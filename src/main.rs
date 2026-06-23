@@ -1,3 +1,5 @@
+use std::io;
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct WorldState {
   turn: u32,
@@ -128,49 +130,44 @@ struct History {
   transitions: Vec<Transition>,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum StrategyPath {
+  AccessStabilization,
+  FiscalCaution,
+  AggressiveBargaining,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct StrategyPlan {
+  name: &'static str,
+  first_command: PlayerCommand,
+  first_inputs: ResolvedInputs,
+  second_command: PlayerCommand,
+  second_inputs: ResolvedInputs,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum CliError {
+  InvalidStrategyChoice(String),
+  InvalidStrategyPlan(ValidationError),
+  InputUnavailable,
+}
+
 fn main() {
   let ruleset = default_ruleset();
-  let genesis = genesis_state();
-  let command = PlayerCommand::StabilizeAccess {
-    add_staffed_beds: 8,
-    capital_spend: 18,
-    requested_commercial_rate: 112,
-  };
-  let inputs = ResolvedInputs {
-    measurement_noise: -2,
-    delayed_access_report: 67,
-    labor_sick_call_delta: -3,
-    policy_signal: 4,
-  };
 
-  let first =
-    transition(&genesis, command, inputs, &ruleset).expect("scripted demo command should be valid");
-  let second = transition(
-    &first.next,
-    PlayerCommand::RespondToStateAccessMandate {
-      advocacy_spend: 10,
-      access_commitment: 7,
-    },
-    ResolvedInputs {
-      measurement_noise: 1,
-      delayed_access_report: 69,
-      labor_sick_call_delta: 0,
-      policy_signal: 4,
-    },
-    &ruleset,
-  )
-  .expect("scripted policy response should be valid");
-  let history = History {
-    genesis,
-    transitions: vec![first, second],
-  };
-
-  print_demo(&history, &ruleset);
+  match read_strategy_choice().and_then(|choice| run_selected_strategy(choice, &ruleset)) {
+    Ok(()) => {}
+    Err(error) => {
+      eprintln!("Unable to run demo: {}", describe_cli_error(&error));
+      std::process::exit(1);
+    }
+  }
 }
 
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.4",
+    version: "demo-ruleset-0.1.5",
     max_capital_spend: 40,
     max_advocacy_spend: 20,
     target_commercial_rate: 106,
@@ -189,6 +186,153 @@ fn genesis_state() -> WorldState {
     community_trust: 66,
     commercial_rate: 100,
     policy_pressure: 30,
+  }
+}
+
+fn read_strategy_choice() -> Result<StrategyPath, CliError> {
+  println!("Choose a strategy path:");
+  println!("  1. Access stabilization");
+  println!("  2. Fiscal caution");
+  println!("  3. Aggressive bargaining");
+  println!("Press Enter for option 1.");
+
+  let mut input = String::new();
+  io::stdin()
+    .read_line(&mut input)
+    .map_err(|_| CliError::InputUnavailable)?;
+  parse_strategy_choice(&input)
+}
+
+fn run_selected_strategy(choice: StrategyPath, ruleset: &Ruleset) -> Result<(), CliError> {
+  println!("Selected strategy: {}", strategy_plan(choice).name);
+  let history =
+    build_history_for_strategy(choice, ruleset).map_err(CliError::InvalidStrategyPlan)?;
+  print_demo(&history, ruleset);
+  Ok(())
+}
+
+fn parse_strategy_choice(input: &str) -> Result<StrategyPath, CliError> {
+  let trimmed = input.trim();
+
+  match trimmed {
+    "" | "1" => Ok(StrategyPath::AccessStabilization),
+    "2" => Ok(StrategyPath::FiscalCaution),
+    "3" => Ok(StrategyPath::AggressiveBargaining),
+    other => Err(CliError::InvalidStrategyChoice(other.to_string())),
+  }
+}
+
+fn build_history_for_strategy(
+  choice: StrategyPath,
+  ruleset: &Ruleset,
+) -> Result<History, ValidationError> {
+  let plan = strategy_plan(choice);
+  let genesis = genesis_state();
+  let first = transition(
+    &genesis,
+    plan.first_command.clone(),
+    plan.first_inputs.clone(),
+    ruleset,
+  )?;
+  let second = transition(
+    &first.next,
+    plan.second_command.clone(),
+    plan.second_inputs.clone(),
+    ruleset,
+  )?;
+
+  Ok(History {
+    genesis,
+    transitions: vec![first, second],
+  })
+}
+
+fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
+  match choice {
+    StrategyPath::AccessStabilization => StrategyPlan {
+      name: "Access stabilization",
+      first_command: PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 8,
+        capital_spend: 18,
+        requested_commercial_rate: 112,
+      },
+      first_inputs: ResolvedInputs {
+        measurement_noise: -2,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
+      },
+      second_command: PlayerCommand::RespondToStateAccessMandate {
+        advocacy_spend: 10,
+        access_commitment: 7,
+      },
+      second_inputs: ResolvedInputs {
+        measurement_noise: 1,
+        delayed_access_report: 69,
+        labor_sick_call_delta: 0,
+        policy_signal: 4,
+      },
+    },
+    StrategyPath::FiscalCaution => StrategyPlan {
+      name: "Fiscal caution",
+      first_command: PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 4,
+        capital_spend: 10,
+        requested_commercial_rate: 104,
+      },
+      first_inputs: ResolvedInputs {
+        measurement_noise: 0,
+        delayed_access_report: 74,
+        labor_sick_call_delta: 0,
+        policy_signal: 1,
+      },
+      second_command: PlayerCommand::RespondToStateAccessMandate {
+        advocacy_spend: 4,
+        access_commitment: 5,
+      },
+      second_inputs: ResolvedInputs {
+        measurement_noise: 0,
+        delayed_access_report: 75,
+        labor_sick_call_delta: 0,
+        policy_signal: 1,
+      },
+    },
+    StrategyPath::AggressiveBargaining => StrategyPlan {
+      name: "Aggressive bargaining",
+      first_command: PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 2,
+        capital_spend: 5,
+        requested_commercial_rate: 120,
+      },
+      first_inputs: ResolvedInputs {
+        measurement_noise: 0,
+        delayed_access_report: 80,
+        labor_sick_call_delta: 0,
+        policy_signal: 2,
+      },
+      second_command: PlayerCommand::RespondToStateAccessMandate {
+        advocacy_spend: 2,
+        access_commitment: 3,
+      },
+      second_inputs: ResolvedInputs {
+        measurement_noise: 0,
+        delayed_access_report: 75,
+        labor_sick_call_delta: 0,
+        policy_signal: 2,
+      },
+    },
+  }
+}
+
+fn describe_cli_error(error: &CliError) -> String {
+  match error {
+    CliError::InvalidStrategyChoice(choice) => {
+      format!("strategy choice '{choice}' is not available; use 1, 2, or 3")
+    }
+    CliError::InvalidStrategyPlan(error) => {
+      format!("selected strategy is internally invalid: {error:?}")
+    }
+    CliError::InputUnavailable => "could not read strategy choice from standard input".to_string(),
   }
 }
 
@@ -1114,44 +1258,87 @@ mod tests {
     assert_eq!(educational_debrief(&first), educational_debrief(&second));
   }
 
+  #[test]
+  fn empty_cli_choice_defaults_to_access_stabilization() {
+    assert_eq!(
+      parse_strategy_choice("\n").unwrap(),
+      StrategyPath::AccessStabilization
+    );
+  }
+
+  #[test]
+  fn numbered_cli_choices_select_expected_strategy_paths() {
+    assert_eq!(
+      parse_strategy_choice("1\n").unwrap(),
+      StrategyPath::AccessStabilization
+    );
+    assert_eq!(
+      parse_strategy_choice("2\n").unwrap(),
+      StrategyPath::FiscalCaution
+    );
+    assert_eq!(
+      parse_strategy_choice("3\n").unwrap(),
+      StrategyPath::AggressiveBargaining
+    );
+  }
+
+  #[test]
+  fn invalid_cli_choice_is_error() {
+    assert_eq!(
+      parse_strategy_choice("9\n"),
+      Err(CliError::InvalidStrategyChoice("9".to_string()))
+    );
+  }
+
+  #[test]
+  fn each_strategy_path_builds_replayable_history() {
+    let ruleset = default_ruleset();
+
+    for choice in [
+      StrategyPath::AccessStabilization,
+      StrategyPath::FiscalCaution,
+      StrategyPath::AggressiveBargaining,
+    ] {
+      let history = build_history_for_strategy(choice, &ruleset).unwrap();
+      let final_state = history.transitions.last().unwrap().next.clone();
+
+      assert_eq!(history.transitions.len(), 2);
+      assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
+    }
+  }
+
+  #[test]
+  fn fiscal_caution_accepts_rate_and_proceeds_with_mandate() {
+    let ruleset = default_ruleset();
+    let history = build_history_for_strategy(StrategyPath::FiscalCaution, &ruleset).unwrap();
+
+    assert_eq!(
+      history.transitions[0].actor_decision.decision,
+      ActorDecision::Insurer(InsurerDecision::Accept)
+    );
+    assert_eq!(
+      history.transitions[1].actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::ProceedWithMandate)
+    );
+  }
+
+  #[test]
+  fn aggressive_bargaining_rejects_rate_and_escalates_oversight() {
+    let ruleset = default_ruleset();
+    let history = build_history_for_strategy(StrategyPath::AggressiveBargaining, &ruleset).unwrap();
+
+    assert_eq!(
+      history.transitions[0].actor_decision.decision,
+      ActorDecision::Insurer(InsurerDecision::Reject)
+    );
+    assert_eq!(
+      history.transitions[1].actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight)
+    );
+  }
+
   fn demo_history() -> History {
     let ruleset = default_ruleset();
-    let genesis = genesis_state();
-    let first = transition(
-      &genesis,
-      PlayerCommand::StabilizeAccess {
-        add_staffed_beds: 8,
-        capital_spend: 18,
-        requested_commercial_rate: 112,
-      },
-      ResolvedInputs {
-        measurement_noise: -2,
-        delayed_access_report: 67,
-        labor_sick_call_delta: -3,
-        policy_signal: 4,
-      },
-      &ruleset,
-    )
-    .unwrap();
-    let second = transition(
-      &first.next,
-      PlayerCommand::RespondToStateAccessMandate {
-        advocacy_spend: 10,
-        access_commitment: 7,
-      },
-      ResolvedInputs {
-        measurement_noise: 1,
-        delayed_access_report: 69,
-        labor_sick_call_delta: 0,
-        policy_signal: 4,
-      },
-      &ruleset,
-    )
-    .unwrap();
-
-    History {
-      genesis,
-      transitions: vec![first, second],
-    }
+    build_history_for_strategy(StrategyPath::AccessStabilization, &ruleset).unwrap()
   }
 }

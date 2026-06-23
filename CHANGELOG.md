@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.5] - 2026-06-23
+
+### Added
+
+- Added a minimal playable CLI choice over the deterministic two-turn demo.
+- Added hard-coded access stabilization, fiscal caution, and aggressive
+  bargaining strategy paths.
+- Added focused tests for CLI choice parsing, invalid choices, path replay, and
+  non-default actor outcomes.
+
+### Changed
+
+- Bumped package version from `0.1.4` to `0.1.5`.
+- Moved the merged educational debrief slice into completed project state.
+
 ## [0.1.4] - 2026-06-23
 
 ### Added
