@@ -19,38 +19,38 @@ Canonical product and domain direction lives in:
 - Canonical proposal, roadmap, and design principles created under `docs/`.
 - Repo-local agent harness created for project-specific health-policy simulation
   workflow.
-- Rust package scaffold exists with a placeholder CLI entry point.
+- Rust package scaffold and spec-driven documentation baseline established.
 
 ## Present
 
-- Feature: Spec-driven documentation baseline
+- Feature: Deterministic vertical-slice spine
   Status: Active
   Started: 2026-06-23
-  Branch: feat/spec-doc-baseline
+  Branch: feat/deterministic-slice-spine
 
   Summary:
-  Initiate root-level SDD documents so future implementation work has a stable
-  place to track specification state, architecture boundaries, release history,
-  and development lessons.
+  Replace the placeholder CLI with a small deterministic architecture proof: a
+  scripted health-system turn with explicit resolved inputs, validation,
+  actor-specific observation, one commercial-insurer decision rationale,
+  attributed effects, append-only history, and replay verification.
 
   Verification:
-  - `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, and `LESSONS.md` exist at the
-    repository root
-  - Documents align with the canonical proposal, roadmap, design principles, and
-    harness team spec
-  - Package version is bumped for this PR-equivalent documentation change
-  - `cargo fmt` and `cargo test` still pass
+  - Identical prior state, command, resolved inputs, and ruleset produce the
+    same transition
+  - Observed access can differ from true access through explicit resolved inputs
+  - Invalid commands fail validation separately from unfavorable modeled outcomes
+  - Replay from genesis reproduces the committed final state
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
 
   Out of Scope:
-  - Adding new gameplay mechanics
-  - Defining detailed scenario data formats
-  - Adding CI, release automation, or contributor process beyond the initiated
-    documentation baseline
+  - Full campaign or multiple-turn scenario design
+  - Interactive CLI input
+  - Scenario file loading or external data ingestion
+  - Empirical calibration or policy forecasting claims
+  - CI, release automation, or contributor-process expansion
 
 ## Future
 
-- Replace the placeholder CLI with the first deterministic engine proof of
-  concept.
 - Define glossary, decision-record conventions, and versioning policy from
   roadmap Phase 0.
 - Convert Phase 1 research into an evidence registry and research-to-design
@@ -59,4 +59,7 @@ Canonical product and domain direction lives in:
   observation model, and causal framework.
 - Design the first narrow vertical slice with at least one strategic negotiation,
   one policy process, deterministic replay, and educational debrief hooks.
-- Add focused tests around deterministic transitions once core mechanics exist.
+- Split the prototype into stable module boundaries when the next slice needs
+  more than one command or actor interaction.
+- Add scenario data loading only after the conceptual model and first action
+  vocabulary settle.
