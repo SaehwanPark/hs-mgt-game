@@ -87,10 +87,8 @@ reconstructing it from the diff.
   - Replay from genesis reproduces the committed final state
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-## Present
-
 - Feature: State policy response slice
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/state-policy-response-slice
 
@@ -113,10 +111,8 @@ reconstructing it from the diff.
   - Focused tests added for deterministic policy response, invalid advocacy
     spend, invalid access commitment, unfavorable valid policy outcome, and
     two-transition replay
-
-  Not Yet Done:
   - Complete three code-reviewer passes and address findings
-  - Merge after review and verification
+  - PR #3 merged into `main`
 
   Deferred / Non-Goals:
   - No interactive CLI input or command parser
@@ -130,6 +126,47 @@ reconstructing it from the diff.
   - Invalid operations remain separate from unfavorable modeled outcomes
   - Two-transition replay reproduces the committed final state
   - `cargo fmt`, `cargo test`, and `cargo run` pass
+
+## Present
+
+- Feature: Educational debrief slice
+  Status: Active
+  Started: 2026-06-23
+  Branch: feat/educational-debrief-slice
+
+  Summary:
+  Add a concise end-of-run educational debrief to the scripted deterministic
+  demo. The debrief should use the existing history, actor rationales, and
+  attributed effects to explain tradeoffs, distinguish decisions from realized
+  outcomes, and support replayable classroom discussion without adding
+  interactive input or scenario loading.
+
+  Done:
+  - Working branch created from `main`
+  - Stale state-policy response bookkeeping identified from merged PR #3
+  - Implement deterministic debrief generation and CLI display
+  - Add focused debrief tests
+  - Bump package version to `0.1.4`
+  - Update architecture, changelog, lessons, and handoff files
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
+
+  Not Yet Done:
+  - Complete PR handoff and review loop
+
+  Deferred / Non-Goals:
+  - No interactive CLI input or command parser
+  - No scenario, ruleset, or save-file loader
+  - No empirical calibration or policy forecasting claim
+  - No full campaign or general debrief framework
+  - No module split unless implementation proves the current file cannot stay
+    understandable
+
+  Verification:
+  - Debrief output includes actor rationales from the committed history
+  - Debrief output includes at least one explicit tradeoff from attributed
+    effects
+  - Identical histories produce identical debrief text
+  - Existing transition and replay tests remain passing
 
 ## Future
 

@@ -2,10 +2,11 @@
 
 ## Summary
 
-Implemented the state-policy response continuation slice for the Health Policy
+Implemented the educational debrief continuation slice for the Health Policy
 Strategy Game. The scripted demo now shows a capacity stabilization command,
 commercial-insurer response, state access-mandate response, attributed effects,
-state fingerprints, and replay check across a two-transition history.
+state fingerprints, replay check across a two-transition history, and a
+deterministic end-of-run debrief.
 
 ## Changed Files
 
@@ -24,10 +25,10 @@ state fingerprints, and replay check across a two-transition history.
 
 ## Verification
 
-- `cargo fmt` completed successfully.
-- `cargo test` passed: 14 tests passed.
-- `cargo run` printed the two-turn deterministic demo and confirmed replay
-  final state matched the committed state.
+- `cargo fmt --check` completed successfully.
+- `cargo test` passed: 17 tests passed.
+- `cargo run` printed the two-turn deterministic demo, confirmed replay final
+  state matched the committed state, and printed the educational debrief.
 
 ## Known Limits
 
@@ -37,10 +38,11 @@ state fingerprints, and replay check across a two-transition history.
 - No cryptographic state hash.
 - No interactive multi-turn campaign.
 - No full policy lifecycle framework.
+- No general instructor report export.
 
 ## Next Dependencies
 
 - Revisit module boundaries when the next slice needs reusable CLI, scenario, or
-  test boundaries.
+  report boundaries.
 - Define a scenario/ruleset versioning format before loading external content.
 - Build an evidence-linked parameter ledger before claiming calibration.

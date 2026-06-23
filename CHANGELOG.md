@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.4] - 2026-06-23
+
+### Added
+
+- Added a deterministic educational debrief to the scripted two-turn demo.
+- Added focused tests for actor rationale coverage, attributed tradeoff
+  coverage, and deterministic debrief output.
+
+### Changed
+
+- Bumped package version from `0.1.3` to `0.1.4`.
+- Updated project state and handoff documentation for the debrief slice.
+
 ## [0.1.3] - 2026-06-23
 
 ### Added

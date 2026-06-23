@@ -170,7 +170,7 @@ fn main() {
 
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.3",
+    version: "demo-ruleset-0.1.4",
     max_capital_spend: 40,
     max_advocacy_spend: 20,
     target_commercial_rate: 106,
@@ -600,6 +600,65 @@ fn print_demo(history: &History, ruleset: &Ruleset) {
       .last()
       .is_some_and(|transition| replayed == transition.next)
   );
+  println!("Educational debrief:");
+  for line in educational_debrief(history) {
+    println!("  - {line}");
+  }
+}
+
+fn educational_debrief(history: &History) -> Vec<String> {
+  let Some(last_transition) = history.transitions.last() else {
+    return vec!["No committed transitions are available for debriefing.".to_string()];
+  };
+
+  let initial = &history.genesis;
+  let final_state = &last_transition.next;
+  let actor_rationales = history
+    .transitions
+    .iter()
+    .map(|transition| {
+      format!(
+        "{}: {}",
+        transition.actor_decision.actor, transition.actor_decision.rationale
+      )
+    })
+    .collect::<Vec<_>>()
+    .join(" | ");
+
+  let effect_summary = history
+    .transitions
+    .iter()
+    .flat_map(|transition| transition.effects.iter())
+    .map(|effect| {
+      format!(
+        "{} changed {} by {}",
+        effect.source, effect.metric, effect.delta
+      )
+    })
+    .collect::<Vec<_>>()
+    .join("; ");
+
+  vec![
+    format!(
+      "Run-level tradeoff: cash moved from {} to {}, access from {} to {}, workforce trust from {} to {}, community trust from {} to {}, policy pressure from {} to {}, and commercial rate from {} to {}.",
+      initial.cash,
+      final_state.cash,
+      initial.access_index,
+      final_state.access_index,
+      initial.workforce_trust,
+      final_state.workforce_trust,
+      initial.community_trust,
+      final_state.community_trust,
+      initial.policy_pressure,
+      final_state.policy_pressure,
+      initial.commercial_rate,
+      final_state.commercial_rate
+    ),
+    format!("Actor rationales at decision time: {actor_rationales}"),
+    format!("Attributed mechanisms to inspect: {effect_summary}."),
+    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values and the later policy response?".to_string(),
+    "Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.".to_string(),
+  ]
 }
 
 fn push_effect(
@@ -1023,5 +1082,76 @@ mod tests {
     };
 
     assert_eq!(replay(&history, &ruleset).unwrap(), second.next);
+  }
+
+  #[test]
+  fn debrief_includes_actor_rationales() {
+    let history = demo_history();
+    let debrief = educational_debrief(&history).join("\n");
+
+    assert!(debrief.contains("commercial_insurer:"));
+    assert!(debrief.contains("state_policy_officials:"));
+    assert!(debrief.contains("Reported access"));
+    assert!(debrief.contains("Access commitment"));
+  }
+
+  #[test]
+  fn debrief_includes_attributed_tradeoff() {
+    let history = demo_history();
+    let debrief = educational_debrief(&history).join("\n");
+
+    assert!(debrief.contains("cash moved from 100 to 72"));
+    assert!(debrief.contains("access from 70 to 74"));
+    assert!(debrief.contains("capacity investment changed cash by -18"));
+    assert!(debrief.contains("state policy response changed community_trust by 2"));
+  }
+
+  #[test]
+  fn identical_histories_produce_identical_debriefs() {
+    let first = demo_history();
+    let second = demo_history();
+
+    assert_eq!(educational_debrief(&first), educational_debrief(&second));
+  }
+
+  fn demo_history() -> History {
+    let ruleset = default_ruleset();
+    let genesis = genesis_state();
+    let first = transition(
+      &genesis,
+      PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 8,
+        capital_spend: 18,
+        requested_commercial_rate: 112,
+      },
+      ResolvedInputs {
+        measurement_noise: -2,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
+      },
+      &ruleset,
+    )
+    .unwrap();
+    let second = transition(
+      &first.next,
+      PlayerCommand::RespondToStateAccessMandate {
+        advocacy_spend: 10,
+        access_commitment: 7,
+      },
+      ResolvedInputs {
+        measurement_noise: 1,
+        delayed_access_report: 69,
+        labor_sick_call_delta: 0,
+        policy_signal: 4,
+      },
+      &ruleset,
+    )
+    .unwrap();
+
+    History {
+      genesis,
+      transitions: vec![first, second],
+    }
   }
 }
