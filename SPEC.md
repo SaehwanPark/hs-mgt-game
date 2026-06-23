@@ -111,7 +111,7 @@ reconstructing it from the diff.
   - Focused tests added for deterministic policy response, invalid advocacy
     spend, invalid access commitment, unfavorable valid policy outcome, and
     two-transition replay
-  - Complete three code-reviewer passes and address findings
+  - Completed three code-reviewer passes and addressed findings
   - PR #3 merged into `main`
 
   Deferred / Non-Goals:
@@ -149,9 +149,12 @@ reconstructing it from the diff.
   - Bump package version to `0.1.4`
   - Update architecture, changelog, lessons, and handoff files
   - `cargo fmt`, `cargo test`, and `cargo run` pass
+  - PR handoff opened as GitHub PR #4
+  - Three code-reviewer passes completed; one low-severity documentation
+    wording finding was fixed
 
   Not Yet Done:
-  - Complete PR handoff and review loop
+  - Merge after review and verification
 
   Deferred / Non-Goals:
   - No interactive CLI input or command parser

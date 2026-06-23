@@ -29,6 +29,9 @@ deterministic end-of-run debrief.
 - `cargo test` passed: 17 tests passed.
 - `cargo run` printed the two-turn deterministic demo, confirmed replay final
   state matched the committed state, and printed the educational debrief.
+- GitHub PR #4 opened for the slice.
+- Three code-reviewer passes completed; one low-severity documentation wording
+  finding was fixed, with no Critical, High, or Medium findings remaining.
 
 ## Known Limits
 
