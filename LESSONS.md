@@ -32,3 +32,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Add loaders, modules, dependencies, and broader actor frameworks
   only when a later slice has at least two concrete examples that need the same
   boundary.
+
+## Second Slice Can Still Stay Single-File
+
+- Context: Adding the first state-policy response after the initial
+  payer-negotiation proof.
+- Symptom: A second command and second actor decision can make a module split
+  feel immediately attractive.
+- Cause: The design boundary is now visible, but the prototype still has one
+  compact transition function and no reusable scenario, CLI, or persistence
+  boundary.
+- Resolution: The policy response reused the existing command, observation,
+  event, effect, history, and replay shapes without adding dependencies or
+  modules.
+- Prevention: Split modules when reuse or independent testing needs become
+  concrete, not merely because a second branch exists in the demo.

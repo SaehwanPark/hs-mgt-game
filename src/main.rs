@@ -15,7 +15,9 @@ struct WorldState {
 struct Ruleset {
   version: &'static str,
   max_capital_spend: i32,
+  max_advocacy_spend: i32,
   target_commercial_rate: i32,
+  minimum_access_commitment: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -33,6 +35,10 @@ enum PlayerCommand {
     capital_spend: i32,
     requested_commercial_rate: i32,
   },
+  RespondToStateAccessMandate {
+    advocacy_spend: i32,
+    access_commitment: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -45,6 +51,14 @@ enum ValidationError {
     requested: i32,
     available_limit: i32,
   },
+  NegativeAdvocacySpend {
+    requested: i32,
+  },
+  AdvocacySpendTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
+  NonPositiveAccessCommitment,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -55,9 +69,22 @@ enum InsurerDecision {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+enum StatePolicyDecision {
+  GrantFlexibility,
+  ProceedWithMandate,
+  EscalateOversight,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum ActorDecision {
+  Insurer(InsurerDecision),
+  StatePolicy(StatePolicyDecision),
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 struct ActorDecisionRecord {
   actor: &'static str,
-  decision: InsurerDecision,
+  decision: ActorDecision,
   rationale: String,
 }
 
@@ -116,11 +143,26 @@ fn main() {
     policy_signal: 4,
   };
 
-  let transition =
+  let first =
     transition(&genesis, command, inputs, &ruleset).expect("scripted demo command should be valid");
+  let second = transition(
+    &first.next,
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 10,
+      access_commitment: 7,
+    },
+    ResolvedInputs {
+      measurement_noise: 1,
+      delayed_access_report: 69,
+      labor_sick_call_delta: 0,
+      policy_signal: 4,
+    },
+    &ruleset,
+  )
+  .expect("scripted policy response should be valid");
   let history = History {
     genesis,
-    transitions: vec![transition],
+    transitions: vec![first, second],
   };
 
   print_demo(&history, &ruleset);
@@ -128,9 +170,11 @@ fn main() {
 
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.2",
+    version: "demo-ruleset-0.1.3",
     max_capital_spend: 40,
+    max_advocacy_spend: 20,
     target_commercial_rate: 106,
+    minimum_access_commitment: 5,
   }
 }
 
@@ -157,8 +201,8 @@ fn transition(
   validate_command(&command, ruleset)?;
 
   let observation = observe_for_player(prior, &resolved_inputs);
-  let actor_decision = insurer_decision(&command, &observation, ruleset);
-  let requested_commercial_rate = requested_commercial_rate(&command);
+  let actor_decision = actor_decision(&command, &observation, &resolved_inputs, ruleset);
+  let accepted_requested_commercial_rate = requested_commercial_rate(&command);
   let mut next = prior.clone();
   let mut events = Vec::new();
   let mut effects = Vec::new();
@@ -204,10 +248,32 @@ fn transition(
         ),
       });
     }
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => {
+      next.cash -= advocacy_spend;
+      next.access_index += access_commitment / 2;
+      push_effect(&mut effects, "policy response", "cash", -advocacy_spend);
+      push_effect(
+        &mut effects,
+        "policy response",
+        "access_index",
+        access_commitment / 2,
+      );
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "Committed {access_commitment} access units while spending {advocacy_spend} on state engagement."
+        ),
+      });
+    }
   }
 
-  match actor_decision.decision {
-    InsurerDecision::Accept => {
+  match &actor_decision.decision {
+    ActorDecision::Insurer(InsurerDecision::Accept) => {
+      let requested_commercial_rate =
+        accepted_requested_commercial_rate.expect("insurer decision requires rate command");
       let delta = requested_commercial_rate - prior.commercial_rate;
       next.commercial_rate += delta;
       push_effect(&mut effects, "commercial insurer", "commercial_rate", delta);
@@ -216,8 +282,8 @@ fn transition(
         description: "Accepted the requested rate path to preserve network access.".to_string(),
       });
     }
-    InsurerDecision::Counter { offered_rate } => {
-      let delta = offered_rate - prior.commercial_rate;
+    ActorDecision::Insurer(InsurerDecision::Counter { offered_rate }) => {
+      let delta = *offered_rate - prior.commercial_rate;
       next.commercial_rate += delta;
       next.community_trust -= 1;
       push_effect(&mut effects, "commercial insurer", "commercial_rate", delta);
@@ -232,12 +298,44 @@ fn transition(
         description: format!("Countered with a rate of {offered_rate}."),
       });
     }
-    InsurerDecision::Reject => {
+    ActorDecision::Insurer(InsurerDecision::Reject) => {
       next.community_trust -= 3;
       push_effect(&mut effects, "failed negotiation", "community_trust", -3);
       events.push(Event {
         actor: "commercial_insurer",
         description: "Rejected the rate request and signaled a narrow-network threat.".to_string(),
+      });
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility) => {
+      next.policy_pressure -= 5;
+      next.community_trust += 2;
+      push_effect(&mut effects, "state policy response", "policy_pressure", -5);
+      push_effect(&mut effects, "state policy response", "community_trust", 2);
+      events.push(Event {
+        actor: "state_policy_officials",
+        description: "Granted implementation flexibility after a credible access commitment."
+          .to_string(),
+      });
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::ProceedWithMandate) => {
+      next.policy_pressure += 2;
+      next.community_trust += 1;
+      push_effect(&mut effects, "state policy response", "policy_pressure", 2);
+      push_effect(&mut effects, "state policy response", "community_trust", 1);
+      events.push(Event {
+        actor: "state_policy_officials",
+        description: "Kept the mandate on schedule while acknowledging the access plan."
+          .to_string(),
+      });
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight) => {
+      next.policy_pressure += 6;
+      next.community_trust -= 2;
+      push_effect(&mut effects, "state policy response", "policy_pressure", 6);
+      push_effect(&mut effects, "state policy response", "community_trust", -2);
+      events.push(Event {
+        actor: "state_policy_officials",
+        description: "Escalated oversight after judging the response insufficient.".to_string(),
       });
     }
   }
@@ -287,17 +385,39 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
         });
       }
     }
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => {
+      if *advocacy_spend < 0 {
+        return Err(ValidationError::NegativeAdvocacySpend {
+          requested: *advocacy_spend,
+        });
+      }
+
+      if *advocacy_spend > ruleset.max_advocacy_spend {
+        return Err(ValidationError::AdvocacySpendTooHigh {
+          requested: *advocacy_spend,
+          available_limit: ruleset.max_advocacy_spend,
+        });
+      }
+
+      if *access_commitment <= 0 {
+        return Err(ValidationError::NonPositiveAccessCommitment);
+      }
+    }
   }
 
   Ok(())
 }
 
-fn requested_commercial_rate(command: &PlayerCommand) -> i32 {
+fn requested_commercial_rate(command: &PlayerCommand) -> Option<i32> {
   match command {
     PlayerCommand::StabilizeAccess {
       requested_commercial_rate,
       ..
-    } => *requested_commercial_rate,
+    } => Some(*requested_commercial_rate),
+    PlayerCommand::RespondToStateAccessMandate { .. } => None,
   }
 }
 
@@ -316,17 +436,36 @@ fn observe_for_player(prior: &WorldState, inputs: &ResolvedInputs) -> Observatio
   }
 }
 
-fn insurer_decision(
+fn actor_decision(
   command: &PlayerCommand,
+  observation: &Observation,
+  inputs: &ResolvedInputs,
+  ruleset: &Ruleset,
+) -> ActorDecisionRecord {
+  match command {
+    PlayerCommand::StabilizeAccess {
+      requested_commercial_rate,
+      ..
+    } => insurer_decision(*requested_commercial_rate, observation, ruleset),
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => state_policy_decision(
+      *advocacy_spend,
+      *access_commitment,
+      observation,
+      inputs,
+      ruleset,
+    ),
+  }
+}
+
+fn insurer_decision(
+  requested_commercial_rate: i32,
   observation: &Observation,
   ruleset: &Ruleset,
 ) -> ActorDecisionRecord {
-  let PlayerCommand::StabilizeAccess {
-    requested_commercial_rate,
-    ..
-  } = command;
-
-  let (decision, rationale) = if *requested_commercial_rate <= ruleset.target_commercial_rate {
+  let (decision, rationale) = if requested_commercial_rate <= ruleset.target_commercial_rate {
     (
       InsurerDecision::Accept,
       format!(
@@ -356,7 +495,49 @@ fn insurer_decision(
 
   ActorDecisionRecord {
     actor: "commercial_insurer",
-    decision,
+    decision: ActorDecision::Insurer(decision),
+    rationale,
+  }
+}
+
+fn state_policy_decision(
+  advocacy_spend: i32,
+  access_commitment: i32,
+  observation: &Observation,
+  inputs: &ResolvedInputs,
+  ruleset: &Ruleset,
+) -> ActorDecisionRecord {
+  let credible_commitment = access_commitment >= ruleset.minimum_access_commitment;
+  let high_pressure = inputs.policy_signal >= 4 || observation.reported_access_index < 70;
+
+  let (decision, rationale) = if credible_commitment && advocacy_spend >= 8 && high_pressure {
+    (
+      StatePolicyDecision::GrantFlexibility,
+      format!(
+        "Access commitment {access_commitment} and advocacy spend {advocacy_spend} give officials a defensible implementation path under reported access {}.",
+        observation.reported_access_index
+      ),
+    )
+  } else if credible_commitment {
+    (
+      StatePolicyDecision::ProceedWithMandate,
+      format!(
+        "Access commitment {access_commitment} is credible, but advocacy spend {advocacy_spend} does not justify delaying the mandate."
+      ),
+    )
+  } else {
+    (
+      StatePolicyDecision::EscalateOversight,
+      format!(
+        "Access commitment {access_commitment} falls below the minimum credible commitment {}.",
+        ruleset.minimum_access_commitment
+      ),
+    )
+  };
+
+  ActorDecisionRecord {
+    actor: "state_policy_officials",
+    decision: ActorDecision::StatePolicy(decision),
     rationale,
   }
 }
@@ -378,43 +559,46 @@ fn replay(history: &History, ruleset: &Ruleset) -> Result<WorldState, Validation
 }
 
 fn print_demo(history: &History, ruleset: &Ruleset) {
-  let transition = history
-    .transitions
-    .last()
-    .expect("demo history should include one transition");
   let replayed = replay(history, ruleset).expect("demo history should replay");
 
   println!("Health Policy Strategy Game deterministic demo");
   println!("Ruleset: {}", ruleset.version);
-  println!(
-    "Turn: {} -> {}",
-    transition.prior.turn, transition.next.turn
-  );
-  println!(
-    "CEO observation: access {}, quality {}, policy briefing: {}",
-    transition.observation.reported_access_index,
-    transition.observation.reported_quality_index,
-    transition.observation.policy_briefing
-  );
-  println!(
-    "Insurer decision: {:?} ({})",
-    transition.actor_decision.decision, transition.actor_decision.rationale
-  );
-  println!("Events:");
-  for event in &transition.events {
-    println!("  - {}: {}", event.actor, event.description);
-  }
-  println!("Effects:");
-  for effect in &transition.effects {
+  for transition in &history.transitions {
     println!(
-      "  - {} changed {} by {}",
-      effect.source, effect.metric, effect.delta
+      "Turn: {} -> {}",
+      transition.prior.turn, transition.next.turn
     );
+    println!(
+      "CEO observation: access {}, quality {}, policy briefing: {}",
+      transition.observation.reported_access_index,
+      transition.observation.reported_quality_index,
+      transition.observation.policy_briefing
+    );
+    println!(
+      "{} decision: {} ({})",
+      transition.actor_decision.actor,
+      describe_actor_decision(&transition.actor_decision.decision),
+      transition.actor_decision.rationale
+    );
+    println!("Events:");
+    for event in &transition.events {
+      println!("  - {}: {}", event.actor, event.description);
+    }
+    println!("Effects:");
+    for effect in &transition.effects {
+      println!(
+        "  - {} changed {} by {}",
+        effect.source, effect.metric, effect.delta
+      );
+    }
+    println!("Next state fingerprint: {}", transition.state_fingerprint);
   }
-  println!("Next state fingerprint: {}", transition.state_fingerprint);
   println!(
     "Replay final state matches committed state: {}",
-    replayed == transition.next
+    history
+      .transitions
+      .last()
+      .is_some_and(|transition| replayed == transition.next)
   );
 }
 
@@ -429,6 +613,25 @@ fn push_effect(
     metric,
     delta,
   });
+}
+
+fn describe_actor_decision(decision: &ActorDecision) -> String {
+  match decision {
+    ActorDecision::Insurer(InsurerDecision::Accept) => "accept".to_string(),
+    ActorDecision::Insurer(InsurerDecision::Counter { offered_rate }) => {
+      format!("counter at {offered_rate}")
+    }
+    ActorDecision::Insurer(InsurerDecision::Reject) => "reject".to_string(),
+    ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility) => {
+      "grant flexibility".to_string()
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::ProceedWithMandate) => {
+      "proceed with mandate".to_string()
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight) => {
+      "escalate oversight".to_string()
+    }
+  }
 }
 
 fn clamp_metric(value: i32) -> i32 {
@@ -570,7 +773,10 @@ mod tests {
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
 
-    assert_eq!(result.actor_decision.decision, InsurerDecision::Accept);
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::Insurer(InsurerDecision::Accept)
+    );
     assert_eq!(result.next.commercial_rate, 104);
   }
 
@@ -592,7 +798,10 @@ mod tests {
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
 
-    assert_eq!(result.actor_decision.decision, InsurerDecision::Reject);
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::Insurer(InsurerDecision::Reject)
+    );
     assert!(
       result
         .events
@@ -627,5 +836,192 @@ mod tests {
     };
 
     assert_eq!(replay(&history, &ruleset).unwrap(), first.next);
+  }
+
+  #[test]
+  fn policy_response_is_deterministic() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 10,
+      access_commitment: 7,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 1,
+      delayed_access_report: 69,
+      labor_sick_call_delta: 0,
+      policy_signal: 4,
+    };
+
+    let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
+    let second = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(first, second);
+    assert_eq!(
+      first.actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility)
+    );
+  }
+
+  #[test]
+  fn negative_advocacy_spend_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: -1,
+      access_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NegativeAdvocacySpend { requested: -1 })
+    );
+  }
+
+  #[test]
+  fn excessive_advocacy_spend_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 25,
+      access_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::AdvocacySpendTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn non_positive_access_commitment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 4,
+      access_commitment: 0,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NonPositiveAccessCommitment)
+    );
+  }
+
+  #[test]
+  fn credible_policy_response_can_proceed_with_mandate() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 4,
+      access_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 75,
+      labor_sick_call_delta: 0,
+      policy_signal: 1,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::ProceedWithMandate)
+    );
+    assert_eq!(result.next.policy_pressure, 33);
+  }
+
+  #[test]
+  fn unfavorable_policy_outcome_is_not_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: 2,
+      access_commitment: 3,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 75,
+      labor_sick_call_delta: 0,
+      policy_signal: 2,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight)
+    );
+    assert!(
+      result
+        .events
+        .iter()
+        .any(|event| event.description.contains("Escalated oversight"))
+    );
+  }
+
+  #[test]
+  fn replay_reproduces_two_transition_history() {
+    let ruleset = default_ruleset();
+    let genesis = genesis_state();
+    let first = transition(
+      &genesis,
+      PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 8,
+        capital_spend: 18,
+        requested_commercial_rate: 112,
+      },
+      ResolvedInputs {
+        measurement_noise: -2,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
+      },
+      &ruleset,
+    )
+    .unwrap();
+    let second = transition(
+      &first.next,
+      PlayerCommand::RespondToStateAccessMandate {
+        advocacy_spend: 10,
+        access_commitment: 7,
+      },
+      ResolvedInputs {
+        measurement_noise: 1,
+        delayed_access_report: 69,
+        labor_sick_call_delta: 0,
+        policy_signal: 4,
+      },
+      &ruleset,
+    )
+    .unwrap();
+    let history = History {
+      genesis,
+      transitions: vec![first, second.clone()],
+    };
+
+    assert_eq!(replay(&history, &ruleset).unwrap(), second.next);
   }
 }

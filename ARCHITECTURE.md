@@ -8,7 +8,7 @@ intended architecture boundaries that future implementation should preserve.
 - Language: Rust
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`
-- Executable: scripted deterministic demo in `src/main.rs`
+- Executable: two-turn scripted deterministic demo in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-23
@@ -16,8 +16,9 @@ Status: Verified
 
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function, explicit resolved
-inputs, actor-specific observation, local strategic decision rationale,
-attributed effects, append-only history, and replay verification.
+inputs, actor-specific observation, local strategic decision rationales for a
+commercial insurer and state policy officials, attributed effects, append-only
+history, and replay verification.
 
 ## Intended System Shape
 
@@ -82,8 +83,8 @@ Players and non-player actors should make decisions from available information,
 not omniscient state.
 
 Current proof: the player observation uses reported access and quality; the
-commercial insurer decision uses the reported access value and records a
-rationale.
+commercial insurer and state-policy decisions use actor-visible values and
+record rationales.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -93,8 +94,8 @@ Status: Verified
 The initial interface is a CLI. Terminal rendering, input parsing, and display
 formatting should remain outside the deterministic simulation core.
 
-Current proof: `cargo run` prints a fixed demo summary. There is no interactive
-input parser or scenario loader yet.
+Current proof: `cargo run` prints a fixed two-turn demo summary. There is no
+interactive input parser or scenario loader yet.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -117,7 +118,8 @@ Status: Verified
 ## Open Architectural Decisions
 
 - Module or crate boundaries for the deterministic core, CLI, scenario loading,
-  and educational debriefing once the prototype exceeds one compact file.
+  and educational debriefing once the prototype needs reusable boundaries beyond
+  the compact file.
 - Ruleset and scenario versioning format.
 - State hashing and replay artifact format.
 - Decision-record convention.

@@ -2,15 +2,14 @@
 
 ## Summary
 
-Implemented the first deterministic vertical-slice spine for the Health Policy
-Strategy Game. The placeholder CLI is replaced by a scripted demo that shows a
-capacity stabilization command, reported observation, commercial-insurer
-response, attributed effects, state fingerprint, and replay check.
+Implemented the state-policy response continuation slice for the Health Policy
+Strategy Game. The scripted demo now shows a capacity stabilization command,
+commercial-insurer response, state access-mandate response, attributed effects,
+state fingerprints, and replay check across a two-transition history.
 
 ## Changed Files
 
 - `src/main.rs`
-- `rustfmt.toml`
 - `Cargo.toml`
 - `Cargo.lock`
 - `SPEC.md`
@@ -26,9 +25,9 @@ response, attributed effects, state fingerprint, and replay check.
 ## Verification
 
 - `cargo fmt` completed successfully.
-- `cargo test` passed: 7 tests passed.
-- `cargo run` printed the deterministic demo and confirmed replay final state
-  matched the committed state.
+- `cargo test` passed: 14 tests passed.
+- `cargo run` printed the two-turn deterministic demo and confirmed replay
+  final state matched the committed state.
 
 ## Known Limits
 
@@ -36,11 +35,12 @@ response, attributed effects, state fingerprint, and replay check.
 - No scenario loader.
 - No empirical calibration.
 - No cryptographic state hash.
-- No multi-turn campaign.
+- No interactive multi-turn campaign.
+- No full policy lifecycle framework.
 
 ## Next Dependencies
 
-- Add a second player command or actor interaction before splitting into
-  modules.
+- Revisit module boundaries when the next slice needs reusable CLI, scenario, or
+  test boundaries.
 - Define a scenario/ruleset versioning format before loading external content.
 - Build an evidence-linked parameter ledger before claiming calibration.
