@@ -60,3 +60,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   history, with no new dependency, loader, or persistent artifact format.
 - Prevention: Add reporting structure only when repeated debrief outputs need a
   shared format or external consumers.
+
+## First Playability Step Can Be Hard-Coded
+
+- Context: Adding the first player-facing CLI choice after the scripted
+  deterministic demo and debrief were working.
+- Symptom: It is tempting to add a command parser, scenario schema, or save/load
+  path as soon as stdin appears.
+- Cause: The immediate roadmap need is to test whether different strategic
+  paths produce understandable outcomes, not to define durable content formats.
+- Resolution: The first playable slice uses three compiled strategy paths and a
+  small input boundary that selects among existing deterministic transitions.
+- Prevention: Add parsers and scenario loaders only when repeated playable
+  content needs external authoring or persistence.

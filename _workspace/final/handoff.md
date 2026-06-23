@@ -2,11 +2,11 @@
 
 ## Summary
 
-Implemented the educational debrief continuation slice for the Health Policy
-Strategy Game. The scripted demo now shows a capacity stabilization command,
-commercial-insurer response, state access-mandate response, attributed effects,
-state fingerprints, replay check across a two-transition history, and a
-deterministic end-of-run debrief.
+Implemented the playable CLI continuation slice for the Health Policy Strategy
+Game. The demo now prompts the player to choose access stabilization, fiscal
+caution, or aggressive bargaining, then runs a deterministic two-turn history
+with commercial-insurer response, state access-mandate response, attributed
+effects, state fingerprints, replay verification, and educational debrief.
 
 ## Changed Files
 
@@ -26,12 +26,15 @@ deterministic end-of-run debrief.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 17 tests passed.
-- `cargo run` printed the two-turn deterministic demo, confirmed replay final
-  state matched the committed state, and printed the educational debrief.
-- GitHub PR #4 opened for the slice.
-- Three code-reviewer passes completed; one low-severity documentation wording
-  finding was fixed, with no Critical, High, or Medium findings remaining.
+- `cargo test` passed: 23 tests passed.
+- Default `cargo run` selected access stabilization, replayed successfully, and
+  printed the educational debrief.
+- Strategy `2` selected fiscal caution, replayed successfully, and produced
+  insurer accept plus mandate continuation.
+- Strategy `3` selected aggressive bargaining, replayed successfully, and
+  produced insurer rejection plus oversight escalation.
+- Invalid strategy input exited nonzero with an explicit CLI error.
+- PR handoff and three code-reviewer passes are still pending.
 
 ## Known Limits
 
@@ -42,10 +45,12 @@ deterministic end-of-run debrief.
 - No interactive multi-turn campaign.
 - No full policy lifecycle framework.
 - No general instructor report export.
+- No general command parser.
+- No scenario or ruleset file format.
 
 ## Next Dependencies
 
-- Revisit module boundaries when the next slice needs reusable CLI, scenario, or
-  report boundaries.
+- Revisit module boundaries when repeated CLI behavior, scenario loading, or
+  report boundaries need independent ownership.
 - Define a scenario/ruleset versioning format before loading external content.
 - Build an evidence-linked parameter ledger before claiming calibration.

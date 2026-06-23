@@ -46,9 +46,9 @@ observations, and debriefable effects.
 
 - Simple integer metrics are acceptable for the first proof of deterministic
   state movement.
-- A scripted demo remains sufficient at this phase.
-- A two-turn scripted demo is sufficient to prove the first policy-process
-  interaction before adding interactive input or scenario loading.
+- A hard-coded playable demo remains sufficient at this phase.
+- A two-turn strategy-path demo is sufficient to compare payer and policy
+  responses before adding a general command parser or scenario loading.
 - Stable state fingerprints may be human-readable strings for now; no
   cryptographic hash is required yet.
 

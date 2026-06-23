@@ -127,10 +127,8 @@ reconstructing it from the diff.
   - Two-transition replay reproduces the committed final state
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-## Present
-
 - Feature: Educational debrief slice
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/educational-debrief-slice
 
@@ -152,8 +150,6 @@ reconstructing it from the diff.
   - PR handoff opened as GitHub PR #4
   - Three code-reviewer passes completed; one low-severity documentation
     wording finding was fixed
-
-  Not Yet Done:
   - Merge after review and verification
 
   Deferred / Non-Goals:
@@ -170,6 +166,55 @@ reconstructing it from the diff.
     effects
   - Identical histories produce identical debrief text
   - Existing transition and replay tests remain passing
+
+## Present
+
+- Feature: Playable CLI slice
+  Status: Active
+  Started: 2026-06-23
+  Branch: feat/playable-cli-slice
+
+  Summary:
+  Add the first minimal playable CLI choice over the existing deterministic
+  two-turn demo. The player chooses one of three hard-coded strategy paths,
+  while transition logic, resolved inputs, actor observations, replay, and
+  debrief generation remain deterministic and inspectable.
+
+  Done:
+  - Working branch created from `main`
+  - Merged educational debrief slice moved from active state into completed
+    history
+  - Package version bumped to `0.1.5`
+  - Add hard-coded strategy path selection for access stabilization, fiscal
+    caution, and aggressive bargaining
+  - Keep invalid CLI choice handling separate from valid unfavorable modeled
+    outcomes
+  - Add focused CLI choice and strategy-path tests
+  - Run final verification commands
+  - Update architecture, changelog, lessons, and handoff files
+
+  Not Yet Done:
+  - Open PR handoff and complete three code-reviewer passes
+  - Merge after review and verification
+
+  Deferred / Non-Goals:
+  - No full campaign
+  - No scenario or ruleset file format
+  - No general command parser framework
+  - No external data ingestion or calibration
+  - No new dependency
+  - No broad module split
+  - No CI, release automation, or contributor-process expansion
+
+  Verification:
+  - Empty CLI input defaults to access stabilization
+  - CLI choices `1`, `2`, and `3` each build a valid two-transition history
+  - Invalid CLI choice returns an explicit CLI error
+  - Each strategy path replays to its committed final state
+  - Fiscal caution produces insurer accept and mandate continuation
+  - Aggressive bargaining produces insurer rejection and oversight escalation
+  - Existing transition, observation, replay, validation, and debrief tests
+    remain passing
 
 ## Future
 

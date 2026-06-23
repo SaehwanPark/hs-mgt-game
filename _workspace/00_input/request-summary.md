@@ -2,17 +2,17 @@
 
 ## Scope
 
-Continue development under the preferred workflow by extending the deterministic
-vertical-slice spine with a concise educational debrief over the existing
-two-turn scripted history.
+Continue development under the preferred workflow by adding the first minimal
+playable CLI choice over the existing deterministic two-turn history and
+educational debrief.
 
 ## Roadmap Phase
 
-Primary phase: Phase 4 technical architecture proof.
+Primary phase: Phase 5 first vertical slice preparation.
 
-Forward intent: prepare a narrow Phase 5 vertical slice by making the existing
-policy and payer interactions more teachable without implementing a full
-campaign.
+Forward intent: move the architecture proof toward a narrow playable slice by
+letting the player choose among three hard-coded strategy paths without
+implementing scenario loading or a general command parser.
 
 ## Sources
 
@@ -27,7 +27,7 @@ campaign.
 
 ## Expected Files
 
-- Rust prototype in `src/main.rs`
+- Rust prototype and CLI boundary in `src/main.rs`
 - Version bump in `Cargo.toml`
 - Lightweight state updates in `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`,
   and `LESSONS.md`
@@ -42,7 +42,7 @@ campaign.
 ## Non-Goals
 
 - No full campaign.
-- No interactive command parser.
+- No general command parser.
 - No scenario loader.
 - No external data ingestion.
 - No full policy lifecycle framework.

@@ -2,8 +2,9 @@
 
 ## Goal and Roadmap Phase
 
-Extend the Phase 4 deterministic architecture proof with the first educational
-debrief so it can serve as a clearer spine for a later Phase 5 vertical slice.
+Extend the deterministic architecture proof toward Phase 5 by adding the first
+minimal playable CLI choice over the existing two-turn history and educational
+debrief.
 
 ## Slice Boundary
 
@@ -18,11 +19,12 @@ Included:
 - One actor-specific observation.
 - One append-only two-transition history.
 - One deterministic educational debrief over committed history.
+- Three hard-coded strategy paths selected through a small CLI input boundary.
 
 Excluded:
 
 - Full campaign.
-- Interactive CLI.
+- General command parser.
 - Persistent save files.
 - Scenario data loader.
 - Empirical calibration.
@@ -31,7 +33,8 @@ Excluded:
 ## Actors and Authority
 
 - Health system CEO: may choose a valid capacity stabilization command and
-  request a commercial rate, then choose a valid access-mandate response.
+  request a commercial rate, then choose a valid access-mandate response through
+  one of three compiled strategy paths.
 - Commercial insurer: may accept, counter, or reject the requested rate path.
 - State policy officials: may grant flexibility, continue the mandate, or
   escalate oversight.
@@ -52,9 +55,12 @@ Excluded:
 ## Commands, Events, and Effects
 
 - Valid commands: `StabilizeAccess` and `RespondToStateAccessMandate`.
+- CLI strategy paths: access stabilization, fiscal caution, and aggressive
+  bargaining.
 - Validation failures: non-positive capacity change or excessive capital spend.
 - Additional validation failures: negative or excessive advocacy spend and
   non-positive access commitment.
+- CLI failures: invalid numbered strategy choice.
 - Modeled unfavorable outcomes: insurer counteroffer or rejection, and state
   oversight escalation.
 - Events summarize actor-visible occurrences.
@@ -76,17 +82,20 @@ policy-process response, not a full policy lifecycle model.
 The debrief does not add a new strategic interaction. It exposes the recorded
 strategic rationales and attributed effects in a stable end-of-run summary.
 
+The CLI choice does not add a new strategic model. It selects one compiled
+two-command plan before the deterministic transition path runs.
+
 ## Assumptions and Parameters
 
 - All prototype values are small integer abstractions.
-- `demo-ruleset-0.1.4` is a temporary in-code ruleset name.
+- `demo-ruleset-0.1.5` is a temporary in-code ruleset name.
 - State fingerprinting is deterministic string formatting for now.
 
 ## Educational Debrief Hooks
 
-- The demo prints the CEO observation, insurer and state-policy rationales,
-  events, attributed effects, state fingerprints, replay result, and
-  educational debrief.
+- The demo prompts for one of three strategy paths and then prints the CEO
+  observation, insurer and state-policy rationales, events, attributed effects,
+  state fingerprints, replay result, and educational debrief.
 - This supports discussion of decision quality under incomplete information,
   payer bargaining, state policy response, delayed reporting, and unintended
   workforce/community effects.
@@ -99,6 +108,8 @@ strategic rationales and attributed effects in a stable end-of-run summary.
   state.
 - Debrief generation reads the committed history after transitions and does not
   use randomness, time, filesystem, network, or global mutable state.
+- CLI input is outside the transition core and only selects a hard-coded
+  strategy path.
 - No wall-clock time, hidden random number generation, file I/O, network I/O, or
   global mutable state is used in the transition core.
 
