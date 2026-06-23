@@ -47,3 +47,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   modules.
 - Prevention: Split modules when reuse or independent testing needs become
   concrete, not merely because a second branch exists in the demo.
+
+## Debriefing Can Start From Committed History
+
+- Context: Adding the first educational debrief to the deterministic demo.
+- Symptom: It is tempting to design a general reporting framework, scenario
+  schema, or instructor export format before the first debrief exists.
+- Cause: The existing transition history already contains observations, actor
+  rationales, attributed effects, and final state needed for a useful teaching
+  summary.
+- Resolution: The first debrief is a deterministic report over committed
+  history, with no new dependency, loader, or persistent artifact format.
+- Prevention: Add reporting structure only when repeated debrief outputs need a
+  shared format or external consumers.

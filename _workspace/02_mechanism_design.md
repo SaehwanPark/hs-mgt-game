@@ -2,9 +2,8 @@
 
 ## Goal and Roadmap Phase
 
-Extend the Phase 4 deterministic architecture proof with the first policy
-process interaction so it can serve as the spine of a later Phase 5 vertical
-slice.
+Extend the Phase 4 deterministic architecture proof with the first educational
+debrief so it can serve as a clearer spine for a later Phase 5 vertical slice.
 
 ## Slice Boundary
 
@@ -18,6 +17,7 @@ Included:
 - One policy pressure signal.
 - One actor-specific observation.
 - One append-only two-transition history.
+- One deterministic educational debrief over committed history.
 
 Excluded:
 
@@ -26,6 +26,7 @@ Excluded:
 - Persistent save files.
 - Scenario data loader.
 - Empirical calibration.
+- General instructor reporting framework.
 
 ## Actors and Authority
 
@@ -35,6 +36,8 @@ Excluded:
 - State policy officials: may grant flexibility, continue the mandate, or
   escalate oversight.
 - Policy pressure still enters through resolved inputs only.
+- Educational debrief: may summarize committed observations, effects, actor
+  rationales, and final state movement; it does not alter the simulation state.
 
 ## State, Beliefs, and Observations
 
@@ -43,6 +46,8 @@ Excluded:
 - Player observation reports delayed/noisy access and current quality.
 - The transition core receives observations and resolved inputs explicitly; it
   does not generate randomness.
+- The debrief reads committed history and reports actor rationales already
+  recorded at decision time.
 
 ## Commands, Events, and Effects
 
@@ -54,6 +59,8 @@ Excluded:
   oversight escalation.
 - Events summarize actor-visible occurrences.
 - Effects attribute metric deltas to sources.
+- Debrief lines summarize run-level tradeoffs, actor rationales, attributed
+  mechanisms, and classroom prompts.
 
 ## Strategic Interaction
 
@@ -66,16 +73,20 @@ oversight escalation by comparing advocacy spend, access commitment, reported
 access, and explicit policy pressure. The decision record is an abstraction of a
 policy-process response, not a full policy lifecycle model.
 
+The debrief does not add a new strategic interaction. It exposes the recorded
+strategic rationales and attributed effects in a stable end-of-run summary.
+
 ## Assumptions and Parameters
 
 - All prototype values are small integer abstractions.
-- `demo-ruleset-0.1.3` is a temporary in-code ruleset name.
+- `demo-ruleset-0.1.4` is a temporary in-code ruleset name.
 - State fingerprinting is deterministic string formatting for now.
 
 ## Educational Debrief Hooks
 
 - The demo prints the CEO observation, insurer and state-policy rationales,
-  events, attributed effects, state fingerprints, and replay result.
+  events, attributed effects, state fingerprints, replay result, and
+  educational debrief.
 - This supports discussion of decision quality under incomplete information,
   payer bargaining, state policy response, delayed reporting, and unintended
   workforce/community effects.
@@ -86,6 +97,8 @@ policy-process response, not a full policy lifecycle model.
   ruleset.
 - Replay recomputes committed transitions from genesis and compares the final
   state.
+- Debrief generation reads the committed history after transitions and does not
+  use randomness, time, filesystem, network, or global mutable state.
 - No wall-clock time, hidden random number generation, file I/O, network I/O, or
   global mutable state is used in the transition core.
 
