@@ -8,10 +8,16 @@ intended architecture boundaries that future implementation should preserve.
 - Language: Rust
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`
-- Executable: placeholder `src/main.rs`
+- Executable: scripted deterministic demo in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
-No production simulation architecture has been implemented yet.
+Last Reviewed: 2026-06-23
+Status: Verified
+
+The current implementation is a compact architecture proof, not a production
+simulation. It demonstrates a pure transition function, explicit resolved
+inputs, actor-specific observation, local strategic decision rationale,
+attributed effects, append-only history, and replay verification.
 
 ## Intended System Shape
 
@@ -40,6 +46,11 @@ Responsible for:
 
 The core should be testable without terminal I/O.
 
+Current proof location: `src/main.rs`.
+
+Last Reviewed: 2026-06-23
+Status: Verified
+
 ### Stochastic Input Resolution
 
 Responsible for:
@@ -51,6 +62,12 @@ Responsible for:
 
 Random draws should become explicit inputs before the deterministic transition
 core is evaluated.
+
+Current proof: `ResolvedInputs` carries measurement noise, delayed access
+reporting, labor pressure, and policy signal values into the transition.
+
+Last Reviewed: 2026-06-23
+Status: Verified
 
 ### Actor Information
 
@@ -64,10 +81,23 @@ The architecture must distinguish:
 Players and non-player actors should make decisions from available information,
 not omniscient state.
 
+Current proof: the player observation uses reported access and quality; the
+commercial insurer decision uses the reported access value and records a
+rationale.
+
+Last Reviewed: 2026-06-23
+Status: Verified
+
 ### Interface
 
 The initial interface is a CLI. Terminal rendering, input parsing, and display
 formatting should remain outside the deterministic simulation core.
+
+Current proof: `cargo run` prints a fixed demo summary. There is no interactive
+input parser or scenario loader yet.
+
+Last Reviewed: 2026-06-23
+Status: Verified
 
 ## Durable Constraints
 
@@ -78,11 +108,16 @@ formatting should remain outside the deterministic simulation core.
 - Prefer narrow vertical slices before general frameworks.
 - Make assumptions, causal mechanisms, and debrief explanations inspectable.
 - Treat history as immutable after committed transitions.
+- Keep prototype formulas visibly labeled as abstractions until evidence and
+  calibration work justify stronger claims.
+
+Last Reviewed: 2026-06-23
+Status: Verified
 
 ## Open Architectural Decisions
 
 - Module or crate boundaries for the deterministic core, CLI, scenario loading,
-  and educational debriefing.
+  and educational debriefing once the prototype exceeds one compact file.
 - Ruleset and scenario versioning format.
 - State hashing and replay artifact format.
 - Decision-record convention.
