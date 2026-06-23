@@ -2,10 +2,10 @@
 
 ## Scope
 
-Map enough project evidence to justify the first deterministic architecture
-proof: a small scripted turn involving a nonprofit health system, commercial
-insurer response, capacity pressure, reported observations, and debriefable
-effects.
+Map enough project evidence to justify the next deterministic architecture
+proof: a two-turn scripted history involving a nonprofit health system,
+commercial insurer response, state policy official response, reported
+observations, and debriefable effects.
 
 ## Sources Reviewed
 
@@ -24,6 +24,9 @@ effects.
 - Commercial payer response depends on reported access and requested rate. This
   is a design abstraction for payer-provider bargaining that demonstrates local
   strategic interaction without solving a global game.
+- State policy response depends on access commitment, advocacy spend, reported
+  access, and explicit policy signal. This is a design abstraction for a policy
+  process interaction, not a complete legislative or administrative lifecycle.
 - Policy pressure is modeled as an explicit resolved input. It is not generated
   inside the core transition.
 - Measurement delay/noise enters through explicit resolved inputs, preserving a
@@ -34,8 +37,8 @@ effects.
 - Player health system: seeks access stabilization while preserving financial
   capacity, quality, workforce trust, community trust, and policy legitimacy.
 - Commercial insurer: seeks affordable rates while preserving network access.
-- State policy environment: represented only as a pressure signal for this
-  prototype, not as a complete lifecycle.
+- State policy officials: seek credible access commitments and political
+  defensibility under policy pressure.
 - Player observations use reported access and quality rather than omniscient
   true state.
 
@@ -43,7 +46,9 @@ effects.
 
 - Simple integer metrics are acceptable for the first proof of deterministic
   state movement.
-- A scripted demo is sufficient to replace the placeholder CLI at this phase.
+- A scripted demo remains sufficient at this phase.
+- A two-turn scripted demo is sufficient to prove the first policy-process
+  interaction before adding interactive input or scenario loading.
 - Stable state fingerprints may be human-readable strings for now; no
   cryptographic hash is required yet.
 
@@ -59,8 +64,8 @@ effects.
 - Keep all randomness and measurement artifacts outside the transition function.
 - Preserve invalid-command validation separately from unfavorable modeled
   outcomes.
-- Emit events, effects, and actor rationales so later debriefing can explain
-  why outcomes occurred.
+- Emit events, effects, and actor rationales for both payer and policy actors so
+  later debriefing can explain why outcomes occurred.
 
 ## Risks
 

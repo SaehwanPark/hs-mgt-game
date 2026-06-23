@@ -36,11 +36,8 @@ reconstructing it from the diff.
 - Repo-local agent harness created for project-specific health-policy simulation
   workflow.
 - Rust package scaffold and spec-driven documentation baseline established.
-
-## Present
-
 - Feature: Deterministic vertical-slice spine
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/deterministic-slice-spine
 
@@ -68,10 +65,7 @@ reconstructing it from the diff.
   - Repo-local handoff artifacts added under `_workspace/`
   - `ARCHITECTURE.md`, `CHANGELOG.md`, and `LESSONS.md` updated for the slice
   - PR handoff opened as GitHub PR #2, and three review passes completed
-
-  Not Yet Done:
-  - Merge PR #2 into `main`
-  - Move this item from `Present` to `Past` after merge verification
+  - PR #2 merged into `main`
 
   Deferred / Non-Goals:
   - No full campaign or multiple-turn playable scenario
@@ -93,12 +87,49 @@ reconstructing it from the diff.
   - Replay from genesis reproduces the committed final state
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-  Out of Scope:
-  - Full campaign or multiple-turn scenario design
-  - Interactive CLI input
-  - Scenario file loading or external data ingestion
-  - Empirical calibration or policy forecasting claims
-  - CI, release automation, or contributor-process expansion
+## Present
+
+- Feature: State policy response slice
+  Status: Active
+  Started: 2026-06-23
+  Branch: feat/state-policy-response-slice
+
+  Summary:
+  Extend the scripted deterministic demo from one payer negotiation into a
+  two-turn history by adding one state-policy response command. The new command
+  models a health system response to a state access mandate using explicit
+  advocacy spend, access commitment, actor-specific observation, state-official
+  decision rationale, attributed effects, and replay verification.
+
+  Done:
+  - Package version bumped to `0.1.3`
+  - Added `RespondToStateAccessMandate` with validation for advocacy spend and
+    access commitment
+  - Added state policy decisions for flexibility, mandate continuation, and
+    oversight escalation
+  - Demo history now commits the existing capacity/payer turn followed by one
+    state-policy response turn
+  - Replay now verifies the final state of a two-transition history
+  - Focused tests added for deterministic policy response, invalid advocacy
+    spend, invalid access commitment, unfavorable valid policy outcome, and
+    two-transition replay
+
+  Not Yet Done:
+  - Complete three code-reviewer passes and address findings
+  - Merge after review and verification
+
+  Deferred / Non-Goals:
+  - No interactive CLI input or command parser
+  - No scenario, ruleset, or save-file loader
+  - No external data ingestion or empirical calibration
+  - No full policy lifecycle framework
+  - No module split yet
+
+  Verification:
+  - Existing payer negotiation behavior remains intact
+  - Invalid operations remain separate from unfavorable modeled outcomes
+  - Two-transition replay reproduces the committed final state
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
 
 ## Future
 
@@ -108,8 +139,8 @@ reconstructing it from the diff.
   implications memo.
 - Define the initial conceptual model: system boundary, actor classes, ontology,
   observation model, and causal framework.
-- Design the first narrow vertical slice with at least one strategic negotiation,
-  one policy process, deterministic replay, and educational debrief hooks.
+- Design the first narrow vertical slice with deterministic replay and
+  educational debrief hooks.
 - Split the prototype into stable module boundaries when the next slice needs
   more than one command or actor interaction.
 - Add scenario data loading only after the conceptual model and first action

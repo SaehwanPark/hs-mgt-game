@@ -2,15 +2,16 @@
 
 ## Scope
 
-Continue development under the preferred workflow by replacing the placeholder
-CLI with the first deterministic vertical-slice spine.
+Continue development under the preferred workflow by extending the deterministic
+vertical-slice spine with one state-policy response command and a two-turn
+scripted history.
 
 ## Roadmap Phase
 
 Primary phase: Phase 4 technical architecture proof.
 
-Forward intent: prepare a narrow Phase 5 vertical slice without implementing a
-full campaign.
+Forward intent: prepare a narrow Phase 5 vertical slice by adding the first
+policy-process interaction without implementing a full campaign.
 
 ## Sources
 
@@ -43,6 +44,7 @@ full campaign.
 - No interactive command parser.
 - No scenario loader.
 - No external data ingestion.
+- No full policy lifecycle framework.
 - No CI, release automation, or contributor-process expansion.
 - No empirical calibration or policy forecasting claim.
 
