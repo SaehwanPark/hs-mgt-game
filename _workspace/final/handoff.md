@@ -26,7 +26,7 @@ response, attributed effects, state fingerprint, and replay check.
 ## Verification
 
 - `cargo fmt` completed successfully.
-- `cargo test` passed: 5 tests passed.
+- `cargo test` passed: 7 tests passed.
 - `cargo run` printed the deterministic demo and confirmed replay final state
   matched the committed state.
 

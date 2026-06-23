@@ -38,6 +38,9 @@ enum PlayerCommand {
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum ValidationError {
   NonPositiveCapacityChange,
+  NegativeCapitalSpend {
+    requested: i32,
+  },
   CapitalSpendTooHigh {
     requested: i32,
     available_limit: i32,
@@ -155,6 +158,7 @@ fn transition(
 
   let observation = observe_for_player(prior, &resolved_inputs);
   let actor_decision = insurer_decision(&command, &observation, ruleset);
+  let requested_commercial_rate = requested_commercial_rate(&command);
   let mut next = prior.clone();
   let mut events = Vec::new();
   let mut effects = Vec::new();
@@ -204,7 +208,7 @@ fn transition(
 
   match actor_decision.decision {
     InsurerDecision::Accept => {
-      let delta = ruleset.target_commercial_rate - prior.commercial_rate;
+      let delta = requested_commercial_rate - prior.commercial_rate;
       next.commercial_rate += delta;
       push_effect(&mut effects, "commercial insurer", "commercial_rate", delta);
       events.push(Event {
@@ -270,6 +274,12 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
         return Err(ValidationError::NonPositiveCapacityChange);
       }
 
+      if *capital_spend < 0 {
+        return Err(ValidationError::NegativeCapitalSpend {
+          requested: *capital_spend,
+        });
+      }
+
       if *capital_spend > ruleset.max_capital_spend {
         return Err(ValidationError::CapitalSpendTooHigh {
           requested: *capital_spend,
@@ -280,6 +290,15 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
   }
 
   Ok(())
+}
+
+fn requested_commercial_rate(command: &PlayerCommand) -> i32 {
+  match command {
+    PlayerCommand::StabilizeAccess {
+      requested_commercial_rate,
+      ..
+    } => *requested_commercial_rate,
+  }
 }
 
 fn observe_for_player(prior: &WorldState, inputs: &ResolvedInputs) -> Observation {
@@ -509,6 +528,50 @@ mod tests {
         available_limit: 40
       })
     );
+  }
+
+  #[test]
+  fn negative_capital_spend_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::StabilizeAccess {
+      add_staffed_beds: 8,
+      capital_spend: -1,
+      requested_commercial_rate: 104,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NegativeCapitalSpend { requested: -1 })
+    );
+  }
+
+  #[test]
+  fn accepted_negotiation_applies_requested_rate() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::StabilizeAccess {
+      add_staffed_beds: 4,
+      capital_spend: 10,
+      requested_commercial_rate: 104,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 75,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(result.actor_decision.decision, InsurerDecision::Accept);
+    assert_eq!(result.next.commercial_rate, 104);
   }
 
   #[test]

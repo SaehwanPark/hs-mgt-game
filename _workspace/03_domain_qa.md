@@ -31,7 +31,9 @@ pass
 
 ## Required Fixes
 
-- None for this slice.
+- Review pass 1 found two code-level fixes, both completed before handoff:
+  accepted commercial-rate negotiations now apply the requested accepted rate,
+  and negative capital spend is rejected during validation.
 
 ## Residual Risks
 
@@ -44,6 +46,6 @@ pass
 ## Verification Evidence
 
 - `cargo fmt` completed successfully.
-- `cargo test` passed: 5 tests passed.
+- `cargo test` passed: 7 tests passed.
 - `cargo run` printed the deterministic demo and confirmed replay final state
   matched the committed state.
