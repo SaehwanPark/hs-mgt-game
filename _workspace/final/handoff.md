@@ -34,7 +34,8 @@ effects, state fingerprints, replay verification, and educational debrief.
 - Strategy `3` selected aggressive bargaining, replayed successfully, and
   produced insurer rejection plus oversight escalation.
 - Invalid strategy input exited nonzero with an explicit CLI error.
-- PR handoff and three code-reviewer passes are still pending.
+- GitHub PR #5 opened for the slice.
+- Three code-reviewer passes are in progress.
 
 ## Known Limits
 

@@ -192,9 +192,10 @@ reconstructing it from the diff.
   - Add focused CLI choice and strategy-path tests
   - Run final verification commands
   - Update architecture, changelog, lessons, and handoff files
+  - PR handoff opened as GitHub PR #5
 
   Not Yet Done:
-  - Open PR handoff and complete three code-reviewer passes
+  - Complete three code-reviewer passes
   - Merge after review and verification
 
   Deferred / Non-Goals:
