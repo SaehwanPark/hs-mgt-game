@@ -18,12 +18,15 @@ Any active or incomplete item in `Present` must explicitly separate:
 
 - `Done`: implemented, documented, or verified work that already exists on the
   active branch.
-- `Not Yet Done`: remaining work, excluded work, deferred work, or known limits
-  that should not be mistaken for completed scope.
+- `Not Yet Done`: planned goal or target scope for the active item that is not
+  complete yet.
+- `Deferred / Non-Goals`: excluded work, future work, or known limits that
+  should not be mistaken for planned completion within the active item.
 
 Do not rely only on summaries, verification lists, or out-of-scope notes for
 active work; future contributors must be able to tell what exists versus what
-does not yet exist without reconstructing it from the diff.
+is planned-but-incomplete versus what is deliberately out of scope without
+reconstructing it from the diff.
 
 ## Past
 
@@ -67,6 +70,10 @@ does not yet exist without reconstructing it from the diff.
   - PR handoff opened as GitHub PR #2, and three review passes completed
 
   Not Yet Done:
+  - Merge PR #2 into `main`
+  - Move this item from `Present` to `Past` after merge verification
+
+  Deferred / Non-Goals:
   - No full campaign or multiple-turn playable scenario
   - No interactive CLI input or command parser
   - No scenario, ruleset, or save-file loader
