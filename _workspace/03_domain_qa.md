@@ -36,7 +36,7 @@ pass
 
 ## Required Fixes
 
-- Complete code-reviewer PR passes.
+- None before merge.
 
 ## Residual Risks
 
@@ -58,3 +58,6 @@ pass
 - Strategy `3` selected aggressive bargaining, replayed successfully, and
   produced insurer rejection plus oversight escalation.
 - Invalid strategy input exited nonzero with an explicit CLI error.
+- Three code-reviewer passes completed; one low-severity handoff wording
+  finding was fixed, with no Critical, High, or Medium findings remaining.
+- GitHub reported no CI checks for the branch.

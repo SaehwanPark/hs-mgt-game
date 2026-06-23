@@ -193,9 +193,10 @@ reconstructing it from the diff.
   - Run final verification commands
   - Update architecture, changelog, lessons, and handoff files
   - PR handoff opened as GitHub PR #5
+  - Three code-reviewer passes completed; one low-severity handoff wording
+    finding was fixed
 
   Not Yet Done:
-  - Complete three code-reviewer passes
   - Merge after review and verification
 
   Deferred / Non-Goals:

@@ -35,7 +35,9 @@ effects, state fingerprints, replay verification, and educational debrief.
   produced insurer rejection plus oversight escalation.
 - Invalid strategy input exited nonzero with an explicit CLI error.
 - GitHub PR #5 opened for the slice.
-- Three code-reviewer passes are in progress.
+- Three code-reviewer passes completed; one low-severity handoff wording
+  finding was fixed, with no Critical, High, or Medium findings remaining.
+- GitHub reported no CI checks for the branch.
 
 ## Known Limits
 
