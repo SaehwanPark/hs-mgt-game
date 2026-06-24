@@ -12,8 +12,8 @@ checks, a starting executive dashboard at v0.1.13, per-turn interactive play
 at v0.1.14, deterministic replay artifact export at v0.1.15, library module
 boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
 scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
-parameter-source ledger at v0.1.20, and fifth-turn competitor capacity slice at
-v0.1.21.
+parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
+v0.1.21, and Phase 0 governance docs at v0.1.22.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -38,6 +38,9 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Actor Card Template](docs/actor-cards.md)
 - [First Scenario Brief](docs/first-scenario-brief.md)
 - [Phase 1 Implications Memo](docs/phase1-implications-memo.md)
+- [Glossary](docs/glossary.md)
+- [Versioning Policy](docs/versioning-policy.md)
+- [Architecture Decision Records](docs/decision-records/README.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.21)](docs/playtest-findings-v0.1.21.md)
 
@@ -82,10 +85,13 @@ cargo test
 
 Current priorities are:
 
-1. glossary, decision-record conventions, and versioning policy from roadmap
-   Phase 0.
+1. scenario data loading only after the conceptual model and action vocabulary
+   settle further.
 
-Before proposing major features or abstractions, review the canonical documents in [`docs/`](docs/).
+Before proposing major features or abstractions, review the canonical documents
+in [`docs/`](docs/), including the [glossary](docs/glossary.md),
+[versioning policy](docs/versioning-policy.md), and
+[decision-record template](docs/decision-records/0000-template.md).
 
 ## Programming Principles
 
