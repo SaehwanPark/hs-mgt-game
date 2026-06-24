@@ -9,7 +9,8 @@ The project models health-policy outcomes as the result of strategic interaction
 Early research and design phase with a deterministic architecture proof, minimal
 playable CLI demo, first scenario design artifacts, stable replay state hash
 checks, a starting executive dashboard at v0.1.13, per-turn interactive play
-at v0.1.14, and deterministic replay artifact export at v0.1.15.
+at v0.1.14, deterministic replay artifact export at v0.1.15, library module
+boundaries at v0.1.16, and GitHub Actions CI at v0.1.18.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -65,13 +66,21 @@ The initial version will not attempt to:
 
 The project is not yet ready for broad implementation contributions.
 
+Pull requests to `main` run CI checks for `cargo fmt --check` and `cargo test`.
+Before opening a PR, run the same commands locally:
+
+```bash
+cargo fmt --check
+cargo test
+```
+
 Current priorities are:
 
-1. extend the deterministic prototype toward the first vertical slice;
-2. initial system-boundary definition and domain ontology;
-3. literature and precedent research conversion into an evidence registry;
-4. first-scenario design beyond compiled demo paths;
-5. contributor tooling and CI once roadmap conventions are documented.
+1. close Phase 5 documentation and scope register;
+2. convert Phase 1 research into a research-to-design implications memo;
+3. extend the vertical slice with the next strategic actor (actor card first);
+4. glossary, decision-record conventions, and versioning policy from roadmap
+   Phase 0.
 
 Before proposing major features or abstractions, review the canonical documents in [`docs/`](docs/).
 

@@ -631,12 +631,39 @@ reconstructing it from the diff.
 
 ## Present
 
-- No active items.
+- Feature: Phase 0 CI baseline
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/phase0-ci-baseline
+
+  Summary:
+  Add GitHub Actions CI running `cargo fmt --check` and `cargo test` on pushes
+  to `main` and on pull requests. Document local verification commands in the
+  README.
+
+  Done:
+  - Working branch created from `main`
+  - Added `.github/workflows/ci.yml` with formatting and test jobs
+  - Updated README contributing section with local CI commands
+  - Bumped package version to `0.1.18`
+  - Updated `CHANGELOG.md`
+
+  Not Yet Done:
+  - PR handoff, three code-reviewer passes, and merge when approved
+
+  Deferred / Non-Goals:
+  - No clippy policy or release automation
+  - No workspace crate split or new gameplay behavior
+  - No contributor guide beyond README CI notes
+
+  Verification:
+  - `cargo fmt --check` passes locally
+  - `cargo test` passes locally (78 tests)
 
 ## Future
 
 - Define glossary, decision-record conventions, and versioning policy from
-  roadmap Phase 0.
+  roadmap Phase 0 (CI baseline now in place).
 - Convert Phase 1 research into an evidence registry and research-to-design
   implications memo.
 - Use the actor-card template before adding future strategic actors.
