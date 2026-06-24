@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.25] - 2026-06-24
+
+### Added
+
+- Turn uncertainty preview in interactive CLI play (`src/cli/display/forecast.rs`).
+- [`docs/playtest-findings-v0.1.25.md`](docs/playtest-findings-v0.1.25.md).
+
+### Changed
+
+- Interactive mode prints observation-only uncertainty preview before each
+  executive briefing.
+- Starting dashboard notes that reported measures may differ from true conditions.
+- Phase 5 scope register forecast row marked mostly achieved.
+- Bumped package version from `0.1.24` to `0.1.25`.
+
+### Notes
+
+- Golden seed-42 hash unchanged. Preset paths unaffected.
+
 ## [0.1.24] - 2026-06-24
 
 ### Added

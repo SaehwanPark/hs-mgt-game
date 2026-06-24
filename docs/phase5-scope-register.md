@@ -53,7 +53,7 @@ Partially achieved:
 
 | Requirement | Status | Notes |
 | --- | --- | --- |
-| Forecasts and uncertainty | Partial | Uncertainty appears through noisy/revised observations and strategy previews; dedicated forecast preview slice planned |
+| Forecasts and uncertainty | Mostly achieved | Interactive uncertainty preview before each turn; observation note on dashboard; no probabilistic forecast objects |
 
 ### Internal playtesting (§5.5)
 
@@ -107,7 +107,7 @@ Partially achieved:
 | --- | --- |
 | Scenario or ruleset file loader | Format design draft planned; runtime loader after approval |
 | Mid-run save/load | Replay artifact export covers post-run reproducibility for now |
-| Forecast UI | Observation uncertainty is modeled; dedicated forecast preview slice next |
+| Forecast UI | Mostly achieved | Observation-only uncertainty preview in interactive mode |
 | Empirical calibration | Prototype integers remain design abstractions per [`evidence-registry.md`](evidence-registry.md) |
 | Graphical interface | CLI-first scope per project proposal |
 | Clippy CI or release automation | Phase 0 CI covers fmt and test only |
@@ -152,14 +152,9 @@ Golden final state hash at seed 42: `6fb1ebbea564274f` (82 tests at v0.1.22).
 
 Per [`SPEC.md`](../SPEC.md) Future backlog and README contributor priorities:
 
-1. **Forecast/uncertainty CLI preview** (`feat/forecast-uncertainty-preview`) —
-   closes Phase 5 §5.4 partial gap without probabilistic forecast objects.
-2. **First architecture decision record** (`feat/adr-deterministic-boundary`) —
-   record deterministic transition and stochastic input boundary.
-3. **Scenario/ruleset format design draft** — Phase 6.2 design gate before
-   runtime loader.
-4. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario
-   until brief expands and actor cards exist.
+1. **External playtest protocol refresh** — Phase 7 prep after v0.1.25 hardening.
+2. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
+3. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
 
 ## Related documents
 

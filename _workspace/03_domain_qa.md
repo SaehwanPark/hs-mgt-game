@@ -1,16 +1,16 @@
-# Domain QA — SPEC Reconciliation (v0.1.23)
+# Domain QA — Forecast Uncertainty Preview (v0.1.25)
 
 **Date:** 2026-06-24  
-**Slice:** Docs-only reconciliation; no runtime changes
+**Slice:** Interactive CLI uncertainty preview
 
 ## Checks
 
 | Check | Result |
 | --- | --- |
-| Competitor listed as achieved in scope register | Pass |
-| Rival actor and fifth command in system boundary | Pass |
-| Medicare/Medicaid remain excluded from first scenario | Pass |
-| No implied empirical calibration | Pass |
-| Golden hash unchanged | Pass (verified by tests) |
+| Preview uses observation and ruleset bounds only | Pass |
+| No actor decision outcome leakage | Pass (tests) |
+| No calibrated forecasting language | Pass |
+| Golden hash unchanged | Pass |
+| First-scenario scope preserved | Pass |
 
-**Pass** for docs-only v0.1.23 slice.
+**Pass** for v0.1.25 forecast preview slice.

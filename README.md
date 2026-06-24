@@ -14,7 +14,8 @@ boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
 scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
 parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
 v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
-at v0.1.23, first ADR and scenario format draft at v0.1.24.
+at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
+preview at v0.1.25.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -45,7 +46,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [ADR 0001: Deterministic transition boundary](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
 - [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
-- [Internal Playtest Findings (v0.1.21)](docs/playtest-findings-v0.1.21.md)
+- [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 
@@ -88,9 +89,9 @@ cargo test
 
 Current priorities are:
 
-1. Forecast/uncertainty CLI preview (Phase 5 hardening).
-2. First architecture decision record and scenario format design draft (Phase 6 prep).
-3. Scenario data loading runtime only after the format design is approved.
+1. External playtest protocol refresh (Phase 7 prep).
+2. Scenario data loading runtime after format draft review.
+3. Medicare/Medicaid actors only after first-scenario scope expands.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),

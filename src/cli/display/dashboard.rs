@@ -28,6 +28,8 @@ pub fn executive_dashboard(state: &WorldState) -> Vec<String> {
       rate = state.commercial_rate,
       policy = state.policy_pressure
     ),
+    "  Observation note: reported access and quality may differ from true conditions during play"
+      .to_string(),
   ]
 }
 

@@ -829,14 +829,42 @@ reconstructing it from the diff.
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass
 
+- Feature: Forecast and uncertainty CLI preview
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/forecast-uncertainty-preview
+
+  Summary:
+  Add bounded observation-only uncertainty preview before each interactive turn
+  and an observation note on the starting dashboard without changing transition
+  logic or golden trajectories.
+
+  Done:
+  - Added `src/cli/display/forecast.rs` with turn uncertainty preview helper
+  - Wired preview into interactive session before executive briefings
+  - Added observation uncertainty note to starting executive dashboard
+  - Added focused forecast preview tests
+  - Updated phase5 scope register forecast row to mostly achieved
+  - Added `docs/playtest-findings-v0.1.25.md`
+  - Package version bumped to `0.1.25`
+  - README, CHANGELOG, SPEC, and workspace artifacts updated
+
+  Deferred / Non-Goals:
+  - No probabilistic forecast objects
+  - No changes to `transition()`, hash semantics, or random streams
+  - No preset path output changes beyond dashboard note
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (86 tests)
+  - Interactive mode shows uncertainty preview before turn 1 briefing
+
 ## Present
 
 ## Future
 
-- **Forecast/uncertainty CLI preview** (Phase 5 hardening): bounded observation-only
-  preview before interactive turns; no probabilistic forecast objects.
 - **External playtest protocol refresh** (Phase 7 prep): structured external
-  session protocol after hardening slices land.
+  session protocol.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded from
   first scenario until brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;

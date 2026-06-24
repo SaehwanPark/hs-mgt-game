@@ -10,7 +10,7 @@ use crate::sim::{observe_for_player, transition};
 
 use super::display::{
   print_interactive_results, print_pre_run_briefing, turn_executive_briefing,
-  turn_resolution_summary,
+  turn_resolution_summary, turn_uncertainty_preview, turn_uncertainty_preview_header,
 };
 use super::export::read_replay_export_path;
 use super::io::{read_command_line, read_play_mode_choice, read_seed_choice};
@@ -105,6 +105,11 @@ pub fn run_interactive_history(seed: u64, ruleset: &Ruleset) -> Result<History, 
     let default_hint = describe_command_defaults(&defaults[turn_index]);
     let inputs = resolve_inputs(seed, &state, ruleset);
     let observation = observe_for_player(&state, &inputs);
+
+    println!("{}", turn_uncertainty_preview_header(turn_number));
+    for line in turn_uncertainty_preview(&state, &observation, turn_number, ruleset) {
+      println!("{line}");
+    }
 
     for line in turn_executive_briefing(&state, &observation, turn_number) {
       println!("{line}");
