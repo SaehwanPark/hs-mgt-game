@@ -157,3 +157,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Before adding a strategic actor or scenario mechanism, write the
   actor card and scenario rationale first; only implement when the slice can be
   tested deterministically and explained in debrief.
+
+## Replay Hashing Should Stay Canonical And Bounded
+
+- Context: Adding stable state hashes to the deterministic replay proof.
+- Symptom: It is tempting to add a serializer, save format, cryptographic hash
+  dependency, or durable replay artifact as soon as hashes appear.
+- Cause: The immediate Phase 4 need is drift detection during replay, not
+  persistence or tamper-proof storage.
+- Resolution: Added a labeled canonical state record and local 64-bit FNV-1a
+  hash for committed transition checks without changing gameplay mechanics.
+- Prevention: Keep replay hash inputs explicit and versioned; add external
+  replay artifacts or stronger hash guarantees only when save/load, analysis,
+  or release requirements make them necessary.

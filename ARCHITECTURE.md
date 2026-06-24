@@ -9,7 +9,8 @@ intended architecture boundaries that future implementation should preserve.
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`
 - Executable: minimal playable CLI over a four-turn deterministic demo with
-  seeded resolved inputs and educational debrief in `src/main.rs`
+  seeded resolved inputs, replay state-hash checks, and educational debrief in
+  `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-24
@@ -20,12 +21,12 @@ simulation. It demonstrates a pure transition function, explicit resolved
 inputs derived from a run seed and named streams, actor-specific observation,
 local strategic decision rationales for a commercial insurer, state policy
 officials, nursing workforce representative, and regional provider coalition
-liaison, attributed effects, append-only
-history, replay verification, a deterministic end-of-run educational debrief,
-and a small CLI choice among three hard-coded strategy paths with optional seed
-input. The first Phase 3 design artifacts now define the actor-card template and
-first scenario brief that future runtime additions should satisfy before adding
-new strategic actors or scenario content.
+liaison, attributed effects, append-only history, stable per-transition state
+hashes, replay verification that detects committed hash drift, a deterministic
+end-of-run educational debrief, and a small CLI choice among three hard-coded
+strategy paths with optional seed input. The first Phase 3 design artifacts now
+define the actor-card template and first scenario brief that future runtime
+additions should satisfy before adding new strategic actors or scenario content.
 
 ## Intended System Shape
 
@@ -54,7 +55,9 @@ Responsible for:
 
 The core should be testable without terminal I/O.
 
-Current proof location: `src/main.rs`.
+Current proof location: `src/main.rs`. Each committed transition records a
+stable 64-bit FNV-1a state hash over a canonical, labeled state record. This is
+a deterministic replay check, not a cryptographic integrity guarantee.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -109,8 +112,8 @@ formatting should remain outside the deterministic simulation core.
 Current proof: `cargo run` prompts for one of three hard-coded strategy paths
 and an optional run seed, then prints resolved inputs, the four-turn demo
 summary, replay result, and educational debrief. The CLI input boundary selects
-compiled strategy paths and seeds only; there is no general command parser or
-scenario loader yet.
+compiled strategy paths and seeds only; there is no general command parser,
+scenario loader, save format, or durable replay artifact yet.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -152,6 +155,6 @@ Status: Verified
   and educational debriefing once the prototype needs reusable boundaries beyond
   the compact file.
 - Ruleset and scenario versioning format.
-- State hashing and replay artifact format.
+- Durable replay artifact format.
 - Decision-record convention.
 - Data and licensing policy.
