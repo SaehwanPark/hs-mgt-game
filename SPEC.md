@@ -370,10 +370,8 @@ reconstructing it from the diff.
   - Default `cargo run` preserved the existing four-turn demo behavior
   - Three local code-reviewer passes completed before PR handoff
 
-## Present
-
 - Feature: Phase 3 actor cards and first scenario brief
-  Status: Active
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/phase3-actor-cards-scenario-brief
 
@@ -397,6 +395,7 @@ reconstructing it from the diff.
   - Architecture, changelog, lessons, and workspace handoff artifacts updated
   - PR handoff opened as GitHub PR #10
   - Three code-reviewer passes completed with no actionable findings
+  - PR #10 merged into `main`
 
   Deferred / Non-Goals:
   - No runtime behavior changes
@@ -406,13 +405,53 @@ reconstructing it from the diff.
   - No broad campaign or MVP scenario system
 
   Verification:
-  - `cargo fmt --check` passes
-  - `cargo test` passes with 52 tests
+  - `cargo fmt --check` passed
+  - `cargo test` passed with 52 tests
   - Default `cargo run` with strategy `1` and seed `42` preserves the existing
     four-turn demo behavior
-  - Domain QA passes before PR handoff
+  - Domain QA passed before PR handoff
   - Three local code-reviewer passes found no Critical, High, Medium, or Low
     issues
+
+## Present
+
+- Feature: State hash and replay proof
+  Status: Active
+  Started: 2026-06-24
+  Branch: feat/state-hash-replay-proof
+
+  Summary:
+  Replace the readable state fingerprint with a stable per-transition state
+  hash over a canonical state record. Replay should verify each committed hash,
+  detect hash drift, and preserve the existing four-turn deterministic demo
+  without adding persistence, scenario loading, or cryptographic guarantees.
+
+  Done:
+  - Working branch created from `main`
+  - Phase 3 actor-card and scenario brief slice moved into completed history
+  - Package version bumped to `0.1.12`
+  - Added canonical state record and stable 64-bit FNV-1a state hash helpers
+  - Updated committed transitions to store `state_hash`
+  - Updated replay to return verification and fail on committed hash mismatch
+  - Updated CLI output from state fingerprints to state hashes
+  - Added focused hash determinism, hash drift, and replay mismatch tests
+
+  Deferred / Non-Goals:
+  - No scenario loader, command parser, save format, or replay artifact export
+  - No cryptographic hash dependency or security guarantee
+  - No new commands, actors, metrics, random streams, or gameplay turns
+  - No empirical calibration or authoritative policy forecast
+  - No module split
+
+  Verification:
+  - `cargo fmt --check` passed
+  - `cargo test` passed with 55 tests
+  - Default `cargo run` with strategy `1` and seed `42` prints per-turn state
+    hashes and replay success
+  - Domain QA passed for the bounded hash/replay proof
+  - PR handoff opened as GitHub PR #11
+  - Three code-reviewer passes completed; one low-severity replay diagnostic
+    finding was fixed
 
 ## Future
 
@@ -423,6 +462,8 @@ reconstructing it from the diff.
 - Use the actor-card template before adding future strategic actors.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
+- Add a durable replay artifact format only after save/load or external
+  analysis requires one.
 - Split the prototype into stable module boundaries when the next slice needs
   more than one command or actor interaction.
 - Add scenario data loading only after the conceptual model and first action

@@ -9,6 +9,9 @@ const STREAM_LABOR: u32 = 3;
 const STREAM_POLICY: u32 = 4;
 const STREAM_COALITION: u32 = 5;
 const STREAM_REVISION: u32 = 6;
+const STATE_HASH_SCHEMA_VERSION: &str = "state-hash-v1";
+const FNV_OFFSET_BASIS: u64 = 0xcbf2_9ce4_8422_2325;
+const FNV_PRIME: u64 = 0x0000_0100_0000_01b3;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct WorldState {
@@ -190,7 +193,22 @@ struct Transition {
   events: Vec<Event>,
   effects: Vec<AttributedEffect>,
   next: WorldState,
-  state_fingerprint: String,
+  state_hash: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct ReplayVerification {
+  final_state: WorldState,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum ReplayError {
+  InvalidTransition(ValidationError),
+  StateHashMismatch {
+    turn: u32,
+    expected: String,
+    actual: String,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -805,7 +823,7 @@ fn transition(
   next.community_trust = clamp_metric(next.community_trust);
   next.policy_pressure = clamp_metric(next.policy_pressure);
 
-  let state_fingerprint = fingerprint_state(&next, ruleset);
+  let state_hash = hash_state(&next, ruleset);
 
   Ok(Transition {
     prior: prior.clone(),
@@ -816,7 +834,7 @@ fn transition(
     events,
     effects,
     next,
-    state_fingerprint,
+    state_hash,
   })
 }
 
@@ -1194,7 +1212,7 @@ fn coalition_decision(
   }
 }
 
-fn replay(history: &History, ruleset: &Ruleset) -> Result<WorldState, ValidationError> {
+fn replay(history: &History, ruleset: &Ruleset) -> Result<ReplayVerification, ReplayError> {
   let mut state = history.genesis.clone();
 
   for committed in &history.transitions {
@@ -1203,11 +1221,21 @@ fn replay(history: &History, ruleset: &Ruleset) -> Result<WorldState, Validation
       committed.command.clone(),
       committed.resolved_inputs.clone(),
       ruleset,
-    )?;
+    )
+    .map_err(ReplayError::InvalidTransition)?;
+
+    if replayed.state_hash != committed.state_hash {
+      return Err(ReplayError::StateHashMismatch {
+        turn: replayed.next.turn,
+        expected: committed.state_hash.clone(),
+        actual: replayed.state_hash,
+      });
+    }
+
     state = replayed.next;
   }
 
-  Ok(state)
+  Ok(ReplayVerification { final_state: state })
 }
 
 fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
@@ -1254,14 +1282,14 @@ fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
         effect.source, effect.metric, effect.delta
       );
     }
-    println!("Next state fingerprint: {}", transition.state_fingerprint);
+    println!("Next state hash: {}", transition.state_hash);
   }
   println!(
     "Replay final state matches committed state: {}",
     history
       .transitions
       .last()
-      .is_some_and(|transition| replayed == transition.next)
+      .is_some_and(|transition| replayed.final_state == transition.next)
   );
   println!("Educational debrief:");
   for line in educational_debrief(history) {
@@ -1392,9 +1420,10 @@ fn clamp_metric(value: i32) -> i32 {
   value.clamp(0, 100)
 }
 
-fn fingerprint_state(state: &WorldState, ruleset: &Ruleset) -> String {
+fn state_hash_record(state: &WorldState, ruleset: &Ruleset) -> String {
   format!(
-    "{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
+    "{}|ruleset={}|turn={}|cash={}|staffed_beds={}|access_index={}|quality_index={}|workforce_trust={}|community_trust={}|commercial_rate={}|policy_pressure={}",
+    STATE_HASH_SCHEMA_VERSION,
     ruleset.version,
     state.turn,
     state.cash,
@@ -1406,6 +1435,21 @@ fn fingerprint_state(state: &WorldState, ruleset: &Ruleset) -> String {
     state.commercial_rate,
     state.policy_pressure
   )
+}
+
+fn hash_state(state: &WorldState, ruleset: &Ruleset) -> String {
+  stable_hash_hex(&state_hash_record(state, ruleset))
+}
+
+fn stable_hash_hex(input: &str) -> String {
+  let mut hash = FNV_OFFSET_BASIS;
+
+  for byte in input.as_bytes() {
+    hash ^= u64::from(*byte);
+    hash = hash.wrapping_mul(FNV_PRIME);
+  }
+
+  format!("{hash:016x}")
 }
 
 #[cfg(test)]
@@ -1603,7 +1647,71 @@ mod tests {
       transitions: vec![first.clone()],
     };
 
-    assert_eq!(replay(&history, &ruleset).unwrap(), first.next);
+    assert_eq!(replay(&history, &ruleset).unwrap().final_state, first.next);
+  }
+
+  #[test]
+  fn identical_state_records_produce_identical_hashes() {
+    let ruleset = default_ruleset();
+    let state = genesis_state();
+
+    assert_eq!(hash_state(&state, &ruleset), hash_state(&state, &ruleset));
+    assert_eq!(
+      state_hash_record(&state, &ruleset),
+      "state-hash-v1|ruleset=demo-ruleset-0.1.9|turn=0|cash=100|staffed_beds=120|access_index=70|quality_index=78|workforce_trust=62|community_trust=66|commercial_rate=100|policy_pressure=30"
+    );
+  }
+
+  #[test]
+  fn changed_state_field_changes_hash() {
+    let ruleset = default_ruleset();
+    let mut changed = genesis_state();
+    changed.cash -= 1;
+
+    assert_ne!(
+      hash_state(&genesis_state(), &ruleset),
+      hash_state(&changed, &ruleset)
+    );
+  }
+
+  #[test]
+  fn replay_detects_committed_state_hash_mismatch() {
+    let ruleset = default_ruleset();
+    let genesis = genesis_state();
+    let mut first = transition(
+      &genesis,
+      PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 8,
+        capital_spend: 18,
+        requested_commercial_rate: 112,
+      },
+      ResolvedInputs {
+        measurement_noise: -2,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
+        coalition_leverage_signal: 1,
+        access_measurement_revision: 0,
+      },
+      &ruleset,
+    )
+    .unwrap();
+    let actual = first.state_hash.clone();
+    first.state_hash = "0000000000000000".to_string();
+    first.next.turn = 99;
+    let history = History {
+      genesis,
+      transitions: vec![first],
+    };
+
+    assert_eq!(
+      replay(&history, &ruleset),
+      Err(ReplayError::StateHashMismatch {
+        turn: 1,
+        expected: "0000000000000000".to_string(),
+        actual,
+      })
+    );
   }
 
   #[test]
@@ -1806,7 +1914,7 @@ mod tests {
       transitions: vec![first, second.clone()],
     };
 
-    assert_eq!(replay(&history, &ruleset).unwrap(), second.next);
+    assert_eq!(replay(&history, &ruleset).unwrap().final_state, second.next);
   }
 
   #[test]
@@ -1889,7 +1997,7 @@ mod tests {
       let final_state = history.transitions.last().unwrap().next.clone();
 
       assert_eq!(history.transitions.len(), 4);
-      assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
+      assert_eq!(replay(&history, &ruleset).unwrap().final_state, final_state);
     }
   }
 
@@ -1983,8 +2091,8 @@ mod tests {
       ActorDecision::Coalition(CoalitionDecision::FullPartnership)
     );
     assert_eq!(
-      history.transitions.last().unwrap().state_fingerprint,
-      "demo-ruleset-0.1.9:4:46:128:83:80:68:71:100:35"
+      history.transitions.last().unwrap().state_hash,
+      "bce02dff9b4b4ac6"
     );
   }
 
@@ -2196,7 +2304,7 @@ mod tests {
     let final_state = history.transitions.last().unwrap().next.clone();
 
     assert_eq!(history.transitions.len(), 4);
-    assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
+    assert_eq!(replay(&history, &ruleset).unwrap().final_state, final_state);
   }
 
   #[test]

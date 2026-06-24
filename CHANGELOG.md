@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.12] - 2026-06-24
+
+### Added
+
+- Added stable per-transition state hashes over canonical state records.
+- Added replay verification that detects committed state-hash drift.
+- Added focused tests for deterministic hashing and hash mismatch detection.
+
+### Changed
+
+- Bumped package version from `0.1.11` to `0.1.12`.
+- Updated demo output from state fingerprints to state hashes.
+- Corrected project-state bookkeeping for the merged Phase 3 actor/scenario
+  design slice.
+
 ## [0.1.11] - 2026-06-24
 
 ### Added

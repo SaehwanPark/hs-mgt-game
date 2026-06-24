@@ -6,41 +6,30 @@ pass
 
 ## Reviewed Inputs
 
-- Phase 3 actor-card and first-scenario documentation slice.
+- Phase 4 state-hash and replay verification slice.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/system-boundary.md`
-- `docs/evidence-registry.md`
-- `docs/actor-cards.md`
-- `docs/first-scenario-brief.md`
+- `src/main.rs`
 - `_workspace/00_input/request-summary.md`
-- `_workspace/01_evidence_map.md`
-- `_workspace/02_mechanism_design.md`
 
 ## Findings
 
-- Scope remains documentation-first: no new commands, actors, state variables,
-  loaders, parsers, or module boundaries are introduced.
-- The actor-card template requires objectives, authority, constraints,
-  observations, private information, outside options, decision procedure,
-  rationale output, debrief use, and evidence status before strategic actor
-  expansion.
-- The first scenario brief keeps the setting to a fictional regional US market
-  centered on one nonprofit health system.
-- The scenario brief names included interactions and exclusions without implying
-  Medicare, Medicaid, competitor, employer, patient, or federal actors are
-  implemented strategic agents.
-- True state, observations, and later revisions remain distinct.
-- Invalid operations remain distinguished from unfavorable modeled outcomes.
-- Prototype formulas are clearly labeled as abstractions rather than empirical
-  calibration.
-- Educational debrief hooks distinguish decision quality, actor response,
-  realized outcomes, and social-welfare tradeoffs.
-- Evidence gaps remain visible and point toward a future parameter-source
-  ledger.
+- Scope remains a technical architecture proof: no new commands, actors, state
+  metrics, random streams, loaders, parsers, scenario schemas, or module
+  boundaries are introduced.
+- Hashing is derived from a labeled canonical state record and a fixed local
+  algorithm, which keeps replay checks deterministic and inspectable.
+- Replay now verifies each committed transition hash instead of only comparing
+  the final state.
+- The hash is correctly presented as a deterministic drift check, not a
+  cryptographic integrity guarantee or durable replay artifact format.
+- True state, observations, actor rationales, attributed effects, and
+  educational debrief behavior remain distinct and unchanged.
+- Stochastic inputs remain resolved outside `transition()` through explicit
+  seeded streams.
 
 ## Required Fixes
 
@@ -48,16 +37,16 @@ pass
 
 ## Residual Risks
 
-- The actor-card template is a design artifact and does not replace a runtime
-  actor framework, parameter ledger, or scenario schema.
-- The prototype remains single-file; module boundaries should still be revisited
-  only when scenario loading or independent testing require them.
-- Evidence references remain mostly registry-level; mechanism-specific primary
-  sources are still deferred.
+- The prototype still has no save/load or external replay artifact format.
+- The state hash covers `WorldState` only; it does not hash commands,
+  observations, events, or rationales.
+- The hash algorithm is intentionally simple and non-cryptographic.
+- The prototype remains single-file; module boundaries should still wait for a
+  concrete reuse or testing need.
 
 ## Verification Evidence
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 52 tests passed.
-- Default `cargo run` with strategy `1` and seed `42` replayed successfully and
-  printed the existing four-turn demo and educational debrief.
+- `cargo test` passed: 55 tests passed.
+- Default `cargo run` with strategy `1` and seed `42` printed per-turn state
+  hashes and replay success.
