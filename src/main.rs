@@ -27,6 +27,7 @@ struct Ruleset {
   max_capital_spend: i32,
   max_advocacy_spend: i32,
   max_retention_spend: i32,
+  max_schedule_relief_commitment: i32,
   target_commercial_rate: i32,
   minimum_access_commitment: i32,
   minimum_retention_spend: i32,
@@ -84,6 +85,10 @@ enum ValidationError {
     available_limit: i32,
   },
   NonPositiveScheduleRelief,
+  ScheduleReliefTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -208,6 +213,7 @@ fn default_ruleset() -> Ruleset {
     max_capital_spend: 40,
     max_advocacy_spend: 20,
     max_retention_spend: 25,
+    max_schedule_relief_commitment: 20,
     target_commercial_rate: 106,
     minimum_access_commitment: 5,
     minimum_retention_spend: 5,
@@ -729,6 +735,13 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
       if *schedule_relief_commitment <= 0 {
         return Err(ValidationError::NonPositiveScheduleRelief);
       }
+
+      if *schedule_relief_commitment > ruleset.max_schedule_relief_commitment {
+        return Err(ValidationError::ScheduleReliefTooHigh {
+          requested: *schedule_relief_commitment,
+          available_limit: ruleset.max_schedule_relief_commitment,
+        });
+      }
     }
   }
 
@@ -787,7 +800,7 @@ fn actor_decision(
       retention_spend,
       schedule_relief_commitment,
     } => labor_decision(
-      prior,
+      prior.workforce_trust,
       *retention_spend,
       *schedule_relief_commitment,
       observation,
@@ -880,24 +893,28 @@ fn state_policy_decision(
 }
 
 fn labor_decision(
-  prior: &WorldState,
+  prior_workforce_trust: i32,
   retention_spend: i32,
   schedule_relief_commitment: i32,
   observation: &Observation,
   inputs: &ResolvedInputs,
   ruleset: &Ruleset,
 ) -> ActorDecisionRecord {
-  let labor_pressure = inputs.labor_sick_call_delta <= -3 || prior.workforce_trust < 55;
-  let strong_offer = retention_spend >= 12 && schedule_relief_commitment >= 6;
+  let sick_call_pressure = inputs.labor_sick_call_delta <= -3;
+  let strong_retention_threshold = ruleset.minimum_retention_spend * 2 + 2;
+  let strong_schedule_threshold = ruleset.minimum_schedule_relief * 2;
+  let strong_offer = retention_spend >= strong_retention_threshold
+    && schedule_relief_commitment >= strong_schedule_threshold;
   let credible_offer = retention_spend >= ruleset.minimum_retention_spend
     && schedule_relief_commitment >= ruleset.minimum_schedule_relief;
+  let labor_pressure = sick_call_pressure || prior_workforce_trust < 60;
 
-  let (decision, rationale) = if strong_offer && (labor_pressure || prior.workforce_trust < 60) {
+  let (decision, rationale) = if strong_offer && labor_pressure {
     (
       LaborDecision::Cooperative,
       format!(
-        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} address labor pressure with workforce trust {} and reported access {}.",
-        prior.workforce_trust, observation.reported_access_index
+        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} address labor pressure with workforce trust {prior_workforce_trust} and reported access {}.",
+        observation.reported_access_index
       ),
     )
   } else if credible_offer {
@@ -912,8 +929,8 @@ fn labor_decision(
     (
       LaborDecision::WorkAction,
       format!(
-        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} fall below credible thresholds {} and {} under workforce trust {}.",
-        ruleset.minimum_retention_spend, ruleset.minimum_schedule_relief, prior.workforce_trust
+        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} fall below credible thresholds {} and {} under workforce trust {prior_workforce_trust}.",
+        ruleset.minimum_retention_spend, ruleset.minimum_schedule_relief
       ),
     )
   };
@@ -1496,8 +1513,8 @@ mod tests {
     let history = demo_history();
     let debrief = educational_debrief(&history).join("\n");
 
-    assert!(debrief.contains("cash moved from 100 to"));
-    assert!(debrief.contains("access from 70 to"));
+    assert!(debrief.contains("cash moved from 100 to 58"));
+    assert!(debrief.contains("access from 70 to 77"));
     assert!(debrief.contains("capacity investment changed cash by -18"));
     assert!(debrief.contains("state policy response changed community_trust by 2"));
     assert!(debrief.contains("workforce response changed cash by"));
@@ -1831,6 +1848,65 @@ mod tests {
 
     assert_eq!(history.transitions.len(), 3);
     assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
+  }
+
+  #[test]
+  fn excessive_schedule_relief_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 8,
+      schedule_relief_commitment: 25,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::ScheduleReliefTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn credible_workforce_offer_triggers_limited_support() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 8,
+      schedule_relief_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::LimitedSupport)
+    );
+  }
+
+  #[test]
+  fn fiscal_caution_triggers_limited_support_on_workforce_turn() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::FiscalCaution, DEFAULT_SEED, &ruleset).unwrap();
+
+    assert_eq!(
+      history.transitions[2].actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::LimitedSupport)
+    );
   }
 
   #[test]
