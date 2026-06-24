@@ -2,41 +2,42 @@
 
 ## Scope
 
-Extend the seeded three-turn playable demo with a fourth turn modeling a regional
-access coalition cooperative opportunity.
+Continue development with a documentation-first Phase 2 slice: expand the
+system-boundary and ontology draft for the current fictional regional US market
+prototype, and align the evidence registry and project-state files.
 
 ## Roadmap Phase
 
-Phase 5 first vertical slice — interaction breadth (coalition/cooperative
-opportunity per roadmap §5.2).
+Phase 2 conceptual and domain design — system boundary, domain ontology, actor
+classes, observation boundary, causal categories, and assumption visibility.
 
 ## Expected Outputs
 
-- `PlayerCommand::JoinRegionalAccessCoalition` with validation
-- Regional provider coalition liaison decision with inspectable rationale
-- Four-transition history, replay, and educational debrief coverage
-- Focused tests and golden-trajectory pinning for seed `42`
-- Package version `0.1.8`
+- Expanded `docs/system-boundary.md`
+- Updated `docs/evidence-registry.md`
+- Corrected `SPEC.md` state for the merged coalition slice
+- Version bump to `0.1.10`
+- Updated changelog, lessons, and workspace handoff artifacts
 
 ## Non-Goals
 
-- No full campaign or per-turn interactive command entry
+- No runtime behavior changes
 - No scenario or ruleset file loader
-- No Medicare/Medicaid/competitor actors
-- No module split unless unavoidable
+- No command parser or save format
+- No module split
 - No new Cargo dependencies
-- No CI or release automation
+- No empirical calibration or policy forecasting claim
 
 ## Validation Target
 
-- Four committed transitions replay deterministically from genesis
-- `transition()` contains no RNG, time, or I/O
-- Coalition liaison rationale appears in history and debrief
-- Invalid coalition inputs fail validation separately from unfavorable outcomes
-- `cargo fmt`, `cargo test`, and `cargo run` pass
+- Phase 2 docs clearly identify included and excluded actors, authority,
+  observation boundaries, command vocabulary, causal categories, and evidence
+  gaps
+- Existing deterministic CLI demo remains unchanged
+- `cargo fmt --check`, `cargo test`, and default `cargo run` pass
 
 ## Generic Skills Needed
 
-- `simple-code-writer` for implementation
-- `code-reviewer` for PR review loop
 - `spec-driven-developer` for project state sync
+- `simple-code-writer` for keeping the diff minimal
+- `code-reviewer` for PR review loop

@@ -2,32 +2,26 @@
 
 ## Goal and Roadmap Phase
 
-Extend the seeded three-turn playable demo with a fourth-turn regional access
-coalition interaction while preserving the deterministic transition core, replay,
-debrief, and CLI strategy paths.
+Expand the Phase 2 conceptual boundary for the current fictional regional US
+market prototype while preserving the existing deterministic CLI demo unchanged.
 
 ## Slice Boundary
 
 Included:
 
 - One player-controlled nonprofit health system.
-- One commercial insurer decision (turn 1).
-- One state policy official decision (turn 2).
-- One nursing workforce representative decision (turn 3).
-- One regional provider coalition liaison decision (turn 4).
-- One capacity investment command.
-- One access-mandate response command.
-- One workforce pressure response command.
-- One coalition access command.
-- One explicit run seed at the CLI boundary.
-- Named random streams including coalition leverage signal resolution.
-- Three hard-coded strategy paths selected through the existing CLI input
-  boundary.
-- One append-only four-transition history.
-- One deterministic educational debrief over committed history.
+- Existing commercial insurer, state policy, nursing workforce, and regional
+  provider coalition interactions as documented concepts.
+- Actor authority and information boundaries.
+- Current true-state, observation, command, event, effect, replay, and debrief
+  vocabulary.
+- Explicit documentation of prototype formulas as abstractions.
+- Deferred ontology work needed before scenario loading or calibration.
 
 Excluded:
 
+- Runtime behavior changes.
+- New commands, actors, state fields, or random streams.
 - Full campaign.
 - General command parser.
 - Persistent save files.
@@ -36,84 +30,60 @@ Excluded:
 - General instructor reporting framework.
 - New Cargo dependencies.
 
+## Documentation Changes
+
+- `docs/system-boundary.md` becomes the primary Phase 2 boundary artifact.
+- `docs/evidence-registry.md` records current mechanism status and unresolved
+  evidence questions without turning into a calibration ledger.
+- `SPEC.md` records coalition work as complete and this Phase 2 slice as active.
+- Workspace artifacts preserve the handoff so future implementation can continue
+  without reconstructing the design context from chat history.
+
 ## Actors and Authority
 
-- Health system CEO: may choose valid capacity stabilization, access-mandate
-  response, workforce pressure response, and coalition access commands through
-  one of three compiled strategy paths.
-- Commercial insurer: may accept, counter, or reject the requested rate path.
+- Health system CEO: may allocate health-system resources and make commitments
+  through the current command vocabulary.
+- Commercial insurer: may accept, counter, or reject a requested rate path.
 - State policy officials: may grant flexibility, continue the mandate, or
   escalate oversight.
-- Nursing workforce representative: may accept a cooperative retention package,
-  offer limited support, or signal a work action.
+- Nursing workforce representative: may cooperate, offer limited support, or
+  signal a work action.
 - Regional provider coalition liaison: may accept full partnership, offer
   limited participation, or withdraw from the coalition.
-- Exogenous variation enters only through resolved inputs derived from the run
-  seed before transition evaluation.
-- Educational debrief: may summarize committed observations, effects, actor
-  rationales, and final state movement; it does not alter the simulation state.
+- Deferred actors should not become strategic agents until a future slice defines
+  their authority, information, objectives, and decision procedure.
 
 ## State, Beliefs, and Observations
 
 - True state tracks cash, staffed beds, access, quality, workforce trust,
   community trust, commercial rate, and policy pressure.
-- Player observation reports delayed/noisy access and current quality.
-- Coalition decisions use reported access, prior community trust, coalition
-  investment, shared access commitment, and coalition leverage from resolved
+- Player observation reports delayed/noisy access, current quality, policy
+  briefing, and later prior-period access revisions.
+- Later revisions are new observations rather than mutations of committed
+  history.
+- Actor decisions should remain based on actor-visible observations and resolved
   inputs.
-- The transition core receives observations and resolved inputs explicitly; it
-  does not generate randomness.
 
-## Commands, Events, and Effects
+## Causal and Evidence Boundaries
 
-- Valid commands: `StabilizeAccess`, `RespondToStateAccessMandate`,
-  `RespondToWorkforcePressure`, and `JoinRegionalAccessCoalition`.
-- Coalition command fields: `coalition_investment` and
-  `shared_access_commitment`.
-- CLI strategy paths: access stabilization, fiscal caution, and aggressive
-  bargaining each include a fourth compiled coalition posture.
-- Validation failures: negative or excessive coalition investment and
-  non-positive shared access commitment.
-- Modeled unfavorable coalition outcome: coalition withdrawal reducing community
-  trust and increasing policy pressure.
-- Events summarize actor-visible occurrences.
-- Effects attribute metric deltas to sources.
-
-## Strategic Interaction
-
-The regional provider coalition liaison chooses among full partnership, limited
-participation, or coalition withdrawal by comparing coalition investment, shared
-access commitment, community trust, reported access, and coalition leverage from
-resolved inputs. The decision record includes a rationale for inspection and
-debriefing.
-
-## Stochastic Input Boundary
-
-- Default seed: `42`.
-- New named stream: coalition leverage signal (bounded 1–6).
-- Fourth turn resolves inputs from seed and post-turn-3 state before transition.
-
-## Assumptions and Parameters
-
-- All prototype values are small integer abstractions.
-- `demo-ruleset-0.1.8` is a temporary in-code ruleset name.
-- Coalition thresholds are design abstractions, not empirically calibrated values.
-
-## Educational Debrief Hooks
-
-- Debrief includes coalition liaison rationale and a coalition tradeoff prompt.
-- Supports discussion of community investment versus policy buffer and access
-  leverage under coalition pressure.
+- Current causal categories are financial capacity, access capacity, workforce
+  legitimacy, community legitimacy, policy pressure, and measurement/revision.
+- Current formulas are inspectable design abstractions.
+- Official data selection, parameter ranges, and balancing choices remain
+  deferred to a future parameter-source ledger.
 
 ## Determinism and Replay Notes
 
-- Resolved inputs are computed outside the transition core and committed into
-  history.
-- Replay recomputes all four committed transitions from genesis.
-- No RNG inside `transition()`.
+- This slice must not change `transition()`, `resolve_inputs()`, or CLI behavior.
+- Existing resolved inputs remain computed outside the transition core and
+  committed into history.
+- Existing tests and default demo output serve as regression checks for this
+  documentation-only slice.
 
 ## Open Questions
 
+- Which actor-card template should become canonical once a new actor is added?
+- Which official data sources should anchor first parameter ranges?
+- Which distributional outcomes must be promoted into true state before external
+  classroom use?
 - Whether future state fingerprints should use a cryptographic hash.
-- Whether the first scenario loader should store seeds and stream definitions
-  separately from command presets.

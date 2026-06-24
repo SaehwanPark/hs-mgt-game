@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.10] - 2026-06-24
+
+### Added
+
+- Expanded the Phase 2 system-boundary and ontology draft for the current
+  fictional regional US market slice.
+- Added clearer actor, authority, observation, command, causal-category, and
+  exclusion boundaries for future contributors.
+- Added evidence-registry notes tying current mechanisms to roadmap scope while
+  keeping prototype formulas labeled as abstractions.
+
+### Changed
+
+- Bumped package version from `0.1.9` to `0.1.10`.
+- Corrected project-state bookkeeping for the merged coalition and observation
+  revision work.
+
 ## [0.1.9] - 2026-06-23
 
 ### Added
