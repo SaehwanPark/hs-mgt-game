@@ -2,40 +2,38 @@
 
 ## Scope
 
-Continue development with a bounded Phase 5 playability slice: add per-turn
-interactive command entry as the default CLI play mode while preserving preset
-strategy paths 1–3.
+Close a bounded Phase 5 vertical-slice deliverable: add deterministic replay
+artifact export and record internal playtest findings for the current four-turn
+demo.
 
 ## Roadmap Phase
 
-Phase 5 first vertical slice — playable CLI with per-turn executive decisions,
-without changing the deterministic core mechanics.
+Phase 5 first vertical slice — reproducible replay artifact and internal
+playtest documentation without expanding actors or scenario loading.
 
 ## Expected Outputs
 
-- Updated `src/main.rs` with play-mode selection, per-turn parsers, interactive
-  session loop, executive briefings, and turn-resolution summaries
-- Preserved preset strategy paths with unchanged golden trajectories
-- Version bump to `0.1.14`
+- Updated `src/main.rs` with `replay-artifact-0.1.15` serialize, deserialize,
+  verify helpers and optional post-run export prompt
+- `docs/playtest-findings-v0.1.15.md`
+- Version bump to `0.1.15`
 - Updated README, architecture notes, changelog, lessons, domain QA, and final
   handoff artifacts
 
 ## Non-Goals
 
 - No new commands, actors, metrics, or random streams
-- No scenario or ruleset file loader
-- No command parser framework, save format, or replay artifact export
-- No changes to transition logic, resolved inputs, actor decisions, or replay
-  hash semantics
-- No empirical calibration or policy forecasting claim
-- No module split
+- No mid-run save/load or scenario/ruleset file loader
+- No cryptographic hash dependency or JSON crate
+- No changes to `transition()` or committed replay hash semantics
+- No module split or CI workflow in this slice
 
 ## Validation Target
 
-- Interactive play completes four turns from `cargo run`
-- Preset paths 1–3 reproduce pre-slice behavior
-- Invalid per-turn input fails before committing partial history
-- Turn briefings use observation data only
+- Preset path `1` at seed `42` round-trips through artifact serialize/deserialize
+  and replays with zero hash mismatches
+- Corrupt committed hash fails verification
+- Empty export prompt preserves prior skip behavior
 - `cargo fmt --check`, `cargo test`, and `cargo run` pass
 
 ## Generic Skills Needed

@@ -494,8 +494,6 @@ reconstructing it from the diff.
     dashboard, strategy previews, per-turn state hashes, and replay success
   - Domain QA passed for the bounded CLI dashboard preview slice
 
-## Present
-
 - Feature: Per-turn interactive play slice
   Status: Complete
   Started: 2026-06-24
@@ -522,6 +520,7 @@ reconstructing it from the diff.
   - `cargo fmt --check`, `cargo test` (67 tests), and `cargo run` pass
   - Domain QA passed for the bounded interactive play slice
   - PR handoff opened as GitHub PR #13
+  - PR #13 merged into `main`
 
   Deferred / Non-Goals:
   - No new commands, actors, metrics, or random streams
@@ -540,6 +539,51 @@ reconstructing it from the diff.
   - Turn briefings use observation data only, not future actor outcomes
   - `cargo fmt --check`, `cargo test`, and `cargo run` pass
 
+## Present
+
+- Feature: Replay artifact export and playtest findings slice
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/replay-artifact-export
+
+  Summary:
+  Add a versioned deterministic replay artifact format with serialize,
+  deserialize, and verify helpers plus optional post-run CLI export. Record
+  internal playtest findings for the current four-turn vertical slice.
+
+  Done:
+  - Working branch created from `main`
+  - Per-turn interactive play slice moved into completed history
+  - Package version bumped to `0.1.15`
+  - Added `replay-artifact-0.1.15` serialize, deserialize, and verify helpers
+  - Added optional post-run replay export prompt (empty input skips export)
+  - Added focused round-trip, corruption, golden-header, and play-mode tests
+  - Ran preset and interactive playtest sessions at seed `42`
+  - Added `docs/playtest-findings-v0.1.15.md`
+  - Updated architecture, changelog, lessons, and workspace handoff artifacts
+  - `cargo fmt --check`, `cargo test` (78 tests), and `cargo run` pass
+  - Domain QA passed for the bounded replay artifact slice
+  - PR handoff opened as GitHub PR #14
+  - Three code-reviewer passes completed; High findings fixed (TTY-gated export
+    prompt, redundant ruleset check removed, event/effect count validation)
+
+  Not Yet Done:
+  - Merge after external CI or human review feedback
+
+  Deferred / Non-Goals:
+  - No new commands, actors, metrics, or random streams
+  - No mid-run save/load or scenario file format
+  - No cryptographic hash guarantees or new dependencies
+  - No changes to `transition()` or committed replay hash semantics
+  - No module split or CI workflow
+
+  Verification:
+  - Artifact from preset path `1` and seed `42` round-trips and replays with
+    zero hash mismatches
+  - Corrupt committed hash fails closed on verification
+  - Default `cargo run` still skips export when the path prompt is empty
+  - `cargo fmt --check`, `cargo test`, and `cargo run` pass
+
 ## Future
 
 - Define glossary, decision-record conventions, and versioning policy from
@@ -549,8 +593,6 @@ reconstructing it from the diff.
 - Use the actor-card template before adding future strategic actors.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
-- Add a durable replay artifact format only after save/load or external
-  analysis requires one.
 - Split the prototype into stable module boundaries when the next slice needs
   more than one command or actor interaction.
 - Add scenario data loading only after the conceptual model and first action
