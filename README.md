@@ -15,7 +15,7 @@ scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
 parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
 v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
 at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
-preview at v0.1.25.
+preview at v0.1.25, and rich-terminal CLI display at v0.1.26.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -27,7 +27,7 @@ The initial release will focus on a fictional regional US health market and a no
 - Seeded stochastic inputs outside the core transition logic
 - Strategic non-player actors using game-theoretic and bounded-rationality models
 - Data-driven scenarios built from typed, inspectable mechanics
-- CLI-first interface
+- CLI-first interface (best in a true-color terminal; respects `NO_COLOR`)
 - Educational use in graduate healthcare management and policy programs
 
 ## Documentation

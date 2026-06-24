@@ -4,6 +4,29 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.26] - 2026-06-24
+
+### Added
+
+- Rich-terminal CLI display layer (`src/cli/display/style.rs`, `print.rs`, `prompt.rs`).
+- Explicit per-turn command prompts with parameter legends, ruleset bounds, and
+  global command footers.
+- Focused style and prompt unit tests.
+
+### Changed
+
+- Interactive and preset CLI output use semantic color, emoji section headings,
+  and blank-line section spacing on TTY stdout.
+- Play mode, seed, turn command, and replay export prompts always show applicable
+  global commands.
+- CLI errors print in red on stderr when styling is enabled.
+- Respects `NO_COLOR` and disables ANSI when stdout is not a terminal.
+- Bumped package version from `0.1.25` to `0.1.26`.
+
+### Notes
+
+- Golden seed-42 hash unchanged. Simulation and replay artifact content unchanged.
+
 ## [0.1.25] - 2026-06-24
 
 ### Added

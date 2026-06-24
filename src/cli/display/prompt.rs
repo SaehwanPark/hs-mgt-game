@@ -1,0 +1,198 @@
+use crate::model::{DEFAULT_SEED, PlayerCommand, Ruleset};
+
+use super::style::{self, EMOJI_BRIEFING};
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum PromptContext {
+  PlayMode,
+  Seed,
+  TurnCommand { turn: u32 },
+  ReplayExport,
+}
+
+pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
+  let line = match context {
+    PromptContext::PlayMode => {
+      "Global: Enter or i → Interactive · 1/2/3 → preset strategy paths".to_string()
+    }
+    PromptContext::Seed => format!("Global: Enter → default seed ({DEFAULT_SEED})"),
+    PromptContext::TurnCommand { .. } => "Global: Enter → use defaults listed below".to_string(),
+    PromptContext::ReplayExport => "Global: Enter → skip export".to_string(),
+  };
+
+  vec![style::subsection("Global commands"), format!("  {line}")]
+}
+
+pub fn play_mode_menu_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_STRATEGY, "Choose play mode"),
+    style::option_line("i", "Interactive", "enter each turn's command"),
+    style::option_line("1", "Access stabilization", "preset strategy path"),
+    style::option_line("2", "Fiscal caution", "preset strategy path"),
+    style::option_line("3", "Aggressive bargaining", "preset strategy path"),
+  ]
+}
+
+pub fn seed_prompt_lines() -> Vec<String> {
+  vec![
+    style::subsection("Run seed"),
+    style::label_value(
+      "Enter a positive integer",
+      &format!("or press Enter for default {DEFAULT_SEED}"),
+    ),
+  ]
+}
+
+pub fn replay_export_prompt_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_EXPORT, "Export replay artifact?"),
+    style::label_value("Path", "enter a file path, or press Enter to skip"),
+  ]
+}
+
+pub fn turn_command_prompt(
+  turn_number: u32,
+  ruleset: &Ruleset,
+  default_command: &PlayerCommand,
+) -> Vec<String> {
+  let (title, field_lines) = turn_field_lines(turn_number, ruleset);
+  let mut lines = vec![style::section_heading(
+    EMOJI_BRIEFING,
+    &format!("Turn {turn_number} — {title}"),
+  )];
+
+  lines.push(style::subsection("Enter integers (space-separated):"));
+  lines.extend(field_lines);
+  lines.push(String::new());
+  lines.push(style::subsection("Defaults"));
+  lines.push(format!("  {}", default_command_values(default_command)));
+
+  lines
+}
+
+fn turn_field_lines(turn_number: u32, ruleset: &Ruleset) -> (&'static str, Vec<String>) {
+  match turn_number {
+    1 => (
+      "Capacity and payer posture",
+      vec![
+        field_line("staffed_beds", "beds to add (>0)", None),
+        field_line(
+          "capital_spend",
+          "$ spend",
+          Some(format!("0–{}", ruleset.max_capital_spend)),
+        ),
+        field_line("requested_rate", "commercial rate bid", None),
+      ],
+    ),
+    2 => (
+      "State access mandate",
+      vec![
+        field_line(
+          "advocacy_spend",
+          "$ spend",
+          Some(format!("0–{}", ruleset.max_advocacy_spend)),
+        ),
+        field_line("access_commitment", "access units", Some(">0".to_string())),
+      ],
+    ),
+    3 => (
+      "Workforce pressure",
+      vec![
+        field_line(
+          "retention_spend",
+          "$ spend",
+          Some(format!("0–{}", ruleset.max_retention_spend)),
+        ),
+        field_line(
+          "schedule_relief",
+          "schedule relief units",
+          Some(format!("1–{}", ruleset.max_schedule_relief_commitment)),
+        ),
+      ],
+    ),
+    4 => (
+      "Regional access coalition",
+      vec![
+        field_line(
+          "coalition_investment",
+          "$ investment",
+          Some(format!("0–{}", ruleset.max_coalition_investment)),
+        ),
+        field_line(
+          "shared_access_commitment",
+          "shared access units",
+          Some(format!("1–{}", ruleset.max_shared_access_commitment)),
+        ),
+      ],
+    ),
+    5 => (
+      "Competitor capacity",
+      vec![
+        field_line(
+          "defensive_capital",
+          "$ defensive capital",
+          Some(format!("0–{}", ruleset.max_defensive_capital_commitment)),
+        ),
+        field_line(
+          "access_posture",
+          "access posture units",
+          Some(format!("1–{}", ruleset.max_access_posture)),
+        ),
+      ],
+    ),
+    _ => ("Unknown turn", vec![]),
+  }
+}
+
+fn field_line(name: &str, description: &str, range: Option<String>) -> String {
+  let range_suffix = range.map(|value| format!(" ({value})")).unwrap_or_default();
+
+  if style::styling_enabled() {
+    format!(
+      "  {}  {}{}",
+      style::accent(&format!("{name:<24}")),
+      style::dim(description),
+      style::dim(&range_suffix)
+    )
+  } else {
+    format!("  {name:<24}  {description}{range_suffix}")
+  }
+}
+
+fn default_command_values(command: &PlayerCommand) -> String {
+  match command {
+    PlayerCommand::StabilizeAccess {
+      add_staffed_beds,
+      capital_spend,
+      requested_commercial_rate,
+    } => format!("{add_staffed_beds} {capital_spend} {requested_commercial_rate}"),
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => format!("{advocacy_spend} {access_commitment}"),
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => format!("{retention_spend} {schedule_relief_commitment}"),
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => format!("{coalition_investment} {shared_access_commitment}"),
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => format!("{defensive_capital_commitment} {access_posture}"),
+  }
+}
+
+pub fn format_command_prompt(
+  turn_number: u32,
+  ruleset: &Ruleset,
+  default_command: &PlayerCommand,
+) -> String {
+  let mut lines = turn_command_prompt(turn_number, ruleset, default_command);
+  lines.extend(global_commands_footer(PromptContext::TurnCommand {
+    turn: turn_number,
+  }));
+  lines.join("\n")
+}

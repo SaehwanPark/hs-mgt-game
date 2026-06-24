@@ -1,4 +1,4 @@
-use crate::cli::display::{turn_uncertainty_preview, turn_uncertainty_preview_header};
+use super::{forecast::turn_uncertainty_preview, forecast::turn_uncertainty_preview_header};
 use crate::inputs::resolve_inputs;
 use crate::model::*;
 use crate::sim::observe_for_player;

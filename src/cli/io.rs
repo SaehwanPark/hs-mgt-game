@@ -2,12 +2,15 @@ use std::io;
 
 use crate::model::{CliError, DEFAULT_SEED, PlayMode, StrategyPath};
 
+use super::display::{
+  PromptContext, global_commands_footer, play_mode_menu_lines, print_line, print_prompt_block,
+  seed_prompt_lines,
+};
+
 pub fn read_play_mode_choice() -> Result<PlayMode, CliError> {
-  println!("Choose play mode:");
-  println!("  Enter or i. Interactive (enter each turn's command)");
-  println!("  1. Preset path: Access stabilization");
-  println!("  2. Preset path: Fiscal caution");
-  println!("  3. Preset path: Aggressive bargaining");
+  let mut lines = play_mode_menu_lines();
+  lines.extend(global_commands_footer(PromptContext::PlayMode));
+  print_prompt_block(&lines);
 
   let mut input = String::new();
   io::stdin()
@@ -29,7 +32,9 @@ pub fn parse_play_mode_choice(input: &str) -> Result<PlayMode, CliError> {
 }
 
 pub fn read_seed_choice() -> Result<u64, CliError> {
-  println!("Seed (Enter for default {DEFAULT_SEED}):");
+  let mut lines = seed_prompt_lines();
+  lines.extend(global_commands_footer(PromptContext::Seed));
+  print_prompt_block(&lines);
 
   let mut input = String::new();
   io::stdin()
@@ -49,8 +54,11 @@ pub fn parse_seed_choice(input: &str) -> Result<u64, CliError> {
     .parse::<u64>()
     .map_err(|_| CliError::InvalidSeed(trimmed.to_string()))
 }
+
 pub fn read_command_line(prompt: &str) -> Result<String, CliError> {
-  println!("{prompt}");
+  print_line(prompt);
+  print_line("");
+
   let mut input = String::new();
   io::stdin()
     .read_line(&mut input)

@@ -1,14 +1,11 @@
-use crate::model::{PlayerCommand, StrategyCommitments, StrategyPath, StrategyPlan, WorldState};
+use crate::model::WorldState;
 
 use super::super::strategy::strategy_plan;
+use super::print::{print_pre_run_dashboard, print_strategy_previews};
 
 pub fn print_pre_run_briefing(state: &WorldState) {
-  for line in executive_dashboard(state) {
-    println!("{line}");
-  }
-  for line in strategy_previews() {
-    println!("{line}");
-  }
+  print_pre_run_dashboard(&executive_dashboard(state));
+  print_strategy_previews(&strategy_previews());
 }
 
 pub fn executive_dashboard(state: &WorldState) -> Vec<String> {
@@ -35,9 +32,9 @@ pub fn executive_dashboard(state: &WorldState) -> Vec<String> {
 
 pub fn strategy_previews() -> Vec<String> {
   [
-    StrategyPath::AccessStabilization,
-    StrategyPath::FiscalCaution,
-    StrategyPath::AggressiveBargaining,
+    crate::model::StrategyPath::AccessStabilization,
+    crate::model::StrategyPath::FiscalCaution,
+    crate::model::StrategyPath::AggressiveBargaining,
   ]
   .iter()
   .enumerate()
@@ -53,7 +50,7 @@ pub fn strategy_previews() -> Vec<String> {
   .collect()
 }
 
-pub fn describe_strategy_commitments(plan: &StrategyPlan) -> String {
+pub fn describe_strategy_commitments(plan: &crate::model::StrategyPlan) -> String {
   let commitments = strategy_commitments(plan);
 
   format!(
@@ -72,7 +69,11 @@ pub fn describe_strategy_commitments(plan: &StrategyPlan) -> String {
   )
 }
 
-pub fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
+pub fn strategy_commitments(
+  plan: &crate::model::StrategyPlan,
+) -> crate::model::StrategyCommitments {
+  use crate::model::PlayerCommand;
+
   let &PlayerCommand::StabilizeAccess {
     add_staffed_beds,
     capital_spend,
@@ -114,7 +115,7 @@ pub fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
     panic!("strategy preview expects a competitor response command fifth");
   };
 
-  StrategyCommitments {
+  crate::model::StrategyCommitments {
     staffed_beds: add_staffed_beds,
     capital_spend,
     requested_commercial_rate,
