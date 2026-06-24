@@ -26,7 +26,8 @@ prototype integer parameters.
 
 - Current actors and commands are justified by the roadmap's first vertical-slice
   requirements: payer negotiation, policy process, workforce pressure,
-  cooperative opportunity, observation separation, replay, and debrief.
+  cooperative opportunity, competitive capacity response, observation separation,
+  replay, and debrief.
 - Current formulas remain design abstractions. They should be replaced or
   bounded by official data and focused literature only when a mechanism is being
   prepared for calibration or external playtesting.
@@ -59,8 +60,8 @@ design), `calibrated` (ranges applied in ruleset — none yet).
 | Nursing workforce pressure | Turn 3 labor signal and retention | BLS healthcare occupations; selected workforce shortage literature | candidate | No strike-law simulation |
 | Community trust / coalition leverage | Turns 3–4 trust and coalition signals | KFF community health surveys (conceptual); local coalition case studies | candidate | Qualitative anchor only |
 | Access and quality indices | Reported vs true access, quality | CMS quality programs (conceptual); literature on measurement error | literature-informed | Observation noise already modeled |
-| Market competition / capacity | Planned Turn 5 competitor slice | MedPAC hospital market concentration; IO literature on capacity competition | candidate | Actor card required before runtime |
-| Macroeconomic / utilization shocks | Future exogenous inputs | CMS NHE projections; recession utilization literature | candidate | Not in current four-turn demo |
+| Market competition / capacity | Turn 5 competitor capacity response | MedPAC hospital market concentration; IO literature on capacity competition | linked | Implemented at v0.1.21 per competitor actor card |
+| Macroeconomic / utilization shocks | Future exogenous inputs | CMS NHE projections; recession utilization literature | candidate | Not in current five-turn demo |
 
 ### Ledger rules
 

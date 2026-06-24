@@ -2,24 +2,23 @@
 
 ## Summary
 
-Closed Phase 0 governance documentation at v0.1.22 with glossary, ADR template,
-and versioning policy. No runtime changes.
+Closed SPEC reconciliation and Phase 5 register refresh at v0.1.23. Synced
+stale boundary and evidence docs for five-turn state. No runtime changes.
 
 ## Changed Files
 
-- `docs/glossary.md`
-- `docs/decision-records/README.md`
-- `docs/decision-records/0000-template.md`
-- `docs/versioning-policy.md`
-- `Cargo.toml`, `README.md`, `SPEC.md`, `CHANGELOG.md`
+- `docs/phase5-scope-register.md`
+- `docs/system-boundary.md`
+- `docs/evidence-registry.md`
+- `docs/playtest-findings-v0.1.21.md`
+- `SPEC.md`, `README.md`, `CHANGELOG.md`, `Cargo.toml`
 
 ## Verification
 
 - `cargo fmt --check` passed
 - `cargo test` passed: 82 tests
-- Golden hash unchanged
+- Golden hash `6fb1ebbea564274f` unchanged at seed 42
 
-## Post-Plan State
+## Next Slice
 
-All three continuation-plan slices delivered: Phase 1 memo (v0.1.20), competitor
-slice (v0.1.21), governance docs (v0.1.22).
+`feat/adr-deterministic-boundary` — ADR 0001 and optional scenario format draft.

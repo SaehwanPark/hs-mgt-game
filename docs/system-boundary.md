@@ -71,6 +71,7 @@ information, and decision procedure.
 | `RespondToStateAccessMandate` | Advocacy and access commitment | Non-negative bounded advocacy spend, positive access commitment |
 | `RespondToWorkforcePressure` | Retention and schedule-relief response | Non-negative bounded retention spend, positive bounded schedule relief |
 | `JoinRegionalAccessCoalition` | Regional access coalition posture | Non-negative bounded coalition investment, positive bounded shared access commitment |
+| `RespondToCompetitorCapacityMove` | Defensive response to rival capacity pressure | Non-negative bounded defensive capital commitment, positive bounded access posture |
 
 Validation failures represent invalid operations. Rejected negotiations,
 oversight escalation, work actions, and coalition withdrawal are valid modeled
@@ -101,12 +102,14 @@ Included in the current conceptual boundary:
 - State access-policy response.
 - Workforce pressure and labor response.
 - Regional access coalition opportunity.
+- Rival health system capacity competition response.
 - Actor-specific observation, rationale records, attributed effects, replay, and
   educational debrief.
 
 Excluded from the current conceptual boundary:
 
-- Full Medicare, Medicaid, employer, patient, or additional competitor strategic behavior.
+- Full Medicare, Medicaid, employer, or patient strategic behavior.
+- Additional rival systems or market-entry relocation modeling.
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.

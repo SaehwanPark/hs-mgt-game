@@ -772,9 +772,53 @@ reconstructing it from the diff.
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass
 
+- Feature: SPEC reconciliation and Phase 5 register refresh
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/spec-doc-reconciliation
+
+  Summary:
+  Sync SPEC Future backlog and refresh stale Phase 5, system-boundary, and
+  evidence-registry docs for five-turn v0.1.21+ state without runtime changes.
+
+  Done:
+  - Working branch created from `main`
+  - `docs/phase5-scope-register.md` refreshed for five-turn closure and
+    competitor achieved
+  - `docs/system-boundary.md` updated with `RespondToCompetitorCapacityMove` and
+    rival capacity inclusion
+  - `docs/evidence-registry.md` updated for five-turn wording and competitor
+    ledger `linked` status
+  - `docs/playtest-findings-v0.1.21.md` next-slice note marked superseded
+  - SPEC `Future` backlog expanded with prioritized roadmap-aligned items
+  - Package version bumped to `0.1.23`
+  - README, CHANGELOG, and workspace handoff updated
+
+  Deferred / Non-Goals:
+  - No runtime changes
+  - No Medicare/Medicaid actors
+  - No scenario loader
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (82 tests)
+
 ## Present
 
 ## Future
 
-- Add scenario data loading only after the conceptual model and first action
-  vocabulary settle.
+- **Forecast/uncertainty CLI preview** (Phase 5 hardening): bounded observation-only
+  preview before interactive turns; no probabilistic forecast objects.
+- **First architecture decision record** (Phase 0/4): ADR 0001 for deterministic
+  transition and stochastic input boundary.
+- **Scenario/ruleset format design draft** (Phase 6.2 design): typed initial
+  state, ruleset id, actor stubs, turn schedule, learning objectives; no runtime
+  loader until approved.
+- **External playtest protocol refresh** (Phase 7 prep): structured external
+  session protocol after hardening slices land.
+- **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded from
+  first scenario until brief expands; actor cards required first.
+- **Scenario data loading runtime** (Phase 6.2): after format design approval and
+  vocabulary stability.
+- **Mid-run save/load** (Phase 6): replay artifact covers post-run for now.
+- **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.

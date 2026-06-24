@@ -26,4 +26,8 @@ Golden final state hash at seed 42 (preset path 1 / interactive defaults):
 
 ## Recommended Next Slice
 
-Phase 0 governance docs: glossary, decision-record conventions, versioning policy.
+**Superseded at v0.1.22.** Phase 0 governance docs (glossary, decision-record
+conventions, versioning policy) shipped in `feat/phase0-governance-docs`.
+
+See [`phase5-scope-register.md`](phase5-scope-register.md) for current deferred
+items and hardening priorities (forecast preview, scenario format design).

@@ -13,7 +13,8 @@ at v0.1.14, deterministic replay artifact export at v0.1.15, library module
 boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
 scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
 parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
-v0.1.21, and Phase 0 governance docs at v0.1.22.
+v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
+at v0.1.23.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -85,8 +86,9 @@ cargo test
 
 Current priorities are:
 
-1. scenario data loading only after the conceptual model and action vocabulary
-   settle further.
+1. Forecast/uncertainty CLI preview (Phase 5 hardening).
+2. First architecture decision record and scenario format design draft (Phase 6 prep).
+3. Scenario data loading runtime only after the format design is approved.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),

@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.23] - 2026-06-24
+
+### Changed
+
+- Refreshed [`docs/phase5-scope-register.md`](docs/phase5-scope-register.md) for
+  five-turn v0.1.21+ closure, competitor achieved, and updated next-slice pointers.
+- Updated [`docs/system-boundary.md`](docs/system-boundary.md) with
+  `RespondToCompetitorCapacityMove` and rival capacity competition inclusion.
+- Updated [`docs/evidence-registry.md`](docs/evidence-registry.md) competitor
+  ledger row to `linked`; five-turn wording.
+- Expanded [`SPEC.md`](SPEC.md) `Future` backlog and closed reconciliation slice
+  in `Past`.
+- Marked superseded next-slice note in
+  [`docs/playtest-findings-v0.1.21.md`](docs/playtest-findings-v0.1.21.md).
+
+### Notes
+
+- Docs-only release; no runtime behavior changes. Golden hash unchanged.
+
 ## [0.1.22] - 2026-06-24
 
 ### Added
