@@ -541,6 +541,37 @@ reconstructing it from the diff.
 
 ## Present
 
+- Feature: Module boundary refactor
+  Status: Complete
+  Started: 2026-06-24
+  Branch: refactor/module-scaffold
+
+  Summary:
+  Split the 4,436-line monolithic `src/main.rs` into library modules aligned
+  with `ARCHITECTURE.md` boundaries while preserving all gameplay behavior.
+
+  Done:
+  - Added `src/lib.rs` with `model`, `inputs`, `sim`, `actors`, `replay`,
+    `artifact`, `debrief`, and `cli` modules
+  - Reduced `main.rs` entry point to `cli::run()` (tests remain in `main.rs`)
+  - Largest implementation files now under ~650 lines (`artifact/parse.rs`,
+    `sim/transition.rs`)
+  - Package version bumped to `0.1.16`
+  - Updated `ARCHITECTURE.md` and `CHANGELOG.md`
+
+  Not Yet Done:
+  - Colocate 78 characterization tests with owning modules (slice R8)
+  - PR handoff and review loop when approved
+
+  Deferred / Non-Goals:
+  - No workspace crate split
+  - No new gameplay, actors, or dependencies
+  - No scenario loader or CI workflow
+
+  Verification:
+  - `cargo fmt --check`, `cargo test` (78 tests), and `cargo run` smoke pass
+  - Golden seed-42 preset and interactive trajectories unchanged
+
 - Feature: Replay artifact export and playtest findings slice
   Status: Complete
   Started: 2026-06-24
@@ -594,6 +625,7 @@ reconstructing it from the diff.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
 - Split the prototype into stable module boundaries when the next slice needs
-  more than one command or actor interaction.
+  more than one command or actor interaction. **Done in v0.1.16**; follow-up:
+  colocate tests and add golden integration test.
 - Add scenario data loading only after the conceptual model and first action
   vocabulary settle.
