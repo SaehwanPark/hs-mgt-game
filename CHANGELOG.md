@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.17] - 2026-06-24
+
+### Changed
+
+- Colocated 77 characterization unit tests with owning library modules under
+  `#[cfg(test)]` and added a crate-root golden integration test in
+  `tests/golden_seed42.rs`.
+- Added `src/test_support.rs` for shared test helpers (`demo_history`,
+  `sample_replay_artifact`).
+- Reduced `src/main.rs` to entry-point only (no embedded test module).
+- Bumped package version from `0.1.16` to `0.1.17`.
+
 ## [0.1.16] - 2026-06-24
 
 ### Changed

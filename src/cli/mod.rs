@@ -23,3 +23,13 @@ pub use strategy::{
   build_history_for_strategy, build_history_interactive, default_interactive_commands,
   strategy_plan,
 };
+
+#[cfg(test)]
+#[path = "io_tests.rs"]
+mod io_tests;
+#[cfg(test)]
+#[path = "parse_tests.rs"]
+mod parse_tests;
+#[cfg(test)]
+#[path = "strategy_tests.rs"]
+mod strategy_tests;

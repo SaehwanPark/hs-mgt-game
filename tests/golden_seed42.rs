@@ -1,0 +1,74 @@
+use hs_mgt_game::cli::build_history_for_strategy;
+use hs_mgt_game::model::*;
+
+#[test]
+fn default_seed_reproduces_canonical_demo_trajectory() {
+  let ruleset = default_ruleset();
+  let history =
+    build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset).unwrap();
+
+  assert_eq!(
+    history.transitions[0].resolved_inputs,
+    ResolvedInputs {
+      measurement_noise: 4,
+      delayed_access_report: 67,
+      labor_sick_call_delta: -3,
+      policy_signal: 4,
+      coalition_leverage_signal: 2,
+      access_measurement_revision: 0,
+    }
+  );
+  assert_eq!(
+    history.transitions[1].resolved_inputs,
+    ResolvedInputs {
+      measurement_noise: -5,
+      delayed_access_report: 70,
+      labor_sick_call_delta: -2,
+      policy_signal: 3,
+      coalition_leverage_signal: 4,
+      access_measurement_revision: -1,
+    }
+  );
+  assert_eq!(
+    history.transitions[0].actor_decision.decision,
+    ActorDecision::Insurer(InsurerDecision::Reject)
+  );
+  assert_eq!(
+    history.transitions[1].actor_decision.decision,
+    ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility)
+  );
+  assert_eq!(
+    history.transitions[2].resolved_inputs,
+    ResolvedInputs {
+      measurement_noise: -5,
+      delayed_access_report: 69,
+      labor_sick_call_delta: -5,
+      policy_signal: 1,
+      coalition_leverage_signal: 2,
+      access_measurement_revision: 2,
+    }
+  );
+  assert_eq!(
+    history.transitions[2].actor_decision.decision,
+    ActorDecision::Labor(LaborDecision::Cooperative)
+  );
+  assert_eq!(
+    history.transitions[3].resolved_inputs,
+    ResolvedInputs {
+      measurement_noise: -2,
+      delayed_access_report: 71,
+      labor_sick_call_delta: -5,
+      policy_signal: 5,
+      coalition_leverage_signal: 3,
+      access_measurement_revision: -1,
+    }
+  );
+  assert_eq!(
+    history.transitions[3].actor_decision.decision,
+    ActorDecision::Coalition(CoalitionDecision::FullPartnership)
+  );
+  assert_eq!(
+    history.transitions.last().unwrap().state_hash,
+    "bce02dff9b4b4ac6"
+  );
+}

@@ -160,9 +160,9 @@ Status: Verified
   resolved inputs for external verification. This is analysis/reproducibility,
   not cryptographic integrity or mid-run save/load.
 - Module boundaries for the deterministic core, CLI, scenario loading, and
-  educational debriefing are now established in `src/lib.rs`. Remaining work:
-  colocate the 78 characterization tests with their owning modules and add a
-  crate-root integration test for golden seed-42 trajectories.
+  educational debriefing are now established in `src/lib.rs`. Characterization
+  tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
+  golden integration test lives in `tests/golden_seed42.rs`.
 - Ruleset and scenario versioning format.
 - Decision-record convention.
 - Data and licensing policy.

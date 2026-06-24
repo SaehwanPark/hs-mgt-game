@@ -8,3 +8,10 @@ pub use dashboard::{
   strategy_previews,
 };
 pub use interactive::print_interactive_results;
+
+#[cfg(test)]
+#[path = "briefing_tests.rs"]
+mod briefing_tests;
+#[cfg(test)]
+#[path = "dashboard_tests.rs"]
+mod dashboard_tests;

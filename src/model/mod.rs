@@ -21,3 +21,7 @@ pub use resolved::*;
 pub use ruleset::*;
 pub use session::*;
 pub use state::*;
+
+#[cfg(test)]
+#[path = "hash_tests.rs"]
+mod hash_tests;
