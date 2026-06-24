@@ -26,8 +26,11 @@ struct Ruleset {
   version: &'static str,
   max_capital_spend: i32,
   max_advocacy_spend: i32,
+  max_retention_spend: i32,
   target_commercial_rate: i32,
   minimum_access_commitment: i32,
+  minimum_retention_spend: i32,
+  minimum_schedule_relief: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -49,6 +52,10 @@ enum PlayerCommand {
     advocacy_spend: i32,
     access_commitment: i32,
   },
+  RespondToWorkforcePressure {
+    retention_spend: i32,
+    schedule_relief_commitment: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -69,6 +76,14 @@ enum ValidationError {
     available_limit: i32,
   },
   NonPositiveAccessCommitment,
+  NegativeRetentionSpend {
+    requested: i32,
+  },
+  RetentionSpendTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
+  NonPositiveScheduleRelief,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -86,9 +101,17 @@ enum StatePolicyDecision {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+enum LaborDecision {
+  Cooperative,
+  LimitedSupport,
+  WorkAction,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 enum ActorDecision {
   Insurer(InsurerDecision),
   StatePolicy(StatePolicyDecision),
+  Labor(LaborDecision),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -150,6 +173,7 @@ struct StrategyPlan {
   name: &'static str,
   first_command: PlayerCommand,
   second_command: PlayerCommand,
+  third_command: PlayerCommand,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -180,11 +204,14 @@ struct RunConfig {
 
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.6",
+    version: "demo-ruleset-0.1.7",
     max_capital_spend: 40,
     max_advocacy_spend: 20,
+    max_retention_spend: 25,
     target_commercial_rate: 106,
     minimum_access_commitment: 5,
+    minimum_retention_spend: 5,
+    minimum_schedule_relief: 3,
   }
 }
 
@@ -279,10 +306,17 @@ fn build_history_for_strategy(
     second_inputs,
     ruleset,
   )?;
+  let third_inputs = resolve_inputs(seed, &second.next, ruleset);
+  let third = transition(
+    &second.next,
+    plan.third_command.clone(),
+    third_inputs,
+    ruleset,
+  )?;
 
   Ok(History {
     genesis,
-    transitions: vec![first, second],
+    transitions: vec![first, second, third],
   })
 }
 
@@ -299,6 +333,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         advocacy_spend: 10,
         access_commitment: 7,
       },
+      third_command: PlayerCommand::RespondToWorkforcePressure {
+        retention_spend: 14,
+        schedule_relief_commitment: 8,
+      },
     },
     StrategyPath::FiscalCaution => StrategyPlan {
       name: "Fiscal caution",
@@ -311,6 +349,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         advocacy_spend: 4,
         access_commitment: 5,
       },
+      third_command: PlayerCommand::RespondToWorkforcePressure {
+        retention_spend: 8,
+        schedule_relief_commitment: 5,
+      },
     },
     StrategyPath::AggressiveBargaining => StrategyPlan {
       name: "Aggressive bargaining",
@@ -322,6 +364,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
       second_command: PlayerCommand::RespondToStateAccessMandate {
         advocacy_spend: 2,
         access_commitment: 3,
+      },
+      third_command: PlayerCommand::RespondToWorkforcePressure {
+        retention_spend: 2,
+        schedule_relief_commitment: 2,
       },
     },
   }
@@ -396,7 +442,7 @@ fn transition(
   validate_command(&command, ruleset)?;
 
   let observation = observe_for_player(prior, &resolved_inputs);
-  let actor_decision = actor_decision(&command, &observation, &resolved_inputs, ruleset);
+  let actor_decision = actor_decision(&command, prior, &observation, &resolved_inputs, ruleset);
   let accepted_requested_commercial_rate = requested_commercial_rate(&command);
   let mut next = prior.clone();
   let mut events = Vec::new();
@@ -460,6 +506,33 @@ fn transition(
         actor: "health_system",
         description: format!(
           "Committed {access_commitment} access units while spending {advocacy_spend} on state engagement."
+        ),
+      });
+    }
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => {
+      next.cash -= retention_spend;
+      next.workforce_trust += schedule_relief_commitment / 2;
+      next.access_index += schedule_relief_commitment / 4;
+      push_effect(&mut effects, "workforce response", "cash", -retention_spend);
+      push_effect(
+        &mut effects,
+        "workforce response",
+        "workforce_trust",
+        schedule_relief_commitment / 2,
+      );
+      push_effect(
+        &mut effects,
+        "schedule relief",
+        "access_index",
+        schedule_relief_commitment / 4,
+      );
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "Offered {retention_spend} retention units and {schedule_relief_commitment} schedule-relief commitment to address labor pressure."
         ),
       });
     }
@@ -533,6 +606,41 @@ fn transition(
         description: "Escalated oversight after judging the response insufficient.".to_string(),
       });
     }
+    ActorDecision::Labor(LaborDecision::Cooperative) => {
+      next.workforce_trust += 4;
+      next.quality_index += 2;
+      next.access_index += 1;
+      push_effect(&mut effects, "nursing workforce", "workforce_trust", 4);
+      push_effect(&mut effects, "nursing workforce", "quality_index", 2);
+      push_effect(&mut effects, "nursing workforce", "access_index", 1);
+      events.push(Event {
+        actor: "nursing_workforce",
+        description: "Accepted the retention package and schedule relief plan.".to_string(),
+      });
+    }
+    ActorDecision::Labor(LaborDecision::LimitedSupport) => {
+      next.workforce_trust += 1;
+      push_effect(&mut effects, "nursing workforce", "workforce_trust", 1);
+      events.push(Event {
+        actor: "nursing_workforce",
+        description: "Offered limited support while monitoring staffing conditions.".to_string(),
+      });
+    }
+    ActorDecision::Labor(LaborDecision::WorkAction) => {
+      next.access_index -= 4;
+      next.quality_index -= 2;
+      next.community_trust -= 2;
+      next.workforce_trust -= 2;
+      push_effect(&mut effects, "work action signal", "access_index", -4);
+      push_effect(&mut effects, "work action signal", "quality_index", -2);
+      push_effect(&mut effects, "work action signal", "community_trust", -2);
+      push_effect(&mut effects, "work action signal", "workforce_trust", -2);
+      events.push(Event {
+        actor: "nursing_workforce",
+        description: "Signaled a work action after judging the retention offer insufficient."
+          .to_string(),
+      });
+    }
   }
 
   next.quality_index = clamp_metric(next.quality_index);
@@ -601,6 +709,27 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
         return Err(ValidationError::NonPositiveAccessCommitment);
       }
     }
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => {
+      if *retention_spend < 0 {
+        return Err(ValidationError::NegativeRetentionSpend {
+          requested: *retention_spend,
+        });
+      }
+
+      if *retention_spend > ruleset.max_retention_spend {
+        return Err(ValidationError::RetentionSpendTooHigh {
+          requested: *retention_spend,
+          available_limit: ruleset.max_retention_spend,
+        });
+      }
+
+      if *schedule_relief_commitment <= 0 {
+        return Err(ValidationError::NonPositiveScheduleRelief);
+      }
+    }
   }
 
   Ok(())
@@ -613,6 +742,7 @@ fn requested_commercial_rate(command: &PlayerCommand) -> Option<i32> {
       ..
     } => Some(*requested_commercial_rate),
     PlayerCommand::RespondToStateAccessMandate { .. } => None,
+    PlayerCommand::RespondToWorkforcePressure { .. } => None,
   }
 }
 
@@ -633,6 +763,7 @@ fn observe_for_player(prior: &WorldState, inputs: &ResolvedInputs) -> Observatio
 
 fn actor_decision(
   command: &PlayerCommand,
+  prior: &WorldState,
   observation: &Observation,
   inputs: &ResolvedInputs,
   ruleset: &Ruleset,
@@ -648,6 +779,17 @@ fn actor_decision(
     } => state_policy_decision(
       *advocacy_spend,
       *access_commitment,
+      observation,
+      inputs,
+      ruleset,
+    ),
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => labor_decision(
+      prior,
+      *retention_spend,
+      *schedule_relief_commitment,
       observation,
       inputs,
       ruleset,
@@ -733,6 +875,52 @@ fn state_policy_decision(
   ActorDecisionRecord {
     actor: "state_policy_officials",
     decision: ActorDecision::StatePolicy(decision),
+    rationale,
+  }
+}
+
+fn labor_decision(
+  prior: &WorldState,
+  retention_spend: i32,
+  schedule_relief_commitment: i32,
+  observation: &Observation,
+  inputs: &ResolvedInputs,
+  ruleset: &Ruleset,
+) -> ActorDecisionRecord {
+  let labor_pressure = inputs.labor_sick_call_delta <= -3 || prior.workforce_trust < 55;
+  let strong_offer = retention_spend >= 12 && schedule_relief_commitment >= 6;
+  let credible_offer = retention_spend >= ruleset.minimum_retention_spend
+    && schedule_relief_commitment >= ruleset.minimum_schedule_relief;
+
+  let (decision, rationale) = if strong_offer && (labor_pressure || prior.workforce_trust < 60) {
+    (
+      LaborDecision::Cooperative,
+      format!(
+        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} address labor pressure with workforce trust {} and reported access {}.",
+        prior.workforce_trust, observation.reported_access_index
+      ),
+    )
+  } else if credible_offer {
+    (
+      LaborDecision::LimitedSupport,
+      format!(
+        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} are credible but do not fully offset sick-call pressure {}.",
+        inputs.labor_sick_call_delta
+      ),
+    )
+  } else {
+    (
+      LaborDecision::WorkAction,
+      format!(
+        "Retention spend {retention_spend} and schedule relief {schedule_relief_commitment} fall below credible thresholds {} and {} under workforce trust {}.",
+        ruleset.minimum_retention_spend, ruleset.minimum_schedule_relief, prior.workforce_trust
+      ),
+    )
+  };
+
+  ActorDecisionRecord {
+    actor: "nursing_workforce",
+    decision: ActorDecision::Labor(decision),
     rationale,
   }
 }
@@ -859,7 +1047,7 @@ fn educational_debrief(history: &History) -> Vec<String> {
     ),
     format!("Actor rationales at decision time: {actor_rationales}"),
     format!("Attributed mechanisms to inspect: {effect_summary}."),
-    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values and the later policy response?".to_string(),
+    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, and the workforce retention tradeoff?".to_string(),
     "Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.".to_string(),
   ]
 }
@@ -893,6 +1081,9 @@ fn describe_actor_decision(decision: &ActorDecision) -> String {
     ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight) => {
       "escalate oversight".to_string()
     }
+    ActorDecision::Labor(LaborDecision::Cooperative) => "cooperative".to_string(),
+    ActorDecision::Labor(LaborDecision::LimitedSupport) => "limited support".to_string(),
+    ActorDecision::Labor(LaborDecision::WorkAction) => "work action".to_string(),
   }
 }
 
@@ -1294,8 +1485,10 @@ mod tests {
 
     assert!(debrief.contains("commercial_insurer:"));
     assert!(debrief.contains("state_policy_officials:"));
+    assert!(debrief.contains("nursing_workforce:"));
     assert!(debrief.contains("Reported access"));
     assert!(debrief.contains("Access commitment"));
+    assert!(debrief.contains("workforce retention tradeoff"));
   }
 
   #[test]
@@ -1303,10 +1496,11 @@ mod tests {
     let history = demo_history();
     let debrief = educational_debrief(&history).join("\n");
 
-    assert!(debrief.contains("cash moved from 100 to 72"));
-    assert!(debrief.contains("access from 70 to 74"));
+    assert!(debrief.contains("cash moved from 100 to"));
+    assert!(debrief.contains("access from 70 to"));
     assert!(debrief.contains("capacity investment changed cash by -18"));
     assert!(debrief.contains("state policy response changed community_trust by 2"));
+    assert!(debrief.contains("workforce response changed cash by"));
   }
 
   #[test]
@@ -1361,7 +1555,7 @@ mod tests {
       let history = build_history_for_strategy(choice, DEFAULT_SEED, &ruleset).unwrap();
       let final_state = history.transitions.last().unwrap().next.clone();
 
-      assert_eq!(history.transitions.len(), 2);
+      assert_eq!(history.transitions.len(), 3);
       assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
     }
   }
@@ -1420,6 +1614,23 @@ mod tests {
     assert_eq!(
       history.transitions[1].actor_decision.decision,
       ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility)
+    );
+    assert_eq!(
+      history.transitions[2].resolved_inputs,
+      ResolvedInputs {
+        measurement_noise: -5,
+        delayed_access_report: 69,
+        labor_sick_call_delta: -5,
+        policy_signal: 1,
+      }
+    );
+    assert_eq!(
+      history.transitions[2].actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::Cooperative)
+    );
+    assert_eq!(
+      history.transitions.last().unwrap().state_fingerprint,
+      "demo-ruleset-0.1.7:3:58:128:77:80:68:65:100:33"
     );
   }
 
@@ -1488,5 +1699,150 @@ mod tests {
   fn demo_history() -> History {
     let ruleset = default_ruleset();
     build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset).unwrap()
+  }
+
+  #[test]
+  fn workforce_response_is_deterministic() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 14,
+      schedule_relief_commitment: 8,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: -4,
+      policy_signal: 2,
+    };
+
+    let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
+    let second = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(first, second);
+    assert_eq!(
+      first.actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::Cooperative)
+    );
+  }
+
+  #[test]
+  fn negative_retention_spend_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: -1,
+      schedule_relief_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NegativeRetentionSpend { requested: -1 })
+    );
+  }
+
+  #[test]
+  fn excessive_retention_spend_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 30,
+      schedule_relief_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::RetentionSpendTooHigh {
+        requested: 30,
+        available_limit: 25
+      })
+    );
+  }
+
+  #[test]
+  fn non_positive_schedule_relief_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 8,
+      schedule_relief_commitment: 0,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NonPositiveScheduleRelief)
+    );
+  }
+
+  #[test]
+  fn unfavorable_labor_outcome_is_not_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: 2,
+      schedule_relief_commitment: 2,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: -4,
+      policy_signal: 0,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::WorkAction)
+    );
+    assert!(
+      result
+        .events
+        .iter()
+        .any(|event| event.description.contains("work action"))
+    );
+  }
+
+  #[test]
+  fn replay_reproduces_three_transition_history() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let final_state = history.transitions.last().unwrap().next.clone();
+
+    assert_eq!(history.transitions.len(), 3);
+    assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
+  }
+
+  #[test]
+  fn aggressive_bargaining_triggers_work_action_on_workforce_turn() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AggressiveBargaining, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(
+      history.transitions[2].actor_decision.decision,
+      ActorDecision::Labor(LaborDecision::WorkAction)
+    );
   }
 }

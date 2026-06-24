@@ -7,7 +7,7 @@ The project models health-policy outcomes as the result of strategic interaction
 ## Status
 
 Early research and design phase with a deterministic architecture proof and
-minimal playable CLI demo at v0.1.6.
+minimal playable CLI demo at v0.1.7.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 

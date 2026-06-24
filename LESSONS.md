@@ -87,3 +87,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   history for replay and debrief.
 - Prevention: Keep all random draws, measurement noise, and exogenous shocks in
   explicit pre-transition resolution steps; never hide RNG inside the core.
+
+## Third Turn Can Reuse Command And Actor Patterns
+
+- Context: Adding a workforce pressure turn after payer and policy interactions.
+- Symptom: A third command and third actor decision can invite a general
+  campaign framework or module split.
+- Cause: The demo already has command validation, actor rationales, effects,
+  history, replay, and debrief patterns that extend cleanly.
+- Resolution: Added `RespondToWorkforcePressure` with a nursing workforce
+  representative decision, extended strategy presets with `third_command`, and
+  kept everything in `src/main.rs` without new dependencies.
+- Prevention: Extend the existing command and actor-decision shapes turn by turn
+  until reuse boundaries justify extraction into modules.
