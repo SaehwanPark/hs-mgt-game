@@ -16,8 +16,8 @@ use super::export::read_replay_export_path;
 use super::io::{read_command_line, read_play_mode_choice, read_seed_choice};
 use super::output::print_demo;
 use super::parse::{
-  describe_command_defaults, parse_coalition_command, parse_policy_command,
-  parse_stabilize_access_command, parse_workforce_command,
+  describe_command_defaults, parse_coalition_command, parse_competitor_command,
+  parse_policy_command, parse_stabilize_access_command, parse_workforce_command,
 };
 use super::strategy::{build_history_for_strategy, default_interactive_commands, strategy_plan};
 
@@ -77,7 +77,7 @@ pub fn run_interactive_history(seed: u64, ruleset: &Ruleset) -> Result<History, 
   let mut transitions = Vec::new();
   let defaults = default_interactive_commands();
 
-  let turn_readers: [(&str, fn(&str) -> Result<PlayerCommand, CliError>); 4] = [
+  let turn_readers: [(&str, fn(&str) -> Result<PlayerCommand, CliError>); 5] = [
     (
       "Turn 1 command (capacity and payer posture): staffed_beds capital_spend requested_rate",
       parse_stabilize_access_command,
@@ -93,6 +93,10 @@ pub fn run_interactive_history(seed: u64, ruleset: &Ruleset) -> Result<History, 
     (
       "Turn 4 command (regional access coalition): coalition_investment shared_access_commitment",
       parse_coalition_command,
+    ),
+    (
+      "Turn 5 command (competitor capacity): defensive_capital access_posture",
+      parse_competitor_command,
     ),
   ];
 

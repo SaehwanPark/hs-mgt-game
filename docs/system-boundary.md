@@ -12,7 +12,7 @@ scenario or ruleset format is approved.
 
 - The setting is a fictional regional US health market centered on one
   nonprofit health system.
-- The current executable is a four-turn deterministic demo with compiled
+- The current executable is a five-turn deterministic demo with compiled
   strategy paths, explicit run seed, append-only history, replay, and educational
   debrief.
 - Each turn represents an executive decision point, not a fixed calendar unit.
@@ -26,8 +26,9 @@ scenario or ruleset format is approved.
 
 - The player is the health system CEO.
 - Current authority covers capacity investment, payer negotiation posture, state
-  access-mandate response, workforce retention and schedule relief offers, and
-  regional access coalition participation.
+  access-mandate response, workforce retention and schedule relief offers,
+  regional access coalition participation, and defensive response to rival
+  capacity pressure.
 - The player can allocate organizational resources and make public or
   institutional commitments.
 - The player cannot directly set reimbursement law, legislate, control
@@ -43,8 +44,9 @@ scenario or ruleset format is approved.
 | State policy officials | Turn 2 access mandate response | May grant flexibility, continue mandate, or escalate oversight | Responds to reported access, commitments, and policy signal |
 | Nursing workforce representative | Turn 3 labor pressure response | May cooperate, offer limited support, or signal work action | Responds to retention, schedule relief, trust, and labor pressure |
 | Regional provider coalition liaison | Turn 4 access coalition | May join fully, participate narrowly, or withdraw | Responds to shared access commitment, community trust, and leverage |
+| Rival regional health system | Turn 5 capacity competition | May accelerate expansion, hold position, or partially retreat | Responds to defensive capital, access posture, and market signal |
 
-Future actor classes may include Medicare, Medicaid, competitors, employers,
+Future actor classes may include Medicare, Medicaid, employers,
 patient groups, regulators, elected officials, and advocacy coalitions. They
 should not be added as strategic actors until a slice needs their authority,
 information, and decision procedure.
@@ -104,7 +106,7 @@ Included in the current conceptual boundary:
 
 Excluded from the current conceptual boundary:
 
-- Full Medicare, Medicaid, employer, patient, or competitor strategic behavior.
+- Full Medicare, Medicaid, employer, patient, or additional competitor strategic behavior.
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.

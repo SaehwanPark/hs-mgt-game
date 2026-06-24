@@ -22,6 +22,7 @@ pub struct StrategyPlan {
   pub second_command: PlayerCommand,
   pub third_command: PlayerCommand,
   pub fourth_command: PlayerCommand,
+  pub fifth_command: PlayerCommand,
 }
 
 pub struct StrategyCommitments {
@@ -34,6 +35,8 @@ pub struct StrategyCommitments {
   pub schedule_relief_commitment: i32,
   pub coalition_investment: i32,
   pub shared_access_commitment: i32,
+  pub defensive_capital_commitment: i32,
+  pub access_posture: i32,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]

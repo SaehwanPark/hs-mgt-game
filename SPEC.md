@@ -715,14 +715,43 @@ reconstructing it from the diff.
   - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass
 
+  - `cargo fmt --check`, `cargo test` pass
+
+- Feature: Competitor capacity slice
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/competitor-capacity-slice
+
+  Summary:
+  Add a fifth turn modeling rival health system capacity competition with
+  defensive player command, competitor actor decision, replay, debrief, and
+  preset path extensions while preserving turns 1–4 behavior.
+
+  Done:
+  - Competitor actor card and mechanism design artifacts
+  - `RespondToCompetitorCapacityMove` command and validation
+  - Competitor actor with accelerate, hold, and partial retreat outcomes
+  - `competitor_market_signal` stream active on turn 5 only
+  - Extended interactive and preset paths to five turns
+  - Golden hash updated; turn 4 hash unchanged at seed 42
+  - Package version bumped to `0.1.21`
+  - Playtest findings, system boundary, and scenario brief updated
+
+  Deferred / Non-Goals:
+  - No Medicare/Medicaid actors
+  - No scenario loader or mid-run save
+  - No market-entry relocation modeling
+
+  Verification:
+  - Five-transition replay from genesis
+  - Turns 1–4 resolved inputs and turn 4 hash unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` (82 tests) pass
+
 ## Present
 
 ## Future
 
 - Phase 0 governance docs: glossary, decision-record conventions, and versioning
   policy (CI baseline now in place).
-- Use the actor-card template before adding future strategic actors.
-- Use the first scenario brief to guide the next narrow vertical-slice runtime
-  expansion with deterministic replay and educational debrief hooks.
 - Add scenario data loading only after the conceptual model and first action
   vocabulary settle.

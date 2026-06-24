@@ -10,6 +10,7 @@ fn debrief_includes_actor_rationales() {
   assert!(debrief.contains("state_policy_officials:"));
   assert!(debrief.contains("nursing_workforce:"));
   assert!(debrief.contains("regional_provider_coalition:"));
+  assert!(debrief.contains("competitor_health_system:"));
   assert!(debrief.contains("Reported access"));
   assert!(debrief.contains("Access commitment"));
   assert!(debrief.contains("coalition investment choice"));
@@ -19,12 +20,13 @@ fn debrief_includes_attributed_tradeoff() {
   let history = demo_history();
   let debrief = educational_debrief(&history).join("\n");
 
-  assert!(debrief.contains("cash moved from 100 to 46"));
-  assert!(debrief.contains("access from 70 to 83"));
+  assert!(debrief.contains("cash moved from 100 to 32"));
+  assert!(debrief.contains("access from 70 to 89"));
   assert!(debrief.contains("capacity investment changed cash by -18"));
   assert!(debrief.contains("state policy response changed community_trust by 2"));
   assert!(debrief.contains("workforce response changed cash by"));
   assert!(debrief.contains("coalition response changed cash by"));
+  assert!(debrief.contains("competitor response changed cash by"));
 }
 #[test]
 fn identical_histories_produce_identical_debriefs() {

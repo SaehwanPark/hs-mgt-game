@@ -1,7 +1,7 @@
 use crate::model::{
-  ActorDecision, ActorDecisionRecord, AttributedEffect, CoalitionDecision, Event, InsurerDecision,
-  LaborDecision, Observation, PlayMode, PlayerCommand, ReplayArtifactError, ResolvedInputs,
-  StatePolicyDecision, StrategyPath, Transition, WorldState,
+  ActorDecision, ActorDecisionRecord, AttributedEffect, CoalitionDecision, CompetitorDecision,
+  Event, InsurerDecision, LaborDecision, Observation, PlayMode, PlayerCommand, ReplayArtifactError,
+  ResolvedInputs, StatePolicyDecision, StrategyPath, Transition, WorldState,
 };
 
 use super::text::unescape_artifact_text;
@@ -128,6 +128,10 @@ pub fn parse_player_command(payload: &str) -> Result<PlayerCommand, ReplayArtifa
       coalition_investment: read_i32("coalition_investment")?,
       shared_access_commitment: read_i32("shared_access_commitment")?,
     }),
+    "RespondToCompetitorCapacityMove" => Ok(PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment: read_i32("defensive_capital_commitment")?,
+      access_posture: read_i32("access_posture")?,
+    }),
     other => Err(ReplayArtifactError::ParseError {
       line: 0,
       detail: format!("unknown command kind {other}"),
@@ -168,6 +172,18 @@ pub fn parse_resolved_inputs(payload: &str) -> Result<ResolvedInputs, ReplayArti
     policy_signal: read_i32("policy_signal")?,
     coalition_leverage_signal: read_i32("coalition_leverage_signal")?,
     access_measurement_revision: read_i32("access_measurement_revision")?,
+    competitor_market_signal: fields
+      .get("competitor_market_signal")
+      .map(|value| {
+        value
+          .parse::<i32>()
+          .map_err(|_| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid competitor_market_signal".to_string(),
+          })
+      })
+      .transpose()?
+      .unwrap_or(0),
   })
 }
 
@@ -225,6 +241,15 @@ pub fn parse_actor_decision(payload: &str) -> Result<ActorDecision, ReplayArtifa
     )),
     ("Coalition", "CoalitionWithdrawal") => Ok(ActorDecision::Coalition(
       CoalitionDecision::CoalitionWithdrawal,
+    )),
+    ("Competitor", "AccelerateExpansion") => Ok(ActorDecision::Competitor(
+      CompetitorDecision::AccelerateExpansion,
+    )),
+    ("Competitor", "HoldPosition") => {
+      Ok(ActorDecision::Competitor(CompetitorDecision::HoldPosition))
+    }
+    ("Competitor", "PartialRetreat") => Ok(ActorDecision::Competitor(
+      CompetitorDecision::PartialRetreat,
     )),
     _ => Err(ReplayArtifactError::ParseError {
       line: 0,
@@ -292,6 +317,7 @@ pub fn intern_static_label(value: &str) -> Result<&'static str, ReplayArtifactEr
     "state_policy_officials" => Ok("state_policy_officials"),
     "nursing_workforce" => Ok("nursing_workforce"),
     "regional_provider_coalition" => Ok("regional_provider_coalition"),
+    "competitor_health_system" => Ok("competitor_health_system"),
     "capacity investment" => Ok("capacity investment"),
     "staffing constraint" => Ok("staffing constraint"),
     "policy response" => Ok("policy response"),
@@ -299,6 +325,9 @@ pub fn intern_static_label(value: &str) -> Result<&'static str, ReplayArtifactEr
     "schedule relief" => Ok("schedule relief"),
     "coalition response" => Ok("coalition response"),
     "coalition investment" => Ok("coalition investment"),
+    "competitor response" => Ok("competitor response"),
+    "defensive capacity" => Ok("defensive capacity"),
+    "competitor health system" => Ok("competitor health system"),
     "commercial insurer" => Ok("commercial insurer"),
     "public bargaining friction" => Ok("public bargaining friction"),
     "failed negotiation" => Ok("failed negotiation"),
@@ -331,6 +360,24 @@ pub fn intern_policy_briefing(value: &str) -> Result<&'static str, ReplayArtifac
     other => Err(ReplayArtifactError::ParseError {
       line: 0,
       detail: format!("unknown policy briefing {other}"),
+    }),
+  }
+}
+
+pub fn intern_market_competition_briefing(
+  value: &str,
+) -> Result<&'static str, ReplayArtifactError> {
+  match value {
+    "" => Ok(""),
+    "a rival system is signaling outpatient capacity expansion nearby" => {
+      Ok("a rival system is signaling outpatient capacity expansion nearby")
+    }
+    "regional competitor capacity plans are being watched cautiously" => {
+      Ok("regional competitor capacity plans are being watched cautiously")
+    }
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown market competition briefing {other}"),
     }),
   }
 }
@@ -430,12 +477,18 @@ pub fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifa
             detail: format!("invalid observation field {key}"),
           })
       };
+      let market_briefing = if payload.contains("market_competition_briefing:") {
+        parse_quoted_field(payload, "market_competition_briefing")?
+      } else {
+        String::new()
+      };
       observation = Some(Observation {
         actor,
         reported_access_index: read_field("reported_access_index")?,
         reported_quality_index: read_field("reported_quality_index")?,
         prior_access_revision: read_field("prior_access_revision")?,
         policy_briefing: intern_policy_briefing(&parse_quoted_field(payload, "policy_briefing")?)?,
+        market_competition_briefing: intern_market_competition_briefing(&market_briefing)?,
       });
       continue;
     }

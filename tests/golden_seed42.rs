@@ -7,6 +7,7 @@ fn default_seed_reproduces_canonical_demo_trajectory() {
   let history =
     build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset).unwrap();
 
+  assert_eq!(history.transitions.len(), 5);
   assert_eq!(
     history.transitions[0].resolved_inputs,
     ResolvedInputs {
@@ -16,6 +17,7 @@ fn default_seed_reproduces_canonical_demo_trajectory() {
       policy_signal: 4,
       coalition_leverage_signal: 2,
       access_measurement_revision: 0,
+      competitor_market_signal: 0,
     }
   );
   assert_eq!(
@@ -27,6 +29,7 @@ fn default_seed_reproduces_canonical_demo_trajectory() {
       policy_signal: 3,
       coalition_leverage_signal: 4,
       access_measurement_revision: -1,
+      competitor_market_signal: 0,
     }
   );
   assert_eq!(
@@ -46,6 +49,7 @@ fn default_seed_reproduces_canonical_demo_trajectory() {
       policy_signal: 1,
       coalition_leverage_signal: 2,
       access_measurement_revision: 2,
+      competitor_market_signal: 0,
     }
   );
   assert_eq!(
@@ -61,14 +65,32 @@ fn default_seed_reproduces_canonical_demo_trajectory() {
       policy_signal: 5,
       coalition_leverage_signal: 3,
       access_measurement_revision: -1,
+      competitor_market_signal: 0,
     }
   );
   assert_eq!(
     history.transitions[3].actor_decision.decision,
     ActorDecision::Coalition(CoalitionDecision::FullPartnership)
   );
+  assert_eq!(history.transitions[3].state_hash, "bce02dff9b4b4ac6");
+  assert_eq!(
+    history.transitions[4].resolved_inputs,
+    ResolvedInputs {
+      measurement_noise: -5,
+      delayed_access_report: 78,
+      labor_sick_call_delta: -4,
+      policy_signal: 2,
+      coalition_leverage_signal: 2,
+      access_measurement_revision: 3,
+      competitor_market_signal: 6,
+    }
+  );
+  assert_eq!(
+    history.transitions[4].actor_decision.decision,
+    ActorDecision::Competitor(CompetitorDecision::PartialRetreat)
+  );
   assert_eq!(
     history.transitions.last().unwrap().state_hash,
-    "bce02dff9b4b4ac6"
+    "6fb1ebbea564274f"
   );
 }

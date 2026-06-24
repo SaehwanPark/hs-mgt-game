@@ -4,6 +4,28 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.21] - 2026-06-24
+
+### Added
+
+- Fifth-turn competitor capacity interaction with
+  `RespondToCompetitorCapacityMove` command and rival health system actor.
+- Competitor actor card in [`docs/actor-cards.md`](docs/actor-cards.md).
+- `competitor_market_signal` random stream (active on turn 5 only).
+- [`docs/playtest-findings-v0.1.21.md`](docs/playtest-findings-v0.1.21.md).
+
+### Changed
+
+- Extended playable demo from four to five turns (interactive and preset paths).
+- Bumped package version from `0.1.20` to `0.1.21`.
+- Golden seed-42 final state hash updated to `6fb1ebbea564274f` (turns 1–4
+  unchanged; turn 4 hash remains `bce02dff9b4b4ac6`).
+
+### Notes
+
+- Replay artifact format adds optional `competitor_market_signal` and
+  `market_competition_briefing` fields with backward-compatible parsing.
+
 ## [0.1.20] - 2026-06-24
 
 ### Added

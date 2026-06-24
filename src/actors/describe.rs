@@ -1,5 +1,6 @@
 use crate::model::{
-  ActorDecision, CoalitionDecision, InsurerDecision, LaborDecision, StatePolicyDecision,
+  ActorDecision, CoalitionDecision, CompetitorDecision, InsurerDecision, LaborDecision,
+  StatePolicyDecision,
 };
 
 pub fn describe_actor_decision(decision: &ActorDecision) -> String {
@@ -28,5 +29,10 @@ pub fn describe_actor_decision(decision: &ActorDecision) -> String {
     ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal) => {
       "coalition withdrawal".to_string()
     }
+    ActorDecision::Competitor(CompetitorDecision::AccelerateExpansion) => {
+      "accelerate expansion".to_string()
+    }
+    ActorDecision::Competitor(CompetitorDecision::HoldPosition) => "hold position".to_string(),
+    ActorDecision::Competitor(CompetitorDecision::PartialRetreat) => "partial retreat".to_string(),
   }
 }

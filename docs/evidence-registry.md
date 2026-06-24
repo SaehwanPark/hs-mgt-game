@@ -15,6 +15,7 @@ prototype integer parameters.
 | State access mandate response | Turn 2 policy decision | Abstraction | Simplified oversight ladder |
 | Workforce retention under pressure | Turn 3 labor decision | Abstraction | Inspired by labor-market tension literature |
 | Regional access coalition | Turn 4 coalition decision | Abstraction | Cooperative opportunity per roadmap §5.2 |
+| Competitor capacity response | Turn 5 rival system decision | Abstraction | Competitive capacity interaction per roadmap §3.3 |
 | Delayed/noisy access reporting | Observation model | Literature-informed | Supports decision vs. outcome debrief |
 | Prior-period measurement revision | Observation briefing | Literature-informed | Revisions do not rewrite committed history |
 | Deterministic replay | Architecture proof | Project requirement | ODD/STRESS-aligned documentation target |

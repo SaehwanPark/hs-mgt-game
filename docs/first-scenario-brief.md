@@ -23,7 +23,7 @@ reported measurements.
 
 ## Scenario Duration
 
-The current prototype uses four executive decision points. A later campaign may
+The current prototype uses five executive decision points. A later campaign may
 map those turns to quarters, but this brief does not assign calendar duration.
 
 ## Learning Objectives
@@ -45,6 +45,7 @@ The scenario includes the current interaction set:
 - State access-policy response.
 - Workforce pressure response.
 - Regional access coalition opportunity.
+- Rival health system capacity competition response.
 - Delayed, noisy, and revised access reporting.
 - End-of-run causal debrief from committed history.
 
@@ -53,7 +54,6 @@ The scenario includes the current interaction set:
 The scenario does not yet include:
 
 - Full Medicare or Medicaid strategic behavior.
-- Competitor system strategy.
 - Employer or patient-group strategy.
 - Service-line portfolio modeling.
 - Individual patient simulation.

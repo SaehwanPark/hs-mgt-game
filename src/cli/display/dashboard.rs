@@ -61,10 +61,12 @@ pub fn describe_strategy_commitments(plan: &StrategyPlan) -> String {
     total_spend = commitments.capital_spend
       + commitments.advocacy_spend
       + commitments.retention_spend
-      + commitments.coalition_investment,
+      + commitments.coalition_investment
+      + commitments.defensive_capital_commitment,
     total_commitment = commitments.access_commitment
       + commitments.schedule_relief_commitment
       + commitments.shared_access_commitment
+      + commitments.access_posture
   )
 }
 
@@ -102,6 +104,14 @@ pub fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
     panic!("strategy preview expects a coalition command fourth");
   };
 
+  let &PlayerCommand::RespondToCompetitorCapacityMove {
+    defensive_capital_commitment,
+    access_posture,
+  } = &plan.fifth_command
+  else {
+    panic!("strategy preview expects a competitor response command fifth");
+  };
+
   StrategyCommitments {
     staffed_beds: add_staffed_beds,
     capital_spend,
@@ -112,5 +122,7 @@ pub fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
     schedule_relief_commitment,
     coalition_investment,
     shared_access_commitment,
+    defensive_capital_commitment,
+    access_posture,
   }
 }

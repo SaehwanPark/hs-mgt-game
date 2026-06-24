@@ -141,6 +141,38 @@ pub fn transition(
         ),
       });
     }
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => {
+      next.cash -= defensive_capital_commitment;
+      next.access_index += access_posture / 2;
+      next.staffed_beds += defensive_capital_commitment / 6;
+      push_effect(
+        &mut effects,
+        "competitor response",
+        "cash",
+        -defensive_capital_commitment,
+      );
+      push_effect(
+        &mut effects,
+        "competitor response",
+        "access_index",
+        access_posture / 2,
+      );
+      push_effect(
+        &mut effects,
+        "defensive capacity",
+        "staffed_beds",
+        defensive_capital_commitment / 6,
+      );
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "Committed {defensive_capital_commitment} defensive capital units and access posture {access_posture} in response to rival capacity pressure."
+        ),
+      });
+    }
   }
 
   match &actor_decision.decision {
@@ -297,6 +329,69 @@ pub fn transition(
       events.push(Event {
         actor: "regional_provider_coalition",
         description: "Withdrew from the coalition after judging the investment and access commitment insufficient.".to_string(),
+      });
+    }
+    ActorDecision::Competitor(CompetitorDecision::AccelerateExpansion) => {
+      next.access_index -= 4;
+      next.community_trust -= 2;
+      next.commercial_rate -= 2;
+      push_effect(&mut effects, "competitor health system", "access_index", -4);
+      push_effect(
+        &mut effects,
+        "competitor health system",
+        "community_trust",
+        -2,
+      );
+      push_effect(
+        &mut effects,
+        "competitor health system",
+        "commercial_rate",
+        -2,
+      );
+      events.push(Event {
+        actor: "competitor_health_system",
+        description:
+          "Accelerated outpatient capacity expansion after judging the defensive response insufficient."
+            .to_string(),
+      });
+    }
+    ActorDecision::Competitor(CompetitorDecision::HoldPosition) => {
+      next.access_index -= 1;
+      next.policy_pressure += 1;
+      push_effect(&mut effects, "competitor health system", "access_index", -1);
+      push_effect(
+        &mut effects,
+        "competitor health system",
+        "policy_pressure",
+        1,
+      );
+      events.push(Event {
+        actor: "competitor_health_system",
+        description: "Held expansion plans steady while monitoring rival commitments.".to_string(),
+      });
+    }
+    ActorDecision::Competitor(CompetitorDecision::PartialRetreat) => {
+      next.access_index += 2;
+      next.community_trust += 2;
+      next.policy_pressure -= 2;
+      push_effect(&mut effects, "competitor health system", "access_index", 2);
+      push_effect(
+        &mut effects,
+        "competitor health system",
+        "community_trust",
+        2,
+      );
+      push_effect(
+        &mut effects,
+        "competitor health system",
+        "policy_pressure",
+        -2,
+      );
+      events.push(Event {
+        actor: "competitor_health_system",
+        description:
+          "Scaled back expansion plans after a credible defensive capital and access posture."
+            .to_string(),
       });
     }
   }

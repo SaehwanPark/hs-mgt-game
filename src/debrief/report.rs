@@ -64,7 +64,7 @@ pub fn educational_debrief(history: &History) -> Vec<String> {
     ),
     format!("Actor rationales at decision time: {actor_rationales}"),
     format!("Attributed mechanisms to inspect: {effect_summary}."),
-    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, the workforce retention tradeoff, and the coalition investment choice?".to_string(),
+    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, the workforce retention tradeoff, the coalition investment choice, and the defensive response to rival capacity pressure?".to_string(),
     "Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.".to_string(),
   ];
 

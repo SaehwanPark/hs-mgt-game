@@ -101,6 +101,34 @@ pub fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<()
         });
       }
     }
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => {
+      if *defensive_capital_commitment < 0 {
+        return Err(ValidationError::NegativeDefensiveCapitalCommitment {
+          requested: *defensive_capital_commitment,
+        });
+      }
+
+      if *defensive_capital_commitment > ruleset.max_defensive_capital_commitment {
+        return Err(ValidationError::DefensiveCapitalCommitmentTooHigh {
+          requested: *defensive_capital_commitment,
+          available_limit: ruleset.max_defensive_capital_commitment,
+        });
+      }
+
+      if *access_posture <= 0 {
+        return Err(ValidationError::NonPositiveAccessPosture);
+      }
+
+      if *access_posture > ruleset.max_access_posture {
+        return Err(ValidationError::AccessPostureTooHigh {
+          requested: *access_posture,
+          available_limit: ruleset.max_access_posture,
+        });
+      }
+    }
   }
 
   Ok(())
@@ -115,5 +143,6 @@ pub fn requested_commercial_rate(command: &PlayerCommand) -> Option<i32> {
     PlayerCommand::RespondToStateAccessMandate { .. } => None,
     PlayerCommand::RespondToWorkforcePressure { .. } => None,
     PlayerCommand::JoinRegionalAccessCoalition { .. } => None,
+    PlayerCommand::RespondToCompetitorCapacityMove { .. } => None,
   }
 }

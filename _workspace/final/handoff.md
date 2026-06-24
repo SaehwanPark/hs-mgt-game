@@ -2,28 +2,25 @@
 
 ## Summary
 
-Delivered Phase 1 research-to-design implications memo at v0.1.20. Added
-parameter-source ledger to evidence registry. Restored SPEC Present bookkeeping.
-No runtime behavior changed.
+Delivered fifth-turn competitor capacity slice at v0.1.21. Extended playable
+demo to five turns with rival health system actor while preserving turns 1–4
+behavior at seed 42.
 
 ## Changed Files
 
-- `Cargo.toml`
-- `README.md`
-- `SPEC.md`
-- `CHANGELOG.md`
-- `docs/phase1-implications-memo.md`
-- `docs/evidence-registry.md`
-- `_workspace/00_input/request-summary.md`
-- `_workspace/03_domain_qa.md`
+- `src/` — model, actors, sim, inputs, cli, artifact, debrief modules
+- `tests/golden_seed42.rs`
+- `docs/actor-cards.md`, `docs/system-boundary.md`, `docs/first-scenario-brief.md`
+- `docs/playtest-findings-v0.1.21.md`, `docs/evidence-registry.md`
+- `Cargo.toml`, `README.md`, `SPEC.md`, `CHANGELOG.md`
+- `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`
 
 ## Verification
 
 - `cargo fmt --check` passed
-- `cargo test` passed: 78 tests
-- Golden hash `bce02dff9b4b4ac6` unchanged at seed 42
+- `cargo test` passed: 82 tests (81 unit + 1 integration)
+- Turn 4 hash `bce02dff9b4b4ac6` unchanged; final hash `6fb1ebbea564274f`
 
 ## Next Dependencies
 
-- Competitor actor card and fifth-turn runtime slice (`feat/competitor-capacity-slice`)
-- Phase 0 governance docs after competitor slice
+- Phase 0 governance docs (`feat/phase0-governance-docs`)

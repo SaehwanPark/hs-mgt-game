@@ -40,3 +40,24 @@ fn genesis_turn_has_no_access_measurement_revision() {
 
   assert_eq!(inputs.access_measurement_revision, 0);
 }
+
+#[test]
+fn competitor_market_signal_is_zero_before_fifth_turn() {
+  let ruleset = default_ruleset();
+  let mut prior = genesis_state();
+  for turn in 0..4 {
+    prior.turn = turn;
+    let inputs = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+    assert_eq!(inputs.competitor_market_signal, 0);
+  }
+}
+
+#[test]
+fn competitor_market_signal_resolves_on_fifth_turn() {
+  let ruleset = default_ruleset();
+  let mut prior = genesis_state();
+  prior.turn = 4;
+  let inputs = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+
+  assert_eq!(inputs.competitor_market_signal, 6);
+}

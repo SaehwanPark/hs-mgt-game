@@ -1,6 +1,7 @@
 use crate::model::{
-  ActorDecision, CoalitionDecision, InsurerDecision, LaborDecision, PlayMode, PlayerCommand,
-  ReplayArtifact, ResolvedInputs, StatePolicyDecision, StrategyPath, Transition, WorldState,
+  ActorDecision, CoalitionDecision, CompetitorDecision, InsurerDecision, LaborDecision, PlayMode,
+  PlayerCommand, ReplayArtifact, ResolvedInputs, StatePolicyDecision, StrategyPath, Transition,
+  WorldState,
 };
 
 use super::text::escape_artifact_text;
@@ -49,18 +50,25 @@ pub fn serialize_player_command(command: &PlayerCommand) -> String {
     } => format!(
       "JoinRegionalAccessCoalition,coalition_investment:{coalition_investment},shared_access_commitment:{shared_access_commitment}"
     ),
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => format!(
+      "RespondToCompetitorCapacityMove,defensive_capital_commitment:{defensive_capital_commitment},access_posture:{access_posture}"
+    ),
   }
 }
 
 pub fn serialize_resolved_inputs(inputs: &ResolvedInputs) -> String {
   format!(
-    "measurement_noise:{},delayed_access_report:{},labor_sick_call_delta:{},policy_signal:{},coalition_leverage_signal:{},access_measurement_revision:{}",
+    "measurement_noise:{},delayed_access_report:{},labor_sick_call_delta:{},policy_signal:{},coalition_leverage_signal:{},access_measurement_revision:{},competitor_market_signal:{}",
     inputs.measurement_noise,
     inputs.delayed_access_report,
     inputs.labor_sick_call_delta,
     inputs.policy_signal,
     inputs.coalition_leverage_signal,
-    inputs.access_measurement_revision
+    inputs.access_measurement_revision,
+    inputs.competitor_market_signal
   )
 }
 
@@ -92,6 +100,15 @@ pub fn serialize_actor_decision(decision: &ActorDecision) -> String {
     ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal) => {
       "Coalition:CoalitionWithdrawal".to_string()
     }
+    ActorDecision::Competitor(CompetitorDecision::AccelerateExpansion) => {
+      "Competitor:AccelerateExpansion".to_string()
+    }
+    ActorDecision::Competitor(CompetitorDecision::HoldPosition) => {
+      "Competitor:HoldPosition".to_string()
+    }
+    ActorDecision::Competitor(CompetitorDecision::PartialRetreat) => {
+      "Competitor:PartialRetreat".to_string()
+    }
   }
 }
 
@@ -117,12 +134,13 @@ pub fn serialize_transition(transition: &Transition) -> Vec<String> {
     serialize_world_state("prior", &transition.prior),
     serialize_world_state("next", &transition.next),
     format!(
-      "observation=actor:{},reported_access_index:{},reported_quality_index:{},prior_access_revision:{},policy_briefing:\"{}\"",
+      "observation=actor:{},reported_access_index:{},reported_quality_index:{},prior_access_revision:{},policy_briefing:\"{}\",market_competition_briefing:\"{}\"",
       transition.observation.actor,
       transition.observation.reported_access_index,
       transition.observation.reported_quality_index,
       transition.observation.prior_access_revision,
-      escape_artifact_text(transition.observation.policy_briefing)
+      escape_artifact_text(transition.observation.policy_briefing),
+      escape_artifact_text(transition.observation.market_competition_briefing)
     ),
     format!(
       "actor_decision=actor:{},decision:{},rationale:\"{}\"",

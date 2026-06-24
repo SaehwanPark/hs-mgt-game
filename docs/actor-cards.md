@@ -153,3 +153,24 @@ These are sufficient for the four-turn architecture proof. Future slices should
 use this template before adding Medicare, Medicaid, competitors, employers,
 patient groups, regulators, elected officials, or advocacy coalitions as
 strategic actors.
+
+### Rival regional health system (competitor)
+
+| Field | Value |
+| --- | --- |
+| Actor name and class | Rival regional health system; competitor health system |
+| Scenario role | Fifth-turn competitive capacity pressure after coalition turn |
+| Objectives | Protect market share and growth option value in the region |
+| Authority | Can accelerate outpatient/capacity expansion or pause plans |
+| Constraints | Capital limits, community scrutiny, payer network reactions |
+| Resources | Expansion capital, existing capacity, market intelligence |
+| Observations | Player access posture signals, reported access, regional trust |
+| Private information | Expansion cost estimates and margin thresholds (abstracted as market signal input) |
+| Outside options | Delay expansion, target different submarket |
+| Risk posture | Accelerate when rival response looks weak under market pressure |
+| Time horizon | Current planning cycle |
+| Feasible actions | Accelerate expansion, hold position, partial retreat |
+| Decision procedure | Threshold evaluation on defensive capital and access posture vs market signal |
+| Rationale output | Text explaining expansion, hold, or retreat given player credibility |
+| Debrief use | Contrast defensive investment with competitive access and trust outcomes |
+| Evidence status | Abstraction inspired by hospital market-capacity literature; not calibrated |

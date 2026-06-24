@@ -13,6 +13,10 @@ pub struct Ruleset {
   pub minimum_coalition_investment: i32,
   pub minimum_shared_access_commitment: i32,
   pub max_shared_access_commitment: i32,
+  pub max_defensive_capital_commitment: i32,
+  pub minimum_defensive_capital_commitment: i32,
+  pub minimum_access_posture: i32,
+  pub max_access_posture: i32,
 }
 
 pub fn default_ruleset() -> Ruleset {
@@ -30,5 +34,9 @@ pub fn default_ruleset() -> Ruleset {
     minimum_coalition_investment: 4,
     minimum_shared_access_commitment: 4,
     max_shared_access_commitment: 20,
+    max_defensive_capital_commitment: 25,
+    minimum_defensive_capital_commitment: 4,
+    minimum_access_posture: 3,
+    max_access_posture: 15,
   }
 }

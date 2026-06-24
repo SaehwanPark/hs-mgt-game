@@ -13,5 +13,14 @@ pub fn observe_for_player(prior: &WorldState, inputs: &ResolvedInputs) -> Observ
     reported_quality_index: prior.quality_index,
     prior_access_revision: inputs.access_measurement_revision,
     policy_briefing,
+    market_competition_briefing: if prior.turn >= 4 {
+      if inputs.competitor_market_signal >= 4 {
+        "a rival system is signaling outpatient capacity expansion nearby"
+      } else {
+        "regional competitor capacity plans are being watched cautiously"
+      }
+    } else {
+      ""
+    },
   }
 }

@@ -17,6 +17,10 @@ pub enum PlayerCommand {
     coalition_investment: i32,
     shared_access_commitment: i32,
   },
+  RespondToCompetitorCapacityMove {
+    defensive_capital_commitment: i32,
+    access_posture: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -58,6 +62,18 @@ pub enum ValidationError {
   },
   NonPositiveSharedAccessCommitment,
   SharedAccessCommitmentTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
+  NegativeDefensiveCapitalCommitment {
+    requested: i32,
+  },
+  DefensiveCapitalCommitmentTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
+  NonPositiveAccessPosture,
+  AccessPostureTooHigh {
     requested: i32,
     available_limit: i32,
   },
