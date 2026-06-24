@@ -561,11 +561,14 @@ reconstructing it from the diff.
   - Ran preset and interactive playtest sessions at seed `42`
   - Added `docs/playtest-findings-v0.1.15.md`
   - Updated architecture, changelog, lessons, and workspace handoff artifacts
-  - `cargo fmt --check`, `cargo test` (77 tests), and `cargo run` pass
+  - `cargo fmt --check`, `cargo test` (78 tests), and `cargo run` pass
   - Domain QA passed for the bounded replay artifact slice
+  - PR handoff opened as GitHub PR #14
+  - Three code-reviewer passes completed; High findings fixed (TTY-gated export
+    prompt, redundant ruleset check removed, event/effect count validation)
 
   Not Yet Done:
-  - PR handoff and three code-reviewer passes
+  - Merge after external CI or human review feedback
 
   Deferred / Non-Goals:
   - No new commands, actors, metrics, or random streams

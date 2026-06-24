@@ -749,20 +749,22 @@ fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
     PlayMode::Interactive => print_interactive_results(config.seed, &history, ruleset),
   }
 
-  if let Some(path) = read_replay_export_path()? {
-    let artifact = ReplayArtifact {
-      seed: config.seed,
-      play_mode: config.play_mode,
-      ruleset_version: ruleset.version.to_string(),
-      history,
-    };
+  if std::io::IsTerminal::is_terminal(&io::stdin()) {
+    if let Some(path) = read_replay_export_path()? {
+      let artifact = ReplayArtifact {
+        seed: config.seed,
+        play_mode: config.play_mode,
+        ruleset_version: ruleset.version.to_string(),
+        history,
+      };
 
-    match write_replay_artifact(&path, &artifact) {
-      Ok(()) => println!("Replay artifact written to {path}"),
-      Err(error) => eprintln!(
-        "Replay export failed: {}",
-        describe_replay_artifact_error(&error)
-      ),
+      match write_replay_artifact(&path, &artifact) {
+        Ok(()) => println!("Replay artifact written to {path}"),
+        Err(error) => eprintln!(
+          "Replay export failed: {}",
+          describe_replay_artifact_error(&error)
+        ),
+      }
     }
   }
 
@@ -2482,8 +2484,38 @@ fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifactEr
   let mut actor_decision = None;
   let mut events = Vec::new();
   let mut effects = Vec::new();
+  let mut expected_event_count = None;
+  let mut expected_effect_count = None;
+  let mut declared_turn = None;
 
   for line in lines {
+    if line.starts_with("turn=") {
+      declared_turn = Some(line["turn=".len()..].parse::<u32>().map_err(|_| {
+        ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid transition turn".to_string(),
+        }
+      })?);
+      continue;
+    }
+    if line.starts_with("event_count=") {
+      expected_event_count = Some(line["event_count=".len()..].parse::<usize>().map_err(|_| {
+        ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid event_count".to_string(),
+        }
+      })?);
+      continue;
+    }
+    if line.starts_with("effect_count=") {
+      expected_effect_count = Some(line["effect_count=".len()..].parse::<usize>().map_err(
+        |_| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid effect_count".to_string(),
+        },
+      )?);
+      continue;
+    }
     if line.starts_with("command=") {
       command = Some(parse_player_command(&line["command=".len()..])?);
       continue;
@@ -2648,6 +2680,44 @@ fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifactEr
     }
   }
 
+  let next = next.ok_or_else(|| ReplayArtifactError::ParseError {
+    line: 0,
+    detail: "missing transition next state".to_string(),
+  })?;
+  if let Some(turn) = declared_turn {
+    if turn != next.turn {
+      return Err(ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!(
+          "transition turn {turn} does not match next state turn {}",
+          next.turn
+        ),
+      });
+    }
+  }
+  if let Some(event_count) = expected_event_count {
+    if events.len() != event_count {
+      return Err(ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!(
+          "event_count {event_count} does not match parsed events {}",
+          events.len()
+        ),
+      });
+    }
+  }
+  if let Some(effect_count) = expected_effect_count {
+    if effects.len() != effect_count {
+      return Err(ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!(
+          "effect_count {effect_count} does not match parsed effects {}",
+          effects.len()
+        ),
+      });
+    }
+  }
+
   Ok(Transition {
     prior: prior.ok_or_else(|| ReplayArtifactError::ParseError {
       line: 0,
@@ -2671,10 +2741,7 @@ fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifactEr
     })?,
     events,
     effects,
-    next: next.ok_or_else(|| ReplayArtifactError::ParseError {
-      line: 0,
-      detail: "missing transition next state".to_string(),
-    })?,
+    next,
     state_hash: state_hash.ok_or_else(|| ReplayArtifactError::ParseError {
       line: 0,
       detail: "missing transition state hash".to_string(),
@@ -2815,24 +2882,11 @@ fn deserialize_replay_artifact(text: &str) -> Result<ReplayArtifact, ReplayArtif
   })
 }
 
-fn ruleset_for_artifact_version(version: &str) -> Result<Ruleset, ReplayArtifactError> {
-  let ruleset = default_ruleset();
-  if ruleset.version != version {
-    return Err(ReplayArtifactError::RulesetMismatch {
-      expected: ruleset.version.to_string(),
-      found: version.to_string(),
-    });
-  }
-
-  Ok(ruleset)
-}
-
 fn verify_replay_artifact(
   text: &str,
   ruleset: &Ruleset,
 ) -> Result<ReplayVerification, ReplayArtifactError> {
   let artifact = deserialize_replay_artifact(text)?;
-  ruleset_for_artifact_version(&artifact.ruleset_version)?;
   if artifact.ruleset_version != ruleset.version {
     return Err(ReplayArtifactError::RulesetMismatch {
       expected: ruleset.version.to_string(),
@@ -4231,6 +4285,41 @@ mod tests {
       play_mode,
       ruleset_version: default_ruleset().version.to_string(),
       history,
+    }
+  }
+
+  #[test]
+  fn replay_artifact_round_trip_verifies_all_preset_paths() {
+    let ruleset = default_ruleset();
+
+    for (play_mode, choice) in [
+      (
+        PlayMode::Preset(StrategyPath::AccessStabilization),
+        StrategyPath::AccessStabilization,
+      ),
+      (
+        PlayMode::Preset(StrategyPath::FiscalCaution),
+        StrategyPath::FiscalCaution,
+      ),
+      (
+        PlayMode::Preset(StrategyPath::AggressiveBargaining),
+        StrategyPath::AggressiveBargaining,
+      ),
+    ] {
+      let history = build_history_for_strategy(choice, DEFAULT_SEED, &ruleset).unwrap();
+      let artifact = sample_replay_artifact(play_mode, history.clone());
+      let serialized = serialize_replay_artifact(&artifact);
+
+      assert_eq!(
+        deserialize_replay_artifact(&serialized).unwrap().history,
+        history
+      );
+      assert_eq!(
+        verify_replay_artifact(&serialized, &ruleset)
+          .unwrap()
+          .final_state,
+        history.transitions.last().unwrap().next
+      );
     }
   }
 

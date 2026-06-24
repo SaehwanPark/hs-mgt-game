@@ -32,9 +32,15 @@ can reload and replay-check committed transitions without terminal input.
 
 ## Review Summary
 
-- PR handoff pending.
-- Domain QA: pass.
-- Critical/High findings: none observed locally before PR.
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/14
+- Three code-reviewer passes completed.
+- Fixed High findings: export prompt gated on interactive TTY stdin; removed
+  redundant `ruleset_for_artifact_version` call; validate `event_count`,
+  `effect_count`, and `turn` during artifact parse.
+- Deferred Low findings: parse line numbers in errors, overwrite warning for
+  existing export paths, `parse_quoted_field` substring robustness.
+- Critical/High findings after fixes: none open.
+- Merge-ready: yes, pending external CI or human review feedback.
 
 ## Known Limits
 
