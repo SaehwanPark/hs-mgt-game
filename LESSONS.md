@@ -73,3 +73,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   small input boundary that selects among existing deterministic transitions.
 - Prevention: Add parsers and scenario loaders only when repeated playable
   content needs external authoring or persistence.
+
+## Seeded Inputs Belong Outside The Transition Core
+
+- Context: Replacing per-path hard-coded `ResolvedInputs` with a seeded
+  stochastic input boundary.
+- Symptom: It is tempting to call RNG helpers inside `transition()` once
+  exogenous variation is needed.
+- Cause: The architecture requires stochasticity to be resolved before the
+  deterministic core evaluates state changes.
+- Resolution: Added `resolve_inputs(seed, prior, ruleset)` with named streams
+  and splitmix64 outside `transition()`, then committed resolved inputs into
+  history for replay and debrief.
+- Prevention: Keep all random draws, measurement noise, and exogenous shocks in
+  explicit pre-transition resolution steps; never hide RNG inside the core.

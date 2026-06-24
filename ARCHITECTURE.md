@@ -9,7 +9,7 @@ intended architecture boundaries that future implementation should preserve.
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`
 - Executable: minimal playable CLI over a two-turn deterministic demo with
-  educational debrief in `src/main.rs`
+  seeded resolved inputs and educational debrief in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-23
@@ -17,10 +17,11 @@ Status: Verified
 
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function, explicit resolved
-inputs, actor-specific observation, local strategic decision rationales for a
-commercial insurer and state policy officials, attributed effects, append-only
-history, replay verification, a deterministic end-of-run educational debrief,
-and a small CLI choice among three hard-coded strategy paths.
+inputs derived from a run seed and named streams, actor-specific observation,
+local strategic decision rationales for a commercial insurer and state policy
+officials, attributed effects, append-only history, replay verification, a
+deterministic end-of-run educational debrief, and a small CLI choice among
+three hard-coded strategy paths with optional seed input.
 
 ## Intended System Shape
 
@@ -66,8 +67,9 @@ Responsible for:
 Random draws should become explicit inputs before the deterministic transition
 core is evaluated.
 
-Current proof: `ResolvedInputs` carries measurement noise, delayed access
-reporting, labor pressure, and policy signal values into the transition.
+Current proof: `ResolvedInputs` are derived outside the transition core from a
+run seed, turn index, prior state, and named streams for measurement noise,
+delayed access reporting, labor pressure, and policy signal values.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -97,10 +99,11 @@ Status: Verified
 The initial interface is a CLI. Terminal rendering, input parsing, and display
 formatting should remain outside the deterministic simulation core.
 
-Current proof: `cargo run` prompts for one of three hard-coded strategy paths,
-then prints the two-turn demo summary, replay result, and educational debrief.
-The CLI input boundary selects compiled strategy paths only; there is no general
-command parser or scenario loader yet.
+Current proof: `cargo run` prompts for one of three hard-coded strategy paths
+and an optional run seed, then prints resolved inputs, the two-turn demo
+summary, replay result, and educational debrief. The CLI input boundary selects
+compiled strategy paths and seeds only; there is no general command parser or
+scenario loader yet.
 
 Last Reviewed: 2026-06-23
 Status: Verified

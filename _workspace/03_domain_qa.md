@@ -6,7 +6,7 @@ pass
 
 ## Reviewed Inputs
 
-- User request to implement the approved playable CLI continuation plan.
+- User request to implement the seeded stochastic input boundary plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
@@ -19,20 +19,20 @@ pass
 
 ## Findings
 
-- Scope remains narrow: a minimal CLI choice over three hard-coded two-turn
-  strategy paths rather than a full campaign, parser framework, or scenario
-  loader.
-- Deterministic boundary is explicit: resolved inputs are provided to the
-  transition function, and no hidden randomness, time, filesystem, or network
-  state is used in core transition logic.
-- CLI input is outside the transition core and only selects compiled strategy
-  paths.
-- True state and reported observation are distinct in both code and tests.
-- Invalid commands are separated from unfavorable valid outcomes.
-- Invalid CLI choice is separated from valid unfavorable modeled outcomes.
-- The commercial-insurer and state-policy decisions include inspectable
+- Scope remains narrow: seed-scoped input resolution over the existing two-turn
+  demo rather than a full campaign, parser framework, or scenario loader.
+- Stochasticity is explicit and outside the transition core: `resolve_inputs`
+  derives `ResolvedInputs` from seed, turn, and prior state using named streams.
+- `transition()` contains no RNG, time, filesystem, or network access.
+- True state and reported observation remain distinct in both code and tests.
+- Invalid commands remain separate from unfavorable valid outcomes.
+- Invalid CLI strategy choice and invalid seed input remain separate from modeled
+  outcomes.
+- Commercial-insurer and state-policy decisions still include inspectable
   rationales, and the debrief reports those committed rationales.
-- Prototype formulas are documented as abstractions, limiting false precision.
+- Prototype formulas remain abstractions, limiting false precision.
+- Default seed `42` pins a canonical demo trajectory in tests without claiming
+  empirical calibration.
 
 ## Required Fixes
 
@@ -46,18 +46,16 @@ pass
 - The prototype is still single-file; module boundaries should be revisited when
   repeated CLI behavior, scenario loading, reporting exports, or independent
   testing require it.
+- Removing per-path hard-coded inputs changes default demo outcomes relative to
+  earlier releases; this is documented through seed-pinned tests rather than
+  hidden behavior drift.
 
 ## Verification Evidence
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 23 tests passed.
-- Default `cargo run` selected access stabilization, replayed successfully, and
-  printed the educational debrief.
-- Strategy `2` selected fiscal caution, replayed successfully, and produced
-  insurer accept plus mandate continuation.
-- Strategy `3` selected aggressive bargaining, replayed successfully, and
-  produced insurer rejection plus oversight escalation.
-- Invalid strategy input exited nonzero with an explicit CLI error.
-- Three code-reviewer passes completed; one low-severity handoff wording
-  finding was fixed, with no Critical, High, or Medium findings remaining.
-- GitHub reported no CI checks for the branch.
+- `cargo test` passed: 29 tests passed.
+- Default `cargo run` selected access stabilization and seed `42`, replayed
+  successfully, and printed resolved inputs plus the educational debrief.
+- Invalid seed input exits nonzero with an explicit CLI error.
+- Different seeds change resolved inputs while identical seeds remain
+  deterministic.
