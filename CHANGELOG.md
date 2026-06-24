@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.22] - 2026-06-24
+
+### Added
+
+- [`docs/glossary.md`](docs/glossary.md) — core ontology terms for contributors.
+- [`docs/decision-records/`](docs/decision-records/) — ADR README and template.
+- [`docs/versioning-policy.md`](docs/versioning-policy.md) — code, ruleset, and
+  replay artifact versioning rules.
+
+### Changed
+
+- Bumped package version from `0.1.21` to `0.1.22`.
+- Updated README contributing section with governance doc links.
+
+### Notes
+
+- Docs-only release; no runtime behavior changes. Golden hash unchanged.
+
 ## [0.1.21] - 2026-06-24
 
 ### Added

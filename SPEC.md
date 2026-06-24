@@ -747,11 +747,34 @@ reconstructing it from the diff.
   - Turns 1–4 resolved inputs and turn 4 hash unchanged at seed 42
   - `cargo fmt --check`, `cargo test` (82 tests) pass
 
+- Feature: Phase 0 governance docs
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/phase0-governance-docs
+
+  Summary:
+  Add glossary, architecture decision record conventions, and versioning policy
+  for Phase 0 repository governance without changing runtime behavior.
+
+  Done:
+  - Added `docs/glossary.md`
+  - Added `docs/decision-records/README.md` and `0000-template.md`
+  - Added `docs/versioning-policy.md`
+  - Package version bumped to `0.1.22`
+  - README and CHANGELOG updated
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No clippy policy or release automation
+  - No first accepted ADR beyond template
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Present
 
 ## Future
 
-- Phase 0 governance docs: glossary, decision-record conventions, and versioning
-  policy (CI baseline now in place).
 - Add scenario data loading only after the conceptual model and first action
   vocabulary settle.
