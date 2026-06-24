@@ -334,7 +334,7 @@ reconstructing it from the diff.
 ## Present
 
 - Feature: Phase 2 system boundary and ontology slice
-  Status: Active
+  Status: PR Handoff
   Started: 2026-06-24
   Branch: feat/phase2-system-boundary-ontology
 
@@ -355,9 +355,7 @@ reconstructing it from the diff.
   - Package version bumped to `0.1.10`
   - README status updated to `v0.1.10`
   - Changelog and lessons updated for the documentation slice
-
-  Not Yet Done:
-  - PR handoff
+  - PR handoff opened as GitHub PR #9
 
   Deferred / Non-Goals:
   - No runtime behavior changes
