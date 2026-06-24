@@ -45,6 +45,8 @@ prototype integer parameters.
 
 ## Next Steps
 
+- See [`phase5-scope-register.md`](phase5-scope-register.md) for Phase 5 closure,
+  deferred world elements, and recommended next runtime slice.
 - Use [`actor-cards.md`](actor-cards.md) before adding future strategic actors.
 - Use [`first-scenario-brief.md`](first-scenario-brief.md) to keep first-slice
   runtime expansion bounded.

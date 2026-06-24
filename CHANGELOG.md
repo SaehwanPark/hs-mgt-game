@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.19] - 2026-06-24
+
+### Added
+
+- Added [`docs/phase5-scope-register.md`](docs/phase5-scope-register.md) closing
+  Phase 5 with achieved scope, deferrals, risks, exit-criteria assessment, and
+  next-slice recommendation.
+- Added [`docs/playtest-findings-v0.1.19.md`](docs/playtest-findings-v0.1.19.md)
+  refreshing internal playtest notes for the post-refactor codebase and CI.
+
+### Changed
+
+- Bumped package version from `0.1.18` to `0.1.19`.
+- Updated README documentation links and contributor priorities.
+- Updated evidence registry and workspace handoff artifacts.
+
+### Notes
+
+- Docs-only release; no runtime behavior changes. Golden seed-42 hash unchanged.
+
 ## [0.1.18] - 2026-06-24
 
 ### Added

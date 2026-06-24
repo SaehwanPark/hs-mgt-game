@@ -629,8 +629,6 @@ reconstructing it from the diff.
   - `cargo test`: 77 lib unit tests + 1 integration test (78 total)
   - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
 
-## Present
-
 - Feature: Phase 0 CI baseline
   Status: Complete
   Started: 2026-06-24
@@ -648,9 +646,6 @@ reconstructing it from the diff.
   - Bumped package version to `0.1.18`
   - Updated `CHANGELOG.md`
 
-  Not Yet Done:
-  - PR handoff, three code-reviewer passes, and merge when approved
-
   Deferred / Non-Goals:
   - No clippy policy or release automation
   - No workspace crate split or new gameplay behavior
@@ -660,12 +655,47 @@ reconstructing it from the diff.
   - `cargo fmt --check` passes locally
   - `cargo test` passes locally (78 tests)
 
+## Present
+
+- Feature: Phase 5 scope and risk register
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/phase5-scope-register
+
+  Summary:
+  Close Phase 5 documentation by adding a revised scope and risk register,
+  refreshed internal playtest findings for the post-refactor v0.1.19 codebase,
+  and updated project state files. No runtime behavior changes.
+
+  Done:
+  - Working branch created from `main`
+  - `docs/phase5-scope-register.md` added with achieved, deferred, risk, and
+    exit-criteria assessment
+  - `docs/playtest-findings-v0.1.19.md` added for post-refactor and CI state
+  - `_workspace/final/handoff.md` and `_workspace/03_domain_qa.md` updated
+  - Package version bumped to `0.1.19`
+  - README, CHANGELOG, and evidence-registry cross-links updated
+  - PR handoff opened as GitHub PR #17
+  - Three code-reviewer passes completed; Medium findings fixed
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No new commands, actors, metrics, or random streams
+  - No scenario loader, parameter ledger, or empirical calibration
+  - No competitor, Medicare, or Medicaid runtime implementation in this slice
+
+  Verification:
+  - `cargo fmt --check` passes
+  - `cargo test` passes (78 tests)
+  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
+  - Domain QA pass for scope register wording
+
 ## Future
 
-- Define glossary, decision-record conventions, and versioning policy from
-  roadmap Phase 0 (CI baseline now in place).
-- Convert Phase 1 research into an evidence registry and research-to-design
-  implications memo.
+- Phase 0 governance docs: glossary, decision-record conventions, and versioning
+  policy (CI baseline now in place).
+- Author Phase 1 research-to-design implications memo; expand
+  [`evidence-registry.md`](evidence-registry.md) with parameter-source ledger.
 - Use the actor-card template before adding future strategic actors.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
