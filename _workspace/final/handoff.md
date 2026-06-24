@@ -2,11 +2,11 @@
 
 ## Summary
 
-Implemented the Phase 2 system-boundary and ontology documentation slice for the
-Health Policy Strategy Game. The current fictional regional US market prototype
-now has clearer documentation for actor classes, player and NPC authority,
-state and observation boundaries, command vocabulary, causal categories,
-included and excluded processes, and unresolved evidence work.
+Implemented the Phase 3 actor-card and first-scenario documentation slice for
+the Health Policy Strategy Game. The current fictional regional US market
+prototype now has a reusable actor-card template and a first scenario brief that
+future runtime expansion can use before adding more strategic actors or scenario
+content.
 
 ## Changed Files
 
@@ -14,8 +14,11 @@ included and excluded processes, and unresolved evidence work.
 - `Cargo.lock`
 - `SPEC.md`
 - `README.md`
+- `ARCHITECTURE.md`
 - `CHANGELOG.md`
 - `LESSONS.md`
+- `docs/actor-cards.md`
+- `docs/first-scenario-brief.md`
 - `docs/system-boundary.md`
 - `docs/evidence-registry.md`
 - `_workspace/00_input/request-summary.md`
@@ -30,14 +33,16 @@ included and excluded processes, and unresolved evidence work.
 - `cargo test` passed: 52 tests passed.
 - Default `cargo run` with strategy `1` and seed `42` replayed successfully and
   printed the existing four-turn demo and educational debrief.
-- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/9
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/10
+- GitHub reported no configured checks for the PR branch.
 
 ## Review Summary
 
-- Pass 1: Low finding, stale README status still said `v0.1.9`; fixed.
+- Pass 1: No actionable issues found.
 - Pass 2: No actionable issues found.
-- Pass 3: Low finding, grammar issue in actor table; fixed.
+- Pass 3: No actionable issues found.
 - Critical/High findings: none.
+- Merge-ready: yes, pending any external CI or human review feedback.
 
 ## Known Limits
 
@@ -51,7 +56,7 @@ included and excluded processes, and unresolved evidence work.
 
 ## Next Dependencies
 
-- Create an actor-card template before adding new strategic actor classes.
+- Use the actor-card template before adding new strategic actor classes.
 - Build an evidence-linked parameter ledger before claiming calibration.
 - Define scenario/ruleset versioning before loading external content.
 - Promote distributional outcome vocabulary before external classroom use.

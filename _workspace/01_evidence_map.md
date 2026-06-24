@@ -2,9 +2,10 @@
 
 ## Scope
 
-Map enough project evidence to support the Phase 2 system-boundary and ontology
-draft for the current four-turn deterministic prototype. This evidence map does
-not calibrate formulas or approve new runtime mechanics.
+Map enough project evidence to support the Phase 3 actor-card template and
+first scenario brief for the current four-turn deterministic prototype. This
+evidence map does not calibrate formulas, approve a runtime scenario schema, or
+add new mechanics.
 
 ## Sources Reviewed
 
@@ -17,6 +18,8 @@ not calibrate formulas or approve new runtime mechanics.
 - Current implementation and project docs establish the existing four-turn demo:
   payer negotiation, state-policy response, workforce pressure, coalition
   opportunity, observation revisions, replay, and debrief.
+- `docs/system-boundary.md` identifies a formal actor-card template and scenario
+  vocabulary as deferred ontology work.
 
 ## Boundary Evidence
 
@@ -52,6 +55,12 @@ not calibrate formulas or approve new runtime mechanics.
   pressure.
 - Measurement delay, noise, and revisions enter through explicit resolved inputs
   and observations, preserving a deterministic transition core.
+- Actor cards are a design-control mechanism for future strategic actors. They
+  should prevent future runtime additions from skipping authority, information,
+  outside-option, rationale, and debrief definitions.
+- The first scenario brief is a design-control mechanism for future playable
+  expansion. It should keep runtime work focused on one regional stabilization
+  challenge rather than a general campaign framework.
 
 ## Actor Incentives and Information
 
@@ -97,6 +106,11 @@ not calibrate formulas or approve new runtime mechanics.
   domain review.
 - Document actor authority and information boundaries before adding new actor
   classes.
+- Use the actor-card template before implementing Medicare, Medicaid,
+  competitors, employers, patient groups, regulators, elected officials, or
+  advocacy coalitions as strategic actors.
+- Use the first scenario brief to evaluate whether a runtime slice creates a
+  meaningful player decision and debriefable strategic response.
 - Create a parameter ledger before replacing prototype thresholds with
   evidence-backed ranges.
 

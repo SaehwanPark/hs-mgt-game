@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.11] - 2026-06-24
+
+### Added
+
+- Added a Phase 3 actor-card template for future strategic actor design.
+- Added a first scenario brief for the regional-market stabilization slice.
+- Updated workspace handoff artifacts for the actor/scenario design
+  continuation.
+
+### Changed
+
+- Bumped package version from `0.1.10` to `0.1.11`.
+- Updated project state to move the Phase 2 boundary slice into completed
+  history.
+
 ## [0.1.10] - 2026-06-24
 
 ### Added

@@ -45,6 +45,9 @@ prototype integer parameters.
 
 ## Next Steps
 
+- Use [`actor-cards.md`](actor-cards.md) before adding future strategic actors.
+- Use [`first-scenario-brief.md`](first-scenario-brief.md) to keep first-slice
+  runtime expansion bounded.
 - Link each mechanism row to primary sources as parameters are introduced.
 - Separate empirical calibration ranges from gameplay balancing choices.
 - Add scenario-specific evidence when the first external scenario format lands.

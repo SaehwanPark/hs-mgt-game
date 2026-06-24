@@ -2,8 +2,9 @@
 
 ## Goal and Roadmap Phase
 
-Expand the Phase 2 conceptual boundary for the current fictional regional US
-market prototype while preserving the existing deterministic CLI demo unchanged.
+Add Phase 3 actor and scenario design artifacts for the current fictional
+regional US market prototype while preserving the existing deterministic CLI
+demo unchanged.
 
 ## Slice Boundary
 
@@ -12,11 +13,11 @@ Included:
 - One player-controlled nonprofit health system.
 - Existing commercial insurer, state policy, nursing workforce, and regional
   provider coalition interactions as documented concepts.
-- Actor authority and information boundaries.
+- A reusable actor-card template for future strategic actors.
+- A first scenario brief for the regional-market stabilization challenge.
 - Current true-state, observation, command, event, effect, replay, and debrief
-  vocabulary.
+  vocabulary as constraints on future runtime expansion.
 - Explicit documentation of prototype formulas as abstractions.
-- Deferred ontology work needed before scenario loading or calibration.
 
 Excluded:
 
@@ -32,10 +33,14 @@ Excluded:
 
 ## Documentation Changes
 
-- `docs/system-boundary.md` becomes the primary Phase 2 boundary artifact.
-- `docs/evidence-registry.md` records current mechanism status and unresolved
-  evidence questions without turning into a calibration ledger.
-- `SPEC.md` records coalition work as complete and this Phase 2 slice as active.
+- `docs/actor-cards.md` defines the required design fields before future actor
+  additions.
+- `docs/first-scenario-brief.md` defines the first scenario concept, learning
+  objectives, strategic tensions, observation use, debrief hooks, and non-goals.
+- `docs/system-boundary.md` and `docs/evidence-registry.md` link to these
+  artifacts without approving a runtime format.
+- `SPEC.md` records the Phase 2 boundary slice as complete and this Phase 3
+  slice as active.
 - Workspace artifacts preserve the handoff so future implementation can continue
   without reconstructing the design context from chat history.
 
@@ -82,8 +87,8 @@ Excluded:
 
 ## Open Questions
 
-- Which actor-card template should become canonical once a new actor is added?
 - Which official data sources should anchor first parameter ranges?
 - Which distributional outcomes must be promoted into true state before external
   classroom use?
 - Whether future state fingerprints should use a cryptographic hash.
+- Which actor card should be implemented next once runtime expansion resumes?
