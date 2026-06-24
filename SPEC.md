@@ -861,30 +861,31 @@ reconstructing it from the diff.
 
 ## Present
 
-- Feature: Rich-terminal CLI display
+- Feature: CLI session UX (quit, autosave, guidance, beginner mode)
   Status: Complete
   Started: 2026-06-24
-  Branch: feat/cli-rich-terminal-display
+  Branch: feat/cli-session-ux
 
   Summary:
-  Improve CLI readability with semantic color, emoji section headings, blank-line
-  spacing, and explicit per-turn command prompts with global command footers.
+  Add global quit/help, interactive autosave and resume, new-player cues, and
+  beginner-mode multiple-choice turns without changing the simulation core.
 
   Done:
-  - Added `src/cli/display/style.rs`, `print.rs`, and `prompt.rs`
-  - Wired styled output through interactive session, preset demo, menus, and export
-  - Added style and prompt unit tests
-  - Package version bumped to `0.1.26`
-  - README, CHANGELOG, and SPEC updated
+  - Global input routing (`src/cli/input.rs`) with quit/help at all prompts
+  - Session save format `session-save-0.1.27` and persistence (`src/cli/persistence.rs`)
+  - Resume/start-over startup flow; autosave on interactive quit; clear on completion
+  - Contextual guidance and one-time new-player block (`src/cli/guidance.rs`)
+  - Beginner mode per-turn options from preset strategy paths (`src/cli/beginner.rs`)
+  - ADR-0002, package version `0.1.27`, focused unit tests
 
   Deferred / Non-Goals:
-  - No new Cargo dependencies or TUI framework
-  - No `?`/help mid-run commands
-  - No changes to `transition()`, hash semantics, or replay artifacts
+  - No autosave on every turn or for preset paths
+  - No multi-slot save library or encrypted saves
+  - No changes to `transition()`, golden hash, or replay artifact format
 
   Verification:
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
+  - `cargo fmt --check`, `cargo test` pass (114 tests)
 
 ## Future
 
@@ -894,5 +895,4 @@ reconstructing it from the diff.
   first scenario until brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;
   see [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md).
-- **Mid-run save/load** (Phase 6): replay artifact covers post-run for now.
 - **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.

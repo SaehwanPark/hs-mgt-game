@@ -15,7 +15,8 @@ scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
 parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
 v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
 at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
-preview at v0.1.25, and rich-terminal CLI display at v0.1.26.
+preview at v0.1.25, and rich-terminal CLI display at v0.1.26, and CLI session UX
+(quit, autosave, guidance, beginner mode) at v0.1.27.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -44,6 +45,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Versioning Policy](docs/versioning-policy.md)
 - [Architecture Decision Records](docs/decision-records/README.md)
 - [ADR 0001: Deterministic transition boundary](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
+- [ADR 0002: Mid-run session save](docs/decision-records/0002-mid-run-session-save.md)
 - [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)

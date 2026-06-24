@@ -8,6 +8,7 @@ mod replay_artifact;
 mod resolved;
 mod ruleset;
 mod session;
+mod session_save;
 mod state;
 
 pub use actors::*;
@@ -20,6 +21,7 @@ pub use replay_artifact::*;
 pub use resolved::*;
 pub use ruleset::*;
 pub use session::*;
+pub use session_save::*;
 pub use state::*;
 
 #[cfg(test)]

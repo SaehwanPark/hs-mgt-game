@@ -3,11 +3,13 @@ use crate::cli::default_interactive_commands;
 use crate::model::default_ruleset;
 
 #[test]
-fn play_mode_footer_lists_interactive_and_preset_shortcuts() {
+fn play_mode_footer_lists_interactive_beginner_and_global_commands() {
   let footer = global_commands_footer(PromptContext::PlayMode).join("\n");
 
-  assert!(footer.contains("Interactive"));
+  assert!(footer.contains("interactive"));
+  assert!(footer.contains("beginner"));
   assert!(footer.contains("1/2/3"));
+  assert!(footer.contains("q/quit"));
 }
 
 #[test]
@@ -33,6 +35,7 @@ fn turn_command_prompt_lists_parameters_bounds_defaults_and_global_footer() {
   assert!(text.contains("0–40"));
   assert!(text.contains("8 18 112"));
   assert!(text.contains("Global: Enter"));
+  assert!(text.contains("q/quit"));
 }
 
 #[test]

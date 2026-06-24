@@ -3,10 +3,13 @@ use crate::model::CliError;
 pub fn describe_cli_error(error: &CliError) -> String {
   match error {
     CliError::InvalidPlayModeChoice(choice) => {
-      format!("play mode '{choice}' is not available; use Enter, i, 1, 2, or 3")
+      format!("play mode '{choice}' is not available; use Enter, i, b, 1, 2, or 3")
     }
     CliError::InvalidSeed(seed) => {
       format!("seed '{seed}' is not a valid unsigned integer")
+    }
+    CliError::InvalidResumeChoice(choice) => {
+      format!("resume choice '{choice}' is not available; use r or n")
     }
     CliError::InvalidCommandInput(message) => message.clone(),
     CliError::InvalidStrategyPlan(error) => {
@@ -15,6 +18,7 @@ pub fn describe_cli_error(error: &CliError) -> String {
     CliError::InvalidInteractiveCommand(error) => {
       format!("command is invalid for this turn: {error:?}")
     }
+    CliError::SessionSaveFailed(message) => format!("session save failed: {message}"),
     CliError::InputUnavailable => "could not read input from standard input".to_string(),
   }
 }

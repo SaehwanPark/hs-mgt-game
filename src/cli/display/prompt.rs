@@ -4,29 +4,51 @@ use super::style::{self, EMOJI_BRIEFING};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PromptContext {
+  ResumeChoice,
   PlayMode,
   Seed,
   TurnCommand { turn: u32 },
+  BeginnerTurn { turn: u32 },
   ReplayExport,
 }
 
 pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
   let line = match context {
-    PromptContext::PlayMode => {
-      "Global: Enter or i → Interactive · 1/2/3 → preset strategy paths".to_string()
+    PromptContext::ResumeChoice => {
+      "Global: r → resume · n → start over · ?/help · q/quit/exit".to_string()
     }
-    PromptContext::Seed => format!("Global: Enter → default seed ({DEFAULT_SEED})"),
-    PromptContext::TurnCommand { .. } => "Global: Enter → use defaults listed below".to_string(),
-    PromptContext::ReplayExport => "Global: Enter → skip export".to_string(),
+    PromptContext::PlayMode => {
+      "Global: Enter/i → interactive · b → beginner · 1/2/3 → presets · ?/help · q/quit/exit"
+        .to_string()
+    }
+    PromptContext::Seed => {
+      format!("Global: Enter → default seed ({DEFAULT_SEED}) · ?/help · q/quit/exit")
+    }
+    PromptContext::TurnCommand { .. } => {
+      "Global: Enter → defaults · ?/help · q/quit/exit".to_string()
+    }
+    PromptContext::BeginnerTurn { .. } => {
+      "Global: 1/2/3 → choose option · ?/help · q/quit/exit".to_string()
+    }
+    PromptContext::ReplayExport => "Global: Enter → skip export · ?/help · q/quit/exit".to_string(),
   };
 
   vec![style::subsection("Global commands"), format!("  {line}")]
 }
 
+pub fn resume_choice_prompt_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_STRATEGY, "Saved session found"),
+    style::label_value("Resume", "r — continue where you left off"),
+    style::label_value("Start over", "n — delete autosave and begin fresh"),
+  ]
+}
+
 pub fn play_mode_menu_lines() -> Vec<String> {
   vec![
     style::section_heading(style::EMOJI_STRATEGY, "Choose play mode"),
-    style::dim("  Enter or i → Interactive"),
+    style::dim("  Enter or i → Interactive (standard)"),
+    style::dim("  b → Beginner (guided multiple choice)"),
     style::option_line("1", "Access stabilization", "preset strategy path"),
     style::option_line("2", "Fiscal caution", "preset strategy path"),
     style::option_line("3", "Aggressive bargaining", "preset strategy path"),

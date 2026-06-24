@@ -159,6 +159,9 @@ Status: Verified
   seed, play mode, genesis state, and committed transitions with explicit
   resolved inputs for external verification. This is analysis/reproducibility,
   not cryptographic integrity or mid-run save/load.
+- Mid-run interactive save: **addressed** by `session-save-0.1.27` and
+  [ADR-0002](docs/decision-records/0002-mid-run-session-save.md). Autosave on
+  voluntary quit; resume on startup; separate from replay artifacts.
 - Module boundaries for the deterministic core, CLI, scenario loading, and
   educational debriefing are now established in `src/lib.rs`. Characterization
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root

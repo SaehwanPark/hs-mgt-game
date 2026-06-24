@@ -1,11 +1,25 @@
-use super::{PlayerCommand, ValidationError};
+use super::{History, PlayerCommand, ValidationError};
 
 pub const DEFAULT_SEED: u64 = 42;
+pub const INTERACTIVE_TURN_COUNT: u32 = 5;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ExperienceMode {
+  Standard,
+  Beginner,
+}
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PlayMode {
   Interactive,
   Preset(StrategyPath),
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum SessionOutcome {
+  Completed,
+  QuitSaved,
+  QuitNoSave,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -39,10 +53,18 @@ pub struct StrategyCommitments {
   pub access_posture: i32,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub struct RunConfig {
   pub seed: u64,
   pub play_mode: PlayMode,
+  pub experience_mode: ExperienceMode,
+  pub resume: Option<ResumeState>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct ResumeState {
+  pub history: History,
+  pub next_turn: u32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -52,5 +74,7 @@ pub enum CliError {
   InvalidCommandInput(String),
   InvalidStrategyPlan(ValidationError),
   InvalidInteractiveCommand(ValidationError),
+  InvalidResumeChoice(String),
+  SessionSaveFailed(String),
   InputUnavailable,
 }
