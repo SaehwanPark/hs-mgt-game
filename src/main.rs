@@ -233,6 +233,18 @@ struct StrategyPlan {
   fourth_command: PlayerCommand,
 }
 
+struct StrategyCommitments {
+  staffed_beds: i32,
+  capital_spend: i32,
+  requested_commercial_rate: i32,
+  advocacy_spend: i32,
+  access_commitment: i32,
+  retention_spend: i32,
+  schedule_relief_commitment: i32,
+  coalition_investment: i32,
+  shared_access_commitment: i32,
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum CliError {
   InvalidStrategyChoice(String),
@@ -292,9 +304,123 @@ fn genesis_state() -> WorldState {
 }
 
 fn read_run_config() -> Result<RunConfig, CliError> {
+  print_pre_run_briefing(&genesis_state());
   let strategy = read_strategy_choice()?;
   let seed = read_seed_choice()?;
   Ok(RunConfig { seed, strategy })
+}
+
+fn print_pre_run_briefing(state: &WorldState) {
+  for line in executive_dashboard(state) {
+    println!("{line}");
+  }
+  for line in strategy_previews() {
+    println!("{line}");
+  }
+}
+
+fn executive_dashboard(state: &WorldState) -> Vec<String> {
+  vec![
+    "Executive dashboard".to_string(),
+    format!(
+      "  Cash {cash}, staffed beds {staffed_beds}, access {access}, quality {quality}",
+      cash = state.cash,
+      staffed_beds = state.staffed_beds,
+      access = state.access_index,
+      quality = state.quality_index
+    ),
+    format!(
+      "  Workforce trust {workforce}, community trust {community}, commercial rate {rate}, policy pressure {policy}",
+      workforce = state.workforce_trust,
+      community = state.community_trust,
+      rate = state.commercial_rate,
+      policy = state.policy_pressure
+    ),
+  ]
+}
+
+fn strategy_previews() -> Vec<String> {
+  [
+    StrategyPath::AccessStabilization,
+    StrategyPath::FiscalCaution,
+    StrategyPath::AggressiveBargaining,
+  ]
+  .iter()
+  .enumerate()
+  .map(|(index, choice)| {
+    let plan = strategy_plan(*choice);
+    format!(
+      "  {}. {}: {}",
+      index + 1,
+      plan.name,
+      describe_strategy_commitments(&plan)
+    )
+  })
+  .collect()
+}
+
+fn describe_strategy_commitments(plan: &StrategyPlan) -> String {
+  let commitments = strategy_commitments(plan);
+
+  format!(
+    "adds {staffed_beds} staffed beds, requests commercial rate {requested_commercial_rate}, spends {total_spend} total resource units, and commits {total_commitment} access/workforce/coalition units",
+    staffed_beds = commitments.staffed_beds,
+    requested_commercial_rate = commitments.requested_commercial_rate,
+    total_spend = commitments.capital_spend
+      + commitments.advocacy_spend
+      + commitments.retention_spend
+      + commitments.coalition_investment,
+    total_commitment = commitments.access_commitment
+      + commitments.schedule_relief_commitment
+      + commitments.shared_access_commitment
+  )
+}
+
+fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
+  let &PlayerCommand::StabilizeAccess {
+    add_staffed_beds,
+    capital_spend,
+    requested_commercial_rate,
+  } = &plan.first_command
+  else {
+    panic!("strategy preview expects a capacity command first");
+  };
+
+  let &PlayerCommand::RespondToStateAccessMandate {
+    advocacy_spend,
+    access_commitment,
+  } = &plan.second_command
+  else {
+    panic!("strategy preview expects a policy response command second");
+  };
+
+  let &PlayerCommand::RespondToWorkforcePressure {
+    retention_spend,
+    schedule_relief_commitment,
+  } = &plan.third_command
+  else {
+    panic!("strategy preview expects a workforce response command third");
+  };
+
+  let &PlayerCommand::JoinRegionalAccessCoalition {
+    coalition_investment,
+    shared_access_commitment,
+  } = &plan.fourth_command
+  else {
+    panic!("strategy preview expects a coalition command fourth");
+  };
+
+  StrategyCommitments {
+    staffed_beds: add_staffed_beds,
+    capital_spend,
+    requested_commercial_rate,
+    advocacy_spend,
+    access_commitment,
+    retention_spend,
+    schedule_relief_commitment,
+    coalition_investment,
+    shared_access_commitment,
+  }
 }
 
 fn read_strategy_choice() -> Result<StrategyPath, CliError> {
@@ -2112,6 +2238,41 @@ mod tests {
       parse_seed_choice("abc\n"),
       Err(CliError::InvalidSeed("abc".to_string()))
     );
+  }
+
+  #[test]
+  fn executive_dashboard_reports_starting_state() {
+    let dashboard = executive_dashboard(&genesis_state()).join("\n");
+
+    assert!(dashboard.contains("Executive dashboard"));
+    assert!(dashboard.contains("Cash 100"));
+    assert!(dashboard.contains("staffed beds 120"));
+    assert!(dashboard.contains("access 70"));
+    assert!(dashboard.contains("policy pressure 30"));
+  }
+
+  #[test]
+  fn strategy_previews_cover_all_compiled_paths() {
+    let previews = strategy_previews();
+
+    assert_eq!(previews.len(), 3);
+    assert!(previews[0].contains("1. Access stabilization"));
+    assert!(previews[0].contains("spends 54 total resource units"));
+    assert!(previews[1].contains("2. Fiscal caution"));
+    assert!(previews[1].contains("requests commercial rate 104"));
+    assert!(previews[2].contains("3. Aggressive bargaining"));
+    assert!(previews[2].contains("commits 9 access/workforce/coalition units"));
+  }
+
+  #[test]
+  fn strategy_previews_do_not_describe_future_actor_outcomes() {
+    let previews = strategy_previews().join("\n");
+
+    assert!(!previews.contains("reject"));
+    assert!(!previews.contains("grant flexibility"));
+    assert!(!previews.contains("work action"));
+    assert!(!previews.contains("full partnership"));
+    assert!(!previews.contains("state hash"));
   }
 
   #[test]

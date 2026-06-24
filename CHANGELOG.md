@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.13] - 2026-06-24
+
+### Added
+
+- Added a starting executive dashboard to the CLI.
+- Added strategy commitment previews for the three compiled strategy paths.
+- Added focused tests for dashboard content, preview coverage, and avoiding
+  future actor-outcome leakage in previews.
+
+### Changed
+
+- Bumped package version from `0.1.12` to `0.1.13`.
+- Updated project-state bookkeeping for the merged state-hash replay proof.
+
 ## [0.1.12] - 2026-06-24
 
 ### Added

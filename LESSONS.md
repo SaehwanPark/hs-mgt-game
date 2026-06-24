@@ -170,3 +170,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep replay hash inputs explicit and versioned; add external
   replay artifacts or stronger hash guarantees only when save/load, analysis,
   or release requirements make them necessary.
+
+## CLI Playability Can Improve Without New Input Semantics
+
+- Context: Adding a starting executive dashboard and strategy previews after
+  the replay hash proof.
+- Symptom: It is tempting to make the preview step a command parser, forecast
+  engine, or per-turn choice system.
+- Cause: The first Phase 5 playability need is better pre-run context, while
+  the existing compiled strategy paths still provide the bounded behavior under
+  test.
+- Resolution: Added pure dashboard and commitment-preview helpers derived from
+  existing state and `StrategyPlan` values, without changing transitions,
+  resolved inputs, actor decisions, or replay hashes.
+- Prevention: Keep CLI affordance improvements at the display boundary until
+  the scenario action vocabulary justifies interactive per-turn command entry.
