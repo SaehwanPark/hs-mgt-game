@@ -34,6 +34,7 @@ content.
 - Default `cargo run` with strategy `1` and seed `42` replayed successfully and
   printed the existing four-turn demo and educational debrief.
 - PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/10
+- GitHub reported no configured checks for the PR branch.
 
 ## Review Summary
 
