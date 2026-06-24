@@ -32,10 +32,35 @@ fn uncertainty_preview_reports_turn_spend_bound_from_ruleset() {
   };
 
   let turn_one = turn_uncertainty_preview(&prior, &observation, 1, &ruleset).join("\n");
+  let turn_two = turn_uncertainty_preview(&prior, &observation, 2, &ruleset).join("\n");
   let turn_three = turn_uncertainty_preview(&prior, &observation, 3, &ruleset).join("\n");
+  let turn_four = turn_uncertainty_preview(&prior, &observation, 4, &ruleset).join("\n");
 
   assert!(turn_one.contains(&format!("up to ${} spend", ruleset.max_capital_spend)));
+  assert!(turn_two.contains(&format!("up to ${} spend", ruleset.max_advocacy_spend)));
   assert!(turn_three.contains(&format!("up to ${} spend", ruleset.max_retention_spend)));
+  assert!(turn_four.contains(&format!(
+    "up to ${} spend",
+    ruleset.max_coalition_investment
+  )));
+}
+
+#[test]
+fn uncertainty_preview_includes_prior_access_revision_note() {
+  let ruleset = default_ruleset();
+  let prior = genesis_state();
+  let observation = Observation {
+    actor: "health_system_ceo",
+    reported_access_index: 70,
+    reported_quality_index: 78,
+    prior_access_revision: -2,
+    policy_briefing: "state policy attention is stable",
+    market_competition_briefing: "",
+  };
+  let preview = turn_uncertainty_preview(&prior, &observation, 2, &ruleset).join("\n");
+
+  assert!(preview.contains("Measurement note"));
+  assert!(preview.contains("prior-period access revision -2"));
 }
 
 #[test]

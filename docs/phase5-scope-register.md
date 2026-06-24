@@ -59,7 +59,7 @@ Partially achieved:
 
 | Requirement | Evidence |
 | --- | --- |
-| Comprehensibility | [`playtest-findings-v0.1.21.md`](playtest-findings-v0.1.21.md) |
+| Comprehensibility | [`playtest-findings-v0.1.25.md`](playtest-findings-v0.1.25.md) |
 | Strategic tension | Finance/access/workforce/policy/competition tradeoffs at seed 42 |
 | Causal transparency | Actor rationales, attributed effects, debrief prompts |
 | Pacing | Five-turn bounded slice; no action overload observed |
@@ -74,7 +74,7 @@ Partially achieved:
 | One short scenario | Complete (design) | [`first-scenario-brief.md`](first-scenario-brief.md) |
 | Deterministic replay file | Complete | `replay-artifact-0.1.15` format in `src/artifact/` |
 | End-of-run analysis report | Complete | Debrief output plus replay artifact export |
-| Internal playtest findings | Complete | [`playtest-findings-v0.1.21.md`](playtest-findings-v0.1.21.md) |
+| Internal playtest findings | Complete | [`playtest-findings-v0.1.25.md`](playtest-findings-v0.1.25.md) |
 | Revised scope and risk register | Complete | This document |
 
 ## Deferred (with rationale)
@@ -107,7 +107,6 @@ Partially achieved:
 | --- | --- |
 | Scenario or ruleset file loader | Format design draft planned; runtime loader after approval |
 | Mid-run save/load | Replay artifact export covers post-run reproducibility for now |
-| Forecast UI | Mostly achieved | Observation-only uncertainty preview in interactive mode |
 | Empirical calibration | Prototype integers remain design abstractions per [`evidence-registry.md`](evidence-registry.md) |
 | Graphical interface | CLI-first scope per project proposal |
 | Clippy CI or release automation | Phase 0 CI covers fmt and test only |
@@ -134,7 +133,7 @@ Phase 5 is **closed for the first-scenario bounded slice**. Remaining roadmap
 §5.1 world elements (Medicare, Medicaid, cohorts) and Phase 6 expansion are
 deferred with explicit design gates.
 
-Golden final state hash at seed 42: `6fb1ebbea564274f` (82 tests at v0.1.22).
+Golden final state hash at seed 42: `6fb1ebbea564274f` (86 tests at v0.1.25).
 
 ## Risk register
 
@@ -160,5 +159,5 @@ Per [`SPEC.md`](../SPEC.md) Future backlog and README contributor priorities:
 
 - [`first-scenario-brief.md`](first-scenario-brief.md) — scenario concept and expansion gates
 - [`system-boundary.md`](system-boundary.md) — actor and command boundaries
-- [`playtest-findings-v0.1.21.md`](playtest-findings-v0.1.21.md) — internal playtest record
+- [`playtest-findings-v0.1.25.md`](playtest-findings-v0.1.25.md) — internal playtest record
 - [`evidence-registry.md`](evidence-registry.md) — mechanism evidence status

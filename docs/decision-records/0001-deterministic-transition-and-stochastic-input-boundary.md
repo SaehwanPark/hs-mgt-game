@@ -36,7 +36,7 @@ run configuration.
    verification.
 
 3. **Named random streams.** `inputs/streams.rs` assigns stable stream indices
-   (measurement, access delay/noise, labor, policy, coalition, revision,
+   (measurement, access delay, access noise, labor, policy, coalition, revision,
    competitor) so subsystem changes do not unnecessarily perturb unrelated draws.
 
 4. **Replay integrity via state hash.** Each committed transition stores a

@@ -1,5 +1,8 @@
 use crate::model::{Observation, Ruleset, WorldState};
 
+const ELEVATED_POLICY_PRESSURE_THRESHOLD: i32 = 50;
+const MODERATE_POLICY_PRESSURE_THRESHOLD: i32 = 35;
+
 pub fn turn_uncertainty_preview_header(turn_number: u32) -> String {
   format!("Turn {turn_number} uncertainty preview")
 }
@@ -25,11 +28,14 @@ pub fn turn_uncertainty_preview(
       prior.policy_pressure,
       policy_pressure_label(prior.policy_pressure)
     ),
-    format!(
+  ];
+
+  if !observation.policy_briefing.is_empty() {
+    lines.push(format!(
       "  Policy briefing: {} (not a forecast of actor response)",
       observation.policy_briefing
-    ),
-  ];
+    ));
+  }
 
   if observation.prior_access_revision != 0 {
     lines.push(format!(
@@ -49,6 +55,11 @@ pub fn turn_uncertainty_preview(
 }
 
 fn max_spend_for_turn(turn_number: u32, ruleset: &Ruleset) -> i32 {
+  debug_assert!(
+    (1..=5).contains(&turn_number),
+    "turn_uncertainty_preview supports the five-turn demo only"
+  );
+
   match turn_number {
     1 => ruleset.max_capital_spend,
     2 => ruleset.max_advocacy_spend,
@@ -60,9 +71,10 @@ fn max_spend_for_turn(turn_number: u32, ruleset: &Ruleset) -> i32 {
 }
 
 fn policy_pressure_label(pressure: i32) -> &'static str {
-  if pressure >= 50 {
+  // Prototype 0–100 scale; genesis policy_pressure is 30.
+  if pressure >= ELEVATED_POLICY_PRESSURE_THRESHOLD {
     "elevated"
-  } else if pressure >= 35 {
+  } else if pressure >= MODERATE_POLICY_PRESSURE_THRESHOLD {
     "moderate"
   } else {
     "lower"
