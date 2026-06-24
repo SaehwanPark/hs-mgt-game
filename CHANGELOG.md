@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.6] - 2026-06-23
+
+### Added
+
+- Added a seeded stochastic input boundary with named streams for measurement
+  noise, delayed access reporting, labor pressure, and policy signal resolution.
+- Added optional CLI seed input with default seed `42`.
+- Added focused tests for seed parsing, resolver determinism, seed variation,
+  and canonical demo trajectory pinning.
+
+### Changed
+
+- Bumped package version from `0.1.5` to `0.1.6`.
+- Removed per-path hard-coded `ResolvedInputs` from strategy plans.
+- Moved the merged playable CLI slice into completed project state.
+
 ## [0.1.5] - 2026-06-23
 
 ### Added

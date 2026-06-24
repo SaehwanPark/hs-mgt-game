@@ -2,17 +2,18 @@
 
 ## Scope
 
-Continue development under the preferred workflow by adding the first minimal
-playable CLI choice over the existing deterministic two-turn history and
-educational debrief.
+Continue development under the preferred workflow by adding a seeded stochastic
+input boundary to the existing deterministic two-turn playable CLI demo. Replace
+per-path hard-coded `ResolvedInputs` with deterministic derivation from an
+explicit seed and named random streams before the transition core runs.
 
 ## Roadmap Phase
 
-Primary phase: Phase 5 first vertical slice preparation.
+Primary phase: Phase 4.3 stochastic input boundary completion.
 
-Forward intent: move the architecture proof toward a narrow playable slice by
-letting the player choose among three hard-coded strategy paths without
-implementing scenario loading or a general command parser.
+Forward intent: keep strategy paths as command presets while moving exogenous
+variation behind an inspectable seed boundary that preserves deterministic
+replay.
 
 ## Sources
 
@@ -21,7 +22,6 @@ implementing scenario loading or a general command parser.
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/phase1-lit-review.md`
 - `SPEC.md`
 - `ARCHITECTURE.md`
 
@@ -41,12 +41,11 @@ implementing scenario loading or a general command parser.
 
 ## Non-Goals
 
-- No full campaign.
-- No general command parser.
-- No scenario loader.
-- No external data ingestion.
-- No full policy lifecycle framework.
-- No general debrief framework or instructor export format.
+- No scenario or ruleset file format.
+- No new Cargo dependency.
+- No cryptographic state hash or durable replay artifact.
+- No module split unless unavoidable.
+- No interactive per-turn command entry.
 - No CI, release automation, or contributor-process expansion.
 - No empirical calibration or policy forecasting claim.
 

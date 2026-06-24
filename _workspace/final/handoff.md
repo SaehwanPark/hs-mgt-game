@@ -2,11 +2,12 @@
 
 ## Summary
 
-Implemented the playable CLI continuation slice for the Health Policy Strategy
-Game. The demo now prompts the player to choose access stabilization, fiscal
-caution, or aggressive bargaining, then runs a deterministic two-turn history
-with commercial-insurer response, state access-mandate response, attributed
-effects, state fingerprints, replay verification, and educational debrief.
+Implemented the seeded stochastic input boundary for the Health Policy Strategy
+Game. The demo now prompts for an optional run seed, derives `ResolvedInputs`
+from named streams before each transition, and keeps strategy paths as command
+presets over the existing deterministic two-turn history with commercial-insurer
+response, state access-mandate response, attributed effects, state fingerprints,
+replay verification, and educational debrief.
 
 ## Changed Files
 
@@ -18,7 +19,6 @@ effects, state fingerprints, replay verification, and educational debrief.
 - `CHANGELOG.md`
 - `LESSONS.md`
 - `_workspace/00_input/request-summary.md`
-- `_workspace/01_evidence_map.md`
 - `_workspace/02_mechanism_design.md`
 - `_workspace/03_domain_qa.md`
 - `_workspace/final/handoff.md`
@@ -26,22 +26,15 @@ effects, state fingerprints, replay verification, and educational debrief.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 23 tests passed.
-- Default `cargo run` selected access stabilization, replayed successfully, and
-  printed the educational debrief.
-- Strategy `2` selected fiscal caution, replayed successfully, and produced
-  insurer accept plus mandate continuation.
-- Strategy `3` selected aggressive bargaining, replayed successfully, and
-  produced insurer rejection plus oversight escalation.
-- Invalid strategy input exited nonzero with an explicit CLI error.
-- GitHub PR #5 opened for the slice.
-- Three code-reviewer passes completed; one low-severity handoff wording
-  finding was fixed, with no Critical, High, or Medium findings remaining.
-- GitHub reported no CI checks for the branch.
+- `cargo test` passed: 30 tests passed.
+- Default `cargo run` selected access stabilization and seed `42`, replayed
+  successfully, and printed resolved inputs plus the educational debrief.
+- Seed `99` changed resolved inputs relative to the default seed while remaining
+  deterministic on replay.
+- Invalid seed input exited nonzero with an explicit CLI error.
 
 ## Known Limits
 
-- No interactive CLI.
 - No scenario loader.
 - No empirical calibration.
 - No cryptographic state hash.
@@ -50,10 +43,12 @@ effects, state fingerprints, replay verification, and educational debrief.
 - No general instructor report export.
 - No general command parser.
 - No scenario or ruleset file format.
+- No new Cargo dependency.
 
 ## Next Dependencies
 
 - Revisit module boundaries when repeated CLI behavior, scenario loading, or
   report boundaries need independent ownership.
 - Define a scenario/ruleset versioning format before loading external content.
+- Add a third-turn workforce interaction after the seed boundary is stable.
 - Build an evidence-linked parameter ledger before claiming calibration.

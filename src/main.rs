@@ -1,5 +1,13 @@
 use std::io;
 
+const DEFAULT_SEED: u64 = 42;
+
+const STREAM_MEASUREMENT: u32 = 0;
+const STREAM_ACCESS_DELAY: u32 = 1;
+const STREAM_ACCESS_NOISE: u32 = 2;
+const STREAM_LABOR: u32 = 3;
+const STREAM_POLICY: u32 = 4;
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct WorldState {
   turn: u32,
@@ -141,14 +149,13 @@ enum StrategyPath {
 struct StrategyPlan {
   name: &'static str,
   first_command: PlayerCommand,
-  first_inputs: ResolvedInputs,
   second_command: PlayerCommand,
-  second_inputs: ResolvedInputs,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum CliError {
   InvalidStrategyChoice(String),
+  InvalidSeed(String),
   InvalidStrategyPlan(ValidationError),
   InputUnavailable,
 }
@@ -156,7 +163,7 @@ enum CliError {
 fn main() {
   let ruleset = default_ruleset();
 
-  match read_strategy_choice().and_then(|choice| run_selected_strategy(choice, &ruleset)) {
+  match read_run_config().and_then(|config| run_selected_strategy(config, &ruleset)) {
     Ok(()) => {}
     Err(error) => {
       eprintln!("Unable to run demo: {}", describe_cli_error(&error));
@@ -165,9 +172,15 @@ fn main() {
   }
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct RunConfig {
+  seed: u64,
+  strategy: StrategyPath,
+}
+
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.5",
+    version: "demo-ruleset-0.1.6",
     max_capital_spend: 40,
     max_advocacy_spend: 20,
     target_commercial_rate: 106,
@@ -189,6 +202,12 @@ fn genesis_state() -> WorldState {
   }
 }
 
+fn read_run_config() -> Result<RunConfig, CliError> {
+  let strategy = read_strategy_choice()?;
+  let seed = read_seed_choice()?;
+  Ok(RunConfig { seed, strategy })
+}
+
 fn read_strategy_choice() -> Result<StrategyPath, CliError> {
   println!("Choose a strategy path:");
   println!("  1. Access stabilization");
@@ -203,11 +222,33 @@ fn read_strategy_choice() -> Result<StrategyPath, CliError> {
   parse_strategy_choice(&input)
 }
 
-fn run_selected_strategy(choice: StrategyPath, ruleset: &Ruleset) -> Result<(), CliError> {
-  println!("Selected strategy: {}", strategy_plan(choice).name);
-  let history =
-    build_history_for_strategy(choice, ruleset).map_err(CliError::InvalidStrategyPlan)?;
-  print_demo(&history, ruleset);
+fn read_seed_choice() -> Result<u64, CliError> {
+  println!("Seed (Enter for default {DEFAULT_SEED}):");
+
+  let mut input = String::new();
+  io::stdin()
+    .read_line(&mut input)
+    .map_err(|_| CliError::InputUnavailable)?;
+  parse_seed_choice(&input)
+}
+
+fn parse_seed_choice(input: &str) -> Result<u64, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(DEFAULT_SEED);
+  }
+
+  trimmed
+    .parse::<u64>()
+    .map_err(|_| CliError::InvalidSeed(trimmed.to_string()))
+}
+
+fn run_selected_strategy(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
+  println!("Selected strategy: {}", strategy_plan(config.strategy).name);
+  let history = build_history_for_strategy(config.strategy, config.seed, ruleset)
+    .map_err(CliError::InvalidStrategyPlan)?;
+  print_demo(config.seed, &history, ruleset);
   Ok(())
 }
 
@@ -224,20 +265,18 @@ fn parse_strategy_choice(input: &str) -> Result<StrategyPath, CliError> {
 
 fn build_history_for_strategy(
   choice: StrategyPath,
+  seed: u64,
   ruleset: &Ruleset,
 ) -> Result<History, ValidationError> {
   let plan = strategy_plan(choice);
   let genesis = genesis_state();
-  let first = transition(
-    &genesis,
-    plan.first_command.clone(),
-    plan.first_inputs.clone(),
-    ruleset,
-  )?;
+  let first_inputs = resolve_inputs(seed, &genesis, ruleset);
+  let first = transition(&genesis, plan.first_command.clone(), first_inputs, ruleset)?;
+  let second_inputs = resolve_inputs(seed, &first.next, ruleset);
   let second = transition(
     &first.next,
     plan.second_command.clone(),
-    plan.second_inputs.clone(),
+    second_inputs,
     ruleset,
   )?;
 
@@ -256,21 +295,9 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         capital_spend: 18,
         requested_commercial_rate: 112,
       },
-      first_inputs: ResolvedInputs {
-        measurement_noise: -2,
-        delayed_access_report: 67,
-        labor_sick_call_delta: -3,
-        policy_signal: 4,
-      },
       second_command: PlayerCommand::RespondToStateAccessMandate {
         advocacy_spend: 10,
         access_commitment: 7,
-      },
-      second_inputs: ResolvedInputs {
-        measurement_noise: 1,
-        delayed_access_report: 69,
-        labor_sick_call_delta: 0,
-        policy_signal: 4,
       },
     },
     StrategyPath::FiscalCaution => StrategyPlan {
@@ -280,21 +307,9 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         capital_spend: 10,
         requested_commercial_rate: 104,
       },
-      first_inputs: ResolvedInputs {
-        measurement_noise: 0,
-        delayed_access_report: 74,
-        labor_sick_call_delta: 0,
-        policy_signal: 1,
-      },
       second_command: PlayerCommand::RespondToStateAccessMandate {
         advocacy_spend: 4,
         access_commitment: 5,
-      },
-      second_inputs: ResolvedInputs {
-        measurement_noise: 0,
-        delayed_access_report: 75,
-        labor_sick_call_delta: 0,
-        policy_signal: 1,
       },
     },
     StrategyPath::AggressiveBargaining => StrategyPlan {
@@ -304,21 +319,9 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         capital_spend: 5,
         requested_commercial_rate: 120,
       },
-      first_inputs: ResolvedInputs {
-        measurement_noise: 0,
-        delayed_access_report: 80,
-        labor_sick_call_delta: 0,
-        policy_signal: 2,
-      },
       second_command: PlayerCommand::RespondToStateAccessMandate {
         advocacy_spend: 2,
         access_commitment: 3,
-      },
-      second_inputs: ResolvedInputs {
-        measurement_noise: 0,
-        delayed_access_report: 75,
-        labor_sick_call_delta: 0,
-        policy_signal: 2,
       },
     },
   }
@@ -329,11 +332,59 @@ fn describe_cli_error(error: &CliError) -> String {
     CliError::InvalidStrategyChoice(choice) => {
       format!("strategy choice '{choice}' is not available; use 1, 2, or 3")
     }
+    CliError::InvalidSeed(seed) => {
+      format!("seed '{seed}' is not a valid unsigned integer")
+    }
     CliError::InvalidStrategyPlan(error) => {
       format!("selected strategy is internally invalid: {error:?}")
     }
-    CliError::InputUnavailable => "could not read strategy choice from standard input".to_string(),
+    CliError::InputUnavailable => "could not read input from standard input".to_string(),
   }
+}
+
+fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> ResolvedInputs {
+  // `_ruleset` is reserved for future ruleset-gated stream bounds.
+  let turn = prior.turn;
+
+  let measurement_noise = bounded_i32(stream_rng(seed, turn, STREAM_MEASUREMENT), -5, 5);
+  let access_delay = bounded_u32(stream_rng(seed, turn, STREAM_ACCESS_DELAY), 2, 8);
+  let access_noise = bounded_i32(stream_rng(seed, turn, STREAM_ACCESS_NOISE), -2, 2);
+  let delayed_access_report = clamp_metric(prior.access_index - access_delay as i32 + access_noise);
+  let labor_sick_call_delta = bounded_i32(stream_rng(seed, turn, STREAM_LABOR), -5, 0);
+  let policy_signal = bounded_i32(stream_rng(seed, turn, STREAM_POLICY), 1, 6);
+
+  ResolvedInputs {
+    measurement_noise,
+    delayed_access_report,
+    labor_sick_call_delta,
+    policy_signal,
+  }
+}
+
+fn stream_rng(seed: u64, turn: u32, stream_id: u32) -> u64 {
+  let state = seed
+    .wrapping_add((turn as u64).wrapping_mul(0x517c_c1b7_2722_0a95))
+    .wrapping_add((stream_id as u64).wrapping_mul(0x6c62_272e_07bb_0142));
+  splitmix64(state)
+}
+
+fn splitmix64(mut z: u64) -> u64 {
+  z = z.wrapping_add(0x9e37_79b9_7f4a_7c15);
+  z = (z ^ (z >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+  z = (z ^ (z >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+  z ^ (z >> 31)
+}
+
+fn bounded_u32(value: u64, lo: u32, hi: u32) -> u32 {
+  debug_assert!(lo <= hi, "bounded_u32: hi must be >= lo");
+  let span = (hi - lo + 1) as u64;
+  lo + (value % span) as u32
+}
+
+fn bounded_i32(value: u64, lo: i32, hi: i32) -> i32 {
+  debug_assert!(lo <= hi, "bounded_i32: hi must be >= lo");
+  let span = (hi - lo + 1) as u64;
+  lo + (value % span) as i32
 }
 
 fn transition(
@@ -702,15 +753,23 @@ fn replay(history: &History, ruleset: &Ruleset) -> Result<WorldState, Validation
   Ok(state)
 }
 
-fn print_demo(history: &History, ruleset: &Ruleset) {
+fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
   let replayed = replay(history, ruleset).expect("demo history should replay");
 
   println!("Health Policy Strategy Game deterministic demo");
   println!("Ruleset: {}", ruleset.version);
+  println!("Run seed: {seed}");
   for transition in &history.transitions {
     println!(
       "Turn: {} -> {}",
       transition.prior.turn, transition.next.turn
+    );
+    println!(
+      "Resolved inputs: measurement_noise {}, delayed_access_report {}, labor_sick_call_delta {}, policy_signal {}",
+      transition.resolved_inputs.measurement_noise,
+      transition.resolved_inputs.delayed_access_report,
+      transition.resolved_inputs.labor_sick_call_delta,
+      transition.resolved_inputs.policy_signal
     );
     println!(
       "CEO observation: access {}, quality {}, policy briefing: {}",
@@ -1299,7 +1358,7 @@ mod tests {
       StrategyPath::FiscalCaution,
       StrategyPath::AggressiveBargaining,
     ] {
-      let history = build_history_for_strategy(choice, &ruleset).unwrap();
+      let history = build_history_for_strategy(choice, DEFAULT_SEED, &ruleset).unwrap();
       let final_state = history.transitions.last().unwrap().next.clone();
 
       assert_eq!(history.transitions.len(), 2);
@@ -1308,9 +1367,96 @@ mod tests {
   }
 
   #[test]
+  fn default_seed_resolves_identical_inputs_for_same_turn() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+
+    let first = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+    let second = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+
+    assert_eq!(first, second);
+  }
+
+  #[test]
+  fn different_seeds_can_change_resolved_inputs() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+
+    let default_inputs = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+    let alternate_inputs = resolve_inputs(99, &prior, &ruleset);
+
+    assert_ne!(default_inputs, alternate_inputs);
+  }
+
+  #[test]
+  fn default_seed_reproduces_canonical_demo_trajectory() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(
+      history.transitions[0].resolved_inputs,
+      ResolvedInputs {
+        measurement_noise: 4,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
+      }
+    );
+    assert_eq!(
+      history.transitions[1].resolved_inputs,
+      ResolvedInputs {
+        measurement_noise: -5,
+        delayed_access_report: 70,
+        labor_sick_call_delta: -2,
+        policy_signal: 3,
+      }
+    );
+    assert_eq!(
+      history.transitions[0].actor_decision.decision,
+      ActorDecision::Insurer(InsurerDecision::Reject)
+    );
+    assert_eq!(
+      history.transitions[1].actor_decision.decision,
+      ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility)
+    );
+  }
+
+  #[test]
+  fn empty_seed_choice_defaults_to_default_seed() {
+    assert_eq!(parse_seed_choice("\n").unwrap(), DEFAULT_SEED);
+  }
+
+  #[test]
+  fn numeric_seed_choice_is_parsed() {
+    assert_eq!(parse_seed_choice("99\n").unwrap(), 99);
+  }
+
+  #[test]
+  fn invalid_seed_choice_is_error() {
+    assert_eq!(
+      parse_seed_choice("abc\n"),
+      Err(CliError::InvalidSeed("abc".to_string()))
+    );
+  }
+
+  #[test]
+  fn seed_zero_resolves_bounded_inputs() {
+    let ruleset = default_ruleset();
+    let inputs = resolve_inputs(0, &genesis_state(), &ruleset);
+
+    assert!((-5..=5).contains(&inputs.measurement_noise));
+    assert!((0..=100).contains(&inputs.delayed_access_report));
+    assert!((-5..=0).contains(&inputs.labor_sick_call_delta));
+    assert!((1..=6).contains(&inputs.policy_signal));
+  }
+
+  #[test]
   fn fiscal_caution_accepts_rate_and_proceeds_with_mandate() {
     let ruleset = default_ruleset();
-    let history = build_history_for_strategy(StrategyPath::FiscalCaution, &ruleset).unwrap();
+    let history =
+      build_history_for_strategy(StrategyPath::FiscalCaution, DEFAULT_SEED, &ruleset).unwrap();
 
     assert_eq!(
       history.transitions[0].actor_decision.decision,
@@ -1325,7 +1471,9 @@ mod tests {
   #[test]
   fn aggressive_bargaining_rejects_rate_and_escalates_oversight() {
     let ruleset = default_ruleset();
-    let history = build_history_for_strategy(StrategyPath::AggressiveBargaining, &ruleset).unwrap();
+    let history =
+      build_history_for_strategy(StrategyPath::AggressiveBargaining, DEFAULT_SEED, &ruleset)
+        .unwrap();
 
     assert_eq!(
       history.transitions[0].actor_decision.decision,
@@ -1339,6 +1487,6 @@ mod tests {
 
   fn demo_history() -> History {
     let ruleset = default_ruleset();
-    build_history_for_strategy(StrategyPath::AccessStabilization, &ruleset).unwrap()
+    build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset).unwrap()
   }
 }

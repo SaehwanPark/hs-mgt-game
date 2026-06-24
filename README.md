@@ -6,7 +6,8 @@ The project models health-policy outcomes as the result of strategic interaction
 
 ## Status
 
-Early research and design phase.
+Early research and design phase with a deterministic architecture proof and
+minimal playable CLI demo at v0.1.6.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -62,11 +63,11 @@ The project is not yet ready for broad implementation contributions.
 
 Current priorities are:
 
-1. literature and precedent research;
-2. initial system-boundary definition;
-3. domain ontology and actor framework;
-4. first-scenario design;
-5. deterministic engine proof of concept.
+1. extend the deterministic prototype toward the first vertical slice;
+2. initial system-boundary definition and domain ontology;
+3. literature and precedent research conversion into an evidence registry;
+4. first-scenario design beyond compiled demo paths;
+5. contributor tooling and CI once roadmap conventions are documented.
 
 Before proposing major features or abstractions, review the canonical documents in [`docs/`](docs/).
 

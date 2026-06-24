@@ -167,10 +167,8 @@ reconstructing it from the diff.
   - Identical histories produce identical debrief text
   - Existing transition and replay tests remain passing
 
-## Present
-
 - Feature: Playable CLI slice
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/playable-cli-slice
 
@@ -195,9 +193,7 @@ reconstructing it from the diff.
   - PR handoff opened as GitHub PR #5
   - Three code-reviewer passes completed; one low-severity handoff wording
     finding was fixed
-
-  Not Yet Done:
-  - Merge after review and verification
+  - PR #5 merged into `main`
 
   Deferred / Non-Goals:
   - No full campaign
@@ -217,6 +213,49 @@ reconstructing it from the diff.
   - Aggressive bargaining produces insurer rejection and oversight escalation
   - Existing transition, observation, replay, validation, and debrief tests
     remain passing
+
+## Present
+
+- Feature: Seeded stochastic input boundary
+  Status: Active
+  Started: 2026-06-23
+  Branch: feat/seeded-stochastic-inputs
+
+  Summary:
+  Replace per-path hard-coded `ResolvedInputs` with deterministic derivation
+  from an explicit seed and named random streams before the transition core
+  runs. Strategy paths remain command presets; stochasticity stays outside
+  `transition()`.
+
+  Done:
+  - Working branch created from `main`
+  - Playable CLI slice moved from active state into completed history
+  - Package version bumped to `0.1.6`
+  - Add seed-scoped input resolver with named streams
+  - Extend CLI to accept optional seed
+  - Add focused seed, resolver, and golden-trajectory tests
+  - Update architecture, changelog, lessons, and handoff files
+  - Run final verification commands
+
+  Not Yet Done:
+  - PR handoff and three code-reviewer passes
+  - Merge after review and verification
+
+  Deferred / Non-Goals:
+  - No scenario or ruleset file format
+  - No new Cargo dependency
+  - No cryptographic state hash or durable replay artifact
+  - No module split unless unavoidable
+  - No interactive per-turn command entry
+  - No CI or release automation
+
+  Verification:
+  - Identical seed and commands produce identical resolved inputs and history
+  - Different seeds can change resolved inputs while commands stay fixed
+  - Default seed reproduces access-stabilization golden trajectory
+  - Invalid seed input returns explicit CLI error
+  - `transition()` contains no RNG, time, or I/O
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
 
 ## Future
 
