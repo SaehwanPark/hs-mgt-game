@@ -4,6 +4,34 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.17] - 2026-06-24
+
+### Changed
+
+- Colocated 77 characterization unit tests with owning library modules under
+  `#[cfg(test)]` and added a crate-root golden integration test in
+  `tests/golden_seed42.rs`.
+- Added `src/test_support.rs` for shared test helpers (`demo_history`,
+  `sample_replay_artifact`).
+- Reduced `src/main.rs` to entry-point only (no embedded test module).
+- Bumped package version from `0.1.16` to `0.1.17`.
+
+## [0.1.16] - 2026-06-24
+
+### Changed
+
+- Split the monolithic `src/main.rs` prototype into library modules aligned
+  with architecture boundaries: `model`, `inputs`, `sim`, `actors`, `replay`,
+  `artifact`, `debrief`, and `cli`.
+- Reduced the binary entry point to a thin `main()`; gameplay logic now lives
+  under `src/lib.rs` module tree.
+- Bumped package version from `0.1.15` to `0.1.16`.
+
+### Notes
+
+- All 78 existing tests pass unchanged in behavior; tests remain in `main.rs`
+  pending a follow-up colocation slice.
+
 ## [0.1.15] - 2026-06-24
 
 ### Added

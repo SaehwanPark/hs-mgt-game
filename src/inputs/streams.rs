@@ -1,0 +1,7 @@
+pub(crate) const STREAM_MEASUREMENT: u32 = 0;
+pub(crate) const STREAM_ACCESS_DELAY: u32 = 1;
+pub(crate) const STREAM_ACCESS_NOISE: u32 = 2;
+pub(crate) const STREAM_LABOR: u32 = 3;
+pub(crate) const STREAM_POLICY: u32 = 4;
+pub(crate) const STREAM_COALITION: u32 = 5;
+pub(crate) const STREAM_REVISION: u32 = 6;

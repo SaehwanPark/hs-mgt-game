@@ -541,6 +541,57 @@ reconstructing it from the diff.
 
 ## Present
 
+- Feature: Module boundary refactor
+  Status: Complete
+  Started: 2026-06-24
+  Branch: refactor/module-scaffold
+
+  Summary:
+  Split the 4,436-line monolithic `src/main.rs` into library modules aligned
+  with `ARCHITECTURE.md` boundaries while preserving all gameplay behavior.
+
+  Done:
+  - Added `src/lib.rs` with `model`, `inputs`, `sim`, `actors`, `replay`,
+    `artifact`, `debrief`, and `cli` modules
+  - Reduced `main.rs` entry point to `cli::run()` (tests remain in `main.rs`)
+  - Largest implementation files now under ~650 lines (`artifact/parse.rs`,
+    `sim/transition.rs`)
+  - Package version bumped to `0.1.16`
+  - Updated `ARCHITECTURE.md` and `CHANGELOG.md`
+
+  Not Yet Done:
+  - PR handoff and review loop when approved
+
+  Deferred / Non-Goals:
+  - No workspace crate split
+  - No new gameplay, actors, or dependencies
+  - No scenario loader or CI workflow
+
+  Verification:
+  - `cargo fmt --check`, `cargo test` (78 tests), and `cargo run` smoke pass
+  - Golden seed-42 preset and interactive trajectories unchanged
+
+- Feature: Test colocation slice (R8)
+  Status: Complete
+  Started: 2026-06-24
+  Branch: refactor/module-scaffold
+
+  Summary:
+  Move characterization tests from `main.rs` into module-local `#[cfg(test)]`
+  blocks and add a crate-root golden integration test for seed-42 trajectories.
+
+  Done:
+  - 77 unit tests colocated across `sim`, `replay`, `model`, `inputs`,
+    `debrief`, `cli`, and `artifact` modules
+  - `tests/golden_seed42.rs` integration test for canonical demo trajectory
+  - `src/test_support.rs` shared helpers for cross-module test fixtures
+  - `main.rs` reduced to thin entry point only
+  - Package version bumped to `0.1.17`
+
+  Verification:
+  - `cargo test`: 77 lib unit tests + 1 integration test (78 total)
+  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
+
 - Feature: Replay artifact export and playtest findings slice
   Status: Complete
   Started: 2026-06-24
@@ -594,6 +645,7 @@ reconstructing it from the diff.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
 - Split the prototype into stable module boundaries when the next slice needs
-  more than one command or actor interaction.
+  more than one command or actor interaction. **Done in v0.1.16–0.1.17** (module
+  split plus test colocation and golden integration test).
 - Add scenario data loading only after the conceptual model and first action
   vocabulary settle.

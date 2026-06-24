@@ -7,30 +7,29 @@ intended architecture boundaries that future implementation should preserve.
 
 - Language: Rust
 - Interface: command-line first
-- Package: single Rust package, `hs-mgt-game`
-- Executable: interactive and preset-play CLI over a four-turn deterministic demo
-  with a starting executive dashboard, per-turn executive briefings, strategy
-  previews, seeded resolved inputs, replay state-hash checks, optional replay
-  artifact export, and educational debrief in `src/main.rs`
+- Package: single Rust package, `hs-mgt-game`, with `src/lib.rs` module tree
+- Executable: thin `src/main.rs` entry calling `cli::run()`
+- Library modules:
+  - `model/` — typed world state, commands, history, session types
+  - `inputs/` — seeded stochastic input resolution
+  - `sim/` — deterministic transition core
+  - `actors/` — non-player actor decisions
+  - `replay/` — replay verification and state hashing
+  - `artifact/` — replay artifact serialize/deserialize/verify
+  - `debrief/` — educational debrief generation
+  - `cli/` — terminal I/O, parsers, session loop, display
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-24
 Status: Verified
 
 The current implementation is a compact architecture proof, not a production
-simulation. It demonstrates a pure transition function, explicit resolved
-inputs derived from a run seed and named streams, actor-specific observation,
-local strategic decision rationales for a commercial insurer, state policy
-officials, nursing workforce representative, and regional provider coalition
-liaison, attributed effects, append-only history, stable per-transition state
-hashes, replay verification that detects committed hash drift, a deterministic
-end-of-run educational debrief, optional replay artifact export in
-`replay-artifact-0.1.15` format, and CLI play modes for per-turn interactive
-command entry or three hard-coded preset strategy paths with a starting
-dashboard, commitment previews, and optional seed input. The first Phase 3 design
-artifacts now define the actor-card template and first scenario brief that future
-runtime additions should satisfy before adding new strategic actors or scenario
-content.
+simulation. It demonstrates a pure transition function in `sim/transition.rs`,
+explicit resolved inputs from `inputs/resolve.rs`, actor-specific observation and
+decisions, attributed effects, append-only history, stable per-transition state
+hashes in `replay/hash.rs`, replay verification, deterministic educational
+debrief in `debrief/report.rs`, optional replay artifact export in
+`artifact/`, and CLI play modes in `cli/session.rs`.
 
 ## Intended System Shape
 
@@ -59,9 +58,10 @@ Responsible for:
 
 The core should be testable without terminal I/O.
 
-Current proof location: `src/main.rs`. Each committed transition records a
-stable 64-bit FNV-1a state hash over a canonical, labeled state record. This is
-a deterministic replay check, not a cryptographic integrity guarantee.
+Current proof location: `sim/transition.rs` and `sim/validate.rs`. Each committed
+transition records a stable 64-bit FNV-1a state hash over a canonical, labeled
+state record in `replay/hash.rs`. This is a deterministic replay check, not a
+cryptographic integrity guarantee.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -78,10 +78,10 @@ Responsible for:
 Random draws should become explicit inputs before the deterministic transition
 core is evaluated.
 
-Current proof: `ResolvedInputs` are derived outside the transition core from a
-run seed, turn index, prior state, and named streams for measurement noise,
-delayed access reporting, labor pressure, policy signal values, coalition
-leverage, and prior-period access measurement revisions.
+Current proof: `ResolvedInputs` are derived in `inputs/resolve.rs` from a run
+seed, turn index, prior state, and named streams for measurement noise, delayed
+access reporting, labor pressure, policy signal values, coalition leverage, and
+prior-period access measurement revisions.
 
 Last Reviewed: 2026-06-23
 Status: Verified
@@ -113,15 +113,11 @@ Status: Verified
 The initial interface is a CLI. Terminal rendering, input parsing, and display
 formatting should remain outside the deterministic simulation core.
 
-Current proof: `cargo run` prints a starting executive dashboard and strategy
-commitment previews, prompts for interactive play (default) or one of three
-preset strategy paths and an optional run seed, then either collects four
-per-turn command entries with executive briefings and turn-resolution summaries
-or runs a preset path with the full technical demo dump, replay result, and
-educational debrief, then optionally writes a replay artifact when the player
-provides a path. The CLI input boundary selects play mode, per-turn command
-parameters or compiled strategy paths, seeds, and optional export path only;
-there is no general command parser, scenario loader, or mid-run save format yet.
+Current proof: `cargo run` invokes `cli::run()` for a starting executive
+dashboard and strategy commitment previews, play-mode and seed selection,
+per-turn interactive command entry or preset strategy paths, executive
+briefings, turn-resolution summaries, replay, debrief, and optional replay
+artifact export.
 
 Last Reviewed: 2026-06-24
 Status: Verified
@@ -163,9 +159,10 @@ Status: Verified
   seed, play mode, genesis state, and committed transitions with explicit
   resolved inputs for external verification. This is analysis/reproducibility,
   not cryptographic integrity or mid-run save/load.
-- Module or crate boundaries for the deterministic core, CLI, scenario loading,
-  and educational debriefing once the prototype needs reusable boundaries beyond
-  the compact file.
+- Module boundaries for the deterministic core, CLI, scenario loading, and
+  educational debriefing are now established in `src/lib.rs`. Characterization
+  tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
+  golden integration test lives in `tests/golden_seed42.rs`.
 - Ruleset and scenario versioning format.
 - Decision-record convention.
 - Data and licensing policy.
