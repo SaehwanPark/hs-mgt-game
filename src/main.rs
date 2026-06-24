@@ -7,6 +7,8 @@ const STREAM_ACCESS_DELAY: u32 = 1;
 const STREAM_ACCESS_NOISE: u32 = 2;
 const STREAM_LABOR: u32 = 3;
 const STREAM_POLICY: u32 = 4;
+const STREAM_COALITION: u32 = 5;
+const STREAM_REVISION: u32 = 6;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 struct WorldState {
@@ -28,10 +30,14 @@ struct Ruleset {
   max_advocacy_spend: i32,
   max_retention_spend: i32,
   max_schedule_relief_commitment: i32,
+  max_coalition_investment: i32,
   target_commercial_rate: i32,
   minimum_access_commitment: i32,
   minimum_retention_spend: i32,
   minimum_schedule_relief: i32,
+  minimum_coalition_investment: i32,
+  minimum_shared_access_commitment: i32,
+  max_shared_access_commitment: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -40,6 +46,8 @@ struct ResolvedInputs {
   delayed_access_report: i32,
   labor_sick_call_delta: i32,
   policy_signal: i32,
+  coalition_leverage_signal: i32,
+  access_measurement_revision: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -56,6 +64,10 @@ enum PlayerCommand {
   RespondToWorkforcePressure {
     retention_spend: i32,
     schedule_relief_commitment: i32,
+  },
+  JoinRegionalAccessCoalition {
+    coalition_investment: i32,
+    shared_access_commitment: i32,
   },
 }
 
@@ -89,6 +101,18 @@ enum ValidationError {
     requested: i32,
     available_limit: i32,
   },
+  NegativeCoalitionInvestment {
+    requested: i32,
+  },
+  CoalitionInvestmentTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
+  NonPositiveSharedAccessCommitment,
+  SharedAccessCommitmentTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -113,10 +137,18 @@ enum LaborDecision {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+enum CoalitionDecision {
+  FullPartnership,
+  LimitedParticipation,
+  CoalitionWithdrawal,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 enum ActorDecision {
   Insurer(InsurerDecision),
   StatePolicy(StatePolicyDecision),
   Labor(LaborDecision),
+  Coalition(CoalitionDecision),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -131,6 +163,7 @@ struct Observation {
   actor: &'static str,
   reported_access_index: i32,
   reported_quality_index: i32,
+  prior_access_revision: i32,
   policy_briefing: &'static str,
 }
 
@@ -179,6 +212,7 @@ struct StrategyPlan {
   first_command: PlayerCommand,
   second_command: PlayerCommand,
   third_command: PlayerCommand,
+  fourth_command: PlayerCommand,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -209,15 +243,19 @@ struct RunConfig {
 
 fn default_ruleset() -> Ruleset {
   Ruleset {
-    version: "demo-ruleset-0.1.7",
+    version: "demo-ruleset-0.1.9",
     max_capital_spend: 40,
     max_advocacy_spend: 20,
     max_retention_spend: 25,
     max_schedule_relief_commitment: 20,
+    max_coalition_investment: 20,
     target_commercial_rate: 106,
     minimum_access_commitment: 5,
     minimum_retention_spend: 5,
     minimum_schedule_relief: 3,
+    minimum_coalition_investment: 4,
+    minimum_shared_access_commitment: 4,
+    max_shared_access_commitment: 20,
   }
 }
 
@@ -319,10 +357,17 @@ fn build_history_for_strategy(
     third_inputs,
     ruleset,
   )?;
+  let fourth_inputs = resolve_inputs(seed, &third.next, ruleset);
+  let fourth = transition(
+    &third.next,
+    plan.fourth_command.clone(),
+    fourth_inputs,
+    ruleset,
+  )?;
 
   Ok(History {
     genesis,
-    transitions: vec![first, second, third],
+    transitions: vec![first, second, third, fourth],
   })
 }
 
@@ -343,6 +388,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         retention_spend: 14,
         schedule_relief_commitment: 8,
       },
+      fourth_command: PlayerCommand::JoinRegionalAccessCoalition {
+        coalition_investment: 12,
+        shared_access_commitment: 8,
+      },
     },
     StrategyPath::FiscalCaution => StrategyPlan {
       name: "Fiscal caution",
@@ -359,6 +408,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         retention_spend: 8,
         schedule_relief_commitment: 5,
       },
+      fourth_command: PlayerCommand::JoinRegionalAccessCoalition {
+        coalition_investment: 6,
+        shared_access_commitment: 5,
+      },
     },
     StrategyPath::AggressiveBargaining => StrategyPlan {
       name: "Aggressive bargaining",
@@ -374,6 +427,10 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
       third_command: PlayerCommand::RespondToWorkforcePressure {
         retention_spend: 2,
         schedule_relief_commitment: 2,
+      },
+      fourth_command: PlayerCommand::JoinRegionalAccessCoalition {
+        coalition_investment: 4,
+        shared_access_commitment: 4,
       },
     },
   }
@@ -404,12 +461,20 @@ fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> Resolved
   let delayed_access_report = clamp_metric(prior.access_index - access_delay as i32 + access_noise);
   let labor_sick_call_delta = bounded_i32(stream_rng(seed, turn, STREAM_LABOR), -5, 0);
   let policy_signal = bounded_i32(stream_rng(seed, turn, STREAM_POLICY), 1, 6);
+  let coalition_leverage_signal = bounded_i32(stream_rng(seed, turn, STREAM_COALITION), 1, 6);
+  let access_measurement_revision = if turn > 0 {
+    bounded_i32(stream_rng(seed, turn, STREAM_REVISION), -3, 3)
+  } else {
+    0
+  };
 
   ResolvedInputs {
     measurement_noise,
     delayed_access_report,
     labor_sick_call_delta,
     policy_signal,
+    coalition_leverage_signal,
+    access_measurement_revision,
   }
 }
 
@@ -542,6 +607,38 @@ fn transition(
         ),
       });
     }
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => {
+      next.cash -= coalition_investment;
+      next.access_index += shared_access_commitment / 2;
+      next.community_trust += shared_access_commitment / 4;
+      push_effect(
+        &mut effects,
+        "coalition response",
+        "cash",
+        -coalition_investment,
+      );
+      push_effect(
+        &mut effects,
+        "coalition response",
+        "access_index",
+        shared_access_commitment / 2,
+      );
+      push_effect(
+        &mut effects,
+        "coalition response",
+        "community_trust",
+        shared_access_commitment / 4,
+      );
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "Committed {shared_access_commitment} shared access units and {coalition_investment} coalition investment to join the regional access coalition."
+        ),
+      });
+    }
   }
 
   match &actor_decision.decision {
@@ -647,6 +744,59 @@ fn transition(
           .to_string(),
       });
     }
+    ActorDecision::Coalition(CoalitionDecision::FullPartnership) => {
+      next.community_trust += 4;
+      next.policy_pressure -= 3;
+      next.access_index += 2;
+      push_effect(
+        &mut effects,
+        "regional provider coalition",
+        "community_trust",
+        4,
+      );
+      push_effect(
+        &mut effects,
+        "regional provider coalition",
+        "policy_pressure",
+        -3,
+      );
+      push_effect(
+        &mut effects,
+        "regional provider coalition",
+        "access_index",
+        2,
+      );
+      events.push(Event {
+        actor: "regional_provider_coalition",
+        description:
+          "Accepted full partnership after a credible coalition investment and access commitment."
+            .to_string(),
+      });
+    }
+    ActorDecision::Coalition(CoalitionDecision::LimitedParticipation) => {
+      next.community_trust += 1;
+      push_effect(
+        &mut effects,
+        "regional provider coalition",
+        "community_trust",
+        1,
+      );
+      events.push(Event {
+        actor: "regional_provider_coalition",
+        description: "Offered limited participation while monitoring coalition conditions."
+          .to_string(),
+      });
+    }
+    ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal) => {
+      next.community_trust -= 3;
+      next.policy_pressure += 4;
+      push_effect(&mut effects, "coalition withdrawal", "community_trust", -3);
+      push_effect(&mut effects, "coalition withdrawal", "policy_pressure", 4);
+      events.push(Event {
+        actor: "regional_provider_coalition",
+        description: "Withdrew from the coalition after judging the investment and access commitment insufficient.".to_string(),
+      });
+    }
   }
 
   next.quality_index = clamp_metric(next.quality_index);
@@ -743,6 +893,34 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
         });
       }
     }
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => {
+      if *coalition_investment < 0 {
+        return Err(ValidationError::NegativeCoalitionInvestment {
+          requested: *coalition_investment,
+        });
+      }
+
+      if *coalition_investment > ruleset.max_coalition_investment {
+        return Err(ValidationError::CoalitionInvestmentTooHigh {
+          requested: *coalition_investment,
+          available_limit: ruleset.max_coalition_investment,
+        });
+      }
+
+      if *shared_access_commitment <= 0 {
+        return Err(ValidationError::NonPositiveSharedAccessCommitment);
+      }
+
+      if *shared_access_commitment > ruleset.max_shared_access_commitment {
+        return Err(ValidationError::SharedAccessCommitmentTooHigh {
+          requested: *shared_access_commitment,
+          available_limit: ruleset.max_shared_access_commitment,
+        });
+      }
+    }
   }
 
   Ok(())
@@ -756,6 +934,7 @@ fn requested_commercial_rate(command: &PlayerCommand) -> Option<i32> {
     } => Some(*requested_commercial_rate),
     PlayerCommand::RespondToStateAccessMandate { .. } => None,
     PlayerCommand::RespondToWorkforcePressure { .. } => None,
+    PlayerCommand::JoinRegionalAccessCoalition { .. } => None,
   }
 }
 
@@ -770,6 +949,7 @@ fn observe_for_player(prior: &WorldState, inputs: &ResolvedInputs) -> Observatio
     actor: "health_system_ceo",
     reported_access_index: clamp_metric(inputs.delayed_access_report + inputs.measurement_noise),
     reported_quality_index: prior.quality_index,
+    prior_access_revision: inputs.access_measurement_revision,
     policy_briefing,
   }
 }
@@ -803,6 +983,17 @@ fn actor_decision(
       prior.workforce_trust,
       *retention_spend,
       *schedule_relief_commitment,
+      observation,
+      inputs,
+      ruleset,
+    ),
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => coalition_decision(
+      prior.community_trust,
+      *coalition_investment,
+      *shared_access_commitment,
       observation,
       inputs,
       ruleset,
@@ -942,6 +1133,67 @@ fn labor_decision(
   }
 }
 
+fn coalition_decision(
+  prior_community_trust: i32,
+  coalition_investment: i32,
+  shared_access_commitment: i32,
+  observation: &Observation,
+  inputs: &ResolvedInputs,
+  ruleset: &Ruleset,
+) -> ActorDecisionRecord {
+  let strong_investment_threshold = ruleset.minimum_coalition_investment * 2 + 2;
+  let strong_commitment_threshold = ruleset.minimum_shared_access_commitment * 2;
+  let strong_offer = coalition_investment >= strong_investment_threshold
+    && shared_access_commitment >= strong_commitment_threshold;
+  let credible_offer = coalition_investment >= ruleset.minimum_coalition_investment
+    && shared_access_commitment >= ruleset.minimum_shared_access_commitment;
+
+  let (decision, rationale) = if strong_offer {
+    (
+      CoalitionDecision::FullPartnership,
+      format!(
+        "Coalition investment {coalition_investment} and shared access commitment {shared_access_commitment} give the coalition a defensible partnership path under reported access {} and leverage {}.",
+        observation.reported_access_index, inputs.coalition_leverage_signal
+      ),
+    )
+  } else if credible_offer
+    && coalition_investment <= ruleset.minimum_coalition_investment + 1
+    && shared_access_commitment <= ruleset.minimum_shared_access_commitment + 1
+    && (inputs.coalition_leverage_signal >= 4 || prior_community_trust < 62)
+  {
+    (
+      CoalitionDecision::CoalitionWithdrawal,
+      format!(
+        "Coalition investment {coalition_investment} and shared access commitment {shared_access_commitment} are too weak after community trust fell to {prior_community_trust} under leverage {}.",
+        inputs.coalition_leverage_signal
+      ),
+    )
+  } else if credible_offer {
+    (
+      CoalitionDecision::LimitedParticipation,
+      format!(
+        "Coalition investment {coalition_investment} and shared access commitment {shared_access_commitment} are credible but do not justify full partnership under community trust {prior_community_trust}."
+      ),
+    )
+  } else {
+    (
+      CoalitionDecision::CoalitionWithdrawal,
+      format!(
+        "Coalition investment {coalition_investment} and shared access commitment {shared_access_commitment} fall below credible thresholds {} and {} under leverage {}.",
+        ruleset.minimum_coalition_investment,
+        ruleset.minimum_shared_access_commitment,
+        inputs.coalition_leverage_signal
+      ),
+    )
+  };
+
+  ActorDecisionRecord {
+    actor: "regional_provider_coalition",
+    decision: ActorDecision::Coalition(decision),
+    rationale,
+  }
+}
+
 fn replay(history: &History, ruleset: &Ruleset) -> Result<WorldState, ValidationError> {
   let mut state = history.genesis.clone();
 
@@ -970,16 +1222,19 @@ fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
       transition.prior.turn, transition.next.turn
     );
     println!(
-      "Resolved inputs: measurement_noise {}, delayed_access_report {}, labor_sick_call_delta {}, policy_signal {}",
+      "Resolved inputs: measurement_noise {}, delayed_access_report {}, labor_sick_call_delta {}, policy_signal {}, coalition_leverage_signal {}, access_measurement_revision {}",
       transition.resolved_inputs.measurement_noise,
       transition.resolved_inputs.delayed_access_report,
       transition.resolved_inputs.labor_sick_call_delta,
-      transition.resolved_inputs.policy_signal
+      transition.resolved_inputs.policy_signal,
+      transition.resolved_inputs.coalition_leverage_signal,
+      transition.resolved_inputs.access_measurement_revision
     );
     println!(
-      "CEO observation: access {}, quality {}, policy briefing: {}",
+      "CEO observation: access {}, quality {}, prior access revision {}, policy briefing: {}",
       transition.observation.reported_access_index,
       transition.observation.reported_quality_index,
+      transition.observation.prior_access_revision,
       transition.observation.policy_briefing
     );
     println!(
@@ -1046,7 +1301,21 @@ fn educational_debrief(history: &History) -> Vec<String> {
     .collect::<Vec<_>>()
     .join("; ");
 
-  vec![
+  let revision_notes = history
+    .transitions
+    .iter()
+    .filter(|transition| transition.observation.prior_access_revision != 0)
+    .map(|transition| {
+      format!(
+        "turn {} revised the prior reported access estimate by {}",
+        transition.prior.turn + 1,
+        transition.observation.prior_access_revision
+      )
+    })
+    .collect::<Vec<_>>()
+    .join("; ");
+
+  let mut lines = vec![
     format!(
       "Run-level tradeoff: cash moved from {} to {}, access from {} to {}, workforce trust from {} to {}, community trust from {} to {}, policy pressure from {} to {}, and commercial rate from {} to {}.",
       initial.cash,
@@ -1064,9 +1333,17 @@ fn educational_debrief(history: &History) -> Vec<String> {
     ),
     format!("Actor rationales at decision time: {actor_rationales}"),
     format!("Attributed mechanisms to inspect: {effect_summary}."),
-    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, and the workforce retention tradeoff?".to_string(),
+    "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, the workforce retention tradeoff, and the coalition investment choice?".to_string(),
     "Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.".to_string(),
-  ]
+  ];
+
+  if !revision_notes.is_empty() {
+    lines.push(format!(
+      "Observation revision note: {revision_notes}. Prior committed observations remain unchanged in history; revisions affect only the current briefing."
+    ));
+  }
+
+  lines
 }
 
 fn push_effect(
@@ -1101,6 +1378,13 @@ fn describe_actor_decision(decision: &ActorDecision) -> String {
     ActorDecision::Labor(LaborDecision::Cooperative) => "cooperative".to_string(),
     ActorDecision::Labor(LaborDecision::LimitedSupport) => "limited support".to_string(),
     ActorDecision::Labor(LaborDecision::WorkAction) => "work action".to_string(),
+    ActorDecision::Coalition(CoalitionDecision::FullPartnership) => "full partnership".to_string(),
+    ActorDecision::Coalition(CoalitionDecision::LimitedParticipation) => {
+      "limited participation".to_string()
+    }
+    ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal) => {
+      "coalition withdrawal".to_string()
+    }
   }
 }
 
@@ -1142,6 +1426,8 @@ mod tests {
       delayed_access_report: 67,
       labor_sick_call_delta: -3,
       policy_signal: 4,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -1164,6 +1450,8 @@ mod tests {
       delayed_access_report: 60,
       labor_sick_call_delta: 0,
       policy_signal: 1,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1192,6 +1480,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1217,6 +1507,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1239,6 +1531,8 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1264,6 +1558,8 @@ mod tests {
       delayed_access_report: 80,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1296,6 +1592,8 @@ mod tests {
         delayed_access_report: 67,
         labor_sick_call_delta: -3,
         policy_signal: 4,
+        coalition_leverage_signal: 1,
+        access_measurement_revision: 0,
       },
       &ruleset,
     )
@@ -1321,6 +1619,8 @@ mod tests {
       delayed_access_report: 69,
       labor_sick_call_delta: 0,
       policy_signal: 4,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -1346,6 +1646,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1367,6 +1669,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1391,6 +1695,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1412,6 +1718,8 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 1,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1436,6 +1744,8 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 2,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1468,6 +1778,8 @@ mod tests {
         delayed_access_report: 67,
         labor_sick_call_delta: -3,
         policy_signal: 4,
+        coalition_leverage_signal: 1,
+        access_measurement_revision: 0,
       },
       &ruleset,
     )
@@ -1483,6 +1795,8 @@ mod tests {
         delayed_access_report: 69,
         labor_sick_call_delta: 0,
         policy_signal: 4,
+        coalition_leverage_signal: 1,
+        access_measurement_revision: 0,
       },
       &ruleset,
     )
@@ -1503,9 +1817,10 @@ mod tests {
     assert!(debrief.contains("commercial_insurer:"));
     assert!(debrief.contains("state_policy_officials:"));
     assert!(debrief.contains("nursing_workforce:"));
+    assert!(debrief.contains("regional_provider_coalition:"));
     assert!(debrief.contains("Reported access"));
     assert!(debrief.contains("Access commitment"));
-    assert!(debrief.contains("workforce retention tradeoff"));
+    assert!(debrief.contains("coalition investment choice"));
   }
 
   #[test]
@@ -1513,11 +1828,12 @@ mod tests {
     let history = demo_history();
     let debrief = educational_debrief(&history).join("\n");
 
-    assert!(debrief.contains("cash moved from 100 to 58"));
-    assert!(debrief.contains("access from 70 to 77"));
+    assert!(debrief.contains("cash moved from 100 to 46"));
+    assert!(debrief.contains("access from 70 to 83"));
     assert!(debrief.contains("capacity investment changed cash by -18"));
     assert!(debrief.contains("state policy response changed community_trust by 2"));
     assert!(debrief.contains("workforce response changed cash by"));
+    assert!(debrief.contains("coalition response changed cash by"));
   }
 
   #[test]
@@ -1572,7 +1888,7 @@ mod tests {
       let history = build_history_for_strategy(choice, DEFAULT_SEED, &ruleset).unwrap();
       let final_state = history.transitions.last().unwrap().next.clone();
 
-      assert_eq!(history.transitions.len(), 3);
+      assert_eq!(history.transitions.len(), 4);
       assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
     }
   }
@@ -1613,6 +1929,8 @@ mod tests {
         delayed_access_report: 67,
         labor_sick_call_delta: -3,
         policy_signal: 4,
+        coalition_leverage_signal: 2,
+        access_measurement_revision: 0,
       }
     );
     assert_eq!(
@@ -1622,6 +1940,8 @@ mod tests {
         delayed_access_report: 70,
         labor_sick_call_delta: -2,
         policy_signal: 3,
+        coalition_leverage_signal: 4,
+        access_measurement_revision: -1,
       }
     );
     assert_eq!(
@@ -1639,6 +1959,8 @@ mod tests {
         delayed_access_report: 69,
         labor_sick_call_delta: -5,
         policy_signal: 1,
+        coalition_leverage_signal: 2,
+        access_measurement_revision: 2,
       }
     );
     assert_eq!(
@@ -1646,8 +1968,23 @@ mod tests {
       ActorDecision::Labor(LaborDecision::Cooperative)
     );
     assert_eq!(
+      history.transitions[3].resolved_inputs,
+      ResolvedInputs {
+        measurement_noise: -2,
+        delayed_access_report: 71,
+        labor_sick_call_delta: -5,
+        policy_signal: 5,
+        coalition_leverage_signal: 3,
+        access_measurement_revision: -1,
+      }
+    );
+    assert_eq!(
+      history.transitions[3].actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::FullPartnership)
+    );
+    assert_eq!(
       history.transitions.last().unwrap().state_fingerprint,
-      "demo-ruleset-0.1.7:3:58:128:77:80:68:65:100:33"
+      "demo-ruleset-0.1.9:4:46:128:83:80:68:71:100:35"
     );
   }
 
@@ -1678,6 +2015,8 @@ mod tests {
     assert!((0..=100).contains(&inputs.delayed_access_report));
     assert!((-5..=0).contains(&inputs.labor_sick_call_delta));
     assert!((1..=6).contains(&inputs.policy_signal));
+    assert!((1..=6).contains(&inputs.coalition_leverage_signal));
+    assert!((-3..=3).contains(&inputs.access_measurement_revision));
   }
 
   #[test]
@@ -1731,6 +2070,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: -4,
       policy_signal: 2,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -1756,6 +2097,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1777,6 +2120,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1801,6 +2146,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1822,6 +2169,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: -4,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1839,14 +2188,14 @@ mod tests {
   }
 
   #[test]
-  fn replay_reproduces_three_transition_history() {
+  fn replay_reproduces_four_transition_history() {
     let ruleset = default_ruleset();
     let history =
       build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
         .unwrap();
     let final_state = history.transitions.last().unwrap().next.clone();
 
-    assert_eq!(history.transitions.len(), 3);
+    assert_eq!(history.transitions.len(), 4);
     assert_eq!(replay(&history, &ruleset).unwrap(), final_state);
   }
 
@@ -1863,6 +2212,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     assert_eq!(
@@ -1887,6 +2238,8 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
     };
 
     let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -1910,6 +2263,31 @@ mod tests {
   }
 
   #[test]
+  fn aggressive_bargaining_triggers_coalition_withdrawal_on_fourth_turn() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AggressiveBargaining, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(
+      history.transitions[3].actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal)
+    );
+  }
+
+  #[test]
+  fn fiscal_caution_triggers_limited_coalition_participation() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::FiscalCaution, DEFAULT_SEED, &ruleset).unwrap();
+
+    assert_eq!(
+      history.transitions[3].actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::LimitedParticipation)
+    );
+  }
+
+  #[test]
   fn aggressive_bargaining_triggers_work_action_on_workforce_turn() {
     let ruleset = default_ruleset();
     let history =
@@ -1919,6 +2297,205 @@ mod tests {
     assert_eq!(
       history.transitions[2].actor_decision.decision,
       ActorDecision::Labor(LaborDecision::WorkAction)
+    );
+  }
+
+  #[test]
+  fn coalition_response_is_deterministic() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 12,
+      shared_access_commitment: 8,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 2,
+      coalition_leverage_signal: 5,
+      access_measurement_revision: 0,
+    };
+
+    let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
+    let second = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(first, second);
+    assert_eq!(
+      first.actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::FullPartnership)
+    );
+  }
+
+  #[test]
+  fn negative_coalition_investment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: -1,
+      shared_access_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NegativeCoalitionInvestment { requested: -1 })
+    );
+  }
+
+  #[test]
+  fn excessive_coalition_investment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 25,
+      shared_access_commitment: 5,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::CoalitionInvestmentTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn non_positive_shared_access_commitment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 8,
+      shared_access_commitment: 0,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::NonPositiveSharedAccessCommitment)
+    );
+  }
+
+  #[test]
+  fn genesis_turn_has_no_access_measurement_revision() {
+    let ruleset = default_ruleset();
+    let inputs = resolve_inputs(DEFAULT_SEED, &genesis_state(), &ruleset);
+
+    assert_eq!(inputs.access_measurement_revision, 0);
+  }
+
+  #[test]
+  fn later_turn_can_revise_prior_reported_access_in_observation() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(history.transitions[1].observation.prior_access_revision, -1);
+    assert_eq!(history.transitions[0].observation.prior_access_revision, 0);
+  }
+
+  #[test]
+  fn debrief_notes_observation_revisions_without_rewriting_history() {
+    let history = demo_history();
+    let debrief = educational_debrief(&history).join("\n");
+
+    assert!(debrief.contains("Observation revision note:"));
+    assert!(debrief.contains("Prior committed observations remain unchanged"));
+    assert_eq!(history.transitions[0].observation.prior_access_revision, 0);
+  }
+
+  #[test]
+  fn excessive_shared_access_commitment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 8,
+      shared_access_commitment: 25,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
+    };
+
+    assert_eq!(
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::SharedAccessCommitmentTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn access_stabilization_triggers_full_coalition_partnership() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(
+      history.transitions[3].actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::FullPartnership)
+    );
+  }
+
+  #[test]
+  fn unfavorable_coalition_outcome_is_not_validation_failure() {
+    let ruleset = default_ruleset();
+    let mut prior = genesis_state();
+    prior.community_trust = 55;
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 4,
+      shared_access_commitment: 4,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 3,
+      access_measurement_revision: 0,
+    };
+
+    let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+    assert_eq!(
+      result.actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal)
+    );
+    assert!(
+      result
+        .events
+        .iter()
+        .any(|event| event.description.contains("Withdrew"))
     );
   }
 }

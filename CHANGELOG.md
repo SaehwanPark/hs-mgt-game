@@ -4,6 +4,46 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.9] - 2026-06-23
+
+### Added
+
+- Added prior-period access measurement revisions via a named revision stream in
+  resolved inputs.
+- Added observation revision notes to the educational debrief without rewriting
+  committed history.
+- Added focused tests for genesis revision bounds, later-turn revision
+  briefings, and debrief revision notes.
+- Added initial `docs/system-boundary.md` and `docs/evidence-registry.md`
+  design stubs.
+
+### Changed
+
+- Bumped package version from `0.1.8` to `0.1.9`.
+- Updated ruleset version to `demo-ruleset-0.1.9`.
+- Updated golden trajectory pinning for observation revision inputs.
+
+## [0.1.8] - 2026-06-23
+
+### Added
+
+- Added a fourth-turn regional access coalition command with coalition liaison
+  decisions and inspectable rationales.
+- Added coalition investment and shared access commitment validation.
+- Added a named coalition leverage stream to resolved inputs.
+- Extended strategy paths with fourth compiled coalition posture presets.
+- Added focused tests for coalition determinism, validation failures, unfavorable
+  coalition outcomes, four-transition replay, and updated golden trajectory
+  pinning.
+
+### Changed
+
+- Bumped package version from `0.1.7` to `0.1.8`.
+- Extended demo history from three to four transitions.
+- Updated educational debrief to include coalition rationales and a coalition
+  tradeoff prompt.
+- Moved the merged workforce pressure slice into completed project state.
+
 ## [0.1.7] - 2026-06-23
 
 ### Added
