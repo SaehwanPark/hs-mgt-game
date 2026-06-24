@@ -37,6 +37,7 @@ struct Ruleset {
   minimum_schedule_relief: i32,
   minimum_coalition_investment: i32,
   minimum_shared_access_commitment: i32,
+  max_shared_access_commitment: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -108,6 +109,10 @@ enum ValidationError {
     available_limit: i32,
   },
   NonPositiveSharedAccessCommitment,
+  SharedAccessCommitmentTooHigh {
+    requested: i32,
+    available_limit: i32,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -250,6 +255,7 @@ fn default_ruleset() -> Ruleset {
     minimum_schedule_relief: 3,
     minimum_coalition_investment: 4,
     minimum_shared_access_commitment: 4,
+    max_shared_access_commitment: 20,
   }
 }
 
@@ -907,6 +913,13 @@ fn validate_command(command: &PlayerCommand, ruleset: &Ruleset) -> Result<(), Va
       if *shared_access_commitment <= 0 {
         return Err(ValidationError::NonPositiveSharedAccessCommitment);
       }
+
+      if *shared_access_commitment > ruleset.max_shared_access_commitment {
+        return Err(ValidationError::SharedAccessCommitmentTooHigh {
+          requested: *shared_access_commitment,
+          available_limit: ruleset.max_shared_access_commitment,
+        });
+      }
     }
   }
 
@@ -1134,9 +1147,8 @@ fn coalition_decision(
     && shared_access_commitment >= strong_commitment_threshold;
   let credible_offer = coalition_investment >= ruleset.minimum_coalition_investment
     && shared_access_commitment >= ruleset.minimum_shared_access_commitment;
-  let coalition_pressure = inputs.coalition_leverage_signal >= 5 || prior_community_trust < 58;
 
-  let (decision, rationale) = if strong_offer && coalition_pressure {
+  let (decision, rationale) = if strong_offer {
     (
       CoalitionDecision::FullPartnership,
       format!(
@@ -1414,7 +1426,7 @@ mod tests {
       delayed_access_report: 67,
       labor_sick_call_delta: -3,
       policy_signal: 4,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1438,7 +1450,7 @@ mod tests {
       delayed_access_report: 60,
       labor_sick_call_delta: 0,
       policy_signal: 1,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1468,7 +1480,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1495,7 +1507,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1519,7 +1531,7 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1546,7 +1558,7 @@ mod tests {
       delayed_access_report: 80,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1580,7 +1592,7 @@ mod tests {
         delayed_access_report: 67,
         labor_sick_call_delta: -3,
         policy_signal: 4,
-        coalition_leverage_signal: 0,
+        coalition_leverage_signal: 1,
         access_measurement_revision: 0,
       },
       &ruleset,
@@ -1607,7 +1619,7 @@ mod tests {
       delayed_access_report: 69,
       labor_sick_call_delta: 0,
       policy_signal: 4,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1634,7 +1646,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1657,7 +1669,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1683,7 +1695,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1706,7 +1718,7 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 1,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1732,7 +1744,7 @@ mod tests {
       delayed_access_report: 75,
       labor_sick_call_delta: 0,
       policy_signal: 2,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -1766,7 +1778,7 @@ mod tests {
         delayed_access_report: 67,
         labor_sick_call_delta: -3,
         policy_signal: 4,
-        coalition_leverage_signal: 0,
+        coalition_leverage_signal: 1,
         access_measurement_revision: 0,
       },
       &ruleset,
@@ -1783,7 +1795,7 @@ mod tests {
         delayed_access_report: 69,
         labor_sick_call_delta: 0,
         policy_signal: 4,
-        coalition_leverage_signal: 0,
+        coalition_leverage_signal: 1,
         access_measurement_revision: 0,
       },
       &ruleset,
@@ -1817,7 +1829,7 @@ mod tests {
     let debrief = educational_debrief(&history).join("\n");
 
     assert!(debrief.contains("cash moved from 100 to 46"));
-    assert!(debrief.contains("access from 70 to 81"));
+    assert!(debrief.contains("access from 70 to 83"));
     assert!(debrief.contains("capacity investment changed cash by -18"));
     assert!(debrief.contains("state policy response changed community_trust by 2"));
     assert!(debrief.contains("workforce response changed cash by"));
@@ -1968,11 +1980,11 @@ mod tests {
     );
     assert_eq!(
       history.transitions[3].actor_decision.decision,
-      ActorDecision::Coalition(CoalitionDecision::LimitedParticipation)
+      ActorDecision::Coalition(CoalitionDecision::FullPartnership)
     );
     assert_eq!(
       history.transitions.last().unwrap().state_fingerprint,
-      "demo-ruleset-0.1.9:4:46:128:81:80:68:68:100:38"
+      "demo-ruleset-0.1.9:4:46:128:83:80:68:71:100:35"
     );
   }
 
@@ -2058,7 +2070,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: -4,
       policy_signal: 2,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2085,7 +2097,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2108,7 +2120,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2134,7 +2146,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2157,7 +2169,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: -4,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2200,7 +2212,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2226,7 +2238,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2328,7 +2340,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2351,7 +2363,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2377,7 +2389,7 @@ mod tests {
       delayed_access_report: 70,
       labor_sick_call_delta: 0,
       policy_signal: 0,
-      coalition_leverage_signal: 0,
+      coalition_leverage_signal: 1,
       access_measurement_revision: 0,
     };
 
@@ -2413,9 +2425,45 @@ mod tests {
 
     assert!(debrief.contains("Observation revision note:"));
     assert!(debrief.contains("Prior committed observations remain unchanged"));
+    assert_eq!(history.transitions[0].observation.prior_access_revision, 0);
+  }
+
+  #[test]
+  fn excessive_shared_access_commitment_is_validation_failure() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let command = PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: 8,
+      shared_access_commitment: 25,
+    };
+    let inputs = ResolvedInputs {
+      measurement_noise: 0,
+      delayed_access_report: 70,
+      labor_sick_call_delta: 0,
+      policy_signal: 0,
+      coalition_leverage_signal: 1,
+      access_measurement_revision: 0,
+    };
+
     assert_eq!(
-      history.transitions[0].observation.prior_access_revision,
-      history.transitions[0].observation.prior_access_revision
+      transition(&prior, command, inputs, &ruleset),
+      Err(ValidationError::SharedAccessCommitmentTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn access_stabilization_triggers_full_coalition_partnership() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+
+    assert_eq!(
+      history.transitions[3].actor_decision.decision,
+      ActorDecision::Coalition(CoalitionDecision::FullPartnership)
     );
   }
 
