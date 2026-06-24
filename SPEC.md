@@ -803,22 +803,43 @@ reconstructing it from the diff.
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (82 tests)
 
+- Feature: First architecture decision record and scenario format draft
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/adr-deterministic-boundary
+
+  Summary:
+  Record the implemented deterministic transition and stochastic input boundary
+  as ADR 0001 and add a Phase 6.2 scenario format design draft without runtime
+  changes.
+
+  Done:
+  - Added `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`
+  - Added `docs/scenario-format-draft.md`
+  - Updated `ARCHITECTURE.md` open decisions and stream/actor proof sections
+  - Updated decision-records README with accepted ADR link
+  - Package version bumped to `0.1.24`
+  - README, CHANGELOG, and SPEC updated
+
+  Deferred / Non-Goals:
+  - No runtime changes
+  - No scenario loader implementation
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Present
 
 ## Future
 
 - **Forecast/uncertainty CLI preview** (Phase 5 hardening): bounded observation-only
   preview before interactive turns; no probabilistic forecast objects.
-- **First architecture decision record** (Phase 0/4): ADR 0001 for deterministic
-  transition and stochastic input boundary.
-- **Scenario/ruleset format design draft** (Phase 6.2 design): typed initial
-  state, ruleset id, actor stubs, turn schedule, learning objectives; no runtime
-  loader until approved.
 - **External playtest protocol refresh** (Phase 7 prep): structured external
   session protocol after hardening slices land.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded from
   first scenario until brief expands; actor cards required first.
-- **Scenario data loading runtime** (Phase 6.2): after format design approval and
-  vocabulary stability.
+- **Scenario data loading runtime** (Phase 6.2): after format design approval;
+  see [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md).
 - **Mid-run save/load** (Phase 6): replay artifact covers post-run for now.
 - **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.

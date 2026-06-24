@@ -80,10 +80,10 @@ core is evaluated.
 
 Current proof: `ResolvedInputs` are derived in `inputs/resolve.rs` from a run
 seed, turn index, prior state, and named streams for measurement noise, delayed
-access reporting, labor pressure, policy signal values, coalition leverage, and
-prior-period access measurement revisions.
+access reporting, labor pressure, policy signal values, coalition leverage,
+prior-period access measurement revisions, and competitor market signal.
 
-Last Reviewed: 2026-06-23
+Last Reviewed: 2026-06-24
 Status: Verified
 
 ### Actor Information
@@ -101,11 +101,11 @@ not omniscient state.
 Current proof: the player observation uses reported access and quality; later
 turns may include prior-period access measurement revisions in the briefing
 without rewriting committed history. The commercial insurer, state-policy,
-coalition, and workforce decisions use actor-visible values and record
-rationales. The educational debrief reports those rationales from committed
-history rather than recomputing hidden actor knowledge.
+coalition, workforce, and competitor decisions use actor-visible values and
+record rationales. The educational debrief reports those rationales from
+committed history rather than recomputing hidden actor knowledge.
 
-Last Reviewed: 2026-06-23
+Last Reviewed: 2026-06-24
 Status: Verified
 
 ### Interface
@@ -163,6 +163,8 @@ Status: Verified
   educational debriefing are now established in `src/lib.rs`. Characterization
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
   golden integration test lives in `tests/golden_seed42.rs`.
-- Ruleset and scenario versioning format.
-- Decision-record convention.
+- Ruleset and scenario versioning format: design draft at
+  `docs/scenario-format-draft.md`; no runtime loader yet.
+- Decision-record convention: **addressed** by
+  `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
 - Data and licensing policy.

@@ -14,7 +14,7 @@ boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
 scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
 parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
 v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
-at v0.1.23.
+at v0.1.23, first ADR and scenario format draft at v0.1.24.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -42,6 +42,8 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Glossary](docs/glossary.md)
 - [Versioning Policy](docs/versioning-policy.md)
 - [Architecture Decision Records](docs/decision-records/README.md)
+- [ADR 0001: Deterministic transition boundary](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
+- [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.21)](docs/playtest-findings-v0.1.21.md)
 

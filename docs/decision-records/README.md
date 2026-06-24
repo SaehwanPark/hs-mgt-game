@@ -17,6 +17,10 @@ consequential technical and design choices in the Health Policy Strategy Game.
 3. Link the ADR from `CHANGELOG.md` or relevant design docs when merged.
 4. Do not rewrite accepted ADRs; supersede with a new record if the decision changes.
 
+## Accepted Records
+
+- [ADR-0001: Deterministic transition and stochastic input boundary](0001-deterministic-transition-and-stochastic-input-boundary.md)
+
 ## Status Values
 
 - **Proposed** — under discussion, not yet implemented

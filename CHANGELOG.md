@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.24] - 2026-06-24
+
+### Added
+
+- [`docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
+  — first accepted ADR for pure transition core and stochastic input boundary.
+- [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md) — Phase 6.2
+  scenario format design draft (no runtime loader).
+
+### Changed
+
+- Updated [`ARCHITECTURE.md`](ARCHITECTURE.md) open decisions, competitor stream,
+  and actor-information proof.
+- Bumped package version from `0.1.23` to `0.1.24`.
+- Updated README and SPEC bookkeeping.
+
+### Notes
+
+- Docs-only release; no runtime behavior changes. Golden hash unchanged.
+
 ## [0.1.23] - 2026-06-24
 
 ### Changed
