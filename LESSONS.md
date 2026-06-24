@@ -128,3 +128,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   remains append-only.
 - Prevention: Keep revisions as explicit briefing inputs or notes; never mutate
   prior committed transition records.
+
+## Phase 2 Docs Should Constrain Before They Format
+
+- Context: Expanding the system-boundary and ontology draft after the first
+  four-turn vertical-slice prototype.
+- Symptom: It is tempting to introduce scenario schemas, actor-card templates,
+  or parameter ledgers while documenting the conceptual boundary.
+- Cause: The roadmap calls for ontology and causal boundaries before broader
+  implementation conventions.
+- Resolution: The Phase 2 document names actors, authority, observations,
+  commands, causal categories, exclusions, and deferred ontology work without
+  defining a file format or calibration process.
+- Prevention: Use boundary docs to stabilize vocabulary and scope first; create
+  loaders, schemas, and ledgers only when a later slice needs executable or
+  evidence-backed artifacts.

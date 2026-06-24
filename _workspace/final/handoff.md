@@ -2,25 +2,24 @@
 
 ## Summary
 
-Implemented the coalition cooperative interaction slice and observation revision
-slice for the Health Policy Strategy Game. The demo now runs four deterministic
-transitions with a regional provider coalition liaison decision, prior-period
-access measurement revisions in later-turn briefings, seeded resolved inputs,
-replay, and educational debrief.
+Implemented the Phase 2 system-boundary and ontology documentation slice for the
+Health Policy Strategy Game. The current fictional regional US market prototype
+now has clearer documentation for actor classes, player and NPC authority,
+state and observation boundaries, command vocabulary, causal categories,
+included and excluded processes, and unresolved evidence work.
 
 ## Changed Files
 
-- `src/main.rs`
 - `Cargo.toml`
 - `Cargo.lock`
 - `SPEC.md`
-- `ARCHITECTURE.md`
+- `README.md`
 - `CHANGELOG.md`
 - `LESSONS.md`
-- `README.md`
 - `docs/system-boundary.md`
 - `docs/evidence-registry.md`
 - `_workspace/00_input/request-summary.md`
+- `_workspace/01_evidence_map.md`
 - `_workspace/02_mechanism_design.md`
 - `_workspace/03_domain_qa.md`
 - `_workspace/final/handoff.md`
@@ -28,15 +27,21 @@ replay, and educational debrief.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 50 tests passed.
+- `cargo test` passed: 52 tests passed.
 - Default `cargo run` with strategy `1` and seed `42` replayed successfully and
-  printed four-turn resolved inputs, observation revisions, and educational
-  debrief.
-- Invalid coalition inputs exit validation separately from unfavorable coalition
-  outcomes.
+  printed the existing four-turn demo and educational debrief.
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/9
+
+## Review Summary
+
+- Pass 1: Low finding, stale README status still said `v0.1.9`; fixed.
+- Pass 2: No actionable issues found.
+- Pass 3: Low finding, grammar issue in actor table; fixed.
+- Critical/High findings: none.
 
 ## Known Limits
 
+- No runtime behavior changes.
 - No scenario loader.
 - No empirical calibration.
 - No cryptographic state hash.
@@ -46,8 +51,7 @@ replay, and educational debrief.
 
 ## Next Dependencies
 
-- Revisit module boundaries when scenario loading or report exports need
-  independent ownership.
-- Define a scenario/ruleset versioning format before loading external content.
-- Expand `docs/system-boundary.md` into a full Phase 2 ontology specification.
+- Create an actor-card template before adding new strategic actor classes.
 - Build an evidence-linked parameter ledger before claiming calibration.
+- Define scenario/ruleset versioning before loading external content.
+- Promote distributional outcome vocabulary before external classroom use.

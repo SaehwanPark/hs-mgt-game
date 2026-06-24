@@ -289,8 +289,6 @@ reconstructing it from the diff.
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-## Present
-
 - Feature: Coalition cooperative interaction slice
   Status: Complete
   Started: 2026-06-23
@@ -313,11 +311,8 @@ reconstructing it from the diff.
   - Implement observation revision stream and debrief notes
   - Add `docs/system-boundary.md` and `docs/evidence-registry.md` stubs
   - Update architecture, changelog, lessons, and handoff files
+  - PR #8 merged into `main`
   - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-  Not Yet Done:
-  - PR handoff and three code-reviewer passes
-  - Merge after review and verification
 
   Deferred / Non-Goals:
   - No full campaign or per-turn interactive command entry
@@ -336,14 +331,52 @@ reconstructing it from the diff.
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
+## Present
+
+- Feature: Phase 2 system boundary and ontology slice
+  Status: PR Handoff
+  Started: 2026-06-24
+  Branch: feat/phase2-system-boundary-ontology
+
+  Summary:
+  Expand the initial system-boundary and ontology documentation for the current
+  fictional regional US market slice. The slice clarifies actors, authority,
+  state and observation boundaries, command vocabulary, causal categories,
+  exclusions, and evidence gaps without changing runtime behavior.
+
+  Done:
+  - Working branch created from `main`
+  - Coalition cooperative interaction slice moved from active state into
+    completed history
+  - `docs/system-boundary.md` expanded from a stub into a Phase 2 conceptual
+    boundary draft
+  - `docs/evidence-registry.md` updated to align current mechanisms with the
+    expanded boundary while preserving evidence gaps
+  - Package version bumped to `0.1.10`
+  - README status updated to `v0.1.10`
+  - Changelog and lessons updated for the documentation slice
+  - PR handoff opened as GitHub PR #9
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No scenario loader, command parser, save format, or ruleset schema
+  - No module split
+  - No new dependency
+  - No empirical calibration or authoritative policy forecast
+  - No broad actor expansion beyond documenting future actor classes
+
+  Verification:
+  - `cargo fmt --check` passes
+  - `cargo test` passes with 52 tests
+  - Default `cargo run` preserves the existing four-turn demo behavior
+  - Three local code-reviewer passes completed before PR handoff
+
 ## Future
 
 - Define glossary, decision-record conventions, and versioning policy from
   roadmap Phase 0.
 - Convert Phase 1 research into an evidence registry and research-to-design
   implications memo.
-- Define the initial conceptual model: system boundary, actor classes, ontology,
-  observation model, and causal framework.
 - Design the first narrow vertical slice with deterministic replay and
   educational debrief hooks.
 - Split the prototype into stable module boundaries when the next slice needs
