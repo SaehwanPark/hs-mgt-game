@@ -1,4 +1,5 @@
 mod coalition;
+mod competitor;
 mod describe;
 mod dispatch;
 mod insurer;

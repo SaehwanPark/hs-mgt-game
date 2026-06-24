@@ -5,6 +5,7 @@ pub struct Observation {
   pub reported_quality_index: i32,
   pub prior_access_revision: i32,
   pub policy_briefing: &'static str,
+  pub market_competition_briefing: &'static str,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

@@ -18,7 +18,7 @@ fn interactive_history_replays_with_matching_state_hashes() {
   let history =
     build_history_interactive(DEFAULT_SEED, &ruleset, default_interactive_commands()).unwrap();
 
-  assert_eq!(history.transitions.len(), 4);
+  assert_eq!(history.transitions.len(), 5);
   assert_eq!(
     replay(&history, &ruleset).unwrap().final_state,
     history.transitions.last().unwrap().next
@@ -36,7 +36,7 @@ fn each_strategy_path_builds_replayable_history() {
     let history = build_history_for_strategy(choice, DEFAULT_SEED, &ruleset).unwrap();
     let final_state = history.transitions.last().unwrap().next.clone();
 
-    assert_eq!(history.transitions.len(), 4);
+    assert_eq!(history.transitions.len(), 5);
     assert_eq!(replay(&history, &ruleset).unwrap().final_state, final_state);
   }
 }

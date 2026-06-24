@@ -1,47 +1,55 @@
-# Mechanism Design
+# Mechanism Design — Competitor Capacity Slice
 
 ## Goal and Roadmap Phase
 
-Add Phase 5 replay artifact export and internal playtest findings for the
-current fictional regional US market prototype while preserving the existing
-deterministic transition core unchanged.
+Phase 5 world-slice expansion: add one competitive capacity interaction as
+roadmap §3.3 third strategic form. Fifth executive turn after coalition turn.
 
 ## Slice Boundary
 
-Included:
+- **In:** One rival nonprofit health system, capacity-expansion threat, player
+  defensive response command, competitor deterministic decision, fifth-turn replay,
+  debrief, preset paths, golden test update.
+- **Out:** Market-entry relocation, Medicare/Medicaid, scenario loader, forecast UI.
 
-- Versioned `replay-artifact-0.1.15` text format.
-- Serialize, deserialize, and verify helpers over committed history.
-- Optional post-run CLI export prompt with empty-input skip behavior.
-- Internal playtest findings for preset path 1 and interactive defaults at seed
-  `42`.
+## Actors and Authority
 
-Excluded:
+- **Player CEO:** Allocates defensive capital and access posture; cannot control
+  competitor expansion directly.
+- **Rival regional health system (`competitor_health_system`):** Responds to
+  player credibility with accelerate, hold, or partial retreat.
 
-- New commands, actors, state fields, or random streams.
-- Mid-run save/load.
-- Scenario or ruleset file loader.
-- Cryptographic integrity guarantees.
-- Module split or CI workflow.
+## State, Beliefs, and Observations
 
-## Documentation Changes
+- True state unchanged structurally; competitor signal enters via resolved input
+  `competitor_market_signal` when `prior.turn >= 4` (fifth decision).
+- CEO briefing adds `market_competition_briefing` on turn 5 from observation.
 
-- `docs/playtest-findings-v0.1.15.md` records comprehensibility, strategic
-  tension, debrief usefulness, and recommended next slice.
-- `ARCHITECTURE.md` documents the artifact boundary under Interface and open
-  architectural decisions.
-- `SPEC.md` records the interactive slice as complete and this replay export
-  slice as active.
+## Commands, Events, and Effects
 
-## Determinism and Replay Notes
+- `RespondToCompetitorCapacityMove { defensive_capital_commitment, access_posture }`
+- Validation: non-negative capital within max; positive access posture within max.
+- Player effects: cash spend, access gain, modest bed addition from capital.
+- Competitor effects: access/trust/rate pressure (accelerate) vs relief (retreat).
 
-- Artifact verification replays committed commands and resolved inputs through
-  the existing `replay()` path and fails on hash drift.
-- Resolved inputs remain explicit in the artifact so verification does not
-  re-derive RNG streams differently.
-- `transition()` and hash semantics are unchanged.
+## Strategic Interaction
 
-## Open Questions
+- **Form:** Competitive capacity expansion response (not market entry).
+- **Procedure:** Threshold-based credible/strong offer evaluation using
+  `competitor_market_signal` as exogenous pressure.
+- **Outcomes:** `AccelerateExpansion`, `HoldPosition`, `PartialRetreat`.
 
-- Whether future artifacts should embed debrief text or instructor notes.
-- Whether module extraction should happen before the next actor expansion.
+## Debrief Hooks
+
+- Competitive tradeoff: defensive spend vs market share and community trust.
+- Decision quality separate from competitor realization under market signal.
+
+## Determinism
+
+- `competitor_market_signal` from named stream `STREAM_COMPETITOR` at turn 5 only
+  (zero on turns 1–4 to preserve golden trajectory for first four transitions).
+
+## Tests
+
+- Validation failures, decision branches, five-transition replay, golden hash,
+  preset path 1–4 regression, artifact round-trip.

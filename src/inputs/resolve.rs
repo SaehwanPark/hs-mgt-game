@@ -2,8 +2,8 @@ use crate::model::{ResolvedInputs, Ruleset, WorldState, clamp_metric};
 
 use super::rng::{bounded_i32, bounded_u32, stream_rng};
 use super::streams::{
-  STREAM_ACCESS_DELAY, STREAM_ACCESS_NOISE, STREAM_COALITION, STREAM_LABOR, STREAM_MEASUREMENT,
-  STREAM_POLICY, STREAM_REVISION,
+  STREAM_ACCESS_DELAY, STREAM_ACCESS_NOISE, STREAM_COALITION, STREAM_COMPETITOR, STREAM_LABOR,
+  STREAM_MEASUREMENT, STREAM_POLICY, STREAM_REVISION,
 };
 
 pub fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> ResolvedInputs {
@@ -22,6 +22,11 @@ pub fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> Reso
   } else {
     0
   };
+  let competitor_market_signal = if turn >= 4 {
+    bounded_i32(stream_rng(seed, turn, STREAM_COMPETITOR), 1, 6)
+  } else {
+    0
+  };
 
   ResolvedInputs {
     measurement_noise,
@@ -30,5 +35,6 @@ pub fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> Reso
     policy_signal,
     coalition_leverage_signal,
     access_measurement_revision,
+    competitor_market_signal,
   }
 }

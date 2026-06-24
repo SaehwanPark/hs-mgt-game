@@ -21,6 +21,7 @@ fn replay_reproduces_committed_final_state() {
       policy_signal: 4,
       coalition_leverage_signal: 1,
       access_measurement_revision: 0,
+      competitor_market_signal: 0,
     },
     &ruleset,
   )
@@ -50,6 +51,7 @@ fn replay_detects_committed_state_hash_mismatch() {
       policy_signal: 4,
       coalition_leverage_signal: 1,
       access_measurement_revision: 0,
+      competitor_market_signal: 0,
     },
     &ruleset,
   )
@@ -89,6 +91,7 @@ fn replay_reproduces_two_transition_history() {
       policy_signal: 4,
       coalition_leverage_signal: 1,
       access_measurement_revision: 0,
+      competitor_market_signal: 0,
     },
     &ruleset,
   )
@@ -106,6 +109,7 @@ fn replay_reproduces_two_transition_history() {
       policy_signal: 4,
       coalition_leverage_signal: 1,
       access_measurement_revision: 0,
+      competitor_market_signal: 0,
     },
     &ruleset,
   )
@@ -124,6 +128,6 @@ fn replay_reproduces_four_transition_history() {
     build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset).unwrap();
   let final_state = history.transitions.last().unwrap().next.clone();
 
-  assert_eq!(history.transitions.len(), 4);
+  assert_eq!(history.transitions.len(), 5);
   assert_eq!(replay(&history, &ruleset).unwrap().final_state, final_state);
 }

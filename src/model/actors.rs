@@ -27,11 +27,19 @@ pub enum CoalitionDecision {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
+pub enum CompetitorDecision {
+  AccelerateExpansion,
+  HoldPosition,
+  PartialRetreat,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
 pub enum ActorDecision {
   Insurer(InsurerDecision),
   StatePolicy(StatePolicyDecision),
   Labor(LaborDecision),
   Coalition(CoalitionDecision),
+  Competitor(CompetitorDecision),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

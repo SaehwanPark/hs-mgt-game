@@ -87,7 +87,7 @@ fn replay_artifact_golden_header_is_stable() {
       "genesis=turn:0,cash:100,staffed_beds:120,access_index:70,quality_index:78,workforce_trust:62,community_trust:66,commercial_rate:100,policy_pressure:30"
     )
   );
-  assert_eq!(lines.next(), Some("transition_count=4"));
+  assert_eq!(lines.next(), Some("transition_count=5"));
 }
 #[test]
 fn corrupt_replay_artifact_hash_fails_verification() {

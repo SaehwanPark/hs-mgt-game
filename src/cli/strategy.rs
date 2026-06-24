@@ -34,17 +34,24 @@ pub fn build_history_for_strategy(
     fourth_inputs,
     ruleset,
   )?;
+  let fifth_inputs = resolve_inputs(seed, &fourth.next, ruleset);
+  let fifth = transition(
+    &fourth.next,
+    plan.fifth_command.clone(),
+    fifth_inputs,
+    ruleset,
+  )?;
 
   Ok(History {
     genesis,
-    transitions: vec![first, second, third, fourth],
+    transitions: vec![first, second, third, fourth, fifth],
   })
 }
 
 pub fn build_history_interactive(
   seed: u64,
   ruleset: &Ruleset,
-  commands: [PlayerCommand; 4],
+  commands: [PlayerCommand; 5],
 ) -> Result<History, ValidationError> {
   let genesis = genesis_state();
   let first_inputs = resolve_inputs(seed, &genesis, ruleset);
@@ -55,20 +62,23 @@ pub fn build_history_interactive(
   let third = transition(&second.next, commands[2].clone(), third_inputs, ruleset)?;
   let fourth_inputs = resolve_inputs(seed, &third.next, ruleset);
   let fourth = transition(&third.next, commands[3].clone(), fourth_inputs, ruleset)?;
+  let fifth_inputs = resolve_inputs(seed, &fourth.next, ruleset);
+  let fifth = transition(&fourth.next, commands[4].clone(), fifth_inputs, ruleset)?;
 
   Ok(History {
     genesis,
-    transitions: vec![first, second, third, fourth],
+    transitions: vec![first, second, third, fourth, fifth],
   })
 }
 
-pub fn default_interactive_commands() -> [PlayerCommand; 4] {
+pub fn default_interactive_commands() -> [PlayerCommand; 5] {
   let plan = strategy_plan(StrategyPath::AccessStabilization);
   [
     plan.first_command,
     plan.second_command,
     plan.third_command,
     plan.fourth_command,
+    plan.fifth_command,
   ]
 }
 pub fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
@@ -92,6 +102,10 @@ pub fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         coalition_investment: 12,
         shared_access_commitment: 8,
       },
+      fifth_command: PlayerCommand::RespondToCompetitorCapacityMove {
+        defensive_capital_commitment: 14,
+        access_posture: 8,
+      },
     },
     StrategyPath::FiscalCaution => StrategyPlan {
       name: "Fiscal caution",
@@ -112,6 +126,10 @@ pub fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
         coalition_investment: 6,
         shared_access_commitment: 5,
       },
+      fifth_command: PlayerCommand::RespondToCompetitorCapacityMove {
+        defensive_capital_commitment: 8,
+        access_posture: 5,
+      },
     },
     StrategyPath::AggressiveBargaining => StrategyPlan {
       name: "Aggressive bargaining",
@@ -131,6 +149,10 @@ pub fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
       fourth_command: PlayerCommand::JoinRegionalAccessCoalition {
         coalition_investment: 4,
         shared_access_commitment: 4,
+      },
+      fifth_command: PlayerCommand::RespondToCompetitorCapacityMove {
+        defensive_capital_commitment: 4,
+        access_posture: 4,
       },
     },
   }

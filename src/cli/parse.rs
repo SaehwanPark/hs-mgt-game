@@ -114,6 +114,33 @@ pub fn parse_coalition_command(input: &str) -> Result<PlayerCommand, CliError> {
   })
 }
 
+pub fn parse_competitor_command(input: &str) -> Result<PlayerCommand, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(default_interactive_commands()[4].clone());
+  }
+
+  let parts: Vec<&str> = trimmed.split_whitespace().collect();
+  if parts.len() != 2 {
+    return Err(CliError::InvalidCommandInput(
+      "turn 5 expects two integers: defensive_capital access_posture".to_string(),
+    ));
+  }
+
+  let defensive_capital_commitment = parts[0].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid defensive capital '{}'", parts[0]))
+  })?;
+  let access_posture = parts[1]
+    .parse::<i32>()
+    .map_err(|_| CliError::InvalidCommandInput(format!("invalid access posture '{}'", parts[1])))?;
+
+  Ok(PlayerCommand::RespondToCompetitorCapacityMove {
+    defensive_capital_commitment,
+    access_posture,
+  })
+}
+
 pub fn describe_command_defaults(command: &PlayerCommand) -> String {
   match command {
     PlayerCommand::StabilizeAccess {
@@ -135,5 +162,9 @@ pub fn describe_command_defaults(command: &PlayerCommand) -> String {
       coalition_investment,
       shared_access_commitment,
     } => format!("Enter for defaults: {coalition_investment} {shared_access_commitment}"),
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => format!("Enter for defaults: {defensive_capital_commitment} {access_posture}"),
   }
 }

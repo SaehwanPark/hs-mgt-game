@@ -27,6 +27,13 @@ pub fn turn_executive_briefing(
     ));
   }
 
+  if !observation.market_competition_briefing.is_empty() {
+    lines.push(format!(
+      "  Market competition briefing: {}",
+      observation.market_competition_briefing
+    ));
+  }
+
   lines
 }
 

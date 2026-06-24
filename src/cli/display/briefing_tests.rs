@@ -12,6 +12,7 @@ fn turn_briefing_includes_prior_access_revision_when_present() {
     reported_quality_index: 78,
     prior_access_revision: -1,
     policy_briefing: "state officials are increasing scrutiny of access and affordability",
+    market_competition_briefing: "",
   };
   let briefing = turn_executive_briefing(&genesis_state(), &observation, 2).join("\n");
 

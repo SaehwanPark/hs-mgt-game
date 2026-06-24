@@ -12,7 +12,8 @@ checks, a starting executive dashboard at v0.1.13, per-turn interactive play
 at v0.1.14, deterministic replay artifact export at v0.1.15, library module
 boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
 scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
-parameter-source ledger at v0.1.20.
+parameter-source ledger at v0.1.20, and fifth-turn competitor capacity slice at
+v0.1.21.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -38,7 +39,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [First Scenario Brief](docs/first-scenario-brief.md)
 - [Phase 1 Implications Memo](docs/phase1-implications-memo.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
-- [Internal Playtest Findings (v0.1.19)](docs/playtest-findings-v0.1.19.md)
+- [Internal Playtest Findings (v0.1.21)](docs/playtest-findings-v0.1.21.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 
@@ -81,8 +82,7 @@ cargo test
 
 Current priorities are:
 
-1. extend the vertical slice with the next strategic actor (actor card first);
-2. glossary, decision-record conventions, and versioning policy from roadmap
+1. glossary, decision-record conventions, and versioning policy from roadmap
    Phase 0.
 
 Before proposing major features or abstractions, review the canonical documents in [`docs/`](docs/).

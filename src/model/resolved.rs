@@ -6,4 +6,5 @@ pub struct ResolvedInputs {
   pub policy_signal: i32,
   pub coalition_leverage_signal: i32,
   pub access_measurement_revision: i32,
+  pub competitor_market_signal: i32,
 }

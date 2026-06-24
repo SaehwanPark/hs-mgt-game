@@ -17,6 +17,7 @@ fn identical_inputs_produce_identical_transition() {
     policy_signal: 4,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -40,6 +41,7 @@ fn true_state_and_observed_state_can_differ() {
     policy_signal: 1,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -69,6 +71,7 @@ fn invalid_command_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -95,6 +98,7 @@ fn negative_capital_spend_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -118,6 +122,7 @@ fn accepted_negotiation_applies_requested_rate() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -144,6 +149,7 @@ fn unfavorable_valid_outcome_is_not_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -174,6 +180,7 @@ fn policy_response_is_deterministic() {
     policy_signal: 4,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -200,6 +207,7 @@ fn negative_advocacy_spend_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -222,6 +230,7 @@ fn excessive_advocacy_spend_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -247,6 +256,7 @@ fn non_positive_access_commitment_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -269,6 +279,7 @@ fn credible_policy_response_can_proceed_with_mandate() {
     policy_signal: 1,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -294,6 +305,7 @@ fn unfavorable_policy_outcome_is_not_validation_failure() {
     policy_signal: 2,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -324,6 +336,7 @@ fn workforce_response_is_deterministic() {
     policy_signal: 2,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -350,6 +363,7 @@ fn negative_retention_spend_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -372,6 +386,7 @@ fn excessive_retention_spend_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -397,6 +412,7 @@ fn non_positive_schedule_relief_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -419,6 +435,7 @@ fn unfavorable_labor_outcome_is_not_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -449,6 +466,7 @@ fn excessive_schedule_relief_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -474,6 +492,7 @@ fn credible_workforce_offer_triggers_limited_support() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -498,6 +517,7 @@ fn coalition_response_is_deterministic() {
     policy_signal: 2,
     coalition_leverage_signal: 5,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let first = transition(&prior, command.clone(), inputs.clone(), &ruleset).unwrap();
@@ -524,6 +544,7 @@ fn negative_coalition_investment_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -546,6 +567,7 @@ fn excessive_coalition_investment_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -571,6 +593,7 @@ fn non_positive_shared_access_commitment_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -593,6 +616,7 @@ fn excessive_shared_access_commitment_is_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 1,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   assert_eq!(
@@ -619,6 +643,7 @@ fn unfavorable_coalition_outcome_is_not_validation_failure() {
     policy_signal: 0,
     coalition_leverage_signal: 3,
     access_measurement_revision: 0,
+    competitor_market_signal: 0,
   };
 
   let result = transition(&prior, command, inputs, &ruleset).unwrap();
@@ -632,5 +657,69 @@ fn unfavorable_coalition_outcome_is_not_validation_failure() {
       .events
       .iter()
       .any(|event| event.description.contains("Withdrew"))
+  );
+}
+
+#[test]
+fn negative_defensive_capital_is_validation_failure() {
+  let ruleset = default_ruleset();
+  let prior = genesis_state();
+  let command = PlayerCommand::RespondToCompetitorCapacityMove {
+    defensive_capital_commitment: -1,
+    access_posture: 5,
+  };
+  let inputs = ResolvedInputs {
+    measurement_noise: 0,
+    delayed_access_report: 70,
+    labor_sick_call_delta: 0,
+    policy_signal: 0,
+    coalition_leverage_signal: 0,
+    access_measurement_revision: 0,
+    competitor_market_signal: 4,
+  };
+
+  assert_eq!(
+    transition(&prior, command, inputs, &ruleset),
+    Err(ValidationError::NegativeDefensiveCapitalCommitment { requested: -1 })
+  );
+}
+
+#[test]
+fn unfavorable_competitor_outcome_is_not_validation_failure() {
+  let ruleset = default_ruleset();
+  let prior = genesis_state();
+  let command = PlayerCommand::RespondToCompetitorCapacityMove {
+    defensive_capital_commitment: 4,
+    access_posture: 4,
+  };
+  let inputs = ResolvedInputs {
+    measurement_noise: 0,
+    delayed_access_report: 70,
+    labor_sick_call_delta: 0,
+    policy_signal: 0,
+    coalition_leverage_signal: 0,
+    access_measurement_revision: 0,
+    competitor_market_signal: 6,
+  };
+
+  let result = transition(&prior, command, inputs, &ruleset).unwrap();
+
+  assert_eq!(
+    result.actor_decision.decision,
+    ActorDecision::Competitor(CompetitorDecision::AccelerateExpansion)
+  );
+}
+
+#[test]
+fn five_transition_history_replays_from_genesis() {
+  let ruleset = default_ruleset();
+  let history = crate::test_support::demo_history();
+
+  assert_eq!(history.transitions.len(), 5);
+  assert_eq!(
+    crate::replay::replay(&history, &ruleset)
+      .unwrap()
+      .final_state,
+    history.transitions.last().unwrap().next
   );
 }

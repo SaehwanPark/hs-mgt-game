@@ -3,8 +3,8 @@ use crate::model::{
 };
 
 use super::{
-  coalition::coalition_decision, insurer::insurer_decision, labor::labor_decision,
-  state_policy::state_policy_decision,
+  coalition::coalition_decision, competitor::competitor_decision, insurer::insurer_decision,
+  labor::labor_decision, state_policy::state_policy_decision,
 };
 
 pub fn actor_decision(
@@ -47,6 +47,16 @@ pub fn actor_decision(
       prior.community_trust,
       *coalition_investment,
       *shared_access_commitment,
+      observation,
+      inputs,
+      ruleset,
+    ),
+    PlayerCommand::RespondToCompetitorCapacityMove {
+      defensive_capital_commitment,
+      access_posture,
+    } => competitor_decision(
+      *defensive_capital_commitment,
+      *access_posture,
       observation,
       inputs,
       ruleset,

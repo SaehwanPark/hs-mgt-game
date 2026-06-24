@@ -17,11 +17,11 @@ fn strategy_previews_cover_all_compiled_paths() {
 
   assert_eq!(previews.len(), 3);
   assert!(previews[0].contains("1. Access stabilization"));
-  assert!(previews[0].contains("spends 54 total resource units"));
+  assert!(previews[0].contains("spends 68 total resource units"));
   assert!(previews[1].contains("2. Fiscal caution"));
   assert!(previews[1].contains("requests commercial rate 104"));
   assert!(previews[2].contains("3. Aggressive bargaining"));
-  assert!(previews[2].contains("commits 9 access/workforce/coalition units"));
+  assert!(previews[2].contains("commits 13 access/workforce/coalition units"));
 }
 #[test]
 fn strategy_previews_do_not_describe_future_actor_outcomes() {
