@@ -396,9 +396,7 @@ reconstructing it from the diff.
   - README status updated to `v0.1.11`
   - Architecture, changelog, lessons, and workspace handoff artifacts updated
   - PR handoff opened as GitHub PR #10
-
-  Not Yet Done:
-  - Review loop still needs to complete
+  - Three code-reviewer passes completed with no actionable findings
 
   Deferred / Non-Goals:
   - No runtime behavior changes
@@ -413,6 +411,8 @@ reconstructing it from the diff.
   - Default `cargo run` with strategy `1` and seed `42` preserves the existing
     four-turn demo behavior
   - Domain QA passes before PR handoff
+  - Three local code-reviewer passes found no Critical, High, Medium, or Low
+    issues
 
 ## Future
 
