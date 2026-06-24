@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.18] - 2026-06-24
+
+### Added
+
+- Added GitHub Actions CI workflow running `cargo fmt --check` and `cargo test`
+  on pushes to `main` and on pull requests.
+
+### Changed
+
+- Bumped package version from `0.1.17` to `0.1.18`.
+- Updated README contributing notes with local CI commands and revised
+  priorities.
+
 ## [0.1.17] - 2026-06-24
 
 ### Changed
