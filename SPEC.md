@@ -861,6 +861,31 @@ reconstructing it from the diff.
 
 ## Present
 
+- Feature: Rich-terminal CLI display
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/cli-rich-terminal-display
+
+  Summary:
+  Improve CLI readability with semantic color, emoji section headings, blank-line
+  spacing, and explicit per-turn command prompts with global command footers.
+
+  Done:
+  - Added `src/cli/display/style.rs`, `print.rs`, and `prompt.rs`
+  - Wired styled output through interactive session, preset demo, menus, and export
+  - Added style and prompt unit tests
+  - Package version bumped to `0.1.26`
+  - README, CHANGELOG, and SPEC updated
+
+  Deferred / Non-Goals:
+  - No new Cargo dependencies or TUI framework
+  - No `?`/help mid-run commands
+  - No changes to `transition()`, hash semantics, or replay artifacts
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Future
 
 - **External playtest protocol refresh** (Phase 7 prep): structured external

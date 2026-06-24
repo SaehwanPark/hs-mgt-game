@@ -8,8 +8,9 @@ mod session;
 mod strategy;
 
 pub use display::{
-  describe_strategy_commitments, executive_dashboard, print_pre_run_briefing, strategy_commitments,
-  strategy_previews, turn_executive_briefing, turn_resolution_summary,
+  describe_strategy_commitments, eprint_error, executive_dashboard, format_command_prompt,
+  print_line, print_pre_run_briefing, strategy_commitments, strategy_previews,
+  turn_executive_briefing, turn_resolution_summary,
 };
 pub use error::describe_cli_error;
 pub use io::{parse_play_mode_choice, parse_seed_choice, read_play_mode_choice, read_seed_choice};
