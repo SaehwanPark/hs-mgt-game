@@ -521,6 +521,7 @@ reconstructing it from the diff.
   - Updated architecture, changelog, lessons, and workspace handoff artifacts
   - `cargo fmt --check`, `cargo test` (67 tests), and `cargo run` pass
   - Domain QA passed for the bounded interactive play slice
+  - PR handoff opened as GitHub PR #13
 
   Deferred / Non-Goals:
   - No new commands, actors, metrics, or random streams

@@ -31,8 +31,11 @@ Preset strategy paths 1–3 remain available for regression and quick play.
 
 ## Review Summary
 
-- Pending PR handoff and three code-reviewer passes.
-- Domain QA: pass.
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/13
+- Three code-reviewer passes completed; Medium hint-string drift fixed; Low
+  parser default tests added.
+- Critical/High findings: none.
+- Merge-ready: yes, pending any external CI or human review feedback.
 
 ## Known Limits
 

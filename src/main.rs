@@ -733,36 +733,58 @@ fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
   Ok(())
 }
 
+fn describe_command_defaults(command: &PlayerCommand) -> String {
+  match command {
+    PlayerCommand::StabilizeAccess {
+      add_staffed_beds,
+      capital_spend,
+      requested_commercial_rate,
+    } => {
+      format!("Enter for defaults: {add_staffed_beds} {capital_spend} {requested_commercial_rate}")
+    }
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => format!("Enter for defaults: {advocacy_spend} {access_commitment}"),
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => format!("Enter for defaults: {retention_spend} {schedule_relief_commitment}"),
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => format!("Enter for defaults: {coalition_investment} {shared_access_commitment}"),
+  }
+}
+
 fn run_interactive_history(seed: u64, ruleset: &Ruleset) -> Result<History, CliError> {
   let genesis = genesis_state();
   let mut state = genesis.clone();
   let mut transitions = Vec::new();
+  let defaults = default_interactive_commands();
 
-  let turn_readers: [(&str, &str, fn(&str) -> Result<PlayerCommand, CliError>); 4] = [
+  let turn_readers: [(&str, fn(&str) -> Result<PlayerCommand, CliError>); 4] = [
     (
       "Turn 1 command (capacity and payer posture): staffed_beds capital_spend requested_rate",
-      "Enter for defaults: 8 18 112",
       parse_stabilize_access_command,
     ),
     (
       "Turn 2 command (state access mandate): advocacy_spend access_commitment",
-      "Enter for defaults: 10 7",
       parse_policy_command,
     ),
     (
       "Turn 3 command (workforce pressure): retention_spend schedule_relief",
-      "Enter for defaults: 14 8",
       parse_workforce_command,
     ),
     (
       "Turn 4 command (regional access coalition): coalition_investment shared_access_commitment",
-      "Enter for defaults: 12 8",
       parse_coalition_command,
     ),
   ];
 
-  for (turn_index, (prompt, default_hint, parse_command)) in turn_readers.iter().enumerate() {
+  for (turn_index, (prompt, parse_command)) in turn_readers.iter().enumerate() {
     let turn_number = turn_index as u32 + 1;
+    let default_hint = describe_command_defaults(&defaults[turn_index]);
     let inputs = resolve_inputs(seed, &state, ruleset);
     let observation = observe_for_player(&state, &inputs);
 
@@ -2436,6 +2458,59 @@ mod tests {
   #[test]
   fn parse_stabilize_access_command_rejects_malformed_input() {
     assert!(parse_stabilize_access_command("8 18\n").is_err());
+  }
+
+  #[test]
+  fn parse_policy_command_defaults_on_empty_input() {
+    assert_eq!(
+      parse_policy_command("\n").unwrap(),
+      default_interactive_commands()[1]
+    );
+  }
+
+  #[test]
+  fn parse_workforce_command_defaults_on_empty_input() {
+    assert_eq!(
+      parse_workforce_command("\n").unwrap(),
+      default_interactive_commands()[2]
+    );
+  }
+
+  #[test]
+  fn parse_coalition_command_defaults_on_empty_input() {
+    assert_eq!(
+      parse_coalition_command("\n").unwrap(),
+      default_interactive_commands()[3]
+    );
+  }
+
+  #[test]
+  fn describe_command_defaults_matches_access_stabilization_plan() {
+    let plan = strategy_plan(StrategyPath::AccessStabilization);
+    let defaults = default_interactive_commands();
+
+    assert_eq!(
+      describe_command_defaults(&defaults[0]),
+      "Enter for defaults: 8 18 112"
+    );
+    assert_eq!(
+      describe_command_defaults(&plan.first_command),
+      describe_command_defaults(&defaults[0])
+    );
+  }
+
+  #[test]
+  fn turn_briefing_includes_prior_access_revision_when_present() {
+    let observation = Observation {
+      actor: "health_system_ceo",
+      reported_access_index: 65,
+      reported_quality_index: 78,
+      prior_access_revision: -1,
+      policy_briefing: "state officials are increasing scrutiny of access and affordability",
+    };
+    let briefing = turn_executive_briefing(&genesis_state(), &observation, 2).join("\n");
+
+    assert!(briefing.contains("Prior access measurement revision: -1"));
   }
 
   #[test]
