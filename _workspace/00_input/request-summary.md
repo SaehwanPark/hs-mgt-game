@@ -2,18 +2,18 @@
 
 ## Scope
 
-Continue development under the preferred workflow by adding a seeded stochastic
-input boundary to the existing deterministic two-turn playable CLI demo. Replace
-per-path hard-coded `ResolvedInputs` with deterministic derivation from an
-explicit seed and named random streams before the transition core runs.
+Continue development under the preferred workflow by adding a third-turn workforce
+pressure interaction to the existing seeded three-path playable CLI demo. Extend
+the two-transition history with a workforce response command, nursing workforce
+representative decision, replay verification, and debrief coverage.
 
 ## Roadmap Phase
 
-Primary phase: Phase 4.3 stochastic input boundary completion.
+Primary phase: Phase 4.4 strategic actor proof extension and Phase 5.2 workforce
+pressure slice.
 
-Forward intent: keep strategy paths as command presets while moving exogenous
-variation behind an inspectable seed boundary that preserves deterministic
-replay.
+Forward intent: keep strategy paths as command presets while adding one localized
+labor-market interaction after the seeded stochastic input boundary is stable.
 
 ## Sources
 
@@ -24,6 +24,7 @@ replay.
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - `SPEC.md`
 - `ARCHITECTURE.md`
+- `_workspace/final/handoff.md`
 
 ## Expected Files
 

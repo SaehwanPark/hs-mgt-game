@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.7] - 2026-06-23
+
+### Added
+
+- Added a third-turn workforce pressure response command with nursing workforce
+  representative decisions and inspectable rationales.
+- Added retention spend and schedule relief validation for workforce commands.
+- Extended strategy paths with third compiled workforce posture presets.
+- Added focused tests for workforce determinism, validation failures, unfavorable
+  labor outcomes, three-transition replay, and updated golden trajectory pinning.
+
+### Changed
+
+- Bumped package version from `0.1.6` to `0.1.7`.
+- Extended demo history from two to three transitions.
+- Updated educational debrief to include labor rationales and a workforce
+  tradeoff prompt.
+- Moved the merged seeded stochastic input boundary into completed project state.
+
 ## [0.1.6] - 2026-06-23
 
 ### Added

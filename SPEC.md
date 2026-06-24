@@ -214,10 +214,8 @@ reconstructing it from the diff.
   - Existing transition, observation, replay, validation, and debrief tests
     remain passing
 
-## Present
-
 - Feature: Seeded stochastic input boundary
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/seeded-stochastic-inputs
 
@@ -235,11 +233,8 @@ reconstructing it from the diff.
   - Extend CLI to accept optional seed
   - Add focused seed, resolver, and golden-trajectory tests
   - Update architecture, changelog, lessons, and handoff files
-  - Run final verification commands
-
-  Not Yet Done:
-  - PR handoff and three code-reviewer passes
-  - Merge after review and verification
+  - PR handoff opened as GitHub PR #6, and three review passes completed
+  - PR #6 merged into `main`
 
   Deferred / Non-Goals:
   - No scenario or ruleset file format
@@ -254,6 +249,48 @@ reconstructing it from the diff.
   - Different seeds can change resolved inputs while commands stay fixed
   - Default seed reproduces access-stabilization golden trajectory
   - Invalid seed input returns explicit CLI error
+  - `transition()` contains no RNG, time, or I/O
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
+
+## Present
+
+- Feature: Workforce pressure slice
+  Status: Active
+  Started: 2026-06-23
+  Branch: feat/workforce-pressure-slice
+
+  Summary:
+  Extend the seeded two-turn playable demo with a third turn modeling workforce
+  pressure. Add a workforce response command, nursing workforce representative
+  decision with inspectable rationale, three-transition replay, and debrief
+  coverage while keeping stochasticity outside `transition()`.
+
+  Done:
+  - Working branch created from `main`
+  - Seeded stochastic input boundary moved from active state into completed
+    history
+  - Package version bumped to `0.1.7`
+  - Implement workforce response command and labor actor decision
+  - Extend strategy paths with third compiled command presets
+  - Add focused workforce, replay, and golden-trajectory tests
+  - Update architecture, changelog, lessons, and handoff files
+  - Run final verification commands
+
+  Not Yet Done:
+  - PR handoff and three code-reviewer passes
+  - Merge after review and verification
+
+  Deferred / Non-Goals:
+  - No full campaign or per-turn interactive command entry
+  - No scenario or ruleset file format
+  - No module split unless unavoidable
+  - No new Cargo dependency
+  - No CI or release automation
+
+  Verification:
+  - Three-transition history replays from genesis
+  - Labor actor rationale appears in committed history and debrief
+  - Invalid workforce spend remains separate from unfavorable labor outcomes
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
