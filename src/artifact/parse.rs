@@ -271,6 +271,19 @@ pub fn parse_play_mode(payload: &str) -> Result<PlayMode, ReplayArtifactError> {
   }
 }
 
+pub fn parse_experience_mode(
+  payload: &str,
+) -> Result<crate::model::ExperienceMode, ReplayArtifactError> {
+  match payload {
+    "standard" => Ok(crate::model::ExperienceMode::Standard),
+    "beginner" => Ok(crate::model::ExperienceMode::Beginner),
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown experience mode {other}"),
+    }),
+  }
+}
+
 pub fn parse_quoted_field(payload: &str, key: &str) -> Result<String, ReplayArtifactError> {
   let marker = format!("{key}:\"");
   let start = payload

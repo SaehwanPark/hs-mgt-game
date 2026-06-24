@@ -4,6 +4,31 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.27] - 2026-06-24
+
+### Added
+
+- Global quit (`q`/`quit`/`exit`) and help (`?`/`help`) at all CLI prompts.
+- Mid-run session autosave on interactive quit (`session-save-0.1.27`) with resume
+  or start-over on next launch.
+- User-config persistence under `$XDG_CONFIG_HOME/hs-mgt-game/` (or `~/.config/...`).
+- Contextual player guidance (`src/cli/guidance.rs`) and one-time new-player cues.
+- Beginner mode (`b`) with per-turn multiple-choice options, pros/cons, and
+  recommendability (`src/cli/beginner.rs`).
+- ADR-0002: mid-run session save format and semantics.
+
+### Changed
+
+- `RunConfig` carries `ExperienceMode` and optional resume state.
+- `run()` returns `SessionOutcome` (completed, quit saved, quit without save).
+- Play mode menu documents beginner (`b`) and global commands on all footers.
+- Bumped package version from `0.1.26` to `0.1.27`.
+
+### Notes
+
+- Golden seed-42 preset hash unchanged. Simulation core and replay artifact format
+  unchanged.
+
 ## [0.1.26] - 2026-06-24
 
 ### Added
