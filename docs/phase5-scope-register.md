@@ -148,17 +148,15 @@ blockers.
 
 ## Recommended next slice
 
-**Competitor strategic actor runtime slice** (`feat/competitor-capacity-slice`):
+Per README contributor priorities:
 
-1. Write competitor actor card using [`actor-cards.md`](actor-cards.md).
-2. Add a bounded fifth-turn competitive capacity or market-entry interaction.
-3. Extend replay, debrief, preset paths, and golden tests consistently.
-4. Run mechanism design and domain QA handoffs before implementation.
-
-Intervening documentation slices (per README contributor priorities):
-
-1. Phase 1 research-to-design implications memo.
-2. Phase 0 governance docs (glossary, decision records, versioning policy).
+1. **Phase 1 research-to-design implications memo** (`feat/phase1-implications-memo`).
+2. **Competitor strategic actor runtime slice** (`feat/competitor-capacity-slice`):
+   - Write competitor actor card using [`actor-cards.md`](actor-cards.md).
+   - Add a bounded fifth-turn competitive capacity or market-entry interaction.
+   - Extend replay, debrief, preset paths, and golden tests consistently.
+   - Run mechanism design and domain QA handoffs before implementation.
+3. **Phase 0 governance docs** (glossary, decision records, versioning policy).
 
 ## Related documents
 

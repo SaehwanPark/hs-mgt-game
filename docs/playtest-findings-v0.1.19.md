@@ -72,8 +72,10 @@ Golden final state hash at seed 42 (preset path 1 / interactive defaults):
 
 ## Recommended Next Slice
 
-- Phase 0 governance docs: glossary, decision-record conventions, versioning
-  policy.
-- Phase 1 research-to-design implications memo.
-- Competitor actor card and bounded fifth-turn competitive interaction runtime
-  slice.
+Per README contributor priorities:
+
+1. Phase 1 research-to-design implications memo.
+2. Competitor actor card and bounded fifth-turn competitive interaction runtime
+   slice.
+3. Phase 0 governance docs: glossary, decision-record conventions, versioning
+   policy.

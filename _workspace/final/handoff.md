@@ -47,6 +47,6 @@ behavior changed.
 
 ## Next Dependencies
 
-- PR handoff, three code-reviewer passes, and merge when approved.
-- Recommended next slices: Phase 0 governance docs, Phase 1 implications memo,
-  then competitor actor runtime expansion with actor card first.
+- Merge when approved after CI passes.
+- Recommended next slices (per README): Phase 1 implications memo, competitor
+  actor runtime expansion, then Phase 0 governance docs.
