@@ -6,8 +6,8 @@ The project models health-policy outcomes as the result of strategic interaction
 
 ## Status
 
-Early research and design phase with a deterministic architecture proof and
-minimal playable CLI demo at v0.1.10.
+Early research and design phase with a deterministic architecture proof, minimal
+playable CLI demo, and first scenario design artifacts at v0.1.11.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -29,6 +29,8 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Project Proposal](docs/proposal.md)
 - [Development Roadmap](docs/roadmap.md)
 - [Design Principles](docs/design_principles.md)
+- [Actor Card Template](docs/actor-cards.md)
+- [First Scenario Brief](docs/first-scenario-brief.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 

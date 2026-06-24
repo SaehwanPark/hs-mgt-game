@@ -116,8 +116,10 @@ Excluded from the current conceptual boundary:
 
 - Formal actor-card template covering objectives, authority, constraints,
   information, outside options, risk posture, time horizon, and decision
-  procedure.
-- Scenario and ruleset versioning format.
+  procedure. Initial design artifact: [`actor-cards.md`](actor-cards.md).
+- Scenario and ruleset versioning format. The first scenario concept is
+  documented in [`first-scenario-brief.md`](first-scenario-brief.md), but no
+  runtime format is approved yet.
 - Patient cohort and distributional outcome vocabulary.
 - Service-line, capital-allocation, and market-area vocabulary.
 - Formal belief-state representation beyond observation snapshots.

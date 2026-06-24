@@ -143,3 +143,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Use boundary docs to stabilize vocabulary and scope first; create
   loaders, schemas, and ledgers only when a later slice needs executable or
   evidence-backed artifacts.
+
+## Actor And Scenario Docs Should Gate Runtime Expansion
+
+- Context: Continuing from the Phase 2 boundary draft into the first Phase 3
+  design artifacts.
+- Symptom: It is tempting to add a fifth turn, a new actor, or a scenario
+  schema as soon as the current demo has a coherent four-turn loop.
+- Cause: The next roadmap need is to clarify actor authority, information,
+  objectives, and learning goals before expanding runtime content.
+- Resolution: Added an actor-card template and first scenario brief without
+  changing Rust behavior, adding a loader, or introducing a runtime schema.
+- Prevention: Before adding a strategic actor or scenario mechanism, write the
+  actor card and scenario rationale first; only implement when the slice can be
+  tested deterministically and explained in debrief.

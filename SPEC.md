@@ -331,10 +331,8 @@ reconstructing it from the diff.
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-## Present
-
 - Feature: Phase 2 system boundary and ontology slice
-  Status: PR Handoff
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/phase2-system-boundary-ontology
 
@@ -356,6 +354,7 @@ reconstructing it from the diff.
   - README status updated to `v0.1.10`
   - Changelog and lessons updated for the documentation slice
   - PR handoff opened as GitHub PR #9
+  - PR #9 merged into `main`
 
   Deferred / Non-Goals:
   - No runtime behavior changes
@@ -366,10 +365,53 @@ reconstructing it from the diff.
   - No broad actor expansion beyond documenting future actor classes
 
   Verification:
+  - `cargo fmt --check` passed
+  - `cargo test` passed with 52 tests
+  - Default `cargo run` preserved the existing four-turn demo behavior
+  - Three local code-reviewer passes completed before PR handoff
+
+## Present
+
+- Feature: Phase 3 actor cards and first scenario brief
+  Status: Active
+  Started: 2026-06-24
+  Branch: feat/phase3-actor-cards-scenario-brief
+
+  Summary:
+  Add the first Phase 3 design artifacts that should constrain future runtime
+  expansion: a reusable actor-card template and a first scenario brief for the
+  current fictional regional US market stabilization slice. The slice preserves
+  existing runtime behavior.
+
+  Done:
+  - Working branch created from `main`
+  - `docs/actor-cards.md` added with required actor design fields for future
+    strategic actors
+  - `docs/first-scenario-brief.md` added with the first scenario concept,
+    learning objectives, included interactions, strategic tensions, observation
+    use, debrief hooks, and non-goals
+  - `docs/system-boundary.md` and `docs/evidence-registry.md` updated to point
+    to the new design artifacts without approving a runtime schema
+  - Package version bumped to `0.1.11`
+  - README status updated to `v0.1.11`
+  - Architecture, changelog, lessons, and workspace handoff artifacts updated
+
+  Not Yet Done:
+  - PR handoff and review loop still need to complete
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No new commands, actors, state fields, or random streams
+  - No scenario loader, command parser, save format, or ruleset schema
+  - No empirical calibration or authoritative policy forecast
+  - No broad campaign or MVP scenario system
+
+  Verification:
   - `cargo fmt --check` passes
   - `cargo test` passes with 52 tests
-  - Default `cargo run` preserves the existing four-turn demo behavior
-  - Three local code-reviewer passes completed before PR handoff
+  - Default `cargo run` with strategy `1` and seed `42` preserves the existing
+    four-turn demo behavior
+  - Domain QA passes before PR handoff
 
 ## Future
 
@@ -377,8 +419,9 @@ reconstructing it from the diff.
   roadmap Phase 0.
 - Convert Phase 1 research into an evidence registry and research-to-design
   implications memo.
-- Design the first narrow vertical slice with deterministic replay and
-  educational debrief hooks.
+- Use the actor-card template before adding future strategic actors.
+- Use the first scenario brief to guide the next narrow vertical-slice runtime
+  expansion with deterministic replay and educational debrief hooks.
 - Split the prototype into stable module boundaries when the next slice needs
   more than one command or actor interaction.
 - Add scenario data loading only after the conceptual model and first action

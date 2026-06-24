@@ -12,7 +12,7 @@ intended architecture boundaries that future implementation should preserve.
   seeded resolved inputs and educational debrief in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-06-23
+Last Reviewed: 2026-06-24
 Status: Verified
 
 The current implementation is a compact architecture proof, not a production
@@ -23,7 +23,9 @@ officials, nursing workforce representative, and regional provider coalition
 liaison, attributed effects, append-only
 history, replay verification, a deterministic end-of-run educational debrief,
 and a small CLI choice among three hard-coded strategy paths with optional seed
-input.
+input. The first Phase 3 design artifacts now define the actor-card template and
+first scenario brief that future runtime additions should satisfy before adding
+new strategic actors or scenario content.
 
 ## Intended System Shape
 
@@ -126,6 +128,22 @@ Status: Verified
   calibration work justify stronger claims.
 
 Last Reviewed: 2026-06-23
+Status: Verified
+
+### Scenario and Actor Design
+
+Responsible for:
+
+- actor-card fields before strategic actor expansion
+- first-scenario scope and learning objectives
+- educational debrief hooks
+- explicit scenario non-goals and evidence gaps
+
+Current design artifacts: `docs/actor-cards.md` and
+`docs/first-scenario-brief.md`. These documents are not runtime schemas and do
+not add scenario loading, command parsing, or persistence.
+
+Last Reviewed: 2026-06-24
 Status: Verified
 
 ## Open Architectural Decisions
