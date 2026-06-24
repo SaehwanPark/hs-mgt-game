@@ -1,6 +1,6 @@
 use crate::actors::actor_decision;
+use crate::model::hash_state;
 use crate::model::*;
-use crate::replay::hash_state;
 
 use super::effects::push_effect;
 use super::observe::observe_for_player;

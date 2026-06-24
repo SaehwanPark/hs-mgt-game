@@ -1,11 +1,4 @@
-use hs_mgt_game::artifact::*;
-use hs_mgt_game::cli::*;
 use hs_mgt_game::cli::{describe_cli_error, run};
-use hs_mgt_game::debrief::educational_debrief;
-use hs_mgt_game::inputs::resolve_inputs;
-use hs_mgt_game::model::*;
-use hs_mgt_game::replay::*;
-use hs_mgt_game::sim::*;
 
 fn main() {
   match run() {
@@ -19,6 +12,14 @@ fn main() {
 
 #[cfg(test)]
 mod tests {
+  use hs_mgt_game::artifact::*;
+  use hs_mgt_game::cli::*;
+  use hs_mgt_game::debrief::educational_debrief;
+  use hs_mgt_game::inputs::resolve_inputs;
+  use hs_mgt_game::model::*;
+  use hs_mgt_game::replay::*;
+  use hs_mgt_game::sim::*;
+
   use super::*;
 
   #[test]

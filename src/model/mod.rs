@@ -1,6 +1,7 @@
 mod actors;
 mod command;
 mod events;
+mod hash;
 mod history;
 mod metrics;
 mod replay_artifact;
@@ -12,6 +13,7 @@ mod state;
 pub use actors::*;
 pub use command::*;
 pub use events::*;
+pub use hash::{STATE_HASH_SCHEMA_VERSION, hash_state, stable_hash_hex, state_hash_record};
 pub use history::*;
 pub use metrics::clamp_metric;
 pub use replay_artifact::*;
