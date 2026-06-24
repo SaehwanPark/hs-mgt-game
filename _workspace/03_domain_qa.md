@@ -6,40 +6,37 @@ pass
 
 ## Reviewed Inputs
 
-- `_workspace/00_input/request-summary.md`
-- `_workspace/02_mechanism_design.md`
+- `docs/phase5-scope-register.md`
+- `docs/playtest-findings-v0.1.19.md`
 - `docs/first-scenario-brief.md`
 - `docs/system-boundary.md`
-- `src/main.rs` replay artifact helpers and CLI export prompt
-- `docs/playtest-findings-v0.1.15.md`
+- `docs/roadmap.md` Phase 5
 
 ## Findings
 
-- The slice stays within the first-scenario boundary: no new actors, commands, or
-  scenario loader.
-- Stochasticity remains outside `transition()`; artifacts store explicit resolved
-  inputs rather than re-deriving RNG inside verification.
-- True state, observations, actor rationales, and debrief separation remain
-  intact.
-- Replay artifact export supports reproducibility without claiming empirical
-  calibration or policy forecasting.
-- The optional export prompt preserves skip behavior and does not expose hidden
-  actor outcomes beyond committed history.
+- Deferred actors (competitor, Medicare, Medicaid, patient cohorts) are listed
+  in a dedicated Deferred section with rationale; they are not described as
+  implemented strategic agents.
+- Achieved interactions map to committed runtime modules and test evidence.
+- Exit-criteria assessment cites playtest findings and replay/debrief tests rather
+  than claiming empirical validation.
+- Prototype integer formulas remain labeled as abstractions via cross-links to
+  `evidence-registry.md` and `system-boundary.md`.
+- Partial achievement of forecasts/uncertainty UI is documented honestly.
 
 ## Required Fixes
 
-- None.
+None.
 
 ## Residual Risks
 
-- Artifact parsing relies on a closed vocabulary of static labels; future effect
-  or actor labels require format/version updates.
-- Playtest findings cover only seed `42` and the current four-turn slice.
-- No external classroom validation yet.
+- Readers may still conflate Phase 5 closure with full roadmap §5.1 world
+  completeness; the register explicitly states §5.1 deferrals.
+- External classroom use remains premature until governance docs and competitor
+  slice land.
+- Parameter ledger and calibration evidence still unresolved.
 
 ## Verification Evidence
 
-- `cargo test`: 77 tests passed.
-- Preset path `1` and interactive default sessions at seed `42` completed with
-  replay success.
-- Round-trip and corrupt-hash artifact tests passed.
+- Docs-only slice; no `transition()` or ruleset changes.
+- Golden seed-42 hash unchanged; runtime behavior preserved.

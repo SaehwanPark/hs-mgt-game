@@ -10,7 +10,8 @@ Early research and design phase with a deterministic architecture proof, minimal
 playable CLI demo, first scenario design artifacts, stable replay state hash
 checks, a starting executive dashboard at v0.1.13, per-turn interactive play
 at v0.1.14, deterministic replay artifact export at v0.1.15, library module
-boundaries at v0.1.16, and GitHub Actions CI at v0.1.18.
+boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 scope register
+at v0.1.19.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
@@ -34,6 +35,8 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Design Principles](docs/design_principles.md)
 - [Actor Card Template](docs/actor-cards.md)
 - [First Scenario Brief](docs/first-scenario-brief.md)
+- [Phase 5 Scope Register](docs/phase5-scope-register.md)
+- [Internal Playtest Findings (v0.1.19)](docs/playtest-findings-v0.1.19.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 
@@ -76,10 +79,9 @@ cargo test
 
 Current priorities are:
 
-1. close Phase 5 documentation and scope register;
-2. convert Phase 1 research into a research-to-design implications memo;
-3. extend the vertical slice with the next strategic actor (actor card first);
-4. glossary, decision-record conventions, and versioning policy from roadmap
+1. convert Phase 1 research into a research-to-design implications memo;
+2. extend the vertical slice with the next strategic actor (actor card first);
+3. glossary, decision-record conventions, and versioning policy from roadmap
    Phase 0.
 
 Before proposing major features or abstractions, review the canonical documents in [`docs/`](docs/).
