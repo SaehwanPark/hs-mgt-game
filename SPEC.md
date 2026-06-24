@@ -395,9 +395,10 @@ reconstructing it from the diff.
   - Package version bumped to `0.1.11`
   - README status updated to `v0.1.11`
   - Architecture, changelog, lessons, and workspace handoff artifacts updated
+  - PR handoff opened as GitHub PR #10
 
   Not Yet Done:
-  - PR handoff and review loop still need to complete
+  - Review loop still needs to complete
 
   Deferred / Non-Goals:
   - No runtime behavior changes

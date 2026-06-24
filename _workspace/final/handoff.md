@@ -33,7 +33,7 @@ content.
 - `cargo test` passed: 52 tests passed.
 - Default `cargo run` with strategy `1` and seed `42` replayed successfully and
   printed the existing four-turn demo and educational debrief.
-- PR pending.
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/10
 
 ## Review Summary
 
