@@ -200,3 +200,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   regression.
 - Prevention: Add parsers and posture menus only when repeated playable content
   needs external authoring or more than numeric parameter entry.
+
+## Replay Artifacts Can Stay Human-Readable and Dependency-Free
+
+- Context: Adding deterministic replay artifact export after interactive play.
+- Symptom: It is tempting to add JSON crates, cryptographic hashes, or a general
+  save/load framework as soon as external replay is mentioned.
+- Cause: The committed history already stores commands, resolved inputs, and
+  per-turn state hashes needed for verification.
+- Resolution: Added a versioned line-oriented `replay-artifact-0.1.15` format
+  with pure serialize, deserialize, and verify helpers plus an optional
+  post-run export prompt.
+- Prevention: Keep artifact formats explicit and versioned; add stronger
+  integrity guarantees or mid-run persistence only when analysis or classroom
+  workflows require them.

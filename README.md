@@ -8,8 +8,8 @@ The project models health-policy outcomes as the result of strategic interaction
 
 Early research and design phase with a deterministic architecture proof, minimal
 playable CLI demo, first scenario design artifacts, stable replay state hash
-checks, a starting executive dashboard at v0.1.13, and per-turn interactive play
-at v0.1.14.
+checks, a starting executive dashboard at v0.1.13, per-turn interactive play
+at v0.1.14, and deterministic replay artifact export at v0.1.15.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 

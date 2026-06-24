@@ -10,8 +10,8 @@ intended architecture boundaries that future implementation should preserve.
 - Package: single Rust package, `hs-mgt-game`
 - Executable: interactive and preset-play CLI over a four-turn deterministic demo
   with a starting executive dashboard, per-turn executive briefings, strategy
-  previews, seeded resolved inputs, replay state-hash checks, and educational
-  debrief in `src/main.rs`
+  previews, seeded resolved inputs, replay state-hash checks, optional replay
+  artifact export, and educational debrief in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-24
@@ -24,7 +24,8 @@ local strategic decision rationales for a commercial insurer, state policy
 officials, nursing workforce representative, and regional provider coalition
 liaison, attributed effects, append-only history, stable per-transition state
 hashes, replay verification that detects committed hash drift, a deterministic
-end-of-run educational debrief, and CLI play modes for per-turn interactive
+end-of-run educational debrief, optional replay artifact export in
+`replay-artifact-0.1.15` format, and CLI play modes for per-turn interactive
 command entry or three hard-coded preset strategy paths with a starting
 dashboard, commitment previews, and optional seed input. The first Phase 3 design
 artifacts now define the actor-card template and first scenario brief that future
@@ -117,9 +118,10 @@ commitment previews, prompts for interactive play (default) or one of three
 preset strategy paths and an optional run seed, then either collects four
 per-turn command entries with executive briefings and turn-resolution summaries
 or runs a preset path with the full technical demo dump, replay result, and
-educational debrief. The CLI input boundary selects play mode, per-turn command
-parameters or compiled strategy paths, and seeds only; there is no general
-command parser, scenario loader, save format, or durable replay artifact yet.
+educational debrief, then optionally writes a replay artifact when the player
+provides a path. The CLI input boundary selects play mode, per-turn command
+parameters or compiled strategy paths, seeds, and optional export path only;
+there is no general command parser, scenario loader, or mid-run save format yet.
 
 Last Reviewed: 2026-06-24
 Status: Verified
@@ -157,10 +159,13 @@ Status: Verified
 
 ## Open Architectural Decisions
 
+- Durable replay artifact format: `replay-artifact-0.1.15` stores ruleset id,
+  seed, play mode, genesis state, and committed transitions with explicit
+  resolved inputs for external verification. This is analysis/reproducibility,
+  not cryptographic integrity or mid-run save/load.
 - Module or crate boundaries for the deterministic core, CLI, scenario loading,
   and educational debriefing once the prototype needs reusable boundaries beyond
   the compact file.
 - Ruleset and scenario versioning format.
-- Durable replay artifact format.
 - Decision-record convention.
 - Data and licensing policy.

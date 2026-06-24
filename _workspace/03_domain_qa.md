@@ -6,26 +6,25 @@ pass
 
 ## Reviewed Inputs
 
-- User request: per-turn interactive play slice per implementation plan
-- Changed files: `src/main.rs`, project state docs, workspace handoff artifacts
-- Canonical docs: `README.md`, `docs/first-scenario-brief.md`,
-  `docs/system-boundary.md`, `docs/design_principles.md`
-- Verification: `cargo fmt --check`, `cargo test` (67 tests), interactive and
-  preset `cargo run` smoke checks
+- `_workspace/00_input/request-summary.md`
+- `_workspace/02_mechanism_design.md`
+- `docs/first-scenario-brief.md`
+- `docs/system-boundary.md`
+- `src/main.rs` replay artifact helpers and CLI export prompt
+- `docs/playtest-findings-v0.1.15.md`
 
 ## Findings
 
-- Scope remains within the first scenario brief's four executive decision points.
-- Interactive briefings use `observe_for_player` output only; they do not expose
-  future actor decisions or true-state outcomes beyond committed observation
-  fields.
-- Preset strategy paths preserve existing deterministic trajectories for
-  regression.
-- `transition()` still has no RNG, wall-clock, filesystem, network, or stdin
-  access.
-- Validation failures remain separate from unfavorable modeled actor outcomes.
-- No new actors, commands, calibration claims, or scenario-loader behavior were
-  introduced.
+- The slice stays within the first-scenario boundary: no new actors, commands, or
+  scenario loader.
+- Stochasticity remains outside `transition()`; artifacts store explicit resolved
+  inputs rather than re-deriving RNG inside verification.
+- True state, observations, actor rationales, and debrief separation remain
+  intact.
+- Replay artifact export supports reproducibility without claiming empirical
+  calibration or policy forecasting.
+- The optional export prompt preserves skip behavior and does not expose hidden
+  actor outcomes beyond committed history.
 
 ## Required Fixes
 
@@ -33,15 +32,14 @@ pass
 
 ## Residual Risks
 
-- Interactive numeric entry may feel terse until a later posture-menu or forecast
-  framing slice improves player guidance.
-- `src/main.rs` continues to grow; module split remains deferred.
-- Prototype integer formulas remain abstractions without empirical calibration.
+- Artifact parsing relies on a closed vocabulary of static labels; future effect
+  or actor labels require format/version updates.
+- Playtest findings cover only seed `42` and the current four-turn slice.
+- No external classroom validation yet.
 
 ## Verification Evidence
 
-- `cargo test`: 67 passed
-- Interactive defaults at seed `42` complete four turns and replay successfully
-- Preset path `1` at seed `42` preserves canonical demo trajectory test
-- `interactive_history_matches_access_stabilization_preset` confirms parser
-  defaults align with the access-stabilization preset
+- `cargo test`: 77 tests passed.
+- Preset path `1` and interactive default sessions at seed `42` completed with
+  replay success.
+- Round-trip and corrupt-hash artifact tests passed.

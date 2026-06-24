@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.15] - 2026-06-24
+
+### Added
+
+- Added versioned `replay-artifact-0.1.15` serialize, deserialize, and verify
+  helpers for committed run history.
+- Added optional post-run replay artifact export prompt in the CLI.
+- Added focused tests for artifact round-trip, corruption handling, golden
+  header stability, and interactive/preset history alignment.
+- Added internal playtest findings for the four-turn vertical slice.
+
+### Changed
+
+- Bumped package version from `0.1.14` to `0.1.15`.
+- Moved the merged per-turn interactive play slice into completed project state.
+
 ## [0.1.14] - 2026-06-24
 
 ### Added

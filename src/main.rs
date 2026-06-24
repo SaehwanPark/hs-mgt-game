@@ -1,3 +1,4 @@
+use std::fs;
 use std::io;
 
 const DEFAULT_SEED: u64 = 42;
@@ -9,6 +10,7 @@ const STREAM_LABOR: u32 = 3;
 const STREAM_POLICY: u32 = 4;
 const STREAM_COALITION: u32 = 5;
 const STREAM_REVISION: u32 = 6;
+const REPLAY_ARTIFACT_VERSION: &str = "replay-artifact-0.1.15";
 const STATE_HASH_SCHEMA_VERSION: &str = "state-hash-v1";
 const FNV_OFFSET_BASIS: u64 = 0xcbf2_9ce4_8422_2325;
 const FNV_PRIME: u64 = 0x0000_0100_0000_01b3;
@@ -209,6 +211,23 @@ enum ReplayError {
     expected: String,
     actual: String,
   },
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+struct ReplayArtifact {
+  seed: u64,
+  play_mode: PlayMode,
+  ruleset_version: String,
+  history: History,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+enum ReplayArtifactError {
+  UnsupportedVersion { found: String },
+  RulesetMismatch { expected: String, found: String },
+  ParseError { line: usize, detail: String },
+  ReplayFailed(ReplayError),
+  IoError(String),
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -730,7 +749,40 @@ fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
     PlayMode::Interactive => print_interactive_results(config.seed, &history, ruleset),
   }
 
+  if let Some(path) = read_replay_export_path()? {
+    let artifact = ReplayArtifact {
+      seed: config.seed,
+      play_mode: config.play_mode,
+      ruleset_version: ruleset.version.to_string(),
+      history,
+    };
+
+    match write_replay_artifact(&path, &artifact) {
+      Ok(()) => println!("Replay artifact written to {path}"),
+      Err(error) => eprintln!(
+        "Replay export failed: {}",
+        describe_replay_artifact_error(&error)
+      ),
+    }
+  }
+
   Ok(())
+}
+
+fn read_replay_export_path() -> Result<Option<String>, CliError> {
+  println!("Export replay artifact? Enter path (or Enter to skip):");
+
+  let mut input = String::new();
+  io::stdin()
+    .read_line(&mut input)
+    .map_err(|_| CliError::InputUnavailable)?;
+
+  let trimmed = input.trim();
+  if trimmed.is_empty() {
+    return Ok(None);
+  }
+
+  Ok(Some(trimmed.to_string()))
 }
 
 fn describe_command_defaults(command: &PlayerCommand) -> String {
@@ -1894,6 +1946,938 @@ fn stable_hash_hex(input: &str) -> String {
   }
 
   format!("{hash:016x}")
+}
+
+fn escape_artifact_text(value: &str) -> String {
+  let mut escaped = String::with_capacity(value.len());
+
+  for ch in value.chars() {
+    match ch {
+      '\\' => escaped.push_str("\\\\"),
+      '"' => escaped.push_str("\\\""),
+      '\n' => escaped.push_str("\\n"),
+      '\r' => escaped.push_str("\\r"),
+      other => escaped.push(other),
+    }
+  }
+
+  escaped
+}
+
+fn unescape_artifact_text(value: &str) -> Result<String, ReplayArtifactError> {
+  let mut unescaped = String::with_capacity(value.len());
+  let mut chars = value.chars();
+
+  while let Some(ch) = chars.next() {
+    if ch != '\\' {
+      unescaped.push(ch);
+      continue;
+    }
+
+    match chars.next() {
+      Some('\\') => unescaped.push('\\'),
+      Some('"') => unescaped.push('"'),
+      Some('n') => unescaped.push('\n'),
+      Some('r') => unescaped.push('\r'),
+      Some(other) => {
+        return Err(ReplayArtifactError::ParseError {
+          line: 0,
+          detail: format!("invalid escape sequence \\{other}"),
+        });
+      }
+      None => {
+        return Err(ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "trailing escape in artifact text".to_string(),
+        });
+      }
+    }
+  }
+
+  Ok(unescaped)
+}
+
+fn serialize_world_state(prefix: &str, state: &WorldState) -> String {
+  format!(
+    "{prefix}=turn:{turn},cash:{cash},staffed_beds:{staffed_beds},access_index:{access_index},quality_index:{quality_index},workforce_trust:{workforce_trust},community_trust:{community_trust},commercial_rate:{commercial_rate},policy_pressure:{policy_pressure}",
+    turn = state.turn,
+    cash = state.cash,
+    staffed_beds = state.staffed_beds,
+    access_index = state.access_index,
+    quality_index = state.quality_index,
+    workforce_trust = state.workforce_trust,
+    community_trust = state.community_trust,
+    commercial_rate = state.commercial_rate,
+    policy_pressure = state.policy_pressure
+  )
+}
+
+fn parse_world_state_line(
+  line: &str,
+  expected_prefix: &str,
+) -> Result<WorldState, ReplayArtifactError> {
+  let (prefix, payload) = line
+    .split_once('=')
+    .ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("expected {expected_prefix}=..."),
+    })?;
+
+  if prefix != expected_prefix {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("expected {expected_prefix}, found {prefix}"),
+    });
+  }
+
+  let mut fields = std::collections::BTreeMap::new();
+  for part in payload.split(',') {
+    let (key, value) = part
+      .split_once(':')
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid world-state field {part}"),
+      })?;
+    fields.insert(key.to_string(), value.to_string());
+  }
+
+  let read_i32 = |key: &str| -> Result<i32, ReplayArtifactError> {
+    fields
+      .get(key)
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("missing world-state field {key}"),
+      })?
+      .parse::<i32>()
+      .map_err(|_| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid integer for world-state field {key}"),
+      })
+  };
+
+  let read_u32 = |key: &str| -> Result<u32, ReplayArtifactError> {
+    fields
+      .get(key)
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("missing world-state field {key}"),
+      })?
+      .parse::<u32>()
+      .map_err(|_| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid unsigned integer for world-state field {key}"),
+      })
+  };
+
+  Ok(WorldState {
+    turn: read_u32("turn")?,
+    cash: read_i32("cash")?,
+    staffed_beds: read_i32("staffed_beds")?,
+    access_index: read_i32("access_index")?,
+    quality_index: read_i32("quality_index")?,
+    workforce_trust: read_i32("workforce_trust")?,
+    community_trust: read_i32("community_trust")?,
+    commercial_rate: read_i32("commercial_rate")?,
+    policy_pressure: read_i32("policy_pressure")?,
+  })
+}
+
+fn serialize_player_command(command: &PlayerCommand) -> String {
+  match command {
+    PlayerCommand::StabilizeAccess {
+      add_staffed_beds,
+      capital_spend,
+      requested_commercial_rate,
+    } => format!(
+      "StabilizeAccess,add_staffed_beds:{add_staffed_beds},capital_spend:{capital_spend},requested_commercial_rate:{requested_commercial_rate}"
+    ),
+    PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend,
+      access_commitment,
+    } => format!(
+      "RespondToStateAccessMandate,advocacy_spend:{advocacy_spend},access_commitment:{access_commitment}"
+    ),
+    PlayerCommand::RespondToWorkforcePressure {
+      retention_spend,
+      schedule_relief_commitment,
+    } => format!(
+      "RespondToWorkforcePressure,retention_spend:{retention_spend},schedule_relief_commitment:{schedule_relief_commitment}"
+    ),
+    PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment,
+      shared_access_commitment,
+    } => format!(
+      "JoinRegionalAccessCoalition,coalition_investment:{coalition_investment},shared_access_commitment:{shared_access_commitment}"
+    ),
+  }
+}
+
+fn parse_player_command(payload: &str) -> Result<PlayerCommand, ReplayArtifactError> {
+  let mut parts = payload.split(',');
+  let kind = parts
+    .next()
+    .ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing command kind".to_string(),
+    })?;
+
+  let mut fields = std::collections::BTreeMap::new();
+  for part in parts {
+    let (key, value) = part
+      .split_once(':')
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid command field {part}"),
+      })?;
+    fields.insert(key.to_string(), value.to_string());
+  }
+
+  let read_i32 = |key: &str| -> Result<i32, ReplayArtifactError> {
+    fields
+      .get(key)
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("missing command field {key}"),
+      })?
+      .parse::<i32>()
+      .map_err(|_| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid integer for command field {key}"),
+      })
+  };
+
+  match kind {
+    "StabilizeAccess" => Ok(PlayerCommand::StabilizeAccess {
+      add_staffed_beds: read_i32("add_staffed_beds")?,
+      capital_spend: read_i32("capital_spend")?,
+      requested_commercial_rate: read_i32("requested_commercial_rate")?,
+    }),
+    "RespondToStateAccessMandate" => Ok(PlayerCommand::RespondToStateAccessMandate {
+      advocacy_spend: read_i32("advocacy_spend")?,
+      access_commitment: read_i32("access_commitment")?,
+    }),
+    "RespondToWorkforcePressure" => Ok(PlayerCommand::RespondToWorkforcePressure {
+      retention_spend: read_i32("retention_spend")?,
+      schedule_relief_commitment: read_i32("schedule_relief_commitment")?,
+    }),
+    "JoinRegionalAccessCoalition" => Ok(PlayerCommand::JoinRegionalAccessCoalition {
+      coalition_investment: read_i32("coalition_investment")?,
+      shared_access_commitment: read_i32("shared_access_commitment")?,
+    }),
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown command kind {other}"),
+    }),
+  }
+}
+
+fn serialize_resolved_inputs(inputs: &ResolvedInputs) -> String {
+  format!(
+    "measurement_noise:{},delayed_access_report:{},labor_sick_call_delta:{},policy_signal:{},coalition_leverage_signal:{},access_measurement_revision:{}",
+    inputs.measurement_noise,
+    inputs.delayed_access_report,
+    inputs.labor_sick_call_delta,
+    inputs.policy_signal,
+    inputs.coalition_leverage_signal,
+    inputs.access_measurement_revision
+  )
+}
+
+fn parse_resolved_inputs(payload: &str) -> Result<ResolvedInputs, ReplayArtifactError> {
+  let mut fields = std::collections::BTreeMap::new();
+  for part in payload.split(',') {
+    let (key, value) = part
+      .split_once(':')
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid resolved-input field {part}"),
+      })?;
+    fields.insert(key.to_string(), value.to_string());
+  }
+
+  let read_i32 = |key: &str| -> Result<i32, ReplayArtifactError> {
+    fields
+      .get(key)
+      .ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("missing resolved-input field {key}"),
+      })?
+      .parse::<i32>()
+      .map_err(|_| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: format!("invalid integer for resolved-input field {key}"),
+      })
+  };
+
+  Ok(ResolvedInputs {
+    measurement_noise: read_i32("measurement_noise")?,
+    delayed_access_report: read_i32("delayed_access_report")?,
+    labor_sick_call_delta: read_i32("labor_sick_call_delta")?,
+    policy_signal: read_i32("policy_signal")?,
+    coalition_leverage_signal: read_i32("coalition_leverage_signal")?,
+    access_measurement_revision: read_i32("access_measurement_revision")?,
+  })
+}
+
+fn serialize_actor_decision(decision: &ActorDecision) -> String {
+  match decision {
+    ActorDecision::Insurer(InsurerDecision::Accept) => "Insurer:Accept".to_string(),
+    ActorDecision::Insurer(InsurerDecision::Counter { offered_rate }) => {
+      format!("Insurer:Counter:{offered_rate}")
+    }
+    ActorDecision::Insurer(InsurerDecision::Reject) => "Insurer:Reject".to_string(),
+    ActorDecision::StatePolicy(StatePolicyDecision::GrantFlexibility) => {
+      "StatePolicy:GrantFlexibility".to_string()
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::ProceedWithMandate) => {
+      "StatePolicy:ProceedWithMandate".to_string()
+    }
+    ActorDecision::StatePolicy(StatePolicyDecision::EscalateOversight) => {
+      "StatePolicy:EscalateOversight".to_string()
+    }
+    ActorDecision::Labor(LaborDecision::Cooperative) => "Labor:Cooperative".to_string(),
+    ActorDecision::Labor(LaborDecision::LimitedSupport) => "Labor:LimitedSupport".to_string(),
+    ActorDecision::Labor(LaborDecision::WorkAction) => "Labor:WorkAction".to_string(),
+    ActorDecision::Coalition(CoalitionDecision::FullPartnership) => {
+      "Coalition:FullPartnership".to_string()
+    }
+    ActorDecision::Coalition(CoalitionDecision::LimitedParticipation) => {
+      "Coalition:LimitedParticipation".to_string()
+    }
+    ActorDecision::Coalition(CoalitionDecision::CoalitionWithdrawal) => {
+      "Coalition:CoalitionWithdrawal".to_string()
+    }
+  }
+}
+
+fn parse_actor_decision(payload: &str) -> Result<ActorDecision, ReplayArtifactError> {
+  let mut parts = payload.split(':');
+  let family = parts
+    .next()
+    .ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing actor decision family".to_string(),
+    })?;
+  let variant = parts
+    .next()
+    .ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing actor decision variant".to_string(),
+    })?;
+
+  match (family, variant) {
+    ("Insurer", "Accept") => Ok(ActorDecision::Insurer(InsurerDecision::Accept)),
+    ("Insurer", "Reject") => Ok(ActorDecision::Insurer(InsurerDecision::Reject)),
+    ("Insurer", "Counter") => {
+      let offered_rate = parts
+        .next()
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "missing insurer counter rate".to_string(),
+        })?
+        .parse::<i32>()
+        .map_err(|_| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid insurer counter rate".to_string(),
+        })?;
+      Ok(ActorDecision::Insurer(InsurerDecision::Counter {
+        offered_rate,
+      }))
+    }
+    ("StatePolicy", "GrantFlexibility") => Ok(ActorDecision::StatePolicy(
+      StatePolicyDecision::GrantFlexibility,
+    )),
+    ("StatePolicy", "ProceedWithMandate") => Ok(ActorDecision::StatePolicy(
+      StatePolicyDecision::ProceedWithMandate,
+    )),
+    ("StatePolicy", "EscalateOversight") => Ok(ActorDecision::StatePolicy(
+      StatePolicyDecision::EscalateOversight,
+    )),
+    ("Labor", "Cooperative") => Ok(ActorDecision::Labor(LaborDecision::Cooperative)),
+    ("Labor", "LimitedSupport") => Ok(ActorDecision::Labor(LaborDecision::LimitedSupport)),
+    ("Labor", "WorkAction") => Ok(ActorDecision::Labor(LaborDecision::WorkAction)),
+    ("Coalition", "FullPartnership") => {
+      Ok(ActorDecision::Coalition(CoalitionDecision::FullPartnership))
+    }
+    ("Coalition", "LimitedParticipation") => Ok(ActorDecision::Coalition(
+      CoalitionDecision::LimitedParticipation,
+    )),
+    ("Coalition", "CoalitionWithdrawal") => Ok(ActorDecision::Coalition(
+      CoalitionDecision::CoalitionWithdrawal,
+    )),
+    _ => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown actor decision {payload}"),
+    }),
+  }
+}
+
+fn serialize_play_mode(play_mode: PlayMode) -> String {
+  match play_mode {
+    PlayMode::Interactive => "interactive".to_string(),
+    PlayMode::Preset(StrategyPath::AccessStabilization) => "preset:1".to_string(),
+    PlayMode::Preset(StrategyPath::FiscalCaution) => "preset:2".to_string(),
+    PlayMode::Preset(StrategyPath::AggressiveBargaining) => "preset:3".to_string(),
+  }
+}
+
+fn parse_play_mode(payload: &str) -> Result<PlayMode, ReplayArtifactError> {
+  match payload {
+    "interactive" => Ok(PlayMode::Interactive),
+    "preset:1" => Ok(PlayMode::Preset(StrategyPath::AccessStabilization)),
+    "preset:2" => Ok(PlayMode::Preset(StrategyPath::FiscalCaution)),
+    "preset:3" => Ok(PlayMode::Preset(StrategyPath::AggressiveBargaining)),
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown play mode {other}"),
+    }),
+  }
+}
+
+fn serialize_transition(transition: &Transition) -> Vec<String> {
+  let mut lines = vec![
+    "[transition]".to_string(),
+    format!("turn={}", transition.next.turn),
+    format!("command={}", serialize_player_command(&transition.command)),
+    format!(
+      "resolved_inputs={}",
+      serialize_resolved_inputs(&transition.resolved_inputs)
+    ),
+    format!("state_hash={}", transition.state_hash),
+    serialize_world_state("prior", &transition.prior),
+    serialize_world_state("next", &transition.next),
+    format!(
+      "observation=actor:{},reported_access_index:{},reported_quality_index:{},prior_access_revision:{},policy_briefing:\"{}\"",
+      transition.observation.actor,
+      transition.observation.reported_access_index,
+      transition.observation.reported_quality_index,
+      transition.observation.prior_access_revision,
+      escape_artifact_text(transition.observation.policy_briefing)
+    ),
+    format!(
+      "actor_decision=actor:{},decision:{},rationale:\"{}\"",
+      transition.actor_decision.actor,
+      serialize_actor_decision(&transition.actor_decision.decision),
+      escape_artifact_text(&transition.actor_decision.rationale)
+    ),
+    format!("event_count={}", transition.events.len()),
+  ];
+
+  for (index, event) in transition.events.iter().enumerate() {
+    lines.push(format!(
+      "event={index},actor:{},description:\"{}\"",
+      event.actor,
+      escape_artifact_text(&event.description)
+    ));
+  }
+
+  lines.push(format!("effect_count={}", transition.effects.len()));
+  for (index, effect) in transition.effects.iter().enumerate() {
+    lines.push(format!(
+      "effect={index},source:{},metric:{},delta:{}",
+      effect.source, effect.metric, effect.delta
+    ));
+  }
+
+  lines.push("[/transition]".to_string());
+  lines
+}
+
+fn parse_quoted_field(payload: &str, key: &str) -> Result<String, ReplayArtifactError> {
+  let marker = format!("{key}:\"");
+  let start = payload
+    .find(&marker)
+    .ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("missing quoted field {key}"),
+    })?
+    + marker.len();
+  let mut escaped = String::new();
+  let mut chars = payload[start..].chars();
+
+  while let Some(ch) = chars.next() {
+    if ch == '"' {
+      return unescape_artifact_text(&escaped);
+    }
+
+    if ch == '\\' {
+      let next = chars
+        .next()
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: format!("unterminated quoted field {key}"),
+        })?;
+      escaped.push('\\');
+      escaped.push(next);
+      continue;
+    }
+
+    escaped.push(ch);
+  }
+
+  Err(ReplayArtifactError::ParseError {
+    line: 0,
+    detail: format!("unterminated quoted field {key}"),
+  })
+}
+
+fn intern_static_label(value: &str) -> Result<&'static str, ReplayArtifactError> {
+  match value {
+    "health_system_ceo" => Ok("health_system_ceo"),
+    "health_system" => Ok("health_system"),
+    "commercial_insurer" => Ok("commercial_insurer"),
+    "state_policy_officials" => Ok("state_policy_officials"),
+    "nursing_workforce" => Ok("nursing_workforce"),
+    "regional_provider_coalition" => Ok("regional_provider_coalition"),
+    "capacity investment" => Ok("capacity investment"),
+    "staffing constraint" => Ok("staffing constraint"),
+    "policy response" => Ok("policy response"),
+    "workforce response" => Ok("workforce response"),
+    "schedule relief" => Ok("schedule relief"),
+    "coalition response" => Ok("coalition response"),
+    "coalition investment" => Ok("coalition investment"),
+    "commercial insurer" => Ok("commercial insurer"),
+    "public bargaining friction" => Ok("public bargaining friction"),
+    "failed negotiation" => Ok("failed negotiation"),
+    "state policy response" => Ok("state policy response"),
+    "nursing workforce" => Ok("nursing workforce"),
+    "work action signal" => Ok("work action signal"),
+    "regional provider coalition" => Ok("regional provider coalition"),
+    "coalition withdrawal" => Ok("coalition withdrawal"),
+    "cash" => Ok("cash"),
+    "staffed_beds" => Ok("staffed_beds"),
+    "access_index" => Ok("access_index"),
+    "quality_index" => Ok("quality_index"),
+    "workforce_trust" => Ok("workforce_trust"),
+    "community_trust" => Ok("community_trust"),
+    "commercial_rate" => Ok("commercial_rate"),
+    "policy_pressure" => Ok("policy_pressure"),
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown static label {other}"),
+    }),
+  }
+}
+
+fn intern_policy_briefing(value: &str) -> Result<&'static str, ReplayArtifactError> {
+  match value {
+    "state officials are increasing scrutiny of access and affordability" => {
+      Ok("state officials are increasing scrutiny of access and affordability")
+    }
+    "state policy attention is stable" => Ok("state policy attention is stable"),
+    other => Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!("unknown policy briefing {other}"),
+    }),
+  }
+}
+
+fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifactError> {
+  let mut command = None;
+  let mut resolved_inputs = None;
+  let mut state_hash = None;
+  let mut prior = None;
+  let mut next = None;
+  let mut observation = None;
+  let mut actor_decision = None;
+  let mut events = Vec::new();
+  let mut effects = Vec::new();
+
+  for line in lines {
+    if line.starts_with("command=") {
+      command = Some(parse_player_command(&line["command=".len()..])?);
+      continue;
+    }
+    if line.starts_with("resolved_inputs=") {
+      resolved_inputs = Some(parse_resolved_inputs(&line["resolved_inputs=".len()..])?);
+      continue;
+    }
+    if line.starts_with("state_hash=") {
+      state_hash = Some(line["state_hash=".len()..].to_string());
+      continue;
+    }
+    if line.starts_with("prior=") {
+      prior = Some(parse_world_state_line(line, "prior")?);
+      continue;
+    }
+    if line.starts_with("next=") {
+      next = Some(parse_world_state_line(line, "next")?);
+      continue;
+    }
+    if line.starts_with("observation=") {
+      let payload = &line["observation=".len()..];
+      let actor = intern_static_label(
+        payload
+          .split(',')
+          .next()
+          .and_then(|part| part.strip_prefix("actor:"))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid observation actor".to_string(),
+          })?,
+      )?;
+      let read_field = |key: &str| -> Result<i32, ReplayArtifactError> {
+        let marker = format!("{key}:");
+        let value = payload
+          .split(',')
+          .find(|part| part.starts_with(&marker))
+          .and_then(|part| part.strip_prefix(&marker))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: format!("missing observation field {key}"),
+          })?
+          .split(',')
+          .next()
+          .unwrap_or("")
+          .trim_end_matches('"');
+        value
+          .parse::<i32>()
+          .map_err(|_| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: format!("invalid observation field {key}"),
+          })
+      };
+      observation = Some(Observation {
+        actor,
+        reported_access_index: read_field("reported_access_index")?,
+        reported_quality_index: read_field("reported_quality_index")?,
+        prior_access_revision: read_field("prior_access_revision")?,
+        policy_briefing: intern_policy_briefing(&parse_quoted_field(payload, "policy_briefing")?)?,
+      });
+      continue;
+    }
+    if line.starts_with("actor_decision=") {
+      let payload = &line["actor_decision=".len()..];
+      let actor = intern_static_label(
+        payload
+          .split(',')
+          .next()
+          .and_then(|part| part.strip_prefix("actor:"))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid actor_decision actor".to_string(),
+          })?,
+      )?;
+      let decision = payload
+        .split(',')
+        .find(|part| part.starts_with("decision:"))
+        .and_then(|part| part.strip_prefix("decision:"))
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "missing actor_decision decision".to_string(),
+        })?;
+      actor_decision = Some(ActorDecisionRecord {
+        actor,
+        decision: parse_actor_decision(decision)?,
+        rationale: parse_quoted_field(payload, "rationale")?,
+      });
+      continue;
+    }
+    if let Some(rest) = line.strip_prefix("event=") {
+      let mut parts = rest.splitn(3, ',');
+      let _index = parts
+        .next()
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "missing event index".to_string(),
+        })?;
+      let actor = intern_static_label(
+        parts
+          .next()
+          .and_then(|part| part.strip_prefix("actor:"))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid event actor".to_string(),
+          })?,
+      )?;
+      let description_payload = parts
+        .next()
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "missing event description".to_string(),
+        })?;
+      events.push(Event {
+        actor,
+        description: parse_quoted_field(description_payload, "description")?,
+      });
+      continue;
+    }
+    if let Some(rest) = line.strip_prefix("effect=") {
+      let mut parts = rest.split(',');
+      let _index = parts
+        .next()
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "missing effect index".to_string(),
+        })?;
+      let source = intern_static_label(
+        parts
+          .next()
+          .and_then(|part| part.strip_prefix("source:"))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid effect source".to_string(),
+          })?,
+      )?;
+      let metric = intern_static_label(
+        parts
+          .next()
+          .and_then(|part| part.strip_prefix("metric:"))
+          .ok_or_else(|| ReplayArtifactError::ParseError {
+            line: 0,
+            detail: "invalid effect metric".to_string(),
+          })?,
+      )?;
+      let delta = parts
+        .next()
+        .and_then(|part| part.strip_prefix("delta:"))
+        .ok_or_else(|| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid effect delta".to_string(),
+        })?
+        .parse::<i32>()
+        .map_err(|_| ReplayArtifactError::ParseError {
+          line: 0,
+          detail: "invalid effect delta integer".to_string(),
+        })?;
+      effects.push(AttributedEffect {
+        source,
+        metric,
+        delta,
+      });
+    }
+  }
+
+  Ok(Transition {
+    prior: prior.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition prior state".to_string(),
+    })?,
+    command: command.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition command".to_string(),
+    })?,
+    resolved_inputs: resolved_inputs.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition resolved inputs".to_string(),
+    })?,
+    observation: observation.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition observation".to_string(),
+    })?,
+    actor_decision: actor_decision.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition actor decision".to_string(),
+    })?,
+    events,
+    effects,
+    next: next.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition next state".to_string(),
+    })?,
+    state_hash: state_hash.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing transition state hash".to_string(),
+    })?,
+  })
+}
+
+fn serialize_replay_artifact(artifact: &ReplayArtifact) -> String {
+  let mut lines = vec![
+    REPLAY_ARTIFACT_VERSION.to_string(),
+    format!("ruleset={}", artifact.ruleset_version),
+    format!("seed={}", artifact.seed),
+    format!("play_mode={}", serialize_play_mode(artifact.play_mode)),
+    serialize_world_state("genesis", &artifact.history.genesis),
+    format!("transition_count={}", artifact.history.transitions.len()),
+  ];
+
+  for transition in &artifact.history.transitions {
+    lines.extend(serialize_transition(transition));
+  }
+
+  lines.join("\n")
+}
+
+fn deserialize_replay_artifact(text: &str) -> Result<ReplayArtifact, ReplayArtifactError> {
+  let raw_lines: Vec<&str> = text
+    .lines()
+    .map(str::trim)
+    .filter(|line| !line.is_empty())
+    .collect();
+
+  if raw_lines.is_empty() {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "empty replay artifact".to_string(),
+    });
+  }
+
+  if raw_lines[0] != REPLAY_ARTIFACT_VERSION {
+    return Err(ReplayArtifactError::UnsupportedVersion {
+      found: raw_lines[0].to_string(),
+    });
+  }
+
+  let mut ruleset_version = None;
+  let mut seed = None;
+  let mut play_mode = None;
+  let mut genesis = None;
+  let mut transition_count = None;
+  let mut transitions = Vec::new();
+  let mut index = 1;
+
+  while index < raw_lines.len() {
+    let line = raw_lines[index];
+    index += 1;
+
+    if line.starts_with("ruleset=") {
+      ruleset_version = Some(line["ruleset=".len()..].to_string());
+      continue;
+    }
+    if line.starts_with("seed=") {
+      seed = Some(line["seed=".len()..].parse::<u64>().map_err(|_| {
+        ReplayArtifactError::ParseError {
+          line: index,
+          detail: "invalid seed".to_string(),
+        }
+      })?);
+      continue;
+    }
+    if line.starts_with("play_mode=") {
+      play_mode = Some(parse_play_mode(&line["play_mode=".len()..])?);
+      continue;
+    }
+    if line.starts_with("genesis=") {
+      genesis = Some(parse_world_state_line(line, "genesis")?);
+      continue;
+    }
+    if line.starts_with("transition_count=") {
+      transition_count = Some(line["transition_count=".len()..].parse::<usize>().map_err(
+        |_| ReplayArtifactError::ParseError {
+          line: index,
+          detail: "invalid transition_count".to_string(),
+        },
+      )?);
+      continue;
+    }
+    if line == "[transition]" {
+      let mut block = Vec::new();
+      while index < raw_lines.len() && raw_lines[index] != "[/transition]" {
+        block.push(raw_lines[index]);
+        index += 1;
+      }
+      if index >= raw_lines.len() {
+        return Err(ReplayArtifactError::ParseError {
+          line: index,
+          detail: "unterminated transition block".to_string(),
+        });
+      }
+      transitions.push(parse_transition_block(&block)?);
+      index += 1;
+    }
+  }
+
+  let expected_count = transition_count.ok_or_else(|| ReplayArtifactError::ParseError {
+    line: 0,
+    detail: "missing transition_count".to_string(),
+  })?;
+  if transitions.len() != expected_count {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!(
+        "transition_count {expected_count} does not match parsed transitions {}",
+        transitions.len()
+      ),
+    });
+  }
+
+  Ok(ReplayArtifact {
+    seed: seed.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing seed".to_string(),
+    })?,
+    play_mode: play_mode.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing play_mode".to_string(),
+    })?,
+    ruleset_version: ruleset_version.ok_or_else(|| ReplayArtifactError::ParseError {
+      line: 0,
+      detail: "missing ruleset".to_string(),
+    })?,
+    history: History {
+      genesis: genesis.ok_or_else(|| ReplayArtifactError::ParseError {
+        line: 0,
+        detail: "missing genesis".to_string(),
+      })?,
+      transitions,
+    },
+  })
+}
+
+fn ruleset_for_artifact_version(version: &str) -> Result<Ruleset, ReplayArtifactError> {
+  let ruleset = default_ruleset();
+  if ruleset.version != version {
+    return Err(ReplayArtifactError::RulesetMismatch {
+      expected: ruleset.version.to_string(),
+      found: version.to_string(),
+    });
+  }
+
+  Ok(ruleset)
+}
+
+fn verify_replay_artifact(
+  text: &str,
+  ruleset: &Ruleset,
+) -> Result<ReplayVerification, ReplayArtifactError> {
+  let artifact = deserialize_replay_artifact(text)?;
+  ruleset_for_artifact_version(&artifact.ruleset_version)?;
+  if artifact.ruleset_version != ruleset.version {
+    return Err(ReplayArtifactError::RulesetMismatch {
+      expected: ruleset.version.to_string(),
+      found: artifact.ruleset_version,
+    });
+  }
+
+  replay(&artifact.history, ruleset).map_err(ReplayArtifactError::ReplayFailed)
+}
+
+fn write_replay_artifact(path: &str, artifact: &ReplayArtifact) -> Result<(), ReplayArtifactError> {
+  fs::write(path, serialize_replay_artifact(artifact)).map_err(|error| {
+    ReplayArtifactError::IoError(format!(
+      "unable to write replay artifact to {path}: {error}"
+    ))
+  })
+}
+
+fn describe_replay_artifact_error(error: &ReplayArtifactError) -> String {
+  match error {
+    ReplayArtifactError::UnsupportedVersion { found } => {
+      format!("unsupported replay artifact version {found}")
+    }
+    ReplayArtifactError::RulesetMismatch { expected, found } => {
+      format!("ruleset mismatch: expected {expected}, found {found}")
+    }
+    ReplayArtifactError::ParseError { line, detail } => {
+      if *line == 0 {
+        format!("replay artifact parse error: {detail}")
+      } else {
+        format!("replay artifact parse error at line {line}: {detail}")
+      }
+    }
+    ReplayArtifactError::ReplayFailed(ReplayError::InvalidTransition(validation_error)) => {
+      format!("replay verification failed during transition: {validation_error:?}")
+    }
+    ReplayArtifactError::ReplayFailed(ReplayError::StateHashMismatch {
+      turn,
+      expected,
+      actual,
+    }) => format!(
+      "replay verification failed at turn {turn}: expected hash {expected}, actual {actual}"
+    ),
+    ReplayArtifactError::IoError(message) => message.clone(),
+  }
 }
 
 #[cfg(test)]
@@ -3238,6 +4222,126 @@ mod tests {
         .events
         .iter()
         .any(|event| event.description.contains("Withdrew"))
+    );
+  }
+
+  fn sample_replay_artifact(play_mode: PlayMode, history: History) -> ReplayArtifact {
+    ReplayArtifact {
+      seed: DEFAULT_SEED,
+      play_mode,
+      ruleset_version: default_ruleset().version.to_string(),
+      history,
+    }
+  }
+
+  #[test]
+  fn replay_artifact_round_trip_verifies_preset_path_one() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let artifact = sample_replay_artifact(
+      PlayMode::Preset(StrategyPath::AccessStabilization),
+      history.clone(),
+    );
+    let serialized = serialize_replay_artifact(&artifact);
+    let restored = deserialize_replay_artifact(&serialized).unwrap();
+
+    assert_eq!(restored.seed, DEFAULT_SEED);
+    assert_eq!(
+      restored.play_mode,
+      PlayMode::Preset(StrategyPath::AccessStabilization)
+    );
+    assert_eq!(restored.history, history);
+    assert_eq!(
+      verify_replay_artifact(&serialized, &ruleset)
+        .unwrap()
+        .final_state,
+      history.transitions.last().unwrap().next
+    );
+  }
+
+  #[test]
+  fn replay_artifact_golden_header_is_stable() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let artifact =
+      sample_replay_artifact(PlayMode::Preset(StrategyPath::AccessStabilization), history);
+    let serialized = serialize_replay_artifact(&artifact);
+    let mut lines = serialized.lines();
+
+    assert_eq!(lines.next(), Some(REPLAY_ARTIFACT_VERSION));
+    assert_eq!(lines.next(), Some("ruleset=demo-ruleset-0.1.9"));
+    assert_eq!(lines.next(), Some("seed=42"));
+    assert_eq!(lines.next(), Some("play_mode=preset:1"));
+    assert_eq!(
+      lines.next(),
+      Some(
+        "genesis=turn:0,cash:100,staffed_beds:120,access_index:70,quality_index:78,workforce_trust:62,community_trust:66,commercial_rate:100,policy_pressure:30"
+      )
+    );
+    assert_eq!(lines.next(), Some("transition_count=4"));
+  }
+
+  #[test]
+  fn corrupt_replay_artifact_hash_fails_verification() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let mut artifact =
+      sample_replay_artifact(PlayMode::Preset(StrategyPath::AccessStabilization), history);
+    artifact.history.transitions[0].state_hash = "0000000000000000".to_string();
+    let serialized = serialize_replay_artifact(&artifact);
+
+    assert!(matches!(
+      verify_replay_artifact(&serialized, &ruleset),
+      Err(ReplayArtifactError::ReplayFailed(_))
+    ));
+  }
+
+  #[test]
+  fn interactive_defaults_match_preset_replay_artifact_history() {
+    let ruleset = default_ruleset();
+    let preset_history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let interactive_history =
+      build_history_interactive(DEFAULT_SEED, &ruleset, default_interactive_commands()).unwrap();
+    let preset_artifact = sample_replay_artifact(
+      PlayMode::Preset(StrategyPath::AccessStabilization),
+      preset_history.clone(),
+    );
+    let interactive_artifact = sample_replay_artifact(PlayMode::Interactive, interactive_history);
+
+    assert_eq!(preset_history, interactive_artifact.history);
+    assert_ne!(preset_artifact.play_mode, interactive_artifact.play_mode);
+    assert_eq!(
+      serialize_replay_artifact(&preset_artifact)
+        .replace("play_mode=preset:1", "play_mode=interactive"),
+      serialize_replay_artifact(&interactive_artifact)
+    );
+  }
+
+  #[test]
+  fn unsupported_replay_artifact_version_is_rejected() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let mut serialized = serialize_replay_artifact(&sample_replay_artifact(
+      PlayMode::Preset(StrategyPath::AccessStabilization),
+      history,
+    ));
+    serialized = serialized.replacen(REPLAY_ARTIFACT_VERSION, "replay-artifact-0.0.0", 1);
+
+    assert_eq!(
+      verify_replay_artifact(&serialized, &ruleset),
+      Err(ReplayArtifactError::UnsupportedVersion {
+        found: "replay-artifact-0.0.0".to_string(),
+      })
     );
   }
 }
