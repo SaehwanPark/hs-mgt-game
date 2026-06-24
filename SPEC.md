@@ -413,10 +413,8 @@ reconstructing it from the diff.
   - Three local code-reviewer passes found no Critical, High, Medium, or Low
     issues
 
-## Present
-
 - Feature: State hash and replay proof
-  Status: Active
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/state-hash-replay-proof
 
@@ -452,6 +450,50 @@ reconstructing it from the diff.
   - PR handoff opened as GitHub PR #11
   - Three code-reviewer passes completed; one low-severity replay diagnostic
     finding was fixed
+  - PR #11 merged into `main`
+
+## Present
+
+- Feature: CLI dashboard preview slice
+  Status: Active
+  Started: 2026-06-24
+  Branch: feat/cli-dashboard-preview-slice
+
+  Summary:
+  Add a starting executive dashboard and commitment previews for the three
+  compiled strategy paths. The slice improves pre-run player context while
+  preserving the existing four-turn deterministic demo, transition core,
+  resolved-input boundary, actor decisions, replay hashes, and educational
+  debrief.
+
+  Done:
+  - Working branch created from `main`
+  - State hash and replay proof moved into completed history
+  - Package version bumped to `0.1.13`
+  - Added pure CLI dashboard and strategy-preview helpers
+  - Wired the dashboard and previews into the pre-run CLI flow
+  - Added focused dashboard and preview tests
+
+  Deferred / Non-Goals:
+  - No per-turn interactive command entry
+  - No scenario loader, command parser, save format, or replay artifact export
+  - No new commands, actors, metrics, random streams, or gameplay turns
+  - No changes to transition logic, resolved input generation, actor decisions,
+    or committed replay hash semantics
+  - No empirical calibration or authoritative policy forecast
+  - No module split
+
+  Verification:
+  - New tests cover starting dashboard content, all three strategy previews, and
+    avoiding future actor-outcome leakage in previews
+  - `cargo fmt --check` passed
+  - `cargo test` passed with 58 tests
+  - Default `cargo run` with strategy `1` and seed `42` prints the starting
+    dashboard, strategy previews, per-turn state hashes, and replay success
+  - Domain QA passed for the bounded CLI dashboard preview slice
+  - PR handoff opened as GitHub PR #12
+  - Three code-reviewer passes completed; one low-severity handoff/spec
+    PR-state wording issue was fixed
 
 ## Future
 
