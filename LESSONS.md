@@ -100,3 +100,31 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   kept everything in `src/main.rs` without new dependencies.
 - Prevention: Extend the existing command and actor-decision shapes turn by turn
   until reuse boundaries justify extraction into modules.
+
+## Fourth Turn Can Reuse Coalition Patterns
+
+- Context: Adding a regional access coalition turn after payer, policy, and
+  workforce interactions.
+- Symptom: A fourth command and fourth actor decision can invite a general
+  coalition framework or module split.
+- Cause: The demo already has command validation, actor rationales, effects,
+  history, replay, and debrief patterns that extend cleanly.
+- Resolution: Added `JoinRegionalAccessCoalition` with a coalition liaison
+  decision, extended strategy presets with `fourth_command`, and kept everything
+  in `src/main.rs` without new dependencies.
+- Prevention: Extend the existing command and actor-decision shapes turn by turn
+  until reuse boundaries justify extraction into modules.
+
+## Observation Revisions Can Stay In Briefings
+
+- Context: Adding prior-period access measurement revisions after the coalition
+  turn without rewriting committed history.
+- Symptom: It is tempting to retroactively edit prior transition observations
+  when later data arrives.
+- Cause: The architecture requires immutable committed observations while still
+  teaching the difference between reported and revised estimates.
+- Resolution: Added `access_measurement_revision` to resolved inputs and
+  `prior_access_revision` to observations; debrief notes revisions while history
+  remains append-only.
+- Prevention: Keep revisions as explicit briefing inputs or notes; never mutate
+  prior committed transition records.

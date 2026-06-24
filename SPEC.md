@@ -252,10 +252,8 @@ reconstructing it from the diff.
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 
-## Present
-
 - Feature: Workforce pressure slice
-  Status: Active
+  Status: Complete
   Started: 2026-06-23
   Branch: feat/workforce-pressure-slice
 
@@ -274,11 +272,8 @@ reconstructing it from the diff.
   - Extend strategy paths with third compiled command presets
   - Add focused workforce, replay, and golden-trajectory tests
   - Update architecture, changelog, lessons, and handoff files
-  - Run final verification commands
-
-  Not Yet Done:
-  - PR handoff and three code-reviewer passes
-  - Merge after review and verification
+  - PR handoff opened as GitHub PR #7, and three review passes completed
+  - PR #7 merged into `main`
 
   Deferred / Non-Goals:
   - No full campaign or per-turn interactive command entry
@@ -291,6 +286,53 @@ reconstructing it from the diff.
   - Three-transition history replays from genesis
   - Labor actor rationale appears in committed history and debrief
   - Invalid workforce spend remains separate from unfavorable labor outcomes
+  - `transition()` contains no RNG, time, or I/O
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
+
+## Present
+
+- Feature: Coalition cooperative interaction slice
+  Status: Complete
+  Started: 2026-06-23
+  Branch: feat/coalition-cooperative-slice
+
+  Summary:
+  Extend the seeded three-turn playable demo with a fourth turn modeling a
+  regional access coalition opportunity. Add a coalition response command,
+  coalition liaison decision with inspectable rationale, four-transition replay,
+  and debrief coverage while keeping stochasticity outside `transition()`.
+
+  Done:
+  - Working branch created from `main`
+  - Workforce pressure slice moved from active state into completed history
+  - Mechanism design and domain QA artifacts updated
+  - Package version bumped to `0.1.8` then `0.1.9`
+  - Implement coalition command and liaison actor decision
+  - Extend strategy paths with fourth compiled command presets
+  - Add focused coalition, replay, and golden-trajectory tests
+  - Implement observation revision stream and debrief notes
+  - Add `docs/system-boundary.md` and `docs/evidence-registry.md` stubs
+  - Update architecture, changelog, lessons, and handoff files
+  - `cargo fmt`, `cargo test`, and `cargo run` pass
+
+  Not Yet Done:
+  - PR handoff and three code-reviewer passes
+  - Merge after review and verification
+
+  Deferred / Non-Goals:
+  - No full campaign or per-turn interactive command entry
+  - No scenario or ruleset file format
+  - No Medicare/Medicaid/competitor actors
+  - No module split unless unavoidable
+  - No new Cargo dependency
+  - No CI or release automation
+
+  Verification:
+  - Four-transition history replays from genesis
+  - Coalition liaison rationale appears in committed history and debrief
+  - Invalid coalition inputs remain separate from unfavorable coalition outcomes
+  - Later-turn observation revisions appear in briefings and debrief without
+    rewriting committed history
   - `transition()` contains no RNG, time, or I/O
   - `cargo fmt`, `cargo test`, and `cargo run` pass
 

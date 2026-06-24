@@ -2,11 +2,11 @@
 
 ## Summary
 
-Implemented the workforce pressure slice for the Health Policy Strategy Game.
-The demo now runs three deterministic transitions: capacity/payer negotiation,
-state access-mandate response, and workforce pressure response with a nursing
-workforce representative decision. Strategy paths, seeded resolved inputs,
-replay, and educational debrief all extend to the third turn.
+Implemented the coalition cooperative interaction slice and observation revision
+slice for the Health Policy Strategy Game. The demo now runs four deterministic
+transitions with a regional provider coalition liaison decision, prior-period
+access measurement revisions in later-turn briefings, seeded resolved inputs,
+replay, and educational debrief.
 
 ## Changed Files
 
@@ -18,6 +18,8 @@ replay, and educational debrief all extend to the third turn.
 - `CHANGELOG.md`
 - `LESSONS.md`
 - `README.md`
+- `docs/system-boundary.md`
+- `docs/evidence-registry.md`
 - `_workspace/00_input/request-summary.md`
 - `_workspace/02_mechanism_design.md`
 - `_workspace/03_domain_qa.md`
@@ -26,11 +28,12 @@ replay, and educational debrief all extend to the third turn.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 37 tests passed.
+- `cargo test` passed: 50 tests passed.
 - Default `cargo run` with strategy `1` and seed `42` replayed successfully and
-  printed three-turn resolved inputs plus the educational debrief.
-- Invalid retention spend and schedule relief inputs exit validation separately
-  from unfavorable labor work-action outcomes.
+  printed four-turn resolved inputs, observation revisions, and educational
+  debrief.
+- Invalid coalition inputs exit validation separately from unfavorable coalition
+  outcomes.
 
 ## Known Limits
 
@@ -38,8 +41,6 @@ replay, and educational debrief all extend to the third turn.
 - No empirical calibration.
 - No cryptographic state hash.
 - No interactive multi-turn campaign beyond compiled strategy presets.
-- No full policy lifecycle framework.
-- No general instructor report export.
 - No general command parser.
 - No new Cargo dependency.
 
@@ -48,5 +49,5 @@ replay, and educational debrief all extend to the third turn.
 - Revisit module boundaries when scenario loading or report exports need
   independent ownership.
 - Define a scenario/ruleset versioning format before loading external content.
-- Draft system boundary and ontology documentation for Phase 2.
+- Expand `docs/system-boundary.md` into a full Phase 2 ontology specification.
 - Build an evidence-linked parameter ledger before claiming calibration.
