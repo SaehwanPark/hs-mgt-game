@@ -185,3 +185,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   resolved inputs, actor decisions, or replay hashes.
 - Prevention: Keep CLI affordance improvements at the display boundary until
   the scenario action vocabulary justifies interactive per-turn command entry.
+
+## Per-Turn Play Can Reuse Existing Command Shapes
+
+- Context: Adding per-turn interactive command entry after the dashboard preview
+  slice.
+- Symptom: It is tempting to add a general command grammar, scenario schema, or
+  per-turn posture menus before the first interactive loop exists.
+- Cause: The four-turn demo already has typed commands, validation, observation
+  briefings, actor decisions, and replay hashes that can be driven turn by turn.
+- Resolution: Added play-mode selection, pure per-command parsers with
+  access-stabilization defaults, executive briefings from observation data only,
+  and concise turn summaries while preserving preset strategy paths for
+  regression.
+- Prevention: Add parsers and posture menus only when repeated playable content
+  needs external authoring or more than numeric parameter entry.

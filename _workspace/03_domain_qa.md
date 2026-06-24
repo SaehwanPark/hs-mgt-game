@@ -6,48 +6,42 @@ pass
 
 ## Reviewed Inputs
 
-- Phase 5 CLI dashboard preview slice.
-- `README.md`
-- `docs/proposal.md`
-- `docs/roadmap.md`
-- `docs/design_principles.md`
-- `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/first-scenario-brief.md`
-- `src/main.rs`
-- `_workspace/00_input/request-summary.md`
+- User request: per-turn interactive play slice per implementation plan
+- Changed files: `src/main.rs`, project state docs, workspace handoff artifacts
+- Canonical docs: `README.md`, `docs/first-scenario-brief.md`,
+  `docs/system-boundary.md`, `docs/design_principles.md`
+- Verification: `cargo fmt --check`, `cargo test` (67 tests), interactive and
+  preset `cargo run` smoke checks
 
 ## Findings
 
-- Scope remains a display-boundary playability improvement: no new commands,
-  actors, state metrics, random streams, loaders, parsers, scenario schemas, or
-  module boundaries are introduced.
-- The dashboard uses starting true-state values only as initial executive
-  context, before any turn is resolved.
-- Strategy previews are derived from the existing compiled player commitments;
-  they do not disclose future actor responses, replay results, or realized
-  stochastic outcomes.
-- Transition logic, resolved stochastic input generation, actor-specific
-  observations, actor rationales, replay hash semantics, and educational
-  debrief behavior remain unchanged.
-- The slice fits the Phase 5 playable CLI direction while preserving the
-  roadmap preference for narrow vertical slices before broader frameworks.
+- Scope remains within the first scenario brief's four executive decision points.
+- Interactive briefings use `observe_for_player` output only; they do not expose
+  future actor decisions or true-state outcomes beyond committed observation
+  fields.
+- Preset strategy paths preserve existing deterministic trajectories for
+  regression.
+- `transition()` still has no RNG, wall-clock, filesystem, network, or stdin
+  access.
+- Validation failures remain separate from unfavorable modeled actor outcomes.
+- No new actors, commands, calibration claims, or scenario-loader behavior were
+  introduced.
 
 ## Required Fixes
 
-- None before PR handoff.
+- None.
 
 ## Residual Risks
 
-- The CLI still uses compiled strategy paths rather than per-turn interactive
-  command entry.
-- The previews are qualitative commitment summaries, not calibrated forecasts.
-- No scenario loader, save/load path, or external replay artifact exists.
+- Interactive numeric entry may feel terse until a later posture-menu or forecast
+  framing slice improves player guidance.
+- `src/main.rs` continues to grow; module split remains deferred.
+- Prototype integer formulas remain abstractions without empirical calibration.
 
 ## Verification Evidence
 
-- Focused tests were added for dashboard content, preview coverage, and avoiding
-  future actor-outcome leakage in previews.
-- `cargo fmt --check` completed successfully.
-- `cargo test` passed: 58 tests passed.
-- Default `cargo run` with strategy `1` and seed `42` printed the starting
-  dashboard, strategy previews, per-turn state hashes, and replay success.
+- `cargo test`: 67 passed
+- Interactive defaults at seed `42` complete four turns and replay successfully
+- Preset path `1` at seed `42` preserves canonical demo trajectory test
+- `interactive_history_matches_access_stabilization_preset` confirms parser
+  defaults align with the access-stabilization preset

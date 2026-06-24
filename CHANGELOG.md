@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.14] - 2026-06-24
+
+### Added
+
+- Added per-turn interactive command entry as the default CLI play mode.
+- Added play-mode selection between interactive play and three preset strategy
+  paths.
+- Added executive turn briefings and concise turn-resolution summaries for
+  interactive play.
+- Added pure command parsers and `build_history_interactive` for testable
+  interactive history construction.
+- Added focused tests for play-mode parsing, command parsing, interactive
+  history replay, and briefing purity.
+
+### Changed
+
+- Bumped package version from `0.1.13` to `0.1.14`.
+- Preset strategy paths 1–3 remain available for regression and quick play.
+- Moved the merged CLI dashboard preview slice into completed project state.
+
 ## [0.1.13] - 2026-06-24
 
 ### Added

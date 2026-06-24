@@ -452,10 +452,8 @@ reconstructing it from the diff.
     finding was fixed
   - PR #11 merged into `main`
 
-## Present
-
 - Feature: CLI dashboard preview slice
-  Status: Active
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/cli-dashboard-preview-slice
 
@@ -473,6 +471,10 @@ reconstructing it from the diff.
   - Added pure CLI dashboard and strategy-preview helpers
   - Wired the dashboard and previews into the pre-run CLI flow
   - Added focused dashboard and preview tests
+  - PR handoff opened as GitHub PR #12
+  - Three code-reviewer passes completed; one low-severity handoff/spec
+    PR-state wording issue was fixed
+  - PR #12 merged into `main`
 
   Deferred / Non-Goals:
   - No per-turn interactive command entry
@@ -491,9 +493,52 @@ reconstructing it from the diff.
   - Default `cargo run` with strategy `1` and seed `42` prints the starting
     dashboard, strategy previews, per-turn state hashes, and replay success
   - Domain QA passed for the bounded CLI dashboard preview slice
-  - PR handoff opened as GitHub PR #12
-  - Three code-reviewer passes completed; one low-severity handoff/spec
-    PR-state wording issue was fixed
+
+## Present
+
+- Feature: Per-turn interactive play slice
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/per-turn-interactive-slice
+
+  Summary:
+  Add per-turn interactive command entry as the default play mode while
+  preserving preset strategy paths 1–3 for regression and quick play. Each turn
+  shows an executive briefing, accepts command parameters within existing
+  ruleset bounds, and prints a concise turn-resolution summary before replay and
+  debrief.
+
+  Done:
+  - Working branch created from `main`
+  - CLI dashboard preview slice moved into completed history
+  - Package version bumped to `0.1.14`
+  - Added play-mode selection with interactive default and preset paths 1–3
+  - Added per-turn command parsers with access-stabilization defaults
+  - Added `build_history_interactive`, executive turn briefings, and
+    turn-resolution summaries
+  - Added interactive CLI session loop separate from preset technical dump
+  - Added focused interactive parsing, history, and briefing tests
+  - Updated architecture, changelog, lessons, and workspace handoff artifacts
+  - `cargo fmt --check`, `cargo test` (67 tests), and `cargo run` pass
+  - Domain QA passed for the bounded interactive play slice
+  - PR handoff opened as GitHub PR #13
+
+  Deferred / Non-Goals:
+  - No new commands, actors, metrics, or random streams
+  - No per-turn strategic posture menus beyond numeric parameter entry
+  - No scenario loader, save format, or replay artifact export
+  - No changes to `transition()`, hash semantics, or debrief generation logic
+  - No module split, CI workflow, or new dependencies
+  - No competitor/Medicare/Medicaid actors
+  - No empirical calibration or authoritative policy forecast
+
+  Verification:
+  - Interactive path completes four turns from `cargo run` with default commands
+  - Preset paths 1–3 remain bit-identical to pre-slice behavior
+  - `build_history_interactive` with default commands matches access-stabilization
+    preset at seed `42`
+  - Turn briefings use observation data only, not future actor outcomes
+  - `cargo fmt --check`, `cargo test`, and `cargo run` pass
 
 ## Future
 

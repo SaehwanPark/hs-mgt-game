@@ -8,9 +8,10 @@ intended architecture boundaries that future implementation should preserve.
 - Language: Rust
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`
-- Executable: minimal playable CLI over a four-turn deterministic demo with a
-  starting executive dashboard, strategy previews, seeded resolved inputs,
-  replay state-hash checks, and educational debrief in `src/main.rs`
+- Executable: interactive and preset-play CLI over a four-turn deterministic demo
+  with a starting executive dashboard, per-turn executive briefings, strategy
+  previews, seeded resolved inputs, replay state-hash checks, and educational
+  debrief in `src/main.rs`
 - Canonical design docs: `README.md` and `docs/`
 
 Last Reviewed: 2026-06-24
@@ -23,11 +24,12 @@ local strategic decision rationales for a commercial insurer, state policy
 officials, nursing workforce representative, and regional provider coalition
 liaison, attributed effects, append-only history, stable per-transition state
 hashes, replay verification that detects committed hash drift, a deterministic
-end-of-run educational debrief, and a small CLI choice among three hard-coded
-strategy paths with a starting dashboard, commitment previews, and optional seed
-input. The first Phase 3 design artifacts now define the actor-card template and
-first scenario brief that future runtime additions should satisfy before adding
-new strategic actors or scenario content.
+end-of-run educational debrief, and CLI play modes for per-turn interactive
+command entry or three hard-coded preset strategy paths with a starting
+dashboard, commitment previews, and optional seed input. The first Phase 3 design
+artifacts now define the actor-card template and first scenario brief that future
+runtime additions should satisfy before adding new strategic actors or scenario
+content.
 
 ## Intended System Shape
 
@@ -111,13 +113,15 @@ The initial interface is a CLI. Terminal rendering, input parsing, and display
 formatting should remain outside the deterministic simulation core.
 
 Current proof: `cargo run` prints a starting executive dashboard and strategy
-commitment previews, prompts for one of three hard-coded strategy paths and an
-optional run seed, then prints resolved inputs, the four-turn demo summary,
-replay result, and educational debrief. The CLI input boundary selects compiled
-strategy paths and seeds only; there is no general command parser, scenario
-loader, save format, or durable replay artifact yet.
+commitment previews, prompts for interactive play (default) or one of three
+preset strategy paths and an optional run seed, then either collects four
+per-turn command entries with executive briefings and turn-resolution summaries
+or runs a preset path with the full technical demo dump, replay result, and
+educational debrief. The CLI input boundary selects play mode, per-turn command
+parameters or compiled strategy paths, and seeds only; there is no general
+command parser, scenario loader, save format, or durable replay artifact yet.
 
-Last Reviewed: 2026-06-23
+Last Reviewed: 2026-06-24
 Status: Verified
 
 ## Durable Constraints
