@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [0.1.20] - 2026-06-24
+
+### Added
+
+- Added [`docs/phase1-implications-memo.md`](docs/phase1-implications-memo.md)
+  converting Phase 1 research into adopted, modified, and rejected design
+  patterns plus mechanism implications for the stabilization slice.
+- Added parameter-source ledger section to
+  [`docs/evidence-registry.md`](docs/evidence-registry.md).
+
+### Changed
+
+- Bumped package version from `0.1.19` to `0.1.20`.
+- Updated README documentation links and contributor priorities.
+- Restored SPEC `Present` section bookkeeping after Phase 5 closure.
+
+### Notes
+
+- Docs-only release; no runtime behavior changes. Golden seed-42 hash unchanged.
+
 ## [0.1.19] - 2026-06-24
 
 ### Added

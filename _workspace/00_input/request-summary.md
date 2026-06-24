@@ -1,42 +1,35 @@
-# Request Summary
+# Request Summary — Phase 1 Implications Memo Slice
 
 ## Scope
 
-Close a bounded Phase 5 vertical-slice deliverable: add deterministic replay
-artifact export and record internal playtest findings for the current four-turn
-demo.
+Convert existing Phase 1 research into `docs/phase1-implications-memo.md` and add
+an initial parameter-source ledger to `docs/evidence-registry.md`. No runtime
+changes.
 
-## Roadmap Phase
+## Non-goals
 
-Phase 5 first vertical slice — reproducible replay artifact and internal
-playtest documentation without expanding actors or scenario loading.
+- No empirical calibration or numeric threshold replacement
+- No new actors, commands, or scenario loader
+- No governance docs (Slice 3)
 
-## Expected Outputs
+## Sources
 
-- Updated `src/main.rs` with `replay-artifact-0.1.15` serialize, deserialize,
-  verify helpers and optional post-run export prompt
-- `docs/playtest-findings-v0.1.15.md`
-- Version bump to `0.1.15`
-- Updated README, architecture notes, changelog, lessons, domain QA, and final
-  handoff artifacts
+- `docs/phase1-lit-review.md`
+- `_workspace/01_evidence_map.md`
+- `docs/evidence-registry.md`
+- `docs/phase5-scope-register.md`
 
-## Non-Goals
+## Expected files
 
-- No new commands, actors, metrics, or random streams
-- No mid-run save/load or scenario/ruleset file loader
-- No cryptographic hash dependency or JSON crate
-- No changes to `transition()` or committed replay hash semantics
-- No module split or CI workflow in this slice
+- `docs/phase1-implications-memo.md` (create)
+- `docs/evidence-registry.md` (update)
+- `README.md`, `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`
+- `_workspace/final/handoff.md`, `_workspace/03_domain_qa.md`
 
-## Validation Target
+## Validation
 
-- Preset path `1` at seed `42` round-trips through artifact serialize/deserialize
-  and replays with zero hash mismatches
-- Corrupt committed hash fails verification
-- Empty export prompt preserves prior skip behavior
-- `cargo fmt --check`, `cargo test`, and `cargo run` pass
+- `cargo fmt --check`, `cargo test` (78 tests, golden hash unchanged)
 
-## Generic Skills Needed
+## Global skills
 
-- `simple-code-writer` for the minimal implementation
-- `code-reviewer` for the preferred-workflow review loop after PR handoff
+- `spec-driven-developer`, `code-reviewer` (PR review loop)

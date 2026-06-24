@@ -43,8 +43,36 @@ prototype integer parameters.
 - Which distributional outcomes must be first-class before external classroom
   use?
 
+## Parameter-Source Ledger
+
+Initial ledger of official source **candidates** for future parameterization.
+No prototype integer in the current codebase is calibrated from these sources.
+Status keys: `candidate` (identified, not applied), `linked` (cited in mechanism
+design), `calibrated` (ranges applied in ruleset — none yet).
+
+| Parameter domain | Prototype use (abstract) | Source candidate | Status | Notes |
+| --- | --- | --- | --- | --- |
+| Hospital finance / cash pressure | `cash_on_hand`, spend commands | CMS National Health Expenditure Data; AHA/Hospital Cost Report context via MedPAC reports | candidate | Use for plausible ranges only when calibrating |
+| Commercial payer rates / network tension | Turn 1 rate request thresholds | KFF Employer Health Benefits Survey; MedPAC Medicare payment context as benchmark | candidate | Not contract-level modeling |
+| State access / policy pressure | Turn 2 mandate and oversight ladder | State health department reports; MACPAC access narratives for Medicaid context | candidate | Federal Medicaid rules deferred |
+| Nursing workforce pressure | Turn 3 labor signal and retention | BLS healthcare occupations; selected workforce shortage literature | candidate | No strike-law simulation |
+| Community trust / coalition leverage | Turns 3–4 trust and coalition signals | KFF community health surveys (conceptual); local coalition case studies | candidate | Qualitative anchor only |
+| Access and quality indices | Reported vs true access, quality | CMS quality programs (conceptual); literature on measurement error | literature-informed | Observation noise already modeled |
+| Market competition / capacity | Planned Turn 5 competitor slice | MedPAC hospital market concentration; IO literature on capacity competition | candidate | Actor card required before runtime |
+| Macroeconomic / utilization shocks | Future exogenous inputs | CMS NHE projections; recession utilization literature | candidate | Not in current four-turn demo |
+
+### Ledger rules
+
+- Replace a prototype threshold only when a row moves to `calibrated` with an
+  explicit citation and CHANGELOG note.
+- Separate **empirical calibration** (plausible real-world ranges) from
+  **gameplay balancing** (fun, tension, teachability).
+- Gameplay balancing choices must be documented even when not empirically sourced.
+
 ## Next Steps
 
+- See [`phase1-implications-memo.md`](phase1-implications-memo.md) for
+  research-to-design implications from Phase 1.
 - See [`phase5-scope-register.md`](phase5-scope-register.md) for Phase 5 closure,
   deferred world elements, and recommended next runtime slice.
 - Use [`actor-cards.md`](actor-cards.md) before adding future strategic actors.
@@ -53,5 +81,3 @@ prototype integer parameters.
 - Link each mechanism row to primary sources as parameters are introduced.
 - Separate empirical calibration ranges from gameplay balancing choices.
 - Add scenario-specific evidence when the first external scenario format lands.
-- Create a parameter-source ledger before replacing any prototype integer
-  thresholds with evidence-backed ranges.
