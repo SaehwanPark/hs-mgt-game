@@ -655,8 +655,6 @@ reconstructing it from the diff.
   - `cargo fmt --check` passes locally
   - `cargo test` passes locally (78 tests)
 
-## Present
-
 - Feature: Phase 5 scope and risk register
   Status: Complete
   Started: 2026-06-24
@@ -690,12 +688,39 @@ reconstructing it from the diff.
   - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
   - Domain QA pass for scope register wording
 
+- Feature: Phase 1 research-to-design implications memo
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/phase1-implications-memo
+
+  Summary:
+  Convert Phase 1 literature research into actionable design implications and
+  add an initial parameter-source ledger without changing runtime behavior.
+
+  Done:
+  - Working branch created from `main`
+  - SPEC Present section bookkeeping restored after Phase 5 closure
+  - Added `docs/phase1-implications-memo.md`
+  - Expanded `docs/evidence-registry.md` with parameter-source ledger
+  - Package version bumped to `0.1.20`
+  - README, CHANGELOG, and workspace handoff artifacts updated
+  - `cargo fmt --check` and `cargo test` pass (golden hash unchanged)
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No empirical calibration or numeric threshold replacement
+  - No competitor actor implementation in this slice
+
+  Verification:
+  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
+
+## Present
+
 ## Future
 
 - Phase 0 governance docs: glossary, decision-record conventions, and versioning
   policy (CI baseline now in place).
-- Author Phase 1 research-to-design implications memo; expand
-  [`evidence-registry.md`](evidence-registry.md) with parameter-source ledger.
 - Use the actor-card template before adding future strategic actors.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.
