@@ -2,10 +2,10 @@
 
 ## Summary
 
-Implemented the Phase 5 CLI dashboard preview slice for the Health Policy
-Strategy Game. The CLI now shows starting executive context and commitment
-previews for the three compiled strategy paths before running the existing
-four-turn deterministic demo.
+Implemented the Phase 5 per-turn interactive play slice for the Health Policy
+Strategy Game. The CLI now defaults to interactive play where the player enters
+each of four turn commands with executive briefings and concise turn summaries.
+Preset strategy paths 1–3 remain available for regression and quick play.
 
 ## Changed Files
 
@@ -24,22 +24,19 @@ four-turn deterministic demo.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 58 tests passed.
-- Default `cargo run` with strategy `1` and seed `42` printed the starting
-  dashboard, strategy previews, per-turn state hashes, and replay success.
+- `cargo test` passed: 67 tests passed.
+- Interactive `cargo run` with default play mode, seed `42`, and default turn
+  commands completed four turns with replay success and debrief output.
+- Preset path `1` with seed `42` preserved the canonical demo trajectory.
 
 ## Review Summary
 
-- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/12
-- Pass 1: Low-severity handoff/spec PR-state wording issue found and fixed.
-- Pass 2: No actionable issues found after the PR-state wording fix.
-- Pass 3: No actionable issues found.
-- Critical/High findings: none.
-- Merge-ready: yes, pending any external CI or human review feedback.
+- Pending PR handoff and three code-reviewer passes.
+- Domain QA: pass.
 
 ## Known Limits
 
-- No per-turn interactive command entry.
+- No per-turn strategic posture menus beyond numeric parameter entry.
 - No scenario loader.
 - No save/load or durable replay artifact format.
 - No calibrated forecast or empirical parameter ledger.
@@ -47,4 +44,4 @@ four-turn deterministic demo.
 
 ## Next Dependencies
 
-- Watch for external CI or human review feedback on PR #12.
+- PR handoff, three code-reviewer passes, and merge when approved.

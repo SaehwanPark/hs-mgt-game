@@ -218,6 +218,12 @@ struct History {
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum PlayMode {
+  Interactive,
+  Preset(StrategyPath),
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 enum StrategyPath {
   AccessStabilization,
   FiscalCaution,
@@ -247,16 +253,18 @@ struct StrategyCommitments {
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 enum CliError {
-  InvalidStrategyChoice(String),
+  InvalidPlayModeChoice(String),
   InvalidSeed(String),
+  InvalidCommandInput(String),
   InvalidStrategyPlan(ValidationError),
+  InvalidInteractiveCommand(ValidationError),
   InputUnavailable,
 }
 
 fn main() {
   let ruleset = default_ruleset();
 
-  match read_run_config().and_then(|config| run_selected_strategy(config, &ruleset)) {
+  match read_run_config().and_then(|config| run_session(config, &ruleset)) {
     Ok(()) => {}
     Err(error) => {
       eprintln!("Unable to run demo: {}", describe_cli_error(&error));
@@ -268,7 +276,7 @@ fn main() {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 struct RunConfig {
   seed: u64,
-  strategy: StrategyPath,
+  play_mode: PlayMode,
 }
 
 fn default_ruleset() -> Ruleset {
@@ -305,9 +313,9 @@ fn genesis_state() -> WorldState {
 
 fn read_run_config() -> Result<RunConfig, CliError> {
   print_pre_run_briefing(&genesis_state());
-  let strategy = read_strategy_choice()?;
+  let play_mode = read_play_mode_choice()?;
   let seed = read_seed_choice()?;
-  Ok(RunConfig { seed, strategy })
+  Ok(RunConfig { seed, play_mode })
 }
 
 fn print_pre_run_briefing(state: &WorldState) {
@@ -423,18 +431,30 @@ fn strategy_commitments(plan: &StrategyPlan) -> StrategyCommitments {
   }
 }
 
-fn read_strategy_choice() -> Result<StrategyPath, CliError> {
-  println!("Choose a strategy path:");
-  println!("  1. Access stabilization");
-  println!("  2. Fiscal caution");
-  println!("  3. Aggressive bargaining");
-  println!("Press Enter for option 1.");
+fn read_play_mode_choice() -> Result<PlayMode, CliError> {
+  println!("Choose play mode:");
+  println!("  Enter or i. Interactive (enter each turn's command)");
+  println!("  1. Preset path: Access stabilization");
+  println!("  2. Preset path: Fiscal caution");
+  println!("  3. Preset path: Aggressive bargaining");
 
   let mut input = String::new();
   io::stdin()
     .read_line(&mut input)
     .map_err(|_| CliError::InputUnavailable)?;
-  parse_strategy_choice(&input)
+  parse_play_mode_choice(&input)
+}
+
+fn parse_play_mode_choice(input: &str) -> Result<PlayMode, CliError> {
+  let trimmed = input.trim();
+
+  match trimmed {
+    "" | "i" | "I" => Ok(PlayMode::Interactive),
+    "1" => Ok(PlayMode::Preset(StrategyPath::AccessStabilization)),
+    "2" => Ok(PlayMode::Preset(StrategyPath::FiscalCaution)),
+    "3" => Ok(PlayMode::Preset(StrategyPath::AggressiveBargaining)),
+    other => Err(CliError::InvalidPlayModeChoice(other.to_string())),
+  }
 }
 
 fn read_seed_choice() -> Result<u64, CliError> {
@@ -457,25 +477,6 @@ fn parse_seed_choice(input: &str) -> Result<u64, CliError> {
   trimmed
     .parse::<u64>()
     .map_err(|_| CliError::InvalidSeed(trimmed.to_string()))
-}
-
-fn run_selected_strategy(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
-  println!("Selected strategy: {}", strategy_plan(config.strategy).name);
-  let history = build_history_for_strategy(config.strategy, config.seed, ruleset)
-    .map_err(CliError::InvalidStrategyPlan)?;
-  print_demo(config.seed, &history, ruleset);
-  Ok(())
-}
-
-fn parse_strategy_choice(input: &str) -> Result<StrategyPath, CliError> {
-  let trimmed = input.trim();
-
-  match trimmed {
-    "" | "1" => Ok(StrategyPath::AccessStabilization),
-    "2" => Ok(StrategyPath::FiscalCaution),
-    "3" => Ok(StrategyPath::AggressiveBargaining),
-    other => Err(CliError::InvalidStrategyChoice(other.to_string())),
-  }
 }
 
 fn build_history_for_strategy(
@@ -513,6 +514,297 @@ fn build_history_for_strategy(
     genesis,
     transitions: vec![first, second, third, fourth],
   })
+}
+
+fn build_history_interactive(
+  seed: u64,
+  ruleset: &Ruleset,
+  commands: [PlayerCommand; 4],
+) -> Result<History, ValidationError> {
+  let genesis = genesis_state();
+  let first_inputs = resolve_inputs(seed, &genesis, ruleset);
+  let first = transition(&genesis, commands[0].clone(), first_inputs, ruleset)?;
+  let second_inputs = resolve_inputs(seed, &first.next, ruleset);
+  let second = transition(&first.next, commands[1].clone(), second_inputs, ruleset)?;
+  let third_inputs = resolve_inputs(seed, &second.next, ruleset);
+  let third = transition(&second.next, commands[2].clone(), third_inputs, ruleset)?;
+  let fourth_inputs = resolve_inputs(seed, &third.next, ruleset);
+  let fourth = transition(&third.next, commands[3].clone(), fourth_inputs, ruleset)?;
+
+  Ok(History {
+    genesis,
+    transitions: vec![first, second, third, fourth],
+  })
+}
+
+fn default_interactive_commands() -> [PlayerCommand; 4] {
+  let plan = strategy_plan(StrategyPath::AccessStabilization);
+  [
+    plan.first_command,
+    plan.second_command,
+    plan.third_command,
+    plan.fourth_command,
+  ]
+}
+
+fn parse_stabilize_access_command(input: &str) -> Result<PlayerCommand, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(default_interactive_commands()[0].clone());
+  }
+
+  let parts: Vec<&str> = trimmed.split_whitespace().collect();
+  if parts.len() != 3 {
+    return Err(CliError::InvalidCommandInput(
+      "turn 1 expects three integers: staffed_beds capital_spend requested_rate".to_string(),
+    ));
+  }
+
+  let add_staffed_beds = parts[0]
+    .parse::<i32>()
+    .map_err(|_| CliError::InvalidCommandInput(format!("invalid staffed beds '{0}'", parts[0])))?;
+  let capital_spend = parts[1]
+    .parse::<i32>()
+    .map_err(|_| CliError::InvalidCommandInput(format!("invalid capital spend '{0}'", parts[1])))?;
+  let requested_commercial_rate = parts[2].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid requested commercial rate '{}'", parts[2]))
+  })?;
+
+  Ok(PlayerCommand::StabilizeAccess {
+    add_staffed_beds,
+    capital_spend,
+    requested_commercial_rate,
+  })
+}
+
+fn parse_policy_command(input: &str) -> Result<PlayerCommand, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(default_interactive_commands()[1].clone());
+  }
+
+  let parts: Vec<&str> = trimmed.split_whitespace().collect();
+  if parts.len() != 2 {
+    return Err(CliError::InvalidCommandInput(
+      "turn 2 expects two integers: advocacy_spend access_commitment".to_string(),
+    ));
+  }
+
+  let advocacy_spend = parts[0].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid advocacy spend '{0}'", parts[0]))
+  })?;
+  let access_commitment = parts[1].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid access commitment '{}'", parts[1]))
+  })?;
+
+  Ok(PlayerCommand::RespondToStateAccessMandate {
+    advocacy_spend,
+    access_commitment,
+  })
+}
+
+fn parse_workforce_command(input: &str) -> Result<PlayerCommand, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(default_interactive_commands()[2].clone());
+  }
+
+  let parts: Vec<&str> = trimmed.split_whitespace().collect();
+  if parts.len() != 2 {
+    return Err(CliError::InvalidCommandInput(
+      "turn 3 expects two integers: retention_spend schedule_relief".to_string(),
+    ));
+  }
+
+  let retention_spend = parts[0].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid retention spend '{0}'", parts[0]))
+  })?;
+  let schedule_relief_commitment = parts[1].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid schedule relief '{}'", parts[1]))
+  })?;
+
+  Ok(PlayerCommand::RespondToWorkforcePressure {
+    retention_spend,
+    schedule_relief_commitment,
+  })
+}
+
+fn parse_coalition_command(input: &str) -> Result<PlayerCommand, CliError> {
+  let trimmed = input.trim();
+
+  if trimmed.is_empty() {
+    return Ok(default_interactive_commands()[3].clone());
+  }
+
+  let parts: Vec<&str> = trimmed.split_whitespace().collect();
+  if parts.len() != 2 {
+    return Err(CliError::InvalidCommandInput(
+      "turn 4 expects two integers: coalition_investment shared_access_commitment".to_string(),
+    ));
+  }
+
+  let coalition_investment = parts[0].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid coalition investment '{}'", parts[0]))
+  })?;
+  let shared_access_commitment = parts[1].parse::<i32>().map_err(|_| {
+    CliError::InvalidCommandInput(format!("invalid shared access commitment '{}'", parts[1]))
+  })?;
+
+  Ok(PlayerCommand::JoinRegionalAccessCoalition {
+    coalition_investment,
+    shared_access_commitment,
+  })
+}
+
+fn read_command_line(prompt: &str) -> Result<String, CliError> {
+  println!("{prompt}");
+  let mut input = String::new();
+  io::stdin()
+    .read_line(&mut input)
+    .map_err(|_| CliError::InputUnavailable)?;
+  Ok(input)
+}
+
+fn turn_executive_briefing(
+  prior: &WorldState,
+  observation: &Observation,
+  turn_number: u32,
+) -> Vec<String> {
+  let mut lines = vec![
+    format!("Turn {turn_number} executive briefing"),
+    format!(
+      "  Cash {}, policy pressure {}, workforce trust {}, community trust {}",
+      prior.cash, prior.policy_pressure, prior.workforce_trust, prior.community_trust
+    ),
+    format!(
+      "  Reported access {}, quality {}, policy briefing: {}",
+      observation.reported_access_index,
+      observation.reported_quality_index,
+      observation.policy_briefing
+    ),
+  ];
+
+  if observation.prior_access_revision != 0 {
+    lines.push(format!(
+      "  Prior access measurement revision: {}",
+      observation.prior_access_revision
+    ));
+  }
+
+  lines
+}
+
+fn turn_resolution_summary(transition: &Transition) -> Vec<String> {
+  vec![
+    format!(
+      "Turn {} resolved: {}",
+      transition.next.turn,
+      describe_actor_decision(&transition.actor_decision.decision)
+    ),
+    format!(
+      "  {} — {}",
+      transition.actor_decision.actor, transition.actor_decision.rationale
+    ),
+    format!("  State hash: {}", transition.state_hash),
+  ]
+}
+
+fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
+  let history = match config.play_mode {
+    PlayMode::Preset(strategy) => {
+      println!("Selected preset: {}", strategy_plan(strategy).name);
+      build_history_for_strategy(strategy, config.seed, ruleset)
+        .map_err(CliError::InvalidStrategyPlan)?
+    }
+    PlayMode::Interactive => {
+      println!("Selected play mode: Interactive");
+      run_interactive_history(config.seed, ruleset)?
+    }
+  };
+
+  match config.play_mode {
+    PlayMode::Preset(_) => print_demo(config.seed, &history, ruleset),
+    PlayMode::Interactive => print_interactive_results(config.seed, &history, ruleset),
+  }
+
+  Ok(())
+}
+
+fn run_interactive_history(seed: u64, ruleset: &Ruleset) -> Result<History, CliError> {
+  let genesis = genesis_state();
+  let mut state = genesis.clone();
+  let mut transitions = Vec::new();
+
+  let turn_readers: [(&str, &str, fn(&str) -> Result<PlayerCommand, CliError>); 4] = [
+    (
+      "Turn 1 command (capacity and payer posture): staffed_beds capital_spend requested_rate",
+      "Enter for defaults: 8 18 112",
+      parse_stabilize_access_command,
+    ),
+    (
+      "Turn 2 command (state access mandate): advocacy_spend access_commitment",
+      "Enter for defaults: 10 7",
+      parse_policy_command,
+    ),
+    (
+      "Turn 3 command (workforce pressure): retention_spend schedule_relief",
+      "Enter for defaults: 14 8",
+      parse_workforce_command,
+    ),
+    (
+      "Turn 4 command (regional access coalition): coalition_investment shared_access_commitment",
+      "Enter for defaults: 12 8",
+      parse_coalition_command,
+    ),
+  ];
+
+  for (turn_index, (prompt, default_hint, parse_command)) in turn_readers.iter().enumerate() {
+    let turn_number = turn_index as u32 + 1;
+    let inputs = resolve_inputs(seed, &state, ruleset);
+    let observation = observe_for_player(&state, &inputs);
+
+    for line in turn_executive_briefing(&state, &observation, turn_number) {
+      println!("{line}");
+    }
+
+    let command = parse_command(&read_command_line(&format!("{prompt}\n  {default_hint}"))?)?;
+    let transition =
+      transition(&state, command, inputs, ruleset).map_err(CliError::InvalidInteractiveCommand)?;
+
+    for line in turn_resolution_summary(&transition) {
+      println!("{line}");
+    }
+
+    state = transition.next.clone();
+    transitions.push(transition);
+  }
+
+  Ok(History {
+    genesis,
+    transitions,
+  })
+}
+
+fn print_interactive_results(seed: u64, history: &History, ruleset: &Ruleset) {
+  let replayed = replay(history, ruleset).expect("interactive history should replay");
+
+  println!("Health Policy Strategy Game interactive session complete");
+  println!("Ruleset: {}", ruleset.version);
+  println!("Run seed: {seed}");
+  println!(
+    "Replay final state matches committed state: {}",
+    history
+      .transitions
+      .last()
+      .is_some_and(|transition| replayed.final_state == transition.next)
+  );
+  println!("Educational debrief:");
+  for line in educational_debrief(history) {
+    println!("  - {line}");
+  }
 }
 
 fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
@@ -582,14 +874,18 @@ fn strategy_plan(choice: StrategyPath) -> StrategyPlan {
 
 fn describe_cli_error(error: &CliError) -> String {
   match error {
-    CliError::InvalidStrategyChoice(choice) => {
-      format!("strategy choice '{choice}' is not available; use 1, 2, or 3")
+    CliError::InvalidPlayModeChoice(choice) => {
+      format!("play mode '{choice}' is not available; use Enter, i, 1, 2, or 3")
     }
     CliError::InvalidSeed(seed) => {
       format!("seed '{seed}' is not a valid unsigned integer")
     }
+    CliError::InvalidCommandInput(message) => message.clone(),
     CliError::InvalidStrategyPlan(error) => {
       format!("selected strategy is internally invalid: {error:?}")
+    }
+    CliError::InvalidInteractiveCommand(error) => {
+      format!("command is invalid for this turn: {error:?}")
     }
     CliError::InputUnavailable => "could not read input from standard input".to_string(),
   }
@@ -2079,35 +2375,137 @@ mod tests {
   }
 
   #[test]
-  fn empty_cli_choice_defaults_to_access_stabilization() {
+  fn empty_play_mode_choice_defaults_to_interactive() {
+    assert_eq!(parse_play_mode_choice("\n").unwrap(), PlayMode::Interactive);
+  }
+
+  #[test]
+  fn interactive_play_mode_alias_is_parsed() {
     assert_eq!(
-      parse_strategy_choice("\n").unwrap(),
-      StrategyPath::AccessStabilization
+      parse_play_mode_choice("i\n").unwrap(),
+      PlayMode::Interactive
     );
   }
 
   #[test]
-  fn numbered_cli_choices_select_expected_strategy_paths() {
+  fn numbered_play_mode_choices_select_preset_paths() {
     assert_eq!(
-      parse_strategy_choice("1\n").unwrap(),
-      StrategyPath::AccessStabilization
+      parse_play_mode_choice("1\n").unwrap(),
+      PlayMode::Preset(StrategyPath::AccessStabilization)
     );
     assert_eq!(
-      parse_strategy_choice("2\n").unwrap(),
-      StrategyPath::FiscalCaution
+      parse_play_mode_choice("2\n").unwrap(),
+      PlayMode::Preset(StrategyPath::FiscalCaution)
     );
     assert_eq!(
-      parse_strategy_choice("3\n").unwrap(),
-      StrategyPath::AggressiveBargaining
+      parse_play_mode_choice("3\n").unwrap(),
+      PlayMode::Preset(StrategyPath::AggressiveBargaining)
     );
   }
 
   #[test]
-  fn invalid_cli_choice_is_error() {
+  fn invalid_play_mode_choice_is_error() {
     assert_eq!(
-      parse_strategy_choice("9\n"),
-      Err(CliError::InvalidStrategyChoice("9".to_string()))
+      parse_play_mode_choice("9\n"),
+      Err(CliError::InvalidPlayModeChoice("9".to_string()))
     );
+  }
+
+  #[test]
+  fn parse_stabilize_access_command_accepts_valid_input() {
+    let command = parse_stabilize_access_command("8 18 112\n").unwrap();
+
+    assert_eq!(
+      command,
+      PlayerCommand::StabilizeAccess {
+        add_staffed_beds: 8,
+        capital_spend: 18,
+        requested_commercial_rate: 112,
+      }
+    );
+  }
+
+  #[test]
+  fn parse_stabilize_access_command_defaults_on_empty_input() {
+    assert_eq!(
+      parse_stabilize_access_command("\n").unwrap(),
+      default_interactive_commands()[0]
+    );
+  }
+
+  #[test]
+  fn parse_stabilize_access_command_rejects_malformed_input() {
+    assert!(parse_stabilize_access_command("8 18\n").is_err());
+  }
+
+  #[test]
+  fn parse_policy_command_rejects_out_of_bounds_values_at_transition() {
+    let ruleset = default_ruleset();
+    let command = parse_policy_command("25 5\n").unwrap();
+
+    assert_eq!(
+      transition(
+        &genesis_state(),
+        command,
+        resolve_inputs(DEFAULT_SEED, &genesis_state(), &ruleset),
+        &ruleset
+      ),
+      Err(ValidationError::AdvocacySpendTooHigh {
+        requested: 25,
+        available_limit: 20
+      })
+    );
+  }
+
+  #[test]
+  fn interactive_history_matches_access_stabilization_preset() {
+    let ruleset = default_ruleset();
+    let preset =
+      build_history_for_strategy(StrategyPath::AccessStabilization, DEFAULT_SEED, &ruleset)
+        .unwrap();
+    let interactive =
+      build_history_interactive(DEFAULT_SEED, &ruleset, default_interactive_commands()).unwrap();
+
+    assert_eq!(interactive, preset);
+  }
+
+  #[test]
+  fn interactive_history_replays_with_matching_state_hashes() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_interactive(DEFAULT_SEED, &ruleset, default_interactive_commands()).unwrap();
+
+    assert_eq!(history.transitions.len(), 4);
+    assert_eq!(
+      replay(&history, &ruleset).unwrap().final_state,
+      history.transitions.last().unwrap().next
+    );
+  }
+
+  #[test]
+  fn turn_briefing_uses_observation_not_future_actor_outcomes() {
+    let ruleset = default_ruleset();
+    let prior = genesis_state();
+    let inputs = resolve_inputs(DEFAULT_SEED, &prior, &ruleset);
+    let observation = observe_for_player(&prior, &inputs);
+    let briefing = turn_executive_briefing(&prior, &observation, 1).join("\n");
+
+    assert!(briefing.contains("Reported access"));
+    assert!(!briefing.contains("decision:"));
+    assert!(!briefing.contains("Rejected"));
+    assert!(!briefing.contains("Accepted"));
+  }
+
+  #[test]
+  fn turn_resolution_summary_includes_actor_rationale_and_hash() {
+    let ruleset = default_ruleset();
+    let history =
+      build_history_interactive(DEFAULT_SEED, &ruleset, default_interactive_commands()).unwrap();
+    let summary = turn_resolution_summary(&history.transitions[0]).join("\n");
+
+    assert!(summary.contains("Turn 1 resolved:"));
+    assert!(summary.contains("commercial_insurer"));
+    assert!(summary.contains("State hash:"));
   }
 
   #[test]
