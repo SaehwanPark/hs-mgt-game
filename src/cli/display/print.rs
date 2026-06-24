@@ -56,7 +56,7 @@ pub fn print_turn_briefing_block(turn_number: u32, lines: &[String]) {
       continue;
     }
 
-    if line.contains("Prior access measurement revision") || line.contains("revision") {
+    if line.contains("Prior access measurement revision") {
       block.push(warning(line));
     } else {
       block.push(line.clone());

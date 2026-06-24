@@ -20,11 +20,15 @@ const YELLOW: &str = "\x1b[33m";
 const RED: &str = "\x1b[31m";
 
 pub fn styling_enabled() -> bool {
-  if env::var_os("NO_COLOR").is_some() {
-    return false;
-  }
+  stream_styling_enabled(io::stdout().is_terminal())
+}
 
-  io::stdout().is_terminal()
+fn stderr_styling_enabled() -> bool {
+  stream_styling_enabled(io::stderr().is_terminal())
+}
+
+fn stream_styling_enabled(is_terminal: bool) -> bool {
+  env::var_os("NO_COLOR").is_none() && is_terminal
 }
 
 pub fn section_heading(emoji: &str, text: &str) -> String {
@@ -60,7 +64,11 @@ pub fn warning(text: &str) -> String {
 }
 
 pub fn error(text: &str) -> String {
-  wrap_styled(styling_enabled(), text, &format!("{RED}{text}{RESET}"))
+  wrap_styled(
+    stderr_styling_enabled(),
+    text,
+    &format!("{RED}{text}{RESET}"),
+  )
 }
 
 pub fn accent(text: &str) -> String {

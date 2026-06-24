@@ -26,7 +26,7 @@ pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
 pub fn play_mode_menu_lines() -> Vec<String> {
   vec![
     style::section_heading(style::EMOJI_STRATEGY, "Choose play mode"),
-    style::option_line("i", "Interactive", "enter each turn's command"),
+    style::dim("  Enter or i → Interactive"),
     style::option_line("1", "Access stabilization", "preset strategy path"),
     style::option_line("2", "Fiscal caution", "preset strategy path"),
     style::option_line("3", "Aggressive bargaining", "preset strategy path"),
