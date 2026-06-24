@@ -35,6 +35,7 @@ None.
 - External classroom use remains premature until governance docs and competitor
   slice land.
 - Parameter ledger and calibration evidence still unresolved.
+- Internal playtest findings cover seed 42 and the four-turn slice only.
 
 ## Verification Evidence
 

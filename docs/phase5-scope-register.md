@@ -36,7 +36,7 @@ architecture and gameplay proof, not an MVP campaign or calibrated policy model.
 | True versus reported measures | `observe` derives actor-visible reports from true state plus resolved inputs | `src/sim/observe.rs`, observation tests |
 | Actor-specific information | Per-turn briefings use observation data, not future outcomes | `src/cli/display/briefing.rs`, briefing tests |
 | Measurement delay or uncertainty | Named random streams perturb reported access | `src/inputs/resolve.rs`, resolver tests |
-| Later revisions | Revision stream adds new briefing notes without rewriting history | Observation revision tests, debrief revision notes |
+| Later revisions | Revision stream adds new briefing notes without rewriting history | `src/cli/strategy_tests.rs`, `src/debrief/report_tests.rs` |
 
 ### Playable CLI slice (§5.4)
 
@@ -45,7 +45,7 @@ architecture and gameplay proof, not an MVP campaign or calibrated policy model.
 | Concise executive dashboard | Starting dashboard before play-mode selection | `src/cli/display/dashboard.rs`, dashboard tests |
 | Event and policy briefings | Per-turn executive briefings in interactive mode | `src/cli/display/briefing.rs` |
 | Command selection | Interactive default plus preset strategy paths 1–3 | `src/cli/session.rs`, interactive tests |
-| Turn-resolution summaries | Post-turn actor rationale and state hash display | `src/cli/display/interactive.rs` |
+| Turn-resolution summaries | Post-turn actor rationale and state hash display | `src/cli/display/briefing.rs`, briefing tests |
 | End-of-run causal explanation | Deterministic debrief from committed history | `src/debrief/report.rs`, debrief tests |
 
 Partially achieved:
@@ -62,6 +62,7 @@ Partially achieved:
 | Strategic tension | Finance/access/workforce/policy tradeoffs at seed 42 |
 | Causal transparency | Actor rationales, attributed effects, debrief prompts |
 | Pacing | Four-turn bounded slice; no action overload observed |
+| Action overload | Not observed in four-turn slice at seed 42 |
 | Obvious exploits | None dominant at seed 42 in internal sessions |
 
 ### Phase 5 deliverables
@@ -77,7 +78,17 @@ Partially achieved:
 
 ## Deferred (with rationale)
 
-### World slice (§5.1) — intentionally narrowed
+### World slice (§5.1) — achieved within narrowed scope
+
+| Roadmap item | Status | Evidence |
+| --- | --- | --- |
+| One player-controlled health system | Achieved | Player CEO commands in `src/model/command.rs` |
+| One commercial insurer | Achieved | Turn 1 insurer actor in `src/actors/insurer.rs` |
+| Small labor market | Achieved | Turn 3 nursing workforce representative in `src/actors/labor.rs` |
+| Selected financial, capacity, access, quality, and trust measures | Achieved | `src/model/metrics.rs`, `src/model/state.rs` |
+| One state-policy process | Achieved | Turn 2 state policy actor in `src/actors/state_policy.rs` |
+
+### World slice (§5.1) — intentionally deferred
 
 | Roadmap item | Status | Rationale |
 | --- | --- | --- |
@@ -86,6 +97,8 @@ Partially achieved:
 | Medicaid | Deferred | Same as Medicare; state Medicaid agency needs distinct authority and information boundaries |
 | Patient cohorts | Deferred | First scenario uses aggregate access and trust indices, not cohort simulation |
 | Service-line portfolio | Deferred | Beyond stabilization scenario learning objectives |
+| Employer or patient-group strategy | Deferred | Per [`first-scenario-brief.md`](first-scenario-brief.md) excluded interactions |
+| Federal legislative process | Deferred | Per [`system-boundary.md`](system-boundary.md) excluded processes |
 
 ### Runtime and platform
 
@@ -111,12 +124,15 @@ Partially achieved:
 | Exit criterion | Assessment | Evidence |
 | --- | --- | --- |
 | Player can complete the slice without developer intervention | Met | Interactive default completes four turns from `cargo run`; preset paths 1–3 available |
-| Meaningful conflict among finance, access, workforce, and policy | Met | Seed 42 access-stabilization path trades cash for access; payer rejection and policy escalation paths exist |
-| Non-player behavior understandable but not entirely predictable | Met | Actor rationales in history and debrief; seeded inputs vary outcomes by seed |
+| Meaningful conflict among finance, access, workforce, and policy | Met | Path 1 at seed 42 trades cash for access with insurer rejection; path 3 triggers policy escalation (`aggressive_bargaining_rejects_rate_and_escalates_oversight`) |
+| Non-player behavior understandable but not entirely predictable | Met | Actor rationales in history and debrief; resolved inputs vary by seed (`different_seeds_can_change_resolved_inputs`) |
 | Players can explain why major outcomes occurred | Met | Debrief uses rationales, attributed effects, and decision-vs-outcome prompt |
 | Recognizably a strategy game, not a static model demo | Met | Multiple defensible preset paths, interactive parameter choices, strategic actor responses |
 
-Phase 5 is **closed for the current bounded slice**. Remaining roadmap §5.1 world elements are deferred to later slices with explicit design gates, not treated as incomplete Phase 5 blockers.
+Phase 5 is **closed for the current bounded slice** (pending merge of this
+documentation release). Remaining roadmap §5.1 world elements are deferred to
+later slices with explicit design gates, not treated as incomplete Phase 5
+blockers.
 
 ## Risk register
 
@@ -139,10 +155,10 @@ Phase 5 is **closed for the current bounded slice**. Remaining roadmap §5.1 wor
 3. Extend replay, debrief, preset paths, and golden tests consistently.
 4. Run mechanism design and domain QA handoffs before implementation.
 
-Intervening documentation slices (per README priorities):
+Intervening documentation slices (per README contributor priorities):
 
-1. Phase 0 governance docs (glossary, decision records, versioning policy).
-2. Phase 1 research-to-design implications memo.
+1. Phase 1 research-to-design implications memo.
+2. Phase 0 governance docs (glossary, decision records, versioning policy).
 
 ## Related documents
 

@@ -658,7 +658,7 @@ reconstructing it from the diff.
 ## Present
 
 - Feature: Phase 5 scope and risk register
-  Status: In Progress
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/phase5-scope-register
 
@@ -675,9 +675,8 @@ reconstructing it from the diff.
   - `_workspace/final/handoff.md` and `_workspace/03_domain_qa.md` updated
   - Package version bumped to `0.1.19`
   - README, CHANGELOG, and evidence-registry cross-links updated
-
-  Not Yet Done:
-  - PR handoff, three code-reviewer passes, and merge when approved
+  - PR handoff opened as GitHub PR #17
+  - Three code-reviewer passes completed; Medium findings fixed
 
   Deferred / Non-Goals:
   - No runtime behavior changes
@@ -695,8 +694,8 @@ reconstructing it from the diff.
 
 - Phase 0 governance docs: glossary, decision-record conventions, and versioning
   policy (CI baseline now in place).
-- Convert Phase 1 research into an evidence registry and research-to-design
-  implications memo.
+- Author Phase 1 research-to-design implications memo; expand
+  [`evidence-registry.md`](evidence-registry.md) with parameter-source ledger.
 - Use the actor-card template before adding future strategic actors.
 - Use the first scenario brief to guide the next narrow vertical-slice runtime
   expansion with deterministic replay and educational debrief hooks.

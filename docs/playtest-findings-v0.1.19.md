@@ -10,8 +10,8 @@
 | --- | --- | --- | --- |
 | Preset path 1 | Access stabilization | 42 | Completed four turns; replay verified |
 | Interactive defaults | Interactive (default commands) | 42 | Completed four turns; identical final state to preset path 1 |
-| Preset path 2 | Fiscal caution | 42 | Completed four turns; replay verified |
-| Preset path 3 | Aggressive bargaining | 42 | Completed four turns; replay verified |
+| Preset path 2 | Fiscal caution | 42 | Verified via strategy/replay tests at seed 42 |
+| Preset path 3 | Aggressive bargaining | 42 | Verified via strategy/replay tests at seed 42 |
 
 Golden final state hash at seed 42 (preset path 1 / interactive defaults):
 `bce02dff9b4b4ac6` — unchanged since module refactor and test colocation.
@@ -72,7 +72,6 @@ Golden final state hash at seed 42 (preset path 1 / interactive defaults):
 
 ## Recommended Next Slice
 
-- Phase 5 scope and risk register (this release).
 - Phase 0 governance docs: glossary, decision-record conventions, versioning
   policy.
 - Phase 1 research-to-design implications memo.

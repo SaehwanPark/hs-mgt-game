@@ -10,6 +10,7 @@ behavior changed.
 ## Changed Files
 
 - `Cargo.toml`
+- `Cargo.lock`
 - `README.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -23,14 +24,19 @@ behavior changed.
 
 - `cargo fmt --check` completed successfully.
 - `cargo test` passed: 78 tests (77 unit + 1 integration).
-- Default `cargo run` smoke pass; golden hash `bce02dff9b4b4ac6` unchanged at
-  seed 42.
+- Golden hash `bce02dff9b4b4ac6` unchanged at seed 42.
+- All preset paths verified via `each_strategy_path_builds_replayable_history`
+  and `replay_artifact_round_trip_verifies_all_preset_paths`.
+- Default `cargo run` smoke pass.
 
 ## Review Summary
 
-- PR handoff pending user approval for commit and push.
-- Domain QA: pass for scope register (deferred actors clearly marked).
-- Three code-reviewer passes required after PR open.
+- PR opened: https://github.com/SaehwanPark/hs-mgt-game/pull/17
+- Three code-reviewer passes completed; Medium findings fixed (§5.1 partial
+  achievement table, exit-criteria evidence, README priority alignment, stale
+  next-slice bullets, SPEC Future wording).
+- Critical/High findings after fixes: none open.
+- Merge-ready: yes, pending CI and human review.
 
 ## Known Limits
 

@@ -10,8 +10,8 @@ Early research and design phase with a deterministic architecture proof, minimal
 playable CLI demo, first scenario design artifacts, stable replay state hash
 checks, a starting executive dashboard at v0.1.13, per-turn interactive play
 at v0.1.14, deterministic replay artifact export at v0.1.15, library module
-boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 scope register
-at v0.1.19.
+boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
+scope register (docs closure) at v0.1.19.
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
