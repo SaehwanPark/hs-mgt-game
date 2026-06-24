@@ -26,7 +26,7 @@ replay verification, and educational debrief.
 ## Verification
 
 - `cargo fmt --check` completed successfully.
-- `cargo test` passed: 29 tests passed.
+- `cargo test` passed: 30 tests passed.
 - Default `cargo run` selected access stabilization and seed `42`, replayed
   successfully, and printed resolved inputs plus the educational debrief.
 - Seed `99` changed resolved inputs relative to the default seed while remaining

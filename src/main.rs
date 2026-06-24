@@ -246,7 +246,6 @@ fn parse_seed_choice(input: &str) -> Result<u64, CliError> {
 
 fn run_selected_strategy(config: RunConfig, ruleset: &Ruleset) -> Result<(), CliError> {
   println!("Selected strategy: {}", strategy_plan(config.strategy).name);
-  println!("Run seed: {}", config.seed);
   let history = build_history_for_strategy(config.strategy, config.seed, ruleset)
     .map_err(CliError::InvalidStrategyPlan)?;
   print_demo(config.seed, &history, ruleset);
@@ -339,11 +338,12 @@ fn describe_cli_error(error: &CliError) -> String {
     CliError::InvalidStrategyPlan(error) => {
       format!("selected strategy is internally invalid: {error:?}")
     }
-    CliError::InputUnavailable => "could not read strategy choice from standard input".to_string(),
+    CliError::InputUnavailable => "could not read input from standard input".to_string(),
   }
 }
 
 fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> ResolvedInputs {
+  // `_ruleset` is reserved for future ruleset-gated stream bounds.
   let turn = prior.turn;
 
   let measurement_noise = bounded_i32(stream_rng(seed, turn, STREAM_MEASUREMENT), -5, 5);
@@ -362,26 +362,27 @@ fn resolve_inputs(seed: u64, prior: &WorldState, _ruleset: &Ruleset) -> Resolved
 }
 
 fn stream_rng(seed: u64, turn: u32, stream_id: u32) -> u64 {
-  let mut state = seed
+  let state = seed
     .wrapping_add((turn as u64).wrapping_mul(0x517c_c1b7_2722_0a95))
-    .wrapping_add((stream_id as u64).wrapping_mul(0x0000_0000_6c07_8965));
-  splitmix64(&mut state)
+    .wrapping_add((stream_id as u64).wrapping_mul(0x6c62_272e_07bb_0142));
+  splitmix64(state)
 }
 
-fn splitmix64(state: &mut u64) -> u64 {
-  *state = state.wrapping_add(0x9e37_79b9_7f4a_7c15);
-  let mut z = *state;
+fn splitmix64(mut z: u64) -> u64 {
+  z = z.wrapping_add(0x9e37_79b9_7f4a_7c15);
   z = (z ^ (z >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
   z = (z ^ (z >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
   z ^ (z >> 31)
 }
 
 fn bounded_u32(value: u64, lo: u32, hi: u32) -> u32 {
+  debug_assert!(lo <= hi, "bounded_u32: hi must be >= lo");
   let span = (hi - lo + 1) as u64;
   lo + (value % span) as u32
 }
 
 fn bounded_i32(value: u64, lo: i32, hi: i32) -> i32 {
+  debug_assert!(lo <= hi, "bounded_i32: hi must be >= lo");
   let span = (hi - lo + 1) as u64;
   lo + (value % span) as i32
 }
@@ -1303,7 +1304,7 @@ mod tests {
     let debrief = educational_debrief(&history).join("\n");
 
     assert!(debrief.contains("cash moved from 100 to 72"));
-    assert!(debrief.contains("access from 70 to 73"));
+    assert!(debrief.contains("access from 70 to 74"));
     assert!(debrief.contains("capacity investment changed cash by -18"));
     assert!(debrief.contains("state policy response changed community_trust by 2"));
   }
@@ -1398,18 +1399,18 @@ mod tests {
       history.transitions[0].resolved_inputs,
       ResolvedInputs {
         measurement_noise: 4,
-        delayed_access_report: 66,
-        labor_sick_call_delta: -4,
-        policy_signal: 3,
+        delayed_access_report: 67,
+        labor_sick_call_delta: -3,
+        policy_signal: 4,
       }
     );
     assert_eq!(
       history.transitions[1].resolved_inputs,
       ResolvedInputs {
         measurement_noise: -5,
-        delayed_access_report: 65,
-        labor_sick_call_delta: -3,
-        policy_signal: 2,
+        delayed_access_report: 70,
+        labor_sick_call_delta: -2,
+        policy_signal: 3,
       }
     );
     assert_eq!(
@@ -1438,6 +1439,17 @@ mod tests {
       parse_seed_choice("abc\n"),
       Err(CliError::InvalidSeed("abc".to_string()))
     );
+  }
+
+  #[test]
+  fn seed_zero_resolves_bounded_inputs() {
+    let ruleset = default_ruleset();
+    let inputs = resolve_inputs(0, &genesis_state(), &ruleset);
+
+    assert!((-5..=5).contains(&inputs.measurement_noise));
+    assert!((0..=100).contains(&inputs.delayed_access_report));
+    assert!((-5..=0).contains(&inputs.labor_sick_call_delta));
+    assert!((1..=6).contains(&inputs.policy_signal));
   }
 
   #[test]
