@@ -27,7 +27,7 @@ const RIVERSIDE: RivalTemplate = RivalTemplate {
   staffed_beds: 118,
   access_index: 68,
   quality_index: 72,
-  workforce_trust: 58,
+  workforce_trust: 60,
   community_trust: 64,
   market_share_index: 24,
 };
@@ -137,6 +137,7 @@ pub fn genesis_competitive_world_with_ruleset(
   }
 
   CompetitiveWorldState {
+    difficulty,
     turn: 0,
     market: SharedMarketFields {
       regional_demand_index: 102,
@@ -164,7 +165,7 @@ pub fn genesis_roster_lines(world: &CompetitiveWorldState) -> Vec<String> {
         }
       };
       Some(format!(
-        "  {} — {} beds, access {}, share {}% ({})",
+        "  {} — {} beds, access {}, share index {} ({})",
         system.name,
         system.staffed_beds,
         system.access_index,

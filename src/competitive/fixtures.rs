@@ -3,7 +3,12 @@ use crate::model::{
   CashRunwaySignal, ConsultantOption, Difficulty, PlayerObservation, PlayerResources,
 };
 
-fn consultant_options_month1() -> Vec<ConsultantOption> {
+fn consultant_options_month1(difficulty: Difficulty) -> Vec<ConsultantOption> {
+  let monitor_target = if difficulty.k_rivals() >= 2 {
+    "Summit"
+  } else {
+    "Northlake"
+  };
   vec![
     ConsultantOption {
       label: 'A',
@@ -17,8 +22,9 @@ fn consultant_options_month1() -> Vec<ConsultantOption> {
     },
     ConsultantOption {
       label: 'C',
-      title: "Monitor Summit: spend AP on competitor intelligence before committing capital"
-        .to_string(),
+      title: format!(
+        "Monitor {monitor_target}: spend AP on competitor intelligence before committing capital"
+      ),
       tradeoff_bullets: vec!["delays response one month".to_string()],
     },
     ConsultantOption {
@@ -38,17 +44,7 @@ pub fn observation_from_genesis(world: &crate::model::CompetitiveWorldState) -> 
   let human = world
     .human_system()
     .expect("competitive genesis must include human system");
-  let difficulty = difficulty_from_rival_count(world.rival_count() as u32);
-  observation_from_human_system(human, difficulty)
-}
-
-fn difficulty_from_rival_count(k_rivals: u32) -> Difficulty {
-  match k_rivals {
-    1 => Difficulty::Easy,
-    2 => Difficulty::Normal,
-    3 => Difficulty::Hard,
-    _ => Difficulty::Expert,
-  }
+  observation_from_human_system(human, world.difficulty)
 }
 
 fn cash_runway_signal(resources: &PlayerResources) -> CashRunwaySignal {
@@ -133,7 +129,7 @@ fn observation_from_human_system(
       "No federal rule change this month".to_string(),
     ],
     annual_policy_review: None,
-    consultant_options: consultant_options_month1(),
+    consultant_options: consultant_options_month1(difficulty),
     intel_gaps,
   }
 }
@@ -149,4 +145,42 @@ pub fn mock_observation_annual_month(difficulty: Difficulty) -> PlayerObservatio
     "Medicaid access reporting: new quarterly template effective next year".to_string(),
   ]);
   observation
+}
+
+#[cfg(test)]
+mod fixtures_tests {
+  use super::*;
+  use crate::model::Difficulty;
+
+  #[test]
+  fn observation_metrics_match_human_genesis_system() {
+    for difficulty in [
+      Difficulty::Easy,
+      Difficulty::Normal,
+      Difficulty::Hard,
+      Difficulty::Expert,
+    ] {
+      let world = genesis_competitive_world(difficulty);
+      let human = world.human_system().expect("human system");
+      let observation = observation_from_genesis(&world);
+      assert_eq!(observation.org_name, human.name);
+      assert_eq!(observation.reported_access_index, human.access_index);
+      assert_eq!(observation.reported_quality_index, human.quality_index);
+      assert_eq!(
+        observation.cash_runway_signal,
+        cash_runway_signal(&human.resources)
+      );
+    }
+  }
+
+  #[test]
+  fn easy_consultant_monitor_option_targets_northlake() {
+    let observation = mock_observation_month1(Difficulty::Easy);
+    let monitor = observation
+      .consultant_options
+      .iter()
+      .find(|option| option.label == 'C')
+      .expect("option C");
+    assert!(monitor.title.contains("Northlake"));
+  }
 }

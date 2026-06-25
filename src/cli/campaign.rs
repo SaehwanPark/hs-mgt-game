@@ -10,8 +10,8 @@ use super::io::{
   read_difficulty_choice, read_seed_choice, read_validation_demo_choice,
 };
 use crate::competitive::{
-  genesis_competitive_world, genesis_roster_lines, mock_observation_month1, validation_demo_by_id,
-  validation_demo_menu_lines, validation_resources_for_demo,
+  genesis_competitive_world_with_ruleset, genesis_roster_lines, observation_from_genesis,
+  validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
 };
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
@@ -84,14 +84,14 @@ fn run_competitive_preview_internal(
   demo_input: Option<Option<String>>,
 ) -> SessionOutcome {
   let ruleset = default_competitive_ruleset();
-  let world = genesis_competitive_world(config.difficulty);
+  let world = genesis_competitive_world_with_ruleset(config.difficulty, &ruleset);
   let resources = world
     .human_system()
     .expect("competitive genesis includes human system")
     .resources
     .clone();
   let calendar = world.policy_calendar;
-  let observation = mock_observation_month1(config.difficulty);
+  let observation = observation_from_genesis(&world);
   let ap_budget = config.difficulty.human_ap_per_month();
   let report = render_executive_report(
     calendar,

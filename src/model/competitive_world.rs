@@ -1,4 +1,4 @@
-use super::{PlayerResources, PolicyCalendar};
+use super::{Difficulty, PlayerResources, PolicyCalendar};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SharedMarketFields {
@@ -119,6 +119,7 @@ pub struct PendingEffect {
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct CompetitiveWorldState {
+  pub difficulty: Difficulty,
   pub turn: u32,
   pub market: SharedMarketFields,
   pub systems: Vec<HealthSystemState>,
@@ -130,7 +131,14 @@ pub struct CompetitiveWorldState {
 
 impl CompetitiveWorldState {
   pub fn human_system(&self) -> Option<&HealthSystemState> {
-    self.systems.first()
+    let human_slot = self
+      .players
+      .iter()
+      .find(|slot| matches!(slot.controller, PlayerController::Human))?;
+    self
+      .systems
+      .iter()
+      .find(|system| system.system_id == human_slot.system_id)
   }
 
   pub fn rival_count(&self) -> usize {
