@@ -2,12 +2,19 @@
 
 **Status:** Phase 6.2 design draft (not approved for runtime)  
 **Audience:** Contributors designing scenario loading and campaign content  
-**Version:** draft-0.1.24
+**Version:** draft-0.1.28
 
-This document proposes a typed, versioned scenario description for the first
-regional stabilization campaign. It is a **design artifact only**. No runtime
-loader, parser, or schema validation ships until this draft is reviewed and an
-ADR approves a format version.
+This document proposes a typed, versioned scenario description for regional
+market campaigns. It is a **design artifact only**. No runtime loader, parser,
+or schema validation ships until this draft is reviewed and an ADR approves a
+format version.
+
+## Campaign kinds
+
+| `campaign_id` | Turn unit | Schedule model |
+| --- | --- | --- |
+| `stabilization-v1` | abstract | `turn_schedule` maps turn index to command kind |
+| `competitive-regional-v1` | month | `campaign_length_months`; open verb catalog per month |
 
 ## Design Goals
 
@@ -21,14 +28,22 @@ ADR approves a format version.
 
 | Field | Purpose | Example |
 | --- | --- | --- |
+| `campaign_id` | Campaign kind | `stabilization-v1` or `competitive-regional-v1` |
 | `scenario_id` | Stable identifier | `regional-stabilization-v1` |
 | `scenario_version` | Content version string | `1.0.0` |
+| `turn_unit` | Calendar mapping | `abstract` or `month` |
 | `ruleset_id` | Validation and transition bounds | `demo-ruleset-0.1.9` |
 | `title` | Human-readable name | Regional Market Stabilization |
 | `learning_objectives` | Instructor-facing goals | List of strings |
-| `initial_state` | Genesis `WorldState` fields | Typed integers matching `model/state.rs` |
+| `initial_state` | Genesis state fields | Typed integers matching campaign world state |
 | `default_seed` | Suggested run seed | `42` |
-| `turn_schedule` | Ordered executive decision points | Five entries mapping turn index to expected command kind |
+| `turn_schedule` | Stabilization only: ordered decision points | Five entries mapping turn index to command kind |
+| `campaign_length_months` | Competitive only | `24` |
+| `k_competitors` | Competitive only: AI health systems | `2` |
+| `difficulty` | Competitive only: profile tier | `normal` |
+| `action_catalog_ref` | Competitive only | `action-catalog-draft.md` |
+| `event_schedule` | Competitive only: monthly/annual event deck ref | `events-competitive-v1` (placeholder; deck TBD) |
+| `systems` | Competitive only: per-system genesis | List of `{system_id, controller, initial_state}` |
 | `actor_stubs` | Non-player actor metadata | References to actor-card ids, not decision code |
 | `evaluation_profile` | Debrief and assessment hooks | Optional scoring or discussion prompts |
 
@@ -44,8 +59,8 @@ actor_stub: commercial_insurer
 ```
 
 The runtime would validate that interactive or preset play follows the schedule
-for campaign mode. The current five-turn demo hard-codes this schedule in CLI
-strategy paths.
+for **stabilization-v1** campaign mode. Competitive campaigns use open monthly
+verbs per `action_catalog_ref`, not `turn_schedule`.
 
 ## Actor Stubs
 
@@ -75,7 +90,7 @@ source of truth for what actually happened in a session.
 ## Non-Goals (this draft)
 
 - No executable scripts, WASM, or general-purpose expression language.
-- No mid-run save format.
+- No competitive mid-run save format (stabilization session save: ADR-0002).
 - No Medicare/Medicaid actor stubs until first-scenario scope expands.
 - No empirical parameter files; use [`evidence-registry.md`](evidence-registry.md)
   ledger when calibrating rulesets.
@@ -99,6 +114,7 @@ Before implementing `feat/scenario-loader`:
 ## Related Documents
 
 - [`first-scenario-brief.md`](first-scenario-brief.md)
+- [`competitive-scenario-brief.md`](competitive-scenario-brief.md)
 - [`system-boundary.md`](system-boundary.md)
 - [`decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`](decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
 - [`phase5-scope-register.md`](phase5-scope-register.md)

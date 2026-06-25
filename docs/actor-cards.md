@@ -149,12 +149,36 @@ The current executable already contains compact actor behavior for:
 - Nursing workforce representative.
 - Regional provider coalition liaison.
 
-These are sufficient for the four-turn architecture proof. Future slices should
-use this template before adding Medicare, Medicaid, competitors, employers,
+These are sufficient for the five-turn architecture proof. Future slices should
+use this template before adding Medicare, Medicaid, employers,
 patient groups, regulators, elected officials, or advocacy coalitions as
 strategic actors.
 
-### Rival regional health system (competitor)
+For **AI health-system players** in the competitive campaign, use the AI player
+card template below (distinct from NPC institution cards).
+
+### AI health-system player (competitive campaign)
+
+| Field | Value |
+| --- | --- |
+| Actor name and class | AI-controlled regional health system CEO; peer player |
+| Scenario role | Compete with human and other AI systems for access, margin, and trust |
+| Objectives | Style-weighted: growth, margin, access leadership, or political legitimacy |
+| Authority | Monthly command batch within AP, cash, and political capital limits |
+| Constraints | Same ruleset as human; no omniscient rival state |
+| Resources | Action points, cash, political capital, in-flight project slots |
+| Observations | Own reported metrics; lagged public rival actions; policy briefings |
+| Private information | Internal cash runway estimate (noisy); rival private negotiations hidden |
+| Outside options | `hold`, reduced investment, defensive monitoring |
+| Risk posture | Profile-defined; higher tiers take calculated competitive risks |
+| Time horizon | Monthly with 1-month bounded lookahead for decision scoring |
+| Feasible actions | Competitive verb catalog: `recruit`, `invest`, `monitor`, etc. |
+| Decision procedure | Satisficing → level-1 best response to observed rival moves → stream tie-break |
+| Rationale output | Text comparing top candidates and chosen batch |
+| Debrief use | Contrast AI reasoning with human and consultant recommendations |
+| Evidence status | Bounded game-theory abstraction per [`design_principles.md`](design_principles.md) §5; not calibrated to real hospital competition |
+
+### Rival regional health system (competitor, stabilization only)
 
 | Field | Value |
 | --- | --- |

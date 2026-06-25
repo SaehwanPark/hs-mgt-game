@@ -4,6 +4,36 @@ All notable project changes should be recorded here.
 
 The project follows lightweight semantic versioning during early development.
 
+## [Unreleased]
+
+## [0.1.28] - 2026-06-24
+
+### Added
+
+- Competitive gameplay design package for parallel `competitive-regional-v1` campaign:
+  `docs/gameplay-competitive-sketch.md`, `docs/core-loop-spec.md`,
+  `docs/competitive-scenario-brief.md`, `docs/executive-report-format.md`,
+  `docs/action-catalog-draft.md`, `docs/cli-command-grammar-draft.md`.
+- ADRs 0003–0006: simultaneous monthly actions, multi-system player state,
+  action economy, Stata-like CLI layer.
+- AI health-system player card template in `docs/actor-cards.md`.
+- Glossary entries for action points, simultaneous resolution, AI player vs NPC.
+
+### Changed
+
+- `docs/proposal.md`, `docs/roadmap.md` (Phase 6.0 competitive track),
+  `docs/system-boundary.md`, `docs/scenario-format-draft.md`,
+  `docs/first-scenario-brief.md`, `docs/phase5-scope-register.md`,
+  `docs/phase1-implications-memo.md`, `LESSONS.md`.
+- `SPEC.md`, `ARCHITECTURE.md`, workspace handoff artifacts, `README.md`, and
+  `docs/decision-records/README.md`.
+- Bumped package version from `0.1.27` to `0.1.28`.
+
+### Notes
+
+- Design and documentation only; no runtime behavior changes.
+- Golden seed-42 stabilization hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.27] - 2026-06-24
 
 ### Added

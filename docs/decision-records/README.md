@@ -20,6 +20,11 @@ consequential technical and design choices in the Health Policy Strategy Game.
 ## Accepted Records
 
 - [ADR-0001: Deterministic transition and stochastic input boundary](0001-deterministic-transition-and-stochastic-input-boundary.md)
+- [ADR-0002: Mid-run session save](0002-mid-run-session-save.md)
+- [ADR-0003: Simultaneous monthly player actions](0003-simultaneous-monthly-player-actions.md)
+- [ADR-0004: Multi-system player state](0004-multi-system-player-state.md)
+- [ADR-0005: Action economy and monthly budget](0005-action-economy-and-monthly-budget.md)
+- [ADR-0006: Stata-like CLI layer](0006-stata-like-cli-layer.md)
 
 ## Status Values
 

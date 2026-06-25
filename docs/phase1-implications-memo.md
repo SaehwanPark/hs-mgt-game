@@ -14,7 +14,7 @@ not a bibliography and does not calibrate prototype parameters.
 
 Phase 1 asked which prior approaches the project should adopt, modify, or
 reject, and which evidence infrastructure must exist before broader calibration
-or external playtesting. The bounded four-turn prototype at v0.1.19 already
+or external playtesting. The bounded five-turn prototype at v0.1.27 already
 implements several adopted patterns. This memo records what literature and
 precedent imply for **future** mechanism work, documentation, and validation.
 
@@ -22,7 +22,7 @@ precedent imply for **future** mechanism work, documentation, and validation.
 
 | Pattern | Literature / precedent basis | Current implementation |
 | --- | --- | --- |
-| Narrow vertical slice before frameworks | Roadmap, serious-games pedagogy reviews | Four-turn CLI demo with replay and debrief |
+| Narrow vertical slice before frameworks | Roadmap, serious-games pedagogy reviews | Five-turn CLI demo with replay and debrief |
 | Deterministic transition core with explicit stochastic boundary | Simulation method literature, ODD/STRESS targets | `sim/transition.rs` plus `inputs/resolve.rs` |
 | True state vs actor observations | Health simulation reporting guidance | `sim/observe.rs`, briefing tests |
 | Local strategic actors with inspectable rationales | Bargaining and institutional IO abstractions | `actors/` modules, history records |

@@ -26,6 +26,10 @@ reported measurements.
 The current prototype uses five executive decision points. A later campaign may
 map those turns to quarters, but this brief does not assign calendar duration.
 
+For the **competitive regional market campaign** (parallel track, design only),
+see [`competitive-scenario-brief.md`](competitive-scenario-brief.md): 24 monthly
+turns with annual policy review.
+
 ## Learning Objectives
 
 The first scenario should help players practice:

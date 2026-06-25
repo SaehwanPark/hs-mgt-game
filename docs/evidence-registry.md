@@ -21,6 +21,7 @@ prototype integer parameters.
 | Deterministic replay | Architecture proof | Project requirement | ODD/STRESS-aligned documentation target |
 | Actor decision rationales | History and debrief | Project requirement | Records why each local strategic actor selected an outcome |
 | Attributed effects | Transition explanation | Project requirement | Supports causal inspection without claiming calibration |
+| Competitive regional campaign (design) | Phase 6.0 parallel track | Design artifact | See [`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md), ADRs 0003–0006; not runtime |
 
 ## Boundary Evidence Notes
 

@@ -1,14 +1,27 @@
 # Initial System Boundary and Ontology Draft
 
-**Status:** Phase 2 conceptual design draft  
+**Status:** Phase 2 conceptual design draft (updated for competitive campaign design)  
 **Audience:** Contributors and domain reviewers
 
-This document defines the current conceptual boundary for the first regional
-market slice. It describes what the prototype represents, what it deliberately
-leaves outside the model, and which terms should stay stable until a narrower
-scenario or ruleset format is approved.
+This document defines the conceptual boundary for regional market slices. It
+describes what the prototype represents, what it deliberately leaves outside the
+model, and which terms should stay stable until a narrower scenario or ruleset
+format is approved.
+
+## Campaign Fork
+
+Two campaign concepts coexist:
+
+| Campaign | Id | Turn unit | Status |
+| --- | --- | --- | --- |
+| Stabilization demo | `stabilization-v1` | Abstract (5 points) | Implemented v0.1.27 |
+| Competitive regional market | `competitive-regional-v1` | 1 month | Design only (v0.1.28) |
+
+See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md`](competitive-scenario-brief.md).
 
 ## Setting and Time Horizon
+
+### Stabilization demo
 
 - The setting is a fictional regional US health market centered on one
   nonprofit health system.
@@ -16,8 +29,13 @@ scenario or ruleset format is approved.
   strategy paths, explicit run seed, append-only history, replay, and educational
   debrief.
 - Each turn represents an executive decision point, not a fixed calendar unit.
-  A later campaign design may assign quarters or months after the scenario
-  learning objectives are settled.
+
+### Competitive campaign (design)
+
+- Same regional US market; multiple health systems (1 human + K AI players).
+- One strategy turn equals one calendar month; annual policy tick every 12 months.
+- Campaign length parameterized (default 24 months in competitive scenario brief).
+
 - The scope is regional and institutional. National policy, federal budgets,
   and macroeconomic conditions may appear only as resolved external inputs until
   the roadmap calls for broader modeling.
@@ -44,7 +62,8 @@ scenario or ruleset format is approved.
 | State policy officials | Turn 2 access mandate response | May grant flexibility, continue mandate, or escalate oversight | Responds to reported access, commitments, and policy signal |
 | Nursing workforce representative | Turn 3 labor pressure response | May cooperate, offer limited support, or signal work action | Responds to retention, schedule relief, trust, and labor pressure |
 | Regional provider coalition liaison | Turn 4 access coalition | May join fully, participate narrowly, or withdraw | Responds to shared access commitment, community trust, and leverage |
-| Rival regional health system | Turn 5 capacity competition | May accelerate expansion, hold position, or partially retreat | Responds to defensive capital, access posture, and market signal |
+| Rival regional health system | Turn 5 capacity competition (stabilization only) | May accelerate expansion, hold position, or partially retreat | Responds to defensive capital, access posture, and market signal |
+| AI health-system player (competitive) | Peer competitor with monthly action budget | Same command vocabulary as human CEO for assigned system | Observes own metrics and lagged public rival actions; not counted as NPC |
 
 Future actor classes may include Medicare, Medicaid, employers,
 patient groups, regulators, elected officials, and advocacy coalitions. They
@@ -106,16 +125,23 @@ Included in the current conceptual boundary:
 - Actor-specific observation, rationale records, attributed effects, replay, and
   educational debrief.
 
-Excluded from the current conceptual boundary:
+Excluded from the **stabilization demo** conceptual boundary:
 
 - Full Medicare, Medicaid, employer, or patient strategic behavior.
-- Additional rival systems or market-entry relocation modeling.
+- Additional rival systems beyond the turn-5 NPC competitor.
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.
 - Scenario or ruleset file loading.
-- Save files, persistence, multiplayer roles, graphical interface, or release
-  packaging.
+- Graphical interface or release packaging.
+
+The **competitive campaign** (design) adds multi-system peer players, monthly
+calendar, action economy, and Stata-like CLI per ADRs 0003–0006. It does not
+replace the stabilization demo. Classroom hot-seat multiplayer (Phase 9) remains
+deferred.
+
+Mid-run session save is implemented for the stabilization interactive path
+(ADR-0002). Competitive campaign save semantics are deferred to runtime slice I1+.
 
 ## Deferred Ontology Work
 
