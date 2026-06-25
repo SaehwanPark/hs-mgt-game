@@ -43,7 +43,7 @@ reconstructing it from the diff.
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 | Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
-| Competitive runtime I6 | v0.1.33 | Bounded AI players with inspectable rationales | 179 | `6fb1ebbea564274f` (stabilization) |
+| Competitive runtime I6 | v0.1.33 | Bounded AI players with inspectable rationales | 180 | `6fb1ebbea564274f` (stabilization) |
 
 ### Recent slices
 
@@ -253,7 +253,7 @@ reconstructing it from the diff.
   Verification:
   - AI batch determinism and validation tests; rationale present for each rival
   - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (179 tests)
+  - `cargo fmt --check`, `cargo test` pass (180 tests)
 
 ## Present
 

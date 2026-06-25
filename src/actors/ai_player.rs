@@ -154,10 +154,11 @@ fn style_primary_command(style: AiStyleWeights) -> CompetitiveCommand {
       pledge_type: PledgeType::Access,
       level: 2,
     },
-    _ => CompetitiveCommand::Commit {
+    "political" => CompetitiveCommand::Commit {
       pledge_type: PledgeType::Quality,
       level: 2,
     },
+    _ => CompetitiveCommand::Hold,
   }
 }
 
@@ -205,10 +206,10 @@ fn best_response_commands(action: &LaggedRivalAction) -> Vec<CompetitiveCommand>
 
 fn default_monitor_target(system_id: u32) -> MonitorTarget {
   match system_id {
-    1 => MonitorTarget::Northlake,
-    2 => MonitorTarget::Summit,
+    1 => MonitorTarget::Summit,
+    2 => MonitorTarget::Northlake,
     3 => MonitorTarget::Valley,
-    _ => MonitorTarget::Metro,
+    _ => MonitorTarget::Northlake,
   }
 }
 
@@ -270,7 +271,7 @@ mod tests {
   use super::*;
   use crate::competitive::genesis_competitive_world;
   use crate::model::Difficulty;
-  use crate::sim::{ai_profile_for_system, observe_for_ai};
+  use crate::sim::{LaggedRivalAction, ai_profile_for_system, observe_for_ai};
 
   fn resources_for(system_id: u32) -> crate::model::PlayerResources {
     genesis_competitive_world(Difficulty::Normal).systems[system_id as usize]
@@ -317,5 +318,21 @@ mod tests {
       let batch = compute_ai_batch(&observation, &profile, &resources, &ruleset, 42);
       validate_competitive_batch(&batch.commands, &resources, &ruleset).expect("valid batch");
     }
+  }
+
+  #[test]
+  fn best_response_commands_match_investing_summary() {
+    let responses = best_response_commands(&LaggedRivalAction {
+      system_id: 1,
+      rival_name: "Northlake Health".to_string(),
+      summary: "Northlake Health: investing 25 in Beds".to_string(),
+    });
+    assert!(responses.iter().any(|cmd| matches!(
+      cmd,
+      CompetitiveCommand::Invest {
+        domain: InvestDomain::Beds,
+        ..
+      }
+    )));
   }
 }
