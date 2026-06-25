@@ -148,7 +148,7 @@ v0.1.28 is design-only).
 | Cognitive load | Low–Medium | Five-turn bound; dashboard and previews reduce pre-run confusion |
 | Golden-test fragility | Low | `tests/golden_seed42.rs` documents canonical hash; breaking changes require explicit CHANGELOG note and hash update |
 | Export prompt friction | Low | Empty input skips export; TTY-gated in non-interactive contexts |
-| Documentation staleness | Medium | Version playtest findings with releases; keep SPEC Present/Done accurate |
+| Documentation staleness | Medium | Version playtest findings with releases; keep SPEC Present/Done accurate; full slice history in [`spec-past-archive.md`](spec-past-archive.md) |
 | Normative opacity | Low | Debrief separates decision quality from outcome quality; social welfare not collapsed into player score |
 
 ## Recommended next slices

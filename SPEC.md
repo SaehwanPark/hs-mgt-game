@@ -12,6 +12,8 @@ Canonical product and domain direction lives in:
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 
+Full per-slice completion history: [`docs/spec-past-archive.md`](docs/spec-past-archive.md)
+
 ## Spec Maintenance Rule
 
 Any active or incomplete item in `Present` must explicitly separate:
@@ -30,804 +32,18 @@ reconstructing it from the diff.
 
 ## Past
 
-- Project concept established as a Rust, CLI-first health-policy strategy game
-  about leading a fictional nonprofit US health system.
-- Canonical proposal, roadmap, and design principles created under `docs/`.
-- Repo-local agent harness created for project-specific health-policy simulation
-  workflow.
-- Rust package scaffold and spec-driven documentation baseline established.
-- Feature: Deterministic vertical-slice spine
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/deterministic-slice-spine
-
-  Summary:
-  Replace the placeholder CLI with a small deterministic architecture proof: a
-  scripted health-system turn with explicit resolved inputs, validation,
-  actor-specific observation, one commercial-insurer decision rationale,
-  attributed effects, append-only history, and replay verification.
-
-  Done:
-  - Placeholder `Hello, world!` CLI replaced by a scripted deterministic demo
-  - Package version bumped to `0.1.2`
-  - Single-file Rust prototype added with typed world state, ruleset, resolved
-    inputs, player command, validation errors, observation, actor decision
-    record, events, attributed effects, transition, and history
-  - Pure transition path added for the scripted slice:
-    `prior state + command + resolved inputs + ruleset -> transition`
-  - Commercial-insurer decision added with accept, counter, and reject outcomes
-    plus inspectable rationale text
-  - Append-only demo history and replay function added
-  - State fingerprint string added for deterministic demo inspection
-  - Focused tests added for deterministic repeatability, true-state versus
-    observed-state separation, validation failures, unfavorable valid outcomes,
-    accepted-rate handling, negative capital-spend rejection, and replay
-  - Repo-local handoff artifacts added under `_workspace/`
-  - `ARCHITECTURE.md`, `CHANGELOG.md`, and `LESSONS.md` updated for the slice
-  - PR handoff opened as GitHub PR #2, and three review passes completed
-  - PR #2 merged into `main`
-
-  Deferred / Non-Goals:
-  - No full campaign or multiple-turn playable scenario
-  - No interactive CLI input or command parser
-  - No scenario, ruleset, or save-file loader
-  - No external data ingestion or official parameter ledger
-  - No empirical calibration, validation against real data, or policy
-    forecasting claim
-  - No cryptographic state hash or durable replay artifact format
-  - No module split; prototype remains in `src/main.rs` until another command or
-    actor interaction justifies boundaries
-  - No CI, release automation, or expanded contributor process
-
-  Verification:
-  - Identical prior state, command, resolved inputs, and ruleset produce the
-    same transition
-  - Observed access can differ from true access through explicit resolved inputs
-  - Invalid commands fail validation separately from unfavorable modeled outcomes
-  - Replay from genesis reproduces the committed final state
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-- Feature: State policy response slice
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/state-policy-response-slice
-
-  Summary:
-  Extend the scripted deterministic demo from one payer negotiation into a
-  two-turn history by adding one state-policy response command. The new command
-  models a health system response to a state access mandate using explicit
-  advocacy spend, access commitment, actor-specific observation, state-official
-  decision rationale, attributed effects, and replay verification.
-
-  Done:
-  - Package version bumped to `0.1.3`
-  - Added `RespondToStateAccessMandate` with validation for advocacy spend and
-    access commitment
-  - Added state policy decisions for flexibility, mandate continuation, and
-    oversight escalation
-  - Demo history now commits the existing capacity/payer turn followed by one
-    state-policy response turn
-  - Replay now verifies the final state of a two-transition history
-  - Focused tests added for deterministic policy response, invalid advocacy
-    spend, invalid access commitment, unfavorable valid policy outcome, and
-    two-transition replay
-  - Completed three code-reviewer passes and addressed findings
-  - PR #3 merged into `main`
-
-  Deferred / Non-Goals:
-  - No interactive CLI input or command parser
-  - No scenario, ruleset, or save-file loader
-  - No external data ingestion or empirical calibration
-  - No full policy lifecycle framework
-  - No module split yet
-
-  Verification:
-  - Existing payer negotiation behavior remains intact
-  - Invalid operations remain separate from unfavorable modeled outcomes
-  - Two-transition replay reproduces the committed final state
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-- Feature: Educational debrief slice
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/educational-debrief-slice
-
-  Summary:
-  Add a concise end-of-run educational debrief to the scripted deterministic
-  demo. The debrief should use the existing history, actor rationales, and
-  attributed effects to explain tradeoffs, distinguish decisions from realized
-  outcomes, and support replayable classroom discussion without adding
-  interactive input or scenario loading.
-
-  Done:
-  - Working branch created from `main`
-  - Stale state-policy response bookkeeping identified from merged PR #3
-  - Implement deterministic debrief generation and CLI display
-  - Add focused debrief tests
-  - Bump package version to `0.1.4`
-  - Update architecture, changelog, lessons, and handoff files
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-  - PR handoff opened as GitHub PR #4
-  - Three code-reviewer passes completed; one low-severity documentation
-    wording finding was fixed
-  - Merge after review and verification
-
-  Deferred / Non-Goals:
-  - No interactive CLI input or command parser
-  - No scenario, ruleset, or save-file loader
-  - No empirical calibration or policy forecasting claim
-  - No full campaign or general debrief framework
-  - No module split unless implementation proves the current file cannot stay
-    understandable
-
-  Verification:
-  - Debrief output includes actor rationales from the committed history
-  - Debrief output includes at least one explicit tradeoff from attributed
-    effects
-  - Identical histories produce identical debrief text
-  - Existing transition and replay tests remain passing
-
-- Feature: Playable CLI slice
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/playable-cli-slice
-
-  Summary:
-  Add the first minimal playable CLI choice over the existing deterministic
-  two-turn demo. The player chooses one of three hard-coded strategy paths,
-  while transition logic, resolved inputs, actor observations, replay, and
-  debrief generation remain deterministic and inspectable.
-
-  Done:
-  - Working branch created from `main`
-  - Merged educational debrief slice moved from active state into completed
-    history
-  - Package version bumped to `0.1.5`
-  - Add hard-coded strategy path selection for access stabilization, fiscal
-    caution, and aggressive bargaining
-  - Keep invalid CLI choice handling separate from valid unfavorable modeled
-    outcomes
-  - Add focused CLI choice and strategy-path tests
-  - Run final verification commands
-  - Update architecture, changelog, lessons, and handoff files
-  - PR handoff opened as GitHub PR #5
-  - Three code-reviewer passes completed; one low-severity handoff wording
-    finding was fixed
-  - PR #5 merged into `main`
-
-  Deferred / Non-Goals:
-  - No full campaign
-  - No scenario or ruleset file format
-  - No general command parser framework
-  - No external data ingestion or calibration
-  - No new dependency
-  - No broad module split
-  - No CI, release automation, or contributor-process expansion
-
-  Verification:
-  - Empty CLI input defaults to access stabilization
-  - CLI choices `1`, `2`, and `3` each build a valid two-transition history
-  - Invalid CLI choice returns an explicit CLI error
-  - Each strategy path replays to its committed final state
-  - Fiscal caution produces insurer accept and mandate continuation
-  - Aggressive bargaining produces insurer rejection and oversight escalation
-  - Existing transition, observation, replay, validation, and debrief tests
-    remain passing
-
-- Feature: Seeded stochastic input boundary
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/seeded-stochastic-inputs
-
-  Summary:
-  Replace per-path hard-coded `ResolvedInputs` with deterministic derivation
-  from an explicit seed and named random streams before the transition core
-  runs. Strategy paths remain command presets; stochasticity stays outside
-  `transition()`.
-
-  Done:
-  - Working branch created from `main`
-  - Playable CLI slice moved from active state into completed history
-  - Package version bumped to `0.1.6`
-  - Add seed-scoped input resolver with named streams
-  - Extend CLI to accept optional seed
-  - Add focused seed, resolver, and golden-trajectory tests
-  - Update architecture, changelog, lessons, and handoff files
-  - PR handoff opened as GitHub PR #6, and three review passes completed
-  - PR #6 merged into `main`
-
-  Deferred / Non-Goals:
-  - No scenario or ruleset file format
-  - No new Cargo dependency
-  - No cryptographic state hash or durable replay artifact
-  - No module split unless unavoidable
-  - No interactive per-turn command entry
-  - No CI or release automation
-
-  Verification:
-  - Identical seed and commands produce identical resolved inputs and history
-  - Different seeds can change resolved inputs while commands stay fixed
-  - Default seed reproduces access-stabilization golden trajectory
-  - Invalid seed input returns explicit CLI error
-  - `transition()` contains no RNG, time, or I/O
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-- Feature: Workforce pressure slice
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/workforce-pressure-slice
-
-  Summary:
-  Extend the seeded two-turn playable demo with a third turn modeling workforce
-  pressure. Add a workforce response command, nursing workforce representative
-  decision with inspectable rationale, three-transition replay, and debrief
-  coverage while keeping stochasticity outside `transition()`.
-
-  Done:
-  - Working branch created from `main`
-  - Seeded stochastic input boundary moved from active state into completed
-    history
-  - Package version bumped to `0.1.7`
-  - Implement workforce response command and labor actor decision
-  - Extend strategy paths with third compiled command presets
-  - Add focused workforce, replay, and golden-trajectory tests
-  - Update architecture, changelog, lessons, and handoff files
-  - PR handoff opened as GitHub PR #7, and three review passes completed
-  - PR #7 merged into `main`
-
-  Deferred / Non-Goals:
-  - No full campaign or per-turn interactive command entry
-  - No scenario or ruleset file format
-  - No module split unless unavoidable
-  - No new Cargo dependency
-  - No CI or release automation
-
-  Verification:
-  - Three-transition history replays from genesis
-  - Labor actor rationale appears in committed history and debrief
-  - Invalid workforce spend remains separate from unfavorable labor outcomes
-  - `transition()` contains no RNG, time, or I/O
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-- Feature: Coalition cooperative interaction slice
-  Status: Complete
-  Started: 2026-06-23
-  Branch: feat/coalition-cooperative-slice
-
-  Summary:
-  Extend the seeded three-turn playable demo with a fourth turn modeling a
-  regional access coalition opportunity. Add a coalition response command,
-  coalition liaison decision with inspectable rationale, four-transition replay,
-  and debrief coverage while keeping stochasticity outside `transition()`.
-
-  Done:
-  - Working branch created from `main`
-  - Workforce pressure slice moved from active state into completed history
-  - Mechanism design and domain QA artifacts updated
-  - Package version bumped to `0.1.8` then `0.1.9`
-  - Implement coalition command and liaison actor decision
-  - Extend strategy paths with fourth compiled command presets
-  - Add focused coalition, replay, and golden-trajectory tests
-  - Implement observation revision stream and debrief notes
-  - Add `docs/system-boundary.md` and `docs/evidence-registry.md` stubs
-  - Update architecture, changelog, lessons, and handoff files
-  - PR #8 merged into `main`
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-  Deferred / Non-Goals:
-  - No full campaign or per-turn interactive command entry
-  - No scenario or ruleset file format
-  - No Medicare/Medicaid/competitor actors
-  - No module split unless unavoidable
-  - No new Cargo dependency
-  - No CI or release automation
-
-  Verification:
-  - Four-transition history replays from genesis
-  - Coalition liaison rationale appears in committed history and debrief
-  - Invalid coalition inputs remain separate from unfavorable coalition outcomes
-  - Later-turn observation revisions appear in briefings and debrief without
-    rewriting committed history
-  - `transition()` contains no RNG, time, or I/O
-  - `cargo fmt`, `cargo test`, and `cargo run` pass
-
-- Feature: Phase 2 system boundary and ontology slice
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase2-system-boundary-ontology
-
-  Summary:
-  Expand the initial system-boundary and ontology documentation for the current
-  fictional regional US market slice. The slice clarifies actors, authority,
-  state and observation boundaries, command vocabulary, causal categories,
-  exclusions, and evidence gaps without changing runtime behavior.
-
-  Done:
-  - Working branch created from `main`
-  - Coalition cooperative interaction slice moved from active state into
-    completed history
-  - `docs/system-boundary.md` expanded from a stub into a Phase 2 conceptual
-    boundary draft
-  - `docs/evidence-registry.md` updated to align current mechanisms with the
-    expanded boundary while preserving evidence gaps
-  - Package version bumped to `0.1.10`
-  - README status updated to `v0.1.10`
-  - Changelog and lessons updated for the documentation slice
-  - PR handoff opened as GitHub PR #9
-  - PR #9 merged into `main`
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No scenario loader, command parser, save format, or ruleset schema
-  - No module split
-  - No new dependency
-  - No empirical calibration or authoritative policy forecast
-  - No broad actor expansion beyond documenting future actor classes
-
-  Verification:
-  - `cargo fmt --check` passed
-  - `cargo test` passed with 52 tests
-  - Default `cargo run` preserved the existing four-turn demo behavior
-  - Three local code-reviewer passes completed before PR handoff
-
-- Feature: Phase 3 actor cards and first scenario brief
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase3-actor-cards-scenario-brief
-
-  Summary:
-  Add the first Phase 3 design artifacts that should constrain future runtime
-  expansion: a reusable actor-card template and a first scenario brief for the
-  current fictional regional US market stabilization slice. The slice preserves
-  existing runtime behavior.
-
-  Done:
-  - Working branch created from `main`
-  - `docs/actor-cards.md` added with required actor design fields for future
-    strategic actors
-  - `docs/first-scenario-brief.md` added with the first scenario concept,
-    learning objectives, included interactions, strategic tensions, observation
-    use, debrief hooks, and non-goals
-  - `docs/system-boundary.md` and `docs/evidence-registry.md` updated to point
-    to the new design artifacts without approving a runtime schema
-  - Package version bumped to `0.1.11`
-  - README status updated to `v0.1.11`
-  - Architecture, changelog, lessons, and workspace handoff artifacts updated
-  - PR handoff opened as GitHub PR #10
-  - Three code-reviewer passes completed with no actionable findings
-  - PR #10 merged into `main`
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No new commands, actors, state fields, or random streams
-  - No scenario loader, command parser, save format, or ruleset schema
-  - No empirical calibration or authoritative policy forecast
-  - No broad campaign or MVP scenario system
-
-  Verification:
-  - `cargo fmt --check` passed
-  - `cargo test` passed with 52 tests
-  - Default `cargo run` with strategy `1` and seed `42` preserves the existing
-    four-turn demo behavior
-  - Domain QA passed before PR handoff
-  - Three local code-reviewer passes found no Critical, High, Medium, or Low
-    issues
-
-- Feature: State hash and replay proof
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/state-hash-replay-proof
-
-  Summary:
-  Replace the readable state fingerprint with a stable per-transition state
-  hash over a canonical state record. Replay should verify each committed hash,
-  detect hash drift, and preserve the existing four-turn deterministic demo
-  without adding persistence, scenario loading, or cryptographic guarantees.
-
-  Done:
-  - Working branch created from `main`
-  - Phase 3 actor-card and scenario brief slice moved into completed history
-  - Package version bumped to `0.1.12`
-  - Added canonical state record and stable 64-bit FNV-1a state hash helpers
-  - Updated committed transitions to store `state_hash`
-  - Updated replay to return verification and fail on committed hash mismatch
-  - Updated CLI output from state fingerprints to state hashes
-  - Added focused hash determinism, hash drift, and replay mismatch tests
-
-  Deferred / Non-Goals:
-  - No scenario loader, command parser, save format, or replay artifact export
-  - No cryptographic hash dependency or security guarantee
-  - No new commands, actors, metrics, random streams, or gameplay turns
-  - No empirical calibration or authoritative policy forecast
-  - No module split
-
-  Verification:
-  - `cargo fmt --check` passed
-  - `cargo test` passed with 55 tests
-  - Default `cargo run` with strategy `1` and seed `42` prints per-turn state
-    hashes and replay success
-  - Domain QA passed for the bounded hash/replay proof
-  - PR handoff opened as GitHub PR #11
-  - Three code-reviewer passes completed; one low-severity replay diagnostic
-    finding was fixed
-  - PR #11 merged into `main`
-
-- Feature: CLI dashboard preview slice
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/cli-dashboard-preview-slice
-
-  Summary:
-  Add a starting executive dashboard and commitment previews for the three
-  compiled strategy paths. The slice improves pre-run player context while
-  preserving the existing four-turn deterministic demo, transition core,
-  resolved-input boundary, actor decisions, replay hashes, and educational
-  debrief.
-
-  Done:
-  - Working branch created from `main`
-  - State hash and replay proof moved into completed history
-  - Package version bumped to `0.1.13`
-  - Added pure CLI dashboard and strategy-preview helpers
-  - Wired the dashboard and previews into the pre-run CLI flow
-  - Added focused dashboard and preview tests
-  - PR handoff opened as GitHub PR #12
-  - Three code-reviewer passes completed; one low-severity handoff/spec
-    PR-state wording issue was fixed
-  - PR #12 merged into `main`
-
-  Deferred / Non-Goals:
-  - No per-turn interactive command entry
-  - No scenario loader, command parser, save format, or replay artifact export
-  - No new commands, actors, metrics, random streams, or gameplay turns
-  - No changes to transition logic, resolved input generation, actor decisions,
-    or committed replay hash semantics
-  - No empirical calibration or authoritative policy forecast
-  - No module split
-
-  Verification:
-  - New tests cover starting dashboard content, all three strategy previews, and
-    avoiding future actor-outcome leakage in previews
-  - `cargo fmt --check` passed
-  - `cargo test` passed with 58 tests
-  - Default `cargo run` with strategy `1` and seed `42` prints the starting
-    dashboard, strategy previews, per-turn state hashes, and replay success
-  - Domain QA passed for the bounded CLI dashboard preview slice
-
-- Feature: Per-turn interactive play slice
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/per-turn-interactive-slice
-
-  Summary:
-  Add per-turn interactive command entry as the default play mode while
-  preserving preset strategy paths 1–3 for regression and quick play. Each turn
-  shows an executive briefing, accepts command parameters within existing
-  ruleset bounds, and prints a concise turn-resolution summary before replay and
-  debrief.
-
-  Done:
-  - Working branch created from `main`
-  - CLI dashboard preview slice moved into completed history
-  - Package version bumped to `0.1.14`
-  - Added play-mode selection with interactive default and preset paths 1–3
-  - Added per-turn command parsers with access-stabilization defaults
-  - Added `build_history_interactive`, executive turn briefings, and
-    turn-resolution summaries
-  - Added interactive CLI session loop separate from preset technical dump
-  - Added focused interactive parsing, history, and briefing tests
-  - Updated architecture, changelog, lessons, and workspace handoff artifacts
-  - `cargo fmt --check`, `cargo test` (67 tests), and `cargo run` pass
-  - Domain QA passed for the bounded interactive play slice
-  - PR handoff opened as GitHub PR #13
-  - PR #13 merged into `main`
-
-  Deferred / Non-Goals:
-  - No new commands, actors, metrics, or random streams
-  - No per-turn strategic posture menus beyond numeric parameter entry
-  - No scenario loader, save format, or replay artifact export
-  - No changes to `transition()`, hash semantics, or debrief generation logic
-  - No module split, CI workflow, or new dependencies
-  - No competitor/Medicare/Medicaid actors
-  - No empirical calibration or authoritative policy forecast
-
-  Verification:
-  - Interactive path completes four turns from `cargo run` with default commands
-  - Preset paths 1–3 remain bit-identical to pre-slice behavior
-  - `build_history_interactive` with default commands matches access-stabilization
-    preset at seed `42`
-  - Turn briefings use observation data only, not future actor outcomes
-  - `cargo fmt --check`, `cargo test`, and `cargo run` pass
-
-- Feature: Replay artifact export and playtest findings slice
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/replay-artifact-export
-
-  Summary:
-  Add a versioned deterministic replay artifact format with serialize,
-  deserialize, and verify helpers plus optional post-run CLI export. Record
-  internal playtest findings for the current four-turn vertical slice.
-
-  Done:
-  - Working branch created from `main`
-  - Per-turn interactive play slice moved into completed history
-  - Package version bumped to `0.1.15`
-  - Added `replay-artifact-0.1.15` serialize, deserialize, and verify helpers
-  - Added optional post-run replay export prompt (empty input skips export)
-  - Added focused round-trip, corruption, golden-header, and play-mode tests
-  - Ran preset and interactive playtest sessions at seed `42`
-  - Added `docs/playtest-findings-v0.1.15.md`
-  - Updated architecture, changelog, lessons, and workspace handoff artifacts
-  - Domain QA passed for the bounded replay artifact slice
-  - PR handoff opened as GitHub PR #14
-  - Three code-reviewer passes completed; High findings fixed (TTY-gated export
-    prompt, redundant ruleset check removed, event/effect count validation)
-  - PR #14 merged into main
-
-  Deferred / Non-Goals:
-  - No new commands, actors, metrics, or random streams
-  - No mid-run save/load or scenario file format
-  - No cryptographic hash guarantees or new dependencies
-  - No changes to `transition()` or committed replay hash semantics
-  - No module split or CI workflow
-
-  Verification:
-  - Artifact from preset path `1` and seed `42` round-trips and replays with
-    zero hash mismatches
-  - Corrupt committed hash fails closed on verification
-  - Default `cargo run` still skips export when the path prompt is empty
-  - `cargo fmt --check`, `cargo test`, and `cargo run` pass
-
-- Feature: Module boundary refactor
-  Status: Complete
-  Started: 2026-06-24
-  Branch: refactor/module-scaffold
-
-  Summary:
-  Split the 4,436-line monolithic `src/main.rs` into library modules aligned
-  with `ARCHITECTURE.md` boundaries while preserving all gameplay behavior.
-
-  Done:
-  - Added `src/lib.rs` with `model`, `inputs`, `sim`, `actors`, `replay`,
-    `artifact`, `debrief`, and `cli` modules
-  - Reduced `main.rs` entry point to `cli::run()`
-  - Largest implementation files now under ~650 lines (`artifact/parse.rs`,
-    `sim/transition.rs`)
-  - Package version bumped to `0.1.16`
-  - Updated `ARCHITECTURE.md` and `CHANGELOG.md`
-  - PR #15 merged into main
-
-  Deferred / Non-Goals:
-  - No workspace crate split
-  - No new gameplay, actors, or dependencies
-  - No scenario loader or CI workflow
-
-  Verification:
-  - `cargo fmt --check`, `cargo test`, and `cargo run` smoke pass
-  - Golden seed-42 preset and interactive trajectories unchanged
-
-- Feature: Test colocation slice (R8)
-  Status: Complete
-  Started: 2026-06-24
-  Branch: refactor/module-scaffold
-
-  Summary:
-  Move characterization tests from `main.rs` into module-local `#[cfg(test)]`
-  blocks and add a crate-root golden integration test for seed-42 trajectories.
-
-  Done:
-  - 77 unit tests colocated across `sim`, `replay`, `model`, `inputs`,
-    `debrief`, `cli`, and `artifact` modules
-  - `tests/golden_seed42.rs` integration test for canonical demo trajectory
-  - `src/test_support.rs` shared helpers for cross-module test fixtures
-  - `main.rs` reduced to thin entry point only
-  - Package version bumped to `0.1.17`
-  - PR #15 merged into main
-
-  Verification:
-  - `cargo test`: 77 lib unit tests + 1 integration test (78 total)
-  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
-
-- Feature: Phase 0 CI baseline
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase0-ci-baseline
-
-  Summary:
-  Add GitHub Actions CI running `cargo fmt --check` and `cargo test` on pushes
-  to `main` and on pull requests. Document local verification commands in the
-  README.
-
-  Done:
-  - Working branch created from `main`
-  - Added `.github/workflows/ci.yml` with formatting and test jobs
-  - Updated README contributing section with local CI commands
-  - Bumped package version to `0.1.18`
-  - Updated `CHANGELOG.md`
-
-  Deferred / Non-Goals:
-  - No clippy policy or release automation
-  - No workspace crate split or new gameplay behavior
-  - No contributor guide beyond README CI notes
-
-  Verification:
-  - `cargo fmt --check` passes locally
-  - `cargo test` passes locally (78 tests)
-
-- Feature: Phase 5 scope and risk register
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase5-scope-register
-
-  Summary:
-  Close Phase 5 documentation by adding a revised scope and risk register,
-  refreshed internal playtest findings for the post-refactor v0.1.19 codebase,
-  and updated project state files. No runtime behavior changes.
-
-  Done:
-  - Working branch created from `main`
-  - `docs/phase5-scope-register.md` added with achieved, deferred, risk, and
-    exit-criteria assessment
-  - `docs/playtest-findings-v0.1.19.md` added for post-refactor and CI state
-  - `_workspace/final/handoff.md` and `_workspace/03_domain_qa.md` updated
-  - Package version bumped to `0.1.19`
-  - README, CHANGELOG, and evidence-registry cross-links updated
-  - PR handoff opened as GitHub PR #17
-  - Three code-reviewer passes completed; Medium findings fixed
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No new commands, actors, metrics, or random streams
-  - No scenario loader, parameter ledger, or empirical calibration
-  - No competitor, Medicare, or Medicaid runtime implementation in this slice
-
-  Verification:
-  - `cargo fmt --check` passes
-  - `cargo test` passes (78 tests)
-  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
-  - Domain QA pass for scope register wording
-
-- Feature: Phase 1 research-to-design implications memo
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase1-implications-memo
-
-  Summary:
-  Convert Phase 1 literature research into actionable design implications and
-  add an initial parameter-source ledger without changing runtime behavior.
-
-  Done:
-  - Working branch created from `main`
-  - SPEC Present section bookkeeping restored after Phase 5 closure
-  - Added `docs/phase1-implications-memo.md`
-  - Expanded `docs/evidence-registry.md` with parameter-source ledger
-  - Package version bumped to `0.1.20`
-  - README, CHANGELOG, and workspace handoff artifacts updated
-  - `cargo fmt --check` and `cargo test` pass (golden hash unchanged)
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No empirical calibration or numeric threshold replacement
-  - No competitor actor implementation in this slice
-
-  Verification:
-  - Golden final state hash `bce02dff9b4b4ac6` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
-
-  - `cargo fmt --check`, `cargo test` pass
-
-- Feature: Competitor capacity slice
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/competitor-capacity-slice
-
-  Summary:
-  Add a fifth turn modeling rival health system capacity competition with
-  defensive player command, competitor actor decision, replay, debrief, and
-  preset path extensions while preserving turns 1–4 behavior.
-
-  Done:
-  - Competitor actor card and mechanism design artifacts
-  - `RespondToCompetitorCapacityMove` command and validation
-  - Competitor actor with accelerate, hold, and partial retreat outcomes
-  - `competitor_market_signal` stream active on turn 5 only
-  - Extended interactive and preset paths to five turns
-  - Golden hash updated; turn 4 hash unchanged at seed 42
-  - Package version bumped to `0.1.21`
-  - Playtest findings, system boundary, and scenario brief updated
-
-  Deferred / Non-Goals:
-  - No Medicare/Medicaid actors
-  - No scenario loader or mid-run save
-  - No market-entry relocation modeling
-
-  Verification:
-  - Five-transition replay from genesis
-  - Turns 1–4 resolved inputs and turn 4 hash unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` (82 tests) pass
-
-- Feature: Phase 0 governance docs
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/phase0-governance-docs
-
-  Summary:
-  Add glossary, architecture decision record conventions, and versioning policy
-  for Phase 0 repository governance without changing runtime behavior.
-
-  Done:
-  - Added `docs/glossary.md`
-  - Added `docs/decision-records/README.md` and `0000-template.md`
-  - Added `docs/versioning-policy.md`
-  - Package version bumped to `0.1.22`
-  - README and CHANGELOG updated
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No clippy policy or release automation
-  - No first accepted ADR beyond template
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
-
-- Feature: SPEC reconciliation and Phase 5 register refresh
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/spec-doc-reconciliation
-
-  Summary:
-  Sync SPEC Future backlog and refresh stale Phase 5, system-boundary, and
-  evidence-registry docs for five-turn v0.1.21+ state without runtime changes.
-
-  Done:
-  - Working branch created from `main`
-  - `docs/phase5-scope-register.md` refreshed for five-turn closure and
-    competitor achieved
-  - `docs/system-boundary.md` updated with `RespondToCompetitorCapacityMove` and
-    rival capacity inclusion
-  - `docs/evidence-registry.md` updated for five-turn wording and competitor
-    ledger `linked` status
-  - `docs/playtest-findings-v0.1.21.md` next-slice note marked superseded
-  - SPEC `Future` backlog expanded with prioritized roadmap-aligned items
-  - Package version bumped to `0.1.23`
-  - README, CHANGELOG, and workspace handoff updated
-
-  Deferred / Non-Goals:
-  - No runtime changes
-  - No Medicare/Medicaid actors
-  - No scenario loader
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (82 tests)
-
-- Feature: First architecture decision record and scenario format draft
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/adr-deterministic-boundary
-
-  Summary:
-  Record the implemented deterministic transition and stochastic input boundary
-  as ADR 0001 and add a Phase 6.2 scenario format design draft without runtime
-  changes.
-
-  Done:
-  - Added `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`
-  - Added `docs/scenario-format-draft.md`
-  - Updated `ARCHITECTURE.md` open decisions and stream/actor proof sections
-  - Updated decision-records README with accepted ADR link
-  - Package version bumped to `0.1.24`
-  - README, CHANGELOG, and SPEC updated
-
-  Deferred / Non-Goals:
-  - No runtime changes
-  - No scenario loader implementation
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
+### Phased rollup
+
+| Phase / track | Version range | Highlights | Tests at closure | Golden hash (seed 42) |
+| --- | --- | --- | --- | --- |
+| Foundations | concept → v0.1.2 | Proposal, harness, deterministic spine | — | — |
+| Stabilization vertical slice | v0.1.3–v0.1.15 | Two- to five-turn demo, debrief, interactive CLI, replay artifact | 67 | `bce02dff9b4b4ac6` (4-turn) |
+| Module refactor + CI | v0.1.16–v0.1.18 | `src/lib.rs` modules, colocated tests, GitHub Actions CI | 78 | `bce02dff9b4b4ac6` |
+| Phase 0–5 docs closure | v0.1.19–v0.1.24 | Scope register, implications memo, competitor turn, governance, ADR 0001 | 82 | `6fb1ebbea564274f` (5-turn) |
+| Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
+| Competitive design + runtime I1–I3 | v0.1.28–v0.1.30 | Design package, campaign router, action economy validation | 148 | `6fb1ebbea564274f` |
+
+### Recent slices
 
 - Feature: Forecast and uncertainty CLI preview
   Status: Complete
@@ -840,24 +56,42 @@ reconstructing it from the diff.
   logic or golden trajectories.
 
   Done:
-  - Added `src/cli/display/forecast.rs` with turn uncertainty preview helper
-  - Wired preview into interactive session before executive briefings
-  - Added observation uncertainty note to starting executive dashboard
-  - Added focused forecast preview tests
-  - Updated phase5 scope register forecast row to mostly achieved
-  - Added `docs/playtest-findings-v0.1.25.md`
+  - `src/cli/display/forecast.rs` with turn uncertainty preview helper
+  - Preview wired into interactive session before executive briefings
+  - Observation uncertainty note on starting executive dashboard
+  - Focused forecast preview tests; playtest findings v0.1.25
   - Package version bumped to `0.1.25`
-  - README, CHANGELOG, SPEC, and workspace artifacts updated
 
   Deferred / Non-Goals:
   - No probabilistic forecast objects
   - No changes to `transition()`, hash semantics, or random streams
-  - No preset path output changes beyond dashboard note
 
   Verification:
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (86 tests)
-  - Interactive mode shows uncertainty preview before turn 1 briefing
+
+- Feature: Rich-terminal CLI display
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/rich-terminal-cli-display
+
+  Summary:
+  Add semantic color, emoji section headings, and explicit per-turn command
+  prompts with parameter legends on TTY stdout while respecting `NO_COLOR`.
+
+  Done:
+  - `src/cli/display/style.rs`, `print.rs`, `prompt.rs`
+  - Interactive and preset CLI output use styled sections and global command footers
+  - CLI errors print in red on stderr when styling is enabled
+  - Package version bumped to `0.1.26`
+
+  Deferred / Non-Goals:
+  - No simulation or replay artifact content changes
+  - No competitive campaign changes
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
 
 - Feature: CLI session UX (quit, autosave, guidance, beginner mode)
   Status: Complete
@@ -871,14 +105,12 @@ reconstructing it from the diff.
   Done:
   - Global input routing (`src/cli/input.rs`) with quit/help at all prompts
   - Session save format `session-save-0.1.27` and persistence (`src/cli/persistence.rs`)
-  - Resume/start-over startup flow; autosave on interactive quit; clear on completion
-  - Contextual guidance and one-time new-player block (`src/cli/guidance.rs`)
-  - Beginner mode per-turn options from preset strategy paths (`src/cli/beginner.rs`)
-  - ADR-0002, package version `0.1.27`, focused unit tests
+  - Resume/start-over startup flow; autosave on interactive quit
+  - Contextual guidance and beginner mode (`src/cli/guidance.rs`, `src/cli/beginner.rs`)
+  - ADR-0002; package version `0.1.27`
 
   Deferred / Non-Goals:
   - No autosave on every turn or for preset paths
-  - No multi-slot save library or encrypted saves
   - No changes to `transition()`, golden hash, or replay artifact format
 
   Verification:
@@ -891,35 +123,22 @@ reconstructing it from the diff.
   Branch: feat/competitive-gameplay-design
 
   Summary:
-  Fully develop the competitive gameplay sketch into durable design artifacts and
-  sync SDD/canonical docs for a parallel regional-market campaign (1 human + K AI
-  health systems) without changing stabilization demo runtime behavior.
+  Develop the competitive gameplay sketch into durable design artifacts for a
+  parallel regional-market campaign (1 human + K AI health systems) without
+  changing stabilization demo runtime behavior.
 
   Done:
-  - `_workspace/00_input/request-summary.md` framed scope and non-goals
-  - `_workspace/01_evidence_map.md` updated for competitive precedents
-  - `_workspace/02_mechanism_design.md` rewritten for competitive campaign
-  - `docs/gameplay-competitive-sketch.md` with acceptance criteria per sketch bullet
-  - `docs/core-loop-spec.md` (Phase 3 deliverable) for both campaigns
-  - `docs/competitive-scenario-brief.md`, `docs/executive-report-format.md`,
-    `docs/action-catalog-draft.md`, `docs/cli-command-grammar-draft.md`
-  - ADRs 0003–0006 accepted in `docs/decision-records/`
-  - Canonical docs updated: proposal, roadmap §6.0, system-boundary, scenario
-    format, actor-cards, glossary, LESSONS, phase registers, evidence-registry
-  - `ARCHITECTURE.md` competitive modules documented (Needs Review until runtime)
-  - Domain QA pass; three code-reviewer passes on doc diff
+  - `docs/gameplay-competitive-sketch.md`, `docs/core-loop-spec.md`,
+    `docs/competitive-scenario-brief.md`, action catalog and CLI grammar drafts
+  - ADRs 0003–0006 accepted; canonical docs and workspace artifacts updated
   - Package version bumped to `0.1.28`
 
   Deferred / Non-Goals:
-  - Runtime implementation slices I1–I8 (tracked in Future)
-  - Refactoring stabilization demo into competitive mode
+  - Runtime implementation slices I1–I8 (tracked in Future / Present)
   - Medicare/Medicaid actors in competitive v1
-  - Classroom hot-seat multiplayer (Phase 9)
-  - Empirical calibration and global equilibrium AI
 
   Verification:
-  - All new design docs exist and cross-link consistently
-  - Domain QA pass in `_workspace/03_domain_qa.md`
+  - Design docs cross-link consistently; domain QA pass
   - `cargo fmt --check`, `cargo test` pass with golden hash unchanged
 
 - Feature: Competitive campaign runtime I1+I2
@@ -930,33 +149,23 @@ reconstructing it from the diff.
   Summary:
   Add CLI campaign router (`stabilization-v1` vs `competitive-regional-v1` preview)
   and monthly executive report renderer using observation-only mock fixtures.
-  Stabilization demo behavior unchanged.
 
   Done:
   - `CampaignId`, `Difficulty`, `PolicyCalendar`, `PlayerObservation` in
     `src/model/campaign.rs`
-  - CLI campaign and difficulty selectors in `src/cli/campaign.rs` and `src/cli/io.rs`
-  - Executive report renderer in `src/cli/display/executive_report.rs`
-  - Mock fixtures in `src/competitive/fixtures.rs`
-  - `SessionOutcome::CompetitivePreview` for stub exit
-  - Focused unit tests for campaign parsing, calendar, report sections, stub flow
+  - Campaign and difficulty selectors; executive report renderer
+  - Mock fixtures in `src/competitive/fixtures.rs`; `SessionOutcome::CompetitivePreview`
   - Package version bumped to `0.1.29`
 
-  Not Yet Done:
-  - Full competitive play (I3–I8): AP economy, multi-system state, simultaneous
-    resolver, AI players, events, Stata CLI
-
   Deferred / Non-Goals:
-  - No `transition_competitive()` or changes to stabilization `transition()`
-  - No scenario file loader
-  - No Medicare/Medicaid actors
+  - No `transition_competitive()` or stabilization `transition()` changes
+  - Full competitive play deferred to I3–I8 (see archive and Future)
   - Session autosave remains stabilization-only
 
   Verification:
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (130 tests)
-  - Empty campaign input defaults to stabilization
-  - Competitive path shows six-section month-1 executive report then stub message
+  - Competitive path shows month-1 executive report then stub message
 
 - Feature: Competitive campaign runtime I3
   Status: Complete
@@ -965,42 +174,60 @@ reconstructing it from the diff.
 
   Summary:
   Add competitive command types, action-cost catalog, and batch validation for
-  AP, cash, and political capital per ADR-0005. Extend executive report and
-  competitive stub with validation demo presets. Stabilization unchanged.
+  AP, cash, and political capital per ADR-0005.
 
   Done:
-  - `CompetitiveCommand`, `ActionCost`, and verb argument enums in
-    `src/model/competitive_command.rs`
-  - `PlayerResources`, `CompetitiveRuleset`, `CompetitiveValidationError` in
-    `src/model/resources.rs`
-  - `validate_competitive_batch` / `validate_competitive_command` in
-    `src/sim/validate_competitive.rs`
-  - Executive report shows AP and political capital remaining
-  - Five preset validation demos in `src/competitive/mod.rs`
-  - Competitive stub validation demo loop after month-1 report
-  - Focused unit tests for catalog costs, batch validation, report header
+  - `CompetitiveCommand`, `ActionCost` in `src/model/competitive_command.rs`
+  - `PlayerResources`, `CompetitiveRuleset` in `src/model/resources.rs`
+  - `validate_competitive_batch` in `src/sim/validate_competitive.rs`
+  - Five preset validation demos; executive report AP/PC header
   - Package version bumped to `0.1.30`
 
-  Not Yet Done:
-  - Full competitive play (I4–I8): multi-system state, simultaneous resolver,
-    AI players, events, Stata CLI
-
   Deferred / Non-Goals:
-  - No `transition_competitive()` or changes to stabilization `transition()`
-  - No scenario file loader
-  - No Medicare/Medicaid actors
-  - Session autosave remains stabilization-only
-  - No Stata-like command parser (I8)
+  - Multi-system state, resolver, AI, events, Stata CLI (I4–I8)
+  - No scenario file loader; no Medicare/Medicaid actors
 
   Verification:
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (148 tests)
   - Competitive demos 1–5 exercise pass/fail validation paths
 
+## Present
+
+- Feature: Competitive campaign runtime I4
+  Status: Active
+  Started: 2026-06-24
+  Branch: feat/competitive-multi-system-state
+
+  Summary:
+  Add `CompetitiveWorldState` with K+1 `HealthSystemState` entities, player
+  slots, and difficulty-scoped genesis fixtures per ADR-0004. No
+  `transition_competitive()` yet.
+
+  Done:
+  - (populated during implementation)
+
+  Not Yet Done:
+  - `CompetitiveWorldState`, `SharedMarketFields`, `HealthSystemState`,
+    `PlayerSlot` types
+  - Difficulty-scoped genesis fixtures (Easy–Expert)
+  - Competitive stub roster/summary display from genesis (not mock-only)
+  - Focused genesis and sizing tests; stabilization golden unchanged
+
+  Deferred / Non-Goals:
+  - `transition_competitive()` and monthly loop (I5)
+  - AI players, events, Stata CLI (I6–I8)
+  - Stabilization `WorldState` or golden hash changes
+  - Replay artifact version bump for competitive runs
+
+  Verification:
+  - `systems.len() == K+1` for each `Difficulty` tier
+  - Human player assigned to system 0; K AI slots with profiles
+  - Golden stabilization hash unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Future
 
-- **Competitive campaign runtime I4** — multi-system player state (K+1 entities,
-  difficulty profiles).
 - **Competitive campaign runtime I5** — simultaneous monthly action resolver
   and partial rival observability.
 - **Competitive campaign runtime I6** — bounded game-theory AI players with
