@@ -1,7 +1,7 @@
 use crate::model::{
   CampaignId, CliError, CompetitiveRunConfig, Ruleset, SessionOutcome, default_competitive_ruleset,
 };
-use crate::sim::validate_competitive_batch;
+use crate::sim::{observe_for_human, validate_competitive_batch};
 
 use super::display::{print_block, print_line, render_executive_report, style};
 use super::input::ReadLineOutcome;
@@ -11,7 +11,8 @@ use super::io::{
 };
 use crate::competitive::{
   genesis_competitive_world_with_ruleset, genesis_roster_lines, observation_from_genesis,
-  validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
+  resolution_summary_lines, resolve_preset_month1, validation_demo_by_id,
+  validation_demo_menu_lines, validation_resources_for_demo,
 };
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
@@ -154,9 +155,46 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
+  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I5)"));
+  print_line("Resolving preset simultaneous player batches (human + AI rivals)...");
+  print_line("");
+
+  match resolve_preset_month1(&world, &ruleset) {
+    Ok(transition) => {
+      for line in resolution_summary_lines(&transition) {
+        print_line(&line);
+      }
+      print_line("");
+
+      let month2_human = transition
+        .next
+        .human_system()
+        .expect("human system after resolution");
+      let month2_observation = observe_for_human(&transition.next, Some(&transition.aggregated));
+      let ap_budget = config.difficulty.human_ap_per_month();
+      let month2_report = render_executive_report(
+        transition.next.policy_calendar,
+        &month2_observation,
+        ap_budget,
+        ap_budget,
+        month2_human.resources.political_capital,
+        ruleset.political_capital_cap,
+      );
+      print_block(&month2_report);
+    }
+    Err(error) => {
+      print_line(&style::warning(&format!(
+        "{} Month 1 resolution failed: {}",
+        style::EMOJI_WARNING,
+        error.message()
+      )));
+    }
+  }
+
+  print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I4). Monthly command entry, simultaneous \
-     resolution, and the full 24-month campaign ship in slices I5–I8.",
+    "Competitive campaign preview (slices I1–I5). AI players, events/delays, Stata CLI, and \
+     the full 24-month campaign ship in slices I6–I8.",
   ));
   print_line(&style::dim(
     "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",

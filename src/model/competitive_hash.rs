@@ -1,0 +1,64 @@
+use super::{CompetitiveRuleset, CompetitiveWorldState, stable_hash_hex};
+
+pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v1";
+
+pub fn competitive_state_hash_record(
+  state: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+) -> String {
+  let mut systems = String::new();
+  for system in &state.systems {
+    systems.push_str(&format!(
+      "|sys{}:beds={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}",
+      system.system_id,
+      system.staffed_beds,
+      system.access_index,
+      system.quality_index,
+      system.market_share_index,
+      system.resources.cash,
+      system.resources.political_capital,
+      system.resources.ap_budget,
+      system.resources.active_projects,
+    ));
+  }
+
+  format!(
+    "{}|ruleset={}|turn={}|month={}|demand={}|payer={}|policy={}|log={}|queue={}{}",
+    COMPETITIVE_STATE_HASH_SCHEMA_VERSION,
+    ruleset.version,
+    state.turn,
+    state.policy_calendar.month_index,
+    state.market.regional_demand_index,
+    state.market.commercial_payer_pressure,
+    state.market.policy_pressure,
+    state.public_action_log.len(),
+    state.effect_queue.len(),
+    systems,
+  )
+}
+
+pub fn hash_competitive_state(
+  state: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+) -> String {
+  stable_hash_hex(&competitive_state_hash_record(state, ruleset))
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+  use crate::model::{Difficulty, default_competitive_ruleset};
+
+  #[test]
+  fn competitive_hash_is_stable_for_same_state() {
+    let world = crate::competitive::genesis_competitive_world_with_ruleset(
+      Difficulty::Normal,
+      &default_competitive_ruleset(),
+    );
+    let ruleset = default_competitive_ruleset();
+    let first = hash_competitive_state(&world, &ruleset);
+    let second = hash_competitive_state(&world, &ruleset);
+    assert_eq!(first, second);
+    assert_eq!(first.len(), 16);
+  }
+}

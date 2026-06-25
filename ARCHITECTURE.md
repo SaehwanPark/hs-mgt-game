@@ -25,6 +25,12 @@ intended architecture boundaries that future implementation should preserve.
 Last Reviewed: 2026-06-24
 Status: Verified
 
+The current implementation includes a competitive campaign path with genesis
+multi-system state, action-economy validation, simultaneous monthly batch
+resolution (`sim/resolve.rs`), `transition_competitive()`, and observation-only
+rival intel with 1-month lag (`sim/observe_competitive.rs`). Full AI players,
+events/delays, and Stata CLI remain deferred to slices I6–I8.
+
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function in `sim/transition.rs`,
 explicit resolved inputs from `inputs/resolve.rs`, actor-specific observation and
@@ -168,7 +174,8 @@ Implemented modules for `competitive-regional-v1`:
 | Executive report renderer | Six-section monthly briefing from `PlayerObservation` | Verified |
 | `CompetitiveCommand` + validation | AP/cash/PC batch validation per action catalog | Verified |
 | `CompetitiveWorldState` + genesis | K+1 health systems, player slots, difficulty fixtures | Verified (I4) |
-| `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Needs Review |
+| `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Verified (`sim/resolve.rs`, v0.1.32) |
+| `transition_competitive()` | Competitive monthly state transition | Verified (`sim/transition_competitive.rs`, v0.1.32) |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Needs Review |
 | `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Needs Review |
 
@@ -197,5 +204,5 @@ Status: Verified (router, report, validation, genesis); Needs Review (resolver, 
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
 - Competitive campaign boundaries: **addressed** by ADRs
   [0003](docs/decision-records/0003-simultaneous-monthly-player-actions.md)–[0006](docs/decision-records/0006-stata-like-cli-layer.md);
-  runtime modules deferred to slices I5–I8 (I1–I4 landed).
+  I1–I5 landed; I6–I8 runtime deferred.
 - Data and licensing policy.

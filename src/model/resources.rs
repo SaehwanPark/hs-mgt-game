@@ -95,6 +95,9 @@ pub enum CompetitiveValidationError {
   ProjectBudgetNonPositive,
   ProjectBudgetBelowDuration { budget: i32, resolve_months: u32 },
   ProjectMonthlyDrawInfeasible { monthly_draw: i32, available: i32 },
+  UnknownSystemId { system_id: u32 },
+  BatchCountMismatch { expected: u32, provided: u32 },
+  MonthIndexMismatch { expected: u32, provided: u32 },
 }
 
 impl CompetitiveValidationError {
@@ -153,6 +156,15 @@ impl CompetitiveValidationError {
         available,
       } => {
         format!("project monthly draw {monthly_draw} exceeds available cash {available}")
+      }
+      CompetitiveValidationError::UnknownSystemId { system_id } => {
+        format!("unknown system id {system_id}")
+      }
+      CompetitiveValidationError::BatchCountMismatch { expected, provided } => {
+        format!("expected {expected} player batches, received {provided}")
+      }
+      CompetitiveValidationError::MonthIndexMismatch { expected, provided } => {
+        format!("month index {provided} does not match current month {expected}")
       }
     }
   }

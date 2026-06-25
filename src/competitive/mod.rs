@@ -1,11 +1,16 @@
 mod fixtures;
 mod genesis;
+mod resolution;
 
 pub use fixtures::{
   mock_observation_annual_month, mock_observation_month1, observation_from_genesis,
 };
 pub use genesis::{
   genesis_competitive_world, genesis_competitive_world_with_ruleset, genesis_roster_lines,
+};
+pub use resolution::{
+  build_month1_resolution_history, month1_preset_batches, resolution_summary_lines,
+  resolve_preset_month1,
 };
 
 use crate::model::{

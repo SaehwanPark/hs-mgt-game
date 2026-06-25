@@ -42,6 +42,7 @@ reconstructing it from the diff.
 | Phase 0–5 docs closure | v0.1.19–v0.1.24 | Scope register, implications memo, competitor turn, governance, ADR 0001 | 82 | `6fb1ebbea564274f` (5-turn) |
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
+| Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
 
 ### Recent slices
 
@@ -194,24 +195,109 @@ reconstructing it from the diff.
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (154 tests)
 
+- Feature: Competitive campaign runtime I5
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/competitive-simultaneous-resolver
+
+  Summary:
+  Add simultaneous monthly action resolver, `transition_competitive()`, partial
+  rival observability, and a one-month resolution CLI demo per ADR-0003.
+
+  Done:
+  - `SystemMonthlyBatch`, `AggregatedMonthlyActions` in `src/model/competitive_batch.rs`
+  - `CompetitiveTransition`, `CompetitiveHistory` in `src/model/competitive_history.rs`
+  - `resolve_monthly_batches` in `src/sim/resolve.rs`
+  - `transition_competitive()` in `src/sim/transition_competitive.rs`
+  - `observe_for_human()` in `src/sim/observe_competitive.rs`
+  - Month-1 preset resolution in `src/competitive/resolution.rs`
+  - CLI month-1 resolution demo + month-2 executive report preview
+  - Golden `tests/golden_competitive_seed42.rs` hash `05a422b51a2c24e8`
+  - Package version bumped to `0.1.32`
+
+  Deferred / Non-Goals:
+  - AI players (I6), events/delays (I7), Stata CLI (I8)
+  - Full 24-month campaign loop, competitive replay artifact, competitive autosave
+  - No stabilization golden hash changes
+
+  Verification:
+  - Permutation-invariance test for batch collection order
+  - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (173 tests)
+
 ## Present
 
-No active slice. Next: **Competitive campaign runtime I5** (see Future).
+No active slice. Next: **Competitive campaign runtime I6** (see Future).
 
 ## Future
 
-- **Competitive campaign runtime I5** — simultaneous monthly action resolver
-  and partial rival observability.
-- **Competitive campaign runtime I6** — bounded game-theory AI players with
-  rationales.
-- **Competitive campaign runtime I7** — random events, delayed effect queue,
-  annual policy tick.
-- **Competitive campaign runtime I8** — Stata-like CLI (grammar, color, autocomplete,
-  help).
+Planned slices are ordered by dependency. Each item separates what exists today
+from what the slice would add.
+
+### Competitive campaign runtime I6 — AI players (recommended next)
+
+**Branch:** `feat/competitive-ai-players`  
+**Depends on:** I5 batch shapes and `resolve_monthly_batches` (complete)
+
+**Done (already):**
+- `AiProfile`, `AiStyleWeights`, and difficulty-scoped rival roster in genesis
+- Design acceptance criteria in `docs/gameplay-competitive-sketch.md` §9
+
+**Not Yet Done:**
+- `compute_ai_batch(system_id, observation, ruleset) -> SystemMonthlyBatch` per rival
+- Level-1 best response to lagged public log + style-weighted utility
+- Named RNG stream `ai_player_{id}` for tie-break only (ADR-0001)
+- Inspectable rationale string stored on each AI batch / transition record
+- Replace preset rival batches in `src/competitive/resolution.rs` with AI-generated batches
+- Tests: same seed + genesis → identical AI batches; rationale present for each AI system
+
+**Deferred within I6:**
+- Global equilibrium solver; human-visible same-month AI choices
+
+### Competitive campaign runtime I7 — events, delays, annual tick
+
+**Branch:** `feat/competitive-events-delays`  
+**Depends on:** I5 `transition_competitive()` and `effect_queue` enqueue (complete)
+
+**Done (already):**
+- `PendingEffect` type and enqueue on `project` / delayed `recruit`
+- `PolicyCalendar` with `advance()` and `is_annual_tick()`
+- ADR-0001 stochastic boundary pattern in stabilization `inputs/resolve.rs`
+
+**Not Yet Done:**
+- Competitive streams: `monthly_events`, `annual_policy`, `ai_player_{id}` in `inputs/resolve.rs`
+- Apply due `PendingEffect` entries at month start before player decisions
+- Simplified NPC institution phase (payer + state only per mechanism design)
+- Multi-month CLI or library loop (at least 2–3 months beyond current 1-month demo)
+- Competitive replay artifact version bump for multi-system history
+
+**Deferred within I7:**
+- Full labor/coalition NPC expansion; Medicare/Medicaid actors
+
+### Competitive campaign runtime I8 — Stata-like CLI
+
+**Branch:** `feat/competitive-stata-cli`  
+**Depends on:** I5 command batch API stable; best after I6 generates rival batches
+
+**Done (already):**
+- `docs/cli-command-grammar-draft.md`, ADR-0006
+- Typed `CompetitiveCommand` enum and validation in `src/sim/validate_competitive.rs`
+
+**Not Yet Done:**
+- Parse `verb arg=value` surface syntax into `CompetitiveCommand` batches
+- Interactive monthly entry loop (submit / hold) for human player
+- Color-coded help, parameter legends, and autocomplete for MVP verbs
+- Wire parsed batches into `resolve_monthly_batches` instead of presets
+
+**Deferred within I8:**
+- Mid-run competitive autosave; classroom async commit-reveal
+
+### Parallel / gated tracks (after I6–I8 or when unblocked)
+
 - **External playtest protocol refresh** (Phase 7 prep): structured external
-  session protocol.
-- **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded from
-  first scenario until brief expands; actor cards required first.
+  session protocol; no runtime required.
+- **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded until
+  brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;
   see [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md).
 - **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.
