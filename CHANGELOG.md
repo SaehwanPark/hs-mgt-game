@@ -6,6 +6,19 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.38] - 2026-06-25
+
+### Added
+
+- New player-facing manual at `docs/how-to-play.md` covering quickstart,
+  campaign flow, terminology, commands, worked interaction example, and
+  difficulty recovery tips.
+
+### Changed
+
+- `README.md` documentation index now links the new player manual.
+- Package version bumped to `0.1.38`.
+
 ## [0.1.37] - 2026-06-25
 
 ### Added

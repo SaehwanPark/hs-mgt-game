@@ -27,6 +27,7 @@ and competitive events/delays at v0.1.34,
 and Stata-like competitive command entry at v0.1.35,
 and bounded three-month competitive loop at v0.1.36,
 and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37.
+and new-player "How to Play" manual at v0.1.38.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -51,6 +52,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Project Proposal](docs/proposal.md)
 - [Development Roadmap](docs/roadmap.md)
 - [Design Principles](docs/design_principles.md)
+- [How To Play (New Players)](docs/how-to-play.md)
 - [Actor Card Template](docs/actor-cards.md)
 - [First Scenario Brief](docs/first-scenario-brief.md)
 - [Phase 1 Implications Memo](docs/phase1-implications-memo.md)
