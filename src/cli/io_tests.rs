@@ -1,6 +1,35 @@
 use crate::cli::input::*;
 use crate::cli::io::*;
-use crate::model::{CliError, DEFAULT_SEED, ExperienceMode, PlayMode, StrategyPath};
+use crate::model::{
+  CampaignId, CliError, DEFAULT_SEED, Difficulty, ExperienceMode, PlayMode, StrategyPath,
+};
+
+#[test]
+fn empty_campaign_choice_defaults_to_stabilization() {
+  assert_eq!(
+    parse_campaign_choice("").unwrap(),
+    CampaignId::StabilizationV1
+  );
+}
+
+#[test]
+fn competitive_campaign_alias_is_parsed() {
+  assert_eq!(
+    parse_campaign_choice("c").unwrap(),
+    CampaignId::CompetitiveRegionalV1
+  );
+}
+
+#[test]
+fn empty_difficulty_choice_defaults_to_normal() {
+  assert_eq!(parse_difficulty_choice("").unwrap(), Difficulty::Normal);
+}
+
+#[test]
+fn numbered_difficulty_choices_are_parsed() {
+  assert_eq!(parse_difficulty_choice("1").unwrap(), Difficulty::Easy);
+  assert_eq!(parse_difficulty_choice("4").unwrap(), Difficulty::Expert);
+}
 
 #[test]
 fn empty_play_mode_choice_defaults_to_interactive_standard() {

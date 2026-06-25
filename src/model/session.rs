@@ -18,6 +18,7 @@ pub enum PlayMode {
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum SessionOutcome {
   Completed,
+  CompetitivePreview,
   QuitSaved,
   QuitNoSave,
 }
@@ -75,6 +76,8 @@ pub enum CliError {
   InvalidStrategyPlan(ValidationError),
   InvalidInteractiveCommand(ValidationError),
   InvalidResumeChoice(String),
+  InvalidCampaignChoice(String),
+  InvalidDifficultyChoice(String),
   SessionSaveFailed(String),
   InputUnavailable,
 }

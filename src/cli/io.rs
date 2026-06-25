@@ -1,10 +1,12 @@
 use std::io;
 
-use crate::model::{CliError, DEFAULT_SEED, ExperienceMode, PlayMode, StrategyPath};
+use crate::model::{
+  CampaignId, CliError, DEFAULT_SEED, Difficulty, ExperienceMode, PlayMode, StrategyPath,
+};
 
 use super::display::{
-  PromptContext, global_commands_footer, play_mode_menu_lines, print_prompt_block,
-  resume_choice_prompt_lines, seed_prompt_lines,
+  PromptContext, campaign_menu_lines, difficulty_menu_lines, global_commands_footer,
+  play_mode_menu_lines, print_prompt_block, resume_choice_prompt_lines, seed_prompt_lines,
 };
 use super::guidance::print_context_help;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
@@ -44,6 +46,38 @@ pub fn parse_resume_choice(input: &str) -> Result<bool, CliError> {
     "r" | "R" => Ok(true),
     "n" | "N" => Ok(false),
     other => Err(CliError::InvalidResumeChoice(other.to_string())),
+  }
+}
+
+pub fn read_campaign_choice() -> Result<ReadLineOutcome, CliError> {
+  let mut lines = campaign_menu_lines();
+  lines.extend(global_commands_footer(PromptContext::Campaign));
+  read_line_with_globals(&lines, PromptContext::Campaign)
+}
+
+pub fn parse_campaign_choice(input: &str) -> Result<CampaignId, CliError> {
+  let trimmed = input.trim();
+  match trimmed {
+    "" | "1" => Ok(CampaignId::StabilizationV1),
+    "2" | "c" | "C" => Ok(CampaignId::CompetitiveRegionalV1),
+    other => Err(CliError::InvalidCampaignChoice(other.to_string())),
+  }
+}
+
+pub fn read_difficulty_choice() -> Result<ReadLineOutcome, CliError> {
+  let mut lines = difficulty_menu_lines();
+  lines.extend(global_commands_footer(PromptContext::Difficulty));
+  read_line_with_globals(&lines, PromptContext::Difficulty)
+}
+
+pub fn parse_difficulty_choice(input: &str) -> Result<Difficulty, CliError> {
+  let trimmed = input.trim();
+  match trimmed {
+    "" | "2" => Ok(Difficulty::Normal),
+    "1" => Ok(Difficulty::Easy),
+    "3" => Ok(Difficulty::Hard),
+    "4" => Ok(Difficulty::Expert),
+    other => Err(CliError::InvalidDifficultyChoice(other.to_string())),
   }
 }
 

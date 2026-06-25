@@ -1,7 +1,7 @@
 # Phase 5 Scope and Risk Register
 
 **Status:** Phase 5 closure artifact (refreshed)  
-**Version:** v0.1.28  
+**Version:** v0.1.29  
 **Date:** 2026-06-24  
 **Audience:** Contributors, domain reviewers, and playtest designers
 
@@ -155,7 +155,8 @@ v0.1.28 is design-only).
 
 Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
 
-1. **Competitive campaign runtime I1+I2** — campaign router and monthly executive report.
+1. **Competitive campaign runtime I3** — action-point economy, cash feasibility,
+   political capital validation.
 2. **External playtest protocol refresh** — Phase 7 prep.
 3. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
 4. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
