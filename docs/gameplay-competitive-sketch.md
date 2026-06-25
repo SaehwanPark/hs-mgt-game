@@ -184,7 +184,7 @@ the same month are treated as simultaneous choices.
 
 - [x] AI player card template in actor-cards.md
 - [x] Design principles §5 cited; phase1 memo rejection of global equilibrium
-- [ ] Named RNG stream per AI for tie-break only (runtime)
+- [x] Named RNG stream per AI for tie-break only (runtime)
 
 ---
 

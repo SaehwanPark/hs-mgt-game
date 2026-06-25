@@ -4,6 +4,29 @@ use super::CompetitiveCommand;
 pub struct SystemMonthlyBatch {
   pub system_id: u32,
   pub commands: Vec<CompetitiveCommand>,
+  pub rationale: Option<String>,
+}
+
+impl SystemMonthlyBatch {
+  pub fn new(system_id: u32, commands: Vec<CompetitiveCommand>) -> Self {
+    Self {
+      system_id,
+      commands,
+      rationale: None,
+    }
+  }
+
+  pub fn with_rationale(
+    system_id: u32,
+    commands: Vec<CompetitiveCommand>,
+    rationale: impl Into<String>,
+  ) -> Self {
+    Self {
+      system_id,
+      commands,
+      rationale: Some(rationale.into()),
+    }
+  }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -34,6 +57,7 @@ mod tests {
         SystemMonthlyBatch {
           system_id: 0,
           commands: vec![CompetitiveCommand::Hold],
+          rationale: None,
         },
         SystemMonthlyBatch {
           system_id: 1,
@@ -41,6 +65,7 @@ mod tests {
             target: MonitorTarget::Northlake,
             depth: 1,
           }],
+          rationale: Some("AI selected monitor action".to_string()),
         },
       ],
     };
@@ -65,6 +90,7 @@ mod tests {
         domain: InvestDomain::Beds,
         amount: 20,
       }],
+      rationale: None,
     };
     assert_eq!(batch.commands.len(), 1);
   }

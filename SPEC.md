@@ -43,6 +43,7 @@ reconstructing it from the diff.
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 | Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
+| Competitive runtime I6 | v0.1.33 | AI batch planner, style-weighted rival actions, inspectable rationale traces | 183 | `e68f683da77d7c2f` (competitive) |
 
 ### Recent slices
 
@@ -225,34 +226,41 @@ reconstructing it from the diff.
   - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (173 tests)
 
+- Feature: Competitive campaign runtime I6
+  Status: Complete
+  Started: 2026-06-25
+  Branch: feat/competitive-ai-players
+
+  Summary:
+  Add deterministic AI rival batch generation with style-weighted command
+  scoring, lagged-public-log response, and inspectable rationale strings.
+
+  Done:
+  - `compute_ai_batch()` and `month1_batches_with_ai()` in `src/competitive/resolution.rs`
+  - `SystemMonthlyBatch.rationale` persisted for AI action traceability
+  - Competitive month-1 resolver switched from fixed rival presets to AI-generated batches
+  - Seed plumbed through month-1 competitive resolution helpers for deterministic tie-breaks
+  - New tests in `tests/competitive_ai_players.rs`; competitive golden updated
+  - Package version bumped to `0.1.33`
+
+  Deferred / Non-Goals:
+  - No events/delays/annual policy tick (I7)
+  - No Stata-like monthly command parser/entry loop (I8)
+  - No full 24-month competitive campaign loop
+
+  Verification:
+  - `cargo fmt --check`, `cargo test` pass (183 tests)
+  - Competitive seed-42 golden hash `e68f683da77d7c2f`
+  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+
 ## Present
 
-No active slice. Next: **Competitive campaign runtime I6** (see Future).
+No active slice. Next: **Competitive campaign runtime I7** (see Future).
 
 ## Future
 
 Planned slices are ordered by dependency. Each item separates what exists today
 from what the slice would add.
-
-### Competitive campaign runtime I6 — AI players (recommended next)
-
-**Branch:** `feat/competitive-ai-players`  
-**Depends on:** I5 batch shapes and `resolve_monthly_batches` (complete)
-
-**Done (already):**
-- `AiProfile`, `AiStyleWeights`, and difficulty-scoped rival roster in genesis
-- Design acceptance criteria in `docs/gameplay-competitive-sketch.md` §9
-
-**Not Yet Done:**
-- `compute_ai_batch(system_id, observation, ruleset) -> SystemMonthlyBatch` per rival
-- Level-1 best response to lagged public log + style-weighted utility
-- Named RNG stream `ai_player_{id}` for tie-break only (ADR-0001)
-- Inspectable rationale string stored on each AI batch / transition record
-- Replace preset rival batches in `src/competitive/resolution.rs` with AI-generated batches
-- Tests: same seed + genesis → identical AI batches; rationale present for each AI system
-
-**Deferred within I6:**
-- Global equilibrium solver; human-visible same-month AI choices
 
 ### Competitive campaign runtime I7 — events, delays, annual tick
 

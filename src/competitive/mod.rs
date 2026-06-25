@@ -9,8 +9,8 @@ pub use genesis::{
   genesis_competitive_world, genesis_competitive_world_with_ruleset, genesis_roster_lines,
 };
 pub use resolution::{
-  build_month1_resolution_history, month1_preset_batches, resolution_summary_lines,
-  resolve_preset_month1,
+  build_month1_resolution_history, compute_ai_batch, month1_batches_with_ai, month1_preset_batches,
+  resolution_summary_lines, resolve_preset_month1,
 };
 
 use crate::model::{

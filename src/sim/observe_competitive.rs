@@ -211,6 +211,7 @@ mod tests {
             depth: 1,
           },
         ],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 1,
@@ -224,6 +225,7 @@ mod tests {
             headcount: 2,
           },
         ],
+        rationale: Some("AI prioritized growth this month".to_string()),
       },
       SystemMonthlyBatch {
         system_id: 2,
@@ -231,6 +233,7 @@ mod tests {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
+        rationale: Some("AI prioritized access trust signal".to_string()),
       },
     ]
   }

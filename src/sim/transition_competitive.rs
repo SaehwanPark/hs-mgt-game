@@ -373,6 +373,7 @@ mod transition_competitive_tests {
             depth: 1,
           },
         ],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 1,
@@ -386,6 +387,7 @@ mod transition_competitive_tests {
             headcount: 2,
           },
         ],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 2,
@@ -393,6 +395,7 @@ mod transition_competitive_tests {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
+        rationale: None,
       },
     ]
   }

@@ -6,3 +6,5 @@ pub(crate) const STREAM_POLICY: u32 = 4;
 pub(crate) const STREAM_COALITION: u32 = 5;
 pub(crate) const STREAM_REVISION: u32 = 6;
 pub(crate) const STREAM_COMPETITOR: u32 = 7;
+// Reserve 100..=109 for per-system AI tie-break streams; logical streams stay below 10.
+pub(crate) const STREAM_AI_PLAYER_BASE: u32 = 100;

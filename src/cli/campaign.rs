@@ -159,7 +159,7 @@ fn run_competitive_preview_internal(
   print_line("Resolving preset simultaneous player batches (human + AI rivals)...");
   print_line("");
 
-  match resolve_preset_month1(&world, &ruleset) {
+  match resolve_preset_month1(&world, &ruleset, config.seed) {
     Ok(transition) => {
       for line in resolution_summary_lines(&transition) {
         print_line(&line);

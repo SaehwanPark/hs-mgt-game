@@ -6,6 +6,33 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.33] - 2026-06-25
+
+### Added
+
+- Competitive AI batch planner APIs: `compute_ai_batch()` and
+  `month1_batches_with_ai()` (`src/competitive/resolution.rs`).
+- Style-weighted AI command selection using lagged public-action pressure with
+  deterministic tie-break stream mapping `ai_player_{id}`.
+- AI rationale persistence on `SystemMonthlyBatch.rationale` for inspectable
+  decision traces.
+- Integration test coverage in `tests/competitive_ai_players.rs` for
+  reproducibility and rationale presence.
+
+### Changed
+
+- Competitive month-1 resolver now uses AI-generated rival batches instead of
+  fixed presets (human batch remains explicit).
+- `resolve_preset_month1` and `build_month1_resolution_history` now take a run
+  seed to keep AI tie-break behavior reproducible in tests and CLI.
+- Golden competitive seed-42 hash updated to `e68f683da77d7c2f`.
+- Bumped package version from `0.1.32` to `0.1.33`.
+
+### Notes
+
+- I7 (events/delays/annual tick) and I8 (Stata-like CLI) remain deferred.
+- Stabilization golden seed-42 hash remains `6fb1ebbea564274f`.
+
 ## [0.1.32] - 2026-06-24
 
 ### Added

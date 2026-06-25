@@ -21,7 +21,8 @@ design package (parallel campaign spec, core loop, ADRs 0003–0006) at v0.1.28,
 and competitive campaign router with month-1 executive report preview at v0.1.29,
 and competitive action economy validation at v0.1.30,
 and competitive multi-system genesis state at v0.1.31,
-and competitive simultaneous monthly resolver at v0.1.32.
+and competitive simultaneous monthly resolver at v0.1.32,
+and competitive AI player batch generation at v0.1.33.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).

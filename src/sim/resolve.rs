@@ -60,6 +60,7 @@ mod tests {
             headcount: 2,
           },
         ],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 0,
@@ -70,6 +71,7 @@ mod tests {
             depth: 1,
           },
         ],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 2,
@@ -77,6 +79,7 @@ mod tests {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
+        rationale: None,
       },
     ]
   }
@@ -101,10 +104,12 @@ mod tests {
       SystemMonthlyBatch {
         system_id: 0,
         commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
       },
       SystemMonthlyBatch {
         system_id: 9,
         commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
       },
     ];
     assert!(matches!(
@@ -120,6 +125,7 @@ mod tests {
     let batches = vec![SystemMonthlyBatch {
       system_id: 0,
       commands: vec![CompetitiveCommand::Hold],
+      rationale: None,
     }];
     assert!(matches!(
       resolve_monthly_batches(&prior, &batches, &ruleset),
