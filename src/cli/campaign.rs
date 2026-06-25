@@ -274,9 +274,36 @@ fn print_competitive_month_report(
     "Enter Stata-like commands for Riverside (system 0), or press Enter for fallback batch.",
   );
   for line in competitive_command_help_lines() {
-    print_line(&style::dim(&format!("  {line}")));
+    print_line(&format!("  {}", format_competitive_help_line(&line)));
   }
+  print_line(&format!(
+    "  {}",
+    style::command_prompt_label("Prompt: riverside> (Tab: complete command verbs)")
+  ));
   print_line("");
+}
+
+fn format_competitive_help_line(line: &str) -> String {
+  if line.starts_with("Separate ") {
+    return style::dim(line);
+  }
+
+  if line.contains(char::is_whitespace) {
+    let mut parts = line.splitn(2, char::is_whitespace);
+    let verb = parts.next().unwrap_or_default();
+    let rest = parts.next().unwrap_or("").trim();
+    if rest.is_empty() {
+      style::command_token(verb)
+    } else {
+      format!(
+        "{} {}",
+        style::command_token(verb),
+        style::argument_token(rest)
+      )
+    }
+  } else {
+    style::command_token(line)
+  }
 }
 
 fn read_human_batch_for_world(

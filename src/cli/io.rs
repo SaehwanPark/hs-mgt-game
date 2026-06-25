@@ -10,6 +10,7 @@ use super::display::{
 };
 use super::guidance::print_context_help;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
+use super::repl::read_competitive_command_line;
 
 pub fn read_line_with_globals(
   prompt_lines: &[String],
@@ -179,7 +180,7 @@ pub fn read_validation_demo_choice() -> Result<ReadLineOutcome, CliError> {
 
 pub fn read_competitive_command_batch() -> Result<ReadLineOutcome, CliError> {
   let lines = vec![style::subsection("Competitive command batch")];
-  read_line_with_globals(&lines, PromptContext::CompetitiveCommand)
+  read_competitive_command_line(&lines)
 }
 
 pub fn parse_replay_export_path(input: &str) -> Option<String> {

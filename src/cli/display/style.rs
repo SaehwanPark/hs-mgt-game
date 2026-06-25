@@ -18,6 +18,7 @@ const CYAN: &str = "\x1b[36m";
 const GREEN: &str = "\x1b[32m";
 const YELLOW: &str = "\x1b[33m";
 const RED: &str = "\x1b[31m";
+const MAGENTA: &str = "\x1b[35m";
 
 pub fn styling_enabled() -> bool {
   stream_styling_enabled(io::stdout().is_terminal())
@@ -75,6 +76,26 @@ pub fn accent(text: &str) -> String {
   wrap_styled(styling_enabled(), text, &format!("{CYAN}{text}{RESET}"))
 }
 
+pub fn command_token(text: &str) -> String {
+  wrap_styled(
+    styling_enabled(),
+    text,
+    &format!("{BOLD}{CYAN}{text}{RESET}"),
+  )
+}
+
+pub fn argument_token(text: &str) -> String {
+  wrap_styled(styling_enabled(), text, &format!("{GREEN}{text}{RESET}"))
+}
+
+pub fn command_prompt_label(text: &str) -> String {
+  wrap_styled(
+    styling_enabled(),
+    text,
+    &format!("{BOLD}{MAGENTA}{text}{RESET}"),
+  )
+}
+
 pub fn option_line(number: &str, label: &str, detail: &str) -> String {
   if styling_enabled() {
     format!(
@@ -107,4 +128,14 @@ pub(crate) fn section_heading_with(enabled: bool, emoji: &str, text: &str) -> St
 #[cfg(test)]
 pub(crate) fn error_with(enabled: bool, text: &str) -> String {
   wrap_styled(enabled, text, &format!("{RED}{text}{RESET}"))
+}
+
+#[cfg(test)]
+pub(crate) fn command_token_with(enabled: bool, text: &str) -> String {
+  wrap_styled(enabled, text, &format!("{BOLD}{CYAN}{text}{RESET}"))
+}
+
+#[cfg(test)]
+pub(crate) fn argument_token_with(enabled: bool, text: &str) -> String {
+  wrap_styled(enabled, text, &format!("{GREEN}{text}{RESET}"))
 }

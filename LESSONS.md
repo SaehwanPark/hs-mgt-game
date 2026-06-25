@@ -227,3 +227,15 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   existing validation and transition boundary.
 - Prevention: Do not generalize the REPL to stabilization until a concrete need
   appears; keep parser logic out of `transition()` per ADR-0001.
+
+## Rustyline Helper Types Need Full Trait Set
+
+- Context: Adding competitive verb Tab-autocomplete using `rustyline`.
+- Symptom: Compilation fails with trait-bound errors even when a custom
+  completer compiles in isolation.
+- Cause: In `rustyline`, `Helper` requires `Completer + Hinter + Highlighter +
+  Validator` on the same helper type.
+- Resolution: Implemented empty/default `Hinter`, `Highlighter`, and `Validator`
+  traits on the completer helper struct.
+- Prevention: When introducing a new `rustyline` helper, scaffold all required
+  helper trait impls first, then add completer logic.

@@ -31,7 +31,8 @@ resolution (`sim/resolve.rs`), `transition_competitive()`, bounded AI player bat
 (`actors/ai_player.rs`, `sim/observe_ai.rs`), and observation-only rival intel with
 1-month lag (`sim/observe_competitive.rs`), monthly event/delay ticks, annual
 policy inputs, Stata-like competitive command parsing, and a bounded three-month
-competitive CLI loop.
+competitive CLI loop with help-command catalog output, colored command prompt
+tokens, and verb-only Tab autocomplete.
 
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function in `sim/transition.rs`,
@@ -179,7 +180,7 @@ Implemented modules for `competitive-regional-v1`:
 | `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Verified (`sim/resolve.rs`, v0.1.32) |
 | `transition_competitive()` | Competitive monthly state transition | Verified (`sim/transition_competitive.rs`, v0.1.32) |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Verified (v0.1.34) |
-| `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Verified (v0.1.35) |
+| `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006), with help catalog rendering and verb-only autocomplete | Verified (v0.1.37) |
 | `CompetitivePreviewLoop` | Bounded three-month CLI loop over evolving competitive world state | Verified (v0.1.36) |
 
 Genesis world, observation derivation, and validation demos live in

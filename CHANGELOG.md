@@ -6,6 +6,24 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.37] - 2026-06-25
+
+### Added
+
+- Competitive verb-only Tab autocomplete for monthly command entry using a CLI-only REPL boundary.
+- Competitive help now lists available command usages when `help`/`?` is entered at command prompt.
+- Shared competitive command catalog metadata reused by parser help and REPL completion.
+
+### Changed
+
+- Competitive command usage text now styles command tokens separately from argument syntax when color is enabled.
+- Competitive command prompt includes an explicit colored `riverside>` label with completion hint.
+- Package version bumped to `0.1.37`.
+
+### Notes
+
+- Argument-key and enum-value autocomplete remain deferred.
+
 ## [0.1.36] - 2026-06-25
 
 ### Added

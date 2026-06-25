@@ -25,7 +25,8 @@ and competitive simultaneous monthly resolver at v0.1.32,
 and competitive AI player batch generation at v0.1.33,
 and competitive events/delays at v0.1.34,
 and Stata-like competitive command entry at v0.1.35,
-and bounded three-month competitive loop at v0.1.36.
+and bounded three-month competitive loop at v0.1.36,
+and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
