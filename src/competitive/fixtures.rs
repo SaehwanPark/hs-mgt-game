@@ -1,6 +1,14 @@
-use crate::model::{CashRunwaySignal, ConsultantOption, Difficulty, PlayerObservation};
+use super::genesis_competitive_world;
+use crate::model::{
+  CashRunwaySignal, ConsultantOption, Difficulty, PlayerObservation, PlayerResources,
+};
 
-fn consultant_options_month1() -> Vec<ConsultantOption> {
+fn consultant_options_month1(difficulty: Difficulty) -> Vec<ConsultantOption> {
+  let monitor_target = if difficulty.k_rivals() >= 2 {
+    "Summit"
+  } else {
+    "Northlake"
+  };
   vec![
     ConsultantOption {
       label: 'A',
@@ -14,8 +22,9 @@ fn consultant_options_month1() -> Vec<ConsultantOption> {
     },
     ConsultantOption {
       label: 'C',
-      title: "Monitor Summit: spend AP on competitor intelligence before committing capital"
-        .to_string(),
+      title: format!(
+        "Monitor {monitor_target}: spend AP on competitor intelligence before committing capital"
+      ),
       tradeoff_bullets: vec!["delays response one month".to_string()],
     },
     ConsultantOption {
@@ -27,6 +36,39 @@ fn consultant_options_month1() -> Vec<ConsultantOption> {
 }
 
 pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
+  let world = genesis_competitive_world(difficulty);
+  observation_from_genesis(&world)
+}
+
+pub fn observation_from_genesis(world: &crate::model::CompetitiveWorldState) -> PlayerObservation {
+  let human = world
+    .human_system()
+    .expect("competitive genesis must include human system");
+  observation_from_human_system(human, world.difficulty)
+}
+
+fn cash_runway_signal(resources: &PlayerResources) -> CashRunwaySignal {
+  if resources.cash >= 70 {
+    CashRunwaySignal::Comfortable
+  } else if resources.cash >= 45 {
+    CashRunwaySignal::Watch
+  } else {
+    CashRunwaySignal::Strained
+  }
+}
+
+fn workforce_trust_summary(trust: i32) -> String {
+  if trust >= 60 {
+    "moderate; vacancy rate elevated in nursing".to_string()
+  } else {
+    "strained; vacancy rate elevated in nursing".to_string()
+  }
+}
+
+fn observation_from_human_system(
+  human: &crate::model::HealthSystemState,
+  difficulty: Difficulty,
+) -> PlayerObservation {
   let k = difficulty.k_rivals();
   let mut market_bullets = vec![
     "Regional inpatient demand: stable-to-rising (+0.8% vs prior month, reported)".to_string(),
@@ -67,14 +109,18 @@ pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
   }
 
   PlayerObservation {
-    org_name: "Riverside Community Health".to_string(),
-    reported_access_index: 68,
+    org_name: human.name.clone(),
+    reported_access_index: human.access_index,
     prior_access_revision: None,
-    reported_quality_index: 72,
-    workforce_trust_summary: "moderate; vacancy rate elevated in nursing".to_string(),
-    community_trust_summary: "stable".to_string(),
+    reported_quality_index: human.quality_index,
+    workforce_trust_summary: workforce_trust_summary(human.workforce_trust),
+    community_trust_summary: if human.community_trust >= 60 {
+      "stable".to_string()
+    } else {
+      "watch".to_string()
+    },
     in_flight_projects: "none".to_string(),
-    cash_runway_signal: CashRunwaySignal::Watch,
+    cash_runway_signal: cash_runway_signal(&human.resources),
     market_bullets,
     policy_bullets: vec![
       "State Medicaid director signal: access reporting scrutiny increasing".to_string(),
@@ -83,7 +129,7 @@ pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
       "No federal rule change this month".to_string(),
     ],
     annual_policy_review: None,
-    consultant_options: consultant_options_month1(),
+    consultant_options: consultant_options_month1(difficulty),
     intel_gaps,
   }
 }
@@ -99,4 +145,42 @@ pub fn mock_observation_annual_month(difficulty: Difficulty) -> PlayerObservatio
     "Medicaid access reporting: new quarterly template effective next year".to_string(),
   ]);
   observation
+}
+
+#[cfg(test)]
+mod fixtures_tests {
+  use super::*;
+  use crate::model::Difficulty;
+
+  #[test]
+  fn observation_metrics_match_human_genesis_system() {
+    for difficulty in [
+      Difficulty::Easy,
+      Difficulty::Normal,
+      Difficulty::Hard,
+      Difficulty::Expert,
+    ] {
+      let world = genesis_competitive_world(difficulty);
+      let human = world.human_system().expect("human system");
+      let observation = observation_from_genesis(&world);
+      assert_eq!(observation.org_name, human.name);
+      assert_eq!(observation.reported_access_index, human.access_index);
+      assert_eq!(observation.reported_quality_index, human.quality_index);
+      assert_eq!(
+        observation.cash_runway_signal,
+        cash_runway_signal(&human.resources)
+      );
+    }
+  }
+
+  #[test]
+  fn easy_consultant_monitor_option_targets_northlake() {
+    let observation = mock_observation_month1(Difficulty::Easy);
+    let monitor = observation
+      .consultant_options
+      .iter()
+      .find(|option| option.label == 'C')
+      .expect("option C");
+    assert!(monitor.title.contains("Northlake"));
+  }
 }

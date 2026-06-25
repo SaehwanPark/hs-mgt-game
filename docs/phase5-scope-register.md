@@ -148,16 +148,17 @@ v0.1.28 is design-only).
 | Cognitive load | Low–Medium | Five-turn bound; dashboard and previews reduce pre-run confusion |
 | Golden-test fragility | Low | `tests/golden_seed42.rs` documents canonical hash; breaking changes require explicit CHANGELOG note and hash update |
 | Export prompt friction | Low | Empty input skips export; TTY-gated in non-interactive contexts |
-| Documentation staleness | Medium | Version playtest findings with releases; keep SPEC Present/Done accurate |
+| Documentation staleness | Medium | Version playtest findings with releases; keep SPEC Present/Done accurate; full slice history in [`spec-past-archive.md`](spec-past-archive.md) |
 | Normative opacity | Low | Debrief separates decision quality from outcome quality; social welfare not collapsed into player score |
 
 ## Recommended next slices
 
 Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
 
-1. **Competitive campaign runtime I4** — multi-system player state (K+1 entities,
-   `CompetitiveWorldState` per ADR-0004).
-2. **Competitive campaign runtime I5** — simultaneous monthly action resolver.
+1. **Competitive campaign runtime I5** — simultaneous monthly action resolver
+   (`SimultaneousActionResolver` per ADR-0003).
+2. **Competitive campaign runtime I6** — bounded game-theory AI players with
+   rationales.
 3. **External playtest protocol refresh** — Phase 7 prep.
 4. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
 5. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.

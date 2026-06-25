@@ -10,7 +10,8 @@ intended architecture boundaries that future implementation should preserve.
 - Package: single Rust package, `hs-mgt-game`, with `src/lib.rs` module tree
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - Library modules:
-  - `model/` — typed world state, commands, competitive commands, resources, history, session types, campaign types
+  - `model/` — typed world state, commands, competitive commands, competitive world,
+    resources, history, session types, campaign types
   - `competitive/` — competitive campaign mock fixtures and validation demos
   - `inputs/` — seeded stochastic input resolution
   - `sim/` — deterministic transition core
@@ -166,15 +167,16 @@ Implemented modules for `competitive-regional-v1`:
 | `PolicyCalendar` | Month index, year boundary labels for reports | Verified |
 | Executive report renderer | Six-section monthly briefing from `PlayerObservation` | Verified |
 | `CompetitiveCommand` + validation | AP/cash/PC batch validation per action catalog | Verified |
-| `MultiSystemState` | K+1 health systems in shared market (`model/players.rs`) | Needs Review |
+| `CompetitiveWorldState` + genesis | K+1 health systems, player slots, difficulty fixtures | Verified (I4) |
 | `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Needs Review |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Needs Review |
 | `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Needs Review |
 
-Stub fixtures and validation demos live in `src/competitive/`; full simulation deferred to I4–I8.
+Genesis world, observation derivation, and validation demos live in
+`src/competitive/`; monthly transition and full campaign deferred to I5–I8.
 
 Last Reviewed: 2026-06-24
-Status: Verified (router, report, validation); Needs Review (remaining modules)
+Status: Verified (router, report, validation, genesis); Needs Review (resolver, AI, events, CLI)
 
 ## Open Architectural Decisions
 
@@ -195,5 +197,5 @@ Status: Verified (router, report, validation); Needs Review (remaining modules)
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
 - Competitive campaign boundaries: **addressed** by ADRs
   [0003](docs/decision-records/0003-simultaneous-monthly-player-actions.md)–[0006](docs/decision-records/0006-stata-like-cli-layer.md);
-  runtime modules deferred to slices I1–I8.
+  runtime modules deferred to slices I5–I8 (I1–I4 landed).
 - Data and licensing policy.

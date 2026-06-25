@@ -1,6 +1,12 @@
 mod fixtures;
+mod genesis;
 
-pub use fixtures::{mock_observation_annual_month, mock_observation_month1};
+pub use fixtures::{
+  mock_observation_annual_month, mock_observation_month1, observation_from_genesis,
+};
+pub use genesis::{
+  genesis_competitive_world, genesis_competitive_world_with_ruleset, genesis_roster_lines,
+};
 
 use crate::model::{
   CompetitiveCommand, InvestDomain, MonitorTarget, PayerId, PledgeType, ProjectKind, RatePosture,
@@ -101,7 +107,11 @@ pub fn validation_resources_for_demo(
   difficulty: crate::model::Difficulty,
   ruleset: &crate::model::CompetitiveRuleset,
 ) -> crate::model::PlayerResources {
-  let mut resources = crate::model::PlayerResources::genesis(difficulty, ruleset);
+  let mut resources = genesis_competitive_world_with_ruleset(difficulty, ruleset)
+    .human_system()
+    .expect("genesis includes human system")
+    .resources
+    .clone();
   if let Some(demo) = validation_demo_by_id(demo_id) {
     if let Some(pc) = demo.political_capital_override {
       resources.political_capital = pc;

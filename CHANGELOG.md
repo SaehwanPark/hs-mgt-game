@@ -6,6 +6,27 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.31] - 2026-06-24
+
+### Added
+
+- `CompetitiveWorldState`, `HealthSystemState`, `SharedMarketFields`, `PlayerSlot`,
+  and `AiProfile` types per ADR-0004 (`src/model/competitive_world.rs`).
+- Difficulty-scoped competitive genesis fixtures (`src/competitive/genesis.rs`).
+- Genesis roster display in competitive campaign preview CLI flow.
+- Six focused genesis sizing and controller-assignment tests.
+
+### Changed
+
+- `mock_observation_month1` derives human-system metrics from genesis state.
+- `SPEC.md` reconciled with `docs/spec-past-archive.md` and restored `Present` section.
+- `ARCHITECTURE.md`, `README.md`, `_workspace/final/handoff.md`, `docs/phase5-scope-register.md`.
+
+### Notes
+
+- No `transition_competitive()` or monthly loop yet (deferred to I5).
+- Golden seed-42 stabilization hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.30] - 2026-06-24
 
 ### Added

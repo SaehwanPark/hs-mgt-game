@@ -57,7 +57,7 @@ and controller assignment without breaking the stabilization demo.
 
 ### Follow-ups
 
-- `model/players.rs` in slice I4
+- `model/competitive_world.rs` in slice I4 (implemented)
 - Scenario format fields: `k_competitors`, `difficulty`, per-system genesis
 - Competitive golden test `tests/golden_competitive_seed42.rs`
 
