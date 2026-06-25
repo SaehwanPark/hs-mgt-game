@@ -1,9 +1,14 @@
+use std::io::IsTerminal;
+
 use crate::model::{
-  CampaignId, CliError, CompetitiveRunConfig, Ruleset, SessionOutcome, default_competitive_ruleset,
+  CampaignId, CliError, CompetitiveRuleset, CompetitiveRunConfig, PlayerResources, Ruleset,
+  SessionOutcome, SystemMonthlyBatch, default_competitive_ruleset,
 };
 use crate::sim::{observe_for_human, validate_competitive_batch};
 
+use super::competitive_parse::{competitive_command_help_lines, parse_competitive_batch};
 use super::display::{print_block, print_line, render_executive_report, style};
+use super::error::describe_cli_error;
 use super::input::ReadLineOutcome;
 use super::io::{
   parse_campaign_choice, parse_difficulty_choice, parse_seed_choice, read_campaign_choice,
@@ -11,8 +16,9 @@ use super::io::{
 };
 use crate::competitive::{
   build_multi_month_resolution_history, genesis_competitive_world_with_ruleset,
-  genesis_roster_lines, observation_from_genesis, resolution_summary_lines, resolve_preset_month1,
-  validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
+  genesis_roster_lines, month1_human_preset_batch, observation_from_genesis,
+  resolution_summary_lines, resolve_competitive_month, validation_demo_by_id,
+  validation_demo_menu_lines, validation_resources_for_demo,
 };
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
@@ -155,11 +161,43 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
-  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I7)"));
-  print_line("Resolving simultaneous player batches (human preset + AI rivals)...");
+  print_line(&style::subsection("MONTH 1 COMMAND ENTRY (slice I8)"));
+  print_line(
+    "Enter Stata-like commands for Riverside (system 0), or press Enter for preset batch.",
+  );
+  for line in competitive_command_help_lines() {
+    print_line(&style::dim(&format!("  {line}")));
+  }
   print_line("");
 
-  match resolve_preset_month1(&world, &ruleset, config.seed) {
+  let human_resources = world
+    .human_system()
+    .expect("human system")
+    .resources
+    .clone();
+  let human_batch = if std::io::stdin().is_terminal() {
+    match read_competitive_human_batch(&human_resources, &ruleset) {
+      Ok(None) => return SessionOutcome::QuitNoSave,
+      Ok(Some(batch)) => batch,
+      Err(error) => {
+        print_line(&style::warning(&format!(
+          "{} Could not parse human batch: {}",
+          style::EMOJI_WARNING,
+          describe_cli_error(&error)
+        )));
+        return SessionOutcome::CompetitivePreview;
+      }
+    }
+  } else {
+    month1_human_preset_batch()
+  };
+
+  print_line("");
+  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I8)"));
+  print_line("Resolving simultaneous player batches (human entry + AI rivals)...");
+  print_line("");
+
+  match resolve_competitive_month(&world, &ruleset, config.seed, human_batch) {
     Ok(transition) => {
       for line in resolution_summary_lines(&transition) {
         print_line(&line);
@@ -227,14 +265,31 @@ fn run_competitive_preview_internal(
 
   print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I7). Stata CLI and the full 24-month \
-     campaign ship in slice I8.",
+    "Competitive campaign preview (slices I1–I8). Full 24-month campaign loop remains deferred.",
   ));
   print_line(&style::dim(
     "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",
   ));
 
   SessionOutcome::CompetitivePreview
+}
+
+fn read_competitive_human_batch(
+  resources: &PlayerResources,
+  ruleset: &CompetitiveRuleset,
+) -> Result<Option<SystemMonthlyBatch>, CliError> {
+  match read_validation_demo_choice()? {
+    ReadLineOutcome::Quit => Ok(None),
+    ReadLineOutcome::Payload(input) => {
+      if input.trim().is_empty() {
+        return Ok(Some(month1_human_preset_batch()));
+      }
+      let commands = parse_competitive_batch(&input)?;
+      validate_competitive_batch(&commands, resources, ruleset)
+        .map_err(|error| CliError::InvalidCommandInput(error.message()))?;
+      Ok(Some(SystemMonthlyBatch::new(0, commands)))
+    }
+  }
 }
 
 fn read_validation_demo_input() -> Option<String> {

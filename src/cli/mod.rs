@@ -1,5 +1,6 @@
 mod beginner;
 mod campaign;
+mod competitive_parse;
 mod display;
 mod error;
 mod export;
@@ -12,6 +13,9 @@ mod persistence;
 mod session;
 mod strategy;
 
+pub use competitive_parse::{
+  competitive_command_help_lines, parse_competitive_batch, parse_competitive_command,
+};
 pub use display::{
   describe_strategy_commitments, eprint_error, executive_dashboard, format_command_prompt,
   print_line, print_pre_run_briefing, strategy_commitments, strategy_previews,

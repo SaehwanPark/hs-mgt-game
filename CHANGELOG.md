@@ -6,6 +6,23 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.35] - 2026-06-25
+
+### Added
+
+- Stata-like competitive command parser (`src/cli/competitive_parse.rs`) for MVP verbs.
+- Interactive human monthly batch entry in competitive campaign preview (slice I8).
+- `competitive_command_help_lines` for in-session command reference.
+
+### Changed
+
+- Competitive month-1 resolution uses parsed human batch or preset on empty input.
+- Package version bumped to `0.1.35`.
+
+### Notes
+
+- Full 24-month interactive competitive loop and autosave remain deferred.
+
 ## [0.1.34] - 2026-06-25
 
 ### Added
