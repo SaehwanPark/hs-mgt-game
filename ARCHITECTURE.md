@@ -27,9 +27,10 @@ Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
 multi-system state, action-economy validation, simultaneous monthly batch
-resolution (`sim/resolve.rs`), `transition_competitive()`, and observation-only
-rival intel with 1-month lag (`sim/observe_competitive.rs`). Full AI players,
-events/delays, and Stata CLI remain deferred to slices I6–I8.
+resolution (`sim/resolve.rs`), `transition_competitive()`, bounded AI player batches
+(`actors/ai_player.rs`, `sim/observe_ai.rs`), and observation-only rival intel with
+1-month lag (`sim/observe_competitive.rs`). Events/delays and Stata CLI remain
+deferred to slices I7–I8.
 
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function in `sim/transition.rs`,

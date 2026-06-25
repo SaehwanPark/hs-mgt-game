@@ -1,5 +1,6 @@
 mod effects;
 mod observe;
+mod observe_ai;
 mod observe_competitive;
 mod resolve;
 mod transition;
@@ -8,6 +9,9 @@ mod validate;
 mod validate_competitive;
 
 pub use observe::observe_for_player;
+pub use observe_ai::{
+  AiPlayerObservation, LaggedRivalAction, ai_profile_for_system, observe_for_ai,
+};
 pub use observe_competitive::observe_for_human;
 pub use resolve::resolve_monthly_batches;
 pub use transition::transition;

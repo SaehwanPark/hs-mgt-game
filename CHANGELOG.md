@@ -6,6 +6,31 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.33] - 2026-06-24
+
+### Added
+
+- `compute_ai_batch` in `src/actors/ai_player.rs` with style-weighted utility,
+  satisficing, level-1 best response, and inspectable rationales.
+- `observe_for_ai()` and `AiPlayerObservation` in `src/sim/observe_ai.rs`.
+- `ai_player_{id}` tie-break stream (`STREAM_AI_PLAYER_BASE`) in `inputs/streams.rs`.
+- `build_monthly_batches_with_ai`, `resolve_month1_with_ai`, and
+  `DEFAULT_COMPETITIVE_SEED` in `src/competitive/resolution.rs`.
+- `SystemMonthlyBatch.rationale` field and constructor helpers.
+
+### Changed
+
+- Competitive month-1 resolution uses AI-generated rival batches (human preset retained).
+- CLI competitive demo passes seed and prints AI rationales in resolution summary.
+- Golden test `tests/golden_competitive_seed42.rs` hash `e68f683da77d7c2f`.
+- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `docs/phase5-scope-register.md`,
+  `docs/gameplay-competitive-sketch.md`, `_workspace/final/handoff.md`.
+
+### Notes
+
+- Events/delays and Stata CLI deferred to I7–I8.
+- Stabilization golden seed-42 hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.32] - 2026-06-24
 
 ### Added

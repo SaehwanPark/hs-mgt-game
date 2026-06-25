@@ -202,19 +202,19 @@ mod tests {
 
   fn month1_batches() -> Vec<SystemMonthlyBatch> {
     vec![
-      SystemMonthlyBatch {
-        system_id: 0,
-        commands: vec![
+      SystemMonthlyBatch::new(
+        0,
+        vec![
           CompetitiveCommand::Hold,
           CompetitiveCommand::Monitor {
             target: MonitorTarget::Northlake,
             depth: 1,
           },
         ],
-      },
-      SystemMonthlyBatch {
-        system_id: 1,
-        commands: vec![
+      ),
+      SystemMonthlyBatch::new(
+        1,
+        vec![
           CompetitiveCommand::Invest {
             domain: InvestDomain::Beds,
             amount: 25,
@@ -224,14 +224,14 @@ mod tests {
             headcount: 2,
           },
         ],
-      },
-      SystemMonthlyBatch {
-        system_id: 2,
-        commands: vec![CompetitiveCommand::Commit {
+      ),
+      SystemMonthlyBatch::new(
+        2,
+        vec![CompetitiveCommand::Commit {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
-      },
+      ),
     ]
   }
 

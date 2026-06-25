@@ -43,6 +43,7 @@ reconstructing it from the diff.
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 | Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
+| Competitive runtime I6 | v0.1.33 | Bounded AI players with inspectable rationales | 179 | `6fb1ebbea564274f` (stabilization) |
 
 ### Recent slices
 
@@ -225,47 +226,57 @@ reconstructing it from the diff.
   - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (173 tests)
 
+- Feature: Competitive campaign runtime I6
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/competitive-ai-players
+
+  Summary:
+  Add bounded game-theory AI players with inspectable rationales, replacing preset
+  rival batches in month-1 resolution per ADR-0003 and gameplay sketch §9.
+
+  Done:
+  - `compute_ai_batch` in `src/actors/ai_player.rs` with style-weighted scoring,
+    satisficing, level-1 best response, and `ai_player_{id}` tie-break stream
+  - `observe_for_ai()` and `AiPlayerObservation` in `src/sim/observe_ai.rs`
+  - `SystemMonthlyBatch.rationale`; `build_monthly_batches_with_ai` and
+    `resolve_month1_with_ai` in `src/competitive/resolution.rs`
+  - CLI month-1 demo wires `CompetitiveRunConfig.seed` and prints AI rationales
+  - Golden `tests/golden_competitive_seed42.rs` hash `e68f683da77d7c2f`
+  - Package version bumped to `0.1.33`
+
+  Deferred / Non-Goals:
+  - Events/delays/annual tick (I7), Stata CLI (I8)
+  - Full 24-month campaign loop, competitive replay artifact, competitive autosave
+  - No stabilization golden hash changes
+
+  Verification:
+  - AI batch determinism and validation tests; rationale present for each rival
+  - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (179 tests)
+
 ## Present
 
-No active slice. Next: **Competitive campaign runtime I6** (see Future).
+No active slice. Next: **Competitive campaign runtime I7** (see Future).
 
 ## Future
 
 Planned slices are ordered by dependency. Each item separates what exists today
 from what the slice would add.
 
-### Competitive campaign runtime I6 — AI players (recommended next)
-
-**Branch:** `feat/competitive-ai-players`  
-**Depends on:** I5 batch shapes and `resolve_monthly_batches` (complete)
-
-**Done (already):**
-- `AiProfile`, `AiStyleWeights`, and difficulty-scoped rival roster in genesis
-- Design acceptance criteria in `docs/gameplay-competitive-sketch.md` §9
-
-**Not Yet Done:**
-- `compute_ai_batch(system_id, observation, ruleset) -> SystemMonthlyBatch` per rival
-- Level-1 best response to lagged public log + style-weighted utility
-- Named RNG stream `ai_player_{id}` for tie-break only (ADR-0001)
-- Inspectable rationale string stored on each AI batch / transition record
-- Replace preset rival batches in `src/competitive/resolution.rs` with AI-generated batches
-- Tests: same seed + genesis → identical AI batches; rationale present for each AI system
-
-**Deferred within I6:**
-- Global equilibrium solver; human-visible same-month AI choices
-
-### Competitive campaign runtime I7 — events, delays, annual tick
+### Competitive campaign runtime I7 — events, delays, annual tick (recommended next)
 
 **Branch:** `feat/competitive-events-delays`  
-**Depends on:** I5 `transition_competitive()` and `effect_queue` enqueue (complete)
+**Depends on:** I5 `transition_competitive()` and I6 AI batch generation (complete)
 
 **Done (already):**
 - `PendingEffect` type and enqueue on `project` / delayed `recruit`
 - `PolicyCalendar` with `advance()` and `is_annual_tick()`
 - ADR-0001 stochastic boundary pattern in stabilization `inputs/resolve.rs`
+- `ai_player_{id}` tie-break stream in `inputs/streams.rs` (I6)
 
 **Not Yet Done:**
-- Competitive streams: `monthly_events`, `annual_policy`, `ai_player_{id}` in `inputs/resolve.rs`
+- Competitive streams: `monthly_events`, `annual_policy` in `inputs/resolve.rs`
 - Apply due `PendingEffect` entries at month start before player decisions
 - Simplified NPC institution phase (payer + state only per mechanism design)
 - Multi-month CLI or library loop (at least 2–3 months beyond current 1-month demo)
