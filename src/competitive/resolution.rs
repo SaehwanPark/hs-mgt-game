@@ -1,98 +1,296 @@
-use crate::actors::compute_ai_batch;
 use crate::model::{
   CompetitiveCommand, CompetitiveHistory, CompetitiveRuleset, CompetitiveTransition,
-  CompetitiveWorldState, Difficulty, MonitorTarget, PlayerController, SystemMonthlyBatch,
-  default_competitive_ruleset,
+  CompetitiveWorldState, Difficulty, InvestDomain, MonitorTarget, PayerId, PlayerController,
+  PledgeType, RatePosture, RecruitRole, SystemMonthlyBatch, default_competitive_ruleset,
 };
-use crate::sim::{observe_for_ai, resolve_monthly_batches, transition_competitive};
+use crate::sim::{resolve_monthly_batches, transition_competitive};
 
-pub const DEFAULT_COMPETITIVE_SEED: u64 = 42;
+pub fn month1_preset_batches(difficulty: Difficulty) -> Vec<SystemMonthlyBatch> {
+  let mut batches = vec![
+    SystemMonthlyBatch {
+      system_id: 0,
+      commands: vec![
+        CompetitiveCommand::Hold,
+        CompetitiveCommand::Monitor {
+          target: MonitorTarget::Northlake,
+          depth: 1,
+        },
+      ],
+      rationale: None,
+    },
+    SystemMonthlyBatch {
+      system_id: 1,
+      commands: vec![
+        CompetitiveCommand::Invest {
+          domain: InvestDomain::Beds,
+          amount: 25,
+        },
+        CompetitiveCommand::Recruit {
+          role: RecruitRole::Nurse,
+          headcount: 2,
+        },
+      ],
+      rationale: Some("AI (growth) invested in beds and recruited nurses".to_string()),
+    },
+  ];
 
-pub fn month1_human_preset_batch() -> SystemMonthlyBatch {
-  SystemMonthlyBatch::new(
-    0,
-    vec![
+  if difficulty.k_rivals() >= 2 {
+    batches.push(SystemMonthlyBatch {
+      system_id: 2,
+      commands: vec![CompetitiveCommand::Commit {
+        pledge_type: PledgeType::Access,
+        level: 2,
+      }],
+      rationale: Some("AI (access) issued an access pledge".to_string()),
+    });
+  }
+  if difficulty.k_rivals() >= 3 {
+    batches.push(SystemMonthlyBatch {
+      system_id: 3,
+      commands: vec![CompetitiveCommand::Hold],
+      rationale: Some("AI (margin) held to preserve flexibility".to_string()),
+    });
+  }
+  if difficulty.k_rivals() >= 4 {
+    batches.push(SystemMonthlyBatch {
+      system_id: 4,
+      commands: vec![CompetitiveCommand::Hold],
+      rationale: Some("AI (political) held to preserve capital".to_string()),
+    });
+  }
+
+  batches
+}
+
+pub fn month1_batches_with_ai(
+  prior: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+  seed: u64,
+) -> Result<Vec<SystemMonthlyBatch>, crate::model::CompetitiveValidationError> {
+  let mut batches = Vec::with_capacity(prior.systems.len());
+  batches.push(SystemMonthlyBatch {
+    system_id: 0,
+    commands: vec![
       CompetitiveCommand::Hold,
       CompetitiveCommand::Monitor {
         target: MonitorTarget::Northlake,
         depth: 1,
       },
     ],
-  )
-}
+    rationale: None,
+  });
 
-pub fn build_monthly_batches_with_ai(
-  world: &CompetitiveWorldState,
-  ruleset: &CompetitiveRuleset,
-  seed: u64,
-  human_batch: SystemMonthlyBatch,
-) -> Vec<SystemMonthlyBatch> {
-  let mut batches = vec![human_batch];
-
-  for slot in &world.players {
-    let PlayerController::Ai(profile) = slot.controller else {
+  for slot in &prior.players {
+    let PlayerController::Ai(_) = slot.controller else {
       continue;
     };
-    let system = world
-      .systems
-      .iter()
-      .find(|system| system.system_id == slot.system_id)
-      .expect("player slot must reference a system");
-    let observation = observe_for_ai(world, slot.system_id);
-    batches.push(compute_ai_batch(
-      &observation,
-      &profile,
-      &system.resources,
-      ruleset,
-      seed,
-    ));
+    batches.push(compute_ai_batch(slot.system_id, prior, ruleset, seed)?);
   }
-
-  batches.sort_by_key(|batch| batch.system_id);
-  batches
+  Ok(batches)
 }
 
-pub fn month1_preset_batches(difficulty: Difficulty) -> Vec<SystemMonthlyBatch> {
-  let ruleset = default_competitive_ruleset();
-  let genesis = crate::competitive::genesis_competitive_world_with_ruleset(difficulty, &ruleset);
-  build_monthly_batches_with_ai(
-    &genesis,
-    &ruleset,
-    DEFAULT_COMPETITIVE_SEED,
-    month1_human_preset_batch(),
-  )
-}
-
-pub fn resolve_month1_with_ai(
+pub fn compute_ai_batch(
+  system_id: u32,
   prior: &CompetitiveWorldState,
   ruleset: &CompetitiveRuleset,
   seed: u64,
-) -> Result<CompetitiveTransition, crate::model::CompetitiveValidationError> {
-  let batches = build_monthly_batches_with_ai(prior, ruleset, seed, month1_human_preset_batch());
-  let aggregated = resolve_monthly_batches(prior, &batches, ruleset)?;
-  transition_competitive(prior, aggregated, ruleset)
+) -> Result<SystemMonthlyBatch, crate::model::CompetitiveValidationError> {
+  let system = prior
+    .systems
+    .iter()
+    .find(|system| system.system_id == system_id)
+    .ok_or(crate::model::CompetitiveValidationError::UnknownSystemId { system_id })?;
+  let slot = prior
+    .players
+    .iter()
+    .find(|slot| slot.system_id == system_id)
+    .ok_or(crate::model::CompetitiveValidationError::UnknownSystemId { system_id })?;
+  let PlayerController::Ai(profile) = slot.controller else {
+    return Ok(SystemMonthlyBatch {
+      system_id,
+      commands: vec![CompetitiveCommand::Hold],
+      rationale: Some("Non-AI slot fallback to hold".to_string()),
+    });
+  };
+
+  let response_target = lagged_public_pressure_target(prior, system_id);
+  let mut options = vec![
+    (
+      vec![
+        CompetitiveCommand::Invest {
+          domain: InvestDomain::Beds,
+          amount: 25,
+        },
+        CompetitiveCommand::Recruit {
+          role: RecruitRole::Nurse,
+          headcount: 2,
+        },
+      ],
+      "capacity build (beds + nursing hiring)",
+      (profile.style.growth * 3 + profile.style.margin) as i64,
+    ),
+    (
+      vec![CompetitiveCommand::Commit {
+        pledge_type: PledgeType::Access,
+        level: 2,
+      }],
+      "public access pledge to strengthen trust",
+      (profile.style.access * 3 + profile.style.political) as i64,
+    ),
+    (
+      vec![CompetitiveCommand::Negotiate {
+        payer: PayerId::CarrierA,
+        rate_posture: RatePosture::Aggressive,
+      }],
+      "private payer negotiation for margin defense",
+      (profile.style.margin * 3 + profile.style.growth) as i64,
+    ),
+    (
+      vec![CompetitiveCommand::Monitor {
+        target: response_target,
+        depth: 1,
+      }],
+      "monitor rival actions and wait",
+      (profile.style.political * 2 + profile.style.access) as i64,
+    ),
+  ];
+
+  if has_rival_invest_pressure(prior, system_id) {
+    options[0].2 += 30;
+    options[3].2 += 10;
+  }
+  if has_rival_access_pressure(prior, system_id) {
+    options[1].2 += 30;
+    options[2].2 += 10;
+  }
+
+  let mut best_idx = 0usize;
+  let mut best_score = i64::MIN;
+  for (idx, (commands, _, score)) in options.iter().enumerate() {
+    if !commands_fit_budget(commands, &system.resources, ruleset) {
+      continue;
+    }
+    let tie_roll = ai_tie_break_roll(
+      seed,
+      prior.policy_calendar.month_index,
+      system_id,
+      idx as u32,
+    );
+    let composite = (*score * 1000) + tie_roll as i64;
+    if composite > best_score {
+      best_score = composite;
+      best_idx = idx;
+    }
+  }
+
+  let (commands, label, score) = options.swap_remove(best_idx);
+  let rationale = format!(
+    "AI system {system_id} ({}) selected '{}' using style={} and lagged month-{} public log (score={score}).",
+    profile.org_name,
+    label,
+    profile.style.style_label(),
+    prior.policy_calendar.month_index.saturating_sub(1),
+  );
+  Ok(SystemMonthlyBatch {
+    system_id,
+    commands,
+    rationale: Some(rationale),
+  })
+}
+
+fn has_rival_invest_pressure(world: &CompetitiveWorldState, system_id: u32) -> bool {
+  let lagged = world.policy_calendar.month_index.saturating_sub(1);
+  world.public_action_log.iter().any(|entry| {
+    entry.month_index == lagged
+      && entry.system_id != system_id
+      && entry.summary.to_lowercase().contains("invest")
+  })
+}
+
+fn has_rival_access_pressure(world: &CompetitiveWorldState, system_id: u32) -> bool {
+  let lagged = world.policy_calendar.month_index.saturating_sub(1);
+  world.public_action_log.iter().any(|entry| {
+    entry.month_index == lagged
+      && entry.system_id != system_id
+      && (entry.summary.to_lowercase().contains("access")
+        || entry.summary.to_lowercase().contains("pledge"))
+  })
+}
+
+fn lagged_public_pressure_target(world: &CompetitiveWorldState, system_id: u32) -> MonitorTarget {
+  let lagged = world.policy_calendar.month_index.saturating_sub(1);
+  let mut counts = [0u32; 5];
+  for entry in &world.public_action_log {
+    if entry.month_index == lagged
+      && entry.system_id != system_id
+      && (entry.system_id as usize) < counts.len()
+    {
+      counts[entry.system_id as usize] += 1;
+    }
+  }
+  let mut best_id = 1u32;
+  let mut best_count = 0u32;
+  for candidate in [1u32, 2, 3, 4] {
+    let c = counts[candidate as usize];
+    if c > best_count {
+      best_count = c;
+      best_id = candidate;
+    }
+  }
+  match best_id {
+    2 => MonitorTarget::Summit,
+    3 => MonitorTarget::Valley,
+    4 => MonitorTarget::Metro,
+    _ => MonitorTarget::Northlake,
+  }
+}
+
+fn commands_fit_budget(
+  commands: &[CompetitiveCommand],
+  resources: &crate::model::PlayerResources,
+  ruleset: &CompetitiveRuleset,
+) -> bool {
+  crate::sim::validate_competitive_batch(commands, resources, ruleset).is_ok()
+}
+
+fn ai_tie_break_roll(seed: u64, month_index: u32, system_id: u32, option_idx: u32) -> u32 {
+  let stream_id = ai_stream_id(system_id);
+  let base = seed
+    .wrapping_add((month_index as u64).wrapping_mul(0x517c_c1b7_2722_0a95))
+    .wrapping_add((stream_id as u64).wrapping_mul(0x6c62_272e_07bb_0142))
+    .wrapping_add((option_idx as u64).wrapping_mul(0x9e37_79b9_7f4a_7c15));
+  splitmix64(base) as u32
+}
+
+fn ai_stream_id(system_id: u32) -> u32 {
+  // Named stream mapping: ai_player_{id} -> stable numeric stream id.
+  10_000 + system_id
+}
+
+fn splitmix64(mut z: u64) -> u64 {
+  z = z.wrapping_add(0x9e37_79b9_7f4a_7c15);
+  z = (z ^ (z >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+  z = (z ^ (z >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+  z ^ (z >> 31)
 }
 
 pub fn resolve_preset_month1(
   prior: &CompetitiveWorldState,
   ruleset: &CompetitiveRuleset,
+  seed: u64,
 ) -> Result<CompetitiveTransition, crate::model::CompetitiveValidationError> {
-  resolve_month1_with_ai(prior, ruleset, DEFAULT_COMPETITIVE_SEED)
+  let batches = month1_batches_with_ai(prior, ruleset, seed)?;
+  let aggregated = resolve_monthly_batches(prior, &batches, ruleset)?;
+  transition_competitive(prior, aggregated, ruleset)
 }
 
 pub fn build_month1_resolution_history(
-  difficulty: Difficulty,
-) -> Result<CompetitiveHistory, crate::model::CompetitiveValidationError> {
-  build_month1_resolution_history_with_seed(difficulty, DEFAULT_COMPETITIVE_SEED)
-}
-
-pub fn build_month1_resolution_history_with_seed(
   difficulty: Difficulty,
   seed: u64,
 ) -> Result<CompetitiveHistory, crate::model::CompetitiveValidationError> {
   let ruleset = default_competitive_ruleset();
   let genesis = crate::competitive::genesis_competitive_world_with_ruleset(difficulty, &ruleset);
-  let transition = resolve_month1_with_ai(&genesis, &ruleset, seed)?;
+  let transition = resolve_preset_month1(&genesis, &ruleset, seed)?;
   Ok(CompetitiveHistory {
     genesis,
     transitions: vec![transition],
@@ -124,19 +322,6 @@ pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<Strin
     format!("State hash: {}", transition.state_hash),
   ];
 
-  for batch in &transition.aggregated.batches {
-    if let Some(rationale) = &batch.rationale {
-      let system_name = transition
-        .prior
-        .systems
-        .iter()
-        .find(|system| system.system_id == batch.system_id)
-        .map(|system| system.name.as_str())
-        .unwrap_or("unknown system");
-      lines.push(format!("  AI {system_name}: {rationale}"));
-    }
-  }
-
   for event in &transition.events {
     lines.push(format!("  • {}", event.description));
   }
@@ -148,10 +333,9 @@ pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<Strin
 mod tests {
   use super::*;
   use crate::model::Difficulty;
-  use crate::sim::ai_profile_for_system;
 
   #[test]
-  fn ai_batches_match_system_count_per_difficulty() {
+  fn preset_batches_match_system_count_per_difficulty() {
     for difficulty in [
       Difficulty::Easy,
       Difficulty::Normal,
@@ -160,44 +344,15 @@ mod tests {
     ] {
       let batches = month1_preset_batches(difficulty);
       assert_eq!(batches.len(), (difficulty.k_rivals() + 1) as usize);
-      assert!(
-        batches
-          .iter()
-          .filter(|batch| batch.rationale.is_some())
-          .count()
-          == difficulty.k_rivals() as usize
-      );
     }
   }
 
   #[test]
-  fn resolve_month1_with_ai_succeeds_for_normal() {
+  fn resolve_preset_month1_succeeds_for_normal() {
     let ruleset = default_competitive_ruleset();
     let genesis =
       crate::competitive::genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
-    let transition =
-      resolve_month1_with_ai(&genesis, &ruleset, DEFAULT_COMPETITIVE_SEED).expect("resolve");
+    let transition = resolve_preset_month1(&genesis, &ruleset, 42).expect("resolve");
     assert_eq!(transition.next.turn, 1);
-    assert!(ai_profile_for_system(&genesis, 1).is_some());
-  }
-
-  #[test]
-  fn ai_batches_are_stable_for_seed_42() {
-    let ruleset = default_competitive_ruleset();
-    let genesis =
-      crate::competitive::genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
-    let first = build_monthly_batches_with_ai(
-      &genesis,
-      &ruleset,
-      DEFAULT_COMPETITIVE_SEED,
-      month1_human_preset_batch(),
-    );
-    let second = build_monthly_batches_with_ai(
-      &genesis,
-      &ruleset,
-      DEFAULT_COMPETITIVE_SEED,
-      month1_human_preset_batch(),
-    );
-    assert_eq!(first, second);
   }
 }

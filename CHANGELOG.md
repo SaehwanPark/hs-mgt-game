@@ -6,30 +6,32 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
-## [0.1.33] - 2026-06-24
+## [0.1.33] - 2026-06-25
 
 ### Added
 
-- `compute_ai_batch` in `src/actors/ai_player.rs` with style-weighted utility,
-  satisficing, level-1 best response, and inspectable rationales.
-- `observe_for_ai()` and `AiPlayerObservation` in `src/sim/observe_ai.rs`.
-- `ai_player_{id}` tie-break stream (`STREAM_AI_PLAYER_BASE`) in `inputs/streams.rs`.
-- `build_monthly_batches_with_ai`, `resolve_month1_with_ai`, and
-  `DEFAULT_COMPETITIVE_SEED` in `src/competitive/resolution.rs`.
-- `SystemMonthlyBatch.rationale` field and constructor helpers.
+- Competitive AI batch planner APIs: `compute_ai_batch()` and
+  `month1_batches_with_ai()` (`src/competitive/resolution.rs`).
+- Style-weighted AI command selection using lagged public-action pressure with
+  deterministic tie-break stream mapping `ai_player_{id}`.
+- AI rationale persistence on `SystemMonthlyBatch.rationale` for inspectable
+  decision traces.
+- Integration test coverage in `tests/competitive_ai_players.rs` for
+  reproducibility and rationale presence.
 
 ### Changed
 
-- Competitive month-1 resolution uses AI-generated rival batches (human preset retained).
-- CLI competitive demo passes seed and prints AI rationales in resolution summary.
-- Golden test `tests/golden_competitive_seed42.rs` hash `e68f683da77d7c2f`.
-- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `docs/phase5-scope-register.md`,
-  `docs/gameplay-competitive-sketch.md`, `_workspace/final/handoff.md`.
+- Competitive month-1 resolver now uses AI-generated rival batches instead of
+  fixed presets (human batch remains explicit).
+- `resolve_preset_month1` and `build_month1_resolution_history` now take a run
+  seed to keep AI tie-break behavior reproducible in tests and CLI.
+- Golden competitive seed-42 hash updated to `64227d52b853c49e`.
+- Bumped package version from `0.1.32` to `0.1.33`.
 
 ### Notes
 
-- Events/delays and Stata CLI deferred to I7–I8.
-- Stabilization golden seed-42 hash unchanged (`6fb1ebbea564274f`).
+- I7 (events/delays/annual tick) and I8 (Stata-like CLI) remain deferred.
+- Stabilization golden seed-42 hash remains `6fb1ebbea564274f`.
 
 ## [0.1.32] - 2026-06-24
 

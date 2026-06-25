@@ -202,19 +202,20 @@ mod tests {
 
   fn month1_batches() -> Vec<SystemMonthlyBatch> {
     vec![
-      SystemMonthlyBatch::new(
-        0,
-        vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![
           CompetitiveCommand::Hold,
           CompetitiveCommand::Monitor {
             target: MonitorTarget::Northlake,
             depth: 1,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        1,
-        vec![
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![
           CompetitiveCommand::Invest {
             domain: InvestDomain::Beds,
             amount: 25,
@@ -224,14 +225,16 @@ mod tests {
             headcount: 2,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        2,
-        vec![CompetitiveCommand::Commit {
+        rationale: Some("AI prioritized growth this month".to_string()),
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Commit {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
-      ),
+        rationale: Some("AI prioritized access trust signal".to_string()),
+      },
     ]
   }
 

@@ -48,9 +48,9 @@ mod tests {
 
   fn month1_preset_batches() -> Vec<SystemMonthlyBatch> {
     vec![
-      SystemMonthlyBatch::new(
-        1,
-        vec![
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![
           CompetitiveCommand::Invest {
             domain: InvestDomain::Beds,
             amount: 25,
@@ -60,24 +60,27 @@ mod tests {
             headcount: 2,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        0,
-        vec![
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![
           CompetitiveCommand::Hold,
           CompetitiveCommand::Monitor {
             target: MonitorTarget::Northlake,
             depth: 1,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        2,
-        vec![CompetitiveCommand::Commit {
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Commit {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
-      ),
+        rationale: None,
+      },
     ]
   }
 
@@ -98,8 +101,16 @@ mod tests {
     let prior = genesis_competitive_world(Difficulty::Easy);
     let ruleset = default_competitive_ruleset();
     let batches = vec![
-      SystemMonthlyBatch::new(0, vec![CompetitiveCommand::Hold]),
-      SystemMonthlyBatch::new(9, vec![CompetitiveCommand::Hold]),
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 9,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
     ];
     assert!(matches!(
       resolve_monthly_batches(&prior, &batches, &ruleset),
@@ -111,7 +122,11 @@ mod tests {
   fn resolver_rejects_batch_count_mismatch() {
     let prior = genesis_competitive_world(Difficulty::Normal);
     let ruleset = default_competitive_ruleset();
-    let batches = vec![SystemMonthlyBatch::new(0, vec![CompetitiveCommand::Hold])];
+    let batches = vec![SystemMonthlyBatch {
+      system_id: 0,
+      commands: vec![CompetitiveCommand::Hold],
+      rationale: None,
+    }];
     assert!(matches!(
       resolve_monthly_batches(&prior, &batches, &ruleset),
       Err(CompetitiveValidationError::BatchCountMismatch { .. })

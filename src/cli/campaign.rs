@@ -11,7 +11,7 @@ use super::io::{
 };
 use crate::competitive::{
   genesis_competitive_world_with_ruleset, genesis_roster_lines, observation_from_genesis,
-  resolution_summary_lines, resolve_month1_with_ai, validation_demo_by_id,
+  resolution_summary_lines, resolve_preset_month1, validation_demo_by_id,
   validation_demo_menu_lines, validation_resources_for_demo,
 };
 
@@ -155,11 +155,11 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
-  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I6)"));
-  print_line("Resolving simultaneous player batches (human preset + AI rivals)...");
+  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I5)"));
+  print_line("Resolving preset simultaneous player batches (human + AI rivals)...");
   print_line("");
 
-  match resolve_month1_with_ai(&world, &ruleset, config.seed) {
+  match resolve_preset_month1(&world, &ruleset, config.seed) {
     Ok(transition) => {
       for line in resolution_summary_lines(&transition) {
         print_line(&line);
@@ -193,8 +193,8 @@ fn run_competitive_preview_internal(
 
   print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I6). Events/delays, Stata CLI, and \
-     the full 24-month campaign ship in slices I7–I8.",
+    "Competitive campaign preview (slices I1–I5). AI players, events/delays, Stata CLI, and \
+     the full 24-month campaign ship in slices I6–I8.",
   ));
   print_line(&style::dim(
     "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",

@@ -364,19 +364,20 @@ mod transition_competitive_tests {
 
   fn month1_preset_batches() -> Vec<SystemMonthlyBatch> {
     vec![
-      SystemMonthlyBatch::new(
-        0,
-        vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![
           CompetitiveCommand::Hold,
           CompetitiveCommand::Monitor {
             target: MonitorTarget::Northlake,
             depth: 1,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        1,
-        vec![
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![
           CompetitiveCommand::Invest {
             domain: InvestDomain::Beds,
             amount: 25,
@@ -386,14 +387,16 @@ mod transition_competitive_tests {
             headcount: 2,
           },
         ],
-      ),
-      SystemMonthlyBatch::new(
-        2,
-        vec![CompetitiveCommand::Commit {
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Commit {
           pledge_type: PledgeType::Access,
           level: 2,
         }],
-      ),
+        rationale: None,
+      },
     ]
   }
 
