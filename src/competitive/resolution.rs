@@ -1,11 +1,24 @@
 use crate::model::{
-  CompetitiveCommand, CompetitiveHistory, CompetitiveRuleset, CompetitiveTransition,
-  CompetitiveWorldState, Difficulty, InvestDomain, MonitorTarget, PlayerController, PledgeType,
-  RecruitRole, SystemMonthlyBatch, default_competitive_ruleset,
+  CompetitiveCommand, CompetitiveRuleset, CompetitiveTransition, CompetitiveWorldState, Difficulty,
+  InvestDomain, MonitorTarget, PlayerController, PledgeType, RecruitRole, SystemMonthlyBatch,
 };
-use crate::sim::{
-  ai_profile_for_system, observe_for_ai, resolve_monthly_batches, transition_competitive,
-};
+use crate::sim::{ai_profile_for_system, observe_for_ai};
+
+pub const DEFAULT_COMPETITIVE_SEED: u64 = 42;
+
+pub fn month1_human_preset_batch() -> SystemMonthlyBatch {
+  SystemMonthlyBatch {
+    system_id: 0,
+    commands: vec![
+      CompetitiveCommand::Hold,
+      CompetitiveCommand::Monitor {
+        target: MonitorTarget::Northlake,
+        depth: 1,
+      },
+    ],
+    rationale: None,
+  }
+}
 
 pub fn month1_preset_batches(difficulty: Difficulty) -> Vec<SystemMonthlyBatch> {
   let mut batches = vec![
@@ -64,23 +77,13 @@ pub fn month1_preset_batches(difficulty: Difficulty) -> Vec<SystemMonthlyBatch> 
   batches
 }
 
-pub fn month1_batches_with_ai(
+pub fn build_monthly_batches_with_ai(
   prior: &CompetitiveWorldState,
   ruleset: &CompetitiveRuleset,
   seed: u64,
+  human_batch: SystemMonthlyBatch,
 ) -> Result<Vec<SystemMonthlyBatch>, crate::model::CompetitiveValidationError> {
-  let mut batches = Vec::with_capacity(prior.systems.len());
-  batches.push(SystemMonthlyBatch {
-    system_id: 0,
-    commands: vec![
-      CompetitiveCommand::Hold,
-      CompetitiveCommand::Monitor {
-        target: MonitorTarget::Northlake,
-        depth: 1,
-      },
-    ],
-    rationale: None,
-  });
+  let mut batches = vec![human_batch];
 
   for slot in &prior.players {
     let PlayerController::Ai(_) = slot.controller else {
@@ -88,7 +91,17 @@ pub fn month1_batches_with_ai(
     };
     batches.push(compute_ai_batch(slot.system_id, prior, ruleset, seed)?);
   }
+
+  batches.sort_by_key(|batch| batch.system_id);
   Ok(batches)
+}
+
+pub fn month1_batches_with_ai(
+  prior: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+  seed: u64,
+) -> Result<Vec<SystemMonthlyBatch>, crate::model::CompetitiveValidationError> {
+  build_monthly_batches_with_ai(prior, ruleset, seed, month1_human_preset_batch())
 }
 
 pub fn compute_ai_batch(
@@ -119,22 +132,7 @@ pub fn resolve_preset_month1(
   ruleset: &CompetitiveRuleset,
   seed: u64,
 ) -> Result<CompetitiveTransition, crate::model::CompetitiveValidationError> {
-  let batches = month1_batches_with_ai(prior, ruleset, seed)?;
-  let aggregated = resolve_monthly_batches(prior, &batches, ruleset)?;
-  transition_competitive(prior, aggregated, ruleset)
-}
-
-pub fn build_month1_resolution_history(
-  difficulty: Difficulty,
-  seed: u64,
-) -> Result<CompetitiveHistory, crate::model::CompetitiveValidationError> {
-  let ruleset = default_competitive_ruleset();
-  let genesis = crate::competitive::genesis_competitive_world_with_ruleset(difficulty, &ruleset);
-  let transition = resolve_preset_month1(&genesis, &ruleset, seed)?;
-  Ok(CompetitiveHistory {
-    genesis,
-    transitions: vec![transition],
-  })
+  super::month_loop::resolve_competitive_month(prior, ruleset, seed, month1_human_preset_batch())
 }
 
 pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<String> {
