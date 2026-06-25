@@ -41,34 +41,9 @@ reconstructing it from the diff.
 | Module refactor + CI | v0.1.16–v0.1.18 | `src/lib.rs` modules, colocated tests, GitHub Actions CI | 78 | `bce02dff9b4b4ac6` |
 | Phase 0–5 docs closure | v0.1.19–v0.1.24 | Scope register, implications memo, competitor turn, governance, ADR 0001 | 82 | `6fb1ebbea564274f` (5-turn) |
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
-| Competitive design + runtime I1–I3 | v0.1.28–v0.1.30 | Design package, campaign router, action economy validation | 148 | `6fb1ebbea564274f` |
+| Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 
 ### Recent slices
-
-- Feature: Forecast and uncertainty CLI preview
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/forecast-uncertainty-preview
-
-  Summary:
-  Add bounded observation-only uncertainty preview before each interactive turn
-  and an observation note on the starting dashboard without changing transition
-  logic or golden trajectories.
-
-  Done:
-  - `src/cli/display/forecast.rs` with turn uncertainty preview helper
-  - Preview wired into interactive session before executive briefings
-  - Observation uncertainty note on starting executive dashboard
-  - Focused forecast preview tests; playtest findings v0.1.25
-  - Package version bumped to `0.1.25`
-
-  Deferred / Non-Goals:
-  - No probabilistic forecast objects
-  - No changes to `transition()`, hash semantics, or random streams
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (86 tests)
 
 - Feature: Rich-terminal CLI display
   Status: Complete
@@ -192,39 +167,36 @@ reconstructing it from the diff.
   - `cargo fmt --check`, `cargo test` pass (148 tests)
   - Competitive demos 1–5 exercise pass/fail validation paths
 
-## Present
-
 - Feature: Competitive campaign runtime I4
-  Status: Active
+  Status: Complete
   Started: 2026-06-24
   Branch: feat/competitive-multi-system-state
 
   Summary:
   Add `CompetitiveWorldState` with K+1 `HealthSystemState` entities, player
-  slots, and difficulty-scoped genesis fixtures per ADR-0004. No
-  `transition_competitive()` yet.
+  slots, and difficulty-scoped genesis fixtures per ADR-0004.
 
   Done:
-  - (populated during implementation)
-
-  Not Yet Done:
   - `CompetitiveWorldState`, `SharedMarketFields`, `HealthSystemState`,
-    `PlayerSlot` types
-  - Difficulty-scoped genesis fixtures (Easy–Expert)
-  - Competitive stub roster/summary display from genesis (not mock-only)
-  - Focused genesis and sizing tests; stabilization golden unchanged
+    `PlayerSlot`, `AiProfile` in `src/model/competitive_world.rs`
+  - `genesis_competitive_world` and roster display in `src/competitive/genesis.rs`
+  - Executive observation derives human metrics from genesis
+  - Competitive stub shows genesis roster before month-1 report
+  - Six focused genesis tests; package version bumped to `0.1.31`
 
   Deferred / Non-Goals:
-  - `transition_competitive()` and monthly loop (I5)
-  - AI players, events, Stata CLI (I6–I8)
-  - Stabilization `WorldState` or golden hash changes
-  - Replay artifact version bump for competitive runs
+  - No `transition_competitive()` or monthly loop (I5–I8)
+  - No stabilization golden hash changes
 
   Verification:
   - `systems.len() == K+1` for each `Difficulty` tier
-  - Human player assigned to system 0; K AI slots with profiles
-  - Golden stabilization hash unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
+  - Human at system 0; K AI rivals with style profiles
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (154 tests)
+
+## Present
+
+No active slice. Next: **Competitive campaign runtime I5** (see Future).
 
 ## Future
 

@@ -1,4 +1,7 @@
-use crate::model::{CashRunwaySignal, ConsultantOption, Difficulty, PlayerObservation};
+use super::genesis_competitive_world;
+use crate::model::{
+  CashRunwaySignal, ConsultantOption, Difficulty, PlayerObservation, PlayerResources,
+};
 
 fn consultant_options_month1() -> Vec<ConsultantOption> {
   vec![
@@ -27,6 +30,49 @@ fn consultant_options_month1() -> Vec<ConsultantOption> {
 }
 
 pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
+  let world = genesis_competitive_world(difficulty);
+  observation_from_genesis(&world)
+}
+
+pub fn observation_from_genesis(world: &crate::model::CompetitiveWorldState) -> PlayerObservation {
+  let human = world
+    .human_system()
+    .expect("competitive genesis must include human system");
+  let difficulty = difficulty_from_rival_count(world.rival_count() as u32);
+  observation_from_human_system(human, difficulty)
+}
+
+fn difficulty_from_rival_count(k_rivals: u32) -> Difficulty {
+  match k_rivals {
+    1 => Difficulty::Easy,
+    2 => Difficulty::Normal,
+    3 => Difficulty::Hard,
+    _ => Difficulty::Expert,
+  }
+}
+
+fn cash_runway_signal(resources: &PlayerResources) -> CashRunwaySignal {
+  if resources.cash >= 70 {
+    CashRunwaySignal::Comfortable
+  } else if resources.cash >= 45 {
+    CashRunwaySignal::Watch
+  } else {
+    CashRunwaySignal::Strained
+  }
+}
+
+fn workforce_trust_summary(trust: i32) -> String {
+  if trust >= 60 {
+    "moderate; vacancy rate elevated in nursing".to_string()
+  } else {
+    "strained; vacancy rate elevated in nursing".to_string()
+  }
+}
+
+fn observation_from_human_system(
+  human: &crate::model::HealthSystemState,
+  difficulty: Difficulty,
+) -> PlayerObservation {
   let k = difficulty.k_rivals();
   let mut market_bullets = vec![
     "Regional inpatient demand: stable-to-rising (+0.8% vs prior month, reported)".to_string(),
@@ -67,14 +113,18 @@ pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
   }
 
   PlayerObservation {
-    org_name: "Riverside Community Health".to_string(),
-    reported_access_index: 68,
+    org_name: human.name.clone(),
+    reported_access_index: human.access_index,
     prior_access_revision: None,
-    reported_quality_index: 72,
-    workforce_trust_summary: "moderate; vacancy rate elevated in nursing".to_string(),
-    community_trust_summary: "stable".to_string(),
+    reported_quality_index: human.quality_index,
+    workforce_trust_summary: workforce_trust_summary(human.workforce_trust),
+    community_trust_summary: if human.community_trust >= 60 {
+      "stable".to_string()
+    } else {
+      "watch".to_string()
+    },
     in_flight_projects: "none".to_string(),
-    cash_runway_signal: CashRunwaySignal::Watch,
+    cash_runway_signal: cash_runway_signal(&human.resources),
     market_bullets,
     policy_bullets: vec![
       "State Medicaid director signal: access reporting scrutiny increasing".to_string(),

@@ -1,6 +1,5 @@
 use crate::model::{
-  CampaignId, CliError, CompetitiveRunConfig, PlayerResources, Ruleset, SessionOutcome,
-  default_competitive_ruleset,
+  CampaignId, CliError, CompetitiveRunConfig, Ruleset, SessionOutcome, default_competitive_ruleset,
 };
 use crate::sim::validate_competitive_batch;
 
@@ -11,10 +10,9 @@ use super::io::{
   read_difficulty_choice, read_seed_choice, read_validation_demo_choice,
 };
 use crate::competitive::{
-  mock_observation_month1, validation_demo_by_id, validation_demo_menu_lines,
-  validation_resources_for_demo,
+  genesis_competitive_world, genesis_roster_lines, mock_observation_month1, validation_demo_by_id,
+  validation_demo_menu_lines, validation_resources_for_demo,
 };
-use crate::model::PolicyCalendar;
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
   loop {
@@ -86,8 +84,13 @@ fn run_competitive_preview_internal(
   demo_input: Option<Option<String>>,
 ) -> SessionOutcome {
   let ruleset = default_competitive_ruleset();
-  let resources = PlayerResources::genesis(config.difficulty, &ruleset);
-  let calendar = PolicyCalendar::new_month(1);
+  let world = genesis_competitive_world(config.difficulty);
+  let resources = world
+    .human_system()
+    .expect("competitive genesis includes human system")
+    .resources
+    .clone();
+  let calendar = world.policy_calendar;
   let observation = mock_observation_month1(config.difficulty);
   let ap_budget = config.difficulty.human_ap_per_month();
   let report = render_executive_report(
@@ -118,6 +121,11 @@ fn run_competitive_preview_internal(
   ));
   print_line(&style::label_value("Seed", &config.seed.to_string()));
   print_line("");
+  print_line(&style::subsection("REGIONAL MARKET ROSTER (genesis)"));
+  for line in genesis_roster_lines(&world) {
+    print_line(&line);
+  }
+  print_line("");
 
   print_block(&report);
 
@@ -147,8 +155,8 @@ fn run_competitive_preview_internal(
 
   print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I3). Monthly command entry, simultaneous \
-     resolution, and the full 24-month campaign ship in slices I4–I8.",
+    "Competitive campaign preview (slices I1–I4). Monthly command entry, simultaneous \
+     resolution, and the full 24-month campaign ship in slices I5–I8.",
   ));
   print_line(&style::dim(
     "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",

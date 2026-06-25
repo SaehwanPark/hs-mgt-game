@@ -1,6 +1,10 @@
 mod fixtures;
+mod genesis;
 
 pub use fixtures::{mock_observation_annual_month, mock_observation_month1};
+pub use genesis::{
+  genesis_competitive_world, genesis_competitive_world_with_ruleset, genesis_roster_lines,
+};
 
 use crate::model::{
   CompetitiveCommand, InvestDomain, MonitorTarget, PayerId, PledgeType, ProjectKind, RatePosture,
