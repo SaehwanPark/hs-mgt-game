@@ -13,6 +13,7 @@ pub enum PromptContext {
   BeginnerTurn { turn: u32 },
   ReplayExport,
   ValidationDemo,
+  CompetitiveCommand,
 }
 
 pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
@@ -44,6 +45,9 @@ pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
     PromptContext::ValidationDemo => {
       "Global: 1–5 → preset batch · Enter → skip · ?/help · q/quit/exit".to_string()
     }
+    PromptContext::CompetitiveCommand => {
+      "Global: Enter → fallback batch · ?/help · q/quit/exit".to_string()
+    }
   };
 
   vec![style::subsection("Global commands"), format!("  {line}")]
@@ -61,7 +65,7 @@ pub fn campaign_menu_lines() -> Vec<String> {
   vec![
     style::section_heading(style::EMOJI_STRATEGY, "Choose campaign"),
     style::dim("  Enter or 1 → Regional stabilization demo (five-turn playable)"),
-    style::dim("  2 or c → Competitive regional market (month-1 report preview)"),
+    style::dim("  2 or c → Competitive regional market (three-month preview)"),
   ]
 }
 

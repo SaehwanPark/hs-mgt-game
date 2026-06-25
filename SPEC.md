@@ -46,6 +46,7 @@ reconstructing it from the diff.
 | Competitive runtime I6 | v0.1.33 | AI batch planner, style-weighted rival actions, inspectable rationale traces | 183 | `e68f683da77d7c2f` (competitive) |
 | Competitive runtime I7 | v0.1.34 | Events, delayed effects, institution phase, multi-month loop | 189 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive runtime I8 | v0.1.35 | Stata-like CLI parser, interactive human batch entry | 189 | `88d07f9e1bbd6f04` (competitive) |
+| Competitive bounded loop | v0.1.36 | Three-month interactive competitive loop over evolving world state | 193 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -279,9 +280,27 @@ reconstructing it from the diff.
   Deferred / Non-Goals:
   - Full 24-month interactive loop, competitive autosave, syntax highlighting/autocomplete
 
+- Feature: Competitive bounded multi-month loop
+  Status: Complete
+  Branch: feat/competitive-multi-month-loop
+  Version: 0.1.36
+
+  Done:
+  - Competitive CLI preview resolves one coherent three-month loop from a single
+    evolving `CompetitiveWorldState`
+  - Per-month executive reports precede human command entry
+  - TTY mode accepts Stata-like batches each month; non-TTY mode uses deterministic
+    fallback batches for CI/tests
+  - Focused tests cover three-month non-TTY progression and fallback batch policy
+
+  Deferred / Non-Goals:
+  - Full 24-month campaign loop, competitive autosave, replay artifact export
+  - Syntax highlighting/autocomplete and scenario file loading
+
 ## Present
 
-No active slice. Competitive runtime I1–I8 complete for MVP preview track.
+No active slice. Competitive runtime I1–I8 and the bounded three-month loop are
+complete for the MVP preview track.
 
 ## Future
 

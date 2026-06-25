@@ -1,81 +1,49 @@
-# Request Summary — Competitive Gameplay Design Package
+# Request Summary — Competitive Multi-Month Loop
 
 ## Scope
 
-Fully develop the user-provided competitive gameplay sketch into durable design
-artifacts and sync SDD/canonical documentation. Deliver a **parallel competitive
-regional-market campaign** design (1 human + K AI health-system players) without
-changing runtime behavior or breaking the existing five-turn stabilization demo
-at v0.1.27.
+Continue the competitive campaign runtime after v0.1.35 by replacing the
+single-month interactive preview plus preset months 2-3 preview with one bounded
+three-month competitive loop. The loop should reuse the existing deterministic
+one-month resolver, AI batch generation, event/delay tick, institution phase,
+Stata-like command parser, and executive report renderer.
 
 ## Non-goals
 
-- No runtime code changes in this slice
-- No refactoring of the stabilization demo into competitive mode
-- No Medicare/Medicaid expansion, service-line modeling, or graphical UI
-- No global multi-agent equilibrium solver
-- No empirical calibration or policy forecasting claims
-- No breaking golden hash `6fb1ebbea564274f` for stabilization demo
-- No CI clippy or release automation
+- No full 24-month campaign loop
+- No competitive autosave or replay artifact export
+- No syntax highlighting or autocomplete
+- No scenario file loader
+- No Medicare/Medicaid strategic actors
+- No stabilization campaign behavior changes
+- No new dependencies
 
 ## Sources
 
-- User gameplay sketch (monthly turns, executive report, K AI competitors,
-  simultaneous actions, action economy, Stata CLI, delayed effects, yearly
-  policy, random events)
+- User-approved plan for `feat/competitive-multi-month-loop`
 - Canonical docs: `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
   `docs/design_principles.md`
-- Current implementation: v0.1.27 five-turn stabilization vertical slice
-- ADR-0001 deterministic transition boundary
-- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md` (prior slices)
+- Harness spec: `docs/harness/health-policy-strategy-game/team-spec.md`
+- Current runtime state in `SPEC.md`, `ARCHITECTURE.md`, and `CHANGELOG.md`
+- Existing code in `src/cli/campaign.rs` and `src/competitive/month_loop.rs`
 
 ## Expected files
 
-### Workspace handoffs
+- `src/cli/campaign.rs`
+- `src/competitive/month_loop.rs` if focused loop tests need adjustment
+- `Cargo.toml`, `CHANGELOG.md`, `README.md`, `SPEC.md`, `ARCHITECTURE.md`
+- `_workspace/00_input/request-summary.md`, `_workspace/final/handoff.md`
+- `LESSONS.md` only if implementation reveals a reusable trap
 
-- `_workspace/00_input/request-summary.md` (this file)
-- `_workspace/01_evidence_map.md` (update)
-- `_workspace/02_mechanism_design.md` (rewrite for competitive campaign)
-- `_workspace/03_domain_qa.md` (domain QA pass)
-- `_workspace/final/handoff.md` (completion handoff)
+## Validation target
 
-### New canonical design docs
-
-- `docs/gameplay-competitive-sketch.md`
-- `docs/core-loop-spec.md`
-- `docs/executive-report-format.md`
-- `docs/action-catalog-draft.md`
-- `docs/cli-command-grammar-draft.md`
-- `docs/competitive-scenario-brief.md`
-- `docs/decision-records/0003-simultaneous-monthly-player-actions.md`
-- `docs/decision-records/0004-multi-system-player-state.md`
-- `docs/decision-records/0005-action-economy-and-monthly-budget.md`
-- `docs/decision-records/0006-stata-like-cli-layer.md`
-
-### Updated docs
-
-- `docs/proposal.md`, `docs/roadmap.md`, `docs/system-boundary.md`
-- `docs/scenario-format-draft.md`, `docs/first-scenario-brief.md`
-- `docs/actor-cards.md`, `docs/glossary.md`, `LESSONS.md`
-- `docs/phase5-scope-register.md`, `docs/phase1-implications-memo.md`
-- `docs/decision-records/README.md`
-- `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, `Cargo.toml`, `README.md`
-
-## Validation
-
-- Domain QA pass in `_workspace/03_domain_qa.md` with no unresolved Critical/High
-  findings
-- Every sketch bullet mapped in `docs/gameplay-competitive-sketch.md`
-- ADRs 0003–0006 consistent with ADR-0001
-- `cargo fmt --check` and `cargo test` pass with zero gameplay changes
-- Three code-reviewer passes on doc diff before PR merge
-
-## Global skills
-
-- `hs-policy-evidence-mapper`, `hs-policy-mechanism-designer`, `hs-policy-domain-qa`
-- `spec-driven-developer`, `preferred-workflow`, `code-reviewer`
+- `cargo fmt --check`
+- `cargo test`
+- Competitive seed-42 golden remains deterministic; update only if the planned
+  loop changes the committed golden scope with a changelog note.
+- Stabilization golden hash remains unchanged.
 
 ## Roadmap phase
 
-Phase 3 (core loop specification) + Phase 6.0 competitive campaign design track.
-Implementation deferred to follow-on vertical slices I1–I8.
+Phase 6.0 competitive campaign runtime continuation. This is a narrow runtime
+slice after I8, not a broad MVP completion.

@@ -1,8 +1,9 @@
 use std::io::IsTerminal;
 
 use crate::model::{
-  CampaignId, CliError, CompetitiveRuleset, CompetitiveRunConfig, PlayerResources, Ruleset,
-  SessionOutcome, SystemMonthlyBatch, default_competitive_ruleset,
+  CampaignId, CliError, CompetitiveHistory, CompetitiveRuleset, CompetitiveRunConfig,
+  CompetitiveWorldState, PlayerResources, Ruleset, SessionOutcome, SystemMonthlyBatch,
+  default_competitive_ruleset,
 };
 use crate::sim::{observe_for_human, validate_competitive_batch};
 
@@ -12,14 +13,16 @@ use super::error::describe_cli_error;
 use super::input::ReadLineOutcome;
 use super::io::{
   parse_campaign_choice, parse_difficulty_choice, parse_seed_choice, read_campaign_choice,
-  read_difficulty_choice, read_seed_choice, read_validation_demo_choice,
+  read_competitive_command_batch, read_difficulty_choice, read_seed_choice,
+  read_validation_demo_choice,
 };
 use crate::competitive::{
-  build_multi_month_resolution_history, genesis_competitive_world_with_ruleset,
-  genesis_roster_lines, month1_human_preset_batch, observation_from_genesis,
-  resolution_summary_lines, resolve_competitive_month, validation_demo_by_id,
-  validation_demo_menu_lines, validation_resources_for_demo,
+  genesis_competitive_world_with_ruleset, genesis_roster_lines, human_batch_for_month,
+  observation_from_genesis, resolution_summary_lines, resolve_competitive_month,
+  validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
 };
+
+const COMPETITIVE_PREVIEW_MONTHS: u32 = 3;
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
   loop {
@@ -92,22 +95,6 @@ fn run_competitive_preview_internal(
 ) -> SessionOutcome {
   let ruleset = default_competitive_ruleset();
   let world = genesis_competitive_world_with_ruleset(config.difficulty, &ruleset);
-  let resources = world
-    .human_system()
-    .expect("competitive genesis includes human system")
-    .resources
-    .clone();
-  let calendar = world.policy_calendar;
-  let observation = observation_from_genesis(&world);
-  let ap_budget = config.difficulty.human_ap_per_month();
-  let report = render_executive_report(
-    calendar,
-    &observation,
-    ap_budget,
-    ap_budget,
-    resources.political_capital,
-    ruleset.political_capital_cap,
-  );
 
   print_line(&style::label_value(
     "Campaign",
@@ -132,9 +119,6 @@ fn run_competitive_preview_internal(
   for line in genesis_roster_lines(&world) {
     print_line(&line);
   }
-  print_line("");
-
-  print_block(&report);
 
   print_line("");
   print_line(&style::subsection(
@@ -161,102 +145,39 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
-  print_line(&style::subsection("MONTH 1 COMMAND ENTRY (slice I8)"));
-  print_line(
-    "Enter Stata-like commands for Riverside (system 0), or press Enter for preset batch.",
-  );
-  for line in competitive_command_help_lines() {
-    print_line(&style::dim(&format!("  {line}")));
-  }
-  print_line("");
-
-  let human_resources = world
-    .human_system()
-    .expect("human system")
-    .resources
-    .clone();
-  let human_batch = if std::io::stdin().is_terminal() {
-    match read_competitive_human_batch(&human_resources, &ruleset) {
-      Ok(None) => return SessionOutcome::QuitNoSave,
-      Ok(Some(batch)) => batch,
-      Err(error) => {
-        print_line(&style::warning(&format!(
-          "{} Could not parse human batch: {}",
-          style::EMOJI_WARNING,
-          describe_cli_error(&error)
-        )));
-        return SessionOutcome::CompetitivePreview;
-      }
-    }
-  } else {
-    month1_human_preset_batch()
-  };
-
-  print_line("");
-  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I8)"));
-  print_line("Resolving simultaneous player batches (human entry + AI rivals)...");
-  print_line("");
-
-  match resolve_competitive_month(&world, &ruleset, config.seed, human_batch) {
-    Ok(transition) => {
-      for line in resolution_summary_lines(&transition) {
-        print_line(&line);
-      }
+  print_line(&style::subsection("THREE-MONTH COMPETITIVE LOOP"));
+  match run_competitive_month_loop(world, &ruleset, config.seed) {
+    Ok(history) => {
       print_line("");
-
-      let month2_human = transition
-        .next
-        .human_system()
-        .expect("human system after resolution");
-      let month2_observation = observe_for_human(&transition.next, Some(&transition.aggregated));
-      let ap_budget = config.difficulty.human_ap_per_month();
-      let month2_report = render_executive_report(
-        transition.next.policy_calendar,
-        &month2_observation,
-        ap_budget,
-        ap_budget,
-        month2_human.resources.political_capital,
-        ruleset.political_capital_cap,
-      );
-      print_block(&month2_report);
-
-      print_line("");
-      print_line(&style::subsection("MONTHS 2–3 PREVIEW (slice I7)"));
-      match build_multi_month_resolution_history(config.difficulty, config.seed, 3) {
-        Ok(history) => {
-          for (index, transition) in history.transitions.iter().skip(1).enumerate() {
-            print_line(&format!(
-              "  Month {} hash {}",
-              transition.prior.policy_calendar.month_index, transition.state_hash
-            ));
-            for event in transition
-              .events
-              .iter()
-              .filter(|event| event.actor == "environment" || event.actor == "payer")
-              .take(2)
-            {
-              print_line(&format!("    • [{}] {}", event.actor, event.description));
-            }
-            if index == 1 {
-              print_line(&format!(
-                "  Final state after month 3: turn {}",
-                transition.next.turn
-              ));
-            }
-          }
-        }
-        Err(error) => {
-          print_line(&style::warning(&format!(
-            "{} Multi-month preview failed: {}",
-            style::EMOJI_WARNING,
-            error.message()
-          )));
-        }
-      }
+      print_line(&style::success(&format!(
+        "Completed {} competitive months.",
+        history.transitions.len()
+      )));
+      print_line(&style::label_value(
+        "Final turn",
+        &history.final_state().turn.to_string(),
+      ));
+      print_line(&style::label_value(
+        "Next report month",
+        &format!(
+          "Year {}, Month {}",
+          history.final_state().policy_calendar.year,
+          history.final_state().policy_calendar.month_in_year
+        ),
+      ));
     }
-    Err(error) => {
+    Err(CompetitiveLoopError::Quit) => return SessionOutcome::QuitNoSave,
+    Err(CompetitiveLoopError::Cli(error)) => {
       print_line(&style::warning(&format!(
-        "{} Month 1 resolution failed: {}",
+        "{} Could not parse human batch: {}",
+        style::EMOJI_WARNING,
+        describe_cli_error(&error)
+      )));
+      return SessionOutcome::CompetitivePreview;
+    }
+    Err(CompetitiveLoopError::Validation(error)) => {
+      print_line(&style::warning(&format!(
+        "{} Competitive month resolution failed: {}",
         style::EMOJI_WARNING,
         error.message()
       )));
@@ -265,24 +186,131 @@ fn run_competitive_preview_internal(
 
   print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I8). Full 24-month campaign loop remains deferred.",
-  ));
-  print_line(&style::dim(
-    "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",
+    "Competitive campaign preview is bounded to three months; full 24-month campaign remains deferred.",
   ));
 
   SessionOutcome::CompetitivePreview
 }
 
+#[derive(Debug)]
+enum CompetitiveLoopError {
+  Quit,
+  Cli(CliError),
+  Validation(crate::model::CompetitiveValidationError),
+}
+
+impl From<crate::model::CompetitiveValidationError> for CompetitiveLoopError {
+  fn from(error: crate::model::CompetitiveValidationError) -> Self {
+    Self::Validation(error)
+  }
+}
+
+fn run_competitive_month_loop(
+  genesis: CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+  seed: u64,
+) -> Result<CompetitiveHistory, CompetitiveLoopError> {
+  let mut current = genesis.clone();
+  let mut prior_aggregated = None;
+  let mut transitions = Vec::with_capacity(COMPETITIVE_PREVIEW_MONTHS as usize);
+
+  for _ in 0..COMPETITIVE_PREVIEW_MONTHS {
+    print_competitive_month_report(&current, prior_aggregated.as_ref(), ruleset);
+    let human_batch = read_human_batch_for_world(&current, ruleset)?;
+
+    print_line("");
+    print_line(&style::subsection(&format!(
+      "MONTH {} RESOLUTION",
+      current.policy_calendar.month_index
+    )));
+    print_line("Resolving simultaneous player batches (human entry + AI rivals)...");
+    print_line("");
+
+    let transition = resolve_competitive_month(&current, ruleset, seed, human_batch)?;
+    for line in resolution_summary_lines(&transition) {
+      print_line(&line);
+    }
+    print_line("");
+
+    prior_aggregated = Some(transition.aggregated.clone());
+    current = transition.next.clone();
+    transitions.push(transition);
+  }
+
+  Ok(CompetitiveHistory {
+    genesis,
+    transitions,
+  })
+}
+
+fn print_competitive_month_report(
+  world: &CompetitiveWorldState,
+  prior_aggregated: Option<&crate::model::AggregatedMonthlyActions>,
+  ruleset: &CompetitiveRuleset,
+) {
+  let human = world.human_system().expect("human system");
+  let observation = if world.turn == 0 {
+    observation_from_genesis(world)
+  } else {
+    observe_for_human(world, prior_aggregated)
+  };
+  let ap_budget = world.difficulty.human_ap_per_month();
+  let report = render_executive_report(
+    world.policy_calendar,
+    &observation,
+    ap_budget,
+    ap_budget,
+    human.resources.political_capital,
+    ruleset.political_capital_cap,
+  );
+
+  print_block(&report);
+  print_line("");
+  print_line(&style::subsection(&format!(
+    "MONTH {} COMMAND ENTRY",
+    world.policy_calendar.month_index
+  )));
+  print_line(
+    "Enter Stata-like commands for Riverside (system 0), or press Enter for fallback batch.",
+  );
+  for line in competitive_command_help_lines() {
+    print_line(&style::dim(&format!("  {line}")));
+  }
+  print_line("");
+}
+
+fn read_human_batch_for_world(
+  world: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+) -> Result<SystemMonthlyBatch, CompetitiveLoopError> {
+  let fallback_batch = human_batch_for_month(world.turn);
+  if !std::io::stdin().is_terminal() {
+    return Ok(fallback_batch);
+  }
+
+  let human_resources = world
+    .human_system()
+    .expect("human system")
+    .resources
+    .clone();
+
+  match read_competitive_human_batch(&human_resources, ruleset, fallback_batch) {
+    Ok(None) => Err(CompetitiveLoopError::Quit),
+    Ok(Some(batch)) => Ok(batch),
+    Err(error) => Err(CompetitiveLoopError::Cli(error)),
+  }
+}
+
 fn read_competitive_human_batch(
   resources: &PlayerResources,
   ruleset: &CompetitiveRuleset,
+  fallback_batch: SystemMonthlyBatch,
 ) -> Result<Option<SystemMonthlyBatch>, CliError> {
-  match read_validation_demo_choice()? {
+  match read_competitive_command_batch()? {
     ReadLineOutcome::Quit => Ok(None),
     ReadLineOutcome::Payload(input) => {
       if input.trim().is_empty() {
-        return Ok(Some(month1_human_preset_batch()));
+        return Ok(Some(fallback_batch));
       }
       let commands = parse_competitive_batch(&input)?;
       validate_competitive_batch(&commands, resources, ruleset)
@@ -393,6 +421,17 @@ mod tests {
       Some(String::new()),
     );
     assert_eq!(outcome, SessionOutcome::CompetitivePreview);
+  }
+
+  #[test]
+  fn competitive_month_loop_runs_three_months_in_non_tty_context() {
+    let ruleset = default_competitive_ruleset();
+    let world = genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
+    let history = run_competitive_month_loop(world, &ruleset, DEFAULT_SEED).expect("history");
+
+    assert_eq!(history.transitions.len(), 3);
+    assert_eq!(history.final_state().turn, 3);
+    assert_eq!(history.final_state().policy_calendar.month_index, 4);
   }
 
   #[test]
