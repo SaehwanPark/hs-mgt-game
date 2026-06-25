@@ -232,3 +232,29 @@ fn commit_level_out_of_range_fails() {
     CompetitiveValidationError::CommitLevelOutOfRange { .. }
   ));
 }
+
+#[test]
+fn empty_batch_passes() {
+  let resources = genesis_resources(Difficulty::Normal);
+  assert!(validate_competitive_batch(&[], &resources, &default_competitive_ruleset()).is_ok());
+}
+
+#[test]
+fn project_budget_smaller_than_duration_fails() {
+  let ruleset = default_competitive_ruleset();
+  let error = validate_competitive_command(
+    &CompetitiveCommand::Project {
+      kind: ProjectKind::EhrEpic,
+      budget: 5,
+    },
+    &ruleset,
+  )
+  .expect_err("budget below resolve months should fail");
+  assert!(matches!(
+    error,
+    CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
+      monthly_draw: 0,
+      available: 0,
+    }
+  ));
+}

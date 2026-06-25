@@ -1,6 +1,6 @@
 use crate::model::{
-  ActionCost, CompetitiveCommand, CompetitiveRuleset, CompetitiveValidationError, PlayerResources,
-  project_monthly_draw,
+  CompetitiveCommand, CompetitiveRuleset, CompetitiveValidationError, PlayerResources,
+  project_monthly_draw, sum_action_costs,
 };
 
 pub fn validate_competitive_command(
@@ -57,7 +57,10 @@ pub fn validate_competitive_command(
       }
       let monthly_draw = project_monthly_draw(*budget, kind.resolve_months());
       if monthly_draw <= 0 {
-        return Err(CompetitiveValidationError::ProjectBudgetNonPositive);
+        return Err(CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
+          monthly_draw,
+          available: 0,
+        });
       }
       Ok(())
     }
@@ -74,22 +77,11 @@ pub fn validate_competitive_batch(
     validate_competitive_command(command, ruleset)?;
   }
 
-  let mut totals = ActionCost {
-    action_points: 0,
-    cash_cost: 0,
-    political_capital: 0,
-  };
-  let mut new_projects = 0u32;
-
-  for command in commands {
-    let cost = command.action_cost();
-    totals.action_points += cost.action_points;
-    totals.cash_cost += cost.cash_cost;
-    totals.political_capital += cost.political_capital;
-    if command.is_project() {
-      new_projects += 1;
-    }
-  }
+  let totals = sum_action_costs(commands);
+  let new_projects = commands
+    .iter()
+    .filter(|command| command.is_project())
+    .count() as u32;
 
   if totals.action_points > resources.ap_budget {
     return Err(CompetitiveValidationError::ApBudgetExceeded {
@@ -98,7 +90,7 @@ pub fn validate_competitive_batch(
     });
   }
 
-  let concurrent_projects = resources.active_projects + new_projects;
+  let concurrent_projects = resources.active_projects.saturating_add(new_projects);
   if concurrent_projects > ruleset.max_concurrent_projects {
     return Err(CompetitiveValidationError::TooManyConcurrentProjects {
       requested: concurrent_projects,

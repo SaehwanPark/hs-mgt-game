@@ -12,6 +12,7 @@ pub struct ValidationDemo {
   pub id: u32,
   pub label: &'static str,
   pub commands: &'static [CompetitiveCommand],
+  pub political_capital_override: Option<u32>,
 }
 
 pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
@@ -25,6 +26,7 @@ pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
         depth: 1,
       },
     ],
+    political_capital_override: None,
   },
   ValidationDemo {
     id: 2,
@@ -47,6 +49,7 @@ pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
         level: 2,
       },
     ],
+    political_capital_override: None,
   },
   ValidationDemo {
     id: 3,
@@ -61,6 +64,7 @@ pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
         headcount: 5,
       },
     ],
+    political_capital_override: None,
   },
   ValidationDemo {
     id: 4,
@@ -75,6 +79,7 @@ pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
         level: 1,
       },
     ],
+    political_capital_override: Some(2),
   },
   ValidationDemo {
     id: 5,
@@ -83,6 +88,7 @@ pub const VALIDATION_DEMOS: &[ValidationDemo] = &[
       kind: ProjectKind::EhrEpic,
       budget: 60,
     }],
+    political_capital_override: None,
   },
 ];
 
@@ -96,8 +102,10 @@ pub fn validation_resources_for_demo(
   ruleset: &crate::model::CompetitiveRuleset,
 ) -> crate::model::PlayerResources {
   let mut resources = crate::model::PlayerResources::genesis(difficulty, ruleset);
-  if demo_id == 4 {
-    resources.political_capital = 2;
+  if let Some(demo) = validation_demo_by_id(demo_id) {
+    if let Some(pc) = demo.political_capital_override {
+      resources.political_capital = pc;
+    }
   }
   resources
 }

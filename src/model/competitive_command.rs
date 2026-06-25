@@ -54,7 +54,7 @@ pub enum ProjectKind {
   ClinicNetwork,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CompetitiveCommand {
   Hold,
   Recruit {
@@ -149,7 +149,7 @@ impl CompetitiveCommand {
   }
 }
 
-pub fn project_monthly_draw(budget: i32, resolve_months: u32) -> i32 {
+pub(crate) fn project_monthly_draw(budget: i32, resolve_months: u32) -> i32 {
   if resolve_months == 0 {
     return budget;
   }

@@ -78,7 +78,13 @@ fn read_validation_demo_input() -> Option<String> {
   match read_validation_demo_choice() {
     Ok(ReadLineOutcome::Quit) => None,
     Ok(ReadLineOutcome::Payload(input)) => Some(input),
-    Err(_) => Some(String::new()),
+    Err(error) => {
+      print_line(&style::warning(&format!(
+        "{} Could not read validation demo choice: {error:?}",
+        style::EMOJI_WARNING
+      )));
+      Some(String::new())
+    }
   }
 }
 
@@ -256,5 +262,30 @@ mod tests {
     let resources = validation_resources_for_demo(2, Difficulty::Normal, &ruleset);
     let demo = validation_demo_by_id(2).expect("demo 2");
     assert!(validate_competitive_batch(demo.commands, &resources, &ruleset).is_err());
+  }
+
+  #[test]
+  fn validation_demo_three_fails_cash_at_genesis() {
+    let ruleset = default_competitive_ruleset();
+    let resources = validation_resources_for_demo(3, Difficulty::Normal, &ruleset);
+    let demo = validation_demo_by_id(3).expect("demo 3");
+    assert!(validate_competitive_batch(demo.commands, &resources, &ruleset).is_err());
+  }
+
+  #[test]
+  fn validation_demo_four_fails_political_capital() {
+    let ruleset = default_competitive_ruleset();
+    let resources = validation_resources_for_demo(4, Difficulty::Normal, &ruleset);
+    let demo = validation_demo_by_id(4).expect("demo 4");
+    assert_eq!(resources.political_capital, 2);
+    assert!(validate_competitive_batch(demo.commands, &resources, &ruleset).is_err());
+  }
+
+  #[test]
+  fn validation_demo_five_passes_project_at_genesis() {
+    let ruleset = default_competitive_ruleset();
+    let resources = validation_resources_for_demo(5, Difficulty::Normal, &ruleset);
+    let demo = validation_demo_by_id(5).expect("demo 5");
+    assert!(validate_competitive_batch(demo.commands, &resources, &ruleset).is_ok());
   }
 }
