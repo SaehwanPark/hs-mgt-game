@@ -171,7 +171,7 @@ pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<Strin
 mod tests {
 
   use super::*;
-  use crate::model::Difficulty;
+  use crate::model::{Difficulty, default_competitive_ruleset};
 
   #[test]
   fn preset_batches_match_system_count_per_difficulty() {
