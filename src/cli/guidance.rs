@@ -63,6 +63,12 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       lines.push("  Replay artifacts record the full run for classroom analysis.".to_string());
       lines.push("  Press Enter to skip export.".to_string());
     }
+    PromptContext::ValidationDemo => {
+      lines
+        .push("  Preset batches exercise AP, cash, and political capital validation.".to_string());
+      lines.push("  Demo 4 uses constrained political capital (2) to show PC failure.".to_string());
+      lines.push("  Press Enter to skip the validation demo.".to_string());
+    }
   }
 
   lines.push(style::dim("  Type your choice again after reading help."));

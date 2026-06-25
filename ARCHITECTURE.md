@@ -10,8 +10,8 @@ intended architecture boundaries that future implementation should preserve.
 - Package: single Rust package, `hs-mgt-game`, with `src/lib.rs` module tree
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - Library modules:
-  - `model/` — typed world state, commands, history, session types, campaign types
-  - `competitive/` — competitive campaign mock fixtures (preview slice)
+  - `model/` — typed world state, commands, competitive commands, resources, history, session types, campaign types
+  - `competitive/` — competitive campaign mock fixtures and validation demos
   - `inputs/` — seeded stochastic input resolution
   - `sim/` — deterministic transition core
   - `actors/` — non-player actor decisions
@@ -165,15 +165,16 @@ Implemented modules for `competitive-regional-v1`:
 | `CampaignRouter` | Select stabilization vs competitive entry in CLI | Verified |
 | `PolicyCalendar` | Month index, year boundary labels for reports | Verified |
 | Executive report renderer | Six-section monthly briefing from `PlayerObservation` | Verified |
+| `CompetitiveCommand` + validation | AP/cash/PC batch validation per action catalog | Verified |
 | `MultiSystemState` | K+1 health systems in shared market (`model/players.rs`) | Needs Review |
 | `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Needs Review |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Needs Review |
 | `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Needs Review |
 
-Stub fixtures live in `src/competitive/fixtures.rs`; full simulation deferred to I3–I8.
+Stub fixtures and validation demos live in `src/competitive/`; full simulation deferred to I4–I8.
 
 Last Reviewed: 2026-06-24
-Status: Verified (router + report); Needs Review (remaining modules)
+Status: Verified (router, report, validation); Needs Review (remaining modules)
 
 ## Open Architectural Decisions
 

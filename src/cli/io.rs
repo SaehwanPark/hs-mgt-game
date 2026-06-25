@@ -6,7 +6,7 @@ use crate::model::{
 
 use super::display::{
   PromptContext, campaign_menu_lines, difficulty_menu_lines, global_commands_footer,
-  play_mode_menu_lines, print_prompt_block, resume_choice_prompt_lines, seed_prompt_lines,
+  play_mode_menu_lines, print_prompt_block, resume_choice_prompt_lines, seed_prompt_lines, style,
 };
 use super::guidance::print_context_help;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
@@ -170,6 +170,11 @@ pub fn read_replay_export_path() -> Result<ReadLineOutcome, CliError> {
   let mut lines = super::display::replay_export_prompt_lines();
   lines.extend(global_commands_footer(PromptContext::ReplayExport));
   read_line_with_globals(&lines, PromptContext::ReplayExport)
+}
+
+pub fn read_validation_demo_choice() -> Result<ReadLineOutcome, CliError> {
+  let lines = vec![style::subsection("Validation demo choice")];
+  read_line_with_globals(&lines, PromptContext::ValidationDemo)
 }
 
 pub fn parse_replay_export_path(input: &str) -> Option<String> {

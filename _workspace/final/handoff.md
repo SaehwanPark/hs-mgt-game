@@ -1,47 +1,48 @@
-# Handoff — Competitive Campaign Runtime I1+I2 (v0.1.29)
+# Handoff — Competitive Campaign Runtime I3 (v0.1.30)
 
 ## Summary
 
-Implemented CLI campaign router and month-1 executive report preview for
-`competitive-regional-v1`. Stabilization demo unchanged.
+Implemented competitive action economy validation: typed commands, AP/cash/PC
+batch checks per ADR-0005, executive report PC header, and validation demo
+presets in the competitive stub. Stabilization demo unchanged.
 
 ## Changed files
 
 ### New
 
-- `src/model/campaign.rs`, `src/model/campaign_tests.rs`
-- `src/cli/campaign.rs`
-- `src/cli/display/executive_report.rs`, `src/cli/display/executive_report_tests.rs`
-- `src/competitive/mod.rs`, `src/competitive/fixtures.rs`
+- `src/model/competitive_command.rs`
+- `src/model/resources.rs`
+- `src/sim/validate_competitive.rs`, `src/sim/validate_competitive_tests.rs`
 
 ### Updated
 
-- `src/cli/session.rs`, `src/cli/io.rs`, `src/cli/io_tests.rs`
-- `src/cli/display/prompt.rs`, `src/cli/display/mod.rs`
-- `src/cli/guidance.rs`, `src/cli/error.rs`, `src/cli/mod.rs`
-- `src/model/mod.rs`, `src/model/session.rs`, `src/main.rs`, `src/lib.rs`
+- `src/model/mod.rs`, `src/sim/mod.rs`
+- `src/cli/campaign.rs`, `src/cli/io.rs`, `src/cli/guidance.rs`
+- `src/cli/display/executive_report.rs`, `src/cli/display/executive_report_tests.rs`
+- `src/cli/display/prompt.rs`
+- `src/competitive/mod.rs`
 - `SPEC.md`, `CHANGELOG.md`, `ARCHITECTURE.md`, `README.md`, `Cargo.toml`
-- `docs/core-loop-spec.md`, `docs/phase5-scope-register.md`
 
 ## Verification
 
 - `cargo fmt --check`
-- `cargo test` (129 lib + 1 golden; golden hash `6fb1ebbea564274f` unchanged)
+- `cargo test` (142 lib + 1 golden; golden hash `6fb1ebbea564274f` unchanged)
 
 ## Known limits
 
-- Competitive path is preview-only: no command entry or monthly loop
-- Report uses mock `PlayerObservation` fixtures, not live simulation state
+- Validation demo only; no monthly loop or `transition_competitive()`
+- Report still uses mock `PlayerObservation` fixtures
 - Autosave resume applies to stabilization interactive runs only
 
 ## Recommended next slice
 
-**I3:** `feat/competitive-action-economy` — AP/cash/political capital validation
-before simultaneous resolver (I5) and multi-system state (I4 can parallelize with
-care; ADR-0004 lists I4 before I5).
+**I4:** `feat/competitive-multi-system-state` — `CompetitiveWorldState`, K+1
+`HealthSystemState`, genesis fixtures per ADR-0004.
+
+**Then I5:** simultaneous monthly resolver before AI players and events.
 
 ## Phase dependencies
 
 - I4 multi-system state before I5 simultaneous resolver
-- I3 action economy before competitive CLI command validation
-- I8 Stata CLI after I3 and typed command shapes exist
+- I5 before I6 AI players and I7 events/delays
+- I8 Stata CLI after I3 command shapes (can parallelize with I4–I5)

@@ -958,10 +958,47 @@ reconstructing it from the diff.
   - Empty campaign input defaults to stabilization
   - Competitive path shows six-section month-1 executive report then stub message
 
+- Feature: Competitive campaign runtime I3
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/competitive-action-economy
+
+  Summary:
+  Add competitive command types, action-cost catalog, and batch validation for
+  AP, cash, and political capital per ADR-0005. Extend executive report and
+  competitive stub with validation demo presets. Stabilization unchanged.
+
+  Done:
+  - `CompetitiveCommand`, `ActionCost`, and verb argument enums in
+    `src/model/competitive_command.rs`
+  - `PlayerResources`, `CompetitiveRuleset`, `CompetitiveValidationError` in
+    `src/model/resources.rs`
+  - `validate_competitive_batch` / `validate_competitive_command` in
+    `src/sim/validate_competitive.rs`
+  - Executive report shows AP and political capital remaining
+  - Five preset validation demos in `src/competitive/mod.rs`
+  - Competitive stub validation demo loop after month-1 report
+  - Focused unit tests for catalog costs, batch validation, report header
+  - Package version bumped to `0.1.30`
+
+  Not Yet Done:
+  - Full competitive play (I4–I8): multi-system state, simultaneous resolver,
+    AI players, events, Stata CLI
+
+  Deferred / Non-Goals:
+  - No `transition_competitive()` or changes to stabilization `transition()`
+  - No scenario file loader
+  - No Medicare/Medicaid actors
+  - Session autosave remains stabilization-only
+  - No Stata-like command parser (I8)
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (148 tests)
+  - Competitive demos 1–5 exercise pass/fail validation paths
+
 ## Future
 
-- **Competitive campaign runtime I3** — action-point economy, cash feasibility,
-  political capital validation.
 - **Competitive campaign runtime I4** — multi-system player state (K+1 entities,
   difficulty profiles).
 - **Competitive campaign runtime I5** — simultaneous monthly action resolver

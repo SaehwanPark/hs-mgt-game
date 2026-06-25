@@ -12,6 +12,7 @@ pub enum PromptContext {
   TurnCommand { turn: u32 },
   BeginnerTurn { turn: u32 },
   ReplayExport,
+  ValidationDemo,
 }
 
 pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
@@ -40,6 +41,9 @@ pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
       "Global: 1/2/3 → choose option · ?/help · q/quit/exit".to_string()
     }
     PromptContext::ReplayExport => "Global: Enter → skip export · ?/help · q/quit/exit".to_string(),
+    PromptContext::ValidationDemo => {
+      "Global: 1–5 → preset batch · Enter → skip · ?/help · q/quit/exit".to_string()
+    }
   };
 
   vec![style::subsection("Global commands"), format!("  {line}")]

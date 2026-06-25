@@ -6,6 +6,28 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.30] - 2026-06-24
+
+### Added
+
+- Competitive command types and action-cost catalog (`src/model/competitive_command.rs`).
+- Player resource and competitive ruleset types (`src/model/resources.rs`).
+- `validate_competitive_batch` and `validate_competitive_command` in
+  `src/sim/validate_competitive.rs` (AP, cash, political capital, concurrent projects).
+- Executive report header shows political capital remaining (ADR-0005).
+- Competitive validation demo presets and interactive stub loop (`src/competitive/`,
+  `src/cli/campaign.rs`).
+
+### Changed
+
+- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `_workspace/final/handoff.md`.
+- Bumped package version from `0.1.29` to `0.1.30`.
+
+### Notes
+
+- Competitive path validates preset command batches only; full play deferred to I4–I8.
+- Golden seed-42 stabilization hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.29] - 2026-06-24
 
 ### Added

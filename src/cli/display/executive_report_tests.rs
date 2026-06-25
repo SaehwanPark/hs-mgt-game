@@ -40,7 +40,7 @@ fn section_ids_in_report(report: &[String]) -> Vec<&'static str> {
 fn executive_report_includes_all_six_sections() {
   let calendar = PolicyCalendar::new_month(1);
   let observation = mock_observation_month1(Difficulty::Normal);
-  let report = render_executive_report(calendar, &observation, 3, 3);
+  let report = render_executive_report(calendar, &observation, 3, 3, 8, 15);
   let sections = section_ids_in_report(&report);
 
   assert_eq!(sections.len(), 6);
@@ -56,7 +56,7 @@ fn executive_report_includes_all_six_sections() {
 fn consultant_section_avoids_optimal_wording() {
   let calendar = PolicyCalendar::new_month(1);
   let observation = mock_observation_month1(Difficulty::Easy);
-  let report = render_executive_report(calendar, &observation, 4, 4);
+  let report = render_executive_report(calendar, &observation, 4, 4, 8, 15);
   let joined = report.join("\n").to_lowercase();
 
   assert!(!joined.contains("optimal"));
@@ -68,7 +68,7 @@ fn consultant_section_avoids_optimal_wording() {
 fn annual_month_fixture_includes_year_in_review() {
   let calendar = PolicyCalendar::new_month(12);
   let observation = mock_observation_annual_month(Difficulty::Normal);
-  let report = render_executive_report(calendar, &observation, 3, 3);
+  let report = render_executive_report(calendar, &observation, 3, 3, 8, 15);
   let joined = report.join("\n");
 
   assert!(calendar.is_annual_tick());
@@ -80,10 +80,21 @@ fn annual_month_fixture_includes_year_in_review() {
 }
 
 #[test]
+fn report_header_shows_ap_and_political_capital() {
+  let calendar = PolicyCalendar::new_month(1);
+  let observation = mock_observation_month1(Difficulty::Normal);
+  let report = render_executive_report(calendar, &observation, 2, 3, 8, 15);
+  let joined = report.join("\n");
+
+  assert!(joined.contains("Action points remaining: 2/3"));
+  assert!(joined.contains("Political capital remaining: 8/15"));
+}
+
+#[test]
 fn report_uses_reported_metric_labels() {
   let calendar = PolicyCalendar::new_month(4);
   let observation = mock_observation_month1(Difficulty::Hard);
-  let report = render_executive_report(calendar, &observation, 3, 3);
+  let report = render_executive_report(calendar, &observation, 3, 3, 8, 15);
   let joined = report.join("\n");
 
   assert!(joined.contains("Reported access index"));

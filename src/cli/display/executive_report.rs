@@ -7,6 +7,8 @@ pub fn render_executive_report(
   observation: &PlayerObservation,
   ap_remaining: u32,
   ap_budget: u32,
+  pc_remaining: u32,
+  pc_cap: u32,
 ) -> Vec<String> {
   let mut lines = Vec::new();
 
@@ -22,6 +24,10 @@ pub fn render_executive_report(
     calendar.month_name(),
     ap_remaining,
     ap_budget
+  ));
+  lines.push(format!(
+    "  Political capital remaining: {}/{}",
+    pc_remaining, pc_cap
   ));
   lines.push(format!(
     "  Cash runway: {}",
