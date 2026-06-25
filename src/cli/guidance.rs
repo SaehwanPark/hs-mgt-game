@@ -14,9 +14,7 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
     }
     PromptContext::Campaign => {
       lines.push("  Stabilization (Enter or 1): the playable five-turn regional demo.".to_string());
-      lines.push(
-        "  Competitive (2 or c): preview the monthly executive report stub only.".to_string(),
-      );
+      lines.push("  Competitive (2 or c): preview three monthly competitive turns.".to_string());
       lines.push("  Autosave resume applies to stabilization interactive runs only.".to_string());
     }
     PromptContext::Difficulty => {
@@ -68,6 +66,12 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
         .push("  Preset batches exercise AP, cash, and political capital validation.".to_string());
       lines.push("  Demo 4 uses constrained political capital (2) to show PC failure.".to_string());
       lines.push("  Press Enter to skip the validation demo.".to_string());
+    }
+    PromptContext::CompetitiveCommand => {
+      lines
+        .push("  Enter one or more competitive commands using verb arg=value syntax.".to_string());
+      lines.push("  Separate multiple commands with semicolons on one line.".to_string());
+      lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
   }
 
@@ -152,6 +156,7 @@ mod tests {
       PromptContext::TurnCommand { turn: 1 },
       PromptContext::BeginnerTurn { turn: 2 },
       PromptContext::ReplayExport,
+      PromptContext::CompetitiveCommand,
     ] {
       let text = context_help_lines(context).join("\n");
       assert!(

@@ -101,4 +101,17 @@ mod loop_tests {
         .any(|event| event.actor == "environment")
     );
   }
+
+  #[test]
+  fn human_fallback_uses_month_one_preset_then_hold() {
+    assert_eq!(human_batch_for_month(0), month1_human_preset_batch());
+    assert_eq!(
+      human_batch_for_month(1),
+      SystemMonthlyBatch::new(0, vec![CompetitiveCommand::Hold])
+    );
+    assert_eq!(
+      human_batch_for_month(2),
+      SystemMonthlyBatch::new(0, vec![CompetitiveCommand::Hold])
+    );
+  }
 }

@@ -1,4 +1,6 @@
-use super::prompt::{PromptContext, global_commands_footer, turn_command_prompt};
+use super::prompt::{
+  PromptContext, campaign_menu_lines, global_commands_footer, turn_command_prompt,
+};
 use crate::cli::default_interactive_commands;
 use crate::model::default_ruleset;
 
@@ -17,6 +19,23 @@ fn seed_footer_documents_default_seed() {
   let footer = global_commands_footer(PromptContext::Seed).join("\n");
 
   assert!(footer.contains("default seed (42)"));
+}
+
+#[test]
+fn campaign_menu_describes_competitive_three_month_preview() {
+  let menu = campaign_menu_lines().join("\n");
+
+  assert!(menu.contains("three-month preview"));
+  assert!(!menu.contains("month-1"));
+}
+
+#[test]
+fn competitive_command_footer_documents_fallback_batch() {
+  let footer = global_commands_footer(PromptContext::CompetitiveCommand).join("\n");
+
+  assert!(footer.contains("fallback batch"));
+  assert!(footer.contains("q/quit"));
+  assert!(!footer.contains("preset batch"));
 }
 
 #[test]

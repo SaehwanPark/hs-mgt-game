@@ -177,6 +177,11 @@ pub fn read_validation_demo_choice() -> Result<ReadLineOutcome, CliError> {
   read_line_with_globals(&lines, PromptContext::ValidationDemo)
 }
 
+pub fn read_competitive_command_batch() -> Result<ReadLineOutcome, CliError> {
+  let lines = vec![style::subsection("Competitive command batch")];
+  read_line_with_globals(&lines, PromptContext::CompetitiveCommand)
+}
+
 pub fn parse_replay_export_path(input: &str) -> Option<String> {
   let trimmed = input.trim();
   if trimmed.is_empty() {

@@ -6,6 +6,28 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.36] - 2026-06-25
+
+### Added
+
+- Bounded three-month competitive loop in the CLI preview, reusing the existing
+  one-month resolver for each evolving month.
+- Per-month executive report, human command entry, simultaneous AI resolution,
+  and resolution summary across months 1-3.
+- Competitive command-entry prompt and help context for the monthly loop.
+- Focused tests for non-TTY three-month loop behavior and fallback human batches.
+
+### Changed
+
+- Competitive preview no longer shows a separate preset months 2-3 preview after
+  month 1; it resolves one coherent three-month history.
+- Package version bumped to `0.1.36`.
+
+### Notes
+
+- Full 24-month competitive campaign, competitive autosave, replay export,
+  syntax highlighting, autocomplete, and scenario loading remain deferred.
+
 ## [0.1.35] - 2026-06-25
 
 ### Added

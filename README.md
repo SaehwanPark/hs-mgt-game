@@ -22,7 +22,10 @@ and competitive campaign router with month-1 executive report preview at v0.1.29
 and competitive action economy validation at v0.1.30,
 and competitive multi-system genesis state at v0.1.31,
 and competitive simultaneous monthly resolver at v0.1.32,
-and competitive AI player batch generation at v0.1.33.
+and competitive AI player batch generation at v0.1.33,
+and competitive events/delays at v0.1.34,
+and Stata-like competitive command entry at v0.1.35,
+and bounded three-month competitive loop at v0.1.36.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -100,10 +103,10 @@ cargo test
 
 Current priorities are:
 
-1. Competitive campaign runtime I6 (bounded game-theory AI players).
-2. Competitive campaign runtime I7 (random events, delayed effect queue, annual policy tick).
-3. External playtest protocol refresh (Phase 7 prep).
-4. Scenario data loading runtime after format draft review.
+1. External playtest protocol refresh (Phase 7 prep).
+2. Scenario data loading runtime after format draft review.
+3. Competitive campaign hardening after bounded-loop playtests.
+4. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),
