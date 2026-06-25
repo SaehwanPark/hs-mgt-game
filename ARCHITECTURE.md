@@ -10,7 +10,8 @@ intended architecture boundaries that future implementation should preserve.
 - Package: single Rust package, `hs-mgt-game`, with `src/lib.rs` module tree
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - Library modules:
-  - `model/` — typed world state, commands, history, session types
+  - `model/` — typed world state, commands, history, session types, campaign types
+  - `competitive/` — competitive campaign mock fixtures (preview slice)
   - `inputs/` — seeded stochastic input resolution
   - `sim/` — deterministic transition core
   - `actors/` — non-player actor decisions
@@ -155,21 +156,24 @@ competitive campaign until approved slices land.
 Last Reviewed: 2026-06-24
 Status: Verified
 
-## Competitive Campaign (design only)
+## Competitive Campaign (partial runtime)
 
-Planned modules for `competitive-regional-v1` (not yet implemented):
+Implemented modules for `competitive-regional-v1`:
 
 | Module | Responsibility | Status |
 | --- | --- | --- |
-| `CampaignRouter` | Select stabilization vs competitive entry in CLI | Needs Review |
+| `CampaignRouter` | Select stabilization vs competitive entry in CLI | Verified |
+| `PolicyCalendar` | Month index, year boundary labels for reports | Verified |
+| Executive report renderer | Six-section monthly briefing from `PlayerObservation` | Verified |
 | `MultiSystemState` | K+1 health systems in shared market (`model/players.rs`) | Needs Review |
 | `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Needs Review |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Needs Review |
-| `PolicyCalendar` | Month index, year boundary, annual policy stream | Needs Review |
 | `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Needs Review |
 
+Stub fixtures live in `src/competitive/fixtures.rs`; full simulation deferred to I3–I8.
+
 Last Reviewed: 2026-06-24
-Status: Needs Review
+Status: Verified (router + report); Needs Review (remaining modules)
 
 ## Open Architectural Decisions
 

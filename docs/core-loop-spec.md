@@ -12,7 +12,7 @@ repository.
 | Campaign id | Name | Turn unit | Player model | Status |
 | --- | --- | --- | --- | --- |
 | `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 human CEO + per-turn NPC actors | Implemented v0.1.27 |
-| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | Design only |
+| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | Stub: campaign select + month-1 report preview (v0.1.29) |
 
 ## Shared principles
 

@@ -17,7 +17,8 @@ v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
 at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
 preview at v0.1.25, and rich-terminal CLI display at v0.1.26, and CLI session UX
 (quit, autosave, guidance, beginner mode) at v0.1.27, and competitive gameplay
-design package (parallel campaign spec, core loop, ADRs 0003–0006) at v0.1.28.
+design package (parallel campaign spec, core loop, ADRs 0003–0006) at v0.1.28,
+and competitive campaign router with month-1 executive report preview at v0.1.29.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -95,9 +96,10 @@ cargo test
 
 Current priorities are:
 
-1. External playtest protocol refresh (Phase 7 prep).
-2. Scenario data loading runtime after format draft review.
-3. Medicare/Medicaid actors only after first-scenario scope expands.
+1. Competitive campaign runtime I3 (action-point economy).
+2. External playtest protocol refresh (Phase 7 prep).
+3. Scenario data loading runtime after format draft review.
+4. Medicare/Medicaid actors only after first-scenario scope expands.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),

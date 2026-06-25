@@ -5,6 +5,8 @@ use super::style::{self, EMOJI_BRIEFING};
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PromptContext {
   ResumeChoice,
+  Campaign,
+  Difficulty,
   PlayMode,
   Seed,
   TurnCommand { turn: u32 },
@@ -16,6 +18,13 @@ pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
   let line = match context {
     PromptContext::ResumeChoice => {
       "Global: r → resume · n → start over · ?/help · q/quit/exit".to_string()
+    }
+    PromptContext::Campaign => {
+      "Global: Enter/1 → stabilization · 2/c/C → competitive preview · ?/help · q/quit/exit"
+        .to_string()
+    }
+    PromptContext::Difficulty => {
+      "Global: Enter/2 → normal · 1/3/4 → other tiers · ?/help · q/quit/exit".to_string()
     }
     PromptContext::PlayMode => {
       "Global: Enter/i → interactive · b → beginner · 1/2/3 → presets · ?/help · q/quit/exit"
@@ -41,6 +50,24 @@ pub fn resume_choice_prompt_lines() -> Vec<String> {
     style::section_heading(style::EMOJI_STRATEGY, "Saved session found"),
     style::label_value("Resume", "r — continue where you left off"),
     style::label_value("Start over", "n — delete autosave and begin fresh"),
+  ]
+}
+
+pub fn campaign_menu_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_STRATEGY, "Choose campaign"),
+    style::dim("  Enter or 1 → Regional stabilization demo (five-turn playable)"),
+    style::dim("  2 or c → Competitive regional market (month-1 report preview)"),
+  ]
+}
+
+pub fn difficulty_menu_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_STRATEGY, "Choose difficulty"),
+    style::option_line("1", "Easy", "1 AI rival · 4 AP/month"),
+    style::option_line("2", "Normal", "2 AI rivals · 3 AP/month (default)"),
+    style::option_line("3", "Hard", "3 AI rivals · 3 AP/month"),
+    style::option_line("4", "Expert", "4 AI rivals · 2 AP/month"),
   ]
 }
 

@@ -1,4 +1,5 @@
 mod beginner;
+mod campaign;
 mod display;
 mod error;
 mod export;
@@ -19,8 +20,9 @@ pub use display::{
 pub use error::describe_cli_error;
 pub use input::{GlobalInput, ReadLineOutcome, parse_global_input};
 pub use io::{
-  PlayModeSelection, parse_play_mode_choice, parse_replay_export_path, parse_resume_choice,
-  parse_seed_choice, read_play_mode_choice, read_seed_choice,
+  PlayModeSelection, parse_campaign_choice, parse_difficulty_choice, parse_play_mode_choice,
+  parse_replay_export_path, parse_resume_choice, parse_seed_choice, read_play_mode_choice,
+  read_seed_choice,
 };
 pub use output::print_demo;
 pub use parse::{
@@ -28,7 +30,7 @@ pub use parse::{
   parse_stabilize_access_command, parse_workforce_command,
 };
 pub use session::{
-  InteractiveRunResult, read_run_config, run, run_interactive_history, run_session,
+  InteractiveRunResult, read_stabilization_run_config, run, run_interactive_history, run_session,
 };
 pub use strategy::{
   build_history_for_strategy, build_history_interactive, default_interactive_commands,

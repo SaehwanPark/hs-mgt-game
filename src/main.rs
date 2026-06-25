@@ -4,6 +4,7 @@ use hs_mgt_game::model::SessionOutcome;
 fn main() {
   match run() {
     Ok(SessionOutcome::Completed)
+    | Ok(SessionOutcome::CompetitivePreview)
     | Ok(SessionOutcome::QuitSaved)
     | Ok(SessionOutcome::QuitNoSave) => {}
     Err(error) => {

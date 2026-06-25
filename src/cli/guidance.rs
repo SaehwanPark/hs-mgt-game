@@ -12,6 +12,17 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       lines.push("  Resume continues your saved interactive session.".to_string());
       lines.push("  Start over deletes the autosave and begins a fresh run.".to_string());
     }
+    PromptContext::Campaign => {
+      lines.push("  Stabilization (Enter or 1): the playable five-turn regional demo.".to_string());
+      lines.push(
+        "  Competitive (2 or c): preview the monthly executive report stub only.".to_string(),
+      );
+      lines.push("  Autosave resume applies to stabilization interactive runs only.".to_string());
+    }
+    PromptContext::Difficulty => {
+      lines.push("  Difficulty sets rival count (K) and monthly action-point budgets.".to_string());
+      lines.push("  Normal (Enter or 2) is the default competitive preview tier.".to_string());
+    }
     PromptContext::PlayMode => {
       lines.push("  Interactive (Enter or i): choose each turn yourself.".to_string());
       lines
@@ -26,10 +37,11 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
     }
     PromptContext::Seed => {
       lines.push(
-        "  The seed fixes stochastic inputs (measurement noise, labor shocks, etc.).".to_string(),
+        "  The seed fixes stochastic inputs and ties together reproducible classroom runs."
+          .to_string(),
       );
       lines.push(
-        "  The same seed and commands always produce the same run for classroom replay."
+        "  The same seed and choices always produce the same outcome for a given campaign."
           .to_string(),
       );
     }

@@ -3,13 +3,14 @@ use std::io;
 use crate::artifact::{describe_replay_artifact_error, write_replay_artifact};
 use crate::inputs::resolve_inputs;
 use crate::model::{
-  CliError, ExperienceMode, History, INTERACTIVE_TURN_COUNT, PlayMode, PlayerCommand,
+  CampaignId, CliError, ExperienceMode, History, INTERACTIVE_TURN_COUNT, PlayMode, PlayerCommand,
   ReplayArtifact, ResumeState, Ruleset, RunConfig, SessionOutcome, SessionSave, default_ruleset,
   genesis_state,
 };
 use crate::sim::{observe_for_player, transition};
 
 use super::beginner::{format_beginner_menu, parse_beginner_choice};
+use super::campaign::{read_competitive_run_config, run_competitive_stub, select_campaign};
 use super::display::{
   format_command_prompt, print_block, print_interactive_results, print_line,
   print_pre_run_briefing, print_turn_briefing_block, print_turn_resolution_block,
@@ -42,19 +43,16 @@ pub enum InteractiveRunResult {
 
 pub fn run() -> Result<SessionOutcome, CliError> {
   let ruleset = default_ruleset();
-  let Some(config) = read_run_config(&ruleset)? else {
-    return Ok(SessionOutcome::QuitNoSave);
-  };
-  run_session(config, &ruleset)
-}
 
-pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
-  if session_save_exists_interactive(ruleset)? {
+  if session_save_exists_interactive(&ruleset)? {
     loop {
       match read_resume_choice()? {
-        ReadLineOutcome::Quit => return Ok(None),
+        ReadLineOutcome::Quit => return Ok(SessionOutcome::QuitNoSave),
         ReadLineOutcome::Payload(input) => match parse_resume_choice(&input) {
-          Ok(true) => return Ok(Some(resume_run_config(ruleset)?)),
+          Ok(true) => {
+            let config = resume_run_config(&ruleset)?;
+            return run_session(config, &ruleset);
+          }
           Ok(false) => {
             delete_session_save().map_err(|error| {
               CliError::SessionSaveFailed(super::persistence::describe_persistence_error(&error))
@@ -73,6 +71,28 @@ pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError>
     }
   }
 
+  let Some(campaign) = select_campaign()? else {
+    return Ok(SessionOutcome::QuitNoSave);
+  };
+
+  match campaign {
+    CampaignId::StabilizationV1 => {
+      let Some(config) = read_stabilization_run_config(&ruleset)? else {
+        return Ok(SessionOutcome::QuitNoSave);
+      };
+      run_session(config, &ruleset)
+    }
+    CampaignId::CompetitiveRegionalV1 => {
+      let Some(config) = read_competitive_run_config()? else {
+        return Ok(SessionOutcome::QuitNoSave);
+      };
+      Ok(run_competitive_stub(&ruleset, config))
+    }
+  }
+}
+
+pub fn read_stabilization_run_config(_ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
+  // ruleset not yet consumed; will gate UI when scenario loader lands.
   print_pre_run_briefing(&genesis_state());
   maybe_show_new_player_cues();
 
@@ -163,6 +183,11 @@ fn maybe_show_new_player_cues() {
     print_block(&new_player_cue_lines());
     let _ = mark_first_run_complete();
   }
+}
+
+pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
+  // Stabilization-only setup; campaign routing lives in `run()`.
+  read_stabilization_run_config(ruleset)
 }
 
 pub fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<SessionOutcome, CliError> {

@@ -922,12 +922,44 @@ reconstructing it from the diff.
   - Domain QA pass in `_workspace/03_domain_qa.md`
   - `cargo fmt --check`, `cargo test` pass with golden hash unchanged
 
+- Feature: Competitive campaign runtime I1+I2
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/campaign-router-executive-report
+
+  Summary:
+  Add CLI campaign router (`stabilization-v1` vs `competitive-regional-v1` preview)
+  and monthly executive report renderer using observation-only mock fixtures.
+  Stabilization demo behavior unchanged.
+
+  Done:
+  - `CampaignId`, `Difficulty`, `PolicyCalendar`, `PlayerObservation` in
+    `src/model/campaign.rs`
+  - CLI campaign and difficulty selectors in `src/cli/campaign.rs` and `src/cli/io.rs`
+  - Executive report renderer in `src/cli/display/executive_report.rs`
+  - Mock fixtures in `src/competitive/fixtures.rs`
+  - `SessionOutcome::CompetitivePreview` for stub exit
+  - Focused unit tests for campaign parsing, calendar, report sections, stub flow
+  - Package version bumped to `0.1.29`
+
+  Not Yet Done:
+  - Full competitive play (I3–I8): AP economy, multi-system state, simultaneous
+    resolver, AI players, events, Stata CLI
+
+  Deferred / Non-Goals:
+  - No `transition_competitive()` or changes to stabilization `transition()`
+  - No scenario file loader
+  - No Medicare/Medicaid actors
+  - Session autosave remains stabilization-only
+
+  Verification:
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (130 tests)
+  - Empty campaign input defaults to stabilization
+  - Competitive path shows six-section month-1 executive report then stub message
+
 ## Future
 
-- **Competitive campaign runtime I1** — campaign router (`stabilization-v1` vs
-  `competitive-regional-v1` stub entry).
-- **Competitive campaign runtime I2** — monthly calendar and executive report
-  sections with consultant recommendations.
 - **Competitive campaign runtime I3** — action-point economy, cash feasibility,
   political capital validation.
 - **Competitive campaign runtime I4** — multi-system player state (K+1 entities,

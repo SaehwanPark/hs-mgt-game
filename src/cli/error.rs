@@ -11,6 +11,12 @@ pub fn describe_cli_error(error: &CliError) -> String {
     CliError::InvalidResumeChoice(choice) => {
       format!("resume choice '{choice}' is not available; use r or n")
     }
+    CliError::InvalidCampaignChoice(choice) => {
+      format!("campaign '{choice}' is not available; use Enter, 1, or 2")
+    }
+    CliError::InvalidDifficultyChoice(choice) => {
+      format!("difficulty '{choice}' is not available; use Enter, 1, 2, 3, or 4")
+    }
     CliError::InvalidCommandInput(message) => message.clone(),
     CliError::InvalidStrategyPlan(error) => {
       format!("selected strategy is internally invalid: {error:?}")

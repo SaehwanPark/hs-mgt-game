@@ -6,6 +6,31 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.29] - 2026-06-24
+
+### Added
+
+- CLI campaign router: `stabilization-v1` (default) vs `competitive-regional-v1`
+  preview (`src/cli/campaign.rs`, `src/cli/io.rs`).
+- Competitive campaign types: `CampaignId`, `Difficulty`, `PolicyCalendar`,
+  `PlayerObservation` (`src/model/campaign.rs`).
+- Monthly executive report renderer with six sections per
+  `docs/executive-report-format.md` (`src/cli/display/executive_report.rs`).
+- Observation-only mock fixtures for competitive month-1 preview (`src/competitive/`).
+- `SessionOutcome::CompetitivePreview` for competitive stub exit.
+
+### Changed
+
+- `run()` flow: campaign selection after autosave resume; stabilization path unchanged.
+- `ARCHITECTURE.md`, `docs/core-loop-spec.md`, `docs/phase5-scope-register.md`,
+  `SPEC.md`, `README.md`, `_workspace/final/handoff.md`.
+- Bumped package version from `0.1.28` to `0.1.29`.
+
+### Notes
+
+- Competitive path shows month-1 executive report only; full play deferred to I3–I8.
+- Golden seed-42 stabilization hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.28] - 2026-06-24
 
 ### Added
