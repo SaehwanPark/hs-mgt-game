@@ -7,6 +7,28 @@ pub struct SystemMonthlyBatch {
   pub rationale: Option<String>,
 }
 
+impl SystemMonthlyBatch {
+  pub fn new(system_id: u32, commands: Vec<CompetitiveCommand>) -> Self {
+    Self {
+      system_id,
+      commands,
+      rationale: None,
+    }
+  }
+
+  pub fn with_rationale(
+    system_id: u32,
+    commands: Vec<CompetitiveCommand>,
+    rationale: impl Into<String>,
+  ) -> Self {
+    Self {
+      system_id,
+      commands,
+      rationale: Some(rationale.into()),
+    }
+  }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct AggregatedMonthlyActions {
   pub month_index: u32,
