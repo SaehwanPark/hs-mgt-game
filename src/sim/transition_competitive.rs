@@ -1,7 +1,7 @@
 use crate::model::{
   AggregatedMonthlyActions, CompetitiveCommand, CompetitiveRuleset, CompetitiveValidationError,
-  CompetitiveWorldState, Event, InvestDomain, PendingEffect, PledgeType, PublicActionEntry,
-  SystemMonthlyBatch, hash_competitive_state,
+  CompetitiveWorldState, Event, InvestDomain, PendingEffect, PendingEffectKind, PledgeType,
+  PublicActionEntry, SystemMonthlyBatch, hash_competitive_state,
 };
 
 use super::effects::push_effect;
@@ -145,6 +145,7 @@ fn apply_command(
           system_id,
           month_index,
           month_index + delay,
+          PendingEffectKind::Recruit { headcount },
           format!("{summary} (resolves month {})", month_index + delay),
         );
       }
@@ -176,6 +177,7 @@ fn apply_command(
             system_id,
             month_index,
             month_index + 1,
+            PendingEffectKind::OutpatientAccess { access_delta: 3 },
             format!("{summary} (outpatient expansion)"),
           );
         }
@@ -185,6 +187,7 @@ fn apply_command(
             system_id,
             month_index,
             month_index + 2,
+            PendingEffectKind::TechnologyQuality { quality_delta: 2 },
             format!("{summary} (technology rollout)"),
           );
         }
@@ -252,6 +255,7 @@ fn apply_command(
         system_id,
         month_index,
         month_index + resolve_months,
+        PendingEffectKind::TechnologyQuality { quality_delta: 5 },
         format!(
           "{summary} (completes month {})",
           month_index + resolve_months
@@ -294,6 +298,7 @@ fn enqueue_effect(
   system_id: u32,
   enqueue_month: u32,
   resolve_month: u32,
+  kind: PendingEffectKind,
   summary: String,
 ) {
   let id = world.effect_queue.len() as u32 + 1;
@@ -302,6 +307,7 @@ fn enqueue_effect(
     system_id,
     enqueue_month,
     resolve_month,
+    kind,
     summary,
   });
 }

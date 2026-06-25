@@ -19,5 +19,14 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
       .count(),
     1
   );
-  assert_eq!(transition.state_hash, "e68f683da77d7c2f");
+  assert!(
+    transition
+      .aggregated
+      .batches
+      .iter()
+      .filter(|batch| batch.rationale.is_some())
+      .count()
+      == 2
+  );
+  assert_eq!(transition.state_hash, "88d07f9e1bbd6f04");
 }

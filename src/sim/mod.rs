@@ -1,4 +1,5 @@
 mod effects;
+mod effects_competitive;
 mod observe;
 mod observe_ai;
 mod observe_competitive;
@@ -8,6 +9,9 @@ mod transition_competitive;
 mod validate;
 mod validate_competitive;
 
+pub use effects_competitive::{
+  apply_due_pending_effects, apply_institution_phase, apply_month_start_tick,
+};
 pub use observe::observe_for_player;
 pub use observe_ai::{
   AiPlayerObservation, LaggedRivalAction, ai_profile_for_system, observe_for_ai,

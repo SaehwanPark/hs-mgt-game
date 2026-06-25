@@ -6,6 +6,30 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.34] - 2026-06-25
+
+### Added
+
+- `CompetitiveResolvedInputs` and `resolve_competitive_inputs` with `monthly_events`
+  and `annual_policy` streams (`src/inputs/resolve_competitive.rs`).
+- `PendingEffectKind` on competitive effect queue; `apply_due_pending_effects` and
+  `apply_month_start_tick` (`src/sim/effects_competitive.rs`).
+- Simplified payer/state institution phase after player resolution.
+- `resolve_competitive_month` and `build_multi_month_resolution_history` in
+  `src/competitive/month_loop.rs` (2–3 month demo loop).
+- Competitive CLI preview for months 2–3 with environment and institution events.
+
+### Changed
+
+- Month-1 resolution applies environment tick before player decisions.
+- Golden test `tests/golden_competitive_seed42.rs` hash `88d07f9e1bbd6f04`.
+- Package version bumped to `0.1.34`.
+
+### Notes
+
+- Stata CLI deferred to I8.
+- Stabilization golden seed-42 hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.33] - 2026-06-25
 
 ### Added

@@ -108,12 +108,20 @@ pub struct PublicActionEntry {
   pub summary: String,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum PendingEffectKind {
+  Recruit { headcount: u32 },
+  OutpatientAccess { access_delta: i32 },
+  TechnologyQuality { quality_delta: i32 },
+}
+
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PendingEffect {
   pub id: u32,
   pub system_id: u32,
   pub enqueue_month: u32,
   pub resolve_month: u32,
+  pub kind: PendingEffectKind,
   pub summary: String,
 }
 

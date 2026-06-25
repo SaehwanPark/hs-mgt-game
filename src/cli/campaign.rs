@@ -10,9 +10,9 @@ use super::io::{
   read_difficulty_choice, read_seed_choice, read_validation_demo_choice,
 };
 use crate::competitive::{
-  genesis_competitive_world_with_ruleset, genesis_roster_lines, observation_from_genesis,
-  resolution_summary_lines, resolve_preset_month1, validation_demo_by_id,
-  validation_demo_menu_lines, validation_resources_for_demo,
+  build_multi_month_resolution_history, genesis_competitive_world_with_ruleset,
+  genesis_roster_lines, observation_from_genesis, resolution_summary_lines, resolve_preset_month1,
+  validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
 };
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
@@ -155,8 +155,8 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
-  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I5)"));
-  print_line("Resolving preset simultaneous player batches (human + AI rivals)...");
+  print_line(&style::subsection("MONTH 1 RESOLUTION DEMO (slice I7)"));
+  print_line("Resolving simultaneous player batches (human preset + AI rivals)...");
   print_line("");
 
   match resolve_preset_month1(&world, &ruleset, config.seed) {
@@ -181,6 +181,40 @@ fn run_competitive_preview_internal(
         ruleset.political_capital_cap,
       );
       print_block(&month2_report);
+
+      print_line("");
+      print_line(&style::subsection("MONTHS 2–3 PREVIEW (slice I7)"));
+      match build_multi_month_resolution_history(config.difficulty, config.seed, 3) {
+        Ok(history) => {
+          for (index, transition) in history.transitions.iter().skip(1).enumerate() {
+            print_line(&format!(
+              "  Month {} hash {}",
+              transition.prior.policy_calendar.month_index, transition.state_hash
+            ));
+            for event in transition
+              .events
+              .iter()
+              .filter(|event| event.actor == "environment" || event.actor == "payer")
+              .take(2)
+            {
+              print_line(&format!("    • [{}] {}", event.actor, event.description));
+            }
+            if index == 1 {
+              print_line(&format!(
+                "  Final state after month 3: turn {}",
+                transition.next.turn
+              ));
+            }
+          }
+        }
+        Err(error) => {
+          print_line(&style::warning(&format!(
+            "{} Multi-month preview failed: {}",
+            style::EMOJI_WARNING,
+            error.message()
+          )));
+        }
+      }
     }
     Err(error) => {
       print_line(&style::warning(&format!(
@@ -193,8 +227,8 @@ fn run_competitive_preview_internal(
 
   print_line("");
   print_line(&style::dim(
-    "Competitive campaign preview (slices I1–I5). AI players, events/delays, Stata CLI, and \
-     the full 24-month campaign ship in slices I6–I8.",
+    "Competitive campaign preview (slices I1–I7). Stata CLI and the full 24-month \
+     campaign ship in slice I8.",
   ));
   print_line(&style::dim(
     "Select stabilization-v1 (campaign 1) for the playable five-turn demo.",
