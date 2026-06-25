@@ -155,10 +155,10 @@ v0.1.28 is design-only).
 
 Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
 
-1. **Competitive campaign runtime I5** — simultaneous monthly action resolver
-   (`SimultaneousActionResolver` per ADR-0003).
-2. **Competitive campaign runtime I6** — bounded game-theory AI players with
+1. **Competitive campaign runtime I6** — bounded game-theory AI players with
    rationales.
+2. **Competitive campaign runtime I7** — random events, delayed effect queue,
+   annual policy tick (`SimultaneousActionResolver` landed in I5).
 3. **External playtest protocol refresh** — Phase 7 prep.
 4. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
 5. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.

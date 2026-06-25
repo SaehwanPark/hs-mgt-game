@@ -6,6 +6,33 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.32] - 2026-06-24
+
+### Added
+
+- `SystemMonthlyBatch`, `AggregatedMonthlyActions`, `CompetitiveTransition`, and
+  `CompetitiveHistory` types (`src/model/competitive_batch.rs`,
+  `src/model/competitive_history.rs`).
+- `SimultaneousActionResolver` in `src/sim/resolve.rs` per ADR-0003.
+- `transition_competitive()` with MVP command dispatch, public action log, and
+  pending effect enqueue (`src/sim/transition_competitive.rs`).
+- `observe_for_human()` with 1-month lag rival intel and monitor depth support
+  (`src/sim/observe_competitive.rs`).
+- Competitive state hash (`src/model/competitive_hash.rs`).
+- Month-1 preset resolution helpers (`src/competitive/resolution.rs`).
+- Competitive CLI path: month-1 resolution demo and month-2 executive report preview.
+- Golden test `tests/golden_competitive_seed42.rs` (hash `05a422b51a2c24e8`).
+
+### Changed
+
+- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `docs/phase5-scope-register.md`,
+  `_workspace/final/handoff.md`.
+
+### Notes
+
+- AI players, events/delays, and Stata CLI deferred to I6–I8.
+- Stabilization golden seed-42 hash unchanged (`6fb1ebbea564274f`).
+
 ## [0.1.31] - 2026-06-24
 
 ### Added

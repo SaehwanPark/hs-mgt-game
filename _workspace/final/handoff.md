@@ -1,49 +1,53 @@
-# Handoff — Competitive Campaign Runtime I4 (v0.1.31)
+# Handoff — Competitive Campaign Runtime I5 (v0.1.32)
 
 ## Summary
 
-Implemented competitive multi-system player state per ADR-0004: typed
-`CompetitiveWorldState`, difficulty-scoped genesis fixtures for Riverside plus
-K named AI rivals, genesis-derived human observation metrics, and a roster
-display in the competitive campaign preview. Stabilization demo unchanged.
-
-Also reconciled `SPEC.md` with `docs/spec-past-archive.md` (slice on
-`refactor/spec-cleanup`).
+Implemented simultaneous monthly action resolution per ADR-0003: batch aggregation
+in `sim/resolve.rs`, `transition_competitive()` with public action log and pending
+effect enqueue, `observe_for_human()` with 1-month lag rival intel and monitor
+depth support, CLI month-1 resolution demo with month-2 executive report preview,
+and competitive golden test. Stabilization demo unchanged.
 
 ## Changed files
 
 ### New
 
-- `docs/spec-past-archive.md`
-- `src/model/competitive_world.rs`
-- `src/competitive/genesis.rs`, `src/competitive/genesis_tests.rs`
+- `src/model/competitive_batch.rs`, `src/model/competitive_history.rs`, `src/model/competitive_hash.rs`
+- `src/sim/resolve.rs`, `src/sim/transition_competitive.rs`, `src/sim/observe_competitive.rs`
+- `src/competitive/resolution.rs`
+- `tests/golden_competitive_seed42.rs`
 
 ### Updated
 
-- `SPEC.md`, `docs/phase5-scope-register.md`
-- `src/model/mod.rs`, `src/competitive/mod.rs`, `src/competitive/fixtures.rs`
-- `src/cli/campaign.rs`
-- `CHANGELOG.md`, `ARCHITECTURE.md`, `README.md`, `Cargo.toml`
+- `src/model/mod.rs`, `src/model/resources.rs`
+- `src/sim/mod.rs`, `src/cli/campaign.rs`, `src/competitive/mod.rs`
+- `SPEC.md`, `CHANGELOG.md`, `ARCHITECTURE.md`, `README.md`, `Cargo.toml`
+- `docs/phase5-scope-register.md`, `docs/core-loop-spec.md`
 
 ## Verification
 
 - `cargo fmt --check`
-- `cargo test` (153 lib + 1 golden; golden hash `6fb1ebbea564274f` unchanged)
+- `cargo test` (171 lib + 2 golden; stabilization hash `6fb1ebbea564274f` unchanged)
+- Competitive month-1 golden hash `05a422b51a2c24e8` at Normal difficulty
 
 ## Known limits
 
-- Genesis only; no `transition_competitive()` or monthly loop
-- Market/policy narrative bullets in executive report remain partly fixture text
-- Autosave resume applies to stabilization interactive runs only
+- Preset batches only; no AI decision logic (I6)
+- Effect queue enqueues but does not apply delayed resolutions (I7)
+- No interactive monthly command entry (I8)
+- Competitive replay artifact format not yet versioned
 
 ## Recommended next slice
 
-**I5:** `feat/competitive-simultaneous-resolver` — simultaneous monthly action
-resolver and partial rival observability per ADR-0003.
+**I6:** `feat/competitive-ai-players` — bounded game-theory AI players with
+inspectable rationales.
 
-**Then I6:** bounded game-theory AI players with rationales.
+**Then I7:** random events, delayed effect queue application, annual policy tick.
+
+**Then I8:** Stata-like CLI (can parallelize after I6 batch generation stabilizes).
 
 ## Phase dependencies
 
-- I5 resolver before I6 AI players and I7 events/delays
-- I8 Stata CLI can parallelize after I5 command batch shapes stabilize
+- I6 AI players require I5 batch shapes and resolver (complete)
+- I7 events/delays require I5 effect queue and transition_competitive (complete)
+- I8 Stata CLI requires stable command batch API from I5 (complete)
