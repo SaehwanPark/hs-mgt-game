@@ -37,10 +37,11 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
     }
     PromptContext::Seed => {
       lines.push(
-        "  The seed fixes stochastic inputs (measurement noise, labor shocks, etc.).".to_string(),
+        "  The seed fixes stochastic inputs and ties together reproducible classroom runs."
+          .to_string(),
       );
       lines.push(
-        "  The same seed and commands always produce the same run for classroom replay."
+        "  The same seed and choices always produce the same outcome for a given campaign."
           .to_string(),
       );
     }

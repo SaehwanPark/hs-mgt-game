@@ -2,13 +2,6 @@ use crate::model::{PlayerObservation, PolicyCalendar};
 
 use super::style;
 
-pub const SECTION_HEADER: &str = "header";
-pub const SECTION_MARKET: &str = "market";
-pub const SECTION_POLICY: &str = "policy";
-pub const SECTION_OWN_STATUS: &str = "own_status";
-pub const SECTION_CONSULTANT: &str = "consultant";
-pub const SECTION_INTEL_GAPS: &str = "intel_gaps";
-
 pub fn render_executive_report(
   calendar: PolicyCalendar,
   observation: &PlayerObservation,
@@ -44,12 +37,14 @@ pub fn render_executive_report(
   lines.push(String::new());
 
   lines.push(style::subsection("POLICY AND REGULATORY"));
-  if let Some(review) = &observation.annual_policy_review {
-    lines.push("  Year in review".to_string());
-    for bullet in review {
-      lines.push(format!("  • {bullet}"));
+  if calendar.is_annual_tick() {
+    if let Some(review) = &observation.annual_policy_review {
+      lines.push("  Year in review".to_string());
+      for bullet in review {
+        lines.push(format!("  • {bullet}"));
+      }
+      lines.push(String::new());
     }
-    lines.push(String::new());
   }
   for bullet in &observation.policy_bullets {
     lines.push(format!("  • {bullet}"));
@@ -99,30 +94,4 @@ pub fn render_executive_report(
   lines.push("══════════════════════════════════════════════════════════════".to_string());
 
   lines
-}
-
-pub fn section_ids_in_report(report: &[String]) -> Vec<&'static str> {
-  let mut sections = Vec::new();
-  let joined = report.join("\n");
-
-  if joined.contains("EXECUTIVE REPORT") {
-    sections.push(SECTION_HEADER);
-  }
-  if joined.contains("MARKET SITUATION") {
-    sections.push(SECTION_MARKET);
-  }
-  if joined.contains("POLICY AND REGULATORY") {
-    sections.push(SECTION_POLICY);
-  }
-  if joined.contains("OWN HEALTH SYSTEM STATUS") {
-    sections.push(SECTION_OWN_STATUS);
-  }
-  if joined.contains("STRATEGY CONSULTANT NOTES") {
-    sections.push(SECTION_CONSULTANT);
-  }
-  if joined.contains("INTELLIGENCE GAPS") {
-    sections.push(SECTION_INTEL_GAPS);
-  }
-
-  sections
 }

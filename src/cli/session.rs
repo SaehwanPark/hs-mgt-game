@@ -91,11 +91,8 @@ pub fn run() -> Result<SessionOutcome, CliError> {
   }
 }
 
-pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
-  read_stabilization_run_config(ruleset)
-}
-
 pub fn read_stabilization_run_config(_ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
+  // ruleset not yet consumed; will gate UI when scenario loader lands.
   print_pre_run_briefing(&genesis_state());
   maybe_show_new_player_cues();
 
@@ -186,6 +183,11 @@ fn maybe_show_new_player_cues() {
     print_block(&new_player_cue_lines());
     let _ = mark_first_run_complete();
   }
+}
+
+pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
+  // Stabilization-only setup; campaign routing lives in `run()`.
+  read_stabilization_run_config(ruleset)
 }
 
 pub fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<SessionOutcome, CliError> {

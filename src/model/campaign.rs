@@ -4,8 +4,6 @@ pub enum CampaignId {
   CompetitiveRegionalV1,
 }
 
-pub type CampaignKind = CampaignId;
-
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Difficulty {
   Easy,
@@ -90,6 +88,7 @@ impl Difficulty {
   }
 
   pub fn cpu_ap_per_month(self) -> u32 {
+    // Consumed by competitive AI turn resolver (slice I6).
     match self {
       Difficulty::Easy => 2,
       Difficulty::Normal | Difficulty::Hard => 3,
@@ -109,6 +108,7 @@ impl Difficulty {
 
 impl PolicyCalendar {
   pub fn new_month(month_index: u32) -> Self {
+    debug_assert!(month_index >= 1, "month_index must be >= 1");
     let month_in_year = ((month_index - 1) % 12) + 1;
     let year = ((month_index - 1) / 12) + 1;
     Self {

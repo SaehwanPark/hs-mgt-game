@@ -30,8 +30,7 @@ pub use parse::{
   parse_stabilize_access_command, parse_workforce_command,
 };
 pub use session::{
-  InteractiveRunResult, read_run_config, read_stabilization_run_config, run,
-  run_interactive_history, run_session,
+  InteractiveRunResult, read_stabilization_run_config, run, run_interactive_history, run_session,
 };
 pub use strategy::{
   build_history_for_strategy, build_history_interactive, default_interactive_commands,

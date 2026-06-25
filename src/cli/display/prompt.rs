@@ -20,7 +20,7 @@ pub fn global_commands_footer(context: PromptContext) -> Vec<String> {
       "Global: r → resume · n → start over · ?/help · q/quit/exit".to_string()
     }
     PromptContext::Campaign => {
-      "Global: Enter/1 → stabilization · 2/c → competitive preview · ?/help · q/quit/exit"
+      "Global: Enter/1 → stabilization · 2/c/C → competitive preview · ?/help · q/quit/exit"
         .to_string()
     }
     PromptContext::Difficulty => {

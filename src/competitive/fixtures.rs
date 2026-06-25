@@ -63,7 +63,7 @@ pub fn mock_observation_month1(difficulty: Difficulty) -> PlayerObservation {
     vec!["Northlake private payer negotiations (not publicly disclosed)".to_string()];
   if k >= 2 {
     intel_gaps.push("Summit capital budget allocation beyond marketing (unobserved)".to_string());
-    intel_gaps.push("Consider: monitor northlake depth=2 (cost: 1 AP)".to_string());
+    intel_gaps.push("Northlake intelligence depth 2 is available (1 AP)".to_string());
   }
 
   PlayerObservation {
