@@ -1,35 +1,28 @@
-# Handoff — Competitive Campaign Runtime I7 (v0.1.34)
+# Handoff — Competitive Campaign Runtime I8 (v0.1.35)
 
 ## Summary
 
-Implemented competitive environment tick, delayed effect application, institution
-NPC phase, and multi-month resolution loop. Month start applies `monthly_events`
-and `annual_policy` streams plus due `PendingEffect` entries before player
-decisions. CLI previews months 2–3 after month-1 resolution.
+Implemented Stata-like competitive command parser and interactive human monthly
+batch entry in the competitive campaign preview. Non-TTY contexts (tests, CI)
+use the preset human batch without blocking on stdin.
 
 ## Changed files
 
 ### New
 
-- `src/model/competitive_resolved.rs`
-- `src/inputs/resolve_competitive.rs`
-- `src/sim/effects_competitive.rs`
-- `src/competitive/month_loop.rs`
+- `src/cli/competitive_parse.rs`
 
 ### Updated
 
-- `src/model/competitive_world.rs` (`PendingEffectKind`)
-- `src/sim/transition_competitive.rs`, `src/sim/mod.rs`
-- `src/competitive/resolution.rs`, `src/competitive/mod.rs`
-- `src/cli/campaign.rs`, `tests/golden_competitive_seed42.rs`
+- `src/cli/campaign.rs`, `src/cli/mod.rs`
 - `Cargo.toml`, `CHANGELOG.md`
 
 ## Verification
 
-- `cargo fmt --check`, `cargo test` (185 tests)
-- Competitive golden hash `88d07f9e1bbd6f04` at seed 42
-- Stabilization hash unchanged
+- `cargo fmt --check`, `cargo test` (192 tests)
+- Competitive golden hash unchanged (`88d07f9e1bbd6f04`)
 
-## Recommended next slice
+## Known limits
 
-**I8:** `feat/competitive-stata-cli` — Stata-like parser and interactive human monthly entry.
+- Single-line batch entry (semicolon-separated); no multi-line submit loop yet
+- Full 24-month interactive campaign and competitive autosave remain deferred

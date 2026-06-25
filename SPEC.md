@@ -44,6 +44,8 @@ reconstructing it from the diff.
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 | Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
 | Competitive runtime I6 | v0.1.33 | AI batch planner, style-weighted rival actions, inspectable rationale traces | 183 | `e68f683da77d7c2f` (competitive) |
+| Competitive runtime I7 | v0.1.34 | Events, delayed effects, institution phase, multi-month loop | 189 | `88d07f9e1bbd6f04` (competitive) |
+| Competitive runtime I8 | v0.1.35 | Stata-like CLI parser, interactive human batch entry | 189 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -240,67 +242,50 @@ reconstructing it from the diff.
   - `SystemMonthlyBatch.rationale` persisted for AI action traceability
   - Competitive month-1 resolver switched from fixed rival presets to AI-generated batches
   - Seed plumbed through month-1 competitive resolution helpers for deterministic tie-breaks
-  - New tests in `tests/competitive_ai_players.rs`; competitive golden updated
+  - New tests in `tests/competitive_ai_players.rs`; competitive golden updated in I7
   - Package version bumped to `0.1.33`
 
   Deferred / Non-Goals:
-  - No events/delays/annual policy tick (I7)
-  - No Stata-like monthly command parser/entry loop (I8)
-  - No full 24-month competitive campaign loop
+  - Events/delays/annual tick (I7) and Stata CLI (I8) — completed in follow-on slices
+  - Full 24-month campaign loop, competitive replay artifact, competitive autosave
+  - No stabilization golden hash changes
 
   Verification:
-  - `cargo fmt --check`, `cargo test` pass (183 tests)
-  - Competitive seed-42 golden hash `e68f683da77d7c2f`
+  - `cargo fmt --check`, `cargo test` pass (189 tests)
+  - Competitive seed-42 golden hash `88d07f9e1bbd6f04` (updated in I7)
   - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+
+- Feature: Competitive campaign runtime I7
+  Status: Complete
+  Branch: feat/competitive-events-delays
+  Version: 0.1.34
+
+  Done:
+  - `resolve_competitive_inputs` with `monthly_events` and `annual_policy` streams
+  - `PendingEffectKind` and `apply_due_pending_effects` at month start
+  - Institution phase (payer/state) and `build_multi_month_resolution_history`
+  - CLI months 2–3 preview; golden hash `88d07f9e1bbd6f04`
+
+- Feature: Competitive campaign runtime I8
+  Status: Complete
+  Branch: feat/competitive-stata-cli
+  Version: 0.1.35
+
+  Done:
+  - `src/cli/competitive_parse.rs` for MVP `verb arg=value` syntax
+  - TTY interactive human batch entry wired to `resolve_competitive_month`
+  - Non-TTY preset fallback for CI/tests
+
+  Deferred / Non-Goals:
+  - Full 24-month interactive loop, competitive autosave, syntax highlighting/autocomplete
 
 ## Present
 
-No active slice. Next: **Competitive campaign runtime I7** (see Future).
+No active slice. Competitive runtime I1–I8 complete for MVP preview track.
 
 ## Future
 
-Planned slices are ordered by dependency. Each item separates what exists today
-from what the slice would add.
-
-### Competitive campaign runtime I7 — events, delays, annual tick
-
-**Branch:** `feat/competitive-events-delays`  
-**Depends on:** I5 `transition_competitive()` and `effect_queue` enqueue (complete)
-
-**Done (already):**
-- `PendingEffect` type and enqueue on `project` / delayed `recruit`
-- `PolicyCalendar` with `advance()` and `is_annual_tick()`
-- ADR-0001 stochastic boundary pattern in stabilization `inputs/resolve.rs`
-
-**Not Yet Done:**
-- Competitive streams: `monthly_events`, `annual_policy`, `ai_player_{id}` in `inputs/resolve.rs`
-- Apply due `PendingEffect` entries at month start before player decisions
-- Simplified NPC institution phase (payer + state only per mechanism design)
-- Multi-month CLI or library loop (at least 2–3 months beyond current 1-month demo)
-- Competitive replay artifact version bump for multi-system history
-
-**Deferred within I7:**
-- Full labor/coalition NPC expansion; Medicare/Medicaid actors
-
-### Competitive campaign runtime I8 — Stata-like CLI
-
-**Branch:** `feat/competitive-stata-cli`  
-**Depends on:** I5 command batch API stable; best after I6 generates rival batches
-
-**Done (already):**
-- `docs/cli-command-grammar-draft.md`, ADR-0006
-- Typed `CompetitiveCommand` enum and validation in `src/sim/validate_competitive.rs`
-
-**Not Yet Done:**
-- Parse `verb arg=value` surface syntax into `CompetitiveCommand` batches
-- Interactive monthly entry loop (submit / hold) for human player
-- Color-coded help, parameter legends, and autocomplete for MVP verbs
-- Wire parsed batches into `resolve_monthly_batches` instead of presets
-
-**Deferred within I8:**
-- Mid-run competitive autosave; classroom async commit-reveal
-
-### Parallel / gated tracks (after I6–I8 or when unblocked)
+### Parallel / gated tracks
 
 - **External playtest protocol refresh** (Phase 7 prep): structured external
   session protocol; no runtime required.
