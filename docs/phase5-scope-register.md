@@ -1,7 +1,7 @@
 # Phase 5 Scope and Risk Register
 
 **Status:** Phase 5 closure artifact (refreshed)  
-**Version:** v0.1.23  
+**Version:** v0.1.28  
 **Date:** 2026-06-24  
 **Audience:** Contributors, domain reviewers, and playtest designers
 
@@ -106,7 +106,8 @@ Partially achieved:
 | Item | Rationale |
 | --- | --- |
 | Scenario or ruleset file loader | Format design draft planned; runtime loader after approval |
-| Mid-run save/load | Replay artifact export covers post-run reproducibility for now |
+| Mid-run save/load (stabilization) | Achieved: ADR-0002, `session-save-0.1.27` |
+| Competitive mid-run save | Deferred to competitive track slice I1+ |
 | Empirical calibration | Prototype integers remain design abstractions per [`evidence-registry.md`](evidence-registry.md) |
 | Graphical interface | CLI-first scope per project proposal |
 | Clippy CI or release automation | Phase 0 CI covers fmt and test only |
@@ -129,11 +130,14 @@ Partially achieved:
 | Players can explain why major outcomes occurred | Met | Debrief uses rationales, attributed effects, and decision-vs-outcome prompt |
 | Recognizably a strategy game, not a static model demo | Met | Multiple defensible preset paths, interactive parameter choices, strategic actor responses |
 
-Phase 5 is **closed for the first-scenario bounded slice**. Remaining roadmap
-§5.1 world elements (Medicare, Medicaid, cohorts) and Phase 6 expansion are
-deferred with explicit design gates.
+Phase 5 is **closed for the stabilization bounded slice**. The **competitive
+regional market campaign** design track opens at v0.1.28; see
+[`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md) and roadmap
+§6.0. Remaining roadmap §5.1 world elements (Medicare, Medicaid, cohorts) and
+Phase 6 runtime expansion are deferred with explicit design gates.
 
-Golden final state hash at seed 42: `6fb1ebbea564274f` (86 tests at v0.1.25).
+Golden final state hash at seed 42: `6fb1ebbea564274f` (114 tests at v0.1.27;
+v0.1.28 is design-only).
 
 ## Risk register
 
@@ -149,11 +153,12 @@ Golden final state hash at seed 42: `6fb1ebbea564274f` (86 tests at v0.1.25).
 
 ## Recommended next slices
 
-Per [`SPEC.md`](../SPEC.md) Future backlog and README contributor priorities:
+Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
 
-1. **External playtest protocol refresh** — Phase 7 prep after v0.1.25 hardening.
-2. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
-3. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
+1. **Competitive campaign runtime I1+I2** — campaign router and monthly executive report.
+2. **External playtest protocol refresh** — Phase 7 prep.
+3. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
+4. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
 
 ## Related documents
 

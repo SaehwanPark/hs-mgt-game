@@ -24,6 +24,11 @@ Core terms for the Health Policy Strategy Game, aligned with
 | Term | Definition |
 | --- | --- |
 | Player command | CEO action validated against the ruleset before transition. |
+| Action points (AP) | Monthly management-attention budget limiting competitive campaign commands. |
+| Political capital | Advocacy and negotiation resource consumed by some competitive verbs. |
+| Simultaneous resolution | Aggregating all player monthly batches before transition (ADR-0003). |
+| AI player | Computer-controlled health-system peer using the same command catalog as the human. |
+| NPC actor | Institution (insurer, state, labor, coalition) that responds to market state; not a peer player. |
 | Actor decision | Non-player strategic outcome with inspectable rationale text. |
 | Attributed effect | Labeled delta linking a source, metric, and value change. |
 | Actor card | Design artifact defining authority, objectives, and decision procedure before runtime implementation. |
@@ -42,11 +47,14 @@ Core terms for the Health Policy Strategy Game, aligned with
 | --- | --- |
 | Vertical slice | Bounded end-to-end demo proving architecture and gameplay thesis. |
 | Ruleset | Versioned validation bounds and transition parameters for a demo or scenario. |
-| Scenario | Future packaged initial conditions, actor set, and learning objectives (not yet a loader). |
+| Scenario | Packaged initial conditions, actor set, and learning objectives; format draft only. |
+| Campaign | Playable run configuration (`stabilization-v1` or `competitive-regional-v1`). |
 | Abstraction | Prototype mechanism labeled as design simplification, not calibrated fact. |
 
 ## Related Documents
 
 - [`system-boundary.md`](system-boundary.md)
 - [`actor-cards.md`](actor-cards.md)
+- [`competitive-scenario-brief.md`](competitive-scenario-brief.md)
+- [`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md)
 - [`versioning-policy.md`](versioning-policy.md)

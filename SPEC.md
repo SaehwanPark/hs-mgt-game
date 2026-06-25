@@ -859,8 +859,6 @@ reconstructing it from the diff.
   - `cargo fmt --check`, `cargo test` pass (86 tests)
   - Interactive mode shows uncertainty preview before turn 1 briefing
 
-## Present
-
 - Feature: CLI session UX (quit, autosave, guidance, beginner mode)
   Status: Complete
   Started: 2026-06-24
@@ -887,8 +885,61 @@ reconstructing it from the diff.
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (114 tests)
 
+- Feature: Competitive gameplay design package
+  Status: Complete
+  Started: 2026-06-24
+  Branch: feat/competitive-gameplay-design
+
+  Summary:
+  Fully develop the competitive gameplay sketch into durable design artifacts and
+  sync SDD/canonical docs for a parallel regional-market campaign (1 human + K AI
+  health systems) without changing stabilization demo runtime behavior.
+
+  Done:
+  - `_workspace/00_input/request-summary.md` framed scope and non-goals
+  - `_workspace/01_evidence_map.md` updated for competitive precedents
+  - `_workspace/02_mechanism_design.md` rewritten for competitive campaign
+  - `docs/gameplay-competitive-sketch.md` with acceptance criteria per sketch bullet
+  - `docs/core-loop-spec.md` (Phase 3 deliverable) for both campaigns
+  - `docs/competitive-scenario-brief.md`, `docs/executive-report-format.md`,
+    `docs/action-catalog-draft.md`, `docs/cli-command-grammar-draft.md`
+  - ADRs 0003–0006 accepted in `docs/decision-records/`
+  - Canonical docs updated: proposal, roadmap §6.0, system-boundary, scenario
+    format, actor-cards, glossary, LESSONS, phase registers, evidence-registry
+  - `ARCHITECTURE.md` competitive modules documented (Needs Review until runtime)
+  - Domain QA pass; three code-reviewer passes on doc diff
+  - Package version bumped to `0.1.28`
+
+  Deferred / Non-Goals:
+  - Runtime implementation slices I1–I8 (tracked in Future)
+  - Refactoring stabilization demo into competitive mode
+  - Medicare/Medicaid actors in competitive v1
+  - Classroom hot-seat multiplayer (Phase 9)
+  - Empirical calibration and global equilibrium AI
+
+  Verification:
+  - All new design docs exist and cross-link consistently
+  - Domain QA pass in `_workspace/03_domain_qa.md`
+  - `cargo fmt --check`, `cargo test` pass with golden hash unchanged
+
 ## Future
 
+- **Competitive campaign runtime I1** — campaign router (`stabilization-v1` vs
+  `competitive-regional-v1` stub entry).
+- **Competitive campaign runtime I2** — monthly calendar and executive report
+  sections with consultant recommendations.
+- **Competitive campaign runtime I3** — action-point economy, cash feasibility,
+  political capital validation.
+- **Competitive campaign runtime I4** — multi-system player state (K+1 entities,
+  difficulty profiles).
+- **Competitive campaign runtime I5** — simultaneous monthly action resolver
+  and partial rival observability.
+- **Competitive campaign runtime I6** — bounded game-theory AI players with
+  rationales.
+- **Competitive campaign runtime I7** — random events, delayed effect queue,
+  annual policy tick.
+- **Competitive campaign runtime I8** — Stata-like CLI (grammar, color, autocomplete,
+  help).
 - **External playtest protocol refresh** (Phase 7 prep): structured external
   session protocol.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded from

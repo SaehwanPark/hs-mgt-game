@@ -146,12 +146,30 @@ Responsible for:
 - educational debrief hooks
 - explicit scenario non-goals and evidence gaps
 
-Current design artifacts: `docs/actor-cards.md` and
-`docs/first-scenario-brief.md`. These documents are not runtime schemas and do
-not add scenario loading, command parsing, or persistence.
+Current design artifacts: `docs/actor-cards.md`,
+`docs/first-scenario-brief.md`, `docs/competitive-scenario-brief.md`,
+`docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. These
+documents are not runtime schemas and do not add scenario loading for the
+competitive campaign until approved slices land.
 
 Last Reviewed: 2026-06-24
 Status: Verified
+
+## Competitive Campaign (design only)
+
+Planned modules for `competitive-regional-v1` (not yet implemented):
+
+| Module | Responsibility | Status |
+| --- | --- | --- |
+| `CampaignRouter` | Select stabilization vs competitive entry in CLI | Needs Review |
+| `MultiSystemState` | K+1 health systems in shared market (`model/players.rs`) | Needs Review |
+| `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Needs Review |
+| `EffectScheduler` | Delayed/project effect queue and annual tick | Needs Review |
+| `PolicyCalendar` | Month index, year boundary, annual policy stream | Needs Review |
+| `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006) | Needs Review |
+
+Last Reviewed: 2026-06-24
+Status: Needs Review
 
 ## Open Architectural Decisions
 
@@ -170,4 +188,7 @@ Status: Verified
   `docs/scenario-format-draft.md`; no runtime loader yet.
 - Decision-record convention: **addressed** by
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
+- Competitive campaign boundaries: **addressed** by ADRs
+  [0003](docs/decision-records/0003-simultaneous-monthly-player-actions.md)–[0006](docs/decision-records/0006-stata-like-cli-layer.md);
+  runtime modules deferred to slices I1–I8.
 - Data and licensing policy.

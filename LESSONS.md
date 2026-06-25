@@ -214,3 +214,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep artifact formats explicit and versioned; add stronger
   integrity guarantees or mid-run persistence only when analysis or classroom
   workflows require them.
+
+## Competitive Track Justifies Scoped Command Parser
+
+- Context: Designing the competitive regional market campaign with Stata-like CLI.
+- Symptom: Earlier lessons deferred general command parsers for the stabilization
+  vertical slice, which uses numeric prompts and turn-locked commands.
+- Cause: The competitive sketch requires verb+argument entry, help, and
+  autocomplete at a scale numeric prompts cannot support.
+- Resolution: ADR-0006 limits the parser to the competitive campaign I/O layer
+  only; stabilization demo unchanged; parse output is typed commands feeding the
+  existing validation and transition boundary.
+- Prevention: Do not generalize the REPL to stabilization until a concrete need
+  appears; keep parser logic out of `transition()` per ADR-0001.

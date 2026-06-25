@@ -16,7 +16,11 @@ parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
 v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
 at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
 preview at v0.1.25, and rich-terminal CLI display at v0.1.26, and CLI session UX
-(quit, autosave, guidance, beginner mode) at v0.1.27.
+(quit, autosave, guidance, beginner mode) at v0.1.27, and competitive gameplay
+design package (parallel campaign spec, core loop, ADRs 0003–0006) at v0.1.28.
+See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
+[`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
+[`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
 
 The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
 
