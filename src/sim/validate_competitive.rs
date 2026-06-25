@@ -57,9 +57,9 @@ pub fn validate_competitive_command(
       }
       let monthly_draw = project_monthly_draw(*budget, kind.resolve_months());
       if monthly_draw <= 0 {
-        return Err(CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
-          monthly_draw,
-          available: 0,
+        return Err(CompetitiveValidationError::ProjectBudgetBelowDuration {
+          budget: *budget,
+          resolve_months: kind.resolve_months(),
         });
       }
       Ok(())

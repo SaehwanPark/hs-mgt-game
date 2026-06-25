@@ -93,6 +93,7 @@ pub enum CompetitiveValidationError {
   MonitorDepthOutOfRange { depth: u32, min: u32, max: u32 },
   CommitLevelOutOfRange { level: u32, min: u32, max: u32 },
   ProjectBudgetNonPositive,
+  ProjectBudgetBelowDuration { budget: i32, resolve_months: u32 },
   ProjectMonthlyDrawInfeasible { monthly_draw: i32, available: i32 },
 }
 
@@ -138,6 +139,14 @@ impl CompetitiveValidationError {
       }
       CompetitiveValidationError::ProjectBudgetNonPositive => {
         "project budget must be positive".to_string()
+      }
+      CompetitiveValidationError::ProjectBudgetBelowDuration {
+        budget,
+        resolve_months,
+      } => {
+        format!(
+          "project budget {budget} is too small for a non-zero monthly draw over {resolve_months} months"
+        )
       }
       CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
         monthly_draw,

@@ -252,9 +252,9 @@ fn project_budget_smaller_than_duration_fails() {
   .expect_err("budget below resolve months should fail");
   assert!(matches!(
     error,
-    CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
-      monthly_draw: 0,
-      available: 0,
+    CompetitiveValidationError::ProjectBudgetBelowDuration {
+      budget: 5,
+      resolve_months: 12,
     }
   ));
 }

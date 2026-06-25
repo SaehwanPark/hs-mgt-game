@@ -71,26 +71,19 @@ pub fn read_competitive_run_config() -> Result<Option<CompetitiveRunConfig>, Cli
 }
 
 pub fn run_competitive_stub(_ruleset: &Ruleset, config: CompetitiveRunConfig) -> SessionOutcome {
-  run_competitive_preview(config, read_validation_demo_input())
-}
-
-fn read_validation_demo_input() -> Option<String> {
-  match read_validation_demo_choice() {
-    Ok(ReadLineOutcome::Quit) => None,
-    Ok(ReadLineOutcome::Payload(input)) => Some(input),
-    Err(error) => {
-      print_line(&style::warning(&format!(
-        "{} Could not read validation demo choice: {error:?}",
-        style::EMOJI_WARNING
-      )));
-      Some(String::new())
-    }
-  }
+  run_competitive_preview_internal(config, None)
 }
 
 pub fn run_competitive_preview(
   config: CompetitiveRunConfig,
   demo_input: Option<String>,
+) -> SessionOutcome {
+  run_competitive_preview_internal(config, Some(demo_input))
+}
+
+fn run_competitive_preview_internal(
+  config: CompetitiveRunConfig,
+  demo_input: Option<Option<String>>,
 ) -> SessionOutcome {
   let ruleset = default_competitive_ruleset();
   let resources = PlayerResources::genesis(config.difficulty, &ruleset);
@@ -139,6 +132,11 @@ pub fn run_competitive_preview(
   print_line("  Enter — skip validation demo");
   print_line("");
 
+  let demo_input = match demo_input {
+    Some(input) => input,
+    None => read_validation_demo_input(),
+  };
+
   match demo_input {
     None => return SessionOutcome::QuitNoSave,
     Some(input) if input.is_empty() => {
@@ -157,6 +155,20 @@ pub fn run_competitive_preview(
   ));
 
   SessionOutcome::CompetitivePreview
+}
+
+fn read_validation_demo_input() -> Option<String> {
+  match read_validation_demo_choice() {
+    Ok(ReadLineOutcome::Quit) => None,
+    Ok(ReadLineOutcome::Payload(input)) => Some(input),
+    Err(error) => {
+      print_line(&style::warning(&format!(
+        "{} Could not read validation demo choice: {error:?}",
+        style::EMOJI_WARNING
+      )));
+      Some(String::new())
+    }
+  }
 }
 
 fn run_validation_demo(
