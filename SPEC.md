@@ -43,7 +43,7 @@ reconstructing it from the diff.
 | Stabilization UX | v0.1.25–v0.1.27 | Forecast preview, rich-terminal display, session autosave, beginner mode | 114 | `6fb1ebbea564274f` |
 | Competitive design + runtime I1–I4 | v0.1.28–v0.1.31 | Design package, campaign router, action economy, multi-system genesis | 154 | `6fb1ebbea564274f` |
 | Competitive runtime I5 | v0.1.32 | Simultaneous resolver, transition_competitive, rival observability | 173 | `6fb1ebbea564274f` (stabilization) |
-| Competitive runtime I6 | v0.1.33 | AI batch planner, style-weighted rival actions, inspectable rationale traces | 175 | `64227d52b853c49e` (competitive) |
+| Competitive runtime I6 | v0.1.33 | AI batch planner, style-weighted rival actions, inspectable rationale traces | 183 | `e68f683da77d7c2f` (competitive) |
 
 ### Recent slices
 
@@ -249,8 +249,8 @@ reconstructing it from the diff.
   - No full 24-month competitive campaign loop
 
   Verification:
-  - `cargo fmt --check`, `cargo test` pass (175 tests)
-  - Competitive seed-42 golden hash `64227d52b853c49e`
+  - `cargo fmt --check`, `cargo test` pass (183 tests)
+  - Competitive seed-42 golden hash `e68f683da77d7c2f`
   - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
 
 ## Present

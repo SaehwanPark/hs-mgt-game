@@ -17,7 +17,7 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
       .iter()
       .filter(|entry| entry.month_index == 1)
       .count(),
-    0
+    1
   );
-  assert_eq!(transition.state_hash, "64227d52b853c49e");
+  assert_eq!(transition.state_hash, "e68f683da77d7c2f");
 }

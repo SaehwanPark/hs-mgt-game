@@ -25,7 +25,7 @@ The project follows lightweight semantic versioning during early development.
   fixed presets (human batch remains explicit).
 - `resolve_preset_month1` and `build_month1_resolution_history` now take a run
   seed to keep AI tie-break behavior reproducible in tests and CLI.
-- Golden competitive seed-42 hash updated to `64227d52b853c49e`.
+- Golden competitive seed-42 hash updated to `e68f683da77d7c2f`.
 - Bumped package version from `0.1.32` to `0.1.33`.
 
 ### Notes

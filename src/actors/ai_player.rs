@@ -208,7 +208,7 @@ fn default_monitor_target(system_id: u32) -> MonitorTarget {
   match system_id {
     1 => MonitorTarget::Summit,
     2 => MonitorTarget::Northlake,
-    3 => MonitorTarget::Valley,
+    3 => MonitorTarget::Northlake,
     _ => MonitorTarget::Northlake,
   }
 }
