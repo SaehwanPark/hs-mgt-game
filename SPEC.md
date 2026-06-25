@@ -994,7 +994,7 @@ reconstructing it from the diff.
 
   Verification:
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (143 tests)
+  - `cargo fmt --check`, `cargo test` pass (148 tests)
   - Competitive demos 1–5 exercise pass/fail validation paths
 
 ## Future
