@@ -1,3 +1,4 @@
+use super::competitive_parse::competitive_command_help_lines;
 use super::display::{PromptContext, print_block, style};
 
 pub fn print_context_help(context: PromptContext) {
@@ -71,12 +72,42 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       lines
         .push("  Enter one or more competitive commands using verb arg=value syntax.".to_string());
       lines.push("  Separate multiple commands with semicolons on one line.".to_string());
+      lines.push("  Available commands:".to_string());
+      for command_line in competitive_command_help_lines() {
+        lines.push(format!(
+          "    {}",
+          format_competitive_help_line(&command_line)
+        ));
+      }
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
   }
 
   lines.push(style::dim("  Type your choice again after reading help."));
   lines
+}
+
+fn format_competitive_help_line(line: &str) -> String {
+  if line.starts_with("Separate ") {
+    return style::dim(line);
+  }
+
+  if line.contains(char::is_whitespace) {
+    let mut parts = line.splitn(2, char::is_whitespace);
+    let verb = parts.next().unwrap_or_default();
+    let rest = parts.next().unwrap_or("").trim();
+    if rest.is_empty() {
+      style::command_token(verb)
+    } else {
+      format!(
+        "{} {}",
+        style::command_token(verb),
+        style::argument_token(rest)
+      )
+    }
+  } else {
+    style::command_token(line)
+  }
 }
 
 fn turn_help_lines(turn: u32) -> Vec<String> {
@@ -173,5 +204,13 @@ mod tests {
         assert!(guidance_has_no_outcome_spoilers(hint));
       }
     }
+  }
+
+  #[test]
+  fn competitive_help_lists_available_commands() {
+    let text = context_help_lines(PromptContext::CompetitiveCommand).join("\n");
+    assert!(text.contains("Available commands"));
+    assert!(text.contains("invest"));
+    assert!(text.contains("recruit"));
   }
 }

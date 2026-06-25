@@ -3,6 +3,54 @@ use crate::model::{
   RatePosture, RecruitRole,
 };
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct CompetitiveCommandSpec {
+  pub verb: &'static str,
+  pub usage: &'static str,
+}
+
+const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
+  CompetitiveCommandSpec {
+    verb: "hold",
+    usage: "hold",
+  },
+  CompetitiveCommandSpec {
+    verb: "invest",
+    usage: "invest domain=beds|outpatient|technology amount=<int>",
+  },
+  CompetitiveCommandSpec {
+    verb: "recruit",
+    usage: "recruit role=nurse|physician|admin headcount=<int>",
+  },
+  CompetitiveCommandSpec {
+    verb: "monitor",
+    usage: "monitor target=northlake|summit|valley|metro depth=<1-3>",
+  },
+  CompetitiveCommandSpec {
+    verb: "negotiate",
+    usage: "negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative",
+  },
+  CompetitiveCommandSpec {
+    verb: "commit",
+    usage: "commit pledge_type=access|quality level=<1-5>",
+  },
+  CompetitiveCommandSpec {
+    verb: "project",
+    usage: "project kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>",
+  },
+];
+
+pub fn competitive_command_specs() -> &'static [CompetitiveCommandSpec] {
+  &COMPETITIVE_COMMAND_SPECS
+}
+
+pub fn competitive_command_verbs() -> Vec<&'static str> {
+  competitive_command_specs()
+    .iter()
+    .map(|spec| spec.verb)
+    .collect()
+}
+
 pub fn parse_competitive_batch(input: &str) -> Result<Vec<CompetitiveCommand>, CliError> {
   let trimmed = input.trim();
   if trimmed.is_empty() {
@@ -98,16 +146,12 @@ pub fn parse_competitive_command(input: &str) -> Result<CompetitiveCommand, CliE
 }
 
 pub fn competitive_command_help_lines() -> Vec<String> {
-  vec![
-    "hold".to_string(),
-    "invest domain=beds|outpatient|technology amount=<int>".to_string(),
-    "recruit role=nurse|physician|admin headcount=<int>".to_string(),
-    "monitor target=northlake|summit|valley|metro depth=<1-3>".to_string(),
-    "negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative".to_string(),
-    "commit pledge_type=access|quality level=<1-5>".to_string(),
-    "project kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>".to_string(),
-    "Separate multiple commands with ';' on one line.".to_string(),
-  ]
+  let mut lines = competitive_command_specs()
+    .iter()
+    .map(|spec| spec.usage.to_string())
+    .collect::<Vec<_>>();
+  lines.push("Separate multiple commands with ';' on one line.".to_string());
+  lines
 }
 
 fn required_arg<'a>(
@@ -234,5 +278,24 @@ mod competitive_parse_tests {
   #[test]
   fn unknown_verb_is_error() {
     assert!(parse_competitive_command("invst domain=beds amount=1").is_err());
+  }
+
+  #[test]
+  fn command_specs_match_help_lines_order() {
+    let expected = competitive_command_specs()
+      .iter()
+      .map(|spec| spec.usage.to_string())
+      .collect::<Vec<_>>();
+    let mut actual = competitive_command_help_lines();
+    let _ = actual.pop();
+    assert_eq!(actual, expected);
+  }
+
+  #[test]
+  fn command_verbs_are_unique() {
+    let mut verbs = competitive_command_verbs();
+    verbs.sort_unstable();
+    verbs.dedup();
+    assert_eq!(verbs.len(), competitive_command_specs().len());
   }
 }

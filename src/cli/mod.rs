@@ -10,6 +10,7 @@ mod io;
 mod output;
 mod parse;
 mod persistence;
+mod repl;
 mod session;
 mod strategy;
 

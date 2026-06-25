@@ -47,6 +47,7 @@ reconstructing it from the diff.
 | Competitive runtime I7 | v0.1.34 | Events, delayed effects, institution phase, multi-month loop | 189 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive runtime I8 | v0.1.35 | Stata-like CLI parser, interactive human batch entry | 189 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive bounded loop | v0.1.36 | Three-month interactive competitive loop over evolving world state | 193 | `88d07f9e1bbd6f04` (competitive) |
+| Competitive prompt ergonomics | v0.1.37 | Competitive help command list, colored command/arg tokens, verb-only Tab autocomplete | 201 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -295,12 +296,28 @@ reconstructing it from the diff.
 
   Deferred / Non-Goals:
   - Full 24-month campaign loop, competitive autosave, replay artifact export
-  - Syntax highlighting/autocomplete and scenario file loading
+  - Scenario file loading
+
+- Feature: Competitive command prompt ergonomics
+  Status: Complete
+  Branch: feat/competitive-prompt-ergonomics
+  Version: 0.1.37
+
+  Done:
+  - Shared competitive command catalog metadata for parser help and REPL completion
+  - Competitive help context now lists available commands for `help`/`?`
+  - Colored command vs argument token rendering for competitive command reference lines
+  - Verb-only Tab autocomplete in competitive TTY command entry (fallback to plain input when unavailable)
+  - Focused parser, style, guidance, and REPL completion tests
+
+  Deferred / Non-Goals:
+  - Argument-key and enum-value autocomplete
+  - Full 24-month campaign loop, competitive autosave, replay artifact export, scenario loading
 
 ## Present
 
-No active slice. Competitive runtime I1–I8 and the bounded three-month loop are
-complete for the MVP preview track.
+No active slice. Competitive runtime I1–I8, bounded three-month loop, and
+competitive command-prompt ergonomics are complete for the MVP preview track.
 
 ## Future
 
