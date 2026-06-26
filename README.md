@@ -28,7 +28,8 @@ and Stata-like competitive command entry at v0.1.35,
 and bounded three-month competitive loop at v0.1.36,
 and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37,
 and new-player "How to Play" manual at v0.1.38,
-and external playtest protocol refresh at v0.1.39.
+and external playtest protocol refresh at v0.1.39,
+and minimal stabilization scenario TOML loading at v0.1.40.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -109,7 +110,8 @@ cargo test
 Current priorities are:
 
 1. Run and synthesize external playtests using the Phase 7 prep protocol.
-2. Scenario data loading runtime after format draft review.
+2. Extend scenario data loading only after the minimal stabilization TOML slice
+   has playtest or authoring evidence.
 3. Competitive campaign hardening after bounded-loop playtests.
 4. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
 

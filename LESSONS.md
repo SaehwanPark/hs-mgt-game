@@ -239,3 +239,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   traits on the completer helper struct.
 - Prevention: When introducing a new `rustyline` helper, scaffold all required
   helper trait impls first, then add completer logic.
+
+## Scenario Loading Should Start As A Data Boundary
+
+- Context: Adding the first runtime scenario loader after the scenario format
+  draft was approved for a narrow slice.
+- Symptom: It is tempting to make scenario files own presets, transition logic,
+  arbitrary paths, competitive campaigns, or migration policy immediately.
+- Cause: The first proven need is to externalize the existing stabilization
+  genesis and schedule, not to create a general authoring platform.
+- Resolution: Added `scenario-toml-0.1.40` with one bundled
+  `stabilization-v1` TOML fixture and validation before fresh runs; transitions,
+  replay artifacts, and session saves stayed unchanged.
+- Prevention: Extend scenario loading only when playtest or authoring evidence
+  identifies a concrete repeated need; keep executable logic out of scenario
+  files.

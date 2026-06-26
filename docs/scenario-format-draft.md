@@ -1,13 +1,14 @@
 # Scenario Format Draft
 
-**Status:** Phase 6.2 design draft (not approved for runtime)  
+**Status:** Phase 6.2 design draft; minimal stabilization runtime accepted in ADR-0007  
 **Audience:** Contributors designing scenario loading and campaign content  
 **Version:** draft-0.1.28
 
 This document proposes a typed, versioned scenario description for regional
-market campaigns. It is a **design artifact only**. No runtime loader, parser,
-or schema validation ships until this draft is reviewed and an ADR approves a
-format version.
+market campaigns. ADR-0007 accepts a narrow `scenario-toml-0.1.40` runtime
+format for the bundled `stabilization-v1` scenario only. Competitive scenario
+loading, arbitrary scenario paths, and broader authoring workflows remain
+design-only until a later ADR.
 
 ## Campaign kinds
 
@@ -102,14 +103,20 @@ source of truth for what actually happened in a session.
 3. Should preset strategy paths be scenario data or CLI convenience presets?
 4. How do instructors override seed and evaluation profile per session?
 
-## Approval Gate Before Runtime Loader
+## Runtime Loader Gate
 
-Before implementing `feat/scenario-loader`:
+For the first runtime slice:
 
-- [ ] Domain QA on scenario scope and learning objectives
-- [ ] ADR accepting format version and file extension
-- [ ] Schema validation tests with one fixture matching current five-turn demo
-- [ ] CHANGELOG and versioning-policy cross-links updated
+- [x] Domain QA through existing first-scenario scope and learning objectives
+- [x] ADR accepting format version and file extension: ADR-0007
+- [x] Schema validation tests with one fixture matching current five-turn demo
+- [x] CHANGELOG and versioning-policy cross-links updated
+
+Still deferred:
+
+- Competitive scenario loading.
+- CLI selection of arbitrary scenario paths.
+- Scenario migration tooling or schema generation.
 
 ## Related Documents
 

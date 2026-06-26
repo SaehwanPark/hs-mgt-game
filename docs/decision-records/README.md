@@ -25,6 +25,7 @@ consequential technical and design choices in the Health Policy Strategy Game.
 - [ADR-0004: Multi-system player state](0004-multi-system-player-state.md)
 - [ADR-0005: Action economy and monthly budget](0005-action-economy-and-monthly-budget.md)
 - [ADR-0006: Stata-like CLI layer](0006-stata-like-cli-layer.md)
+- [ADR-0007: Minimal stabilization scenario TOML](0007-minimal-stabilization-scenario-toml.md)
 
 ## Status Values
 

@@ -50,6 +50,7 @@ reconstructing it from the diff.
 | Competitive prompt ergonomics | v0.1.37 | Competitive help command list, colored command/arg tokens, verb-only Tab autocomplete | 201 | `88d07f9e1bbd6f04` (competitive) |
 | New-player manual | v0.1.38 | How-to-play manual for stabilization and competitive-preview flows | 201 | `88d07f9e1bbd6f04` (competitive) |
 | External playtest protocol | v0.1.39 | Phase 7 prep protocol for stabilization and competitive-preview sessions | 201 | `88d07f9e1bbd6f04` (competitive) |
+| Minimal stabilization scenario loader | v0.1.40 | TOML scenario format, bundled stabilization fixture, validation boundary | 208 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -356,11 +357,43 @@ reconstructing it from the diff.
   - No scenario loader, 24-month competitive campaign, or new strategic actors
   - No formal human-subjects research process or policy-forecasting claim
 
+- Feature: Minimal stabilization scenario loader
+  Status: Complete
+  Branch: feat/minimal-scenario-loader
+  Version: 0.1.40
+
+  Summary:
+  Add a narrow TOML runtime scenario boundary for the existing five-turn
+  `stabilization-v1` flow.
+
+  Done:
+  - ADR-0007 accepts `scenario-toml-0.1.40` for stabilization only
+  - `scenarios/stabilization-v1.toml` records current genesis state, learning
+    objectives, actor stubs, and fixed five-turn schedule
+  - `src/scenario/` parses and validates the bundled scenario before fresh
+    stabilization runs
+  - Package version bumped to `0.1.40`
+
+  Deferred / Non-Goals:
+  - No competitive scenario loading
+  - No arbitrary scenario path CLI option
+  - No scenario migration tooling or schema generation
+  - No transition, replay artifact, or session-save format changes
+
+  Verification:
+  - Scenario tests cover valid fixture, malformed TOML, ruleset mismatch,
+    unsupported campaign, unsupported turn unit, missing actor stub, and current
+    turn schedule
+  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+  - Competitive seed-42 golden hash unchanged at `88d07f9e1bbd6f04`
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Present
 
 No active slice. Competitive runtime I1–I8, bounded three-month loop,
-competitive command-prompt ergonomics, and external playtest protocol refresh
-are complete for the MVP preview and Phase 7 prep tracks.
+competitive command-prompt ergonomics, external playtest protocol refresh, and
+the minimal stabilization scenario loader are complete for the MVP preview,
+Phase 7 prep, and Phase 6.2 scenario-loading tracks.
 
 ## Future
 
@@ -371,5 +404,6 @@ are complete for the MVP preview and Phase 7 prep tracks.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded until
   brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;
-  see [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md).
+  minimal stabilization TOML loading is complete; competitive scenario loading,
+  arbitrary scenario path selection, and migration tooling remain deferred.
 - **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.

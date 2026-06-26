@@ -26,6 +26,16 @@ Record all user-visible changes in [`CHANGELOG.md`](../CHANGELOG.md).
   in ways that affect replay compatibility.
 - Replay artifacts record the ruleset version at export time.
 
+## Scenario Format Version
+
+- Format prefix: `scenario-toml-<package-version>` at time of introduction
+  (current: `scenario-toml-0.1.40`).
+- Scenario files record `scenario_id`, `scenario_version`, and `ruleset_id`.
+- New runtime scenario format versions require an ADR and focused validation
+  tests.
+- The first runtime format supports only the bundled `stabilization-v1`
+  scenario; competitive scenario loading is deferred.
+
 ## Replay Artifact Version
 
 - Format prefix: `replay-artifact-<package-version>` at time of introduction
