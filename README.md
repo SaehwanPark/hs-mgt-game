@@ -26,8 +26,9 @@ and competitive AI player batch generation at v0.1.33,
 and competitive events/delays at v0.1.34,
 and Stata-like competitive command entry at v0.1.35,
 and bounded three-month competitive loop at v0.1.36,
-and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37.
-and new-player "How to Play" manual at v0.1.38.
+and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37,
+and new-player "How to Play" manual at v0.1.38,
+and external playtest protocol refresh at v0.1.39.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -64,6 +65,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
+- [External Playtest Protocol](docs/external-playtest-protocol.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 
@@ -106,7 +108,7 @@ cargo test
 
 Current priorities are:
 
-1. External playtest protocol refresh (Phase 7 prep).
+1. Run and synthesize external playtests using the Phase 7 prep protocol.
 2. Scenario data loading runtime after format draft review.
 3. Competitive campaign hardening after bounded-loop playtests.
 4. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
