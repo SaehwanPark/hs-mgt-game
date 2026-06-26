@@ -48,6 +48,8 @@ reconstructing it from the diff.
 | Competitive runtime I8 | v0.1.35 | Stata-like CLI parser, interactive human batch entry | 189 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive bounded loop | v0.1.36 | Three-month interactive competitive loop over evolving world state | 193 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive prompt ergonomics | v0.1.37 | Competitive help command list, colored command/arg tokens, verb-only Tab autocomplete | 201 | `88d07f9e1bbd6f04` (competitive) |
+| New-player manual | v0.1.38 | How-to-play manual for stabilization and competitive-preview flows | 201 | `88d07f9e1bbd6f04` (competitive) |
+| External playtest protocol | v0.1.39 | Phase 7 prep protocol for stabilization and competitive-preview sessions | 201 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -314,17 +316,58 @@ reconstructing it from the diff.
   - Argument-key and enum-value autocomplete
   - Full 24-month campaign loop, competitive autosave, replay artifact export, scenario loading
 
+- Feature: New-player How to Play manual
+  Status: Complete
+  Version: 0.1.38
+
+  Summary:
+  Add a player-facing manual for current stabilization and competitive-preview
+  flows.
+
+  Done:
+  - `docs/how-to-play.md` with quickstart, campaign flow, terminology, command
+    examples, worked interaction example, and difficulty recovery tips
+  - README documentation index updated
+  - Package version bumped to `0.1.38`
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No full 24-month competitive campaign
+  - No scenario loading
+
+- Feature: External playtest protocol refresh
+  Status: Complete
+  Branch: feat/external-playtest-protocol
+  Version: 0.1.39
+
+  Summary:
+  Add a Phase 7 prep protocol for informal external playtests of the current
+  stabilization and competitive-preview CLI flows.
+
+  Done:
+  - `docs/external-playtest-protocol.md` with setup, stabilization and
+    competitive session scripts, observation rubric, post-session prompts,
+    note template, privacy cautions, and synthesis guidance
+  - README documentation index and current-priority wording updated
+  - Package version bumped to `0.1.39`
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No scenario loader, 24-month competitive campaign, or new strategic actors
+  - No formal human-subjects research process or policy-forecasting claim
+
 ## Present
 
-No active slice. Competitive runtime I1–I8, bounded three-month loop, and
-competitive command-prompt ergonomics are complete for the MVP preview track.
+No active slice. Competitive runtime I1–I8, bounded three-month loop,
+competitive command-prompt ergonomics, and external playtest protocol refresh
+are complete for the MVP preview and Phase 7 prep tracks.
 
 ## Future
 
 ### Parallel / gated tracks
 
-- **External playtest protocol refresh** (Phase 7 prep): structured external
-  session protocol; no runtime required.
+- **External playtest synthesis** (Phase 7 prep): run protocol sessions and
+  summarize findings in a versioned playtest findings document.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded until
   brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;

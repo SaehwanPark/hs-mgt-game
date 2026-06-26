@@ -1,49 +1,48 @@
-# Request Summary — Competitive Multi-Month Loop
+# Request Summary — External Playtest Protocol Refresh
 
 ## Scope
 
-Continue the competitive campaign runtime after v0.1.35 by replacing the
-single-month interactive preview plus preset months 2-3 preview with one bounded
-three-month competitive loop. The loop should reuse the existing deterministic
-one-month resolver, AI batch generation, event/delay tick, institution phase,
-Stata-like command parser, and executive report renderer.
+Continue development after v0.1.38 by adding a Phase 7 prep protocol for
+informal external playtests of the current CLI game. The protocol should cover
+both implemented flows: the five-turn `stabilization-v1` slice and the bounded
+three-month `competitive-regional-v1` preview.
 
 ## Non-goals
 
-- No full 24-month campaign loop
-- No competitive autosave or replay artifact export
-- No syntax highlighting or autocomplete
+- No Rust runtime behavior changes
 - No scenario file loader
+- No full 24-month competitive campaign
+- No competitive autosave or replay artifact export
 - No Medicare/Medicaid strategic actors
-- No stabilization campaign behavior changes
-- No new dependencies
+- No empirical calibration or policy-forecasting claim
+- No formal human-subjects research workflow beyond cautioning when it is needed
 
 ## Sources
 
-- User-approved plan for `feat/competitive-multi-month-loop`
+- User-approved plan for `feat/external-playtest-protocol`
 - Canonical docs: `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
   `docs/design_principles.md`
 - Harness spec: `docs/harness/health-policy-strategy-game/team-spec.md`
-- Current runtime state in `SPEC.md`, `ARCHITECTURE.md`, and `CHANGELOG.md`
-- Existing code in `src/cli/campaign.rs` and `src/competitive/month_loop.rs`
+- Current state in `SPEC.md`, `CHANGELOG.md`, `docs/how-to-play.md`,
+  `docs/first-scenario-brief.md`, and `docs/competitive-scenario-brief.md`
 
 ## Expected files
 
-- `src/cli/campaign.rs`
-- `src/competitive/month_loop.rs` if focused loop tests need adjustment
-- `Cargo.toml`, `CHANGELOG.md`, `README.md`, `SPEC.md`, `ARCHITECTURE.md`
-- `_workspace/00_input/request-summary.md`, `_workspace/final/handoff.md`
-- `LESSONS.md` only if implementation reveals a reusable trap
+- `docs/external-playtest-protocol.md`
+- `README.md`, `SPEC.md`, `CHANGELOG.md`
+- `Cargo.toml`, `Cargo.lock`
+- `_workspace/00_input/request-summary.md`
+- `_workspace/03_domain_qa.md`
+- `_workspace/final/handoff.md`
 
 ## Validation target
 
 - `cargo fmt --check`
 - `cargo test`
-- Competitive seed-42 golden remains deterministic; update only if the planned
-  loop changes the committed golden scope with a changelog note.
-- Stabilization golden hash remains unchanged.
+- Manual documentation review for scope, campaign status accuracy, educational
+  debrief framing, privacy caution, and no unsupported forecasting claims
 
 ## Roadmap phase
 
-Phase 6.0 competitive campaign runtime continuation. This is a narrow runtime
-slice after I8, not a broad MVP completion.
+Phase 7 prep. This is a documentation and validation-readiness slice, not a
+runtime expansion.

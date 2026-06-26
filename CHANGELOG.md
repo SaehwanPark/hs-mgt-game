@@ -6,6 +6,19 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.39] - 2026-06-26
+
+### Added
+
+- External playtest protocol at `docs/external-playtest-protocol.md` covering
+  stabilization and competitive-preview session scripts, observation rubric,
+  post-session prompts, privacy cautions, and synthesis guidance.
+
+### Changed
+
+- `README.md` documentation index now links the external playtest protocol.
+- Package version bumped to `0.1.39`.
+
 ## [0.1.38] - 2026-06-25
 
 ### Added

@@ -1,36 +1,34 @@
-# Handoff — Competitive Multi-Month Loop (v0.1.36)
+# Handoff — External Playtest Protocol Refresh (v0.1.39)
 
 ## Summary
 
-Implemented a bounded three-month competitive campaign loop in the CLI preview.
-The loop reuses the existing deterministic monthly resolver, AI batches,
-event/delay tick, institution phase, executive report renderer, and Stata-like
-command parser over one evolving `CompetitiveWorldState`.
+Added a Phase 7 prep protocol for informal external playtests of the current CLI
+game. The protocol gives facilitators setup steps, stabilization and competitive
+preview session scripts, an observation rubric, post-session prompts, a note
+template, privacy cautions, and synthesis guidance.
 
 ## Changed files
 
-### Updated runtime
+### Added documentation
 
-- `src/cli/campaign.rs`
-- `src/competitive/month_loop.rs`
+- `docs/external-playtest-protocol.md`
 
 ### Updated project state
 
 - `Cargo.toml`, `Cargo.lock`, `CHANGELOG.md`
-- `README.md`, `SPEC.md`, `ARCHITECTURE.md`
+- `README.md`, `SPEC.md`
 - `_workspace/00_input/request-summary.md`
+- `_workspace/03_domain_qa.md`
 - `_workspace/final/handoff.md`
 
 ## Verification
 
-- `cargo fmt`
-- `cargo test` (193 unit tests plus integration tests)
-- Competitive seed-42 golden hash unchanged (`88d07f9e1bbd6f04`)
-- Stabilization seed-42 golden hash unchanged (`6fb1ebbea564274f`)
+- `cargo fmt --check`
+- `cargo test` (201 library tests plus integration tests)
 
 ## Known limits
 
-- Competitive preview remains bounded to three months, not the full 24-month
-  campaign.
-- Competitive autosave, replay artifact export, syntax highlighting,
-  autocomplete, and scenario loading remain deferred.
+- No runtime behavior changed.
+- The protocol is for informal playtesting, not formal human-subjects research
+  or calibrated learning-outcome measurement.
+- External playtest synthesis remains future work.
