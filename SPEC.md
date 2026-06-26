@@ -51,6 +51,7 @@ reconstructing it from the diff.
 | New-player manual | v0.1.38 | How-to-play manual for stabilization and competitive-preview flows | 201 | `88d07f9e1bbd6f04` (competitive) |
 | External playtest protocol | v0.1.39 | Phase 7 prep protocol for stabilization and competitive-preview sessions | 201 | `88d07f9e1bbd6f04` (competitive) |
 | Minimal stabilization scenario loader | v0.1.40 | TOML scenario format, bundled stabilization fixture, validation boundary | 208 | `88d07f9e1bbd6f04` (competitive) |
+| MCP agent support | v0.1.41 | Local stdio MCP server for bounded autonomous play of both current campaigns | 216 | `88d07f9e1bbd6f04` (competitive) |
 
 ### Recent slices
 
@@ -388,12 +389,47 @@ reconstructing it from the diff.
   - Competitive seed-42 golden hash unchanged at `88d07f9e1bbd6f04`
   - `cargo fmt --check`, `cargo test` pass
 
+- Feature: MCP agent support
+  Status: Complete
+  Branch: feat/mcp-agent-support
+  Version: 0.1.41
+
+  Summary:
+  Add a local stdio MCP server so AI agents can play the current bounded
+  `stabilization-v1` and `competitive-regional-v1` campaign sessions through
+  structured tools.
+
+  Done:
+  - `src/bin/hs-mgt-game-mcp.rs` starts the stdio MCP server
+  - `src/mcp/` exposes in-memory sessions, actor-visible observations,
+    `submit_turn`, append-only history summaries, and end-session debriefs
+  - MCP layer reuses existing scenario validation, command parsers,
+    observations, validation, transition, and competitive month resolution
+  - ADR-0008 and `docs/mcp-agent-interface.md`
+  - Package version bumped to `0.1.41`
+
+  Deferred / Non-Goals:
+  - No Streamable HTTP transport, auth, persistence, or multi-client session
+    coordination
+  - No 24-month competitive campaign, competitive replay artifact, or scenario
+    loading expansion
+  - No transition, replay artifact, or session-save format changes
+
+  Verification:
+  - MCP session tests cover both campaigns, invalid-command non-advancement,
+    bounded completion, and same-seed hash determinism
+  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+  - Competitive seed-42 golden hash unchanged at `88d07f9e1bbd6f04`
+  - `cargo check --bin hs-mgt-game-mcp`, `cargo test`, and `cargo fmt --check`
+    pass
+
 ## Present
 
 No active slice. Competitive runtime I1–I8, bounded three-month loop,
-competitive command-prompt ergonomics, external playtest protocol refresh, and
-the minimal stabilization scenario loader are complete for the MVP preview,
-Phase 7 prep, and Phase 6.2 scenario-loading tracks.
+competitive command-prompt ergonomics, external playtest protocol refresh, the
+minimal stabilization scenario loader, and bounded MCP agent-play support are
+complete for the MVP preview, Phase 7 prep, Phase 6.2 scenario-loading, and
+agent-interface tracks.
 
 ## Future
 
@@ -406,4 +442,7 @@ Phase 7 prep, and Phase 6.2 scenario-loading tracks.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;
   minimal stabilization TOML loading is complete; competitive scenario loading,
   arbitrary scenario path selection, and migration tooling remain deferred.
+- **MCP agent interface expansion**: HTTP transport, auth, durable MCP session
+  persistence, full competitive campaign length, and replay/export integration
+  remain deferred until bounded agent play produces evidence for those needs.
 - **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.

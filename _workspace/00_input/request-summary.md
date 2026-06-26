@@ -1,48 +1,42 @@
-# Request Summary — External Playtest Protocol Refresh
+# Request Summary
 
 ## Scope
 
-Continue development after v0.1.38 by adding a Phase 7 prep protocol for
-informal external playtests of the current CLI game. The protocol should cover
-both implemented flows: the five-turn `stabilization-v1` slice and the bounded
-three-month `competitive-regional-v1` preview.
+Implement local MCP support so AI agents can autonomously play the current
+bounded `stabilization-v1` and `competitive-regional-v1` campaigns.
 
-## Non-goals
+## Phase
 
-- No Rust runtime behavior changes
-- No scenario file loader
-- No full 24-month competitive campaign
-- No competitive autosave or replay artifact export
-- No Medicare/Medicaid strategic actors
-- No empirical calibration or policy-forecasting claim
-- No formal human-subjects research workflow beyond cautioning when it is needed
+Technical prototype / interface slice over existing Phase 5-6 playable runtime.
+
+## Non-Goals
+
+- No Streamable HTTP, auth, remote deployment, or multi-client service.
+- No durable MCP session persistence.
+- No new health-policy mechanisms or actor behavior.
+- No full 24-month competitive campaign.
+- No competitive scenario loading or scenario migration tooling.
 
 ## Sources
 
-- User-approved plan for `feat/external-playtest-protocol`
-- Canonical docs: `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`
-- Harness spec: `docs/harness/health-policy-strategy-game/team-spec.md`
-- Current state in `SPEC.md`, `CHANGELOG.md`, `docs/how-to-play.md`,
-  `docs/first-scenario-brief.md`, and `docs/competitive-scenario-brief.md`
+- `README.md`
+- `docs/proposal.md`
+- `docs/roadmap.md`
+- `docs/design_principles.md`
+- `docs/harness/health-policy-strategy-game/team-spec.md`
+- MCP specification `2025-11-25`
+- Official Rust SDK `rmcp`
 
-## Expected files
+## Expected Files
 
-- `docs/external-playtest-protocol.md`
-- `README.md`, `SPEC.md`, `CHANGELOG.md`
-- `Cargo.toml`, `Cargo.lock`
-- `_workspace/00_input/request-summary.md`
-- `_workspace/03_domain_qa.md`
-- `_workspace/final/handoff.md`
+- `src/mcp/`
+- `src/bin/hs-mgt-game-mcp.rs`
+- `docs/mcp-agent-interface.md`
+- `docs/decision-records/0008-mcp-agent-interface.md`
+- `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`
 
-## Validation target
+## Validation Target
 
-- `cargo fmt --check`
-- `cargo test`
-- Manual documentation review for scope, campaign status accuracy, educational
-  debrief framing, privacy caution, and no unsupported forecasting claims
-
-## Roadmap phase
-
-Phase 7 prep. This is a documentation and validation-readiness slice, not a
-runtime expansion.
+MCP agent play must reuse existing deterministic transitions and observations.
+Invalid commands must not advance a session. Existing golden hashes must remain
+unchanged.

@@ -1,0 +1,147 @@
+use std::sync::{Arc, Mutex};
+
+use rmcp::{
+  ErrorData, ServerHandler, ServiceExt,
+  handler::server::{router::tool::ToolRouter, wrapper::Parameters},
+  model::{CallToolResult, Content, Implementation, ServerCapabilities, ServerInfo},
+  tool, tool_handler, tool_router,
+};
+
+use super::session::{
+  EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetHistoryRequest,
+  GetObservationRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest,
+  SubmitTurnRequest,
+};
+
+#[derive(Clone)]
+pub struct McpGameServer {
+  store: Arc<Mutex<GameSessionStore>>,
+  #[allow(dead_code)]
+  tool_router: ToolRouter<Self>,
+}
+
+impl Default for McpGameServer {
+  fn default() -> Self {
+    Self::new()
+  }
+}
+
+impl McpGameServer {
+  pub fn new() -> Self {
+    Self {
+      store: Arc::new(Mutex::new(GameSessionStore::default())),
+      tool_router: Self::tool_router(),
+    }
+  }
+}
+
+#[tool_router]
+impl McpGameServer {
+  #[tool(
+    name = "start_session",
+    description = "Start a bounded game session for stabilization-v1 or competitive-regional-v1."
+  )]
+  async fn start_session(
+    &self,
+    Parameters(request): Parameters<StartSessionRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.start_session(request))
+  }
+
+  #[tool(
+    name = "get_observation",
+    description = "Read the current actor-visible observation and legal command format for a session."
+  )]
+  async fn get_observation(
+    &self,
+    Parameters(request): Parameters<GetObservationRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_observation(request))
+  }
+
+  #[tool(
+    name = "submit_turn",
+    description = "Submit one player command batch and advance the current session by one turn or month."
+  )]
+  async fn submit_turn(
+    &self,
+    Parameters(request): Parameters<SubmitTurnRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.submit_turn(request))
+  }
+
+  #[tool(
+    name = "get_history",
+    description = "Return append-only transition summaries and state hashes for a session."
+  )]
+  async fn get_history(
+    &self,
+    Parameters(request): Parameters<GetHistoryRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_history(request))
+  }
+
+  #[tool(
+    name = "end_session",
+    description = "End a session and return its final debrief summary."
+  )]
+  async fn end_session(
+    &self,
+    Parameters(request): Parameters<EndSessionRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.end_session(request))
+  }
+}
+
+impl McpGameServer {
+  fn with_store<T>(
+    &self,
+    run: impl FnOnce(&mut GameSessionStore) -> Result<T, McpErrorMessage>,
+  ) -> CallToolResult
+  where
+    T: serde::Serialize,
+  {
+    match self.store.lock() {
+      Ok(mut store) => match run(&mut store) {
+        Ok(value) => CallToolResult::structured(serde_json::to_value(value).expect("MCP result")),
+        Err(error) => {
+          CallToolResult::structured_error(serde_json::to_value(error).expect("MCP error result"))
+        }
+      },
+      Err(_) => CallToolResult::error(vec![Content::text("MCP session store lock failed")]),
+    }
+  }
+}
+
+#[tool_handler]
+impl ServerHandler for McpGameServer {
+  fn get_info(&self) -> ServerInfo {
+    ServerInfo::new(ServerCapabilities::builder().enable_tools().build())
+      .with_server_info({
+        let mut implementation =
+          Implementation::new("hs-mgt-game-mcp", env!("CARGO_PKG_VERSION"));
+        implementation.title = Some("Health Policy Strategy Game MCP".to_string());
+        implementation.description =
+          Some("Local MCP interface for autonomous play of bounded campaign sessions.".to_string());
+        implementation
+      })
+      .with_instructions(
+        "Use start_session, get_observation, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions.",
+      )
+  }
+}
+
+pub async fn run_stdio_server() -> Result<(), Box<dyn std::error::Error>> {
+  let service = McpGameServer::new().serve(rmcp::transport::stdio()).await?;
+  service.waiting().await?;
+  Ok(())
+}
+
+#[allow(dead_code)]
+fn _assert_result_shapes(
+  _: SessionEnvelope,
+  _: HistoryEnvelope,
+  _: EndSessionEnvelope,
+  _: ErrorData,
+) {
+}

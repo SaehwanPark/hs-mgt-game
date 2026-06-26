@@ -29,7 +29,8 @@ and bounded three-month competitive loop at v0.1.36,
 and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37,
 and new-player "How to Play" manual at v0.1.38,
 and external playtest protocol refresh at v0.1.39,
-and minimal stabilization scenario TOML loading at v0.1.40.
+and minimal stabilization scenario TOML loading at v0.1.40,
+and local stdio MCP agent-play support at v0.1.41.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -45,6 +46,7 @@ The initial release will focus on a fictional regional US health market and a no
 - Strategic non-player actors using game-theoretic and bounded-rationality models
 - Data-driven scenarios built from typed, inspectable mechanics
 - CLI-first interface (best in a true-color terminal; respects `NO_COLOR`)
+- Local MCP stdio interface for AI-agent play of bounded current campaigns
 - Educational use in graduate healthcare management and policy programs
 
 ## Documentation
@@ -67,6 +69,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
 - [External Playtest Protocol](docs/external-playtest-protocol.md)
+- [MCP Agent Interface](docs/mcp-agent-interface.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
 
