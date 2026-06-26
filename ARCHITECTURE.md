@@ -9,6 +9,8 @@ intended architecture boundaries that future implementation should preserve.
 - Interface: command-line first
 - Package: single Rust package, `hs-mgt-game`, with `src/lib.rs` module tree
 - Executable: thin `src/main.rs` entry calling `cli::run()`
+- MCP executable: `src/bin/hs-mgt-game-mcp.rs` serving a local stdio MCP server
+  for bounded autonomous-agent play
 - Library modules:
   - `model/` — typed world state, commands, competitive commands, competitive world,
     resources, history, session types, campaign types
@@ -20,9 +22,10 @@ intended architecture boundaries that future implementation should preserve.
   - `artifact/` — replay artifact serialize/deserialize/verify
   - `debrief/` — educational debrief generation
   - `cli/` — terminal I/O, parsers, session loop, display
+  - `mcp/` — MCP session store, tool DTOs, and stdio server adapter
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-06-25
+Last Reviewed: 2026-06-26
 Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
@@ -33,6 +36,8 @@ resolution (`sim/resolve.rs`), `transition_competitive()`, bounded AI player bat
 policy inputs, Stata-like competitive command parsing, and a bounded three-month
 competitive CLI loop with help-command catalog output, colored command prompt
 tokens, and verb-only Tab autocomplete.
+It also includes a local stdio MCP server (`hs-mgt-game-mcp`) with in-memory
+bounded sessions for `stabilization-v1` and `competitive-regional-v1`.
 
 The current implementation is a compact architecture proof, not a production
 simulation. It demonstrates a pure transition function in `sim/transition.rs`,
@@ -121,8 +126,9 @@ Status: Verified
 
 ### Interface
 
-The initial interface is a CLI. Terminal rendering, input parsing, and display
-formatting should remain outside the deterministic simulation core.
+The initial player interface is a CLI. Terminal rendering, input parsing,
+display formatting, and MCP protocol handling should remain outside the
+deterministic simulation core.
 
 Current proof: `cargo run` invokes `cli::run()` for a starting executive
 dashboard and strategy commitment previews, play-mode and seed selection,
@@ -130,7 +136,14 @@ per-turn interactive command entry or preset strategy paths, executive
 briefings, turn-resolution summaries, replay, debrief, and optional replay
 artifact export.
 
-Last Reviewed: 2026-06-24
+`cargo run --bin hs-mgt-game-mcp` invokes a local stdio MCP server that exposes
+tools for starting a bounded session, reading actor-visible observations,
+submitting one turn/month of commands, inspecting committed transition
+summaries, and ending a session. The MCP layer reuses existing parsers,
+observation helpers, validation, and transition functions; it does not read
+randomness or mutate the core directly.
+
+Last Reviewed: 2026-06-26
 Status: Verified
 
 ## Durable Constraints
@@ -213,3 +226,7 @@ Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI
   [0003](docs/decision-records/0003-simultaneous-monthly-player-actions.md)–[0006](docs/decision-records/0006-stata-like-cli-layer.md);
   I1–I8 and the bounded three-month preview loop landed.
 - Data and licensing policy.
+- MCP interface boundary: **addressed** by
+  [ADR-0008](docs/decision-records/0008-mcp-agent-interface.md). Local stdio
+  tools are accepted for bounded agent play; HTTP transport, auth, persistence,
+  and long-running multi-client sessions remain deferred.

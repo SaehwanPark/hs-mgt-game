@@ -1,0 +1,6 @@
+use hs_mgt_game::mcp::run_stdio_server;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+  run_stdio_server().await
+}

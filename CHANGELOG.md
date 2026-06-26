@@ -6,6 +6,29 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.41] - 2026-06-26
+
+### Added
+
+- Local stdio MCP server binary `hs-mgt-game-mcp` for AI-agent play of the
+  bounded `stabilization-v1` and `competitive-regional-v1` campaigns.
+- MCP tools for starting sessions, reading actor-visible observations,
+  submitting one turn/month, inspecting append-only history summaries, and
+  ending sessions with a debrief summary.
+- `docs/mcp-agent-interface.md` and ADR-0008 documenting the MCP interface
+  boundary, tool contract, and deferred transports.
+
+### Changed
+
+- Package version bumped to `0.1.41`.
+
+### Notes
+
+- MCP session state is in-memory per server process. Streamable HTTP, auth,
+  persistence, competitive replay artifacts, and 24-month competitive play
+  remain deferred.
+- Transition semantics, replay artifact format, and golden hashes are unchanged.
+
 ## [0.1.40] - 2026-06-26
 
 ### Added

@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## MCP SDK Schema Derives Need Direct Dependencies
+
+- Context: Adding the first local MCP stdio server with the official `rmcp`
+  Rust SDK.
+- Symptom: `JsonSchema` derives failed even though the SDK re-exports schema
+  helpers.
+- Cause: Derive macros resolve the `schemars` crate name directly.
+- Resolution: Add `schemars` as a direct dependency and keep MCP DTOs in
+  `src/mcp/` instead of adding serialization/schema derives to core model types.
+- Prevention: For protocol adapter DTOs, depend directly on the derive macro's
+  crate and keep schema-facing structs at the adapter boundary.
+
 ## Canonical Docs Define Scope Before Structure
 
 - Context: Initiating the spec-driven-development baseline for an early research
