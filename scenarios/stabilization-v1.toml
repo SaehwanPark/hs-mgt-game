@@ -1,0 +1,85 @@
+format_version = "scenario-toml-0.1.40"
+campaign_id = "stabilization-v1"
+scenario_id = "regional-stabilization-v1"
+scenario_version = "1.0.0"
+turn_unit = "abstract"
+ruleset_id = "demo-ruleset-0.1.9"
+title = "Regional Market Stabilization"
+default_seed = 42
+
+learning_objectives = [
+  "Balance financial capacity, access, workforce legitimacy, community trust, and policy pressure.",
+  "Reason from reported observations rather than omniscient true state.",
+  "Anticipate strategic responses from payer, regulator, workforce, coalition, and competitor actors.",
+  "Distinguish invalid operations from valid unfavorable outcomes.",
+  "Explain decision quality separately from realized outcome quality.",
+]
+
+[initial_state]
+turn = 0
+cash = 100
+staffed_beds = 120
+access_index = 70
+quality_index = 78
+workforce_trust = 62
+community_trust = 66
+commercial_rate = 100
+policy_pressure = 30
+
+[[turn_schedule]]
+turn = 1
+command_kind = "StabilizeAccess"
+briefing_context = "commercial_payer_negotiation"
+actor_stub = "commercial_insurer"
+
+[[turn_schedule]]
+turn = 2
+command_kind = "RespondToStateAccessMandate"
+briefing_context = "state_access_policy_response"
+actor_stub = "state_policy"
+
+[[turn_schedule]]
+turn = 3
+command_kind = "RespondToWorkforcePressure"
+briefing_context = "nursing_workforce_pressure"
+actor_stub = "labor_representative"
+
+[[turn_schedule]]
+turn = 4
+command_kind = "JoinRegionalAccessCoalition"
+briefing_context = "regional_access_coalition"
+actor_stub = "coalition_liaison"
+
+[[turn_schedule]]
+turn = 5
+command_kind = "RespondToCompetitorCapacityMove"
+briefing_context = "rival_capacity_response"
+actor_stub = "rival_health_system"
+
+[[actor_stubs]]
+id = "commercial_insurer"
+card_ref = "actor-cards.md#commercial-insurer"
+turn = 1
+
+[[actor_stubs]]
+id = "state_policy"
+card_ref = "actor-cards.md#state-policy-actor"
+turn = 2
+
+[[actor_stubs]]
+id = "labor_representative"
+card_ref = "actor-cards.md#labor-organization"
+turn = 3
+
+[[actor_stubs]]
+id = "coalition_liaison"
+card_ref = "actor-cards.md#regional-access-coalition"
+turn = 4
+
+[[actor_stubs]]
+id = "rival_health_system"
+card_ref = "actor-cards.md#competing-health-system"
+turn = 5
+
+[evaluation_profile]
+debrief_prompt = "Which decision remained reasonable given what you knew, and which decision would you revisit?"

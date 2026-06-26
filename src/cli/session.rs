@@ -7,6 +7,7 @@ use crate::model::{
   ReplayArtifact, ResumeState, Ruleset, RunConfig, SessionOutcome, SessionSave, default_ruleset,
   genesis_state,
 };
+use crate::scenario::{default_stabilization_scenario, validate_stabilization_scenario};
 use crate::sim::{observe_for_player, transition};
 
 use super::beginner::{format_beginner_menu, parse_beginner_choice};
@@ -20,9 +21,9 @@ use super::display::{
 use super::guidance::{new_player_cue_lines, turn_hint};
 use super::input::ReadLineOutcome;
 use super::io::{
-  parse_play_mode_choice, parse_replay_export_path, parse_resume_choice, parse_seed_choice,
-  read_beginner_choice, read_command_line, read_play_mode_choice, read_replay_export_path,
-  read_resume_choice, read_seed_choice,
+  parse_play_mode_choice, parse_replay_export_path, parse_resume_choice,
+  parse_seed_choice_with_default, read_beginner_choice, read_command_line, read_play_mode_choice,
+  read_replay_export_path, read_resume_choice, read_seed_choice,
 };
 use super::output::print_demo;
 use super::parse::{
@@ -33,12 +34,19 @@ use super::persistence::{
   delete_session_save, first_run_complete, load_session_save, mark_first_run_complete,
   write_session_save,
 };
-use super::strategy::{build_history_for_strategy, default_interactive_commands, strategy_plan};
+use super::strategy::{
+  build_history_for_strategy_from_genesis, default_interactive_commands, strategy_plan,
+};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum InteractiveRunResult {
   Completed(History),
   QuitEarly { history: History, next_turn: u32 },
+}
+
+struct StabilizationRunSetup {
+  config: RunConfig,
+  initial_state: crate::model::WorldState,
 }
 
 pub fn run() -> Result<SessionOutcome, CliError> {
@@ -77,10 +85,10 @@ pub fn run() -> Result<SessionOutcome, CliError> {
 
   match campaign {
     CampaignId::StabilizationV1 => {
-      let Some(config) = read_stabilization_run_config(&ruleset)? else {
+      let Some(setup) = read_stabilization_run_setup(&ruleset)? else {
         return Ok(SessionOutcome::QuitNoSave);
       };
-      run_session(config, &ruleset)
+      run_session_from_genesis(setup.config, &ruleset, &setup.initial_state)
     }
     CampaignId::CompetitiveRegionalV1 => {
       let Some(config) = read_competitive_run_config()? else {
@@ -91,9 +99,22 @@ pub fn run() -> Result<SessionOutcome, CliError> {
   }
 }
 
-pub fn read_stabilization_run_config(_ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
-  // ruleset not yet consumed; will gate UI when scenario loader lands.
-  print_pre_run_briefing(&genesis_state());
+pub fn read_stabilization_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
+  Ok(read_stabilization_run_setup(ruleset)?.map(|setup| setup.config))
+}
+
+fn read_stabilization_run_setup(
+  ruleset: &Ruleset,
+) -> Result<Option<StabilizationRunSetup>, CliError> {
+  let scenario = default_stabilization_scenario().map_err(|error| {
+    CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
+  })?;
+  validate_stabilization_scenario(&scenario, ruleset).map_err(|error| {
+    CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
+  })?;
+  let initial_state = scenario.initial_world_state();
+
+  print_pre_run_briefing(&initial_state);
   maybe_show_new_player_cues();
 
   let selection = loop {
@@ -115,25 +136,33 @@ pub fn read_stabilization_run_config(_ruleset: &Ruleset) -> Result<Option<RunCon
   let seed = loop {
     match read_seed_choice()? {
       ReadLineOutcome::Quit => return Ok(None),
-      ReadLineOutcome::Payload(input) => match parse_seed_choice(&input) {
-        Ok(seed) => break seed,
-        Err(CliError::InvalidSeed(seed)) => {
-          print_line(&style::warning(&format!(
-            "{} Seed '{seed}' is not a valid unsigned integer",
-            style::EMOJI_WARNING
-          )));
+      ReadLineOutcome::Payload(input) => {
+        match parse_seed_choice_with_default(&input, scenario.default_seed) {
+          Ok(seed) => break seed,
+          Err(CliError::InvalidSeed(seed)) => {
+            print_line(&style::warning(&format!(
+              "{} Seed '{seed}' is not a valid unsigned integer",
+              style::EMOJI_WARNING
+            )));
+          }
+          Err(error) => return Err(error),
         }
-        Err(error) => return Err(error),
-      },
+      }
     }
   };
 
-  Ok(Some(RunConfig {
-    seed,
-    play_mode: selection.play_mode,
-    experience_mode: selection.experience_mode,
-    resume: None,
-  }))
+  Ok(
+    Some(RunConfig {
+      seed,
+      play_mode: selection.play_mode,
+      experience_mode: selection.experience_mode,
+      resume: None,
+    })
+    .map(|config| StabilizationRunSetup {
+      config,
+      initial_state,
+    }),
+  )
 }
 
 fn session_save_exists_interactive(ruleset: &Ruleset) -> Result<bool, CliError> {
@@ -191,14 +220,28 @@ pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError>
 }
 
 pub fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<SessionOutcome, CliError> {
+  let genesis = genesis_state();
+  run_session_from_genesis(config, ruleset, &genesis)
+}
+
+fn run_session_from_genesis(
+  config: RunConfig,
+  ruleset: &Ruleset,
+  initial_state: &crate::model::WorldState,
+) -> Result<SessionOutcome, CliError> {
   let interactive_result = match config.play_mode {
     PlayMode::Preset(strategy) => {
       print_line(&style::label_value(
         "Selected preset",
         strategy_plan(strategy).name,
       ));
-      let history = build_history_for_strategy(strategy, config.seed, ruleset)
-        .map_err(CliError::InvalidStrategyPlan)?;
+      let history = build_history_for_strategy_from_genesis(
+        strategy_plan(strategy),
+        config.seed,
+        ruleset,
+        initial_state.clone(),
+      )
+      .map_err(CliError::InvalidStrategyPlan)?;
       print_demo(config.seed, &history, ruleset);
       InteractiveRunResult::Completed(history)
     }
@@ -208,11 +251,12 @@ pub fn run_session(config: RunConfig, ruleset: &Ruleset) -> Result<SessionOutcom
         ExperienceMode::Beginner => "Beginner (guided)",
       };
       print_line(&style::label_value("Selected play mode", mode_label));
-      let result = run_interactive_history(
+      let result = run_interactive_history_from_genesis(
         config.seed,
         ruleset,
         config.experience_mode,
         config.resume.as_ref(),
+        initial_state,
       )?;
       match &result {
         InteractiveRunResult::Completed(history) => {
@@ -292,6 +336,17 @@ pub fn run_interactive_history(
   experience_mode: ExperienceMode,
   resume: Option<&ResumeState>,
 ) -> Result<InteractiveRunResult, CliError> {
+  let genesis = genesis_state();
+  run_interactive_history_from_genesis(seed, ruleset, experience_mode, resume, &genesis)
+}
+
+pub fn run_interactive_history_from_genesis(
+  seed: u64,
+  ruleset: &Ruleset,
+  experience_mode: ExperienceMode,
+  resume: Option<&ResumeState>,
+  initial_state: &crate::model::WorldState,
+) -> Result<InteractiveRunResult, CliError> {
   let (genesis, mut state, mut transitions, start_turn) = if let Some(resume) = resume {
     let state = resume
       .history
@@ -306,7 +361,7 @@ pub fn run_interactive_history(
       resume.next_turn,
     )
   } else {
-    let genesis = genesis_state();
+    let genesis = initial_state.clone();
     (genesis.clone(), genesis, Vec::new(), 1)
   };
 

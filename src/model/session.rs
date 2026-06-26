@@ -79,5 +79,6 @@ pub enum CliError {
   InvalidCampaignChoice(String),
   InvalidDifficultyChoice(String),
   SessionSaveFailed(String),
+  ScenarioLoadFailed(String),
   InputUnavailable,
 }

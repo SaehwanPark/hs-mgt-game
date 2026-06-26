@@ -25,6 +25,7 @@ pub fn describe_cli_error(error: &CliError) -> String {
       format!("command is invalid for this turn: {error:?}")
     }
     CliError::SessionSaveFailed(message) => format!("session save failed: {message}"),
+    CliError::ScenarioLoadFailed(message) => format!("scenario load failed: {message}"),
     CliError::InputUnavailable => "could not read input from standard input".to_string(),
   }
 }

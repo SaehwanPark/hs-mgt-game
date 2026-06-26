@@ -6,6 +6,7 @@ pub mod debrief;
 pub mod inputs;
 pub mod model;
 pub mod replay;
+pub mod scenario;
 pub mod sim;
 
 #[cfg(test)]

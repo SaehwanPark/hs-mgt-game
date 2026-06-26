@@ -1,6 +1,7 @@
 use crate::inputs::resolve_inputs;
 use crate::model::{
-  History, PlayerCommand, Ruleset, StrategyPath, StrategyPlan, ValidationError, genesis_state,
+  History, PlayerCommand, Ruleset, StrategyPath, StrategyPlan, ValidationError, WorldState,
+  genesis_state,
 };
 use crate::sim::transition;
 
@@ -11,6 +12,15 @@ pub fn build_history_for_strategy(
 ) -> Result<History, ValidationError> {
   let plan = strategy_plan(choice);
   let genesis = genesis_state();
+  build_history_for_strategy_from_genesis(plan, seed, ruleset, genesis)
+}
+
+pub fn build_history_for_strategy_from_genesis(
+  plan: StrategyPlan,
+  seed: u64,
+  ruleset: &Ruleset,
+  genesis: WorldState,
+) -> Result<History, ValidationError> {
   let first_inputs = resolve_inputs(seed, &genesis, ruleset);
   let first = transition(&genesis, plan.first_command.clone(), first_inputs, ruleset)?;
   let second_inputs = resolve_inputs(seed, &first.next, ruleset);
@@ -54,6 +64,15 @@ pub fn build_history_interactive(
   commands: [PlayerCommand; 5],
 ) -> Result<History, ValidationError> {
   let genesis = genesis_state();
+  build_history_interactive_from_genesis(seed, ruleset, commands, genesis)
+}
+
+pub fn build_history_interactive_from_genesis(
+  seed: u64,
+  ruleset: &Ruleset,
+  commands: [PlayerCommand; 5],
+  genesis: WorldState,
+) -> Result<History, ValidationError> {
   let first_inputs = resolve_inputs(seed, &genesis, ruleset);
   let first = transition(&genesis, commands[0].clone(), first_inputs, ruleset)?;
   let second_inputs = resolve_inputs(seed, &first.next, ruleset);

@@ -6,6 +6,27 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.40] - 2026-06-26
+
+### Added
+
+- Minimal TOML scenario loader for the bundled `stabilization-v1` scenario.
+- `scenarios/stabilization-v1.toml` with current genesis state, learning
+  objectives, actor stubs, and five-turn schedule.
+- ADR-0007 accepting `scenario-toml-0.1.40` for the stabilization-only runtime
+  slice.
+
+### Changed
+
+- Fresh stabilization runs now validate the bundled scenario before starting,
+  while transition and replay semantics remain unchanged.
+- Package version bumped to `0.1.40`.
+
+### Notes
+
+- Competitive scenario loading, arbitrary scenario path selection, and scenario
+  migration tooling remain deferred.
+
 ## [0.1.39] - 2026-06-26
 
 ### Added

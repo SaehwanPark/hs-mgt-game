@@ -1,7 +1,9 @@
 [package]
 name = "hs-mgt-game"
-version = "0.1.39"
+version = "0.1.40"
 edition = "2024"
 
 [dependencies]
 rustyline = "18.0.1"
+serde = { version = "1.0.228", features = ["derive"] }
+toml = "1.1.2"

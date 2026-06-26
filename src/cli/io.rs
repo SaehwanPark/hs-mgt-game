@@ -129,10 +129,14 @@ pub fn read_seed_choice() -> Result<ReadLineOutcome, CliError> {
 }
 
 pub fn parse_seed_choice(input: &str) -> Result<u64, CliError> {
+  parse_seed_choice_with_default(input, DEFAULT_SEED)
+}
+
+pub fn parse_seed_choice_with_default(input: &str, default_seed: u64) -> Result<u64, CliError> {
   let trimmed = input.trim();
 
   if trimmed.is_empty() {
-    return Ok(DEFAULT_SEED);
+    return Ok(default_seed);
   }
 
   trimmed
