@@ -49,8 +49,21 @@ struct StabilizationRunSetup {
   initial_state: crate::model::WorldState,
 }
 
-pub fn run() -> Result<SessionOutcome, CliError> {
+pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, CliError> {
   let ruleset = default_ruleset();
+
+  // If a scenario path was provided, load and run it directly (bypassing campaign selection/resume prompts).
+  if let Some(path) = scenario_path {
+    let scenario = crate::scenario::load_scenario_file(&path).map_err(|error| {
+      CliError::ScenarioLoadFailed(format!("could not load scenario file: {error}"))
+    })?;
+    crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
+      .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+    let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
+      return Ok(SessionOutcome::QuitNoSave);
+    };
+    return run_session_from_genesis(setup.config, &ruleset, &setup.initial_state);
+  }
 
   if session_save_exists_interactive(&ruleset)? {
     loop {
@@ -85,7 +98,10 @@ pub fn run() -> Result<SessionOutcome, CliError> {
 
   match campaign {
     CampaignId::StabilizationV1 => {
-      let Some(setup) = read_stabilization_run_setup(&ruleset)? else {
+      let scenario = default_stabilization_scenario().map_err(|error| {
+        CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
+      })?;
+      let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
         return Ok(SessionOutcome::QuitNoSave);
       };
       run_session_from_genesis(setup.config, &ruleset, &setup.initial_state)
@@ -100,18 +116,16 @@ pub fn run() -> Result<SessionOutcome, CliError> {
 }
 
 pub fn read_stabilization_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
-  Ok(read_stabilization_run_setup(ruleset)?.map(|setup| setup.config))
+  let scenario = default_stabilization_scenario().map_err(|error| {
+    CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
+  })?;
+  Ok(read_stabilization_run_setup(ruleset, &scenario)?.map(|setup| setup.config))
 }
 
 fn read_stabilization_run_setup(
   ruleset: &Ruleset,
+  scenario: &crate::scenario::Scenario,
 ) -> Result<Option<StabilizationRunSetup>, CliError> {
-  let scenario = default_stabilization_scenario().map_err(|error| {
-    CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
-  })?;
-  validate_stabilization_scenario(&scenario, ruleset).map_err(|error| {
-    CliError::ScenarioLoadFailed(format!("default stabilization scenario: {error}"))
-  })?;
   let initial_state = scenario.initial_world_state();
 
   print_pre_run_briefing(&initial_state);

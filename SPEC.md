@@ -52,8 +52,35 @@ reconstructing it from the diff.
 | External playtest protocol | v0.1.39 | Phase 7 prep protocol for stabilization and competitive-preview sessions | 201 | `88d07f9e1bbd6f04` (competitive) |
 | Minimal stabilization scenario loader | v0.1.40 | TOML scenario format, bundled stabilization fixture, validation boundary | 208 | `88d07f9e1bbd6f04` (competitive) |
 | MCP agent support | v0.1.41 | Local stdio MCP server for bounded autonomous play of both current campaigns | 216 | `88d07f9e1bbd6f04` (competitive) |
+| CLI scenario loader selection | v0.1.42 | CLI `--scenario` / `-s` flag to load arbitrary stabilization-v1 TOML scenarios | 219 | `88d07f9e1bbd6f04` (competitive) |
+
 
 ### Recent slices
+
+- Feature: CLI arbitrary scenario path selection
+  Status: Complete
+  Started: 2026-06-27
+  Branch: feat/cli-scenario-loading
+  Version: 0.1.42
+
+  Summary:
+  Add CLI support for `--scenario <PATH>` / `-s <PATH>` flags to load and play
+  arbitrary scenario TOML files, bypassing campaign selection and resume prompts
+  when a custom scenario is loaded.
+
+  Done:
+  - Parse CLI arguments in `src/main.rs`
+  - Update `run()`, `read_stabilization_run_config()`, and `read_stabilization_run_setup()` in `src/cli/session.rs`
+  - Add integration tests in `tests/scenario_selection_tests.rs`
+  - Package version bumped to `0.1.42`
+
+  Deferred / Non-Goals:
+  - No competitive scenario loading from TOML (remains deferred)
+  - No changes to transition logic, state hashes, or session save format
+
+  Verification:
+  - Golden hashes (`6fb1ebbea564274f` and `88d07f9e1bbd6f04`) are unchanged
+  - All 219 tests pass successfully
 
 - Feature: Rich-terminal CLI display
   Status: Complete
@@ -427,9 +454,9 @@ reconstructing it from the diff.
 
 No active slice. Competitive runtime I1–I8, bounded three-month loop,
 competitive command-prompt ergonomics, external playtest protocol refresh, the
-minimal stabilization scenario loader, and bounded MCP agent-play support are
-complete for the MVP preview, Phase 7 prep, Phase 6.2 scenario-loading, and
-agent-interface tracks.
+minimal stabilization scenario loader, bounded MCP agent-play support, and CLI
+scenario file path selection are complete for the MVP preview, Phase 7 prep, Phase 6.2
+scenario-loading, and agent-interface tracks.
 
 ## Future
 
@@ -440,8 +467,8 @@ agent-interface tracks.
 - **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded until
   brief expands; actor cards required first.
 - **Scenario data loading runtime** (Phase 6.2): after format design approval;
-  minimal stabilization TOML loading is complete; competitive scenario loading,
-  arbitrary scenario path selection, and migration tooling remain deferred.
+  minimal stabilization TOML loading and arbitrary scenario path selection are complete;
+  competitive scenario loading and migration tooling remain deferred.
 - **MCP agent interface expansion**: HTTP transport, auth, durable MCP session
   persistence, full competitive campaign length, and replay/export integration
   remain deferred until bounded agent play produces evidence for those needs.

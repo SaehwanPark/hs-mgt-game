@@ -1,8 +1,38 @@
 use hs_mgt_game::cli::{describe_cli_error, eprint_error, run};
 use hs_mgt_game::model::SessionOutcome;
+use std::path::PathBuf;
 
 fn main() {
-  match run() {
+  let mut args = std::env::args().skip(1);
+  let mut scenario_path = None;
+
+  while let Some(arg) = args.next() {
+    match arg.as_str() {
+      "-h" | "--help" => {
+        println!("Health Policy Strategy Game CLI");
+        println!("Usage: hs-mgt-game [OPTIONS]");
+        println!();
+        println!("Options:");
+        println!("  -s, --scenario <PATH>  Path to a custom TOML scenario file to load");
+        println!("  -h, --help             Print help information");
+        return;
+      }
+      "-s" | "--scenario" => {
+        if let Some(path_str) = args.next() {
+          scenario_path = Some(PathBuf::from(path_str));
+        } else {
+          eprintln!("Error: --scenario requires a path argument.");
+          std::process::exit(1);
+        }
+      }
+      other => {
+        eprintln!("Error: Unknown argument '{}'. Use --help for usage.", other);
+        std::process::exit(1);
+      }
+    }
+  }
+
+  match run(scenario_path) {
     Ok(SessionOutcome::Completed)
     | Ok(SessionOutcome::CompetitivePreview)
     | Ok(SessionOutcome::QuitSaved)

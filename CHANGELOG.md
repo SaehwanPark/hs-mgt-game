@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.42] - 2026-06-27
+
+### Added
+
+- CLI `--scenario <PATH>` / `-s <PATH>` flags to load and play arbitrary stabilization TOML scenarios.
+- Bypass of campaign selection and resume prompts when launching with a custom scenario file.
+- Integration tests in `tests/scenario_selection_tests.rs` for scenario file loading and error paths.
+
+### Changed
+
+- Package version bumped to `0.1.42`.
+
 ## [0.1.41] - 2026-06-26
 
 ### Added
