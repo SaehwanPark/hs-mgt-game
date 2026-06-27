@@ -266,3 +266,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Extend scenario loading only when playtest or authoring evidence
   identifies a concrete repeated need; keep executable logic out of scenario
   files.
+
+## Interactive Terminal Tests Can Hang Without Stdin Redirection
+
+- Context: Running `cargo test` in a pseudo-terminal (PTY) runner or workspace sandbox.
+- Symptom: Tests that read standard input for campaigns (e.g. `competitive_month_loop_runs_three_months_in_non_tty_context`) hang or timeout.
+- Cause: `std::io::stdin().is_terminal()` returns `true` inside a PTY, causing the game to block waiting for human command input instead of executing the fallback non-TTY batch.
+- Resolution: Rerun or structure the test execution command with stdin redirected from `/dev/null` (`cargo test < /dev/null`) to force `is_terminal() == false`.
+- Prevention: Document stdin redirection for local workspace tests, or mock terminal checks inside test suites when standard input prompts are under test.
+
