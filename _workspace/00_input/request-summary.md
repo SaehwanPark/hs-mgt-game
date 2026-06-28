@@ -1,42 +1,39 @@
-# Request Summary
+# Request Summary - Gameplay Testing and Review
 
 ## Scope
 
-Implement local MCP support so AI agents can autonomously play the current
-bounded `stabilization-v1` and `competitive-regional-v1` campaigns.
+Design a plan to test and review the gameplay of the Health Policy Strategy Game using 3 automated test-player subagents playing via the implemented Model Context Protocol (MCP) server. Collect their logs, analyze the feedback, and produce a comprehensive report assessing:
+1. Winnability/Clearability (winnable but not trivial).
+2. Entertainment value (non-deterministic transitions, meaningful strategic trade-offs, and lack of a single dominant strategy).
 
 ## Phase
 
-Technical prototype / interface slice over existing Phase 5-6 playable runtime.
+Phase 4: Validation / Playtest (aligned with Phase 7 prep protocol of the roadmap).
 
 ## Non-Goals
 
-- No Streamable HTTP, auth, remote deployment, or multi-client service.
-- No durable MCP session persistence.
-- No new health-policy mechanisms or actor behavior.
-- No full 24-month competitive campaign.
-- No competitive scenario loading or scenario migration tooling.
+- Do not modify the Rust simulation engine, command parser, or database/ruleset logic.
+- Do not add or change any CLI features.
+- Do not implement new MCP endpoints or protocols.
+- Do not modify existing scenario parameters.
 
 ## Sources
 
 - `README.md`
-- `docs/proposal.md`
-- `docs/roadmap.md`
-- `docs/design_principles.md`
-- `docs/harness/health-policy-strategy-game/team-spec.md`
-- MCP specification `2025-11-25`
-- Official Rust SDK `rmcp`
+- `docs/external-playtest-protocol.md`
+- `docs/how-to-play.md`
+- `docs/mcp-agent-interface.md`
+- `src/mcp/session.rs`
 
 ## Expected Files
 
-- `src/mcp/`
-- `src/bin/hs-mgt-game-mcp.rs`
-- `docs/mcp-agent-interface.md`
-- `docs/decision-records/0008-mcp-agent-interface.md`
-- `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`
+- `_workspace/00_input/request-summary.md` (this file)
+- `_workspace/03_domain_qa.md` (Domain QA review notes)
+- `_workspace/final/handoff.md` (Summary of playtest run and results)
+- `docs/playtest-findings-v0.1.42.md` (Comprehensive playtest report)
 
 ## Validation Target
 
-MCP agent play must reuse existing deterministic transitions and observations.
-Invalid commands must not advance a session. Existing golden hashes must remain
-unchanged.
+- Run at least 3 distinct subagents playing both `stabilization-v1` and `competitive-regional-v1` campaign sessions.
+- Produce explicit feedback from each test-player on comprehension, tradeoffs, pacing, winnability, and entertainment.
+- Compile observations into a formal report.
