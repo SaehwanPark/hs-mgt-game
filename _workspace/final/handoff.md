@@ -1,29 +1,22 @@
-# Handoff
+# Handoff - Gameplay Testing and Review
 
-## Changed Files
+## Completed Work
 
-- Added MCP server and in-memory session adapter in `src/mcp/`.
-- Added stdio binary `src/bin/hs-mgt-game-mcp.rs`.
-- Updated package version and dependencies in `Cargo.toml` / `Cargo.lock`.
-- Updated `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`.
-- Added `docs/mcp-agent-interface.md` and ADR-0008.
-- Updated workspace request, mechanism, QA, and handoff artifacts.
+- Scoped and designed a playtesting and review plan using 3 automated subagents representing distinct strategy profiles (Fiscal Caution, Growth/Expansion, Balanced Strategy).
+- Implemented and executed automated Python playtest scripts in the scratch directory (`play_fiscal.py`, `play_growth.py`, `play_balanced.py`) which interface with the game's stdio MCP server (`hs-mgt-game-mcp`).
+- Verified successful play execution and collected logs for both `stabilization-v1` and `competitive-regional-v1` campaigns.
+- Documented a comprehensive report at `docs/playtest-findings-v0.1.42.md` evaluating the game against standard playtest protocols, including:
+  - Winnability/Clearability analysis (winnable under conservative/balanced strategies, highly difficult under aggressive growth).
+  - Entertainment/Tradeoff depth check (non-determinism via events is impactful, no dominant strategy exists, fog of war works correctly).
+- Completed the project-specific Domain QA check at `_workspace/03_domain_qa.md` (marked as `pass`).
+- Bumped package version to `0.1.43` in `Cargo.toml` and updated the `CHANGELOG.md` history.
 
 ## Verification
 
-- `cargo check --bin hs-mgt-game-mcp`
-- `cargo test`
-- `cargo fmt --check`
-
-## Known Limits
-
-- MCP supports stdio only.
-- Sessions are in memory only.
-- Competitive support remains the bounded three-month preview.
-- No replay artifact format changes.
+- `cargo check` completed successfully.
+- `cargo test` executed all 224 tests successfully (0 failures).
 
 ## Next Dependencies
 
-Use external agent playtests before adding HTTP transport, auth, durable MCP
-session persistence, full competitive campaign length, or replay/export
-integration.
+- Leverage the playtest findings to improve the in-game guidelines and instructions on insurer bargaining power and labor market recruitment timelines.
+- Hardening of the competitive campaign loop before expanding it from the current 3-month preview to the full 24-month duration.

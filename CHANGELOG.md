@@ -6,6 +6,17 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.43] - 2026-06-28
+
+### Added
+
+- Comprehensive gameplay playtest findings report at `docs/playtest-findings-v0.1.42.md` documenting play session results, winnability, strategic tension, and entertainment value.
+- Automated Python playtest scripts (`play_fiscal.py`, `play_growth.py`, `play_balanced.py`) and logs verifying MCP stdio game sessions.
+
+### Changed
+
+- Package version bumped to `0.1.43`.
+
 ## [0.1.42] - 2026-06-27
 
 ### Added
