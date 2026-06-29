@@ -80,7 +80,7 @@ fn option_for_turn(path: StrategyPath, turn: u32) -> BeginnerOption {
     (StrategyPath::FiscalCaution, 1) => (
       "Measured expansion",
       "Preserves more cash; still adds beds",
-      "Smaller access lift; modest rate request",
+      "Smaller access lift; less leverage for payer talks",
       "Fiscal buffer vs access pace",
       "Situational",
       plan.first_command.clone(),
@@ -88,7 +88,7 @@ fn option_for_turn(path: StrategyPath, turn: u32) -> BeginnerOption {
     (StrategyPath::AggressiveBargaining, 1) => (
       "Lean operations, hard bargain",
       "Minimal capital spend; high rate bid",
-      "Little capacity added; payer may push back",
+      "Little capacity added; weak visible leverage for a high rate ask",
       "Revenue ambition vs relationship risk",
       "High risk",
       plan.first_command.clone(),

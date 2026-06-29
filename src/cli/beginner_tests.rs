@@ -31,6 +31,20 @@ fn beginner_metadata_avoids_actor_outcome_spoilers() {
 }
 
 #[test]
+fn turn_one_beginner_metadata_surfaces_payer_leverage_risk() {
+  let options = beginner_options(1);
+  let text = options
+    .iter()
+    .map(|option| format!("{} {}", option.pros, option.cons))
+    .collect::<Vec<_>>()
+    .join("\n");
+
+  assert!(text.contains("payer talks"));
+  assert!(text.contains("visible leverage"));
+  assert!(text.contains("high rate ask"));
+}
+
+#[test]
 fn beginner_choice_maps_to_preset_commands() {
   for turn in 1..=5 {
     for (index, path) in [

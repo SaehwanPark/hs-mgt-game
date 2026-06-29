@@ -30,7 +30,9 @@ and competitive command prompt ergonomics (help catalog, token color, verb autoc
 and new-player "How to Play" manual at v0.1.38,
 and external playtest protocol refresh at v0.1.39,
 and minimal stabilization scenario TOML loading at v0.1.40,
-and local stdio MCP agent-play support at v0.1.41.
+and local stdio MCP agent-play support at v0.1.41, CLI scenario path selection at
+v0.1.42, automated MCP playtest findings at v0.1.43, and playtest-guided
+player guidance at v0.1.44.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).

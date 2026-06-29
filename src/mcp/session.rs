@@ -629,6 +629,7 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
       "Final calendar: Year {}, Month {}.",
       final_state.policy_calendar.year, final_state.policy_calendar.month_in_year
     ),
+    "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
     "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.".to_string(),
   ]
 }
@@ -731,6 +732,22 @@ mod tests {
       })
       .expect("history");
     assert_eq!(history.transition_count, 3);
+  }
+
+  #[test]
+  fn competitive_debrief_explains_recruitment_timing() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: session.session_id,
+      })
+      .expect("end session");
+    let text = ended.debrief.join("\n");
+
+    assert!(text.contains("Recruitment lesson"));
+    assert!(text.contains("role-specific delays"));
+    assert!(text.contains("workforce trust"));
   }
 
   #[test]

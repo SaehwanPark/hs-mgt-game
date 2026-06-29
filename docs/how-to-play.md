@@ -187,6 +187,15 @@ Use this triage playbook.
 - Balanced month: medium `invest` + one legitimacy move (`commit`).
 - Information-first month: `monitor`, then adjust next month with better intel.
 
+## Strategy notes from playtesting
+
+- Commercial rate asks work best when you have visible leverage. Reported access,
+  capacity, quality, and market context matter; a high rate posture by itself can
+  create relationship risk without improving your outside option.
+- Recruitment is not instant capacity. Hiring spends cash immediately, resolves
+  after role-specific delays, and can strain workforce trust while the added
+  capacity is still pending.
+
 ## FAQ and troubleshooting
 
 Q: I entered a command and got an error. Did I lose the month?  

@@ -6,6 +6,16 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.44] - 2026-06-29
+
+### Changed
+
+- Clarified player-facing guidance for commercial payer leverage in stabilization
+  Turn 1 help and beginner-mode choices.
+- Clarified competitive recruitment timing and workforce-trust tradeoffs in
+  player observations, MCP debrief output, and the player manual.
+- Package version bumped to `0.1.44`.
+
 ## [0.1.43] - 2026-06-28
 
 ### Added
