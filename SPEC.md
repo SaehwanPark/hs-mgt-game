@@ -53,9 +53,40 @@ reconstructing it from the diff.
 | Minimal stabilization scenario loader | v0.1.40 | TOML scenario format, bundled stabilization fixture, validation boundary | 208 | `88d07f9e1bbd6f04` (competitive) |
 | MCP agent support | v0.1.41 | Local stdio MCP server for bounded autonomous play of both current campaigns | 216 | `88d07f9e1bbd6f04` (competitive) |
 | CLI scenario loader selection | v0.1.42 | CLI `--scenario` / `-s` flag to load arbitrary stabilization-v1 TOML scenarios | 219 | `88d07f9e1bbd6f04` (competitive) |
+| Automated MCP playtest findings | v0.1.43 | Three-strategy MCP playtest report for stabilization and competitive-preview campaigns | 224 | `88d07f9e1bbd6f04` (competitive) |
+| Playtest-guided player guidance | v0.1.44 | Insurer leverage and recruitment-timing guidance from automated playtest findings | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Playtest-guided player guidance
+  Status: Complete
+  Started: 2026-06-29
+  Branch: feat/playtest-guidance-fixes
+  Version: 0.1.44
+
+  Summary:
+  Clarify player-facing guidance for commercial payer leverage and competitive
+  recruitment timing based on the v0.1.42 automated playtest findings.
+
+  Done:
+  - Stabilization Turn 1 help explains that above-target commercial rate bids
+    need visible leverage from reported access, capacity, or quality context
+  - Beginner-mode Turn 1 option copy surfaces payer-leverage risk without
+    exposing exact outcomes
+  - Competitive observation and MCP debrief text explain that recruitment spends
+    cash immediately, resolves after role-specific delays, and can strain
+    workforce trust
+  - `docs/how-to-play.md` records the same player-facing strategy notes
+  - Package version bumped to `0.1.44`
+
+  Deferred / Non-Goals:
+  - No changes to transition logic, validation thresholds, scenario files, MCP
+    DTO schemas, replay artifacts, or golden hashes
+  - No competitive campaign length expansion or competitive scenario loading
+
+  Verification:
+  - `cargo fmt --check` and `cargo test </dev/null>` pass
 
 - Feature: CLI arbitrary scenario path selection
   Status: Complete

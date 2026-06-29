@@ -114,7 +114,7 @@ fn turn_help_lines(turn: u32) -> Vec<String> {
   match turn {
     1 => vec![
       "  Turn 1 — capacity and payer posture: add staffed beds, spend capital, and bid a commercial rate.".to_string(),
-      "  Higher beds and spend improve access but consume cash; aggressive rates may draw payer pushback.".to_string(),
+      "  Higher beds and spend improve access but consume cash; above-target rates need visible payer leverage from reported access, capacity, or quality context.".to_string(),
     ],
     2 => vec![
       "  Turn 2 — state access mandate: advocacy spend and an access commitment signal responsiveness.".to_string(),
@@ -149,7 +149,9 @@ pub fn new_player_cue_lines() -> Vec<String> {
 
 pub fn turn_hint(turn: u32) -> Option<&'static str> {
   match turn {
-    1 => Some("Tip: compare capital spend bound with how many beds you add."),
+    1 => Some(
+      "Tip: compare capital spend, added beds, and rate posture; payers respond to visible leverage, not rate asks alone.",
+    ),
     2 => Some("Tip: advocacy spend is capped — pair it with a credible access commitment."),
     3 => Some("Tip: schedule relief must be at least 1; balance spend and commitment."),
     4 => Some("Tip: coalition investment and shared access move together."),
@@ -212,5 +214,14 @@ mod tests {
     assert!(text.contains("Available commands"));
     assert!(text.contains("invest"));
     assert!(text.contains("recruit"));
+  }
+
+  #[test]
+  fn payer_help_mentions_leverage_without_spoilers() {
+    let text = context_help_lines(PromptContext::TurnCommand { turn: 1 }).join("\n");
+
+    assert!(text.contains("above-target rates"));
+    assert!(text.contains("visible payer leverage"));
+    assert!(guidance_has_no_outcome_spoilers(&text));
   }
 }

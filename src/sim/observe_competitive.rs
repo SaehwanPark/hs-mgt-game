@@ -185,6 +185,7 @@ fn default_policy_bullets() -> Vec<String> {
     "State Medicaid director signal: access reporting scrutiny increasing".to_string(),
     "Hospital association lobbying: workforce retention tax credit under committee review"
       .to_string(),
+    "Labor market note: recruit commands spend cash now, resolve after role-specific delays, and can strain workforce trust while capacity comes online".to_string(),
     "No federal rule change this month".to_string(),
   ]
 }
@@ -289,5 +290,16 @@ mod tests {
     let observation = observe_for_human(&world, None);
     assert_eq!(observation.org_name, "Riverside Community Health");
     assert!(!observation.market_bullets.is_empty());
+  }
+
+  #[test]
+  fn observation_explains_recruitment_timing_tradeoff() {
+    let world = genesis_competitive_world(Difficulty::Normal);
+    let observation = observe_for_human(&world, None);
+    let policy_text = observation.policy_bullets.join("\n");
+
+    assert!(policy_text.contains("recruit commands spend cash now"));
+    assert!(policy_text.contains("role-specific delays"));
+    assert!(policy_text.contains("strain workforce trust"));
   }
 }
