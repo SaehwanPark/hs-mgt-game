@@ -56,9 +56,38 @@ reconstructing it from the diff.
 | Automated MCP playtest findings | v0.1.43 | Three-strategy MCP playtest report for stabilization and competitive-preview campaigns | 224 | `88d07f9e1bbd6f04` (competitive) |
 | Playtest-guided player guidance | v0.1.44 | Insurer leverage and recruitment-timing guidance from automated playtest findings | 228 | `88d07f9e1bbd6f04` (competitive) |
 | SDD next-development cleanup | v0.1.45 | SPEC Future tracks made actionable; stale companion doc statuses refreshed | 228 | `88d07f9e1bbd6f04` (competitive) |
+| Deferred item triage | v0.1.46 | Worthy deferred Past items folded into actionable Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Deferred item triage
+  Status: Complete
+  Started: 2026-06-30
+  Version: 0.1.46
+
+  Summary:
+  Review deferred items from completed Past records and archived slice history,
+  then preserve still-worthy follow-up work in Future without carrying forward
+  items that are complete, obsolete, or permanent non-goals.
+
+  Done:
+  - Future tracks now explicitly cover evidence and parameter-ledger work,
+    instructor analysis and replay/export capabilities, competitive command
+    ergonomics, and broader simulation breadth gates
+  - Completed deferred items such as per-turn command entry, module split,
+    CI baseline, replay artifact export, and competitive runtime I1-I8 were not
+    re-added as Future work
+  - Package version bumped to `0.1.46`
+
+  Deferred / Non-Goals:
+  - No runtime behavior, scenario schemas, rulesets, replay artifacts, MCP DTOs,
+    or golden hashes changed
+  - No Future track was promoted into `Present`
+
+  Verification:
+  - Deferred-item scan reviewed `SPEC.md` and `docs/spec-past-archive.md`
+  - `cargo fmt --check` and markdown whitespace checks pass
 
 - Feature: SDD next-development cleanup
   Status: Complete
@@ -239,7 +268,7 @@ No active slice. Competitive runtime I1-I8, the bounded three-month loop,
 competitive command-prompt ergonomics, external playtest protocol refresh, the
 minimal stabilization scenario loader, bounded MCP agent-play support, CLI
 scenario file path selection, automated MCP playtest findings, playtest-guided
-player guidance, and this SDD cleanup are complete.
+player guidance, SDD cleanup, and deferred-item triage are complete.
 
 ## Future
 
@@ -270,8 +299,9 @@ player guidance, and this SDD cleanup are complete.
 
   Next actionable slice:
   Pick one bounded issue from playtest evidence, such as month-summary clarity,
-  command help coverage, AI rationale visibility, or a three-month pacing
-  problem, and address it without expanding campaign length.
+  command help coverage, argument-key or enum-value autocomplete, AI rationale
+  visibility, or a three-month pacing problem, and address it without expanding
+  campaign length.
 
   Verification target:
   Focused CLI/parser/simulation tests cover the changed behavior, competitive
@@ -281,6 +311,25 @@ player guidance, and this SDD cleanup are complete.
   Deferred / Non-Goals:
   Full 24-month campaign loop, competitive autosave, competitive replay export,
   competitive scenario loading, multiplayer, and new strategic actor classes.
+
+- Track: Instructor analysis and replay exports
+  Phase / Gate: Phase 6.4/8; proceed when playtest or instructional use shows a
+  concrete need beyond the current end-of-run debrief and stabilization replay
+  artifact export.
+
+  Next actionable slice:
+  Add one bounded analysis capability, such as competitive replay export,
+  instructor-visible run summary, decision-quality review, counterfactual rerun
+  notes, or a debrief extension tied to committed history.
+
+  Verification target:
+  Export or debrief tests round-trip the relevant data, preserve append-only
+  history, and prove that actor-visible observations are not replaced by
+  omniscient true-state reporting in player-facing output.
+
+  Deferred / Non-Goals:
+  Cryptographic integrity guarantees, a general analytics platform, LMS
+  integration, and policy-forecasting or grading claims.
 
 - Track: Scenario data loading expansion
   Phase / Gate: Phase 6.2; proceed only with authoring or playtest evidence that
@@ -300,6 +349,25 @@ player guidance, and this SDD cleanup are complete.
   No unrestricted rules language, no migration framework without a concrete
   versioning need, no competitive loader until the state boundary and campaign
   length are explicitly accepted.
+
+- Track: Evidence, parameters, and calibration groundwork
+  Phase / Gate: Phase 1/7; proceed when a mechanism needs stronger grounding
+  than the current visibly labeled prototype abstractions.
+
+  Next actionable slice:
+  Create or extend a parameter/evidence ledger for one bounded mechanism,
+  linking model assumptions to sources, plausible ranges, uncertainty, and
+  unresolved normative choices before changing formulas.
+
+  Verification target:
+  The ledger distinguishes empirical claims, design abstractions, balancing
+  choices, and social-welfare assumptions. Any later runtime formula change must
+  cite the ledger and include deterministic regression tests.
+
+  Deferred / Non-Goals:
+  External data ingestion pipeline, empirical calibration across the whole
+  model, real-world policy forecast validation, or authoritative numerical
+  claims.
 
 - Track: MCP agent interface expansion
   Phase / Gate: Agent-play support; proceed only after bounded stdio play
@@ -337,6 +405,26 @@ player guidance, and this SDD cleanup are complete.
   Deferred / Non-Goals:
   National policy simulation, federal budget modeling, full Medicaid eligibility
   rules, Medicare payment reproduction, and authoritative policy forecasting.
+
+- Track: Broader simulation breadth
+  Phase / Gate: Phase 6.1; proceed only after playtest or instructor feedback
+  shows that current campaign limits block meaningful strategy or learning.
+
+  Next actionable slice:
+  Add one bounded breadth element, such as one service-line decision, one patient
+  or distributional outcome category, one capital-allocation tradeoff, one
+  market-area concept, or one additional strategic interaction.
+
+  Verification target:
+  The new mechanism has a documented actor/observation boundary, deterministic
+  tests, debrief attribution, and clear player-facing tradeoffs. Existing
+  stabilization and competitive golden hashes remain stable unless the slice
+  intentionally changes transition semantics.
+
+  Deferred / Non-Goals:
+  Full US health-system model, individual patient simulation, broad federal
+  policy lifecycle framework, global equilibrium AI, and speculative generalized
+  frameworks.
 
 - Track: Clippy CI / release automation
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release

@@ -12,7 +12,8 @@ checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
 with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
 for bounded agent play of both current campaigns. The SDD index was refreshed at
-v0.1.45 to make the next development tracks more actionable.
+v0.1.46 to make the next development tracks more actionable and preserve worthy
+deferred items in Future.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).

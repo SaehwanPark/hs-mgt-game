@@ -6,6 +6,17 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.46] - 2026-06-30
+
+### Changed
+
+- Reviewed deferred items in SPEC Past and archived slice records, then folded
+  still-worthy follow-up work into SPEC Future tracks.
+- Added Future coverage for evidence/parameter ledgers, instructor analysis,
+  replay/export work, competitive command ergonomics, and broader simulation
+  breadth gates.
+- Package version bumped to `0.1.46`.
+
 ## [0.1.45] - 2026-06-30
 
 ### Changed
