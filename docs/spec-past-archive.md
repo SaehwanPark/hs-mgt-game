@@ -975,3 +975,216 @@ remains in [`CHANGELOG.md`](../CHANGELOG.md). The active spec index in
   - Golden hash `6fb1ebbea564274f` unchanged at seed 42
   - `cargo fmt --check`, `cargo test` pass (148 tests)
   - Competitive demos 1–5 exercise pass/fail validation paths
+
+- Feature: Competitive campaign runtime I4
+  Status: Complete
+  Version: 0.1.31
+
+  Summary:
+  Add `CompetitiveWorldState` with K+1 `HealthSystemState` entities, player
+  slots, and difficulty-scoped genesis fixtures per ADR-0004.
+
+  Done:
+  - `CompetitiveWorldState`, shared market fields, health-system state, player
+    slots, and AI profiles added under `src/model/competitive_world.rs`
+  - Genesis fixtures and roster display added for competitive preview
+  - Executive observation derives human metrics from competitive genesis
+  - Package version bumped to `0.1.31`
+
+  Deferred / Non-Goals:
+  - No `transition_competitive()` or monthly loop
+  - No stabilization golden hash changes
+
+  Verification:
+  - Difficulty tiers create K+1 systems with the human at system 0
+  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (154 tests)
+
+- Feature: Competitive campaign runtime I5
+  Status: Complete
+  Version: 0.1.32
+
+  Summary:
+  Add simultaneous monthly action resolver, `transition_competitive()`, partial
+  rival observability, and a one-month resolution CLI demo per ADR-0003.
+
+  Done:
+  - Monthly batch and competitive history types added
+  - `resolve_monthly_batches`, `transition_competitive()`, and human
+    observation helpers added
+  - CLI month-1 resolution demo and month-2 executive report preview added
+  - Package version bumped to `0.1.32`
+
+  Deferred / Non-Goals:
+  - AI players, events/delays, and Stata CLI remained deferred to I6-I8
+  - Full 24-month campaign loop, competitive replay artifact, and competitive
+    autosave remained deferred
+
+  Verification:
+  - Permutation-invariance test covers batch collection order
+  - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
+  - `cargo fmt --check`, `cargo test` pass (173 tests)
+
+- Feature: Competitive campaign runtime I6
+  Status: Complete
+  Version: 0.1.33
+
+  Summary:
+  Add deterministic AI rival batch generation with style-weighted command
+  scoring, lagged-public-log response, and inspectable rationale strings.
+
+  Done:
+  - AI batch planner APIs added for competitive month resolution
+  - AI rationale strings persisted on monthly batches
+  - Competitive month-1 resolver switched from fixed rival presets to
+    AI-generated batches
+  - Package version bumped to `0.1.33`
+
+  Deferred / Non-Goals:
+  - Events/delays/annual tick and Stata CLI remained deferred to follow-on
+    slices
+  - Full 24-month campaign loop, competitive replay artifact, and competitive
+    autosave remained deferred
+
+  Verification:
+  - AI reproducibility and rationale tests pass
+  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+  - `cargo fmt --check`, `cargo test` pass
+
+- Feature: Competitive campaign runtime I7
+  Status: Complete
+  Version: 0.1.34
+
+  Summary:
+  Add competitive monthly events, delayed effects, annual policy inputs, and a
+  simplified institution phase.
+
+  Done:
+  - `CompetitiveResolvedInputs` and competitive input resolver added
+  - Pending-effect queue and month-start tick added
+  - Payer/state institution phase and multi-month resolution history added
+  - Package version bumped to `0.1.34`
+
+  Deferred / Non-Goals:
+  - Stata-like CLI remained deferred to I8
+  - Full 24-month campaign, autosave, and replay export remained deferred
+
+  Verification:
+  - Competitive seed-42 golden hash `88d07f9e1bbd6f04`
+  - Stabilization golden seed-42 hash unchanged at `6fb1ebbea564274f`
+  - `cargo fmt --check`, `cargo test` pass
+
+- Feature: Competitive campaign runtime I8
+  Status: Complete
+  Version: 0.1.35
+
+  Summary:
+  Add Stata-like competitive command parsing and interactive human monthly batch
+  entry for the preview campaign.
+
+  Done:
+  - `src/cli/competitive_parse.rs` added for MVP `verb arg=value` syntax
+  - TTY interactive monthly batch entry wired to competitive month resolution
+  - Non-TTY preset fallback preserved for CI and tests
+  - Package version bumped to `0.1.35`
+
+  Deferred / Non-Goals:
+  - Full 24-month interactive loop, competitive autosave, syntax highlighting,
+    and autocomplete
+
+  Verification:
+  - Parser and competitive command-entry tests pass
+  - Golden hashes remain stable except for documented competitive changes
+
+- Feature: Competitive bounded multi-month loop
+  Status: Complete
+  Version: 0.1.36
+
+  Summary:
+  Extend the competitive preview into a coherent three-month loop over one
+  evolving `CompetitiveWorldState`.
+
+  Done:
+  - Per-month executive reports precede human command entry
+  - TTY mode accepts Stata-like batches each month
+  - Non-TTY mode uses deterministic fallback batches for CI/tests
+  - Package version bumped to `0.1.36`
+
+  Deferred / Non-Goals:
+  - Full 24-month campaign loop, competitive autosave, replay artifact export,
+    and scenario loading
+
+  Verification:
+  - Focused tests cover three-month non-TTY progression and fallback batch
+    policy
+  - `cargo fmt --check`, `cargo test` pass (193 tests)
+
+- Feature: Competitive command prompt ergonomics
+  Status: Complete
+  Version: 0.1.37
+
+  Summary:
+  Improve competitive command-entry help, token styling, and verb-only Tab
+  autocomplete.
+
+  Done:
+  - Shared competitive command catalog metadata feeds parser help and REPL
+    completion
+  - Competitive help context lists available commands for `help` and `?`
+  - Colored command and argument token rendering added
+  - Verb-only Tab autocomplete added for TTY command entry
+  - Package version bumped to `0.1.37`
+
+  Deferred / Non-Goals:
+  - Argument-key and enum-value autocomplete
+  - Full 24-month campaign loop, competitive autosave, replay artifact export,
+    and scenario loading
+
+  Verification:
+  - Parser, style, guidance, and REPL completion tests pass
+  - `cargo fmt --check`, `cargo test` pass (201 tests)
+
+- Feature: New-player How to Play manual
+  Status: Complete
+  Version: 0.1.38
+
+  Summary:
+  Add a player-facing manual for current stabilization and competitive-preview
+  flows.
+
+  Done:
+  - `docs/how-to-play.md` added with quickstart, campaign flow, terminology,
+    commands, worked example, and difficulty recovery tips
+  - README documentation index updated
+  - Package version bumped to `0.1.38`
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No full 24-month competitive campaign
+  - No scenario loading
+
+  Verification:
+  - `cargo fmt --check`, `cargo test` pass
+
+- Feature: External playtest protocol refresh
+  Status: Complete
+  Version: 0.1.39
+
+  Summary:
+  Add a Phase 7 prep protocol for informal external playtests of the current
+  stabilization and competitive-preview CLI flows.
+
+  Done:
+  - `docs/external-playtest-protocol.md` added with setup, session scripts,
+    observation rubric, post-session prompts, note template, privacy cautions,
+    and synthesis guidance
+  - README documentation index and current-priority wording updated
+  - Package version bumped to `0.1.39`
+
+  Deferred / Non-Goals:
+  - No runtime behavior changes
+  - No scenario loader, 24-month competitive campaign, or new strategic actors
+  - No formal human-subjects research process or policy-forecasting claim
+
+  Verification:
+  - `cargo fmt --check`, `cargo test` pass

@@ -1,11 +1,12 @@
 # Competitive Gameplay Sketch — Canonical Specification
 
-**Status:** Phase 6.0 design artifact  
+**Status:** Phase 6.0 design artifact; bounded preview runtime implemented
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign:** `competitive-regional-v1` (parallel to stabilization demo)
 
 This document expands the user gameplay sketch into requirements with acceptance
-criteria. Runtime implementation is deferred to vertical slices I1–I8.
+criteria. Initial runtime slices I1-I8 are complete as a bounded preview; full
+campaign length and hardening remain deferred.
 
 ## Overview
 
@@ -307,8 +308,9 @@ autocomplete; in-game help for commands.
 
 ## Implementation sequence
 
-See `SPEC.md` Future and plan slices I1–I8. Recommended first runtime slice:
-**I1 campaign router + I2 monthly executive report**.
+See `SPEC.md` Future for gated next work. The initial I1-I8 runtime sequence is
+complete; likely next work should come from playtest synthesis, competitive
+hardening, or scenario-loading evidence.
 
 ## Related documents
 

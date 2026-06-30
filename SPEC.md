@@ -55,9 +55,64 @@ reconstructing it from the diff.
 | CLI scenario loader selection | v0.1.42 | CLI `--scenario` / `-s` flag to load arbitrary stabilization-v1 TOML scenarios | 219 | `88d07f9e1bbd6f04` (competitive) |
 | Automated MCP playtest findings | v0.1.43 | Three-strategy MCP playtest report for stabilization and competitive-preview campaigns | 224 | `88d07f9e1bbd6f04` (competitive) |
 | Playtest-guided player guidance | v0.1.44 | Insurer leverage and recruitment-timing guidance from automated playtest findings | 228 | `88d07f9e1bbd6f04` (competitive) |
+| SDD next-development cleanup | v0.1.45 | SPEC Future tracks made actionable; stale companion doc statuses refreshed | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: SDD next-development cleanup
+  Status: Complete
+  Started: 2026-06-30
+  Version: 0.1.45
+
+  Summary:
+  Refresh the spec-driven-development index so the next development tracks are
+  specific, gated, and verification-oriented while companion docs reflect the
+  current bounded competitive preview, scenario-loader, and MCP interface state.
+
+  Done:
+  - `SPEC.md` Future now names actionable next slices with gates,
+    verification targets, and deferred work
+  - README status text summarizes current capabilities without repeating the
+    full release history
+  - Architecture, core-loop, roadmap, system-boundary, competitive-sketch, and
+    CLI grammar docs no longer describe completed competitive runtime slices as
+    only planned or design-only
+  - Package version bumped to `0.1.45`
+
+  Deferred / Non-Goals:
+  - No runtime behavior, scenario files, schemas, replay artifacts, golden
+    hashes, MCP DTOs, or test expectations changed
+  - No active Future slice was promoted into `Present`
+
+  Verification:
+  - `cargo fmt --check` and `cargo test` pass
+  - Stale status scan leaves only historical release/archive references
+
+- Feature: Automated MCP playtest findings
+  Status: Complete
+  Started: 2026-06-28
+  Version: 0.1.43
+
+  Summary:
+  Run automated MCP sessions across stabilization and competitive-preview
+  campaigns and record findings for strategy diversity, winnability, tension,
+  and entertainment value.
+
+  Done:
+  - `docs/playtest-findings-v0.1.42.md` summarizes three strategy runs across
+    both current campaigns
+  - `scripts/play_game.py` and `scripts/run_automated_playtests.py` support
+    bounded MCP playtest sessions
+  - Package version bumped to `0.1.43`
+
+  Deferred / Non-Goals:
+  - No transition, scenario, MCP tool-contract, or campaign-length changes
+  - No claim of external validation or empirical calibration
+
+  Verification:
+  - Automated MCP sessions completed for fiscal, growth, and balanced strategies
+  - `cargo fmt --check` and `cargo test` pass
 
 - Feature: Playtest-guided player guidance
   Status: Complete
@@ -87,365 +142,6 @@ reconstructing it from the diff.
 
   Verification:
   - `cargo fmt --check` and `cargo test </dev/null>` pass
-
-- Feature: CLI arbitrary scenario path selection
-  Status: Complete
-  Started: 2026-06-27
-  Branch: feat/cli-scenario-loading
-  Version: 0.1.42
-
-  Summary:
-  Add CLI support for `--scenario <PATH>` / `-s <PATH>` flags to load and play
-  arbitrary scenario TOML files, bypassing campaign selection and resume prompts
-  when a custom scenario is loaded.
-
-  Done:
-  - Parse CLI arguments in `src/main.rs`
-  - Update `run()`, `read_stabilization_run_config()`, and `read_stabilization_run_setup()` in `src/cli/session.rs`
-  - Add integration tests in `tests/scenario_selection_tests.rs`
-  - Package version bumped to `0.1.42`
-
-  Deferred / Non-Goals:
-  - No competitive scenario loading from TOML (remains deferred)
-  - No changes to transition logic, state hashes, or session save format
-
-  Verification:
-  - Golden hashes (`6fb1ebbea564274f` and `88d07f9e1bbd6f04`) are unchanged
-  - All 219 tests pass successfully
-
-- Feature: Rich-terminal CLI display
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/rich-terminal-cli-display
-
-  Summary:
-  Add semantic color, emoji section headings, and explicit per-turn command
-  prompts with parameter legends on TTY stdout while respecting `NO_COLOR`.
-
-  Done:
-  - `src/cli/display/style.rs`, `print.rs`, `prompt.rs`
-  - Interactive and preset CLI output use styled sections and global command footers
-  - CLI errors print in red on stderr when styling is enabled
-  - Package version bumped to `0.1.26`
-
-  Deferred / Non-Goals:
-  - No simulation or replay artifact content changes
-  - No competitive campaign changes
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass
-
-- Feature: CLI session UX (quit, autosave, guidance, beginner mode)
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/cli-session-ux
-
-  Summary:
-  Add global quit/help, interactive autosave and resume, new-player cues, and
-  beginner-mode multiple-choice turns without changing the simulation core.
-
-  Done:
-  - Global input routing (`src/cli/input.rs`) with quit/help at all prompts
-  - Session save format `session-save-0.1.27` and persistence (`src/cli/persistence.rs`)
-  - Resume/start-over startup flow; autosave on interactive quit
-  - Contextual guidance and beginner mode (`src/cli/guidance.rs`, `src/cli/beginner.rs`)
-  - ADR-0002; package version `0.1.27`
-
-  Deferred / Non-Goals:
-  - No autosave on every turn or for preset paths
-  - No changes to `transition()`, golden hash, or replay artifact format
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (114 tests)
-
-- Feature: Competitive gameplay design package
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/competitive-gameplay-design
-
-  Summary:
-  Develop the competitive gameplay sketch into durable design artifacts for a
-  parallel regional-market campaign (1 human + K AI health systems) without
-  changing stabilization demo runtime behavior.
-
-  Done:
-  - `docs/gameplay-competitive-sketch.md`, `docs/core-loop-spec.md`,
-    `docs/competitive-scenario-brief.md`, action catalog and CLI grammar drafts
-  - ADRs 0003–0006 accepted; canonical docs and workspace artifacts updated
-  - Package version bumped to `0.1.28`
-
-  Deferred / Non-Goals:
-  - Runtime implementation slices I1–I8 (tracked in Future / Present)
-  - Medicare/Medicaid actors in competitive v1
-
-  Verification:
-  - Design docs cross-link consistently; domain QA pass
-  - `cargo fmt --check`, `cargo test` pass with golden hash unchanged
-
-- Feature: Competitive campaign runtime I1+I2
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/campaign-router-executive-report
-
-  Summary:
-  Add CLI campaign router (`stabilization-v1` vs `competitive-regional-v1` preview)
-  and monthly executive report renderer using observation-only mock fixtures.
-
-  Done:
-  - `CampaignId`, `Difficulty`, `PolicyCalendar`, `PlayerObservation` in
-    `src/model/campaign.rs`
-  - Campaign and difficulty selectors; executive report renderer
-  - Mock fixtures in `src/competitive/fixtures.rs`; `SessionOutcome::CompetitivePreview`
-  - Package version bumped to `0.1.29`
-
-  Deferred / Non-Goals:
-  - No `transition_competitive()` or stabilization `transition()` changes
-  - Full competitive play deferred to I3–I8 (see archive and Future)
-  - Session autosave remains stabilization-only
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (130 tests)
-  - Competitive path shows month-1 executive report then stub message
-
-- Feature: Competitive campaign runtime I3
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/competitive-action-economy
-
-  Summary:
-  Add competitive command types, action-cost catalog, and batch validation for
-  AP, cash, and political capital per ADR-0005.
-
-  Done:
-  - `CompetitiveCommand`, `ActionCost` in `src/model/competitive_command.rs`
-  - `PlayerResources`, `CompetitiveRuleset` in `src/model/resources.rs`
-  - `validate_competitive_batch` in `src/sim/validate_competitive.rs`
-  - Five preset validation demos; executive report AP/PC header
-  - Package version bumped to `0.1.30`
-
-  Deferred / Non-Goals:
-  - Multi-system state, resolver, AI, events, Stata CLI (I4–I8)
-  - No scenario file loader; no Medicare/Medicaid actors
-
-  Verification:
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (148 tests)
-  - Competitive demos 1–5 exercise pass/fail validation paths
-
-- Feature: Competitive campaign runtime I4
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/competitive-multi-system-state
-
-  Summary:
-  Add `CompetitiveWorldState` with K+1 `HealthSystemState` entities, player
-  slots, and difficulty-scoped genesis fixtures per ADR-0004.
-
-  Done:
-  - `CompetitiveWorldState`, `SharedMarketFields`, `HealthSystemState`,
-    `PlayerSlot`, `AiProfile` in `src/model/competitive_world.rs`
-  - `genesis_competitive_world` and roster display in `src/competitive/genesis.rs`
-  - Executive observation derives human metrics from genesis
-  - Competitive stub shows genesis roster before month-1 report
-  - Six focused genesis tests; package version bumped to `0.1.31`
-
-  Deferred / Non-Goals:
-  - No `transition_competitive()` or monthly loop (I5–I8)
-  - No stabilization golden hash changes
-
-  Verification:
-  - `systems.len() == K+1` for each `Difficulty` tier
-  - Human at system 0; K AI rivals with style profiles
-  - Golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (154 tests)
-
-- Feature: Competitive campaign runtime I5
-  Status: Complete
-  Started: 2026-06-24
-  Branch: feat/competitive-simultaneous-resolver
-
-  Summary:
-  Add simultaneous monthly action resolver, `transition_competitive()`, partial
-  rival observability, and a one-month resolution CLI demo per ADR-0003.
-
-  Done:
-  - `SystemMonthlyBatch`, `AggregatedMonthlyActions` in `src/model/competitive_batch.rs`
-  - `CompetitiveTransition`, `CompetitiveHistory` in `src/model/competitive_history.rs`
-  - `resolve_monthly_batches` in `src/sim/resolve.rs`
-  - `transition_competitive()` in `src/sim/transition_competitive.rs`
-  - `observe_for_human()` in `src/sim/observe_competitive.rs`
-  - Month-1 preset resolution in `src/competitive/resolution.rs`
-  - CLI month-1 resolution demo + month-2 executive report preview
-  - Golden `tests/golden_competitive_seed42.rs` hash `05a422b51a2c24e8`
-  - Package version bumped to `0.1.32`
-
-  Deferred / Non-Goals:
-  - AI players (I6), events/delays (I7), Stata CLI (I8)
-  - Full 24-month campaign loop, competitive replay artifact, competitive autosave
-  - No stabilization golden hash changes
-
-  Verification:
-  - Permutation-invariance test for batch collection order
-  - Stabilization golden hash `6fb1ebbea564274f` unchanged at seed 42
-  - `cargo fmt --check`, `cargo test` pass (173 tests)
-
-- Feature: Competitive campaign runtime I6
-  Status: Complete
-  Started: 2026-06-25
-  Branch: feat/competitive-ai-players
-
-  Summary:
-  Add deterministic AI rival batch generation with style-weighted command
-  scoring, lagged-public-log response, and inspectable rationale strings.
-
-  Done:
-  - `compute_ai_batch()` and `month1_batches_with_ai()` in `src/competitive/resolution.rs`
-  - `SystemMonthlyBatch.rationale` persisted for AI action traceability
-  - Competitive month-1 resolver switched from fixed rival presets to AI-generated batches
-  - Seed plumbed through month-1 competitive resolution helpers for deterministic tie-breaks
-  - New tests in `tests/competitive_ai_players.rs`; competitive golden updated in I7
-  - Package version bumped to `0.1.33`
-
-  Deferred / Non-Goals:
-  - Events/delays/annual tick (I7) and Stata CLI (I8) — completed in follow-on slices
-  - Full 24-month campaign loop, competitive replay artifact, competitive autosave
-  - No stabilization golden hash changes
-
-  Verification:
-  - `cargo fmt --check`, `cargo test` pass (189 tests)
-  - Competitive seed-42 golden hash `88d07f9e1bbd6f04` (updated in I7)
-  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
-
-- Feature: Competitive campaign runtime I7
-  Status: Complete
-  Branch: feat/competitive-events-delays
-  Version: 0.1.34
-
-  Done:
-  - `resolve_competitive_inputs` with `monthly_events` and `annual_policy` streams
-  - `PendingEffectKind` and `apply_due_pending_effects` at month start
-  - Institution phase (payer/state) and `build_multi_month_resolution_history`
-  - CLI months 2–3 preview; golden hash `88d07f9e1bbd6f04`
-
-- Feature: Competitive campaign runtime I8
-  Status: Complete
-  Branch: feat/competitive-stata-cli
-  Version: 0.1.35
-
-  Done:
-  - `src/cli/competitive_parse.rs` for MVP `verb arg=value` syntax
-  - TTY interactive human batch entry wired to `resolve_competitive_month`
-  - Non-TTY preset fallback for CI/tests
-
-  Deferred / Non-Goals:
-  - Full 24-month interactive loop, competitive autosave, syntax highlighting/autocomplete
-
-- Feature: Competitive bounded multi-month loop
-  Status: Complete
-  Branch: feat/competitive-multi-month-loop
-  Version: 0.1.36
-
-  Done:
-  - Competitive CLI preview resolves one coherent three-month loop from a single
-    evolving `CompetitiveWorldState`
-  - Per-month executive reports precede human command entry
-  - TTY mode accepts Stata-like batches each month; non-TTY mode uses deterministic
-    fallback batches for CI/tests
-  - Focused tests cover three-month non-TTY progression and fallback batch policy
-
-  Deferred / Non-Goals:
-  - Full 24-month campaign loop, competitive autosave, replay artifact export
-  - Scenario file loading
-
-- Feature: Competitive command prompt ergonomics
-  Status: Complete
-  Branch: feat/competitive-prompt-ergonomics
-  Version: 0.1.37
-
-  Done:
-  - Shared competitive command catalog metadata for parser help and REPL completion
-  - Competitive help context now lists available commands for `help`/`?`
-  - Colored command vs argument token rendering for competitive command reference lines
-  - Verb-only Tab autocomplete in competitive TTY command entry (fallback to plain input when unavailable)
-  - Focused parser, style, guidance, and REPL completion tests
-
-  Deferred / Non-Goals:
-  - Argument-key and enum-value autocomplete
-  - Full 24-month campaign loop, competitive autosave, replay artifact export, scenario loading
-
-- Feature: New-player How to Play manual
-  Status: Complete
-  Version: 0.1.38
-
-  Summary:
-  Add a player-facing manual for current stabilization and competitive-preview
-  flows.
-
-  Done:
-  - `docs/how-to-play.md` with quickstart, campaign flow, terminology, command
-    examples, worked interaction example, and difficulty recovery tips
-  - README documentation index updated
-  - Package version bumped to `0.1.38`
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No full 24-month competitive campaign
-  - No scenario loading
-
-- Feature: External playtest protocol refresh
-  Status: Complete
-  Branch: feat/external-playtest-protocol
-  Version: 0.1.39
-
-  Summary:
-  Add a Phase 7 prep protocol for informal external playtests of the current
-  stabilization and competitive-preview CLI flows.
-
-  Done:
-  - `docs/external-playtest-protocol.md` with setup, stabilization and
-    competitive session scripts, observation rubric, post-session prompts,
-    note template, privacy cautions, and synthesis guidance
-  - README documentation index and current-priority wording updated
-  - Package version bumped to `0.1.39`
-
-  Deferred / Non-Goals:
-  - No runtime behavior changes
-  - No scenario loader, 24-month competitive campaign, or new strategic actors
-  - No formal human-subjects research process or policy-forecasting claim
-
-- Feature: Minimal stabilization scenario loader
-  Status: Complete
-  Branch: feat/minimal-scenario-loader
-  Version: 0.1.40
-
-  Summary:
-  Add a narrow TOML runtime scenario boundary for the existing five-turn
-  `stabilization-v1` flow.
-
-  Done:
-  - ADR-0007 accepts `scenario-toml-0.1.40` for stabilization only
-  - `scenarios/stabilization-v1.toml` records current genesis state, learning
-    objectives, actor stubs, and fixed five-turn schedule
-  - `src/scenario/` parses and validates the bundled scenario before fresh
-    stabilization runs
-  - Package version bumped to `0.1.40`
-
-  Deferred / Non-Goals:
-  - No competitive scenario loading
-  - No arbitrary scenario path CLI option
-  - No scenario migration tooling or schema generation
-  - No transition, replay artifact, or session-save format changes
-
-  Verification:
-  - Scenario tests cover valid fixture, malformed TOML, ruleset mismatch,
-    unsupported campaign, unsupported turn unit, missing actor stub, and current
-    turn schedule
-  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
-  - Competitive seed-42 golden hash unchanged at `88d07f9e1bbd6f04`
-  - `cargo fmt --check`, `cargo test` pass
 
 - Feature: MCP agent support
   Status: Complete
@@ -481,26 +177,180 @@ reconstructing it from the diff.
   - `cargo check --bin hs-mgt-game-mcp`, `cargo test`, and `cargo fmt --check`
     pass
 
+- Feature: CLI arbitrary scenario path selection
+  Status: Complete
+  Started: 2026-06-27
+  Branch: feat/cli-scenario-loading
+  Version: 0.1.42
+
+  Summary:
+  Add CLI support for `--scenario <PATH>` / `-s <PATH>` flags to load and play
+  arbitrary scenario TOML files, bypassing campaign selection and resume prompts
+  when a custom scenario is loaded.
+
+  Done:
+  - Parse CLI arguments in `src/main.rs`
+  - Update `run()`, `read_stabilization_run_config()`, and `read_stabilization_run_setup()` in `src/cli/session.rs`
+  - Add integration tests in `tests/scenario_selection_tests.rs`
+  - Package version bumped to `0.1.42`
+
+  Deferred / Non-Goals:
+  - No competitive scenario loading from TOML (remains deferred)
+  - No changes to transition logic, state hashes, or session save format
+
+  Verification:
+  - Golden hashes (`6fb1ebbea564274f` and `88d07f9e1bbd6f04`) are unchanged
+  - All 219 tests pass successfully
+
+- Feature: Minimal stabilization scenario loader
+  Status: Complete
+  Branch: feat/minimal-scenario-loader
+  Version: 0.1.40
+
+  Summary:
+  Add a narrow TOML runtime scenario boundary for the existing five-turn
+  `stabilization-v1` flow.
+
+  Done:
+  - ADR-0007 accepts `scenario-toml-0.1.40` for stabilization only
+  - `scenarios/stabilization-v1.toml` records current genesis state, learning
+    objectives, actor stubs, and fixed five-turn schedule
+  - `src/scenario/` parses and validates the bundled scenario before fresh
+    stabilization runs
+  - Package version bumped to `0.1.40`
+
+  Deferred / Non-Goals:
+  - No competitive scenario loading
+  - No arbitrary scenario path CLI option
+  - No scenario migration tooling or schema generation
+  - No transition, replay artifact, or session-save format changes
+
+  Verification:
+  - Scenario tests cover valid fixture, malformed TOML, ruleset mismatch,
+    unsupported campaign, unsupported turn unit, missing actor stub, and current
+    turn schedule
+  - Stabilization seed-42 golden hash unchanged at `6fb1ebbea564274f`
+  - Competitive seed-42 golden hash unchanged at `88d07f9e1bbd6f04`
+  - `cargo fmt --check`, `cargo test` pass
+
 ## Present
 
-No active slice. Competitive runtime I1–I8, bounded three-month loop,
+No active slice. Competitive runtime I1-I8, the bounded three-month loop,
 competitive command-prompt ergonomics, external playtest protocol refresh, the
-minimal stabilization scenario loader, bounded MCP agent-play support, and CLI
-scenario file path selection are complete for the MVP preview, Phase 7 prep, Phase 6.2
-scenario-loading, and agent-interface tracks.
+minimal stabilization scenario loader, bounded MCP agent-play support, CLI
+scenario file path selection, automated MCP playtest findings, playtest-guided
+player guidance, and this SDD cleanup are complete.
 
 ## Future
 
-### Parallel / gated tracks
+### Prioritized / gated tracks
 
-- **External playtest synthesis** (Phase 7 prep): run protocol sessions and
-  summarize findings in a versioned playtest findings document.
-- **Medicare/Medicaid strategic actors** (Phase 5.1 / 6.1, gated): excluded until
-  brief expands; actor cards required first.
-- **Scenario data loading runtime** (Phase 6.2): after format design approval;
-  minimal stabilization TOML loading and arbitrary scenario path selection are complete;
-  competitive scenario loading and migration tooling remain deferred.
-- **MCP agent interface expansion**: HTTP transport, auth, durable MCP session
-  persistence, full competitive campaign length, and replay/export integration
-  remain deferred until bounded agent play produces evidence for those needs.
-- **Clippy CI / release automation** (Phase 0 / 8): explicitly deferred.
+- Track: External playtest synthesis
+  Phase / Gate: Phase 7 prep; use `docs/external-playtest-protocol.md` and the
+  v0.1.42 automated findings as baseline evidence.
+
+  Next actionable slice:
+  Run a small external or semi-external playtest batch for current
+  `stabilization-v1` and `competitive-regional-v1` preview flows, then add a
+  versioned findings document that separates comprehension, strategic tension,
+  winnability, entertainment, and educational debrief observations.
+
+  Verification target:
+  Findings cite session counts, campaign(s), seeds or setup, observation notes,
+  post-session prompts, and prioritized follow-up recommendations. No runtime
+  change is required unless findings identify a narrow blocking defect.
+
+  Deferred / Non-Goals:
+  No formal human-subjects research process, empirical calibration claim,
+  scoring redesign, or broad balance pass.
+
+- Track: Competitive campaign hardening
+  Phase / Gate: Phase 6/7; start only after playtest findings identify concrete
+  comprehension, pacing, exploit, or command-entry issues.
+
+  Next actionable slice:
+  Pick one bounded issue from playtest evidence, such as month-summary clarity,
+  command help coverage, AI rationale visibility, or a three-month pacing
+  problem, and address it without expanding campaign length.
+
+  Verification target:
+  Focused CLI/parser/simulation tests cover the changed behavior, competitive
+  seed-42 golden hash is unchanged unless transition semantics intentionally
+  change, and player-facing docs explain any new guidance.
+
+  Deferred / Non-Goals:
+  Full 24-month campaign loop, competitive autosave, competitive replay export,
+  competitive scenario loading, multiplayer, and new strategic actor classes.
+
+- Track: Scenario data loading expansion
+  Phase / Gate: Phase 6.2; proceed only with authoring or playtest evidence that
+  the current stabilization-only TOML boundary is limiting iteration.
+
+  Next actionable slice:
+  Extend scenario loading in the smallest useful direction, such as additional
+  stabilization fixture validation, authoring diagnostics, or a design-only
+  competitive scenario-loading plan before runtime support.
+
+  Verification target:
+  Scenario parser/validator tests cover valid input, unsupported campaign or
+  format, missing required content, and CLI error reporting. Existing
+  `scenario-toml-0.1.40` stabilization files remain valid.
+
+  Deferred / Non-Goals:
+  No unrestricted rules language, no migration framework without a concrete
+  versioning need, no competitive loader until the state boundary and campaign
+  length are explicitly accepted.
+
+- Track: MCP agent interface expansion
+  Phase / Gate: Agent-play support; proceed only after bounded stdio play
+  exposes a specific need that cannot be met through current tools.
+
+  Next actionable slice:
+  Add one evidence-backed MCP improvement, such as a richer observation summary,
+  safer error payload, or playtest automation affordance, while preserving the
+  local stdio boundary.
+
+  Verification target:
+  MCP session tests cover both campaigns, invalid-command non-advancement,
+  bounded completion, and same-seed determinism. Tool DTO shape changes are
+  documented in `docs/mcp-agent-interface.md`.
+
+  Deferred / Non-Goals:
+  HTTP transport, auth, durable session persistence, multi-client coordination,
+  full competitive campaign length, and replay/export integration.
+
+- Track: Medicare/Medicaid strategic actors
+  Phase / Gate: Phase 5.1/6.1; blocked until actor-card and scenario briefs
+  define authority, information, objectives, and learning purpose for the actor.
+
+  Next actionable slice:
+  Draft or update actor cards and a scenario brief section before adding runtime
+  behavior. Choose one institution and one localized interaction rather than a
+  general public-payer framework.
+
+  Verification target:
+  Domain docs distinguish actor utility from social welfare, define observation
+  boundaries, and label evidence-backed mechanisms versus design abstractions.
+  Runtime implementation, if later approved, must include deterministic actor
+  rationale tests.
+
+  Deferred / Non-Goals:
+  National policy simulation, federal budget modeling, full Medicaid eligibility
+  rules, Medicare payment reproduction, and authoritative policy forecasting.
+
+- Track: Clippy CI / release automation
+  Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
+  preparation becomes the active priority.
+
+  Next actionable slice:
+  Add one lightweight quality or release check with documented local command
+  usage, starting with non-invasive checks before release packaging.
+
+  Verification target:
+  Local command passes, CI documentation is updated, and the change does not
+  alter simulation behavior or require new release conventions beyond
+  `docs/versioning-policy.md`.
+
+  Deferred / Non-Goals:
+  Public release packaging, publication automation, data/licensing finalization,
+  or broad repository restructuring.

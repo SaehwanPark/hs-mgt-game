@@ -6,6 +6,16 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.45] - 2026-06-30
+
+### Changed
+
+- Cleaned up `SPEC.md` so next development tracks are specific, gated, and
+  verification-oriented.
+- Refreshed SDD and companion design docs for the current bounded competitive
+  preview, stabilization scenario-loader, and MCP agent-play state.
+- Package version bumped to `0.1.45`.
+
 ## [0.1.44] - 2026-06-29
 
 ### Changed

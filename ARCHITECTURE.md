@@ -170,13 +170,14 @@ Responsible for:
 - educational debrief hooks
 - explicit scenario non-goals and evidence gaps
 
-Current design artifacts: `docs/actor-cards.md`,
+Current design artifacts include `docs/actor-cards.md`,
 `docs/first-scenario-brief.md`, `docs/competitive-scenario-brief.md`,
-`docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. These
-documents are not runtime schemas and do not add scenario loading for the
-competitive campaign until approved slices land.
+`docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. Runtime
+scenario loading is implemented only for `stabilization-v1`; competitive
+scenario loading and scenario migration tooling remain deferred until a bounded
+slice is approved.
 
-Last Reviewed: 2026-06-24
+Last Reviewed: 2026-06-30
 Status: Verified
 
 ## Competitive Campaign (partial runtime)
@@ -202,7 +203,7 @@ Genesis world, observation derivation, and validation demos live in
 The full 24-month campaign, competitive autosave, and scenario loading remain
 deferred.
 
-Last Reviewed: 2026-06-25
+Last Reviewed: 2026-06-30
 Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI, bounded loop)
 
 ## Open Architectural Decisions
@@ -219,7 +220,8 @@ Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
   golden integration test lives in `tests/golden_seed42.rs`.
 - Ruleset and scenario versioning format: design draft at
-  `docs/scenario-format-draft.md`; no runtime loader yet.
+  `docs/scenario-format-draft.md`; the accepted runtime loader is currently
+  limited to `scenario-toml-0.1.40` for `stabilization-v1`.
 - Decision-record convention: **addressed** by
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
 - Competitive campaign boundaries: **addressed** by ADRs

@@ -3,6 +3,23 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## SDD Status Drift Needs A Cross-Doc Scan
+
+- Context: Cleaning up `SPEC.md` after competitive preview, scenario-loader, MCP,
+  and playtest slices had landed.
+- Symptom: `SPEC.md` and `ARCHITECTURE.md` reflected the current runtime, while
+  companion docs still described competitive work as design-only, stubbed, or
+  planned I1-I8 runtime.
+- Cause: Slice completion updated release history faster than older design docs
+  that originally framed the implementation sequence.
+- Resolution: Refresh `SPEC.md` Future into gated actionable tracks, archive
+  displaced completion detail, and scan canonical/companion docs for stale
+  status phrases before final verification.
+- Prevention: For SDD cleanup PRs, run a targeted `rg` over `SPEC.md`,
+  `README.md`, `ARCHITECTURE.md`, and `docs/*.md` for old version numbers,
+  "stub", "design only", "runtime deferred", and completed slice names before
+  calling the docs aligned.
+
 ## MCP SDK Schema Derives Need Direct Dependencies
 
 - Context: Adding the first local MCP stdio server with the official `rmcp`
@@ -274,4 +291,3 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: `std::io::stdin().is_terminal()` returns `true` inside a PTY, causing the game to block waiting for human command input instead of executing the fallback non-TTY batch.
 - Resolution: Rerun or structure the test execution command with stdin redirected from `/dev/null` (`cargo test < /dev/null`) to force `is_terminal() == false`.
 - Prevention: Document stdin redirection for local workspace tests, or mock terminal checks inside test suites when standard input prompts are under test.
-

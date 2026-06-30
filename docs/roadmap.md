@@ -598,7 +598,8 @@ Expand the validated slice into a coherent first campaign suitable for external 
 
 ## 6.0 Competitive Campaign Design Track
 
-**Status:** Design artifacts delivered at v0.1.28; runtime deferred.
+**Status:** Design artifacts delivered at v0.1.28; bounded preview runtime
+I1-I8 delivered through v0.1.37.
 
 Parallel to the stabilization demo (`stabilization-v1`), the competitive
 regional market campaign (`competitive-regional-v1`) adds:
@@ -624,9 +625,12 @@ regional market campaign (`competitive-regional-v1`) adds:
 - [`cli-command-grammar-draft.md`](cli-command-grammar-draft.md)
 - ADRs 0003–0006
 
-**Runtime slices (planned):** campaign router (I1), monthly executive report
+**Runtime slices delivered:** campaign router (I1), monthly executive report
 (I2), action economy (I3), multi-system state (I4), simultaneous resolver (I5),
-AI players (I6), events/delays/annual tick (I7), Stata CLI (I8).
+AI players (I6), events/delays/annual tick (I7), and Stata CLI (I8). The bounded
+three-month preview, prompt help, and verb autocomplete are implemented; full
+24-month competitive campaign length, competitive autosave, competitive replay
+export, and competitive scenario loading remain deferred.
 
 **Note:** Phase 9 role-based classroom multiplayer assigns human participants to
 organizational roles (CEO, CFO, etc.). That is distinct from K AI health-system

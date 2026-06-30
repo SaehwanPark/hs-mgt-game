@@ -8,7 +8,7 @@
 
 - Stata-like `verb arg=value` entry with reproducible command log
 - Syntax highlighting when stdout is a TTY and `NO_COLOR` is unset
-- Tab autocomplete for verbs and enum arguments
+- Tab autocomplete, currently implemented for verbs only
 - In-game `help` without leaving the session
 - Parse layer only — no simulation logic (ADR-0006)
 
@@ -48,7 +48,7 @@ hold
 | `help` | List verbs with one-line description |
 | `help <verb>` | Show arguments, costs, example |
 | `?` | Alias for `help` |
-| `quit` / `q` | Autosave and exit (competitive save format deferred to slice I1+; stabilization uses ADR-0002) |
+| `quit` / `q` | Exit command path; stabilization autosave uses ADR-0002, competitive save semantics remain deferred |
 | `status` | Show remaining AP, cash, political capital |
 | `log` | Show commands submitted this month (preview before submit) |
 

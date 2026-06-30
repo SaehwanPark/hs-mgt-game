@@ -6,33 +6,13 @@ The project models health-policy outcomes as the result of strategic interaction
 
 ## Status
 
-Early research and design phase with a deterministic architecture proof, minimal
-playable CLI demo, first scenario design artifacts, stable replay state hash
-checks, a starting executive dashboard at v0.1.13, per-turn interactive play
-at v0.1.14, deterministic replay artifact export at v0.1.15, library module
-boundaries at v0.1.16, GitHub Actions CI at v0.1.18, and Phase 5 bounded-slice
-scope register (docs closure) at v0.1.19, and Phase 1 implications memo with
-parameter-source ledger at v0.1.20, fifth-turn competitor capacity slice at
-v0.1.21, Phase 0 governance docs at v0.1.22, and SPEC/Phase 5 doc reconciliation
-at v0.1.23, first ADR and scenario format draft at v0.1.24, and forecast/uncertainty CLI
-preview at v0.1.25, and rich-terminal CLI display at v0.1.26, and CLI session UX
-(quit, autosave, guidance, beginner mode) at v0.1.27, and competitive gameplay
-design package (parallel campaign spec, core loop, ADRs 0003–0006) at v0.1.28,
-and competitive campaign router with month-1 executive report preview at v0.1.29,
-and competitive action economy validation at v0.1.30,
-and competitive multi-system genesis state at v0.1.31,
-and competitive simultaneous monthly resolver at v0.1.32,
-and competitive AI player batch generation at v0.1.33,
-and competitive events/delays at v0.1.34,
-and Stata-like competitive command entry at v0.1.35,
-and bounded three-month competitive loop at v0.1.36,
-and competitive command prompt ergonomics (help catalog, token color, verb autocomplete) at v0.1.37,
-and new-player "How to Play" manual at v0.1.38,
-and external playtest protocol refresh at v0.1.39,
-and minimal stabilization scenario TOML loading at v0.1.40,
-and local stdio MCP agent-play support at v0.1.41, CLI scenario path selection at
-v0.1.42, automated MCP playtest findings at v0.1.43, and playtest-guided
-player guidance at v0.1.44.
+Early research, design, and vertical-slice development phase. The current build
+includes a deterministic five-turn stabilization campaign, replay and state-hash
+checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
+with `--scenario` path selection, a bounded three-month competitive regional
+preview with AI rivals and Stata-like command entry, and a local stdio MCP server
+for bounded agent play of both current campaigns. The SDD index was refreshed at
+v0.1.45 to make the next development tracks more actionable.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).

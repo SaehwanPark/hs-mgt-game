@@ -1,6 +1,6 @@
 # Initial System Boundary and Ontology Draft
 
-**Status:** Phase 2 conceptual design draft (updated for competitive campaign design)  
+**Status:** Phase 2 conceptual design draft (updated for bounded competitive preview)
 **Audience:** Contributors and domain reviewers
 
 This document defines the conceptual boundary for regional market slices. It
@@ -15,7 +15,7 @@ Two campaign concepts coexist:
 | Campaign | Id | Turn unit | Status |
 | --- | --- | --- | --- |
 | Stabilization demo | `stabilization-v1` | Abstract (5 points) | Implemented v0.1.27 |
-| Competitive regional market | `competitive-regional-v1` | 1 month | Design only (v0.1.28) |
+| Competitive regional market | `competitive-regional-v1` | 1 month | Bounded three-month preview implemented v0.1.36 |
 
 See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md`](competitive-scenario-brief.md).
 
@@ -30,11 +30,12 @@ See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md
   debrief.
 - Each turn represents an executive decision point, not a fixed calendar unit.
 
-### Competitive campaign (design)
+### Competitive campaign
 
 - Same regional US market; multiple health systems (1 human + K AI players).
 - One strategy turn equals one calendar month; annual policy tick every 12 months.
-- Campaign length parameterized (default 24 months in competitive scenario brief).
+- Current executable preview runs three months. The competitive scenario brief
+  still describes the deferred 24-month target.
 
 - The scope is regional and institutional. National policy, federal budgets,
   and macroeconomic conditions may appear only as resolved external inputs until
@@ -132,25 +133,26 @@ Excluded from the **stabilization demo** conceptual boundary:
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.
-- Scenario or ruleset file loading.
+- Scenario or ruleset file loading beyond the accepted stabilization TOML
+  boundary.
 - Graphical interface or release packaging.
 
-The **competitive campaign** (design) adds multi-system peer players, monthly
-calendar, action economy, and Stata-like CLI per ADRs 0003–0006. It does not
-replace the stabilization demo. Classroom hot-seat multiplayer (Phase 9) remains
-deferred.
+The **competitive campaign** adds multi-system peer players, monthly calendar,
+action economy, simultaneous resolution, AI rival batches, event/delay ticks,
+and Stata-like CLI per ADRs 0003–0006. The current runtime remains a bounded
+three-month preview and does not replace the stabilization demo. Classroom
+hot-seat multiplayer (Phase 9) remains deferred.
 
 Mid-run session save is implemented for the stabilization interactive path
-(ADR-0002). Competitive campaign save semantics are deferred to runtime slice I1+.
+(ADR-0002). Competitive campaign save semantics remain deferred.
 
 ## Deferred Ontology Work
 
 - Formal actor-card template covering objectives, authority, constraints,
   information, outside options, risk posture, time horizon, and decision
   procedure. Initial design artifact: [`actor-cards.md`](actor-cards.md).
-- Scenario and ruleset versioning format. The first scenario concept is
-  documented in [`first-scenario-brief.md`](first-scenario-brief.md), but no
-  runtime format is approved yet.
+- Scenario and ruleset versioning beyond the accepted stabilization-only
+  `scenario-toml-0.1.40` runtime format.
 - Patient cohort and distributional outcome vocabulary.
 - Service-line, capital-allocation, and market-area vocabulary.
 - Formal belief-state representation beyond observation snapshots.
