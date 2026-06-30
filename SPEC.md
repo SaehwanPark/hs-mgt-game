@@ -58,9 +58,41 @@ reconstructing it from the diff.
 | SDD next-development cleanup | v0.1.45 | SPEC Future tracks made actionable; stale companion doc statuses refreshed | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Deferred item triage | v0.1.46 | Worthy deferred Past items folded into actionable Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest validation pivot | v0.1.47 | Phase 7 validation docs moved from external human recruitment to reproducible AI-agent playtests | 228 | `88d07f9e1bbd6f04` (competitive) |
+| Feedback-aligned future planning | v0.1.48 | External feedback translated into validation-first SDD Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Feedback-aligned future planning
+  Status: Complete
+  Started: 2026-06-30
+  Version: 0.1.48
+
+  Summary:
+  Review external project feedback and translate it into docs-only future plans
+  that prioritize gameplay validation, strategy-space diagnostics, debrief
+  quality, one exemplary scenario, and model-confidence annotations before
+  broad new architecture.
+
+  Done:
+  - Future tracks now foreground falsifiable gameplay hypotheses, diagnostic
+    evidence, debrief QA, canonical scenario quality, evidence/confidence
+    labeling, and abstraction-freeze gates
+  - Agent-playtest protocol now asks findings to test explicit gameplay
+    validity hypotheses and strategy-space diagnostics when relevant
+  - Roadmap and architecture planning language now makes validation evidence the
+    gate for broader scenario tooling, calibration, and platform expansion
+  - Package version bumped to `0.1.48`
+
+  Deferred / Non-Goals:
+  - No runtime behavior, scenario schemas, rulesets, replay artifacts, MCP DTOs,
+    golden hashes, or transition semantics changed
+  - No strategy-space diagnostic implementation, new scenario loader,
+    calibration pass, human learning claim, or policy-forecasting claim
+
+  Verification:
+  - Rust checks, markdown diff checks, stale-claim scan, and domain QA completed
+    for the docs-only planning refresh
 
 - Feature: AI-agent playtest validation pivot
   Status: Complete
@@ -299,7 +331,7 @@ competitive command-prompt ergonomics, external playtest protocol refresh, the
 minimal stabilization scenario loader, bounded MCP agent-play support, CLI
 scenario file path selection, automated MCP playtest findings, playtest-guided
 player guidance, SDD cleanup, deferred-item triage, and the AI-agent playtest
-validation pivot are complete.
+validation pivot, and feedback-aligned future planning refresh are complete.
 
 ## Future
 
@@ -312,21 +344,63 @@ validation pivot are complete.
 
   Next actionable slice:
   Run a versioned AI-agent playtest batch for current `stabilization-v1` and
-  `competitive-regional-v1` preview flows, then add a findings document that
-  separates command comprehension, strategic tension, winnability, exploit
-  discovery, pacing proxies, and educational debrief coherence.
+  `competitive-regional-v1` preview flows against the protocol's gameplay
+  validity hypotheses. Add a findings document that separates command
+  comprehension, strategic tension, winnability, exploit discovery, pacing
+  proxies, strategy-space diagnostics, and educational debrief coherence.
 
   Verification target:
   Findings cite session counts, campaign(s), seeds, difficulty, agent profiles
   or prompts, actor-visible observations, submitted commands, validation
-  failures, histories, debriefs, evidence limits, and prioritized follow-up
-  recommendations. No runtime change is required unless findings identify a
-  narrow blocking defect.
+  failures, histories, debriefs, diagnostic summaries, evidence limits, and
+  prioritized follow-up recommendations. The findings explicitly test whether
+  multiple strategies can succeed, whether any first-month command dominates,
+  whether outcomes are explainable from the debrief, whether rival behavior is
+  recognizable but imperfectly predictable, and whether a month can be completed
+  without implementation docs.
 
   Deferred / Non-Goals:
   No external human recruitment gate, formal human-subjects research process,
   measured human learning claim, empirical calibration claim, scoring redesign,
   or broad balance pass.
+
+- Track: Strategy-space diagnostics
+  Phase / Gate: Phase 7; start with analysis artifacts only, and implement
+  tooling only when manual or scripted findings show repeated diagnostic needs.
+
+  Next actionable slice:
+  For one current campaign and seed matrix, summarize action frequencies,
+  outcome distributions, strategy clusters, stochastic sensitivity, and any
+  dominance or near-dominance findings from committed histories and debriefs.
+
+  Verification target:
+  The diagnostic report links claims to captured runs, separates simulated-player
+  behavior from interpretation, and names which findings should affect guidance,
+  debriefing, balance, or future tooling. No formula tuning should happen from a
+  single profile, seed, or campaign.
+
+  Deferred / Non-Goals:
+  No analytics platform, policy forecast validation, automated optimization
+  framework, or runtime export change unless a later slice proves the need.
+
+- Track: Debrief quality as product surface
+  Phase / Gate: Phase 6.4/7.6; proceed when playtest evidence shows a specific
+  gap in causal explanation, decision-quality review, or uncertainty framing.
+
+  Next actionable slice:
+  Improve or evaluate one debrief surface so it answers: what happened, why it
+  happened, what the player knew, which assumptions mattered, what alternatives
+  were available, and whether a poor outcome reflected decision quality or
+  unfavorable realization.
+
+  Verification target:
+  Debrief tests or findings prove the output is derived from committed history,
+  distinguishes actor-visible observations from true state, and labels
+  uncertainty without revealing hidden mechanisms too early in play.
+
+  Deferred / Non-Goals:
+  No grading system, LMS integration, full counterfactual engine, or omniscient
+  player-facing report during active play.
 
 - Track: Competitive campaign hardening
   Phase / Gate: Phase 6/7; start only after playtest findings identify concrete
@@ -371,9 +445,11 @@ validation pivot are complete.
   the current stabilization-only TOML boundary is limiting iteration.
 
   Next actionable slice:
-  Extend scenario loading in the smallest useful direction, such as additional
-  stabilization fixture validation, authoring diagnostics, or a design-only
-  competitive scenario-loading plan before runtime support.
+  Develop one exemplary scenario brief or fixture plan before broadening runtime
+  tooling. The scenario should include financial pressure, one workforce
+  conflict, one payer interaction, one competitive response, one policy or
+  regulatory process, delayed consequences, and at least two defensible
+  strategic directions. Extend loading only after authoring friction is concrete.
 
   Verification target:
   Scenario parser/validator tests cover valid input, unsupported campaign or
@@ -390,14 +466,16 @@ validation pivot are complete.
   than the current visibly labeled prototype abstractions.
 
   Next actionable slice:
-  Create or extend a parameter/evidence ledger for one bounded mechanism,
-  linking model assumptions to sources, plausible ranges, uncertainty, and
-  unresolved normative choices before changing formulas.
+  Create or extend a parameter/evidence ledger for one bounded mechanism, and
+  assign model-confidence labels that distinguish empirically calibrated,
+  literature-grounded, expert-informed, stylized abstraction, and
+  gameplay-driven mechanics before changing formulas.
 
   Verification target:
   The ledger distinguishes empirical claims, design abstractions, balancing
-  choices, and social-welfare assumptions. Any later runtime formula change must
-  cite the ledger and include deterministic regression tests.
+  choices, social-welfare assumptions, and confidence labels. Any later runtime
+  formula change must cite the ledger and include deterministic regression
+  tests.
 
   Deferred / Non-Goals:
   External data ingestion pipeline, empirical calibration across the whole
@@ -435,7 +513,9 @@ validation pivot are complete.
   Domain docs distinguish actor utility from social welfare, define observation
   boundaries, and label evidence-backed mechanisms versus design abstractions.
   Runtime implementation, if later approved, must include deterministic actor
-  rationale tests.
+  rationale tests. Actor decisions should favor explicit institutional
+  heuristics, constraints, routines, aspiration levels, and attention limits over
+  cleaner but less realistic global optimization.
 
   Deferred / Non-Goals:
   National policy simulation, federal budget modeling, full Medicaid eligibility
@@ -460,6 +540,26 @@ validation pivot are complete.
   Full US health-system model, individual patient simulation, broad federal
   policy lifecycle framework, global equilibrium AI, and speculative generalized
   frameworks.
+
+- Track: Architecture and documentation discipline
+  Phase / Gate: Cross-cutting SDD; apply before promoting any Future item into
+  Present.
+
+  Next actionable slice:
+  Freeze major abstractions by default. Permit new architecture, scenario
+  generalization, or documentation taxonomy only when a playtest, authoring, QA,
+  or debrief finding names a concrete need that current structures cannot meet.
+
+  Verification target:
+  New slices cite the finding that justifies the abstraction, preserve
+  deterministic replay boundaries, and record non-goals. Documentation updates
+  should reduce ambiguity for future agents rather than expand the conceptual
+  framework without validation evidence.
+
+  Deferred / Non-Goals:
+  No broad framework expansion, reusable comparative-policy platform work, or
+  research-grade calibration until the compact educational strategy simulation
+  proves difficult, legible, and interesting decisions.
 
 - Track: Clippy CI / release automation
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release

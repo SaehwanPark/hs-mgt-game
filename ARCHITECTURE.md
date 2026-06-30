@@ -157,8 +157,26 @@ Status: Verified
 - Treat history as immutable after committed transitions.
 - Keep prototype formulas visibly labeled as abstractions until evidence and
   calibration work justify stronger claims.
+- Freeze major new abstractions unless playtest, scenario-authoring, debrief, or
+  domain-review evidence identifies a concrete need that current structures
+  cannot satisfy.
 
 Last Reviewed: 2026-06-23
+Status: Verified
+
+### Future Architecture Posture
+
+The current architecture is sufficiently expressive for validation of the
+bounded stabilization and competitive-preview slices. Future work should avoid
+adding generalized scenario tooling, actor frameworks, analytics platforms, or
+calibration structures until a documented finding shows that gameplay,
+authoring, debriefing, or validation is blocked by the current narrower shape.
+
+When a new abstraction is justified, the implementing slice should name the
+evidence source, keep deterministic replay and actor-observation boundaries
+intact, and leave unrelated platform goals deferred.
+
+Last Reviewed: 2026-06-30
 Status: Verified
 
 ### Scenario and Actor Design

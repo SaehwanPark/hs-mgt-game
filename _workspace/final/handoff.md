@@ -1,34 +1,33 @@
-# Final Handoff: AI-Agent Playtest Documentation Pivot
+# Final Handoff: Feedback-Aligned SDD Future Planning
 
 ## Changed Files
 
-- Added `docs/agent-playtest-protocol.md`.
-- Added `docs/decision-records/0009-ai-agent-playtest-validation-path.md` and
-  linked it from the ADR index.
-- Updated `README.md`, `SPEC.md`, `docs/roadmap.md`,
-  `docs/external-playtest-protocol.md`, `docs/mcp-playtesting-guide.md`,
-  `docs/glossary.md`, `docs/evidence-registry.md`,
-  `docs/phase5-scope-register.md`, and `docs/phase1-implications-memo.md`.
-- Added request summary, domain QA, and handoff artifacts under `_workspace/`.
-- Updated `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`, and `LESSONS.md`.
+- Updated `SPEC.md`, `ARCHITECTURE.md`, `README.md`, `CHANGELOG.md`,
+  `Cargo.toml`, and `Cargo.lock`.
+- Updated `docs/roadmap.md`, `docs/agent-playtest-protocol.md`, and
+  `docs/evidence-registry.md`.
+- Added a lesson to `LESSONS.md`.
+- Replaced the request summary, evidence map, domain QA, and final handoff under
+  `_workspace/`.
 
 ## Verification
 
-- MCP one-turn smoke test passed.
 - `cargo fmt --check` passed.
 - `cargo test` passed.
 - `git diff --check` passed.
-- Stale-language scan reviewed active and historical playtest terminology.
+- Stale-claim scan reviewed active and historical validation language.
 
 ## Known Limits
 
-- Full `scripts/run_automated_playtests.py` hung twice on the first
-  stabilization batch `submit_turn`; this was not fixed because the requested
-  change was documentation-only.
-- The docs now make AI-agent playtests the active validation path, but they do
-  not claim human educational outcome measurement.
+- This slice only updates future planning and evidence gates.
+- Strategy-space diagnostics, debrief improvements, scenario authoring changes,
+  calibration work, and runtime tooling remain future work.
+- AI-agent playtests remain simulated-player evidence, not measured human
+  learning or policy validation.
 
 ## Next Dependency
 
-The next agent-playtest findings slice should either fix or replace the hanging
-batch runner before relying on it for a versioned findings document.
+The next validation slice should run a versioned AI-agent playtest batch against
+the explicit hypotheses in `docs/agent-playtest-protocol.md`, then decide which
+single follow-up belongs in guidance, debriefing, diagnostics, scenario
+authoring, or runtime behavior.

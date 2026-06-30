@@ -2,7 +2,7 @@
 
 **Status:** Active Phase 7 validation protocol  
 **Audience:** Contributors, domain reviewers, and agent-playtest operators  
-**Version:** v0.1.47
+**Version:** v0.1.48
 
 This protocol replaces planned recruitment of external human playtesters for the
 current validation path. It uses AI agents or sub-agents to play the bounded
@@ -81,6 +81,45 @@ being tested:
 
 Do not tune numeric balance from a single profile, seed, or campaign.
 
+## Gameplay Validity Hypotheses
+
+Each synthesis should state which hypotheses it tests. The default competitive
+preview batch should test these five unless the findings document explains why a
+smaller scope is sufficient:
+
+- At least three materially different strategies can complete the current slice
+  without collapse under plausible seeds.
+- No single first-month command or command batch dominates across required
+  profiles and plausible seeds.
+- Agents can explain the main cause of an outcome after reading the debrief and
+  transition history.
+- Rival behavior is institutionally recognizable but not perfectly predictable
+  from the player's actor-visible report.
+- A first-time simulated player can complete a month using only actor-visible
+  observations, legal command hints, and player-facing docs, without consulting
+  implementation documentation.
+
+Failed hypotheses are useful evidence. Record whether the follow-up belongs in
+player guidance, command help, debriefing, balance investigation, scenario
+authoring, or runtime behavior.
+
+## Strategy-Space Diagnostics
+
+When the batch is large enough to support comparison, include compact
+diagnostics:
+
+- action frequencies by campaign, profile, seed, and month or turn;
+- outcome distributions for cash, access, trust, political capital, and other
+  scenario-relevant metrics;
+- strategy clusters or repeated command patterns;
+- regret-style notes where an obvious alternative was available from the same
+  actor-visible information;
+- sensitivity to stochastic inputs across named seeds;
+- dominance or near-dominance findings.
+
+Do not present diagnostics as equilibrium analysis or empirical calibration.
+They are validation aids for gameplay, comprehension, and debrief quality.
+
 ## Observation Rubric
 
 Score each agent batch from 1 to 5 and include short evidence notes:
@@ -101,7 +140,7 @@ friction, but it does not measure human cognitive burden.
 ## Synthesis Template
 
 Create versioned findings documents such as
-`docs/playtest-findings-v0.1.47.md`. Do not overwrite prior findings.
+`docs/playtest-findings-v0.1.48.md`. Do not overwrite prior findings.
 
 ```text
 Session batch id:

@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.48] - 2026-06-30
+
+### Changed
+
+- Refreshed SDD Future planning from external project feedback, prioritizing
+  gameplay validity hypotheses, strategy-space diagnostics, debrief quality, one
+  exemplary scenario, and model-confidence annotations before broad new
+  architecture.
+- Clarified that future abstraction, scenario-tooling, and calibration work
+  should be gated by playtest, authoring, or debrief evidence.
+- Package version bumped to `0.1.48`.
+
 ## [0.1.47] - 2026-06-30
 
 ### Added

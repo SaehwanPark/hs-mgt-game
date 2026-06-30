@@ -1,59 +1,56 @@
-# Domain QA: AI-Agent Playtest Documentation Pivot
+# Domain QA: Feedback-Aligned SDD Future Planning
 
 ## Status
 
-Pass with residual verification caveat.
+Pass.
 
 ## Reviewed Inputs
 
-- User request to implement the approved plan.
+- User request to implement the proposed plan
+- Supplied external feedback
 - `_workspace/00_input/request-summary.md`
+- `_workspace/01_evidence_map.md`
 - `README.md`
 - `SPEC.md`
+- `ARCHITECTURE.md`
+- `CHANGELOG.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/agent-playtest-protocol.md`
-- `docs/decision-records/0009-ai-agent-playtest-validation-path.md`
-- `docs/mcp-playtesting-guide.md`
-- `docs/glossary.md`
 - `docs/evidence-registry.md`
-- `docs/phase5-scope-register.md`
-- `docs/phase1-implications-memo.md`
+- `docs/harness/health-policy-strategy-game/team-spec.md`
 
 ## Findings
 
-- Scope is bounded to documentation, planning, ADR, glossary, and version
-  bookkeeping; no Rust runtime, ruleset, scenario, replay, MCP DTO, or golden
-  hash behavior changed.
-- The new protocol and roadmap language separate AI-agent playtest evidence
-  from measured human learning, empirical calibration, and policy-forecasting
-  claims.
-- In-game AI players remain distinct from AI-agent playtesters through glossary
-  and protocol language.
-- Deterministic boundaries are preserved because the protocol requires campaign,
-  seed, difficulty, observations, commands, histories, and debrief capture
-  through the MCP adapter.
+- Scope stayed docs-only: no Rust runtime, scenario format, ruleset, replay,
+  MCP DTO, transition, or golden-hash behavior changed.
+- Future planning now reflects the feedback's central risk: architecture and
+  documentation should not outrun validated gameplay, debrief quality, or
+  scenario authoring.
+- Agent-playtest guidance now has falsifiable gameplay hypotheses and
+  strategy-space diagnostics while preserving evidence limits.
+- Evidence planning now distinguishes model-confidence labels without implying
+  runtime schema or empirical calibration.
+- Architecture language preserves deterministic replay and actor-observation
+  boundaries while adding an evidence gate for major abstractions.
 
 ## Required Fixes
 
-None for the documentation pivot.
+None.
 
 ## Residual Risks
 
-- `scripts/run_automated_playtests.py` hung during verification on the first
-  stabilization batch `submit_turn`, despite a one-turn MCP smoke test passing.
-  Script debugging is a follow-up outside this docs-only change.
-- Agent-playtest evidence remains simulated-player evidence. Any future claim
-  about actual learner outcomes needs a separate human evaluation plan.
+- The next playtest batch may still expose automation issues before diagnostics
+  can be generated at scale.
+- Model-confidence labels need disciplined use in future mechanism work so they
+  do not become unsupported authority markers.
+- Human educational value remains unmeasured unless a separate human evaluation
+  plan is created later.
 
 ## Verification Evidence
 
-- `python3` MCP one-turn smoke test passed for `start_session` and
-  `submit_turn`.
-- `python3 scripts/run_automated_playtests.py` attempted twice and interrupted
-  after hanging on the first stabilization batch.
 - `cargo fmt --check` passed.
-- `cargo test` passed: 228 tests total across library and integration targets.
+- `cargo test` passed.
 - `git diff --check` passed.
-- Stale-language scan leaves active external-human wording only in historical,
-  superseded, or explicit evidence-limit contexts.
+- Stale-claim scan reviewed active and historical language about human learning,
+  policy forecasting, and external human recruitment.

@@ -12,7 +12,9 @@ checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
 with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
 for bounded agent play of both current campaigns. The SDD index was refreshed at
-v0.1.47 to make AI-agent playtests the active Phase 7 validation path.
+v0.1.48 to make AI-agent playtests the active Phase 7 validation path and to
+prioritize gameplay validation, diagnostics, debrief quality, one exemplary
+scenario, and model-confidence annotation before broad new architecture.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -95,11 +97,14 @@ cargo test
 
 Current priorities are:
 
-1. Run and synthesize AI-agent playtests using the Phase 7 protocol.
-2. Extend scenario data loading only after the minimal stabilization TOML slice
+1. Run and synthesize AI-agent playtests against explicit gameplay validity
+   hypotheses and strategy-space diagnostics.
+2. Treat debrief quality and causal explanation as primary product surfaces.
+3. Develop one exemplary scenario before broad scenario tooling.
+4. Extend scenario data loading only after the minimal stabilization TOML slice
    has playtest or authoring evidence.
-3. Competitive campaign hardening after bounded-loop playtests.
-4. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
+5. Competitive campaign hardening after bounded-loop playtests.
+6. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),

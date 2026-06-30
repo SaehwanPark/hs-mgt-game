@@ -7,6 +7,24 @@ This registry tracks mechanisms, evidence quality, and design use. It is not an
 empirical calibration ledger, and it should not be treated as validation for
 prototype integer parameters.
 
+## Model-Confidence Labels
+
+Future mechanism and parameter ledgers should use these labels when a mechanic
+is prepared for calibration, debrief, or scenario-authoring work. These are
+documentation labels only; they do not introduce a runtime schema.
+
+| Label | Meaning |
+| --- | --- |
+| Empirically calibrated | Parameter range or behavior is linked to cited data and applied in a versioned ruleset |
+| Literature-grounded | Mechanism direction or relationship is supported by literature, but current numbers are not calibrated |
+| Expert-informed | Mechanism is based on documented reviewer or practitioner judgment |
+| Stylized abstraction | Mechanism is intentionally simplified to preserve a credible strategic relationship |
+| Gameplay-driven | Mechanism or value exists primarily for tension, pacing, or teachability and must be labeled as such |
+
+Rows may carry more than one note, but do not blur empirical calibration with
+gameplay balancing. A prototype threshold remains an abstraction until the
+ledger records a source, range, and versioned ruleset use.
+
 ## Mechanism Registry
 
 | Mechanism | Design use | Evidence status | Notes |

@@ -597,6 +597,12 @@ Test for:
 Expand the validated slice into a coherent first campaign suitable for
 AI-agent validation and early educational review.
 
+Future Phase 6 work should prioritize the first release as an educational
+strategy simulation first, engaging gameplay second, reusable modeling platform
+third, and research-grade policy model fourth. Broader abstractions should wait
+for playtest, scenario-authoring, debrief, or domain-review evidence that the
+current compact structures are blocking validated gameplay or learning.
+
 ## 6.0 Competitive Campaign Design Track
 
 **Status:** Design artifacts delivered at v0.1.28; bounded preview runtime
@@ -651,6 +657,8 @@ Add enough depth to support a complete campaign:
 - and several strategic interaction types.
 
 Expansion should follow demonstrated gameplay needs, not a desire for completeness.
+Do not add a mechanism solely because the ontology can represent it; require a
+scenario, playtest, or debrief need.
 
 ## 6.2 Scenario System
 
@@ -665,6 +673,10 @@ Create a versioned, validated scenario format for:
 - and scoring or evaluation profiles.
 
 Support composition of known mechanisms without permitting arbitrary executable logic.
+Before broadening runtime tooling, develop one exemplary scenario that
+demonstrates financial pressure, a workforce conflict, a payer interaction, a
+competitive response, a policy or regulatory process, delayed consequences, and
+at least two defensible strategic directions.
 
 ## 6.3 Strategic Actor Expansion
 
@@ -678,6 +690,9 @@ Add bounded, interpretable decision models as required, such as:
 - and repeated-game reputation effects.
 
 Every decision model should expose a rationale suitable for debugging and teaching.
+Prefer explicit institutional heuristics, constrained optimization, aspiration
+levels, organizational routines, and actor-specific attention limits over
+increasingly formal global optimization.
 
 ## 6.4 Educational and Instructor Features
 
@@ -727,6 +742,10 @@ Provide:
 Evaluate whether the game is technically correct, behaviorally credible,
 strategically engaging, and educationally inspectable through reproducible
 AI-agent playtests.
+
+Phase 7 should answer whether repeated play produces difficult, legible, and
+interesting decisions before the project expands its architecture or actor
+ontology.
 
 ## 7.1 Technical Validation
 
@@ -795,6 +814,13 @@ Assess:
 - exploitability;
 - and quality of explanations.
 
+Default findings should test whether at least three strategies can succeed, no
+single first-month command dominates, outcomes are explainable from the debrief,
+rivals are recognizable but not perfectly predictable, and a month can be
+completed without implementation documentation. When enough runs exist, include
+action frequencies, outcome distributions, strategy clusters, stochastic
+sensitivity, and dominance or near-dominance findings.
+
 Agent playtests replace planned external human recruitment for this roadmap.
 They should capture campaign, seed, difficulty, agent profile or prompt,
 actor-visible observations, submitted commands, validation failures, histories,
@@ -814,6 +840,10 @@ Use agent decision traces, rationale reviews, debrief quality, and scenario
 counterfactuals rather than relying only on final scores. Do not present
 AI-agent playtests as measured human learning, classroom effectiveness, or
 formal learner assessment.
+Treat the debrief as a primary product surface: it should explain what happened,
+why it happened, what the player knew at the time, which assumptions mattered,
+what alternatives were available, and whether a bad outcome reflected poor
+decision quality or unfavorable realization.
 
 ## Deliverables
 

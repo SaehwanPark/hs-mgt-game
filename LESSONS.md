@@ -20,6 +20,24 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   "stub", "design only", "runtime deferred", and completed slice names before
   calling the docs aligned.
 
+## Broad Feedback Should Become Gates Before Features
+
+- Context: Translating external assessment into future SDD planning after the
+  architecture, MCP interface, scenario loader, and competitive preview already
+  existed.
+- Symptom: Strong conceptual feedback can invite broad new abstractions,
+  diagnostics, scenario tooling, or calibration frameworks before gameplay has
+  proved the need.
+- Cause: The project can represent sophisticated health-policy simulation, but
+  the next risk is whether repeated play is difficult, legible, interesting, and
+  teachable.
+- Resolution: Convert feedback into falsifiable playtest hypotheses,
+  strategy-space diagnostics, debrief QA, canonical-scenario gates, and
+  model-confidence labels rather than runtime expansion.
+- Prevention: For future SDD planning updates, ask which finding would justify
+  implementation. If no playtest, authoring, debrief, or domain-review evidence
+  exists, keep the item in Future and label the needed evidence.
+
 ## Agent Playtests Need Evidence Labels
 
 - Context: Replacing planned external human playtest recruitment with AI-agent
