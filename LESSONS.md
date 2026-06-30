@@ -3,6 +3,22 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Playtest Policies Need Campaign-Stable Detection
+
+- Context: Running the v0.1.49 automated MCP playtest batch after the AI-agent
+  validation pivot.
+- Symptom: The batch appeared to hang on the first stabilization `submit_turn`.
+- Cause: Scripted policies detected stabilization by checking for the Turn 1
+  `staffed_beds` legal-command hint. From Turn 2 onward the policies fell into
+  the competitive branch, submitted invalid competitive commands to the
+  stabilization parser, and retried forever.
+- Resolution: Detect stabilization by the MCP legal-command surface shape,
+  launch the built stdio MCP binary, and make scripted validation failures raise
+  with campaign, turn, command, and error context.
+- Prevention: In playtest automation, branch on stable campaign/session
+  metadata or legal-command surface shape, not one turn-specific hint. Scripted
+  policies should fail fast on validation errors rather than silently retrying.
+
 ## SDD Status Drift Needs A Cross-Doc Scan
 
 - Context: Cleaning up `SPEC.md` after competitive preview, scenario-loader, MCP,

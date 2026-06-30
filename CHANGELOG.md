@@ -6,6 +6,22 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.49] - 2026-06-30
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.49.md` with Phase 7 scripted MCP playtest
+  findings for the current stabilization and competitive preview campaigns.
+
+### Changed
+
+- Fixed the automated MCP playtest harness so stabilization policies continue
+  using stabilization commands after Turn 1.
+- Updated the Python MCP client to launch the built stdio server by default,
+  read responses with bounded byte-level waits, and fail scripted validation
+  errors with context instead of looping silently.
+- Package version bumped to `0.1.49`.
+
 ## [0.1.48] - 2026-06-30
 
 ### Changed

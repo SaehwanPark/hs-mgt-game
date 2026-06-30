@@ -11,10 +11,10 @@ includes a deterministic five-turn stabilization campaign, replay and state-hash
 checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
 with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
-for bounded agent play of both current campaigns. The SDD index was refreshed at
-v0.1.48 to make AI-agent playtests the active Phase 7 validation path and to
-prioritize gameplay validation, diagnostics, debrief quality, one exemplary
-scenario, and model-confidence annotation before broad new architecture.
+for bounded agent play of both current campaigns. The v0.1.49 Phase 7 scripted
+MCP playtest batch completed across both current campaigns and identified
+competitive final-metric reporting as the next evidence gap before broader
+diagnostics or balance work.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -52,6 +52,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
+- [AI-Agent Playtest Findings (v0.1.49)](docs/playtest-findings-v0.1.49.md)
 - [AI-Agent Playtest Protocol](docs/agent-playtest-protocol.md)
 - [External Playtest Protocol (Superseded)](docs/external-playtest-protocol.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
