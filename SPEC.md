@@ -57,9 +57,39 @@ reconstructing it from the diff.
 | Playtest-guided player guidance | v0.1.44 | Insurer leverage and recruitment-timing guidance from automated playtest findings | 228 | `88d07f9e1bbd6f04` (competitive) |
 | SDD next-development cleanup | v0.1.45 | SPEC Future tracks made actionable; stale companion doc statuses refreshed | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Deferred item triage | v0.1.46 | Worthy deferred Past items folded into actionable Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
+| AI-agent playtest validation pivot | v0.1.47 | Phase 7 validation docs moved from external human recruitment to reproducible AI-agent playtests | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: AI-agent playtest validation pivot
+  Status: Complete
+  Started: 2026-06-30
+  Version: 0.1.47
+
+  Summary:
+  Replace planned external human playtest recruitment with AI-agent and
+  sub-agent playtests as the active Phase 7 validation path.
+
+  Done:
+  - Added `docs/agent-playtest-protocol.md` with required MCP evidence,
+    profile matrix, rubric, synthesis template, and evidence limits
+  - Added ADR-0009 accepting AI-agent playtests as the active validation path
+  - Superseded the external human playtest protocol in active planning language
+  - Package version bumped to `0.1.47`
+
+  Deferred / Non-Goals:
+  - No runtime behavior, scenario schemas, rulesets, replay artifacts, MCP DTOs,
+    or golden hashes changed
+  - No claim of measured human learning, empirical calibration, or policy
+    forecasting validity from agent runs
+
+  Verification:
+  - MCP one-turn smoke test, Rust checks, markdown diff checks,
+    stale-language scans, and domain QA completed for the docs-only pivot
+  - Full `scripts/run_automated_playtests.py` was attempted twice and hung on
+    the first stabilization batch `submit_turn`; script debugging remains
+    outside this docs-only slice
 
 - Feature: Deferred item triage
   Status: Complete
@@ -268,30 +298,35 @@ No active slice. Competitive runtime I1-I8, the bounded three-month loop,
 competitive command-prompt ergonomics, external playtest protocol refresh, the
 minimal stabilization scenario loader, bounded MCP agent-play support, CLI
 scenario file path selection, automated MCP playtest findings, playtest-guided
-player guidance, SDD cleanup, and deferred-item triage are complete.
+player guidance, SDD cleanup, deferred-item triage, and the AI-agent playtest
+validation pivot are complete.
 
 ## Future
 
 ### Prioritized / gated tracks
 
-- Track: External playtest synthesis
-  Phase / Gate: Phase 7 prep; use `docs/external-playtest-protocol.md` and the
-  v0.1.42 automated findings as baseline evidence.
+- Track: AI-agent playtest synthesis
+  Phase / Gate: Phase 7 prep; use `docs/agent-playtest-protocol.md`,
+  `docs/mcp-playtesting-guide.md`, and the v0.1.42 automated findings as
+  baseline evidence.
 
   Next actionable slice:
-  Run a small external or semi-external playtest batch for current
-  `stabilization-v1` and `competitive-regional-v1` preview flows, then add a
-  versioned findings document that separates comprehension, strategic tension,
-  winnability, entertainment, and educational debrief observations.
+  Run a versioned AI-agent playtest batch for current `stabilization-v1` and
+  `competitive-regional-v1` preview flows, then add a findings document that
+  separates command comprehension, strategic tension, winnability, exploit
+  discovery, pacing proxies, and educational debrief coherence.
 
   Verification target:
-  Findings cite session counts, campaign(s), seeds or setup, observation notes,
-  post-session prompts, and prioritized follow-up recommendations. No runtime
-  change is required unless findings identify a narrow blocking defect.
+  Findings cite session counts, campaign(s), seeds, difficulty, agent profiles
+  or prompts, actor-visible observations, submitted commands, validation
+  failures, histories, debriefs, evidence limits, and prioritized follow-up
+  recommendations. No runtime change is required unless findings identify a
+  narrow blocking defect.
 
   Deferred / Non-Goals:
-  No formal human-subjects research process, empirical calibration claim,
-  scoring redesign, or broad balance pass.
+  No external human recruitment gate, formal human-subjects research process,
+  measured human learning claim, empirical calibration claim, scoring redesign,
+  or broad balance pass.
 
 - Track: Competitive campaign hardening
   Phase / Gate: Phase 6/7; start only after playtest findings identify concrete

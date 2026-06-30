@@ -14,7 +14,7 @@ not a bibliography and does not calibrate prototype parameters.
 
 Phase 1 asked which prior approaches the project should adopt, modify, or
 reject, and which evidence infrastructure must exist before broader calibration
-or external playtesting. The bounded five-turn prototype at v0.1.27 already
+or agent-playtest validation. The bounded five-turn prototype at v0.1.27 already
 implements several adopted patterns. This memo records what literature and
 precedent imply for **future** mechanism work, documentation, and validation.
 
@@ -117,8 +117,9 @@ Adopt for ongoing slices:
 | Playtest findings versioned with releases | `docs/playtest-findings-v*.md` |
 | Decision vs outcome debrief | Required debrief prompt in every end-of-run report |
 
-Defer to Phase 7 unless an evaluation study is planned: CONSORT-SPI, TIDieR-PHP,
-formal learning-outcome instruments, and external expert panels at scale.
+Defer to a separate human evaluation study unless explicitly planned:
+CONSORT-SPI, TIDieR-PHP, formal learning-outcome instruments, and external
+expert panels at scale.
 
 ## Unresolved Empirical Questions
 
@@ -126,8 +127,9 @@ These remain open by design until a parameter ledger row moves to calibration:
 
 1. Which official datasets anchor payer mix, hospital margin, workforce pressure,
    and access indices for the fictional region?
-2. Which mechanism thresholds need expert review before external classroom use?
-3. Which educational outcomes should be measured in structured playtests?
+2. Which mechanism thresholds need expert review before future classroom use?
+3. Which educational outcomes can agent-playtest traces inspect, and which
+   require a separate human evaluation plan?
 4. Which actor objectives should be scenario-configurable versus fixed?
 5. Which distributional or disparity outcomes must be first-class before public
    release?

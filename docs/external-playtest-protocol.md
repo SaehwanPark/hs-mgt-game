@@ -1,8 +1,13 @@
 # External Playtest Protocol
 
-**Status:** Phase 7 prep protocol
+**Status:** Superseded by [`agent-playtest-protocol.md`](agent-playtest-protocol.md)
 **Audience:** Facilitators, contributors, and domain reviewers
 **Version:** v0.1.39
+
+This historical protocol is retained for context. The active Phase 7 validation
+path no longer depends on recruiting external human players; use
+[`agent-playtest-protocol.md`](agent-playtest-protocol.md) for current AI-agent
+and sub-agent playtest work.
 
 This protocol gives facilitators a repeatable way to run informal external
 playtests of the current CLI experience. It is intended to test comprehension,

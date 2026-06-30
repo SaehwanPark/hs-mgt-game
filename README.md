@@ -12,8 +12,7 @@ checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
 with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
 for bounded agent play of both current campaigns. The SDD index was refreshed at
-v0.1.46 to make the next development tracks more actionable and preserve worthy
-deferred items in Future.
+v0.1.47 to make AI-agent playtests the active Phase 7 validation path.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -51,7 +50,8 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [Scenario Format Draft](docs/scenario-format-draft.md)
 - [Phase 5 Scope Register](docs/phase5-scope-register.md)
 - [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
-- [External Playtest Protocol](docs/external-playtest-protocol.md)
+- [AI-Agent Playtest Protocol](docs/agent-playtest-protocol.md)
+- [External Playtest Protocol (Superseded)](docs/external-playtest-protocol.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
 
 Detailed subsystem specifications will be added separately as design work progresses.
@@ -95,7 +95,7 @@ cargo test
 
 Current priorities are:
 
-1. Run and synthesize external playtests using the Phase 7 prep protocol.
+1. Run and synthesize AI-agent playtests using the Phase 7 protocol.
 2. Extend scenario data loading only after the minimal stabilization TOML slice
    has playtest or authoring evidence.
 3. Competitive campaign hardening after bounded-loop playtests.

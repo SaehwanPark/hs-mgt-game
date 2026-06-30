@@ -28,6 +28,8 @@ Core terms for the Health Policy Strategy Game, aligned with
 | Political capital | Advocacy and negotiation resource consumed by some competitive verbs. |
 | Simultaneous resolution | Aggregating all player monthly batches before transition (ADR-0003). |
 | AI player | Computer-controlled health-system peer using the same command catalog as the human. |
+| AI-agent playtester | External AI or sub-agent client that plays a campaign through MCP to generate validation evidence; distinct from an in-game AI player. |
+| Human player | Person playing the CEO role through the CLI; not required for the active Phase 7 playtest path. |
 | NPC actor | Institution (insurer, state, labor, coalition) that responds to market state; not a peer player. |
 | Actor decision | Non-player strategic outcome with inspectable rationale text. |
 | Attributed effect | Labeled delta linking a source, metric, and value change. |
@@ -40,6 +42,7 @@ Core terms for the Health Policy Strategy Game, aligned with
 | Debrief | End-of-run causal explanation from committed history, not omniscient state. |
 | Decision quality | Whether a choice was reasonable given observations at decision time. |
 | Outcome quality | Realized state after actor responses and stochastic inputs. |
+| Agent-playtest evidence | Simulated-player observations, commands, histories, and debriefs used to inspect gameplay and explanation quality; not measured human learning evidence. |
 
 ## Scope
 

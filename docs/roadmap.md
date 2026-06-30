@@ -594,7 +594,8 @@ Test for:
 
 ## Objective
 
-Expand the validated slice into a coherent first campaign suitable for external testing and early educational use.
+Expand the validated slice into a coherent first campaign suitable for
+AI-agent validation and early educational review.
 
 ## 6.0 Competitive Campaign Design Track
 
@@ -713,7 +714,8 @@ Provide:
 - The campaign supports multiple viable strategies.
 - A full run is reproducible and explainable.
 - Contributors can add or modify scenario content without changing core engine code.
-- The game can support structured external playtesting.
+- The game can support structured AI-agent playtesting through reproducible
+  observations, commands, histories, and debrief outputs.
 - No major feature depends on hidden or undocumented model behavior.
 
 ---
@@ -722,7 +724,9 @@ Provide:
 
 ## Objective
 
-Evaluate whether the game is technically correct, behaviorally credible, strategically engaging, and educationally useful.
+Evaluate whether the game is technically correct, behaviorally credible,
+strategically engaging, and educationally inspectable through reproducible
+AI-agent playtests.
 
 ## 7.1 Technical Validation
 
@@ -773,29 +777,32 @@ For important parameters:
 
 Separate empirical calibration from gameplay balancing.
 
-## 7.5 Gameplay Evaluation
+## 7.5 AI-Agent Gameplay Evaluation
 
-Conduct structured playtests with:
+Conduct structured AI-agent and sub-agent playtests with:
 
-- developers;
-- domain experts;
-- strategy-game players;
-- graduate students;
-- and instructors.
+- scripted strategy policies;
+- LLM or sub-agent personas;
+- naive first-time simulated players;
+- adversarial exploit-seeking agents;
+- and domain-informed reviewer agents.
 
 Assess:
 
-- clarity;
-- engagement;
-- cognitive load;
-- perceived agency;
+- command comprehension;
+- pacing and action-overload proxies;
 - strategic diversity;
 - exploitability;
 - and quality of explanations.
 
+Agent playtests replace planned external human recruitment for this roadmap.
+They should capture campaign, seed, difficulty, agent profile or prompt,
+actor-visible observations, submitted commands, validation failures, histories,
+and debriefs.
+
 ## 7.6 Educational Evaluation
 
-Evaluate whether players improve in:
+Evaluate whether the game artifacts support the intended educational reasoning:
 
 - recognizing stakeholder incentives;
 - identifying second-order effects;
@@ -803,7 +810,10 @@ Evaluate whether players improve in:
 - distinguishing observed from true conditions;
 - and explaining policy implementation and strategic response.
 
-Use pre/post prompts, decision reviews, interviews, and debrief quality rather than relying only on final scores.
+Use agent decision traces, rationale reviews, debrief quality, and scenario
+counterfactuals rather than relying only on final scores. Do not present
+AI-agent playtests as measured human learning, classroom effectiveness, or
+formal learner assessment.
 
 ## Deliverables
 
@@ -811,8 +821,8 @@ Use pre/post prompts, decision reviews, interviews, and debrief quality rather t
 - Expert review summary
 - Parameter evidence registry
 - Sensitivity analysis
-- Gameplay study findings
-- Educational evaluation findings
+- AI-agent gameplay findings
+- Educational artifact review findings
 - Prioritized revision plan
 
 ## Exit Criteria
@@ -820,8 +830,10 @@ Use pre/post prompts, decision reviews, interviews, and debrief quality rather t
 - Critical mechanisms are technically reliable and institutionally defensible.
 - Known limitations and uncertainties are documented.
 - No dominant exploit trivializes the campaign.
-- External users can understand major causal pathways.
-- There is evidence that the game supports its stated learning objectives.
+- AI-agent playtest evidence shows major causal pathways are inspectable from
+  actor-visible observations and debriefs.
+- There is evidence that the game artifacts support the stated learning
+  objectives, without claiming measured human learning outcomes.
 
 ---
 
@@ -867,7 +879,9 @@ Include:
 
 ## 8.4 Early Adoption
 
-Pilot the release in a small number of educational or expert settings. Collect structured feedback while preserving a stable baseline for comparison.
+Prepare the release for educational or expert review after the agent-playtest
+baseline is stable. Collect any future human feedback through a separate
+approved evaluation plan while preserving a stable baseline for comparison.
 
 ## Deliverables
 
@@ -875,7 +889,7 @@ Pilot the release in a small number of educational or expert settings. Collect s
 - Canonical campaign
 - Complete documentation set
 - Reproducibility package
-- Pilot protocol
+- Agent-playtest protocol
 - Public issue and feedback process
 
 ## Exit Criteria

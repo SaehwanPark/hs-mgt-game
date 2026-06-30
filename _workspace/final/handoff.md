@@ -1,22 +1,34 @@
-# Handoff - Gameplay Testing and Review
+# Final Handoff: AI-Agent Playtest Documentation Pivot
 
-## Completed Work
+## Changed Files
 
-- Scoped and designed a playtesting and review plan using 3 automated subagents representing distinct strategy profiles (Fiscal Caution, Growth/Expansion, Balanced Strategy).
-- Implemented and executed automated Python playtest scripts in the scratch directory (`play_fiscal.py`, `play_growth.py`, `play_balanced.py`) which interface with the game's stdio MCP server (`hs-mgt-game-mcp`).
-- Verified successful play execution and collected logs for both `stabilization-v1` and `competitive-regional-v1` campaigns.
-- Documented a comprehensive report at `docs/playtest-findings-v0.1.42.md` evaluating the game against standard playtest protocols, including:
-  - Winnability/Clearability analysis (winnable under conservative/balanced strategies, highly difficult under aggressive growth).
-  - Entertainment/Tradeoff depth check (non-determinism via events is impactful, no dominant strategy exists, fog of war works correctly).
-- Completed the project-specific Domain QA check at `_workspace/03_domain_qa.md` (marked as `pass`).
-- Bumped package version to `0.1.43` in `Cargo.toml` and updated the `CHANGELOG.md` history.
+- Added `docs/agent-playtest-protocol.md`.
+- Added `docs/decision-records/0009-ai-agent-playtest-validation-path.md` and
+  linked it from the ADR index.
+- Updated `README.md`, `SPEC.md`, `docs/roadmap.md`,
+  `docs/external-playtest-protocol.md`, `docs/mcp-playtesting-guide.md`,
+  `docs/glossary.md`, `docs/evidence-registry.md`,
+  `docs/phase5-scope-register.md`, and `docs/phase1-implications-memo.md`.
+- Added request summary, domain QA, and handoff artifacts under `_workspace/`.
+- Updated `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`, and `LESSONS.md`.
 
 ## Verification
 
-- `cargo check` completed successfully.
-- `cargo test` executed all 224 tests successfully (0 failures).
+- MCP one-turn smoke test passed.
+- `cargo fmt --check` passed.
+- `cargo test` passed.
+- `git diff --check` passed.
+- Stale-language scan reviewed active and historical playtest terminology.
 
-## Next Dependencies
+## Known Limits
 
-- Leverage the playtest findings to improve the in-game guidelines and instructions on insurer bargaining power and labor market recruitment timelines.
-- Hardening of the competitive campaign loop before expanding it from the current 3-month preview to the full 24-month duration.
+- Full `scripts/run_automated_playtests.py` hung twice on the first
+  stabilization batch `submit_turn`; this was not fixed because the requested
+  change was documentation-only.
+- The docs now make AI-agent playtests the active validation path, but they do
+  not claim human educational outcome measurement.
+
+## Next Dependency
+
+The next agent-playtest findings slice should either fix or replace the hanging
+batch runner before relying on it for a versioned findings document.

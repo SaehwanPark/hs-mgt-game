@@ -1,6 +1,6 @@
 # MCP Playtesting Guide
 
-This guide describes how to run automated and interactive gameplay playtests of the Health Policy Strategy Game using the Model Context Protocol (MCP) interface and the provided Python tooling.
+This guide describes how to run automated and interactive gameplay playtests of the Health Policy Strategy Game using the Model Context Protocol (MCP) interface and the provided Python tooling. It is the operational runbook for the active [`AI-Agent Playtest Protocol`](agent-playtest-protocol.md).
 
 ## Architecture Overview
 
@@ -13,7 +13,7 @@ The playtesting harness decouples the simulation logic from the player client:
 
 ## Running Automated Playtests
 
-We have automated three distinct strategic playstyles (Fiscal Caution, Growth/Expansion, and Balanced Strategy) across both the stabilization and competitive campaign previews.
+We have automated three distinct strategic playstyles (Fiscal Caution, Growth/Expansion, and Balanced Strategy) across both the stabilization and competitive campaign previews. Treat these runs as simulated-player evidence; they do not measure actual human learning or classroom effectiveness.
 
 To execute the automated playtests and print a comparison table of their ending metrics:
 

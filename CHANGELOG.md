@@ -6,6 +6,23 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.47] - 2026-06-30
+
+### Added
+
+- Added `docs/agent-playtest-protocol.md` as the active Phase 7 validation
+  protocol for AI-agent and sub-agent playtests.
+- Added ADR-0009 accepting AI-agent playtests as the validation path replacing
+  planned external human playtest recruitment.
+
+### Changed
+
+- Superseded the external human playtest protocol in active roadmap and SPEC
+  planning language.
+- Clarified that agent-playtest evidence does not claim measured human learning,
+  empirical calibration, or policy-forecasting validity.
+- Package version bumped to `0.1.47`.
+
 ## [0.1.46] - 2026-06-30
 
 ### Changed

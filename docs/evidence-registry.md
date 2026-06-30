@@ -31,7 +31,7 @@ prototype integer parameters.
   replay, and debrief.
 - Current formulas remain design abstractions. They should be replaced or
   bounded by official data and focused literature only when a mechanism is being
-  prepared for calibration or external playtesting.
+  prepared for calibration or agent-playtest validation.
 - Official source candidates named in the Phase 1 literature review include CMS,
   KFF, MedPAC, MACPAC, and BLS. Selecting exact datasets is deferred until the
   parameter ledger is created.
@@ -39,12 +39,13 @@ prototype integer parameters.
 ## Unresolved Questions
 
 - Which official datasets should anchor future parameter ranges?
-- Which mechanisms need expert review before external playtesting?
+- Which mechanisms need expert or domain-reviewer review before agent-playtest
+  synthesis?
 - How should educational debrief prompts be evaluated for learning objectives?
 - Which actor objectives should be configurable versus fixed in the first
   scenario?
-- Which distributional outcomes must be first-class before external classroom
-  use?
+- Which distributional outcomes must be first-class before any future classroom
+  or expert review?
 
 ## Parameter-Source Ledger
 
@@ -83,4 +84,4 @@ design), `calibrated` (ranges applied in ruleset — none yet).
   runtime expansion bounded.
 - Link each mechanism row to primary sources as parameters are introduced.
 - Separate empirical calibration ranges from gameplay balancing choices.
-- Add scenario-specific evidence when the first external scenario format lands.
+- Add scenario-specific evidence when the first expanded scenario format lands.

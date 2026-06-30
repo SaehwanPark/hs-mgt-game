@@ -116,8 +116,8 @@ Partially achieved:
 
 | Item | Rationale |
 | --- | --- |
-| External classroom playtesting | Phase 7 scope; after hardening and governance docs |
-| Learning-outcome measurement | Phase 7 educational evaluation scope |
+| AI-agent playtest synthesis | Phase 7 scope; active path per [`agent-playtest-protocol.md`](agent-playtest-protocol.md) |
+| Human learning-outcome measurement | Deferred to a separate evaluation plan if needed |
 | Parameter-source ledger | Added in Phase 1 implications memo (v0.1.20) |
 
 ## Exit criteria assessment (roadmap §5)
@@ -158,7 +158,7 @@ Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
 1. **Competitive campaign runtime I7** — random events, delayed effect queue,
    annual policy tick.
 2. **Competitive campaign runtime I8** — Stata-like CLI for human monthly entry.
-3. **External playtest protocol refresh** — Phase 7 prep.
+3. **AI-agent playtest synthesis** — Phase 7 prep.
 4. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
 5. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
 

@@ -20,6 +20,21 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   "stub", "design only", "runtime deferred", and completed slice names before
   calling the docs aligned.
 
+## Agent Playtests Need Evidence Labels
+
+- Context: Replacing planned external human playtest recruitment with AI-agent
+  and sub-agent playtests.
+- Symptom: It is easy for validation language to drift from "agent traces show
+  the debrief is inspectable" into "players learned the intended material."
+- Cause: Agent runs are reproducible and useful, but they are simulated-player
+  evidence rather than human educational measurement.
+- Resolution: Added an active agent-playtest protocol, ADR-0009, glossary terms,
+  and roadmap language that separate command/gameplay evidence from human
+  learning and policy-validation claims.
+- Prevention: When adding playtest findings, label the actor type, seed,
+  profile or prompt, observations, commands, and evidence limits before making
+  follow-up recommendations.
+
 ## MCP SDK Schema Derives Need Direct Dependencies
 
 - Context: Adding the first local MCP stdio server with the official `rmcp`
