@@ -1,4 +1,4 @@
-# Domain QA: Feedback-Aligned SDD Future Planning
+# Domain QA: MCP Playtest Evidence Slice
 
 ## Status
 
@@ -6,33 +6,31 @@ Pass.
 
 ## Reviewed Inputs
 
-- User request to implement the proposed plan
-- Supplied external feedback
+- User request to implement the preferred-workflow continuation plan
 - `_workspace/00_input/request-summary.md`
-- `_workspace/01_evidence_map.md`
 - `README.md`
 - `SPEC.md`
-- `ARCHITECTURE.md`
 - `CHANGELOG.md`
-- `docs/roadmap.md`
-- `docs/design_principles.md`
+- `LESSONS.md`
 - `docs/agent-playtest-protocol.md`
-- `docs/evidence-registry.md`
+- `docs/mcp-playtesting-guide.md`
+- `docs/playtest-findings-v0.1.49.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
+- `scripts/play_game.py`
+- `scripts/run_automated_playtests.py`
 
 ## Findings
 
-- Scope stayed docs-only: no Rust runtime, scenario format, ruleset, replay,
-  MCP DTO, transition, or golden-hash behavior changed.
-- Future planning now reflects the feedback's central risk: architecture and
-  documentation should not outrun validated gameplay, debrief quality, or
-  scenario authoring.
-- Agent-playtest guidance now has falsifiable gameplay hypotheses and
-  strategy-space diagnostics while preserving evidence limits.
-- Evidence planning now distinguishes model-confidence labels without implying
-  runtime schema or empirical calibration.
-- Architecture language preserves deterministic replay and actor-observation
-  boundaries while adding an evidence gate for major abstractions.
+- Scope stayed within Phase 7 evidence collection and harness repair.
+- The automated playtest bug was a harness policy-selection issue, not a
+  simulation mechanism issue.
+- Findings preserve the distinction between scripted AI-agent evidence and
+  human learning, empirical calibration, or policy-validation claims.
+- The stabilization findings use committed debrief tradeoffs and actor
+  rationales, preserving the true-state/observation/history boundaries.
+- Competitive findings correctly label the lack of final metric exposure as an
+  evidence gap rather than inferring outcome distributions from unavailable
+  data.
 
 ## Required Fixes
 
@@ -40,17 +38,15 @@ None.
 
 ## Residual Risks
 
-- The next playtest batch may still expose automation issues before diagnostics
-  can be generated at scale.
-- Model-confidence labels need disciplined use in future mechanism work so they
-  do not become unsupported authority markers.
-- Human educational value remains unmeasured unless a separate human evaluation
-  plan is created later.
+- The batch uses one seed and scripted policies only.
+- Competitive debrief/MCP evidence is still too thin for outcome-distribution
+  diagnostics.
+- Future free-form agent profiles may expose command-help or pacing issues not
+  visible in scripted policies.
 
 ## Verification Evidence
 
+- `python3 scripts/run_automated_playtests.py` completed six sessions.
 - `cargo fmt --check` passed.
-- `cargo test` passed.
+- `cargo test < /dev/null` passed.
 - `git diff --check` passed.
-- Stale-claim scan reviewed active and historical language about human learning,
-  policy forecasting, and external human recruitment.

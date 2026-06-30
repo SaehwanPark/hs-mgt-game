@@ -22,7 +22,12 @@ python3 scripts/run_automated_playtests.py
 ```
 
 ### Expected Output
-The script launches the MCP server, runs both campaigns for all three strategies, parses the final metrics, and prints console tables comparing ending Cash, Access, Beds, and Trust metrics.
+The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
+campaigns for all three strategies, and prints a comparison table. Stabilization
+metrics are parsed from the committed debrief. The current competitive MCP
+debrief exposes final hashes but not final player tradeoff metrics, so
+competitive metric distributions should be recorded only after that evidence
+surface is extended.
 
 ## Creating a Custom Strategy Policy
 

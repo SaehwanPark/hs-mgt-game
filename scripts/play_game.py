@@ -2,27 +2,38 @@ import subprocess
 import json
 import sys
 import os
+import select
+import shlex
+import time
 
 class McpClient:
-  def __init__(self, bin_path="cargo run --bin hs-mgt-game-mcp"):
+  def __init__(self, bin_path=None, timeout_seconds=10):
+    if bin_path is None:
+      bin_path = os.environ.get("HS_MGT_GAME_MCP_BIN")
+      if bin_path is None:
+        local_bin = "./target/debug/hs-mgt-game-mcp"
+        bin_path = local_bin if os.path.exists(local_bin) else "cargo run --quiet --bin hs-mgt-game-mcp"
     self.bin_path = bin_path
     self.proc = None
     self.msg_id = 0
+    self.timeout_seconds = timeout_seconds
+    self.last_method = None
+    self.read_buffer = b""
 
   def start(self):
-    cmd = self.bin_path.split()
+    cmd = shlex.split(self.bin_path)
     self.proc = subprocess.Popen(
       cmd,
       stdin=subprocess.PIPE,
       stdout=subprocess.PIPE,
       stderr=subprocess.PIPE,
-      text=True,
-      bufsize=1
+      bufsize=0
     )
     self._initialize()
 
   def _send(self, method, params=None, is_notification=False):
     self.msg_id += 1
+    self.last_method = method
     msg = {
       "jsonrpc": "2.0",
       "method": method
@@ -33,17 +44,35 @@ class McpClient:
       msg["id"] = self.msg_id
 
     payload = json.dumps(msg)
-    self.proc.stdin.write(payload + "\n")
+    self.proc.stdin.write((payload + "\n").encode("utf-8"))
     self.proc.stdin.flush()
     return self.msg_id
 
   def _recv(self, expected_id=None):
+    deadline = time.monotonic() + self.timeout_seconds
     while True:
-      line = self.proc.stdout.readline()
-      if not line:
-        raise EOFError("MCP server process closed connection unexpectedly.")
+      if b"\n" not in self.read_buffer:
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+          raise TimeoutError(self._timeout_message(expected_id))
+        ready, _, _ = select.select([self.proc.stdout.fileno()], [], [], remaining)
+        if not ready:
+          raise TimeoutError(self._timeout_message(expected_id))
+        chunk = os.read(self.proc.stdout.fileno(), 4096)
+        if not chunk:
+          raise EOFError(
+            "MCP server process closed connection unexpectedly."
+            + self._stderr_excerpt()
+          )
+        self.read_buffer += chunk
+        if b"\n" not in self.read_buffer:
+          continue
+      remaining = deadline - time.monotonic()
+      if remaining <= 0:
+        raise TimeoutError(self._timeout_message(expected_id))
+      line, self.read_buffer = self.read_buffer.split(b"\n", 1)
       try:
-        msg = json.loads(line)
+        msg = json.loads(line.decode("utf-8"))
       except json.JSONDecodeError:
         continue
 
@@ -88,11 +117,33 @@ class McpClient:
 
   def close(self):
     if self.proc:
-      self.proc.stdin.close()
+      if self.proc.stdin:
+        self.proc.stdin.close()
       try:
         self.proc.wait(timeout=5)
       except subprocess.TimeoutExpired:
         self.proc.kill()
+
+  def _timeout_message(self, expected_id):
+    detail = (
+      f"Timed out after {self.timeout_seconds}s waiting for MCP response"
+      f" to request id {expected_id} ({self.last_method})."
+    )
+    return detail + self._stderr_excerpt()
+
+  def _stderr_excerpt(self):
+    if not self.proc or not self.proc.stderr:
+      return ""
+    ready, _, _ = select.select([self.proc.stderr.fileno()], [], [], 0)
+    if not ready:
+      return ""
+    try:
+      text = os.read(self.proc.stderr.fileno(), 4000).decode("utf-8", errors="replace")
+    except BlockingIOError:
+      return ""
+    if not text:
+      return ""
+    return f"\nMCP server stderr excerpt:\n{text}"
 
 def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
   client = McpClient()
@@ -111,6 +162,7 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
     session = res["data"]
     session_id = session["session_id"]
     history = []
+    validation_failures = []
     
     while not session["done"]:
       turn = session["turn"]
@@ -131,6 +183,17 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
       })
       
       if res["isError"]:
+        failure = {
+          "turn": turn,
+          "command": cmd,
+          "error": res["error"]
+        }
+        validation_failures.append(failure)
+        if policy_fn:
+          raise RuntimeError(
+            f"Scripted policy failed on {campaign} turn {turn} with command "
+            f"{cmd!r}: {res['error']}"
+          )
         if not policy_fn:
           print(f"\n[Validation Error] {res['error']}")
           print("Please try again.")
@@ -149,7 +212,8 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
       "difficulty": difficulty if campaign == "competitive-regional-v1" else None,
       "history": history,
       "debrief": debrief,
-      "final_observation": session["observation"]
+      "final_observation": session["observation"],
+      "validation_failures": validation_failures
     }
   finally:
     client.close()

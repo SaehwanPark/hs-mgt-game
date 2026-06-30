@@ -59,9 +59,42 @@ reconstructing it from the diff.
 | Deferred item triage | v0.1.46 | Worthy deferred Past items folded into actionable Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest validation pivot | v0.1.47 | Phase 7 validation docs moved from external human recruitment to reproducible AI-agent playtests | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Feedback-aligned future planning | v0.1.48 | External feedback translated into validation-first SDD Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
+| AI-agent playtest evidence | v0.1.49 | Automated Phase 7 MCP playtest batch completed and findings recorded | 228 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: AI-agent playtest evidence
+  Status: Complete
+  Started: 2026-06-30
+  Version: 0.1.49
+
+  Summary:
+  Fix the automated MCP playtest harness enough to complete the active Phase 7
+  default scripted-policy batch, then record versioned findings for the current
+  stabilization and competitive preview campaigns.
+
+  Done:
+  - Automated playtest policies now keep stabilization command selection on the
+    stabilization legal-command surface after Turn 1
+  - MCP Python client now launches the built stdio server by default, uses
+    byte-level response reads, and reports scripted validation failures instead
+    of looping silently
+  - `docs/playtest-findings-v0.1.49.md` records six completed seed-42 sessions,
+    gameplay-hypothesis results, rubric scores, evidence limits, and prioritized
+    follow-up
+  - Package version bumped to `0.1.49`
+
+  Deferred / Non-Goals:
+  - No runtime transition behavior, rulesets, scenario schemas, replay formats,
+    MCP DTO shapes, campaign length, golden hashes, or gameplay formulas changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    balance tuning, or broad diagnostics platform
+
+  Verification:
+  - Automated MCP playtest batch completed for three profiles across both
+    current campaigns
+  - Rust checks and diff checks completed for the harness and docs slice
 
 - Feature: Feedback-aligned future planning
   Status: Complete
@@ -330,8 +363,9 @@ No active slice. Competitive runtime I1-I8, the bounded three-month loop,
 competitive command-prompt ergonomics, external playtest protocol refresh, the
 minimal stabilization scenario loader, bounded MCP agent-play support, CLI
 scenario file path selection, automated MCP playtest findings, playtest-guided
-player guidance, SDD cleanup, deferred-item triage, and the AI-agent playtest
-validation pivot, and feedback-aligned future planning refresh are complete.
+player guidance, SDD cleanup, deferred-item triage, the AI-agent playtest
+validation pivot, feedback-aligned future planning refresh, and the v0.1.49
+AI-agent playtest evidence batch are complete.
 
 ## Future
 
@@ -339,25 +373,22 @@ validation pivot, and feedback-aligned future planning refresh are complete.
 
 - Track: AI-agent playtest synthesis
   Phase / Gate: Phase 7 prep; use `docs/agent-playtest-protocol.md`,
-  `docs/mcp-playtesting-guide.md`, and the v0.1.42 automated findings as
-  baseline evidence.
+  `docs/mcp-playtesting-guide.md`, the v0.1.42 automated findings, and
+  `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Run a versioned AI-agent playtest batch for current `stabilization-v1` and
-  `competitive-regional-v1` preview flows against the protocol's gameplay
-  validity hypotheses. Add a findings document that separates command
-  comprehension, strategic tension, winnability, exploit discovery, pacing
-  proxies, strategy-space diagnostics, and educational debrief coherence.
+  Close one evidence gap from the v0.1.49 findings before expanding the batch:
+  either expose a bounded competitive final tradeoff summary through committed
+  history/debrief output, add a naive/free-form agent profile, or run a
+  seed-variation batch after the competitive summary gap is addressed.
 
   Verification target:
-  Findings cite session counts, campaign(s), seeds, difficulty, agent profiles
-  or prompts, actor-visible observations, submitted commands, validation
-  failures, histories, debriefs, diagnostic summaries, evidence limits, and
-  prioritized follow-up recommendations. The findings explicitly test whether
-  multiple strategies can succeed, whether any first-month command dominates,
-  whether outcomes are explainable from the debrief, whether rival behavior is
-  recognizable but imperfectly predictable, and whether a month can be completed
-  without implementation docs.
+  Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
+  agent profiles or prompts, actor-visible observations, submitted commands,
+  validation failures, histories, debriefs, diagnostic summaries, evidence
+  limits, and prioritized recommendations. Competitive findings should not make
+  outcome-distribution claims until final player tradeoff metrics are available
+  through an accepted evidence surface.
 
   Deferred / Non-Goals:
   No external human recruitment gate, formal human-subjects research process,

@@ -1,13 +1,17 @@
 import sys
 import os
 import re
+import subprocess
 
 # Add scripts directory to path to allow import
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from play_game import play_session
 
+def is_stabilization_legal(legal):
+  return len(legal) == 1
+
 def policy_fiscal(obs, legal, turn):
-  if len(legal) > 0 and "staffed_beds" in legal[0]:  # stabilization
+  if is_stabilization_legal(legal):
     commands = ["4 10 104", "4 5", "8 5", "6 5", "8 5"]
     return commands[turn - 1]
   else:  # competitive
@@ -19,7 +23,7 @@ def policy_fiscal(obs, legal, turn):
     return commands[turn - 1]
 
 def policy_growth(obs, legal, turn):
-  if len(legal) > 0 and "staffed_beds" in legal[0]:  # stabilization
+  if is_stabilization_legal(legal):
     commands = ["12 25 115", "15 9", "15 9", "15 9", "15 9"]
     return commands[turn - 1]
   else:  # competitive
@@ -31,7 +35,7 @@ def policy_growth(obs, legal, turn):
     return commands[turn - 1]
 
 def policy_balanced(obs, legal, turn):
-  if len(legal) > 0 and "staffed_beds" in legal[0]:  # stabilization
+  if is_stabilization_legal(legal):
     commands = ["8 18 112", "10 7", "14 8", "12 8", "14 8"]
     return commands[turn - 1]
   else:  # competitive
@@ -42,10 +46,11 @@ def policy_balanced(obs, legal, turn):
     ]
     return commands[turn - 1]
 
-def parse_stabilization_metrics(obs):
+def parse_stabilization_metrics(obs, debrief=None):
   metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "Policy": "N/A"}
   # Helper to parse lists of observations
   text = "\n".join(obs)
+  debrief_text = "\n".join(debrief or [])
   
   cash_m = re.search(r"Cash:\s*(\d+)", text)
   if cash_m:
@@ -71,10 +76,21 @@ def parse_stabilization_metrics(obs):
   if pol_m:
     metrics["Policy"] = pol_m.group(1)
 
+  tradeoff_m = re.search(
+    r"cash moved from \d+ to (\d+), access from \d+ to (\d+), workforce trust from \d+ to (\d+), community trust from \d+ to (\d+), policy pressure from \d+ to (\d+)",
+    debrief_text
+  )
+  if tradeoff_m:
+    metrics["Cash"] = tradeoff_m.group(1)
+    metrics["Access"] = tradeoff_m.group(2)
+    metrics["WorkforceTrust"] = tradeoff_m.group(3)
+    metrics["CommunityTrust"] = tradeoff_m.group(4)
+    metrics["Policy"] = tradeoff_m.group(5)
+
   return metrics
 
-def parse_competitive_metrics(obs):
-  metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "PC": "N/A"}
+def parse_competitive_metrics(obs, history=None):
+  metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "PC": "N/A", "Hash": "N/A"}
   text = "\n".join(obs)
 
   # Check Riverside Community Health metrics block
@@ -123,9 +139,17 @@ def parse_competitive_metrics(obs):
   if pc_m:
     metrics["PC"] = pc_m.group(1)
 
+  if history:
+    metrics["Hash"] = history[-1]["state_hash"]
+
   return metrics
 
 def run_tests():
+  subprocess.run(
+    ["cargo", "build", "--quiet", "--bin", "hs-mgt-game-mcp"],
+    check=True
+  )
+
   strategies = {
     "Fiscal Caution": policy_fiscal,
     "Capacity Growth": policy_growth,
@@ -142,7 +166,7 @@ def run_tests():
     print(f"Running stabilization campaign for '{name}'...")
     res = play_session("stabilization-v1", seed=42, policy_fn=policy)
     if res:
-      metrics = parse_stabilization_metrics(res["final_observation"])
+      metrics = parse_stabilization_metrics(res["final_observation"], res["debrief"])
       stab_results[name] = metrics
       print(f"  -> Done. Final Cash: {metrics['Cash']}, Reported Access: {metrics['Access']}\n")
     else:
@@ -154,9 +178,9 @@ def run_tests():
     print(f"Running competitive regional campaign for '{name}'...")
     res = play_session("competitive-regional-v1", seed=42, policy_fn=policy)
     if res:
-      metrics = parse_competitive_metrics(res["final_observation"])
+      metrics = parse_competitive_metrics(res["final_observation"], res["history"])
       comp_results[name] = metrics
-      print(f"  -> Done. Final Cash: {metrics['Cash']}, Access: {metrics['Access']}, Beds: {metrics['Beds']}\n")
+      print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
     else:
       print(f"  -> Failed to execute run for '{name}'\n")
 
@@ -173,10 +197,10 @@ def run_tests():
   print("====================================================")
   print("COMPETITIVE CAMPAIGN COMPARISON SUMMARY (SEED 42)")
   print("====================================================")
-  print(f"{'Strategy':<20} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}")
-  print("-" * 83)
+  print(f"{'Strategy':<20} | {'Final Hash':<16} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}")
+  print("-" * 102)
   for name, m in comp_results.items():
-    print(f"{name:<20} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9} | {m['PC']:<4}")
+    print(f"{name:<20} | {m['Hash']:<16} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9} | {m['PC']:<4}")
   print()
 
 if __name__ == "__main__":

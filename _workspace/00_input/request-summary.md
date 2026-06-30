@@ -1,51 +1,48 @@
-# Request Summary: Feedback-Aligned SDD Future Planning
+# Request Summary: MCP Playtest Evidence Slice
 
 ## Scope
 
-Review the supplied external feedback and translate it into future-facing
-spec-driven-development documentation. The work should adjust planning,
-validation, evidence, and release bookkeeping without changing runtime behavior.
+Implement the preferred-workflow continuation plan for the next Phase 7 evidence
+slice. Fix the automated MCP playtest harness enough to complete the current
+scripted-policy batch, then record versioned findings before changing gameplay.
 
 ## Roadmap Phase
 
-Primarily Phase 7 validation and calibration, with Phase 6 and Phase 8 planning
-language updated where the feedback affects scenario, debrief, and release
-priorities.
+Phase 7 validation and calibration prep. This is evidence collection and harness
+repair, not gameplay expansion.
 
 ## Non-Goals
 
-- No Rust runtime, ruleset, scenario, replay, MCP DTO, or golden-hash changes.
-- No new scenario loader, diagnostics implementation, calibration pass, or
-  analytics platform.
-- No external human recruitment gate or human learning-outcome claim.
-- No policy-forecasting claim or research-grade model claim.
-- No broad actor, ontology, or framework expansion.
+- No transition, ruleset, scenario schema, replay format, MCP DTO, campaign
+  length, or golden-hash change.
+- No balance tuning, scoring redesign, diagnostics platform, human learning
+  claim, empirical calibration claim, or policy forecast claim.
+- No competitive final-metric export in this slice; record it as an evidence gap.
 
 ## Sources
 
-- User-supplied external feedback
+- User request to implement the proposed preferred-workflow plan
 - `README.md`
 - `SPEC.md`
-- `ARCHITECTURE.md`
-- `CHANGELOG.md`
-- `docs/roadmap.md`
-- `docs/design_principles.md`
 - `docs/agent-playtest-protocol.md`
-- `docs/evidence-registry.md`
+- `docs/mcp-playtesting-guide.md`
+- `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
+- Existing scripts under `scripts/`
 
 ## Expected Files
 
-- Updated SDD and release bookkeeping: `SPEC.md`, `ARCHITECTURE.md`,
-  `CHANGELOG.md`, `README.md`, `Cargo.toml`, `Cargo.lock`
-- Updated planning/evidence docs: `docs/roadmap.md`,
-  `docs/agent-playtest-protocol.md`, `docs/evidence-registry.md`, `LESSONS.md`
-- Updated handoffs under `_workspace/`
+- MCP playtest scripts: `scripts/play_game.py`,
+  `scripts/run_automated_playtests.py`
+- Findings and docs: `docs/playtest-findings-v0.1.49.md`,
+  `docs/mcp-playtesting-guide.md`, `README.md`, `SPEC.md`, `CHANGELOG.md`,
+  `LESSONS.md`
+- Version and handoff files: `Cargo.toml`, `Cargo.lock`, `_workspace/`
 
 ## Validation Target
 
-Future planning should foreground gameplay validity hypotheses,
-strategy-space diagnostics, debrief quality, one exemplary scenario,
-model-confidence labels, and evidence gates for new abstractions. The docs must
-preserve AI-agent evidence limits and avoid implying human educational
-measurement, empirical calibration, or policy forecasting validity.
+The automated batch should complete three scripted profiles for
+`stabilization-v1` and `competitive-regional-v1` at seed `42` without silent
+hangs. Findings must preserve AI-agent evidence limits and identify follow-up
+work without implying human educational measurement, empirical calibration, or
+policy forecasting validity.
