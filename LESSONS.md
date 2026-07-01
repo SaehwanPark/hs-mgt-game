@@ -3,6 +3,22 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## End-Session Metrics Belong In Debrief, Not Active Observation
+
+- Context: Closing the v0.1.49 competitive MCP evidence gap by exposing final
+  player tradeoff metrics.
+- Symptom: Competitive playtest findings could compare commands and hashes but
+  could not make outcome-distribution claims.
+- Cause: The active MCP observation surface correctly avoids omniscient state,
+  but the end-session debrief had not yet summarized the final human-system
+  metrics available in committed history.
+- Resolution: Add final player tradeoff and resource lines to competitive
+  `end_session` debrief only, derived from genesis and final committed human
+  system state.
+- Prevention: Put post-run analysis metrics in debrief or instructor surfaces,
+  not active-play observations, unless a design explicitly changes the actor's
+  information boundary.
+
 ## Playtest Policies Need Campaign-Stable Detection
 
 - Context: Running the v0.1.49 automated MCP playtest batch after the AI-agent

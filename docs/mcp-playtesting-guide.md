@@ -24,10 +24,9 @@ python3 scripts/run_automated_playtests.py
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all three strategies, and prints a comparison table. Stabilization
-metrics are parsed from the committed debrief. The current competitive MCP
-debrief exposes final hashes but not final player tradeoff metrics, so
-competitive metric distributions should be recorded only after that evidence
-surface is extended.
+metrics are parsed from the committed debrief. Competitive end-session debriefs
+now expose final player tradeoff metrics from committed history; treat those as
+scripted-agent evidence, not human learning or empirical calibration evidence.
 
 ## Creating a Custom Strategy Policy
 

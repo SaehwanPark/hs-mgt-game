@@ -11,10 +11,10 @@ includes a deterministic five-turn stabilization campaign, replay and state-hash
 checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
 with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
-for bounded agent play of both current campaigns. The v0.1.49 Phase 7 scripted
-MCP playtest batch completed across both current campaigns and identified
-competitive final-metric reporting as the next evidence gap before broader
-diagnostics or balance work.
+for bounded agent play of both current campaigns. The v0.1.50 MCP debrief
+surface now reports final competitive player tradeoff metrics from committed
+history, closing the v0.1.49 evidence gap before seed variation or free-form
+agent validation.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).

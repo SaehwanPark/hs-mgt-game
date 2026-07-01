@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.50] - 2026-07-01
+
+### Changed
+
+- Added final competitive player tradeoff and resource metrics to the MCP
+  `end_session` debrief using committed history.
+- Updated the automated playtest summary to parse competitive final metrics
+  from the MCP debrief.
+- Documented the bounded competitive debrief evidence surface for MCP
+  playtesting.
+- Package version bumped to `0.1.50`.
+
 ## [0.1.49] - 2026-06-30
 
 ### Added
