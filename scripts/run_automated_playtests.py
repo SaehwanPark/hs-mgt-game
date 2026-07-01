@@ -89,9 +89,10 @@ def parse_stabilization_metrics(obs, debrief=None):
 
   return metrics
 
-def parse_competitive_metrics(obs, history=None):
+def parse_competitive_metrics(obs, history=None, debrief=None):
   metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "PC": "N/A", "Hash": "N/A"}
   text = "\n".join(obs)
+  debrief_text = "\n".join(debrief or [])
 
   # Check Riverside Community Health metrics block
   riverside_block = ""
@@ -142,6 +143,24 @@ def parse_competitive_metrics(obs, history=None):
   if history:
     metrics["Hash"] = history[-1]["state_hash"]
 
+  tradeoff_m = re.search(
+    r"cash moved from -?\d+ to (-?\d+), access from \d+ to (\d+), quality from \d+ to \d+, workforce trust from \d+ to (\d+), community trust from \d+ to (\d+), and market share from \d+ to \d+",
+    debrief_text
+  )
+  if tradeoff_m:
+    metrics["Cash"] = tradeoff_m.group(1)
+    metrics["Access"] = tradeoff_m.group(2)
+    metrics["WorkforceTrust"] = tradeoff_m.group(3)
+    metrics["CommunityTrust"] = tradeoff_m.group(4)
+
+  resource_m = re.search(
+    r"Final player resources: political capital (\d+), active projects \d+, active project monthly draws -?\d+, staffed beds (\d+)",
+    debrief_text
+  )
+  if resource_m:
+    metrics["PC"] = resource_m.group(1)
+    metrics["Beds"] = resource_m.group(2)
+
   return metrics
 
 def run_tests():
@@ -178,7 +197,7 @@ def run_tests():
     print(f"Running competitive regional campaign for '{name}'...")
     res = play_session("competitive-regional-v1", seed=42, policy_fn=policy)
     if res:
-      metrics = parse_competitive_metrics(res["final_observation"], res["history"])
+      metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
       comp_results[name] = metrics
       print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
     else:

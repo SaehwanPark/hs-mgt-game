@@ -1,34 +1,34 @@
-# Final Handoff: MCP Playtest Evidence Slice
+# Final Handoff: Competitive Final Debrief Metrics Slice
 
 ## Changed Files
 
-- Updated `scripts/play_game.py` and `scripts/run_automated_playtests.py`.
-- Added `docs/playtest-findings-v0.1.49.md`.
+- Updated `src/mcp/session.rs` to add final competitive player tradeoff and
+  resource metrics to the MCP `end_session` debrief.
+- Updated `scripts/run_automated_playtests.py` to parse competitive final
+  metrics from the MCP debrief for the comparison table.
 - Updated `README.md`, `SPEC.md`, `CHANGELOG.md`,
-  `docs/mcp-playtesting-guide.md`, and `LESSONS.md`.
+  `docs/mcp-agent-interface.md`, `docs/mcp-playtesting-guide.md`, and
+  `LESSONS.md`.
 - Bumped package version in `Cargo.toml` and `Cargo.lock`.
 - Replaced current `_workspace/` request summary, domain QA, and handoff.
 
 ## Verification
 
-- `python3 scripts/run_automated_playtests.py` completed the six-session batch:
-  three scripted profiles across `stabilization-v1` and
-  `competitive-regional-v1` at seed `42`.
 - `cargo fmt --check` passed.
-- `cargo test < /dev/null` passed.
+- `cargo test` passed: 222 unit tests, 8 integration tests, 0 doc tests.
+- `python3 scripts/run_automated_playtests.py` completed six sessions and
+  printed competitive final metric values from the MCP debrief.
 - `git diff --check` passed.
 
 ## Known Limits
 
-- The playtest batch uses one seed and scripted policies only.
-- Competitive final player tradeoff metrics are not yet exposed through the MCP
-  debrief/summary surface, so competitive diagnostics remain command/hash based.
+- The change adds a text debrief surface, not a typed analytics export.
+- The final metrics are end-of-run committed-history evidence only; active-play
+  observations still avoid omniscient final-state reporting.
 - No gameplay formulas, transition semantics, scenarios, replay formats, MCP DTO
   shapes, campaign length, or golden hashes changed.
 
 ## Next Dependency
 
-The next validation slice should close the competitive evidence gap by exposing
-a bounded final tradeoff summary from committed history/debrief output, then run
-a seed-variation or naive/free-form agent batch before broader diagnostics or
-balance work.
+Run a seed-variation batch or one naive/free-form agent profile using the new
+competitive final metric debrief before broader diagnostics or balance work.

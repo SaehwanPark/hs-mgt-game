@@ -60,9 +60,43 @@ reconstructing it from the diff.
 | AI-agent playtest validation pivot | v0.1.47 | Phase 7 validation docs moved from external human recruitment to reproducible AI-agent playtests | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Feedback-aligned future planning | v0.1.48 | External feedback translated into validation-first SDD Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest evidence | v0.1.49 | Automated Phase 7 MCP playtest batch completed and findings recorded | 228 | `88d07f9e1bbd6f04` (competitive) |
+| Competitive final debrief metrics | v0.1.50 | MCP competitive end-session debrief reports final player tradeoff metrics from committed history | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Competitive final debrief metrics
+  Status: Complete
+  Started: 2026-07-01
+  Version: 0.1.50
+
+  Summary:
+  Close the v0.1.49 competitive evidence gap by adding bounded final player
+  tradeoff and resource metrics to the competitive MCP `end_session` debrief.
+
+  Done:
+  - Competitive MCP debrief now reports final human-system cash, access,
+    quality, workforce trust, community trust, market share, political capital,
+    active projects, active project monthly draws, and staffed beds from
+    committed history
+  - Automated playtest summaries now parse competitive final metrics from the
+    MCP end-session debrief
+  - Focused MCP session tests cover completed-session metric reporting and keep
+    rival organization names out of the final metric lines
+  - MCP playtesting and interface docs describe the end-session metric surface
+  - Package version bumped to `0.1.50`
+
+  Deferred / Non-Goals:
+  - No transition behavior, rulesets, scenario schemas, replay formats, MCP DTO
+    shapes, active observation surfaces, campaign length, golden hashes, or
+    gameplay formulas changed
+  - No seed-variation batch, free-form agent profile, human learning claim,
+    empirical calibration claim, policy forecast claim, balance tuning, or
+    diagnostics platform
+
+  Verification:
+  - MCP session tests cover the new competitive final debrief metrics
+  - Full Rust checks and diff checks completed for the slice
 
 - Feature: AI-agent playtest evidence
   Status: Complete
@@ -364,8 +398,9 @@ competitive command-prompt ergonomics, external playtest protocol refresh, the
 minimal stabilization scenario loader, bounded MCP agent-play support, CLI
 scenario file path selection, automated MCP playtest findings, playtest-guided
 player guidance, SDD cleanup, deferred-item triage, the AI-agent playtest
-validation pivot, feedback-aligned future planning refresh, and the v0.1.49
-AI-agent playtest evidence batch are complete.
+validation pivot, feedback-aligned future planning refresh, the v0.1.49
+AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
+metrics slice are complete.
 
 ## Future
 
@@ -377,18 +412,17 @@ AI-agent playtest evidence batch are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Close one evidence gap from the v0.1.49 findings before expanding the batch:
-  either expose a bounded competitive final tradeoff summary through committed
-  history/debrief output, add a naive/free-form agent profile, or run a
-  seed-variation batch after the competitive summary gap is addressed.
+  Use the v0.1.50 competitive final debrief metrics to run either a
+  seed-variation batch or one naive/free-form agent profile before broader
+  diagnostics or balance work.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
   agent profiles or prompts, actor-visible observations, submitted commands,
   validation failures, histories, debriefs, diagnostic summaries, evidence
-  limits, and prioritized recommendations. Competitive findings should not make
-  outcome-distribution claims until final player tradeoff metrics are available
-  through an accepted evidence surface.
+  limits, and prioritized recommendations. Competitive findings may use the
+  v0.1.50 end-session player metrics, but should still label evidence as
+  scripted-agent or free-form-agent evidence rather than human validation.
 
   Deferred / Non-Goals:
   No external human recruitment gate, formal human-subjects research process,

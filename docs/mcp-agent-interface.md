@@ -72,6 +72,11 @@ functions, and debrief helpers. It does not add randomness, rewrite history, or
 expose hidden true state beyond the current actor-visible observation and
 committed transition summaries.
 
+For `competitive-regional-v1`, `end_session` includes final player tradeoff and
+resource metrics derived from the human system in committed history. This is an
+end-of-run debrief surface, not an active-play observation surface, and it does
+not add rival private-state reporting.
+
 ## Deferred
 
 - Streamable HTTP transport and auth

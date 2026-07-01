@@ -611,7 +611,7 @@ fn format_effect(effect: &crate::model::AttributedEffect) -> String {
 
 fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
   let final_state = session.history.final_state();
-  vec![
+  let mut lines = vec![
     format!(
       "Competitive preview completed {} committed month(s).",
       session.history.transitions.len()
@@ -629,8 +629,57 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
       "Final calendar: Year {}, Month {}.",
       final_state.policy_calendar.year, final_state.policy_calendar.month_in_year
     ),
+  ];
+  lines.extend(competitive_final_tradeoff_lines(
+    &session.history.genesis,
+    final_state,
+  ));
+  lines.extend([
     "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
     "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.".to_string(),
+  ]);
+  lines
+}
+
+fn competitive_final_tradeoff_lines(
+  genesis: &CompetitiveWorldState,
+  final_state: &CompetitiveWorldState,
+) -> Vec<String> {
+  let Some(initial_human) = genesis.human_system() else {
+    return vec![
+      "Final player tradeoff metrics unavailable: no human system at genesis.".to_string(),
+    ];
+  };
+  let Some(final_human) = final_state.human_system() else {
+    return vec![
+      "Final player tradeoff metrics unavailable: no human system in final state.".to_string(),
+    ];
+  };
+
+  vec![
+    format!(
+      "Final player tradeoff: {} cash moved from {} to {}, access from {} to {}, quality from {} to {}, workforce trust from {} to {}, community trust from {} to {}, and market share from {} to {}.",
+      final_human.name,
+      initial_human.resources.cash,
+      final_human.resources.cash,
+      initial_human.access_index,
+      final_human.access_index,
+      initial_human.quality_index,
+      final_human.quality_index,
+      initial_human.workforce_trust,
+      final_human.workforce_trust,
+      initial_human.community_trust,
+      final_human.community_trust,
+      initial_human.market_share_index,
+      final_human.market_share_index
+    ),
+    format!(
+      "Final player resources: political capital {}, active projects {}, active project monthly draws {}, staffed beds {}.",
+      final_human.resources.political_capital,
+      final_human.resources.active_projects,
+      final_human.resources.active_project_monthly_draws,
+      final_human.staffed_beds
+    ),
   ]
 }
 
@@ -748,6 +797,68 @@ mod tests {
     assert!(text.contains("Recruitment lesson"));
     assert!(text.contains("role-specific delays"));
     assert!(text.contains("workforce trust"));
+  }
+
+  #[test]
+  fn completed_competitive_debrief_includes_final_player_tradeoff_metrics() {
+    let mut store = GameSessionStore::default();
+    let mut current = start(&mut store, "competitive-regional-v1");
+
+    for command_text in [
+      "monitor target=northlake depth=1; recruit role=nurse headcount=4",
+      "invest domain=beds amount=15; commit pledge_type=access level=2",
+      "negotiate payer=carrier_a rate_posture=neutral; hold",
+    ] {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id.clone(),
+          command_text: command_text.to_string(),
+        })
+        .expect("advance");
+    }
+
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: current.session_id,
+      })
+      .expect("end session");
+    let text = ended.debrief.join("\n");
+
+    assert!(text.contains("Final player tradeoff:"));
+    assert!(text.contains("cash moved from"));
+    assert!(text.contains("access from"));
+    assert!(text.contains("quality from"));
+    assert!(text.contains("workforce trust from"));
+    assert!(text.contains("community trust from"));
+    assert!(text.contains("market share from"));
+    assert!(text.contains("Final player resources: political capital"));
+  }
+
+  #[test]
+  fn competitive_debrief_final_metrics_do_not_name_rival_systems() {
+    let mut store = GameSessionStore::default();
+    let mut current = start(&mut store, "competitive-regional-v1");
+
+    for _ in 0..3 {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("advance");
+    }
+
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: current.session_id,
+      })
+      .expect("end session");
+    let text = ended.debrief.join("\n");
+
+    assert!(!text.contains("Northlake"));
+    assert!(!text.contains("Summit"));
+    assert!(!text.contains("Valley"));
+    assert!(!text.contains("Metro"));
   }
 
   #[test]

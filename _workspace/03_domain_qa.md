@@ -1,4 +1,4 @@
-# Domain QA: MCP Playtest Evidence Slice
+# Domain QA: Competitive Final Debrief Metrics Slice
 
 ## Status
 
@@ -13,24 +13,28 @@ Pass.
 - `CHANGELOG.md`
 - `LESSONS.md`
 - `docs/agent-playtest-protocol.md`
+- `docs/mcp-agent-interface.md`
 - `docs/mcp-playtesting-guide.md`
 - `docs/playtest-findings-v0.1.49.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `scripts/play_game.py`
+- `src/mcp/session.rs`
 - `scripts/run_automated_playtests.py`
 
 ## Findings
 
-- Scope stayed within Phase 7 evidence collection and harness repair.
-- The automated playtest bug was a harness policy-selection issue, not a
-  simulation mechanism issue.
-- Findings preserve the distinction between scripted AI-agent evidence and
-  human learning, empirical calibration, or policy-validation claims.
-- The stabilization findings use committed debrief tradeoffs and actor
-  rationales, preserving the true-state/observation/history boundaries.
-- Competitive findings correctly label the lack of final metric exposure as an
-  evidence gap rather than inferring outcome distributions from unavailable
-  data.
+- Scope stayed within the Phase 7 evidence-surface gap identified by the
+  v0.1.49 automated playtest findings.
+- Final competitive metrics are reported only in the end-session debrief, not
+  during active-play observation, preserving the actor information boundary.
+- The metrics are derived from the human system in genesis and final committed
+  competitive state, preserving append-only history and deterministic replay
+  assumptions.
+- The change does not alter transition formulas, stochastic inputs, rulesets,
+  scenario files, campaign length, MCP tool names, or DTO shapes.
+- Focused tests check metric presence after a completed competitive session and
+  guard against final metric lines naming rival systems.
+- The automated playtest summary reads the new debrief evidence surface instead
+  of trying to infer final metrics from the completed-session observation.
 
 ## Required Fixes
 
@@ -38,15 +42,17 @@ None.
 
 ## Residual Risks
 
-- The batch uses one seed and scripted policies only.
-- Competitive debrief/MCP evidence is still too thin for outcome-distribution
-  diagnostics.
-- Future free-form agent profiles may expose command-help or pacing issues not
-  visible in scripted policies.
+- Competitive metric interpretation is still simulated-agent evidence, not
+  human learning, empirical calibration, or policy-validation evidence.
+- Seed variation and naive/free-form agent play remain necessary before broad
+  strategy-space or outcome-distribution claims.
+- The MCP debrief remains text-oriented; typed analysis exports are still
+  deferred until repeated evidence shows a concrete need.
 
 ## Verification Evidence
 
-- `python3 scripts/run_automated_playtests.py` completed six sessions.
 - `cargo fmt --check` passed.
-- `cargo test < /dev/null` passed.
+- `cargo test` passed: 222 unit tests, 8 integration tests, 0 doc tests.
+- `python3 scripts/run_automated_playtests.py` completed six sessions and
+  printed competitive final metric values from the MCP debrief.
 - `git diff --check` passed.
