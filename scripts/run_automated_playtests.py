@@ -7,6 +7,8 @@ import subprocess
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from play_game import play_session
 
+SEEDS = [42, 43, 44]
+
 def is_stabilization_legal(legal):
   return len(legal) == 1
 
@@ -163,6 +165,31 @@ def parse_competitive_metrics(obs, history=None, debrief=None):
 
   return metrics
 
+def numeric_values(results, key):
+  values = []
+  for result in results:
+    value = result["metrics"].get(key, "N/A")
+    if value != "N/A":
+      values.append(int(value))
+  return values
+
+def format_range(results, key):
+  values = numeric_values(results, key)
+  if not values:
+    return "N/A"
+  if min(values) == max(values):
+    return str(values[0])
+  return f"{min(values)}-{max(values)}"
+
+def print_range_summary(title, results, keys):
+  print("====================================================")
+  print(title)
+  print("====================================================")
+  print(f"Sessions: {len(results)}")
+  for key in keys:
+    print(f"{key}: {format_range(results, key)}")
+  print()
+
 def run_tests():
   subprocess.run(
     ["cargo", "build", "--quiet", "--bin", "hs-mgt-game-mcp"],
@@ -180,47 +207,70 @@ def run_tests():
   print("====================================================\n")
 
   # 1. Run Stabilization Campaigns
-  stab_results = {}
-  for name, policy in strategies.items():
-    print(f"Running stabilization campaign for '{name}'...")
-    res = play_session("stabilization-v1", seed=42, policy_fn=policy)
-    if res:
-      metrics = parse_stabilization_metrics(res["final_observation"], res["debrief"])
-      stab_results[name] = metrics
-      print(f"  -> Done. Final Cash: {metrics['Cash']}, Reported Access: {metrics['Access']}\n")
-    else:
-      print(f"  -> Failed to execute run for '{name}'\n")
+  stab_results = []
+  for seed in SEEDS:
+    for name, policy in strategies.items():
+      print(f"Running stabilization campaign for '{name}' with seed {seed}...")
+      res = play_session("stabilization-v1", seed=seed, policy_fn=policy)
+      if res:
+        metrics = parse_stabilization_metrics(res["final_observation"], res["debrief"])
+        stab_results.append({"seed": seed, "strategy": name, "metrics": metrics})
+        print(f"  -> Done. Final Cash: {metrics['Cash']}, Reported Access: {metrics['Access']}\n")
+      else:
+        print(f"  -> Failed to execute run for '{name}' with seed {seed}\n")
 
   # 2. Run Competitive Campaigns
-  comp_results = {}
-  for name, policy in strategies.items():
-    print(f"Running competitive regional campaign for '{name}'...")
-    res = play_session("competitive-regional-v1", seed=42, policy_fn=policy)
-    if res:
-      metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
-      comp_results[name] = metrics
-      print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
-    else:
-      print(f"  -> Failed to execute run for '{name}'\n")
+  comp_results = []
+  for seed in SEEDS:
+    for name, policy in strategies.items():
+      print(f"Running competitive regional campaign for '{name}' with seed {seed}...")
+      res = play_session("competitive-regional-v1", seed=seed, policy_fn=policy)
+      if res:
+        metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
+        comp_results.append({"seed": seed, "strategy": name, "metrics": metrics})
+        print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
+      else:
+        print(f"  -> Failed to execute run for '{name}' with seed {seed}\n")
+
+  expected_sessions = len(SEEDS) * len(strategies)
+  if len(stab_results) != expected_sessions or len(comp_results) != expected_sessions:
+    raise RuntimeError(
+      "Automated playtest batch incomplete: "
+      f"stabilization {len(stab_results)}/{expected_sessions}, "
+      f"competitive {len(comp_results)}/{expected_sessions}"
+    )
 
   # Print Comparison Tables
   print("====================================================")
-  print("STABILIZATION CAMPAIGN COMPARISON SUMMARY (SEED 42)")
+  print("STABILIZATION CAMPAIGN COMPARISON SUMMARY")
   print("====================================================")
-  print(f"{'Strategy':<20} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9}")
-  print("-" * 75)
-  for name, m in stab_results.items():
-    print(f"{name:<20} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9}")
+  print(f"{'Seed':<6} | {'Strategy':<20} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9}")
+  print("-" * 84)
+  for result in stab_results:
+    m = result["metrics"]
+    print(f"{result['seed']:<6} | {result['strategy']:<20} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9}")
   print()
 
   print("====================================================")
-  print("COMPETITIVE CAMPAIGN COMPARISON SUMMARY (SEED 42)")
+  print("COMPETITIVE CAMPAIGN COMPARISON SUMMARY")
   print("====================================================")
-  print(f"{'Strategy':<20} | {'Final Hash':<16} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}")
-  print("-" * 102)
-  for name, m in comp_results.items():
-    print(f"{name:<20} | {m['Hash']:<16} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9} | {m['PC']:<4}")
+  print(f"{'Seed':<6} | {'Strategy':<20} | {'Final Hash':<16} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}")
+  print("-" * 111)
+  for result in comp_results:
+    m = result["metrics"]
+    print(f"{result['seed']:<6} | {result['strategy']:<20} | {m['Hash']:<16} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9} | {m['PC']:<4}")
   print()
+
+  print_range_summary(
+    "STABILIZATION SEED-VARIATION RANGES",
+    stab_results,
+    ["Cash", "Access", "WorkforceTrust", "CommunityTrust", "Policy"]
+  )
+  print_range_summary(
+    "COMPETITIVE SEED-VARIATION RANGES",
+    comp_results,
+    ["Cash", "Access", "Beds", "WorkforceTrust", "CommunityTrust", "PC"]
+  )
 
 if __name__ == "__main__":
   run_tests()

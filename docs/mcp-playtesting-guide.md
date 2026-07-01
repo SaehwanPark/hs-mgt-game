@@ -23,9 +23,10 @@ python3 scripts/run_automated_playtests.py
 
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
-campaigns for all three strategies, and prints a comparison table. Stabilization
+campaigns for all three strategies across seeds `42`, `43`, and `44`, and
+prints per-seed comparison tables plus compact metric ranges. Stabilization
 metrics are parsed from the committed debrief. Competitive end-session debriefs
-now expose final player tradeoff metrics from committed history; treat those as
+expose final player tradeoff metrics from committed history; treat those as
 scripted-agent evidence, not human learning or empirical calibration evidence.
 
 ## Creating a Custom Strategy Policy
