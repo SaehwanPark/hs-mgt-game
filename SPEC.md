@@ -61,9 +61,43 @@ reconstructing it from the diff.
 | Feedback-aligned future planning | v0.1.48 | External feedback translated into validation-first SDD Future tracks | 228 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest evidence | v0.1.49 | Automated Phase 7 MCP playtest batch completed and findings recorded | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive final debrief metrics | v0.1.50 | MCP competitive end-session debrief reports final player tradeoff metrics from committed history | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Seed-variation playtest evidence | v0.1.51 | Scripted MCP playtest batch completed across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Seed-variation playtest evidence
+  Status: Complete
+  Started: 2026-07-01
+  Version: 0.1.51
+
+  Summary:
+  Extend the scripted MCP Phase 7 playtest batch from the seed-42 baseline to a
+  fixed seed matrix using the v0.1.50 competitive final metric debrief surface.
+
+  Done:
+  - Automated playtest runner now executes Fiscal Caution, Capacity Growth, and
+    Balanced Strategy profiles for both current campaigns across seeds 42, 43,
+    and 44
+  - Script output now prints per-seed comparison rows and compact metric ranges
+    for stabilization and competitive preview outcomes
+  - `docs/playtest-findings-v0.1.51.md` records 18 completed scripted MCP
+    sessions, seed-sensitivity observations, evidence limits, and follow-up
+    recommendations
+  - Package version bumped to `0.1.51`
+
+  Deferred / Non-Goals:
+  - No transition behavior, rulesets, scenario schemas, replay formats, MCP DTO
+    shapes, active observation surfaces, campaign length, golden hashes, free-
+    form agent profile, naive profile, balance tuning, or diagnostics platform
+    changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    or formula tuning from this scripted seed matrix
+
+  Verification:
+  - Automated MCP seed-variation batch completed 18 sessions without validation
+    failures
+  - Full Rust checks and diff checks completed for the slice
 
 - Feature: Competitive final debrief metrics
   Status: Complete
@@ -400,7 +434,8 @@ scenario file path selection, automated MCP playtest findings, playtest-guided
 player guidance, SDD cleanup, deferred-item triage, the AI-agent playtest
 validation pivot, feedback-aligned future planning refresh, the v0.1.49
 AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
-metrics slice are complete.
+metrics slice, and the v0.1.51 scripted seed-variation playtest batch are
+complete.
 
 ## Future
 
@@ -412,9 +447,9 @@ metrics slice are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Use the v0.1.50 competitive final debrief metrics to run either a
-  seed-variation batch or one naive/free-form agent profile before broader
-  diagnostics or balance work.
+  Add one naive or free-form agent profile to test command comprehension, help
+  text, and debrief use beyond scripted policies before broader diagnostics or
+  balance work.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,

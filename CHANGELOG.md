@@ -6,6 +6,20 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.51] - 2026-07-01
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.51.md` with scripted MCP seed-variation
+  evidence across seeds 42, 43, and 44.
+
+### Changed
+
+- Updated the automated MCP playtest runner to execute the existing three
+  scripted strategies across a fixed seed matrix and print per-seed metric
+  summaries.
+- Package version bumped to `0.1.51`.
+
 ## [0.1.50] - 2026-07-01
 
 ### Changed
