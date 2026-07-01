@@ -6,6 +6,19 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.52] - 2026-07-01
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.52.md` with scripted MCP naive-profile
+  evidence across seeds 42, 43, and 44.
+
+### Changed
+
+- Updated the automated MCP playtest runner to include a `Naive First-Time`
+  profile alongside the three existing scripted strategies.
+- Package version bumped to `0.1.52`.
+
 ## [0.1.51] - 2026-07-01
 
 ### Added

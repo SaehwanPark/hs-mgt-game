@@ -13,6 +13,9 @@ turn/month transitions to append-only histories.
   numeric command text.
 - `competitive-regional-v1`: three-month preview with existing Stata-like
   competitive command batches.
+- `Naive First-Time`: deterministic scripted profile that uses legal
+  low-complexity commands to probe completion and outcome contrast without
+  optimizing strategy.
 
 ## Observation Boundary
 
@@ -29,4 +32,5 @@ briefing values or committed public history.
 ## Deferred
 
 Network transport, auth, persistence, long competitive campaigns, replay export,
-and scenario expansion are deferred until agent-play evidence justifies them.
+scenario expansion, free-form agent orchestration, and balance changes are
+deferred until agent-play evidence justifies them.

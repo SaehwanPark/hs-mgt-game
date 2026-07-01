@@ -13,7 +13,10 @@ The playtesting harness decouples the simulation logic from the player client:
 
 ## Running Automated Playtests
 
-We have automated three distinct strategic playstyles (Fiscal Caution, Growth/Expansion, and Balanced Strategy) across both the stabilization and competitive campaign previews. Treat these runs as simulated-player evidence; they do not measure actual human learning or classroom effectiveness.
+We have automated four scripted profiles (Fiscal Caution, Capacity Growth,
+Balanced Strategy, and Naive First-Time) across both the stabilization and
+competitive campaign previews. Treat these runs as simulated-player evidence;
+they do not measure actual human learning or classroom effectiveness.
 
 To execute the automated playtests and print a comparison table of their ending metrics:
 
@@ -23,7 +26,7 @@ python3 scripts/run_automated_playtests.py
 
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
-campaigns for all three strategies across seeds `42`, `43`, and `44`, and
+campaigns for all four profiles across seeds `42`, `43`, and `44`, and
 prints per-seed comparison tables plus compact metric ranges. Stabilization
 metrics are parsed from the committed debrief. Competitive end-session debriefs
 expose final player tradeoff metrics from committed history; treat those as

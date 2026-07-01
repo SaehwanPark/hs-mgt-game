@@ -48,6 +48,18 @@ def policy_balanced(obs, legal, turn):
     ]
     return commands[turn - 1]
 
+def policy_naive_first_time(obs, legal, turn):
+  if is_stabilization_legal(legal):
+    commands = ["6 10 108", "5 4", "5 4", "5 4", "5 4"]
+    return commands[turn - 1]
+  else:  # competitive
+    commands = [
+      "monitor target=northlake depth=1; hold",
+      "hold",
+      "commit pledge_type=access level=1; hold"
+    ]
+    return commands[turn - 1]
+
 def parse_stabilization_metrics(obs, debrief=None):
   metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "Policy": "N/A"}
   # Helper to parse lists of observations
@@ -199,7 +211,8 @@ def run_tests():
   strategies = {
     "Fiscal Caution": policy_fiscal,
     "Capacity Growth": policy_growth,
-    "Balanced Strategy": policy_balanced
+    "Balanced Strategy": policy_balanced,
+    "Naive First-Time": policy_naive_first_time
   }
 
   print("====================================================")
