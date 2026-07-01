@@ -62,9 +62,46 @@ reconstructing it from the diff.
 | AI-agent playtest evidence | v0.1.49 | Automated Phase 7 MCP playtest batch completed and findings recorded | 228 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive final debrief metrics | v0.1.50 | MCP competitive end-session debrief reports final player tradeoff metrics from committed history | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Seed-variation playtest evidence | v0.1.51 | Scripted MCP playtest batch completed across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Naive-profile playtest evidence | v0.1.52 | Scripted MCP playtest batch added a naive first-time profile across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Naive-profile playtest evidence
+  Status: Complete
+  Started: 2026-07-01
+  Version: 0.1.52
+
+  Summary:
+  Extend the scripted MCP Phase 7 playtest batch with a deliberately simple
+  `Naive First-Time` profile to test whether current command hints and
+  observations support legal low-complexity completion beyond the three
+  optimized scripted strategies.
+
+  Done:
+  - Automated playtest runner now executes Fiscal Caution, Capacity Growth,
+    Balanced Strategy, and Naive First-Time profiles for both current campaigns
+    across seeds 42, 43, and 44
+  - `docs/playtest-findings-v0.1.52.md` records 24 completed scripted MCP
+    sessions, naive-profile command choices, outcome comparisons, evidence
+    limits, and follow-up recommendations
+  - The naive profile completed all sessions without validation failures while
+    preserving cash and underusing some access, community-trust, and competitive
+    action-space opportunities
+  - Package version bumped to `0.1.52`
+
+  Deferred / Non-Goals:
+  - No transition behavior, rulesets, scenario schemas, replay formats, MCP DTO
+    shapes, active observation surfaces, campaign length, golden hashes,
+    free-form agent orchestration, balance tuning, or diagnostics platform
+    changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    formula tuning, or command-surface change from this scripted naive profile
+
+  Verification:
+  - Automated MCP naive-profile batch completed 24 sessions without validation
+    failures
+  - Rust checks and diff checks completed for the slice
 
 - Feature: Seed-variation playtest evidence
   Status: Complete
@@ -434,8 +471,8 @@ scenario file path selection, automated MCP playtest findings, playtest-guided
 player guidance, SDD cleanup, deferred-item triage, the AI-agent playtest
 validation pivot, feedback-aligned future planning refresh, the v0.1.49
 AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
-metrics slice, and the v0.1.51 scripted seed-variation playtest batch are
-complete.
+metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
+v0.1.52 naive-profile playtest batch are complete.
 
 ## Future
 
@@ -447,8 +484,9 @@ complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Add one naive or free-form agent profile to test command comprehension, help
-  text, and debrief use beyond scripted policies before broader diagnostics or
+  Run one free-form agent profile that must choose commands from actor-visible
+  observations, legal-command hints, and player-facing docs, then capture
+  validation retries and debrief explanations before broader diagnostics or
   balance work.
 
   Verification target:
