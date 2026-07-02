@@ -6,6 +6,30 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.54] - 2026-07-02
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.54.md` with a free-form MCP first-time
+  executive profile across both current campaigns at seed 42.
+
+### Changed
+
+- Documented the operator-run MCP free-form playtest procedure in the
+  playtesting guide.
+- Package version bumped to `0.1.54`.
+
+## [0.1.53] - 2026-07-02
+
+### Fixed
+
+- Fixed competitive campaign tests so PTY-backed test runs use fallback input
+  instead of blocking on interactive prompts.
+
+### Changed
+
+- Package version bumped to `0.1.53`.
+
 ## [0.1.52] - 2026-07-01
 
 ### Added

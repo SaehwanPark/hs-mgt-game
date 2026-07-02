@@ -74,3 +74,25 @@ python3 scripts/play_game.py stabilization-v1
 ```
 
 This will print the observation and prompt you to input the commands manually, sending them directly to the underlying MCP server.
+
+## Free-Form Agent Evidence Runs
+
+Use this procedure when collecting a bounded free-form agent artifact rather
+than adding another scripted policy. The operator or agent should choose
+commands only from player-facing docs, current MCP observations, and the
+`legal_commands` hints returned by the server.
+
+1. Use seed `42` unless the findings question requires seed variation.
+2. Run both current campaigns: `stabilization-v1` and
+   `competitive-regional-v1` with normal difficulty.
+3. Record the agent profile or persona, observations shown, legal command hints,
+   submitted command text, validation errors and retries, transition hashes,
+   final debrief, and the agent's causal explanation after reading the history
+   and debrief.
+4. Label the result as free-form agent evidence. Do not present it as human
+   learning evidence, empirical calibration, balance validation, or policy
+   forecasting.
+
+The run may use `scripts/play_game.py` interactively or a small operator-owned
+MCP client wrapper. Do not commit a new LLM runner unless repeated findings show
+that the existing client cannot capture the needed evidence.

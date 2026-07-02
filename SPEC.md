@@ -63,9 +63,69 @@ reconstructing it from the diff.
 | Competitive final debrief metrics | v0.1.50 | MCP competitive end-session debrief reports final player tradeoff metrics from committed history | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Seed-variation playtest evidence | v0.1.51 | Scripted MCP playtest batch completed across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Naive-profile playtest evidence | v0.1.52 | Scripted MCP playtest batch added a naive first-time profile across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Campaign test fallback fix | v0.1.53 | PTY-backed competitive campaign tests use fallback input instead of blocking | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Free-form agent playtest evidence | v0.1.54 | One free-form first-time profile completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Free-form agent playtest evidence
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.54
+
+  Summary:
+  Run one bounded free-form `Free-Form First-Time Executive` profile through the
+  existing MCP interface for both current campaigns, then record observations,
+  legal-command hints, submitted commands, histories, debriefs, causal
+  explanation, evidence limits, and follow-up recommendations.
+
+  Done:
+  - `docs/playtest-findings-v0.1.54.md` records one stabilization and one
+    competitive free-form session at seed 42 with zero validation failures
+  - The free-form stabilization run produced final cash 45, access 84,
+    workforce trust 64, community trust 70, and hash `5beed26a91f1b739`
+  - The free-form competitive run produced final cash 30, access 71, staffed
+    beds 124, workforce trust 57, community trust 65, political capital 11, and
+    hash `10c3060949fa8aa1`
+  - `docs/mcp-playtesting-guide.md` documents the operator-run free-form
+    evidence procedure
+  - Package version bumped to `0.1.54`
+
+  Deferred / Non-Goals:
+  - No LLM runner, new playtest orchestration framework, transition behavior,
+    ruleset, scenario schema, replay format, MCP DTO, campaign length, active
+    observation surface, golden hash, balance tuning, or diagnostics platform
+    changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    or formula tuning from one free-form simulated-agent profile
+
+  Verification:
+  - Free-form MCP profile completed both current campaigns at seed 42 without
+    validation failures
+  - Rust checks, scripted MCP regression batch, and diff checks completed for
+    the slice
+
+- Feature: Campaign test fallback fix
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.53
+
+  Summary:
+  Fix competitive campaign tests so PTY-backed test runs use fallback input
+  instead of blocking on interactive prompts.
+
+  Done:
+  - CLI stdin fallback detection treats unit tests like non-TTY input for the
+    competitive preview loop
+  - Package version bumped to `0.1.53`
+
+  Deferred / Non-Goals:
+  - No simulation behavior, scenario files, MCP contract, replay format, or
+    golden hash changed
+
+  Verification:
+  - `cargo test` and `cargo fmt --check` pass on `main`
 
 - Feature: Naive-profile playtest evidence
   Status: Complete
@@ -472,7 +532,8 @@ player guidance, SDD cleanup, deferred-item triage, the AI-agent playtest
 validation pivot, feedback-aligned future planning refresh, the v0.1.49
 AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
-v0.1.52 naive-profile playtest batch are complete.
+v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
+and the v0.1.54 free-form agent playtest evidence slice are complete.
 
 ## Future
 
@@ -484,10 +545,11 @@ v0.1.52 naive-profile playtest batch are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Run one free-form agent profile that must choose commands from actor-visible
-  observations, legal-command hints, and player-facing docs, then capture
-  validation retries and debrief explanations before broader diagnostics or
-  balance work.
+  Run at least two additional free-form profiles with different strategic
+  priorities before stronger command-comprehension or passive-competitive-play
+  conclusions. If repeated free-form runs underuse commitments or negotiations,
+  review monthly report guidance and command help before considering balance
+  changes.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
