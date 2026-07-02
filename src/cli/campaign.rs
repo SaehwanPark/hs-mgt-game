@@ -1,5 +1,3 @@
-use std::io::IsTerminal;
-
 use crate::model::{
   CampaignId, CliError, CompetitiveHistory, CompetitiveRuleset, CompetitiveRunConfig,
   CompetitiveWorldState, PlayerResources, Ruleset, SessionOutcome, SystemMonthlyBatch,
@@ -14,7 +12,7 @@ use super::input::ReadLineOutcome;
 use super::io::{
   parse_campaign_choice, parse_difficulty_choice, parse_seed_choice, read_campaign_choice,
   read_competitive_command_batch, read_difficulty_choice, read_seed_choice,
-  read_validation_demo_choice,
+  read_validation_demo_choice, stdin_uses_fallback_input,
 };
 use crate::competitive::{
   genesis_competitive_world_with_ruleset, genesis_roster_lines, human_batch_for_month,
@@ -311,7 +309,7 @@ fn read_human_batch_for_world(
   ruleset: &CompetitiveRuleset,
 ) -> Result<SystemMonthlyBatch, CompetitiveLoopError> {
   let fallback_batch = human_batch_for_month(world.turn);
-  if !std::io::stdin().is_terminal() {
+  if stdin_uses_fallback_input() {
     return Ok(fallback_batch);
   }
 

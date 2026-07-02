@@ -354,5 +354,5 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Context: Running `cargo test` in a pseudo-terminal (PTY) runner or workspace sandbox.
 - Symptom: Tests that read standard input for campaigns (e.g. `competitive_month_loop_runs_three_months_in_non_tty_context`) hang or timeout.
 - Cause: `std::io::stdin().is_terminal()` returns `true` inside a PTY, causing the game to block waiting for human command input instead of executing the fallback non-TTY batch.
-- Resolution: Rerun or structure the test execution command with stdin redirected from `/dev/null` (`cargo test < /dev/null`) to force `is_terminal() == false`.
-- Prevention: Document stdin redirection for local workspace tests, or mock terminal checks inside test suites when standard input prompts are under test.
+- Resolution: `stdin_uses_fallback_input()` in `src/cli/io.rs` treats `cfg!(test)` like non-TTY stdin so competitive campaign tests use preset fallback batches instead of rustyline. Stdin redirection (`cargo test < /dev/null`) still works for manual runs.
+- Prevention: Route any new CLI stdin prompts through `stdin_uses_fallback_input()` (or equivalent) so unit tests never block on terminal detection inside PTYs.

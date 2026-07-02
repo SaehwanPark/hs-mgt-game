@@ -1,4 +1,10 @@
-use std::io;
+use std::io::{self, IsTerminal};
+
+/// Non-interactive stdin (pipes, redirects) and unit tests use preset fallback batches
+/// instead of blocking on rustyline prompts.
+pub(crate) fn stdin_uses_fallback_input() -> bool {
+  cfg!(test) || !io::stdin().is_terminal()
+}
 
 use crate::model::{
   CampaignId, CliError, DEFAULT_SEED, Difficulty, ExperienceMode, PlayMode, StrategyPath,

@@ -10,6 +10,7 @@ use rustyline::{Config, Context, Editor, Helper};
 use crate::model::CliError;
 
 use super::competitive_parse::competitive_command_verbs;
+use super::io::stdin_uses_fallback_input;
 use super::display::{PromptContext, print_line, print_prompt_block, style};
 use super::guidance::print_context_help;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
@@ -63,7 +64,7 @@ pub fn read_competitive_command_line(prompt_lines: &[String]) -> Result<ReadLine
 }
 
 fn read_line() -> Result<String, CliError> {
-  if io::stdin().is_terminal() {
+  if io::stdin().is_terminal() && !stdin_uses_fallback_input() {
     return match read_line_with_completion() {
       Ok(line) => Ok(line),
       Err(ReadlineError::Interrupted | ReadlineError::Eof) => Ok("quit".to_string()),
