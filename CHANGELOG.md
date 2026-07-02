@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.56] - 2026-07-02
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.56.md` with lightweight strategy-space
+  diagnostics over existing scripted and free-form MCP playtest evidence.
+
+### Changed
+
+- Updated project status and SDD history for the diagnostics slice.
+- Package version bumped to `0.1.56`.
+
 ## [0.1.55] - 2026-07-02
 
 ### Added

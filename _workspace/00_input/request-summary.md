@@ -1,51 +1,53 @@
-# Request Summary: Free-Form Profile Synthesis Slice
+# Request Summary
 
 ## Scope
 
-Implement the preferred-workflow continuation plan for the next Phase 7
-validation slice. Capture two additional free-form profiles, `Free-Form Fiscal
-Steward` and `Free-Form Access Expansion Advocate`, through the existing MCP
-interface for both current campaigns at seed `42`, then record versioned
-findings.
-
-## Roadmap Phase
-
-Phase 7 validation and calibration prep. This is free-form simulated-agent
-evidence collection and synthesis, not gameplay expansion, balance tuning, or a
-new agent orchestration framework.
+Add the v0.1.56 strategy-space diagnostics slice. Synthesize existing scripted
+and free-form MCP playtest findings into a lightweight analysis artifact that
+summarizes strategy clusters, outcome ranges, action-frequency signals, evidence
+limits, and follow-up routing before any balance work.
 
 ## Non-Goals
 
-- No transition, ruleset, scenario schema, replay format, MCP DTO, campaign
-  length, active observation, or golden-hash change.
-- No LLM runner, broad diagnostics platform, scoring redesign, or balance pass.
-- No human learning claim, empirical calibration claim, or policy forecast
-  claim.
+- No runtime transition, parser, validation, scenario, MCP DTO, replay, golden
+  hash, or campaign-length changes.
+- No new MCP session matrix, LLM runner, orchestration framework, analytics
+  platform, balance tuning, empirical calibration, policy forecast, equilibrium
+  analysis, or human learning claim.
+- No formula changes from this diagnostic artifact.
 
 ## Sources
 
-- User-approved preferred-workflow plan
 - `README.md`
 - `SPEC.md`
-- `_workspace/final/handoff.md` from v0.1.52
-- `docs/playtest-findings-v0.1.52.md`
+- `CHANGELOG.md`
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
+- `docs/playtest-findings-v0.1.51.md`
+- `docs/playtest-findings-v0.1.52.md`
 - `docs/playtest-findings-v0.1.54.md`
-- `docs/design_principles.md`
+- `docs/playtest-findings-v0.1.55.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- Existing MCP playtest scripts under `scripts/`
 
 ## Expected Files
 
-- Findings: `docs/playtest-findings-v0.1.55.md`
-- Documentation: `README.md`, `SPEC.md`, `CHANGELOG.md`,
-- Version and handoff files: `Cargo.toml`, `Cargo.lock`, `_workspace/`
+- `docs/playtest-findings-v0.1.56.md`
+- `README.md`
+- `SPEC.md`
+- `CHANGELOG.md`
+- `Cargo.toml`
+- `Cargo.lock`
+- `_workspace/` handoff artifacts
 
 ## Validation Target
 
-Both free-form profiles should complete both `stabilization-v1` and
-`competitive-regional-v1` at seed `42` without validation failures, while the
-existing scripted MCP regression batch still completes. Findings must cite
-observations, legal-command hints, submitted commands, histories, debriefs,
-causal explanation, evidence limits, and prioritized follow-up.
+- Diagnostic claims cite captured findings and preserve evidence limits.
+- Existing scripted MCP batch still completes.
+- `cargo fmt --check`, `cargo test`, and `git diff --check` pass.
+
+## Global Skills Needed
+
+- `preferred-workflow` for branch, PR, and review-loop discipline.
+- `simple-code-writer` for minimal docs/version edits.
+- `spec-driven-developer` for SDD and changelog alignment.
+- `code-reviewer` for three independent review passes.
