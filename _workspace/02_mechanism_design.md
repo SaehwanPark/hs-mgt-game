@@ -1,41 +1,41 @@
 # Mechanism Design
 
-## Interface Mechanism
+## Diagnostic Mechanism
 
-The MCP server remains an adapter around existing campaign mechanisms. It
-creates in-memory sessions, returns actor-visible observations, accepts existing
-command strings, validates them at the same boundary as CLI play, and commits
-completed turn/month transitions to append-only histories.
+The slice adds a documentation-only strategy-space diagnostic artifact. It reads
+already-captured findings, groups observed strategies into clusters, summarizes
+metric ranges, and routes follow-up work to guidance, debrief, evidence, or
+future diagnostics.
 
 ## Campaign Coverage
 
-- `stabilization-v1`: five existing executive decision turns with turn-specific
-  numeric command text.
-- `competitive-regional-v1`: three-month preview with existing Stata-like
-  competitive command batches.
-- `Free-Form Fiscal Steward`: operator-run simulated-agent profile that
-  protects cash runway and favors low-risk commitments.
-- `Free-Form Access Expansion Advocate`: operator-run simulated-agent profile
-  that prioritizes access, staffed capacity, and public legitimacy while
-  watching cash.
+- `stabilization-v1`: five-turn findings from scripted and free-form profiles.
+- `competitive-regional-v1`: three-month preview findings from scripted and
+  free-form profiles.
+- Scripted profiles: Fiscal Caution, Capacity Growth, Balanced Strategy, and
+  Naive First-Time.
+- Free-form profiles: First-Time Executive, Fiscal Steward, and Access Expansion
+  Advocate.
 
 ## Observation Boundary
 
-MCP responses expose current observations and transition summaries only. They do
-not expose hidden true state except where already represented by current player
-briefing values, legal-command hints, committed public history, or end-session
-debrief metrics.
+The diagnostic artifact uses only published findings: actor-visible observation
+summaries, legal command hints, submitted commands, committed histories,
+end-session debrief metrics, and recorded causal explanations. It does not add
+hidden-state exposure or active player-facing omniscient reporting.
 
 ## Failure Modes
 
-- Unknown sessions, unsupported campaigns, unsupported difficulty labels,
-  invalid commands, and completed sessions return tool-level structured errors.
-- Failed command validation does not mutate session state or history.
-- This slice records validation failures and retries if they occur; it does not
-  change parser or validation behavior.
+- If a diagnostic claim cannot be traced to a prior findings document, omit it
+  or label it as an unresolved question.
+- If a trend appears in only one profile, seed, or campaign, route it to future
+  diagnostics rather than balance tuning.
+- If validation checks fail, distinguish docs/version mistakes from unrelated
+  runtime failures before expanding scope.
 
 ## Deferred
 
 Network transport, auth, persistence, long competitive campaigns, replay export,
-scenario expansion, LLM-runner orchestration, balance changes, and analytics
-tooling are deferred until repeated evidence justifies them.
+scenario expansion, LLM-runner orchestration, balance changes, runtime guidance
+changes, and analytics tooling are deferred until repeated evidence justifies
+them.

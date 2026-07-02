@@ -66,9 +66,47 @@ reconstructing it from the diff.
 | Campaign test fallback fix | v0.1.53 | PTY-backed competitive campaign tests use fallback input instead of blocking | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Free-form agent playtest evidence | v0.1.54 | One free-form first-time profile completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Free-form profile synthesis | v0.1.55 | Two additional free-form profiles completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Strategy-space diagnostics | v0.1.56 | Lightweight diagnostics over existing scripted and free-form MCP playtest evidence | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Strategy-space diagnostics
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.56
+
+  Summary:
+  Synthesize existing scripted and free-form MCP findings into a lightweight
+  Phase 7 strategy-space diagnostic artifact, with strategy clusters, outcome
+  ranges, action-frequency signals, evidence limits, and follow-up routing
+  before any balance work.
+
+  Done:
+  - `docs/playtest-findings-v0.1.56.md` summarizes v0.1.51, v0.1.52, v0.1.54,
+    and v0.1.55 evidence across both current campaigns
+  - Stabilization diagnostics distinguish fiscal caution, access/capacity
+    growth, balanced access, and naive low-complexity clusters
+  - Competitive diagnostics identify passive/fiscal, scripted fiscal caution,
+    capacity/access growth, and balanced/free-form clusters
+  - Action-frequency signals note repeated use of monitor and access pledges,
+    passive-profile overuse of `hold`, and no captured `project` use in the
+    three-month preview
+  - Package version bumped to `0.1.56`
+
+  Deferred / Non-Goals:
+  - No new MCP session matrix, LLM runner, diagnostics tooling, transition
+    behavior, ruleset, scenario schema, replay format, MCP DTO, campaign length,
+    active observation surface, golden hash, runtime guidance, or balance tuning
+    changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    equilibrium analysis, or formula tuning from this diagnostic artifact
+
+  Verification:
+  - Diagnostic claims cite already-captured findings and preserve evidence
+    limits
+  - Rust checks, scripted MCP regression batch, and diff checks completed for
+    the slice
 
 - Feature: Free-form profile synthesis
   Status: Complete
@@ -575,8 +613,9 @@ validation pivot, feedback-aligned future planning refresh, the v0.1.49
 AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
-the v0.1.54 free-form agent playtest evidence slice, and the v0.1.55 free-form
-profile synthesis slice are complete.
+the v0.1.54 free-form agent playtest evidence slice, the v0.1.55 free-form
+profile synthesis slice, and the v0.1.56 strategy-space diagnostics slice are
+complete.
 
 ## Future
 
@@ -588,10 +627,9 @@ profile synthesis slice are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Use the v0.1.54 and v0.1.55 free-form profile evidence as the baseline for
-  the next synthesis step. If repeated free-form competitive runs underuse
-  commitments, negotiations, or projects, review monthly report guidance and
-  command help before considering balance changes.
+  Use the v0.1.56 diagnostics as the baseline for deciding whether the next
+  Phase 7 slice should improve competitive monthly report guidance, command
+  help, or debrief explanation before considering balance changes.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
@@ -611,9 +649,9 @@ profile synthesis slice are complete.
   tooling only when manual or scripted findings show repeated diagnostic needs.
 
   Next actionable slice:
-  For one current campaign and seed matrix, summarize action frequencies,
-  outcome distributions, strategy clusters, stochastic sensitivity, and any
-  dominance or near-dominance findings from committed histories and debriefs.
+  Keep diagnostics as lightweight analysis artifacts. Implement dedicated
+  tooling only if a later playtest or authoring workflow repeatedly needs
+  action-frequency, outcome-distribution, or strategy-cluster extraction.
 
   Verification target:
   The diagnostic report links claims to captured runs, separates simulated-player

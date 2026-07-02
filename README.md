@@ -14,9 +14,9 @@ preview with AI rivals and Stata-like command entry, and a local stdio MCP serve
 for bounded agent play of both current campaigns. The v0.1.50 MCP debrief
 surface reports final competitive player tradeoff metrics from committed
 history, the v0.1.52 scripted MCP batch adds a naive first-time profile across
-seeds 42, 43, and 44, the v0.1.54 free-form agent run records one
-observation-driven first-time profile, and the v0.1.55 free-form synthesis adds
-two more profile runs before balance work.
+seeds 42, 43, and 44, the v0.1.54 and v0.1.55 free-form runs record three
+observation-driven profiles, and the v0.1.56 diagnostics artifact summarizes
+strategy-space signals before any balance work.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -59,6 +59,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [AI-Agent Naive-Profile Findings (v0.1.52)](docs/playtest-findings-v0.1.52.md)
 - [AI-Agent Free-Form Findings (v0.1.54)](docs/playtest-findings-v0.1.54.md)
 - [AI-Agent Free-Form Synthesis (v0.1.55)](docs/playtest-findings-v0.1.55.md)
+- [AI-Agent Strategy-Space Diagnostics (v0.1.56)](docs/playtest-findings-v0.1.56.md)
 - [AI-Agent Playtest Protocol](docs/agent-playtest-protocol.md)
 - [External Playtest Protocol (Superseded)](docs/external-playtest-protocol.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
@@ -106,12 +107,14 @@ Current priorities are:
 
 1. Run and synthesize AI-agent playtests against explicit gameplay validity
    hypotheses and strategy-space diagnostics.
-2. Treat debrief quality and causal explanation as primary product surfaces.
-3. Develop one exemplary scenario before broad scenario tooling.
-4. Extend scenario data loading only after the minimal stabilization TOML slice
+2. Review competitive guidance or debrief quality before formula tuning where
+   diagnostics show passive or underexplained play.
+3. Treat debrief quality and causal explanation as primary product surfaces.
+4. Develop one exemplary scenario before broad scenario tooling.
+5. Extend scenario data loading only after the minimal stabilization TOML slice
    has playtest or authoring evidence.
-5. Competitive campaign hardening after bounded-loop playtests.
-6. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
+6. Competitive campaign hardening after bounded-loop playtests.
+7. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
 
 Before proposing major features or abstractions, review the canonical documents
 in [`docs/`](docs/), including the [glossary](docs/glossary.md),
