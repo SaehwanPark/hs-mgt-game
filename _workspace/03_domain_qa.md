@@ -1,4 +1,4 @@
-# Domain QA: Free-Form Agent Playtest Evidence Slice
+# Domain QA: Free-Form Profile Synthesis Slice
 
 ## Status
 
@@ -13,19 +13,20 @@ Pass.
 - `CHANGELOG.md`
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
-- `docs/playtest-findings-v0.1.52.md`
 - `docs/playtest-findings-v0.1.54.md`
+- `docs/playtest-findings-v0.1.55.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 
 ## Findings
 
 - Scope stayed within the Phase 7 validation track: free-form MCP evidence
   collection and synthesis.
-- The slice records one free-form simulated-agent profile rather than changing
+- The slice records two additional free-form simulated-agent profiles rather
+  than changing
   mechanics, actors, scenario tooling, MCP contracts, or diagnostics tooling.
-- The v0.1.54 findings label evidence limits clearly and do not claim human
+- The v0.1.55 findings label evidence limits clearly and do not claim human
   learning, empirical calibration, policy forecasting, or balance validity.
-- The profile completed both current campaigns at seed 42 without validation
+- Both profiles completed both current campaigns at seed 42 without validation
   failures.
 - Competitive final metrics are read from end-session debrief evidence and are
   not exposed during active play.
@@ -38,8 +39,8 @@ None.
 
 ## Residual Risks
 
-- One free-form profile cannot characterize human comprehension, strategy-space
-  breadth, stochastic sensitivity, or balance.
+- Three total free-form seed-42 profiles cannot characterize human
+  comprehension, strategy-space breadth, stochastic sensitivity, or balance.
 - The operator-run artifact does not provide reusable LLM orchestration.
 - Any response to passive or low-benefit competitive choices should begin with
   repeated free-form evidence or player-facing guidance review, not formula
@@ -47,7 +48,7 @@ None.
 
 ## Verification Evidence
 
-- Free-form MCP profile completed both current campaigns at seed 42 without
+- Free-form MCP profiles completed both current campaigns at seed 42 without
   validation failures.
 - Existing scripted MCP regression batch completed 24 sessions without
   validation failures.
