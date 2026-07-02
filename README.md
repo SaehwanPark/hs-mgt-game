@@ -128,4 +128,4 @@ in [`docs/`](docs/), including the [glossary](docs/glossary.md),
 
 ## License
 
-To be determined.
+[GPL-3](LICENSE)
