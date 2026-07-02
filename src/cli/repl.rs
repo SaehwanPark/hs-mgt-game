@@ -10,10 +10,10 @@ use rustyline::{Config, Context, Editor, Helper};
 use crate::model::CliError;
 
 use super::competitive_parse::competitive_command_verbs;
-use super::io::stdin_uses_fallback_input;
 use super::display::{PromptContext, print_line, print_prompt_block, style};
 use super::guidance::print_context_help;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
+use super::io::stdin_uses_fallback_input;
 
 #[derive(Clone, Debug)]
 struct CompetitiveVerbCompleter {
