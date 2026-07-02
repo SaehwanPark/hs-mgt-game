@@ -6,6 +6,19 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.55] - 2026-07-02
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.55.md` with two additional free-form MCP
+  profiles across both current campaigns at seed 42.
+
+### Changed
+
+- Updated project status and SDD history for the free-form profile synthesis
+  slice.
+- Package version bumped to `0.1.55`.
+
 ## [0.1.54] - 2026-07-02
 
 ### Added

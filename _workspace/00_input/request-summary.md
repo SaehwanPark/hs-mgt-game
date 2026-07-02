@@ -1,11 +1,12 @@
-# Request Summary: Free-Form Agent Playtest Evidence Slice
+# Request Summary: Free-Form Profile Synthesis Slice
 
 ## Scope
 
 Implement the preferred-workflow continuation plan for the next Phase 7
-validation slice. Capture one free-form `Free-Form First-Time Executive` profile
-through the existing MCP interface for both current campaigns at seed `42`, then
-record versioned findings.
+validation slice. Capture two additional free-form profiles, `Free-Form Fiscal
+Steward` and `Free-Form Access Expansion Advocate`, through the existing MCP
+interface for both current campaigns at seed `42`, then record versioned
+findings.
 
 ## Roadmap Phase
 
@@ -30,20 +31,20 @@ new agent orchestration framework.
 - `docs/playtest-findings-v0.1.52.md`
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
+- `docs/playtest-findings-v0.1.54.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - Existing MCP playtest scripts under `scripts/`
 
 ## Expected Files
 
-- Findings: `docs/playtest-findings-v0.1.54.md`
+- Findings: `docs/playtest-findings-v0.1.55.md`
 - Documentation: `README.md`, `SPEC.md`, `CHANGELOG.md`,
-  `docs/mcp-playtesting-guide.md`
 - Version and handoff files: `Cargo.toml`, `Cargo.lock`, `_workspace/`
 
 ## Validation Target
 
-The free-form profile should complete both `stabilization-v1` and
+Both free-form profiles should complete both `stabilization-v1` and
 `competitive-regional-v1` at seed `42` without validation failures, while the
 existing scripted MCP regression batch still completes. Findings must cite
 observations, legal-command hints, submitted commands, histories, debriefs,

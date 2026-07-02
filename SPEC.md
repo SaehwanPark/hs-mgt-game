@@ -65,9 +65,51 @@ reconstructing it from the diff.
 | Naive-profile playtest evidence | v0.1.52 | Scripted MCP playtest batch added a naive first-time profile across seeds 42, 43, and 44 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Campaign test fallback fix | v0.1.53 | PTY-backed competitive campaign tests use fallback input instead of blocking | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Free-form agent playtest evidence | v0.1.54 | One free-form first-time profile completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Free-form profile synthesis | v0.1.55 | Two additional free-form profiles completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Free-form profile synthesis
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.55
+
+  Summary:
+  Run two additional bounded free-form profiles, `Free-Form Fiscal Steward` and
+  `Free-Form Access Expansion Advocate`, through the existing MCP interface for
+  both current campaigns at seed 42, then record observations, legal-command
+  hints, submitted commands, histories, debriefs, causal explanation, evidence
+  limits, and follow-up recommendations.
+
+  Done:
+  - `docs/playtest-findings-v0.1.55.md` records two stabilization and two
+    competitive free-form sessions at seed 42 with zero validation failures
+  - The fiscal stabilization run produced final cash 68, access 75, workforce
+    trust 64, community trust 66, and hash `b5ba1b2a51d998f9`
+  - The fiscal competitive run produced final cash 60, access 70, staffed beds
+    118, workforce trust 60, community trust 65, political capital 11, and hash
+    `4479e68d2a4516e3`
+  - The access-expansion stabilization run produced final cash 30, access 90,
+    workforce trust 67, community trust 73, and hash `20ad2f9a97dd9e00`
+  - The access-expansion competitive run produced final cash 10, access 76,
+    staffed beds 126, workforce trust 56, community trust 67, political capital
+    11, and hash `34a4653b135f1e63`
+  - Package version bumped to `0.1.55`
+
+  Deferred / Non-Goals:
+  - No LLM runner, new playtest orchestration framework, transition behavior,
+    ruleset, scenario schema, replay format, MCP DTO, campaign length, active
+    observation surface, golden hash, balance tuning, or diagnostics platform
+    changed
+  - No human learning claim, empirical calibration claim, policy forecast claim,
+    or formula tuning from these free-form simulated-agent profiles
+
+  Verification:
+  - Free-form MCP profiles completed both current campaigns at seed 42 without
+    validation failures
+  - Rust checks, scripted MCP regression batch, and diff checks completed for
+    the slice
 
 - Feature: Free-form agent playtest evidence
   Status: Complete
@@ -533,7 +575,8 @@ validation pivot, feedback-aligned future planning refresh, the v0.1.49
 AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
-and the v0.1.54 free-form agent playtest evidence slice are complete.
+the v0.1.54 free-form agent playtest evidence slice, and the v0.1.55 free-form
+profile synthesis slice are complete.
 
 ## Future
 
@@ -545,11 +588,10 @@ and the v0.1.54 free-form agent playtest evidence slice are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Run at least two additional free-form profiles with different strategic
-  priorities before stronger command-comprehension or passive-competitive-play
-  conclusions. If repeated free-form runs underuse commitments or negotiations,
-  review monthly report guidance and command help before considering balance
-  changes.
+  Use the v0.1.54 and v0.1.55 free-form profile evidence as the baseline for
+  the next synthesis step. If repeated free-form competitive runs underuse
+  commitments, negotiations, or projects, review monthly report guidance and
+  command help before considering balance changes.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,

@@ -13,9 +13,11 @@ completed turn/month transitions to append-only histories.
   numeric command text.
 - `competitive-regional-v1`: three-month preview with existing Stata-like
   competitive command batches.
-- `Free-Form First-Time Executive`: operator-run simulated-agent profile that
-  chooses commands from actor-visible observations, legal-command hints, and
-  player-facing docs.
+- `Free-Form Fiscal Steward`: operator-run simulated-agent profile that
+  protects cash runway and favors low-risk commitments.
+- `Free-Form Access Expansion Advocate`: operator-run simulated-agent profile
+  that prioritizes access, staffed capacity, and public legitimacy while
+  watching cash.
 
 ## Observation Boundary
 
