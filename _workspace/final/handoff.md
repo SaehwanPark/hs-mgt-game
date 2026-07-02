@@ -1,20 +1,22 @@
-# Final Handoff: Naive-Profile Playtest Evidence Slice
+# Final Handoff: Free-Form Agent Playtest Evidence Slice
 
 ## Changed Files
 
-- Updated `scripts/run_automated_playtests.py` to add a `Naive First-Time`
-  scripted profile to the existing MCP batch.
-- Added `docs/playtest-findings-v0.1.52.md` with the 24-session naive-profile
-  findings.
-- Updated `README.md`, `SPEC.md`, `CHANGELOG.md`, and
-  `docs/mcp-playtesting-guide.md`.
+- Added `docs/playtest-findings-v0.1.54.md` with one free-form
+  first-time-executive profile across both current MCP campaigns.
+- Updated `docs/mcp-playtesting-guide.md` with the operator-run free-form
+  evidence procedure.
+- Updated `README.md`, `SPEC.md`, and `CHANGELOG.md`.
 - Bumped package version in `Cargo.toml` and `Cargo.lock`.
-- Replaced current `_workspace/` request summary, domain QA, and handoff.
+- Replaced current `_workspace/` request summary, evidence map, mechanism
+  design, domain QA, and handoff artifacts.
 
 ## Verification
 
-- `python3 scripts/run_automated_playtests.py` completed 24 sessions without
-  validation failures.
+- Free-form MCP profile completed `stabilization-v1` and
+  `competitive-regional-v1` at seed 42 with zero validation failures.
+- `python3 scripts/run_automated_playtests.py` completed 24 scripted sessions
+  without validation failures.
 - `cargo fmt --check` passed.
 - `cargo test` passed: 222 unit tests, 8 integration tests, 0 doc tests.
 - `git diff --check` passed.
@@ -22,24 +24,22 @@
 ## Review
 
 - Three sequential code-reviewer passes were completed on fresh branch diffs.
-- Pass 1 found one low-severity documentation consistency issue: the MCP
-  playtesting guide used the old `Growth/Expansion` label instead of
-  `Capacity Growth`; fixed.
+- Pass 1 found one Medium documentation evidence issue: the findings summarized
+  observation cues but did not explicitly record legal-command hints and
+  actor-visible observations; fixed in `docs/playtest-findings-v0.1.54.md`.
 - Passes 2 and 3 found no actionable issues.
+- No Critical or High findings remain open.
 
 ## Known Limits
 
-- This is deterministic scripted-agent evidence, not free-form agent play or
-  human learning evaluation.
-- Seeds 42, 43, and 44 provide bounded comparison, not broad stochastic
+- This is one free-form simulated-agent profile, not human learning evaluation.
+- Seed 42 is a bounded validation point, not broad stochastic
   characterization.
-- The naive competitive profile conserves resources and underuses the action
-  space; this is evidence for follow-up, not a balance conclusion.
 - No gameplay formulas, transition semantics, scenarios, replay formats, MCP DTO
   shapes, campaign length, or golden hashes changed.
 
 ## Next Dependency
 
-Run one free-form agent profile that chooses commands from actor-visible
-observations, legal-command hints, and player-facing docs, then capture
-validation retries and debrief explanations.
+Run at least two additional free-form profiles with different strategic
+priorities before drawing stronger command-comprehension, strategy-space, or
+passive competitive-play conclusions.

@@ -13,8 +13,9 @@ with `--scenario` path selection, a bounded three-month competitive regional
 preview with AI rivals and Stata-like command entry, and a local stdio MCP server
 for bounded agent play of both current campaigns. The v0.1.50 MCP debrief
 surface reports final competitive player tradeoff metrics from committed
-history, and the v0.1.52 scripted MCP batch adds a naive first-time profile
-across seeds 42, 43, and 44 before free-form agent validation or balance work.
+history, the v0.1.52 scripted MCP batch adds a naive first-time profile across
+seeds 42, 43, and 44, and the v0.1.54 free-form agent run records one
+observation-driven first-time profile before balance work.
 See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
 [`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
 [`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
@@ -55,6 +56,7 @@ Canonical project documents are maintained in [`docs/`](docs/):
 - [AI-Agent Playtest Findings (v0.1.49)](docs/playtest-findings-v0.1.49.md)
 - [AI-Agent Seed-Variation Findings (v0.1.51)](docs/playtest-findings-v0.1.51.md)
 - [AI-Agent Naive-Profile Findings (v0.1.52)](docs/playtest-findings-v0.1.52.md)
+- [AI-Agent Free-Form Findings (v0.1.54)](docs/playtest-findings-v0.1.54.md)
 - [AI-Agent Playtest Protocol](docs/agent-playtest-protocol.md)
 - [External Playtest Protocol (Superseded)](docs/external-playtest-protocol.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
