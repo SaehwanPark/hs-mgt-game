@@ -6,6 +6,15 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.61] - 2026-07-03
+
+### Changed
+
+- Cleaned up `SPEC.md` to simplify active and completed feature tracking, making the Past-Present-Future distinction more straightforward.
+- Archived completed feature slices from `v0.1.40` through `v0.1.54` into `docs/spec-past-archive.md`.
+- Reduced `Present` section in `SPEC.md` to focus strictly on active tasks.
+- Bumps project version to `0.1.61`.
+
 ## [0.1.60] - 2026-07-03
 
 ### Added
