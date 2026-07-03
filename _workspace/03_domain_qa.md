@@ -14,7 +14,7 @@ pass
 - **Health Policy Credibility:** The scenario mechanisms are backed by standard health economics and health services literature (Dafny, Town, Devers, MedPAC, BLS). The description clearly maps real-world phenomena (e.g. mandatory staffing ratios and certificate of need legal disputes) into the game's stylized AP/cash resource economy.
 - **Educational Alignment:** The debrief hooks are well-designed to push students to distinguish decision quality from random realizations, evaluate information gaps (unobserved competitor projects), and analyze the tradeoffs of nonprofit mission preservation vs. fiscal safety.
 - **Determinism and Replay Stability:** The scenario rules depend on a deterministic event deck and mathematical recruitment success functions, maintaining compliance with the project's strict requirement for reproducible session replays.
-- **Hygiene & Style:** The document adheres to a tab size of 2 spaces and uses appropriate markdown formatting. Emojis and Chronology diagrams (mermaid) are included to improve CLI/instructor presentation. No Rust files were edited, eliminating regression risks.
+- **Hygiene & Style:** The document adheres to a tab size of 2 spaces and uses appropriate markdown formatting. Emojis and timeline diagrams (mermaid) are included to improve CLI/instructor presentation. No Rust files were edited, eliminating regression risks.
 
 ## Required Fixes
 None.

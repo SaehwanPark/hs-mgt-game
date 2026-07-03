@@ -9,7 +9,7 @@
 
 ## 1. Scenario Concept
 
-In this 24-month competitive campaign, the player leads **Riverside Community Health**, a safety-net-leaning nonprofit health system in a mid-sized regional market. Riverside faces simultaneous pressure from a severe nurse staffing shortage, a dominant commercial payer demanding cost cuts, a aggressive expansionist rival poaching commercial patients, and state regulatory constraints on facility growth.
+In this 24-month competitive campaign, the player leads **Riverside Community Health**, a safety-net-leaning nonprofit health system in a mid-sized regional market. Riverside faces simultaneous pressure from a severe nurse staffing shortage, a dominant commercial payer demanding cost cuts, an aggressive expansionist rival poaching commercial patients, and state regulatory constraints on facility growth.
 
 The campaign tests whether players can maintain their safety-net mission and workforce stability without triggering a fiscal crisis or regulatory intervention.
 
@@ -40,8 +40,14 @@ The campaign tests whether players can maintain their safety-net mission and wor
 | **Starting AP/month** | 3 AP | 3 AP | 3 AP |
 | **Political Capital** | 4 | 2 | 2 |
 | **Clinic Capacity** | 100 units | 150 units | 120 units |
+| **Starting Nurse Staffing Ratio** | 85% | 90% | 80% |
 | **Nurse Staffing Trust** | 70% | 85% | 60% |
 | **Commercial Rate Index** | 1.0 (baseline) | 1.15 | 1.10 |
+
+### Key Capital Project Configurations
+- **CON Clinic Expansion Project:** Costs $250,000 in total cash, takes 6 months of consecutive funding, and requires 1 AP per month.
+- **EHR Migration Project:** Costs $150,000 in total cash, takes 3 months of consecutive funding, and requires 1 AP per month. Underfunding this project triggers operational lag.
+- **Political Capital Refresh:** Regenerates automatically by 2 points every month (capped at 15).
 
 ---
 
@@ -56,28 +62,33 @@ The campaign tests whether players can maintain their safety-net mission and wor
 ## 5. Timeline of Events and Delayed Consequences
 
 ```mermaid
-chronology
-  title competitive-exemplary-v1 Campaign Timeline
-  01 : Month 1 - Campaign Baseline
-  08 : Month 8 - Nurse Burnout Crisis
-  10 : Month 10 - Northlake CON Challenge
-  12 : Month 12 - Annual Blue Shield Rate Renewal
-  18 : Month 18 - Delayed EHR / Strike Consequences
-  24 : Month 24 - Final Evaluation & Debrief
+mermaid
+timeline
+  title competitive-exemplary-v1 Representative Campaign Timeline
+  Month 1 : Campaign Baseline
+  Month 8 : Nurse Burnout Crisis
+  Month 10 : Northlake CON Challenge (Representative)
+  Month 12 : Annual Blue Shield Rate Renewal
+  Month 18 : Delayed EHR / Strike Consequences
+  Month 24 : Final Evaluation & Debrief
 ```
+
+> [!NOTE]
+> The Month 10 CON Challenge is represented on the timeline assuming a standard player trajectory. Its trigger is dynamic: it occurs exactly 6 months after starting the clinic build (when the project reaches 50% completion).
 
 - **Month 1: Campaign Baseline.** Riverside must allocate AP to balance nursing recruitment and monitor rivals.
 - **Month 8: Nurse Burnout Crisis (Workforce Conflict).**
   - *Trigger:* Regional nurse shortage increases vacancy rates.
-  - *Effect:* Nurse staffing trust drops by 15%. If Riverside's staffing ratio is below 80% capacity, RNA issues a strike warning. The player must choose to increase wages (costing $50,000/month and 1 AP) or face a 2-month strike in Month 10.
-- **Month 10: CON Legal Challenge (Competitive Response & Policy Process).**
-  - *Trigger:* Riverside's clinic build project reaches 50% completion.
-  - *Effect:* Northlake Health files a formal CON objection. The project is suspended for 3 months unless Riverside spends 3 political capital or $100,000 in legal fees to expedite approval.
+  - *Effect:* Nurse staffing trust drops by 15%. If Riverside's staffing ratio is below 80% capacity, RNA issues a strike warning. The player must choose to increase wages (costing a permanent $50,000/month for the remainder of the 24-month campaign, and a one-time transaction cost of 1 AP) or face a 2-month strike starting in Month 10.
+- **Month 10: CON Legal Challenge & Nurse Strike Immediate Impact (Representative).**
+  - *CON Challenge Trigger:* Riverside's clinic build project reaches 50% completion (Month 10 in standard play).
+  - *CON Challenge Effect:* Northlake Health files a formal CON objection. The project is suspended for 3 months unless Riverside spends 3 political capital or $100,000 in legal fees to expedite approval.
+  - *Nurse Strike Immediate Effect:* If the player rejected the wage increase in Month 8, a 2-month nurse strike begins in Month 10. During Months 10 and 11, Riverside's operational capacity is reduced by 50%, all active capital projects (including clinic build and EHR migration) are suspended, and operating costs increase by $30,000/month to hire emergency travel nurses.
 - **Month 12: Annual Blue Shield Rate Renewal (Payer Interaction).**
   - *Trigger:* Calendar checkpoint.
   - *Effect:* Simultaneous rate negotiations. Riverside must spend AP and political capital to secure rate increases. If Riverside fails to reach a contract, they go out-of-network, reducing commercial patient volume by 40% but increasing reimbursement rates on remaining patients by 20%.
 - **Month 18: Delayed Consequences.**
-  - *Effect:* If the nurse strike occurred in Month 10, patient safety ratings drop by 20%, leading to a permanent 10% reduction in commercial volume. If the EHR migration project was underfunded, data system lag reduces operational efficiency, increasing monthly operating costs by $20,000.
+  - *Effect:* If the nurse strike occurred in Month 10, patient safety ratings drop by 20%, leading to a permanent 10% reduction in commercial volume. If the EHR migration project was underfunded (less than 3 months of active funding by Month 18), data system lag reduces operational efficiency, increasing monthly operating costs by $20,000.
 - **Month 24: Final Campaign Review.**
   - *Effect:* Final evaluation of access index, cash position, and policy legitimacy.
 
