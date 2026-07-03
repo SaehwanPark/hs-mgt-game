@@ -638,8 +638,9 @@ AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
 the v0.1.54 free-form agent playtest evidence slice, the v0.1.55 free-form
-profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, and the
-v0.1.57 competitive guidance & debrief hardening slice are complete.
+profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, the
+v0.1.57 competitive guidance & debrief hardening slice, and the v0.1.58
+AI-agent playtest synthesis slice are complete.
 
 ## Future
 
@@ -651,7 +652,7 @@ v0.1.57 competitive guidance & debrief hardening slice are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Run follow-up automated or free-form MCP playtest sessions using the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding.
+  Review subsequent playtest findings under longer campaign horizons or different difficulty tiers when available.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
