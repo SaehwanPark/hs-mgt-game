@@ -1,137 +1,159 @@
 # Health Policy Strategy Game
 
-A turn-based, command-line strategy game about leading a US health system under financial, clinical, regulatory, political, and social constraints.
+Health Policy Strategy Game is a command-line strategy simulation about leading
+a fictional nonprofit US health system through financial pressure, workforce
+constraints, payer negotiations, policy oversight, market competition, and
+community trust.
 
-The project models health-policy outcomes as the result of strategic interaction among health systems, insurers, government, clinicians, employers, labor, patients, and other stakeholders.
+The game is built around a simple thesis: health-policy outcomes are not direct
+levers. They emerge from strategic responses by institutions with different
+authority, incentives, information, and constraints.
 
-## Status
+The current public milestone is a playable Rust prototype. It is intended for
+inspection, playtesting, portfolio review, and future educational design work.
+It is not a calibrated policy forecast or a model of any real institution.
 
-Early research, design, and vertical-slice development phase. The current build
-includes a deterministic five-turn stabilization campaign, replay and state-hash
-checks, rich interactive CLI guidance, a stabilization-only TOML scenario loader
-with `--scenario` path selection, a bounded three-month competitive regional
-preview with AI rivals and Stata-like command entry, and a local stdio MCP server
-for bounded agent play of both current campaigns. The v0.1.50 MCP debrief
-surface reports final competitive player tradeoff metrics from committed
-history, the v0.1.52 scripted MCP batch adds a naive first-time profile across
-seeds 42, 43, and 44, the v0.1.54 and v0.1.55 free-form runs record three
-observation-driven profiles, and the v0.1.56 diagnostics artifact summarizes
-strategy-space signals before any balance work.
-See [`docs/core-loop-spec.md`](docs/core-loop-spec.md),
-[`docs/gameplay-competitive-sketch.md`](docs/gameplay-competitive-sketch.md), and
-[`docs/competitive-scenario-brief.md`](docs/competitive-scenario-brief.md).
+## What You Can Play
 
-The initial release will focus on a fictional regional US health market and a nonprofit health system led by the player.
+- `stabilization-v1`: a five-turn executive stabilization campaign.
+- `competitive-regional-v1`: a bounded three-month regional-market preview with
+  one human-led system, AI rival health systems, simultaneous monthly actions,
+  lagged rival observability, and end-of-run debriefing.
 
-## Core Direction
+Both campaigns are deterministic for a given seed and set of choices. The
+simulation separates true state from actor-visible observations, records
+append-only history, and verifies replay through stable state hashes.
 
-- Rust-based deterministic simulation engine
-- Immutable snapshots and append-only history
-- Explicit separation of true state, beliefs, and observed measurements
-- Seeded stochastic inputs outside the core transition logic
-- Strategic non-player actors using game-theoretic and bounded-rationality models
-- Data-driven scenarios built from typed, inspectable mechanics
-- CLI-first interface (best in a true-color terminal; respects `NO_COLOR`)
-- Local MCP stdio interface for AI-agent play of bounded current campaigns
-- Educational use in graduate healthcare management and policy programs
+## Why It Exists
+
+Most health-policy teaching tools make one part of the system legible at a
+time: finance, operations, regulation, insurance, labor, or public policy. This
+project asks the player to reason across those boundaries.
+
+The design emphasizes:
+
+- tradeoffs rather than a single score;
+- incomplete information rather than omniscient dashboards;
+- institutional actors rather than passive background conditions;
+- delayed and stochastic effects that are resolved outside the deterministic
+  transition core;
+- debriefs that explain why outcomes happened and what the player knew at the
+  time.
+
+## Quickstart
+
+Prerequisites:
+
+- Rust toolchain with Cargo.
+
+Run the game:
+
+```bash
+cargo run
+```
+
+Then choose:
+
+- Enter or `1` for the stabilization campaign.
+- `2` or `c` for the competitive preview.
+- Enter for the default seed, or provide a numeric seed for a different
+  deterministic run.
+
+For a first session, start with `stabilization-v1` in beginner mode. For the
+competitive preview, Normal difficulty gives a compact introduction to monthly
+action budgeting and rival pressure.
+
+## Competitive Command Examples
+
+Competitive mode uses short Stata-like commands. Commands can be chained with
+semicolons.
+
+```text
+monitor target=northlake depth=1
+recruit role=nurse headcount=4
+invest domain=beds amount=20
+negotiate payer=carrier_a rate_posture=neutral
+commit pledge_type=access level=3
+project kind=ehr_epic budget=60
+hold
+```
+
+Example batch:
+
+```text
+monitor target=northlake depth=1; recruit role=nurse headcount=4
+```
+
+Type `?` or `help` inside the game for command guidance.
+
+## Current Boundaries
+
+This is a playable prototype, not a finished educational release.
+
+Current limits:
+
+- the competitive campaign is a three-month preview, not the planned full
+  24-month campaign;
+- competitive scenario loading, competitive replay export, and competitive
+  autosave are deferred;
+- current numerical thresholds are documented abstractions, not empirically
+  calibrated parameters;
+- AI-agent playtest findings are validation aids for gameplay and explanation,
+  not evidence of measured human learning.
+
+The model should not be used for operational, clinical, financial, regulatory,
+or policy decisions.
 
 ## Documentation
 
-Canonical project documents are maintained in [`docs/`](docs/):
+Start here:
+
+- [How to Play](docs/how-to-play.md)
+- [Core Loop Spec](docs/core-loop-spec.md)
+- [Competitive Scenario Brief](docs/competitive-scenario-brief.md)
+- [Design Principles](docs/design_principles.md)
+- [Architecture](ARCHITECTURE.md)
+- [Project Specification](SPEC.md)
+
+Deeper project context:
 
 - [Project Proposal](docs/proposal.md)
-- [Development Roadmap](docs/roadmap.md)
-- [Design Principles](docs/design_principles.md)
-- [How To Play (New Players)](docs/how-to-play.md)
-- [Actor Card Template](docs/actor-cards.md)
-- [First Scenario Brief](docs/first-scenario-brief.md)
-- [Phase 1 Implications Memo](docs/phase1-implications-memo.md)
+- [Roadmap](docs/roadmap.md)
 - [Glossary](docs/glossary.md)
-- [Versioning Policy](docs/versioning-policy.md)
+- [Evidence Registry](docs/evidence-registry.md)
 - [Architecture Decision Records](docs/decision-records/README.md)
-- [ADR 0001: Deterministic transition boundary](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
-- [ADR 0002: Mid-run session save](docs/decision-records/0002-mid-run-session-save.md)
-- [Scenario Format Draft](docs/scenario-format-draft.md)
-- [Phase 5 Scope Register](docs/phase5-scope-register.md)
-- [Internal Playtest Findings (v0.1.25)](docs/playtest-findings-v0.1.25.md)
-- [AI-Agent Playtest Findings (v0.1.49)](docs/playtest-findings-v0.1.49.md)
-- [AI-Agent Seed-Variation Findings (v0.1.51)](docs/playtest-findings-v0.1.51.md)
-- [AI-Agent Naive-Profile Findings (v0.1.52)](docs/playtest-findings-v0.1.52.md)
-- [AI-Agent Free-Form Findings (v0.1.54)](docs/playtest-findings-v0.1.54.md)
-- [AI-Agent Free-Form Synthesis (v0.1.55)](docs/playtest-findings-v0.1.55.md)
-- [AI-Agent Strategy-Space Diagnostics (v0.1.56)](docs/playtest-findings-v0.1.56.md)
-- [AI-Agent Playtest Protocol](docs/agent-playtest-protocol.md)
-- [External Playtest Protocol (Superseded)](docs/external-playtest-protocol.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
+- [Agent Playtest Protocol](docs/agent-playtest-protocol.md)
 
-Detailed subsystem specifications will be added separately as design work progresses.
+Historical and internal development notes, including older playtest findings,
+are kept in `docs/` for transparency. The previous developer-focused README is
+archived at [docs/README-dev-archive-v0.1.61.md](docs/README-dev-archive-v0.1.61.md).
 
-## Development Approach
+## Development
 
-The project will proceed through research, conceptual design, technical prototyping, and a narrow vertical slice before expanding into a full MVP.
-
-The first playable slice should demonstrate:
-
-- meaningful executive tradeoffs;
-- actor-specific incomplete information;
-- at least one strategic negotiation;
-- one policy process;
-- delayed and stochastic effects;
-- deterministic replay;
-- and causal explanation of outcomes.
-
-## Non-Goals
-
-The initial version will not attempt to:
-
-- model the entire US healthcare system;
-- provide authoritative policy forecasts;
-- reproduce every reimbursement or regulatory rule;
-- support multiple countries;
-- solve global equilibria among all actors;
-- or provide a graphical interface.
-
-## Contributing
-
-The project is not yet ready for broad implementation contributions.
-
-Pull requests to `main` run CI checks for `cargo fmt --check` and `cargo test`.
-Before opening a PR, run the same commands locally:
+Run the standard checks:
 
 ```bash
 cargo fmt --check
+cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
-Current priorities are:
+Run the local MCP server used for bounded agent playtesting:
 
-1. Run and synthesize AI-agent playtests against explicit gameplay validity
-   hypotheses and strategy-space diagnostics.
-2. Review competitive guidance or debrief quality before formula tuning where
-   diagnostics show passive or underexplained play.
-3. Treat debrief quality and causal explanation as primary product surfaces.
-4. Develop one exemplary scenario before broad scenario tooling.
-5. Extend scenario data loading only after the minimal stabilization TOML slice
-   has playtest or authoring evidence.
-6. Competitive campaign hardening after bounded-loop playtests.
-7. Medicare/Medicaid strategic actors only after actor-card and scenario gates.
+```bash
+cargo run --bin hs-mgt-game-mcp
+```
 
-Before proposing major features or abstractions, review the canonical documents
-in [`docs/`](docs/), including the [glossary](docs/glossary.md),
-[versioning policy](docs/versioning-policy.md), and
-[decision-record template](docs/decision-records/0000-template.md).
+Run the scripted playtest harness:
 
-## Programming Principles
+```bash
+python3 scripts/run_automated_playtests.py
+```
 
-- Functional programming
-- Railway-oriented programming
-- Domain-driven design + Carefully designed abstract data types
-- Idiomatic Rust code writing
-- Careful error handling and resource management
-- Thorough and thoughtful code comments and docstrings
-- Spec-driven development
-- Test-driven development
-- Tabsize of 2 spaces
+The codebase is intentionally CLI-first. Core simulation transitions should stay
+deterministic, with randomness resolved into explicit inputs before transition
+evaluation.
 
 ## License
 

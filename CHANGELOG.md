@@ -6,6 +6,30 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-03
+
+### Added
+
+- Added a public-facing `README.md` focused on the playable CLI prototype,
+  current campaigns, quickstart, limitations, and documentation paths.
+- Archived the previous developer-focused README at
+  `docs/README-dev-archive-v0.1.61.md`.
+
+### Changed
+
+- Repositioned the project as a playable public/portfolio prototype while
+  preserving explicit non-claims around empirical calibration, human learning
+  evidence, and policy forecasting.
+- Set the Cargo default binary to `hs-mgt-game` so `cargo run` launches the
+  playable CLI when the MCP binary is also present.
+- Updated repository hygiene rules to ignore Python bytecode caches and macOS
+  metadata.
+- Bumped package version to `0.2.0`.
+
+### Removed
+
+- Removed a tracked generated Python bytecode file from `scripts/__pycache__/`.
+
 ## [0.1.61] - 2026-07-03
 
 ### Changed

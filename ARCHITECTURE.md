@@ -1,7 +1,8 @@
 # Architecture
 
-The project is currently in early research and design. This document records the
-intended architecture boundaries that future implementation should preserve.
+The project is currently a playable CLI prototype with bounded stabilization and
+competitive-preview campaigns. This document records the intended architecture
+boundaries that future implementation should preserve.
 
 ## Current State
 
@@ -25,7 +26,7 @@ intended architecture boundaries that future implementation should preserve.
   - `mcp/` — MCP session store, tool DTOs, and stdio server adapter
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-06-26
+Last Reviewed: 2026-07-03
 Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
@@ -39,13 +40,14 @@ tokens, and verb-only Tab autocomplete.
 It also includes a local stdio MCP server (`hs-mgt-game-mcp`) with in-memory
 bounded sessions for `stabilization-v1` and `competitive-regional-v1`.
 
-The current implementation is a compact architecture proof, not a production
-simulation. It demonstrates a pure transition function in `sim/transition.rs`,
-explicit resolved inputs from `inputs/resolve.rs`, actor-specific observation and
-decisions, attributed effects, append-only history, stable per-transition state
-hashes in `replay/hash.rs`, replay verification, deterministic educational
-debrief in `debrief/report.rs`, optional replay artifact export in
-`artifact/`, and CLI play modes in `cli/session.rs`.
+The current implementation is a playable prototype and compact architecture
+proof, not a production simulation or calibrated policy model. It demonstrates a
+pure transition function in `sim/transition.rs`, explicit resolved inputs from
+`inputs/resolve.rs`, actor-specific observation and decisions, attributed
+effects, append-only history, stable per-transition state hashes in
+`replay/hash.rs`, replay verification, deterministic educational debrief in
+`debrief/report.rs`, optional replay artifact export in `artifact/`, and CLI
+play modes in `cli/session.rs`.
 
 ## Intended System Shape
 
