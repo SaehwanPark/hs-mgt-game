@@ -1,3 +1,5 @@
+![screenshot](https://i.imgur.com/gfmOO3O.png)
+
 # Health Policy Strategy Game
 
 Health Policy Strategy Game is a command-line strategy simulation about leading
