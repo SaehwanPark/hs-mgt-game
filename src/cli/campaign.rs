@@ -276,7 +276,9 @@ fn print_competitive_month_report(
   }
   print_line(&format!(
     "  {}",
-    style::command_prompt_label("Prompt: riverside> (Tab: complete command verbs)")
+    style::command_prompt_label(
+      "Prompt: riverside> (Type ? or help for detailed command descriptions, Tab: complete command verbs)"
+    )
   ));
   print_line("");
 }

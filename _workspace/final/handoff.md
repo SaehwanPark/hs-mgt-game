@@ -1,43 +1,18 @@
-# Final Handoff: Strategy-Space Diagnostics Slice
+# Final Handoff
 
-## Changed Files
+## Summary of Changes
 
-- Added `docs/playtest-findings-v0.1.56.md` with lightweight strategy-space
-  diagnostics over existing scripted and free-form MCP evidence.
-- Updated `README.md`, `SPEC.md`, and `CHANGELOG.md`.
-- Bumped package version in `Cargo.toml` and `Cargo.lock`.
-- Replaced current `_workspace/` request summary, evidence map, mechanism
-  design, domain QA, and handoff artifacts.
+To address the strategy-space diagnostics gaps identified in v0.1.56 (specifically, that passive simulated profiles overused `hold` and underused/omitted `project`), we implemented competitive campaign guidance and debrief hardening:
+1. **Competitive Command Help Hardened:** Expanded the help text for `PromptContext::CompetitiveCommand` in `src/cli/guidance.rs` to detail resource costs, effects, and duration/delay constraints for all 7 verbs.
+2. **Monthly Cueing Hardened:** Updated the Riverside command prompt label in `src/cli/campaign.rs` and `src/cli/repl.rs` to clearly cue the player to type `?` or `help` for detailed command descriptions.
+3. **Projects Strategic Lesson Added:** Enhanced the competitive campaign `end_session` debrief in `src/mcp/session.rs` to include a project-related strategic lesson explaining AP costs, monthly draws, duration, and concurrency limits.
+4. **Version Bump:** Cargo package version bumped to `0.1.57`.
 
-## Verification
+## Verifications Performed
 
-- `python3 scripts/run_automated_playtests.py` completed 24 scripted sessions
-  without validation failures.
-- `cargo fmt --check` passed.
-- `cargo test` passed: 222 unit tests, 8 integration tests, 0 doc tests.
-- `git diff --check` passed.
+- Run `cargo test` and `cargo fmt --check` pass. All 230+ unit/integration tests succeed.
+- Checked that the spoiler-free help test (`help_text_avoids_actor_outcome_spoilers`) passes without leaking any outcome spoilers in the new command help text.
 
-## Review
+## Next Steps and Dependencies
 
-- Three sequential code-reviewer passes were completed on fresh branch diffs.
-- Pass 1 checked diagnostic claims against v0.1.52 and v0.1.55 source findings;
-  one over-strong phrase was fixed before final review.
-- Pass 2 checked scope discipline, versioning, and cross-document consistency;
-  no actionable issues found.
-- Pass 3 checked stale references, handoff completeness, and whitespace; no
-  actionable issues found.
-- No Critical or High findings remain open.
-
-## Known Limits
-
-- This is a diagnostic artifact over simulated-agent evidence, not human
-  learning evaluation.
-- Free-form evidence remains seed 42 only, and scripted seed coverage remains
-  limited to seeds 42, 43, and 44.
-- No gameplay formulas, transition semantics, scenarios, replay formats, MCP DTO
-  shapes, campaign length, runtime guidance, or golden hashes changed.
-
-## Next Dependency
-
-Use the v0.1.56 diagnostics to choose a bounded competitive guidance or debrief
-quality slice before considering formula tuning or diagnostics tooling.
+- Run follow-up automated and free-form MCP playtest sessions using the updated v0.1.57 interface observations to verify that the new cues successfully guide simulated agents to use `project` and `recruit` commands appropriately instead of overusing `hold`.

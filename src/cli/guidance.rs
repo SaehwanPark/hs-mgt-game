@@ -79,6 +79,14 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
           format_competitive_help_line(&command_line)
         ));
       }
+      lines.push("  Command descriptions and resource costs:".to_string());
+      lines.push("    hold: Do nothing. Costs 0 AP, $0 cash, 0 PC.".to_string());
+      lines.push("    invest domain=beds|outpatient|technology amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, or technology investments.".to_string());
+      lines.push("    recruit role=nurse|physician|admin headcount=<int>: Hire personnel. Costs 1 AP, $5 cash per headcount. Delays: nurse (1 mo), admin (2 mo), physician (3 mo). Can lower trust.".to_string());
+      lines.push("    monitor target=northlake|summit|valley|metro depth=<1-3>: View competitor activity. Costs AP equal to depth, $0 cash, 0 PC.".to_string());
+      lines.push("    negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative: Set payer commercial bid. Costs 1 AP, $0 cash, 2 PC.".to_string());
+      lines.push("    commit pledge_type=access|quality level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
+      lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>: Multi-month capital projects. Costs 2 AP, monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo). Max 2 concurrent projects.".to_string());
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
   }

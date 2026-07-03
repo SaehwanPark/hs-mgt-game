@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.57] - 2026-07-02
+
+### Added
+
+- Added a capital projects strategic lesson to `competitive_debrief` in the MCP layer.
+
+### Changed
+
+- Expanded competitive command help (`PromptContext::CompetitiveCommand`) to output detailed descriptions and AP/cash/political capital costs for all 7 verbs.
+- Hardened monthly command prompt cues in `print_competitive_month_report` to explicitly guide players to type `?` or `help` for detailed command explanations.
+- Bumped package version to `0.1.57`.
+
 ## [0.1.56] - 2026-07-02
 
 ### Added
