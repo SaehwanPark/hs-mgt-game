@@ -6,6 +6,17 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.58] - 2026-07-02
+
+### Added
+
+- Added `docs/playtest-findings-v0.1.58.md` detailing the follow-up playtest sessions using v0.1.57 command help and prompt cues.
+
+### Changed
+
+- Updated project status and SDD history for the AI-agent playtest synthesis slice.
+- Package version bumped to `0.1.58`.
+
 ## [0.1.57] - 2026-07-02
 
 ### Added

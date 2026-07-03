@@ -68,9 +68,36 @@ reconstructing it from the diff.
 | Free-form profile synthesis | v0.1.55 | Two additional free-form profiles completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Strategy-space diagnostics | v0.1.56 | Lightweight diagnostics over existing scripted and free-form MCP playtest evidence | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive guidance & debrief hardening | v0.1.57 | Expanded competitive command help, monthly prompt cues, and capital projects strategic lesson | 230 | `88d07f9e1bbd6f04` (competitive) |
+| AI-agent playtest synthesis | v0.1.58 | Follow-up free-form playtest sessions at seed 42 verifying guidance changes | 230 | `bf0414a383634dd6` (competitive) |
 
 
 ### Recent slices
+
+- Feature: AI-agent playtest synthesis
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.58
+
+  Summary:
+  Execute follow-up free-form playtest sessions under the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding. Document the findings in docs/playtest-findings-v0.1.58.md.
+
+  Done:
+  - Run follow-up free-form playtest sessions for the `stabilization-v1` and `competitive-regional-v1` campaigns with seed 42
+  - Verify that the agent utilizes the expanded command help (typing `?` or `help`) and uses commands like `project`, `recruit`, and `negotiate` instead of defaulting to `hold` where appropriate
+  - Update `CHANGELOG.md` and `SPEC.md` to document the new playtest findings and present version bump
+  - Package version bumped to `0.1.58`
+
+  Deferred / Non-Goals:
+  - No changes to core simulation transition logic, model structures, or validation thresholds
+  - No changes to scenario TOML files or the campaign selection flow
+  - No changes to golden hashes (the golden hashes for seed 42 must remain identical to main)
+  - No new MCP endpoints or DTO changes
+
+  Verification:
+  - All automated playtests pass successfully
+  - All unit and integration tests (230+) run and pass
+  - `cargo fmt --check` passes
+  - Playtest report matches the structure in `docs/agent-playtest-protocol.md`
 
 - Feature: Competitive guidance & debrief hardening
   Status: Complete
@@ -638,8 +665,9 @@ AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
 the v0.1.54 free-form agent playtest evidence slice, the v0.1.55 free-form
-profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, and the
-v0.1.57 competitive guidance & debrief hardening slice are complete.
+profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, the
+v0.1.57 competitive guidance & debrief hardening slice, and the v0.1.58
+AI-agent playtest synthesis slice are complete.
 
 ## Future
 
@@ -651,7 +679,7 @@ v0.1.57 competitive guidance & debrief hardening slice are complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Run follow-up automated or free-form MCP playtest sessions using the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding.
+  Review subsequent playtest findings under longer campaign horizons or different difficulty tiers when available.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,
