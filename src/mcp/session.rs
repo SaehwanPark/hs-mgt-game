@@ -697,46 +697,44 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
     final_state,
   ));
 
+  let human_system_id = session
+    .history
+    .genesis
+    .human_system()
+    .map(|sys| sys.system_id)
+    .unwrap_or(0);
+
   if !session.history.transitions.is_empty() {
     // Trace transitions
     for (idx, transition) in session.history.transitions.iter().enumerate() {
       let month_name = format!("Month {}", idx + 1);
       lines.push(format!("--- {} ---", month_name));
 
-      if let Some(human_batch) = transition.aggregated.batch_for_system(0) {
+      if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
         let cmds: Vec<String> = human_batch
           .commands
           .iter()
           .map(format_command_debrief)
           .collect();
-        lines.push(format!("Player: {}", cmds.join("; ")));
+        let cmd_str = if cmds.is_empty() {
+          "none".to_string()
+        } else {
+          cmds.join("; ")
+        };
+        lines.push(format!("Player: {}", cmd_str));
       }
 
-      let current_month_index = transition.prior.policy_calendar.month_index;
       let mut monitored_system_ids = std::collections::HashSet::new();
-      for t_prev in &session.history.transitions {
-        let m_prev = t_prev.prior.policy_calendar.month_index;
-        if m_prev <= current_month_index {
-          if let Some(human_batch) = t_prev.aggregated.batch_for_system(0) {
-            for cmd in &human_batch.commands {
-              if let crate::model::CompetitiveCommand::Monitor { target, depth } = cmd {
-                if m_prev + *depth > current_month_index {
-                  let system_id = match target {
-                    crate::model::MonitorTarget::Northlake => 1,
-                    crate::model::MonitorTarget::Summit => 2,
-                    crate::model::MonitorTarget::Valley => 3,
-                    crate::model::MonitorTarget::Metro => 4,
-                  };
-                  monitored_system_ids.insert(system_id);
-                }
-              }
-            }
+      if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
+        for cmd in &human_batch.commands {
+          if let crate::model::CompetitiveCommand::Monitor { target, .. } = cmd {
+            monitored_system_ids.insert(target.system_id());
           }
         }
       }
 
       for system in &transition.prior.systems {
-        if system.system_id == 0 {
+        if system.system_id == human_system_id {
           continue;
         }
         if let Some(rival_batch) = transition.aggregated.batch_for_system(system.system_id) {
@@ -754,7 +752,12 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
               }
             }
           }
-          lines.push(format!("Rival {}: {}", system.name, cmd_strs.join("; ")));
+          let cmd_str = if cmd_strs.is_empty() {
+            "none".to_string()
+          } else {
+            cmd_strs.join("; ")
+          };
+          lines.push(format!("Rival {}: {}", system.name, cmd_str));
           if let Some(rationale) = &rival_batch.rationale {
             lines.push(format!("Rival {} rationale: {}", system.name, rationale));
           }
@@ -773,6 +776,12 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
         effects.push(format_effect(effect));
       }
     }
+
+    events.sort();
+    events.dedup();
+    effects.sort();
+    effects.dedup();
+
     let effect_summary = if effects.is_empty() {
       "none".to_string()
     } else {

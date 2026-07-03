@@ -103,6 +103,17 @@ impl ProjectKind {
   }
 }
 
+impl MonitorTarget {
+  pub fn system_id(self) -> u32 {
+    match self {
+      MonitorTarget::Northlake => 1,
+      MonitorTarget::Summit => 2,
+      MonitorTarget::Valley => 3,
+      MonitorTarget::Metro => 4,
+    }
+  }
+}
+
 impl CompetitiveCommand {
   pub fn action_cost(&self) -> ActionCost {
     match self {
