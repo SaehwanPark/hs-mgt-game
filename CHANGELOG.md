@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.59] - 2026-07-02
+
+### Added
+
+- Enhanced competitive campaign end-session debriefing with a detailed month-by-month history log of player commands, rival commands (flagged as publicly disclosed, observed via monitor, or unobserved by you), events, and effects.
+- Added helper formatting for competitive commands in `competitive_debrief`.
+
+### Changed
+
+- Updated project status and SDD history for the debrief quality slice.
+- Package version bumped to `0.1.59`.
+
 ## [0.1.58] - 2026-07-02
 
 ### Added

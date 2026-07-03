@@ -146,12 +146,7 @@ fn build_intel_gaps(
 }
 
 pub fn monitor_target_system_id(target: MonitorTarget) -> u32 {
-  match target {
-    MonitorTarget::Northlake => 1,
-    MonitorTarget::Summit => 2,
-    MonitorTarget::Valley => 3,
-    MonitorTarget::Metro => 4,
-  }
+  target.system_id()
 }
 
 fn cash_runway_signal(resources: &crate::model::PlayerResources) -> CashRunwaySignal {

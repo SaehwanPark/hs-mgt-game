@@ -69,9 +69,33 @@ reconstructing it from the diff.
 | Strategy-space diagnostics | v0.1.56 | Lightweight diagnostics over existing scripted and free-form MCP playtest evidence | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Competitive guidance & debrief hardening | v0.1.57 | Expanded competitive command help, monthly prompt cues, and capital projects strategic lesson | 230 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest synthesis | v0.1.58 | Follow-up free-form playtest sessions at seed 42 verifying guidance changes | 230 | `bf0414a383634dd6` (competitive) |
+| Debrief quality as product surface | v0.1.59 | Enhanced competitive end-session debrief with detailed player/rival action logs | 231 | `bf0414a383634dd6` (competitive) |
 
 
-### Recent slices
+- Feature: Debrief quality as product surface
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.59
+
+  Summary:
+  Enhance the competitive end-session debriefing logic to provide a detailed history log of player commands, rival commands (categorized by publicly disclosed, observed via monitor, or unobserved by you), events, and effects.
+
+  Done:
+  - Implement helper `format_command_debrief` in `src/mcp/session.rs` for formatting competitive commands
+  - Update `competitive_debrief` to trace player and rival actions, mapping monitored status correctly
+  - Output aggregated mechanisms and events in the end-session debrief
+  - Add test coverage for detailed history trace and correct observation labels
+  - Package version bumped to `0.1.59`
+
+  Deferred / Non-Goals:
+  - No changes to transition rules, simulation physics, or state serialization
+  - No new MCP endpoints
+  - No changes to stabilization campaign debrief structure
+
+  Verification:
+  - `cargo test` passes cleanly with 231 tests
+  - `cargo fmt --check` passes
+  - Automated playtests run and compare successfully
 
 - Feature: AI-agent playtest synthesis
   Status: Complete
@@ -666,8 +690,9 @@ metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
 the v0.1.54 free-form agent playtest evidence slice, the v0.1.55 free-form
 profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, the
-v0.1.57 competitive guidance & debrief hardening slice, and the v0.1.58
-AI-agent playtest synthesis slice are complete.
+v0.1.57 competitive guidance & debrief hardening slice, the v0.1.58
+AI-agent playtest synthesis slice, and the v0.1.59 debrief quality slice are
+complete.
 
 ## Future
 
@@ -718,10 +743,7 @@ AI-agent playtest synthesis slice are complete.
   gap in causal explanation, decision-quality review, or uncertainty framing.
 
   Next actionable slice:
-  Improve or evaluate one debrief surface so it answers: what happened, why it
-  happened, what the player knew, which assumptions mattered, what alternatives
-  were available, and whether a poor outcome reflected decision quality or
-  unfavorable realization.
+  Add further counterfactual explanation patterns, grading or assessment frameworks when a specific classroom learning need is validated.
 
   Verification target:
   Debrief tests or findings prove the output is derived from committed history,
