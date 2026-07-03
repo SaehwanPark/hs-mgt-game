@@ -19,7 +19,7 @@ pub use observe_ai::{
 pub use observe_competitive::observe_for_human;
 pub use resolve::resolve_monthly_batches;
 pub use transition::transition;
-pub use transition_competitive::transition_competitive;
+pub use transition_competitive::{is_public_command, transition_competitive};
 pub use validate_competitive::{validate_competitive_batch, validate_competitive_command};
 
 #[cfg(test)]

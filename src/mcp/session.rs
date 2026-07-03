@@ -609,6 +609,68 @@ fn format_effect(effect: &crate::model::AttributedEffect) -> String {
   )
 }
 
+fn format_command_debrief(cmd: &crate::model::CompetitiveCommand) -> String {
+  match cmd {
+    crate::model::CompetitiveCommand::Hold => "hold".to_string(),
+    crate::model::CompetitiveCommand::Recruit { role, headcount } => {
+      let r = match role {
+        crate::model::RecruitRole::Nurse => "nurse",
+        crate::model::RecruitRole::Physician => "physician",
+        crate::model::RecruitRole::Admin => "admin",
+      };
+      format!("recruit role={} headcount={}", r, headcount)
+    }
+    crate::model::CompetitiveCommand::Invest { domain, amount } => {
+      let d = match domain {
+        crate::model::InvestDomain::Beds => "beds",
+        crate::model::InvestDomain::Outpatient => "outpatient",
+        crate::model::InvestDomain::Technology => "technology",
+      };
+      format!("invest domain={} amount={}", d, amount)
+    }
+    crate::model::CompetitiveCommand::Monitor { target, depth } => {
+      let t = match target {
+        crate::model::MonitorTarget::Northlake => "northlake",
+        crate::model::MonitorTarget::Summit => "summit",
+        crate::model::MonitorTarget::Valley => "valley",
+        crate::model::MonitorTarget::Metro => "metro",
+      };
+      format!("monitor target={} depth={}", t, depth)
+    }
+    crate::model::CompetitiveCommand::Negotiate {
+      payer,
+      rate_posture,
+    } => {
+      let p = match payer {
+        crate::model::PayerId::CarrierA => "carrier_a",
+        crate::model::PayerId::CarrierB => "carrier_b",
+      };
+      let rp = match rate_posture {
+        crate::model::RatePosture::Aggressive => "aggressive",
+        crate::model::RatePosture::Neutral => "neutral",
+        crate::model::RatePosture::Conservative => "conservative",
+      };
+      format!("negotiate payer={} rate_posture={}", p, rp)
+    }
+    crate::model::CompetitiveCommand::Commit { pledge_type, level } => {
+      let pt = match pledge_type {
+        crate::model::PledgeType::Access => "access",
+        crate::model::PledgeType::Quality => "quality",
+      };
+      format!("commit pledge_type={} level={}", pt, level)
+    }
+    crate::model::CompetitiveCommand::Project { kind, budget } => {
+      let k = match kind {
+        crate::model::ProjectKind::EhrEpic => "ehr_epic",
+        crate::model::ProjectKind::EhrCerner => "ehr_cerner",
+        crate::model::ProjectKind::Tower => "tower",
+        crate::model::ProjectKind::ClinicNetwork => "clinic_network",
+      };
+      format!("project kind={} budget={}", k, budget)
+    }
+  }
+}
+
 fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
   let final_state = session.history.final_state();
   let mut lines = vec![
@@ -634,6 +696,100 @@ fn competitive_debrief(session: &CompetitiveSession) -> Vec<String> {
     &session.history.genesis,
     final_state,
   ));
+
+  if !session.history.transitions.is_empty() {
+    // Trace transitions
+    for (idx, transition) in session.history.transitions.iter().enumerate() {
+      let month_name = format!("Month {}", idx + 1);
+      lines.push(format!("--- {} ---", month_name));
+
+      if let Some(human_batch) = transition.aggregated.batch_for_system(0) {
+        let cmds: Vec<String> = human_batch
+          .commands
+          .iter()
+          .map(format_command_debrief)
+          .collect();
+        lines.push(format!("Player: {}", cmds.join("; ")));
+      }
+
+      let current_month_index = transition.prior.policy_calendar.month_index;
+      let mut monitored_system_ids = std::collections::HashSet::new();
+      for t_prev in &session.history.transitions {
+        let m_prev = t_prev.prior.policy_calendar.month_index;
+        if m_prev <= current_month_index {
+          if let Some(human_batch) = t_prev.aggregated.batch_for_system(0) {
+            for cmd in &human_batch.commands {
+              if let crate::model::CompetitiveCommand::Monitor { target, depth } = cmd {
+                if m_prev + *depth > current_month_index {
+                  let system_id = match target {
+                    crate::model::MonitorTarget::Northlake => 1,
+                    crate::model::MonitorTarget::Summit => 2,
+                    crate::model::MonitorTarget::Valley => 3,
+                    crate::model::MonitorTarget::Metro => 4,
+                  };
+                  monitored_system_ids.insert(system_id);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      for system in &transition.prior.systems {
+        if system.system_id == 0 {
+          continue;
+        }
+        if let Some(rival_batch) = transition.aggregated.batch_for_system(system.system_id) {
+          let mut cmd_strs = Vec::new();
+          for cmd in &rival_batch.commands {
+            let formatted = format_command_debrief(cmd);
+            if crate::sim::is_public_command(cmd) {
+              cmd_strs.push(format!("{} (publicly disclosed)", formatted));
+            } else {
+              let observed = monitored_system_ids.contains(&system.system_id);
+              if observed {
+                cmd_strs.push(format!("{} (observed via monitor)", formatted));
+              } else {
+                cmd_strs.push(format!("{} (unobserved by you)", formatted));
+              }
+            }
+          }
+          lines.push(format!("Rival {}: {}", system.name, cmd_strs.join("; ")));
+          if let Some(rationale) = &rival_batch.rationale {
+            lines.push(format!("Rival {} rationale: {}", system.name, rationale));
+          }
+        }
+      }
+    }
+
+    // Summary of mechanisms and events
+    let mut events = Vec::new();
+    let mut effects = Vec::new();
+    for transition in &session.history.transitions {
+      for event in &transition.events {
+        events.push(format_event(event));
+      }
+      for effect in &transition.effects {
+        effects.push(format_effect(effect));
+      }
+    }
+    let effect_summary = if effects.is_empty() {
+      "none".to_string()
+    } else {
+      effects.join("; ")
+    };
+    let event_summary = if events.is_empty() {
+      "none".to_string()
+    } else {
+      events.join("; ")
+    };
+    lines.push(format!(
+      "Attributed mechanisms to inspect: {}.",
+      effect_summary
+    ));
+    lines.push(format!("Resolved events: {}.", event_summary));
+  }
+
   lines.extend([
     "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
     "Capital project lesson: EHR Epic/Cerner, Tower, and Clinic Network projects consume Action Points and cash immediately, draw cash monthly over their duration (9 to 12 months), and are limited to a maximum of 2 concurrent projects. They are long-term strategic investments that do not resolve within a short three-month preview but are critical in longer horizons.".to_string(),
@@ -836,7 +992,7 @@ mod tests {
   }
 
   #[test]
-  fn competitive_debrief_final_metrics_do_not_name_rival_systems() {
+  fn competitive_debrief_final_tradeoff_lines_do_not_name_rival_systems() {
     let mut store = GameSessionStore::default();
     let mut current = start(&mut store, "competitive-regional-v1");
 
@@ -854,12 +1010,63 @@ mod tests {
         session_id: current.session_id,
       })
       .expect("end session");
+
+    // Tradeoff lines themselves should not contain rival names (they only name the player system)
+    let tradeoff_text = ended.debrief[3..5].join("\n");
+    assert!(!tradeoff_text.contains("Northlake"));
+    assert!(!tradeoff_text.contains("Summit"));
+    assert!(!tradeoff_text.contains("Valley"));
+    assert!(!tradeoff_text.contains("Metro"));
+  }
+
+  #[test]
+  fn competitive_debrief_contains_detailed_history_and_monitored_labels() {
+    let mut store = GameSessionStore::default();
+    let mut current = start(&mut store, "competitive-regional-v1");
+
+    // In month 1, we monitor Northlake
+    current = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: current.session_id.clone(),
+        command_text: "monitor target=northlake depth=1; recruit role=nurse headcount=2"
+          .to_string(),
+      })
+      .expect("advance 1");
+
+    // In month 2, we hold
+    current = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: current.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("advance 2");
+
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: current.session_id,
+      })
+      .expect("end session");
     let text = ended.debrief.join("\n");
 
-    assert!(!text.contains("Northlake"));
-    assert!(!text.contains("Summit"));
-    assert!(!text.contains("Valley"));
-    assert!(!text.contains("Metro"));
+    // Verify player actions are tracked
+    assert!(
+      text.contains("Player: monitor target=northlake depth=1; recruit role=nurse headcount=2")
+    );
+
+    // Verify rival names and unobserved / observed labels exist
+    assert!(text.contains("Rival Northlake Health:"));
+    assert!(text.contains("Rival Summit Care:"));
+
+    // Verify observed / unobserved / public labels
+    assert!(
+      text.contains("observed via monitor")
+        || text.contains("unobserved by you")
+        || text.contains("publicly disclosed")
+    );
+
+    // Attributed mechanisms should be outputted
+    assert!(text.contains("Attributed mechanisms to inspect:"));
+    assert!(text.contains("Resolved events:"));
   }
 
   #[test]
