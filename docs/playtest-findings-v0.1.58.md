@@ -90,7 +90,7 @@ The stabilization campaign outcome is identical to the v0.1.54 baseline run, ver
 | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 42 | `bf0414a383634dd6` | 48 | 70 | 120 | 58 | 65 | 11 | 25 | 0 |
 
-The free-form competitive run successfully utilized a capital project (`project kind=clinic_network budget=18`) and nurse recruitment (`recruit role=nurse headcount=2`) in Month 1, followed by access commitment and rival monitoring in Month 2, and payer negotiation in Month 3. 
+The free-form competitive run successfully utilized a capital project (`project kind=clinic_network budget=18`) and nurse recruitment (`recruit role=nurse headcount=2`) in Month 1, followed by access commitment and rival monitoring in Month 2, and payer negotiation in Month 3.
 
 ## Causal Explanation
 
