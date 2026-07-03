@@ -108,6 +108,10 @@ or policy decisions.
 
 ## Documentation
 
+Relevant blog posts:
+
+- [A Management Game Where the Market Talks Back (design essay)](docs/blog-posts/health-policy-strategy-game.md): [Medium](https://medium.com/@saehwanpark/a-management-game-where-the-market-talks-back-388fb2955f26)
+
 Start here:
 
 - [How to Play](docs/how-to-play.md)
