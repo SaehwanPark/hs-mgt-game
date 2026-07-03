@@ -122,10 +122,10 @@ pub fn validation_resources_for_demo(
     .expect("genesis includes human system")
     .resources
     .clone();
-  if let Some(demo) = validation_demo_by_id(demo_id) {
-    if let Some(pc) = demo.political_capital_override {
-      resources.political_capital = pc;
-    }
+  if let Some(demo) = validation_demo_by_id(demo_id)
+    && let Some(pc) = demo.political_capital_override
+  {
+    resources.political_capital = pc;
   }
   resources
 }

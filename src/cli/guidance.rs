@@ -168,6 +168,7 @@ pub fn turn_hint(turn: u32) -> Option<&'static str> {
   }
 }
 
+#[cfg(test)]
 fn guidance_has_no_outcome_spoilers(text: &str) -> bool {
   let lower = text.to_ascii_lowercase();
   ![

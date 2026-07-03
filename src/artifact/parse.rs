@@ -410,43 +410,52 @@ pub fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifa
   let mut declared_turn = None;
 
   for line in lines {
-    if line.starts_with("turn=") {
-      declared_turn = Some(line["turn=".len()..].parse::<u32>().map_err(|_| {
-        ReplayArtifactError::ParseError {
-          line: 0,
-          detail: "invalid transition turn".to_string(),
-        }
-      })?);
+    if let Some(stripped) = line.strip_prefix("turn=") {
+      declared_turn =
+        Some(
+          stripped
+            .parse::<u32>()
+            .map_err(|_| ReplayArtifactError::ParseError {
+              line: 0,
+              detail: "invalid transition turn".to_string(),
+            })?,
+        );
       continue;
     }
-    if line.starts_with("event_count=") {
-      expected_event_count = Some(line["event_count=".len()..].parse::<usize>().map_err(|_| {
-        ReplayArtifactError::ParseError {
-          line: 0,
-          detail: "invalid event_count".to_string(),
-        }
-      })?);
+    if let Some(stripped) = line.strip_prefix("event_count=") {
+      expected_event_count =
+        Some(
+          stripped
+            .parse::<usize>()
+            .map_err(|_| ReplayArtifactError::ParseError {
+              line: 0,
+              detail: "invalid event_count".to_string(),
+            })?,
+        );
       continue;
     }
-    if line.starts_with("effect_count=") {
-      expected_effect_count = Some(line["effect_count=".len()..].parse::<usize>().map_err(
-        |_| ReplayArtifactError::ParseError {
-          line: 0,
-          detail: "invalid effect_count".to_string(),
-        },
-      )?);
+    if let Some(stripped) = line.strip_prefix("effect_count=") {
+      expected_effect_count =
+        Some(
+          stripped
+            .parse::<usize>()
+            .map_err(|_| ReplayArtifactError::ParseError {
+              line: 0,
+              detail: "invalid effect_count".to_string(),
+            })?,
+        );
       continue;
     }
-    if line.starts_with("command=") {
-      command = Some(parse_player_command(&line["command=".len()..])?);
+    if let Some(stripped) = line.strip_prefix("command=") {
+      command = Some(parse_player_command(stripped)?);
       continue;
     }
-    if line.starts_with("resolved_inputs=") {
-      resolved_inputs = Some(parse_resolved_inputs(&line["resolved_inputs=".len()..])?);
+    if let Some(stripped) = line.strip_prefix("resolved_inputs=") {
+      resolved_inputs = Some(parse_resolved_inputs(stripped)?);
       continue;
     }
-    if line.starts_with("state_hash=") {
-      state_hash = Some(line["state_hash=".len()..].to_string());
+    if let Some(stripped) = line.strip_prefix("state_hash=") {
+      state_hash = Some(stripped.to_string());
       continue;
     }
     if line.starts_with("prior=") {
@@ -457,8 +466,7 @@ pub fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifa
       next = Some(parse_world_state_line(line, "next")?);
       continue;
     }
-    if line.starts_with("observation=") {
-      let payload = &line["observation=".len()..];
+    if let Some(payload) = line.strip_prefix("observation=") {
       let actor = intern_static_label(
         payload
           .split(',')
@@ -505,8 +513,7 @@ pub fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifa
       });
       continue;
     }
-    if line.starts_with("actor_decision=") {
-      let payload = &line["actor_decision=".len()..];
+    if let Some(payload) = line.strip_prefix("actor_decision=") {
       let actor = intern_static_label(
         payload
           .split(',')
@@ -611,38 +618,38 @@ pub fn parse_transition_block(lines: &[&str]) -> Result<Transition, ReplayArtifa
     line: 0,
     detail: "missing transition next state".to_string(),
   })?;
-  if let Some(turn) = declared_turn {
-    if turn != next.turn {
-      return Err(ReplayArtifactError::ParseError {
-        line: 0,
-        detail: format!(
-          "transition turn {turn} does not match next state turn {}",
-          next.turn
-        ),
-      });
-    }
+  if let Some(turn) = declared_turn
+    && turn != next.turn
+  {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!(
+        "transition turn {turn} does not match next state turn {}",
+        next.turn
+      ),
+    });
   }
-  if let Some(event_count) = expected_event_count {
-    if events.len() != event_count {
-      return Err(ReplayArtifactError::ParseError {
-        line: 0,
-        detail: format!(
-          "event_count {event_count} does not match parsed events {}",
-          events.len()
-        ),
-      });
-    }
+  if let Some(event_count) = expected_event_count
+    && events.len() != event_count
+  {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!(
+        "event_count {event_count} does not match parsed events {}",
+        events.len()
+      ),
+    });
   }
-  if let Some(effect_count) = expected_effect_count {
-    if effects.len() != effect_count {
-      return Err(ReplayArtifactError::ParseError {
-        line: 0,
-        detail: format!(
-          "effect_count {effect_count} does not match parsed effects {}",
-          effects.len()
-        ),
-      });
-    }
+  if let Some(effect_count) = expected_effect_count
+    && effects.len() != effect_count
+  {
+    return Err(ReplayArtifactError::ParseError {
+      line: 0,
+      detail: format!(
+        "effect_count {effect_count} does not match parsed effects {}",
+        effects.len()
+      ),
+    });
   }
 
   Ok(Transition {

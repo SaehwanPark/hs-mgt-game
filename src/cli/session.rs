@@ -7,7 +7,7 @@ use crate::model::{
   ReplayArtifact, ResumeState, Ruleset, RunConfig, SessionOutcome, SessionSave, default_ruleset,
   genesis_state,
 };
-use crate::scenario::{default_stabilization_scenario, validate_stabilization_scenario};
+use crate::scenario::default_stabilization_scenario;
 use crate::sim::{observe_for_player, transition};
 
 use super::beginner::{format_beginner_menu, parse_beginner_choice};
@@ -37,6 +37,8 @@ use super::persistence::{
 use super::strategy::{
   build_history_for_strategy_from_genesis, default_interactive_commands, strategy_plan,
 };
+
+type TurnParser = fn(&str) -> Result<PlayerCommand, CliError>;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum InteractiveRunResult {
@@ -123,7 +125,7 @@ pub fn read_stabilization_run_config(ruleset: &Ruleset) -> Result<Option<RunConf
 }
 
 fn read_stabilization_run_setup(
-  ruleset: &Ruleset,
+  _ruleset: &Ruleset,
   scenario: &crate::scenario::Scenario,
 ) -> Result<Option<StabilizationRunSetup>, CliError> {
   let initial_state = scenario.initial_world_state();
@@ -228,6 +230,7 @@ fn maybe_show_new_player_cues() {
   }
 }
 
+#[allow(dead_code)]
 pub fn read_run_config(ruleset: &Ruleset) -> Result<Option<RunConfig>, CliError> {
   // Stabilization-only setup; campaign routing lives in `run()`.
   read_stabilization_run_config(ruleset)
@@ -380,7 +383,7 @@ pub fn run_interactive_history_from_genesis(
   };
 
   let defaults = default_interactive_commands();
-  let turn_parsers: [fn(&str) -> Result<PlayerCommand, CliError>; 5] = [
+  let turn_parsers: [TurnParser; 5] = [
     parse_stabilize_access_command,
     parse_policy_command,
     parse_workforce_command,
@@ -404,10 +407,10 @@ pub fn run_interactive_history_from_genesis(
       &turn_executive_briefing(&state, &observation, turn_number),
     );
 
-    if experience_mode == ExperienceMode::Standard {
-      if let Some(hint) = turn_hint(turn_number) {
-        print_line(&style::dim(hint));
-      }
+    if experience_mode == ExperienceMode::Standard
+      && let Some(hint) = turn_hint(turn_number)
+    {
+      print_line(&style::dim(hint));
     }
 
     let command = match experience_mode {

@@ -356,3 +356,11 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: `std::io::stdin().is_terminal()` returns `true` inside a PTY, causing the game to block waiting for human command input instead of executing the fallback non-TTY batch.
 - Resolution: `stdin_uses_fallback_input()` in `src/cli/io.rs` treats `cfg!(test)` like non-TTY stdin so competitive campaign tests use preset fallback batches instead of rustyline. Stdin redirection (`cargo test < /dev/null`) still works for manual runs.
 - Prevention: Route any new CLI stdin prompts through `stdin_uses_fallback_input()` (or equivalent) so unit tests never block on terminal detection inside PTYs.
+
+## Clippy CI Check Prevents Code Quality Decay
+
+- Context: Integrating `cargo clippy --all-targets -- -D warnings` into the CI workflow.
+- Symptom: The repository had accumulated 32 clippy errors (including manual prefix stripping, complex type signatures, collapsible ifs) because clippy was not enforced in the pipeline.
+- Cause: The original `.github/workflows/ci.yml` only executed `cargo fmt` and `cargo test` without checks for code quality and compiler lints.
+- Resolution: Resolved all 32 clippy issues across production and test code, and added a lint checking step to the CI pipeline.
+- Prevention: Run `cargo clippy --all-targets -- -D warnings` locally before committing and always include clippy checks in the CI runner to catch lints early.
