@@ -164,6 +164,13 @@ fn run_competitive_preview_internal(
           history.final_state().policy_calendar.month_in_year
         ),
       ));
+      print_line("");
+      print_line(&style::subsection(
+        "Competitive Debrief & Instructor Review",
+      ));
+      for line in crate::debrief::competitive_debrief(&history) {
+        print_line(&format!("  {line}"));
+      }
     }
     Err(CompetitiveLoopError::Quit) => return SessionOutcome::QuitNoSave,
     Err(CompetitiveLoopError::Cli(error)) => {

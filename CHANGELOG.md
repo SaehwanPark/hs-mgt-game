@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-07-03
+
+### Added
+- Added an instructor-visible run summary & decision-quality review block to stabilization and competitive debriefs.
+- Stabilization summary lists turn-by-turn observed access vs true access index and calculates observation gaps.
+- Competitive summary lists all true rival actions and rationales, explicitly labeling them as observed (if monitored or public) or unobserved.
+- Added automatic printing of the competitive debrief at the end of the three-month competitive campaign loop in CLI mode.
+
+### Changed
+- Centralized competitive campaign debriefing in the `src/debrief/report.rs` module and cleaned up duplicates from MCP session logic.
+- Bumped package version to `0.2.2`.
+
 ## [0.2.1] - 2026-07-03
 
 ### Changed

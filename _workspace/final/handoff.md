@@ -1,35 +1,19 @@
-# Final Handoff
+# Final Handoff - Instructor Run Summary & Decision Quality Review
 
 ## Summary of Changes
-
-Implemented the post-v0.2 SDD progress review:
-
-1. **Progress Review Recorded:** Added `v0.2.1` to `SPEC.md` as a completed
-   documentation/planning slice.
-2. **Next Queue Ranked:** Reorganized `SPEC.md` Future into a ranked queue that
-   prioritizes debrief/instructor analysis, exemplary scenario authoring,
-   evidence-confidence work, and only evidence-backed competitive hardening.
-3. **Present Kept Empty:** Left `SPEC.md` `Present` as `No active slice` so no
-   runtime implementation is implied.
-4. **Companion Docs Refreshed:** Updated stale Phase 5 and first-scenario notes
-   that still pointed to completed competitive runtime work as future work.
-5. **Version and Changelog Synchronized:** Bumped the package to `0.2.1` and
-   documented the slice in `CHANGELOG.md`.
-6. **Lesson Recorded:** Added a `LESSONS.md` entry about post-milestone SDD
-   reviews ranking future work instead of expanding scope.
+Implemented Track 1 (Debrief and instructor analysis quality) from the ranked next-development queue:
+1. **Stabilization Campaign Summary:** Added `instructor_run_summary` to compare turn-by-turn observed reported access vs true access index and display measurement gaps.
+2. **Competitive Campaign Summary:** Added `competitive_instructor_summary` to list true rival actions and rationales, explicitly labeling observed vs unobserved rival actions at debrief time.
+3. **Decoupled and Centralized:** Centralized both stabilization and competitive campaign debriefing functions (including the new instructor run summaries) into the `src/debrief/report.rs` module.
+4. **CLI Integration:** Enabled automatic printing of the competitive debrief at the end of the competitive campaign loop in CLI mode.
+5. **Version and Changelog:** Bumped package version to `0.2.2` in `Cargo.toml`/`Cargo.lock` and added version notes to `CHANGELOG.md` and `SPEC.md`.
+6. **Lessons Learned:** Recorded lessons regarding shared CLI/MCP debrief centralisation in `LESSONS.md`.
 
 ## Verifications Performed
-
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test`
-- Targeted `rg` scan for stale competitive-runtime and SDD status phrases.
+- `cargo test` passes cleanly (all 233 tests including new unit tests for stabilization and competitive instructor summaries).
 
 ## Next Steps and Dependencies
-
-- The recommended next implementation direction is **Debrief and instructor
-  analysis quality**, but it should be promoted into `Present` only after an
-  explicit implementation decision.
-- Keep formula tuning, competitive campaign expansion, new actors, and runtime
-  scenario generalization gated by playtest, authoring, debrief, or domain-review
-  evidence.
+- The next development track in the `SPEC.md` Future queue is **Track 2: Exemplary scenario authoring plan**.
+- The codebase is clean, structured, and has zero warnings.

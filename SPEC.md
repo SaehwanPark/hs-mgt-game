@@ -74,7 +74,33 @@ reconstructing it from the diff.
 | SPEC.md cleanup and version bump | v0.1.61 | Archive old SPEC items to spec-past-archive.md, simplify Present section | 231 | `bf0414a383634dd6` (competitive) |
 | Public playable prototype announcement prep | v0.2.0 | Public README, old README archive, repo hygiene cleanup, milestone version bump | 231 | `bf0414a383634dd6` (competitive) |
 | Post-v0.2 SDD progress review | v0.2.1 | Review current prototype progress and rank next development tracks | 231 | `bf0414a383634dd6` (competitive) |
+| Instructor-visible run summary & decision-quality review | v0.2.2 | Compare observed vs true state in stabilization and detailed observed/unobserved rival actions in competitive | 233 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Instructor-visible run summary & decision-quality review
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.2
+
+  Summary:
+  Add an instructor-visible run summary and decision-quality review capability to the end-of-session debrief for both stabilization and competitive campaigns. The summary evaluates decisions made under uncertainty and lists the state/observation gap and unobserved rival moves.
+
+  Done:
+  - Add `instructor_run_summary` for stabilization to compare turn-by-turn reported access vs true access index and display measurement gaps.
+  - Add `competitive_instructor_summary` to reveal all true rival actions and rationales, explicitly labeling observed vs unobserved rival actions at debrief time.
+  - Centralize competitive debriefing in the `src/debrief/report.rs` module and clean up duplicates from MCP session logic.
+  - Print the competitive debrief at the end of the competitive campaign loop in CLI mode.
+  - Expose the instructor summaries in both CLI and MCP end-of-session debrief outputs.
+  - Set tabsize to 2 spaces and keep the simulation core deterministic and untouched.
+
+  Deferred / Non-Goals:
+  - No changes to transition rules or state/observation calculations during active play.
+  - No grading system or automated LMS scoring.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 - Feature: Post-v0.2 SDD progress review
   Status: Complete
