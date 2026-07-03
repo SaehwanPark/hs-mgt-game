@@ -2,19 +2,34 @@
 
 ## Summary of Changes
 
-To verify the effectiveness of the competitive guidance and prompt cues introduced in `v0.1.57`, we executed follow-up AI-agent playtests and synthesized the findings for `v0.1.58`:
-1. **Playtest Findings Documented:** Created `docs/playtest-findings-v0.1.58.md` detailing the playtest runs for `stabilization-v1` and `competitive-regional-v1` campaigns at seed 42 under the updated command help and monthly prompt cues.
-2. **First-Time Executive Guidance Verified:** Confirmed that the new prompt cues and help command successfully guided a First-Time Executive agent profile to actively utilize strategic actions (`project`, `recruit`, and `negotiate`) rather than overusing `hold` as seen in prior runs.
-3. **Spec and Changelog Synchronized:** Added `v0.1.58` to `SPEC.md`'s Phased Rollup table and Recent Slices log, and updated the `CHANGELOG.md` with release notes.
-4. **Version Bump:** Bumped Cargo package version to `0.1.58`.
+Implemented the post-v0.2 SDD progress review:
+
+1. **Progress Review Recorded:** Added `v0.2.1` to `SPEC.md` as a completed
+   documentation/planning slice.
+2. **Next Queue Ranked:** Reorganized `SPEC.md` Future into a ranked queue that
+   prioritizes debrief/instructor analysis, exemplary scenario authoring,
+   evidence-confidence work, and only evidence-backed competitive hardening.
+3. **Present Kept Empty:** Left `SPEC.md` `Present` as `No active slice` so no
+   runtime implementation is implied.
+4. **Companion Docs Refreshed:** Updated stale Phase 5 and first-scenario notes
+   that still pointed to completed competitive runtime work as future work.
+5. **Version and Changelog Synchronized:** Bumped the package to `0.2.1` and
+   documented the slice in `CHANGELOG.md`.
+6. **Lesson Recorded:** Added a `LESSONS.md` entry about post-milestone SDD
+   reviews ranking future work instead of expanding scope.
 
 ## Verifications Performed
 
-- Run `cargo test` successfully (all 230 unit/integration tests pass cleanly).
-- Run `python3 scripts/run_automated_playtests.py` successfully (comparison summaries and ranges verify simulation output).
-- `cargo fmt --check` passes successfully.
-- Conducted a three-pass `code-reviewer` loop on the local branch diff, resolved all findings (missing spec entries and trailing space), and ran a follow-up re-review pass.
+- `cargo fmt --check`
+- `cargo clippy --all-targets -- -D warnings`
+- `cargo test`
+- Targeted `rg` scan for stale competitive-runtime and SDD status phrases.
 
 ## Next Steps and Dependencies
 
-- Proceed with subsequent Future roadmap tracks in `SPEC.md`, such as **Debrief quality as product surface** or **Scenario data loading expansion**, now that guidance effectiveness and playtesting baselines are verified.
+- The recommended next implementation direction is **Debrief and instructor
+  analysis quality**, but it should be promoted into `Present` only after an
+  explicit implementation decision.
+- Keep formula tuning, competitive campaign expansion, new actors, and runtime
+  scenario generalization gated by playtest, authoring, debrief, or domain-review
+  evidence.

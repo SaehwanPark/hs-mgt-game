@@ -3,6 +3,25 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Post-Milestone SDD Reviews Should Rank, Not Expand
+
+- Context: After the public playable prototype reached v0.2.0, the repo had a
+  thorough runnable stabilization slice, a bounded competitive preview, MCP
+  playtest evidence, and a long Future backlog.
+- Symptom: Future work was specific but still read as a broad menu, making it
+  too easy for the next agent to pick platform expansion, balance tuning, or
+  new actors before the product risk was re-evaluated.
+- Cause: Milestone completion changed the main uncertainty from "can the game
+  run end to end?" to "is repeated play explainable, teachable, and strategically
+  interesting?"
+- Resolution: Keep `SPEC.md` `Present` empty, record the progress-review slice
+  as completed, and rank Future tracks so debrief/instructor analysis,
+  exemplary scenario authoring, and evidence-confidence work lead runtime
+  expansion.
+- Prevention: After major runnable milestones, perform an SDD review that
+  explicitly names the next risk, ranks Future tracks, and refreshes stale
+  companion docs before promoting a new implementation slice.
+
 ## End-Session Metrics Belong In Debrief, Not Active Observation
 
 - Context: Closing the v0.1.49 competitive MCP evidence gap by exposing final

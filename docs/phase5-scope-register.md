@@ -131,13 +131,16 @@ Partially achieved:
 | Recognizably a strategy game, not a static model demo | Met | Multiple defensible preset paths, interactive parameter choices, strategic actor responses |
 
 Phase 5 is **closed for the stabilization bounded slice**. The **competitive
-regional market campaign** design track opens at v0.1.28; see
-[`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md) and roadmap
-§6.0. Remaining roadmap §5.1 world elements (Medicare, Medicaid, cohorts) and
-Phase 6 runtime expansion are deferred with explicit design gates.
+regional market campaign** design track opened at v0.1.28 and now has a bounded
+three-month playable preview; see
+[`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md), roadmap
+§6.0, and [`SPEC.md`](../SPEC.md). Remaining roadmap §5.1 world elements
+(Medicare, Medicaid, cohorts) and fuller Phase 6 runtime expansion are deferred
+with explicit design gates.
 
-Golden final state hash at seed 42: `6fb1ebbea564274f` (114 tests at v0.1.27;
-v0.1.28 is design-only).
+Golden final state hash at seed 42 for the stabilization slice:
+`6fb1ebbea564274f` (114 tests at v0.1.27). The current competitive preview
+golden hash is tracked in [`SPEC.md`](../SPEC.md).
 
 ## Risk register
 
@@ -153,14 +156,19 @@ v0.1.28 is design-only).
 
 ## Recommended next slices
 
-Per [`SPEC.md`](../SPEC.md) Future backlog and competitive design package:
+Per the ranked queue in [`SPEC.md`](../SPEC.md), the recommended post-v0.2
+direction is:
 
-1. **Competitive campaign runtime I7** — random events, delayed effect queue,
-   annual policy tick.
-2. **Competitive campaign runtime I8** — Stata-like CLI for human monthly entry.
-3. **AI-agent playtest synthesis** — Phase 7 prep.
-4. **Scenario data loading runtime** — after [`scenario-format-draft.md`](scenario-format-draft.md) review.
-5. **Medicare/Medicaid strategic actors** — gated; excluded from first scenario.
+1. **Debrief and instructor analysis quality** — add one bounded post-run
+   explanation or decision-review capability derived from committed history.
+2. **Exemplary scenario authoring plan** — draft one richer scenario brief or
+   fixture plan before broadening runtime scenario tooling.
+3. **Evidence, parameters, and model-confidence ledger** — ground one bounded
+   mechanism before any formula or balance changes.
+4. **Competitive campaign hardening** — address only a concrete playtest-backed
+   comprehension, pacing, exploit, or command-entry issue.
+5. **Broader simulation breadth and new strategic actors** — gated by playtest,
+   instructor, scenario, or domain-review evidence.
 
 ## Related documents
 

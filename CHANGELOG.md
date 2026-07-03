@@ -6,6 +6,17 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-07-03
+
+### Changed
+
+- Reviewed post-v0.2 project progress and reorganized `SPEC.md` Future into a
+  ranked next-development queue while keeping `Present` empty.
+- Refreshed stale companion planning notes that still pointed to already
+  completed competitive runtime slices as future work.
+- Recorded a lesson for post-milestone SDD reviews.
+- Bumped package version to `0.2.1`.
+
 ## [0.2.0] - 2026-07-03
 
 ### Added

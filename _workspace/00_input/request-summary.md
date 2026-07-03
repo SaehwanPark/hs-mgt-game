@@ -2,51 +2,63 @@
 
 ## Scope
 
-Execute follow-up playtest sessions under the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding. Document the findings in `docs/playtest-findings-v0.1.58.md`.
+Implement the post-v0.2 SDD progress review plan. The goal is to review the
+current playable prototype state and organize the next development queue in
+`SPEC.md` and related SDD documents without promoting a runtime feature into
+active development.
 
 Specific tasks:
-1. Run follow-up free-form playtest sessions for the `stabilization-v1` and `competitive-regional-v1` campaigns with seed 42.
-2. Verify that the agent utilizes the expanded command help (typing `?` or `help`) and uses commands like `project`, `recruit`, and `negotiate` instead of defaulting to `hold` where appropriate.
-3. Update `CHANGELOG.md` and `SPEC.md` to document the new playtest findings and present version bump.
-4. Bump Cargo package version in `Cargo.toml` to `0.1.58`.
-5. Prepare and push a temporary branch `feat/playtest-findings-v0.1.58` and open a PR (PR handoff).
-6. Run the 3-pass review loop on the resulting PR.
+1. Record the progress review as a completed patch-level SDD slice.
+2. Keep `SPEC.md` `Present` empty.
+3. Reorganize `SPEC.md` `Future` into a ranked, gated next-development queue.
+4. Refresh stale companion docs that still point to completed competitive
+   runtime slices as next work.
+5. Update `CHANGELOG.md`, `LESSONS.md`, and Cargo package version to `0.2.1`.
+6. Run standard Rust checks and targeted stale-status scans.
 
 ## Non-Goals
 
-- No changes to core simulation transition logic, model structures, or validation thresholds.
-- No changes to scenario TOML files or the campaign selection flow.
-- No changes to golden hashes (the golden hashes for seed 42 must remain identical to main).
-- No new MCP endpoints or DTO changes.
+- No changes to simulation transition rules, command syntax, scenario schemas,
+  replay formats, MCP DTOs, gameplay balance, or public product positioning.
+- No promotion of a Future item into `Present`.
+- No claims of empirical calibration, measured human learning, classroom
+  effectiveness, or policy-forecasting validity.
 
 ## Sources
 
+- `README.md`
 - `SPEC.md`
+- `ARCHITECTURE.md`
+- `CHANGELOG.md`
+- `docs/roadmap.md`
+- `docs/design_principles.md`
+- `docs/harness/health-policy-strategy-game/team-spec.md`
 - `docs/playtest-findings-v0.1.56.md`
-- `docs/playtest-findings-v0.1.55.md`
-- `docs/agent-playtest-protocol.md`
-- `docs/mcp-playtesting-guide.md`
-- `scripts/play_game.py`
-- `scripts/run_automated_playtests.py`
+- `docs/playtest-findings-v0.1.58.md`
+- `LESSONS.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.1.58.md`
 - `SPEC.md`
 - `CHANGELOG.md`
+- `LESSONS.md`
 - `Cargo.toml`
+- `Cargo.lock`
+- `docs/first-scenario-brief.md`
+- `docs/phase5-scope-register.md`
+- `_workspace/00_input/request-summary.md`
+- `_workspace/final/handoff.md`
 
 ## Validation Target
 
-- All automated playtests pass successfully.
-- All unit and integration tests (230+) run and pass.
-- `cargo fmt --check` passes.
-- Playtest report matches the structure in `docs/agent-playtest-protocol.md`.
+- `cargo fmt --check`
+- `cargo clippy --all-targets -- -D warnings`
+- `cargo test`
+- Targeted `rg` scan for stale competitive-runtime and SDD status phrases.
 
 ## Global Skills Needed
 
-- `preferred-workflow` for PR, branch, and code-review loop.
-- `plan-designer` for defining the operational coding plan.
-- `simple-code-writer` for editing project files.
-- `spec-driven-developer` for SDD index and changelog updates.
-- `code-reviewer` for three independent review passes.
+- `spec-driven-developer` for SDD index, changelog, and architecture/status
+  synchronization.
+- `plan-designer` for keeping the implementation bounded to the approved plan.
+- `simple-code-writer` for minimal, scoped edits.
