@@ -68,7 +68,11 @@ pub fn educational_debrief(history: &History) -> Vec<String> {
       final_state.commercial_rate
     ),
     format!("Actor rationales at decision time: {actor_rationales}"),
-    format!("Attributed mechanisms to inspect: {effect_summary}."),
+    if effect_summary.is_empty() {
+      "Attributed mechanisms to inspect: none.".to_string()
+    } else {
+      format!("Attributed mechanisms to inspect: {effect_summary}.")
+    },
     "Debrief prompt: Was the CEO's access strategy reasonable given the reported access values, the later policy response, the workforce retention tradeoff, the coalition investment choice, and the defensive response to rival capacity pressure?".to_string(),
     "Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.".to_string(),
   ];
@@ -243,17 +247,18 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
         }
         if let Some(rival_batch) = transition.aggregated.batch_for_system(system.system_id) {
           let mut cmd_strs = Vec::new();
+          let observed = monitored_system_ids.contains(&system.system_id);
+          let mut any_observed = false;
           for cmd in &rival_batch.commands {
             let formatted = format_command_debrief(cmd);
             if is_public_command(cmd) {
               cmd_strs.push(format!("{} (publicly disclosed)", formatted));
+              any_observed = true;
+            } else if observed {
+              cmd_strs.push(format!("{} (observed via monitor)", formatted));
+              any_observed = true;
             } else {
-              let observed = monitored_system_ids.contains(&system.system_id);
-              if observed {
-                cmd_strs.push(format!("{} (observed via monitor)", formatted));
-              } else {
-                cmd_strs.push(format!("{} (unobserved by you)", formatted));
-              }
+              cmd_strs.push("[Private Action] (unobserved by you)".to_string());
             }
           }
           let cmd_str = if cmd_strs.is_empty() {
@@ -262,7 +267,9 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
             cmd_strs.join("; ")
           };
           lines.push(format!("Rival {}: {}", system.name, cmd_str));
-          if let Some(rationale) = &rival_batch.rationale {
+          if let Some(rationale) = &rival_batch.rationale
+            && any_observed
+          {
             lines.push(format!("Rival {} rationale: {}", system.name, rationale));
           }
         }
