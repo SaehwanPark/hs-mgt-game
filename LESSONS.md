@@ -383,3 +383,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: The original `.github/workflows/ci.yml` only executed `cargo fmt` and `cargo test` without checks for code quality and compiler lints.
 - Resolution: Resolved all 32 clippy issues across production and test code, and added a lint checking step to the CI pipeline.
 - Prevention: Run `cargo clippy --all-targets -- -D warnings` locally before committing and always include clippy checks in the CI runner to catch lints early.
+
+## Centralize Post-Run Debriefing Logic for Shared CLI/MCP Surface
+
+- Context: Adding instructor-visible summaries and decision quality reviews for stabilization and competitive campaigns.
+- Symptom: It is tempting to write separate CLI-only or MCP-only report string formatting functions or duplicate logic between the MCP session handler and the CLI campaign loop.
+- Cause: The CLI campaign and MCP session end endpoint need the same structured information. Duplicating code violates modularity and invites drift.
+- Resolution: Consolidated both stabilization and competitive campaign debriefing functions (including the new instructor run summaries) into the `src/debrief/report.rs` module. The CLI campaign runner and the MCP session end endpoint call the exact same module functions, sharing the same representations.
+- Prevention: Keep all report formatting and debrief generation code in `src/debrief` and have other layers (CLI and MCP) consume it, ensuring a single source of truth for debriefing text.
+

@@ -1,33 +1,31 @@
-# Domain QA Review
+# Domain QA Review - Instructor Run Summary & Decision Quality Review
 
 ## Status
-
 pass
 
 ## Reviewed Inputs
-
 - `_workspace/00_input/request-summary.md`
-- `src/cli/guidance.rs`
+- `_workspace/01_evidence_map.md`
+- `_workspace/02_mechanism_design.md`
+- `src/debrief/report.rs`
+- `src/debrief/report_tests.rs`
 - `src/cli/campaign.rs`
-- `src/cli/repl.rs`
 - `src/mcp/session.rs`
 
 ## Findings
-
-- **Guidance Hardening:** The expanded help text in `src/cli/guidance.rs` for `PromptContext::CompetitiveCommand` correctly lists resource costs (Action Points, cash, political capital) and delay/concurrency constraints for all 7 verbs (`hold`, `invest`, `recruit`, `monitor`, `negotiate`, `commit`, `project`).
-- **Prompt Cueing:** The prompt message in `src/cli/campaign.rs` and the interactive input in `src/cli/repl.rs` now explicitly cues the player that typing `?` or `help` shows detailed command descriptions.
-- **Debrief Quality:** A strategic lesson about capital projects has been added to the competitive end-session debrief in `src/mcp/session.rs` to address the `project` command underuse identified during diagnostics.
-- **Determinism and State Boundaries:** No changes were made to core simulation transition logic, model structures, or state hashes. Simulation determinism and replay stability are fully preserved.
+- **Observed vs. True State:** The stabilization instructor run summary accurately compares `reported_access_index` against the true `prior.access_index` per turn, calculating the observation gap (noise + delay) and showing the resulting true state.
+- **Rival Observability:** The competitive instructor run summary correctly iterates through rival systems and lists their true commands, labeling them as observed (if public or monitored) or unobserved, revealing their rationales.
+- **Active Play Information Boundaries:** Unobserved state and rival actions are kept private during active play. The summaries are strictly generated and displayed at debrief time.
+- **CLI Handoff integration:** The competitive preview in the CLI now invokes and prints the competitive debrief including the new instructor run summary on completion.
+- **MCP Compatibility:** The MCP session termination debrief automatically includes the competitive instructor run summary, keeping endpoints compatible without DTO changes.
+- **Tabsize and Code Quality:** Tabsize of 2 spaces is strictly preserved. No warnings or Clippy violations are introduced.
 
 ## Required Fixes
-
 None.
 
 ## Residual Risks
-
-- **Playtest Validation:** Although guidance has been hardened to encourage better utilization of commands like `project` and `recruit`, follow-up automated playtests are required to verify if the new info-rich interface actually changes agent command distributions and reduces `hold` overuse.
+None.
 
 ## Verification Evidence
-
-- Run `cargo test` and `cargo fmt --check` successful. All 230+ tests passed cleanly.
-- Existing tests (such as `help_text_avoids_actor_outcome_spoilers`) verify that no outcome spoilers were leaked in the expanded help text.
+- `cargo test` runs and passes successfully. All 233 tests (including new unit tests for stabilization and competitive summaries) passed cleanly.
+- `cargo clippy --all-targets -- -D warnings` and `cargo fmt --check` pass.

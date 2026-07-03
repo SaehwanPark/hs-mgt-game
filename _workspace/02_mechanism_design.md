@@ -1,41 +1,29 @@
-# Mechanism Design
+# Mechanism Design - Instructor Run Summary & Decision Quality Review
 
-## Diagnostic Mechanism
+## 1. Stabilization Campaign Instructor Summary
+We will add `instructor_run_summary(history: &History) -> Vec<String>` to generate a dedicated post-run report for the stabilization campaign.
+For each transition in the committed history, it will output:
+- **Turn index**: e.g., "Turn 0 → 1"
+- **Reported (Observed) Access Index**: `transition.observation.reported_access_index`
+- **True Prior Access Index**: `transition.prior.access_index`
+- **Measurement Gap**: `reported_access_index - true_prior_access_index` (indicating how much the player's perception was distorted by noise/delay).
+- **Player Action**: Descriptive summary of the command chosen by the player (e.g. access commitment, nursing coalition rate).
+- **True Next Access Index**: `transition.next.access_index` (the actual resulting state).
 
-The slice adds a documentation-only strategy-space diagnostic artifact. It reads
-already-captured findings, groups observed strategies into clusters, summarizes
-metric ranges, and routes follow-up work to guidance, debrief, evidence, or
-future diagnostics.
+## 2. Competitive Campaign Instructor Summary
+We will add `competitive_instructor_summary(history: &CompetitiveHistory, human_system_id: u32) -> Vec<String>` (or implement it directly as part of `competitive_debrief`).
+For each month:
+- **Month name**: e.g., "Month 1"
+- **Player Batch**: The commands submitted by the player system.
+- **Rivals True Actions**: List each rival system's commands and explicitly show their visibility:
+  - Public commands: labeled as "(publicly disclosed)"
+  - Private commands target-monitored by the player: labeled as "(observed via monitor)"
+  - Private commands NOT monitored: labeled as "(unobserved by you - REVEALED FOR INSTRUCTOR REVIEW)"
+- **Rival Rationales**: Expose the private rationales of each rival system for that month, labeled as "(unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)".
 
-## Campaign Coverage
+## 3. CLI Display
+- In the stabilization campaign, the summary is printed immediately after the standard educational debrief.
+- In the competitive campaign, the competitive debrief is printed when the three-month preview completes.
 
-- `stabilization-v1`: five-turn findings from scripted and free-form profiles.
-- `competitive-regional-v1`: three-month preview findings from scripted and
-  free-form profiles.
-- Scripted profiles: Fiscal Caution, Capacity Growth, Balanced Strategy, and
-  Naive First-Time.
-- Free-form profiles: First-Time Executive, Fiscal Steward, and Access Expansion
-  Advocate.
-
-## Observation Boundary
-
-The diagnostic artifact uses only published findings: actor-visible observation
-summaries, legal command hints, submitted commands, committed histories,
-end-session debrief metrics, and recorded causal explanations. It does not add
-hidden-state exposure or active player-facing omniscient reporting.
-
-## Failure Modes
-
-- If a diagnostic claim cannot be traced to a prior findings document, omit it
-  or label it as an unresolved question.
-- If a trend appears in only one profile, seed, or campaign, route it to future
-  diagnostics rather than balance tuning.
-- If validation checks fail, distinguish docs/version mistakes from unrelated
-  runtime failures before expanding scope.
-
-## Deferred
-
-Network transport, auth, persistence, long competitive campaigns, replay export,
-scenario expansion, LLM-runner orchestration, balance changes, runtime guidance
-changes, and analytics tooling are deferred until repeated evidence justifies
-them.
+## 4. MCP Display
+- The MCP session end endpoint will return the enhanced debrief lines.
