@@ -2,17 +2,19 @@
 
 ## Summary of Changes
 
-To address the strategy-space diagnostics gaps identified in v0.1.56 (specifically, that passive simulated profiles overused `hold` and underused/omitted `project`), we implemented competitive campaign guidance and debrief hardening:
-1. **Competitive Command Help Hardened:** Expanded the help text for `PromptContext::CompetitiveCommand` in `src/cli/guidance.rs` to detail resource costs, effects, and duration/delay constraints for all 7 verbs.
-2. **Monthly Cueing Hardened:** Updated the Riverside command prompt label in `src/cli/campaign.rs` and `src/cli/repl.rs` to clearly cue the player to type `?` or `help` for detailed command descriptions.
-3. **Projects Strategic Lesson Added:** Enhanced the competitive campaign `end_session` debrief in `src/mcp/session.rs` to include a project-related strategic lesson explaining AP costs, monthly draws, duration, and concurrency limits.
-4. **Version Bump:** Cargo package version bumped to `0.1.57`.
+To verify the effectiveness of the competitive guidance and prompt cues introduced in `v0.1.57`, we executed follow-up AI-agent playtests and synthesized the findings for `v0.1.58`:
+1. **Playtest Findings Documented:** Created `docs/playtest-findings-v0.1.58.md` detailing the playtest runs for `stabilization-v1` and `competitive-regional-v1` campaigns at seed 42 under the updated command help and monthly prompt cues.
+2. **First-Time Executive Guidance Verified:** Confirmed that the new prompt cues and help command successfully guided a First-Time Executive agent profile to actively utilize strategic actions (`project`, `recruit`, and `negotiate`) rather than overusing `hold` as seen in prior runs.
+3. **Spec and Changelog Synchronized:** Added `v0.1.58` to `SPEC.md`'s Phased Rollup table and Recent Slices log, and updated the `CHANGELOG.md` with release notes.
+4. **Version Bump:** Bumped Cargo package version to `0.1.58`.
 
 ## Verifications Performed
 
-- Run `cargo test` and `cargo fmt --check` pass. All 230+ unit/integration tests succeed.
-- Checked that the spoiler-free help test (`help_text_avoids_actor_outcome_spoilers`) passes without leaking any outcome spoilers in the new command help text.
+- Run `cargo test` successfully (all 230 unit/integration tests pass cleanly).
+- Run `python3 scripts/run_automated_playtests.py` successfully (comparison summaries and ranges verify simulation output).
+- `cargo fmt --check` passes successfully.
+- Conducted a three-pass `code-reviewer` loop on the local branch diff, resolved all findings (missing spec entries and trailing space), and ran a follow-up re-review pass.
 
 ## Next Steps and Dependencies
 
-- Run follow-up automated and free-form MCP playtest sessions using the updated v0.1.57 interface observations to verify that the new cues successfully guide simulated agents to use `project` and `recruit` commands appropriately instead of overusing `hold`.
+- Proceed with subsequent Future roadmap tracks in `SPEC.md`, such as **Debrief quality as product surface** or **Scenario data loading expansion**, now that guidance effectiveness and playtesting baselines are verified.
