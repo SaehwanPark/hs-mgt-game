@@ -2,52 +2,48 @@
 
 ## Scope
 
-Add the v0.1.56 strategy-space diagnostics slice. Synthesize existing scripted
-and free-form MCP playtest findings into a lightweight analysis artifact that
-summarizes strategy clusters, outcome ranges, action-frequency signals, evidence
-limits, and follow-up routing before any balance work.
+Hardening competitive campaign guidance, command help, and debriefing to resolve the gaps identified in the v0.1.56 playtest diagnostics. Specifically:
+1. Expand the help text for `PromptContext::CompetitiveCommand` in `src/cli/guidance.rs` to display detailed descriptions of each competitive command's effects, Action Point (AP) costs, cash costs, and political capital costs.
+2. Update the monthly command prompt printing in `src/cli/campaign.rs` to clearly notify the user that typing `?` or `help` displays the detailed command manual.
+3. Update the `competitive_debrief` function in `src/mcp/session.rs` to add a strategic lesson about capital projects (AP costs, monthly cash draws, duration, and concurrency limits).
 
 ## Non-Goals
 
-- No runtime transition, parser, validation, scenario, MCP DTO, replay, golden
-  hash, or campaign-length changes.
-- No new MCP session matrix, LLM runner, orchestration framework, analytics
-  platform, balance tuning, empirical calibration, policy forecast, equilibrium
-  analysis, or human learning claim.
-- No formula changes from this diagnostic artifact.
+- No changes to core simulation transition logic, model structures, or validation thresholds.
+- No changes to scenario TOML files or the campaign selection flow.
+- No changes to the stabilization campaign's guidance, help, or debrief.
+- No changes to golden hashes (the golden hashes for seed 42 must remain identical to main).
+- No new MCP endpoints or DTO changes.
 
 ## Sources
 
-- `README.md`
 - `SPEC.md`
-- `CHANGELOG.md`
-- `docs/agent-playtest-protocol.md`
-- `docs/mcp-playtesting-guide.md`
-- `docs/playtest-findings-v0.1.51.md`
-- `docs/playtest-findings-v0.1.52.md`
-- `docs/playtest-findings-v0.1.54.md`
-- `docs/playtest-findings-v0.1.55.md`
+- `docs/playtest-findings-v0.1.56.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
+- `src/cli/guidance.rs`
+- `src/cli/campaign.rs`
+- `src/mcp/session.rs`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.1.56.md`
-- `README.md`
+- `src/cli/guidance.rs`
+- `src/cli/campaign.rs`
+- `src/mcp/session.rs`
 - `SPEC.md`
 - `CHANGELOG.md`
 - `Cargo.toml`
-- `Cargo.lock`
-- `_workspace/` handoff artifacts
 
 ## Validation Target
 
-- Diagnostic claims cite captured findings and preserve evidence limits.
-- Existing scripted MCP batch still completes.
-- `cargo fmt --check`, `cargo test`, and `git diff --check` pass.
+- Extended competitive help text passes the existing `help_text_avoids_actor_outcome_spoilers` test.
+- All 230+ cargo tests run and pass.
+- Stabilization and competitive campaign simulation outcomes (e.g. golden hashes) remain stable.
+- `cargo fmt --check` passes.
 
 ## Global Skills Needed
 
-- `preferred-workflow` for branch, PR, and review-loop discipline.
-- `simple-code-writer` for minimal docs/version edits.
-- `spec-driven-developer` for SDD and changelog alignment.
+- `preferred-workflow` for PR, branch, and code-review loop.
+- `plan-designer` for defining the operational coding plan.
+- `simple-code-writer` for editing the Rust files.
+- `spec-driven-developer` for SDD index and changelog updates.
 - `code-reviewer` for three independent review passes.

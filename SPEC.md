@@ -67,9 +67,33 @@ reconstructing it from the diff.
 | Free-form agent playtest evidence | v0.1.54 | One free-form first-time profile completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Free-form profile synthesis | v0.1.55 | Two additional free-form profiles completed both current MCP campaigns at seed 42 | 230 | `88d07f9e1bbd6f04` (competitive) |
 | Strategy-space diagnostics | v0.1.56 | Lightweight diagnostics over existing scripted and free-form MCP playtest evidence | 230 | `88d07f9e1bbd6f04` (competitive) |
+| Competitive guidance & debrief hardening | v0.1.57 | Expanded competitive command help, monthly prompt cues, and capital projects strategic lesson | 230 | `88d07f9e1bbd6f04` (competitive) |
 
 
 ### Recent slices
+
+- Feature: Competitive guidance & debrief hardening
+  Status: Complete
+  Started: 2026-07-02
+  Version: 0.1.57
+
+  Summary:
+  Expand competitive command help with detailed descriptions and resource costs for all 7 verbs, update the monthly command prompt printing to explicitly cue ?/help for the command manual, and add a strategic projects lesson to the competitive end-session debrief to address playtest gaps.
+
+  Done:
+  - `src/cli/guidance.rs` `PromptContext::CompetitiveCommand` help text details effects, AP, cash, and political capital costs for all 7 competitive verbs
+  - `src/cli/campaign.rs` and `src/cli/repl.rs` update prompt label to cue "? or help" for detailed command descriptions
+  - `src/mcp/session.rs` `competitive_debrief` adds a strategic lesson about Action Points, monthly cash draws, duration, and concurrency limits of capital projects
+  - Package version bumped to `0.1.57`
+
+  Deferred / Non-Goals:
+  - No changes to transition logic, simulation rules, scenario schemas, validation thresholds, or campaign selection
+  - No changes to stabilization campaign help or debrief logic
+  - No database or telemetry collection addition
+
+  Verification:
+  - Spoiler-free tests, MCP session tests, and all 230+ cargo tests pass successfully
+  - `cargo fmt --check` passes
 
 - Feature: Strategy-space diagnostics
   Status: Complete
@@ -614,8 +638,8 @@ AI-agent playtest evidence batch, and the v0.1.50 competitive final debrief
 metrics slice, the v0.1.51 scripted seed-variation playtest batch, and the
 v0.1.52 naive-profile playtest batch, the v0.1.53 campaign test fallback fix,
 the v0.1.54 free-form agent playtest evidence slice, the v0.1.55 free-form
-profile synthesis slice, and the v0.1.56 strategy-space diagnostics slice are
-complete.
+profile synthesis slice, the v0.1.56 strategy-space diagnostics slice, and the
+v0.1.57 competitive guidance & debrief hardening slice are complete.
 
 ## Future
 
@@ -627,9 +651,7 @@ complete.
   `docs/playtest-findings-v0.1.49.md` as baseline evidence.
 
   Next actionable slice:
-  Use the v0.1.56 diagnostics as the baseline for deciding whether the next
-  Phase 7 slice should improve competitive monthly report guidance, command
-  help, or debrief explanation before considering balance changes.
+  Run follow-up automated or free-form MCP playtest sessions using the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding.
 
   Verification target:
   Any follow-up findings cite session counts, campaign(s), seeds, difficulty,

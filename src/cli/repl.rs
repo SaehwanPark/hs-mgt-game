@@ -89,7 +89,9 @@ fn read_line_with_completion() -> Result<String, ReadlineError> {
   // Keep prompt color in display output to avoid terminal cursor width issues.
   print_line(&format!(
     "  {}",
-    style::command_prompt_label("riverside> (Tab: complete command verbs)")
+    style::command_prompt_label(
+      "riverside> (Type ? or help for detailed command descriptions, Tab: complete command verbs)"
+    )
   ));
   editor.readline("> ")
 }

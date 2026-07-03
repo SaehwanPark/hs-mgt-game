@@ -1,56 +1,33 @@
-# Domain QA: Strategy-Space Diagnostics Slice
+# Domain QA Review
 
 ## Status
 
-Pass.
+pass
 
 ## Reviewed Inputs
 
-- User-approved preferred-workflow plan
 - `_workspace/00_input/request-summary.md`
-- `README.md`
-- `SPEC.md`
-- `CHANGELOG.md`
-- `docs/agent-playtest-protocol.md`
-- `docs/mcp-playtesting-guide.md`
-- `docs/playtest-findings-v0.1.51.md`
-- `docs/playtest-findings-v0.1.52.md`
-- `docs/playtest-findings-v0.1.54.md`
-- `docs/playtest-findings-v0.1.55.md`
-- `docs/playtest-findings-v0.1.56.md`
-- `docs/harness/health-policy-strategy-game/team-spec.md`
+- `src/cli/guidance.rs`
+- `src/cli/campaign.rs`
+- `src/cli/repl.rs`
+- `src/mcp/session.rs`
 
 ## Findings
 
-- Scope stays within the Phase 7 validation track: lightweight diagnostics over
-  existing simulated-agent MCP evidence.
-- The v0.1.56 artifact summarizes strategy clusters, outcome ranges, action
-  frequency signals, evidence limits, and follow-up routing without changing
-  mechanics, actors, scenario tooling, MCP contracts, or diagnostics tooling.
-- Evidence limits are labeled clearly and do not claim human learning,
-  empirical calibration, policy forecasting, equilibrium analysis, or balance
-  validity.
-- Competitive final metrics are read from published end-session debrief
-  evidence and are not exposed during active play.
-- No transition formulas, stochastic input resolution, rulesets, scenario files,
-  campaign length, MCP DTO shapes, replay formats, or golden hashes changed.
+- **Guidance Hardening:** The expanded help text in `src/cli/guidance.rs` for `PromptContext::CompetitiveCommand` correctly lists resource costs (Action Points, cash, political capital) and delay/concurrency constraints for all 7 verbs (`hold`, `invest`, `recruit`, `monitor`, `negotiate`, `commit`, `project`).
+- **Prompt Cueing:** The prompt message in `src/cli/campaign.rs` and the interactive input in `src/cli/repl.rs` now explicitly cues the player that typing `?` or `help` shows detailed command descriptions.
+- **Debrief Quality:** A strategic lesson about capital projects has been added to the competitive end-session debrief in `src/mcp/session.rs` to address the `project` command underuse identified during diagnostics.
+- **Determinism and State Boundaries:** No changes were made to core simulation transition logic, model structures, or state hashes. Simulation determinism and replay stability are fully preserved.
 
 ## Required Fixes
 
-None identified in the domain review.
+None.
 
 ## Residual Risks
 
-- The diagnostic artifact is still based on small scripted and free-form
-  simulated-agent samples.
-- Market share appears only in v0.1.55 free-form competitive evidence.
-- Any response to passive or low-benefit competitive choices should begin with
-  player-facing guidance or debrief review, not formula tuning.
+- **Playtest Validation:** Although guidance has been hardened to encourage better utilization of commands like `project` and `recruit`, follow-up automated playtests are required to verify if the new info-rich interface actually changes agent command distributions and reduces `hold` overuse.
 
 ## Verification Evidence
 
-- `python3 scripts/run_automated_playtests.py` completed 24 scripted sessions
-  without validation failures.
-- `cargo fmt --check` passed.
-- `cargo test` passed: 222 unit tests, 8 integration tests, 0 doc tests.
-- `git diff --check` passed.
+- Run `cargo test` and `cargo fmt --check` successful. All 230+ tests passed cleanly.
+- Existing tests (such as `help_text_avoids_actor_outcome_spoilers`) verify that no outcome spoilers were leaked in the expanded help text.
