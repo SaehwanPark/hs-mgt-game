@@ -37,26 +37,25 @@ pub fn deserialize_session_save(text: &str) -> Result<SessionSave, SessionSaveEr
     let line = raw_lines[index];
     index += 1;
 
-    if line.starts_with("ruleset=") {
-      ruleset_version = Some(line["ruleset=".len()..].to_string());
+    if let Some(stripped) = line.strip_prefix("ruleset=") {
+      ruleset_version = Some(stripped.to_string());
       continue;
     }
-    if line.starts_with("seed=") {
+    if let Some(stripped) = line.strip_prefix("seed=") {
       seed = Some(
-        line["seed=".len()..]
+        stripped
           .parse::<u64>()
           .map_err(|_| map_parse_error(index, "invalid seed"))?,
       );
       continue;
     }
-    if line.starts_with("experience_mode=") {
-      experience_mode =
-        Some(parse_experience_mode(&line["experience_mode=".len()..]).map_err(map_replay_error)?);
+    if let Some(stripped) = line.strip_prefix("experience_mode=") {
+      experience_mode = Some(parse_experience_mode(stripped).map_err(map_replay_error)?);
       continue;
     }
-    if line.starts_with("next_turn=") {
+    if let Some(stripped) = line.strip_prefix("next_turn=") {
       next_turn = Some(
-        line["next_turn=".len()..]
+        stripped
           .parse::<u32>()
           .map_err(|_| map_parse_error(index, "invalid next_turn"))?,
       );
@@ -66,9 +65,9 @@ pub fn deserialize_session_save(text: &str) -> Result<SessionSave, SessionSaveEr
       genesis = Some(parse_world_state_line(line, "genesis").map_err(map_replay_error)?);
       continue;
     }
-    if line.starts_with("transition_count=") {
+    if let Some(stripped) = line.strip_prefix("transition_count=") {
       transition_count = Some(
-        line["transition_count=".len()..]
+        stripped
           .parse::<usize>()
           .map_err(|_| map_parse_error(index, "invalid transition_count"))?,
       );
@@ -110,7 +109,7 @@ pub fn deserialize_session_save(text: &str) -> Result<SessionSave, SessionSaveEr
     detail: "missing next_turn".to_string(),
   })?;
 
-  if next_turn < 1 || next_turn > crate::model::INTERACTIVE_TURN_COUNT + 1 {
+  if !(1..=crate::model::INTERACTIVE_TURN_COUNT + 1).contains(&next_turn) {
     return Err(SessionSaveError::ParseError {
       line: 0,
       detail: format!("next_turn {next_turn} is out of range"),

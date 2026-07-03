@@ -452,10 +452,9 @@ fn advance_competitive(
   Ok(transition)
 }
 
-fn stabilization_parser(
-  turn_number: u32,
-) -> Result<fn(&str) -> Result<crate::model::PlayerCommand, crate::model::CliError>, McpErrorMessage>
-{
+type CommandParser = fn(&str) -> Result<crate::model::PlayerCommand, crate::model::CliError>;
+
+fn stabilization_parser(turn_number: u32) -> Result<CommandParser, McpErrorMessage> {
   match turn_number {
     1 => Ok(parse_stabilize_access_command),
     2 => Ok(parse_policy_command),

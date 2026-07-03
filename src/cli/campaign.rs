@@ -80,6 +80,7 @@ pub fn run_competitive_stub(_ruleset: &Ruleset, config: CompetitiveRunConfig) ->
   run_competitive_preview_internal(config, None)
 }
 
+#[allow(dead_code)]
 pub fn run_competitive_preview(
   config: CompetitiveRunConfig,
   demo_input: Option<String>,

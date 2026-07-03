@@ -4,6 +4,7 @@ use crate::model::{
 };
 use crate::sim::{ai_profile_for_system, observe_for_ai};
 
+#[allow(dead_code)]
 pub const DEFAULT_COMPETITIVE_SEED: u64 = 42;
 
 pub fn month1_human_preset_batch() -> SystemMonthlyBatch {

@@ -6,6 +6,17 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.1.60] - 2026-07-03
+
+### Added
+
+- Added `cargo clippy --all-targets -- -D warnings` check to GitHub Actions CI workflow to enforce code quality and prevent lint regression.
+
+### Changed
+
+- Resolved 32 Clippy compiler warnings/errors across the codebase (including manual prefix stripping, collapsible `if` blocks, manual range contains checks, complex types, and unused variable/import warnings).
+- Bumps project version to `0.1.60`.
+
 ## [0.1.59] - 2026-07-02
 
 ### Added

@@ -70,7 +70,34 @@ reconstructing it from the diff.
 | Competitive guidance & debrief hardening | v0.1.57 | Expanded competitive command help, monthly prompt cues, and capital projects strategic lesson | 230 | `88d07f9e1bbd6f04` (competitive) |
 | AI-agent playtest synthesis | v0.1.58 | Follow-up free-form playtest sessions at seed 42 verifying guidance changes | 230 | `bf0414a383634dd6` (competitive) |
 | Debrief quality as product surface | v0.1.59 | Enhanced competitive end-session debrief with detailed player/rival action logs | 231 | `bf0414a383634dd6` (competitive) |
+| Clippy CI / release automation | v0.1.60 | Enforce clippy checks in CI and resolve 32 compiler warnings/errors | 231 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Clippy CI / release automation
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.1.60
+
+  Summary:
+  Enforce strict code quality checking by adding Clippy validations to the GitHub Actions CI pipeline and fixing all 32 existing clippy lints across the codebase.
+
+  Done:
+  - Add `cargo clippy --all-targets -- -D warnings` step to `.github/workflows/ci.yml`
+  - Refactor manual prefix checking/slicing to use `.strip_prefix()` in `src/artifact/parse.rs`, `src/artifact/session_save.rs`, and `src/artifact/verify.rs`
+  - Collapse nested conditional `if` blocks into single `if` statements with `&&`
+  - Define custom type aliases for complex type signatures in `src/cli/session.rs` and `src/mcp/session.rs`
+  - Replace manual out-of-bounds check with `RangeInclusive::contains()` in `src/artifact/session_save.rs`
+  - Annotate unused variables/imports and dead-code constants/functions with appropriate compiler warnings/dead code attributes
+  - Bump package version to `0.1.60` in `Cargo.toml`
+
+  Deferred / Non-Goals:
+  - No changes to transition rules, simulation physics, or state serialization logic
+  - No new MCP endpoints
+  - No changes to gameplay or user-facing output messages
+
+  Verification:
+  - `cargo clippy --all-targets -- -D warnings` passes with zero warnings or errors
+  - `cargo test` passes cleanly with all 231 tests
 
 - Feature: Debrief quality as product surface
   Status: Complete

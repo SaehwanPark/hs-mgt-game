@@ -40,34 +40,39 @@ pub fn deserialize_replay_artifact(text: &str) -> Result<ReplayArtifact, ReplayA
     let line = raw_lines[index];
     index += 1;
 
-    if line.starts_with("ruleset=") {
-      ruleset_version = Some(line["ruleset=".len()..].to_string());
+    if let Some(stripped) = line.strip_prefix("ruleset=") {
+      ruleset_version = Some(stripped.to_string());
       continue;
     }
-    if line.starts_with("seed=") {
-      seed = Some(line["seed=".len()..].parse::<u64>().map_err(|_| {
-        ReplayArtifactError::ParseError {
-          line: index,
-          detail: "invalid seed".to_string(),
-        }
-      })?);
+    if let Some(stripped) = line.strip_prefix("seed=") {
+      seed = Some(
+        stripped
+          .parse::<u64>()
+          .map_err(|_| ReplayArtifactError::ParseError {
+            line: index,
+            detail: "invalid seed".to_string(),
+          })?,
+      );
       continue;
     }
-    if line.starts_with("play_mode=") {
-      play_mode = Some(parse_play_mode(&line["play_mode=".len()..])?);
+    if let Some(stripped) = line.strip_prefix("play_mode=") {
+      play_mode = Some(parse_play_mode(stripped)?);
       continue;
     }
     if line.starts_with("genesis=") {
       genesis = Some(parse_world_state_line(line, "genesis")?);
       continue;
     }
-    if line.starts_with("transition_count=") {
-      transition_count = Some(line["transition_count=".len()..].parse::<usize>().map_err(
-        |_| ReplayArtifactError::ParseError {
-          line: index,
-          detail: "invalid transition_count".to_string(),
-        },
-      )?);
+    if let Some(stripped) = line.strip_prefix("transition_count=") {
+      transition_count =
+        Some(
+          stripped
+            .parse::<usize>()
+            .map_err(|_| ReplayArtifactError::ParseError {
+              line: index,
+              detail: "invalid transition_count".to_string(),
+            })?,
+        );
       continue;
     }
     if line == "[transition]" {

@@ -43,14 +43,14 @@ pub fn render_executive_report(
   lines.push(String::new());
 
   lines.push(style::subsection("POLICY AND REGULATORY"));
-  if calendar.is_annual_tick() {
-    if let Some(review) = &observation.annual_policy_review {
-      lines.push("  Year in review".to_string());
-      for bullet in review {
-        lines.push(format!("  • {bullet}"));
-      }
-      lines.push(String::new());
+  if calendar.is_annual_tick()
+    && let Some(review) = &observation.annual_policy_review
+  {
+    lines.push("  Year in review".to_string());
+    for bullet in review {
+      lines.push(format!("  • {bullet}"));
     }
+    lines.push(String::new());
   }
   for bullet in &observation.policy_bullets {
     lines.push(format!("  • {bullet}"));
