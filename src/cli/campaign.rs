@@ -176,15 +176,8 @@ fn run_competitive_preview_internal(
   }
 }
 
-pub fn resume_competitive_campaign(
-  ruleset: &Ruleset,
-  save: CompetitiveSessionSave,
-) -> SessionOutcome {
+pub fn resume_competitive_campaign(save: CompetitiveSessionSave) -> SessionOutcome {
   let comp_ruleset = default_competitive_ruleset();
-  let config = CompetitiveRunConfig {
-    seed: save.seed,
-    difficulty: save.difficulty,
-  };
 
   print_line("");
   print_line(&style::subsection(&format!(
