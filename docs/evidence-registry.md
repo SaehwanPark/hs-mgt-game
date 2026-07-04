@@ -31,7 +31,7 @@ ledger records a source, range, and versioned ruleset use.
 | --- | --- | --- | --- |
 | Payer-provider rate negotiation | Turn 1 insurer decision | Abstraction | Integer thresholds; not calibrated to real contracts |
 | State access mandate response | Turn 2 policy decision | Abstraction | Simplified oversight ladder |
-| Workforce retention under pressure | Turn 3 labor decision | Abstraction | Inspired by labor-market tension literature |
+| Workforce retention under pressure | Turn 3 labor decision; competitive recruitment | Literature-grounded | Detailed in [workforce-ledger.md](workforce-ledger.md) |
 | Regional access coalition | Turn 4 coalition decision | Abstraction | Cooperative opportunity per roadmap §5.2 |
 | Competitor capacity response | Turn 5 rival system decision | Abstraction | Competitive capacity interaction per roadmap §3.3 |
 | Delayed/noisy access reporting | Observation model | Literature-informed | Supports decision vs. outcome debrief |
@@ -77,7 +77,7 @@ design), `calibrated` (ranges applied in ruleset — none yet).
 | Hospital finance / cash pressure | `cash_on_hand`, spend commands | CMS National Health Expenditure Data; AHA/Hospital Cost Report context via MedPAC reports | candidate | Use for plausible ranges only when calibrating |
 | Commercial payer rates / network tension | Turn 1 rate request thresholds | KFF Employer Health Benefits Survey; MedPAC Medicare payment context as benchmark | candidate | Not contract-level modeling |
 | State access / policy pressure | Turn 2 mandate and oversight ladder | State health department reports; MACPAC access narratives for Medicaid context | candidate | Federal Medicaid rules deferred |
-| Nursing workforce pressure | Turn 3 labor signal and retention | BLS healthcare occupations; selected workforce shortage literature | candidate | No strike-law simulation |
+| Nursing workforce pressure | Turn 3 labor signal and retention; competitive nurse recruitment | BLS healthcare occupations; California AB 394 safe staffing; Aiken JAMA 2002; NSI staffing report | linked | Detailed workforce ledger created at [workforce-ledger.md](workforce-ledger.md) |
 | Community trust / coalition leverage | Turns 3–4 trust and coalition signals | KFF community health surveys (conceptual); local coalition case studies | candidate | Qualitative anchor only |
 | Access and quality indices | Reported vs true access, quality | CMS quality programs (conceptual); literature on measurement error | literature-informed | Observation noise already modeled |
 | Market competition / capacity | Turn 5 competitor capacity response | MedPAC hospital market concentration; IO literature on capacity competition | linked | Implemented at v0.1.21 per competitor actor card |
