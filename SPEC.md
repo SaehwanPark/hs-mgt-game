@@ -79,7 +79,34 @@ reconstructing it from the diff.
 | Competitive campaign autocomplete hardening | v0.2.5 | Implement argument-key and enum-value autocomplete in the CLI REPL for competitive campaigns | 237 | `bf0414a383634dd6` (competitive) |
 | Competitive debrief decision-quality review | v0.2.6 | Implement deterministic checks (runway, workforce trust, payer posture, rival response) in competitive debrief | 238 | `bf0414a383634dd6` (competitive) |
 | AI Rationale Visibility Hardening | v0.2.7 | Dynamically track and display visibility sources for rival AI rationales in debrief and instructor summaries | 241 | `bf0414a383634dd6` (competitive) |
+| Competitive Month-Summary Clarity | v0.2.8 | Display player's resolved commands, rival public action details, resolved effects, and next month's resources | 242 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Competitive Month-Summary Clarity
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.2.8
+
+  Summary:
+  Enhanced the month resolution summary in the competitive campaign CLI to display player's resolved commands, detailed rival public actions, resolved attributed effects, and next month's starting resources.
+
+  Done:
+  - Formatted and printed the player's resolved commands in `resolution_summary_lines`.
+  - Detailed each logged public action for the resolved month with system name and entry summary.
+  - Formatted and listed resolved `AttributedEffect` entries.
+  - Displayed the player's next-month starting resources.
+  - Added unit test in `src/competitive/resolution.rs` validating formatting output correctness.
+  - Bumped package version to `0.2.8`.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign resolution rules.
+  - No database or telemetry collection addition.
+  - State transition calculations and golden hash values remain unchanged.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test` (all 242 tests pass)
 
 - Feature: AI Rationale Visibility Hardening
   Status: Complete

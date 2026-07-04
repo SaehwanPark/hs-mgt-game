@@ -1,17 +1,14 @@
-# Evidence Map - Competitive Autocomplete Hardening (Phase 1)
+# Evidence Map - Month-Summary Clarity
 
-## Scope
-This slice is a purely technical UI/UX enhancement for the competitive command-line interface.
+## Assumptions
+- CLI visibility of resolved actions improves player strategic alignment and mitigates "opaque state" complaints.
+- Display of next month resources immediately after resolution helps players budget action points and cash runway without waiting for the next full prompt cycle.
+- Public action details are already tracked in the transition log but were previously aggregated and hidden under a count in student view.
 
-## Sources Reviewed
-1. **docs/cli-command-grammar-draft.md** (Section: Autocomplete)
-   - *Key finding:* Defines the expectations for Tab autocompletion:
-     - Verb completion (already implemented).
-     - Argument key completion (e.g., typing `invest ` and Tab cycles `domain=` and `amount=`).
-     - Enum value completion (e.g., typing `invest domain=` and Tab cycles `beds`, `outpatient`, `technology`).
-     - No filesystem completion.
+## Precedents
+- Business strategy games (e.g., Capsim) print turn-by-turn resolution reports highlighting player inputs and competitor public choices.
+- Serious educational game design recommends immediate feedback loops linking player commands directly to metrics updates.
 
-## Mechanisms and Abstractions
-1. **State-Free Text Completion:**
-   - The autocompletion candidates are derived solely from the command grammar schema and the user's typed line prefix.
-   - The command schema defines static arguments and enum domains for each verb.
+## Calibration / Abstractions
+- **Attributed Effects**: Stylized attribution linking causes (e.g. recruit, invest) to metric deltas (staffed beds, trust).
+- **Public Action Log**: Simplified categorization of public versus private action domains (e.g., access pledges are public, monitoring is private).

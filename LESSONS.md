@@ -400,3 +400,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Resolution: Consolidated both stabilization and competitive campaign debriefing functions (including the new instructor run summaries) into the `src/debrief/report.rs` module. The CLI campaign runner and the MCP session end endpoint call the exact same module functions, sharing the same representations.
 - Prevention: Keep all report formatting and debrief generation code in `src/debrief` and have other layers (CLI and MCP) consume it, ensuring a single source of truth for debriefing text.
 
+## write_to_file Scopes and Parameter Mismatch Scrutiny
+
+- Context: Updating workspace pipeline files (`_workspace/*`) under the harness team spec.
+- Symptom: `write_to_file` returned a tool error when writing to `_workspace/00_input/request-summary.md` with `ArtifactMetadata` specified.
+- Cause: Specifying `ArtifactMetadata` flags the file as an agent artifact, which the tool restricts to the absolute path `/home/saehwan/.gemini/antigravity-cli/brain/`.
+- Resolution: Omit `ArtifactMetadata` entirely when creating or modifying standard workspace and codebase files outside the conversation-specific artifacts directory.
+- Prevention: Do not include `ArtifactMetadata` in `write_to_file` arguments unless writing a conversation report/plan directly to the chat artifacts directory.
+
+

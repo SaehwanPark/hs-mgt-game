@@ -6,6 +6,14 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.8] - 2026-07-04
+
+### Added
+- Enhanced the month resolution summary in the competitive campaign CLI to display the player's resolved commands, detailed logged rival public actions, and resolved attributed effects.
+- Added start-of-month starting resources summary (AP, Cash, Political Capital, active project draws) directly to the end of the turn resolution output to improve runway planning and strategy visibility.
+- Added comprehensive unit tests verifying the formatting and correctness of the new resolution summary sections.
+- Bumped package version to `0.2.8`.
+
 ## [0.2.7] - 2026-07-04
 
 ### Added
