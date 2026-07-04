@@ -6,7 +6,7 @@ This document serves as the official parameter and evidence ledger for the **Nur
 
 The nursing workforce mechanism simulates the strategic tension between hospital capacity, labor expenditures, and nursing burnout/trust. 
 - In the **stabilization campaign**, the player uses `RespondToWorkforcePressure` (specifying `retention_spend` and `schedule_relief_commitment`) to avert nurse work actions.
-- In the **competitive campaign**, the player uses `Recruit` commands to hire nurses, which cost capital and AP, and resolve with a monthly delay. Recruiting also temporarily decreases staffing trust while added capacity is pending.
+- In the **competitive campaign**, the player uses `Recruit` commands to hire nurses, which cost cash and AP, and resolve with a monthly delay. Recruiting also decreases workforce trust when capacity resolves.
 
 ---
 
@@ -27,11 +27,11 @@ The table below maps the workforce-related parameters and formulas from the code
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **Nurse Staffing Burnout Trigger** | [labor.rs:L20](file:///home/saehwan/repos/hs-mgt-game/src/actors/labor.rs#L20) | `prior_workforce_trust < 60` | Literature-grounded | California AB 394 Safe Staffing Law (1999) | Ratios below safe minimums trigger labor tension. 60% represents the threshold below which understaffing forces union actions. |
 | **Nurse Recruitment Delay** | [competitive_command.rs:L89](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_command.rs#L89) | `RecruitRole::Nurse = 1 month` | Literature-grounded | NSI National Health Care Retention & RN Staffing Report (2026) | National average time-to-fill for an RN vacancy is **78 days** (approx. 2.6 months). In a monthly CLI loop, a 1-month delay is a stylized, conservative representation of this hiring lag. |
-| **Nurse Recruitment Cost** | [competitive_command.rs:L94](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_command.rs#L94) | `$5` per nurse unit (AP cost = 1) | Stylized abstraction | NSI 2026 RN Staffing Report; BLS Occupational Employment Statistics | Represents advertising, onboarding, and training costs, scaled to fit the game's cash units. |
+| **Nurse Recruitment Cost** | [competitive_command.rs:L125-129](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_command.rs#L125-L129) | `$5` per nurse unit (AP cost = 1) | Stylized abstraction | NSI 2026 RN Staffing Report; BLS Occupational Employment Statistics | Represents advertising, onboarding, and training costs, scaled to fit the game's cash units. |
 | **Beds Addition Trust Penalty** | [transition.rs:L45](file:///home/saehwan/repos/hs-mgt-game/src/sim/transition.rs#L45) | `next.workforce_trust -= add_staffed_beds / 4` | Literature-grounded | Aiken et al. (2002) JAMA study on nurse-to-patient ratios | Adding staffed beds without hiring additional nurses increases the patient-to-nurse ratio, which Aiken et al. showed increases the odds of nurse burnout and job dissatisfaction. |
 | **Schedule Relief Trust Benefit** | [transition.rs:L90](file:///home/saehwan/repos/hs-mgt-game/src/sim/transition.rs#L90) | `next.workforce_trust += schedule_relief_commitment / 2` | Stylized abstraction | McHugh et al. (2011) Policy, Politics & Nursing Practice | Offering schedule relief and reducing overtime hours significantly improves retention and trust. Formulated as a linear recovery index. |
 | **Labor Credible Offer Threshold** | [labor.rs:L18-19](file:///home/saehwan/repos/hs-mgt-game/src/actors/labor.rs#L18-L19) | `retention_spend >= ruleset.minimum_retention_spend` (5) and `schedule_relief >= ruleset.minimum_schedule_relief` (3) | Gameplay-driven | Default Demo Ruleset (`v0.1.9`) | Minimum credible thresholds for labor negotiations. Sourced for game pacing and preventing player exploitation of zero-cost inputs. |
-| **Pending Hire Trust Drop** | [effects_competitive.rs:L61](file:///home/saehwan/repos/hs-mgt-game/src/sim/effects_competitive.rs#L61) | `workforce_trust -= headcount` | Stylized abstraction | Selected workforce shortage literature | Trust declines temporarily when staff are recruited but not yet on board, reflecting immediate workload pressure on existing staff. |
+| **Recruitment Capacity Trust Drop** | [effects_competitive.rs:L61](file:///home/saehwan/repos/hs-mgt-game/src/sim/effects_competitive.rs#L61) | `workforce_trust -= headcount` | Stylized abstraction | Selected workforce shortage literature | Trust declines when recruitment resolves and staffed beds increase, reflecting onboarding workload friction and staffing ratio constraints. |
 | **Strike Temporary Cost Premium** | [exemplary-scenario-brief.md:L86](file:///home/saehwan/repos/hs-mgt-game/docs/exemplary-scenario-brief.md#L86) | `$30,000/month` | Literature-grounded | American Association of Colleges of Nursing (AACN) | Strike contingency costs (e.g., travel nurses) typically run 2x to 3x higher than standard registry rates. |
 
 ---
@@ -39,7 +39,7 @@ The table below maps the workforce-related parameters and formulas from the code
 ## 3. Key Lit-Review Grounding
 
 ### Safe Staffing Ratios (California AB 394)
-California Assembly Bill 394 (passed in 1999, implemented in 2004) was the first US law to mandate specific, unit-specific numerical nurse-to-patient staffing ratios (e.g., 1:5 in medical-surgical units, 1:2 in intensive care). Ratios below these levels are treated by nurses and unions as unsafe working conditions, resulting in immediate labor grievances. This supports the game's modeling of a distinct "staffing ratio trust threshold" below which strikes or union burnout crises trigger.
+California Assembly Bill 394 (passed in 1999, implemented in 2004) was the first US law to mandate unit-specific numerical nurse-to-patient staffing ratios (e.g., 1:5 in medical-surgical units, 1:2 in intensive care). Ratios below these levels are treated by nurses and unions as unsafe working conditions, resulting in immediate labor grievances. This supports the game's modeling of a distinct "staffing ratio trust threshold" below which strikes or union burnout crises trigger.
 
 ### Linda Aiken's JAMA 2002 Study
 In a landmark study published in the *Journal of the American Medical Association*, Linda H. Aiken and colleagues demonstrated that for each additional patient per nurse beyond the baseline:

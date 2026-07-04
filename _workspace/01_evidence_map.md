@@ -25,7 +25,7 @@ This evidence map converts literature and data on nursing labor markets, safe st
    - *Abstractions:* 1-month recruitment delay for nurses (stylized 1-turn delay in CLI).
 2. **Capacity Staffing Friction:**
    - *Real-world basis:* Staffing beds without nurses reduces quality and increases burnout.
-   - *Abstractions:* Bed addition without recruitment reduces `workforce_trust` by `/ 4`.
+   - *Abstractions:* Bed addition without recruitment reduces `workforce_trust` by `add_staffed_beds / 4`.
 3. **Union/Labor Action Trigger:**
    - *Real-world basis:* Grievances under poor staffing ratios.
    - *Abstractions:* `prior_workforce_trust < 60` triggers strike threat / work action.

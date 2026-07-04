@@ -23,14 +23,14 @@ Defines the mapping between the conceptual model parameters and their mathematic
    $$\Delta T_{\text{workforce}} = +\frac{\text{schedule\_relief}}{2}$$
    - *Label:* Stylized abstraction.
 3. **Workforce Strike Trigger:**
-   $$\text{Decision} = \text{WorkAction} \quad \text{if} \quad T_{\text{workforce}} < 60 \quad \text{and} \quad \text{spend} < \text{minimum}$$
-   - *Label:* Literature-grounded / Gameplay-driven.
+   $$\text{Decision} = \text{WorkAction} \quad \text{if} \quad \text{not } \text{credible\_offer}$$
+   - *Label:* Gameplay-driven (Note: `T_workforce < 60` or `sick_call_pressure` activates `labor_pressure` which is required for a `Cooperative` outcome, but `WorkAction` triggers unconditionally if the offer is not credible).
 
 ### Competitive Campaign (`src/sim/transition_competitive.rs`)
 
 1. **Hiring Lag:**
    $$\text{Delay}_{\text{nurse}} = 1 \text{ month}$$
    - *Label:* Literature-grounded (78-day NSI average).
-2. **Pending Staffing Burden:**
+2. **Recruitment Capacity Staffing Burden:**
    $$\Delta T_{\text{workforce}} = -\text{headcount}$$
-   - *Label:* Stylized abstraction.
+   - *Label:* Stylized abstraction (applied when recruitment resolves).
