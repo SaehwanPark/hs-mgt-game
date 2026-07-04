@@ -87,6 +87,29 @@ reconstructing it from the diff.
 | Versioning Policy Alignment | v0.5.1 | Align version history and policy docs with repository governance standards | 252 | `e73a38b3951cd8b6` (competitive) |
 | Test Hang and Playtest Fixes | v0.5.2 | Fix test suite hangs under interactive stdin and index out of bounds in playtests | 252 | `e73a38b3951cd8b6` (competitive) |
 | Strategy-Space Diagnostics Tooling | v0.5.3 | Implement offline replay diagnostics script for strategy cluster and resource outcome analysis | 252 | `e73a38b3951cd8b6` (competitive) |
+| MCP Custom Scenario Loading | v0.5.4 | Implement custom scenario path loading in the MCP start_session tool with validation and tests | 255 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: MCP Custom Scenario Loading
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.5.4
+
+  Summary:
+  Implemented custom scenario file loading in the MCP stdio server's `start_session` tool via the optional `scenario_path` parameter, supporting validation and initial state derivation for both stabilization and competitive scenarios.
+
+  Done:
+  - Added `scenario_path: Option<String>` to `StartSessionRequest` in `src/mcp/session.rs`.
+  - Refactored `start_stabilization` and `start_competitive` to validate and extract genesis states from custom loaded scenarios.
+  - Implemented unit tests for custom scenario loading and validation error conditions in `src/mcp/session.rs`.
+  - Bumped Cargo.toml version to `0.5.4`.
+
+  Deferred / Non-Goals:
+  - No network/HTTP scenario fetching.
+
+  Verification:
+  - cargo check
+  - cargo test (all 255 tests pass)
 
 
 - Feature: Strategy-Space Diagnostics Tooling

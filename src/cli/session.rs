@@ -1,4 +1,3 @@
-
 use crate::artifact::{describe_replay_artifact_error, write_replay_artifact};
 use crate::inputs::resolve_inputs;
 use crate::model::{
