@@ -78,7 +78,31 @@ reconstructing it from the diff.
 | Evidence ledger (Workforce) | v0.2.4 | Create parameter/evidence ledger for Nursing Workforce & Retention; update evidence registry | 233 | `bf0414a383634dd6` (competitive) |
 | Competitive campaign autocomplete hardening | v0.2.5 | Implement argument-key and enum-value autocomplete in the CLI REPL for competitive campaigns | 237 | `bf0414a383634dd6` (competitive) |
 | Competitive debrief decision-quality review | v0.2.6 | Implement deterministic checks (runway, workforce trust, payer posture, rival response) in competitive debrief | 238 | `bf0414a383634dd6` (competitive) |
+| AI Rationale Visibility Hardening | v0.2.7 | Dynamically track and display visibility sources for rival AI rationales in debrief and instructor summaries | 241 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: AI Rationale Visibility Hardening
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.2.7
+
+  Summary:
+  Dynamically track and display visibility sources for rival AI rationales in both student-facing debriefs and instructor summaries.
+
+  Done:
+  - Check and attribute rival AI rationales to `(observed via monitor)` or `(observed via public disclosure)` in `competitive_debrief`.
+  - Refactor `competitive_instructor_summary` to attribute rationale visibility source dynamically during instructor review, showing `(unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)` only for private, unobserved actions.
+  - Colocate comprehensive unit tests in `src/debrief/report_tests.rs` covering all visibility state combinations.
+  - Bump package version to `v0.2.7`.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign debrief structure.
+  - No changes to core simulation transition logic or scenario files.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test` (all 241 tests pass)
 
 - Feature: Competitive debrief decision-quality review
   Status: Complete
