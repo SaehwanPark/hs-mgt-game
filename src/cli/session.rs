@@ -1,4 +1,3 @@
-
 use crate::artifact::{describe_replay_artifact_error, write_replay_artifact};
 use crate::inputs::resolve_inputs;
 use crate::model::{
@@ -71,7 +70,13 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
         2 => crate::model::Difficulty::Easy,
         3 => crate::model::Difficulty::Normal,
         4 => crate::model::Difficulty::Hard,
-        _ => crate::model::Difficulty::Expert,
+        5 => crate::model::Difficulty::Expert,
+        other => {
+          return Err(CliError::ScenarioLoadFailed(format!(
+            "custom competitive scenario must have between 2 and 5 systems, got {}",
+            other
+          )));
+        }
       };
 
       use crate::cli::input::ReadLineOutcome;

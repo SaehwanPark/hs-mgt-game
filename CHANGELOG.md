@@ -6,6 +6,13 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.4] - 2026-07-04
+
+### Added
+- Implemented custom scenario file loading in the MCP stdio server's `start_session` tool via the optional `scenario_path` parameter.
+- Integrated validation and initial state derivation for both custom stabilization and competitive scenarios in the MCP server.
+- Added unit tests for custom scenario loading and validation in `src/mcp/session.rs`.
+
 ## [0.5.3] - 2026-07-04
 
 ### Added

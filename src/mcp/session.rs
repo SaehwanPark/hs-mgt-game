@@ -16,7 +16,10 @@ use crate::model::{
   Observation, PlayerObservation, Ruleset, SystemMonthlyBatch, Transition,
   default_competitive_ruleset, default_ruleset,
 };
-use crate::scenario::{default_stabilization_scenario, validate_stabilization_scenario};
+use crate::scenario::{
+  Scenario, default_stabilization_scenario, validate_competitive_scenario,
+  validate_stabilization_scenario,
+};
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -26,6 +29,7 @@ pub struct StartSessionRequest {
   pub campaign: String,
   pub seed: Option<u64>,
   pub difficulty: Option<String>,
+  pub scenario_path: Option<String>,
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
@@ -144,11 +148,65 @@ impl GameSessionStore {
     let campaign = parse_campaign(&request.campaign)?;
     let session_id = self.allocate_session_id();
 
+    let custom_scenario = if let Some(ref path_str) = request.scenario_path {
+      let path = std::path::Path::new(path_str);
+      let scenario = crate::scenario::load_scenario_file(path)
+        .map_err(|error| error_message(format!("could not load scenario file: {error}")))?;
+      if scenario.campaign_id != request.campaign {
+        return Err(error_message(format!(
+          "scenario campaign '{}' does not match request campaign '{}'",
+          scenario.campaign_id, request.campaign
+        )));
+      }
+      Some(scenario)
+    } else {
+      None
+    };
+
     let session = match campaign {
-      CampaignId::StabilizationV1 => GameSession::Stabilization(start_stabilization(seed)?),
+      CampaignId::StabilizationV1 => {
+        GameSession::Stabilization(start_stabilization(seed, custom_scenario)?)
+      }
       CampaignId::CompetitiveRegionalV1 => {
-        let difficulty = parse_difficulty(request.difficulty.as_deref())?;
-        GameSession::Competitive(start_competitive(seed, difficulty))
+        let difficulty = match request.difficulty.as_deref() {
+          Some(diff_str) => {
+            let difficulty = parse_difficulty(Some(diff_str))?;
+            if let Some(systems) = custom_scenario
+              .as_ref()
+              .and_then(|s| s.systems.as_ref())
+              .filter(|systems| systems.len() as u32 != difficulty.k_rivals() + 1)
+            {
+              return Err(error_message(format!(
+                "difficulty '{}' expects {} systems (1 human + {} rivals), but scenario has {}",
+                difficulty.label(),
+                difficulty.k_rivals() + 1,
+                difficulty.k_rivals(),
+                systems.len()
+              )));
+            }
+            difficulty
+          }
+          None => {
+            if let Some(ref scenario) = custom_scenario {
+              let systems_len = scenario.systems.as_ref().map(|s| s.len()).unwrap_or(0);
+              match systems_len {
+                2 => Difficulty::Easy,
+                3 => Difficulty::Normal,
+                4 => Difficulty::Hard,
+                5 => Difficulty::Expert,
+                other => {
+                  return Err(error_message(format!(
+                    "custom competitive scenario must have between 2 and 5 systems, got {}",
+                    other
+                  )));
+                }
+              }
+            } else {
+              Difficulty::Normal
+            }
+          }
+        };
+        GameSession::Competitive(start_competitive(seed, difficulty, custom_scenario)?)
       }
     };
 
@@ -365,12 +423,18 @@ impl GameSession {
   }
 }
 
-fn start_stabilization(seed: u64) -> Result<StabilizationSession, McpErrorMessage> {
+fn start_stabilization(
+  seed: u64,
+  custom_scenario: Option<Scenario>,
+) -> Result<StabilizationSession, McpErrorMessage> {
   let ruleset = default_ruleset();
-  let scenario = default_stabilization_scenario()
-    .map_err(|error| error_message(format!("default stabilization scenario: {error}")))?;
+  let scenario = match custom_scenario {
+    Some(s) => s,
+    None => default_stabilization_scenario()
+      .map_err(|error| error_message(format!("default stabilization scenario: {error}")))?,
+  };
   validate_stabilization_scenario(&scenario, &ruleset)
-    .map_err(|error| error_message(format!("default stabilization scenario: {error}")))?;
+    .map_err(|error| error_message(format!("invalid stabilization scenario: {error}")))?;
   let genesis = scenario.initial_world_state();
 
   Ok(StabilizationSession {
@@ -385,11 +449,28 @@ fn start_stabilization(seed: u64) -> Result<StabilizationSession, McpErrorMessag
   })
 }
 
-fn start_competitive(seed: u64, difficulty: Difficulty) -> CompetitiveSession {
+fn start_competitive(
+  seed: u64,
+  difficulty: Difficulty,
+  custom_scenario: Option<Scenario>,
+) -> Result<CompetitiveSession, McpErrorMessage> {
   let ruleset = default_competitive_ruleset();
-  let genesis = genesis_competitive_world_with_ruleset(difficulty, &ruleset);
+  let genesis = match custom_scenario {
+    Some(scenario) => {
+      validate_competitive_scenario(&scenario, &ruleset)
+        .map_err(|error| error_message(format!("invalid competitive scenario: {error}")))?;
+      scenario
+        .initial_competitive_world_state(difficulty, &ruleset)
+        .map_err(|error| {
+          error_message(format!(
+            "failed to initialize competitive world state: {error}"
+          ))
+        })?
+    }
+    None => genesis_competitive_world_with_ruleset(difficulty, &ruleset),
+  };
 
-  CompetitiveSession {
+  Ok(CompetitiveSession {
     seed,
     ruleset,
     history: CompetitiveHistory {
@@ -399,7 +480,7 @@ fn start_competitive(seed: u64, difficulty: Difficulty) -> CompetitiveSession {
     current: genesis,
     prior_aggregated: None,
     done: false,
-  }
+  })
 }
 
 fn advance_stabilization(
@@ -624,6 +705,7 @@ mod tests {
         campaign: campaign.to_string(),
         seed: Some(42),
         difficulty: Some("normal".to_string()),
+        scenario_path: None,
       })
       .expect("session")
   }
@@ -911,5 +993,75 @@ mod tests {
         .expect("second transition")
         .state_hash
     );
+  }
+
+  #[test]
+  fn starts_session_with_custom_scenario_path() {
+    let mut store = GameSessionStore::default();
+    let session = store
+      .start_session(StartSessionRequest {
+        campaign: "stabilization-v1".to_string(),
+        seed: Some(42),
+        difficulty: None,
+        scenario_path: Some("scenarios/stabilization-v1.toml".to_string()),
+      })
+      .expect("session with custom scenario");
+
+    assert_eq!(session.campaign, "stabilization-v1");
+    assert_eq!(session.turn, 1);
+    assert!(session.observation.iter().any(|line| line.contains("Cash")));
+  }
+
+  #[test]
+  fn start_session_fails_on_campaign_mismatch() {
+    let mut store = GameSessionStore::default();
+    let result = store.start_session(StartSessionRequest {
+      campaign: "stabilization-v1".to_string(),
+      seed: Some(42),
+      difficulty: None,
+      scenario_path: Some("scenarios/competitive-v1-template.toml".to_string()),
+    });
+
+    assert!(result.is_err());
+    let err = result.unwrap_err();
+    assert!(err.error.contains("does not match request campaign"));
+  }
+
+  #[test]
+  fn starts_competitive_session_with_custom_scenario_path() {
+    let mut store = GameSessionStore::default();
+    let session = store
+      .start_session(StartSessionRequest {
+        campaign: "competitive-regional-v1".to_string(),
+        seed: Some(42),
+        difficulty: None,
+        scenario_path: Some("scenarios/competitive-v1-template.toml".to_string()),
+      })
+      .expect("session with custom competitive scenario");
+
+    assert_eq!(session.campaign, "competitive-regional-v1");
+    assert_eq!(session.turn, 1);
+    assert_eq!(session.difficulty, Some("Normal".to_string())); // Derived from 3 systems
+    assert!(
+      session
+        .observation
+        .iter()
+        .any(|line| line.contains("Riverside"))
+    );
+  }
+
+  #[test]
+  fn starts_competitive_session_fails_on_difficulty_mismatch() {
+    let mut store = GameSessionStore::default();
+    let result = store.start_session(StartSessionRequest {
+      campaign: "competitive-regional-v1".to_string(),
+      seed: Some(42),
+      difficulty: Some("easy".to_string()), // expects 2 systems, template has 3
+      scenario_path: Some("scenarios/competitive-v1-template.toml".to_string()),
+    });
+
+    assert!(result.is_err());
+    let err = result.unwrap_err();
+    assert!(err.error.contains("expects 2 systems"));
   }
 }
