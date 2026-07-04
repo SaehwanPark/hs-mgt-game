@@ -415,4 +415,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: The system genesis template initialized administrator counts below their target ratio, creating a starting admin deficit that triggered immediate burnout penalties in turn 0/genesis calculations.
 - Prevention: Ensure that all starting staffing headcounts are set to at least their target ratio levels in the genesis template unless a starting deficit is intentionally part of the scenario. In unit tests, explicitly set target counts for all supporting headcounts (like admins) to isolate the testing of a specific deficit (like nurses).
 
+## Competitive Staffing and Capacity Design Safeguards
+
+- Context: Addressing senior code reviewer findings for Track 5 clinical service line capacity and staffing.
+- Symptoms: Compounding exponential decay of access/quality metrics; AI players unable to recruit physicians/admins; immediate understaffing penalties due to instant construction vs. delayed recruitment; leaking rival private events in CLI summaries; integer division budget exploits.
+- Causes & Resolutions:
+  - **In-place Metric Mutation vs. Additive Penalties:** Direct multiplication of state metrics (`access_index`, `quality_index`) by utility ratios compounds exponentially to 0. Resolved by replacing multiplication with a linear monthly additive drop proportional to the staffing deficit severity.
+  - **AI Competitor Completeness:** AI players were restricted to `RecruitRole::Nurse`. Resolved by extending AI candidate command generation to check and generate recruitment options for physicians and admins when their counts fall below target ratios.
+  - **Physical Capacity Construction Delays:** Instant physical bed expansion paired with delayed nurse recruitment resulted in immediate, unavoidable turn-0 penalties. Resolved by queuing bed capacity additions with a 1-month delay, matching outpatient clinics, allowing players to recruit beforehand.
+  - **Rival Event Filtering:** Rival private operational events (burnout, etc.) were displayed to the player. Resolved by filtering player-facing summaries to skip events starting with competitor names.
+  - **Budget Division Exploits:** Players could buy projects with non-multiple budgets, under-paying total costs due to integer truncation. Resolved by validating that project budgets must be a multiple of the duration.
+- Prevention: Always use additive drops for ongoing penalties, ensure AI player vocabulary handles all roles, keep construction and recruitment delays aligned, maintain observation boundaries in displays, and validate budget divisibility.
+
 
