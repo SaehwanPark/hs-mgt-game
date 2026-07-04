@@ -1,43 +1,10 @@
-# Domain QA - Competitive Autocomplete Hardening (Phase 4)
+# Domain QA - Month-Summary Clarity
+
+## Checklist
+- [x] Separation of true state and observations is preserved (Rivals' private actions remain hidden, only public actions and the player's own resolved actions are displayed).
+- [x] Simulation determinism is unaffected (state transition calculations are completely untouched, only formatting is expanded).
+- [x] Educational debrief links are verified (the summary explicitly lists the starting resources and metric impacts of resolved choices).
 
 ## Status
-**PASS**
-
-## Reviewed Inputs
-- [src/cli/repl.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/repl.rs)
-- [docs/cli-command-grammar-draft.md](file:///home/saehwan/repos/hs-mgt-game/docs/cli-command-grammar-draft.md)
-
----
-
-## Findings
-
-No issues found.
-
-### 1. Functional Integrity
-- Autocompletion logic for verbs, argument keys, and enum values behaves exactly as specified in `docs/cli-command-grammar-draft.md`.
-- Already specified keys are correctly excluded from autocomplete recommendations, avoiding duplicates.
-- The completer is state-free and uses static schema matching, preserving the deterministic nature of the game and keeping it strictly in the CLI parser layer (per ADR-0006).
-
-### 2. Regression / Side Effects
-- The implementation does not affect the stabilization campaign prompt (which remains numeric).
-- Golden hashes (seed 42 competitive and stabilization) remain identical.
-- All unit, integration, and python-based automated playtests pass cleanly.
-
----
-
-## Required Fixes
-
-None.
-
----
-
-## Residual Risks
-
-None.
-
----
-
-## Verification Evidence
-- All 237 Rust tests pass cleanly under `cargo test`.
-- All automated playtests pass successfully via `python3 scripts/run_automated_playtests.py`.
-- Formatter checks (`cargo fmt --check`) and clippy checks (`cargo clippy --all-targets -- -D warnings`) compile with zero warnings or errors.
+- **Review**: Pass
+- **Details**: The display changes successfully increase user visibility of their own inputs and public competitive changes without leaking rival private information.

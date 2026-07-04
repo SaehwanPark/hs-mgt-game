@@ -1,23 +1,20 @@
-# Final Handoff - AI Rationale Visibility Hardening (Phase 5 - Track 1)
+# Final Handoff - Month-Summary Clarity (Phase 6 - Track 1)
 
 ## Summary of Changes
-
-1. **AI Rationale visibility in Competitive Debrief (`src/debrief/report.rs`):**
-   - Refactored `competitive_debrief` to append detailed visibility sources (`(observed via monitor)` or `(observed via public disclosure)`) to rival AI rationales when they are observed by the player.
-   - Refactored `competitive_instructor_summary` to dynamically calculate whether a rival's actions were monitored or public during play. It now correctly prints the appropriate visibility source instead of unconditionally labeling every rationale as unobserved during play.
-2. **Focused Unit Tests (`src/debrief/report_tests.rs`):**
-   - Added `test_competitive_debrief_rationale_visibility` which mocks a single-month transition history.
-   - Verified that rationales are completely hidden from the student when private and unmonitored.
-   - Verified that monitored private actions show the rationale with the `(observed via monitor)` tag in both student and instructor reports.
-   - Verified that public commands show the rationale with the `(observed via public disclosure)` tag in both student and instructor reports.
-3. **Specifications and Changelog (`SPEC.md`, `CHANGELOG.md`):**
-   - Documented the v0.2.7 feature entry, summary, and verification in `SPEC.md` and `CHANGELOG.md`.
-4. **Version Bump to `v0.2.7`:**
-   - Updated package version in `Cargo.toml` and ran `cargo check` to synchronize `Cargo.lock`.
-
----
+1. **Enhanced Turn Resolution Summary (`src/competitive/resolution.rs`):**
+   - Added command parser helper `format_competitive_command` that translates `CompetitiveCommand` variants back into clean CLI-equivalent command strings (e.g. `recruit role=nurse headcount=2`).
+   - Refactored `resolution_summary_lines` to retrieve the player's system ID, look up their batch, and print resolved commands.
+   - Expanded public action logging to print detailed system names and logged public entries.
+   - Displayed resolved attributed effects (e.g., `recruit → staffed_beds +2`).
+   - Appended starting resources (AP, Cash, Political Capital, active project draws) for the next month to improve financial runway planning.
+2. **Added Unit Tests:**
+   - Colocated `test_resolution_summary_lines_formatting` in `src/competitive/resolution.rs` tests.
+   - Checked that all summary headers, commands, public actions, and resources render correctly.
+3. **Repository Bookkeeping:**
+   - Bumped package version to `0.2.8` in `Cargo.toml` and updated `Cargo.lock`.
+   - Updated `CHANGELOG.md` and `SPEC.md` to document the completed slice.
 
 ## Verification Results
 - `cargo fmt --check` passes cleanly.
 - `cargo clippy --all-targets -- -D warnings` compiles with zero warnings or errors.
-- `cargo test` passes cleanly (all 241 unit/integration tests).
+- `cargo test` passes cleanly (all 242 unit and integration tests).
