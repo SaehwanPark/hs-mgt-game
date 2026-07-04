@@ -168,8 +168,24 @@ impl GameSessionStore {
         GameSession::Stabilization(start_stabilization(seed, custom_scenario)?)
       }
       CampaignId::CompetitiveRegionalV1 => {
-        let difficulty = match request.difficulty {
-          Some(ref diff_str) => parse_difficulty(Some(diff_str))?,
+        let difficulty = match request.difficulty.as_deref() {
+          Some(diff_str) => {
+            let difficulty = parse_difficulty(Some(diff_str))?;
+            if let Some(systems) = custom_scenario
+              .as_ref()
+              .and_then(|s| s.systems.as_ref())
+              .filter(|systems| systems.len() as u32 != difficulty.k_rivals() + 1)
+            {
+              return Err(error_message(format!(
+                "difficulty '{}' expects {} systems (1 human + {} rivals), but scenario has {}",
+                difficulty.label(),
+                difficulty.k_rivals() + 1,
+                difficulty.k_rivals(),
+                systems.len()
+              )));
+            }
+            difficulty
+          }
           None => {
             if let Some(ref scenario) = custom_scenario {
               let systems_len = scenario.systems.as_ref().map(|s| s.len()).unwrap_or(0);
@@ -177,7 +193,13 @@ impl GameSessionStore {
                 2 => Difficulty::Easy,
                 3 => Difficulty::Normal,
                 4 => Difficulty::Hard,
-                _ => Difficulty::Expert,
+                5 => Difficulty::Expert,
+                other => {
+                  return Err(error_message(format!(
+                    "custom competitive scenario must have between 2 and 5 systems, got {}",
+                    other
+                  )));
+                }
               }
             } else {
               Difficulty::Normal
@@ -1003,5 +1025,43 @@ mod tests {
     assert!(result.is_err());
     let err = result.unwrap_err();
     assert!(err.error.contains("does not match request campaign"));
+  }
+
+  #[test]
+  fn starts_competitive_session_with_custom_scenario_path() {
+    let mut store = GameSessionStore::default();
+    let session = store
+      .start_session(StartSessionRequest {
+        campaign: "competitive-regional-v1".to_string(),
+        seed: Some(42),
+        difficulty: None,
+        scenario_path: Some("scenarios/competitive-v1-template.toml".to_string()),
+      })
+      .expect("session with custom competitive scenario");
+
+    assert_eq!(session.campaign, "competitive-regional-v1");
+    assert_eq!(session.turn, 1);
+    assert_eq!(session.difficulty, Some("Normal".to_string())); // Derived from 3 systems
+    assert!(
+      session
+        .observation
+        .iter()
+        .any(|line| line.contains("Riverside"))
+    );
+  }
+
+  #[test]
+  fn starts_competitive_session_fails_on_difficulty_mismatch() {
+    let mut store = GameSessionStore::default();
+    let result = store.start_session(StartSessionRequest {
+      campaign: "competitive-regional-v1".to_string(),
+      seed: Some(42),
+      difficulty: Some("easy".to_string()), // expects 2 systems, template has 3
+      scenario_path: Some("scenarios/competitive-v1-template.toml".to_string()),
+    });
+
+    assert!(result.is_err());
+    let err = result.unwrap_err();
+    assert!(err.error.contains("expects 2 systems"));
   }
 }
