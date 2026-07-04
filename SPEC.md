@@ -88,7 +88,7 @@ reconstructing it from the diff.
 | Test Hang and Playtest Fixes | v0.5.2 | Fix test suite hangs under interactive stdin and index out of bounds in playtests | 252 | `e73a38b3951cd8b6` (competitive) |
 | Strategy-Space Diagnostics Tooling | v0.5.3 | Implement offline replay diagnostics script for strategy cluster and resource outcome analysis | 252 | `e73a38b3951cd8b6` (competitive) |
 | MCP Custom Scenario Loading | v0.5.4 | Implement custom scenario path loading in the MCP start_session tool with validation and tests | 255 | `e73a38b3951cd8b6` (competitive) |
-| Medicaid Public Payer Integration | v0.5.5 | Add Medicaid public payer, posture validation, resource costing, and access compliance effects | 263 | `e73a38b3951cd8b6` (competitive) |
+| Medicaid Public Payer Integration | v0.5.5 | Add Medicaid public payer, posture validation, resource costing, and access compliance effects | 261 | `e73a38b3951cd8b6` (competitive) |
 
 
 - Feature: Medicaid Public Payer Integration
@@ -111,7 +111,7 @@ reconstructing it from the diff.
   - No structural changes to HealthSystemState.
 
   Verification:
-  - cargo test (all 263 tests pass)
+  - cargo test (all 261 tests pass)
 
 
 - Feature: MCP Custom Scenario Loading
