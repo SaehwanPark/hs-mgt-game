@@ -301,7 +301,10 @@ mod tests {
     let lines = resolution_summary_lines(&transition);
     println!("--- public action details ---");
     for entry in &transition.next.public_action_log {
-      println!("entry.system_id={}, entry.summary='{}'", entry.system_id, entry.summary);
+      println!(
+        "entry.system_id={}, entry.summary='{}'",
+        entry.system_id, entry.summary
+      );
     }
     println!("-----------------------------");
     for line in &lines {
