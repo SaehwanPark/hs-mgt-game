@@ -6,6 +6,15 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.7] - 2026-07-04
+
+### Added
+- Refactored competitive end-session debriefs and instructor summaries to track and display visibility sources for rival AI rationales.
+- Rationales now explicitly show `(observed via monitor)` or `(observed via public disclosure)` when observed during play.
+- Instructor summaries dynamically attribute visibility sources and display `(unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)` only for private, unobserved actions.
+- Added comprehensive unit tests in `src/debrief/report_tests.rs` covering all visibility state combinations.
+- Bumped package version to `0.2.7`.
+
 ## [0.2.6] - 2026-07-04
 
 ### Added

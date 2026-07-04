@@ -270,7 +270,15 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
           if let Some(rationale) = &rival_batch.rationale
             && any_observed
           {
-            lines.push(format!("Rival {} rationale: {}", system.name, rationale));
+            let visibility_label = if observed {
+              "observed via monitor"
+            } else {
+              "observed via public disclosure"
+            };
+            lines.push(format!(
+              "Rival {} rationale: {} ({})",
+              system.name, rationale, visibility_label
+            ));
           }
         }
       }
@@ -400,10 +408,30 @@ pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<Strin
         };
         lines.push(format!("  Rival {}: {}", system.name, cmd_str));
         if let Some(rationale) = &rival_batch.rationale {
-          lines.push(format!(
-            "  Rival {} rationale: {} (unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)",
-            system.name, rationale
-          ));
+          let observed = monitored_system_ids.contains(&system.system_id);
+          let mut any_public = false;
+          for cmd in &rival_batch.commands {
+            if is_public_command(cmd) {
+              any_public = true;
+            }
+          }
+          let observed_during_play = observed || any_public;
+          if observed_during_play {
+            let detail = if observed {
+              "observed via monitor"
+            } else {
+              "observed via public disclosure"
+            };
+            lines.push(format!(
+              "  Rival {} rationale: {} ({})",
+              system.name, rationale, detail
+            ));
+          } else {
+            lines.push(format!(
+              "  Rival {} rationale: {} (unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)",
+              system.name, rationale
+            ));
+          }
         }
       }
     }

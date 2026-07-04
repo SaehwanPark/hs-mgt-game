@@ -309,3 +309,171 @@ fn test_competitive_decision_quality_warnings() {
     assert!(summary_str.contains("Warning: Rival capacity expansion by"));
   }
 }
+
+#[test]
+fn test_competitive_debrief_rationale_visibility() {
+  let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 1)
+    .expect("should build competitive history");
+
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+  let rival_system = history
+    .genesis
+    .systems
+    .iter()
+    .find(|s| s.system_id != human_system_id)
+    .unwrap();
+  let rival_id = rival_system.system_id;
+
+  // 1. Private action only, not monitored -> Rationale should be unobserved by student,
+  //    revealed for instructor.
+  {
+    let mut private_unmonitored_history = history.clone();
+
+    // Set human commands to Hold (not monitoring anyone)
+    if let Some(pos) = private_unmonitored_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == human_system_id)
+    {
+      private_unmonitored_history.transitions[0]
+        .aggregated
+        .batches[pos]
+        .commands = vec![crate::model::CompetitiveCommand::Hold];
+    }
+
+    // Set rival commands to Hold (private action) and add a rationale
+    if let Some(pos) = private_unmonitored_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == rival_id)
+    {
+      private_unmonitored_history.transitions[0]
+        .aggregated
+        .batches[pos]
+        .commands = vec![crate::model::CompetitiveCommand::Hold];
+      private_unmonitored_history.transitions[0]
+        .aggregated
+        .batches[pos]
+        .rationale = Some("Rival private rationale test".to_string());
+    }
+
+    let debrief_str = competitive_debrief(&private_unmonitored_history).join("\n");
+    let summary_str = competitive_instructor_summary(&private_unmonitored_history).join("\n");
+
+    // Student should NOT see the rationale or private actions
+    let parts: Vec<&str> = debrief_str
+      .split("=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===")
+      .collect();
+    let student_debrief = parts[0];
+    assert!(!student_debrief.contains("Rival private rationale test"));
+    assert!(student_debrief.contains("[Private Action] (unobserved by you)"));
+
+    // Instructor should see it as unobserved during play
+    assert!(summary_str.contains(
+      "Rival private rationale test (unobserved during play - REVEALED FOR INSTRUCTOR REVIEW)"
+    ));
+  }
+
+  // 2. Private action only, but monitored -> Rationale should be observed via monitor
+  {
+    let mut private_monitored_history = history.clone();
+
+    // Find the MonitorTarget corresponding to the rival system
+    let rival_name = rival_system.name.to_lowercase();
+    let target = if rival_name.contains("northlake") {
+      crate::model::MonitorTarget::Northlake
+    } else if rival_name.contains("summit") {
+      crate::model::MonitorTarget::Summit
+    } else if rival_name.contains("valley") {
+      crate::model::MonitorTarget::Valley
+    } else {
+      crate::model::MonitorTarget::Metro
+    };
+
+    // Set human commands to Monitor target
+    if let Some(pos) = private_monitored_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == human_system_id)
+    {
+      private_monitored_history.transitions[0].aggregated.batches[pos].commands =
+        vec![crate::model::CompetitiveCommand::Monitor { target, depth: 1 }];
+    }
+
+    // Set rival commands to Hold (private action) and add a rationale
+    if let Some(pos) = private_monitored_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == rival_id)
+    {
+      private_monitored_history.transitions[0].aggregated.batches[pos].commands =
+        vec![crate::model::CompetitiveCommand::Hold];
+      private_monitored_history.transitions[0].aggregated.batches[pos].rationale =
+        Some("Rival monitored rationale test".to_string());
+    }
+
+    let debrief_str = competitive_debrief(&private_monitored_history).join("\n");
+    let summary_str = competitive_instructor_summary(&private_monitored_history).join("\n");
+
+    // Student should see the rationale observed via monitor
+    let parts: Vec<&str> = debrief_str
+      .split("=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===")
+      .collect();
+    let student_debrief = parts[0];
+    assert!(student_debrief.contains("Rival monitored rationale test (observed via monitor)"));
+
+    // Instructor should see it observed via monitor
+    assert!(summary_str.contains("Rival monitored rationale test (observed via monitor)"));
+  }
+
+  // 3. Public action present, not monitored -> Rationale should be observed via public disclosure
+  {
+    let mut public_history = history.clone();
+
+    // Set human commands to Hold
+    if let Some(pos) = public_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == human_system_id)
+    {
+      public_history.transitions[0].aggregated.batches[pos].commands =
+        vec![crate::model::CompetitiveCommand::Hold];
+    }
+
+    // Set rival commands to Recruit (public action) and add a rationale
+    if let Some(pos) = public_history.transitions[0]
+      .aggregated
+      .batches
+      .iter()
+      .position(|b| b.system_id == rival_id)
+    {
+      public_history.transitions[0].aggregated.batches[pos].commands =
+        vec![crate::model::CompetitiveCommand::Recruit {
+          role: crate::model::RecruitRole::Nurse,
+          headcount: 1,
+        }];
+      public_history.transitions[0].aggregated.batches[pos].rationale =
+        Some("Rival public rationale test".to_string());
+    }
+
+    let debrief_str = competitive_debrief(&public_history).join("\n");
+    let summary_str = competitive_instructor_summary(&public_history).join("\n");
+
+    // Student should see the rationale observed via public disclosure
+    let parts: Vec<&str> = debrief_str
+      .split("=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===")
+      .collect();
+    let student_debrief = parts[0];
+    assert!(
+      student_debrief.contains("Rival public rationale test (observed via public disclosure)")
+    );
+
+    // Instructor should see it observed via public disclosure
+    assert!(summary_str.contains("Rival public rationale test (observed via public disclosure)"));
+  }
+}

@@ -1,36 +1,23 @@
-# Final Handoff - Competitive Autocomplete Hardening (Phase 5)
+# Final Handoff - AI Rationale Visibility Hardening (Phase 5 - Track 1)
 
 ## Summary of Changes
 
-1. **CLI REPL Autocomplete Hardening (`src/cli/repl.rs`):**
-   - Implemented `get_verb_args` defining the argument key and enum value schema for all competitive CLI verbs.
-   - Refactored `complete_verb_candidates` to support full token parsing and contextual autocomplete for:
-     - Verb prefixes (existing behavior preserved).
-     - Argument keys (e.g. `domain=`) after a space/partial key.
-     - Enum values (e.g. `beds`) after an `=`.
-   - Excluded already specified keys from subsequent autocomplete candidates in the same command segment.
-   - Preserved semicolon-separated command batch boundary detection.
-2. **Comprehensive Unit Tests (`src/cli/repl.rs`):**
-   - Added unit tests checking:
-     - Verb prefix completions.
-     - Semicolon-separated batch commands.
-     - Argument key completions.
-     - Deduplication of present keys.
-     - Enum value cycling and cycling with prefixes.
-3. **Workspace Tracking Files (`_workspace/`):**
-   - Framed the task in `_workspace/00_input/request-summary.md`.
-   - Updated technical findings in `_workspace/01_evidence_map.md` and `_workspace/02_mechanism_design.md`.
-   - Verified the QA report in `_workspace/03_domain_qa.md` as **PASS**.
-4. **Hygiene & Specifications (`SPEC.md`, `CHANGELOG.md`):**
-   - Documented the v0.2.5 feature and rollup details in `SPEC.md` and `CHANGELOG.md`.
-   - Updated the Future Track 2 "Competitive campaign hardening" next actionable slice definition.
-5. **Version Bump to `v0.2.5`:**
-   - Incremented version in `Cargo.toml` and `Cargo.lock`.
+1. **AI Rationale visibility in Competitive Debrief (`src/debrief/report.rs`):**
+   - Refactored `competitive_debrief` to append detailed visibility sources (`(observed via monitor)` or `(observed via public disclosure)`) to rival AI rationales when they are observed by the player.
+   - Refactored `competitive_instructor_summary` to dynamically calculate whether a rival's actions were monitored or public during play. It now correctly prints the appropriate visibility source instead of unconditionally labeling every rationale as unobserved during play.
+2. **Focused Unit Tests (`src/debrief/report_tests.rs`):**
+   - Added `test_competitive_debrief_rationale_visibility` which mocks a single-month transition history.
+   - Verified that rationales are completely hidden from the student when private and unmonitored.
+   - Verified that monitored private actions show the rationale with the `(observed via monitor)` tag in both student and instructor reports.
+   - Verified that public commands show the rationale with the `(observed via public disclosure)` tag in both student and instructor reports.
+3. **Specifications and Changelog (`SPEC.md`, `CHANGELOG.md`):**
+   - Documented the v0.2.7 feature entry, summary, and verification in `SPEC.md` and `CHANGELOG.md`.
+4. **Version Bump to `v0.2.7`:**
+   - Updated package version in `Cargo.toml` and ran `cargo check` to synchronize `Cargo.lock`.
 
 ---
 
 ## Verification Results
 - `cargo fmt --check` passes cleanly.
 - `cargo clippy --all-targets -- -D warnings` compiles with zero warnings or errors.
-- `cargo test` passes cleanly (all 237 unit/integration tests).
-- `python3 scripts/run_automated_playtests.py` passes successfully, preserving golden session hashes.
+- `cargo test` passes cleanly (all 241 unit/integration tests).
