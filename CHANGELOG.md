@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-04
+
+### Added
+- Implemented clinical service lines and staffing requirements in the competitive campaign loop, distinguishing inpatient beds (`staffed_beds`) and outpatient clinics (`outpatient_capacity`).
+- Added nurse, physician, and admin headcount metrics to `HealthSystemState`.
+- Implemented dynamic staffing ratio targets (5 beds per nurse, 10 clinics per physician, 20 capacity units per admin) and understaffing penalties.
+- Added effective capacity caps, access/quality index discounts, and workforce trust penalties due to staff burnout.
+- Updated `ProjectKind::Tower` and `ProjectKind::ClinicNetwork` to grant physical capacity units.
+- Updated state hashing and CLI display reports to render capacity and staffing metrics.
+- Added unit tests for staffing constraints, capacity resolution, and trust penalties.
+- Bumped package version to `0.3.0`.
+
 ## [0.2.9] - 2026-07-04
 
 ### Added

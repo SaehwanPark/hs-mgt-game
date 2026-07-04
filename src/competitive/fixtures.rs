@@ -119,6 +119,11 @@ fn observation_from_human_system(
     } else {
       "watch".to_string()
     },
+    staffed_beds: human.staffed_beds,
+    outpatient_capacity: human.outpatient_capacity,
+    nurses: human.nurses,
+    physicians: human.physicians,
+    admins: human.admins,
     in_flight_projects: "none".to_string(),
     cash_runway_signal: cash_runway_signal(&human.resources),
     market_bullets,

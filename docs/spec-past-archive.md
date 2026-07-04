@@ -9,6 +9,112 @@ remains in [`CHANGELOG.md`](../CHANGELOG.md). The active spec index in
 
 ---
 
+- Feature: Evidence, parameters, and model-confidence ledger
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.4
+
+  Summary:
+  Create the first parameter and evidence ledger for the Nursing Workforce & Retention mechanism (focused on nurse staffing ratios, recruitment delays/costs, and retention spend), and update the main evidence registry to link it.
+
+  Done:
+  - Create a detailed parameter/evidence ledger at `docs/workforce-ledger.md` mapping workforce-related parameters and formulas to literature citations (BLS, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
+  - Assign confidence labels matching the project schema (`Empirically calibrated`, `Literature-grounded`, `Stylized abstraction`, `Gameplay-driven`).
+  - Update `docs/evidence-registry.md` to reference and link `docs/workforce-ledger.md`.
+  - Bump project version to `0.2.4` across tracking files.
+
+  Deferred / Non-Goals:
+  - No changes to simulation transition logic or parameter values in the codebase.
+  - No database or telemetry changes.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
+
+- Feature: Exemplary scenario brief
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.3
+
+  Summary:
+  Draft the first exemplary scenario brief for the competitive regional campaign (`docs/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences, accompanied by workspace handoff documents.
+
+  Done:
+  - Draft exemplary scenario brief covering financial pressure, nurse staffing ratios, payer rate negotiations, CON objections, and delayed consequences.
+  - Complete workspace handoffs (Phase 0 input, Phase 1 evidence map, Phase 2 mechanism design, Phase 4 domain QA, and Phase 5 final handoff).
+  - Set tab size of 2 spaces and run existing tests.
+
+  Deferred / Non-Goals:
+  - No changes to simulation rules, scenario parser, or TOML loader.
+  - No changes to existing scenarios.
+
+  Verification:
+  - All unit and integration tests pass successfully (233 tests).
+
+- Feature: Instructor-visible run summary & decision-quality review
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.2
+
+  Summary:
+  Add an instructor-visible run summary and decision-quality review capability to the end-of-session debrief for both stabilization and competitive campaigns. The summary evaluates decisions made under uncertainty and lists the state/observation gap and unobserved rival moves.
+
+  Done:
+  - Add `instructor_run_summary` for stabilization to compare turn-by-turn reported access vs true access index and display measurement gaps.
+  - Add `competitive_instructor_summary` to reveal all true rival actions and rationales, explicitly labeling observed vs unobserved rival actions at debrief time.
+  - Centralize competitive debriefing in the `src/debrief/report.rs` module and clean up duplicates from MCP session logic.
+  - Print the competitive debrief at the end of the competitive campaign loop in CLI mode.
+  - Expose the instructor summaries in both CLI and MCP end-of-session debrief outputs.
+  - Set tabsize to 2 spaces and keep the simulation core deterministic and untouched.
+
+  Deferred / Non-Goals:
+  - No changes to transition rules or state/observation calculations during active play.
+  - No grading system or automated LMS scoring.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
+
+- Feature: Post-v0.2 SDD progress review
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.1
+
+  Summary:
+  Review current project progress after the public playable prototype milestone
+  and organize the next development queue without promoting a runtime feature
+  into active work. The current state is a thoroughly runnable prototype: the
+  stabilization campaign and bounded competitive preview are playable,
+  documented, deterministic, tested, and supported by reproducible AI-agent
+  playtest evidence.
+
+  Done:
+  - Keep `Present` empty so no implementation slice is implied before the next
+    explicit decision.
+  - Reframe `Future` as a ranked, gated queue that prioritizes debrief and
+    instructor-analysis quality, exemplary scenario authoring, evidence and
+    parameter confidence work, and only evidence-backed competitive hardening.
+  - Refresh stale companion documentation that still pointed to already
+    completed competitive runtime slices as next work.
+  - Record a lesson for post-milestone SDD reviews.
+  - Bump package version in `Cargo.toml`, `Cargo.lock`, and `CHANGELOG.md`.
+
+  Deferred / Non-Goals:
+  - No changes to transition rules, simulation physics, command syntax,
+    scenario schemas, replay formats, MCP DTOs, gameplay balance, or public
+    product positioning.
+  - No promotion of a Future item into `Present`.
+  - No claim of empirical calibration, measured human learning, classroom
+    effectiveness, or policy-forecasting validity.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
+  - Targeted `rg` scan for stale competitive runtime and SDD status phrases`git status --short`
+
 - Feature: Public playable prototype announcement prep
   Status: Complete
   Started: 2026-07-03

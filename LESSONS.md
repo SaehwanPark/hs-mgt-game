@@ -408,4 +408,11 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Resolution: Omit `ArtifactMetadata` entirely when creating or modifying standard workspace and codebase files outside the conversation-specific artifacts directory.
 - Prevention: Do not include `ArtifactMetadata` in `write_to_file` arguments unless writing a conversation report/plan directly to the chat artifacts directory.
 
+## Scenario starting parameters should be complete to prevent initial deficits
+
+- Context: Implementing clinical capacity and staffing requirements (nurses, physicians, admins) in the competitive campaign.
+- Symptom: A unit test for the nurse staffing deficit failed because workforce trust dropped more than the isolated nurse deficit.
+- Cause: The system genesis template initialized administrator counts below their target ratio, creating a starting admin deficit that triggered immediate burnout penalties in turn 0/genesis calculations.
+- Prevention: Ensure that all starting staffing headcounts are set to at least their target ratio levels in the genesis template unless a starting deficit is intentionally part of the scenario. In unit tests, explicitly set target counts for all supporting headcounts (like admins) to isolate the testing of a specific deficit (like nurses).
+
 

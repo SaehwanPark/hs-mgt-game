@@ -1,14 +1,18 @@
-# Evidence Map - Month-Summary Clarity
+# Evidence Map - Clinical Service Lines and Staffing (Phase 6 - Track 5)
 
 ## Assumptions
-- CLI visibility of resolved actions improves player strategic alignment and mitigates "opaque state" complaints.
-- Display of next month resources immediately after resolution helps players budget action points and cash runway without waiting for the next full prompt cycle.
-- Public action details are already tracked in the transition log but were previously aggregated and hidden under a count in student view.
+- Nonprofit health systems manage two distinct clinical flows: acute inpatient care and preventive/primary outpatient care.
+- Beds require nurses to operate. Physical bed expansion without nurse recruitment leads to unstaffed beds and staff burnout.
+- Outpatient clinics require physicians to handle patient visits. Capacity expansion without physician recruitment leads to reduced outpatient throughput and patient access friction.
+- Workforce trust (morale) is highly sensitive to nurse workload and staffing deficits.
 
 ## Precedents
-- Business strategy games (e.g., Capsim) print turn-by-turn resolution reports highlighting player inputs and competitor public choices.
-- Serious educational game design recommends immediate feedback loops linking player commands directly to metrics updates.
+- **California AB 394 (Safe Staffing):** Mandates specific nurse-to-patient staffing ratios (e.g. 1 nurse to 5 patients in med-surg).
+- **Aiken JAMA 2002 (Nurse Burnout):** Literature links lower nurse-to-patient staffing ratios directly to increased nurse burnout, intention to leave, and elevated 30-day mortality.
+- **Primary Care Access (HRSA):** Shortages of physicians limit outpatient clinic operational capacity, directly correlating with lower regional access metrics.
 
 ## Calibration / Abstractions
-- **Attributed Effects**: Stylized attribution linking causes (e.g. recruit, invest) to metric deltas (staffed beds, trust).
-- **Public Action Log**: Simplified categorization of public versus private action domains (e.g., access pledges are public, monitoring is private).
+- **Staffed Beds / Inpatient Ratio:** We calibrate the med-surg equivalent at 5 inpatient beds per 1 nurse.
+- **Outpatient Capacity / Clinic Ratio:** We calibrate outpatient capacity at 10 clinic units per 1 physician.
+- **Effective Capacity:** If staffing is deficient, effective capacity is capped at `headcount * ratio`.
+- **Understaffing Penalty:** Staffing deficits subtract directly from `workforce_trust` (-1 per understaffed bed/clinic unit) and reduce `access_index` and `quality_index` proportionally to the unstaffed capacity.

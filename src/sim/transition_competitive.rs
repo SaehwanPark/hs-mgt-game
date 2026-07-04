@@ -52,6 +52,8 @@ pub fn transition_competitive(
   next.policy_calendar = prior.policy_calendar.advance();
   refresh_monthly_resources(&mut next, ruleset);
 
+  apply_staffing_constraints(&mut next, ruleset, &mut events, &mut effects);
+
   let state_hash = hash_competitive_state(&next, ruleset);
 
   Ok(crate::model::CompetitiveTransition {
@@ -138,14 +140,14 @@ fn apply_command(
         push_public_log(world, month_index, system_id, summary.clone());
       }
       if delay == 0 {
-        apply_recruit_immediate(world, system_idx, headcount, effects);
+        apply_recruit_immediate(world, system_idx, role, headcount, effects);
       } else {
         enqueue_effect(
           world,
           system_id,
           month_index,
           month_index + delay,
-          PendingEffectKind::Recruit { headcount },
+          PendingEffectKind::Recruit { role, headcount },
           format!("{summary} (resolves month {})", month_index + delay),
         );
       }
@@ -172,13 +174,14 @@ fn apply_command(
           push_effect(effects, "capacity investment", "access_index", access_delta);
         }
         InvestDomain::Outpatient => {
+          let capacity_delta = amount / 10;
           enqueue_effect(
             world,
             system_id,
             month_index,
             month_index + 1,
-            PendingEffectKind::OutpatientAccess { access_delta: 3 },
-            format!("{summary} (outpatient expansion)"),
+            PendingEffectKind::OutpatientCapacity { capacity_delta },
+            format!("{summary} (outpatient capacity expansion)"),
           );
         }
         InvestDomain::Technology => {
@@ -250,12 +253,23 @@ fn apply_command(
       let monthly_draw = budget / (resolve_months as i32);
       let summary = format!("{system_name}: started {kind:?} project (budget {budget})");
       push_public_log(world, month_index, system_id, summary.clone());
+
+      let effect_kind = match kind {
+        crate::model::ProjectKind::Tower => PendingEffectKind::BedsCapacity { capacity_delta: 20 },
+        crate::model::ProjectKind::ClinicNetwork => {
+          PendingEffectKind::OutpatientCapacity { capacity_delta: 30 }
+        }
+        crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
+          PendingEffectKind::TechnologyQuality { quality_delta: 5 }
+        }
+      };
+
       enqueue_effect(
         world,
         system_id,
         month_index,
         month_index + resolve_months,
-        PendingEffectKind::TechnologyQuality { quality_delta: 5 },
+        effect_kind,
         format!(
           "{summary} (completes month {})",
           month_index + resolve_months
@@ -277,14 +291,26 @@ fn apply_command(
 fn apply_recruit_immediate(
   world: &mut CompetitiveWorldState,
   system_idx: usize,
+  role: crate::model::RecruitRole,
   headcount: u32,
   effects: &mut Vec<crate::model::AttributedEffect>,
 ) {
   let system = &mut world.systems[system_idx];
-  let beds_delta = headcount as i32;
-  system.staffed_beds += beds_delta;
+  match role {
+    crate::model::RecruitRole::Nurse => {
+      system.nurses += headcount as i32;
+      push_effect(effects, "recruitment", "nurses", headcount as i32);
+    }
+    crate::model::RecruitRole::Physician => {
+      system.physicians += headcount as i32;
+      push_effect(effects, "recruitment", "physicians", headcount as i32);
+    }
+    crate::model::RecruitRole::Admin => {
+      system.admins += headcount as i32;
+      push_effect(effects, "recruitment", "admins", headcount as i32);
+    }
+  }
   system.workforce_trust = crate::model::clamp_metric(system.workforce_trust - headcount as i32);
-  push_effect(effects, "recruitment", "staffed_beds", beds_delta);
   push_effect(
     effects,
     "recruitment",
@@ -356,6 +382,86 @@ pub fn command_intel_summary(command: &CompetitiveCommand, system_name: &str) ->
       "{system_name}: quiet {domain:?} spend ({amount} units, below disclosure threshold)"
     )),
     _ => None,
+  }
+}
+fn apply_staffing_constraints(
+  world: &mut CompetitiveWorldState,
+  _ruleset: &CompetitiveRuleset,
+  events: &mut Vec<Event>,
+  effects: &mut Vec<crate::model::AttributedEffect>,
+) {
+  for system in &mut world.systems {
+    let target_nurses = (system.staffed_beds + 4) / 5;
+    let target_physicians = (system.outpatient_capacity + 9) / 10;
+    let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20;
+
+    let nurse_deficit = (target_nurses - system.nurses).max(0);
+    let physician_deficit = (target_physicians - system.physicians).max(0);
+    let admin_deficit = (target_admins - system.admins).max(0);
+    let total_deficit = nurse_deficit + physician_deficit + admin_deficit;
+
+    if total_deficit > 0 {
+      system.workforce_trust = crate::model::clamp_metric(system.workforce_trust - total_deficit);
+      push_effect(
+        effects,
+        "staffing deficit burnout",
+        "workforce_trust",
+        -total_deficit,
+      );
+      events.push(Event {
+        actor: "workforce",
+        description: format!(
+          "{}: staffing deficit of {} staff ({} nurses, {} physicians, {} admins) causes burnout",
+          system.name, total_deficit, nurse_deficit, physician_deficit, admin_deficit
+        ),
+      });
+    }
+
+    let effective_beds = system.staffed_beds.min(system.nurses * 5);
+    let effective_outpatient = system.outpatient_capacity.min(system.physicians * 10);
+
+    let total_physical = system.staffed_beds + system.outpatient_capacity;
+    let total_effective = effective_beds + effective_outpatient;
+
+    if total_physical > 0 && total_effective < total_physical {
+      let utility_ratio = total_effective as f32 / total_physical as f32;
+
+      let access_before = system.access_index;
+      let quality_before = system.quality_index;
+
+      system.access_index =
+        crate::model::clamp_metric((access_before as f32 * utility_ratio) as i32);
+      system.quality_index =
+        crate::model::clamp_metric((quality_before as f32 * utility_ratio) as i32);
+
+      let access_delta = system.access_index - access_before;
+      let quality_delta = system.quality_index - quality_before;
+
+      if access_delta != 0 {
+        push_effect(
+          effects,
+          "staffing capacity constraint",
+          "access_index",
+          access_delta,
+        );
+      }
+      if quality_delta != 0 {
+        push_effect(
+          effects,
+          "staffing capacity constraint",
+          "quality_index",
+          quality_delta,
+        );
+      }
+
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: understaffing reduces operational capacity (effective/physical: {}/{})",
+          system.name, total_effective, total_physical
+        ),
+      });
+    }
   }
 }
 
@@ -494,5 +600,44 @@ mod transition_competitive_tests {
       domain: InvestDomain::Beds,
       amount: 25,
     }));
+  }
+
+  #[test]
+  fn test_staffing_deficit_penalties() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+    let ruleset = default_competitive_ruleset();
+
+    // Set admins to target (ceil(218/20) = 11) to avoid admin deficit
+    world.systems[0].admins = 11;
+    // Induce a nurse deficit of 14 (118 beds needs 24 nurses, we set to 10)
+    world.systems[0].nurses = 10;
+
+    let mut events = Vec::new();
+    let mut effects = Vec::new();
+    let trust_before = world.systems[0].workforce_trust;
+
+    apply_staffing_constraints(&mut world, &ruleset, &mut events, &mut effects);
+
+    // Deficit of 14 nurses: trust should drop by 14
+    assert_eq!(world.systems[0].workforce_trust, trust_before - 14);
+
+    // Total physical capacity = 118 beds + 100 clinics = 218
+    // Total effective capacity = (10 nurses * 5 beds) + 100 clinics = 150
+    // Capacity utility ratio = 150 / 218 = ~0.68807
+    // Expected access = 68 * 0.68807 = 46
+    // Expected quality = 72 * 0.68807 = 49
+    assert_eq!(world.systems[0].access_index, 46);
+    assert_eq!(world.systems[0].quality_index, 49);
+
+    assert!(
+      events
+        .iter()
+        .any(|e| e.actor == "workforce" && e.description.contains("burnout"))
+    );
+    assert!(
+      events
+        .iter()
+        .any(|e| e.actor == "operations" && e.description.contains("understaffing"))
+    );
   }
 }
