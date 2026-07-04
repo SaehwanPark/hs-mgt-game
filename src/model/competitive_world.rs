@@ -1,4 +1,4 @@
-use super::{Difficulty, PlayerResources, PolicyCalendar};
+use super::{Difficulty, PlayerResources, PolicyCalendar, RecruitRole};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SharedMarketFields {
@@ -93,6 +93,10 @@ pub struct HealthSystemState {
   pub system_id: u32,
   pub name: String,
   pub staffed_beds: i32,
+  pub outpatient_capacity: i32,
+  pub nurses: i32,
+  pub physicians: i32,
+  pub admins: i32,
   pub access_index: i32,
   pub quality_index: i32,
   pub workforce_trust: i32,
@@ -110,9 +114,22 @@ pub struct PublicActionEntry {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PendingEffectKind {
-  Recruit { headcount: u32 },
-  OutpatientAccess { access_delta: i32 },
-  TechnologyQuality { quality_delta: i32 },
+  Recruit {
+    role: RecruitRole,
+    headcount: u32,
+  },
+  BedsCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  OutpatientCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  TechnologyQuality {
+    quality_delta: i32,
+    project_draw: Option<i32>,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

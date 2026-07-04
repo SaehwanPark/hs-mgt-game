@@ -55,29 +55,78 @@ fn apply_pending_effect(
   };
 
   match effect.kind {
-    PendingEffectKind::Recruit { headcount } => {
+    PendingEffectKind::Recruit { role, headcount } => {
       let system = &mut world.systems[system_idx];
-      system.staffed_beds += headcount as i32;
+      match role {
+        crate::model::RecruitRole::Nurse => {
+          system.nurses += headcount as i32;
+        }
+        crate::model::RecruitRole::Physician => {
+          system.physicians += headcount as i32;
+        }
+        crate::model::RecruitRole::Admin => {
+          system.admins += headcount as i32;
+        }
+      }
       system.workforce_trust = clamp_metric(system.workforce_trust - headcount as i32);
       events.push(Event {
         actor: "health_system",
         description: format!(
-          "{}: delayed recruitment resolves (+{headcount} staffed beds)",
+          "{}: delayed recruitment resolves (+{headcount} {role:?})",
+          system.name,
+          role = role
+        ),
+      });
+    }
+    PendingEffectKind::BedsCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
+      let system = &mut world.systems[system_idx];
+      system.staffed_beds += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "{}: capital project expands bed capacity (+{capacity_delta} staffed beds)",
           system.name
         ),
       });
     }
-    PendingEffectKind::OutpatientAccess { access_delta } => {
+    PendingEffectKind::OutpatientCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
       let system = &mut world.systems[system_idx];
-      system.access_index = clamp_metric(system.access_index + access_delta);
+      system.outpatient_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
       events.push(Event {
         actor: "health_system",
-        description: format!("{}: outpatient expansion improves access", system.name),
+        description: format!(
+          "{}: capacity expansion improves clinic capacity (+{capacity_delta} units)",
+          system.name
+        ),
       });
     }
-    PendingEffectKind::TechnologyQuality { quality_delta } => {
+    PendingEffectKind::TechnologyQuality {
+      quality_delta,
+      project_draw,
+    } => {
       let system = &mut world.systems[system_idx];
       system.quality_index = clamp_metric(system.quality_index + quality_delta);
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
       events.push(Event {
         actor: "health_system",
         description: format!(
@@ -152,13 +201,16 @@ mod effects_competitive_tests {
       system_id: 1,
       enqueue_month: 1,
       resolve_month: 2,
-      kind: PendingEffectKind::Recruit { headcount: 2 },
+      kind: PendingEffectKind::Recruit {
+        role: crate::model::RecruitRole::Nurse,
+        headcount: 2,
+      },
       summary: "recruiting".to_string(),
     });
-    let beds_before = world.systems[1].staffed_beds;
+    let nurses_before = world.systems[1].nurses;
     let mut events = Vec::new();
     apply_due_pending_effects(&mut world, &mut events);
-    assert_eq!(world.systems[1].staffed_beds, beds_before + 2);
+    assert_eq!(world.systems[1].nurses, nurses_before + 2);
     assert!(world.effect_queue.is_empty());
   }
 

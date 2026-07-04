@@ -94,6 +94,7 @@ pub enum CompetitiveValidationError {
   CommitLevelOutOfRange { level: u32, min: u32, max: u32 },
   ProjectBudgetNonPositive,
   ProjectBudgetBelowDuration { budget: i32, resolve_months: u32 },
+  ProjectBudgetNotDivisible { budget: i32, resolve_months: u32 },
   ProjectMonthlyDrawInfeasible { monthly_draw: i32, available: i32 },
   UnknownSystemId { system_id: u32 },
   BatchCountMismatch { expected: u32, provided: u32 },
@@ -150,6 +151,12 @@ impl CompetitiveValidationError {
         format!(
           "project budget {budget} is too small for a non-zero monthly draw over {resolve_months} months"
         )
+      }
+      CompetitiveValidationError::ProjectBudgetNotDivisible {
+        budget,
+        resolve_months,
+      } => {
+        format!("project budget {budget} must be a multiple of duration {resolve_months} months")
       }
       CompetitiveValidationError::ProjectMonthlyDrawInfeasible {
         monthly_draw,

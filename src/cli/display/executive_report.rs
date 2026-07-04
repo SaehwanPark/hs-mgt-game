@@ -71,6 +71,19 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
+  let eff_beds = observation.staffed_beds.min(observation.nurses * 5);
+  let eff_clinics = observation
+    .outpatient_capacity
+    .min(observation.physicians * 10);
+  lines.push(format!(
+    "  • Inpatient beds: {} (effective: {}) | Nurses: {}",
+    observation.staffed_beds, eff_beds, observation.nurses
+  ));
+  lines.push(format!(
+    "  • Outpatient capacity: {} units (effective: {}) | Physicians: {}",
+    observation.outpatient_capacity, eff_clinics, observation.physicians
+  ));
+  lines.push(format!("  • Administrative staff: {}", observation.admins));
   lines.push(format!(
     "  • Workforce trust: {}",
     observation.workforce_trust_summary

@@ -49,6 +49,11 @@ pub fn observe_for_human(
     } else {
       "watch".to_string()
     },
+    staffed_beds: human.staffed_beds,
+    outpatient_capacity: human.outpatient_capacity,
+    nurses: human.nurses,
+    physicians: human.physicians,
+    admins: human.admins,
     in_flight_projects: in_flight_projects_label(human.resources.active_projects),
     cash_runway_signal: cash_runway_signal(&human.resources),
     market_bullets,

@@ -81,7 +81,34 @@ reconstructing it from the diff.
 | AI Rationale Visibility Hardening | v0.2.7 | Dynamically track and display visibility sources for rival AI rationales in debrief and instructor summaries | 241 | `bf0414a383634dd6` (competitive) |
 | Competitive Month-Summary Clarity | v0.2.8 | Display player's resolved commands, rival public action details, resolved effects, and next month's resources | 242 | `bf0414a383634dd6` (competitive) |
 | Competitive Command Help Coverage | v0.2.9 | Support querying detailed help for specific commands (e.g. 'help recruit' or '? invest') in the competitive REPL | 244 | `bf0414a383634dd6` (competitive) |
+| Clinical Service Lines and Staffing | v0.3.0 | Distinguish inpatient beds/outpatient clinics and implement nurses/physicians/admins staffing constraints | 246 | `a49a2f80540ecd9b` (competitive) |
 
+
+- Feature: Clinical Service Lines and Staffing
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.3.0
+
+  Summary:
+  Implemented inpatient vs outpatient capacity structures and role-based staffing constraints (nurses, physicians, admins) in the competitive campaign, applying capacity caps and burnout penalties under deficit.
+
+  Done:
+  - Added outpatient_capacity, nurses, physicians, and admins fields to HealthSystemState.
+  - Mapped recruit and invest commands to roles and respective physical capacities.
+  - Implemented staffing ratio checks, effective capacity utility ratios, and trust/access/quality penalties.
+  - Updated Tower and ClinicNetwork projects to grant physical capacities on completion.
+  - Updated executive report display and state hash record.
+  - Added unit test coverage for staffing constraints in transition_competitive.rs.
+  - Bumped package version to v0.3.0.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop.
+  - No multiplayer network capabilities.
+
+  Verification:
+  - cargo fmt --check
+  - cargo clippy --all-targets -- -D warnings
+  - cargo test (all 246 tests pass, golden competitive hash updated to a49a2f80540ecd9b)
 
 - Feature: Competitive Command Help Coverage
   Status: Complete
@@ -205,269 +232,7 @@ reconstructing it from the diff.
   - `cargo test` (all 237 tests pass)
   - `python3 scripts/run_automated_playtests.py`
 
-- Feature: Evidence, parameters, and model-confidence ledger
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.2.4
 
-  Summary:
-  Create the first parameter and evidence ledger for the Nursing Workforce & Retention mechanism (focused on nurse staffing ratios, recruitment delays/costs, and retention spend), and update the main evidence registry to link it.
-
-  Done:
-  - Create a detailed parameter/evidence ledger at `docs/workforce-ledger.md` mapping workforce-related parameters and formulas to literature citations (BLS, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
-  - Assign confidence labels matching the project schema (`Empirically calibrated`, `Literature-grounded`, `Stylized abstraction`, `Gameplay-driven`).
-  - Update `docs/evidence-registry.md` to reference and link `docs/workforce-ledger.md`.
-  - Bump project version to `0.2.4` across tracking files.
-
-  Deferred / Non-Goals:
-  - No changes to simulation transition logic or parameter values in the codebase.
-  - No database or telemetry changes.
-
-  Verification:
-  - `cargo fmt --check`
-  - `cargo clippy --all-targets -- -D warnings`
-  - `cargo test`
-
-- Feature: Exemplary scenario brief
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.2.3
-
-  Summary:
-  Draft the first exemplary scenario brief for the competitive regional campaign (`docs/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences, accompanied by workspace handoff documents.
-
-  Done:
-  - Draft exemplary scenario brief covering financial pressure, nurse staffing ratios, payer rate negotiations, CON objections, and delayed consequences.
-  - Complete workspace handoffs (Phase 0 input, Phase 1 evidence map, Phase 2 mechanism design, Phase 4 domain QA, and Phase 5 final handoff).
-  - Set tab size of 2 spaces and run existing tests.
-
-  Deferred / Non-Goals:
-  - No changes to simulation rules, scenario parser, or TOML loader.
-  - No changes to existing scenarios.
-
-  Verification:
-  - All unit and integration tests pass successfully (233 tests).
-
-- Feature: Instructor-visible run summary & decision-quality review
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.2.2
-
-  Summary:
-  Add an instructor-visible run summary and decision-quality review capability to the end-of-session debrief for both stabilization and competitive campaigns. The summary evaluates decisions made under uncertainty and lists the state/observation gap and unobserved rival moves.
-
-  Done:
-  - Add `instructor_run_summary` for stabilization to compare turn-by-turn reported access vs true access index and display measurement gaps.
-  - Add `competitive_instructor_summary` to reveal all true rival actions and rationales, explicitly labeling observed vs unobserved rival actions at debrief time.
-  - Centralize competitive debriefing in the `src/debrief/report.rs` module and clean up duplicates from MCP session logic.
-  - Print the competitive debrief at the end of the competitive campaign loop in CLI mode.
-  - Expose the instructor summaries in both CLI and MCP end-of-session debrief outputs.
-  - Set tabsize to 2 spaces and keep the simulation core deterministic and untouched.
-
-  Deferred / Non-Goals:
-  - No changes to transition rules or state/observation calculations during active play.
-  - No grading system or automated LMS scoring.
-
-  Verification:
-  - `cargo fmt --check`
-  - `cargo clippy --all-targets -- -D warnings`
-  - `cargo test`
-
-- Feature: Post-v0.2 SDD progress review
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.2.1
-
-  Summary:
-  Review current project progress after the public playable prototype milestone
-  and organize the next development queue without promoting a runtime feature
-  into active work. The current state is a thoroughly runnable prototype: the
-  stabilization campaign and bounded competitive preview are playable,
-  documented, deterministic, tested, and supported by reproducible AI-agent
-  playtest evidence.
-
-  Done:
-  - Keep `Present` empty so no implementation slice is implied before the next
-    explicit decision.
-  - Reframe `Future` as a ranked, gated queue that prioritizes debrief and
-    instructor-analysis quality, exemplary scenario authoring, evidence and
-    parameter confidence work, and only evidence-backed competitive hardening.
-  - Refresh stale companion documentation that still pointed to already
-    completed competitive runtime slices as next work.
-  - Record a lesson for post-milestone SDD reviews.
-  - Bump package version in `Cargo.toml`, `Cargo.lock`, and `CHANGELOG.md`.
-
-  Deferred / Non-Goals:
-  - No changes to transition rules, simulation physics, command syntax,
-    scenario schemas, replay formats, MCP DTOs, gameplay balance, or public
-    product positioning.
-  - No promotion of a Future item into `Present`.
-  - No claim of empirical calibration, measured human learning, classroom
-    effectiveness, or policy-forecasting validity.
-
-  Verification:
-  - `cargo fmt --check`
-  - `cargo clippy --all-targets -- -D warnings`
-  - `cargo test`
-  - Targeted `rg` scan for stale competitive runtime and SDD status phrases`git status --short`
-
-- Feature: SPEC.md cleanup and version bump
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.1.61
-
-  Summary:
-  Clean up SPEC.md to make the Past-Present-Future distinction straightforward and comprehensible. Archive completed slices older than the six most recent ones into docs/spec-past-archive.md. Simplify the Present section, and bump the project version to v0.1.61.
-
-  Done:
-  - Archive features from v0.1.40 through v0.1.55 into `docs/spec-past-archive.md`.
-  - Retain only the six most recent slices (v0.1.56 through v0.1.61) in the active `SPEC.md` list.
-  - Simplify the `## Present` section, removing the completed-features wall of text and outlining the active cleanup task.
-  - Bump project version in Cargo.toml, Cargo.lock, and CHANGELOG.md.
-
-  Deferred / Non-Goals:
-  - No changes to transition rules, simulation physics, or state serialization logic.
-
-  Verification:
-  - All unit and integration tests pass successfully (231 tests).
-  - `git diff` shows correct file movements.
-
-- Feature: Clippy CI / release automation
-  Status: Complete
-  Started: 2026-07-03
-  Version: 0.1.60
-
-  Summary:
-  Enforce strict code quality checking by adding Clippy validations to the GitHub Actions CI pipeline and fixing all 32 existing clippy lints across the codebase.
-
-  Done:
-  - Add `cargo clippy --all-targets -- -D warnings` step to `.github/workflows/ci.yml`
-  - Refactor manual prefix checking/slicing to use `.strip_prefix()` in `src/artifact/parse.rs`, `src/artifact/session_save.rs`, and `src/artifact/verify.rs`
-  - Collapse nested conditional `if` blocks into single `if` statements with `&&`
-  - Define custom type aliases for complex type signatures in `src/cli/session.rs` and `src/mcp/session.rs`
-  - Replace manual out-of-bounds check with `RangeInclusive::contains()` in `src/artifact/session_save.rs`
-  - Annotate unused variables/imports and dead-code constants/functions with appropriate compiler warnings/dead code attributes
-  - Bump package version to `0.1.60` in `Cargo.toml`
-
-  Deferred / Non-Goals:
-  - No changes to transition rules, simulation physics, or state serialization logic
-  - No new MCP endpoints
-  - No changes to gameplay or user-facing output messages
-
-  Verification:
-  - `cargo clippy --all-targets -- -D warnings` passes with zero warnings or errors
-  - `cargo test` passes cleanly with all 231 tests
-
-- Feature: Debrief quality as product surface
-  Status: Complete
-  Started: 2026-07-02
-  Version: 0.1.59
-
-  Summary:
-  Enhance the competitive end-session debriefing logic to provide a detailed history log of player commands, rival commands (categorized by publicly disclosed, observed via monitor, or unobserved by you), events, and effects.
-
-  Done:
-  - Implement helper `format_command_debrief` in `src/mcp/session.rs` for formatting competitive commands
-  - Update `competitive_debrief` to trace player and rival actions, mapping monitored status correctly
-  - Output aggregated mechanisms and events in the end-session debrief
-  - Add test coverage for detailed history trace and correct observation labels
-  - Package version bumped to `0.1.59`
-
-  Deferred / Non-Goals:
-  - No changes to transition rules, simulation physics, or state serialization
-  - No new MCP endpoints
-  - No changes to stabilization campaign debrief structure
-
-  Verification:
-  - `cargo test` passes cleanly with 231 tests
-  - `cargo fmt --check` passes
-  - Automated playtests run and compare successfully
-
-- Feature: AI-agent playtest synthesis
-  Status: Complete
-  Started: 2026-07-02
-  Version: 0.1.58
-
-  Summary:
-  Execute follow-up free-form playtest sessions under the new v0.1.57 command help and prompt cues to verify if the guidance successfully reduces Hold overuse and aids first-time play understanding. Document the findings in docs/playtest-findings-v0.1.58.md.
-
-  Done:
-  - Run follow-up free-form playtest sessions for the `stabilization-v1` and `competitive-regional-v1` campaigns with seed 42
-  - Verify that the agent utilizes the expanded command help (typing `?` or `help`) and uses commands like `project`, `recruit`, and `negotiate` instead of defaulting to `hold` where appropriate
-  - Update `CHANGELOG.md` and `SPEC.md` to document the new playtest findings and present version bump
-  - Package version bumped to `0.1.58`
-
-  Deferred / Non-Goals:
-  - No changes to core simulation transition logic, model structures, or validation thresholds
-  - No changes to scenario TOML files or the campaign selection flow
-  - No changes to golden hashes (the golden hashes for seed 42 must remain identical to main)
-  - No new MCP endpoints or DTO changes
-
-  Verification:
-  - All automated playtests pass successfully
-  - All unit and integration tests (230+) run and pass
-  - `cargo fmt --check` passes
-  - Playtest report matches the structure in `docs/agent-playtest-protocol.md`
-
-- Feature: Competitive guidance & debrief hardening
-  Status: Complete
-  Started: 2026-07-02
-  Version: 0.1.57
-
-  Summary:
-  Expand competitive command help with detailed descriptions and resource costs for all 7 verbs, update the monthly command prompt printing to explicitly cue ?/help for the command manual, and add a strategic projects lesson to the competitive end-session debrief to address playtest gaps.
-
-  Done:
-  - `src/cli/guidance.rs` `PromptContext::CompetitiveCommand` help text details effects, AP, cash, and political capital costs for all 7 competitive verbs
-  - `src/cli/campaign.rs` and `src/cli/repl.rs` update prompt label to cue "? or help" for detailed command descriptions
-  - `src/mcp/session.rs` `competitive_debrief` adds a strategic lesson about Action Points, monthly cash draws, duration, and concurrency limits of capital projects
-  - Package version bumped to `0.1.57`
-
-  Deferred / Non-Goals:
-  - No changes to transition logic, simulation rules, scenario schemas, validation thresholds, or campaign selection
-  - No changes to stabilization campaign help or debrief logic
-  - No database or telemetry collection addition
-
-  Verification:
-  - Spoiler-free tests, MCP session tests, and all 230+ cargo tests pass successfully
-  - `cargo fmt --check` passes
-
-- Feature: Strategy-space diagnostics
-  Status: Complete
-  Started: 2026-07-02
-  Version: 0.1.56
-
-  Summary:
-  Synthesize existing scripted and free-form MCP findings into a lightweight
-  Phase 7 strategy-space diagnostic artifact, with strategy clusters, outcome
-  ranges, action-frequency signals, evidence limits, and follow-up routing
-  before any balance work.
-
-  Done:
-  - `docs/playtest-findings-v0.1.56.md` summarizes v0.1.51, v0.1.52, v0.1.54,
-    and v0.1.55 evidence across both current campaigns
-  - Stabilization diagnostics distinguish fiscal caution, access/capacity
-    growth, balanced access, and naive low-complexity clusters
-  - Competitive diagnostics identify passive/fiscal, scripted fiscal caution,
-    capacity/access growth, and balanced/free-form clusters
-  - Action-frequency signals note repeated use of monitor and access pledges,
-    passive-profile overuse of `hold`, and no captured `project` use in the
-    three-month preview
-  - Package version bumped to `0.1.56`
-
-  Deferred / Non-Goals:
-  - No new MCP session matrix, LLM runner, diagnostics tooling, transition
-    behavior, ruleset, scenario schema, replay format, MCP DTO, campaign length,
-    active observation surface, golden hash, runtime guidance, or balance tuning
-    changed
-  - No human learning claim, empirical calibration claim, policy forecast claim,
-    equilibrium analysis, or formula tuning from this diagnostic artifact
-
-  Verification:
-  - Diagnostic claims cite already-captured findings and preserve evidence
-    limits
-  - Rust checks, scripted MCP regression batch, and diff checks completed for
-    the slice
 
 ## Present
 

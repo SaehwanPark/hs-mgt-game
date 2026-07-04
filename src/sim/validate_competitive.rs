@@ -55,11 +55,18 @@ pub fn validate_competitive_command(
       if *budget <= 0 {
         return Err(CompetitiveValidationError::ProjectBudgetNonPositive);
       }
-      let monthly_draw = project_monthly_draw(*budget, kind.resolve_months());
+      let resolve_months = kind.resolve_months();
+      let monthly_draw = project_monthly_draw(*budget, resolve_months);
       if monthly_draw <= 0 {
         return Err(CompetitiveValidationError::ProjectBudgetBelowDuration {
           budget: *budget,
-          resolve_months: kind.resolve_months(),
+          resolve_months,
+        });
+      }
+      if *budget % (resolve_months as i32) != 0 {
+        return Err(CompetitiveValidationError::ProjectBudgetNotDivisible {
+          budget: *budget,
+          resolve_months,
         });
       }
       Ok(())

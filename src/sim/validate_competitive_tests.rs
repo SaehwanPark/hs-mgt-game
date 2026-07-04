@@ -258,3 +258,23 @@ fn project_budget_smaller_than_duration_fails() {
     }
   ));
 }
+
+#[test]
+fn project_budget_not_divisible_by_duration_fails() {
+  let ruleset = default_competitive_ruleset();
+  let error = validate_competitive_command(
+    &CompetitiveCommand::Project {
+      kind: ProjectKind::EhrEpic,
+      budget: 15,
+    },
+    &ruleset,
+  )
+  .expect_err("budget not divisible by duration should fail");
+  assert!(matches!(
+    error,
+    CompetitiveValidationError::ProjectBudgetNotDivisible {
+      budget: 15,
+      resolve_months: 12,
+    }
+  ));
+}

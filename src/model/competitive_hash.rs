@@ -9,9 +9,13 @@ pub fn competitive_state_hash_record(
   let mut systems = String::new();
   for system in &state.systems {
     systems.push_str(&format!(
-      "|sys{}:beds={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}",
+      "|sys{}:beds={}|outpatient={}|nurses={}|physicians={}|admins={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}|trust_wf={}|trust_comm={}",
       system.system_id,
       system.staffed_beds,
+      system.outpatient_capacity,
+      system.nurses,
+      system.physicians,
+      system.admins,
       system.access_index,
       system.quality_index,
       system.market_share_index,
@@ -19,6 +23,8 @@ pub fn competitive_state_hash_record(
       system.resources.political_capital,
       system.resources.ap_budget,
       system.resources.active_projects,
+      system.workforce_trust,
+      system.community_trust,
     ));
   }
 

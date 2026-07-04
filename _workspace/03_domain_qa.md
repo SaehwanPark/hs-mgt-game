@@ -1,52 +1,14 @@
-# Domain QA - Month-Summary Clarity (Pass 3)
+# Domain QA - Clinical Service Lines and Staffing (Phase 6 - Track 5)
 
-## Status
-- **Review**: `fix`
-- **Details**: The formatting changes introduce two notable issues: a display bug that duplicates the system name in public action entries, and a logical/information-leak bug that prints a flat, un-attributed list of effects containing both the player's and all rivals' effects (including private actions).
+## Review Status: APPROVED (Verified 2026-07-04)
 
-## Reviewed Inputs
-- `src/competitive/resolution.rs` (working branch changes)
-- `_workspace/02_mechanism_design.md`
+## Project-Specific Checks
+- **Determinism Check:** The staffing calculation, effective capacity, and burnout formulas are completely deterministic, satisfying the core engine design boundary.
+- **State vs. Observation Separation:** Physical capacities and headcounts are true state variables. The executive report will present reported access/quality (which can be noisy or lagged) alongside current headcounts and capacity indicators.
+- **Strategic Tradeoffs:** Ensures high capital spend on expansion projects must be balanced with appropriate timing of recruitment (and its associated delay & cash costs) to avoid understaffing penalties.
+- **Simple Code Writing:** Avoids adding a general staffing framework. Implements simple formulas directly in `effects_competitive.rs` and `transition_competitive.rs`.
 
-## Findings
-
-### Finding 1: Duplicated System Name in Public Action Entries (Logical/Formatting Bug)
-In `resolution_summary_lines`, the public actions log entries are printed as:
-```rust
-lines.push(format!("  • {}: {}", name, entry.summary));
-```
-However, in `src/sim/transition_competitive.rs`, all public action logs are already formatted with the system name prefixed inside `entry.summary` (e.g., `"{system_name}: recruiting {headcount} {role:?} staff"`). This results in redundant CLI output:
-```
-  • Northlake Health: Northlake Health: recruiting 2 Nurse staff
-```
-This is a minor cosmetic and formatting bug.
-
-### Finding 2: Information Leak and Confusion in Flat "Resolved Effects" (High Severity Logical Bug)
-In the competitive campaign, `transition.effects` collects `AttributedEffect` entries for **all** systems (human + AI rivals) in a single shared vector. 
-Because `AttributedEffect` does not store `system_id` or system name, displaying these in a flat list:
-```rust
-for effect in &transition.effects {
-  let sign = if effect.delta >= 0 { "+" } else { "" };
-  lines.push(format!("  • {} → {} {}{}", effect.source, effect.metric, sign, effect.delta));
-}
-```
-leads to two critical issues:
-1. **Information Leak**: It prints cash/resource and metric changes caused by rivals' *private* actions (e.g., investment below the public threshold, private recruitment), violating the design boundary that rivals' private actions must remain hidden.
-2. **Player Confusion**: Since the list is un-attributed, a player who chose `Hold` (cost 0) might see `action cost → cash -25` (from a rival's investment) and mistakenly believe their own cash was deducted.
-
-## Required Fixes
-
-1. **Remove Duplicated Prefix**: Change the public actions loop in `resolution_summary_lines` to format only `entry.summary`:
-   ```rust
-   lines.push(format!("  • {}", entry.summary));
-   ```
-2. **Handle Resolved Effects Properly**: 
-   - **Option A (Recommended)**: Remove the raw `transition.effects` print loop entirely from `resolution_summary_lines` for competitive campaigns. The player already gets their own resolved commands list, their starting resources for next month, and public events. Displaying un-attributed global effects is confusing and leaks private data.
-   - **Option B**: If metric deltas are needed, compute them explicitly and securely for the human system by comparing `transition.prior.human_system()` and `transition.next.human_system()`.
-
-## Residual Risks
-- Ensure that removing/updating `transition.effects` printing in `resolution_summary_lines` does not affect any existing test assertions.
-
-## Verification Evidence
-- `cargo test` passes successfully (242 tests).
-- `cargo clippy --all-targets -- -D warnings` compiles without warnings.
+## Validation Targets for Implementer
+- Verify that standard recruitment delays (1 month for nurses, 3 months for physicians) are preserved.
+- Verify that the game loop resolves recruitments correctly and updates `nurses` and `physicians` fields.
+- Ensure that the CLI dashboard and executive reports display the new staffing headcounts and capacity constraints clearly.
