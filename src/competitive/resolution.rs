@@ -239,25 +239,7 @@ pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<Strin
 
   lines.push(format!("Public actions logged: {}", public_actions.len()));
   for entry in &public_actions {
-    let name = transition
-      .next
-      .systems
-      .iter()
-      .find(|sys| sys.system_id == entry.system_id)
-      .map(|sys| sys.name.as_str())
-      .unwrap_or("Unknown");
-    lines.push(format!("  • {}: {}", name, entry.summary));
-  }
-
-  if !transition.effects.is_empty() {
-    lines.push("Resolved effects:".to_string());
-    for effect in &transition.effects {
-      let sign = if effect.delta >= 0 { "+" } else { "" };
-      lines.push(format!(
-        "  • {} → {} {}{}",
-        effect.source, effect.metric, sign, effect.delta
-      ));
-    }
+    lines.push(format!("  • {}", entry.summary));
   }
 
   lines.push(format!(
@@ -317,6 +299,14 @@ mod tests {
       crate::competitive::genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
     let transition = resolve_preset_month1(&genesis, &ruleset, 42).expect("resolve");
     let lines = resolution_summary_lines(&transition);
+    println!("--- public action details ---");
+    for entry in &transition.next.public_action_log {
+      println!("entry.system_id={}, entry.summary='{}'", entry.system_id, entry.summary);
+    }
+    println!("-----------------------------");
+    for line in &lines {
+      println!("{}", line);
+    }
 
     // Check that we render the player's resolved commands
     assert!(
