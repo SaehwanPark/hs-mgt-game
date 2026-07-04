@@ -278,3 +278,55 @@ fn project_budget_not_divisible_by_duration_fails() {
     }
   ));
 }
+
+#[test]
+fn medicaid_negotiation_neutral_passes() {
+  let ruleset = default_competitive_ruleset();
+  assert!(
+    validate_competitive_command(
+      &CompetitiveCommand::Negotiate {
+        payer: PayerId::Medicaid,
+        rate_posture: RatePosture::Neutral,
+      },
+      &ruleset,
+    )
+    .is_ok()
+  );
+}
+
+#[test]
+fn medicaid_negotiation_non_neutral_fails() {
+  let ruleset = default_competitive_ruleset();
+  let error = validate_competitive_command(
+    &CompetitiveCommand::Negotiate {
+      payer: PayerId::Medicaid,
+      rate_posture: RatePosture::Aggressive,
+    },
+    &ruleset,
+  )
+  .expect_err("non-neutral medicaid posture should fail");
+  assert!(matches!(
+    error,
+    CompetitiveValidationError::InvalidMedicaidPosture
+  ));
+}
+
+#[test]
+fn medicaid_negotiation_insufficient_cash_fails() {
+  let mut resources = genesis_resources(Difficulty::Normal);
+  // Starting cash is 60. Let's drop it to 4.
+  resources.cash = 4;
+  let batch = vec![CompetitiveCommand::Negotiate {
+    payer: PayerId::Medicaid,
+    rate_posture: RatePosture::Neutral,
+  }];
+  let error = validate_competitive_batch(&batch, &resources, &default_competitive_ruleset())
+    .expect_err("insufficient cash should fail");
+  assert!(matches!(
+    error,
+    CompetitiveValidationError::InsufficientCash {
+      required: 5,
+      available: 4,
+    }
+  ));
+}

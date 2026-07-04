@@ -202,6 +202,7 @@ fn parse_payer(value: &str) -> Result<PayerId, CliError> {
   match value.to_ascii_lowercase().as_str() {
     "carrier_a" => Ok(PayerId::CarrierA),
     "carrier_b" => Ok(PayerId::CarrierB),
+    "medicaid" => Ok(PayerId::Medicaid),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown payer '{value}'"
     ))),

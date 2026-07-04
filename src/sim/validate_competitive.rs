@@ -71,7 +71,17 @@ pub fn validate_competitive_command(
       }
       Ok(())
     }
-    CompetitiveCommand::Negotiate { .. } => Ok(()),
+    CompetitiveCommand::Negotiate {
+      payer,
+      rate_posture,
+    } => {
+      if matches!(payer, crate::model::PayerId::Medicaid)
+        && !matches!(rate_posture, crate::model::RatePosture::Neutral)
+      {
+        return Err(CompetitiveValidationError::InvalidMedicaidPosture);
+      }
+      Ok(())
+    }
   }
 }
 

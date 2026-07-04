@@ -147,7 +147,13 @@ pub fn apply_institution_phase(
     .batches
     .iter()
     .flat_map(|batch| batch.commands.iter())
-    .filter(|command| matches!(command, crate::model::CompetitiveCommand::Negotiate { .. }))
+    .filter(|command| {
+      if let crate::model::CompetitiveCommand::Negotiate { payer, .. } = command {
+        !matches!(payer, crate::model::PayerId::Medicaid)
+      } else {
+        false
+      }
+    })
     .count() as i32;
 
   if negotiate_count > 0 {

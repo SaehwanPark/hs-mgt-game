@@ -6,7 +6,14 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
-## [0.5.4] - 2026-07-04
+## [0.5.5] - 2026-07-04
+
+### Added
+- Implemented Medicaid public payer integration in the competitive regional campaign loop.
+- Added `PayerId::Medicaid` variant to command models, CLI parsing, autocompletes, and topic help guides.
+- Implemented custom Medicaid negotiation rules where compliance alignment costs 1 AP, 2 PC, and $5 cash, resulting in +3 access index and -3 policy pressure (with no market share or commercial payer pressure increments).
+- Enforced neutral-posture-only validation checks for Medicaid negotiations.
+- Added comprehensive unit and validation tests for Medicaid compliance alignment.
 
 ### Added
 - Implemented custom scenario file loading in the MCP stdio server's `start_session` tool via the optional `scenario_path` parameter.

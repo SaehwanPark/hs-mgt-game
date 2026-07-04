@@ -99,6 +99,7 @@ pub enum CompetitiveValidationError {
   UnknownSystemId { system_id: u32 },
   BatchCountMismatch { expected: u32, provided: u32 },
   MonthIndexMismatch { expected: u32, provided: u32 },
+  InvalidMedicaidPosture,
 }
 
 impl CompetitiveValidationError {
@@ -172,6 +173,9 @@ impl CompetitiveValidationError {
       }
       CompetitiveValidationError::MonthIndexMismatch { expected, provided } => {
         format!("month index {provided} does not match current month {expected}")
+      }
+      CompetitiveValidationError::InvalidMedicaidPosture => {
+        "Medicaid negotiations only support neutral posture".to_string()
       }
     }
   }
