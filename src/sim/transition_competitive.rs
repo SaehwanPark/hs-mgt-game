@@ -428,9 +428,15 @@ pub fn command_intel_summary(command: &CompetitiveCommand, system_name: &str) ->
     CompetitiveCommand::Negotiate {
       payer,
       rate_posture,
-    } => Some(format!(
-      "{system_name}: private payer talks with {payer:?} ({rate_posture:?})"
-    )),
+    } => {
+      if matches!(payer, crate::model::PayerId::Medicaid) {
+        Some(format!("{system_name}: Medicaid compliance alignment"))
+      } else {
+        Some(format!(
+          "{system_name}: private payer talks with {payer:?} ({rate_posture:?})"
+        ))
+      }
+    }
     CompetitiveCommand::Hold => Some(format!("{system_name}: held position (no public moves)")),
     CompetitiveCommand::Invest { domain, amount } => Some(format!(
       "{system_name}: quiet {domain:?} spend ({amount} units, below disclosure threshold)"

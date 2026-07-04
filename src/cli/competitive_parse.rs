@@ -28,7 +28,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "negotiate",
-    usage: "negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative",
+    usage: "negotiate payer=carrier_a|carrier_b|medicaid rate_posture=aggressive|neutral|conservative",
   },
   CompetitiveCommandSpec {
     verb: "commit",
