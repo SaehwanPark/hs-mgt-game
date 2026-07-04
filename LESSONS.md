@@ -447,9 +447,9 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 ## Keep Changelog and Versioning Policy Aligned with Repository Rules
 
 - Context: Updating `CHANGELOG.md` to align with the new versioning policy (0.0.1 bump per PR/PR-equivalent change, 0.1 minor bump for major features/milestones with lower digits reset).
-- Symptom: Commit history shows versions (like `0.3.3`) merged to `main` in PRs without corresponding entries in `CHANGELOG.md`, causing a mismatch between `Cargo.toml` and the changelog.
+- Symptom: Commit history shows versions (like `0.5.0`) merged to `main` in PRs without corresponding entries in `CHANGELOG.md`, causing a mismatch between `Cargo.toml` and the changelog.
 - Cause: Developers sometimes bump `Cargo.toml` version during PR development but forget to add the changelog section for that version.
-- Resolution: Added the release notes for `0.3.3` (campaign extension, autosave, replay export), bumped the package version to `0.3.4` in both `Cargo.toml` and `CHANGELOG.md` for the alignment change itself, and aligned `docs/versioning-policy.md` to match the exact rules in `AGENTS.md`.
+- Resolution: Added the release notes for `0.5.0` (campaign extension, autosave, replay export), bumped the package version to `0.5.1` in both `Cargo.toml` and `CHANGELOG.md` for the alignment change itself, and aligned `docs/versioning-policy.md` to match the exact rules in `AGENTS.md`.
 - Prevention: Always check that `CHANGELOG.md` includes the entry for the version in `Cargo.toml` before merging a PR, and perform a `0.0.1` bump for every PR-equivalent change (including changelog/documentation updates).
 
 

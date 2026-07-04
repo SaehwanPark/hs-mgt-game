@@ -9,7 +9,7 @@ Create `CompetitiveSessionSave` representing the persistent state of a competiti
 - `next_month: u32`
 
 Define custom serialization and deserialization in a new file `src/artifact/competitive_session_save.rs` with:
-- Header: `competitive-session-save-0.3.3`
+- Header: `competitive-session-save-0.5.0`
 - Serialized representation of `Difficulty` and `CompetitiveWorldState` / `CompetitiveHistory`.
 - Integration into `src/artifact/mod.rs`.
 

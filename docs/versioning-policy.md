@@ -5,12 +5,20 @@
 
 ## Package Version (Cargo)
 
-The `hs-mgt-game` crate uses the following versioning policy:
+The `hs-mgt-game` crate follows the versioning policy defined in [`AGENTS.md`](../AGENTS.md):
 
-- Increase version number by `0.0.1` for each PR or PR-equivalent change.
-- Increase version number by `0.1.0` (increase `0.1` of the minor digit and reset lower digits to `0`) for major feature releases or meaningful accumulated changes.
-- Reset lower digits when bumping a higher digit (e.g. `0.2.0` not `0.2.21`).
-- No need to carry over the patch digit when bumping up higher digits.
+The project follows a modified semantic versioning format: `x.y.z`, where **x**, **y**, and **z** are integers.
+
+### Increment Rules
+
+* **Patch (`z`):** Increment by `1` for every Pull Request (PR) or PR-equivalent change.
+* **Minor (`y`):** Increment by `1` when the project receives significant improvements or feature updates.
+* **Major (`x`):** Increment by `1` for categorical, architectural, or structurally different changes.
+
+### Reset & Carrying Rules
+
+* **No Automatic Carry-Over:** Lower digits do **not** automatically roll over or carry over when a higher digit is incremented, nor do they roll over when reaching `10` (e.g., version `0.1.9` increments to `0.1.10`, not `0.2.0`).
+* **Digit Initialization:** When a higher-order digit (**x** or **y**) is incremented, all lower-order digits are explicitly reset to `0` (e.g., incrementing `y` resets `z` to `0`; incrementing `x` resets both `y` and `z` to `0`).
 
 Record all user-visible changes in [`CHANGELOG.md`](../CHANGELOG.md).
 

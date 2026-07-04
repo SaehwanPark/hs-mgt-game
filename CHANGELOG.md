@@ -6,13 +6,13 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
-## [0.3.4] - 2026-07-04
+## [0.5.1] - 2026-07-04
 
 ### Changed
 - Aligned versioning policy documentation in `docs/versioning-policy.md` and version history in `CHANGELOG.md` with the new repository rules.
-- Documented release notes for `0.3.3` and bumped package version to `0.3.4`.
+- Documented release notes for `0.5.0` and bumped package version to `0.5.1`.
 
-## [0.3.3] - 2026-07-04
+## [0.5.0] - 2026-07-04
 
 ### Added
 - Extended the competitive campaign duration from 3 months to 24 months, enabling multi-year simulation loops.
@@ -23,7 +23,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Changed
 - Resolved code reviewer findings to clean up unused imports and parameters.
 
-## [0.3.2] - 2026-07-04
+## [0.4.0] - 2026-07-04
 
 ### Added
 - Implemented competitive scenario loading and validation, allowing custom multi-system campaign scenario files (`competitive-regional-v1`) to be parsed, validated, and run via the `--scenario` CLI option.

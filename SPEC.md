@@ -82,23 +82,23 @@ reconstructing it from the diff.
 | Competitive Month-Summary Clarity | v0.2.8 | Display player's resolved commands, rival public action details, resolved effects, and next month's resources | 242 | `bf0414a383634dd6` (competitive) |
 | Competitive Command Help Coverage | v0.2.9 | Support querying detailed help for specific commands (e.g. 'help recruit' or '? invest') in the competitive REPL | 244 | `bf0414a383634dd6` (competitive) |
 | Clinical Service Lines and Staffing | v0.3.0 | Distinguish inpatient beds/outpatient clinics and implement nurses/physicians/admins staffing constraints | 246 | `a49a2f80540ecd9b` (competitive) |
-| Competitive Scenario Loading and Validation | v0.3.2 | Load and validate custom multi-system scenarios for competitive campaigns via --scenario CLI option | 249 | `e73a38b3951cd8b6` (competitive) |
-| Competitive Campaign Extension & Autosave | v0.3.3 | Extend competitive duration to 24 months, add autosave/resume, and replay export | 252 | `e73a38b3951cd8b6` (competitive) |
-| Versioning Policy Alignment | v0.3.4 | Align version history and policy docs with repository governance standards | 252 | `e73a38b3951cd8b6` (competitive) |
+| Competitive Scenario Loading and Validation | v0.4.0 | Load and validate custom multi-system scenarios for competitive campaigns via --scenario CLI option | 249 | `e73a38b3951cd8b6` (competitive) |
+| Competitive Campaign Extension & Autosave | v0.5.0 | Extend competitive duration to 24 months, add autosave/resume, and replay export | 252 | `e73a38b3951cd8b6` (competitive) |
+| Versioning Policy Alignment | v0.5.1 | Align version history and policy docs with repository governance standards | 252 | `e73a38b3951cd8b6` (competitive) |
 
 
 - Feature: Versioning Policy Alignment
   Status: Complete
   Started: 2026-07-04
-  Version: 0.3.4
+  Version: 0.5.1
 
   Summary:
   Aligned versioning policy documentation in docs/versioning-policy.md and version history in CHANGELOG.md with the repository rules (0.0.1 bump per PR/PR-equivalent change, 0.1 minor bump for major features/milestones with lower digits reset).
 
   Done:
   - Updated docs/versioning-policy.md to specify the exact semver bump rules.
-  - Documented release notes for v0.3.3 and v0.3.4 in CHANGELOG.md.
-  - Bumped Cargo.toml and Cargo.lock package version to v0.3.4.
+  - Documented release notes for v0.5.0 and v0.5.1 in CHANGELOG.md.
+  - Bumped Cargo.toml and Cargo.lock package version to v0.5.1.
 
   Deferred / Non-Goals:
   - None.
@@ -111,7 +111,7 @@ reconstructing it from the diff.
 - Feature: Competitive Campaign Extension & Autosave
   Status: Complete
   Started: 2026-07-04
-  Version: 0.3.3
+  Version: 0.5.0
 
   Summary:
   Extended competitive campaign duration from 3 to 24 months, implemented mid-run session autosave/resume REPL prompt, and added replay artifact export at the end of the competitive campaign.
@@ -133,7 +133,7 @@ reconstructing it from the diff.
 - Feature: Competitive Scenario Loading and Validation
   Status: Complete
   Started: 2026-07-04
-  Version: 0.3.2
+  Version: 0.4.0
 
   Summary:
   Implemented loading, validation, and execution of custom competitive scenarios from TOML via the --scenario CLI option, parsing multi-system starting states and matching them to selected difficulties.
@@ -145,7 +145,7 @@ reconstructing it from the diff.
   - Refactored run_competitive_preview to accept custom initial state.
   - Added competitive-v1-template.toml template.
   - Added unit/integration tests for competitive scenario loading and validation.
-  - Bumped package version to v0.3.2.
+  - Bumped package version to v0.4.0.
 
   Deferred / Non-Goals:
   - No changes to stabilization campaign loop rules.
