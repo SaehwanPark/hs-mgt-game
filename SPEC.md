@@ -80,7 +80,33 @@ reconstructing it from the diff.
 | Competitive debrief decision-quality review | v0.2.6 | Implement deterministic checks (runway, workforce trust, payer posture, rival response) in competitive debrief | 238 | `bf0414a383634dd6` (competitive) |
 | AI Rationale Visibility Hardening | v0.2.7 | Dynamically track and display visibility sources for rival AI rationales in debrief and instructor summaries | 241 | `bf0414a383634dd6` (competitive) |
 | Competitive Month-Summary Clarity | v0.2.8 | Display player's resolved commands, rival public action details, resolved effects, and next month's resources | 242 | `bf0414a383634dd6` (competitive) |
+| Competitive Command Help Coverage | v0.2.9 | Support querying detailed help for specific commands (e.g. 'help recruit' or '? invest') in the competitive REPL | 244 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Competitive Command Help Coverage
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.2.9
+
+  Summary:
+  Implemented topic-specific command help in the competitive campaign CLI. Players can query detailed help for specific commands (e.g., 'help recruit', '? invest'), displaying resource costs, parameter constraints, and strategic guidance.
+
+  Done:
+  - Extended the `GlobalInput` enum and parser to support help topic parameters.
+  - Refactored `read_line_with_globals` and `read_competitive_command_line` to delegate to the new topic-specific guidance helpers.
+  - Implemented detailed, styled help outputs for all 7 competitive command verbs (hold, invest, recruit, monitor, negotiate, commit, project).
+  - Added comprehensive unit tests in `src/cli/input.rs` and `src/cli/guidance.rs` verifying input parsing, formatting, and safety checks.
+  - Bumped package version to `0.2.9`.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign resolution rules.
+  - No modifications to actual game rules or simulation logic.
+  - Golden hash value remains unchanged.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test` (all 244 tests pass)
 
 - Feature: Competitive Month-Summary Clarity
   Status: Complete
@@ -463,8 +489,9 @@ campaign length, or platform architecture.
   Next actionable slice:
   Pick one bounded issue from playtest evidence, such as month-summary clarity,
   command help coverage, AI rationale visibility, or a three-month pacing problem
-  (argument-key and enum-value autocomplete completed in v0.2.5), and address
-  it without expanding campaign length.
+  (autocomplete completed in v0.2.5; AI rationale visibility completed in v0.2.7;
+  month-summary clarity completed in v0.2.8; command help coverage completed in v0.2.9),
+  and address it without expanding campaign length.
 
   Verification target:
   Focused CLI/parser/simulation tests cover the changed behavior, competitive

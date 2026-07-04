@@ -6,6 +6,13 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.9] - 2026-07-04
+
+### Added
+- Implemented command-specific help coverage in the competitive campaign CLI. Users can query detailed parameters, resource costs, constraints, and strategic guidance for specific command verbs (e.g. `help recruit`, `? invest`).
+- Added robust validation and unit tests in `src/cli/input.rs` and `src/cli/guidance.rs` covering parsing, formatting, and safety checks for topics.
+- Bumped package version to `0.2.9`.
+
 ## [0.2.8] - 2026-07-04
 
 ### Added

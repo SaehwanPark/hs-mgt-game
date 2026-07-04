@@ -11,7 +11,7 @@ use crate::model::CliError;
 
 use super::competitive_parse::competitive_command_verbs;
 use super::display::{PromptContext, print_line, print_prompt_block, style};
-use super::guidance::print_context_help;
+use super::guidance::print_context_help_with_topic;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
 use super::io::stdin_uses_fallback_input;
 
@@ -55,8 +55,8 @@ pub fn read_competitive_command_line(prompt_lines: &[String]) -> Result<ReadLine
 
     match parse_global_input(&input) {
       GlobalInput::Quit => return Ok(ReadLineOutcome::Quit),
-      GlobalInput::Help => {
-        print_context_help(PromptContext::CompetitiveCommand);
+      GlobalInput::Help { topic } => {
+        print_context_help_with_topic(PromptContext::CompetitiveCommand, topic.as_deref());
       }
       GlobalInput::Payload(payload) => return Ok(ReadLineOutcome::Payload(payload)),
     }
