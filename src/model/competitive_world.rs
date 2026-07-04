@@ -114,10 +114,22 @@ pub struct PublicActionEntry {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PendingEffectKind {
-  Recruit { role: RecruitRole, headcount: u32 },
-  BedsCapacity { capacity_delta: i32 },
-  OutpatientCapacity { capacity_delta: i32 },
-  TechnologyQuality { quality_delta: i32 },
+  Recruit {
+    role: RecruitRole,
+    headcount: u32,
+  },
+  BedsCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  OutpatientCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  TechnologyQuality {
+    quality_delta: i32,
+    project_draw: Option<i32>,
+  },
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

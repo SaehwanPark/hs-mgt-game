@@ -78,9 +78,17 @@ fn apply_pending_effect(
         ),
       });
     }
-    PendingEffectKind::BedsCapacity { capacity_delta } => {
+    PendingEffectKind::BedsCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
       let system = &mut world.systems[system_idx];
       system.staffed_beds += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
       events.push(Event {
         actor: "health_system",
         description: format!(
@@ -89,9 +97,17 @@ fn apply_pending_effect(
         ),
       });
     }
-    PendingEffectKind::OutpatientCapacity { capacity_delta } => {
+    PendingEffectKind::OutpatientCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
       let system = &mut world.systems[system_idx];
       system.outpatient_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
       events.push(Event {
         actor: "health_system",
         description: format!(
@@ -100,9 +116,17 @@ fn apply_pending_effect(
         ),
       });
     }
-    PendingEffectKind::TechnologyQuality { quality_delta } => {
+    PendingEffectKind::TechnologyQuality {
+      quality_delta,
+      project_draw,
+    } => {
       let system = &mut world.systems[system_idx];
       system.quality_index = clamp_metric(system.quality_index + quality_delta);
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
       events.push(Event {
         actor: "health_system",
         description: format!(

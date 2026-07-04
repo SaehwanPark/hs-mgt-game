@@ -248,7 +248,18 @@ pub fn resolution_summary_lines(transition: &CompetitiveTransition) -> Vec<Strin
   ));
 
   for event in &transition.events {
-    lines.push(format!("  • {}", event.description));
+    let mut is_rival_private = false;
+    if let Some(human_system) = transition.prior.human_system() {
+      is_rival_private = transition
+        .prior
+        .systems
+        .iter()
+        .filter(|sys| sys.system_id != human_system.system_id)
+        .any(|sys| event.description.starts_with(&format!("{}:", sys.name)));
+    }
+    if !is_rival_private {
+      lines.push(format!("  • {}", event.description));
+    }
   }
 
   if let Some(next_human) = transition.next.human_system() {

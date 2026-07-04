@@ -35,6 +35,23 @@ pub fn transition_competitive(
   let mut next = prior.clone();
   let mut events = Vec::new();
   let mut effects = Vec::new();
+
+  // Deduct active project monthly draws for ongoing capital projects
+  for system in &mut next.systems {
+    let draws = system.resources.active_project_monthly_draws;
+    if draws > 0 {
+      system.resources.cash -= draws;
+      push_effect(&mut effects, "active project monthly draw", "cash", -draws);
+      events.push(Event {
+        actor: "finance",
+        description: format!(
+          "{}: monthly draw of {draws} cash for ongoing capital projects",
+          system.name
+        ),
+      });
+    }
+  }
+
   let month_index = prior.policy_calendar.month_index;
 
   for batch in &aggregated.batches {
@@ -166,12 +183,22 @@ fn apply_command(
           let beds_delta = amount / 5;
           let access_delta = amount / 10;
           let system = &mut world.systems[system_idx];
-          system.staffed_beds += beds_delta;
           system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
           system.market_share_index =
             crate::model::clamp_metric(system.market_share_index + amount / 20);
-          push_effect(effects, "capacity investment", "staffed_beds", beds_delta);
           push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::BedsCapacity {
+              capacity_delta: beds_delta,
+              project_draw: None,
+            },
+            format!("{summary} (med-surg bed capacity expansion)"),
+          );
         }
         InvestDomain::Outpatient => {
           let capacity_delta = amount / 10;
@@ -180,7 +207,10 @@ fn apply_command(
             system_id,
             month_index,
             month_index + 1,
-            PendingEffectKind::OutpatientCapacity { capacity_delta },
+            PendingEffectKind::OutpatientCapacity {
+              capacity_delta,
+              project_draw: None,
+            },
             format!("{summary} (outpatient capacity expansion)"),
           );
         }
@@ -190,7 +220,10 @@ fn apply_command(
             system_id,
             month_index,
             month_index + 2,
-            PendingEffectKind::TechnologyQuality { quality_delta: 2 },
+            PendingEffectKind::TechnologyQuality {
+              quality_delta: 2,
+              project_draw: None,
+            },
             format!("{summary} (technology rollout)"),
           );
         }
@@ -255,12 +288,19 @@ fn apply_command(
       push_public_log(world, month_index, system_id, summary.clone());
 
       let effect_kind = match kind {
-        crate::model::ProjectKind::Tower => PendingEffectKind::BedsCapacity { capacity_delta: 20 },
-        crate::model::ProjectKind::ClinicNetwork => {
-          PendingEffectKind::OutpatientCapacity { capacity_delta: 30 }
-        }
+        crate::model::ProjectKind::Tower => PendingEffectKind::BedsCapacity {
+          capacity_delta: 20,
+          project_draw: Some(monthly_draw),
+        },
+        crate::model::ProjectKind::ClinicNetwork => PendingEffectKind::OutpatientCapacity {
+          capacity_delta: 30,
+          project_draw: Some(monthly_draw),
+        },
         crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
-          PendingEffectKind::TechnologyQuality { quality_delta: 5 }
+          PendingEffectKind::TechnologyQuality {
+            quality_delta: 5,
+            project_draw: Some(monthly_draw),
+          }
         }
       };
 
@@ -425,42 +465,44 @@ fn apply_staffing_constraints(
 
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
+      let penalty_pct = 1.0 - utility_ratio;
+      let penalty = (penalty_pct * 15.0).round() as i32;
 
-      let access_before = system.access_index;
-      let quality_before = system.quality_index;
+      if penalty > 0 {
+        let access_before = system.access_index;
+        let quality_before = system.quality_index;
 
-      system.access_index =
-        crate::model::clamp_metric((access_before as f32 * utility_ratio) as i32);
-      system.quality_index =
-        crate::model::clamp_metric((quality_before as f32 * utility_ratio) as i32);
+        system.access_index = crate::model::clamp_metric(system.access_index - penalty);
+        system.quality_index = crate::model::clamp_metric(system.quality_index - penalty);
 
-      let access_delta = system.access_index - access_before;
-      let quality_delta = system.quality_index - quality_before;
+        let access_delta = system.access_index - access_before;
+        let quality_delta = system.quality_index - quality_before;
 
-      if access_delta != 0 {
-        push_effect(
-          effects,
-          "staffing capacity constraint",
-          "access_index",
-          access_delta,
-        );
+        if access_delta != 0 {
+          push_effect(
+            effects,
+            "staffing capacity constraint",
+            "access_index",
+            access_delta,
+          );
+        }
+        if quality_delta != 0 {
+          push_effect(
+            effects,
+            "staffing capacity constraint",
+            "quality_index",
+            quality_delta,
+          );
+        }
+
+        events.push(Event {
+          actor: "operations",
+          description: format!(
+            "{}: understaffing reduces operational capacity (-{} to access/quality; effective/physical: {}/{})",
+            system.name, penalty, total_effective, total_physical
+          ),
+        });
       }
-      if quality_delta != 0 {
-        push_effect(
-          effects,
-          "staffing capacity constraint",
-          "quality_index",
-          quality_delta,
-        );
-      }
-
-      events.push(Event {
-        actor: "operations",
-        description: format!(
-          "{}: understaffing reduces operational capacity (effective/physical: {}/{})",
-          system.name, total_effective, total_physical
-        ),
-      });
     }
   }
 }
@@ -624,10 +666,10 @@ mod transition_competitive_tests {
     // Total physical capacity = 118 beds + 100 clinics = 218
     // Total effective capacity = (10 nurses * 5 beds) + 100 clinics = 150
     // Capacity utility ratio = 150 / 218 = ~0.68807
-    // Expected access = 68 * 0.68807 = 46
-    // Expected quality = 72 * 0.68807 = 49
-    assert_eq!(world.systems[0].access_index, 46);
-    assert_eq!(world.systems[0].quality_index, 49);
+    // Expected access = 68 - 5 = 63
+    // Expected quality = 72 - 5 = 67
+    assert_eq!(world.systems[0].access_index, 63);
+    assert_eq!(world.systems[0].quality_index, 67);
 
     assert!(
       events

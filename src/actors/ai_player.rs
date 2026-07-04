@@ -135,6 +135,47 @@ fn generate_candidates(
     });
   }
 
+  // Generate recruitment candidates for understaffed roles
+  let target_nurses = (observation.staffed_beds + 4) / 5;
+  let target_physicians = (observation.outpatient_capacity + 9) / 10;
+  let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20;
+
+  if observation.nurses < target_nurses {
+    let diff = (target_nurses - observation.nurses) as u32;
+    for headcount in [1, 2, 3] {
+      if headcount <= diff {
+        candidates.push(CompetitiveCommand::Recruit {
+          role: RecruitRole::Nurse,
+          headcount,
+        });
+      }
+    }
+  }
+
+  if observation.physicians < target_physicians {
+    let diff = (target_physicians - observation.physicians) as u32;
+    for headcount in [1, 2, 3] {
+      if headcount <= diff {
+        candidates.push(CompetitiveCommand::Recruit {
+          role: RecruitRole::Physician,
+          headcount,
+        });
+      }
+    }
+  }
+
+  if observation.admins < target_admins {
+    let diff = (target_admins - observation.admins) as u32;
+    for headcount in [1, 2, 3] {
+      if headcount <= diff {
+        candidates.push(CompetitiveCommand::Recruit {
+          role: RecruitRole::Admin,
+          headcount,
+        });
+      }
+    }
+  }
+
   candidates.sort_by_key(|command| format!("{command:?}"));
   candidates.dedup();
   candidates
