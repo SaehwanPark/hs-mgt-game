@@ -6,6 +6,13 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-07-03
+
+### Added
+- Drafted the first exemplary scenario brief for the competitive campaign (`docs/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences.
+- Created repository-local workspace pipeline artifacts (`_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, and `_workspace/final/handoff.md`).
+- Bumps package version to `0.2.3`.
+
 ## [0.2.2] - 2026-07-03
 
 ### Added

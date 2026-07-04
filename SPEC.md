@@ -75,7 +75,28 @@ reconstructing it from the diff.
 | Public playable prototype announcement prep | v0.2.0 | Public README, old README archive, repo hygiene cleanup, milestone version bump | 231 | `bf0414a383634dd6` (competitive) |
 | Post-v0.2 SDD progress review | v0.2.1 | Review current prototype progress and rank next development tracks | 231 | `bf0414a383634dd6` (competitive) |
 | Instructor-visible run summary & decision-quality review | v0.2.2 | Compare observed vs true state in stabilization and detailed observed/unobserved rival actions in competitive | 233 | `bf0414a383634dd6` (competitive) |
+| Exemplary scenario brief | v0.2.3 | Draft the first exemplary scenario brief for the competitive campaign modeling workforce and payer conflicts | 233 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Exemplary scenario brief
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.3
+
+  Summary:
+  Draft the first exemplary scenario brief for the competitive regional campaign (`docs/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences, accompanied by workspace handoff documents.
+
+  Done:
+  - Draft exemplary scenario brief covering financial pressure, nurse staffing ratios, payer rate negotiations, CON objections, and delayed consequences.
+  - Complete workspace handoffs (Phase 0 input, Phase 1 evidence map, Phase 2 mechanism design, Phase 4 domain QA, and Phase 5 final handoff).
+  - Set tab size of 2 spaces and run existing tests.
+
+  Deferred / Non-Goals:
+  - No changes to simulation rules, scenario parser, or TOML loader.
+  - No changes to existing scenarios.
+
+  Verification:
+  - All unit and integration tests pass successfully (233 tests).
 
 - Feature: Instructor-visible run summary & decision-quality review
   Status: Complete

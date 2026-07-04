@@ -1,29 +1,31 @@
-# Request Summary - Instructor Run Summary & Decision Quality Review
+# Request Summary - Exemplary Scenario Authoring Plan (Phase 6.2)
 
 ## Scope
-Implement an instructor-visible run summary and decision-quality review capability for both stabilization and competitive campaigns.
-1. In the stabilization campaign, display a comparison between observed reported access index and the true access index per turn, highlighting the delta caused by measurement noise and delay.
-2. In the competitive campaign, list true rival actions, labeling them as observed (if monitored or public) or unobserved by the player.
-3. Ensure this detailed analysis is only displayed at the end of the campaign (debrief time).
-4. Integrate the new summary into both CLI and MCP end-of-session outputs.
+Draft an exemplary scenario brief at `docs/exemplary-scenario-brief.md` that models a mid-sized regional healthcare market containing:
+1. **Financial Pressure:** Declining margins or cash flow squeeze due to shifting payer rates or high fixed operating costs.
+2. **Workforce Conflict:** Nurses bargaining or strike threat over staffing ratios and burnout.
+3. **Payer provider rate negotiations:** Negotiation with a dominant commercial payer.
+4. **Competitive Response:** Simultaneous capacity expansion or service line poaching by a rival health system.
+5. **Policy / Regulatory process:** Certificate of Need (CON) review for facility expansion, or health department policy intervention.
+6. **Delayed consequences:** Long-term reputation effects, lagged effects of EHR rollout, or worker strike consequences.
+7. **Debrief hooks:** Educational reflection prompts distinguishing decision quality from luck and rival behavior.
+8. **Defensible strategic directions:** At least two viable, contrasting strategies for Riverside Community Health (e.g., Access Safety Net Defense vs. Fiscal Preservation/Market Consolidation).
 
 ## Non-Goals
-- No changes to transition rules or state/observation calculations during active play.
-- No grading system or automated LMS scoring.
+- No changes to simulation code or Rust codebase.
+- No scenario loader or TOML parser modifications.
+- No changes to existing scenario fixtures (e.g. `scenarios/stabilization-v1.toml`).
+- No drive-by refactoring of unrelated documents.
 
 ## Sources
-- `SPEC.md` Track 1
-- `docs/design_principles.md` Principle 20 (Design for Debriefing)
+- `SPEC.md` Track 2 (Exemplary scenario authoring plan)
+- `docs/first-scenario-brief.md`
+- `docs/competitive-scenario-brief.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 
 ## Expected Files
-- `src/debrief/report.rs`
-- `src/debrief/report_tests.rs`
-- `src/cli/output.rs`
-- `src/cli/campaign.rs`
-- `src/mcp/session.rs`
+- `docs/exemplary-scenario-brief.md`
 
 ## Validation Target
-- `cargo fmt --check`
-- `cargo clippy --all-targets -- -D warnings`
-- `cargo test`
+- Domain review confirms scenario elements, observations, learning purpose, and non-goals.
+- Existing codebase compiles and all tests pass (`cargo test`).

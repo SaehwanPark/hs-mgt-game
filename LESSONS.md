@@ -3,6 +3,14 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+
+## Keep Scenario Briefs Parameter-Complete to Avoid Downstream Gaps
+
+- Context: Drafting the `competitive-exemplary-v1` scenario brief under Track 2.
+- Symptom: Initial drafts of the scenario timeline referred to delayed consequences for underfunded EHR projects and nurse staffing ratios, but lacked initial parameters for starting staffing ratios or definitions of EHR project costs, duration, and Action Point requirements in the brief.
+- Cause: Scenario authoring sometimes relies on mechanism-design documents or core codebase defaults without reflecting those constraints explicitly in the student/instructor-facing brief.
+- Prevention: Every scenario brief must explicitly specify starting parameters, project costs, duration, Action Point requirements, and immediate vs. delayed consequences of events (such as strikes or underfunding) to remain actionable for future scenario developers.
+
 ## Post-Milestone SDD Reviews Should Rank, Not Expand
 
 - Context: After the public playable prototype reached v0.2.0, the repo had a
