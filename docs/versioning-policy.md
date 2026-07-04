@@ -5,16 +5,12 @@
 
 ## Package Version (Cargo)
 
-The `hs-mgt-game` crate uses lightweight semantic versioning during early
-development:
+The `hs-mgt-game` crate uses the following versioning policy:
 
-| Change type | Bump | Example |
-| --- | --- | --- |
-| Bug fix, docs-only, test-only | patch `0.0.x` | `0.1.20` → `0.1.21` |
-| New bounded slice (command, actor, turn) | patch `0.0.x` | `0.1.21` → `0.1.22` |
-| Major feature release or accumulated milestone | minor `0.x.0` | `0.1.x` → `0.2.0` |
-
-Reset lower digits when bumping a higher digit (e.g. `0.2.0` not `0.2.21`).
+- Increase version number by `0.0.1` for each PR or PR-equivalent change.
+- Increase version number by `0.1.0` (increase `0.1` of the minor digit and reset lower digits to `0`) for major feature releases or meaningful accumulated changes.
+- Reset lower digits when bumping a higher digit (e.g. `0.2.0` not `0.2.21`).
+- No need to carry over the patch digit when bumping up higher digits.
 
 Record all user-visible changes in [`CHANGELOG.md`](../CHANGELOG.md).
 
