@@ -82,3 +82,230 @@ fn test_competitive_instructor_summary_and_debrief() {
   assert!(debrief_str.contains("=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ==="));
   assert!(debrief_str.contains("Competitive preview completed 3 committed month(s)"));
 }
+
+#[test]
+fn test_competitive_decision_quality_warnings() {
+  let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 1)
+    .expect("should build competitive history");
+
+  // By default, the run should pass all checks
+  let summary_pass = competitive_instructor_summary(&history);
+  let summary_pass_str = summary_pass.join("\n");
+  assert!(summary_pass_str.contains("All strategic checks passed."));
+
+  // 1. Cash runway warning
+  {
+    let mut runway_history = history.clone();
+    if let Some(mut human_next) = runway_history.transitions[0].next.human_system().cloned() {
+      human_next.resources.cash = 15;
+      human_next.resources.active_project_monthly_draws = 5;
+      if let Some(pos) = runway_history.transitions[0]
+        .next
+        .systems
+        .iter()
+        .position(|s| s.system_id == human_next.system_id)
+      {
+        runway_history.transitions[0].next.systems[pos] = human_next;
+      }
+    }
+    let summary = competitive_instructor_summary(&runway_history);
+    let summary_str = summary.join("\n");
+    assert!(summary_str.contains(
+      "Warning: Cash runway fell to 15 in Month 1 while carrying active project monthly draws of 5"
+    ));
+  }
+
+  // 2. Workforce trust warning
+  {
+    let mut workforce_history = history.clone();
+    let human_system_id = workforce_history.genesis.human_system().unwrap().system_id;
+    if let Some(batch) = workforce_history.transitions[0]
+      .aggregated
+      .batch_for_system(human_system_id)
+    {
+      let mut updated_batch = batch.clone();
+      updated_batch
+        .commands
+        .push(crate::model::CompetitiveCommand::Recruit {
+          role: crate::model::RecruitRole::Nurse,
+          headcount: 5,
+        });
+      let pos = workforce_history.transitions[0]
+        .aggregated
+        .batches
+        .iter()
+        .position(|b| b.system_id == human_system_id)
+        .unwrap();
+      workforce_history.transitions[0].aggregated.batches[pos] = updated_batch;
+    }
+    if let Some(mut human_next) = workforce_history.transitions[0]
+      .next
+      .human_system()
+      .cloned()
+    {
+      human_next.workforce_trust = 50;
+      if let Some(pos) = workforce_history.transitions[0]
+        .next
+        .systems
+        .iter()
+        .position(|s| s.system_id == human_next.system_id)
+      {
+        workforce_history.transitions[0].next.systems[pos] = human_next;
+      }
+    }
+    let summary = competitive_instructor_summary(&workforce_history);
+    let summary_str = summary.join("\n");
+    assert!(
+      summary_str
+        .contains("Warning: Workforce trust dropped to 50 in Month 1 due to recruitment stress")
+    );
+  }
+
+  // 3. Payer negotiation warning
+  {
+    let mut negotiation_history = history.clone();
+    let human_system_id = negotiation_history
+      .genesis
+      .human_system()
+      .unwrap()
+      .system_id;
+    if let Some(batch) = negotiation_history.transitions[0]
+      .aggregated
+      .batch_for_system(human_system_id)
+    {
+      let mut updated_batch = batch.clone();
+      updated_batch
+        .commands
+        .push(crate::model::CompetitiveCommand::Negotiate {
+          payer: crate::model::PayerId::CarrierA,
+          rate_posture: crate::model::RatePosture::Aggressive,
+        });
+      let pos = negotiation_history.transitions[0]
+        .aggregated
+        .batches
+        .iter()
+        .position(|b| b.system_id == human_system_id)
+        .unwrap();
+      negotiation_history.transitions[0].aggregated.batches[pos] = updated_batch;
+    }
+    if let Some(mut human_prior) = negotiation_history.transitions[0]
+      .prior
+      .human_system()
+      .cloned()
+    {
+      human_prior.quality_index = 50;
+      human_prior.market_share_index = 10;
+      if let Some(pos) = negotiation_history.transitions[0]
+        .prior
+        .systems
+        .iter()
+        .position(|s| s.system_id == human_prior.system_id)
+      {
+        negotiation_history.transitions[0].prior.systems[pos] = human_prior;
+      }
+    }
+    let summary = competitive_instructor_summary(&negotiation_history);
+    let summary_str = summary.join("\n");
+    assert!(summary_str.contains("Warning: Attempted aggressive payer negotiation in Month 1 with low leverage (Market Share = 10%, Quality = 50)"));
+  }
+
+  // 4. Rival Bed Capacity response warning
+  {
+    let mut capacity_history = history.clone();
+    let human_system_id = capacity_history.genesis.human_system().unwrap().system_id;
+    let rival_id = capacity_history.transitions[0]
+      .prior
+      .systems
+      .iter()
+      .find(|s| s.system_id != human_system_id)
+      .unwrap()
+      .system_id;
+
+    if let Some(mut rival_prior) = capacity_history.transitions[0]
+      .prior
+      .systems
+      .iter()
+      .find(|s| s.system_id == rival_id)
+      .cloned()
+    {
+      rival_prior.staffed_beds = 100;
+      if let Some(pos) = capacity_history.transitions[0]
+        .prior
+        .systems
+        .iter()
+        .position(|s| s.system_id == rival_id)
+      {
+        capacity_history.transitions[0].prior.systems[pos] = rival_prior;
+      }
+    }
+    if let Some(mut rival_next) = capacity_history.transitions[0]
+      .next
+      .systems
+      .iter()
+      .find(|s| s.system_id == rival_id)
+      .cloned()
+    {
+      rival_next.staffed_beds = 115;
+      if let Some(pos) = capacity_history.transitions[0]
+        .next
+        .systems
+        .iter()
+        .position(|s| s.system_id == rival_id)
+      {
+        capacity_history.transitions[0].next.systems[pos] = rival_next;
+      }
+    }
+
+    if let Some(mut human_prior) = capacity_history.transitions[0]
+      .prior
+      .human_system()
+      .cloned()
+    {
+      human_prior.market_share_index = 30;
+      if let Some(pos) = capacity_history.transitions[0]
+        .prior
+        .systems
+        .iter()
+        .position(|s| s.system_id == human_system_id)
+      {
+        capacity_history.transitions[0].prior.systems[pos] = human_prior;
+      }
+    }
+    if let Some(mut human_next) = capacity_history.transitions[0].next.human_system().cloned() {
+      human_next.market_share_index = 25;
+      if let Some(pos) = capacity_history.transitions[0]
+        .next
+        .systems
+        .iter()
+        .position(|s| s.system_id == human_system_id)
+      {
+        capacity_history.transitions[0].next.systems[pos] = human_next;
+      }
+    }
+
+    if let Some(batch) = capacity_history.transitions[0]
+      .aggregated
+      .batch_for_system(human_system_id)
+    {
+      let mut updated_batch = batch.clone();
+      updated_batch.commands.retain(|cmd| {
+        !matches!(
+          cmd,
+          crate::model::CompetitiveCommand::Invest { .. }
+            | crate::model::CompetitiveCommand::Project { .. }
+        )
+      });
+      let pos = capacity_history.transitions[0]
+        .aggregated
+        .batches
+        .iter()
+        .position(|b| b.system_id == human_system_id)
+        .unwrap();
+      capacity_history.transitions[0].aggregated.batches[pos] = updated_batch;
+    }
+
+    let summary = competitive_instructor_summary(&capacity_history);
+    let summary_str = summary.join("\n");
+    assert!(summary_str.contains("Warning: Rival capacity expansion by"));
+  }
+}

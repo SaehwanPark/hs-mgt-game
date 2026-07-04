@@ -409,6 +409,144 @@ pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<Strin
     }
   }
 
+  // Append decision-quality evaluation
+  lines.extend(analyze_decision_quality(history));
+
+  lines
+}
+
+fn analyze_decision_quality(history: &CompetitiveHistory) -> Vec<String> {
+  let mut lines = vec![
+    "".to_string(),
+    "=== DECISION QUALITY EVALUATION ===".to_string(),
+  ];
+
+  let Some(human_system) = history.genesis.human_system() else {
+    lines.push("No human system found for decision quality evaluation.".to_string());
+    return lines;
+  };
+  let human_system_id = human_system.system_id;
+
+  let mut warnings = Vec::new();
+
+  for (idx, transition) in history.transitions.iter().enumerate() {
+    let month_idx = idx + 1;
+    let Some(human_prior) = transition
+      .prior
+      .systems
+      .iter()
+      .find(|s| s.system_id == human_system_id)
+    else {
+      continue;
+    };
+    let Some(human_next) = transition
+      .next
+      .systems
+      .iter()
+      .find(|s| s.system_id == human_system_id)
+    else {
+      continue;
+    };
+
+    // 1. Cash Runway Safety
+    if human_next.resources.cash < 20 && human_next.resources.active_project_monthly_draws > 0 {
+      warnings.push(format!(
+        "  - Warning: Cash runway fell to {} in Month {} while carrying active project monthly draws of {}. Consider halting capital projects or deferring investments if cash is critically low.",
+        human_next.resources.cash, month_idx, human_next.resources.active_project_monthly_draws
+      ));
+    }
+
+    // 2. Workforce Trust Check
+    if human_next.workforce_trust < 55 {
+      let mut recruited = false;
+      if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
+        for cmd in &human_batch.commands {
+          if let CompetitiveCommand::Recruit { headcount, .. } = cmd {
+            recruited |= *headcount > 0;
+          }
+        }
+      }
+      if recruited {
+        warnings.push(format!(
+          "  - Warning: Workforce trust dropped to {} in Month {} due to recruitment stress. Watch headcount additions to avoid severe staffing vacancies or burnout.",
+          human_next.workforce_trust, month_idx
+        ));
+      }
+    }
+
+    // 3. Payer Posture Check
+    if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
+      for cmd in &human_batch.commands {
+        if let CompetitiveCommand::Negotiate {
+          rate_posture: RatePosture::Aggressive,
+          ..
+        } = cmd
+        {
+          let low_leverage = human_prior.quality_index < 75 && human_prior.market_share_index < 20;
+          if low_leverage {
+            warnings.push(format!(
+              "  - Warning: Attempted aggressive payer negotiation in Month {} with low leverage (Market Share = {}%, Quality = {}). Aggressive rates require strong market share (>= 20%) or quality (>= 75) to succeed.",
+              month_idx, human_prior.market_share_index, human_prior.quality_index
+            ));
+          }
+        }
+      }
+    }
+
+    // 4. Rival Bed Capacity Check
+    for rival_prior in &transition.prior.systems {
+      if rival_prior.system_id == human_system_id {
+        continue;
+      }
+      if let Some(rival_next) = transition
+        .next
+        .systems
+        .iter()
+        .find(|s| s.system_id == rival_prior.system_id)
+      {
+        let bed_diff = rival_next.staffed_beds - rival_prior.staffed_beds;
+        if bed_diff >= 10 {
+          let mut human_expanded = false;
+          if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
+            for cmd in &human_batch.commands {
+              match cmd {
+                CompetitiveCommand::Invest {
+                  domain: InvestDomain::Beds,
+                  amount,
+                } if *amount > 0 => {
+                  human_expanded = true;
+                }
+                CompetitiveCommand::Recruit { headcount, .. } if *headcount > 0 => {
+                  human_expanded = true;
+                }
+                CompetitiveCommand::Project {
+                  kind: ProjectKind::Tower | ProjectKind::ClinicNetwork,
+                  ..
+                } => {
+                  human_expanded = true;
+                }
+                _ => {}
+              }
+            }
+          }
+          let market_share_erosion = human_next.market_share_index < human_prior.market_share_index;
+          if !human_expanded && market_share_erosion {
+            warnings.push(format!(
+              "  - Warning: Rival capacity expansion by {} ({}) went unanswered in Month {}. Northlake/Summit/Valley/Metro expanded capacity while you did not invest in beds, recruitment, or project capital, resulting in market share erosion.",
+              rival_prior.name, bed_diff, month_idx
+            ));
+          }
+        }
+      }
+    }
+  }
+
+  if warnings.is_empty() {
+    lines.push("All strategic checks passed. The run demonstrated safe cash runway, balanced recruitment, appropriate payer rate postures, and adequate rival capacity responses.".to_string());
+  } else {
+    lines.extend(warnings);
+  }
+
   lines
 }
 
