@@ -6,6 +6,15 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.6] - 2026-07-04
+
+### Added
+- Implemented a deterministic Decision-Quality Assessment capability in the competitive campaign debriefing system.
+- Checks evaluate cash runway safety (active project monthly draws under low cash), workforce trust (critical trust drops after recruitment), payer negotiation postures (aggressive rate requests without leverage), and rival capacity responses (unanswered competitor expansion).
+- Appended the strategic decision-quality feedback to the instructor run summary and end-of-session debriefs.
+- Created robust unit tests verifying all four check triggers in `src/debrief/report_tests.rs`.
+- Bumped package version to `0.2.6`.
+
 ## [0.2.5] - 2026-07-03
 
 ### Added
