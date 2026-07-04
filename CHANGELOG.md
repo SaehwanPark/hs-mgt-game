@@ -6,6 +6,13 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.3.2] - 2026-07-04
+
+### Added
+- Implemented competitive scenario loading and validation, allowing custom multi-system campaign scenario files (`competitive-regional-v1`) to be parsed, validated, and run via the `--scenario` CLI option.
+- Added custom competitive scenario template `scenarios/competitive-v1-template.toml`.
+- Added unit and integration tests covering competitive scenario validation errors, ruleset validation, and initial state extraction.
+
 ## [0.3.1] - 2026-07-04
 
 ### Fixed

@@ -76,24 +76,31 @@ pub fn read_competitive_run_config() -> Result<Option<CompetitiveRunConfig>, Cli
   Ok(Some(CompetitiveRunConfig { seed, difficulty }))
 }
 
-pub fn run_competitive_stub(_ruleset: &Ruleset, config: CompetitiveRunConfig) -> SessionOutcome {
-  run_competitive_preview_internal(config, None)
+pub fn run_competitive_stub(
+  _ruleset: &Ruleset,
+  config: CompetitiveRunConfig,
+  initial_world: Option<CompetitiveWorldState>,
+) -> SessionOutcome {
+  run_competitive_preview_internal(config, None, initial_world)
 }
 
 #[allow(dead_code)]
 pub fn run_competitive_preview(
   config: CompetitiveRunConfig,
   demo_input: Option<String>,
+  initial_world: Option<CompetitiveWorldState>,
 ) -> SessionOutcome {
-  run_competitive_preview_internal(config, Some(demo_input))
+  run_competitive_preview_internal(config, Some(demo_input), initial_world)
 }
 
 fn run_competitive_preview_internal(
   config: CompetitiveRunConfig,
   demo_input: Option<Option<String>>,
+  initial_world: Option<CompetitiveWorldState>,
 ) -> SessionOutcome {
   let ruleset = default_competitive_ruleset();
-  let world = genesis_competitive_world_with_ruleset(config.difficulty, &ruleset);
+  let world = initial_world
+    .unwrap_or_else(|| genesis_competitive_world_with_ruleset(config.difficulty, &ruleset));
 
   print_line(&style::label_value(
     "Campaign",
@@ -103,13 +110,9 @@ fn run_competitive_preview_internal(
     "Difficulty",
     &format!(
       "{} ({} AI rival{})",
-      config.difficulty.label(),
-      config.difficulty.k_rivals(),
-      if config.difficulty.k_rivals() == 1 {
-        ""
-      } else {
-        "s"
-      }
+      world.difficulty.label(),
+      world.rival_count(),
+      if world.rival_count() == 1 { "" } else { "s" }
     ),
   ));
   print_line(&style::label_value("Seed", &config.seed.to_string()));
@@ -454,6 +457,7 @@ mod tests {
         difficulty: Difficulty::Normal,
       },
       Some(String::new()),
+      None,
     );
     assert_eq!(outcome, SessionOutcome::CompetitivePreview);
   }

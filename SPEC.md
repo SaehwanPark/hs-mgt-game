@@ -82,6 +82,34 @@ reconstructing it from the diff.
 | Competitive Month-Summary Clarity | v0.2.8 | Display player's resolved commands, rival public action details, resolved effects, and next month's resources | 242 | `bf0414a383634dd6` (competitive) |
 | Competitive Command Help Coverage | v0.2.9 | Support querying detailed help for specific commands (e.g. 'help recruit' or '? invest') in the competitive REPL | 244 | `bf0414a383634dd6` (competitive) |
 | Clinical Service Lines and Staffing | v0.3.0 | Distinguish inpatient beds/outpatient clinics and implement nurses/physicians/admins staffing constraints | 246 | `a49a2f80540ecd9b` (competitive) |
+| Competitive Scenario Loading and Validation | v0.3.2 | Load and validate custom multi-system scenarios for competitive campaigns via --scenario CLI option | 249 | `a49a2f80540ecd9b` (competitive) |
+
+
+- Feature: Competitive Scenario Loading and Validation
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.3.2
+
+  Summary:
+  Implemented loading, validation, and execution of custom competitive scenarios from TOML via the --scenario CLI option, parsing multi-system starting states and matching them to selected difficulties.
+
+  Done:
+  - Extended Scenario struct with optional systems and initial_market fields.
+  - Implemented validate_competitive_scenario and initial_competitive_world_state.
+  - Updated run CLI routing to support loading and running custom competitive scenarios.
+  - Refactored run_competitive_preview to accept custom initial state.
+  - Added competitive-v1-template.toml template.
+  - Added unit/integration tests for competitive scenario loading and validation.
+  - Bumped package version to v0.3.2.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+  - No changes to competitive transition engine rules.
+
+  Verification:
+  - cargo fmt --check
+  - cargo clippy --all-targets -- -D warnings
+  - cargo test (all 249 tests pass)
 
 
 - Feature: Clinical Service Lines and Staffing

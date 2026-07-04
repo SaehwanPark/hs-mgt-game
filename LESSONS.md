@@ -427,4 +427,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   - **Budget Division Exploits:** Players could buy projects with non-multiple budgets, under-paying total costs due to integer truncation. Resolved by validating that project budgets must be a multiple of the duration.
 - Prevention: Always use additive drops for ongoing penalties, ensure AI player vocabulary handles all roles, keep construction and recruitment delays aligned, maintain observation boundaries in displays, and validate budget divisibility.
 
+## Scenario Deserialization Backward Compatibility & Systems Length Validation
+
+- Context: Implementing competitive scenario loading and validation (Track 1 / Phase 6.2).
+- Symptom: Extending the `Scenario` struct with new required fields broke parsing of the existing stabilization scenario TOML file. Also, difficulty selection had to align with the number of systems in the custom file.
+- Cause: TOML deserializers using `#[serde(deny_unknown_fields)]` reject input when fields are added unless they are marked optional. Difficulty choice also determines how many AI rival controllers are initialized.
+- Resolution: Wrapped all new competitive-specific fields (`initial_market`, `systems`) and existing stabilization-specific fields (`initial_state`, `turn_schedule`, `actor_stubs`) in `Option`. Validated in `validate_stabilization_scenario` and `validate_competitive_scenario` that the required fields for each campaign are present. In the CLI session runner, verified that `systems.len() == 1 + difficulty.k_rivals()` before initializing.
+- Prevention: Make all campaign-specific scenario fields optional in the shared deserialization struct and enforce campaign-specific schema requirements during separate validation passes.
+
 

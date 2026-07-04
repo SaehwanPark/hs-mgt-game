@@ -59,12 +59,35 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
     let scenario = crate::scenario::load_scenario_file(&path).map_err(|error| {
       CliError::ScenarioLoadFailed(format!("could not load scenario file: {error}"))
     })?;
-    crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
-      .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
-    let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
-      return Ok(SessionOutcome::QuitNoSave);
-    };
-    return run_session_from_genesis(setup.config, &ruleset, &setup.initial_state);
+    if scenario.campaign_id == "competitive-regional-v1" {
+      let comp_ruleset = crate::model::default_competitive_ruleset();
+      crate::scenario::validate_competitive_scenario(&scenario, &comp_ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+      let Some(config) = read_competitive_run_config()? else {
+        return Ok(SessionOutcome::QuitNoSave);
+      };
+      let expected_systems = (1 + config.difficulty.k_rivals()) as usize;
+      let systems_len = scenario.systems.as_ref().map(|s| s.len()).unwrap_or(0);
+      if systems_len != expected_systems {
+        return Err(CliError::ScenarioLoadFailed(format!(
+          "scenario has {} systems, but chosen difficulty {} requires {}",
+          systems_len,
+          config.difficulty.label(),
+          expected_systems
+        )));
+      }
+      let initial_world = scenario
+        .initial_competitive_world_state(config.difficulty, &comp_ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid initial state: {error}")))?;
+      return Ok(run_competitive_stub(&ruleset, config, Some(initial_world)));
+    } else {
+      crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+      let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
+        return Ok(SessionOutcome::QuitNoSave);
+      };
+      return run_session_from_genesis(setup.config, &ruleset, &setup.initial_state);
+    }
   }
 
   if session_save_exists_interactive(&ruleset)? {
@@ -112,7 +135,7 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
       let Some(config) = read_competitive_run_config()? else {
         return Ok(SessionOutcome::QuitNoSave);
       };
-      Ok(run_competitive_stub(&ruleset, config))
+      Ok(run_competitive_stub(&ruleset, config, None))
     }
   }
 }
