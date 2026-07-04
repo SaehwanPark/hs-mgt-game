@@ -86,6 +86,29 @@ reconstructing it from the diff.
 | Competitive Campaign Extension & Autosave | v0.5.0 | Extend competitive duration to 24 months, add autosave/resume, and replay export | 252 | `e73a38b3951cd8b6` (competitive) |
 | Versioning Policy Alignment | v0.5.1 | Align version history and policy docs with repository governance standards | 252 | `e73a38b3951cd8b6` (competitive) |
 | Test Hang and Playtest Fixes | v0.5.2 | Fix test suite hangs under interactive stdin and index out of bounds in playtests | 252 | `e73a38b3951cd8b6` (competitive) |
+| Strategy-Space Diagnostics Tooling | v0.5.3 | Implement offline replay diagnostics script for strategy cluster and resource outcome analysis | 252 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: Strategy-Space Diagnostics Tooling
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.5.3
+
+  Summary:
+  Implemented offline replay diagnostics python script to summarize command frequencies, resource trajectories, strategy clusters, and key events across exported runs.
+
+  Done:
+  - Created `scripts/diagnose_runs.py` supporting offline parsing and summarization of replay JSON logs.
+  - Added a test in `tests/golden_competitive_seed42.rs` to automatically write the 24-month seed 42 run to `tests/fixtures/mock_replay.json`.
+  - Bumped Cargo.toml and Cargo.lock version to v0.5.3.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - cargo check
+  - cargo test (all 252 tests pass)
+  - python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json (successfully reports metrics and classifications)
 
 
 - Feature: Test Hang and Playtest Fixes

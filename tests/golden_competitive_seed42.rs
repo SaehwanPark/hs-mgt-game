@@ -30,3 +30,21 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
   );
   assert_eq!(transition.state_hash, "e73a38b3951cd8b6");
 }
+
+#[test]
+fn generate_mock_replay_fixture() {
+  use hs_mgt_game::competitive::build_multi_month_resolution_history;
+  use std::fs;
+  use std::path::Path;
+
+  let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 24)
+    .expect("build multi month history");
+
+  let json = serde_json::to_string_pretty(&history).expect("serialize history");
+
+  let dir = Path::new("tests/fixtures");
+  if !dir.exists() {
+    fs::create_dir_all(dir).expect("create fixtures dir");
+  }
+  fs::write(dir.join("mock_replay.json"), json).expect("write mock replay file");
+}

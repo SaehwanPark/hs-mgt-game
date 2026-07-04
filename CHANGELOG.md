@@ -6,6 +6,12 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.3] - 2026-07-04
+
+### Added
+- Implemented `scripts/diagnose_runs.py` diagnostic command-line tool to analyze action frequencies, outcome distributions, and strategy-cluster classifications over exported replay JSON files.
+- Added `generate_mock_replay_fixture` test in `tests/golden_competitive_seed42.rs` to automatically generate a mock 24-month replay file at `tests/fixtures/mock_replay.json` during test runs.
+
 ## [0.5.2] - 2026-07-04
 
 ### Fixed

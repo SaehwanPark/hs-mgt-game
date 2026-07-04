@@ -462,4 +462,14 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Never bypass fallback checks with direct terminal state checks in interactive prompt paths. Ensure automated scripts gracefully scale commands when campaign configurations (like loop duration) change.
 
 
+## Keep Offline Replay Fixtures Up to Date via Integration Tests
+
+- Context: Developing offline diagnostic scripts that parse replay JSON files which match the current Rust models.
+- Symptom: Hardcoded offline JSON files quickly become out-of-date and cause parsers to fail when Rust models are updated or serialized keys change.
+- Cause: Manually exporting and updating JSON replay files is slow and easily overlooked.
+- Resolution: Created an integration test `generate_mock_replay_fixture` under `tests/golden_competitive_seed42.rs` that automatically builds a full 24-month `CompetitiveHistory` and writes it out as a pretty JSON file at `tests/fixtures/mock_replay.json` on every test run.
+- Prevention: Leverage standard test runners to dynamically export serialization fixtures to maintain parity between engine structures and diagnostic tool inputs.
+
+
+
 
