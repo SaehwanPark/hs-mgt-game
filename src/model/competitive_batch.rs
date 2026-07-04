@@ -1,6 +1,6 @@
 use super::CompetitiveCommand;
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct SystemMonthlyBatch {
   pub system_id: u32,
   pub commands: Vec<CompetitiveCommand>,
@@ -29,7 +29,7 @@ impl SystemMonthlyBatch {
   }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct AggregatedMonthlyActions {
   pub month_index: u32,
   pub batches: Vec<SystemMonthlyBatch>,

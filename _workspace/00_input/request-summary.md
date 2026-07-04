@@ -1,45 +1,35 @@
-# Request Summary - Clinical Service Lines and Staffing (Phase 6 - Track 5)
+# Request Summary - Competitive Campaign Length & Autosave
 
 ## Scope
-Implement clinical service line capacity and staffing requirements in the competitive regional campaign.
+Extend the competitive regional campaign loop to 24 months, implement autosave/resume logic via `competitive_session.save`, and add competitive replay export on completion.
+
 Specifically:
-- Differentiate between two service lines: Inpatient Beds (`staffed_beds`) and Outpatient Clinics (`outpatient_capacity`).
-- Add `outpatient_capacity`, `nurses`, and `physicians` metrics to `HealthSystemState`.
-- Map `InvestDomain::Beds` to physical inpatient capacity (`staffed_beds`) and `InvestDomain::Outpatient` to physical outpatient capacity (`outpatient_capacity`).
-- Map `RecruitRole::Nurse` to `nurses` and `RecruitRole::Physician` to `physicians`.
-- Implement dynamic staffing ratio constraints and understaffing penalties:
-  - Target: 5 inpatient beds per nurse, 10 outpatient clinic units per physician.
-  - Compute effective capacity based on staffing: `effective_beds = nurses * 5`, `effective_outpatient = physicians * 10`.
-  - Penalize `access_index`, `quality_index`, and `workforce_trust` when physical capacity exceeds effective staffed capacity.
-- Update `ProjectKind::Tower` and `ProjectKind::ClinicNetwork` to grant physical capacities.
-- Update serialization, parsing, state hashing, CLI displays, and unit tests.
+- Extend campaign loop length: change default preview to a 24-month horizon.
+- Autosave/resume:
+  - Add path and load/write/delete helpers for `competitive_session.save` in `src/cli/persistence.rs`.
+  - Create serializable `CompetitiveSessionSave` structure.
+  - Intercept early quit in `run_competitive_month_loop` and save active campaign.
+  - Check for competitive autosave on CLI REPL startup and offer resume menu option.
+- Replay export:
+  - Support exporting competitive replay JSON artifact upon successful completion.
 
 ## Non-Goals
-- No changes to stabilization campaign rules or schema.
-- No changes to the Stata command grammar (keep the same 7 verbs and parameters).
-- No multiplayer network capabilities.
-- No new external crate dependencies.
+- No changes to stabilization campaign rules, loop, or save file.
+- No network multiplayer capabilities.
+- No database integration.
 
 ## Sources
-- `src/model/competitive_world.rs`
-- `src/model/competitive_command.rs`
-- `src/model/competitive_hash.rs`
-- `src/sim/effects_competitive.rs`
-- `src/sim/transition_competitive.rs`
-- `src/cli/display/executive_report.rs`
+- `src/cli/campaign.rs`
+- `src/cli/persistence.rs`
+- `src/cli/session.rs`
+- `src/model/session_save.rs`
 
 ## Expected Files
-- `src/model/competitive_world.rs`
-- `src/model/competitive_command.rs`
-- `src/model/competitive_hash.rs`
-- `src/sim/effects_competitive.rs`
-- `src/sim/transition_competitive.rs`
-- `src/cli/display/executive_report.rs`
+- `src/model/competitive_session_save.rs` (or added to `session_save.rs`)
+- `src/artifact/competitive_session_save.rs`
+- `src/cli/persistence.rs`
+- `src/cli/campaign.rs`
+- `src/cli/session.rs`
 - `Cargo.toml`
 - `CHANGELOG.md`
 - `SPEC.md`
-
-## Validation Target
-- All cargo tests pass cleanly (245+ tests).
-- `cargo clippy --all-targets -- -D warnings` compiles without warnings.
-- `cargo fmt --check` passes cleanly.

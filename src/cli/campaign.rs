@@ -1,7 +1,7 @@
 use crate::model::{
   CampaignId, CliError, CompetitiveHistory, CompetitiveRuleset, CompetitiveRunConfig,
-  CompetitiveWorldState, PlayerResources, Ruleset, SessionOutcome, SystemMonthlyBatch,
-  default_competitive_ruleset,
+  CompetitiveSessionSave, CompetitiveTransition, CompetitiveWorldState, PlayerResources, Ruleset,
+  SessionOutcome, SystemMonthlyBatch, default_competitive_ruleset,
 };
 use crate::sim::{observe_for_human, validate_competitive_batch};
 
@@ -14,13 +14,16 @@ use super::io::{
   read_competitive_command_batch, read_difficulty_choice, read_seed_choice,
   read_validation_demo_choice, stdin_uses_fallback_input,
 };
+use super::persistence::{
+  delete_competitive_session_save, describe_persistence_error, write_competitive_session_save,
+};
 use crate::competitive::{
   genesis_competitive_world_with_ruleset, genesis_roster_lines, human_batch_for_month,
   observation_from_genesis, resolution_summary_lines, resolve_competitive_month,
   validation_demo_by_id, validation_demo_menu_lines, validation_resources_for_demo,
 };
 
-const COMPETITIVE_PREVIEW_MONTHS: u32 = 3;
+const COMPETITIVE_CAMPAIGN_MONTHS: u32 = 24;
 
 pub fn select_campaign() -> Result<Option<CampaignId>, CliError> {
   loop {
@@ -147,42 +150,20 @@ fn run_competitive_preview_internal(
   }
 
   print_line("");
-  print_line(&style::subsection("THREE-MONTH COMPETITIVE LOOP"));
-  match run_competitive_month_loop(world, &ruleset, config.seed) {
+  print_line(&style::subsection("COMPETITIVE CAMPAIGN LOOP"));
+  match run_competitive_month_loop(world, Vec::new(), &ruleset, config.seed) {
     Ok(history) => {
-      print_line("");
-      print_line(&style::success(&format!(
-        "Completed {} competitive months.",
-        history.transitions.len()
-      )));
-      print_line(&style::label_value(
-        "Final turn",
-        &history.final_state().turn.to_string(),
-      ));
-      print_line(&style::label_value(
-        "Next report month",
-        &format!(
-          "Year {}, Month {}",
-          history.final_state().policy_calendar.year,
-          history.final_state().policy_calendar.month_in_year
-        ),
-      ));
-      print_line("");
-      print_line(&style::subsection(
-        "Competitive Debrief & Instructor Review",
-      ));
-      for line in crate::debrief::competitive_debrief(&history) {
-        print_line(&format!("  {line}"));
-      }
+      print_competitive_completed(history);
+      SessionOutcome::Completed
     }
-    Err(CompetitiveLoopError::Quit) => return SessionOutcome::QuitNoSave,
+    Err(CompetitiveLoopError::Quit) => SessionOutcome::QuitSaved,
     Err(CompetitiveLoopError::Cli(error)) => {
       print_line(&style::warning(&format!(
         "{} Could not parse human batch: {}",
         style::EMOJI_WARNING,
         describe_cli_error(&error)
       )));
-      return SessionOutcome::CompetitivePreview;
+      SessionOutcome::CompetitivePreview
     }
     Err(CompetitiveLoopError::Validation(error)) => {
       print_line(&style::warning(&format!(
@@ -190,15 +171,111 @@ fn run_competitive_preview_internal(
         style::EMOJI_WARNING,
         error.message()
       )));
+      SessionOutcome::CompetitivePreview
     }
   }
+}
+
+pub fn resume_competitive_campaign(
+  ruleset: &Ruleset,
+  save: CompetitiveSessionSave,
+) -> SessionOutcome {
+  let comp_ruleset = default_competitive_ruleset();
+  let config = CompetitiveRunConfig {
+    seed: save.seed,
+    difficulty: save.difficulty,
+  };
 
   print_line("");
-  print_line(&style::dim(
-    "Competitive campaign preview is bounded to three months; full 24-month campaign remains deferred.",
-  ));
+  print_line(&style::subsection(&format!(
+    "RESUMING COMPETITIVE CAMPAIGN (Month {}, seed {})",
+    save.next_month, save.seed
+  )));
 
-  SessionOutcome::CompetitivePreview
+  match run_competitive_month_loop(
+    save.history.genesis,
+    save.history.transitions,
+    &comp_ruleset,
+    save.seed,
+  ) {
+    Ok(history) => {
+      print_competitive_completed(history);
+      SessionOutcome::Completed
+    }
+    Err(CompetitiveLoopError::Quit) => SessionOutcome::QuitSaved,
+    Err(CompetitiveLoopError::Cli(error)) => {
+      print_line(&style::warning(&format!(
+        "{} Could not parse human batch: {}",
+        style::EMOJI_WARNING,
+        describe_cli_error(&error)
+      )));
+      SessionOutcome::CompetitivePreview
+    }
+    Err(CompetitiveLoopError::Validation(error)) => {
+      print_line(&style::warning(&format!(
+        "{} Competitive month resolution failed: {}",
+        style::EMOJI_WARNING,
+        error.message()
+      )));
+      SessionOutcome::CompetitivePreview
+    }
+  }
+}
+
+fn print_competitive_completed(history: CompetitiveHistory) {
+  print_line("");
+  print_line(&style::success(&format!(
+    "Completed {} competitive months.",
+    history.transitions.len()
+  )));
+  print_line(&style::label_value(
+    "Final turn",
+    &history.final_state().turn.to_string(),
+  ));
+  print_line(&style::label_value(
+    "Next report month",
+    &format!(
+      "Year {}, Month {}",
+      history.final_state().policy_calendar.year,
+      history.final_state().policy_calendar.month_in_year
+    ),
+  ));
+  print_line("");
+  print_line(&style::subsection(
+    "Competitive Debrief & Instructor Review",
+  ));
+  for line in crate::debrief::competitive_debrief(&history) {
+    print_line(&format!("  {line}"));
+  }
+
+  if std::io::IsTerminal::is_terminal(&std::io::stdin()) {
+    match super::io::read_replay_export_path() {
+      Ok(ReadLineOutcome::Quit) => {}
+      Ok(ReadLineOutcome::Payload(input)) => {
+        let trimmed = input.trim();
+        if !trimmed.is_empty() {
+          let path = std::path::PathBuf::from(trimmed);
+          let text = serde_json::to_string_pretty(&history).unwrap_or_default();
+          match std::fs::write(&path, text) {
+            Ok(()) => {
+              print_line(&style::success(&format!(
+                "{} Replay export complete: {}",
+                style::EMOJI_SUCCESS,
+                path.display()
+              )));
+            }
+            Err(error) => {
+              print_line(&style::warning(&format!(
+                "{} Replay export failed: {error}",
+                style::EMOJI_WARNING
+              )));
+            }
+          }
+        }
+      }
+      Err(_) => {}
+    }
+  }
 }
 
 #[derive(Debug)]
@@ -216,16 +293,56 @@ impl From<crate::model::CompetitiveValidationError> for CompetitiveLoopError {
 
 fn run_competitive_month_loop(
   genesis: CompetitiveWorldState,
+  initial_transitions: Vec<CompetitiveTransition>,
   ruleset: &CompetitiveRuleset,
   seed: u64,
 ) -> Result<CompetitiveHistory, CompetitiveLoopError> {
-  let mut current = genesis.clone();
-  let mut prior_aggregated = None;
-  let mut transitions = Vec::with_capacity(COMPETITIVE_PREVIEW_MONTHS as usize);
+  let mut transitions = initial_transitions;
+  let mut current = if let Some(last) = transitions.last() {
+    last.next.clone()
+  } else {
+    genesis.clone()
+  };
+  let mut prior_aggregated = transitions.last().map(|t| t.aggregated.clone());
 
-  for _ in 0..COMPETITIVE_PREVIEW_MONTHS {
+  let start_month = transitions.len() as u32;
+
+  for _ in start_month..COMPETITIVE_CAMPAIGN_MONTHS {
     print_competitive_month_report(&current, prior_aggregated.as_ref(), ruleset);
-    let human_batch = read_human_batch_for_world(&current, ruleset)?;
+
+    let human_batch = match read_human_batch_for_world(&current, ruleset) {
+      Ok(batch) => batch,
+      Err(CompetitiveLoopError::Quit) => {
+        let history = CompetitiveHistory {
+          genesis: genesis.clone(),
+          transitions: transitions.clone(),
+        };
+        let save = CompetitiveSessionSave {
+          ruleset_version: ruleset.version.to_string(),
+          seed,
+          difficulty: genesis.difficulty,
+          history,
+          next_month: current.policy_calendar.month_index,
+        };
+        match write_competitive_session_save(&save) {
+          Ok(()) => {
+            print_line(&style::success(&format!(
+              "{} Competitive campaign session saved; resume on next launch with c/2",
+              style::EMOJI_SUCCESS
+            )));
+          }
+          Err(error) => {
+            print_line(&style::warning(&format!(
+              "{} Competitive autosave failed: {}",
+              style::EMOJI_WARNING,
+              describe_persistence_error(&error)
+            )));
+          }
+        }
+        return Err(CompetitiveLoopError::Quit);
+      }
+      Err(other) => return Err(other),
+    };
 
     print_line("");
     print_line(&style::subsection(&format!(
@@ -245,6 +362,9 @@ fn run_competitive_month_loop(
     current = transition.next.clone();
     transitions.push(transition);
   }
+
+  // Campaign completed successfully, delete autosave
+  let _ = delete_competitive_session_save();
 
   Ok(CompetitiveHistory {
     genesis,
@@ -450,7 +570,7 @@ mod tests {
   }
 
   #[test]
-  fn competitive_stub_returns_preview_outcome() {
+  fn competitive_stub_returns_completed_outcome() {
     let outcome = run_competitive_preview(
       CompetitiveRunConfig {
         seed: DEFAULT_SEED,
@@ -459,18 +579,19 @@ mod tests {
       Some(String::new()),
       None,
     );
-    assert_eq!(outcome, SessionOutcome::CompetitivePreview);
+    assert_eq!(outcome, SessionOutcome::Completed);
   }
 
   #[test]
-  fn competitive_month_loop_runs_three_months_in_non_tty_context() {
+  fn competitive_month_loop_runs_twenty_four_months_in_non_tty_context() {
     let ruleset = default_competitive_ruleset();
     let world = genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
-    let history = run_competitive_month_loop(world, &ruleset, DEFAULT_SEED).expect("history");
+    let history =
+      run_competitive_month_loop(world, Vec::new(), &ruleset, DEFAULT_SEED).expect("history");
 
-    assert_eq!(history.transitions.len(), 3);
-    assert_eq!(history.final_state().turn, 3);
-    assert_eq!(history.final_state().policy_calendar.month_index, 4);
+    assert_eq!(history.transitions.len(), 24);
+    assert_eq!(history.final_state().turn, 24);
+    assert_eq!(history.final_state().policy_calendar.month_index, 25);
   }
 
   #[test]

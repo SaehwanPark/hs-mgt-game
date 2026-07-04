@@ -61,11 +61,19 @@ pub fn resume_choice_prompt_lines() -> Vec<String> {
   ]
 }
 
+pub fn competitive_resume_choice_prompt_lines() -> Vec<String> {
+  vec![
+    style::section_heading(style::EMOJI_STRATEGY, "Saved competitive campaign found"),
+    style::label_value("Resume", "r — continue where you left off"),
+    style::label_value("Start over", "n — delete autosave and begin fresh"),
+  ]
+}
+
 pub fn campaign_menu_lines() -> Vec<String> {
   vec![
     style::section_heading(style::EMOJI_STRATEGY, "Choose campaign"),
     style::dim("  Enter or 1 → Regional stabilization demo (five-turn playable)"),
-    style::dim("  2 or c → Competitive regional market (three-month preview)"),
+    style::dim("  2 or c → Competitive regional market (24-month campaign)"),
   ]
 }
 

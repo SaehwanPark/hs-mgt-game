@@ -3,15 +3,17 @@ use std::io;
 use crate::artifact::{describe_replay_artifact_error, write_replay_artifact};
 use crate::inputs::resolve_inputs;
 use crate::model::{
-  CampaignId, CliError, ExperienceMode, History, INTERACTIVE_TURN_COUNT, PlayMode, PlayerCommand,
-  ReplayArtifact, ResumeState, Ruleset, RunConfig, SessionOutcome, SessionSave, default_ruleset,
-  genesis_state,
+  CampaignId, CliError, CompetitiveRuleset, CompetitiveSessionSave, ExperienceMode, History,
+  INTERACTIVE_TURN_COUNT, PlayMode, PlayerCommand, ReplayArtifact, ResumeState, Ruleset, RunConfig,
+  SessionOutcome, SessionSave, default_ruleset, genesis_state,
 };
 use crate::scenario::default_stabilization_scenario;
 use crate::sim::{observe_for_player, transition};
 
 use super::beginner::{format_beginner_menu, parse_beginner_choice};
-use super::campaign::{read_competitive_run_config, run_competitive_stub, select_campaign};
+use super::campaign::{
+  read_competitive_run_config, resume_competitive_campaign, run_competitive_stub, select_campaign,
+};
 use super::display::{
   format_command_prompt, print_block, print_interactive_results, print_line,
   print_pre_run_briefing, print_turn_briefing_block, print_turn_resolution_block,
@@ -22,8 +24,9 @@ use super::guidance::{new_player_cue_lines, turn_hint};
 use super::input::ReadLineOutcome;
 use super::io::{
   parse_play_mode_choice, parse_replay_export_path, parse_resume_choice,
-  parse_seed_choice_with_default, read_beginner_choice, read_command_line, read_play_mode_choice,
-  read_replay_export_path, read_resume_choice, read_seed_choice,
+  parse_seed_choice_with_default, read_beginner_choice, read_command_line,
+  read_competitive_resume_choice, read_play_mode_choice, read_replay_export_path,
+  read_resume_choice, read_seed_choice,
 };
 use super::output::print_demo;
 use super::parse::{
@@ -31,8 +34,9 @@ use super::parse::{
   parse_stabilize_access_command, parse_workforce_command,
 };
 use super::persistence::{
-  delete_session_save, first_run_complete, load_session_save, mark_first_run_complete,
-  write_session_save,
+  delete_competitive_session_save, delete_session_save, first_run_complete,
+  load_competitive_session_save, load_session_save, mark_first_run_complete,
+  write_competitive_session_save, write_session_save,
 };
 use super::strategy::{
   build_history_for_strategy_from_genesis, default_interactive_commands, strategy_plan,
@@ -106,6 +110,8 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
     }
   }
 
+  let comp_ruleset = crate::model::default_competitive_ruleset();
+
   if session_save_exists_interactive(&ruleset)? {
     loop {
       match read_resume_choice()? {
@@ -117,6 +123,33 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
           }
           Ok(false) => {
             delete_session_save().map_err(|error| {
+              CliError::SessionSaveFailed(super::persistence::describe_persistence_error(&error))
+            })?;
+            break;
+          }
+          Err(CliError::InvalidResumeChoice(choice)) => {
+            print_line(&style::warning(&format!(
+              "{} '{choice}' is not valid; use r to resume or n to start over",
+              style::EMOJI_WARNING
+            )));
+          }
+          Err(error) => return Err(error),
+        },
+      }
+    }
+  } else if competitive_session_save_exists_interactive(&comp_ruleset)? {
+    loop {
+      match read_competitive_resume_choice()? {
+        ReadLineOutcome::Quit => return Ok(SessionOutcome::QuitNoSave),
+        ReadLineOutcome::Payload(input) => match parse_resume_choice(&input) {
+          Ok(true) => {
+            let save = load_competitive_session_save(&comp_ruleset).map_err(|error| {
+              CliError::SessionSaveFailed(super::persistence::describe_persistence_error(&error))
+            })?;
+            return Ok(resume_competitive_campaign(&ruleset, save));
+          }
+          Ok(false) => {
+            delete_competitive_session_save().map_err(|error| {
               CliError::SessionSaveFailed(super::persistence::describe_persistence_error(&error))
             })?;
             break;
@@ -234,6 +267,27 @@ fn session_save_exists_interactive(ruleset: &Ruleset) -> Result<bool, CliError> 
         super::persistence::describe_persistence_error(&error)
       )));
       let _ = delete_session_save();
+      Ok(false)
+    }
+  }
+}
+
+fn competitive_session_save_exists_interactive(
+  ruleset: &CompetitiveRuleset,
+) -> Result<bool, CliError> {
+  if !super::persistence::competitive_session_save_exists() {
+    return Ok(false);
+  }
+
+  match load_competitive_session_save(ruleset) {
+    Ok(_) => Ok(true),
+    Err(error) => {
+      print_line(&style::warning(&format!(
+        "{} Ignoring invalid competitive autosave: {}",
+        style::EMOJI_WARNING,
+        super::persistence::describe_persistence_error(&error)
+      )));
+      let _ = delete_competitive_session_save();
       Ok(false)
     }
   }

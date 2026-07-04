@@ -19,7 +19,7 @@ use crate::model::{
 use crate::scenario::{default_stabilization_scenario, validate_stabilization_scenario};
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
-const COMPETITIVE_MONTH_LIMIT: u32 = 3;
+const COMPETITIVE_MONTH_LIMIT: u32 = 24;
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct StartSessionRequest {
@@ -683,12 +683,12 @@ mod tests {
   }
 
   #[test]
-  fn competitive_advances_three_months_then_done() {
+  fn competitive_advances_twenty_four_months_then_done() {
     let mut store = GameSessionStore::default();
     let session = start(&mut store, "competitive-regional-v1");
     let mut current = session;
 
-    for _ in 0..3 {
+    for _ in 0..24 {
       current = store
         .submit_turn(SubmitTurnRequest {
           session_id: current.session_id.clone(),
@@ -698,14 +698,14 @@ mod tests {
     }
 
     assert!(current.done);
-    assert_eq!(current.turn, 3);
+    assert_eq!(current.turn, 24);
     assert!(current.legal_commands.is_empty());
     let history = store
       .get_history(GetHistoryRequest {
         session_id: current.session_id,
       })
       .expect("history");
-    assert_eq!(history.transition_count, 3);
+    assert_eq!(history.transition_count, 24);
   }
 
   #[test]

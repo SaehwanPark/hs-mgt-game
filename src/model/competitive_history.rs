@@ -3,7 +3,7 @@ use super::{
   Event,
 };
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct CompetitiveTransition {
   pub prior: CompetitiveWorldState,
   pub aggregated: AggregatedMonthlyActions,
@@ -23,7 +23,7 @@ pub enum CompetitiveReplayError {
   },
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct CompetitiveHistory {
   pub genesis: CompetitiveWorldState,
   pub transitions: Vec<CompetitiveTransition>,

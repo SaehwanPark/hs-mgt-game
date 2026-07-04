@@ -22,10 +22,10 @@ fn seed_footer_documents_default_seed() {
 }
 
 #[test]
-fn campaign_menu_describes_competitive_three_month_preview() {
+fn campaign_menu_describes_competitive_twenty_four_month_campaign() {
   let menu = campaign_menu_lines().join("\n");
 
-  assert!(menu.contains("three-month preview"));
+  assert!(menu.contains("24-month campaign"));
   assert!(!menu.contains("month-1"));
 }
 

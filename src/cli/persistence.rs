@@ -1,8 +1,13 @@
 use std::fs;
 use std::path::PathBuf;
 
-use crate::artifact::{describe_session_save_error, serialize_session_save, verify_session_save};
-use crate::model::{Ruleset, SessionSave, SessionSaveError};
+use crate::artifact::{
+  describe_session_save_error, deserialize_competitive_session_save,
+  serialize_competitive_session_save, serialize_session_save, verify_session_save,
+};
+use crate::model::{
+  CompetitiveRuleset, CompetitiveSessionSave, Ruleset, SessionSave, SessionSaveError,
+};
 
 pub fn config_dir() -> PathBuf {
   if let Ok(xdg) = std::env::var("XDG_CONFIG_HOME") {
@@ -18,12 +23,20 @@ pub fn session_save_path() -> PathBuf {
   config_dir().join("session.save")
 }
 
+pub fn competitive_session_save_path() -> PathBuf {
+  config_dir().join("competitive_session.save")
+}
+
 pub fn settings_path() -> PathBuf {
   config_dir().join("settings")
 }
 
 pub fn session_save_exists() -> bool {
   session_save_path().is_file()
+}
+
+pub fn competitive_session_save_exists() -> bool {
+  competitive_session_save_path().is_file()
 }
 
 pub fn load_session_save(ruleset: &Ruleset) -> Result<SessionSave, SessionSaveError> {
@@ -64,6 +77,53 @@ pub fn delete_session_save() -> Result<(), SessionSaveError> {
   fs::remove_file(&path).map_err(|error| {
     SessionSaveError::IoError(format!(
       "unable to delete session save at {}: {error}",
+      path.display()
+    ))
+  })
+}
+
+pub fn load_competitive_session_save(
+  ruleset: &CompetitiveRuleset,
+) -> Result<CompetitiveSessionSave, SessionSaveError> {
+  let path = competitive_session_save_path();
+  let text = fs::read_to_string(&path).map_err(|error| {
+    SessionSaveError::IoError(format!(
+      "unable to read competitive session save at {}: {error}",
+      path.display()
+    ))
+  })?;
+  deserialize_competitive_session_save(&text, ruleset)
+}
+
+pub fn write_competitive_session_save(
+  save: &CompetitiveSessionSave,
+) -> Result<(), SessionSaveError> {
+  let dir = config_dir();
+  fs::create_dir_all(&dir).map_err(|error| {
+    SessionSaveError::IoError(format!(
+      "unable to create config directory {}: {error}",
+      dir.display()
+    ))
+  })?;
+
+  let path = competitive_session_save_path();
+  fs::write(&path, serialize_competitive_session_save(save)).map_err(|error| {
+    SessionSaveError::IoError(format!(
+      "unable to write competitive session save to {}: {error}",
+      path.display()
+    ))
+  })
+}
+
+pub fn delete_competitive_session_save() -> Result<(), SessionSaveError> {
+  let path = competitive_session_save_path();
+  if !path.is_file() {
+    return Ok(());
+  }
+
+  fs::remove_file(&path).map_err(|error| {
+    SessionSaveError::IoError(format!(
+      "unable to delete competitive session save at {}: {error}",
       path.display()
     ))
   })
@@ -132,5 +192,81 @@ mod tests {
     assert_eq!(restored.seed, 42);
     assert_eq!(restored.next_turn, 1);
     assert_eq!(restored.experience_mode, ExperienceMode::Standard);
+  }
+
+  #[test]
+  fn competitive_session_save_round_trip_fields() {
+    use crate::artifact::{
+      deserialize_competitive_session_save, serialize_competitive_session_save,
+    };
+    use crate::competitive::genesis_competitive_world;
+    use crate::model::{
+      CompetitiveHistory, CompetitiveSessionSave, Difficulty, default_competitive_ruleset,
+    };
+
+    let ruleset = default_competitive_ruleset();
+    let genesis = genesis_competitive_world(Difficulty::Normal);
+
+    let save = CompetitiveSessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      difficulty: Difficulty::Normal,
+      history: CompetitiveHistory {
+        genesis,
+        transitions: Vec::new(),
+      },
+      next_month: 1,
+    };
+
+    let text = serialize_competitive_session_save(&save);
+    let restored = deserialize_competitive_session_save(&text, &ruleset).unwrap();
+    assert_eq!(restored.seed, 42);
+    assert_eq!(restored.next_month, 1);
+    assert_eq!(restored.difficulty, Difficulty::Normal);
+  }
+
+  #[test]
+  fn delete_competitive_session_save_is_idempotent_when_missing() {
+    let _ = delete_competitive_session_save();
+  }
+
+  #[test]
+  fn competitive_persistence_write_load_delete_round_trip() {
+    use crate::competitive::genesis_competitive_world;
+    use crate::model::{
+      CompetitiveHistory, CompetitiveSessionSave, Difficulty, default_competitive_ruleset,
+    };
+
+    let ruleset = default_competitive_ruleset();
+    let genesis = genesis_competitive_world(Difficulty::Normal);
+
+    let save = CompetitiveSessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 12345,
+      difficulty: Difficulty::Normal,
+      history: CompetitiveHistory {
+        genesis,
+        transitions: Vec::new(),
+      },
+      next_month: 2,
+    };
+
+    // Ensure clean state
+    let _ = delete_competitive_session_save();
+    assert!(!competitive_session_save_exists());
+
+    // Write save
+    write_competitive_session_save(&save).unwrap();
+    assert!(competitive_session_save_exists());
+
+    // Load save
+    let loaded = load_competitive_session_save(&ruleset).unwrap();
+    assert_eq!(loaded.seed, 12345);
+    assert_eq!(loaded.next_month, 2);
+    assert_eq!(loaded.difficulty, Difficulty::Normal);
+
+    // Delete save
+    delete_competitive_session_save().unwrap();
+    assert!(!competitive_session_save_exists());
   }
 }

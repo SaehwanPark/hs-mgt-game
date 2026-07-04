@@ -1,3 +1,4 @@
+mod competitive_session_save;
 mod parse;
 mod serialize;
 mod session_save;
@@ -5,6 +6,9 @@ mod session_save_serialize;
 mod text;
 mod verify;
 
+pub use competitive_session_save::{
+  deserialize_competitive_session_save, serialize_competitive_session_save,
+};
 pub use serialize::{REPLAY_ARTIFACT_VERSION, serialize_replay_artifact};
 pub use session_save::{
   describe_session_save_error, deserialize_session_save, verify_session_save,

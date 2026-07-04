@@ -435,4 +435,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Resolution: Wrapped all new competitive-specific fields (`initial_market`, `systems`) and existing stabilization-specific fields (`initial_state`, `turn_schedule`, `actor_stubs`) in `Option`. Validated in `validate_stabilization_scenario` and `validate_competitive_scenario` that the required fields for each campaign are present. In the CLI session runner, verified that `systems.len() == 1 + difficulty.k_rivals()` before initializing.
 - Prevention: Make all campaign-specific scenario fields optional in the shared deserialization struct and enforce campaign-specific schema requirements during separate validation passes.
 
+## Competitive Campaign Length Extension & Autosave Implementation
+
+- Context: Extending the competitive regional campaign from a 3-month preview to a full 24-month horizon with mid-campaign serialization, autosave, and reload.
+- Symptom: Serializing structs with `'static str` references (e.g. `AiProfile`, `Event`, `AttributedEffect`) causes compilation or runtime issues with serde, and simultaneous loop progression requires keeping track of the historical transition chain.
+- Cause: Serde cannot directly deserialize `'static str` since it represents memory leaked references. Additionally, resuming a competitive campaign requires restoring both the starting state and all resolved transitions to date.
+- Resolution: Derived `Serialize` and `Deserialize` on all competitive types. For structs with `'static str` fields, serialized them as standard strings, and manually leaked them using `Box::leak` on deserialization to reconstruct stable `'static str` references. Bounded campaign execution to 24 months, auto-saved the transition history on early quit (`q`/`quit`) into `.config/hs-mgt-game/competitive_session.save`, and added a resume menu selection to reload it. Finally, enabled exporting the complete `CompetitiveHistory` as a replay JSON file upon campaign completion.
+- Prevention: Separate save structures (`session.save` and `competitive_session.save`) to isolate serialization logic. When deserializing lifetime-bound static strings, deserialize into owned strings and use `Box::leak` to construct stable `'static str` references safely. Ensure complete unit/integration tests cover round-trip serialization and delete-on-completion paths.
+
 

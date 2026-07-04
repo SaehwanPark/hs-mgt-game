@@ -1,13 +1,13 @@
 use super::{Difficulty, PlayerResources, PolicyCalendar, RecruitRole};
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct SharedMarketFields {
   pub regional_demand_index: i32,
   pub commercial_payer_pressure: i32,
   pub policy_pressure: i32,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct AiStyleWeights {
   pub growth: u32,
   pub margin: u32,
@@ -82,13 +82,66 @@ pub enum PlayerController {
   Ai(AiProfile),
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+impl serde::Serialize for PlayerController {
+  fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+  where
+    S: serde::Serializer,
+  {
+    #[derive(serde::Serialize)]
+    enum RawPlayerController {
+      Human,
+      Ai {
+        org_name: String,
+        style: AiStyleWeights,
+      },
+    }
+
+    let raw = match self {
+      PlayerController::Human => RawPlayerController::Human,
+      PlayerController::Ai(profile) => RawPlayerController::Ai {
+        org_name: profile.org_name.to_string(),
+        style: profile.style,
+      },
+    };
+    raw.serialize(serializer)
+  }
+}
+
+impl<'de> serde::Deserialize<'de> for PlayerController {
+  fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+  where
+    D: serde::Deserializer<'de>,
+  {
+    #[derive(serde::Deserialize)]
+    enum RawPlayerController {
+      Human,
+      Ai {
+        org_name: String,
+        style: AiStyleWeights,
+      },
+    }
+
+    let raw = RawPlayerController::deserialize(deserializer)?;
+    match raw {
+      RawPlayerController::Human => Ok(PlayerController::Human),
+      RawPlayerController::Ai { org_name, style } => {
+        let leaked: &'static str = Box::leak(org_name.into_boxed_str());
+        Ok(PlayerController::Ai(AiProfile {
+          org_name: leaked,
+          style,
+        }))
+      }
+    }
+  }
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct PlayerSlot {
   pub system_id: u32,
   pub controller: PlayerController,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct HealthSystemState {
   pub system_id: u32,
   pub name: String,
@@ -105,14 +158,14 @@ pub struct HealthSystemState {
   pub resources: PlayerResources,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct PublicActionEntry {
   pub month_index: u32,
   pub system_id: u32,
   pub summary: String,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum PendingEffectKind {
   Recruit {
     role: RecruitRole,
@@ -132,7 +185,7 @@ pub enum PendingEffectKind {
   },
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct PendingEffect {
   pub id: u32,
   pub system_id: u32,
@@ -142,7 +195,7 @@ pub struct PendingEffect {
   pub summary: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct CompetitiveWorldState {
   pub difficulty: Difficulty,
   pub turn: u32,

@@ -4,7 +4,7 @@ pub enum CampaignId {
   CompetitiveRegionalV1,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub enum Difficulty {
   Easy,
   Normal,
@@ -58,7 +58,7 @@ pub struct PlayerObservation {
   pub intel_gaps: Vec<String>,
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct PolicyCalendar {
   pub month_index: u32,
   pub year: u32,

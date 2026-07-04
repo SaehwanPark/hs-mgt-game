@@ -24,9 +24,9 @@ pub use print::{
   print_turn_resolution_block, print_turn_uncertainty_block,
 };
 pub use prompt::{
-  PromptContext, campaign_menu_lines, difficulty_menu_lines, format_command_prompt,
-  global_commands_footer, play_mode_menu_lines, replay_export_prompt_lines,
-  resume_choice_prompt_lines, seed_prompt_lines,
+  PromptContext, campaign_menu_lines, competitive_resume_choice_prompt_lines,
+  difficulty_menu_lines, format_command_prompt, global_commands_footer, play_mode_menu_lines,
+  replay_export_prompt_lines, resume_choice_prompt_lines, seed_prompt_lines,
 };
 
 #[cfg(test)]
