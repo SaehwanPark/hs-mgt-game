@@ -11,8 +11,9 @@ use crate::model::{
 };
 
 use super::display::{
-  PromptContext, campaign_menu_lines, difficulty_menu_lines, global_commands_footer,
-  play_mode_menu_lines, print_prompt_block, resume_choice_prompt_lines, seed_prompt_lines, style,
+  PromptContext, campaign_menu_lines, competitive_resume_choice_prompt_lines,
+  difficulty_menu_lines, global_commands_footer, play_mode_menu_lines, print_prompt_block,
+  resume_choice_prompt_lines, seed_prompt_lines, style,
 };
 use super::guidance::print_context_help_with_topic;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
@@ -43,6 +44,12 @@ pub fn read_line_with_globals(
 
 pub fn read_resume_choice() -> Result<ReadLineOutcome, CliError> {
   let mut lines = resume_choice_prompt_lines();
+  lines.extend(global_commands_footer(PromptContext::ResumeChoice));
+  read_line_with_globals(&lines, PromptContext::ResumeChoice)
+}
+
+pub fn read_competitive_resume_choice() -> Result<ReadLineOutcome, CliError> {
+  let mut lines = competitive_resume_choice_prompt_lines();
   lines.extend(global_commands_footer(PromptContext::ResumeChoice));
   read_line_with_globals(&lines, PromptContext::ResumeChoice)
 }

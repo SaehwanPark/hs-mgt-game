@@ -49,7 +49,7 @@ pub fn default_competitive_ruleset() -> CompetitiveRuleset {
   }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct PlayerResources {
   pub cash: i32,
   pub political_capital: u32,

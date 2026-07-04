@@ -1,4 +1,4 @@
-use super::{ExperienceMode, History, ReplayError};
+use super::{CompetitiveHistory, Difficulty, ExperienceMode, History, ReplayError};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SessionSave {
@@ -7,6 +7,15 @@ pub struct SessionSave {
   pub experience_mode: ExperienceMode,
   pub history: History,
   pub next_turn: u32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct CompetitiveSessionSave {
+  pub ruleset_version: String,
+  pub seed: u64,
+  pub difficulty: Difficulty,
+  pub history: CompetitiveHistory,
+  pub next_month: u32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
