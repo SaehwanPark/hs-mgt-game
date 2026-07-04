@@ -245,14 +245,27 @@ fn apply_command(
       rate_posture,
     } => {
       let system = &mut world.systems[system_idx];
-      system.market_share_index = crate::model::clamp_metric(system.market_share_index + 1);
-      push_effect(effects, "payer negotiation", "market_share_index", 1);
-      events.push(Event {
-        actor: "health_system",
-        description: format!(
-          "{system_name}: negotiating with {payer:?} ({rate_posture:?} posture)"
-        ),
-      });
+      if matches!(payer, crate::model::PayerId::Medicaid) {
+        system.access_index = crate::model::clamp_metric(system.access_index + 3);
+        world.market.policy_pressure = crate::model::clamp_metric(world.market.policy_pressure - 3);
+        push_effect(effects, "Medicaid compliance", "access_index", 3);
+        push_effect(effects, "Medicaid compliance", "policy_pressure", -3);
+        events.push(Event {
+          actor: "health_system",
+          description: format!(
+            "{system_name}: Medicaid compliance alignment (improved access, reduced policy pressure)"
+          ),
+        });
+      } else {
+        system.market_share_index = crate::model::clamp_metric(system.market_share_index + 1);
+        push_effect(effects, "payer negotiation", "market_share_index", 1);
+        events.push(Event {
+          actor: "health_system",
+          description: format!(
+            "{system_name}: negotiating with {payer:?} ({rate_posture:?} posture)"
+          ),
+        });
+      }
     }
     CompetitiveCommand::Commit { pledge_type, level } => {
       let summary = format!("{system_name}: public {pledge_type:?} pledge level {level}");
@@ -415,9 +428,15 @@ pub fn command_intel_summary(command: &CompetitiveCommand, system_name: &str) ->
     CompetitiveCommand::Negotiate {
       payer,
       rate_posture,
-    } => Some(format!(
-      "{system_name}: private payer talks with {payer:?} ({rate_posture:?})"
-    )),
+    } => {
+      if matches!(payer, crate::model::PayerId::Medicaid) {
+        Some(format!("{system_name}: Medicaid compliance alignment"))
+      } else {
+        Some(format!(
+          "{system_name}: private payer talks with {payer:?} ({rate_posture:?})"
+        ))
+      }
+    }
     CompetitiveCommand::Hold => Some(format!("{system_name}: held position (no public moves)")),
     CompetitiveCommand::Invest { domain, amount } => Some(format!(
       "{system_name}: quiet {domain:?} spend ({amount} units, below disclosure threshold)"
@@ -513,7 +532,8 @@ mod transition_competitive_tests {
   use super::*;
   use crate::competitive::genesis_competitive_world;
   use crate::model::{
-    Difficulty, InvestDomain, MonitorTarget, PledgeType, RecruitRole, default_competitive_ruleset,
+    Difficulty, InvestDomain, MonitorTarget, PayerId, PledgeType, RatePosture, RecruitRole,
+    default_competitive_ruleset,
   };
   use crate::sim::resolve::resolve_monthly_batches;
 
@@ -682,5 +702,53 @@ mod transition_competitive_tests {
         .iter()
         .any(|e| e.actor == "operations" && e.description.contains("understaffing"))
     );
+  }
+
+  #[test]
+  fn test_medicaid_negotiation_lobbying() {
+    let mut prior = genesis_competitive_world(Difficulty::Normal);
+    prior.systems[0].resources.cash = 60;
+    prior.systems[0].access_index = 68;
+    prior.market.policy_pressure = 30;
+    prior.systems[0].market_share_index = 25;
+
+    let ruleset = default_competitive_ruleset();
+    let batch = SystemMonthlyBatch {
+      system_id: prior.systems[0].system_id,
+      commands: vec![CompetitiveCommand::Negotiate {
+        payer: PayerId::Medicaid,
+        rate_posture: RatePosture::Neutral,
+      }],
+      rationale: None,
+    };
+    let batches = vec![
+      batch,
+      SystemMonthlyBatch {
+        system_id: prior.systems[1].system_id,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: prior.systems[2].system_id,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+    ];
+
+    let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
+    let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
+
+    // Cash: 60 starting - 5 cost = 55
+    assert_eq!(transition.next.systems[0].resources.cash, 55);
+    // Access: 68 starting + 3 = 71
+    assert_eq!(transition.next.systems[0].access_index, 71);
+    // Policy pressure: 30 starting - 3 = 27
+    assert_eq!(transition.next.market.policy_pressure, 27);
+    // Market share remains unchanged (does not increase like commercial negotiation)
+    assert_eq!(transition.next.systems[0].market_share_index, 25);
+
+    assert!(transition.events.iter().any(
+      |e| e.actor == "health_system" && e.description.contains("Medicaid compliance alignment")
+    ));
   }
 }

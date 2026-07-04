@@ -88,6 +88,30 @@ reconstructing it from the diff.
 | Test Hang and Playtest Fixes | v0.5.2 | Fix test suite hangs under interactive stdin and index out of bounds in playtests | 252 | `e73a38b3951cd8b6` (competitive) |
 | Strategy-Space Diagnostics Tooling | v0.5.3 | Implement offline replay diagnostics script for strategy cluster and resource outcome analysis | 252 | `e73a38b3951cd8b6` (competitive) |
 | MCP Custom Scenario Loading | v0.5.4 | Implement custom scenario path loading in the MCP start_session tool with validation and tests | 255 | `e73a38b3951cd8b6` (competitive) |
+| Medicaid Public Payer Integration | v0.5.5 | Add Medicaid public payer, posture validation, resource costing, and access compliance effects | 261 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: Medicaid Public Payer Integration
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.5.5
+
+  Summary:
+  Implemented Medicaid public payer integration in the competitive regional campaign loop, supporting custom negotiation rules representing public regulatory compliance and access alignment.
+
+  Done:
+  - Added `PayerId::Medicaid` variant to command models, CLI parsing, autocompletes, and topic help guides.
+  - Implemented Medicaid validation ensuring only neutral rate posture is valid and enforcing a $5 compliance cost.
+  - Implemented transition effects where Medicaid negotiations deduct 1 AP, 2 PC, and $5 cash, resulting in +3 access index and -3 policy pressure.
+  - Filtered out Medicaid negotiations from commercial payer pressure calculations.
+  - Added unit tests for transition effects and validation rules.
+
+  Deferred / Non-Goals:
+  - No Medicaid patient cohort tracking.
+  - No structural changes to HealthSystemState.
+
+  Verification:
+  - cargo test (all 261 tests pass)
 
 
 - Feature: MCP Custom Scenario Loading

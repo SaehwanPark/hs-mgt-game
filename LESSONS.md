@@ -470,6 +470,10 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Resolution: Created an integration test `generate_mock_replay_fixture` under `tests/golden_competitive_seed42.rs` that automatically builds a full 24-month `CompetitiveHistory` and writes it out as a pretty JSON file at `tests/fixtures/mock_replay.json` on every test run.
 - Prevention: Leverage standard test runners to dynamically export serialization fixtures to maintain parity between engine structures and diagnostic tool inputs.
 
+## Avoid Shared-File Race Conditions in Parallel Test Runners
 
-
-
+- Context: Running standard Rust `cargo test` suites containing tests that read/write/delete shared configuration files in the user's config directory.
+- Symptom: Sporadic test failures in `competitive_persistence_write_load_delete_round_trip` with `No such file or directory` errors.
+- Cause: Rust tests run in parallel by default. A cleanup step in one test (like `delete_competitive_session_save`) can run concurrently and delete the file written by another test before it gets loaded.
+- Resolution: Run the tests sequentially using `cargo test -- --test-threads=1` when verifying shared file interactions.
+- Prevention: Avoid writing tests that point to hardcoded global config files; use unique temporary files or directories (e.g. using `tempfile` crate) to isolate test states.

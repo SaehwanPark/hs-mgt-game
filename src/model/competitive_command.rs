@@ -31,6 +31,7 @@ pub enum MonitorTarget {
 pub enum PayerId {
   CarrierA,
   CarrierB,
+  Medicaid,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -137,9 +138,13 @@ impl CompetitiveCommand {
         cash_cost: 0,
         political_capital: 0,
       },
-      CompetitiveCommand::Negotiate { .. } => ActionCost {
+      CompetitiveCommand::Negotiate { payer, .. } => ActionCost {
         action_points: 1,
-        cash_cost: 0,
+        cash_cost: if matches!(payer, PayerId::Medicaid) {
+          5
+        } else {
+          0
+        },
         political_capital: 2,
       },
       CompetitiveCommand::Commit { .. } => ActionCost {

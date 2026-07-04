@@ -172,6 +172,7 @@ pub fn format_competitive_command(cmd: &CompetitiveCommand) -> String {
       let payer_str = match payer {
         PayerId::CarrierA => "carrier_a",
         PayerId::CarrierB => "carrier_b",
+        PayerId::Medicaid => "medicaid",
       };
       let posture_str = match rate_posture {
         RatePosture::Aggressive => "aggressive",

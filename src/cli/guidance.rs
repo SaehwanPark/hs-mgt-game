@@ -115,7 +115,7 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       lines.push("    invest domain=beds|outpatient|technology amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, or technology investments.".to_string());
       lines.push("    recruit role=nurse|physician|admin headcount=<int>: Hire personnel. Costs 1 AP, $5 cash per headcount. Delays: nurse (1 mo), admin (2 mo), physician (3 mo). Can lower trust.".to_string());
       lines.push("    monitor target=northlake|summit|valley|metro depth=<1-3>: View competitor activity. Costs AP equal to depth, $0 cash, 0 PC.".to_string());
-      lines.push("    negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative: Set payer commercial bid. Costs 1 AP, $0 cash, 2 PC.".to_string());
+      lines.push("    negotiate payer=carrier_a|carrier_b|medicaid rate_posture=aggressive|neutral|conservative: Set payer commercial bid or align public compliance. Commercial: 1 AP, $0 cash, 2 PC. Medicaid: 1 AP, $5 cash, 2 PC (neutral posture only).".to_string());
       lines.push("    commit pledge_type=access|quality level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
       lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>: Multi-month capital projects. Costs 2 AP, monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo). Max 2 concurrent projects.".to_string());
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
@@ -295,23 +295,32 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
         &format!(
           "{} {}",
           style::accent("negotiate"),
-          style::dim("payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative")
+          style::dim(
+            "payer=carrier_a|carrier_b|medicaid rate_posture=aggressive|neutral|conservative"
+          )
         ),
       ),
       style::label_value(
         "  Description",
-        "Renegotiate commercial payment rates with insurance carriers.",
+        "Renegotiate commercial payment rates with insurance carriers, or align public Medicaid compliance.",
       ),
-      style::label_value("  Resource Costs", "Costs 1 AP, $0 cash, 2 PC."),
+      style::label_value(
+        "  Resource Costs",
+        "Commercial (carrier_a/carrier_b): 1 AP, $0 cash, 2 PC.\n  Medicaid: 1 AP, $5 cash, 2 PC (neutral posture only).",
+      ),
       style::label_value("  Postures", ""),
       style::dim(
-        "    - aggressive: Demand maximum rates. High revenue potential, but risks contract renewal failure and relationship damage if you lack market leverage.",
+        "    - aggressive: Demand maximum rates (Commercial only). High revenue potential but risks contract renewal failure if you lack leverage.",
       ),
-      style::dim("    - neutral: Propose balanced rate increases."),
-      style::dim("    - conservative: Offer concessions for a guaranteed quick renewal."),
+      style::dim(
+        "    - neutral: Propose balanced rate increases (Commercial), or align Medicaid compliance.",
+      ),
+      style::dim(
+        "    - conservative: Offer concessions for a guaranteed renewal (Commercial only).",
+      ),
       style::label_value(
         "  Strategic Guidance",
-        "Rate increases require leverage (capacity, quality, or market share). Aggressive proposals without leverage are likely to fail, wasting AP and PC.",
+        "Commercial negotiations require leverage to succeed. Medicaid compliance alignment represents lobbying/compliance and does not increase market share; instead, it directly improves access index (+3) and reduces policy pressure (-3).",
       ),
     ]),
     "commit" => Some(vec![

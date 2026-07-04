@@ -28,7 +28,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "negotiate",
-    usage: "negotiate payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative",
+    usage: "negotiate payer=carrier_a|carrier_b|medicaid rate_posture=aggressive|neutral|conservative",
   },
   CompetitiveCommandSpec {
     verb: "commit",
@@ -202,6 +202,7 @@ fn parse_payer(value: &str) -> Result<PayerId, CliError> {
   match value.to_ascii_lowercase().as_str() {
     "carrier_a" => Ok(PayerId::CarrierA),
     "carrier_b" => Ok(PayerId::CarrierB),
+    "medicaid" => Ok(PayerId::Medicaid),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown payer '{value}'"
     ))),
