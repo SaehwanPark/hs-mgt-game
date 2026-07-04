@@ -241,7 +241,7 @@ fn print_competitive_completed(history: CompetitiveHistory) {
     print_line(&format!("  {line}"));
   }
 
-  if std::io::IsTerminal::is_terminal(&std::io::stdin()) {
+  if !stdin_uses_fallback_input() {
     match super::io::read_replay_export_path() {
       Ok(ReadLineOutcome::Quit) => {}
       Ok(ReadLineOutcome::Payload(input)) => {

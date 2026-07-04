@@ -22,7 +22,9 @@ def policy_fiscal(obs, legal, turn):
       "recruit role=nurse headcount=2; hold",
       "commit pledge_type=access level=1; hold"
     ]
-    return commands[turn - 1]
+    if turn <= len(commands):
+      return commands[turn - 1]
+    return "hold"
 
 def policy_growth(obs, legal, turn):
   if is_stabilization_legal(legal):
@@ -34,7 +36,9 @@ def policy_growth(obs, legal, turn):
       "recruit role=nurse headcount=6",
       "negotiate payer=carrier_a rate_posture=aggressive"
     ]
-    return commands[turn - 1]
+    if turn <= len(commands):
+      return commands[turn - 1]
+    return "hold"
 
 def policy_balanced(obs, legal, turn):
   if is_stabilization_legal(legal):
@@ -46,7 +50,9 @@ def policy_balanced(obs, legal, turn):
       "invest domain=beds amount=15; commit pledge_type=access level=2",
       "negotiate payer=carrier_a rate_posture=neutral; hold"
     ]
-    return commands[turn - 1]
+    if turn <= len(commands):
+      return commands[turn - 1]
+    return "hold"
 
 def policy_naive_first_time(obs, legal, turn):
   if is_stabilization_legal(legal):
@@ -58,7 +64,9 @@ def policy_naive_first_time(obs, legal, turn):
       "hold",
       "commit pledge_type=access level=1; hold"
     ]
-    return commands[turn - 1]
+    if turn <= len(commands):
+      return commands[turn - 1]
+    return "hold"
 
 def parse_stabilization_metrics(obs, debrief=None):
   metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "Policy": "N/A"}

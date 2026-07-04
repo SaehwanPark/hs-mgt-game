@@ -1,4 +1,3 @@
-use std::io;
 
 use crate::artifact::{describe_replay_artifact_error, write_replay_artifact};
 use crate::inputs::resolve_inputs;
@@ -26,7 +25,7 @@ use super::io::{
   parse_play_mode_choice, parse_replay_export_path, parse_resume_choice,
   parse_seed_choice_with_default, read_beginner_choice, read_command_line,
   read_competitive_resume_choice, read_play_mode_choice, read_replay_export_path,
-  read_resume_choice, read_seed_choice,
+  read_resume_choice, read_seed_choice, stdin_uses_fallback_input,
 };
 use super::output::print_demo;
 use super::parse::{
@@ -407,7 +406,7 @@ fn run_session_from_genesis(
     InteractiveRunResult::Completed(history) => {
       let _ = delete_session_save();
 
-      if std::io::IsTerminal::is_terminal(&io::stdin()) {
+      if !stdin_uses_fallback_input() {
         match read_replay_export_path()? {
           ReadLineOutcome::Quit => return Ok(SessionOutcome::QuitNoSave),
           ReadLineOutcome::Payload(input) => {

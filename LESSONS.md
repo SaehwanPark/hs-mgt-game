@@ -453,3 +453,13 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Always check that `CHANGELOG.md` includes the entry for the version in `Cargo.toml` before merging a PR, and perform a `0.0.1` bump for every PR-equivalent change (including changelog/documentation updates).
 
 
+## Prevent Test Suite and Automated Playtest Hangs / Crashes
+
+- Context: Running standard cargo test and python automated playtests after campaign loop extension.
+- Symptom: Test execution blocks indefinitely waiting for stdin in PTY/terminal-like test environments, and automated playtests crash with `IndexError` on turn index >= 4.
+- Cause: Directly calling `std::io::IsTerminal::is_terminal(&io::stdin())` inside campaign completion checks bypassing the `stdin_uses_fallback_input()` safeguard, and fixed 3-command arrays in playtest policies when the competitive loop runs for 24 months.
+- Resolution: Swapped `is_terminal` checks with `!stdin_uses_fallback_input()` in `src/cli/campaign.rs` and `src/cli/session.rs`. Modified `scripts/run_automated_playtests.py` policy functions to return `"hold"` once turns exceed the defined command sequence.
+- Prevention: Never bypass fallback checks with direct terminal state checks in interactive prompt paths. Ensure automated scripts gracefully scale commands when campaign configurations (like loop duration) change.
+
+
+

@@ -85,6 +85,29 @@ reconstructing it from the diff.
 | Competitive Scenario Loading and Validation | v0.4.0 | Load and validate custom multi-system scenarios for competitive campaigns via --scenario CLI option | 249 | `e73a38b3951cd8b6` (competitive) |
 | Competitive Campaign Extension & Autosave | v0.5.0 | Extend competitive duration to 24 months, add autosave/resume, and replay export | 252 | `e73a38b3951cd8b6` (competitive) |
 | Versioning Policy Alignment | v0.5.1 | Align version history and policy docs with repository governance standards | 252 | `e73a38b3951cd8b6` (competitive) |
+| Test Hang and Playtest Fixes | v0.5.2 | Fix test suite hangs under interactive stdin and index out of bounds in playtests | 252 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: Test Hang and Playtest Fixes
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.5.2
+
+  Summary:
+  Fixed test suite hangs under interactive stdin and index out of bounds in automated playtest scripts.
+
+  Done:
+  - Replaced direct `std::io::IsTerminal::is_terminal(&io::stdin())` checks with `!stdin_uses_fallback_input()` in `src/cli/campaign.rs` and `src/cli/session.rs` to avoid blocking on stdin prompts under test contexts.
+  - Fixed `IndexError` in `scripts/run_automated_playtests.py` for competitive campaign runs by defaulting turns beyond 3 to `"hold"`.
+  - Bumped Cargo.toml and Cargo.lock package version to v0.5.2.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - cargo check
+  - cargo test (all 252 tests pass)
+  - python3 scripts/run_automated_playtests.py (all 24 runs pass)
 
 
 - Feature: Versioning Policy Alignment

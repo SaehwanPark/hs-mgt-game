@@ -6,6 +6,12 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.2] - 2026-07-04
+
+### Fixed
+- Fixed a test suite hang where interactive/PTY test contexts would block indefinitely on stdin prompts for replay export.
+- Fixed `IndexError` in `scripts/run_automated_playtests.py` by ensuring simulated player policies default to holding on turns beyond the initial 3 months of the newly extended 24-month competitive campaign loop.
+
 ## [0.5.1] - 2026-07-04
 
 ### Changed
