@@ -6,19 +6,29 @@ pub fn print_context_help_with_topic(context: PromptContext, topic: Option<&str>
 }
 
 pub fn context_help_lines_with_topic(context: PromptContext, topic: Option<&str>) -> Vec<String> {
-  if let (Some(t), PromptContext::CompetitiveCommand) = (topic, context) {
-    if let Some(help_lines) = command_topic_help_lines(t) {
-      return help_lines;
+  if let Some(t) = topic {
+    if context == PromptContext::CompetitiveCommand {
+      if let Some(help_lines) = command_topic_help_lines(t) {
+        return help_lines;
+      } else {
+        return vec![
+          style::section_heading(
+            style::EMOJI_BRIEFING,
+            &format!("Help: unknown topic '{}'", t),
+          ),
+          style::warning(&format!(
+            "  No specific help available for '{}'. Available commands: hold, invest, recruit, monitor, negotiate, commit, project.",
+            t
+          )),
+        ];
+      }
     } else {
       return vec![
-        style::section_heading(
-          style::EMOJI_BRIEFING,
-          &format!("Help: unknown topic '{}'", t),
+        style::section_heading(style::EMOJI_BRIEFING, &format!("Help: topic '{}'", t)),
+        style::warning(
+          "  Command-specific help is only available during the competitive campaign.",
         ),
-        style::warning(&format!(
-          "  No specific help available for '{}'. Available commands: hold, invest, recruit, monitor, negotiate, commit, project.",
-          t
-        )),
+        style::dim("  For general menu help, type ? or help without any topic."),
       ];
     }
   }
@@ -99,6 +109,7 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
           format_competitive_help_line(&command_line)
         ));
       }
+      // Note: Keep command details here aligned with `command_topic_help_lines` below to avoid doc drift.
       lines.push("  Command descriptions and resource costs:".to_string());
       lines.push("    hold: Do nothing. Costs 0 AP, $0 cash, 0 PC.".to_string());
       lines.push("    invest domain=beds|outpatient|technology amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, or technology investments.".to_string());
@@ -188,6 +199,7 @@ pub fn turn_hint(turn: u32) -> Option<&'static str> {
   }
 }
 
+// Note: Keep command details here aligned with `PromptContext::CompetitiveCommand` help block above to avoid doc drift.
 fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
   let verb_lower = verb.trim().to_ascii_lowercase();
   match verb_lower.as_str() {
@@ -454,5 +466,13 @@ mod tests {
     let text = help.join("\n");
     assert!(text.contains("Help: unknown topic"));
     assert!(text.contains("No specific help available"));
+  }
+
+  #[test]
+  fn test_topic_help_for_non_competitive_context() {
+    let help = context_help_lines_with_topic(PromptContext::Campaign, Some("recruit"));
+    let text = help.join("\n");
+    assert!(text.contains("Help: topic 'recruit'"));
+    assert!(text.contains("Command-specific help is only available"));
   }
 }

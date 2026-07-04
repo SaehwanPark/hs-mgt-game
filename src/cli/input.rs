@@ -23,17 +23,16 @@ pub fn parse_global_input(raw: &str) -> GlobalInput {
     return GlobalInput::Help { topic: None };
   }
 
-  if lower.starts_with("help ") {
-    let topic = trimmed[5..].trim().to_string();
-    if !topic.is_empty() {
-      return GlobalInput::Help { topic: Some(topic) };
-    }
-  }
-
-  if lower.starts_with("? ") {
-    let topic = trimmed[2..].trim().to_string();
-    if !topic.is_empty() {
-      return GlobalInput::Help { topic: Some(topic) };
+  let mut parts = trimmed.split_whitespace();
+  if let Some(first) = parts.next() {
+    let first_lower = first.to_ascii_lowercase();
+    if first_lower == "help" || first_lower == "?" {
+      let rest: Vec<&str> = parts.collect();
+      if !rest.is_empty() {
+        return GlobalInput::Help {
+          topic: Some(rest.join(" ")),
+        };
+      }
     }
   }
 
@@ -79,9 +78,15 @@ mod tests {
       }
     );
     assert_eq!(
-      parse_global_input("HELP   project\n"),
+      parse_global_input("HELP\tproject\n"),
       GlobalInput::Help {
         topic: Some("project".to_string())
+      }
+    );
+    assert_eq!(
+      parse_global_input("?  hold \n"),
+      GlobalInput::Help {
+        topic: Some("hold".to_string())
       }
     );
   }
