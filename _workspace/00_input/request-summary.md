@@ -1,35 +1,28 @@
-# Request Summary - Workforce Parameter/Evidence Ledger (Phase 1/7 - Track 3)
+# Request Summary - Competitive Autocomplete Hardening (Phase 6 - Track 2)
 
 ## Scope
-Create or extend a parameter/evidence ledger for one bounded mechanism. We select the **Nursing Workforce & Retention** mechanism (comprising nurse staffing ratios, recruitment delays, AP/cash costs, and workforce trust).
-We will:
-1. Identify all workforce-related parameters and formulas in both stabilization and competitive campaign models.
-2. Link code variables and transitions to primary literature and precedents (e.g., California AB 394 safe staffing, Linda Aiken JAMA 2002 nurse burnout study, NSI 2026 RN Staffing Report).
-3. Assign confidence labels based on the project ontology: `Empirically calibrated`, `Literature-grounded`, `Expert-informed`, `Stylized abstraction`, `Gameplay-driven`.
-4. Document the ledger in `docs/workforce-ledger.md` and update `docs/evidence-registry.md` to reference it.
-5. Bump the package version to `0.2.4`.
+Extend the CLI autocompletion capabilities in the competitive campaign (`competitive-regional-v1`) to support argument keys and enum values, fulfilling the requirements in `docs/cli-command-grammar-draft.md`.
+Specifically, we will:
+1. Parse the command segment at the cursor (handling multi-command semicolon separators).
+2. If the cursor is at an argument key position (e.g. after a verb or a space), autocomplete matching argument keys that have not yet been specified in the current command segment.
+3. If the cursor is after an argument key followed by `=` (e.g. `domain=`), autocomplete or cycle through matching enum values.
+4. Ensure no filesystem completion is triggered.
+5. Colocate unit tests in `src/cli/repl.rs` to verify autocompletion behavior for verbs, keys, and values.
 
 ## Non-Goals
-- No changes to simulation rules or parameter values in the codebase.
-- No database or telemetry changes.
-- No changes to existing scenario TOML files.
+- No changes to stabilization campaign prompts (which are numeric-only).
+- No changes to transition rules or gameplay balance.
+- No changes to simulation state hash validation or scenarios.
 
 ## Sources
-- `SPEC.md` Track 3 (Evidence, parameters, and model-confidence ledger)
-- `docs/evidence-registry.md`
-- `src/actors/labor.rs`
-- `src/sim/transition.rs`
-- `src/sim/transition_competitive.rs`
-- `src/model/competitive_command.rs`
+- `docs/cli-command-grammar-draft.md` § Autocomplete
+- `src/cli/repl.rs`
+- `src/cli/competitive_parse.rs`
 
 ## Expected Files
-- `docs/workforce-ledger.md` (Created)
-- `docs/evidence-registry.md` (Modified)
-- `Cargo.toml` (Modified)
-- `Cargo.lock` (Modified)
-- `CHANGELOG.md` (Modified)
-- `SPEC.md` (Modified)
+- `src/cli/repl.rs` (Modified)
+- `_workspace/00_input/request-summary.md` (Modified)
 
 ## Validation Target
-- All cargo tests pass successfully (`cargo test`).
-- Formatting and clippy checks pass cleanly.
+- All unit tests in `src/cli/repl.rs` pass cleanly.
+- `cargo test` passes cleanly (233+ tests).

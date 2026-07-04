@@ -77,7 +77,33 @@ reconstructing it from the diff.
 | Instructor-visible run summary & decision-quality review | v0.2.2 | Compare observed vs true state in stabilization and detailed observed/unobserved rival actions in competitive | 233 | `bf0414a383634dd6` (competitive) |
 | Exemplary scenario brief | v0.2.3 | Draft the first exemplary scenario brief for the competitive campaign modeling workforce and payer conflicts | 233 | `bf0414a383634dd6` (competitive) |
 | Evidence ledger (Workforce) | v0.2.4 | Create parameter/evidence ledger for Nursing Workforce & Retention; update evidence registry | 233 | `bf0414a383634dd6` (competitive) |
+| Competitive campaign autocomplete hardening | v0.2.5 | Implement argument-key and enum-value autocomplete in the CLI REPL for competitive campaigns | 237 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Competitive campaign autocomplete hardening
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.5
+
+  Summary:
+  Extend the competitive campaign CLI REPL autocompletion capability to support argument keys and enum values, ensuring no filesystem completion is triggered, deduplicating keys, and adding unit tests.
+
+  Done:
+  - Implement segment parsing in `src/cli/repl.rs` to identify current word being completed under cursor.
+  - Complete argument keys (e.g. `domain=`) after space/key-prefix, excluding keys already present in segment.
+  - Complete enum values (e.g. `beds`) after a key's `=`.
+  - Add comprehensive unit tests in `src/cli/repl.rs` for argument key, enum value, and batch command autocomplete.
+  - Bump project version to `0.2.5` in Cargo.toml.
+
+  Deferred / Non-Goals:
+  - No autocomplete for integer arguments.
+  - No changes to stabilization campaign prompt behavior.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test` (all 237 tests pass)
+  - `python3 scripts/run_automated_playtests.py`
 
 - Feature: Evidence, parameters, and model-confidence ledger
   Status: Complete
@@ -428,9 +454,9 @@ campaign length, or platform architecture.
 
   Next actionable slice:
   Pick one bounded issue from playtest evidence, such as month-summary clarity,
-  command help coverage, argument-key or enum-value autocomplete, AI rationale
-  visibility, or a three-month pacing problem, and address it without expanding
-  campaign length.
+  command help coverage, AI rationale visibility, or a three-month pacing problem
+  (argument-key and enum-value autocomplete completed in v0.2.5), and address
+  it without expanding campaign length.
 
   Verification target:
   Focused CLI/parser/simulation tests cover the changed behavior, competitive
