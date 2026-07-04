@@ -6,6 +6,18 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.3.1] - 2026-07-04
+
+### Fixed
+- Fixed compounding exponential decay of quality and access indices during understaffing by replacing it with a linear, additive monthly drop.
+- Fixed active project draws never resolving by carrying `project_draw` values to completion effects and deducting ongoing draws from system cash at the start of transition.
+- Fixed missing `workforce_trust` and `community_trust` in the competitive state hash record.
+- Fixed AI player systems lacking candidate commands to recruit Physicians and Administrators.
+- Fixed immediate understaffing penalties on starting turns by matching genesis template administrator levels to required targets.
+- Fixed instant bed capacity mismatch by queuing physical bed expansions with a 1-month delay, matching outpatient clinics.
+- Fixed private rival operational events leaking to the player in the monthly CLI summary report.
+- Fixed budget division truncation exploits by validating that project budgets must be a multiple of the project duration.
+
 ## [0.3.0] - 2026-07-04
 
 ### Added
