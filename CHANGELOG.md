@@ -6,6 +6,14 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-07-03
+
+### Added
+- Created the first dedicated parameter and evidence ledger for the Nursing Workforce & Retention mechanism (`docs/workforce-ledger.md`), mapping game variables and formulas to literature context (BLS occupational reports, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
+- Assigned confidence labels distinguishing empirical calibration candidates, literature-grounded behaviors, stylized abstractions, and gameplay-driven limits.
+- Extended the main evidence registry (`docs/evidence-registry.md`) to link and index the new workforce ledger.
+- Bumps package version to `0.2.4`.
+
 ## [0.2.3] - 2026-07-03
 
 ### Added

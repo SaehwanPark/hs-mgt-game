@@ -1,27 +1,22 @@
-# Final Handoff - Exemplary Scenario Brief (Phase 6.2)
+# Final Handoff - Nursing Workforce & Retention Ledger (Phase 5)
 
 ## Summary of Changes
-Completed Track 2 (Exemplary scenario authoring plan) from the ranked next-development queue:
-1. **Exemplary Scenario Brief:** Designed and drafted `docs/exemplary-scenario-brief.md` modeling a 24-turn competitive regional healthcare campaign (`competitive-exemplary-v1`). The brief details:
-   - **Financial Pressure:** safety-net margin compression for Riverside Community Health.
-   - **Workforce Conflict:** nurse burnout and strike threat at Month 8.
-   - **Payer Provider Negotiation:** Blue Shield commercial rate negotiations at Month 12 and 24.
-   - **Competitive Response:** Northlake Health outpatient capacity and market share poaching.
-   - **Policy / Regulatory Process:** Certificate of Need (CON) legal challenges from Northlake at Month 10.
-   - **Delayed Consequences:** EHR migration delays and nurse strike safety/volume impacts.
-   - **Debrief Hooks:** Qualitative reflection prompts comparing decision quality under uncertainty.
-   - **Strategic Directions:** "Access Safety Net Defense" vs. "Fiscal Preservation & Market Consolidation".
-2. **Workspace Handoffs:** Structured the development using the local team-spec pipeline:
-   - `_workspace/00_input/request-summary.md` (Phase 0 scope and non-goals)
-   - `_workspace/01_evidence_map.md` (Phase 1 literature basis and assumptions)
-   - `_workspace/02_mechanism_design.md` (Phase 2 actor actions, observations, and events)
-   - `_workspace/03_domain_qa.md` (Phase 4 domain verification report)
-3. **Version and Changelog:** Bumped package version to `0.2.3` in `Cargo.toml`/`Cargo.lock` and added version notes to `CHANGELOG.md` and `SPEC.md`.
 
-## Verifications Performed
-- All 233 unit and integration tests compile and pass cleanly.
-- Visual validation of file links, tabsize (2 spaces), and mermaid syntax.
+1. **Workforce Ledger Created (`docs/workforce-ledger.md`):**
+   - Established the parameter/evidence ledger for the Nursing Workforce & Retention mechanism.
+   - Assigned confidence labels (`Empirically calibrated`, `Literature-grounded`, `Stylized abstraction`, `Gameplay-driven`) to all relevant ruleset thresholds, recruitment costs/delays, and trust-impact formulas.
+   - Grounded parameters in health services literature, including California AB 394 (safe staffing mandates), Linda Aiken's JAMA 2002 nurse burnout study, and NSI's 2026 RN Staffing Report (78-day time-to-fill).
+2. **Registry References (`docs/evidence-registry.md`):**
+   - Updated the registry table to point to the new workforce ledger, shifting status from candidate to linked.
+3. **Spec Updates (`SPEC.md`):**
+   - Moved Track 3 from Future to Past, renumbered remaining Future development tracks, and recorded complete status.
+4. **Version Bump to `v0.2.4`:**
+   - Incremented version in `Cargo.toml`, `Cargo.lock`, and `CHANGELOG.md`.
 
-## Next Steps and Dependencies
-- The next development track in the `SPEC.md` Future queue is **Track 3: Evidence, parameters, and model-confidence ledger**.
-- The repository is in a clean state on the branch `feat/exemplary-scenario-brief`.
+---
+
+## Verification Results
+- `cargo fmt --check` passes cleanly.
+- `cargo clippy --all-targets -- -D warnings` compiles with zero warnings or errors.
+- `cargo test` passes cleanly (all 233 unit/integration tests).
+- Golden hashes (competitive seed-42 and stabilization) remain identical.

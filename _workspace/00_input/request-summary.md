@@ -1,31 +1,35 @@
-# Request Summary - Exemplary Scenario Authoring Plan (Phase 6.2)
+# Request Summary - Workforce Parameter/Evidence Ledger (Phase 1/7 - Track 3)
 
 ## Scope
-Draft an exemplary scenario brief at `docs/exemplary-scenario-brief.md` that models a mid-sized regional healthcare market containing:
-1. **Financial Pressure:** Declining margins or cash flow squeeze due to shifting payer rates or high fixed operating costs.
-2. **Workforce Conflict:** Nurses bargaining or strike threat over staffing ratios and burnout.
-3. **Payer provider rate negotiations:** Negotiation with a dominant commercial payer.
-4. **Competitive Response:** Simultaneous capacity expansion or service line poaching by a rival health system.
-5. **Policy / Regulatory process:** Certificate of Need (CON) review for facility expansion, or health department policy intervention.
-6. **Delayed consequences:** Long-term reputation effects, lagged effects of EHR rollout, or worker strike consequences.
-7. **Debrief hooks:** Educational reflection prompts distinguishing decision quality from luck and rival behavior.
-8. **Defensible strategic directions:** At least two viable, contrasting strategies for Riverside Community Health (e.g., Access Safety Net Defense vs. Fiscal Preservation/Market Consolidation).
+Create or extend a parameter/evidence ledger for one bounded mechanism. We select the **Nursing Workforce & Retention** mechanism (comprising nurse staffing ratios, recruitment delays, AP/cash costs, and workforce trust).
+We will:
+1. Identify all workforce-related parameters and formulas in both stabilization and competitive campaign models.
+2. Link code variables and transitions to primary literature and precedents (e.g., California AB 394 safe staffing, Linda Aiken JAMA 2002 nurse burnout study, NSI 2026 RN Staffing Report).
+3. Assign confidence labels based on the project ontology: `Empirically calibrated`, `Literature-grounded`, `Expert-informed`, `Stylized abstraction`, `Gameplay-driven`.
+4. Document the ledger in `docs/workforce-ledger.md` and update `docs/evidence-registry.md` to reference it.
+5. Bump the package version to `0.2.4`.
 
 ## Non-Goals
-- No changes to simulation code or Rust codebase.
-- No scenario loader or TOML parser modifications.
-- No changes to existing scenario fixtures (e.g. `scenarios/stabilization-v1.toml`).
-- No drive-by refactoring of unrelated documents.
+- No changes to simulation rules or parameter values in the codebase.
+- No database or telemetry changes.
+- No changes to existing scenario TOML files.
 
 ## Sources
-- `SPEC.md` Track 2 (Exemplary scenario authoring plan)
-- `docs/first-scenario-brief.md`
-- `docs/competitive-scenario-brief.md`
-- `docs/harness/health-policy-strategy-game/team-spec.md`
+- `SPEC.md` Track 3 (Evidence, parameters, and model-confidence ledger)
+- `docs/evidence-registry.md`
+- `src/actors/labor.rs`
+- `src/sim/transition.rs`
+- `src/sim/transition_competitive.rs`
+- `src/model/competitive_command.rs`
 
 ## Expected Files
-- `docs/exemplary-scenario-brief.md`
+- `docs/workforce-ledger.md` (Created)
+- `docs/evidence-registry.md` (Modified)
+- `Cargo.toml` (Modified)
+- `Cargo.lock` (Modified)
+- `CHANGELOG.md` (Modified)
+- `SPEC.md` (Modified)
 
 ## Validation Target
-- Domain review confirms scenario elements, observations, learning purpose, and non-goals.
-- Existing codebase compiles and all tests pass (`cargo test`).
+- All cargo tests pass successfully (`cargo test`).
+- Formatting and clippy checks pass cleanly.

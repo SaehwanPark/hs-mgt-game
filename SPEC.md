@@ -76,7 +76,31 @@ reconstructing it from the diff.
 | Post-v0.2 SDD progress review | v0.2.1 | Review current prototype progress and rank next development tracks | 231 | `bf0414a383634dd6` (competitive) |
 | Instructor-visible run summary & decision-quality review | v0.2.2 | Compare observed vs true state in stabilization and detailed observed/unobserved rival actions in competitive | 233 | `bf0414a383634dd6` (competitive) |
 | Exemplary scenario brief | v0.2.3 | Draft the first exemplary scenario brief for the competitive campaign modeling workforce and payer conflicts | 233 | `bf0414a383634dd6` (competitive) |
+| Evidence ledger (Workforce) | v0.2.4 | Create parameter/evidence ledger for Nursing Workforce & Retention; update evidence registry | 233 | `bf0414a383634dd6` (competitive) |
 
+
+- Feature: Evidence, parameters, and model-confidence ledger
+  Status: Complete
+  Started: 2026-07-03
+  Version: 0.2.4
+
+  Summary:
+  Create the first parameter and evidence ledger for the Nursing Workforce & Retention mechanism (focused on nurse staffing ratios, recruitment delays/costs, and retention spend), and update the main evidence registry to link it.
+
+  Done:
+  - Create a detailed parameter/evidence ledger at `docs/workforce-ledger.md` mapping workforce-related parameters and formulas to literature citations (BLS, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
+  - Assign confidence labels matching the project schema (`Empirically calibrated`, `Literature-grounded`, `Stylized abstraction`, `Gameplay-driven`).
+  - Update `docs/evidence-registry.md` to reference and link `docs/workforce-ledger.md`.
+  - Bump project version to `0.2.4` across tracking files.
+
+  Deferred / Non-Goals:
+  - No changes to simulation transition logic or parameter values in the codebase.
+  - No database or telemetry changes.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 - Feature: Exemplary scenario brief
   Status: Complete
@@ -398,49 +422,7 @@ campaign length, or platform architecture.
   platform, active-play omniscient report, policy-forecasting claim, or measured
   human-learning claim.
 
-2. Track: Exemplary scenario authoring plan
-  Phase / Gate: Phase 6.2; proceed before broadening runtime scenario tooling.
-  Use this when the project needs a better candidate campaign shape rather than
-  a parser or loader change.
-
-  Next actionable slice:
-  Draft one exemplary scenario brief or fixture plan with financial pressure,
-  one workforce conflict, one payer interaction, one competitive response, one
-  policy or regulatory process, delayed consequences, debrief hooks, and at
-  least two defensible strategic directions.
-
-  Verification target:
-  Domain review confirms the scenario has clear actor authority, observation
-  boundaries, assumptions, learning purpose, and non-goals. Runtime loader work
-  remains out of scope unless authoring friction is documented.
-
-  Deferred / Non-Goals:
-  No competitive scenario loader, migration framework, unrestricted rules
-  language, new campaign length, or engine generalization.
-
-3. Track: Evidence, parameters, and model-confidence ledger
-  Phase / Gate: Phase 1/7; proceed when a mechanism needs stronger grounding
-  than the current visibly labeled prototype abstractions, especially before
-  formula or balance changes.
-
-  Next actionable slice:
-  Create or extend a parameter/evidence ledger for one bounded mechanism. Assign
-  confidence labels that distinguish empirically calibrated,
-  literature-grounded, expert-informed, stylized abstraction, and
-  gameplay-driven mechanics before changing formulas.
-
-  Verification target:
-  The ledger distinguishes empirical claims, design abstractions, balancing
-  choices, social-welfare assumptions, and confidence labels. Any later runtime
-  formula change must cite the ledger and include deterministic regression
-  tests.
-
-  Deferred / Non-Goals:
-  External data ingestion pipeline, empirical calibration across the whole
-  model, real-world policy forecast validation, or authoritative numerical
-  claims.
-
-4. Track: Competitive campaign hardening
+2. Track: Competitive campaign hardening
   Phase / Gate: Phase 6/7; proceed only after playtest findings identify a
   concrete comprehension, pacing, exploit, or command-entry issue.
 
@@ -459,7 +441,7 @@ campaign length, or platform architecture.
   Full 24-month campaign loop, competitive autosave, competitive replay export,
   competitive scenario loading, multiplayer, and new strategic actor classes.
 
-5. Track: Strategy-space diagnostics
+3. Track: Strategy-space diagnostics
   Phase / Gate: Phase 7; keep as analysis artifacts until repeated review needs
   justify tooling.
 
@@ -478,7 +460,7 @@ campaign length, or platform architecture.
   No analytics platform, policy forecast validation, automated optimization
   framework, or runtime export change unless a later slice proves the need.
 
-6. Track: AI-agent playtest synthesis
+4. Track: AI-agent playtest synthesis
   Phase / Gate: Phase 7 prep; use `docs/agent-playtest-protocol.md`,
   `docs/mcp-playtesting-guide.md`, and versioned findings as the evidence
   baseline.
@@ -498,7 +480,7 @@ campaign length, or platform architecture.
   measured human-learning claim, empirical calibration claim, scoring redesign,
   or broad balance pass.
 
-7. Track: MCP agent interface expansion
+5. Track: MCP agent interface expansion
   Phase / Gate: Agent-play support; proceed only after bounded stdio play
   exposes a specific need that cannot be met through current tools.
 
@@ -516,7 +498,7 @@ campaign length, or platform architecture.
   HTTP transport, auth, durable session persistence, multi-client coordination,
   full competitive campaign length, and replay/export integration.
 
-8. Track: Broader simulation breadth and new strategic actors
+6. Track: Broader simulation breadth and new strategic actors
   Phase / Gate: Phase 6.1; proceed only after playtest, instructor, scenario, or
   domain-review evidence shows that current campaign limits block meaningful
   strategy or learning.
