@@ -1,8 +1,28 @@
 use super::competitive_parse::competitive_command_help_lines;
 use super::display::{PromptContext, print_block, style};
 
-pub fn print_context_help(context: PromptContext) {
-  print_block(&context_help_lines(context));
+pub fn print_context_help_with_topic(context: PromptContext, topic: Option<&str>) {
+  print_block(&context_help_lines_with_topic(context, topic));
+}
+
+pub fn context_help_lines_with_topic(context: PromptContext, topic: Option<&str>) -> Vec<String> {
+  if let (Some(t), PromptContext::CompetitiveCommand) = (topic, context) {
+    if let Some(help_lines) = command_topic_help_lines(t) {
+      return help_lines;
+    } else {
+      return vec![
+        style::section_heading(
+          style::EMOJI_BRIEFING,
+          &format!("Help: unknown topic '{}'", t),
+        ),
+        style::warning(&format!(
+          "  No specific help available for '{}'. Available commands: hold, invest, recruit, monitor, negotiate, commit, project.",
+          t
+        )),
+      ];
+    }
+  }
+  context_help_lines(context)
 }
 
 pub fn context_help_lines(context: PromptContext) -> Vec<String> {
@@ -168,6 +188,179 @@ pub fn turn_hint(turn: u32) -> Option<&'static str> {
   }
 }
 
+fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
+  let verb_lower = verb.trim().to_ascii_lowercase();
+  match verb_lower.as_str() {
+    "hold" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: hold"),
+      style::label_value("  Usage", &style::accent("hold")),
+      style::label_value("  Description", "Do nothing for the current month."),
+      style::label_value("  Resource Costs", "Costs 0 AP, $0 cash, 0 PC."),
+      style::label_value(
+        "  Strategic Guidance",
+        "Use hold to pass the turn when cash is strained and you need to wait, or to observe rival activity without committing resources.",
+      ),
+    ]),
+    "invest" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: invest"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("invest"),
+          style::dim("domain=beds|outpatient|technology amount=<int>")
+        ),
+      ),
+      style::label_value("  Description", "Expand local service capacities."),
+      style::label_value(
+        "  Resource Costs",
+        "Costs 1 AP, cash equal to the amount invested.",
+      ),
+      style::label_value("  Domains", ""),
+      style::dim("    - beds: Expands staffed inpatient bed capacity."),
+      style::dim("    - outpatient: Expands outpatient clinic services."),
+      style::dim("    - technology: Upgrades system technology infrastructure."),
+      style::label_value(
+        "  Strategic Guidance",
+        "Building capacity increases access and quality potential but consumes cash. Keep an eye on your cash runway before investing large amounts.",
+      ),
+    ]),
+    "recruit" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: recruit"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("recruit"),
+          style::dim("role=nurse|physician|admin headcount=<int>")
+        ),
+      ),
+      style::label_value("  Description", "Hire and onboard healthcare personnel."),
+      style::label_value(
+        "  Resource Costs",
+        "Costs 1 AP, $5 cash per headcount, 0 PC.",
+      ),
+      style::label_value("  Onboarding Delays", ""),
+      style::dim("    - nurse: 1 month delay (available next month)"),
+      style::dim("    - admin: 2 months delay (available in 2 months)"),
+      style::dim("    - physician: 3 months delay (available in 3 months)"),
+      style::label_value(
+        "  Strategic Guidance",
+        "Hiring staff resolves capacity bottlenecks, but recruitment takes time. Sudden high-volume recruitment can strain short-term workforce trust.",
+      ),
+    ]),
+    "monitor" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: monitor"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("monitor"),
+          style::dim("target=northlake|summit|valley|metro depth=<1-3>")
+        ),
+      ),
+      style::label_value(
+        "  Description",
+        "Audit and spy on rival health system capacity and strategic moves.",
+      ),
+      style::label_value(
+        "  Resource Costs",
+        "Costs Action Points (AP) equal to depth, $0 cash, 0 PC.",
+      ),
+      style::label_value("  Depths", ""),
+      style::dim("    - depth=1: Basic visibility into public actions and announcements."),
+      style::dim("    - depth=2: Deeper capacity metrics and private project information."),
+      style::dim("    - depth=3: Full strategic target detail and rationale observation."),
+      style::label_value(
+        "  Strategic Guidance",
+        "Information is power; monitor rivals before making major market plays. Monitor costs AP but no cash, making it a great low-burn choice.",
+      ),
+    ]),
+    "negotiate" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: negotiate"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("negotiate"),
+          style::dim("payer=carrier_a|carrier_b rate_posture=aggressive|neutral|conservative")
+        ),
+      ),
+      style::label_value(
+        "  Description",
+        "Renegotiate commercial payment rates with insurance carriers.",
+      ),
+      style::label_value("  Resource Costs", "Costs 1 AP, $0 cash, 2 PC."),
+      style::label_value("  Postures", ""),
+      style::dim(
+        "    - aggressive: Demand maximum rates. High revenue potential, but risks contract renewal failure and relationship damage if you lack market leverage.",
+      ),
+      style::dim("    - neutral: Propose balanced rate increases."),
+      style::dim("    - conservative: Offer concessions for a guaranteed quick renewal."),
+      style::label_value(
+        "  Strategic Guidance",
+        "Rate increases require leverage (capacity, quality, or market share). Aggressive proposals without leverage are likely to fail, wasting AP and PC.",
+      ),
+    ]),
+    "commit" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: commit"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("commit"),
+          style::dim("pledge_type=access|quality level=<1-5>")
+        ),
+      ),
+      style::label_value(
+        "  Description",
+        "Make public commitments to build trust and legitimacy with officials.",
+      ),
+      style::label_value("  Resource Costs", "Costs 1 AP, $0 cash, 1 PC."),
+      style::label_value("  Pledges", ""),
+      style::dim("    - access: Pledges to improve or protect healthcare access."),
+      style::dim("    - quality: Pledges to enhance care quality indices."),
+      style::label_value(
+        "  Strategic Guidance",
+        "Public commitments build political goodwill and long-term trust. Failing to meet your commitments will severely damage system credibility.",
+      ),
+    ]),
+    "project" => Some(vec![
+      style::section_heading(style::EMOJI_BRIEFING, "Help: project"),
+      style::label_value(
+        "  Usage",
+        &format!(
+          "{} {}",
+          style::accent("project"),
+          style::dim("kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>")
+        ),
+      ),
+      style::label_value(
+        "  Description",
+        "Launch major multi-month infrastructure and capital projects.",
+      ),
+      style::label_value(
+        "  Resource Costs",
+        "Costs 2 AP (at start), monthly cash draw equal to budget divided by duration.",
+      ),
+      style::label_value("  Project Kinds & Durations", ""),
+      style::dim("    - ehr_epic: EHR implementation. Duration 12 months."),
+      style::dim("    - ehr_cerner: EHR implementation. Duration 12 months."),
+      style::dim("    - tower: Facility tower construction. Duration 12 months."),
+      style::dim("    - clinic_network: Clinic network expansion. Duration 9 months."),
+      style::label_value(
+        "  Constraints",
+        "Maximum of 2 concurrent projects allowed at any time.",
+      ),
+      style::label_value(
+        "  Strategic Guidance",
+        "Projects provide powerful long-term benefits but tie up monthly cash flow. Make sure your cash reserves can support the monthly draws over the duration.",
+      ),
+    ]),
+    _ => None,
+  }
+}
+
 #[cfg(test)]
 fn guidance_has_no_outcome_spoilers(text: &str) -> bool {
   let lower = text.to_ascii_lowercase();
@@ -232,5 +425,34 @@ mod tests {
     assert!(text.contains("above-target rates"));
     assert!(text.contains("visible payer leverage"));
     assert!(guidance_has_no_outcome_spoilers(&text));
+  }
+
+  #[test]
+  fn test_topic_help_for_valid_verbs() {
+    for verb in [
+      "hold",
+      "invest",
+      "recruit",
+      "monitor",
+      "negotiate",
+      "commit",
+      "project",
+    ] {
+      let help = context_help_lines_with_topic(PromptContext::CompetitiveCommand, Some(verb));
+      let text = help.join("\n");
+      assert!(text.contains("Help:"));
+      assert!(text.contains("Usage"));
+      assert!(text.contains("Description"));
+      assert!(guidance_has_no_outcome_spoilers(&text));
+    }
+  }
+
+  #[test]
+  fn test_topic_help_for_invalid_verb() {
+    let help =
+      context_help_lines_with_topic(PromptContext::CompetitiveCommand, Some("invalid_verb"));
+    let text = help.join("\n");
+    assert!(text.contains("Help: unknown topic"));
+    assert!(text.contains("No specific help available"));
   }
 }

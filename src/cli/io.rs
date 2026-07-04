@@ -14,7 +14,7 @@ use super::display::{
   PromptContext, campaign_menu_lines, difficulty_menu_lines, global_commands_footer,
   play_mode_menu_lines, print_prompt_block, resume_choice_prompt_lines, seed_prompt_lines, style,
 };
-use super::guidance::print_context_help;
+use super::guidance::print_context_help_with_topic;
 use super::input::{GlobalInput, ReadLineOutcome, parse_global_input};
 use super::repl::read_competitive_command_line;
 
@@ -32,8 +32,8 @@ pub fn read_line_with_globals(
 
     match parse_global_input(&input) {
       GlobalInput::Quit => return Ok(ReadLineOutcome::Quit),
-      GlobalInput::Help => {
-        print_context_help(context);
+      GlobalInput::Help { topic } => {
+        print_context_help_with_topic(context, topic.as_deref());
         continue;
       }
       GlobalInput::Payload(payload) => return Ok(ReadLineOutcome::Payload(payload)),
@@ -162,8 +162,8 @@ pub fn read_command_line(prompt: &str, turn: u32) -> Result<ReadLineOutcome, Cli
 
     match parse_global_input(&input) {
       GlobalInput::Quit => return Ok(ReadLineOutcome::Quit),
-      GlobalInput::Help => {
-        print_context_help(PromptContext::TurnCommand { turn });
+      GlobalInput::Help { topic } => {
+        print_context_help_with_topic(PromptContext::TurnCommand { turn }, topic.as_deref());
         continue;
       }
       GlobalInput::Payload(payload) => return Ok(ReadLineOutcome::Payload(payload)),

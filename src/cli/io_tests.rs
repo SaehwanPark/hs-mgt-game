@@ -86,8 +86,11 @@ fn global_quit_is_recognized() {
 
 #[test]
 fn global_help_is_recognized() {
-  assert_eq!(parse_global_input("help\n"), GlobalInput::Help);
-  assert_eq!(parse_global_input("?\n"), GlobalInput::Help);
+  assert_eq!(
+    parse_global_input("help\n"),
+    GlobalInput::Help { topic: None }
+  );
+  assert_eq!(parse_global_input("?\n"), GlobalInput::Help { topic: None });
 }
 
 #[test]
