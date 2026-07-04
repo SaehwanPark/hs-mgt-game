@@ -79,7 +79,8 @@ fn apply_monitor_intel(
   observation_month: u32,
   market_bullets: &mut Vec<String>,
 ) {
-  let Some(human_batch) = aggregated.batch_for_system(0) else {
+  let human_id = world.human_system().map(|s| s.system_id).unwrap_or(0);
+  let Some(human_batch) = aggregated.batch_for_system(human_id) else {
     return;
   };
 
@@ -116,9 +117,10 @@ fn build_intel_gaps(
 ) -> Vec<String> {
   let mut gaps = Vec::new();
   let intel_month = observation_month.saturating_sub(PUBLIC_INTEL_LAG_MONTHS);
+  let human_id = world.human_system().map(|s| s.system_id).unwrap_or(0);
 
   for system in &world.systems {
-    if system.system_id == 0 {
+    if system.system_id == human_id {
       continue;
     }
     let has_public = world

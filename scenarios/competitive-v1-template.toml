@@ -1,0 +1,72 @@
+format_version = "scenario-toml-0.1.40"
+campaign_id = "competitive-regional-v1"
+scenario_id = "exemplary-competitive-v1"
+scenario_version = "1.0.0"
+turn_unit = "month"
+ruleset_id = "competitive-ruleset-0.1.30"
+title = "The Regional Workforce and Market Realignment Challenge"
+default_seed = 42
+
+learning_objectives = [
+  "Manage nursing workforce trust and retention against clinical bed capacities.",
+  "Coordinate outpatient clinic expansion with physician recruitment to avoid understaffing penalties.",
+  "Balance competitive expansion against cash runway and active capital project monthly draws.",
+]
+
+[initial_market]
+regional_demand_index = 102
+commercial_payer_pressure = 48
+policy_pressure = 36
+
+[[systems]]
+system_id = 0
+name = "Riverside Community Health"
+controller = "Human"
+staffed_beds = 118
+outpatient_capacity = 100
+nurses = 24
+physicians = 10
+admins = 11
+access_index = 68
+quality_index = 72
+workforce_trust = 60
+community_trust = 64
+market_share_index = 24
+cash = 60
+political_capital = 8
+
+[[systems]]
+system_id = 1
+name = "Northlake Health"
+controller = "Ai"
+ai_style = "growth"
+staffed_beds = 132
+outpatient_capacity = 150
+nurses = 27
+physicians = 15
+admins = 15
+access_index = 64
+quality_index = 70
+workforce_trust = 55
+community_trust = 58
+market_share_index = 28
+cash = 60
+political_capital = 8
+
+[[systems]]
+system_id = 2
+name = "Summit Care"
+controller = "Ai"
+ai_style = "margin"
+staffed_beds = 104
+outpatient_capacity = 120
+nurses = 21
+physicians = 12
+admins = 12
+access_index = 66
+quality_index = 74
+workforce_trust = 60
+community_trust = 61
+market_share_index = 22
+cash = 60
+political_capital = 8

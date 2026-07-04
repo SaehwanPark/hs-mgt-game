@@ -5,10 +5,30 @@ use std::path::Path;
 
 use serde::Deserialize;
 
-use crate::model::{INTERACTIVE_TURN_COUNT, Ruleset, WorldState};
+use crate::model::{
+  AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState, Difficulty,
+  HealthSystemState, INTERACTIVE_TURN_COUNT, PlayerController, PlayerResources, PlayerSlot,
+  PolicyCalendar, Ruleset, SharedMarketFields, WorldState,
+};
 
 pub const SCENARIO_TOML_FORMAT_VERSION: &str = "scenario-toml-0.1.40";
 pub const STABILIZATION_SCENARIO_TOML: &str = include_str!("../../scenarios/stabilization-v1.toml");
+
+use std::sync::{Mutex, OnceLock};
+
+static NAME_INTERNER: OnceLock<Mutex<HashSet<&'static str>>> = OnceLock::new();
+
+fn intern_string(s: &str) -> &'static str {
+  let cache_mutex = NAME_INTERNER.get_or_init(|| Mutex::new(HashSet::new()));
+  let mut cache = cache_mutex.lock().unwrap();
+  if let Some(&static_str) = cache.get(s) {
+    static_str
+  } else {
+    let leaked = Box::leak(s.to_string().into_boxed_str());
+    cache.insert(leaked);
+    leaked
+  }
+}
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 #[serde(deny_unknown_fields)]
@@ -22,10 +42,41 @@ pub struct Scenario {
   pub title: String,
   pub default_seed: u64,
   pub learning_objectives: Vec<String>,
-  pub initial_state: ScenarioInitialState,
-  pub turn_schedule: Vec<TurnScheduleEntry>,
-  pub actor_stubs: Vec<ActorStub>,
+  pub initial_state: Option<ScenarioInitialState>,
+  pub turn_schedule: Option<Vec<TurnScheduleEntry>>,
+  pub actor_stubs: Option<Vec<ActorStub>>,
   pub evaluation_profile: Option<EvaluationProfile>,
+  pub initial_market: Option<ScenarioMarketState>,
+  pub systems: Option<Vec<ScenarioSystemState>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ScenarioMarketState {
+  pub regional_demand_index: i32,
+  pub commercial_payer_pressure: i32,
+  pub policy_pressure: i32,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ScenarioSystemState {
+  pub system_id: u32,
+  pub name: String,
+  pub staffed_beds: i32,
+  pub outpatient_capacity: i32,
+  pub nurses: i32,
+  pub physicians: i32,
+  pub admins: i32,
+  pub access_index: i32,
+  pub quality_index: i32,
+  pub workforce_trust: i32,
+  pub community_trust: i32,
+  pub market_share_index: i32,
+  pub cash: i32,
+  pub political_capital: u32,
+  pub controller: String,
+  pub ai_style: Option<String>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
@@ -77,6 +128,7 @@ pub enum ScenarioError {
   EmptyLearningObjectives,
   InvalidTurnSchedule(String),
   InvalidActorStub(String),
+  InvalidSystem(String),
 }
 
 impl fmt::Display for ScenarioError {
@@ -104,6 +156,7 @@ impl fmt::Display for ScenarioError {
       }
       ScenarioError::InvalidTurnSchedule(message) => write!(f, "invalid turn schedule: {message}"),
       ScenarioError::InvalidActorStub(message) => write!(f, "invalid actor stub: {message}"),
+      ScenarioError::InvalidSystem(message) => write!(f, "invalid system configuration: {message}"),
     }
   }
 }
@@ -128,7 +181,112 @@ impl ScenarioInitialState {
 
 impl Scenario {
   pub fn initial_world_state(&self) -> WorldState {
-    self.initial_state.to_world_state()
+    self
+      .initial_state
+      .as_ref()
+      .expect("initial_state must be present for stabilization")
+      .to_world_state()
+  }
+
+  pub fn initial_competitive_world_state(
+    &self,
+    difficulty: Difficulty,
+    _ruleset: &CompetitiveRuleset,
+  ) -> Result<CompetitiveWorldState, ScenarioError> {
+    let market_spec = self.initial_market.as_ref().ok_or_else(|| {
+      ScenarioError::Parse("missing initial_market in competitive scenario".to_string())
+    })?;
+
+    let systems_spec = self
+      .systems
+      .as_ref()
+      .ok_or_else(|| ScenarioError::Parse("missing systems in competitive scenario".to_string()))?;
+
+    let mut systems = Vec::with_capacity(systems_spec.len());
+    let mut players = Vec::with_capacity(systems_spec.len());
+
+    for sys in systems_spec {
+      let controller = match sys.controller.to_ascii_lowercase().as_str() {
+        "human" => PlayerController::Human,
+        "ai" => {
+          let style_str = sys.ai_style.as_deref().ok_or_else(|| {
+            ScenarioError::Parse(format!("missing ai_style for AI system '{}'", sys.name))
+          })?;
+          let style = match style_str.to_ascii_lowercase().as_str() {
+            "growth" => AiStyleWeights::growth_focused(),
+            "margin" => AiStyleWeights::margin_focused(),
+            "access" => AiStyleWeights::access_focused(),
+            "political" => AiStyleWeights::political_focused(),
+            _ => {
+              return Err(ScenarioError::Parse(format!(
+                "invalid ai_style '{}' for system '{}'",
+                style_str, sys.name
+              )));
+            }
+          };
+          PlayerController::Ai(AiProfile {
+            org_name: intern_string(&sys.name),
+            style,
+          })
+        }
+        other => {
+          return Err(ScenarioError::Parse(format!(
+            "invalid controller '{}' for system '{}'",
+            other, sys.name
+          )));
+        }
+      };
+
+      let ap_budget = if let PlayerController::Human = controller {
+        difficulty.human_ap_per_month()
+      } else {
+        difficulty.cpu_ap_per_month()
+      };
+
+      let resources = PlayerResources {
+        cash: sys.cash,
+        political_capital: sys.political_capital,
+        ap_budget,
+        active_projects: 0,
+        active_project_monthly_draws: 0,
+      };
+
+      systems.push(HealthSystemState {
+        system_id: sys.system_id,
+        name: sys.name.clone(),
+        staffed_beds: sys.staffed_beds,
+        outpatient_capacity: sys.outpatient_capacity,
+        nurses: sys.nurses,
+        physicians: sys.physicians,
+        admins: sys.admins,
+        access_index: sys.access_index,
+        quality_index: sys.quality_index,
+        workforce_trust: sys.workforce_trust,
+        community_trust: sys.community_trust,
+        market_share_index: sys.market_share_index,
+        resources,
+      });
+
+      players.push(PlayerSlot {
+        system_id: sys.system_id,
+        controller,
+      });
+    }
+
+    Ok(CompetitiveWorldState {
+      difficulty,
+      turn: 0,
+      market: SharedMarketFields {
+        regional_demand_index: market_spec.regional_demand_index,
+        commercial_payer_pressure: market_spec.commercial_payer_pressure,
+        policy_pressure: market_spec.policy_pressure,
+      },
+      systems,
+      players,
+      public_action_log: Vec::new(),
+      effect_queue: Vec::new(),
+      policy_calendar: PolicyCalendar::new_month(1),
+    })
   }
 }
 
@@ -172,17 +330,115 @@ pub fn validate_stabilization_scenario(
       actual: scenario.ruleset_id.clone(),
     });
   }
-  if scenario.initial_state.turn != 0 {
-    return Err(ScenarioError::InvalidInitialTurn(
-      scenario.initial_state.turn,
-    ));
+  let initial = scenario.initial_state.as_ref().ok_or_else(|| {
+    ScenarioError::Parse("missing initial_state in stabilization scenario".to_string())
+  })?;
+  if initial.turn != 0 {
+    return Err(ScenarioError::InvalidInitialTurn(initial.turn));
   }
   if scenario.learning_objectives.is_empty() {
     return Err(ScenarioError::EmptyLearningObjectives);
   }
 
-  validate_turn_schedule(&scenario.turn_schedule)?;
-  validate_actor_stubs(&scenario.actor_stubs, &scenario.turn_schedule)?;
+  let schedule = scenario.turn_schedule.as_ref().ok_or_else(|| {
+    ScenarioError::Parse("missing turn_schedule in stabilization scenario".to_string())
+  })?;
+  validate_turn_schedule(schedule)?;
+
+  let stubs = scenario.actor_stubs.as_ref().ok_or_else(|| {
+    ScenarioError::Parse("missing actor_stubs in stabilization scenario".to_string())
+  })?;
+  validate_actor_stubs(stubs, schedule)?;
+
+  Ok(())
+}
+
+pub fn validate_competitive_scenario(
+  scenario: &Scenario,
+  ruleset: &CompetitiveRuleset,
+) -> Result<(), ScenarioError> {
+  if scenario.format_version != SCENARIO_TOML_FORMAT_VERSION {
+    return Err(ScenarioError::UnsupportedFormatVersion(
+      scenario.format_version.clone(),
+    ));
+  }
+  if scenario.campaign_id != "competitive-regional-v1" {
+    return Err(ScenarioError::UnsupportedCampaign(
+      scenario.campaign_id.clone(),
+    ));
+  }
+  if scenario.turn_unit != "month" {
+    return Err(ScenarioError::UnsupportedTurnUnit(
+      scenario.turn_unit.clone(),
+    ));
+  }
+  if scenario.ruleset_id != ruleset.version {
+    return Err(ScenarioError::RulesetMismatch {
+      expected: ruleset.version.to_string(),
+      actual: scenario.ruleset_id.clone(),
+    });
+  }
+  if scenario.learning_objectives.is_empty() {
+    return Err(ScenarioError::EmptyLearningObjectives);
+  }
+
+  let _ = scenario.initial_market.as_ref().ok_or_else(|| {
+    ScenarioError::InvalidSystem("missing initial_market in competitive scenario".to_string())
+  })?;
+
+  let systems = scenario
+    .systems
+    .as_ref()
+    .ok_or_else(|| ScenarioError::Parse("missing systems in competitive scenario".to_string()))?;
+
+  if systems.is_empty() {
+    return Err(ScenarioError::InvalidSystem(
+      "scenario systems list cannot be empty".to_string(),
+    ));
+  }
+
+  let mut system_ids: Vec<u32> = systems.iter().map(|sys| sys.system_id).collect();
+  system_ids.sort_unstable();
+  let expected_ids: Vec<u32> = (0..systems.len() as u32).collect();
+  if system_ids != expected_ids {
+    return Err(ScenarioError::InvalidSystem(format!(
+      "system IDs must be unique, sequential, and start at 0 (expected {:?}, got {:?})",
+      expected_ids, system_ids
+    )));
+  }
+
+  let mut human_count = 0;
+  for sys in systems {
+    match sys.controller.to_ascii_lowercase().as_str() {
+      "human" => human_count += 1,
+      "ai" => {
+        let style_str = sys.ai_style.as_ref().ok_or_else(|| {
+          ScenarioError::InvalidSystem(format!("AI system '{}' must define ai_style", sys.name))
+        })?;
+        match style_str.to_ascii_lowercase().as_str() {
+          "growth" | "margin" | "access" | "political" => {}
+          other => {
+            return Err(ScenarioError::InvalidSystem(format!(
+              "AI system '{}' has invalid ai_style '{}'",
+              sys.name, other
+            )));
+          }
+        }
+      }
+      other => {
+        return Err(ScenarioError::InvalidSystem(format!(
+          "system '{}' has invalid controller '{}'",
+          sys.name, other
+        )));
+      }
+    }
+  }
+
+  if human_count != 1 {
+    return Err(ScenarioError::InvalidSystem(format!(
+      "competitive scenario must have exactly one human player, found {human_count}"
+    )));
+  }
 
   Ok(())
 }
@@ -315,6 +571,8 @@ mod tests {
     let scenario = default_stabilization_scenario().expect("scenario");
     let commands = scenario
       .turn_schedule
+      .as_ref()
+      .unwrap()
       .iter()
       .map(|entry| entry.command_kind.as_str())
       .collect::<Vec<_>>();
@@ -382,7 +640,7 @@ mod tests {
   #[test]
   fn missing_actor_stub_is_rejected() {
     let mut scenario = default_stabilization_scenario().expect("scenario");
-    scenario.actor_stubs.pop();
+    scenario.actor_stubs.as_mut().unwrap().pop();
 
     assert!(matches!(
       validate_stabilization_scenario(&scenario, &default_ruleset()),
@@ -393,7 +651,7 @@ mod tests {
   #[test]
   fn actor_stub_turn_mismatch_is_rejected() {
     let mut scenario = default_stabilization_scenario().expect("scenario");
-    scenario.actor_stubs[0].turn = 5;
+    scenario.actor_stubs.as_mut().unwrap()[0].turn = 5;
 
     assert!(matches!(
       validate_stabilization_scenario(&scenario, &default_ruleset()),

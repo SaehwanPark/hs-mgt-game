@@ -59,12 +59,51 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
     let scenario = crate::scenario::load_scenario_file(&path).map_err(|error| {
       CliError::ScenarioLoadFailed(format!("could not load scenario file: {error}"))
     })?;
-    crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
-      .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
-    let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
-      return Ok(SessionOutcome::QuitNoSave);
-    };
-    return run_session_from_genesis(setup.config, &ruleset, &setup.initial_state);
+    if scenario.campaign_id == "competitive-regional-v1" {
+      let comp_ruleset = crate::model::default_competitive_ruleset();
+      crate::scenario::validate_competitive_scenario(&scenario, &comp_ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+
+      let systems_len = scenario.systems.as_ref().map(|s| s.len()).unwrap_or(0);
+      let difficulty = match systems_len {
+        2 => crate::model::Difficulty::Easy,
+        3 => crate::model::Difficulty::Normal,
+        4 => crate::model::Difficulty::Hard,
+        _ => crate::model::Difficulty::Expert,
+      };
+
+      use crate::cli::input::ReadLineOutcome;
+      use crate::cli::io::{parse_seed_choice, read_seed_choice};
+      let seed = loop {
+        match read_seed_choice()? {
+          ReadLineOutcome::Quit => return Ok(SessionOutcome::QuitNoSave),
+          ReadLineOutcome::Payload(input) => match parse_seed_choice(&input) {
+            Ok(seed) => break seed,
+            Err(CliError::InvalidSeed(s)) => {
+              print_line(&style::warning(&format!(
+                "{} Seed '{}' is not a valid unsigned integer",
+                style::EMOJI_WARNING,
+                s
+              )));
+            }
+            Err(error) => return Err(error),
+          },
+        }
+      };
+
+      let config = crate::model::CompetitiveRunConfig { seed, difficulty };
+      let initial_world = scenario
+        .initial_competitive_world_state(config.difficulty, &comp_ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid initial state: {error}")))?;
+      return Ok(run_competitive_stub(&ruleset, config, Some(initial_world)));
+    } else {
+      crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+      let Some(setup) = read_stabilization_run_setup(&ruleset, &scenario)? else {
+        return Ok(SessionOutcome::QuitNoSave);
+      };
+      return run_session_from_genesis(setup.config, &ruleset, &setup.initial_state);
+    }
   }
 
   if session_save_exists_interactive(&ruleset)? {
@@ -112,7 +151,7 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
       let Some(config) = read_competitive_run_config()? else {
         return Ok(SessionOutcome::QuitNoSave);
       };
-      Ok(run_competitive_stub(&ruleset, config))
+      Ok(run_competitive_stub(&ruleset, config, None))
     }
   }
 }

@@ -1,5 +1,7 @@
-use hs_mgt_game::model::default_ruleset;
-use hs_mgt_game::scenario::{load_scenario_file, validate_stabilization_scenario};
+use hs_mgt_game::model::{Difficulty, default_competitive_ruleset, default_ruleset};
+use hs_mgt_game::scenario::{
+  load_scenario_file, validate_competitive_scenario, validate_stabilization_scenario,
+};
 use std::fs;
 
 #[test]
@@ -30,4 +32,43 @@ fn test_load_valid_scenario() {
   assert_eq!(scenario.campaign_id, "stabilization-v1");
   let ruleset = default_ruleset();
   assert!(validate_stabilization_scenario(&scenario, &ruleset).is_ok());
+}
+
+#[test]
+fn test_load_valid_competitive_scenario() {
+  let scenario =
+    load_scenario_file("scenarios/competitive-v1-template.toml").expect("load template");
+  assert_eq!(scenario.campaign_id, "competitive-regional-v1");
+  let ruleset = default_competitive_ruleset();
+  assert!(validate_competitive_scenario(&scenario, &ruleset).is_ok());
+
+  let initial_state = scenario.initial_competitive_world_state(Difficulty::Normal, &ruleset);
+  assert!(initial_state.is_ok());
+  let world = initial_state.unwrap();
+  assert_eq!(world.systems.len(), 3);
+  assert_eq!(world.market.regional_demand_index, 102);
+}
+
+#[test]
+fn test_validate_competitive_scenario_errors() {
+  let mut scenario =
+    load_scenario_file("scenarios/competitive-v1-template.toml").expect("load template");
+  let ruleset = default_competitive_ruleset();
+
+  // Test ruleset mismatch
+  scenario.ruleset_id = "bad-ruleset".to_string();
+  assert!(validate_competitive_scenario(&scenario, &ruleset).is_err());
+  scenario.ruleset_id = ruleset.version.to_string();
+
+  // Test wrong campaign_id
+  scenario.campaign_id = "stabilization-v1".to_string();
+  assert!(validate_competitive_scenario(&scenario, &ruleset).is_err());
+  scenario.campaign_id = "competitive-regional-v1".to_string();
+
+  // Test zero human controller
+  if let Some(systems) = &mut scenario.systems {
+    systems[0].controller = "Ai".to_string();
+    systems[0].ai_style = Some("growth".to_string());
+  }
+  assert!(validate_competitive_scenario(&scenario, &ruleset).is_err());
 }
