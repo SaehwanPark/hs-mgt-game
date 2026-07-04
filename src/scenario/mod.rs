@@ -14,6 +14,22 @@ use crate::model::{
 pub const SCENARIO_TOML_FORMAT_VERSION: &str = "scenario-toml-0.1.40";
 pub const STABILIZATION_SCENARIO_TOML: &str = include_str!("../../scenarios/stabilization-v1.toml");
 
+use std::sync::{Mutex, OnceLock};
+
+static NAME_INTERNER: OnceLock<Mutex<HashSet<&'static str>>> = OnceLock::new();
+
+fn intern_string(s: &str) -> &'static str {
+  let cache_mutex = NAME_INTERNER.get_or_init(|| Mutex::new(HashSet::new()));
+  let mut cache = cache_mutex.lock().unwrap();
+  if let Some(&static_str) = cache.get(s) {
+    static_str
+  } else {
+    let leaked = Box::leak(s.to_string().into_boxed_str());
+    cache.insert(leaked);
+    leaked
+  }
+}
+
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Scenario {
@@ -112,6 +128,7 @@ pub enum ScenarioError {
   EmptyLearningObjectives,
   InvalidTurnSchedule(String),
   InvalidActorStub(String),
+  InvalidSystem(String),
 }
 
 impl fmt::Display for ScenarioError {
@@ -139,6 +156,7 @@ impl fmt::Display for ScenarioError {
       }
       ScenarioError::InvalidTurnSchedule(message) => write!(f, "invalid turn schedule: {message}"),
       ScenarioError::InvalidActorStub(message) => write!(f, "invalid actor stub: {message}"),
+      ScenarioError::InvalidSystem(message) => write!(f, "invalid system configuration: {message}"),
     }
   }
 }
@@ -207,7 +225,7 @@ impl Scenario {
             }
           };
           PlayerController::Ai(AiProfile {
-            org_name: Box::leak(sys.name.clone().into_boxed_str()),
+            org_name: intern_string(&sys.name),
             style,
           })
         }
@@ -364,15 +382,29 @@ pub fn validate_competitive_scenario(
     return Err(ScenarioError::EmptyLearningObjectives);
   }
 
+  let _ = scenario.initial_market.as_ref().ok_or_else(|| {
+    ScenarioError::InvalidSystem("missing initial_market in competitive scenario".to_string())
+  })?;
+
   let systems = scenario
     .systems
     .as_ref()
     .ok_or_else(|| ScenarioError::Parse("missing systems in competitive scenario".to_string()))?;
 
   if systems.is_empty() {
-    return Err(ScenarioError::InvalidActorStub(
+    return Err(ScenarioError::InvalidSystem(
       "scenario systems list cannot be empty".to_string(),
     ));
+  }
+
+  let mut system_ids: Vec<u32> = systems.iter().map(|sys| sys.system_id).collect();
+  system_ids.sort_unstable();
+  let expected_ids: Vec<u32> = (0..systems.len() as u32).collect();
+  if system_ids != expected_ids {
+    return Err(ScenarioError::InvalidSystem(format!(
+      "system IDs must be unique, sequential, and start at 0 (expected {:?}, got {:?})",
+      expected_ids, system_ids
+    )));
   }
 
   let mut human_count = 0;
@@ -380,15 +412,21 @@ pub fn validate_competitive_scenario(
     match sys.controller.to_ascii_lowercase().as_str() {
       "human" => human_count += 1,
       "ai" => {
-        if sys.ai_style.is_none() {
-          return Err(ScenarioError::InvalidActorStub(format!(
-            "AI system '{}' must define ai_style",
-            sys.name
-          )));
+        let style_str = sys.ai_style.as_ref().ok_or_else(|| {
+          ScenarioError::InvalidSystem(format!("AI system '{}' must define ai_style", sys.name))
+        })?;
+        match style_str.to_ascii_lowercase().as_str() {
+          "growth" | "margin" | "access" | "political" => {}
+          other => {
+            return Err(ScenarioError::InvalidSystem(format!(
+              "AI system '{}' has invalid ai_style '{}'",
+              sys.name, other
+            )));
+          }
         }
       }
       other => {
-        return Err(ScenarioError::InvalidActorStub(format!(
+        return Err(ScenarioError::InvalidSystem(format!(
           "system '{}' has invalid controller '{}'",
           sys.name, other
         )));
@@ -397,7 +435,7 @@ pub fn validate_competitive_scenario(
   }
 
   if human_count != 1 {
-    return Err(ScenarioError::InvalidActorStub(format!(
+    return Err(ScenarioError::InvalidSystem(format!(
       "competitive scenario must have exactly one human player, found {human_count}"
     )));
   }

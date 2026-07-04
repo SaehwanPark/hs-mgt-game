@@ -84,8 +84,9 @@ pub fn transition_competitive(
 }
 
 fn refresh_monthly_resources(world: &mut CompetitiveWorldState, ruleset: &CompetitiveRuleset) {
+  let human_id = world.human_system().map(|s| s.system_id).unwrap_or(0);
   for system in &mut world.systems {
-    system.resources.ap_budget = if system.system_id == 0 {
+    system.resources.ap_budget = if system.system_id == human_id {
       world.difficulty.human_ap_per_month()
     } else {
       world.difficulty.cpu_ap_per_month()
