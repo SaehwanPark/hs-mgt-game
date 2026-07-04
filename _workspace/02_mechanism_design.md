@@ -1,36 +1,34 @@
-# Mechanism Design - Nursing Workforce & Retention Ledger (Phase 2)
+# Mechanism Design - Competitive Autocomplete Hardening (Phase 2)
 
 ## Scope
-Defines the mapping between the conceptual model parameters and their mathematical expressions in code.
+Defines the technical autocompletion engine for the competitive command CLI.
 
----
+## 1. REPL Autocomplete State Machine
+The autocompleter parses the segment of the line from the start or from the last semicolon (`;`) up to the cursor position `pos`.
 
-## 1. Actor Actions & Incentives
+1. **Active Segment Extraction:**
+   - Find the last index of `;` before `pos`. Let this be `segment_start`.
+   - The active segment is `line[segment_start..pos]`.
+   - The offset where completion begins is `segment_start + leading_whitespace_offset`.
 
-- **Nursing Workforce NPC:** Represents Riverside's nurse labor pool. Demands safe ratios (modeled as maintaining `workforce_trust` >= 60) and fair wages (modeled as `minimum_retention_spend` >= 5 and `minimum_schedule_relief` >= 3).
-- **Player (CEO):** Balancing capacity growth (needs cash and AP) with labor stability (needs wage/retention spend).
+2. **Tokenizer & Context Identification:**
+   - Split the active segment by whitespace.
+   - If there is 1 token and the cursor is right at its end (no trailing whitespace), we are in **Verb Completion** mode.
+   - If there are multiple tokens, or if there is a trailing space after the first token, we look at the first token as the `verb`.
+   - If the `verb` is not a valid competitive verb, abort completion (return empty candidates).
+   - If it is valid, identify the word currently under the cursor (from the last space before the cursor to the cursor).
+   - If the current word contains `=`:
+     - Split at `=` into `key` and `val_prefix`.
+     - We are in **Enum Value Completion** mode for the argument `key`.
+   - Otherwise, we are in **Argument Key Completion** mode.
 
----
+3. **Argument & Enum Value Mapping:**
+   - **invest**: `domain` (`beds`, `outpatient`, `technology`), `amount` (integer)
+   - **recruit**: `role` (`nurse`, `physician`, `admin`), `headcount` (integer)
+   - **monitor**: `target` (`northlake`, `summit`, `valley`, `metro`), `depth` (integer)
+   - **negotiate**: `payer` (`carrier_a`, `carrier_b`), `rate_posture` (`aggressive`, `neutral`, `conservative`)
+   - **commit**: `pledge_type` (`access`, `quality`), `level` (integer)
+   - **project**: `kind` (`ehr_epic`, `ehr_cerner`, `tower`, `clinic_network`), `budget` (integer)
 
-## 2. Mathematical Mapping
-
-### Stabilization Campaign (`src/sim/transition.rs`)
-
-1. **Staffing Friction on Bed Addition:**
-   $$\Delta T_{\text{workforce}} = -\frac{\text{add\_staffed\_beds}}{4}$$
-   - *Label:* Literature-grounded (Aiken 2002 burnout metrics).
-2. **Schedule Relief Impact:**
-   $$\Delta T_{\text{workforce}} = +\frac{\text{schedule\_relief}}{2}$$
-   - *Label:* Stylized abstraction.
-3. **Workforce Strike Trigger:**
-   $$\text{Decision} = \text{WorkAction} \quad \text{if} \quad \text{not } \text{credible\_offer}$$
-   - *Label:* Gameplay-driven (Note: `T_workforce < 60` or `sick_call_pressure` activates `labor_pressure` which is required for a `Cooperative` outcome, but `WorkAction` triggers unconditionally if the offer is not credible).
-
-### Competitive Campaign (`src/sim/transition_competitive.rs`)
-
-1. **Hiring Lag:**
-   $$\text{Delay}_{\text{nurse}} = 1 \text{ month}$$
-   - *Label:* Literature-grounded (78-day NSI average).
-2. **Recruitment Capacity Staffing Burden:**
-   $$\Delta T_{\text{workforce}} = -\text{headcount}$$
-   - *Label:* Stylized abstraction (applied when recruitment resolves).
+4. **Argument Key Deduplication:**
+   - During **Argument Key Completion**, exclude keys that are already present as tokens in the current command segment.

@@ -104,6 +104,36 @@ fn read_line_from_stdin() -> Result<String, CliError> {
   Ok(input)
 }
 
+fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'static str])]> {
+  match verb {
+    "invest" => Some(&[
+      ("domain", &["beds", "outpatient", "technology"]),
+      ("amount", &[]),
+    ]),
+    "recruit" => Some(&[
+      ("role", &["nurse", "physician", "admin"]),
+      ("headcount", &[]),
+    ]),
+    "monitor" => Some(&[
+      ("target", &["northlake", "summit", "valley", "metro"]),
+      ("depth", &[]),
+    ]),
+    "negotiate" => Some(&[
+      ("payer", &["carrier_a", "carrier_b"]),
+      ("rate_posture", &["aggressive", "neutral", "conservative"]),
+    ]),
+    "commit" => Some(&[("pledge_type", &["access", "quality"]), ("level", &[])]),
+    "project" => Some(&[
+      (
+        "kind",
+        &["ehr_epic", "ehr_cerner", "tower", "clinic_network"],
+      ),
+      ("budget", &[]),
+    ]),
+    _ => None,
+  }
+}
+
 fn complete_verb_candidates(line: &str, pos: usize, verbs: &[String]) -> (usize, Vec<String>) {
   let cursor = pos.min(line.len());
   let head = &line[..cursor];
@@ -113,17 +143,74 @@ fn complete_verb_candidates(line: &str, pos: usize, verbs: &[String]) -> (usize,
   let leading_ws = segment.len() - trimmed_start.len();
   let completion_start = segment_start + leading_ws;
 
-  if trimmed_start.contains(char::is_whitespace) {
-    return (cursor, Vec::new());
+  if trimmed_start.is_empty() {
+    return (completion_start, verbs.to_vec());
   }
 
-  let prefix = trimmed_start.to_ascii_lowercase();
-  let candidates = verbs
-    .iter()
-    .filter(|verb| verb.starts_with(&prefix))
-    .cloned()
-    .collect::<Vec<_>>();
-  (completion_start, candidates)
+  let space_idx_opt = trimmed_start.rfind(char::is_whitespace);
+
+  match space_idx_opt {
+    None => {
+      let prefix = trimmed_start.to_ascii_lowercase();
+      let candidates = verbs
+        .iter()
+        .filter(|verb| verb.starts_with(&prefix))
+        .cloned()
+        .collect::<Vec<_>>();
+      (completion_start, candidates)
+    }
+    Some(space_idx) => {
+      let verb_token = trimmed_start.split_whitespace().next().unwrap_or("");
+      let verb = verb_token.to_ascii_lowercase();
+
+      let Some(schema) = get_verb_args(&verb) else {
+        return (cursor, Vec::new());
+      };
+
+      let ws_char = trimmed_start[space_idx..].chars().next().unwrap();
+      let ws_len = ws_char.len_utf8();
+
+      let last_word = &trimmed_start[space_idx + ws_len..];
+      let word_start = completion_start + space_idx + ws_len;
+
+      if let Some(eq_offset) = last_word.find('=') {
+        let key = &last_word[..eq_offset].to_ascii_lowercase();
+        let val_prefix = &last_word[eq_offset + 1..].to_ascii_lowercase();
+        let replacement_start = word_start + eq_offset + 1;
+
+        let mut candidates = Vec::new();
+        for &(k, enum_vals) in schema {
+          if k == key {
+            for &val in enum_vals {
+              if val.starts_with(val_prefix) {
+                candidates.push(val.to_string());
+              }
+            }
+          }
+        }
+        (replacement_start, candidates)
+      } else {
+        let key_prefix = last_word.to_ascii_lowercase();
+        let replacement_start = word_start;
+
+        let prior_part = &trimmed_start[..space_idx];
+        let mut present_keys = std::collections::HashSet::new();
+        for token in prior_part.split_whitespace() {
+          if let Some((k, _)) = token.split_once('=') {
+            present_keys.insert(k.to_ascii_lowercase());
+          }
+        }
+
+        let mut candidates = Vec::new();
+        for &(k, _) in schema {
+          if !present_keys.contains(k) && k.starts_with(&key_prefix) {
+            candidates.push(format!("{}=", k));
+          }
+        }
+        (replacement_start, candidates)
+      }
+    }
+  }
 }
 
 #[cfg(test)]
@@ -136,6 +223,9 @@ mod tests {
       "invest".to_string(),
       "recruit".to_string(),
       "monitor".to_string(),
+      "negotiate".to_string(),
+      "commit".to_string(),
+      "project".to_string(),
     ]
   }
 
@@ -162,9 +252,60 @@ mod tests {
   }
 
   #[test]
-  fn does_not_complete_argument_position() {
+  fn completes_argument_keys() {
+    let (start, candidates) = complete_verb_candidates("invest ", 7, &verbs());
+    assert_eq!(start, 7);
+    assert_eq!(
+      candidates,
+      vec!["domain=".to_string(), "amount=".to_string()]
+    );
+  }
+
+  #[test]
+  fn completes_argument_keys_excluding_present() {
+    let (start, candidates) = complete_verb_candidates("invest domain=beds ", 19, &verbs());
+    assert_eq!(start, 19);
+    assert_eq!(candidates, vec!["amount=".to_string()]);
+  }
+
+  #[test]
+  fn completes_enum_values_for_key() {
     let (start, candidates) = complete_verb_candidates("invest domain=", 14, &verbs());
     assert_eq!(start, 14);
-    assert!(candidates.is_empty());
+    assert_eq!(
+      candidates,
+      vec![
+        "beds".to_string(),
+        "outpatient".to_string(),
+        "technology".to_string()
+      ]
+    );
+  }
+
+  #[test]
+  fn completes_enum_values_with_prefix() {
+    let (start, candidates) = complete_verb_candidates("invest domain=ou", 16, &verbs());
+    assert_eq!(start, 14);
+    assert_eq!(candidates, vec!["outpatient".to_string()]);
+  }
+
+  #[test]
+  fn completes_in_second_batch_command() {
+    let (start, candidates) = complete_verb_candidates("hold; recruit ", 14, &verbs());
+    assert_eq!(start, 14);
+    assert_eq!(
+      candidates,
+      vec!["role=".to_string(), "headcount=".to_string()]
+    );
+  }
+
+  #[test]
+  fn completes_with_multibyte_space() {
+    let (start, candidates) = complete_verb_candidates("invest\u{3000}", 9, &verbs());
+    assert_eq!(start, 9);
+    assert_eq!(
+      candidates,
+      vec!["domain=".to_string(), "amount=".to_string()]
+    );
   }
 }

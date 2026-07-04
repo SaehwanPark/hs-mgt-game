@@ -1,22 +1,36 @@
-# Final Handoff - Nursing Workforce & Retention Ledger (Phase 5)
+# Final Handoff - Competitive Autocomplete Hardening (Phase 5)
 
 ## Summary of Changes
 
-1. **Workforce Ledger Created (`docs/workforce-ledger.md`):**
-   - Established the parameter/evidence ledger for the Nursing Workforce & Retention mechanism.
-   - Assigned confidence labels (`Empirically calibrated`, `Literature-grounded`, `Stylized abstraction`, `Gameplay-driven`) to all relevant ruleset thresholds, recruitment costs/delays, and trust-impact formulas.
-   - Grounded parameters in health services literature, including California AB 394 (safe staffing mandates), Linda Aiken's JAMA 2002 nurse burnout study, and NSI's 2026 RN Staffing Report (78-day time-to-fill).
-2. **Registry References (`docs/evidence-registry.md`):**
-   - Updated the registry table to point to the new workforce ledger, shifting status from candidate to linked.
-3. **Spec Updates (`SPEC.md`):**
-   - Moved Track 3 from Future to Past, renumbered remaining Future development tracks, and recorded complete status.
-4. **Version Bump to `v0.2.4`:**
-   - Incremented version in `Cargo.toml`, `Cargo.lock`, and `CHANGELOG.md`.
+1. **CLI REPL Autocomplete Hardening (`src/cli/repl.rs`):**
+   - Implemented `get_verb_args` defining the argument key and enum value schema for all competitive CLI verbs.
+   - Refactored `complete_verb_candidates` to support full token parsing and contextual autocomplete for:
+     - Verb prefixes (existing behavior preserved).
+     - Argument keys (e.g. `domain=`) after a space/partial key.
+     - Enum values (e.g. `beds`) after an `=`.
+   - Excluded already specified keys from subsequent autocomplete candidates in the same command segment.
+   - Preserved semicolon-separated command batch boundary detection.
+2. **Comprehensive Unit Tests (`src/cli/repl.rs`):**
+   - Added unit tests checking:
+     - Verb prefix completions.
+     - Semicolon-separated batch commands.
+     - Argument key completions.
+     - Deduplication of present keys.
+     - Enum value cycling and cycling with prefixes.
+3. **Workspace Tracking Files (`_workspace/`):**
+   - Framed the task in `_workspace/00_input/request-summary.md`.
+   - Updated technical findings in `_workspace/01_evidence_map.md` and `_workspace/02_mechanism_design.md`.
+   - Verified the QA report in `_workspace/03_domain_qa.md` as **PASS**.
+4. **Hygiene & Specifications (`SPEC.md`, `CHANGELOG.md`):**
+   - Documented the v0.2.5 feature and rollup details in `SPEC.md` and `CHANGELOG.md`.
+   - Updated the Future Track 2 "Competitive campaign hardening" next actionable slice definition.
+5. **Version Bump to `v0.2.5`:**
+   - Incremented version in `Cargo.toml` and `Cargo.lock`.
 
 ---
 
 ## Verification Results
 - `cargo fmt --check` passes cleanly.
 - `cargo clippy --all-targets -- -D warnings` compiles with zero warnings or errors.
-- `cargo test` passes cleanly (all 233 unit/integration tests).
-- Golden hashes (competitive seed-42 and stabilization) remain identical.
+- `cargo test` passes cleanly (all 237 unit/integration tests).
+- `python3 scripts/run_automated_playtests.py` passes successfully, preserving golden session hashes.

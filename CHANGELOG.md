@@ -6,6 +6,13 @@ The project follows lightweight semantic versioning during early development.
 
 ## [Unreleased]
 
+## [0.2.5] - 2026-07-03
+
+### Added
+- Implemented argument-key and enum-value autocomplete in the competitive campaign CLI REPL, allowing tab cycling through valid parameters and excluding already entered options.
+- Added comprehensive unit tests in `src/cli/repl.rs` to verify autocomplete outcomes for command segments, batches, argument keys, and enum values.
+- Bumped package version to `0.2.5`.
+
 ## [0.2.4] - 2026-07-03
 
 ### Added
