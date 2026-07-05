@@ -123,6 +123,7 @@ fn observation_from_human_system(
     },
     staffed_beds: human.staffed_beds,
     outpatient_capacity: human.outpatient_capacity,
+    emergency_capacity: human.emergency_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,

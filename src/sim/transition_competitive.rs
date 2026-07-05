@@ -239,6 +239,27 @@ fn apply_command(
             format!("{summary} (technology rollout)"),
           );
         }
+        InvestDomain::Emergency => {
+          let emergency_delta = amount / 15;
+          let access_delta = amount / 15;
+          let system = &mut world.systems[system_idx];
+          system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
+          system.market_share_index =
+            crate::model::clamp_metric(system.market_share_index + amount / 30);
+          push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::EmergencyCapacity {
+              capacity_delta: emergency_delta,
+              project_draw: None,
+            },
+            format!("{summary} (emergency capacity expansion)"),
+          );
+        }
       }
       events.push(Event {
         actor: "health_system",
@@ -369,6 +390,10 @@ fn apply_command(
         },
         crate::model::ProjectKind::ClinicNetwork => PendingEffectKind::OutpatientCapacity {
           capacity_delta: 30,
+          project_draw: Some(monthly_draw),
+        },
+        crate::model::ProjectKind::EmergencyPavilion => PendingEffectKind::EmergencyCapacity {
+          capacity_delta: 15,
           project_draw: Some(monthly_draw),
         },
         crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
@@ -514,9 +539,11 @@ fn apply_staffing_constraints(
   effects: &mut Vec<crate::model::AttributedEffect>,
 ) {
   for system in &mut world.systems {
-    let target_nurses = (system.staffed_beds + 4) / 5;
-    let target_physicians = (system.outpatient_capacity + 9) / 10;
-    let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20;
+    let target_nurses = (system.staffed_beds + 4) / 5 + (system.emergency_capacity + 1) / 2;
+    let target_physicians =
+      (system.outpatient_capacity + 9) / 10 + (system.emergency_capacity + 3) / 4;
+    let target_admins =
+      (system.staffed_beds + system.outpatient_capacity + system.emergency_capacity + 19) / 20;
 
     let nurse_deficit = (target_nurses - system.nurses).max(0);
     let physician_deficit = (target_physicians - system.physicians).max(0);
@@ -540,8 +567,25 @@ fn apply_staffing_constraints(
       });
     }
 
-    let mut effective_beds = system.staffed_beds.min(system.nurses * 5);
-    let mut effective_outpatient = system.outpatient_capacity.min(system.physicians * 10);
+    // Hierarchical staffing allocation: beds first, clinics second, ED third
+    let target_nurses_beds = (system.staffed_beds + 4) / 5;
+    let nurses_beds = system.nurses.min(target_nurses_beds);
+    let remaining_nurses = (system.nurses - nurses_beds).max(0);
+    let target_nurses_ed = (system.emergency_capacity + 1) / 2;
+    let nurses_ed = remaining_nurses.min(target_nurses_ed);
+
+    let target_physicians_outpatient = (system.outpatient_capacity + 9) / 10;
+    let physicians_outpatient = system.physicians.min(target_physicians_outpatient);
+    let remaining_physicians = (system.physicians - physicians_outpatient).max(0);
+    let target_physicians_ed = (system.emergency_capacity + 3) / 4;
+    let physicians_ed = remaining_physicians.min(target_physicians_ed);
+
+    let mut effective_beds = system.staffed_beds.min(nurses_beds * 5);
+    let mut effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10);
+    let mut effective_emergency = system
+      .emergency_capacity
+      .min(nurses_ed * 2)
+      .min(physicians_ed * 4);
 
     if system.system_id == 0
       && world.scenario_id == "exemplary-competitive-v1"
@@ -549,10 +593,12 @@ fn apply_staffing_constraints(
     {
       effective_beds /= 2;
       effective_outpatient /= 2;
+      effective_emergency /= 2;
     }
 
-    let total_physical = system.staffed_beds + system.outpatient_capacity;
-    let total_effective = effective_beds + effective_outpatient;
+    let total_physical =
+      system.staffed_beds + system.outpatient_capacity + system.emergency_capacity;
+    let total_effective = effective_beds + effective_outpatient + effective_emergency;
 
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
@@ -1028,5 +1074,94 @@ mod transition_competitive_tests {
         .iter()
         .any(|e| e.description.contains("EHR increases operating costs"))
     );
+  }
+
+  #[test]
+  fn test_emergency_department_mechanics() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+    let ruleset = default_competitive_ruleset();
+
+    // 1. Initially emergency_capacity is 0
+    assert_eq!(world.systems[0].emergency_capacity, 0);
+
+    // 2. Invest in Emergency capacity: domain=emergency, amount=30
+    let batches = vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![CompetitiveCommand::Invest {
+          domain: InvestDomain::Emergency,
+          amount: 30,
+        }],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+    ];
+
+    let aggregated = resolve_monthly_batches(&world, &batches, &ruleset).expect("resolve");
+    let transition = transition_competitive(&world, aggregated, &ruleset).expect("transition");
+
+    // After transition, the next state is advanced to Month 2, but the start-of-month tick hasn't run.
+    // So emergency_capacity is still 0.
+    assert_eq!(transition.next.systems[0].emergency_capacity, 0);
+    // access_index at genesis was 68. 68 + 2 = 70.
+    assert_eq!(transition.next.systems[0].access_index, 70);
+    // market_share_index at genesis was 24. 24 + 1 = 25.
+    assert_eq!(transition.next.systems[0].market_share_index, 25);
+
+    // 3. Tick Month 2 to resolve the pending EmergencyCapacity effect
+    let mut next_world = transition.next.clone();
+    let inputs = crate::inputs::resolve_competitive_inputs(42, 2, false);
+    let mut events = Vec::new();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut next_world,
+      &inputs,
+      &mut events,
+    );
+
+    // Now emergency capacity increases by 30 / 15 = 2.
+    assert_eq!(next_world.systems[0].emergency_capacity, 2);
+
+    // 4. Staffing target increases:
+    // Staffed beds: 118, Outpatient: 100, Emergency capacity: 2
+    // target_nurses: 118/5 (24) + 2/2 (1) = 25 nurses
+    // target_physicians: 100/10 (10) + 2/4 (1) = 11 physicians
+    // target_admins: (118 + 100 + 2 + 19)/20 = 11 admins
+    // Riverside starts with 24 nurses, 10 physicians, 11 admins.
+    // So there is a deficit of 1 nurse and 1 physician.
+    let mut events_staffing = Vec::new();
+    let mut effects_staffing = Vec::new();
+    apply_staffing_constraints(
+      &mut next_world,
+      &ruleset,
+      &mut events_staffing,
+      &mut effects_staffing,
+    );
+
+    // Workforce trust drops by 2 (deficit of 1 nurse + 1 physician)
+    assert_eq!(next_world.systems[0].workforce_trust, 60 - 2);
+
+    // Effective capacity:
+    // Nurses beds target: 24. Nurses assigned beds: 24 (nurses = 24). Remaining nurses: 0. Nurses ED: 0.
+    // Physicians outpatient target: 10. Physicians assigned outpatient: 10 (physicians = 10). Remaining physicians: 0. Physicians ED: 0.
+    // Effective beds: 118
+    // Effective outpatient: 100
+    // Effective emergency: 0
+    // Total physical: 118 + 100 + 2 = 220
+    // Total effective: 118 + 100 + 0 = 218
+    // Capacity utility ratio = 218 / 220 = 0.9909
+    // Penalty pct = 1.0 - 0.9909 = 0.0091
+    // Penalty = (0.0091 * 15.0).round() = 0.
+    // Quality/access should remain at 72 / 70 respectively.
+    assert_eq!(next_world.systems[0].quality_index, 72);
+    assert_eq!(next_world.systems[0].access_index, 70);
   }
 }

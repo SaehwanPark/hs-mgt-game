@@ -302,6 +302,25 @@ fn apply_pending_effect(
         ),
       });
     }
+    PendingEffectKind::EmergencyCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
+      let system = &mut world.systems[system_idx];
+      system.emergency_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "{}: capital project expands emergency capacity (+{capacity_delta} bays)",
+          system.name
+        ),
+      });
+    }
     PendingEffectKind::OutpatientCapacity {
       capacity_delta,
       project_draw,

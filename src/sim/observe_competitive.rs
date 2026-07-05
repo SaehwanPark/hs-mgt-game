@@ -51,6 +51,7 @@ pub fn observe_for_human(
     },
     staffed_beds: human.staffed_beds,
     outpatient_capacity: human.outpatient_capacity,
+    emergency_capacity: human.emergency_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,
@@ -198,6 +199,16 @@ pub fn in_flight_projects_label(world: &CompetitiveWorldState, human_id: u32) ->
           let remaining = effect.resolve_month.saturating_sub(observation_month);
           projects.push(format!(
             "ClinicNetwork ({} mos left, ${}k/mo draw)",
+            remaining, draw
+          ));
+        }
+        crate::model::PendingEffectKind::EmergencyCapacity {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          projects.push(format!(
+            "EmergencyPavilion ({} mos left, ${}k/mo draw)",
             remaining, draw
           ));
         }

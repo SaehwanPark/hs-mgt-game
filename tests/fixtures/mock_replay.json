@@ -13,6 +13,7 @@
         "name": "Riverside Community Health",
         "staffed_beds": 118,
         "outpatient_capacity": 100,
+        "emergency_capacity": 0,
         "nurses": 24,
         "physicians": 10,
         "admins": 11,
@@ -34,6 +35,7 @@
         "name": "Northlake Health",
         "staffed_beds": 132,
         "outpatient_capacity": 150,
+        "emergency_capacity": 0,
         "nurses": 27,
         "physicians": 15,
         "admins": 15,
@@ -55,6 +57,7 @@
         "name": "Summit Care",
         "staffed_beds": 104,
         "outpatient_capacity": 120,
+        "emergency_capacity": 0,
         "nurses": 21,
         "physicians": 12,
         "admins": 12,
@@ -132,6 +135,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -153,6 +157,7 @@
             "name": "Northlake Health",
             "staffed_beds": 132,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -174,6 +179,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -345,6 +351,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -366,6 +373,7 @@
             "name": "Northlake Health",
             "staffed_beds": 132,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -387,6 +395,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -468,7 +477,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "e73a38b3951cd8b6"
+      "state_hash": "0930e2bf6890aaba"
     },
     {
       "prior": {
@@ -485,6 +494,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -506,6 +516,7 @@
             "name": "Northlake Health",
             "staffed_beds": 137,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -527,6 +538,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -702,6 +714,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -723,6 +736,7 @@
             "name": "Northlake Health",
             "staffed_beds": 137,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -744,6 +758,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -830,7 +845,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "b448d37b3f54db07"
+      "state_hash": "510bcfa8c175aff3"
     },
     {
       "prior": {
@@ -847,6 +862,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -868,6 +884,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -889,6 +906,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1064,6 +1082,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1085,6 +1104,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -1106,6 +1126,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1197,7 +1218,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "f264c22f030e5f41"
+      "state_hash": "d71b9dcbd728318d"
     },
     {
       "prior": {
@@ -1214,6 +1235,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1235,6 +1257,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1256,6 +1279,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1427,6 +1451,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1448,6 +1473,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1469,6 +1495,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1546,7 +1573,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "8e605d6c4ff8a11a"
+      "state_hash": "3f55fca6a36b5dde"
     },
     {
       "prior": {
@@ -1563,6 +1590,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1584,6 +1612,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1605,6 +1634,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1772,6 +1802,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1793,6 +1824,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1814,6 +1846,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1891,7 +1924,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "7e1938d650e94730"
+      "state_hash": "40c9ceb104952f3c"
     },
     {
       "prior": {
@@ -1908,6 +1941,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1929,6 +1963,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1950,6 +1985,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2117,6 +2153,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2138,6 +2175,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2159,6 +2197,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2236,7 +2275,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "1dc7948a4e613c36"
+      "state_hash": "550c5610a752b3f2"
     },
     {
       "prior": {
@@ -2253,6 +2292,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2274,6 +2314,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2295,6 +2336,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2462,6 +2504,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2483,6 +2526,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2504,6 +2548,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2581,7 +2626,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "8309e8cffe1261e0"
+      "state_hash": "25248065d4fa88a4"
     },
     {
       "prior": {
@@ -2598,6 +2643,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2619,6 +2665,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2640,6 +2687,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2807,6 +2855,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2828,6 +2877,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2849,6 +2899,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2926,7 +2977,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "1a45783bc404ea47"
+      "state_hash": "edcfa509a43fe713"
     },
     {
       "prior": {
@@ -2943,6 +2994,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2964,6 +3016,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2985,6 +3038,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3152,6 +3206,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3173,6 +3228,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3194,6 +3250,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3271,7 +3328,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "cfb2f78837e42822"
+      "state_hash": "7f3eb6232cf9603e"
     },
     {
       "prior": {
@@ -3288,6 +3345,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3309,6 +3367,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3330,6 +3389,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3497,6 +3557,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3518,6 +3579,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3539,6 +3601,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3616,7 +3679,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "9b2a7191bd754f43"
+      "state_hash": "48b871eefd08455f"
     },
     {
       "prior": {
@@ -3633,6 +3696,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3654,6 +3718,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3675,6 +3740,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3842,6 +3908,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3863,6 +3930,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3884,6 +3952,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3961,7 +4030,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "2513bd639105d92b"
+      "state_hash": "de54c587c2002bbf"
     },
     {
       "prior": {
@@ -3978,6 +4047,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3999,6 +4069,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4020,6 +4091,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4191,6 +4263,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4212,6 +4285,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4233,6 +4307,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4310,7 +4385,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "8cb6e45bf414199a"
+      "state_hash": "41fc3afdd155c426"
     },
     {
       "prior": {
@@ -4327,6 +4402,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4348,6 +4424,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4369,6 +4446,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4536,6 +4614,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4557,6 +4636,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4578,6 +4658,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4655,7 +4736,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "4e05a38e2cc51d1e"
+      "state_hash": "76b4e51035755002"
     },
     {
       "prior": {
@@ -4672,6 +4753,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4693,6 +4775,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4714,6 +4797,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4881,6 +4965,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4902,6 +4987,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4923,6 +5009,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5000,7 +5087,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "d50ea586a0d0242d"
+      "state_hash": "c1e650f42d5bdda1"
     },
     {
       "prior": {
@@ -5017,6 +5104,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5038,6 +5126,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5059,6 +5148,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5226,6 +5316,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5247,6 +5338,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5268,6 +5360,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5345,7 +5438,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "415e8e5703666716"
+      "state_hash": "d19043dcf270fb0a"
     },
     {
       "prior": {
@@ -5362,6 +5455,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5383,6 +5477,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5404,6 +5499,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5571,6 +5667,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5592,6 +5689,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5613,6 +5711,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5690,7 +5789,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "8fb76dc696fa614d"
+      "state_hash": "1462bf2dfdd00509"
     },
     {
       "prior": {
@@ -5707,6 +5806,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5728,6 +5828,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5749,6 +5850,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5916,6 +6018,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5937,6 +6040,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5958,6 +6062,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6035,7 +6140,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "cd082e9d6395ed35"
+      "state_hash": "3b68773bdf3cc189"
     },
     {
       "prior": {
@@ -6052,6 +6157,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6073,6 +6179,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6094,6 +6201,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6261,6 +6369,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6282,6 +6391,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6303,6 +6413,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6380,7 +6491,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "8a1f0129acb06cfd"
+      "state_hash": "54398dc5acca6729"
     },
     {
       "prior": {
@@ -6397,6 +6508,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6418,6 +6530,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6439,6 +6552,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6606,6 +6720,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6627,6 +6742,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6648,6 +6764,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6725,7 +6842,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "ad6f9895825d979a"
+      "state_hash": "2837758991b32a66"
     },
     {
       "prior": {
@@ -6742,6 +6859,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6763,6 +6881,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6784,6 +6903,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6951,6 +7071,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6972,6 +7093,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6993,6 +7115,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7070,7 +7193,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "92968a6e333f4ff9"
+      "state_hash": "0dcc75bff7ac4035"
     },
     {
       "prior": {
@@ -7087,6 +7210,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7108,6 +7232,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7129,6 +7254,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7296,6 +7422,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7317,6 +7444,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7338,6 +7466,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7415,7 +7544,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "53154f15565c8bc6"
+      "state_hash": "ce2f0d4ce51af972"
     },
     {
       "prior": {
@@ -7432,6 +7561,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7453,6 +7583,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7474,6 +7605,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7641,6 +7773,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7662,6 +7795,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7683,6 +7817,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7760,7 +7895,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "011aa1a5ef662b2b"
+      "state_hash": "76647637f4b1363f"
     },
     {
       "prior": {
@@ -7777,6 +7912,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7798,6 +7934,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7819,6 +7956,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7986,6 +8124,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8007,6 +8146,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8028,6 +8168,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8105,7 +8246,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "81665b419d10326e"
+      "state_hash": "a48007f46908fe92"
     },
     {
       "prior": {
@@ -8122,6 +8263,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8143,6 +8285,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8164,6 +8307,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8335,6 +8479,7 @@
             "name": "Riverside Community Health",
             "staffed_beds": 118,
             "outpatient_capacity": 100,
+            "emergency_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8356,6 +8501,7 @@
             "name": "Northlake Health",
             "staffed_beds": 142,
             "outpatient_capacity": 150,
+            "emergency_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8377,6 +8523,7 @@
             "name": "Summit Care",
             "staffed_beds": 104,
             "outpatient_capacity": 120,
+            "emergency_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8454,7 +8601,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "382453a23e9c88ff"
+      "state_hash": "fee8f96418b7ec93"
     }
   ]
 }
