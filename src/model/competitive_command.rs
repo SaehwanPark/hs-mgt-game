@@ -32,6 +32,7 @@ pub enum PayerId {
   CarrierA,
   CarrierB,
   Medicaid,
+  Medicare,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -141,10 +142,10 @@ impl CompetitiveCommand {
       },
       CompetitiveCommand::Negotiate { payer, .. } => ActionCost {
         action_points: 1,
-        cash_cost: if matches!(payer, PayerId::Medicaid) {
-          5
-        } else {
-          0
+        cash_cost: match payer {
+          PayerId::Medicaid => 5,
+          PayerId::Medicare => 10,
+          _ => 0,
         },
         political_capital: 2,
       },
