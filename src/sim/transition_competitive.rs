@@ -703,7 +703,7 @@ fn apply_staffing_constraints(
     let diverted_patients = (obstetric_demand - effective_obs).max(0);
     if diverted_patients > 0 {
       let trust_penalty = diverted_patients * 2;
-      let share_penalty = diverted_patients * 1;
+      let share_penalty = diverted_patients;
       system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
       system.market_share_index =
         crate::model::clamp_metric(system.market_share_index - share_penalty);
@@ -1399,7 +1399,7 @@ mod transition_competitive_tests {
 
   #[test]
   fn test_obstetrics_department_mechanics() {
-    let mut world = genesis_competitive_world(Difficulty::Normal);
+    let world = genesis_competitive_world(Difficulty::Normal);
     let ruleset = default_competitive_ruleset();
 
     // 1. Initially obstetrics_capacity is 0
