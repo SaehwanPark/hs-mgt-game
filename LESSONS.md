@@ -542,3 +542,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Symptom: If priority queues are not kept aligned between the transition simulation (`src/sim/transition_competitive.rs`) and the user dashboard display (`src/cli/display/executive_report.rs`), the dashboard will show incorrect/inconsistent effective capacities compared to the actual state transitions.
 - Cause: The simulation uses a hierarchical greedy allocation to distribute nurses and physicians to ICU, Obstetrics, Med-Surg Beds, Outpatient Clinics, and ED in a specific sequence. This sequence must be mirrored exactly in the display formatting code.
 - Prevention: Ensure that any change to the hierarchical allocation rules (such as inserting a new service line like Obstetrics) is updated identically in both `apply_staffing_constraints` and the CLI dashboard report renderer.
+
+
+## Psychiatric ED Boarding Interaction & Testing Constraints
+
+- Context: Implementing Psychiatric Service Line with ED holding boarding and diversion mechanics.
+- Symptom: Unit tests failed to trigger the psychiatric ED boarding path because overflow patients were constantly diverted instead of boarded.
+- Cause: ICU critical care patients board in the ED unconditionally (even when ED effective capacity is 0), which depletes all available ED bays before psychiatric patients (who board conditionally based on remaining ED bays) are processed. Furthermore, under normal staffing, ED staffing is only possible if higher-priority specialty units (like psychiatric beds) are fully staffed, leaving no psychiatric overflow.
+- Resolution: To test psychiatric ED boarding, set starting `staffed_beds` to `0` to prevent ICU boarding, and activate the scenario-specific RNA strike (under a matching `scenario_id` like `exemplary-competitive-v1`) to halve a single psychiatric bed to `0` effective capacity (creating 1 overflow patient) while leaving the ED staffed with positive capacity.
+- Prevention: When testing conditional resource-sharing code (like psychiatric ED holding), isolate the target resource by zeroing out higher-priority demands (like Med-Surg staffed beds / ICU) and use scenario strike/event logic to create capacity-staffing mismatches while maintaining positive holding capacity.
