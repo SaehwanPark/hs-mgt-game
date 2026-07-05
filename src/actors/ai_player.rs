@@ -139,11 +139,8 @@ fn generate_candidates(
   let target_nurses = (observation.staffed_beds + 4) / 5 + (observation.emergency_capacity + 1) / 2;
   let target_physicians =
     (observation.outpatient_capacity + 9) / 10 + (observation.emergency_capacity + 3) / 4;
-  let target_admins = (observation.staffed_beds
-    + observation.outpatient_capacity
-    + observation.emergency_capacity
-    + 19)
-    / 20;
+  let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20
+    + (observation.emergency_capacity + 9) / 10;
 
   if observation.nurses < target_nurses {
     let diff = (target_nurses - observation.nurses) as u32;

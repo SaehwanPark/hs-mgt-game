@@ -1,21 +1,18 @@
-# Final Handoff - Active Projects Display Hardening (Track 1)
+# Final Handoff - PR Review Polish: Emergency Department Service Line
 
 ## Summary of Changes
-1. **Created Working Branch:** Switched to branch `feat/active-projects-display-details`.
-2. **Handoff Artifacts Created/Updated:**
-   - `_workspace/00_input/request-summary.md`: Scoped request to detail active project kind, duration, and cash draws.
-   - `_workspace/02_mechanism_design.md`: Map pending project effects to descriptive labels and remaining durations in the observation step.
-   - `_workspace/03_domain_qa.md`: Domain QA review (status: `pass`) validating transparency and determinism.
-   - `_workspace/04_implementation_plan.md`: Step-by-step code change list and validation checks.
-3. **Implementation details:**
-   - Refactored `in_flight_projects_label` in [src/sim/observe_competitive.rs](file:///Users/saehwan/repos/hs-mgt-game/src/sim/observe_competitive.rs) to scan `world.effect_queue` for matching system project effects, calculate remaining months, and extract project names and cash draws.
-   - Updated `observe_for_human` call site to pass `world` and `human.system_id`.
-   - Added unit test `test_active_projects_observation` covering formatting.
-4. **Project tracking updated:**
-   - Version bumped to `0.5.9` in [Cargo.toml](file:///Users/saehwan/repos/hs-mgt-game/Cargo.toml).
-   - Documented changes in [CHANGELOG.md](file:///Users/saehwan/repos/hs-mgt-game/CHANGELOG.md) and [SPEC.md](file:///Users/saehwan/repos/hs-mgt-game/SPEC.md) (archived `Medicare` and `Active Projects` detailed entries under `Past`).
-   - Bookkept new lesson in [LESSONS.md](file:///Users/saehwan/repos/hs-mgt-game/LESSONS.md).
+1. **Added Serde Defaults:**
+   - Modified `src/model/competitive_world.rs` to add `#[serde(default)]` to the `emergency_capacity` field in the `HealthSystemState` struct, ensuring backward compatibility when resuming legacy autosaves/replays.
+2. **Suspended ED Pavilion Projects during RNA Strikes:**
+   - Updated the strike delay match block in `src/sim/effects_competitive.rs` to include `PendingEffectKind::EmergencyCapacity`, ensuring active Emergency Department Pavilion projects and their monthly cash draws are properly suspended during active RNA strikes.
+3. **Corrected Admin Staffing Target:**
+   - Corrected the formula for calculating target admins in `src/sim/transition_competitive.rs` and `src/actors/ai_player.rs` to be `(system.staffed_beds + system.outpatient_capacity + 19) / 20 + (system.emergency_capacity + 9) / 10`, aligning with the documented ratio in `SPEC.md` (existing target + `ceil(emergency_capacity / 10)`).
+   - Updated the nurse target warning check in `src/sim/effects_competitive.rs` to include the `emergency_capacity` nurse target.
+4. **Updated Test Cases:**
+   - Refactored assertions in `test_emergency_department_mechanics` in `src/sim/transition_competitive.rs` to account for the corrected target admin calculations and their impact on workforce trust drops.
+5. **Tracked Lockfile Updates:**
+   - Refreshed and updated `Cargo.lock` to reflect version `0.6.0` bump.
 
 ## Verification Results
-- Runs `cargo fmt` and `cargo test` sequentially.
-- All 271 tests pass successfully.
+- Ran `cargo fmt` and `cargo test`.
+- All 272 tests passed successfully.

@@ -542,8 +542,8 @@ fn apply_staffing_constraints(
     let target_nurses = (system.staffed_beds + 4) / 5 + (system.emergency_capacity + 1) / 2;
     let target_physicians =
       (system.outpatient_capacity + 9) / 10 + (system.emergency_capacity + 3) / 4;
-    let target_admins =
-      (system.staffed_beds + system.outpatient_capacity + system.emergency_capacity + 19) / 20;
+    let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20
+      + (system.emergency_capacity + 9) / 10;
 
     let nurse_deficit = (target_nurses - system.nurses).max(0);
     let physician_deficit = (target_physicians - system.physicians).max(0);
@@ -1134,9 +1134,9 @@ mod transition_competitive_tests {
     // Staffed beds: 118, Outpatient: 100, Emergency capacity: 2
     // target_nurses: 118/5 (24) + 2/2 (1) = 25 nurses
     // target_physicians: 100/10 (10) + 2/4 (1) = 11 physicians
-    // target_admins: (118 + 100 + 2 + 19)/20 = 11 admins
+    // target_admins: (118 + 100 + 19)/20 (11) + (2 + 9)/10 (1) = 12 admins
     // Riverside starts with 24 nurses, 10 physicians, 11 admins.
-    // So there is a deficit of 1 nurse and 1 physician.
+    // So there is a deficit of 1 nurse, 1 physician, and 1 admin.
     let mut events_staffing = Vec::new();
     let mut effects_staffing = Vec::new();
     apply_staffing_constraints(
@@ -1146,8 +1146,8 @@ mod transition_competitive_tests {
       &mut effects_staffing,
     );
 
-    // Workforce trust drops by 2 (deficit of 1 nurse + 1 physician)
-    assert_eq!(next_world.systems[0].workforce_trust, 60 - 2);
+    // Workforce trust drops by 3 (deficit of 1 nurse + 1 physician + 1 admin)
+    assert_eq!(next_world.systems[0].workforce_trust, 60 - 3);
 
     // Effective capacity:
     // Nurses beds target: 24. Nurses assigned beds: 24 (nurses = 24). Remaining nurses: 0. Nurses ED: 0.

@@ -56,6 +56,7 @@ pub fn apply_month_start_tick(
           match effect.kind {
             PendingEffectKind::BedsCapacity { .. }
             | PendingEffectKind::OutpatientCapacity { .. }
+            | PendingEffectKind::EmergencyCapacity { .. }
             | PendingEffectKind::TechnologyQuality { .. } => {
               effect.resolve_month += 1;
             }
@@ -110,7 +111,8 @@ pub fn apply_month_start_tick(
         });
 
         // Check staffing ratio < 80%
-        let target_nurses = (riverside.staffed_beds + 4) / 5;
+        let target_nurses =
+          (riverside.staffed_beds + 4) / 5 + (riverside.emergency_capacity + 1) / 2;
         let staffing_ratio = if target_nurses > 0 {
           riverside.nurses as f32 / target_nurses as f32
         } else {

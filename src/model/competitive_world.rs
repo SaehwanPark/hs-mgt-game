@@ -147,6 +147,7 @@ pub struct HealthSystemState {
   pub name: String,
   pub staffed_beds: i32,
   pub outpatient_capacity: i32,
+  #[serde(default)]
   pub emergency_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
