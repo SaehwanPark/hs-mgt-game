@@ -109,7 +109,14 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
     "invest" => Some(&[
       (
         "domain",
-        &["beds", "outpatient", "technology", "emergency", "icu", "obstetrics"],
+        &[
+          "beds",
+          "outpatient",
+          "technology",
+          "emergency",
+          "icu",
+          "obstetrics",
+        ],
       ),
       ("amount", &[]),
     ]),

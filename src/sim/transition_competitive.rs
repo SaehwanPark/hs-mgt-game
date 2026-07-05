@@ -657,7 +657,10 @@ fn apply_staffing_constraints(
     let physicians_ed = remaining_physicians_ed.min(target_physicians_ed);
 
     let mut effective_icu = system.icu_capacity.min(nurses_icu).min(physicians_icu * 2);
-    let mut effective_obs = system.obstetrics_capacity.min(nurses_obs * 2).min(physicians_obs * 5);
+    let mut effective_obs = system
+      .obstetrics_capacity
+      .min(nurses_obs * 2)
+      .min(physicians_obs * 5);
     let mut effective_beds = system.staffed_beds.min(nurses_beds * 5);
     let mut effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10);
     let mut effective_emergency = system
@@ -702,10 +705,21 @@ fn apply_staffing_constraints(
       let trust_penalty = diverted_patients * 2;
       let share_penalty = diverted_patients * 1;
       system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
-      system.market_share_index = crate::model::clamp_metric(system.market_share_index - share_penalty);
+      system.market_share_index =
+        crate::model::clamp_metric(system.market_share_index - share_penalty);
 
-      push_effect(effects, "obstetric diversion", "community_trust", -trust_penalty);
-      push_effect(effects, "obstetric diversion", "market_share_index", -share_penalty);
+      push_effect(
+        effects,
+        "obstetric diversion",
+        "community_trust",
+        -trust_penalty,
+      );
+      push_effect(
+        effects,
+        "obstetric diversion",
+        "market_share_index",
+        -share_penalty,
+      );
 
       events.push(Event {
         actor: "operations",

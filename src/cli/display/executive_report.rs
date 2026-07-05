@@ -145,7 +145,10 @@ pub fn render_executive_report(
     observation.obstetrics_capacity, eff_obs
   ));
   if diverted_patients > 0 {
-    lines.push(format!("  • Obstetric diversion: {} patients", diverted_patients));
+    lines.push(format!(
+      "  • Obstetric diversion: {} patients",
+      diverted_patients
+    ));
   }
   if boarded_patients > 0 {
     lines.push(format!("  • ED boarding: {} patients", boarded_patients));

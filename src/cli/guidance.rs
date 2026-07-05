@@ -379,7 +379,9 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
         "    - emergency_pavilion: Emergency department pavilion expansion. Duration 6 months.",
       ),
       style::dim("    - icu_wing: Intensive Care Unit wing expansion. Duration 12 months."),
-      style::dim("    - obstetrics_unit: Labor & Delivery Obstetrics unit expansion. Duration 9 months."),
+      style::dim(
+        "    - obstetrics_unit: Labor & Delivery Obstetrics unit expansion. Duration 9 months.",
+      ),
       style::label_value(
         "  Constraints",
         "Maximum of 2 concurrent projects allowed at any time.",
