@@ -494,3 +494,21 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Symptom: Rust compilation error (E0004) for non-exhaustive match patterns on PledgeType and CompetitiveCommand.
 - Cause: Adding a new enum variant without updating all matching structures in the codebase (e.g., AI command scoring, serialization helpers, and debrief reports).
 - Prevention: When introducing new command verbs or enum variants, search the workspace for all pattern matches on that type and explicitly update AI, report generation, and formatting match arms.
+
+
+## PR Creation under Sandboxed Credentials
+
+- Context: Attempting to automate pull request creation using `gh pr create` inside a sandboxed agent environment.
+- Symptom: `gh pr create` fails with exit code 1 and permission errors (`Permission denied for gh command`).
+- Cause: The agent's token/environment lacks permissions to execute `gh` pull request operations on GitHub directly.
+- Resolution: Push the git branch to the remote origin (`git push -u origin HEAD`) and report the blocker to the user, providing the direct URL to open the PR manually via the GitHub web interface.
+- Prevention: Document this limitation and fallback to manual PR creation rather than blocking the handoff flow.
+
+
+## Sequential Run Target for Persistence Tests
+
+- Context: Running `cargo test` in parallel when tests read or write global configuration states.
+- Symptom: Persistence tests such as `competitive_persistence_write_load_delete_round_trip` fail intermittently when run in parallel.
+- Cause: Parallel test execution triggers race conditions where a cleanup step in one thread deletes the session file expected by another thread.
+- Resolution: Enforce sequential execution for tests interacting with shared files by running them with `cargo test -- --test-threads=1`.
+
