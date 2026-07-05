@@ -343,6 +343,48 @@ fn apply_command(
             format!("{summary} (cardiology capacity expansion)"),
           );
         }
+        InvestDomain::Oncology => {
+          let oncology_delta = amount / 20;
+          let access_delta = amount / 20;
+          let system = &mut world.systems[system_idx];
+          system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
+          system.market_share_index =
+            crate::model::clamp_metric(system.market_share_index + amount / 40);
+          push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::OncologyCapacity {
+              capacity_delta: oncology_delta,
+              project_draw: None,
+            },
+            format!("{summary} (oncology capacity expansion)"),
+          );
+        }
+        InvestDomain::Infusion => {
+          let infusion_delta = amount / 15;
+          let access_delta = amount / 15;
+          let system = &mut world.systems[system_idx];
+          system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
+          system.market_share_index =
+            crate::model::clamp_metric(system.market_share_index + amount / 30);
+          push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::InfusionCapacity {
+              capacity_delta: infusion_delta,
+              project_draw: None,
+            },
+            format!("{summary} (infusion capacity expansion)"),
+          );
+        }
       }
       events.push(Event {
         actor: "health_system",
@@ -493,6 +535,14 @@ fn apply_command(
           capacity_delta: 4,
           project_draw: Some(monthly_draw),
         },
+        crate::model::ProjectKind::OncologyUnit => PendingEffectKind::OncologyCapacity {
+          capacity_delta: 6,
+          project_draw: Some(monthly_draw),
+        },
+        crate::model::ProjectKind::InfusionCenter => PendingEffectKind::InfusionCapacity {
+          capacity_delta: 8,
+          project_draw: Some(monthly_draw),
+        },
         crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
           PendingEffectKind::TechnologyQuality {
             quality_delta: 5,
@@ -641,19 +691,25 @@ fn apply_staffing_constraints(
       + system.icu_capacity
       + (system.obstetrics_capacity + 1) / 2
       + (system.psychiatric_capacity + 3) / 4
-      + (system.cardiology_capacity + 2) / 3;
+      + (system.cardiology_capacity + 2) / 3
+      + (system.oncology_capacity + 2) / 3
+      + (system.infusion_capacity + 3) / 4;
     let target_physicians = (system.outpatient_capacity + 9) / 10
       + (system.emergency_capacity + 3) / 4
       + (system.icu_capacity + 1) / 2
       + (system.obstetrics_capacity + 4) / 5
       + (system.psychiatric_capacity + 9) / 10
-      + (system.cardiology_capacity + 7) / 8;
+      + (system.cardiology_capacity + 7) / 8
+      + (system.oncology_capacity + 7) / 8
+      + (system.infusion_capacity + 14) / 15;
     let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20
       + (system.emergency_capacity + 9) / 10
       + (system.icu_capacity + 4) / 5
       + (system.obstetrics_capacity + 9) / 10
       + (system.psychiatric_capacity + 14) / 15
-      + (system.cardiology_capacity + 11) / 12;
+      + (system.cardiology_capacity + 11) / 12
+      + (system.oncology_capacity + 11) / 12
+      + (system.infusion_capacity + 19) / 20;
 
     let nurse_deficit = (target_nurses - system.nurses).max(0);
     let physician_deficit = (target_physicians - system.physicians).max(0);
@@ -696,7 +752,15 @@ fn apply_staffing_constraints(
 
     let target_nurses_psych = (system.psychiatric_capacity + 3) / 4;
     let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
-    let remaining_nurses_ed = (remaining_nurses_psych - nurses_psych).max(0);
+    let remaining_nurses_oncology = (remaining_nurses_psych - nurses_psych).max(0);
+
+    let target_nurses_oncology = (system.oncology_capacity + 2) / 3;
+    let nurses_oncology = remaining_nurses_oncology.min(target_nurses_oncology);
+    let remaining_nurses_infusion = (remaining_nurses_oncology - nurses_oncology).max(0);
+
+    let target_nurses_infusion = (system.infusion_capacity + 3) / 4;
+    let nurses_infusion = remaining_nurses_infusion.min(target_nurses_infusion);
+    let remaining_nurses_ed = (remaining_nurses_infusion - nurses_infusion).max(0);
 
     let target_nurses_ed = (system.emergency_capacity + 1) / 2;
     let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
@@ -715,7 +779,16 @@ fn apply_staffing_constraints(
 
     let target_physicians_psych = (system.psychiatric_capacity + 9) / 10;
     let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
-    let remaining_physicians_op = (remaining_physicians_psych - physicians_psych).max(0);
+    let remaining_physicians_oncology = (remaining_physicians_psych - physicians_psych).max(0);
+
+    let target_physicians_oncology = (system.oncology_capacity + 7) / 8;
+    let physicians_oncology = remaining_physicians_oncology.min(target_physicians_oncology);
+    let remaining_physicians_infusion =
+      (remaining_physicians_oncology - physicians_oncology).max(0);
+
+    let target_physicians_infusion = (system.infusion_capacity + 14) / 15;
+    let physicians_infusion = remaining_physicians_infusion.min(target_physicians_infusion);
+    let remaining_physicians_op = (remaining_physicians_infusion - physicians_infusion).max(0);
 
     let target_physicians_outpatient = (system.outpatient_capacity + 9) / 10;
     let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
@@ -738,6 +811,14 @@ fn apply_staffing_constraints(
       .psychiatric_capacity
       .min(nurses_psych * 4)
       .min(physicians_psych * 10);
+    let mut effective_oncology = system
+      .oncology_capacity
+      .min(nurses_oncology * 3)
+      .min(physicians_oncology * 8);
+    let mut effective_infusion = system
+      .infusion_capacity
+      .min(nurses_infusion * 4)
+      .min(physicians_infusion * 15);
     let mut effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10);
     let mut effective_emergency = system
       .emergency_capacity
@@ -754,6 +835,8 @@ fn apply_staffing_constraints(
       effective_obs /= 2;
       effective_psych /= 2;
       effective_cardio /= 2;
+      effective_oncology /= 2;
+      effective_infusion /= 2;
     }
 
     // ED Boarding Calculation.
@@ -865,6 +948,84 @@ fn apply_staffing_constraints(
       });
     }
 
+    // Oncology ED Boarding & Diversion Calculation.
+    let oncology_demand = (system.oncology_capacity + 9) / 10;
+    let oncology_overflow = (oncology_demand - effective_oncology).max(0);
+    let boarded_oncology = oncology_overflow.min(effective_emergency);
+    effective_emergency = (effective_emergency - boarded_oncology).max(0);
+    let diverted_oncology = (oncology_overflow - boarded_oncology).max(0);
+
+    if boarded_oncology > 0 {
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} oncology patients boarded in ED due to oncology bed constraints",
+          system.name, boarded_oncology
+        ),
+      });
+    }
+
+    if diverted_oncology > 0 {
+      let trust_penalty = diverted_oncology * 2;
+      let quality_penalty = diverted_oncology * 2;
+      system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
+      system.quality_index = crate::model::clamp_metric(system.quality_index - quality_penalty);
+
+      push_effect(
+        effects,
+        "oncology diversion",
+        "community_trust",
+        -trust_penalty,
+      );
+      push_effect(
+        effects,
+        "oncology diversion",
+        "quality_index",
+        -quality_penalty,
+      );
+
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} oncology patients diverted due to lack of ED holding capacity",
+          system.name, diverted_oncology
+        ),
+      });
+    }
+
+    // Infusion Center Deferral Calculation.
+    let infusion_demand = (system.infusion_capacity + 4) / 5;
+    let deferred_infusion = (infusion_demand - effective_infusion).max(0);
+
+    if deferred_infusion > 0 {
+      let trust_penalty = deferred_infusion;
+      let share_penalty = deferred_infusion;
+      system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
+      system.market_share_index =
+        crate::model::clamp_metric(system.market_share_index - share_penalty);
+
+      push_effect(
+        effects,
+        "infusion deferral",
+        "community_trust",
+        -trust_penalty,
+      );
+      push_effect(
+        effects,
+        "infusion deferral",
+        "market_share_index",
+        -share_penalty,
+      );
+
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} chemotherapy infusion sessions deferred due to infusion center capacity constraints",
+          system.name, deferred_infusion
+        ),
+      });
+    }
+
     // Obstetric Diversion Calculation.
     let obstetric_demand = (system.obstetrics_capacity + 9) / 10;
     let diverted_patients = (obstetric_demand - effective_obs).max(0);
@@ -903,14 +1064,18 @@ fn apply_staffing_constraints(
       + system.icu_capacity
       + system.obstetrics_capacity
       + system.psychiatric_capacity
-      + system.cardiology_capacity;
+      + system.cardiology_capacity
+      + system.oncology_capacity
+      + system.infusion_capacity;
     let total_effective = effective_beds
       + effective_outpatient
       + effective_emergency
       + effective_icu
       + effective_obs
       + effective_psych
-      + effective_cardio;
+      + effective_cardio
+      + effective_oncology
+      + effective_infusion;
 
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
@@ -1946,6 +2111,162 @@ mod transition_competitive_tests {
       events_div
         .iter()
         .any(|e| e.description.contains("cardiology patients diverted"))
+    );
+  }
+
+  #[test]
+  fn test_oncology_and_infusion_department_mechanics() {
+    let world = genesis_competitive_world(Difficulty::Normal);
+    let ruleset = default_competitive_ruleset();
+
+    // 1. Initially oncology_capacity and infusion_capacity are 0
+    assert_eq!(world.systems[0].oncology_capacity, 0);
+    assert_eq!(world.systems[0].infusion_capacity, 0);
+
+    // 2. Invest in Oncology capacity (amount=20, yields +1 beds next month) and Infusion capacity (amount=15, yields +1 bays next month)
+    let batches = vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![
+          CompetitiveCommand::Invest {
+            domain: InvestDomain::Oncology,
+            amount: 20,
+          },
+          CompetitiveCommand::Invest {
+            domain: InvestDomain::Infusion,
+            amount: 15,
+          },
+        ],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+    ];
+
+    let aggregated = resolve_monthly_batches(&world, &batches, &ruleset).expect("resolve");
+    let transition = transition_competitive(&world, aggregated, &ruleset).expect("transition");
+
+    // After transition, capacity has not resolved yet
+    assert_eq!(transition.next.systems[0].oncology_capacity, 0);
+    assert_eq!(transition.next.systems[0].infusion_capacity, 0);
+    assert_eq!(transition.next.systems[0].access_index, 68 + 1 + 1); // access delta: +1 from oncology, +1 from infusion
+
+    // 3. Tick Month 2 to resolve the pending effects
+    let mut next_world = transition.next.clone();
+    let inputs = crate::inputs::resolve_competitive_inputs(42, 2, false);
+    let mut events = Vec::new();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut next_world,
+      &inputs,
+      &mut events,
+    );
+
+    // Now capacities increase by 1
+    assert_eq!(next_world.systems[0].oncology_capacity, 1);
+    assert_eq!(next_world.systems[0].infusion_capacity, 1);
+
+    // 4. Staffing target increases:
+    // target_nurses: 118/5 (24) + (1 + 2)/3 (1) + (1 + 3)/4 (1) = 26 nurses (up by 2)
+    // target_physicians: 100/10 (10) + (1 + 7)/8 (1) + (1 + 14)/15 (1) = 12 physicians (up by 2)
+    // target_admins: (118 + 100 + 19)/20 (11) + (1 + 11)/12 (1) + (1 + 19)/20 (1) = 13 admins (up by 2)
+    // Riverside starts with 24 nurses, 10 physicians, 11 admins.
+    // Deficit: 2 nurses, 2 physicians, 2 admins = total 6 deficit.
+    let mut events_staffing = Vec::new();
+    let mut effects_staffing = Vec::new();
+    apply_staffing_constraints(
+      &mut next_world,
+      &ruleset,
+      &mut events_staffing,
+      &mut effects_staffing,
+    );
+
+    // Workforce trust drops by 6
+    assert_eq!(next_world.systems[0].workforce_trust, 60 - 6);
+
+    // 5. Test Oncology boarding in ED and Infusion deferrals under strike
+    let mut scarce_world = transition.next.clone();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut scarce_world,
+      &inputs,
+      &mut events,
+    );
+    // Trigger RNA strike to halve effective capacities (effective capacities become 0)
+    scarce_world.scenario_id = "exemplary-competitive-v1".to_string();
+    scarce_world
+      .event_metadata
+      .insert("rna_strike_active".to_string(), "true".to_string());
+
+    // Give enough staff to fully staff Beds, Psychiatric, Cardiology, Oncology, Infusion, and ED
+    scarce_world.systems[0].staffed_beds = 0;
+    scarce_world.systems[0].nurses = 45;
+    scarce_world.systems[0].physicians = 20;
+    scarce_world.systems[0].emergency_capacity = 10;
+
+    let mut events_board = Vec::new();
+    let mut effects_board = Vec::new();
+    apply_staffing_constraints(
+      &mut scarce_world,
+      &ruleset,
+      &mut events_board,
+      &mut effects_board,
+    );
+
+    // Effective oncology is halved by strike to 0. Inpatient Oncology demand is (1 + 9)/10 = 1. Overflow = 1 boards in ED.
+    assert!(
+      events_board
+        .iter()
+        .any(|e| e.description.contains("oncology patients boarded in ED"))
+    );
+    // Effective infusion is halved by strike to 0. Infusion demand is (1 + 4)/5 = 1. Overflow = 1 session deferred.
+    assert!(events_board.iter().any(|e| {
+      e.description
+        .contains("chemotherapy infusion sessions deferred")
+    }));
+    // Trust penalties for infusion deferral: -1 community trust, -1 market share.
+    assert_eq!(scarce_world.systems[0].community_trust, 64 - 1);
+    assert_eq!(scarce_world.systems[0].market_share_index, 24 - 1);
+
+    // 6. Test Oncology diversion when ED is full (by setting nurses to 0)
+    let mut full_ed_world = transition.next.clone();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut full_ed_world,
+      &inputs,
+      &mut events,
+    );
+    full_ed_world.systems[0].staffed_beds = 0;
+    full_ed_world.systems[0].nurses = 0; // makes effective oncology/infusion capacities 0
+    full_ed_world.systems[0].physicians = 12;
+    full_ed_world.systems[0].emergency_capacity = 0; // ED cannot hold anyone
+
+    let mut events_div = Vec::new();
+    let mut effects_div = Vec::new();
+    apply_staffing_constraints(
+      &mut full_ed_world,
+      &ruleset,
+      &mut events_div,
+      &mut effects_div,
+    );
+
+    // Diverted is 1 oncology patient. Penalty: -2 community trust and -2 quality index.
+    // Infusion is deferred: Penalty: -1 community trust and -1 market share.
+    // Net trust drop: -2 (oncology) - 1 (infusion) = -3. Community trust = 64 - 3 = 61.
+    // Net quality drop: -2 (oncology). Quality = 72 - 2 = 70.
+    // Net market share drop: -1 (infusion). Market share = 24 - 1 = 23.
+    assert_eq!(full_ed_world.systems[0].community_trust, 64 - 3);
+    assert_eq!(full_ed_world.systems[0].quality_index, 72 - 2);
+    assert_eq!(full_ed_world.systems[0].market_share_index, 24 - 1);
+    assert!(
+      events_div
+        .iter()
+        .any(|e| e.description.contains("oncology patients diverted"))
     );
   }
 }

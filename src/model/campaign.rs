@@ -51,6 +51,8 @@ pub struct PlayerObservation {
   pub obstetrics_capacity: i32,
   pub psychiatric_capacity: i32,
   pub cardiology_capacity: i32,
+  pub oncology_capacity: i32,
+  pub infusion_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,

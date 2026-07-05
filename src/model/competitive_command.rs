@@ -22,6 +22,8 @@ pub enum InvestDomain {
   Obstetrics,
   Psychiatric,
   Cardiology,
+  Oncology,
+  Infusion,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -65,6 +67,8 @@ pub enum ProjectKind {
   ObstetricsUnit,
   PsychiatricUnit,
   CardiologyUnit,
+  OncologyUnit,
+  InfusionCenter,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -117,6 +121,8 @@ impl ProjectKind {
       ProjectKind::ObstetricsUnit => 9,
       ProjectKind::PsychiatricUnit => 6,
       ProjectKind::CardiologyUnit => 6,
+      ProjectKind::OncologyUnit => 9,
+      ProjectKind::InfusionCenter => 6,
     }
   }
 }
@@ -171,7 +177,7 @@ impl CompetitiveCommand {
       },
       CompetitiveCommand::Project { kind, budget } => ActionCost {
         action_points: match kind {
-          ProjectKind::IcuWing => 3,
+          ProjectKind::IcuWing | ProjectKind::OncologyUnit => 3,
           _ => 2,
         },
         cash_cost: project_monthly_draw(*budget, kind.resolve_months()),

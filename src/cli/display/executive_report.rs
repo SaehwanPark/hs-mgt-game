@@ -90,7 +90,15 @@ pub fn render_executive_report(
 
   let target_nurses_psych = (observation.psychiatric_capacity + 3) / 4;
   let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
-  let remaining_nurses_ed = (remaining_nurses_psych - nurses_psych).max(0);
+  let remaining_nurses_oncology = (remaining_nurses_psych - nurses_psych).max(0);
+
+  let target_nurses_oncology = (observation.oncology_capacity + 2) / 3;
+  let nurses_oncology = remaining_nurses_oncology.min(target_nurses_oncology);
+  let remaining_nurses_infusion = (remaining_nurses_oncology - nurses_oncology).max(0);
+
+  let target_nurses_infusion = (observation.infusion_capacity + 3) / 4;
+  let nurses_infusion = remaining_nurses_infusion.min(target_nurses_infusion);
+  let remaining_nurses_ed = (remaining_nurses_infusion - nurses_infusion).max(0);
 
   let target_nurses_ed = (observation.emergency_capacity + 1) / 2;
   let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
@@ -109,7 +117,15 @@ pub fn render_executive_report(
 
   let target_physicians_psych = (observation.psychiatric_capacity + 9) / 10;
   let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
-  let remaining_physicians_op = (remaining_physicians_psych - physicians_psych).max(0);
+  let remaining_physicians_oncology = (remaining_physicians_psych - physicians_psych).max(0);
+
+  let target_physicians_oncology = (observation.oncology_capacity + 7) / 8;
+  let physicians_oncology = remaining_physicians_oncology.min(target_physicians_oncology);
+  let remaining_physicians_infusion = (remaining_physicians_oncology - physicians_oncology).max(0);
+
+  let target_physicians_infusion = (observation.infusion_capacity + 14) / 15;
+  let physicians_infusion = remaining_physicians_infusion.min(target_physicians_infusion);
+  let remaining_physicians_op = (remaining_physicians_infusion - physicians_infusion).max(0);
 
   let target_physicians_outpatient = (observation.outpatient_capacity + 9) / 10;
   let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
@@ -135,6 +151,14 @@ pub fn render_executive_report(
     .psychiatric_capacity
     .min(nurses_psych * 4)
     .min(physicians_psych * 10);
+  let mut eff_oncology = observation
+    .oncology_capacity
+    .min(nurses_oncology * 3)
+    .min(physicians_oncology * 8);
+  let mut eff_infusion = observation
+    .infusion_capacity
+    .min(nurses_infusion * 4)
+    .min(physicians_infusion * 15);
   let mut eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
@@ -149,6 +173,8 @@ pub fn render_executive_report(
     eff_beds /= 2;
     eff_cardio /= 2;
     eff_psych /= 2;
+    eff_oncology /= 2;
+    eff_infusion /= 2;
     eff_clinics /= 2;
     eff_emergency /= 2;
   }
@@ -171,6 +197,17 @@ pub fn render_executive_report(
   let boarded_psych = psychiatric_overflow.min(eff_emergency);
   eff_emergency = (eff_emergency - boarded_psych).max(0);
   let diverted_psych = (psychiatric_overflow - boarded_psych).max(0);
+
+  // Oncology ED Boarding & Diversion Calculation
+  let oncology_demand = (observation.oncology_capacity + 9) / 10;
+  let oncology_overflow = (oncology_demand - eff_oncology).max(0);
+  let boarded_oncology = oncology_overflow.min(eff_emergency);
+  eff_emergency = (eff_emergency - boarded_oncology).max(0);
+  let diverted_oncology = (oncology_overflow - boarded_oncology).max(0);
+
+  // Infusion Center Deferral Calculation
+  let infusion_demand = (observation.infusion_capacity + 4) / 5;
+  let deferred_infusion = (infusion_demand - eff_infusion).max(0);
 
   // Obstetric Diversion Calculation
   let obstetric_demand = (observation.obstetrics_capacity + 9) / 10;
@@ -199,6 +236,14 @@ pub fn render_executive_report(
   lines.push(format!(
     "  • Psychiatric capacity: {} beds (effective: {})",
     observation.psychiatric_capacity, eff_psych
+  ));
+  lines.push(format!(
+    "  • Oncology capacity: {} beds (effective: {})",
+    observation.oncology_capacity, eff_oncology
+  ));
+  lines.push(format!(
+    "  • Infusion Center capacity: {} bays (effective: {})",
+    observation.infusion_capacity, eff_infusion
   ));
   if diverted_patients > 0 {
     lines.push(format!(
@@ -231,6 +276,24 @@ pub fn render_executive_report(
     lines.push(format!(
       "  • Psychiatric diversion: {} patients",
       diverted_psych
+    ));
+  }
+  if boarded_oncology > 0 {
+    lines.push(format!(
+      "  • Oncology ED boarding: {} patients",
+      boarded_oncology
+    ));
+  }
+  if diverted_oncology > 0 {
+    lines.push(format!(
+      "  • Oncology diversion: {} patients",
+      diverted_oncology
+    ));
+  }
+  if deferred_infusion > 0 {
+    lines.push(format!(
+      "  • Infusion sessions deferred: {} patients",
+      deferred_infusion
     ));
   }
   lines.push(format!(

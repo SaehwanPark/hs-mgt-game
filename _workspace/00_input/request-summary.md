@@ -1,30 +1,34 @@
-# Request Summary - Implement Psychiatric Service Line & Behavioral Health Crisis Mechanics
+# Request Summary - Implement Oncology Service Line & Infusion Center Mechanics
 
 ## Phase / Gate
-Phase 6.1: Simulation Breadth (Track 5) - Psychiatric Service Line & Behavioral Health Crisis Mechanics
+Phase 6.1: Simulation Breadth (Track 5) - Oncology Service Line & Infusion Center Mechanics
 
 ## Scope
-Implement a Psychiatric (Behavioral Health) Service Line with capacity-staffing trade-offs, specialized staffing targets, hierarchical allocation prioritizing Psychiatric after Med-Surg and before Outpatient, and a Psychiatric ED boarding/diversion crisis penalty representing the "behavioral health crisis holding" reality:
-1.  **State Fields:** Add `psychiatric_capacity` to `HealthSystemState` in `src/model/competitive_world.rs`, defaulting to 0 for scenario/genesis backward compatibility. Add `PendingEffectKind::PsychiatricCapacity { capacity_delta: i32, project_draw: Option<i32> }` to `PendingEffectKind`.
-2.  **Command Grammar:** Add `Psychiatric` (alias `"psychiatric"`, `"psych"`) to `InvestDomain` enum and `PsychiatricUnit` (duration: 6 months, capacity: +5 beds, cost: 2 AP, budget: $30k) to `ProjectKind` enum in `src/model/competitive_command.rs`. Update action cost mappings.
+Implement an Oncology (Inpatient) Service Line and an Infusion Center (Outpatient) Service Line with capacity-staffing trade-offs, specialized staffing targets, hierarchical allocation prioritizing Oncology/Infusion after Psychiatric and before Outpatient, and ED boarding (inpatient) or deferral (outpatient) mechanics:
+1.  **State Fields:** Add `oncology_capacity` and `infusion_capacity` to `HealthSystemState` in `src/model/competitive_world.rs`, defaulting to 0 for scenario/genesis backward compatibility. Add `PendingEffectKind::OncologyCapacity { capacity_delta: i32, project_draw: Option<i32> }` and `PendingEffectKind::InfusionCapacity { capacity_delta: i32, project_draw: Option<i32> }` to `PendingEffectKind`.
+2.  **Command Grammar:** Add `Oncology` (alias `"oncology"`, `"onco"`) and `Infusion` (alias `"infusion"`, `"infuse"`) to `InvestDomain` enum. Add `OncologyUnit` (duration: 9 months, capacity: +6 beds, cost: 3 AP, budget: $45k) and `InfusionCenter` (duration: 6 months, capacity: +8 bays, cost: 2 AP, budget: $30k) to `ProjectKind` enum in `src/model/competitive_command.rs`. Update action cost and duration mappings.
 3.  **Staffing Constraints:**
-    *   Psychiatric staffing targets: 1 Nurse per 4 beds, 1 Physician per 10 beds, 1 Admin per 15 beds. These are added to total system targets.
-    *   Hierarchical allocation order: ICU first, Obstetrics second, Med-Surg Beds third, Psychiatric fourth, Outpatient Clinics fifth, Emergency Department sixth.
-4.  **Behavioral Health ED Boarding & Diversion Mechanics:**
-    *   Psychiatric admission demand is modeled as `(system.psychiatric_capacity + 9) / 10` (10% of psychiatric capacity, ceiling division).
-    *   If `effective_psychiatric < psychiatric_demand`, the overflowed volume `psychiatric_demand - effective_psychiatric` represents patients in psychiatric crisis.
-    *   These psychiatric crisis patients board in the ED on a 1-to-1 basis, directly reducing the effective emergency capacity (representing the "holding" of psychiatric patients in ED bays when specialized beds are full/understaffed).
-    *   If the boarded psychiatric patients exceed the remaining effective emergency capacity, the excess patients are diverted/turned away, triggering:
-        *   `-1` community trust penalty per diverted psychiatric patient.
-        *   `-1` quality index penalty per diverted psychiatric patient (due to unsafe care transitions).
-5.  **Strike & CON Delays:** Ensure `PendingEffectKind::PsychiatricCapacity` projects are suspended during RNA strikes.
+    *   Oncology (inpatient) staffing targets: 1 Nurse per 3 beds, 1 Physician per 8 beds, 1 Admin per 12 beds.
+    *   Infusion (outpatient) staffing targets: 1 Nurse per 4 bays, 1 Physician per 15 bays, 1 Admin per 20 bays.
+    *   Hierarchical nurse/physician allocation order: ICU first, Obstetrics second, Med-Surg third, Cardiology fourth, Psychiatric fifth, Oncology sixth, Infusion seventh, Outpatient Clinics eighth, Emergency Department ninth.
+4.  **Oncology & Infusion Mechanics:**
+    *   Oncology inpatient admission demand: `(system.oncology_capacity + 9) / 10` (10% of oncology capacity, ceiling division).
+    *   If `effective_oncology < oncology_demand`, the overflowed volume `oncology_demand - effective_oncology` represents patients who board in the ED on a 1-to-1 basis, directly reducing effective emergency capacity.
+    *   If the boarded oncology patients exceed the remaining effective emergency capacity, the excess patients are diverted, triggering:
+        *   `-2` community trust penalty per diverted oncology patient.
+        *   `-2` quality index penalty per diverted oncology patient (due to compromised care cycle).
+    *   Infusion Center demand: `(system.infusion_capacity + 4) / 5` (20% of infusion capacity, ceiling division).
+    *   If `effective_infusion < infusion_demand`, the unserved outpatient volume `infusion_demand - effective_infusion` cannot board in the ED (outpatient service). They are deferred, triggering:
+        *   `-1` community trust penalty per deferred infusion patient.
+        *   `-1` market share index penalty per deferred infusion patient (competitors absorb the demand).
+5.  **Strike & CON Delays:** Ensure `PendingEffectKind::OncologyCapacity` and `PendingEffectKind::InfusionCapacity` projects are suspended during RNA strikes.
 6.  **CLI & Dashboard:** Update executive report, CLI parsers, autocompletion, and guidance help topics.
 7.  **AI Decisions:** Update target calculation and candidate generation in `src/actors/ai_player.rs`.
 8.  **Golden Hash / Tests:** Verify transition logic with focused unit tests, and update/record the competitive golden hash.
 
 ## Non-Goals
 - No changes to stabilization campaign loops.
-- No specialized pediatric psychiatric or substance abuse rehab facilities.
+- No specialized pediatric oncology or radiation therapy bunkers.
 - No modifications to the core simultaneous command resolution sequence itself.
 
 ## Expected Files to Change
