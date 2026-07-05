@@ -534,8 +534,8 @@ fn apply_staffing_constraints(
       && world.scenario_id == "exemplary-competitive-v1"
       && world.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
     {
-      effective_beds = effective_beds / 2;
-      effective_outpatient = effective_outpatient / 2;
+      effective_beds /= 2;
+      effective_outpatient /= 2;
     }
 
     let total_physical = system.staffed_beds + system.outpatient_capacity;
@@ -949,7 +949,6 @@ mod transition_competitive_tests {
 
     let inputs = crate::inputs::resolve_competitive_inputs(42, 18, false);
     let mut events = Vec::new();
-    let share_before = world.systems[0].market_share_index;
 
     super::super::effects_competitive::apply_month_start_tick(&mut world, &inputs, &mut events);
 

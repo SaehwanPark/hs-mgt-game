@@ -106,6 +106,7 @@ pub struct GameSessionStore {
 }
 
 #[derive(Debug)]
+#[allow(clippy::large_enum_variant)]
 enum GameSession {
   Stabilization(StabilizationSession),
   Competitive(CompetitiveSession),

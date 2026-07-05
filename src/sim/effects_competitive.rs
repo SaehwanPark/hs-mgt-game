@@ -3,6 +3,7 @@ use crate::model::{
   PendingEffectKind, clamp_metric,
 };
 
+#[allow(clippy::collapsible_if)]
 pub fn apply_month_start_tick(
   world: &mut CompetitiveWorldState,
   inputs: &CompetitiveResolvedInputs,
@@ -215,7 +216,7 @@ pub fn apply_month_start_tick(
     // Month 18 Delayed Strike Consequences
     if month_index == 18 {
       if world.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
-        || world.event_metadata.get("rna_strike_months_left").is_some()
+        || world.event_metadata.contains_key("rna_strike_months_left")
       {
         if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
           riverside.community_trust = clamp_metric(riverside.community_trust - 20);
