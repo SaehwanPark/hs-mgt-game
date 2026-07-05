@@ -6,6 +6,12 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.9] - 2026-07-05
+
+### Added
+- Hardened the competitive campaign CLI dashboard by detailing in-flight projects (project kind, remaining months to completion, and monthly cash draw) instead of a simple count.
+- Added comprehensive unit tests for active project observation formatting.
+
 ## [0.5.8] - 2026-07-05
 
 ### Added

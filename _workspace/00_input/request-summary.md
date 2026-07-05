@@ -1,43 +1,29 @@
-# Request Summary - Medicare Public Payer Integration
+# Request Summary - Active Projects Display Hardening
 
 ## Phase / Gate
-Phase 6.1: Simulation Breadth (Track 5: Broader simulation breadth and new strategic actors)
+Phase 6.0/6.1/7: Competitive Campaign Hardening (Track 1)
 
 ## Scope
-Design the plan to implement Medicare public payer integration in the competitive regional campaign loop.
-Medicare will complement the existing Medicaid public payer (added in v0.5.5) and commercial payers (Carrier A and Carrier B).
-Medicare will model quality-compliance alignment rules, where:
-- Medicare is added to the `PayerId` enum and CLI parses `"medicare"`.
-- Medicare negotiations only support `RatePosture::Neutral` posture, representing compliance / reporting alignment.
-- Setting non-neutral rate posture for Medicare results in a validation error.
-- Responding to Medicare compliance requires 1 AP, 2 PC, and $10 cash (higher compliance/reporting overhead than Medicaid).
-- Resolving Medicare compliance grants a direct benefit to quality index (+3 quality_index) and reduces state policy pressure (-3 policy_pressure).
-- Update help guidance, autocomplete, REPL summaries, and debriefing reports to cover Medicare.
+Enhance the active projects display in the competitive campaign's executive report dashboard.
+- Instead of the generic `In-flight: 1 active project(s)`, show details of each project: project kind, remaining months to completion, and monthly cash draw.
+- E.g., `In-flight: ClinicNetwork (8 mos left, $2k/mo draw)`.
+- If multiple, display separated by commas (e.g. `ClinicNetwork (8 mos left, $2k/mo draw), Tower (11 mos left, $10k/mo draw)`).
+- If none, display `none`.
+- Update `observe_for_human` in `src/sim/observe_competitive.rs` to extract these details from the `effect_queue`.
+- Keep existing game rules, stabilization campaigns, and other CLI aspects unchanged.
 
 ## Non-Goals
 - No changes to stabilization campaign loop rules.
-- No structural changes to `HealthSystemState` beyond existing metrics.
-- No patient cohort division by Medicare/Medicaid eligibility for this slice.
-- No changes to commercial payer negotiation mechanics.
+- No changes to competitive transition engine rules.
+- No changes to database/serialization format for saved sessions or replays.
 
 ## Sources
-- `docs/roadmap.md` §5.1, 6.1
-- `docs/phase5-scope-register.md` (Deferred list)
-- `src/model/competitive_command.rs`
-- `src/sim/transition_competitive.rs`
-- `src/sim/validate_competitive.rs`
-- `src/cli/competitive_parse.rs`
-- `src/cli/guidance.rs`
+- `docs/roadmap.md` §6.0, 6.1
+- `src/sim/observe_competitive.rs`
+- `src/cli/display/executive_report.rs`
 
 ## Expected Files to Change
-- `src/model/competitive_command.rs`
-- `src/cli/competitive_parse.rs`
-- `src/cli/guidance.rs`
-- `src/cli/repl.rs`
-- `src/competitive/resolution.rs`
-- `src/debrief/report.rs`
-- `src/sim/transition_competitive.rs`
-- `src/sim/validate_competitive.rs`
+- `src/sim/observe_competitive.rs`
 - `SPEC.md`
 - `CHANGELOG.md`
 - `Cargo.toml`

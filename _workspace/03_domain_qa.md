@@ -1,27 +1,15 @@
-# Domain QA Review: Medicare Public Payer Integration Plan
+# Domain QA Review - Active Projects Detailed Observation
 
-## Status
-pass
+## Status: Pass
 
-## Reviewed Inputs
-- User request: `/preferred-workflow design a plan to continue developments + PR handoff`
-- Request Summary: `_workspace/00_input/request-summary.md`
-- Evidence Map: `_workspace/01_evidence_map.md`
-- Mechanism Design / Implementation Plan: `_workspace/02_mechanism_design.md`
-- Project Canonical Docs: `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, `docs/harness/health-policy-strategy-game/team-spec.md`
+## Project Principles Check
+1. **Strategic interaction preserved?** Yes, no changes to how AI and human systems interact or transition.
+2. **Causal transparency?** Yes, this significantly improves causal transparency and visibility by showing the player exactly which projects are active, how long they will take, and how much cash they consume each month.
+3. **Deterministic transitions?** Yes, observation generation is pure and derived deterministically from the current state and effect queue.
 
-## Findings
-- **Roadmap Alignment:** The proposed Medicare integration aligns with Phase 6.1 (Simulation Breadth) and completes a missing piece of the Phase 5/6 World Slice (Medicare & Medicaid as public payers).
-- **Model Isolation:** Quality compliance is mapped to `quality_index`, which keeps it distinct from the Medicaid compliance index (`access_index`), maintaining strategic tension.
-- **Determinism:** The transition kernel remains completely deterministic. No stochasticity or wall-clock dependencies are introduced.
-- **No Scope Creep:** The mechanism relies entirely on existing structs and enums (`PayerId`, `RatePosture`, etc.) and avoids adding complex billing or cohort segmentation.
+## Risk Assessment
+- **Risk:** Impact on existing integration/golden tests.
+- **Mitigation:** Run `cargo test` to ensure no golden tests assert exact string outputs of the dashboard in a way that breaks, or update the assertions if they were pinning the old `"none"`/`"1 active project(s)"` format. (Note: our grep search showed no matches for `in_flight_projects` in `tests/`, which reduces this risk).
 
-## Required Fixes
-None.
-
-## Residual Risks
-- **Abstractions vs. Realism:** Medicare compliance is highly simplified. Real-world Medicare payments are based on DRGs (Diagnostic Related Groups) and FFS payment calendars, which are abstracted away here.
-- **Parameter Validation:** The cash cost of $10 and quality boost of +3 are relative game abstractions, not calibrated to actual MedPAC financial figures.
-
-## Verification Evidence
-- Verification will be performed on the implementation branch via unit tests checking validation errors (`InvalidMedicarePosture`) and transition results.
+## Verification Target
+- Run `cargo test` and ensure all 260+ tests pass cleanly.
