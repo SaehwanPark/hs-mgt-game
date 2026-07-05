@@ -418,6 +418,7 @@ fn apply_command(
           project_draw: Some(monthly_draw),
         },
         crate::model::ProjectKind::IcuWing => PendingEffectKind::IcuCapacity {
+          // 10 ICU beds regardless of budget; budget size controls monthly cash draw only
           capacity_delta: 10,
           project_draw: Some(monthly_draw),
         },
@@ -639,7 +640,11 @@ fn apply_staffing_constraints(
       effective_icu /= 2;
     }
 
-    // ED Boarding Calculation
+    // ED Boarding Calculation.
+    // NOTE: critical_admissions uses physical staffed_beds, not effective_beds.
+    // During a nurse strike, supply (effective_icu) is halved but demand is not.
+    // This is intentional: ICU shortage compounds during workforce crises, which
+    // reflects real-world boarding dynamics and creates an educational lesson.
     let critical_admissions = (system.staffed_beds + 19) / 20;
     let boarded_patients = (critical_admissions - effective_icu).max(0);
     effective_emergency = (effective_emergency - boarded_patients).max(0);

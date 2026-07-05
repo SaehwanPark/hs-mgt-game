@@ -1,6 +1,7 @@
 use super::{CompetitiveRuleset, CompetitiveWorldState, stable_hash_hex};
 
-pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v1";
+// v2: added icu= field to record format (2026-07-05, feat/icu-service-line-and-boarding)
+pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v2";
 
 pub fn competitive_state_hash_record(
   state: &CompetitiveWorldState,
