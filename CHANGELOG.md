@@ -6,6 +6,17 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.8.0] - 2026-07-05
+
+### Added
+- Implemented the Obstetrics/L&D Service Line & Diversion Mechanics.
+- Added Obstetrics-specific staffing targets (1 nurse per 2 beds, 1 physician per 5 beds, 1 admin per 10 beds) to transition rules.
+- Implemented hierarchical staffing allocation prioritizing ICU first, Obstetrics second, Med-Surg third, Clinics fourth, and ED last.
+- Added Obstetrics diversion mechanics where patients are diverted if Obstetrics capacity is under-staffed or under-capacitated, incurring `-2` community trust and `-1` market share index penalties.
+- Added `InvestDomain::Obstetrics` for direct Obstetrics bed investments and `ProjectKind::ObstetricsUnit` for 9-month capital projects.
+- Integrated Obstetrics capacity and diversion into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+- Created comprehensive unit tests validating Obstetrics priority allocation, diversion penalties under deficit, and project resolution.
+
 ## [0.7.0] - 2026-07-05
 
 ### Added

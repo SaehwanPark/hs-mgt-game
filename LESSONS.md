@@ -536,4 +536,9 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: Observation mapping relied on the simple count field (`human.resources.active_projects`) rather than inspecting the pending effects queue.
 - Resolution: Updated `in_flight_projects_label` in `src/sim/observe_competitive.rs` to query `world.effect_queue` for matching system effects, calculate remaining months, and extract project names and cash draws.
 - Prevention: When displaying status of delayed or multi-turn commitments, query the queue containing the details instead of only presenting state accumulator values.
+## Hierarchical Staffing Priority Insertion
 
+- Context: Adding the Obstetrics/L&D service line as a second-priority service line after ICU and before Med-Surg/Outpatient.
+- Symptom: If priority queues are not kept aligned between the transition simulation (`src/sim/transition_competitive.rs`) and the user dashboard display (`src/cli/display/executive_report.rs`), the dashboard will show incorrect/inconsistent effective capacities compared to the actual state transitions.
+- Cause: The simulation uses a hierarchical greedy allocation to distribute nurses and physicians to ICU, Obstetrics, Med-Surg Beds, Outpatient Clinics, and ED in a specific sequence. This sequence must be mirrored exactly in the display formatting code.
+- Prevention: Ensure that any change to the hierarchical allocation rules (such as inserting a new service line like Obstetrics) is updated identically in both `apply_staffing_constraints` and the CLI dashboard report renderer.
