@@ -50,6 +50,7 @@ pub struct PlayerObservation {
   pub icu_capacity: i32,
   pub obstetrics_capacity: i32,
   pub psychiatric_capacity: i32,
+  pub cardiology_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,
@@ -60,6 +61,7 @@ pub struct PlayerObservation {
   pub annual_policy_review: Option<Vec<String>>,
   pub consultant_options: Vec<ConsultantOption>,
   pub intel_gaps: Vec<String>,
+  pub rna_strike_active: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]

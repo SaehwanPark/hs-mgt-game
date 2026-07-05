@@ -17,6 +17,7 @@
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
         "psychiatric_capacity": 0,
+        "cardiology_capacity": 0,
         "nurses": 24,
         "physicians": 10,
         "admins": 11,
@@ -42,6 +43,7 @@
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
         "psychiatric_capacity": 0,
+        "cardiology_capacity": 0,
         "nurses": 27,
         "physicians": 15,
         "admins": 15,
@@ -67,6 +69,7 @@
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
         "psychiatric_capacity": 0,
+        "cardiology_capacity": 0,
         "nurses": 21,
         "physicians": 12,
         "admins": 12,
@@ -149,6 +152,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -174,6 +178,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -199,6 +204,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -387,6 +393,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -412,6 +419,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -437,6 +445,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -519,7 +528,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "7bd8a0c7a8312f4e"
+      "state_hash": "7a771bad0a222f34"
     },
     {
       "prior": {
@@ -540,6 +549,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -565,6 +575,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -590,6 +601,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -782,6 +794,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -807,6 +820,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -832,6 +846,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -919,7 +934,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "7f79c293582796df"
+      "state_hash": "ffebb8dba13ddbbb"
     },
     {
       "prior": {
@@ -940,6 +955,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -965,6 +981,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -990,6 +1007,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1182,6 +1200,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1207,6 +1226,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -1232,6 +1252,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1324,7 +1345,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "e26ac8b04f148d97"
+      "state_hash": "7e5439c11c1097db"
     },
     {
       "prior": {
@@ -1345,6 +1366,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1370,6 +1392,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1395,6 +1418,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1583,6 +1607,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1608,6 +1633,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1633,6 +1659,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1711,7 +1738,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "ff740a4586232764"
+      "state_hash": "6c68680eb69087ba"
     },
     {
       "prior": {
@@ -1732,6 +1759,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1757,6 +1785,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1782,6 +1811,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1966,6 +1996,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1991,6 +2022,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2016,6 +2048,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2094,7 +2127,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "04338a18b04fedfe"
+      "state_hash": "d8235ed875b98926"
     },
     {
       "prior": {
@@ -2115,6 +2148,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2140,6 +2174,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2165,6 +2200,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2349,6 +2385,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2374,6 +2411,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2399,6 +2437,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2477,7 +2516,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "10e5ce5f7f9dabe4"
+      "state_hash": "5856fb8c9a56b22e"
     },
     {
       "prior": {
@@ -2498,6 +2537,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2523,6 +2563,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2548,6 +2589,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2732,6 +2774,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2757,6 +2800,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2782,6 +2826,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2860,7 +2905,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "dc7fa1105fc58548"
+      "state_hash": "9a91c5f5c4792482"
     },
     {
       "prior": {
@@ -2881,6 +2926,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2906,6 +2952,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2931,6 +2978,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3115,6 +3163,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3140,6 +3189,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3165,6 +3215,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3243,7 +3294,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "088b7b189bdcfe5f"
+      "state_hash": "4c17d954e7cda0d7"
     },
     {
       "prior": {
@@ -3264,6 +3315,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3289,6 +3341,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3314,6 +3367,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3498,6 +3552,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3523,6 +3578,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3548,6 +3604,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3626,7 +3683,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "487d1fc459ef3f2e"
+      "state_hash": "06ab386946dabbaa"
     },
     {
       "prior": {
@@ -3647,6 +3704,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3672,6 +3730,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3697,6 +3756,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3881,6 +3941,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3906,6 +3967,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3931,6 +3993,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4009,7 +4072,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "9543cfe9993d3f35"
+      "state_hash": "47fba818406c8203"
     },
     {
       "prior": {
@@ -4030,6 +4093,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4055,6 +4119,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4080,6 +4145,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4264,6 +4330,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4289,6 +4356,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4314,6 +4382,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4392,7 +4461,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "31e94265f75c4bc5"
+      "state_hash": "1c84d595eb954139"
     },
     {
       "prior": {
@@ -4413,6 +4482,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4438,6 +4508,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4463,6 +4534,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4651,6 +4723,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4676,6 +4749,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4701,6 +4775,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4779,7 +4854,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "4ae2c779704d58a6"
+      "state_hash": "abd99cf9733ac13c"
     },
     {
       "prior": {
@@ -4800,6 +4875,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4825,6 +4901,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4850,6 +4927,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5034,6 +5112,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5059,6 +5138,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5084,6 +5164,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5162,7 +5243,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "f2a0cac730c6b942"
+      "state_hash": "4163bf69d96b4fae"
     },
     {
       "prior": {
@@ -5183,6 +5264,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5208,6 +5290,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5233,6 +5316,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5417,6 +5501,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5442,6 +5527,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5467,6 +5553,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5545,7 +5632,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "6e447ca6c69b481d"
+      "state_hash": "bcf2a28acf6070c5"
     },
     {
       "prior": {
@@ -5566,6 +5653,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5591,6 +5679,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5616,6 +5705,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5800,6 +5890,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5825,6 +5916,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5850,6 +5942,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5928,7 +6021,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "c676bf267e24c7ba"
+      "state_hash": "a592f17c717ad916"
     },
     {
       "prior": {
@@ -5949,6 +6042,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5974,6 +6068,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5999,6 +6094,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6183,6 +6279,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6208,6 +6305,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6233,6 +6331,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6311,7 +6410,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "668ecc5913725b71"
+      "state_hash": "54668f9579c3b6e5"
     },
     {
       "prior": {
@@ -6332,6 +6431,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6357,6 +6457,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6382,6 +6483,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6566,6 +6668,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6591,6 +6694,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6616,6 +6720,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6694,7 +6799,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "2344a605d53db681"
+      "state_hash": "28fa24b9b4cc6d07"
     },
     {
       "prior": {
@@ -6715,6 +6820,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6740,6 +6846,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6765,6 +6872,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6949,6 +7057,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6974,6 +7083,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6999,6 +7109,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7077,7 +7188,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "c5d4e8961edd1a11"
+      "state_hash": "d00a834111c575d3"
     },
     {
       "prior": {
@@ -7098,6 +7209,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7123,6 +7235,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7148,6 +7261,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7332,6 +7446,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7357,6 +7472,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7382,6 +7498,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7460,7 +7577,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "7e18c5c33b81bd3e"
+      "state_hash": "11c708dac045a910"
     },
     {
       "prior": {
@@ -7481,6 +7598,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7506,6 +7624,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7531,6 +7650,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7715,6 +7835,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7740,6 +7861,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7765,6 +7887,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7843,7 +7966,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "165c7a5464cf35f9"
+      "state_hash": "784ef219393267fb"
     },
     {
       "prior": {
@@ -7864,6 +7987,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7889,6 +8013,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7914,6 +8039,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8098,6 +8224,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8123,6 +8250,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8148,6 +8276,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8226,7 +8355,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "5186310d5a6f5b06"
+      "state_hash": "02bbd23e6d07e528"
     },
     {
       "prior": {
@@ -8247,6 +8376,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8272,6 +8402,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8297,6 +8428,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8481,6 +8613,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8506,6 +8639,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8531,6 +8665,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8609,7 +8744,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "36b3adf262754dc7"
+      "state_hash": "d4ca8e53310cf399"
     },
     {
       "prior": {
@@ -8630,6 +8765,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8655,6 +8791,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8680,6 +8817,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8864,6 +9002,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8889,6 +9028,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8914,6 +9054,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8992,7 +9133,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "159da4d00c8ff94e"
+      "state_hash": "394b600edad9e474"
     },
     {
       "prior": {
@@ -9013,6 +9154,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9038,6 +9180,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9063,6 +9206,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9251,6 +9395,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9276,6 +9421,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9301,6 +9447,7 @@
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
             "psychiatric_capacity": 0,
+            "cardiology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9379,7 +9526,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "a12feb524035ae1f"
+      "state_hash": "4ca91080a325c4a1"
     }
   ]
 }

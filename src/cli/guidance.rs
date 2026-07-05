@@ -112,12 +112,12 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       // Note: Keep command details here aligned with `command_topic_help_lines` below to avoid doc drift.
       lines.push("  Command descriptions and resource costs:".to_string());
       lines.push("    hold: Do nothing. Costs 0 AP, $0 cash, 0 PC.".to_string());
-      lines.push("    invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, technology, emergency, ICU, obstetrics, or psychiatric investments.".to_string());
+      lines.push("    invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, technology, emergency, ICU, obstetrics, psychiatric, or cardiology investments.".to_string());
       lines.push("    recruit role=nurse|physician|admin headcount=<int>: Hire personnel. Costs 1 AP, $5 cash per headcount. Delays: nurse (1 mo), admin (2 mo), physician (3 mo). Can lower trust.".to_string());
       lines.push("    monitor target=northlake|summit|valley|metro depth=<1-3>: View competitor activity. Costs AP equal to depth, $0 cash, 0 PC.".to_string());
       lines.push("    negotiate payer=carrier_a|carrier_b|medicaid|medicare rate_posture=aggressive|neutral|conservative: Set payer commercial bid or align public compliance. Commercial: 1 AP, $0 cash, 2 PC. Medicaid: 1 AP, $5 cash, 2 PC (neutral posture only). Medicare: 1 AP, $10 cash, 2 PC (neutral posture only).".to_string());
       lines.push("    commit pledge_type=access|quality|workforce level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
-      lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit budget=<int>: Multi-month capital projects. Costs 2 AP (3 AP for icu_wing), monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo), emergency_pavilion (6 mo), icu_wing (12 mo), obstetrics_unit (9 mo), psychiatric_unit (6 mo). Max 2 concurrent projects.".to_string());
+      lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit budget=<int>: Multi-month capital projects. Costs 2 AP (3 AP for icu_wing), monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo), emergency_pavilion (6 mo), icu_wing (12 mo), obstetrics_unit (9 mo), psychiatric_unit (6 mo), cardiology_unit (6 mo). Max 2 concurrent projects.".to_string());
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
   }
@@ -221,7 +221,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("invest"),
           style::dim(
-            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric amount=<int>"
+            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology amount=<int>"
           )
         ),
       ),
@@ -238,6 +238,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - icu: Expands intensive care unit beds."),
       style::dim("    - obstetrics: Expands obstetrics beds."),
       style::dim("    - psychiatric: Expands psychiatric beds."),
+      style::dim("    - cardiology: Expands cardiology beds."),
       style::label_value(
         "  Strategic Guidance",
         "Building capacity increases access and quality potential but consumes cash. Keep an eye on your cash runway before investing large amounts.",
@@ -361,7 +362,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("project"),
           style::dim(
-            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit budget=<int>"
+            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit budget=<int>"
           )
         ),
       ),
@@ -388,6 +389,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim(
         "    - psychiatric_unit: Inpatient Psychiatric Unit expansion. Duration 6 months.",
       ),
+      style::dim("    - cardiology_unit: Inpatient Cardiology Unit expansion. Duration 6 months."),
       style::label_value(
         "  Constraints",
         "Maximum of 2 concurrent projects allowed at any time.",

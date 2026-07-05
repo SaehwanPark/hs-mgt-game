@@ -4,6 +4,14 @@ Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 
+## Exhaustive Enum Match Updates for Command Vocabularies
+
+- Context: Adding the Cardiology service line and CardiologyUnit project kind to the command vocabularies.
+- Symptom: Compilation failures on unmatched patterns in `src/competitive/resolution.rs` and `src/debrief/report.rs`.
+- Cause: Match expressions on `InvestDomain` and `ProjectKind` enums in serialization and debrief report formatters were not updated to include the new variants.
+- Prevention: When extending command or project enums (`InvestDomain`, `ProjectKind`, etc.), perform a global repository search or run `cargo check` early to guarantee that all match arms in serialization wrappers, command-to-string formatters, REPL autocomplete registries, parser modules, and debrief report generators are exhaustively populated.
+
+
 ## Maintain Original Execution Sequence for Dynamic Timeline Events
 
 - Context: Refactoring hardcoded timeline events to run dynamically from parsed scenario TOML.

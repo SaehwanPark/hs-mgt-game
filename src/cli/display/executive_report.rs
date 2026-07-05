@@ -71,7 +71,7 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
-  // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Psychiatric fourth, clinics fifth (for physicians), ED last
+  // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Cardiology fourth, Psychiatric fifth, clinics sixth (for physicians), ED last
   let target_nurses_icu = observation.icu_capacity;
   let nurses_icu = observation.nurses.min(target_nurses_icu);
   let remaining_nurses_obs = (observation.nurses - nurses_icu).max(0);
@@ -82,7 +82,11 @@ pub fn render_executive_report(
 
   let target_nurses_beds = (observation.staffed_beds + 4) / 5;
   let nurses_beds = remaining_nurses_ms.min(target_nurses_beds);
-  let remaining_nurses_psych = (remaining_nurses_ms - nurses_beds).max(0);
+  let remaining_nurses_cardio = (remaining_nurses_ms - nurses_beds).max(0);
+
+  let target_nurses_cardio = (observation.cardiology_capacity + 2) / 3;
+  let nurses_cardio = remaining_nurses_cardio.min(target_nurses_cardio);
+  let remaining_nurses_psych = (remaining_nurses_cardio - nurses_cardio).max(0);
 
   let target_nurses_psych = (observation.psychiatric_capacity + 3) / 4;
   let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
@@ -97,7 +101,11 @@ pub fn render_executive_report(
 
   let target_physicians_obs = (observation.obstetrics_capacity + 4) / 5;
   let physicians_obs = remaining_physicians_obs.min(target_physicians_obs);
-  let remaining_physicians_psych = (remaining_physicians_obs - physicians_obs).max(0);
+  let remaining_physicians_cardio = (remaining_physicians_obs - physicians_obs).max(0);
+
+  let target_physicians_cardio = (observation.cardiology_capacity + 7) / 8;
+  let physicians_cardio = remaining_physicians_cardio.min(target_physicians_cardio);
+  let remaining_physicians_psych = (remaining_physicians_cardio - physicians_cardio).max(0);
 
   let target_physicians_psych = (observation.psychiatric_capacity + 9) / 10;
   let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
@@ -110,20 +118,24 @@ pub fn render_executive_report(
   let target_physicians_ed = (observation.emergency_capacity + 3) / 4;
   let physicians_ed = remaining_physicians_ed.min(target_physicians_ed);
 
-  let eff_icu = observation
+  let mut eff_icu = observation
     .icu_capacity
     .min(nurses_icu)
     .min(physicians_icu * 2);
-  let eff_obs = observation
+  let mut eff_obs = observation
     .obstetrics_capacity
     .min(nurses_obs * 2)
     .min(physicians_obs * 5);
-  let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
-  let eff_psych = observation
+  let mut eff_beds = observation.staffed_beds.min(nurses_beds * 5);
+  let mut eff_cardio = observation
+    .cardiology_capacity
+    .min(nurses_cardio * 3)
+    .min(physicians_cardio * 8);
+  let mut eff_psych = observation
     .psychiatric_capacity
     .min(nurses_psych * 4)
     .min(physicians_psych * 10);
-  let eff_clinics = observation
+  let mut eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
   let mut eff_emergency = observation
@@ -131,10 +143,27 @@ pub fn render_executive_report(
     .min(nurses_ed * 2)
     .min(physicians_ed * 4);
 
+  if observation.rna_strike_active {
+    eff_icu /= 2;
+    eff_obs /= 2;
+    eff_beds /= 2;
+    eff_cardio /= 2;
+    eff_psych /= 2;
+    eff_clinics /= 2;
+    eff_emergency /= 2;
+  }
+
   // ED Boarding Calculation
   let critical_admissions = (observation.staffed_beds + 19) / 20;
   let boarded_patients = (critical_admissions - eff_icu).max(0);
   eff_emergency = (eff_emergency - boarded_patients).max(0);
+
+  // Cardiology ED Boarding & Diversion Calculation
+  let cardiology_demand = (observation.cardiology_capacity + 9) / 10;
+  let cardiology_overflow = (cardiology_demand - eff_cardio).max(0);
+  let boarded_cardio = cardiology_overflow.min(eff_emergency);
+  eff_emergency = (eff_emergency - boarded_cardio).max(0);
+  let diverted_cardio = (cardiology_overflow - boarded_cardio).max(0);
 
   // Psychiatric ED Boarding & Diversion Calculation
   let psychiatric_demand = (observation.psychiatric_capacity + 9) / 10;
@@ -164,6 +193,10 @@ pub fn render_executive_report(
     observation.obstetrics_capacity, eff_obs
   ));
   lines.push(format!(
+    "  • Cardiology capacity: {} beds (effective: {})",
+    observation.cardiology_capacity, eff_cardio
+  ));
+  lines.push(format!(
     "  • Psychiatric capacity: {} beds (effective: {})",
     observation.psychiatric_capacity, eff_psych
   ));
@@ -175,6 +208,18 @@ pub fn render_executive_report(
   }
   if boarded_patients > 0 {
     lines.push(format!("  • ED boarding: {} patients", boarded_patients));
+  }
+  if boarded_cardio > 0 {
+    lines.push(format!(
+      "  • Cardiology ED boarding: {} patients",
+      boarded_cardio
+    ));
+  }
+  if diverted_cardio > 0 {
+    lines.push(format!(
+      "  • Cardiology diversion: {} patients",
+      diverted_cardio
+    ));
   }
   if boarded_psych > 0 {
     lines.push(format!(

@@ -99,7 +99,31 @@ reconstructing it from the diff.
 | Psychiatric Service Line & ED holding/diversion mechanics | v0.8.1 | Add Psychiatric service line, staffing targets, Psychiatric-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Project Document Alignment and Version Bump | v0.8.2 | Align project documentation with implemented 24-month campaign loop, autosave, scenario loading, and new service line features | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Externalize Scenario Timeline Events | v0.8.3 | Externalize scenario timeline events to TOML and generalize transition triggers | 275 | `7bd8a0c7a8312f4e` (competitive) |
+| Cardiology Service Line & Cath Lab Mechanics | v0.8.4 | Add Cardiology service line, staffing targets, Cardiology-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 276 | `7a771bad0a222f34` (competitive) |
 
+
+- Feature: Cardiology Service Line & Cath Lab Mechanics
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.8.4
+
+  Summary:
+  Implemented Cardiology (Cardiovascular Care) Service Line and Cardiac Cath Lab infrastructure with capacity-staffing trade-offs, specialized staffing targets, hierarchical allocation prioritizing Cardiology fourth (after Med-Surg and before Psychiatric), and ED boarding/diversion mechanics.
+
+  Done:
+  - Added `cardiology_capacity` to system state structure and `CardiologyCapacity` to `PendingEffectKind`.
+  - Added `InvestDomain::Cardiology` and `ProjectKind::CardiologyUnit` (6-month build time).
+  - Implemented target staffing requirements and 4th-priority nurse/physician hierarchical allocation for Cardiology.
+  - Implemented Cardiology ED holding boarding and diversion mechanics under capacity/staffing deficit (incurring `-2` community trust and `-2` quality index penalties).
+  - Integrated Cardiology capacity and diversion into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+  - Created comprehensive unit tests validating Cardiology priority allocation, diversion penalties under deficit, and project resolution.
+  - Updated competitive state hash to v5 (adding `cardio=`) with value `7a771bad0a222f34`.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all 276 tests.
 
 
 - Feature: Externalize Scenario Timeline Events

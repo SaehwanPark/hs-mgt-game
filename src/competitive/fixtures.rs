@@ -127,6 +127,7 @@ fn observation_from_human_system(
     icu_capacity: human.icu_capacity,
     obstetrics_capacity: human.obstetrics_capacity,
     psychiatric_capacity: human.psychiatric_capacity,
+    cardiology_capacity: human.cardiology_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,
@@ -142,6 +143,7 @@ fn observation_from_human_system(
     annual_policy_review: None,
     consultant_options: consultant_options_month1(difficulty),
     intel_gaps,
+    rna_strike_active: false,
   }
 }
 

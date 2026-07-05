@@ -157,6 +157,7 @@ pub fn format_competitive_command(cmd: &CompetitiveCommand) -> String {
         InvestDomain::Icu => "icu",
         InvestDomain::Obstetrics => "obstetrics",
         InvestDomain::Psychiatric => "psychiatric",
+        InvestDomain::Cardiology => "cardiology",
       };
       format!("invest domain={} amount={}", domain_str, amount)
     }
@@ -204,6 +205,7 @@ pub fn format_competitive_command(cmd: &CompetitiveCommand) -> String {
         ProjectKind::IcuWing => "icu_wing",
         ProjectKind::ObstetricsUnit => "obstetrics_unit",
         ProjectKind::PsychiatricUnit => "psychiatric_unit",
+        ProjectKind::CardiologyUnit => "cardiology_unit",
       };
       format!("project kind={} budget={}", kind_str, budget)
     }
