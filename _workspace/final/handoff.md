@@ -1,18 +1,27 @@
-# Final Handoff - PR Review Polish: Emergency Department Service Line
+# Final Handoff - ICU Service Line & ED Boarding Mechanics
 
 ## Summary of Changes
-1. **Added Serde Defaults:**
-   - Modified `src/model/competitive_world.rs` to add `#[serde(default)]` to the `emergency_capacity` field in the `HealthSystemState` struct, ensuring backward compatibility when resuming legacy autosaves/replays.
-2. **Suspended ED Pavilion Projects during RNA Strikes:**
-   - Updated the strike delay match block in `src/sim/effects_competitive.rs` to include `PendingEffectKind::EmergencyCapacity`, ensuring active Emergency Department Pavilion projects and their monthly cash draws are properly suspended during active RNA strikes.
-3. **Corrected Admin Staffing Target:**
-   - Corrected the formula for calculating target admins in `src/sim/transition_competitive.rs` and `src/actors/ai_player.rs` to be `(system.staffed_beds + system.outpatient_capacity + 19) / 20 + (system.emergency_capacity + 9) / 10`, aligning with the documented ratio in `SPEC.md` (existing target + `ceil(emergency_capacity / 10)`).
-   - Updated the nurse target warning check in `src/sim/effects_competitive.rs` to include the `emergency_capacity` nurse target.
-4. **Updated Test Cases:**
-   - Refactored assertions in `test_emergency_department_mechanics` in `src/sim/transition_competitive.rs` to account for the corrected target admin calculations and their impact on workforce trust drops.
-5. **Tracked Lockfile Updates:**
-   - Refreshed and updated `Cargo.lock` to reflect version `0.6.0` bump.
+1.  **State and Observation Extensions:**
+    *   Added `icu_capacity` to `HealthSystemState` in `src/model/competitive_world.rs` (defaulting to 0).
+    *   Added `PendingEffectKind::IcuCapacity` to track in-flight ICU Wing projects.
+    *   Extended `PlayerObservation` in `src/model/campaign.rs` and `AiPlayerObservation` in `src/sim/observe_ai.rs` with the `icu_capacity` field.
+2.  **Command and Cost Vocabulary:**
+    *   Added `InvestDomain::Icu` and `ProjectKind::IcuWing` to `src/model/competitive_command.rs`.
+    *   Configured `IcuWing` duration to 12 months, AP cost to 3 (compared to 2 for other projects), and cash draw to `budget / 12` monthly.
+3.  **Transition Kernel Rules (Staffing & Boarding):**
+    *   Implemented high-intensity ICU staffing targets (1 Nurse per 1 Bed, 1 Physician per 2 Beds, 1 Admin per 5 Beds).
+    *   Added ICU first in the hierarchical staffing allocation: ICU -> Med-Surg Beds -> Outpatient Clinics -> Emergency Department.
+    *   Implemented ED Boarding: critical admissions demand is calculated as `(staffed_beds + 19) / 20` (5% of staffed beds). If `effective_icu < critical_admissions`, the remainder board in the ED, consuming ED bays on a 1-to-1 basis.
+    *   Added strike active suspension for ICU Wing projects.
+4.  **CLI and User Interface:**
+    *   Updated the Stata CLI parser, auto-completion candidate arrays, and command help topic guides to support ICU and IcuWing.
+    *   Updated the REPL Executive report dashboard to calculate and display ICU capacity, effective ICU capacity, ED boarding count, and updated emergency capacity.
+5.  **State Hash and Deterministic Replay:**
+    *   Included `icu_capacity` in the `competitive_state_hash_record` in `src/model/competitive_hash.rs` to ensure exact deterministic validation.
+    *   Updated the seed-42 golden hash test assertion to the new schema-compliant value `"2904083fb91b2770"`.
+6.  **Test Coverage:**
+    *   Added the `test_icu_department_mechanics` integration unit test in `src/sim/transition_competitive.rs` to verify ICU investment, staffing targets, hierarchical allocation, ED boarding, and capacity-deficit index penalties.
 
 ## Verification Results
-- Ran `cargo fmt` and `cargo test`.
-- All 272 tests passed successfully.
+*   Ran `cargo fmt` and `cargo test`.
+*   All 273 tests passed successfully.

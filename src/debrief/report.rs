@@ -595,6 +595,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
         InvestDomain::Outpatient => "outpatient",
         InvestDomain::Technology => "technology",
         InvestDomain::Emergency => "emergency",
+        InvestDomain::Icu => "icu",
       };
       format!("invest domain={} amount={}", d, amount)
     }
@@ -639,6 +640,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
         ProjectKind::Tower => "tower",
         ProjectKind::ClinicNetwork => "clinic_network",
         ProjectKind::EmergencyPavilion => "emergency_pavilion",
+        ProjectKind::IcuWing => "icu_wing",
       };
       format!("project kind={} budget={}", k, budget)
     }

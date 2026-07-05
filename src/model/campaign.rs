@@ -47,6 +47,7 @@ pub struct PlayerObservation {
   pub staffed_beds: i32,
   pub outpatient_capacity: i32,
   pub emergency_capacity: i32,
+  pub icu_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,

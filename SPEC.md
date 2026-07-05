@@ -94,6 +94,32 @@ reconstructing it from the diff.
 | Medicare Public Payer Integration | v0.5.8 | Implement Medicare public payer quality compliance, validation, CLI REPL autocompletes, topic help, and unit tests | 270 | `e73a38b3951cd8b6` (competitive) |
 | Active Projects Display Hardening | v0.5.9 | Harden competitive campaign CLI dashboard by detailing in-flight projects, durations, and monthly cash draws | 271 | `e73a38b3951cd8b6` (competitive) |
 | Emergency Department Service Line | v0.6.0 | Add Emergency Department service line with capacity-staffing trade-offs, hierarchical staffing, and new command verbs | 272 | `0930e2bf6890aaba` (competitive) |
+| ICU Service Line & ED Boarding | v0.7.0 | Add Intensive Care Unit service line, high-intensity staffing targets, ICU-first hierarchical allocation, and ED boarding bottleneck mechanics | 273 | `2904083fb91b2770` (competitive) |
+
+
+- Feature: ICU Service Line & ED Boarding
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.7.0
+
+  Summary:
+  Implemented the Intensive Care Unit (ICU) Service Line with high-intensity capacity-staffing trade-offs, hierarchical allocation prioritizing ICU, and ED boarding bottleneck mechanics where ICU overflow boarded in ED consumes emergency capacity.
+
+  Done:
+  - Added `icu_capacity` to health system state (defaulting to 0 for scenario compatibility).
+  - Extended command vocabulary with `InvestDomain::Icu` and `ProjectKind::IcuWing` (12-month capital project, 3 AP cost).
+  - Implemented high-intensity staffing targets (1 nurse per bed, 1 physician per 2 beds, 1 admin per 5 beds).
+  - Implemented hierarchical staffing allocation order prioritizing ICU first, med-surg beds second, outpatient clinics third, and ED last.
+  - Implemented ED Boarding mechanics (5% of med-surg beds require ICU, overflow board in ED, boarding reduces effective emergency capacity).
+  - Updated CLI parsers, REPL autocompletes, guidance help topics, and state record hashes.
+  - Added focused unit tests verifying ICU allocation, ED boarding, and capacity-deficit index penalties.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+  - No outpatient ICU equivalents or general federal payment models.
+
+  Verification:
+  - cargo test (all 273 tests pass)
 
 
 - Feature: Emergency Department Service Line

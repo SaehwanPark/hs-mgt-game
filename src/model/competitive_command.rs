@@ -18,6 +18,7 @@ pub enum InvestDomain {
   Outpatient,
   Technology,
   Emergency,
+  Icu,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -57,6 +58,7 @@ pub enum ProjectKind {
   Tower,
   ClinicNetwork,
   EmergencyPavilion,
+  IcuWing,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -105,6 +107,7 @@ impl ProjectKind {
       ProjectKind::Tower => 12,
       ProjectKind::ClinicNetwork => 9,
       ProjectKind::EmergencyPavilion => 6,
+      ProjectKind::IcuWing => 12,
     }
   }
 }
@@ -158,7 +161,10 @@ impl CompetitiveCommand {
         political_capital: 1,
       },
       CompetitiveCommand::Project { kind, budget } => ActionCost {
-        action_points: 2,
+        action_points: match kind {
+          ProjectKind::IcuWing => 3,
+          _ => 2,
+        },
         cash_cost: project_monthly_draw(*budget, kind.resolve_months()),
         political_capital: 0,
       },

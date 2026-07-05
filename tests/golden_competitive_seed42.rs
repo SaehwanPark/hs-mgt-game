@@ -28,7 +28,7 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
       .count()
       == 2
   );
-  assert_eq!(transition.state_hash, "0930e2bf6890aaba");
+  assert_eq!(transition.state_hash, "2904083fb91b2770");
 }
 
 #[test]

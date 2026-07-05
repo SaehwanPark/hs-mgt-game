@@ -6,6 +6,17 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-07-05
+
+### Added
+- Implemented the Intensive Care Unit (ICU) Service Line with capacity-staffing trade-offs.
+- Added ICU-specific staffing targets (1 nurse per bed, 1 physician per 2 beds, 1 admin per 5 beds) to transition rules.
+- Implemented hierarchical staffing allocation where staff are assigned to ICU first, med-surg beds second, clinics third, and ED last.
+- Implemented ED Boarding mechanics where patients requiring ICU admission are boarded in the ED if ICU beds are full, consuming ED bays and reducing effective emergency capacity.
+- Added `InvestDomain::Icu` for direct ICU bed investments and `ProjectKind::IcuWing` for 12-month capital projects (costing 3 AP).
+- Integrated ICU capacity and boarding into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+- Created comprehensive unit tests validating ICU allocation, boarding, and trust/index penalties.
+
 ## [0.6.0] - 2026-07-05
 
 ### Added
