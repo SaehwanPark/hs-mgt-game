@@ -72,3 +72,20 @@ fn test_validate_competitive_scenario_errors() {
   }
   assert!(validate_competitive_scenario(&scenario, &ruleset).is_err());
 }
+
+#[test]
+fn test_load_exemplary_competitive_scenario() {
+  let scenario =
+    load_scenario_file("scenarios/competitive-exemplary-v1.toml").expect("load exemplary scenario");
+  assert_eq!(scenario.campaign_id, "competitive-regional-v1");
+  assert_eq!(scenario.scenario_id, "exemplary-competitive-v1");
+  let ruleset = default_competitive_ruleset();
+  assert!(validate_competitive_scenario(&scenario, &ruleset).is_ok());
+
+  let initial_state = scenario.initial_competitive_world_state(Difficulty::Normal, &ruleset);
+  assert!(initial_state.is_ok());
+  let world = initial_state.unwrap();
+  assert_eq!(world.systems.len(), 3);
+  assert_eq!(world.systems[0].name, "Riverside Community Health");
+  assert_eq!(world.systems[0].resources.cash, 500);
+}

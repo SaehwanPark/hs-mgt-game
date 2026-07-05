@@ -6,6 +6,19 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.6] - 2026-07-04
+
+### Added
+- Created the new `competitive-exemplary-v1` scenario defining Riverside Community Health, Northlake Health, and Summit Care.
+- Added `scenario_id` and `event_metadata` fields to `CompetitiveWorldState` and `CompetitiveSessionSave` to track scenario state.
+- Added `PledgeType::Workforce` to model workforce wage settlements.
+- Implemented Month 8 nurse burnout crisis and strike warnings.
+- Implemented Month 10 nurse strike active mode (halved capacity, project delays, travel nurse costs) and Certificate of Need (CON) legal challenge objections.
+- Implemented Month 12 Blue Shield commercial contract renewal out-of-network volume drop.
+- Implemented Month 18 delayed strike and underfunded EHR migration project lag costs.
+- Added CLI parsing, REPL autocompletion, and help guidance support for workforce pledges.
+- Added comprehensive unit and integration tests verifying all timeline events.
+
 ## [0.5.5] - 2026-07-04
 
 ### Added

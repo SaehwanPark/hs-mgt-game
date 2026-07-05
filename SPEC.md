@@ -89,6 +89,35 @@ reconstructing it from the diff.
 | Strategy-Space Diagnostics Tooling | v0.5.3 | Implement offline replay diagnostics script for strategy cluster and resource outcome analysis | 252 | `e73a38b3951cd8b6` (competitive) |
 | MCP Custom Scenario Loading | v0.5.4 | Implement custom scenario path loading in the MCP start_session tool with validation and tests | 255 | `e73a38b3951cd8b6` (competitive) |
 | Medicaid Public Payer Integration | v0.5.5 | Add Medicaid public payer, posture validation, resource costing, and access compliance effects | 261 | `e73a38b3951cd8b6` (competitive) |
+| Competitive Exemplary Scenario | v0.5.6 | Add competitive-exemplary-v1 scenario, workforce wage settlements, nurse strike, CON legal challenge, and Blue Shield/EHR consequences | 260 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: Competitive Exemplary Scenario
+  Status: Complete
+  Started: 2026-07-04
+  Version: 0.5.6
+
+  Summary:
+  Implemented the `competitive-exemplary-v1` scenario, including its timeline events, delayed consequences, and the RNA strike / CON challenge mechanics.
+
+  Done:
+  - Created `scenarios/competitive-exemplary-v1.toml` with startup states matching the scenario brief.
+  - Added `scenario_id` and `event_metadata` to state tracking and serialization.
+  - Extended `PledgeType` with `Workforce` to represent wage settlements.
+  - Implemented Month 8 nurse burnout crisis and strike warnings.
+  - Implemented Month 10 active strike (halved capacity, project delays, travel nurse costs) and Certificate of Need (CON) legal objections.
+  - Implemented Month 12 Blue Shield contract renewal out-of-network commercial volume drop.
+  - Implemented Month 18 delayed strike and underfunded EHR migration project lag costs.
+  - Added parser, autocompletion, and helper documentation for workforce pledges.
+  - Added comprehensive unit and integration tests verifying all timeline events.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+  - No network multiplayer capabilities.
+  - No database integration.
+
+  Verification:
+  - cargo test (all 260 tests pass)
 
 
 - Feature: Medicaid Public Payer Integration

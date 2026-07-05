@@ -1,35 +1,33 @@
-# Request Summary - Competitive Campaign Length & Autosave
+# Request Summary - Exemplary Competitive Scenario & Timeline Events
 
 ## Scope
-Extend the competitive regional campaign loop to 24 months, implement autosave/resume logic via `competitive_session.save`, and add competitive replay export on completion.
+Implement the `competitive-exemplary-v1` scenario, including its timeline events, delayed consequences, and the RNA strike / CON challenge mechanics.
 
 Specifically:
-- Extend campaign loop length: change default preview to a 24-month horizon.
-- Autosave/resume:
-  - Add path and load/write/delete helpers for `competitive_session.save` in `src/cli/persistence.rs`.
-  - Create serializable `CompetitiveSessionSave` structure.
-  - Intercept early quit in `run_competitive_month_loop` and save active campaign.
-  - Check for competitive autosave on CLI REPL startup and offer resume menu option.
-- Replay export:
-  - Support exporting competitive replay JSON artifact upon successful completion.
+- Create `scenarios/competitive-exemplary-v1.toml` TOML file with the setup parameters from `docs/exemplary-scenario-brief.md`.
+- Add `scenario_id` and `event_metadata` fields to `CompetitiveWorldState` to identify and track events for the exemplary campaign.
+- Extend `PledgeType` with `Workforce` to support wage increase commitments.
+- Implement conditional timeline checks and effects in `src/sim/effects_competitive.rs` and `src/sim/transition_competitive.rs` for Month 8, 10, 12, and 18 events.
 
 ## Non-Goals
-- No changes to stabilization campaign rules, loop, or save file.
+- No changes to stabilization campaign loop rules.
 - No network multiplayer capabilities.
 - No database integration.
 
 ## Sources
-- `src/cli/campaign.rs`
-- `src/cli/persistence.rs`
-- `src/cli/session.rs`
-- `src/model/session_save.rs`
+- `docs/exemplary-scenario-brief.md`
+- `src/model/competitive_world.rs`
+- `src/scenario/mod.rs`
+- `src/sim/effects_competitive.rs`
+- `src/sim/transition_competitive.rs`
 
 ## Expected Files
-- `src/model/competitive_session_save.rs` (or added to `session_save.rs`)
-- `src/artifact/competitive_session_save.rs`
-- `src/cli/persistence.rs`
-- `src/cli/campaign.rs`
-- `src/cli/session.rs`
-- `Cargo.toml`
-- `CHANGELOG.md`
+- `scenarios/competitive-exemplary-v1.toml`
+- `src/model/competitive_world.rs`
+- `src/model/competitive_command.rs`
+- `src/cli/competitive_parse.rs`
+- `src/cli/repl.rs`
+- `src/sim/effects_competitive.rs`
+- `src/sim/transition_competitive.rs`
 - `SPEC.md`
+- `CHANGELOG.md`

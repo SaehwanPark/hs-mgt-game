@@ -205,6 +205,8 @@ pub struct CompetitiveWorldState {
   pub public_action_log: Vec<PublicActionEntry>,
   pub effect_queue: Vec<PendingEffect>,
   pub policy_calendar: PolicyCalendar,
+  pub scenario_id: String,
+  pub event_metadata: std::collections::HashMap<String, String>,
 }
 
 impl CompetitiveWorldState {

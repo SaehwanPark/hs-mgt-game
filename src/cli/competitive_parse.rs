@@ -32,7 +32,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "commit",
-    usage: "commit pledge_type=access|quality level=<1-5>",
+    usage: "commit pledge_type=access|quality|workforce level=<1-5>",
   },
   CompetitiveCommandSpec {
     verb: "project",
@@ -224,6 +224,7 @@ fn parse_pledge_type(value: &str) -> Result<PledgeType, CliError> {
   match value.to_ascii_lowercase().as_str() {
     "access" => Ok(PledgeType::Access),
     "quality" => Ok(PledgeType::Quality),
+    "workforce" => Ok(PledgeType::Workforce),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown pledge type '{value}'"
     ))),
