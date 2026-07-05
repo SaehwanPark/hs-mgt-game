@@ -1,14 +1,27 @@
-# Domain QA - Clinical Service Lines and Staffing (Phase 6 - Track 5)
+# Domain QA Review: Medicare Public Payer Integration Plan
 
-## Review Status: APPROVED (Verified 2026-07-04)
+## Status
+pass
 
-## Project-Specific Checks
-- **Determinism Check:** The staffing calculation, effective capacity, and burnout formulas are completely deterministic, satisfying the core engine design boundary.
-- **State vs. Observation Separation:** Physical capacities and headcounts are true state variables. The executive report will present reported access/quality (which can be noisy or lagged) alongside current headcounts and capacity indicators.
-- **Strategic Tradeoffs:** Ensures high capital spend on expansion projects must be balanced with appropriate timing of recruitment (and its associated delay & cash costs) to avoid understaffing penalties.
-- **Simple Code Writing:** Avoids adding a general staffing framework. Implements simple formulas directly in `effects_competitive.rs` and `transition_competitive.rs`.
+## Reviewed Inputs
+- User request: `/preferred-workflow design a plan to continue developments + PR handoff`
+- Request Summary: `_workspace/00_input/request-summary.md`
+- Evidence Map: `_workspace/01_evidence_map.md`
+- Mechanism Design / Implementation Plan: `_workspace/02_mechanism_design.md`
+- Project Canonical Docs: `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, `docs/harness/health-policy-strategy-game/team-spec.md`
 
-## Validation Targets for Implementer
-- Verify that standard recruitment delays (1 month for nurses, 3 months for physicians) are preserved.
-- Verify that the game loop resolves recruitments correctly and updates `nurses` and `physicians` fields.
-- Ensure that the CLI dashboard and executive reports display the new staffing headcounts and capacity constraints clearly.
+## Findings
+- **Roadmap Alignment:** The proposed Medicare integration aligns with Phase 6.1 (Simulation Breadth) and completes a missing piece of the Phase 5/6 World Slice (Medicare & Medicaid as public payers).
+- **Model Isolation:** Quality compliance is mapped to `quality_index`, which keeps it distinct from the Medicaid compliance index (`access_index`), maintaining strategic tension.
+- **Determinism:** The transition kernel remains completely deterministic. No stochasticity or wall-clock dependencies are introduced.
+- **No Scope Creep:** The mechanism relies entirely on existing structs and enums (`PayerId`, `RatePosture`, etc.) and avoids adding complex billing or cohort segmentation.
+
+## Required Fixes
+None.
+
+## Residual Risks
+- **Abstractions vs. Realism:** Medicare compliance is highly simplified. Real-world Medicare payments are based on DRGs (Diagnostic Related Groups) and FFS payment calendars, which are abstracted away here.
+- **Parameter Validation:** The cash cost of $10 and quality boost of +3 are relative game abstractions, not calibrated to actual MedPAC financial figures.
+
+## Verification Evidence
+- Verification will be performed on the implementation branch via unit tests checking validation errors (`InvalidMedicarePosture`) and transition results.

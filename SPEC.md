@@ -431,7 +431,30 @@ reconstructing it from the diff.
 
 ## Present
 
-No active slice.
+- Feature: Medicare Public Payer Integration Plan
+  Status: In Progress
+  Started: 2026-07-05
+  Version: 0.5.6 (Plan Designed)
+
+  Summary:
+  Design a plan to implement Medicare public payer quality-compliance integration, modeling quality improvements and policy pressure reduction with a neutral posture and compliance costs.
+
+  Done:
+  - Designed the comprehensive Medicare integration plan (evidence mapping, mechanism design, and domain QA review).
+  - Created working branch `feat/medicare-payer-plan` containing the request summary, evidence map, and mechanism design.
+
+  Not Yet Done:
+  - Add `Medicare` variant to `PayerId` in `src/model/competitive_command.rs` and update `resource_costs` ($10 cash).
+  - Update `parse_payer_id` in `src/cli/competitive_parse.rs` and CLI autocompletion/guidance helpers.
+  - Implement `InvalidMedicarePosture` validation check in `src/sim/validate_competitive.rs`.
+  - Implement quality compliance effects (+3 quality, -3 policy pressure) in `src/sim/transition_competitive.rs`.
+  - Add focused unit tests for Medicare validation and transition outcomes in `validate_competitive_tests.rs` and `transition_competitive.rs`.
+  - Bump crate version to `0.5.7` and document changes in `CHANGELOG.md` and `Cargo.toml`.
+
+  Deferred / Non-Goals:
+  - No Medicare patient cohort tracking or FFS DRG-based billing rules.
+  - No changes to stabilization campaign loop.
+
 
 ## Future
 
