@@ -96,7 +96,7 @@ pub fn render_executive_report(
 
   let eff_icu = observation
     .icu_capacity
-    .min(nurses_icu * 1)
+    .min(nurses_icu)
     .min(physicians_icu * 2);
   let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
   let eff_clinics = observation

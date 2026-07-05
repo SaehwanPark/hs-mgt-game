@@ -619,10 +619,7 @@ fn apply_staffing_constraints(
     let target_physicians_ed = (system.emergency_capacity + 3) / 4;
     let physicians_ed = remaining_physicians_ed.min(target_physicians_ed);
 
-    let mut effective_icu = system
-      .icu_capacity
-      .min(nurses_icu * 1)
-      .min(physicians_icu * 2);
+    let mut effective_icu = system.icu_capacity.min(nurses_icu).min(physicians_icu * 2);
     let mut effective_beds = system.staffed_beds.min(nurses_beds * 5);
     let mut effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10);
     let mut effective_emergency = system
