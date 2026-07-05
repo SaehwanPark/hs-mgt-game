@@ -40,10 +40,14 @@ pub fn transition_competitive(
   for system in &mut next.systems {
     let draws = system.resources.active_project_monthly_draws;
     if draws > 0 {
-      if system.system_id == 0 && next.scenario_id == "exemplary-competitive-v1" && next.event_metadata.get("rna_strike_active") == Some(&"true".to_string()) {
+      if system.system_id == 0
+        && next.scenario_id == "exemplary-competitive-v1"
+        && next.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
+      {
         events.push(Event {
           actor: "finance",
-          description: "Riverside: active capital project draws suspended due to strike".to_string(),
+          description: "Riverside: active capital project draws suspended due to strike"
+            .to_string(),
         });
       } else {
         system.resources.cash -= draws;
@@ -266,8 +270,13 @@ fn apply_command(
       } else {
         system.market_share_index = crate::model::clamp_metric(system.market_share_index + 1);
         push_effect(effects, "payer negotiation", "market_share_index", 1);
-        if world.scenario_id == "exemplary-competitive-v1" && system_id == 0 && matches!(payer, crate::model::PayerId::CarrierA) {
-          world.event_metadata.insert("blue_shield_negotiated".to_string(), "true".to_string());
+        if world.scenario_id == "exemplary-competitive-v1"
+          && system_id == 0
+          && matches!(payer, crate::model::PayerId::CarrierA)
+        {
+          world
+            .event_metadata
+            .insert("blue_shield_negotiated".to_string(), "true".to_string());
         }
         events.push(Event {
           actor: "health_system",
@@ -301,10 +310,14 @@ fn apply_command(
         }
         PledgeType::Workforce => {
           if world.scenario_id == "exemplary-competitive-v1" && system_id == 0 {
-            world.event_metadata.insert("rna_wage_increase_accepted".to_string(), "true".to_string());
+            world
+              .event_metadata
+              .insert("rna_wage_increase_accepted".to_string(), "true".to_string());
             events.push(Event {
               actor: "health_system",
-              description: format!("{system_name}: Settle RNA wage dispute (wages increased permanent +$50k/month)"),
+              description: format!(
+                "{system_name}: Settle RNA wage dispute (wages increased permanent +$50k/month)"
+              ),
             });
           }
         }
@@ -321,11 +334,20 @@ fn apply_command(
       push_public_log(world, month_index, system_id, summary.clone());
 
       if world.scenario_id == "exemplary-competitive-v1" && system_id == 0 {
-        if matches!(kind, crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner) {
-          world.event_metadata.insert("ehr_project_started_month".to_string(), month_index.to_string());
+        if matches!(
+          kind,
+          crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner
+        ) {
+          world.event_metadata.insert(
+            "ehr_project_started_month".to_string(),
+            month_index.to_string(),
+          );
         }
         if matches!(kind, crate::model::ProjectKind::ClinicNetwork) {
-          world.event_metadata.insert("clinic_project_start_month".to_string(), month_index.to_string());
+          world.event_metadata.insert(
+            "clinic_project_start_month".to_string(),
+            month_index.to_string(),
+          );
         }
       }
 
@@ -508,7 +530,10 @@ fn apply_staffing_constraints(
     let mut effective_beds = system.staffed_beds.min(system.nurses * 5);
     let mut effective_outpatient = system.outpatient_capacity.min(system.physicians * 10);
 
-    if system.system_id == 0 && world.scenario_id == "exemplary-competitive-v1" && world.event_metadata.get("rna_strike_active") == Some(&"true".to_string()) {
+    if system.system_id == 0
+      && world.scenario_id == "exemplary-competitive-v1"
+      && world.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
+    {
       effective_beds = effective_beds / 2;
       effective_outpatient = effective_outpatient / 2;
     }
@@ -790,21 +815,28 @@ mod transition_competitive_tests {
     let mut world = genesis_competitive_world(Difficulty::Normal);
     world.scenario_id = "exemplary-competitive-v1".to_string();
     world.policy_calendar = crate::model::PolicyCalendar::new_month(8);
-    
+
     // Induce staffing ratio below 80%: 118 staffed beds needs 24 nurses. We set nurses to 18 (18 * 5 = 90 capacity, which is < 118 * 0.8 = 94.4)
     world.systems[0].nurses = 18;
-    
+
     let inputs = crate::inputs::resolve_competitive_inputs(42, 8, false);
     let mut events = Vec::new();
     let trust_before = world.systems[0].workforce_trust;
-    
+
     super::super::effects_competitive::apply_month_start_tick(&mut world, &inputs, &mut events);
-    
+
     // Workforce trust drops by 15% due to burnout
     assert_eq!(world.systems[0].workforce_trust, trust_before - 15);
     // Strike warning is triggered
-    assert_eq!(world.event_metadata.get("rna_strike_warning"), Some(&"true".to_string()));
-    assert!(events.iter().any(|e| e.description.contains("STRIKE WARNING")));
+    assert_eq!(
+      world.event_metadata.get("rna_strike_warning"),
+      Some(&"true".to_string())
+    );
+    assert!(
+      events
+        .iter()
+        .any(|e| e.description.contains("STRIKE WARNING"))
+    );
   }
 
   #[test]
@@ -813,7 +845,7 @@ mod transition_competitive_tests {
     prior.scenario_id = "exemplary-competitive-v1".to_string();
     prior.policy_calendar = crate::model::PolicyCalendar::new_month(8);
     prior.systems[0].resources.political_capital = 5;
-    
+
     let ruleset = default_competitive_ruleset();
     let batch = SystemMonthlyBatch {
       system_id: 0,
@@ -823,7 +855,7 @@ mod transition_competitive_tests {
       }],
       rationale: None,
     };
-    
+
     let batches = vec![
       batch,
       SystemMonthlyBatch {
@@ -837,13 +869,24 @@ mod transition_competitive_tests {
         rationale: None,
       },
     ];
-    
+
     let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
     let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
-    
+
     // Wages increase accepted metadata flag set
-    assert_eq!(transition.next.event_metadata.get("rna_wage_increase_accepted"), Some(&"true".to_string()));
-    assert!(transition.events.iter().any(|e| e.description.contains("Settle RNA wage dispute")));
+    assert_eq!(
+      transition
+        .next
+        .event_metadata
+        .get("rna_wage_increase_accepted"),
+      Some(&"true".to_string())
+    );
+    assert!(
+      transition
+        .events
+        .iter()
+        .any(|e| e.description.contains("Settle RNA wage dispute"))
+    );
   }
 
   #[test]
@@ -853,7 +896,7 @@ mod transition_competitive_tests {
     world.policy_calendar = crate::model::PolicyCalendar::new_month(10);
     world.systems[0].resources.cash = 50;
     world.systems[0].resources.political_capital = 1; // low PC, low cash so CON challenge will delay project
-    
+
     // Queue a clinic build project
     world.effect_queue.push(crate::model::PendingEffect {
       id: 1,
@@ -866,22 +909,30 @@ mod transition_competitive_tests {
       },
       summary: "clinic network project".to_string(),
     });
-    
+
     // Trigger strike warning
-    world.event_metadata.insert("rna_strike_warning".to_string(), "true".to_string());
-    
+    world
+      .event_metadata
+      .insert("rna_strike_warning".to_string(), "true".to_string());
+
     let inputs = crate::inputs::resolve_competitive_inputs(42, 10, false);
     let mut events = Vec::new();
-    
+
     super::super::effects_competitive::apply_month_start_tick(&mut world, &inputs, &mut events);
-    
+
     // Strike is active and months left set to 2
-    assert_eq!(world.event_metadata.get("rna_strike_active"), Some(&"true".to_string()));
-    assert_eq!(world.event_metadata.get("rna_strike_months_left"), Some(&"2".to_string()));
-    
+    assert_eq!(
+      world.event_metadata.get("rna_strike_active"),
+      Some(&"true".to_string())
+    );
+    assert_eq!(
+      world.event_metadata.get("rna_strike_months_left"),
+      Some(&"2".to_string())
+    );
+
     // CON challenge delayed clinic network project by 3 months (15 + 3 = 18)
     assert_eq!(world.effect_queue[0].resolve_month, 18);
-    
+
     // Strike cost not deducted yet on the first Month 10 tick when strike starts
     assert_eq!(world.systems[0].resources.cash, 50);
   }
@@ -892,23 +943,30 @@ mod transition_competitive_tests {
     world.scenario_id = "exemplary-competitive-v1".to_string();
     world.policy_calendar = crate::model::PolicyCalendar::new_month(18);
     world.systems[0].resources.cash = 500;
-    
+
     // Blue Shield NOT negotiated
     // EHR NOT started (underfunded)
-    
+
     let inputs = crate::inputs::resolve_competitive_inputs(42, 18, false);
     let mut events = Vec::new();
     let share_before = world.systems[0].market_share_index;
-    
+
     super::super::effects_competitive::apply_month_start_tick(&mut world, &inputs, &mut events);
-    
+
     // Out of network triggers volume drop (40% of share_before: 24 * 0.6 = 14)
     assert_eq!(world.systems[0].market_share_index, 14);
-    assert_eq!(world.event_metadata.get("blue_shield_out_of_network"), Some(&"true".to_string()));
-    
+    assert_eq!(
+      world.event_metadata.get("blue_shield_out_of_network"),
+      Some(&"true".to_string())
+    );
+
     // EHR underfunded lag cost $20k deducted
     // (Note: Month 18 tick also applies OON if not done, so cash = 500 - 20 = 480)
     assert_eq!(world.systems[0].resources.cash, 480);
-    assert!(events.iter().any(|e| e.description.contains("EHR increases operating costs")));
+    assert!(
+      events
+        .iter()
+        .any(|e| e.description.contains("EHR increases operating costs"))
+    );
   }
 }
