@@ -1,15 +1,15 @@
-# Domain QA Review - Active Projects Detailed Observation
+# Domain QA - Emergency Department Service Line
 
-## Status: Pass
+- **Status:** Pending (Design Review Phase)
+- **Role:** Domain QA Reviewer
 
-## Project Principles Check
-1. **Strategic interaction preserved?** Yes, no changes to how AI and human systems interact or transition.
-2. **Causal transparency?** Yes, this significantly improves causal transparency and visibility by showing the player exactly which projects are active, how long they will take, and how much cash they consume each month.
-3. **Deterministic transitions?** Yes, observation generation is pure and derived deterministically from the current state and effect queue.
+## Checklist & Review Criteria
 
-## Risk Assessment
-- **Risk:** Impact on existing integration/golden tests.
-- **Mitigation:** Run `cargo test` to ensure no golden tests assert exact string outputs of the dashboard in a way that breaks, or update the assertions if they were pinning the old `"none"`/`"1 active project(s)"` format. (Note: our grep search showed no matches for `in_flight_projects` in `tests/`, which reduces this risk).
+- [ ] **State/Observation Separation:** The human player only observes reported and effective emergency capacity, while the underlying true state is updated deterministically in the transition kernel.
+- [ ] **Deterministic Replay Boundary:** All emergency capacity changes are queued through the `effect_queue` and resolved deterministically during transitions. The state hash incorporates `emergency_capacity` to ensure exact replay alignment.
+- [ ] **Educational Balance:** The staffing formulas reflect the realistic policy challenge that Emergency Departments are high-intensity resource environments where shortages cause compounding quality and access issues.
+- [ ] **Backward Compatibility:** Existing custom scenarios that do not specify `emergency_capacity` default safely to standard values (e.g. 15 for Riverside, 20 for Northlake) during parsing, avoiding serializing/deserializing failures.
 
-## Verification Target
-- Run `cargo test` and ensure all 260+ tests pass cleanly.
+## Findings & Risk Mitigation
+- **Risk:** High staffing targets for ED could cause immediate turn-0 deficits for systems with low starting staff.
+- **Mitigation:** Ensure starting staff (nurses, physicians, admins) in the scenario files are sufficient to cover the initial beds, outpatient capacity, and default/explicit emergency capacity, or start with no deficits at month 1.
