@@ -16,6 +16,7 @@
         "emergency_capacity": 0,
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
+        "psychiatric_capacity": 0,
         "nurses": 24,
         "physicians": 10,
         "admins": 11,
@@ -40,6 +41,7 @@
         "emergency_capacity": 0,
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
+        "psychiatric_capacity": 0,
         "nurses": 27,
         "physicians": 15,
         "admins": 15,
@@ -64,6 +66,7 @@
         "emergency_capacity": 0,
         "icu_capacity": 0,
         "obstetrics_capacity": 0,
+        "psychiatric_capacity": 0,
         "nurses": 21,
         "physicians": 12,
         "admins": 12,
@@ -144,6 +147,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -168,6 +172,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -192,6 +197,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -378,6 +384,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -402,6 +409,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -426,6 +434,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -507,7 +516,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "e57cc6377e17ea09"
+      "state_hash": "7bd8a0c7a8312f4e"
     },
     {
       "prior": {
@@ -527,6 +536,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -551,6 +561,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -575,6 +586,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -765,6 +777,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -789,6 +802,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -813,6 +827,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -899,7 +914,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "eeb17514d08f6d08"
+      "state_hash": "7f79c293582796df"
     },
     {
       "prior": {
@@ -919,6 +934,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -943,6 +959,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -967,6 +984,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1157,6 +1175,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1181,6 +1200,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -1205,6 +1225,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1296,7 +1317,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "5f30917a1cd6b532"
+      "state_hash": "e26ac8b04f148d97"
     },
     {
       "prior": {
@@ -1316,6 +1337,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1340,6 +1362,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1364,6 +1387,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1550,6 +1574,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1574,6 +1599,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1598,6 +1624,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1675,7 +1702,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "be54975bc1a30cd9"
+      "state_hash": "ff740a4586232764"
     },
     {
       "prior": {
@@ -1695,6 +1722,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1719,6 +1747,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1743,6 +1772,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1925,6 +1955,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1949,6 +1980,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1973,6 +2005,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2050,7 +2083,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "7981f57df6b4ae83"
+      "state_hash": "04338a18b04fedfe"
     },
     {
       "prior": {
@@ -2070,6 +2103,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2094,6 +2128,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2118,6 +2153,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2300,6 +2336,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2324,6 +2361,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2348,6 +2386,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2425,7 +2464,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "c1188ee72b12e4fd"
+      "state_hash": "10e5ce5f7f9dabe4"
     },
     {
       "prior": {
@@ -2445,6 +2484,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2469,6 +2509,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2493,6 +2534,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2675,6 +2717,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2699,6 +2742,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2723,6 +2767,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2800,7 +2845,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "6d67d55266ef4337"
+      "state_hash": "dc7fa1105fc58548"
     },
     {
       "prior": {
@@ -2820,6 +2865,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2844,6 +2890,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2868,6 +2915,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3050,6 +3098,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3074,6 +3123,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3098,6 +3148,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3175,7 +3226,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "f555bf9df0909888"
+      "state_hash": "088b7b189bdcfe5f"
     },
     {
       "prior": {
@@ -3195,6 +3246,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3219,6 +3271,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3243,6 +3296,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3425,6 +3479,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3449,6 +3504,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3473,6 +3529,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3550,7 +3607,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "5880119b1740797d"
+      "state_hash": "487d1fc459ef3f2e"
     },
     {
       "prior": {
@@ -3570,6 +3627,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3594,6 +3652,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3618,6 +3677,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3800,6 +3860,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3824,6 +3885,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3848,6 +3910,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3925,7 +3988,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "c0bc3b4a6457ca90"
+      "state_hash": "9543cfe9993d3f35"
     },
     {
       "prior": {
@@ -3945,6 +4008,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3969,6 +4033,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3993,6 +4058,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4175,6 +4241,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4199,6 +4266,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4223,6 +4291,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4300,7 +4369,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "6658ca41bb3fb174"
+      "state_hash": "31e94265f75c4bc5"
     },
     {
       "prior": {
@@ -4320,6 +4389,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4344,6 +4414,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4368,6 +4439,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4554,6 +4626,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4578,6 +4651,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4602,6 +4676,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4679,7 +4754,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "038d9c6b1b344139"
+      "state_hash": "4ae2c779704d58a6"
     },
     {
       "prior": {
@@ -4699,6 +4774,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4723,6 +4799,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4747,6 +4824,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4929,6 +5007,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4953,6 +5032,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4977,6 +5057,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5054,7 +5135,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "2a980c919541d3c9"
+      "state_hash": "f2a0cac730c6b942"
     },
     {
       "prior": {
@@ -5074,6 +5155,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5098,6 +5180,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5122,6 +5205,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5304,6 +5388,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5328,6 +5413,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5352,6 +5438,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5429,7 +5516,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "ae16cd0200863cb6"
+      "state_hash": "6e447ca6c69b481d"
     },
     {
       "prior": {
@@ -5449,6 +5536,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5473,6 +5561,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5497,6 +5586,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5679,6 +5769,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5703,6 +5794,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5727,6 +5819,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5804,7 +5897,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "5945cce229ed61e9"
+      "state_hash": "c676bf267e24c7ba"
     },
     {
       "prior": {
@@ -5824,6 +5917,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5848,6 +5942,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5872,6 +5967,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6054,6 +6150,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6078,6 +6175,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6102,6 +6200,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6179,7 +6278,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "ccec6f0897739432"
+      "state_hash": "668ecc5913725b71"
     },
     {
       "prior": {
@@ -6199,6 +6298,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6223,6 +6323,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6247,6 +6348,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6429,6 +6531,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6453,6 +6556,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6477,6 +6581,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6554,7 +6659,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "9b203ed1bfc6b956"
+      "state_hash": "2344a605d53db681"
     },
     {
       "prior": {
@@ -6574,6 +6679,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6598,6 +6704,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6622,6 +6729,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6804,6 +6912,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6828,6 +6937,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6852,6 +6962,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6929,7 +7040,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "c5a85b45e3fc3a4a"
+      "state_hash": "c5d4e8961edd1a11"
     },
     {
       "prior": {
@@ -6949,6 +7060,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6973,6 +7085,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6997,6 +7110,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7179,6 +7293,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7203,6 +7318,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7227,6 +7343,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7304,7 +7421,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "68d448c6d6742031"
+      "state_hash": "7e18c5c33b81bd3e"
     },
     {
       "prior": {
@@ -7324,6 +7441,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7348,6 +7466,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7372,6 +7491,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7554,6 +7674,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7578,6 +7699,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7602,6 +7724,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7679,7 +7802,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "7f3298d16003f27a"
+      "state_hash": "165c7a5464cf35f9"
     },
     {
       "prior": {
@@ -7699,6 +7822,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7723,6 +7847,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7747,6 +7872,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7929,6 +8055,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7953,6 +8080,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7977,6 +8105,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8054,7 +8183,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "d7cdf92a045c2e45"
+      "state_hash": "5186310d5a6f5b06"
     },
     {
       "prior": {
@@ -8074,6 +8203,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8098,6 +8228,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8122,6 +8253,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8304,6 +8436,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8328,6 +8461,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8352,6 +8486,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8429,7 +8564,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "38596ee4d1774d38"
+      "state_hash": "36b3adf262754dc7"
     },
     {
       "prior": {
@@ -8449,6 +8584,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8473,6 +8609,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8497,6 +8634,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8679,6 +8817,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8703,6 +8842,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8727,6 +8867,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8804,7 +8945,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "4f7e5e00bcdd7179"
+      "state_hash": "159da4d00c8ff94e"
     },
     {
       "prior": {
@@ -8824,6 +8965,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8848,6 +8990,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8872,6 +9015,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9058,6 +9202,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9082,6 +9227,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9106,6 +9252,7 @@
             "emergency_capacity": 0,
             "icu_capacity": 0,
             "obstetrics_capacity": 0,
+            "psychiatric_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9183,7 +9330,7 @@
         "scenario_id": "default-competitive",
         "event_metadata": {}
       },
-      "state_hash": "cbd0e78566e50d98"
+      "state_hash": "a12feb524035ae1f"
     }
   ]
 }

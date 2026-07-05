@@ -116,6 +116,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
           "emergency",
           "icu",
           "obstetrics",
+          "psychiatric",
         ],
       ),
       ("amount", &[]),
@@ -147,6 +148,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
           "emergency_pavilion",
           "icu_wing",
           "obstetrics_unit",
+          "psychiatric_unit",
         ],
       ),
       ("budget", &[]),
@@ -301,7 +303,8 @@ mod tests {
         "technology".to_string(),
         "emergency".to_string(),
         "icu".to_string(),
-        "obstetrics".to_string()
+        "obstetrics".to_string(),
+        "psychiatric".to_string()
       ]
     );
   }

@@ -139,15 +139,18 @@ fn generate_candidates(
   let target_nurses = (observation.staffed_beds + 4) / 5
     + (observation.emergency_capacity + 1) / 2
     + observation.icu_capacity
-    + (observation.obstetrics_capacity + 1) / 2;
+    + (observation.obstetrics_capacity + 1) / 2
+    + (observation.psychiatric_capacity + 3) / 4;
   let target_physicians = (observation.outpatient_capacity + 9) / 10
     + (observation.emergency_capacity + 3) / 4
     + (observation.icu_capacity + 1) / 2
-    + (observation.obstetrics_capacity + 4) / 5;
+    + (observation.obstetrics_capacity + 4) / 5
+    + (observation.psychiatric_capacity + 9) / 10;
   let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20
     + (observation.emergency_capacity + 9) / 10
     + (observation.icu_capacity + 4) / 5
-    + (observation.obstetrics_capacity + 9) / 10;
+    + (observation.obstetrics_capacity + 9) / 10
+    + (observation.psychiatric_capacity + 14) / 15;
 
   if observation.nurses < target_nurses {
     let diff = (target_nurses - observation.nurses) as u32;
@@ -325,6 +328,10 @@ fn score_command(
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {
       domain: InvestDomain::Obstetrics,
+      ..
+    } => (style.growth + style.access * 2) as i32,
+    CompetitiveCommand::Invest {
+      domain: InvestDomain::Psychiatric,
       ..
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {

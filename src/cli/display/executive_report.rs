@@ -71,7 +71,7 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
-  // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, clinics fourth (for physicians), ED last
+  // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Psychiatric fourth, clinics fifth (for physicians), ED last
   let target_nurses_icu = observation.icu_capacity;
   let nurses_icu = observation.nurses.min(target_nurses_icu);
   let remaining_nurses_obs = (observation.nurses - nurses_icu).max(0);
@@ -82,7 +82,11 @@ pub fn render_executive_report(
 
   let target_nurses_beds = (observation.staffed_beds + 4) / 5;
   let nurses_beds = remaining_nurses_ms.min(target_nurses_beds);
-  let remaining_nurses_ed = (remaining_nurses_ms - nurses_beds).max(0);
+  let remaining_nurses_psych = (remaining_nurses_ms - nurses_beds).max(0);
+
+  let target_nurses_psych = (observation.psychiatric_capacity + 3) / 4;
+  let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
+  let remaining_nurses_ed = (remaining_nurses_psych - nurses_psych).max(0);
 
   let target_nurses_ed = (observation.emergency_capacity + 1) / 2;
   let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
@@ -93,7 +97,11 @@ pub fn render_executive_report(
 
   let target_physicians_obs = (observation.obstetrics_capacity + 4) / 5;
   let physicians_obs = remaining_physicians_obs.min(target_physicians_obs);
-  let remaining_physicians_op = (remaining_physicians_obs - physicians_obs).max(0);
+  let remaining_physicians_psych = (remaining_physicians_obs - physicians_obs).max(0);
+
+  let target_physicians_psych = (observation.psychiatric_capacity + 9) / 10;
+  let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
+  let remaining_physicians_op = (remaining_physicians_psych - physicians_psych).max(0);
 
   let target_physicians_outpatient = (observation.outpatient_capacity + 9) / 10;
   let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
@@ -111,6 +119,10 @@ pub fn render_executive_report(
     .min(nurses_obs * 2)
     .min(physicians_obs * 5);
   let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
+  let eff_psych = observation
+    .psychiatric_capacity
+    .min(nurses_psych * 4)
+    .min(physicians_psych * 10);
   let eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
@@ -123,6 +135,13 @@ pub fn render_executive_report(
   let critical_admissions = (observation.staffed_beds + 19) / 20;
   let boarded_patients = (critical_admissions - eff_icu).max(0);
   eff_emergency = (eff_emergency - boarded_patients).max(0);
+
+  // Psychiatric ED Boarding & Diversion Calculation
+  let psychiatric_demand = (observation.psychiatric_capacity + 9) / 10;
+  let psychiatric_overflow = (psychiatric_demand - eff_psych).max(0);
+  let boarded_psych = psychiatric_overflow.min(eff_emergency);
+  eff_emergency = (eff_emergency - boarded_psych).max(0);
+  let diverted_psych = (psychiatric_overflow - boarded_psych).max(0);
 
   // Obstetric Diversion Calculation
   let obstetric_demand = (observation.obstetrics_capacity + 9) / 10;
@@ -144,6 +163,10 @@ pub fn render_executive_report(
     "  • Obstetrics capacity: {} beds (effective: {})",
     observation.obstetrics_capacity, eff_obs
   ));
+  lines.push(format!(
+    "  • Psychiatric capacity: {} beds (effective: {})",
+    observation.psychiatric_capacity, eff_psych
+  ));
   if diverted_patients > 0 {
     lines.push(format!(
       "  • Obstetric diversion: {} patients",
@@ -152,6 +175,18 @@ pub fn render_executive_report(
   }
   if boarded_patients > 0 {
     lines.push(format!("  • ED boarding: {} patients", boarded_patients));
+  }
+  if boarded_psych > 0 {
+    lines.push(format!(
+      "  • Psychiatric ED boarding: {} patients",
+      boarded_psych
+    ));
+  }
+  if diverted_psych > 0 {
+    lines.push(format!(
+      "  • Psychiatric diversion: {} patients",
+      diverted_psych
+    ));
   }
   lines.push(format!(
     "  • Emergency capacity: {} bays (effective: {})",

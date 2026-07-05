@@ -153,6 +153,8 @@ pub struct HealthSystemState {
   pub icu_capacity: i32,
   #[serde(default)]
   pub obstetrics_capacity: i32,
+  #[serde(default)]
+  pub psychiatric_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,
@@ -194,6 +196,10 @@ pub enum PendingEffectKind {
     project_draw: Option<i32>,
   },
   ObstetricsCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  PsychiatricCapacity {
     capacity_delta: i32,
     project_draw: Option<i32>,
   },

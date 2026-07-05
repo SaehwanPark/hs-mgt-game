@@ -126,6 +126,7 @@ fn observation_from_human_system(
     emergency_capacity: human.emergency_capacity,
     icu_capacity: human.icu_capacity,
     obstetrics_capacity: human.obstetrics_capacity,
+    psychiatric_capacity: human.psychiatric_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,
