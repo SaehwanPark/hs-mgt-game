@@ -1,82 +1,89 @@
-# Mechanism Design - Psychiatric Service Line & Behavioral Health crisis holding mechanics
+# Mechanism Design - Oncology Service Line & Infusion Center Mechanics
 
-## Actor Set
-- **Health Systems (Riverside, Northlake, Summit):** Can expand psychiatric capacity via direct investment or by launching a `PsychiatricUnit` project.
-- **Workforce (Nurses, Physicians, Admins):** Allocated hierarchically to satisfy ICU, Obstetrics, and Med-Surg needs before Psychiatric, Outpatient, and Emergency units.
-- **Patients (Psychiatric Flow):** Demand for psychiatric services triggers emergency department boarding or diversion if psychiatric beds are full/understaffed.
+## Goal and Roadmap Phase
+Phase 6.1: Simulation Breadth (Track 5) - Oncology Service Line & Infusion Center Mechanics.
 
-## Action Vocabulary
-1.  `invest domain=psychiatric amount=<int>` (alias `psych`): Immediate capital investment in psychiatric beds.
-    *   **Cash cost:** `amount` (each Psychiatric bed costs 20 units of cash).
-    *   **Access/market share increments:** `access_delta = amount / 20`, `market_share = amount / 40` immediately.
-    *   **Delay:** 1 month (capacity delta resolves next month).
-2.  `project kind=psychiatric_unit budget=<int>` (alias `psych_unit`): Launches a Psychiatric Unit expansion.
-    *   **Duration:** 6 months.
-    *   **AP Cost:** 2.
-    *   **Cash draw:** `budget / 6` per month.
-    *   **Yields:** +5 Psychiatric capacity upon completion.
+## Slice Boundary
+- **Included:**
+  * Inpatient Oncology Bed capacity & Outpatient Infusion Center Bay capacity.
+  * Specialized staffing targets (nurse, physician, admin) for both services.
+  * Greedy staffing priority hierarchy (Oncology 6th, Infusion 7th).
+  * Oncology inpatient ED boarding and diversion penalties.
+  * Infusion Center outpatient treatment deferral penalties.
+  * Command grammar aliases for invest and project actions.
+  * AI competitor response and REPL autocomplete/dashboard formatting.
+- **Excluded:**
+  * Radiation vaults, clinical pharmacy inventory, or 340B drug pricing logic.
+  * Patient demographic/cohort level details.
 
-## State Boundary
-- `HealthSystemState` adds `psychiatric_capacity: i32`.
-- `PendingEffectKind` adds `PsychiatricCapacity { capacity_delta: i32, project_draw: Option<i32> }`.
-- `PlayerObservation` and `AiPlayerObservation` add `psychiatric_capacity: i32`.
+## Actors and Authority
+- **Player CEO & Rival CEOs:** Have authority to:
+  * Invest immediately in Oncology beds (`domain=oncology`) and Infusion bays (`domain=infusion`).
+  * Initiate long-term Oncology inpatient wing (`kind=oncology_unit`) and Outpatient Infusion center (`kind=infusion_center`) capital projects.
+  * Recruit staff (nurses, physicians, admins) to support the service line expansions.
+- **Clinical Staff (Nurses/Physicians):** Allocated greedily based on the hierarchical priority rule.
 
-## Observation Model
-- **REPL executive report dashboard:**
-  ```text
-    • Psychiatric capacity: <psychiatric_capacity> beds (effective: <effective_psych>)
-    • Psychiatric ED boarding: <boarded_psych> patients
-  ```
-  *(Psychiatric ED boarding line is visible only when boarded_psych > 0)*
-- **In-flight projects:**
-  `PsychiatricUnit (<N> mos left, $<D>k/mo draw)`
+## State, Beliefs, and Observations
+- **True State additions:**
+  * `oncology_capacity: i32` (physical inpatient beds, default 0).
+  * `infusion_capacity: i32` (physical outpatient infusion bays, default 0).
+  * `PendingEffectKind::OncologyCapacity { capacity_delta: i32, project_draw: Option<i32> }`
+  * `PendingEffectKind::InfusionCapacity { capacity_delta: i32, project_draw: Option<i32> }`
+- **Observations:** Exposes:
+  * `oncology_capacity` and `infusion_capacity` physical vs effective.
+  * In-flight oncology/infusion projects in the detailed project tracking dashboard.
+  * ED boarding / Outpatient treatment deferrals in the monthly summary report.
 
-## Causal Effects
+## Commands, Events, and Effects
+### Commands
+- `invest domain=oncology amount=<int>`:
+  * Cash Cost: `amount` ($20k per bed).
+  * Access: Immediate increase `amount / 20`.
+  * Market Share: Immediate increase `amount / 40`.
+  * Effect: Enqueues `PendingEffectKind::OncologyCapacity { capacity_delta: amount / 20, project_draw: None }` for next month.
+- `invest domain=infusion amount=<int>`:
+  * Cash Cost: `amount` ($15k per bay).
+  * Access: Immediate increase `amount / 15`.
+  * Market Share: Immediate increase `amount / 30`.
+  * Effect: Enqueues `PendingEffectKind::InfusionCapacity { capacity_delta: amount / 15, project_draw: None }` for next month.
+- `project kind=oncology_unit budget=45`:
+  * AP Cost: 3, cash draw: $5k/month for 9 months.
+  * Completion: Enqueues `PendingEffectKind::OncologyCapacity { capacity_delta: 6, project_draw: Some(5) }` after 9 months.
+- `project kind=infusion_center budget=30`:
+  * AP Cost: 2, cash draw: $5k/month for 6 months.
+  * Completion: Enqueues `PendingEffectKind::InfusionCapacity { capacity_delta: 8, project_draw: Some(5) }` after 6 months.
 
-### 1. Psychiatric Staffing Targets
-The system-wide staffing targets are updated to:
-*   `target_nurses = (system.staffed_beds + 4) / 5 + (system.emergency_capacity + 1) / 2 + system.icu_capacity + (system.obstetrics_capacity + 1) / 2 + (system.psychiatric_capacity + 3) / 4;`
-*   `target_physicians = (system.outpatient_capacity + 9) / 10 + (system.emergency_capacity + 3) / 4 + (system.icu_capacity + 1) / 2 + (system.obstetrics_capacity + 4) / 5 + (system.psychiatric_capacity + 9) / 10;`
-*   `target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20 + (system.emergency_capacity + 9) / 10 + (system.icu_capacity + 4) / 5 + (system.obstetrics_capacity + 9) / 10 + (system.psychiatric_capacity + 14) / 15;`
+### Events
+- **RNA Strike:** Suspends active Oncology and Infusion capital projects, and halves effective capacity of both services due to temporary staffing shortages.
 
-### 2. Hierarchical Allocation Order (ICU -> Obstetrics -> Beds -> Psychiatric -> Clinics -> ED)
-*   **Nurses:**
-    1.  ICU first: `nurses_icu = system.nurses.min(system.icu_capacity)`
-    2.  Obstetrics second: `nurses_obs = (system.nurses - nurses_icu).max(0).min((system.obstetrics_capacity + 1) / 2)`
-    3.  Med-Surg Beds third: `nurses_beds = (system.nurses - nurses_icu - nurses_obs).max(0).min((system.staffed_beds + 4) / 5)`
-    4.  Psychiatric fourth: `nurses_psych = (system.nurses - nurses_icu - nurses_obs - nurses_beds).max(0).min((system.psychiatric_capacity + 3) / 4)`
-    5.  Emergency Department fifth: `nurses_ed = (system.nurses - nurses_icu - nurses_obs - nurses_beds - nurses_psych).max(0).min((system.emergency_capacity + 1) / 2)`
-*   **Physicians:**
-    1.  ICU first: `physicians_icu = system.physicians.min((system.icu_capacity + 1) / 2)`
-    2.  Obstetrics second: `physicians_obs = (system.physicians - physicians_icu).max(0).min((system.obstetrics_capacity + 4) / 5)`
-    3.  Psychiatric third: `physicians_psych = (system.physicians - physicians_icu - physicians_obs).max(0).min((system.psychiatric_capacity + 9) / 10)`
-    4.  Outpatient Clinics fourth: `physicians_outpatient = (system.physicians - physicians_icu - physicians_obs - physicians_psych).max(0).min((system.outpatient_capacity + 9) / 10)`
-    5.  Emergency Department fifth: `physicians_ed = (system.physicians - physicians_icu - physicians_obs - physicians_psych - physicians_outpatient).max(0).min((system.emergency_capacity + 3) / 4)`
+### Effects
+- **Oncology ED Boarding & Diversion:**
+  * Demand = `(system.oncology_capacity + 9) / 10`.
+  * Overflow = `(demand - effective_oncology).max(0)`.
+  * Boarded = `overflow.min(effective_emergency_capacity)`. Boarded patients consume ED bays and reduce emergency capacity.
+  * Diverted = `overflow - boarded`. Diverted oncology patients suffer `-2` community trust and `-2` quality index penalties due to fractured care loops.
+- **Infusion Treatment Deferral:**
+  * Demand = `(system.infusion_capacity + 4) / 5`.
+  * Unserved = `(demand - effective_infusion).max(0)`.
+  * Penalty: Outpatients cannot board in the ED; they are deferred. Triggers `-1` community trust and `-1` market share index penalties per deferred patient.
 
-### 3. Effective Capacities
-*   `effective_icu = system.icu_capacity.min(nurses_icu * 1).min(physicians_icu * 2)`
-*   `effective_obs = system.obstetrics_capacity.min(nurses_obs * 2).min(physicians_obs * 5)`
-*   `effective_beds = system.staffed_beds.min(nurses_beds * 5)`
-*   `effective_psych = system.psychiatric_capacity.min(nurses_psych * 4).min(physicians_psych * 10)`
-*   `effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10)`
-*   `effective_emergency = system.emergency_capacity.min(nurses_ed * 2).min(physicians_ed * 4)`
+## Strategic Interaction
+- Rival AI players will evaluate candidate commands for oncology and infusion projects. If a rival sees the player expanding oncology/infusion, it may initiate a counter-expansion to protect its market share.
 
-*Note: During a nurse strike, effective_psych is halved, just like other capacity services.*
+## Assumptions and Parameters
+- **Staffing Targets:**
+  * Oncology (Inpatient): Nurse:bed = 1:3, Physician:bed = 1:8, Admin:bed = 1:12.
+  * Infusion (Outpatient): Nurse:bay = 1:4, Physician:bay = 1:15, Admin:bay = 1:20.
+- **Hierarchical Priority Allocation:**
+  * ICU (1st) -> Obstetrics (2nd) -> Med-Surg (3rd) -> Cardiology (4th) -> Psychiatric (5th) -> Oncology (6th) -> Infusion (7th) -> Outpatient Clinics (8th) -> ED (9th).
 
-### 4. Psychiatric ED Boarding & Diversion Calculation
-*   Psychiatric admission demand: `psychiatric_demand = (system.psychiatric_capacity + 9) / 10` (10% of psychiatric capacity, ceiling division).
-*   Psychiatric crisis overflow: `psychiatric_overflow = (psychiatric_demand - effective_psych).max(0)`.
-*   These overflowed patients board in the ED, directly consuming ED bays:
-    *   `boarded_psych = psychiatric_overflow.min(effective_emergency)`
-    *   `effective_emergency = (effective_emergency - boarded_psych).max(0)`
-*   If psychiatric overflow exceeds available ED bays, the remaining patients are diverted/turned away:
-    *   `diverted_psych = (psychiatric_overflow - boarded_psych).max(0)`
-    *   `system.community_trust = (system.community_trust - diverted_psych).max(0)`
-    *   `system.quality_index = (system.quality_index - diverted_psych).max(0)`
+## Educational Debrief Hooks
+- Appends decision quality warnings if:
+  * Oncology inpatient diversion occurs: `"Oncology inpatient care was diverted due to capacity/staffing constraints, disrupting cancer treatments."`
+  * Infusion treatment deferrals occur: `"Chemotherapy infusion appointments were deferred, compromising outpatient oncology quality."`
 
-### 5. Quality & Access Penalties
-Staffing/capacity deficit penalties apply over all physical capacity:
-*   `total_physical = staffed_beds + outpatient_capacity + emergency_capacity + icu_capacity + obstetrics_capacity + psychiatric_capacity`
-*   `total_effective = effective_beds + effective_outpatient + effective_emergency + effective_icu + effective_obs + effective_psych`
-*   `penalty = ((1.0 - total_effective / total_physical) * 15.0).round()`
-*   Penalty is subtracted from `access_index` and `quality_index`.
+## Determinism and Replay Notes
+- Transitions are fully deterministic. All random inputs are pre-calculated at the turn-start boundary, ensuring identical commands under a identical seed yield identical outcomes. State hash incorporates `oncology_capacity` and `infusion_capacity` to prevent drift.
+
+## Open Questions
+- None.

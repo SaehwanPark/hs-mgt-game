@@ -100,6 +100,31 @@ reconstructing it from the diff.
 | Project Document Alignment and Version Bump | v0.8.2 | Align project documentation with implemented 24-month campaign loop, autosave, scenario loading, and new service line features | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Externalize Scenario Timeline Events | v0.8.3 | Externalize scenario timeline events to TOML and generalize transition triggers | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Cardiology Service Line & Cath Lab Mechanics | v0.8.4 | Add Cardiology service line, staffing targets, Cardiology-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 276 | `7a771bad0a222f34` (competitive) |
+| Oncology & Infusion Service Lines | v0.9.0 | Add inpatient Oncology and outpatient Infusion service lines, staffing ratios, hierarchical priority queues, and ED boarding/diversion/deferral mechanics | 277 | `6044273e2c6c1374` (competitive) |
+
+
+- Feature: Oncology & Infusion Service Lines
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.9.0
+
+  Summary:
+  Implemented Oncology (Inpatient) and Infusion Center (Outpatient Chemotherapy) Service Lines with specialized capacity-staffing trade-offs, hierarchical nurse and physician allocations prioritizing Oncology 6th and Infusion 7th (before ED), and clinical overflow rules (Oncology ED boarding/diversion with `-2` trust/quality penalties; Infusion deferrals with `-1` trust/market share penalties).
+
+  Done:
+  - Added `oncology_capacity` and `infusion_capacity` to competitive system state, player observations, and pending effects.
+  - Configured `InvestDomain` and `ProjectKind` (OncologyUnit = 9 months / 3 AP; InfusionCenter = 6 months / 2 AP).
+  - Implemented nurse/physician staffing targets and priority allocation logic.
+  - Implemented inpatient Oncology ED boarding/diversion and outpatient Infusion deferral rules.
+  - Bumped competitive state hash version to v6 (`onco=`, `infuse=`) with golden hash `6044273e2c6c1374`.
+  - Added CLI parsing, autocompletions, REPL guidance documentation, and executive dashboard layout updates.
+  - Created comprehensive unit tests validating Oncology and Infusion capacities, staffing, and strike/boarding penalties.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all 277 tests.
 
 
 - Feature: Cardiology Service Line & Cath Lab Mechanics

@@ -128,6 +128,8 @@ fn observation_from_human_system(
     obstetrics_capacity: human.obstetrics_capacity,
     psychiatric_capacity: human.psychiatric_capacity,
     cardiology_capacity: human.cardiology_capacity,
+    oncology_capacity: human.oncology_capacity,
+    infusion_capacity: human.infusion_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,

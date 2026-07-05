@@ -6,6 +6,18 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-07-05
+
+### Added
+- Implemented Oncology (Inpatient) and Infusion Center (Outpatient Chemotherapy) Service Line mechanics.
+- Configured nurse-to-bed/bay, physician-to-bed/bay, and admin-to-bed/bay staffing targets for Oncology and Infusion capacity.
+- Implemented hierarchical staffing allocation prioritizing Oncology 6th and Infusion 7th (before ED).
+- Added Oncology ED boarding & diversion rules (penalizing `-2` community trust and `-2` quality index under diversion).
+- Added Infusion session deferral rules (penalizing `-1` community trust and `-1` market share index under capacity constraints).
+- Added `InvestDomain` (`Oncology` and `Infusion`) and `ProjectKind` (`OncologyUnit` (9-month) and `InfusionCenter` (6-month)) commands and resolution logic.
+- Extended CLI commands, autocomplete, REPL guidance documentation, and executive dashboard layout to support Oncology/Infusion capacity.
+- Added comprehensive unit tests validating Oncology/Infusion priority allocation, strike halving, and overflow rules.
+
 ## [0.8.4] - 2026-07-05
 
 ### Added
