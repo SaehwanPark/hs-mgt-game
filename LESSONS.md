@@ -4,6 +4,14 @@ Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 
+## Direct Investment Limits in Tests
+
+- Context: Adding the Intensive Care Unit (ICU) service line with direct investment commands.
+- Symptom: A test for direct ICU investment failed validation with `InvestAmountTooHigh { amount: 60, max: 40 }`.
+- Cause: The competitive ruleset defines `max_invest_amount = 40` as the maximum allowed direct investment per turn to keep resource consumption bounded.
+- Prevention: When writing unit or integration tests that verify capacity expansion, ensure that direct `Invest` commands do not exceed the ruleset's single-turn investment limit (e.g., 40). For larger expansions, split investments across multiple turns or use capital projects (`ProjectKind`).
+
+
 ## Default Capacities in Backward-Compatible Scenarios to Avoid Staffing Deficits
 
 - Context: Adding the Emergency Department (ED) service line with staffing targets to existing scenario models.

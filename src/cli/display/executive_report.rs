@@ -71,27 +71,46 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
-  // Hierarchical staffing allocation: beds first, clinics second, ED third
+  // Hierarchical staffing allocation: ICU first, beds second, clinics third (for physicians), ED last
+  let target_nurses_icu = observation.icu_capacity;
+  let nurses_icu = observation.nurses.min(target_nurses_icu);
+  let remaining_nurses_ms = (observation.nurses - nurses_icu).max(0);
+
   let target_nurses_beds = (observation.staffed_beds + 4) / 5;
-  let nurses_beds = observation.nurses.min(target_nurses_beds);
-  let remaining_nurses = (observation.nurses - nurses_beds).max(0);
+  let nurses_beds = remaining_nurses_ms.min(target_nurses_beds);
+  let remaining_nurses_ed = (remaining_nurses_ms - nurses_beds).max(0);
+
   let target_nurses_ed = (observation.emergency_capacity + 1) / 2;
-  let nurses_ed = remaining_nurses.min(target_nurses_ed);
+  let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
+
+  let target_physicians_icu = (observation.icu_capacity + 1) / 2;
+  let physicians_icu = observation.physicians.min(target_physicians_icu);
+  let remaining_physicians_op = (observation.physicians - physicians_icu).max(0);
 
   let target_physicians_outpatient = (observation.outpatient_capacity + 9) / 10;
-  let physicians_outpatient = observation.physicians.min(target_physicians_outpatient);
-  let remaining_physicians = (observation.physicians - physicians_outpatient).max(0);
-  let target_physicians_ed = (observation.emergency_capacity + 3) / 4;
-  let physicians_ed = remaining_physicians.min(target_physicians_ed);
+  let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
+  let remaining_physicians_ed = (remaining_physicians_op - physicians_outpatient).max(0);
 
+  let target_physicians_ed = (observation.emergency_capacity + 3) / 4;
+  let physicians_ed = remaining_physicians_ed.min(target_physicians_ed);
+
+  let eff_icu = observation
+    .icu_capacity
+    .min(nurses_icu)
+    .min(physicians_icu * 2);
   let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
   let eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
-  let eff_emergency = observation
+  let mut eff_emergency = observation
     .emergency_capacity
     .min(nurses_ed * 2)
     .min(physicians_ed * 4);
+
+  // ED Boarding Calculation
+  let critical_admissions = (observation.staffed_beds + 19) / 20;
+  let boarded_patients = (critical_admissions - eff_icu).max(0);
+  eff_emergency = (eff_emergency - boarded_patients).max(0);
 
   lines.push(format!(
     "  • Inpatient beds: {} (effective: {}) | Nurses: {}",
@@ -101,6 +120,13 @@ pub fn render_executive_report(
     "  • Outpatient capacity: {} units (effective: {}) | Physicians: {}",
     observation.outpatient_capacity, eff_clinics, observation.physicians
   ));
+  lines.push(format!(
+    "  • ICU capacity: {} beds (effective: {})",
+    observation.icu_capacity, eff_icu
+  ));
+  if boarded_patients > 0 {
+    lines.push(format!("  • ED boarding: {} patients", boarded_patients));
+  }
   lines.push(format!(
     "  • Emergency capacity: {} bays (effective: {})",
     observation.emergency_capacity, eff_emergency

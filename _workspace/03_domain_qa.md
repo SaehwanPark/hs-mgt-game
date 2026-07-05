@@ -1,15 +1,16 @@
-# Domain QA - Emergency Department Service Line
+# Domain QA - ICU Service Line & ED Boarding Mechanics
 
-- **Status:** Pending (Design Review Phase)
+- **Status:** Pass
 - **Role:** Domain QA Reviewer
 
 ## Checklist & Review Criteria
 
-- [ ] **State/Observation Separation:** The human player only observes reported and effective emergency capacity, while the underlying true state is updated deterministically in the transition kernel.
-- [ ] **Deterministic Replay Boundary:** All emergency capacity changes are queued through the `effect_queue` and resolved deterministically during transitions. The state hash incorporates `emergency_capacity` to ensure exact replay alignment.
-- [ ] **Educational Balance:** The staffing formulas reflect the realistic policy challenge that Emergency Departments are high-intensity resource environments where shortages cause compounding quality and access issues.
-- [ ] **Backward Compatibility:** Existing custom scenarios that do not specify `emergency_capacity` default safely to standard values (e.g. 15 for Riverside, 20 for Northlake) during parsing, avoiding serializing/deserializing failures.
+- [x] **State/Observation Separation:** The human player only observes the ICU capacity, effective capacity, and ED boarding count through formatted REPL reports, while the underlying true state is updated deterministically in the transition kernel.
+- [x] **Deterministic Replay Boundary:** All ICU capacity changes are enqueued in `effect_queue` and resolved during transition. The state hash record has been updated to include `icu_capacity` to guarantee deterministic replay validation.
+- [x] **Educational & Operational Balance:** The staffing targets reflect the high-intensity environment of critical care (1 Nurse per 1 Bed, 1 Physician per 2 Beds, 1 Admin per 5 Beds). The hierarchical allocation model mimics standard clinical operations (critical care needs met first).
+- [x] **ED Boarding Bottleneck:** ED boarding correctly deducts from effective ED capacity on a 1-to-1 basis when effective ICU capacity is less than the critical admissions demand (5% of med-surg beds). This captures the inter-departmental bottleneck.
+- [x] **Backward Compatibility:** Default `icu_capacity` defaults to `0` in `HealthSystemState` deserialization and custom scenario parsing, avoiding turn-1 staffing deficits and serialization panics in existing scenarios/saves.
 
 ## Findings & Risk Mitigation
-- **Risk:** High staffing targets for ED could cause immediate turn-0 deficits for systems with low starting staff.
-- **Mitigation:** Ensure starting staff (nurses, physicians, admins) in the scenario files are sufficient to cover the initial beds, outpatient capacity, and default/explicit emergency capacity, or start with no deficits at month 1.
+- **Verification:** Unit tests in `src/sim/transition_competitive.rs` (`test_icu_department_mechanics`) confirm that ICU investments, staffing targets, hierarchical allocation, ED boarding, and capacity-deficit index penalties evaluate to the exact expected mathematical values.
+- **Strike Suspension:** The RNA nurse strike delays `PendingEffectKind::IcuCapacity` along with other capital project kinds, preventing completion of ICU expansions during active labor strikes.
