@@ -34,11 +34,11 @@ multi-system state, action-economy validation, simultaneous monthly batch
 resolution (`sim/resolve.rs`), `transition_competitive()`, bounded AI player batches
 (`actors/ai_player.rs`, `sim/observe_ai.rs`), and observation-only rival intel with
 1-month lag (`sim/observe_competitive.rs`), monthly event/delay ticks, annual
-policy inputs, Stata-like competitive command parsing, and a bounded three-month
+policy inputs, Stata-like competitive command parsing, and a 24-month
 competitive CLI loop with help-command catalog output, colored command prompt
 tokens, and verb-only Tab autocomplete.
 It also includes a local stdio MCP server (`hs-mgt-game-mcp`) with in-memory
-bounded sessions for `stabilization-v1` and `competitive-regional-v1`.
+sessions for `stabilization-v1` and `competitive-regional-v1`.
 
 The current implementation is a playable prototype and compact architecture
 proof, not a production simulation or calibrated policy model. It demonstrates a
@@ -215,16 +215,15 @@ Implemented modules for `competitive-regional-v1`:
 | `transition_competitive()` | Competitive monthly state transition | Verified (`sim/transition_competitive.rs`, v0.1.32) |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Verified (v0.1.34) |
 | `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006), with help catalog rendering and verb-only autocomplete | Verified (v0.1.37) |
-| `CompetitivePreviewLoop` | Bounded three-month CLI loop over evolving competitive world state | Verified (v0.1.36) |
+| `CompetitiveCampaignLoop` | 24-month CLI loop over evolving competitive world state | Verified (v0.5.0) |
 
 Genesis world, observation derivation, and validation demos live in
-`src/competitive/`; the bounded competitive preview loop lives in
+`src/competitive/`; the competitive campaign loop lives in
 `src/cli/campaign.rs` and reuses `resolve_competitive_month()` for each month.
-The full 24-month campaign, competitive autosave, and scenario loading remain
-deferred.
+The 24-month campaign loop features autosave/resume, scenario loading, and replay export.
 
-Last Reviewed: 2026-06-30
-Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI, bounded loop)
+Last Reviewed: 2026-07-05
+Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI, campaign loop, autosave, scenario loader)
 
 ## Open Architectural Decisions
 
@@ -240,13 +239,13 @@ Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
   golden integration test lives in `tests/golden_seed42.rs`.
 - Ruleset and scenario versioning format: design draft at
-  `docs/scenario-format-draft.md`; the accepted runtime loader is currently
-  limited to `scenario-toml-0.1.40` for `stabilization-v1`.
+  `docs/scenario-format-draft.md`; the accepted runtime loader parses and validates
+  both stabilization and competitive scenario files.
 - Decision-record convention: **addressed** by
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.
 - Competitive campaign boundaries: **addressed** by ADRs
   [0003](docs/decision-records/0003-simultaneous-monthly-player-actions.md)–[0006](docs/decision-records/0006-stata-like-cli-layer.md);
-  I1–I8 and the bounded three-month preview loop landed.
+  I1–I8 and the competitive campaign loop landed.
 - Data and licensing policy.
 - MCP interface boundary: **addressed** by
   [ADR-0008](docs/decision-records/0008-mcp-agent-interface.md). Local stdio

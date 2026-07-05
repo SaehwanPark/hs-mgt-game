@@ -320,7 +320,7 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
 
   lines.extend([
     "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
-    "Capital project lesson: EHR Epic/Cerner, Tower, and Clinic Network projects consume Action Points and cash immediately, draw cash monthly over their duration (9 to 12 months), and are limited to a maximum of 2 concurrent projects. They are long-term strategic investments that do not resolve within a short three-month preview but are critical in longer horizons.".to_string(),
+    "Capital project lesson: EHR Epic/Cerner, Tower, and Clinic Network projects consume Action Points and cash immediately, draw cash monthly over their duration (9 to 12 months), and are limited to a maximum of 2 concurrent projects. They are long-term strategic investments that require careful planning over the 24-month horizon.".to_string(),
     "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.".to_string(),
   ]);
 

@@ -6,6 +6,24 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.8.2] - 2026-07-05
+
+### Changed
+- Aligned project documentation (`README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/how-to-play.md`, `docs/versioning-policy.md`, `docs/core-loop-spec.md`, `docs/system-boundary.md`, `docs/competitive-scenario-brief.md`, `docs/first-scenario-brief.md`, and `docs/agent-playtest-protocol.md`) with the implemented 24-month campaign loop, custom scenario loading, autosave/resume, and new service line additions.
+- Bumped package version to `0.8.2`.
+
+## [0.8.1] - 2026-07-05
+
+### Added
+- Implemented the Psychiatric Service Line & ED holding/diversion mechanics.
+- Added Psychiatric-specific staffing targets (1 nurse per 4 beds, 1 physician per 10 beds, 1 admin per 15 beds) to transition rules.
+- Implemented hierarchical staffing allocation prioritizing ICU first, Obstetrics second, Med-Surg third, Psychiatric fourth, Clinics fifth, and ED last.
+- Implemented Psychiatric ED holding boarding (psychiatric overflow boards in ED, consuming ED bays) and diversion mechanics under capacity/staffing deficit (incurring `-2` community trust and `-1` market share index penalties).
+- Added `InvestDomain::Psychiatric` for direct Psychiatric bed investments and `ProjectKind::PsychiatricUnit` for 6-month capital projects.
+- Integrated Psychiatric capacity and holding into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+- Created comprehensive unit tests validating Psychiatric priority allocation, ED boarding, diversion penalties under deficit, and project resolution.
+- Updated `LESSONS.md` to document Psychiatric ED boarding test constraints and hierarchical staffing priority.
+
 ## [0.8.0] - 2026-07-05
 
 ### Added

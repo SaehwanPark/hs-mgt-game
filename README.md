@@ -18,7 +18,7 @@ It is not a calibrated policy forecast or a model of any real institution.
 ## What You Can Play
 
 - `stabilization-v1`: a five-turn executive stabilization campaign.
-- `competitive-regional-v1`: a bounded three-month regional-market preview with
+- `competitive-regional-v1`: a 24-month regional-market campaign with
   one human-led system, AI rival health systems, simultaneous monthly actions,
   lagged rival observability, and end-of-run debriefing.
 
@@ -94,10 +94,7 @@ This is a playable prototype, not a finished educational release.
 
 Current limits:
 
-- the competitive campaign is a three-month preview, not the planned full
-  24-month campaign;
-- competitive scenario loading, competitive replay export, and competitive
-  autosave are deferred;
+- the campaign features local AI rivals or MCP agents with no network multiplayer;
 - current numerical thresholds are documented abstractions, not empirically
   calibrated parameters;
 - AI-agent playtest findings are validation aids for gameplay and explanation,

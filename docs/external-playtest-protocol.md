@@ -26,10 +26,9 @@ The protocol covers the implemented command-line flows:
 | Campaign | Current status | Session target |
 | --- | --- | --- |
 | `stabilization-v1` | Five-turn playable slice | First-time comprehension and debrief quality |
-| `competitive-regional-v1` | Bounded three-month preview | Competitive command comprehension and monthly tradeoffs |
+| `competitive-regional-v1` | 24-month campaign | Competitive command comprehension and monthly tradeoffs |
 
-The full 24-month competitive campaign, scenario file loading, Medicare and
-Medicaid strategic actors, and empirical calibration remain deferred.
+Medicare and Medicaid strategic actors (beyond standard integration) and empirical calibration remain deferred.
 
 ## Session Goals
 
@@ -116,7 +115,7 @@ testing competitive campaign ergonomics.
 2. Choose `normal` difficulty unless testing difficulty-specific confusion.
 3. Ask the player to summarize the monthly executive report before entering
    commands.
-4. Let the player complete the three-month preview.
+4. Let the player complete the campaign.
 5. At each command prompt, note:
    - whether `help` gives enough information;
    - whether `verb arg=value` syntax is understood;

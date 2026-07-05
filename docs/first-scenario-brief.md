@@ -27,9 +27,8 @@ The current prototype uses five executive decision points. A later campaign may
 map those turns to quarters, but this brief does not assign calendar duration.
 
 For the **competitive regional market campaign** (parallel track), see
-[`competitive-scenario-brief.md`](competitive-scenario-brief.md). The current
-runtime is a bounded three-month preview; the fuller 24-month campaign remains
-deferred.
+[`competitive-scenario-brief.md`](competitive-scenario-brief.md). The competitive
+campaign runs for the full 24-month duration.
 
 ## Learning Objectives
 

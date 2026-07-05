@@ -20,11 +20,10 @@ human cognitive load, or real-world policy effects.
 | Campaign | Current status | Agent-playtest target |
 | --- | --- | --- |
 | `stabilization-v1` | Five-turn playable slice | First-pass comprehension, tradeoffs, and debrief coherence |
-| `competitive-regional-v1` | Bounded three-month preview | Competitive command comprehension, simultaneous rival pressure, and monthly tradeoffs |
+| `competitive-regional-v1` | 24-month campaign | Competitive command comprehension, simultaneous rival pressure, and monthly tradeoffs |
 
-The full 24-month competitive campaign, competitive scenario loading, Medicare
-and Medicaid strategic actors, empirical calibration, and human learning-outcome
-measurement remain outside this protocol.
+Medicare and Medicaid strategic actors (beyond standard integration), empirical
+calibration, and human learning-outcome measurement remain outside this protocol.
 
 ## Required Harness
 

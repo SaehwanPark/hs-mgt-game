@@ -10,10 +10,9 @@ You play as a health-system leader in a fictional US market. You make strategy
 decisions under pressure from finance, workforce, policy, and competitors.
 
 Two campaigns are currently visible in the CLI:
-
-- `stabilization-v1` (implemented): five-turn executive demo.
-- `competitive-regional-v1` (implemented as a bounded preview): three-month
-  competitive loop with one human system and AI rivals.
+ 
+ - `stabilization-v1` (implemented): five-turn executive demo.
+ - `competitive-regional-v1` (implemented): 24-month competitive campaign loop with one human system and AI rivals.
 
 The game is deterministic for a given seed and set of choices. A poor outcome
 can still follow a reasonable decision when uncertainty and rival behavior
@@ -59,18 +58,17 @@ For each of 5 turns, you:
 
 At run end, you get replay verification and a debrief.
 
-## Competitive preview (`competitive-regional-v1`)
-
-For each month in the 3-month preview, you:
-
-1. Read the executive report.
-2. Enter one command batch (Stata-like verbs).
-3. Submit; AI rivals submit simultaneously.
-4. Review resolution summary.
-5. Repeat next month with updated conditions.
-
-Note: full 24-month competitive campaign is still deferred; current player flow
-is a bounded preview.
+## Competitive campaign (`competitive-regional-v1`)
+ 
+ For each month in the 24-month campaign, you:
+ 
+ 1. Read the executive report.
+ 2. Enter one command batch (Stata-like verbs).
+ 3. Submit; AI rivals submit simultaneously.
+ 4. Review resolution summary.
+ 5. Repeat next month with updated conditions.
+ 
+ Note: the 24-month campaign features full autosave/resume, scenario loading, and replay export.
 
 ## Key terminology
 
@@ -207,7 +205,7 @@ A: Rival actions, delayed effects, and seeded uncertainty can produce adverse
 outcomes. Debrief helps separate decision quality from outcome quality.
 
 Q: Is competitive a full campaign already?  
-A: Not yet. Current competitive flow is a bounded three-month preview.
+A: Yes. The competitive campaign loop runs for 24 months, with AI rivals, monthly events, and scenario loading.
 
 Q: I want a less overwhelming first run.  
 A: Start with `stabilization-v1` and beginner mode (`b`), then move to

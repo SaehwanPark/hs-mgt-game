@@ -95,6 +95,75 @@ reconstructing it from the diff.
 | Active Projects Display Hardening | v0.5.9 | Harden competitive campaign CLI dashboard by detailing in-flight projects, durations, and monthly cash draws | 271 | `e73a38b3951cd8b6` (competitive) |
 | Emergency Department Service Line | v0.6.0 | Add Emergency Department service line with capacity-staffing trade-offs, hierarchical staffing, and new command verbs | 272 | `0930e2bf6890aaba` (competitive) |
 | ICU Service Line & ED Boarding | v0.7.0 | Add Intensive Care Unit service line, high-intensity staffing targets, ICU-first hierarchical allocation, and ED boarding bottleneck mechanics | 273 | `2904083fb91b2770` (competitive) |
+| Obstetrics/L&D Service Line & Diversion Mechanics | v0.8.0 | Add Obstetrics service line, staffing targets, Obstetrics-second hierarchical allocation, and diversion mechanics under deficit | 274 | `e57cc6377e17ea09` (competitive) |
+| Psychiatric Service Line & ED holding/diversion mechanics | v0.8.1 | Add Psychiatric service line, staffing targets, Psychiatric-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 275 | `7bd8a0c7a8312f4e` (competitive) |
+| Project Document Alignment and Version Bump | v0.8.2 | Align project documentation with implemented 24-month campaign loop, autosave, scenario loading, and new service line features | 275 | `7bd8a0c7a8312f4e` (competitive) |
+
+
+- Feature: Project Document Alignment and Version Bump
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.8.2
+
+  Summary:
+  Aligned project documentation with implemented 24-month campaign loop, autosave/resume, scenario loading, and new service line features.
+
+  Done:
+  - Updated `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/how-to-play.md`, `docs/versioning-policy.md`, `docs/core-loop-spec.md`, `docs/system-boundary.md`, `docs/competitive-scenario-brief.md`, `docs/first-scenario-brief.md`, and `docs/agent-playtest-protocol.md` to remove outdated "three-month" and "deferred" statements.
+  - Bumped Cargo package version to `0.8.2`.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all 275 tests.
+
+
+- Feature: Psychiatric Service Line & ED holding/diversion mechanics
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.8.1
+
+  Summary:
+  Implemented the Psychiatric Service Line & ED holding/diversion mechanics with capacity-staffing trade-offs, hierarchical allocation prioritizing Psychiatric, and ED holding boarding/diversion mechanics.
+
+  Done:
+  - Added Psychiatric-specific staffing targets (1 nurse per 4 beds, 1 physician per 10 beds, 1 admin per 15 beds) to transition rules.
+  - Implemented hierarchical staffing allocation prioritizing ICU first, Obstetrics second, Med-Surg third, Psychiatric fourth, Clinics fifth, and ED last.
+  - Implemented Psychiatric ED holding boarding (psychiatric overflow boards in ED, consuming ED bays) and diversion mechanics under capacity/staffing deficit (incurring `-2` community trust and `-1` market share index penalties).
+  - Added `InvestDomain::Psychiatric` for direct Psychiatric bed investments and `ProjectKind::PsychiatricUnit` for 6-month capital projects.
+  - Integrated Psychiatric capacity and holding into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+  - Created comprehensive unit tests validating Psychiatric priority allocation, ED boarding, diversion penalties under deficit, and project resolution.
+  - Updated `LESSONS.md` to document Psychiatric ED boarding test constraints and hierarchical staffing priority.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+
+  Verification:
+  - cargo test (all 275 tests pass)
+
+
+- Feature: Obstetrics/L&D Service Line & Diversion Mechanics
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.8.0
+
+  Summary:
+  Implemented the Obstetrics/L&D Service Line & Diversion Mechanics.
+
+  Done:
+  - Added Obstetrics-specific staffing targets (1 nurse per 2 beds, 1 physician per 5 beds, 1 admin per 10 beds) to transition rules.
+  - Implemented hierarchical staffing allocation prioritizing ICU first, Obstetrics second, Med-Surg third, Clinics fourth, and ED last.
+  - Implemented Obstetrics diversion mechanics where patients are diverted if Obstetrics capacity is under-staffed or under-capacitated, incurring `-2` community trust and `-1` market share index penalties.
+  - Added `InvestDomain::Obstetrics` for direct Obstetrics bed investments and `ProjectKind::ObstetricsUnit` for 9-month capital projects.
+  - Integrated Obstetrics capacity and diversion into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+  - Created comprehensive unit tests validating Obstetrics priority allocation, diversion penalties under deficit, and project resolution.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+
+  Verification:
+  - cargo test (all 274 tests pass)
 
 
 - Feature: ICU Service Line & ED Boarding

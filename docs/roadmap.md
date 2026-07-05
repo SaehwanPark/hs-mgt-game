@@ -634,10 +634,10 @@ regional market campaign (`competitive-regional-v1`) adds:
 
 **Runtime slices delivered:** campaign router (I1), monthly executive report
 (I2), action economy (I3), multi-system state (I4), simultaneous resolver (I5),
-AI players (I6), events/delays/annual tick (I7), and Stata CLI (I8). The bounded
-three-month preview, prompt help, and verb autocomplete are implemented; full
-24-month competitive campaign length, competitive autosave, competitive replay
-export, and competitive scenario loading remain deferred.
+AI players (I6), events/delays/annual tick (I7), and Stata CLI (I8). The full
+24-month competitive campaign length, prompt help, verb autocomplete, competitive
+autosave/resume, competitive replay export, and competitive scenario loading are
+implemented.
 
 **Note:** Phase 9 role-based classroom multiplayer assigns human participants to
 organizational roles (CEO, CFO, etc.). That is distinct from K AI health-system

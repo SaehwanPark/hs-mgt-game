@@ -15,7 +15,7 @@ Two campaign concepts coexist:
 | Campaign | Id | Turn unit | Status |
 | --- | --- | --- | --- |
 | Stabilization demo | `stabilization-v1` | Abstract (5 points) | Implemented v0.1.27 |
-| Competitive regional market | `competitive-regional-v1` | 1 month | Bounded three-month preview implemented v0.1.36 |
+| Competitive regional market | `competitive-regional-v1` | 1 month | 24-month campaign implemented v0.5.0 |
 
 See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md`](competitive-scenario-brief.md).
 
@@ -34,8 +34,7 @@ See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md
 
 - Same regional US market; multiple health systems (1 human + K AI players).
 - One strategy turn equals one calendar month; annual policy tick every 12 months.
-- Current executable preview runs three months. The competitive scenario brief
-  still describes the deferred 24-month target.
+- The campaign loop runs for 24 months.
 
 - The scope is regional and institutional. National policy, federal budgets,
   and macroeconomic conditions may appear only as resolved external inputs until
@@ -139,20 +138,18 @@ Excluded from the **stabilization demo** conceptual boundary:
 
 The **competitive campaign** adds multi-system peer players, monthly calendar,
 action economy, simultaneous resolution, AI rival batches, event/delay ticks,
-and Stata-like CLI per ADRs 0003–0006. The current runtime remains a bounded
-three-month preview and does not replace the stabilization demo. Classroom
+and Stata-like CLI per ADRs 0003–0006. The campaign loop runs for 24 months,
+with full autosave/resume, scenario loading, and replay export. Classroom
 hot-seat multiplayer (Phase 9) remains deferred.
 
-Mid-run session save is implemented for the stabilization interactive path
-(ADR-0002). Competitive campaign save semantics remain deferred.
+Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 
 ## Deferred Ontology Work
 
 - Formal actor-card template covering objectives, authority, constraints,
   information, outside options, risk posture, time horizon, and decision
   procedure. Initial design artifact: [`actor-cards.md`](actor-cards.md).
-- Scenario and ruleset versioning beyond the accepted stabilization-only
-  `scenario-toml-0.1.40` runtime format.
+- Scenario loading and validation is fully supported for both stabilization and competitive campaigns.
 - Patient cohort and distributional outcome vocabulary.
 - Service-line, capital-allocation, and market-area vocabulary.
 - Formal belief-state representation beyond observation snapshots.

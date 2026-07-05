@@ -12,7 +12,7 @@ repository.
 | Campaign id | Name | Turn unit | Player model | Status |
 | --- | --- | --- | --- | --- |
 | `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 human CEO + per-turn NPC actors | Implemented v0.1.27 |
-| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | Bounded three-month preview implemented v0.1.36; prompt ergonomics v0.1.37 |
+| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
 
 ## Shared principles
 
@@ -52,8 +52,7 @@ but not feasibility-checked.
 
 ## Competitive campaign loop
 
-Current bounded preview loop (`competitive-regional-v1`), with full campaign
-length still deferred:
+Current campaign loop (`competitive-regional-v1`):
 
 ```
 FOR month IN 1..campaign_length:

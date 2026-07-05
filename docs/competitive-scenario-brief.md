@@ -118,7 +118,7 @@ Players should practice:
 | Commands | Turn-locked five types | Open verb catalog per month |
 | CLI | Numeric prompts | Stata-like grammar |
 | Rival | Turn-5 NPC actor | K AI peer systems |
-| Status | Implemented | Bounded three-month preview implemented; 24-month target deferred |
+| Status | Implemented | Implemented (24-month campaign loop, autosave, scenario loading, and replay export) |
 
 Both campaigns coexist through the implemented campaign router.
 
