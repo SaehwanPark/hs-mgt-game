@@ -512,3 +512,12 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: Parallel test execution triggers race conditions where a cleanup step in one thread deletes the session file expected by another thread.
 - Resolution: Enforce sequential execution for tests interacting with shared files by running them with `cargo test -- --test-threads=1`.
 
+
+## Query Pending Effect Queue to Enrich Observations
+
+- Context: Deriving rich observations for in-flight operations (like active capital projects).
+- Symptom: Dashboard displays generic labels like `1 active project(s)` which hides crucial details (project name, remaining duration, monthly cash drain).
+- Cause: Observation mapping relied on the simple count field (`human.resources.active_projects`) rather than inspecting the pending effects queue.
+- Resolution: Updated `in_flight_projects_label` in `src/sim/observe_competitive.rs` to query `world.effect_queue` for matching system effects, calculate remaining months, and extract project names and cash draws.
+- Prevention: When displaying status of delayed or multi-turn commitments, query the queue containing the details instead of only presenting state accumulator values.
+

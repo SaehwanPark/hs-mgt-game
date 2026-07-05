@@ -44,7 +44,9 @@ pub fn observation_from_genesis(world: &crate::model::CompetitiveWorldState) -> 
   let human = world
     .human_system()
     .expect("competitive genesis must include human system");
-  observation_from_human_system(human, world.difficulty)
+  let mut obs = observation_from_human_system(human, world.difficulty);
+  obs.in_flight_projects = crate::sim::in_flight_projects_label(world, human.system_id);
+  obs
 }
 
 fn cash_runway_signal(resources: &PlayerResources) -> CashRunwaySignal {

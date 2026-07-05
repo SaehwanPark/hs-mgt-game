@@ -236,7 +236,7 @@ pub fn apply_due_pending_effects(world: &mut CompetitiveWorldState, events: &mut
   let due: Vec<_> = world
     .effect_queue
     .iter()
-    .filter(|effect| effect.resolve_month == month_index)
+    .filter(|effect| effect.resolve_month <= month_index)
     .cloned()
     .collect();
 

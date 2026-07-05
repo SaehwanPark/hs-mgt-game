@@ -92,6 +92,54 @@ reconstructing it from the diff.
 | Competitive Exemplary Scenario | v0.5.6 | Add competitive-exemplary-v1 scenario, workforce wage settlements, nurse strike, CON legal challenge, and Blue Shield/EHR consequences | 260 | `e73a38b3951cd8b6` (competitive) |
 | Medicare Public Payer Integration Plan | v0.5.7 | Design Medicare public payer quality-compliance integration plan | 260 | `e73a38b3951cd8b6` (competitive) |
 | Medicare Public Payer Integration | v0.5.8 | Implement Medicare public payer quality compliance, validation, CLI REPL autocompletes, topic help, and unit tests | 270 | `e73a38b3951cd8b6` (competitive) |
+| Active Projects Display Hardening | v0.5.9 | Harden competitive campaign CLI dashboard by detailing in-flight projects, durations, and monthly cash draws | 271 | `e73a38b3951cd8b6` (competitive) |
+
+
+- Feature: Active Projects Display Hardening
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.5.9
+
+  Summary:
+  Hardened the competitive campaign CLI dashboard by detailing in-flight projects (project kind, remaining months to completion, and monthly cash draw) instead of a simple count.
+
+  Done:
+  - Designed the comprehensive active projects detailed observation plan (workspace request summary, mechanism design, and domain QA review).
+  - Updated `in_flight_projects_label` in `src/sim/observe_competitive.rs` to inspect the `effect_queue` and construct a detailed description of each active project.
+  - Added unit test coverage for active project observation formatting.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop.
+  - No changes to transition engine rules.
+
+  Verification:
+  - cargo test (all 271 tests pass)
+
+
+- Feature: Medicare Public Payer Integration
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.5.8
+
+  Summary:
+  Implement Medicare public payer quality-compliance integration in the competitive regional campaign loop, modeling quality improvements (+3 quality) and policy pressure reduction (-3 policy pressure) with neutral posture and $10 compliance costs.
+
+  Done:
+  - Designed the comprehensive Medicare integration plan (evidence mapping, mechanism design, and domain QA review).
+  - Added `Medicare` variant to `PayerId` in `src/model/competitive_command.rs` and updated `resource_costs` ($10 cash).
+  - Updated `parse_payer` in `src/cli/competitive_parse.rs` and CLI autocompletion/guidance helpers.
+  - Implemented `InvalidMedicarePosture` validation check in `src/sim/validate_competitive.rs`.
+  - Implemented quality compliance effects (+3 quality, -3 policy pressure) in `src/sim/transition_competitive.rs`.
+  - Added focused unit tests for Medicare validation and transition outcomes in `validate_competitive_tests.rs` and `transition_competitive.rs`.
+  - Bumped crate version to `0.5.8` and documented changes in `CHANGELOG.md` and `Cargo.toml`.
+  - Switched working branch to `feat/medicare-payer-implementation`.
+
+  Deferred / Non-Goals:
+  - No Medicare patient cohort tracking or FFS DRG-based billing rules.
+  - No changes to stabilization campaign loop.
+
+  Verification:
+  - cargo test (all 270 tests pass)
 
 
 - Feature: Competitive Exemplary Scenario
@@ -433,27 +481,7 @@ reconstructing it from the diff.
 
 ## Present
 
-- Feature: Medicare Public Payer Integration
-  Status: Complete
-  Started: 2026-07-05
-  Version: 0.5.8
-
-  Summary:
-  Implement Medicare public payer quality-compliance integration in the competitive regional campaign loop, modeling quality improvements (+3 quality) and policy pressure reduction (-3 policy pressure) with neutral posture and $10 compliance costs.
-
-  Done:
-  - Designed the comprehensive Medicare integration plan (evidence mapping, mechanism design, and domain QA review).
-  - Added `Medicare` variant to `PayerId` in `src/model/competitive_command.rs` and updated `resource_costs` ($10 cash).
-  - Updated `parse_payer` in `src/cli/competitive_parse.rs` and CLI autocompletion/guidance helpers.
-  - Implemented `InvalidMedicarePosture` validation check in `src/sim/validate_competitive.rs`.
-  - Implemented quality compliance effects (+3 quality, -3 policy pressure) in `src/sim/transition_competitive.rs`.
-  - Added focused unit tests for Medicare validation and transition outcomes in `validate_competitive_tests.rs` and `transition_competitive.rs`.
-  - Bumped crate version to `0.5.8` and documented changes in `CHANGELOG.md` and `Cargo.toml`.
-  - Switched working branch to `feat/medicare-payer-implementation`.
-
-  Deferred / Non-Goals:
-  - No Medicare patient cohort tracking or FFS DRG-based billing rules.
-  - No changes to stabilization campaign loop.
+None. All scheduled features are complete.
 
 
 ## Future

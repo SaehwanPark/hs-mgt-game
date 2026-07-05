@@ -54,7 +54,7 @@ pub fn observe_for_human(
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,
-    in_flight_projects: in_flight_projects_label(human.resources.active_projects),
+    in_flight_projects: in_flight_projects_label(world, human.system_id),
     cash_runway_signal: cash_runway_signal(&human.resources),
     market_bullets,
     policy_bullets: default_policy_bullets(),
@@ -174,11 +174,57 @@ fn workforce_trust_summary(trust: i32) -> String {
   }
 }
 
-fn in_flight_projects_label(active_projects: u32) -> String {
-  if active_projects == 0 {
+pub fn in_flight_projects_label(world: &CompetitiveWorldState, human_id: u32) -> String {
+  let mut projects = Vec::new();
+  let observation_month = world.policy_calendar.month_index;
+
+  for effect in &world.effect_queue {
+    if effect.system_id == human_id {
+      match &effect.kind {
+        crate::model::PendingEffectKind::BedsCapacity {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          projects.push(format!(
+            "Tower ({} mos left, ${}k/mo draw)",
+            remaining, draw
+          ));
+        }
+        crate::model::PendingEffectKind::OutpatientCapacity {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          projects.push(format!(
+            "ClinicNetwork ({} mos left, ${}k/mo draw)",
+            remaining, draw
+          ));
+        }
+        crate::model::PendingEffectKind::TechnologyQuality {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          let label = if effect.summary.contains("started EhrCerner") {
+            "EhrCerner"
+          } else {
+            "EhrEpic"
+          };
+          projects.push(format!(
+            "{} ({} mos left, ${}k/mo draw)",
+            label, remaining, draw
+          ));
+        }
+        _ => {}
+      }
+    }
+  }
+
+  if projects.is_empty() {
     "none".to_string()
   } else {
-    format!("{active_projects} active project(s)")
+    projects.join(", ")
   }
 }
 
@@ -303,5 +349,49 @@ mod tests {
     assert!(policy_text.contains("recruit commands spend cash now"));
     assert!(policy_text.contains("role-specific delays"));
     assert!(policy_text.contains("strain workforce trust"));
+  }
+
+  #[test]
+  fn test_active_projects_observation() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+
+    world.effect_queue.push(crate::model::PendingEffect {
+      id: 1,
+      system_id: 0,
+      enqueue_month: 1,
+      resolve_month: 10,
+      kind: crate::model::PendingEffectKind::OutpatientCapacity {
+        capacity_delta: 30,
+        project_draw: Some(2),
+      },
+      summary: "Riverside Community Health: started clinic_network project (budget 18)".to_string(),
+    });
+
+    world.effect_queue.push(crate::model::PendingEffect {
+      id: 2,
+      system_id: 0,
+      enqueue_month: 1,
+      resolve_month: 13,
+      kind: crate::model::PendingEffectKind::TechnologyQuality {
+        quality_delta: 5,
+        project_draw: Some(10),
+      },
+      summary: "Riverside Community Health: started EhrEpic project (budget 120)".to_string(),
+    });
+
+    world.policy_calendar.month_index = 2;
+
+    let observation = observe_for_human(&world, None);
+
+    assert!(
+      observation
+        .in_flight_projects
+        .contains("ClinicNetwork (8 mos left, $2k/mo draw)")
+    );
+    assert!(
+      observation
+        .in_flight_projects
+        .contains("EhrEpic (11 mos left, $10k/mo draw)")
+    );
   }
 }
