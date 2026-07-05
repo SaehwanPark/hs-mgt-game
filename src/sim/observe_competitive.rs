@@ -66,6 +66,7 @@ pub fn observe_for_human(
     annual_policy_review: None,
     consultant_options: Vec::new(),
     intel_gaps,
+    rna_strike_active: world.event_metadata.get("rna_strike_active") == Some(&"true".to_string()),
   }
 }
 

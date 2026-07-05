@@ -143,6 +143,7 @@ fn observation_from_human_system(
     annual_policy_review: None,
     consultant_options: consultant_options_month1(difficulty),
     intel_gaps,
+    rna_strike_active: false,
   }
 }
 

@@ -118,30 +118,40 @@ pub fn render_executive_report(
   let target_physicians_ed = (observation.emergency_capacity + 3) / 4;
   let physicians_ed = remaining_physicians_ed.min(target_physicians_ed);
 
-  let eff_icu = observation
+  let mut eff_icu = observation
     .icu_capacity
     .min(nurses_icu)
     .min(physicians_icu * 2);
-  let eff_obs = observation
+  let mut eff_obs = observation
     .obstetrics_capacity
     .min(nurses_obs * 2)
     .min(physicians_obs * 5);
-  let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
-  let eff_cardio = observation
+  let mut eff_beds = observation.staffed_beds.min(nurses_beds * 5);
+  let mut eff_cardio = observation
     .cardiology_capacity
     .min(nurses_cardio * 3)
     .min(physicians_cardio * 8);
-  let eff_psych = observation
+  let mut eff_psych = observation
     .psychiatric_capacity
     .min(nurses_psych * 4)
     .min(physicians_psych * 10);
-  let eff_clinics = observation
+  let mut eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
   let mut eff_emergency = observation
     .emergency_capacity
     .min(nurses_ed * 2)
     .min(physicians_ed * 4);
+
+  if observation.rna_strike_active {
+    eff_icu /= 2;
+    eff_obs /= 2;
+    eff_beds /= 2;
+    eff_cardio /= 2;
+    eff_psych /= 2;
+    eff_clinics /= 2;
+    eff_emergency /= 2;
+  }
 
   // ED Boarding Calculation
   let critical_admissions = (observation.staffed_beds + 19) / 20;

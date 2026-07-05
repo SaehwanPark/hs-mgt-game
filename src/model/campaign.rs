@@ -61,6 +61,7 @@ pub struct PlayerObservation {
   pub annual_policy_review: Option<Vec<String>>,
   pub consultant_options: Vec<ConsultantOption>,
   pub intel_gaps: Vec<String>,
+  pub rna_strike_active: bool,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
