@@ -289,6 +289,10 @@ fn score_command(
       pledge_type: PledgeType::Quality,
       level,
     } => (style.political * 2 + style.access) as i32 + (*level as i32),
+    CompetitiveCommand::Commit {
+      pledge_type: PledgeType::Workforce,
+      level,
+    } => (style.political + style.access) as i32 + (*level as i32),
     CompetitiveCommand::Negotiate { .. } => {
       (style.margin * 2) as i32 + observation.market.commercial_payer_pressure / 10
     }

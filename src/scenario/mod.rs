@@ -286,6 +286,8 @@ impl Scenario {
       public_action_log: Vec::new(),
       effect_queue: Vec::new(),
       policy_calendar: PolicyCalendar::new_month(1),
+      scenario_id: self.scenario_id.clone(),
+      event_metadata: std::collections::HashMap::new(),
     })
   }
 }

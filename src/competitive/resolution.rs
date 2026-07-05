@@ -185,6 +185,7 @@ pub fn format_competitive_command(cmd: &CompetitiveCommand) -> String {
       let pledge_str = match pledge_type {
         PledgeType::Access => "access",
         PledgeType::Quality => "quality",
+        PledgeType::Workforce => "workforce",
       };
       format!("commit pledge_type={} level={}", pledge_str, level)
     }

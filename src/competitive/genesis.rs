@@ -177,6 +177,8 @@ pub fn genesis_competitive_world_with_ruleset(
     public_action_log: Vec::<PublicActionEntry>::new(),
     effect_queue: Vec::<PendingEffect>::new(),
     policy_calendar: PolicyCalendar::new_month(1),
+    scenario_id: "default-competitive".to_string(),
+    event_metadata: std::collections::HashMap::new(),
   }
 }
 

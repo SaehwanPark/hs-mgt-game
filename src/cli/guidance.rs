@@ -116,7 +116,7 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       lines.push("    recruit role=nurse|physician|admin headcount=<int>: Hire personnel. Costs 1 AP, $5 cash per headcount. Delays: nurse (1 mo), admin (2 mo), physician (3 mo). Can lower trust.".to_string());
       lines.push("    monitor target=northlake|summit|valley|metro depth=<1-3>: View competitor activity. Costs AP equal to depth, $0 cash, 0 PC.".to_string());
       lines.push("    negotiate payer=carrier_a|carrier_b|medicaid rate_posture=aggressive|neutral|conservative: Set payer commercial bid or align public compliance. Commercial: 1 AP, $0 cash, 2 PC. Medicaid: 1 AP, $5 cash, 2 PC (neutral posture only).".to_string());
-      lines.push("    commit pledge_type=access|quality level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
+      lines.push("    commit pledge_type=access|quality|workforce level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
       lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network budget=<int>: Multi-month capital projects. Costs 2 AP, monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo). Max 2 concurrent projects.".to_string());
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
@@ -330,17 +330,18 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
         &format!(
           "{} {}",
           style::accent("commit"),
-          style::dim("pledge_type=access|quality level=<1-5>")
+          style::dim("pledge_type=access|quality|workforce level=<1-5>")
         ),
       ),
       style::label_value(
         "  Description",
-        "Make public commitments to build trust and legitimacy with officials.",
+        "Make public commitments to build trust and legitimacy with officials or resolve workforce disputes.",
       ),
       style::label_value("  Resource Costs", "Costs 1 AP, $0 cash, 1 PC."),
       style::label_value("  Pledges", ""),
       style::dim("    - access: Pledges to improve or protect healthcare access."),
       style::dim("    - quality: Pledges to enhance care quality indices."),
+      style::dim("    - workforce: Pledges to accept RNA wage demands during workforce disputes."),
       style::label_value(
         "  Strategic Guidance",
         "Public commitments build political goodwill and long-term trust. Failing to meet your commitments will severely damage system credibility.",

@@ -477,3 +477,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: Rust tests run in parallel by default. A cleanup step in one test (like `delete_competitive_session_save`) can run concurrently and delete the file written by another test before it gets loaded.
 - Resolution: Run the tests sequentially using `cargo test -- --test-threads=1` when verifying shared file interactions.
 - Prevention: Avoid writing tests that point to hardcoded global config files; use unique temporary files or directories (e.g. using `tempfile` crate) to isolate test states.
+
+
+## Differentiate Timeline Decounters from Event Activation Triggers
+
+- Context: Implementing scheduled timeline events with finite durations (like the nurse strike).
+- Symptom: Strike duration decremented immediately in the same month-start tick it was activated, reducing a 2-month strike to 1 month on the first turn.
+- Cause: Execution of activation logic and time-decay counters within the same sequential tick processing loop without checking if the event was just created.
+- Resolution: Guarded the strike decrement logic to run only when the current month is strictly greater than the activation month (`month_index > 10`).
+- Prevention: Ensure state decrements or decay steps check that they do not run in the same tick the state is initialized, or guard them with index constraints.
+
+
+## Exhaustive Match Patterns for Domain Model Enums
+
+- Context: Adding new PledgeType variants to support Workforce pledges.
+- Symptom: Rust compilation error (E0004) for non-exhaustive match patterns on PledgeType and CompetitiveCommand.
+- Cause: Adding a new enum variant without updating all matching structures in the codebase (e.g., AI command scoring, serialization helpers, and debrief reports).
+- Prevention: When introducing new command verbs or enum variants, search the workspace for all pattern matches on that type and explicitly update AI, report generation, and formatting match arms.

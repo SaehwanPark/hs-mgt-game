@@ -45,6 +45,7 @@ pub enum RatePosture {
 pub enum PledgeType {
   Access,
   Quality,
+  Workforce,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]

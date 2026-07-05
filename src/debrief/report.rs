@@ -626,6 +626,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
       let pt = match pledge_type {
         PledgeType::Access => "access",
         PledgeType::Quality => "quality",
+        PledgeType::Workforce => "workforce",
       };
       format!("commit pledge_type={} level={}", pt, level)
     }

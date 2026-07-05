@@ -122,7 +122,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
       ("payer", &["carrier_a", "carrier_b", "medicaid"]),
       ("rate_posture", &["aggressive", "neutral", "conservative"]),
     ]),
-    "commit" => Some(&[("pledge_type", &["access", "quality"]), ("level", &[])]),
+    "commit" => Some(&[("pledge_type", &["access", "quality", "workforce"]), ("level", &[])]),
     "project" => Some(&[
       (
         "kind",
