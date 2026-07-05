@@ -6,6 +6,17 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.8.4] - 2026-07-05
+
+### Added
+- Implemented the Cardiology Service Line & Cardiac Cath Lab mechanics.
+- Added Cardiology-specific staffing targets (1 nurse per 3 beds, 1 physician per 8 beds, 1 admin per 12 beds) to transition rules.
+- Implemented hierarchical staffing allocation prioritizing ICU first, Obstetrics second, Med-Surg third, Cardiology fourth, Psychiatric fifth, Clinics sixth, and ED last.
+- Implemented Cardiology ED holding boarding and diversion mechanics under capacity/staffing deficit (incurring `-2` community trust and `-2` quality index penalties).
+- Added `InvestDomain::Cardiology` for direct Cardiology bed investments and `ProjectKind::CardiologyUnit` for 6-month capital projects.
+- Integrated Cardiology capacity and diversion into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+- Created comprehensive unit tests validating Cardiology priority allocation, diversion penalties under deficit, and project resolution.
+
 ## [0.8.3] - 2026-07-05
 
 ### Added

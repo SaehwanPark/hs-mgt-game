@@ -322,6 +322,27 @@ fn apply_command(
             format!("{summary} (psychiatric capacity expansion)"),
           );
         }
+        InvestDomain::Cardiology => {
+          let cardio_delta = amount / 20;
+          let access_delta = amount / 20;
+          let system = &mut world.systems[system_idx];
+          system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
+          system.market_share_index =
+            crate::model::clamp_metric(system.market_share_index + amount / 40);
+          push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::CardiologyCapacity {
+              capacity_delta: cardio_delta,
+              project_draw: None,
+            },
+            format!("{summary} (cardiology capacity expansion)"),
+          );
+        }
       }
       events.push(Event {
         actor: "health_system",
@@ -466,6 +487,10 @@ fn apply_command(
         },
         crate::model::ProjectKind::PsychiatricUnit => PendingEffectKind::PsychiatricCapacity {
           capacity_delta: 5,
+          project_draw: Some(monthly_draw),
+        },
+        crate::model::ProjectKind::CardiologyUnit => PendingEffectKind::CardiologyCapacity {
+          capacity_delta: 4,
           project_draw: Some(monthly_draw),
         },
         crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
@@ -615,17 +640,20 @@ fn apply_staffing_constraints(
       + (system.emergency_capacity + 1) / 2
       + system.icu_capacity
       + (system.obstetrics_capacity + 1) / 2
-      + (system.psychiatric_capacity + 3) / 4;
+      + (system.psychiatric_capacity + 3) / 4
+      + (system.cardiology_capacity + 2) / 3;
     let target_physicians = (system.outpatient_capacity + 9) / 10
       + (system.emergency_capacity + 3) / 4
       + (system.icu_capacity + 1) / 2
       + (system.obstetrics_capacity + 4) / 5
-      + (system.psychiatric_capacity + 9) / 10;
+      + (system.psychiatric_capacity + 9) / 10
+      + (system.cardiology_capacity + 7) / 8;
     let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20
       + (system.emergency_capacity + 9) / 10
       + (system.icu_capacity + 4) / 5
       + (system.obstetrics_capacity + 9) / 10
-      + (system.psychiatric_capacity + 14) / 15;
+      + (system.psychiatric_capacity + 14) / 15
+      + (system.cardiology_capacity + 11) / 12;
 
     let nurse_deficit = (target_nurses - system.nurses).max(0);
     let physician_deficit = (target_physicians - system.physicians).max(0);
@@ -649,7 +677,7 @@ fn apply_staffing_constraints(
       });
     }
 
-    // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Psychiatric fourth, clinics fifth (for physicians), ED last
+    // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Cardiology fourth, Psychiatric fifth, clinics sixth (for physicians), ED last
     let target_nurses_icu = system.icu_capacity;
     let nurses_icu = system.nurses.min(target_nurses_icu);
     let remaining_nurses_obs = (system.nurses - nurses_icu).max(0);
@@ -660,7 +688,11 @@ fn apply_staffing_constraints(
 
     let target_nurses_beds = (system.staffed_beds + 4) / 5;
     let nurses_beds = remaining_nurses_ms.min(target_nurses_beds);
-    let remaining_nurses_psych = (remaining_nurses_ms - nurses_beds).max(0);
+    let remaining_nurses_cardio = (remaining_nurses_ms - nurses_beds).max(0);
+
+    let target_nurses_cardio = (system.cardiology_capacity + 2) / 3;
+    let nurses_cardio = remaining_nurses_cardio.min(target_nurses_cardio);
+    let remaining_nurses_psych = (remaining_nurses_cardio - nurses_cardio).max(0);
 
     let target_nurses_psych = (system.psychiatric_capacity + 3) / 4;
     let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
@@ -675,7 +707,11 @@ fn apply_staffing_constraints(
 
     let target_physicians_obs = (system.obstetrics_capacity + 4) / 5;
     let physicians_obs = remaining_physicians_obs.min(target_physicians_obs);
-    let remaining_physicians_psych = (remaining_physicians_obs - physicians_obs).max(0);
+    let remaining_physicians_cardio = (remaining_physicians_obs - physicians_obs).max(0);
+
+    let target_physicians_cardio = (system.cardiology_capacity + 7) / 8;
+    let physicians_cardio = remaining_physicians_cardio.min(target_physicians_cardio);
+    let remaining_physicians_psych = (remaining_physicians_cardio - physicians_cardio).max(0);
 
     let target_physicians_psych = (system.psychiatric_capacity + 9) / 10;
     let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
@@ -694,6 +730,10 @@ fn apply_staffing_constraints(
       .min(nurses_obs * 2)
       .min(physicians_obs * 5);
     let mut effective_beds = system.staffed_beds.min(nurses_beds * 5);
+    let mut effective_cardio = system
+      .cardiology_capacity
+      .min(nurses_cardio * 3)
+      .min(physicians_cardio * 8);
     let mut effective_psych = system
       .psychiatric_capacity
       .min(nurses_psych * 4)
@@ -713,6 +753,7 @@ fn apply_staffing_constraints(
       effective_icu /= 2;
       effective_obs /= 2;
       effective_psych /= 2;
+      effective_cardio /= 2;
     }
 
     // ED Boarding Calculation.
@@ -730,6 +771,51 @@ fn apply_staffing_constraints(
         description: format!(
           "{}: {} critical care patients boarded in ED due to ICU capacity constraints",
           system.name, boarded_patients
+        ),
+      });
+    }
+
+    // Cardiology ED Boarding & Diversion Calculation.
+    let cardiology_demand = (system.cardiology_capacity + 9) / 10;
+    let cardiology_overflow = (cardiology_demand - effective_cardio).max(0);
+    let boarded_cardio = cardiology_overflow.min(effective_emergency);
+    effective_emergency = (effective_emergency - boarded_cardio).max(0);
+    let diverted_cardio = (cardiology_overflow - boarded_cardio).max(0);
+
+    if boarded_cardio > 0 {
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} cardiology patients boarded in ED due to cardiology bed constraints",
+          system.name, boarded_cardio
+        ),
+      });
+    }
+
+    if diverted_cardio > 0 {
+      let trust_penalty = diverted_cardio * 2;
+      let quality_penalty = diverted_cardio * 2;
+      system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
+      system.quality_index = crate::model::clamp_metric(system.quality_index - quality_penalty);
+
+      push_effect(
+        effects,
+        "cardiology diversion",
+        "community_trust",
+        -trust_penalty,
+      );
+      push_effect(
+        effects,
+        "cardiology diversion",
+        "quality_index",
+        -quality_penalty,
+      );
+
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} cardiology patients diverted due to lack of ED holding capacity",
+          system.name, diverted_cardio
         ),
       });
     }
@@ -816,13 +902,15 @@ fn apply_staffing_constraints(
       + system.emergency_capacity
       + system.icu_capacity
       + system.obstetrics_capacity
-      + system.psychiatric_capacity;
+      + system.psychiatric_capacity
+      + system.cardiology_capacity;
     let total_effective = effective_beds
       + effective_outpatient
       + effective_emergency
       + effective_icu
       + effective_obs
-      + effective_psych;
+      + effective_psych
+      + effective_cardio;
 
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
@@ -1720,6 +1808,144 @@ mod transition_competitive_tests {
       events_div
         .iter()
         .any(|e| e.description.contains("psychiatric patients diverted"))
+    );
+  }
+
+  #[test]
+  fn test_cardiology_department_mechanics() {
+    let world = genesis_competitive_world(Difficulty::Normal);
+    let ruleset = default_competitive_ruleset();
+
+    // 1. Initially cardiology_capacity is 0
+    assert_eq!(world.systems[0].cardiology_capacity, 0);
+
+    // 2. Invest in Cardiology capacity: domain=cardiology, amount=20 (yields +1 beds next month)
+    let batches = vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![CompetitiveCommand::Invest {
+          domain: InvestDomain::Cardiology,
+          amount: 20,
+        }],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+    ];
+
+    let aggregated = resolve_monthly_batches(&world, &batches, &ruleset).expect("resolve");
+    let transition = transition_competitive(&world, aggregated, &ruleset).expect("transition");
+
+    // After transition, capacity has not resolved yet
+    assert_eq!(transition.next.systems[0].cardiology_capacity, 0);
+    assert_eq!(transition.next.systems[0].access_index, 69); // 68 + 1
+
+    // 3. Tick Month 2 to resolve the pending CardiologyCapacity effect
+    let mut next_world = transition.next.clone();
+    let inputs = crate::inputs::resolve_competitive_inputs(42, 2, false);
+    let mut events = Vec::new();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut next_world,
+      &inputs,
+      &mut events,
+    );
+
+    // Now Cardiology capacity increases by 20 / 20 = 1.
+    assert_eq!(next_world.systems[0].cardiology_capacity, 1);
+
+    // 4. Staffing target increases:
+    // target_nurses: 118/5 (24) + (1 + 2)/3 (1) = 25 nurses
+    // target_physicians: 100/10 (10) + (1 + 7)/8 (1) = 11 physicians
+    // target_admins: (118 + 100 + 19)/20 (11) + (1 + 11)/12 (1) = 12 admins
+    // Riverside starts with 24 nurses, 10 physicians, 11 admins.
+    // Deficit: 1 nurse, 1 physician, 1 admin.
+    let mut events_staffing = Vec::new();
+    let mut effects_staffing = Vec::new();
+    apply_staffing_constraints(
+      &mut next_world,
+      &ruleset,
+      &mut events_staffing,
+      &mut effects_staffing,
+    );
+
+    // Workforce trust drops by 3
+    assert_eq!(next_world.systems[0].workforce_trust, 60 - 3);
+
+    // 5. Test boarding in ED
+    let mut scarce_world = transition.next.clone();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut scarce_world,
+      &inputs,
+      &mut events,
+    );
+    // Trigger RNA strike to halve effective capacities (effective cardiology capacity becomes 0)
+    scarce_world.scenario_id = "exemplary-competitive-v1".to_string();
+    scarce_world
+      .event_metadata
+      .insert("rna_strike_active".to_string(), "true".to_string());
+    // Give enough staff to fully staff Beds, Cardiology, and ED (so emergency capacity is > 0)
+    // Reduce staffed_beds to 0 to prevent ICU boarding from crowding out the ED
+    scarce_world.systems[0].staffed_beds = 0;
+    scarce_world.systems[0].nurses = 35;
+    scarce_world.systems[0].physicians = 15;
+    scarce_world.systems[0].emergency_capacity = 10;
+
+    let mut events_board = Vec::new();
+    let mut effects_board = Vec::new();
+    apply_staffing_constraints(
+      &mut scarce_world,
+      &ruleset,
+      &mut events_board,
+      &mut effects_board,
+    );
+
+    // Effective cardio is halved by strike to 0.
+    // Demand is (1 + 9)/10 = 1. Overflow is 1 patient.
+    // Since ED is staffed, effective emergency is 10 / 2 = 5, so patient boards in the ED.
+    assert!(
+      events_board
+        .iter()
+        .any(|e| e.description.contains("cardiology patients boarded in ED"))
+    );
+    assert_eq!(scarce_world.systems[0].community_trust, 64); // no diversion
+
+    // 6. Test diversion when ED is full / has 0 capacity (by setting nurses to 0)
+    let mut full_ed_world = transition.next.clone();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut full_ed_world,
+      &inputs,
+      &mut events,
+    );
+    full_ed_world.systems[0].staffed_beds = 0;
+    full_ed_world.systems[0].nurses = 0; // makes effective cardiology capacity 0
+    full_ed_world.systems[0].physicians = 12; // staffs outpatient fully to avoid understaffing penalty
+    full_ed_world.systems[0].emergency_capacity = 0; // ED cannot hold anyone
+
+    let mut events_div = Vec::new();
+    let mut effects_div = Vec::new();
+    apply_staffing_constraints(
+      &mut full_ed_world,
+      &ruleset,
+      &mut events_div,
+      &mut effects_div,
+    );
+
+    // Diverted is 1 patient.
+    // Penalty is -2 community trust and -2 quality index.
+    assert_eq!(full_ed_world.systems[0].community_trust, 64 - 2);
+    assert_eq!(full_ed_world.systems[0].quality_index, 72 - 2);
+    assert!(
+      events_div
+        .iter()
+        .any(|e| e.description.contains("cardiology patients diverted"))
     );
   }
 }

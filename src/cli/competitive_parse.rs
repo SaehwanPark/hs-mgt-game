@@ -16,7 +16,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "invest",
-    usage: "invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric amount=<int>",
+    usage: "invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology amount=<int>",
   },
   CompetitiveCommandSpec {
     verb: "recruit",
@@ -36,7 +36,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "project",
-    usage: "project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit budget=<int>",
+    usage: "project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit budget=<int>",
   },
 ];
 
@@ -184,6 +184,7 @@ fn parse_invest_domain(value: &str) -> Result<InvestDomain, CliError> {
     "icu" => Ok(InvestDomain::Icu),
     "obstetrics" | "obs" => Ok(InvestDomain::Obstetrics),
     "psychiatric" | "psych" => Ok(InvestDomain::Psychiatric),
+    "cardiology" | "cardio" => Ok(InvestDomain::Cardiology),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown invest domain '{value}'"
     ))),
@@ -246,6 +247,7 @@ fn parse_project_kind(value: &str) -> Result<ProjectKind, CliError> {
     "icu_wing" => Ok(ProjectKind::IcuWing),
     "obstetrics_unit" | "obs_unit" => Ok(ProjectKind::ObstetricsUnit),
     "psychiatric_unit" | "psych_unit" => Ok(ProjectKind::PsychiatricUnit),
+    "cardiology_unit" | "cardio_unit" => Ok(ProjectKind::CardiologyUnit),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown project kind '{value}'"
     ))),

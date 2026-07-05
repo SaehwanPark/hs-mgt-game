@@ -111,6 +111,7 @@ pub fn apply_month_start_tick(
             | PendingEffectKind::IcuCapacity { .. }
             | PendingEffectKind::ObstetricsCapacity { .. }
             | PendingEffectKind::PsychiatricCapacity { .. }
+            | PendingEffectKind::CardiologyCapacity { .. }
             | PendingEffectKind::TechnologyQuality { .. } => {
               effect.resolve_month += 1;
             }
@@ -436,6 +437,25 @@ fn apply_pending_effect(
         actor: "health_system",
         description: format!(
           "{}: capital project expands Psychiatric capacity (+{capacity_delta} beds)",
+          system.name
+        ),
+      });
+    }
+    PendingEffectKind::CardiologyCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
+      let system = &mut world.systems[system_idx];
+      system.cardiology_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "{}: capital project expands Cardiology capacity (+{capacity_delta} beds)",
           system.name
         ),
       });

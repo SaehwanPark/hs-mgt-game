@@ -55,6 +55,7 @@ pub fn observe_for_human(
     icu_capacity: human.icu_capacity,
     obstetrics_capacity: human.obstetrics_capacity,
     psychiatric_capacity: human.psychiatric_capacity,
+    cardiology_capacity: human.cardiology_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,
@@ -242,6 +243,16 @@ pub fn in_flight_projects_label(world: &CompetitiveWorldState, human_id: u32) ->
           let remaining = effect.resolve_month.saturating_sub(observation_month);
           projects.push(format!(
             "PsychiatricUnit ({} mos left, ${}k/mo draw)",
+            remaining, draw
+          ));
+        }
+        crate::model::PendingEffectKind::CardiologyCapacity {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          projects.push(format!(
+            "CardiologyUnit ({} mos left, ${}k/mo draw)",
             remaining, draw
           ));
         }
