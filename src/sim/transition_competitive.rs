@@ -1078,7 +1078,7 @@ mod transition_competitive_tests {
 
   #[test]
   fn test_emergency_department_mechanics() {
-    let mut world = genesis_competitive_world(Difficulty::Normal);
+    let world = genesis_competitive_world(Difficulty::Normal);
     let ruleset = default_competitive_ruleset();
 
     // 1. Initially emergency_capacity is 0
