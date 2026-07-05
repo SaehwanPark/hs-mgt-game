@@ -100,6 +100,7 @@ pub enum CompetitiveValidationError {
   BatchCountMismatch { expected: u32, provided: u32 },
   MonthIndexMismatch { expected: u32, provided: u32 },
   InvalidMedicaidPosture,
+  InvalidMedicarePosture,
 }
 
 impl CompetitiveValidationError {
@@ -176,6 +177,9 @@ impl CompetitiveValidationError {
       }
       CompetitiveValidationError::InvalidMedicaidPosture => {
         "Medicaid negotiations only support neutral posture".to_string()
+      }
+      CompetitiveValidationError::InvalidMedicarePosture => {
+        "Medicare negotiations only support neutral posture".to_string()
       }
     }
   }

@@ -90,6 +90,8 @@ reconstructing it from the diff.
 | MCP Custom Scenario Loading | v0.5.4 | Implement custom scenario path loading in the MCP start_session tool with validation and tests | 255 | `e73a38b3951cd8b6` (competitive) |
 | Medicaid Public Payer Integration | v0.5.5 | Add Medicaid public payer, posture validation, resource costing, and access compliance effects | 261 | `e73a38b3951cd8b6` (competitive) |
 | Competitive Exemplary Scenario | v0.5.6 | Add competitive-exemplary-v1 scenario, workforce wage settlements, nurse strike, CON legal challenge, and Blue Shield/EHR consequences | 260 | `e73a38b3951cd8b6` (competitive) |
+| Medicare Public Payer Integration Plan | v0.5.7 | Design Medicare public payer quality-compliance integration plan | 260 | `e73a38b3951cd8b6` (competitive) |
+| Medicare Public Payer Integration | v0.5.8 | Implement Medicare public payer quality compliance, validation, CLI REPL autocompletes, topic help, and unit tests | 270 | `e73a38b3951cd8b6` (competitive) |
 
 
 - Feature: Competitive Exemplary Scenario
@@ -431,25 +433,23 @@ reconstructing it from the diff.
 
 ## Present
 
-- Feature: Medicare Public Payer Integration Plan
-  Status: In Progress
+- Feature: Medicare Public Payer Integration
+  Status: Complete
   Started: 2026-07-05
-  Version: 0.5.6 (Plan Designed)
+  Version: 0.5.8
 
   Summary:
-  Design a plan to implement Medicare public payer quality-compliance integration, modeling quality improvements and policy pressure reduction with a neutral posture and compliance costs.
+  Implement Medicare public payer quality-compliance integration in the competitive regional campaign loop, modeling quality improvements (+3 quality) and policy pressure reduction (-3 policy pressure) with neutral posture and $10 compliance costs.
 
   Done:
   - Designed the comprehensive Medicare integration plan (evidence mapping, mechanism design, and domain QA review).
-  - Created working branch `feat/medicare-payer-plan` containing the request summary, evidence map, and mechanism design.
-
-  Not Yet Done:
-  - Add `Medicare` variant to `PayerId` in `src/model/competitive_command.rs` and update `resource_costs` ($10 cash).
-  - Update `parse_payer_id` in `src/cli/competitive_parse.rs` and CLI autocompletion/guidance helpers.
-  - Implement `InvalidMedicarePosture` validation check in `src/sim/validate_competitive.rs`.
-  - Implement quality compliance effects (+3 quality, -3 policy pressure) in `src/sim/transition_competitive.rs`.
-  - Add focused unit tests for Medicare validation and transition outcomes in `validate_competitive_tests.rs` and `transition_competitive.rs`.
-  - Bump crate version to `0.5.7` and document changes in `CHANGELOG.md` and `Cargo.toml`.
+  - Added `Medicare` variant to `PayerId` in `src/model/competitive_command.rs` and updated `resource_costs` ($10 cash).
+  - Updated `parse_payer` in `src/cli/competitive_parse.rs` and CLI autocompletion/guidance helpers.
+  - Implemented `InvalidMedicarePosture` validation check in `src/sim/validate_competitive.rs`.
+  - Implemented quality compliance effects (+3 quality, -3 policy pressure) in `src/sim/transition_competitive.rs`.
+  - Added focused unit tests for Medicare validation and transition outcomes in `validate_competitive_tests.rs` and `transition_competitive.rs`.
+  - Bumped crate version to `0.5.8` and documented changes in `CHANGELOG.md` and `Cargo.toml`.
+  - Switched working branch to `feat/medicare-payer-implementation`.
 
   Deferred / Non-Goals:
   - No Medicare patient cohort tracking or FFS DRG-based billing rules.

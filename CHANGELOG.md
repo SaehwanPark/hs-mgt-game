@@ -6,6 +6,22 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.5.8] - 2026-07-05
+
+### Added
+- Implemented Medicare public payer integration in the competitive regional campaign loop.
+- Added `PayerId::Medicare` variant supporting quality compliance alignment with neutral posture and $10 compliance cost.
+- Implemented state transition effects for Medicare compliance (+3 quality index, -3 state policy pressure).
+- Enforced neutral-posture-only validation checks and resource costing checks for Medicare negotiations.
+- Excluded Medicare negotiations from commercial payer pressure calculations.
+- Added CLI parsing, REPL autocomplete, brief and detailed guidance help support for Medicare.
+- Added focused unit tests verifying Medicare validation checks and transition outcomes.
+
+## [0.5.7] - 2026-07-05
+
+### Added
+- Designed the Medicare Public Payer integration plan and recorded design maps, evidence registers, and QA specifications in `_workspace/`.
+
 ## [0.5.6] - 2026-07-04
 
 ### Added

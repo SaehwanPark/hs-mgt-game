@@ -80,6 +80,11 @@ pub fn validate_competitive_command(
       {
         return Err(CompetitiveValidationError::InvalidMedicaidPosture);
       }
+      if matches!(payer, crate::model::PayerId::Medicare)
+        && !matches!(rate_posture, crate::model::RatePosture::Neutral)
+      {
+        return Err(CompetitiveValidationError::InvalidMedicarePosture);
+      }
       Ok(())
     }
   }

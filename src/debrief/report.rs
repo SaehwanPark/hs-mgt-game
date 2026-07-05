@@ -614,6 +614,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
         PayerId::CarrierA => "carrier_a",
         PayerId::CarrierB => "carrier_b",
         PayerId::Medicaid => "medicaid",
+        PayerId::Medicare => "medicare",
       };
       let rp = match rate_posture {
         RatePosture::Aggressive => "aggressive",
