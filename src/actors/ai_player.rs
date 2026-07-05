@@ -136,9 +136,11 @@ fn generate_candidates(
   }
 
   // Generate recruitment candidates for understaffed roles
-  let target_nurses = (observation.staffed_beds + 4) / 5;
-  let target_physicians = (observation.outpatient_capacity + 9) / 10;
-  let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20;
+  let target_nurses = (observation.staffed_beds + 4) / 5 + (observation.emergency_capacity + 1) / 2;
+  let target_physicians =
+    (observation.outpatient_capacity + 9) / 10 + (observation.emergency_capacity + 3) / 4;
+  let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20
+    + (observation.emergency_capacity + 9) / 10;
 
   if observation.nurses < target_nurses {
     let diff = (target_nurses - observation.nurses) as u32;
@@ -217,6 +219,22 @@ fn best_response_commands(action: &LaggedRivalAction) -> Vec<CompetitiveCommand>
       },
     ];
   }
+  if summary.contains("investing") && summary.contains("emergency") {
+    return vec![
+      CompetitiveCommand::Invest {
+        domain: InvestDomain::Emergency,
+        amount: 30,
+      },
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Nurse,
+        headcount: 2,
+      },
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Physician,
+        headcount: 1,
+      },
+    ];
+  }
   if summary.contains("pledge") && summary.contains("access") {
     return vec![
       CompetitiveCommand::Commit {
@@ -272,6 +290,10 @@ fn score_command(
     }
     CompetitiveCommand::Invest {
       domain: InvestDomain::Outpatient,
+      ..
+    } => (style.growth + style.access * 2) as i32,
+    CompetitiveCommand::Invest {
+      domain: InvestDomain::Emergency,
       ..
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {

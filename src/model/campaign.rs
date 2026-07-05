@@ -46,6 +46,7 @@ pub struct PlayerObservation {
   pub community_trust_summary: String,
   pub staffed_beds: i32,
   pub outpatient_capacity: i32,
+  pub emergency_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,

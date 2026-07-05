@@ -6,6 +6,17 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-07-05
+
+### Added
+- Implemented the Emergency Department (ED) Service Line with capacity-staffing trade-offs.
+- Extended state structures to include `emergency_capacity` defaulting to 0 for scenario/genesis backward compatibility.
+- Added ED-specific staffing targets (1 nurse per 2 bays, 1 physician per 4 bays, 1 admin per 10 bays) to transition rules.
+- Implemented hierarchical staffing allocation where nurses and physicians are assigned to med-surg beds first, clinics second, and ED third.
+- Added `InvestDomain::Emergency` for immediate investments and `ProjectKind::EmergencyPavilion` for 6-month capital projects.
+- Integrated ED capacity and projects into observation mapping, REPL display, parser, autocompletion lists, help guidance pages, and state record hashes.
+- Created comprehensive test coverage verifying transition outcomes and staffing constraint details.
+
 ## [0.5.9] - 2026-07-05
 
 ### Added

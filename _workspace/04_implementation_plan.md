@@ -1,65 +1,89 @@
-# Coding Implementation Plan - Active Projects Detailed Observation
+# Implementation Plan - Emergency Department Service Line
 
-## Task restatement
-Enhance the competitive campaign dashboard's `In-flight` project display by formatting detailed active project states (kind, remaining months, and monthly cash draw) instead of a simple count.
+## 1. Domain Struct Changes
+- `src/model/competitive_world.rs`:
+  - Add `pub emergency_capacity: i32` to `HealthSystemState`.
+  - Add `EmergencyCapacity { capacity_delta: i32, project_draw: Option<i32> }` to `PendingEffectKind`.
+- `src/model/campaign.rs`:
+  - Add `pub emergency_capacity: i32` to `PlayerObservation`.
+- `src/sim/observe_ai.rs`:
+  - Add `pub emergency_capacity: i32` to `AiPlayerObservation`.
 
-## Current understanding
-- `PlayerObservation::in_flight_projects` is a string currently populated by calling `in_flight_projects_label(human.resources.active_projects)` in `src/sim/observe_competitive.rs`.
-- `in_flight_projects_label` currently just takes a count `active_projects` and formats it as `"none"` or `"{active_projects} active project(s)"`.
-- The actual list of active projects is contained in `world.effect_queue` (where `effect.system_id == human.system_id` and the effect has a `project_draw` value).
-- `PendingEffectKind` variants (`BedsCapacity`, `OutpatientCapacity`, `TechnologyQuality`) store the `project_draw` as `Option<i32>`.
+## 2. Command Vocabulary Expansion
+- `src/model/competitive_command.rs`:
+  - Add `Emergency` to `InvestDomain` enum.
+  - Add `EmergencyPavilion` to `ProjectKind` enum.
+  - Update `ProjectKind::resolve_months` to return `6` for `EmergencyPavilion`.
+  - Update `is_public_command` in `src/sim/transition_competitive.rs` and `command_intel_summary` to support `Emergency` and `EmergencyPavilion`.
+  - Update `ActionCost` mapping in `CompetitiveCommand::action_cost`:
+    - For `ProjectKind::EmergencyPavilion`, AP cost is 2, monthly draw is `budget / 6`.
 
-## Assumptions
-- `project_draw` values are only `Some(draw)` for actual active projects started via the `project` command.
-- The state values in `human.resources.active_projects` and `human.resources.active_project_monthly_draws` remain correct and do not need to change.
-- Replay/save compatibility is not broken since the observation struct's fields do not change types (only `in_flight_projects` string content is enriched).
+## 3. Transition Kernel updates
+- `src/sim/effects_competitive.rs`:
+  - Handle `PendingEffectKind::EmergencyCapacity` resolution inside `resolve_pending_effects` by incrementing `system.emergency_capacity` and adjusting active projects/draws.
+- `src/sim/transition_competitive.rs`:
+  - Update `apply_command` for `InvestDomain::Emergency`:
+    - `let emergency_delta = amount / 15;`
+    - `let access_delta = amount / 15;`
+    - Immediate `access_index` increment of `access_delta` and `market_share_index` increment of `amount / 30`.
+    - Enqueue `PendingEffectKind::EmergencyCapacity { capacity_delta: emergency_delta, project_draw: None }`.
+  - Update `apply_command` for `ProjectKind::EmergencyPavilion`:
+    - Enqueue `PendingEffectKind::EmergencyCapacity { capacity_delta: 15, project_draw: Some(monthly_draw) }`.
+  - Refactor `apply_staffing_constraints`:
+    - Compute targets:
+      - `target_nurses = (system.staffed_beds + 4) / 5 + (system.emergency_capacity + 1) / 2;`
+      - `target_physicians = (system.outpatient_capacity + 9) / 10 + (system.emergency_capacity + 3) / 4;`
+      - `target_admins = (system.staffed_beds + system.outpatient_capacity + system.emergency_capacity + 19) / 20;`
+    - Calculate effective capacities:
+      - Allocate nurses to beds first: `nurses_for_beds = system.nurses.min((system.staffed_beds + 4) / 5)`.
+      - Allocate remaining nurses to emergency: `nurses_for_ed = (system.nurses - nurses_for_beds).max(0)`.
+      - Allocate physicians to outpatient first: `physicians_for_outpatient = system.physicians.min((system.outpatient_capacity + 9) / 10)`.
+      - Allocate remaining physicians to emergency: `physicians_for_ed = (system.physicians - physicians_for_outpatient).max(0)`.
+      - `effective_beds = system.staffed_beds.min(nurses_for_beds * 5);`
+      - `effective_outpatient = system.outpatient_capacity.min(physicians_for_outpatient * 10);`
+      - `effective_emergency = system.emergency_capacity.min(nurses_for_ed * 2).min(physicians_for_ed * 4);`
+    - Update `total_physical = system.staffed_beds + system.outpatient_capacity + system.emergency_capacity;`
+    - Update `total_effective = effective_beds + effective_outpatient + effective_emergency;`
+    - Compute `penalty` and apply to access/quality.
 
-## Minimal implementation plan
-1. **Refactor `in_flight_projects_label`:**
-   - Change signature in `src/sim/observe_competitive.rs` to take `world: &CompetitiveWorldState` and `human_id: u32`.
-   - Scan `world.effect_queue`.
-   - Filter effects where `effect.system_id == human_id` and `effect.kind` is a project.
-   - Map them to project details:
-     - `PendingEffectKind::BedsCapacity { project_draw: Some(draw), .. }` -> `"Tower"`
-     - `PendingEffectKind::OutpatientCapacity { project_draw: Some(draw), .. }` -> `"ClinicNetwork"`
-     - `PendingEffectKind::TechnologyQuality { project_draw: Some(draw), .. }` -> if `effect.summary.contains("EhrCerner")` { `"EhrCerner"` } else { `"EhrEpic"` }
-     - Calculate remaining months: `effect.resolve_month.saturating_sub(world.policy_calendar.month_index)`.
-     - Format: `"{label} ({remaining} mos left, ${draw}k/mo draw)"`.
-   - Join with `", "`. If none, return `"none"`.
-2. **Update observation call:**
-   - Update `in_flight_projects` population in `observe_for_human`:
-     ```rust
-     in_flight_projects: in_flight_projects_label(world, human.system_id),
-     ```
-3. **Verify & Test:**
-   - Add a unit test in `src/sim/observe_competitive.rs` verifying observation formatting with one or two active projects in `effect_queue`.
-   - Run `cargo test` to ensure all tests pass.
-   - Update version to `0.5.9` in `Cargo.toml`.
-   - Document changes in `CHANGELOG.md` and `SPEC.md`.
+## 4. State Hash & Display Alignment
+- `src/model/competitive_hash.rs`:
+  - Add `|emergency={}` to system formatting block in `competitive_state_hash_record` and format `system.emergency_capacity`.
+- `src/sim/observe_competitive.rs`:
+  - Populate `emergency_capacity` in `PlayerObservation`.
+  - Update `in_flight_projects_label` to recognize `PendingEffectKind::EmergencyCapacity` and format as `EmergencyPavilion`.
+- `src/sim/observe_ai.rs`:
+  - Populate `emergency_capacity` in `AiPlayerObservation`.
+- `src/cli/display/executive_report.rs`:
+  - Calculate `eff_emergency` and display:
+    `  • Emergency capacity: {} bays (effective: {})`
 
-## Files and functions likely to change
-- `src/sim/observe_competitive.rs`: `in_flight_projects_label`, `observe_for_human`, and unit tests.
-- `Cargo.toml`: version bump.
-- `CHANGELOG.md`: Record new version and additions.
-- `SPEC.md`: Move feature track to Done / Present.
+## 5. Parser, Auto-complete, and Help Topic Updates
+- `src/cli/competitive_parse.rs`:
+  - Update `InvestDomain` parsing to recognize `"emergency"`.
+  - Update `ProjectKind` parsing to recognize `"emergency_pavilion"`.
+- `src/cli/guidance.rs` & `src/cli/repl.rs`:
+  - Add autocomplete options for `"emergency"` domain and `"emergency_pavilion"` project kind.
+  - Document the new investment domain and project kind in command topic help guides.
 
-## Tests and checks
-- `cargo test` (ensuring 260+ tests pass successfully).
+## 6. Scenario System Compatibility
+- `src/scenario/mod.rs`:
+  - Add `pub emergency_capacity: Option<i32>` to `ScenarioSystemState`.
+  - Default it during mapping to `HealthSystemState`:
+    - system_id 0 => 15
+    - system_id 1 => 20
+    - system_id 2 => 10
+    - system_id 3 => 8
+    - system_id 4 => 25
+    - default => 15
+- `src/competitive/genesis.rs`:
+  - Add `emergency_capacity` to `RivalTemplate` and initialize all presets.
+  - Update `genesis_roster_lines` to print emergency bays.
 
-## Acceptance criteria
-- Starting a project shows its name, remaining duration, and monthly draw on the turn dashboard.
-- Multiple active projects are listed simultaneously.
-- Completed projects disappear.
-- All tests pass cleanly.
-
-## Non-goals
-- No changes to stabilization campaign loop rules.
-- No changes to competitive transition engine rules.
-
-## Stop conditions
-- Stop and review if any core state serialization schema must change.
-
-## Review checklist
-- Only requested changes are implemented.
-- Covered by unit tests.
-- Version bumped by 0.0.1.
+## 7. AI Decision Support
+- `src/actors/ai_player.rs`:
+  - Update targets in `generate_candidates`:
+    - `target_nurses = (observation.staffed_beds + 4) / 5 + (observation.emergency_capacity + 1) / 2;`
+    - `target_physicians = (observation.outpatient_capacity + 9) / 10 + (observation.emergency_capacity + 3) / 4;`
+    - `target_admins = (observation.staffed_beds + observation.outpatient_capacity + observation.emergency_capacity + 19) / 20;`
+  - Update `best_response_commands` to handle `emergency` investment responses.

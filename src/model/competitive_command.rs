@@ -17,6 +17,7 @@ pub enum InvestDomain {
   Beds,
   Outpatient,
   Technology,
+  Emergency,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -55,6 +56,7 @@ pub enum ProjectKind {
   EhrCerner,
   Tower,
   ClinicNetwork,
+  EmergencyPavilion,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -102,6 +104,7 @@ impl ProjectKind {
       ProjectKind::EhrEpic | ProjectKind::EhrCerner => 12,
       ProjectKind::Tower => 12,
       ProjectKind::ClinicNetwork => 9,
+      ProjectKind::EmergencyPavilion => 6,
     }
   }
 }

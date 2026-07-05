@@ -56,6 +56,7 @@ pub fn apply_month_start_tick(
           match effect.kind {
             PendingEffectKind::BedsCapacity { .. }
             | PendingEffectKind::OutpatientCapacity { .. }
+            | PendingEffectKind::EmergencyCapacity { .. }
             | PendingEffectKind::TechnologyQuality { .. } => {
               effect.resolve_month += 1;
             }
@@ -110,7 +111,8 @@ pub fn apply_month_start_tick(
         });
 
         // Check staffing ratio < 80%
-        let target_nurses = (riverside.staffed_beds + 4) / 5;
+        let target_nurses =
+          (riverside.staffed_beds + 4) / 5 + (riverside.emergency_capacity + 1) / 2;
         let staffing_ratio = if target_nurses > 0 {
           riverside.nurses as f32 / target_nurses as f32
         } else {
@@ -298,6 +300,25 @@ fn apply_pending_effect(
         actor: "health_system",
         description: format!(
           "{}: capital project expands bed capacity (+{capacity_delta} staffed beds)",
+          system.name
+        ),
+      });
+    }
+    PendingEffectKind::EmergencyCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
+      let system = &mut world.systems[system_idx];
+      system.emergency_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "{}: capital project expands emergency capacity (+{capacity_delta} bays)",
           system.name
         ),
       });

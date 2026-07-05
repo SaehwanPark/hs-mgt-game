@@ -107,7 +107,7 @@ fn read_line_from_stdin() -> Result<String, CliError> {
 fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'static str])]> {
   match verb {
     "invest" => Some(&[
-      ("domain", &["beds", "outpatient", "technology"]),
+      ("domain", &["beds", "outpatient", "technology", "emergency"]),
       ("amount", &[]),
     ]),
     "recruit" => Some(&[
@@ -129,7 +129,13 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
     "project" => Some(&[
       (
         "kind",
-        &["ehr_epic", "ehr_cerner", "tower", "clinic_network"],
+        &[
+          "ehr_epic",
+          "ehr_cerner",
+          "tower",
+          "clinic_network",
+          "emergency_pavilion",
+        ],
       ),
       ("budget", &[]),
     ]),
@@ -280,7 +286,8 @@ mod tests {
       vec![
         "beds".to_string(),
         "outpatient".to_string(),
-        "technology".to_string()
+        "technology".to_string(),
+        "emergency".to_string()
       ]
     );
   }

@@ -1,23 +1,23 @@
-# Evidence Map - Medicare Public Payer Integration
+# Evidence Map - Emergency Department Service Line
 
-## Domain Context & Precedents
-- **Source:** MedPAC March 2025 Report to Congress, CMS Hospital Value-Based Purchasing (VBP) Program.
-- **Mechanism:** Medicare payments are largely non-negotiable administered rates, but hospitals must comply with extensive quality reporting and value-based metrics (e.g., readmission rates, clinical outcomes, patient safety).
-- **Lobbying and Compliance Costs:** Maintaining Medicare compliance requires dedicated quality registry reporting, clinical documentation improvement (CDI) programs, and administrative overhead. This translates to higher cash costs than Medicaid ($10k vs $5k) due to federal reporting requirements.
-- **Strategic Impact:** Successful compliance increases reported clinical quality ratings (VBP incentives/Star Ratings) and reduces regulatory policy pressure.
+## Assumptions
+- **ED Staffing Intensity:** Emergency Departments operate 24/7 and have much higher staffing intensity compared to inpatient med-surg units and outpatient clinics. Standard literature indicates ED nurse-to-patient ratios are typically 1:2 to 1:3 for acute patients, and physician coverage is constant.
+- **Resource Constraints:** In our strategy game model, this translates to:
+  - 1 Nurse per 2 ED capacity units (compared to 1 Nurse per 5 Med-Surg beds).
+  - 1 Physician per 4 ED capacity units (compared to 1 Physician per 10 Outpatient units).
+  - 1 Admin per 10 ED capacity units (compared to 1 Admin per 20 total beds + outpatient capacity).
+- **Service Integration:** ED serves as the entry point for the hospital, making it highly visible and critical for public access and overall quality index metrics. Understaffing or overcrowding (deficit in effective ED capacity) directly penalizes both access and quality indices.
 
-## Causal Mapping
-```
-Player Action: Negotiate (payer=medicare, posture=neutral)
-  -> Costs: 1 AP, 2 PC, $10 Cash
-  -> Results:
-       - Direct increase in Quality Index (+3 quality_index)
-       - Direct decrease in Policy Pressure (-3 policy_pressure)
-       - No change to Commercial Payer Pressure (isolated from Carrier A/B)
-       - No direct change to Market Share (compliance-focused, not market-poaching)
-```
+## Precedents
+- Med-Surg beds: 1 Nurse per 5 beds.
+- Outpatient capacity: 1 Physician per 10 capacity.
+- Admins: 1 Admin per 20 total capacity.
+- Nurse strike effects: emergency travel nurse costs ($30k/mo) and half capacity.
+- Medicaid negotiation: neutral posture only.
 
-## Abstractions and Assumptions
-1. **Administered Rates:** Medicare does not allow rate negotiations. Posture is restricted to `neutral` only (representing compliance alignment).
-2. **Quality Focus:** Unlike Medicaid compliance which improves geographical access index (safety net/Medicaid access), Medicare compliance rewards the system's clinical quality index (representing federal value-based care performance).
-3. **Overhead Cost:** The $10 cash cost represents administrative compliance overhead, which is double the Medicaid compliance cost ($5) to reflect federal regulatory reporting density.
+## Evidence Quality
+- **High:** Staffing shortages are the primary driver of ED diversion, boarding, and patient dissatisfaction.
+- **Medium:** The specific numerical targets (1:2 nurse, 1:4 physician) are stylized abstractions to ensure gameplay balance and decision-making tension rather than exact empirical translations.
+
+## Uncertainty
+- The impact of ED capacity on commercial payer negotiations is modeled as indirect via quality index updates, rather than as a separate negotiating track, keeping the payer ontology compact.

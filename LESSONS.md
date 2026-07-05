@@ -4,6 +4,14 @@ Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 
+## Default Capacities in Backward-Compatible Scenarios to Avoid Staffing Deficits
+
+- Context: Adding the Emergency Department (ED) service line with staffing targets to existing scenario models.
+- Symptom: Adding default non-zero `emergency_capacity` at genesis/scenario mapping induced turn-1 staffing deficits and access/quality penalties for existing scenarios because start-of-month systems lacked the nurses and physicians to staff the new ED bays.
+- Cause: Scenario structures (e.g. `ScenarioSystemState`) mapped and parsed TOML objects. When defaults are hardcoded to positive values for new fields, they apply immediately to old test files/fixtures, altering their operational assumptions and failing regression tests.
+- Prevention: Always set new capacity or service-line default parameters to `0` unless scenario-specific data exists. This allows systems to begin without initial staffing deficits, preserving legacy test runs while allowing players to expand into the new service lines in subsequent turns.
+
+
 ## Keep Scenario Briefs Parameter-Complete to Avoid Downstream Gaps
 
 - Context: Drafting the `competitive-exemplary-v1` scenario brief under Track 2.

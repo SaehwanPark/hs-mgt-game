@@ -93,6 +93,31 @@ reconstructing it from the diff.
 | Medicare Public Payer Integration Plan | v0.5.7 | Design Medicare public payer quality-compliance integration plan | 260 | `e73a38b3951cd8b6` (competitive) |
 | Medicare Public Payer Integration | v0.5.8 | Implement Medicare public payer quality compliance, validation, CLI REPL autocompletes, topic help, and unit tests | 270 | `e73a38b3951cd8b6` (competitive) |
 | Active Projects Display Hardening | v0.5.9 | Harden competitive campaign CLI dashboard by detailing in-flight projects, durations, and monthly cash draws | 271 | `e73a38b3951cd8b6` (competitive) |
+| Emergency Department Service Line | v0.6.0 | Add Emergency Department service line with capacity-staffing trade-offs, hierarchical staffing, and new command verbs | 272 | `0930e2bf6890aaba` (competitive) |
+
+
+- Feature: Emergency Department Service Line
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.6.0
+
+  Summary:
+  Implemented the Emergency Department (ED) Service Line with capacity-staffing targets, hierarchical staffing constraints, immediate investments, capital pavilion projects, and full REPL integration.
+
+  Done:
+  - Added `emergency_capacity` tracking to health system state (defaults to 0 for backward-compatible scenario/genesis preservation).
+  - Extended command vocabulary with `InvestDomain::Emergency` and `ProjectKind::EmergencyPavilion` (6-month capital duration).
+  - Implemented staffing targets (1 nurse per 2 bays, 1 physician per 4 bays, 1 admin per 10 bays).
+  - Implemented hierarchical staffing allocation prioritizing Med-Surg beds first, Outpatient clinics second, and Emergency third.
+  - Formatted ED capacities and projects in human observations, REPL autocompletes, guidance help topics, and state record hashes.
+  - Added focused unit tests and verified all regression tests pass.
+
+  Deferred / Non-Goals:
+  - No changes to stabilization campaign loop rules.
+  - No ambulance diversion mechanics or specific pediatric ED capabilities.
+
+  Verification:
+  - cargo test (all 272 tests pass)
 
 
 - Feature: Active Projects Display Hardening

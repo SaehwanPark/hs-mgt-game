@@ -71,10 +71,28 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
-  let eff_beds = observation.staffed_beds.min(observation.nurses * 5);
+  // Hierarchical staffing allocation: beds first, clinics second, ED third
+  let target_nurses_beds = (observation.staffed_beds + 4) / 5;
+  let nurses_beds = observation.nurses.min(target_nurses_beds);
+  let remaining_nurses = (observation.nurses - nurses_beds).max(0);
+  let target_nurses_ed = (observation.emergency_capacity + 1) / 2;
+  let nurses_ed = remaining_nurses.min(target_nurses_ed);
+
+  let target_physicians_outpatient = (observation.outpatient_capacity + 9) / 10;
+  let physicians_outpatient = observation.physicians.min(target_physicians_outpatient);
+  let remaining_physicians = (observation.physicians - physicians_outpatient).max(0);
+  let target_physicians_ed = (observation.emergency_capacity + 3) / 4;
+  let physicians_ed = remaining_physicians.min(target_physicians_ed);
+
+  let eff_beds = observation.staffed_beds.min(nurses_beds * 5);
   let eff_clinics = observation
     .outpatient_capacity
-    .min(observation.physicians * 10);
+    .min(physicians_outpatient * 10);
+  let eff_emergency = observation
+    .emergency_capacity
+    .min(nurses_ed * 2)
+    .min(physicians_ed * 4);
+
   lines.push(format!(
     "  • Inpatient beds: {} (effective: {}) | Nurses: {}",
     observation.staffed_beds, eff_beds, observation.nurses
@@ -82,6 +100,10 @@ pub fn render_executive_report(
   lines.push(format!(
     "  • Outpatient capacity: {} units (effective: {}) | Physicians: {}",
     observation.outpatient_capacity, eff_clinics, observation.physicians
+  ));
+  lines.push(format!(
+    "  • Emergency capacity: {} bays (effective: {})",
+    observation.emergency_capacity, eff_emergency
   ));
   lines.push(format!("  • Administrative staff: {}", observation.admins));
   lines.push(format!(
