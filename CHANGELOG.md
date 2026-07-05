@@ -6,6 +6,14 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ## [Unreleased]
 
+## [0.8.3] - 2026-07-05
+
+### Added
+- Externalized scenario timeline events from the transition core to scenario TOML files.
+- Added parsing support for `[[timeline_events]]` in `src/scenario/mod.rs` and added `timeline_events` field to `CompetitiveWorldState` (with `#[serde(default)]` for backward compatibility).
+- Configured dynamic event triggers and ongoing scenario effects in the effects engine.
+- Fixed a minor bug where completing the technology project did not correctly set `ehr_project_fully_funded` metadata state.
+
 ## [0.8.2] - 2026-07-05
 
 ### Changed

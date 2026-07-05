@@ -70,3 +70,28 @@ community_trust = 61
 market_share_index = 22
 cash = 900
 political_capital = 2
+
+[[timeline_events]]
+trigger_month = 8
+actor = "workforce"
+description = "Nurse Burnout Crisis: Regional nurse shortage drops Riverside nurse trust by 15%."
+event_type = "burnout_crisis"
+
+[[timeline_events]]
+trigger_month = 10
+actor = "workforce"
+description = "Northlake Health files a formal CON objection to Riverside's clinic expansion project."
+event_type = "strike_and_con"
+
+[[timeline_events]]
+trigger_month = 12
+actor = "payer"
+description = "Riverside is OUT-OF-NETWORK with Blue Shield! Commercial patient volume drops by 40%."
+event_type = "blue_shield_renewal"
+
+[[timeline_events]]
+trigger_month = 18
+actor = "community"
+description = "Delayed Strike Consequences: Patient safety drops, decreasing Riverside community trust by 20% and market share by 10%."
+event_type = "delayed_consequences"
+
