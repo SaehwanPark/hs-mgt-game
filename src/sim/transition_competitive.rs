@@ -41,7 +41,6 @@ pub fn transition_competitive(
     let draws = system.resources.active_project_monthly_draws;
     if draws > 0 {
       if system.system_id == 0
-        && next.scenario_id == "exemplary-competitive-v1"
         && next.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
       {
         events.push(Event {
@@ -365,10 +364,7 @@ fn apply_command(
       } else {
         system.market_share_index = crate::model::clamp_metric(system.market_share_index + 1);
         push_effect(effects, "payer negotiation", "market_share_index", 1);
-        if world.scenario_id == "exemplary-competitive-v1"
-          && system_id == 0
-          && matches!(payer, crate::model::PayerId::CarrierA)
-        {
+        if system_id == 0 && matches!(payer, crate::model::PayerId::CarrierA) {
           world
             .event_metadata
             .insert("blue_shield_negotiated".to_string(), "true".to_string());
@@ -404,7 +400,7 @@ fn apply_command(
           );
         }
         PledgeType::Workforce => {
-          if world.scenario_id == "exemplary-competitive-v1" && system_id == 0 {
+          if system_id == 0 {
             world
               .event_metadata
               .insert("rna_wage_increase_accepted".to_string(), "true".to_string());
@@ -428,7 +424,7 @@ fn apply_command(
       let summary = format!("{system_name}: started {kind:?} project (budget {budget})");
       push_public_log(world, month_index, system_id, summary.clone());
 
-      if world.scenario_id == "exemplary-competitive-v1" && system_id == 0 {
+      if system_id == 0 {
         if matches!(
           kind,
           crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner
@@ -709,7 +705,6 @@ fn apply_staffing_constraints(
       .min(physicians_ed * 4);
 
     if system.system_id == 0
-      && world.scenario_id == "exemplary-competitive-v1"
       && world.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
     {
       effective_beds /= 2;

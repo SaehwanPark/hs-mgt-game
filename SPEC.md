@@ -98,6 +98,29 @@ reconstructing it from the diff.
 | Obstetrics/L&D Service Line & Diversion Mechanics | v0.8.0 | Add Obstetrics service line, staffing targets, Obstetrics-second hierarchical allocation, and diversion mechanics under deficit | 274 | `e57cc6377e17ea09` (competitive) |
 | Psychiatric Service Line & ED holding/diversion mechanics | v0.8.1 | Add Psychiatric service line, staffing targets, Psychiatric-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Project Document Alignment and Version Bump | v0.8.2 | Align project documentation with implemented 24-month campaign loop, autosave, scenario loading, and new service line features | 275 | `7bd8a0c7a8312f4e` (competitive) |
+| Externalize Scenario Timeline Events | v0.8.3 | Externalize scenario timeline events to TOML and generalize transition triggers | 275 | `7bd8a0c7a8312f4e` (competitive) |
+
+
+
+- Feature: Externalize Scenario Timeline Events
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.8.3
+
+  Summary:
+  Externalized scenario timeline events from the transition core to scenario TOML files and generalized event trigger logic in the effects engine.
+
+  Done:
+  - Added parsing support for `[[timeline_events]]` in `src/scenario/mod.rs`.
+  - Added `timeline_events` field to `CompetitiveWorldState` and initialized it from scenario TOML configurations.
+  - Generalized scenario trigger logic in `transition_competitive.rs` and `effects_competitive.rs`.
+  - Fixed technology project completion flag bug setting `ehr_project_fully_funded` state.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all 275 tests.
 
 
 - Feature: Project Document Alignment and Version Bump

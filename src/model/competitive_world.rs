@@ -220,6 +220,16 @@ pub struct PendingEffect {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct ScenarioEvent {
+  pub trigger_month: u32,
+  pub actor: String,
+  pub description: String,
+  pub event_type: String,
+  pub target_system_id: Option<u32>,
+  pub parameters: Option<std::collections::HashMap<String, String>>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct CompetitiveWorldState {
   pub difficulty: Difficulty,
   pub turn: u32,
@@ -231,6 +241,8 @@ pub struct CompetitiveWorldState {
   pub policy_calendar: PolicyCalendar,
   pub scenario_id: String,
   pub event_metadata: std::collections::HashMap<String, String>,
+  #[serde(default)]
+  pub timeline_events: Vec<ScenarioEvent>,
 }
 
 impl CompetitiveWorldState {

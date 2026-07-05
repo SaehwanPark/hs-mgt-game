@@ -1,6 +1,6 @@
 use crate::model::{
   AggregatedMonthlyActions, CompetitiveResolvedInputs, CompetitiveWorldState, Event,
-  PendingEffectKind, clamp_metric,
+  PendingEffectKind, ScenarioEvent, clamp_metric,
 };
 
 #[allow(clippy::collapsible_if)]
@@ -26,9 +26,60 @@ pub fn apply_month_start_tick(
     });
   }
 
-  if world.scenario_id == "exemplary-competitive-v1" {
-    let month_index = world.policy_calendar.month_index;
+  if world.timeline_events.is_empty() && world.scenario_id == "exemplary-competitive-v1" {
+    world.timeline_events = vec![
+      ScenarioEvent {
+        trigger_month: 8,
+        actor: "workforce".to_string(),
+        description: "Nurse Burnout Crisis: Regional nurse shortage drops Riverside nurse trust by 15%.".to_string(),
+        event_type: "burnout_crisis".to_string(),
+        target_system_id: Some(0),
+        parameters: None,
+      },
+      ScenarioEvent {
+        trigger_month: 10,
+        actor: "workforce".to_string(),
+        description: "Northlake Health files a formal CON objection to Riverside's clinic expansion project.".to_string(),
+        event_type: "strike_and_con".to_string(),
+        target_system_id: Some(0),
+        parameters: None,
+      },
+      ScenarioEvent {
+        trigger_month: 12,
+        actor: "payer".to_string(),
+        description: "Riverside is OUT-OF-NETWORK with Blue Shield! Commercial patient volume drops by 40%.".to_string(),
+        event_type: "blue_shield_renewal".to_string(),
+        target_system_id: Some(0),
+        parameters: None,
+      },
+      ScenarioEvent {
+        trigger_month: 18,
+        actor: "community".to_string(),
+        description: "Delayed Strike Consequences: Patient safety drops, decreasing Riverside community trust by 20% and market share by 10%.".to_string(),
+        event_type: "delayed_consequences".to_string(),
+        target_system_id: Some(0),
+        parameters: None,
+      },
+    ];
+  }
 
+  let month_index = world.policy_calendar.month_index;
+
+  // Ongoing scenario ticks based on whether events are configured in the scenario
+  let has_strike_event = world
+    .timeline_events
+    .iter()
+    .any(|e| e.event_type == "strike_and_con");
+  let has_blue_shield_event = world
+    .timeline_events
+    .iter()
+    .any(|e| e.event_type == "blue_shield_renewal");
+  let has_delayed_event = world
+    .timeline_events
+    .iter()
+    .any(|e| e.event_type == "delayed_consequences");
+
+  if has_strike_event {
     // 1. RNA Wage increase cost ($50k/month)
     if world.event_metadata.get("rna_wage_increase_accepted") == Some(&"true".to_string()) {
       if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
@@ -69,132 +120,6 @@ pub fn apply_month_start_tick(
       }
     }
 
-    // 3. EHR underfunded lag cost ($20k/month starting Month 18)
-    if month_index >= 18
-      && world.event_metadata.get("ehr_project_fully_funded") != Some(&"true".to_string())
-    {
-      if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
-        riverside.resources.cash -= 20;
-        events.push(Event {
-          actor: "operations",
-          description: "Riverside: data system lag from underfunded EHR increases operating costs (+$20k/month)".to_string(),
-        });
-      }
-    }
-
-    // 4. Out-of-network Blue Shield penalty (starting Month 12)
-    if month_index >= 12
-      && world.event_metadata.get("blue_shield_negotiated") != Some(&"true".to_string())
-    {
-      if world.event_metadata.get("blue_shield_out_of_network") != Some(&"true".to_string()) {
-        world
-          .event_metadata
-          .insert("blue_shield_out_of_network".to_string(), "true".to_string());
-        if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
-          riverside.market_share_index =
-            (riverside.market_share_index as f32 * 0.60).round() as i32;
-          events.push(Event {
-            actor: "payer",
-            description: "Riverside is OUT-OF-NETWORK with Blue Shield! Commercial patient volume drops by 40%.".to_string(),
-          });
-        }
-      }
-    }
-
-    // Timeline Events
-    // Month 8: Nurse Burnout Crisis
-    if month_index == 8 {
-      if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
-        riverside.workforce_trust = clamp_metric(riverside.workforce_trust - 15);
-        events.push(Event {
-          actor: "workforce",
-          description:
-            "Nurse Burnout Crisis: Regional nurse shortage drops Riverside nurse trust by 15%."
-              .to_string(),
-        });
-
-        // Check staffing ratio < 80%
-        let target_nurses = (riverside.staffed_beds + 4) / 5
-          + (riverside.emergency_capacity + 1) / 2
-          + riverside.icu_capacity;
-        let staffing_ratio = if target_nurses > 0 {
-          riverside.nurses as f32 / target_nurses as f32
-        } else {
-          1.0
-        };
-        if staffing_ratio < 0.80 {
-          world
-            .event_metadata
-            .insert("rna_strike_warning".to_string(), "true".to_string());
-          events.push(Event {
-            actor: "workforce",
-            description: "RNA issues a STRIKE WARNING due to low nurse staffing ratio (<80%). Settle wages by submitting 'commit pledge_type=workforce level=1' before Month 10 or face a strike.".to_string(),
-          });
-        }
-      }
-    }
-
-    // Month 10: CON Legal Challenge & Strike Active Trigger
-    if month_index == 10 {
-      // 1. Strike trigger check
-      if world.event_metadata.get("rna_strike_warning") == Some(&"true".to_string())
-        && world.event_metadata.get("rna_wage_increase_accepted") != Some(&"true".to_string())
-      {
-        world
-          .event_metadata
-          .insert("rna_strike_active".to_string(), "true".to_string());
-        world
-          .event_metadata
-          .insert("rna_strike_months_left".to_string(), "2".to_string());
-        events.push(Event {
-          actor: "workforce",
-          description: "RNA STRIKE BEGINS! Riverside emergency operation mode active (capacities halved, projects suspended).".to_string(),
-        });
-      }
-
-      // 2. CON Legal Challenge Check
-      let has_clinic_project = world.effect_queue.iter().any(|effect| {
-        effect.system_id == 0 && matches!(effect.kind, PendingEffectKind::OutpatientCapacity { .. })
-      });
-      if has_clinic_project {
-        events.push(Event {
-          actor: "regulator",
-          description:
-            "Northlake Health files a formal CON objection to Riverside's clinic expansion project."
-              .to_string(),
-        });
-        if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
-          if riverside.resources.political_capital >= 3 {
-            riverside.resources.political_capital -= 3;
-            events.push(Event {
-              actor: "health_system",
-              description: "Riverside spends 3 Political Capital to expedite CON approval. Clinic project proceeds.".to_string(),
-            });
-          } else if riverside.resources.cash >= 100 {
-            riverside.resources.cash -= 100;
-            events.push(Event {
-              actor: "health_system",
-              description: "Riverside spends $100k in legal fees to expedite CON approval. Clinic project proceeds.".to_string(),
-            });
-          } else {
-            // Suspend project for 3 months
-            for effect in &mut world.effect_queue {
-              if effect.system_id == 0
-                && matches!(effect.kind, PendingEffectKind::OutpatientCapacity { .. })
-              {
-                effect.resolve_month += 3;
-              }
-            }
-            events.push(Event {
-              actor: "regulator",
-              description: "Clinic project suspended for 3 months due to CON legal challenge."
-                .to_string(),
-            });
-          }
-        }
-      }
-    }
-
     // Strike decrement logic
     if month_index > 10 {
       if let Some(months_left_str) = world.event_metadata.get("rna_strike_months_left").cloned() {
@@ -218,20 +143,151 @@ pub fn apply_month_start_tick(
         }
       }
     }
+  }
 
-    // Month 18 Delayed Strike Consequences
-    if month_index == 18 {
-      if world.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
-        || world.event_metadata.contains_key("rna_strike_months_left")
-      {
+  if has_delayed_event {
+    // 3. EHR underfunded lag cost ($20k/month starting Month 18)
+    if month_index >= 18
+      && world.event_metadata.get("ehr_project_fully_funded") != Some(&"true".to_string())
+    {
+      if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
+        riverside.resources.cash -= 20;
+        events.push(Event {
+          actor: "operations",
+          description: "Riverside: data system lag from underfunded EHR increases operating costs (+$20k/month)".to_string(),
+        });
+      }
+    }
+  }
+
+  if has_blue_shield_event {
+    // 4. Out-of-network Blue Shield penalty (starting Month 12)
+    if month_index >= 12
+      && world.event_metadata.get("blue_shield_negotiated") != Some(&"true".to_string())
+    {
+      if world.event_metadata.get("blue_shield_out_of_network") != Some(&"true".to_string()) {
+        world
+          .event_metadata
+          .insert("blue_shield_out_of_network".to_string(), "true".to_string());
         if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
-          riverside.community_trust = clamp_metric(riverside.community_trust - 20);
-          riverside.market_share_index = clamp_metric(riverside.market_share_index - 10);
+          riverside.market_share_index =
+            (riverside.market_share_index as f32 * 0.60).round() as i32;
           events.push(Event {
-            actor: "community",
-            description: "Delayed Strike Consequences: Patient safety drops, decreasing Riverside community trust by 20% and market share by 10%.".to_string(),
+            actor: "payer",
+            description: "Riverside is OUT-OF-NETWORK with Blue Shield! Commercial patient volume drops by 40%.".to_string(),
           });
         }
+      }
+    }
+  }
+
+  // Run dynamic scenario timeline events
+  let events_to_run = world.timeline_events.clone();
+  for event in &events_to_run {
+    if event.trigger_month == month_index {
+      match event.event_type.as_str() {
+        "burnout_crisis" => {
+          if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
+            riverside.workforce_trust = clamp_metric(riverside.workforce_trust - 15);
+            events.push(Event {
+              actor: "workforce",
+              description: event.description.clone(),
+            });
+
+            // Check staffing ratio < 80%
+            let target_nurses = (riverside.staffed_beds + 4) / 5
+              + (riverside.emergency_capacity + 1) / 2
+              + riverside.icu_capacity;
+            let staffing_ratio = if target_nurses > 0 {
+              riverside.nurses as f32 / target_nurses as f32
+            } else {
+              1.0
+            };
+            if staffing_ratio < 0.80 {
+              world
+                .event_metadata
+                .insert("rna_strike_warning".to_string(), "true".to_string());
+              events.push(Event {
+                actor: "workforce",
+                description: "RNA issues a STRIKE WARNING due to low nurse staffing ratio (<80%). Settle wages by submitting 'commit pledge_type=workforce level=1' before Month 10 or face a strike.".to_string(),
+              });
+            }
+          }
+        }
+        "strike_and_con" => {
+          // 1. Strike trigger check
+          if world.event_metadata.get("rna_strike_warning") == Some(&"true".to_string())
+            && world.event_metadata.get("rna_wage_increase_accepted") != Some(&"true".to_string())
+          {
+            world
+              .event_metadata
+              .insert("rna_strike_active".to_string(), "true".to_string());
+            world
+              .event_metadata
+              .insert("rna_strike_months_left".to_string(), "2".to_string());
+            events.push(Event {
+              actor: "workforce",
+              description: "RNA STRIKE BEGINS! Riverside emergency operation mode active (capacities halved, projects suspended).".to_string(),
+            });
+          }
+
+          // 2. CON Legal Challenge Check
+          let has_clinic_project = world.effect_queue.iter().any(|effect| {
+            effect.system_id == 0
+              && matches!(effect.kind, PendingEffectKind::OutpatientCapacity { .. })
+          });
+          if has_clinic_project {
+            events.push(Event {
+              actor: "regulator",
+              description: event.description.clone(),
+            });
+            if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
+              if riverside.resources.political_capital >= 3 {
+                riverside.resources.political_capital -= 3;
+                events.push(Event {
+                  actor: "health_system",
+                  description: "Riverside spends 3 Political Capital to expedite CON approval. Clinic project proceeds.".to_string(),
+                });
+              } else if riverside.resources.cash >= 100 {
+                riverside.resources.cash -= 100;
+                events.push(Event {
+                  actor: "health_system",
+                  description: "Riverside spends $100k in legal fees to expedite CON approval. Clinic project proceeds.".to_string(),
+                });
+              } else {
+                // Suspend project for 3 months
+                for effect in &mut world.effect_queue {
+                  if effect.system_id == 0
+                    && matches!(effect.kind, PendingEffectKind::OutpatientCapacity { .. })
+                  {
+                    effect.resolve_month += 3;
+                  }
+                }
+                events.push(Event {
+                  actor: "regulator",
+                  description: "Clinic project suspended for 3 months due to CON legal challenge."
+                    .to_string(),
+                });
+              }
+            }
+          }
+        }
+        "delayed_consequences" => {
+          let has_strike = world.event_metadata.get("rna_strike_active")
+            == Some(&"true".to_string())
+            || world.event_metadata.contains_key("rna_strike_months_left");
+          if has_strike {
+            if let Some(riverside) = world.systems.iter_mut().find(|sys| sys.system_id == 0) {
+              riverside.community_trust = clamp_metric(riverside.community_trust - 20);
+              riverside.market_share_index = clamp_metric(riverside.market_share_index - 10);
+              events.push(Event {
+                actor: "community",
+                description: event.description.clone(),
+              });
+            }
+          }
+        }
+        _ => {}
       }
     }
   }
@@ -409,6 +465,11 @@ fn apply_pending_effect(
     } => {
       let system = &mut world.systems[system_idx];
       system.quality_index = clamp_metric(system.quality_index + quality_delta);
+      if system_idx == 0 {
+        world
+          .event_metadata
+          .insert("ehr_project_fully_funded".to_string(), "true".to_string());
+      }
       if let Some(draw) = project_draw {
         system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
         system.resources.active_project_monthly_draws =

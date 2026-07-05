@@ -4,6 +4,14 @@ Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 
+## Maintain Original Execution Sequence for Dynamic Timeline Events
+
+- Context: Refactoring hardcoded timeline events to run dynamically from parsed scenario TOML.
+- Symptom: An integration test for Month 10 strike action failed because a capital project ended up delayed by 4 months (resolve month 19) instead of 3 (resolve month 18).
+- Cause: The refactored trigger logic executed dynamic timeline events before ongoing scenario tick effects (such as active nurse strike costs and project delays). Since the timeline event set the strike active flag to `true`, the active nurse strike logic immediately executed and added an extra 1-month delay in the same turn, which differed from the original sequential ordering where the active nurse strike check ran before the Month 10 strike trigger.
+- Prevention: When externalizing or dynamically refactoring sequential transition logic, ensure ongoing condition evaluations run *before* event trigger checks in the turn-start phase to match the exact original execution sequence.
+
+
 ## Direct Investment Limits in Tests
 
 - Context: Adding the Intensive Care Unit (ICU) service line with direct investment commands.

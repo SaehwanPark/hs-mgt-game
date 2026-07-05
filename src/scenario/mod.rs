@@ -8,7 +8,7 @@ use serde::Deserialize;
 use crate::model::{
   AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState, Difficulty,
   HealthSystemState, INTERACTIVE_TURN_COUNT, PlayerController, PlayerResources, PlayerSlot,
-  PolicyCalendar, Ruleset, SharedMarketFields, WorldState,
+  PolicyCalendar, Ruleset, ScenarioEvent, SharedMarketFields, WorldState,
 };
 
 pub const SCENARIO_TOML_FORMAT_VERSION: &str = "scenario-toml-0.1.40";
@@ -48,6 +48,7 @@ pub struct Scenario {
   pub evaluation_profile: Option<EvaluationProfile>,
   pub initial_market: Option<ScenarioMarketState>,
   pub systems: Option<Vec<ScenarioSystemState>>,
+  pub timeline_events: Option<Vec<ScenarioEvent>>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
@@ -296,6 +297,7 @@ impl Scenario {
       policy_calendar: PolicyCalendar::new_month(1),
       scenario_id: self.scenario_id.clone(),
       event_metadata: std::collections::HashMap::new(),
+      timeline_events: self.timeline_events.clone().unwrap_or_default(),
     })
   }
 }
