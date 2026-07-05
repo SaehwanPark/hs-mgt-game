@@ -1,23 +1,25 @@
-# Evidence Map - ICU Service Line & ED Boarding Mechanics
+# Evidence Map - Obstetrics Service Line & L&D Diversion Mechanics
 
 ## Assumptions
-1.  **ICU Staffing Intensity:** Intensive Care Units (ICUs) are the most resource-intensive units in a hospital. Unlike Med-Surg beds (1 Nurse to 5 beds) or ED bays (1 Nurse to 2 bays), ICU beds require a 1-to-1 nurse-to-patient ratio for critical patients (consistent with California mandates and high-acuity recommendations). 
-2.  **Physician Coverage:** ICUs require constant intensivist availability. We model this as 1 Physician per 2 ICU beds (compared to 1 Physician per 10 Outpatient units and 1 per 4 ED bays).
-3.  **Admin Staffing:** To reflect the operational complexity of critical care management, we model 1 Admin per 5 ICU beds (compared to 1 Admin per 10 ED bays and 1 Admin per 20 total beds + clinics).
-4.  **ED Boarding:** Critical care boarding in the Emergency Department (ED) occurs when patients requiring ICU admission are held in the ED because no ICU beds are available. This is a primary driver of ED overcrowding, patient safety issues, and operational inefficiency.
-    *   We assume a baseline critical care admission rate of 5% of the system's total staffed med-surg beds (`(staffed_beds + 19) / 20` using ceiling division).
-    *   Boarded patients consume ED bays on a 1-to-1 basis, reducing the effective ED capacity.
+1.  **Obstetric Staffing Intensity:** Labor and Delivery (L&D) units require specialized obstetric nursing and medical staff. To reflect this high-intensity clinical environment (below ICU but above Med-Surg), we model obstetric staffing targets as:
+    *   Nurses: 1 Nurse per 2 obstetric beds (target: `(system.obstetrics_capacity + 1) / 2`).
+    *   Physicians: 1 OB/GYN per 5 obstetric beds (target: `(system.obstetrics_capacity + 4) / 5`).
+    *   Admins: 1 Admin per 10 obstetric beds (target: `(system.obstetrics_capacity + 9) / 10`).
+2.  **Childbirth Loyalty ("Halo Effect"):** Labor and Delivery is widely recognized in healthcare management as the primary entry point for young families into a health system, establishing multi-decade loyalty ("halo effect").
+    *   We assume that diverting obstetric patients due to capacity or staffing deficits has disproportionate reputational and competitive impacts.
+    *   Diverting a patient causes a loss of community trust (`-2` trust per diverted patient) and a leak of market share (`-1` market share index per diverted patient).
+3.  **Inpatient Demand:** We model a baseline monthly obstetric demand of 10% of the physical obstetric capacity (`(system.obstetrics_capacity + 9) / 10` using ceiling division).
 
 ## Precedents
-- Med-Surg beds: 1 Nurse per 5 beds.
-- Outpatient capacity: 1 Physician per 10 capacity.
-- ED bays: 1 Nurse per 2 bays, 1 Physician per 4 bays, 1 Admin per 10 bays.
+- Med-Surg beds: 1 Nurse per 5 beds, 1 Physician per 20 beds, 1 Admin per 20 beds.
 - ICU beds: 1 Nurse per 1 bed, 1 Physician per 2 beds, 1 Admin per 5 beds.
-- ED boarding is modeled as a direct deduction from ED capacity, reflecting how physical boarding blocks new ED patient flow.
+- ED bays: 1 Nurse per 2 bays, 1 Physician per 4 bays, 1 Admin per 10 bays.
+- Obstetrics beds: 1 Nurse per 2 beds, 1 Physician per 5 beds, 1 Admin per 10 beds.
+- ED boarding is modeled as a physical capacity bottleneck, whereas obstetric deficits are modeled as patient diversion / regional bypass.
 
 ## Evidence Quality
-- **High:** ICU nurse-to-patient ratios are strictly regulated in several jurisdictions (e.g. 1:1 or 1:2 in California). ED boarding is widely documented in health services research as a major threat to patient safety and access.
-- **Medium:** The specific 5% admission rate and 1:2 physician/1:5 admin targets are stylized abstractions designed to create balanced gameplay tension.
+- **High:** Childbirth as a driver of long-term family brand loyalty and lifetime healthcare value is well-documented in healthcare marketing and strategy literature. Specialized L&D nurse-to-patient staffing ratios (1:2 for active labor) are standard clinical guidelines (AWHONN).
+- **Medium:** The specific 10% monthly demand rate, `-2` community trust penalty, and `-1` market share index penalty are stylized balancing parameters designed to create clear strategic tradeoffs.
 
 ## Uncertainty
-- The simplified 5% critical admission rate does not fluctuate stochastically (following the project's deterministic transition design) but remains a reliable, transparent operational metric.
+- Actual obstetric patient volume is deterministic relative to physical capacity and does not model stochastic seasonal birth rate spikes, preserving the deterministic nature of transition evaluation.

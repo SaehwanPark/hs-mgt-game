@@ -109,7 +109,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
     "invest" => Some(&[
       (
         "domain",
-        &["beds", "outpatient", "technology", "emergency", "icu"],
+        &["beds", "outpatient", "technology", "emergency", "icu", "obstetrics"],
       ),
       ("amount", &[]),
     ]),
@@ -139,6 +139,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
           "clinic_network",
           "emergency_pavilion",
           "icu_wing",
+          "obstetrics_unit",
         ],
       ),
       ("budget", &[]),
@@ -292,7 +293,8 @@ mod tests {
         "outpatient".to_string(),
         "technology".to_string(),
         "emergency".to_string(),
-        "icu".to_string()
+        "icu".to_string(),
+        "obstetrics".to_string()
       ]
     );
   }

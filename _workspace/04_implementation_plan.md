@@ -1,89 +1,156 @@
-# Implementation Plan - Emergency Department Service Line
+# Operational Coding Plan - Obstetrics Service Line & L&D Diversion Mechanics
 
-## 1. Domain Struct Changes
-- `src/model/competitive_world.rs`:
-  - Add `pub emergency_capacity: i32` to `HealthSystemState`.
-  - Add `EmergencyCapacity { capacity_delta: i32, project_draw: Option<i32> }` to `PendingEffectKind`.
-- `src/model/campaign.rs`:
-  - Add `pub emergency_capacity: i32` to `PlayerObservation`.
-- `src/sim/observe_ai.rs`:
-  - Add `pub emergency_capacity: i32` to `AiPlayerObservation`.
+## Task restatement
 
-## 2. Command Vocabulary Expansion
-- `src/model/competitive_command.rs`:
-  - Add `Emergency` to `InvestDomain` enum.
-  - Add `EmergencyPavilion` to `ProjectKind` enum.
-  - Update `ProjectKind::resolve_months` to return `6` for `EmergencyPavilion`.
-  - Update `is_public_command` in `src/sim/transition_competitive.rs` and `command_intel_summary` to support `Emergency` and `EmergencyPavilion`.
-  - Update `ActionCost` mapping in `CompetitiveCommand::action_cost`:
-    - For `ProjectKind::EmergencyPavilion`, AP cost is 2, monthly draw is `budget / 6`.
+Implement the Obstetrics (Labor & Delivery) service line with associated capacity, staffing targets, hierarchical allocation rules prioritizing Obstetrics second (after ICU and before Med-Surg Beds), and an obstetric capacity-diversion penalty representing the "halo effect". This must be implemented while preserving all existing campaign, parser, AI, and verification rules without causing backward compatibility breaks in stabilization or competitive scenarios.
 
-## 3. Transition Kernel updates
-- `src/sim/effects_competitive.rs`:
-  - Handle `PendingEffectKind::EmergencyCapacity` resolution inside `resolve_pending_effects` by incrementing `system.emergency_capacity` and adjusting active projects/draws.
-- `src/sim/transition_competitive.rs`:
-  - Update `apply_command` for `InvestDomain::Emergency`:
-    - `let emergency_delta = amount / 15;`
-    - `let access_delta = amount / 15;`
-    - Immediate `access_index` increment of `access_delta` and `market_share_index` increment of `amount / 30`.
-    - Enqueue `PendingEffectKind::EmergencyCapacity { capacity_delta: emergency_delta, project_draw: None }`.
-  - Update `apply_command` for `ProjectKind::EmergencyPavilion`:
-    - Enqueue `PendingEffectKind::EmergencyCapacity { capacity_delta: 15, project_draw: Some(monthly_draw) }`.
-  - Refactor `apply_staffing_constraints`:
-    - Compute targets:
-      - `target_nurses = (system.staffed_beds + 4) / 5 + (system.emergency_capacity + 1) / 2;`
-      - `target_physicians = (system.outpatient_capacity + 9) / 10 + (system.emergency_capacity + 3) / 4;`
-      - `target_admins = (system.staffed_beds + system.outpatient_capacity + system.emergency_capacity + 19) / 20;`
-    - Calculate effective capacities:
-      - Allocate nurses to beds first: `nurses_for_beds = system.nurses.min((system.staffed_beds + 4) / 5)`.
-      - Allocate remaining nurses to emergency: `nurses_for_ed = (system.nurses - nurses_for_beds).max(0)`.
-      - Allocate physicians to outpatient first: `physicians_for_outpatient = system.physicians.min((system.outpatient_capacity + 9) / 10)`.
-      - Allocate remaining physicians to emergency: `physicians_for_ed = (system.physicians - physicians_for_outpatient).max(0)`.
-      - `effective_beds = system.staffed_beds.min(nurses_for_beds * 5);`
-      - `effective_outpatient = system.outpatient_capacity.min(physicians_for_outpatient * 10);`
-      - `effective_emergency = system.emergency_capacity.min(nurses_for_ed * 2).min(physicians_for_ed * 4);`
-    - Update `total_physical = system.staffed_beds + system.outpatient_capacity + system.emergency_capacity;`
-    - Update `total_effective = effective_beds + effective_outpatient + effective_emergency;`
-    - Compute `penalty` and apply to access/quality.
+## Current understanding
 
-## 4. State Hash & Display Alignment
-- `src/model/competitive_hash.rs`:
-  - Add `|emergency={}` to system formatting block in `competitive_state_hash_record` and format `system.emergency_capacity`.
-- `src/sim/observe_competitive.rs`:
-  - Populate `emergency_capacity` in `PlayerObservation`.
-  - Update `in_flight_projects_label` to recognize `PendingEffectKind::EmergencyCapacity` and format as `EmergencyPavilion`.
-- `src/sim/observe_ai.rs`:
-  - Populate `emergency_capacity` in `AiPlayerObservation`.
-- `src/cli/display/executive_report.rs`:
-  - Calculate `eff_emergency` and display:
-    `  • Emergency capacity: {} bays (effective: {})`
+- **Relevant code appears to be in:**
+  - `src/model/competitive_world.rs` (State definitions, `PendingEffectKind`)
+  - `src/model/competitive_command.rs` (Domain and project command enum types)
+  - `src/model/campaign.rs` (Player observation struct)
+  - `src/sim/observe_ai.rs` (AI player observation struct)
+  - `src/sim/effects_competitive.rs` (Applying project completion effects)
+  - `src/sim/transition_competitive.rs` (Command application, staffing targets, hierarchy, and diversion penalties)
+  - `src/sim/observe_competitive.rs` (Formatting observations, in-flight projects label)
+  - `src/cli/competitive_parse.rs` (Command input parsing)
+  - `src/cli/display/executive_report.rs` (Executive REPL dashboard metrics rendering)
+  - `src/cli/guidance.rs` (Topic help topic text)
+  - `src/cli/repl.rs` (Tab autocomplete candidates)
+  - `src/actors/ai_player.rs` (AI player command candidate generation)
+  - `src/competitive/genesis.rs` & `src/competitive/fixtures.rs` (Initial competitive worlds)
+  - `src/model/competitive_hash.rs` (System hash record for deterministic validation)
+  - `src/scenario/mod.rs` (Scenario loading and defaults)
+- **Desired behavior is:**
+  - Obstetrics capacity (`obstetrics_capacity`) is added to the system state, defaulting to 0.
+  - Adding `InvestDomain::Obstetrics` (alias `"obstetrics"`, `"obs"`) and `ProjectKind::ObstetricsUnit` (alias `"obstetrics_unit"`, `"obs_unit"`, duration 9 months, yields +6 capacity).
+  - Obstetrics staffing target ratios: Nurses (1 Nurse per 2 beds), Physicians (1 Physician per 5 beds), Admins (1 Admin per 10 beds).
+  - Allocation order: ICU -> Obstetrics -> Med-Surg Beds -> Outpatient Clinics -> ED.
+  - Diverting patients when obstetric demand (10% of obstetric capacity) exceeds effective obstetric capacity, yielding `-2` community trust and `-1` market share index per diverted patient.
+- **Existing behavior that must not change is:**
+  - Stabilization campaign execution and rules.
+  - All existing 273 unit/integration tests must pass.
+  - Existing custom scenarios or session saves must continue to load without errors.
 
-## 5. Parser, Auto-complete, and Help Topic Updates
-- `src/cli/competitive_parse.rs`:
-  - Update `InvestDomain` parsing to recognize `"emergency"`.
-  - Update `ProjectKind` parsing to recognize `"emergency_pavilion"`.
-- `src/cli/guidance.rs` & `src/cli/repl.rs`:
-  - Add autocomplete options for `"emergency"` domain and `"emergency_pavilion"` project kind.
-  - Document the new investment domain and project kind in command topic help guides.
+## Assumptions
 
-## 6. Scenario System Compatibility
-- `src/scenario/mod.rs`:
-  - Add `pub emergency_capacity: Option<i32>` to `ScenarioSystemState`.
-  - Default it during mapping to `HealthSystemState`:
-    - system_id 0 => 15
-    - system_id 1 => 20
-    - system_id 2 => 10
-    - system_id 3 => 8
-    - system_id 4 => 25
-    - default => 15
-- `src/competitive/genesis.rs`:
-  - Add `emergency_capacity` to `RivalTemplate` and initialize all presets.
-  - Update `genesis_roster_lines` to print emergency bays.
+- Adding a new `InvestDomain` and `ProjectKind` variant is backwards-compatible since we will exhaustively update all match statements across the codebase.
+- Setting default value for `obstetrics_capacity` to 0 in scenarios and genesis templates prevents turn-1 staffing deficits or discrepancies.
+- The competitive state hash must include `obstetrics_capacity` in its format to maintain strict deterministic verification.
 
-## 7. AI Decision Support
-- `src/actors/ai_player.rs`:
-  - Update targets in `generate_candidates`:
-    - `target_nurses = (observation.staffed_beds + 4) / 5 + (observation.emergency_capacity + 1) / 2;`
-    - `target_physicians = (observation.outpatient_capacity + 9) / 10 + (observation.emergency_capacity + 3) / 4;`
-    - `target_admins = (observation.staffed_beds + observation.outpatient_capacity + observation.emergency_capacity + 19) / 20;`
-  - Update `best_response_commands` to handle `emergency` investment responses.
+If any assumption is false, stop and report the mismatch before editing.
+
+## Minimal implementation plan
+
+1.  **Inspect files:** Verify existing service lines (e.g. `icu_capacity` and `emergency_capacity`) are defined in `src/model/competitive_world.rs` and matching locations.
+2.  **State and Command Types changes:**
+    *   Add `pub obstetrics_capacity: i32` to `HealthSystemState` in `src/model/competitive_world.rs` (with `#[serde(default)]`).
+    *   Add `ObstetricsCapacity { capacity_delta: i32, project_draw: Option<i32> }` to `PendingEffectKind` in `src/model/competitive_world.rs`.
+    *   Add `obstetrics_capacity` to `PlayerObservation` in `src/model/campaign.rs` and `AiPlayerObservation` in `src/sim/observe_ai.rs`.
+    *   Add `Obstetrics` variant to `InvestDomain` and `ObstetricsUnit` variant to `ProjectKind` in `src/model/competitive_command.rs`. Update `resolve_months` (returns 9) and `action_cost` (AP cost 2, monthly draw = budget / 9).
+3.  **Harness and Scenario defaults:**
+    *   In `src/scenario/mod.rs`, add `pub obstetrics_capacity: Option<i32>` to `ScenarioSystemState`, default to 0 on mapping.
+    *   In `src/competitive/genesis.rs` and `src/competitive/fixtures.rs`, initialize `obstetrics_capacity` to 0.
+4.  **Transition Kernel changes:**
+    *   In `src/sim/effects_competitive.rs`, resolve `PendingEffectKind::ObstetricsCapacity` inside `resolve_pending_effects` by adding `capacity_delta` and adjusting draws.
+    *   In `src/sim/transition_competitive.rs`:
+        *   Update `apply_command` match arms:
+            *   For `InvestDomain::Obstetrics`, immediate cost is `amount`. Delta beds = `amount / 25`. Immediately increase access by `amount / 25` and market share by `amount / 50`. Enqueue `PendingEffectKind::ObstetricsCapacity { capacity_delta, project_draw: None }` with 1 month delay.
+            *   For `ProjectKind::ObstetricsUnit`, enqueue `PendingEffectKind::ObstetricsCapacity { capacity_delta: 6, project_draw: Some(monthly_draw) }`.
+        *   In `apply_staffing_constraints`:
+            *   Update `target_nurses`, `target_physicians`, `target_admins` formulas to add obstetric requirements.
+            *   Update hierarchical nurse and physician allocations to insert Obstetrics as the second priority (after ICU and before Med-Surg).
+            *   Compute `effective_obs = system.obstetrics_capacity.min(nurses_obs * 2).min(physicians_obs * 5)`. Halve it if `rna_strike_active` is true.
+            *   Compute obstetric demand: `obstetric_demand = (system.obstetrics_capacity + 9) / 10`.
+            *   Compute `diverted_patients = (obstetric_demand - effective_obs).max(0)`.
+            *   Apply penalties: `-2` community trust and `-1` market share index per diverted patient. Log an event if `diverted_patients > 0`.
+            *   Add `obstetrics_capacity` to `total_physical` and `effective_obs` to `total_effective`.
+5.  **State Hash updates:**
+    *   In `src/model/competitive_hash.rs`, append `|obs={}` to formatting string and format `system.obstetrics_capacity`.
+6.  **Observation Model changes:**
+    *   In `src/sim/observe_competitive.rs`, populate `obstetrics_capacity`. Update `in_flight_projects_label` to recognize `PendingEffectKind::ObstetricsCapacity`.
+    *   In `src/sim/observe_ai.rs`, populate `obstetrics_capacity`.
+7.  **AI Player changes:**
+    *   In `src/actors/ai_player.rs`, update target calculations in `generate_candidates` and match arms to avoid non-exhaustive compiler warnings.
+8.  **Parser and Auto-complete updates:**
+    *   In `src/cli/competitive_parse.rs`, parse `obstetrics` (and `obs`) domain and `obstetrics_unit` (and `obs_unit`) project kind.
+    *   In `src/cli/repl.rs`, add `"obstetrics"` to domain candidates and `"obstetrics_unit"` to project kinds.
+    *   In `src/cli/guidance.rs`, update topic help strings for `invest` and `project` commands.
+    *   In `src/cli/display/executive_report.rs`, compute `eff_obs` and format in the report. If diversions occur, format `  • Obstetric diversion: {} patients`.
+9.  **Integration Unit Test:** Add a unit test verifying Obstetrics allocation, diversion, trust/market-share penalties, and project resolution.
+10. **Replay Hash update:** Run the golden hash generation integration test, fetch the new competitive seed-42 golden state hash, and update the assertion in `tests/golden_competitive_seed42.rs`.
+
+## Files and functions likely to change
+
+- `src/model/competitive_world.rs`: Add fields to `HealthSystemState` and `PendingEffectKind`
+- `src/model/competitive_command.rs`: Add variants to `InvestDomain`, `ProjectKind`, and matching arms
+- `src/model/campaign.rs`: Add `obstetrics_capacity` to `PlayerObservation`
+- `src/scenario/mod.rs`: Add `obstetrics_capacity` to `ScenarioSystemState`
+- `src/competitive/genesis.rs`: Initialize `obstetrics_capacity` to 0
+- `src/competitive/fixtures.rs`: Initialize `obstetrics_capacity` to 0
+- `src/sim/observe_ai.rs`: Add field to `AiPlayerObservation` and map it
+- `src/sim/effects_competitive.rs`: Add resolution arm for `PendingEffectKind::ObstetricsCapacity`
+- `src/sim/transition_competitive.rs`: Update `apply_command`, `apply_staffing_constraints` (targets, hierarchy, diversion penalties), and add unit test
+- `src/sim/observe_competitive.rs`: Map field to observation, update project label mapping
+- `src/model/competitive_hash.rs`: Format state hash with `obstetrics_capacity`
+- `src/cli/competitive_parse.rs`: Add parser support for `"obstetrics"` and `"obstetrics_unit"`
+- `src/cli/repl.rs`: Add autocomplete strings
+- `src/cli/guidance.rs`: Update help texts
+- `src/cli/display/executive_report.rs`: Render Obstetrics capacity and diversions on dashboard
+- `src/actors/ai_player.rs`: Handle new enum variants and update targets
+- `tests/golden_competitive_seed42.rs`: Update golden state hash assertion after test run
+
+Avoid editing files outside this list unless the plan is found to be incomplete. If that happens, stop and explain why.
+
+## Tests and checks
+
+Run `cargo test`.
+
+Expected result:
+- All unit and integration tests compile and pass.
+- Standard playtests run without crash or hang.
+
+If tests fail:
+1. Fix failures directly related to this change.
+2. Do not fix unrelated failures unless required to unblock validation.
+3. Report unrelated failures separately.
+
+## Acceptance criteria
+
+- `project kind=obstetrics_unit budget=45` parses and schedules a 9-month project drawing $5/month.
+- Completing the project yields `obstetrics_capacity += 6` beds.
+- `invest domain=obstetrics amount=25` immediately yields +1 obstetric capacity bed.
+- If obstetric beds are staffed with at least 1 nurse per 2 beds and 1 physician per 5 beds, and no deficit occurs, diversions are 0.
+- If a staffing deficit in Obstetrics occurs (e.g. not enough nurses), effective capacity drops, and if it falls below 10% of capacity, patients are diverted, causing `-2` community trust and `-1` market share index per diverted patient.
+- Existing campaigns run without regression, and the updated golden seed-42 hash is asserted successfully.
+
+## Non-goals
+
+- Do not change stabilization campaign rules.
+- Do not introduce a NICU or other pediatric service lines.
+- Do not add complex clinical pathways or clinical outcome factors outside trust/access/quality indices.
+- Do not perform unrelated refactoring.
+
+## Stop conditions
+
+Stop and ask for review if:
+- More than 20 production files need edits.
+- The implementation requires changing the core simultaneous resolver sequence itself.
+- Tests reveal unexpected changes in the stabilization campaign loop outcomes.
+
+## Review checklist
+
+Before finalizing, verify:
+- The diff implements only the requested Obstetrics behavior.
+- The change is covered by focused unit tests verifying hierarchical allocation, effective capacity, and diversion.
+- Existing behavior is preserved.
+- No unrelated formatting, renaming, or cleanup was introduced.
+- Error handling and edge cases are explicit.
+- The final summary lists files changed and tests run.
+
+## Risk label
+
+Risk: Medium
+
+Reason: This change affects system state fields, parser inputs, transition logic, AI decision targets, state hashes, and CLI dashboards, which could impact regression test hashes and scenario compatibility if not isolated carefully.
