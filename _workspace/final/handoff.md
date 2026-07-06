@@ -28,6 +28,20 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
 
+## PR Handoff
+
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/85
+- Branch: `feat/access-commit-guidance`
+- Base: `main`
+
+## Review Summary
+
+- Pass 1: Low handoff-status finding fixed by recording the PR URL and review
+  state here.
+- Pass 2: No actionable issues found.
+- Pass 3: No actionable issues found.
+- Merge-ready: pending CI/comment triage after push.
+
 ## Known Limits
 
 - The change is guidance-only and does not alter pledge effects or add
@@ -38,5 +52,5 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
 
 ## Next Phase Dependency
 
-Open a PR from `feat/access-commit-guidance` to `main`, complete the required
-three-pass review loop, and address any findings before marking merge-ready.
+Push this handoff update, then triage CI or PR comments before marking
+merge-ready.
