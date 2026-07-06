@@ -72,11 +72,12 @@ The `difficulty-sweep` target runs the four baseline competitive profiles at
 playtest protocol's difficulty-variation requirement without changing the default
 Normal-only baseline batch.
 The `difficulty-adaptive` target uses the same Easy/Hard matrix but wraps
-baseline profiles with rival-aware command adjustments on Hard difficulty
-(reduced aggressive invests, added monitors/holds, workforce-commit preference
-when trust is low). Use it when testing whether difficulty tiers change scripted
-player tradeoff metrics; compare results against the static `difficulty-sweep`
-batch rather than treating either batch as balance evidence.
+baseline profiles with rival-aware command adjustments on Hard difficulty only
+(Easy passes through static month tables). Reduced aggressive invests, added
+monitors/holds, and workforce-commit preference when trust is low apply on Hard.
+Use it when testing whether difficulty tiers change scripted player tradeoff
+metrics; compare results against the static `difficulty-sweep` batch rather than
+treating either batch as balance evidence.
 
 ## Creating a Custom Strategy Policy
 

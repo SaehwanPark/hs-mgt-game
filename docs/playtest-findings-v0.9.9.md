@@ -84,8 +84,8 @@ Stabilization policies were not changed in this slice.
   Pass. All 24 competitive sessions completed with zero validation failures.
 - **The harness records difficulty in batch artifacts and diagnostics:** Pass.
 - **Difficulty variation changes committed competitive state:** Pass. Easy and
-  Hard runs for the same seed/profile produce different final hashes except where
-  adaptive rules do not alter commands (Naive First-Time on seed 42).
+  Hard runs for the same seed/profile produce different final hashes because rival
+  composition differs by tier and hard adaptation can change player commands.
 - **Difficulty-adaptive policies differentiate scripted player tradeoff metrics:**
   Partial pass. Capacity Growth and Balanced Strategy now diverge across tiers;
   Fiscal Caution shifts slightly; Naive First-Time is unchanged.

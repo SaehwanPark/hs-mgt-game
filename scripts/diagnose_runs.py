@@ -369,8 +369,8 @@ def print_adaptive_difficulty_comparison(batch):
     )
   print()
   print(
-    "- Adaptive hard policies should show more holds, monitors, and workforce "
-    "commits than easy when rival pressure triggers the adaptation layer."
+    "- Adaptive hard policies should show more holds and monitors than easy when "
+    "rival pressure triggers the adaptation layer."
   )
   print(
     "- Compare player tradeoff metrics in the difficulty tables above against "

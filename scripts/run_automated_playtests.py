@@ -74,6 +74,9 @@ def reduce_large_invest(cmd):
   )
 
   def replace_other(match):
+    domain = match.group(1).lower()
+    if domain == "beds":
+      return match.group(0)
     amount = int(match.group(2))
     if amount >= 8:
       return f"invest domain={match.group(1)} amount={max(4, amount - 2)}"
@@ -112,13 +115,17 @@ def adapt_command(cmd, difficulty, obs, turn):
     parse_obs_workforce_trust(obs)
   )
 
-  if count_action_verbs(adapted) >= 2 and "hold" not in adapted.lower():
-    adapted = f"{adapted}; hold"
-
   obs_text = "\n".join(obs).upper()
-  rivals_visible = "NORTHLAKE" in obs_text or "SUMMIT" in obs_text
+  rivals_visible = any(
+    rival in obs_text for rival in ("NORTHLAKE", "SUMMIT", "VALLEY")
+  )
   if rivals_visible and "monitor" not in adapted.lower() and turn % 3 == 0:
     adapted = f"monitor target=northlake depth=1; {adapted}"
+
+  if count_action_verbs(adapted) >= 2 and not any(
+    part.strip().lower() == "hold" for part in adapted.split(";")
+  ):
+    adapted = f"{adapted}; hold"
 
   return adapted
 
@@ -640,7 +647,8 @@ if __name__ == "__main__":
       "Playtest target to run; baseline preserves the default four-profile batch, "
       "project-coverage exercises capital-project commands, difficulty-sweep "
       "runs static baseline profiles at easy and hard competitive difficulty, "
-      "and difficulty-adaptive applies rival-aware policy adjustments at easy/hard"
+      "and difficulty-adaptive applies rival-aware policy adjustments on hard "
+      "(easy remains a static baseline control)"
     )
   )
   parser.add_argument(
