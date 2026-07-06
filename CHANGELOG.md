@@ -4,6 +4,15 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.4] - 2026-07-06
+
+### Added
+- Recorded a Phase 7 scripted AI-agent playtest synthesis for the current `v0.9.4` prototype in `docs/playtest-findings-v0.9.4.md`.
+- Ran both playable campaigns across four scripted profiles and seeds `42`, `43`, and `44` through the local MCP playtest harness.
+
+### Changed
+- Bumped the package version to `0.9.4` for the playtest-synthesis PR-equivalent change.
+
 ## [0.9.3] - 2026-07-05
 
 ### Added
