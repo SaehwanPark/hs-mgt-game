@@ -107,6 +107,41 @@ reconstructing it from the diff.
 | Strategy-Space Diagnostics Artifact | v0.9.5 | Add automated playtest JSON artifact output and diagnostic report support for Phase 7 scripted batches | 282 | `8926f71296f39efc` (competitive) |
 | Competitive Playtest Policy Coverage | v0.9.6 | Extend scripted competitive MCP policies beyond month 3 and exercise newer service-line commands | 282 | `8926f71296f39efc` (competitive) |
 | Project-Command Playtest Diagnostics | v0.9.7 | Add targeted project-command MCP playtest mode and diagnostic reporting for project kinds, active projects, and monthly draws | 282 | `8926f71296f39efc` (competitive) |
+| Difficulty-Tier Playtest Synthesis | v0.9.8 | Add targeted difficulty-sweep MCP playtest mode and per-difficulty diagnostic reporting for Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Difficulty-Tier Playtest Synthesis
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.8
+
+  Summary:
+  Added a targeted Phase 7 automated MCP playtest mode for competitive
+  difficulty-tier coverage. The harness runs baseline scripted profiles at Easy
+  and Hard difficulty while preserving the default Normal-only baseline batch.
+  Diagnostics now report outcomes grouped by difficulty.
+
+  Done:
+  - Added `--target difficulty-sweep` to `scripts/run_automated_playtests.py`
+    while preserving the default baseline batch.
+  - Extended `scripts/diagnose_runs.py` with per-difficulty and
+    profile-by-difficulty outcome tables for batch artifacts.
+  - Added `docs/playtest-findings-v0.9.8.md` documenting the completed targeted
+    batch, evidence limits, and follow-up routing.
+  - Updated the MCP playtesting guide with the difficulty-sweep target.
+  - Bumped package metadata to `0.9.8`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    equilibrium, policy-validity, or balance-tuning claim.
+  - No Expert difficulty sweep, default baseline replacement, or difficulty-
+    adaptive scripted policies in this slice.
+
+  Verification:
+  - `python3 scripts/run_automated_playtests.py --target difficulty-sweep --json-output _workspace/experiments/v0.9.8-difficulty-sweep/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.8-difficulty-sweep/results.json --output _workspace/experiments/v0.9.8-difficulty-sweep/diagnostics.md`
 
 
 - Feature: Project-Command Playtest Diagnostics

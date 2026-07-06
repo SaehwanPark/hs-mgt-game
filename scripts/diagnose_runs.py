@@ -150,6 +150,52 @@ def analyze_single_run(file_path):
     "system_stats": system_stats
   }
 
+def empty_playtest_stats():
+  return {
+    "sessions": 0,
+    "holds": 0,
+    "verbs": Counter(),
+    "validation_failures": 0,
+    "cash": [],
+    "access": [],
+    "beds": [],
+    "workforce_trust": [],
+    "community_trust": [],
+    "political_capital": [],
+    "hashes": [],
+    "active_projects": [],
+    "active_project_draws": [],
+    "project_kinds": Counter()
+  }
+
+def accumulate_playtest_result(stats, result):
+  stats["sessions"] += 1
+  stats["validation_failures"] += len(result.get("validation_failures", []))
+  for transition in result.get("transitions", []):
+    for verb in parse_summary_command_verbs(transition.get("command", "")):
+      if verb == "Hold":
+        stats["holds"] += 1
+      else:
+        stats["verbs"][verb] += 1
+    for kind in parse_summary_project_kinds(transition.get("command", "")):
+      stats["project_kinds"][kind] += 1
+  metrics = result.get("metrics", {})
+  for key, target in [
+    ("Cash", "cash"),
+    ("Access", "access"),
+    ("Beds", "beds"),
+    ("WorkforceTrust", "workforce_trust"),
+    ("CommunityTrust", "community_trust"),
+    ("PC", "political_capital"),
+    ("ActiveProjects", "active_projects"),
+    ("ActiveProjectDraws", "active_project_draws")
+  ]:
+    value = metrics.get(key)
+    if value is not None and value != "N/A":
+      stats[target].append(int(value))
+  if metrics.get("Hash") and metrics["Hash"] != "N/A":
+    stats["hashes"].append(metrics["Hash"])
+
 def analyze_playtest_batch(file_path, data):
   competitive = data.get("campaigns", {}).get("competitive-regional-v1", [])
   stabilization = data.get("campaigns", {}).get("stabilization-v1", [])
@@ -158,58 +204,34 @@ def analyze_playtest_batch(file_path, data):
     return None
 
   profile_stats = {}
+  difficulty_stats = {}
+  profile_difficulty_stats = {}
   for result in competitive:
     strategy = result.get("strategy", "Unknown")
-    stats = profile_stats.setdefault(strategy, {
-      "sessions": 0,
-      "holds": 0,
-      "verbs": Counter(),
-      "validation_failures": 0,
-      "cash": [],
-      "access": [],
-      "beds": [],
-      "workforce_trust": [],
-      "community_trust": [],
-      "political_capital": [],
-      "hashes": [],
-      "active_projects": [],
-      "active_project_draws": [],
-      "project_kinds": Counter()
-    })
-    stats["sessions"] += 1
-    stats["validation_failures"] += len(result.get("validation_failures", []))
-    for transition in result.get("transitions", []):
-      for verb in parse_summary_command_verbs(transition.get("command", "")):
-        if verb == "Hold":
-          stats["holds"] += 1
-        else:
-          stats["verbs"][verb] += 1
-      for kind in parse_summary_project_kinds(transition.get("command", "")):
-        stats["project_kinds"][kind] += 1
-    metrics = result.get("metrics", {})
-    for key, target in [
-      ("Cash", "cash"),
-      ("Access", "access"),
-      ("Beds", "beds"),
-      ("WorkforceTrust", "workforce_trust"),
-      ("CommunityTrust", "community_trust"),
-      ("PC", "political_capital"),
-      ("ActiveProjects", "active_projects"),
-      ("ActiveProjectDraws", "active_project_draws")
+    difficulty = (result.get("difficulty") or "normal").lower()
+    profile_key = strategy
+    difficulty_key = difficulty
+    profile_difficulty_key = f"{strategy} / {difficulty}"
+
+    for key, bucket in [
+      (profile_key, profile_stats),
+      (difficulty_key, difficulty_stats),
+      (profile_difficulty_key, profile_difficulty_stats)
     ]:
-      value = metrics.get(key)
-      if value is not None and value != "N/A":
-        stats[target].append(int(value))
-    if metrics.get("Hash") and metrics["Hash"] != "N/A":
-      stats["hashes"].append(metrics["Hash"])
+      stats = bucket.setdefault(key, empty_playtest_stats())
+      accumulate_playtest_result(stats, result)
 
   return {
     "filename": os.path.basename(file_path),
     "code_version": data.get("code_version", "unknown"),
+    "target": data.get("target", "unknown"),
     "seeds": data.get("seeds", []),
+    "difficulties": data.get("difficulties", []),
     "stabilization_sessions": len(stabilization),
     "competitive_sessions": len(competitive),
-    "profile_stats": profile_stats
+    "profile_stats": profile_stats,
+    "difficulty_stats": difficulty_stats,
+    "profile_difficulty_stats": profile_difficulty_stats
   }
 
 def format_metric_range(values):
@@ -218,6 +240,24 @@ def format_metric_range(values):
   if min(values) == max(values):
     return str(values[0])
   return f"{min(values)}-{max(values)}"
+
+def print_playtest_outcome_table(title, stats_by_key):
+  print(f"### {title}")
+  print("| Group | Sessions | Cash | Access | Beds | Workforce Trust | Community Trust | PC | Validation Failures | Representative Hashes |")
+  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
+  for group, stats in stats_by_key.items():
+    hashes = ", ".join(stats["hashes"][:3]) if stats["hashes"] else "N/A"
+    print(
+      f"| {group} | {stats['sessions']} | "
+      f"{format_metric_range(stats['cash'])} | "
+      f"{format_metric_range(stats['access'])} | "
+      f"{format_metric_range(stats['beds'])} | "
+      f"{format_metric_range(stats['workforce_trust'])} | "
+      f"{format_metric_range(stats['community_trust'])} | "
+      f"{format_metric_range(stats['political_capital'])} | "
+      f"{stats['validation_failures']} | {hashes} |"
+    )
+  print()
 
 def print_run_markdown(run_data):
   print(f"## Diagnostic Report for `{run_data['filename']}`")
@@ -311,26 +351,26 @@ def print_aggregated_markdown(runs):
 def print_playtest_batch_markdown(batch):
   print(f"## Playtest Batch Diagnostics for `{batch['filename']}`")
   print(f"- **Code version:** {batch['code_version']}")
+  print(f"- **Target:** {batch.get('target', 'unknown')}")
   print(f"- **Seeds:** {', '.join(str(seed) for seed in batch['seeds'])}")
+  if batch.get("difficulties"):
+    print(f"- **Competitive difficulties:** {', '.join(batch['difficulties'])}")
   print(f"- **Stabilization sessions:** {batch['stabilization_sessions']}")
   print(f"- **Competitive sessions:** {batch['competitive_sessions']}\n")
 
-  print("### Competitive Profile Outcomes")
-  print("| Profile | Sessions | Cash | Access | Beds | Workforce Trust | Community Trust | PC | Validation Failures | Representative Hashes |")
-  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
-  for profile, stats in batch["profile_stats"].items():
-    hashes = ", ".join(stats["hashes"][:3]) if stats["hashes"] else "N/A"
-    print(
-      f"| {profile} | {stats['sessions']} | "
-      f"{format_metric_range(stats['cash'])} | "
-      f"{format_metric_range(stats['access'])} | "
-      f"{format_metric_range(stats['beds'])} | "
-      f"{format_metric_range(stats['workforce_trust'])} | "
-      f"{format_metric_range(stats['community_trust'])} | "
-      f"{format_metric_range(stats['political_capital'])} | "
-      f"{stats['validation_failures']} | {hashes} |"
+  print_playtest_outcome_table("Competitive Profile Outcomes", batch["profile_stats"])
+
+  if batch.get("difficulty_stats"):
+    print_playtest_outcome_table(
+      "Competitive Outcomes by Difficulty",
+      batch["difficulty_stats"]
     )
-  print()
+
+  if batch.get("profile_difficulty_stats") and len(batch["profile_difficulty_stats"]) > len(batch["profile_stats"]):
+    print_playtest_outcome_table(
+      "Competitive Profile Outcomes by Difficulty",
+      batch["profile_difficulty_stats"]
+    )
 
   print("### Competitive Action Frequency Signals")
   print("| Profile | Holds | Action Commands | Project Commands | Top Non-Hold Verb | Strategy Classification |")
