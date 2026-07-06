@@ -12,6 +12,12 @@ def parse_command_verb(cmd):
     return list(cmd.keys())[0]
   return "Unknown"
 
+def parse_summary_command_verbs(command_text):
+  verbs = []
+  for verb in ["Monitor", "Recruit", "Invest", "Negotiate", "Commit", "Project", "Hold"]:
+    verbs.extend([verb] * command_text.count(verb))
+  return verbs
+
 def classify_strategy(hold_count, verb_counts):
   total_commands = hold_count + sum(verb_counts.values())
   if total_commands == 0:
@@ -135,6 +141,68 @@ def analyze_single_run(file_path):
     "system_stats": system_stats
   }
 
+def analyze_playtest_batch(file_path, data):
+  competitive = data.get("campaigns", {}).get("competitive-regional-v1", [])
+  stabilization = data.get("campaigns", {}).get("stabilization-v1", [])
+  if not competitive and not stabilization:
+    print(f"Skipping {file_path}: playtest batch has no campaign results.", file=sys.stderr)
+    return None
+
+  profile_stats = {}
+  for result in competitive:
+    strategy = result.get("strategy", "Unknown")
+    stats = profile_stats.setdefault(strategy, {
+      "sessions": 0,
+      "holds": 0,
+      "verbs": Counter(),
+      "validation_failures": 0,
+      "cash": [],
+      "access": [],
+      "beds": [],
+      "workforce_trust": [],
+      "community_trust": [],
+      "political_capital": [],
+      "hashes": []
+    })
+    stats["sessions"] += 1
+    stats["validation_failures"] += len(result.get("validation_failures", []))
+    for transition in result.get("transitions", []):
+      for verb in parse_summary_command_verbs(transition.get("command", "")):
+        if verb == "Hold":
+          stats["holds"] += 1
+        else:
+          stats["verbs"][verb] += 1
+    metrics = result.get("metrics", {})
+    for key, target in [
+      ("Cash", "cash"),
+      ("Access", "access"),
+      ("Beds", "beds"),
+      ("WorkforceTrust", "workforce_trust"),
+      ("CommunityTrust", "community_trust"),
+      ("PC", "political_capital")
+    ]:
+      value = metrics.get(key)
+      if value is not None and value != "N/A":
+        stats[target].append(int(value))
+    if metrics.get("Hash") and metrics["Hash"] != "N/A":
+      stats["hashes"].append(metrics["Hash"])
+
+  return {
+    "filename": os.path.basename(file_path),
+    "code_version": data.get("code_version", "unknown"),
+    "seeds": data.get("seeds", []),
+    "stabilization_sessions": len(stabilization),
+    "competitive_sessions": len(competitive),
+    "profile_stats": profile_stats
+  }
+
+def format_metric_range(values):
+  if not values:
+    return "N/A"
+  if min(values) == max(values):
+    return str(values[0])
+  return f"{min(values)}-{max(values)}"
+
 def print_run_markdown(run_data):
   print(f"## Diagnostic Report for `{run_data['filename']}`")
   print(f"- **Difficulty:** {run_data['difficulty']}")
@@ -215,7 +283,7 @@ def print_aggregated_markdown(runs):
     print(f"| Workforce Trust | {min(player_final_wf_trust)} | {max(player_final_wf_trust)} | {sum(player_final_wf_trust)/len(player_final_wf_trust):.1f} |")
     print(f"| Community Trust | {min(player_final_ct_trust)} | {max(player_final_ct_trust)} | {sum(player_final_ct_trust)/len(player_final_ct_trust):.1f} |")
     print()
-    
+
     print("### Player Strategy Profile Distribution")
     print("| Strategy Profile | Occurrence Count | Percentage |")
     print("| --- | ---: | ---: |")
@@ -223,6 +291,46 @@ def print_aggregated_markdown(runs):
       pct = (count / len(runs)) * 100
       print(f"| {strat} | {count} | {pct:.1f}% |")
     print()
+
+def print_playtest_batch_markdown(batch):
+  print(f"## Playtest Batch Diagnostics for `{batch['filename']}`")
+  print(f"- **Code version:** {batch['code_version']}")
+  print(f"- **Seeds:** {', '.join(str(seed) for seed in batch['seeds'])}")
+  print(f"- **Stabilization sessions:** {batch['stabilization_sessions']}")
+  print(f"- **Competitive sessions:** {batch['competitive_sessions']}\n")
+
+  print("### Competitive Profile Outcomes")
+  print("| Profile | Sessions | Cash | Access | Beds | Workforce Trust | Community Trust | PC | Validation Failures | Representative Hashes |")
+  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
+  for profile, stats in batch["profile_stats"].items():
+    hashes = ", ".join(stats["hashes"][:3]) if stats["hashes"] else "N/A"
+    print(
+      f"| {profile} | {stats['sessions']} | "
+      f"{format_metric_range(stats['cash'])} | "
+      f"{format_metric_range(stats['access'])} | "
+      f"{format_metric_range(stats['beds'])} | "
+      f"{format_metric_range(stats['workforce_trust'])} | "
+      f"{format_metric_range(stats['community_trust'])} | "
+      f"{format_metric_range(stats['political_capital'])} | "
+      f"{stats['validation_failures']} | {hashes} |"
+    )
+  print()
+
+  print("### Competitive Action Frequency Signals")
+  print("| Profile | Holds | Action Commands | Top Non-Hold Verb | Strategy Classification |")
+  print("| --- | ---: | ---: | --- | --- |")
+  for profile, stats in batch["profile_stats"].items():
+    non_holds = sum(stats["verbs"].values())
+    top_verb = stats["verbs"].most_common(1)
+    top_verb_str = f"{top_verb[0][0]} ({top_verb[0][1]})" if top_verb else "None"
+    strategy = classify_strategy(stats["holds"], stats["verbs"])
+    print(f"| {profile} | {stats['holds']} | {non_holds} | {top_verb_str} | {strategy} |")
+  print()
+
+  print("### Evidence Limits")
+  print("- Batch diagnostics use MCP transition summaries, final observations, and debriefs; they are not full replay artifacts.")
+  print("- These diagnostics support gameplay and explanation review, not human-learning, empirical calibration, or policy-validity claims.")
+  print("- Treat formula tuning or runtime expansion as a separate follow-up requiring stronger evidence.\n")
 
 def main():
   parser = argparse.ArgumentParser(description="Strategy-Space Diagnostics for Health Policy Strategy Game")
@@ -247,12 +355,25 @@ def main():
     
   # Analyze
   runs = []
+  batches = []
   for file in files:
-    res = analyze_single_run(file)
-    if res:
-      runs.append(res)
+    try:
+      with open(file, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    except Exception as e:
+      print(f"Error reading {file}: {e}", file=sys.stderr)
+      continue
+
+    if data.get("artifact_type") == "automated_playtest_batch":
+      res = analyze_playtest_batch(file, data)
+      if res:
+        batches.append(res)
+    else:
+      res = analyze_single_run(file)
+      if res:
+        runs.append(res)
       
-  if not runs:
+  if not runs and not batches:
     print("Error: No runs could be successfully parsed.", file=sys.stderr)
     sys.exit(1)
     
@@ -269,6 +390,10 @@ def main():
   print("# Strategy-Space Diagnostic Report")
   print("This diagnostic summary maps strategic actions, outcome distributions, and strategy-cluster classifications.\n")
   
+  for batch in batches:
+    print_playtest_batch_markdown(batch)
+    print("---")
+
   for run in runs:
     print_run_markdown(run)
     print("---")
