@@ -356,6 +356,10 @@ fn score_command(
       ..
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {
+      domain: InvestDomain::Neurology,
+      ..
+    } => (style.growth + style.access * 2) as i32,
+    CompetitiveCommand::Invest {
       domain: InvestDomain::Technology,
       ..
     } => (style.growth + style.margin) as i32,

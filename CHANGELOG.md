@@ -4,7 +4,16 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
-## [Unreleased]
+## [0.9.1] - 2026-07-05
+
+### Added
+- Implemented Neurology & Stroke Center inpatient service line mechanics.
+- Configured nurse-to-bed (1:3), physician-to-bed (1:6), and admin-to-bed (1:10) staffing targets for Neurology capacity.
+- Implemented hierarchical staffing allocation prioritizing Neurology 6th (after Psychiatric and before Oncology).
+- Added Neurology ED boarding & diversion rules (penalizing `-2` community trust and `-2` quality index under diversion).
+- Added `InvestDomain::Neurology` (direct beds) and `ProjectKind::NeurologyUnit` (6-month capital project) commands and resolution logic.
+- Extended CLI commands parser, autocomplete, REPL guidance documentation, and executive dashboard layout to support Neurology capacity.
+- Added comprehensive unit tests validating Neurology priority allocation, strike halving, and overflow rules.
 
 ## [0.9.0] - 2026-07-05
 
