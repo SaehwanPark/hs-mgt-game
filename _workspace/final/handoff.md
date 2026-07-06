@@ -40,17 +40,22 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
 
 ## PR Handoff
 
-- PR: pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/86
 - Branch: `feat/post-guidance-validation`
 - Base: `main`
 
 ## Review Summary
 
-- Pass 1: pending
-- Pass 2: pending
-- Pass 3: pending
-- CI/comment triage: pending
-- Merge-ready: no, pending PR handoff and review loop.
+- Pass 1: No actionable artifact correctness findings. Confirmed
+  `results.json` is valid, contains 18 sessions, and records zero validation
+  failures.
+- Pass 2: Low handoff bookkeeping finding fixed by recording the PR URL and
+  review state here.
+- Pass 3: No scope or CI findings. Confirmed changed files are limited to
+  docs/workspace artifacts, version metadata, and the generated evidence
+  artifact.
+- CI/comment triage: CI `check` passed; no PR comments or reviews were present.
+- Merge-ready: yes.
 
 ## Known Limits
 
