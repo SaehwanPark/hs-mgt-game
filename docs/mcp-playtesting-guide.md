@@ -15,8 +15,10 @@ The playtesting harness decouples the simulation logic from the player client:
 
 We have automated four scripted profiles (Fiscal Caution, Capacity Growth,
 Balanced Strategy, and Naive First-Time) across both the stabilization and
-competitive campaign previews. Treat these runs as simulated-player evidence;
-they do not measure actual human learning or classroom effectiveness.
+competitive campaign previews. Competitive scripts submit commands across the
+24-month campaign and include newer service-line, public-payer, staffing,
+monitoring, and commitment actions. Treat these runs as simulated-player
+evidence; they do not measure actual human learning or classroom effectiveness.
 
 To execute the automated playtests and print a comparison table of their ending metrics:
 
@@ -27,8 +29,8 @@ python3 scripts/run_automated_playtests.py
 To persist a compact JSON artifact for strategy-space diagnostics:
 
 ```bash
-python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/v0.9.5-playtest-batch/results.json
-python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.5-playtest-batch/results.json --output _workspace/experiments/v0.9.5-playtest-batch/diagnostics.md
+python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/v0.9.6-playtest-policy-coverage/results.json
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.6-playtest-policy-coverage/results.json --output _workspace/experiments/v0.9.6-playtest-policy-coverage/diagnostics.md
 ```
 
 ### Expected Output

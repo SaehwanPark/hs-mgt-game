@@ -3,6 +3,21 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Scripted MCP Policies Must Budget for Long-Run Cash Draws
+
+- Context: Extending competitive scripted playtest policies beyond month 3 for
+  v0.9.6.
+- Symptom: Early versions of the extended policies failed around months 5, 10,
+  12, 19, or 22 with validation errors such as cash required exceeding
+  available cash.
+- Cause: The validator correctly includes active project monthly draws and
+  current command costs. A policy can become invalid many months after an early
+  project or recruitment decision if later commands assume cash that no longer
+  exists.
+- Prevention: When writing scripted 24-month policies, keep project commands
+  rare, prefer low-cost direct investments for coverage slices, and rerun the
+  full `python3 scripts/run_automated_playtests.py --json-output ...` batch
+  before documenting findings.
 
 ## Clinical Service Line Expansion Checklist
 
