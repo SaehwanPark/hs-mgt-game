@@ -40,7 +40,8 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
   state here.
 - Pass 2: No actionable issues found.
 - Pass 3: No actionable issues found.
-- Merge-ready: pending CI/comment triage after push.
+- CI/comment triage: CI `check` passed; no PR comments or reviews were present.
+- Merge-ready: yes.
 
 ## Known Limits
 
@@ -52,5 +53,4 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
 
 ## Next Phase Dependency
 
-Push this handoff update, then triage CI or PR comments before marking
-merge-ready.
+No immediate next dependency remains for this slice beyond normal PR merge.
