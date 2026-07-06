@@ -1,65 +1,59 @@
-# Final Handoff - Difficulty-Adaptive Playtest Policies
+# Final Handoff - Free-Form Hard Competitive Playtest Synthesis
 
 ## Summary
 
-Added a targeted Phase 7 automated MCP playtest mode for difficulty-adaptive
-competitive policies and bumped the package version to `0.9.9`. The harness runs
-baseline scripted profiles at Easy and Hard difficulty with rival-aware command
-adjustments on Hard (reduced aggressive invests, added monitors/holds, workforce-
-commit preference when trust is low). Batch diagnostics now include an adaptive
-action-frequency comparison section.
+Collected bounded free-form MCP competitive sessions at Hard difficulty on the
+full 24-month campaign and bumped the package version to `0.10.0`. Three
+observation-driven profiles (Fiscal Steward, Access Expansion Advocate,
+First-Time Executive) completed seed-42 Hard runs with zero validation failures.
+Findings compare free-form endpoints against v0.9.9 difficulty-adaptive scripted
+Hard baselines.
 
 This slice does not change simulation behavior, command grammar, scenario
 schemas, MCP DTOs, replay formats, state hashes, or balance values.
 
 ## Changed Files
 
-- `scripts/run_automated_playtests.py`: added `--target difficulty-adaptive`,
-  `adapt_command`, and `with_difficulty` policy wrapper.
-- `scripts/diagnose_runs.py`: added difficulty-adaptive action comparison notes.
-- `docs/playtest-findings-v0.9.9.md`: new targeted difficulty-adaptive findings.
-- `docs/mcp-playtesting-guide.md`: documented the difficulty-adaptive target.
-- `SPEC.md`: completed v0.9.9 slice and Past rollup row.
-- `CHANGELOG.md`: v0.9.9 release note.
+- `docs/playtest-findings-v0.10.0.md`: new free-form Hard competitive findings.
+- `docs/mcp-playtesting-guide.md`: documented free-form Hard competitive procedure.
+- `_workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`: operator capture script.
+- `_workspace/experiments/v0.10.0-free-form-hard/results.json`: captured session artifact.
+- `SPEC.md`: completed v0.10.0 slice and Past rollup row.
+- `CHANGELOG.md`: v0.10.0 release note.
 - `Cargo.toml` and `Cargo.lock`: package metadata version bump.
 - `_workspace/00_input/request-summary.md`: current request framing.
 - `_workspace/final/handoff.md`: this handoff.
 
 ## Evidence Summary
 
-The targeted MCP batch completed 36 sessions: 12 stabilization sessions and 24
-competitive sessions across Easy and Hard difficulty, four baseline profiles,
-and seeds `42`, `43`, `44`. No validation failures, crashes, hangs, or
-incomplete sessions were observed.
+Three Hard competitive sessions at seed 42 completed 24 months each with zero
+validation failures. Free-form endpoints diverged materially from v0.9.9
+adaptive scripted Hard baselines: cash 38–60 versus 7–20, access 84–100 versus
+72–75, community trust 72–100 versus 66–67. All three free-form final hashes
+differ from each other and from scripted Hard seed-42 hashes.
 
-Hard adaptive policies increased monitor commands (147 vs 84 pooled) and
-differentiated Capacity Growth and Balanced Strategy endpoints across tiers.
-Naive First-Time remained unchanged because hold-heavy static commands bypass
-most adaptation rules. The findings are simulated-agent validation evidence,
-not balance, calibration, or human-learning evidence.
+The findings are simulated-agent validation evidence, not balance, calibration,
+or human-learning evidence.
 
 ## Verification
 
+- Operator capture: `python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`
 - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
-- `python3 scripts/run_automated_playtests.py --target difficulty-adaptive --json-output _workspace/experiments/v0.9.9-difficulty-adaptive/results.json`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.9-difficulty-adaptive/results.json --output _workspace/experiments/v0.9.9-difficulty-adaptive/diagnostics.md`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
 
 ## Known Limits
 
-- Batch diagnostics use MCP transition summaries and debriefs, not full replay
-  artifacts.
-- Adaptation rules are deterministic heuristics over observation text, not
-  LLM or best-response play.
-- Hold-heavy profiles can still mask difficulty-tier differences in player-facing
-  debrief metrics.
-- No raw transcript artifact is committed.
+- Operator policies are deterministic observation heuristics, not LLM or human play.
+- Only seed 42 was exercised in this slice.
+- Access Expansion Advocate and First-Time Executive entered repetitive
+  commitment loops under persistent scrutiny cues.
+- Operator script and JSON artifact live under `_workspace/experiments/` and are
+  not required for CI.
 
 ## Next Phase Dependency
 
-Future difficulty-aware playtest work should use free-form agent profiles at
-Hard difficulty when scripted heuristics are insufficient. Runtime or balance
-changes should require stronger repeated-run, scenario-specific, or domain-review
-evidence.
+Extend free-form Hard evidence to seeds 43 and 44 before broader
+strategy-diversity claims. Runtime or balance changes should require stronger
+repeated-run, scenario-specific, or domain-review evidence.

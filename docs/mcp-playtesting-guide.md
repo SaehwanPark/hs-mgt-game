@@ -143,3 +143,36 @@ commands only from player-facing docs, current MCP observations, and the
 The run may use `scripts/play_game.py` interactively or a small operator-owned
 MCP client wrapper. Do not commit a new LLM runner unless repeated findings show
 that the existing client cannot capture the needed evidence.
+
+## Free-Form Hard Competitive Runs
+
+Use this procedure when collecting observation-driven free-form evidence on the
+full 24-month competitive campaign at Hard difficulty. This extends the general
+free-form procedure above. This slice omits stabilization and Normal difficulty;
+it is competitive Hard only.
+
+1. Build the MCP server: `cargo build --bin hs-mgt-game-mcp`.
+2. Start `competitive-regional-v1` with `difficulty=hard` and seed `42` unless
+   the findings question requires seed variation.
+3. Use deterministic observation-heuristic policies or manual command entry
+   (not LLM play unless separately documented). Choose commands only from
+   player-facing docs, current MCP observations, and `legal_commands` hints.
+   Record persona prompts, per-month observation cues, submitted commands,
+   validation failures, transition hashes, and final debrief metrics.
+4. Run at least two distinct free-form profiles. Recommended personas from prior
+   evidence: Free-Form Fiscal Steward, Free-Form Access Expansion Advocate, and
+   Free-Form First-Time Executive.
+5. Compare outcomes against the v0.9.9 `--target difficulty-adaptive` Hard
+   scripted baselines for the same seed rather than treating either artifact as
+   balance evidence.
+6. Label results as free-form simulated-agent evidence. Do not present them as
+   human learning, empirical calibration, or policy forecasting.
+
+Operator capture for free-form Hard competitive runs:
+
+```bash
+python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py
+```
+
+The operator script writes `_workspace/experiments/v0.10.0-free-form-hard/results.json`.
+Findings are synthesized in versioned `docs/playtest-findings-v*.md` artifacts.

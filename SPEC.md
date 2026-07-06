@@ -109,6 +109,43 @@ reconstructing it from the diff.
 | Project-Command Playtest Diagnostics | v0.9.7 | Add targeted project-command MCP playtest mode and diagnostic reporting for project kinds, active projects, and monthly draws | 282 | `8926f71296f39efc` (competitive) |
 | Difficulty-Tier Playtest Synthesis | v0.9.8 | Add targeted difficulty-sweep MCP playtest mode and per-difficulty diagnostic reporting for Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
 | Difficulty-Adaptive Playtest Policies | v0.9.9 | Add targeted difficulty-adaptive MCP playtest mode with rival-aware scripted policy adjustments at Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
+| Free-Form Hard Competitive Playtest Synthesis | v0.10.0 | Record observation-driven free-form MCP competitive sessions at Hard difficulty on the full 24-month campaign | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Free-Form Hard Competitive Playtest Synthesis
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.10.0
+
+  Summary:
+  Collected bounded free-form MCP competitive sessions at Hard difficulty on the
+  full 24-month campaign. Documented observation-driven play evidence and compared
+  outcomes against v0.9.9 difficulty-adaptive scripted Hard baselines.
+
+  Done:
+  - Ran three free-form profiles (Fiscal Steward, Access Expansion Advocate,
+    First-Time Executive) at Hard difficulty, seed 42, with zero validation
+    failures across 24 months each.
+  - Added `docs/playtest-findings-v0.10.0.md` with session matrix, outcome
+    comparison vs v0.9.9 adaptive Hard baselines, evidence limits, and
+    follow-up routing.
+  - Updated the MCP playtesting guide with the free-form Hard competitive
+    procedure.
+  - Bumped package metadata to `0.10.0`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No new LLM runner, Expert difficulty sweep, seed-variation batch, or
+    human-learning / calibration claim.
+  - No default baseline batch replacement in `scripts/run_automated_playtests.py`.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Difficulty-Adaptive Playtest Policies
