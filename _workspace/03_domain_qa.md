@@ -1,4 +1,4 @@
-# Domain QA - Free-Form Hard Seed Variation
+# Domain QA - Access-Loop Diagnostic
 
 - **Status:** Complete
 - **Role:** Domain QA Reviewer
@@ -6,7 +6,7 @@
 ## Checklist & Review Criteria
 
 - [x] **Scope Fit:** The slice stays in Phase 7 validation/evidence work by
-  extending free-form Hard competitive sessions across seeds 42, 43, and 44.
+  comparing operator-policy variants for an issue identified in v0.10.1.
 - [x] **State/Observation Separation:** Operator policies use only MCP
   observations, legal-command hints, and player-facing documentation. No active
   observation surface is expanded.
@@ -17,15 +17,15 @@
 - [x] **Evidence Labeling:** Findings label results as simulated-agent evidence
   and explicitly exclude human-learning, empirical calibration, policy-validity,
   and balance claims.
-- [x] **Narrow Follow-Up Routing:** The follow-up recommends only bounded
-  heuristic/comprehension testing if repetitive pledge loops need evaluation.
+- [x] **Narrow Follow-Up Routing:** The follow-up routes repetitive access
+  pledges to guidance or operator-policy evaluation before any runtime change.
 
 ## Findings & Risk Mitigation
 
-- **Pass:** All nine Hard competitive sessions completed 24 months with zero
+- **Pass:** All 27 Hard competitive sessions completed 24 months with zero
   validation failures.
-- **Pass:** Seed 42 reproduces v0.10.0 endpoint metrics and final hashes for all
-  three unchanged free-form policies.
-- **Watch:** Access-heavy policies repeat commitments once scrutiny cues
-  persist. The findings frame this as a future comprehension diagnostic, not as
-  optimal play or balance evidence.
+- **Pass:** Cooldown and threshold variants reduced aggregate access pledges
+  from 162 baseline pledges to 72 and 60 respectively.
+- **Watch:** Reduced pledging also reduced access and/or community-trust
+  endpoints for access-heavy profiles, so the artifact should not be used for
+  direct runtime balance tuning.

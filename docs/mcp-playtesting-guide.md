@@ -188,3 +188,16 @@ The seed-variation script writes
 `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json`.
 Use it to test completion and profile endpoint stability across seeds, not to
 justify balance or runtime changes.
+
+To compare the v0.10.1 free-form Hard policies against bounded access-pledge
+cooldown and reported-access-threshold variants:
+
+```bash
+python3 _workspace/experiments/v0.10.2-access-loop-diagnostic/run_sessions.py
+```
+
+The access-loop diagnostic script writes
+`_workspace/experiments/v0.10.2-access-loop-diagnostic/results.json`. Use it to
+test whether repetitive access commitments are reducible through operator-policy
+or guidance changes. Do not treat it as evidence for runtime balance changes or
+automatic command cooldowns.

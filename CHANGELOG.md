@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.2] - 2026-07-06
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.2.md` with a free-form Hard
+  access-loop diagnostic comparing unchanged baseline policies against bounded
+  access-pledge cooldown and reported-access-threshold variants.
+- Added operator capture script and JSON artifact at
+  `_workspace/experiments/v0.10.2-access-loop-diagnostic/`.
+- Documented the access-loop diagnostic procedure in
+  `docs/mcp-playtesting-guide.md`.
+
+### Changed
+- Bumped the package version to `0.10.2`.
+
 ## [0.10.1] - 2026-07-06
 
 ### Added

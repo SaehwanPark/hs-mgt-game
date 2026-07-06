@@ -3,6 +3,24 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Access-Loop Diagnostics Should Precede Runtime Cooldowns
+
+- Context: The v0.10.1 free-form Hard seed-variation findings showed access-heavy
+  operator policies repeatedly issuing public access commitments under persistent
+  scrutiny cues.
+- Symptom: The repeated commands could be mistaken for a balance problem or a
+  need for automatic runtime cooldowns.
+- Cause: The operator policies reacted to recurring observation language without
+  remembering recent pledges or requiring a high-access threshold before
+  pledging again.
+- Resolution: The v0.10.2 diagnostic compared unchanged baseline policies
+  against cooldown and reported-access-threshold variants. Both variants reduced
+  access pledges while completing all sessions, but also changed access and
+  community-trust endpoints for access-heavy profiles.
+- Prevention: Treat repeated pledge loops as guidance or operator-policy
+  diagnostics first. Do not tune pledge effects or add runtime cooldowns without
+  stronger human, LLM, or domain-review evidence.
+
 ## Targeted Project Playtests Must Account for Scenario Delays
 
 - Context: Adding the v0.9.7 `project-coverage` automated MCP playtest target.
