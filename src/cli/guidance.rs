@@ -112,12 +112,12 @@ pub fn context_help_lines(context: PromptContext) -> Vec<String> {
       // Note: Keep command details here aligned with `command_topic_help_lines` below to avoid doc drift.
       lines.push("  Command descriptions and resource costs:".to_string());
       lines.push("    hold: Do nothing. Costs 0 AP, $0 cash, 0 PC.".to_string());
-      lines.push("    invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, technology, emergency, ICU, obstetrics, psychiatric, cardiology, oncology, or infusion investments.".to_string());
+      lines.push("    invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology|asc amount=<int>: Expand capacity. Costs 1 AP, cash amount. Beds, outpatient services, technology, emergency, ICU, obstetrics, psychiatric, cardiology, oncology, infusion, neurology, or ASC investments.".to_string());
       lines.push("    recruit role=nurse|physician|admin headcount=<int>: Hire personnel. Costs 1 AP, $5 cash per headcount. Delays: nurse (1 mo), admin (2 mo), physician (3 mo). Can lower trust.".to_string());
       lines.push("    monitor target=northlake|summit|valley|metro depth=<1-3>: View competitor activity. Costs AP equal to depth, $0 cash, 0 PC.".to_string());
       lines.push("    negotiate payer=carrier_a|carrier_b|medicaid|medicare rate_posture=aggressive|neutral|conservative: Set payer commercial bid or align public compliance. Commercial: 1 AP, $0 cash, 2 PC. Medicaid: 1 AP, $5 cash, 2 PC (neutral posture only). Medicare: 1 AP, $10 cash, 2 PC (neutral posture only).".to_string());
-      lines.push("    commit pledge_type=access|quality|workforce level=<1-5>: Public commitments. Costs 1 AP, $0 cash, 1 PC.".to_string());
-      lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center budget=<int>: Multi-month capital projects. Costs 2 AP (3 AP for icu_wing), monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo), emergency_pavilion (6 mo), icu_wing (12 mo), obstetrics_unit (9 mo), psychiatric_unit (6 mo), cardiology_unit (6 mo), oncology_unit (9 mo), infusion_center (6 mo). Max 2 concurrent projects.".to_string());
+      lines.push("    commit pledge_type=access|quality|workforce level=<1-5>: Public legitimacy commitments. Costs 1 AP, $0 cash, 1 PC. Access pledges can reduce scrutiny, but repeated pledges do not replace durable capacity, staffing, monitoring, or payer work.".to_string());
+      lines.push("    project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit|asc_unit budget=<int>: Multi-month capital projects. Costs 2 AP (3 AP for icu_wing or oncology_unit), monthly cash draw (budget/duration). Duration: epic/cerner (12 mo), tower (12 mo), clinic_network (9 mo), emergency_pavilion (6 mo), icu_wing (12 mo), obstetrics_unit (9 mo), psychiatric_unit (6 mo), cardiology_unit (6 mo), oncology_unit (9 mo), infusion_center (6 mo), neurology_unit (6 mo), asc_unit (6 mo). Max 2 concurrent projects.".to_string());
       lines.push("  Press Enter to use the fallback batch for this month.".to_string());
     }
   }
@@ -355,7 +355,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - workforce: Pledges to accept RNA wage demands during workforce disputes."),
       style::label_value(
         "  Strategic Guidance",
-        "Public commitments build political goodwill and long-term trust. Failing to meet your commitments will severely damage system credibility.",
+        "Public commitments build political goodwill and long-term trust. Use access pledges when scrutiny is high, but do not repeat them as a substitute for durable capacity, staffing, monitoring, or payer work. Failing to meet your commitments will severely damage system credibility.",
       ),
     ]),
     "project" => Some(vec![
@@ -477,6 +477,30 @@ mod tests {
     assert!(text.contains("above-target rates"));
     assert!(text.contains("visible payer leverage"));
     assert!(guidance_has_no_outcome_spoilers(&text));
+  }
+
+  #[test]
+  fn commit_help_distinguishes_access_pledges_from_durable_actions() {
+    let lines = command_topic_help_lines("commit").expect("commit help");
+    let joined = lines.join("\n");
+
+    assert!(joined.contains("Use access pledges when scrutiny is high"));
+    assert!(joined.contains("durable capacity, staffing, monitoring, or payer work"));
+  }
+
+  #[test]
+  fn competitive_general_help_matches_current_capacity_vocabularies() {
+    let joined = context_help_lines(PromptContext::CompetitiveCommand).join("\n");
+
+    for expected in [
+      "neurology",
+      "asc",
+      "neurology_unit",
+      "asc_unit",
+      "repeated pledges do not replace durable capacity",
+    ] {
+      assert!(joined.contains(expected), "missing {expected}");
+    }
   }
 
   #[test]

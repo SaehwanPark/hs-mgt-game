@@ -190,6 +190,10 @@ Use this triage playbook.
 - Commercial rate asks work best when you have visible leverage. Reported access,
   capacity, quality, and market context matter; a high rate posture by itself can
   create relationship risk without improving your outside option.
+- Public access pledges can reduce scrutiny and build legitimacy, especially
+  when access pressure is visible. Repeating access pledges is not the same as
+  adding durable capacity, staffing, monitoring rivals, or improving payer
+  posture; use commitments with operational follow-through.
 - Recruitment is not instant capacity. Hiring spends cash immediately, resolves
   after role-specific delays, and can strain workforce trust while the added
   capacity is still pending.
