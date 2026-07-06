@@ -163,6 +163,8 @@ pub struct HealthSystemState {
   pub infusion_capacity: i32,
   #[serde(default)]
   pub neurology_capacity: i32,
+  #[serde(default)]
+  pub asc_capacity: i32,
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,
@@ -224,6 +226,10 @@ pub enum PendingEffectKind {
     project_draw: Option<i32>,
   },
   NeurologyCapacity {
+    capacity_delta: i32,
+    project_draw: Option<i32>,
+  },
+  AscCapacity {
     capacity_delta: i32,
     project_draw: Option<i32>,
   },

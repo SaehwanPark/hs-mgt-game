@@ -115,6 +115,7 @@ pub fn apply_month_start_tick(
             | PendingEffectKind::OncologyCapacity { .. }
             | PendingEffectKind::InfusionCapacity { .. }
             | PendingEffectKind::NeurologyCapacity { .. }
+            | PendingEffectKind::AscCapacity { .. }
             | PendingEffectKind::TechnologyQuality { .. } => {
               effect.resolve_month += 1;
             }
@@ -201,7 +202,14 @@ pub fn apply_month_start_tick(
             // Check staffing ratio < 80%
             let target_nurses = (riverside.staffed_beds + 4) / 5
               + (riverside.emergency_capacity + 1) / 2
-              + riverside.icu_capacity;
+              + riverside.icu_capacity
+              + (riverside.obstetrics_capacity + 1) / 2
+              + (riverside.psychiatric_capacity + 3) / 4
+              + (riverside.cardiology_capacity + 2) / 3
+              + (riverside.oncology_capacity + 2) / 3
+              + (riverside.infusion_capacity + 3) / 4
+              + (riverside.neurology_capacity + 2) / 3
+              + (riverside.asc_capacity + 1) / 2;
             let staffing_ratio = if target_nurses > 0 {
               riverside.nurses as f32 / target_nurses as f32
             } else {
@@ -516,6 +524,25 @@ fn apply_pending_effect(
         actor: "health_system",
         description: format!(
           "{}: capital project expands Neurology capacity (+{capacity_delta} beds)",
+          system.name
+        ),
+      });
+    }
+    PendingEffectKind::AscCapacity {
+      capacity_delta,
+      project_draw,
+    } => {
+      let system = &mut world.systems[system_idx];
+      system.asc_capacity += capacity_delta;
+      if let Some(draw) = project_draw {
+        system.resources.active_projects = system.resources.active_projects.saturating_sub(1);
+        system.resources.active_project_monthly_draws =
+          (system.resources.active_project_monthly_draws - draw).max(0);
+      }
+      events.push(Event {
+        actor: "health_system",
+        description: format!(
+          "{}: capital project expands ASC capacity (+{capacity_delta} bays)",
           system.name
         ),
       });

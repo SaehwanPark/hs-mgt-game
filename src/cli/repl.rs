@@ -121,6 +121,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
           "oncology",
           "infusion",
           "neurology",
+          "asc",
         ],
       ),
       ("amount", &[]),
@@ -157,6 +158,7 @@ fn get_verb_args(verb: &str) -> Option<&'static [(&'static str, &'static [&'stat
           "oncology_unit",
           "infusion_center",
           "neurology_unit",
+          "asc_unit",
         ],
       ),
       ("budget", &[]),
@@ -316,7 +318,8 @@ mod tests {
         "cardiology".to_string(),
         "oncology".to_string(),
         "infusion".to_string(),
-        "neurology".to_string()
+        "neurology".to_string(),
+        "asc".to_string()
       ]
     );
   }

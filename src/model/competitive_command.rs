@@ -25,6 +25,7 @@ pub enum InvestDomain {
   Oncology,
   Infusion,
   Neurology,
+  Asc,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -71,6 +72,7 @@ pub enum ProjectKind {
   OncologyUnit,
   InfusionCenter,
   NeurologyUnit,
+  AscUnit,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -126,6 +128,7 @@ impl ProjectKind {
       ProjectKind::OncologyUnit => 9,
       ProjectKind::InfusionCenter => 6,
       ProjectKind::NeurologyUnit => 6,
+      ProjectKind::AscUnit => 6,
     }
   }
 }

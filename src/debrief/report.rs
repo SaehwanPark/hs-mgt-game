@@ -567,6 +567,95 @@ fn analyze_decision_quality(history: &CompetitiveHistory) -> Vec<String> {
         }
       }
     }
+
+    // 5. ASC Deferrals Hook
+    let target_nurses_icu = human_prior.icu_capacity;
+    let nurses_icu = human_prior.nurses.min(target_nurses_icu);
+    let remaining_nurses_obs = (human_prior.nurses - nurses_icu).max(0);
+
+    let target_nurses_obs = (human_prior.obstetrics_capacity + 1) / 2;
+    let nurses_obs = remaining_nurses_obs.min(target_nurses_obs);
+    let remaining_nurses_ms = (remaining_nurses_obs - nurses_obs).max(0);
+
+    let target_nurses_beds = (human_prior.staffed_beds + 4) / 5;
+    let nurses_beds = remaining_nurses_ms.min(target_nurses_beds);
+    let remaining_nurses_cardio = (remaining_nurses_ms - nurses_beds).max(0);
+
+    let target_nurses_cardio = (human_prior.cardiology_capacity + 2) / 3;
+    let nurses_cardio = remaining_nurses_cardio.min(target_nurses_cardio);
+    let remaining_nurses_psych = (remaining_nurses_cardio - nurses_cardio).max(0);
+
+    let target_nurses_psych = (human_prior.psychiatric_capacity + 3) / 4;
+    let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
+    let remaining_nurses_neuro = (remaining_nurses_psych - nurses_psych).max(0);
+
+    let target_nurses_neuro = (human_prior.neurology_capacity + 2) / 3;
+    let nurses_neuro = remaining_nurses_neuro.min(target_nurses_neuro);
+    let remaining_nurses_oncology = (remaining_nurses_neuro - nurses_neuro).max(0);
+
+    let target_nurses_oncology = (human_prior.oncology_capacity + 2) / 3;
+    let nurses_oncology = remaining_nurses_oncology.min(target_nurses_oncology);
+    let remaining_nurses_infusion = (remaining_nurses_oncology - nurses_oncology).max(0);
+
+    let target_nurses_infusion = (human_prior.infusion_capacity + 3) / 4;
+    let nurses_infusion = remaining_nurses_infusion.min(target_nurses_infusion);
+    let remaining_nurses_asc = (remaining_nurses_infusion - nurses_infusion).max(0);
+
+    let target_nurses_asc = (human_prior.asc_capacity + 1) / 2;
+    let nurses_asc = remaining_nurses_asc.min(target_nurses_asc);
+
+    let target_physicians_icu = (human_prior.icu_capacity + 1) / 2;
+    let physicians_icu = human_prior.physicians.min(target_physicians_icu);
+    let remaining_physicians_obs = (human_prior.physicians - physicians_icu).max(0);
+
+    let target_physicians_obs = (human_prior.obstetrics_capacity + 4) / 5;
+    let physicians_obs = remaining_physicians_obs.min(target_physicians_obs);
+    let remaining_physicians_cardio = (remaining_physicians_obs - physicians_obs).max(0);
+
+    let target_physicians_cardio = (human_prior.cardiology_capacity + 7) / 8;
+    let physicians_cardio = remaining_physicians_cardio.min(target_physicians_cardio);
+    let remaining_physicians_psych = (remaining_physicians_cardio - physicians_cardio).max(0);
+
+    let target_physicians_psych = (human_prior.psychiatric_capacity + 9) / 10;
+    let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
+    let remaining_physicians_neuro = (remaining_physicians_psych - physicians_psych).max(0);
+
+    let target_physicians_neuro = (human_prior.neurology_capacity + 5) / 6;
+    let physicians_neuro = remaining_physicians_neuro.min(target_physicians_neuro);
+    let remaining_physicians_oncology = (remaining_physicians_neuro - physicians_neuro).max(0);
+
+    let target_physicians_oncology = (human_prior.oncology_capacity + 7) / 8;
+    let physicians_oncology = remaining_physicians_oncology.min(target_physicians_oncology);
+    let remaining_physicians_infusion =
+      (remaining_physicians_oncology - physicians_oncology).max(0);
+
+    let target_physicians_infusion = (human_prior.infusion_capacity + 14) / 15;
+    let physicians_infusion = remaining_physicians_infusion.min(target_physicians_infusion);
+    let remaining_physicians_asc = (remaining_physicians_infusion - physicians_infusion).max(0);
+
+    let target_physicians_asc = (human_prior.asc_capacity + 3) / 4;
+    let physicians_asc = remaining_physicians_asc.min(target_physicians_asc);
+
+    let mut eff_asc = human_prior
+      .asc_capacity
+      .min(nurses_asc * 2)
+      .min(physicians_asc * 4);
+
+    if human_prior.system_id == 0
+      && transition.prior.event_metadata.get("rna_strike_active") == Some(&"true".to_string())
+    {
+      eff_asc /= 2;
+    }
+
+    let asc_demand = (human_prior.asc_capacity + 7) / 8;
+    let deferred_asc = (asc_demand - eff_asc).max(0);
+
+    if deferred_asc > 0 {
+      warnings.push(format!(
+        "  - Warning: Ambulatory surgery center procedures were deferred due to capacity/staffing constraints, causing patient leakage in Month {}.",
+        month_idx
+      ));
+    }
   }
 
   if warnings.is_empty() {
@@ -602,6 +691,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
         InvestDomain::Oncology => "oncology",
         InvestDomain::Infusion => "infusion",
         InvestDomain::Neurology => "neurology",
+        InvestDomain::Asc => "asc",
       };
       format!("invest domain={} amount={}", d, amount)
     }
@@ -653,6 +743,7 @@ fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
         ProjectKind::OncologyUnit => "oncology_unit",
         ProjectKind::InfusionCenter => "infusion_center",
         ProjectKind::NeurologyUnit => "neurology_unit",
+        ProjectKind::AscUnit => "asc_unit",
       };
       format!("project kind={} budget={}", k, budget)
     }

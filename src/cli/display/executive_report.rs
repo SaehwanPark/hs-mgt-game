@@ -102,7 +102,11 @@ pub fn render_executive_report(
 
   let target_nurses_infusion = (observation.infusion_capacity + 3) / 4;
   let nurses_infusion = remaining_nurses_infusion.min(target_nurses_infusion);
-  let remaining_nurses_ed = (remaining_nurses_infusion - nurses_infusion).max(0);
+  let remaining_nurses_asc = (remaining_nurses_infusion - nurses_infusion).max(0);
+
+  let target_nurses_asc = (observation.asc_capacity + 1) / 2;
+  let nurses_asc = remaining_nurses_asc.min(target_nurses_asc);
+  let remaining_nurses_ed = (remaining_nurses_asc - nurses_asc).max(0);
 
   let target_nurses_ed = (observation.emergency_capacity + 1) / 2;
   let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
@@ -133,7 +137,11 @@ pub fn render_executive_report(
 
   let target_physicians_infusion = (observation.infusion_capacity + 14) / 15;
   let physicians_infusion = remaining_physicians_infusion.min(target_physicians_infusion);
-  let remaining_physicians_op = (remaining_physicians_infusion - physicians_infusion).max(0);
+  let remaining_physicians_asc = (remaining_physicians_infusion - physicians_infusion).max(0);
+
+  let target_physicians_asc = (observation.asc_capacity + 3) / 4;
+  let physicians_asc = remaining_physicians_asc.min(target_physicians_asc);
+  let remaining_physicians_op = (remaining_physicians_asc - physicians_asc).max(0);
 
   let target_physicians_outpatient = (observation.outpatient_capacity + 9) / 10;
   let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
@@ -171,6 +179,10 @@ pub fn render_executive_report(
     .neurology_capacity
     .min(nurses_neuro * 3)
     .min(physicians_neuro * 6);
+  let mut eff_asc = observation
+    .asc_capacity
+    .min(nurses_asc * 2)
+    .min(physicians_asc * 4);
   let mut eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
@@ -188,6 +200,7 @@ pub fn render_executive_report(
     eff_oncology /= 2;
     eff_infusion /= 2;
     eff_neuro /= 2;
+    eff_asc /= 2;
     eff_clinics /= 2;
     eff_emergency /= 2;
   }
@@ -229,6 +242,10 @@ pub fn render_executive_report(
   let infusion_demand = (observation.infusion_capacity + 4) / 5;
   let deferred_infusion = (infusion_demand - eff_infusion).max(0);
 
+  // ASC Deferral Calculation
+  let asc_demand = (observation.asc_capacity + 7) / 8;
+  let deferred_asc = (asc_demand - eff_asc).max(0);
+
   // Obstetric Diversion Calculation
   let obstetric_demand = (observation.obstetrics_capacity + 9) / 10;
   let diverted_patients = (obstetric_demand - eff_obs).max(0);
@@ -268,6 +285,10 @@ pub fn render_executive_report(
   lines.push(format!(
     "  • Neurology capacity: {} beds (effective: {})",
     observation.neurology_capacity, eff_neuro
+  ));
+  lines.push(format!(
+    "  • ASC capacity: {} bays (effective: {})",
+    observation.asc_capacity, eff_asc
   ));
   if diverted_patients > 0 {
     lines.push(format!(
@@ -330,6 +351,12 @@ pub fn render_executive_report(
     lines.push(format!(
       "  • Infusion sessions deferred: {} patients",
       deferred_infusion
+    ));
+  }
+  if deferred_asc > 0 {
+    lines.push(format!(
+      "  • Outpatient surgery procedures deferred: {} patients",
+      deferred_asc
     ));
   }
   lines.push(format!(
