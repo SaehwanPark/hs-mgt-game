@@ -111,6 +111,44 @@ reconstructing it from the diff.
 | Difficulty-Adaptive Playtest Policies | v0.9.9 | Add targeted difficulty-adaptive MCP playtest mode with rival-aware scripted policy adjustments at Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
 | Free-Form Hard Competitive Playtest Synthesis | v0.10.0 | Record observation-driven free-form MCP competitive sessions at Hard difficulty on the full 24-month campaign | 282 | `8926f71296f39efc` (competitive) |
 | Free-Form Hard Seed Variation | v0.10.1 | Extend free-form Hard competitive sessions across seeds 42, 43, and 44 | 282 | `8926f71296f39efc` (competitive) |
+| Access-Loop Diagnostic | v0.10.2 | Compare free-form Hard baseline policies against bounded access-pledge cooldown and reported-access-threshold variants | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access-Loop Diagnostic
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.10.2
+
+  Summary:
+  Tested whether the repetitive access-commitment loop found in v0.10.1 could be
+  reduced at the operator-policy layer. Compared unchanged baseline free-form
+  Hard policies against cooldown and reported-access-threshold variants across
+  the same three profiles and seeds 42, 43, and 44.
+
+  Done:
+  - Ran 27 Hard competitive sessions: three free-form profiles, three seeds, and
+    three policy variants, with zero validation failures across 24 months each.
+  - Added `docs/playtest-findings-v0.10.2.md` with variant definitions, command
+    totals, endpoint comparison, evidence limits, and follow-up routing.
+  - Added `_workspace/experiments/v0.10.2-access-loop-diagnostic/` operator
+    capture script and generated JSON artifact.
+  - Updated the MCP playtesting guide with the access-loop diagnostic procedure.
+  - Bumped package metadata to `0.10.2`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No automatic command cooldown, pledge-effect tuning, default scripted batch
+    replacement, or LLM runner.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.2-access-loop-diagnostic/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.2-access-loop-diagnostic/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Free-Form Hard Seed Variation
