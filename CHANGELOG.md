@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.0] - 2026-07-06
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.0.md` with free-form Hard competitive
+  MCP playtest evidence for three observation-driven profiles on the full
+  24-month campaign at seed 42.
+- Documented the free-form Hard competitive operator procedure in
+  `docs/mcp-playtesting-guide.md`.
+
+### Changed
+- Bumped the package version to `0.10.0`.
+
 ## [0.9.9] - 2026-07-06
 
 ### Added
