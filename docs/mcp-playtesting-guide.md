@@ -148,15 +148,17 @@ that the existing client cannot capture the needed evidence.
 
 Use this procedure when collecting observation-driven free-form evidence on the
 full 24-month competitive campaign at Hard difficulty. This extends the general
-free-form procedure above for the v0.10.0 validation slice.
+free-form procedure above. This slice omits stabilization and Normal difficulty;
+it is competitive Hard only.
 
 1. Build the MCP server: `cargo build --bin hs-mgt-game-mcp`.
 2. Start `competitive-regional-v1` with `difficulty=hard` and seed `42` unless
    the findings question requires seed variation.
-3. Choose commands only from player-facing docs, current MCP observations, and
-   `legal_commands` hints. Record persona prompts, per-month observation cues,
-   submitted commands, validation failures, transition hashes, and final debrief
-   metrics.
+3. Use deterministic observation-heuristic policies or manual command entry
+   (not LLM play unless separately documented). Choose commands only from
+   player-facing docs, current MCP observations, and `legal_commands` hints.
+   Record persona prompts, per-month observation cues, submitted commands,
+   validation failures, transition hashes, and final debrief metrics.
 4. Run at least two distinct free-form profiles. Recommended personas from prior
    evidence: Free-Form Fiscal Steward, Free-Form Access Expansion Advocate, and
    Free-Form First-Time Executive.
@@ -166,11 +168,11 @@ free-form procedure above for the v0.10.0 validation slice.
 6. Label results as free-form simulated-agent evidence. Do not present them as
    human learning, empirical calibration, or policy forecasting.
 
-Operator capture for the v0.10.0 slice:
+Operator capture for free-form Hard competitive runs:
 
 ```bash
 python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py
 ```
 
 The operator script writes `_workspace/experiments/v0.10.0-free-form-hard/results.json`.
-Findings are synthesized in `docs/playtest-findings-v0.10.0.md`.
+Findings are synthesized in versioned `docs/playtest-findings-v*.md` artifacts.

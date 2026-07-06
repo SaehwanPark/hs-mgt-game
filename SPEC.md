@@ -141,11 +141,11 @@ reconstructing it from the diff.
   - No default baseline batch replacement in `scripts/run_automated_playtests.py`.
 
   Verification:
-  - Operator capture: `_workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`
+  - `python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
   - `cargo fmt --check`
   - `cargo clippy --all-targets -- -D warnings`
   - `cargo test`
-  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
 
 
 - Feature: Difficulty-Adaptive Playtest Policies

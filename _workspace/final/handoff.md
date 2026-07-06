@@ -16,6 +16,8 @@ schemas, MCP DTOs, replay formats, state hashes, or balance values.
 
 - `docs/playtest-findings-v0.10.0.md`: new free-form Hard competitive findings.
 - `docs/mcp-playtesting-guide.md`: documented free-form Hard competitive procedure.
+- `_workspace/experiments/v0.10.0-free-form-hard/run_sessions.py`: operator capture script.
+- `_workspace/experiments/v0.10.0-free-form-hard/results.json`: captured session artifact.
 - `SPEC.md`: completed v0.10.0 slice and Past rollup row.
 - `CHANGELOG.md`: v0.10.0 release note.
 - `Cargo.toml` and `Cargo.lock`: package metadata version bump.

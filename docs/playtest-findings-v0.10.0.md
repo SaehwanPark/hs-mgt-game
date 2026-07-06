@@ -11,9 +11,10 @@
 - **Agent profiles:** Free-Form Fiscal Steward; Free-Form Access Expansion
   Advocate; Free-Form First-Time Executive
 
-These findings are free-form simulated-agent evidence only. Each profile chose
-commands from actor-visible observations, MCP legal-command hints, and
-player-facing docs. They do not measure human learning, classroom effectiveness,
+These findings are free-form **simulated-agent** evidence only. Each profile used
+deterministic observation-heuristic policies (not LLM or human play) that read
+actor-visible observations, MCP legal-command hints, and player-facing docs.
+They do not measure human learning, classroom effectiveness,
 empirical calibration, real-world policy validity, numerical balance, or
 equilibrium behavior.
 
@@ -48,6 +49,9 @@ incomplete sessions, or command validation failures.
 
 ## Comparison vs v0.9.9 Difficulty-Adaptive Scripted Hard (Seed 42)
 
+Seed 42 only; profile pairings below are thematic analogues, not matched-policy
+baselines.
+
 | Profile / baseline | Cash | Access | Beds | Workforce Trust | Community Trust | Final hash |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | Free-Form Fiscal Steward | 60 | 84 | 118 | 60 | 72 | `9326f6e68777e594` |
@@ -78,6 +82,8 @@ produce distinct final hashes.
 | 12 | `commit pledge_type=access level=1; hold` |
 | 18 | `commit pledge_type=access level=1; hold` |
 | 24 | `commit pledge_type=access level=1; hold` |
+
+Fiscal Steward also committed on months 9, 15, and 21 (eight access commits total).
 
 Causal path: early rival monitoring and conservative payer negotiation preserved
 cash (60 final). Recurring modest access commitments under state scrutiny
@@ -117,9 +123,9 @@ Access Expansion Advocate.
 | First-Time Executive | 22 | 1 | 1 | 1 | 0 | 23 |
 
 Free-form profiles use commitment commands far more heavily than the v0.9.9
-adaptive scripted batch (pooled Hard commits: 63 across four profiles × 12
-sessions). Observation-driven access-scrutiny responses differentiate outcomes
-beyond scripted month tables.
+adaptive scripted batch (63 total commit commands across 12 Hard sessions:
+four profiles × three seeds). Observation-driven access-scrutiny responses
+differentiate outcomes beyond scripted month tables.
 
 ## Gameplay Validity Hypotheses
 
@@ -130,12 +136,14 @@ beyond scripted month tables.
   scripted Hard baselines:** Pass. All three free-form hashes differ from each
   other and from all four v0.9.9 adaptive Hard seed-42 hashes.
 - **Free-form play differentiates strategy endpoints beyond scripted adaptive
-  policies:** Pass. Cash, access, and community-trust ranges exceed scripted Hard
-  pooled ranges; Access Expansion Advocate and First-Time Executive reach access
-  100 versus scripted ceiling 75.
-- **Free-form play avoids the Naive First-Time adaptive blind spot:** Pass.
-  First-Time Executive is observation-active (recruit, invest, sustained
-  commits) and does not mirror the hold-heavy scripted Naive profile.
+  policies:** Partial pass (seed 42 only). Cash, access, and community-trust
+  ranges exceed scripted Hard pooled ranges on this seed; Access Expansion
+  Advocate and First-Time Executive reach access 100 versus scripted ceiling 75.
+  Seed generalization is not tested in this slice.
+- **Free-form play differs from the scripted Naive First-Time adaptive profile:**
+  Partial pass. The First-Time Executive heuristic differs from scripted Naive
+  endpoints and action mix on seed 42; it does not validate human first-time
+  comprehension.
 - **The batch supports balance tuning:** Fail. This evidence is about validation
   coverage and strategy diversity, not formula calibration.
 
