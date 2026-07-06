@@ -110,6 +110,46 @@ reconstructing it from the diff.
 | Difficulty-Tier Playtest Synthesis | v0.9.8 | Add targeted difficulty-sweep MCP playtest mode and per-difficulty diagnostic reporting for Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
 | Difficulty-Adaptive Playtest Policies | v0.9.9 | Add targeted difficulty-adaptive MCP playtest mode with rival-aware scripted policy adjustments at Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
 | Free-Form Hard Competitive Playtest Synthesis | v0.10.0 | Record observation-driven free-form MCP competitive sessions at Hard difficulty on the full 24-month campaign | 282 | `8926f71296f39efc` (competitive) |
+| Free-Form Hard Seed Variation | v0.10.1 | Extend free-form Hard competitive sessions across seeds 42, 43, and 44 | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Free-Form Hard Seed Variation
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.10.1
+
+  Summary:
+  Extended the bounded free-form MCP competitive Hard artifact from seed 42 to
+  seeds 42, 43, and 44. Documented seed-variation evidence for the same three
+  observation-driven profiles and preserved explicit evidence limits.
+
+  Done:
+  - Ran three free-form profiles (Fiscal Steward, Access Expansion Advocate,
+    First-Time Executive) at Hard difficulty across seeds 42, 43, and 44, with
+    zero validation failures across 24 months each.
+  - Added `docs/playtest-findings-v0.10.1.md` with session matrix, outcome
+    table, action-frequency signals, evidence limits, and follow-up routing.
+  - Added `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/`
+    operator capture script and generated JSON artifact.
+  - Updated the MCP playtesting guide with the free-form Hard seed-variation
+    procedure.
+  - Bumped package metadata to `0.10.1`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No profile-policy tuning, validation-failure retry loop, Expert difficulty
+    sweep, or stabilization re-run requirement.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    policy-validity, or balance-tuning claim.
+  - No default baseline batch replacement in `scripts/run_automated_playtests.py`.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.1-free-form-hard-seed-variation/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Free-Form Hard Competitive Playtest Synthesis
