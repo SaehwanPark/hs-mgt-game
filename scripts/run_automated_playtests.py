@@ -31,7 +31,28 @@ def policy_fiscal(obs, legal, turn):
     commands = [
       "monitor target=northlake depth=1; hold",
       "recruit role=nurse headcount=2; hold",
-      "commit pledge_type=access level=1; hold"
+      "commit pledge_type=access level=1; hold",
+      "negotiate payer=medicaid rate_posture=neutral; hold",
+      "invest domain=emergency amount=8; hold",
+      "monitor target=summit depth=1; hold",
+      "recruit role=admin headcount=1; hold",
+      "commit pledge_type=workforce level=1; hold",
+      "invest domain=infusion amount=6; hold",
+      "hold",
+      "negotiate payer=medicare rate_posture=neutral; hold",
+      "monitor target=northlake depth=1; hold",
+      "commit pledge_type=quality level=1; hold",
+      "invest domain=psychiatric amount=5; hold",
+      "invest domain=asc amount=6; hold",
+      "monitor target=northlake depth=1; hold",
+      "monitor target=summit depth=1; hold",
+      "hold",
+      "commit pledge_type=access level=1; hold",
+      "hold",
+      "monitor target=northlake depth=1; hold",
+      "hold",
+      "commit pledge_type=workforce level=1; hold",
+      "hold"
     ]
     if turn <= len(commands):
       return commands[turn - 1]
@@ -43,9 +64,30 @@ def policy_growth(obs, legal, turn):
     return commands[turn - 1]
   else:  # competitive
     commands = [
-      "invest domain=beds amount=25",
-      "recruit role=nurse headcount=6",
-      "negotiate payer=carrier_a rate_posture=aggressive"
+      "invest domain=beds amount=15",
+      "recruit role=nurse headcount=2",
+      "negotiate payer=carrier_a rate_posture=aggressive",
+      "invest domain=emergency amount=6; hold",
+      "monitor target=northlake depth=1; hold",
+      "invest domain=icu amount=6; hold",
+      "invest domain=cardiology amount=6; hold",
+      "monitor target=northlake depth=1; hold",
+      "commit pledge_type=quality level=2; hold",
+      "negotiate payer=carrier_b rate_posture=neutral; hold",
+      "invest domain=oncology amount=8; hold",
+      "monitor target=northlake depth=1; hold",
+      "commit pledge_type=quality level=1; hold",
+      "monitor target=summit depth=1; hold",
+      "commit pledge_type=access level=2; hold",
+      "monitor target=northlake depth=1; hold",
+      "negotiate payer=carrier_a rate_posture=neutral; hold",
+      "commit pledge_type=workforce level=1; hold",
+      "monitor target=summit depth=1; hold",
+      "commit pledge_type=quality level=1; hold",
+      "monitor target=northlake depth=1; hold",
+      "commit pledge_type=workforce level=1; hold",
+      "hold",
+      "monitor target=summit depth=1; hold"
     ]
     if turn <= len(commands):
       return commands[turn - 1]
@@ -59,7 +101,28 @@ def policy_balanced(obs, legal, turn):
     commands = [
       "monitor target=northlake depth=1; recruit role=nurse headcount=4",
       "invest domain=beds amount=15; commit pledge_type=access level=2",
-      "negotiate payer=carrier_a rate_posture=neutral; hold"
+      "negotiate payer=carrier_a rate_posture=neutral; hold",
+      "invest domain=outpatient amount=8; hold",
+      "monitor target=northlake depth=1; hold",
+      "monitor target=summit depth=1; hold",
+      "commit pledge_type=workforce level=2; hold",
+      "recruit role=admin headcount=1; hold",
+      "monitor target=summit depth=1; hold",
+      "invest domain=obstetrics amount=5; hold",
+      "commit pledge_type=workforce level=1; hold",
+      "monitor target=northlake depth=1; hold",
+      "invest domain=cardiology amount=6; hold",
+      "commit pledge_type=quality level=1; hold",
+      "negotiate payer=carrier_b rate_posture=conservative; hold",
+      "monitor target=northlake depth=1; hold",
+      "commit pledge_type=quality level=1; hold",
+      "monitor target=summit depth=1; hold",
+      "monitor target=northlake depth=1; hold",
+      "monitor target=summit depth=1; hold",
+      "commit pledge_type=access level=1; hold",
+      "negotiate payer=carrier_a rate_posture=neutral; hold",
+      "hold",
+      "monitor target=northlake depth=1; hold"
     ]
     if turn <= len(commands):
       return commands[turn - 1]
@@ -73,7 +136,28 @@ def policy_naive_first_time(obs, legal, turn):
     commands = [
       "monitor target=northlake depth=1; hold",
       "hold",
-      "commit pledge_type=access level=1; hold"
+      "commit pledge_type=access level=1; hold",
+      "recruit role=nurse headcount=1; hold",
+      "hold",
+      "invest domain=emergency amount=5; hold",
+      "monitor target=summit depth=1; hold",
+      "hold",
+      "commit pledge_type=workforce level=1; hold",
+      "negotiate payer=medicaid rate_posture=neutral; hold",
+      "hold",
+      "invest domain=outpatient amount=5; hold",
+      "monitor target=northlake depth=1; hold",
+      "hold",
+      "recruit role=admin headcount=1; hold",
+      "commit pledge_type=quality level=1; hold",
+      "hold",
+      "negotiate payer=medicare rate_posture=neutral; hold",
+      "monitor target=summit depth=1; hold",
+      "hold",
+      "invest domain=asc amount=5; hold",
+      "hold",
+      "commit pledge_type=access level=1; hold",
+      "hold"
     ]
     if turn <= len(commands):
       return commands[turn - 1]

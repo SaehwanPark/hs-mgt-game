@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.6] - 2026-07-06
+
+### Changed
+- Extended competitive scripted MCP playtest policies beyond month 3 to improve
+  24-month command coverage.
+- Added direct scripted coverage for newer service-line investments, public
+  payers, staffing, monitoring, and commitment commands without changing
+  simulation behavior.
+- Recorded `docs/playtest-findings-v0.9.6.md` with the updated Phase 7
+  simulated-agent evidence and limits.
+- Bumped the package version to `0.9.6`.
+
 ## [0.9.5] - 2026-07-06
 
 ### Added

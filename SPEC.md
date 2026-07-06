@@ -105,6 +105,43 @@ reconstructing it from the diff.
 | Ambulatory Surgery Center | v0.9.3 | Add outpatient ASC service line, staffing ratios, hierarchical priority queue 9th, and outpatient surgery deferral mechanics | 280 | `8926f71296f39efc` (competitive) |
 | Agent Playtest Synthesis After Service-Line Expansion | v0.9.4 | Record scripted Phase 7 MCP playtest evidence across current campaigns, seeds, and profiles | 282 | `8926f71296f39efc` (competitive) |
 | Strategy-Space Diagnostics Artifact | v0.9.5 | Add automated playtest JSON artifact output and diagnostic report support for Phase 7 scripted batches | 282 | `8926f71296f39efc` (competitive) |
+| Competitive Playtest Policy Coverage | v0.9.6 | Extend scripted competitive MCP policies beyond month 3 and exercise newer service-line commands | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Competitive Playtest Policy Coverage
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.6
+
+  Summary:
+  Extended Phase 7 scripted competitive MCP playtest policies beyond month 3.
+  The automated playtest runner now exercises more of the 24-month competitive
+  command space, including newer service-line investments, public-payer
+  negotiations, staffing, monitoring, and commitments, without changing runtime
+  simulation behavior or balance values.
+
+  Done:
+  - Updated the competitive branches of the four scripted policies in
+    `scripts/run_automated_playtests.py`.
+  - Added `docs/playtest-findings-v0.9.6.md` documenting the completed batch,
+    action-frequency diagnostics, evidence limits, and follow-up routing.
+  - Updated the MCP playtesting guide with the v0.9.6 artifact commands and
+    coverage description.
+  - Recorded a long-run scripted-policy budgeting lesson in `LESSONS.md`.
+  - Bumped package metadata to `0.9.6`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    equilibrium, policy-validity, or balance-tuning claim.
+  - No new analytics platform, optimizer, raw transcript archive, or broad
+    project-command coverage push.
+
+  Verification:
+  - `python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/v0.9.6-playtest-policy-coverage/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.6-playtest-policy-coverage/results.json --output _workspace/experiments/v0.9.6-playtest-policy-coverage/diagnostics.md`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
 
 
 - Feature: Strategy-Space Diagnostics Artifact
