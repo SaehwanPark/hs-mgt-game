@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.1] - 2026-07-06
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.1.md` with free-form Hard competitive
+  MCP seed-variation evidence for three observation-driven profiles across
+  seeds `42`, `43`, and `44`.
+- Added operator capture script and JSON artifact at
+  `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/`.
+- Documented the free-form Hard seed-variation procedure in
+  `docs/mcp-playtesting-guide.md`.
+
+### Changed
+- Bumped the package version to `0.10.1`.
+
 ## [0.10.0] - 2026-07-06
 
 ### Added

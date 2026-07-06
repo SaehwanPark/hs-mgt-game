@@ -176,3 +176,15 @@ python3 _workspace/experiments/v0.10.0-free-form-hard/run_sessions.py
 
 The operator script writes `_workspace/experiments/v0.10.0-free-form-hard/results.json`.
 Findings are synthesized in versioned `docs/playtest-findings-v*.md` artifacts.
+
+To extend the same three free-form Hard competitive profiles across seeds `42`,
+`43`, and `44`:
+
+```bash
+python3 _workspace/experiments/v0.10.1-free-form-hard-seed-variation/run_sessions.py
+```
+
+The seed-variation script writes
+`_workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json`.
+Use it to test completion and profile endpoint stability across seeds, not to
+justify balance or runtime changes.
