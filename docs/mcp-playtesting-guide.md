@@ -47,6 +47,13 @@ python3 scripts/run_automated_playtests.py --target difficulty-sweep --json-outp
 python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.8-difficulty-sweep/results.json --output _workspace/experiments/v0.9.8-difficulty-sweep/diagnostics.md
 ```
 
+To run the targeted difficulty-adaptive competitive sweep:
+
+```bash
+python3 scripts/run_automated_playtests.py --target difficulty-adaptive --json-output _workspace/experiments/v0.9.9-difficulty-adaptive/results.json
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.9-difficulty-adaptive/results.json --output _workspace/experiments/v0.9.9-difficulty-adaptive/diagnostics.md
+```
+
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all four profiles across seeds `42`, `43`, and `44`, and
@@ -64,6 +71,13 @@ The `difficulty-sweep` target runs the four baseline competitive profiles at
 `easy` and `hard` across seeds `42`, `43`, and `44`. It satisfies the agent
 playtest protocol's difficulty-variation requirement without changing the default
 Normal-only baseline batch.
+The `difficulty-adaptive` target uses the same Easy/Hard matrix but wraps
+baseline profiles with rival-aware command adjustments on Hard difficulty only
+(Easy passes through static month tables). Reduced aggressive invests, added
+monitors/holds, and workforce-commit preference when trust is low apply on Hard.
+Use it when testing whether difficulty tiers change scripted player tradeoff
+metrics; compare results against the static `difficulty-sweep` batch rather than
+treating either batch as balance evidence.
 
 ## Creating a Custom Strategy Policy
 

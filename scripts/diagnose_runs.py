@@ -348,6 +348,37 @@ def print_aggregated_markdown(runs):
       print(f"| {strat} | {count} | {pct:.1f}% |")
     print()
 
+def print_adaptive_difficulty_comparison(batch):
+  if batch.get("target") != "difficulty-adaptive":
+    return
+
+  difficulty_stats = batch.get("difficulty_stats", {})
+  easy = difficulty_stats.get("easy")
+  hard = difficulty_stats.get("hard")
+  if not easy or not hard:
+    return
+
+  print("### Difficulty-Adaptive Action Comparison")
+  print("| Difficulty | Holds | Action Commands | Monitor | Invest | Recruit | Commit |")
+  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: |")
+  for label, stats in [("easy", easy), ("hard", hard)]:
+    print(
+      f"| {label} | {stats['holds']} | {sum(stats['verbs'].values())} | "
+      f"{stats['verbs'].get('Monitor', 0)} | {stats['verbs'].get('Invest', 0)} | "
+      f"{stats['verbs'].get('Recruit', 0)} | {stats['verbs'].get('Commit', 0)} |"
+    )
+  print()
+  print(
+    "- Adaptive hard policies should show more holds and monitors than easy when "
+    "rival pressure triggers the adaptation layer."
+  )
+  print(
+    "- Compare player tradeoff metrics in the difficulty tables above against "
+    "the static `difficulty-sweep` batch to see whether adaptation differentiates "
+    "Easy/Hard endpoints for the same seed/profile."
+  )
+  print()
+
 def print_playtest_batch_markdown(batch):
   print(f"## Playtest Batch Diagnostics for `{batch['filename']}`")
   print(f"- **Code version:** {batch['code_version']}")
@@ -371,6 +402,8 @@ def print_playtest_batch_markdown(batch):
       "Competitive Profile Outcomes by Difficulty",
       batch["profile_difficulty_stats"]
     )
+
+  print_adaptive_difficulty_comparison(batch)
 
   print("### Competitive Action Frequency Signals")
   print("| Profile | Holds | Action Commands | Project Commands | Top Non-Hold Verb | Strategy Classification |")

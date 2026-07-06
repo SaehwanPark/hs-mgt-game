@@ -108,6 +108,41 @@ reconstructing it from the diff.
 | Competitive Playtest Policy Coverage | v0.9.6 | Extend scripted competitive MCP policies beyond month 3 and exercise newer service-line commands | 282 | `8926f71296f39efc` (competitive) |
 | Project-Command Playtest Diagnostics | v0.9.7 | Add targeted project-command MCP playtest mode and diagnostic reporting for project kinds, active projects, and monthly draws | 282 | `8926f71296f39efc` (competitive) |
 | Difficulty-Tier Playtest Synthesis | v0.9.8 | Add targeted difficulty-sweep MCP playtest mode and per-difficulty diagnostic reporting for Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
+| Difficulty-Adaptive Playtest Policies | v0.9.9 | Add targeted difficulty-adaptive MCP playtest mode with rival-aware scripted policy adjustments at Easy and Hard competitive runs | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Difficulty-Adaptive Playtest Policies
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.9
+
+  Summary:
+  Added a targeted Phase 7 automated MCP playtest mode for difficulty-adaptive
+  competitive policies. The harness runs baseline scripted profiles at Easy and
+  Hard difficulty with rival-aware command adjustments on Hard while preserving
+  the default Normal-only baseline batch.
+
+  Done:
+  - Added `--target difficulty-adaptive` to `scripts/run_automated_playtests.py`
+    with `adapt_command` and `with_difficulty` policy wrappers.
+  - Extended `scripts/diagnose_runs.py` with difficulty-adaptive action-frequency
+    comparison notes for batch artifacts.
+  - Added `docs/playtest-findings-v0.9.9.md` documenting the completed targeted
+    batch, evidence limits, and follow-up routing.
+  - Updated the MCP playtesting guide with the difficulty-adaptive target.
+  - Bumped package metadata to `0.9.9`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    equilibrium, policy-validity, or balance-tuning claim.
+  - No Expert difficulty sweep, default baseline replacement, or free-form agent
+    profiles in this slice.
+
+  Verification:
+  - `python3 scripts/run_automated_playtests.py --target difficulty-adaptive --json-output _workspace/experiments/v0.9.9-difficulty-adaptive/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.9-difficulty-adaptive/results.json --output _workspace/experiments/v0.9.9-difficulty-adaptive/diagnostics.md`
 
 
 - Feature: Difficulty-Tier Playtest Synthesis
