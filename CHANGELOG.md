@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.3] - 2026-07-06
+
+### Changed
+- Hardened competitive `commit` help and player-facing strategy notes to
+  distinguish public access pledges from durable capacity, staffing,
+  monitoring, and payer actions after the v0.10.2 access-loop diagnostic.
+- Realigned general competitive help text with existing neurology and ASC
+  invest/project vocabularies.
+- Bumped the package version to `0.10.3`.
+
 ## [0.10.2] - 2026-07-06
 
 ### Added

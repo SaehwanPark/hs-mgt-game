@@ -1,47 +1,45 @@
-# Request Summary - Access-Loop Diagnostic
+# Request Summary - Access Commitment Guidance Hardening
 
 ## Phase / Gate
-Phase 7: AI-agent gameplay evaluation — free-form Hard access-loop diagnostic
+Phase 7: AI-agent gameplay evaluation follow-up — player-facing guidance
+hardening from the access-loop diagnostic.
 
 ## Scope
-Continue from the completed `v0.10.1` checkpoint by testing whether repetitive
-access commitments in free-form Hard competitive runs are reducible through
-bounded operator-policy variants. Compare the unchanged baseline policies
-against access-pledge cooldown and reported-access-threshold variants across the
-same three profiles and seeds `42`, `43`, and `44`.
+Convert the completed `v0.10.2` access-loop diagnostic into competitive
+player-facing guidance. Clarify that public access pledges can reduce scrutiny
+and build legitimacy, but repeated pledges do not substitute for durable
+capacity, staffing, monitoring, or payer work.
 
 Expected artifacts:
-- `docs/playtest-findings-v0.10.2.md`
-- `docs/mcp-playtesting-guide.md`
+- `src/cli/guidance.rs`
+- `docs/how-to-play.md`
 - `SPEC.md`
 - `CHANGELOG.md`
-- package version metadata (`0.10.2`)
+- package version metadata (`0.10.3`)
 - `_workspace/final/handoff.md`
-- `_workspace/experiments/v0.10.2-access-loop-diagnostic/results.json`
-  (operator capture)
 
 ## Non-Goals
 - No simulation behavior changes.
 - No command grammar, MCP DTO, scenario schema, replay artifact, state hash, or
   balance changes.
 - No automatic runtime command cooldowns or pledge-effect tuning.
-- No new LLM runner committed to the repository.
+- No new playtest evidence batch or LLM runner.
 - No default baseline batch replacement in `scripts/run_automated_playtests.py`.
 - No human-learning, calibration, classroom-effectiveness, or policy-validity
   claims.
 
 ## Sources
 - `README.md`
-- `docs/agent-playtest-protocol.md`
-- `docs/mcp-playtesting-guide.md`
-- `docs/playtest-findings-v0.10.1.md`
+- `docs/proposal.md`
+- `docs/roadmap.md`
+- `docs/design_principles.md`
+- `docs/harness/health-policy-strategy-game/team-spec.md`
+- `docs/playtest-findings-v0.10.2.md`
+- `LESSONS.md`
 - `SPEC.md`
-- `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/run_sessions.py`
-- `scripts/play_game.py`
 
 ## Validation Target
-- `python3 _workspace/experiments/v0.10.2-access-loop-diagnostic/run_sessions.py`
-- `python3 -m json.tool _workspace/experiments/v0.10.2-access-loop-diagnostic/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
+- Three-pass `code-reviewer` loop on the PR diff.

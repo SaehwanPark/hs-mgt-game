@@ -112,6 +112,38 @@ reconstructing it from the diff.
 | Free-Form Hard Competitive Playtest Synthesis | v0.10.0 | Record observation-driven free-form MCP competitive sessions at Hard difficulty on the full 24-month campaign | 282 | `8926f71296f39efc` (competitive) |
 | Free-Form Hard Seed Variation | v0.10.1 | Extend free-form Hard competitive sessions across seeds 42, 43, and 44 | 282 | `8926f71296f39efc` (competitive) |
 | Access-Loop Diagnostic | v0.10.2 | Compare free-form Hard baseline policies against bounded access-pledge cooldown and reported-access-threshold variants | 282 | `8926f71296f39efc` (competitive) |
+| Access Commitment Guidance Hardening | v0.10.3 | Clarify competitive access pledge guidance without changing runtime mechanics or balance | 284 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access Commitment Guidance Hardening
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.10.3
+
+  Summary:
+  Converted the v0.10.2 access-loop diagnostic into player-facing competitive
+  guidance. Clarified that public access pledges are legitimacy commitments,
+  not substitutes for durable capacity, staffing, monitoring, or payer work.
+
+  Done:
+  - Updated competitive general help and `help commit` guidance.
+  - Realigned general competitive help with already-supported neurology and ASC
+    invest/project vocabularies.
+  - Added focused CLI guidance tests for the new access-pledge language and
+    vocabulary coverage.
+  - Updated How to Play strategy notes and package metadata to `0.10.3`.
+
+  Deferred / Non-Goals:
+  - No runtime command cooldown, pledge-effect tuning, balance pass, playtest
+    runner change, scenario schema change, MCP DTO change, replay artifact
+    change, or state hash change.
+  - No new evidence batch, LLM runner, human-learning claim, empirical
+    calibration claim, classroom-effectiveness claim, or policy-validity claim.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Access-Loop Diagnostic
