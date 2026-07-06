@@ -13,7 +13,10 @@ SEEDS = [42, 43, 44]
 TARGET_BASELINE = "baseline"
 TARGET_PROJECT_COVERAGE = "project-coverage"
 TARGET_DIFFICULTY_SWEEP = "difficulty-sweep"
+TARGET_DIFFICULTY_ADAPTIVE = "difficulty-adaptive"
 DIFFICULTY_SWEEP_LEVELS = ["easy", "hard"]
+ACTION_VERBS = ("recruit", "invest", "negotiate", "commit", "project", "monitor")
+WORKFORCE_TRUST_HARD_THRESHOLD = 50
 
 def code_version():
   try:
@@ -26,6 +29,112 @@ def code_version():
 
 def is_stabilization_legal(legal):
   return len(legal) == 1
+
+def riverside_observation_block(obs):
+  block = ""
+  in_riverside = False
+  for line in "\n".join(obs).split("\n"):
+    if "RIVERSIDE COMMUNITY HEALTH" in line.upper():
+      in_riverside = True
+    elif in_riverside and ("NORTHLAKE" in line.upper() or "SUMMIT" in line.upper() or "VALLEY" in line.upper()):
+      in_riverside = False
+    if in_riverside:
+      block += line + "\n"
+  return block
+
+def parse_obs_workforce_trust(obs):
+  riverside_block = riverside_observation_block(obs)
+  wf_m = re.search(r"Workforce trust:\s*(\d+)", riverside_block)
+  if not wf_m:
+    wf_m = re.search(r"Workforce:\s*(\d+)", riverside_block)
+  return int(wf_m.group(1)) if wf_m else None
+
+def count_action_verbs(cmd):
+  count = 0
+  for part in cmd.split(";"):
+    part = part.strip().lower()
+    for verb in ACTION_VERBS:
+      if part == verb or part.startswith(f"{verb} "):
+        count += 1
+        break
+  return count
+
+def reduce_large_invest(cmd):
+  def replace_beds(match):
+    amount = int(match.group(1))
+    if amount > 10:
+      return f"invest domain=beds amount={min(8, amount)}"
+    return match.group(0)
+
+  cmd = re.sub(
+    r"invest domain=beds amount=(\d+)",
+    replace_beds,
+    cmd,
+    flags=re.IGNORECASE
+  )
+
+  def replace_other(match):
+    amount = int(match.group(2))
+    if amount >= 8:
+      return f"invest domain={match.group(1)} amount={max(4, amount - 2)}"
+    return match.group(0)
+
+  return re.sub(
+    r"invest domain=(\w+) amount=(\d+)",
+    replace_other,
+    cmd,
+    flags=re.IGNORECASE
+  )
+
+def prefer_workforce_commit_over_growth(cmd, workforce_trust):
+  if workforce_trust is None or workforce_trust >= WORKFORCE_TRUST_HARD_THRESHOLD:
+    return cmd
+  if "commit pledge_type=workforce" in cmd.lower():
+    return cmd
+  parts = [part.strip() for part in cmd.split(";") if part.strip()]
+  replaced = False
+  updated = []
+  for part in parts:
+    if not replaced and part.lower().startswith("invest"):
+      updated.append("commit pledge_type=workforce level=1")
+      replaced = True
+    else:
+      updated.append(part)
+  return "; ".join(updated) if updated else cmd
+
+def adapt_command(cmd, difficulty, obs, turn):
+  if difficulty != "hard":
+    return cmd
+
+  adapted = reduce_large_invest(cmd)
+  adapted = prefer_workforce_commit_over_growth(
+    adapted,
+    parse_obs_workforce_trust(obs)
+  )
+
+  if count_action_verbs(adapted) >= 2 and "hold" not in adapted.lower():
+    adapted = f"{adapted}; hold"
+
+  obs_text = "\n".join(obs).upper()
+  rivals_visible = "NORTHLAKE" in obs_text or "SUMMIT" in obs_text
+  if rivals_visible and "monitor" not in adapted.lower() and turn % 3 == 0:
+    adapted = f"monitor target=northlake depth=1; {adapted}"
+
+  return adapted
+
+def with_difficulty(base_policy, difficulty):
+  def policy(obs, legal, turn):
+    if is_stabilization_legal(legal):
+      return base_policy(obs, legal, turn)
+    base_cmd = base_policy(obs, legal, turn)
+    return adapt_command(base_cmd, difficulty, obs, turn)
+
+  return policy
+
+def policy_for_competitive(base_policy, difficulty, target):
+  if target == TARGET_DIFFICULTY_ADAPTIVE:
+    return with_difficulty(base_policy, difficulty)
+  return base_policy
 
 def policy_fiscal(obs, legal, turn):
   if is_stabilization_legal(legal):
@@ -352,7 +461,7 @@ def print_range_summary(title, results, keys):
   print()
 
 def competitive_difficulties_for_target(target):
-  if target == TARGET_DIFFICULTY_SWEEP:
+  if target in (TARGET_DIFFICULTY_SWEEP, TARGET_DIFFICULTY_ADAPTIVE):
     return DIFFICULTY_SWEEP_LEVELS
   return ["normal"]
 
@@ -434,11 +543,12 @@ def run_tests(json_output=None, target=TARGET_BASELINE):
           f"Running competitive regional campaign for '{name}' with seed {seed} "
           f"at difficulty {difficulty}..."
         )
+        competitive_policy = policy_for_competitive(policy, difficulty, target)
         res = play_session(
           "competitive-regional-v1",
           seed=seed,
           difficulty=difficulty,
-          policy_fn=policy
+          policy_fn=competitive_policy
         )
         if res:
           metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
@@ -519,12 +629,18 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Run automated MCP gameplay playtests")
   parser.add_argument(
     "--target",
-    choices=[TARGET_BASELINE, TARGET_PROJECT_COVERAGE, TARGET_DIFFICULTY_SWEEP],
+    choices=[
+      TARGET_BASELINE,
+      TARGET_PROJECT_COVERAGE,
+      TARGET_DIFFICULTY_SWEEP,
+      TARGET_DIFFICULTY_ADAPTIVE
+    ],
     default=TARGET_BASELINE,
     help=(
       "Playtest target to run; baseline preserves the default four-profile batch, "
-      "project-coverage exercises capital-project commands, and difficulty-sweep "
-      "runs baseline profiles at easy and hard competitive difficulty"
+      "project-coverage exercises capital-project commands, difficulty-sweep "
+      "runs static baseline profiles at easy and hard competitive difficulty, "
+      "and difficulty-adaptive applies rival-aware policy adjustments at easy/hard"
     )
   )
   parser.add_argument(
