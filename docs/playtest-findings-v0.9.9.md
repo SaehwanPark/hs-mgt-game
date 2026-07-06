@@ -45,9 +45,9 @@ rises from `34` to `55`. Beds ceiling drops from `121` to `119`.
 | Fiscal Caution | easy | 5 | 75 | 118 | 57 |
 | Fiscal Caution | hard | 7 | 75 | 118 | 57 |
 | Capacity Growth | easy | 9 | 73 | 121 | 34 |
-| Capacity Growth | hard | 20 | 72 | 119 | 58 |
+| Capacity Growth | hard | 18 | 72 | 119 | 58 |
 | Balanced Strategy | easy | 1 | 75 | 121 | 48 |
-| Balanced Strategy | hard | 12 | 74 | 119 | 55 |
+| Balanced Strategy | hard | 10 | 74 | 119 | 55 |
 | Naive First-Time | easy | 20 | 75 | 118 | 58 |
 | Naive First-Time | hard | 20 | 75 | 118 | 58 |
 
