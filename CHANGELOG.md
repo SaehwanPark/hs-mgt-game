@@ -4,6 +4,12 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.2] - 2026-07-05
+
+### Fixed
+- Addressed Codex PR review comments to account for `neurology_capacity` in AI player target staffing calculations (`target_nurses`, `target_physicians`, and `target_admins`).
+- Added unit test `test_ai_candidate_generation_includes_neurology_staffing` confirming correct candidate generation under neurology staffing deficits.
+
 ## [0.9.1] - 2026-07-05
 
 ### Added
