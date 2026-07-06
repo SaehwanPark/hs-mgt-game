@@ -33,6 +33,13 @@ python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/
 python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.6-playtest-policy-coverage/results.json --output _workspace/experiments/v0.9.6-playtest-policy-coverage/diagnostics.md
 ```
 
+To run the targeted project-command coverage diagnostic:
+
+```bash
+python3 scripts/run_automated_playtests.py --target project-coverage --json-output _workspace/experiments/v0.9.7-project-command-coverage/results.json
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.7-project-command-coverage/results.json --output _workspace/experiments/v0.9.7-project-command-coverage/diagnostics.md
+```
+
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all four profiles across seeds `42`, `43`, and `44`, and
@@ -43,6 +50,9 @@ scripted-agent evidence, not human learning or empirical calibration evidence.
 The optional JSON artifact records final observations, transition summaries,
 debrief lines, validation failures, and metrics for lightweight diagnostics; it
 is not a full replay artifact.
+The `project-coverage` target is intentionally narrower than the default
+baseline and is meant to exercise capital-project command paths, not to model a
+recommended strategy or justify balance changes.
 
 ## Creating a Custom Strategy Policy
 
