@@ -90,7 +90,11 @@ pub fn render_executive_report(
 
   let target_nurses_psych = (observation.psychiatric_capacity + 3) / 4;
   let nurses_psych = remaining_nurses_psych.min(target_nurses_psych);
-  let remaining_nurses_oncology = (remaining_nurses_psych - nurses_psych).max(0);
+  let remaining_nurses_neuro = (remaining_nurses_psych - nurses_psych).max(0);
+
+  let target_nurses_neuro = (observation.neurology_capacity + 2) / 3;
+  let nurses_neuro = remaining_nurses_neuro.min(target_nurses_neuro);
+  let remaining_nurses_oncology = (remaining_nurses_neuro - nurses_neuro).max(0);
 
   let target_nurses_oncology = (observation.oncology_capacity + 2) / 3;
   let nurses_oncology = remaining_nurses_oncology.min(target_nurses_oncology);
@@ -117,7 +121,11 @@ pub fn render_executive_report(
 
   let target_physicians_psych = (observation.psychiatric_capacity + 9) / 10;
   let physicians_psych = remaining_physicians_psych.min(target_physicians_psych);
-  let remaining_physicians_oncology = (remaining_physicians_psych - physicians_psych).max(0);
+  let remaining_physicians_neuro = (remaining_physicians_psych - physicians_psych).max(0);
+
+  let target_physicians_neuro = (observation.neurology_capacity + 5) / 6;
+  let physicians_neuro = remaining_physicians_neuro.min(target_physicians_neuro);
+  let remaining_physicians_oncology = (remaining_physicians_neuro - physicians_neuro).max(0);
 
   let target_physicians_oncology = (observation.oncology_capacity + 7) / 8;
   let physicians_oncology = remaining_physicians_oncology.min(target_physicians_oncology);
@@ -159,6 +167,10 @@ pub fn render_executive_report(
     .infusion_capacity
     .min(nurses_infusion * 4)
     .min(physicians_infusion * 15);
+  let mut eff_neuro = observation
+    .neurology_capacity
+    .min(nurses_neuro * 3)
+    .min(physicians_neuro * 6);
   let mut eff_clinics = observation
     .outpatient_capacity
     .min(physicians_outpatient * 10);
@@ -175,6 +187,7 @@ pub fn render_executive_report(
     eff_psych /= 2;
     eff_oncology /= 2;
     eff_infusion /= 2;
+    eff_neuro /= 2;
     eff_clinics /= 2;
     eff_emergency /= 2;
   }
@@ -204,6 +217,13 @@ pub fn render_executive_report(
   let boarded_oncology = oncology_overflow.min(eff_emergency);
   eff_emergency = (eff_emergency - boarded_oncology).max(0);
   let diverted_oncology = (oncology_overflow - boarded_oncology).max(0);
+
+  // Neurology ED Boarding & Diversion Calculation
+  let neurology_demand = (observation.neurology_capacity + 7) / 8;
+  let neurology_overflow = (neurology_demand - eff_neuro).max(0);
+  let boarded_neuro = neurology_overflow.min(eff_emergency);
+  eff_emergency = (eff_emergency - boarded_neuro).max(0);
+  let diverted_neuro = (neurology_overflow - boarded_neuro).max(0);
 
   // Infusion Center Deferral Calculation
   let infusion_demand = (observation.infusion_capacity + 4) / 5;
@@ -244,6 +264,10 @@ pub fn render_executive_report(
   lines.push(format!(
     "  • Infusion Center capacity: {} bays (effective: {})",
     observation.infusion_capacity, eff_infusion
+  ));
+  lines.push(format!(
+    "  • Neurology capacity: {} beds (effective: {})",
+    observation.neurology_capacity, eff_neuro
   ));
   if diverted_patients > 0 {
     lines.push(format!(
@@ -288,6 +312,18 @@ pub fn render_executive_report(
     lines.push(format!(
       "  • Oncology diversion: {} patients",
       diverted_oncology
+    ));
+  }
+  if boarded_neuro > 0 {
+    lines.push(format!(
+      "  • Neurology ED boarding: {} patients",
+      boarded_neuro
+    ));
+  }
+  if diverted_neuro > 0 {
+    lines.push(format!(
+      "  • Neurology diversion: {} patients",
+      diverted_neuro
     ));
   }
   if deferred_infusion > 0 {

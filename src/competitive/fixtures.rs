@@ -130,6 +130,7 @@ fn observation_from_human_system(
     cardiology_capacity: human.cardiology_capacity,
     oncology_capacity: human.oncology_capacity,
     infusion_capacity: human.infusion_capacity,
+    neurology_capacity: human.neurology_capacity,
     nurses: human.nurses,
     physicians: human.physicians,
     admins: human.admins,

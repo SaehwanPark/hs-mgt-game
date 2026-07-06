@@ -221,7 +221,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("invest"),
           style::dim(
-            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion amount=<int>"
+            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology amount=<int>"
           )
         ),
       ),
@@ -241,6 +241,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - cardiology: Expands cardiology beds."),
       style::dim("    - oncology: Expands oncology beds."),
       style::dim("    - infusion: Expands outpatient infusion bays."),
+      style::dim("    - neurology: Expands neurology beds."),
       style::label_value(
         "  Strategic Guidance",
         "Building capacity increases access and quality potential but consumes cash. Keep an eye on your cash runway before investing large amounts.",
@@ -364,7 +365,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("project"),
           style::dim(
-            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center budget=<int>"
+            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit budget=<int>"
           )
         ),
       ),
@@ -374,7 +375,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       ),
       style::label_value(
         "  Resource Costs",
-        "Costs 2 AP (3 AP for icu_wing), monthly cash draw equal to budget divided by duration.",
+        "Costs 2 AP (3 AP for icu_wing or oncology_unit), monthly cash draw equal to budget divided by duration.",
       ),
       style::label_value("  Project Kinds & Durations", ""),
       style::dim("    - ehr_epic: EHR implementation. Duration 12 months."),
@@ -394,6 +395,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - cardiology_unit: Inpatient Cardiology Unit expansion. Duration 6 months."),
       style::dim("    - oncology_unit: Inpatient Oncology Unit expansion. Duration 9 months."),
       style::dim("    - infusion_center: Outpatient Infusion Center expansion. Duration 6 months."),
+      style::dim("    - neurology_unit: Inpatient Neurology Unit expansion. Duration 6 months."),
       style::label_value(
         "  Constraints",
         "Maximum of 2 concurrent projects allowed at any time.",

@@ -20,6 +20,7 @@
         "cardiology_capacity": 0,
         "oncology_capacity": 0,
         "infusion_capacity": 0,
+        "neurology_capacity": 0,
         "nurses": 24,
         "physicians": 10,
         "admins": 11,
@@ -48,6 +49,7 @@
         "cardiology_capacity": 0,
         "oncology_capacity": 0,
         "infusion_capacity": 0,
+        "neurology_capacity": 0,
         "nurses": 27,
         "physicians": 15,
         "admins": 15,
@@ -76,6 +78,7 @@
         "cardiology_capacity": 0,
         "oncology_capacity": 0,
         "infusion_capacity": 0,
+        "neurology_capacity": 0,
         "nurses": 21,
         "physicians": 12,
         "admins": 12,
@@ -161,6 +164,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -189,6 +193,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -217,6 +222,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -408,6 +414,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -436,6 +443,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -464,6 +472,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -546,7 +555,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "6044273e2c6c1374"
+      "state_hash": "807fcbc8edeea8e3"
     },
     {
       "prior": {
@@ -570,6 +579,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -598,6 +608,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -626,6 +637,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -821,6 +833,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -849,6 +862,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -877,6 +891,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -964,7 +979,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "295238738ceb7f07"
+      "state_hash": "19e7c34bd84b6918"
     },
     {
       "prior": {
@@ -988,6 +1003,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1016,6 +1032,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -1044,6 +1061,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1239,6 +1257,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1267,6 +1286,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 27,
             "physicians": 15,
             "admins": 15,
@@ -1295,6 +1315,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1387,7 +1408,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "18f7353b431fc9c5"
+      "state_hash": "aad7f068a0a29194"
     },
     {
       "prior": {
@@ -1411,6 +1432,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1439,6 +1461,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1467,6 +1490,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1658,6 +1682,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1686,6 +1711,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1714,6 +1740,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -1792,7 +1819,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "195e0adc2f6d7e4c"
+      "state_hash": "d37523d5e326496d"
     },
     {
       "prior": {
@@ -1816,6 +1843,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -1844,6 +1872,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -1872,6 +1901,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2059,6 +2089,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2087,6 +2118,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2115,6 +2147,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2193,7 +2226,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "03a749b35700b3d0"
+      "state_hash": "9df6fe69ddc79ca9"
     },
     {
       "prior": {
@@ -2217,6 +2250,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2245,6 +2279,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2273,6 +2308,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2460,6 +2496,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2488,6 +2525,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2516,6 +2554,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2594,7 +2633,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "51025bf4f16504d4"
+      "state_hash": "c08f060e0d4804d1"
     },
     {
       "prior": {
@@ -2618,6 +2657,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2646,6 +2686,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2674,6 +2715,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2861,6 +2903,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -2889,6 +2932,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -2917,6 +2961,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -2995,7 +3040,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "3cba928e9b961c86"
+      "state_hash": "e2949302bf383d61"
     },
     {
       "prior": {
@@ -3019,6 +3064,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3047,6 +3093,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3075,6 +3122,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3262,6 +3310,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3290,6 +3339,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3318,6 +3368,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3396,7 +3447,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "1e900e721d4cd377"
+      "state_hash": "ca89b884cb50c834"
     },
     {
       "prior": {
@@ -3420,6 +3471,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3448,6 +3500,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3476,6 +3529,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3663,6 +3717,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3691,6 +3746,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3719,6 +3775,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -3797,7 +3854,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "d388485b3e74ed86"
+      "state_hash": "cb58400c752be449"
     },
     {
       "prior": {
@@ -3821,6 +3878,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -3849,6 +3907,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -3877,6 +3936,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4064,6 +4124,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4092,6 +4153,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4120,6 +4182,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4198,7 +4261,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "b2f03968fe16512d"
+      "state_hash": "3aa9aa4db700083c"
     },
     {
       "prior": {
@@ -4222,6 +4285,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4250,6 +4314,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4278,6 +4343,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4465,6 +4531,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4493,6 +4560,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4521,6 +4589,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4599,7 +4668,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "e245c9552595be63"
+      "state_hash": "7f71eb7e5169e502"
     },
     {
       "prior": {
@@ -4623,6 +4692,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4651,6 +4721,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4679,6 +4750,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -4870,6 +4942,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -4898,6 +4971,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -4926,6 +5000,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5004,7 +5079,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "391e1ebfc924e6b8"
+      "state_hash": "a5847742ccfc6b1b"
     },
     {
       "prior": {
@@ -5028,6 +5103,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5056,6 +5132,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5084,6 +5161,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5271,6 +5349,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5299,6 +5378,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5327,6 +5407,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5405,7 +5486,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "63bc85e106044a42"
+      "state_hash": "b9ce0bae3d191765"
     },
     {
       "prior": {
@@ -5429,6 +5510,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5457,6 +5539,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5485,6 +5568,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5672,6 +5756,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5700,6 +5785,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5728,6 +5814,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -5806,7 +5893,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "f19261697baffba1"
+      "state_hash": "beace8b9c45bef6a"
     },
     {
       "prior": {
@@ -5830,6 +5917,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -5858,6 +5946,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -5886,6 +5975,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6073,6 +6163,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6101,6 +6192,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6129,6 +6221,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6207,7 +6300,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "9856dfe4c9afd61a"
+      "state_hash": "46812a469866a9fd"
     },
     {
       "prior": {
@@ -6231,6 +6324,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6259,6 +6353,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6287,6 +6382,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6474,6 +6570,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6502,6 +6599,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6530,6 +6628,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6608,7 +6707,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "b451c995fdb260e1"
+      "state_hash": "23a90a060564fafe"
     },
     {
       "prior": {
@@ -6632,6 +6731,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6660,6 +6760,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6688,6 +6789,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -6875,6 +6977,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -6903,6 +7006,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -6931,6 +7035,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7009,7 +7114,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "52368e91cef34e63"
+      "state_hash": "827a6b713f396d38"
     },
     {
       "prior": {
@@ -7033,6 +7138,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7061,6 +7167,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7089,6 +7196,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7276,6 +7384,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7304,6 +7413,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7332,6 +7442,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7410,7 +7521,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "3a9cf594f5eea6b7"
+      "state_hash": "1cc1a99e5bd9c178"
     },
     {
       "prior": {
@@ -7434,6 +7545,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7462,6 +7574,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7490,6 +7603,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7677,6 +7791,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7705,6 +7820,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7733,6 +7849,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -7811,7 +7928,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "cf01c84cc124b508"
+      "state_hash": "cb67f1d45c6d9f37"
     },
     {
       "prior": {
@@ -7835,6 +7952,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -7863,6 +7981,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -7891,6 +8010,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8078,6 +8198,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8106,6 +8227,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8134,6 +8256,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8212,7 +8335,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "71117c6b7bfa6a27"
+      "state_hash": "7b2141d8b17da214"
     },
     {
       "prior": {
@@ -8236,6 +8359,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8264,6 +8388,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8292,6 +8417,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8479,6 +8605,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8507,6 +8634,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8535,6 +8663,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8613,7 +8742,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "62211f249356ebcc"
+      "state_hash": "dad907588a9e39d7"
     },
     {
       "prior": {
@@ -8637,6 +8766,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8665,6 +8795,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8693,6 +8824,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -8880,6 +9012,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -8908,6 +9041,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -8936,6 +9070,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9014,7 +9149,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "de7261ca1fb95009"
+      "state_hash": "11cf4705ee8d0476"
     },
     {
       "prior": {
@@ -9038,6 +9173,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9066,6 +9202,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9094,6 +9231,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9281,6 +9419,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9309,6 +9448,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9337,6 +9477,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9415,7 +9556,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "27b3337a9f68977c"
+      "state_hash": "e196563542e38827"
     },
     {
       "prior": {
@@ -9439,6 +9580,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9467,6 +9609,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9495,6 +9638,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9686,6 +9830,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 24,
             "physicians": 10,
             "admins": 11,
@@ -9714,6 +9859,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 29,
             "physicians": 15,
             "admins": 15,
@@ -9742,6 +9888,7 @@
             "cardiology_capacity": 0,
             "oncology_capacity": 0,
             "infusion_capacity": 0,
+            "neurology_capacity": 0,
             "nurses": 21,
             "physicians": 12,
             "admins": 12,
@@ -9820,7 +9967,7 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "635062fed6aca009"
+      "state_hash": "2e0ebf6b436f4d0a"
     }
   ]
 }

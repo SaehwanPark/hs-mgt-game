@@ -567,3 +567,11 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Cause: ICU critical care patients board in the ED unconditionally (even when ED effective capacity is 0), which depletes all available ED bays before psychiatric patients (who board conditionally based on remaining ED bays) are processed. Furthermore, under normal staffing, ED staffing is only possible if higher-priority specialty units (like psychiatric beds) are fully staffed, leaving no psychiatric overflow.
 - Resolution: To test psychiatric ED boarding, set starting `staffed_beds` to `0` to prevent ICU boarding, and activate the scenario-specific RNA strike (under a matching `scenario_id` like `exemplary-competitive-v1`) to halve a single psychiatric bed to `0` effective capacity (creating 1 overflow patient) while leaving the ED staffed with positive capacity.
 - Prevention: When testing conditional resource-sharing code (like psychiatric ED holding), isolate the target resource by zeroing out higher-priority demands (like Med-Surg staffed beds / ICU) and use scenario strike/event logic to create capacity-staffing mismatches while maintaining positive holding capacity.
+
+
+## Keep Display and Transition Ratios Aligned for Dashboard Integrity
+
+- Context: Adding the Neurology inpatient service line with capacity, commands, priority staffing allocation, and ED holding boarding/diversion mechanics.
+- Symptom: Incorrect or inconsistent effective capacity numbers printed on the REPL dashboard.
+- Cause: The logic to calculate effective capacities (including strike-time halving, target nurse/physician/admin ratios, priority allocation queues, and ED boarding math) was updated in the simulation kernel (`src/sim/transition_competitive.rs`) but not in the display formatting engine (`src/cli/display/executive_report.rs`).
+- Prevention: Whenever adding or modifying service lines, targets, strike adjustments, or boarding mathematics, modify both the transition simulation kernel and the CLI/REPL display report formatter in tandem. Write exhaustive unit tests verifying the alignment of targets, effective capacities, and ED boarding/diversion outcomes.
