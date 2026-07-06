@@ -4,6 +4,23 @@ Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 
+## Clinical Service Line Expansion Checklist
+
+- Context: Implementing the Ambulatory Surgery Center (ASC) service line in the competitive regional campaign.
+- Symptom: Compile-time errors for missing fields/variants or missing match arms, state hash mismatches in integration tests, and display/transition calculation drifts.
+- Cause: Clinical service lines touch almost all layers of the game engine (state, observations, commands, parser, autocompletion, resolver, effects engine, AI, display dashboard, scenario loader, state hashing, and test fixtures).
+- Prevention: When adding any new clinical service line, ensure you update the following modules in a single consistent change:
+  1. **Core Models**: Add capacity field to `HealthSystemState` in `src/model/competitive_world.rs` and enum variants to `InvestDomain`/`ProjectKind` in `src/model/competitive_command.rs`.
+  2. **Observations**: Add capacity to `PlayerObservation` in `src/model/campaign.rs` and map it in both `src/sim/observe_ai.rs` and `src/sim/observe_competitive.rs`. Update test fixtures in `src/competitive/fixtures.rs`.
+  3. **Effects Engine**: Register the capacity variant in `effects_competitive.rs` (under strike suspension lists and resolution).
+  4. **CLI Parser & Autocomplete**: Add parsing rules in `competitive_parse.rs`, register REPL autocompletes (and update completion unit tests) in `repl.rs`, and document commands in `guidance.rs`.
+  5. **Resolution Formatting**: Update command string formatters in `resolution.rs` and `debrief/report.rs`.
+  6. **Rival AI**: Include the new capacity in target staffing calculations and `InvestDomain` command scoring in `src/actors/ai_player.rs`.
+  7. **Genesis & Scenarios**: Initialize the capacity in `src/competitive/genesis.rs` rival templates, and load it from TOML configs in `src/scenario/mod.rs`.
+  8. **Simulation & Display Kernels**: Update target staffing formulas, priority greedy allocation loops, strike adjustments, overflow/diversion/deferral rules, and total capacity calculations in both `transition_competitive.rs` and `display/executive_report.rs` in tandem.
+  9. **State Hashing**: Bump schema version in `competitive_hash.rs`, append the new capacity to the hashed string format, and update golden test hashes in `tests/golden_competitive_seed42.rs`.
+
+
 ## Exhaustive Enum Match Updates for Command Vocabularies
 
 - Context: Adding the Cardiology service line and CardiologyUnit project kind to the command vocabularies.

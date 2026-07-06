@@ -16,7 +16,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "invest",
-    usage: "invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology amount=<int>",
+    usage: "invest domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology|asc amount=<int>",
   },
   CompetitiveCommandSpec {
     verb: "recruit",
@@ -36,7 +36,7 @@ const COMPETITIVE_COMMAND_SPECS: [CompetitiveCommandSpec; 7] = [
   },
   CompetitiveCommandSpec {
     verb: "project",
-    usage: "project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit budget=<int>",
+    usage: "project kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit|asc_unit budget=<int>",
   },
 ];
 
@@ -188,6 +188,7 @@ fn parse_invest_domain(value: &str) -> Result<InvestDomain, CliError> {
     "oncology" | "onco" => Ok(InvestDomain::Oncology),
     "infusion" | "infuse" => Ok(InvestDomain::Infusion),
     "neurology" | "neuro" => Ok(InvestDomain::Neurology),
+    "asc" | "surg" => Ok(InvestDomain::Asc),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown invest domain '{value}'"
     ))),
@@ -254,6 +255,7 @@ fn parse_project_kind(value: &str) -> Result<ProjectKind, CliError> {
     "oncology_unit" | "onco_unit" => Ok(ProjectKind::OncologyUnit),
     "infusion_center" | "infusion" => Ok(ProjectKind::InfusionCenter),
     "neurology_unit" | "neuro_unit" => Ok(ProjectKind::NeurologyUnit),
+    "asc_unit" | "surg_unit" => Ok(ProjectKind::AscUnit),
     _ => Err(CliError::InvalidCommandInput(format!(
       "unknown project kind '{value}'"
     ))),

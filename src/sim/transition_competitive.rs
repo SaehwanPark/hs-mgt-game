@@ -406,6 +406,27 @@ fn apply_command(
             format!("{summary} (neurology capacity expansion)"),
           );
         }
+        InvestDomain::Asc => {
+          let asc_delta = amount / 20;
+          let access_delta = amount / 20;
+          let system = &mut world.systems[system_idx];
+          system.access_index = crate::model::clamp_metric(system.access_index + access_delta);
+          system.market_share_index =
+            crate::model::clamp_metric(system.market_share_index + amount / 40);
+          push_effect(effects, "capacity investment", "access_index", access_delta);
+
+          enqueue_effect(
+            world,
+            system_id,
+            month_index,
+            month_index + 1,
+            PendingEffectKind::AscCapacity {
+              capacity_delta: asc_delta,
+              project_draw: None,
+            },
+            format!("{summary} (ASC capacity expansion)"),
+          );
+        }
       }
       events.push(Event {
         actor: "health_system",
@@ -568,6 +589,10 @@ fn apply_command(
           capacity_delta: 6,
           project_draw: Some(monthly_draw),
         },
+        crate::model::ProjectKind::AscUnit => PendingEffectKind::AscCapacity {
+          capacity_delta: 6,
+          project_draw: Some(monthly_draw),
+        },
         crate::model::ProjectKind::EhrEpic | crate::model::ProjectKind::EhrCerner => {
           PendingEffectKind::TechnologyQuality {
             quality_delta: 5,
@@ -719,7 +744,8 @@ fn apply_staffing_constraints(
       + (system.cardiology_capacity + 2) / 3
       + (system.oncology_capacity + 2) / 3
       + (system.infusion_capacity + 3) / 4
-      + (system.neurology_capacity + 2) / 3;
+      + (system.neurology_capacity + 2) / 3
+      + (system.asc_capacity + 1) / 2;
     let target_physicians = (system.outpatient_capacity + 9) / 10
       + (system.emergency_capacity + 3) / 4
       + (system.icu_capacity + 1) / 2
@@ -728,7 +754,8 @@ fn apply_staffing_constraints(
       + (system.cardiology_capacity + 7) / 8
       + (system.oncology_capacity + 7) / 8
       + (system.infusion_capacity + 14) / 15
-      + (system.neurology_capacity + 5) / 6;
+      + (system.neurology_capacity + 5) / 6
+      + (system.asc_capacity + 3) / 4;
     let target_admins = (system.staffed_beds + system.outpatient_capacity + 19) / 20
       + (system.emergency_capacity + 9) / 10
       + (system.icu_capacity + 4) / 5
@@ -737,7 +764,8 @@ fn apply_staffing_constraints(
       + (system.cardiology_capacity + 11) / 12
       + (system.oncology_capacity + 11) / 12
       + (system.infusion_capacity + 19) / 20
-      + (system.neurology_capacity + 9) / 10;
+      + (system.neurology_capacity + 9) / 10
+      + (system.asc_capacity + 11) / 12;
 
     let nurse_deficit = (target_nurses - system.nurses).max(0);
     let physician_deficit = (target_physicians - system.physicians).max(0);
@@ -761,7 +789,7 @@ fn apply_staffing_constraints(
       });
     }
 
-    // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Cardiology fourth, Psychiatric fifth, clinics sixth (for physicians), ED last
+    // Hierarchical staffing allocation: ICU first, Obstetrics second, Med-Surg beds third, Cardiology fourth, Psychiatric fifth, Neurology sixth, Oncology seventh, Infusion eighth, ASC ninth, Outpatient Clinics tenth (for physicians), ED eleventh/last
     let target_nurses_icu = system.icu_capacity;
     let nurses_icu = system.nurses.min(target_nurses_icu);
     let remaining_nurses_obs = (system.nurses - nurses_icu).max(0);
@@ -792,7 +820,11 @@ fn apply_staffing_constraints(
 
     let target_nurses_infusion = (system.infusion_capacity + 3) / 4;
     let nurses_infusion = remaining_nurses_infusion.min(target_nurses_infusion);
-    let remaining_nurses_ed = (remaining_nurses_infusion - nurses_infusion).max(0);
+    let remaining_nurses_asc = (remaining_nurses_infusion - nurses_infusion).max(0);
+
+    let target_nurses_asc = (system.asc_capacity + 1) / 2;
+    let nurses_asc = remaining_nurses_asc.min(target_nurses_asc);
+    let remaining_nurses_ed = (remaining_nurses_asc - nurses_asc).max(0);
 
     let target_nurses_ed = (system.emergency_capacity + 1) / 2;
     let nurses_ed = remaining_nurses_ed.min(target_nurses_ed);
@@ -824,7 +856,11 @@ fn apply_staffing_constraints(
 
     let target_physicians_infusion = (system.infusion_capacity + 14) / 15;
     let physicians_infusion = remaining_physicians_infusion.min(target_physicians_infusion);
-    let remaining_physicians_op = (remaining_physicians_infusion - physicians_infusion).max(0);
+    let remaining_physicians_asc = (remaining_physicians_infusion - physicians_infusion).max(0);
+
+    let target_physicians_asc = (system.asc_capacity + 3) / 4;
+    let physicians_asc = remaining_physicians_asc.min(target_physicians_asc);
+    let remaining_physicians_op = (remaining_physicians_asc - physicians_asc).max(0);
 
     let target_physicians_outpatient = (system.outpatient_capacity + 9) / 10;
     let physicians_outpatient = remaining_physicians_op.min(target_physicians_outpatient);
@@ -859,6 +895,10 @@ fn apply_staffing_constraints(
       .neurology_capacity
       .min(nurses_neuro * 3)
       .min(physicians_neuro * 6);
+    let mut effective_asc = system
+      .asc_capacity
+      .min(nurses_asc * 2)
+      .min(physicians_asc * 4);
     let mut effective_outpatient = system.outpatient_capacity.min(physicians_outpatient * 10);
     let mut effective_emergency = system
       .emergency_capacity
@@ -878,6 +918,7 @@ fn apply_staffing_constraints(
       effective_oncology /= 2;
       effective_infusion /= 2;
       effective_neuro /= 2;
+      effective_asc /= 2;
     }
 
     // ED Boarding Calculation.
@@ -1112,6 +1153,34 @@ fn apply_staffing_constraints(
       });
     }
 
+    // ASC Deferral Calculation.
+    let asc_demand = (system.asc_capacity + 7) / 8;
+    let deferred_asc = (asc_demand - effective_asc).max(0);
+
+    if deferred_asc > 0 {
+      let trust_penalty = deferred_asc;
+      let share_penalty = deferred_asc;
+      system.community_trust = crate::model::clamp_metric(system.community_trust - trust_penalty);
+      system.market_share_index =
+        crate::model::clamp_metric(system.market_share_index - share_penalty);
+
+      push_effect(effects, "ASC deferral", "community_trust", -trust_penalty);
+      push_effect(
+        effects,
+        "ASC deferral",
+        "market_share_index",
+        -share_penalty,
+      );
+
+      events.push(Event {
+        actor: "operations",
+        description: format!(
+          "{}: {} outpatient surgery procedures deferred due to ASC capacity constraints",
+          system.name, deferred_asc
+        ),
+      });
+    }
+
     // Obstetric Diversion Calculation.
     let obstetric_demand = (system.obstetrics_capacity + 9) / 10;
     let diverted_patients = (obstetric_demand - effective_obs).max(0);
@@ -1153,7 +1222,8 @@ fn apply_staffing_constraints(
       + system.cardiology_capacity
       + system.oncology_capacity
       + system.infusion_capacity
-      + system.neurology_capacity;
+      + system.neurology_capacity
+      + system.asc_capacity;
     let total_effective = effective_beds
       + effective_outpatient
       + effective_emergency
@@ -1163,7 +1233,8 @@ fn apply_staffing_constraints(
       + effective_cardio
       + effective_oncology
       + effective_infusion
-      + effective_neuro;
+      + effective_neuro
+      + effective_asc;
 
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
@@ -2493,5 +2564,110 @@ mod transition_competitive_tests {
         .iter()
         .any(|e| e.description.contains("neurology patients diverted"))
     );
+  }
+
+  #[test]
+  fn test_asc_department_mechanics() {
+    let world = genesis_competitive_world(Difficulty::Normal);
+    let ruleset = default_competitive_ruleset();
+
+    // 1. Initially asc_capacity is 0
+    assert_eq!(world.systems[0].asc_capacity, 0);
+
+    // 2. Invest in ASC capacity: domain=asc, amount=20 (yields +1 bays next month)
+    let batches = vec![
+      SystemMonthlyBatch {
+        system_id: 0,
+        commands: vec![CompetitiveCommand::Invest {
+          domain: InvestDomain::Asc,
+          amount: 20,
+        }],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 1,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+      SystemMonthlyBatch {
+        system_id: 2,
+        commands: vec![CompetitiveCommand::Hold],
+        rationale: None,
+      },
+    ];
+
+    let aggregated = resolve_monthly_batches(&world, &batches, &ruleset).expect("resolve");
+    let transition = transition_competitive(&world, aggregated, &ruleset).expect("transition");
+
+    // After transition, capacity has not resolved yet
+    assert_eq!(transition.next.systems[0].asc_capacity, 0);
+    assert_eq!(transition.next.systems[0].access_index, 69); // 68 + 1
+
+    // 3. Tick Month 2 to resolve the pending AscCapacity effect
+    let mut next_world = transition.next.clone();
+    let inputs = crate::inputs::resolve_competitive_inputs(42, 2, false);
+    let mut events = Vec::new();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut next_world,
+      &inputs,
+      &mut events,
+    );
+
+    // Now ASC capacity increases by 20 / 20 = 1.
+    assert_eq!(next_world.systems[0].asc_capacity, 1);
+
+    // 4. Staffing target increases:
+    // target_nurses: 118/5 (24) + (1 + 1)/2 (1) = 25 nurses
+    // target_physicians: 100/10 (10) + (1 + 3)/4 (1) = 11 physicians
+    // target_admins: (118 + 100 + 19)/20 (11) + (1 + 11)/12 (1) = 12 admins
+    // Riverside starts with 24 nurses, 10 physicians, 11 admins.
+    // Deficit: 1 nurse, 1 physician, 1 admin.
+    let mut events_staffing = Vec::new();
+    let mut effects_staffing = Vec::new();
+    apply_staffing_constraints(
+      &mut next_world,
+      &ruleset,
+      &mut events_staffing,
+      &mut effects_staffing,
+    );
+
+    // Workforce trust drops by 3
+    assert_eq!(next_world.systems[0].workforce_trust, 60 - 3);
+
+    // 5. Test ASC deferral under strike
+    let mut scarce_world = transition.next.clone();
+    super::super::effects_competitive::apply_month_start_tick(
+      &mut scarce_world,
+      &inputs,
+      &mut events,
+    );
+    // Trigger RNA strike to halve effective capacities
+    scarce_world.scenario_id = "exemplary-competitive-v1".to_string();
+    scarce_world
+      .event_metadata
+      .insert("rna_strike_active".to_string(), "true".to_string());
+    // Give enough staff to avoid understaffing penalties on other units
+    scarce_world.systems[0].staffed_beds = 0;
+    scarce_world.systems[0].nurses = 35;
+    scarce_world.systems[0].physicians = 15;
+
+    let mut events_defer = Vec::new();
+    let mut effects_defer = Vec::new();
+    apply_staffing_constraints(
+      &mut scarce_world,
+      &ruleset,
+      &mut events_defer,
+      &mut effects_defer,
+    );
+
+    // Effective ASC is halved by strike to 0.
+    // Demand is (1 + 7)/8 = 1. Overflow is 1 outpatient surgery procedure deferred.
+    assert!(events_defer.iter().any(|e| {
+      e.description
+        .contains("outpatient surgery procedures deferred due to ASC capacity constraints")
+    }));
+    // Deferral penalty: -1 community trust, -1 market share.
+    assert_eq!(scarce_world.systems[0].community_trust, 64 - 1);
+    assert_eq!(scarce_world.systems[0].market_share_index, 24 - 1);
   }
 }

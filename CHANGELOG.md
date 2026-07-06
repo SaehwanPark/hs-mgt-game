@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.3] - 2026-07-05
+
+### Added
+- Implemented the Ambulatory Surgery Center (ASC) Service Line mechanics.
+- Configured nurse-to-bay (1:2), physician-to-bay (1:4), and admin-to-bay (1:12) staffing targets for ASC capacity.
+- Implemented hierarchical staffing allocation prioritizing ASC 9th (after Infusion and before Outpatient Clinics).
+- Added ASC outpatient surgery deferral rules (penalizing `-1` community trust and `-1` market share index per deferred patient).
+- Added `InvestDomain::Asc` (direct bays) and `ProjectKind::AscUnit` (6-month capital project) commands and resolution logic.
+- Extended CLI commands, autocomplete, REPL guidance documentation, and executive dashboard layout to support ASC capacity.
+- Added comprehensive unit tests validating ASC priority allocation, strike halving, and deferral rules.
+
 ## [0.9.2] - 2026-07-05
 
 ### Fixed

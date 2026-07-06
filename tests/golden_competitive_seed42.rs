@@ -28,8 +28,8 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
       .count()
       == 2
   );
-  // v7 schema (added neuro= field + version string bump, 2026-07-05)
-  assert_eq!(transition.state_hash, "807fcbc8edeea8e3");
+  // v8 schema (added asc= field + version string bump, 2026-07-05)
+  assert_eq!(transition.state_hash, "8926f71296f39efc");
 }
 
 #[test]

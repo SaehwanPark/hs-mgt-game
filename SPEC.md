@@ -101,6 +101,56 @@ reconstructing it from the diff.
 | Externalize Scenario Timeline Events | v0.8.3 | Externalize scenario timeline events to TOML and generalize transition triggers | 275 | `7bd8a0c7a8312f4e` (competitive) |
 | Cardiology Service Line & Cath Lab Mechanics | v0.8.4 | Add Cardiology service line, staffing targets, Cardiology-fourth hierarchical allocation, and ED holding boarding/diversion mechanics | 276 | `7a771bad0a222f34` (competitive) |
 | Oncology & Infusion Service Lines | v0.9.0 | Add inpatient Oncology and outpatient Infusion service lines, staffing ratios, hierarchical priority queues, and ED boarding/diversion/deferral mechanics | 277 | `6044273e2c6c1374` (competitive) |
+| Neurology & Stroke Center | v0.9.1–v0.9.2 | Add inpatient Neurology service line, staffing ratios, hierarchical priority queue 6th, and ED holding boarding/diversion mechanics | 279 | `807fcbc8edeea8e3` (competitive) |
+| Ambulatory Surgery Center | v0.9.3 | Add outpatient ASC service line, staffing ratios, hierarchical priority queue 9th, and outpatient surgery deferral mechanics | 280 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Ambulatory Surgery Center Service Line
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.9.3
+
+  Summary:
+  Implemented the Ambulatory Surgery Center (ASC) Service Line mechanics representing outpatient surgery infrastructure. Configured specialized staffing targets, hierarchical nurse and physician allocations prioritizing ASC 9th (after Infusion and before Outpatient Clinics), and clinical overflow rules (outpatient surgery deferrals with `-1` community trust and `-1` market share index penalties).
+
+  Done:
+  - Added `asc_capacity` to competitive system state, player observations, and pending effects.
+  - Configured `InvestDomain::Asc` and `ProjectKind::AscUnit` (6-month build time).
+  - Implemented nurse/physician staffing targets and priority allocation logic.
+  - Implemented outpatient surgery deferral rules.
+  - Bumped competitive state hash version to v8 (`asc=`) with golden hash `8926f71296f39efc`.
+  - Added CLI parsing, autocompletions, REPL guidance documentation, and executive dashboard layout updates.
+  - Created comprehensive unit tests validating ASC capacity, staffing, and strike/deferral penalties.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all tests.
+
+
+- Feature: Neurology & Stroke Center Service Line
+  Status: Complete
+  Started: 2026-07-05
+  Version: 0.9.1–v0.9.2
+
+  Summary:
+  Implemented the Neurology & Stroke Center inpatient service line with capacity-staffing trade-offs, specialized staffing targets, hierarchical allocation prioritizing Neurology sixth (after Psychiatric and before Oncology), and ED boarding/diversion mechanics.
+
+  Done:
+  - Added `neurology_capacity` to system state structure and `NeurologyCapacity` to `PendingEffectKind`.
+  - Added `InvestDomain::Neurology` and `ProjectKind::NeurologyUnit` (6-month build time).
+  - Implemented target staffing requirements and 6th-priority nurse/physician hierarchical allocation for Neurology.
+  - Implemented Neurology ED holding boarding and diversion mechanics under capacity/staffing deficit (incurring `-2` community trust and `-2` quality index penalties).
+  - Integrated Neurology capacity and diversion into observation mapping, REPL executive dashboard, parser, autocomplete, and guidance help pages.
+  - Created comprehensive unit tests validating Neurology priority allocation, diversion penalties under deficit, and project resolution.
+  - Updated competitive state hash to v7 (adding `neuro=`) with value `807fcbc8edeea8e3`.
+
+  Deferred / Non-Goals:
+  - None.
+
+  Verification:
+  - `cargo test` passes all tests.
 
 
 - Feature: Oncology & Infusion Service Lines

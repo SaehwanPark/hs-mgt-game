@@ -382,3 +382,28 @@ fn medicare_negotiation_insufficient_cash_fails() {
     }
   ));
 }
+
+#[test]
+fn test_asc_command_validation_costs() {
+  let ruleset = default_competitive_ruleset();
+
+  // InvestDomain::Asc command validation
+  let invest_cmd = CompetitiveCommand::Invest {
+    domain: InvestDomain::Asc,
+    amount: 20,
+  };
+  let cost = invest_cmd.action_cost();
+  assert_eq!(cost.action_points, 1);
+  assert_eq!(cost.cash_cost, 20);
+  assert!(validate_competitive_command(&invest_cmd, &ruleset).is_ok());
+
+  // ProjectKind::AscUnit command validation
+  let project_cmd = CompetitiveCommand::Project {
+    kind: ProjectKind::AscUnit,
+    budget: 30,
+  };
+  let cost = project_cmd.action_cost();
+  assert_eq!(cost.action_points, 2);
+  assert_eq!(cost.cash_cost, 5); // monthly draw: 30 / 6 = 5
+  assert!(validate_competitive_command(&project_cmd, &ruleset).is_ok());
+}

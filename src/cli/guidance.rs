@@ -221,7 +221,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("invest"),
           style::dim(
-            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology amount=<int>"
+            "domain=beds|outpatient|technology|emergency|icu|obstetrics|psychiatric|cardiology|oncology|infusion|neurology|asc amount=<int>"
           )
         ),
       ),
@@ -242,6 +242,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - oncology: Expands oncology beds."),
       style::dim("    - infusion: Expands outpatient infusion bays."),
       style::dim("    - neurology: Expands neurology beds."),
+      style::dim("    - asc: Expands outpatient ASC bays."),
       style::label_value(
         "  Strategic Guidance",
         "Building capacity increases access and quality potential but consumes cash. Keep an eye on your cash runway before investing large amounts.",
@@ -365,7 +366,7 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
           "{} {}",
           style::accent("project"),
           style::dim(
-            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit budget=<int>"
+            "kind=ehr_epic|ehr_cerner|tower|clinic_network|emergency_pavilion|icu_wing|obstetrics_unit|psychiatric_unit|cardiology_unit|oncology_unit|infusion_center|neurology_unit|asc_unit budget=<int>"
           )
         ),
       ),
@@ -396,6 +397,9 @@ fn command_topic_help_lines(verb: &str) -> Option<Vec<String>> {
       style::dim("    - oncology_unit: Inpatient Oncology Unit expansion. Duration 9 months."),
       style::dim("    - infusion_center: Outpatient Infusion Center expansion. Duration 6 months."),
       style::dim("    - neurology_unit: Inpatient Neurology Unit expansion. Duration 6 months."),
+      style::dim(
+        "    - asc_unit: Outpatient Ambulatory Surgery Center expansion. Duration 6 months.",
+      ),
       style::label_value(
         "  Constraints",
         "Maximum of 2 concurrent projects allowed at any time.",

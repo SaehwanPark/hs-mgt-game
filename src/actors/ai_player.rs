@@ -144,7 +144,8 @@ fn generate_candidates(
     + (observation.cardiology_capacity + 2) / 3
     + (observation.oncology_capacity + 2) / 3
     + (observation.infusion_capacity + 3) / 4
-    + (observation.neurology_capacity + 2) / 3;
+    + (observation.neurology_capacity + 2) / 3
+    + (observation.asc_capacity + 1) / 2;
   let target_physicians = (observation.outpatient_capacity + 9) / 10
     + (observation.emergency_capacity + 3) / 4
     + (observation.icu_capacity + 1) / 2
@@ -153,7 +154,8 @@ fn generate_candidates(
     + (observation.cardiology_capacity + 7) / 8
     + (observation.oncology_capacity + 7) / 8
     + (observation.infusion_capacity + 14) / 15
-    + (observation.neurology_capacity + 5) / 6;
+    + (observation.neurology_capacity + 5) / 6
+    + (observation.asc_capacity + 3) / 4;
   let target_admins = (observation.staffed_beds + observation.outpatient_capacity + 19) / 20
     + (observation.emergency_capacity + 9) / 10
     + (observation.icu_capacity + 4) / 5
@@ -162,7 +164,8 @@ fn generate_candidates(
     + (observation.cardiology_capacity + 11) / 12
     + (observation.oncology_capacity + 11) / 12
     + (observation.infusion_capacity + 19) / 20
-    + (observation.neurology_capacity + 9) / 10;
+    + (observation.neurology_capacity + 9) / 10
+    + (observation.asc_capacity + 11) / 12;
 
   if observation.nurses < target_nurses {
     let diff = (target_nurses - observation.nurses) as u32;
@@ -273,6 +276,27 @@ fn best_response_commands(action: &LaggedRivalAction) -> Vec<CompetitiveCommand>
       },
     ];
   }
+  if summary.contains("investing")
+    && (summary.contains("asc")
+      || summary.contains("surgical")
+      || summary.contains("surg")
+      || summary.contains("ascunit"))
+  {
+    return vec![
+      CompetitiveCommand::Invest {
+        domain: InvestDomain::Asc,
+        amount: 20,
+      },
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Nurse,
+        headcount: 1,
+      },
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Physician,
+        headcount: 1,
+      },
+    ];
+  }
   if summary.contains("pledge") && summary.contains("access") {
     return vec![
       CompetitiveCommand::Commit {
@@ -360,6 +384,10 @@ fn score_command(
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {
       domain: InvestDomain::Neurology,
+      ..
+    } => (style.growth + style.access * 2) as i32,
+    CompetitiveCommand::Invest {
+      domain: InvestDomain::Asc,
       ..
     } => (style.growth + style.access * 2) as i32,
     CompetitiveCommand::Invest {
@@ -498,6 +526,56 @@ mod tests {
     let candidates = generate_candidates(&observation, style);
 
     // Verify that recruitment commands for nurse, physician, and admin are generated
+    assert!(candidates.iter().any(|cmd| matches!(
+      cmd,
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Nurse,
+        headcount: 1,
+      }
+    )));
+    assert!(candidates.iter().any(|cmd| matches!(
+      cmd,
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Physician,
+        headcount: 1,
+      }
+    )));
+    assert!(candidates.iter().any(|cmd| matches!(
+      cmd,
+      CompetitiveCommand::Recruit {
+        role: RecruitRole::Admin,
+        headcount: 1,
+      }
+    )));
+  }
+
+  #[test]
+  fn test_ai_candidate_generation_includes_asc_staffing() {
+    let mut observation = observe_for_ai(&genesis_competitive_world(Difficulty::Normal), 1);
+    // Artificially give ASC capacity of 4 bays (target: 2 nurses, 1 physician, 1 admin)
+    observation.asc_capacity = 4;
+    observation.nurses = 0;
+    observation.physicians = 0;
+    observation.admins = 0;
+    observation.staffed_beds = 0;
+    observation.outpatient_capacity = 0;
+    observation.emergency_capacity = 0;
+    observation.icu_capacity = 0;
+    observation.obstetrics_capacity = 0;
+    observation.psychiatric_capacity = 0;
+    observation.cardiology_capacity = 0;
+    observation.oncology_capacity = 0;
+    observation.infusion_capacity = 0;
+    observation.neurology_capacity = 0;
+
+    let style = AiStyleWeights {
+      growth: 1,
+      margin: 1,
+      access: 1,
+      political: 1,
+    };
+    let candidates = generate_candidates(&observation, style);
+
     assert!(candidates.iter().any(|cmd| matches!(
       cmd,
       CompetitiveCommand::Recruit {

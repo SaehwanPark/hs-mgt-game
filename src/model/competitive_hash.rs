@@ -1,7 +1,7 @@
 use super::{CompetitiveRuleset, CompetitiveWorldState, stable_hash_hex};
 
-// v7: added neuro= field to record format (2026-07-05, feat/neurology-service-line)
-pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v7";
+// v8: added asc= field to record format (2026-07-05, feat/asc-service-line)
+pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v8";
 
 pub fn competitive_state_hash_record(
   state: &CompetitiveWorldState,
@@ -10,7 +10,7 @@ pub fn competitive_state_hash_record(
   let mut systems = String::new();
   for system in &state.systems {
     systems.push_str(&format!(
-      "|sys{}:beds={}|outpatient={}|emergency={}|icu={}|obs={}|psych={}|cardio={}|onco={}|infuse={}|neuro={}|nurses={}|physicians={}|admins={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}|trust_wf={}|trust_comm={}",
+      "|sys{}:beds={}|outpatient={}|emergency={}|icu={}|obs={}|psych={}|cardio={}|onco={}|infuse={}|neuro={}|asc={}|nurses={}|physicians={}|admins={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}|trust_wf={}|trust_comm={}",
       system.system_id,
       system.staffed_beds,
       system.outpatient_capacity,
@@ -22,6 +22,7 @@ pub fn competitive_state_hash_record(
       system.oncology_capacity,
       system.infusion_capacity,
       system.neurology_capacity,
+      system.asc_capacity,
       system.nurses,
       system.physicians,
       system.admins,
