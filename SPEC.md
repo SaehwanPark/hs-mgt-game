@@ -113,6 +113,46 @@ reconstructing it from the diff.
 | Free-Form Hard Seed Variation | v0.10.1 | Extend free-form Hard competitive sessions across seeds 42, 43, and 44 | 282 | `8926f71296f39efc` (competitive) |
 | Access-Loop Diagnostic | v0.10.2 | Compare free-form Hard baseline policies against bounded access-pledge cooldown and reported-access-threshold variants | 282 | `8926f71296f39efc` (competitive) |
 | Access Commitment Guidance Hardening | v0.10.3 | Clarify competitive access pledge guidance without changing runtime mechanics or balance | 284 | `8926f71296f39efc` (competitive) |
+| Post-Guidance Validation | v0.10.4 | Compare unchanged free-form Hard policies against a guidance-aware access-pledge policy | 284 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Post-Guidance Validation
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.10.4
+
+  Summary:
+  Tested whether the v0.10.3 access-commitment guidance can be represented as a
+  bounded simulated-agent policy change. Compared unchanged free-form Hard
+  policies against a guidance-aware variant that suppresses repeated/high-access
+  pledges and redirects to existing legal fallback actions.
+
+  Done:
+  - Ran 18 Hard competitive sessions: three free-form profiles, three seeds,
+    and two policy variants, with zero validation failures across 24 months
+    each.
+  - Added `docs/playtest-findings-v0.10.4.md` with command totals, endpoint
+    comparison, hypotheses, evidence limits, and follow-up routing.
+  - Added `_workspace/experiments/v0.10.4-post-guidance-validation/` operator
+    capture script and generated JSON artifact.
+  - Updated the MCP playtesting guide with the post-guidance validation
+    procedure.
+  - Bumped package metadata to `0.10.4`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No automatic command cooldown, pledge-effect tuning, default scripted batch
+    replacement, or LLM runner.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.4-post-guidance-validation/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Access Commitment Guidance Hardening

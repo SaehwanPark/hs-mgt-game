@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.4] - 2026-07-06
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.4.md` with post-guidance validation
+  comparing unchanged free-form Hard policies against a guidance-aware access
+  pledge policy across three profiles and seeds `42`, `43`, and `44`.
+- Added operator capture script and JSON artifact at
+  `_workspace/experiments/v0.10.4-post-guidance-validation/`.
+- Documented the post-guidance validation procedure in
+  `docs/mcp-playtesting-guide.md`.
+
+### Changed
+- Bumped the package version to `0.10.4`.
+
 ## [0.10.3] - 2026-07-06
 
 ### Changed

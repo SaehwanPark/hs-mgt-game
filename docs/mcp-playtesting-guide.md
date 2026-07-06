@@ -201,3 +201,17 @@ The access-loop diagnostic script writes
 test whether repetitive access commitments are reducible through operator-policy
 or guidance changes. Do not treat it as evidence for runtime balance changes or
 automatic command cooldowns.
+
+To validate whether the v0.10.3 access-commitment guidance can reduce repeated
+access pledges in a bounded operator policy:
+
+```bash
+python3 _workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py
+```
+
+The post-guidance validation script writes
+`_workspace/experiments/v0.10.4-post-guidance-validation/results.json`. Use it to
+compare unchanged baseline free-form Hard policies against a guidance-aware
+variant that redirects repeated or high-access pledges to existing legal
+fallback actions. Do not treat it as evidence for runtime balance changes,
+automatic command cooldowns, or pledge-effect tuning.

@@ -21,6 +21,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   diagnostics first. Do not tune pledge effects or add runtime cooldowns without
   stronger human, LLM, or domain-review evidence.
 
+## Post-Guidance Validation Can Change Endpoint Tradeoffs
+
+- Context: The v0.10.4 post-guidance validation compared unchanged free-form
+  Hard policies against a guidance-aware variant that suppressed repeated or
+  high-access pledges.
+- Symptom: Aggregate access pledges fell sharply, but access-heavy profiles also
+  ended with lower access and/or community trust.
+- Cause: Redirecting repeated pledges toward neutral payer negotiation reduced
+  public legitimacy effects while preserving legal command completion.
+- Prevention: Treat lower repetitive-command counts as a behavior signal, not
+  automatically as an improved gameplay outcome. Document endpoint tradeoffs
+  before promoting guidance heuristics into runtime cooldowns, formula tuning,
+  or default playtest policies.
+
 ## Targeted Project Playtests Must Account for Scenario Delays
 
 - Context: Adding the v0.9.7 `project-coverage` automated MCP playtest target.
