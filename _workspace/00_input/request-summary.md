@@ -1,21 +1,23 @@
-# Request Summary - Access Commitment Guidance Hardening
+# Request Summary - Post-Guidance Validation
 
 ## Phase / Gate
-Phase 7: AI-agent gameplay evaluation follow-up — player-facing guidance
-hardening from the access-loop diagnostic.
+Phase 7: AI-agent gameplay evaluation follow-up — post-guidance validation for
+the access-commitment guidance hardening.
 
 ## Scope
-Convert the completed `v0.10.2` access-loop diagnostic into competitive
-player-facing guidance. Clarify that public access pledges can reduce scrutiny
-and build legitimacy, but repeated pledges do not substitute for durable
-capacity, staffing, monitoring, or payer work.
+Test whether the v0.10.3 access-commitment guidance can be represented as a
+bounded simulated-agent policy change. Compare unchanged free-form Hard
+competitive policies against a guidance-aware variant that suppresses repeated
+or high-access pledges and redirects to existing legal fallback actions.
 
 Expected artifacts:
-- `src/cli/guidance.rs`
-- `docs/how-to-play.md`
+- `_workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py`
+- `_workspace/experiments/v0.10.4-post-guidance-validation/results.json`
+- `docs/playtest-findings-v0.10.4.md`
+- `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
-- package version metadata (`0.10.3`)
+- package version metadata (`0.10.4`)
 - `_workspace/final/handoff.md`
 
 ## Non-Goals
@@ -23,10 +25,10 @@ Expected artifacts:
 - No command grammar, MCP DTO, scenario schema, replay artifact, state hash, or
   balance changes.
 - No automatic runtime command cooldowns or pledge-effect tuning.
-- No new playtest evidence batch or LLM runner.
 - No default baseline batch replacement in `scripts/run_automated_playtests.py`.
-- No human-learning, calibration, classroom-effectiveness, or policy-validity
-  claims.
+- No LLM runner.
+- No human-learning, calibration, classroom-effectiveness, policy-validity, or
+  balance-tuning claims.
 
 ## Sources
 - `README.md`
@@ -35,10 +37,14 @@ Expected artifacts:
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - `docs/playtest-findings-v0.10.2.md`
+- `CHANGELOG.md`
+- `docs/how-to-play.md`
 - `LESSONS.md`
 - `SPEC.md`
 
 ## Validation Target
+- `python3 _workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.4-post-guidance-validation/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
