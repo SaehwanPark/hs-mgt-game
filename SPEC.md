@@ -103,6 +103,38 @@ reconstructing it from the diff.
 | Oncology & Infusion Service Lines | v0.9.0 | Add inpatient Oncology and outpatient Infusion service lines, staffing ratios, hierarchical priority queues, and ED boarding/diversion/deferral mechanics | 277 | `6044273e2c6c1374` (competitive) |
 | Neurology & Stroke Center | v0.9.1–v0.9.2 | Add inpatient Neurology service line, staffing ratios, hierarchical priority queue 6th, and ED holding boarding/diversion mechanics | 279 | `807fcbc8edeea8e3` (competitive) |
 | Ambulatory Surgery Center | v0.9.3 | Add outpatient ASC service line, staffing ratios, hierarchical priority queue 9th, and outpatient surgery deferral mechanics | 280 | `8926f71296f39efc` (competitive) |
+| Agent Playtest Synthesis After Service-Line Expansion | v0.9.4 | Record scripted Phase 7 MCP playtest evidence across current campaigns, seeds, and profiles | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Agent Playtest Synthesis After Service-Line Expansion
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.4
+
+  Summary:
+  Recorded a Phase 7 scripted AI-agent playtest synthesis after the recent
+  service-line expansion through ASC. The slice validates that both current
+  campaigns complete through the local MCP playtest harness across four
+  scripted profiles and seeds `42`, `43`, and `44`, while keeping evidence
+  limits explicit.
+
+  Done:
+  - Added `docs/playtest-findings-v0.9.4.md` with session matrix, metric
+    ranges, representative hashes, rubric scores, evidence limits, and
+    follow-up recommendations.
+  - Verified 12 stabilization and 12 competitive scripted MCP sessions
+    completed without validation failures.
+  - Bumped package metadata to `0.9.4`.
+
+  Deferred / Non-Goals:
+  - No simulation behavior, command grammar, MCP DTO, scenario schema, golden
+    hash, balance, or strategic actor change.
+  - No claims about human learning, empirical calibration, classroom
+    effectiveness, or real-world policy validity.
+
+  Verification:
+  - `python3 scripts/run_automated_playtests.py` completed all scripted
+    sessions.
 
 
 - Feature: Ambulatory Surgery Center Service Line
