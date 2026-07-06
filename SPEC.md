@@ -104,6 +104,42 @@ reconstructing it from the diff.
 | Neurology & Stroke Center | v0.9.1–v0.9.2 | Add inpatient Neurology service line, staffing ratios, hierarchical priority queue 6th, and ED holding boarding/diversion mechanics | 279 | `807fcbc8edeea8e3` (competitive) |
 | Ambulatory Surgery Center | v0.9.3 | Add outpatient ASC service line, staffing ratios, hierarchical priority queue 9th, and outpatient surgery deferral mechanics | 280 | `8926f71296f39efc` (competitive) |
 | Agent Playtest Synthesis After Service-Line Expansion | v0.9.4 | Record scripted Phase 7 MCP playtest evidence across current campaigns, seeds, and profiles | 282 | `8926f71296f39efc` (competitive) |
+| Strategy-Space Diagnostics Artifact | v0.9.5 | Add automated playtest JSON artifact output and diagnostic report support for Phase 7 scripted batches | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Strategy-Space Diagnostics Artifact
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.5
+
+  Summary:
+  Added a lightweight Phase 7 diagnostics artifact path for scripted MCP
+  playtest batches. The automated playtest runner can now write compact JSON
+  evidence, and the diagnostic script can summarize that batch without changing
+  simulation behavior, MCP DTOs, replay formats, command grammar, or balance.
+
+  Done:
+  - Added optional `--json-output` support to
+    `scripts/run_automated_playtests.py`.
+  - Extended `scripts/diagnose_runs.py` to accept automated playtest batch JSON
+    in addition to existing competitive replay JSON.
+  - Added `docs/playtest-findings-v0.9.5.md` documenting strategy-space
+    diagnostic results, evidence limits, and follow-up routing.
+  - Updated the MCP playtesting guide with the JSON artifact and diagnostic
+    commands.
+  - Bumped package metadata to `0.9.5`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    equilibrium, or policy-validity claim.
+  - No broad raw transcript archive committed.
+
+  Verification:
+  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
+  - `python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/v0.9.5-playtest-batch/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.5-playtest-batch/results.json --output _workspace/experiments/v0.9.5-playtest-batch/diagnostics.md`
 
 
 - Feature: Agent Playtest Synthesis After Service-Line Expansion

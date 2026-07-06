@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.5] - 2026-07-06
+
+### Added
+- Added optional JSON batch artifact output to `scripts/run_automated_playtests.py` for Phase 7 strategy-space diagnostics.
+- Extended `scripts/diagnose_runs.py` to read automated playtest batch JSON while preserving existing competitive replay JSON diagnostics.
+- Recorded `docs/playtest-findings-v0.9.5.md` with strategy-space diagnostic findings for the current scripted MCP batch.
+
+### Changed
+- Documented the playtest JSON artifact and diagnostic workflow in `docs/mcp-playtesting-guide.md`.
+- Bumped the package version to `0.9.5` for the diagnostics tooling and evidence PR-equivalent change.
+
 ## [0.9.4] - 2026-07-06
 
 ### Added

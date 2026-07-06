@@ -1,3 +1,5 @@
+import argparse
+import json
 import sys
 import os
 import re
@@ -8,6 +10,15 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from play_game import play_session
 
 SEEDS = [42, 43, 44]
+
+def code_version():
+  try:
+    with open("Cargo.toml", "r", encoding="utf-8") as f:
+      text = f.read()
+  except OSError:
+    return "unknown"
+  match = re.search(r'^version\s*=\s*"([^"]+)"', text, re.MULTILINE)
+  return match.group(1) if match else "unknown"
 
 def is_stabilization_legal(legal):
   return len(legal) == 1
@@ -210,7 +221,23 @@ def print_range_summary(title, results, keys):
     print(f"{key}: {format_range(results, key)}")
   print()
 
-def run_tests():
+def write_json_artifact(path, stab_results, comp_results):
+  artifact = {
+    "artifact_type": "automated_playtest_batch",
+    "code_version": code_version(),
+    "seeds": SEEDS,
+    "strategies": sorted({result["strategy"] for result in stab_results + comp_results}),
+    "campaigns": {
+      "stabilization-v1": stab_results,
+      "competitive-regional-v1": comp_results
+    }
+  }
+  os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
+  with open(path, "w", encoding="utf-8") as f:
+    json.dump(artifact, f, indent=2)
+    f.write("\n")
+
+def run_tests(json_output=None):
   subprocess.run(
     ["cargo", "build", "--quiet", "--bin", "hs-mgt-game-mcp"],
     check=True
@@ -235,7 +262,17 @@ def run_tests():
       res = play_session("stabilization-v1", seed=seed, policy_fn=policy)
       if res:
         metrics = parse_stabilization_metrics(res["final_observation"], res["debrief"])
-        stab_results.append({"seed": seed, "strategy": name, "metrics": metrics})
+        stab_results.append({
+          "seed": seed,
+          "strategy": name,
+          "campaign": res["campaign"],
+          "metrics": metrics,
+          "transition_count": len(res["history"]),
+          "transitions": res["history"],
+          "final_observation": res["final_observation"],
+          "debrief": res["debrief"],
+          "validation_failures": res["validation_failures"]
+        })
         print(f"  -> Done. Final Cash: {metrics['Cash']}, Reported Access: {metrics['Access']}\n")
       else:
         print(f"  -> Failed to execute run for '{name}' with seed {seed}\n")
@@ -248,7 +285,18 @@ def run_tests():
       res = play_session("competitive-regional-v1", seed=seed, policy_fn=policy)
       if res:
         metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
-        comp_results.append({"seed": seed, "strategy": name, "metrics": metrics})
+        comp_results.append({
+          "seed": seed,
+          "strategy": name,
+          "campaign": res["campaign"],
+          "difficulty": res["difficulty"],
+          "metrics": metrics,
+          "transition_count": len(res["history"]),
+          "transitions": res["history"],
+          "final_observation": res["final_observation"],
+          "debrief": res["debrief"],
+          "validation_failures": res["validation_failures"]
+        })
         print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
       else:
         print(f"  -> Failed to execute run for '{name}' with seed {seed}\n")
@@ -293,5 +341,15 @@ def run_tests():
     ["Cash", "Access", "Beds", "WorkforceTrust", "CommunityTrust", "PC"]
   )
 
+  if json_output:
+    write_json_artifact(json_output, stab_results, comp_results)
+    print(f"Automated playtest batch JSON written to {json_output}")
+
 if __name__ == "__main__":
-  run_tests()
+  parser = argparse.ArgumentParser(description="Run automated MCP gameplay playtests")
+  parser.add_argument(
+    "--json-output",
+    help="Optional path for a JSON batch artifact containing observations, transitions, debriefs, and metrics"
+  )
+  args = parser.parse_args()
+  run_tests(json_output=args.json_output)

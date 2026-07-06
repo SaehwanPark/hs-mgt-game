@@ -24,6 +24,13 @@ To execute the automated playtests and print a comparison table of their ending 
 python3 scripts/run_automated_playtests.py
 ```
 
+To persist a compact JSON artifact for strategy-space diagnostics:
+
+```bash
+python3 scripts/run_automated_playtests.py --json-output _workspace/experiments/v0.9.5-playtest-batch/results.json
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.5-playtest-batch/results.json --output _workspace/experiments/v0.9.5-playtest-batch/diagnostics.md
+```
+
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all four profiles across seeds `42`, `43`, and `44`, and
@@ -31,6 +38,9 @@ prints per-seed comparison tables plus compact metric ranges. Stabilization
 metrics are parsed from the committed debrief. Competitive end-session debriefs
 expose final player tradeoff metrics from committed history; treat those as
 scripted-agent evidence, not human learning or empirical calibration evidence.
+The optional JSON artifact records final observations, transition summaries,
+debrief lines, validation failures, and metrics for lightweight diagnostics; it
+is not a full replay artifact.
 
 ## Creating a Custom Strategy Policy
 
