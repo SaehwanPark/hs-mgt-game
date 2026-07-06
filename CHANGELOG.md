@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.8] - 2026-07-06
+
+### Added
+- Added a targeted `--target difficulty-sweep` automated MCP playtest mode for
+  exercising competitive baseline profiles at Easy and Hard difficulty.
+- Extended strategy diagnostics to report competitive outcomes grouped by
+  difficulty and profile-by-difficulty cross-tabs for automated playtest batch
+  artifacts.
+- Recorded `docs/playtest-findings-v0.9.8.md` with the targeted Phase 7
+  simulated-agent evidence and limits.
+
+### Changed
+- Bumped the package version to `0.9.8`.
+
 ## [0.9.7] - 2026-07-06
 
 ### Added

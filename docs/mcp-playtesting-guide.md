@@ -40,6 +40,13 @@ python3 scripts/run_automated_playtests.py --target project-coverage --json-outp
 python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.7-project-command-coverage/results.json --output _workspace/experiments/v0.9.7-project-command-coverage/diagnostics.md
 ```
 
+To run the targeted difficulty-tier competitive sweep:
+
+```bash
+python3 scripts/run_automated_playtests.py --target difficulty-sweep --json-output _workspace/experiments/v0.9.8-difficulty-sweep/results.json
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.8-difficulty-sweep/results.json --output _workspace/experiments/v0.9.8-difficulty-sweep/diagnostics.md
+```
+
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all four profiles across seeds `42`, `43`, and `44`, and
@@ -53,6 +60,10 @@ is not a full replay artifact.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
+The `difficulty-sweep` target runs the four baseline competitive profiles at
+`easy` and `hard` across seeds `42`, `43`, and `44`. It satisfies the agent
+playtest protocol's difficulty-variation requirement without changing the default
+Normal-only baseline batch.
 
 ## Creating a Custom Strategy Policy
 

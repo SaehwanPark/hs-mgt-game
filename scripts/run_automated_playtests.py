@@ -12,6 +12,8 @@ from play_game import play_session
 SEEDS = [42, 43, 44]
 TARGET_BASELINE = "baseline"
 TARGET_PROJECT_COVERAGE = "project-coverage"
+TARGET_DIFFICULTY_SWEEP = "difficulty-sweep"
+DIFFICULTY_SWEEP_LEVELS = ["easy", "hard"]
 
 def code_version():
   try:
@@ -349,6 +351,11 @@ def print_range_summary(title, results, keys):
     print(f"{key}: {format_range(results, key)}")
   print()
 
+def competitive_difficulties_for_target(target):
+  if target == TARGET_DIFFICULTY_SWEEP:
+    return DIFFICULTY_SWEEP_LEVELS
+  return ["normal"]
+
 def write_json_artifact(path, stab_results, comp_results, target):
   artifact = {
     "artifact_type": "automated_playtest_batch",
@@ -361,6 +368,9 @@ def write_json_artifact(path, stab_results, comp_results, target):
       "competitive-regional-v1": comp_results
     }
   }
+  difficulties = competitive_difficulties_for_target(target)
+  if len(difficulties) > 1:
+    artifact["difficulties"] = difficulties
   os.makedirs(os.path.dirname(path) or ".", exist_ok=True)
   with open(path, "w", encoding="utf-8") as f:
     json.dump(artifact, f, indent=2)
@@ -416,34 +426,48 @@ def run_tests(json_output=None, target=TARGET_BASELINE):
 
   # 2. Run Competitive Campaigns
   comp_results = []
+  competitive_difficulties = competitive_difficulties_for_target(target)
   for seed in SEEDS:
-    for name, policy in strategies.items():
-      print(f"Running competitive regional campaign for '{name}' with seed {seed}...")
-      res = play_session("competitive-regional-v1", seed=seed, policy_fn=policy)
-      if res:
-        metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
-        comp_results.append({
-          "seed": seed,
-          "strategy": name,
-          "campaign": res["campaign"],
-          "difficulty": res["difficulty"],
-          "metrics": metrics,
-          "transition_count": len(res["history"]),
-          "transitions": res["history"],
-          "final_observation": res["final_observation"],
-          "debrief": res["debrief"],
-          "validation_failures": res["validation_failures"]
-        })
-        print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
-      else:
-        print(f"  -> Failed to execute run for '{name}' with seed {seed}\n")
+    for difficulty in competitive_difficulties:
+      for name, policy in strategies.items():
+        print(
+          f"Running competitive regional campaign for '{name}' with seed {seed} "
+          f"at difficulty {difficulty}..."
+        )
+        res = play_session(
+          "competitive-regional-v1",
+          seed=seed,
+          difficulty=difficulty,
+          policy_fn=policy
+        )
+        if res:
+          metrics = parse_competitive_metrics(res["final_observation"], res["history"], res["debrief"])
+          comp_results.append({
+            "seed": seed,
+            "strategy": name,
+            "campaign": res["campaign"],
+            "difficulty": res["difficulty"],
+            "metrics": metrics,
+            "transition_count": len(res["history"]),
+            "transitions": res["history"],
+            "final_observation": res["final_observation"],
+            "debrief": res["debrief"],
+            "validation_failures": res["validation_failures"]
+          })
+          print(f"  -> Done. Final Hash: {metrics['Hash']}\n")
+        else:
+          print(
+            f"  -> Failed to execute run for '{name}' with seed {seed} "
+            f"at difficulty {difficulty}\n"
+          )
 
-  expected_sessions = len(SEEDS) * len(strategies)
-  if len(stab_results) != expected_sessions or len(comp_results) != expected_sessions:
+  expected_stab_sessions = len(SEEDS) * len(strategies)
+  expected_comp_sessions = expected_stab_sessions * len(competitive_difficulties)
+  if len(stab_results) != expected_stab_sessions or len(comp_results) != expected_comp_sessions:
     raise RuntimeError(
       "Automated playtest batch incomplete: "
-      f"stabilization {len(stab_results)}/{expected_sessions}, "
-      f"competitive {len(comp_results)}/{expected_sessions}"
+      f"stabilization {len(stab_results)}/{expected_stab_sessions}, "
+      f"competitive {len(comp_results)}/{expected_comp_sessions}"
     )
 
   # Print Comparison Tables
@@ -460,11 +484,20 @@ def run_tests(json_output=None, target=TARGET_BASELINE):
   print("====================================================")
   print("COMPETITIVE CAMPAIGN COMPARISON SUMMARY")
   print("====================================================")
-  print(f"{'Seed':<6} | {'Strategy':<20} | {'Final Hash':<16} | {'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}")
-  print("-" * 111)
+  comp_header = (
+    f"{'Seed':<6} | {'Strategy':<20} | {'Difficulty':<8} | {'Final Hash':<16} | "
+    f"{'Cash':<6} | {'Access':<8} | {'Beds':<6} | {'Workforce':<9} | {'Community':<9} | {'PC':<4}"
+  )
+  print(comp_header)
+  print("-" * (len(comp_header) + 2))
   for result in comp_results:
     m = result["metrics"]
-    print(f"{result['seed']:<6} | {result['strategy']:<20} | {m['Hash']:<16} | {m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | {m['CommunityTrust']:<9} | {m['PC']:<4}")
+    difficulty = result.get("difficulty") or "normal"
+    print(
+      f"{result['seed']:<6} | {result['strategy']:<20} | {difficulty:<8} | {m['Hash']:<16} | "
+      f"{m['Cash']:<6} | {m['Access']:<8} | {m['Beds']:<6} | {m['WorkforceTrust']:<9} | "
+      f"{m['CommunityTrust']:<9} | {m['PC']:<4}"
+    )
   print()
 
   print_range_summary(
@@ -486,9 +519,13 @@ if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Run automated MCP gameplay playtests")
   parser.add_argument(
     "--target",
-    choices=[TARGET_BASELINE, TARGET_PROJECT_COVERAGE],
+    choices=[TARGET_BASELINE, TARGET_PROJECT_COVERAGE, TARGET_DIFFICULTY_SWEEP],
     default=TARGET_BASELINE,
-    help="Playtest target to run; baseline preserves the default four-profile batch"
+    help=(
+      "Playtest target to run; baseline preserves the default four-profile batch, "
+      "project-coverage exercises capital-project commands, and difficulty-sweep "
+      "runs baseline profiles at easy and hard competitive difficulty"
+    )
   )
   parser.add_argument(
     "--json-output",
