@@ -10,6 +10,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from play_game import play_session
 
 SEEDS = [42, 43, 44]
+TARGET_BASELINE = "baseline"
+TARGET_PROJECT_COVERAGE = "project-coverage"
 
 def code_version():
   try:
@@ -163,6 +165,40 @@ def policy_naive_first_time(obs, legal, turn):
       return commands[turn - 1]
     return "hold"
 
+def policy_project_coverage(obs, legal, turn):
+  if is_stabilization_legal(legal):
+    return "6 10 108" if turn == 1 else "5 4"
+
+  commands = [
+    "project kind=emergency_pavilion budget=6",
+    "project kind=clinic_network budget=9",
+    "monitor target=northlake depth=1; hold",
+    "commit pledge_type=workforce level=1; hold",
+    "monitor target=summit depth=1; hold",
+    "negotiate payer=medicaid rate_posture=neutral; hold",
+    "monitor target=northlake depth=1; hold",
+    "project kind=asc_unit budget=6",
+    "commit pledge_type=access level=1; hold",
+    "hold",
+    "monitor target=summit depth=1; hold",
+    "monitor target=summit depth=1; hold",
+    "project kind=neurology_unit budget=6",
+    "hold",
+    "monitor target=northlake depth=1; hold",
+    "monitor target=northlake depth=1; hold",
+    "monitor target=summit depth=1; hold",
+    "hold",
+    "commit pledge_type=quality level=1; hold",
+    "monitor target=summit depth=1; hold",
+    "monitor target=northlake depth=1; hold",
+    "hold",
+    "commit pledge_type=workforce level=1; hold",
+    "project kind=infusion_center budget=6"
+  ]
+  if turn <= len(commands):
+    return commands[turn - 1]
+  return "hold"
+
 def parse_stabilization_metrics(obs, debrief=None):
   metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "Policy": "N/A"}
   # Helper to parse lists of observations
@@ -207,7 +243,7 @@ def parse_stabilization_metrics(obs, debrief=None):
   return metrics
 
 def parse_competitive_metrics(obs, history=None, debrief=None):
-  metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "PC": "N/A", "Hash": "N/A"}
+  metrics = {"Cash": "N/A", "Access": "N/A", "Beds": "N/A", "WorkforceTrust": "N/A", "CommunityTrust": "N/A", "PC": "N/A", "Hash": "N/A", "ActiveProjects": "N/A", "ActiveProjectDraws": "N/A"}
   text = "\n".join(obs)
   debrief_text = "\n".join(debrief or [])
 
@@ -278,6 +314,14 @@ def parse_competitive_metrics(obs, history=None, debrief=None):
     metrics["PC"] = resource_m.group(1)
     metrics["Beds"] = resource_m.group(2)
 
+  project_m = re.search(
+    r"Final player resources: political capital \d+, active projects (\d+), active project monthly draws (-?\d+), staffed beds \d+",
+    debrief_text
+  )
+  if project_m:
+    metrics["ActiveProjects"] = project_m.group(1)
+    metrics["ActiveProjectDraws"] = project_m.group(2)
+
   return metrics
 
 def numeric_values(results, key):
@@ -305,10 +349,11 @@ def print_range_summary(title, results, keys):
     print(f"{key}: {format_range(results, key)}")
   print()
 
-def write_json_artifact(path, stab_results, comp_results):
+def write_json_artifact(path, stab_results, comp_results, target):
   artifact = {
     "artifact_type": "automated_playtest_batch",
     "code_version": code_version(),
+    "target": target,
     "seeds": SEEDS,
     "strategies": sorted({result["strategy"] for result in stab_results + comp_results}),
     "campaigns": {
@@ -321,22 +366,30 @@ def write_json_artifact(path, stab_results, comp_results):
     json.dump(artifact, f, indent=2)
     f.write("\n")
 
-def run_tests(json_output=None):
-  subprocess.run(
-    ["cargo", "build", "--quiet", "--bin", "hs-mgt-game-mcp"],
-    check=True
-  )
-
-  strategies = {
+def strategies_for_target(target):
+  if target == TARGET_PROJECT_COVERAGE:
+    return {
+      "Project Coverage": policy_project_coverage
+    }
+  return {
     "Fiscal Caution": policy_fiscal,
     "Capacity Growth": policy_growth,
     "Balanced Strategy": policy_balanced,
     "Naive First-Time": policy_naive_first_time
   }
 
+def run_tests(json_output=None, target=TARGET_BASELINE):
+  subprocess.run(
+    ["cargo", "build", "--quiet", "--bin", "hs-mgt-game-mcp"],
+    check=True
+  )
+
+  strategies = strategies_for_target(target)
+
   print("====================================================")
   print("STARTING AUTOMATED GAMEPLAY PLAYTEST RUNS")
   print("====================================================\n")
+  print(f"Target: {target}\n")
 
   # 1. Run Stabilization Campaigns
   stab_results = []
@@ -426,14 +479,20 @@ def run_tests(json_output=None):
   )
 
   if json_output:
-    write_json_artifact(json_output, stab_results, comp_results)
+    write_json_artifact(json_output, stab_results, comp_results, target)
     print(f"Automated playtest batch JSON written to {json_output}")
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Run automated MCP gameplay playtests")
   parser.add_argument(
+    "--target",
+    choices=[TARGET_BASELINE, TARGET_PROJECT_COVERAGE],
+    default=TARGET_BASELINE,
+    help="Playtest target to run; baseline preserves the default four-profile batch"
+  )
+  parser.add_argument(
     "--json-output",
     help="Optional path for a JSON batch artifact containing observations, transitions, debriefs, and metrics"
   )
   args = parser.parse_args()
-  run_tests(json_output=args.json_output)
+  run_tests(json_output=args.json_output, target=args.target)

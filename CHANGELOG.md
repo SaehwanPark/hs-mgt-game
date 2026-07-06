@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.9.7] - 2026-07-06
+
+### Added
+- Added a targeted `--target project-coverage` automated MCP playtest mode for
+  exercising competitive capital-project command paths.
+- Extended strategy diagnostics to report project-command counts, project kinds,
+  final active projects, and final active project monthly draws for automated
+  playtest batch artifacts.
+- Recorded `docs/playtest-findings-v0.9.7.md` with the targeted Phase 7
+  simulated-agent evidence and limits.
+
+### Changed
+- Bumped the package version to `0.9.7`.
+
 ## [0.9.6] - 2026-07-06
 
 ### Changed

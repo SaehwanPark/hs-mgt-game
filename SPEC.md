@@ -106,6 +106,45 @@ reconstructing it from the diff.
 | Agent Playtest Synthesis After Service-Line Expansion | v0.9.4 | Record scripted Phase 7 MCP playtest evidence across current campaigns, seeds, and profiles | 282 | `8926f71296f39efc` (competitive) |
 | Strategy-Space Diagnostics Artifact | v0.9.5 | Add automated playtest JSON artifact output and diagnostic report support for Phase 7 scripted batches | 282 | `8926f71296f39efc` (competitive) |
 | Competitive Playtest Policy Coverage | v0.9.6 | Extend scripted competitive MCP policies beyond month 3 and exercise newer service-line commands | 282 | `8926f71296f39efc` (competitive) |
+| Project-Command Playtest Diagnostics | v0.9.7 | Add targeted project-command MCP playtest mode and diagnostic reporting for project kinds, active projects, and monthly draws | 282 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Project-Command Playtest Diagnostics
+  Status: Complete
+  Started: 2026-07-06
+  Version: 0.9.7
+
+  Summary:
+  Added a targeted Phase 7 automated MCP playtest mode for competitive
+  capital-project command coverage. The diagnostic script now reports
+  project-command counts, project kinds, final active projects, and final
+  monthly project draws for automated batch artifacts without changing runtime
+  simulation behavior or balance values.
+
+  Done:
+  - Added `--target project-coverage` to `scripts/run_automated_playtests.py`
+    while preserving the default baseline batch.
+  - Added a Project Coverage policy that completes both current campaigns across
+    seeds `42`, `43`, and `44`.
+  - Extended `scripts/diagnose_runs.py` to report project-command counts,
+    project kinds, final active projects, and final monthly draws.
+  - Added `docs/playtest-findings-v0.9.7.md` documenting the completed targeted
+    batch, evidence limits, and follow-up routing.
+  - Updated the MCP playtesting guide with the target command.
+  - Recorded a project-command concurrency lesson in `LESSONS.md`.
+  - Bumped package metadata to `0.9.7`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, or balance change.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    equilibrium, policy-validity, or balance-tuning claim.
+  - No default baseline-policy replacement, analytics platform, optimizer, or
+    raw transcript archive.
+
+  Verification:
+  - `python3 scripts/run_automated_playtests.py --target project-coverage --json-output _workspace/experiments/v0.9.7-project-command-coverage/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.7-project-command-coverage/results.json --output _workspace/experiments/v0.9.7-project-command-coverage/diagnostics.md`
 
 
 - Feature: Competitive Playtest Policy Coverage

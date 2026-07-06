@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import re
 import sys
 from collections import Counter, defaultdict
 
@@ -17,6 +18,14 @@ def parse_summary_command_verbs(command_text):
   for verb in ["Monitor", "Recruit", "Invest", "Negotiate", "Commit", "Project", "Hold"]:
     verbs.extend([verb] * command_text.count(verb))
   return verbs
+
+def parse_summary_project_kinds(command_text):
+  kinds = []
+  for token in command_text.replace(";", " ").split():
+    if token.startswith("kind="):
+      kinds.append(token.split("=", 1)[1].strip())
+  kinds.extend(re.findall(r"kind:\s*([A-Za-z]+)", command_text))
+  return kinds
 
 def classify_strategy(hold_count, verb_counts):
   total_commands = hold_count + sum(verb_counts.values())
@@ -162,7 +171,10 @@ def analyze_playtest_batch(file_path, data):
       "workforce_trust": [],
       "community_trust": [],
       "political_capital": [],
-      "hashes": []
+      "hashes": [],
+      "active_projects": [],
+      "active_project_draws": [],
+      "project_kinds": Counter()
     })
     stats["sessions"] += 1
     stats["validation_failures"] += len(result.get("validation_failures", []))
@@ -172,6 +184,8 @@ def analyze_playtest_batch(file_path, data):
           stats["holds"] += 1
         else:
           stats["verbs"][verb] += 1
+      for kind in parse_summary_project_kinds(transition.get("command", "")):
+        stats["project_kinds"][kind] += 1
     metrics = result.get("metrics", {})
     for key, target in [
       ("Cash", "cash"),
@@ -179,7 +193,9 @@ def analyze_playtest_batch(file_path, data):
       ("Beds", "beds"),
       ("WorkforceTrust", "workforce_trust"),
       ("CommunityTrust", "community_trust"),
-      ("PC", "political_capital")
+      ("PC", "political_capital"),
+      ("ActiveProjects", "active_projects"),
+      ("ActiveProjectDraws", "active_project_draws")
     ]:
       value = metrics.get(key)
       if value is not None and value != "N/A":
@@ -317,14 +333,29 @@ def print_playtest_batch_markdown(batch):
   print()
 
   print("### Competitive Action Frequency Signals")
-  print("| Profile | Holds | Action Commands | Top Non-Hold Verb | Strategy Classification |")
-  print("| --- | ---: | ---: | --- | --- |")
+  print("| Profile | Holds | Action Commands | Project Commands | Top Non-Hold Verb | Strategy Classification |")
+  print("| --- | ---: | ---: | ---: | --- | --- |")
   for profile, stats in batch["profile_stats"].items():
     non_holds = sum(stats["verbs"].values())
+    project_commands = stats["verbs"].get("Project", 0)
     top_verb = stats["verbs"].most_common(1)
     top_verb_str = f"{top_verb[0][0]} ({top_verb[0][1]})" if top_verb else "None"
     strategy = classify_strategy(stats["holds"], stats["verbs"])
-    print(f"| {profile} | {stats['holds']} | {non_holds} | {top_verb_str} | {strategy} |")
+    print(f"| {profile} | {stats['holds']} | {non_holds} | {project_commands} | {top_verb_str} | {strategy} |")
+  print()
+
+  print("### Competitive Project Coverage")
+  print("| Profile | Project Kinds | Final Active Projects | Final Monthly Draws |")
+  print("| --- | --- | ---: | ---: |")
+  for profile, stats in batch["profile_stats"].items():
+    project_kinds = ", ".join(
+      f"{kind} ({count})" for kind, count in stats["project_kinds"].most_common()
+    ) or "None"
+    print(
+      f"| {profile} | {project_kinds} | "
+      f"{format_metric_range(stats['active_projects'])} | "
+      f"{format_metric_range(stats['active_project_draws'])} |"
+    )
   print()
 
   print("### Evidence Limits")

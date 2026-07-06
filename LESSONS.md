@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Targeted Project Playtests Must Account for Scenario Delays
+
+- Context: Adding the v0.9.7 `project-coverage` automated MCP playtest target.
+- Symptom: Early project-heavy policies failed with `concurrent projects 3
+  exceed limit 2`, even when commands appeared spaced apart.
+- Cause: Scenario mechanics such as CON legal objections can delay project
+  completion, so a later project command may overlap with more in-flight work
+  than a simple duration count suggests.
+- Prevention: For targeted project-command playtests, use minimal divisible
+  budgets, keep no more than two plausible concurrent projects including
+  scenario delays, and rerun the full target before documenting findings.
+
 ## Scripted MCP Policies Must Budget for Long-Run Cash Draws
 
 - Context: Extending competitive scripted playtest policies beyond month 3 for
