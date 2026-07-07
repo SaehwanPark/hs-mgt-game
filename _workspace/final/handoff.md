@@ -60,8 +60,9 @@ hashes, or balance values.
 - Critical/High findings: none.
 - Medium/Low disposition: one Low documentation finding fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: pending
-- Merge-ready: pending
+- CI/comment triage: GitHub Actions `check` passed on PR #94; no PR comments
+  or reviews were present during triage.
+- Merge-ready: yes
 
 ## Known Limits
 
