@@ -1,49 +1,42 @@
-# Request Summary - Competitive Access-Pledge Debrief QA
-
-## Phase / Gate
-Phase 7: debrief-quality follow-up after the v0.10.5 access-pledge evidence
-synthesis.
+# Request Summary - LLM Access-Pledge Evidence
 
 ## Scope
-Add a debrief-only decision-quality check for repeated public access pledges
-without capacity, staffing, monitoring, or payer follow-through in the same
-three-month window.
 
-Expected artifacts:
-- `src/debrief/report.rs`
-- `src/debrief/report_tests.rs`
-- `SPEC.md`
-- `CHANGELOG.md`
-- package version metadata (`0.10.6`)
-- `_workspace/final/handoff.md`
+Continue development after PR #88 with a PR-sized Phase 7 evidence slice. Test
+whether repeated access pledges appear in bounded sub-agent generated command
+plans outside deterministic operator heuristics.
 
 ## Non-Goals
+
 - No runtime access-pledge cooldown or pledge-effect tuning.
-- No simulation behavior, command validation, stochastic input, scenario schema,
-  MCP DTO, replay artifact, state hash, or balance change.
-- No new playtest runs, LLM runner, analytics tooling, or default scripted batch
-  replacement.
-- No human-learning, empirical calibration, classroom-effectiveness,
-  policy-validity, or balance-tuning claim.
+- No command grammar, scenario schema, MCP DTO, transition, replay, state hash,
+  or balance change.
+- No general LLM runner or live LLM integration.
+- No human-learning, classroom-effectiveness, empirical calibration,
+  policy-validity, or balance claim.
 
 ## Sources
+
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
+- `docs/playtest-findings-v0.10.5.md`
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
-- `docs/playtest-findings-v0.10.5.md`
-- `CHANGELOG.md`
-- `docs/how-to-play.md`
-- `LESSONS.md`
-- `SPEC.md`
-- `src/debrief/report.rs`
-- `src/debrief/report_tests.rs`
+
+## Expected Files
+
+- `docs/playtest-findings-v0.10.7.md`
+- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.py`
+- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json`
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`
+- `_workspace/01_evidence_map.md`, `_workspace/03_domain_qa.md`,
+  `_workspace/final/handoff.md`
 
 ## Validation Target
-- `cargo fmt --check`
-- `cargo clippy --all-targets -- -D warnings`
-- `cargo test`
-- Three-pass `code-reviewer` loop on the PR diff.
+
+Replay at least two 24-month Hard competitive sessions through MCP with zero
+validation failures, record command and debrief evidence, and keep conclusions
+limited to simulated-agent evidence.

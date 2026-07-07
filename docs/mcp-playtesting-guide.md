@@ -221,3 +221,14 @@ the `v0.10.0` through `v0.10.4` free-form Hard evidence without adding new runs.
 Use it as the current routing note for access-pledge follow-up: repeated
 baseline matrices are controls, not independent player evidence, and runtime
 cooldowns or pledge-effect tuning still require a separate evidence gate.
+
+The v0.10.7 sub-agent access-pledge slice replays three generated Hard
+competitive command plans through MCP:
+
+```bash
+python3 _workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.py
+```
+
+Use `docs/playtest-findings-v0.10.7.md` as bounded simulated-agent evidence
+only. It does not justify runtime access cooldowns, pledge-effect tuning, or a
+general LLM runner.

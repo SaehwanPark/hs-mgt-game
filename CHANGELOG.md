@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.7] - 2026-07-07
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.7.md` with a bounded sub-agent
+  access-pledge evidence slice for Hard competitive play at seed `42`.
+- Added replayable MCP artifact capture at
+  `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/`.
+
+### Changed
+- Bumped the package version to `0.10.7`.
+
 ## [0.10.6] - 2026-07-07
 
 ### Added

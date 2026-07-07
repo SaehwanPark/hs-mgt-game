@@ -1,31 +1,44 @@
-# Domain QA - Access-Loop Diagnostic
+# Domain QA - LLM Access-Pledge Evidence
 
-- **Status:** Complete
-- **Role:** Domain QA Reviewer
+## Status
 
-## Checklist & Review Criteria
+pass
 
-- [x] **Scope Fit:** The slice stays in Phase 7 validation/evidence work by
-  comparing operator-policy variants for an issue identified in v0.10.1.
-- [x] **State/Observation Separation:** Operator policies use only MCP
-  observations, legal-command hints, and player-facing documentation. No active
-  observation surface is expanded.
-- [x] **Deterministic Replay Boundary:** The slice records MCP transition
-  summaries and final hashes only. It does not change transition logic,
-  stochastic input resolution, replay formats, state hashes, or scenario
-  schemas.
-- [x] **Evidence Labeling:** Findings label results as simulated-agent evidence
-  and explicitly exclude human-learning, empirical calibration, policy-validity,
-  and balance claims.
-- [x] **Narrow Follow-Up Routing:** The follow-up routes repetitive access
-  pledges to guidance or operator-policy evaluation before any runtime change.
+## Reviewed Inputs
 
-## Findings & Risk Mitigation
+- `docs/playtest-findings-v0.10.7.md`
+- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json`
+- `_workspace/00_input/request-summary.md`
+- `_workspace/01_evidence_map.md`
+- Canonical docs and harness team spec
 
-- **Pass:** All 27 Hard competitive sessions completed 24 months with zero
-  validation failures.
-- **Pass:** Cooldown and threshold variants reduced aggregate access pledges
-  from 162 baseline pledges to 72 and 60 respectively.
-- **Watch:** Reduced pledging also reduced access and/or community-trust
-  endpoints for access-heavy profiles, so the artifact should not be used for
-  direct runtime balance tuning.
+## Findings
+
+- Scope fit: The slice stays in Phase 7 evidence work and does not change
+  runtime mechanics, command grammar, state hashes, scenario schemas, or MCP
+  DTOs.
+- Evidence labeling: The findings consistently label the runs as sub-agent
+  simulated evidence and avoid human-learning, empirical calibration, and
+  policy-validity claims.
+- Determinism: The accepted command sequences replay through the existing MCP
+  boundary with fixed campaign, seed, and difficulty.
+- Access-pledge interpretation: No repeated access-pledge loop appears in the
+  replayed slice; conclusions remain bounded and do not recommend tuning.
+
+## Required Fixes
+
+None.
+
+## Residual Risks
+
+- The three command plans were generated without live month-by-month MCP
+  observation access, so they are weaker than live LLM play evidence.
+- Operator corrections converted invalid or unaffordable planned commands to
+  legal replay commands; those corrections should not be interpreted as
+  autonomous player adaptation.
+- One seed and one difficulty cannot support balance conclusions.
+
+## Verification Evidence
+
+- `python3 _workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json >/dev/null`
