@@ -269,3 +269,16 @@ Use `docs/playtest-findings-v0.10.11.md` as workflow evidence that the live MCP
 capture path supports small seed/difficulty matrices. Do not treat the repeated
 deterministic policies as independent player samples or evidence for runtime
 tuning.
+
+To run a live-capture matrix using the existing automated pressure policies and
+the Hard difficulty-adaptive wrapper:
+
+```bash
+python3 _workspace/experiments/v0.10.12-live-difficulty-pressure/run_sessions.py
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json --output _workspace/experiments/v0.10.12-live-difficulty-pressure/diagnostics.md
+```
+
+Use `docs/playtest-findings-v0.10.12.md` as simulated-agent pressure evidence
+for Normal/Hard comparison. Do not treat it as balance proof, empirical
+calibration, human-learning evidence, or justification for runtime tuning by
+itself.

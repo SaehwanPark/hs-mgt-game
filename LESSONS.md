@@ -3,6 +3,22 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Reuse Existing Playtest Policies for Evidence Slices Before Inventing New Ones
+
+- Context: Adding the v0.10.12 live difficulty-pressure capture slice after the
+  v0.10.11 conservative live-capture matrix.
+- Symptom: A new evidence slice can look like it needs new scripted command
+  policies, which increases validation risk and duplicates prior playtest
+  logic.
+- Cause: The pressure and difficulty-adaptive policies already existed in
+  `scripts/run_automated_playtests.py`; the missing piece was the
+  observation-by-observation live capture artifact, not new gameplay behavior.
+- Resolution: Reuse the existing automated policies through `play_session` with
+  `capture_trace=True`, and fail fast when a run has validation failures or does
+  not complete 24 transitions.
+- Prevention: For future Phase 7 evidence work, first check existing automated
+  policies and diagnostics before adding new policy logic or runtime exports.
+
 ## Capture MCP Evidence at the Wrapper Boundary First
 
 - Context: Adding the v0.10.9 live MCP capture evidence slice after v0.10.7
