@@ -34,11 +34,18 @@ hashes, or balance values.
 
 - Branch: `feat/llm-access-pledge-evidence`
 - Base: `main`
-- PR: pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/89
 
 ## Review Summary
 
-Pending PR creation and required three-pass review loop.
+- Pass 1: No actionable findings.
+- Pass 2: Low evidence-wording finding for an ASC reference in the access
+  profile rationale, and Low handoff bookkeeping finding for stale PR status;
+  both fixed.
+- Pass 3: Low evidence-wording finding for the same ASC reference; fixed.
+- Critical/High findings: none.
+- Medium/Low disposition: two Low findings fixed.
+- Merge-ready: pending CI completion.
 
 ## Known Limits
 

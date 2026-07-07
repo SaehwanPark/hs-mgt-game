@@ -89,7 +89,7 @@ PROFILES = [
     ],
     "post_run_rationale": (
       "Used one access pledge in month 1 to signal the persona's priority, "
-      "then shifted to outpatient, emergency, psychiatric, obstetrics, ASC, "
+      "then shifted to outpatient, emergency, psychiatric, obstetrics, "
       "Medicaid negotiation, and staffing actions."
     ),
   },
