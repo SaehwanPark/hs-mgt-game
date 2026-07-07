@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.11] - 2026-07-07
+
+### Added
+- Added a Phase 7 live-capture matrix artifact across three deterministic
+  persona policies, seeds `42`, `43`, and `44`, and Normal/Hard competitive
+  difficulty tiers.
+- Generated `_workspace/experiments/v0.10.11-live-capture-matrix/diagnostics.md`
+  from the matrix artifact.
+- Recorded `docs/playtest-findings-v0.10.11.md` with findings and evidence
+  limits for the live-capture matrix.
+
+### Changed
+- Documented the live-capture matrix command in the MCP playtesting guide.
+- Bumped the package version to `0.10.11`.
+
 ## [0.10.10] - 2026-07-07
 
 ### Added

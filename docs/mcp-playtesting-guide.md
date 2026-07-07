@@ -256,3 +256,16 @@ python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.9-live-mcp-capture
 The report summarizes profile outcomes, action frequencies, validation failures,
 access pledges, and final hashes. Use it as simulated-agent strategy-space
 diagnostics only; it is not evidence for runtime tuning or balance changes.
+
+To extend live capture across the current deterministic persona policies,
+seeds `42`, `43`, and `44`, and Normal/Hard competitive difficulty tiers:
+
+```bash
+python3 _workspace/experiments/v0.10.11-live-capture-matrix/run_sessions.py
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.11-live-capture-matrix/results.json --output _workspace/experiments/v0.10.11-live-capture-matrix/diagnostics.md
+```
+
+Use `docs/playtest-findings-v0.10.11.md` as workflow evidence that the live MCP
+capture path supports small seed/difficulty matrices. Do not treat the repeated
+deterministic policies as independent player samples or evidence for runtime
+tuning.
