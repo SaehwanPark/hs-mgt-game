@@ -27,6 +27,50 @@ def parse_summary_project_kinds(command_text):
   kinds.extend(re.findall(r"kind:\s*([A-Za-z]+)", command_text))
   return kinds
 
+def parse_raw_command_verbs(command_text):
+  verbs = []
+  for command in command_text.split(";"):
+    token = command.strip().split(maxsplit=1)
+    if not token:
+      continue
+    verb = token[0].lower()
+    known = {
+      "monitor": "Monitor",
+      "recruit": "Recruit",
+      "invest": "Invest",
+      "negotiate": "Negotiate",
+      "commit": "Commit",
+      "project": "Project",
+      "hold": "Hold"
+    }
+    if verb in known:
+      verbs.append(known[verb])
+  return verbs
+
+def parse_final_tradeoff(debrief):
+  metrics = {}
+  text = "\n".join(debrief)
+  tradeoff = re.search(
+    r"cash moved from -?\d+ to (?P<Cash>-?\d+), access from -?\d+ to "
+    r"(?P<Access>-?\d+), quality from -?\d+ to (?P<Quality>-?\d+), "
+    r"workforce trust from -?\d+ to (?P<WorkforceTrust>-?\d+), "
+    r"community trust from -?\d+ to (?P<CommunityTrust>-?\d+), and "
+    r"market share from -?\d+ to (?P<MarketShare>-?\d+)",
+    text
+  )
+  if tradeoff:
+    metrics.update({key: int(value) for key, value in tradeoff.groupdict().items()})
+
+  resources = re.search(
+    r"political capital (?P<PC>-?\d+), active projects "
+    r"(?P<ActiveProjects>-?\d+), active project monthly draws "
+    r"(?P<ActiveProjectDraws>-?\d+), staffed beds (?P<Beds>-?\d+)",
+    text
+  )
+  if resources:
+    metrics.update({key: int(value) for key, value in resources.groupdict().items()})
+  return metrics
+
 def classify_strategy(hold_count, verb_counts):
   total_commands = hold_count + sum(verb_counts.values())
   if total_commands == 0:
@@ -234,6 +278,52 @@ def analyze_playtest_batch(file_path, data):
     "profile_difficulty_stats": profile_difficulty_stats
   }
 
+def analyze_live_capture_batch(file_path, data):
+  runs = data.get("runs", [])
+  if not runs:
+    print(f"Skipping {file_path}: live-capture artifact has no runs.", file=sys.stderr)
+    return None
+
+  run_stats = []
+  for run in runs:
+    verbs = Counter()
+    holds = 0
+    project_kinds = Counter()
+    for command in run.get("commands", []):
+      for verb in parse_raw_command_verbs(command):
+        if verb == "Hold":
+          holds += 1
+        else:
+          verbs[verb] += 1
+      for kind in parse_summary_project_kinds(command):
+        project_kinds[kind] += 1
+
+    metrics = parse_final_tradeoff(run.get("debrief", []))
+    run_stats.append({
+      "profile_name": run.get("profile_name", run.get("profile_id", "Unknown")),
+      "profile_id": run.get("profile_id", "unknown"),
+      "transition_count": run.get("transition_count", len(run.get("state_hashes", []))),
+      "validation_failures": len(run.get("validation_failures", [])),
+      "access_pledges": run.get("access_pledge_count", 0),
+      "final_hash": run.get("final_hash", "N/A"),
+      "holds": holds,
+      "verbs": verbs,
+      "project_kinds": project_kinds,
+      "metrics": metrics,
+      "strategy": classify_strategy(holds, verbs)
+    })
+
+  return {
+    "filename": os.path.basename(file_path),
+    "batch_id": data.get("batch_id", "unknown"),
+    "code_version": data.get("code_version", "unknown"),
+    "campaign": data.get("campaign", "unknown"),
+    "difficulty": data.get("difficulty", "unknown"),
+    "seed": data.get("seed", "unknown"),
+    "evidence_type": data.get("evidence_type", "unknown"),
+    "run_stats": run_stats
+  }
+
 def format_metric_range(values):
   if not values:
     return "N/A"
@@ -436,6 +526,53 @@ def print_playtest_batch_markdown(batch):
   print("- These diagnostics support gameplay and explanation review, not human-learning, empirical calibration, or policy-validity claims.")
   print("- Treat formula tuning or runtime expansion as a separate follow-up requiring stronger evidence.\n")
 
+def print_live_capture_batch_markdown(batch):
+  print(f"## Live-Capture Diagnostics for `{batch['filename']}`")
+  print(f"- **Batch id:** {batch['batch_id']}")
+  print(f"- **Code version:** {batch['code_version']}")
+  print(f"- **Campaign:** {batch['campaign']}")
+  print(f"- **Difficulty:** {batch['difficulty']}")
+  print(f"- **Seed:** {batch['seed']}")
+  print(f"- **Evidence type:** {batch['evidence_type']}\n")
+
+  print("### Profile Outcomes")
+  print("| Profile | Months | Cash | Access | Quality | Workforce Trust | Community Trust | Market Share | PC | Beds | Validation Failures | Access Pledges | Final Hash |")
+  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
+  for stats in batch["run_stats"]:
+    metrics = stats["metrics"]
+    print(
+      f"| {stats['profile_name']} | {stats['transition_count']} | "
+      f"{metrics.get('Cash', 'N/A')} | {metrics.get('Access', 'N/A')} | "
+      f"{metrics.get('Quality', 'N/A')} | {metrics.get('WorkforceTrust', 'N/A')} | "
+      f"{metrics.get('CommunityTrust', 'N/A')} | {metrics.get('MarketShare', 'N/A')} | "
+      f"{metrics.get('PC', 'N/A')} | {metrics.get('Beds', 'N/A')} | "
+      f"{stats['validation_failures']} | {stats['access_pledges']} | "
+      f"{stats['final_hash']} |"
+    )
+  print()
+
+  print("### Action Frequency Signals")
+  print("| Profile | Holds | Action Commands | Monitor | Recruit | Invest | Negotiate | Commit | Project | Top Non-Hold Verb | Strategy Classification |")
+  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |")
+  for stats in batch["run_stats"]:
+    verbs = stats["verbs"]
+    non_holds = sum(verbs.values())
+    top_verb = verbs.most_common(1)
+    top_verb_str = f"{top_verb[0][0]} ({top_verb[0][1]})" if top_verb else "None"
+    print(
+      f"| {stats['profile_name']} | {stats['holds']} | {non_holds} | "
+      f"{verbs.get('Monitor', 0)} | {verbs.get('Recruit', 0)} | "
+      f"{verbs.get('Invest', 0)} | {verbs.get('Negotiate', 0)} | "
+      f"{verbs.get('Commit', 0)} | {verbs.get('Project', 0)} | "
+      f"{top_verb_str} | {stats['strategy']} |"
+    )
+  print()
+
+  print("### Evidence Limits")
+  print("- Live-capture diagnostics use actor-visible observations, submitted commands, transition summaries, and debrief text from the captured MCP wrapper artifact.")
+  print("- These diagnostics support gameplay, command-surface, and explanation review; they are not human-learning, empirical-calibration, policy-validity, or balance evidence.")
+  print("- Do not use a single seed, difficulty, or scripted persona batch to justify runtime tuning.\n")
+
 def main():
   parser = argparse.ArgumentParser(description="Strategy-Space Diagnostics for Health Policy Strategy Game")
   parser.add_argument("inputs", nargs="+", help="Paths to replay JSON files or directories containing replay files")
@@ -460,6 +597,7 @@ def main():
   # Analyze
   runs = []
   batches = []
+  live_batches = []
   for file in files:
     try:
       with open(file, "r", encoding="utf-8") as f:
@@ -472,12 +610,16 @@ def main():
       res = analyze_playtest_batch(file, data)
       if res:
         batches.append(res)
+    elif data.get("runs") is not None and data.get("evidence_type") is not None:
+      res = analyze_live_capture_batch(file, data)
+      if res:
+        live_batches.append(res)
     else:
       res = analyze_single_run(file)
       if res:
         runs.append(res)
       
-  if not runs and not batches:
+  if not runs and not batches and not live_batches:
     print("Error: No runs could be successfully parsed.", file=sys.stderr)
     sys.exit(1)
     
@@ -496,6 +638,10 @@ def main():
   
   for batch in batches:
     print_playtest_batch_markdown(batch)
+    print("---")
+
+  for batch in live_batches:
+    print_live_capture_batch_markdown(batch)
     print("---")
 
   for run in runs:

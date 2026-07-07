@@ -119,6 +119,48 @@ reconstructing it from the diff.
 | LLM Access-Pledge Evidence | v0.10.7 | Record bounded sub-agent Hard competitive evidence for access-pledge repetition after guidance and debrief QA | 287 | `8926f71296f39efc` (competitive) |
 | Active Project Document Alignment | v0.10.8 | Align active docs with current competitive campaign, scenario loading, replay export, MCP boundaries, and autocomplete status | 287 | `8926f71296f39efc` (competitive) |
 | Live MCP Capture Evidence | v0.10.9 | Record observation-by-observation Hard competitive MCP capture evidence without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+| Live-Capture Diagnostics | v0.10.10 | Add diagnostic report support for live MCP capture artifacts without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live-Capture Diagnostics
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.10
+
+  Summary:
+  Extended the existing strategy-space diagnostics script to parse the v0.10.9
+  live MCP capture artifact shape and report profile outcomes, action
+  frequencies, validation failures, access pledges, final hashes, and evidence
+  limits.
+
+  Done:
+  - Added live-capture artifact parsing and markdown output to
+    `scripts/diagnose_runs.py`.
+  - Added a compact live-capture fixture under `tests/fixtures/`.
+  - Generated `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`
+    from the v0.10.9 capture artifact.
+  - Added `docs/playtest-findings-v0.10.10.md` and updated the MCP playtesting
+    guide.
+  - Bumped package metadata to `0.10.10`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No LLM runner, analytics platform, optimizer, or broad diagnostics
+    framework.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m py_compile scripts/diagnose_runs.py`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/mock_replay.json`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.9-live-mcp-capture/results.json --output _workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.9-live-mcp-capture/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Live MCP Capture Evidence
