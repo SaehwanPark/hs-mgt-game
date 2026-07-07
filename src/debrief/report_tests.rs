@@ -477,3 +477,102 @@ fn test_competitive_debrief_rationale_visibility() {
     assert!(summary_str.contains("Rival public rationale test (observed via public disclosure)"));
   }
 }
+
+#[test]
+fn competitive_debrief_warns_on_repeated_access_pledges_without_follow_through() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 3,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 2,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    2,
+    vec![crate::model::CompetitiveCommand::Hold],
+  );
+
+  let summary = competitive_instructor_summary(&history).join("\n");
+
+  assert!(summary.contains("Repeated public access pledges in Months 1, 2"));
+  assert!(summary.contains("not substitutes for durable operational action"));
+}
+
+#[test]
+fn competitive_debrief_accepts_access_pledges_with_follow_through() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 3,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![
+      crate::model::CompetitiveCommand::Commit {
+        pledge_type: crate::model::PledgeType::Access,
+        level: 2,
+      },
+      crate::model::CompetitiveCommand::Recruit {
+        role: crate::model::RecruitRole::Nurse,
+        headcount: 1,
+      },
+    ],
+  );
+
+  let summary = competitive_instructor_summary(&history).join("\n");
+
+  assert!(!summary.contains("Repeated public access pledges"));
+}
+
+#[test]
+fn competitive_debrief_includes_access_pledge_lesson() {
+  let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 1)
+    .expect("should build competitive history");
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert!(debrief.contains("Access pledge lesson:"));
+  assert!(debrief.contains("capacity, staffing, monitoring, or payer follow-through"));
+}
+
+fn set_human_commands(
+  history: &mut crate::model::CompetitiveHistory,
+  human_system_id: u32,
+  transition_idx: usize,
+  commands: Vec<crate::model::CompetitiveCommand>,
+) {
+  let pos = history.transitions[transition_idx]
+    .aggregated
+    .batches
+    .iter()
+    .position(|batch| batch.system_id == human_system_id)
+    .expect("human batch");
+  history.transitions[transition_idx].aggregated.batches[pos].commands = commands;
+}

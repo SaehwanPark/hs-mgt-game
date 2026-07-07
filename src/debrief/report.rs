@@ -321,6 +321,7 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
   lines.extend([
     "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
     "Capital project lesson: EHR Epic/Cerner, Tower, and Clinic Network projects consume Action Points and cash immediately, draw cash monthly over their duration (9 to 12 months), and are limited to a maximum of 2 concurrent projects. They are long-term strategic investments that require careful planning over the 24-month horizon.".to_string(),
+    "Access pledge lesson: public access commitments build legitimacy, but the debrief reviews whether repeated pledges were paired with capacity, staffing, monitoring, or payer follow-through.".to_string(),
     "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.".to_string(),
   ]);
 
@@ -658,6 +659,11 @@ fn analyze_decision_quality(history: &CompetitiveHistory) -> Vec<String> {
     }
   }
 
+  warnings.extend(access_pledge_follow_through_warnings(
+    history,
+    human_system_id,
+  ));
+
   if warnings.is_empty() {
     lines.push("All strategic checks passed. The run demonstrated safe cash runway, balanced recruitment, appropriate payer rate postures, and adequate rival capacity responses.".to_string());
   } else {
@@ -665,6 +671,103 @@ fn analyze_decision_quality(history: &CompetitiveHistory) -> Vec<String> {
   }
 
   lines
+}
+
+fn access_pledge_follow_through_warnings(
+  history: &CompetitiveHistory,
+  human_system_id: u32,
+) -> Vec<String> {
+  let mut warnings = Vec::new();
+  let mut warned_months = std::collections::BTreeSet::new();
+
+  for (idx, transition) in history.transitions.iter().enumerate() {
+    let month_idx = idx + 1;
+    if warned_months.contains(&month_idx) || !human_access_pledged(transition, human_system_id) {
+      continue;
+    }
+
+    let window_end = (idx + 3).min(history.transitions.len());
+    let pledge_months = history.transitions[idx..window_end]
+      .iter()
+      .enumerate()
+      .filter_map(|(offset, window_transition)| {
+        if human_access_pledged(window_transition, human_system_id) {
+          Some(idx + offset + 1)
+        } else {
+          None
+        }
+      })
+      .collect::<Vec<_>>();
+
+    if pledge_months.len() < 2 {
+      continue;
+    }
+
+    let has_follow_through = history.transitions[idx..window_end]
+      .iter()
+      .any(|window_transition| human_has_access_follow_through(window_transition, human_system_id));
+
+    if has_follow_through {
+      continue;
+    }
+
+    for pledged_month in &pledge_months {
+      warned_months.insert(*pledged_month);
+    }
+
+    let months = pledge_months
+      .iter()
+      .map(|month| month.to_string())
+      .collect::<Vec<_>>()
+      .join(", ");
+    warnings.push(format!(
+      "  - Warning: Repeated public access pledges in Months {} had no capacity, staffing, monitoring, or payer follow-through in the same three-month window. Treat access pledges as legitimacy signals, not substitutes for durable operational action.",
+      months
+    ));
+  }
+
+  warnings
+}
+
+fn human_access_pledged(
+  transition: &crate::model::CompetitiveTransition,
+  human_system_id: u32,
+) -> bool {
+  transition
+    .aggregated
+    .batch_for_system(human_system_id)
+    .is_some_and(|batch| {
+      batch.commands.iter().any(|cmd| {
+        matches!(
+          cmd,
+          CompetitiveCommand::Commit {
+            pledge_type: PledgeType::Access,
+            ..
+          }
+        )
+      })
+    })
+}
+
+fn human_has_access_follow_through(
+  transition: &crate::model::CompetitiveTransition,
+  human_system_id: u32,
+) -> bool {
+  transition
+    .aggregated
+    .batch_for_system(human_system_id)
+    .is_some_and(|batch| {
+      batch.commands.iter().any(|cmd| {
+        matches!(
+          cmd,
+          CompetitiveCommand::Recruit { .. }
+            | CompetitiveCommand::Invest { .. }
+            | CompetitiveCommand::Monitor { .. }
+            | CompetitiveCommand::Negotiate { .. }
+            | CompetitiveCommand::Project { .. }
+        )
+      })
+    })
 }
 
 fn format_command_debrief(cmd: &CompetitiveCommand) -> String {

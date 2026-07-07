@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.6] - 2026-07-07
+
+### Added
+- Added a competitive debrief decision-quality warning for repeated public
+  access pledges that are not paired with capacity, staffing, monitoring, or
+  payer follow-through in the same three-month window.
+- Added a student-facing debrief lesson distinguishing public access pledges
+  from durable operational action.
+
+### Changed
+- Bumped the package version to `0.10.6`.
+
 ## [0.10.5] - 2026-07-07
 
 ### Added
