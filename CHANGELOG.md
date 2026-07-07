@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.12] - 2026-07-07
+
+### Added
+- Added a Phase 7 live difficulty-pressure capture artifact across four
+  existing automated playtest profiles, seeds `42`, `43`, and `44`, and
+  Normal/Hard competitive difficulty tiers.
+- Generated `_workspace/experiments/v0.10.12-live-difficulty-pressure/diagnostics.md`
+  from the pressure-policy artifact.
+- Recorded `docs/playtest-findings-v0.10.12.md` with Normal/Hard pressure
+  findings and evidence limits.
+
+### Changed
+- Documented the live difficulty-pressure capture command in the MCP playtesting
+  guide.
+- Bumped the package version to `0.10.12`.
+
 ## [0.10.11] - 2026-07-07
 
 ### Added
