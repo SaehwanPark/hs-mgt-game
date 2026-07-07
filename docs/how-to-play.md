@@ -28,7 +28,7 @@ interact.
 
 2. Choose a campaign:
    - Enter or `1` for stabilization (recommended first run).
-   - `2` or `c` for competitive preview.
+   - `2` or `c` for competitive.
 3. If you picked competitive, choose a difficulty:
    - Easy: 1 AI rival, 4 AP/month.
    - Normal: 2 AI rivals, 3 AP/month.

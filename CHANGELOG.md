@@ -4,6 +4,14 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.8] - 2026-07-07
+
+### Changed
+- Aligned active project documentation with the current 24-month competitive
+  campaign, competitive scenario loading, replay export, MCP boundaries, and
+  command autocomplete status.
+- Bumped the package version to `0.10.8`.
+
 ## [0.10.7] - 2026-07-07
 
 ### Added

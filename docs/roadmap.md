@@ -605,8 +605,8 @@ current compact structures are blocking validated gameplay or learning.
 
 ## 6.0 Competitive Campaign Design Track
 
-**Status:** Design artifacts delivered at v0.1.28; bounded preview runtime
-I1-I8 delivered through v0.1.37.
+**Status:** Design artifacts delivered at v0.1.28; I1-I8 runtime delivered
+through v0.1.37; 24-month campaign loop and hardening slices implemented.
 
 Parallel to the stabilization demo (`stabilization-v1`), the competitive
 regional market campaign (`competitive-regional-v1`) adds:

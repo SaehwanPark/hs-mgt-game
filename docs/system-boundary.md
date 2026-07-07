@@ -1,6 +1,6 @@
 # Initial System Boundary and Ontology Draft
 
-**Status:** Phase 2 conceptual design draft (updated for bounded competitive preview)
+**Status:** Phase 2 conceptual design draft (updated for the 24-month competitive campaign)
 **Audience:** Contributors and domain reviewers
 
 This document defines the conceptual boundary for regional market slices. It
@@ -149,7 +149,6 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal actor-card template covering objectives, authority, constraints,
   information, outside options, risk posture, time horizon, and decision
   procedure. Initial design artifact: [`actor-cards.md`](actor-cards.md).
-- Scenario loading and validation is fully supported for both stabilization and competitive campaigns.
 - Patient cohort and distributional outcome vocabulary.
 - Service-line, capital-allocation, and market-area vocabulary.
 - Formal belief-state representation beyond observation snapshots.

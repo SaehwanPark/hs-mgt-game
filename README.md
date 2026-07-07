@@ -57,12 +57,12 @@ cargo run
 Then choose:
 
 - Enter or `1` for the stabilization campaign.
-- `2` or `c` for the competitive preview.
+- `2` or `c` for the competitive campaign.
 - Enter for the default seed, or provide a numeric seed for a different
   deterministic run.
 
 For a first session, start with `stabilization-v1` in beginner mode. For the
-competitive preview, Normal difficulty gives a compact introduction to monthly
+competitive campaign, Normal difficulty gives a compact introduction to monthly
 action budgeting and rival pressure.
 
 ## Competitive Command Examples

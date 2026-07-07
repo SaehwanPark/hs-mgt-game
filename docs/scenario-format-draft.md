@@ -1,14 +1,15 @@
 # Scenario Format Draft
 
-**Status:** Phase 6.2 design draft; minimal stabilization runtime accepted in ADR-0007  
+**Status:** Phase 6.2 design draft; stabilization and competitive runtime loading implemented  
 **Audience:** Contributors designing scenario loading and campaign content  
 **Version:** draft-0.1.28
 
 This document proposes a typed, versioned scenario description for regional
-market campaigns. ADR-0007 accepts a narrow `scenario-toml-0.1.40` runtime
-format for the bundled `stabilization-v1` scenario only. Competitive scenario
-loading, arbitrary scenario paths, and broader authoring workflows remain
-design-only until a later ADR.
+market campaigns. ADR-0007 accepted the first narrow `scenario-toml-0.1.40`
+runtime format for the bundled `stabilization-v1` scenario; later slices added
+validated custom scenario loading for both `stabilization-v1` and
+`competitive-regional-v1`. Broader authoring workflows and scenario migration
+tooling remain deferred.
 
 ## Campaign kinds
 
@@ -114,9 +115,8 @@ For the first runtime slice:
 
 Still deferred:
 
-- Competitive scenario loading.
-- CLI selection of arbitrary scenario paths.
 - Scenario migration tooling or schema generation.
+- Broader scenario-authoring workflow beyond validated TOML files.
 
 ## Related Documents
 

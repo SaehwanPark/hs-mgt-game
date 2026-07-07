@@ -4,8 +4,8 @@
 **Audience:** AI-agent clients, contributors, instructors testing autonomous play
 
 The `hs-mgt-game-mcp` binary exposes a local Model Context Protocol server over
-stdio. It lets an AI agent play the current bounded campaign slices without
-using terminal prompts.
+stdio. It lets an AI agent play the current bounded campaigns without using
+terminal prompts.
 
 ## Run
 
@@ -43,12 +43,14 @@ For competitive play:
 {
   "campaign": "competitive-regional-v1",
   "seed": 42,
-  "difficulty": "normal"
+  "difficulty": "normal",
+  "scenario_path": "scenarios/competitive-v1-template.toml"
 }
 ```
 
 Difficulty may be `easy`, `normal`, `hard`, or `expert`; omitted difficulty
-defaults to `normal`.
+defaults to `normal`. `scenario_path` is optional and may point to a validated
+stabilization or competitive scenario file.
 
 ### `submit_turn`
 
@@ -82,6 +84,4 @@ not add rival private-state reporting.
 - Streamable HTTP transport and auth
 - Durable MCP session persistence
 - Multi-client session coordination
-- Competitive replay artifact export
-- Full 24-month competitive campaign
-- Arbitrary scenario path loading or scenario migration tooling
+- Scenario migration tooling

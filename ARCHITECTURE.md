@@ -1,7 +1,7 @@
 # Architecture
 
 The project is currently a playable CLI prototype with bounded stabilization and
-competitive-preview campaigns. This document records the intended architecture
+competitive campaign modes. This document records the intended architecture
 boundaries that future implementation should preserve.
 
 ## Current State
@@ -26,7 +26,7 @@ boundaries that future implementation should preserve.
   - `mcp/` — MCP session store, tool DTOs, and stdio server adapter
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-07-03
+Last Reviewed: 2026-07-07
 Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
@@ -36,7 +36,7 @@ resolution (`sim/resolve.rs`), `transition_competitive()`, bounded AI player bat
 1-month lag (`sim/observe_competitive.rs`), monthly event/delay ticks, annual
 policy inputs, Stata-like competitive command parsing, and a 24-month
 competitive CLI loop with help-command catalog output, colored command prompt
-tokens, and verb-only Tab autocomplete.
+tokens, and Tab autocomplete for verbs, argument keys, and enum values.
 It also includes a local stdio MCP server (`hs-mgt-game-mcp`) with in-memory
 sessions for `stabilization-v1` and `competitive-regional-v1`.
 
@@ -145,7 +145,7 @@ summaries, and ending a session. The MCP layer reuses existing parsers,
 observation helpers, validation, and transition functions; it does not read
 randomness or mutate the core directly.
 
-Last Reviewed: 2026-06-26
+Last Reviewed: 2026-07-07
 Status: Verified
 
 ## Durable Constraints
@@ -169,16 +169,17 @@ Status: Verified
 ### Future Architecture Posture
 
 The current architecture is sufficiently expressive for validation of the
-bounded stabilization and competitive-preview slices. Future work should avoid
-adding generalized scenario tooling, actor frameworks, analytics platforms, or
-calibration structures until a documented finding shows that gameplay,
-authoring, debriefing, or validation is blocked by the current narrower shape.
+bounded stabilization and competitive campaign slices. Future work should avoid
+adding generalized actor frameworks, analytics platforms, calibration
+structures, or broader scenario-authoring infrastructure until a documented
+finding shows that gameplay, authoring, debriefing, or validation is blocked by
+the current narrower shape.
 
 When a new abstraction is justified, the implementing slice should name the
 evidence source, keep deterministic replay and actor-observation boundaries
 intact, and leave unrelated platform goals deferred.
 
-Last Reviewed: 2026-06-30
+Last Reviewed: 2026-07-07
 Status: Verified
 
 ### Scenario and Actor Design
@@ -193,14 +194,14 @@ Responsible for:
 Current design artifacts include `docs/actor-cards.md`,
 `docs/first-scenario-brief.md`, `docs/competitive-scenario-brief.md`,
 `docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. Runtime
-scenario loading is implemented only for `stabilization-v1`; competitive
-scenario loading and scenario migration tooling remain deferred until a bounded
-slice is approved.
+scenario loading is implemented for both `stabilization-v1` and
+`competitive-regional-v1`; scenario migration tooling and broader authoring
+workflows remain deferred until a bounded slice is approved.
 
-Last Reviewed: 2026-06-30
+Last Reviewed: 2026-07-07
 Status: Verified
 
-## Competitive Campaign (partial runtime)
+## Competitive Campaign
 
 Implemented modules for `competitive-regional-v1`:
 
@@ -214,7 +215,7 @@ Implemented modules for `competitive-regional-v1`:
 | `SimultaneousActionResolver` | Aggregate monthly player batches before transition | Verified (`sim/resolve.rs`, v0.1.32) |
 | `transition_competitive()` | Competitive monthly state transition | Verified (`sim/transition_competitive.rs`, v0.1.32) |
 | `EffectScheduler` | Delayed/project effect queue and annual tick | Verified (v0.1.34) |
-| `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006), with help catalog rendering and verb-only autocomplete | Verified (v0.1.37) |
+| `CommandRepl` | Stata-like parse/display layer (I/O only, ADR-0006), with help catalog rendering and command autocomplete | Verified |
 | `CompetitiveCampaignLoop` | 24-month CLI loop over evolving competitive world state | Verified (v0.5.0) |
 
 Genesis world, observation derivation, and validation demos live in
@@ -222,7 +223,7 @@ Genesis world, observation derivation, and validation demos live in
 `src/cli/campaign.rs` and reuses `resolve_competitive_month()` for each month.
 The 24-month campaign loop features autosave/resume, scenario loading, and replay export.
 
-Last Reviewed: 2026-07-05
+Last Reviewed: 2026-07-07
 Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI, campaign loop, autosave, scenario loader)
 
 ## Open Architectural Decisions
@@ -233,7 +234,8 @@ Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI
   not cryptographic integrity or mid-run save/load.
 - Mid-run interactive save: **addressed** by `session-save-0.1.27` and
   [ADR-0002](docs/decision-records/0002-mid-run-session-save.md). Autosave on
-  voluntary quit; resume on startup; separate from replay artifacts.
+  voluntary quit and resume on startup now cover current interactive campaign
+  modes; save state remains separate from replay artifacts.
 - Module boundaries for the deterministic core, CLI, scenario loading, and
   educational debriefing are now established in `src/lib.rs`. Characterization
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root

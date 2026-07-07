@@ -1,12 +1,13 @@
 # Competitive Gameplay Sketch — Canonical Specification
 
-**Status:** Phase 6.0 design artifact; bounded preview runtime implemented
+**Status:** Phase 6.0 design artifact; 24-month runtime implemented
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign:** `competitive-regional-v1` (parallel to stabilization demo)
 
 This document expands the user gameplay sketch into requirements with acceptance
-criteria. Initial runtime slices I1-I8 are complete as a bounded preview; full
-campaign length and hardening remain deferred.
+criteria. Initial runtime slices I1-I8 and the full 24-month campaign loop are
+complete; future work should be driven by playtest, authoring, debrief, or
+domain-review evidence.
 
 ## Overview
 
@@ -128,7 +129,7 @@ difficulty (Capitalism-style).
 
 - [x] ADR-0004 specifies shared `CompetitiveWorldState`
 - [x] No per-player duplicate market simulation
-- [ ] Replay stores all player action batches in one history (runtime)
+- [x] Replay stores all player action batches in one history (runtime)
 
 ---
 
@@ -258,7 +259,7 @@ autocomplete; in-game help for commands.
 **Acceptance criteria:**
 
 - [x] Scenario format includes `event_schedule` or deck reference (placeholder)
-- [ ] Events resolved in `inputs/resolve.rs` per ADR-0001 (runtime)
+- [x] Events resolved in `inputs/resolve.rs` per ADR-0001 (runtime)
 - [x] Debrief can cite event impacts
 
 ---
@@ -276,7 +277,7 @@ autocomplete; in-game help for commands.
 **Acceptance criteria:**
 
 - [x] Action catalog documents delay column per verb
-- [x] Architecture documents `EffectScheduler` (Needs Review until implemented)
+- [x] Architecture documents `EffectScheduler`
 - [x] Mechanism design includes EHR example
 
 ---
@@ -308,9 +309,9 @@ autocomplete; in-game help for commands.
 
 ## Implementation sequence
 
-See `SPEC.md` Future for gated next work. The initial I1-I8 runtime sequence is
-complete; likely next work should come from playtest synthesis, competitive
-hardening, or scenario-loading evidence.
+See `SPEC.md` Future for gated next work. The initial I1-I8 runtime sequence and
+24-month campaign loop are complete; likely next work should come from playtest
+synthesis, competitive hardening, or scenario-authoring evidence.
 
 ## Related documents
 

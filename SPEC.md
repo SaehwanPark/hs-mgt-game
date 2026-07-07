@@ -117,6 +117,40 @@ reconstructing it from the diff.
 | Phase 7 Evidence Synthesis | v0.10.5 | Synthesize v0.10.0-v0.10.4 free-form Hard evidence and preserve the next evidence gate before runtime tuning | 284 | `8926f71296f39efc` (competitive) |
 | Competitive Access-Pledge Debrief QA | v0.10.6 | Add debrief review for repeated public access pledges without operational follow-through | 287 | `8926f71296f39efc` (competitive) |
 | LLM Access-Pledge Evidence | v0.10.7 | Record bounded sub-agent Hard competitive evidence for access-pledge repetition after guidance and debrief QA | 287 | `8926f71296f39efc` (competitive) |
+| Active Project Document Alignment | v0.10.8 | Align active docs with current competitive campaign, scenario loading, replay export, MCP boundaries, and autocomplete status | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Active Project Document Alignment
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.8
+
+  Summary:
+  Reviewed active project documents for stale current-facing statements and
+  aligned them with the implemented 24-month competitive campaign, competitive
+  scenario loading, replay export, MCP boundaries, and command autocomplete
+  status.
+
+  Done:
+  - Updated active architecture, scenario, MCP, player-facing, and competitive
+    design docs to remove obsolete preview/deferred wording for completed
+    features.
+  - Kept historical changelog entries, archived docs, and versioned playtest
+    findings unchanged.
+  - Bumped package metadata to `0.10.8`.
+
+  Deferred / Non-Goals:
+  - No runtime behavior, command grammar, MCP DTO, scenario schema, replay
+    artifact, state hash, balance, or validation change.
+  - No edits to historical playtest findings, archived docs, or old changelog
+    entries.
+  - No empirical calibration, policy-validity, forecasting, human-learning, or
+    classroom-effectiveness claim.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo test`
+  - Targeted stale-marker search over active project documents
 
 
 - Feature: LLM Access-Pledge Evidence
@@ -1242,7 +1276,7 @@ None. All scheduled features are complete.
 The first runnable prototype is complete enough that the next risk is not
 engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
-campaign length, or platform architecture.
+strategic actors, or platform architecture.
 
 1. Track: Competitive campaign hardening
   Phase / Gate: Phase 6/7; proceed only after playtest findings identify a
@@ -1250,10 +1284,10 @@ campaign length, or platform architecture.
 
   Next actionable slice:
   Pick one bounded issue from playtest evidence, such as month-summary clarity,
-  command help coverage, AI rationale visibility, or a three-month pacing problem
+  command help coverage, AI rationale visibility, or a pacing/comprehension problem
   (autocomplete completed in v0.2.5; AI rationale visibility completed in v0.2.7;
   month-summary clarity completed in v0.2.8; command help coverage completed in v0.2.9),
-  and address it without expanding campaign length.
+  and address it without broadening the campaign scope.
 
   Verification target:
   Focused CLI/parser/simulation tests cover the changed behavior, competitive
@@ -1261,8 +1295,8 @@ campaign length, or platform architecture.
   change, and player-facing docs explain any new guidance.
 
   Deferred / Non-Goals:
-  Full 24-month campaign loop, competitive autosave, competitive replay export,
-  competitive scenario loading, multiplayer, and new strategic actor classes.
+  Multiplayer, new strategic actor classes, broad balance passes, and platform
+  architecture expansion.
 
 2. Track: Strategy-space diagnostics
   Phase / Gate: Phase 7; keep as analysis artifacts until repeated review needs
@@ -1319,7 +1353,7 @@ campaign length, or platform architecture.
 
   Deferred / Non-Goals:
   HTTP transport, auth, durable session persistence, multi-client coordination,
-  full competitive campaign length, and replay/export integration.
+  and new runtime export formats.
 
 5. Track: Broader simulation breadth and new strategic actors
   Phase / Gate: Phase 6.1; proceed only after playtest, instructor, scenario, or
