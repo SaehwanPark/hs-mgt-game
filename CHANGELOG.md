@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.9] - 2026-07-07
+
+### Added
+- Added live observation-by-observation MCP capture evidence for three Hard
+  competitive persona policies at seed `42`.
+- Added replayable capture artifacts at
+  `_workspace/experiments/v0.10.9-live-mcp-capture/`.
+
+### Changed
+- Extended `scripts/play_game.py` with optional trace capture while preserving
+  existing caller behavior.
+- Bumped the package version to `0.10.9`.
+
 ## [0.10.8] - 2026-07-07
 
 ### Changed

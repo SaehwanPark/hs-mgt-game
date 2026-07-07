@@ -145,7 +145,7 @@ class McpClient:
       return ""
     return f"\nMCP server stderr excerpt:\n{text}"
 
-def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
+def play_session(campaign, seed=42, difficulty="normal", policy_fn=None, capture_trace=False):
   client = McpClient()
   client.start()
   
@@ -163,6 +163,7 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
     session_id = session["session_id"]
     history = []
     validation_failures = []
+    turn_trace = []
     
     while not session["done"]:
       turn = session["turn"]
@@ -176,6 +177,18 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
         print("\n".join(obs))
         print(f"Legal command description/hints: {legal}")
         cmd = input("Enter command: ")
+
+      trace_entry = None
+      if capture_trace:
+        trace_entry = {
+          "turn": turn,
+          "observation": obs,
+          "legal_commands": legal,
+          "submitted_command": cmd,
+          "validation_failures": [],
+          "latest_transition": None,
+          "done_after_submit": False
+        }
           
       res = client.call_tool("submit_turn", {
         "session_id": session_id,
@@ -189,6 +202,9 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
           "error": res["error"]
         }
         validation_failures.append(failure)
+        if trace_entry is not None:
+          trace_entry["validation_failures"].append(failure)
+          turn_trace.append(trace_entry)
         if policy_fn:
           raise RuntimeError(
             f"Scripted policy failed on {campaign} turn {turn} with command "
@@ -202,11 +218,16 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
       session = res["data"]
       if session.get("latest_transition"):
         history.append(session["latest_transition"])
+        if trace_entry is not None:
+          trace_entry["latest_transition"] = session["latest_transition"]
+      if trace_entry is not None:
+        trace_entry["done_after_submit"] = session["done"]
+        turn_trace.append(trace_entry)
             
     res = client.call_tool("end_session", {"session_id": session_id})
     debrief = res["data"].get("debrief", []) if not res["isError"] else ["Failed to end session."]
     
-    return {
+    result = {
       "campaign": campaign,
       "seed": seed,
       "difficulty": difficulty if campaign == "competitive-regional-v1" else None,
@@ -215,6 +236,9 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None):
       "final_observation": session["observation"],
       "validation_failures": validation_failures
     }
+    if capture_trace:
+      result["turn_trace"] = turn_trace
+    return result
   finally:
     client.close()
 

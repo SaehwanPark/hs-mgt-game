@@ -3,6 +3,21 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Capture MCP Evidence at the Wrapper Boundary First
+
+- Context: Adding the v0.10.9 live MCP capture evidence slice after v0.10.7
+  replayed preplanned sub-agent commands.
+- Symptom: It was tempting to treat observation-by-observation evidence as a new
+  Rust MCP DTO or runtime export requirement.
+- Cause: The existing Python MCP wrapper already receives observations, legal
+  command hints, submitted commands, validation failures, transition summaries,
+  and debriefs during normal play.
+- Resolution: Add optional trace capture to `scripts/play_game.py` and keep the
+  Rust MCP interface unchanged.
+- Prevention: For future playtest evidence gaps, first check whether the Python
+  wrapper can record the needed actor-visible data. Change Rust MCP DTOs only
+  when a specific required field is not already crossing the boundary.
+
 ## Access-Loop Diagnostics Should Precede Runtime Cooldowns
 
 - Context: The v0.10.1 free-form Hard seed-variation findings showed access-heavy
