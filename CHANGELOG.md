@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.13] - 2026-07-07
+
+### Added
+- Added a Phase 7 static-vs-adaptive live-capture artifact across four existing
+  automated playtest profiles, seeds `42`, `43`, and `44`, Normal/Hard
+  competitive difficulty tiers, and static/adaptive policy variants.
+- Generated `_workspace/experiments/v0.10.13-live-static-adaptive-capture/diagnostics.md`
+  from the static/adaptive artifact.
+- Recorded `docs/playtest-findings-v0.10.13.md` with policy-wrapper comparison
+  findings and evidence limits.
+
+### Changed
+- Documented the static-vs-adaptive live-capture command in the MCP playtesting
+  guide.
+- Bumped the package version to `0.10.13`.
+
 ## [0.10.12] - 2026-07-07
 
 ### Added

@@ -3,6 +3,23 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Encode Evidence Matrix Coordinates in Run Metadata Before Expanding Diagnostics
+
+- Context: Adding the v0.10.13 static-vs-adaptive live-capture comparison after
+  the v0.10.12 difficulty-pressure matrix.
+- Symptom: A new comparison axis can look like it requires changes to shared
+  diagnostic tooling before the evidence question is answered.
+- Cause: Existing live-capture diagnostics already summarize runs by
+  `profile_name`; the missing piece was clear per-run variant metadata and
+  readable matrix labels.
+- Resolution: Add `policy_variant` metadata to the artifact and include variant,
+  difficulty, and seed in `profile_name`, preserving the existing diagnostic
+  script.
+- Prevention: For future Phase 7 evidence matrices, first test whether the new
+  axis can be represented in artifact metadata and labels. Change shared
+  diagnostics only when repeated evidence work needs aggregation that labels
+  cannot support.
+
 ## Reuse Existing Playtest Policies for Evidence Slices Before Inventing New Ones
 
 - Context: Adding the v0.10.12 live difficulty-pressure capture slice after the
