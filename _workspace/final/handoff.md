@@ -1,75 +1,56 @@
-# Final Handoff - Phase 7 Evidence Synthesis
+# Final Handoff - Competitive Access-Pledge Debrief QA
 
 ## Summary
 
-Implemented the `v0.10.5` Phase 7 evidence synthesis slice. The artifact
-summarizes existing `v0.10.0` through `v0.10.4` free-form Hard competitive
-evidence without adding new runs or changing runtime behavior.
+Implemented the `v0.10.6` competitive debrief QA slice. The debrief now flags
+repeated public access pledges that are not paired with capacity, staffing,
+monitoring, or payer follow-through in the same three-month window.
 
-The synthesis records that all four source artifacts completed without
-validation failures, repeated access pledges remain a guidance/operator-policy
-diagnostic first, guidance-aware behavior reduced repeated pledges, and endpoint
-tradeoffs still block runtime cooldown or balance-tuning claims.
-
-This slice does not change simulation behavior, command grammar, scenario
-schemas, MCP DTOs, replay formats, state hashes, or balance values.
+This is debrief-only. It does not change transition logic, validation, command
+grammar, scenario schemas, MCP DTOs, replay artifacts, state hashes, or balance
+values.
 
 ## Changed Files
 
-- `docs/playtest-findings-v0.10.5.md`: cross-artifact synthesis and next
-  evidence gate.
-- `docs/mcp-playtesting-guide.md`: synthesis routing note for access-pledge
-  follow-up.
-- `LESSONS.md`: de-duplication lesson for repeated baseline controls.
-- `SPEC.md`: completed v0.10.5 slice and Past rollup row.
-- `CHANGELOG.md`: v0.10.5 release note.
-- `Cargo.toml` and `Cargo.lock`: package metadata version bump.
+- `src/debrief/report.rs`: access-pledge follow-through warning and student
+  lesson.
+- `src/debrief/report_tests.rs`: warning, follow-through suppression, and lesson
+  coverage.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.6` record and
+  package metadata.
 - `_workspace/00_input/request-summary.md`: current request framing.
 - `_workspace/final/handoff.md`: this handoff.
 
 ## Verification
 
-- `python3 -m json.tool _workspace/experiments/v0.10.0-free-form-hard/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.2-access-loop-diagnostic/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.4-post-guidance-validation/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test`
+- `cargo test` (287 tests passed)
 
 ## PR Handoff
 
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/87
-- Branch: `feat/phase7-evidence-synthesis`
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/88
+- Branch: `feat/access-pledge-debrief-qa`
 - Base: `main`
 
 ## Review Summary
 
 - Pass 1: Low handoff bookkeeping finding. The handoff still listed PR/review
-  status as pending after PR #87 existed; fixed in this file.
-- Pass 2: No actionable findings. Confirmed source matrix counts, evidence
-  limits, and non-goals match the v0.10.0-v0.10.4 artifacts.
-- Pass 3: No actionable findings. Confirmed the diff is limited to
-  documentation, workspace handoff files, and package version metadata.
+  status as pending after PR #88 existed; fixed in this file.
+- Pass 2: No actionable findings. Confirmed the warning is debrief-only,
+  derived from committed human command history, and covered by focused tests.
+- Pass 3: No actionable findings. Confirmed the diff stays limited to debrief
+  QA, tests, SDD/version files, and workspace handoff files.
 - Critical/High findings: none.
 - Medium/Low disposition: one Low fixed.
-- CI/comment triage: CI `check` passed; review-loop summary posted on PR #87;
+- CI/comment triage: CI `check` passed; review-loop summary posted on PR #88;
   no external review comments were present.
 - Merge-ready: yes.
 
 ## Known Limits
 
-- The synthesis uses existing deterministic operator-policy artifacts, not LLM
-  or human play.
-- Repeated baseline matrices are useful controls, not independent player
-  samples.
-- Results do not support formula tuning, empirical calibration, human-learning
-  claims, classroom-effectiveness claims, policy-validity claims, or automatic
-  runtime cooldowns.
-
-## Next Phase Dependency
-
-If future LLM or human play still repeats access-pledge loops after the
-`v0.10.3` guidance, capture a separate evidence slice with player rationale,
-actor-visible observations, submitted commands, validation failures, and debrief
-interpretation before changing simulation mechanics.
+- The warning is an educational debrief signal, not a runtime constraint.
+- Follow-through is intentionally defined from committed human commands:
+  `recruit`, `invest`, `project`, `monitor`, or `negotiate`.
+- The slice does not claim human-learning evidence, classroom effectiveness,
+  empirical calibration, policy validity, or balance validation.

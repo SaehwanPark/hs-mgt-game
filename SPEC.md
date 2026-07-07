@@ -115,6 +115,41 @@ reconstructing it from the diff.
 | Access Commitment Guidance Hardening | v0.10.3 | Clarify competitive access pledge guidance without changing runtime mechanics or balance | 284 | `8926f71296f39efc` (competitive) |
 | Post-Guidance Validation | v0.10.4 | Compare unchanged free-form Hard policies against a guidance-aware access-pledge policy | 284 | `8926f71296f39efc` (competitive) |
 | Phase 7 Evidence Synthesis | v0.10.5 | Synthesize v0.10.0-v0.10.4 free-form Hard evidence and preserve the next evidence gate before runtime tuning | 284 | `8926f71296f39efc` (competitive) |
+| Competitive Access-Pledge Debrief QA | v0.10.6 | Add debrief review for repeated public access pledges without operational follow-through | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Competitive Access-Pledge Debrief QA
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.6
+
+  Summary:
+  Added a competitive debrief decision-quality check for repeated public access
+  pledges that are not paired with capacity, staffing, monitoring, or payer
+  follow-through in the same three-month window. This keeps access-loop
+  follow-up in the educational debrief layer without changing runtime mechanics
+  or balance values.
+
+  Done:
+  - Added deterministic debrief-only warning logic derived from committed
+    competitive human command history.
+  - Added a student-facing access pledge lesson to the competitive debrief.
+  - Added focused tests for warning, follow-through suppression, and lesson text.
+  - Bumped package metadata to `0.10.6`.
+
+  Deferred / Non-Goals:
+  - No runtime access-pledge cooldown, pledge-effect tuning, command validation,
+    transition, stochastic input, scenario schema, MCP DTO, replay artifact,
+    state hash, or balance change.
+  - No new playtest runs, LLM runner, analytics tooling, or default scripted
+    batch replacement.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Phase 7 Evidence Synthesis
