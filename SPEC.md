@@ -116,6 +116,40 @@ reconstructing it from the diff.
 | Post-Guidance Validation | v0.10.4 | Compare unchanged free-form Hard policies against a guidance-aware access-pledge policy | 284 | `8926f71296f39efc` (competitive) |
 | Phase 7 Evidence Synthesis | v0.10.5 | Synthesize v0.10.0-v0.10.4 free-form Hard evidence and preserve the next evidence gate before runtime tuning | 284 | `8926f71296f39efc` (competitive) |
 | Competitive Access-Pledge Debrief QA | v0.10.6 | Add debrief review for repeated public access pledges without operational follow-through | 287 | `8926f71296f39efc` (competitive) |
+| LLM Access-Pledge Evidence | v0.10.7 | Record bounded sub-agent Hard competitive evidence for access-pledge repetition after guidance and debrief QA | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: LLM Access-Pledge Evidence
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.7
+
+  Summary:
+  Recorded a bounded Phase 7 sub-agent evidence slice testing whether repeated
+  access pledges appear outside deterministic operator heuristics after the
+  v0.10.3 guidance and v0.10.6 debrief QA work.
+
+  Done:
+  - Captured three sub-agent generated command plans for Hard competitive play
+    at seed `42`.
+  - Replayed the accepted command sequences through the MCP harness with zero
+    validation failures across three completed 24-month sessions.
+  - Added `docs/playtest-findings-v0.10.7.md` and replay artifacts under
+    `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/`.
+  - Bumped package metadata to `0.10.7`.
+
+  Deferred / Non-Goals:
+  - No runtime access-pledge cooldown, pledge-effect tuning, command validation,
+    transition, stochastic input, scenario schema, MCP DTO, replay artifact,
+    state hash, or balance change.
+  - No general LLM runner, live LLM integration, new strategic actor, or MCP
+    transport change.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json >/dev/null`
 
 
 - Feature: Competitive Access-Pledge Debrief QA
