@@ -38,11 +38,21 @@ balance values.
 
 - Branch: `feat/live-mcp-capture-evidence`
 - Base: `main`
-- PR: pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/90
 
 ## Review Summary
 
-Pending PR review loop.
+- Pass 1: Medium evidence-quality finding: workforce trust parsing assumed a
+  numeric observation, but the active MCP observation uses qualitative trust
+  labels. Fixed by mapping qualitative labels before rerunning the capture
+  script and updating findings.
+- Pass 2: No actionable findings after planned PR/review bookkeeping.
+- Pass 3: No actionable findings.
+- Critical/High findings: none.
+- Medium/Low disposition: one Medium finding fixed.
+- Follow-up review after Critical/High fixes: not required.
+- CI/comment triage: pending.
+- Merge-ready: pending CI.
 
 ## Known Limits
 
