@@ -43,7 +43,9 @@ values.
   QA, tests, SDD/version files, and workspace handoff files.
 - Critical/High findings: none.
 - Medium/Low disposition: one Low fixed.
-- Merge-ready: yes, pending CI/comment triage.
+- CI/comment triage: CI `check` passed; review-loop summary posted on PR #88;
+  no external review comments were present.
+- Merge-ready: yes.
 
 ## Known Limits
 
