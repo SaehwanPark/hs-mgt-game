@@ -1,19 +1,21 @@
-# Request Summary - Live MCP Capture Evidence
+# Request Summary - Live-Capture Diagnostics
 
 ## Scope
 
 Implement the next preferred-workflow development continuation slice for the
-Health Policy Strategy Game: live observation-by-observation MCP evidence
-capture for the competitive Hard campaign.
+Health Policy Strategy Game: diagnostic report support for the existing
+observation-by-observation live MCP capture artifact.
 
 ## Phase
 
-Phase 7 validation and calibration evidence. This is workflow/evidence capture,
-not runtime mechanics, balance, or educational effectiveness validation.
+Phase 7 strategy-space diagnostics. This is reporting/tooling over existing
+evidence, not runtime mechanics, balance, or educational effectiveness
+validation.
 
 ## Sources
 
-- User request to implement the preferred-workflow continuation + PR handoff plan.
+- User request to implement the preferred-workflow continuation + PR handoff
+  plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
@@ -22,13 +24,15 @@ not runtime mechanics, balance, or educational effectiveness validation.
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
 - Latest handoff: `_workspace/final/handoff.md`
+- Source artifact:
+  `_workspace/experiments/v0.10.9-live-mcp-capture/results.json`
 
 ## Expected Files
 
-- `scripts/play_game.py`
-- `_workspace/experiments/v0.10.9-live-mcp-capture/run_sessions.py`
-- `_workspace/experiments/v0.10.9-live-mcp-capture/results.json`
-- `docs/playtest-findings-v0.10.9.md`
+- `scripts/diagnose_runs.py`
+- `tests/fixtures/live_capture_batch.json`
+- `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`
+- `docs/playtest-findings-v0.10.10.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -40,17 +44,16 @@ not runtime mechanics, balance, or educational effectiveness validation.
 
 ## Validation Target
 
-Three deterministic persona-policy runs complete the Hard competitive campaign
-at seed `42` through MCP trace capture with zero validation failures. The
-artifact records observations, legal command hints, submitted commands,
-transition hashes, final observations, and debriefs.
+The diagnostics script accepts live-capture artifacts and reports profile
+outcomes, action frequencies, validation failures, access pledge counts, final
+hashes, and explicit evidence limits while preserving existing replay and
+automated-batch diagnostics.
 
 ## Non-Goals
 
-- No runtime access-pledge cooldown, pledge-effect tuning, transition change,
-  command validation change, stochastic input change, scenario schema change,
-  MCP DTO change, state hash change, or balance change.
-- No general LLM runner, networked agent integration, hidden-state exposure, or
-  MCP transport change.
+- No runtime simulation, balance formula, transition, command validation,
+  stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+  change.
+- No LLM runner, analytics platform, optimizer, or broad diagnostics framework.
 - No human-learning, classroom-effectiveness, empirical calibration,
   policy-validity, or balance-tuning claim.

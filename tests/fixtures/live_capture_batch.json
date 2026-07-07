@@ -1,0 +1,26 @@
+{
+  "batch_id": "fixture-live-capture",
+  "code_version": "0.10.9",
+  "campaign": "competitive-regional-v1",
+  "difficulty": "hard",
+  "seed": 42,
+  "evidence_type": "fixture live capture",
+  "runs": [
+    {
+      "profile_id": "fixture_access",
+      "profile_name": "Fixture Access",
+      "transition_count": 2,
+      "access_pledge_count": 1,
+      "validation_failures": [],
+      "final_hash": "abc123",
+      "commands": [
+        "monitor target=northlake depth=1; commit pledge_type=access level=1",
+        "recruit role=nurse headcount=2; hold"
+      ],
+      "debrief": [
+        "Final player tradeoff: Riverside Community Health cash moved from 60 to 50, access from 68 to 72, quality from 72 to 73, workforce trust from 60 to 58, community trust from 64 to 66, and market share from 24 to 25.",
+        "Final player resources: political capital 10, active projects 0, active project monthly draws 0, staffed beds 118."
+      ]
+    }
+  ]
+}

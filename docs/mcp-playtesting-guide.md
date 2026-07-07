@@ -246,3 +246,13 @@ observations, legal command hints, submitted commands, validation outcomes,
 transition hashes, final observations, and final debriefs. Use
 `docs/playtest-findings-v0.10.9.md` as workflow evidence for live capture, not as
 human-learning, calibration, balance, or runtime-tuning evidence.
+
+To generate a compact diagnostic report from that live-capture artifact:
+
+```bash
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.9-live-mcp-capture/results.json --output _workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md
+```
+
+The report summarizes profile outcomes, action frequencies, validation failures,
+access pledges, and final hashes. Use it as simulated-agent strategy-space
+diagnostics only; it is not evidence for runtime tuning or balance changes.

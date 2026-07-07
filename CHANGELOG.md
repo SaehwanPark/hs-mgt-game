@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.10] - 2026-07-07
+
+### Added
+- Extended `scripts/diagnose_runs.py` to parse live MCP capture artifacts and
+  report profile outcomes, action frequencies, validation failures, access
+  pledges, final hashes, and evidence limits.
+- Added a live-capture diagnostics fixture and generated
+  `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`.
+- Recorded `docs/playtest-findings-v0.10.10.md` for the diagnostic report slice.
+
+### Changed
+- Documented the live-capture diagnostics command in the MCP playtesting guide.
+- Bumped the package version to `0.10.10`.
+
 ## [0.10.9] - 2026-07-07
 
 ### Added
