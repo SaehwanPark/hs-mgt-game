@@ -282,3 +282,16 @@ Use `docs/playtest-findings-v0.10.12.md` as simulated-agent pressure evidence
 for Normal/Hard comparison. Do not treat it as balance proof, empirical
 calibration, human-learning evidence, or justification for runtime tuning by
 itself.
+
+To compare static and adaptive policies side by side in one live-capture
+artifact:
+
+```bash
+python3 _workspace/experiments/v0.10.13-live-static-adaptive-capture/run_sessions.py
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json --output _workspace/experiments/v0.10.13-live-static-adaptive-capture/diagnostics.md
+```
+
+Use `docs/playtest-findings-v0.10.13.md` as simulated-agent evidence for the
+policy-wrapper comparison. Do not treat it as balance proof, empirical
+calibration, human-learning evidence, or justification for runtime tuning by
+itself.
