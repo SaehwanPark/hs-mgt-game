@@ -46,13 +46,20 @@ hashes, or balance values.
 
 - Branch: `feat/live-static-adaptive-capture`
 - Base: `main`
-- PR: pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/94
 
 ## Review Summary
 
-- Review loop: pending
-- Critical/High findings: pending
-- Medium/Low disposition: pending
+- Pass 1: Low handoff-bookkeeping finding: PR/review status still said pending
+  after PR #94 was opened. Fixed in this handoff.
+- Pass 2: No additional actionable findings; artifact shape, run counts,
+  validation totals, static/adaptive labels, and generated findings matched the
+  captured results.
+- Pass 3: No additional actionable findings; version metadata, evidence-limit
+  language, no-runtime-change claims, and handoff artifacts matched scope.
+- Critical/High findings: none.
+- Medium/Low disposition: one Low documentation finding fixed.
+- Follow-up review after Critical/High fixes: not required.
 - CI/comment triage: pending
 - Merge-ready: pending
 
