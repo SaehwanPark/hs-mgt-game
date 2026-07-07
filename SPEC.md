@@ -120,6 +120,47 @@ reconstructing it from the diff.
 | Active Project Document Alignment | v0.10.8 | Align active docs with current competitive campaign, scenario loading, replay export, MCP boundaries, and autocomplete status | 287 | `8926f71296f39efc` (competitive) |
 | Live MCP Capture Evidence | v0.10.9 | Record observation-by-observation Hard competitive MCP capture evidence without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live-Capture Diagnostics | v0.10.10 | Add diagnostic report support for live MCP capture artifacts without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+| Live-Capture Matrix Evidence | v0.10.11 | Extend live MCP capture across seeds 42-44 and Normal/Hard difficulty without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live-Capture Matrix Evidence
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.11
+
+  Summary:
+  Added a bounded Phase 7 live-capture matrix over the existing deterministic
+  persona policies, seeds `42`, `43`, and `44`, and Normal/Hard competitive
+  difficulty tiers.
+
+  Done:
+  - Added `_workspace/experiments/v0.10.11-live-capture-matrix/run_sessions.py`.
+  - Captured 18 observation-by-observation competitive MCP runs with zero
+    validation failures.
+  - Generated `_workspace/experiments/v0.10.11-live-capture-matrix/results.json`
+    and `diagnostics.md`.
+  - Added `docs/playtest-findings-v0.10.11.md` and updated the MCP playtesting
+    guide.
+  - Bumped package metadata to `0.10.11`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No LLM runner, analytics platform, optimizer, or broad diagnostics
+    framework.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m py_compile scripts/play_game.py`
+  - `python3 -m py_compile _workspace/experiments/v0.10.11-live-capture-matrix/run_sessions.py`
+  - `python3 _workspace/experiments/v0.10.11-live-capture-matrix/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.11-live-capture-matrix/results.json --output _workspace/experiments/v0.10.11-live-capture-matrix/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.11-live-capture-matrix/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Live-Capture Diagnostics

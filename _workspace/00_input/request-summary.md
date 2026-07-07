@@ -1,16 +1,16 @@
-# Request Summary - Live-Capture Diagnostics
+# Request Summary - Live-Capture Matrix Evidence
 
 ## Scope
 
 Implement the next preferred-workflow development continuation slice for the
-Health Policy Strategy Game: diagnostic report support for the existing
-observation-by-observation live MCP capture artifact.
+Health Policy Strategy Game: expand the existing observation-by-observation live
+MCP capture path into a small seed/difficulty matrix.
 
 ## Phase
 
-Phase 7 strategy-space diagnostics. This is reporting/tooling over existing
-evidence, not runtime mechanics, balance, or educational effectiveness
-validation.
+Phase 7 simulated-agent evidence and strategy-space diagnostics. This is a new
+evidence artifact over existing capture tooling, not runtime mechanics, balance,
+or educational effectiveness validation.
 
 ## Sources
 
@@ -24,15 +24,17 @@ validation.
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
 - Latest handoff: `_workspace/final/handoff.md`
-- Source artifact:
+- Prior source artifact:
   `_workspace/experiments/v0.10.9-live-mcp-capture/results.json`
+- Prior diagnostics slice:
+  `docs/playtest-findings-v0.10.10.md`
 
 ## Expected Files
 
-- `scripts/diagnose_runs.py`
-- `tests/fixtures/live_capture_batch.json`
-- `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`
-- `docs/playtest-findings-v0.10.10.md`
+- `_workspace/experiments/v0.10.11-live-capture-matrix/run_sessions.py`
+- `_workspace/experiments/v0.10.11-live-capture-matrix/results.json`
+- `_workspace/experiments/v0.10.11-live-capture-matrix/diagnostics.md`
+- `docs/playtest-findings-v0.10.11.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -44,10 +46,11 @@ validation.
 
 ## Validation Target
 
-The diagnostics script accepts live-capture artifacts and reports profile
-outcomes, action frequencies, validation failures, access pledge counts, final
-hashes, and explicit evidence limits while preserving existing replay and
-automated-batch diagnostics.
+The live-capture matrix completes 18 competitive sessions across three
+deterministic persona policies, seeds `42`, `43`, and `44`, and Normal/Hard
+difficulty tiers. Diagnostics report profile outcomes, action frequencies,
+validation failures, access pledge counts, final hashes, and explicit evidence
+limits while preserving existing runtime and MCP interfaces.
 
 ## Non-Goals
 
