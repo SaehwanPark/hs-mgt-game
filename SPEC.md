@@ -118,6 +118,41 @@ reconstructing it from the diff.
 | Competitive Access-Pledge Debrief QA | v0.10.6 | Add debrief review for repeated public access pledges without operational follow-through | 287 | `8926f71296f39efc` (competitive) |
 | LLM Access-Pledge Evidence | v0.10.7 | Record bounded sub-agent Hard competitive evidence for access-pledge repetition after guidance and debrief QA | 287 | `8926f71296f39efc` (competitive) |
 | Active Project Document Alignment | v0.10.8 | Align active docs with current competitive campaign, scenario loading, replay export, MCP boundaries, and autocomplete status | 287 | `8926f71296f39efc` (competitive) |
+| Live MCP Capture Evidence | v0.10.9 | Record observation-by-observation Hard competitive MCP capture evidence without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live MCP Capture Evidence
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.9
+
+  Summary:
+  Added a bounded Phase 7 live-capture evidence slice that records actor-visible
+  observations, legal command hints, submitted commands, validation outcomes,
+  transition hashes, final observations, and debriefs for Hard competitive MCP
+  sessions.
+
+  Done:
+  - Extended `scripts/play_game.py` with optional trace capture while preserving
+    existing caller behavior.
+  - Captured three deterministic persona-policy runs for Hard competitive play
+    at seed `42`, all completing 24 months with zero validation failures.
+  - Added `docs/playtest-findings-v0.10.9.md` and replay artifacts under
+    `_workspace/experiments/v0.10.9-live-mcp-capture/`.
+  - Bumped package metadata to `0.10.9`.
+
+  Deferred / Non-Goals:
+  - No runtime access-pledge cooldown, pledge-effect tuning, command validation,
+    transition, stochastic input, scenario schema, MCP DTO, state hash, or
+    balance change.
+  - No general LLM runner, networked agent integration, hidden-state exposure,
+    or MCP transport change.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.9-live-mcp-capture/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.9-live-mcp-capture/results.json >/dev/null`
 
 
 - Feature: Active Project Document Alignment

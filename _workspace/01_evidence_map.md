@@ -1,58 +1,48 @@
-# Evidence Map - LLM Access-Pledge Evidence
+# Evidence Map - Live MCP Capture Evidence
 
-## Scope
+## Evidence Question
 
-Bounded Phase 7 validation of whether repeated access pledges appear in three
-sub-agent generated Hard competitive command plans after current access guidance
-and debrief QA.
+Can the current local MCP wrapper capture observation-by-observation simulated
+play evidence without changing the Rust MCP API or runtime simulation behavior?
 
-## Sources Reviewed
+## Inputs
 
-- `docs/playtest-findings-v0.10.5.md`
-- `docs/agent-playtest-protocol.md`
-- `docs/mcp-playtesting-guide.md`
-- `docs/design_principles.md`
-- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json`
+- `docs/agent-playtest-protocol.md` requires artifacts to record actor-visible
+  observations, legal command hints, submitted commands, validation failures,
+  histories, and final debriefs.
+- `docs/playtest-findings-v0.10.7.md` identified a limit: sub-agent command
+  plans were replayed through MCP, but they were not captured as live
+  month-by-month decisions.
 
-## Mechanisms and Institutions
+## Mechanism Mapping
 
-- Access pledges are public legitimacy commitments in the competitive campaign.
-- Durable access follow-through can also appear through staffing, service-line
-  capacity, monitoring, and payer actions.
-- Public Medicare and Medicaid negotiations support neutral posture only.
+- `scripts/play_game.py` already drives the MCP server over stdio and receives
+  the actor-visible session envelope before each command.
+- Optional trace capture records the evidence already crossing the boundary:
+  observations, legal command hints, submitted command text, validation
+  failures, transition summaries, done state, final observation, and debrief.
+- Because the capture occurs in the Python wrapper, no Rust MCP DTO, hidden
+  state, transition logic, stochastic boundary, or state hash change is needed.
 
-## Actor Incentives and Information
+## Evidence Produced
 
-- Fiscal Steward prioritized solvency and monitoring.
-- Access Expansion Advocate prioritized access but used one pledge, then
-  operational follow-through.
-- First-Time Executive used one modest pledge, then avoided stacking public
-  commitments under uncertainty.
+- Three Hard competitive persona-policy runs at seed `42`.
+- All three completed 24 months with zero validation failures.
+- Access-pledge counts were `0`, `1`, and `0`.
+- The artifact is stored at
+  `_workspace/experiments/v0.10.9-live-mcp-capture/results.json`.
 
-## Assumptions
+## Interpretation Limits
 
-- Sub-agent command plans are simulated-player evidence, not human behavior.
-- MCP replay is the authoritative validation boundary for command legality and
-  deterministic completion.
-- Replacing unaffordable or invalid plan entries with `hold` is an operator
-  correction and must not be treated as autonomous retry behavior.
+- Deterministic persona policies are simulated-agent evidence, not autonomous
+  live LLM play or human play.
+- One seed and one difficulty tier cannot justify balance tuning.
+- Conservative command policies reduce validation noise and are primarily useful
+  for validating the capture workflow.
 
-## Unresolved Questions
+## Follow-Up Routing
 
-- Whether live LLM play with month-by-month observations would make different
-  choices than fixed command-plan replay.
-- Whether human players repeat access pledges after seeing current guidance.
-- Whether access guidance improves educational interpretation in classroom use.
-
-## Design Implications
-
-- Current evidence does not support runtime cooldowns or pledge-effect tuning.
-- Future access-pledge work should stay in guidance, debriefing, or more direct
-  evidence capture unless repetition recurs in live LLM or human play.
-
-## Risks
-
-- False precision from three profiles, one seed, one campaign, and one
-  difficulty.
-- Over-reading corrected replay commands as fully autonomous player behavior.
-- Mistaking reduced pledge repetition for better gameplay or learning.
+- Use this trace path for future free-form or LLM-assisted MCP evidence when
+  observation-by-observation context matters.
+- Keep access-pledge follow-up in guidance, debrief, and evidence review unless
+  later live LLM or human play repeats the issue.

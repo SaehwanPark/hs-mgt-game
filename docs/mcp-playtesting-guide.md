@@ -232,3 +232,17 @@ python3 _workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.p
 Use `docs/playtest-findings-v0.10.7.md` as bounded simulated-agent evidence
 only. It does not justify runtime access cooldowns, pledge-effect tuning, or a
 general LLM runner.
+
+To capture observation-by-observation Hard competitive evidence through the
+existing MCP wrapper:
+
+```bash
+python3 _workspace/experiments/v0.10.9-live-mcp-capture/run_sessions.py
+```
+
+The script writes
+`_workspace/experiments/v0.10.9-live-mcp-capture/results.json` with actor-visible
+observations, legal command hints, submitted commands, validation outcomes,
+transition hashes, final observations, and final debriefs. Use
+`docs/playtest-findings-v0.10.9.md` as workflow evidence for live capture, not as
+human-learning, calibration, balance, or runtime-tuning evidence.

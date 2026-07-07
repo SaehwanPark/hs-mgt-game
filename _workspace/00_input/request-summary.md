@@ -1,42 +1,56 @@
-# Request Summary - LLM Access-Pledge Evidence
+# Request Summary - Live MCP Capture Evidence
 
 ## Scope
 
-Continue development after PR #88 with a PR-sized Phase 7 evidence slice. Test
-whether repeated access pledges appear in bounded sub-agent generated command
-plans outside deterministic operator heuristics.
+Implement the next preferred-workflow development continuation slice for the
+Health Policy Strategy Game: live observation-by-observation MCP evidence
+capture for the competitive Hard campaign.
 
-## Non-Goals
+## Phase
 
-- No runtime access-pledge cooldown or pledge-effect tuning.
-- No command grammar, scenario schema, MCP DTO, transition, replay, state hash,
-  or balance change.
-- No general LLM runner or live LLM integration.
-- No human-learning, classroom-effectiveness, empirical calibration,
-  policy-validity, or balance claim.
+Phase 7 validation and calibration evidence. This is workflow/evidence capture,
+not runtime mechanics, balance, or educational effectiveness validation.
 
 ## Sources
 
+- User request to implement the preferred-workflow continuation + PR handoff plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.5.md`
 - `docs/agent-playtest-protocol.md`
 - `docs/mcp-playtesting-guide.md`
+- Latest handoff: `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.7.md`
-- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/run_sessions.py`
-- `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/results.json`
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`
-- `_workspace/01_evidence_map.md`, `_workspace/03_domain_qa.md`,
-  `_workspace/final/handoff.md`
+- `scripts/play_game.py`
+- `_workspace/experiments/v0.10.9-live-mcp-capture/run_sessions.py`
+- `_workspace/experiments/v0.10.9-live-mcp-capture/results.json`
+- `docs/playtest-findings-v0.10.9.md`
+- `docs/mcp-playtesting-guide.md`
+- `SPEC.md`
+- `CHANGELOG.md`
+- `Cargo.toml`
+- `Cargo.lock`
+- `_workspace/01_evidence_map.md`
+- `_workspace/03_domain_qa.md`
+- `_workspace/final/handoff.md`
 
 ## Validation Target
 
-Replay at least two 24-month Hard competitive sessions through MCP with zero
-validation failures, record command and debrief evidence, and keep conclusions
-limited to simulated-agent evidence.
+Three deterministic persona-policy runs complete the Hard competitive campaign
+at seed `42` through MCP trace capture with zero validation failures. The
+artifact records observations, legal command hints, submitted commands,
+transition hashes, final observations, and debriefs.
+
+## Non-Goals
+
+- No runtime access-pledge cooldown, pledge-effect tuning, transition change,
+  command validation change, stochastic input change, scenario schema change,
+  MCP DTO change, state hash change, or balance change.
+- No general LLM runner, networked agent integration, hidden-state exposure, or
+  MCP transport change.
+- No human-learning, classroom-effectiveness, empirical calibration,
+  policy-validity, or balance-tuning claim.
