@@ -45,7 +45,9 @@ hashes, or balance values.
 - Pass 3: Low evidence-wording finding for the same ASC reference; fixed.
 - Critical/High findings: none.
 - Medium/Low disposition: two Low findings fixed.
-- Merge-ready: pending CI completion.
+- CI/comment triage: CI `check` passed; review-loop summary posted on PR #89;
+  no external review comments were present.
+- Merge-ready: yes.
 
 ## Known Limits
 
