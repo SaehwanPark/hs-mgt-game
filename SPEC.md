@@ -114,6 +114,45 @@ reconstructing it from the diff.
 | Access-Loop Diagnostic | v0.10.2 | Compare free-form Hard baseline policies against bounded access-pledge cooldown and reported-access-threshold variants | 282 | `8926f71296f39efc` (competitive) |
 | Access Commitment Guidance Hardening | v0.10.3 | Clarify competitive access pledge guidance without changing runtime mechanics or balance | 284 | `8926f71296f39efc` (competitive) |
 | Post-Guidance Validation | v0.10.4 | Compare unchanged free-form Hard policies against a guidance-aware access-pledge policy | 284 | `8926f71296f39efc` (competitive) |
+| Phase 7 Evidence Synthesis | v0.10.5 | Synthesize v0.10.0-v0.10.4 free-form Hard evidence and preserve the next evidence gate before runtime tuning | 284 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Phase 7 Evidence Synthesis
+  Status: Complete
+  Started: 2026-07-07
+  Version: 0.10.5
+
+  Summary:
+  Synthesized the existing v0.10.0-v0.10.4 free-form Hard competitive
+  artifacts. Recorded completion, access-pledge loop, guidance-aware behavior,
+  endpoint tradeoff, and evidence de-duplication conclusions without adding new
+  runs or changing runtime behavior.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.5.md` with source matrix, synthesis
+    findings, evidence limits, and next evidence gate.
+  - Updated the MCP playtesting guide to point access-pledge follow-up work to
+    the v0.10.5 synthesis.
+  - Recorded a `LESSONS.md` entry about de-duplicating repeated baseline
+    controls in Phase 7 synthesis.
+  - Bumped package metadata to `0.10.5`.
+
+  Deferred / Non-Goals:
+  - No new run capture, script change, runtime simulation, command grammar, MCP
+    DTO, scenario schema, replay artifact, state hash, or balance change.
+  - No automatic command cooldown, pledge-effect tuning, default scripted batch
+    replacement, LLM runner, or new analytics tooling.
+  - No human-learning, empirical calibration, classroom-effectiveness,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.0-free-form-hard/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.2-access-loop-diagnostic/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.4-post-guidance-validation/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Post-Guidance Validation

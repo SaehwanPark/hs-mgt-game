@@ -215,3 +215,9 @@ compare unchanged baseline free-form Hard policies against a guidance-aware
 variant that redirects repeated or high-access pledges to existing legal
 fallback actions. Do not treat it as evidence for runtime balance changes,
 automatic command cooldowns, or pledge-effect tuning.
+
+The cross-artifact synthesis in `docs/playtest-findings-v0.10.5.md` summarizes
+the `v0.10.0` through `v0.10.4` free-form Hard evidence without adding new runs.
+Use it as the current routing note for access-pledge follow-up: repeated
+baseline matrices are controls, not independent player evidence, and runtime
+cooldowns or pledge-effect tuning still require a separate evidence gate.

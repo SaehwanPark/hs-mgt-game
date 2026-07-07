@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.5] - 2026-07-07
+
+### Added
+- Recorded `docs/playtest-findings-v0.10.5.md` synthesizing the existing
+  `v0.10.0` through `v0.10.4` free-form Hard competitive evidence.
+- Documented evidence de-duplication and the next evidence gate for access
+  pledge loops before any runtime cooldown or balance-tuning work.
+
+### Changed
+- Bumped the package version to `0.10.5`.
+
 ## [0.10.4] - 2026-07-06
 
 ### Added
