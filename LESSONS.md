@@ -35,6 +35,21 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   before promoting guidance heuristics into runtime cooldowns, formula tuning,
   or default playtest policies.
 
+## Phase 7 Synthesis Must De-Duplicate Repeated Controls
+
+- Context: The v0.10.5 synthesis combined the v0.10.0-v0.10.4 free-form Hard
+  competitive artifacts.
+- Symptom: Raw session totals can look stronger than the evidence actually is
+  because the same seed/profile baseline matrix is intentionally repeated across
+  artifacts as a control.
+- Cause: Validation slices reuse baseline policies to compare guidance or
+  operator-policy variants. Those repeated controls are useful for regression
+  and comparison, but they are not independent player samples.
+- Prevention: When synthesizing playtest evidence, report artifact session
+  counts and overlap caveats together. Do not use repeated controls to justify
+  runtime cooldowns, balance tuning, human-learning claims, or empirical
+  calibration.
+
 ## Targeted Project Playtests Must Account for Scenario Delays
 
 - Context: Adding the v0.9.7 `project-coverage` automated MCP playtest target.

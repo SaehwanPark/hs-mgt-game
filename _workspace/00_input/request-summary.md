@@ -1,26 +1,26 @@
-# Request Summary - Post-Guidance Validation
+# Request Summary - Phase 7 Evidence Synthesis
 
 ## Phase / Gate
-Phase 7: AI-agent gameplay evaluation follow-up — post-guidance validation for
-the access-commitment guidance hardening.
+Phase 7: AI-agent gameplay evaluation follow-up — synthesis of existing
+free-form Hard competitive evidence.
 
 ## Scope
-Test whether the v0.10.3 access-commitment guidance can be represented as a
-bounded simulated-agent policy change. Compare unchanged free-form Hard
-competitive policies against a guidance-aware variant that suppresses repeated
-or high-access pledges and redirects to existing legal fallback actions.
+Synthesize the existing `v0.10.0` through `v0.10.4` free-form Hard competitive
+artifacts, with emphasis on access-pledge loop evidence, guidance-aware
+behavior, endpoint tradeoffs, evidence de-duplication, and the next evidence
+gate before runtime tuning.
 
 Expected artifacts:
-- `_workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py`
-- `_workspace/experiments/v0.10.4-post-guidance-validation/results.json`
-- `docs/playtest-findings-v0.10.4.md`
+- `docs/playtest-findings-v0.10.5.md`
 - `docs/mcp-playtesting-guide.md`
+- `LESSONS.md`
 - `SPEC.md`
 - `CHANGELOG.md`
-- package version metadata (`0.10.4`)
+- package version metadata (`0.10.5`)
 - `_workspace/final/handoff.md`
 
 ## Non-Goals
+- No new run capture or script changes.
 - No simulation behavior changes.
 - No command grammar, MCP DTO, scenario schema, replay artifact, state hash, or
   balance changes.
@@ -36,14 +36,21 @@ Expected artifacts:
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
+- `docs/agent-playtest-protocol.md`
+- `docs/mcp-playtesting-guide.md`
+- `docs/playtest-findings-v0.10.0.md`
+- `docs/playtest-findings-v0.10.1.md`
 - `docs/playtest-findings-v0.10.2.md`
+- `docs/playtest-findings-v0.10.4.md`
 - `CHANGELOG.md`
 - `docs/how-to-play.md`
 - `LESSONS.md`
 - `SPEC.md`
 
 ## Validation Target
-- `python3 _workspace/experiments/v0.10.4-post-guidance-validation/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.0-free-form-hard/results.json >/dev/null`
+- `python3 -m json.tool _workspace/experiments/v0.10.1-free-form-hard-seed-variation/results.json >/dev/null`
+- `python3 -m json.tool _workspace/experiments/v0.10.2-access-loop-diagnostic/results.json >/dev/null`
 - `python3 -m json.tool _workspace/experiments/v0.10.4-post-guidance-validation/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
