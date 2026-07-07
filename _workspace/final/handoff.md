@@ -51,8 +51,9 @@ balance values.
 - Critical/High findings: none.
 - Medium/Low disposition: one Medium finding fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: pending.
-- Merge-ready: pending CI.
+- CI/comment triage: CI `check` passed; review-loop summary posted on PR #90;
+  no external review comments were present.
+- Merge-ready: yes.
 
 ## Known Limits
 
