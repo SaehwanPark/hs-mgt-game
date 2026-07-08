@@ -1,73 +1,61 @@
-# Final Handoff - Independent Reviewer-Agent Live Capture
+# Final Handoff - Live LLM Difficulty Gate
 
 ## Summary
 
-Implemented the `v0.10.14` Phase 7 independent reviewer-agent live-capture
-slice. The existing MCP wrapper and diagnostics path now have one artifact
-using independent observation-conditioned reviewer policies across three
-profiles, seeds `42`, `43`, and `44`, and Normal/Hard competitive difficulty
-tiers.
+Implemented the `v0.10.15` Phase 7 live LLM/sub-agent difficulty-gate slice.
+The existing MCP wrapper and diagnostics path now have one artifact using
+month-by-month simulated-agent decisions across three profiles, seed `42`, and
+Normal/Hard competitive difficulty tiers.
 
 This is evidence/reporting-only. It does not change transition logic,
 validation, command grammar, scenario schemas, MCP DTOs, replay hashes, state
-hashes, or balance values.
+hash logic, or balance values.
 
 ## Changed Files
 
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`:
-  observation-conditioned reviewer-policy matrix runner.
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`:
-  18-session live-capture artifact.
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`:
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`:
+  replay script for accepted live-decision command streams.
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`:
+  six-session live-decision artifact.
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`:
   generated diagnostic report.
-- `docs/playtest-findings-v0.10.14.md`: findings and evidence limits.
+- `docs/playtest-findings-v0.10.15.md`: findings and evidence limits.
 - `docs/mcp-playtesting-guide.md`: diagnostic command.
-- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
-  `_workspace/03_domain_qa.md`: harness handoff artifacts.
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.14` record and
+- `_workspace/00_input/request-summary.md`, `_workspace/03_domain_qa.md`:
+  harness handoff artifacts.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.15` record and
   package metadata.
-- `LESSONS.md`: workflow lesson on reading difficulty effects from
-  non-adaptive policies.
+- `LESSONS.md`: workflow lesson on preserving live-agent retry/source metadata.
 
 ## Verification
 
 - `python3 -m py_compile scripts/play_game.py`
-- `python3 -m py_compile scripts/run_automated_playtests.py`
 - `python3 -m py_compile scripts/diagnose_runs.py`
-- `python3 -m py_compile _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
-- `python3 _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json --output _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
-- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
+- `python3 -m py_compile _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+- `python3 _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
 
 ## PR Handoff
 
-- Branch: `feat/independent-reviewer-agent-evidence`
+- Branch: `feat/live-llm-difficulty-gate`
 - Base: `main`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/95
+- PR: pending
 
 ## Review Summary
 
-- Pass 1: No actionable runtime or evidence-scope findings in the runner or
-  findings document.
-- Pass 2: Low handoff-bookkeeping finding: the handoff omitted `LESSONS.md`, and
-  Domain QA verification omitted the Rust checks. Fixed.
-- Pass 3: No additional actionable findings; artifact counts, version metadata,
-  evidence-limit language, and no-runtime-change claims matched the generated
-  outputs.
-- Critical/High findings: none.
-- Medium/Low disposition: one Low documentation finding fixed.
-- Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: GitHub Actions `check` passed on PR #95; no PR comments
-  or reviews were present during triage.
-- Merge-ready: yes
+Pending until PR handoff and the required three-pass review loop complete.
 
 ## Known Limits
 
 - The runs are simulated-agent evidence, not human play, classroom learning, or
   empirical calibration.
+- The matrix uses one seed and one campaign, so it cannot support balance
+  tuning by itself.
 - Final metric extraction depends on current debrief text format.
-- The reviewer policies are operator-authored and not difficulty-adaptive, so
-  this does not prove difficulty balance or strategic richness.
+- One delegated Competitive Analyst Normal session did not complete; the
+  committed artifact records a replacement local live-decision stream from the
+  same actor-visible MCP wrapper boundary.

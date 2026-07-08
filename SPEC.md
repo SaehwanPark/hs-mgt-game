@@ -124,6 +124,51 @@ reconstructing it from the diff.
 | Live Difficulty-Pressure Capture | v0.10.12 | Reuse automated pressure policies through live MCP capture for Normal/Hard competitive comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Static-vs-Adaptive Live Capture | v0.10.13 | Compare static and adaptive deterministic policies in one live MCP capture artifact without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Independent Reviewer-Agent Live Capture | v0.10.14 | Run observation-conditioned reviewer policies through live MCP capture without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+| Live LLM Difficulty Gate | v0.10.15 | Capture live month-by-month sub-agent decisions for Normal/Hard difficulty comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live LLM Difficulty Gate
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.15
+
+  Summary:
+  Added a bounded Phase 7 live-decision difficulty gate using month-by-month
+  simulated-agent decisions from actor-visible MCP observations across three
+  profiles, seed `42`, and Normal/Hard competitive difficulty tiers.
+
+  Done:
+  - Added `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`.
+  - Captured six accepted 24-month competitive command streams with zero final
+    replay validation failures.
+  - Preserved live retry/source metadata, including Access Operator retries and
+    the replacement Competitive Analyst Normal stream after the delegated run
+    did not complete.
+  - Generated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+    and `diagnostics.md`.
+  - Added `docs/playtest-findings-v0.10.15.md` and updated the MCP playtesting
+    guide.
+  - Bumped package metadata to `0.10.15`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No general LLM runner, analytics platform, optimizer, or broad diagnostics
+    framework.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m py_compile scripts/play_game.py`
+  - `python3 -m py_compile scripts/diagnose_runs.py`
+  - `python3 -m py_compile _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+  - `python3 _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Independent Reviewer-Agent Live Capture

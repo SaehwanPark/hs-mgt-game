@@ -307,3 +307,16 @@ python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-rev
 Use `docs/playtest-findings-v0.10.14.md` as simulated-agent reviewer evidence.
 Do not treat it as balance proof, empirical calibration, human-learning
 evidence, or justification for runtime tuning by itself.
+
+To replay the accepted live month-by-month LLM/sub-agent difficulty-gate command
+streams:
+
+```bash
+python3 _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md
+```
+
+Use `docs/playtest-findings-v0.10.15.md` as simulated-agent live-decision
+evidence. It can inform follow-up guidance, debrief, and validation questions;
+do not treat it as balance proof, empirical calibration, human-learning
+evidence, or justification for runtime tuning by itself.

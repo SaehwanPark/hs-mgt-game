@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.15] - 2026-07-08
+
+### Added
+- Added a Phase 7 live LLM/sub-agent difficulty-gate artifact across three
+  profiles, seed `42`, and Normal/Hard competitive difficulty tiers.
+- Generated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+  from the live-decision artifact.
+- Recorded `docs/playtest-findings-v0.10.15.md` with live-decision findings,
+  validation retry notes, and evidence limits.
+
+### Changed
+- Documented the live LLM difficulty-gate replay command in the MCP playtesting
+  guide.
+- Bumped the package version to `0.10.15`.
+
 ## [0.10.14] - 2026-07-08
 
 ### Added

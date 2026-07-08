@@ -3,6 +3,22 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Preserve Live-Agent Retry and Replacement Metadata
+
+- Context: Adding the v0.10.15 live LLM/sub-agent difficulty gate after the
+  v0.10.14 independent reviewer-agent matrix.
+- Symptom: A completed replay artifact can look cleaner than the live decision
+  process that produced it, especially when delegated runs retry invalid
+  commands or one delegated session does not complete.
+- Cause: The replay script validates accepted command streams, while the live
+  process includes wrapper mistakes, cash-overrun retries, and occasional
+  incomplete delegated sessions.
+- Resolution: Store `live_validation_retries` and `decision_source` in the
+  artifact, and document the replacement Competitive Analyst Normal stream
+  explicitly in the findings.
+- Prevention: Future live-decision evidence should preserve retry and source
+  metadata even when the final replay has zero validation failures.
+
 ## Do Not Read Difficulty Effects From Non-Adaptive Policies
 
 - Context: Adding the v0.10.14 independent reviewer-agent live-capture matrix
