@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.16] - 2026-07-08
+
+### Added
+- Added `docs/playtest-findings-v0.10.16.md`, a Phase 7 synthesis comparing
+  live difficulty evidence from `v0.10.12` through `v0.10.15`.
+- Selected cash-pressure and validation-retry visibility for access-heavy Hard
+  live agents as the next bounded follow-up issue before runtime tuning.
+
+### Changed
+- Bumped the package version to `0.10.16`.
+
 ## [0.10.15] - 2026-07-08
 
 ### Added
