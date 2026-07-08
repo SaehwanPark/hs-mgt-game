@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.25] - 2026-07-08
+
+### Added
+- Added `docs/playtest-findings-v0.10.25.md`, a Phase 7 synthesis of the
+  access-heavy evidence chain from `v0.10.21` through `v0.10.24`.
+
+### Changed
+- Closed the access follow-through mini-loop as debrief/guidance evidence while
+  keeping runtime tuning, command-cost changes, pledge cooldowns, difficulty
+  changes, and balance changes deferred.
+- Bumped the package version to `0.10.25`.
+
 ## [0.10.24] - 2026-07-08
 
 ### Added

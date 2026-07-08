@@ -1,11 +1,12 @@
-# Final Handoff - Access Debrief Validation
+# Final Handoff - Access Evidence Synthesis
 
 ## Summary
 
-Implemented the `v0.10.24` Phase 7 debrief-surface validation slice. Bounded
-MCP trigger/control runs now demonstrate that the competitive access
-follow-through note appears in expected low-cash, under-followed access-pledge
-runs and stays absent in nearby controls.
+Implemented the `v0.10.25` Phase 7 access evidence synthesis slice. The new
+findings document synthesizes `v0.10.21` through `v0.10.24`, closes the access
+follow-through mini-loop as debrief/guidance evidence, and preserves the
+requirement that future runtime changes need a separate concrete mechanics
+finding.
 
 This is an evidence and project-state slice. It does not change runtime
 mechanics, MCP DTOs, Python wrapper logic, diagnostic parser logic, command
@@ -14,23 +15,20 @@ ruleset values, balance, or retry metadata.
 
 ## Changed Files
 
-- `_workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`:
-  adds deterministic MCP trigger/control validation runs.
-- `_workspace/experiments/v0.10.24-access-debrief-validation/results.json`:
-  records completed Normal/Hard validation results at seed `42`.
-- `docs/playtest-findings-v0.10.24.md`: records validation results and evidence
-  limits.
-- `docs/mcp-playtesting-guide.md`: notes the bounded validation artifact.
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.24`
+- `docs/playtest-findings-v0.10.25.md`: synthesizes the access-heavy evidence
+  chain and routing decision.
+- `docs/mcp-playtesting-guide.md`: adds the `v0.10.25` routing checkpoint.
+- `_workspace/03_domain_qa.md`: records project-specific domain QA status.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.25`
   project-state and version metadata.
 - `_workspace/00_input/request-summary.md`: scoped request summary for this
   continuation slice.
 
 ## Verification
 
-- `python3 _workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
 - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.24-diagnostics.md`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.25-diagnostics.md`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test -- --test-threads=1`
@@ -38,33 +36,33 @@ ruleset values, balance, or retry metadata.
 
 ## PR Handoff
 
-- Branch: `feat/access-debrief-validation-v0.10.24`
+- Branch: `feat/access-evidence-synthesis-v0.10.25`
 - Base: `main`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/105
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/106
 
 ## Review Summary
 
-- Pass 1: No actionable runner, trigger/control, or validation-scope findings.
-- Pass 2: Low finding in `SPEC.md`: the new `v0.10.24` rollup row copied the
-  prior test-count value instead of the current full-suite count. Fixed the new
-  row to `294`.
-- Pass 3: No additional scope, reproducibility, documentation, or handoff
-  findings after the fix.
+- Pass 1: No actionable scope, versioning, verification, or evidence-limit
+  findings.
+- Pass 2: No actionable documentation-consistency, metadata, or evidence-claim
+  findings.
+- Pass 3: No actionable handoff-completeness, PR-readiness, or domain-boundary
+  findings.
 - Critical/High findings: none.
 - Medium findings: none.
-- Low findings: fixed.
+- Low findings: none.
 - Follow-up review after Critical/High fixes: not required.
 - PR review-loop disposition posted at
-  https://github.com/SaehwanPark/hs-mgt-game/pull/105#issuecomment-4919084849
+  https://github.com/SaehwanPark/hs-mgt-game/pull/106#issuecomment-4919163653
 - CI/comment triage: CI `check` passed; no external review comments were
   present when checked.
 - Merge-ready: Yes.
 
 ## Known Limits
 
-- The artifact validates debrief-surface behavior through deterministic
-  trigger/control policies, not organic human play.
+- The synthesis relies on existing simulated-agent, deterministic-policy, and
+  operator-authored artifacts; it does not add new organic play evidence.
 - Evidence remains simulated-agent and operator-authored, not classroom or
   human-learning evidence.
-- The validation does not justify access-pledge effect tuning, cooldowns,
-  command-cost changes, or difficulty changes.
+- The synthesis does not justify access-pledge effect tuning, cooldowns,
+  command-cost changes, difficulty changes, or balance changes.
