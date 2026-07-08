@@ -6,6 +6,30 @@ import select
 import shlex
 import time
 
+def normalize_tool_error(error_payload):
+  if isinstance(error_payload, dict):
+    message = error_payload.get("error")
+    if isinstance(message, str) and message:
+      normalized = {"error": message}
+      for field in ["code", "resource_limit", "hint"]:
+        value = error_payload.get(field)
+        if value is not None:
+          normalized[field] = value
+      return normalized
+
+  if isinstance(error_payload, str):
+    try:
+      parsed = json.loads(error_payload)
+    except json.JSONDecodeError:
+      return {"error": error_payload}
+    if isinstance(parsed, dict):
+      normalized = normalize_tool_error(parsed)
+      if normalized is not None:
+        return normalized
+    return {"error": error_payload}
+
+  return {"error": str(error_payload)}
+
 class McpClient:
   def __init__(self, bin_path=None, timeout_seconds=10):
     if bin_path is None:
@@ -99,12 +123,12 @@ class McpClient:
     })
     res = self._recv(req_id)
     if "error" in res:
-      return {"isError": True, "error": res["error"]}
+      return {"isError": True, **normalize_tool_error(res["error"])}
     
     result = res.get("result", {})
     if result.get("isError"):
       error_content = result.get("content", [{}])[0].get("text", "Unknown tool error")
-      return {"isError": True, "error": error_content}
+      return {"isError": True, **normalize_tool_error(error_content)}
       
     if "structuredContent" in result:
       return {"isError": False, "data": result["structuredContent"]}
@@ -201,6 +225,10 @@ def play_session(campaign, seed=42, difficulty="normal", policy_fn=None, capture
           "command": cmd,
           "error": res["error"]
         }
+        for field in ["code", "resource_limit", "hint"]:
+          value = res.get(field)
+          if value is not None:
+            failure[field] = value
         validation_failures.append(failure)
         if trace_entry is not None:
           trace_entry["validation_failures"].append(failure)

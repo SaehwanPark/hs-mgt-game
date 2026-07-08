@@ -334,3 +334,9 @@ such as cash overrun, AP overrun, and political-capital overrun include a stable
 capture wrappers to classify retry causes without parsing human-readable error
 text. Do not treat the presence of structured retry metadata as balance,
 calibration, or runtime-tuning evidence by itself.
+
+As of `v0.10.19`, the shared Python MCP wrapper preserves those additive fields
+inside captured `validation_failures` and `live_validation_retries` records
+while keeping the plain `error` string for compatibility. Diagnostics prefer
+structured cash-retry metadata when present and fall back to legacy string-only
+artifacts when older evidence files do not include `code` or `resource_limit`.

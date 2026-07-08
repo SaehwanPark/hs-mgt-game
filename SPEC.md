@@ -128,6 +128,52 @@ reconstructing it from the diff.
 | Live Difficulty Evidence Synthesis | v0.10.16 | Synthesize v0.10.12-v0.10.15 live difficulty evidence and select cash-pressure retry visibility as the next bounded issue before runtime tuning | 287 | `8926f71296f39efc` (competitive) |
 | Live Retry Cash-Pressure Diagnostics | v0.10.17 | Add live retry signal reporting to diagnostics for optional live-capture retry metadata, separating cash-overrun retries from final replay validation failures | 287 | `8926f71296f39efc` (competitive) |
 | MCP Structured Validation Errors | v0.10.18 | Add additive structured MCP competitive validation error fields for resource-limit and retry classification without changing runtime mechanics | 290 | `8926f71296f39efc` (competitive) |
+| Live-Capture Structured Retry Metadata | v0.10.19 | Preserve additive MCP structured retry fields in Python live-capture artifacts and prefer them in diagnostics without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live-Capture Structured Retry Metadata
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.19
+
+  Summary:
+  Updated the Python live-capture wrapper and diagnostics to preserve additive
+  MCP structured retry metadata in artifacts so cash-overrun classification no
+  longer depends on parsing human-readable error prose when structured fields
+  are available.
+
+  Done:
+  - Added wrapper-side normalization of MCP structured tool errors into
+    additive `code`, `resource_limit`, and `hint` fields while preserving the
+    existing `error` string.
+  - Added focused Python tests for structured-error normalization and
+    structured-versus-legacy cash-retry classification.
+  - Updated diagnostics to prefer structured retry metadata with fallback to
+    legacy string-only artifact entries.
+  - Refreshed the `v0.10.15` live difficulty-gate exemplar retry metadata and
+    regenerated its diagnostic report.
+  - Added `docs/playtest-findings-v0.10.19.md` and updated the MCP playtesting
+    guide.
+  - Bumped package metadata to `0.10.19`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, Rust MCP DTO, command
+    grammar, scenario schema, replay artifact, state hash, action-cost, or
+    ruleset change.
+  - No broad historical artifact rewrite, analytics platform expansion, CI
+    workflow change, or diagnostic table redesign.
+  - No access-pledge cooldown, command-cost tuning, action-availability change,
+    human-learning claim, empirical calibration, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m unittest discover -s tests -p 'test_playtest_wrapper*.py'`
+  - `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+  - `python3 _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: MCP Structured Validation Errors
