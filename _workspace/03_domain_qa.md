@@ -1,4 +1,4 @@
-# Domain QA - Independent Reviewer-Agent Live Capture
+# Domain QA - Live LLM Difficulty Gate
 
 ## Status
 
@@ -8,12 +8,11 @@ pass
 
 - `scripts/play_game.py`
 - `scripts/diagnose_runs.py`
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
-- `docs/playtest-findings-v0.10.14.md`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+- `docs/playtest-findings-v0.10.15.md`
 - `_workspace/00_input/request-summary.md`
-- `_workspace/01_evidence_map.md`
 - Canonical docs and harness team spec
 
 ## Findings
@@ -21,19 +20,19 @@ pass
 - Scope fit: The slice stays in Phase 7 evidence/diagnostics and does not
   change runtime mechanics, command grammar, transition logic, stochastic
   inputs, scenario schemas, MCP DTOs, state hashes, or balance values.
-- Evidence labeling: Findings and generated diagnostics consistently label the
-  artifact as simulated-agent evidence and avoid human-learning, empirical
-  calibration, classroom-effectiveness, and policy-validity claims.
-- Observation boundary: The diagnostic reads post-run captured observations,
-  commands, transition summaries, and debriefs. It does not expose hidden state
-  during active play.
-- Determinism: The source artifact remains fixed by campaign, seeds,
-  difficulties, and deterministic observation-conditioned reviewer policies.
-- Matrix result: All 18 sessions completed 24 months with zero validation
-  failures.
-- Difficulty signal: Normal and Hard endpoint metrics are identical for each
-  profile, so the artifact should not be interpreted as difficulty-balance
-  evidence.
+- Evidence labeling: Findings consistently label the artifact as
+  simulated-agent live-decision evidence and avoid human-learning, empirical
+  calibration, classroom-effectiveness, policy-validity, and balance claims.
+- Observation boundary: Live decisions used actor-visible MCP observations and
+  legal command hints. The replay artifact records observations, commands,
+  transition summaries, final observations, and debriefs without exposing hidden
+  active-play state.
+- Determinism: The committed artifact is fixed by campaign, seed, difficulty,
+  accepted commands, and ruleset version.
+- Matrix result: All six replayed sessions completed 24 months with zero final
+  validation failures.
+- Retry signal: Access Operator runs preserve live retry metadata, including
+  cash-overrun failures that are relevant to difficulty and guidance review.
 
 ## Required Fixes
 
@@ -41,21 +40,23 @@ None.
 
 ## Residual Risks
 
-- The final metric parser depends on the current competitive debrief wording.
-- Three seeds, one campaign, and two difficulty labels cannot support balance
+- One seed, one campaign, and three profiles cannot support balance
   conclusions.
-- The reviewer policies are operator-authored heuristics and are not human or
-  live LLM play evidence.
+- The accepted command streams are simulated-agent evidence, not human play.
+- The diagnostic final-metric parser depends on current competitive debrief
+  wording.
+- One delegated Competitive Analyst Normal run did not complete; the artifact
+  records a replacement local live decision stream from the same MCP observation
+  and legal-command surface.
 
 ## Verification Evidence
 
 - `python3 -m py_compile scripts/play_game.py`
-- `python3 -m py_compile scripts/run_automated_playtests.py`
 - `python3 -m py_compile scripts/diagnose_runs.py`
-- `python3 -m py_compile _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
-- `python3 _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json --output _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
-- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
+- `python3 -m py_compile _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+- `python3 _workspace/experiments/v0.10.15-live-llm-difficulty-gate/run_sessions.py`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
