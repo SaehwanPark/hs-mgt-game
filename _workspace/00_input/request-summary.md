@@ -1,34 +1,33 @@
-# Request Summary - Access Follow-Through Debrief Note
+# Request Summary - Access Debrief Validation
 
 ## Scope
 
 Implement the approved preferred-workflow continuation slice for the Health
-Policy Strategy Game: add a concise competitive debrief explanation for
-access-heavy runs that separates public access pledges from durable operational
-follow-through under low final cash.
+Policy Strategy Game: validate the `v0.10.23` competitive access
+follow-through debrief note through bounded MCP trigger/control runs.
 
 ## Phase
 
-Phase 7 explanatory debrief wording. This is a Rust debrief and project-state
-slice, not runtime mechanics, balance, command-surface, or educational
-effectiveness validation.
+Phase 7 debrief-surface validation. This is an evidence, documentation, and
+project-state slice, not runtime mechanics, balance, command-surface, scenario,
+or educational-effectiveness validation.
 
 ## Sources
 
-- User request to implement the approved v0.10.23 plan.
+- User request to implement the approved `v0.10.24` plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.22.md`
+- `docs/playtest-findings-v0.10.23.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `src/debrief/report.rs`
-- `src/debrief/report_tests.rs`
-- `docs/playtest-findings-v0.10.23.md`
+- `_workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`
+- `_workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+- `docs/playtest-findings-v0.10.24.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -39,10 +38,10 @@ effectiveness validation.
 
 ## Validation Target
 
-The competitive debrief adds an explanatory access follow-through note only
-when committed history shows at least two human access pledges, final human cash
-below `20`, and fewer durable follow-through actions than pledges. Focused tests
-cover the trigger and non-trigger cases.
+The MCP end-session debrief includes `Access follow-through note:` for
+bounded low-cash runs with repeated access pledges and fewer durable
+follow-through actions than pledges, and omits the note from nearby control
+runs.
 
 ## Non-Goals
 
@@ -54,4 +53,4 @@ cover the trigger and non-trigger cases.
 - No access-pledge cooldown, command-cost tuning, action-availability change,
   human-learning claim, empirical calibration, policy-validity claim, or
   balance-tuning claim.
-- No new live-capture runs.
+- No organic live-capture runs or external human recruitment gate.

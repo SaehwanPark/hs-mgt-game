@@ -133,6 +133,46 @@ reconstructing it from the diff.
 | Live Evidence Synthesis | v0.10.21 | Synthesize live-capture, difficulty, and retry-visibility evidence and route the next bounded gate toward access-heavy player understanding | 294 | `8926f71296f39efc` (competitive) |
 | Access-Heavy Comprehension Evidence Review | v0.10.22 | Review existing live-capture evidence for access-heavy player understanding and route the next bounded follow-up toward explanatory debrief wording | 294 | `8926f71296f39efc` (competitive) |
 | Access Follow-Through Debrief Note | v0.10.23 | Add explanatory competitive debrief wording for low-cash access-heavy runs where public pledges outnumber durable operational follow-through | 297 | `8926f71296f39efc` (competitive) |
+| Access Debrief Validation | v0.10.24 | Validate the access follow-through debrief note through bounded MCP trigger/control runs without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access Debrief Validation
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.24
+
+  Summary:
+  Validated that the `v0.10.23` access follow-through note appears through the
+  MCP end-session debrief surface for bounded trigger runs and stays absent in
+  nearby control runs.
+
+  Done:
+  - Added `_workspace/experiments/v0.10.24-access-debrief-validation/` with a
+    deterministic MCP trigger/control runner and generated `results.json`.
+  - Covered Normal and Hard difficulty runs at seed `42`, including
+    under-followed repeated access pledges, a single-pledge low-cash control,
+    and a repeated-pledge followed-through control.
+  - Documented the validation results and evidence limits in
+    `docs/playtest-findings-v0.10.24.md`.
+  - Updated the MCP playtesting guide and bumped package metadata to `0.10.24`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, or diagnostic parser change.
+  - No access-pledge effect, cooldown, command-cost, action-availability,
+    difficulty, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    or new organic live-capture run.
+
+  Verification:
+  - `python3 _workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.24-diagnostics.md`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Access Follow-Through Debrief Note
