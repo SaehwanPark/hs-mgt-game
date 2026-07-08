@@ -129,6 +129,45 @@ reconstructing it from the diff.
 | Live Retry Cash-Pressure Diagnostics | v0.10.17 | Add live retry signal reporting to diagnostics for optional live-capture retry metadata, separating cash-overrun retries from final replay validation failures | 287 | `8926f71296f39efc` (competitive) |
 | MCP Structured Validation Errors | v0.10.18 | Add additive structured MCP competitive validation error fields for resource-limit and retry classification without changing runtime mechanics | 290 | `8926f71296f39efc` (competitive) |
 | Live-Capture Structured Retry Metadata | v0.10.19 | Preserve additive MCP structured retry fields in Python live-capture artifacts and prefer them in diagnostics without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
+| Live Retry Visibility Checkpoint | v0.10.20 | Close the current live retry visibility gate and defer runtime tuning until a later evidence slice identifies a concrete mechanic issue | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live Retry Visibility Checkpoint
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.20
+
+  Summary:
+  Recorded the Phase 7 checkpoint that the current live retry visibility gate is
+  complete for live-capture classification: structured MCP validation fields are
+  emitted, preserved by the Python wrapper, and preferred by diagnostics with
+  legacy fallback.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.20.md` summarizing the v0.10.17-v0.10.19
+    retry visibility path and its limits.
+  - Updated the MCP playtesting guide with the v0.10.20 routing note.
+  - Kept runtime tuning, command-cost changes, access-pledge cooldowns, and
+    difficulty adjustments deferred until a later evidence slice names a
+    concrete mechanic issue.
+  - Bumped package metadata to `0.10.20`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, Rust MCP DTO, Python
+    wrapper logic, diagnostic parser logic, command grammar, scenario schema,
+    replay artifact, state hash, action-cost, or ruleset change.
+  - No broad historical artifact rewrite, analytics platform expansion, CI
+    workflow change, or diagnostic table redesign.
+  - No human-learning claim, empirical calibration, policy-validity claim,
+    access-pledge cooldown, command-cost tuning, or balance-tuning claim.
+
+  Verification:
+  - `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.20-diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Live-Capture Structured Retry Metadata
