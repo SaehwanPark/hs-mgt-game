@@ -1,38 +1,34 @@
-# Request Summary - Access-Heavy Comprehension Evidence Review
+# Request Summary - Access Follow-Through Debrief Note
 
 ## Scope
 
-Implement the next preferred-workflow development continuation slice for the
-Health Policy Strategy Game: review existing Phase 7 live-capture evidence for
-whether access-heavy players can distinguish public access pledges from durable
-operational follow-through under cash pressure, then route the next bounded
-follow-up.
+Implement the approved preferred-workflow continuation slice for the Health
+Policy Strategy Game: add a concise competitive debrief explanation for
+access-heavy runs that separates public access pledges from durable operational
+follow-through under low final cash.
 
 ## Phase
 
-Phase 7 simulated-agent evidence review. This is a documentation and
-project-state slice, not runtime mechanics, balance, command-surface, or
-educational effectiveness validation.
+Phase 7 explanatory debrief wording. This is a Rust debrief and project-state
+slice, not runtime mechanics, balance, command-surface, or educational
+effectiveness validation.
 
 ## Sources
 
-- User request to implement the approved v0.10.22 continuation plan.
+- User request to implement the approved v0.10.23 plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.15.md`
-- `docs/playtest-findings-v0.10.16.md`
-- `docs/playtest-findings-v0.10.20.md`
-- `docs/playtest-findings-v0.10.21.md`
-- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
-- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+- `docs/playtest-findings-v0.10.22.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.22.md`
+- `src/debrief/report.rs`
+- `src/debrief/report_tests.rs`
+- `docs/playtest-findings-v0.10.23.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -43,11 +39,10 @@ educational effectiveness validation.
 
 ## Validation Target
 
-The review states whether existing artifact, diagnostic, and debrief surfaces
-are sufficient for access-heavy comprehension review, then routes the next
-bounded follow-up toward explanatory debrief wording if supported. Runtime
-tuning remains deferred until a later evidence slice identifies a concrete
-mechanic issue.
+The competitive debrief adds an explanatory access follow-through note only
+when committed history shows at least two human access pledges, final human cash
+below `20`, and fewer durable follow-through actions than pledges. Focused tests
+cover the trigger and non-trigger cases.
 
 ## Non-Goals
 
@@ -56,9 +51,7 @@ mechanic issue.
   scenario schema, replay artifact, state hash, action-cost, or ruleset change.
 - No MCP transport, auth, durable session persistence, multi-client support, or
   broad tool DTO redesign.
-- No broad historical artifact rewrite, analytics platform expansion, CI
-  workflow change, diagnostic table redesign, or retry metadata expansion.
 - No access-pledge cooldown, command-cost tuning, action-availability change,
   human-learning claim, empirical calibration, policy-validity claim, or
   balance-tuning claim.
-- No new live-capture runs and no player-facing wording change in this slice.
+- No new live-capture runs.

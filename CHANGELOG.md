@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.23] - 2026-07-08
+
+### Added
+- Added an explanatory competitive debrief note for low-cash access-heavy runs
+  where public access pledges outnumber durable operational follow-through.
+- Added `docs/playtest-findings-v0.10.23.md` documenting the Phase 7 debrief
+  wording slice and evidence limits.
+
+### Changed
+- Kept access-pledge effects, action costs, validation rules, difficulty values,
+  replay formats, state hashes, and runtime balance unchanged.
+- Bumped the package version to `0.10.23`.
+
 ## [0.10.22] - 2026-07-08
 
 ### Added

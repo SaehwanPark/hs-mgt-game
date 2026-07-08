@@ -562,6 +562,154 @@ fn competitive_debrief_includes_access_pledge_lesson() {
   assert!(debrief.contains("capacity, staffing, monitoring, or payer follow-through"));
 }
 
+#[test]
+fn competitive_debrief_notes_low_cash_access_pledges_without_follow_through() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 3,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 2,
+    }],
+  );
+  set_final_human_cash(&mut history, human_system_id, 10);
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert!(debrief.contains("Access follow-through note:"));
+  assert!(debrief.contains("2 public access pledge(s), 0 durable follow-through action(s)"));
+  assert!(!debrief.contains("Access follow-through note: Warning:"));
+}
+
+#[test]
+fn competitive_debrief_skips_access_follow_through_note_when_follow_through_matches_pledges() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![
+      crate::model::CompetitiveCommand::Commit {
+        pledge_type: crate::model::PledgeType::Access,
+        level: 3,
+      },
+      crate::model::CompetitiveCommand::Recruit {
+        role: crate::model::RecruitRole::Nurse,
+        headcount: 1,
+      },
+    ],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![
+      crate::model::CompetitiveCommand::Commit {
+        pledge_type: crate::model::PledgeType::Access,
+        level: 2,
+      },
+      crate::model::CompetitiveCommand::Monitor {
+        target: crate::model::MonitorTarget::Northlake,
+        depth: 1,
+      },
+    ],
+  );
+  set_final_human_cash(&mut history, human_system_id, 10);
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert!(!debrief.contains("Access follow-through note:"));
+}
+
+#[test]
+fn competitive_debrief_counts_follow_through_actions_not_months() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 3,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![
+      crate::model::CompetitiveCommand::Commit {
+        pledge_type: crate::model::PledgeType::Access,
+        level: 2,
+      },
+      crate::model::CompetitiveCommand::Recruit {
+        role: crate::model::RecruitRole::Nurse,
+        headcount: 1,
+      },
+      crate::model::CompetitiveCommand::Monitor {
+        target: crate::model::MonitorTarget::Northlake,
+        depth: 1,
+      },
+    ],
+  );
+  set_final_human_cash(&mut history, human_system_id, 10);
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert!(!debrief.contains("Access follow-through note:"));
+}
+
+#[test]
+fn competitive_debrief_skips_access_follow_through_note_when_cash_is_adequate() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    0,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 3,
+    }],
+  );
+  set_human_commands(
+    &mut history,
+    human_system_id,
+    1,
+    vec![crate::model::CompetitiveCommand::Commit {
+      pledge_type: crate::model::PledgeType::Access,
+      level: 2,
+    }],
+  );
+  set_final_human_cash(&mut history, human_system_id, 20);
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert!(!debrief.contains("Access follow-through note:"));
+}
+
 fn set_human_commands(
   history: &mut crate::model::CompetitiveHistory,
   human_system_id: u32,
@@ -575,4 +723,19 @@ fn set_human_commands(
     .position(|batch| batch.system_id == human_system_id)
     .expect("human batch");
   history.transitions[transition_idx].aggregated.batches[pos].commands = commands;
+}
+
+fn set_final_human_cash(
+  history: &mut crate::model::CompetitiveHistory,
+  human_system_id: u32,
+  cash: i32,
+) {
+  let final_transition = history.transitions.last_mut().expect("final transition");
+  let pos = final_transition
+    .next
+    .systems
+    .iter()
+    .position(|system| system.system_id == human_system_id)
+    .expect("human final system");
+  final_transition.next.systems[pos].resources.cash = cash;
 }

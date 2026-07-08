@@ -64,6 +64,10 @@ scripted-agent evidence, not human learning or empirical calibration evidence.
 The optional JSON artifact records final observations, transition summaries,
 debrief lines, validation failures, and metrics for lightweight diagnostics; it
 is not a full replay artifact.
+As of `v0.10.23`, competitive debriefs can include an access follow-through
+note for low-cash access-heavy runs when public pledges outnumber durable
+operational follow-through. Treat that note as explanatory product wording, not
+as a balance change, validation failure, or human-learning result.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
