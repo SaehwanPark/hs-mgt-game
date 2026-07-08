@@ -131,6 +131,48 @@ reconstructing it from the diff.
 | Live-Capture Structured Retry Metadata | v0.10.19 | Preserve additive MCP structured retry fields in Python live-capture artifacts and prefer them in diagnostics without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
 | Live Retry Visibility Checkpoint | v0.10.20 | Close the current live retry visibility gate and defer runtime tuning until a later evidence slice identifies a concrete mechanic issue | 294 | `8926f71296f39efc` (competitive) |
 | Live Evidence Synthesis | v0.10.21 | Synthesize live-capture, difficulty, and retry-visibility evidence and route the next bounded gate toward access-heavy player understanding | 294 | `8926f71296f39efc` (competitive) |
+| Access-Heavy Comprehension Evidence Review | v0.10.22 | Review existing live-capture evidence for access-heavy player understanding and route the next bounded follow-up toward explanatory debrief wording | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access-Heavy Comprehension Evidence Review
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.22
+
+  Summary:
+  Reviewed the existing `v0.10.15` live-capture artifact and diagnostic report
+  for whether access-heavy players can distinguish public access pledges from
+  durable operational follow-through under cash pressure. The review routes the
+  next bounded follow-up toward explanatory competitive debrief wording, not
+  runtime tuning.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.22.md` comparing the Live Access
+    Operator Normal and Hard runs, access pledge counts, live retry counts,
+    cash-overrun retries, final tradeoff metrics, and debrief visibility.
+  - Updated the MCP playtesting guide with the v0.10.22 routing note.
+  - Kept runtime tuning, access-pledge cooldowns, command-cost changes,
+    difficulty adjustments, and player-facing wording changes deferred.
+  - Bumped package metadata to `0.10.22`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, or diagnostic parser change.
+  - No new live-capture runs, analytics platform, optimizer, LLM runner, CI
+    workflow, release system, or broad documentation taxonomy.
+  - No guidance wording, debrief runtime wording, command-surface messaging,
+    access-pledge cooldown, command-cost tuning, action-availability change,
+    difficulty adjustment, human-learning claim, empirical calibration,
+    policy-validity claim, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.22-diagnostics.md`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Live Evidence Synthesis

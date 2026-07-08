@@ -1,40 +1,38 @@
-# Request Summary - Live Evidence Synthesis
+# Request Summary - Access-Heavy Comprehension Evidence Review
 
 ## Scope
 
 Implement the next preferred-workflow development continuation slice for the
-Health Policy Strategy Game: synthesize the recent Phase 7 live-capture,
-difficulty, and retry-visibility evidence path from `v0.10.12` through
-`v0.10.20`, then route the next bounded evidence gate.
+Health Policy Strategy Game: review existing Phase 7 live-capture evidence for
+whether access-heavy players can distinguish public access pledges from durable
+operational follow-through under cash pressure, then route the next bounded
+follow-up.
 
 ## Phase
 
-Phase 7 simulated-agent evidence routing. This is a documentation and
-project-state slice, not runtime mechanics, balance, or educational
-effectiveness validation.
+Phase 7 simulated-agent evidence review. This is a documentation and
+project-state slice, not runtime mechanics, balance, command-surface, or
+educational effectiveness validation.
 
 ## Sources
 
-- User request to implement the approved continuation plan.
+- User request to implement the approved v0.10.22 continuation plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.12.md`
-- `docs/playtest-findings-v0.10.13.md`
-- `docs/playtest-findings-v0.10.14.md`
 - `docs/playtest-findings-v0.10.15.md`
 - `docs/playtest-findings-v0.10.16.md`
-- `docs/playtest-findings-v0.10.17.md`
-- `docs/playtest-findings-v0.10.18.md`
-- `docs/playtest-findings-v0.10.19.md`
 - `docs/playtest-findings-v0.10.20.md`
+- `docs/playtest-findings-v0.10.21.md`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.21.md`
+- `docs/playtest-findings-v0.10.22.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -45,10 +43,9 @@ effectiveness validation.
 
 ## Validation Target
 
-The synthesis states that current live-capture and retry-visibility tooling is
-sufficient for bounded Phase 7 simulated-agent evidence gates, and routes the
-next bounded question toward whether access-heavy players understand public
-pledges versus durable operational follow-through under cash pressure. Runtime
+The review states whether existing artifact, diagnostic, and debrief surfaces
+are sufficient for access-heavy comprehension review, then routes the next
+bounded follow-up toward explanatory debrief wording if supported. Runtime
 tuning remains deferred until a later evidence slice identifies a concrete
 mechanic issue.
 
@@ -64,3 +61,4 @@ mechanic issue.
 - No access-pledge cooldown, command-cost tuning, action-availability change,
   human-learning claim, empirical calibration, policy-validity claim, or
   balance-tuning claim.
+- No new live-capture runs and no player-facing wording change in this slice.

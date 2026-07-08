@@ -264,7 +264,7 @@ dependencies = [
 
 [[package]]
 name = "hs-mgt-game"
-version = "0.10.21"
+version = "0.10.22"
 dependencies = [
  "rmcp",
  "rustyline",
