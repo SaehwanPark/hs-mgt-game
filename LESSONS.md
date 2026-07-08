@@ -3,6 +3,23 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Do Not Read Difficulty Effects From Non-Adaptive Policies
+
+- Context: Adding the v0.10.14 independent reviewer-agent live-capture matrix
+  after the v0.10.13 static-vs-adaptive comparison.
+- Symptom: A Normal/Hard matrix can look like it should explain difficulty
+  balance simply because both difficulty labels are present.
+- Cause: If the submitted player policy does not branch on difficulty and the
+  observed endpoint metrics are identical, the artifact mainly tests policy
+  completion and capture workflow, not difficulty pressure.
+- Resolution: Label the reviewer-policy artifact as simulated-agent evidence and
+  explicitly state that identical Normal/Hard endpoints do not isolate
+  difficulty balance.
+- Prevention: Future difficulty evidence gates should either use policies that
+  intentionally react to difficulty-visible pressure, live month-by-month LLM or
+  human decisions, or a separate analysis that explains why the difficulty
+  setting is expected to change outcomes.
+
 ## Encode Evidence Matrix Coordinates in Run Metadata Before Expanding Diagnostics
 
 - Context: Adding the v0.10.13 static-vs-adaptive live-capture comparison after

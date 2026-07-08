@@ -1,4 +1,4 @@
-# Domain QA - Static-vs-Adaptive Live Capture
+# Domain QA - Independent Reviewer-Agent Live Capture
 
 ## Status
 
@@ -6,12 +6,12 @@ pass
 
 ## Reviewed Inputs
 
+- `scripts/play_game.py`
 - `scripts/diagnose_runs.py`
-- `scripts/run_automated_playtests.py`
-- `_workspace/experiments/v0.10.13-live-static-adaptive-capture/run_sessions.py`
-- `_workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
-- `_workspace/experiments/v0.10.13-live-static-adaptive-capture/diagnostics.md`
-- `docs/playtest-findings-v0.10.13.md`
+- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
+- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
+- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
+- `docs/playtest-findings-v0.10.14.md`
 - `_workspace/00_input/request-summary.md`
 - `_workspace/01_evidence_map.md`
 - Canonical docs and harness team spec
@@ -28,12 +28,12 @@ pass
   commands, transition summaries, and debriefs. It does not expose hidden state
   during active play.
 - Determinism: The source artifact remains fixed by campaign, seeds,
-  difficulties, policy variants, and deterministic policies.
-- Matrix result: All 48 sessions completed 24 months with zero validation
+  difficulties, and deterministic observation-conditioned reviewer policies.
+- Matrix result: All 18 sessions completed 24 months with zero validation
   failures.
-- Policy-variant signal: Normal static and adaptive runs are identical, while
-  Hard adaptive runs increase monitoring and shift endpoint tradeoffs for
-  Capacity Growth and Balanced Strategy.
+- Difficulty signal: Normal and Hard endpoint metrics are identical for each
+  profile, so the artifact should not be interpreted as difficulty-balance
+  evidence.
 
 ## Required Fixes
 
@@ -44,17 +44,18 @@ None.
 - The final metric parser depends on the current competitive debrief wording.
 - Three seeds, one campaign, and two difficulty labels cannot support balance
   conclusions.
-- Static/adaptive differences are policy-mediated by the existing adaptive
-  wrapper and should not be interpreted as isolated balance evidence.
+- The reviewer policies are operator-authored heuristics and are not human or
+  live LLM play evidence.
 
 ## Verification Evidence
 
 - `python3 -m py_compile scripts/play_game.py`
 - `python3 -m py_compile scripts/run_automated_playtests.py`
-- `python3 -m py_compile _workspace/experiments/v0.10.13-live-static-adaptive-capture/run_sessions.py`
-- `python3 _workspace/experiments/v0.10.13-live-static-adaptive-capture/run_sessions.py`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json --output _workspace/experiments/v0.10.13-live-static-adaptive-capture/diagnostics.md`
-- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
+- `python3 -m py_compile scripts/diagnose_runs.py`
+- `python3 -m py_compile _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
+- `python3 _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json --output _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
+- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test`
