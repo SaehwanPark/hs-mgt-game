@@ -52,11 +52,11 @@ ruleset values, balance, or retry metadata.
 - Medium findings: none.
 - Low findings: none.
 - Follow-up review after Critical/High fixes: not required.
-- PR review-loop disposition: pending comment on PR after this handoff update is
-  pushed.
-- CI/comment triage: CI was in progress when the three-pass review completed;
-  no external review comments were present.
-- Merge-ready: Pending final CI check.
+- PR review-loop disposition posted at
+  https://github.com/SaehwanPark/hs-mgt-game/pull/106#issuecomment-4919163653
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
+- Merge-ready: Yes.
 
 ## Known Limits
 
