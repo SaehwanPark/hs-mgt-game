@@ -1,11 +1,10 @@
-# Final Handoff - Live Difficulty Evidence Synthesis
+# Final Handoff - Live Retry Cash-Pressure Diagnostics
 
 ## Summary
 
-Implemented the `v0.10.16` Phase 7 live difficulty evidence synthesis slice.
-The new findings compare `v0.10.12` through `v0.10.15` and select
-cash-pressure / validation-retry visibility for access-heavy Hard live agents as
-the next bounded issue before runtime tuning.
+Implemented the `v0.10.17` Phase 7 diagnostic visibility slice. The live-capture
+diagnostic now reports optional live validation retry metadata and separates
+cash-overrun retries from final replay validation failures.
 
 This is evidence/reporting-only. It does not change transition logic,
 validation, command grammar, scenario schemas, MCP DTOs, replay hashes, state
@@ -13,18 +12,23 @@ hash logic, or balance values.
 
 ## Changed Files
 
-- `docs/playtest-findings-v0.10.16.md`: synthesis findings, selected next
-  issue, evidence limits, and verification commands.
-- `_workspace/00_input/request-summary.md`, `_workspace/03_domain_qa.md`:
-  harness handoff artifacts.
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.16` record and
+- `scripts/diagnose_runs.py`: live retry table and cash-overrun retry
+  classification for live-capture artifacts.
+- `tests/fixtures/live_capture_batch.json`: fixture retry metadata for focused
+  diagnostic verification.
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`:
+  regenerated with live retry signals.
+- `docs/playtest-findings-v0.10.17.md` and `docs/mcp-playtesting-guide.md`:
+  diagnostic findings and usage note.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.17` record and
   package metadata.
+- `_workspace/00_input/request-summary.md`, `_workspace/03_domain_qa.md`: harness
+  handoff artifacts.
 
 ## Verification
 
-- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
+- `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
 - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
@@ -32,22 +36,20 @@ hash logic, or balance values.
 
 ## PR Handoff
 
-- Branch: `feat/live-difficulty-evidence-synthesis`
+- Branch: `feat/live-retry-cash-pressure-diagnostics`
 - Base: `main`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/97
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/98
 
 ## Review Summary
 
-- Pass 1: Low handoff-bookkeeping finding: the handoff still said PR pending
-  after PR #97 was opened. Fixed.
-- Pass 2: No artifact/doc consistency findings; session counts, seed coverage,
-  difficulty labels, validation/retry claims, and evidence limits matched the
-  cited findings.
-- Pass 3: No additional workflow, versioning, or scope findings.
+- Pass 1: No script, fixture, generated diagnostic, or findings-note issues.
+- Pass 2: Low handoff-bookkeeping finding: the handoff still said PR pending
+  after PR #98 was opened. Fixed.
+- Pass 3: No additional workflow, versioning, diagnostic, or scope findings.
 - Critical/High findings: none.
 - Medium/Low disposition: one Low documentation finding fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: GitHub Actions `check` passed on PR #97; no PR comments
+- CI/comment triage: GitHub Actions `check` passed on PR #98; no PR comments
   or reviews were present during triage.
 - Merge-ready: yes.
 
@@ -55,8 +57,6 @@ hash logic, or balance values.
 
 - The inputs are simulated-agent/operator-authored evidence, not human play,
   classroom learning, or empirical calibration.
-- The matrices use one campaign and limited seeds/profiles, so they cannot
-  support balance tuning by themselves.
+- Retry metadata is optional and older artifacts may not contain it.
+- Cash-overrun retry classification currently uses validation error text.
 - Final metric extraction depends on current debrief text format.
-- The selected follow-up issue should start with guidance, debrief, or
-  diagnostic visibility rather than runtime formula changes.

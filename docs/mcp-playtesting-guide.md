@@ -320,3 +320,9 @@ Use `docs/playtest-findings-v0.10.15.md` as simulated-agent live-decision
 evidence. It can inform follow-up guidance, debrief, and validation questions;
 do not treat it as balance proof, empirical calibration, human-learning
 evidence, or justification for runtime tuning by itself.
+
+As of `v0.10.17`, live-capture diagnostics also report optional
+`live_validation_retries` metadata when an artifact includes it. Use the
+`Live Retry Signals` table to distinguish final replay validation failures from
+cash-overrun or other rejected live decision attempts before the accepted
+command stream.
