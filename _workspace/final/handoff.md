@@ -54,8 +54,11 @@ successfully.
 - Critical/High findings: none.
 - Medium/Low disposition: fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: pending after review follow-up commit.
-- Merge-ready: Pending CI/comment triage.
+- PR review-loop disposition posted at
+  https://github.com/SaehwanPark/hs-mgt-game/pull/102#issuecomment-4916027870
+- CI/comment triage: PR had no external comments or reviews when checked; CI
+  `check` passed.
+- Merge-ready: Yes.
 
 ## Known Limits
 
