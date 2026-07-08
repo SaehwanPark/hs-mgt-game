@@ -55,8 +55,8 @@ rerun passed the full suite and this slice did not touch persistence code.
 - Medium/Low disposition: fixed.
 - Follow-up review after Critical/High fixes: not required.
 - CI/comment triage: PR had no comments or reviews when checked; CI `check`
-  was queued/pending.
-- Merge-ready: Pending CI/comment triage.
+  passed.
+- Merge-ready: Yes.
 
 ## Known Limits
 
