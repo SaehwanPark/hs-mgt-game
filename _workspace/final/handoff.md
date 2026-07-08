@@ -55,9 +55,9 @@ hash logic, or balance values.
 - Critical/High findings: none.
 - Medium/Low disposition: one Low documentation finding fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: GitHub Actions `check` was in progress when this handoff
-  was updated; no PR comments or reviews were present during triage.
-- Merge-ready: pending CI completion.
+- CI/comment triage: GitHub Actions `check` passed on PR #96; no PR comments
+  or reviews were present during triage.
+- Merge-ready: yes
 
 ## Known Limits
 
