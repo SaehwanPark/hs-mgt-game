@@ -125,6 +125,46 @@ reconstructing it from the diff.
 | Static-vs-Adaptive Live Capture | v0.10.13 | Compare static and adaptive deterministic policies in one live MCP capture artifact without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Independent Reviewer-Agent Live Capture | v0.10.14 | Run observation-conditioned reviewer policies through live MCP capture without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live LLM Difficulty Gate | v0.10.15 | Capture live month-by-month sub-agent decisions for Normal/Hard difficulty comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+| Live Difficulty Evidence Synthesis | v0.10.16 | Synthesize v0.10.12-v0.10.15 live difficulty evidence and select cash-pressure retry visibility as the next bounded issue before runtime tuning | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live Difficulty Evidence Synthesis
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.16
+
+  Summary:
+  Compared recent Phase 7 live-capture difficulty evidence from `v0.10.12`
+  through `v0.10.15` and selected cash-pressure / validation-retry visibility
+  for access-heavy Hard live agents as the next bounded follow-up issue before
+  any runtime tuning.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.16.md`.
+  - Synthesized session counts, seeds, difficulty tiers, profile families,
+    validation failures/retries, access-heavy behavior, and evidence limits
+    across `v0.10.12` through `v0.10.15`.
+  - Preserved the current evidence gate: guidance, debrief, or diagnostic
+    visibility should precede runtime tuning.
+  - Bumped package metadata to `0.10.16`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No access-pledge cooldown, command-cost tuning, action-availability change,
+    or broad analytics platform.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Live LLM Difficulty Gate
