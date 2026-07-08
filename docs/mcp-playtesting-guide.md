@@ -326,3 +326,11 @@ As of `v0.10.17`, live-capture diagnostics also report optional
 `Live Retry Signals` table to distinguish final replay validation failures from
 cash-overrun or other rejected live decision attempts before the accepted
 command stream.
+
+As of `v0.10.18`, competitive MCP validation errors may include additive
+structured fields alongside the existing `error` string. Resource-limit failures
+such as cash overrun, AP overrun, and political-capital overrun include a stable
+`code`, a `resource_limit` object, and a short `hint`. Use these fields in live
+capture wrappers to classify retry causes without parsing human-readable error
+text. Do not treat the presence of structured retry metadata as balance,
+calibration, or runtime-tuning evidence by itself.

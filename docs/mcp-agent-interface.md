@@ -66,6 +66,27 @@ invest domain=beds amount=20; commit pledge_type=access level=2
 Invalid commands return a tool-level structured error and do not advance the
 session.
 
+Competitive validation errors preserve the plain `error` string and may include
+additive structured fields:
+
+```json
+{
+  "error": "cash required 65 exceeds available 60",
+  "code": "insufficient_cash",
+  "resource_limit": {
+    "resource": "cash",
+    "required": 65,
+    "available": 60
+  },
+  "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
+}
+```
+
+The structured fields are present only when the server can classify the
+competitive validation failure. Parser, session, scenario, and other generic
+errors may return only `error`. Clients should treat `code`, `resource_limit`,
+and `hint` as optional.
+
 ## Boundary
 
 The MCP layer is an interface adapter. It reuses the existing scenario

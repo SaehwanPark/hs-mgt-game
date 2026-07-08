@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.18] - 2026-07-08
+
+### Added
+- Added additive structured MCP validation error fields for competitive
+  validation failures, including stable error codes and resource-limit payloads
+  for cash, action-point, and political-capital overspends.
+- Added focused MCP session tests for structured cash-overrun errors,
+  code-only validation errors, and plain parser errors.
+- Added `docs/playtest-findings-v0.10.18.md` documenting the structured-error
+  follow-up to the live retry cash-pressure diagnostics.
+
+### Changed
+- Documented the additive MCP error payload shape in
+  `docs/mcp-agent-interface.md`.
+- Bumped the package version to `0.10.18`.
+
 ## [0.10.17] - 2026-07-08
 
 ### Added
