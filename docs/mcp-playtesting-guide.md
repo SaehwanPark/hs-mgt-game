@@ -354,3 +354,9 @@ clearly distinguish public access pledges from durable operational follow-throug
 under cash pressure? Use existing live-capture artifacts and diagnostics first.
 Do not expand retry metadata again or tune runtime mechanics unless a later
 evidence slice identifies a concrete mechanic problem.
+
+As of `v0.10.22`, the access-heavy comprehension review uses the existing
+`v0.10.15` live-capture artifact and diagnostic report to compare the Live
+Access Operator's Normal and Hard runs. Treat the next bounded follow-up as
+explanatory competitive debrief wording for access-heavy runs, not runtime
+tuning, command-cost changes, access-pledge cooldowns, or difficulty changes.
