@@ -54,8 +54,11 @@ ruleset values, balance, or retry metadata.
 - Medium findings: none.
 - Low findings: fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: pending.
-- Merge-ready: pending CI.
+- PR review-loop disposition posted at
+  https://github.com/SaehwanPark/hs-mgt-game/pull/105#issuecomment-4919084849
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
+- Merge-ready: Yes.
 
 ## Known Limits
 
