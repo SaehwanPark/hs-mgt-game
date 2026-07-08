@@ -132,6 +132,43 @@ reconstructing it from the diff.
 | Live Retry Visibility Checkpoint | v0.10.20 | Close the current live retry visibility gate and defer runtime tuning until a later evidence slice identifies a concrete mechanic issue | 294 | `8926f71296f39efc` (competitive) |
 | Live Evidence Synthesis | v0.10.21 | Synthesize live-capture, difficulty, and retry-visibility evidence and route the next bounded gate toward access-heavy player understanding | 294 | `8926f71296f39efc` (competitive) |
 | Access-Heavy Comprehension Evidence Review | v0.10.22 | Review existing live-capture evidence for access-heavy player understanding and route the next bounded follow-up toward explanatory debrief wording | 294 | `8926f71296f39efc` (competitive) |
+| Access Follow-Through Debrief Note | v0.10.23 | Add explanatory competitive debrief wording for low-cash access-heavy runs where public pledges outnumber durable operational follow-through | 297 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access Follow-Through Debrief Note
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.23
+
+  Summary:
+  Added a student-facing competitive debrief note for access-heavy low-cash
+  runs. The note separates public access pledges from durable operational
+  follow-through and remains explanatory rather than punitive.
+
+  Done:
+  - Added an `Access follow-through note:` to `competitive_debrief` when
+    committed history shows at least two access pledges, final human cash below
+    `20`, and fewer durable follow-through actions than pledges.
+  - Counted durable follow-through from committed player recruitment,
+    investment, monitoring, payer negotiation, and project commands.
+  - Added focused debrief tests for the trigger and non-trigger cases.
+  - Documented the slice and bumped package metadata to `0.10.23`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, or diagnostic parser change.
+  - No access-pledge effect, cooldown, command-cost, action-availability,
+    difficulty, guidance wording, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    or new live-capture run.
+
+  Verification:
+  - `cargo test debrief::report_tests -- --test-threads=1`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Access-Heavy Comprehension Evidence Review

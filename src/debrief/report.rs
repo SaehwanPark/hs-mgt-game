@@ -212,6 +212,8 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
   };
   let human_system_id = human_system.system_id;
 
+  lines.extend(access_follow_through_notes(history, human_system_id));
+
   if !history.transitions.is_empty() {
     // Trace transitions
     for (idx, transition) in history.transitions.iter().enumerate() {
@@ -768,6 +770,63 @@ fn human_has_access_follow_through(
         )
       })
     })
+}
+
+fn human_access_follow_through_action_count(
+  transition: &crate::model::CompetitiveTransition,
+  human_system_id: u32,
+) -> usize {
+  transition
+    .aggregated
+    .batch_for_system(human_system_id)
+    .map(|batch| {
+      batch
+        .commands
+        .iter()
+        .filter(|cmd| {
+          matches!(
+            cmd,
+            CompetitiveCommand::Recruit { .. }
+              | CompetitiveCommand::Invest { .. }
+              | CompetitiveCommand::Monitor { .. }
+              | CompetitiveCommand::Negotiate { .. }
+              | CompetitiveCommand::Project { .. }
+          )
+        })
+        .count()
+    })
+    .unwrap_or(0)
+}
+
+fn access_follow_through_notes(history: &CompetitiveHistory, human_system_id: u32) -> Vec<String> {
+  let Some(final_human) = history.final_state().human_system() else {
+    return Vec::new();
+  };
+
+  let access_pledges = history
+    .transitions
+    .iter()
+    .filter(|transition| human_access_pledged(transition, human_system_id))
+    .count();
+
+  if access_pledges < 2 || final_human.resources.cash >= 20 {
+    return Vec::new();
+  }
+
+  let follow_through_actions: usize = history
+    .transitions
+    .iter()
+    .map(|transition| human_access_follow_through_action_count(transition, human_system_id))
+    .sum();
+
+  if follow_through_actions >= access_pledges {
+    return Vec::new();
+  }
+
+  vec![format!(
+    "Access follow-through note: The run included {} public access pledge(s), {} durable follow-through action(s), and ended with {} cash. Public commitments can build legitimacy, but durable access improvement depends on operational follow-through such as capacity investment, staffing, monitoring, or payer posture while preserving enough cash runway.",
+    access_pledges, follow_through_actions, final_human.resources.cash
+  )]
 }
 
 fn format_command_debrief(cmd: &CompetitiveCommand) -> String {
