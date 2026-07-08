@@ -126,6 +126,46 @@ reconstructing it from the diff.
 | Independent Reviewer-Agent Live Capture | v0.10.14 | Run observation-conditioned reviewer policies through live MCP capture without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live LLM Difficulty Gate | v0.10.15 | Capture live month-by-month sub-agent decisions for Normal/Hard difficulty comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live Difficulty Evidence Synthesis | v0.10.16 | Synthesize v0.10.12-v0.10.15 live difficulty evidence and select cash-pressure retry visibility as the next bounded issue before runtime tuning | 287 | `8926f71296f39efc` (competitive) |
+| Live Retry Cash-Pressure Diagnostics | v0.10.17 | Add live retry signal reporting to diagnostics for optional live-capture retry metadata, separating cash-overrun retries from final replay validation failures | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Live Retry Cash-Pressure Diagnostics
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.17
+
+  Summary:
+  Added diagnostic visibility for optional `live_validation_retries` metadata in
+  live-capture artifacts, making cash-overrun retry pressure visible separately
+  from final replay validation failures.
+
+  Done:
+  - Updated `scripts/diagnose_runs.py` to report live retries, cash-overrun
+    retries, other retries, and representative retry details.
+  - Updated `tests/fixtures/live_capture_batch.json` with retry metadata for a
+    compact diagnostic check.
+  - Regenerated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+    with a `Live Retry Signals` table.
+  - Added `docs/playtest-findings-v0.10.17.md` and updated
+    `docs/mcp-playtesting-guide.md`.
+  - Bumped package metadata to `0.10.17`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No access-pledge cooldown, command-cost tuning, action-availability change,
+    general analytics platform, or broad diagnostic framework.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Live Difficulty Evidence Synthesis

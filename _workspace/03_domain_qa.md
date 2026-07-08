@@ -1,4 +1,4 @@
-# Domain QA - Live Difficulty Evidence Synthesis
+# Domain QA - Live Retry Cash-Pressure Diagnostics
 
 ## Status
 
@@ -6,37 +6,32 @@ pass
 
 ## Reviewed Inputs
 
-- `docs/playtest-findings-v0.10.12.md`
-- `docs/playtest-findings-v0.10.13.md`
-- `docs/playtest-findings-v0.10.14.md`
-- `docs/playtest-findings-v0.10.15.md`
 - `docs/playtest-findings-v0.10.16.md`
-- `_workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
-- `_workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
+- `docs/playtest-findings-v0.10.17.md`
 - `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
+- `scripts/diagnose_runs.py`
+- `tests/fixtures/live_capture_batch.json`
 - `_workspace/00_input/request-summary.md`
 - Canonical docs and harness team spec
 
 ## Findings
 
-- Scope fit: The slice stays in Phase 7 evidence/diagnostics and does not
-  change runtime mechanics, command grammar, transition logic, stochastic
-  inputs, scenario schemas, MCP DTOs, state hashes, or balance values.
-- Evidence labeling: The synthesis consistently labels the inputs as
-  simulated-agent or operator-authored evidence and avoids human-learning,
-  empirical calibration, classroom-effectiveness, policy-validity, and balance
-  claims.
-- Observation boundary: The synthesis relies on committed artifacts and
-  documented live-capture boundaries; it does not expose hidden active-play
-  state or request runtime export changes.
-- Determinism: No new runs or stochastic inputs are introduced. Existing
-  artifacts remain fixed by campaign, seed, difficulty, accepted commands, and
-  ruleset version.
-- Matrix result: The synthesis correctly separates broad clean replay matrices
-  from the `v0.10.15` live retry signal.
-- Follow-up fit: Cash-pressure and validation-retry visibility is a bounded
-  guidance/debrief/diagnostic issue and does not require balance tuning first.
+- Scope fit: The slice stays in Phase 7 diagnostics and does not change runtime
+  mechanics, command grammar, transition logic, stochastic inputs, scenario
+  schemas, MCP DTOs, replay formats, state hashes, or balance values.
+- Evidence labeling: The findings consistently label retry counts as
+  simulated-agent/operator-authored decision-process evidence, not balance
+  proof, empirical calibration, human-learning evidence, or policy validity.
+- Observation boundary: The diagnostic reads optional wrapper metadata already
+  present in the artifact and does not request hidden runtime state or MCP DTO
+  expansion.
+- Determinism: No accepted command streams, replay artifacts, state hashes, or
+  simulation inputs are changed. The regenerated diagnostic is derived from the
+  fixed `v0.10.15` artifact.
+- Follow-up fit: The live retry table directly addresses the `v0.10.16`
+  selected issue by separating accepted-stream validity from cash-overrun live
+  retries.
 
 ## Required Fixes
 
@@ -45,17 +40,16 @@ None.
 ## Residual Risks
 
 - The evidence base remains simulated-agent evidence, not human play.
-- The matrices use one campaign and limited seeds/profiles.
+- The retry signal depends on optional wrapper metadata; older artifacts without
+  that field report zero live retries.
+- Cash-overrun retry classification currently uses validation error text.
 - The diagnostic final-metric parser depends on current competitive debrief
   wording.
-- The `v0.10.15` retry signal is useful for routing but not sufficient for
-  runtime tuning.
 
 ## Verification Evidence
 
-- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
-- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
+- `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output _workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
 - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`

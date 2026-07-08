@@ -71,6 +71,32 @@ def parse_final_tradeoff(debrief):
     metrics.update({key: int(value) for key, value in resources.groupdict().items()})
   return metrics
 
+def is_cash_retry(retry):
+  if not isinstance(retry, dict):
+    return False
+  error = str(retry.get("error", "")).lower()
+  return "cash required" in error and "exceeds available" in error
+
+def format_retry_detail(retry):
+  if not isinstance(retry, dict):
+    return str(retry)
+  turn = retry.get("turn")
+  turn_label = f"turn {turn}" if turn is not None else "unknown turn"
+  command = retry.get("command")
+  error = retry.get("error", "unknown error")
+  if command:
+    return f"{turn_label}: {error} [{command}]"
+  return f"{turn_label}: {error}"
+
+def summarize_retry_details(retries, limit=2):
+  if not retries:
+    return "None"
+  details = [format_retry_detail(retry) for retry in retries[:limit]]
+  remaining = len(retries) - len(details)
+  if remaining > 0:
+    details.append(f"+{remaining} more")
+  return "<br>".join(details)
+
 def classify_strategy(hold_count, verb_counts):
   total_commands = hold_count + sum(verb_counts.values())
   if total_commands == 0:
@@ -299,11 +325,18 @@ def analyze_live_capture_batch(file_path, data):
         project_kinds[kind] += 1
 
     metrics = parse_final_tradeoff(run.get("debrief", []))
+    live_retries = run.get("live_validation_retries") or []
+    cash_retries = [retry for retry in live_retries if is_cash_retry(retry)]
     run_stats.append({
       "profile_name": run.get("profile_name", run.get("profile_id", "Unknown")),
       "profile_id": run.get("profile_id", "unknown"),
+      "difficulty": run.get("difficulty", "unknown"),
       "transition_count": run.get("transition_count", len(run.get("state_hashes", []))),
       "validation_failures": len(run.get("validation_failures", [])),
+      "live_retry_count": len(live_retries),
+      "cash_retry_count": len(cash_retries),
+      "non_cash_retry_count": len(live_retries) - len(cash_retries),
+      "retry_details": summarize_retry_details(live_retries),
       "access_pledges": run.get("access_pledge_count", 0),
       "final_hash": run.get("final_hash", "N/A"),
       "holds": holds,
@@ -568,8 +601,21 @@ def print_live_capture_batch_markdown(batch):
     )
   print()
 
+  print("### Live Retry Signals")
+  print("| Profile | Difficulty | Final Validation Failures | Live Retries | Cash-Overrun Retries | Other Retries | Representative Retry Details |")
+  print("| --- | --- | ---: | ---: | ---: | ---: | --- |")
+  for stats in batch["run_stats"]:
+    print(
+      f"| {stats['profile_name']} | {stats['difficulty']} | "
+      f"{stats['validation_failures']} | {stats['live_retry_count']} | "
+      f"{stats['cash_retry_count']} | {stats['non_cash_retry_count']} | "
+      f"{stats['retry_details']} |"
+    )
+  print()
+
   print("### Evidence Limits")
   print("- Live-capture diagnostics use actor-visible observations, submitted commands, transition summaries, and debrief text from the captured MCP wrapper artifact.")
+  print("- Live retry signals come from optional wrapper metadata and describe rejected or retried decision attempts before the accepted command stream; they are separate from final replay validation failures.")
   print("- These diagnostics support gameplay, command-surface, and explanation review; they are not human-learning, empirical-calibration, policy-validity, or balance evidence.")
   print("- Do not use a single seed, difficulty, or scripted persona batch to justify runtime tuning.\n")
 

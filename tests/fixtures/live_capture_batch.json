@@ -9,8 +9,21 @@
     {
       "profile_id": "fixture_access",
       "profile_name": "Fixture Access",
+      "difficulty": "hard",
       "transition_count": 2,
       "access_pledge_count": 1,
+      "live_validation_retries": [
+        {
+          "turn": 1,
+          "command": "recruit role=nurse headcount=3; invest domain=beds amount=10",
+          "error": "cash required 25 exceeds available 10"
+        },
+        {
+          "turn": 2,
+          "command": "project kind=clinic_network budget=12",
+          "error": "project budget 12 must be a multiple of duration 9 months"
+        }
+      ],
       "validation_failures": [],
       "final_hash": "abc123",
       "commands": [
