@@ -167,7 +167,7 @@ reconstructing it from the diff.
   - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
   - `cargo fmt --check`
   - `cargo clippy --all-targets -- -D warnings`
-  - `cargo test`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Live-Capture Structured Retry Metadata

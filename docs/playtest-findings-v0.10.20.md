@@ -74,5 +74,5 @@ python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-diffic
 python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
-cargo test
+cargo test -- --test-threads=1
 ```

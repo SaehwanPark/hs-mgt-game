@@ -40,18 +40,22 @@ rerun passed the full suite and this slice did not touch persistence code.
 
 - Branch: `feat/live-retry-visibility-checkpoint`
 - Base: `main`
-- PR: Pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/101
 
 ## Review Summary
 
-- Pass 1: Pending after PR creation.
-- Pass 2: Pending after PR creation.
-- Pass 3: Pending after PR creation.
-- Critical/High findings: Pending after review.
-- Medium/Low disposition: Pending after review.
-- Follow-up review after Critical/High fixes: Pending if needed.
+- Pass 1: Medium finding in `_workspace/final/handoff.md`: PR and review
+  fields still said pending after PR creation. Fixed in review follow-up.
+- Pass 2: Low finding in `SPEC.md` and
+  `docs/playtest-findings-v0.10.20.md`: verification listed plain `cargo test`
+  even though the passing full-suite command was serial. Fixed in review
+  follow-up.
+- Pass 3: No additional actionable findings.
+- Critical/High findings: none.
+- Medium/Low disposition: fixed.
+- Follow-up review after Critical/High fixes: not required.
 - CI/comment triage: Pending after PR creation.
-- Merge-ready: No, pending verification, PR creation, and review loop.
+- Merge-ready: Pending CI/comment triage.
 
 ## Known Limits
 
