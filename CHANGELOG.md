@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.14] - 2026-07-08
+
+### Added
+- Added a Phase 7 independent reviewer-agent live-capture artifact across three
+  observation-conditioned reviewer policies, seeds `42`, `43`, and `44`, and
+  Normal/Hard competitive difficulty tiers.
+- Generated `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
+  from the reviewer-agent artifact.
+- Recorded `docs/playtest-findings-v0.10.14.md` with reviewer-policy findings
+  and evidence limits.
+
+### Changed
+- Documented the independent reviewer-agent live-capture command in the MCP
+  playtesting guide.
+- Bumped the package version to `0.10.14`.
+
 ## [0.10.13] - 2026-07-07
 
 ### Added

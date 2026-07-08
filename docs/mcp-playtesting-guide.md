@@ -295,3 +295,15 @@ Use `docs/playtest-findings-v0.10.13.md` as simulated-agent evidence for the
 policy-wrapper comparison. Do not treat it as balance proof, empirical
 calibration, human-learning evidence, or justification for runtime tuning by
 itself.
+
+To run independent observation-conditioned reviewer policies through the same
+live-capture path:
+
+```bash
+python3 _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py
+python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json --output _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md
+```
+
+Use `docs/playtest-findings-v0.10.14.md` as simulated-agent reviewer evidence.
+Do not treat it as balance proof, empirical calibration, human-learning
+evidence, or justification for runtime tuning by itself.

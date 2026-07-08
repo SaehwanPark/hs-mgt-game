@@ -123,6 +123,49 @@ reconstructing it from the diff.
 | Live-Capture Matrix Evidence | v0.10.11 | Extend live MCP capture across seeds 42-44 and Normal/Hard difficulty without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live Difficulty-Pressure Capture | v0.10.12 | Reuse automated pressure policies through live MCP capture for Normal/Hard competitive comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Static-vs-Adaptive Live Capture | v0.10.13 | Compare static and adaptive deterministic policies in one live MCP capture artifact without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+| Independent Reviewer-Agent Live Capture | v0.10.14 | Run observation-conditioned reviewer policies through live MCP capture without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Independent Reviewer-Agent Live Capture
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.14
+
+  Summary:
+  Added a bounded Phase 7 live-capture matrix using independent
+  observation-conditioned reviewer policies across seeds `42`, `43`, and `44`,
+  Normal/Hard competitive difficulty tiers, and three reviewer profiles.
+
+  Done:
+  - Added `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`.
+  - Captured 18 observation-by-observation competitive MCP runs with zero
+    validation failures.
+  - Generated `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
+    and `diagnostics.md`.
+  - Added `docs/playtest-findings-v0.10.14.md` and updated the MCP playtesting
+    guide.
+  - Bumped package metadata to `0.10.14`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, or state hash
+    change.
+  - No LLM runner, analytics platform, optimizer, or broad diagnostics
+    framework.
+  - No human-learning, classroom-effectiveness, empirical calibration,
+    policy-validity, or balance-tuning claim.
+
+  Verification:
+  - `python3 -m py_compile scripts/play_game.py`
+  - `python3 -m py_compile scripts/run_automated_playtests.py`
+  - `python3 -m py_compile scripts/diagnose_runs.py`
+  - `python3 -m py_compile _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
+  - `python3 _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/run_sessions.py`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json --output _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
+  - `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json >/dev/null`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Static-vs-Adaptive Live Capture
