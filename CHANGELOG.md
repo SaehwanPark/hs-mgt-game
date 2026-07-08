@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.20] - 2026-07-08
+
+### Added
+- Added `docs/playtest-findings-v0.10.20.md`, a Phase 7 checkpoint closing the
+  current live retry visibility gate after the structured retry metadata slices.
+
+### Changed
+- Documented that structured retry visibility is sufficient for current
+  live-capture classification needs while keeping runtime tuning deferred until
+  a later evidence slice identifies a concrete mechanic issue.
+- Bumped the package version to `0.10.20`.
+
 ## [0.10.19] - 2026-07-08
 
 ### Added

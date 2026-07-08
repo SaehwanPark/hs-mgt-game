@@ -1,6 +1,6 @@
 [package]
 name = "hs-mgt-game"
-version = "0.10.19"
+version = "0.10.20"
 edition = "2024"
 default-run = "hs-mgt-game"
 

@@ -340,3 +340,10 @@ inside captured `validation_failures` and `live_validation_retries` records
 while keeping the plain `error` string for compatibility. Diagnostics prefer
 structured cash-retry metadata when present and fall back to legacy string-only
 artifacts when older evidence files do not include `code` or `resource_limit`.
+
+As of `v0.10.20`, the current retry-visibility gate is closed for live-capture
+classification: the MCP server emits structured resource-limit fields, the
+Python wrapper preserves them, and diagnostics prefer them while retaining
+legacy fallback. Treat this as tooling confidence only. Runtime tuning, command
+cost changes, pledge cooldowns, or difficulty changes still require a separate
+evidence slice naming a concrete mechanic problem beyond retry classification.
