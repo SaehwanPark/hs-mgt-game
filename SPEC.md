@@ -127,6 +127,44 @@ reconstructing it from the diff.
 | Live LLM Difficulty Gate | v0.10.15 | Capture live month-by-month sub-agent decisions for Normal/Hard difficulty comparison without changing runtime mechanics | 287 | `8926f71296f39efc` (competitive) |
 | Live Difficulty Evidence Synthesis | v0.10.16 | Synthesize v0.10.12-v0.10.15 live difficulty evidence and select cash-pressure retry visibility as the next bounded issue before runtime tuning | 287 | `8926f71296f39efc` (competitive) |
 | Live Retry Cash-Pressure Diagnostics | v0.10.17 | Add live retry signal reporting to diagnostics for optional live-capture retry metadata, separating cash-overrun retries from final replay validation failures | 287 | `8926f71296f39efc` (competitive) |
+| MCP Structured Validation Errors | v0.10.18 | Add additive structured MCP competitive validation error fields for resource-limit and retry classification without changing runtime mechanics | 290 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: MCP Structured Validation Errors
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.18
+
+  Summary:
+  Added additive structured MCP error fields for competitive validation failures
+  so live-capture wrappers can classify resource-limit retries, especially
+  cash-overrun attempts, without parsing human-readable text.
+
+  Done:
+  - Extended MCP structured errors with optional `code`, `resource_limit`, and
+    `hint` fields while preserving the existing `error` string.
+  - Mapped competitive validation errors to stable snake_case codes.
+  - Added resource-limit payloads for insufficient cash, AP budget exceeded,
+    and insufficient political capital.
+  - Added focused MCP session tests for cash-overrun structure, code-only
+    validation errors, parser-error plain shape, and non-advancement.
+  - Added `docs/playtest-findings-v0.10.18.md` and updated MCP docs.
+  - Bumped package metadata to `0.10.18`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command grammar,
+    stochastic input, scenario schema, replay artifact, state hash, action-cost,
+    or ruleset change.
+  - No MCP transport, auth, durable session persistence, multi-client support,
+    or broad tool DTO redesign.
+  - No access-pledge cooldown, command-cost tuning, action-availability change,
+    human-learning claim, empirical calibration, or balance-tuning claim.
+
+  Verification:
+  - `cargo test mcp::session::tests::competitive_ --lib`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test`
 
 
 - Feature: Live Retry Cash-Pressure Diagnostics

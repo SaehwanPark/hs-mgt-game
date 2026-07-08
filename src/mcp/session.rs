@@ -97,6 +97,19 @@ pub struct TransitionSummary {
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
 pub struct McpErrorMessage {
   pub error: String,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub code: Option<String>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub resource_limit: Option<ResourceLimitError>,
+  #[serde(skip_serializing_if = "Option::is_none")]
+  pub hint: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct ResourceLimitError {
+  pub resource: String,
+  pub required: i64,
+  pub available: i64,
 }
 
 #[derive(Debug)]
@@ -516,7 +529,7 @@ fn advance_competitive(
     .resources
     .clone();
   validate_competitive_batch(&commands, &human_resources, &session.ruleset)
-    .map_err(|error| error_message(error.message()))?;
+    .map_err(competitive_validation_error_message)?;
   let human_batch = SystemMonthlyBatch::new(0, commands);
   let transition = resolve_competitive_month(
     &session.current,
@@ -693,6 +706,105 @@ fn format_effect(effect: &crate::model::AttributedEffect) -> String {
 fn error_message(message: impl Into<String>) -> McpErrorMessage {
   McpErrorMessage {
     error: message.into(),
+    code: None,
+    resource_limit: None,
+    hint: None,
+  }
+}
+
+fn competitive_validation_error_message(
+  error: crate::model::CompetitiveValidationError,
+) -> McpErrorMessage {
+  let message = error.message();
+  let code = competitive_validation_error_code(&error);
+  let (resource_limit, hint) = match error {
+    crate::model::CompetitiveValidationError::InsufficientCash {
+      required,
+      available,
+    } => (
+      Some(ResourceLimitError {
+        resource: "cash".to_string(),
+        required: required.into(),
+        available: available.into(),
+      }),
+      Some(
+        "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
+          .to_string(),
+      ),
+    ),
+    crate::model::CompetitiveValidationError::ApBudgetExceeded { requested, budget } => (
+      Some(ResourceLimitError {
+        resource: "action_points".to_string(),
+        required: requested.into(),
+        available: budget.into(),
+      }),
+      Some("Reduce the number or AP cost of commands in this monthly batch.".to_string()),
+    ),
+    crate::model::CompetitiveValidationError::InsufficientPoliticalCapital {
+      required,
+      available,
+    } => (
+      Some(ResourceLimitError {
+        resource: "political_capital".to_string(),
+        required: required.into(),
+        available: available.into(),
+      }),
+      Some("Choose fewer political actions or wait for political capital to refresh.".to_string()),
+    ),
+    _ => (None, None),
+  };
+  McpErrorMessage {
+    error: message,
+    code: Some(code.to_string()),
+    resource_limit,
+    hint,
+  }
+}
+
+fn competitive_validation_error_code(
+  error: &crate::model::CompetitiveValidationError,
+) -> &'static str {
+  match error {
+    crate::model::CompetitiveValidationError::ApBudgetExceeded { .. } => "ap_budget_exceeded",
+    crate::model::CompetitiveValidationError::InsufficientCash { .. } => "insufficient_cash",
+    crate::model::CompetitiveValidationError::InsufficientPoliticalCapital { .. } => {
+      "insufficient_political_capital"
+    }
+    crate::model::CompetitiveValidationError::TooManyConcurrentProjects { .. } => {
+      "too_many_concurrent_projects"
+    }
+    crate::model::CompetitiveValidationError::InvalidRecruitHeadcount { .. } => {
+      "invalid_recruit_headcount"
+    }
+    crate::model::CompetitiveValidationError::InvestAmountNonPositive => {
+      "invest_amount_non_positive"
+    }
+    crate::model::CompetitiveValidationError::InvestAmountTooHigh { .. } => {
+      "invest_amount_too_high"
+    }
+    crate::model::CompetitiveValidationError::MonitorDepthOutOfRange { .. } => {
+      "monitor_depth_out_of_range"
+    }
+    crate::model::CompetitiveValidationError::CommitLevelOutOfRange { .. } => {
+      "commit_level_out_of_range"
+    }
+    crate::model::CompetitiveValidationError::ProjectBudgetNonPositive => {
+      "project_budget_non_positive"
+    }
+    crate::model::CompetitiveValidationError::ProjectBudgetBelowDuration { .. } => {
+      "project_budget_below_duration"
+    }
+    crate::model::CompetitiveValidationError::ProjectBudgetNotDivisible { .. } => {
+      "project_budget_not_divisible"
+    }
+    crate::model::CompetitiveValidationError::ProjectMonthlyDrawInfeasible { .. } => {
+      "project_monthly_draw_infeasible"
+    }
+    crate::model::CompetitiveValidationError::UnknownSystemId { .. } => "unknown_system_id",
+    crate::model::CompetitiveValidationError::BatchCountMismatch { .. } => "batch_count_mismatch",
+    crate::model::CompetitiveValidationError::MonthIndexMismatch { .. } => "month_index_mismatch",
+    crate::model::CompetitiveValidationError::InvalidMedicaidPosture => "invalid_medicaid_posture",
+    crate::model::CompetitiveValidationError::InvalidMedicarePosture => "invalid_medicare_posture",
   }
 }
 
@@ -955,6 +1067,93 @@ mod tests {
         })
         .is_err()
     );
+
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+    assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn competitive_cash_validation_error_is_structured_and_does_not_advance() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+
+    let err = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "invest domain=beds amount=40; recruit role=nurse headcount=5".to_string(),
+      })
+      .expect_err("batch should exceed starting cash");
+
+    assert_eq!(err.error, "cash required 65 exceeds available 60");
+    assert_eq!(err.code.as_deref(), Some("insufficient_cash"));
+    assert_eq!(
+      err.resource_limit,
+      Some(ResourceLimitError {
+        resource: "cash".to_string(),
+        required: 65,
+        available: 60,
+      })
+    );
+    assert!(
+      err
+        .hint
+        .as_deref()
+        .is_some_and(|hint| hint.contains("Reduce cash spending"))
+    );
+
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+    assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn competitive_non_resource_validation_error_has_code_only() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+
+    let err = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "commit pledge_type=access level=6".to_string(),
+      })
+      .expect_err("level should be out of range");
+
+    assert_eq!(err.code.as_deref(), Some("commit_level_out_of_range"));
+    assert!(err.error.contains("commit level 6"));
+    assert_eq!(err.resource_limit, None);
+    assert_eq!(err.hint, None);
+
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+    assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn competitive_parser_error_remains_plain_and_does_not_advance() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+
+    let err = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "bogus".to_string(),
+      })
+      .expect_err("unknown command should fail parsing");
+
+    assert!(err.error.contains("unknown competitive verb"));
+    assert_eq!(err.code, None);
+    assert_eq!(err.resource_limit, None);
+    assert_eq!(err.hint, None);
 
     let current = store
       .get_observation(GetObservationRequest {
