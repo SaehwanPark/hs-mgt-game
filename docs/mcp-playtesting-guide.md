@@ -68,6 +68,10 @@ As of `v0.10.23`, competitive debriefs can include an access follow-through
 note for low-cash access-heavy runs when public pledges outnumber durable
 operational follow-through. Treat that note as explanatory product wording, not
 as a balance change, validation failure, or human-learning result.
+As of `v0.10.24`, bounded trigger/control MCP runs validate that the note
+appears through end-session debriefs when expected and stays absent in nearby
+controls. Keep follow-up work evidence-led; this validation does not justify
+runtime tuning, pledge cooldowns, command-cost changes, or difficulty changes.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
@@ -364,3 +368,8 @@ As of `v0.10.22`, the access-heavy comprehension review uses the existing
 Access Operator's Normal and Hard runs. Treat the next bounded follow-up as
 explanatory competitive debrief wording for access-heavy runs, not runtime
 tuning, command-cost changes, access-pledge cooldowns, or difficulty changes.
+
+As of `v0.10.24`, `_workspace/experiments/v0.10.24-access-debrief-validation/`
+contains bounded MCP trigger/control evidence for the access follow-through
+debrief note. Use it as debrief-surface validation only, not as human-learning
+or balance evidence.

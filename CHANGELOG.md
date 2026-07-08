@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.24] - 2026-07-08
+
+### Added
+- Added bounded MCP trigger/control validation for the access follow-through
+  debrief note in `_workspace/experiments/v0.10.24-access-debrief-validation/`.
+- Added `docs/playtest-findings-v0.10.24.md` documenting the debrief-surface
+  validation and evidence limits.
+
+### Changed
+- Routed access follow-through work back to evidence-led guidance, debrief
+  review, or broader synthesis rather than runtime tuning.
+- Bumped the package version to `0.10.24`.
+
 ## [0.10.23] - 2026-07-08
 
 ### Added

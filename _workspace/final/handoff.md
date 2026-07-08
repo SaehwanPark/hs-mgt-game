@@ -1,67 +1,70 @@
-# Final Handoff - Access Follow-Through Debrief Note
+# Final Handoff - Access Debrief Validation
 
 ## Summary
 
-Implemented the `v0.10.23` Phase 7 explanatory debrief slice. Competitive
-debriefs now add a student-facing access follow-through note when committed
-history shows repeated public access pledges, low final cash, and fewer durable
-operational follow-through actions than pledges.
+Implemented the `v0.10.24` Phase 7 debrief-surface validation slice. Bounded
+MCP trigger/control runs now demonstrate that the competitive access
+follow-through note appears in expected low-cash, under-followed access-pledge
+runs and stays absent in nearby controls.
 
-This is a debrief wording and project-state slice. It does not change runtime
+This is an evidence and project-state slice. It does not change runtime
 mechanics, MCP DTOs, Python wrapper logic, diagnostic parser logic, command
 legality, scenario schemas, replay hashes, state hash logic, action costs,
 ruleset values, balance, or retry metadata.
 
 ## Changed Files
 
-- `src/debrief/report.rs`: adds the derived access follow-through debrief note.
-- `src/debrief/report_tests.rs`: adds focused trigger and non-trigger tests.
-- `docs/playtest-findings-v0.10.23.md`: records the explanatory wording slice.
-- `docs/mcp-playtesting-guide.md`: notes how to interpret the new debrief note.
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.23`
+- `_workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`:
+  adds deterministic MCP trigger/control validation runs.
+- `_workspace/experiments/v0.10.24-access-debrief-validation/results.json`:
+  records completed Normal/Hard validation results at seed `42`.
+- `docs/playtest-findings-v0.10.24.md`: records validation results and evidence
+  limits.
+- `docs/mcp-playtesting-guide.md`: notes the bounded validation artifact.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.24`
   project-state and version metadata.
 - `_workspace/00_input/request-summary.md`: scoped request summary for this
   continuation slice.
 
 ## Verification
 
-- `cargo test debrief::report_tests -- --test-threads=1`
+- `python3 _workspace/experiments/v0.10.24-access-debrief-validation/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.24-diagnostics.md`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test -- --test-threads=1`
 - `git diff --check`
 
-All verification commands passed.
-
 ## PR Handoff
 
-- Branch: `feat/access-follow-through-debrief-v0.10.23`
+- Branch: `feat/access-debrief-validation-v0.10.24`
 - Base: `main`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/104
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/105
 
 ## Review Summary
 
-- Pass 1: Medium finding in `src/debrief/report.rs`: the initial trigger
-  counted follow-through months rather than follow-through actions, which could
-  emit the note when two follow-through actions happened in one month. Fixed by
-  counting matching committed commands and adding a regression test.
-- Pass 2: Low finding in `SPEC.md`: test summary said two non-trigger cases
-  after the action-count regression test was added. Fixed wording.
-- Pass 3: No additional scope, compatibility, or edge-case findings.
+- Pass 1: No actionable runner, trigger/control, or validation-scope findings.
+- Pass 2: Low finding in `SPEC.md`: the new `v0.10.24` rollup row copied the
+  prior test-count value instead of the current full-suite count. Fixed the new
+  row to `294`.
+- Pass 3: No additional scope, reproducibility, documentation, or handoff
+  findings after the fix.
 - Critical/High findings: none.
-- Medium/Low disposition: fixed.
+- Medium findings: none.
+- Low findings: fixed.
 - Follow-up review after Critical/High fixes: not required.
 - PR review-loop disposition posted at
-  https://github.com/SaehwanPark/hs-mgt-game/pull/104#issuecomment-4918977453
-- CI/comment triage: PR had no external review comments when checked; CI
-  `check` passed and merge state was clean.
+  https://github.com/SaehwanPark/hs-mgt-game/pull/105#issuecomment-4919084849
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
 - Merge-ready: Yes.
 
 ## Known Limits
 
-- The note is a product explanation heuristic over committed history, not a new
-  failure state or balance rule.
-- Evidence remains simulated-agent and operator-authored, not human play or
-  classroom evidence.
-- The trigger uses the existing cash-risk threshold of `20` and does not tune
-  access-pledge mechanics or action costs.
+- The artifact validates debrief-surface behavior through deterministic
+  trigger/control policies, not organic human play.
+- Evidence remains simulated-agent and operator-authored, not classroom or
+  human-learning evidence.
+- The validation does not justify access-pledge effect tuning, cooldowns,
+  command-cost changes, or difficulty changes.
