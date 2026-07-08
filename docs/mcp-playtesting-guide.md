@@ -373,3 +373,9 @@ As of `v0.10.24`, `_workspace/experiments/v0.10.24-access-debrief-validation/`
 contains bounded MCP trigger/control evidence for the access follow-through
 debrief note. Use it as debrief-surface validation only, not as human-learning
 or balance evidence.
+
+As of `v0.10.25`, `docs/playtest-findings-v0.10.25.md` synthesizes the
+`v0.10.21` through `v0.10.24` access-heavy evidence chain. Treat that synthesis
+as a routing checkpoint: access follow-through is now covered as debrief
+explanation, and future runtime changes still require a separate artifact that
+identifies a concrete mechanics problem.

@@ -134,6 +134,47 @@ reconstructing it from the diff.
 | Access-Heavy Comprehension Evidence Review | v0.10.22 | Review existing live-capture evidence for access-heavy player understanding and route the next bounded follow-up toward explanatory debrief wording | 294 | `8926f71296f39efc` (competitive) |
 | Access Follow-Through Debrief Note | v0.10.23 | Add explanatory competitive debrief wording for low-cash access-heavy runs where public pledges outnumber durable operational follow-through | 297 | `8926f71296f39efc` (competitive) |
 | Access Debrief Validation | v0.10.24 | Validate the access follow-through debrief note through bounded MCP trigger/control runs without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
+| Access Evidence Synthesis | v0.10.25 | Synthesize the v0.10.21-v0.10.24 access-heavy evidence chain and keep runtime tuning deferred until a later concrete mechanics finding | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Access Evidence Synthesis
+  Status: Complete
+  Started: 2026-07-08
+  Version: 0.10.25
+
+  Summary:
+  Synthesized the `v0.10.21` through `v0.10.24` access-heavy evidence chain.
+  The synthesis closes the access follow-through mini-loop as debrief/guidance
+  evidence and routes future access-related runtime work back behind a concrete
+  mechanics finding.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.25.md` summarizing the live-capture
+    synthesis, access comprehension review, debrief wording slice, and bounded
+    trigger/control validation.
+  - Updated the MCP playtesting guide with a `v0.10.25` routing checkpoint.
+  - Preserved runtime mechanics, command validation, scenarios, MCP DTOs,
+    replay formats, state hashes, diagnostics logic, action costs, pledge
+    effects, difficulty values, and balance.
+  - Bumped package metadata to `0.10.25`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, or diagnostic parser change.
+  - No access-pledge effect, cooldown, command-cost, action-availability,
+    difficulty, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new live-capture run, new analytics platform, or broad evidence taxonomy.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.25-diagnostics.md`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Access Debrief Validation
