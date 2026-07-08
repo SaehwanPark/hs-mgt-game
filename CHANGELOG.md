@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.19] - 2026-07-08
+
+### Added
+- Added focused Python wrapper tests covering structured MCP error
+  normalization and structured-versus-legacy cash-retry classification.
+- Added `docs/playtest-findings-v0.10.19.md` documenting the live-capture
+  structured retry metadata follow-up.
+
+### Changed
+- Updated `scripts/play_game.py` to normalize structured MCP tool errors into
+  additive `code`, `resource_limit`, and `hint` fields while preserving the
+  existing `error` string in captured validation failures.
+- Updated `scripts/diagnose_runs.py` to prefer structured retry metadata for
+  cash-overrun classification while remaining compatible with legacy string-only
+  artifacts.
+- Refreshed the `v0.10.15` live difficulty-gate exemplar retry metadata and
+  regenerated its diagnostic output.
+- Bumped the package version to `0.10.19`.
+
 ## [0.10.18] - 2026-07-08
 
 ### Added

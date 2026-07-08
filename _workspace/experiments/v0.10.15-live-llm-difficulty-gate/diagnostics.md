@@ -3,7 +3,7 @@ This diagnostic summary maps strategic actions, outcome distributions, and strat
 
 ## Live-Capture Diagnostics for `results.json`
 - **Batch id:** v0.10.15-live-llm-difficulty-gate
-- **Code version:** 0.10.15
+- **Code version:** 0.10.19
 - **Campaign:** competitive-regional-v1
 - **Difficulty:** normal, hard
 - **Seed:** 42

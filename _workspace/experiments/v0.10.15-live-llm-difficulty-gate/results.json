@@ -1,6 +1,6 @@
 {
   "batch_id": "v0.10.15-live-llm-difficulty-gate",
-  "code_version": "0.10.15",
+  "code_version": "0.10.19",
   "campaign": "competitive-regional-v1",
   "difficulty": "normal, hard",
   "seed": 42,
@@ -9028,7 +9028,14 @@
         {
           "turn": 4,
           "command": "negotiate payer=carrier_b rate_posture=neutral; recruit role=nurse headcount=3",
-          "error": "cash required 15 exceeds available 10"
+          "error": "cash required 15 exceeds available 10",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 15,
+            "available": 10
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         }
       ],
       "validation_failures": [],
@@ -11004,37 +11011,80 @@
         {
           "turn": 1,
           "command": "project kind=clinic_network budget=12; recruit role=nurse headcount=2",
-          "error": "project budget 12 must be a multiple of duration 9 months"
+          "error": "project budget 12 must be a multiple of duration 9 months",
+          "code": "project_budget_not_divisible"
         },
         {
           "turn": 13,
           "command": "recruit role=nurse headcount=1; invest domain=outpatient amount=5",
-          "error": "cash required 10 exceeds available 4"
+          "error": "cash required 10 exceeds available 4",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 10,
+            "available": 4
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 17,
           "command": "recruit role=admin headcount=1; commit pledge_type=quality level=1",
-          "error": "cash required 5 exceeds available 0"
+          "error": "cash required 5 exceeds available 0",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 5,
+            "available": 0
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 19,
           "command": "recruit role=nurse headcount=1; invest domain=beds amount=4",
-          "error": "cash required 9 exceeds available 0"
+          "error": "cash required 9 exceeds available 0",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 9,
+            "available": 0
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 21,
           "command": "negotiate payer=medicaid rate_posture=neutral; invest domain=technology amount=3",
-          "error": "cash required 8 exceeds available 0"
+          "error": "cash required 8 exceeds available 0",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 8,
+            "available": 0
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 22,
           "command": "monitor target=metro depth=1; recruit role=physician headcount=1",
-          "error": "cash required 5 exceeds available 0"
+          "error": "cash required 5 exceeds available 0",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 5,
+            "available": 0
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 23,
           "command": "commit pledge_type=workforce level=1; invest domain=outpatient amount=3",
-          "error": "cash required 3 exceeds available 0"
+          "error": "cash required 3 exceeds available 0",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 3,
+            "available": 0
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         }
       ],
       "validation_failures": [],

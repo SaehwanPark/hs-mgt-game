@@ -74,6 +74,11 @@ def parse_final_tradeoff(debrief):
 def is_cash_retry(retry):
   if not isinstance(retry, dict):
     return False
+  resource_limit = retry.get("resource_limit")
+  if isinstance(resource_limit, dict) and resource_limit.get("resource") == "cash":
+    return True
+  if retry.get("code") == "insufficient_cash":
+    return True
   error = str(retry.get("error", "")).lower()
   return "cash required" in error and "exceeds available" in error
 

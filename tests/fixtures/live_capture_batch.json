@@ -1,6 +1,6 @@
 {
   "batch_id": "fixture-live-capture",
-  "code_version": "0.10.9",
+  "code_version": "0.10.19",
   "campaign": "competitive-regional-v1",
   "difficulty": "hard",
   "seed": 42,
@@ -16,7 +16,14 @@
         {
           "turn": 1,
           "command": "recruit role=nurse headcount=3; invest domain=beds amount=10",
-          "error": "cash required 25 exceeds available 10"
+          "error": "cash required 25 exceeds available 10",
+          "code": "insufficient_cash",
+          "resource_limit": {
+            "resource": "cash",
+            "required": 25,
+            "available": 10
+          },
+          "hint": "Reduce cash spending, choose hold or monitor, or wait for resources before resubmitting."
         },
         {
           "turn": 2,
