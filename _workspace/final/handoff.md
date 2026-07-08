@@ -1,68 +1,71 @@
-# Final Handoff - Live Retry Visibility Checkpoint
+# Final Handoff - Live Evidence Synthesis
 
 ## Summary
 
-Implemented the `v0.10.20` Phase 7 evidence-routing checkpoint. The current live
-retry visibility gate is now documented as complete for live-capture
-classification: structured MCP validation fields are emitted, preserved by the
-Python wrapper, and preferred by diagnostics while retaining legacy fallback.
+Implemented the `v0.10.21` Phase 7 evidence synthesis. The recent live-capture,
+difficulty, and retry-visibility path from `v0.10.12` through `v0.10.20` is now
+summarized as sufficient for bounded simulated-agent evidence gates, with the
+next bounded question routed toward access-heavy player understanding of public
+pledges versus durable operational follow-through under cash pressure.
 
 This is a documentation and project-state slice. It does not change Rust runtime
 mechanics, MCP DTOs, Python wrapper logic, diagnostic parser logic, command
 legality, scenario schemas, replay hashes, state hash logic, action costs,
-ruleset values, or balance.
+ruleset values, balance, or retry metadata.
 
 ## Changed Files
 
-- `docs/playtest-findings-v0.10.20.md`: checkpoint findings, evidence limits,
-  and follow-up routing.
-- `docs/mcp-playtesting-guide.md`: v0.10.20 retry-visibility routing note.
-- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.20`
+- `docs/playtest-findings-v0.10.21.md`: synthesis findings, evidence limits,
+  and next-gate routing.
+- `docs/mcp-playtesting-guide.md`: v0.10.21 evidence-routing note.
+- `SPEC.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`: `v0.10.21`
   project-state and version metadata.
 - `_workspace/00_input/request-summary.md`: scoped request summary for this
   continuation slice.
 
 ## Verification
 
-- `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
-- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.20-diagnostics.md`
+- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
+- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
+- `python3 -m json.tool _workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
 - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `python3 scripts/diagnose_runs.py tests/fixtures/live_capture_batch.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.21-diagnostics.md`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test -- --test-threads=1`
 
-Note: an initial parallel `cargo test` run failed once in
-`cli::persistence::tests::competitive_persistence_write_load_delete_round_trip`
-while reading `~/.config/hs-mgt-game/competitive_session.save`. The serial
-rerun passed the full suite and this slice did not touch persistence code.
+All verification commands passed. The JSON validation commands were run without
+shell redirection and printed large formatted artifacts, but exited
+successfully.
 
 ## PR Handoff
 
-- Branch: `feat/live-retry-visibility-checkpoint`
+- Branch: `feat/live-evidence-synthesis-v0.10.21`
 - Base: `main`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/101
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/102
 
 ## Review Summary
 
-- Pass 1: Medium finding in `_workspace/final/handoff.md`: PR and review
-  fields still said pending after PR creation. Fixed in review follow-up.
-- Pass 2: Low finding in `SPEC.md` and
-  `docs/playtest-findings-v0.10.20.md`: verification listed plain `cargo test`
-  even though the passing full-suite command was serial. Fixed in review
-  follow-up.
+- Pass 1: Low finding in `_workspace/final/handoff.md`: PR and review fields
+  still said pending after PR creation. Fixed in review follow-up.
+- Pass 2: Same Low handoff finding; no additional actionable issues.
 - Pass 3: No additional actionable findings.
 - Critical/High findings: none.
 - Medium/Low disposition: fixed.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: PR had no comments or reviews when checked; CI `check`
-  passed.
+- PR review-loop disposition posted at
+  https://github.com/SaehwanPark/hs-mgt-game/pull/102#issuecomment-4916027870
+- CI/comment triage: PR had no external comments or reviews when checked; CI
+  `check` passed.
 - Merge-ready: Yes.
 
 ## Known Limits
 
-- This checkpoint relies on simulated-agent and operator-authored evidence, not
-  human play or empirical calibration.
+- This synthesis relies on simulated-agent, reviewer-policy, and
+  operator-authored evidence, not human play or empirical calibration.
 - The strongest live retry signal still comes from the `v0.10.15` seed `42`
   exemplar.
 - Runtime tuning remains deferred until a later evidence slice identifies a
-  concrete mechanic problem beyond retry classification.
+  concrete mechanic problem beyond retry classification or comprehension
+  review.

@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.21] - 2026-07-08
+
+### Added
+- Added `docs/playtest-findings-v0.10.21.md`, a Phase 7 synthesis of the
+  live-capture, difficulty, and retry-visibility evidence from `v0.10.12`
+  through `v0.10.20`.
+
+### Changed
+- Routed the next bounded evidence gate toward access-heavy player understanding
+  of public pledges versus durable operational follow-through, while keeping
+  runtime tuning deferred.
+- Bumped the package version to `0.10.21`.
+
 ## [0.10.20] - 2026-07-08
 
 ### Added

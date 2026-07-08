@@ -347,3 +347,10 @@ Python wrapper preserves them, and diagnostics prefer them while retaining
 legacy fallback. Treat this as tooling confidence only. Runtime tuning, command
 cost changes, pledge cooldowns, or difficulty changes still require a separate
 evidence slice naming a concrete mechanic problem beyond retry classification.
+
+As of `v0.10.21`, the live-capture evidence synthesis routes the next bounded
+question toward access-heavy player understanding: can debrief and guidance
+clearly distinguish public access pledges from durable operational follow-through
+under cash pressure? Use existing live-capture artifacts and diagnostics first.
+Do not expand retry metadata again or tune runtime mechanics unless a later
+evidence slice identifies a concrete mechanic problem.
