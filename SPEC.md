@@ -142,6 +142,51 @@ reconstructing it from the diff.
 | Workforce-Protective Evidence Review | v0.10.30 | Review workforce-protective competitive play as an interpretive evidence axis across staffing, trust, pacing, monitoring, and commitment discipline | 294 | `8926f71296f39efc` (competitive) |
 | Expansion Proposal Review | v0.10.31 | Review difficulty, regional M&A, and GUI expansion proposals before roadmap and SDD propagation | 294 | `8926f71296f39efc` (competitive) |
 | Future Queue Re-ranking and SDD Alignment | v0.10.32 | Re-rank SPEC Future tracks around validation-first promotion gates and align SDD handoff docs | 294 | `8926f71296f39efc` (competitive) |
+| Growth/Capacity-Oriented Evidence Review | v0.10.33 | Review growth/capacity-oriented competitive play as an interpretive evidence axis across projects, investments, staffed capacity, cash runway, access, and rival pressure | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Growth/Capacity-Oriented Evidence Review
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.33
+
+  Summary:
+  Added a Phase 7 focused evidence review for interpreting growth/capacity-
+  oriented competitive play across existing simulated-agent,
+  deterministic-policy, reviewer-policy, and operator-authored artifacts. The
+  slice keeps runtime mechanics and balance unchanged.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.33.md` with growth/capacity signals,
+    evidence reading, instructor prompts, routing guidance, and evidence limits.
+  - Updated the MCP playtesting guide with a `v0.10.33` routing checkpoint.
+  - Preserved runtime mechanics, command validation, stochastic inputs,
+    scenarios, MCP DTOs, replay formats, state hashes, diagnostics logic,
+    action costs, project costs, capacity effects, difficulty values, scoring,
+    and balance.
+  - Bumped package metadata to `0.10.33`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, diagnostic parser, or command-surface change.
+  - No project-cost, capacity-effect, staffing-allocation, action-availability,
+    difficulty, scoring, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new live-capture run, hidden score, validated learner archetype, instructor
+    export format, analytics platform, or broad evidence taxonomy.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json --output /tmp/hs-mgt-game-v0.10.33-static-adaptive-diagnostics.md`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.33-live-diagnostics.md`
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Future Queue Re-ranking and SDD Alignment

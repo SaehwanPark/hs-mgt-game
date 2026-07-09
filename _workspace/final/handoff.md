@@ -1,11 +1,11 @@
-# Final Handoff - Future Queue Re-ranking and SDD Alignment
+# Final Handoff - Growth/Capacity-Oriented Evidence Review
 
 ## Summary
 
-Implemented the `v0.10.32` Future queue re-ranking and SDD alignment slice. The
-change restructures `SPEC.md` Future items around explicit promotion rules,
-validation-first ranking, and cross-cutting SDD guardrails so future work can be
-promoted into bounded `Present` slices without broadening scope.
+Implemented the `v0.10.33` growth/capacity-oriented evidence review slice. The
+change adds a Phase 7 focused evidence review that helps instructors and
+contributors interpret project, investment, staffed-capacity, cash-runway,
+access, and rival-pressure signals across existing competitive evidence.
 
 This is a documentation and project-state slice. It does not change runtime
 mechanics, command legality, scenario schemas, MCP DTOs, replay formats, state
@@ -14,31 +14,36 @@ files.
 
 ## Changed Files
 
-- `SPEC.md`: adds the `v0.10.32` completion record, explicit Future promotion
-  rules, a six-track ranked queue, and cross-cutting SDD guardrails.
-- `CHANGELOG.md`, `Cargo.toml`, and `Cargo.lock`: record `v0.10.32` project
+- `docs/playtest-findings-v0.10.33.md`: adds the focused
+  growth/capacity-oriented evidence review.
+- `docs/mcp-playtesting-guide.md`: adds `v0.10.33` routing checkpoints.
+- `SPEC.md`: records the completed `v0.10.33` slice and updates the Past
+  rollup.
+- `CHANGELOG.md`, `Cargo.toml`, and `Cargo.lock`: record `v0.10.33` project
   state and package metadata.
-- `LESSONS.md`: records the durable SDD lesson that Future queues should
-  separate ranked work from promotion rules and cross-cutting guardrails.
 - `_workspace/00_input/request-summary.md`, `_workspace/03_domain_qa.md`, and
   `_workspace/final/handoff.md`: record repo-local handoff bookkeeping.
 
 ## Verification
 
+- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
+- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
+- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json --output /tmp/hs-mgt-game-v0.10.33-static-adaptive-diagnostics.md`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.33-live-diagnostics.md`
 - `git diff --check`
-- `rg` stale-queue/version scan over SDD and companion docs; remaining hits were
-  expected historical references or current version records.
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test -- --test-threads=1`
 
 ## Known Limits
 
-- The ranking is a planning posture, not a claim that lower-ranked work is less
-  valuable in all future circumstances.
-- Expert difficulty is not yet proven winnable; it is now a future validation
-  target with explicit non-goals.
-- Regional M&A is not yet a scenario or mechanic; domain review and a bounded
-  design slice are still required.
-- GUI work has no toolkit, asset manifest, packaging plan, or implementation;
-  the accepted boundary is only that a future GUI must reuse the existing core.
+- The review uses simulated-agent, deterministic-policy, reviewer-policy, and
+  operator-authored evidence, not human classroom observation.
+- Growth/capacity-oriented play is an interpretive review posture, not a
+  hidden strategy class, validated learner archetype, balance proof, or
+  empirical claim.
+- Runtime changes to project costs, capacity effects, staffing allocation,
+  action availability, difficulty, scoring, or balance remain deferred until a
+  future artifact identifies a concrete mechanics defect.

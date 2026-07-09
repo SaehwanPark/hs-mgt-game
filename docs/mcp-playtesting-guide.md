@@ -89,6 +89,12 @@ interpretive review posture across staffing follow-through, workforce trust,
 pacing, monitoring, and commitment discipline, not as a hidden strategy class,
 validated learner archetype, standalone balance proof, or reason to tune
 workforce formulas.
+As of `v0.10.33`, the growth/capacity-oriented evidence review narrows a
+parallel comparison axis from the debrief surface. Treat growth/capacity play
+as an interpretive review posture across projects, investments, staffed
+capacity, cash runway, access, and rival pressure, not as a hidden strategy
+class, validated learner archetype, standalone balance proof, or reason to
+tune project costs or capacity effects.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
@@ -420,3 +426,11 @@ workforce-protective play as an interpretive comparison axis across staffing,
 trust, pacing, monitoring, and commitment discipline. Use it for discussion and
 future evidence routing, not as a standalone strategy class, validated learner
 archetype, balance proof, or reason to tune workforce mechanics.
+
+As of `v0.10.33`, `docs/playtest-findings-v0.10.33.md` reviews
+growth/capacity-oriented play as an interpretive comparison axis across
+projects, investments, staffed capacity, cash runway, access, and rival
+pressure. Use it for discussion and future evidence routing, not as a
+standalone strategy class, validated learner archetype, balance proof, or
+reason to tune project costs, capacity effects, staffing allocation, or
+difficulty.
