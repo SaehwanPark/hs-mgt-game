@@ -40,19 +40,26 @@ ruleset values, pledge effects, difficulty values, scoring, or balance.
 
 - Branch: `feat/debrief-comparison-surface-v0.10.29`
 - Base: `main`
-- PR: Pending
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/110
 
 ## Review Summary
 
-- Pass 1: Pending.
-- Pass 2: Pending.
-- Pass 3: Pending.
-- Critical/High findings: pending review.
-- Medium findings: pending review.
-- Low findings: pending review.
-- Follow-up review after Critical/High fixes: pending review outcome.
-- CI/comment triage: pending PR creation.
-- Merge-ready: No, pending PR handoff and review loop.
+- Pass 1: One Low stale-handoff finding because this file still listed the PR
+  and review state as pending after PR #110 was opened. No evidence-claim,
+  versioning, scope, or runtime-change findings.
+- Pass 2: One Low stale-handoff finding for the same PR/review/CI metadata. No
+  Critical, High, Medium, runtime-claim, or missing-verification findings.
+- Pass 3: One Low stale-handoff finding for the same PR/review/CI metadata. No
+  additional findings in the comparison surface, project-state files, or domain
+  QA.
+- Critical/High findings: none.
+- Medium findings: none.
+- Low findings: stale handoff after PR creation; fixed by recording PR #110,
+  pass dispositions, CI status, and merge-readiness details in this handoff.
+- Follow-up review after Critical/High fixes: not required.
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
+- Merge-ready: Yes.
 
 ## Known Limits
 
