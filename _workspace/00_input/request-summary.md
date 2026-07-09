@@ -1,20 +1,20 @@
-# Request Summary - Debrief Comparison Surface
+# Request Summary - Workforce-Protective Evidence Review
 
 ## Scope
 
 Implement the approved preferred-workflow continuation slice for the Health
-Policy Strategy Game: add a compact instructor/reviewer comparison surface for
-repeated competitive debriefs, then prepare a PR handoff.
+Policy Strategy Game: add a focused Phase 7 evidence review for
+workforce-protective competitive play, then prepare a PR handoff.
 
 ## Phase
 
-Phase 7 instructor/debrief comparison surface. This is an evidence,
-documentation, and project-state slice, not runtime mechanics, balance,
-command-surface, scenario, or educational-effectiveness validation.
+Phase 7 focused evidence review. This is an evidence, documentation, and
+project-state slice, not a runtime mechanics, balance, command-surface,
+scenario, or educational-effectiveness validation slice.
 
 ## Sources
 
-- User request to implement the approved `v0.10.29` plan.
+- User request to implement the approved `v0.10.30` plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
@@ -22,15 +22,14 @@ command-surface, scenario, or educational-effectiveness validation.
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - `docs/playtest-findings-v0.10.16.md`
 - `docs/playtest-findings-v0.10.21.md`
-- `docs/playtest-findings-v0.10.25.md`
 - `docs/playtest-findings-v0.10.26.md`
-- `docs/playtest-findings-v0.10.27.md`
 - `docs/playtest-findings-v0.10.28.md`
+- `docs/playtest-findings-v0.10.29.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.29.md`
+- `docs/playtest-findings-v0.10.30.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -43,11 +42,11 @@ command-surface, scenario, or educational-effectiveness validation.
 
 ## Validation Target
 
-The comparison surface is grounded in existing competitive evidence and helps
-reviewers compare decision quality, outcome quality, cash runway, durable
-follow-through, rival pressure, and debrief traceability while preserving the
-distinction between simulated-agent behavior, interpretive development labels,
-classroom learning evidence, and runtime mechanics evidence.
+The evidence review should make workforce-protective competitive play
+reviewable as an interpretive axis across staffing follow-through, workforce
+trust, pacing under cash pressure, monitoring, and commitment discipline while
+preserving the distinction between simulated-agent evidence, interpretive
+development labels, classroom learning evidence, and runtime mechanics evidence.
 
 ## Non-Goals
 
@@ -55,10 +54,9 @@ classroom learning evidence, and runtime mechanics evidence.
   wrapper logic, diagnostic parser logic, command grammar, stochastic input,
   scenario schema, replay artifact, state hash, action-cost, ruleset, or command
   validation change.
-- No access-pledge cooldown, effect tuning, command-cost tuning,
-  action-availability change, difficulty adjustment, scoring redesign, or
-  balance-tuning claim.
+- No workforce-trust formula, recruitment-cost, staffing allocation,
+  action-availability, difficulty, scoring, or balance-tuning change.
 - No new live-capture runs, instructor export format, analytics platform,
-  evidence taxonomy, validated learner archetype, external human recruitment
-  gate, human-learning claim, empirical calibration claim, or policy-validity
-  claim.
+  broad evidence taxonomy, validated learner archetype, external human
+  recruitment gate, human-learning claim, empirical calibration claim, or
+  policy-validity claim.

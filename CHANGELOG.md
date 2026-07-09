@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.30] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.30.md`, a Phase 7 focused evidence
+  review for interpreting workforce-protective competitive play across existing
+  simulated-agent, deterministic-policy, reviewer-policy, and operator-authored
+  artifacts.
+
+### Changed
+- Routed follow-up work toward a parallel growth/capacity evidence review only
+  if instructors need another comparison axis, while keeping workforce-trust
+  formula changes, recruitment-cost changes, staffing allocation changes,
+  action-availability changes, difficulty changes, scoring, and balance tuning
+  deferred.
+- Bumped the package version to `0.10.30`.
+
 ## [0.10.29] - 2026-07-09
 
 ### Added

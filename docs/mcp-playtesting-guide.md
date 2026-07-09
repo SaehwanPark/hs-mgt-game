@@ -83,6 +83,12 @@ outcome quality, cash runway, durable follow-through, rival pressure, and
 debrief traceability across repeated competitive runs. Treat it as discussion
 design, not as human-learning validation, empirical calibration, or runtime
 tuning evidence.
+As of `v0.10.30`, the workforce-protective evidence review narrows one
+comparison axis from the debrief surface. Treat workforce-protective play as an
+interpretive review posture across staffing follow-through, workforce trust,
+pacing, monitoring, and commitment discipline, not as a hidden strategy class,
+validated learner archetype, standalone balance proof, or reason to tune
+workforce formulas.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.

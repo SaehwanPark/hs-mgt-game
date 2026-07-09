@@ -1,34 +1,63 @@
-# Domain QA - Debrief Comparison Surface
+# Domain QA - Workforce-Protective Evidence Review
 
 ## Status
 
 Pass.
 
-## Scope Review
+## Reviewed Inputs
 
-The `v0.10.29` slice is a Phase 7 instructor/debrief comparison surface. It
-turns existing competitive evidence into review axes for repeated-run
-discussion and does not change runtime mechanics, command validation,
-stochastic inputs, scenario schemas, replay formats, state hashes, MCP DTOs,
-Python wrapper logic, diagnostics logic, action costs, pledge effects,
-difficulty values, scoring, or balance.
+- User request to implement the preferred-workflow continuation plan.
+- `docs/harness/health-policy-strategy-game/team-spec.md`
+- `docs/roadmap.md`
+- `docs/design_principles.md`
+- `docs/playtest-findings-v0.10.28.md`
+- `docs/playtest-findings-v0.10.29.md`
+- `docs/playtest-findings-v0.10.30.md`
+- `_workspace/00_input/request-summary.md`
 
-## Domain Findings
+## Findings
 
-- The comparison surface preserves the distinction between observed
-  simulated-agent behavior, interpretive development labels, and human learning
-  or classroom effectiveness evidence.
-- Strategy postures are framed as discussion handles rather than hidden player
-  classes, validated archetypes, equilibrium results, or optimization targets.
-- Decision quality, outcome quality, cash runway, durable follow-through, rival
-  pressure, and debrief traceability are treated as reviewable discussion axes
-  rather than scoring categories or direct runtime-tuning claims.
-- Future runtime changes remain gated on a concrete mechanics finding.
+- The `v0.10.30` slice stays within Phase 7 evidence review scope and narrows a
+  comparison axis explicitly identified by the `v0.10.29` surface.
+- Workforce-protective play is framed as an interpretive review posture across
+  staffing follow-through, workforce trust, pacing, monitoring, and commitment
+  discipline, not as a hidden player class, validated archetype, equilibrium
+  result, or balance proof.
+- The artifact preserves the distinction between actor-visible observations,
+  accepted commands, final outcomes, and educational debrief interpretation.
+- The review does not change deterministic transitions, stochastic boundaries,
+  scenario schemas, replay hashes, state hashes, command legality, MCP DTOs,
+  diagnostics logic, action costs, difficulty values, scoring, or balance.
+- Future runtime changes remain gated on a concrete mechanics finding rather
+  than inferred from this evidence review.
 
-## Caveats
+## Required Fixes
 
-- The underlying evidence remains simulated-agent, reviewer-policy,
-  deterministic-policy, and operator-authored evidence.
-- The artifact supports development routing and comparison design, not
-  validated classroom assessment, empirical calibration, human comprehension,
-  policy validity, learner archetype validation, or balance validation.
+None.
+
+## Residual Risks
+
+- The underlying evidence remains simulated-agent, deterministic-policy,
+  reviewer-policy, and operator-authored evidence rather than classroom or
+  human-learning evidence.
+- Current artifacts do not isolate workforce protection as a clean standalone
+  strategy; they expose workforce signals inside broader cash, access, payer,
+  rival, and capacity tradeoffs.
+- The review supports development routing and instructor discussion, not
+  empirical calibration, policy validity, learner archetype validation, or
+  balance validation.
+
+## Verification Evidence
+
+Planned verification for this slice:
+
+- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
+- `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
+- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+- `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json >/dev/null`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json --output /tmp/hs-mgt-game-v0.10.30-difficulty-diagnostics.md`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json --output /tmp/hs-mgt-game-v0.10.30-static-adaptive-diagnostics.md`
+- `cargo fmt --check`
+- `cargo clippy --all-targets -- -D warnings`
+- `cargo test -- --test-threads=1`
+- `git diff --check`
