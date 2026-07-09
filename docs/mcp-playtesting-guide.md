@@ -72,6 +72,11 @@ As of `v0.10.24`, bounded trigger/control MCP runs validate that the note
 appears through end-session debriefs when expected and stays absent in nearby
 controls. Keep follow-up work evidence-led; this validation does not justify
 runtime tuning, pledge cooldowns, command-cost changes, or difficulty changes.
+As of `v0.10.28`, the strategy-space synthesis compares finance-first,
+access-heavy, workforce-protective, and growth-oriented signals across existing
+competitive evidence. Treat those strategy labels as interpretive development
+summaries, not hidden game classes, validated learner archetypes, or balance
+proof.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.

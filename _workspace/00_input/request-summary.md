@@ -1,36 +1,39 @@
-# Request Summary - Instructor Comparison Note
+# Request Summary - Strategy-Space Synthesis
 
 ## Scope
 
 Implement the approved preferred-workflow continuation slice for the Health
-Policy Strategy Game: turn existing competitive playtest evidence into
-instructor-facing comparison prompts about decision quality versus outcome
-quality, then prepare a PR handoff.
+Policy Strategy Game: compare existing competitive playtest evidence across
+finance-first, access-heavy, workforce-protective, and growth-oriented strategy
+signals, then prepare a PR handoff.
 
 ## Phase
 
-Phase 7 instructor-facing evidence note. This is an evidence, documentation,
-and project-state slice, not runtime mechanics, balance, command-surface,
-scenario, or educational-effectiveness validation.
+Phase 7 simulated-agent strategy-space synthesis. This is an evidence,
+documentation, and project-state slice, not runtime mechanics, balance,
+command-surface, scenario, or educational-effectiveness validation.
 
 ## Sources
 
-- User request to implement the approved `v0.10.27` plan.
+- User request to implement the approved `v0.10.28` plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.16.md`
+- `docs/playtest-findings-v0.10.12.md`
+- `docs/playtest-findings-v0.10.13.md`
+- `docs/playtest-findings-v0.10.15.md`
 - `docs/playtest-findings-v0.10.21.md`
-- `docs/playtest-findings-v0.10.22.md`
+- `docs/playtest-findings-v0.10.24.md`
 - `docs/playtest-findings-v0.10.25.md`
 - `docs/playtest-findings-v0.10.26.md`
+- `docs/playtest-findings-v0.10.27.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.27.md`
+- `docs/playtest-findings-v0.10.28.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -42,9 +45,10 @@ scenario, or educational-effectiveness validation.
 
 ## Validation Target
 
-The note provides instructor-facing prompts grounded in existing competitive
-evidence while preserving the distinction between simulated-agent evidence,
-classroom learning evidence, and runtime mechanics evidence.
+The synthesis compares strategy-space signals grounded in existing competitive
+evidence while preserving the distinction between simulated-agent behavior,
+interpretive development labels, classroom learning evidence, and runtime
+mechanics evidence.
 
 ## Non-Goals
 
@@ -56,5 +60,6 @@ classroom learning evidence, and runtime mechanics evidence.
   action-availability change, difficulty adjustment, scoring redesign, or
   balance-tuning claim.
 - No new live-capture runs, instructor export format, analytics platform,
-  evidence taxonomy, external human recruitment gate, human-learning claim,
-  empirical calibration claim, or policy-validity claim.
+  evidence taxonomy, validated learner archetype, external human recruitment
+  gate, human-learning claim, empirical calibration claim, or policy-validity
+  claim.

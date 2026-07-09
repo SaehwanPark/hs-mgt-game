@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.28] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.28.md`, a Phase 7 strategy-space
+  synthesis comparing finance-first, access-heavy, workforce-protective, and
+  growth-oriented signals across existing competitive evidence.
+
+### Changed
+- Routed follow-up work toward comparison surfaces or narrower evidence reviews
+  while keeping runtime mechanics, command costs, pledge cooldowns, validation
+  rules, difficulty changes, scoring, and balance changes deferred.
+- Bumped the package version to `0.10.28`.
+
 ## [0.10.27] - 2026-07-09
 
 ### Added
