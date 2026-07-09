@@ -110,6 +110,11 @@ information delay, monitor value, and public disclosure as the reviewable
 difficulty surfaces for future testing. Treat those tier descriptions as design
 hypotheses, not implemented rules, empirical calibration, Expert winnability
 proof, or a reason to change AP budgets, command costs, scoring, or balance.
+As of `v0.10.37`, paired Hard/Expert live MCP captures compare monitored and
+unmonitored rival-information policies at seed `42`. Treat the result as
+observation-surface evidence for monitor value and debrief traceability, not as
+human-learning validation, empirical calibration, Expert winnability proof, or
+runtime tuning evidence.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.

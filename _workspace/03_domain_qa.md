@@ -1,4 +1,4 @@
-# Domain QA - Rival Information Pressure Design
+# Domain QA - Rival Information Monitor Evidence
 
 ## Status
 
@@ -6,10 +6,11 @@ pass
 
 ## Reviewed Inputs
 
-- User request to implement the approved PR handoff plan.
+- User request to implement the approved continuation plan.
+- `docs/playtest-findings-v0.10.37.md`
+- `_workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json`
+- `_workspace/experiments/v0.10.37-rival-info-monitor-evidence/diagnostics.md`
 - `docs/playtest-findings-v0.10.36.md`
-- `docs/playtest-findings-v0.10.35.md`
-- `docs/expansion-proposal-review.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - `SPEC.md`
@@ -18,17 +19,17 @@ pass
 
 ## Findings
 
-- The artifact stays within Phase 7 difficulty design and does not promote
-  runtime mechanics, scenario schemas, MCP interfaces, replay formats, state
-  hashes, scoring, AP budgets, command costs, or balance changes.
-- The design separates observable rival information surfaces from hidden true
-  state. It frames information delay, monitor value, and public disclosure as
-  actor-visible design hypotheses rather than omniscient rival advantages.
-- The note preserves the distinction between design intent, evidence limits,
-  and future promotion criteria. Expert clearability is explicitly unvalidated.
-- The design keeps monitoring pressure contextual and reviewable. It does not
-  present monitoring frequency as proof of learning, endpoint quality, or
-  calibrated strategy value.
+- The artifact stays within Phase 7 evidence work and does not promote runtime
+  mechanics, scenario schemas, MCP interfaces, replay formats, state hashes,
+  scoring, AP budgets, command costs, or balance changes.
+- The paired runs correctly separate observation value from endpoint metrics:
+  monitored and unmonitored pairs have identical final hashes, while monitored
+  runs include monitor-intel lines unavailable in the unmonitored observations.
+- The findings preserve actor-visible observation boundaries. They discuss
+  public rival lines, monitor intel, and private activity gaps rather than
+  treating hidden true state as player knowledge.
+- Expert completion is framed narrowly as one conservative simulated-agent
+  policy completing seed `42`, not as a general Expert winnability claim.
 
 ## Required Fixes
 
@@ -36,19 +37,20 @@ pass
 
 ## Residual Risks
 
-- The tier table is still a design hypothesis based on simulated-agent,
-  deterministic-policy, reviewer-policy, and operator-authored evidence rather
-  than classroom observation.
-- A future runtime slice must still prove that one information-pressure surface
-  cannot be handled by existing observations, histories, diagnostics, or
-  debriefs before changing mechanics.
+- The evidence uses deterministic simulated-agent policies, not human classroom
+  observation or calibrated learner behavior.
+- The paired policy does not test whether players change later choices after
+  seeing monitor intel.
+- A future runtime slice must still identify a concrete gap before changing
+  information delay, monitor value, public disclosure, difficulty values, AP
+  budgets, command costs, scoring, or balance.
 
 ## Verification Evidence
 
-- `python3 -m json.tool _workspace/experiments/v0.9.8-difficulty-sweep/results.json`
-- `python3 -m json.tool _workspace/experiments/v0.9.9-difficulty-adaptive/results.json`
-- `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
-- `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+- `python3 -m py_compile scripts/diagnose_runs.py _workspace/experiments/v0.10.37-rival-info-monitor-evidence/run_sessions.py`
+- `python3 _workspace/experiments/v0.10.37-rival-info-monitor-evidence/run_sessions.py`
+- `python3 -m json.tool _workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json`
+- `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json --output _workspace/experiments/v0.10.37-rival-info-monitor-evidence/diagnostics.md`
 - `git diff --check`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
