@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.33] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.33.md`, a Phase 7 focused evidence
+  review for interpreting growth/capacity-oriented competitive play across
+  existing simulated-agent, deterministic-policy, reviewer-policy, and
+  operator-authored artifacts.
+
+### Changed
+- Routed follow-up work back through competitive teachability and validation
+  gates unless a future artifact identifies a concrete project-cost,
+  capacity-effect, staffing-allocation, strategic-behavior, or balance defect.
+- Bumped the package version to `0.10.33`.
+
 ## [0.10.32] - 2026-07-09
 
 ### Changed
