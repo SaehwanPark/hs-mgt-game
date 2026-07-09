@@ -144,6 +144,55 @@ reconstructing it from the diff.
 | Future Queue Re-ranking and SDD Alignment | v0.10.32 | Re-rank SPEC Future tracks around validation-first promotion gates and align SDD handoff docs | 294 | `8926f71296f39efc` (competitive) |
 | Growth/Capacity-Oriented Evidence Review | v0.10.33 | Review growth/capacity-oriented competitive play as an interpretive evidence axis across projects, investments, staffed capacity, cash runway, access, and rival pressure | 294 | `8926f71296f39efc` (competitive) |
 | Instructor Debrief Facilitation Note | v0.10.34 | Sequence recent competitive comparison, workforce-protective, and growth/capacity evidence into instructor debrief prompts | 294 | `8926f71296f39efc` (competitive) |
+| Difficulty Pressure Dimension Gate | v0.10.35 | Select rival information and monitoring pressure visibility as the next bounded difficulty surface before any runtime tuning | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Difficulty Pressure Dimension Gate
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.35
+
+  Summary:
+  Added a Phase 7 difficulty evidence gate that reviews current Easy/Normal/Hard
+  difficulty artifacts and selects rival information and monitoring pressure
+  visibility as the next bounded difficulty dimension to design or test. The
+  slice keeps runtime mechanics and balance unchanged.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.35.md` with the current difficulty
+    surface, selected dimension, recommended next slice, non-promotions, and
+    evidence limits.
+  - Updated the MCP playtesting guide with a `v0.10.35` routing checkpoint.
+  - Preserved runtime mechanics, command validation, stochastic inputs,
+    scenarios, MCP DTOs, replay formats, state hashes, diagnostics logic,
+    action costs, project costs, capacity effects, difficulty values, scoring,
+    and balance.
+  - Bumped package metadata to `0.10.35`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, diagnostic parser, or command-surface change.
+  - No Expert winnability claim, difficulty value change, hidden rival
+    omniscience, punitive player-resource cut, broad balance pass, command-cost
+    change, AP-budget change, access-pledge cooldown, scoring redesign, new
+    strategic actor class, GUI, M&A, release, or runtime tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new live-capture run, hidden score, validated learner archetype, assessment
+    instrument, instructor export format, analytics platform, or broad evidence
+    taxonomy.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.9.8-difficulty-sweep/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.9.9-difficulty-adaptive/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.35-diagnostics.md`
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Instructor Debrief Facilitation Note

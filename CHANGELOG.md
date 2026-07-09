@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.35] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.35.md`, a Phase 7 difficulty pressure
+  dimension gate selecting rival information and monitoring pressure visibility
+  as the next bounded difficulty surface to design or test.
+
+### Changed
+- Routed difficulty follow-up away from retry metadata and runtime tuning toward
+  evidence-gated rival information/monitoring pressure before any balance
+  change.
+- Bumped the package version to `0.10.35`.
+
 ## [0.10.34] - 2026-07-09
 
 ### Added
