@@ -40,6 +40,9 @@ ledger records a source, range, and versioned ruleset use.
 | Actor decision rationales | History and debrief | Project requirement | Records why each local strategic actor selected an outcome |
 | Attributed effects | Transition explanation | Project requirement | Supports causal inspection without claiming calibration |
 | Competitive regional campaign (design) | Phase 6.0 parallel track | Design artifact | See [`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md), ADRs 0003–0006; not runtime |
+| Difficulty pressure tiers | Future Phase 7/9 expansion review | Gameplay-driven / design abstraction | Current runtime varies rival count, AP, and AI ability; future resource, information, and aggression differences require validation and Expert winnability evidence |
+| Regional merger/acquisition | Future Phase 7/9 expansion review | Literature-grounded direction; uncalibrated mechanics | DOJ/FTC merger review and HHS consolidation materials support institutional relevance; prototype outcomes must not imply legal forecasting |
+| GUI asset sourcing | Future interface expansion | Licensing / product constraint | Prefer CC0 assets such as Kenney; OpenGameArt/itch.io assets require per-asset license review before distribution |
 
 ## Boundary Evidence Notes
 

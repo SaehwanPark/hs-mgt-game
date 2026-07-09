@@ -124,6 +124,7 @@ Deeper project context:
 - [Roadmap](docs/roadmap.md)
 - [Glossary](docs/glossary.md)
 - [Evidence Registry](docs/evidence-registry.md)
+- [Expansion Proposal Review](docs/expansion-proposal-review.md)
 - [Architecture Decision Records](docs/decision-records/README.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
 - [Agent Playtest Protocol](docs/agent-playtest-protocol.md)

@@ -49,6 +49,13 @@ tooling remain deferred.
 | `actor_stubs` | Non-player actor metadata | References to actor-card ids, not decision code |
 | `evaluation_profile` | Debrief and assessment hooks | Optional scoring or discussion prompts |
 
+Future expansion fields should be added only after proposal review and domain
+QA. Candidate additions include explicit difficulty-pressure profiles
+(resource access, information delay, monitoring depth, risk posture), regional
+consolidation scenario events or actor stubs, and GUI presentation metadata.
+These fields should compose known mechanisms; they must not become executable
+logic or a second rules language.
+
 ## Turn Schedule Entry (draft)
 
 Each entry describes one executive decision point:
@@ -96,6 +103,10 @@ source of truth for what actually happened in a session.
 - No Medicare/Medicaid actor stubs until first-scenario scope expands.
 - No empirical parameter files; use [`evidence-registry.md`](evidence-registry.md)
   ledger when calibrating rulesets.
+- No merger/acquisition deal-market schema until one regional consolidation
+  slice proves the needed fields.
+- No GUI-only scenario behavior; graphical clients should consume existing
+  scenario content and observation/debrief outputs.
 
 ## Open Questions
 

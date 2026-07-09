@@ -142,6 +142,19 @@ and Stata-like CLI per ADRs 0003–0006. The campaign loop runs for 24 months,
 with full autosave/resume, scenario loading, and replay export. Classroom
 hot-seat multiplayer (Phase 9) remains deferred.
 
+Future expansion boundaries:
+
+- Difficulty expansion may vary rival resource access, information access, and
+  risk posture only through explicit scenario, ruleset, or actor-configuration
+  data. It must not give rivals hidden omniscience.
+- Regional merger/acquisition should begin as one affiliation or acquisition
+  slice with regulatory, community, payer, labor, integration, and access
+  consequences. A national deal market and private-equity rollup simulator
+  remain outside the current boundary.
+- GUI work should be an interface adapter over existing observations, commands,
+  histories, replay, and debrief outputs. Graphical rendering and asset loading
+  stay outside the deterministic core.
+
 Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 
 ## Deferred Ontology Work
@@ -154,3 +167,6 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal belief-state representation beyond observation snapshots.
 - Parameter ledger separating empirical ranges, design abstractions, balancing
   choices, and normative scoring.
+- Regional consolidation vocabulary, including affiliation, acquisition,
+  regulatory review, community-benefit commitment, and integration drag, once
+  an M&A slice is promoted.

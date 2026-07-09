@@ -845,6 +845,38 @@ why it happened, what the player knew at the time, which assumptions mattered,
 what alternatives were available, and whether a bad outcome reflected poor
 decision quality or unfavorable realization.
 
+## 7.7 Expansion Proposal Review Gate
+
+Before broadening the game beyond the current competitive campaign, review
+candidate expansions as proposals rather than immediate implementation tracks.
+This gate exists to keep future work research-informed, playable, and
+inspectable.
+
+Review in this order:
+
+1. assess the proposal and precedent evidence;
+2. identify the smallest credible slice;
+3. update this roadmap and SDD documents;
+4. run domain QA; and
+5. only then promote a bounded implementation item into `SPEC.md` Present.
+
+Current proposal-review candidates:
+
+- **Difficulty expansion:** extend the existing Capitalism-style tiers beyond K
+  rivals and AP budgets by varying rival resource access, information access,
+  and risk/aggression posture. Harder tiers must remain explainable, and Expert
+  difficulty must be validated as severe but winnable rather than punitive or
+  impossible.
+- **Regional merger/acquisition:** model a realistic US regional affiliation or
+  acquisition slice with regulatory review, community commitments, payer
+  leverage, labor effects, integration drag, and access/quality consequences.
+  Full deal-market simulation, private-equity rollups, and national
+  consolidation strategy remain deferred.
+- **GUI thin client:** design a graphical layer that reuses the same core,
+  scenario, observation, replay, and debrief data as the CLI/MCP interfaces.
+  Publicly downloadable pixel assets require license review, with CC0 sources
+  preferred.
+
 ## Deliverables
 
 - Technical validation report
@@ -853,6 +885,8 @@ decision quality or unfavorable realization.
 - Sensitivity analysis
 - AI-agent gameplay findings
 - Educational artifact review findings
+- Expansion proposal review artifact when future-feature proposals are under
+  consideration
 - Prioritized revision plan
 
 ## Exit Criteria
@@ -864,6 +898,8 @@ decision quality or unfavorable realization.
   actor-visible observations and debriefs.
 - There is evidence that the game artifacts support the stated learning
   objectives, without claiming measured human learning outcomes.
+- Future expansion candidates have explicit review artifacts, evidence limits,
+  non-goals, and promotion gates before runtime implementation.
 
 ---
 
@@ -951,6 +987,19 @@ Potential additions include:
 - public-health emergency;
 - and state-level regulatory variation.
 
+Difficulty expansion is also a candidate post-release track. If Phase 7
+evidence supports it, refine tiers so they differ by more than rival count:
+rival capital and borrowing slack, monitoring depth, information delay, risk
+posture, implementation-capacity pressure, and scenario-specific starting
+asymmetries. The hardest tier should remain clearable by strong play across
+more than one strategy family.
+
+Merger and antitrust review should begin with one regional nonprofit/community
+affiliation or acquisition scenario, not a national deal market. The first
+slice should model partner fit, regulatory and community review,
+community-benefit commitments, payer leverage, labor alignment, integration
+cost, and post-deal access or quality consequences.
+
 ## 9.2 Deeper Strategic Models
 
 Potential additions include:
@@ -968,10 +1017,17 @@ Potential additions include:
 Potential additions include:
 
 - role-based multiplayer;
-- graphical or web interfaces;
+- graphical or web interfaces that reuse the same deterministic core,
+  observations, command validation, replay history, and debrief outputs as the
+  CLI/MCP interfaces;
 - richer instructor controls;
 - assignment and learning-management integration;
 - and comparative cohort analytics.
+
+A GUI proof should start as a thin client. Rendering, input handling, layout,
+asset loading, and packaging must remain outside the transition core. Pixel
+assets must be publicly downloadable and license-audited before distribution;
+CC0 assets should be preferred for the first proof.
 
 ## 9.4 Comparative Health Systems
 

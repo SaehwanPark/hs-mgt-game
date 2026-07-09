@@ -140,6 +140,87 @@ reconstructing it from the diff.
 | Competitive Strategy-Space Synthesis | v0.10.28 | Compare finance-first, access-heavy, workforce-protective, and growth-oriented signals across existing competitive evidence | 294 | `8926f71296f39efc` (competitive) |
 | Competitive Debrief Comparison Surface | v0.10.29 | Add an instructor/reviewer comparison surface for decision quality, outcome quality, cash runway, follow-through, rival pressure, and debrief traceability | 294 | `8926f71296f39efc` (competitive) |
 | Workforce-Protective Evidence Review | v0.10.30 | Review workforce-protective competitive play as an interpretive evidence axis across staffing, trust, pacing, monitoring, and commitment discipline | 294 | `8926f71296f39efc` (competitive) |
+| Expansion Proposal Review | v0.10.31 | Review difficulty, regional M&A, and GUI expansion proposals before roadmap and SDD propagation | 294 | `8926f71296f39efc` (competitive) |
+| Future Queue Re-ranking and SDD Alignment | v0.10.32 | Re-rank SPEC Future tracks around validation-first promotion gates and align SDD handoff docs | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Future Queue Re-ranking and SDD Alignment
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.32
+
+  Summary:
+  Reviewed and restructured the `SPEC.md` Future queue so future work is easier
+  to promote into bounded `Present` slices. The queue now separates promotion
+  rules from ranked product/runtime tracks and keeps validation, teachability,
+  and evidence gates ahead of broader expansion.
+
+  Done:
+  - Replaced the mixed 10-item Future queue with explicit promotion rules, a
+    six-track ranked queue, and cross-cutting SDD guardrails.
+  - Re-ranked next work around competitive teachability/validation before
+    difficulty depth, regional affiliation/acquisition, GUI proof, broader
+    simulation breadth, and release readiness.
+  - Updated SDD handoff artifacts and changelog/version metadata for `0.10.32`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, state hash,
+    ruleset, GUI implementation, asset download, or scenario file change.
+  - No difficulty tuning, Expert clearability claim, M&A legal forecast, merger
+    outcome formula, GUI toolkit choice, desktop packaging, or asset pipeline.
+  - No broad archive rewrite, new documentation framework, release convention,
+    public package workflow, human-learning claim, empirical calibration claim,
+    or policy-validity claim.
+
+  Verification:
+  - `rg` stale-queue/version scan over SDD and companion docs
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+
+
+- Feature: Expansion Proposal Review
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.31
+
+  Summary:
+  Added a validation-first proposal review and propagated roadmap/SDD guidance
+  for three future expansion candidates: richer Capitalism-style difficulty
+  tiers, one regional healthcare affiliation/acquisition slice, and a GUI thin
+  client over the existing deterministic core.
+
+  Done:
+  - Added `docs/expansion-proposal-review.md` with proposal-review posture,
+    source links, recommended gates, design implications, risks, and promotion
+    rules.
+  - Updated `docs/roadmap.md` with a Phase 7 expansion proposal review gate and
+    Phase 9 routing for difficulty depth, regional consolidation, and GUI
+    thin-client work.
+  - Propagated future-boundary guidance into `ARCHITECTURE.md`,
+    `docs/design_principles.md`, `docs/competitive-scenario-brief.md`,
+    `docs/system-boundary.md`, `docs/scenario-format-draft.md`, and
+    `docs/evidence-registry.md`.
+  - Bumped package metadata to `0.10.31`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, MCP DTO, replay artifact, state hash,
+    ruleset, GUI implementation, asset download, or scenario file change.
+  - No difficulty tuning, Expert clearability claim, M&A legal forecast, merger
+    outcome formula, GUI toolkit choice, desktop packaging, or asset pipeline.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new playtest run, broad scenario-authoring framework, national deal-market
+    model, private-equity rollup simulator, or replacement of CLI/MCP.
+
+  Verification:
+  - `rg` stale-phrase scan over roadmap, SDD, and companion docs
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Workforce-Protective Evidence Review
@@ -2183,6 +2264,22 @@ None. All scheduled features are complete.
 
 ## Future
 
+### Promotion rules
+
+Before any Future item moves into `Present`, the new Present entry must name:
+
+- the roadmap phase or gate it satisfies;
+- the evidence source, proposal review, playtest finding, domain QA note, or
+  release need that justifies promotion;
+- the narrow artifact or runtime behavior being changed;
+- verification criteria needed before the slice can close; and
+- explicit non-goals that keep adjacent Future tracks out of scope.
+
+Major architecture, scenario-generalization, documentation-taxonomy, GUI, MCP,
+or release-automation work remains frozen by default. Permit it only when a
+playtest, authoring, QA, debrief, audience-access, or release-readiness finding
+names a concrete need that current structures cannot meet.
+
 ### Ranked next-development queue
 
 The first runnable prototype is complete enough that the next risk is not
@@ -2190,87 +2287,98 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: Competitive campaign hardening
-  Phase / Gate: Phase 6/7; proceed only after playtest findings identify a
-  concrete comprehension, pacing, exploit, or command-entry issue.
+1. Track: Competitive teachability and validation loop
+  Phase / Gate: Phase 7; proceed when existing or newly captured playtest
+  evidence identifies one concrete comprehension, pacing, traceability, strategy
+  comparison, or debrief-use issue.
 
   Next actionable slice:
-  Pick one bounded issue from playtest evidence, such as month-summary clarity,
-  command help coverage, AI rationale visibility, or a pacing/comprehension problem
-  (autocomplete completed in v0.2.5; AI rationale visibility completed in v0.2.7;
-  month-summary clarity completed in v0.2.8; command help coverage completed in v0.2.9),
-  and address it without broadening the campaign scope.
+  Pick one bounded teachability issue from evidence, such as strategy comparison
+  prompts, instructor debrief use, repeated-play interpretation, access/workforce
+  explanation, or command-entry friction that remains after prior autocomplete,
+  rationale-visibility, month-summary, command-help, and comparison-surface work.
 
   Verification target:
-  Focused CLI/parser/simulation tests cover the changed behavior, competitive
-  seed-42 golden hash is unchanged unless transition semantics intentionally
-  change, and player-facing docs explain any new guidance.
-
-  Deferred / Non-Goals:
-  Multiplayer, new strategic actor classes, broad balance passes, and platform
-  architecture expansion.
-
-2. Track: Strategy-space diagnostics
-  Phase / Gate: Phase 7; keep as analysis artifacts until repeated review needs
-  justify tooling.
-
-  Next actionable slice:
-  Write a lightweight diagnostic report over newly captured runs, or implement
-  dedicated tooling only after repeated playtest or authoring work needs
-  action-frequency, outcome-distribution, or strategy-cluster extraction.
-
-  Verification target:
-  The diagnostic links claims to captured runs, separates simulated-player
-  behavior from interpretation, and names which findings should affect guidance,
-  debriefing, balance, or future tooling. No formula tuning should happen from a
-  single profile, seed, or campaign.
-
-  Deferred / Non-Goals:
-  No analytics platform, policy forecast validation, automated optimization
-  framework, or runtime export change unless a later slice proves the need.
-
-3. Track: AI-agent playtest synthesis
-  Phase / Gate: Phase 7 prep; use `docs/agent-playtest-protocol.md`,
-  `docs/mcp-playtesting-guide.md`, and versioned findings as the evidence
-  baseline.
-
-  Next actionable slice:
-  Review subsequent playtest findings under longer campaign horizons, different
-  difficulty tiers, or new debrief/instructor-analysis surfaces when available.
-
-  Verification target:
-  Follow-up findings cite session counts, campaign(s), seeds, difficulty, agent
-  profiles or prompts, actor-visible observations, submitted commands,
-  validation failures, histories, debriefs, diagnostic summaries, evidence
-  limits, and prioritized recommendations.
+  Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible
+  observations, submitted commands, validation failures or retries, histories,
+  debriefs, diagnostic summaries, evidence limits, and prioritized
+  recommendations. Runtime or interface changes require focused tests, and the
+  competitive seed-42 golden hash remains unchanged unless transition semantics
+  intentionally change.
 
   Deferred / Non-Goals:
   No external human recruitment gate, formal human-subjects research process,
   measured human-learning claim, empirical calibration claim, scoring redesign,
-  or broad balance pass.
+  broad balance pass, multiplayer, new strategic actor class, or platform
+  architecture expansion.
 
-4. Track: MCP agent interface expansion
-  Phase / Gate: Agent-play support; proceed only after bounded stdio play
-  exposes a specific need that cannot be met through current tools.
+2. Track: Difficulty depth and winnability
+  Phase / Gate: Phase 7/9; proceed only after the expansion proposal review and
+  difficulty evidence identify one pressure dimension current tiers do not
+  express.
 
   Next actionable slice:
-  Add one evidence-backed MCP improvement, such as a richer observation summary,
-  safer error payload, or playtest automation affordance, while preserving the
-  local stdio boundary.
+  Design or test one visible difficulty dimension, such as rival resource
+  access, information delay, monitoring depth, implementation capacity, or
+  risk/aggression posture. Validate Expert difficulty as severe but winnable
+  before changing default balance.
 
   Verification target:
-  MCP session tests cover both campaigns, invalid-command non-advancement,
-  bounded completion, and same-seed determinism. Tool DTO shape changes are
-  documented in `docs/mcp-agent-interface.md`.
+  Findings cite seeds, profiles, difficulty tiers, validation failures or
+  retries, final tradeoff metrics, rival pressure, and debrief traceability.
+  Expert should show at least one clearable path without hidden omniscience or
+  one locked optimal strategy.
 
   Deferred / Non-Goals:
-  HTTP transport, auth, durable session persistence, multi-client coordination,
-  and new runtime export formats.
+  No broad balance pass, hidden rival omniscience, punitive player-resource cut,
+  scoring redesign, runtime tuning from a single run, or difficulty claim from
+  one profile/seed/campaign.
 
-5. Track: Broader simulation breadth and new strategic actors
-  Phase / Gate: Phase 6.1; proceed only after playtest, instructor, scenario, or
-  domain-review evidence shows that current campaign limits block meaningful
-  strategy or learning.
+3. Track: Regional affiliation/acquisition slice
+  Phase / Gate: Phase 7/9; proceed only after proposal review and domain QA
+  approve one bounded US regional affiliation or acquisition scenario.
+
+  Next actionable slice:
+  Draft one regional affiliation/acquisition scenario design covering partner
+  fit, regulatory review, community-benefit commitments, payer leverage, labor
+  response, integration drag, capital access, service continuity, and
+  access/quality consequences.
+
+  Verification target:
+  The design distinguishes organizational utility, actor incentives, social
+  welfare, community effects, and educational evaluation. Legal/regulatory
+  outcomes are labeled abstractions unless separately grounded.
+
+  Deferred / Non-Goals:
+  No national consolidation simulator, private-equity rollup model, detailed
+  deal-financing system, calibrated antitrust forecast, multi-transaction
+  strategy framework, or scenario-schema/runtime implementation before the
+  design slice closes.
+
+4. Track: GUI thin-client proof
+  Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
+  review evidence shows a graphical surface would improve usability without
+  weakening core inspectability.
+
+  Next actionable slice:
+  Prototype one GUI surface that consumes existing observations, command
+  validation, history/replay, and debrief outputs. Complete an asset-license
+  audit before distributing any downloaded pixel assets.
+
+  Verification target:
+  GUI work preserves CLI/MCP behavior, does not duplicate simulation state, and
+  keeps rendering, input, assets, layout, and packaging outside the deterministic
+  core. Asset manifests record source and license before distribution.
+
+  Deferred / Non-Goals:
+  No GUI-only scenario behavior, runtime semantics fork, release packaging
+  commitment, non-audited assets, replacement of CLI/MCP, HTTP multiplayer,
+  auth, or durable session persistence.
+
+5. Track: Broader simulation breadth and strategic actors
+  Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
+  domain-review evidence shows current campaign limits block meaningful strategy
+  or learning.
 
   Next actionable slice:
   Add one bounded breadth element, such as one service-line decision, one patient
@@ -2288,29 +2396,10 @@ strategic actors, or platform architecture.
   Full US health-system model, individual patient simulation, broad federal
   policy lifecycle framework, national policy simulation, federal budget
   modeling, full Medicaid eligibility rules, Medicare payment reproduction,
-  global equilibrium AI, and speculative generalized frameworks.
+  global equilibrium AI, speculative generalized frameworks, and broad
+  scenario-authoring infrastructure.
 
-6. Track: Architecture and documentation discipline
-  Phase / Gate: Cross-cutting SDD; apply before promoting any Future item into
-  Present.
-
-  Next actionable slice:
-  Freeze major abstractions by default. Permit new architecture, scenario
-  generalization, or documentation taxonomy only when a playtest, authoring, QA,
-  or debrief finding names a concrete need that current structures cannot meet.
-
-  Verification target:
-  New slices cite the finding that justifies the abstraction, preserve
-  deterministic replay boundaries, and record non-goals. Documentation updates
-  should reduce ambiguity for future agents rather than expand the conceptual
-  framework without validation evidence.
-
-  Deferred / Non-Goals:
-  No broad framework expansion, reusable comparative-policy platform work, or
-  research-grade calibration until the compact educational strategy simulation
-  proves difficult, legible, and interesting decisions.
-
-7. Track: Release automation and contributor readiness
+6. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 
@@ -2320,9 +2409,9 @@ strategic actors, or platform architecture.
 
   Verification target:
   Local command passes, CI documentation is updated, and the change does not
-  alter simulation behavior or require new release conventions beyond
+  alter simulation behavior or require release conventions beyond
   `docs/versioning-policy.md`.
 
   Deferred / Non-Goals:
-  Public release packaging, publication automation, data/licensing finalization,
-  or broad repository restructuring.
+  No public release packaging, publication automation, data/licensing
+  finalization, or broad repository restructuring.

@@ -41,6 +41,12 @@ mere market share maximization.
 | Hard | 3 | 3 | 3 | Northlake + Summit + Valley Regional (access) |
 | Expert | 4 | 2 | 4 | Above + Metro Academic (political) |
 
+Future difficulty expansion should preserve the table as the visible baseline
+while adding explainable pressure dimensions only after validation: rival
+resource access, information delay, monitoring depth, and risk/aggression
+posture. Expert should be documented and playtested as difficult but winnable,
+not as an impossible challenge tier.
+
 ## Learning objectives
 
 Players should practice:
@@ -75,6 +81,10 @@ Players should practice:
 - Hot-seat classroom multiplayer (Phase 9)
 - Empirical calibration or forecasting claims
 - Refactoring or replacing stabilization demo
+- Regional merger/acquisition mechanics until a reviewed consolidation slice is
+  promoted from roadmap Future into an active scenario design.
+- GUI-specific scenario behavior; future graphical clients must reuse the same
+  scenario and core data.
 
 ## Initial strategic tensions
 

@@ -129,8 +129,8 @@ Status: Verified
 ### Interface
 
 The initial player interface is a CLI. Terminal rendering, input parsing,
-display formatting, and MCP protocol handling should remain outside the
-deterministic simulation core.
+display formatting, MCP protocol handling, and any future GUI rendering should
+remain outside the deterministic simulation core.
 
 Current proof: `cargo run` invokes `cli::run()` for a starting executive
 dashboard and strategy commitment previews, play-mode and seed selection,
@@ -146,6 +146,16 @@ observation helpers, validation, and transition functions; it does not read
 randomness or mutate the core directly.
 
 Last Reviewed: 2026-07-07
+Status: Verified
+
+Future GUI work should be a thin client over the same scenario, observation,
+command-validation, history, replay, and debrief surfaces used by CLI and MCP.
+It must not introduce a second simulation state model, hidden randomness,
+network-dependent core behavior, or GUI-only transition semantics. Asset loading
+and license attribution belong at the interface/distribution boundary, not in
+the core engine.
+
+Last Reviewed: 2026-07-09
 Status: Verified
 
 ## Durable Constraints
@@ -171,9 +181,9 @@ Status: Verified
 The current architecture is sufficiently expressive for validation of the
 bounded stabilization and competitive campaign slices. Future work should avoid
 adding generalized actor frameworks, analytics platforms, calibration
-structures, or broader scenario-authoring infrastructure until a documented
-finding shows that gameplay, authoring, debriefing, or validation is blocked by
-the current narrower shape.
+structures, GUI platform layers, or broader scenario-authoring infrastructure
+until a documented finding shows that gameplay, authoring, debriefing, audience
+reach, or validation is blocked by the current narrower shape.
 
 When a new abstraction is justified, the implementing slice should name the
 evidence source, keep deterministic replay and actor-observation boundaries

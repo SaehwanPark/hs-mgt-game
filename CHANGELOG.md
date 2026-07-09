@@ -4,6 +4,27 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.32] - 2026-07-09
+
+### Changed
+- Re-ranked and restructured the `SPEC.md` Future queue around explicit
+  promotion rules, validation-first next steps, and cross-cutting SDD guardrails.
+- Updated SDD handoff artifacts for the Future queue review and alignment slice.
+- Bumped the package version to `0.10.32`.
+
+## [0.10.31] - 2026-07-09
+
+### Added
+- Added `docs/expansion-proposal-review.md`, a Phase 7 proposal-review artifact
+  for richer Capitalism-style difficulty tiers, a regional healthcare
+  affiliation/acquisition slice, and a GUI thin client over the existing core.
+
+### Changed
+- Updated roadmap, SDD, architecture, and companion design docs so expansion
+  ideas are reviewed first, then promoted through validation gates before any
+  runtime implementation.
+- Bumped the package version to `0.10.31`.
+
 ## [0.10.30] - 2026-07-09
 
 ### Added

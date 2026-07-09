@@ -427,6 +427,12 @@ Strategies should create different risks, stakeholder relationships, and long-te
 
 Balance should not mean making every action equally effective. It should mean that multiple approaches can be rational under different objectives and beliefs.
 
+Difficulty settings should preserve this principle. Harder tiers may give
+rivals better resource access, faster information, or more aggressive risk
+posture, but they should not rely on hidden omniscience or arbitrary punishment.
+The hardest tier should be severe but winnable through more than one coherent
+strategy.
+
 ---
 
 ## 22. Build Vertical Slices Before General Frameworks
@@ -520,6 +526,16 @@ The terminal interface should emphasize:
 The CLI is not merely a temporary absence of graphics. It is a way to focus development on systems, explanation, and educational usability.
 
 Future interfaces should consume the same underlying engine rather than redefine the simulation.
+
+A future GUI may broaden the audience, but it should remain an interface layer:
+rendering, input, assets, layout, and packaging outside the deterministic core;
+the same actor observations, commands, replay history, and debrief logic inside
+the product boundary.
+
+Regional merger or acquisition mechanics should be held to the same standards
+as other strategic interactions. They must separate organizational advantage,
+actor utility, social welfare, community effects, and educational evaluation
+instead of treating consolidation as automatically good or bad.
 
 ---
 

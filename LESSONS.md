@@ -3,6 +3,36 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Separate Future Queue Ranking From Promotion Rules
+
+- Context: Re-ranking `SPEC.md` Future items after several validation and
+  proposal-review slices had accumulated.
+- Symptom: The Future queue mixed ranked product work, evidence analysis,
+  platform support, architecture discipline, and release readiness as if they
+  were equivalent next actions.
+- Cause: Cross-cutting guardrails and promotion criteria were stored as ranked
+  tracks, making it harder to see the next bounded slice.
+- Resolution: Move promotion rules and architecture/documentation discipline
+  above the ranked queue, then rank only actionable future tracks.
+- Prevention: When updating `SPEC.md` Future, keep the ranked list focused on
+  promotable work. Put phase gates, evidence requirements, non-goals, and
+  architecture freezes in separate guardrail text.
+
+## Expansion Ideas Need Proposal Gates Before SDD Promotion
+
+- Context: Reviewing future difficulty, regional M&A, and GUI expansion ideas
+  after the competitive campaign already had substantial validation evidence.
+- Symptom: Large attractive features can look ready for implementation because
+  the current architecture can plausibly support them.
+- Cause: Difficulty tuning, consolidation mechanics, and GUI work each carry
+  different evidence, domain, licensing, and architecture risks that should not
+  be collapsed into one implementation track.
+- Resolution: Add a proposal-review artifact first, then update roadmap and SDD
+  Future tracks while keeping runtime behavior unchanged.
+- Prevention: For future broad product ideas, write the review gate before
+  promoting work into `SPEC.md` Present. Name the smallest slice, evidence
+  limits, non-goals, and stop conditions before editing runtime code.
+
 ## Preserve Live-Agent Retry and Replacement Metadata
 
 - Context: Adding the v0.10.15 live LLM/sub-agent difficulty gate after the
