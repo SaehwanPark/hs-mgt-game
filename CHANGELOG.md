@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.26] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.26.md`, a Phase 7 synthesis comparing
+  recent competitive playtest findings for teachability, debrief coherence, and
+  repeated-play interest.
+
+### Changed
+- Routed the next bounded follow-up toward instructor-facing comparison or
+  broader strategy-space synthesis while keeping runtime mechanics, command
+  costs, pledge cooldowns, difficulty changes, and balance changes deferred.
+- Bumped the package version to `0.10.26`.
+
 ## [0.10.25] - 2026-07-08
 
 ### Added

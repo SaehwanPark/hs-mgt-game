@@ -379,3 +379,9 @@ As of `v0.10.25`, `docs/playtest-findings-v0.10.25.md` synthesizes the
 as a routing checkpoint: access follow-through is now covered as debrief
 explanation, and future runtime changes still require a separate artifact that
 identifies a concrete mechanics problem.
+
+As of `v0.10.26`, `docs/playtest-findings-v0.10.26.md` compares recent
+competitive evidence for teachability, debrief coherence, and repeated-play
+interest. Treat that synthesis as a broader Phase 7 routing checkpoint:
+follow-up work should prefer instructor-facing comparison prompts or broader
+strategy-space synthesis before reopening runtime tuning.
