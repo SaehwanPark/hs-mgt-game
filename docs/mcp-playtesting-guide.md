@@ -385,3 +385,9 @@ competitive evidence for teachability, debrief coherence, and repeated-play
 interest. Treat that synthesis as a broader Phase 7 routing checkpoint:
 follow-up work should prefer instructor-facing comparison prompts or broader
 strategy-space synthesis before reopening runtime tuning.
+
+As of `v0.10.27`, `docs/playtest-findings-v0.10.27.md` turns the competitive
+teachability synthesis into instructor-facing comparison prompts. Use it for
+discussion of decision quality versus outcome quality across existing evidence,
+not as human-learning validation, empirical calibration, or runtime tuning
+evidence.
