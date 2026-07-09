@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.34] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.34.md`, a Phase 7 instructor debrief
+  facilitation note connecting recent comparison, workforce-protective, and
+  growth/capacity evidence into repeated-run discussion prompts.
+
+### Changed
+- Routed follow-up work through competitive teachability and validation gates
+  unless a future artifact identifies a concrete diagnostics, difficulty, or
+  mechanics issue.
+- Bumped the package version to `0.10.34`.
+
 ## [0.10.33] - 2026-07-09
 
 ### Added

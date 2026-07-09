@@ -95,6 +95,11 @@ as an interpretive review posture across projects, investments, staffed
 capacity, cash runway, access, and rival pressure, not as a hidden strategy
 class, validated learner archetype, standalone balance proof, or reason to
 tune project costs or capacity effects.
+As of `v0.10.34`, the instructor debrief facilitation note sequences recent
+comparison, workforce-protective, and growth/capacity evidence into classroom
+or reviewer prompts. Treat it as a discussion aid, not as measured human
+learning, a validated assessment instrument, or a reason to tune runtime
+mechanics.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
@@ -434,3 +439,9 @@ pressure. Use it for discussion and future evidence routing, not as a
 standalone strategy class, validated learner archetype, balance proof, or
 reason to tune project costs, capacity effects, staffing allocation, or
 difficulty.
+
+As of `v0.10.34`, `docs/playtest-findings-v0.10.34.md` provides an instructor
+debrief facilitation sequence across decision context, outcome context,
+follow-through, workforce posture, growth posture, rival response, and debrief
+clarity. Use it to guide repeated-run discussion, not to claim measured
+learning or promote runtime tuning.
