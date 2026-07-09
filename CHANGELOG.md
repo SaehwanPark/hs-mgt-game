@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.36] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.36.md`, a Phase 7 design note defining
+  rival information delay, monitor value, and public disclosure as the bounded
+  difficulty pressure surface to test before runtime tuning.
+
+### Changed
+- Routed difficulty follow-up toward evidence-gated information-pressure design
+  and away from hidden rival omniscience, broad balance changes, scoring changes,
+  or Expert winnability claims.
+- Bumped the package version to `0.10.36`.
+
 ## [0.10.35] - 2026-07-09
 
 ### Added

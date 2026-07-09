@@ -105,6 +105,11 @@ information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
 as a routing gate, not as Expert winnability evidence, runtime tuning,
 scoring evidence, or a reason to give rivals hidden omniscience.
+As of `v0.10.36`, the rival information pressure design note defines
+information delay, monitor value, and public disclosure as the reviewable
+difficulty surfaces for future testing. Treat those tier descriptions as design
+hypotheses, not implemented rules, empirical calibration, Expert winnability
+proof, or a reason to change AP budgets, command costs, scoring, or balance.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
