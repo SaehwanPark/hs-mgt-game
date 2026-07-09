@@ -146,6 +146,51 @@ reconstructing it from the diff.
 | Instructor Debrief Facilitation Note | v0.10.34 | Sequence recent competitive comparison, workforce-protective, and growth/capacity evidence into instructor debrief prompts | 294 | `8926f71296f39efc` (competitive) |
 | Difficulty Pressure Dimension Gate | v0.10.35 | Select rival information and monitoring pressure visibility as the next bounded difficulty surface before any runtime tuning | 294 | `8926f71296f39efc` (competitive) |
 | Rival Information Pressure Design | v0.10.36 | Define information delay, monitor value, and public disclosure as reviewable difficulty pressure surfaces before runtime tuning | 294 | `8926f71296f39efc` (competitive) |
+| Rival Information Monitor Evidence | v0.10.37 | Compare monitored versus unmonitored Hard/Expert live MCP captures for rival-information observation value | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Rival Information Monitor Evidence
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.37
+
+  Summary:
+  Added a paired Phase 7 live MCP evidence slice comparing monitored and
+  unmonitored rival-information policies on Hard and Expert difficulty at seed
+  42. The slice keeps runtime mechanics and balance unchanged.
+
+  Done:
+  - Added `_workspace/experiments/v0.10.37-rival-info-monitor-evidence/` with
+    the paired capture script, `results.json`, and diagnostics report.
+  - Extended live-capture diagnostics with optional rival-information signal
+    counts for monitor intel, public rival lines, private activity gaps, and no
+    public signal lines.
+  - Added `docs/playtest-findings-v0.10.37.md` and updated the MCP playtesting
+    guide with the evidence-routing checkpoint.
+  - Preserved runtime mechanics, command validation, stochastic inputs,
+    scenarios, MCP DTOs, replay formats, state hashes, ruleset values,
+    difficulty values, scoring, and balance.
+  - Bumped package metadata to `0.10.37`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python MCP wrapper protocol, command-surface, AP-budget,
+    command-cost, scoring, difficulty-value, or rival-AI behavior change.
+  - No Expert winnability claim, hidden rival omniscience, broad balance pass,
+    monitor-cost tuning, public-disclosure tuning, GUI, M&A, release
+    automation, human-learning claim, empirical calibration claim, or
+    policy-validity claim.
+
+  Verification:
+  - `python3 -m py_compile scripts/diagnose_runs.py _workspace/experiments/v0.10.37-rival-info-monitor-evidence/run_sessions.py`
+  - `python3 _workspace/experiments/v0.10.37-rival-info-monitor-evidence/run_sessions.py`
+  - `python3 -m json.tool _workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json --output _workspace/experiments/v0.10.37-rival-info-monitor-evidence/diagnostics.md`
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Rival Information Pressure Design

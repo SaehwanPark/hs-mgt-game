@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.37] - 2026-07-09
+
+### Added
+- Added paired Hard/Expert live MCP capture evidence comparing monitored and
+  unmonitored rival-information policies at seed `42`.
+- Added `docs/playtest-findings-v0.10.37.md` documenting monitor-value evidence
+  and limits.
+- Added optional rival-information signal counts to live-capture diagnostics.
+
+### Changed
+- Routed rival-information pressure follow-up toward observation and debrief
+  traceability evidence before runtime tuning.
+- Bumped the package version to `0.10.37`.
+
 ## [0.10.36] - 2026-07-09
 
 ### Added

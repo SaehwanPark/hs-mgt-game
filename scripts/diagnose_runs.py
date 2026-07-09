@@ -335,13 +335,21 @@ def analyze_live_capture_batch(file_path, data):
     run_stats.append({
       "profile_name": run.get("profile_name", run.get("profile_id", "Unknown")),
       "profile_id": run.get("profile_id", "unknown"),
+      "policy_variant": run.get("policy_variant", "unknown"),
       "difficulty": run.get("difficulty", "unknown"),
+      "completion_status": run.get("completion_status", "unknown"),
+      "run_error": run.get("run_error", ""),
       "transition_count": run.get("transition_count", len(run.get("state_hashes", []))),
       "validation_failures": len(run.get("validation_failures", [])),
       "live_retry_count": len(live_retries),
       "cash_retry_count": len(cash_retries),
       "non_cash_retry_count": len(live_retries) - len(cash_retries),
       "retry_details": summarize_retry_details(live_retries),
+      "monitor_intel_line_count": run.get("monitor_intel_line_count", 0),
+      "public_rival_line_count": run.get("public_rival_line_count", 0),
+      "private_activity_gap_line_count": run.get("private_activity_gap_line_count", 0),
+      "no_public_signal_line_count": run.get("no_public_signal_line_count", 0),
+      "rival_information_examples": run.get("rival_information_examples", {}),
       "access_pledges": run.get("access_pledge_count", 0),
       "final_hash": run.get("final_hash", "N/A"),
       "holds": holds,
@@ -574,12 +582,15 @@ def print_live_capture_batch_markdown(batch):
   print(f"- **Evidence type:** {batch['evidence_type']}\n")
 
   print("### Profile Outcomes")
-  print("| Profile | Months | Cash | Access | Quality | Workforce Trust | Community Trust | Market Share | PC | Beds | Validation Failures | Access Pledges | Final Hash |")
-  print("| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
+  print("| Profile | Status | Months | Cash | Access | Quality | Workforce Trust | Community Trust | Market Share | PC | Beds | Validation Failures | Access Pledges | Final Hash |")
+  print("| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |")
   for stats in batch["run_stats"]:
     metrics = stats["metrics"]
+    status = stats["completion_status"]
+    if stats["run_error"]:
+      status = f"{status}: {stats['run_error']}".replace("|", "\\|")
     print(
-      f"| {stats['profile_name']} | {stats['transition_count']} | "
+      f"| {stats['profile_name']} | {status} | {stats['transition_count']} | "
       f"{metrics.get('Cash', 'N/A')} | {metrics.get('Access', 'N/A')} | "
       f"{metrics.get('Quality', 'N/A')} | {metrics.get('WorkforceTrust', 'N/A')} | "
       f"{metrics.get('CommunityTrust', 'N/A')} | {metrics.get('MarketShare', 'N/A')} | "
@@ -617,6 +628,33 @@ def print_live_capture_batch_markdown(batch):
       f"{stats['retry_details']} |"
     )
   print()
+
+  if any(
+    stats["monitor_intel_line_count"]
+    or stats["public_rival_line_count"]
+    or stats["private_activity_gap_line_count"]
+    or stats["no_public_signal_line_count"]
+    for stats in batch["run_stats"]
+  ):
+    print("### Rival Information Signals")
+    print("| Profile | Difficulty | Variant | Monitor Intel Lines | Public Rival Lines | Private Activity Gaps | No Public Signal Lines | Example Signal |")
+    print("| --- | --- | --- | ---: | ---: | ---: | ---: | --- |")
+    for stats in batch["run_stats"]:
+      examples = stats["rival_information_examples"]
+      example = "None"
+      for key in ["monitor_intel", "public_rival", "private_activity_gap", "no_public_signal"]:
+        values = examples.get(key, [])
+        if values:
+          example = values[0].replace("|", "\\|")
+          break
+      print(
+        f"| {stats['profile_name']} | {stats['difficulty']} | "
+        f"{stats['policy_variant']} | {stats['monitor_intel_line_count']} | "
+        f"{stats['public_rival_line_count']} | "
+        f"{stats['private_activity_gap_line_count']} | "
+        f"{stats['no_public_signal_line_count']} | {example} |"
+      )
+    print()
 
   print("### Evidence Limits")
   print("- Live-capture diagnostics use actor-visible observations, submitted commands, transition summaries, and debrief text from the captured MCP wrapper artifact.")
