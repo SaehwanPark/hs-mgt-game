@@ -57,8 +57,9 @@ ruleset values, pledge effects, difficulty values, scoring, or balance.
 - Low findings: stale handoff after PR creation; fixed by recording PR #109,
   pass dispositions, and merge-readiness details in this handoff.
 - Follow-up review after Critical/High fixes: not required.
-- CI/comment triage: Pending.
-- Merge-ready: Pending CI/comment triage.
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
+- Merge-ready: Yes.
 
 ## Known Limits
 
