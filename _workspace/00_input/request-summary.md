@@ -1,39 +1,36 @@
-# Request Summary - Strategy-Space Synthesis
+# Request Summary - Debrief Comparison Surface
 
 ## Scope
 
 Implement the approved preferred-workflow continuation slice for the Health
-Policy Strategy Game: compare existing competitive playtest evidence across
-finance-first, access-heavy, workforce-protective, and growth-oriented strategy
-signals, then prepare a PR handoff.
+Policy Strategy Game: add a compact instructor/reviewer comparison surface for
+repeated competitive debriefs, then prepare a PR handoff.
 
 ## Phase
 
-Phase 7 simulated-agent strategy-space synthesis. This is an evidence,
+Phase 7 instructor/debrief comparison surface. This is an evidence,
 documentation, and project-state slice, not runtime mechanics, balance,
 command-surface, scenario, or educational-effectiveness validation.
 
 ## Sources
 
-- User request to implement the approved `v0.10.28` plan.
+- User request to implement the approved `v0.10.29` plan.
 - `README.md`
 - `docs/proposal.md`
 - `docs/roadmap.md`
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
-- `docs/playtest-findings-v0.10.12.md`
-- `docs/playtest-findings-v0.10.13.md`
-- `docs/playtest-findings-v0.10.15.md`
+- `docs/playtest-findings-v0.10.16.md`
 - `docs/playtest-findings-v0.10.21.md`
-- `docs/playtest-findings-v0.10.24.md`
 - `docs/playtest-findings-v0.10.25.md`
 - `docs/playtest-findings-v0.10.26.md`
 - `docs/playtest-findings-v0.10.27.md`
+- `docs/playtest-findings-v0.10.28.md`
 - `_workspace/final/handoff.md`
 
 ## Expected Files
 
-- `docs/playtest-findings-v0.10.28.md`
+- `docs/playtest-findings-v0.10.29.md`
 - `docs/mcp-playtesting-guide.md`
 - `SPEC.md`
 - `CHANGELOG.md`
@@ -42,13 +39,15 @@ command-surface, scenario, or educational-effectiveness validation.
 - `_workspace/00_input/request-summary.md`
 - `_workspace/03_domain_qa.md`
 - `_workspace/final/handoff.md`
+- `_workspace/01_output/pr-description.md`
 
 ## Validation Target
 
-The synthesis compares strategy-space signals grounded in existing competitive
-evidence while preserving the distinction between simulated-agent behavior,
-interpretive development labels, classroom learning evidence, and runtime
-mechanics evidence.
+The comparison surface is grounded in existing competitive evidence and helps
+reviewers compare decision quality, outcome quality, cash runway, durable
+follow-through, rival pressure, and debrief traceability while preserving the
+distinction between simulated-agent behavior, interpretive development labels,
+classroom learning evidence, and runtime mechanics evidence.
 
 ## Non-Goals
 

@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.29] - 2026-07-09
+
+### Added
+- Added `docs/playtest-findings-v0.10.29.md`, a Phase 7 debrief comparison
+  surface for comparing decision quality, outcome quality, cash runway,
+  durable follow-through, rival pressure, and debrief traceability across
+  repeated competitive runs.
+
+### Changed
+- Routed follow-up work toward narrower evidence reviews only when comparison
+  axes remain under-explained, while keeping runtime mechanics, command costs,
+  pledge cooldowns, validation rules, difficulty changes, scoring, and balance
+  changes deferred.
+- Bumped the package version to `0.10.29`.
+
 ## [0.10.28] - 2026-07-09
 
 ### Added
