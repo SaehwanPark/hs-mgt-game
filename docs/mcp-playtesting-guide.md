@@ -77,6 +77,12 @@ access-heavy, workforce-protective, and growth-oriented signals across existing
 competitive evidence. Treat those strategy labels as interpretive development
 summaries, not hidden game classes, validated learner archetypes, or balance
 proof.
+As of `v0.10.29`, the debrief comparison surface turns the strategy-space
+synthesis into a compact instructor/reviewer aid for comparing decision quality,
+outcome quality, cash runway, durable follow-through, rival pressure, and
+debrief traceability across repeated competitive runs. Treat it as discussion
+design, not as human-learning validation, empirical calibration, or runtime
+tuning evidence.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
@@ -396,3 +402,9 @@ teachability synthesis into instructor-facing comparison prompts. Use it for
 discussion of decision quality versus outcome quality across existing evidence,
 not as human-learning validation, empirical calibration, or runtime tuning
 evidence.
+
+As of `v0.10.29`, `docs/playtest-findings-v0.10.29.md` adds a compact
+debrief comparison surface for repeated competitive runs. Use it to structure
+instructor or reviewer discussion across strategy postures and final debriefs.
+Do not treat it as a score, hidden strategy taxonomy, classroom-effectiveness
+measure, balance proof, or justification for runtime changes.

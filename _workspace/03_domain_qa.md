@@ -1,4 +1,4 @@
-# Domain QA - Strategy-Space Synthesis
+# Domain QA - Debrief Comparison Surface
 
 ## Status
 
@@ -6,23 +6,23 @@ Pass.
 
 ## Scope Review
 
-The `v0.10.28` slice is a Phase 7 simulated-agent strategy-space synthesis. It
-compares existing competitive evidence across strategy postures and does not
-change runtime mechanics, command validation, stochastic inputs, scenario
-schemas, replay formats, state hashes, MCP DTOs, Python wrapper logic,
-diagnostics logic, action costs, pledge effects, difficulty values, scoring, or
-balance.
+The `v0.10.29` slice is a Phase 7 instructor/debrief comparison surface. It
+turns existing competitive evidence into review axes for repeated-run
+discussion and does not change runtime mechanics, command validation,
+stochastic inputs, scenario schemas, replay formats, state hashes, MCP DTOs,
+Python wrapper logic, diagnostics logic, action costs, pledge effects,
+difficulty values, scoring, or balance.
 
 ## Domain Findings
 
-- The synthesis preserves the distinction between observed simulated-agent
-  behavior, interpretive development labels, and human learning or classroom
-  effectiveness evidence.
-- Strategy postures are framed as comparison surfaces rather than hidden player
+- The comparison surface preserves the distinction between observed
+  simulated-agent behavior, interpretive development labels, and human learning
+  or classroom effectiveness evidence.
+- Strategy postures are framed as discussion handles rather than hidden player
   classes, validated archetypes, equilibrium results, or optimization targets.
-- Public commitments, cash runway, workforce follow-through, capacity growth,
-  and difficulty pressure are treated as reviewable tradeoffs rather than
-  direct runtime-tuning claims.
+- Decision quality, outcome quality, cash runway, durable follow-through, rival
+  pressure, and debrief traceability are treated as reviewable discussion axes
+  rather than scoring categories or direct runtime-tuning claims.
 - Future runtime changes remain gated on a concrete mechanics finding.
 
 ## Caveats

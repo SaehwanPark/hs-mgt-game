@@ -138,6 +138,49 @@ reconstructing it from the diff.
 | Competitive Teachability Synthesis | v0.10.26 | Compare recent competitive playtest findings for teachability, debrief coherence, and repeated-play interest | 294 | `8926f71296f39efc` (competitive) |
 | Competitive Instructor Comparison Note | v0.10.27 | Turn existing competitive evidence into instructor-facing prompts about decision quality versus outcome quality | 294 | `8926f71296f39efc` (competitive) |
 | Competitive Strategy-Space Synthesis | v0.10.28 | Compare finance-first, access-heavy, workforce-protective, and growth-oriented signals across existing competitive evidence | 294 | `8926f71296f39efc` (competitive) |
+| Competitive Debrief Comparison Surface | v0.10.29 | Add an instructor/reviewer comparison surface for decision quality, outcome quality, cash runway, follow-through, rival pressure, and debrief traceability | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Competitive Debrief Comparison Surface
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.29
+
+  Summary:
+  Added a Phase 7 debrief comparison surface that helps instructors and
+  reviewers compare repeated competitive runs across decision quality, outcome
+  quality, cash runway, durable follow-through, rival pressure, and debrief
+  traceability. The slice keeps runtime mechanics and balance unchanged.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.29.md` with a compact comparison table,
+    strategy posture prompts, recommended use, follow-up routing, and evidence
+    limits.
+  - Updated the MCP playtesting guide with a `v0.10.29` routing checkpoint.
+  - Preserved runtime mechanics, command validation, stochastic inputs,
+    scenarios, MCP DTOs, replay formats, state hashes, diagnostics logic,
+    action costs, pledge effects, difficulty values, scoring, and balance.
+  - Bumped package metadata to `0.10.29`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, diagnostic parser, or command-surface change.
+  - No access-pledge effect, cooldown, command-cost, action-availability,
+    difficulty, scoring, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new live-capture run, hidden score, validated learner archetype, instructor
+    export format, analytics platform, or broad evidence taxonomy.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
+  - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json >/dev/null`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json --output /tmp/hs-mgt-game-v0.10.29-live-diagnostics.md`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.29-access-diagnostics.md`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Competitive Strategy-Space Synthesis
