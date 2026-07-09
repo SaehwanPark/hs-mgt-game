@@ -100,6 +100,11 @@ comparison, workforce-protective, and growth/capacity evidence into classroom
 or reviewer prompts. Treat it as a discussion aid, not as measured human
 learning, a validated assessment instrument, or a reason to tune runtime
 mechanics.
+As of `v0.10.35`, the difficulty pressure dimension gate selects rival
+information and monitoring pressure visibility as the next bounded difficulty
+surface to design or test if difficulty remains the active priority. Treat it
+as a routing gate, not as Expert winnability evidence, runtime tuning,
+scoring evidence, or a reason to give rivals hidden omniscience.
 The `project-coverage` target is intentionally narrower than the default
 baseline and is meant to exercise capital-project command paths, not to model a
 recommended strategy or justify balance changes.
