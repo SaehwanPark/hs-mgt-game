@@ -414,3 +414,9 @@ debrief comparison surface for repeated competitive runs. Use it to structure
 instructor or reviewer discussion across strategy postures and final debriefs.
 Do not treat it as a score, hidden strategy taxonomy, classroom-effectiveness
 measure, balance proof, or justification for runtime changes.
+
+As of `v0.10.30`, `docs/playtest-findings-v0.10.30.md` reviews
+workforce-protective play as an interpretive comparison axis across staffing,
+trust, pacing, monitoring, and commitment discipline. Use it for discussion and
+future evidence routing, not as a standalone strategy class, validated learner
+archetype, balance proof, or reason to tune workforce mechanics.

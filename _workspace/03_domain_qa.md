@@ -49,7 +49,7 @@ None.
 
 ## Verification Evidence
 
-Planned verification for this slice:
+Verification completed for this slice:
 
 - `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
 - `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`

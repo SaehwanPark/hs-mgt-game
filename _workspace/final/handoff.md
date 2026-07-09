@@ -28,8 +28,6 @@ ruleset values, pledge effects, difficulty values, scoring, or balance.
 
 ## Verification
 
-Pending before PR handoff:
-
 - `python3 -m json.tool _workspace/experiments/v0.10.12-live-difficulty-pressure/results.json >/dev/null`
 - `python3 -m json.tool _workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json >/dev/null`
 - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json >/dev/null`
@@ -45,19 +43,28 @@ Pending before PR handoff:
 
 - Branch: `feat/workforce-protective-evidence-v0.10.30`
 - Base: `main`
-- PR: Pending.
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/111
 
 ## Review Summary
 
-- Pass 1: Pending.
-- Pass 2: Pending.
-- Pass 3: Pending.
-- Critical/High findings: pending.
-- Medium findings: pending.
-- Low findings: pending.
-- Follow-up review after Critical/High fixes: pending if required.
-- CI/comment triage: pending after PR creation.
-- Merge-ready: No, pending verification, PR creation, review loop, and CI.
+- Pass 1: Two Low stale-state findings: this handoff still listed PR and review
+  state as pending, and `_workspace/03_domain_qa.md` still described
+  verification as planned. No Critical, High, Medium, evidence-scope,
+  runtime-change, or versioning findings.
+- Pass 2: One Low stale-handoff finding for the same pending PR, verification,
+  review, and merge-readiness state. No Critical, High, or Medium findings.
+- Pass 3: Two Low stale-state findings matching Pass 1. No Critical, High,
+  Medium, evidence-scope, runtime-change, or versioning findings.
+- Critical/High findings: none.
+- Medium findings: none.
+- Low findings: stale handoff and QA verification wording after PR creation and
+  verification; fixed by recording PR #111, completed verification, review
+  dispositions, CI status, and merge-readiness details in this handoff and
+  `_workspace/03_domain_qa.md`.
+- Follow-up review after Critical/High fixes: not required.
+- CI/comment triage: CI `check` passed; no external review comments were
+  present when checked.
+- Merge-ready: Yes.
 
 ## Known Limits
 
