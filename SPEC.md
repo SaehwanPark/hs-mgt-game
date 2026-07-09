@@ -135,6 +135,46 @@ reconstructing it from the diff.
 | Access Follow-Through Debrief Note | v0.10.23 | Add explanatory competitive debrief wording for low-cash access-heavy runs where public pledges outnumber durable operational follow-through | 297 | `8926f71296f39efc` (competitive) |
 | Access Debrief Validation | v0.10.24 | Validate the access follow-through debrief note through bounded MCP trigger/control runs without changing runtime mechanics | 294 | `8926f71296f39efc` (competitive) |
 | Access Evidence Synthesis | v0.10.25 | Synthesize the v0.10.21-v0.10.24 access-heavy evidence chain and keep runtime tuning deferred until a later concrete mechanics finding | 294 | `8926f71296f39efc` (competitive) |
+| Competitive Teachability Synthesis | v0.10.26 | Compare recent competitive playtest findings for teachability, debrief coherence, and repeated-play interest | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Competitive Teachability Synthesis
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.26
+
+  Summary:
+  Synthesized recent competitive Phase 7 evidence around teachability, debrief
+  coherence, and repeated-play interest. The slice broadens the `v0.10.25`
+  routing checkpoint without reopening runtime tuning.
+
+  Done:
+  - Added `docs/playtest-findings-v0.10.26.md` comparing the recent live
+    difficulty, live-capture, access comprehension, and access evidence
+    synthesis findings.
+  - Updated the MCP playtesting guide with a `v0.10.26` routing checkpoint.
+  - Preserved runtime mechanics, command validation, stochastic inputs,
+    scenarios, MCP DTOs, replay formats, state hashes, diagnostics logic,
+    action costs, pledge effects, difficulty values, and balance.
+  - Bumped package metadata to `0.10.26`.
+
+  Deferred / Non-Goals:
+  - No runtime simulation, balance formula, transition, command validation,
+    stochastic input, scenario schema, replay artifact, state hash, ruleset,
+    Rust MCP DTO, Python wrapper, or diagnostic parser change.
+  - No access-pledge effect, cooldown, command-cost, action-availability,
+    difficulty, guidance wording, scoring, or balance-tuning change.
+  - No human-learning claim, empirical calibration claim, policy-validity claim,
+    new live-capture run, analytics platform, or broad evidence taxonomy.
+
+  Verification:
+  - `python3 -m json.tool _workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
+  - `python3 -m json.tool _workspace/experiments/v0.10.24-access-debrief-validation/results.json`
+  - `python3 scripts/diagnose_runs.py _workspace/experiments/v0.10.24-access-debrief-validation/results.json --output /tmp/hs-mgt-game-v0.10.26-diagnostics.md`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
+  - `git diff --check`
 
 
 - Feature: Access Evidence Synthesis
