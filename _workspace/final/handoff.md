@@ -48,4 +48,6 @@ the advisor market.
 
 - Base branch: `main`
 - Working branch: `feat/consultant-advice-history-v0.10.39`
-- PR and review-loop status: pending commit/push/PR creation.
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/117
+- CI: GitHub `check` passed.
+- Review-loop status: three independent review passes in progress.
