@@ -51,13 +51,14 @@ and explicit deferral of the advisor market.
 - Base branch: `main`
 - Working branch: `feat/consultant-advice-evidence-v0.10.40`
 - PR: https://github.com/SaehwanPark/hs-mgt-game/pull/118
-- CI: pending GitHub check inspection after push.
+- CI: GitHub `check` passed on the implementation commit; rechecked after the
+  final handoff update.
 - Review loop: three independent passes complete.
 - Findings: Pass 1 Medium—evidence runner reported trace failures without
   failing, fixed by `validate_runs`; Pass 2 Medium—artifact omitted the option
   payloads behind match counts, fixed by retaining rendered/stored options and
   debrief lines; Pass 3 none.
 - Critical/High findings: none.
-- Merge-ready: pending GitHub CI and comment triage.
+- Merge-ready: yes, pending the normal GitHub merge decision.
 - Next dependency: retain the generic advice baseline unless a later,
   separately justified teachability need identifies a limitation.
