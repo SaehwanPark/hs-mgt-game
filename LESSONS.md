@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Pair Advice-Aware Evidence With Hash-Matched Controls
+
+- Context: Adding the v0.10.41 consultant-advice usage matrix.
+- Symptom: Advice-aware commands can change cash runway and make an inherited
+  scripted command invalid later in the campaign.
+- Resolution: Record advice-aware selection and fallback signals separately,
+  guard commands using visible resources, and compare advice-ignoring control
+  hashes with the prior traceability artifact.
+- Prevention: Never infer advice value from endpoint differences when the policy
+  itself changed; require exact observation/history/debrief continuity and a
+  matching control before interpreting the evidence.
+
 ## Build the Local MCP Binary Before Wrapper Evidence Runs
 
 - Context: Adding the v0.10.40 consultant-advice traceability matrix.
