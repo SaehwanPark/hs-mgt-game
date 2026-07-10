@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.40] - 2026-07-10
+
+### Added
+- Added a deterministic Phase 7 MCP capture matrix for consultant-advice
+  traceability across four existing profiles, seeds 42–44, and Normal/Hard
+  competitive difficulty.
+- Added evidence artifacts and findings that compare rendered consultant options
+  with committed history and debrief records.
+- Added the existing consultant options to competitive MCP transition summaries
+  so wrapper-level evidence can audit committed advice history.
+
+### Changed
+- Kept the advice baseline non-binding and treated command-family alignment as a
+  descriptive traceability signal rather than advice-quality or learning
+  evidence.
+- Kept runtime mechanics, replay formats, state hashes, scenario behavior,
+  difficulty, and balance unchanged.
+- Bumped the package version to `0.10.40`.
+
 ## [0.10.39] - 2026-07-10
 
 ### Added

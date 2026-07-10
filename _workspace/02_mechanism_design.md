@@ -1,58 +1,49 @@
-# Mechanism Design - Live Consultant Advice and Advisory History
+# Mechanism Design - Consultant Advice Traceability Evidence
 
 ## Goal and Roadmap Phase
 
-Phase 7 competitive teachability and validation slice following the v0.10.38
-advisor-market proposal review.
+Phase 7 competitive teachability and validation slice following v0.10.39's
+generic consultant-advice repair.
 
 ## Slice Boundary
 
-- Generate exactly four options (`A`–`D`) for each human competitive
-  observation, with visible tradeoffs and no ranking or optimal label.
-- Use one shared deterministic generator for genesis, live CLI, and MCP
-  observations.
-- Store the exact options shown on the corresponding competitive transition for
-  instructor debrief comparison.
+- Reuse existing observations and scripted policies to capture a 3-seed,
+  2-difficulty, 4-profile matrix.
+- Compare the four rendered `A`–`D` options with the options stored on the same
+  committed transition, then count monthly debrief records.
+- Report command-family alignment without scoring compliance or treating advice
+  as a causal input to the scripted policy.
 
 ## State, Beliefs, and Observations
 
-- Advice uses only the owning system's `PlayerObservation`, including reported
-  cash runway, workforce/community summaries, and visible intelligence gaps.
-- Options are state-conditioned by visible categories but never expose hidden
-  rival actions or predict a guaranteed outcome.
-- A report contains four total attributed advisory options and labels them
-  `Advisory — not binding`.
+- The runner reads only MCP observation text, accepted commands, committed
+  transition summaries, and final debrief text. The transition summary carries
+  the already-stored consultant options as an additive audit field.
+- It does not inspect hidden rival state or add agent behavior.
 
 ## Commands, Events, and Effects
 
-- No commands, events, effects, payroll, or actor utility changes are introduced
-  by this slice.
-- The stored advisory list is explanatory history only and cannot alter
-  validation or transition results.
+- No commands, events, effects, payroll, or actor utility changes are
+  introduced. The runner fails if an expected trace field is missing.
 
 ## Determinism and Replay Notes
 
-- `resolve_competitive_month` captures advice from the same prior world and prior
-  aggregated actions used to render the pre-decision observation, before the
-  month-start tick mutates the working copy.
-- The advisory field is serialized with a default empty value for legacy
-  competitive transition JSON; state hashing remains based on world state.
+- The evidence artifact contains no timestamps and is regenerated twice to
+  establish byte-for-byte stability. State hashes remain evidence of unchanged
+  world transitions, not advice effectiveness.
 
 ## Open Questions
 
-- The deferred advisor market remains gated on evidence that this generic
-  advice baseline is insufficient for a documented learning or strategy need.
+- If rendered and stored options diverge, stop and route the mismatch to a
+  separate runtime repair slice; do not change the simulation from this PR.
 
 ## Educational Debrief Hooks
 
-- Retain monthly option titles and tradeoff bullets beside the actual player
-  commands.
-- Show the available advice and chosen action without scoring compliance or
-  treating any option as correct.
-- Preserve enough history for instructor discussion of decision quality versus
-  outcome quality.
+- Preserve enough evidence for instructors to verify what was shown, what was
+  chosen, and what the debrief retained without claiming that aligned choices
+  were better choices.
 
 ## Conclusion
 
-Promote only the generic advice baseline. Keep differentiated advisors,
-employment state, payroll, and AI parity outside this slice.
+Keep differentiated advisors, employment state, payroll, AI parity, and all
+runtime changes beyond the additive history-audit DTO field outside this slice.

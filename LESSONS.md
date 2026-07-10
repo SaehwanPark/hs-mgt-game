@@ -3,6 +3,16 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Build the Local MCP Binary Before Wrapper Evidence Runs
+
+- Context: Adding the v0.10.40 consultant-advice traceability matrix.
+- Symptom: The wrapper launched an existing `target/debug/hs-mgt-game-mcp`
+  binary, which can be older than the checked-out source and produce misleading
+  evidence about current MCP output.
+- Prevention: Evidence runners that invoke the local MCP binary must run
+  `cargo build --quiet --bin hs-mgt-game-mcp` before starting sessions, then
+  record the package version from the same worktree.
+
 ## Test Recurring Costs Against Every Scenario Cash Scale
 
 - Context: Evaluating a future in-house advisor market with monthly salaries.

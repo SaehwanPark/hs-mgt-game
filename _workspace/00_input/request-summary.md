@@ -1,12 +1,12 @@
-# Request Summary - Live Consultant Advice and Advisory History
+# Request Summary - Consultant Advice Traceability Evidence
 
 ## Scope
 
 - Roadmap phase: Phase 7 competitive teachability and validation loop.
-- Task type: development continuation and bounded runtime vertical slice.
-- Selected slice: restore deterministic state-conditioned consultant options for
-  every competitive CLI/MCP month and retain the exact options shown for
-  debrief comparison.
+- Task type: development continuation and bounded evidence slice.
+- Selected slice: verify that the restored deterministic consultant options are
+  visible in MCP observations, retained in committed history, and available in
+  debriefs across existing competitive profiles, seeds, and difficulty tiers.
 
 ## Sources
 
@@ -14,26 +14,28 @@
   `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 - `docs/expansion-proposal-review.md`
-- U.S. Bureau of Labor Statistics Management Analysts profile
+- `docs/mcp-playtesting-guide.md` and the v0.10.39 handoff
 
 ## Expected Files
 
-- `src/model/campaign.rs`, `src/model/competitive_history.rs`, and competitive
-  observation/resolution paths
-- `src/mcp/session.rs`, `src/debrief/report.rs`, and focused tests
-- `SPEC.md`, `CHANGELOG.md`, package metadata, competitive design docs, and
-  `_workspace/03_domain_qa.md` / `_workspace/final/handoff.md`
+- `_workspace/experiments/v0.10.40-consultant-advice-evidence/`
+- `docs/playtest-findings-v0.10.40.md`, `docs/mcp-playtesting-guide.md`,
+  `SPEC.md`, `CHANGELOG.md`, package metadata, and project handoffs
 
 ## Validation Target
 
-- Every competitive month exposes four deterministic, non-binding options from
-  the human actor's `PlayerObservation`.
-- The exact options shown are retained with the committed transition and are
-  compared with the player's commands in the debrief.
-- State transitions, AI behavior, commands, ruleset values, and state hashes do
-  not change.
+- All 24 months complete for each existing scripted profile at seeds 42–44 on
+  Normal and Hard difficulty without validation failures.
+- Every captured observation has four non-binding A–D options that exactly
+  match the stored transition options, while each debrief retains its monthly
+  advisory record.
+- State transitions, AI behavior, commands, ruleset values, and state hashes
+  remain unchanged.
 
 ## Non-Goals
 
 - No advisor market, advisor roster, payroll, candidate pool, hire/fire command,
   AI advice policy, scenario schema, balance change, or human-learning claim.
+- No replay, state-hash, scenario, or shared-diagnostics change. Add only the
+  consultant options already stored in history to the MCP transition summary so
+  the wrapper can compare its rendered observation with committed history.

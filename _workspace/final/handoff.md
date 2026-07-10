@@ -1,12 +1,12 @@
-# Final Handoff - Live Consultant Advice and Advisory History
+# Final Handoff - Consultant Advice Traceability Evidence
 
 ## Summary
 
-Implemented the `v0.10.39` bounded teachability slice. Competitive genesis,
-CLI, and MCP observations now expose four deterministic, non-binding consultant
-options derived from the human actor's visible observation. Each committed
-competitive transition retains the exact options shown, and the debrief
-compares them with the player's submitted actions.
+Implemented the `v0.10.40` Phase 7 evidence slice. A deterministic 24-run MCP
+matrix verifies four rendered consultant options per month against the exact
+options retained in committed competitive history and the monthly debrief
+record. The MCP transition summary now includes those already-stored options so
+the wrapper can audit the same history the debrief uses.
 
 The advisor market remains deferred: no roster, payroll, hiring, firing,
 candidate pool, AI advice behavior, scenario schema, balance, or transition
@@ -14,44 +14,51 @@ semantics were added.
 
 ## Changed Files
 
-- Shared observation generation and competitive transition history now provide
-  live options and serialized advisory records.
-- MCP formatting, CLI fixture delegation, competitive debrief, persistence
-  tests, and the generated competitive history fixture were updated.
-- Competitive loop/report documentation, SDD artifacts, changelog, and package
-  metadata now describe `v0.10.39`.
+- Added the consultant-advice evidence runner, stable result artifact, and
+  diagnostic report for four existing profiles, three seeds, and two tiers.
+- Added an additive `consultant_options` field to MCP competitive transition
+  summaries plus focused coverage for submitted and fetched history.
+- Updated Phase 7 findings, playtesting guidance, SDD artifacts, lessons,
+  changelog, specification, and package metadata for `v0.10.40`.
 
 ## Verification
 
+- `python3 -m py_compile _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.py`
+- Generated the 24-run matrix twice; `results.json` was byte-for-byte stable.
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
 - `cargo test --all -- --test-threads=1` (285 tests pass)
-- `cargo test --lib competitive_session_save_round_trip_fields`
 - `python3 scripts/run_automated_playtests.py`
 - `git diff --check`
 - Seed-42 competitive golden hashes remain unchanged.
 
 ## Domain QA
 
-Pass. The slice preserves actor-visible observation boundaries, deterministic
-transitions, immutable history, debrief traceability, and explicit deferral of
-the advisor market.
+Pass. The additive MCP audit field preserves actor-visible observation
+boundaries, deterministic transitions, immutable history, debrief traceability,
+and explicit deferral of the advisor market.
 
 ## Known Limits
 
 - Advice wording is a design abstraction, not evidence of advice quality,
   measured learning, policy validity, or calibrated outcomes.
-- Legacy competitive history payloads deserialize with an empty advisory list;
-  advice from those historical runs cannot be reconstructed.
+- The new MCP summary field is additive; strict downstream schemas must accept
+  it. Legacy competitive history payloads still deserialize with an empty
+  advisory list and cannot reconstruct advice never recorded.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/consultant-advice-history-v0.10.39`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/117
-- CI: GitHub `check` passed.
+- Working branch: `feat/consultant-advice-evidence-v0.10.40`
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/118
+- CI: GitHub `check` passed on the implementation commit; rechecked after the
+  final handoff update.
 - Review loop: three independent passes complete.
-- Findings: Pass 1 none; Pass 2 one Medium stale-status documentation issue,
-  fixed in `569814a`; Pass 3 none.
+- Findings: Pass 1 Medium—evidence runner reported trace failures without
+  failing, fixed by `validate_runs`; Pass 2 Medium—artifact omitted the option
+  payloads behind match counts, fixed by retaining rendered/stored options and
+  debrief lines; Pass 3 none.
 - Critical/High findings: none.
-- Merge-ready: yes, pending normal GitHub merge decision.
+- Merge-ready: yes, pending the normal GitHub merge decision.
+- Next dependency: retain the generic advice baseline unless a later,
+  separately justified teachability need identifies a limitation.

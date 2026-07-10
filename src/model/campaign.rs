@@ -29,7 +29,9 @@ impl CashRunwaySignal {
   }
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize, schemars::JsonSchema,
+)]
 pub struct ConsultantOption {
   pub label: char,
   pub title: String,
