@@ -81,6 +81,12 @@ fn test_competitive_instructor_summary_and_debrief() {
   let debrief_str = debrief.join("\n");
   assert!(debrief_str.contains("=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ==="));
   assert!(debrief_str.contains("Competitive preview completed 3 committed month(s)"));
+  assert!(debrief_str.contains("Consultant options shown"));
+  assert!(
+    !debrief_str
+      .to_lowercase()
+      .contains("consultant option is correct")
+  );
 }
 
 #[test]

@@ -1,4 +1,4 @@
-# Domain QA - Advisor Market Proposal Review
+# Domain QA - Live Consultant Advice and Advisory History
 
 ## Status
 
@@ -6,22 +6,29 @@ pass
 
 ## Reviewed Inputs
 
-- User request and approved advisor evaluation plan.
-- Canonical project documents, SDD documents, and workspace evidence/mechanism
-  artifacts.
+- `SPEC.md` v0.10.39 completion entry and Future promotion rules.
+- `_workspace/00_input/request-summary.md` and
+  `_workspace/02_mechanism_design.md`.
+- `src/sim/observe_competitive.rs`, `src/competitive/month_loop.rs`,
+  `src/model/competitive_history.rs`, `src/mcp/session.rs`, and
+  `src/debrief/report.rs`.
+- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, and the harness team specification.
 
 ## Findings
 
-- The proposal remains a Phase 7 gate and does not promote a runtime mechanic.
-- It correctly distinguishes generic advice repair from the extra value claimed
-  by a roster market.
-- It keeps state, observations, stochastic inputs, AI parity, history, and
-  debrief requirements explicit for a future implementation.
-- Experience and specialization are limited to visible-observation framing;
-  unsupported cap, salary, and labor-market claims are labeled abstractions.
-- The paper-fixture matrix correctly defers runtime promotion: the repaired
-  generic-advice comparator is unavailable and every tested positive integer
-  full-roster salary schedule exceeds the default 60-cash campaign scale.
+- The slice is bounded to decision support and history; it does not promote the
+  deferred advisor market, payroll, hiring, or a new strategic actor.
+- Consultant options are generated from `PlayerObservation` only and retain
+  visible uncertainty and tradeoffs without hidden rival state or outcome
+  guarantees.
+- The exact options shown are stored on committed competitive transitions,
+  preserving append-only debrief traceability and serialized session recovery.
+- The deterministic transition core and state hash remain unchanged; advice is
+  captured before the month-start working-state mutation.
+- CLI and MCP observations use the same generator, while AI decision behavior
+  remains unchanged and symmetric future advisor-market requirements remain
+  deferred.
 
 ## Required Fixes
 
@@ -29,15 +36,17 @@ pass
 
 ## Residual Risks
 
-- Monthly payroll is infeasible for the tested full rosters in the default
-  low-cash scenario.
-- Month-start ordering needs a separate bounded decision before any payroll or
-  candidate availability enters the competitive transition.
+- Advice wording is a gameplay abstraction and has not been validated as an
+  educational intervention or calibrated policy guidance.
+- Competitive history JSON now contains an optional advisory field; legacy
+  payloads default to an empty list and therefore cannot reconstruct advice
+  that was never recorded.
 
 ## Verification Evidence
 
-- Documentation consistency review against current observation and report paths.
-- `git diff --check`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test -- --test-threads=1`
+- `cargo test --all -- --test-threads=1` (285 tests pass)
+- `cargo test --lib competitive_session_save_round_trip_fields`
+- `python3 scripts/run_automated_playtests.py`
+- `git diff --check`

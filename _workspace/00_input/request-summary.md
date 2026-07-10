@@ -1,11 +1,12 @@
-# Request Summary - Advisor Market Proposal Review
+# Request Summary - Live Consultant Advice and Advisory History
 
 ## Scope
 
-- Roadmap phase: Phase 7 expansion proposal review.
-- Task type: documentation and mechanism evaluation.
-- Selected slice: evaluate differentiated in-house advisors against repaired
-  state-conditioned monthly advice; record only future-gated design boundaries.
+- Roadmap phase: Phase 7 competitive teachability and validation loop.
+- Task type: development continuation and bounded runtime vertical slice.
+- Selected slice: restore deterministic state-conditioned consultant options for
+  every competitive CLI/MCP month and retain the exact options shown for
+  debrief comparison.
 
 ## Sources
 
@@ -17,20 +18,22 @@
 
 ## Expected Files
 
-- `docs/expansion-proposal-review.md`
-- `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, and package metadata
-- Competitive design and evidence companion documents
-- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`,
-  `_workspace/03_domain_qa.md`, and `_workspace/final/handoff.md`
+- `src/model/campaign.rs`, `src/model/competitive_history.rs`, and competitive
+  observation/resolution paths
+- `src/mcp/session.rs`, `src/debrief/report.rs`, and focused tests
+- `SPEC.md`, `CHANGELOG.md`, package metadata, competitive design docs, and
+  `_workspace/03_domain_qa.md` / `_workspace/final/handoff.md`
 
 ## Validation Target
 
-- The review separates supported role direction from gameplay abstractions.
-- The proposed mechanism preserves deterministic replay, actor-specific
-  observations, AI parity, and debrief traceability if later implemented.
-- No runtime behavior changes.
+- Every competitive month exposes four deterministic, non-binding options from
+  the human actor's `PlayerObservation`.
+- The exact options shown are retained with the committed transition and are
+  compared with the player's commands in the debrief.
+- State transitions, AI behavior, commands, ruleset values, and state hashes do
+  not change.
 
 ## Non-Goals
 
-- No advisor runtime implementation, scenario schema, command, replay, hash,
-  ruleset, balance, staffing, or human-learning claim.
+- No advisor market, advisor roster, payroll, candidate pool, hire/fire command,
+  AI advice policy, scenario schema, balance change, or human-learning claim.

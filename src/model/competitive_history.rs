@@ -11,6 +11,8 @@ pub struct CompetitiveTransition {
   pub effects: Vec<AttributedEffect>,
   pub next: CompetitiveWorldState,
   pub state_hash: String,
+  #[serde(default)]
+  pub consultant_options: Vec<crate::model::ConsultantOption>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]

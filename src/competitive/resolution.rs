@@ -134,7 +134,13 @@ pub fn resolve_preset_month1(
   ruleset: &CompetitiveRuleset,
   seed: u64,
 ) -> Result<CompetitiveTransition, crate::model::CompetitiveValidationError> {
-  super::month_loop::resolve_competitive_month(prior, ruleset, seed, month1_human_preset_batch())
+  super::month_loop::resolve_competitive_month(
+    prior,
+    ruleset,
+    seed,
+    month1_human_preset_batch(),
+    None,
+  )
 }
 
 pub fn format_competitive_command(cmd: &CompetitiveCommand) -> String {

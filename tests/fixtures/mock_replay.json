@@ -564,7 +564,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "8926f71296f39efc"
+      "state_hash": "8926f71296f39efc",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -994,7 +1024,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "bebfa410dab82137"
+      "state_hash": "bebfa410dab82137",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -1429,7 +1489,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "f5ca260240180c4d"
+      "state_hash": "f5ca260240180c4d",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -1846,7 +1936,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "6870f49bc3425c38"
+      "state_hash": "6870f49bc3425c38",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -2259,7 +2379,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "ff9f27bd73c401a0"
+      "state_hash": "ff9f27bd73c401a0",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -2672,7 +2822,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "bf8fd1209552b640"
+      "state_hash": "bf8fd1209552b640",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -3085,7 +3265,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "054f1aa78820084e"
+      "state_hash": "054f1aa78820084e",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -3498,7 +3708,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "311739adc50590c3"
+      "state_hash": "311739adc50590c3",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -3911,7 +4151,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "39ec0385efe01ac2"
+      "state_hash": "39ec0385efe01ac2",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -4324,7 +4594,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "6c1bb0bde3135f09"
+      "state_hash": "6c1bb0bde3135f09",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -4737,7 +5037,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "cad9ba6ce76e62a7"
+      "state_hash": "cad9ba6ce76e62a7",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -5154,7 +5484,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "7bd709671c7b3744"
+      "state_hash": "7bd709671c7b3744",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -5567,7 +5927,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "e6f2802a34480896"
+      "state_hash": "e6f2802a34480896",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -5980,7 +6370,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "475cbba4672685b9"
+      "state_hash": "475cbba4672685b9",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -6393,7 +6813,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "4ac30efeb242458e"
+      "state_hash": "4ac30efeb242458e",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -6806,7 +7256,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "c33a3ce3cee321cd"
+      "state_hash": "c33a3ce3cee321cd",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -7219,7 +7699,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "1050116c4df9917f"
+      "state_hash": "1050116c4df9917f",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -7632,7 +8142,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "ad37efd27fb74f83"
+      "state_hash": "ad37efd27fb74f83",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -8045,7 +8585,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "a1dd58f859a68768"
+      "state_hash": "a1dd58f859a68768",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -8458,7 +9028,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "d24903bfed7872af"
+      "state_hash": "d24903bfed7872af",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -8871,7 +9471,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "57d2d1d67bef4324"
+      "state_hash": "57d2d1d67bef4324",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -9284,7 +9914,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "956e41e5d1780f79"
+      "state_hash": "956e41e5d1780f79",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -9697,7 +10357,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "7639edadb9e89610"
+      "state_hash": "7639edadb9e89610",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     },
     {
       "prior": {
@@ -10114,7 +10804,37 @@
         "event_metadata": {},
         "timeline_events": []
       },
-      "state_hash": "782d0f39ef52031d"
+      "state_hash": "782d0f39ef52031d",
+      "consultant_options": [
+        {
+          "label": "A",
+          "title": "Defensive capacity: invest in staffed beds to protect access and share",
+          "tradeoff_bullets": [
+            "protects access and share but consumes cash before delayed capacity arrives"
+          ]
+        },
+        {
+          "label": "B",
+          "title": "Workforce resilience: recruit nurses before capacity constraints bind",
+          "tradeoff_bullets": [
+            "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          ]
+        },
+        {
+          "label": "C",
+          "title": "Information-first: monitor an identified rival intelligence gap",
+          "tradeoff_bullets": [
+            "costs AP and delays direct action; any signal remains partial"
+          ]
+        },
+        {
+          "label": "D",
+          "title": "Public access pledge: commit to an access target",
+          "tradeoff_bullets": [
+            "may reduce policy pressure but creates a visible follow-through obligation"
+          ]
+        }
+      ]
     }
   ]
 }

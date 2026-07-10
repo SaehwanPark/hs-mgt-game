@@ -65,8 +65,8 @@ FOR month IN 1..campaign_length:
   2. Observation generation
      - Per-player PlayerObservation
      - Executive report (6 sections; see executive-report-format.md)
-     - Consultant recommendations (advisory; live monthly coverage remains a
-       follow-up requirement)
+     - Four deterministic consultant recommendations from the actor-visible
+       observation (advisory; not binding)
      - Rival intel from public action log (lagged)
 
   3. Decision phase
@@ -92,8 +92,8 @@ FOR month IN 1..campaign_length:
   8. Monthly resolution summary
 END
 9. Replay verification
-10. Educational debrief (AI rationales and annual review; consultant comparison
-    is a follow-up requirement)
+10. Educational debrief (AI rationales, annual review, and retained consultant
+    options compared with the player's submitted actions)
 ```
 
 ## Limited resources (competitive)
@@ -108,13 +108,14 @@ END
 
 ## Future Advisor-Market Gate
 
-The current campaign has a consultant-report design target but not persistent
-live advisory output. A future advisor market is permitted only after repaired
-state-conditioned advice is compared against a roster-based design. If promoted,
-monthly preparation must resolve or reserve advisor payroll and candidate events
-before both human and AI observations and batch validation. Advisor advice must
-be derived from actor-visible observations, and any arrival or contested hire
-must be an explicit resolved input recorded for replay.
+The current campaign provides four deterministic, non-binding options from the
+human actor's `PlayerObservation` and stores the options shown with each
+competitive transition. A future advisor market is permitted only after this
+baseline is compared against a roster-based design. If promoted, monthly
+preparation must resolve or reserve advisor payroll and candidate events before
+both human and AI observations and batch validation. Advisor advice must be
+derived from actor-visible observations, and any arrival or contested hire must
+be an explicit resolved input recorded for replay.
 
 Difficulty scales K, CPU AP, and AI ability — not human AP below documented floors.
 
@@ -135,9 +136,9 @@ hidden optimal path.
 
 | Stage | Stabilization | Competitive |
 | --- | --- | --- |
-| Pre-decision | Turn briefing + forecast preview | Executive report; live consultant advice is a follow-up requirement |
+| Pre-decision | Turn briefing + forecast preview | Executive report with live consultant advice |
 | Post-decision | Actor rationale + state hash | All player rationales + monthly summary |
-| End of run | Debrief from history | Debrief + year reviews; advisory comparison is a follow-up requirement |
+| End of run | Debrief from history | Debrief + year reviews + advisory comparison |
 
 ## Related documents
 

@@ -615,8 +615,8 @@ regional market campaign (`competitive-regional-v1`) adds:
 - 1 human + K AI health-system players on a shared market model;
 - simultaneous monthly action resolution (ADR-0003);
 - action-point, cash, and political capital economy (ADR-0005);
-- executive one-page report shell, with first-month fixture consultant
-  recommendations; live monthly advisory coverage remains a follow-up;
+- executive one-page report with four deterministic consultant recommendations
+  generated from the actor-visible observation and retained for debrief;
 - partial observability of rival public actions;
 - bounded game-theory AI with inspectable rationales;
 - random monthly events and delayed effect queues;

@@ -199,7 +199,7 @@ mod tests {
     use crate::artifact::{
       deserialize_competitive_session_save, serialize_competitive_session_save,
     };
-    use crate::competitive::genesis_competitive_world;
+    use crate::competitive::{build_month1_resolution_history, genesis_competitive_world};
     use crate::model::{
       CompetitiveHistory, CompetitiveSessionSave, Difficulty, default_competitive_ruleset,
     };
@@ -213,7 +213,9 @@ mod tests {
       difficulty: Difficulty::Normal,
       history: CompetitiveHistory {
         genesis,
-        transitions: Vec::new(),
+        transitions: build_month1_resolution_history(Difficulty::Normal, 42)
+          .expect("history")
+          .transitions,
       },
       next_month: 1,
     };
@@ -223,6 +225,16 @@ mod tests {
     assert_eq!(restored.seed, 42);
     assert_eq!(restored.next_month, 1);
     assert_eq!(restored.difficulty, Difficulty::Normal);
+    assert_eq!(restored.history.transitions[0].consultant_options.len(), 4);
+
+    let mut legacy_json: serde_json::Value = serde_json::from_str(&text).expect("json");
+    legacy_json["history"]["transitions"][0]
+      .as_object_mut()
+      .expect("transition object")
+      .remove("consultant_options");
+    let legacy_text = serde_json::to_string_pretty(&legacy_json).expect("legacy json");
+    let legacy = deserialize_competitive_session_save(&legacy_text, &ruleset).unwrap();
+    assert!(legacy.history.transitions[0].consultant_options.is_empty());
   }
 
   #[test]

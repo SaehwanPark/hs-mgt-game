@@ -148,6 +148,7 @@ reconstructing it from the diff.
 | Rival Information Pressure Design | v0.10.36 | Define information delay, monitor value, and public disclosure as reviewable difficulty pressure surfaces before runtime tuning | 294 | `8926f71296f39efc` (competitive) |
 | Rival Information Monitor Evidence | v0.10.37 | Compare monitored versus unmonitored Hard/Expert live MCP captures for rival-information observation value | 294 | `8926f71296f39efc` (competitive) |
 | Advisor Market Proposal Review | v0.10.38 | Paper-evaluate differentiated in-house advisors and defer runtime promotion pending generic advice repair | 294 | `8926f71296f39efc` (competitive) |
+| Live Consultant Advice and Advisory History | v0.10.39 | Restore four deterministic actor-visible consultant options across competitive CLI/MCP observations and retain them for debrief comparison | 294 | `8926f71296f39efc` (competitive) |
 
 
 - Feature: Advisor Market Proposal Review
@@ -184,6 +185,38 @@ reconstructing it from the diff.
   - `cargo fmt --check`
   - `cargo clippy --all-targets -- -D warnings`
   - `cargo test -- --test-threads=1`
+
+
+- Feature: Live Consultant Advice and Advisory History
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.39
+
+  Summary:
+  Restored four deterministic, non-binding consultant options for every
+  competitive human observation and retained the exact options shown with each
+  committed transition for debrief comparison.
+
+  Done:
+  - Unified genesis, live CLI, and MCP observations through the shared
+    actor-visible advice generator.
+  - Added serialized per-transition consultant options with legacy empty-field
+    compatibility and no state-hash change.
+  - Added MCP rendering, debrief comparison lines, focused tests, and updated
+    competitive loop/report documentation.
+  - Bumped package metadata to `0.10.39`.
+
+  Deferred / Non-Goals:
+  - No advisor market, roster, payroll, candidate pool, hire/fire command, AI
+    advice behavior, scenario schema, ruleset, balance, or transition semantics.
+  - No advice quality, learning, calibration, or policy-validity claim.
+
+  Verification:
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test --all -- --test-threads=1` (285 tests pass)
+  - `python3 scripts/run_automated_playtests.py`
+  - `git diff --check`
 
 
 - Feature: Rival Information Monitor Evidence
