@@ -117,6 +117,18 @@ python3 _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.
 python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/results.json
 ```
 
+As of `v0.10.41`, the consultant-advice usage matrix pairs two existing control
+policies with deterministic advice-aware wrappers. The wrappers use only visible
+consultant options, observation cues, and resource hints; they record selection,
+fallback, safe-hold, and command-alignment signals. The controls must retain the
+v0.10.40 state hashes. Treat all signals as simulated-policy evidence, not advice
+quality, causal impact, human learning, or balance evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.41-consultant-advice-usage/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it

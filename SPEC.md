@@ -150,6 +150,42 @@ reconstructing it from the diff.
 | Advisor Market Proposal Review | v0.10.38 | Paper-evaluate differentiated in-house advisors and defer runtime promotion pending generic advice repair | 294 | `8926f71296f39efc` (competitive) |
 | Live Consultant Advice and Advisory History | v0.10.39 | Restore four deterministic actor-visible consultant options across competitive CLI/MCP observations and retain them for debrief comparison | 294 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Traceability Evidence | v0.10.40 | Verify rendered consultant options, committed history, and debrief continuity across existing deterministic competitive captures | 294 | `8926f71296f39efc` (competitive) |
+| Consultant Advice Usage Evidence | v0.10.41 | Compare advice-aware and advice-ignoring simulated policies using visible cues, resource-safe fallback, and exact observation/history/debrief continuity | 285 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Consultant Advice Usage Evidence
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.41
+
+  Summary:
+  Added a bounded Phase 7 evidence slice that compares deterministic advice-aware
+  and advice-ignoring competitive policies. The advice-aware wrapper reads only
+  actor-visible consultant options and resources, records its selected option or
+  fallback, and preserves exact continuity with committed history and debriefs.
+
+  Done:
+  - Added a 24-run matrix for Fiscal Caution and Naive First-Time profiles,
+    seeds 42–44, and Normal/Hard difficulty.
+  - Added focused tests for option parsing, visible-cue priority, resource
+    guards, and safe fallback to hold.
+  - Verified advice-ignoring control hashes match the v0.10.40 artifact.
+  - Bumped package metadata to `0.10.41`.
+
+  Deferred / Non-Goals:
+  - No advisor roster, payroll, candidate pool, hire/fire command, AI advisor,
+    scenario, replay, state-hash, ruleset, balance, or runtime mechanics change.
+  - No advice-quality, causal-impact, human-learning, policy-validity, or
+    empirical-calibration claim.
+
+  Verification:
+  - `python3 -m unittest discover -s tests -p 'test_*.py'`
+  - `python3 _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test --all -- --test-threads=1`
+  - `python3 scripts/run_automated_playtests.py`
+  - `git diff --check`
 
 
 - Feature: Advisor Market Proposal Review

@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.41] - 2026-07-10
+
+### Added
+- Added a deterministic Phase 7 MCP capture matrix comparing advice-aware and
+  advice-ignoring simulated policies across two profiles, seeds 42–44, and
+  Normal/Hard competitive difficulty.
+- Added visible-cue, resource-guard, fallback, and command-alignment records to
+  the consultant-advice evidence artifact.
+- Added focused Python coverage for option parsing, visible selection, and
+  resource-safe fallback behavior.
+
+### Changed
+- Kept advice-aware choices as simulated-policy evidence only; they do not
+  establish advice quality, causal impact, human learning, or calibration.
+- Kept runtime mechanics, MCP schemas, replay formats, state hashes, scenarios,
+  difficulty, and balance unchanged.
+- Bumped the package version to `0.10.41`.
+
 ## [0.10.40] - 2026-07-10
 
 ### Added
