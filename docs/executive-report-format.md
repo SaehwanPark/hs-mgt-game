@@ -33,12 +33,12 @@ brief: bullet points, headline metrics, short analyst notes — not a raw debug 
 
 ## Current implementation note
 
-The first interactive CLI report uses fixture consultant options. Later live
-reports and the MCP observation path currently provide an empty consultant
-option list. The 2-4-option section remains a design requirement, not a claim
-that every current observation delivers advice. Restoring deterministic,
-state-conditioned monthly advice is separate from the future advisor-market
-proposal in [`expansion-proposal-review.md`](expansion-proposal-review.md).
+Genesis, live monthly CLI reports, and MCP observations all use the same four
+deterministic consultant options generated from the human actor's visible
+observation. The options are advisory only and are retained with each
+competitive transition for debrief comparison. This generic advice baseline is
+separate from the deferred advisor-market proposal in
+[`expansion-proposal-review.md`](expansion-proposal-review.md).
 
 ## Example report (Month 4, Year 1)
 

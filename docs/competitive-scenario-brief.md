@@ -61,8 +61,8 @@ Players should practice:
 
 ## Included interactions
 
-- Monthly executive report with consultant recommendations (design target;
-  currently fixture-backed only for the first CLI month)
+- Monthly executive report with four deterministic consultant recommendations
+  derived from the actor-visible observation
 - Simultaneous multi-system command resolution
 - Action-point, cash, and political capital economy
 - Public vs private rival action observability
@@ -71,8 +71,7 @@ Players should practice:
 - Multi-month `project` pipelines including EHR migration
 - Annual policy and insurance renewal tick
 - Stata-like command entry (competitive CLI)
-- End-of-run debrief with AI rationales; advisory comparison remains a follow-up
-  requirement
+- End-of-run debrief with AI rationales and month-by-month advisory comparison
 
 ## Excluded interactions (competitive v1)
 
@@ -103,8 +102,7 @@ Players should practice:
 
 - Human sees own reported metrics (noise and delay via resolved inputs)
 - Rival **public** actions appear with 1-month lag
-- Consultant options are intended to highlight tradeoffs; ignoring advice
-  remains viable when the live advisory path is restored
+- Consultant options highlight tradeoffs; ignoring advice remains viable
 - Intelligence gaps explicitly list unobserved rival activity
 - Random events inject exogenous shocks without railroading a single path
 
@@ -117,7 +115,7 @@ Players should practice:
 
 ## Debrief hooks
 
-- Future: month-by-month comparison of human and consultant recommendations
+- Month-by-month comparison of human actions and retained consultant options
 - Rival AI rationales for key competitive months
 - Effect attribution for simultaneous moves (share, access, trust)
 - Cite resolved monthly event shocks where material

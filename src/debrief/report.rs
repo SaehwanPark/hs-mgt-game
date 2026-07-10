@@ -234,6 +234,20 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
         lines.push(format!("Player: {}", cmd_str));
       }
 
+      if !transition.consultant_options.is_empty() {
+        let options = transition
+          .consultant_options
+          .iter()
+          .map(|option| format!("{} — {}", option.label, option.title))
+          .collect::<Vec<_>>()
+          .join("; ");
+        lines.push(format!("Consultant options shown: {options}"));
+        lines.push(
+          "Advisory comparison: the available options are recorded for discussion; none is marked correct."
+            .to_string(),
+        );
+      }
+
       let mut monitored_system_ids = std::collections::HashSet::new();
       if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
         for cmd in &human_batch.commands {

@@ -100,6 +100,11 @@ comparison, workforce-protective, and growth/capacity evidence into classroom
 or reviewer prompts. Treat it as a discussion aid, not as measured human
 learning, a validated assessment instrument, or a reason to tune runtime
 mechanics.
+As of `v0.10.39`, competitive MCP observations include four deterministic,
+non-binding consultant options derived from the actor-visible observation, and
+competitive debriefs retain the options shown for comparison with submitted
+actions. Treat this as an explanation and traceability improvement, not as
+advice quality evidence, a learning claim, or an advisor-market implementation.
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it

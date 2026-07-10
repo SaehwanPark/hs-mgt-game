@@ -90,6 +90,7 @@ pub fn transition_competitive(
     effects,
     next,
     state_hash,
+    consultant_options: Vec::new(),
   })
 }
 

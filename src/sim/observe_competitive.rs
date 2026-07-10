@@ -7,6 +7,65 @@ use super::transition_competitive::{command_intel_summary, is_public_command};
 
 const PUBLIC_INTEL_LAG_MONTHS: u32 = 1;
 
+fn consultant_options_for_observation(
+  observation: &PlayerObservation,
+) -> Vec<crate::model::ConsultantOption> {
+  let cash_protective = matches!(observation.cash_runway_signal, CashRunwaySignal::Strained);
+  let workforce_strained = observation.workforce_trust_summary.contains("strained");
+  let trust_watch = observation.community_trust_summary == "watch";
+  let has_intelligence_gap = !observation.intel_gaps.is_empty();
+
+  vec![
+    crate::model::ConsultantOption {
+      label: 'A',
+      title: if cash_protective {
+        "Cash-protective capacity: defer staffed-bed investment until runway improves".to_string()
+      } else {
+        "Defensive capacity: invest in staffed beds to protect access and share".to_string()
+      },
+      tradeoff_bullets: vec![if cash_protective {
+        "protects near-term runway but leaves capacity pressure unresolved".to_string()
+      } else {
+        "protects access and share but consumes cash before delayed capacity arrives".to_string()
+      }],
+    },
+    crate::model::ConsultantOption {
+      label: 'B',
+      title: if workforce_strained {
+        "Workforce-first: recruit nurses to address observed staffing strain".to_string()
+      } else {
+        "Workforce resilience: recruit nurses before capacity constraints bind".to_string()
+      },
+      tradeoff_bullets: vec![
+        "spends cash and may lower workforce trust before delayed staffing relief arrives"
+          .to_string(),
+      ],
+    },
+    crate::model::ConsultantOption {
+      label: 'C',
+      title: if has_intelligence_gap {
+        "Information-first: monitor an identified rival intelligence gap".to_string()
+      } else {
+        "Information-first: monitor rival activity before committing capital".to_string()
+      },
+      tradeoff_bullets: vec![
+        "costs AP and delays direct action; any signal remains partial".to_string(),
+      ],
+    },
+    crate::model::ConsultantOption {
+      label: 'D',
+      title: if trust_watch {
+        "Public legitimacy: make an access commitment to rebuild trust".to_string()
+      } else {
+        "Public access pledge: commit to an access target".to_string()
+      },
+      tradeoff_bullets: vec![
+        "may reduce policy pressure but creates a visible follow-through obligation".to_string(),
+      ],
+    },
+  ]
+}
+
 pub fn observe_for_human(
   world: &CompetitiveWorldState,
   prior_aggregated: Option<&AggregatedMonthlyActions>,
@@ -38,7 +97,7 @@ pub fn observe_for_human(
 
   let intel_gaps = build_intel_gaps(world, prior_aggregated, observation_month);
 
-  PlayerObservation {
+  let mut observation = PlayerObservation {
     org_name: human.name.clone(),
     reported_access_index: human.access_index,
     prior_access_revision: None,
@@ -71,7 +130,9 @@ pub fn observe_for_human(
     consultant_options: Vec::new(),
     intel_gaps,
     rna_strike_active: world.event_metadata.get("rna_strike_active") == Some(&"true".to_string()),
-  }
+  };
+  observation.consultant_options = consultant_options_for_observation(&observation);
+  observation
 }
 
 fn rival_name(world: &CompetitiveWorldState, system_id: u32) -> String {
@@ -428,6 +489,52 @@ mod tests {
     let observation = observe_for_human(&world, None);
     assert_eq!(observation.org_name, "Riverside Community Health");
     assert!(!observation.market_bullets.is_empty());
+  }
+
+  #[test]
+  fn every_competitive_observation_has_four_non_binding_options() {
+    let world = genesis_competitive_world(Difficulty::Normal);
+    let observation = observe_for_human(&world, None);
+
+    assert_eq!(observation.consultant_options.len(), 4);
+    assert_eq!(
+      observation
+        .consultant_options
+        .iter()
+        .map(|option| option.label)
+        .collect::<Vec<_>>(),
+      vec!['A', 'B', 'C', 'D']
+    );
+    assert!(
+      observation
+        .consultant_options
+        .iter()
+        .all(|option| !option.tradeoff_bullets.is_empty())
+    );
+  }
+
+  #[test]
+  fn consultant_options_change_from_visible_observation_categories() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+    let baseline = observe_for_human(&world, None);
+
+    world.systems[0].resources.cash = 20;
+    world.systems[0].workforce_trust = 40;
+    world.systems[0].community_trust = 40;
+    let strained = observe_for_human(&world, None);
+
+    assert_ne!(
+      baseline.consultant_options[0],
+      strained.consultant_options[0]
+    );
+    assert_ne!(
+      baseline.consultant_options[1],
+      strained.consultant_options[1]
+    );
+    assert_ne!(
+      baseline.consultant_options[3],
+      strained.consultant_options[3]
+    );
   }
 
   #[test]

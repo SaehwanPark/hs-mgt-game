@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.39] - 2026-07-10
+
+### Added
+- Restored four deterministic, state-conditioned consultant options for every
+  competitive CLI and MCP observation.
+- Retained the exact monthly options shown with competitive transitions and
+  exposed them in the competitive debrief for comparison with player actions.
+
+### Changed
+- Unified genesis, live CLI, and MCP consultant output through the same
+  actor-visible observation path.
+- Kept the advisor market, payroll, hiring, AI behavior, ruleset values, and
+  state hashes deferred or unchanged.
+- Bumped the package version to `0.10.39`.
+
 ## [0.10.38] - 2026-07-09
 
 ### Added

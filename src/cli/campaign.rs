@@ -345,7 +345,13 @@ fn run_competitive_month_loop(
     print_line("Resolving simultaneous player batches (human entry + AI rivals)...");
     print_line("");
 
-    let transition = resolve_competitive_month(&current, ruleset, seed, human_batch)?;
+    let transition = resolve_competitive_month(
+      &current,
+      ruleset,
+      seed,
+      human_batch,
+      prior_aggregated.as_ref(),
+    )?;
     for line in resolution_summary_lines(&transition) {
       print_line(&line);
     }

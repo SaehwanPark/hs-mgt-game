@@ -1,11 +1,12 @@
 use crate::inputs::resolve_competitive_inputs;
 use crate::model::{
-  CompetitiveCommand, CompetitiveHistory, CompetitiveRuleset, CompetitiveTransition,
-  CompetitiveValidationError, CompetitiveWorldState, Difficulty, SystemMonthlyBatch,
-  default_competitive_ruleset,
+  AggregatedMonthlyActions, CompetitiveCommand, CompetitiveHistory, CompetitiveRuleset,
+  CompetitiveTransition, CompetitiveValidationError, CompetitiveWorldState, Difficulty,
+  SystemMonthlyBatch, default_competitive_ruleset,
 };
 use crate::sim::{
-  apply_institution_phase, apply_month_start_tick, resolve_monthly_batches, transition_competitive,
+  apply_institution_phase, apply_month_start_tick, observe_for_human, resolve_monthly_batches,
+  transition_competitive,
 };
 
 use super::resolution::{build_monthly_batches_with_ai, month1_human_preset_batch};
@@ -23,7 +24,9 @@ pub fn resolve_competitive_month(
   ruleset: &CompetitiveRuleset,
   seed: u64,
   human_batch: SystemMonthlyBatch,
+  prior_aggregated: Option<&AggregatedMonthlyActions>,
 ) -> Result<CompetitiveTransition, CompetitiveValidationError> {
+  let consultant_options = observe_for_human(prior, prior_aggregated).consultant_options;
   let mut working = prior.clone();
   let inputs = resolve_competitive_inputs(
     seed,
@@ -44,6 +47,7 @@ pub fn resolve_competitive_month(
     .events
     .splice(0..0, pre_events.into_iter().chain(institution_events));
   transition.state_hash = crate::model::hash_competitive_state(&transition.next, ruleset);
+  transition.consultant_options = consultant_options;
 
   Ok(transition)
 }
@@ -57,11 +61,19 @@ pub fn build_multi_month_resolution_history(
   let genesis = crate::competitive::genesis_competitive_world_with_ruleset(difficulty, &ruleset);
   let mut transitions = Vec::with_capacity(months as usize);
   let mut current = genesis.clone();
+  let mut prior_aggregated = None;
 
   for _ in 0..months {
     let human_batch = human_batch_for_month(current.turn);
-    let transition = resolve_competitive_month(&current, &ruleset, seed, human_batch)?;
+    let transition = resolve_competitive_month(
+      &current,
+      &ruleset,
+      seed,
+      human_batch,
+      prior_aggregated.as_ref(),
+    )?;
     current = transition.next.clone();
+    prior_aggregated = Some(transition.aggregated.clone());
     transitions.push(transition);
   }
 
@@ -88,6 +100,8 @@ mod loop_tests {
     assert_eq!(history.transitions.len(), 3);
     assert_eq!(history.final_state().turn, 3);
     assert_eq!(history.final_state().policy_calendar.month_index, 4);
+    assert_eq!(history.transitions[0].consultant_options.len(), 4);
+    assert_eq!(history.transitions[2].consultant_options.len(), 4);
   }
 
   #[test]

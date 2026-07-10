@@ -536,6 +536,7 @@ fn advance_competitive(
     &session.ruleset,
     session.seed,
     human_batch,
+    session.prior_aggregated.as_ref(),
   )
   .map_err(|error| error_message(error.message()))?;
 
@@ -638,6 +639,16 @@ fn format_competitive_observation(
       .iter()
       .map(|bullet| format!("Policy: {bullet}")),
   );
+  lines.push("STRATEGY CONSULTANT NOTES — Advisory, not binding".to_string());
+  for option in &obs.consultant_options {
+    lines.push(format!("Option {} — {}", option.label, option.title));
+    lines.extend(
+      option
+        .tradeoff_bullets
+        .iter()
+        .map(|bullet| format!("  Tradeoff: {bullet}")),
+    );
+  }
   lines.extend(
     obs
       .intel_gaps
@@ -844,6 +855,12 @@ mod tests {
     assert_eq!(session.difficulty, Some("Normal".to_string()));
     assert!(
       session
+        .observation
+        .iter()
+        .any(|line| line.contains("STRATEGY CONSULTANT NOTES"))
+    );
+    assert!(
+      session
         .legal_commands
         .iter()
         .any(|line| line.contains("invest"))
@@ -917,6 +934,43 @@ mod tests {
     assert!(text.contains("Recruitment lesson"));
     assert!(text.contains("role-specific delays"));
     assert!(text.contains("workforce trust"));
+  }
+
+  #[test]
+  fn competitive_history_and_debrief_retain_consultant_options() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let ended = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("advance");
+    let history = store
+      .get_history(GetHistoryRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("history");
+
+    assert_eq!(history.transition_count, 1);
+    assert!(
+      ended
+        .observation
+        .iter()
+        .any(|line| line.contains("STRATEGY CONSULTANT NOTES"))
+    );
+
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: session.session_id,
+      })
+      .expect("end session");
+    assert!(
+      ended
+        .debrief
+        .iter()
+        .any(|line| line.contains("Consultant options shown"))
+    );
   }
 
   #[test]

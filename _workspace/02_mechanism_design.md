@@ -1,58 +1,58 @@
-# Mechanism Design - Future Advisor Market Candidate
+# Mechanism Design - Live Consultant Advice and Advisory History
 
 ## Goal and Roadmap Phase
 
-Phase 7 proposal review for a future Phase 6/9 bounded strategic-actor slice.
+Phase 7 competitive teachability and validation slice following the v0.10.38
+advisor-market proposal review.
 
 ## Slice Boundary
 
-- Compare repaired generic advice with advisor-roster advice before runtime work.
-- Future candidate: stable advisor identity, specialty, experience tier,
-  monthly salary, and available-or-employed status.
-- Every human and AI system begins with one junior generalist; roster cap is
-  four, including pending hires.
+- Generate exactly four options (`A`–`D`) for each human competitive
+  observation, with visible tradeoffs and no ranking or optimal label.
+- Use one shared deterministic generator for genesis, live CLI, and MCP
+  observations.
+- Store the exact options shown on the corresponding competitive transition for
+  instructor debrief comparison.
 
 ## State, Beliefs, and Observations
 
-- Advice uses only the owning system's observation.
-- Experience changes coverage, prioritization, and tradeoff framing, not hidden
-  state accuracy or direct outcomes.
-- A report remains limited to 2-4 total attributed advisory options.
+- Advice uses only the owning system's `PlayerObservation`, including reported
+  cash runway, workforce/community summaries, and visible intelligence gaps.
+- Options are state-conditioned by visible categories but never expose hidden
+  rival actions or predict a guaranteed outcome.
+- A report contains four total attributed advisory options and labels them
+  `Advisory — not binding`.
 
 ## Commands, Events, and Effects
 
-- Evaluation baseline: `hire advisor=<id>` and `fire advisor=<id>` cost one AP,
-  take effect next month, and do not add signing or severance costs.
-- Current-month payroll remains owed after firing; releases return to the market
-  next month.
-- Outside arrivals, competitor dismissals, and constraint-driven layoffs are
-  distinct events. Contested hires require an explicit symmetric resolved input.
+- No commands, events, effects, payroll, or actor utility changes are introduced
+  by this slice.
+- The stored advisory list is explanatory history only and cannot alter
+  validation or transition results.
 
 ## Determinism and Replay Notes
 
-- Payroll and candidate availability must be prepared before observations and
-  batch validation, or deliberately staged to the next month.
-- Future history must retain delivered advice, employment changes, payroll, and
-  resolved arrival/match inputs for debrief and replay.
+- `resolve_competitive_month` captures advice from the same prior world and prior
+  aggregated actions used to render the pre-decision observation, before the
+  month-start tick mutates the working copy.
+- The advisory field is serialized with a default empty value for legacy
+  competitive transition JSON; state hashing remains based on world state.
 
 ## Open Questions
 
-- Defer runtime work if payroll sensitivity across 60, 500, 900, and 1200 cash
-  scales cannot yield viable lean and specialist strategies.
+- The deferred advisor market remains gated on evidence that this generic
+  advice baseline is insufficient for a documented learning or strategy need.
 
-## Paper-Fixture Results
+## Educational Debrief Hooks
 
-- Repaired generic advice is not live, so no evidence shows that a roster adds
-  value beyond restoring the current design requirement.
-- At 24 months, a four-advisor roster costs 96 cash even at a flat 1/1/1 salary
-  schedule and 216 cash at 1/2/3. Both exceed the default 60-cash scenario
-  before other spending.
-- Outside arrivals, releases, contention, cap validation, firing, next-month
-  activation, payroll, and AI parity can be specified with explicit state and
-  inputs, but this is feasibility evidence, not a runtime validation.
+- Retain monthly option titles and tradeoff bullets beside the actual player
+  commands.
+- Show the available advice and chosen action without scoring compliance or
+  treating any option as correct.
+- Preserve enough history for instructor discussion of decision quality versus
+  outcome quality.
 
 ## Conclusion
 
-Defer the advisor market. The next potential slice is repaired generic monthly
-advice and advisory-history capture; reconsider the roster only if that baseline
-does not satisfy a documented learning or strategy need.
+Promote only the generic advice baseline. Keep differentiated advisors,
+employment state, payroll, and AI parity outside this slice.
