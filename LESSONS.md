@@ -3,6 +3,16 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Test Recurring Costs Against Every Scenario Cash Scale
+
+- Context: Evaluating a future in-house advisor market with monthly salaries.
+- Symptom: A recurring cost can appear modest against a high-cash exemplary
+  scenario while consuming a large share of the default 60-cash campaign, which
+  has no general recurring operating-income flow.
+- Prevention: Before promoting a recurring-cost mechanic, test its full campaign
+  burden against every supported scenario cash scale and document when a
+  month-start tick must occur before observation and command validation.
+
 ## Separate Future Queue Ranking From Promotion Rules
 
 - Context: Re-ranking `SPEC.md` Future items after several validation and

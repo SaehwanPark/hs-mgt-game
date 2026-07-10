@@ -52,7 +52,10 @@ tooling remain deferred.
 Future expansion fields should be added only after proposal review and domain
 QA. Candidate additions include explicit difficulty-pressure profiles
 (resource access, information delay, monitoring depth, risk posture), regional
-consolidation scenario events or actor stubs, and GUI presentation metadata.
+consolidation scenario events or actor stubs, GUI presentation metadata, and a
+reviewed advisor-market roster/candidate definition. Advisor fields require a
+separate bounded proposal because they affect payroll, observations, replay, and
+simultaneous action resolution.
 These fields should compose known mechanisms; they must not become executable
 logic or a second rules language.
 

@@ -2,7 +2,7 @@
 
 **Status:** Phase 6.0 design artifact  
 **Audience:** CLI implementers, instructors, playtest designers  
-**Renders in:** `src/cli/display/briefing.rs` (competitive campaign, slice I2)
+**Renders in:** `src/cli/display/executive_report.rs` (competitive campaign)
 
 ## Purpose
 
@@ -30,6 +30,15 @@ brief: bullet points, headline metrics, short analyst notes — not a raw debug 
 - Consultant options are deterministic template variants; never label one "optimal."
 - Cash runway signal: `comfortable` / `watch` / `strained` from ruleset thresholds.
 - On annual months, `policy` section leads with **Year in review** subsection.
+
+## Current implementation note
+
+The first interactive CLI report uses fixture consultant options. Later live
+reports and the MCP observation path currently provide an empty consultant
+option list. The 2-4-option section remains a design requirement, not a claim
+that every current observation delivers advice. Restoring deterministic,
+state-conditioned monthly advice is separate from the future advisor-market
+proposal in [`expansion-proposal-review.md`](expansion-proposal-review.md).
 
 ## Example report (Month 4, Year 1)
 

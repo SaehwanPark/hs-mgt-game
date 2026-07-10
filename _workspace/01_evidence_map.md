@@ -1,64 +1,46 @@
-# Evidence Map - Independent Reviewer-Agent Live Capture
+# Evidence Map - Differentiated In-House Advisors
 
-## Evidence Question
+## Scope
 
-Can the existing live MCP capture path evaluate independent
-observation-conditioned reviewer policies without changing runtime simulation
-behavior, MCP DTOs, or shared diagnostics?
+Evaluate whether an advice-only advisor roster is a credible future health-system
+strategy mechanism.
 
-## Inputs
+## Sources Reviewed
 
-- `docs/agent-playtest-protocol.md` requires captured evidence to retain
-  actor-visible observations, legal commands, submitted commands, validation
-  failures, histories, and debriefs.
-- `docs/playtest-findings-v0.10.9.md` establishes that the current MCP wrapper
-  can capture observation-by-observation evidence.
-- `docs/playtest-findings-v0.10.10.md` establishes that the current diagnostic
-  script can summarize live-capture artifact shape.
-- `docs/playtest-findings-v0.10.13.md` recommends a stronger next gate using a
-  bounded agent or reviewer policy not authored from the same deterministic
-  profile scripts.
-- `scripts/play_game.py` and `scripts/diagnose_runs.py` already expose the
-  capture and diagnostic boundary needed for this slice.
+- U.S. Bureau of Labor Statistics, Management Analysts Occupational Outlook
+  Handbook: <https://www.bls.gov/ooh/business-and-financial/management-analysts.htm>
+- Existing competitive report, observation, debrief, cash, and action documents.
 
-## Mechanism Mapping
+## Mechanisms and Institutions
 
-- The new runner records actor-visible observations, legal command hints,
-  submitted commands, validation failures, transition hashes, final
-  observations, and debriefs through the existing Python wrapper.
-- Three reviewer policies choose commands from observation cues and month
-  position, not from the existing automated month-table policies.
-- Access-pledge repetition is bounded to at most one pledge per run so the slice
-  tests reviewer follow-through rather than restaging the prior access-loop
-  diagnostic.
-- Because this is post-run analysis, no hidden active-play state, Rust MCP DTO,
-  transition logic, stochastic boundary, or state hash change is needed.
+- Management analysts may work in-house, specialize by domain or industry, and
+  take on more responsibility with experience.
+- The direction for specialization, experience, and compensation is
+  literature-grounded. Monthly payroll, exact pay, a junior starter, a cap of
+  four, candidate arrival, layoffs, and firing rules are gameplay abstractions.
 
-## Evidence Produced
+## Actor Incentives and Information
 
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
-  records 18 completed competitive runs.
-- `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
-  summarizes profile outcomes, action frequencies, validation failures, access
-  pledges, and final hashes.
-- The matrix produced zero validation failures and 6 total access pledges.
-- Normal and Hard endpoint metrics were identical for each profile because the
-  policies are not difficulty-adaptive.
+- Health-system leaders trade recurring cost and attention against broader or
+  more focused decision support.
+- Advisors may use only the employing system's observation; they cannot reveal
+  a rival's hidden state or forecast realized outcomes.
 
-## Interpretation Limits
+## Unresolved Questions
 
-- This is simulated-agent strategy-space diagnostics, not human play or live LLM
-  play.
-- Three seeds, one campaign, two difficulty labels, and three deterministic
-  reviewer policies cannot justify balance tuning.
-- The reviewer policies are operator-authored and observation-conditioned; they
-  are not independent human samples.
-- The diagnostic parses final metrics from debrief text; it does not add a new
-  runtime export surface.
+- The default 60-cash campaign lacks general recurring income, making any
+  positive integer monthly salary material over 24 months.
+- Evidence does not support a calibrated cap, salary schedule, or layoff rate.
 
-## Follow-Up Routing
+## Design Implications
 
-- Use this matrix as evidence that new bounded reviewer policies can be tested
-  with the current capture/diagnostic workflow before runtime tuning.
-- Keep runtime cooldowns, pledge-effect tuning, difficulty tuning, and broader
-  analytics tooling gated on stronger repeated evidence.
+- Compare roster advice against repaired generic advice before promotion.
+- Treat shared candidate availability, outside arrivals, releases, and hiring
+  contention as visible mechanisms with explicit inputs and history.
+
+## Risks
+
+- A scalar capability ladder can create a dominant purchase.
+- Payroll or churn can overwhelm the existing cash/action economy.
+- Advisor quality can become hidden-state leakage unless constrained to framing
+  and coverage.

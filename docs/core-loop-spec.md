@@ -65,7 +65,8 @@ FOR month IN 1..campaign_length:
   2. Observation generation
      - Per-player PlayerObservation
      - Executive report (6 sections; see executive-report-format.md)
-     - Consultant recommendations (advisory)
+     - Consultant recommendations (advisory; live monthly coverage remains a
+       follow-up requirement)
      - Rival intel from public action log (lagged)
 
   3. Decision phase
@@ -91,18 +92,29 @@ FOR month IN 1..campaign_length:
   8. Monthly resolution summary
 END
 9. Replay verification
-10. Educational debrief (includes consultant comparison, AI rationales, annual review)
+10. Educational debrief (AI rationales and annual review; consultant comparison
+    is a follow-up requirement)
 ```
 
 ## Limited resources (competitive)
 
 | Resource | Role | Refresh |
 | --- | --- | --- |
-| Cash | Capital spends, recruitment, projects | Operating flows per transition |
+| Cash | Capital spends, recruitment, projects | No general periodic operating-income flow in the current prototype |
 | Action points (AP) | Monthly command capacity | Full budget each month (no banking in MVP) |
 | Political capital | Advocacy, negotiation posture | Partial monthly refresh, cap 15 |
 | Trust metrics | Workforce and community legitimacy | Modified by commits and outcomes |
 | Implementation capacity | Concurrent projects | Max 2 in-flight projects per system in MVP |
+
+## Future Advisor-Market Gate
+
+The current campaign has a consultant-report design target but not persistent
+live advisory output. A future advisor market is permitted only after repaired
+state-conditioned advice is compared against a roster-based design. If promoted,
+monthly preparation must resolve or reserve advisor payroll and candidate events
+before both human and AI observations and batch validation. Advisor advice must
+be derived from actor-visible observations, and any arrival or contested hire
+must be an explicit resolved input recorded for replay.
 
 Difficulty scales K, CPU AP, and AI ability — not human AP below documented floors.
 
@@ -123,9 +135,9 @@ hidden optimal path.
 
 | Stage | Stabilization | Competitive |
 | --- | --- | --- |
-| Pre-decision | Turn briefing + forecast preview | Executive report + consultant advice |
+| Pre-decision | Turn briefing + forecast preview | Executive report; live consultant advice is a follow-up requirement |
 | Post-decision | Actor rationale + state hash | All player rationales + monthly summary |
-| End of run | Debrief from history | Debrief + advisory comparison + year reviews |
+| End of run | Debrief from history | Debrief + year reviews; advisory comparison is a follow-up requirement |
 
 ## Related documents
 

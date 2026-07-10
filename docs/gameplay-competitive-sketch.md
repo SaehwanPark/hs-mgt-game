@@ -72,8 +72,15 @@ players may or may not follow advice.
 **Acceptance criteria:**
 
 - [x] Mechanism design documents generation rules
-- [x] Debrief compares advisory vs actual player choices
+- [ ] Live monthly observations and MCP sessions provide 2-4 deterministic
+  advisory options after the initial CLI fixture
+- [ ] Debrief compares available advisory options with actual player choices
 - [x] No single option marked as "correct"
+
+**Future advisor-market gate:** A roster of differentiated in-house advisors is
+not required to close these items. It must first beat repaired state-conditioned
+advice on teaching value and strategic choice, while keeping recommendations
+non-binding and derived only from each system's observation.
 
 ---
 

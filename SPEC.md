@@ -147,6 +147,43 @@ reconstructing it from the diff.
 | Difficulty Pressure Dimension Gate | v0.10.35 | Select rival information and monitoring pressure visibility as the next bounded difficulty surface before any runtime tuning | 294 | `8926f71296f39efc` (competitive) |
 | Rival Information Pressure Design | v0.10.36 | Define information delay, monitor value, and public disclosure as reviewable difficulty pressure surfaces before runtime tuning | 294 | `8926f71296f39efc` (competitive) |
 | Rival Information Monitor Evidence | v0.10.37 | Compare monitored versus unmonitored Hard/Expert live MCP captures for rival-information observation value | 294 | `8926f71296f39efc` (competitive) |
+| Advisor Market Proposal Review | v0.10.38 | Paper-evaluate differentiated in-house advisors and defer runtime promotion pending generic advice repair | 294 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Advisor Market Proposal Review
+  Status: Complete
+  Started: 2026-07-09
+  Version: 0.10.38
+
+  Summary:
+  Added a Phase 7 paper evaluation for differentiated in-house advisors as an
+  advice-only, shared-market candidate. The review defers runtime promotion:
+  the generic monthly-advice baseline is absent, and all tested positive
+  integer salary schedules make a four-advisor roster infeasible at the default
+  60-cash scale.
+
+  Done:
+  - Extended `docs/expansion-proposal-review.md` with evidence limits, fixture
+    outcomes, a 24-month payroll sensitivity matrix, promotion conditions, and
+    non-goals.
+  - Documented future-only architecture, roadmap, scenario, command, evidence,
+    and debrief boundaries without changing runtime behavior.
+  - Corrected consultant-report documentation to distinguish the intended
+    monthly advisory section from its current fixture-only implementation.
+  - Bumped package metadata to `0.10.38`.
+
+  Deferred / Non-Goals:
+  - No advisor state, command, salary, candidate pool, firing behavior, AI
+    change, schema, replay, state hash, ruleset, balance, or scenario change.
+  - No calibrated compensation, labor-market, layoff, or educational-effect
+    claim; the four-advisor cap and all cadence/price choices remain gameplay
+  abstractions pending future validation.
+
+  Verification:
+  - `git diff --check`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test -- --test-threads=1`
 
 
 - Feature: Rival Information Monitor Evidence
@@ -2615,13 +2652,18 @@ strategic actors, or platform architecture.
   Add one bounded breadth element, such as one service-line decision, one patient
   or distributional outcome category, one capital-allocation tradeoff, one
   market-area concept, one additional strategic interaction, or one localized
-  Medicare/Medicaid actor interaction.
+  Medicare/Medicaid actor interaction. A differentiated in-house advisor market
+  is a gated candidate only after repaired state-conditioned advice proves
+  insufficient for the desired decision-support and debrief value.
 
   Verification target:
   The new mechanism has a documented actor/observation boundary, deterministic
   tests, debrief attribution, and clear player-facing tradeoffs. Public-payer
   work must distinguish actor utility from social welfare and label
-  evidence-backed mechanisms versus design abstractions.
+  evidence-backed mechanisms versus design abstractions. Advisor work must also
+  show viable recurring-cost sensitivity across supported scenario cash scales,
+  symmetric human/AI information and roster rules, and explicit arrivals and
+  contested-hire inputs.
 
   Deferred / Non-Goals:
   Full US health-system model, individual patient simulation, broad federal

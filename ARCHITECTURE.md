@@ -189,8 +189,16 @@ When a new abstraction is justified, the implementing slice should name the
 evidence source, keep deterministic replay and actor-observation boundaries
 intact, and leave unrelated platform goals deferred.
 
-Last Reviewed: 2026-07-07
-Status: Verified
+A future advisor-market slice is deferred as a narrow decision-support
+candidate. If later justified, it would require shared market and roster state, advisor-generated
+recommendations derived from each owning system's observation, explicit resolved
+inputs for outside arrivals and contested hires, and append-only records of
+payroll, advice, and employment changes. It must not expose hidden state,
+create a generic worker framework, or claim that advisor quality predicts
+outcomes. See `docs/expansion-proposal-review.md`.
+
+Last Reviewed: 2026-07-09
+Status: Verified; future advisor-market boundary documented
 
 ### Scenario and Actor Design
 

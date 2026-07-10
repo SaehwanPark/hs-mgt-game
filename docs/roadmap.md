@@ -615,7 +615,8 @@ regional market campaign (`competitive-regional-v1`) adds:
 - 1 human + K AI health-system players on a shared market model;
 - simultaneous monthly action resolution (ADR-0003);
 - action-point, cash, and political capital economy (ADR-0005);
-- executive one-page report with consultant recommendations;
+- executive one-page report shell, with first-month fixture consultant
+  recommendations; live monthly advisory coverage remains a follow-up;
 - partial observability of rival public actions;
 - bounded game-theory AI with inspectable rationales;
 - random monthly events and delayed effect queues;
@@ -876,6 +877,11 @@ Current proposal-review candidates:
   scenario, observation, replay, and debrief data as the CLI/MCP interfaces.
   Publicly downloadable pixel assets require license review, with CC0 sources
   preferred.
+- **Differentiated in-house advisors:** evaluate a shared, scarce advisor market
+  against repaired state-conditioned monthly advice before adding a roster,
+  payroll, candidate availability, or hire/fire mechanic. Any future slice must
+  preserve observation boundaries, symmetric human/AI rules, deterministic
+  arrivals and hiring contention, and debriefable advice provenance.
 
 ## Deliverables
 

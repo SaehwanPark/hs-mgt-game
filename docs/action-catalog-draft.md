@@ -32,6 +32,11 @@ results.
 | `commit` | `pledge_type`, `level` | 1 | 0 | 1 | 0 | yes | Public access or quality pledge |
 | `project` | `kind`, `budget` | 2 | budget/resolve_months per mo | 0 | 6–18 | yes at start | Multi-month pipeline (e.g., EHR migration) |
 
+`hire advisor=<id>` and `fire advisor=<id>` are future proposal-only commands,
+not part of the current catalog. A promoted advisor slice must define payroll
+timing, roster-cap validation, candidate visibility, and simultaneous-hire
+resolution before adding them.
+
 ### Argument enums (MVP)
 
 - `role`: `nurse`, `physician`, `admin`

@@ -43,6 +43,7 @@ ledger records a source, range, and versioned ruleset use.
 | Difficulty pressure tiers | Future Phase 7/9 expansion review | Gameplay-driven / design abstraction | Current runtime varies rival count, AP, and AI ability; future resource, information, and aggression differences require validation and Expert winnability evidence |
 | Regional merger/acquisition | Future Phase 7/9 expansion review | Literature-grounded direction; uncalibrated mechanics | DOJ/FTC merger review and HHS consolidation materials support institutional relevance; prototype outcomes must not imply legal forecasting |
 | GUI asset sourcing | Future interface expansion | Licensing / product constraint | Prefer CC0 assets such as Kenney; OpenGameArt/itch.io assets require per-asset license review before distribution |
+| Differentiated in-house advisor market | Future decision-support and strategic-actor proposal | Literature-grounded direction / gameplay-driven parameters | Management-analyst work supports specialization, experience, and compensation context. Roster cap, monthly salary scale, candidate arrivals, layoffs, and firing remain abstractions; see [expansion-proposal-review.md](expansion-proposal-review.md). |
 
 ## Boundary Evidence Notes
 

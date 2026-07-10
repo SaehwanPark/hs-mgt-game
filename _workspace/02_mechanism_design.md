@@ -1,72 +1,58 @@
-# Mechanism Design - Ambulatory Surgery Center (ASC) Service Line
+# Mechanism Design - Future Advisor Market Candidate
 
 ## Goal and Roadmap Phase
-Phase 6.1: Simulation Breadth (Track 5) - Ambulatory Surgery Center (ASC) Service Line.
+
+Phase 7 proposal review for a future Phase 6/9 bounded strategic-actor slice.
 
 ## Slice Boundary
-- **Included:**
-  * Outpatient ASC capacity.
-  * Specialized staffing targets (nurse, physician, admin) for ASC.
-  * Greedy staffing priority hierarchy (ASC 9th).
-  * ASC outpatient treatment deferral mechanics and penalties.
-  * Command grammar aliases for invest and project actions.
-  * AI competitor response and REPL autocomplete/dashboard formatting.
-- **Excluded:**
-  * Individual surgery type categories (orthopedic, ophthalmic, etc.).
-  * Detailed surgical instrument inventory or OR scheduling slots.
-  * Patient demographic/cohort level details.
 
-## Actors and Authority
-- **Player CEO & Rival CEOs:** Have authority to:
-  * Invest immediately in ASC bays (`domain=asc`).
-  * Initiate long-term ASC capital projects (`kind=asc_unit`).
-  * Recruit staff (nurses, physicians, admins) to support the service line expansions.
-- **Clinical Staff (Nurses/Physicians):** Allocated greedily based on the hierarchical priority rule.
+- Compare repaired generic advice with advisor-roster advice before runtime work.
+- Future candidate: stable advisor identity, specialty, experience tier,
+  monthly salary, and available-or-employed status.
+- Every human and AI system begins with one junior generalist; roster cap is
+  four, including pending hires.
 
 ## State, Beliefs, and Observations
-- **True State additions:**
-  * `asc_capacity: i32` (physical outpatient surgical bays, default 0).
-  * `PendingEffectKind::AscCapacity { capacity_delta: i32, project_draw: Option<i32> }`
-- **Observations:** Exposes:
-  * `asc_capacity` physical vs effective.
-  * In-flight ASC projects in the detailed project tracking dashboard.
-  * Outpatient surgical treatment deferrals in the monthly summary report.
+
+- Advice uses only the owning system's observation.
+- Experience changes coverage, prioritization, and tradeoff framing, not hidden
+  state accuracy or direct outcomes.
+- A report remains limited to 2-4 total attributed advisory options.
 
 ## Commands, Events, and Effects
-### Commands
-- `invest domain=asc amount=<int>`:
-  * Cash Cost: `amount` ($20k per bay).
-  * Access: Immediate increase `amount / 20`.
-  * Market Share: Immediate increase `amount / 40`.
-  * Effect: Enqueues `PendingEffectKind::AscCapacity { capacity_delta: amount / 20, project_draw: None }` for next month.
-- `project kind=asc_unit budget=24`:
-  * AP Cost: 2, cash draw: $4k/month for 6 months.
-  * Completion: Enqueues `PendingEffectKind::AscCapacity { capacity_delta: 6, project_draw: Some(4) }` after 6 months.
 
-### Events
-- **RNA Strike:** Suspends active ASC capital projects, and halves effective capacity due to temporary staffing shortages.
-
-### Effects
-- **ASC Treatment Deferral:**
-  * Demand = `(system.asc_capacity + 7) / 8` (12.5% of ASC capacity, ceiling division).
-  * Unserved = `(demand - effective_asc).max(0)`.
-  * Penalty: Outpatients cannot board in the ED; they are deferred. Triggers `-1` community trust and `-1` market share index penalties per deferred patient.
-
-## Strategic Interaction
-- Rival AI players will evaluate candidate commands for ASC projects. If a rival sees the player expanding ASC, it may initiate a counter-expansion to protect its market share.
-
-## Assumptions and Parameters
-- **Staffing Targets:**
-  * ASC (Outpatient Surgery): Nurse:bay = 1:2, Physician:bay = 1:4, Admin:bay = 1:12.
-- **Hierarchical Priority Allocation:**
-  * ICU (1st) -> Obstetrics (2nd) -> Med-Surg (3rd) -> Cardiology (4th) -> Psychiatric (5th) -> Neurology (6th) -> Oncology (7th) -> Infusion (8th) -> ASC (9th) -> Outpatient Clinics (10th) -> ED (11th).
-
-## Educational Debrief Hooks
-- Appends decision quality warnings if:
-  * ASC treatment deferrals occur: `"Ambulatory surgery center procedures were deferred due to capacity/staffing constraints, causing patient leakage."`
+- Evaluation baseline: `hire advisor=<id>` and `fire advisor=<id>` cost one AP,
+  take effect next month, and do not add signing or severance costs.
+- Current-month payroll remains owed after firing; releases return to the market
+  next month.
+- Outside arrivals, competitor dismissals, and constraint-driven layoffs are
+  distinct events. Contested hires require an explicit symmetric resolved input.
 
 ## Determinism and Replay Notes
-- Transitions are fully deterministic. All random inputs are pre-calculated at the turn-start boundary. State hash incorporates `asc_capacity` to prevent drift.
+
+- Payroll and candidate availability must be prepared before observations and
+  batch validation, or deliberately staged to the next month.
+- Future history must retain delivered advice, employment changes, payroll, and
+  resolved arrival/match inputs for debrief and replay.
 
 ## Open Questions
-- None.
+
+- Defer runtime work if payroll sensitivity across 60, 500, 900, and 1200 cash
+  scales cannot yield viable lean and specialist strategies.
+
+## Paper-Fixture Results
+
+- Repaired generic advice is not live, so no evidence shows that a roster adds
+  value beyond restoring the current design requirement.
+- At 24 months, a four-advisor roster costs 96 cash even at a flat 1/1/1 salary
+  schedule and 216 cash at 1/2/3. Both exceed the default 60-cash scenario
+  before other spending.
+- Outside arrivals, releases, contention, cap validation, firing, next-month
+  activation, payroll, and AI parity can be specified with explicit state and
+  inputs, but this is feasibility evidence, not a runtime validation.
+
+## Conclusion
+
+Defer the advisor market. The next potential slice is repaired generic monthly
+advice and advisory-history capture; reconsider the roster only if that baseline
+does not satisfy a documented learning or strategy need.

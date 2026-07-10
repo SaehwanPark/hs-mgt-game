@@ -2,10 +2,10 @@
 
 **Status:** Phase 7 proposal-review artifact  
 **Audience:** Contributors, domain reviewers, playtest designers  
-**Scope:** Difficulty expansion, regional merger/acquisition mechanics, and a
-future GUI layer
+**Scope:** Difficulty expansion, regional merger/acquisition mechanics, a
+future GUI layer, and a differentiated in-house advisor market
 
-This document reviews three expansion ideas before they are promoted into
+This document reviews expansion ideas before they are promoted into
 runtime work. It is intentionally a gate, not an implementation specification.
 Future slices should update this review, then the roadmap, then SDD documents
 before changing mechanics or interfaces.
@@ -41,6 +41,10 @@ before changing mechanics or interfaces.
 - OpenGameArt license guidance: OpenGameArt supports CC0 and other free
   licenses, but attribution and compatibility vary by asset:
   <https://opengameart.org/content/faq>.
+- U.S. Bureau of Labor Statistics management analyst profile: analysts may work
+  in-house, specialize by domain or industry, gain responsibility with
+  experience, and receive compensation that varies by role and work setting:
+  <https://www.bls.gov/ooh/business-and-financial/management-analysts.htm>.
 
 ## Proposal 1: Difficulty Expansion
 
@@ -150,6 +154,92 @@ Risks:
 - Pixel assets can create licensing or attribution debt.
 - A separate UI state model can break replay and observation boundaries.
 
+## Proposal 4: Differentiated In-House Advisor Market
+
+The competitive campaign intends to show 2-4 deterministic, non-binding
+consultant options each month. The first CLI month renders fixture options, but
+later live observations and the MCP observation path currently provide none.
+Repairing state-conditioned monthly advice is the baseline, not evidence that a
+roster market is needed.
+
+The advisor proposal should therefore be treated as a testable extension of
+decision support: a system-owned advisor supplies visible-observation analysis,
+not direct access, quality, cash, or action bonuses. Experience and specialty
+should affect coverage, prioritization, and tradeoff framing only; they must not
+make a senior advisor more accurate about hidden state or realized outcomes.
+
+Recommended gate:
+
+- Compare repaired generic monthly advice against an advisor-roster paper
+  fixture on identical actor-visible snapshots.
+- If evaluated in a future slice, use stable transferable identities with a
+  specialty, experience tier, monthly salary, and one employer-or-available
+  status. Each human and AI system starts with one junior generalist and may
+  employ at most four advisors.
+- Treat outside-market arrivals, competitor dismissals, and constraint-driven
+  layoffs as separate, explicit events. Any random arrival or simultaneous
+  hiring tie-break must be a named resolved input recorded for replay.
+- Keep advisor recommendations advisory and cap the report at 2-4 total
+  options with advisor provenance and stated limits.
+- Make AI systems consume the same structured advice from their own
+  observations, under the same roster, payroll, hiring, and firing rules.
+
+Paper-fixture evaluation:
+
+| Fixture | Result |
+| --- | --- |
+| Repaired generic advice vs roster advice | No comparison can yet show roster value because live state-conditioned monthly advice is absent. A roster must not receive credit merely for repairing this existing gap. |
+| Outside arrival, competitor release, and contested hire | These can be represented as named arrivals, releases, and symmetric match inputs without hidden randomness; no runtime fixture is justified yet. |
+| Cap, firing, activation, and payroll | A cap can validate final roster size; current-month payroll and next-month activation prevent free advice or same-month churn. These are candidate rules, not implemented behavior. |
+| Human and AI parity | Both can consume structured advice from their own observations under the same candidate, payroll, and roster rules; current AI advice behavior is not implemented. |
+
+The payroll sensitivity below assumes 24 monthly payments, no command spending,
+and no general recurring operating-income flow. A full roster means one junior,
+one senior, and two principals. Each cell is total payroll as a percentage of
+starting cash for lean-junior/full-roster strategies.
+
+| Monthly junior/senior/principal salaries | 60 cash | 500 cash | 900 cash | 1200 cash |
+| --- | --- | --- | --- | --- |
+| 1 / 1 / 1 | 40% / 160% | 4.8% / 19.2% | 2.7% / 10.7% | 2.0% / 8.0% |
+| 1 / 2 / 3 | 40% / 360% | 4.8% / 43.2% | 2.7% / 24.0% | 2.0% / 18.0% |
+| 2 / 4 / 6 | 80% / 720% | 9.6% / 86.4% | 5.3% / 48.0% | 4.0% / 36.0% |
+
+Evaluation result:
+
+- Experience, specialization, mobility, and compensation have a
+  literature-grounded direction. The starting junior advisor, four-person cap,
+  monthly cadence, salary scale, arrival rate, and firing rules are
+  gameplay-driven abstractions, not calibrated labor-market claims.
+- The payroll matrix makes a general four-advisor implementation infeasible in
+  the default 60-cash scenario under every tested positive integer schedule.
+  It can also dominate high-cash scenario spending. No salary schedule is
+  promoted from this review.
+- Current report ordering presents the human briefing before the month-start
+  tick. Payroll and candidate availability need a prepared-month boundary or a
+  clearly staged next-month effect before they can be validated fairly for
+  human and AI systems.
+
+**Decision: defer runtime advisor-market promotion.** The next bounded need is
+to restore generic, deterministic monthly advice from actor-visible state and
+record it for debrief. Reconsider a roster only if that repaired baseline proves
+insufficient for a documented teachability or strategy need.
+
+Promotion conditions:
+
+- Show at least two defensible roster strategies, including a viable lean
+  generalist strategy; no tier may be a universal upgrade.
+- Show that hiring and firing are meaningful but not monthly churn, and that
+  payroll is material without making no-hire or a full roster automatic.
+- Preserve actor-specific information, readable reports, append-only advisory
+  history, deterministic replay, and debrief comparison of available advice
+  with chosen actions.
+
+Deferred / non-goals:
+
+- No runtime advisor market, command, scenario field, state-hash change,
+  automatic layoff system, severance model, performance management, calibrated
+  salary model, or broad human-resources simulation.
+
 ## Promotion rule
 
 Before any implementation slice begins, the active `SPEC.md` Present entry
@@ -159,4 +249,4 @@ should cite:
 - the roadmap gate it satisfies;
 - the narrow artifact or runtime behavior being changed;
 - verification evidence needed before the slice can close; and
-- explicit non-goals that keep the other two proposals from entering scope.
+- explicit non-goals that keep the other proposals from entering scope.

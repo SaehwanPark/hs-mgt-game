@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.38] - 2026-07-09
+
+### Added
+- Added a Phase 7 advisor-market proposal review covering differentiated
+  in-house advisors, shared candidate availability, recurring compensation,
+  and evaluation gates before any runtime work.
+
+### Changed
+- Deferred the advisor concept pending generic monthly-advice repair and future
+  cash-scale evidence; runtime mechanics, schemas, replay, and rulesets remain
+  unchanged.
+- Corrected executive-report documentation to distinguish its intended
+  consultant section from the current CLI fixture and MCP behavior.
+- Bumped the package version to `0.10.38`.
+
 ## [0.10.37] - 2026-07-09
 
 ### Added

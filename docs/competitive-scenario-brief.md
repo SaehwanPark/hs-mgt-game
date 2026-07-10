@@ -61,7 +61,8 @@ Players should practice:
 
 ## Included interactions
 
-- Monthly executive report with consultant recommendations
+- Monthly executive report with consultant recommendations (design target;
+  currently fixture-backed only for the first CLI month)
 - Simultaneous multi-system command resolution
 - Action-point, cash, and political capital economy
 - Public vs private rival action observability
@@ -70,7 +71,8 @@ Players should practice:
 - Multi-month `project` pipelines including EHR migration
 - Annual policy and insurance renewal tick
 - Stata-like command entry (competitive CLI)
-- End-of-run debrief with AI rationales and advisory comparison
+- End-of-run debrief with AI rationales; advisory comparison remains a follow-up
+  requirement
 
 ## Excluded interactions (competitive v1)
 
@@ -85,6 +87,8 @@ Players should practice:
   promoted from roadmap Future into an active scenario design.
 - GUI-specific scenario behavior; future graphical clients must reuse the same
   scenario and core data.
+- Advisor-market, payroll, candidate-pool, or hire/fire mechanics until the
+  reviewed advisor proposal is promoted into a bounded runtime slice.
 
 ## Initial strategic tensions
 
@@ -99,7 +103,8 @@ Players should practice:
 
 - Human sees own reported metrics (noise and delay via resolved inputs)
 - Rival **public** actions appear with 1-month lag
-- Consultant options highlight tradeoffs; ignoring advice remains viable
+- Consultant options are intended to highlight tradeoffs; ignoring advice
+  remains viable when the live advisory path is restored
 - Intelligence gaps explicitly list unobserved rival activity
 - Random events inject exogenous shocks without railroading a single path
 
@@ -112,7 +117,7 @@ Players should practice:
 
 ## Debrief hooks
 
-- Month-by-month: human vs consultant recommendations
+- Future: month-by-month comparison of human and consultant recommendations
 - Rival AI rationales for key competitive months
 - Effect attribution for simultaneous moves (share, access, trust)
 - Cite resolved monthly event shocks where material
