@@ -105,6 +105,18 @@ non-binding consultant options derived from the actor-visible observation, and
 competitive debriefs retain the options shown for comparison with submitted
 actions. Treat this as an explanation and traceability improvement, not as
 advice quality evidence, a learning claim, or an advisor-market implementation.
+As of `v0.10.40`, competitive transition summaries also include the consultant
+options already retained in history. The consultant-advice traceability matrix
+uses that additive audit field to verify rendered options match committed history
+and remain available in debriefs across existing profiles, seeds, and
+Normal/Hard difficulty. Its command-family counts are descriptive only; they do
+not measure advice uptake, quality, learning, or causal outcomes.
+
+```bash
+python3 _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
