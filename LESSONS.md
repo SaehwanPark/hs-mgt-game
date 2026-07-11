@@ -809,3 +809,13 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Symptom: Incorrect or inconsistent effective capacity numbers printed on the REPL dashboard.
 - Cause: The logic to calculate effective capacities (including strike-time halving, target nurse/physician/admin ratios, priority allocation queues, and ED boarding math) was updated in the simulation kernel (`src/sim/transition_competitive.rs`) but not in the display formatting engine (`src/cli/display/executive_report.rs`).
 - Prevention: Whenever adding or modifying service lines, targets, strike adjustments, or boarding mathematics, modify both the transition simulation kernel and the CLI/REPL display report formatter in tandem. Write exhaustive unit tests verifying the alignment of targets, effective capacities, and ED boarding/diversion outcomes.
+## Advice Validation Must Separate Traceability From Advice Quality
+
+- Context: Validating the repaired deterministic consultant baseline after the
+  v0.10.39 live observation and history slice.
+- Resolution: Capture observations and debriefs at the MCP wrapper boundary,
+  assert exact A-D option and month coverage, and preserve submitted commands
+  beside the retained options without scoring adherence.
+- Prevention: Treat simulated-agent advice traces as evidence of visibility and
+  inspectability only. Do not infer learning, advice quality, calibration,
+  difficulty value, or advisor-market value from this matrix.
