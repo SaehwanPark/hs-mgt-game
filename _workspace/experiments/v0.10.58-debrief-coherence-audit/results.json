@@ -1,0 +1,2458 @@
+{
+  "batch_id": "v0.10.58-debrief-coherence-audit",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.58",
+  "completed_run_count": 39,
+  "completed_source_count": 6,
+  "evidence_gap_count": 0,
+  "evidence_gaps": [],
+  "hash_continuity": {
+    "comparisons": [
+      {
+        "earlier": "v0.10.54-project-limit-recovery",
+        "later": "v0.10.55-asc-project-observation",
+        "mismatched_seeds": [],
+        "seed_count": 3,
+        "status": "supported"
+      },
+      {
+        "earlier": "v0.10.55-asc-project-observation",
+        "later": "v0.10.56-project-recovery-use",
+        "mismatched_seeds": [],
+        "seed_count": 3,
+        "status": "supported"
+      }
+    ],
+    "status": "supported"
+  },
+  "limitations": [
+    "Coverage is traceability evidence, not causal evidence.",
+    "The source policies are deterministic simulated policies, not human or classroom sessions.",
+    "The audit does not measure debrief clarity, learning, strategy quality, balance, or calibration.",
+    "Decision-versus-outcome separation in text does not establish that a decision was good or bad.",
+    "Project ceilings, rival behavior, and delayed effects remain gameplay abstractions."
+  ],
+  "promotion_basis": "This audit measures decision-to-debrief trace coherence in existing artifacts. Runtime or interface promotion requires separate player-facing, instructor-facing, or domain-review evidence of an unexplained problem.",
+  "review_steps": [
+    {
+      "description": "Actor-visible information and legal commands before each choice",
+      "name": "decision_context",
+      "status": "supported"
+    },
+    {
+      "description": "Submitted commands, validation failures, and safe retries",
+      "name": "action_response",
+      "status": "supported"
+    },
+    {
+      "description": "Accepted effects, events, and committed state hashes",
+      "name": "transition_follow_through",
+      "status": "supported"
+    },
+    {
+      "description": "Lagged rival signals or visible pending project context",
+      "name": "delayed_or_partial_context",
+      "status": "supported"
+    },
+    {
+      "description": "Final tradeoff, transition count, and hash sequence",
+      "name": "outcome_context",
+      "status": "supported"
+    },
+    {
+      "description": "Month-level actions and retrospective decision-quality framing",
+      "name": "debrief_explanation",
+      "status": "supported"
+    }
+  ],
+  "run_count": 39,
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json",
+    "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+    "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+    "_workspace/experiments/v0.10.54-project-limit-recovery/results.json",
+    "_workspace/experiments/v0.10.55-asc-project-observation/results.json",
+    "_workspace/experiments/v0.10.56-project-recovery-use/results.json"
+  ],
+  "source_count": 6,
+  "source_reports": [
+    {
+      "batch_id": "v0.10.43-rival-info-follow-through",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.43",
+      "completed_run_count": 18,
+      "context": "partial",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "rival-pressure",
+      "review_steps": [
+        {
+          "covered_runs": 18,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 18,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 18,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / hard",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Rival Information unmonitored / expert",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.50-teachability-observation-capture",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.50",
+      "completed_run_count": 9,
+      "context": "not_applicable",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "strategy-tradeoff",
+      "review_steps": [
+        {
+          "covered_runs": 9,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "not_applicable"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 9,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 9,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "Fiscal Steward / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Access Expansion Advocate / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "First-Time Executive / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Fiscal Steward / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Access Expansion Advocate / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "First-Time Executive / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Fiscal Steward / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Access Expansion Advocate / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "First-Time Executive / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.51-adversarial-resource-probe",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.51",
+      "completed_run_count": 3,
+      "context": "not_applicable",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "resource-retry",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "not_applicable"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "Adversarial Resource Probe / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Adversarial Resource Probe / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Adversarial Resource Probe / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "not_applicable"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.54-project-limit-recovery",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.54",
+      "completed_run_count": 3,
+      "context": "delayed",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Limit Recovery / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Limit Recovery / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Limit Recovery / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.54-project-limit-recovery/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.55-asc-project-observation",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.55",
+      "completed_run_count": 3,
+      "context": "delayed",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "ASC Project Observation / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "ASC Project Observation / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "ASC Project Observation / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.55-asc-project-observation/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.56-project-recovery-use",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.56",
+      "completed_run_count": 3,
+      "context": "delayed",
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible information and legal commands before each choice",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "decision_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, and safe retries",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "action_response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted effects, events, and committed state hashes",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "transition_follow_through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Lagged rival signals or visible pending project context",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "delayed_or_partial_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Final tradeoff, transition count, and hash sequence",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "outcome_context",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Month-level actions and retrospective decision-quality framing",
+          "eligible_runs": 3,
+          "evidence_gaps": [],
+          "limited_turns": [],
+          "name": "debrief_explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Recovery Use / hard / seed 42",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 42,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Recovery Use / hard / seed 43",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 43,
+          "status": "supported"
+        },
+        {
+          "completion_status": "complete",
+          "profile_name": "Project-Recovery Use / hard / seed 44",
+          "review_steps": [
+            {
+              "description": "Actor-visible information and legal commands before each choice",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "decision_context",
+              "status": "supported"
+            },
+            {
+              "description": "Submitted commands, validation failures, and safe retries",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "action_response",
+              "status": "supported"
+            },
+            {
+              "description": "Accepted effects, events, and committed state hashes",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "transition_follow_through",
+              "status": "supported"
+            },
+            {
+              "description": "Lagged rival signals or visible pending project context",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "delayed_or_partial_context",
+              "status": "supported"
+            },
+            {
+              "description": "Final tradeoff, transition count, and hash sequence",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "outcome_context",
+              "status": "supported"
+            },
+            {
+              "description": "Month-level actions and retrospective decision-quality framing",
+              "evidence_gaps": [],
+              "limited_turns": [],
+              "name": "debrief_explanation",
+              "status": "supported"
+            }
+          ],
+          "seed": 44,
+          "status": "supported"
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.56-project-recovery-use/results.json",
+      "status": "supported"
+    }
+  ],
+  "status": "supported"
+}

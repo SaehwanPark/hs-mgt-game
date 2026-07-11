@@ -3,6 +3,21 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Decision-to-Debrief Audits Need Source-Specific Retry Contracts
+
+- Context: Auditing decision-time context, retries, delayed observations,
+  outcomes, and debrief framing for v0.10.58 across the v0.10.43, v0.10.50,
+  v0.10.51, and v0.10.54–v0.10.56 artifacts.
+- Symptom: A shared retry rule treated the v0.10.51 resource-probe artifact as
+  incomplete because that source records the pre-submit observation rather than
+  an `observation_after_failure` field.
+- Resolution: Keep source-specific contracts, accept the declared pre-submit
+  observation only when the source also records the expected failure, and treat
+  malformed or mismatched retry state as limited evidence.
+- Prevention: Do not normalize heterogeneous evidence into a shared schema or
+  infer successful recovery from absent fields; preserve each source's declared
+  observation and retry boundary.
+
 ## Event-Specific Debrief Coverage Is Still Traceability Evidence
 
 - Context: Auditing v0.10.43, v0.10.50, v0.10.51, and v0.10.54–v0.10.56

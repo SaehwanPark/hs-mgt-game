@@ -207,6 +207,17 @@ python3 _workspace/experiments/v0.10.57-debrief-use-audit/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.57-debrief-use-audit/results.json
 ```
 
+As of `v0.10.58`, the read-only debrief-coherence audit joins decision-time
+observations, submitted commands, accepted transitions, delayed or partial
+context, outcomes, and retrospective decision-quality framing across the same
+six source artifacts. It preserves the v0.10.51 pre-submit observation contract
+for expected resource probes and keeps runtime promotion deferred.
+
+```bash
+python3 _workspace/experiments/v0.10.58-debrief-coherence-audit/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.58-debrief-coherence-audit/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
