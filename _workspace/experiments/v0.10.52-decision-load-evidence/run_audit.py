@@ -191,6 +191,10 @@ def _source_identity_gaps(source):
   return [{"type": "source identity", "expected": expected, "actual": actual}]
 
 
+def _member_key(profile_id, seed):
+  return (str(profile_id), str(seed))
+
+
 def _profile_summaries(reports):
   summaries = {}
   for profile_id in EXPECTED_PROFILES:
@@ -213,7 +217,10 @@ def _profile_summaries(reports):
         else "limited"
       ),
       "run_count": len(profile_reports),
-      "seeds": sorted(report.get("seed") for report in profile_reports),
+      "seeds": sorted(
+        (report.get("seed") for report in profile_reports),
+        key=lambda value: (type(value).__name__, repr(value)),
+      ),
       "seed_stable": seed_stable,
       "metrics": metric_values[0] if metric_values else {},
     }
@@ -238,12 +245,12 @@ def build_audit(source=None):
     for index, run in enumerate(runs)
   ]
   expected_members = {
-    (profile_id, seed)
+    _member_key(profile_id, seed)
     for profile_id in EXPECTED_PROFILES
     for seed in EXPECTED_SEEDS
   }
   observed_members = {
-    (report.get("profile_id"), report.get("seed"))
+    _member_key(report.get("profile_id"), report.get("seed"))
     for report in reports
   }
   if observed_members != expected_members:

@@ -96,6 +96,19 @@ class DecisionLoadEvidenceTests(unittest.TestCase):
     self.assertTrue(incomplete["issues"])
     self.assertTrue(malformed["issues"])
 
+  def test_unhashable_identity_fields_remain_limited(self):
+    audit = RUNNER.build_audit(source={
+      "batch_id": RUNNER.SOURCE_BATCH_ID,
+      "code_version": RUNNER.SOURCE_CODE_VERSION,
+      "campaign": RUNNER.CAMPAIGN,
+      "difficulty": RUNNER.SOURCE_DIFFICULTY,
+      "seeds": RUNNER.EXPECTED_SEEDS,
+      "runs": [{"profile_id": [], "seed": {}}],
+    })
+
+    self.assertEqual(audit["status"], "limited")
+    self.assertIn("matrix continuity", {gap["type"] for gap in audit["unexplained_gaps"]})
+
   def test_source_identity_mismatch_is_limited(self):
     audit = RUNNER.build_audit(source={
       "batch_id": RUNNER.SOURCE_BATCH_ID,
