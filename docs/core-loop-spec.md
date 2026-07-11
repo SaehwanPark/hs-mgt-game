@@ -12,7 +12,7 @@ repository.
 | Campaign id | Name | Turn unit | Player model | Status |
 | --- | --- | --- | --- | --- |
 | `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 human CEO + per-turn NPC actors | Implemented v0.1.27 |
-| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
+| `competitive-regional-v1` | Competitive regional market | 1 month | 1 player-controlled + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
 
 ## Shared principles
 
@@ -70,7 +70,7 @@ FOR month IN 1..campaign_length:
      - Rival intel from public action log (lagged)
 
   3. Decision phase
-     - Human: Stata-like CLI command batch entry until submit or hold
+     - Player controller: Stata-like command batch entry until submit or hold
      - AI: compute batches from observations + beliefs (not shown to human)
 
   4. Simultaneous resolution (ADR-0003)
@@ -119,9 +119,10 @@ be an explicit resolved input recorded for replay.
 
 Difficulty scales K, CPU AP, and AI ability — not human AP below documented floors.
 
-## Paper-playable manual prototype
+## Manual facilitation (optional)
 
-Instructors can run the competitive loop on paper:
+The executable and MCP harness are canonical. A separately funded classroom or
+facilitation effort may also run the competitive loop on paper:
 
 1. Distribute executive report printout per month (template in executive-report-format.md).
 2. Each AI seat uses style card + last month's public log.

@@ -5,7 +5,8 @@
 **Version:** v0.1.48
 
 This protocol replaces planned recruitment of external human playtesters for the
-current validation path. It uses AI agents or sub-agents to play the bounded
+current validation path because recruitment and participant-study costs are not
+feasible for this personal project. It uses AI agents or sub-agents to play the bounded
 campaign slices through the local MCP interface, then synthesizes reproducible
 evidence about command comprehension, strategic diversity, pacing proxies,
 exploit risk, causal transparency, and debrief coherence.
@@ -196,4 +197,4 @@ Agent playtest findings must not be presented as:
 - policy forecasts or claims about actual institutions.
 
 If the project later needs human educational evidence, create a separate,
-approved evaluation plan rather than reviving this protocol silently.
+funded and approved evaluation plan rather than reviving recruitment silently.
