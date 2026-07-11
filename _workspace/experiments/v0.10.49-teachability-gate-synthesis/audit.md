@@ -26,7 +26,7 @@ Runtime promotion: deferred
 
 No concrete unexplained player-facing, instructor-facing, or domain-review gap was found; traceability and endpoint differences are not causal evidence.
 
-No concrete unexplained gap was identified by this evidence synthesis. A future runtime or interface slice still requires a player-facing, instructor-facing, or domain-review finding that current observations, histories, diagnostics, and debriefs cannot explain.
+A future runtime or interface slice still requires a player-facing, instructor-facing, or domain-review finding that current observations, histories, diagnostics, and debriefs cannot explain.
 
 ## Unexplained gaps
 
