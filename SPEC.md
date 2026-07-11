@@ -3048,6 +3048,40 @@ reconstructing it from the diff.
     checks pass.
 
 
+- Feature: Project-Recovery Use Evidence
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.56
+
+  Summary:
+  Added a deterministic response-conditioned project-limit recovery capture
+  across Hard seeds 42, 43, and 44. The simulated policy uses only the plain
+  validation error and unchanged actor-visible observation to select a safe
+  `hold` retry.
+
+  Done:
+  - Added the v0.10.56 MCP capture, diagnostics, and focused Python coverage.
+  - Confirmed expected rejection classification, same-turn observation
+    preservation, response-conditioned recovery, safe retry, debrief coverage,
+    and v0.10.55 state-hash continuity.
+  - Documented the evidence limits and kept project hints, resource payloads,
+    and runtime promotion deferred.
+  - Bumped the package version to `0.10.56`.
+
+  Deferred / Non-Goals:
+  - No runtime, command, scenario, replay, state-hash, MCP schema, structured
+    validation hint, resource payload, difficulty, scoring, or balance change.
+  - No human-comprehension, learning, calibration, winnability, or policy-
+    validity claim.
+
+  Verification:
+  - Three Hard runs complete 24 transitions with one expected project-limit
+    rejection and one response-conditioned `hold` retry each.
+  - Generated JSON and Markdown regenerate deterministically.
+  - Focused/full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

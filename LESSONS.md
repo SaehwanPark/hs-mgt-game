@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Response-Conditioned Recovery Is Still Simulated-Policy Evidence
+
+- Context: Testing whether the existing project-limit error surface supports a
+  response-conditioned recovery path in v0.10.56.
+- Symptom: A scripted policy can branch on a plain error and recover cleanly,
+  which may look like evidence that the interface is comprehensible.
+- Resolution: Record the allowed observation/error surface, exclude structured
+  fields from the recovery branch, preserve rejected-turn and hash continuity,
+  and label the result as traceability evidence.
+- Prevention: Do not promote validation hints, schema changes, or human-learning
+  claims from deterministic simulated-policy recovery alone.
+
 ## Missing Structured Hints Need Recovery Evidence Before Promotion
 
 - Context: Narrowing the v0.10.51 concurrent-project trace fact in v0.10.54.

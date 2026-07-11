@@ -183,6 +183,18 @@ python3 _workspace/experiments/v0.10.55-asc-project-observation/run_sessions.py
 python3 -m json.tool _workspace/experiments/v0.10.55-asc-project-observation/results.json
 ```
 
+As of `v0.10.56`, the project-recovery-use capture adds a response-conditioned
+simulated policy to the same schedule. The recovery branch reads only the plain
+validation error and unchanged actor-visible observation, does not consume
+`code`, `hint`, or `resource_limit` fields, and preserves v0.10.55 hashes.
+Treat this as response-surface traceability evidence, not human comprehension
+or a reason to change the MCP schema.
+
+```bash
+python3 _workspace/experiments/v0.10.56-project-recovery-use/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.56-project-recovery-use/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
