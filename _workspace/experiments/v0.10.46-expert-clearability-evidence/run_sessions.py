@@ -83,7 +83,7 @@ def run_profile(profile, seed):
       policy_fn=PROFILE_POLICIES[profile],
       capture_trace=True,
     )
-  except RuntimeError as error:
+  except Exception as error:
     return failed_run(profile, seed, str(error))
 
   if result is None:
