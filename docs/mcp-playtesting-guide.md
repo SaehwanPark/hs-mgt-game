@@ -519,3 +519,13 @@ debrief facilitation sequence across decision context, outcome context,
 follow-through, workforce posture, growth posture, rival response, and debrief
 clarity. Use it to guide repeated-run discussion, not to claim measured
 learning or promote runtime tuning.
+
+As of `v0.10.44`, `docs/playtest-findings-v0.10.44.md` connects the generic
+consultant-advice and rival-monitor evidence chains into one information-to-
+action comparison surface. Use it to compare visible information, subsequent
+commands, operational follow-through, realized tradeoffs, and debrief
+traceability across runs. Treat response records as inspectability evidence,
+not as proof of advice quality, monitor value, human learning, causal impact,
+balance, or calibration. Keep runtime and advisor-market work deferred unless
+a later artifact identifies a concrete gap that current observations, history,
+diagnostics, and debriefs cannot explain.

@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.44] - 2026-07-10
+
+### Added
+- Added a Phase 7 information-to-action comparison surface connecting the
+  generic consultant-advice and rival-monitor evidence chains for instructor
+  and reviewer discussion.
+- Added explicit prompts for comparing visible information, subsequent action,
+  operational follow-through, and debrief traceability across runs.
+
+### Changed
+- Kept runtime mechanics, MCP schemas, replay formats, state hashes, scenarios,
+  difficulty, scoring, and balance unchanged.
+- Bumped the package version to `0.10.44`.
+
 ## [0.10.43] - 2026-07-10
 
 ### Added

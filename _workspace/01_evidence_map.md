@@ -1,53 +1,63 @@
-# Evidence Map - Rival Information Follow-Through
+# Evidence Map - Information-to-Action Comparison
 
 ## Scope
 
-Extend the v0.10.37 monitor-value evidence from exposure to next-turn
-decision traceability.
+Synthesize existing Phase 7 evidence about two actor-visible decision-support
+surfaces: generic consultant advice and delayed rival-monitor intelligence.
+The output is an instructor/reviewer comparison aid, not a new simulation
+mechanic or causal evaluation.
 
 ## Sources Reviewed
 
 - Canonical project and harness documents.
-- `docs/playtest-findings-v0.10.37.md` and `docs/playtest-findings-v0.10.42.md`.
-- The v0.10.37 monitor capture and current MCP wrapper.
+- `docs/playtest-findings-v0.10.37.md` and its monitor artifact.
+- `docs/playtest-findings-v0.10.40.md`, `v0.10.41.md`, and `v0.10.42.md` and
+  their consultant-advice artifacts.
+- `docs/playtest-findings-v0.10.43.md` and its follow-through artifact.
+- Existing comparison and facilitation surfaces in v0.10.29 and v0.10.34.
 
 ## Mechanisms and Institutions
 
-- The human-led health system receives delayed, partial rival information.
-- Monitoring is an observation-surface action; this slice does not change its
-  modeled cost or transition effects.
-- The three policy arms are evidence controls, not new strategic actors.
+- The human-led health system receives non-binding consultant suggestions and
+  delayed partial information about rival activity.
+- Consultant advice is a state-conditioned observation retained for history and
+  debrief review; monitor intelligence is an observation-only rival signal.
+- The comparison mechanism is a documentation abstraction over visibility,
+  response, operational follow-through, outcomes, and explanation.
 
 ## Actor Incentives and Information
 
-- Reactive policies inspect only the current actor-visible observation and
-  visible resource hints.
-- Monitor-ignoring policies receive the same monitor signals but deliberately
-  retain the baseline command stream.
-- Unmonitored controls do not receive monitor-intel lines.
+- Simulated policies use actor-visible observations and visible resource hints.
+- Advice-aware and monitor-reactive policies intentionally differ from controls,
+  so their endpoint differences are not causal treatment estimates.
+- Final debriefs can reveal additional history and outcomes that were not known
+  at decision time; instructor review must keep those contexts separate.
 
 ## Assumptions
 
-- Signal-to-command linkage is a gameplay/evidence abstraction, not a model of
-  human cognition or validated decision quality.
-- Repeated deterministic runs are regression evidence, not human samples.
-- Different reactive commands make endpoint comparisons non-causal.
+- Existing JSON artifacts are deterministic and sufficient for the synthesis.
+- Strategy labels remain interpretive discussion handles, not learner classes.
+- Advice selection, monitor response, and fallback records demonstrate
+  traceability only.
 
 ## Unresolved Questions
 
-- Whether human or instructor-facing users find the signal-to-response trace
-  sufficiently clear remains untested.
-- Whether any future runtime information change is needed remains unresolved.
+- Whether instructors or human players find the comparison sequence clear has
+  not been tested with human or classroom evidence.
+- Whether a future runtime information or difficulty change is needed remains
+  unresolved.
 
 ## Design Implications
 
-- Preserve the current observation, history, debrief, and replay boundaries.
-- Report signal exposure, ignored signals, and next-turn responses separately.
-- Keep difficulty and monitor mechanics deferred absent a concrete gap.
+- Compare information visibility and response before judging endpoint quality.
+- Treat operational follow-through as distinct from public commitments.
+- Preserve current observation, history, replay, and debrief boundaries.
+- Keep runtime, advisor-market, difficulty, balance, and scoring changes gated
+  on a concrete future gap.
 
 ## Risks
 
-- A deterministic reactive wrapper can be mistaken for human monitor use.
-- Reactive endpoint differences can be misread as causal monitor benefit.
-- Signal wording changes could silently break the parser; focused parser tests
-  and a complete matrix must expose that failure.
+- Different policy command streams may be misread as causal evidence.
+- Instructor prompts may be mistaken for a validated assessment instrument.
+- The comparison surface could duplicate prior facilitation notes unless it
+  remains focused on the information-to-action chain.

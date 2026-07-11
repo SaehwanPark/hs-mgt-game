@@ -1,50 +1,43 @@
-# Final Handoff - Rival Information Follow-Through Evidence
+# Final Handoff - Information-to-Action Comparison Evidence
 
 ## Summary
 
-Implemented the v0.10.43 Phase 7 evidence slice testing whether visible rival
-monitor intel is followed by a next-turn simulated-policy response. The matrix
-contains reactive, monitor-ignoring, and unmonitored controls across seeds
-42–44 and Hard/Expert difficulty.
+Implemented the v0.10.44 Phase 7 evidence synthesis connecting generic
+consultant advice and rival-monitor follow-through into one instructor-facing
+comparison surface.
 
 ## Changed Files
 
-- Added the v0.10.43 capture runner, stable JSON artifact, diagnostics, and
-  focused Python tests.
-- Added findings, MCP playtesting guidance, SPEC/changelog/version updates,
-  README milestone, lessons, and Phase 7 handoff artifacts.
-- No Rust runtime, scenario, replay, MCP schema, or state-hash files changed.
+- Added `docs/playtest-findings-v0.10.44.md` with the evidence chain,
+  information-to-action review sequence, prompts, routing, and limits.
+- Updated MCP playtesting guidance, SPEC, changelog, README, lessons, package
+  metadata, and the five project handoff artifacts.
+- No Rust runtime, scenario, replay, MCP schema, state-hash, or test-source
+  files changed.
 
 ## Verification
 
-- 18 runs completed 24 transitions each with zero validation failures.
-- Reactive arms recorded visible signal-to-next-turn response records.
-- Monitor-ignoring and unmonitored control hashes matched for all six pairs.
-- Artifact regeneration was byte-for-byte stable.
-- Full Python tests, JSON validation, formatting, clippy, Rust tests, automated
-  playtests, and diff checks passed.
+- Existing v0.10.37, v0.10.40, v0.10.41, and v0.10.43 JSON artifacts parse.
+- Full Python tests, formatting, clippy, Rust tests, automated playtests, and
+  diff checks pass.
 
 ## Domain QA
 
 Pass. The slice preserves deterministic transitions, actor-visible information
-boundaries, append-only history, and the distinction between traceability and
-causal or educational claims.
+boundaries, append-only history, and the distinction between traceability,
+decision quality, outcome quality, and educational claims.
 
 ## Known Limits
 
 - Evidence is from deterministic simulated policies, not human or classroom
   sessions.
-- Reactive endpoint differences are not causal monitor-value evidence.
-- Signal classification is a gameplay abstraction and may require revision if
-  observation wording changes.
+- Advice-aware and monitor-reactive endpoint differences are non-causal.
+- The comparison prompts are not a validated assessment instrument.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/rival-info-follow-through-v0.10.43`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/122
-- CI: GitHub `check` passed
-- Review loop: three independent `code-reviewer` passes complete; no actionable
-  Critical, High, Medium, or Low findings
-- Review comments: none requiring replies or resolution
-- Merge-ready: yes, pending the normal GitHub merge decision
+- Working branch: `feat/information-to-action-comparison-v0.10.44`
+- PR URL: pending
+- Review loop: pending
+- Merge-ready: pending verification and review
