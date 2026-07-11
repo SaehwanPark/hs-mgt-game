@@ -3,6 +3,16 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Separate Month-Level Debrief Links From Global Attribution
+
+- Context: The v0.11.2 audit found complete decision and transition traces for
+  469 operating signal-months, but no month-specific operating-outcome lines in
+  the debrief; global attribution summaries appeared in all 60 runs.
+- Resolution: Count month-level decision links, month-level outcome links, and
+  global attribution summaries as separate evidence dimensions.
+- Prevention: Never treat an aggregated debrief mechanism list as proof that a
+  specific month’s loss or bottleneck was explained retrospectively.
+
 ## Preserve a Golden Control Beside New Policy Matrices
 
 - Context: The v0.11.1 matrix intentionally submits different commands from the

@@ -2,40 +2,48 @@
 
 ## Result
 
-- Added the v0.11.1 five-lane AI operating-loop validation matrix.
-- Captured 60 complete competitive runs across seeds 42–44 and all four
-  difficulty configurations.
-- Audited 1,440 months of player-owned demand, volume, unmet demand, revenue,
-  cost, margin, cash, attribution, hashes, and debrief traces.
-- Kept runtime promotion deferred; no gameplay or interface change was made.
+- Added a deterministic read-only v0.11.2 audit over the v0.11.1 operating
+  validation artifact.
+- Audited 60 runs and 1,440 transitions, separating decision context,
+  transition attribution, month-level debrief outcome linkage, and global
+  attribution summaries.
+- Identified 469 categorized signal-months with complete decision and
+  transition linkage but no month-specific operating-outcome debrief link.
+- Kept runtime, MCP, scenario, replay, ruleset, state-hash, balance, and debrief
+  wording behavior unchanged.
 
 ## Version Boundaries
 
-- Package: `0.11.1`
-- Competitive ruleset: `competitive-ruleset-0.2.0`
-- Competitive state hash: `competitive-state-hash-v9`
-- Seed-42 Normal hold-control month-one hash: `61357596d8800592`
+- Package: `0.11.2`
+- Source ruleset: `competitive-ruleset-0.2.0`
+- Source state hash: `competitive-state-hash-v9`
+- Source seed-42 Normal hold-control month-one hash: `61357596d8800592`
 
 ## Verification
 
-- 6 focused Python audit tests pass.
-- 60/60 matrix runs complete with zero validation failures.
-- 1,440/1,440 operating months pass accounting and actor-boundary checks.
-- 60/60 runs retain decision-to-debrief trace coverage.
-- Golden control, JSON validation, deterministic regeneration, and diff checks pass.
+- Eight focused explainability tests pass.
+- Source and v0.11.2 audits validate the documented matrix and counts.
+- 116 full Python tests and 289 Rust tests pass with formatting and clippy.
+- JSON validation, deterministic regeneration, and diff checks pass.
 
 ## Known Limits
 
-- Findings are deterministic simulated-policy evidence, not human or classroom
-  evidence.
-- Losses, bottlenecks, threshold crossings, and command trajectories are not
-  causal, dominance, balance, calibration, or winnability proof.
-- Payer-specific operations, shared demand diversion, and contested markets
-  remain deferred.
+- Findings are deterministic traceability evidence, not causal, balance,
+  calibration, winnability, human-learning, or policy-validity evidence.
+- The missing month-level debrief link is a follow-up candidate, not proof of
+  poor decisions or learner confusion.
+- Payer-specific operations, shared demand diversion, contested markets, and
+  runtime/debrief changes remain deferred.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/operating-loop-ai-validation-v0.11.1`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/139
-- Review loop: three independent `code-reviewer` passes required before merge readiness.
+- Working branch: `feat/operating-loss-explainability-v0.11.2`
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/140
+- CI: GitHub `check` passed; the only annotation is the repository’s existing
+  Node.js 20 deprecation warning.
+- Review loop: three independent `code-reviewer` passes completed; one Medium
+  trace-link issue and two Low documentation count issues were fixed and
+  pushed. Follow-up review found no actionable issues.
+- PR comments/review threads: none open.
+- Merge-ready: yes.

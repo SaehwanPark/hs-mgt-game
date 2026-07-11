@@ -2,59 +2,41 @@
 
 ## Goal and Roadmap Phase
 
-Phase 7 AI-agent gameplay validation of the v0.11.0 monthly operating loop.
+Phase 7 validation of whether the v0.11.1 operating consequence loop is
+inspectable from decision-time context through debrief evidence.
 
 ## Slice Boundary
 
-- Competitive campaign only.
-- Five external scripted policy lanes × three seeds × four difficulty levels.
-- One 24-month run per matrix coordinate.
-- No transition, command, actor, scenario, MCP, or replay changes.
+- Read the existing v0.11.1 artifact only.
+- Audit 60 runs and 1,440 committed months.
+- Classify capacity/demand, operating-loss, and workforce-capacity signals.
+- Make no transition, command, actor, scenario, MCP, replay, or hash change.
 
 ## Actors and Authority
 
-The existing Riverside player system and existing AI rival systems remain the
-only actors. The five policy lanes are test-client behavior, not runtime actor
-definitions.
+Riverside remains the player-owned system. Existing rivals remain background
+actors in source history, but rival-private operating results are excluded from
+the new audit output.
 
 ## State, Beliefs, and Observations
 
-The audit uses actor-visible observations, legal-resource hints, submitted
-commands, transition summaries, attributed effects, state hashes, and debriefs.
-It does not infer rival private operating state.
+For each categorized signal, record whether the trace contains cash, prior
+operations, workforce, project, and labor-market context; a submitted command;
+and a player-owned operating transition with a committed hash.
 
-## Commands, Events, and Effects
+## Debrief Contract
 
-The runner submits existing commands only. Each operating month must expose:
-demand, treated volume, unmet demand, revenue, cost, and cash-margin effect, plus
-the Riverside operations event. Invalid commands are not expected-policy evidence.
+Count month-level `Player:` decision links separately from month-level operating
+outcome lines. Count global attributed-mechanism summaries separately and never
+promote them to month-level explanation evidence.
 
-## Strategic Interaction
+## Determinism and Evidence Limits
 
-The lanes vary priorities among access, commercial negotiation, workforce,
-capital modernization, and coalition/legitimacy. Difficulty changes only the
-existing rival configuration and resource rules.
+The audit uses fixed source JSON, stable sorting, no wall-clock data, and no new
+randomness. It reports traceability only; it does not score decisions or claim
+causal explanation, balance, or learning.
 
-## Assumptions and Parameters
+## Open Question
 
-- `demand = treated + unmet`.
-- `margin = revenue - cost`.
-- Operating cash effect equals margin.
-- Observed effect ranges and threshold crossings are descriptive only.
-
-## Educational Debrief Hooks
-
-The artifact preserves month-level observation, action, transition, operating
-effect, hash, and debrief continuity so reviewers can inspect what was visible
-and what followed. It does not score decisions or learning.
-
-## Determinism and Replay Notes
-
-The runner builds the local MCP binary, uses fixed seeds and policy order, writes
-timestamp-free sorted JSON, and separately checks the known seed-42 Normal
-hold-control hash.
-
-## Open Questions
-
-Loss and bottleneck patterns need a future controlled evidence slice before any
-runtime or balance change is considered.
+Whether a future debrief should expose month-specific operating outcomes remains
+deferred to a separate bounded design or runtime slice.

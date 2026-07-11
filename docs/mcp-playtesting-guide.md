@@ -63,6 +63,19 @@ python3 _workspace/experiments/v0.11.1-operating-loop-ai-validation/run_audit.py
 python3 -m unittest tests/test_operating_loop_ai_validation.py
 ```
 
+To audit operating-loss and bottleneck explainability from the existing
+v0.11.1 artifact without launching new sessions:
+
+```bash
+python3 _workspace/experiments/v0.11.2-operating-loss-explainability/run_audit.py
+python3 -m unittest tests/test_operating_loss_explainability.py
+```
+
+This read-only audit separates decision-time context, transition attribution,
+month-level debrief outcome linkage, and global debrief attribution. It is
+descriptive traceability evidence, not causal, balance, or human-learning
+evidence.
+
 This matrix runs five deterministic policy lanes across seeds `42`, `43`, `44`
 and Easy/Normal/Hard/Expert. It is descriptive gameplay-validation evidence;
 it does not establish causal marginal effects, dominance, balance, calibration,
