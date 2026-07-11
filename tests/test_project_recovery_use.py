@@ -1,4 +1,3 @@
-import copy
 import importlib.util
 import json
 import unittest
@@ -25,6 +24,7 @@ def sample_run(seed=42):
   source_hashes = RUNNER.source_hashes_by_seed()[seed]
   trace = []
   expected_failures = []
+  probe_results = []
   for turn in range(1, RUNNER.EXPECTED_TRANSITIONS + 1):
     failure = []
     retry_commands = []
@@ -70,6 +70,19 @@ def sample_run(seed=42):
       },
       "done_after_submit": turn == RUNNER.EXPECTED_TRANSITIONS,
     })
+    if turn in RUNNER.PROBE_SCHEDULE:
+      probe = RUNNER.PROBE_SCHEDULE[turn]
+      failure = failure[0] if failure else {}
+      probe_results.append({
+        "turn": turn,
+        "probe_id": probe["probe_id"],
+        "expected_code": probe["expected_code"],
+        "observed_code": failure.get("code"),
+        "accepted": not bool(failure),
+        "retry_commands": retry_commands,
+        "turn_after_failure": turn_after_failure,
+        "response_conditioned": bool(failure),
+      })
   return {
     "profile_id": "project_recovery_use",
     "profile_name": f"Project-Recovery Use / hard / seed {seed}",
@@ -84,6 +97,7 @@ def sample_run(seed=42):
     "difficulty": RUNNER.DIFFICULTY,
     "completion_status": "complete",
     "turn_trace": trace,
+    "probe_results": probe_results,
     "validation_failures": expected_failures,
     "expected_probe_failures": expected_failures,
     "unexpected_failures": [],
@@ -126,6 +140,15 @@ class ProjectRecoveryUseTests(unittest.TestCase):
     self.assertEqual(
       failed["observation_after_failure"], failed["observation"]
     )
+
+  def test_probe_month_is_bound_to_expected_schedule(self):
+    artifact = RUNNER.build_artifact(
+      [sample_run(seed) for seed in RUNNER.SEEDS]
+    )
+    tampered = json.loads(json.dumps(artifact))
+    tampered["runs"][0]["probe_results"][2]["turn"] = 8
+    with self.assertRaises(AssertionError):
+      RUNNER.validate_artifact(tampered)
 
   def test_project_failure_does_not_use_structured_fields(self):
     failure = sample_run()["expected_probe_failures"][0]

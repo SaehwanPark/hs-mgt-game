@@ -2824,6 +2824,40 @@
           "done_after_submit": true
         }
       ],
+      "probe_results": [
+        {
+          "turn": 4,
+          "probe_id": "accepted_clinic_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 6,
+          "probe_id": "accepted_asc_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 7,
+          "probe_id": "concurrent_project_limit",
+          "expected_code": "too_many_concurrent_projects",
+          "observed_code": "too_many_concurrent_projects",
+          "accepted": false,
+          "retry_commands": [
+            "hold"
+          ],
+          "turn_after_failure": 7,
+          "response_conditioned": true
+        }
+      ],
       "validation_failures": [
         {
           "turn": 7,
@@ -6067,6 +6101,40 @@
           "done_after_submit": true
         }
       ],
+      "probe_results": [
+        {
+          "turn": 4,
+          "probe_id": "accepted_clinic_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 6,
+          "probe_id": "accepted_asc_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 7,
+          "probe_id": "concurrent_project_limit",
+          "expected_code": "too_many_concurrent_projects",
+          "observed_code": "too_many_concurrent_projects",
+          "accepted": false,
+          "retry_commands": [
+            "hold"
+          ],
+          "turn_after_failure": 7,
+          "response_conditioned": true
+        }
+      ],
       "validation_failures": [
         {
           "turn": 7,
@@ -9308,6 +9376,40 @@
             "turn": 24
           },
           "done_after_submit": true
+        }
+      ],
+      "probe_results": [
+        {
+          "turn": 4,
+          "probe_id": "accepted_clinic_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 6,
+          "probe_id": "accepted_asc_project",
+          "expected_code": null,
+          "observed_code": null,
+          "accepted": true,
+          "retry_commands": [],
+          "turn_after_failure": null,
+          "response_conditioned": false
+        },
+        {
+          "turn": 7,
+          "probe_id": "concurrent_project_limit",
+          "expected_code": "too_many_concurrent_projects",
+          "observed_code": "too_many_concurrent_projects",
+          "accepted": false,
+          "retry_commands": [
+            "hold"
+          ],
+          "turn_after_failure": 7,
+          "response_conditioned": true
         }
       ],
       "validation_failures": [

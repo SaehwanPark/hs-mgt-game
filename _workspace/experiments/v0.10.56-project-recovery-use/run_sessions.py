@@ -140,6 +140,7 @@ def failed_run(seed, error):
     "completion_status": "failed",
     "run_error": error,
     "turn_trace": [],
+    "probe_results": [],
     "validation_failures": [],
     "expected_probe_failures": [],
     "unexpected_failures": [],
@@ -160,6 +161,7 @@ def run_session(seed):
   validation_failures = []
   expected_probe_failures = []
   unexpected_failures = []
+  probe_results = []
 
   try:
     client.start()
@@ -290,6 +292,18 @@ def run_session(seed):
         trace["latest_transition"] = transition
       trace["done_after_submit"] = session["done"]
       turn_trace.append(trace)
+      if probe:
+        failure = trace["validation_failures"][0] if trace["validation_failures"] else {}
+        probe_results.append({
+          "turn": turn,
+          "probe_id": probe["probe_id"],
+          "expected_code": probe["expected_code"],
+          "observed_code": failure.get("code"),
+          "accepted": not bool(failure),
+          "retry_commands": trace["retry_commands"],
+          "turn_after_failure": trace["turn_after_failure"],
+          "response_conditioned": bool(trace["recovery_decision"]),
+        })
 
   except Exception as error:
     return failed_run(seed, str(error))
@@ -324,6 +338,7 @@ def run_session(seed):
       "complete" if len(history) == EXPECTED_TRANSITIONS else "incomplete"
     ),
     "turn_trace": turn_trace,
+    "probe_results": probe_results,
     "validation_failures": validation_failures,
     "expected_probe_failures": expected_probe_failures,
     "unexpected_failures": unexpected_failures,
@@ -427,11 +442,27 @@ def validate_artifact(artifact):
     assert run["completion_status"] == "complete"
     assert run["transition_count"] == EXPECTED_TRANSITIONS
     assert len(run["turn_trace"]) == EXPECTED_TRANSITIONS
+    assert len(run["probe_results"]) == len(PROBE_SCHEDULE)
     assert len(run["expected_probe_failures"]) == 1
     assert run["unexpected_failures"] == []
     assert run["retry_count"] == 1
     assert run["debrief"]
     assert run["state_hashes"] == source_hashes[run["seed"]]
+
+    for result in run["probe_results"]:
+      assert result["turn"] in PROBE_SCHEDULE
+      expected = PROBE_SCHEDULE[result["turn"]]
+      assert result["probe_id"] == expected["probe_id"]
+      assert result["expected_code"] == expected["expected_code"]
+      if expected["expected_code"] is None:
+        assert result["accepted"]
+        assert result["observed_code"] is None
+      else:
+        assert not result["accepted"]
+        assert result["observed_code"] == expected["expected_code"]
+        assert result["turn_after_failure"] == result["turn"]
+        assert result["retry_commands"] == ["hold"]
+        assert result["response_conditioned"]
 
     for entry in run["turn_trace"]:
       assert REQUIRED_TRACE_FIELDS <= set(entry)
