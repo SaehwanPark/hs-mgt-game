@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.56] - 2026-07-11
+
+### Added
+- Added a deterministic response-conditioned project-limit recovery capture
+  across Hard seeds 42, 43, and 44.
+- Added focused coverage proving recovery uses only the plain validation error
+  and unchanged actor-visible observation, while preserving accepted-transition
+  state hashes and debrief continuity.
+
+### Changed
+- Kept project validation hints, resource payloads, runtime guidance, and MCP
+  behavior unchanged because this simulated-policy evidence does not establish
+  human comprehension or unexplained recovery friction.
+- Bumped the package version to `0.10.56`.
+
 ## [0.10.55] - 2026-07-11
 
 ### Fixed
