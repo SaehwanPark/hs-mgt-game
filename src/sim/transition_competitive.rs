@@ -736,6 +736,9 @@ fn apply_staffing_constraints(
   events: &mut Vec<Event>,
   effects: &mut Vec<crate::model::AttributedEffect>,
 ) {
+  let regional_demand_index = world.market.regional_demand_index;
+  let payer_pressure = world.market.commercial_payer_pressure;
+  let human_system_id = world.human_system().map(|system| system.system_id);
   for system in &mut world.systems {
     let target_nurses = (system.staffed_beds + 4) / 5
       + (system.emergency_capacity + 1) / 2
@@ -1237,6 +1240,15 @@ fn apply_staffing_constraints(
       + effective_neuro
       + effective_asc;
 
+    apply_monthly_operating_cycle(
+      system,
+      (regional_demand_index, payer_pressure),
+      (total_physical, total_effective),
+      human_system_id == Some(system.system_id),
+      events,
+      effects,
+    );
+
     if total_physical > 0 && total_effective < total_physical {
       let utility_ratio = total_effective as f32 / total_physical as f32;
       let penalty_pct = 1.0 - utility_ratio;
@@ -1278,6 +1290,70 @@ fn apply_staffing_constraints(
         });
       }
     }
+  }
+}
+
+fn apply_monthly_operating_cycle(
+  system: &mut crate::model::HealthSystemState,
+  market: (i32, i32),
+  capacity: (i32, i32),
+  expose_to_player: bool,
+  events: &mut Vec<Event>,
+  effects: &mut Vec<crate::model::AttributedEffect>,
+) {
+  let (regional_demand_index, payer_pressure) = market;
+  let (total_physical_capacity, total_effective_capacity) = capacity;
+  let demand = (regional_demand_index.max(0) * system.market_share_index.max(0) + 50) / 100;
+  let volume_capacity = (total_effective_capacity.max(0) + 4) / 8;
+  let treated = demand.min(volume_capacity);
+  let unmet = demand - treated;
+
+  // These integer units are visible game abstractions, not calibrated dollars
+  // or encounters. Quality improves realization while payer pressure suppresses it.
+  let revenue_rate = (150 + system.quality_index - payer_pressure).max(25);
+  let revenue = (treated * revenue_rate + 50) / 100;
+  let workforce_cost = (system.nurses + system.physicians + system.admins + 1) / 2;
+  let footprint_cost = (total_physical_capacity.max(0) + 10) / 20;
+  let cost = workforce_cost + footprint_cost;
+  let margin = revenue - cost;
+
+  system.monthly_demand = demand;
+  system.monthly_treated_volume = treated;
+  system.monthly_unmet_demand = unmet;
+  system.monthly_operating_revenue = revenue;
+  system.monthly_operating_cost = cost;
+  system.monthly_operating_margin = margin;
+  system.resources.cash += margin;
+
+  if expose_to_player {
+    push_effect(
+      effects,
+      "monthly demand allocation",
+      "monthly_demand",
+      demand,
+    );
+    push_effect(
+      effects,
+      "staffed volume resolution",
+      "monthly_treated_volume",
+      treated,
+    );
+    push_effect(effects, "capacity shortfall", "monthly_unmet_demand", unmet);
+    push_effect(
+      effects,
+      "revenue realization",
+      "monthly_operating_revenue",
+      revenue,
+    );
+    push_effect(effects, "operating expense", "monthly_operating_cost", cost);
+    push_effect(effects, "monthly operating cycle", "cash", margin);
+    events.push(Event {
+      actor: "operations",
+      description: format!(
+        "{}: treated {treated}/{demand} demand units; operating revenue {revenue}, cost {cost}, margin {margin:+}",
+        system.name
+      ),
+    });
   }
 }
 
@@ -1342,6 +1418,62 @@ mod transition_competitive_tests {
     let transition = resolve_month1(&prior);
     assert_eq!(transition.next.turn, 1);
     assert_eq!(transition.next.policy_calendar.month_index, 2);
+  }
+
+  #[test]
+  fn monthly_operating_cycle_connects_demand_capacity_cost_and_cash() {
+    let prior = genesis_competitive_world(Difficulty::Normal);
+    let starting_cash = prior.systems[0].resources.cash;
+    let transition = resolve_month1(&prior);
+    let human = &transition.next.systems[0];
+
+    assert!(human.monthly_demand > 0);
+    assert!(human.monthly_treated_volume <= human.monthly_demand);
+    assert_eq!(
+      human.monthly_unmet_demand,
+      human.monthly_demand - human.monthly_treated_volume
+    );
+    assert_eq!(
+      human.monthly_operating_margin,
+      human.monthly_operating_revenue - human.monthly_operating_cost
+    );
+    assert_eq!(
+      human.resources.cash,
+      starting_cash + human.monthly_operating_margin
+    );
+    assert!(transition.events.iter().any(|event| {
+      event.actor == "operations" && event.description.contains("operating revenue")
+    }));
+    assert!(!transition.events.iter().any(|event| {
+      event.description.contains("Northlake Health: treated")
+        || event.description.contains("Summit Care: treated")
+    }));
+    assert!(transition.effects.iter().any(|effect| {
+      effect.source == "staffed volume resolution" && effect.metric == "monthly_treated_volume"
+    }));
+  }
+
+  #[test]
+  fn staffing_shortage_limits_volume_and_can_create_unmet_demand() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+    world.systems[0].nurses = 0;
+    world.systems[0].physicians = 0;
+
+    let mut events = Vec::new();
+    let mut effects = Vec::new();
+    apply_staffing_constraints(
+      &mut world,
+      &default_competitive_ruleset(),
+      &mut events,
+      &mut effects,
+    );
+
+    assert_eq!(world.systems[0].monthly_treated_volume, 0);
+    assert_eq!(
+      world.systems[0].monthly_unmet_demand,
+      world.systems[0].monthly_demand
+    );
+    assert!(world.systems[0].monthly_operating_margin < 0);
   }
 
   #[test]
@@ -1492,8 +1624,11 @@ mod transition_competitive_tests {
     let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
     let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
 
-    // Cash: 60 starting - 5 cost = 55
-    assert_eq!(transition.next.systems[0].resources.cash, 55);
+    // Cash includes the negotiation cost and the resolved operating margin.
+    assert_eq!(
+      transition.next.systems[0].resources.cash,
+      55 + transition.next.systems[0].monthly_operating_margin
+    );
     // Access: 68 starting + 3 = 71
     assert_eq!(transition.next.systems[0].access_index, 71);
     // Policy pressure: 30 starting - 3 = 27
@@ -1540,8 +1675,11 @@ mod transition_competitive_tests {
     let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
     let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
 
-    // Cash: 60 starting - 10 cost = 50
-    assert_eq!(transition.next.systems[0].resources.cash, 50);
+    // Cash includes the negotiation cost and the resolved operating margin.
+    assert_eq!(
+      transition.next.systems[0].resources.cash,
+      50 + transition.next.systems[0].monthly_operating_margin
+    );
     // Quality: 68 starting + 3 = 71
     assert_eq!(transition.next.systems[0].quality_index, 71);
     // Policy pressure: 30 starting - 3 = 27

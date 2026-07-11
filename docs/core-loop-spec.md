@@ -12,7 +12,7 @@ repository.
 | Campaign id | Name | Turn unit | Player model | Status |
 | --- | --- | --- | --- | --- |
 | `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 human CEO + per-turn NPC actors | Implemented v0.1.27 |
-| `competitive-regional-v1` | Competitive regional market | 1 month | 1 human + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
+| `competitive-regional-v1` | Competitive regional market | 1 month | 1 player-controlled + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
 
 ## Shared principles
 
@@ -70,7 +70,7 @@ FOR month IN 1..campaign_length:
      - Rival intel from public action log (lagged)
 
   3. Decision phase
-     - Human: Stata-like CLI command batch entry until submit or hold
+     - Player controller: Stata-like command batch entry until submit or hold
      - AI: compute batches from observations + beliefs (not shown to human)
 
   4. Simultaneous resolution (ADR-0003)
@@ -86,6 +86,8 @@ FOR month IN 1..campaign_length:
        unified merge is proven safe (ADR-0004)
      - Enqueue new PendingEffects
      - Update public rival action log for next month observability
+     - Resolve staffed capacity against regional demand
+     - Derive treated and unmet demand, operating revenue and cost, and cash margin
 
   7. Commit transition to history with state hash
 
@@ -100,7 +102,7 @@ END
 
 | Resource | Role | Refresh |
 | --- | --- | --- |
-| Cash | Capital spends, recruitment, projects | No general periodic operating-income flow in the current prototype |
+| Cash | Capital spends, recruitment, projects, and operating margin | Monthly operating margin after staffed-volume resolution |
 | Action points (AP) | Monthly command capacity | Full budget each month (no banking in MVP) |
 | Political capital | Advocacy, negotiation posture | Partial monthly refresh, cap 15 |
 | Trust metrics | Workforce and community legitimacy | Modified by commits and outcomes |
@@ -119,9 +121,31 @@ be an explicit resolved input recorded for replay.
 
 Difficulty scales K, CPU AP, and AI ability — not human AP below documented floors.
 
-## Paper-playable manual prototype
+## Monthly operating abstraction
 
-Instructors can run the competitive loop on paper:
+The competitive campaign now closes a compact consequence loop:
+
+```text
+regional demand × market position
+  -> system demand
+staffed effective capacity
+  -> treated volume + unmet demand
+treated volume × (quality and payer-pressure realization)
+  -> operating revenue
+workforce + physical footprint
+  -> operating cost
+revenue - cost
+  -> cash available for later decisions
+```
+
+All quantities are integer game units. They are versioned, inspectable design
+abstractions rather than calibrated encounters, reimbursement, expenses, or
+financial forecasts.
+
+## Manual facilitation (optional)
+
+The executable and MCP harness are canonical. A separately funded classroom or
+facilitation effort may also run the competitive loop on paper:
 
 1. Distribute executive report printout per month (template in executive-report-format.md).
 2. Each AI seat uses style card + last month's public log.

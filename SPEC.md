@@ -3157,6 +3157,25 @@ None. All scheduled features are complete.
 
 ## Future
 
+The v0.11.0 operating loop is the current gameplay-maturity baseline. Before
+adding actors, commands, service lines, or platform layers, validate it with AI
+strategy archetypes across seeds and rival configurations. Required diagnostics
+are effect attribution, monthly bottlenecks, unused or dominated actions,
+trajectory diversity, low-influence state variables, stable marginal effects,
+and threshold cliffs. Runtime changes require a concrete unexplained gap.
+
+Shared contested mechanics remain gated. Contested hiring, demand diversion,
+scarce shared resources, coalition conflicts, or multi-party negotiations must
+first introduce a three-stage resolver: evaluate intentions against one prior
+snapshot, centrally resolve conflicts, then apply effects. Existing
+permutation-invariance tests remain mandatory but are not by themselves proof
+for future shared mutations.
+
+Routine project governance should update the four canonical layers—product
+thesis, architecture/invariants, current mechanics, and evidence/validation—at
+coherent feature boundaries. Dated findings and ADRs remain historical records;
+they do not each require a new runtime release or synchronized ceremony.
+
 ### Promotion rules
 
 Before any Future item moves into `Present`, the new Present entry must name:

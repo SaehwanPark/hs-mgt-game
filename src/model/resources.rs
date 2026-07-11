@@ -33,7 +33,7 @@ pub struct CompetitiveRuleset {
 
 pub fn default_competitive_ruleset() -> CompetitiveRuleset {
   CompetitiveRuleset {
-    version: "competitive-ruleset-0.1.30",
+    version: "competitive-ruleset-0.2.0",
     starting_cash: DEFAULT_STARTING_CASH,
     starting_political_capital: DEFAULT_STARTING_POLITICAL_CAPITAL,
     political_capital_cap: DEFAULT_POLITICAL_CAPITAL_CAP,

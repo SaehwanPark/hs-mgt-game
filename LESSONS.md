@@ -3,6 +3,24 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Close the Consequence Loop Before Expanding Content
+
+- Context: External review found that competitive cash funded actions but had
+  no recurring operating-income source despite extensive capacity and staffing.
+- Resolution: Add one aggregate demand-to-volume-to-margin cycle using existing
+  state before adding actors, commands, or service lines.
+- Prevention: A new operational domain should identify how it changes demand,
+  staffed production, revenue, cost, cash, quality, or access; otherwise defer it.
+
+## AI Playtests Do Not Become Human Evidence Through Repetition
+
+- Context: Recruitment and participant-study costs make structured human
+  playtests infeasible for the current personal project.
+- Resolution: Use bounded MCP AI playtests as the active gameplay-validation
+  path and retain a separate funded approval gate for any future human study.
+- Prevention: Never translate AI completion, explanation, pacing, or diversity
+  into claims about enjoyment, comprehension, cognitive load, or learning.
+
 ## Decision-to-Debrief Audits Need Source-Specific Retry Contracts
 
 - Context: Auditing decision-time context, retries, delayed observations,

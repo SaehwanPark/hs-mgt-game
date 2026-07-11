@@ -7,9 +7,10 @@
 ## Context
 
 The roadmap previously expected structured external human playtests during
-Phase 7. Recruiting external players is difficult for the current project, and
-the repository now has a local stdio MCP server plus Python automation for
-bounded agent play of both implemented campaign slices.
+Phase 7. Recruiting external players is difficult for the current project and
+is not feasible within the current personal-project budget. The repository has
+a local stdio MCP server plus Python automation for bounded agent play of both
+implemented campaign slices.
 
 The project still needs reproducible evidence for command comprehension,
 strategic diversity, pacing risks, exploit discovery, causal transparency, and
@@ -18,8 +19,9 @@ debrief coherence before expanding campaign scope.
 ## Decision
 
 Use AI-agent and sub-agent playtests as the active validation path for the
-current roadmap. External human recruitment is no longer required for planned
-Phase 7 playtest synthesis.
+current roadmap. External human recruitment is not a Phase 7 dependency, and
+no project budget is reserved for recruitment, incentives, or human-subject
+study administration.
 
 Agent playtests must use the MCP interface or an equivalent documented adapter
 that preserves actor-visible observations, validated commands, transition
@@ -37,7 +39,7 @@ classroom effectiveness, empirical calibration, or policy forecasting validity.
 - Educational claims are narrower: agent evidence can inspect debrief coherence
   and decision traces, but cannot prove actual learner outcomes.
 - Human-subjects governance is not part of routine validation unless a future
-  separate human evaluation plan is created.
+  separately funded and approved human evaluation plan is created.
 
 ## Alternatives Considered
 

@@ -1,51 +1,32 @@
-# Final Handoff - Debrief-Coherence Audit
+# Final Handoff
 
-## Summary
+## Result
 
-Implemented v0.10.58 as a deterministic read-only audit joining decision-time
-observations, submitted commands, accepted transitions, delayed or partial
-context, outcomes, and retrospective debrief markers across six existing Phase
-7 artifacts and 39 completed competitive runs.
+- Added a deterministic monthly operating loop from regional demand through staffed volume, unmet demand, revenue, cost, margin, and cash.
+- Exposed player-owned results in CLI/MCP observations and structured history while protecting rival-private operating facts.
+- Gave AI rivals private operating observations and bounded responses to unmet demand and losses.
+- Formalized AI-only Phase 7 test plays as the active budget-feasible path, with separate funding/approval required for any human evaluation.
+- Documented strategy archetypes, diagnostics, simultaneous-resolution hardening, governance simplification, and evidence limits.
 
-## Changed Files
+## Version Boundaries
 
-- Added `_workspace/experiments/v0.10.58-debrief-coherence-audit/` with the
-  runner, generated JSON, and Markdown report.
-- Added `tests/test_debrief_coherence_audit.py`.
-- Updated findings, MCP playtesting guidance, SPEC, changelog, README, lessons,
-  package metadata, and required `_workspace` handoffs.
+- Package: `0.11.0`
+- Competitive ruleset: `competitive-ruleset-0.2.0`
+- Competitive state hash: `competitive-state-hash-v9`
+- Golden competitive seed-42 month-one hash: `61357596d8800592`
 
 ## Verification
 
-- Seven focused audit tests and 102 full Python tests pass.
-- 286 Rust tests pass with `--test-threads=1`.
-- `cargo fmt --check` and clippy with `-D warnings` pass.
-- Automated baseline playtests complete for 24 sessions.
-- JSON validation, deterministic regeneration, and `git diff --check` pass.
-- v0.10.54→v0.10.55→v0.10.56 project hashes match for seeds 42–44.
-
-## Domain QA
-
-Pass. The audit preserves source-specific evidence boundaries, actor-visible
-observations, deterministic replay evidence, decision-versus-outcome limits,
-and the project's educational evidence boundaries.
+- Rust formatting, clippy, 289 unit tests, integration tests, doc tests, 102 Python tests, replay fixture regeneration, and diff whitespace checks pass.
+- Three independent reviews completed. One High information-disclosure issue, two Medium issues, and two Low issues were fixed; Pass 1 had no initial findings.
 
 ## Known Limits
 
-- This is simulated-policy traceability evidence, not human or classroom
-  comprehension evidence.
-- Supported debrief markers do not establish decision quality, causal strategy
-  value, learning, balance, calibration, or policy validity.
-- Runtime, MCP, scenario, replay, state-hash, scoring, difficulty, balance, and
-  debrief wording changes remain deferred.
+- Formulas are visible game abstractions, not calibrated clinical or financial units.
+- Payer-specific operations, shared demand diversion, and contested markets remain deferred.
+- AI runs validate reproducible gameplay traces and explanations, not human learning or enjoyment.
 
-## PR Handoff
+## Next Phase Dependency
 
-- Base branch: `main`
-- Working branch: `feat/debrief-coherence-audit-v0.10.58`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/137
-- CI: GitHub `check` passed.
-- Review loop: Pass 1 found no actionable issues; Pass 2 found no actionable
-  issues; Pass 3 found no actionable issues.
-- No Critical, High, Medium, or Low findings remain.
-- Merge-ready: yes.
+Run the documented AI archetype matrix across named seeds and rival configurations, then use operating attribution to identify bottlenecks, dominated actions, weak variables, stable marginal effects, and threshold cliffs before tuning or adding content.
+

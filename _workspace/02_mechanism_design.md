@@ -1,63 +1,45 @@
-# Mechanism Design - Debrief-Coherence Audit
+# Mechanism Design
 
 ## Goal and Roadmap Phase
 
-Phase 7 validation: inspect decision-to-debrief trace coherence without
-changing the deterministic competitive simulation.
+Phase 6 gameplay-maturity slice with Phase 7 AI validation: establish a complete operating consequence loop before expanding content.
 
 ## Slice Boundary
 
-- Included: six existing JSON artifacts, 39 completed runs, source-specific
-  coherence checks, project hash continuity, deterministic outputs, and tests.
-- Excluded: new sessions, runtime changes, MCP changes, schema generalization,
-  new mechanics, and debrief wording changes.
+- One monthly aggregate cycle per system: shared demand, market share, staffed capacity, treated/unmet demand, payer pressure, quality, revenue, workforce/footprint cost, margin, and cash.
+- Excludes payer-specific claims, debt, depreciation, acuity, new commands, and calibrated currency.
 
 ## Actors and Authority
 
-The audit treats source records as prior simulated policies. It introduces no
-actors, authority, incentives, or strategic decisions.
+- Systems retain existing commands; operating income emerges from state and resolved actions.
 
 ## State, Beliefs, and Observations
 
-The audit keeps actor-visible observations, committed transitions, delayed or
-partial signals, true-state hashes, and retrospective instructor material as
-separate evidence categories. Hidden state is not inferred.
+- True state stores the latest demand allocation, treated volume, unmet demand, revenue, cost, and margin.
+- The owner observes those results; rival internal facts remain hidden.
 
 ## Commands, Events, and Effects
 
-The audit records submitted commands, expected validation failures, safe retries,
-transition effects/events, state hashes, and debrief markers. It does not create
-or modify commands, events, or effects.
+- No new command. After staffing allocation, resolution applies margin to cash, emits an event, and attributes the cash effect.
+- Negative margin is a modeled outcome, not a validation failure.
 
 ## Strategic Interaction
 
-Existing rival-pressure, resource-retry, and project-recovery traces are checked
-for continuity. No policy is evaluated as optimal, causal, or educationally
-effective.
+- Capacity without workforce cannot produce full volume; quality supports revenue; payer pressure suppresses it; workforce and footprint impose cost.
 
 ## Assumptions and Parameters
 
-- Review steps: decision context, action response, transition follow-through,
-  delayed or partial context, outcome context, and debrief explanation.
-- Delayed/partial context is not applicable to source lanes that do not claim
-  that evidence dimension.
-- Project recovery hashes compare v0.10.54 with v0.10.55 and v0.10.55 with
-  v0.10.56 for seeds 42–44.
-- Runtime promotion is deferred by this slice.
+- Integer formulas are versioned rules abstractions tuned for legibility, not empirical estimates.
 
 ## Educational Debrief Hooks
 
-The report supports reviewer discussion of what was visible, what response
-followed, what transition occurred, what remained delayed or partial, and what
-the debrief records. It does not assess human understanding or learning.
+- Compare capacity with treated volume and unmet demand; distinguish revenue, margin, and reinvestment capacity; identify the binding bottleneck.
 
 ## Determinism and Replay Notes
 
-The runner reads immutable artifacts in fixed contract order, uses no randomness
-or wall-clock state, sorts generated JSON keys, and must regenerate byte-
-identical JSON and Markdown.
+- No randomness is added. Results are hashed and depend only on shared resolved market fields and each system's post-action state.
 
 ## Open Questions
 
-If a future reviewer identifies an actual explanation limitation, create a
-separate approved wording or interface slice rather than expanding this audit.
+- Future payer-specific rates and whether unmet demand should directly alter access.
+

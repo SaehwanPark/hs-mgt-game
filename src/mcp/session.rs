@@ -626,6 +626,15 @@ fn format_competitive_observation(
     format!("Workforce trust: {}", obs.workforce_trust_summary),
     format!("Community trust: {}", obs.community_trust_summary),
     format!("Cash runway: {}", obs.cash_runway_signal.label()),
+    format!(
+      "Prior-month operations: treated {}/{} demand units ({} unmet); revenue {}, cost {}, margin {:+}",
+      obs.monthly_treated_volume,
+      obs.monthly_demand,
+      obs.monthly_unmet_demand,
+      obs.monthly_operating_revenue,
+      obs.monthly_operating_cost,
+      obs.monthly_operating_margin
+    ),
     format!("In-flight projects: {}", obs.in_flight_projects),
   ];
   lines.extend(

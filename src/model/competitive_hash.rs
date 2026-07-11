@@ -1,7 +1,7 @@
 use super::{CompetitiveRuleset, CompetitiveWorldState, stable_hash_hex};
 
-// v8: added asc= field to record format (2026-07-05, feat/asc-service-line)
-pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v8";
+// v9: added monthly operating-loop fields (2026-07-11).
+pub const COMPETITIVE_STATE_HASH_SCHEMA_VERSION: &str = "competitive-state-hash-v9";
 
 pub fn competitive_state_hash_record(
   state: &CompetitiveWorldState,
@@ -10,7 +10,7 @@ pub fn competitive_state_hash_record(
   let mut systems = String::new();
   for system in &state.systems {
     systems.push_str(&format!(
-      "|sys{}:beds={}|outpatient={}|emergency={}|icu={}|obs={}|psych={}|cardio={}|onco={}|infuse={}|neuro={}|asc={}|nurses={}|physicians={}|admins={}|access={}|quality={}|share={}|cash={}|pc={}|ap={}|projects={}|trust_wf={}|trust_comm={}",
+      "|sys{}:beds={}|outpatient={}|emergency={}|icu={}|obs={}|psych={}|cardio={}|onco={}|infuse={}|neuro={}|asc={}|nurses={}|physicians={}|admins={}|access={}|quality={}|share={}|demand={}|treated={}|unmet={}|revenue={}|cost={}|margin={}|cash={}|pc={}|ap={}|projects={}|trust_wf={}|trust_comm={}",
       system.system_id,
       system.staffed_beds,
       system.outpatient_capacity,
@@ -29,6 +29,12 @@ pub fn competitive_state_hash_record(
       system.access_index,
       system.quality_index,
       system.market_share_index,
+      system.monthly_demand,
+      system.monthly_treated_volume,
+      system.monthly_unmet_demand,
+      system.monthly_operating_revenue,
+      system.monthly_operating_cost,
+      system.monthly_operating_margin,
       system.resources.cash,
       system.resources.political_capital,
       system.resources.ap_budget,

@@ -283,6 +283,12 @@ impl Scenario {
         workforce_trust: sys.workforce_trust,
         community_trust: sys.community_trust,
         market_share_index: sys.market_share_index,
+        monthly_demand: 0,
+        monthly_treated_volume: 0,
+        monthly_unmet_demand: 0,
+        monthly_operating_revenue: 0,
+        monthly_operating_cost: 0,
+        monthly_operating_margin: 0,
         resources,
       });
 

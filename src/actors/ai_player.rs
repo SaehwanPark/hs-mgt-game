@@ -424,7 +424,18 @@ fn score_command(
     CompetitiveCommand::Project { .. } => (style.growth + style.political) as i32,
   };
 
-  base + cash_pressure
+  let operating_adjustment = match command {
+    CompetitiveCommand::Hold if observation.monthly_operating_margin < 0 => 12,
+    CompetitiveCommand::Negotiate { .. } if observation.monthly_operating_margin < 0 => 8,
+    CompetitiveCommand::Invest { .. } | CompetitiveCommand::Recruit { .. }
+      if observation.monthly_unmet_demand > 0 =>
+    {
+      10
+    }
+    _ => 0,
+  };
+
+  base + cash_pressure + operating_adjustment
 }
 
 #[cfg(test)]

@@ -1,42 +1,42 @@
-# Domain QA - Debrief-Coherence Audit
+# Domain QA
 
 ## Status
 
-pass
+Pass.
 
 ## Reviewed Inputs
 
-- v0.10.58 audit runner, generated JSON, and Markdown.
-- Six source artifacts from v0.10.43, v0.10.50, v0.10.51, and v0.10.54–v0.10.56.
-- `SPEC.md`, findings, MCP playtesting guidance, and mechanism/evidence handoffs.
-- Focused/full Python tests, Rust tests, formatting, clippy, and automated
-  playtest output.
+- User feedback and `_workspace/00_input/request-summary.md`.
+- Evidence and mechanism handoffs.
+- Competitive operating-loop state, transition, observations, AI behavior, hashing, scenarios, tests, and canonical docs.
+- Three independent code-review passes and post-fix verification.
 
 ## Findings
 
-- The slice remains within the Phase 7 evidence-only gate.
-- Source-specific contracts preserve heterogeneous retry and observation shapes.
-- Decision context, response/retry, committed transitions, delayed or partial
-  context, outcomes, and debrief framing remain distinct.
-- Project-recovery hashes match across all v0.10.54–v0.10.56 comparisons.
-- The audit does not infer hidden state, actor utility, social welfare, causal
-  strategy, human learning, or policy validity.
-- No runtime, MCP, scenario, replay, or deterministic transition behavior changed.
+- Scope stays within one aggregate operating loop; no actor, command, service-line, or platform expansion was introduced.
+- Demand, staffed capacity, quality, payer pressure, workforce, footprint, margin, cash, access, and unmet demand remain distinguishable.
+- Player-private operating results are not disclosed for rivals through shared CLI/MCP transition output.
+- AI systems receive only their own operating results and can condition choices on losses or unmet demand.
+- No randomness, time, network, global mutation, or unresolved stochastic input entered the deterministic core.
+- Operating facts are included in v9 state hashes and structured player-owned attribution.
+- AI validation is explicit, while human learning, enjoyment, cognitive load, and policy validity remain unclaimed.
 
 ## Required Fixes
 
-None.
+None. The review-discovered rival information leak was fixed before this pass.
 
 ## Residual Risks
 
-- Supported trace coherence is not evidence of debrief clarity or learning.
-- Decision-versus-outcome wording is a review aid, not a decision-quality score.
-- The source policies and project ceiling remain gameplay abstractions.
+- Operating parameters are uncalibrated integer game units and need multi-seed AI balance diagnostics.
+- Aggregate payer realization does not model payer-specific volume or reimbursement.
+- Existing system-local resolution remains safe by permutation test; future contested shared mechanics require the documented three-stage resolver.
+- AI evidence cannot validate human educational attainment or subjective replay interest.
 
 ## Verification Evidence
 
-- Seven focused audit tests and 102 full Python tests pass.
-- 286 Rust tests, formatting, and clippy pass.
-- Automated baseline playtests complete for 24 sessions.
-- Generated JSON and Markdown are byte-identical across regeneration.
-- JSON validation and `git diff --check` pass.
+- `cargo fmt --check`
+- `cargo clippy --all-targets -- -D warnings`
+- `cargo test --all -- --test-threads=1` (289 Rust unit tests plus integration and doc tests)
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (102 tests)
+- `git diff --check`
+

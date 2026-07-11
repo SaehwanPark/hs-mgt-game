@@ -28,8 +28,8 @@ fn competitive_seed42_month1_preset_resolution_is_stable() {
       .count()
       == 2
   );
-  // v8 schema (added asc= field + version string bump, 2026-07-05)
-  assert_eq!(transition.state_hash, "8926f71296f39efc");
+  // v9 schema includes resolved monthly operating-loop state.
+  assert_eq!(transition.state_hash, "61357596d8800592");
 }
 
 #[test]

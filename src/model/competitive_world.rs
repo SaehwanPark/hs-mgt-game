@@ -173,6 +173,18 @@ pub struct HealthSystemState {
   pub workforce_trust: i32,
   pub community_trust: i32,
   pub market_share_index: i32,
+  #[serde(default)]
+  pub monthly_demand: i32,
+  #[serde(default)]
+  pub monthly_treated_volume: i32,
+  #[serde(default)]
+  pub monthly_unmet_demand: i32,
+  #[serde(default)]
+  pub monthly_operating_revenue: i32,
+  #[serde(default)]
+  pub monthly_operating_cost: i32,
+  #[serde(default)]
+  pub monthly_operating_margin: i32,
   pub resources: PlayerResources,
 }
 
