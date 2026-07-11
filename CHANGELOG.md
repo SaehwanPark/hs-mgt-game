@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.53] - 2026-07-11
+
+### Added
+- Added a deterministic read-only synthesis of the v0.10.50–v0.10.52 Phase 7
+  evidence chain.
+- Added focused coverage for source identity, control-hash continuity, the
+  nine-member profile/seed matrix, evidence gaps, and deterministic rendering.
+
+### Changed
+- Connected observation-driven teachability, resource-validation, retry, and
+  pacing-proxy evidence without creating a generalized evidence schema.
+- Kept runtime promotion deferred because no concrete unexplained player-facing,
+  instructor-facing, or domain-review gap was identified.
+- Bumped the package version to `0.10.53`.
+
 ## [0.10.52] - 2026-07-11
 
 ### Added

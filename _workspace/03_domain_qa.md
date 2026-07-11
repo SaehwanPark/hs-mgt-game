@@ -1,4 +1,4 @@
-# Domain QA - Decision-Load and Pacing Proxy Evidence
+# Domain QA - Phase 7 Evidence Chain Synthesis
 
 ## Status
 
@@ -6,21 +6,22 @@ pass
 
 ## Reviewed Inputs
 
-- `_workspace/experiments/v0.10.52-decision-load-evidence/run_audit.py`
-- Generated decision-load results and diagnostics.
-- `docs/playtest-findings-v0.10.52.md` and request summary.
+- `_workspace/experiments/v0.10.53-evidence-synthesis/run_audit.py`
+- Generated v0.10.53 JSON and Markdown audit outputs.
+- The v0.10.50, v0.10.51, and v0.10.52 source artifacts.
+- `docs/playtest-findings-v0.10.53.md` and request summary.
 - `README.md`, `SPEC.md`, `docs/roadmap.md`,
   `docs/design_principles.md`, and the harness team specification.
 
 ## Findings
 
 - The slice remains within the Phase 7 competitive teachability gate.
-- The audit reads existing actor-visible turn traces and does not alter
-  simulation state, stochastic inputs, replay, or MCP boundaries.
-- All nine source runs are complete, source-identifiable, and stable across
-  seeds 42, 43, and 44.
-- Action concentration is reported as a descriptive pacing proxy rather than a
-  claim about human cognitive burden, comprehension, or educational effect.
+- Each source is validated against its declared artifact shape without creating
+  a generalized evidence schema.
+- v0.10.51 control hashes match the v0.10.50 First-Time Executive runs, and the
+  nine-member profile/seed matrix remains continuous through v0.10.52.
+- Continuity is reported as descriptive trace evidence, not causal strategy,
+  balance, winnability, or educational evidence.
 - No concrete unexplained runtime, command-surface, or debrief gap was found;
   runtime promotion remains deferred.
 
@@ -30,17 +31,16 @@ None.
 
 ## Residual Risks
 
-- The source is deterministic simulated-policy evidence, not human or
+- The sources are deterministic simulated-policy evidence, not human or
   classroom evidence.
-- One campaign, one difficulty, three profiles, and three seeds do not support
-  general pacing, balance, winnability, or learning claims.
-- Temporal command concentration is descriptive and does not establish a
-  strategy defect or justify runtime tuning.
+- One campaign, one difficulty, and the existing bounded profiles and seeds do
+  not support general learning, balance, or policy-validity claims.
+- Control and matrix continuity do not establish causality or strategy quality.
 
 ## Verification Evidence
 
-- Focused decision-load tests: 6 passed.
-- Full Python suite: 58 passed.
+- Focused synthesis tests: 6 passed.
+- Generated JSON and Markdown regenerate deterministically.
+- Full Python suite: 64 passed.
 - Rust tests, formatting, Clippy, automated stabilization and competitive
   playtests, and `git diff --check` passed.
-- Generated JSON and Markdown regenerate deterministically.
