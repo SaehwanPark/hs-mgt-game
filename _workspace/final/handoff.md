@@ -42,8 +42,9 @@ calibration, difficulty, balance, or advisor-market claim.
 - Base branch: `main`
 - Working branch: `feat/consultant-advice-validation-v0.10.40`
 - PR: https://github.com/SaehwanPark/hs-mgt-game/pull/120
-- CI: GitHub check status pending or not reported yet.
-- Review loop: three independent passes complete; Pass 1 found one Medium
-  assertion gap, fixed in `de45214`; Passes 2 and 3 found no actionable issues.
+- CI: GitHub reports no configured status checks for this PR.
+- Review loop: three independent passes plus a post-fix follow-up complete; Pass
+  1 found one Medium assertion gap, fixed in `de45214`; Passes 2 and 3 and the
+  follow-up found no actionable issues.
 - Critical/High findings: none.
-- Merge-ready: pending post-fix review and normal GitHub merge decision.
+- Merge-ready: yes, pending normal GitHub merge decision.
