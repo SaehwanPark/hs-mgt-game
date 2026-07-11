@@ -49,8 +49,8 @@ explicit non-causal interpretation of simulated-policy evidence.
 - Base branch: `main`
 - Working branch: `feat/consultant-advice-synthesis-v0.10.42`
 - PR: https://github.com/SaehwanPark/hs-mgt-game/pull/121
-- CI: pending GitHub check completion
+- CI: GitHub `check` passed
 - Review loop: three independent `code-reviewer` passes complete; no actionable
   Critical, High, Medium, or Low findings
 - Review comments: none requiring replies or resolution
-- Merge-ready: pending CI completion and final comment triage
+- Merge-ready: yes, pending the normal GitHub merge decision
