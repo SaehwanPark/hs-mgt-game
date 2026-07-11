@@ -2918,10 +2918,40 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Decision-Load and Pacing Proxy Evidence Audit
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.52
+
+  Summary:
+  Audited the existing v0.10.50 observation-driven competitive traces at the
+  month/turn level so action concentration and active-month cadence are
+  available as bounded Phase 7 pacing proxies.
+
+  Done:
+  - Audited the v0.10.50 nine-run matrix without launching new sessions.
+  - Added deterministic per-turn action, hold, active-month, multi-action,
+    and maximum monthly action metrics.
+  - Confirmed all source runs are complete, source-identifiable, and stable
+    across seeds 42, 43, and 44.
+  - Preserved runtime promotion as deferred because no concrete unexplained
+    player-facing, instructor-facing, or domain-review gap was found.
+
+  Deferred / Non-Goals:
+  - No new MCP sessions, runtime, command, scenario, replay, MCP schema,
+    state-hash, scoring, balance, difficulty, or debrief change.
+  - No human-learning, cognitive-load, causal strategy, winnability,
+    calibration, or policy-validity claim.
+
+  Verification:
+  - Focused decision-load tests and deterministic artifact generation pass.
+  - Full Python tests, formatting, clippy, Rust tests, automated playtests,
+    and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.
-
 
 ## Future
 
