@@ -20,7 +20,8 @@ unchanged actor-visible observation; no runtime or MCP behavior changed.
 - Accepted-transition state hashes matched v0.10.55.
 - Structured validation fields consumed: 0/3.
 - Generated JSON and Markdown were deterministic.
-- Full repository checks passed.
+- Full repository checks passed: 286 Rust tests and 87 Python tests, formatting,
+  clippy, automated playtests, and diff checks.
 
 ## Domain QA
 
@@ -33,3 +34,15 @@ debrief, and educational-boundary constraints.
   classroom comprehension evidence.
 - Structured project hints, resource payloads, broader project guidance, and
   runtime tuning remain deferred.
+
+## PR Handoff
+
+- Base branch: `main`
+- Working branch: `feat/project-recovery-use-v0.10.56`
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/135
+- CI: GitHub `check` passed; merge state is clean.
+- Review loop: Pass 1 found a Medium artifact-integrity gap and fixed it by
+  binding probe results to the expected schedule; Passes 2 and 3 found no
+  actionable issues.
+- No Critical or High findings remain; no review threads are open.
+- Merge-ready: yes, pending the normal merge decision.
