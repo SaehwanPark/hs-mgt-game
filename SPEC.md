@@ -3082,6 +3082,39 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Debrief-Use Audit
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.57
+
+  Summary:
+  Added a deterministic read-only audit of event-specific trace continuity
+  across rival-pressure, strategy-tradeoff, resource-retry, and project-
+  recovery evidence artifacts.
+
+  Done:
+  - Audited six source artifacts and 39 completed runs for visibility,
+    response, follow-through, outcome, and explanation coverage.
+  - Confirmed v0.10.54→v0.10.55→v0.10.56 project state-hash continuity across
+    seeds 42, 43, and 44.
+  - Added focused tests, generated deterministic JSON/Markdown, findings,
+    guidance, lessons, and required handoff artifacts.
+  - Bumped package metadata to `0.10.57`.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, state-hash, scoring, difficulty,
+    balance, or debrief wording change.
+  - No human-learning, classroom-effectiveness, causal strategy, calibration,
+    or policy-validity claim.
+
+  Verification:
+  - Eight focused audit tests and 95 full Python tests pass.
+  - 286 Rust tests, formatting, clippy, automated playtests, JSON validation,
+    and diff checks pass.
+  - All six source artifacts and 39 runs report supported coverage; no source
+    evidence gap was identified.
+
+
 ## Present
 
 None. All scheduled features are complete.

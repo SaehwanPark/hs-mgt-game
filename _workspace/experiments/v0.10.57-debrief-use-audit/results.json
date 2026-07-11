@@ -1,0 +1,900 @@
+{
+  "batch_id": "v0.10.57-debrief-use-audit",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.57",
+  "completed_run_count": 39,
+  "completed_source_count": 6,
+  "evidence_gap_count": 0,
+  "evidence_gaps": [],
+  "hash_continuity": {
+    "comparisons": [
+      {
+        "earlier": "v0.10.54-project-limit-recovery",
+        "later": "v0.10.55-asc-project-observation",
+        "mismatched_seeds": [],
+        "seed_count": 3,
+        "status": "supported"
+      },
+      {
+        "earlier": "v0.10.55-asc-project-observation",
+        "later": "v0.10.56-project-recovery-use",
+        "mismatched_seeds": [],
+        "seed_count": 3,
+        "status": "supported"
+      }
+    ],
+    "status": "supported"
+  },
+  "limitations": [
+    "Coverage is traceability evidence, not causal evidence.",
+    "The source policies are deterministic simulated policies, not human or classroom sessions.",
+    "The audit does not measure debrief clarity, learning, strategy quality, balance, or calibration.",
+    "A supported trace does not establish that an instructor or learner will find the explanation sufficient."
+  ],
+  "promotion_basis": "This audit measures event-specific trace continuity in existing artifacts. Runtime or interface promotion requires separate player-facing, instructor-facing, or domain-review evidence of an unexplained problem.",
+  "run_count": 39,
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json",
+    "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+    "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+    "_workspace/experiments/v0.10.54-project-limit-recovery/results.json",
+    "_workspace/experiments/v0.10.55-asc-project-observation/results.json",
+    "_workspace/experiments/v0.10.56-project-recovery-use/results.json"
+  ],
+  "source_count": 6,
+  "source_reports": [
+    {
+      "batch_id": "v0.10.43-rival-info-follow-through",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.43",
+      "completed_run_count": 18,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "rival-pressure",
+      "review_steps": [
+        {
+          "covered_runs": 18,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 18,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 18,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 18,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 18,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 18,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 18,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / hard",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / expert",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / hard",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / expert",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / hard",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / hard",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / hard",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-reactive / expert",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information monitor-ignoring / expert",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Rival Information unmonitored / expert",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.50-teachability-observation-capture",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.50",
+      "completed_run_count": 9,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "strategy-tradeoff",
+      "review_steps": [
+        {
+          "covered_runs": 9,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 9,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 9,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 9,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 9,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 9,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 9,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 9,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Fiscal Steward / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Access Expansion Advocate / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "First-Time Executive / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Fiscal Steward / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Access Expansion Advocate / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "First-Time Executive / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Fiscal Steward / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Access Expansion Advocate / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "First-Time Executive / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.51-adversarial-resource-probe",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.51",
+      "completed_run_count": 3,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "resource-retry",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 3,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 3,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 3,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 3,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 3,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Adversarial Resource Probe / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Adversarial Resource Probe / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Adversarial Resource Probe / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.54-project-limit-recovery",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.54",
+      "completed_run_count": 3,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 3,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 3,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 3,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 3,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 3,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Limit Recovery / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Limit Recovery / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Limit Recovery / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.54-project-limit-recovery/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.55-asc-project-observation",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.55",
+      "completed_run_count": 3,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 3,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 3,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 3,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 3,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 3,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "ASC Project Observation / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "ASC Project Observation / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "ASC Project Observation / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.55-asc-project-observation/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.56-project-recovery-use",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.56",
+      "completed_run_count": 3,
+      "evidence_gaps": [],
+      "identity_status": "supported",
+      "lane": "project-recovery",
+      "review_steps": [
+        {
+          "covered_runs": 3,
+          "description": "Actor-visible observations, advice, or rival signals",
+          "eligible_runs": 3,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Submitted commands, validation failures, or retries",
+          "eligible_runs": 3,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Accepted transitions after the observed response",
+          "eligible_runs": 3,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Transition counts, state hashes, and final results",
+          "eligible_runs": 3,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 3,
+          "description": "Event-specific debrief material for retrospective review",
+          "eligible_runs": 3,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 3,
+      "run_reports": [
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Recovery Use / hard / seed 42",
+          "seed": 42,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Recovery Use / hard / seed 43",
+          "seed": 43,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        },
+        {
+          "completion_status": "complete",
+          "missing_steps": [],
+          "profile_name": "Project-Recovery Use / hard / seed 44",
+          "seed": 44,
+          "status": "supported",
+          "step_evidence": {
+            "explanation": true,
+            "follow-through": true,
+            "outcome": true,
+            "response": true,
+            "visibility": true
+          }
+        }
+      ],
+      "source_artifact": "_workspace/experiments/v0.10.56-project-recovery-use/results.json",
+      "status": "supported"
+    }
+  ]
+}

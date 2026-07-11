@@ -195,6 +195,18 @@ python3 _workspace/experiments/v0.10.56-project-recovery-use/run_sessions.py
 python3 -m json.tool _workspace/experiments/v0.10.56-project-recovery-use/results.json
 ```
 
+As of `v0.10.57`, the read-only debrief-use audit checks event-specific
+continuity across the rival-pressure, strategy, resource-retry, and
+project-recovery artifacts. It verifies visibility, response, follow-through,
+outcome, explanation coverage, and v0.10.54–v0.10.56 project hash continuity
+without launching new sessions. Treat supported coverage as traceability
+evidence, not proof of debrief clarity, learning, or classroom effectiveness.
+
+```bash
+python3 _workspace/experiments/v0.10.57-debrief-use-audit/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.57-debrief-use-audit/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
