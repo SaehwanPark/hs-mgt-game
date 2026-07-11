@@ -36,7 +36,8 @@ calibration, or policy validity. Runtime promotion remains deferred.
 
 - Base branch: `main`
 - Working branch: `feat/teachability-gate-synthesis-v0.10.49`
-- PR URL: pending
+- Primary commit: `431e8a5`
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/128
 - Review loop: pending three independent passes and any required follow-up.
 - Merge-ready: pending commit, PR, CI, and review completion.
 
