@@ -9,7 +9,7 @@
     43,
     44
   ],
-  "profile": "Project-Limit Recovery",
+  "profile": "ASC Project Observation",
   "evidence_type": "deterministic actor-visible ASC project observation coverage",
   "source": {
     "path": "_workspace/experiments/v0.10.54-project-limit-recovery/results.json",
@@ -55,7 +55,7 @@
     "safe_retry_count": 3,
     "debrief_limit_explanation_count": 3
   },
-  "promotion_basis": "Record the current project-limit response and recovery surface. A runtime or interface change requires separate evidence of unexplained decision friction.",
+  "promotion_basis": "The v0.10.54 artifact identified a concrete actor-visible omission. This capture verifies the minimal AscCapacity observation correction; project validation hints and broader runtime guidance remain deferred.",
   "limitations": [
     "An ASC project is a game abstraction, not an empirical health-system constraint.",
     "Visible project details show traceability, not human comprehension or learning.",
@@ -64,10 +64,10 @@
   ],
   "runs": [
     {
-      "profile_id": "project_limit_recovery",
-      "profile_name": "Project-Limit Recovery / hard / seed 42",
-      "persona_prompt": "Start two valid capital projects, probe the existing two-project limit, then recover with hold while preserving actor-visible evidence.",
-      "decision_source": "fixed probe schedule using actor-visible MCP surfaces",
+      "profile_id": "asc_project_observation",
+      "profile_name": "ASC Project Observation / hard / seed 42",
+      "persona_prompt": "Verify accepted ASC project visibility, project-limit rejection, same-turn recovery, and state-hash continuity.",
+      "decision_source": "fixed project-limit schedule with actor-visible observation assertions",
       "seed": 42,
       "difficulty": "hard",
       "completion_status": "complete",
@@ -3315,10 +3315,10 @@
       ]
     },
     {
-      "profile_id": "project_limit_recovery",
-      "profile_name": "Project-Limit Recovery / hard / seed 43",
-      "persona_prompt": "Start two valid capital projects, probe the existing two-project limit, then recover with hold while preserving actor-visible evidence.",
-      "decision_source": "fixed probe schedule using actor-visible MCP surfaces",
+      "profile_id": "asc_project_observation",
+      "profile_name": "ASC Project Observation / hard / seed 43",
+      "persona_prompt": "Verify accepted ASC project visibility, project-limit rejection, same-turn recovery, and state-hash continuity.",
+      "decision_source": "fixed project-limit schedule with actor-visible observation assertions",
       "seed": 43,
       "difficulty": "hard",
       "completion_status": "complete",
@@ -6566,10 +6566,10 @@
       ]
     },
     {
-      "profile_id": "project_limit_recovery",
-      "profile_name": "Project-Limit Recovery / hard / seed 44",
-      "persona_prompt": "Start two valid capital projects, probe the existing two-project limit, then recover with hold while preserving actor-visible evidence.",
-      "decision_source": "fixed probe schedule using actor-visible MCP surfaces",
+      "profile_id": "asc_project_observation",
+      "profile_name": "ASC Project Observation / hard / seed 44",
+      "persona_prompt": "Verify accepted ASC project visibility, project-limit rejection, same-turn recovery, and state-hash continuity.",
+      "decision_source": "fixed project-limit schedule with actor-visible observation assertions",
       "seed": 44,
       "difficulty": "hard",
       "completion_status": "complete",

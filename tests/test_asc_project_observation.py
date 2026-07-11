@@ -31,6 +31,8 @@ class AscProjectObservationTests(unittest.TestCase):
     self.assertEqual(RUNNER.SOURCE_RUNNER.SEEDS, [42, 43, 44])
     self.assertEqual(artifact["batch_id"], "v0.10.55-asc-project-observation")
     self.assertEqual(artifact["code_version"], "0.10.55")
+    self.assertEqual(artifact["profile"], "ASC Project Observation")
+    self.assertIn("concrete actor-visible omission", artifact["promotion_basis"])
     self.assertEqual(
       artifact["source"]["batch_id"],
       "v0.10.54-project-limit-recovery",

@@ -66,10 +66,28 @@ def source_hashes_by_seed():
 
 def build_artifact(runs):
   artifact = SOURCE_RUNNER.build_artifact(runs)
+  artifact["profile"] = "ASC Project Observation"
   visibility = [project_visibility(run) for run in runs]
   artifact["evidence_type"] = (
     "deterministic actor-visible ASC project observation coverage"
   )
+  artifact["promotion_basis"] = (
+    "The v0.10.54 artifact identified a concrete actor-visible omission. This "
+    "capture verifies the minimal AscCapacity observation correction; project "
+    "validation hints and broader runtime guidance remain deferred."
+  )
+  for run in artifact["runs"]:
+    run["profile_id"] = "asc_project_observation"
+    run["profile_name"] = (
+      f"ASC Project Observation / {run['difficulty']} / seed {run['seed']}"
+    )
+    run["persona_prompt"] = (
+      "Verify accepted ASC project visibility, project-limit rejection, "
+      "same-turn recovery, and state-hash continuity."
+    )
+    run["decision_source"] = (
+      "fixed project-limit schedule with actor-visible observation assertions"
+    )
   artifact["project_observation"] = {
     "checked_turn": 7,
     "run_count": len(visibility),
