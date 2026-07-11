@@ -67,6 +67,19 @@ class TeachabilityGateSynthesisTests(unittest.TestCase):
     self.assertEqual(report["status"], "limited")
     self.assertIn("visibility", report["limited_dimensions"])
 
+  def test_source_identity_mismatch_is_reported_as_limited(self):
+    report = RUNNER.audit_source(
+      {
+        "batch_id": "v0.10.48-strategy-diversity-evidence",
+        "code_version": "0.10.48",
+        "campaign": "wrong-campaign",
+        "runs": [],
+      },
+      "fixture/results.json",
+    )
+
+    self.assertEqual(report["status"], "limited")
+
   def test_endpoint_differences_do_not_create_a_runtime_promotion(self):
     audit = RUNNER.build_audit()
 

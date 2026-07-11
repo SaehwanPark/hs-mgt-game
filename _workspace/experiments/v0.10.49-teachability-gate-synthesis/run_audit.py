@@ -21,6 +21,10 @@ EXPECTED_BATCHES = {
   "v0.10.47-command-effect-explainability": "command-to-effect traceability",
   "v0.10.48-strategy-diversity-evidence": "strategy diversity",
 }
+EXPECTED_VERSIONS = {
+  batch_id: batch_id.split("-")[0].removeprefix("v")
+  for batch_id in EXPECTED_BATCHES
+}
 LIMITATIONS = [
   "This synthesis is traceability and completion evidence, not causal evidence.",
   "The source policies are deterministic simulated policies, not human or classroom evidence.",
@@ -94,10 +98,11 @@ def _run_dimensions(runs, eligible=None):
 
 
 def _audit_instructor_summary(artifact):
-  reports = artifact.get("artifacts", [])
+  raw_reports = artifact.get("artifacts", [])
+  reports = raw_reports if isinstance(raw_reports, list) else []
   eligible = len(reports)
   covered = sum(
-    all(step.get("status") == "supported" for step in report.get("review_steps", []))
+    _supported_review(report)
     for report in reports
   )
   dimensions = {
@@ -108,6 +113,16 @@ def _audit_instructor_summary(artifact):
     "explanation": _dimension("explanation", covered, eligible, "History or debrief material"),
   }
   return dimensions, eligible
+
+
+def _supported_review(report):
+  if not isinstance(report, dict):
+    return False
+  steps = report.get("review_steps", [])
+  return isinstance(steps, list) and bool(steps) and all(
+    isinstance(step, dict) and step.get("status") == "supported"
+    for step in steps
+  )
 
 
 def _audit_specialized(artifact):
@@ -165,6 +180,11 @@ def audit_source(artifact, source_path):
     if dimension["status"] != "supported"
   )
   expected_label = EXPECTED_BATCHES.get(batch_id)
+  identity_supported = (
+    expected_label
+    and artifact.get("campaign") == CAMPAIGN
+    and artifact.get("code_version") == EXPECTED_VERSIONS.get(batch_id)
+  )
   return {
     "source_artifact": source_path,
     "batch_id": batch_id,
@@ -175,7 +195,7 @@ def audit_source(artifact, source_path):
     "expected_evidence": expected_label or "unrecognized source",
     "dimensions": dimensions,
     "limited_dimensions": limited_dimensions,
-    "status": "supported" if expected_label and not limited_dimensions else "limited",
+    "status": "supported" if identity_supported and not limited_dimensions else "limited",
   }
 
 
