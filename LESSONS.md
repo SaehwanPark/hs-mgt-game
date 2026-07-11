@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Evidence Synthesis Must Close Promotion Gates
+
+- Context: Synthesizing the v0.10.39–v0.10.41 consultant-advice evidence chain.
+- Symptom: A sequence of successful traceability and simulated-policy captures
+  can look like justification for adding a richer advisor system.
+- Resolution: Close the chain with an explicit synthesis that separates
+  visibility and continuity evidence from advice quality, learning, causality,
+  and advisor-market value.
+- Prevention: Keep generic decision-support baselines in place until a later
+  artifact identifies a concrete teachability or strategy limitation that the
+  proposed runtime expansion would solve.
+
 ## Pair Advice-Aware Evidence With Hash-Matched Controls
 
 - Context: Adding the v0.10.41 consultant-advice usage matrix.

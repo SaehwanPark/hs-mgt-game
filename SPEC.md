@@ -151,6 +151,43 @@ reconstructing it from the diff.
 | Live Consultant Advice and Advisory History | v0.10.39 | Restore four deterministic actor-visible consultant options across competitive CLI/MCP observations and retain them for debrief comparison | 294 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Traceability Evidence | v0.10.40 | Verify rendered consultant options, committed history, and debrief continuity across existing deterministic competitive captures | 294 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Usage Evidence | v0.10.41 | Compare advice-aware and advice-ignoring simulated policies using visible cues, resource-safe fallback, and exact observation/history/debrief continuity | 285 | `8926f71296f39efc` (competitive) |
+| Consultant Advice Evidence Synthesis | v0.10.42 | Synthesize generic advice visibility, traceability, and usage evidence and retain the advisor-market promotion gate | 285 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Consultant Advice Evidence Synthesis
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.42
+
+  Summary:
+  Synthesized the v0.10.39–v0.10.41 generic consultant-advice evidence chain
+  and confirmed that current artifacts do not identify a concrete limitation
+  requiring a differentiated advisor market.
+
+  Done:
+  - Added findings covering generic advice restoration, exact history/debrief
+    continuity, visible-cue policy usage, fallback behavior, and control hashes.
+  - Updated playtesting guidance, evidence handoffs, domain QA, changelog,
+    README milestone, lessons, and package metadata.
+  - Preserved the advisor-market promotion gate and recorded explicit evidence
+    limits.
+
+  Deferred / Non-Goals:
+  - No advisor roster, payroll, candidate pool, hire/fire command, AI advisor,
+    scenario, replay, state-hash, ruleset, balance, difficulty, scoring, or
+    runtime mechanics change.
+  - No new playtest matrix, causal advice claim, human-learning claim,
+    policy-validity claim, or empirical-calibration claim.
+
+  Verification:
+  - v0.10.40 and v0.10.41 JSON artifacts parse successfully.
+  - v0.10.41 artifact regeneration is byte-for-byte stable.
+  - `python3 -m unittest discover -s tests -p 'test_*.py'`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test --all -- --test-threads=1`
+  - `python3 scripts/run_automated_playtests.py`
+  - `git diff --check`
 
 
 - Feature: Consultant Advice Usage Evidence

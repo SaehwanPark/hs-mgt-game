@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.42] - 2026-07-10
+
+### Added
+- Added a Phase 7 synthesis of the v0.10.39–v0.10.41 consultant-advice
+  evidence chain.
+- Added explicit routing and promotion conditions for retaining generic advice
+  while keeping the advisor market deferred.
+
+### Changed
+- Kept runtime mechanics, commands, scenarios, replay formats, MCP schemas,
+  state hashes, difficulty, scoring, and balance unchanged.
+- Bumped the package version to `0.10.42`.
+
 ## [0.10.41] - 2026-07-10
 
 ### Added
