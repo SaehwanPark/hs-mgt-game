@@ -1,53 +1,54 @@
-# Final Handoff - Phase 7 Evidence Chain Synthesis
+# Final Handoff - Project-Limit Recovery Evidence Gate
 
 ## Summary
 
-Implemented the v0.10.53 deterministic read-only synthesis of the v0.10.50,
-v0.10.51, and v0.10.52 Phase 7 evidence artifacts.
+Implemented the v0.10.54 deterministic project-limit recovery evidence gate
+across Hard seeds 42, 43, and 44.
 
 ## Changed Files
 
-- Added a standalone source-continuity audit and six focused Python tests.
-- Added generated JSON and Markdown reports for source coverage, control hashes,
-  and profile/seed matrix continuity.
+- Added a direct MCP capture and seven focused Python tests.
+- Added generated JSON and Markdown reports for the accepted project setup,
+  rejected third project, same-turn state, safe retry, and debrief explanation.
 - Added findings, SPEC, changelog/version, README, playtesting guidance, lessons,
-  request summary, domain QA, and project-state updates.
-- No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, balance,
-  difficulty, or debrief behavior changed.
+  request summary, evidence map, domain QA, and project-state updates.
+- No Rust runtime, CLI, scenario, replay, MCP schema, state-hash, scoring,
+  balance, difficulty, or debrief behavior changed.
 
 ## Verification
 
-- Focused synthesis tests: 7 passed.
-- Generated JSON and Markdown regenerated deterministically.
-- Full Python suite: 65 passed.
+- Focused project-limit tests: 7 passed.
+- Generated JSON and Markdown regenerated with matching SHA-256 hashes.
+- Full Python suite: 72 passed.
 - `cargo test --all -- --test-threads=1` passed.
 - `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings` passed.
 - Automated stabilization and competitive playtests passed.
 - `git diff --check` passed.
-- Source coverage: three supported artifacts.
-- Control continuity: v0.10.51 controls match v0.10.50.
-- Matrix continuity: nine profile/seed members supported through v0.10.52.
+- Three Hard runs completed 24 transitions with one expected rejection and one
+  safe same-turn retry each.
+- Stable project-limit codes: 3/3; structured hints and resource fields: 0/3.
+- Debrief explanations of the two-project ceiling: 3/3.
 
 ## Domain QA
 
-Pass. The synthesis preserves source-specific trace boundaries and distinguishes
-descriptive continuity from causality, strategy quality, learning, balance, and
-runtime promotion. No concrete unexplained product gap was identified.
+Pass. The capture preserves actor-visible state and immutable transition
+history, labels the project ceiling as a game abstraction, and distinguishes
+recovery traceability from comprehension, learning, balance, and runtime
+promotion. No concrete unexplained product gap was identified.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/evidence-synthesis-v0.10.53`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/132
-- CI: GitHub `check` passed.
-- Review loop: three independent passes complete; Pass 1 Medium fixed in
-  `680b10e`, Passes 2 and 3 had no actionable findings.
-- Merge-ready: yes, pending normal merge decision.
+- Working branch: `feat/project-limit-recovery-evidence-v0.10.54`
+- PR URL: pending
+- CI: pending
+- Review loop: pending
+- Merge-ready: no, pending PR handoff and review.
 
 ## Known Limits
 
-- The source artifacts are deterministic simulated-policy evidence, not human or
-  classroom evidence.
-- The synthesis does not establish cognitive load, comprehension, causal
-  strategy value, balance, winnability, calibration, or policy validity.
-- Runtime and interface promotion remain deferred.
+- The capture is deterministic simulated-policy evidence, not human or classroom
+  evidence.
+- Safe retry does not establish human comprehension, causal strategy value,
+  balance, winnability, calibration, or policy validity.
+- Validation-hint and runtime promotion remain deferred.

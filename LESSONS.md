@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Missing Structured Hints Need Recovery Evidence Before Promotion
+
+- Context: Narrowing the v0.10.51 concurrent-project trace fact in v0.10.54.
+- Symptom: A stable validation code without a structured resource hint can look
+  like an interface defect even when the plain error, unchanged turn, visible
+  project state, safe retry, and debrief explanation remain available.
+- Resolution: Capture the full rejected-turn surface across named seeds and
+  separate response-shape evidence from actual repeated decision friction.
+- Prevention: Do not promote validation wording or schema changes from field
+  asymmetry alone; require a player-facing, instructor-facing, or domain-review
+  artifact that demonstrates unexplained recovery failure.
+
 ## Cross-Artifact Synthesis Should Preserve Source Boundaries
 
 - Context: Synthesizing the v0.10.50–v0.10.52 Phase 7 evidence chain for

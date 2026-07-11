@@ -1,4 +1,4 @@
-# Domain QA - Phase 7 Evidence Chain Synthesis
+# Domain QA - Project-Limit Recovery Evidence Gate
 
 ## Status
 
@@ -6,24 +6,28 @@ pass
 
 ## Reviewed Inputs
 
-- `_workspace/experiments/v0.10.53-evidence-synthesis/run_audit.py`
-- Generated v0.10.53 JSON and Markdown audit outputs.
-- The v0.10.50, v0.10.51, and v0.10.52 source artifacts.
-- `docs/playtest-findings-v0.10.53.md` and request summary.
+- `_workspace/experiments/v0.10.54-project-limit-recovery/run_sessions.py`.
+- Generated v0.10.54 JSON and Markdown outputs.
+- The v0.10.51 source artifact and current validation, observation, guidance,
+  and debrief surfaces.
+- `docs/playtest-findings-v0.10.54.md`, request summary, and evidence map.
 - `README.md`, `SPEC.md`, `docs/roadmap.md`,
   `docs/design_principles.md`, and the harness team specification.
 
 ## Findings
 
-- The slice remains within the Phase 7 competitive teachability gate.
-- Each source is validated against its declared artifact shape without creating
-  a generalized evidence schema.
-- v0.10.51 control hashes match the v0.10.50 First-Time Executive runs, and the
-  nine-member profile/seed matrix remains continuous through v0.10.52.
-- Continuity is reported as descriptive trace evidence, not causal strategy,
-  balance, winnability, or educational evidence.
+- The slice remains within the Phase 7 competitive teachability gate and does
+  not add or reinterpret a health-policy mechanism.
+- The two-project ceiling remains visibly labeled as a game abstraction rather
+  than an empirical health-system constraint.
+- The capture preserves actor-visible observations, legal hints, rejected-turn
+  state, explicit error fields, safe retries, immutable transition hashes, and
+  retrospective debriefs.
+- The current response exposes a stable code and plain-language limit without a
+  structured hint or resource field; the findings keep that as trace evidence,
+  not a human-comprehension or interface-defect claim.
 - No concrete unexplained runtime, command-surface, or debrief gap was found;
-  runtime promotion remains deferred.
+  validation-hint and runtime promotion remain deferred.
 
 ## Required Fixes
 
@@ -31,16 +35,19 @@ None.
 
 ## Residual Risks
 
-- The sources are deterministic simulated-policy evidence, not human or
-  classroom evidence.
-- One campaign, one difficulty, and the existing bounded profiles and seeds do
-  not support general learning, balance, or policy-validity claims.
-- Control and matrix continuity do not establish causality or strategy quality.
+- The runs are deterministic simulated-policy evidence, not human or classroom
+  evidence.
+- One campaign, one difficulty, and three seeds do not support general learning,
+  balance, winnability, or policy-validity claims.
+- Safe scripted recovery does not establish that a first-time player would
+  select the same response or understand every project constraint.
 
 ## Verification Evidence
 
-- Focused synthesis tests: 7 passed.
-- Generated JSON and Markdown regenerate deterministically.
-- Full Python suite: 65 passed.
-- Rust tests, formatting, Clippy, automated stabilization and competitive
-  playtests, and `git diff --check` passed.
+- Focused project-limit tests: 7 passed.
+- Generated JSON and Markdown regenerate with matching SHA-256 hashes.
+- Full Python suite: 72 passed.
+- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and
+  `cargo test --all -- --test-threads=1` passed.
+- Automated stabilization and competitive playtests and `git diff --check`
+  passed.

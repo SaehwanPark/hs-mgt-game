@@ -159,6 +159,19 @@ reactive endpoint differences are expected because the response policy submits
 different commands. Keep runtime monitor and difficulty mechanics deferred
 unless later evidence identifies a concrete explanation or gameplay gap.
 
+As of `v0.10.54`, the project-limit recovery capture starts two valid projects,
+submits a third project, and preserves the rejection, same-turn observation,
+safe retry, history, hashes, and debrief across Hard seeds `42`, `43`, and `44`.
+The response exposes `too_many_concurrent_projects` and a plain limit message
+without structured `resource_limit` or `hint` fields. Treat that as recovery-
+surface evidence, not proof of human comprehension or a reason to change the
+MCP schema or runtime behavior.
+
+```bash
+python3 _workspace/experiments/v0.10.54-project-limit-recovery/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.54-project-limit-recovery/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
