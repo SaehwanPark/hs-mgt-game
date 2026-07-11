@@ -37,5 +37,5 @@
 
 - Base branch: `main`
 - Working branch: `feat/operating-loop-ai-validation-v0.11.1`
-- PR URL: to be added after push/open.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/139
 - Review loop: three independent `code-reviewer` passes required before merge readiness.
