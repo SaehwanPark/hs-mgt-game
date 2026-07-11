@@ -39,6 +39,6 @@ claims, and educational evaluation.
 
 - Base branch: `main`
 - Working branch: `feat/instructor-debrief-use-audit-v0.10.45`
-- PR URL: pending
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/124
 - Review loop: pending three independent `code-reviewer` passes
 - Merge-ready: no, until PR review and CI complete
