@@ -39,7 +39,8 @@ policy validity.
 
 - Base branch: `main`
 - Working branch: `feat/expert-clearability-evidence-v0.10.46`
-- PR URL: pending
+- Commit: `6f283f9` (`feat: add Expert clearability evidence v0.10.46`)
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/125
 - CI: pending
 - Review loop: pending three independent `code-reviewer` passes
 - Merge-ready: no, until PR review and CI complete
