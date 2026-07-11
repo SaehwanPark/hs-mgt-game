@@ -40,7 +40,7 @@ promotion. No concrete unexplained product gap was identified.
 
 - Base branch: `main`
 - Working branch: `feat/project-limit-recovery-evidence-v0.10.54`
-- PR URL: pending
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/133
 - CI: pending
 - Review loop: pending
 - Merge-ready: no, pending PR handoff and review.
