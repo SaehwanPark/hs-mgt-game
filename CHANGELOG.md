@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.51] - 2026-07-11
+
+### Added
+- Added a deterministic Hard competitive resource-probe capture across seeds
+  42, 43, and 44.
+- Added focused coverage for cash, action-point, and concurrent-project
+  validation errors, rejected-turn preservation, safe retries, and control
+  metadata.
+
+### Changed
+- Confirmed expected validation failures are preserved as probe evidence while
+  all three runs complete 24 months with five safe retries each.
+- Kept runtime mechanics, scenarios, replay formats, MCP schemas, difficulty,
+  scoring, balance, and debrief behavior unchanged.
+- Bumped the package version to `0.10.51`.
+
 ## [0.10.50] - 2026-07-11
 
 ### Added

@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Expected Validation Failures Need Separate Run Status
+
+- Context: Probing cash, action-point, and concurrent-project limits for
+  v0.10.51.
+- Symptom: A complete campaign can contain validation failures intentionally
+  submitted as part of a resource-boundary probe.
+- Resolution: Store expected probe failures separately from unexpected failures,
+  verify the rejected turn remains unchanged, and record the safe retry that
+  advances the campaign.
+- Prevention: Do not count intentional probes as final replay failures or infer
+  exploit value, balance, or comprehension from their presence alone.
+
 ## Zero-Retry Observation Captures Are Compatibility Evidence
 
 - Context: Capturing nine observation-driven Hard competitive runs for v0.10.50.
