@@ -41,7 +41,9 @@ calibration, difficulty, balance, or advisor-market claim.
 
 - Base branch: `main`
 - Working branch: `feat/consultant-advice-validation-v0.10.40`
-- PR: pending creation after final local verification
-- Review loop: pending three independent code-reviewer passes
-- Merge-ready: no, until PR creation, CI, review findings, and comment replies
-  are complete
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/120
+- CI: GitHub check status pending or not reported yet.
+- Review loop: three independent passes complete; Pass 1 found one Medium
+  assertion gap, fixed in `de45214`; Passes 2 and 3 found no actionable issues.
+- Critical/High findings: none.
+- Merge-ready: pending post-fix review and normal GitHub merge decision.
