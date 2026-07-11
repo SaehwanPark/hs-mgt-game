@@ -2978,6 +2978,43 @@ reconstructing it from the diff.
     diff checks pass.
 
 
+- Feature: Project-Limit Recovery Evidence Gate
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.54
+
+  Summary:
+  Captured a bounded Phase 7 evidence matrix for the existing two-project
+  concurrency limit across Hard seeds 42, 43, and 44. The artifact preserves
+  the rejected command, actor-visible surface, same-turn observation, safe
+  retry, transition history, and debrief without changing runtime behavior.
+
+  Done:
+  - Recovered the v0.10.53 checkpoint and confirmed a clean `main` baseline.
+  - Selected the v0.10.51 `too_many_concurrent_projects` trace fact as the
+    narrow evidence question.
+  - Added a deterministic three-seed Hard MCP capture with the actor-visible
+    rejected-turn surface, safe retry, hashes, history, and debrief.
+  - Confirmed stable error codes, unchanged turns and observations, one safe
+    retry per run, no unexpected failures, and retrospective debrief coverage.
+  - Kept validation-hint and runtime promotion deferred because the artifact
+    identifies no unexplained recovery failure.
+
+  Deferred / Non-Goals:
+  - No validation-hint, runtime, CLI, MCP schema, scenario, replay, state-hash,
+    difficulty, scoring, balance, or debrief behavior change.
+  - No human-comprehension, learning, causal-strategy, calibration, or policy-
+    validity claim.
+
+  Verification:
+  - Three Hard runs completed 24 transitions with one expected project-limit
+    rejection and one safe same-turn retry each.
+  - Generated JSON and Markdown regenerate deterministically with stable SHA-256
+    hashes.
+  - Eight focused and 73 full Python tests, formatting, clippy, Rust tests,
+    automated playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

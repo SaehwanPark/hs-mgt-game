@@ -1,59 +1,62 @@
-# Evidence Map - Teachability Observation Capture
+# Evidence Map - Project-Limit Recovery
 
 ## Scope
 
-Capture new Phase 7 evidence about whether observation-driven policies can read
-the current competitive surface, make distinct responses, complete the Hard
-campaign, and preserve explanation traces. This is a read-only evidence slice
-and does not add or reinterpret a health-policy mechanism.
+Capture Phase 7 evidence about whether the current project-limit validation
+surface preserves enough decision-time and retrospective information to inspect
+a rejected third project and a safe retry. This slice does not add or
+reinterpret a health-policy mechanism.
 
 ## Sources Reviewed
 
 - `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, and `SPEC.md`.
-- `docs/playtest-findings-v0.10.45.md` through
-  `docs/playtest-findings-v0.10.49.md`.
+- `docs/playtest-findings-v0.10.51.md` and its generated artifact.
 - `docs/agent-playtest-protocol.md` and `docs/mcp-playtesting-guide.md`.
-- The v0.10.50 nine-run observation-driven capture artifact and diagnostics.
+- Current validation code, MCP error mapping, project help, observation, and
+  debrief wording.
 
 ## Mechanisms and Institutions
 
-- The capture observes information visibility, policy response, operational
-  follow-through, outcomes, explanation, completion, command traceability, and
-  descriptive profile variation.
+- The maximum of two concurrent projects is an existing game resource rule and
+  design abstraction, not a calibrated real-world constraint.
+- The capture observes validation, rejected-turn preservation, retry behavior,
+  actor-visible project state, and retrospective explanation.
 - It does not add an actor, policy, market, service line, or transition
   mechanism.
 
 ## Actor Incentives and Information
 
-- Profiles are deterministic simulated policies using actor-visible
-  observations, legal command surfaces, and turn number.
-- Histories and debriefs preserve retrospective traceability but do not establish
-  human interpretation or learning.
+- The probe uses only the actor-visible MCP observation, legal command hints,
+  submitted commands, and returned validation payload.
+- Histories and debriefs are retrospective evidence and are not treated as
+  decision-time knowledge.
 
 ## Assumptions
 
-- Observation-driven policy traces are inspectability evidence, not causal
-  evidence.
-- Endpoint differences and command-family variation are descriptive only.
-- Zero validation failures show capture compatibility, not command comprehension
-  or educational effectiveness.
+- A stable error code and unchanged turn establish machine-readable recovery
+  traceability, not human comprehension.
+- Absence of a structured resource hint is a trace fact until repeated recovery
+  evidence identifies a concrete unexplained gap.
+- A successful `hold` retry establishes a safe continuation path, not that it is
+  the only or preferred player response.
 
 ## Unresolved Questions
 
-- Whether human players or instructors would find the current evidence clear or
-  educationally useful.
-- Whether a future reviewer identifies a gap that current observations,
-  histories, diagnostics, and debriefs cannot explain.
+- Whether the current error payload, observation, legal hints, and debrief make
+  the two-project limit sufficiently inspectable for agent or instructor review.
+- Whether any later evidence warrants a player-facing hint change.
 
 ## Design Implications
 
+- Preserve raw response fields and same-turn state rather than inferring missing
+  information from rendered prose.
 - Keep runtime, difficulty, balance, scoring, and debrief behavior unchanged.
-- Require a concrete player-facing, instructor-facing, or domain-review gap
-  before promoting runtime work.
+- If a concrete gap is found, record one separate follow-up slice instead of
+  implementing it in this evidence PR.
 
 ## Risks
 
 - Deterministic simulated-policy traces cannot establish human learning,
   strategy value, balance, winnability, calibration, or policy validity.
-- Treating complete runs or zero retries as proof of clarity would create
-  educational opacity and premature runtime promotion.
+- Treating a known rule, successful fallback, or complete run as proof of
+  player clarity would overstate the evidence.

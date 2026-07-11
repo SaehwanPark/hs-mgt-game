@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.54] - 2026-07-11
+
+### Added
+- Added a deterministic Hard competitive project-limit recovery capture across
+  seeds 42, 43, and 44.
+- Added focused coverage for accepted project setup, the rejected third
+  project, same-turn observation preservation, safe retry, and deterministic
+  evidence output.
+
+### Changed
+- Confirmed the current project-limit response retains a stable code and plain
+  limit message without a structured resource hint, while the debrief preserves
+  the two-project explanation.
+- Kept validation-hint and runtime promotion deferred because the evidence does
+  not establish unexplained recovery friction.
+- Bumped the package version to `0.10.54`.
+
 ## [0.10.53] - 2026-07-11
 
 ### Added
