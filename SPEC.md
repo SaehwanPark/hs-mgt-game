@@ -2792,6 +2792,36 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Strategy-Diversity Evidence
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.48
+
+  Summary:
+  Added a bounded Phase 7 read-only audit comparing command-family trajectories
+  and descriptive tradeoff records across the existing v0.10.46 Expert runs.
+
+  Done:
+  - Reviewed all 12 existing runs without launching new MCP sessions.
+  - Confirmed four distinct profile trajectories across the tested matrix, with
+    no common first-turn action family across every profile.
+  - Added deterministic JSON/Markdown diagnostics and focused Python tests.
+  - Preserved the evidence boundary around strategy variation, causality,
+    optimality, balance, human learning, and policy validity.
+
+  Deferred / Non-Goals:
+  - No runtime, command, scenario, replay, MCP schema, state-hash, difficulty,
+    scoring, balance, or debrief behavior change.
+  - No causal strategy comparison, dominance claim, general winnability claim,
+    human-learning claim, calibration claim, or policy-validity claim.
+
+  Verification:
+  - All 12 source runs are represented and supported.
+  - Generated JSON and Markdown output regenerate deterministically.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

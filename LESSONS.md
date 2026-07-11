@@ -900,3 +900,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Treat semantic command coverage as traceability evidence only;
   do not convert matched event/effect text into causal, decision-quality,
   learning, balance, or policy-validity claims.
+
+## Strategy Signatures Are Descriptive, Not Dominance Evidence
+
+- Context: Continuing Phase 7 validation after the v0.10.47 command-to-effect
+  traceability audit.
+- Symptom: Different command trajectories can be mistaken for proof that one
+  profile or action is strategically superior.
+- Resolution: Added a read-only audit that reports normalized action families,
+  trajectories, hold rates, first-turn signals, and existing final tradeoffs
+  without assigning utility or comparing outcomes causally.
+- Prevention: Treat common actions and distinct profiles as descriptive evidence
+  only; require a concrete player, instructor, or domain-review gap before
+  changing runtime, balance, difficulty, or scoring.
