@@ -3209,7 +3209,7 @@ reconstructing it from the diff.
     human-learning, or policy-validity claim.
 
   Verification:
-  - Eight focused Python tests, 108 full Python tests, 289 Rust tests, clippy,
+  - Eight focused Python tests, 116 full Python tests, 289 Rust tests, clippy,
     formatting, JSON validation, deterministic regeneration, and diff checks
     pass.
 
