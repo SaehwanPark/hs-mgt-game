@@ -71,6 +71,18 @@ pub fn render_executive_report(
     "  • Reported quality index: {}",
     observation.reported_quality_index
   ));
+  lines.push(format!(
+    "  • Prior-month operations: treated {}/{} demand units ({} unmet)",
+    observation.monthly_treated_volume,
+    observation.monthly_demand,
+    observation.monthly_unmet_demand
+  ));
+  lines.push(format!(
+    "  • Prior-month finances: revenue {}, operating cost {}, margin {:+}",
+    observation.monthly_operating_revenue,
+    observation.monthly_operating_cost,
+    observation.monthly_operating_margin
+  ));
   // Hierarchical staffing allocation: ICU first, Obstetrics second, beds third, Cardiology fourth, Psychiatric fifth, clinics sixth (for physicians), ED last
   let target_nurses_icu = observation.icu_capacity;
   let nurses_icu = observation.nurses.min(target_nurses_icu);
