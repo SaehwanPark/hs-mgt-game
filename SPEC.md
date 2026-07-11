@@ -3115,6 +3115,42 @@ reconstructing it from the diff.
     evidence gap was identified.
 
 
+- Feature: Debrief-Coherence Audit
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.58
+
+  Summary:
+  Added a deterministic read-only audit joining decision-time observations,
+  submitted commands, accepted transitions, delayed or partial context,
+  outcomes, and retrospective debrief markers across the existing Phase 7
+  evidence chain.
+
+  Done:
+  - Audited six source artifacts and 39 completed competitive runs.
+  - Verified decision context, response/retry handling, transition follow-through,
+    delayed or partial context where applicable, outcome context, and
+    decision-versus-outcome debrief framing.
+  - Preserved v0.10.54→v0.10.55→v0.10.56 project state-hash continuity across
+    seeds 42, 43, and 44.
+  - Added deterministic JSON/Markdown output, focused tests, findings, guidance,
+    lessons, and required handoff artifacts.
+  - Bumped package metadata to `0.10.58`.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, state-hash, scoring, difficulty,
+    balance, or debrief wording change.
+  - No human-learning, classroom-effectiveness, causal strategy, calibration,
+    or policy-validity claim.
+
+  Verification:
+  - Seven focused audit tests and the full Python test suite pass.
+  - Generated JSON and Markdown regenerate deterministically.
+  - Rust tests, formatting, clippy, automated playtests, JSON validation, and
+    diff checks pass.
+  - All six source artifacts and 39 runs report supported coverage.
+
+
 ## Present
 
 None. All scheduled features are complete.

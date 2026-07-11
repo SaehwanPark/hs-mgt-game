@@ -1,55 +1,59 @@
-# Evidence Map - Debrief-Use Audit
+# Evidence Map - Debrief-Coherence Audit
 
 ## Scope
 
-Audit whether existing Phase 7 artifacts preserve an inspectable chain from
-actor-visible information through submitted response, accepted transition and
-hash, and event-specific retrospective explanation.
+Audit whether existing Phase 7 traces preserve a reconstructable path from
+actor-visible decision context through response, committed transition, delayed
+or partial information, realized outcome, and retrospective explanation.
 
 ## Sources Reviewed
 
-- `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, and `SPEC.md`.
+- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, and `SPEC.md`.
 - `docs/harness/health-policy-strategy-game/team-spec.md`.
-- v0.10.43, v0.10.50, v0.10.51, v0.10.54, v0.10.55, and v0.10.56 JSON artifacts.
-- Existing findings, playtesting guidance, and prior evidence audits.
+- v0.10.43, v0.10.50, v0.10.51, and v0.10.54–v0.10.56 JSON artifacts.
+- v0.10.57 findings, audit, lessons, and project handoff.
 
 ## Mechanisms and Institutions
 
-- Rival information, project concurrency, resource validation, and strategic
-  tradeoffs are existing game abstractions, not calibrated forecasts.
-- The audit evaluates evidence structure; it does not add or reinterpret a
-  health-policy mechanism.
+- Rival information, resource validation, project concurrency, delayed effects,
+  and competitive debriefing are existing game abstractions.
+- The audit evaluates evidence structure only; it adds no institution or
+  strategic mechanism.
 
 ## Actor Incentives and Information
 
-- Source traces retain the actor-visible observation and submitted policy.
-- Rejected commands and retries are treated as validation-surface records, not
-  modeled outcomes or evidence of human confusion.
+- Player commands are evaluated against actor-visible observations and legal
+  command surfaces.
+- Rival information remains partial or lagged where the source declares it.
 - Instructor-only retrospective material remains distinct from information
   available during play.
 
 ## Assumptions
 
-- Existing artifact contracts are the source of truth and remain immutable.
-- Heterogeneous source shapes require source-specific adapters, not a shared
-  analytics schema.
-- Event-specific debrief markers establish trace coverage only.
+- Existing artifact contracts are immutable source records.
+- Source-specific adapters are required because v0.10.51 records expected
+  probe failures against the pre-submit observation rather than an
+  `observation_after_failure` field.
+- Decision-versus-outcome text is a traceability marker, not a quality score.
 
 ## Unresolved Questions
 
-- Whether an actual instructor or learner would find any supported explanation
-  clear remains untested.
+- Whether a learner or instructor would find any supported explanation clear
+  remains untested.
 - A future wording or interface change requires concrete player-facing,
-  instructor-facing, or domain-review evidence of an unexplained gap.
+  instructor-facing, or domain-review evidence of an unexplained limitation.
 
 ## Design Implications
 
-- Keep the audit read-only and deterministic.
-- Report missing fields explicitly as limited evidence.
-- Preserve source identity, seed identity, hash continuity, and evidence limits.
+- Keep the audit read-only, deterministic, and source-specific.
+- Report missing fields and malformed retries explicitly as limited evidence.
+- Preserve observation, actor utility, organizational outcome, social welfare,
+  and educational evaluation boundaries.
 
 ## Risks
 
-- Simulated-policy trace continuity can be mistaken for comprehension or
-  educational effectiveness.
-- The project ceiling and rival behavior remain gameplay abstractions.
+- Structural continuity can be mistaken for causal evidence or comprehension.
+- Retrospective debrief markers can be mistaken for measured decision quality.
+- Project ceilings, rival behavior, and delayed effects remain gameplay
+  abstractions rather than empirical health-system constraints.
