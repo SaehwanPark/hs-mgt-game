@@ -42,6 +42,9 @@ causal or educational claims.
 
 - Base branch: `main`
 - Working branch: `feat/rival-info-follow-through-v0.10.43`
-- PR URL: pending push and PR creation
-- Review loop: pending three independent `code-reviewer` passes
-- Merge-ready: no, until PR review and CI gates complete
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/122
+- CI: GitHub `check` passed
+- Review loop: three independent `code-reviewer` passes complete; no actionable
+  Critical, High, Medium, or Low findings
+- Review comments: none requiring replies or resolution
+- Merge-ready: yes, pending the normal GitHub merge decision
