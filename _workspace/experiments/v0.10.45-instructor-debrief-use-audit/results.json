@@ -1,0 +1,202 @@
+{
+  "artifacts": [
+    {
+      "batch_id": "v0.10.37-rival-info-monitor-evidence",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.37",
+      "completed_run_count": 4,
+      "review_steps": [
+        {
+          "covered_runs": 4,
+          "description": "Actor-visible observations, advice, or monitor signals",
+          "eligible_runs": 4,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 4,
+          "description": "Submitted commands, selections, ignores, or fallbacks",
+          "eligible_runs": 4,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 4,
+          "description": "Operational action traces that can be compared later",
+          "eligible_runs": 4,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 4,
+          "description": "Transition counts, state hashes, and final-run results",
+          "eligible_runs": 4,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 4,
+          "description": "History or debrief material for retrospective explanation",
+          "eligible_runs": 4,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 4,
+      "source_artifact": "_workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json"
+    },
+    {
+      "batch_id": "v0.10.40-consultant-advice-evidence",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.40",
+      "completed_run_count": 24,
+      "review_steps": [
+        {
+          "covered_runs": 24,
+          "description": "Actor-visible observations, advice, or monitor signals",
+          "eligible_runs": 24,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Submitted commands, selections, ignores, or fallbacks",
+          "eligible_runs": 24,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Operational action traces that can be compared later",
+          "eligible_runs": 24,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Transition counts, state hashes, and final-run results",
+          "eligible_runs": 24,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "History or debrief material for retrospective explanation",
+          "eligible_runs": 24,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 24,
+      "source_artifact": "_workspace/experiments/v0.10.40-consultant-advice-evidence/results.json"
+    },
+    {
+      "batch_id": "v0.10.41-consultant-advice-usage",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.41",
+      "completed_run_count": 24,
+      "review_steps": [
+        {
+          "covered_runs": 24,
+          "description": "Actor-visible observations, advice, or monitor signals",
+          "eligible_runs": 24,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Submitted commands, selections, ignores, or fallbacks",
+          "eligible_runs": 24,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Operational action traces that can be compared later",
+          "eligible_runs": 24,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "Transition counts, state hashes, and final-run results",
+          "eligible_runs": 24,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 24,
+          "description": "History or debrief material for retrospective explanation",
+          "eligible_runs": 24,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 24,
+      "source_artifact": "_workspace/experiments/v0.10.41-consultant-advice-usage/results.json"
+    },
+    {
+      "batch_id": "v0.10.43-rival-info-follow-through",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.43",
+      "completed_run_count": 18,
+      "review_steps": [
+        {
+          "covered_runs": 18,
+          "description": "Actor-visible observations, advice, or monitor signals",
+          "eligible_runs": 18,
+          "name": "visibility",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Submitted commands, selections, ignores, or fallbacks",
+          "eligible_runs": 18,
+          "name": "response",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Operational action traces that can be compared later",
+          "eligible_runs": 18,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "Transition counts, state hashes, and final-run results",
+          "eligible_runs": 18,
+          "name": "outcome",
+          "status": "supported"
+        },
+        {
+          "covered_runs": 18,
+          "description": "History or debrief material for retrospective explanation",
+          "eligible_runs": 18,
+          "name": "explanation",
+          "status": "supported"
+        }
+      ],
+      "run_count": 18,
+      "source_artifact": "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json"
+    }
+  ],
+  "batch_id": "v0.10.45-instructor-debrief-use-audit",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.45",
+  "completed_run_count": 70,
+  "limitations": [
+    "Coverage is traceability evidence, not causal evidence.",
+    "The policies are deterministic simulated policies, not human or classroom sessions.",
+    "The audit does not measure advice quality, monitor value, learning, balance, or calibration.",
+    "A supported field does not establish that an instructor or learner will find it clear."
+  ],
+  "run_count": 70,
+  "source_artifacts": [
+    "_workspace/experiments/v0.10.37-rival-info-monitor-evidence/results.json",
+    "_workspace/experiments/v0.10.40-consultant-advice-evidence/results.json",
+    "_workspace/experiments/v0.10.41-consultant-advice-usage/results.json",
+    "_workspace/experiments/v0.10.43-rival-info-follow-through/results.json"
+  ],
+  "source_count": 4
+}

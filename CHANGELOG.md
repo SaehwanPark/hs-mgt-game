@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.45] - 2026-07-11
+
+### Added
+- Added a deterministic read-only audit of existing Phase 7 evidence for
+  visibility, response, operational follow-through, outcomes, and explanation.
+- Added generated JSON/Markdown audit artifacts and focused Python coverage.
+
+### Changed
+- Confirmed that current evidence supports traceability review while keeping
+  runtime promotion, difficulty, scoring, balance, and advisor-market work
+  deferred.
+- Bumped the package version to `0.10.45`.
+
 ## [0.10.44] - 2026-07-10
 
 ### Added

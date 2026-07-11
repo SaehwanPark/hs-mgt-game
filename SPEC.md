@@ -154,6 +154,7 @@ reconstructing it from the diff.
 | Consultant Advice Evidence Synthesis | v0.10.42 | Synthesize generic advice visibility, traceability, and usage evidence and retain the advisor-market promotion gate | 285 | `8926f71296f39efc` (competitive) |
 | Rival Information Follow-Through Evidence | v0.10.43 | Compare monitor-reactive, monitor-ignoring, and unmonitored policies for visible signal-to-next-turn response traceability | 285 | `8926f71296f39efc` (competitive) |
 | Information-to-Action Comparison Evidence | v0.10.44 | Connect consultant-advice and rival-monitor evidence into an instructor-facing comparison of visibility, response, follow-through, outcomes, and debrief traceability | 285 | `8926f71296f39efc` (competitive) |
+| Instructor Debrief-Use Audit Evidence | v0.10.45 | Audit existing Phase 7 artifacts for visibility, response, follow-through, outcome, and explanation trace coverage before runtime promotion | 285 | `8926f71296f39efc` (competitive) |
 
 
 - Feature: Consultant Advice Evidence Synthesis
@@ -2696,6 +2697,37 @@ reconstructing it from the diff.
   - Source evidence JSON artifacts parse successfully.
   - Full Python tests, formatting, clippy, Rust tests, automated playtests, and
     diff checks pass.
+
+
+- Feature: Instructor Debrief-Use Audit Evidence
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.45
+
+  Summary:
+  Audited the existing v0.10.37, v0.10.40, v0.10.41, and v0.10.43 evidence
+  artifacts for the five information-to-action review steps before promoting
+  runtime work.
+
+  Done:
+  - Added a deterministic read-only audit with JSON and Markdown outputs across
+    70 complete source runs.
+  - Added focused tests for complete, partial, and deterministic audit output.
+  - Confirmed all four source artifacts expose trace coverage for visibility,
+    response, follow-through, outcomes, and explanation.
+  - Preserved the distinction between traceability, educational clarity,
+    decision quality, outcome quality, and causal claims.
+
+  Deferred / Non-Goals:
+  - No new sessions, runtime simulation, command, scenario, replay, state-hash,
+    MCP schema, advisor market, difficulty, scoring, or balance change.
+  - No human-learning, advice-quality, monitor-value, calibration, policy-
+    validity, or validated-assessment claim.
+
+  Verification:
+  - Source artifacts parse and regenerated audit output is byte-for-byte stable.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
 
 
 ## Present

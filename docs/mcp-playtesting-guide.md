@@ -529,3 +529,15 @@ not as proof of advice quality, monitor value, human learning, causal impact,
 balance, or calibration. Keep runtime and advisor-market work deferred unless
 a later artifact identifies a concrete gap that current observations, history,
 diagnostics, and debriefs cannot explain.
+
+As of `v0.10.45`, the instructor debrief-use audit checks the existing
+v0.10.37, v0.10.40, v0.10.41, and v0.10.43 artifacts for coverage of the five
+information-to-action review steps. It is a read-only trace-field audit across
+70 complete runs, not human or classroom evidence. A supported field indicates
+inspectability only; it does not establish clarity, learning, advice quality,
+monitor value, causal impact, balance, or calibration.
+
+```bash
+python3 _workspace/experiments/v0.10.45-instructor-debrief-use-audit/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.45-instructor-debrief-use-audit/results.json
+```
