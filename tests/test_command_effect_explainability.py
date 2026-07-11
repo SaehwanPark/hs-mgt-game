@@ -83,6 +83,42 @@ class CommandEffectExplainabilityTests(unittest.TestCase):
     self.assertEqual(len(result["unsupported_commands"]), 1)
     self.assertIn("no action-specific", result["unsupported_commands"][0]["reason"])
 
+  def test_missing_debrief_record_is_reported(self):
+    run = make_run(
+      ["monitor target=northlake depth=1"],
+      events=[
+        "health_system: Riverside Community Health: monitoring Northlake at depth 1",
+      ],
+    )
+    run["debrief"] = []
+
+    result = RUNNER.audit_run(run)
+
+    self.assertEqual(result["coverage_status"], "limited")
+    self.assertEqual(len(result["missing_debrief_commands"]), 1)
+
+  def test_deferred_effect_is_retained_as_trace_continuity(self):
+    run = make_run(["recruit role=nurse headcount=2"], events=["routine month"])
+    run["turn_trace"].append(
+      {
+        "turn": 2,
+        "observation": [],
+        "submitted_command": "hold",
+        "latest_transition": {
+          "events": [
+            "health_system: Riverside Community Health: delayed recruitment resolves (+2 Nurse)",
+          ],
+          "effects": [],
+        },
+      }
+    )
+    run["debrief"].append("Player: hold")
+
+    result = RUNNER.audit_run(run)
+
+    self.assertEqual(result["coverage_status"], "supported")
+    self.assertEqual(result["deferred_follow_through"][0]["resolved_turn"], 2)
+
   def test_hold_is_neutral_and_does_not_require_effect_evidence(self):
     result = RUNNER.audit_run(make_run(["hold"], events=["routine month"]))
 
