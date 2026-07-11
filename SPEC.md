@@ -153,6 +153,7 @@ reconstructing it from the diff.
 | Consultant Advice Usage Evidence | v0.10.41 | Compare advice-aware and advice-ignoring simulated policies using visible cues, resource-safe fallback, and exact observation/history/debrief continuity | 285 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Evidence Synthesis | v0.10.42 | Synthesize generic advice visibility, traceability, and usage evidence and retain the advisor-market promotion gate | 285 | `8926f71296f39efc` (competitive) |
 | Rival Information Follow-Through Evidence | v0.10.43 | Compare monitor-reactive, monitor-ignoring, and unmonitored policies for visible signal-to-next-turn response traceability | 285 | `8926f71296f39efc` (competitive) |
+| Information-to-Action Comparison Evidence | v0.10.44 | Connect consultant-advice and rival-monitor evidence into an instructor-facing comparison of visibility, response, follow-through, outcomes, and debrief traceability | 285 | `8926f71296f39efc` (competitive) |
 
 
 - Feature: Consultant Advice Evidence Synthesis
@@ -2666,6 +2667,37 @@ reconstructing it from the diff.
     playtests, JSON validation, and diff checks passed.
 
 
+- Feature: Information-to-Action Comparison Evidence
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.44
+
+  Summary:
+  Added a bounded Phase 7 synthesis connecting the generic consultant-advice
+  and rival-monitor evidence chains into one instructor-facing comparison
+  surface.
+
+  Done:
+  - Added visibility, response, follow-through, outcome, and explanation
+    prompts for comparing completed competitive runs.
+  - Linked each comparison claim to existing v0.10.37, v0.10.40, v0.10.41,
+    v0.10.42, and v0.10.43 evidence artifacts.
+  - Preserved the distinction between actor-visible information, organizational
+    outcomes, social welfare, and educational evaluation.
+
+  Deferred / Non-Goals:
+  - No new capture matrix, runtime simulation, command, scenario, replay,
+    state-hash, MCP schema, advisor market, difficulty, scoring, or balance
+    change.
+  - No causal monitor/advice, human-learning, policy-validity, or calibration
+    claim.
+
+  Verification:
+  - Source evidence JSON artifacts parse successfully.
+  - Full Python tests, formatting, clippy, Rust tests, automated playtests, and
+    diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.
@@ -2702,10 +2734,10 @@ strategic actors, or platform architecture.
   comparison, or debrief-use issue.
 
   Next actionable slice:
-  Pick one bounded teachability issue from evidence, such as strategy comparison
-  prompts, instructor debrief use, repeated-play interpretation, access/workforce
-  explanation, or command-entry friction that remains after prior autocomplete,
-  rationale-visibility, month-summary, command-help, and comparison-surface work.
+  Preserve the evidence-only posture until a new artifact identifies a concrete
+  comprehension, pacing, traceability, strategy-comparison, or debrief-use gap
+  that the current observations, history, diagnostics, and debriefs cannot
+  explain. Do not promote runtime work from the v0.10.44 synthesis alone.
 
   Verification target:
   Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible

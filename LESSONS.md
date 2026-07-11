@@ -843,3 +843,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Treat simulated-agent advice traces as evidence of visibility and
   inspectability only. Do not infer learning, advice quality, calibration,
   difficulty value, or advisor-market value from this matrix.
+
+## Compare Information-to-Action Traces Without Claiming Causality
+
+- Context: Synthesizing consultant-advice and rival-monitor evidence into an
+  instructor-facing comparison surface.
+- Symptom: A visible cue followed by a different command can look like proof
+  that the cue improved a decision or outcome.
+- Cause: Advice-aware and monitor-reactive policies intentionally submit
+  different commands from their controls, while deterministic traces do not
+  represent human decision-making.
+- Resolution: Compare visibility, response, resource feasibility, operational
+  follow-through, realized tradeoffs, and debrief continuity as separate review
+  steps. Label endpoint differences and strategy labels as non-causal,
+  interpretive evidence.
+- Prevention: Keep actor utility, organizational outcomes, social welfare, and
+  educational evaluation distinct; require a new concrete gap before changing
+  runtime information, difficulty, balance, or advisor mechanics.

@@ -1,62 +1,66 @@
-# Mechanism Design - Rival Information Follow-Through
+# Mechanism Design - Information-to-Action Comparison
 
 ## Goal and Roadmap Phase
 
-Phase 7 competitive teachability and validation: determine whether a visible
-monitor signal can be traced to a later simulated-policy command.
+Phase 7 competitive teachability and validation: make the existing path from
+visible information to later simulated-policy action inspectable across runs.
 
 ## Slice Boundary
 
-- Campaign: `competitive-regional-v1`, 24 months.
-- Matrix: seeds 42–44, Hard/Expert, three policy arms, 18 runs.
-- No runtime, command, schema, scenario, replay, or balance changes.
+- Campaign: `competitive-regional-v1`, existing 24-month artifacts.
+- Inputs: v0.10.37, v0.10.40, v0.10.41, v0.10.42, and v0.10.43 evidence.
+- Output: one instructor-facing comparison document and routing checkpoint.
+- Excluded: new capture runs, runtime changes, new actors, and new schemas.
 
 ## Actors and Authority
 
-- Human-led system: owns the submitted command stream.
-- Rival systems: existing AI actors; their behavior is unchanged.
-- Evidence policies: deterministic wrappers, not game actors.
+- Human-led health system: submits the command stream being reviewed.
+- Existing rival systems and consultant baseline: unchanged simulation actors or
+  observation sources.
+- Advice-aware, monitor-reactive, and control policies: deterministic evidence
+  wrappers, not new game actors.
 
 ## State, Beliefs, and Observations
 
 - True rival state remains inside the Rust simulation.
-- Policies consume only MCP observation text and legal resource hints.
-- Monitor intel is recorded with its source month and the observation turn in
-  which it becomes visible.
+- Review starts from actor-visible observations and legal resource hints.
+- Later history and debrief information are labeled as retrospective context.
 
 ## Commands, Events, and Effects
 
-- Existing v0.10.37 monitor and baseline commands are reused.
-- Reactive responses use bounded visible-signal categories and safe resource
-  fallback to `hold`.
-- No new command or transition semantics are introduced.
+- Existing commands, events, effects, validation, and hashes are reused.
+- The comparison records visibility, response or fallback, durable follow-through,
+  realized tradeoffs, and explanation continuity without creating transitions.
 
 ## Strategic Interaction
 
-The reactive and ignoring policies submit different commands intentionally. The
-artifact therefore evaluates traceability and control hash behavior, not a
-causal treatment effect.
+The evidence compares information surfaces and policy responses, but does not
+estimate a causal treatment effect. Controls and reactive policies intentionally
+submit different commands.
 
 ## Assumptions and Parameters
 
-- Monitor signals are classified from visible text as payer, capacity,
-  workforce, access, or other.
-- The response mapping is a deterministic gameplay abstraction.
-- Each completed run must contain 24 transitions and no validation failures.
+- Source-month, observation-turn, option, command, resource, and debrief fields
+  are read from existing artifacts.
+- All interpretation labels are gameplay or educational abstractions.
 
 ## Educational Debrief Hooks
 
-- Show what signal was visible, when it originated, and what command followed.
-- Distinguish a response, an ignored signal, and a safe fallback.
-- Preserve the existing debrief as evidence context, not a learning score.
+- What was visible at decision time?
+- What response was affordable and actually submitted?
+- Did the response become durable operational follow-through?
+- Which outcome was intended, tolerated, or an unfavorable realization?
+- Can the debrief explain the difference without scoring the learner?
 
 ## Determinism and Replay Notes
 
-- Build the local MCP binary before capture.
-- Require stable JSON/diagnostic regeneration.
-- Verify monitor-ignoring and unmonitored state hashes match.
+No randomness, transition, replay, state hash, or persistence path changes. The
+comparison consumes stable deterministic artifacts and preserves the distinction
+between actor observations and retrospective debrief information.
 
 ## Open Questions
 
-- Later human or instructor evidence may determine whether current traceability
-  wording is adequate; this slice does not answer that question.
+- Human or instructor review is still needed to assess whether the sequence is
+  sufficiently clear.
+- No runtime promotion is justified unless current surfaces fail to explain a
+  concrete future finding.
