@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.46] - 2026-07-10
+
+### Added
+- Added a deterministic Expert clearability evidence matrix for the four
+  existing competitive simulated-policy profiles across seeds 42, 43, and 44.
+- Added generated JSON/Markdown diagnostics and focused Python coverage for
+  complete, incomplete, failed, and deterministic evidence output.
+
+### Changed
+- Confirmed all 12 Expert runs completed 24 months with zero validation
+  failures while keeping runtime difficulty, scoring, balance, and replay
+  behavior unchanged.
+- Kept the result bounded to simulated-policy completion evidence; it does not
+  establish general Expert winnability, human learning, or policy validity.
+- Bumped the package version to `0.10.46`.
+
 ## [0.10.45] - 2026-07-11
 
 ### Added

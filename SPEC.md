@@ -2730,6 +2730,38 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Expert Clearability Evidence
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.46
+
+  Summary:
+  Captured a bounded Expert competitive completion matrix using the four
+  existing scripted profiles across seeds 42, 43, and 44.
+
+  Done:
+  - Added 12 deterministic MCP runs with actor-visible traces, commands,
+    transition histories, state hashes, and debriefs.
+  - Confirmed all profiles completed 24 months with zero validation failures.
+  - Added focused coverage for matrix completeness, recorded failures, and
+    deterministic diagnostics.
+  - Kept completion evidence separate from general winnability, balance,
+    causal, learning, and policy-validity claims.
+
+  Deferred / Non-Goals:
+  - No difficulty values, rival behavior, action costs, scoring, balance,
+    runtime mechanics, command, scenario, replay, MCP schema, or state-hash
+    change.
+  - No general Expert winnability, human-learning, calibration, or policy-
+    validity claim.
+
+  Verification:
+  - All 12 runs complete 24 months with zero validation failures.
+  - Generated JSON and Markdown diagnostics are deterministic.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

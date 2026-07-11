@@ -1,66 +1,41 @@
-# Mechanism Design - Instructor Debrief-Use Audit
+# Mechanism Design - Expert Clearability Evidence
 
 ## Goal and Roadmap Phase
 
-Phase 7 competitive teachability and validation: establish whether existing
-information-to-action evidence contains the trace fields needed for review
-before any runtime promotion.
+Phase 7 difficulty and winnability evidence: test whether the existing Expert
+campaign can be completed by multiple bounded simulated policies before any
+difficulty or balance promotion.
 
 ## Slice Boundary
 
-- Inputs: v0.10.37, v0.10.40, v0.10.41, and v0.10.43 JSON artifacts.
-- Output: deterministic JSON and Markdown audit artifacts plus findings.
-- Included: shallow field-presence checks for visibility, response,
-  follow-through, outcome, and explanation.
-- Excluded: new sessions, runtime changes, new actors, new schemas, and human
-  or classroom evaluation.
+- Inputs: existing MCP wrapper and four existing policy functions.
+- Output: deterministic 12-run JSON matrix, diagnostics, and findings.
+- Included: observations, legal hints, commands, failures, histories, hashes,
+  and debriefs.
+- Excluded: runtime mechanics, difficulty parameters, scoring, balance, and
+  new simulation behavior.
 
-## Actors and Authority
+## Actors and Information
 
-- Existing human-led system and simulated policy wrappers remain unchanged.
-- The audit is an offline reviewer tool, not a game actor or transition.
+- Policies act only through the actor-visible MCP observation and legal hints.
+- Retrospective history and debrief output are not treated as decision-time
+  knowledge.
+- Existing rival and payer behavior remains unchanged.
 
-## State, Beliefs, and Observations
+## Clearability Proxy
 
-- Visibility checks use observation, rendered-option, monitor-signal, and source
-  timing fields already captured in the artifacts.
-- Outcome and explanation checks use retrospective hashes, histories, and
-  debrief fields only as retrospective evidence.
-
-## Commands, Events, and Effects
-
-- The audit reads commands, response records, and debrief traces without
-  creating or resolving commands, events, or effects.
-- Missing fields are classified rather than synthesized.
-
-## Strategic Interaction
-
-The audit does not compare policy quality or estimate treatment effects. It only
-checks whether a reviewer can locate the trace categories used by the existing
-comparison surface.
-
-## Assumptions and Parameters
-
-- Complete runs are the eligible denominator for coverage.
-- `supported`, `limited`, and `unsupported` describe artifact coverage only.
-- The report uses fixed source ordering and stable JSON serialization.
-
-## Educational Debrief Hooks
-
-- Can the reviewer identify what was visible before the command?
-- Can the response or fallback be located?
-- Can later operational follow-through be distinguished from public intent?
-- Can outcomes and retrospective explanation be inspected without judging from
-  hidden state?
+An eligible run is complete when it records all 24 competitive transitions with
+zero validation failures. A failed or incomplete run is retained and reported;
+it is not silently excluded from the matrix.
 
 ## Determinism and Replay Notes
 
-No randomness, transition, replay, state hash, persistence, or MCP path changes.
-The audit is read-only with respect to source artifacts and deterministic in its
-generated outputs.
+The runner uses the existing seeded MCP session boundary and does not alter
+transition inputs, state hashes, replay formats, or stochastic resolution.
+Repeated generation must produce identical JSON and Markdown output.
 
-## Open Questions
+## Educational and Domain Limits
 
-- Human or instructor review is still required to assess clarity.
-- Runtime work remains deferred unless future review identifies a concrete gap
-  that current observations, history, diagnostics, and debriefs cannot explain.
+The artifact supports inspectability of Expert completion paths only. It does
+not measure learning, establish strategy quality, prove balance, or validate
+real health-policy outcomes.

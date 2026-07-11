@@ -541,3 +541,16 @@ monitor value, causal impact, balance, or calibration.
 python3 _workspace/experiments/v0.10.45-instructor-debrief-use-audit/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.45-instructor-debrief-use-audit/results.json
 ```
+
+As of `v0.10.46`, the Expert clearability evidence matrix runs the existing
+Fiscal Caution, Capacity Growth, Balanced Strategy, and Naive First-Time
+profiles across seeds `42`, `43`, and `44` at Expert difficulty. It records
+actor-visible traces, commands, validation failures, histories, hashes, and
+debriefs for a bounded completion check. Full 24-month completion is a
+clearability proxy for these policies and seeds, not general Expert winnability,
+balance, human-learning, causal, or policy-validity evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.46-expert-clearability-evidence/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.46-expert-clearability-evidence/results.json
+```

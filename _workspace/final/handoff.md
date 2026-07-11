@@ -1,47 +1,49 @@
-# Final Handoff - Instructor Debrief-Use Audit Evidence
+# Final Handoff - Expert Clearability Evidence
 
 ## Summary
 
-Implemented the v0.10.45 Phase 7 read-only audit of existing
-information-to-action evidence. The audit covers visibility, response,
-follow-through, outcomes, and explanation across 70 complete runs.
+Implemented the v0.10.46 Phase 7 Expert clearability evidence matrix for the
+competitive campaign. Four existing simulated-policy profiles completed all
+24 months across seeds 42, 43, and 44 at Expert difficulty.
 
 ## Changed Files
 
-- Added the v0.10.45 audit runner, generated JSON, and Markdown report.
-- Added focused Python tests for complete, partial, and deterministic output.
-- Added findings and updated playtesting guidance, SPEC, changelog, README,
-  lessons, package metadata, and project handoffs.
-- No Rust runtime, scenario, replay, MCP schema, state-hash, or golden hash
-  files changed.
+- Added the Expert MCP capture runner, generated JSON, and Markdown diagnostics.
+- Added focused Python tests for matrix completeness, recorded failures, and
+  deterministic output.
+- Added findings, playtesting guidance, SPEC/changelog/version updates, and
+  refreshed project handoffs.
+- No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, or
+  balance files changed.
 
 ## Verification
 
-- Source artifacts parse successfully.
-- Audit output is byte-for-byte stable on repeated generation.
+- All 12 runs completed 24 transitions with zero validation failures.
+- JSON and Markdown output regenerate deterministically.
 - Focused and full Python tests, formatting, clippy, Rust tests, automated
   playtests, and diff checks pass.
 
 ## Domain QA
 
-Pass. The audit is limited to field coverage and preserves the distinction
-between traceability, human clarity, decision quality, outcome quality, causal
-claims, and educational evaluation.
+Pass. The result is bounded simulated-policy completion evidence and does not
+claim general Expert winnability, balance, causal value, human learning, or
+policy validity.
 
 ## Known Limits
 
-- Evidence is deterministic simulated-policy data, not human or classroom
-  evidence.
-- Supported fields do not prove that the comparison surface is clear or useful.
-- No concrete runtime or debrief defect was identified.
+- The matrix covers four policies, three seeds, one campaign, and one difficulty.
+- Full completion is a clearability proxy, not a formal win condition.
+- Runtime difficulty changes remain deferred without a concrete unexplained gap.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/instructor-debrief-use-audit-v0.10.45`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/124
+- Working branch: `feat/expert-clearability-evidence-v0.10.46`
+- Commits: `6f283f9` implementation, `80076f6` handoff, `df9d2cf` failure preservation
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/125
 - CI: GitHub `check` passed
-- Review loop: three independent `code-reviewer` passes complete; no actionable
-  Critical, High, Medium, or Low findings
-- Review comments: none; no replies or thread resolutions required
+- Review loop: three independent `code-reviewer` passes complete
+- Findings: one Medium failure-preservation issue fixed in `df9d2cf`; one Low
+  commit-list documentation issue fixed in `d22fc18`; no Critical or High findings
+- Review comments: no external review threads; dispositions recorded on PR #125
 - Merge-ready: yes, pending the normal GitHub merge decision

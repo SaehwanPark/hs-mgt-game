@@ -874,3 +874,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Verify field coverage and deterministic regeneration first; keep
   supported trace fields separate from human clarity, learning, causal value,
   balance, and runtime-promotion claims.
+
+## Treat Expert Completion as a Bounded Clearability Proxy
+
+- Context: Capturing the v0.10.46 Expert completion matrix across four existing
+  simulated-policy profiles and seeds 42, 43, and 44.
+- Symptom: A complete 24-month run can be read too broadly as proof that Expert
+  difficulty is generally winnable or balanced.
+- Resolution: Record completion status, validation failures, histories, hashes,
+  and debriefs while labeling the result as a bounded clearability proxy for
+  the tested policies and seeds.
+- Prevention: Do not promote difficulty values, scoring, balance, or runtime
+  mechanics from completion alone. Require broader evidence or a concrete
+  player-facing explanation gap before changing the simulation.

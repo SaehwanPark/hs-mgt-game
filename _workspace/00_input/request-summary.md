@@ -1,37 +1,41 @@
-# Request Summary - Instructor Debrief-Use Audit Evidence
+# Request Summary - Expert Clearability Evidence
 
 ## Scope
 
-- Roadmap phase: Phase 7 competitive teachability and validation loop.
-- Task type: development continuation and bounded evidence audit.
-- Selected slice: audit existing information-to-action artifacts for visibility,
-  response, operational follow-through, outcomes, and explanation coverage.
-- Version: 0.10.45.
+- Roadmap phase: Phase 7 competitive difficulty and winnability evidence gate.
+- Task type: development continuation and bounded MCP evidence capture.
+- Selected slice: test completion of the current Expert campaign with existing
+  simulated-policy profiles across named seeds.
+- Version: 0.10.46.
 
 ## Sources
 
-- Canonical project docs and the harness team specification.
-- `docs/playtest-findings-v0.10.44.md` and its source findings.
-- Existing v0.10.37, v0.10.40, v0.10.41, and v0.10.43 JSON artifacts.
+- Canonical project documents and the harness team specification.
+- `SPEC.md` Future difficulty-depth queue and promotion rules.
+- `docs/playtest-findings-v0.10.35.md`, `docs/playtest-findings-v0.10.36.md`,
+  `docs/playtest-findings-v0.10.37.md`, and recent teachability findings.
+- Existing MCP wrapper and policy functions in `scripts/`.
 
 ## Expected Files
 
-- `_workspace/experiments/v0.10.45-instructor-debrief-use-audit/`
-- `tests/test_instructor_debrief_use_audit.py`
-- `docs/playtest-findings-v0.10.45.md`
+- `_workspace/experiments/v0.10.46-expert-clearability-evidence/`
+- `tests/test_expert_clearability_evidence.py`
+- `docs/playtest-findings-v0.10.46.md`
 - Project state, lessons, playtesting guidance, and handoff files.
 
 ## Validation Target
 
-- Parse four existing evidence artifacts covering 70 complete runs.
-- Classify five review-step fields as supported, limited, or unsupported.
-- Regenerate JSON and Markdown output byte-for-byte consistently.
-- Confirm no new capture, Rust runtime, scenario, replay, MCP schema, or
-  state-hash files change.
+- Capture four profiles across seeds `42`, `43`, and `44` at Expert difficulty.
+- Require 12 represented runs with actor-visible traces, commands, validation
+  failures, histories, hashes, and debriefs.
+- Preserve failed or incomplete runs for diagnosis rather than dropping them.
+- Regenerate JSON and Markdown output deterministically.
+- Confirm no runtime, scenario, replay, MCP schema, state-hash, scoring, or
+  balance files change.
 
 ## Non-Goals
 
-- No new playtest sessions, runtime mechanics, difficulty, balance, scoring,
-  advisor, monitor, or command changes.
-- No causal monitor/advice, human-learning, policy-validity, calibration, or
-  validated-assessment claim.
+- No difficulty tuning, new win condition, balance pass, scoring redesign,
+  advisor, monitor, command, actor, scenario, replay, or MCP changes.
+- No general Expert winnability, causal, human-learning, calibration, or
+  policy-validity claim.
