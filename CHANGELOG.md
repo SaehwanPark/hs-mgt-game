@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.48] - 2026-07-11
+
+### Added
+- Added a deterministic read-only strategy-diversity audit over the existing
+  v0.10.46 Expert evidence artifact.
+- Added focused coverage for command-family normalization, trajectory summaries,
+  incomplete or unknown records, tradeoff extraction, and deterministic output.
+
+### Changed
+- Confirmed descriptive variation across four existing simulated-policy
+  profiles while preserving the distinction between common-action signals,
+  causal effects, optimal strategy, balance, and learning.
+- Kept runtime mechanics, scenarios, replay formats, MCP schemas, difficulty,
+  scoring, and balance unchanged.
+- Bumped the package version to `0.10.48`.
+
 ## [0.10.47] - 2026-07-11
 
 ### Added

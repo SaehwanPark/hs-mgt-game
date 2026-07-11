@@ -565,3 +565,13 @@ clear to human learners.
 python3 _workspace/experiments/v0.10.47-command-effect-explainability/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.47-command-effect-explainability/results.json
 ```
+
+As of `v0.10.48`, the strategy-diversity audit summarizes command-family
+trajectories and descriptive final tradeoffs across the same 12 Expert traces.
+It is read-only evidence: distinct trajectories do not establish causal value,
+dominance, optimality, balance, or human learning.
+
+```bash
+python3 _workspace/experiments/v0.10.48-strategy-diversity-evidence/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.48-strategy-diversity-evidence/results.json
+```

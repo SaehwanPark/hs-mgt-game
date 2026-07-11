@@ -1,0 +1,2659 @@
+{
+  "batch_id": "v0.10.48-strategy-diversity-evidence",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.48",
+  "common_first_turn_families": [],
+  "completed_run_count": 12,
+  "difficulty": "expert",
+  "distinct_trajectory_count": 4,
+  "limitations": [
+    "This is descriptive strategy-trace evidence, not a causal comparison.",
+    "The source contains deterministic simulated-policy traces, not human or classroom sessions.",
+    "A common action is a candidate dominance signal only; it is not proof of an optimal strategy.",
+    "The tested profiles, seeds, and difficulty do not establish general balance, learning, or policy validity."
+  ],
+  "profile_summary": {
+    "Balanced Strategy": {
+      "action_families": [
+        "commit:access",
+        "commit:quality",
+        "commit:workforce",
+        "hold",
+        "invest:beds",
+        "invest:cardiology",
+        "invest:obstetrics",
+        "invest:outpatient",
+        "monitor:northlake",
+        "monitor:summit",
+        "negotiate:carrier_a",
+        "negotiate:carrier_b",
+        "recruit:admin",
+        "recruit:nurse"
+      ],
+      "distinct_trajectory_count": 1,
+      "first_turn_families": [
+        "monitor:northlake",
+        "recruit:nurse"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "Capacity Growth": {
+      "action_families": [
+        "commit:access",
+        "commit:quality",
+        "commit:workforce",
+        "hold",
+        "invest:beds",
+        "invest:cardiology",
+        "invest:emergency",
+        "invest:icu",
+        "invest:oncology",
+        "monitor:northlake",
+        "monitor:summit",
+        "negotiate:carrier_a",
+        "negotiate:carrier_b",
+        "recruit:nurse"
+      ],
+      "distinct_trajectory_count": 1,
+      "first_turn_families": [
+        "invest:beds"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "Fiscal Caution": {
+      "action_families": [
+        "commit:access",
+        "commit:quality",
+        "commit:workforce",
+        "hold",
+        "invest:asc",
+        "invest:emergency",
+        "invest:infusion",
+        "invest:psychiatric",
+        "monitor:northlake",
+        "monitor:summit",
+        "negotiate:medicaid",
+        "negotiate:medicare",
+        "recruit:admin",
+        "recruit:nurse"
+      ],
+      "distinct_trajectory_count": 1,
+      "first_turn_families": [
+        "hold",
+        "monitor:northlake"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "Naive First-Time": {
+      "action_families": [
+        "commit:access",
+        "commit:quality",
+        "commit:workforce",
+        "hold",
+        "invest:asc",
+        "invest:emergency",
+        "invest:outpatient",
+        "monitor:northlake",
+        "monitor:summit",
+        "negotiate:medicaid",
+        "negotiate:medicare",
+        "recruit:admin",
+        "recruit:nurse"
+      ],
+      "distinct_trajectory_count": 1,
+      "first_turn_families": [
+        "hold",
+        "monitor:northlake"
+      ],
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    }
+  },
+  "profiles": [
+    "Fiscal Caution",
+    "Capacity Growth",
+    "Balanced Strategy",
+    "Naive First-Time"
+  ],
+  "run_count": 12,
+  "runs": [
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 2,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:infusion": 1,
+        "invest:psychiatric": 1,
+        "monitor:northlake": 4,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 43,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 5,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 57
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.5581,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 19,
+      "player_debrief_count": 24,
+      "profile_name": "Fiscal Caution",
+      "seed": 42,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "invest:infusion",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "invest:psychiatric",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 2,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:infusion": 1,
+        "invest:psychiatric": 1,
+        "monitor:northlake": 4,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 43,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 5,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 57
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.5581,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 19,
+      "player_debrief_count": 24,
+      "profile_name": "Fiscal Caution",
+      "seed": 43,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "invest:infusion",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "invest:psychiatric",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 2,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:infusion": 1,
+        "invest:psychiatric": 1,
+        "monitor:northlake": 4,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 43,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 5,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 57
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.5581,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 19,
+      "player_debrief_count": 24,
+      "profile_name": "Fiscal Caution",
+      "seed": 44,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "invest:infusion",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "invest:psychiatric",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 1,
+        "commit:quality": 3,
+        "commit:workforce": 2,
+        "hold": 21,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:emergency": 1,
+        "invest:icu": 1,
+        "invest:oncology": 1,
+        "monitor:northlake": 5,
+        "monitor:summit": 3,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 44,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 73,
+        "cash": 9,
+        "community_trust": 66,
+        "market_share": 27,
+        "quality": 80,
+        "workforce_trust": 34
+      },
+      "first_turn_families": [
+        "invest:beds"
+      ],
+      "hold_rate": 0.4773,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 23,
+      "player_debrief_count": 24,
+      "profile_name": "Capacity Growth",
+      "seed": 42,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "invest:beds"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:icu",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "invest:oncology",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 1,
+        "commit:quality": 3,
+        "commit:workforce": 2,
+        "hold": 21,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:emergency": 1,
+        "invest:icu": 1,
+        "invest:oncology": 1,
+        "monitor:northlake": 5,
+        "monitor:summit": 3,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 44,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 73,
+        "cash": 9,
+        "community_trust": 66,
+        "market_share": 27,
+        "quality": 80,
+        "workforce_trust": 34
+      },
+      "first_turn_families": [
+        "invest:beds"
+      ],
+      "hold_rate": 0.4773,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 23,
+      "player_debrief_count": 24,
+      "profile_name": "Capacity Growth",
+      "seed": 43,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "invest:beds"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:icu",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "invest:oncology",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 1,
+        "commit:quality": 3,
+        "commit:workforce": 2,
+        "hold": 21,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:emergency": 1,
+        "invest:icu": 1,
+        "invest:oncology": 1,
+        "monitor:northlake": 5,
+        "monitor:summit": 3,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 44,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 73,
+        "cash": 9,
+        "community_trust": 66,
+        "market_share": 27,
+        "quality": 80,
+        "workforce_trust": 34
+      },
+      "first_turn_families": [
+        "invest:beds"
+      ],
+      "hold_rate": 0.4773,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 23,
+      "player_debrief_count": 24,
+      "profile_name": "Capacity Growth",
+      "seed": 44,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "invest:beds"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "recruit:nurse"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:icu",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "invest:oncology",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 2,
+        "commit:workforce": 2,
+        "hold": 22,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:obstetrics": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 6,
+        "monitor:summit": 4,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 47,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 1,
+        "community_trust": 67,
+        "market_share": 27,
+        "quality": 76,
+        "workforce_trust": 48
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "recruit:nurse"
+      ],
+      "hold_rate": 0.4681,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 25,
+      "player_debrief_count": 24,
+      "profile_name": "Balanced Strategy",
+      "seed": 42,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "recruit:nurse"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "invest:beds",
+            "commit:access"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "invest:obstetrics",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 2,
+        "commit:workforce": 2,
+        "hold": 22,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:obstetrics": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 6,
+        "monitor:summit": 4,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 47,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 1,
+        "community_trust": 67,
+        "market_share": 27,
+        "quality": 76,
+        "workforce_trust": 48
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "recruit:nurse"
+      ],
+      "hold_rate": 0.4681,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 25,
+      "player_debrief_count": 24,
+      "profile_name": "Balanced Strategy",
+      "seed": 43,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "recruit:nurse"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "invest:beds",
+            "commit:access"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "invest:obstetrics",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 2,
+        "commit:workforce": 2,
+        "hold": 22,
+        "invest:beds": 1,
+        "invest:cardiology": 1,
+        "invest:obstetrics": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 6,
+        "monitor:summit": 4,
+        "negotiate:carrier_a": 2,
+        "negotiate:carrier_b": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 47,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 14,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 1,
+        "community_trust": 67,
+        "market_share": 27,
+        "quality": 76,
+        "workforce_trust": 48
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "recruit:nurse"
+      ],
+      "hold_rate": 0.4681,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 25,
+      "player_debrief_count": 24,
+      "profile_name": "Balanced Strategy",
+      "seed": 44,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "recruit:nurse"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "invest:beds",
+            "commit:access"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "invest:obstetrics",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "invest:cardiology",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "negotiate:carrier_b",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "negotiate:carrier_a",
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 1,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 2,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 39,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 13,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 20,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 58
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.6154,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 15,
+      "player_debrief_count": 24,
+      "profile_name": "Naive First-Time",
+      "seed": 42,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 1,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 2,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 39,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 13,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 20,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 58
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.6154,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 15,
+      "player_debrief_count": 24,
+      "profile_name": "Naive First-Time",
+      "seed": 43,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    },
+    {
+      "action_family_counts": {
+        "commit:access": 2,
+        "commit:quality": 1,
+        "commit:workforce": 1,
+        "hold": 24,
+        "invest:asc": 1,
+        "invest:emergency": 1,
+        "invest:outpatient": 1,
+        "monitor:northlake": 2,
+        "monitor:summit": 2,
+        "negotiate:medicaid": 1,
+        "negotiate:medicare": 1,
+        "recruit:admin": 1,
+        "recruit:nurse": 1
+      },
+      "command_count": 39,
+      "completion_status": "complete",
+      "difficulty": "expert",
+      "distinct_action_family_count": 13,
+      "final_tradeoff": {
+        "access": 75,
+        "cash": 20,
+        "community_trust": 66,
+        "market_share": 24,
+        "quality": 77,
+        "workforce_trust": 58
+      },
+      "first_turn_families": [
+        "monitor:northlake",
+        "hold"
+      ],
+      "hold_rate": 0.6154,
+      "missing_trace_fields": [],
+      "non_hold_command_count": 15,
+      "player_debrief_count": 24,
+      "profile_name": "Naive First-Time",
+      "seed": 44,
+      "status": "supported",
+      "trajectory": [
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 1
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 2
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 3
+        },
+        {
+          "families": [
+            "recruit:nurse",
+            "hold"
+          ],
+          "turn": 4
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 5
+        },
+        {
+          "families": [
+            "invest:emergency",
+            "hold"
+          ],
+          "turn": 6
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 7
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 8
+        },
+        {
+          "families": [
+            "commit:workforce",
+            "hold"
+          ],
+          "turn": 9
+        },
+        {
+          "families": [
+            "negotiate:medicaid",
+            "hold"
+          ],
+          "turn": 10
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 11
+        },
+        {
+          "families": [
+            "invest:outpatient",
+            "hold"
+          ],
+          "turn": 12
+        },
+        {
+          "families": [
+            "monitor:northlake",
+            "hold"
+          ],
+          "turn": 13
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 14
+        },
+        {
+          "families": [
+            "recruit:admin",
+            "hold"
+          ],
+          "turn": 15
+        },
+        {
+          "families": [
+            "commit:quality",
+            "hold"
+          ],
+          "turn": 16
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 17
+        },
+        {
+          "families": [
+            "negotiate:medicare",
+            "hold"
+          ],
+          "turn": 18
+        },
+        {
+          "families": [
+            "monitor:summit",
+            "hold"
+          ],
+          "turn": 19
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 20
+        },
+        {
+          "families": [
+            "invest:asc",
+            "hold"
+          ],
+          "turn": 21
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 22
+        },
+        {
+          "families": [
+            "commit:access",
+            "hold"
+          ],
+          "turn": 23
+        },
+        {
+          "families": [
+            "hold"
+          ],
+          "turn": 24
+        }
+      ],
+      "transition_count": 24,
+      "turn_count": 24,
+      "unknown_commands": [],
+      "validation_failure_count": 0
+    }
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "source_artifact": "_workspace/experiments/v0.10.46-expert-clearability-evidence/results.json"
+}
