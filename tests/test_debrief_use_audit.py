@@ -55,6 +55,22 @@ class DebriefUseAuditTests(unittest.TestCase):
     self.assertEqual(report["status"], "limited")
     self.assertEqual(report["run_reports"][0]["missing_steps"], ["explanation"])
 
+  def test_partial_explanation_markers_are_not_supported(self):
+    contract = RUNNER.SOURCE_CONTRACTS["v0.10.50-teachability-observation-capture"]
+    artifact = RUNNER.load_artifact(ROOT / contract["path"])
+    tampered = copy.deepcopy(artifact)
+    tampered["runs"][0]["debrief"] = [
+      line
+      for line in tampered["runs"][0]["debrief"]
+      if "Final player tradeoff" not in line
+    ]
+
+    report = RUNNER.audit_artifact(tampered, contract)
+    statuses = {step["name"]: step["status"] for step in report["review_steps"]}
+
+    self.assertEqual(statuses["explanation"], "limited")
+    self.assertEqual(report["status"], "limited")
+
   def test_malformed_runs_are_limited_without_crashing(self):
     contract = RUNNER.SOURCE_CONTRACTS["v0.10.43-rival-info-follow-through"]
     report = RUNNER.audit_artifact(
@@ -84,7 +100,9 @@ class DebriefUseAuditTests(unittest.TestCase):
     )
 
     self.assertEqual(report["identity_status"], "limited")
-    self.assertEqual(report["evidence_gaps"][0]["missing_steps"], ["source_identity"])
+    self.assertTrue(
+      any("source_identity" in gap["missing_steps"] for gap in report["evidence_gaps"])
+    )
 
   def test_hash_continuity_detects_tampered_source(self):
     artifacts = [

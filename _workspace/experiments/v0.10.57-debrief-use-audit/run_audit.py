@@ -95,7 +95,7 @@ def _debrief_contains(run, markers):
   if not isinstance(debrief, list):
     return False
   text = "\n".join(str(line) for line in debrief).casefold()
-  return any(marker.casefold() in text for marker in markers)
+  return all(marker.casefold() in text for marker in markers)
 
 
 def _has_recovery_chain(run):
@@ -238,6 +238,15 @@ def audit_artifact(artifact, contract, source_path=None):
         "missing_steps": ["source_identity"],
       },
     )
+  if not runs or len(complete_runs) != len(runs):
+    evidence_gaps.insert(
+      0,
+      {
+        "profile_name": "source completeness",
+        "seed": None,
+        "missing_steps": ["completed_runs"],
+      },
+    )
   return {
     "source_artifact": source_path or contract["path"],
     "batch_id": batch_id,
@@ -345,6 +354,13 @@ def validate_audit(audit):
   assert audit["campaign"] == CAMPAIGN
   assert audit["source_count"] == len(SOURCE_CONTRACTS)
   assert audit["completed_source_count"] == len(SOURCE_CONTRACTS)
+  assert audit["run_count"] == audit["completed_run_count"]
+  assert audit["evidence_gap_count"] == 0
+  assert all(
+    report["identity_status"] == "supported"
+    and report["status"] == "supported"
+    for report in audit["source_reports"]
+  )
   assert audit["hash_continuity"]["status"] == "supported"
   assert audit["runtime_promotion"] == "deferred"
   assert audit["source_artifacts"] == [

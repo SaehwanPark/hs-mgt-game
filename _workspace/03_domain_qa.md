@@ -33,7 +33,7 @@ None.
 
 ## Verification Evidence
 
-- Seven focused audit tests and 94 full Python tests pass.
+- Eight focused audit tests and 95 full Python tests pass.
 - 286 Rust tests, formatting, clippy, automated playtests, JSON validation,
   and diff checks pass.
 - Generated JSON and Markdown are deterministic.

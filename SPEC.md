@@ -3108,7 +3108,7 @@ reconstructing it from the diff.
     or policy-validity claim.
 
   Verification:
-  - Seven focused audit tests and 94 full Python tests pass.
+  - Eight focused audit tests and 95 full Python tests pass.
   - 286 Rust tests, formatting, clippy, automated playtests, JSON validation,
     and diff checks pass.
   - All six source artifacts and 39 runs report supported coverage; no source

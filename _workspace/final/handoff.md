@@ -16,7 +16,7 @@ audit covers 39 completed runs and preserves runtime promotion as deferred.
 
 ## Verification
 
-- Seven focused audit tests and 94 full Python tests pass.
+- Eight focused audit tests and 95 full Python tests pass.
 - 286 Rust tests pass with `--test-threads=1`.
 - `cargo fmt --check` and clippy with `-D warnings` pass.
 - Automated baseline playtests complete for 24 sessions.
