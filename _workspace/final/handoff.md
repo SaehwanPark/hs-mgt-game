@@ -38,9 +38,8 @@ causal value, decision quality, human learning, balance, or policy validity.
 ## PR Handoff
 
 - Base branch: `main`
-- Base branch: `main`
 - Working branch: `feat/command-effect-explainability-v0.10.47`
-- Commits: `d5bc256` implementation, `3d007fb` deferred-trace test coverage,
+- Primary commits: `d5bc256` implementation, `3d007fb` deferred-trace test coverage,
   and `2848923` verified domain-QA handoff
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/126
 - CI: GitHub `check` passed
@@ -49,4 +48,4 @@ causal value, decision quality, human learning, balance, or policy validity.
 - Findings: no Critical, High, Medium, or Low actionable findings; runtime
   promotion remains deferred
 - Review comments: no external review threads
-- Merge-ready: pending the final CI result and normal GitHub merge decision
+- Merge-ready: yes; CI and review gates passed, pending the normal GitHub merge decision
