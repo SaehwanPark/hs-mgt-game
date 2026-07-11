@@ -40,7 +40,10 @@
 - Base branch: `main`
 - Working branch: `feat/operating-loss-explainability-v0.11.2`
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/140
+- CI: GitHub `check` passed; the only annotation is the repository’s existing
+  Node.js 20 deprecation warning.
 - Review loop: three independent `code-reviewer` passes completed; one Medium
   trace-link issue and two Low documentation count issues were fixed and
-  pushed. Final follow-up review and CI confirmation remain required for merge
-  readiness.
+  pushed. Follow-up review found no actionable issues.
+- PR comments/review threads: none open.
+- Merge-ready: yes.
