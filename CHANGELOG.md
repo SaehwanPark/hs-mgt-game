@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.50] - 2026-07-11
+
+### Added
+- Added a deterministic observation-driven Hard competitive capture across
+  three profiles and seeds 42, 43, and 44.
+- Added focused coverage for profile stability, trace completeness, retry
+  preservation, and deterministic artifact rendering.
+
+### Changed
+- Confirmed all nine simulated-policy runs completed 24 months without
+  validation failures or retries while preserving actor-visible traces,
+  histories, hashes, and debriefs.
+- Kept runtime mechanics, scenarios, replay formats, MCP schemas, difficulty,
+  scoring, balance, and debrief behavior unchanged.
+- Bumped the package version to `0.10.50`.
+
 ## [0.10.49] - 2026-07-11
 
 ### Added

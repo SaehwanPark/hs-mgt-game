@@ -585,3 +585,19 @@ promoting runtime work.
 python3 _workspace/experiments/v0.10.49-teachability-gate-synthesis/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.49-teachability-gate-synthesis/results.json
 ```
+
+As of `v0.10.50`, the observation-driven capture runs Fiscal Steward, Access
+Expansion Advocate, and First-Time Executive policies across Hard seeds 42, 43,
+and 44. Policies read only actor-visible observations, legal command hints, and
+turn number. The wrapper preserves rejected commands, safe retries, transition
+hashes, histories, and debriefs. Treat the nine runs as deterministic
+simulated-policy evidence, not human-learning, balance, winnability, or policy
+validity evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.50-teachability-observation-capture/run_sessions.py
+python3 scripts/diagnose_runs.py \
+  _workspace/experiments/v0.10.50-teachability-observation-capture/results.json \
+  --output _workspace/experiments/v0.10.50-teachability-observation-capture/diagnostics.md
+python3 -m json.tool _workspace/experiments/v0.10.50-teachability-observation-capture/results.json
+```

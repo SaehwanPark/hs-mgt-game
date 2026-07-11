@@ -1,40 +1,39 @@
-# Request Summary - Teachability-Gate Synthesis
+# Request Summary - Teachability Observation Capture
 
 ## Scope
 
 - Roadmap phase: Phase 7 competitive teachability and validation gate.
-- Task type: development continuation and bounded read-only evidence synthesis.
-- Selected slice: check continuity across the v0.10.45–v0.10.48 evidence
-  chain and route runtime promotion only from a concrete unexplained gap.
-- Version: 0.10.49.
+- Task type: development continuation and bounded read-only evidence capture.
+- Selected slice: capture observation-driven Hard competitive traces and route
+  runtime promotion only from a concrete unexplained gap.
+- Version: 0.10.50.
 
 ## Sources
 
 - Canonical project documents and the harness team specification.
 - `SPEC.md` promotion rules and competitive teachability queue.
-- Existing v0.10.45 instructor debrief-use, v0.10.46 Expert clearability,
-  v0.10.47 command-to-effect, and v0.10.48 strategy-diversity artifacts.
+- Existing v0.10.45–v0.10.49 competitive teachability artifacts.
+- `docs/agent-playtest-protocol.md` and `docs/mcp-playtesting-guide.md`.
 
 ## Expected Files
 
-- `_workspace/experiments/v0.10.49-teachability-gate-synthesis/`
-- `tests/test_teachability_gate_synthesis.py`
-- `docs/playtest-findings-v0.10.49.md`
+- `_workspace/experiments/v0.10.50-teachability-observation-capture/`
+- `tests/test_teachability_observation_capture.py`
+- `docs/playtest-findings-v0.10.50.md`
 - Project state, lessons, playtesting guidance, and handoff files.
 
 ## Validation Target
 
-- Review the four existing artifacts without launching new sessions.
-- Confirm source-specific evidence coverage and v0.10.46–v0.10.48 matrix
-  continuity across 12 profile/seed members.
-- Preserve incomplete or unknown records as limited evidence.
-- Regenerate JSON and Markdown output deterministically.
+- Run three observation-driven profiles across seeds 42, 43, and 44 at Hard.
+- Capture actor-visible observations, legal hints, commands, failures/retries,
+  transitions, hashes, history, and debriefs for all nine runs.
+- Regenerate JSON and diagnostics deterministically.
 - Confirm no runtime, scenario, replay, MCP schema, state-hash, scoring,
   balance, difficulty, or debrief behavior changes.
 
 ## Non-Goals
 
-- No new sessions, runtime tuning, new win condition, balance pass, scoring
-  redesign, advisor, monitor, command, actor, scenario, replay, or MCP change.
+- No runtime tuning, new win condition, balance pass, scoring redesign, advisor,
+  monitor, command, actor, scenario, replay, or MCP change.
 - No causal strategy comparison, dominance, optimality, decision-quality,
   human-learning, calibration, or policy-validity claim.

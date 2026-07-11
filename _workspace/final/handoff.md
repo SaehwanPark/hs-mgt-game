@@ -1,16 +1,18 @@
-# Final Handoff - Teachability-Gate Synthesis
+# Final Handoff - Teachability Observation Capture
 
 ## Summary
 
-Implemented the v0.10.49 Phase 7 read-only synthesis across the existing
-v0.10.45–v0.10.48 competitive teachability evidence chain.
+Implemented the v0.10.50 Phase 7 observation-driven Hard competitive capture
+across three profiles and seeds 42, 43, and 44.
 
 ## Changed Files
 
-- Added a deterministic source-coverage and matrix-continuity audit with JSON
-  and Markdown output.
-- Added focused Python tests for supported sources, limited evidence,
-  non-promotion routing, and deterministic rendering.
+- Added a wrapper-boundary MCP capture with actor-visible observations, legal
+  hints, commands, validation failures/retries, transitions, hashes, history,
+  and debrief records.
+- Added focused Python tests for the 3-profile/3-seed matrix, policy stability,
+  trace metadata, retry preservation, and deterministic rendering.
+- Added generated JSON and diagnostics for all nine runs.
 - Updated findings, SPEC, changelog/version, README, playtesting guidance,
   lessons, evidence map, domain QA, and project handoff state.
 - No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, balance,
@@ -18,39 +20,36 @@ v0.10.45–v0.10.48 competitive teachability evidence chain.
 
 ## Verification
 
-- Focused Python tests: 7 passed.
-- Full Python suite: 40 passed.
+- Focused Python tests: 4 passed.
+- Full Python suite: 44 passed.
 - Rust tests: 285 passed; integration and doc tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.
 - Automated stabilization and competitive playtests passed.
-- Generated JSON validation and `git diff --check` passed.
+- Generated JSON validation, byte-for-byte regeneration, and `git diff --check`
+  passed.
 
 ## Domain QA
 
-Pass. The synthesis confirms source coverage and matrix continuity without
-claiming causality, strategy value, balance, winnability, human learning,
-calibration, or policy validity. Runtime promotion remains deferred.
+Pass. All nine simulated-policy runs completed 24 months with zero validation
+failures and zero retries. The capture confirms wrapper-boundary traceability
+without claiming causality, strategy value, balance, winnability, human
+learning, calibration, or policy validity. Runtime promotion remains deferred.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/teachability-gate-synthesis-v0.10.49`
-- Primary commits: `431e8a5` implementation, `a4aca26`/`40e8649` handoff
-  updates, `f442793`/`9289a84` review fixes, and `1a1765f` generated-output
-  refresh.
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/128
-- CI: GitHub `check` passed.
-- Review loop: three independent passes plus follow-up complete.
-- Findings: no Critical or High findings; three Medium documentation/
-  robustness findings fixed. Review disposition posted on the PR.
-- Merge-ready: yes; pending the normal GitHub merge decision.
+- Working branch: `feat/teachability-observation-capture-v0.10.50`
+- Primary commits: pending implementation and review.
+- PR URL: pending PR creation.
+- CI: pending PR CI.
+- Review loop: pending three independent passes plus follow-up if required.
+- Findings: pending review.
+- Merge-ready: no, pending verification and PR review.
 
 ## Known Limits
 
-- The synthesis relies on four existing source artifacts with different trace
-  shapes.
+- The capture uses three deterministic simulated policies, one campaign, one
+  difficulty, and three seeds; it is not human or classroom evidence.
 - It identifies no concrete unexplained gap and therefore promotes no runtime
   or interface work.
-- The evidence remains deterministic simulated-policy evidence, not human or
-  classroom evidence.

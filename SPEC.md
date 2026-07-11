@@ -2856,6 +2856,36 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Teachability Observation Capture
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.50
+
+  Summary:
+  Captured deterministic observation-driven Hard competitive traces across
+  three profiles and seeds 42, 43, and 44 as the next Phase 7 validation slice.
+
+  Done:
+  - Added a wrapper-boundary MCP capture with actor-visible observations, legal
+    hints, submitted commands, failures/retries, transitions, hashes, history,
+    and debrief records.
+  - Confirmed all nine runs completed the 24-month campaign with zero validation
+    failures and zero retries.
+  - Confirmed descriptive profile differences without identifying a concrete
+    unexplained runtime or interface gap.
+
+  Deferred / Non-Goals:
+  - No runtime, command, scenario, replay, state-hash, MCP schema, difficulty,
+    scoring, balance, or debrief behavior change.
+  - No human-learning, causal strategy, winnability, calibration, or policy-
+    validity claim.
+
+  Verification:
+  - Focused capture tests and deterministic artifact checks pass.
+  - Full Python tests, formatting, clippy, Rust tests, automated playtests, and
+    diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.
