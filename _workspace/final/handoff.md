@@ -23,8 +23,8 @@
 
 - Eight focused explainability tests pass.
 - Source and v0.11.2 audits validate the documented matrix and counts.
-- Full Python/Rust tests, formatting, clippy, JSON validation, deterministic
-  regeneration, and diff checks are required before handoff completion.
+- 116 full Python tests and 289 Rust tests pass with formatting and clippy.
+- JSON validation, deterministic regeneration, and diff checks pass.
 
 ## Known Limits
 
@@ -39,6 +39,8 @@
 
 - Base branch: `main`
 - Working branch: `feat/operating-loss-explainability-v0.11.2`
-- PR URL: pending push and PR creation.
-- Review loop: three independent `code-reviewer` passes required before merge
-  readiness, with follow-up review after any Critical or High fix.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/140
+- Review loop: three independent `code-reviewer` passes completed; one Medium
+  trace-link issue and two Low documentation count issues were fixed and
+  pushed. Final follow-up review and CI confirmation remain required for merge
+  readiness.
