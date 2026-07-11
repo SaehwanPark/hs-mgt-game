@@ -172,6 +172,11 @@ Status: Verified
 - Freeze major new abstractions unless playtest, scenario-authoring, debrief, or
   domain-review evidence identifies a concrete need that current structures
   cannot satisfy.
+- Treat simultaneous resolution as a semantic contract. System-local actions
+  may be applied in canonical order only while permutation tests prove order
+  independence. Before adding contested hiring, shared capacity, negotiation
+  conflicts, or demand diversion, split resolution into prior-snapshot intent
+  evaluation, central conflict resolution, and effect application.
 
 Last Reviewed: 2026-06-23
 Status: Verified

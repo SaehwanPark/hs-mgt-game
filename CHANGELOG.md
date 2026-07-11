@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.0] - 2026-07-11
+
+### Added
+- Added a deterministic monthly operating consequence loop connecting regional
+  demand, market position, staffed capacity, treated and unmet demand, quality,
+  payer pressure, revenue, workforce and footprint cost, margin, and cash.
+- Exposed the owning system's prior-month operating results through CLI and MCP
+  observations and included them in competitive state hashes.
+- Added focused volume, cash-identity, and staffing-collapse tests.
+
+### Changed
+- Made AI-agent test plays the explicit budget-feasible Phase 7 validation path;
+  any future human evaluation requires separate funding and approval.
+- Documented the stronger semantic gate required before shared contested
+  mechanics can rely on simultaneous resolution.
+- Bumped the package to `0.11.0`, the competitive ruleset to `0.2.0`, and the
+  competitive state-hash schema to v9.
+
 ## [0.10.58] - 2026-07-11
 
 ### Added

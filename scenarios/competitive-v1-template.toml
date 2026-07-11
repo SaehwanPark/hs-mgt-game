@@ -3,7 +3,7 @@ campaign_id = "competitive-regional-v1"
 scenario_id = "exemplary-competitive-v1"
 scenario_version = "1.0.0"
 turn_unit = "month"
-ruleset_id = "competitive-ruleset-0.1.30"
+ruleset_id = "competitive-ruleset-0.2.0"
 title = "The Regional Workforce and Market Realignment Challenge"
 default_seed = 42
 

@@ -128,7 +128,7 @@ pub fn validate_competitive_batch(
   }
 
   let cash_required = resources.active_project_monthly_draws + totals.cash_cost;
-  if cash_required > resources.cash {
+  if cash_required > 0 && cash_required > resources.cash {
     return Err(CompetitiveValidationError::InsufficientCash {
       required: cash_required,
       available: resources.cash,

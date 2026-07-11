@@ -1594,8 +1594,11 @@ mod transition_competitive_tests {
     let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
     let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
 
-    // Cash: 60 starting - 5 cost = 55
-    assert_eq!(transition.next.systems[0].resources.cash, 55);
+    // Cash includes the negotiation cost and the resolved operating margin.
+    assert_eq!(
+      transition.next.systems[0].resources.cash,
+      55 + transition.next.systems[0].monthly_operating_margin
+    );
     // Access: 68 starting + 3 = 71
     assert_eq!(transition.next.systems[0].access_index, 71);
     // Policy pressure: 30 starting - 3 = 27
@@ -1642,8 +1645,11 @@ mod transition_competitive_tests {
     let aggregated = resolve_monthly_batches(&prior, &batches, &ruleset).expect("resolve");
     let transition = transition_competitive(&prior, aggregated, &ruleset).expect("transition");
 
-    // Cash: 60 starting - 10 cost = 50
-    assert_eq!(transition.next.systems[0].resources.cash, 50);
+    // Cash includes the negotiation cost and the resolved operating margin.
+    assert_eq!(
+      transition.next.systems[0].resources.cash,
+      50 + transition.next.systems[0].monthly_operating_margin
+    );
     // Quality: 68 starting + 3 = 71
     assert_eq!(transition.next.systems[0].quality_index, 71);
     // Policy pressure: 30 starting - 3 = 27

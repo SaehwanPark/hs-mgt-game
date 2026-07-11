@@ -86,6 +86,8 @@ FOR month IN 1..campaign_length:
        unified merge is proven safe (ADR-0004)
      - Enqueue new PendingEffects
      - Update public rival action log for next month observability
+     - Resolve staffed capacity against regional demand
+     - Derive treated and unmet demand, operating revenue and cost, and cash margin
 
   7. Commit transition to history with state hash
 
@@ -100,7 +102,7 @@ END
 
 | Resource | Role | Refresh |
 | --- | --- | --- |
-| Cash | Capital spends, recruitment, projects | No general periodic operating-income flow in the current prototype |
+| Cash | Capital spends, recruitment, projects, and operating margin | Monthly operating margin after staffed-volume resolution |
 | Action points (AP) | Monthly command capacity | Full budget each month (no banking in MVP) |
 | Political capital | Advocacy, negotiation posture | Partial monthly refresh, cap 15 |
 | Trust metrics | Workforce and community legitimacy | Modified by commits and outcomes |
@@ -118,6 +120,27 @@ derived from actor-visible observations, and any arrival or contested hire must
 be an explicit resolved input recorded for replay.
 
 Difficulty scales K, CPU AP, and AI ability — not human AP below documented floors.
+
+## Monthly operating abstraction
+
+The competitive campaign now closes a compact consequence loop:
+
+```text
+regional demand × market position
+  -> system demand
+staffed effective capacity
+  -> treated volume + unmet demand
+treated volume × (quality and payer-pressure realization)
+  -> operating revenue
+workforce + physical footprint
+  -> operating cost
+revenue - cost
+  -> cash available for later decisions
+```
+
+All quantities are integer game units. They are versioned, inspectable design
+abstractions rather than calibrated encounters, reimbursement, expenses, or
+financial forecasts.
 
 ## Manual facilitation (optional)
 

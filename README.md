@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.10.58. It is intended for
+The current public milestone is a playable Rust prototype at v0.11.0. It is intended for
 inspection, playtesting, portfolio review, and future educational design work.
 It is not a calibrated policy forecast or a model of any real institution.
 
@@ -20,7 +20,8 @@ It is not a calibrated policy forecast or a model of any real institution.
 - `stabilization-v1`: a five-turn executive stabilization campaign.
 - `competitive-regional-v1`: a 24-month regional-market campaign with
   one human-led system, AI rival health systems, simultaneous monthly actions,
-  lagged rival observability, and end-of-run debriefing.
+  lagged rival observability, a recurring operating consequence loop, and
+  end-of-run debriefing.
 
 Both campaigns are deterministic for a given seed and set of choices. The
 simulation separates true state from actor-visible observations, records
@@ -99,6 +100,8 @@ Current limits:
   calibrated parameters;
 - AI-agent playtest findings are validation aids for gameplay and explanation,
   not evidence of measured human learning.
+- monthly demand, volume, revenue, and cost use visible game units rather than
+  calibrated encounters or dollars.
 
 The model should not be used for operational, clinical, financial, regulatory,
 or policy decisions.

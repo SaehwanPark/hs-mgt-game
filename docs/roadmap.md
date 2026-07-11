@@ -825,6 +825,19 @@ action frequencies, outcome distributions, strategy clusters, stochastic
 sensitivity, and dominance or near-dominance findings.
 
 Agent playtests replace planned external human recruitment for this roadmap.
+This is a budget and recruitment constraint as well as a reproducibility choice:
+Phase 7 reserves no funding for participant recruitment, incentives, or study
+administration. Any later human educational evaluation requires a separate
+funded and approved plan and must remain distinct from AI gameplay validation.
+
+The next AI validation cycle should emphasize gameplay maturity over content
+count. Run access-first, commercially focused, workforce-resilience,
+capital-modernization, and coalition-oriented policy hypotheses across named
+seeds and rival configurations. Report strategy divergence, treated and unmet
+demand, operating margins, bottlenecks, ignored or dominated commands,
+threshold-cliff frequency, causal explanation quality, and whether the agent
+selects a materially different approach on replay. These are simulated-player
+diagnostics, not human enjoyment or learning measures.
 They should capture campaign, seed, difficulty, agent profile or prompt,
 actor-visible observations, submitted commands, validation failures, histories,
 and debriefs.
