@@ -1,0 +1,77 @@
+{
+  "batch_id": "v0.10.53-evidence-synthesis",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.53",
+  "completed_source_count": 3,
+  "control_continuity": {
+    "control_artifact": "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+    "expected_member_count": 3,
+    "observed_member_count": 3,
+    "status": "supported"
+  },
+  "evidence_gap_count": 0,
+  "evidence_gaps": [],
+  "limitations": [
+    "The source artifacts are deterministic simulated-policy evidence, not human or classroom evidence.",
+    "Cross-artifact continuity describes trace coverage and control identity; it does not establish causality, strategy quality, balance, or optimality.",
+    "Pacing, validation, retry, and endpoint records do not measure cognitive load, comprehension, learning, or policy validity.",
+    "Runtime and interface promotion remains deferred until a player-facing, instructor-facing, or domain-review gap is identified."
+  ],
+  "matrix_continuity": {
+    "capture_member_count": 9,
+    "expected_member_count": 9,
+    "pacing_member_count": 9,
+    "status": "supported"
+  },
+  "promotion_basis": "The three source artifacts form a continuous descriptive evidence chain; no concrete unexplained player-facing, instructor-facing, or domain-review gap justifies runtime promotion.",
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+    "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+    "_workspace/experiments/v0.10.52-decision-load-evidence/results.json"
+  ],
+  "source_count": 3,
+  "source_coverage": {
+    "expected_source_count": 3,
+    "limited_sources": [],
+    "missing_sources": [],
+    "observed_source_count": 3,
+    "status": "supported",
+    "unexpected_sources": []
+  },
+  "source_reports": [
+    {
+      "batch_id": "v0.10.50-teachability-observation-capture",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.50",
+      "completed_run_count": 9,
+      "expected_evidence": "observation-driven teachability capture",
+      "limited_dimensions": [],
+      "run_count": 9,
+      "source_path": "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.51-adversarial-resource-probe",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.51",
+      "completed_run_count": 3,
+      "expected_evidence": "resource validation and retry probes",
+      "limited_dimensions": [],
+      "run_count": 3,
+      "source_path": "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.52-decision-load-evidence",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.52",
+      "completed_run_count": 9,
+      "expected_evidence": "turn-level pacing proxies",
+      "limited_dimensions": [],
+      "run_count": 9,
+      "source_path": "_workspace/experiments/v0.10.52-decision-load-evidence/results.json",
+      "status": "supported"
+    }
+  ]
+}

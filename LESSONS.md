@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Cross-Artifact Synthesis Should Preserve Source Boundaries
+
+- Context: Synthesizing the v0.10.50–v0.10.52 Phase 7 evidence chain for
+  v0.10.53.
+- Symptom: Different artifacts expose different trace shapes, so a synthesis can
+  accidentally imply a shared schema or stronger claim than the sources support.
+- Resolution: Validate each source using its declared fields, verify only the
+  shared control and matrix identities, and report continuity separately from
+  product-gap promotion.
+- Prevention: Do not normalize heterogeneous evidence into a generalized
+  analytics layer or infer causality, strategy quality, learning, or balance
+  from a complete continuity check.
+
 ## Turn-Level Traces Are Required for Pacing Proxies
 
 - Context: Auditing v0.10.50 observation-driven traces for v0.10.52.

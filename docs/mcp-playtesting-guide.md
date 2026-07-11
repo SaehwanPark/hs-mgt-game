@@ -626,3 +626,15 @@ comprehension, strategy-quality, balance, or runtime-tuning evidence.
 python3 _workspace/experiments/v0.10.52-decision-load-evidence/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.52-decision-load-evidence/results.json
 ```
+
+As of `v0.10.53`, the Phase 7 evidence synthesis checks source identity and
+declared coverage across the v0.10.50 observation capture, v0.10.51 resource
+probe, and v0.10.52 pacing audit. It verifies the v0.10.51 First-Time Executive
+control hashes and the shared nine-member profile/seed matrix without creating a
+generalized evidence schema or launching new sessions. Treat continuity as
+descriptive evidence only; runtime promotion remains deferred.
+
+```bash
+python3 _workspace/experiments/v0.10.53-evidence-synthesis/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.53-evidence-synthesis/results.json
+```
