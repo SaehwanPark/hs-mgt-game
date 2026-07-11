@@ -615,3 +615,14 @@ learning, or policy-validity evidence.
 python3 _workspace/experiments/v0.10.51-adversarial-resource-probe/run_sessions.py
 python3 -m json.tool _workspace/experiments/v0.10.51-adversarial-resource-probe/results.json
 ```
+
+As of `v0.10.52`, the decision-load audit reads the existing v0.10.50
+observation-driven traces and reports action concentration, active months,
+holds, multi-action months, and maximum actions per month. Treat these as
+descriptive pacing and action-overload proxies, not cognitive-load, human
+comprehension, strategy-quality, balance, or runtime-tuning evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.52-decision-load-evidence/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.52-decision-load-evidence/results.json
+```

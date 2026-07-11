@@ -1,0 +1,519 @@
+{
+  "batch_id": "v0.10.52-decision-load-evidence",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.52",
+  "complete_run_count": 9,
+  "limitations": [
+    "This audit is deterministic simulated-policy evidence, not human or classroom evidence.",
+    "Action concentration and active-month cadence are pacing and action-overload proxies, not cognitive-load measurements.",
+    "Profile trajectories and endpoint metrics do not establish strategy quality, causality, balance, winnability, or optimality.",
+    "Runtime and interface promotion remains deferred until a player-facing, instructor-facing, or domain-review gap is identified."
+  ],
+  "matrix_continuity": {
+    "expected_member_count": 9,
+    "observed_member_count": 9,
+    "status": "supported"
+  },
+  "profile_summaries": {
+    "access_expansion_advocate": {
+      "metrics": {
+        "action_commands": 10,
+        "active_months": 8,
+        "hold_commands": 22,
+        "max_actions_in_month": 2,
+        "multi_action_months": 2
+      },
+      "run_count": 3,
+      "seed_stable": true,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "status": "supported"
+    },
+    "first_time_executive": {
+      "metrics": {
+        "action_commands": 7,
+        "active_months": 7,
+        "hold_commands": 24,
+        "max_actions_in_month": 1,
+        "multi_action_months": 0
+      },
+      "run_count": 3,
+      "seed_stable": true,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "status": "supported"
+    },
+    "fiscal_steward": {
+      "metrics": {
+        "action_commands": 5,
+        "active_months": 5,
+        "hold_commands": 24,
+        "max_actions_in_month": 1,
+        "multi_action_months": 0
+      },
+      "run_count": 3,
+      "seed_stable": true,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "status": "supported"
+    }
+  },
+  "promotion_basis": "Turn-level decision-load signals are descriptive pacing proxies. No player-facing, instructor-facing, or domain-review gap justifies runtime promotion from this artifact.",
+  "runs": [
+    {
+      "action_commands": 5,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 12
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 18
+        }
+      ],
+      "active_months": 5,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 1,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "fiscal_steward",
+      "profile_name": "Fiscal Steward / hard / seed 42",
+      "retry_count": 0,
+      "seed": 42,
+      "source_path": "source run 1",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 10,
+      "action_counts_by_month": [
+        {
+          "actions": 2,
+          "turn": 1
+        },
+        {
+          "actions": 2,
+          "turn": 2
+        },
+        {
+          "actions": 1,
+          "turn": 5
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 11
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 15
+        },
+        {
+          "actions": 1,
+          "turn": 17
+        }
+      ],
+      "active_months": 8,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 22,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 2,
+      "multi_action_months": 2,
+      "profile_id": "access_expansion_advocate",
+      "profile_name": "Access Expansion Advocate / hard / seed 42",
+      "retry_count": 0,
+      "seed": 42,
+      "source_path": "source run 2",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 7,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 4
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 19
+        }
+      ],
+      "active_months": 7,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "first_time_executive",
+      "profile_name": "First-Time Executive / hard / seed 42",
+      "retry_count": 0,
+      "seed": 42,
+      "source_path": "source run 3",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 5,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 12
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 18
+        }
+      ],
+      "active_months": 5,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 1,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "fiscal_steward",
+      "profile_name": "Fiscal Steward / hard / seed 43",
+      "retry_count": 0,
+      "seed": 43,
+      "source_path": "source run 4",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 10,
+      "action_counts_by_month": [
+        {
+          "actions": 2,
+          "turn": 1
+        },
+        {
+          "actions": 2,
+          "turn": 2
+        },
+        {
+          "actions": 1,
+          "turn": 5
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 11
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 15
+        },
+        {
+          "actions": 1,
+          "turn": 17
+        }
+      ],
+      "active_months": 8,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 22,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 2,
+      "multi_action_months": 2,
+      "profile_id": "access_expansion_advocate",
+      "profile_name": "Access Expansion Advocate / hard / seed 43",
+      "retry_count": 0,
+      "seed": 43,
+      "source_path": "source run 5",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 7,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 4
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 19
+        }
+      ],
+      "active_months": 7,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "first_time_executive",
+      "profile_name": "First-Time Executive / hard / seed 43",
+      "retry_count": 0,
+      "seed": 43,
+      "source_path": "source run 6",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 5,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 12
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 18
+        }
+      ],
+      "active_months": 5,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 1,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "fiscal_steward",
+      "profile_name": "Fiscal Steward / hard / seed 44",
+      "retry_count": 0,
+      "seed": 44,
+      "source_path": "source run 7",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 10,
+      "action_counts_by_month": [
+        {
+          "actions": 2,
+          "turn": 1
+        },
+        {
+          "actions": 2,
+          "turn": 2
+        },
+        {
+          "actions": 1,
+          "turn": 5
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 11
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 15
+        },
+        {
+          "actions": 1,
+          "turn": 17
+        }
+      ],
+      "active_months": 8,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 22,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 2,
+      "multi_action_months": 2,
+      "profile_id": "access_expansion_advocate",
+      "profile_name": "Access Expansion Advocate / hard / seed 44",
+      "retry_count": 0,
+      "seed": 44,
+      "source_path": "source run 8",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    },
+    {
+      "action_commands": 7,
+      "action_counts_by_month": [
+        {
+          "actions": 1,
+          "turn": 1
+        },
+        {
+          "actions": 1,
+          "turn": 4
+        },
+        {
+          "actions": 1,
+          "turn": 6
+        },
+        {
+          "actions": 1,
+          "turn": 7
+        },
+        {
+          "actions": 1,
+          "turn": 13
+        },
+        {
+          "actions": 1,
+          "turn": 16
+        },
+        {
+          "actions": 1,
+          "turn": 19
+        }
+      ],
+      "active_months": 7,
+      "completion_status": "complete",
+      "difficulty": "hard",
+      "hold_commands": 24,
+      "issues": [],
+      "longest_active_streak": 2,
+      "max_actions_in_month": 1,
+      "multi_action_months": 0,
+      "profile_id": "first_time_executive",
+      "profile_name": "First-Time Executive / hard / seed 44",
+      "retry_count": 0,
+      "seed": 44,
+      "source_path": "source run 9",
+      "status": "supported",
+      "trace_count": 24,
+      "transition_count": 24,
+      "validation_failure_count": 0
+    }
+  ],
+  "runtime_promotion": "deferred",
+  "source_artifact": "_workspace/experiments/v0.10.50-teachability-observation-capture/results.json",
+  "source_batch_id": "v0.10.50-teachability-observation-capture",
+  "source_code_version": "0.10.50",
+  "source_run_count": 9,
+  "status": "supported",
+  "unexplained_gap_count": 0,
+  "unexplained_gaps": []
+}

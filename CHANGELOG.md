@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.52] - 2026-07-11
+
+### Added
+- Added a deterministic read-only decision-load and pacing-proxy audit over
+  the existing v0.10.50 observation-driven competitive traces.
+- Added focused coverage for turn-level action concentration, active months,
+  holds, multi-action months, matrix continuity, and deterministic rendering.
+
+### Changed
+- Exposed month/turn decision-load signals without changing runtime mechanics,
+  MCP schemas, scenarios, replay formats, scoring, balance, difficulty, or
+  debrief behavior.
+- Kept runtime promotion deferred because the artifact identifies no concrete
+  player-facing, instructor-facing, or domain-review gap.
+- Bumped the package version to `0.10.52`.
+
 ## [0.10.51] - 2026-07-11
 
 ### Added

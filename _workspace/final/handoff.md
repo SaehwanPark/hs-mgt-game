@@ -1,57 +1,51 @@
-# Final Handoff - Adversarial Resource-Probe Evidence
+# Final Handoff - Decision-Load and Pacing Proxy Evidence
 
 ## Summary
 
-Implemented the v0.10.51 Phase 7 adversarial resource-probe capture across
-Hard seeds 42, 43, and 44.
+Implemented the v0.10.52 Phase 7 read-only decision-load audit over the
+existing v0.10.50 observation-driven competitive traces.
 
 ## Changed Files
 
-- Added a wrapper-boundary MCP capture with actor-visible observations, legal
-  hints, fixed resource probes, structured validation errors, safe retries,
-  transitions, hashes, history, and debrief records.
-- Added focused Python tests for probe scheduling, legal-hint detection,
-  rejected-turn preservation, retry metadata, control continuity, and
-  deterministic rendering.
-- Added generated JSON and diagnostics for all three runs.
+- Added a standalone deterministic audit and focused Python tests.
+- Added generated JSON and Markdown reporting for action commands, active
+  months, holds, multi-action months, and maximum monthly action load.
 - Updated findings, SPEC, changelog/version, README, playtesting guidance,
-  lessons, request summary, domain QA, and project handoff state.
+  lessons, request summary, domain QA, and project state.
 - No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, balance,
   difficulty, or debrief behavior changed.
 
 ## Verification
 
-- Focused Python tests: 7 passed.
-- Full Python suite: 52 passed.
-- Rust tests: 285 passed; integration and doc tests passed.
+- Focused decision-load tests: 5 passed.
+- Full Python suite: 57 passed.
+- Rust tests and integration tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.
 - Automated stabilization and competitive playtests passed.
-- Generated JSON validation, byte-for-byte regeneration, and `git diff --check`
-  passed.
+- `git diff --check` passed.
+- Generated JSON and Markdown regenerated with identical SHA-256 hashes.
+- Source matrix: 9 complete runs, stable across seeds 42, 43, and 44.
 
 ## Domain QA
 
-Pass. All three simulated-policy runs completed 24 months with five expected
-validation failures and five safe retries each. Rejected commands did not
-advance the session turn. The capture confirms resource-guard compatibility
-without claiming exploit value, causality, strategy value, balance, winnability,
-human learning, calibration, or policy validity. Runtime promotion remains
-deferred.
+Pass. The audit preserves the distinction between actor-visible traceability,
+descriptive pacing proxies, human learning, strategy quality, and runtime
+promotion. No concrete unexplained product gap was identified.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/adversarial-resource-probe-v0.10.51`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/130
-- CI: GitHub `check` passed.
-- Review loop: three independent passes complete; no actionable findings.
-- Merge-ready: yes, pending normal merge decision.
+- Working branch: `feat/decision-load-evidence-v0.10.52`
+- PR URL: pending
+- CI: pending
+- Review loop: pending three independent passes
+- Merge-ready: no, pending verification and review
 
 ## Known Limits
 
-- The capture uses one deterministic adversarial simulated policy, one
-  campaign, one difficulty, and three seeds; it is not human or classroom
-  evidence.
-- It identifies no concrete unexplained gap and therefore promotes no runtime
-  or interface work.
+- The audit uses one campaign, one difficulty, three deterministic policies,
+  and three seeds.
+- Action concentration and active-month cadence are pacing/action-overload
+  proxies, not human cognitive-load or comprehension measures.
+- Runtime and interface promotion remain deferred.

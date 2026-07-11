@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Turn-Level Traces Are Required for Pacing Proxies
+
+- Context: Auditing v0.10.50 observation-driven traces for v0.10.52.
+- Symptom: Aggregate action totals hid whether commands were concentrated in
+  particular months or spread across the campaign.
+- Resolution: Derive action, hold, active-month, and multi-action metrics from
+  the recorded turn trace while preserving the raw source artifact.
+- Prevention: Treat temporal command concentration as a descriptive pacing or
+  action-overload proxy only; do not infer human cognitive burden or promote
+  runtime changes without player-facing, instructor-facing, or domain evidence.
+
 ## Expected Validation Failures Need Separate Run Status
 
 - Context: Probing cash, action-point, and concurrent-project limits for
