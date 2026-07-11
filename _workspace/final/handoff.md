@@ -41,9 +41,11 @@ educational-scoring boundary changed.
 - Working branch: `fix/asc-project-observation-v0.10.55`
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/134
 - Review loop: Pass 1 no actionable findings; Pass 2 no actionable findings;
-  Pass 3 found a Medium artifact-provenance mismatch, fixed in the follow-up
-  commit, with re-review pending.
-- Merge-ready: no, pending follow-up review and final CI/comment triage.
+  Pass 3 found a Medium artifact-provenance mismatch, fixed in `3bac37e`;
+  follow-up review found no actionable issues.
+- CI: GitHub `check` passed on the review-complete branch.
+- PR review disposition was posted on the PR comment thread.
+- Merge-ready: yes, pending the normal merge decision.
 
 ## Known Limits
 
