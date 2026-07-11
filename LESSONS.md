@@ -3,6 +3,21 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Synthesize Evidence Without Promoting Runtime Work
+
+- Context: Closing the v0.10.45–v0.10.48 competitive teachability evidence
+  chain.
+- Symptom: Several supported artifacts can look like cumulative justification
+  for a runtime change even when each artifact reports only traceability or
+  descriptive variation.
+- Resolution: Check source continuity and declared evidence dimensions in a
+  read-only synthesis, then route runtime promotion only from a concrete gap
+  that existing observations, histories, diagnostics, and debriefs cannot
+  explain.
+- Prevention: Keep source-specific trace shapes and evidence limits visible;
+  do not infer causality, strategy value, balance, winnability, or learning
+  from a complete chain.
+
 ## Separate Visible Monitor Response From Monitor Exposure
 
 - Context: Adding the v0.10.43 rival-information follow-through matrix.

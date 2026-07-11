@@ -2822,6 +2822,40 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Teachability-Gate Synthesis
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.49
+
+  Summary:
+  Synthesized the existing v0.10.45–v0.10.48 Phase 7 evidence chain to check
+  source continuity and whether a concrete unexplained teachability or debrief
+  gap justified runtime promotion.
+
+  Done:
+  - Added a deterministic read-only audit across four existing evidence
+    artifacts.
+  - Confirmed all source audits are supported and the v0.10.46–v0.10.48
+    profile/seed matrix remains continuous across 12 members.
+  - Confirmed no concrete unexplained player-facing, instructor-facing, or
+    domain-review gap was identified.
+  - Preserved the distinction between traceability, causality, strategy value,
+    balance, winnability, learning, and policy validity.
+
+  Deferred / Non-Goals:
+  - No new sessions, runtime simulation, command, scenario, replay, state-hash,
+    MCP schema, advisor market, difficulty, scoring, balance, or debrief change.
+  - No causal strategy comparison, human-learning, calibration, or policy-
+    validity claim.
+
+  Verification:
+  - All four source artifacts are supported and the 12-member matrix is
+    continuous.
+  - Audit JSON and Markdown regenerate deterministically.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.
