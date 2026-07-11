@@ -887,3 +887,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Do not promote difficulty values, scoring, balance, or runtime
   mechanics from completion alone. Require broader evidence or a concrete
   player-facing explanation gap before changing the simulation.
+
+## Semantic Command Coverage Must Follow Field Coverage
+
+- Context: Continuing Phase 7 evidence review after the v0.10.45 field-coverage
+  audit and v0.10.46 Expert completion matrix.
+- Symptom: A trace can contain command, history, and debrief fields while still
+  leaving the action-specific event/effect relationship untested.
+- Resolution: Added a read-only audit that normalizes each submitted command,
+  matches it to player-owned event/effect signatures or an explicit neutral
+  classification, and verifies the monthly `Player:` debrief record.
+- Prevention: Treat semantic command coverage as traceability evidence only;
+  do not convert matched event/effect text into causal, decision-quality,
+  learning, balance, or policy-validity claims.

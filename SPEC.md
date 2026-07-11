@@ -2762,6 +2762,36 @@ reconstructing it from the diff.
     playtests, and diff checks pass.
 
 
+- Feature: Command-to-Effect Explainability Evidence
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.47
+
+  Summary:
+  Added a bounded Phase 7 read-only audit connecting player commands in the
+  v0.10.46 Expert traces to action-specific transition evidence and monthly
+  debrief records.
+
+  Done:
+  - Reviewed all 12 existing Expert runs without launching new MCP sessions.
+  - Confirmed every command has action-specific event/effect evidence or an
+    explicit neutral classification, plus a preserved monthly player record.
+  - Added deterministic JSON/Markdown audit output and focused Python tests.
+  - Found no unmatched commands or concrete explainability gap in this matrix.
+
+  Deferred / Non-Goals:
+  - No runtime, command, scenario, replay, MCP schema, state-hash, difficulty,
+    scoring, balance, or debrief behavior change.
+  - No causal, decision-quality, human-learning, calibration, or policy-validity
+    claim.
+
+  Verification:
+  - All 12 source runs are represented and supported.
+  - Audit JSON and Markdown regenerate deterministically.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

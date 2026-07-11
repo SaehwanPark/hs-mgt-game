@@ -554,3 +554,14 @@ balance, human-learning, causal, or policy-validity evidence.
 python3 _workspace/experiments/v0.10.46-expert-clearability-evidence/run_sessions.py
 python3 -m json.tool _workspace/experiments/v0.10.46-expert-clearability-evidence/results.json
 ```
+
+As of `v0.10.47`, the command-to-effect explainability audit checks the same
+12 Expert traces for action-specific transition evidence and monthly `Player:`
+debrief records. It is a read-only traceability check: the complete result does
+not establish that commands caused endpoint metrics or that the debrief is
+clear to human learners.
+
+```bash
+python3 _workspace/experiments/v0.10.47-command-effect-explainability/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.47-command-effect-explainability/results.json
+```
