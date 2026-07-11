@@ -40,7 +40,7 @@ None for the scoped evidence slice.
 
 ## Verification Evidence
 
-- Seven focused explainability tests pass.
+- Eight focused explainability tests pass.
 - The source audit validates 60 runs and 1,440 transitions.
 - The v0.11.2 audit reproduces 140 capacity/demand, 269 operating-loss, and 60
   workforce-capacity signals.

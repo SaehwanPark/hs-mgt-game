@@ -21,7 +21,7 @@
 
 ## Verification
 
-- Seven focused explainability tests pass.
+- Eight focused explainability tests pass.
 - Source and v0.11.2 audits validate the documented matrix and counts.
 - Full Python/Rust tests, formatting, clippy, JSON validation, deterministic
   regeneration, and diff checks are required before handoff completion.
