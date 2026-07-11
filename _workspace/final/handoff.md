@@ -38,10 +38,11 @@ runtime promotion. No concrete unexplained product gap was identified.
 
 - Base branch: `main`
 - Working branch: `feat/evidence-synthesis-v0.10.53`
-- PR URL: pending
-- CI: pending
-- Review loop: pending three independent passes
-- Merge-ready: no, pending verification and review
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/132
+- CI: GitHub `check` passed.
+- Review loop: three independent passes complete; Pass 1 Medium fixed in
+  `680b10e`, Passes 2 and 3 had no actionable findings.
+- Merge-ready: yes, pending normal merge decision.
 
 ## Known Limits
 
