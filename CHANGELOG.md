@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.43] - 2026-07-10
+
+### Added
+- Added a deterministic Phase 7 MCP capture matrix comparing monitor-reactive,
+  monitor-ignoring, and unmonitored policies across seeds 42–44 and Hard/Expert
+  difficulty.
+- Added exact visible monitor-signal to next-turn response records and focused
+  parser/resource-guard tests.
+
+### Changed
+- Kept runtime mechanics, MCP schemas, replay formats, state hashes, scenarios,
+  difficulty, scoring, and balance unchanged.
+- Bumped the package version to `0.10.43`.
+
 ## [0.10.42] - 2026-07-10
 
 ### Added

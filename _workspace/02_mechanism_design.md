@@ -1,58 +1,62 @@
-# Mechanism Design - Consultant Advice Evidence Synthesis
+# Mechanism Design - Rival Information Follow-Through
 
 ## Goal and Roadmap Phase
 
-Phase 7 competitive teachability and validation synthesis following the generic
-consultant advice, traceability, and usage slices.
+Phase 7 competitive teachability and validation: determine whether a visible
+monitor signal can be traced to a later simulated-policy command.
 
 ## Slice Boundary
 
-- Compare existing v0.10.40 traceability and v0.10.41 usage artifacts.
-- Preserve the generic four-option, non-binding advice surface.
-- Record whether the evidence identifies a concrete limitation requiring a
-  future runtime slice.
-- Do not add actors, commands, state, effects, scenarios, or new runs.
+- Campaign: `competitive-regional-v1`, 24 months.
+- Matrix: seeds 42–44, Hard/Expert, three policy arms, 18 runs.
+- No runtime, command, schema, scenario, replay, or balance changes.
+
+## Actors and Authority
+
+- Human-led system: owns the submitted command stream.
+- Rival systems: existing AI actors; their behavior is unchanged.
+- Evidence policies: deterministic wrappers, not game actors.
 
 ## State, Beliefs, and Observations
 
-- Existing evidence remains at the MCP wrapper and debrief boundary.
-- The synthesis treats actor-visible options, committed history, and debrief
-  records as separate evidence surfaces.
-- No hidden state, belief, stochastic input, or transition behavior is changed.
+- True rival state remains inside the Rust simulation.
+- Policies consume only MCP observation text and legal resource hints.
+- Monitor intel is recorded with its source month and the observation turn in
+  which it becomes visible.
 
 ## Commands, Events, and Effects
 
-No commands, events, effects, payroll, actor utility, scoring, or balance
-semantics are introduced. The synthesis only reports existing artifact results.
+- Existing v0.10.37 monitor and baseline commands are reused.
+- Reactive responses use bounded visible-signal categories and safe resource
+  fallback to `hold`.
+- No new command or transition semantics are introduced.
 
 ## Strategic Interaction
 
-The artifacts do not add a strategic actor. Advice-aware and advice-ignoring
-policies are paired evidence controls; their different commands and endpoints
-must not be interpreted as a causal treatment effect.
+The reactive and ignoring policies submit different commands intentionally. The
+artifact therefore evaluates traceability and control hash behavior, not a
+causal treatment effect.
 
 ## Assumptions and Parameters
 
-- The v0.10.40 artifact contains 24 complete runs with exact option/history
-  continuity and debrief records.
-- The v0.10.41 artifact contains 24 paired runs with zero validation failures
-  and control hashes matching the prior artifact.
-- All advice wording, option categories, and policy wrappers remain gameplay
-  abstractions.
+- Monitor signals are classified from visible text as payer, capacity,
+  workforce, access, or other.
+- The response mapping is a deterministic gameplay abstraction.
+- Each completed run must contain 24 transitions and no validation failures.
 
 ## Educational Debrief Hooks
 
-- Explain what options were visible, what the simulated policy selected or
-  declined, what fallback occurred, and what the debrief retained.
-- Keep the explanation focused on inspectability and decision context rather
-  than adherence, quality, or learning scores.
+- Show what signal was visible, when it originated, and what command followed.
+- Distinguish a response, an ignored signal, and a safe fallback.
+- Preserve the existing debrief as evidence context, not a learning score.
 
 ## Determinism and Replay Notes
 
-- Re-run the existing v0.10.41 generator twice and require byte stability.
-- Do not alter replay artifacts, state hashes, rulesets, or transition logic.
+- Build the local MCP binary before capture.
+- Require stable JSON/diagnostic regeneration.
+- Verify monitor-ignoring and unmonitored state hashes match.
 
 ## Open Questions
 
-- A future artifact must identify a concrete generic-baseline limitation before
-  advisor roster mechanics are promoted.
+- Later human or instructor evidence may determine whether current traceability
+  wording is adequate; this slice does not answer that question.

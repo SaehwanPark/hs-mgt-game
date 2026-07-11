@@ -1,67 +1,53 @@
-# Evidence Map - Consultant Advice Synthesis
+# Evidence Map - Rival Information Follow-Through
 
 ## Scope
 
-Synthesize the existing generic consultant evidence chain before considering a
-future differentiated advisor market.
+Extend the v0.10.37 monitor-value evidence from exposure to next-turn
+decision traceability.
 
 ## Sources Reviewed
 
-- `docs/expansion-proposal-review.md`
-- `docs/playtest-findings-v0.10.40.md`
-- `docs/playtest-findings-v0.10.41.md`
-- `_workspace/experiments/v0.10.40-consultant-advice-evidence/results.json`
-- `_workspace/experiments/v0.10.41-consultant-advice-usage/results.json`
-- `docs/mcp-playtesting-guide.md`
-- Canonical project and harness documents listed in the request summary
+- Canonical project and harness documents.
+- `docs/playtest-findings-v0.10.37.md` and `docs/playtest-findings-v0.10.42.md`.
+- The v0.10.37 monitor capture and current MCP wrapper.
 
 ## Mechanisms and Institutions
 
-- Generic consultant options are a non-binding decision-support surface derived
-  from the player's actor-visible observation.
-- Advisory history preserves what was shown at the time of a committed
-  transition so later debriefs can distinguish available advice from submitted
-  action.
-- Advice-aware wrapper behavior is an evidence harness, not a new game actor or
-  a model of an advisor labor market.
+- The human-led health system receives delayed, partial rival information.
+- Monitoring is an observation-surface action; this slice does not change its
+  modeled cost or transition effects.
+- The three policy arms are evidence controls, not new strategic actors.
 
 ## Actor Incentives and Information
 
-- Human and simulated policies receive only their visible observations and
-  resource hints.
-- Advice-aware policies use visible cues and safe fallback; controls ignore the
-  advice and provide regression hashes.
-- No artifact establishes human preference, comprehension, advice quality, or
-  causal benefit.
+- Reactive policies inspect only the current actor-visible observation and
+  visible resource hints.
+- Monitor-ignoring policies receive the same monitor signals but deliberately
+  retain the baseline command stream.
+- Unmonitored controls do not receive monitor-intel lines.
 
 ## Assumptions
 
-- Four options remain a gameplay abstraction rather than a calibrated advisory
-  recommendation.
-- Repeated deterministic controls are regression evidence, not independent
-  human samples.
-- Endpoint differences caused by different policy commands are not causal
-  evidence.
+- Signal-to-command linkage is a gameplay/evidence abstraction, not a model of
+  human cognition or validated decision quality.
+- Repeated deterministic runs are regression evidence, not human samples.
+- Different reactive commands make endpoint comparisons non-causal.
 
 ## Unresolved Questions
 
-- Whether a human-facing generic advice surface is sufficiently useful remains
-  untested by human or classroom evidence.
-- Whether a future advisor roster would add educational value remains unresolved
-  because no concrete generic-baseline limitation has been observed.
+- Whether human or instructor-facing users find the signal-to-response trace
+  sufficiently clear remains untested.
+- Whether any future runtime information change is needed remains unresolved.
 
 ## Design Implications
 
-- Retain the generic baseline and its observation/history/debrief continuity.
-- Keep advisor-market runtime promotion gated on a concrete future need,
-  recurring-cost sensitivity, and symmetric human/AI information rules.
-- Route new development through evidence that identifies a specific
-  comprehension, strategy, pacing, or debrief limitation.
+- Preserve the current observation, history, debrief, and replay boundaries.
+- Report signal exposure, ignored signals, and next-turn responses separately.
+- Keep difficulty and monitor mechanics deferred absent a concrete gap.
 
 ## Risks
 
-- Selection, fallback, and alignment counts can be misread as advice uptake or
-  quality.
-- A polished evidence artifact can be mistaken for human-learning validation.
-- Expanding the advisor proposal before a concrete need would add speculative
-  actors, payroll, and balance semantics.
+- A deterministic reactive wrapper can be mistaken for human monitor use.
+- Reactive endpoint differences can be misread as causal monitor benefit.
+- Signal wording changes could silently break the parser; focused parser tests
+  and a complete matrix must expose that failure.

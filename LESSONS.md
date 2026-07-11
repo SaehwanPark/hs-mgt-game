@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Separate Visible Monitor Response From Monitor Exposure
+
+- Context: Adding the v0.10.43 rival-information follow-through matrix.
+- Symptom: A monitored and unmonitored comparison can show information
+  exposure without showing whether a later decision used that information.
+- Resolution: Pair monitor-reactive and monitor-ignoring arms with an
+  unmonitored control, and record the signal source month beside the exact next
+  turn command.
+- Prevention: Treat endpoint differences from intentionally different policy
+  commands as descriptive only; require actor-visible signal-to-command
+  traceability before discussing monitor value or debrief usefulness.
+
 ## Evidence Synthesis Must Close Promotion Gates
 
 - Context: Synthesizing the v0.10.39–v0.10.41 consultant-advice evidence chain.

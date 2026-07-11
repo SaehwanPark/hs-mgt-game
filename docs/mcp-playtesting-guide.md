@@ -142,6 +142,23 @@ python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/
 python3 -m json.tool _workspace/experiments/v0.10.41-consultant-advice-usage/results.json
 ```
 
+As of `v0.10.43`, the rival-information follow-through capture compares three
+deterministic policies across seeds 42–44 and Hard/Expert difficulty:
+monitor-reactive, monitor-ignoring, and unmonitored. It records whether a
+monitor signal in one actor-visible observation is followed by a next-turn
+simulated-policy response. Treat the records as signal-to-command traceability,
+not causal monitor value, human-learning, balance, or difficulty evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.43-rival-info-follow-through/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.43-rival-info-follow-through/results.json
+```
+
+The monitor-ignoring and unmonitored controls should retain matching hashes;
+reactive endpoint differences are expected because the response policy submits
+different commands. Keep runtime monitor and difficulty mechanics deferred
+unless later evidence identifies a concrete explanation or gameplay gap.
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
