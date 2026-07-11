@@ -1,0 +1,324 @@
+{
+  "artifacts": [
+    {
+      "batch_id": "v0.10.45-instructor-debrief-use-audit",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.45",
+      "completed_run_count": 70,
+      "dimensions": {
+        "explanation": {
+          "covered_runs": 4,
+          "description": "History or debrief material",
+          "eligible_runs": 4,
+          "name": "explanation",
+          "status": "supported"
+        },
+        "follow-through": {
+          "covered_runs": 4,
+          "description": "Operational action traces",
+          "eligible_runs": 4,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        "outcome": {
+          "covered_runs": 4,
+          "description": "Hashes, transitions, and final results",
+          "eligible_runs": 4,
+          "name": "outcome",
+          "status": "supported"
+        },
+        "response": {
+          "covered_runs": 4,
+          "description": "Submitted commands or policy responses",
+          "eligible_runs": 4,
+          "name": "response",
+          "status": "supported"
+        },
+        "visibility": {
+          "covered_runs": 4,
+          "description": "Actor-visible observations or reports",
+          "eligible_runs": 4,
+          "name": "visibility",
+          "status": "supported"
+        }
+      },
+      "expected_evidence": "instructor debrief-use coverage",
+      "limited_dimensions": [],
+      "run_count": 70,
+      "source_artifact": "_workspace/experiments/v0.10.45-instructor-debrief-use-audit/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.46-expert-clearability-evidence",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.46",
+      "completed_run_count": 12,
+      "dimensions": {
+        "clearability": {
+          "covered_runs": 12,
+          "description": "Completion of the full Expert campaign",
+          "eligible_runs": 12,
+          "name": "clearability",
+          "status": "supported"
+        },
+        "explanation": {
+          "covered_runs": 12,
+          "description": "History or debrief material",
+          "eligible_runs": 12,
+          "name": "explanation",
+          "status": "supported"
+        },
+        "follow-through": {
+          "covered_runs": 12,
+          "description": "Operational action traces",
+          "eligible_runs": 12,
+          "name": "follow-through",
+          "status": "supported"
+        },
+        "outcome": {
+          "covered_runs": 12,
+          "description": "Hashes, transitions, and final results",
+          "eligible_runs": 12,
+          "name": "outcome",
+          "status": "supported"
+        },
+        "response": {
+          "covered_runs": 12,
+          "description": "Submitted commands or policy responses",
+          "eligible_runs": 12,
+          "name": "response",
+          "status": "supported"
+        },
+        "visibility": {
+          "covered_runs": 12,
+          "description": "Actor-visible observations or reports",
+          "eligible_runs": 12,
+          "name": "visibility",
+          "status": "supported"
+        }
+      },
+      "expected_evidence": "Expert clearability",
+      "limited_dimensions": [],
+      "run_count": 12,
+      "source_artifact": "_workspace/experiments/v0.10.46-expert-clearability-evidence/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.47-command-effect-explainability",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.47",
+      "completed_run_count": 12,
+      "dimensions": {
+        "command-to-effect traceability": {
+          "covered_runs": 12,
+          "description": "Action-specific transition evidence and monthly debrief records",
+          "eligible_runs": 12,
+          "name": "command-to-effect traceability",
+          "status": "supported"
+        }
+      },
+      "expected_evidence": "command-to-effect traceability",
+      "limited_dimensions": [],
+      "run_count": 12,
+      "source_artifact": "_workspace/experiments/v0.10.47-command-effect-explainability/results.json",
+      "status": "supported"
+    },
+    {
+      "batch_id": "v0.10.48-strategy-diversity-evidence",
+      "campaign": "competitive-regional-v1",
+      "code_version": "0.10.48",
+      "completed_run_count": 12,
+      "dimensions": {
+        "strategy diversity": {
+          "covered_runs": 12,
+          "description": "Descriptive command-family variation and final tradeoff records",
+          "eligible_runs": 12,
+          "name": "strategy diversity",
+          "status": "supported"
+        }
+      },
+      "expected_evidence": "strategy diversity",
+      "limited_dimensions": [],
+      "run_count": 12,
+      "source_artifact": "_workspace/experiments/v0.10.48-strategy-diversity-evidence/results.json",
+      "status": "supported"
+    }
+  ],
+  "batch_id": "v0.10.49-teachability-gate-synthesis",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.49",
+  "completed_source_count": 4,
+  "limitations": [
+    "This synthesis is traceability and completion evidence, not causal evidence.",
+    "The source policies are deterministic simulated policies, not human or classroom evidence.",
+    "Endpoint differences and distinct command trajectories do not establish strategy value, dominance, or optimality.",
+    "Supported trace fields do not establish that an instructor or learner finds the debrief clear or educationally effective."
+  ],
+  "matrix_continuity": {
+    "expected_member_count": 12,
+    "source_matrices": {
+      "v0.10.46-expert-clearability-evidence": [
+        [
+          "Balanced Strategy",
+          42
+        ],
+        [
+          "Balanced Strategy",
+          43
+        ],
+        [
+          "Balanced Strategy",
+          44
+        ],
+        [
+          "Capacity Growth",
+          42
+        ],
+        [
+          "Capacity Growth",
+          43
+        ],
+        [
+          "Capacity Growth",
+          44
+        ],
+        [
+          "Fiscal Caution",
+          42
+        ],
+        [
+          "Fiscal Caution",
+          43
+        ],
+        [
+          "Fiscal Caution",
+          44
+        ],
+        [
+          "Naive First-Time",
+          42
+        ],
+        [
+          "Naive First-Time",
+          43
+        ],
+        [
+          "Naive First-Time",
+          44
+        ]
+      ],
+      "v0.10.47-command-effect-explainability": [
+        [
+          "Balanced Strategy",
+          42
+        ],
+        [
+          "Balanced Strategy",
+          43
+        ],
+        [
+          "Balanced Strategy",
+          44
+        ],
+        [
+          "Capacity Growth",
+          42
+        ],
+        [
+          "Capacity Growth",
+          43
+        ],
+        [
+          "Capacity Growth",
+          44
+        ],
+        [
+          "Fiscal Caution",
+          42
+        ],
+        [
+          "Fiscal Caution",
+          43
+        ],
+        [
+          "Fiscal Caution",
+          44
+        ],
+        [
+          "Naive First-Time",
+          42
+        ],
+        [
+          "Naive First-Time",
+          43
+        ],
+        [
+          "Naive First-Time",
+          44
+        ]
+      ],
+      "v0.10.48-strategy-diversity-evidence": [
+        [
+          "Balanced Strategy",
+          42
+        ],
+        [
+          "Balanced Strategy",
+          43
+        ],
+        [
+          "Balanced Strategy",
+          44
+        ],
+        [
+          "Capacity Growth",
+          42
+        ],
+        [
+          "Capacity Growth",
+          43
+        ],
+        [
+          "Capacity Growth",
+          44
+        ],
+        [
+          "Fiscal Caution",
+          42
+        ],
+        [
+          "Fiscal Caution",
+          43
+        ],
+        [
+          "Fiscal Caution",
+          44
+        ],
+        [
+          "Naive First-Time",
+          42
+        ],
+        [
+          "Naive First-Time",
+          43
+        ],
+        [
+          "Naive First-Time",
+          44
+        ]
+      ]
+    },
+    "status": "supported"
+  },
+  "promotion_basis": "No concrete unexplained player-facing, instructor-facing, or domain-review gap was found; traceability and endpoint differences are not causal evidence.",
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    "_workspace/experiments/v0.10.45-instructor-debrief-use-audit/results.json",
+    "_workspace/experiments/v0.10.46-expert-clearability-evidence/results.json",
+    "_workspace/experiments/v0.10.47-command-effect-explainability/results.json",
+    "_workspace/experiments/v0.10.48-strategy-diversity-evidence/results.json"
+  ],
+  "source_count": 4,
+  "unexplained_gap_count": 0,
+  "unexplained_gaps": []
+}

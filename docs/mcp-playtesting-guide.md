@@ -575,3 +575,13 @@ dominance, optimality, balance, or human learning.
 python3 _workspace/experiments/v0.10.48-strategy-diversity-evidence/run_audit.py
 python3 -m json.tool _workspace/experiments/v0.10.48-strategy-diversity-evidence/results.json
 ```
+
+As of `v0.10.49`, the teachability-gate synthesis checks continuity across the
+v0.10.45–v0.10.48 evidence chain. It confirms source coverage and the shared
+Expert profile/seed matrix without creating a generalized evidence schema or
+promoting runtime work.
+
+```bash
+python3 _workspace/experiments/v0.10.49-teachability-gate-synthesis/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.10.49-teachability-gate-synthesis/results.json
+```

@@ -1,4 +1,4 @@
-# Domain QA - Strategy-Diversity Evidence
+# Domain QA - Teachability-Gate Synthesis
 
 ## Status
 
@@ -6,20 +6,21 @@ pass
 
 ## Reviewed Inputs
 
-- The v0.10.48 audit runner, generated results, and focused tests.
-- `docs/playtest-findings-v0.10.48.md` and project handoff artifacts.
+- The v0.10.49 audit runner, generated results, and focused tests.
+- `docs/playtest-findings-v0.10.49.md` and project handoff artifacts.
 - `README.md`, `SPEC.md`, `docs/roadmap.md`, `docs/design_principles.md`, and
   the harness team specification.
 
 ## Findings
 
 - The slice remains within the Phase 7 teachability and validation gate.
-- The audit is read-only and does not alter deterministic transitions, replay,
-  MCP schemas, scenarios, difficulty, or scoring.
-- Command-family signatures and first-turn signals are separated from utility,
-  causal claims, dominance, balance, and educational evaluation.
-- Actor utility, endpoint outcomes, and educational evaluation remain distinct.
-- All 12 source runs are represented, supported, and retain final tradeoff data.
+- All four source artifacts are supported, and the v0.10.46–v0.10.48 matrix
+  contains all 12 expected profile/seed members.
+- The synthesis is read-only and does not alter deterministic transitions,
+  replay, MCP schemas, scenarios, difficulty, scoring, or debrief behavior.
+- Traceability, completion, strategy variation, actor utility, endpoint
+  outcomes, social welfare, and educational evaluation remain distinct.
+- No concrete unexplained runtime or interface gap was identified.
 
 ## Required Fixes
 
@@ -27,10 +28,12 @@ None.
 
 ## Residual Risks
 
-- Command-family normalization is bounded to the current competitive artifact
-  vocabulary.
-- Endpoint tradeoffs cannot establish command causality or optimality.
-- Simulated-policy traces do not establish human or classroom outcomes.
+- The source artifacts use different trace shapes and are compared only through
+  their declared evidence dimensions.
+- Deterministic simulated-policy traces do not establish human or classroom
+  outcomes.
+- Endpoint differences do not establish causality, strategy value, balance, or
+  policy validity.
 
 ## Verification Evidence
 

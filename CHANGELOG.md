@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.49] - 2026-07-11
+
+### Added
+- Added a deterministic read-only synthesis across the v0.10.45–v0.10.48
+  competitive teachability evidence chain.
+- Added focused coverage for source continuity, limited evidence, promotion
+  routing, and deterministic rendering.
+
+### Changed
+- Confirmed instructor debrief-use coverage, Expert clearability,
+  command-to-effect traceability, and descriptive strategy variation without
+  identifying a concrete unexplained runtime gap.
+- Kept runtime mechanics, scenarios, replay formats, MCP schemas, difficulty,
+  scoring, balance, and debrief behavior unchanged.
+- Bumped the package version to `0.10.49`.
+
 ## [0.10.48] - 2026-07-11
 
 ### Added

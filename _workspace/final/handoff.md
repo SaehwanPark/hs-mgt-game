@@ -1,18 +1,16 @@
-# Final Handoff - Strategy-Diversity Evidence
+# Final Handoff - Teachability-Gate Synthesis
 
 ## Summary
 
-Implemented the v0.10.48 Phase 7 strategy-diversity audit over the existing
-v0.10.46 Expert competitive evidence artifact.
+Implemented the v0.10.49 Phase 7 read-only synthesis across the existing
+v0.10.45–v0.10.48 competitive teachability evidence chain.
 
 ## Changed Files
 
-- Added a deterministic read-only audit, generated JSON/Markdown output, and
-  focused Python tests for command-family normalization, trajectories, hold
-  rates, first-turn signals, incomplete records, and final tradeoffs.
-- Reviewed all 12 source runs: four distinct profile trajectories, no common
-  first-turn family across every profile, and a final tradeoff record for every
-  run.
+- Added a deterministic source-coverage and matrix-continuity audit with JSON
+  and Markdown output.
+- Added focused Python tests for supported sources, limited evidence,
+  non-promotion routing, and deterministic rendering.
 - Updated findings, SPEC, changelog/version, README, playtesting guidance,
   lessons, evidence map, domain QA, and project handoff state.
 - No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, balance,
@@ -20,8 +18,8 @@ v0.10.46 Expert competitive evidence artifact.
 
 ## Verification
 
-- Focused Python tests: 5 passed.
-- Full Python suite: 33 passed.
+- Focused Python tests: 7 passed.
+- Full Python suite: 40 passed.
 - Rust tests: 285 passed; integration and doc tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.
@@ -30,27 +28,29 @@ v0.10.46 Expert competitive evidence artifact.
 
 ## Domain QA
 
-Pass. The result is descriptive simulated-policy evidence and does not claim
-causality, dominance, optimal strategy, balance, winnability, human learning,
+Pass. The synthesis confirms source coverage and matrix continuity without
+claiming causality, strategy value, balance, winnability, human learning,
 calibration, or policy validity. Runtime promotion remains deferred.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/strategy-diversity-evidence-v0.10.48`
-- Primary commits: `5542aae` implementation and `946921a` handoff correction
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/127
+- Working branch: `feat/teachability-gate-synthesis-v0.10.49`
+- Primary commits: `431e8a5` implementation, `a4aca26`/`40e8649` handoff
+  updates, `f442793`/`9289a84` review fixes, and `1a1765f` generated-output
+  refresh.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/128
 - CI: GitHub `check` passed.
-- Review loop: three independent passes plus the follow-up review complete.
-- Findings: no Critical, High, Medium, or Low actionable findings; Pass 2's
-  stale-handoff finding was fixed in `946921a`.
-- Review comments: no external review threads at handoff update time.
-- Merge-ready: yes; CI and review gates passed, pending the normal GitHub merge
-  decision.
+- Review loop: three independent passes plus follow-up complete.
+- Findings: no Critical or High findings; three Medium documentation/
+  robustness findings fixed. Review disposition posted on the PR.
+- Merge-ready: yes; pending the normal GitHub merge decision.
 
 ## Known Limits
 
-- The audit covers four deterministic policies, three seeds, one campaign, and
-  one difficulty.
-- Command families are descriptive groupings, not validated strategy classes.
-- Endpoint tradeoffs do not establish causal command effects or strategy value.
+- The synthesis relies on four existing source artifacts with different trace
+  shapes.
+- It identifies no concrete unexplained gap and therefore promotes no runtime
+  or interface work.
+- The evidence remains deterministic simulated-policy evidence, not human or
+  classroom evidence.
