@@ -43,10 +43,10 @@ deferred.
 
 - Base branch: `main`
 - Working branch: `feat/adversarial-resource-probe-v0.10.51`
-- PR URL: pending PR creation.
-- Review loop: required three independent passes plus follow-up after any
-  Critical or High fix.
-- Merge-ready: pending commit, CI, PR review, and comment triage.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/130
+- CI: GitHub `check` passed.
+- Review loop: three independent passes complete; no actionable findings.
+- Merge-ready: yes, pending normal merge decision.
 
 ## Known Limits
 
