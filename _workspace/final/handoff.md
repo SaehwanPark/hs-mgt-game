@@ -37,10 +37,11 @@ promotion. No concrete unexplained product gap was identified.
 
 - Base branch: `main`
 - Working branch: `feat/decision-load-evidence-v0.10.52`
-- PR URL: pending
-- CI: pending
-- Review loop: pending three independent passes
-- Merge-ready: no, pending verification and review
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/131
+- CI: GitHub `check` passed.
+- Review loop: three independent passes complete; Pass 1 Medium fixed, Pass 2
+  no actionable findings, and Pass 3 Low documentation issue fixed.
+- Merge-ready: yes, pending normal merge decision.
 
 ## Known Limits
 
