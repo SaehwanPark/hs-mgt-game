@@ -34,7 +34,12 @@ class TeachabilityObservationCaptureTests(unittest.TestCase):
       "Reported access index: 74",
       "Northlake Health rival report",
     ]
-    legal = ["Available resources: AP 3, cash 500, political capital 2"]
+    legal = [
+      "Available resources: AP 3, cash 500, political capital 2",
+      "hold",
+      "monitor target=northlake|summit depth=<1-3>",
+      "commit pledge_type=access|quality|workforce level=<1-5>",
+    ]
 
     outputs = [
       RUNNER.observation_policy(profile["id"], observation, legal, 1)
@@ -47,6 +52,17 @@ class TeachabilityObservationCaptureTests(unittest.TestCase):
       "monitor target=northlake depth=1; commit pledge_type=access level=1",
     )
     self.assertEqual(outputs[2], "monitor target=northlake depth=1; hold")
+
+  def test_policy_falls_back_when_a_visible_command_is_unavailable(self):
+    legal = ["hold"]
+    command = RUNNER.observation_policy(
+      "fiscal_steward",
+      ["Northlake Health rival report"],
+      legal,
+      1,
+    )
+
+    self.assertEqual(command, "hold")
 
   def test_run_record_preserves_trace_failures_and_retries(self):
     transition = {"state_hash": "abc123"}
@@ -80,6 +96,7 @@ class TeachabilityObservationCaptureTests(unittest.TestCase):
     self.assertEqual(first, second)
     self.assertEqual(artifact["batch_id"], "v0.10.50-teachability-observation-capture")
     self.assertEqual(artifact["difficulty"], "hard")
+    self.assertEqual(artifact["seed"], "42, 43, 44")
     self.assertEqual(artifact["runs"], [])
 
 

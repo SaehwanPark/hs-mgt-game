@@ -3,6 +3,7 @@
   "code_version": "0.10.50",
   "campaign": "competitive-regional-v1",
   "difficulty": "hard",
+  "seed": "42, 43, 44",
   "seeds": [
     42,
     43,

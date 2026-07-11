@@ -6,7 +6,7 @@ This diagnostic summary maps strategic actions, outcome distributions, and strat
 - **Code version:** 0.10.50
 - **Campaign:** competitive-regional-v1
 - **Difficulty:** hard
-- **Seed:** unknown
+- **Seed:** 42, 43, 44
 - **Evidence type:** deterministic observation-driven competitive MCP capture for teachability, command comprehension, follow-through, and debrief use
 
 ### Profile Outcomes

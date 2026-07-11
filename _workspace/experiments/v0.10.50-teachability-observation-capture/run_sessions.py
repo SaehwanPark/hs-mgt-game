@@ -84,8 +84,17 @@ def has_visible_rival(observation):
   return any(name in text for name in ("northlake", "summit", "valley"))
 
 
-def observation_policy(profile_id, observation, _legal_commands, turn):
-  """Return a command using only visible observation text and turn number."""
+def legal_or_hold(command, legal_commands):
+  legal_text = "\n".join(legal_commands).lower()
+  for part in command.split(";"):
+    verb = part.strip().split(maxsplit=1)[0].lower()
+    if not re.search(rf"(?:^|\n){re.escape(verb)}(?:\s|$)", legal_text):
+      return "hold"
+  return command
+
+
+def observation_policy(profile_id, observation, legal_commands, turn):
+  """Return a command using visible observations, legal hints, and turn number."""
   runway = cash_runway(observation)
   trust = workforce_trust(observation) or 0
   access = reported_access(observation)
@@ -93,43 +102,58 @@ def observation_policy(profile_id, observation, _legal_commands, turn):
 
   if profile_id == "fiscal_steward":
     if turn in (1, 6, 12, 18) and rival_visible:
-      return "monitor target=northlake depth=1; hold"
+      return legal_or_hold("monitor target=northlake depth=1; hold", legal_commands)
     if runway in ("strong", "stable") and turn in (2, 10):
-      return "recruit role=nurse headcount=2; hold"
+      return legal_or_hold("recruit role=nurse headcount=2; hold", legal_commands)
     if runway in ("strong", "stable") and turn == 4:
-      return "negotiate payer=carrier_a rate_posture=conservative; hold"
+      return legal_or_hold(
+        "negotiate payer=carrier_a rate_posture=conservative; hold",
+        legal_commands,
+      )
     if turn == 16:
-      return "commit pledge_type=quality level=1; hold"
-    return "hold"
+      return legal_or_hold("commit pledge_type=quality level=1; hold", legal_commands)
+    return legal_or_hold("hold", legal_commands)
 
   if profile_id == "access_expansion_advocate":
     if turn == 1:
-      return "monitor target=northlake depth=1; commit pledge_type=access level=1"
+      return legal_or_hold(
+        "monitor target=northlake depth=1; commit pledge_type=access level=1",
+        legal_commands,
+      )
     if turn == 2:
-      return "recruit role=nurse headcount=2; negotiate payer=medicaid rate_posture=neutral"
+      return legal_or_hold(
+        "recruit role=nurse headcount=2; negotiate payer=medicaid rate_posture=neutral",
+        legal_commands,
+      )
     if runway in ("strong", "stable") and access < 75 and turn in (3, 8):
-      return "invest domain=outpatient amount=2; hold"
+      return legal_or_hold("invest domain=outpatient amount=2; hold", legal_commands)
     if turn in (5, 11, 17) and rival_visible:
-      return "monitor target=summit depth=1; hold"
+      return legal_or_hold("monitor target=summit depth=1; hold", legal_commands)
     if trust < 55 and turn in (7, 13):
-      return "commit pledge_type=workforce level=1; hold"
+      return legal_or_hold("commit pledge_type=workforce level=1; hold", legal_commands)
     if turn == 15:
-      return "negotiate payer=medicare rate_posture=neutral; hold"
-    return "hold"
+      return legal_or_hold(
+        "negotiate payer=medicare rate_posture=neutral; hold",
+        legal_commands,
+      )
+    return legal_or_hold("hold", legal_commands)
 
   if turn in (1, 7, 13, 19) and rival_visible:
-    return "monitor target=northlake depth=1; hold"
+    return legal_or_hold("monitor target=northlake depth=1; hold", legal_commands)
   if trust < 55 and turn in (2, 9):
-    return "recruit role=nurse headcount=2; hold"
+    return legal_or_hold("recruit role=nurse headcount=2; hold", legal_commands)
   if trust < 60 and turn == 4:
-    return "commit pledge_type=workforce level=1; hold"
+    return legal_or_hold("commit pledge_type=workforce level=1; hold", legal_commands)
   if turn == 6:
-    return "negotiate payer=carrier_a rate_posture=neutral; hold"
+    return legal_or_hold(
+      "negotiate payer=carrier_a rate_posture=neutral; hold",
+      legal_commands,
+    )
   if runway in ("strong", "stable") and turn == 10:
-    return "invest domain=emergency amount=2; hold"
+    return legal_or_hold("invest domain=emergency amount=2; hold", legal_commands)
   if turn == 16:
-    return "commit pledge_type=quality level=1; hold"
-  return "hold"
+    return legal_or_hold("commit pledge_type=quality level=1; hold", legal_commands)
+  return legal_or_hold("hold", legal_commands)
 
 
 def final_hash(history):
@@ -254,6 +278,7 @@ def build_artifact(runs):
     "code_version": CODE_VERSION,
     "campaign": CAMPAIGN,
     "difficulty": DIFFICULTY,
+    "seed": ", ".join(str(seed) for seed in SEEDS),
     "seeds": SEEDS,
     "profiles": [profile["id"] for profile in PROFILES],
     "evidence_type": (

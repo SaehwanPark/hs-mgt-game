@@ -20,8 +20,8 @@ across three profiles and seeds 42, 43, and 44.
 
 ## Verification
 
-- Focused Python tests: 4 passed.
-- Full Python suite: 44 passed.
+- Focused Python tests: 5 passed.
+- Full Python suite: 45 passed.
 - Rust tests: 285 passed; integration and doc tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.
