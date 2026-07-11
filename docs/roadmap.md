@@ -617,6 +617,8 @@ regional market campaign (`competitive-regional-v1`) adds:
 - action-point, cash, and political capital economy (ADR-0005);
 - executive one-page report with four deterministic consultant recommendations
   generated from the actor-visible observation and retained for debrief;
+- reproducible MCP validation captures for consultant-option visibility and
+  debrief traceability across policies, seeds, and Normal/Hard fixtures;
 - partial observability of rival public actions;
 - bounded game-theory AI with inspectable rationales;
 - random monthly events and delayed effect queues;

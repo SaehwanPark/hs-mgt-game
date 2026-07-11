@@ -1,57 +1,47 @@
-# Final Handoff - Live Consultant Advice and Advisory History
+# Final Handoff - Consultant Advice Validation Evidence
 
 ## Summary
 
-Implemented the `v0.10.39` bounded teachability slice. Competitive genesis,
-CLI, and MCP observations now expose four deterministic, non-binding consultant
-options derived from the human actor's visible observation. Each committed
-competitive transition retains the exact options shown, and the debrief
-compares them with the player's submitted actions.
+Implemented the v0.10.40 Phase 7 evidence slice. A wrapper-boundary runner
+captured four existing deterministic policies across seeds 42-44 at Normal and
+Hard difficulty. All 24 sessions completed 24 months with zero validation
+failures. Every month exposed four consultant options, and every debrief
+retained the corresponding option titles and advisory comparison line.
 
-The advisor market remains deferred: no roster, payroll, hiring, firing,
-candidate pool, AI advice behavior, scenario schema, balance, or transition
-semantics were added.
+No Rust runtime, MCP DTO, command, scenario, ruleset, balance, state-hash,
+advisor-market, or learning behavior changed.
 
 ## Changed Files
 
-- Shared observation generation and competitive transition history now provide
-  live options and serialized advisory records.
-- MCP formatting, CLI fixture delegation, competitive debrief, persistence
-  tests, and the generated competitive history fixture were updated.
-- Competitive loop/report documentation, SDD artifacts, changelog, and package
-  metadata now describe `v0.10.39`.
+- Added the v0.10.40 capture runner, raw JSON artifact, and diagnostics report.
+- Added the v0.10.40 findings document and updated Phase 7 playtest, roadmap,
+  specification, changelog, version, README, and lessons records.
+- Updated the repository workspace input, evidence map, mechanism design, domain
+  QA, and final handoff artifacts.
 
 ## Verification
 
+- 24-run capture: 24/24 complete; 24/24 advice months; 24/24 debrief option
+  records; 24/24 comparison lines; zero validation failures.
+- `python3 -m unittest tests/test_playtest_wrapper.py`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test --all -- --test-threads=1` (285 tests pass)
-- `cargo test --lib competitive_session_save_round_trip_fields`
+- `cargo test --all -- --test-threads=1`
+- `cargo test --test golden_competitive_seed42 -- --test-threads=1`
 - `python3 scripts/run_automated_playtests.py`
 - `git diff --check`
-- Seed-42 competitive golden hashes remain unchanged.
 
 ## Domain QA
 
-Pass. The slice preserves actor-visible observation boundaries, deterministic
-transitions, immutable history, debrief traceability, and explicit deferral of
-the advisor market.
-
-## Known Limits
-
-- Advice wording is a design abstraction, not evidence of advice quality,
-  measured learning, policy validity, or calibrated outcomes.
-- Legacy competitive history payloads deserialize with an empty advisory list;
-  advice from those historical runs cannot be reconstructed.
+Pass. The evidence is limited to visibility, deterministic variation, accepted
+month coverage, and debrief traceability. It makes no advice-quality, learning,
+calibration, difficulty, balance, or advisor-market claim.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/consultant-advice-history-v0.10.39`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/117
-- CI: GitHub `check` passed.
-- Review loop: three independent passes complete.
-- Findings: Pass 1 none; Pass 2 one Medium stale-status documentation issue,
-  fixed in `569814a`; Pass 3 none.
-- Critical/High findings: none.
-- Merge-ready: yes, pending normal GitHub merge decision.
+- Working branch: `feat/consultant-advice-validation-v0.10.40`
+- PR: pending creation after final local verification
+- Review loop: pending three independent code-reviewer passes
+- Merge-ready: no, until PR creation, CI, review findings, and comment replies
+  are complete

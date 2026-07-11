@@ -1,4 +1,4 @@
-# Domain QA - Live Consultant Advice and Advisory History
+# Domain QA - Consultant Advice Validation Evidence
 
 ## Status
 
@@ -6,29 +6,23 @@ pass
 
 ## Reviewed Inputs
 
-- `SPEC.md` v0.10.39 completion entry and Future promotion rules.
-- `_workspace/00_input/request-summary.md` and
-  `_workspace/02_mechanism_design.md`.
-- `src/sim/observe_competitive.rs`, `src/competitive/month_loop.rs`,
-  `src/model/competitive_history.rs`, `src/mcp/session.rs`, and
-  `src/debrief/report.rs`.
+- `SPEC.md` v0.10.40 completion entry and Future promotion rules.
+- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
+  and `_workspace/02_mechanism_design.md`.
+- The capture runner, `diagnostics.md`, and `results.json`.
 - `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
   `docs/design_principles.md`, and the harness team specification.
 
 ## Findings
 
-- The slice is bounded to decision support and history; it does not promote the
-  deferred advisor market, payroll, hiring, or a new strategic actor.
-- Consultant options are generated from `PlayerObservation` only and retain
-  visible uncertainty and tradeoffs without hidden rival state or outcome
-  guarantees.
-- The exact options shown are stored on committed competitive transitions,
-  preserving append-only debrief traceability and serialized session recovery.
-- The deterministic transition core and state hash remain unchanged; advice is
-  captured before the month-start working-state mutation.
-- CLI and MCP observations use the same generator, while AI decision behavior
-  remains unchanged and symmetric future advisor-market requirements remain
-  deferred.
+- All 24 captured sessions completed 24 months with zero validation failures.
+- Every accepted month exposed four A-D options with non-empty tradeoffs and
+  visible-category variation.
+- Every debrief retained the corresponding option titles and comparison line.
+- The runner reads only MCP actor-visible observations and does not alter or
+  inspect hidden transition state.
+- No runtime, state-hash, difficulty, balance, or advisor-market conclusion is
+  asserted.
 
 ## Required Fixes
 
@@ -36,17 +30,18 @@ pass
 
 ## Residual Risks
 
-- Advice wording is a gameplay abstraction and has not been validated as an
-  educational intervention or calibrated policy guidance.
-- Competitive history JSON now contains an optional advisory field; legacy
-  payloads default to an empty list and therefore cannot reconstruct advice
-  that was never recorded.
+- Simulated-agent traces do not establish human learning or advice quality.
+- Normal/Hard fixture coverage does not establish difficulty balance or Expert
+  winnability.
+- Repeated policy/seed runs are not independent player samples.
 
 ## Verification Evidence
 
+- 24-run capture assertions: pass.
+- `python3 -m unittest tests/test_playtest_wrapper.py`
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test --all -- --test-threads=1` (285 tests pass)
-- `cargo test --lib competitive_session_save_round_trip_fields`
+- `cargo test --all -- --test-threads=1`
+- `cargo test --test golden_competitive_seed42 -- --test-threads=1`
 - `python3 scripts/run_automated_playtests.py`
 - `git diff --check`

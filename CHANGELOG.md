@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.40] - 2026-07-10
+
+### Added
+- Added a reproducible 24-run Normal/Hard MCP capture matrix across four
+  existing policies and seeds `42`, `43`, and `44`.
+- Added diagnostics verifying consultant-option visibility, visible-state
+  variation, accepted-transition coverage, and debrief retention.
+
+### Changed
+- Kept the capture at the MCP wrapper boundary with no runtime, ruleset,
+  balance, state-hash, advisor-market, or learning-claim changes.
+- Bumped the package version to `0.10.40`.
+
 ## [0.10.39] - 2026-07-10
 
 ### Added

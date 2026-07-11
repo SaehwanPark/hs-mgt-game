@@ -1,46 +1,37 @@
-# Evidence Map - Differentiated In-House Advisors
+# Evidence Map - Consultant Advice Validation
 
 ## Scope
 
-Evaluate whether an advice-only advisor roster is a credible future health-system
-strategy mechanism.
+Validate visibility and debrief traceability of the repaired deterministic
+consultant baseline. This slice adds no external policy claim or new mechanism.
 
-## Sources Reviewed
+## Evidence Sources
 
-- U.S. Bureau of Labor Statistics, Management Analysts Occupational Outlook
-  Handbook: <https://www.bls.gov/ooh/business-and-financial/management-analysts.htm>
-- Existing competitive report, observation, debrief, cash, and action documents.
+- v0.10.39 shared actor-visible advice generator and competitive history field.
+- Existing MCP wrapper capture boundary in `scripts/play_game.py`.
+- Existing deterministic policies in `scripts/run_automated_playtests.py`.
+- Current competitive debrief output and Phase 7 agent-playtest protocol.
 
-## Mechanisms and Institutions
+## Evidence Questions
 
-- Management analysts may work in-house, specialize by domain or industry, and
-  take on more responsibility with experience.
-- The direction for specialization, experience, and compensation is
-  literature-grounded. Monthly payroll, exact pay, a junior starter, a cap of
-  four, candidate arrival, layoffs, and firing rules are gameplay abstractions.
+- Does every accepted competitive month expose four non-binding options?
+- Do option signatures vary when visible cash, workforce, community, or
+  intelligence categories vary?
+- Does the debrief retain the exact titles shown before each command?
+- Do all matrix runs complete without validation failures or incomplete
+  histories?
 
-## Actor Incentives and Information
+## Interpretation Boundaries
 
-- Health-system leaders trade recurring cost and attention against broader or
-  more focused decision support.
-- Advisors may use only the employing system's observation; they cannot reveal
-  a rival's hidden state or forecast realized outcomes.
+- A captured option is evidence of interface visibility, not advice quality.
+- A submitted command beside an option supports discussion, not adherence
+  scoring or an optimal-action claim.
+- Normal/Hard coverage is a fixture matrix, not evidence of difficulty balance or
+  Expert winnability.
+- Repeated policy/seed runs are not independent human-player samples.
 
-## Unresolved Questions
+## Routing
 
-- The default 60-cash campaign lacks general recurring income, making any
-  positive integer monthly salary material over 24 months.
-- Evidence does not support a calibrated cap, salary schedule, or layoff rate.
-
-## Design Implications
-
-- Compare roster advice against repaired generic advice before promotion.
-- Treat shared candidate availability, outside arrivals, releases, and hiring
-  contention as visible mechanisms with explicit inputs and history.
-
-## Risks
-
-- A scalar capability ladder can create a dominant purchase.
-- Payroll or churn can overwhelm the existing cash/action economy.
-- Advisor quality can become hidden-state leakage unless constrained to framing
-  and coverage.
+Keep the advisor market, payroll, roster, hiring, firing, AI advice behavior, and
+runtime tuning deferred unless a later evidence or domain-review slice identifies
+a concrete need that this baseline cannot address.
