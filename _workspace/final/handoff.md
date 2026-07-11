@@ -2,31 +2,40 @@
 
 ## Result
 
-- Added a deterministic monthly operating loop from regional demand through staffed volume, unmet demand, revenue, cost, margin, and cash.
-- Exposed player-owned results in CLI/MCP observations and structured history while protecting rival-private operating facts.
-- Gave AI rivals private operating observations and bounded responses to unmet demand and losses.
-- Formalized AI-only Phase 7 test plays as the active budget-feasible path, with separate funding/approval required for any human evaluation.
-- Documented strategy archetypes, diagnostics, simultaneous-resolution hardening, governance simplification, and evidence limits.
+- Added the v0.11.1 five-lane AI operating-loop validation matrix.
+- Captured 60 complete competitive runs across seeds 42–44 and all four
+  difficulty configurations.
+- Audited 1,440 months of player-owned demand, volume, unmet demand, revenue,
+  cost, margin, cash, attribution, hashes, and debrief traces.
+- Kept runtime promotion deferred; no gameplay or interface change was made.
 
 ## Version Boundaries
 
-- Package: `0.11.0`
+- Package: `0.11.1`
 - Competitive ruleset: `competitive-ruleset-0.2.0`
 - Competitive state hash: `competitive-state-hash-v9`
-- Golden competitive seed-42 month-one hash: `61357596d8800592`
+- Seed-42 Normal hold-control month-one hash: `61357596d8800592`
 
 ## Verification
 
-- Rust formatting, clippy, 289 unit tests, integration tests, doc tests, 102 Python tests, replay fixture regeneration, and diff whitespace checks pass.
-- Three independent reviews completed. One High information-disclosure issue, two Medium issues, and two Low issues were fixed; Pass 1 had no initial findings.
+- 6 focused Python audit tests pass.
+- 60/60 matrix runs complete with zero validation failures.
+- 1,440/1,440 operating months pass accounting and actor-boundary checks.
+- 60/60 runs retain decision-to-debrief trace coverage.
+- Golden control, JSON validation, deterministic regeneration, and diff checks pass.
 
 ## Known Limits
 
-- Formulas are visible game abstractions, not calibrated clinical or financial units.
-- Payer-specific operations, shared demand diversion, and contested markets remain deferred.
-- AI runs validate reproducible gameplay traces and explanations, not human learning or enjoyment.
+- Findings are deterministic simulated-policy evidence, not human or classroom
+  evidence.
+- Losses, bottlenecks, threshold crossings, and command trajectories are not
+  causal, dominance, balance, calibration, or winnability proof.
+- Payer-specific operations, shared demand diversion, and contested markets
+  remain deferred.
 
-## Next Phase Dependency
+## PR Handoff
 
-Run the documented AI archetype matrix across named seeds and rival configurations, then use operating attribution to identify bottlenecks, dominated actions, weak variables, stable marginal effects, and threshold cliffs before tuning or adding content.
-
+- Base branch: `main`
+- Working branch: `feat/operating-loop-ai-validation-v0.11.1`
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/139
+- Review loop: three independent `code-reviewer` passes required before merge readiness.

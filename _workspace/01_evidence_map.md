@@ -2,41 +2,58 @@
 
 ## Scope
 
-Map the supplied review into a narrow operating-loop and AI-validation slice.
+Map the v0.11.0 operating-loop baseline into a bounded Phase 7 simulated-policy
+validation artifact without promoting runtime work.
 
 ## Sources Reviewed
 
-- User review; canonical docs; core-loop spec; ADR-0009; agent protocol; current competitive state, transition, staffing, observation, hash, and diagnostics.
+- Canonical project documents and the v0.11.0 final handoff.
+- Existing MCP observations, transition summaries, attribution strings, hashes,
+  debriefs, and operating-loop tests.
+- The agent-playtest protocol and current Phase 7 roadmap gate.
 
 ## Mechanisms and Institutions
 
-- Demand, capacity, staffing, payer pressure, quality, revenue, operating cost, and cash form one monthly organizational feedback loop.
-- Rival systems share demand and payer conditions but retain separate operations and finances.
+- Regional demand and market position determine system demand.
+- Effective staffed capacity determines treated and unmet demand.
+- Quality and payer pressure affect operating revenue.
+- Workforce and physical footprint determine operating cost.
+- Revenue minus cost changes cash available for later decisions.
 
 ## Actor Incentives and Information
 
-- Health systems balance runway, access, quality, workforce, legitimacy, and market position; organizational success is not social welfare.
-- Players see their realized volume, unmet demand, revenue, cost, and margin, not rivals' true internal state.
+- Policy lanes represent organizational priorities, not validated learner types.
+- The player receives only actor-visible observations and compact legal-resource
+  hints; rival private operating results remain excluded.
+- Organizational cash, access, workforce, legitimacy, and market position remain
+  distinct from social welfare and educational evaluation.
 
 ## Assumptions
 
-- Initial formulas are explicit integer game abstractions, not calibrated estimates.
-- Market share allocates demand; effective staffed capacity limits treated volume.
-- Quality and payer pressure modify revenue; workforce and footprint drive cost.
-- AI playtests are gameplay-validation evidence, not human educational evidence.
+- Integer operating values are gameplay abstractions, not calibrated dollars,
+  encounters, or forecasts.
+- Transition-summary operating effects are sufficient for player-owned monthly
+  accounting checks without adding an MCP state snapshot.
+- Seeds and difficulty levels provide descriptive variation, not causal controls.
 
 ## Unresolved Questions
 
-- Payer-specific rates, shared demand diversion, and contested hiring require later evidence and design.
-- AI runs cannot establish subjective enjoyment or actual learning.
+- Whether repeated losses or threshold crossings represent a real gameplay gap
+  requires controlled follow-up evidence.
+- No AI matrix can establish enjoyment, comprehension, learning, or policy validity.
+- Payer-specific volume, shared demand diversion, and contested hiring remain
+  deferred.
 
 ## Design Implications
 
-- Add operating facts to state, hashes, observations, summaries, diagnostics, and history.
-- Calculate each system from the same shared market state so batch order cannot confer advantage.
-- Use AI strategy archetypes across seeds and rivals to test differentiated trajectories.
+- Preserve the existing MCP and deterministic transition boundaries.
+- Parse only Riverside operating events/effects for player-owned attribution.
+- Label common actions, effect stability, and threshold crossings as candidates,
+  not dominance or causal marginal effects.
+- Keep runtime promotion deferred unless a concrete unexplained gap is found.
 
 ## Risks
 
-- False precision, unbalanced cash flow, and excessive release ceremony.
-
+- False precision from numerical ranges.
+- Over-reading repeated simulated-policy losses as balance evidence.
+- Confusing traceability and debrief coverage with educational effectiveness.

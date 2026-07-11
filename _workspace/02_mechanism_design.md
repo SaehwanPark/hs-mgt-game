@@ -2,44 +2,59 @@
 
 ## Goal and Roadmap Phase
 
-Phase 6 gameplay-maturity slice with Phase 7 AI validation: establish a complete operating consequence loop before expanding content.
+Phase 7 AI-agent gameplay validation of the v0.11.0 monthly operating loop.
 
 ## Slice Boundary
 
-- One monthly aggregate cycle per system: shared demand, market share, staffed capacity, treated/unmet demand, payer pressure, quality, revenue, workforce/footprint cost, margin, and cash.
-- Excludes payer-specific claims, debt, depreciation, acuity, new commands, and calibrated currency.
+- Competitive campaign only.
+- Five external scripted policy lanes × three seeds × four difficulty levels.
+- One 24-month run per matrix coordinate.
+- No transition, command, actor, scenario, MCP, or replay changes.
 
 ## Actors and Authority
 
-- Systems retain existing commands; operating income emerges from state and resolved actions.
+The existing Riverside player system and existing AI rival systems remain the
+only actors. The five policy lanes are test-client behavior, not runtime actor
+definitions.
 
 ## State, Beliefs, and Observations
 
-- True state stores the latest demand allocation, treated volume, unmet demand, revenue, cost, and margin.
-- The owner observes those results; rival internal facts remain hidden.
+The audit uses actor-visible observations, legal-resource hints, submitted
+commands, transition summaries, attributed effects, state hashes, and debriefs.
+It does not infer rival private operating state.
 
 ## Commands, Events, and Effects
 
-- No new command. After staffing allocation, resolution applies margin to cash, emits an event, and attributes the cash effect.
-- Negative margin is a modeled outcome, not a validation failure.
+The runner submits existing commands only. Each operating month must expose:
+demand, treated volume, unmet demand, revenue, cost, and cash-margin effect, plus
+the Riverside operations event. Invalid commands are not expected-policy evidence.
 
 ## Strategic Interaction
 
-- Capacity without workforce cannot produce full volume; quality supports revenue; payer pressure suppresses it; workforce and footprint impose cost.
+The lanes vary priorities among access, commercial negotiation, workforce,
+capital modernization, and coalition/legitimacy. Difficulty changes only the
+existing rival configuration and resource rules.
 
 ## Assumptions and Parameters
 
-- Integer formulas are versioned rules abstractions tuned for legibility, not empirical estimates.
+- `demand = treated + unmet`.
+- `margin = revenue - cost`.
+- Operating cash effect equals margin.
+- Observed effect ranges and threshold crossings are descriptive only.
 
 ## Educational Debrief Hooks
 
-- Compare capacity with treated volume and unmet demand; distinguish revenue, margin, and reinvestment capacity; identify the binding bottleneck.
+The artifact preserves month-level observation, action, transition, operating
+effect, hash, and debrief continuity so reviewers can inspect what was visible
+and what followed. It does not score decisions or learning.
 
 ## Determinism and Replay Notes
 
-- No randomness is added. Results are hashed and depend only on shared resolved market fields and each system's post-action state.
+The runner builds the local MCP binary, uses fixed seeds and policy order, writes
+timestamp-free sorted JSON, and separately checks the known seed-42 Normal
+hold-control hash.
 
 ## Open Questions
 
-- Future payer-specific rates and whether unmet demand should directly alter access.
-
+Loss and bottleneck patterns need a future controlled evidence slice before any
+runtime or balance change is considered.
