@@ -987,3 +987,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Treat common actions and distinct profiles as descriptive evidence
   only; require a concrete player, instructor, or domain-review gap before
   changing runtime, balance, difficulty, or scoring.
+
+## Pending Project Effects Must Have Observation Coverage
+
+- Context: Extending project-limit recovery evidence to an accepted ASC
+  project exposed a mismatch between the active-project counter and the human
+  observation text.
+- Symptom: `AscCapacity` consumed a concurrency slot and monthly draw but was
+  omitted from the `In-flight projects` label because the formatter had no
+  matching branch.
+- Resolution: Added the missing `AscCapacity` observation branch and a focused
+  Rust regression test, then reran the three-seed capture with state-hash
+  continuity checks.
+- Prevention: When adding a pending project effect, update actor-visible
+  formatters and test name, remaining duration, and monthly draw alongside
+  validation and transition coverage.

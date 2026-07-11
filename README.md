@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.10.54. It is intended for
+The current public milestone is a playable Rust prototype at v0.10.55. It is intended for
 inspection, playtesting, portfolio review, and future educational design work.
 It is not a calibrated policy forecast or a model of any real institution.
 

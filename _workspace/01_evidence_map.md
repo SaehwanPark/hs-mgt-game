@@ -1,62 +1,59 @@
-# Evidence Map - Project-Limit Recovery
+# Evidence Map - ASC Project Observation Coverage
 
 ## Scope
 
-Capture Phase 7 evidence about whether the current project-limit validation
-surface preserves enough decision-time and retrospective information to inspect
-a rejected third project and a safe retry. This slice does not add or
-reinterpret a health-policy mechanism.
+Validate the concrete observation gap found while extending the v0.10.54
+project-limit recovery capture: an accepted ASC project consumed a project
+slot and monthly draw but was absent from the actor-visible project label.
 
 ## Sources Reviewed
 
 - `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, and `SPEC.md`.
-- `docs/playtest-findings-v0.10.51.md` and its generated artifact.
+- `docs/playtest-findings-v0.10.54.md` and its generated artifact.
 - `docs/agent-playtest-protocol.md` and `docs/mcp-playtesting-guide.md`.
-- Current validation code, MCP error mapping, project help, observation, and
-  debrief wording.
+- `src/sim/observe_competitive.rs`, `src/model/competitive_world.rs`, and
+  project validation/transition code.
 
 ## Mechanisms and Institutions
 
-- The maximum of two concurrent projects is an existing game resource rule and
-  design abstraction, not a calibrated real-world constraint.
-- The capture observes validation, rejected-turn preservation, retry behavior,
-  actor-visible project state, and retrospective explanation.
-- It does not add an actor, policy, market, service line, or transition
-  mechanism.
+- Concurrent project limits, monthly project draws, and delayed capacity are
+  existing game abstractions, not calibrated real-world constraints.
+- The change corrects actor-visible reporting of an existing pending effect; it
+  does not add an actor, policy, service line, or transition mechanism.
 
 ## Actor Incentives and Information
 
-- The probe uses only the actor-visible MCP observation, legal command hints,
-  submitted commands, and returned validation payload.
-- Histories and debriefs are retrospective evidence and are not treated as
-  decision-time knowledge.
+- True state includes the pending `AscCapacity` effect and active-project
+  resource counters.
+- The human actor receives only the formatted observation, legal commands, and
+  later history/debrief output.
+- The missing label created an information mismatch: validation counted the
+  project while the observation did not name it.
 
 ## Assumptions
 
-- A stable error code and unchanged turn establish machine-readable recovery
-  traceability, not human comprehension.
-- Absence of a structured resource hint is a trace fact until repeated recovery
-  evidence identifies a concrete unexplained gap.
-- A successful `hold` retry establishes a safe continuation path, not that it is
-  the only or preferred player response.
+- `AscCapacity` should be represented consistently with other project-bearing
+  pending effects: name, remaining months, and monthly draw.
+- Matching v0.10.54 transition hashes demonstrates that this is an observation
+  correction rather than a simulation-rule change.
+- Observation visibility is traceability evidence, not proof of comprehension,
+  learning, balance, or strategy quality.
 
 ## Unresolved Questions
 
-- Whether the current error payload, observation, legal hints, and debrief make
-  the two-project limit sufficiently inspectable for agent or instructor review.
-- Whether any later evidence warrants a player-facing hint change.
+- Whether future evidence identifies a separate need for structured project
+  validation hints or broader project guidance.
 
 ## Design Implications
 
-- Preserve raw response fields and same-turn state rather than inferring missing
-  information from rendered prose.
-- Keep runtime, difficulty, balance, scoring, and debrief behavior unchanged.
-- If a concrete gap is found, record one separate follow-up slice instead of
-  implementing it in this evidence PR.
+- Preserve raw observations before and after rejected commands.
+- Keep true state, actor observation, transition history, and debrief evidence
+  distinct.
+- Keep project validation hints and runtime tuning deferred.
 
 ## Risks
 
-- Deterministic simulated-policy traces cannot establish human learning,
-  strategy value, balance, winnability, calibration, or policy validity.
-- Treating a known rule, successful fallback, or complete run as proof of
-  player clarity would overstate the evidence.
+- A deterministic three-seed capture cannot establish human learning,
+  calibration, winnability, or policy validity.
+- Adding only the missing observer branch avoids broadening into a generalized
+  project-observation abstraction.

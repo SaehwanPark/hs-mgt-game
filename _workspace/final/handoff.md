@@ -1,57 +1,53 @@
-# Final Handoff - Project-Limit Recovery Evidence Gate
+# Final Handoff - ASC Project Observation Coverage
 
 ## Summary
 
-Implemented the v0.10.54 deterministic project-limit recovery evidence gate
-across Hard seeds 42, 43, and 44.
+Implemented v0.10.55 actor-visible ASC project observation coverage. The
+existing `AscCapacity` pending effect now appears with its remaining duration
+and monthly draw, alongside other active projects.
 
 ## Changed Files
 
-- Added a direct MCP capture and eight focused Python tests.
-- Added generated JSON and Markdown reports for the accepted project setup,
-  rejected third project, same-turn state, safe retry, and debrief explanation.
-- Added findings, SPEC, changelog/version, README, playtesting guidance, lessons,
-  request summary, evidence map, domain QA, and project-state updates.
-- No Rust runtime, CLI, scenario, replay, MCP schema, state-hash, scoring,
-  balance, difficulty, or debrief behavior changed.
+- Updated `src/sim/observe_competitive.rs` and added a focused Rust regression.
+- Added the v0.10.55 deterministic three-seed capture, diagnostics, and five
+  focused Python tests.
+- Updated version, SPEC, changelog, README, lessons, playtesting guidance,
+  findings, and all required `_workspace` handoff artifacts.
 
 ## Verification
 
-- Focused project-limit tests: 8 passed.
-- Generated JSON and Markdown regenerated with matching SHA-256 hashes.
-- Full Python suite: 73 passed.
-- `cargo test --all -- --test-threads=1` passed.
-- `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo test --all -- --test-threads=1` passed: 286 Rust tests plus integration
+  and doctests.
+- Full Python suite passed: 78 tests.
+- Focused ASC evidence tests passed: 5 tests.
+- Three Hard runs completed 24 transitions each with expected project-limit
+  rejection and one safe retry.
+- v0.10.54 state-hash sequences matched exactly.
+- JSON and Markdown regenerated with stable SHA-256 hashes.
 - Automated stabilization and competitive playtests passed.
 - `git diff --check` passed.
-- Three Hard runs completed 24 transitions with one expected rejection and one
-  safe same-turn retry each.
-- Stable project-limit codes: 3/3; structured hints and resource fields: 0/3.
-- Debrief explanations of the two-project ceiling: 3/3.
 
 ## Domain QA
 
-Pass. The capture preserves actor-visible state and immutable transition
-history, labels the project ceiling as a game abstraction, and distinguishes
-recovery traceability from comprehension, learning, balance, and runtime
-promotion. No concrete unexplained product gap was identified.
+Pass. The change is limited to an existing actor-visible observation boundary.
+No true-state, transition, actor-utility, social-welfare, stochastic, or
+educational-scoring boundary changed.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/project-limit-recovery-evidence-v0.10.54`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/133
-- CI: GitHub `check` passed on review-complete commit `7f476e0`; this final
-  handoff-only update does not change implementation or evidence artifacts.
-- Review loop: three independent passes complete. Pass 1 Medium was fixed in
-  `ea7c654`; Pass 2 Low was fixed by resynchronizing the live PR body; Pass 3
-  found no actionable issues.
-- Merge-ready: yes, pending the normal merge decision.
+- Working branch: `fix/asc-project-observation-v0.10.55`
+- PR URL: pending creation
+- Review loop: pending three independent passes
+- Merge-ready: no, pending PR creation and review
 
 ## Known Limits
 
-- The capture is deterministic simulated-policy evidence, not human or classroom
-  evidence.
-- Safe retry does not establish human comprehension, causal strategy value,
+- The capture is deterministic simulated-policy evidence, not human or
+  classroom evidence.
+- Visibility and hash continuity do not establish comprehension, learning,
   balance, winnability, calibration, or policy validity.
-- Validation-hint and runtime promotion remain deferred.
+- Structured project validation hints and broader project guidance remain
+  deferred.

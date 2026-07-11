@@ -3015,6 +3015,39 @@ reconstructing it from the diff.
     automated playtests, and diff checks pass.
 
 
+- Feature: ASC Project Observation Coverage
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.55
+
+  Summary:
+  Corrected the actor-visible competitive project observation so accepted ASC
+  projects appear with remaining duration and monthly draw, while preserving
+  the existing project-limit recovery behavior.
+
+  Done:
+  - Added the missing `AscCapacity` observation formatter branch and focused
+    Rust regression test.
+  - Added a deterministic Hard capture across seeds 42, 43, and 44.
+  - Confirmed both active project labels, same-turn rejection preservation,
+    safe retry, debrief coverage, and v0.10.54 state-hash continuity.
+  - Bumped the package version to `0.10.55`.
+
+  Deferred / Non-Goals:
+  - No project-limit hint, resource payload, transition, MCP schema, balance,
+    difficulty, scoring, or broader project-guidance change.
+  - No human-comprehension, learning, calibration, winnability, or policy-
+    validity claim.
+
+  Verification:
+  - Five focused ASC observation evidence tests pass.
+  - Three Hard runs complete 24 transitions with expected project-limit
+    rejection and one safe retry each.
+  - State-hash sequences match the v0.10.54 source artifact.
+  - Full Python/Rust checks, formatting, clippy, automated playtests, and diff
+    checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

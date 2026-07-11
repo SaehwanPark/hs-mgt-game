@@ -352,6 +352,16 @@ pub fn in_flight_projects_label(world: &CompetitiveWorldState, human_id: u32) ->
             remaining, draw
           ));
         }
+        crate::model::PendingEffectKind::AscCapacity {
+          project_draw: Some(draw),
+          ..
+        } => {
+          let remaining = effect.resolve_month.saturating_sub(observation_month);
+          projects.push(format!(
+            "AscUnit ({} mos left, ${}k/mo draw)",
+            remaining, draw
+          ));
+        }
         crate::model::PendingEffectKind::TechnologyQuality {
           project_draw: Some(draw),
           ..
@@ -589,6 +599,33 @@ mod tests {
       observation
         .in_flight_projects
         .contains("EhrEpic (11 mos left, $10k/mo draw)")
+    );
+  }
+
+  #[test]
+  fn asc_project_appears_in_active_projects_observation() {
+    let mut world = genesis_competitive_world(Difficulty::Normal);
+
+    world.effect_queue.push(crate::model::PendingEffect {
+      id: 1,
+      system_id: 0,
+      enqueue_month: 1,
+      resolve_month: 8,
+      kind: crate::model::PendingEffectKind::AscCapacity {
+        capacity_delta: 6,
+        project_draw: Some(1),
+      },
+      summary: "Riverside Community Health: started asc_unit project (budget 6)".to_string(),
+    });
+
+    world.policy_calendar.month_index = 2;
+
+    let observation = observe_for_human(&world, None);
+
+    assert!(
+      observation
+        .in_flight_projects
+        .contains("AscUnit (6 mos left, $1k/mo draw)")
     );
   }
 }

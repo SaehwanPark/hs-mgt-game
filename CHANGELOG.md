@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.55] - 2026-07-11
+
+### Fixed
+- Exposed accepted ASC capital projects in the actor-visible `In-flight
+  projects` observation with remaining duration and monthly draw.
+
+### Added
+- Added deterministic Hard-seed evidence and focused coverage proving ASC
+  visibility while preserving project-limit rejection, retry, debrief, and
+  state-hash behavior.
+
+### Changed
+- Kept project validation hints, runtime tuning, and broader project guidance
+  deferred because the evidence supports a narrow observation correction only.
+- Bumped the package version to `0.10.55`.
+
 ## [0.10.54] - 2026-07-11
 
 ### Added

@@ -1,4 +1,4 @@
-# Domain QA - Project-Limit Recovery Evidence Gate
+# Domain QA - ASC Project Observation Coverage
 
 ## Status
 
@@ -6,28 +6,24 @@ pass
 
 ## Reviewed Inputs
 
-- `_workspace/experiments/v0.10.54-project-limit-recovery/run_sessions.py`.
-- Generated v0.10.54 JSON and Markdown outputs.
-- The v0.10.51 source artifact and current validation, observation, guidance,
-  and debrief surfaces.
-- `docs/playtest-findings-v0.10.54.md`, request summary, and evidence map.
-- `README.md`, `SPEC.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, and the harness team specification.
+- `src/sim/observe_competitive.rs` and the ASC observation regression test.
+- v0.10.55 deterministic capture and generated diagnostics.
+- v0.10.54 source capture and project-limit findings.
+- `docs/playtest-findings-v0.10.55.md`, `SPEC.md`, and the project handoffs.
+- `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, and the harness
+  team specification.
 
 ## Findings
 
-- The slice remains within the Phase 7 competitive teachability gate and does
-  not add or reinterpret a health-policy mechanism.
-- The two-project ceiling remains visibly labeled as a game abstraction rather
-  than an empirical health-system constraint.
-- The capture preserves actor-visible observations, legal hints, rejected-turn
-  state, explicit error fields, safe retries, immutable transition hashes, and
-  retrospective debriefs.
-- The current response exposes a stable code and plain-language limit without a
-  structured hint or resource field; the findings keep that as trace evidence,
-  not a human-comprehension or interface-defect claim.
-- No concrete unexplained runtime, command-surface, or debrief gap was found;
-  validation-hint and runtime promotion remain deferred.
+- The change is limited to an existing actor-visible observation boundary.
+- True pending effects, active-project counters, validation, and transition
+  history remain unchanged.
+- The capture verifies that accepted ASC projects are visible before and after
+  a rejected third-project command.
+- The project ceiling remains labeled as a game abstraction rather than an
+  empirical health-system constraint.
+- No new actor, policy mechanism, social-welfare claim, or educational scoring
+  rule was introduced.
 
 ## Required Fixes
 
@@ -35,19 +31,16 @@ None.
 
 ## Residual Risks
 
-- The runs are deterministic simulated-policy evidence, not human or classroom
-  evidence.
-- One campaign, one difficulty, and three seeds do not support general learning,
-  balance, winnability, or policy-validity claims.
-- Safe scripted recovery does not establish that a first-time player would
-  select the same response or understand every project constraint.
+- Deterministic simulated-policy traces are not human or classroom evidence.
+- Visibility and hash continuity do not establish comprehension, learning,
+  balance, winnability, calibration, or policy validity.
+- Structured project validation hints and broader guidance remain deferred.
 
 ## Verification Evidence
 
-- Focused project-limit tests: 8 passed.
-- Generated JSON and Markdown regenerate with matching SHA-256 hashes.
-- Full Python suite: 73 passed.
-- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and
-  `cargo test --all -- --test-threads=1` passed.
-- Automated stabilization and competitive playtests and `git diff --check`
-  passed.
+- Focused ASC evidence tests pass.
+- Three Hard runs complete 24 transitions with expected rejection and safe
+  retry behavior.
+- v0.10.54 state-hash sequences remain identical.
+- Full Python/Rust checks, formatting, clippy, automated playtests, and diff
+  checks pass.

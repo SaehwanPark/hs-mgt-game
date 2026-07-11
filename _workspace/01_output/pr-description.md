@@ -1,22 +1,22 @@
 ## Summary
 
-- Add the v0.10.54 project-limit recovery capture across Hard seeds 42–44.
-- Preserve the third-project rejection, unchanged actor-visible turn,
-  structured response shape, safe retry, transition history, and debrief.
-- Keep validation-hint and runtime promotion deferred because no unexplained
-  recovery failure was identified.
+- Expose accepted `AscUnit` projects in the actor-visible `In-flight projects`
+  observation.
+- Add deterministic v0.10.55 Hard-seed evidence across seeds 42–44.
+- Preserve the existing third-project rejection, same-turn state, safe retry,
+  debrief explanation, and v0.10.54 state hashes.
 
 ## Scope
 
-This is a bounded Phase 7 evidence change. It adds no runtime mechanics,
-commands, actors, scenarios, replay fields, state-hash fields, MCP schema
-changes, difficulty changes, scoring changes, balance changes, or debrief
-behavior changes.
+This is a bounded Phase 7 observability correction. It changes one existing
+observation formatter and adds focused tests/evidence. It does not change
+project limits, validation hints, transition rules, commands, scenarios,
+replay formats, MCP schemas, difficulty, scoring, balance, or debrief wording.
 
 ## Verification
 
-- Eight focused project-limit tests
-- Stable JSON and Markdown artifact regeneration
+- Five focused ASC observation evidence tests
+- Deterministic JSON and Markdown artifact regeneration
 - Full Python unit-test suite
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`

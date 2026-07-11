@@ -1,45 +1,45 @@
-# Request Summary - Project-Limit Recovery Evidence Gate
+# Request Summary - ASC Project Observation Coverage
 
 ## Scope
 
 - Roadmap phase: Phase 7 competitive teachability and validation gate.
-- Task type: development continuation and bounded MCP evidence capture.
-- Selected slice: test the actor-visible recovery surface for the existing
-  two-project concurrency limit across Hard seeds 42, 43, and 44.
-- Working branch: `feat/project-limit-recovery-evidence-v0.10.54`.
-- Version: 0.10.54.
+- Task type: development continuation and bounded observability bugfix.
+- Working branch: `fix/asc-project-observation-v0.10.55`.
+- Version: `0.10.55`.
+- Selected slice: expose accepted ASC projects in the existing actor-visible
+  `In-flight projects` observation and verify unchanged project-limit recovery.
 
 ## Sources
 
 - Canonical project documents and the harness team specification.
-- `SPEC.md` promotion rules and competitive teachability queue.
-- `_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json`.
-- `src/mcp/session.rs`, `src/model/resources.rs`, `src/cli/guidance.rs`, and
-  `src/debrief/report.rs` as inspect-only descriptions of current behavior.
+- `SPEC.md` Phase 7 queue and the v0.10.54 project-limit recovery handoff.
+- `_workspace/experiments/v0.10.54-project-limit-recovery/results.json`.
+- `src/sim/observe_competitive.rs` and its active-project observation tests.
 - `docs/agent-playtest-protocol.md` and `docs/mcp-playtesting-guide.md`.
 
 ## Expected Files
 
-- `_workspace/experiments/v0.10.54-project-limit-recovery/`
-- `tests/test_project_limit_recovery.py`
-- `docs/playtest-findings-v0.10.54.md`
-- Project state, evidence map, lessons, playtesting guidance, and handoff files.
+- `src/sim/observe_competitive.rs` and its focused Rust regression test.
+- `_workspace/experiments/v0.10.55-asc-project-observation/`.
+- `tests/test_asc_project_observation.py`.
+- Version, changelog, specification, findings, lessons, playtesting guidance,
+  and required `_workspace` handoff files.
 
 ## Validation Target
 
-- Confirm two project commands are accepted before a third project receives
-  `too_many_concurrent_projects` on the same turn.
-- Preserve the pre-failure observation, legal command hints, structured error
-  fields, post-failure observation, `hold` retry, transition hashes, and debrief.
-- Complete all three 24-month runs without unexpected validation failures.
+- Run `competitive-regional-v1` at Hard difficulty for seeds 42, 43, and 44.
+- Accept `clinic_network` and `asc_unit` projects before probing a third
+  project.
+- Require both `ClinicNetwork` and `AscUnit` details in the month-7
+  actor-visible observation and after the rejected third-project command.
+- Preserve `too_many_concurrent_projects`, same-turn state, one safe `hold`
+  retry, 24 transitions, debrief explanation, and v0.10.54 state hashes.
 - Regenerate JSON and Markdown deterministically.
-- Confirm no runtime, scenario, replay, MCP schema, state-hash, scoring,
-  balance, difficulty, or debrief behavior changes.
 
 ## Non-Goals
 
-- No validation-hint implementation, runtime tuning, new win condition, balance
-  pass, scoring redesign, command, actor, scenario, replay, or MCP change.
-- No generalized evidence schema, causal strategy comparison, dominance,
-  optimality, decision-quality, human-learning, calibration, or policy-validity
-  claim.
+- No project-limit hint, structured resource payload, transition, command,
+  scenario, replay, MCP schema, state-hash, scoring, balance, or difficulty
+  change.
+- No new service-line mechanism, generalized evidence schema, human-learning,
+  calibration, winnability, or policy-validity claim.
