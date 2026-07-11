@@ -39,4 +39,4 @@ None.
 - 286 Rust tests, formatting, and clippy pass.
 - Automated baseline playtests complete for 24 sessions.
 - Generated JSON and Markdown are byte-identical across regeneration.
-- JSON validation and `git diff --check` are required before handoff.
+- JSON validation and `git diff --check` pass.
