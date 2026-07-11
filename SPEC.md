@@ -2886,6 +2886,38 @@ reconstructing it from the diff.
     diff checks pass.
 
 
+- Feature: Adversarial Resource-Probe Evidence
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.10.51
+
+  Summary:
+  Added a deterministic Hard competitive capture that probes cash,
+  action-point, and concurrent-project validation boundaries across seeds 42,
+  43, and 44.
+
+  Done:
+  - Added expected-probe and retry metadata for all three complete 24-month
+    runs.
+  - Confirmed five expected validation failures and five safe retries per run;
+    rejected commands did not advance the session turn.
+  - Added deterministic diagnostics, findings, domain QA, project-state notes,
+    and PR handoff documentation.
+  - Found no concrete unexplained runtime, command-surface, or debrief gap.
+
+  Deferred / Non-Goals:
+  - No runtime, command, scenario, replay, state-hash, MCP schema, difficulty,
+    scoring, balance, or debrief behavior change.
+  - No exploit, human-learning, causal strategy, winnability, calibration, or
+    policy-validity claim.
+
+  Verification:
+  - Three Hard runs completed 24 transitions with expected validation codes.
+  - Generated JSON and diagnostics regenerate deterministically.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, and diff checks pass.
+
+
 ## Present
 
 None. All scheduled features are complete.

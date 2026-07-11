@@ -601,3 +601,17 @@ python3 scripts/diagnose_runs.py \
   --output _workspace/experiments/v0.10.50-teachability-observation-capture/diagnostics.md
 python3 -m json.tool _workspace/experiments/v0.10.50-teachability-observation-capture/results.json
 ```
+
+As of `v0.10.51`, the adversarial resource-probe capture submits fixed
+observation-driven probes for cash, monthly action points, and concurrent
+projects at Hard difficulty across seeds 42, 43, and 44. Expected validation
+failures are separated from unexpected failures; each rejected probe is
+followed by a safe `hold` retry, and the wrapper confirms that the rejected
+submission did not advance the session. Treat this as deterministic resource
+guard and traceability evidence, not exploit, balance, winnability, human
+learning, or policy-validity evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.51-adversarial-resource-probe/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.51-adversarial-resource-probe/results.json
+```
