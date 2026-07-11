@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.47] - 2026-07-11
+
+### Added
+- Added a deterministic read-only command-to-effect explainability audit over
+  the v0.10.46 Expert evidence artifact.
+- Added focused coverage for command parsing, action signatures, neutral holds,
+  unmatched commands, incomplete runs, and deterministic rendering.
+
+### Changed
+- Confirmed all 12 reviewed Expert runs retain action-specific transition
+  evidence and monthly debrief command records, with no unmatched commands.
+- Kept the result bounded to traceability evidence; it does not establish
+  causality, decision quality, learning, balance, or policy validity.
+- Bumped the package version to `0.10.47`.
+
 ## [0.10.46] - 2026-07-10
 
 ### Added

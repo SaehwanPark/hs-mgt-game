@@ -1,0 +1,4855 @@
+{
+  "batch_id": "v0.10.47-command-effect-explainability",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.10.47",
+  "completed_run_count": 12,
+  "limitations": [
+    "Coverage is traceability evidence, not causal evidence.",
+    "The source contains deterministic simulated-policy traces, not human or classroom sessions.",
+    "Aggregated transition effects do not prove that a command caused an endpoint metric.",
+    "A supported trace does not establish decision quality, balance, learning, or policy validity."
+  ],
+  "run_count": 12,
+  "runs": [
+    {
+      "command_count": 43,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=infusion amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=psychiatric amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 19,
+      "profile_name": "Fiscal Caution",
+      "seed": 42,
+      "supported_command_count": 43,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 43,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=infusion amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=psychiatric amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 19,
+      "profile_name": "Fiscal Caution",
+      "seed": 43,
+      "supported_command_count": 43,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 43,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=infusion amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=psychiatric amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 19,
+      "profile_name": "Fiscal Caution",
+      "seed": 44,
+      "supported_command_count": 43,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 44,
+      "commands": [
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "invest"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=aggressive",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "invest domain=emergency amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=icu amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=oncology amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 23,
+      "profile_name": "Capacity Growth",
+      "seed": 42,
+      "supported_command_count": 44,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 44,
+      "commands": [
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "invest"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=aggressive",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "invest domain=emergency amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=icu amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=oncology amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 23,
+      "profile_name": "Capacity Growth",
+      "seed": 43,
+      "supported_command_count": 44,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 44,
+      "commands": [
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "invest"
+        },
+        {
+          "command": "recruit role=nurse headcount=2",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "recruit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=aggressive",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "invest domain=emergency amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=icu amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=oncology amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 23,
+      "profile_name": "Capacity Growth",
+      "seed": 44,
+      "supported_command_count": 44,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 47,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "recruit role=nurse headcount=4",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "recruit"
+        },
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "invest"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "commit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=obstetrics amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=conservative",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 25,
+      "profile_name": "Balanced Strategy",
+      "seed": 42,
+      "supported_command_count": 47,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 47,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "recruit role=nurse headcount=4",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "recruit"
+        },
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "invest"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "commit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=obstetrics amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=conservative",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 25,
+      "profile_name": "Balanced Strategy",
+      "seed": 43,
+      "supported_command_count": 47,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 47,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "recruit role=nurse headcount=4",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "recruit"
+        },
+        {
+          "command": "invest domain=beds amount=15",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "invest"
+        },
+        {
+          "command": "commit pledge_type=access level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "commit"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=8",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=2",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=obstetrics amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=cardiology amount=6",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_b rate_posture=conservative",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=carrier_a rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 25,
+      "profile_name": "Balanced Strategy",
+      "seed": 44,
+      "supported_command_count": 47,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 39,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 15,
+      "profile_name": "Naive First-Time",
+      "seed": 42,
+      "supported_command_count": 39,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 39,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 15,
+      "profile_name": "Naive First-Time",
+      "seed": 43,
+      "supported_command_count": 39,
+      "unsupported_commands": []
+    },
+    {
+      "command_count": 39,
+      "commands": [
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 1,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 2,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 3,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=nurse headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 4,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 5,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=emergency amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 6,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 7,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 8,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=workforce level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 9,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicaid rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 10,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 11,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=outpatient amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 12,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=northlake depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 13,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 14,
+          "verb": "hold"
+        },
+        {
+          "command": "recruit role=admin headcount=1",
+          "debrief_evidence": true,
+          "reason": "player recruitment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "recruit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 15,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=quality level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 16,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 17,
+          "verb": "hold"
+        },
+        {
+          "command": "negotiate payer=medicare rate_posture=neutral",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "negotiate"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 18,
+          "verb": "hold"
+        },
+        {
+          "command": "monitor target=summit depth=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "monitor"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 19,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 20,
+          "verb": "hold"
+        },
+        {
+          "command": "invest domain=asc amount=5",
+          "debrief_evidence": true,
+          "reason": "player investment event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "invest"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 21,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 22,
+          "verb": "hold"
+        },
+        {
+          "command": "commit pledge_type=access level=1",
+          "debrief_evidence": true,
+          "reason": "action-specific event/effect",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "commit"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 23,
+          "verb": "hold"
+        },
+        {
+          "command": "hold",
+          "debrief_evidence": true,
+          "reason": "neutral action; no effect required",
+          "status": "supported",
+          "transition_evidence": true,
+          "turn": 24,
+          "verb": "hold"
+        }
+      ],
+      "completion_status": "complete",
+      "coverage_status": "supported",
+      "deferred_follow_through": [],
+      "missing_debrief_commands": [],
+      "non_hold_command_count": 15,
+      "profile_name": "Naive First-Time",
+      "seed": 44,
+      "supported_command_count": 39,
+      "unsupported_commands": []
+    }
+  ],
+  "source_artifact": "_workspace/experiments/v0.10.46-expert-clearability-evidence/results.json"
+}
