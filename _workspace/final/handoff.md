@@ -17,8 +17,8 @@ existing v0.10.50 observation-driven competitive traces.
 
 ## Verification
 
-- Focused decision-load tests: 5 passed.
-- Full Python suite: 57 passed.
+- Focused decision-load tests: 6 passed.
+- Full Python suite: 58 passed.
 - Rust tests and integration tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.

@@ -39,8 +39,8 @@ None.
 
 ## Verification Evidence
 
-- Focused decision-load tests: 5 passed.
-- Full Python suite: 57 passed.
+- Focused decision-load tests: 6 passed.
+- Full Python suite: 58 passed.
 - Rust tests, formatting, Clippy, automated stabilization and competitive
   playtests, and `git diff --check` passed.
 - Generated JSON and Markdown regenerate deterministically.
