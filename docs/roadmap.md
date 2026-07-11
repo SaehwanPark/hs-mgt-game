@@ -842,9 +842,9 @@ They should capture campaign, seed, difficulty, agent profile or prompt,
 actor-visible observations, submitted commands, validation failures, histories,
 and debriefs.
 
-## 7.6 Educational Evaluation
+## 7.6 Educational Artifact and Debrief Review
 
-Evaluate whether the game artifacts support the intended educational reasoning:
+Evaluate whether the game artifacts make the intended reasoning inspectable:
 
 - recognizing stakeholder incentives;
 - identifying second-order effects;
@@ -917,8 +917,8 @@ Current proposal-review candidates:
 - No dominant exploit trivializes the campaign.
 - AI-agent playtest evidence shows major causal pathways are inspectable from
   actor-visible observations and debriefs.
-- There is evidence that the game artifacts support the stated learning
-  objectives, without claiming measured human learning outcomes.
+- Game artifacts make the stated reasoning objectives inspectable. Evidence of
+  learner attainment remains deferred to a separately funded human evaluation.
 - Future expansion candidates have explicit review artifacts, evidence limits,
   non-goals, and promotion gates before runtime implementation.
 

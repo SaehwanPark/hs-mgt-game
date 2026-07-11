@@ -404,15 +404,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 29/29 demand units; operating revenue 50, cost 43, margin +7"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 23/23 demand units; operating revenue 40, cost 34, margin +6"
         }
       ],
       "effects": [
@@ -447,19 +439,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 42
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 8
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 7
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 6
         }
       ],
       "next": {
@@ -922,15 +929,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 51, cost 43, margin +8"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 24/24 demand units; operating revenue 42, cost 34, margin +8"
         }
       ],
       "effects": [
@@ -960,6 +959,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 42
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 8
@@ -968,16 +992,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 8
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 8
         }
       ],
       "next": {
@@ -1450,15 +1464,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 53, cost 44, margin +9"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 25/25 demand units; operating revenue 44, cost 34, margin +10"
         }
       ],
       "effects": [
@@ -1488,6 +1494,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 41
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 7
@@ -1496,16 +1527,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 9
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 10
         }
       ],
       "next": {
@@ -1988,19 +2009,11 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 52, cost 44, margin +8"
-        },
-        {
-          "actor": "operations",
           "description": "Northlake Health: understaffing reduces operational capacity (-1 to access/quality; effective/physical: 285/297)"
         },
         {
           "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 26/26 demand units; operating revenue 45, cost 34, margin +11"
         }
       ],
       "effects": [
@@ -2025,6 +2038,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 41
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 7
@@ -2035,11 +2073,6 @@
           "delta": -3
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 8
-        },
-        {
           "source": "staffing capacity constraint",
           "metric": "access_index",
           "delta": -1
@@ -2048,11 +2081,6 @@
           "source": "staffing capacity constraint",
           "metric": "quality_index",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 11
         }
       ],
       "next": {
@@ -2545,15 +2573,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 52, cost 44, margin +8"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 27/27 demand units; operating revenue 46, cost 34, margin +12"
         }
       ],
       "effects": [
@@ -2578,6 +2598,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 41
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 7
@@ -2586,16 +2631,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 8
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 12
         }
       ],
       "next": {
@@ -3094,15 +3129,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 51, cost 45, margin +6"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/28 demand units; operating revenue 48, cost 34, margin +14"
         }
       ],
       "effects": [
@@ -3127,19 +3154,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 41
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 7
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 6
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 14
         }
       ],
       "next": {
@@ -3620,15 +3662,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 50, cost 45, margin +5"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/28 demand units; operating revenue 48, cost 34, margin +14"
         }
       ],
       "effects": [
@@ -3653,19 +3687,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 40
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 6
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 5
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 14
         }
       ],
       "next": {
@@ -4146,15 +4195,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 49, cost 45, margin +4"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/29 demand units; operating revenue 47, cost 34, margin +13"
         }
       ],
       "effects": [
@@ -4179,19 +4220,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 40
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 6
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 4
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 13
         }
       ],
       "next": {
@@ -4672,15 +4728,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 32/32 demand units; operating revenue 52, cost 45, margin +7"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/31 demand units; operating revenue 47, cost 34, margin +13"
         }
       ],
       "effects": [
@@ -4710,19 +4758,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 40
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 6
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 7
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 13
         }
       ],
       "next": {
@@ -5192,7 +5255,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 67). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -5235,15 +5298,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 32/32 demand units; operating revenue 52, cost 45, margin +7"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/32 demand units; operating revenue 47, cost 34, margin +13"
         }
       ],
       "effects": [
@@ -5268,6 +5323,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 40
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 6
@@ -5276,16 +5356,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 7
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 13
         }
       ],
       "next": {
@@ -5779,7 +5849,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Admin staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Admin staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -5818,15 +5888,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 32/32 demand units; operating revenue 52, cost 45, margin +7"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/33 demand units; operating revenue 46, cost 34, margin +12"
         }
       ],
       "effects": [
@@ -5851,6 +5913,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 39
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 5
@@ -5859,16 +5946,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 7
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 12
         }
       ],
       "next": {
@@ -6371,7 +6448,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 55). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 65). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -6418,15 +6495,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 50, cost 46, margin +4"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/33 demand units; operating revenue 46, cost 34, margin +12"
         }
       ],
       "effects": [
@@ -6451,19 +6520,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 37
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 3
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 4
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 12
         }
       ],
       "next": {
@@ -6974,15 +7058,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 48, cost 46, margin +2"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/33 demand units; operating revenue 46, cost 34, margin +12"
         }
       ],
       "effects": [
@@ -7007,19 +7083,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 2
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 22
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 22
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 36
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 12
         }
       ],
       "next": {
@@ -7530,15 +7621,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 28/28 demand units; operating revenue 44, cost 46, margin -2"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/32 demand units; operating revenue 46, cost 34, margin +12"
         }
       ],
       "effects": [
@@ -7563,19 +7646,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 21
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 21
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
           "delta": 0
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": -2
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 34
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
-          "delta": 12
+          "delta": 0
         }
       ],
       "next": {
@@ -8086,15 +8184,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 47, cost 46, margin +1"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/34 demand units; operating revenue 45, cost 34, margin +11"
         }
       ],
       "effects": [
@@ -8119,19 +8209,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 1
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 22
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 22
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 35
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 11
         }
       ],
       "next": {
@@ -8642,15 +8747,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 48, cost 46, margin +2"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/36 demand units; operating revenue 45, cost 34, margin +11"
         }
       ],
       "effects": [
@@ -8675,19 +8772,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 37
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 3
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 11
         }
       ],
       "next": {
@@ -9198,15 +9310,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 48, cost 46, margin +2"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/37 demand units; operating revenue 45, cost 34, margin +11"
         }
       ],
       "effects": [
@@ -9231,19 +9335,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 2
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 36
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 11
         }
       ],
       "next": {
@@ -9754,15 +9873,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 48, cost 46, margin +2"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/39 demand units; operating revenue 45, cost 34, margin +11"
         }
       ],
       "effects": [
@@ -9787,19 +9898,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 2
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 36
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 11
         }
       ],
       "next": {
@@ -10310,15 +10436,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 32/32 demand units; operating revenue 49, cost 46, margin +3"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/41 demand units; operating revenue 44, cost 34, margin +10"
         }
       ],
       "effects": [
@@ -10343,19 +10461,34 @@
           "delta": 1
         },
         {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 3
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 24
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 24
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 37
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
         },
         {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 3
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 10
         }
       ],
       "next": {
@@ -10866,15 +10999,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 47, cost 46, margin +1"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/40 demand units; operating revenue 44, cost 34, margin +10"
         }
       ],
       "effects": [
@@ -10904,19 +11029,34 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 36
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 2
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 10
         }
       ],
       "next": {
@@ -11416,7 +11556,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Invest { domain: Beds, amount: 20 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Invest { domain: Beds, amount: 20 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -11459,15 +11599,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 31/31 demand units; operating revenue 47, cost 46, margin +1"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/40 demand units; operating revenue 44, cost 34, margin +10"
         }
       ],
       "effects": [
@@ -11492,6 +11624,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 23
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 23
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 35
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 1
@@ -11500,16 +11657,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 10
         }
       ],
       "next": {
@@ -12034,15 +12181,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 30/30 demand units; operating revenue 45, cost 46, margin -1"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/40 demand units; operating revenue 43, cost 34, margin +9"
         }
       ],
       "effects": [
@@ -12067,6 +12206,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 22
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 22
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 34
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": 0
@@ -12075,16 +12239,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 9
         }
       ],
       "next": {
@@ -12609,15 +12763,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 29/29 demand units; operating revenue 43, cost 46, margin -3"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/40 demand units; operating revenue 43, cost 34, margin +9"
         }
       ],
       "effects": [
@@ -12642,6 +12788,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 21
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 21
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 32
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": -2
@@ -12650,16 +12821,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": -3
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 9
         }
       ],
       "next": {
@@ -13188,15 +13349,7 @@
         },
         {
           "actor": "operations",
-          "description": "Northlake Health: treated 29/29 demand units; operating revenue 43, cost 46, margin -3"
-        },
-        {
-          "actor": "operations",
           "description": "Summit Care: 6 critical care patients boarded in ED due to ICU capacity constraints"
-        },
-        {
-          "actor": "operations",
-          "description": "Summit Care: treated 28/40 demand units; operating revenue 43, cost 34, margin +9"
         }
       ],
       "effects": [
@@ -13221,6 +13374,31 @@
           "delta": 1
         },
         {
+          "source": "monthly demand allocation",
+          "metric": "monthly_demand",
+          "delta": 21
+        },
+        {
+          "source": "staffed volume resolution",
+          "metric": "monthly_treated_volume",
+          "delta": 21
+        },
+        {
+          "source": "capacity shortfall",
+          "metric": "monthly_unmet_demand",
+          "delta": 0
+        },
+        {
+          "source": "revenue realization",
+          "metric": "monthly_operating_revenue",
+          "delta": 32
+        },
+        {
+          "source": "operating expense",
+          "metric": "monthly_operating_cost",
+          "delta": 34
+        },
+        {
           "source": "monthly operating cycle",
           "metric": "cash",
           "delta": -2
@@ -13229,16 +13407,6 @@
           "source": "staffing deficit burnout",
           "metric": "workforce_trust",
           "delta": -1
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": -3
-        },
-        {
-          "source": "monthly operating cycle",
-          "metric": "cash",
-          "delta": 9
         }
       ],
       "next": {

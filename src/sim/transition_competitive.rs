@@ -738,6 +738,7 @@ fn apply_staffing_constraints(
 ) {
   let regional_demand_index = world.market.regional_demand_index;
   let payer_pressure = world.market.commercial_payer_pressure;
+  let human_system_id = world.human_system().map(|system| system.system_id);
   for system in &mut world.systems {
     let target_nurses = (system.staffed_beds + 4) / 5
       + (system.emergency_capacity + 1) / 2
@@ -1241,10 +1242,9 @@ fn apply_staffing_constraints(
 
     apply_monthly_operating_cycle(
       system,
-      regional_demand_index,
-      payer_pressure,
-      total_physical,
-      total_effective,
+      (regional_demand_index, payer_pressure),
+      (total_physical, total_effective),
+      human_system_id == Some(system.system_id),
       events,
       effects,
     );
@@ -1295,13 +1295,14 @@ fn apply_staffing_constraints(
 
 fn apply_monthly_operating_cycle(
   system: &mut crate::model::HealthSystemState,
-  regional_demand_index: i32,
-  payer_pressure: i32,
-  total_physical_capacity: i32,
-  total_effective_capacity: i32,
+  market: (i32, i32),
+  capacity: (i32, i32),
+  expose_to_player: bool,
   events: &mut Vec<Event>,
   effects: &mut Vec<crate::model::AttributedEffect>,
 ) {
+  let (regional_demand_index, payer_pressure) = market;
+  let (total_physical_capacity, total_effective_capacity) = capacity;
   let demand = (regional_demand_index.max(0) * system.market_share_index.max(0) + 50) / 100;
   let volume_capacity = (total_effective_capacity.max(0) + 4) / 8;
   let treated = demand.min(volume_capacity);
@@ -1324,14 +1325,36 @@ fn apply_monthly_operating_cycle(
   system.monthly_operating_margin = margin;
   system.resources.cash += margin;
 
-  push_effect(effects, "monthly operating cycle", "cash", margin);
-  events.push(Event {
-    actor: "operations",
-    description: format!(
-      "{}: treated {treated}/{demand} demand units; operating revenue {revenue}, cost {cost}, margin {margin:+}",
-      system.name
-    ),
-  });
+  if expose_to_player {
+    push_effect(
+      effects,
+      "monthly demand allocation",
+      "monthly_demand",
+      demand,
+    );
+    push_effect(
+      effects,
+      "staffed volume resolution",
+      "monthly_treated_volume",
+      treated,
+    );
+    push_effect(effects, "capacity shortfall", "monthly_unmet_demand", unmet);
+    push_effect(
+      effects,
+      "revenue realization",
+      "monthly_operating_revenue",
+      revenue,
+    );
+    push_effect(effects, "operating expense", "monthly_operating_cost", cost);
+    push_effect(effects, "monthly operating cycle", "cash", margin);
+    events.push(Event {
+      actor: "operations",
+      description: format!(
+        "{}: treated {treated}/{demand} demand units; operating revenue {revenue}, cost {cost}, margin {margin:+}",
+        system.name
+      ),
+    });
+  }
 }
 
 #[cfg(test)]
@@ -1420,6 +1443,13 @@ mod transition_competitive_tests {
     );
     assert!(transition.events.iter().any(|event| {
       event.actor == "operations" && event.description.contains("operating revenue")
+    }));
+    assert!(!transition.events.iter().any(|event| {
+      event.description.contains("Northlake Health: treated")
+        || event.description.contains("Summit Care: treated")
+    }));
+    assert!(transition.effects.iter().any(|effect| {
+      effect.source == "staffed volume resolution" && effect.metric == "monthly_treated_volume"
     }));
   }
 

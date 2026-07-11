@@ -37,6 +37,12 @@ pub struct AiPlayerObservation {
   pub nurses: i32,
   pub physicians: i32,
   pub admins: i32,
+  pub monthly_demand: i32,
+  pub monthly_treated_volume: i32,
+  pub monthly_unmet_demand: i32,
+  pub monthly_operating_revenue: i32,
+  pub monthly_operating_cost: i32,
+  pub monthly_operating_margin: i32,
   pub month_index: u32,
   pub market: SharedMarketFields,
   pub lagged_rival_actions: Vec<LaggedRivalAction>,
@@ -106,6 +112,12 @@ fn observation_from_system(
     nurses: system.nurses,
     physicians: system.physicians,
     admins: system.admins,
+    monthly_demand: system.monthly_demand,
+    monthly_treated_volume: system.monthly_treated_volume,
+    monthly_unmet_demand: system.monthly_unmet_demand,
+    monthly_operating_revenue: system.monthly_operating_revenue,
+    monthly_operating_cost: system.monthly_operating_cost,
+    monthly_operating_margin: system.monthly_operating_margin,
     month_index,
     market: market.clone(),
     lagged_rival_actions,
@@ -183,6 +195,19 @@ mod tests {
     assert_eq!(obs.system_name, "Northlake Health");
     assert!(obs.lagged_rival_actions.is_empty());
     assert_eq!(obs.cash, world.systems[1].resources.cash);
+  }
+
+  #[test]
+  fn ai_observation_includes_only_own_operating_results() {
+    let mut world = crate::competitive::genesis_competitive_world(crate::model::Difficulty::Normal);
+    world.systems[0].monthly_operating_margin = 99;
+    world.systems[1].monthly_operating_margin = -4;
+    world.systems[1].monthly_unmet_demand = 3;
+
+    let observation = observe_for_ai(&world, 1);
+
+    assert_eq!(observation.monthly_operating_margin, -4);
+    assert_eq!(observation.monthly_unmet_demand, 3);
   }
 
   #[test]
