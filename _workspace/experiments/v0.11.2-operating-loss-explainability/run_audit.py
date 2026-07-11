@@ -124,6 +124,15 @@ def _month_outcome_linked(lines):
   return any(MONTH_OUTCOME.search(line) for line in lines)
 
 
+def _trace_matches_transition(trace, transition):
+  latest = trace.get("latest_transition") if trace else None
+  return (
+    isinstance(latest, dict)
+    and latest.get("turn") == transition.get("turn")
+    and latest.get("state_hash") == transition.get("state_hash")
+  )
+
+
 def _audit_run(run):
   source_report = SOURCE_AUDIT.audit_run(run)
   trace_by_turn = {
@@ -182,6 +191,8 @@ def _audit_run(run):
       )
       if not player_event_present:
         missing.append("missing_player_operating_event")
+      if not _trace_matches_transition(trace, transition):
+        missing.append("trace_transition_mismatch")
 
     rival_event_count += operating.get("rival_operating_event_count", 0)
     if operating.get("accounting_status") != "supported":
@@ -205,6 +216,7 @@ def _audit_run(run):
     if (
       transition
       and player_event_present
+      and _trace_matches_transition(trace, transition)
       and operating.get("accounting_status") == "supported"
     ):
       transition_attribution_supported_count += len(signals)

@@ -1,3 +1,4 @@
+import copy
 import importlib.util
 import json
 import unittest
@@ -172,6 +173,18 @@ class OperatingLossExplainabilityTests(unittest.TestCase):
 
     self.assertEqual(audit["rival_operating_event_count"], 1)
     self.assertNotIn("Northlake", json.dumps(audit["limited_records"]))
+
+  def test_trace_transition_mismatch_limits_attribution(self):
+    run = make_run()
+    run["turn_trace"][0]["latest_transition"] = copy.deepcopy(
+      run["turn_trace"][0]["latest_transition"]
+    )
+    run["turn_trace"][0]["latest_transition"]["state_hash"] = "wrong-hash"
+    audit = RUNNER.build_audit(make_artifact([run]))
+
+    report = audit["run_reports"][0]
+    self.assertEqual(report["transition_attribution_limited_count"], 1)
+    self.assertIn("trace_transition_mismatch", report["limited_reasons"])
 
   def test_real_v0111_source_matches_documented_matrix(self):
     source = RUNNER.load_source_artifact()
