@@ -3011,7 +3011,7 @@ reconstructing it from the diff.
     rejection and one safe same-turn retry each.
   - Generated JSON and Markdown regenerate deterministically with stable SHA-256
     hashes.
-  - Seven focused and 72 full Python tests, formatting, clippy, Rust tests,
+  - Eight focused and 73 full Python tests, formatting, clippy, Rust tests,
     automated playtests, and diff checks pass.
 
 

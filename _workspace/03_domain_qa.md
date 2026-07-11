@@ -44,9 +44,9 @@ None.
 
 ## Verification Evidence
 
-- Focused project-limit tests: 7 passed.
+- Focused project-limit tests: 8 passed.
 - Generated JSON and Markdown regenerate with matching SHA-256 hashes.
-- Full Python suite: 72 passed.
+- Full Python suite: 73 passed.
 - `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and
   `cargo test --all -- --test-threads=1` passed.
 - Automated stabilization and competitive playtests and `git diff --check`

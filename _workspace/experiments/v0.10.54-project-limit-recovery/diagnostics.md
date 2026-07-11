@@ -4,7 +4,7 @@
 - **Code version:** 0.10.54
 - **Campaign:** `competitive-regional-v1`
 - **Difficulty:** `hard`
-- **Source:** `_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json`
+- **Source:** `_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json` / v0.10.51-adversarial-resource-probe
 - **Evidence type:** deterministic actor-visible project-limit recovery capture
 
 ## Run Summary

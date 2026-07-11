@@ -15,7 +15,7 @@ behavior changes.
 
 ## Verification
 
-- Seven focused project-limit tests
+- Eight focused project-limit tests
 - Stable JSON and Markdown artifact regeneration
 - Full Python unit-test suite
 - `cargo fmt --check`

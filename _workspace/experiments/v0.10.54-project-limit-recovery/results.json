@@ -11,7 +11,23 @@
   ],
   "profile": "Project-Limit Recovery",
   "evidence_type": "deterministic actor-visible concurrent-project rejection and recovery capture",
-  "source_artifact": "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+  "source": {
+    "path": "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json",
+    "batch_id": "v0.10.51-adversarial-resource-probe",
+    "code_version": "0.10.51",
+    "campaign": "competitive-regional-v1",
+    "difficulty": "hard",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "project_limit_probe": {
+      "probe_id": "concurrent_project_overrun",
+      "command": "project kind=neurology_unit budget=6",
+      "expected_code": "too_many_concurrent_projects"
+    }
+  },
   "expected_probe_schedule": {
     "4": {
       "probe_id": "accepted_clinic_project",

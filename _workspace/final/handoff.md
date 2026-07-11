@@ -7,7 +7,7 @@ across Hard seeds 42, 43, and 44.
 
 ## Changed Files
 
-- Added a direct MCP capture and seven focused Python tests.
+- Added a direct MCP capture and eight focused Python tests.
 - Added generated JSON and Markdown reports for the accepted project setup,
   rejected third project, same-turn state, safe retry, and debrief explanation.
 - Added findings, SPEC, changelog/version, README, playtesting guidance, lessons,
@@ -17,9 +17,9 @@ across Hard seeds 42, 43, and 44.
 
 ## Verification
 
-- Focused project-limit tests: 7 passed.
+- Focused project-limit tests: 8 passed.
 - Generated JSON and Markdown regenerated with matching SHA-256 hashes.
-- Full Python suite: 72 passed.
+- Full Python suite: 73 passed.
 - `cargo test --all -- --test-threads=1` passed.
 - `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings` passed.
 - Automated stabilization and competitive playtests passed.

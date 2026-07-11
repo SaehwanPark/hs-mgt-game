@@ -24,6 +24,8 @@ EXPECTED_TRANSITIONS = 24
 SOURCE_ARTIFACT = (
   "_workspace/experiments/v0.10.51-adversarial-resource-probe/results.json"
 )
+SOURCE_BATCH_ID = "v0.10.51-adversarial-resource-probe"
+SOURCE_CODE_VERSION = "0.10.51"
 PROBE_SCHEDULE = {
   4: {
     "probe_id": "accepted_clinic_project",
@@ -317,6 +319,27 @@ def recovery_surface_summary(runs):
   }
 
 
+def source_summary():
+  source = json.loads((ROOT / SOURCE_ARTIFACT).read_text(encoding="utf-8"))
+  assert source["batch_id"] == SOURCE_BATCH_ID
+  assert source["code_version"] == SOURCE_CODE_VERSION
+  assert source["campaign"] == CAMPAIGN
+  assert source["difficulty"] == DIFFICULTY
+  assert source["seeds"] == SEEDS
+  source_probe = source["expected_probe_schedule"]["7"]
+  assert source_probe["command"] == PROBE_SCHEDULE[7]["command"]
+  assert source_probe["expected_code"] == PROBE_SCHEDULE[7]["expected_code"]
+  return {
+    "path": SOURCE_ARTIFACT,
+    "batch_id": source["batch_id"],
+    "code_version": source["code_version"],
+    "campaign": source["campaign"],
+    "difficulty": source["difficulty"],
+    "seeds": source["seeds"],
+    "project_limit_probe": source_probe,
+  }
+
+
 def build_artifact(runs):
   return {
     "filename": "results.json",
@@ -329,7 +352,7 @@ def build_artifact(runs):
     "evidence_type": (
       "deterministic actor-visible concurrent-project rejection and recovery capture"
     ),
-    "source_artifact": SOURCE_ARTIFACT,
+    "source": source_summary(),
     "expected_probe_schedule": PROBE_SCHEDULE,
     "recovery_surface": recovery_surface_summary(runs),
     "promotion_basis": (
@@ -347,6 +370,7 @@ def validate_artifact(artifact):
   assert artifact["campaign"] == CAMPAIGN
   assert artifact["difficulty"] == DIFFICULTY
   assert artifact["seeds"] == SEEDS
+  assert artifact["source"] == source_summary()
   assert [run["seed"] for run in artifact["runs"]] == SEEDS
   assert len(artifact["runs"]) == len(SEEDS)
 
@@ -400,7 +424,7 @@ def render_diagnostics(artifact):
     f"- **Code version:** {artifact['code_version']}",
     f"- **Campaign:** `{artifact['campaign']}`",
     f"- **Difficulty:** `{artifact['difficulty']}`",
-    f"- **Source:** `{artifact['source_artifact']}`",
+    f"- **Source:** `{artifact['source']['path']}` / {artifact['source']['batch_id']}",
     "- **Evidence type:** deterministic actor-visible project-limit recovery capture",
     "",
     "## Run Summary",

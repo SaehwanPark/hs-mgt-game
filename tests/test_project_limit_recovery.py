@@ -126,6 +126,14 @@ class ProjectLimitRecoveryTests(unittest.TestCase):
     self.assertNotIn("resource_limit", failure)
     self.assertNotIn("hint", failure)
 
+  def test_source_summary_validates_v051_project_limit_probe(self):
+    source = RUNNER.source_summary()
+    self.assertEqual(source["batch_id"], RUNNER.SOURCE_BATCH_ID)
+    self.assertEqual(
+      source["project_limit_probe"]["expected_code"],
+      "too_many_concurrent_projects",
+    )
+
   def test_incomplete_run_is_rejected(self):
     runs = [sample_run(seed) for seed in RUNNER.SEEDS]
     runs[0]["completion_status"] = "incomplete"
