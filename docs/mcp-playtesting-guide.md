@@ -105,12 +105,30 @@ non-binding consultant options derived from the actor-visible observation, and
 competitive debriefs retain the options shown for comparison with submitted
 actions. Treat this as an explanation and traceability improvement, not as
 advice quality evidence, a learning claim, or an advisor-market implementation.
-As of `v0.10.40`, the consultant baseline has a reproducible 24-run validation
-matrix across four existing policies, seeds `42`-`44`, and Normal/Hard
-difficulty. The capture checks option visibility, visible-state variation,
-accepted-month coverage, and exact debrief retention. Treat this as simulated-
-agent traceability evidence, not advice-quality, learning, calibration,
-difficulty, or balance evidence.
+As of `v0.10.40`, competitive transition summaries also include the consultant
+options already retained in history. The consultant-advice traceability matrix
+uses that additive audit field to verify rendered options match committed history
+and remain available in debriefs across existing profiles, seeds, and
+Normal/Hard difficulty. Its command-family counts are descriptive only; they do
+not measure advice uptake, quality, learning, or causal outcomes.
+
+```bash
+python3 _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/results.json
+```
+
+As of `v0.10.41`, the consultant-advice usage matrix pairs two existing control
+policies with deterministic advice-aware wrappers. The wrappers use only visible
+consultant options, observation cues, and resource hints; they record selection,
+fallback, safe-hold, and command-alignment signals. The controls must retain the
+v0.10.40 state hashes. Treat all signals as simulated-policy evidence, not advice
+quality, causal impact, human learning, or balance evidence.
+
+```bash
+python3 _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.41-consultant-advice-usage/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it

@@ -1,50 +1,67 @@
-# Final Handoff - Consultant Advice Validation Evidence
+# Final Handoff - Consultant Advice Usage Evidence
 
 ## Summary
 
-Implemented the v0.10.40 Phase 7 evidence slice. A wrapper-boundary runner
-captured four existing deterministic policies across seeds 42-44 at Normal and
-Hard difficulty. All 24 sessions completed 24 months with zero validation
-failures. Every month exposed four consultant options, and every debrief
-retained the corresponding option titles and advisory comparison line.
+Implemented the `v0.10.41` Phase 7 evidence slice. A deterministic 24-run
+matrix compares advice-aware and advice-ignoring competitive policies across
+Fiscal Caution and Naive First-Time profiles, seeds 42–44, and Normal/Hard
+difficulty.
 
-No Rust runtime, MCP DTO, command, scenario, ruleset, balance, state-hash,
-advisor-market, or learning behavior changed.
+Advice-aware policies read only visible consultant options and resource hints,
+record selection, fallback, safe-hold, and command-alignment signals, and never
+inspect hidden state. Advice-ignoring controls match the v0.10.40 state hashes.
+
+The advisor market remains deferred: no roster, payroll, hiring, firing,
+candidate pool, AI advisor, scenario, balance, or transition semantics were
+added.
 
 ## Changed Files
 
-- Added the v0.10.40 capture runner, raw JSON artifact, and diagnostics report.
-- Added the v0.10.40 findings document and updated Phase 7 playtest, roadmap,
-  specification, changelog, version, README, and lessons records.
-- Updated the repository workspace input, evidence map, mechanism design, domain
-  QA, and final handoff artifacts.
+- Added the advice-usage runner, deterministic result artifact, diagnostics, and
+  focused Python tests.
+- Added v0.10.41 findings, playtesting-guide routing, SDD evidence handoffs,
+  domain QA, lessons, changelog, specification, and package metadata.
 
 ## Verification
 
-- 24-run capture: 24/24 complete; 24/24 advice months; 24/24 debrief option
-  records; 24/24 comparison lines; zero validation failures.
-- `python3 -m unittest tests/test_playtest_wrapper.py`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (9 tests pass)
+- `python3 -m py_compile _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py tests/test_consultant_advice_usage.py`
+- Generated the 24-run matrix twice; `results.json` and `diagnostics.md` were
+  byte-for-byte stable.
+- All 24 runs completed 24 months with zero validation failures, exact option
+  continuity, and 24 debrief records per run.
+- Advice-ignoring controls matched v0.10.40 hashes.
 - `cargo fmt --check`
 - `cargo clippy --all-targets -- -D warnings`
-- `cargo test --all -- --test-threads=1`
-- `cargo test --test golden_competitive_seed42 -- --test-threads=1`
+- `cargo test --all -- --test-threads=1` (285 tests pass)
 - `python3 scripts/run_automated_playtests.py`
 - `git diff --check`
 
 ## Domain QA
 
-Pass. The evidence is limited to visibility, deterministic variation, accepted
-month coverage, and debrief traceability. It makes no advice-quality, learning,
-calibration, difficulty, balance, or advisor-market claim.
+Pass. The slice preserves actor-visible observation boundaries, deterministic
+transitions, immutable history, debrief traceability, and explicit deferral of
+the advisor market. Policy differences are not interpreted as causal advice
+evidence.
+
+## Known Limits
+
+- Advice wording and policy selection remain design abstractions, not evidence
+  of advice quality, measured learning, policy validity, or calibrated outcomes.
+- Advice-aware endpoint differences reflect intentionally different commands and
+  are not a causal comparison.
+- Safe-hold fallback uses visible resource guards and does not prove that the
+  underlying policy would be valid under hidden state.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/consultant-advice-validation-v0.10.40`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/120
-- CI: GitHub reports no configured status checks for this PR.
-- Review loop: three independent passes plus a post-fix follow-up complete; Pass
-  1 found one Medium assertion gap, fixed in `de45214`; Passes 2 and 3 and the
-  follow-up found no actionable issues.
-- Critical/High findings: none.
-- Merge-ready: yes, pending normal GitHub merge decision.
+- Working branch: `feat/consultant-advice-usage-v0.10.41`
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/119
+- CI: GitHub `check` passed.
+- Review loop: three independent passes complete; Pass 1, Pass 2, and Pass 3
+  found no actionable Critical, High, Medium, or Low findings.
+- Review summary posted on the PR; no review threads require resolution.
+- Merge-ready: yes, pending the normal GitHub merge decision.
+- Next dependency: retain the generic advice baseline unless later evidence
+  identifies a concrete teachability limitation.

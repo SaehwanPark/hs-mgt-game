@@ -92,6 +92,7 @@ pub struct TransitionSummary {
   pub events: Vec<String>,
   pub effects: Vec<String>,
   pub state_hash: String,
+  pub consultant_options: Vec<crate::model::ConsultantOption>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
@@ -685,6 +686,7 @@ fn summarize_stabilization_transition(transition: &Transition) -> TransitionSumm
     events: transition.events.iter().map(format_event).collect(),
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
+    consultant_options: Vec::new(),
   }
 }
 
@@ -700,6 +702,7 @@ fn summarize_competitive_transition(transition: &CompetitiveTransition) -> Trans
     events: transition.events.iter().map(format_event).collect(),
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
+    consultant_options: transition.consultant_options.clone(),
   }
 }
 
@@ -953,6 +956,16 @@ mod tests {
       .expect("history");
 
     assert_eq!(history.transition_count, 1);
+    assert_eq!(history.transitions[0].consultant_options.len(), 4);
+    assert_eq!(
+      ended
+        .latest_transition
+        .as_ref()
+        .expect("latest transition")
+        .consultant_options
+        .len(),
+      4
+    );
     assert!(
       ended
         .observation

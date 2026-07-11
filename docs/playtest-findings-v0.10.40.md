@@ -1,64 +1,68 @@
-# Consultant Advice Validation Evidence v0.10.40
+# Consultant Advice Traceability Evidence v0.10.40
 
-- **Status:** Phase 7 bounded simulated-agent evidence slice
-- **Date:** 2026-07-10
-- **Code version:** 0.10.40
+- **Status:** Phase 7 competitive teachability and validation evidence
 - **Campaign:** `competitive-regional-v1`
-- **Matrix:** four existing policies × seeds `42`, `43`, and `44` × Normal and Hard
+- **Matrix:** existing Fiscal Caution, Capacity Growth, Balanced Strategy, and
+  Naive First-Time policies; seeds 42, 43, and 44; Normal and Hard difficulty
 - **Evidence artifact:**
-  - `_workspace/experiments/v0.10.40-consultant-advice-validation/results.json`
-  - `_workspace/experiments/v0.10.40-consultant-advice-validation/diagnostics.md`
+  `_workspace/experiments/v0.10.40-consultant-advice-evidence/results.json`
 
-## Evidence shape
+This slice evaluates the generic consultant baseline restored in v0.10.39. It
+adds the already-stored consultant options to the additive MCP transition
+summary, then captures MCP observations, accepted commands, committed
+transitions, state hashes, and end-session debriefs without changing simulation
+behavior.
 
-The runner reused the existing Fiscal Caution, Capacity Growth, Balanced
-Strategy, and Naive First-Time policies through `play_session` with
-`capture_trace=True`. It recorded actor-visible observations, legal command
-hints, submitted commands, accepted transition summaries, validation failures,
-and end-session debriefs.
+## Questions
 
-All 24 runs completed the full 24-month campaign with zero validation failures.
-Every run contained 24 consultant-option observations, 24 retained debrief
-option records, 24 advisory-comparison lines, and at least two visible option
-signatures. Capacity Growth produced two signatures; the other profiles
-produced three in the captured matrix.
+1. Does every competitive observation expose four non-binding A–D options?
+2. Do the rendered options exactly match options stored with the corresponding
+   committed transition?
+3. Does the debrief retain a monthly record of those options?
+4. Can existing scripted command families be described alongside the options
+   without implying that advice determined the command or outcome?
+
+## Result
+
+All 24 runs completed 24 months with zero validation failures. Every month had
+four rendered options that exactly matched its committed transition record, and
+every debrief retained 24 monthly option records. The options varied between
+two or three visible-observation-conditioned signatures per run. The artifact
+is regenerated twice and must remain byte-for-byte stable.
+
+The alignment mapping is descriptive only: `invest` maps to A, `recruit` to B,
+`monitor` to C, and `commit` to D. Negotiation, projects, holds, and unmatched
+commands are reported as no generic-option alignment.
 
 ## Interpretation
 
-- The existing consultant surface is present at every captured competitive
-  decision point.
-- Option titles vary with visible cash, workforce, community, and intelligence
-  categories rather than requiring hidden rival state.
-- The exact option titles shown before accepted commands are retained in the
-  corresponding month-level debrief records.
-- The matrix validates reproducibility and inspectability, not whether an agent
-  followed the advice or achieved a better outcome.
+This is an observation/debrief traceability check, not advice-quality evidence.
+The policies were authored independently of the consultant text, so aligned
+commands do not show advice uptake, decision quality, learning, causal impact,
+or a need for a differentiated advisor roster.
 
-## Evidence limits and routing
+If all matrix runs complete with exact continuity, the repaired generic baseline
+remains sufficient for the current Phase 7 gate. A future advisor-market proposal
+requires a separate documented need that this baseline cannot meet.
 
-- These are deterministic simulated-agent traces, not human classroom
-  observations or an assessment instrument.
-- Repeated policy/seed runs are not independent player samples.
-- Normal/Hard coverage is not a difficulty, balance, or Expert-winnability
-  claim because the policies are reused controls rather than adaptive human
-  decision makers.
-- No advice-quality, learning, calibration, policy-validity, or advisor-market
-  conclusion is justified.
-- Keep the advisor market, payroll, roster, hiring, firing, AI advice behavior,
-  and runtime tuning deferred until a separate evidence or design gate names a
-  concrete need.
+## Non-Goals
+
+- No advisor roster, payroll, hiring/firing, candidate pool, or AI advice.
+- No balance, difficulty, command, scenario, replay, or state-hash change.
+  The only MCP DTO addition exposes consultant options already retained in
+  competitive history.
+- No human-learning, policy-validity, empirical-calibration, or advice-quality
+  claim.
 
 ## Verification
 
 ```bash
-python3 -m py_compile _workspace/experiments/v0.10.40-consultant-advice-validation/run_sessions.py
-python3 _workspace/experiments/v0.10.40-consultant-advice-validation/run_sessions.py
-python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-validation/results.json
-python3 -m unittest tests/test_playtest_wrapper.py
+python3 -m py_compile _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.py
+python3 _workspace/experiments/v0.10.40-consultant-advice-evidence/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/results.json
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo test --all -- --test-threads=1
-cargo test --test golden_competitive_seed42 -- --test-threads=1
 python3 scripts/run_automated_playtests.py
 git diff --check
 ```

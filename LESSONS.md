@@ -3,6 +3,28 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Pair Advice-Aware Evidence With Hash-Matched Controls
+
+- Context: Adding the v0.10.41 consultant-advice usage matrix.
+- Symptom: Advice-aware commands can change cash runway and make an inherited
+  scripted command invalid later in the campaign.
+- Resolution: Record advice-aware selection and fallback signals separately,
+  guard commands using visible resources, and compare advice-ignoring control
+  hashes with the prior traceability artifact.
+- Prevention: Never infer advice value from endpoint differences when the policy
+  itself changed; require exact observation/history/debrief continuity and a
+  matching control before interpreting the evidence.
+
+## Build the Local MCP Binary Before Wrapper Evidence Runs
+
+- Context: Adding the v0.10.40 consultant-advice traceability matrix.
+- Symptom: The wrapper launched an existing `target/debug/hs-mgt-game-mcp`
+  binary, which can be older than the checked-out source and produce misleading
+  evidence about current MCP output.
+- Prevention: Evidence runners that invoke the local MCP binary must run
+  `cargo build --quiet --bin hs-mgt-game-mcp` before starting sessions, then
+  record the package version from the same worktree.
+
 ## Test Recurring Costs Against Every Scenario Cash Scale
 
 - Context: Evaluating a future in-house advisor market with monthly salaries.

@@ -149,7 +149,43 @@ reconstructing it from the diff.
 | Rival Information Monitor Evidence | v0.10.37 | Compare monitored versus unmonitored Hard/Expert live MCP captures for rival-information observation value | 294 | `8926f71296f39efc` (competitive) |
 | Advisor Market Proposal Review | v0.10.38 | Paper-evaluate differentiated in-house advisors and defer runtime promotion pending generic advice repair | 294 | `8926f71296f39efc` (competitive) |
 | Live Consultant Advice and Advisory History | v0.10.39 | Restore four deterministic actor-visible consultant options across competitive CLI/MCP observations and retain them for debrief comparison | 294 | `8926f71296f39efc` (competitive) |
-| Consultant Advice Validation Evidence | v0.10.40 | Validate consultant-option visibility, visible-state variation, accepted-month coverage, and debrief retention across a reproducible MCP matrix | 294 | `8926f71296f39efc` (competitive) |
+| Consultant Advice Traceability Evidence | v0.10.40 | Verify rendered consultant options, committed history, and debrief continuity across existing deterministic competitive captures | 294 | `8926f71296f39efc` (competitive) |
+| Consultant Advice Usage Evidence | v0.10.41 | Compare advice-aware and advice-ignoring simulated policies using visible cues, resource-safe fallback, and exact observation/history/debrief continuity | 285 | `8926f71296f39efc` (competitive) |
+
+
+- Feature: Consultant Advice Usage Evidence
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.41
+
+  Summary:
+  Added a bounded Phase 7 evidence slice that compares deterministic advice-aware
+  and advice-ignoring competitive policies. The advice-aware wrapper reads only
+  actor-visible consultant options and resources, records its selected option or
+  fallback, and preserves exact continuity with committed history and debriefs.
+
+  Done:
+  - Added a 24-run matrix for Fiscal Caution and Naive First-Time profiles,
+    seeds 42–44, and Normal/Hard difficulty.
+  - Added focused tests for option parsing, visible-cue priority, resource
+    guards, and safe fallback to hold.
+  - Verified advice-ignoring control hashes match the v0.10.40 artifact.
+  - Bumped package metadata to `0.10.41`.
+
+  Deferred / Non-Goals:
+  - No advisor roster, payroll, candidate pool, hire/fire command, AI advisor,
+    scenario, replay, state-hash, ruleset, balance, or runtime mechanics change.
+  - No advice-quality, causal-impact, human-learning, policy-validity, or
+    empirical-calibration claim.
+
+  Verification:
+  - `python3 -m unittest discover -s tests -p 'test_*.py'`
+  - `python3 _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py`
+  - `cargo fmt --check`
+  - `cargo clippy --all-targets -- -D warnings`
+  - `cargo test --all -- --test-threads=1`
+  - `python3 scripts/run_automated_playtests.py`
+  - `git diff --check`
 
 
 - Feature: Advisor Market Proposal Review
@@ -216,48 +252,6 @@ reconstructing it from the diff.
   - `cargo fmt --check`
   - `cargo clippy --all-targets -- -D warnings`
   - `cargo test --all -- --test-threads=1` (285 tests pass)
-  - `python3 scripts/run_automated_playtests.py`
-  - `git diff --check`
-
-
-- Feature: Consultant Advice Validation Evidence
-  Status: Complete
-  Started: 2026-07-10
-  Version: 0.10.40
-
-  Summary:
-  Added a bounded Phase 7 MCP evidence slice for the repaired consultant advice
-  baseline. Four existing deterministic policies were captured across seeds
-  42-44 at Normal and Hard difficulty, preserving actor-visible observations,
-  submitted commands, transition summaries, validation failures, and debriefs.
-
-  Done:
-  - Added a wrapper-boundary capture runner and machine-readable results for all
-    24 matrix runs.
-  - Added fail-closed checks for four A-D options, non-empty tradeoffs, visible
-    state-conditioned variation, 24 accepted months, and exact debrief title
-    retention with advisory comparison lines.
-  - Added diagnostics, findings, playtest-guide instructions, and handoff notes.
-  - Bumped package metadata to `0.10.40`.
-
-  Deferred / Non-Goals:
-  - No runtime Rust, MCP DTO, command, scenario, ruleset, balance, or state-hash
-    changes.
-  - No advice-adherence score, advice-quality, learning, calibration,
-    policy-validity, difficulty, or Expert-winnability claim.
-  - No advisor roster, payroll, candidate pool, hiring, firing, or AI advice
-    behavior.
-
-  Verification:
-  - `python3 -m py_compile _workspace/experiments/v0.10.40-consultant-advice-validation/run_sessions.py`
-  - `python3 _workspace/experiments/v0.10.40-consultant-advice-validation/run_sessions.py`
-  - 24 runs complete; each has 24 advice months, 24 debrief option records, 24
-    debrief comparison lines, and zero validation failures.
-  - `python3 -m unittest tests/test_playtest_wrapper.py`
-  - `cargo fmt --check`
-  - `cargo clippy --all-targets -- -D warnings`
-  - `cargo test --all -- --test-threads=1`
-  - `cargo test --test golden_competitive_seed42 -- --test-threads=1`
   - `python3 scripts/run_automated_playtests.py`
   - `git diff --check`
 

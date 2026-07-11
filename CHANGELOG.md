@@ -4,17 +4,41 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.41] - 2026-07-10
+
+### Added
+- Added a deterministic Phase 7 MCP capture matrix comparing advice-aware and
+  advice-ignoring simulated policies across two profiles, seeds 42–44, and
+  Normal/Hard competitive difficulty.
+- Added visible-cue, resource-guard, fallback, and command-alignment records to
+  the consultant-advice evidence artifact.
+- Added focused Python coverage for option parsing, visible selection, and
+  resource-safe fallback behavior.
+
+### Changed
+- Kept advice-aware choices as simulated-policy evidence only; they do not
+  establish advice quality, causal impact, human learning, or calibration.
+- Kept runtime mechanics, MCP schemas, replay formats, state hashes, scenarios,
+  difficulty, and balance unchanged.
+- Bumped the package version to `0.10.41`.
+
 ## [0.10.40] - 2026-07-10
 
 ### Added
-- Added a reproducible 24-run Normal/Hard MCP capture matrix across four
-  existing policies and seeds `42`, `43`, and `44`.
-- Added diagnostics verifying consultant-option visibility, visible-state
-  variation, accepted-transition coverage, and debrief retention.
+- Added a deterministic Phase 7 MCP capture matrix for consultant-advice
+  traceability across four existing profiles, seeds 42–44, and Normal/Hard
+  competitive difficulty.
+- Added evidence artifacts and findings that compare rendered consultant options
+  with committed history and debrief records.
+- Added the existing consultant options to competitive MCP transition summaries
+  so wrapper-level evidence can audit committed advice history.
 
 ### Changed
-- Kept the capture at the MCP wrapper boundary with no runtime, ruleset,
-  balance, state-hash, advisor-market, or learning-claim changes.
+- Kept the advice baseline non-binding and treated command-family alignment as a
+  descriptive traceability signal rather than advice-quality or learning
+  evidence.
+- Kept runtime mechanics, replay formats, state hashes, scenario behavior,
+  difficulty, and balance unchanged.
 - Bumped the package version to `0.10.40`.
 
 ## [0.10.39] - 2026-07-10

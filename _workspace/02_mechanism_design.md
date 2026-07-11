@@ -1,50 +1,55 @@
-# Mechanism Design - Consultant Advice Validation Evidence
+# Mechanism Design - Consultant Advice Usage Evidence
 
 ## Goal and Roadmap Phase
 
-Phase 7 validation of the v0.10.39 advice-only baseline without changing game
-mechanics.
+Phase 7 competitive teachability and validation slice following v0.10.40's
+consultant-advice traceability repair.
 
 ## Slice Boundary
 
-- Reuse Fiscal Caution, Capacity Growth, Balanced Strategy, and Naive First-Time
-  policies.
-- Capture seeds 42-44 at Normal and Hard difficulty.
-- Record actor-visible observations, submitted commands, accepted transition
-  summaries, validation failures, and end-session debriefs.
-- Produce machine-readable results and a human-readable diagnostic report.
-
-## Actors and Authority
-
-The MCP wrapper is the capture boundary. The human-system observation remains
-the only source for consultant options. Existing scripted policies remain the
-decision source; no new actor or AI decision rule is introduced.
+- Reuse existing observations and scripted policies to capture paired
+  advice-aware and advice-ignoring runs for two profiles across three seeds and
+  two difficulties.
+- Compare the four rendered `A`–`D` options with the options stored on the same
+  committed transition, then count monthly debrief records.
+- Have the advice-aware wrapper select an option from visible cues, execute a
+  resource-safe command when possible, and record fallback or safe-hold behavior.
+- Report command-family alignment without scoring compliance or treating advice
+  as a causal input to a human player.
 
 ## State, Beliefs, and Observations
 
-The runner parses only visible option lines and visible context categories:
-cash runway, workforce trust, community trust, and intelligence gaps. It never
-reads hidden rival state or recomputes outcomes.
+- The runner reads only MCP observation text, legal resource hints, accepted
+  commands, committed transition summaries, and final debrief text.
+- The advice-aware policy uses no hidden rival state and the control policy does
+  not inspect consultant options.
+- It does not inspect hidden rival state or add agent behavior.
 
 ## Commands, Events, and Effects
 
-No commands, events, effects, ruleset values, or transition behavior change.
-Submitted commands are retained only to place observed advice beside the
-corresponding debrief month.
-
-## Educational Debrief Hooks
-
-The artifact verifies that each month has exact retained option titles and an
-advisory comparison line. It deliberately does not score whether a policy
-followed an option or label one option as correct.
+- No commands, events, effects, payroll, or actor utility changes are
+  introduced. The runner fails if an expected trace field is missing or if an
+  inherited command is not safe under visible resources.
 
 ## Determinism and Replay Notes
 
-The runner reuses the existing seeded MCP server and deterministic policies. It
-fails closed on incomplete histories, validation failures, missing A-D options,
-missing tradeoffs, missing debrief records, or absent visible variation.
+- The evidence artifact contains no timestamps and is regenerated twice to
+  establish byte-for-byte stability. State hashes remain evidence of unchanged
+  world transitions, not advice effectiveness.
 
 ## Open Questions
 
-This slice cannot establish advice quality, learning value, calibration, or
-whether a differentiated advisor market would improve the baseline.
+- If rendered and stored options diverge, or control hashes differ from
+  v0.10.40, stop and route the mismatch to a separate runtime repair slice; do
+  not change the simulation from this PR.
+
+## Educational Debrief Hooks
+
+- Preserve enough evidence for instructors to verify what was shown, what was
+  chosen, and what the debrief retained without claiming that aligned choices
+  were better choices.
+
+## Conclusion
+
+Keep differentiated advisors, employment state, payroll, AI parity, and all
+runtime changes beyond the additive history-audit DTO field outside this slice.
