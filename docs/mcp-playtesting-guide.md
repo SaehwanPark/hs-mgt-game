@@ -54,6 +54,20 @@ python3 scripts/run_automated_playtests.py --target difficulty-adaptive --json-o
 python3 scripts/diagnose_runs.py _workspace/experiments/v0.9.9-difficulty-adaptive/results.json --output _workspace/experiments/v0.9.9-difficulty-adaptive/diagnostics.md
 ```
 
+To run the v0.11.1 operating-loop AI validation matrix and audit its
+player-owned monthly operating evidence:
+
+```bash
+python3 _workspace/experiments/v0.11.1-operating-loop-ai-validation/run_sessions.py
+python3 _workspace/experiments/v0.11.1-operating-loop-ai-validation/run_audit.py
+python3 -m unittest tests/test_operating_loop_ai_validation.py
+```
+
+This matrix runs five deterministic policy lanes across seeds `42`, `43`, `44`
+and Easy/Normal/Hard/Expert. It is descriptive gameplay-validation evidence;
+it does not establish causal marginal effects, dominance, balance, calibration,
+human learning, or policy validity.
+
 ### Expected Output
 The script builds `hs-mgt-game-mcp`, launches the local stdio binary, runs both
 campaigns for all four profiles across seeds `42`, `43`, and `44`, and

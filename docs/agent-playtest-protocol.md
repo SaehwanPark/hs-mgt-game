@@ -2,7 +2,7 @@
 
 **Status:** Active Phase 7 validation protocol  
 **Audience:** Contributors, domain reviewers, and agent-playtest operators  
-**Version:** v0.11.0 (governed by ADR-0009)
+**Version:** v0.11.1 (governed by ADR-0009)
 
 This protocol replaces planned recruitment of external human playtesters for the
 current validation path because recruitment and participant-study costs are not
@@ -67,6 +67,12 @@ first-time play. Label adversarial or stress-test agents separately from
 plausible player personas.
 
 ## Session Matrix
+
+The v0.11.1 operating-loop validation matrix uses five deterministic policy
+lanes across seeds `42`, `43`, and `44`, and Easy/Normal/Hard/Expert competitive
+difficulties. It captures actor-visible observations, legal commands, submitted
+commands, transition summaries, hashes, and debriefs for each 24-month run.
+This is a bounded simulated-policy matrix, not a learner or balance study.
 
 For each findings document, run the smallest matrix that answers the question
 being tested:

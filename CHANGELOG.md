@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.1] - 2026-07-11
+
+### Added
+- Added a deterministic 60-run AI policy matrix across five operating-loop
+  profiles, seeds 42–44, and Easy/Normal/Hard/Expert competitive difficulties.
+- Added player-owned monthly operating attribution and bottleneck diagnostics
+  covering 1,440 committed months with complete decision-to-debrief traces.
+- Added focused Python coverage for operating accounting, matrix completeness,
+  actor-boundary checks, and deterministic audit rendering.
+
+### Changed
+- Kept runtime mechanics, MCP schemas, scenarios, rulesets, state hashes,
+  balance, difficulty, and debrief wording unchanged.
+- Kept runtime promotion deferred because the evidence is descriptive and does
+  not establish a concrete unexplained player-facing gap.
+- Bumped the package to `0.11.1`.
+
 ## [0.11.0] - 2026-07-11
 
 ### Added

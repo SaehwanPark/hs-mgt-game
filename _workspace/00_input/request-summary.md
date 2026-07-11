@@ -2,33 +2,45 @@
 
 ## Scope
 
-- Apply the supplied review as a Phase 6 gameplay-maturity and Phase 7 validation update.
-- Replace planned human recruitment with structured AI-agent playtests because recruitment and budget are constrained.
-- Implement a compact monthly consequence loop linking demand, staffed capacity, workforce, payer conditions, revenue, cost, cash, quality, and access.
-- Record simultaneous-resolution hardening, strategy archetypes, diagnostics, and governance simplification as bounded follow-up work.
+- Continue the v0.11.0 operating-loop checkpoint as a Phase 7 validation slice.
+- Capture five deterministic policy hypotheses across seeds 42–44 and Easy,
+  Normal, Hard, and Expert competitive configurations.
+- Audit player-owned operating attribution, bottlenecks, trajectories,
+  threshold candidates, and decision-to-debrief trace coverage.
+- Prepare the v0.11.1 branch and PR handoff.
 
 ## Non-goals
 
-- No new actors, commands, service lines, GUI, calibration platform, or human-learning claim.
-- No broad shared-market framework before a contested mechanic requires it.
+- No new actors, commands, service lines, scenarios, GUI, runtime mechanics,
+  balance tuning, calibration, or human-learning claim.
+- No MCP schema, replay format, ruleset, or state-hash change.
+- No causal dominance or marginal-effect claim from observational traces.
 
 ## Sources
 
-- User-supplied review, canonical project documents, harness team specification, ADR-0009, and the AI-agent playtest protocol.
+- v0.11.0 final handoff and current SPEC Future queue.
+- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, and the harness team specification.
+- Existing MCP wrapper, transition summaries, operating-loop tests, and ADR-0009.
 
 ## Expected Files
 
-- Competitive state, transition, observation/display, hashing, and focused tests.
-- Canonical gameplay, architecture, roadmap, validation, version, changelog, and lessons documentation.
-- Harness handoffs under `_workspace/`.
+- `_workspace/experiments/v0.11.1-operating-loop-ai-validation/`.
+- `tests/test_operating_loop_ai_validation.py`.
+- Version, findings, playtest guidance, SPEC, changelog, lessons, and required
+  workspace handoffs.
 
 ## Validation Target
 
-- Monthly operating results are deterministic, permutation-invariant, hashed, observable, attributable, and replay-safe.
-- AI test-play policy is explicit and evidence claims remain bounded.
-- Rust checks, relevant Python tests, and `git diff --check` pass.
+- 60 complete competitive runs and 1,440 committed operating months.
+- Player-owned demand, treated volume, unmet demand, revenue, cost, margin, and
+  cash identities pass for every audited month.
+- Actor-visible observations, commands, transition summaries, hashes, and
+  debrief traces are preserved for every run.
+- The separate seed-42 Normal hold-control retains hash `61357596d8800592`.
+- Generated JSON and Markdown artifacts are deterministic.
 
 ## Global Skills
 
-- `simple-code-writer` and `preferred-workflow`.
-
+- `preferred-workflow`, `simple-code-writer`, `spec-driven-developer`, and
+  `code-reviewer`.

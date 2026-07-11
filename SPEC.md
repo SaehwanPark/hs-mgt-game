@@ -3151,6 +3151,38 @@ reconstructing it from the diff.
   - All six source artifacts and 39 runs report supported coverage.
 
 
+- Feature: Operating-Loop AI Validation Matrix
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.11.1
+
+  Summary:
+  Capture and audit five deterministic operating-loop policy lanes across
+  seeds 42–44 and Easy, Normal, Hard, and Expert competitive configurations.
+
+  Done:
+  - Completed 60 competitive runs and 1,440 committed operating months.
+  - Preserved player-owned demand, treated volume, unmet demand, revenue, cost,
+    margin, cash, attribution, hashes, observations, commands, and debriefs.
+  - Confirmed 10 distinct command trajectories, 140 capacity/demand bottleneck
+    months, 269 operating-loss months, 60 workforce-capacity months, and 76
+    threshold-crossing candidates.
+  - Kept runtime promotion deferred because the findings are descriptive and do
+    not identify a concrete unexplained player-facing gap.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, ruleset, state-hash, balance, or
+    difficulty change.
+  - No causal marginal-effect, dominance, calibration, winnability,
+    human-learning, or policy-validity claim.
+
+  Verification:
+  - Six focused Python tests, 108 full Python tests, 289 Rust tests, clippy,
+    formatting, JSON validation, deterministic artifact regeneration, and diff
+    checks pass.
+  - Seed-42 Normal hold-control retains month-one hash `61357596d8800592`.
+
+
 ## Present
 
 None. All scheduled features are complete.

@@ -842,6 +842,11 @@ They should capture campaign, seed, difficulty, agent profile or prompt,
 actor-visible observations, submitted commands, validation failures, histories,
 and debriefs.
 
+The v0.11.1 validation artifact completes this matrix across 60 runs and 1,440
+committed months. Its bottleneck, loss, trajectory, and threshold findings are
+descriptive routing evidence only; runtime promotion remains deferred pending a
+concrete unexplained player-facing, instructor-facing, or domain-review gap.
+
 ## 7.6 Educational Artifact and Debrief Review
 
 Evaluate whether the game artifacts make the intended reasoning inspectable:

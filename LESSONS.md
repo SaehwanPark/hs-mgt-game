@@ -3,6 +3,24 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Preserve a Golden Control Beside New Policy Matrices
+
+- Context: The v0.11.1 matrix intentionally submits different commands from the
+  existing seed-42 competitive preset, so its transition hashes differ.
+- Resolution: Run a separate hold-policy control and assert the known month-one
+  hash while keeping new policy trajectories in their own evidence artifact.
+- Prevention: Do not compare a changed-policy trajectory directly with a golden
+  hash; preserve an unchanged control path when validating runtime compatibility.
+
+## Operating Diagnostics Must Separate Traceability From Causality
+
+- Context: The v0.11.1 matrix exposed repeated losses, bottlenecks, and threshold
+  crossings across deterministic policy lanes.
+- Resolution: Report ranges and candidate signals while explicitly deferring
+  causal marginal-effect, dominance, balance, calibration, and learning claims.
+- Prevention: Use controlled follow-up evidence before tuning an operating rule
+  or promoting a player-facing change.
+
 ## Close the Consequence Loop Before Expanding Content
 
 - Context: External review found that competitive cash funded actions but had
