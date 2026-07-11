@@ -40,11 +40,13 @@ calibration, or policy validity. Runtime promotion remains deferred.
 - Working branch: `feat/strategy-diversity-evidence-v0.10.48`
 - Primary commits: `5542aae` implementation and `946921a` handoff correction
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/127
+- CI: GitHub `check` passed.
 - Review loop: three independent passes plus the follow-up review complete.
 - Findings: no Critical, High, Medium, or Low actionable findings; Pass 2's
   stale-handoff finding was fixed in `946921a`.
 - Review comments: no external review threads at handoff update time.
-- Merge-ready: pending CI confirmation.
+- Merge-ready: yes; CI and review gates passed, pending the normal GitHub merge
+  decision.
 
 ## Known Limits
 
