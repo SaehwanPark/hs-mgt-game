@@ -129,6 +129,19 @@ python3 _workspace/experiments/v0.10.41-consultant-advice-usage/run_sessions.py
 python3 -m json.tool _workspace/experiments/v0.10.41-consultant-advice-usage/results.json
 ```
 
+As of `v0.10.42`, the consultant-advice synthesis closes the generic-baseline
+evidence chain. The v0.10.40 and v0.10.41 artifacts establish observation,
+history, debrief, reproducibility, visible-cue, and fallback behavior across
+existing profiles, seeds, and Normal/Hard difficulty. Keep the advisor market
+deferred unless a later artifact identifies a concrete limitation that the
+generic baseline cannot address. These artifacts do not establish advice
+quality, causal impact, human learning, calibration, or balance evidence.
+
+```bash
+python3 -m json.tool _workspace/experiments/v0.10.40-consultant-advice-evidence/results.json
+python3 -m json.tool _workspace/experiments/v0.10.41-consultant-advice-usage/results.json
+```
+
 As of `v0.10.35`, the difficulty pressure dimension gate selects rival
 information and monitoring pressure visibility as the next bounded difficulty
 surface to design or test if difficulty remains the active priority. Treat it
