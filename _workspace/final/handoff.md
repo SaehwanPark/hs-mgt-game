@@ -40,12 +40,12 @@ learning, calibration, or policy validity. Runtime promotion remains deferred.
 
 - Base branch: `main`
 - Working branch: `feat/teachability-observation-capture-v0.10.50`
-- Primary commits: pending implementation and review.
-- PR URL: pending PR creation.
-- CI: pending PR CI.
-- Review loop: pending three independent passes plus follow-up if required.
-- Findings: pending review.
-- Merge-ready: no, pending verification and PR review.
+- Primary commits: `2e1b12f` implementation and `9ca3344` review fixes.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/129
+- CI: GitHub `check` passed.
+- Review loop: three independent passes plus follow-up complete.
+- Findings: two Medium findings fixed; no Critical or High findings.
+- Merge-ready: yes; PR is open and clean, pending normal merge decision.
 
 ## Known Limits
 
