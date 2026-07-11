@@ -18,8 +18,8 @@ v0.10.45–v0.10.48 competitive teachability evidence chain.
 
 ## Verification
 
-- Focused Python tests: 5 passed.
-- Full Python suite: 37 passed.
+- Focused Python tests: 6 passed.
+- Full Python suite: 39 passed.
 - Rust tests: 285 passed; integration and doc tests passed.
 - `cargo fmt --check` passed.
 - `cargo clippy --all-targets -- -D warnings` passed.
@@ -36,7 +36,8 @@ calibration, or policy validity. Runtime promotion remains deferred.
 
 - Base branch: `main`
 - Working branch: `feat/teachability-gate-synthesis-v0.10.49`
-- Primary commits: `431e8a5` implementation and `a4aca26` PR handoff correction.
+- Primary commits: `431e8a5` implementation, `a4aca26` handoff correction, and
+  the review robustness fix.
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/128
 - Review loop: pending three independent passes and any required follow-up.
 - Merge-ready: pending commit, PR, CI, and review completion.

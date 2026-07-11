@@ -47,6 +47,26 @@ class TeachabilityGateSynthesisTests(unittest.TestCase):
     self.assertIn("explanation", report["limited_dimensions"])
     self.assertIn("outcome", report["limited_dimensions"])
 
+  def test_incomplete_and_malformed_records_remain_limited(self):
+    report = RUNNER.audit_source(
+      {
+        "batch_id": "fixture",
+        "code_version": "0.10.49",
+        "campaign": RUNNER.CAMPAIGN,
+        "runs": [
+          {
+            "completion_status": "incomplete",
+            "turn_trace": None,
+          },
+          "malformed run",
+        ],
+      },
+      "fixture/results.json",
+    )
+
+    self.assertEqual(report["status"], "limited")
+    self.assertIn("visibility", report["limited_dimensions"])
+
   def test_endpoint_differences_do_not_create_a_runtime_promotion(self):
     audit = RUNNER.build_audit()
 

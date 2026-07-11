@@ -51,25 +51,30 @@ def _dimension(name, covered, eligible, description):
   }
 
 
-def _run_dimensions(runs):
+def _entries(run, name):
+  value = run.get(name, []) if isinstance(run, dict) else []
+  return value if isinstance(value, list) else []
+
+
+def _run_dimensions(runs, eligible=None):
   complete = [
     run for run in runs
     if isinstance(run, dict) and run.get("completion_status") == "complete"
   ]
-  eligible = len(complete)
+  eligible = len(complete) if eligible is None else eligible
   visibility = sum(
     bool(run.get("final_observation"))
-    or any(entry.get("observation") for entry in run.get("turn_trace", []) if isinstance(entry, dict))
+    or any(entry.get("observation") for entry in _entries(run, "turn_trace") if isinstance(entry, dict))
     for run in complete
   )
   response = sum(
     bool(run.get("commands"))
-    or any(entry.get("submitted_command") for entry in run.get("turn_trace", []) if isinstance(entry, dict))
+    or any(entry.get("submitted_command") for entry in _entries(run, "turn_trace") if isinstance(entry, dict))
     for run in complete
   )
   follow_through = sum(
     bool(run.get("commands"))
-    or any(entry.get("latest_transition") for entry in run.get("turn_trace", []) if isinstance(entry, dict))
+    or any(entry.get("latest_transition") for entry in _entries(run, "turn_trace") if isinstance(entry, dict))
     for run in complete
   )
   outcome = sum(
@@ -107,17 +112,24 @@ def _audit_instructor_summary(artifact):
 
 def _audit_specialized(artifact):
   batch_id = artifact.get("batch_id", "")
-  runs = artifact.get("runs", [])
+  raw_runs = artifact.get("runs", [])
+  runs = raw_runs if isinstance(raw_runs, list) else []
   eligible = len(runs)
   if batch_id == "v0.10.46-expert-clearability-evidence":
-    complete = sum(run.get("completion_status") == "complete" for run in runs)
-    dimensions = _run_dimensions(runs)
+    complete = sum(
+      isinstance(run, dict) and run.get("completion_status") == "complete"
+      for run in runs
+    )
+    dimensions = _run_dimensions(runs, eligible)
     dimensions["clearability"] = _dimension(
       "clearability", complete, eligible, "Completion of the full Expert campaign"
     )
     return dimensions, eligible
   if batch_id == "v0.10.47-command-effect-explainability":
-    supported = sum(run.get("coverage_status") == "supported" for run in runs)
+    supported = sum(
+      isinstance(run, dict) and run.get("coverage_status") == "supported"
+      for run in runs
+    )
     return {
       "command-to-effect traceability": _dimension(
         "command-to-effect traceability",
@@ -127,7 +139,10 @@ def _audit_specialized(artifact):
       )
     }, eligible
   if batch_id == "v0.10.48-strategy-diversity-evidence":
-    supported = sum(run.get("status") == "supported" for run in runs)
+    supported = sum(
+      isinstance(run, dict) and run.get("status") == "supported"
+      for run in runs
+    )
     return {
       "strategy diversity": _dimension(
         "strategy diversity",
@@ -165,9 +180,12 @@ def audit_source(artifact, source_path):
 
 
 def _matrix(artifact):
+  runs = artifact.get("runs", [])
+  if not isinstance(runs, list):
+    return set()
   return {
     (run.get("profile_name"), run.get("seed"))
-    for run in artifact.get("runs", [])
+    for run in runs
     if isinstance(run, dict)
   }
 
@@ -227,6 +245,17 @@ def build_audit(paths=SOURCE_PATHS):
         "expected_member_count": matrix_continuity["expected_member_count"],
       }
     )
+  if unexplained_gaps:
+    promotion_basis = (
+      "Evidence coverage gaps were found; runtime promotion remains deferred "
+      "until a separate player-facing, instructor-facing, or domain-review "
+      "finding establishes an unexplained problem."
+    )
+  else:
+    promotion_basis = (
+      "No concrete unexplained player-facing, instructor-facing, or domain-review gap was found; "
+      "traceability and endpoint differences are not causal evidence."
+    )
   return {
     "batch_id": BATCH_ID,
     "code_version": CODE_VERSION,
@@ -239,10 +268,7 @@ def build_audit(paths=SOURCE_PATHS):
     "unexplained_gaps": unexplained_gaps,
     "unexplained_gap_count": len(unexplained_gaps),
     "runtime_promotion": "deferred",
-    "promotion_basis": (
-      "No concrete unexplained player-facing, instructor-facing, or domain-review gap was found; "
-      "traceability and endpoint differences are not causal evidence."
-    ),
+    "promotion_basis": promotion_basis,
     "limitations": LIMITATIONS,
   }
 
@@ -295,7 +321,7 @@ def render_markdown(audit):
       "",
       audit["promotion_basis"],
       "",
-      "No concrete unexplained gap was identified by this evidence synthesis. A future runtime or interface slice still requires a player-facing, instructor-facing, or domain-review finding that current observations, histories, diagnostics, and debriefs cannot explain.",
+      "A future runtime or interface slice still requires a player-facing, instructor-facing, or domain-review finding that current observations, histories, diagnostics, and debriefs cannot explain.",
       "",
       "## Unexplained gaps",
       "",
