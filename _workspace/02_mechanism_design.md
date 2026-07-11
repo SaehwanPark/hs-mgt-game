@@ -1,66 +1,66 @@
-# Mechanism Design - Information-to-Action Comparison
+# Mechanism Design - Instructor Debrief-Use Audit
 
 ## Goal and Roadmap Phase
 
-Phase 7 competitive teachability and validation: make the existing path from
-visible information to later simulated-policy action inspectable across runs.
+Phase 7 competitive teachability and validation: establish whether existing
+information-to-action evidence contains the trace fields needed for review
+before any runtime promotion.
 
 ## Slice Boundary
 
-- Campaign: `competitive-regional-v1`, existing 24-month artifacts.
-- Inputs: v0.10.37, v0.10.40, v0.10.41, v0.10.42, and v0.10.43 evidence.
-- Output: one instructor-facing comparison document and routing checkpoint.
-- Excluded: new capture runs, runtime changes, new actors, and new schemas.
+- Inputs: v0.10.37, v0.10.40, v0.10.41, and v0.10.43 JSON artifacts.
+- Output: deterministic JSON and Markdown audit artifacts plus findings.
+- Included: shallow field-presence checks for visibility, response,
+  follow-through, outcome, and explanation.
+- Excluded: new sessions, runtime changes, new actors, new schemas, and human
+  or classroom evaluation.
 
 ## Actors and Authority
 
-- Human-led health system: submits the command stream being reviewed.
-- Existing rival systems and consultant baseline: unchanged simulation actors or
-  observation sources.
-- Advice-aware, monitor-reactive, and control policies: deterministic evidence
-  wrappers, not new game actors.
+- Existing human-led system and simulated policy wrappers remain unchanged.
+- The audit is an offline reviewer tool, not a game actor or transition.
 
 ## State, Beliefs, and Observations
 
-- True rival state remains inside the Rust simulation.
-- Review starts from actor-visible observations and legal resource hints.
-- Later history and debrief information are labeled as retrospective context.
+- Visibility checks use observation, rendered-option, monitor-signal, and source
+  timing fields already captured in the artifacts.
+- Outcome and explanation checks use retrospective hashes, histories, and
+  debrief fields only as retrospective evidence.
 
 ## Commands, Events, and Effects
 
-- Existing commands, events, effects, validation, and hashes are reused.
-- The comparison records visibility, response or fallback, durable follow-through,
-  realized tradeoffs, and explanation continuity without creating transitions.
+- The audit reads commands, response records, and debrief traces without
+  creating or resolving commands, events, or effects.
+- Missing fields are classified rather than synthesized.
 
 ## Strategic Interaction
 
-The evidence compares information surfaces and policy responses, but does not
-estimate a causal treatment effect. Controls and reactive policies intentionally
-submit different commands.
+The audit does not compare policy quality or estimate treatment effects. It only
+checks whether a reviewer can locate the trace categories used by the existing
+comparison surface.
 
 ## Assumptions and Parameters
 
-- Source-month, observation-turn, option, command, resource, and debrief fields
-  are read from existing artifacts.
-- All interpretation labels are gameplay or educational abstractions.
+- Complete runs are the eligible denominator for coverage.
+- `supported`, `limited`, and `unsupported` describe artifact coverage only.
+- The report uses fixed source ordering and stable JSON serialization.
 
 ## Educational Debrief Hooks
 
-- What was visible at decision time?
-- What response was affordable and actually submitted?
-- Did the response become durable operational follow-through?
-- Which outcome was intended, tolerated, or an unfavorable realization?
-- Can the debrief explain the difference without scoring the learner?
+- Can the reviewer identify what was visible before the command?
+- Can the response or fallback be located?
+- Can later operational follow-through be distinguished from public intent?
+- Can outcomes and retrospective explanation be inspected without judging from
+  hidden state?
 
 ## Determinism and Replay Notes
 
-No randomness, transition, replay, state hash, or persistence path changes. The
-comparison consumes stable deterministic artifacts and preserves the distinction
-between actor observations and retrospective debrief information.
+No randomness, transition, replay, state hash, persistence, or MCP path changes.
+The audit is read-only with respect to source artifacts and deterministic in its
+generated outputs.
 
 ## Open Questions
 
-- Human or instructor review is still needed to assess whether the sequence is
-  sufficiently clear.
-- No runtime promotion is justified unless current surfaces fail to explain a
-  concrete future finding.
+- Human or instructor review is still required to assess clarity.
+- Runtime work remains deferred unless future review identifies a concrete gap
+  that current observations, history, diagnostics, and debriefs cannot explain.

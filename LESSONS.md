@@ -860,3 +860,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep actor utility, organizational outcomes, social welfare, and
   educational evaluation distinct; require a new concrete gap before changing
   runtime information, difficulty, balance, or advisor mechanics.
+
+## Audit Evidence Coverage Before Promoting Runtime Work
+
+- Context: Continuing the Phase 7 information-to-action comparison after the
+  v0.10.44 synthesis.
+- Symptom: A comparison surface can appear complete while its supporting
+  artifacts use different field names and trace shapes.
+- Resolution: Added a small read-only audit that checks visibility, response,
+  follow-through, outcome, and explanation coverage across the existing source
+  artifacts without launching new sessions or normalizing them into a broader
+  schema.
+- Prevention: Verify field coverage and deterministic regeneration first; keep
+  supported trace fields separate from human clarity, learning, causal value,
+  balance, and runtime-promotion claims.
