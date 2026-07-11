@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Zero-Retry Observation Captures Are Compatibility Evidence
+
+- Context: Capturing nine observation-driven Hard competitive runs for v0.10.50.
+- Symptom: Complete runs with no validation failures can look like proof that
+  the command surface is comprehensible or educationally effective.
+- Resolution: Preserve the full observation, legal-hint, command, retry,
+  history, hash, and debrief trace, then label zero retries as capture
+  compatibility only.
+- Prevention: Do not promote command, guidance, difficulty, or debrief changes
+  without a concrete player-facing or instructor-facing gap.
+
 ## Synthesize Evidence Without Promoting Runtime Work
 
 - Context: Closing the v0.10.45–v0.10.48 competitive teachability evidence
