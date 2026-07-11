@@ -40,9 +40,10 @@ causal value, decision quality, human learning, balance, or policy validity.
 - Base branch: `main`
 - Base branch: `main`
 - Working branch: `feat/command-effect-explainability-v0.10.47`
-- Commits: `d5bc256` implementation and `3d007fb` deferred-trace test coverage
+- Commits: `d5bc256` implementation, `3d007fb` deferred-trace test coverage,
+  and `2848923` verified domain-QA handoff
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/126
-- CI: GitHub `check` pending after the latest push
+- CI: GitHub `check` passed
 - Review loop: three independent passes complete, plus one follow-up pass after
   the test-coverage update
 - Findings: no Critical, High, Medium, or Low actionable findings; runtime
