@@ -1,37 +1,55 @@
-# Evidence Map - Project-Recovery Use Evidence
+# Evidence Map - Debrief-Use Audit
 
 ## Scope
 
-Test whether the current plain project-limit response supports a safe
-response-conditioned retry when the actor-visible observation still shows two
-active projects.
+Audit whether existing Phase 7 artifacts preserve an inspectable chain from
+actor-visible information through submitted response, accepted transition and
+hash, and event-specific retrospective explanation.
 
 ## Sources Reviewed
 
 - `README.md`, `docs/roadmap.md`, `docs/design_principles.md`, and `SPEC.md`.
-- `docs/playtest-findings-v0.10.55.md` and its generated artifact.
-- `docs/agent-playtest-protocol.md` and `docs/mcp-playtesting-guide.md`.
-- The existing MCP wrapper and v0.10.54/v0.10.55 project-limit runners.
+- `docs/harness/health-policy-strategy-game/team-spec.md`.
+- v0.10.43, v0.10.50, v0.10.51, v0.10.54, v0.10.55, and v0.10.56 JSON artifacts.
+- Existing findings, playtesting guidance, and prior evidence audits.
 
-## Mechanism and Information Boundary
+## Mechanisms and Institutions
 
-- The project ceiling, monthly draws, and delayed effects are existing game
-  abstractions, not calibrated health-system constraints.
-- The recovery policy receives actor-visible observation, legal command hints,
-  plain validation error text, and the post-failure observation.
-- The recovery branch excludes hidden state, history, error codes, structured
-  hints, and resource payloads.
+- Rival information, project concurrency, resource validation, and strategic
+  tradeoffs are existing game abstractions, not calibrated forecasts.
+- The audit evaluates evidence structure; it does not add or reinterpret a
+  health-policy mechanism.
 
-## Evidence Interpretation
+## Actor Incentives and Information
 
-- Same-turn preservation, safe retry, and hash continuity establish traceability.
-- A response-conditioned deterministic policy does not establish human
-  comprehension, learning, advice quality, balance, or strategy quality.
-- Runtime validation hints remain deferred unless another artifact identifies a
-  concrete unexplained recovery failure.
+- Source traces retain the actor-visible observation and submitted policy.
+- Rejected commands and retries are treated as validation-surface records, not
+  modeled outcomes or evidence of human confusion.
+- Instructor-only retrospective material remains distinct from information
+  available during play.
+
+## Assumptions
+
+- Existing artifact contracts are the source of truth and remain immutable.
+- Heterogeneous source shapes require source-specific adapters, not a shared
+  analytics schema.
+- Event-specific debrief markers establish trace coverage only.
+
+## Unresolved Questions
+
+- Whether an actual instructor or learner would find any supported explanation
+  clear remains untested.
+- A future wording or interface change requires concrete player-facing,
+  instructor-facing, or domain-review evidence of an unexplained gap.
+
+## Design Implications
+
+- Keep the audit read-only and deterministic.
+- Report missing fields explicitly as limited evidence.
+- Preserve source identity, seed identity, hash continuity, and evidence limits.
 
 ## Risks
 
-- The fixed three-seed Hard matrix may not expose organic player friction.
-- The project ceiling is a game abstraction and must not be presented as a
-  real-world operational constraint.
+- Simulated-policy trace continuity can be mistaken for comprehension or
+  educational effectiveness.
+- The project ceiling and rival behavior remain gameplay abstractions.

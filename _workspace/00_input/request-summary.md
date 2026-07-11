@@ -1,42 +1,42 @@
-# Request Summary - Project-Recovery Use Evidence
+# Request Summary - Debrief-Use Audit
 
 ## Scope
 
 - Roadmap phase: Phase 7 competitive teachability and validation gate.
-- Task type: development continuation and bounded evidence capture.
-- Working branch: `feat/project-recovery-use-v0.10.56`.
-- Version: `0.10.56`.
-- Selected slice: test response-conditioned recovery from the existing
-  two-project limit without changing runtime or MCP behavior.
+- Task type: development continuation and bounded evidence audit.
+- Base branch: `main`.
+- Working branch: `feat/debrief-use-audit-v0.10.57`.
+- Version: `0.10.57`.
+- Selected slice: audit event-specific continuity from actor-visible evidence
+  through response, accepted transition/hash, and debrief explanation.
 
 ## Sources
 
 - Canonical project documents and the harness team specification.
-- `SPEC.md` Phase 7 queue and the v0.10.55 ASC observation handoff.
-- `_workspace/experiments/v0.10.55-asc-project-observation/results.json`.
-- Existing MCP wrapper, project-limit runner, and focused evidence tests.
+- `SPEC.md` Phase 7 queue and v0.10.56 project-recovery handoff.
+- v0.10.43 rival-information follow-through artifact.
+- v0.10.50 observation-driven teachability artifact.
+- v0.10.51 resource-probe artifact.
+- v0.10.54–v0.10.56 project-recovery artifacts.
 
 ## Expected Files
 
-- `_workspace/experiments/v0.10.56-project-recovery-use/`.
-- `tests/test_project_recovery_use.py`.
-- `docs/playtest-findings-v0.10.56.md` and `docs/mcp-playtesting-guide.md`.
-- Version, changelog, specification, README, lessons, and required handoff
-  artifacts.
+- `_workspace/experiments/v0.10.57-debrief-use-audit/`.
+- `tests/test_debrief_use_audit.py`.
+- `docs/playtest-findings-v0.10.57.md` and `docs/mcp-playtesting-guide.md`.
+- Version, changelog, specification, README, lessons, and required handoffs.
 
 ## Validation Target
 
-- Run `competitive-regional-v1` at Hard difficulty for seeds 42, 43, and 44.
-- Accept clinic and ASC projects before probing a third project.
-- On rejection, use only the plain error and unchanged actor-visible
-  observation to select `hold`.
-- Require one expected rejection, one safe retry, 24 transitions, debrief
-  coverage, and v0.10.55 state-hash continuity per run.
+- Review six existing artifacts and 39 completed source runs.
+- Verify visibility, response, follow-through, outcome, and explanation coverage.
+- Verify v0.10.54→v0.10.55→v0.10.56 state-hash continuity across seeds 42–44.
 - Regenerate JSON and Markdown deterministically.
+- Keep runtime promotion deferred unless a separate player-facing,
+  instructor-facing, or domain-review gap is demonstrated.
 
 ## Non-Goals
 
-- No project-limit hint, resource payload, transition, command, scenario,
-  replay, MCP schema, state-hash, scoring, balance, or difficulty change.
-- No human-comprehension, learning, calibration, winnability, or policy-
-  validity claim.
+- No new MCP sessions, runtime mechanics, MCP schema, scenario, replay, state
+  hash, scoring, balance, difficulty, or debrief wording change.
+- No generalized evidence schema or human/classroom learning claim.

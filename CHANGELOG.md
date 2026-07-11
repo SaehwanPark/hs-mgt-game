@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.10.57] - 2026-07-11
+
+### Added
+- Added a deterministic read-only debrief-use audit across six existing Phase
+  7 evidence artifacts.
+- Added focused coverage for event-specific visibility, response, follow-through,
+  outcome, explanation, and project-recovery hash continuity.
+
+### Changed
+- Kept runtime, MCP behavior, scenarios, replay formats, state hashes, scoring,
+  difficulty, balance, and debrief wording unchanged.
+- Kept runtime promotion deferred because the reviewed source shapes identify no
+  unexplained traceability gap.
+- Bumped the package version to `0.10.57`.
+
 ## [0.10.56] - 2026-07-11
 
 ### Added

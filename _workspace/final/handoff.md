@@ -1,48 +1,47 @@
-# Final Handoff - Project-Recovery Use Evidence
+# Final Handoff - Debrief-Use Audit
 
 ## Summary
 
-Implemented v0.10.56 response-conditioned project-limit recovery evidence. The
-simulated policy selects `hold` using only the plain validation error and
-unchanged actor-visible observation; no runtime or MCP behavior changed.
+Implemented v0.10.57 as a deterministic read-only audit of event-specific
+debrief trace continuity across six existing Phase 7 evidence artifacts. The
+audit covers 39 completed runs and preserves runtime promotion as deferred.
 
 ## Changed Files
 
-- Added the v0.10.56 experiment runner, generated artifact, diagnostics, and
-  focused Python tests.
-- Updated findings, playtesting guidance, SPEC, changelog, README, lessons,
-  package version, and required `_workspace` handoff artifacts.
+- Added `_workspace/experiments/v0.10.57-debrief-use-audit/` with the runner,
+  generated JSON, and Markdown report.
+- Added `tests/test_debrief_use_audit.py`.
+- Updated findings, MCP playtesting guidance, SPEC, changelog, README, lessons,
+  package metadata, and required `_workspace` handoffs.
 
 ## Verification
 
-- Three Hard runs completed 24 transitions each with one expected rejection and
-  one response-conditioned safe retry.
-- Accepted-transition state hashes matched v0.10.55.
-- Structured validation fields consumed: 0/3.
-- Generated JSON and Markdown were deterministic.
-- Full repository checks passed: 286 Rust tests and 87 Python tests, formatting,
-  clippy, automated playtests, and diff checks.
+- Seven focused audit tests and 94 full Python tests pass.
+- 286 Rust tests pass with `--test-threads=1`.
+- `cargo fmt --check` and clippy with `-D warnings` pass.
+- Automated baseline playtests complete for 24 sessions.
+- JSON validation, deterministic regeneration, and `git diff --check` pass.
+- v0.10.54→v0.10.55→v0.10.56 project hashes match for seeds 42–44.
 
 ## Domain QA
 
-Pass. The slice preserves true-state, transition, actor-observation, replay,
-debrief, and educational-boundary constraints.
+Pass. The audit preserves source-specific evidence boundaries, true-state and
+actor-observation distinctions, deterministic replay evidence, and the
+project's educational evidence limits.
 
 ## Known Limits
 
-- This is deterministic simulated-policy traceability evidence, not human or
-  classroom comprehension evidence.
-- Structured project hints, resource payloads, broader project guidance, and
-  runtime tuning remain deferred.
+- This is simulated-policy traceability evidence, not human or classroom
+  comprehension evidence.
+- Supported explanation coverage does not establish debrief clarity, learning,
+  causal strategy value, balance, calibration, or policy validity.
+- Runtime, MCP, scenario, replay, state-hash, scoring, difficulty, balance,
+  and debrief wording changes remain deferred.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/project-recovery-use-v0.10.56`
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/135
-- CI: GitHub `check` passed; merge state is clean.
-- Review loop: Pass 1 found a Medium artifact-integrity gap and fixed it by
-  binding probe results to the expected schedule; Passes 2 and 3 found no
-  actionable issues.
-- No Critical or High findings remain; no review threads are open.
-- Merge-ready: yes, pending the normal merge decision.
+- Working branch: `feat/debrief-use-audit-v0.10.57`
+- PR URL: pending implementation handoff
+- Review loop: pending three independent code-reviewer passes
+- Merge-ready: no, until PR review and CI are complete

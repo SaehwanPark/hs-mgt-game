@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Event-Specific Debrief Coverage Is Still Traceability Evidence
+
+- Context: Auditing v0.10.43, v0.10.50, v0.10.51, and v0.10.54–v0.10.56
+  artifacts for debrief use in v0.10.57.
+- Symptom: A source can contain observations, commands, hashes, and a debrief
+  while still appearing to prove more educational value than it does.
+- Resolution: Check each source-specific visibility, response,
+  follow-through, outcome, and explanation step; preserve missing fields as
+  explicit evidence gaps and keep runtime promotion deferred.
+- Prevention: Do not infer debrief clarity, comprehension, learning, strategy
+  quality, or causal value from event-specific trace continuity alone.
+
 ## Response-Conditioned Recovery Is Still Simulated-Policy Evidence
 
 - Context: Testing whether the existing project-limit error surface supports a
