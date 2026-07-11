@@ -36,11 +36,15 @@ calibration, or policy validity. Runtime promotion remains deferred.
 
 - Base branch: `main`
 - Working branch: `feat/teachability-gate-synthesis-v0.10.49`
-- Primary commits: `431e8a5` implementation, `a4aca26` handoff correction, and
-  the review robustness fixes.
+- Primary commits: `431e8a5` implementation, `a4aca26`/`40e8649` handoff
+  updates, `f442793`/`9289a84` review fixes, and `1a1765f` generated-output
+  refresh.
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/128
-- Review loop: pending three independent passes and any required follow-up.
-- Merge-ready: pending commit, PR, CI, and review completion.
+- CI: GitHub `check` passed.
+- Review loop: three independent passes plus follow-up complete.
+- Findings: no Critical or High findings; three Medium documentation/
+  robustness findings fixed. Review disposition posted on the PR.
+- Merge-ready: yes; pending the normal GitHub merge decision.
 
 ## Known Limits
 
