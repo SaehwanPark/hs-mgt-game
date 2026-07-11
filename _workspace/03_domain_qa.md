@@ -33,5 +33,5 @@ None.
 
 ## Verification Evidence
 
-Focused audit tests pass, the generated artifact is deterministic, and the full
-Python/Rust verification suite is required before PR handoff.
+Focused audit tests, deterministic artifact checks, and the full Python/Rust
+verification suite pass before PR handoff.
