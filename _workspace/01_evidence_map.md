@@ -2,58 +2,57 @@
 
 ## Scope
 
-Map the v0.11.0 operating-loop baseline into a bounded Phase 7 simulated-policy
-validation artifact without promoting runtime work.
+Map the v0.11.1 operating-loop artifact into a bounded Phase 7 audit of
+decision-to-debrief explainability without promoting runtime work.
 
 ## Sources Reviewed
 
-- Canonical project documents and the v0.11.0 final handoff.
-- Existing MCP observations, transition summaries, attribution strings, hashes,
-  debriefs, and operating-loop tests.
-- The agent-playtest protocol and current Phase 7 roadmap gate.
+- The v0.11.1 60-run, 1,440-month JSON artifact and strict audit.
+- Existing actor-visible observations, submitted commands, transition effects,
+  player-owned operating events, hashes, and debriefs.
+- `docs/roadmap.md`, `SPEC.md`, the AI-agent playtest protocol, and ADR-0009.
 
 ## Mechanisms and Institutions
 
-- Regional demand and market position determine system demand.
+- Regional demand and market position determine player-owned demand.
 - Effective staffed capacity determines treated and unmet demand.
 - Quality and payer pressure affect operating revenue.
-- Workforce and physical footprint determine operating cost.
-- Revenue minus cost changes cash available for later decisions.
+- Workforce and footprint affect operating cost and cash margin.
+- The debrief records decisions and aggregated mechanisms but may not link every
+  operating outcome to its month-specific decision section.
 
 ## Actor Incentives and Information
 
-- Policy lanes represent organizational priorities, not validated learner types.
-- The player receives only actor-visible observations and compact legal-resource
-  hints; rival private operating results remain excluded.
-- Organizational cash, access, workforce, legitimacy, and market position remain
-  distinct from social welfare and educational evaluation.
+- The five policy lanes are test-client behaviors, not runtime actor classes.
+- The audit uses only the player’s actor-visible observation and committed
+  transition records for player-owned claims.
+- Rival-private operating information is not copied into the new audit output.
+- Organizational outcomes remain distinct from social welfare and educational
+  evaluation.
 
 ## Assumptions
 
-- Integer operating values are gameplay abstractions, not calibrated dollars,
-  encounters, or forecasts.
-- Transition-summary operating effects are sufficient for player-owned monthly
-  accounting checks without adding an MCP state snapshot.
-- Seeds and difficulty levels provide descriptive variation, not causal controls.
+- Existing v0.11.1 signal classification is the authoritative abstraction for
+  loss, capacity/demand, and workforce-capacity categories.
+- Global attributed-mechanism and resolved-event lines are not month-level
+  debrief evidence.
+- Integer operating quantities are gameplay abstractions, not calibrated units.
 
 ## Unresolved Questions
 
-- Whether repeated losses or threshold crossings represent a real gameplay gap
-  requires controlled follow-up evidence.
-- No AI matrix can establish enjoyment, comprehension, learning, or policy validity.
-- Payer-specific volume, shared demand diversion, and contested hiring remain
-  deferred.
+- Whether month-specific operating outcome links improve debrief use requires a
+  later bounded design or validation slice.
+- The audit cannot establish causal effects, balance, learning, or enjoyment.
 
 ## Design Implications
 
-- Preserve the existing MCP and deterministic transition boundaries.
-- Parse only Riverside operating events/effects for player-owned attribution.
-- Label common actions, effect stability, and threshold crossings as candidates,
-  not dominance or causal marginal effects.
-- Keep runtime promotion deferred unless a concrete unexplained gap is found.
+- Keep the audit at the artifact boundary; do not add MCP or runtime fields.
+- Report decision context, transition attribution, month-level debrief links,
+  and global summaries as separate dimensions.
+- Route any future debrief wording change through focused tests and domain QA.
 
 ## Risks
 
-- False precision from numerical ranges.
-- Over-reading repeated simulated-policy losses as balance evidence.
-- Confusing traceability and debrief coverage with educational effectiveness.
+- Treating aggregated attribution as month-specific explanation.
+- Over-reading trace completeness as educational effectiveness.
+- Leaking or reinterpreting rival-private state while producing diagnostics.

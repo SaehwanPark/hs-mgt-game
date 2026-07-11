@@ -846,6 +846,9 @@ The v0.11.1 validation artifact completes this matrix across 60 runs and 1,440
 committed months. Its bottleneck, loss, trajectory, and threshold findings are
 descriptive routing evidence only; runtime promotion remains deferred pending a
 concrete unexplained player-facing, instructor-facing, or domain-review gap.
+The v0.11.2 read-only audit confirms complete decision and transition linkage but
+no month-specific operating-outcome debrief linkage; this remains a debrief
+review candidate, not a runtime tuning basis.
 
 ## 7.6 Educational Artifact and Debrief Review
 

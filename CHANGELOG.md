@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.2] - 2026-07-11
+
+### Added
+- Added a deterministic read-only audit of operating-loss and bottleneck
+  explainability using the v0.11.1 competitive validation artifact.
+- Distinguished decision-time context, transition attribution, month-level
+  debrief linkage, and global debrief attribution in the audit output.
+
+### Changed
+- Recorded 469 categorized signal-months with complete decision and transition
+  linkage but no month-specific operating-outcome debrief linkage.
+- Kept runtime promotion, debrief wording, MCP behavior, rulesets, state hashes,
+  balance, and scenarios unchanged.
+- Bumped the package to `0.11.2`.
+
 ## [0.11.1] - 2026-07-11
 
 ### Added

@@ -3183,15 +3183,47 @@ reconstructing it from the diff.
   - Seed-42 Normal hold-control retains month-one hash `61357596d8800592`.
 
 
+- Feature: Operating-Loss Explainability Audit
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.11.2
+
+  Summary:
+  Audited the v0.11.1 competitive operating traces for decision-time context,
+  player-owned transition attribution, and month-level debrief linkage.
+
+  Done:
+  - Reused the deterministic 60-run, 1,440-month v0.11.1 artifact without
+    launching new sessions or changing runtime behavior.
+  - Classified 140 capacity/demand, 269 operating-loss, and 60 workforce-
+    capacity signal-months.
+  - Confirmed 469/469 decision-context, transition-attribution, and monthly
+    decision links.
+  - Identified 0/469 month-specific operating-outcome links while preserving
+    60/60 global debrief attribution summaries as a separate category.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, ruleset, state-hash, balance,
+    difficulty, or debrief wording change.
+  - No causal marginal-effect, dominance, calibration, winnability,
+    human-learning, or policy-validity claim.
+
+  Verification:
+  - Seven focused Python tests, 108 full Python tests, 289 Rust tests, clippy,
+    formatting, JSON validation, deterministic regeneration, and diff checks
+    pass.
+
+
 ## Present
 
 None. All scheduled features are complete.
 
 ## Future
 
-The v0.11.0 operating loop is the current gameplay-maturity baseline. Before
-adding actors, commands, service lines, or platform layers, validate it with AI
-strategy archetypes across seeds and rival configurations. Required diagnostics
+The v0.11.0 operating loop and v0.11.2 explainability audit are the current
+gameplay-maturity baseline. Before adding actors, commands, service lines, or
+platform layers, validate it with AI strategy archetypes across seeds and rival
+configurations. Required diagnostics
 are effect attribution, monthly bottlenecks, unused or dominated actions,
 trajectory diversity, low-influence state variables, stable marginal effects,
 and threshold cliffs. Runtime changes require a concrete unexplained gap.
