@@ -41,6 +41,9 @@ policy validity.
 - Working branch: `feat/expert-clearability-evidence-v0.10.46`
 - Commits: `6f283f9` implementation, `80076f6` handoff, `df9d2cf` failure preservation
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/125
-- CI: pending
-- Review loop: pending three independent `code-reviewer` passes
-- Merge-ready: no, until PR review and CI complete
+- CI: GitHub `check` passed
+- Review loop: three independent `code-reviewer` passes complete
+- Findings: one Medium failure-preservation issue fixed in `df9d2cf`; one Low
+  commit-list documentation issue fixed in `d22fc18`; no Critical or High findings
+- Review comments: no external review threads; dispositions recorded on PR #125
+- Merge-ready: yes, pending the normal GitHub merge decision
