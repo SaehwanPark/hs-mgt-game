@@ -42,6 +42,6 @@ project's educational evidence limits.
 
 - Base branch: `main`
 - Working branch: `feat/debrief-use-audit-v0.10.57`
-- PR URL: pending implementation handoff
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/136
 - Review loop: pending three independent code-reviewer passes
 - Merge-ready: no, until PR review and CI are complete
