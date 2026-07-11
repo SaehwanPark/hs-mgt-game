@@ -1,4 +1,4 @@
-# Domain QA - Consultant Advice Evidence Synthesis
+# Domain QA - Rival Information Follow-Through
 
 ## Status
 
@@ -6,39 +6,34 @@ pass
 
 ## Reviewed Inputs
 
-- `docs/playtest-findings-v0.10.42.md`
-- v0.10.40 and v0.10.41 result artifacts and diagnostics
-- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
-  and `_workspace/02_mechanism_design.md`
-- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, and the harness team specification
+- `docs/playtest-findings-v0.10.43.md` and generated diagnostics.
+- The three-arm capture runner and focused Python tests.
+- Request summary, evidence map, and mechanism design.
+- Canonical project and harness documents.
 
 ## Findings
 
-- The slice is bounded to Phase 7 evidence synthesis and does not promote the
-  deferred advisor market.
-- It preserves the distinction between actor-visible advice, committed history,
-  debrief records, actor utility, social welfare, and educational evaluation.
-- It explicitly treats advice-aware selection and endpoint differences as
-  simulated-policy evidence rather than advice quality or causal evidence.
-- It preserves deterministic replay boundaries because no runtime or artifact
-  schema changes are introduced.
+- The slice remains within Phase 7 and does not promote runtime difficulty or
+  monitor changes.
+- Reactive decisions use actor-visible observations and visible resources only.
+- The controls preserve the observation-only interpretation of monitoring.
+- Signal source months, response turns, ignored signals, and fallback behavior
+  are inspectable in the artifact.
+- Endpoint differences are explicitly treated as non-causal.
 
 ## Required Fixes
 
-- None, provided artifact validation and full repository checks pass.
+- None, provided the full verification commands remain passing.
 
 ## Residual Risks
 
-- The evidence is simulated-agent and scripted-policy evidence, not human or
-  classroom validation.
-- Generic advice wording remains an uncalibrated gameplay abstraction.
-- Advisor-market value remains unresolved and must not be inferred from the
-  current matrices.
+- Simulated policies are not human-learning or classroom evidence.
+- Signal classification remains a gameplay abstraction tied to current wording.
+- The artifact does not establish monitor value, balance, or Expert winnability.
 
 ## Verification Evidence
 
-- Both v0.10.40 and v0.10.41 JSON artifacts parse successfully.
-- The v0.10.41 runner regenerates stable output without runtime-file changes.
-- Python tests, Rust formatting/lint/tests, automated playtests, and diff checks
-  pass.
+- 18 complete runs, 24 transitions each, zero validation failures.
+- Monitor-ignoring and unmonitored hashes match across all controls.
+- Focused/full Python tests, JSON validation, Rust checks, automated playtests,
+  and diff checks pass.

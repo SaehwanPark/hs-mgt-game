@@ -152,6 +152,7 @@ reconstructing it from the diff.
 | Consultant Advice Traceability Evidence | v0.10.40 | Verify rendered consultant options, committed history, and debrief continuity across existing deterministic competitive captures | 294 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Usage Evidence | v0.10.41 | Compare advice-aware and advice-ignoring simulated policies using visible cues, resource-safe fallback, and exact observation/history/debrief continuity | 285 | `8926f71296f39efc` (competitive) |
 | Consultant Advice Evidence Synthesis | v0.10.42 | Synthesize generic advice visibility, traceability, and usage evidence and retain the advisor-market promotion gate | 285 | `8926f71296f39efc` (competitive) |
+| Rival Information Follow-Through Evidence | v0.10.43 | Compare monitor-reactive, monitor-ignoring, and unmonitored policies for visible signal-to-next-turn response traceability | 285 | `8926f71296f39efc` (competitive) |
 
 
 - Feature: Consultant Advice Evidence Synthesis
@@ -2630,6 +2631,39 @@ reconstructing it from the diff.
   - `cargo test` (all 237 tests pass)
   - `python3 scripts/run_automated_playtests.py`
 
+
+
+- Feature: Rival Information Follow-Through Evidence
+  Status: Complete
+  Started: 2026-07-10
+  Version: 0.10.43
+
+  Summary:
+  Added a bounded Phase 7 MCP evidence matrix testing whether deterministic
+  policies respond on the next turn to rival intelligence exposed by the
+  actor-visible monitor surface.
+
+  Done:
+  - Added monitor-reactive, monitor-ignoring, and unmonitored policies across
+    seeds 42–44 and Hard/Expert difficulty for 18 total runs.
+  - Recorded visible signal source months, next-turn response commands, ignored
+    controls, and safe resource-aware behavior.
+  - Verified monitor-ignoring and unmonitored control hashes match across all
+    seed/difficulty pairs.
+  - Updated the Phase 7 findings, MCP playtesting guide, handoffs, changelog,
+    README milestone, lessons, and package metadata.
+
+  Deferred / Non-Goals:
+  - No runtime monitor, difficulty, balance, scoring, rival-AI, MCP schema,
+    scenario, replay, ruleset, or state-hash change.
+  - No causal monitor-value, human-learning, policy-validity, or calibration
+    claim.
+
+  Verification:
+  - 18 runs completed 24 transitions each with zero validation failures.
+  - Evidence artifact regeneration was byte-for-byte stable.
+  - Focused and full Python tests, formatting, clippy, Rust tests, automated
+    playtests, JSON validation, and diff checks passed.
 
 
 ## Present
