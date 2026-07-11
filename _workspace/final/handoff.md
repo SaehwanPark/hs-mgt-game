@@ -1,51 +1,54 @@
-# Final Handoff - Command-to-Effect Explainability Evidence
+# Final Handoff - Strategy-Diversity Evidence
 
 ## Summary
 
-Implemented the v0.10.47 Phase 7 command-to-effect explainability audit over the
-existing v0.10.46 Expert competitive evidence artifact.
+Implemented the v0.10.48 Phase 7 strategy-diversity audit over the existing
+v0.10.46 Expert competitive evidence artifact.
 
 ## Changed Files
 
 - Added a deterministic read-only audit, generated JSON/Markdown output, and
-  focused Python tests for all command verbs, neutral holds, unmatched traces,
-  incomplete runs, and deterministic rendering.
-- Reviewed all 12 source runs: every command has action-specific transition
-  evidence and a matching monthly `Player:` debrief record.
-- Added findings, playtesting guidance, SPEC/changelog/version updates, lessons,
-  and refreshed project handoffs.
-- No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, or
-  balance files changed.
+  focused Python tests for command-family normalization, trajectories, hold
+  rates, first-turn signals, incomplete records, and final tradeoffs.
+- Reviewed all 12 source runs: four distinct profile trajectories, no common
+  first-turn family across every profile, and a final tradeoff record for every
+  run.
+- Updated findings, SPEC, changelog/version, README, playtesting guidance,
+  lessons, evidence map, domain QA, and project handoff state.
+- No Rust runtime, scenario, replay, MCP schema, state-hash, scoring, balance,
+  difficulty, or debrief behavior changed.
 
 ## Verification
 
-- All 12 source runs are represented and supported with zero unmatched commands.
-- Audit JSON and Markdown output regenerate deterministically.
-- Focused and full Python tests, formatting, clippy, Rust tests, automated
-  playtests, and diff checks pass.
+- Focused Python tests: 5 passed.
+- Full Python suite: 33 passed.
+- Rust tests: 285 passed; integration and doc tests passed.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- Automated stabilization and competitive playtests passed.
+- Generated JSON validation and `git diff --check` passed.
 
 ## Domain QA
 
-Pass. The result is bounded command traceability evidence and does not claim
-causal value, decision quality, human learning, balance, or policy validity.
-
-## Known Limits
-
-- The audit covers four policies, three seeds, one campaign, and one difficulty.
-- Aggregated effects do not establish command causality.
-- Runtime changes remain deferred because no concrete explainability gap was found.
+Pass. The result is descriptive simulated-policy evidence and does not claim
+causality, dominance, optimal strategy, balance, winnability, human learning,
+calibration, or policy validity. Runtime promotion remains deferred.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/command-effect-explainability-v0.10.47`
-- Primary commits: `d5bc256` implementation, `3d007fb` deferred-trace test coverage,
-  and `2848923` verified domain-QA handoff
-- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/126
-- CI: GitHub `check` passed
-- Review loop: three independent passes complete, plus one follow-up pass after
-  the test-coverage update
-- Findings: no Critical, High, Medium, or Low actionable findings; runtime
-  promotion remains deferred
-- Review comments: no external review threads
-- Merge-ready: yes; CI and review gates passed, pending the normal GitHub merge decision
+- Working branch: `feat/strategy-diversity-evidence-v0.10.48`
+- Primary commits: `5542aae` implementation and `TBD` handoff correction
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/127
+- Review loop: three independent passes complete; Pass 2 identified the stale
+  handoff, which this commit fixes; follow-up review remains required.
+- Findings: no Critical or High findings; one documentation finding fixed.
+- Review comments: no external review threads at handoff update time.
+- Merge-ready: pending follow-up review and CI confirmation.
+
+## Known Limits
+
+- The audit covers four deterministic policies, three seeds, one campaign, and
+  one difficulty.
+- Command families are descriptive groupings, not validated strategy classes.
+- Endpoint tradeoffs do not establish causal command effects or strategy value.
