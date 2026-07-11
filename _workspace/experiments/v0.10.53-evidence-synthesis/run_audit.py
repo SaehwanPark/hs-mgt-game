@@ -191,7 +191,11 @@ def _matrix(artifact):
 
 
 def _control_continuity(artifacts):
-  by_batch = {artifact.get("batch_id"): artifact for artifact in artifacts}
+  by_batch = {
+    artifact.get("batch_id"): artifact
+    for artifact in artifacts
+    if isinstance(artifact, dict)
+  }
   capture = by_batch.get("v0.10.50-teachability-observation-capture", {})
   probe = by_batch.get(CONTROL_BATCH_ID, {})
   expected_controls = {
@@ -224,7 +228,11 @@ def _control_continuity(artifacts):
 
 
 def _matrix_continuity(artifacts):
-  by_batch = {artifact.get("batch_id"): artifact for artifact in artifacts}
+  by_batch = {
+    artifact.get("batch_id"): artifact
+    for artifact in artifacts
+    if isinstance(artifact, dict)
+  }
   capture_matrix = _matrix(by_batch.get("v0.10.50-teachability-observation-capture", {}))
   pacing_matrix = _matrix(by_batch.get("v0.10.52-decision-load-evidence", {}))
   supported = capture_matrix == EXPECTED_MATRIX and pacing_matrix == EXPECTED_MATRIX

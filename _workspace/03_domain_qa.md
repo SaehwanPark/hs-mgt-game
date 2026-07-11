@@ -39,8 +39,8 @@ None.
 
 ## Verification Evidence
 
-- Focused synthesis tests: 6 passed.
+- Focused synthesis tests: 7 passed.
 - Generated JSON and Markdown regenerate deterministically.
-- Full Python suite: 64 passed.
+- Full Python suite: 65 passed.
 - Rust tests, formatting, Clippy, automated stabilization and competitive
   playtests, and `git diff --check` passed.

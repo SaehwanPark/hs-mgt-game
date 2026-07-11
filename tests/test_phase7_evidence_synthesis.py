@@ -76,6 +76,16 @@ class Phase7EvidenceSynthesisTests(unittest.TestCase):
 
     self.assertEqual(report["status"], "limited")
 
+  def test_non_object_sources_do_not_crash_continuity_checks(self):
+    self.assertEqual(
+      RUNNER._control_continuity([[], {}])["status"],
+      "limited",
+    )
+    self.assertEqual(
+      RUNNER._matrix_continuity([[], {}])["status"],
+      "limited",
+    )
+
   def test_markdown_rendering_is_deterministic_and_bounded(self):
     audit = RUNNER.build_audit()
 

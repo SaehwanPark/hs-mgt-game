@@ -17,9 +17,9 @@ v0.10.51, and v0.10.52 Phase 7 evidence artifacts.
 
 ## Verification
 
-- Focused synthesis tests: 6 passed.
+- Focused synthesis tests: 7 passed.
 - Generated JSON and Markdown regenerated deterministically.
-- Full Python suite: 64 passed.
+- Full Python suite: 65 passed.
 - `cargo test --all -- --test-threads=1` passed.
 - `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings` passed.
 - Automated stabilization and competitive playtests passed.
