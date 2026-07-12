@@ -162,6 +162,36 @@ class CurrentCodeTeachabilityCaptureTests(unittest.TestCase):
     self.assertEqual(audit["status"], "limited")
     self.assertIn("run validation", {gap["type"] for gap in audit["unexplained_gaps"]})
 
+  def test_short_history_is_limited_without_crashing(self):
+    artifact = make_artifact()
+    artifact["runs"][0]["history"] = []
+    artifact["runs"][0]["state_hashes"] = []
+    artifact["runs"][0]["final_hash"] = None
+
+    audit = RUNNER.build_audit(artifact)
+
+    self.assertEqual(audit["status"], "limited")
+    self.assertIn("run validation", {gap["type"] for gap in audit["unexplained_gaps"]})
+
+  def test_malformed_retry_field_is_limited_without_crashing(self):
+    artifact = make_artifact()
+    artifact["runs"][0]["turn_trace"][0]["retry_commands"] = None
+
+    audit = RUNNER.build_audit(artifact)
+
+    self.assertEqual(audit["status"], "limited")
+    self.assertIn("run validation", {gap["type"] for gap in audit["unexplained_gaps"]})
+
+  def test_active_streak_uses_month_order(self):
+    artifact = make_artifact()
+    trace = artifact["runs"][0]["turn_trace"]
+    trace[0]["submitted_command"] = "monitor target=northlake depth=1"
+    trace[2]["submitted_command"] = "monitor target=northlake depth=1"
+
+    audit = RUNNER.build_audit(artifact)
+
+    self.assertEqual(audit["reports"][0]["longest_active_streak"], 1)
+
   def test_history_hash_contract_is_rejected(self):
     artifact = make_artifact()
     artifact["runs"][0]["state_hashes"][0] = "wrong-hash"

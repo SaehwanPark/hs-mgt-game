@@ -83,22 +83,23 @@ def summarize_run(run):
   action_commands = 0
   hold_commands = 0
   action_counts = []
+  active_flags = []
   retry_count = 0
   for entry in trace:
     if not isinstance(entry, dict):
+      active_flags.append(False)
       continue
     verbs = command_verbs(entry.get("submitted_command", ""))
     action_count = sum(verb != "hold" for verb in verbs)
     action_commands += action_count
     hold_commands += sum(verb == "hold" for verb in verbs)
+    active_flags.append(action_count > 0)
     if action_count:
       action_counts.append({"turn": entry.get("turn"), "actions": action_count})
-    retry_count += len(entry.get("retry_commands", []))
+    retries = entry.get("retry_commands", [])
+    if isinstance(retries, list):
+      retry_count += len(retries)
 
-  active_flags = [
-    item["actions"] > 0
-    for item in action_counts
-  ]
   longest_active_streak = 0
   current_streak = 0
   for active in active_flags:
@@ -113,7 +114,11 @@ def summarize_run(run):
     "completion_status": run.get("completion_status", "unknown"),
     "transition_count": run.get("transition_count", len(_history(run))),
     "trace_count": len(trace),
-    "validation_failure_count": len(run.get("validation_failures", [])),
+    "validation_failure_count": (
+      len(run.get("validation_failures", []))
+      if isinstance(run.get("validation_failures", []), list)
+      else 0
+    ),
     "retry_count": retry_count,
     "action_commands": action_commands,
     "active_months": len(action_counts),
@@ -163,6 +168,8 @@ def audit_run(run, source_path):
     issues.append("completion_status is not complete")
   if run.get("transition_count") != EXPECTED_TRANSITIONS:
     issues.append("transition_count is not 24")
+  if any(not isinstance(item, dict) for item in history):
+    issues.append("history contains a malformed transition")
   history_hashes = [item.get("state_hash") for item in history if isinstance(item, dict)]
   if run.get("state_hashes") != history_hashes:
     issues.append("state_hashes do not match committed history")
@@ -179,9 +186,13 @@ def audit_run(run, source_path):
       turns.append(entry.get("turn"))
       if not REQUIRED_TRACE_FIELDS <= set(entry):
         issues.append("turn_trace entry is missing required fields")
+      if not isinstance(entry.get("retry_commands"), list):
+        issues.append("retry_commands is not a list")
       latest_transition = entry.get("latest_transition")
       if not isinstance(latest_transition, dict):
         issues.append("turn_trace entry is missing latest_transition")
+      elif index >= len(history_hashes):
+        issues.append("turn_trace transition has no matching history entry")
       elif latest_transition.get("state_hash") != history_hashes[index]:
         issues.append("turn_trace transition hash is out of alignment")
     if turns != list(range(1, EXPECTED_TRANSITIONS + 1)):
@@ -234,6 +245,7 @@ def validate_artifact(artifact):
 
   runs = artifact.get("runs")
   assert isinstance(runs, list)
+  assert all(isinstance(run, dict) for run in runs)
   coordinates = [(run.get("profile_id"), run.get("seed")) for run in runs]
   assert len(runs) == EXPECTED_RUN_COUNT
   assert len(set(coordinates)) == len(coordinates)
@@ -243,6 +255,7 @@ def validate_artifact(artifact):
     assert run.get("difficulty") == DIFFICULTY
     assert run.get("completion_status") in {"complete", "incomplete", "failed"}
     history = _history(run)
+    assert all(isinstance(transition, dict) for transition in history)
     assert run.get("state_hashes") == [
       transition.get("state_hash")
       for transition in history
