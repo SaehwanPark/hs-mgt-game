@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Re-run Evidence After a Debrief Surface Fix
+
+- Context: The v0.11.2 audit identified 469 operating signal-months with no
+  month-specific outcome line, and v0.11.3 added the missing player-owned
+  debrief output.
+- Resolution: Re-ran the unchanged five-profile, three-seed, four-difficulty
+  matrix and audited 1,440 monthly sections instead of treating focused report
+  tests as complete evidence.
+- Prevention: Keep post-fix matrix validation separate from runtime changes;
+  require exact month-level coverage and preserve the golden control hash.
+
 ## Render Committed Monthly Outcomes Beside Monthly Decisions
 
 - Context: The v0.11.2 audit found that operating signal-months had complete

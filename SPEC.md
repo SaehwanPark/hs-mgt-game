@@ -3242,14 +3242,45 @@ reconstructing it from the diff.
     golden seed-42 coverage, and diff checks pass.
 
 
+- Feature: Post-v0.11.3 Operating-Outcome Debrief Validation
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.11.4
+
+  Summary:
+  Re-ran the competitive operating-loop matrix against the v0.11.3 debrief
+  surface and verified month-specific outcome linkage for categorized player
+  operating signals.
+
+  Done:
+  - Captured 60 deterministic competitive runs across five policy profiles,
+    seeds 42/43/44, and Easy/Normal/Hard/Expert.
+  - Audited 1,440 committed months and 469 categorized signal-months.
+  - Confirmed one player-owned operating-result line per committed month and
+    469/469 categorized month-level outcome links.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, ruleset, state-hash, balance,
+    difficulty, calibration, winnability, human-learning, or policy-validity
+    claim.
+  - Runtime promotion remains deferred until a new concrete gameplay,
+    instructor, or domain-review gap is identified.
+
+  Verification:
+  - Matrix capture, audit tests, full Python/Rust suites, formatting, clippy,
+    JSON validation, golden seed-42 coverage, and diff checks pass.
+
+
 ## Present
 
-- Competitive monthly operating-outcome debrief linkage is complete in v0.11.3.
+- Competitive monthly operating-outcome debrief linkage and post-fix
+  validation are complete in v0.11.4.
 
 ## Future
 
-The v0.11.0 operating loop, v0.11.2 explainability audit, and v0.11.3
-month-specific debrief linkage are the current gameplay-maturity baseline.
+The v0.11.0 operating loop, v0.11.2 explainability audit, v0.11.3
+month-specific debrief linkage, and v0.11.4 post-fix validation are the current
+gameplay-maturity baseline.
 Before adding actors, commands, service lines, or platform layers, validate it
 with AI strategy archetypes across seeds and rival
 configurations. Required diagnostics

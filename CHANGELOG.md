@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.4] - 2026-07-11
+
+### Added
+- Added a deterministic post-v0.11.3 validation matrix covering 60 competitive
+  policy runs and 1,440 committed months.
+- Added an audit proving month-specific operating-outcome linkage for all 469
+  categorized player-owned signal-months.
+
+### Changed
+- Preserved runtime transitions, MCP behavior, scenarios, replay formats,
+  rulesets, state hashes, balance, and difficulty; runtime promotion remains
+  deferred pending a concrete new gameplay or educational gap.
+- Bumped the package to `0.11.4`.
+
 ## [0.11.3] - 2026-07-11
 
 ### Added

@@ -6,25 +6,23 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.3 request summary and mechanism design.
-- `src/debrief/report.rs`, `src/debrief/report_tests.rs`, and the MCP session
-  test covering the new output.
-- `docs/playtest-findings-v0.11.2.md`, `SPEC.md`, `docs/roadmap.md`, README,
-  design principles, and the harness team specification.
-- Full Rust/Python verification output and the seed-42 golden test.
+- v0.11.4 request summary and evidence contract.
+- New capture/audit scripts, focused Python tests, generated matrix artifacts,
+  and v0.11.4 findings.
+- `SPEC.md`, `docs/roadmap.md`, `docs/agent-playtest-protocol.md`,
+  `docs/mcp-playtesting-guide.md`, design principles, and harness team spec.
 
 ## Findings
 
-- The implementation is limited to the concrete Phase 7 debrief linkage gap
-  identified by v0.11.2.
-- Monthly values are read from the committed player `next` state, preserving
-  the distinction between realized outcomes and decision-time observations.
-- Rival operating values are not rendered by the new helper; existing rival
-  action visibility rules remain unchanged.
-- No stochastic input, transition semantics, actor utility, social-welfare
-  scoring, replay format, or state hash changed.
-- The output uses visible game units and does not imply calibrated financial,
-  clinical, policy, or learning validity.
+- The slice stays within the Phase 7 evidence gate and does not add runtime
+  behavior or a generalized evidence framework.
+- Player-owned operating outcomes are checked against committed transitions and
+  matching monthly debrief sections.
+- Rival-owned operating values are counted only as a privacy regression signal,
+  never as player evidence.
+- Actor utility, social welfare, and educational evaluation remain distinct.
+- The evidence remains descriptive and uses visible game units rather than
+  calibrated policy or clinical quantities.
 
 ## Required Fixes
 
@@ -32,17 +30,19 @@ None.
 
 ## Residual Risks
 
-- The new line improves traceability but does not establish causal marginal
-  effects, balance, winnability, calibration, or human learning.
-- Older deserialized competitive states that lack monthly fields retain their
-  existing serde defaults; no replay migration is introduced.
+- Complete traceability does not establish debrief clarity, learning, causal
+  marginal effects, balance, or winnability.
+- The 60-run matrix remains scripted-policy evidence, not human play evidence.
 
 ## Verification Evidence
 
-- `cargo fmt --check`
-- `cargo clippy --all-targets -- -D warnings`
-- `cargo test --all -- --test-threads=1` — 291 passed
-- `cargo test --test golden_competitive_seed42` — passed within the full suite
-- `python3 -m unittest discover -s tests -p 'test_*.py'` — 116 passed
-- `python3 -m unittest tests/test_operating_loss_explainability.py` — 8 passed
-- `git diff --check`
+- Focused v0.11.4 audit tests — 6 passed.
+- Matrix capture and audit output — 60 runs, 1,440 months, 469/469 links.
+- `cargo fmt --check` — passed.
+- `cargo clippy --all-targets -- -D warnings` — passed.
+- `cargo test --all -- --test-threads=1` — 291 passed.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 122 passed.
+- JSON validation and `git diff --check` — passed.
+- Three independent code-reviewer passes completed; one Medium privacy-audit
+  finding was fixed and no Critical/High findings remain.
+- GitHub CI `check` passed.
