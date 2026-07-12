@@ -1,47 +1,43 @@
-# Final Handoff - Affiliation Runtime Boundary Proposal v0.12.7
+# Final Handoff - Teachability Queue Closure v0.12.8
 
 ## Result
 
-- Reconciled the affiliation-first design gate with the existing opt-in
-  `regional-affiliation-v1` runtime.
-- Confirmed six minimum contracts: true state, actor observation, resolved
-  inputs, deterministic transition evaluation, history/replay, and debrief.
-- Audited source markers across the ADR, model, observation, input resolution,
-  transition, replay, MCP, scenario, and debrief boundaries.
-- Validated the committed v0.12.2 artifact: 9/9 complete runs, 54/54 stages,
-  and commitments/alternatives/assumptions present in all 54 observations.
-- Authorized no new runtime change. Broader acquisition and consolidation
-  remain evidence-gated.
+- Closed the competitive teachability and validation-loop Future item using the
+  committed v0.12.3 cross-campaign review.
+- Confirmed 2 source lanes, 18/18 complete runs, 270 committed transitions, and
+  zero structural gaps across source-specific review contracts.
+- Authorized no new runtime change; reopen only for a concrete comprehension,
+  pacing, traceability, strategy-comparison, or debrief-use finding.
 
 ## Version boundaries
 
-- Package: `0.12.7`
-- Change surface: proposal artifact, source-boundary audit, focused Python
-  tests, and canonical documentation
+- Package: `0.12.8`
+- Change surface: queue-closure artifact, focused Python tests, and canonical
+  documentation
 - Rust runtime behavior, commands, scenario fields, state hashes, replay
-  formats, and competitive campaign behavior: unchanged
+  formats, and campaign behavior: unchanged
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/affiliation-runtime-boundary-v0.12.7`
-- PR: [#160](https://github.com/SaehwanPark/hs-mgt-game/pull/160)
-- Domain QA: Pass.
+- Working branch: `feat/teachability-queue-closure-v0.12.8`
+- PR: [#161](https://github.com/SaehwanPark/hs-mgt-game/pull/161)
+- Domain QA: Pass for queue closure.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208963339](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208963339).
+- CI: `check` passed in run [29209204446](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209204446).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
-- Proposal source markers: supported across all required boundaries.
-- Existing affiliation artifact: 9/9 complete runs, 54/54 stages, zero
-  validation failures, and 54/54 observations with typed context.
-- Focused proposal tests, 308 Rust tests, 199 Python tests, formatting, clippy,
-  CLI smoke, golden, proposal audit, and diff checks: passed locally.
+- Queue-closure source markers: supported.
+- Existing teachability audit: 18/18 complete runs, 270 stages, zero gaps.
+- Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
+  smoke, golden, audit, and diff checks: passed locally; the PR check also
+  passed.
 
 ## Stop condition
 
-After this proposal merges, no Present item remains authorized. A new runtime
-slice requires concrete playtest, instructor, scenario, domain, or release
-evidence identifying an unexplained gap and a new bounded proposal.
+After this closure merges, this Future item is removed. A new teachability
+slice requires concrete playtest, instructor, scenario, or domain evidence
+identifying an unexplained gap and a new bounded proposal.

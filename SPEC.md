@@ -3794,6 +3794,37 @@ reconstructing it from the diff.
     1,800/1,800 exact source history matches, 1,800/1,800 exact state-hash
     matches, and deferred runtime promotion.
 
+- Feature: Competitive Teachability Queue Closure (v0.12.8)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.8
+
+  Summary:
+  Close the already-supported competitive teachability and validation-loop
+  Future item using the v0.12.3 cross-campaign evidence review.
+
+  Done:
+  - Revalidated 2 source lanes, 18 complete runs, and 270 committed
+    transitions with source-specific decision, response, transition, outcome,
+    debrief, strategy-comparison, and context coverage.
+  - Confirmed zero structural gaps and removed the completed teachability item
+    from the Future queue.
+  - Preserved explicit evidence limits and a reopening condition for any future
+    comprehension, pacing, traceability, strategy-comparison, or debrief-use
+    finding.
+  - Kept runtime, difficulty, balance, and human-learning promotion deferred.
+  - Bumped package metadata to `0.12.8`.
+
+  Deferred / Non-Goals:
+  - No human-learning claim, classroom study, balance change, difficulty tuning,
+    new interface, transition/ruleset change, or new strategic actor.
+
+  Verification:
+  - Closure artifact reports 18/18 complete runs, 270 transitions, 0 gaps, and
+    supported source markers.
+  - 308 Rust tests, 204 Python tests, formatting, clippy, CLI smoke, golden,
+    diff checks, focused closure tests, and deterministic audit validation pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3898,33 +3929,7 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: Competitive teachability and validation loop
-  Phase / Gate: Phase 7; proceed when existing or newly captured playtest
-  evidence identifies one concrete comprehension, pacing, traceability, strategy
-  comparison, or debrief-use issue.
-
-  Next actionable slice:
-  The v0.12.3 cross-campaign review is complete with no structural gap. Keep
-  runtime promotion deferred; route any newly identified comprehension,
-  pacing, traceability, strategy-comparison, or debrief-use issue through a
-  separate bounded evidence slice rather than inferring one from descriptive
-  coverage.
-
-  Verification target:
-  Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible
-  observations, submitted commands, validation failures or retries, histories,
-  debriefs, diagnostic summaries, evidence limits, and prioritized
-  recommendations. Runtime or interface changes require focused tests, and the
-  competitive seed-42 golden hash remains unchanged unless transition semantics
-  intentionally change.
-
-  Deferred / Non-Goals:
-  No external human recruitment gate, formal human-subjects research process,
-  measured human-learning claim, empirical calibration claim, scoring redesign,
-  broad balance pass, multiplayer, new strategic actor class, or platform
-  architecture expansion.
-
-2. Track: Difficulty depth and winnability
+1. Track: Difficulty depth and winnability
   Phase / Gate: Phase 7/9; proceed only after the expansion proposal review and
   difficulty evidence identify one pressure dimension current tiers do not
   express.
@@ -3945,7 +3950,7 @@ strategic actors, or platform architecture.
   scoring redesign, runtime tuning from a single run, or difficulty claim from
   one profile/seed/campaign.
 
-3. Track: Regional affiliation/acquisition slice
+2. Track: Regional affiliation/acquisition slice
   Phase / Gate: Phase 7/9; proceed only after proposal review and domain QA
   approve one bounded US regional affiliation or acquisition scenario.
 
@@ -3966,7 +3971,7 @@ strategic actors, or platform architecture.
   strategy framework, or scenario-schema/runtime implementation in the design
   gate. These remain deferred until a separate runtime proposal is approved.
 
-4. Track: GUI thin-client proof
+3. Track: GUI thin-client proof
   Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
   review evidence shows a graphical surface would improve usability without
   weakening core inspectability.
@@ -3986,7 +3991,7 @@ strategic actors, or platform architecture.
   commitment, non-audited assets, replacement of CLI/MCP, HTTP multiplayer,
   auth, or durable session persistence.
 
-5. Track: Broader simulation breadth and strategic actors
+4. Track: Broader simulation breadth and strategic actors
   Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
   domain-review evidence shows current campaign limits block meaningful strategy
   or learning.
@@ -4015,7 +4020,7 @@ strategic actors, or platform architecture.
   global equilibrium AI, speculative generalized frameworks, and broad
   scenario-authoring infrastructure.
 
-6. Track: Release automation and contributor readiness
+5. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 

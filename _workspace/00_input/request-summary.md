@@ -1,19 +1,17 @@
-# Request Summary — Affiliation Runtime Boundary Proposal v0.12.7
+# Request Summary — Teachability Queue Closure v0.12.8
 
 ## Decision
 
-Re-audit the completed affiliation-first design against the existing opt-in
-`regional-affiliation-v1` runtime and close the SPEC item if its minimum
-state/observation/resolved-input/debrief contracts are already implemented.
+Close the competitive teachability and validation-loop queue item using the
+already committed v0.12.3 cross-campaign evidence review.
 
 ## Target slice
 
-- Verify typed true state and actor observation boundaries.
-- Verify stochastic resolution precedes deterministic transition evaluation.
-- Verify append-only history/replay and debrief utility/welfare separation.
-- Record a no-new-runtime decision unless a concrete gap is found.
+- Validate the two source lanes and source-specific review contracts.
+- Confirm 18 complete runs, 270 committed transitions, and zero gaps.
+- Remove the completed Future item without promoting runtime behavior.
 
 ## Explicit non-goals
 
-No acquisition expansion, deal finance, national consolidation, legal forecast,
-generic actor framework, competitive-campaign change, or broad balance claim.
+No human-learning claim, classroom study, balance change, difficulty tuning,
+new interface, or transition/ruleset change.
