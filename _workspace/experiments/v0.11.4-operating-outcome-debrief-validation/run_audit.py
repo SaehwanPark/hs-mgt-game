@@ -43,8 +43,8 @@ EXPECTED_RUN_COUNT = len(SEEDS) * len(DIFFICULTIES) * len(PROFILES)
 EXPECTED_MONTHS = 24
 SIGNAL_NAMES = ("capacity_or_demand", "operating_loss", "workforce_capacity")
 MONTH_HEADER = re.compile(r"^--- Month (?P<month>\d+) ---$")
+RESULT_LINE = re.compile(r"^Operating result: ")
 PLAYER_RESULT = re.compile(r"^Operating result: treated ")
-RIVAL_RESULT = re.compile(r"^Operating result: .+ Health treated ")
 
 
 def load_artifact(path):
@@ -78,8 +78,9 @@ def outcome_counts(debrief):
   missing = []
   for month in sorted(sections):
     player_lines = [line for line in sections[month] if PLAYER_RESULT.match(line)]
+    result_lines = [line for line in sections[month] if RESULT_LINE.match(line)]
     player += len(player_lines)
-    rival += sum(1 for line in sections[month] if RIVAL_RESULT.match(line))
+    rival += len(result_lines) - len(player_lines)
     if len(player_lines) != 1:
       missing.append(month)
   return {
