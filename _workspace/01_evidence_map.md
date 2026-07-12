@@ -1,76 +1,62 @@
-# Evidence Map - Regional Affiliation Playtest Validation v0.12.1
+# Evidence Map - Regional Affiliation Observation Context v0.12.2
 
 ## Scope
 
-This artifact validates the first post-runtime playtest surface for the
-opt-in `regional-affiliation-v1` scenario. It is Phase 7 evidence, not a new
-health-policy mechanism or a calibration exercise.
+Close the v0.12.1 structural MCP observation-context gap without changing the
+affiliation mechanism or making a learning claim.
 
 ## Sources Reviewed
 
-- `SPEC.md` ranked queue and promotion rules.
-- `docs/roadmap.md` Phase 7.5–7.7 validation gates.
-- `docs/proposal.md` and `docs/design_principles.md` deterministic,
-  observation, actor-utility, social-welfare, and debrief boundaries.
-- `docs/decision-records/0010-regional-affiliation-runtime-slice.md`.
-- `src/model/affiliation.rs`, `src/inputs/resolve_affiliation.rs`,
-  `src/affiliation/`, `src/mcp/session.rs`, and `src/debrief/report.rs`.
-- The bundled `scenarios/regional-affiliation-v1.toml` fixture.
+- `docs/playtest-findings-v0.12.1.md` and
+  `_workspace/experiments/v0.12.1-affiliation-playtest-validation/diagnostics.md`.
+- `src/model/affiliation.rs` and `src/affiliation/observe.rs`.
+- `src/mcp/session.rs` formatter and session tests.
+- `SPEC.md`, `docs/roadmap.md`, `docs/design_principles.md`, and ADR-0010.
 
 ## Mechanisms and Institutions
 
-- One Riverside nonprofit system chooses independence, deferral, or pursuit of
-  one neighboring nonprofit affiliation.
-- Pursuit proceeds through commitments, partner response, review, actor
-  responses, and an integration decision.
-- Partner, review, labor, payer, and community outcomes are explicit resolved
-  inputs and are not controlled by the Riverside command alone.
-- The capture uses the existing MCP observation and transition summaries; it
-  does not infer unexposed true-state values.
+- The typed `AffiliationObservation` already computes player-safe commitments,
+  current-stage alternatives, and stylized assumptions.
+- The MCP adapter currently renders only the compact state summary, so the
+  missing fields are an interface projection gap rather than a missing model
+  mechanism.
+- Rendering these values does not alter partner, review, labor, payer, or
+  community response authority.
 
 ## Actor Incentives and Information
 
-- The player policy uses only the MCP observation and legal command hints.
-- The typed affiliation observation contains reported partner condition,
-  commitments, alternatives, and assumptions, while the MCP formatter exposes
-  only a subset of those fields.
-- Actor response labels are read from committed transition/debrief output and
-  remain separate from Riverside cash, access, quality, workforce, community,
-  and market-share outcomes.
+- Commitments are Riverside's already-committed public/player state.
+- Alternatives are the scenario's staged choices, not hidden actor actions.
+- Assumptions explicitly label stylized inputs and the boundary of Riverside
+  authority; they do not reveal private partner condition or future outcomes.
 
 ## Assumptions
 
-- Seeds 42, 43, and 44 are deterministic replay coordinates, not a statistical
-  sample or calibration basis.
-- The three policies are scripted observation-driven probes: independent and
-  deferred hold after their posture choice; pursuit submits a maximum legal
-  commitment package and begins integration only when the legal surface allows.
-- A missing decision-time field is a product/evidence gap only when it is absent
-  across the captured observation matrix and the typed model makes the field
-  available; it is not evidence that the underlying mechanism is wrong.
+- The typed observation is the authoritative safe source for this rendering.
+- Existing line labels are stable enough for focused tests and deterministic
+  artifact auditing.
+- The v0.12.1 matrix is the compatibility baseline; the new v0.12.2 artifact is
+  additive and leaves the historical v0.12.1 artifact unchanged.
 
 ## Unresolved Questions
 
-- Whether displaying alternatives, assumptions, commitments, and actor response
-  context at decision time improves human comprehension is not measured here.
-- Whether the numeric commitment thresholds produce multiple defensible paths
-  is not established by this nine-run capture.
-- No legal, financial, policy, winnability, balance, or educational-effect claim
-  follows from the artifact.
+- Whether the additional context improves human comprehension is not measured.
+- The slice does not establish that any affiliation posture is optimal or
+  winnable.
+- Numeric thresholds, actor responses, legal abstractions, and balance remain
+  outside scope.
 
 ## Design Implications
 
-- Preserve runtime promotion deferral for balance or ruleset changes.
-- Treat the repeated omission of typed observation context from the MCP
-  formatter as one bounded candidate for the next interface slice.
-- Any follow-up must add focused MCP observation tests and preserve competitive
-  golden hashes and affiliation replay determinism.
+- Render only fields already present in `AffiliationObservation`.
+- Add tests at the MCP session envelope boundary, not only formatter unit
+  details, so the actual player-facing surface is protected.
+- Rerun the same capture and require the prior structural gap to close while
+  keeping runtime promotion deferred for balance and transition changes.
 
 ## Risks
 
-- The matrix is small and scripted; it can expose structural trace gaps but not
-  general player behavior.
-- Debrief text is a rendered evidence surface, so its parsing contract must stay
-  explicit and deterministic.
-- Do not convert the observation-context gap into a claim about learning or
-  require a GUI or generalized analytics layer.
+- A future formatter change could accidentally expose a hidden field; tests and
+  review must inspect the source of every new line.
+- Rendered text is a compatibility surface for the evidence runner, so labels
+  should be explicit and stable.

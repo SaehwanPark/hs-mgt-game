@@ -219,12 +219,11 @@ unchanged. See ADR-0010.
 Last Reviewed: 2026-07-12
 Status: Verified; regional-affiliation runtime boundary documented
 
-The v0.12.1 Phase 7 capture also compares the typed affiliation observation to
-the MCP rendering boundary. The typed model retains alternatives, assumptions,
-and commitments, while the current MCP observation formatter does not render
-those fields. This is a bounded interface-context finding for a follow-up slice;
-it does not authorize changes to transition semantics, rulesets, or replay/hash
-contracts.
+The v0.12.1 Phase 7 capture compared the typed affiliation observation to the
+MCP rendering boundary and found that alternatives, assumptions, and
+commitments were omitted. v0.12.2 renders those existing typed fields through
+the MCP observation without changing transition semantics, rulesets, or
+replay/hash contracts. The projection remains outside the deterministic core.
 
 ### Scenario and Actor Design
 

@@ -3608,39 +3608,72 @@ reconstructing it from the diff.
   - Focused artifact tests, deterministic capture, full Rust/Python suites,
     formatting, clippy, golden, and diff checks pass.
 
-## Present
-
 - Feature: Regional Affiliation Observation Context (v0.12.2)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.1 merge
+  Version: 0.12.2
 
   Summary:
-  Close the v0.12.1 Phase 7 finding by deciding and implementing the smallest
-  MCP observation rendering change that exposes the typed affiliation context
-  needed before staged commands.
+  Close the v0.12.1 MCP observation-context gap by rendering safe typed
+  commitments, staged alternatives, and explicit assumptions.
 
   Done:
-  - v0.12.1 captured 9/9 complete runs across independent, deferred, and
-    pursuit policies at seeds 42, 43, and 44.
-  - The audit grounded one repeated gap in the typed-vs-rendered observation
-    boundary and kept runtime promotion deferred for balance and ruleset work.
+  - Added `Commitments:`, `Alternative:`, and `Assumption:` lines to the MCP
+    affiliation observation using only `AffiliationObservation`.
+  - Added a Rust session-boundary regression covering initial, choose-posture,
+    and post-commitment observations.
+  - Preserved the v0.12.1 artifact and added a separate post-fix 9-run × 3-seed
+    artifact with 54/54 observations carrying the required context.
+  - Closed the structural context gap with zero validation failures while
+    keeping balance, transition, legal, and learning promotion deferred.
+  - Bumped package metadata to `0.12.2`.
 
   Not Yet Done:
-  - Render the agreed alternatives, assumptions, and commitments context in
-    affiliation MCP observations without exposing hidden partner utility or
-    true state.
-  - Add focused MCP observation tests and rerun the v0.12.1 matrix/audit.
+  - A new concrete player-facing, instructor-facing, or domain-review gap is
+    required before any further runtime or balance change is promoted.
 
   Deferred / Non-Goals:
-  - No transition semantics, thresholds, ruleset, replay/hash schema, balance,
-    GUI, AI-rival affiliation behavior, legal forecast, or human-learning
-    claim.
+  - No state, transition, ruleset, threshold, balance, replay/hash, command,
+    scenario, GUI, AI-rival, legal, calibration, winnability, or human-learning
+    changes.
 
   Verification:
-  - Required before this item moves to Past: focused MCP tests, complete Rust
-    and Python suites, unchanged competitive golden hash, deterministic replay,
-    and a rerun showing the decision-time context is present.
+  - 9/9 post-fix runs complete; 54 stages, zero validation failures, and zero
+    missing typed-context fields.
+  - 307 Rust tests, 173 Python tests, formatting, clippy, golden, and diff
+    checks pass.
+
+## Present
+
+- Feature: Phase 7 Teachability Evidence Review (v0.12.3)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.2 merge
+
+  Summary:
+  Continue the evidence-only teachability loop after the affiliation context
+  fix and identify whether a new concrete player-facing, instructor-facing, or
+  domain-review gap remains.
+
+  Done:
+  - v0.12.2 closes the typed-vs-rendered affiliation observation gap and reruns
+    the exact 9-coordinate matrix.
+
+  Not Yet Done:
+  - Design a bounded Phase 7 evidence question from current artifacts before
+    adding runtime or balance work.
+  - Capture only the smallest artifact needed to answer that question and keep
+    source-specific evidence limits explicit.
+
+  Deferred / Non-Goals:
+  - No runtime tuning, broad balance pass, new actor class, GUI, legal forecast,
+    calibration, winnability, or human-learning claim without a separately
+    justified evidence gate.
+
+  Verification:
+  - Required before this item moves to Past: named evidence sources, exact
+    matrix/trace contract, deterministic audit, domain QA, and full repository
+    checks.
 
 ## Future
 
@@ -3695,12 +3728,11 @@ strategic actors, or platform architecture.
   comparison, or debrief-use issue.
 
   Next actionable slice:
-  Implement only the v0.12.2 MCP observation-context follow-up identified by the
-  v0.12.1 affiliation capture, then rerun the same audit. After that fix,
-  preserve the evidence-only posture until a new artifact identifies another
-  concrete comprehension, pacing, traceability, strategy-comparison, or
-  debrief-use gap. Do not promote balance or transition work from descriptive
-  evidence alone.
+  Design an evidence-only Phase 7 review from the current post-fix affiliation
+  and competitive artifacts. Preserve the evidence-only posture until a new
+  artifact identifies another concrete comprehension, pacing, traceability,
+  strategy-comparison, or debrief-use gap. Do not promote balance or transition
+  work from descriptive evidence alone.
 
   Verification target:
   Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible
