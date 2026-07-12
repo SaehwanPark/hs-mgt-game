@@ -134,7 +134,22 @@ impl<'de> serde::Deserialize<'de> for PlayerController {
         style,
         risk_posture,
       } => {
-        let leaked: &'static str = Box::leak(org_name.into_boxed_str());
+        fn intern_string(s: &str) -> &'static str {
+          static NAME_INTERNER: std::sync::OnceLock<
+            std::sync::Mutex<std::collections::HashSet<&'static str>>,
+          > = std::sync::OnceLock::new();
+          let cache_mutex =
+            NAME_INTERNER.get_or_init(|| std::sync::Mutex::new(std::collections::HashSet::new()));
+          let mut cache = cache_mutex.lock().unwrap();
+          if let Some(&static_str) = cache.get(s) {
+            static_str
+          } else {
+            let leaked = Box::leak(s.to_string().into_boxed_str());
+            cache.insert(leaked);
+            leaked
+          }
+        }
+        let leaked: &'static str = intern_string(&org_name);
         Ok(PlayerController::Ai(AiProfile {
           org_name: leaked,
           style,

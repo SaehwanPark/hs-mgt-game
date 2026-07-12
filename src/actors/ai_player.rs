@@ -352,8 +352,8 @@ fn score_command(
 ) -> i32 {
   let cash_pressure = if observation.cash < 50 {
     match risk_posture {
-      RiskPosture::Aggressive => -4,
-      _ => -8,
+      RiskPosture::Moderate => -8, // Flat modifier to all commands, preserving seed-42 Normal baseline
+      _ => 0,
     }
   } else {
     0
@@ -459,15 +459,38 @@ fn score_command(
     CompetitiveCommand::Project { .. } => (style.growth + style.political) as i32,
   };
 
-  if let CompetitiveCommand::Invest { amount, .. } = command
-    && *amount > 20
-  {
+  #[allow(clippy::collapsible_if)]
+  if let CompetitiveCommand::Invest { amount, .. } = command {
+    if *amount >= 20 {
+      match risk_posture {
+        RiskPosture::Conservative => {
+          base -= 5;
+        }
+        RiskPosture::Aggressive => {
+          base += 5;
+        }
+        _ => {}
+      }
+    }
+  }
+
+  if observation.cash < 50 {
     match risk_posture {
       RiskPosture::Conservative => {
-        base -= 5;
+        if matches!(
+          command,
+          CompetitiveCommand::Invest { .. } | CompetitiveCommand::Recruit { .. }
+        ) {
+          base -= 8;
+        }
       }
       RiskPosture::Aggressive => {
-        base += 5;
+        if matches!(
+          command,
+          CompetitiveCommand::Invest { .. } | CompetitiveCommand::Recruit { .. }
+        ) {
+          base -= 4;
+        }
       }
       _ => {}
     }
@@ -679,6 +702,10 @@ mod tests {
       domain: InvestDomain::Beds,
       amount: 30,
     };
+    let invest_small = CompetitiveCommand::Invest {
+      domain: InvestDomain::Beds,
+      amount: 10,
+    };
 
     // Moderate Baseline
     let base_neg = score_command(
@@ -721,13 +748,41 @@ mod tests {
     assert_eq!(agg_neg, base_neg + 5);
     assert_eq!(agg_inv, base_inv + 5);
 
-    // Cash pressure under Aggressive vs Moderate
+    // Cash pressure under Aggressive vs Moderate for spending command (Invest)
     observation.cash = 40; // less than 50
-    let mod_pressure = score_command(&hold, style, RiskPosture::Moderate, &observation);
-    let agg_pressure = score_command(&hold, style, RiskPosture::Aggressive, &observation);
+    let mod_pressure_inv = score_command(&invest_small, style, RiskPosture::Moderate, &observation);
+    let agg_pressure_inv =
+      score_command(&invest_small, style, RiskPosture::Aggressive, &observation);
 
-    // Moderate should have -8 cash pressure, Aggressive should have -4 cash pressure.
+    // Moderate has -8 flat penalty, Aggressive has -4 selective penalty on Invest.
     // Difference is +4 for Aggressive
-    assert_eq!(agg_pressure, mod_pressure + 4);
+    assert_eq!(agg_pressure_inv, mod_pressure_inv + 4);
+
+    // Verify selective bias: Conservative penalizes Invest by -8 relative to Hold under low cash.
+    observation.cash = 100;
+    let cons_hold_high = score_command(&hold, style, RiskPosture::Conservative, &observation);
+    let cons_inv_high = score_command(
+      &invest_large,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+
+    observation.cash = 40;
+    let cons_hold_low = score_command(&hold, style, RiskPosture::Conservative, &observation);
+    let cons_inv_low = score_command(
+      &invest_large,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+
+    // High cash diff: cons_hold_high - cons_inv_high
+    // Low cash diff: cons_hold_low - cons_inv_low
+    // Under low cash, Invest is penalized by 8, so the relative value of Hold increases by 8.
+    assert_eq!(
+      cons_hold_low - cons_inv_low,
+      cons_hold_high - cons_inv_high + 8
+    );
   }
 }
