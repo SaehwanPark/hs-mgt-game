@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Render Committed Monthly Outcomes Beside Monthly Decisions
+
+- Context: The v0.11.2 audit found that operating signal-months had complete
+  decision and transition attribution but only a global debrief mechanism list.
+- Resolution: Render the player-owned operating result from each committed
+  transition next state inside its month section, while leaving active
+  observations and global attribution separate.
+- Prevention: Keep post-run outcome lines explicitly labeled as realized
+  game-unit results; do not treat them as decision-time knowledge, calibrated
+  dollars, or causal proof.
+
 ## Separate Month-Level Debrief Links From Global Attribution
 
 - Context: The v0.11.2 audit found complete decision and transition traces for

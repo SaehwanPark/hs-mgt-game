@@ -90,6 +90,56 @@ fn test_competitive_instructor_summary_and_debrief() {
 }
 
 #[test]
+fn competitive_debrief_includes_player_owned_monthly_operating_results() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let human_system_id = history.genesis.human_system().unwrap().system_id;
+
+  for (month_index, transition) in history.transitions.iter_mut().enumerate() {
+    let human = transition
+      .next
+      .systems
+      .iter_mut()
+      .find(|system| system.system_id == human_system_id)
+      .expect("human system should remain in the committed next state");
+    human.monthly_demand = 30 + month_index as i32;
+    human.monthly_treated_volume = 20 + month_index as i32;
+    human.monthly_unmet_demand = 10;
+    human.monthly_operating_revenue = 40 + month_index as i32;
+    human.monthly_operating_cost = 45 + month_index as i32;
+    human.monthly_operating_margin = -5;
+
+    let rival = transition
+      .next
+      .systems
+      .iter_mut()
+      .find(|system| system.system_id != human_system_id)
+      .expect("a normal campaign should include a rival");
+    rival.monthly_demand = 99;
+    rival.monthly_treated_volume = 99;
+    rival.monthly_unmet_demand = 0;
+    rival.monthly_operating_revenue = 999;
+    rival.monthly_operating_cost = 1;
+    rival.monthly_operating_margin = 998;
+  }
+
+  let debrief = competitive_debrief(&history).join("\n");
+
+  assert_eq!(debrief.matches("Operating result:").count(), 3);
+  assert!(debrief.contains(
+    "Operating result: treated 20/30 demand units (10 unmet); operating revenue 40, operating cost 45, operating margin -5."
+  ));
+  assert!(debrief.contains(
+    "Operating result: treated 21/31 demand units (10 unmet); operating revenue 41, operating cost 46, operating margin -5."
+  ));
+  assert!(debrief.contains(
+    "Operating result: treated 22/32 demand units (10 unmet); operating revenue 42, operating cost 47, operating margin -5."
+  ));
+  assert!(!debrief.contains("treated 99/99 demand units"));
+  assert!(!debrief.contains("operating revenue 999"));
+}
+
+#[test]
 fn test_competitive_decision_quality_warnings() {
   let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 1)
     .expect("should build competitive history");

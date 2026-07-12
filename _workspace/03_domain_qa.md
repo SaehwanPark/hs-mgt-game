@@ -6,45 +6,43 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.2 request summary, evidence map, and mechanism design.
-- v0.11.2 audit script, generated JSON, Markdown diagnostics, and findings.
-- v0.11.1 source artifact, strict audit, canonical docs, and test output.
+- v0.11.3 request summary and mechanism design.
+- `src/debrief/report.rs`, `src/debrief/report_tests.rs`, and the MCP session
+  test covering the new output.
+- `docs/playtest-findings-v0.11.2.md`, `SPEC.md`, `docs/roadmap.md`, README,
+  design principles, and the harness team specification.
+- Full Rust/Python verification output and the seed-42 golden test.
 
 ## Findings
 
-- The slice remains within the Phase 7 evidence-only gate and adds no runtime
-  or interface behavior.
-- The audit preserves the distinction between actor-visible context, committed
-  player-owned effects, global debrief summaries, and month-level debrief links.
-- 469 categorized signal-months retain decision context, transition attribution,
-  and month-level decision links; none has a month-specific operating-outcome
-  debrief link.
-- Rival-private operating information is counted only as a boundary check and is
-  not copied into limited audit records.
-- No randomness, wall-clock input, global mutable state, or unresolved stochastic
-  behavior enters the deterministic simulation core.
-- The findings do not claim causal effects, balance, human learning, or policy
-  validity.
+- The implementation is limited to the concrete Phase 7 debrief linkage gap
+  identified by v0.11.2.
+- Monthly values are read from the committed player `next` state, preserving
+  the distinction between realized outcomes and decision-time observations.
+- Rival operating values are not rendered by the new helper; existing rival
+  action visibility rules remain unchanged.
+- No stochastic input, transition semantics, actor utility, social-welfare
+  scoring, replay format, or state hash changed.
+- The output uses visible game units and does not imply calibrated financial,
+  clinical, policy, or learning validity.
 
 ## Required Fixes
 
-None for the scoped evidence slice.
+None.
 
 ## Residual Risks
 
-- A missing month-level debrief link is a product-evidence candidate, not proof
-  that players fail to understand an outcome.
-- Integer operating values remain uncalibrated game abstractions.
-- Any future debrief wording or runtime change requires a separate bounded slice,
-  focused tests, and renewed domain QA.
+- The new line improves traceability but does not establish causal marginal
+  effects, balance, winnability, calibration, or human learning.
+- Older deserialized competitive states that lack monthly fields retain their
+  existing serde defaults; no replay migration is introduced.
 
 ## Verification Evidence
 
-- Eight focused explainability tests pass.
-- The source audit validates 60 runs and 1,440 transitions.
-- The v0.11.2 audit reproduces 140 capacity/demand, 269 operating-loss, and 60
-  workforce-capacity signals.
-- Decision context, transition attribution, and month-level decision linkage are
-  supported for 469/469 signal-months; month-level outcome linkage is 0/469.
-- Full Python/Rust tests, formatting, clippy, JSON validation, deterministic
-  regeneration, and diff checks are required before PR handoff.
+- `cargo fmt --check`
+- `cargo clippy --all-targets -- -D warnings`
+- `cargo test --all -- --test-threads=1` — 291 passed
+- `cargo test --test golden_competitive_seed42` — passed within the full suite
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 116 passed
+- `python3 -m unittest tests/test_operating_loss_explainability.py` — 8 passed
+- `git diff --check`

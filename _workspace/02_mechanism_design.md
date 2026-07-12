@@ -2,41 +2,33 @@
 
 ## Goal and Roadmap Phase
 
-Phase 7 validation of whether the v0.11.1 operating consequence loop is
-inspectable from decision-time context through debrief evidence.
+Phase 7 debrief traceability follow-up for the competitive campaign. This is a
+reporting-surface correction, not a new simulation mechanism.
 
-## Slice Boundary
+## Output Contract
 
-- Read the existing v0.11.1 artifact only.
-- Audit 60 runs and 1,440 committed months.
-- Classify capacity/demand, operating-loss, and workforce-capacity signals.
-- Make no transition, command, actor, scenario, MCP, replay, or hash change.
+For each committed competitive transition, `competitive_debrief` renders one
+player-owned line inside the matching month section:
 
-## Actors and Authority
+`Operating result: treated X/Y demand units (Z unmet); operating revenue R,
+operating cost C, operating margin M.`
 
-Riverside remains the player-owned system. Existing rivals remain background
-actors in source history, but rival-private operating results are excluded from
-the new audit output.
+The values come from the human system in `transition.next`. The line is a
+realized post-run outcome link and is kept separate from decision-time
+observations, player commands, rival visibility, and global effect summaries.
 
-## State, Beliefs, and Observations
+## Boundaries
 
-For each categorized signal, record whether the trace contains cash, prior
-operations, workforce, project, and labor-market context; a submitted command;
-and a player-owned operating transition with a committed hash.
+- Use the existing typed `CompetitiveTransition` and `HealthSystemState` fields.
+- Keep the change inside the debrief layer; CLI and MCP consume the shared
+  output without separate formatting logic.
+- Do not derive or render rival operating values.
+- Do not change transitions, stochastic inputs, hashes, replay formats, or
+  public MCP DTOs.
 
-## Debrief Contract
+## Validation
 
-Count month-level `Player:` decision links separately from month-level operating
-outcome lines. Count global attributed-mechanism summaries separately and never
-promote them to month-level explanation evidence.
-
-## Determinism and Evidence Limits
-
-The audit uses fixed source JSON, stable sorting, no wall-clock data, and no new
-randomness. It reports traceability only; it does not score decisions or claim
-causal explanation, balance, or learning.
-
-## Open Question
-
-Whether a future debrief should expose month-specific operating outcomes remains
-deferred to a separate bounded design or runtime slice.
+- Focused Rust coverage asserts exact player values and excludes rival sentinel
+  values.
+- MCP end-session coverage confirms the shared debrief contains the line.
+- Full Rust/Python verification and the seed-42 golden test remain required.

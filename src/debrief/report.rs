@@ -1,7 +1,7 @@
 use crate::model::{
-  AttributedEffect, CompetitiveCommand, CompetitiveHistory, CompetitiveWorldState, Event, History,
-  InvestDomain, MonitorTarget, PayerId, PlayerCommand, PledgeType, ProjectKind, RatePosture,
-  RecruitRole,
+  AttributedEffect, CompetitiveCommand, CompetitiveHistory, CompetitiveTransition,
+  CompetitiveWorldState, Event, History, InvestDomain, MonitorTarget, PayerId, PlayerCommand,
+  PledgeType, ProjectKind, RatePosture, RecruitRole,
 };
 use crate::sim::is_public_command;
 
@@ -232,6 +232,11 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
           cmds.join("; ")
         };
         lines.push(format!("Player: {}", cmd_str));
+      }
+
+      if let Some(operating_result) = competitive_operating_result_line(transition, human_system_id)
+      {
+        lines.push(operating_result);
       }
 
       if !transition.consultant_options.is_empty() {
@@ -970,6 +975,27 @@ fn competitive_final_tradeoff_lines(
 
 fn format_event(event: &Event) -> String {
   format!("{}: {}", event.actor, event.description)
+}
+
+fn competitive_operating_result_line(
+  transition: &CompetitiveTransition,
+  human_system_id: u32,
+) -> Option<String> {
+  let human = transition
+    .next
+    .systems
+    .iter()
+    .find(|system| system.system_id == human_system_id)?;
+
+  Some(format!(
+    "Operating result: treated {}/{} demand units ({} unmet); operating revenue {}, operating cost {}, operating margin {:+}.",
+    human.monthly_treated_volume,
+    human.monthly_demand,
+    human.monthly_unmet_demand,
+    human.monthly_operating_revenue,
+    human.monthly_operating_cost,
+    human.monthly_operating_margin,
+  ))
 }
 
 fn format_effect(effect: &AttributedEffect) -> String {
