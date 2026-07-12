@@ -59,6 +59,16 @@ simultaneous action resolution.
 These fields should compose known mechanisms; they must not become executable
 logic or a second rules language.
 
+### Proposed regional-affiliation scenario
+
+ADR-0010 proposes an opt-in `regional-affiliation-v1` scenario rather than an
+extension of the default `competitive-regional-v1` campaign. The proposal
+requires typed content for one Riverside system, one neighboring nonprofit
+partner, a six-stage monthly sequence, learning objectives, and a fixed
+resolved-input deck. This is a design contract only; the current loader,
+scenario format version, and competitive schema remain unchanged until a later
+implementation PR.
+
 ## Turn Schedule Entry (draft)
 
 Each entry describes one executive decision point:
@@ -107,7 +117,8 @@ source of truth for what actually happened in a session.
 - No empirical parameter files; use [`evidence-registry.md`](evidence-registry.md)
   ledger when calibrating rulesets.
 - No merger/acquisition deal-market schema until one regional consolidation
-  slice proves the needed fields.
+  slice proves the needed fields. The v0.11.14 proposal is not that runtime
+  implementation.
 - No GUI-only scenario behavior; graphical clients should consume existing
   scenario content and observation/debrief outputs.
 

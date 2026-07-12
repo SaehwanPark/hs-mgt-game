@@ -874,11 +874,13 @@ profiles across seeds 42–44 at Hard difficulty, confirming 9/9 complete runs,
 These remain descriptive pacing and traceability evidence; runtime promotion
 remains deferred.
 
-The v0.11.13 regional affiliation design gate promotes only an affiliation-first
-conceptual slice for one fictional nonprofit partner. It defines institutional
-review, community benefit, labor, payer, integration, capital, service
-continuity, and access/quality tradeoffs while retaining acquisition, runtime
-state, commands, scenario fields, and legal forecasting as deferred work.
+The v0.11.13 regional affiliation design gate promoted an affiliation-first
+conceptual slice for one fictional nonprofit partner. The v0.11.14 runtime
+proposal now defines an opt-in six-stage `regional-affiliation-v1` scenario,
+minimum state and observation boundaries, explicit resolved inputs, and debrief
+requirements. Runtime state, commands, scenario loading, replay changes, and
+legal forecasting remain deferred until a separate implementation PR passes
+domain QA.
 
 ## 7.6 Educational Artifact and Debrief Review
 
@@ -926,8 +928,9 @@ Current proposal-review candidates:
   leverage, labor effects, integration drag, and access/quality consequences.
   Full deal-market simulation, private-equity rollups, and national
   consolidation strategy remain deferred.
-  The v0.11.13 affiliation-first design gate is complete; a runtime slice still
-  requires a separate implementation proposal and domain/design review.
+  The v0.11.13 affiliation-first design gate and v0.11.14 runtime proposal are
+  complete; runtime implementation still requires a separate implementation PR
+  and domain/design review.
 - **GUI thin client:** design a graphical layer that reuses the same core,
   scenario, observation, replay, and debrief data as the CLI/MCP interfaces.
   Publicly downloadable pixel assets require license review, with CC0 sources

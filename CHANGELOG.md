@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.14] - 2026-07-12
+
+### Added
+- Added a proposed opt-in `regional-affiliation-v1` runtime design for a
+  six-stage affiliation scenario built from existing competitive primitives.
+- Added ADR-0010 and synchronized handoff artifacts defining minimum state,
+  actor observations, resolved inputs, replay, and debrief contracts.
+
+### Changed
+- Bumped the package version to `0.11.14`.
+- Promoted the affiliation work from conceptual gate to runtime proposal while
+  keeping implementation and the default competitive campaign deferred.
+
+### Evidence Limits
+- The proposal is a stylized design contract, not a legal, financial,
+  policy-forecasting, calibration, gameplay, or educational-effect claim.
+- No Rust runtime, commands, scenario files, replay formats, MCP behavior,
+  rulesets, or state-hash logic changed.
+
 ## [0.11.13] - 2026-07-12
 
 ### Added

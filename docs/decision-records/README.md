@@ -29,6 +29,10 @@ consequential technical and design choices in the Health Policy Strategy Game.
 - [ADR-0008: MCP agent interface](0008-mcp-agent-interface.md)
 - [ADR-0009: AI-agent playtest validation path](0009-ai-agent-playtest-validation-path.md)
 
+## Proposed Records
+
+- [ADR-0010: Regional affiliation runtime slice](0010-regional-affiliation-runtime-slice.md)
+
 ## Status Values
 
 - **Proposed** — under discussion, not yet implemented

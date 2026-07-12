@@ -82,8 +82,8 @@ Players should practice:
 - Hot-seat classroom multiplayer (Phase 9)
 - Empirical calibration or forecasting claims
 - Refactoring or replacing stabilization demo
-- Regional merger/acquisition mechanics until a reviewed consolidation slice is
-  promoted from roadmap Future into an active scenario design.
+- Regional merger/acquisition mechanics in the default campaign. The separate
+  `regional-affiliation-v1` proposal is opt-in and not implemented.
 - GUI-specific scenario behavior; future graphical clients must reuse the same
   scenario and core data.
 - Advisor-market, payroll, candidate-pool, or hire/fire mechanics until the

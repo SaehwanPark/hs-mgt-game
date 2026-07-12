@@ -136,6 +136,36 @@ community effects, and educational evaluation. Runtime promotion requires a
 separate implementation proposal after those artifacts identify the minimum
 state, observation, resolved-input, and debrief contracts.
 
+### v0.11.14 Runtime Proposal
+
+The next bounded slice is an opt-in `regional-affiliation-v1` scenario rather
+than an extension of `competitive-regional-v1`. It reuses the competitive
+transition, observation, history, replay, and debrief surfaces for one
+human-led Riverside system and one localized nonprofit partner across six
+monthly stages:
+
+1. assess partner condition and fit;
+2. choose independence, deferral, or affiliation pursuit;
+3. negotiate community, workforce, and service-continuity commitments;
+4. submit for institutional review;
+5. resolve approval, conditions, delay, or rejection; and
+6. begin or decline early integration and record initial consequences.
+
+The future implementation must specify the smallest affiliation state,
+reported partner observations, commitment obligations, review status,
+integration progress, and existing Riverside metrics needed for the slice. It
+must resolve partner, review, labor, payer, community, and integration
+outcomes explicitly before deterministic transition evaluation and retain those
+inputs in append-only history/replay records. Debrief output must distinguish
+Riverside utility, organizational outcomes, community and social-welfare
+effects, and decision quality from outcome quality.
+
+This proposal does not add runtime commands, scenario fields, Rust types,
+replay formats, MCP behavior, ruleset values, or state-hash fields. Those are
+implementation-PR decisions. Direct acquisition, national deal markets,
+private-equity rollups, detailed deal finance, calibrated legal outcomes, and
+changes to the default campaign remain deferred. See ADR-0010.
+
 ## Proposal 3: GUI Layer
 
 The GUI should be a thin client over the existing deterministic core, not a
