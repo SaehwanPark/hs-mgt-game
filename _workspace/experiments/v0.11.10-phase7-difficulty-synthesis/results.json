@@ -1,0 +1,90 @@
+{
+  "artifact_type": "phase7_difficulty_evidence_synthesis",
+  "batch_id": "v0.11.10-phase7-difficulty-synthesis",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.11.10",
+  "contract_findings": [
+    "The all-tier strategy-comparison artifact covers five profiles, three seeds, and four difficulty tiers with complete traceability.",
+    "The post-change Expert artifact covers the same five profiles and three seeds with complete observations, commands, histories, hashes, and debriefs.",
+    "The two artifacts retain source-specific contracts; no shared raw evidence schema is inferred.",
+    "No structural evidence gap was identified in the overlapping profile and seed coordinates."
+  ],
+  "coverage": {
+    "expert_profile_seed_overlap_count": 15,
+    "expert_validation": {
+      "coordinate_count": 15,
+      "run_count": 15,
+      "transition_count": 360
+    },
+    "strategy_comparison_all_tiers": {
+      "coordinate_count": 60,
+      "run_count": 60,
+      "transition_count": 1440
+    }
+  },
+  "evidence_limits": [
+    "This is deterministic simulated-policy traceability evidence, not human comprehension or learning evidence.",
+    "Coverage and contract continuity do not establish causal strategy value, balance, or general Expert winnability.",
+    "The source artifacts were produced at different code versions, so endpoint outcomes are not treated as a causal comparison.",
+    "Operating quantities remain visible integer game abstractions rather than calibrated policy or financial units."
+  ],
+  "gap_status": "no_structural_gap",
+  "golden_control_hash": "61357596d8800592",
+  "next_gate": "Require a concrete unexplained player-facing, instructor-facing, or domain-review gap before runtime promotion.",
+  "ruleset": "competitive-ruleset-0.2.0",
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    {
+      "batch_id": "v0.11.6-strategy-comparison-use-audit",
+      "code_version": "0.11.6",
+      "debrief_outcome_gap_count": 0,
+      "difficulties": [
+        "easy",
+        "normal",
+        "hard",
+        "expert"
+      ],
+      "observation_gap_count": 0,
+      "profiles": [
+        "Access First",
+        "Commercial Focus",
+        "Workforce Resilience",
+        "Capital Modernization",
+        "Coalition/Legitimacy"
+      ],
+      "response_gap_count": 0,
+      "run_count": 60,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "supported_run_count": 60,
+      "transition_count": 1440,
+      "validation_failure_count": 0
+    },
+    {
+      "batch_id": "v0.11.9-expert-difficulty-validation",
+      "code_version": "0.11.9",
+      "completed_run_count": 15,
+      "difficulty": "expert",
+      "profiles": [
+        "Access First",
+        "Commercial Focus",
+        "Workforce Resilience",
+        "Capital Modernization",
+        "Coalition/Legitimacy"
+      ],
+      "run_count": 15,
+      "seeds": [
+        42,
+        43,
+        44
+      ],
+      "trace_contract": "observation, legal commands, submitted command, validation failures, transition, and debrief",
+      "transition_count": 360,
+      "validation_failure_count": 0
+    }
+  ],
+  "state_hash_schema": "competitive-state-hash-v9"
+}

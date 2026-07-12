@@ -3400,13 +3400,36 @@ reconstructing it from the diff.
   - Focused Python tests, artifact generation, JSON validation, full Rust and
     Python suites, formatting, clippy, automated playtests, and diff checks pass.
 
+- Feature: Phase 7 Difficulty Evidence Synthesis (v0.11.10)
+  Summary:
+  Synthesize the v0.11.6 all-tier strategy-comparison evidence with the v0.11.9
+  post-change Expert validation artifact while preserving source-specific
+  evidence contracts and runtime deferral.
+  Done:
+  - Added `_workspace/experiments/v0.11.10-phase7-difficulty-synthesis/` with
+    deterministic source validation, coverage summaries, and diagnostics.
+  - Validated 60 all-tier baseline runs, 15 Expert runs, and 15 overlapping
+    profile/seed coordinates without launching new sessions.
+  - Recorded no structural evidence gap and retained deferred runtime promotion.
+  - Added focused Python tests for malformed sources, incomplete traces,
+    coverage, and deterministic rendering.
+  Deferred / Non-Goals:
+  - No runtime mechanics, difficulty values, scoring, balance, scenario,
+    ruleset, replay, MCP schema, or state-hash changes.
+  - No causal strategy, general Expert winnability, human-learning,
+    empirical-calibration, or policy-validity claim.
+  Verification:
+  - Focused synthesis tests, deterministic artifact generation, JSON validation,
+    full Python/Rust suites, formatting, clippy, automated playtests, and diff
+    checks pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
   validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
   strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
-  difficulty resource scaling, and v0.11.9 Expert difficulty validation, are
-  complete.
+  difficulty resource scaling, v0.11.9 Expert difficulty validation, and
+  v0.11.10 Phase 7 difficulty evidence synthesis, are complete.
 
 ## Future
 

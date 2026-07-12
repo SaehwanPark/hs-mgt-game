@@ -1,47 +1,43 @@
-# Request Summary - Expert Difficulty Validation v0.11.9
+# Request Summary - Phase 7 Difficulty Evidence Synthesis v0.11.10
 
 ## Scope
 
-- Validate Expert difficulty after the v0.11.7 AI risk-posture and v0.11.8
-  rival resource-scaling changes.
-- Run a deterministic Expert-only evidence matrix for `competitive-regional-v1`
-  across five policy lanes: Access First, Commercial Focus, Workforce
-  Resilience, Capital Modernization, and Coalition/Legitimacy.
-- Use seeds 42, 43, and 44, capturing actor-visible observations, legal command
-  hints, submitted commands, validation failures, histories, hashes, final
-  observations, and debriefs.
-- Preserve the Normal seed-42 hold-control hash.
-- Update the package version to `0.11.9`.
-- Complete feature branch setup, verification, PR handoff, and review loop.
+- Synthesize the committed v0.11.6 all-tier strategy-comparison audit with the
+  v0.11.9 Expert difficulty validation artifact.
+- Validate source-specific metadata, profile/seed coverage, trace contracts,
+  and deterministic evidence continuity for `competitive-regional-v1`.
+- Record the evidence result and preserve runtime promotion deferral.
+- Update the package version to `0.11.10` and complete PR handoff and review.
 
 ## Non-goals
 
-- No runtime mechanics, difficulty values, scoring, balance, command, scenario,
-  ruleset, replay, MCP schema, or state-hash changes.
-- No general Expert winnability, human-learning, empirical-calibration, causal,
-  or policy-validity claim.
-- No broad Phase 7 synthesis beyond this Expert clearability gate.
+- No new game sessions, runtime mechanics, difficulty values, scoring, balance,
+  command, scenario, ruleset, replay, MCP schema, or state-hash changes.
+- No generalized evidence schema or normalization of heterogeneous source
+  artifacts.
+- No causal strategy, general Expert winnability, human-learning,
+  empirical-calibration, or policy-validity claim.
 
 ## Sources
 
-- `SPEC.md` (Ranked next-development queue - Track 2: Difficulty depth and winnability)
-- `docs/roadmap.md` (Phase 7 validation and Expert severity/winnability gate)
-- `docs/expansion-proposal-review.md` (Difficulty expansion proposal)
-- `docs/playtest-findings-v0.10.46.md` (prior Expert clearability evidence shape)
+- `SPEC.md` ranked next-development queue, Phase 7 validation track.
+- `docs/roadmap.md` Phase 7 validation and evidence limits.
+- `_workspace/experiments/v0.11.6-strategy-comparison-use-audit/results.json`.
+- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`.
+- `docs/playtest-findings-v0.11.6.md` and `docs/playtest-findings-v0.11.9.md`.
 
-## Expected files
+## Expected Files
 
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/run_sessions.py`
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/diagnostics.md`
-- `tests/test_expert_difficulty_validation.py`
-- `docs/playtest-findings-v0.11.9.md`
-- `SPEC.md`, `CHANGELOG.md`, `LESSONS.md`, `README.md`, and MCP guidance docs.
+- `_workspace/experiments/v0.11.10-phase7-difficulty-synthesis/`.
+- `tests/test_phase7_difficulty_synthesis.py`.
+- `docs/playtest-findings-v0.11.10.md`, `SPEC.md`, `CHANGELOG.md`,
+  `LESSONS.md`, `README.md`, `Cargo.toml`, and `Cargo.lock`.
+- `_workspace/03_domain_qa.md` and `_workspace/final/handoff.md`.
 
-## Validation target
+## Validation Target
 
-- 15/15 Expert runs complete the 24-month campaign with zero validation failures
-  or failures are explicitly recorded and routed.
-- Normal seed-42 hold-control hash remains `61357596d8800592`.
-- Focused artifact tests, full Python/Rust tests, formatting, clippy, automated
-  playtests, JSON validation, and diff checks pass.
+- Accept 60 all-tier source runs, 15 Expert source runs, and 15 overlapping
+  profile/seed coordinates with no structural evidence gap.
+- Preserve the Normal seed-42 golden hash and the existing runtime boundaries.
+- Pass focused artifact tests, full Python/Rust suites, formatting, clippy,
+  automated playtests, JSON validation, and diff checks.

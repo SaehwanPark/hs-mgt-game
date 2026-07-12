@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.10] - 2026-07-12
+
+### Added
+- Added a deterministic Phase 7 evidence synthesis comparing the v0.11.6
+  all-tier strategy-comparison audit with the v0.11.9 Expert validation
+  artifact.
+- Added focused Python coverage for source-specific contract validation,
+  profile/seed coverage, malformed inputs, and deterministic rendering.
+
+### Changed
+- Bumped the package version to `0.11.10`.
+- Kept runtime promotion deferred because no structural evidence gap was found.
+
+### Evidence Limits
+- The synthesis is simulated-policy traceability evidence, not human learning,
+  causal strategy, balance, general winnability, or policy-validity evidence.
+- It does not change runtime mechanics, difficulty, scoring, scenarios, replay,
+  MCP behavior, rulesets, or state hashes.
+
 ## [0.11.9] - 2026-07-12
 
 ### Added
