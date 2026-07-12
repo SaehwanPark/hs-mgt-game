@@ -1,20 +1,27 @@
-# Domain QA — GUI Thin-Client Proof v0.12.11
+# Domain QA — Simulation Breadth and Strategic Actors Queue Closure v0.12.12
 
 ## Decision
 
-Pass for a bounded interface proof.
+Pass for an evidence-only queue closure. No new runtime mechanism is
+authorized by the current evidence.
 
 ## Checks
 
-- The surface exposes actor-visible information without inventing hidden state.
-- Legal commands are presented as server-provided hints; client submission does
-  not claim local rule authority.
-- History/state hashes and debrief output remain inspectable.
-- No external assets, network behavior, or GUI-only policy semantics are added.
-- The visual-browser check is explicitly limited by the unavailable in-app
-  browser backend; no human usability claim is made.
+- Existing capacity and service-line choices expose player-facing resource and
+  timing tradeoffs.
+- Operating, access, trust, market-share, and quality fields are kept as
+  bounded game abstractions rather than clinical or equity claims.
+- Rival private information remains outside the player observation unless a
+  permitted public or monitoring path reveals it.
+- Committed effects, actor responses, and debrief lessons provide attribution
+  surfaces without rewriting history.
+- Medicare and Medicaid interactions remain explicitly bounded payer effects;
+  no public-payer utility or social-welfare conclusion is inferred.
+- Existing playtest evidence shows strategy variation and no structural
+  traceability gap, so adding an actor or patient model would be premature.
 
 ## Reopening condition
 
-Require a concrete audience-access, playtest, or review finding before adding
-hosting, richer interaction, or production GUI behavior.
+Reopen the breadth track only when a new playtest, instructor, scenario,
+debrief, or domain-review finding identifies a specific unexplained strategy or
+learning limitation that the current bounded structures cannot represent.

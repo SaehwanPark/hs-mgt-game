@@ -1,0 +1,235 @@
+{
+  "actor_observation_boundary": {
+    "debrief": [
+      "committed events and effects",
+      "attributed mechanisms",
+      "post-run instructor rationale review"
+    ],
+    "player_observation": [
+      "human system reported metrics and typed capacity",
+      "permitted market and policy signals",
+      "lagged public rival actions",
+      "monitor results",
+      "explicit intelligence gaps"
+    ],
+    "private_during_play": [
+      "unobserved rival private actions",
+      "unobserved rival rationales"
+    ],
+    "true_state": [
+      "all health systems",
+      "queued effects",
+      "market fields",
+      "policy and event metadata",
+      "private rival actions"
+    ]
+  },
+  "artifact_type": "simulation_breadth_queue_closure",
+  "batch_id": "v0.12.12-breadth-queue-closure",
+  "breadth_inventory": [
+    {
+      "actor": "human and AI health-system controllers",
+      "category": "service_line_and_capacity",
+      "mechanisms": [
+        "staffed beds",
+        "outpatient",
+        "emergency",
+        "ICU",
+        "obstetrics",
+        "psychiatric",
+        "cardiology",
+        "oncology",
+        "infusion",
+        "neurology",
+        "ASC"
+      ],
+      "observation": "own typed capacity, staffing, demand, treated volume, and unmet demand",
+      "status": "supported_existing_boundary",
+      "tradeoff": "cash/AP/project delay versus access, quality, and operating outcomes"
+    },
+    {
+      "actor": "human health-system controller and affected modeled institutions",
+      "category": "operating_and_community_outcomes",
+      "mechanisms": [
+        "access",
+        "quality",
+        "workforce trust",
+        "community trust",
+        "market share",
+        "operating margin",
+        "treated volume",
+        "unmet demand"
+      ],
+      "observation": "reported own-system metrics and permitted market signals",
+      "status": "supported_bounded_proxy",
+      "tradeoff": "organizational resources and legitimacy versus access, trust, and margin"
+    },
+    {
+      "actor": "human system, AI rivals, and bounded payer command surface",
+      "category": "capital_and_market_interaction",
+      "mechanisms": [
+        "delayed projects",
+        "payer posture",
+        "public access commitments",
+        "rival monitoring",
+        "lagged public rival actions"
+      ],
+      "observation": "public, monitored, and private rival information paths",
+      "status": "supported_existing_boundary",
+      "tradeoff": "information/AP and cash timing versus direct action and competitive position"
+    },
+    {
+      "actor": "player payer-command interaction; not a full strategic public-payer actor",
+      "category": "public_payer_interaction",
+      "mechanisms": [
+        "Medicaid negotiation",
+        "Medicare negotiation"
+      ],
+      "observation": "bounded payer posture and resulting player-owned effects",
+      "status": "supported_bounded_effect",
+      "tradeoff": "compliance cost and posture constraints versus access and policy pressure"
+    },
+    {
+      "actor": "AI rival health-system controllers",
+      "category": "strategic_rivals_and_debrief",
+      "mechanisms": [
+        "style-weighted AI rivals",
+        "public disclosure",
+        "monitor-revealed actions",
+        "private action markers",
+        "post-run rationale review"
+      ],
+      "observation": "lagged/public/monitored signals; private actions withheld during play",
+      "status": "supported_existing_boundary",
+      "tradeoff": "monitoring cost and uncertainty versus defensive or growth action"
+    }
+  ],
+  "closure_status": "complete_no_unexplained_breadth_gap",
+  "code_version": "0.12.12",
+  "deferred_scope": [
+    "full US health-system model",
+    "individual patient simulation",
+    "validated distributional outcome categories",
+    "full Medicare payment reproduction",
+    "full Medicaid eligibility rules",
+    "national policy lifecycle modeling",
+    "generalized strategic actor frameworks",
+    "portfolio optimization",
+    "broad scenario-authoring infrastructure"
+  ],
+  "evidence": {
+    "all_tier": {
+      "code_version": "0.11.11",
+      "distinct_command_trajectories": 10,
+      "first_command_counts": {
+        "Player: commit pledge_type=access level=1": 12,
+        "Player: invest domain=beds amount=5": 12,
+        "Player: negotiate payer=carrier_a rate_posture=aggressive": 12,
+        "Player: recruit role=nurse headcount=1": 24
+      },
+      "no_dominant_first_command": true,
+      "path": "_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json",
+      "run_count": 60,
+      "runtime_promotion": "deferred",
+      "transition_count": 1440
+    },
+    "current_code": {
+      "code_version": "0.11.12",
+      "path": "_workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/results.json",
+      "run_count": 9,
+      "runtime_promotion": "deferred",
+      "transition_count": 216
+    },
+    "teachability_review": {
+      "code_version": "0.12.3",
+      "complete_run_count": 18,
+      "finding": "no_structural_gap",
+      "gap_count": 0,
+      "gaps": [],
+      "path": "_workspace/experiments/v0.12.3-phase7-teachability-review/results.json",
+      "run_count": 18,
+      "runtime_promotion": "deferred",
+      "source_count": 2,
+      "transition_count": 270
+    }
+  },
+  "evidence_limits": [
+    "The inventory describes bounded game abstractions, not calibrated clinical, financial, legal, or policy quantities.",
+    "The evidence is deterministic simulated-policy trace evidence, not human learning, classroom effectiveness, or comprehension evidence.",
+    "No individual patient, public-payer utility, social-welfare, equilibrium, or general winnability claim is made.",
+    "The closure removes the current queue item but does not assert that broader modeling could never be useful."
+  ],
+  "next_action": "Require new playtest, instructor, scenario, debrief, or domain-review evidence naming a concrete unexplained breadth or strategic-actor gap before reopening this track.",
+  "queue_action": "remove_item_from_future_queue",
+  "runtime_change_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_marker_contract": {
+    "docs/playtest-findings-v0.11.11.md": {
+      "markers": [
+        "60/60 runs completed",
+        "Ten distinct command trajectories",
+        "No common first-month action",
+        "Final tradeoff ranges remain varied"
+      ],
+      "status": "supported"
+    },
+    "docs/playtest-findings-v0.11.12.md": {
+      "markers": [
+        "9/9 runs completed",
+        "No structural matrix, history/hash, trace, or debrief gap"
+      ],
+      "status": "supported"
+    },
+    "src/debrief/report.rs": {
+      "markers": [
+        "Attributed mechanisms to inspect:",
+        "Rival actions and rationales that were unobserved during play",
+        "Capital project lesson:",
+        "Decision quality and outcome quality remain separate:"
+      ],
+      "status": "supported"
+    },
+    "src/model/campaign.rs": {
+      "markers": [
+        "pub struct PlayerObservation",
+        "pub monthly_treated_volume",
+        "pub monthly_unmet_demand",
+        "pub market_bullets",
+        "pub intel_gaps"
+      ],
+      "status": "supported"
+    },
+    "src/model/competitive_command.rs": {
+      "markers": [
+        "pub enum InvestDomain",
+        "Emergency,",
+        "Neurology,",
+        "Asc,",
+        "pub enum PayerId",
+        "Medicaid,",
+        "Medicare,",
+        "pub enum ProjectKind",
+        "ClinicNetwork,"
+      ],
+      "status": "supported"
+    },
+    "src/model/competitive_world.rs": {
+      "markers": [
+        "pub struct HealthSystemState",
+        "pub emergency_capacity",
+        "pub monthly_unmet_demand",
+        "pub struct CompetitiveWorldState",
+        "pub effect_queue: Vec<PendingEffect>"
+      ],
+      "status": "supported"
+    },
+    "src/sim/observe_competitive.rs": {
+      "markers": [
+        "pub fn observe_for_human",
+        "Rival {} (observed, prior month): {}",
+        "private activity last month (not publicly disclosed)"
+      ],
+      "status": "supported"
+    }
+  }
+}

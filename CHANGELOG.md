@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.12] - 2026-07-12
+
+### Added
+- Added a reproducible breadth and strategic-actor queue-closure audit covering
+  existing service-line/capacity, operating, capital, payer, rival-information,
+  and debrief boundaries.
+- Added focused validation for 60 all-tier runs, 1,440 transitions, 10 command
+  trajectories, current-code continuity, and zero structural trace gaps.
+
+### Changed
+- Bumped package metadata to `0.12.12`.
+- Removed the broader simulation breadth and strategic-actors Future item after
+  finding no concrete unexplained gap; broader patient, public-payer, and actor
+  modeling remains explicitly deferred.
+
+### Evidence Limits
+- The closure is deterministic simulated-policy evidence, not human learning,
+  causal balance, calibration, social-welfare, equilibrium, or policy-validity
+  evidence.
+
 ## [0.12.11] - 2026-07-12
 
 ### Added
