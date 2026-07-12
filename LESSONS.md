@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Synchronize Queue Text With Completed Runtime Proposals
+
+- Context: The v0.12.7 affiliation proposal was complete, but the related
+  affiliation/acquisition item remained in the Future queue.
+- Symptom: A stale queue entry could imply that a new runtime mechanism was
+  still required and encourage scope expansion.
+- Resolution: Revalidated the six contracts and 9-run/54-stage artifact, then
+  removed the queue item while preserving broader acquisition deferral and a
+  reopening condition.
+- Prevention: After a proposal closes, audit all queue references and either
+  remove the completed item or explicitly route it to a new evidence gap.
+
 ## Separate Pressure Evidence From Tuning Authorization
 
 - Context: The v0.12.4 review found workforce-capacity counts rising across

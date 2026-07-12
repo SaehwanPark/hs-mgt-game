@@ -1,46 +1,42 @@
-# Final Handoff - Difficulty Depth Queue Closure v0.12.9
+# Final Handoff - Affiliation Queue Closure v0.12.10
 
 ## Result
 
-- Closed the difficulty-depth and winnability Future item.
-- Revalidated the v0.12.4 candidate workforce-capacity signal: 75 runs,
-  1,800 transitions, and tier counts Easy 0, Normal 15, Hard 30, Expert 160.
-- Revalidated the 15/15 named Expert profile/seed clearability overlap.
-- Revalidated the v0.12.6 observation-only controls: 75 runs, 1,800 trace
-  entries, exact histories/hashes, and zero hidden markers.
-- Authorized no difficulty or balance tuning; reopen only for a new unexplained
-  pressure, clearability, or player-facing gap.
+- Closed the affiliation/acquisition Future queue item.
+- Revalidated the v0.12.7 proposal: six minimum contracts, supported source
+  markers, and existing opt-in `regional-affiliation-v1` runtime.
+- Revalidated 9/9 complete runs, 54 stages, and 54 typed decision-time
+  observations from the committed affiliation artifact.
+- Preserved deferred direct acquisition, deal finance, legal forecasting,
+  generic actor expansion, and competitive-campaign isolation.
 
 ## Version boundaries
 
-- Package: `0.12.9`
-- Change surface: evidence closure artifact, focused Python tests, and canonical
+- Package: `0.12.10`
+- Change surface: queue-closure artifact, focused Python tests, and canonical
   documentation
-- Runtime difficulty, balance, scoring, rival AI, transition, and replay/hash
-  behavior: unchanged
+- Rust runtime behavior, commands, scenario fields, state hashes, replay, and
+  competitive campaign behavior: unchanged
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/difficulty-queue-closure-v0.12.9`
-- PR: [#162](https://github.com/SaehwanPark/hs-mgt-game/pull/162)
-- Domain QA: Pass for evidence-gated closure.
+- Working branch: `feat/affiliation-queue-closure-v0.12.10`
+- PR: [#163](https://github.com/SaehwanPark/hs-mgt-game/pull/163)
+- Domain QA: Pass for queue synchronization.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29209425910](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209425910).
+- CI: `check` passed in run [29209652285](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209652285).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
 - Closure source markers: supported.
-- Difficulty evidence: 75 runs/1,800 transitions, candidate signal, 15-run
-  clearability overlap.
-- Observation evidence: 75 runs/1,800 entries, exact histories/hashes, zero
-  hidden markers.
+- Proposal evidence: six contracts, 9/9 runs, 54 stages, 54 observations.
 - Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
   smoke, golden, and diff checks: passed locally; the PR check also passed.
 
 ## Stop condition
 
-After this closure merges, the difficulty item is removed. Any tuning requires
-a new evidence-backed design gate and must not be inferred from this signal.
+After this closure merges, the affiliation/acquisition queue item is removed.
+Broader work requires new evidence and a new bounded proposal.

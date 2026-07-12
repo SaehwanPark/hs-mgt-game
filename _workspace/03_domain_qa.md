@@ -1,20 +1,20 @@
-# Domain QA — Difficulty Queue Closure v0.12.9
+# Domain QA — Affiliation Queue Closure v0.12.10
 
 ## Decision
 
-Pass for evidence-gated closure.
+Pass for queue synchronization.
 
 ## Checks
 
-- Workforce-capacity counts are treated as gameplay abstractions and descriptive
-  operating pressure, not clinical or workforce calibration.
-- Expert completion is labeled a bounded clearability proxy, not general
-  winnability.
-- Source-version mismatch and scripted-policy limits remain visible.
-- No punitive resource cut, hidden omniscience, balance claim, or difficulty
-  tuning is introduced.
+- The fictional affiliation abstraction does not imply legal or antitrust
+  prediction.
+- Partner, review, labor, payer, community, and integration responses remain
+  distinct.
+- Organizational outcomes, actor utility, and social welfare remain separate.
+- The default competitive campaign remains isolated.
+- Broader acquisition and consolidation are explicitly deferred.
 
 ## Reopening condition
 
-Require a new concrete player-facing or outcome-clearability gap before changing
-difficulty, balance, or scoring.
+Require concrete evidence of a boundary or educational gap before expanding the
+affiliation runtime.

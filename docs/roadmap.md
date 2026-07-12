@@ -919,6 +919,11 @@ workforce-capacity signal is visible and the tested Expert paths are clearable,
 but identifies no unexplained gap that would justify tuning. Difficulty and
 balance remain evidence-gated.
 
+The v0.12.10 affiliation queue closure confirms that the existing
+`regional-affiliation-v1` runtime already satisfies its bounded proposal. No
+broader acquisition or consolidation work is authorized without new concrete
+evidence.
+
 The v0.12.6 follow-up renders the safe staffing and physical-capacity fields
 from `PlayerObservation` and validates 75 complete runs with 1,800 transitions.
 All source histories and state-hash sequences match exactly, closing the

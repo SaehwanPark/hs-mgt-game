@@ -267,6 +267,11 @@ descriptive evidence route only. The visible observation controls and bounded
 Expert clearability evidence do not alter the deterministic core or authorize
 difficulty, balance, scoring, or winnability changes.
 
+The v0.12.10 affiliation queue closure synchronizes the Future queue with the
+already implemented six-stage opt-in runtime. It adds no state or transition;
+broader acquisition remains outside the current architecture boundary until a
+new evidence-backed proposal is approved.
+
 ### Scenario and Actor Design
 
 Responsible for:

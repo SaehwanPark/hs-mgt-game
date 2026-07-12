@@ -1,10 +1,11 @@
-# Evidence Map — Difficulty Queue Closure v0.12.9
+# Evidence Map — Affiliation Queue Closure v0.12.10
 
-| Question | Authority | Result | Limit |
-| --- | --- | --- | --- |
-| Is there a candidate pressure dimension? | v0.12.4 audit | workforce capacity, 0 → 160 across tested tiers | Descriptive, not causal. |
-| Is the context visible? | v0.12.6 artifact | 75 runs/1,800 entries; exact hashes | Observation-only evidence. |
-| Are tested Expert paths clearable? | v0.12.4 overlap | 15/15 named profile/seed runs | Not general winnability. |
-| Is a new gap unexplained? | v0.12.4 + v0.12.6 controls | No | Source versions differ. |
+| Requirement | Authority | Result |
+| --- | --- | --- |
+| Minimum contracts | v0.12.7 proposal artifact | 6 supported |
+| Runtime implementation | ADR-0010 and source markers | Existing opt-in runtime |
+| Observation/debrief evidence | v0.12.2 artifact | 9 runs, 54 stages, 54 observations |
+| Default campaign isolation | ADR/system boundary | `competitive-regional-v1` unchanged |
+| Broader scope | proposal limits | Deferred |
 
-Conclusion: close the queue item and keep tuning deferred.
+No new runtime gap was identified.

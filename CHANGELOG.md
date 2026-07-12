@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.10] - 2026-07-12
+
+### Added
+- Added a reproducible affiliation/acquisition queue-closure audit tied to the
+  v0.12.7 runtime-boundary proposal.
+- Added focused validation for six minimum contracts, supported source markers,
+  and the existing 9-run/54-stage affiliation evidence.
+
+### Changed
+- Bumped package metadata to `0.12.10`.
+- Removed the completed affiliation/acquisition queue item while preserving
+  broader acquisition deferral and a concrete reopening condition.
+
+### Evidence Limits
+- This is deterministic source-boundary and trace evidence, not legal,
+  antitrust, calibration, social-welfare, or human-learning evidence.
+
 ## [0.12.9] - 2026-07-12
 
 ### Added

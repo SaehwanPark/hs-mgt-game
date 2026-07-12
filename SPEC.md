@@ -3856,6 +3856,34 @@ reconstructing it from the diff.
   - 308 Rust tests, 209 Python tests, formatting, clippy, CLI smoke, golden,
     diff checks, focused closure tests, and deterministic audit validation pass.
 
+- Feature: Affiliation Queue Closure (v0.12.10)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.10
+
+  Summary:
+  Synchronize the affiliation/acquisition Future item with the already
+  implemented v0.12.7 runtime-boundary proposal.
+
+  Done:
+  - Revalidated six minimum contracts, supported source markers, and the
+    existing 9/9-run, 54-stage, 54-observation affiliation evidence.
+  - Removed the completed affiliation/acquisition item from the Future queue.
+  - Preserved direct acquisition, deal finance, legal forecasting, generic
+    actor expansion, and competitive-campaign isolation as deferred scope.
+  - Recorded a concrete reopening condition requiring new evidence.
+  - Bumped package metadata to `0.12.10`.
+
+  Deferred / Non-Goals:
+  - No new affiliation mechanism, acquisition branch, deal-financing system,
+    legal forecast, generic actor framework, or competitive-campaign change.
+
+  Verification:
+  - Closure artifact reports six supported contracts, 9/9 runs, 54 stages,
+    54 observations, and deferred runtime promotion.
+  - 308 Rust tests, 214 Python tests, formatting, clippy, CLI smoke, golden,
+    diff checks, focused closure tests, and deterministic audit validation pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3960,28 +3988,7 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: Regional affiliation/acquisition slice
-  Phase / Gate: Phase 7/9; proceed only after proposal review and domain QA
-  approve one bounded US regional affiliation or acquisition scenario.
-
-  Next actionable slice:
-  The v0.12.7 proposal confirms that the existing opt-in runtime already
-  satisfies the minimum state, observation, resolved-input, history/replay, and
-  debrief contracts. Keep broader affiliation/acquisition work deferred until
-  new evidence identifies a concrete gap.
-
-  Verification target:
-  The design distinguishes organizational utility, actor incentives, social
-  welfare, community effects, and educational evaluation. Legal/regulatory
-  outcomes are labeled abstractions unless separately grounded.
-
-  Deferred / Non-Goals:
-  No national consolidation simulator, private-equity rollup model, detailed
-  deal-financing system, calibrated antitrust forecast, multi-transaction
-  strategy framework, or scenario-schema/runtime implementation in the design
-  gate. These remain deferred until a separate runtime proposal is approved.
-
-2. Track: GUI thin-client proof
+1. Track: GUI thin-client proof
   Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
   review evidence shows a graphical surface would improve usability without
   weakening core inspectability.
@@ -4001,7 +4008,7 @@ strategic actors, or platform architecture.
   commitment, non-audited assets, replacement of CLI/MCP, HTTP multiplayer,
   auth, or durable session persistence.
 
-3. Track: Broader simulation breadth and strategic actors
+2. Track: Broader simulation breadth and strategic actors
   Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
   domain-review evidence shows current campaign limits block meaningful strategy
   or learning.
@@ -4030,7 +4037,7 @@ strategic actors, or platform architecture.
   global equilibrium AI, speculative generalized frameworks, and broad
   scenario-authoring infrastructure.
 
-4. Track: Release automation and contributor readiness
+3. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 
