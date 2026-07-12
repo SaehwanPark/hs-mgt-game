@@ -1,17 +1,18 @@
-# Evidence Map — Workforce Capacity Observation Context v0.12.6
+# Evidence Map — Affiliation Runtime Boundary Proposal v0.12.7
 
-| Question | Evidence | Result | Limit |
+| Contract | Evidence | Result | Limit |
 | --- | --- | --- | --- |
-| Are safe fields typed? | `PlayerObservation` staffing/capacity fields | supported | Typed ownership does not imply visibility. |
-| Are the fields now rendered? | 75-run MCP trace artifact | 1,800/1,800 observations contain both lines | Simulated trace evidence only. |
-| Did transitions change? | v0.11.11 all-tier and v0.11.9 Expert controls | 75/75 exact history matches | Controls are from earlier versions. |
-| Did hashes change? | Per-transition state-hash comparison | 75/75 exact sequence matches | Hash equality is not a learning claim. |
-| Did hidden fields leak? | Excluded-marker scan | 0 occurrences | Marker scan is contract evidence, not a formal privacy proof. |
+| True state | `src/model/affiliation.rs` | typed world state, ruleset, responses, commitments, review, integration | Source coverage is not a calibration claim. |
+| Actor observation | `observe.rs`, MCP formatter, v0.12.2 artifact | alternatives, assumptions, commitments and public signals visible | Named simulated policies only. |
+| Resolved inputs | `src/inputs/resolve_affiliation.rs` | explicit stochastic response bundle before transition | Stylized responses, not legal forecasts. |
+| Deterministic transition | `src/affiliation/transition.rs` | validated command, effects, next state, hash | No general equilibrium claim. |
+| History/replay | model transition/history, artifact verifier | prior/command/observation/inputs/effects/hash retained and replayed | Replay integrity is not human-learning evidence. |
+| Debrief | `src/debrief/report.rs` | Riverside outcomes separated from actor utility/social welfare | No measured comprehension or welfare validity. |
 
-## Source controls
+## Committed artifact
 
-- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json`
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
-- `_workspace/experiments/v0.12.6-workforce-capacity-observation/results.json`
+- `_workspace/experiments/v0.12.2-affiliation-observation-context/results.json`
+- 9 complete runs, 54 committed stages, zero validation failures.
 
-Runtime promotion remains deferred.
+Conclusion: the proposal contract is supported; no new runtime slice is
+authorized without a new concrete evidence gap.

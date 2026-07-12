@@ -1,18 +1,19 @@
-# Request Summary — Workforce Capacity Observation Context v0.12.6
+# Request Summary — Affiliation Runtime Boundary Proposal v0.12.7
 
 ## Decision
 
-Implement the bounded v0.12.5 follow-up: render safe typed staffing and
-physical-capacity values in the competitive MCP observation.
+Re-audit the completed affiliation-first design against the existing opt-in
+`regional-affiliation-v1` runtime and close the SPEC item if its minimum
+state/observation/resolved-input/debrief contracts are already implemented.
 
 ## Target slice
 
-- Add exactly two observation lines from `PlayerObservation`.
-- Add a focused session-boundary test.
-- Rerun the compatible matrix and compare complete histories and state hashes.
+- Verify typed true state and actor observation boundaries.
+- Verify stochastic resolution precedes deterministic transition evaluation.
+- Verify append-only history/replay and debrief utility/welfare separation.
+- Record a no-new-runtime decision unless a concrete gap is found.
 
 ## Explicit non-goals
 
-No difficulty values, balance, transitions, command legality, hidden state,
-effective capacity, future hires, rival private workforce state, scoring,
-winnability, or human-learning claims.
+No acquisition expansion, deal finance, national consolidation, legal forecast,
+generic actor framework, competitive-campaign change, or broad balance claim.

@@ -915,6 +915,13 @@ All source histories and state-hash sequences match exactly, closing the
 bounded interface gap without promoting a difficulty, balance, winnability, or
 human-learning claim.
 
+The v0.12.7 affiliation runtime-boundary proposal confirms that the existing
+opt-in `regional-affiliation-v1` implementation already satisfies the minimum
+state, observation, resolved-input, deterministic-transition, history/replay,
+and debrief contracts. No additional affiliation runtime is authorized without
+a new concrete evidence gap; broader acquisition and consolidation remain
+deferred.
+
 ## 7.6 Educational Artifact and Debrief Review
 
 Evaluate whether the game artifacts make the intended reasoning inspectable:

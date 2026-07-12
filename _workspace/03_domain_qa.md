@@ -1,21 +1,25 @@
-# Domain QA — Workforce Capacity Observation Context v0.12.6
+# Domain QA — Affiliation Runtime Boundary Proposal v0.12.7
 
 ## Decision
 
-Pass for the bounded observation-only implementation.
+Pass. The existing opt-in runtime is appropriately bounded for a fictional
+regional nonprofit affiliation scenario.
 
 ## Checks
 
-- The lines describe current staffing and physical capacity without presenting
-  hidden staffing targets or derived effective capacity as player knowledge.
-- Workforce capacity remains a strategic constraint mediated by trust, labor
-  timing, and operating outcomes; no new causal claim is introduced.
-- The artifact preserves source-version limits and labels all quantities as
-  deterministic gameplay abstractions.
-- No legal, clinical, financial, calibration, winnability, or human-learning
-  claim is made.
+- Organizational outcomes are not treated as social welfare or actor utility.
+- Partner, review, labor, payer, community, and integration responses remain
+  distinct strategic actors or response channels.
+- Observed partner conditions and assumptions are visible without claiming
+  legal certainty or hidden omniscience.
+- Stochastic outcomes are explicit inputs before deterministic transition logic,
+  and history/replay retain them for inspection.
+- The debrief distinguishes decision quality from outcome quality and asks about
+  independence or deferral alternatives.
+- The default competitive campaign remains outside the affiliation boundary.
 
-## Required follow-up
+## Stop condition
 
-The next slice is a separate affiliation runtime-boundary proposal. Do not
-expand workforce difficulty or balance from this interface result alone.
+Do not implement another affiliation mechanic unless new evidence identifies a
+specific strategy, traceability, or educational gap that the current boundary
+cannot address.

@@ -1,52 +1,47 @@
-# Final Handoff - Workforce Capacity Observation Context v0.12.6
+# Final Handoff - Affiliation Runtime Boundary Proposal v0.12.7
 
 ## Result
 
-- Added the exact competitive MCP `Staffing:` and `Physical capacity:` lines
-  from existing typed `PlayerObservation` fields.
-- Added a focused session-boundary regression test with seed-42 starting
-  values.
-- Replayed 75 compatible simulated-policy runs and 1,800 transitions.
-- Confirmed exact history and state-hash equality against the immutable v0.11.11
-  all-tier and v0.11.9 Expert controls.
-- Confirmed all 1,800 trace observations contain both safe lines and no hidden
-  marker from the excluded-field contract.
-- Kept runtime difficulty, balance, scoring, transition, command, replay/hash,
-  winnability, and human-learning promotion deferred.
+- Reconciled the affiliation-first design gate with the existing opt-in
+  `regional-affiliation-v1` runtime.
+- Confirmed six minimum contracts: true state, actor observation, resolved
+  inputs, deterministic transition evaluation, history/replay, and debrief.
+- Audited source markers across the ADR, model, observation, input resolution,
+  transition, replay, MCP, scenario, and debrief boundaries.
+- Validated the committed v0.12.2 artifact: 9/9 complete runs, 54/54 stages,
+  and commitments/alternatives/assumptions present in all 54 observations.
+- Authorized no new runtime change. Broader acquisition and consolidation
+  remain evidence-gated.
 
 ## Version boundaries
 
-- Package: `0.12.6`
-- Change surface: MCP presentation, focused boundary test, evidence artifact,
-  and project records
-- Competitive and affiliation transitions, rulesets, state hashes, replay
-  artifact semantics, command parsers, persistence, and debrief behavior:
-  unchanged
+- Package: `0.12.7`
+- Change surface: proposal artifact, source-boundary audit, focused Python
+  tests, and canonical documentation
+- Rust runtime behavior, commands, scenario fields, state hashes, replay
+  formats, and competitive campaign behavior: unchanged
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/workforce-capacity-observation-v0.12.6`
-- PR: [#159](https://github.com/SaehwanPark/hs-mgt-game/pull/159)
-- Domain QA: Pass for the bounded observation-only scope.
+- Working branch: `feat/affiliation-runtime-boundary-v0.12.7`
+- PR: [#160](https://github.com/SaehwanPark/hs-mgt-game/pull/160)
+- Domain QA: Pass.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208641026](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208641026).
+- CI: `check` passed in run [29208963339](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208963339).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
-- Focused Rust boundary test: passed.
-- Matrix artifact: 75/75 complete runs, 1,800 transitions, 1,800 staffing
-  lines, 1,800 physical-capacity lines, zero hidden markers.
-- Source comparison: 60/60 all-tier histories and 15/15 Expert histories match
-  exactly; all state-hash sequences match exactly.
-- Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
-  checks: passed locally; the PR check also passed.
+- Proposal source markers: supported across all required boundaries.
+- Existing affiliation artifact: 9/9 complete runs, 54/54 stages, zero
+  validation failures, and 54/54 observations with typed context.
+- Focused proposal tests, 308 Rust tests, 199 Python tests, formatting, clippy,
+  CLI smoke, golden, proposal audit, and diff checks: passed locally.
 
-## Next dependency
+## Stop condition
 
-After merge, re-audit the affiliation-first design and produce the narrow
-v0.12.7 runtime boundary proposal before implementing any new affiliation
-mechanic. Keep acquisition breadth, deal finance, legal forecasting, and
-difficulty/balance promotion deferred.
+After this proposal merges, no Present item remains authorized. A new runtime
+slice requires concrete playtest, instructor, scenario, domain, or release
+evidence identifying an unexplained gap and a new bounded proposal.

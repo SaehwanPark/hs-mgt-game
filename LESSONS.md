@@ -3,6 +3,20 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Reconcile Runtime Proposals Before Adding Another Mechanism
+
+- Context: The v0.12.7 SPEC item called for a separate affiliation runtime
+  proposal, while ADR-0010 and the v0.12.0 implementation already supplied
+  that boundary.
+- Symptom: Treating the queue text as an unimplemented feature would duplicate
+  runtime scope and risk expanding the actor model unnecessarily.
+- Resolution: Audited source markers and the committed 9-run/54-stage artifact
+  across state, observations, resolved inputs, transitions, replay, and debrief;
+  closed the queue item as an existing-runtime confirmation with no new code.
+- Prevention: Before promoting a Future item, reconcile SPEC, ADRs, runtime
+  ownership, and committed evidence; authorize new runtime only for a concrete
+  unexplained gap.
+
 ## Prove Observation-Only Changes With Immutable Transition Controls
 
 - Context: v0.12.5 identified safe typed workforce fields that were absent from
