@@ -22,6 +22,7 @@
 
 - The v0.12.1 decision-time context gap is closed at the MCP rendering boundary.
 - The post-fix capture preserves the same transition/state-hash/debrief matrix.
+- The post-fix transition summaries and state hashes exactly match v0.12.1.
 - No balance, transition, legal, winnability, or human-learning claim is made.
 
 ## Evidence limits

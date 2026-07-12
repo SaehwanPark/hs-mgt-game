@@ -16,6 +16,7 @@ BASE_PATH = (
   / "v0.12.1-affiliation-playtest-validation"
   / "run_sessions.py"
 )
+HISTORICAL_ARTIFACT_PATH = BASE_PATH.with_name("results.json")
 BASE_SPEC = importlib.util.spec_from_file_location("affiliation_playtest_base", BASE_PATH)
 BASE = importlib.util.module_from_spec(BASE_SPEC)
 assert BASE_SPEC.loader is not None
@@ -50,6 +51,21 @@ def _context_lines(observation: list[str], label: str) -> list[str]:
   return [line for line in observation if line.startswith(label)]
 
 
+def _assert_history_unchanged(artifact: dict) -> None:
+  historical = json.loads(HISTORICAL_ARTIFACT_PATH.read_text())
+  historical_runs = {
+    (run["profile_id"], run["seed"]): run for run in historical["runs"]
+  }
+  current_runs = {
+    (run["profile_id"], run["seed"]): run for run in artifact["runs"]
+  }
+  assert current_runs.keys() == historical_runs.keys()
+  for coordinate, run in current_runs.items():
+    historical_run = historical_runs[coordinate]
+    assert run["state_hashes"] == historical_run["state_hashes"]
+    assert run["history"] == historical_run["history"]
+
+
 def build_artifact() -> dict:
   runs = [
     BASE._capture_run(profile["id"], seed)
@@ -79,6 +95,7 @@ def validate_artifact(artifact: dict) -> None:
   assert artifact["profiles"] == [profile["id"] for profile in PROFILES]
   assert artifact["runtime_promotion"] == "deferred"
   BASE.validate_artifact(_base_artifact_view(artifact))
+  _assert_history_unchanged(artifact)
 
   for run in artifact["runs"]:
     for trace in run["turn_trace"]:
@@ -103,6 +120,7 @@ def build_audit(artifact: dict) -> dict:
       "unexplained_gaps": [],
       "unexplained_gap_count": 0,
       "runtime_promotion": "deferred",
+      "history_unchanged": True,
       "next_bounded_candidate": "Continue evidence-only validation; no balance or transition change is promoted by this capture.",
     }
   )
@@ -123,6 +141,7 @@ def validate_audit(audit: dict) -> None:
   assert audit["missing_typed_context_fields"] == []
   assert audit["unexplained_gap_count"] == 0
   assert audit["runtime_promotion"] == "deferred"
+  assert audit["history_unchanged"] is True
   assert len(audit["reports"]) == 9
 
 
@@ -153,6 +172,7 @@ def render_markdown(audit: dict) -> str:
     "",
     "- The v0.12.1 decision-time context gap is closed at the MCP rendering boundary.",
     "- The post-fix capture preserves the same transition/state-hash/debrief matrix.",
+    "- The post-fix transition summaries and state hashes exactly match v0.12.1.",
     "- No balance, transition, legal, winnability, or human-learning claim is made.",
     "",
     "## Evidence limits",

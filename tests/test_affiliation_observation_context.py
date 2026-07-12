@@ -37,6 +37,7 @@ class AffiliationObservationContextTests(unittest.TestCase):
     self.assertEqual(audit["run_count"], 9)
     self.assertEqual(audit["transition_count"], 54)
     self.assertEqual(audit["missing_typed_context_fields"], [])
+    self.assertTrue(audit["history_unchanged"])
 
   def test_every_observation_contains_safe_context_labels(self):
     artifact = load_artifact()
