@@ -42,5 +42,7 @@
   maintainability findings.
 - Critical/High findings: none.
 - Follow-up review after Critical/High fixes: not required.
-- CI: GitHub Actions `check` pending at this handoff update.
-- Merge-ready: pending CI completion.
+- Focused v0.11.11 artifact tests: 6 passed; full Python suite: 153 passed;
+  Rust suite: 293 passed.
+- CI: GitHub Actions `check` passed.
+- Merge-ready: yes, pending normal maintainer merge.
