@@ -31,7 +31,7 @@
 
 ## Verification
 
-- Focused artifact tests: 7 passed.
+- Focused artifact tests: 10 passed.
 - Current-code capture: 9/9 complete.
 - Audit: 216 committed months and 216 player operating-month records.
 - Normal seed-42 hold-control hash: `61357596d8800592`.

@@ -35,7 +35,7 @@ None.
 
 ## Verification Evidence
 
-- Focused v0.11.12 artifact tests: 7 passed.
+- Focused v0.11.12 artifact tests: 10 passed.
 - Current-code capture: 9/9 runs completed.
 - Audit: 216 committed months and 216 player operating-month records supported.
 - Normal seed-42 hold-control hash: `61357596d8800592`.
