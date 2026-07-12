@@ -4,6 +4,27 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.3] - 2026-07-12
+
+### Added
+- Added a deterministic read-only Phase 7 audit across the v0.12.2 regional
+  affiliation post-fix artifact and the approved v0.11.12 competitive
+  teachability capture.
+- Added focused validation for source identity, 18-run/270-transition
+  decision-to-debrief coverage, source-specific context, and deterministic
+  diagnostics rendering.
+
+### Changed
+- Bumped package metadata to `0.12.3`.
+- Kept runtime promotion deferred because the cross-campaign artifact review
+  identified no structural gap and makes no human-learning, balance, or
+  winnability claim.
+
+### Evidence Limits
+- This is deterministic simulated-policy traceability evidence, not human or
+  classroom evidence, comprehension evidence, causal evidence, balance,
+  winnability, calibration, legal-validity, or policy-forecasting evidence.
+
 ## [0.12.2] - 2026-07-12
 
 ### Added

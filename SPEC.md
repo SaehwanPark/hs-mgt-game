@@ -3643,37 +3643,72 @@ reconstructing it from the diff.
   - 307 Rust tests, 173 Python tests, formatting, clippy, golden, and diff
     checks pass.
 
-## Present
-
 - Feature: Phase 7 Teachability Evidence Review (v0.12.3)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.2 merge
+  Version: 0.12.3
 
   Summary:
-  Continue the evidence-only teachability loop after the affiliation context
-  fix and identify whether a new concrete player-facing, instructor-facing, or
-  domain-review gap remains.
+  Audit the v0.12.2 affiliation post-fix artifact against the approved
+  v0.11.12 competitive teachability capture for structural decision-to-debrief
+  continuity and source-specific context.
 
   Done:
-  - v0.12.2 closes the typed-vs-rendered affiliation observation gap and reruns
-    the exact 9-coordinate matrix.
+  - Added a deterministic read-only audit over the two pinned source artifacts.
+  - Validated 18/18 complete runs and 270 committed transitions across the
+    affiliation and competitive evidence lanes.
+  - Confirmed actor-visible decision context, action/response, transition/hash,
+    outcome, debrief, profile/seed matrix, and source-specific context coverage
+    with zero structural gaps.
+  - Preserved source versions, campaign-specific semantics, the competitive
+    control hash, and deferred runtime promotion.
+  - Bumped package metadata to `0.12.3`.
 
   Not Yet Done:
-  - Design a bounded Phase 7 evidence question from current artifacts before
-    adding runtime or balance work.
-  - Capture only the smallest artifact needed to answer that question and keep
-    source-specific evidence limits explicit.
+  - A new concrete player-facing, instructor-facing, or domain-review gap is
+    required before runtime or interface promotion.
 
   Deferred / Non-Goals:
-  - No runtime tuning, broad balance pass, new actor class, GUI, legal forecast,
-    calibration, winnability, or human-learning claim without a separately
-    justified evidence gate.
+  - No new capture, state, transition, ruleset, threshold, balance, difficulty,
+    command, scenario, GUI, replay/hash, legal, calibration, winnability, or
+    human-learning changes.
 
   Verification:
-  - Required before this item moves to Past: named evidence sources, exact
-    matrix/trace contract, deterministic audit, domain QA, and full repository
-    checks.
+  - 2 source artifacts, 18 runs, 270 transitions, and zero structural gaps.
+  - 307 Rust tests, 178 Python tests, formatting, clippy, CLI smoke, golden,
+    and diff checks pass.
+
+## Present
+
+- Feature: Difficulty Depth Evidence Review (v0.12.4)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.3 merge
+
+  Summary:
+  Review existing all-tier and Expert evidence for one visible difficulty
+  pressure dimension that current tiers may not express, before any runtime
+  tuning.
+
+  Done:
+  - v0.12.3 finds no structural teachability gap across the current affiliation
+    and competitive artifacts.
+
+  Not Yet Done:
+  - Design a read-only Phase 7/9 difficulty evidence question from the existing
+    all-tier and Expert artifacts.
+  - Identify one visible pressure dimension, if any, before changing rules or
+    balance and keep Expert winnability claims explicitly gated.
+
+  Deferred / Non-Goals:
+  - No runtime tuning, broad balance pass, hidden rival omniscience, scoring
+    redesign, GUI, legal forecast, calibration, winnability, or human-learning
+    claim without a separately justified evidence gate.
+
+  Verification:
+  - Required before this item moves to Past: named all-tier/Expert sources,
+    exact matrix/trace contract, deterministic audit, domain QA, and full
+    repository checks.
 
 ## Future
 
@@ -3728,11 +3763,11 @@ strategic actors, or platform architecture.
   comparison, or debrief-use issue.
 
   Next actionable slice:
-  Design an evidence-only Phase 7 review from the current post-fix affiliation
-  and competitive artifacts. Preserve the evidence-only posture until a new
-  artifact identifies another concrete comprehension, pacing, traceability,
-  strategy-comparison, or debrief-use gap. Do not promote balance or transition
-  work from descriptive evidence alone.
+  The v0.12.3 cross-campaign review is complete with no structural gap. Keep
+  runtime promotion deferred; route any newly identified comprehension,
+  pacing, traceability, strategy-comparison, or debrief-use issue through a
+  separate bounded evidence slice rather than inferring one from descriptive
+  coverage.
 
   Verification target:
   Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible
@@ -3754,10 +3789,12 @@ strategic actors, or platform architecture.
   express.
 
   Next actionable slice:
-  Design or test one visible difficulty dimension, such as rival resource
-  access, information delay, monitoring depth, implementation capacity, or
-  risk/aggression posture. Validate Expert difficulty as severe but winnable
-  before changing default balance.
+  Design a read-only review of the existing all-tier and Expert artifacts for
+  one visible difficulty dimension, such as rival resource access, information
+  delay, monitoring depth, implementation capacity, or risk/aggression posture.
+  Validate whether the evidence names a concrete pressure gap before changing
+  default balance; Expert should remain severe-but-winnable evidence, not an
+  assumption.
 
   Verification target:
   Findings cite seeds, profiles, difficulty tiers, validation failures or

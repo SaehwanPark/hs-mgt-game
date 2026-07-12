@@ -1,73 +1,73 @@
-# Mechanism Design - Regional Affiliation Observation Context v0.12.2
+# Mechanism Design - Phase 7 Teachability Evidence Review v0.12.3
 
 ## Goal and Roadmap Phase
 
-Phase 7.6 educational artifact/debrief review follow-up to the v0.12.1
-observation-context finding. This is an interface projection slice, not a new
-simulation mechanism.
+Phase 7 teachability and validation evidence review after the v0.12.2
+observation-context fix. This is a read-only audit, not a new simulation or
+interface mechanism.
 
 ## Slice Boundary
 
-- Setting: existing `regional-affiliation-v1` six-stage scenario.
-- Player view: MCP `SessionEnvelope.observation` only.
-- New lines: commitment values/total, current alternatives, and stylized
-  assumptions already produced by `observe_affiliation`.
-- Verification: focused Rust session tests plus the unchanged 9-coordinate
-  post-fix capture.
+- Inputs: exactly two committed artifacts: v0.12.2 affiliation post-fix and
+  v0.11.12 competitive teachability capture.
+- Output: one deterministic report with source-level coverage, review-step
+  status, evidence gaps, and explicit limits.
+- Review: 18 complete source runs and 270 committed transitions, with no new
+  sessions or generated runtime state.
 - Excluded: true-state expansion, transition changes, actor-response changes,
-  balance, GUI, legal modeling, and generic observation abstractions.
+  balance, GUI, legal modeling, generalized evidence schemas, and human
+  evaluation.
 
 ## Actors and Authority
 
-Riverside sees its own commitments and the scenario's declared alternatives and
-assumptions. Partner condition, actor utility, review/labor/payer/community
-responses, and future realized effects remain outside the new rendered lines.
+The audit treats each source's actor-visible observation as the boundary of
+what the player could know. Affiliation partner/review/labor/payer/community
+responses and competitive private rival actions remain source-specific; the
+report does not reconstruct them as player knowledge.
 
 ## State, Beliefs, and Observations
 
-The formatter will consume `AffiliationObservation` without reading
-`AffiliationWorldState` directly. It will render:
-
-- `Commitments: community <n>, workforce <n>, continuity <n>, total <n>`;
-- one `Alternative: <text>` line per typed alternative; and
-- one `Assumption: <text>` line per typed assumption.
-
-This preserves the typed observation boundary and makes the debrief's
-alternative-comparison prompt inspectable at decision time.
+The report records only the presence and alignment of source-provided
+observations, legal commands, submitted commands, accepted transitions, state
+hashes, and debrief markers. It does not merge affiliation stages with
+competitive months or infer unrecorded beliefs.
 
 ## Commands, Events, and Effects
 
 No command, event, effect, transition, resolved input, or state-hash behavior
-changes. The existing commands and legal hints remain authoritative.
+changes. Existing command and legal-hint records are merely audited.
 
 ## Strategic Interaction
 
-No strategic decision procedure changes. The post-fix capture reuses the
-independent, deferred, and maximum-commitment pursuit probes from v0.12.1 to
-test interface continuity across all staged states.
+No strategic decision procedure changes. The two source lanes retain their
+independent policy profiles, seeds, difficulty, and actor-response records.
+The audit compares traceability coverage, not policy performance.
 
 ## Assumptions and Parameters
 
-- `AffiliationCommitments::total()` is the source for the rendered total.
-- Existing typed alternative and assumption strings are rendered verbatim.
-- No new numeric parameter or dependency is introduced.
+- Source contracts use pinned batch IDs and expected run/transition counts.
+- Marker checks are explicit and deterministic; no fuzzy model or external
+  dependency is introduced.
+- No numeric game parameter is introduced.
 
 ## Educational Debrief Hooks
 
-- A player can see the alternatives before choosing posture.
-- A player can see the commitments currently carried by the run.
-- The stylized/legal boundary assumptions are visible before decisions and can
-  be compared with the debrief's actor-response explanation.
+- Affiliation decision-time context is checked against its alternative and
+  assumption debrief prompt.
+- Competitive decision-time consultant/advisory context is checked against
+  its retrospective decision-quality framing.
+- Both lanes are checked for action-to-outcome trace linkage without claiming
+  that the debrief is comprehensible or effective.
 
 ## Determinism and Replay Notes
 
-The change is presentation-only. It does not enter transition evaluation,
-history, replay artifacts, or state hashing. The post-fix artifact excludes
-session IDs and validates the same state hashes as v0.12.1.
+The audit reads committed JSON only. It does not enter transition evaluation,
+history, replay artifacts, or state hashing. Source state-hash sequences are
+validated for internal alignment and are not regenerated or rewritten.
 
 ## Open Questions
 
 - Human comprehension and educational effectiveness require evidence outside
   this deterministic simulated-policy slice.
-- Future observation fields require a separate review against hidden-state and
-  actor-authority boundaries.
+- If a future artifact identifies a concrete gap, its fix must be scoped to the
+  owning campaign boundary rather than generalized from this report.
