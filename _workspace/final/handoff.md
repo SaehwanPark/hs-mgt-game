@@ -23,9 +23,9 @@
 
 - Base branch: `main`
 - Working branch: `feat/regional-affiliation-runtime-proposal-v0.11.14`
-- PR: to be populated after push and PR creation.
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/152
 - Domain QA: Pass.
-- Review passes: pending implementation handoff.
+- Review passes: pending three independent review passes.
 
 ## Verification
 
