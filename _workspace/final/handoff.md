@@ -25,10 +25,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/affiliation-observation-context-v0.12.2`
-- PR: to be opened after local verification
+- PR: [#155](https://github.com/SaehwanPark/hs-mgt-game/pull/155)
 - Domain QA: Pass.
-- Review passes: pending implementation completion
-- Merge state: pending PR review and merge
+- Review passes: three post-open passes completed; no actionable code or scope
+  findings. One stale handoff status was corrected in this commit.
+- CI: `check` passed in GitHub Actions run 29206673555.
+- Merge state: open; ready to merge after this handoff update is checked.
 
 ## Verification
 
