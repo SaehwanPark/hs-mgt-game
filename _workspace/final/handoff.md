@@ -20,9 +20,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/release-metadata-check-v0.12.13`
-- PR: to be opened after final local verification
+- PR: [#166](https://github.com/SaehwanPark/hs-mgt-game/pull/166)
 - Domain QA: Pass for bounded contributor-readiness scope.
-- Review passes: pending PR opening and post-open review.
+- Review passes: three clean post-open passes covering scope, checker behavior,
+  and docs/version/queue boundaries.
+- CI: [run #29210513712](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29210513712)
+  passed.
 - Merge state: pending PR review and merge.
 
 ## Verification
