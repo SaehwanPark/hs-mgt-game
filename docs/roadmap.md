@@ -863,6 +863,11 @@ The v0.11.6 strategy-comparison use audit groups the same frozen capture by
 profile, seed, and difficulty, confirms complete traceability across all 60
 runs, and identifies no structural strategy-comparison or debrief-use gap;
 runtime promotion remains deferred.
+The v0.11.11 post-change all-tier validation reruns the five-profile matrix on
+current code after the difficulty risk-posture and rival-resource changes,
+confirming 60/60 complete runs, 1,440 committed months, varied trajectories,
+and no candidate common or near-dominant first-month action. These remain
+descriptive routing evidence; runtime promotion remains deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
 

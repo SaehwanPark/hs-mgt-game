@@ -688,6 +688,20 @@ python3 _workspace/experiments/v0.11.9-expert-difficulty-validation/run_sessions
 python3 -m json.tool _workspace/experiments/v0.11.9-expert-difficulty-validation/results.json
 ```
 
+As of `v0.11.11`, the post-change all-tier validation matrix reruns the five
+existing policy profiles across seeds `42`, `43`, and `44` at Easy, Normal,
+Hard, and Expert difficulty on current code. It records 60 complete 24-month
+runs, operating accounting, strategy trajectories, endpoint tradeoffs,
+bottlenecks, threshold candidates, actor-visible traces, hashes, and debriefs.
+This is bounded simulated-policy evidence, not general winnability, balance,
+causal strategy, human-learning, calibration, or policy-validity evidence.
+
+```bash
+python3 _workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/run_sessions.py
+python3 _workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json
+```
+
 As of `v0.10.47`, the command-to-effect explainability audit checks the same
 12 Expert traces for action-specific transition evidence and monthly `Player:`
 debrief records. It is a read-only traceability check: the complete result does

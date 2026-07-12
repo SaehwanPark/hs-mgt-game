@@ -3423,13 +3423,37 @@ reconstructing it from the diff.
     full Python/Rust suites, formatting, clippy, automated playtests, and diff
     checks pass.
 
+- Feature: Post-Change All-Tier Difficulty Validation (v0.11.11)
+  Summary:
+  Capture and audit current-code all-tier competitive behavior after the v0.11.7
+  AI risk-posture and v0.11.8 rival-resource changes.
+  Done:
+  - Added `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/`
+    with a reproducible 60-run capture and current-version audit adapter.
+  - Validated 60/60 complete 24-month runs, 1,440 operating months, and 60/60
+    decision-to-debrief traces across five profiles, three seeds, and four tiers.
+  - Recorded ten distinct command trajectories, varied operating bottlenecks,
+    and no candidate common or near-dominant first-month action.
+  - Preserved runtime promotion deferral and recorded findings in
+    `docs/playtest-findings-v0.11.11.md`.
+  Deferred / Non-Goals:
+  - No runtime mechanics, difficulty values, AI scoring, balance, scenario,
+    ruleset, replay, MCP schema, or state-hash changes.
+  - No causal strategy, general winnability, human-learning,
+    empirical-calibration, or policy-validity claim.
+  Verification:
+  - Focused artifact tests, 60-run generation, audit validation, JSON parsing,
+    full Python/Rust suites, formatting, clippy, automated playtests, and diff
+    checks pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
   validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
   strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
   difficulty resource scaling, v0.11.9 Expert difficulty validation, and
-  v0.11.10 Phase 7 difficulty evidence synthesis, are complete.
+  v0.11.10 Phase 7 difficulty evidence synthesis, and v0.11.11 post-change
+  all-tier difficulty validation, are complete.
 
 ## Future
 

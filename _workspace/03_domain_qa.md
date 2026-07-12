@@ -6,22 +6,22 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.10 request summary and evidence synthesis runner.
-- `_workspace/experiments/v0.11.6-strategy-comparison-use-audit/results.json`.
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`.
-- `docs/playtest-findings-v0.11.10.md`, `SPEC.md`, `docs/roadmap.md`, design
+- v0.11.11 request summary, evidence map, capture runner, and audit adapter.
+- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json`.
+- `docs/playtest-findings-v0.11.11.md`, `SPEC.md`, `docs/roadmap.md`, design
   principles, and the harness team specification.
 
 ## Findings
 
 - The slice stays within the Phase 7 evidence-only validation gate.
-- Each source artifact is validated using its own declared contract.
-- The synthesis reports only coverage and traceability continuity; it does not
-  infer causal endpoint comparisons from different code versions.
-- The artifact preserves the distinction between simulated-policy evidence and
-  human learning, strategy quality, balance, winnability, or policy validity.
-- Runtime promotion remains deferred because no structural evidence gap was
-  identified.
+- The current-code matrix contains 60/60 complete runs and 1,440 operating
+  months with complete decision-to-debrief coverage.
+- Player-owned operating evidence remains distinct from rival operating events;
+  engine history is not presented as actor-visible decision context.
+- The artifact reports trajectories, bottlenecks, and endpoint ranges as
+  descriptive diagnostics rather than causal or balance claims.
+- Runtime promotion remains deferred because no unexplained product or domain
+  gap was identified.
 
 ## Required Fixes
 
@@ -29,15 +29,16 @@ None.
 
 ## Residual Risks
 
-- Existing source artifacts remain bounded deterministic captures and do not
-  cover all possible strategies, seeds, stochastic conditions, or players.
-- Source-contract continuity is not evidence of educational effectiveness or
-  calibrated policy behavior.
+- The tested profiles and three seeds do not cover all strategies, stochastic
+  conditions, or player skill levels.
+- Completion and trajectory variation are not evidence of general Expert
+  winnability, balance, educational effectiveness, or calibrated policy
+  behavior.
 
 ## Verification Evidence
 
-- Focused synthesis tests: 5 passed.
-- Python suite: 147 passed.
-- Rust suite: 293 passed.
-- `cargo fmt --check`, clippy, automated playtests, JSON validation, and diff
-  checks pass.
+- Focused v0.11.11 artifact tests: 6 passed.
+- Current-code capture: 60/60 runs completed.
+- Audit: 1,440 operating months and 60/60 decision-to-debrief traces supported.
+- Full Python/Rust suites, formatting, clippy, automated playtests, JSON
+  validation, and diff checks pass.
