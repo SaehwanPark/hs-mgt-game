@@ -1109,3 +1109,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: When adding a pending project effect, update actor-visible
   formatters and test name, remaining duration, and monthly draw alongside
   validation and transition coverage.
+
+## Operating-Outcome Use Must Preserve Temporal Alignment
+
+- Context: Auditing whether the v0.11.4 operating-result surface connects
+  visible prior-month outcomes to later commands and exact debrief results.
+- Symptom: A complete current-month debrief line can appear to support a
+  response claim even when the observation belongs to the preceding transition
+  or when the campaign has already ended.
+- Resolution: Compare month-two-plus observations to the preceding committed
+  transition, compare debrief results to the current transition, and classify
+  final-month signals as expected terminal cases rather than missing responses.
+- Prevention: Keep signal-to-command counts descriptive, preserve player/rival
+  boundaries, and do not infer causality, strategy quality, or human learning
+  from deterministic trace continuity.

@@ -95,6 +95,21 @@ player-owned result line per month and 469/469 categorized signal-month
 outcome links. It remains descriptive traceability evidence, not causal,
 balance, winnability, calibration, human-learning, or policy-validity evidence.
 
+To audit operating-outcome use without launching new sessions:
+
+```bash
+python3 _workspace/experiments/v0.11.5-operating-outcome-use-audit/run_audit.py
+python3 -m unittest tests/test_operating_outcome_use_audit.py
+```
+
+The v0.11.5 read-only audit checks prior-month observation timing, exact
+player-owned debrief outcomes, signal-to-next-command continuity, terminal
+signals, and rival-result boundaries. It reports 441 non-terminal response
+opportunities and 28 expected terminal signals in the frozen v0.11.4 capture.
+Response distributions remain descriptive simulated-policy evidence and do not
+establish causality, comprehension, learning, balance, or runtime-promotion
+need.
+
 This matrix runs five deterministic policy lanes across seeds `42`, `43`, `44`
 and Easy/Normal/Hard/Expert. It is descriptive gameplay-validation evidence;
 it does not establish causal marginal effects, dominance, balance, calibration,

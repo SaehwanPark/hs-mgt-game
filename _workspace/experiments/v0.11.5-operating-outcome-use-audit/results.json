@@ -1,0 +1,2426 @@
+{
+  "artifact_type": "operating_outcome_use_audit",
+  "batch_id": "v0.11.5-operating-outcome-use-audit",
+  "campaign": "competitive-regional-v1",
+  "code_version": "0.11.5",
+  "completed_run_count": 60,
+  "debrief_outcome_gap_count": 0,
+  "debrief_outcome_match_count": 1440,
+  "difficulties": [
+    "easy",
+    "normal",
+    "hard",
+    "expert"
+  ],
+  "duplicate_coordinates": [],
+  "evidence_limits": [
+    "This is deterministic traceability evidence, not human comprehension or learning evidence.",
+    "Signal-to-command counts are descriptive and do not establish causal response or strategy value.",
+    "Operating quantities remain visible integer game abstractions, not calibrated units.",
+    "The audit does not establish balance, winnability, calibration, or policy validity."
+  ],
+  "expected_month_count": 1440,
+  "expected_run_count": 60,
+  "initial_baseline_count": 60,
+  "missing_coordinates": [],
+  "multi_action_command_count": 0,
+  "observation_gap_count": 0,
+  "prior_observation_match_count": 1380,
+  "profiles": [
+    "Access First",
+    "Commercial Focus",
+    "Workforce Resilience",
+    "Capital Modernization",
+    "Coalition/Legitimacy"
+  ],
+  "response_gap_count": 0,
+  "response_link_count": 441,
+  "response_opportunity_count": 441,
+  "rival_operating_result_count": 0,
+  "ruleset": "competitive-ruleset-0.2.0",
+  "run_count": 60,
+  "run_reports": [
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 5,
+      "response_opportunity_count": 5,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 4,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 2,
+          "monitor": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 5,
+      "response_opportunity_count": 5,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 4,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 2,
+          "monitor": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 5,
+      "response_opportunity_count": 5,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 4,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 2,
+          "monitor": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 3,
+      "response_opportunity_count": 3,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 2,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 3,
+      "response_opportunity_count": 3,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 2,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 3,
+      "response_opportunity_count": 3,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 2,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "invest": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "invest": 10,
+        "monitor": 4,
+        "recruit": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 9,
+      "response_opportunity_count": 9,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 8,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "invest": 3,
+          "monitor": 2,
+          "recruit": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 7,
+        "invest": 7,
+        "monitor": 3,
+        "recruit": 4
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 7,
+          "invest": 3,
+          "monitor": 1,
+          "recruit": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 7,
+        "invest": 7,
+        "monitor": 3,
+        "recruit": 4
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 7,
+          "invest": 3,
+          "monitor": 1,
+          "recruit": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 7,
+        "invest": 7,
+        "monitor": 3,
+        "recruit": 4
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Access First",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 7,
+          "invest": 3,
+          "monitor": 1,
+          "recruit": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "capacity_or_demand": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 2,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "capacity_or_demand": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 2,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "capacity_or_demand": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 2,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 15,
+      "response_opportunity_count": 15,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "capacity_or_demand": 14,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 2,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 16,
+      "response_opportunity_count": 16,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "capacity_or_demand": 15,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 3,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 16,
+      "response_opportunity_count": 16,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "capacity_or_demand": 15,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 3,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 16,
+      "response_opportunity_count": 16,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "capacity_or_demand": 15,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 3,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 16,
+      "response_opportunity_count": 16,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "capacity_or_demand": 15,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "hold": 3,
+          "monitor": 3,
+          "negotiate": 9
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 4,
+      "response_opportunity_count": 4,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "capacity_or_demand": 3,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "monitor": 1,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 4,
+      "response_opportunity_count": 4,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "capacity_or_demand": 3,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "monitor": 1,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 4,
+      "response_opportunity_count": 4,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "capacity_or_demand": 3,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "monitor": 1,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "monitor": 5,
+        "negotiate": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Commercial Focus",
+      "response_gap_count": 0,
+      "response_link_count": 4,
+      "response_opportunity_count": 4,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "capacity_or_demand": 3,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "capacity_or_demand": {
+          "monitor": 1,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 4,
+        "recruit": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 3,
+      "response_opportunity_count": 3,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 2,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "recruit": 1
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 5,
+        "recruit": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 3,
+          "recruit": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 5,
+        "recruit": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 3,
+          "recruit": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 5,
+        "recruit": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 3,
+          "recruit": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 4,
+        "recruit": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 4,
+        "recruit": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 9,
+      "response_opportunity_count": 9,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 8,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 1,
+          "recruit": 5
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 4,
+        "recruit": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 9,
+      "response_opportunity_count": 9,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 8,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 1,
+          "recruit": 5
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 5,
+        "hold": 4,
+        "recruit": 15
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 9,
+      "response_opportunity_count": 9,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "operating_loss": 8,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 1,
+          "recruit": 5
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 4,
+        "hold": 9,
+        "recruit": 11
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 14,
+      "response_opportunity_count": 14,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 13,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 2,
+          "hold": 6,
+          "recruit": 5
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 12,
+        "recruit": 9
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 17,
+      "response_opportunity_count": 17,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 16,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 11,
+          "recruit": 4
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 12,
+        "recruit": 9
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 17,
+      "response_opportunity_count": 17,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 16,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 11,
+          "recruit": 4
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 3,
+        "hold": 12,
+        "recruit": 9
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Workforce Resilience",
+      "response_gap_count": 0,
+      "response_link_count": 17,
+      "response_opportunity_count": 17,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 16,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1,
+          "hold": 11,
+          "recruit": 4
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 1,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 4,
+        "invest": 20
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 2,
+      "response_opportunity_count": 2,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 1,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "invest": 1
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 10,
+        "invest": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "hold": 5,
+          "invest": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 10,
+        "invest": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "hold": 5,
+          "invest": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "hold": 10,
+        "invest": 14
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Capital Modernization",
+      "response_gap_count": 0,
+      "response_link_count": 12,
+      "response_opportunity_count": 12,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 11,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "hold": 5,
+          "invest": 6
+        },
+        "workforce_capacity": {
+          "hold": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 42,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 1,
+      "response_opportunity_count": 1,
+      "rival_operating_result_count": 0,
+      "seed": 43,
+      "signal_counts": {
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "easy",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 2,
+      "response_opportunity_count": 2,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 1,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 1
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "normal",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 11,
+      "response_opportunity_count": 11,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 10,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 6,
+          "monitor": 2,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "hard",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 11,
+      "response_opportunity_count": 11,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 10,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 6,
+          "monitor": 2,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    },
+    {
+      "command_family_counts": {
+        "commit": 15,
+        "monitor": 4,
+        "negotiate": 5
+      },
+      "completion_status": "complete",
+      "debrief_outcome_gap_count": 0,
+      "debrief_outcome_match_count": 24,
+      "difficulty": "expert",
+      "initial_baseline_count": 1,
+      "multi_action_command_count": 0,
+      "observation_gap_count": 0,
+      "prior_observation_match_count": 23,
+      "profile": "Coalition/Legitimacy",
+      "response_gap_count": 0,
+      "response_link_count": 11,
+      "response_opportunity_count": 11,
+      "rival_operating_result_count": 0,
+      "seed": 44,
+      "signal_counts": {
+        "operating_loss": 10,
+        "workforce_capacity": 1
+      },
+      "signal_to_command_counts": {
+        "operating_loss": {
+          "commit": 6,
+          "monitor": 2,
+          "negotiate": 2
+        },
+        "workforce_capacity": {
+          "monitor": 1
+        }
+      },
+      "terminal_signal_count": 0,
+      "trace_count": 24,
+      "trace_hash_match_count": 24,
+      "transition_count": 24,
+      "unknown_command_count": 0,
+      "validation_failure_count": 0
+    }
+  ],
+  "runtime_promotion": "deferred",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "signal_count": 441,
+  "signal_counts": {
+    "capacity_or_demand": 128,
+    "operating_loss": 253,
+    "workforce_capacity": 60
+  },
+  "signal_to_command_counts": {
+    "capacity_or_demand": {
+      "hold": 20,
+      "monitor": 28,
+      "negotiate": 80
+    },
+    "operating_loss": {
+      "commit": 48,
+      "hold": 87,
+      "invest": 40,
+      "monitor": 14,
+      "negotiate": 6,
+      "recruit": 58
+    },
+    "workforce_capacity": {
+      "hold": 36,
+      "monitor": 24
+    }
+  },
+  "source_artifact_type": "operating_outcome_debrief_validation",
+  "source_batch_id": "v0.11.4-operating-outcome-debrief-validation",
+  "source_code_version": "0.11.4",
+  "state_hash_schema": "competitive-state-hash-v9",
+  "terminal_signal_count": 28,
+  "trace_count": 1440,
+  "trace_hash_match_count": 1440,
+  "transition_count": 1440,
+  "unknown_command_count": 0,
+  "validation_failure_count": 0
+}

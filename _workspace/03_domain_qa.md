@@ -6,23 +6,23 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.4 request summary and evidence contract.
-- New capture/audit scripts, focused Python tests, generated matrix artifacts,
-  and v0.11.4 findings.
-- `SPEC.md`, `docs/roadmap.md`, `docs/agent-playtest-protocol.md`,
-  `docs/mcp-playtesting-guide.md`, design principles, and harness team spec.
+- v0.11.5 request summary and evidence map.
+- v0.11.5 audit script, focused tests, generated JSON/diagnostics, and
+  playtest findings.
+- `SPEC.md`, `docs/roadmap.md`, `docs/mcp-playtesting-guide.md`, design
+  principles, and the harness team specification.
 
 ## Findings
 
-- The slice stays within the Phase 7 evidence gate and does not add runtime
-  behavior or a generalized evidence framework.
-- Player-owned operating outcomes are checked against committed transitions and
-  matching monthly debrief sections.
-- Rival-owned operating values are counted only as a privacy regression signal,
-  never as player evidence.
+- The slice stays within the Phase 7 evidence gate and adds no runtime behavior
+  or generalized evidence framework.
+- Prior-month observations are compared to the preceding committed transition,
+  while current debrief results are compared to the current transition.
+- Terminal signals are separated from missing responses.
+- Rival operating values remain outside player evidence.
+- Signal-to-command distributions are explicitly descriptive, not causal or
+  educational claims.
 - Actor utility, social welfare, and educational evaluation remain distinct.
-- The evidence remains descriptive and uses visible game units rather than
-  calibrated policy or clinical quantities.
 
 ## Required Fixes
 
@@ -30,19 +30,22 @@ None.
 
 ## Residual Risks
 
-- Complete traceability does not establish debrief clarity, learning, causal
-  marginal effects, balance, or winnability.
-- The 60-run matrix remains scripted-policy evidence, not human play evidence.
+- Scripted-policy traces do not establish human comprehension, learning,
+  enjoyment, balance, or winnability.
+- Response distributions do not establish causal command effects or strategy
+  quality.
+- Operating values remain visible game units rather than calibrated quantities.
 
 ## Verification Evidence
 
-- Focused v0.11.4 audit tests — 6 passed.
-- Matrix capture and audit output — 60 runs, 1,440 months, 469/469 links.
-- `cargo fmt --check` — passed.
-- `cargo clippy --all-targets -- -D warnings` — passed.
-- `cargo test --all -- --test-threads=1` — 291 passed.
-- `python3 -m unittest discover -s tests -p 'test_*.py'` — 122 passed.
-- JSON validation and `git diff --check` — passed.
-- Three independent code-reviewer passes completed; one Medium privacy-audit
-  finding was fixed and no Critical/High findings remain.
-- GitHub CI `check` passed.
+- Eight focused v0.11.5 audit tests passed.
+- Matrix audit: 60/60 runs, 1,440/1,440 traces, 1,380 prior-month matches,
+  1,440/1,440 debrief matches, 441 response opportunities, and 28 terminal
+  signals.
+- Rival operating-result lines counted as player evidence: 0.
+- Full Python suite — 130 tests passed.
+- Full Rust suite — 291 tests passed with single-threaded execution.
+- `cargo fmt --check`, clippy, JSON validation, deterministic regeneration,
+  `cargo test --test golden_competitive_seed42`, and `git diff --check` passed.
+- Three independent code-reviewer passes completed with no actionable findings.
+- GitHub `check` CI passed.

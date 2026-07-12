@@ -853,7 +853,12 @@ closes that reporting-surface gap using committed player outcomes without
 changing transition semantics or promoting balance, causal, or learning claims.
 The v0.11.4 post-fix matrix re-runs the same 60-run baseline and confirms
 1,440/1,440 monthly result lines and 469/469 categorized outcome links; this is
-structural traceability evidence and does not promote runtime expansion.
+structural traceability evidence and does not promote runtime expansion. The
+v0.11.5 operating-outcome use audit confirms 1,380 prior-month observation
+matches, 1,440 exact debrief outcome matches, 441 non-terminal
+signal-to-next-command opportunities, and 28 expected terminal signals; these
+remain descriptive traceability evidence rather than causal or learning
+evidence.
 
 ## 7.6 Educational Artifact and Debrief Review
 

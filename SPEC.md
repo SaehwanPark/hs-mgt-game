@@ -3271,16 +3271,50 @@ reconstructing it from the diff.
     JSON validation, golden seed-42 coverage, and diff checks pass.
 
 
+- Feature: Operating-Outcome Use Audit
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.11.5
+
+  Summary:
+  Audited whether the v0.11.4 operating outcomes remain aligned across
+  actor-visible prior-month observations, subsequent command traces, committed
+  transitions, and player-owned monthly debrief results.
+
+  Done:
+  - Reused the frozen v0.11.4 capture without launching new sessions or
+    changing runtime behavior.
+  - Confirmed 60 complete runs, 1,440 traces, 1,380 prior-month observation
+    matches, 1,440 trace/hash matches, and 1,440 exact debrief outcome matches.
+  - Reported 441 non-terminal signal-to-next-command opportunities and 28
+    expected terminal signals without treating response distributions as
+    causal strategy evidence.
+
+  Not Yet Done:
+  - No human comprehension, classroom, causal, balance, winnability,
+    calibration, or policy-validity evaluation has been performed.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, ruleset, state-hash, balance, difficulty,
+    scoring, or debrief wording change.
+  - No generalized evidence schema, new capture matrix, or runtime promotion.
+
+  Verification:
+  - Eight focused audit tests, full Python/Rust suites, formatting, clippy,
+    JSON validation, deterministic regeneration, golden seed-42 coverage, and
+    diff checks pass.
+
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
-  validation are complete in v0.11.4.
+  validation, plus the v0.11.5 operating-outcome use audit, are complete.
 
 ## Future
 
 The v0.11.0 operating loop, v0.11.2 explainability audit, v0.11.3
-month-specific debrief linkage, and v0.11.4 post-fix validation are the current
-gameplay-maturity baseline.
+month-specific debrief linkage, v0.11.4 post-fix validation, and v0.11.5
+operating-outcome use audit are the current gameplay-maturity baseline.
 Before adding actors, commands, service lines, or platform layers, validate it
 with AI strategy archetypes across seeds and rival
 configurations. Required diagnostics
