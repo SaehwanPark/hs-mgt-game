@@ -21,11 +21,11 @@
 
 - Base branch: `main`
 - Working branch: `feat/teachability-queue-closure-v0.12.8`
-- PR: [#160](https://github.com/SaehwanPark/hs-mgt-game/pull/160)
+- PR: [#161](https://github.com/SaehwanPark/hs-mgt-game/pull/161)
 - Domain QA: Pass for queue closure.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208963339](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208963339).
+- CI: `check` passed in run [29209204446](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209204446).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
@@ -33,7 +33,8 @@
 - Queue-closure source markers: supported.
 - Existing teachability audit: 18/18 complete runs, 270 stages, zero gaps.
 - Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
-  smoke, golden, audit, and diff checks: pending final verification.
+  smoke, golden, audit, and diff checks: passed locally; the PR check also
+  passed.
 
 ## Stop condition
 
