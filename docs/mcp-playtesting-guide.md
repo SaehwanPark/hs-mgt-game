@@ -82,6 +82,19 @@ reports visible game-unit demand, treated volume, unmet demand, revenue, cost,
 and margin; it is a post-run outcome link, not a calibrated financial or clinical
 measure.
 
+To validate the post-v0.11.3 operating-result linkage matrix:
+
+```bash
+python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_sessions.py
+python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_audit.py
+python3 -m unittest tests/test_operating_outcome_debrief_validation.py
+```
+
+The v0.11.4 artifact covers 60 runs and 1,440 committed months, with one
+player-owned result line per month and 469/469 categorized signal-month
+outcome links. It remains descriptive traceability evidence, not causal,
+balance, winnability, calibration, human-learning, or policy-validity evidence.
+
 This matrix runs five deterministic policy lanes across seeds `42`, `43`, `44`
 and Easy/Normal/Hard/Expert. It is descriptive gameplay-validation evidence;
 it does not establish causal marginal effects, dominance, balance, calibration,

@@ -851,6 +851,9 @@ no month-specific operating-outcome debrief linkage; this remains a debrief
 review candidate, not a runtime tuning basis. The v0.11.3 debrief follow-up
 closes that reporting-surface gap using committed player outcomes without
 changing transition semantics or promoting balance, causal, or learning claims.
+The v0.11.4 post-fix matrix re-runs the same 60-run baseline and confirms
+1,440/1,440 monthly result lines and 469/469 categorized outcome links; this is
+structural traceability evidence and does not promote runtime expansion.
 
 ## 7.6 Educational Artifact and Debrief Review
 

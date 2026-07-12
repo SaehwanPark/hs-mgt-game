@@ -2,33 +2,34 @@
 
 ## Goal and Roadmap Phase
 
-Phase 7 debrief traceability follow-up for the competitive campaign. This is a
-reporting-surface correction, not a new simulation mechanism.
+Phase 7 validation of the existing competitive debrief surface. This slice
+adds no actor, policy, scenario, or transition mechanism.
 
-## Output Contract
+## Evidence Contract
 
-For each committed competitive transition, `competitive_debrief` renders one
-player-owned line inside the matching month section:
-
-`Operating result: treated X/Y demand units (Z unmet); operating revenue R,
-operating cost C, operating margin M.`
-
-The values come from the human system in `transition.next`. The line is a
-realized post-run outcome link and is kept separate from decision-time
-observations, player commands, rival visibility, and global effect summaries.
+- Reuse the five existing deterministic policy lanes, seeds 42/43/44, and
+  Easy/Normal/Hard/Expert difficulties.
+- Audit the player-owned transition operating fields and the matching monthly
+  debrief section.
+- Count one player `Operating result:` line per committed month and require a
+  result line for each categorized capacity/demand, operating-loss, or
+  workforce-capacity signal-month.
+- Keep global attribution summaries separate from month-level linkage.
 
 ## Boundaries
 
-- Use the existing typed `CompetitiveTransition` and `HealthSystemState` fields.
-- Keep the change inside the debrief layer; CLI and MCP consume the shared
-  output without separate formatting logic.
-- Do not derive or render rival operating values.
-- Do not change transitions, stochastic inputs, hashes, replay formats, or
-  public MCP DTOs.
+- Capture only through the existing MCP wrapper boundary.
+- Preserve actor-visible observations, rival-private state, ruleset,
+  state-hash schema, replay formats, and transition semantics.
+- Do not modify historical v0.11.1 or v0.11.2 artifacts.
+- Treat the output as structural traceability evidence, not causal, balance,
+  winnability, calibration, human-learning, or policy-validity evidence.
 
 ## Validation
 
-- Focused Rust coverage asserts exact player values and excludes rival sentinel
-  values.
-- MCP end-session coverage confirms the shared debrief contains the line.
-- Full Rust/Python verification and the seed-42 golden test remain required.
+- Matrix coordinates are complete and unique: 60 runs.
+- Every run has 24 committed transitions and matching trace hashes.
+- The post-v0.11.3 debrief contains 1,440 player result lines and 469/469
+  categorized signal-month links.
+- The audit is deterministic and rejects missing, duplicate, malformed, or
+  rival-owned result records.

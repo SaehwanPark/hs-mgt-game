@@ -1,38 +1,42 @@
-# Implementation Plan - Monthly Operating-Outcome Debrief Linkage
+# Implementation Plan - Post-v0.11.3 Operating-Outcome Validation
 
 ## Summary
 
-Add a small debrief formatter that renders committed player operating outcomes
-next to each competitive month’s player command. Preserve all transition,
-observation, replay, ruleset, and hash behavior.
+Capture and audit the existing 60-run competitive policy matrix against the
+v0.11.3 monthly operating-result debrief surface. Preserve all runtime and
+replay behavior.
 
 ## Implementation
 
-- Add focused report and MCP tests first.
-- Read the human system from `CompetitiveTransition.next`.
-- Render demand, treated volume, unmet demand, revenue, cost, and signed margin.
-- Keep the formatter in `src/debrief/report.rs` so CLI and MCP remain aligned.
-- Update v0.11.3 project records and workspace handoffs.
+- Add focused audit-contract tests first.
+- Capture five existing profiles across seeds 42/43/44 and four difficulties.
+- Validate 60 complete runs, 1,440 committed months, 1,440 player result lines,
+  and 469/469 categorized signal-month links.
+- Reject trace/hash mismatches, validation failures, malformed month sections,
+  duplicate matrix coordinates, and rival-owned result lines.
+- Update v0.11.4 project records and workspace handoffs.
 
 ## Verification
 
 ```text
-cargo test debrief::report_tests::competitive_debrief_includes_player_owned_monthly_operating_results -- --test-threads=1
-cargo test mcp::session::tests::competitive_debrief_includes_monthly_operating_result -- --test-threads=1
+python3 -m unittest tests/test_operating_outcome_debrief_validation.py
+python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_sessions.py
+python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_audit.py \
+  --source _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/capture.json
+python3 -m unittest discover -s tests -p 'test_*.py'
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo test --all -- --test-threads=1
-python3 -m unittest discover -s tests -p 'test_*.py'
 git diff --check
 ```
 
 ## Non-goals
 
-No new simulation mechanics, actors, commands, schema fields, scenario files,
-replay migration, balance tuning, or new Phase 7 matrix.
+No runtime, MCP schema, scenario, replay, ruleset, state-hash, balance,
+difficulty, calibration, or learning change.
 
 ## Handoff
 
-Commit, push, open the GitHub PR against `main`, run three independent
-`code-reviewer` passes, fix all Critical/High findings, and record domain QA
-as `pass` before reporting merge readiness.
+Commit, push, open the GitHub PR against `main`, run exactly three independent
+`code-reviewer` passes, fix Critical/High findings, reply to actionable review
+feedback, and record domain QA as `Pass` before reporting merge readiness.
