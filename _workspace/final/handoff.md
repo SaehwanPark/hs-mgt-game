@@ -25,10 +25,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/affiliation-runtime-boundary-v0.12.7`
-- PR: to be opened after final local verification
+- PR: [#160](https://github.com/SaehwanPark/hs-mgt-game/pull/160)
 - Domain QA: Pass.
-- Review passes: pending PR opening and post-open review.
-- Merge state: pending PR review and merge.
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in run [29208963339](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208963339).
+- Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
