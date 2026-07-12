@@ -1,0 +1,64 @@
+{
+  "artifact_type": "affiliation_queue_closure",
+  "batch_id": "v0.12.10-affiliation-queue-closure",
+  "closure_status": "complete_existing_runtime",
+  "code_version": "0.12.10",
+  "deferred_scope": [
+    "direct acquisition branch",
+    "national consolidation or multi-deal market",
+    "private-equity rollups",
+    "detailed transaction financing",
+    "calibrated legal or antitrust forecasts",
+    "generic actor-framework expansion",
+    "changes to competitive-regional-v1"
+  ],
+  "evidence_limits": [
+    "The proposal and artifact are deterministic source-boundary and trace evidence, not legal, antitrust, calibration, social-welfare, or human-learning evidence.",
+    "The existing six-stage runtime is a bounded fictional affiliation abstraction, not a full acquisition simulator."
+  ],
+  "next_action": "Wait for new evidence identifying a concrete affiliation strategy, traceability, or educational gap before reopening this track.",
+  "proposal": {
+    "implementation_status": "existing_opt_in_runtime_confirmed",
+    "minimum_contract_count": 6,
+    "new_runtime_changes_authorized": false,
+    "observation_count": 54,
+    "path": "_workspace/experiments/v0.12.7-affiliation-runtime-boundary-proposal/proposal.json",
+    "run_count": 9,
+    "runtime_promotion": "deferred",
+    "source_code_version": "0.12.7",
+    "transition_count": 54
+  },
+  "queue_action": "remove_item_from_future_queue",
+  "runtime_change_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_marker_contract": {
+    "_workspace/experiments/v0.12.7-affiliation-runtime-boundary-proposal/diagnostics.md": {
+      "markers": [
+        "existing bounded runtime satisfies the proposal contract",
+        "Complete runs: 9/9.",
+        "Committed stages: 54.",
+        "New runtime changes authorized:** no"
+      ],
+      "status": "supported"
+    },
+    "docs/affiliation-runtime-boundary-v0.12.7.md": {
+      "markers": [
+        "The existing opt-in `regional-affiliation-v1` runtime already satisfies",
+        "True state:",
+        "Actor observation:",
+        "Resolved inputs:",
+        "History/replay:",
+        "Deferred scope"
+      ],
+      "status": "supported"
+    },
+    "docs/decision-records/0010-regional-affiliation-runtime-slice.md": {
+      "markers": [
+        "**Status:** Implemented in v0.12.0",
+        "one localized",
+        "Direct acquisition, national"
+      ],
+      "status": "supported"
+    }
+  }
+}

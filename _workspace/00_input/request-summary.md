@@ -1,18 +1,17 @@
-# Request Summary — Difficulty Queue Closure v0.12.9
+# Request Summary — Affiliation Queue Closure v0.12.10
 
 ## Decision
 
-Close the difficulty-depth and winnability queue item after reconciling the
-candidate workforce-capacity signal with its visible observation context and
-bounded Expert clearability evidence.
+Remove the affiliation/acquisition Future queue item because the existing
+opt-in runtime and v0.12.7 proposal already satisfy its minimum contract.
 
 ## Target slice
 
-- Validate v0.12.4 pressure and clearability evidence.
-- Validate v0.12.6 exact history/hash observation-only controls.
-- Remove the queue item without tuning difficulty or balance.
+- Validate six state/observation/input/transition/history/debrief contracts.
+- Preserve 9-run/54-stage evidence and source-version limits.
+- Record deferred broader acquisition scope and reopening condition.
 
 ## Explicit non-goals
 
-No runtime difficulty values, broad balance pass, hidden rival omniscience,
-scoring change, or general winnability claim.
+No new affiliation mechanic, acquisition simulator, deal finance, legal
+forecast, generic actor framework, or competitive-campaign change.
