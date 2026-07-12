@@ -2,57 +2,57 @@
 
 ## Scope
 
-Map the v0.11.1 operating-loop artifact into a bounded Phase 7 audit of
-decision-to-debrief explainability without promoting runtime work.
+Audit the existing v0.11.4 competitive capture for operating-outcome
+visibility, temporal observation alignment, next-command trace continuity, and
+player-owned debrief linkage.
 
 ## Sources Reviewed
 
-- The v0.11.1 60-run, 1,440-month JSON artifact and strict audit.
-- Existing actor-visible observations, submitted commands, transition effects,
-  player-owned operating events, hashes, and debriefs.
-- `docs/roadmap.md`, `SPEC.md`, the AI-agent playtest protocol, and ADR-0009.
+- `docs/roadmap.md`, Phase 7 validation and educational artifact gates.
+- `SPEC.md`, the v0.11.4 baseline and ranked teachability queue.
+- `docs/design_principles.md`, especially deterministic replay, observation
+  boundaries, inspectable causality, and evidence limits.
+- `_workspace/experiments/v0.11.4-operating-outcome-debrief-validation/capture.json`.
+- The v0.11.4 audit parser and focused contract tests.
 
 ## Mechanisms and Institutions
 
-- Regional demand and market position determine player-owned demand.
-- Effective staffed capacity determines treated and unmet demand.
-- Quality and payer pressure affect operating revenue.
-- Workforce and footprint affect operating cost and cash margin.
-- The debrief records decisions and aggregated mechanisms but may not link every
-  operating outcome to its month-specific decision section.
+The audit does not add or tune a health-policy mechanism. Its signal categories
+reuse the existing operating-loop diagnostic labels: capacity/demand,
+operating loss, and workforce capacity.
 
 ## Actor Incentives and Information
 
-- The five policy lanes are test-client behaviors, not runtime actor classes.
-- The audit uses only the player’s actor-visible observation and committed
-  transition records for player-owned claims.
-- Rival-private operating information is not copied into the new audit output.
-- Organizational outcomes remain distinct from social welfare and educational
-  evaluation.
+The player command is linked only to the player-visible prior-month observation.
+Rival-owned operating values remain a regression signal and are never counted
+as player evidence.
 
 ## Assumptions
 
-- Existing v0.11.1 signal classification is the authoritative abstraction for
-  loss, capacity/demand, and workforce-capacity categories.
-- Global attributed-mechanism and resolved-event lines are not month-level
-  debrief evidence.
-- Integer operating quantities are gameplay abstractions, not calibrated units.
+- The v0.11.4 capture is authoritative and remains deterministic.
+- A month-two observation describes the committed month-one result; it must not
+  be compared with the current month transition.
+- A final-month signal has no later command and is therefore a terminal signal,
+  not a missing response.
 
 ## Unresolved Questions
 
-- Whether month-specific operating outcome links improve debrief use requires a
-  later bounded design or validation slice.
-- The audit cannot establish causal effects, balance, learning, or enjoyment.
+- Whether a person finds the operating-result surface clear remains untested.
+- Whether any response distribution reflects good strategy or causal effect
+  remains unresolved.
+- Human learning, classroom use, calibration, and policy validity require
+  separate evidence.
 
 ## Design Implications
 
-- Keep the audit at the artifact boundary; do not add MCP or runtime fields.
-- Report decision context, transition attribution, month-level debrief links,
-  and global summaries as separate dimensions.
-- Route any future debrief wording change through focused tests and domain QA.
+- Keep the audit read-only and source-specific.
+- Preserve exact observation, command, transition, hash, and debrief fields.
+- Route runtime promotion only from a concrete unexplained product or domain
+  gap.
 
 ## Risks
 
-- Treating aggregated attribution as month-specific explanation.
-- Over-reading trace completeness as educational effectiveness.
-- Leaking or reinterpreting rival-private state while producing diagnostics.
+- Deterministic scripted policies are not human players.
+- Signal-to-command counts can be overinterpreted as causal response evidence.
+- Visible integer game units must not be presented as calibrated financial or
+  clinical quantities.

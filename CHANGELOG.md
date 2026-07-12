@@ -4,6 +4,19 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.5] - 2026-07-12
+
+### Added
+- Added a deterministic read-only audit of operating-outcome visibility,
+  prior-month observation alignment, next-command trace continuity, and exact
+  monthly debrief outcome linkage using the v0.11.4 capture.
+
+### Changed
+- Recorded 441 non-terminal signal-to-next-command opportunities and 28
+  expected terminal signals while preserving the runtime, MCP, replay, ruleset,
+  state-hash, balance, and difficulty boundaries.
+- Bumped the package to `0.11.5`.
+
 ## [0.11.4] - 2026-07-11
 
 ### Added

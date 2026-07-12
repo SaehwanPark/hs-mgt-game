@@ -1,27 +1,37 @@
 ## Summary
 
-- Add a deterministic post-v0.11.3 operating-outcome debrief validation matrix.
-- Capture five policy lanes across seeds 42–44 and Easy/Normal/Hard/Expert.
-- Verify 60 complete runs, 1,440 committed months, 1,440 player result lines,
-  and 469/469 categorized month-level outcome links.
-- Preserve runtime, MCP, ruleset, replay, and state-hash behavior.
+- Add a deterministic read-only v0.11.5 audit of operating-outcome use.
+- Reuse the v0.11.4 capture to verify prior-month observation alignment,
+  signal-to-next-command continuity, exact debrief linkage, and actor
+  boundaries.
+- Confirm 60 complete runs, 1,440 traces, 1,380 prior-month matches, 1,440
+  debrief matches, 441 response opportunities, and 28 terminal signals.
+- Preserve runtime, MCP, ruleset, replay, state-hash, balance, and difficulty
+  behavior.
 
 ## Evidence limits
 
-This is simulated-policy traceability evidence. It does not establish causal
-marginal effects, dominance, balance, calibration, human learning, enjoyment,
-winnability, or policy validity. Runtime promotion remains deferred.
+This is deterministic simulated-policy traceability evidence. Signal-to-command
+counts do not establish causal response, strategy quality, human comprehension,
+learning, enjoyment, balance, winnability, calibration, or policy validity.
+Runtime promotion remains deferred.
 
 ## Verification
 
 ```text
-python3 -m unittest tests/test_operating_outcome_debrief_validation.py
-python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_sessions.py
-python3 _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/run_audit.py \
-  --source _workspace/experiments/v0.11.4-operating-outcome-debrief-validation/capture.json
+python3 -m unittest tests/test_operating_outcome_use_audit.py
+python3 _workspace/experiments/v0.11.5-operating-outcome-use-audit/run_audit.py
+python3 -m json.tool _workspace/experiments/v0.11.5-operating-outcome-use-audit/results.json
 python3 -m unittest discover -s tests -p 'test_*.py'
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo test --all -- --test-threads=1
+cargo test --test golden_competitive_seed42 -- --test-threads=1
 git diff --check
 ```
+
+## Non-goals
+
+No runtime, MCP schema, scenario, replay, ruleset, state-hash, balance,
+difficulty, calibration, winnability, causal, human-learning, or policy-validity
+change.
