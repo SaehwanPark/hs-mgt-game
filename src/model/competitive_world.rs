@@ -1,4 +1,4 @@
-use super::{Difficulty, PlayerResources, PolicyCalendar, RecruitRole};
+use super::{Difficulty, PlayerResources, PolicyCalendar, RecruitRole, RiskPosture};
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
 pub struct SharedMarketFields {
@@ -74,6 +74,7 @@ impl AiStyleWeights {
 pub struct AiProfile {
   pub org_name: &'static str,
   pub style: AiStyleWeights,
+  pub risk_posture: RiskPosture,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -93,6 +94,7 @@ impl serde::Serialize for PlayerController {
       Ai {
         org_name: String,
         style: AiStyleWeights,
+        risk_posture: RiskPosture,
       },
     }
 
@@ -101,6 +103,7 @@ impl serde::Serialize for PlayerController {
       PlayerController::Ai(profile) => RawPlayerController::Ai {
         org_name: profile.org_name.to_string(),
         style: profile.style,
+        risk_posture: profile.risk_posture,
       },
     };
     raw.serialize(serializer)
@@ -118,17 +121,24 @@ impl<'de> serde::Deserialize<'de> for PlayerController {
       Ai {
         org_name: String,
         style: AiStyleWeights,
+        #[serde(default)]
+        risk_posture: RiskPosture,
       },
     }
 
     let raw = RawPlayerController::deserialize(deserializer)?;
     match raw {
       RawPlayerController::Human => Ok(PlayerController::Human),
-      RawPlayerController::Ai { org_name, style } => {
+      RawPlayerController::Ai {
+        org_name,
+        style,
+        risk_posture,
+      } => {
         let leaked: &'static str = Box::leak(org_name.into_boxed_str());
         Ok(PlayerController::Ai(AiProfile {
           org_name: leaked,
           style,
+          risk_posture,
         }))
       }
     }

@@ -12,6 +12,14 @@ pub enum Difficulty {
   Expert,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default, serde::Serialize, serde::Deserialize)]
+pub enum RiskPosture {
+  Conservative,
+  #[default]
+  Moderate,
+  Aggressive,
+}
+
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum CashRunwaySignal {
   Comfortable,
