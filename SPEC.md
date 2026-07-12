@@ -3446,14 +3446,39 @@ reconstructing it from the diff.
     full Python/Rust suites, formatting, clippy, automated playtests, and diff
     checks pass.
 
+- Feature: Current-Code Teachability Capture (v0.11.12)
+  Summary:
+  Capture current-code observation-driven teachability and pacing evidence after
+  the v0.11.7 risk-posture and v0.11.8 rival-resource changes.
+  Done:
+  - Added `_workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/`
+    with a retry-aware MCP capture and deterministic audit.
+  - Validated 9/9 complete Hard-difficulty runs, 216 committed months, and
+    complete player observation, history/hash, and debrief trace coverage across
+    three profiles and seeds 42, 43, and 44.
+  - Preserved the Normal seed-42 hold-control hash and excluded rival operating
+    events from player-owned evidence.
+  - Recorded findings in `docs/playtest-findings-v0.11.12.md` and retained
+    deferred runtime promotion.
+  Deferred / Non-Goals:
+  - No runtime mechanics, difficulty values, AI scoring, balance, scenario,
+    ruleset, replay, MCP schema, or state-hash changes.
+  - No human-learning, cognitive-load, causal strategy, general winnability,
+    calibration, or policy-validity claim.
+  Verification:
+  - Focused artifact tests, current-code capture, audit validation, JSON
+    validation, full Python/Rust suites, formatting, clippy, and diff checks
+    pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
   validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
   strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
-  difficulty resource scaling, v0.11.9 Expert difficulty validation, and
-  v0.11.10 Phase 7 difficulty evidence synthesis, and v0.11.11 post-change
-  all-tier difficulty validation, are complete.
+  difficulty resource scaling, v0.11.9 Expert difficulty validation,
+  v0.11.10 Phase 7 difficulty evidence synthesis, v0.11.11 post-change
+  all-tier difficulty validation, and v0.11.12 current-code teachability
+  capture are complete.
 
 ## Future
 

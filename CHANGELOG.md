@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.12] - 2026-07-12
+
+### Added
+- Added a current-code Phase 7 teachability capture across three
+  observation-driven profiles and seeds 42–44 at Hard difficulty.
+- Added focused Python coverage for matrix identity, trace/hash alignment,
+  retry preservation, actor boundaries, and deterministic audit rendering.
+
+### Changed
+- Bumped the package version to `0.11.12`.
+- Preserved runtime promotion deferral because no structural or unexplained
+  player-facing gap was identified.
+
+### Evidence Limits
+- The artifact is deterministic simulated-policy evidence, not human learning,
+  cognitive-load, causal strategy, balance, general winnability, calibration,
+  or policy-validity evidence.
+- Runtime mechanics, difficulty values, scoring, scenarios, replay, MCP
+  behavior, rulesets, and state-hash logic remain unchanged.
+
 ## [0.11.11] - 2026-07-12
 
 ### Added

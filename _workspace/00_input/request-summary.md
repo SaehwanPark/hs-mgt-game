@@ -1,54 +1,55 @@
-# Request Summary - Post-Change All-Tier Difficulty Validation v0.11.11
+# Request Summary - Current-Code Teachability Capture v0.11.12
 
 ## Scope
 
-- Capture current-code `competitive-regional-v1` sessions after the v0.11.7
-  AI risk-posture and v0.11.8 rival-resource changes.
-- Run the existing five deterministic policy profiles across seeds `42`, `43`,
-  and `44` at Easy, Normal, Hard, and Expert difficulty.
+- Continue Phase 7 validation after the merged v0.11.11 all-tier matrix.
+- Reuse the existing observation-driven Fiscal Steward, Access Expansion
+  Advocate, and First-Time Executive profiles.
+- Capture `competitive-regional-v1` at Hard difficulty for seeds 42, 43, and
+  44 through the local MCP boundary.
 - Preserve actor-visible observations, legal commands, submitted commands,
-  validation failures, committed histories, state hashes, final observations,
-  and debriefs.
-- Audit clearability proxies, strategy trajectories, operating accounting,
-  endpoint tradeoffs, bottlenecks, and debrief traceability.
-- Bump the package to `0.11.11` and complete the branch, PR, and review
+  validation failures, retries, committed histories, state hashes, final
+  observations, and debriefs.
+- Audit action cadence, trace/hash alignment, player/rival operating-event
+  boundaries, and debrief continuity.
+- Bump the package to `0.11.12` and complete the branch, PR, and review
   handoff.
 
 ## Non-goals
 
 - No runtime mechanics, difficulty values, AI scoring, commands, scenarios,
-  rulesets, replay formats, MCP schemas, or state-hash implementation changes.
-- No generalized evidence schema or normalization of historical artifacts.
-- No causal strategy, dominance, balance, general winnability, human-learning,
-  empirical-calibration, or policy-validity claim.
-- No runtime promotion in this evidence slice, even if a follow-up gap is
-  identified.
+  rulesets, replay formats, MCP schemas, or state-hash changes.
+- No new evidence framework, dependency, external LLM integration, or broad
+  all-tier rerun.
+- No causal strategy, balance, general winnability, human-learning,
+  cognitive-load, calibration, or policy-validity claim.
+- No runtime promotion from descriptive pacing or retry signals alone.
 
 ## Sources
 
-- `SPEC.md` ranked Phase 7 queue and v0.11.7-v0.11.10 history.
-- `docs/roadmap.md`, Phase 7 validation and AI-agent evidence limits.
-- `docs/agent-playtest-protocol.md` matrix and trace requirements.
-- `_workspace/experiments/v0.11.1-operating-loop-ai-validation/` existing
-  five-profile all-tier runner and audit contracts.
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/` current
-  post-change capture and failure-preserving runner pattern.
-- `docs/playtest-findings-v0.11.9.md` and `docs/playtest-findings-v0.11.10.md`.
+- `SPEC.md`, the Phase 7 ranked queue, and the v0.11.11 checkpoint.
+- `docs/roadmap.md`, `docs/design_principles.md`, and
+  `docs/agent-playtest-protocol.md`.
+- Historical observation-driven policies in
+  `_workspace/experiments/v0.10.50-teachability-observation-capture/`.
+- Historical pacing audit in
+  `_workspace/experiments/v0.10.52-decision-load-evidence/`.
+- Current-code all-tier baseline in
+  `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/`.
 
-## Expected Files
+## Expected files
 
-- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/`.
-- `tests/test_phase7_post_change_all_tier_validation.py`.
-- `docs/playtest-findings-v0.11.11.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
+- `_workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/`.
+- `tests/test_phase7_current_code_teachability_capture.py`.
+- `docs/playtest-findings-v0.11.12.md`, `CHANGELOG.md`, `README.md`, `SPEC.md`,
   `docs/roadmap.md`, `docs/mcp-playtesting-guide.md`, and `LESSONS.md`.
-- `Cargo.toml`, `Cargo.lock`, `_workspace/03_domain_qa.md`, and
-  `_workspace/final/handoff.md`.
+- `Cargo.toml`, `Cargo.lock`, and active `_workspace` handoffs.
 
-## Validation Target
+## Validation target
 
-- Exactly 60 unique profile/seed/difficulty coordinates and 1,440 committed
-  months are captured.
-- Every run completes with zero validation failures before PR handoff.
+- Exactly 9 unique profile/seed coordinates and 216 committed months.
+- Every run completes 24 transitions; any rejected command or safe retry is
+  preserved rather than discarded.
 - The Normal seed-42 hold-control hash remains `61357596d8800592`.
-- Focused artifact tests, the full Python/Rust suites, formatting, clippy,
-  automated playtests, JSON validation, and diff checks pass.
+- Focused artifact tests, full Python/Rust suites, formatting, clippy,
+  playtest generation, JSON validation, and diff checks pass.

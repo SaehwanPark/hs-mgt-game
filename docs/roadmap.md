@@ -868,6 +868,11 @@ current code after the difficulty risk-posture and rival-resource changes,
 confirming 60/60 complete runs, 1,440 committed months, varied trajectories,
 and no candidate common or near-dominant first-month action. These remain
 descriptive routing evidence; runtime promotion remains deferred.
+The v0.11.12 current-code teachability capture reruns three observation-driven
+profiles across seeds 42–44 at Hard difficulty, confirming 9/9 complete runs,
+216 committed months, complete trace/debrief coverage, and no structural gap.
+These remain descriptive pacing and traceability evidence; runtime promotion
+remains deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
 
