@@ -27,10 +27,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/workforce-capacity-design-v0.12.5`
-- PR: to be opened after local verification
+- PR: [#158](https://github.com/SaehwanPark/hs-mgt-game/pull/158)
 - Domain QA: Pass.
-- Review passes: pending implementation completion
-- Merge state: pending PR review and merge
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in run [29208148870](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208148870).
+- Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
@@ -38,7 +40,7 @@
 - Design artifact: source markers supported; observation follow-up required;
   runtime difficulty change unauthorized.
 - Full Rust/Python suites, formatting, clippy, CLI smoke, competitive golden,
-  and diff checks: pending final verification.
+  and diff checks: passed locally; the PR check also passed.
 
 ## Next dependency
 
