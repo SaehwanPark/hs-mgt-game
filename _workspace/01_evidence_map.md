@@ -1,83 +1,69 @@
-# Evidence Map - Difficulty Depth Evidence Review v0.12.4
+# Evidence Map - Workforce Capacity Difficulty Design Gate v0.12.5
 
 ## Scope
 
-Review existing all-tier and Expert simulated-policy artifacts for a visible
-difficulty pressure signal before any runtime tuning. This is descriptive
-evidence, not a balance or winnability claim.
+Decide whether the v0.12.4 workforce-capacity signal is interpretable from the
+current decision-time MCP observation, and define the smallest safe projection
+follow-up if it is not.
 
 ## Sources Reviewed
 
-- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json`
-  and `diagnostics.md`.
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
-  and `diagnostics.md`.
-- `docs/playtest-findings-v0.11.10.md`,
-  `docs/playtest-findings-v0.11.11.md`, `SPEC.md`, `docs/roadmap.md`, and
-  `docs/design_principles.md`.
+- `_workspace/experiments/v0.12.4-difficulty-depth-evidence/results.json` and
+  `diagnostics.md`.
+- `src/model/campaign.rs` (`PlayerObservation`).
+- `src/sim/observe_competitive.rs` observation construction and consultant
+  options.
+- `src/mcp/session.rs` competitive observation formatter and session tests.
+- `src/sim/transition_competitive.rs` staffing constraints and operating events.
+- `src/debrief/report.rs` attribution and decision/outcome framing.
+- `SPEC.md`, `docs/roadmap.md`, `docs/design_principles.md`, and
+  `docs/playtest-findings-v0.11.11.md` / `v0.11.12.md`.
 
-## Evidence lanes
+## Evidence chain
 
-| Lane | Source | Matrix | Code version | Purpose |
-| --- | --- | --- | --- | --- |
-| all-tier pressure | v0.11.11 post-change all-tier validation | 5 profiles × 3 seeds × Easy/Normal/Hard/Expert; 60 runs | 0.11.11 | per-tier operating pressure, action trajectories, outcomes |
-| Expert clearability | v0.11.9 Expert difficulty validation | 5 profiles × 3 seeds × Expert; 15 runs | 0.11.9 | bounded completion/trace contract and overlap |
+| Stage | Existing surface | Design finding |
+| --- | --- | --- |
+| prior evidence | v0.12.4 reports workforce-capacity counts 0/15/30/160 by tier | candidate pressure signal only |
+| decision context | workforce trust summary, nursing vacancy note, prior operations, labor-market note, consultant option B | visible but not numerically specific |
+| typed observation | nurses, physicians, admins, staffed beds, outpatient and service-line capacities | safe fields exist in `PlayerObservation` |
+| MCP projection | `format_competitive_observation` omits those staffing/capacity fields | bounded observation-context gap |
+| transition/debrief | staffing deficit/capacity events, operating effects, attributed mechanisms, decision/outcome separation | follow-through exists; decision context is incomplete |
 
-The source-version mismatch is retained as a limitation. The audit does not
-pretend the two artifacts are a causal before/after experiment.
+## Actor and information boundaries
 
-## Review dimensions
+- Safe to render: Riverside's own staffing counts and physical capacities
+  already present in `PlayerObservation`.
+- Already visible: workforce trust category, prior operating results, generic
+  labor-market delay/cost note, and state-conditioned consultant tradeoffs.
+- Not safe to render: hidden staffing targets, effective allocation by service
+  line, future pending hires, rival private workforce state, or realized future
+  actor responses.
 
-- Matrix identity: profiles, seeds, difficulty labels, and coordinates are
-  complete and unique.
-- Trace integrity: 24 transitions per run, observation/legal-command/
-  submitted-command records, accepted history/state hashes, and debrief lines.
-- Clearability proxy: complete run status and zero validation failures for the
-  tested profiles and seeds.
-- Visible pressure: per-tier operating bottleneck counts, especially
-  `workforce_capacity`, plus action-family counts and trajectory diversity.
-- Tradeoff surface: descriptive per-tier ranges for cash, access, quality,
-  workforce trust, community trust, and market share.
+## Concrete gap
 
-## Candidate-signal rule
+The MCP player view says workforce trust is strained and that nursing vacancy is
+elevated, but it does not show the current Riverside staffing counts or the
+physical capacity that the staffing constraint is limiting. A player or
+instructor cannot inspect the numeric decision context for the v0.12.4 signal
+from the MCP observation alone, even though the typed observation already owns
+safe current values and the debrief later explains the realized constraint.
 
-Report a candidate visible pressure dimension when its all-tier operating
-signal is nondecreasing across Easy → Normal → Hard → Expert and the source
-contract supports the signal for every tier. This is a routing signal only. It
-does not establish that the dimension causes player behavior or that a tier is
-balanced or winnable.
+This supports an interface projection follow-up, not difficulty or balance
+tuning.
 
-## Observed direction to verify
+## Design assumptions and limits
 
-The prior diagnostics suggest `workforce_capacity` appears in 0 Easy, 15
-Normal, 30 Hard, and 160 Expert operating months. The audit must recompute
-these counts from committed history and record the result rather than trusting
-the prose summary. Normal, Hard, and Expert also appear to reuse the same
-aggregate scripted action counts; this may indicate that pressure is visible in
-operating consequences rather than in the submitted action surface.
+- `PlayerObservation` remains the authoritative safe source for any new lines.
+- A field's presence does not establish that humans understand it or that a
+  difficulty tier is balanced.
+- The v0.12.4 source version and simulated-policy limits remain explicit.
+- The next implementation gate must rerun the same v0.12.4 evidence matrix and
+  compare history/state hashes exactly.
 
-## Assumptions and limits
+## Routing decision
 
-- Existing JSON artifacts are immutable historical sources.
-- A scripted profile's completion is only a bounded clearability proxy for the
-  named coordinates.
-- Endpoint ranges and bottleneck counts are not causal marginal effects,
-  equilibrium outcomes, or validated strategy classes.
-- Integer operating quantities are game abstractions, not calibrated clinical,
-  financial, or policy units.
+`observation_context_follow_up_required`: yes.
 
-## Design implications
-
-- Preserve source-specific contracts and code versions.
-- Compare aggregate descriptive summaries only after validating each source's
-  internal trace and hash continuity.
-- If a candidate signal appears, route it to a later bounded difficulty design
-  gate; do not modify runtime values in this evidence slice.
-
-## Risks
-
-- Monotonic counts can be an artifact of scripted policies or source rules, not
-  evidence that a human experiences difficulty in the same way.
-- Different code versions make cross-source endpoint comparisons unsafe.
-- A complete Expert matrix can be overread as general winnability; the report
-  must name the tested profiles and seeds every time.
+The follow-up should render a compact staffing line and a compact physical
+capacity line from existing typed fields, add MCP boundary tests, and preserve
+all transition, replay, hash, command, and competitive golden contracts.

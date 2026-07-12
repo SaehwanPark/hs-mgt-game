@@ -1,50 +1,47 @@
-# Final Handoff - Difficulty Depth Evidence Review v0.12.4
+# Final Handoff - Workforce Capacity Difficulty Design Gate v0.12.5
 
 ## Result
 
-- Audited the v0.11.11 post-change all-tier artifact and v0.11.9 standalone
-  Expert artifact without launching new sessions.
-- Covered 75/75 complete runs and 1,800 committed transitions across five
-  profiles, three seeds, and the declared difficulty matrices.
-- Recomputed per-tier operating bottlenecks, action-family counts, trajectory
-  diversity, final tradeoff ranges, and Expert overlap/clearability.
-- Identified a candidate `workforce_capacity` pressure signal rising from 0,
-  15, 30, and 160 operating months across Easy, Normal, Hard, and Expert.
-- Kept runtime promotion deferred and preserved the competitive seed-42 golden
-  boundary.
+- Reviewed the v0.12.4 workforce-capacity signal against the typed competitive
+  observation, MCP formatter, staffing transition events, and debrief output.
+- Confirmed existing visible context: workforce trust, nursing-vacancy wording,
+  prior operations, labor-market guidance, consultant options, and debrief
+  attribution.
+- Identified a bounded decision-time gap: safe typed staffing and physical-
+  capacity counts exist in `PlayerObservation` but are omitted by the MCP
+  formatter.
+- Specified the smallest next projection: `Staffing:` and `Physical capacity:`
+  lines using only existing typed fields.
+- Excluded hidden targets, effective allocations, future hires, rival private
+  state, and all difficulty/balance/transition tuning.
 
 ## Version boundaries
 
-- Package: `0.12.4`
-- Change surface: read-only difficulty evidence audit and focused tests
+- Package: `0.12.5`
+- Change surface: design contract, source-boundary review, and focused tests
 - Competitive and affiliation transitions, rulesets, state hashes, replay
-  artifact semantics, command parsers, and persistence behavior: unchanged
-- Runtime promotion for difficulty/balance/winnability changes: deferred
+  artifact semantics, command parsers, persistence, and MCP behavior: unchanged
+- Runtime difficulty/balance/scoring/winnability promotion: deferred
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/difficulty-depth-evidence-v0.12.4`
-- PR: [#157](https://github.com/SaehwanPark/hs-mgt-game/pull/157)
+- Working branch: `feat/workforce-capacity-design-v0.12.5`
+- PR: to be opened after local verification
 - Domain QA: Pass.
-- Review passes: three post-open passes completed; no actionable code, data,
-  scope, or documentation findings.
-- CI: `check` passed in GitHub Actions run 29207759345.
-- Merge state: open; ready to merge after this handoff update is checked.
+- Review passes: pending implementation completion
+- Merge state: pending PR review and merge
 
 ## Verification
 
-- Focused Python evidence tests: 6 passed.
-- Read-only audit: 75 runs, 1,800 transitions, candidate workforce-capacity
-  signal, zero source-contract gaps.
-- Full Rust suite: 307 tests passed with serial and default parallel execution.
-- Full Python suite: 184 tests passed.
-- Formatting, clippy, CLI smoke, competitive golden (2 tests), and diff checks
-  passed.
+- Focused design-contract tests: 5 passed.
+- Design artifact: source markers supported; observation follow-up required;
+  runtime difficulty change unauthorized.
+- Full Rust/Python suites, formatting, clippy, CLI smoke, competitive golden,
+  and diff checks: pending final verification.
 
 ## Next dependency
 
-After merge, promote the candidate workforce-capacity signal into a separate
-difficulty design gate only if the next bounded review can specify visible
-pressure, actor/player observation boundaries, and Expert winnability limits.
-Keep runtime tuning deferred until that gate is complete.
+After merge, implement only the observation-context projection if the next
+slice can add focused MCP boundary tests and prove unchanged v0.12.4-compatible
+history/state hashes. Keep runtime difficulty and balance promotion deferred.

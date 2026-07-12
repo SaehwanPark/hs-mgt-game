@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.5] - 2026-07-12
+
+### Added
+- Added a deterministic workforce-capacity difficulty design gate that compares
+  the v0.12.4 candidate signal with the typed competitive observation and MCP
+  projection boundary.
+- Added a design contract for a two-line observation-only follow-up using
+  existing `PlayerObservation` staffing and physical-capacity fields.
+- Added focused validation for safe typed fields, excluded hidden fields,
+  source markers, and deterministic diagnostics rendering.
+
+### Changed
+- Bumped package metadata to `0.12.5`.
+- Recorded a bounded MCP observation-context gap while keeping difficulty,
+  balance, transition, scoring, and winnability promotion deferred.
+
+### Evidence Limits
+- The design gate is not human-learning, comprehension, calibration, legal,
+  causal, balance, or general Expert winnability evidence.
+
 ## [0.12.4] - 2026-07-12
 
 ### Added

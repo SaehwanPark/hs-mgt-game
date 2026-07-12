@@ -237,6 +237,12 @@ workforce-capacity pressure signal across the tested tiers while preserving the
 source-version and scripted-policy limits; any difficulty tuning remains behind
 a separate design gate.
 
+The v0.12.5 workforce-capacity design gate found that the typed competitive
+observation owns safe staffing and physical-capacity fields that the MCP
+formatter does not currently render. It specifies a two-line observation-only
+follow-up while excluding hidden targets, effective allocations, future hires,
+and rival private state; no difficulty or transition change is authorized.
+
 ### Scenario and Actor Design
 
 Responsible for:

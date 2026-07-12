@@ -902,6 +902,13 @@ Normal, Hard, and Expert scripted action counts remain identical in the source
 matrix, so the result is descriptive routing evidence rather than a causal
 difficulty, balance, or winnability claim.
 
+The v0.12.5 workforce-capacity design gate confirms that the candidate signal
+has a bounded MCP observation-context gap: typed Riverside staffing and
+physical-capacity fields exist but are omitted from the decision-time formatter.
+It routes an observation-only projection follow-up with focused boundary tests
+and unchanged history/hash evidence; difficulty and balance tuning remain
+deferred.
+
 ## 7.6 Educational Artifact and Debrief Review
 
 Evaluate whether the game artifacts make the intended reasoning inspectable:
