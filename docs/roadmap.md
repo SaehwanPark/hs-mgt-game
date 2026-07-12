@@ -929,6 +929,13 @@ The v0.12.10 affiliation queue closure confirms that the existing
 broader acquisition or consolidation work is authorized without new concrete
 evidence.
 
+The v0.12.12 breadth closure confirms that the competitive campaign already
+contains bounded service-line/capacity, operating, capital, payer, rival-
+information, and debrief mechanisms. The 60-run evidence matrix shows varied
+command trajectories without a structural trace gap, so no new actor, patient,
+public-payer, or generalized breadth runtime is authorized without a new
+concrete finding.
+
 The v0.12.6 follow-up renders the safe staffing and physical-capacity fields
 from `PlayerObservation` and validates 75 complete runs with 1,800 transitions.
 All source histories and state-hash sequences match exactly, closing the

@@ -276,6 +276,12 @@ The v0.12.11 GUI proof remains an interface adapter over existing MCP-shaped
 outputs. It owns rendering only; command legality, transition evaluation,
 history, replay, and debrief semantics remain outside the browser surface.
 
+The v0.12.12 breadth closure inventories the existing competitive capacity,
+operating, capital, payer, rival-information, and debrief boundaries. It found
+no concrete unexplained gap authorizing a new strategic actor, individual
+patient model, public-payer utility model, or generalized framework. Those
+expansions remain evidence-gated.
+
 ### Scenario and Actor Design
 
 Responsible for:

@@ -3914,6 +3914,40 @@ reconstructing it from the diff.
   - 308 Rust tests, 219 Python tests, formatting, clippy, CLI smoke, golden,
     and diff checks pass.
 
+- Feature: Simulation Breadth and Strategic Actors Queue Closure (v0.12.12)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.12
+
+  Summary:
+  Audit the existing competitive campaign against the bounded breadth and
+  strategic-actor Future item, using committed repeated-play and traceability
+  evidence before authorizing any new runtime mechanism.
+
+  Done:
+  - Inventoried existing service-line/capacity, operating/community outcome,
+    capital/market, public-payer, rival-information, and debrief surfaces.
+  - Revalidated 60/60 all-tier runs, 1,440 transitions, 10 distinct command
+    trajectories, no dominant first-month action, and varied final tradeoffs.
+  - Revalidated 9/9 current-code runs and the v0.12.3 review's 18/18 runs,
+    270 transitions, and zero structural gaps.
+  - Documented true state, player observation, private rival information, and
+    debrief boundaries without promoting a new actor or patient model.
+  - Removed the breadth and strategic-actors item from the Future queue while
+    preserving deferred scope and a concrete reopening condition.
+  - Bumped package metadata to `0.12.12`.
+
+  Deferred / Non-Goals:
+  - No new state, command, transition, strategic actor, individual patient,
+    public-payer utility, portfolio optimizer, or scenario-authoring framework.
+  - No human-learning, causal balance, calibration, social-welfare,
+    equilibrium, or policy-validity claim.
+
+  Verification:
+  - Closure artifact source markers and focused breadth tests pass.
+  - Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
+    checks pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3956,16 +3990,17 @@ reconstructing it from the diff.
   Branch: none
 
   Summary:
-  All currently promoted slices and their bounded follow-ups are complete. No
-  Future item is authorized until playtest, instructor, scenario, domain, or
-  release evidence identifies a specific unexplained need.
+  All currently promoted runtime slices and their bounded follow-ups are
+  complete. No new runtime Future item is authorized until playtest, instructor,
+  scenario, or domain evidence identifies a specific unexplained need. Release
+  readiness remains a separate non-runtime governance queue item.
 
   Not Yet Done:
-  - None currently authorized.
+  - No new runtime slice currently authorized.
 
   Deferred / Non-Goals:
-  - Do not infer a GUI, broader simulation, acquisition expansion, difficulty
-    tuning, or release-automation task from the absence of an active slice.
+  - Do not infer a GUI, broader simulation, acquisition expansion, or difficulty
+    tuning task from the absence of an active runtime slice.
 
   Verification:
   - A new Present item must satisfy the promotion rules below and name its
@@ -4018,36 +4053,7 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: Broader simulation breadth and strategic actors
-  Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
-  domain-review evidence shows current campaign limits block meaningful strategy
-  or learning.
-
-  Next actionable slice:
-  Add one bounded breadth element, such as one service-line decision, one patient
-  or distributional outcome category, one capital-allocation tradeoff, one
-  market-area concept, one additional strategic interaction, or one localized
-  Medicare/Medicaid actor interaction. A differentiated in-house advisor market
-  is a gated candidate only after repaired state-conditioned advice proves
-  insufficient for the desired decision-support and debrief value.
-
-  Verification target:
-  The new mechanism has a documented actor/observation boundary, deterministic
-  tests, debrief attribution, and clear player-facing tradeoffs. Public-payer
-  work must distinguish actor utility from social welfare and label
-  evidence-backed mechanisms versus design abstractions. Advisor work must also
-  show viable recurring-cost sensitivity across supported scenario cash scales,
-  symmetric human/AI information and roster rules, and explicit arrivals and
-  contested-hire inputs.
-
-  Deferred / Non-Goals:
-  Full US health-system model, individual patient simulation, broad federal
-  policy lifecycle framework, national policy simulation, federal budget
-  modeling, full Medicaid eligibility rules, Medicare payment reproduction,
-  global equilibrium AI, speculative generalized frameworks, and broad
-  scenario-authoring infrastructure.
-
-2. Track: Release automation and contributor readiness
+1. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 

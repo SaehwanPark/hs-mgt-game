@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Close Breadth Only With Scope-Matched Evidence
+
+- Context: The breadth queue offered several attractive expansion directions,
+  while the current competitive campaign already had multiple bounded tradeoffs.
+- Symptom: Treating a broad queue label as permission for a new actor or patient
+  model would expand scope without a demonstrated gameplay or learning need.
+- Resolution: Audited the existing source boundaries and committed playtest
+  artifacts, then removed the queue item while preserving public-payer, patient,
+  actor, and equilibrium limits plus a concrete reopening condition.
+- Prevention: Inventory implemented mechanisms first; require a concrete
+  unexplained gap before adding state, actors, outcomes, or abstractions.
+
 ## Keep GUI Proofs Thin and Adapter-Owned
 
 - Context: The GUI Future item called for one surface consuming existing game
