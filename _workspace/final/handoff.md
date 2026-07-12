@@ -23,10 +23,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/phase7-teachability-review-v0.12.3`
-- PR: to be opened after local verification
+- PR: [#156](https://github.com/SaehwanPark/hs-mgt-game/pull/156)
 - Domain QA: Pass.
-- Review passes: pending implementation completion
-- Merge state: pending PR review and merge
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in GitHub Actions run 29207189584.
+- Merge state: open; ready to merge after this handoff update is checked.
 
 ## Verification
 
