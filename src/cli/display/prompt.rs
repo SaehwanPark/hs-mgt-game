@@ -80,10 +80,26 @@ pub fn campaign_menu_lines() -> Vec<String> {
 pub fn difficulty_menu_lines() -> Vec<String> {
   vec![
     style::section_heading(style::EMOJI_STRATEGY, "Choose difficulty"),
-    style::option_line("1", "Easy", "1 AI rival · 4 AP/month"),
-    style::option_line("2", "Normal", "2 AI rivals · 3 AP/month (default)"),
-    style::option_line("3", "Hard", "3 AI rivals · 3 AP/month"),
-    style::option_line("4", "Expert", "4 AI rivals · 2 AP/month"),
+    style::option_line(
+      "1",
+      "Easy",
+      "1 AI rival · 4 AP/month (Rivals: 40 cash / 10 PC, Conservative)",
+    ),
+    style::option_line(
+      "2",
+      "Normal",
+      "2 AI rivals · 3 AP/month (Rivals: 60 cash / 15 PC, Moderate) (default)",
+    ),
+    style::option_line(
+      "3",
+      "Hard",
+      "3 AI rivals · 3 AP/month (Rivals: 80 cash / 20 PC, Aggressive)",
+    ),
+    style::option_line(
+      "4",
+      "Expert",
+      "4 AI rivals · 2 AP/month (Rivals: 100 cash / 25 PC, Aggressive)",
+    ),
   ]
 }
 

@@ -1,21 +1,23 @@
-# Request Summary - Difficulty Expansion v0.11.7
+# Request Summary - Difficulty Resource Scaling v0.11.8
 
 ## Scope
 
-- Implement a structured difficulty parameter system that makes difficulty levels institutionally expressive.
-- Introduce an explicit `RiskPosture` enum (`Conservative`, `Moderate`, `Aggressive`) representing the AI's strategic risk-taking profile.
-- Add `risk_posture` field to `AiProfile` and `RivalTemplate` to configure each AI system.
-- Map the active game `Difficulty` to initial AI risk postures at genesis (Easy -> Conservative, Normal -> Moderate, Hard/Expert -> Aggressive).
-- Update AI batch computation logic in `src/actors/ai_player.rs` to adjust scoring weights based on the active `RiskPosture` (e.g., conservative AI players penalize aggressive negotiations and large capital investments, while aggressive AI players boost aggressive rate posturing and large capital investments, and have higher cash thresholds).
-- Preserve backwards compatibility for JSON serialization of saved sessions, keeping competitive state hashes invariant.
+- Scale rival starting cash and political capital based on difficulty in the genesis world creator:
+  - **Easy**: Rivals start with 40 cash and 10 political capital (PC), with a conservative posture.
+  - **Normal**: Rivals start with 60 cash and 15 PC, with a moderate posture (default baseline).
+  - **Hard**: Rivals start with 80 cash and 20 PC, with an aggressive posture.
+  - **Expert**: Rivals start with 100 cash and 25 PC, with an aggressive posture.
+- Keep the player's starting resources (Riverside) invariant across all difficulties (default 60 cash and 15 PC).
+- Update CLI difficulty selection menu descriptions in `src/cli/display/prompt.rs` to show the starting resource and risk posture pressures for each difficulty tier.
+- Ensure Normal difficulty seed-42 hold-control hash remains completely invariant.
+- Update the package version to `0.11.8`.
 - Complete the feature branch setup, verification, PR handoff, and review loop.
 
 ## Non-goals
 
-- No broad balance pass, hidden rival omniscience, or punitive player AP/resource cuts.
-- No changes to the state-hash schema or serialization formats that break compatibility with existing save states.
-- No changes to the core transition kernel or the public observation boundaries.
-- No causal or policy-validity claims.
+- No change to the player's starting resources.
+- No changes to state-hash schemas.
+- No changes to scenario files or general ruleset files.
 
 ## Sources
 
@@ -25,15 +27,11 @@
 
 ## Expected files
 
-- Updated `src/model/campaign.rs` (defining `RiskPosture`).
-- Updated `src/model/competitive_world.rs` (adding `risk_posture` to `AiProfile` and updating serialization).
-- Updated `src/competitive/genesis.rs` (initializing `risk_posture` based on `Difficulty`).
-- Updated `src/scenario/mod.rs` (populating `risk_posture` from difficulty when loading AI systems).
-- Updated `src/actors/ai_player.rs` (implementing risk-posture scoring modifiers in `score_command` and rationales).
+- Updated `src/competitive/genesis.rs` (setting rival starting cash/PC based on difficulty).
+- Updated `src/cli/display/prompt.rs` (updating difficulty menu text).
 - Updated `Cargo.toml`, `CHANGELOG.md`, `SPEC.md`, and workspace files.
 
 ## Validation target
 
-- All 291 Rust tests and 138 Python tests pass.
-- Focused unit tests verifying risk-posture behavior under Conservative, Moderate, and Aggressive profiles.
-- Replay and golden seed-42 tests continue to pass (with state-hash invariance verified).
+- All 292 Rust tests and 138 Python tests pass.
+- Verification of seed-42 Normal state-hash invariance.

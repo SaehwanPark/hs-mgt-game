@@ -4,6 +4,16 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.8] - 2026-07-12
+
+### Added
+- Added rival starting resource scaling based on difficulty (Easy: 40 cash / 5 PC, Normal: 60 cash / 8 PC, Hard: 80 cash / 12 PC, Expert: 100 cash / 15 PC) at genesis.
+- Added explicit starting resource and posture details to CLI difficulty selection menu.
+- Added unit testing to verify starting resource scaling across all difficulty levels.
+
+### Changed
+- Bumped package version to `0.11.8`.
+
 ## [0.11.7] - 2026-07-12
 
 ### Added

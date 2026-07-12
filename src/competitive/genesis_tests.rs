@@ -73,3 +73,34 @@ fn genesis_roster_lines_include_all_systems() {
   assert!(lines[1].contains("Northlake Health"));
   assert!(lines[2].contains("Summit Care"));
 }
+
+#[test]
+fn genesis_rivals_resources_scale_by_difficulty() {
+  // Easy
+  let easy_world = genesis_competitive_world(Difficulty::Easy);
+  assert_eq!(easy_world.systems[0].resources.cash, 60); // human invariant
+  assert_eq!(easy_world.systems[0].resources.political_capital, 8); // human invariant
+  assert_eq!(easy_world.systems[1].resources.cash, 40); // Easy rival
+  assert_eq!(easy_world.systems[1].resources.political_capital, 5); // Easy rival
+
+  // Normal
+  let normal_world = genesis_competitive_world(Difficulty::Normal);
+  assert_eq!(normal_world.systems[0].resources.cash, 60);
+  assert_eq!(normal_world.systems[0].resources.political_capital, 8);
+  assert_eq!(normal_world.systems[1].resources.cash, 60);
+  assert_eq!(normal_world.systems[1].resources.political_capital, 8);
+
+  // Hard
+  let hard_world = genesis_competitive_world(Difficulty::Hard);
+  assert_eq!(hard_world.systems[0].resources.cash, 60);
+  assert_eq!(hard_world.systems[0].resources.political_capital, 8);
+  assert_eq!(hard_world.systems[1].resources.cash, 80);
+  assert_eq!(hard_world.systems[1].resources.political_capital, 12);
+
+  // Expert
+  let expert_world = genesis_competitive_world(Difficulty::Expert);
+  assert_eq!(expert_world.systems[0].resources.cash, 60);
+  assert_eq!(expert_world.systems[0].resources.political_capital, 8);
+  assert_eq!(expert_world.systems[1].resources.cash, 100);
+  assert_eq!(expert_world.systems[1].resources.political_capital, 15);
+}

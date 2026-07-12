@@ -1,35 +1,32 @@
-# Final Handoff - Difficulty Expansion v0.11.7
+# Final Handoff - Difficulty Resource Scaling v0.11.8
 
 ## Result
 
-- Implemented an institutionally expressive difficulty system by introducing explicit AI strategic `RiskPosture` settings (`Conservative`, `Moderate`, `Aggressive`) based on the active campaign difficulty.
-- Added `risk_posture` field to `AiProfile` and updated serialization/deserialization logic on `PlayerController` with defaults to maintain backwards-compatible saves.
-- Set up dynamic mapping from `Difficulty` to `RiskPosture` at genesis (`genesis.rs`) and scenario loading (`scenario/mod.rs`).
-- Implemented scoring modifiers and risk-posture-conditioned offsets to AI player batch computation logic (`ai_player.rs`) for holds, aggressive negotiations, large capital investments, and cash pressure.
-- Included the active risk posture in generated AI rationale messages.
-- Added focused unit tests verifying difficulty-driven risk-posture scoring variations.
+- Scaled starting cash and political capital for rivals based on difficulty in the genesis world creator:
+  - **Easy**: Rivals start with 40 cash and 5 political capital (PC), with a conservative posture.
+  - **Normal**: Rivals start with 60 cash and 8 PC, with a moderate posture (default baseline).
+  - **Hard**: Rivals start with 80 cash and 12 PC, with an aggressive posture.
+  - **Expert**: Rivals start with 100 cash and 15 PC, with an aggressive posture.
+- Kept the player's starting resources (Riverside) invariant across all difficulties (default 60 cash and 8 PC).
+- Updated CLI difficulty selection menu descriptions in `src/cli/display/prompt.rs` to show the starting resource and risk posture pressures for each difficulty tier.
+- Added focused unit tests in `src/competitive/genesis_tests.rs` verifying starting resource scaling across all difficulties.
 
 ## Evidence
 
-- Rust Tests: 292/292 passed (including the new `test_risk_postures_score_command` test).
+- Rust Tests: 293/293 passed (including the new `genesis_rivals_resources_scale_by_difficulty` test).
 - Python Tests: 138/138 passed.
-- Formatting and Clippy checks pass.
+- Formatting and Clippy checks pass cleanly.
 - State-hash Invariance: Seed-42 Normal hold-control hash remains unchanged (state hashes are invariant).
-- Backward compatibility for session serialization is preserved (verified via mock replay generation tests).
+- Backward compatibility for session serialization is preserved.
 
 ## Version Boundaries
 
-- Package: `0.11.7`
+- Package: `0.11.8`
 - Competitive ruleset: `competitive-ruleset-0.2.0`
 - Competitive state hash: `competitive-state-hash-v9`
-
-## Known Limits
-
-- Strategic risk postures and offsets are descriptive stylized abstractions for difficulty tuning, not calibrated human decision models.
-- Expert difficulty clearability remains descriptive.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/difficulty-ai-risk-posture-v0.11.7`
+- Working branch: `feat/difficulty-resource-scaling-v0.11.8`
 - Verification: formatting, clippy, Rust and Python test suites pass cleanly.
