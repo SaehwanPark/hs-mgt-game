@@ -914,6 +914,11 @@ evidence chain across 18 complete runs and 270 transitions with no structural
 gap. The teachability track is closed until a new concrete comprehension,
 pacing, traceability, strategy-comparison, or debrief-use finding appears.
 
+The v0.12.9 difficulty-depth closure confirms that the candidate
+workforce-capacity signal is visible and the tested Expert paths are clearable,
+but identifies no unexplained gap that would justify tuning. Difficulty and
+balance remain evidence-gated.
+
 The v0.12.6 follow-up renders the safe staffing and physical-capacity fields
 from `PlayerObservation` and validates 75 complete runs with 1,800 transitions.
 All source histories and state-hash sequences match exactly, closing the

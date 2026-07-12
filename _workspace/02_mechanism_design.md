@@ -1,14 +1,13 @@
-# Mechanism Design — Teachability Queue Closure v0.12.8
+# Mechanism Design — Difficulty Queue Closure v0.12.9
 
-This slice adds no mechanism. It freezes the current teachability contract as
-an evidence boundary:
+This slice adds no mechanism. It closes the evidence route from a candidate
+workforce-capacity signal to visible decision-time context and bounded
+clearability:
 
-1. actor-visible decision context;
-2. action and validation response;
-3. accepted transition and state hash;
-4. complete outcome and final hash;
-5. source-specific debrief explanation; and
-6. strategy/profile comparison.
+1. v0.12.4 identifies the descriptive operating pressure;
+2. v0.12.5 gates the observation follow-up;
+3. v0.12.6 proves the safe context projection preserves transitions and hashes;
+4. v0.12.9 records that no unexplained gap remains for tuning.
 
-The two campaigns retain distinct context vocabularies and stage/month units.
-No runtime change is authorized without a new concrete gap.
+Any future difficulty or balance change requires a new evidence-backed design
+gate.

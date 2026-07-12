@@ -1,0 +1,71 @@
+{
+  "artifact_type": "difficulty_depth_queue_closure",
+  "batch_id": "v0.12.9-difficulty-queue-closure",
+  "closure_status": "complete_no_unexplained_gap",
+  "code_version": "0.12.9",
+  "difficulty_evidence": {
+    "code_version": "0.12.4",
+    "expert_clearability_runs": 15,
+    "path": "_workspace/experiments/v0.12.4-difficulty-depth-evidence/results.json",
+    "pressure_classification": "candidate_visible_pressure_signal",
+    "pressure_dimension": "workforce_capacity",
+    "run_count": 75,
+    "runtime_promotion": "deferred",
+    "source_version_mismatch": true,
+    "tier_counts": {
+      "easy": 0,
+      "expert": 160,
+      "hard": 30,
+      "normal": 15
+    },
+    "transition_count": 1800
+  },
+  "evidence_limits": [
+    "The workforce-capacity counts are descriptive simulated-policy evidence, not causal difficulty or balance evidence.",
+    "Expert completion is a bounded clearability proxy for named profiles and seeds, not general winnability.",
+    "Exact observation histories and hashes support an observation-only change classification, not a human-perceived difficulty claim.",
+    "The source artifacts were produced at different code versions and retain that provenance limitation."
+  ],
+  "next_action": "Require a new unexplained pressure, clearability, or player-facing difficulty gap and a separate design gate before changing difficulty or balance values.",
+  "observation_evidence": {
+    "code_version": "0.12.6",
+    "exact_history_match": true,
+    "exact_state_hash_match": true,
+    "hidden_marker_count": 0,
+    "path": "_workspace/experiments/v0.12.6-workforce-capacity-observation/results.json",
+    "physical_capacity_lines": 1800,
+    "run_count": 75,
+    "runtime_promotion": "deferred",
+    "staffing_lines": 1800,
+    "transition_count": 1800
+  },
+  "queue_action": "remove_item_from_future_queue",
+  "runtime_difficulty_change_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_marker_contract": {
+    "_workspace/experiments/v0.12.4-difficulty-depth-evidence/diagnostics.md": {
+      "markers": [
+        "candidate `workforce_capacity` pressure signal",
+        "- **Runtime promotion:** deferred"
+      ],
+      "status": "supported"
+    },
+    "docs/playtest-findings-v0.12.5.md": {
+      "markers": [
+        "- Runtime difficulty change: not authorized",
+        "v0.12.4 workforce-capacity signal",
+        "No difficulty values, transition formulas, balance"
+      ],
+      "status": "supported"
+    },
+    "docs/playtest-findings-v0.12.6.md": {
+      "markers": [
+        "Runs: 75 complete.",
+        "Transitions: 1,800.",
+        "Source comparison: 60 all-tier histories and 15 Expert histories match",
+        "Runtime difficulty and balance promotion remain deferred."
+      ],
+      "status": "supported"
+    }
+  }
+}

@@ -1,17 +1,18 @@
-# Request Summary — Teachability Queue Closure v0.12.8
+# Request Summary — Difficulty Queue Closure v0.12.9
 
 ## Decision
 
-Close the competitive teachability and validation-loop queue item using the
-already committed v0.12.3 cross-campaign evidence review.
+Close the difficulty-depth and winnability queue item after reconciling the
+candidate workforce-capacity signal with its visible observation context and
+bounded Expert clearability evidence.
 
 ## Target slice
 
-- Validate the two source lanes and source-specific review contracts.
-- Confirm 18 complete runs, 270 committed transitions, and zero gaps.
-- Remove the completed Future item without promoting runtime behavior.
+- Validate v0.12.4 pressure and clearability evidence.
+- Validate v0.12.6 exact history/hash observation-only controls.
+- Remove the queue item without tuning difficulty or balance.
 
 ## Explicit non-goals
 
-No human-learning claim, classroom study, balance change, difficulty tuning,
-new interface, or transition/ruleset change.
+No runtime difficulty values, broad balance pass, hidden rival omniscience,
+scoring change, or general winnability claim.

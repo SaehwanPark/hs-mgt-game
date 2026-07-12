@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Separate Pressure Evidence From Tuning Authorization
+
+- Context: The v0.12.4 review found workforce-capacity counts rising across
+  tested difficulty tiers, and v0.12.6 made the typed context visible.
+- Symptom: A monotonic simulated signal could be mistaken for a causal balance
+  diagnosis or general Expert winnability result.
+- Resolution: Closed the queue item only after confirming exact observation
+  controls, 15/15 named Expert clearability overlap, source-version limits, and
+  no unexplained gap; no runtime values changed.
+- Prevention: Treat descriptive pressure as routing evidence, require a new
+  unexplained gap for tuning, and preserve clearability and provenance limits.
+
 ## Remove Completed Queue Items Without Making Learning Claims
 
 - Context: The v0.12.3 cross-campaign teachability review had already found no

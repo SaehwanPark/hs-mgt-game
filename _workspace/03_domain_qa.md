@@ -1,18 +1,20 @@
-# Domain QA — Teachability Queue Closure v0.12.8
+# Domain QA — Difficulty Queue Closure v0.12.9
 
 ## Decision
 
-Pass for queue closure.
+Pass for evidence-gated closure.
 
 ## Checks
 
-- The audit does not equate trace completeness with learner comprehension.
-- Affiliation stages and competitive months remain source-specific.
-- Advisory, commitment, assumption, and alternative context remain in their
-  respective observation contracts.
-- Runtime difficulty, balance, and transition promotion remain deferred.
+- Workforce-capacity counts are treated as gameplay abstractions and descriptive
+  operating pressure, not clinical or workforce calibration.
+- Expert completion is labeled a bounded clearability proxy, not general
+  winnability.
+- Source-version mismatch and scripted-policy limits remain visible.
+- No punitive resource cut, hidden omniscience, balance claim, or difficulty
+  tuning is introduced.
 
 ## Reopening condition
 
-Require a concrete playtest, instructor, or domain finding before adding a new
-teachability mechanism or interface change.
+Require a new concrete player-facing or outcome-clearability gap before changing
+difficulty, balance, or scoring.
