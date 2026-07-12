@@ -23,9 +23,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/breadth-queue-closure-v0.12.12`
-- PR: to be opened after final local verification
+- PR: [#165](https://github.com/SaehwanPark/hs-mgt-game/pull/165)
 - Domain QA: Pass for bounded evidence-only queue closure.
-- Review passes: pending PR opening and post-open review.
+- Review passes: three clean post-open passes covering scope, closure
+  evidence, and docs/version boundaries.
+- CI: [run #29210319644](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29210319644)
+  passed.
 - Merge state: pending PR review and merge.
 
 ## Verification
