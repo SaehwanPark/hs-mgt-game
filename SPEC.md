@@ -3741,9 +3741,9 @@ reconstructing it from the diff.
     and winnability deferral.
   - Bumped package metadata to `0.12.5`.
 
-  Not Yet Done:
-  - Implement the bounded MCP projection follow-up and rerun the compatible
-    v0.12.4 evidence matrix before considering the interface gap closed.
+  Follow-up:
+  - Delivered in v0.12.6 through the bounded MCP projection and compatible
+    evidence matrix with exact history/state-hash comparison.
 
   Deferred / Non-Goals:
   - No difficulty values, balance pass, scoring, transition, command, scenario,
@@ -3756,12 +3756,10 @@ reconstructing it from the diff.
   - 307 Rust tests, 189 Python tests, formatting, clippy, CLI smoke, golden,
     and diff checks pass.
 
-## Present
-
 - Feature: Workforce Capacity Observation Context (v0.12.6)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.5 merge
+  Version: 0.12.6
 
   Summary:
   Render the safe typed staffing and physical-capacity context at the MCP
@@ -3769,14 +3767,20 @@ reconstructing it from the diff.
   observation-only.
 
   Done:
-  - v0.12.5 identifies the typed-vs-rendered workforce context gap and defines
-    the exact two-line projection contract.
-
-  Not Yet Done:
-  - Implement the `Staffing:` and `Physical capacity:` MCP lines from
-    `PlayerObservation`.
-  - Add session-boundary tests and rerun the unchanged v0.12.4-compatible
-    evidence matrix with exact history/state-hash comparison.
+  - Added the exact `Staffing:` and `Physical capacity:` lines from
+    `PlayerObservation` to competitive MCP observations.
+  - Added a focused Rust session-boundary regression test for the exact
+    seed-42 starting values.
+  - Captured 75 complete runs and 1,800 transitions across the five-profile,
+    three-seed, four-tier compatibility matrix plus the standalone Expert
+    overlap.
+  - Confirmed that all 60 all-tier histories and all 15 Expert histories match
+    their immutable source controls exactly, including state-hash sequences.
+  - Confirmed all 1,800 trace observations include both safe lines and no
+    excluded hidden markers.
+  - Kept difficulty, balance, scoring, transition, command, replay/hash,
+    winnability, and human-learning promotion deferred.
+  - Bumped package metadata to `0.12.6`.
 
   Deferred / Non-Goals:
   - No difficulty tuning, broad balance pass, hidden rival omniscience, derived
@@ -3784,9 +3788,42 @@ reconstructing it from the diff.
     winnability, or human-learning claim.
 
   Verification:
-  - Required before this item moves to Past: focused MCP tests, compatible
-    matrix, exact history/hash comparison, domain QA, and full repository
-    checks.
+  - 308 Rust tests, 194 Python tests, formatting, clippy, CLI smoke, golden,
+    and diff checks pass.
+  - Observation artifact and diagnostics report 75/75 complete runs,
+    1,800/1,800 exact source history matches, 1,800/1,800 exact state-hash
+    matches, and deferred runtime promotion.
+
+## Present
+
+- Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.6 merge
+
+  Summary:
+  Convert the completed affiliation-first design into a bounded runtime
+  proposal with explicit minimum state, actor observations, resolved inputs,
+  and debrief contracts before any new runtime changes.
+
+  Done:
+  - v0.12.6 closes the bounded workforce-capacity MCP observation gap with
+    unchanged histories and state hashes.
+
+  Not Yet Done:
+  - Re-audit the existing affiliation design and runtime boundary.
+  - Produce a narrow proposal and domain-QA decision for the minimum next
+    affiliation runtime slice.
+
+  Deferred / Non-Goals:
+  - No acquisition expansion, deal financing, new actor class, legal forecast,
+    multi-transaction framework, or runtime implementation before the proposal
+    is approved.
+
+  Verification:
+  - Required before this item moves to Past: evidence map, mechanism design,
+    domain QA, explicit state/observation/input/debrief contracts, and focused
+    proposal tests or source-boundary checks.
 
 ## Future
 
@@ -3867,10 +3904,9 @@ strategic actors, or platform architecture.
   express.
 
   Next actionable slice:
-  v0.12.5 confirms a typed-vs-rendered workforce context gap. Implement only
-  the safe `PlayerObservation` staffing/capacity projection and rerun the
-  compatible evidence matrix before considering any difficulty or balance
-  change; Expert should remain severe-but-winnable evidence, not an assumption.
+  v0.12.6 closes the typed-vs-rendered workforce context gap with exact
+  history/hash equality. Keep runtime promotion deferred; any future difficulty
+  work requires a new unexplained evidence gap and a separate design gate.
 
   Verification target:
   Findings cite seeds, profiles, difficulty tiers, validation failures or

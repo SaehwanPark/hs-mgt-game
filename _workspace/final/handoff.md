@@ -1,49 +1,52 @@
-# Final Handoff - Workforce Capacity Difficulty Design Gate v0.12.5
+# Final Handoff - Workforce Capacity Observation Context v0.12.6
 
 ## Result
 
-- Reviewed the v0.12.4 workforce-capacity signal against the typed competitive
-  observation, MCP formatter, staffing transition events, and debrief output.
-- Confirmed existing visible context: workforce trust, nursing-vacancy wording,
-  prior operations, labor-market guidance, consultant options, and debrief
-  attribution.
-- Identified a bounded decision-time gap: safe typed staffing and physical-
-  capacity counts exist in `PlayerObservation` but are omitted by the MCP
-  formatter.
-- Specified the smallest next projection: `Staffing:` and `Physical capacity:`
-  lines using only existing typed fields.
-- Excluded hidden targets, effective allocations, future hires, rival private
-  state, and all difficulty/balance/transition tuning.
+- Added the exact competitive MCP `Staffing:` and `Physical capacity:` lines
+  from existing typed `PlayerObservation` fields.
+- Added a focused session-boundary regression test with seed-42 starting
+  values.
+- Replayed 75 compatible simulated-policy runs and 1,800 transitions.
+- Confirmed exact history and state-hash equality against the immutable v0.11.11
+  all-tier and v0.11.9 Expert controls.
+- Confirmed all 1,800 trace observations contain both safe lines and no hidden
+  marker from the excluded-field contract.
+- Kept runtime difficulty, balance, scoring, transition, command, replay/hash,
+  winnability, and human-learning promotion deferred.
 
 ## Version boundaries
 
-- Package: `0.12.5`
-- Change surface: design contract, source-boundary review, and focused tests
+- Package: `0.12.6`
+- Change surface: MCP presentation, focused boundary test, evidence artifact,
+  and project records
 - Competitive and affiliation transitions, rulesets, state hashes, replay
-  artifact semantics, command parsers, persistence, and MCP behavior: unchanged
-- Runtime difficulty/balance/scoring/winnability promotion: deferred
+  artifact semantics, command parsers, persistence, and debrief behavior:
+  unchanged
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/workforce-capacity-design-v0.12.5`
-- PR: [#158](https://github.com/SaehwanPark/hs-mgt-game/pull/158)
-- Domain QA: Pass.
+- Working branch: `feat/workforce-capacity-observation-v0.12.6`
+- PR: [#159](https://github.com/SaehwanPark/hs-mgt-game/pull/159)
+- Domain QA: Pass for the bounded observation-only scope.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208220762](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208220762).
+- CI: `check` passed in run [29208641026](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208641026).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
-- Focused design-contract tests: 5 passed.
-- Design artifact: source markers supported; observation follow-up required;
-  runtime difficulty change unauthorized.
-- Full Rust/Python suites, formatting, clippy, CLI smoke, competitive golden,
-  and diff checks: passed locally; the PR check also passed.
+- Focused Rust boundary test: passed.
+- Matrix artifact: 75/75 complete runs, 1,800 transitions, 1,800 staffing
+  lines, 1,800 physical-capacity lines, zero hidden markers.
+- Source comparison: 60/60 all-tier histories and 15/15 Expert histories match
+  exactly; all state-hash sequences match exactly.
+- Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
+  checks: passed locally; the PR check also passed.
 
 ## Next dependency
 
-After merge, implement only the observation-context projection if the next
-slice can add focused MCP boundary tests and prove unchanged v0.12.4-compatible
-history/state hashes. Keep runtime difficulty and balance promotion deferred.
+After merge, re-audit the affiliation-first design and produce the narrow
+v0.12.7 runtime boundary proposal before implementing any new affiliation
+mechanic. Keep acquisition breadth, deal finance, legal forecasting, and
+difficulty/balance promotion deferred.

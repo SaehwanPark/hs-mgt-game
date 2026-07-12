@@ -742,6 +742,24 @@ fn format_competitive_observation(
     format!("Reported access index: {}", obs.reported_access_index),
     format!("Reported quality index: {}", obs.reported_quality_index),
     format!("Workforce trust: {}", obs.workforce_trust_summary),
+    format!(
+      "Staffing: nurses {}, physicians {}, admins {}",
+      obs.nurses, obs.physicians, obs.admins
+    ),
+    format!(
+      "Physical capacity: staffed beds {}, outpatient {}, emergency {}, ICU {}, obstetrics {}, psychiatric {}, cardiology {}, oncology {}, infusion {}, neurology {}, ASC {}",
+      obs.staffed_beds,
+      obs.outpatient_capacity,
+      obs.emergency_capacity,
+      obs.icu_capacity,
+      obs.obstetrics_capacity,
+      obs.psychiatric_capacity,
+      obs.cardiology_capacity,
+      obs.oncology_capacity,
+      obs.infusion_capacity,
+      obs.neurology_capacity,
+      obs.asc_capacity
+    ),
     format!("Community trust: {}", obs.community_trust_summary),
     format!("Cash runway: {}", obs.cash_runway_signal.label()),
     format!(
@@ -1094,6 +1112,22 @@ mod tests {
         .iter()
         .any(|line| line.contains("invest"))
     );
+  }
+
+  #[test]
+  fn competitive_observation_includes_staffing_and_physical_capacity_context() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+
+    assert!(
+      session
+        .observation
+        .iter()
+        .any(|line| { line == "Staffing: nurses 24, physicians 10, admins 11" })
+    );
+    assert!(session.observation.iter().any(|line| {
+      line == "Physical capacity: staffed beds 118, outpatient 100, emergency 0, ICU 0, obstetrics 0, psychiatric 0, cardiology 0, oncology 0, infusion 0, neurology 0, ASC 0"
+    }));
   }
 
   #[test]

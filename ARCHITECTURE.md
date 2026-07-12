@@ -243,6 +243,12 @@ formatter does not currently render. It specifies a two-line observation-only
 follow-up while excluding hidden targets, effective allocations, future hires,
 and rival private state; no difficulty or transition change is authorized.
 
+The v0.12.6 follow-up renders those two lines from `PlayerObservation` at the
+MCP boundary. A compatible 75-run/1,800-transition capture shows exact history
+and state-hash equality against the immutable all-tier and Expert controls, so
+the change remains outside the deterministic transition core. Difficulty,
+balance, scoring, and winnability promotion remain deferred.
+
 ### Scenario and Actor Design
 
 Responsible for:
