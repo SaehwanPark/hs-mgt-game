@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.9] - 2026-07-12
+
+### Added
+- Added a deterministic Expert difficulty validation matrix across five
+  scripted policy profiles and seeds 42, 43, and 44 after the v0.11.7
+  risk-posture and v0.11.8 rival resource-scaling changes.
+- Added focused Python tests for the new Expert validation artifact contract.
+- Recorded playtest findings and MCP playtesting guidance for the bounded
+  clearability evidence.
+
+### Changed
+- Bumped package version to `0.11.9`.
+- Kept runtime difficulty tuning, balance, scoring, rulesets, replay formats,
+  and MCP behavior unchanged.
+
 ## [0.11.8] - 2026-07-12
 
 ### Added

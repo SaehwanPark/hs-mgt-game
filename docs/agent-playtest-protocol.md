@@ -2,7 +2,7 @@
 
 **Status:** Active Phase 7 validation protocol  
 **Audience:** Contributors, domain reviewers, and agent-playtest operators  
-**Version:** v0.11.1 (governed by ADR-0009)
+**Version:** v0.11.9 (governed by ADR-0009)
 
 This protocol replaces planned recruitment of external human playtesters for the
 current validation path because recruitment and participant-study costs are not

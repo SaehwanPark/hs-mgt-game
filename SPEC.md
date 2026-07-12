@@ -3379,12 +3379,34 @@ reconstructing it from the diff.
   - All 293 Rust tests and 138 Python tests pass successfully.
   - State-hash invariance for Normal seed-42 is preserved.
 
+- Feature: Expert Difficulty Validation (v0.11.9)
+  Summary:
+  Validate Expert difficulty after the v0.11.7 AI risk-posture and v0.11.8
+  rival resource-scaling changes using a deterministic Phase 7 evidence matrix
+  across five scripted policy lanes and seeds 42, 43, and 44.
+  Done:
+  - Added `_workspace/experiments/v0.11.9-expert-difficulty-validation/` with
+    a reproducible Expert-only runner, JSON results, and diagnostics.
+  - Confirmed 15/15 Expert runs completed the 24-month campaign with zero
+    validation failures.
+  - Added focused Python artifact-contract tests and recorded findings in
+    `docs/playtest-findings-v0.11.9.md`.
+  Deferred / Non-Goals:
+  - No runtime mechanics, difficulty values, scoring, balance, scenario,
+    ruleset, replay, MCP schema, or state-hash changes.
+  - No general Expert winnability, human-learning, empirical-calibration,
+    causal, or policy-validity claim.
+  Verification:
+  - Focused Python tests, artifact generation, JSON validation, full Rust and
+    Python suites, formatting, clippy, automated playtests, and diff checks pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
   validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
-  strategy-comparison use audit, v0.11.7 difficulty expansion, and v0.11.8
-  difficulty resource scaling, are complete.
+  strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
+  difficulty resource scaling, and v0.11.9 Expert difficulty validation, are
+  complete.
 
 ## Future
 

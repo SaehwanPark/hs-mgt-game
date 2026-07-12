@@ -675,6 +675,19 @@ python3 _workspace/experiments/v0.10.46-expert-clearability-evidence/run_session
 python3 -m json.tool _workspace/experiments/v0.10.46-expert-clearability-evidence/results.json
 ```
 
+As of `v0.11.9`, the post-difficulty-expansion Expert validation matrix runs
+Access First, Commercial Focus, Workforce Resilience, Capital Modernization, and
+Coalition/Legitimacy policies across seeds `42`, `43`, and `44` at Expert
+difficulty. It verifies bounded clearability after the v0.11.7 risk-posture and
+v0.11.8 rival resource-scaling changes. Treat it as simulated-policy evidence,
+not general Expert winnability, balance, human-learning, causal, calibration, or
+policy-validity evidence.
+
+```bash
+python3 _workspace/experiments/v0.11.9-expert-difficulty-validation/run_sessions.py
+python3 -m json.tool _workspace/experiments/v0.11.9-expert-difficulty-validation/results.json
+```
+
 As of `v0.10.47`, the command-to-effect explainability audit checks the same
 12 Expert traces for action-specific transition evidence and monthly `Player:`
 debrief records. It is a read-only traceability check: the complete result does

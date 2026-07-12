@@ -1,37 +1,47 @@
-# Request Summary - Difficulty Resource Scaling v0.11.8
+# Request Summary - Expert Difficulty Validation v0.11.9
 
 ## Scope
 
-- Scale rival starting cash and political capital based on difficulty in the genesis world creator:
-  - **Easy**: Rivals start with 40 cash and 10 political capital (PC), with a conservative posture.
-  - **Normal**: Rivals start with 60 cash and 15 PC, with a moderate posture (default baseline).
-  - **Hard**: Rivals start with 80 cash and 20 PC, with an aggressive posture.
-  - **Expert**: Rivals start with 100 cash and 25 PC, with an aggressive posture.
-- Keep the player's starting resources (Riverside) invariant across all difficulties (default 60 cash and 15 PC).
-- Update CLI difficulty selection menu descriptions in `src/cli/display/prompt.rs` to show the starting resource and risk posture pressures for each difficulty tier.
-- Ensure Normal difficulty seed-42 hold-control hash remains completely invariant.
-- Update the package version to `0.11.8`.
-- Complete the feature branch setup, verification, PR handoff, and review loop.
+- Validate Expert difficulty after the v0.11.7 AI risk-posture and v0.11.8
+  rival resource-scaling changes.
+- Run a deterministic Expert-only evidence matrix for `competitive-regional-v1`
+  across five policy lanes: Access First, Commercial Focus, Workforce
+  Resilience, Capital Modernization, and Coalition/Legitimacy.
+- Use seeds 42, 43, and 44, capturing actor-visible observations, legal command
+  hints, submitted commands, validation failures, histories, hashes, final
+  observations, and debriefs.
+- Preserve the Normal seed-42 hold-control hash.
+- Update the package version to `0.11.9`.
+- Complete feature branch setup, verification, PR handoff, and review loop.
 
 ## Non-goals
 
-- No change to the player's starting resources.
-- No changes to state-hash schemas.
-- No changes to scenario files or general ruleset files.
+- No runtime mechanics, difficulty values, scoring, balance, command, scenario,
+  ruleset, replay, MCP schema, or state-hash changes.
+- No general Expert winnability, human-learning, empirical-calibration, causal,
+  or policy-validity claim.
+- No broad Phase 7 synthesis beyond this Expert clearability gate.
 
 ## Sources
 
-- `docs/expansion-proposal-review.md` (Proposal 1: Difficulty Expansion)
 - `SPEC.md` (Ranked next-development queue - Track 2: Difficulty depth and winnability)
-- `docs/roadmap.md` (Phase 7 validation and educational gates)
+- `docs/roadmap.md` (Phase 7 validation and Expert severity/winnability gate)
+- `docs/expansion-proposal-review.md` (Difficulty expansion proposal)
+- `docs/playtest-findings-v0.10.46.md` (prior Expert clearability evidence shape)
 
 ## Expected files
 
-- Updated `src/competitive/genesis.rs` (setting rival starting cash/PC based on difficulty).
-- Updated `src/cli/display/prompt.rs` (updating difficulty menu text).
-- Updated `Cargo.toml`, `CHANGELOG.md`, `SPEC.md`, and workspace files.
+- `_workspace/experiments/v0.11.9-expert-difficulty-validation/run_sessions.py`
+- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
+- `_workspace/experiments/v0.11.9-expert-difficulty-validation/diagnostics.md`
+- `tests/test_expert_difficulty_validation.py`
+- `docs/playtest-findings-v0.11.9.md`
+- `SPEC.md`, `CHANGELOG.md`, `LESSONS.md`, `README.md`, and MCP guidance docs.
 
 ## Validation target
 
-- All 292 Rust tests and 138 Python tests pass.
-- Verification of seed-42 Normal state-hash invariance.
+- 15/15 Expert runs complete the 24-month campaign with zero validation failures
+  or failures are explicitly recorded and routed.
+- Normal seed-42 hold-control hash remains `61357596d8800592`.
+- Focused artifact tests, full Python/Rust tests, formatting, clippy, automated
+  playtests, JSON validation, and diff checks pass.
