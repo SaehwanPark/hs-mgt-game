@@ -7,6 +7,28 @@
 **Initial domain:** United States health policy and health-system strategy  
 **Primary implementation language:** Rust
 
+## Current Implementation Checkpoint
+
+As of 2026-07-12, the proposal has progressed beyond its initial concept and
+vertical-slice stages into a playable, evidence-gated prototype. The repository
+contains three deterministic campaign paths:
+
+- a five-turn stabilization campaign;
+- a 24-month competitive regional-market campaign; and
+- an opt-in six-stage regional-affiliation campaign.
+
+The implementation includes a CLI, a local stdio MCP adapter for bounded agent
+playtesting, replay and state-hash verification, scenario loading, competitive
+autosave/resume, educational debriefs, and a dependency-free GUI thin-client
+proof over existing MCP-shaped outputs. Current numerical mechanisms remain
+documented game abstractions rather than calibrated forecasts, and AI-agent
+playtests remain gameplay and explanation evidence rather than evidence of
+human learning.
+
+The original proposal below remains the durable product thesis. Current scope,
+completed slices, and promotion gates are tracked in [`SPEC.md`](../SPEC.md),
+[`docs/roadmap.md`](roadmap.md), and [`ARCHITECTURE.md`](../ARCHITECTURE.md).
+
 ---
 
 ## 1. Project Summary

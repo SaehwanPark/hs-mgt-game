@@ -6,6 +6,23 @@
 **Planning horizon:** From concept validation through an initial educational release  
 **Approach:** Research-informed, design-led, vertical-slice development
 
+## Current Roadmap Position
+
+As of 2026-07-12, Phases 0–6 have produced the repository foundation,
+research/design artifacts, deterministic architecture proof, stabilization
+vertical slice, and expanded competitive campaign. Phase 7 has accumulated
+cross-campaign deterministic playtest and traceability evidence, including the
+regional-affiliation slice, difficulty/observation reviews, and evidence-gated
+queue closures. Phase 8 is partially established through public player and
+contributor documentation, CI, clippy, replay checks, and release-metadata
+consistency validation.
+
+The current state is a playable prototype, not a calibrated or classroom-
+validated educational release. The project is waiting for a concrete gameplay,
+authoring, domain-QA, audience-access, or release need before promoting another
+runtime slice. The detailed phase descriptions remain design gates; they are
+not a claim that every broad deliverable in a phase is complete.
+
 ---
 
 ## 1. Roadmap Purpose
@@ -1226,10 +1243,18 @@ At each phase gate, explicitly decide what will not be built next.
 
 # 4. Recommended Immediate Next Steps
 
-1. Complete Phase 0 repository and governance setup.
-2. Begin Phase 1 with a structured literature matrix rather than unorganized reading.
-3. In parallel, draft the Phase 2 system-boundary specification.
-4. Delay detailed Rust type design until the initial ontology and vertical-slice scope are stable.
-5. Select one candidate first campaign and one strategic interaction to anchor subsequent design.
+1. Keep the current campaigns, replay boundaries, assumptions, and contributor
+   checks reproducible while the project waits for a concrete evidence gap.
+2. Promote no runtime expansion until a playtest, scenario-authoring, debrief,
+   domain-QA, audience-access, or release finding names a bounded unmet need.
+3. If initial-release work resumes, prioritize the remaining Phase 8 gaps:
+   explicit compatibility/support expectations, an instructor-facing guide,
+   and a reproducible distribution decision.
+4. Keep human learning and classroom-effectiveness claims deferred until a
+   separately funded and approved evaluation exists.
+5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor
+   work as evidence-gated proposals, not an automatic content queue.
 
-The next canonical design document should be the **research plan and literature matrix**, followed by the **initial system-boundary and ontology specification**.
+The next canonical artifact should be the narrow evidence, release, or audience
+finding that justifies a new `SPEC.md` Present item. If no such finding exists,
+maintenance and reproducibility work are the correct posture.

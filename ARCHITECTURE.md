@@ -13,6 +13,9 @@ preserve.
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - MCP executable: `src/bin/hs-mgt-game-mcp.rs` serving a local stdio MCP server
   for bounded autonomous-agent play
+- Browser proof: dependency-free files in `gui/` rendering injected
+  MCP-shaped observations, command hints, history, and debrief data without
+  owning simulation state
 - Library modules:
   - `model/` — typed world state, commands, competitive and affiliation state,
     resources, history, session types, campaign types
@@ -149,7 +152,12 @@ summaries, and ending a session. The MCP layer reuses existing parsers,
 observation helpers, validation, and transition functions; it does not read
 randomness or mutate the core directly.
 
-Last Reviewed: 2026-07-07
+The `gui/` proof renders an injected session envelope and delegates turn
+submission to `window.HsMgtGameAdapter`. It performs only empty-input checking;
+server/core validation remains authoritative. The included demo envelope is a
+display fixture, not a browser-owned simulation.
+
+Last Reviewed: 2026-07-12
 Status: Verified
 
 Future GUI work should be a thin client over the same scenario, observation,
@@ -299,11 +307,12 @@ Responsible for:
 Current design artifacts include `docs/actor-cards.md`,
 `docs/first-scenario-brief.md`, `docs/competitive-scenario-brief.md`,
 `docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. Runtime
-scenario loading is implemented for both `stabilization-v1` and
-`competitive-regional-v1`; scenario migration tooling and broader authoring
-workflows remain deferred until a bounded slice is approved.
+scenario loading is implemented for `stabilization-v1`,
+`competitive-regional-v1`, and `regional-affiliation-v1`; scenario migration
+tooling and broader authoring workflows remain deferred until a bounded slice
+is approved.
 
-Last Reviewed: 2026-07-07
+Last Reviewed: 2026-07-12
 Status: Verified
 
 ## Competitive Campaign

@@ -5,6 +5,13 @@
 **Audience:** Project owner and contributors  
 **Purpose:** Provide durable principles for evaluating product, simulation, technical, and educational decisions
 
+**Current application:** The playable prototype now applies these principles
+across stabilization, competitive regional-market, and regional-affiliation
+campaigns, with CLI and MCP interfaces plus a bounded GUI thin-client proof.
+New runtime or platform work remains evidence-gated; existing simulated-agent
+validation does not establish calibration, policy validity, human learning, or
+classroom effectiveness.
+
 ---
 
 ## 1. Model Strategic Systems, Not Isolated Decisions
