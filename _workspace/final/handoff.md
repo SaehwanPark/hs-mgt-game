@@ -30,10 +30,10 @@
 - Domain QA: Pass.
 - Review passes: three post-open passes and three post-fix follow-up passes
   completed; no actionable code, data, scope, or documentation findings.
-- CI: initial `check` passed in run 29207189584; fresh run 29207222842 exposed
-  the pre-existing parallel persistence-test race and is pending rerun after
-  the test-only mutex fix.
-- Merge state: open; pending fresh CI after the follow-up fix.
+- CI: initial `check` passed in run 29207189584; run 29207222842 exposed the
+  pre-existing parallel persistence-test race; fixed in `770ba38`; fresh
+  `check` passed in run 29207339197.
+- Merge state: open; ready to merge after this final handoff update is checked.
 
 ## Verification
 
