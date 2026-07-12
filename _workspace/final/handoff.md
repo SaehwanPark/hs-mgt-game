@@ -25,10 +25,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/difficulty-depth-evidence-v0.12.4`
-- PR: to be opened after local verification
+- PR: [#157](https://github.com/SaehwanPark/hs-mgt-game/pull/157)
 - Domain QA: Pass.
-- Review passes: pending implementation completion
-- Merge state: pending PR review and merge
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in GitHub Actions run 29207759345.
+- Merge state: open; ready to merge after this handoff update is checked.
 
 ## Verification
 
