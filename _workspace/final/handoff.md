@@ -43,12 +43,13 @@
 
 - Base branch: `main`
 - Working branch: `feat/competitive-operating-outcome-use-v0.11.5`
-- PR URL: to be recorded after push and PR creation.
-- CI: to be recorded after PR creation.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/143
+- CI: GitHub `check` passed — https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29179416110/job/86614317511
 - Domain QA: Pass.
 - Verification: 130 Python tests, 291 Rust tests, formatting, clippy, JSON
   validation, deterministic regeneration, golden seed-42 coverage, and diff
   checks pass.
-- Review loop: three independent passes required; record findings,
-  dispositions, replies, and any follow-up review here.
-- Merge-ready: pending tests, PR, CI, and review-loop completion.
+- Review loop: Passes 1–3 completed with no actionable findings; no fixes or
+  follow-up review were required. PR disposition comment: GitHub comment
+  `4949910412`.
+- Merge-ready: yes.

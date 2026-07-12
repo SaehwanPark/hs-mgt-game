@@ -47,5 +47,5 @@ None.
 - Full Rust suite — 291 tests passed with single-threaded execution.
 - `cargo fmt --check`, clippy, JSON validation, deterministic regeneration,
   `cargo test --test golden_competitive_seed42`, and `git diff --check` passed.
-- Three independent code-reviewer passes and GitHub CI remain required before
-  merge readiness.
+- Three independent code-reviewer passes completed with no actionable findings.
+- GitHub `check` CI passed.
