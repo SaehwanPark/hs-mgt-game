@@ -1,9 +1,11 @@
 mod resolve;
+mod resolve_affiliation;
 mod resolve_competitive;
 mod rng;
 mod streams;
 
 pub use resolve::resolve_inputs;
+pub use resolve_affiliation::resolve_affiliation_inputs;
 pub use resolve_competitive::resolve_competitive_inputs;
 
 pub fn ai_player_tie_break(seed: u64, month_index: u32, system_id: u32) -> u32 {

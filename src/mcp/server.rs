@@ -39,7 +39,7 @@ impl McpGameServer {
 impl McpGameServer {
   #[tool(
     name = "start_session",
-    description = "Start a bounded game session for stabilization-v1 or competitive-regional-v1."
+    description = "Start a bounded game session for stabilization-v1, competitive-regional-v1, or regional-affiliation-v1."
   )]
   async fn start_session(
     &self,

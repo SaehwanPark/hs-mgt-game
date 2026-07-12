@@ -6,13 +6,17 @@ use std::path::Path;
 use serde::Deserialize;
 
 use crate::model::{
-  AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState, Difficulty,
-  HealthSystemState, INTERACTIVE_TURN_COUNT, PlayerController, PlayerResources, PlayerSlot,
-  PolicyCalendar, RiskPosture, Ruleset, ScenarioEvent, SharedMarketFields, WorldState,
+  AffiliationPartnerState, AffiliationRiversideState, AffiliationStage, AffiliationStatus,
+  AffiliationWorldState, AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState,
+  Difficulty, HealthSystemState, INTERACTIVE_TURN_COUNT, PlayerController, PlayerResources,
+  PlayerSlot, PolicyCalendar, RiskPosture, Ruleset, ScenarioEvent, SharedMarketFields, WorldState,
+  default_affiliation_ruleset,
 };
 
 pub const SCENARIO_TOML_FORMAT_VERSION: &str = "scenario-toml-0.1.40";
 pub const STABILIZATION_SCENARIO_TOML: &str = include_str!("../../scenarios/stabilization-v1.toml");
+pub const REGIONAL_AFFILIATION_SCENARIO_TOML: &str =
+  include_str!("../../scenarios/regional-affiliation-v1.toml");
 
 use std::sync::{Mutex, OnceLock};
 
@@ -49,6 +53,24 @@ pub struct Scenario {
   pub initial_market: Option<ScenarioMarketState>,
   pub systems: Option<Vec<ScenarioSystemState>>,
   pub timeline_events: Option<Vec<ScenarioEvent>>,
+  pub affiliation: Option<ScenarioAffiliation>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ScenarioAffiliation {
+  pub riverside_name: String,
+  pub riverside_cash: i32,
+  pub riverside_access_index: i32,
+  pub riverside_quality_index: i32,
+  pub riverside_workforce_trust: i32,
+  pub riverside_community_trust: i32,
+  pub riverside_market_share_index: i32,
+  pub partner_name: String,
+  pub partner_condition_index: i32,
+  pub partner_fit_index: i32,
+  pub partner_autonomy_need: i32,
+  pub partner_continuity_risk: i32,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Deserialize)]
@@ -322,6 +344,45 @@ impl Scenario {
       timeline_events: self.timeline_events.clone().unwrap_or_default(),
     })
   }
+
+  pub fn initial_affiliation_world_state(&self) -> Result<AffiliationWorldState, ScenarioError> {
+    let spec = self.affiliation.as_ref().ok_or_else(|| {
+      ScenarioError::Parse(
+        "missing affiliation section in regional affiliation scenario".to_string(),
+      )
+    })?;
+
+    Ok(AffiliationWorldState {
+      scenario_id: self.scenario_id.clone(),
+      turn: 0,
+      stage: AffiliationStage::AssessPartner,
+      status: AffiliationStatus::Unassessed,
+      riverside: AffiliationRiversideState {
+        name: spec.riverside_name.clone(),
+        cash: spec.riverside_cash,
+        access_index: spec.riverside_access_index,
+        quality_index: spec.riverside_quality_index,
+        workforce_trust: spec.riverside_workforce_trust,
+        community_trust: spec.riverside_community_trust,
+        market_share_index: spec.riverside_market_share_index,
+      },
+      partner: AffiliationPartnerState {
+        name: spec.partner_name.clone(),
+        condition_index: spec.partner_condition_index,
+        fit_index: spec.partner_fit_index,
+        autonomy_need: spec.partner_autonomy_need,
+        continuity_risk: spec.partner_continuity_risk,
+        reported_condition: None,
+      },
+      commitments: Default::default(),
+      review: Default::default(),
+      integration: Default::default(),
+      partner_response: crate::model::PartnerResponse::NotEngaged,
+      labor_response: crate::model::LaborResponse::NotEngaged,
+      payer_response: crate::model::PayerResponse::NotEngaged,
+      community_response: crate::model::CommunityResponse::NotEngaged,
+    })
+  }
 }
 
 pub fn parse_scenario_toml(input: &str) -> Result<Scenario, ScenarioError> {
@@ -336,6 +397,12 @@ pub fn load_scenario_file(path: impl AsRef<Path>) -> Result<Scenario, ScenarioEr
 pub fn default_stabilization_scenario() -> Result<Scenario, ScenarioError> {
   let scenario = parse_scenario_toml(STABILIZATION_SCENARIO_TOML)?;
   validate_stabilization_scenario(&scenario, &crate::model::default_ruleset())?;
+  Ok(scenario)
+}
+
+pub fn default_regional_affiliation_scenario() -> Result<Scenario, ScenarioError> {
+  let scenario = parse_scenario_toml(REGIONAL_AFFILIATION_SCENARIO_TOML)?;
+  validate_regional_affiliation_scenario(&scenario, &default_affiliation_ruleset())?;
   Ok(scenario)
 }
 
@@ -477,6 +544,89 @@ pub fn validate_competitive_scenario(
   Ok(())
 }
 
+pub fn validate_regional_affiliation_scenario(
+  scenario: &Scenario,
+  ruleset: &crate::model::AffiliationRuleset,
+) -> Result<(), ScenarioError> {
+  if scenario.format_version != SCENARIO_TOML_FORMAT_VERSION {
+    return Err(ScenarioError::UnsupportedFormatVersion(
+      scenario.format_version.clone(),
+    ));
+  }
+  if scenario.campaign_id != "regional-affiliation-v1" {
+    return Err(ScenarioError::UnsupportedCampaign(
+      scenario.campaign_id.clone(),
+    ));
+  }
+  if scenario.turn_unit != "month" {
+    return Err(ScenarioError::UnsupportedTurnUnit(
+      scenario.turn_unit.clone(),
+    ));
+  }
+  if scenario.ruleset_id != ruleset.version {
+    return Err(ScenarioError::RulesetMismatch {
+      expected: ruleset.version.clone(),
+      actual: scenario.ruleset_id.clone(),
+    });
+  }
+  if scenario.learning_objectives.is_empty() {
+    return Err(ScenarioError::EmptyLearningObjectives);
+  }
+
+  let affiliation = scenario
+    .affiliation
+    .as_ref()
+    .ok_or_else(|| ScenarioError::InvalidSystem("missing affiliation section".to_string()))?;
+  if affiliation.riverside_name.trim().is_empty() || affiliation.partner_name.trim().is_empty() {
+    return Err(ScenarioError::InvalidSystem(
+      "Riverside and partner names cannot be empty".to_string(),
+    ));
+  }
+  for (label, value) in [
+    ("riverside_access_index", affiliation.riverside_access_index),
+    (
+      "riverside_quality_index",
+      affiliation.riverside_quality_index,
+    ),
+    (
+      "riverside_workforce_trust",
+      affiliation.riverside_workforce_trust,
+    ),
+    (
+      "riverside_community_trust",
+      affiliation.riverside_community_trust,
+    ),
+    (
+      "riverside_market_share_index",
+      affiliation.riverside_market_share_index,
+    ),
+    (
+      "partner_condition_index",
+      affiliation.partner_condition_index,
+    ),
+    ("partner_fit_index", affiliation.partner_fit_index),
+  ] {
+    if !(0..=100).contains(&value) {
+      return Err(ScenarioError::InvalidSystem(format!(
+        "{label} must be between 0 and 100"
+      )));
+    }
+  }
+  if affiliation.riverside_cash < ruleset.assessment_cash_cost {
+    return Err(ScenarioError::InvalidSystem(
+      "Riverside cash is too low to assess the partner".to_string(),
+    ));
+  }
+  if !(0..=10).contains(&affiliation.partner_autonomy_need)
+    || !(0..=10).contains(&affiliation.partner_continuity_risk)
+  {
+    return Err(ScenarioError::InvalidSystem(
+      "partner autonomy and continuity risk must be between 0 and 10".to_string(),
+    ));
+  }
+  Ok(())
+}
+
 fn validate_turn_schedule(schedule: &[TurnScheduleEntry]) -> Result<(), ScenarioError> {
   const EXPECTED_COMMANDS: [&str; 5] = [
     "StabilizeAccess",
@@ -585,7 +735,7 @@ fn validate_actor_stubs(
 #[cfg(test)]
 mod tests {
   use super::*;
-  use crate::model::{default_ruleset, genesis_state};
+  use crate::model::{default_affiliation_ruleset, default_ruleset, genesis_state};
 
   #[test]
   fn bundled_stabilization_scenario_parses_and_validates() {
@@ -691,5 +841,32 @@ mod tests {
       validate_stabilization_scenario(&scenario, &default_ruleset()),
       Err(ScenarioError::InvalidActorStub(_))
     ));
+  }
+
+  #[test]
+  fn bundled_affiliation_scenario_parses_and_validates() {
+    let scenario = default_regional_affiliation_scenario().expect("affiliation scenario");
+    let state = scenario
+      .initial_affiliation_world_state()
+      .expect("affiliation genesis");
+    assert_eq!(scenario.campaign_id, "regional-affiliation-v1");
+    assert_eq!(state.stage, AffiliationStage::AssessPartner);
+    assert_eq!(
+      state.riverside.cash,
+      default_affiliation_ruleset().starting_cash
+    );
+  }
+
+  #[test]
+  fn affiliation_scenario_rejects_out_of_range_metric() {
+    let mut scenario = default_regional_affiliation_scenario().expect("scenario");
+    scenario
+      .affiliation
+      .as_mut()
+      .expect("affiliation")
+      .partner_fit_index = 101;
+    assert!(
+      validate_regional_affiliation_scenario(&scenario, &default_affiliation_ruleset()).is_err()
+    );
   }
 }

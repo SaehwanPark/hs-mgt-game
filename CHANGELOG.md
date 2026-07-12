@@ -4,6 +4,27 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.0] - 2026-07-12
+
+### Added
+- Implemented the opt-in `regional-affiliation-v1` six-stage runtime slice.
+- Added typed affiliation state, explicit stochastic inputs, deterministic
+  transitions, observations, immutable history, state hashing, replay
+  verification, CLI/MCP support, scenario loading, and debrief output.
+- Added focused runtime, scenario, MCP, and replay regression coverage.
+
+### Changed
+- Bumped the package version to `0.12.0` for the meaningful runtime feature.
+- Preserved the competitive campaign state-hash and golden-path contracts.
+
+### Deferred
+- Full deal-market breadth, legal/financial forecasting, autosave expansion,
+  and AI-rival affiliation behavior remain outside this slice.
+
+### Evidence Limits
+- The scenario is a deterministic educational prototype, not a calibrated legal,
+  financial, policy, gameplay-balance, or real-institution forecast.
+
 ## [0.11.14] - 2026-07-12
 
 ### Added

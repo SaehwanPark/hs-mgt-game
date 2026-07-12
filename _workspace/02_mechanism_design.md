@@ -1,8 +1,8 @@
-# Mechanism Design - Regional Affiliation Runtime Proposal v0.11.14
+# Mechanism Design - Regional Affiliation Runtime v0.12.0
 
 ## Goal and Roadmap Phase
 
-Phase 7.7 expansion proposal gate, preparing one Phase 9 opt-in
+Phase 7.7 expansion proposal gate, implemented as one opt-in Phase 9
 `regional-affiliation-v1` scenario without changing the current competitive
 runtime.
 
@@ -30,7 +30,7 @@ runtime.
 
 ## State, Beliefs, and Observations
 
-Future affiliation-specific true state must be limited to:
+Implemented affiliation-specific true state is limited to:
 
 - partner condition and fit signals;
 - affiliation status and stage;
@@ -77,8 +77,8 @@ must each remain defensible under different observations.
   resolved inputs with stable stage/seed identity.
 - Regulatory outcomes are educational abstractions and must not imply legal
   prediction.
-- Commitment cost, review timing, and integration effects remain numeric
-  implementation decisions for a later PR.
+- Commitment cost, review timing, and integration effects are versioned numeric
+  abstractions in `regional-affiliation-ruleset-0.1.0`.
 
 ## Educational Debrief Hooks
 
@@ -92,13 +92,13 @@ must each remain defensible under different observations.
 ## Determinism and Replay Notes
 
 All uncertainty must be resolved before deterministic transition evaluation.
-Future transition/history records must retain the resolved affiliation inputs,
+Transition/history records retain the resolved affiliation inputs,
 decision-time observation, commands, events, attributed effects, and state hash.
 Later observations may revise earlier estimates but must not rewrite committed
 history. Any wire-shape change requires explicit replay and state-hash versioning.
 
 ## Open Questions
 
-- A later implementation PR must choose concrete Rust types, scenario fields,
-  command spelling, numeric ruleset bounds, and replay/hash compatibility.
-- Domain QA must approve those choices before runtime promotion.
+- Future expansion should revisit numeric choices only with new domain or
+  playtest evidence; the current slice uses explicit Rust types, scenario
+  fields, command spelling, and versioned replay/hash compatibility.

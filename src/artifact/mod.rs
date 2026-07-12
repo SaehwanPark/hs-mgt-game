@@ -1,3 +1,4 @@
+mod affiliation;
 mod competitive_session_save;
 mod parse;
 mod serialize;
@@ -6,6 +7,9 @@ mod session_save_serialize;
 mod text;
 mod verify;
 
+pub use affiliation::{
+  deserialize_affiliation_replay, serialize_affiliation_replay, verify_affiliation_replay,
+};
 pub use competitive_session_save::{
   deserialize_competitive_session_save, serialize_competitive_session_save,
 };
@@ -19,6 +23,9 @@ pub use verify::{
   write_replay_artifact,
 };
 
+#[cfg(test)]
+#[path = "affiliation_tests.rs"]
+mod affiliation_tests;
 #[cfg(test)]
 #[path = "verify_tests.rs"]
 mod verify_tests;

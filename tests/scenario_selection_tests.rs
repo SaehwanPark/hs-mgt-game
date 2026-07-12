@@ -1,6 +1,7 @@
 use hs_mgt_game::model::{Difficulty, default_competitive_ruleset, default_ruleset};
 use hs_mgt_game::scenario::{
-  load_scenario_file, validate_competitive_scenario, validate_stabilization_scenario,
+  load_scenario_file, validate_competitive_scenario, validate_regional_affiliation_scenario,
+  validate_stabilization_scenario,
 };
 use std::fs;
 
@@ -88,4 +89,16 @@ fn test_load_exemplary_competitive_scenario() {
   assert_eq!(world.systems.len(), 3);
   assert_eq!(world.systems[0].name, "Riverside Community Health");
   assert_eq!(world.systems[0].resources.cash, 500);
+}
+
+#[test]
+fn test_load_valid_regional_affiliation_scenario() {
+  let scenario =
+    load_scenario_file("scenarios/regional-affiliation-v1.toml").expect("load affiliation");
+  assert_eq!(scenario.campaign_id, "regional-affiliation-v1");
+  validate_regional_affiliation_scenario(
+    &scenario,
+    &hs_mgt_game::model::default_affiliation_ruleset(),
+  )
+  .expect("validate affiliation");
 }

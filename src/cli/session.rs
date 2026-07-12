@@ -103,6 +103,13 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
         .initial_competitive_world_state(config.difficulty, &comp_ruleset)
         .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid initial state: {error}")))?;
       return Ok(run_competitive_stub(&ruleset, config, Some(initial_world)));
+    } else if scenario.campaign_id == "regional-affiliation-v1" {
+      let affiliation_ruleset = crate::model::default_affiliation_ruleset();
+      crate::scenario::validate_regional_affiliation_scenario(&scenario, &affiliation_ruleset)
+        .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
+      return Ok(super::affiliation::run_affiliation_campaign(Some(
+        &scenario,
+      )));
     } else {
       crate::scenario::validate_stabilization_scenario(&scenario, &ruleset)
         .map_err(|error| CliError::ScenarioLoadFailed(format!("invalid scenario: {error}")))?;
@@ -189,6 +196,7 @@ pub fn run(scenario_path: Option<std::path::PathBuf>) -> Result<SessionOutcome, 
       };
       Ok(run_competitive_stub(&ruleset, config, None))
     }
+    CampaignId::RegionalAffiliationV1 => Ok(super::affiliation::run_affiliation_campaign(None)),
   }
 }
 

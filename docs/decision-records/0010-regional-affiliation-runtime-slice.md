@@ -1,6 +1,6 @@
 # ADR-0010: Regional Affiliation Runtime Slice
 
-**Status:** Proposed
+**Status:** Implemented in v0.12.0
 **Date:** 2026-07-12
 **Deciders:** Project maintainer and implementation agent
 
@@ -13,7 +13,7 @@ changing the existing `competitive-regional-v1` campaign or its golden replay.
 
 ## Decision
 
-Propose an opt-in `regional-affiliation-v1` scenario that reuses competitive
+Implement an opt-in `regional-affiliation-v1` scenario that reuses competitive
 transition, observation, history, replay, and debrief primitives. The scenario
 is six monthly stages with one human-led Riverside system and one localized
 nonprofit partner actor. It is not a second full campaign engine and does not
@@ -64,11 +64,23 @@ deferred.
   dynamics.
 - Regulatory and community outcomes remain stylized design abstractions.
 
+## Implementation
+
+- `src/model/affiliation.rs` owns typed state, commands, ruleset, observations,
+  resolved inputs, immutable history, and replay records.
+- `src/affiliation/` provides genesis, observation, validation, deterministic
+  transition, and replay functions; `src/inputs/resolve_affiliation.rs` resolves
+  stochastic outcomes before transition evaluation.
+- The six-stage CLI/MCP command surface is `assess`, `posture`, `commit`,
+  `submit_review`, `await_review`, `integrate`, and `hold`.
+- Affiliation uses ruleset `regional-affiliation-ruleset-0.1.0`, state-hash
+  schema `regional-affiliation-state-hash-v1`, and replay artifact
+  `regional-affiliation-replay-v1`; competitive hashes remain unchanged.
+
 ## Follow-ups
 
-- A separate implementation PR must choose concrete Rust types, scenario fields,
-  command syntax, numeric bounds, and replay/hash compatibility policy.
-- Domain QA must approve the implementation before runtime promotion.
+- Domain QA should validate educational balance and interpretation before broader
+  scenario expansion.
 - Any new shared contested interaction must use prior-snapshot intent evaluation,
   central conflict resolution, and effect application.
 
@@ -84,8 +96,7 @@ deferred.
 
 - Domain QA confirms the proposal preserves scope, determinism, observation
   boundaries, utility/welfare separation, and debriefability.
-- Existing Rust, Python, formatting, clippy, golden, and diff checks remain
-  green because this ADR changes no runtime code.
+- Rust, Python, formatting, clippy, golden, replay, MCP, and diff checks pass.
 
 ## Related Documents
 

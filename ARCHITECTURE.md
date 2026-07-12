@@ -1,8 +1,9 @@
 # Architecture
 
-The project is currently a playable CLI prototype with bounded stabilization and
-competitive campaign modes. This document records the intended architecture
-boundaries that future implementation should preserve.
+The project is currently a playable CLI prototype with bounded stabilization,
+competitive, and opt-in regional-affiliation campaign modes. This document
+records the intended architecture boundaries that future implementation should
+preserve.
 
 ## Current State
 
@@ -13,8 +14,10 @@ boundaries that future implementation should preserve.
 - MCP executable: `src/bin/hs-mgt-game-mcp.rs` serving a local stdio MCP server
   for bounded autonomous-agent play
 - Library modules:
-  - `model/` — typed world state, commands, competitive commands, competitive world,
+  - `model/` — typed world state, commands, competitive and affiliation state,
     resources, history, session types, campaign types
+  - `affiliation/` — six-stage partner interaction genesis, observation,
+    validation, deterministic transition, and replay
   - `competitive/` — competitive campaign mock fixtures and validation demos
   - `inputs/` — seeded stochastic input resolution
   - `sim/` — deterministic transition core
@@ -38,7 +41,8 @@ policy inputs, Stata-like competitive command parsing, and a 24-month
 competitive CLI loop with help-command catalog output, colored command prompt
 tokens, and Tab autocomplete for verbs, argument keys, and enum values.
 It also includes a local stdio MCP server (`hs-mgt-game-mcp`) with in-memory
-sessions for `stabilization-v1` and `competitive-regional-v1`.
+sessions for `stabilization-v1`, `competitive-regional-v1`, and
+`regional-affiliation-v1`.
 
 The current implementation is a playable prototype and compact architecture
 proof, not a production simulation or calibrated policy model. It demonstrates a
@@ -205,16 +209,15 @@ outcomes. See `docs/expansion-proposal-review.md`.
 Last Reviewed: 2026-07-09
 Status: Verified; future advisor-market boundary documented
 
-A proposed `regional-affiliation-v1` slice is likewise kept outside the
-current competitive runtime. If approved for implementation, it should reuse
-the existing transition, observation, history, and debrief surfaces through a
-localized six-stage partner interaction. It must store affiliation-specific
-resolved inputs before transition evaluation, preserve actor-specific
-observations, and avoid introducing a generalized actor framework or changing
-the default competitive campaign. See ADR-0010.
+A `regional-affiliation-v1` slice is implemented outside the current
+competitive runtime. It reuses the transition, observation, history, and
+debrief boundaries through a localized six-stage partner interaction, stores
+affiliation-specific resolved inputs before transition evaluation, preserves
+actor-specific observations, and leaves the default competitive campaign
+unchanged. See ADR-0010.
 
 Last Reviewed: 2026-07-12
-Status: Verified; regional-affiliation proposal boundary documented
+Status: Verified; regional-affiliation runtime boundary documented
 
 ### Scenario and Actor Design
 

@@ -74,6 +74,7 @@ pub fn parse_campaign_choice(input: &str) -> Result<CampaignId, CliError> {
   match trimmed {
     "" | "1" => Ok(CampaignId::StabilizationV1),
     "2" | "c" | "C" => Ok(CampaignId::CompetitiveRegionalV1),
+    "3" | "a" | "A" => Ok(CampaignId::RegionalAffiliationV1),
     other => Err(CliError::InvalidCampaignChoice(other.to_string())),
   }
 }

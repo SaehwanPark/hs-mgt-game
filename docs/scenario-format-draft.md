@@ -1,6 +1,6 @@
 # Scenario Format Draft
 
-**Status:** Phase 6.2 design draft; stabilization and competitive runtime loading implemented  
+**Status:** Phase 6.2 design draft; stabilization, competitive, and regional-affiliation runtime loading implemented
 **Audience:** Contributors designing scenario loading and campaign content  
 **Version:** draft-0.1.28
 
@@ -17,6 +17,7 @@ tooling remain deferred.
 | --- | --- | --- |
 | `stabilization-v1` | abstract | `turn_schedule` maps turn index to command kind |
 | `competitive-regional-v1` | month | `campaign_length_months`; open verb catalog per month |
+| `regional-affiliation-v1` | month | fixed six-stage affiliation schedule |
 
 ## Design Goals
 
@@ -48,6 +49,7 @@ tooling remain deferred.
 | `systems` | Competitive only: per-system genesis | List of `{system_id, controller, initial_state}` |
 | `actor_stubs` | Non-player actor metadata | References to actor-card ids, not decision code |
 | `evaluation_profile` | Debrief and assessment hooks | Optional scoring or discussion prompts |
+| `affiliation` | Regional affiliation genesis | Riverside and partner typed state fields |
 
 Future expansion fields should be added only after proposal review and domain
 QA. Candidate additions include explicit difficulty-pressure profiles
@@ -59,15 +61,14 @@ simultaneous action resolution.
 These fields should compose known mechanisms; they must not become executable
 logic or a second rules language.
 
-### Proposed regional-affiliation scenario
+### Implemented regional-affiliation scenario
 
-ADR-0010 proposes an opt-in `regional-affiliation-v1` scenario rather than an
+ADR-0010 defines an opt-in `regional-affiliation-v1` scenario rather than an
 extension of the default `competitive-regional-v1` campaign. The proposal
 requires typed content for one Riverside system, one neighboring nonprofit
 partner, a six-stage monthly sequence, learning objectives, and a fixed
-resolved-input deck. This is a design contract only; the current loader,
-scenario format version, and competitive schema remain unchanged until a later
-implementation PR.
+resolved-input deck. The loader and bundled fixture are implemented in v0.12.0;
+the competitive schema remains unchanged.
 
 ## Turn Schedule Entry (draft)
 
@@ -116,9 +117,8 @@ source of truth for what actually happened in a session.
 - No Medicare/Medicaid actor stubs until first-scenario scope expands.
 - No empirical parameter files; use [`evidence-registry.md`](evidence-registry.md)
   ledger when calibrating rulesets.
-- No merger/acquisition deal-market schema until one regional consolidation
-  slice proves the needed fields. The v0.11.14 proposal is not that runtime
-  implementation.
+- No merger/acquisition deal-market schema; this bounded affiliation slice does
+  not claim to model a full transaction market.
 - No GUI-only scenario behavior; graphical clients should consume existing
   scenario content and observation/debrief outputs.
 

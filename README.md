@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.11.14. It is intended for
+The current public milestone is a playable Rust prototype at v0.12.0. It is intended for
 inspection, playtesting, portfolio review, and future educational design work.
 It is not a calibrated policy forecast or a model of any real institution.
 
@@ -22,8 +22,11 @@ It is not a calibrated policy forecast or a model of any real institution.
   one human-led system, AI rival health systems, simultaneous monthly actions,
   lagged rival observability, a recurring operating consequence loop, and
   end-of-run debriefing.
+- `regional-affiliation-v1`: an opt-in six-stage regional affiliation campaign
+  with explicit partner observations, commitments, review, integration, replay,
+  and educational debriefing.
 
-Both campaigns are deterministic for a given seed and set of choices. The
+All campaigns are deterministic for a given seed and set of choices. The
 simulation separates true state from actor-visible observations, records
 append-only history, and verifies replay through stable state hashes.
 

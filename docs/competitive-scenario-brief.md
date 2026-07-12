@@ -83,7 +83,7 @@ Players should practice:
 - Empirical calibration or forecasting claims
 - Refactoring or replacing stabilization demo
 - Regional merger/acquisition mechanics in the default campaign. The separate
-  `regional-affiliation-v1` proposal is opt-in and not implemented.
+  `regional-affiliation-v1` runtime is opt-in and remains outside this campaign.
 - GUI-specific scenario behavior; future graphical clients must reuse the same
   scenario and core data.
 - Advisor-market, payroll, candidate-pool, or hire/fire mechanics until the

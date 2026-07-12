@@ -74,6 +74,7 @@ pub fn campaign_menu_lines() -> Vec<String> {
     style::section_heading(style::EMOJI_STRATEGY, "Choose campaign"),
     style::dim("  Enter or 1 → Regional stabilization demo (five-turn playable)"),
     style::dim("  2 or c → Competitive regional market (24-month campaign)"),
+    style::dim("  3 or a → Regional affiliation decision (six-stage scenario)"),
   ]
 }
 
