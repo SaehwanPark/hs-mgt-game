@@ -894,6 +894,14 @@ debrief, and source-specific context coverage with no structural gap. Runtime
 promotion remains deferred.
 Broader deal-market mechanics and legal forecasting remain deferred.
 
+The v0.12.4 Phase 7/9 difficulty-depth review reads the existing v0.11.11
+all-tier and v0.11.9 Expert artifacts. It validates 75 complete runs and 1,800
+committed transitions, and identifies a candidate workforce-capacity pressure
+signal rising from 0 Easy operating months to 160 Expert operating months.
+Normal, Hard, and Expert scripted action counts remain identical in the source
+matrix, so the result is descriptive routing evidence rather than a causal
+difficulty, balance, or winnability claim.
+
 ## 7.6 Educational Artifact and Debrief Review
 
 Evaluate whether the game artifacts make the intended reasoning inspectable:

@@ -1,73 +1,74 @@
-# Mechanism Design - Phase 7 Teachability Evidence Review v0.12.3
+# Mechanism Design - Difficulty Depth Evidence Review v0.12.4
 
 ## Goal and Roadmap Phase
 
-Phase 7 teachability and validation evidence review after the v0.12.2
-observation-context fix. This is a read-only audit, not a new simulation or
-interface mechanism.
+Phase 7/9 difficulty-depth evidence gate after the v0.12.3 teachability review.
+This is a read-only audit, not a new difficulty mechanism.
 
 ## Slice Boundary
 
-- Inputs: exactly two committed artifacts: v0.12.2 affiliation post-fix and
-  v0.11.12 competitive teachability capture.
-- Output: one deterministic report with source-level coverage, review-step
-  status, evidence gaps, and explicit limits.
-- Review: 18 complete source runs and 270 committed transitions, with no new
-  sessions or generated runtime state.
-- Excluded: true-state expansion, transition changes, actor-response changes,
-  balance, GUI, legal modeling, generalized evidence schemas, and human
-  evaluation.
+- Inputs: exactly the v0.11.11 all-tier and v0.11.9 Expert JSON artifacts.
+- Output: deterministic source validation, per-tier pressure summaries,
+  clearability coverage, candidate-signal classification, and evidence limits.
+- Unit: 24 committed operating months per run; 60 all-tier runs plus 15
+  standalone Expert runs.
+- Excluded: new sessions, parameter tuning, ruleset changes, scoring, hidden
+  rival omniscience, player-resource cuts, GUI, and human evaluation.
 
 ## Actors and Authority
 
-The audit treats each source's actor-visible observation as the boundary of
-what the player could know. Affiliation partner/review/labor/payer/community
-responses and competitive private rival actions remain source-specific; the
-report does not reconstruct them as player knowledge.
+The audit treats each source's actor-visible observation and submitted command
+as the player-facing boundary. Rival private actions and instructor-revealed
+outcomes remain source records; the report does not infer them as player
+knowledge or utility.
 
 ## State, Beliefs, and Observations
 
-The report records only the presence and alignment of source-provided
-observations, legal commands, submitted commands, accepted transitions, state
-hashes, and debrief markers. It does not merge affiliation stages with
-competitive months or infer unrecorded beliefs.
+Pressure is represented only by committed operating records and source-provided
+trace fields: workforce-capacity markers, capacity/demand markers, operating
+loss, action-family trajectories, final tradeoff summaries, and debrief
+explanation markers. No hidden state is added.
 
 ## Commands, Events, and Effects
 
-No command, event, effect, transition, resolved input, or state-hash behavior
-changes. Existing command and legal-hint records are merely audited.
+No command, event, effect, transition, resolved input, state-hash, or replay
+behavior changes. Existing events/effects are parsed to classify descriptive
+operating bottlenecks.
 
 ## Strategic Interaction
 
-No strategic decision procedure changes. The two source lanes retain their
-independent policy profiles, seeds, difficulty, and actor-response records.
-The audit compares traceability coverage, not policy performance.
+The all-tier source preserves five scripted profiles over four difficulty tiers;
+the Expert source preserves the same five profile names over three seeds. The
+audit reports profile/seed/tier coverage and action trajectories but assigns no
+utility, quality, or optimality judgment.
 
-## Assumptions and Parameters
+## Candidate Pressure Dimension
 
-- Source contracts use pinned batch IDs and expected run/transition counts.
-- Marker checks are explicit and deterministic; no fuzzy model or external
-  dependency is introduced.
-- No numeric game parameter is introduced.
+`workforce_capacity` is a candidate only if the recomputed all-tier counts are
+nondecreasing across Easy, Normal, Hard, and Expert. If supported, the finding
+means the current artifacts expose an operating-pressure signal worth a later
+design gate. It does not mean the signal is correctly calibrated or that
+runtime tuning is authorized.
 
-## Educational Debrief Hooks
+## Educational and Debrief Hooks
 
-- Affiliation decision-time context is checked against its alternative and
-  assumption debrief prompt.
-- Competitive decision-time consultant/advisory context is checked against
-  its retrospective decision-quality framing.
-- Both lanes are checked for action-to-outcome trace linkage without claiming
-  that the debrief is comprehensible or effective.
+- Each run must retain the decision-time observation/command surface.
+- Each accepted month must link to a committed transition and state hash.
+- Each run must retain month-level debrief coverage and decision-quality
+  framing.
+- The report must distinguish bounded clearability evidence from winnability
+  and human learning.
 
 ## Determinism and Replay Notes
 
-The audit reads committed JSON only. It does not enter transition evaluation,
-history, replay artifacts, or state hashing. Source state-hash sequences are
-validated for internal alignment and are not regenerated or rewritten.
+The audit reads committed JSON only and emits stable JSON/Markdown summaries. It
+does not regenerate a transition, alter a hash, or rewrite a source artifact.
 
 ## Open Questions
 
-- Human comprehension and educational effectiveness require evidence outside
-  this deterministic simulated-policy slice.
-- If a future artifact identifies a concrete gap, its fix must be scoped to the
-  owning campaign boundary rather than generalized from this report.
+- Whether workforce-capacity pressure is legible or appropriately paced to a
+  human player remains unmeasured.
+- Whether Expert is generally winnable remains untested beyond the named
+  profiles and seeds.
+- A later runtime change requires a separate design gate with focused tests and
+  an explicit decision about balance and difficulty semantics.

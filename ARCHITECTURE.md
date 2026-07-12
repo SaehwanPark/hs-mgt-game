@@ -231,6 +231,12 @@ decision-context, action/response, transition/hash, outcome, debrief, and
 source-specific context coverage without merging campaign semantics or
 changing runtime behavior. Runtime promotion remains deferred.
 
+The v0.12.4 difficulty-depth review reads the v0.11.11 all-tier and v0.11.9
+Expert artifacts without changing the simulation. It identifies a candidate
+workforce-capacity pressure signal across the tested tiers while preserving the
+source-version and scripted-policy limits; any difficulty tuning remains behind
+a separate design gate.
+
 ### Scenario and Actor Design
 
 Responsible for:

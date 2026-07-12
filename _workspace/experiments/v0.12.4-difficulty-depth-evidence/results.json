@@ -1,0 +1,297 @@
+{
+  "aggregate": {
+    "expert_profile_seed_overlap_count": 15,
+    "run_count": 75,
+    "source_version_mismatch": true,
+    "supported_run_count": 75,
+    "transition_count": 1800
+  },
+  "artifact_type": "difficulty_depth_evidence_review",
+  "batch_id": "v0.12.4-difficulty-depth-evidence",
+  "campaign": "competitive-regional-v1",
+  "clearability": {
+    "all_tier_expert_runs": 15,
+    "expected_runs": 15,
+    "interpretation": "bounded clearability proxy for named profiles and seeds",
+    "overlap_supported": true,
+    "standalone_expert_runs": 15
+  },
+  "code_version": "0.12.4",
+  "evidence_limits": [
+    "This is deterministic simulated-policy evidence, not human or classroom evidence.",
+    "Bottleneck counts, action trajectories, and endpoint ranges are descriptive signals, not causal marginal effects, validated strategy classes, balance proof, or equilibrium outcomes.",
+    "Expert completion is a bounded clearability proxy for the named profiles and seeds, not general winnability.",
+    "The all-tier and Expert sources were produced at different code versions, so their endpoint values are not treated as a causal comparison.",
+    "Integer operating quantities are gameplay abstractions, not calibrated financial, clinical, legal, or policy units."
+  ],
+  "finding": "candidate_visible_pressure_signal",
+  "issues": [],
+  "pressure_signal": {
+    "all_tier_counts": {
+      "easy": 0,
+      "expert": 160,
+      "hard": 30,
+      "normal": 15
+    },
+    "classification": "candidate_visible_pressure_signal",
+    "dimension": "workforce_capacity",
+    "interpretation": "Workforce-capacity bottleneck counts rise across the tested tiers; this is a descriptive routing signal, not causal or balance evidence.",
+    "monotonic_easy_to_expert": true,
+    "supported_in_each_tier": true
+  },
+  "runtime_promotion": "deferred",
+  "source_artifacts": [
+    {
+      "competitive_control_hash": "61357596d8800592",
+      "difficulty_summary": {
+        "easy": {
+          "action_family_counts": {
+            "commit": 74,
+            "hold": 41,
+            "invest": 90,
+            "monitor": 39,
+            "negotiate": 60,
+            "recruit": 56
+          },
+          "bottleneck_counts": {
+            "capacity_or_demand": 35,
+            "operating_loss": 26
+          },
+          "final_outcome_ranges": {
+            "access": {
+              "count": 15,
+              "max": 93,
+              "min": 68,
+              "unique_count": 3
+            },
+            "cash": {
+              "count": 15,
+              "max": 330,
+              "min": 9,
+              "unique_count": 14
+            },
+            "community_trust": {
+              "count": 15,
+              "max": 69,
+              "min": 64,
+              "unique_count": 2
+            },
+            "market_share": {
+              "count": 15,
+              "max": 34,
+              "min": 24,
+              "unique_count": 2
+            },
+            "quality": {
+              "count": 15,
+              "max": 87,
+              "min": 72,
+              "unique_count": 5
+            },
+            "workforce_trust": {
+              "count": 15,
+              "max": 60,
+              "min": 34,
+              "unique_count": 5
+            }
+          },
+          "run_count": 15,
+          "supported_run_count": 15,
+          "trajectory_count": 6,
+          "transition_count": 360
+        },
+        "expert": {
+          "action_family_counts": {
+            "commit": 71,
+            "hold": 58,
+            "invest": 81,
+            "monitor": 38,
+            "negotiate": 60,
+            "recruit": 52
+          },
+          "bottleneck_counts": {
+            "capacity_or_demand": 35,
+            "operating_loss": 80,
+            "workforce_capacity": 160
+          },
+          "final_outcome_ranges": {
+            "access": {
+              "count": 15,
+              "max": 93,
+              "min": 68,
+              "unique_count": 4
+            },
+            "cash": {
+              "count": 15,
+              "max": 251,
+              "min": -33,
+              "unique_count": 14
+            },
+            "community_trust": {
+              "count": 15,
+              "max": 69,
+              "min": 64,
+              "unique_count": 3
+            },
+            "market_share": {
+              "count": 15,
+              "max": 34,
+              "min": 24,
+              "unique_count": 2
+            },
+            "quality": {
+              "count": 15,
+              "max": 87,
+              "min": 72,
+              "unique_count": 5
+            },
+            "workforce_trust": {
+              "count": 15,
+              "max": 60,
+              "min": 34,
+              "unique_count": 7
+            }
+          },
+          "run_count": 15,
+          "supported_run_count": 15,
+          "trajectory_count": 9,
+          "transition_count": 360
+        },
+        "hard": {
+          "action_family_counts": {
+            "commit": 71,
+            "hold": 58,
+            "invest": 81,
+            "monitor": 38,
+            "negotiate": 60,
+            "recruit": 52
+          },
+          "bottleneck_counts": {
+            "capacity_or_demand": 35,
+            "operating_loss": 81,
+            "workforce_capacity": 30
+          },
+          "final_outcome_ranges": {
+            "access": {
+              "count": 15,
+              "max": 93,
+              "min": 68,
+              "unique_count": 4
+            },
+            "cash": {
+              "count": 15,
+              "max": 251,
+              "min": -31,
+              "unique_count": 14
+            },
+            "community_trust": {
+              "count": 15,
+              "max": 69,
+              "min": 64,
+              "unique_count": 3
+            },
+            "market_share": {
+              "count": 15,
+              "max": 34,
+              "min": 24,
+              "unique_count": 2
+            },
+            "quality": {
+              "count": 15,
+              "max": 87,
+              "min": 72,
+              "unique_count": 5
+            },
+            "workforce_trust": {
+              "count": 15,
+              "max": 60,
+              "min": 34,
+              "unique_count": 6
+            }
+          },
+          "run_count": 15,
+          "supported_run_count": 15,
+          "trajectory_count": 9,
+          "transition_count": 360
+        },
+        "normal": {
+          "action_family_counts": {
+            "commit": 71,
+            "hold": 58,
+            "invest": 81,
+            "monitor": 38,
+            "negotiate": 60,
+            "recruit": 52
+          },
+          "bottleneck_counts": {
+            "capacity_or_demand": 35,
+            "operating_loss": 81,
+            "workforce_capacity": 15
+          },
+          "final_outcome_ranges": {
+            "access": {
+              "count": 15,
+              "max": 93,
+              "min": 68,
+              "unique_count": 4
+            },
+            "cash": {
+              "count": 15,
+              "max": 251,
+              "min": -33,
+              "unique_count": 14
+            },
+            "community_trust": {
+              "count": 15,
+              "max": 69,
+              "min": 64,
+              "unique_count": 3
+            },
+            "market_share": {
+              "count": 15,
+              "max": 34,
+              "min": 24,
+              "unique_count": 2
+            },
+            "quality": {
+              "count": 15,
+              "max": 87,
+              "min": 72,
+              "unique_count": 5
+            },
+            "workforce_trust": {
+              "count": 15,
+              "max": 60,
+              "min": 34,
+              "unique_count": 6
+            }
+          },
+          "run_count": 15,
+          "supported_run_count": 15,
+          "trajectory_count": 9,
+          "transition_count": 360
+        }
+      },
+      "high_tier_action_counts_equal": true,
+      "issues": [],
+      "run_count": 60,
+      "source_code_version": "0.11.11",
+      "source_id": "all_tiers",
+      "source_path": "_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json",
+      "status": "supported",
+      "supported_run_count": 60,
+      "transition_count": 1440
+    },
+    {
+      "coordinate_count": 15,
+      "issues": [],
+      "run_count": 15,
+      "source_code_version": "0.11.9",
+      "source_id": "expert",
+      "source_path": "_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json",
+      "status": "supported",
+      "supported_run_count": 15,
+      "transition_count": 360
+    }
+  ]
+}

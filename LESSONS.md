@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Treat Difficulty Signals as Routing Evidence
+
+- Context: The v0.12.4 review compared existing all-tier and standalone Expert
+  artifacts before any difficulty tuning.
+- Symptom: Workforce-capacity bottleneck counts rose from 0 Easy to 160 Expert,
+  while Normal, Hard, and Expert scripted action counts were identical.
+- Resolution: Reported workforce capacity as a candidate visible pressure signal
+  and kept it behind a separate design gate; Expert completion remained a
+  bounded clearability proxy for named profiles and seeds.
+- Prevention: Recompute pressure from committed events/effects, preserve source
+  versions, and never translate monotonic simulated counts into causal balance,
+  winnability, or human-perceived difficulty claims.
+
 ## Compare Evidence Lanes Without Flattening Campaign Semantics
 
 - Context: The v0.12.3 Phase 7 review joined the v0.12.2 affiliation post-fix
