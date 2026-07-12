@@ -6,23 +6,17 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.6 request summary and evidence map.
-- v0.11.6 audit script, focused tests, generated JSON/diagnostics, and
-  playtest findings.
-- `SPEC.md`, `docs/roadmap.md`, design principles, and the harness team
-  specification.
+- v0.11.7 request summary and implementation plan.
+- Updated source code files: `campaign.rs`, `competitive_world.rs`, `genesis.rs`, `scenario/mod.rs`, and `ai_player.rs`.
+- `SPEC.md`, `docs/roadmap.md`, design principles, and the harness team specification.
 
 ## Findings
 
-- The slice stays within the Phase 7 evidence gate and adds no runtime behavior
-  or generalized evidence framework.
-- The audit reuses the existing v0.11.5 observation, transition, hash, debrief,
-  terminal-signal, and rival-boundary contracts.
-- Profile and difficulty comparisons are descriptive; no strategy-quality,
-  causal, dominance, or educational claim is made.
-- All 60 runs and 1,440 committed months are supported with no unexplained
-  structural gap.
-- Actor utility, social welfare, and educational evaluation remain distinct.
+- The slice stays within the Phase 7/9 difficulty depth and winnability gate, introducing expressive difficulty setting without hidden rival omniscience or punitive resource cuts.
+- The mapping from difficulty levels (Easy -> Conservative, Normal -> Moderate, Hard/Expert -> Aggressive) successfully changes the AI strategic risk-taking profile.
+- Scoring modifiers for Holds, aggressive Negotiations, and large Investments are isolated to AI scoring weight offsets and keep core transition rules untouched.
+- Cash pressure adjustments reflect institutional risk tolerance under Aggressive difficulty.
+- Backward compatibility for session serialization is preserved, and state hashes remain invariant for `Difficulty::Normal`.
 
 ## Required Fixes
 
@@ -30,17 +24,12 @@ None.
 
 ## Residual Risks
 
-- Scripted-policy traces do not establish human comprehension, learning,
-  enjoyment, balance, or winnability.
-- Response distributions do not establish causal command effects or strategy
-  quality.
-- Operating values remain visible game units rather than calibrated quantities.
+- Parameter scoring modifiers (e.g. -10 for aggressive negotiations under Conservative, or +5 under Aggressive) are stylized abstractions and do not represent calibrated human behavior or formal health system optimal strategies.
+- Winnability of Expert difficulty remains descriptive until further playtesting.
 
 ## Verification Evidence
 
-- Seven focused v0.11.6 audit tests passed.
-- Matrix audit: 60/60 runs, 1,440/1,440 traces, 1,380 prior-month matches,
-  1,440/1,440 debrief matches, 441 response opportunities, and 28 terminal
-  signals.
-- Three independent code-reviewer passes and GitHub CI remain required before
-  final merge-ready status.
+- All 292 Rust unit and integration tests passed (including the new `test_risk_postures_score_command` test).
+- All 138 Python tests passed.
+- Formatting and clippy checks pass.
+- State-hash invariance verified (seed-42 Normal hold-control hash remains unchanged).

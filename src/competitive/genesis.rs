@@ -1,7 +1,7 @@
 use crate::model::{
   AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState, Difficulty,
   HealthSystemState, PendingEffect, PlayerController, PlayerResources, PlayerSlot, PolicyCalendar,
-  PublicActionEntry, SharedMarketFields, default_competitive_ruleset,
+  PublicActionEntry, RiskPosture, SharedMarketFields, default_competitive_ruleset,
 };
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -224,11 +224,17 @@ pub fn genesis_competitive_world_with_ruleset(
     let mut resources = PlayerResources::genesis(difficulty, ruleset);
     resources.ap_budget = difficulty.cpu_ap_per_month();
     systems.push(system_from_template(system_id, rival, resources));
+    let risk_posture = match difficulty {
+      Difficulty::Easy => RiskPosture::Conservative,
+      Difficulty::Normal => RiskPosture::Moderate,
+      Difficulty::Hard | Difficulty::Expert => RiskPosture::Aggressive,
+    };
     players.push(PlayerSlot {
       system_id,
       controller: PlayerController::Ai(AiProfile {
         org_name: rival.name,
         style: rival.style,
+        risk_posture,
       }),
     });
   }

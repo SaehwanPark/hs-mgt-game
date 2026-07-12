@@ -3342,11 +3342,37 @@ reconstructing it from the diff.
     diff checks pass.
 
 
+- Feature: Difficulty Expansion
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.11.7
+
+  Summary:
+  Implement an institutionally expressive difficulty system by introducing explicit AI strategic risk postures based on active campaign difficulty, scaling AI scoring preferences and rationales while maintaining backwards compatibility and state-hash invariance.
+
+  Done:
+  - Defined the `RiskPosture` enum (`Conservative`, `Moderate`, `Aggressive`) with default `Moderate` implementation.
+  - Added `risk_posture` field to `AiProfile` and updated serialization/deserialization logic on `PlayerController` with defaults to maintain backwards-compatible saves.
+  - Dynamic mapping from `Difficulty` to `RiskPosture` (Easy -> Conservative, Normal -> Moderate, Hard/Expert -> Aggressive) configured at genesis and scenario loading.
+  - Implemented scoring modifiers and risk-posture-conditioned offsets to AI player batch computation logic for holds, aggressive negotiations, large capital investments, and cash pressure.
+  - Included active risk posture in generated AI rationale messages.
+  - Added focused unit tests verifying difficulty-driven risk-posture scoring variations.
+
+  Deferred / Non-Goals:
+  - No global difficulty balance pass, hidden rival omniscience, or punitive player AP cuts.
+  - No changes to state-hash calculation logic (state-hash invariance is preserved).
+
+  Verification:
+  - All 292 Rust tests (including new focused unit tests) and 138 Python tests pass.
+  - Formatting, clippy, and diff checks pass.
+
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
-  validation, plus the v0.11.5 operating-outcome use audit and v0.11.6
-  strategy-comparison use audit, are complete.
+  validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
+  strategy-comparison use audit, and v0.11.7 difficulty expansion, are
+  complete.
 
 ## Future
 

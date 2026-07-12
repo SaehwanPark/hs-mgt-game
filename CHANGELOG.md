@@ -4,6 +4,17 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.7] - 2026-07-12
+
+### Added
+- Added an institutionally expressive difficulty system by introducing explicit AI strategic `RiskPosture` settings (`Conservative`, `Moderate`, `Aggressive`) based on active campaign difficulty.
+- Added risk posture settings to `AiProfile` and configured dynamic mapping from `Difficulty` at genesis and scenario loading.
+- Added scoring modifiers and risk-posture-conditioned offsets to AI player batch computation logic for holds, aggressive negotiations, large capital investments, and cash pressure.
+- Added focused unit testing for difficulty-driven risk-posture scoring variations.
+
+### Changed
+- Bumped package version to `0.11.7`.
+
 ## [0.11.6] - 2026-07-12
 
 ### Added

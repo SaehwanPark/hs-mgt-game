@@ -8,7 +8,7 @@ use serde::Deserialize;
 use crate::model::{
   AiProfile, AiStyleWeights, CompetitiveRuleset, CompetitiveWorldState, Difficulty,
   HealthSystemState, INTERACTIVE_TURN_COUNT, PlayerController, PlayerResources, PlayerSlot,
-  PolicyCalendar, Ruleset, ScenarioEvent, SharedMarketFields, WorldState,
+  PolicyCalendar, RiskPosture, Ruleset, ScenarioEvent, SharedMarketFields, WorldState,
 };
 
 pub const SCENARIO_TOML_FORMAT_VERSION: &str = "scenario-toml-0.1.40";
@@ -234,9 +234,15 @@ impl Scenario {
               )));
             }
           };
+          let risk_posture = match difficulty {
+            Difficulty::Easy => RiskPosture::Conservative,
+            Difficulty::Normal => RiskPosture::Moderate,
+            Difficulty::Hard | Difficulty::Expert => RiskPosture::Aggressive,
+          };
           PlayerController::Ai(AiProfile {
             org_name: intern_string(&sys.name),
             style,
+            risk_posture,
           })
         }
         other => {

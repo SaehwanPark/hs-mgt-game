@@ -1,7 +1,7 @@
 use crate::inputs::ai_player_tie_break;
 use crate::model::{
   AiProfile, AiStyleWeights, CompetitiveCommand, CompetitiveRuleset, InvestDomain, MonitorTarget,
-  PayerId, PledgeType, RatePosture, RecruitRole, SystemMonthlyBatch,
+  PayerId, PledgeType, RatePosture, RecruitRole, RiskPosture, SystemMonthlyBatch,
 };
 use crate::sim::{AiPlayerObservation, LaggedRivalAction, validate_competitive_batch};
 
@@ -22,7 +22,10 @@ pub fn compute_ai_batch(
       if validate_competitive_batch(&batch, resources, ruleset).is_err() {
         return None;
       }
-      Some((command, score_command(&command, profile.style, observation)))
+      Some((
+        command,
+        score_command(&command, profile.style, profile.risk_posture, observation),
+      ))
     })
     .collect();
 
@@ -31,9 +34,10 @@ pub fn compute_ai_batch(
       observation.system_id,
       vec![CompetitiveCommand::Hold],
       format!(
-        "{} ({}) — no feasible candidates; holding.",
+        "{} ({}, {:?}) — no feasible candidates; holding.",
         profile.org_name,
-        profile.style.style_label()
+        profile.style.style_label(),
+        profile.risk_posture
       ),
     );
   }
@@ -46,7 +50,12 @@ pub fn compute_ai_batch(
   });
 
   let style_primary = style_primary_command(profile.style);
-  let style_score = score_command(&style_primary, profile.style, observation);
+  let style_score = score_command(
+    &style_primary,
+    profile.style,
+    profile.risk_posture,
+    observation,
+  );
   let best_score = scored[0].1;
 
   let chosen = if scored.iter().any(|(cmd, _)| *cmd == style_primary)
@@ -80,9 +89,10 @@ pub fn compute_ai_batch(
   };
 
   let rationale = format!(
-    "{} ({}) — observed: {rival_context}. Top candidate {:?} (score {best_score}); runner-up {runner_up}. Chose {:?} via satisficing/best-response.",
+    "{} ({}, {:?}) — observed: {rival_context}. Top candidate {:?} (score {best_score}); runner-up {runner_up}. Chose {:?} via satisficing/best-response.",
     profile.org_name,
     profile.style.style_label(),
+    profile.risk_posture,
     scored[0].0,
     chosen
   );
@@ -337,11 +347,26 @@ fn default_monitor_target(system_id: u32) -> MonitorTarget {
 fn score_command(
   command: &CompetitiveCommand,
   style: AiStyleWeights,
+  risk_posture: RiskPosture,
   observation: &AiPlayerObservation,
 ) -> i32 {
-  let cash_pressure = if observation.cash < 50 { -8 } else { 0 };
-  let base = match command {
-    CompetitiveCommand::Hold => (style.margin / 4) as i32,
+  let cash_pressure = if observation.cash < 50 {
+    match risk_posture {
+      RiskPosture::Moderate => -8, // Flat modifier to all commands, preserving seed-42 Normal baseline
+      _ => 0,
+    }
+  } else {
+    0
+  };
+
+  let mut base = match command {
+    CompetitiveCommand::Hold => {
+      let mut val = (style.margin / 4) as i32;
+      if let RiskPosture::Conservative = risk_posture {
+        val += 3;
+      }
+      val
+    }
     CompetitiveCommand::Invest {
       domain: InvestDomain::Beds,
       amount,
@@ -409,8 +434,18 @@ fn score_command(
       pledge_type: PledgeType::Workforce,
       level,
     } => (style.political + style.access) as i32 + (*level as i32),
-    CompetitiveCommand::Negotiate { .. } => {
-      (style.margin * 2) as i32 + observation.market.commercial_payer_pressure / 10
+    CompetitiveCommand::Negotiate { rate_posture, .. } => {
+      let mut val = (style.margin * 2) as i32 + observation.market.commercial_payer_pressure / 10;
+      match risk_posture {
+        RiskPosture::Conservative if matches!(rate_posture, RatePosture::Aggressive) => {
+          val -= 10;
+        }
+        RiskPosture::Aggressive if matches!(rate_posture, RatePosture::Aggressive) => {
+          val += 5;
+        }
+        _ => {}
+      }
+      val
     }
     CompetitiveCommand::Monitor { depth, .. } => {
       10 + (style.margin / 2) as i32
@@ -423,6 +458,43 @@ fn score_command(
     }
     CompetitiveCommand::Project { .. } => (style.growth + style.political) as i32,
   };
+
+  #[allow(clippy::collapsible_if)]
+  if let CompetitiveCommand::Invest { amount, .. } = command {
+    if *amount >= 20 {
+      match risk_posture {
+        RiskPosture::Conservative => {
+          base -= 5;
+        }
+        RiskPosture::Aggressive => {
+          base += 5;
+        }
+        _ => {}
+      }
+    }
+  }
+
+  if observation.cash < 50 {
+    match risk_posture {
+      RiskPosture::Conservative => {
+        if matches!(
+          command,
+          CompetitiveCommand::Invest { .. } | CompetitiveCommand::Recruit { .. }
+        ) {
+          base -= 8;
+        }
+      }
+      RiskPosture::Aggressive => {
+        if matches!(
+          command,
+          CompetitiveCommand::Invest { .. } | CompetitiveCommand::Recruit { .. }
+        ) {
+          base -= 4;
+        }
+      }
+      _ => {}
+    }
+  }
 
   let operating_adjustment = match command {
     CompetitiveCommand::Hold if observation.monthly_operating_margin < 0 => 12,
@@ -608,5 +680,109 @@ mod tests {
         headcount: 1,
       }
     )));
+  }
+
+  #[test]
+  fn test_risk_postures_score_command() {
+    let style = AiStyleWeights {
+      growth: 10,
+      margin: 10,
+      access: 10,
+      political: 10,
+    };
+    let mut observation = observe_for_ai(&genesis_competitive_world(Difficulty::Normal), 1);
+    observation.cash = 100;
+
+    let negotiate_aggressive = CompetitiveCommand::Negotiate {
+      payer: PayerId::CarrierA,
+      rate_posture: RatePosture::Aggressive,
+    };
+    let hold = CompetitiveCommand::Hold;
+    let invest_large = CompetitiveCommand::Invest {
+      domain: InvestDomain::Beds,
+      amount: 30,
+    };
+    let invest_small = CompetitiveCommand::Invest {
+      domain: InvestDomain::Beds,
+      amount: 10,
+    };
+
+    // Moderate Baseline
+    let base_neg = score_command(
+      &negotiate_aggressive,
+      style,
+      RiskPosture::Moderate,
+      &observation,
+    );
+    let base_hold = score_command(&hold, style, RiskPosture::Moderate, &observation);
+    let base_inv = score_command(&invest_large, style, RiskPosture::Moderate, &observation);
+
+    // Conservative
+    let cons_neg = score_command(
+      &negotiate_aggressive,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+    let cons_hold = score_command(&hold, style, RiskPosture::Conservative, &observation);
+    let cons_inv = score_command(
+      &invest_large,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+
+    assert_eq!(cons_neg, base_neg - 10);
+    assert_eq!(cons_hold, base_hold + 3);
+    assert_eq!(cons_inv, base_inv - 5);
+
+    // Aggressive
+    let agg_neg = score_command(
+      &negotiate_aggressive,
+      style,
+      RiskPosture::Aggressive,
+      &observation,
+    );
+    let agg_inv = score_command(&invest_large, style, RiskPosture::Aggressive, &observation);
+
+    assert_eq!(agg_neg, base_neg + 5);
+    assert_eq!(agg_inv, base_inv + 5);
+
+    // Cash pressure under Aggressive vs Moderate for spending command (Invest)
+    observation.cash = 40; // less than 50
+    let mod_pressure_inv = score_command(&invest_small, style, RiskPosture::Moderate, &observation);
+    let agg_pressure_inv =
+      score_command(&invest_small, style, RiskPosture::Aggressive, &observation);
+
+    // Moderate has -8 flat penalty, Aggressive has -4 selective penalty on Invest.
+    // Difference is +4 for Aggressive
+    assert_eq!(agg_pressure_inv, mod_pressure_inv + 4);
+
+    // Verify selective bias: Conservative penalizes Invest by -8 relative to Hold under low cash.
+    observation.cash = 100;
+    let cons_hold_high = score_command(&hold, style, RiskPosture::Conservative, &observation);
+    let cons_inv_high = score_command(
+      &invest_large,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+
+    observation.cash = 40;
+    let cons_hold_low = score_command(&hold, style, RiskPosture::Conservative, &observation);
+    let cons_inv_low = score_command(
+      &invest_large,
+      style,
+      RiskPosture::Conservative,
+      &observation,
+    );
+
+    // High cash diff: cons_hold_high - cons_inv_high
+    // Low cash diff: cons_hold_low - cons_inv_low
+    // Under low cash, Invest is penalized by 8, so the relative value of Hold increases by 8.
+    assert_eq!(
+      cons_hold_low - cons_inv_low,
+      cons_hold_high - cons_inv_high + 8
+    );
   }
 }

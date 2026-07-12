@@ -132,7 +132,8 @@
               "margin": 20,
               "access": 15,
               "political": 15
-            }
+            },
+            "risk_posture": "Moderate"
           }
         }
       },
@@ -146,7 +147,8 @@
               "margin": 50,
               "access": 20,
               "political": 15
-            }
+            },
+            "risk_posture": "Moderate"
           }
         }
       }
@@ -297,7 +299,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -311,7 +314,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -353,7 +357,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 122); runner-up Monitor { target: Summit, depth: 1 } (score 18). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 122); runner-up Monitor { target: Summit, depth: 1 } (score 18). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -365,7 +369,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 104); runner-up Monitor { target: Northlake, depth: 1 } (score 33). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 104); runner-up Monitor { target: Northlake, depth: 1 } (score 33). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -602,7 +606,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -616,7 +621,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -818,7 +824,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -832,7 +839,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -874,7 +882,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -886,7 +894,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 104); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 104); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -1127,7 +1135,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -1141,7 +1150,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -1348,7 +1358,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -1362,7 +1373,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -1409,7 +1421,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Recruit { role: Nurse, headcount: 2 } (score 59). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Recruit { role: Nurse, headcount: 2 } (score 59). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -1421,7 +1433,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -1662,7 +1674,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -1676,7 +1689,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -1888,7 +1902,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -1902,7 +1917,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -1954,7 +1970,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Recruit { role: Nurse, headcount: 1 } (score 58); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Recruit { role: Nurse, headcount: 1 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Recruit { role: Nurse, headcount: 1 } (score 58); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Recruit { role: Nurse, headcount: 1 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -1966,7 +1982,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 57). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -2216,7 +2232,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -2230,7 +2247,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -2447,7 +2465,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -2461,7 +2480,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -2518,7 +2538,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Recruit { role: Nurse, headcount: 2 } (score 59); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Recruit { role: Nurse, headcount: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Recruit { role: Nurse, headcount: 2 } (score 59); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Recruit { role: Nurse, headcount: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -2530,7 +2550,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -2766,7 +2786,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -2780,7 +2801,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -3002,7 +3024,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -3016,7 +3039,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -3078,7 +3102,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -3090,7 +3114,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 2 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: recruiting 2 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 56). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -3317,7 +3341,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -3331,7 +3356,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -3539,7 +3565,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -3553,7 +3580,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -3615,7 +3643,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -3627,7 +3655,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -3850,7 +3878,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -3864,7 +3893,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -4072,7 +4102,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -4086,7 +4117,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -4148,7 +4180,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -4160,7 +4192,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -4383,7 +4415,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -4397,7 +4430,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -4605,7 +4639,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -4619,7 +4654,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -4681,7 +4717,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 114); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -4693,7 +4729,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -4921,7 +4957,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -4935,7 +4972,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -5162,7 +5200,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -5176,7 +5215,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -5243,7 +5283,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Recruit { role: Admin, headcount: 1 } (score 58); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Recruit { role: Admin, headcount: 1 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Recruit { role: Admin, headcount: 1 } (score 58); runner-up Recruit { role: Nurse, headcount: 1 } (score 58). Chose Recruit { role: Admin, headcount: 1 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -5255,7 +5295,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 67). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 20 } (score 67). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -5491,7 +5531,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -5505,7 +5546,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -5737,7 +5779,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -5751,7 +5794,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -5837,7 +5881,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Recruit { role: Admin, headcount: 1 } (score 58); runner-up Recruit { role: Admin, headcount: 1 } (score 58). Chose Recruit { role: Nurse, headcount: 1 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Recruit { role: Admin, headcount: 1 } (score 58); runner-up Recruit { role: Admin, headcount: 1 } (score 58). Chose Recruit { role: Nurse, headcount: 1 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -5849,7 +5893,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Admin staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: recruiting 1 Admin staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -6081,7 +6125,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -6095,7 +6140,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -6345,7 +6391,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -6359,7 +6406,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -6436,7 +6484,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -6448,7 +6496,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 65). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: recruiting 1 Nurse staff. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 105); runner-up Invest { domain: Beds, amount: 15 } (score 65). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -6683,7 +6731,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -6697,7 +6746,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -6920,7 +6970,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -6934,7 +6985,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -7011,7 +7063,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -7023,7 +7075,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -7246,7 +7298,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -7260,7 +7313,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -7483,7 +7537,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -7497,7 +7552,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -7574,7 +7630,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -7586,7 +7642,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -7809,7 +7865,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -7823,7 +7880,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -8046,7 +8104,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -8060,7 +8119,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -8137,7 +8197,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -8149,7 +8209,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -8372,7 +8432,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -8386,7 +8447,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -8609,7 +8671,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -8623,7 +8686,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -8700,7 +8764,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -8712,7 +8776,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -8935,7 +8999,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -8949,7 +9014,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -9172,7 +9238,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -9186,7 +9253,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -9263,7 +9331,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -9275,7 +9343,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -9498,7 +9566,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -9512,7 +9581,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -9735,7 +9805,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -9749,7 +9820,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -9826,7 +9898,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -9838,7 +9910,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -10061,7 +10133,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -10075,7 +10148,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -10298,7 +10372,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -10312,7 +10387,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -10389,7 +10465,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -10401,7 +10477,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -10624,7 +10700,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -10638,7 +10715,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -10861,7 +10939,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -10875,7 +10954,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -10952,7 +11032,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 113); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Invest { domain: Beds, amount: 25 } (score 113); runner-up Monitor { target: Summit, depth: 2 } (score 22). Chose Invest { domain: Beds, amount: 25 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -10964,7 +11044,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -11192,7 +11272,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -11206,7 +11287,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -11448,7 +11530,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -11462,7 +11545,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -11544,7 +11628,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -11556,7 +11640,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Invest { domain: Beds, amount: 20 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: Northlake Health: Northlake Health: investing 25 in Beds. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Invest { domain: Beds, amount: 20 } (score 66). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -11792,7 +11876,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -11806,7 +11891,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -12034,7 +12120,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -12048,7 +12135,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -12130,7 +12218,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -12142,7 +12230,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 106); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -12374,7 +12462,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -12388,7 +12477,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -12616,7 +12706,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -12630,7 +12721,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -12712,7 +12804,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -12724,7 +12816,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 107); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 107); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -12956,7 +13048,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -12970,7 +13063,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -13198,7 +13292,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -13212,7 +13307,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
@@ -13294,7 +13390,7 @@
                 }
               }
             ],
-            "rationale": "Northlake Health (growth) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
+            "rationale": "Northlake Health (growth, Moderate) — observed: no lagged public rival moves. Top candidate Monitor { target: Summit, depth: 2 } (score 22); runner-up Monitor { target: Summit, depth: 1 } (score 20). Chose Monitor { target: Summit, depth: 2 } via satisficing/best-response."
           },
           {
             "system_id": 2,
@@ -13306,7 +13402,7 @@
                 }
               }
             ],
-            "rationale": "Summit Care (margin) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 107); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
+            "rationale": "Summit Care (margin, Moderate) — observed: no lagged public rival moves. Top candidate Negotiate { payer: CarrierA, rate_posture: Aggressive } (score 107); runner-up Monitor { target: Northlake, depth: 2 } (score 45). Chose Negotiate { payer: CarrierA, rate_posture: Aggressive } via satisficing/best-response."
           }
         ]
       },
@@ -13542,7 +13638,8 @@
                   "margin": 20,
                   "access": 15,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           },
@@ -13556,7 +13653,8 @@
                   "margin": 50,
                   "access": 20,
                   "political": 15
-                }
+                },
+                "risk_posture": "Moderate"
               }
             }
           }
