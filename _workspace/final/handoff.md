@@ -25,10 +25,13 @@
 - Working branch: `feat/regional-affiliation-design-v0.11.13`
 - PR: https://github.com/SaehwanPark/hs-mgt-game/pull/151
 - Domain QA: Pass.
-- Code review: three independent passes required after PR creation, with
-  follow-up review after any Critical/High fix.
-- CI: pending GitHub Actions completion.
-- Merge-ready: pending PR review and CI.
+- Review Pass 1: found two Medium documentation-consistency issues; fixed in
+  `d7e0d8e`.
+- Review Pass 2: no actionable findings.
+- Review Pass 3: no actionable findings.
+- Critical/High findings: none.
+- CI: GitHub Actions `check` passed.
+- Merge state: clean; merge-ready pending normal maintainer merge.
 
 ## Verification
 
@@ -39,5 +42,5 @@
   2 competitive golden tests.
 - `python3 -m unittest discover -s tests -p 'test_*.py'` passed: 163 tests.
 - `git diff --check` passed.
-- Record any review findings, fixes or accepted deferrals, PR replies, and the
-  final PR URL before declaring merge readiness.
+- No platform review comments or unresolved threads were present; the PR
+  review summary records the internal findings and their disposition.
