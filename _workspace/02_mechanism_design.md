@@ -1,104 +1,85 @@
-# Mechanism Design - Regional Affiliation Runtime v0.12.0
+# Mechanism Design - Regional Affiliation Playtest Validation v0.12.1
 
 ## Goal and Roadmap Phase
 
-Phase 7.7 expansion proposal gate, implemented as one opt-in Phase 9
-`regional-affiliation-v1` scenario without changing the current competitive
-runtime.
+Phase 7.5–7.7 validation evidence for the completed v0.12.0 affiliation
+runtime. The slice tests the existing player-facing observation, command,
+history, replay-summary, actor-response, and debrief boundaries without changing
+the transition mechanism.
 
 ## Slice Boundary
 
-- Setting: Riverside Community Health evaluates a relationship with one
-  fictional neighboring nonprofit system.
-- Runtime target: six monthly stages using existing competitive transition,
-  observation, history, replay, and debrief surfaces.
-- Primary choices: remain independent, defer while gathering information, or
-  pursue the affiliation.
-- Direct acquisition, multi-transaction portfolios, AI rivals, and a new
-  campaign engine remain outside the slice.
+- Setting: one fictional Riverside nonprofit system and one Pine Valley partner.
+- Campaign: opt-in `regional-affiliation-v1`, six monthly stages.
+- Matrix: independent, deferred, and pursuit policies × seeds 42, 43, and 44.
+- Output: one JSON capture, one deterministic audit, one diagnostics report,
+  and focused Python contract tests.
+- Excluded: runtime tuning, balance, legal forecasting, human evaluation, GUI,
+  AI-rival affiliation behavior, and generalized playtest infrastructure.
 
 ## Actors and Authority
 
-- Riverside CEO: assesses, chooses a posture, proposes commitments, submits
-  review, and chooses whether to begin early integration.
-- Partner nonprofit: accepts, rejects, or conditions the package based on its
-  own solvency, mission, continuity, autonomy, and outside options.
-- Review institution: approves, conditions, delays, or rejects; it is not
-  controlled by Riverside.
-- Labor representatives, commercial payer, and community coalition: respond to
-  commitments and perceived service or concentration risk.
+- Riverside policy controls only its staged commands.
+- Partner, review institution, labor representatives, commercial payer, and
+  community coalition responses come from explicit resolved inputs and are
+  reported as separate outcomes.
+- The audit must not treat an actor response as Riverside utility or social
+  welfare.
 
 ## State, Beliefs, and Observations
 
-Implemented affiliation-specific true state is limited to:
-
-- partner condition and fit signals;
-- affiliation status and stage;
-- community, workforce, and service-continuity commitments;
-- review status and conditions;
-- integration progress and drag; and
-- existing Riverside cash, access, quality, workforce, community, and market
-  outcomes reused from the current world model.
-
-Riverside observation may expose reported or delayed partner condition bands,
-public labor/community/payer signals, review status and uncertainty, current
-commitments, resource obligations, and available alternatives. It must not
-expose hidden partner condition, hidden actor utility, or realized outcomes
-before they occur.
+- Each captured turn stores the MCP observation and legal command hint before
+  submission.
+- Each accepted command stores a transition summary and state hash.
+- The debrief stores final status, Riverside outcome deltas, stage-level actor
+  response labels, actor rationales, and the alternatives prompt.
+- The audit compares fields present in the typed `AffiliationObservation` with
+  the MCP-rendered observation. Repeated omission of alternatives/assumptions
+  is recorded as a bounded decision-time context gap.
 
 ## Commands, Events, and Effects
 
-The future command vocabulary is staged and bounded:
-
-1. assess partner;
-2. choose independence, deferral, or affiliation pursuit;
-3. set community, workforce, and service-continuity commitments;
-4. submit the package for review; and
-5. begin or decline early integration after approval.
-
-Invalid operations include exceeding commitment authority, submitting duplicate
-review, integrating without approval, or acting after a terminal decision.
-Modeled outcomes include partner rejection, review delay, conditional approval,
-labor opposition, payer response, service disruption, and integration drag.
+- Independent: `assess`, `posture choice=independent`, then `hold`.
+- Deferred: `assess`, `posture choice=defer`, then `hold`.
+- Pursuit: `assess`, `posture choice=pursue`, maximum legal commitment,
+  `submit_review` when offered, `await_review` when offered, and
+  `integrate decision=begin` when approved.
+- Validation failures are captured separately; a complete matrix must not rely
+  on retrying an invalid command.
 
 ## Strategic Interaction
 
-The partner and Riverside negotiate a credible package. The review institution,
-labor, payer, and community actors respond from their own information and
-authority. Responses are localized to this scenario; no global equilibrium or
-general actor framework is required. Independence, deferral, and affiliation
-must each remain defensible under different observations.
+The artifact is a policy probe, not a new actor decision procedure. It records
+how the existing deterministic resolver exposes partner, review, labor, payer,
+and community responses after Riverside's bounded choices. The policy labels
+are descriptive and do not establish that any posture is optimal.
 
 ## Assumptions and Parameters
 
-- Mechanism direction is evidence-informed; all prototype numbers are game
-  abstractions until separately validated.
-- Partner, review, labor, payer, community, and integration outcomes are named
-  resolved inputs with stable stage/seed identity.
-- Regulatory outcomes are educational abstractions and must not imply legal
-  prediction.
-- Commitment cost, review timing, and integration effects are versioned numeric
-  abstractions in `regional-affiliation-ruleset-0.1.0`.
+- Seeds are fixed reproducibility inputs.
+- Maximum pursuit commitments use the existing legal range and total cap.
+- Existing ruleset numbers remain untouched.
+- Missing fields in an interface observation are treated as an evidence gap only
+  when the typed observation contract documents them.
 
 ## Educational Debrief Hooks
 
-- What did Riverside know before choosing its posture?
-- Which commitments preserved continuity or legitimacy, and what did they cost?
-- Did an unfavorable outcome reflect poor choice, hidden realization, or an
-  actor response outside Riverside's authority?
-- How did organizational outcome differ from community welfare and access?
-- What would independence or deferral have preserved?
+- Does the decision trace preserve what Riverside could see before each command?
+- Can the debrief distinguish organizational deltas from actor responses?
+- Does the player-facing observation show the alternatives and assumptions that
+  the debrief later asks the player to consider?
 
 ## Determinism and Replay Notes
 
-All uncertainty must be resolved before deterministic transition evaluation.
-Transition/history records retain the resolved affiliation inputs,
-decision-time observation, commands, events, attributed effects, and state hash.
-Later observations may revise earlier estimates but must not rewrite committed
-history. Any wire-shape change requires explicit replay and state-hash versioning.
+- The runner records only deterministic outputs from the existing MCP server.
+- It omits session identifiers and process-specific metadata from persisted
+  output.
+- State hashes, six-turn ordering, and debrief stage lines are validated for
+  every matrix coordinate.
 
 ## Open Questions
 
-- Future expansion should revisit numeric choices only with new domain or
-  playtest evidence; the current slice uses explicit Rust types, scenario
-  fields, command spelling, and versioned replay/hash compatibility.
+- The next bounded implementation may expose the omitted observation context in
+  MCP output, but that decision belongs to a separate slice after this audit.
+- The capture cannot establish human comprehension, winnability, calibration,
+  or legal plausibility.

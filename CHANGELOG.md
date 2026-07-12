@@ -4,6 +4,30 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.1] - 2026-07-12
+
+### Added
+- Added a deterministic Phase 7 MCP playtest capture for the opt-in
+  `regional-affiliation-v1` campaign across independent, deferred, and pursuit
+  policies at seeds 42, 43, and 44.
+- Added focused artifact validation for observation-before-command traces,
+  six-stage history/state-hash alignment, actor-response coverage, and debrief
+  continuity.
+- Recorded a concrete decision-time observation-context gap: the typed
+  affiliation observation exposes alternatives, assumptions, and commitments
+  that the MCP-rendered observation does not currently show.
+
+### Changed
+- Bumped package metadata to `0.12.1`.
+- Kept runtime promotion deferred for balance, ruleset, transition, and legal or
+  educational-effect claims; the finding is scoped to a later MCP observation
+  context slice.
+
+### Evidence Limits
+- The capture is deterministic simulated-policy evidence, not human-learning,
+  classroom-effectiveness, general-winnability, calibration, legal-validity, or
+  policy-forecasting evidence.
+
 ## [0.12.0] - 2026-07-12
 
 ### Added

@@ -879,6 +879,11 @@ conceptual slice for one fictional nonprofit partner. The v0.11.14 proposal was
 implemented in v0.12.0 as an opt-in six-stage `regional-affiliation-v1` scenario
 with minimum state and observation boundaries, explicit resolved inputs,
 scenario loading, replay verification, CLI/MCP commands, and debrief output.
+The v0.12.1 Phase 7 capture covers independent, deferred, and pursuit policies
+across seeds 42–44 with complete six-stage trace/debrief linkage. It identifies
+one bounded MCP observation-context gap—the typed alternatives, assumptions,
+and commitments are not rendered at decision time—while keeping transition,
+ruleset, balance, legal, and educational-effect changes deferred.
 Broader deal-market mechanics and legal forecasting remain deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
@@ -928,8 +933,10 @@ Current proposal-review candidates:
   Full deal-market simulation, private-equity rollups, and national
   consolidation strategy remain deferred.
   The v0.11.13 affiliation-first design gate, v0.11.14 runtime proposal, and
-  v0.12.0 bounded runtime implementation are complete; broader runtime breadth
-  still requires separate implementation and domain/design review.
+  v0.12.0 bounded runtime implementation are complete. The v0.12.1 Phase 7
+  capture found a narrow observation-context issue for a possible MCP follow-up;
+  broader runtime breadth still requires separate implementation and
+  domain/design review.
 - **GUI thin client:** design a graphical layer that reuses the same core,
   scenario, observation, replay, and debrief data as the CLI/MCP interfaces.
   Publicly downloadable pixel assets require license review, with CC0 sources
