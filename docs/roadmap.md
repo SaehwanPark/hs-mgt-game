@@ -859,6 +859,11 @@ matches, 1,440 exact debrief outcome matches, 441 non-terminal
 signal-to-next-command opportunities, and 28 expected terminal signals; these
 remain descriptive traceability evidence rather than causal or learning
 evidence.
+
+The v0.12.11 GUI thin-client proof demonstrates one dependency-free surface over
+existing observations, command hints, history/state hashes, and debrief output.
+It adds no GUI-only scenario behavior or hosting commitment; richer GUI work
+requires new audience-access or playtest evidence.
 The v0.11.6 strategy-comparison use audit groups the same frozen capture by
 profile, seed, and difficulty, confirms complete traceability across all 60
 runs, and identifies no structural strategy-comparison or debrief-use gap;

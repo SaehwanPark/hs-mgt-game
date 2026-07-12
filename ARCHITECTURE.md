@@ -272,6 +272,10 @@ already implemented six-stage opt-in runtime. It adds no state or transition;
 broader acquisition remains outside the current architecture boundary until a
 new evidence-backed proposal is approved.
 
+The v0.12.11 GUI proof remains an interface adapter over existing MCP-shaped
+outputs. It owns rendering only; command legality, transition evaluation,
+history, replay, and debrief semantics remain outside the browser surface.
+
 ### Scenario and Actor Design
 
 Responsible for:
