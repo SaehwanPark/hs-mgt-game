@@ -22,6 +22,9 @@ The project follows a modified semantic versioning format: `x.y.z`, where **x**,
 
 Record all user-visible changes in [`CHANGELOG.md`](../CHANGELOG.md).
 
+Before opening a pull request that changes the package version, run the
+read-only [contributor release metadata check](contributor-release-check.md).
+
 ## Ruleset Version
 
 - Ruleset versions are string identifiers on the `Ruleset` struct (e.g.

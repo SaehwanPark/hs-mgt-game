@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.13] - 2026-07-12
+
+### Added
+- Added a read-only release metadata check for the package version in
+  `Cargo.toml`, `Cargo.lock`, the README milestone, and the latest changelog
+  heading.
+- Added focused checker tests, contributor documentation, and a CI invocation
+  of `python3 scripts/check_release_metadata.py`.
+
+### Changed
+- Bumped package metadata to `0.12.13`.
+- Removed the release automation and contributor-readiness Future item after
+  adding the bounded local/CI quality check.
+
+### Evidence Limits
+- This check does not package, publish, tag, license, deploy, or validate
+  simulation behavior.
+
 ## [0.12.12] - 2026-07-12
 
 ### Added

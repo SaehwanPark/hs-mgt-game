@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Keep Release Checks Read-Only and Metadata-Scoped
+
+- Context: The final release-readiness queue item called for one lightweight
+  quality check before any packaging or publication work.
+- Symptom: A release helper can quietly expand into registry, tag, or deployment
+  automation and make local verification harder to reproduce.
+- Resolution: Added one dependency-free checker for package-version projections,
+  documented the same local command, and ran it in CI without touching runtime
+  code or external services.
+- Prevention: Keep early release checks read-only, compare only documented
+  metadata, and require a separate authorized slice for publication workflows.
+
 ## Close Breadth Only With Scope-Matched Evidence
 
 - Context: The breadth queue offered several attractive expansion directions,

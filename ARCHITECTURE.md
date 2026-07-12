@@ -282,6 +282,11 @@ no concrete unexplained gap authorizing a new strategic actor, individual
 patient model, public-payer utility model, or generalized framework. Those
 expansions remain evidence-gated.
 
+The v0.12.13 release metadata check is a repository-boundary quality check. It
+compares the package version with the lockfile, README milestone, and latest
+changelog heading, and does not enter the simulation or release-publication
+boundary.
+
 ### Scenario and Actor Design
 
 Responsible for:
