@@ -3510,6 +3510,41 @@ reconstructing it from the diff.
   - `python3 -m unittest discover -s tests -p 'test_*.py'` passed: 163 tests.
   - `git diff --check` passed.
 
+- Feature: Regional Affiliation Runtime Proposal (v0.11.14)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.11.14
+
+  Summary:
+  Define an opt-in `regional-affiliation-v1` scenario proposal that reuses
+  competitive primitives without changing the default campaign.
+
+  Done:
+  - Defined a six-stage monthly flow for partner assessment, independence or
+    deferral, affiliation commitments, institutional review, and early
+    integration.
+  - Defined minimum true-state, actor-observation, resolved-input, history,
+    replay, and debrief contracts.
+  - Added proposed ADR-0010 and synchronized roadmap, boundary, scenario,
+    architecture, evidence, QA, and final-handoff artifacts.
+  - Bumped package metadata to `0.11.14`.
+
+  Not Yet Done:
+  - A separate implementation PR must choose concrete Rust types, scenario
+    fields, command syntax, numeric ruleset bounds, and replay/hash versioning.
+
+  Deferred / Non-Goals:
+  - No runtime mechanics, commands, scenario files, schema version, replay
+    format, MCP behavior, ruleset, state-hash, acquisition, deal finance, or
+    legal forecasting changes.
+  - No new playtest, calibration, balance, human-learning, or policy-validity
+    claim.
+
+  Verification:
+  - Domain QA returned `Pass`.
+  - Existing Rust, Python, golden-trajectory, formatting, clippy, and diff
+    checks pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix

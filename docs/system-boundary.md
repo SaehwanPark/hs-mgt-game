@@ -167,8 +167,10 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal belief-state representation beyond observation snapshots.
 - Parameter ledger separating empirical ranges, design abstractions, balancing
   choices, and normative scoring.
-- Regional consolidation runtime ontology remains deferred. The v0.11.13
-  affiliation-first design gate defines the preliminary vocabulary of
-  affiliation, regulatory review, community-benefit commitment, labor response,
-  payer leverage, service continuity, and integration drag without promoting
-  those concepts into runtime state.
+- Regional consolidation runtime ontology remains deferred from the current
+  campaigns. The v0.11.14 proposal defines an opt-in `regional-affiliation-v1`
+  scenario using a localized partner actor and six staged monthly decisions.
+  It may reuse competitive transition and history primitives, but it must not
+  change `competitive-regional-v1` until a separate implementation PR is
+  approved. See ADR-0010 for the proposed state, observation, resolved-input,
+  and debrief contracts.

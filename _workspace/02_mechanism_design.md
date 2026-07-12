@@ -1,101 +1,104 @@
-# Mechanism Design - Affiliation-First Regional Consolidation v0.11.13
+# Mechanism Design - Regional Affiliation Runtime Proposal v0.11.14
 
 ## Goal and Roadmap Phase
 
-Phase 7.7 expansion proposal gate, preparing one Phase 9 regional affiliation
-design without changing the current competitive runtime.
+Phase 7.7 expansion proposal gate, preparing one Phase 9 opt-in
+`regional-affiliation-v1` scenario without changing the current competitive
+runtime.
 
 ## Slice Boundary
 
-- Setting: Riverside Community Health evaluates a loose affiliation with one
+- Setting: Riverside Community Health evaluates a relationship with one
   fictional neighboring nonprofit system.
-- Primary choice: remain independent, pursue the affiliation, or defer while
-  gathering information.
-- Sequence: partner assessment, proposed commitments, institutional review,
-  conditional outcome, and early integration consequences.
-- Acquisition is a future comparison branch, not part of the first runtime
-  design.
-- No public command names, scenario fields, numeric parameters, or Rust types
-  are introduced by this artifact.
+- Runtime target: six monthly stages using existing competitive transition,
+  observation, history, replay, and debrief surfaces.
+- Primary choices: remain independent, defer while gathering information, or
+  pursue the affiliation.
+- Direct acquisition, multi-transaction portfolios, AI rivals, and a new
+  campaign engine remain outside the slice.
 
 ## Actors and Authority
 
-- Riverside CEO: proposes the affiliation, allocates preparation resources,
-  and makes community/workforce commitments.
-- Partner nonprofit system: accepts, rejects, or conditions the proposal based
-  on solvency, mission, autonomy, service continuity, and outside options.
-- State regulator/community-review institution: may approve, condition, delay,
-  or reject the proposal; it is not controlled by Riverside.
-- Labor representatives: respond to staffing, job, wage, and integration
-  commitments.
-- Commercial payer and community coalition: respond to concentration,
-  service continuity, access, and community-benefit signals.
+- Riverside CEO: assesses, chooses a posture, proposes commitments, submits
+  review, and chooses whether to begin early integration.
+- Partner nonprofit: accepts, rejects, or conditions the package based on its
+  own solvency, mission, continuity, autonomy, and outside options.
+- Review institution: approves, conditions, delays, or rejects; it is not
+  controlled by Riverside.
+- Labor representatives, commercial payer, and community coalition: respond to
+  commitments and perceived service or concentration risk.
 
 ## State, Beliefs, and Observations
 
-Future true state may include partner capacity and solvency, workforce status,
-service continuity, payer exposure, commitment obligations, review status, and
-integration progress. Player-visible observations should expose reported
-partner condition, public community concerns, labor signals, payer posture, and
-review status with explicit uncertainty or delay. Committed history must retain
-what Riverside knew at decision time; later review findings must not rewrite it.
+Future affiliation-specific true state must be limited to:
+
+- partner condition and fit signals;
+- affiliation status and stage;
+- community, workforce, and service-continuity commitments;
+- review status and conditions;
+- integration progress and drag; and
+- existing Riverside cash, access, quality, workforce, community, and market
+  outcomes reused from the current world model.
+
+Riverside observation may expose reported or delayed partner condition bands,
+public labor/community/payer signals, review status and uncertainty, current
+commitments, resource obligations, and available alternatives. It must not
+expose hidden partner condition, hidden actor utility, or realized outcomes
+before they occur.
 
 ## Commands, Events, and Effects
 
-The design vocabulary is conceptual only:
+The future command vocabulary is staged and bounded:
 
-- assess partner;
-- propose affiliation;
-- negotiate community/workforce commitments;
-- submit for institutional review; and
-- execute staged integration after approval.
+1. assess partner;
+2. choose independence, deferral, or affiliation pursuit;
+3. set community, workforce, and service-continuity commitments;
+4. submit the package for review; and
+5. begin or decline early integration after approval.
 
-Invalid operations include acting without partner consent, submitting a
-duplicate review, or exceeding an explicitly defined commitment authority.
-Modeled outcomes include review delay, conditional approval, failed
-affiliation, labor opposition, payer response, service disruption, and
-integration drag. These are not validation errors.
+Invalid operations include exceeding commitment authority, submitting duplicate
+review, integrating without approval, or acting after a terminal decision.
+Modeled outcomes include partner rejection, review delay, conditional approval,
+labor opposition, payer response, service disruption, and integration drag.
 
 ## Strategic Interaction
 
-The partner and Riverside negotiate a credible affiliation package. The review
-institution evaluates public and competition concerns. Labor and community
-actors respond to commitments and perceived service risk. Payers and rivals may
-change leverage after the affiliation. The design must show that independence,
-affiliation, and deferral can each be defensible under different observations;
-no hidden optimal path is permitted.
+The partner and Riverside negotiate a credible package. The review institution,
+labor, payer, and community actors respond from their own information and
+authority. Responses are localized to this scenario; no global equilibrium or
+general actor framework is required. Independence, deferral, and affiliation
+must each remain defensible under different observations.
 
 ## Assumptions and Parameters
 
-- Mechanism direction is literature-grounded; prototype numbers are not.
-- Review outcomes, labor responses, payer responses, and integration shocks
-  would be named resolved inputs in a future runtime implementation.
-- Legal review is an educational abstraction and must not claim to predict a
-  real agency decision.
-- Community benefit and service continuity are distinct from Riverside's
-  financial utility.
+- Mechanism direction is evidence-informed; all prototype numbers are game
+  abstractions until separately validated.
+- Partner, review, labor, payer, community, and integration outcomes are named
+  resolved inputs with stable stage/seed identity.
+- Regulatory outcomes are educational abstractions and must not imply legal
+  prediction.
+- Commitment cost, review timing, and integration effects remain numeric
+  implementation decisions for a later PR.
 
 ## Educational Debrief Hooks
 
-- What did Riverside know before proposing the affiliation?
-- Which commitments improved continuity or legitimacy and which consumed
-  scarce capital?
-- Did an unfavorable result reflect a poor decision, a hidden realization, or
-  an institutional response outside Riverside's authority?
-- How did the organizational outcome differ from community welfare and access?
-- What would the independence or deferral counterfactual have preserved?
+- What did Riverside know before choosing its posture?
+- Which commitments preserved continuity or legitimacy, and what did they cost?
+- Did an unfavorable outcome reflect poor choice, hidden realization, or an
+  actor response outside Riverside's authority?
+- How did organizational outcome differ from community welfare and access?
+- What would independence or deferral have preserved?
 
 ## Determinism and Replay Notes
 
-No runtime transition changes are included. If promoted later, all uncertainty
-must be resolved before the deterministic transition, with stable named streams
-and append-only records for review, labor, payer, and integration outcomes.
-Actor observations must remain separate from true state and debrief output.
+All uncertainty must be resolved before deterministic transition evaluation.
+Future transition/history records must retain the resolved affiliation inputs,
+decision-time observation, commands, events, attributed effects, and state hash.
+Later observations may revise earlier estimates but must not rewrite committed
+history. Any wire-shape change requires explicit replay and state-hash versioning.
 
 ## Open Questions
 
-- Which one partner attribute set is sufficient for the first playable slice?
-- What is the minimum commitment vocabulary that preserves meaningful tradeoffs?
-- Should affiliation be a staged project or a single scenario decision?
-- Which service-continuity and distributional metrics are necessary before
-  implementation?
+- A later implementation PR must choose concrete Rust types, scenario fields,
+  command spelling, numeric ruleset bounds, and replay/hash compatibility.
+- Domain QA must approve those choices before runtime promotion.

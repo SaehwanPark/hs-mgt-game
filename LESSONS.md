@@ -1186,3 +1186,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep signal-to-command counts descriptive, preserve player/rival
   boundaries, and do not infer causality, strategy quality, or human learning
   from deterministic trace continuity.
+
+## Runtime Proposals Must Freeze the Observation Contract First
+
+- Context: Promoting the v0.11.13 affiliation design gate toward a future
+  runtime slice.
+- Symptom: A staged institutional mechanic can appear small while silently
+  expanding state, actor authority, stochastic inputs, replay, and debrief
+  surfaces.
+- Resolution: Define the opt-in scenario boundary, minimum state and
+  observations, explicit resolved-input categories, and debrief distinctions
+  before adding commands or Rust types.
+- Prevention: Keep proposal PRs separate from runtime implementation, preserve
+  the default campaign golden path, and stop when a design requires a generic
+  actor or deal-market framework.

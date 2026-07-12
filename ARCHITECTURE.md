@@ -205,6 +205,17 @@ outcomes. See `docs/expansion-proposal-review.md`.
 Last Reviewed: 2026-07-09
 Status: Verified; future advisor-market boundary documented
 
+A proposed `regional-affiliation-v1` slice is likewise kept outside the
+current competitive runtime. If approved for implementation, it should reuse
+the existing transition, observation, history, and debrief surfaces through a
+localized six-stage partner interaction. It must store affiliation-specific
+resolved inputs before transition evaluation, preserve actor-specific
+observations, and avoid introducing a generalized actor framework or changing
+the default competitive campaign. See ADR-0010.
+
+Last Reviewed: 2026-07-12
+Status: Verified; regional-affiliation proposal boundary documented
+
 ### Scenario and Actor Design
 
 Responsible for:
