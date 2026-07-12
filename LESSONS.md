@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Prove Observation-Only Changes With Immutable Transition Controls
+
+- Context: v0.12.5 identified safe typed workforce fields that were absent from
+  the competitive MCP observation.
+- Symptom: A presentation fix could appear harmless while accidentally changing
+  simulation behavior or actor-visible scope.
+- Resolution: Added only formatter lines and a boundary test, then replayed the
+  75-run/1,800-transition compatibility matrix against immutable all-tier and
+  Expert artifacts; every history and state-hash sequence matched exactly.
+- Prevention: For observation-boundary changes, count every rendered trace,
+  compare complete histories as well as hashes, and assert excluded hidden
+  markers remain absent before considering the gap closed.
+
 ## Separate Pressure Signals From Their Decision-Time Context
 
 - Context: The v0.12.4 workforce-capacity signal was visible in operating

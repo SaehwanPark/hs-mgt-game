@@ -909,6 +909,12 @@ It routes an observation-only projection follow-up with focused boundary tests
 and unchanged history/hash evidence; difficulty and balance tuning remain
 deferred.
 
+The v0.12.6 follow-up renders the safe staffing and physical-capacity fields
+from `PlayerObservation` and validates 75 complete runs with 1,800 transitions.
+All source histories and state-hash sequences match exactly, closing the
+bounded interface gap without promoting a difficulty, balance, winnability, or
+human-learning claim.
+
 ## 7.6 Educational Artifact and Debrief Review
 
 Evaluate whether the game artifacts make the intended reasoning inspectable:

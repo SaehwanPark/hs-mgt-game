@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.6] - 2026-07-12
+
+### Added
+- Added the competitive MCP `Staffing:` and `Physical capacity:` observation
+  lines from existing typed `PlayerObservation` fields.
+- Added a focused Rust boundary test and a 75-run/1,800-transition observation
+  validation artifact with exact source history and state-hash comparisons.
+- Added focused Python validation for projection coverage, hidden-field
+  exclusion, and deferred runtime promotion.
+
+### Changed
+- Bumped package metadata to `0.12.6`.
+- Closed the v0.12.5 typed-vs-rendered workforce-context gap without changing
+  transitions, commands, state hashes, replay behavior, or difficulty values.
+
+### Evidence Limits
+- The observation matrix supports an observation-only change classification;
+  it is not causal difficulty, balance, winnability, comprehension, human
+  learning, calibration, or policy-forecast evidence.
+
 ## [0.12.5] - 2026-07-12
 
 ### Added
