@@ -1,55 +1,53 @@
-# Request Summary - Current-Code Teachability Capture v0.11.12
+# Request Summary - Regional Affiliation Design Gate v0.11.13
 
 ## Scope
 
-- Continue Phase 7 validation after the merged v0.11.11 all-tier matrix.
-- Reuse the existing observation-driven Fiscal Steward, Access Expansion
-  Advocate, and First-Time Executive profiles.
-- Capture `competitive-regional-v1` at Hard difficulty for seeds 42, 43, and
-  44 through the local MCP boundary.
-- Preserve actor-visible observations, legal commands, submitted commands,
-  validation failures, retries, committed histories, state hashes, final
-  observations, and debriefs.
-- Audit action cadence, trace/hash alignment, player/rival operating-event
-  boundaries, and debrief continuity.
-- Bump the package to `0.11.12` and complete the branch, PR, and review
-  handoff.
+- Continue from the merged v0.11.12 Phase 7 teachability checkpoint.
+- Produce an affiliation-first regional consolidation design gate for one
+  fictional nonprofit health-system partnership.
+- Define partner fit, regulatory review, community-benefit commitments, payer
+  leverage, labor response, integration drag, capital access, service
+  continuity, and access/quality consequences.
+- Preserve the deterministic-core, actor-observation, append-only-history, and
+  educational-debrief boundaries for any future runtime slice.
 
 ## Non-goals
 
-- No runtime mechanics, difficulty values, AI scoring, commands, scenarios,
-  rulesets, replay formats, MCP schemas, or state-hash changes.
-- No new evidence framework, dependency, external LLM integration, or broad
-  all-tier rerun.
-- No causal strategy, balance, general winnability, human-learning,
-  cognitive-load, calibration, or policy-validity claim.
-- No runtime promotion from descriptive pacing or retry signals alone.
+- No Rust runtime mechanics, commands, scenario TOML, state fields, actor AI,
+  rulesets, replay formats, MCP schema, or state-hash changes.
+- No direct acquisition implementation; acquisition remains a bounded future
+  comparison branch after the affiliation-first design.
+- No national deal market, private-equity rollup, multi-transaction portfolio,
+  detailed transaction-finance model, calibrated antitrust forecast, or legal
+  prediction.
+- No new playtest matrix, human-learning claim, balance change, or runtime
+  promotion.
 
 ## Sources
 
-- `SPEC.md`, the Phase 7 ranked queue, and the v0.11.11 checkpoint.
-- `docs/roadmap.md`, `docs/design_principles.md`, and
-  `docs/agent-playtest-protocol.md`.
-- Historical observation-driven policies in
-  `_workspace/experiments/v0.10.50-teachability-observation-capture/`.
-- Historical pacing audit in
-  `_workspace/experiments/v0.10.52-decision-load-evidence/`.
-- Current-code all-tier baseline in
-  `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/`.
+- `README.md`, `SPEC.md`, `docs/roadmap.md`, and `docs/design_principles.md`.
+- `docs/expansion-proposal-review.md` and `docs/evidence-registry.md`.
+- `docs/system-boundary.md`, `docs/scenario-format-draft.md`, and
+  `docs/competitive-scenario-brief.md`.
+- Existing DOJ/FTC merger-guideline and HHS consolidation sources cited by
+  the expansion review; source-backed direction must remain separate from
+  gameplay abstraction.
 
 ## Expected files
 
-- `_workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/`.
-- `tests/test_phase7_current_code_teachability_capture.py`.
-- `docs/playtest-findings-v0.11.12.md`, `CHANGELOG.md`, `README.md`, `SPEC.md`,
-  `docs/roadmap.md`, `docs/mcp-playtesting-guide.md`, and `LESSONS.md`.
-- `Cargo.toml`, `Cargo.lock`, and active `_workspace` handoffs.
+- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
+  `_workspace/03_domain_qa.md`.
+- `_workspace/final/handoff.md`.
+- `docs/expansion-proposal-review.md`, `docs/roadmap.md`, `SPEC.md`,
+  `docs/system-boundary.md`, `docs/evidence-registry.md`, and `LESSONS.md`.
+- `Cargo.toml`, `Cargo.lock`, `README.md`, and `CHANGELOG.md` for the
+  PR-equivalent version bump to `0.11.13`.
 
 ## Validation target
 
-- Exactly 9 unique profile/seed coordinates and 216 committed months.
-- Every run completes 24 transitions; any rejected command or safe retry is
-  preserved rather than discarded.
-- The Normal seed-42 hold-control hash remains `61357596d8800592`.
-- Focused artifact tests, full Python/Rust suites, formatting, clippy,
-  playtest generation, JSON validation, and diff checks pass.
+- Domain QA returns `pass`.
+- The design distinguishes actor authority, observations, actor utility,
+  organizational outcomes, social welfare, and educational evaluation.
+- All legal/regulatory mechanics are explicitly stylized or unresolved unless
+  supported by the cited sources.
+- Runtime exclusion remains explicit and existing Rust/Python checks pass.

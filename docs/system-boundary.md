@@ -167,6 +167,7 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal belief-state representation beyond observation snapshots.
 - Parameter ledger separating empirical ranges, design abstractions, balancing
   choices, and normative scoring.
-- Regional consolidation vocabulary, including affiliation, acquisition,
-  regulatory review, community-benefit commitment, and integration drag, once
-  an M&A slice is promoted.
+- Regional consolidation vocabulary is now defined by the v0.11.13
+  affiliation-first design gate, including affiliation, regulatory review,
+  community-benefit commitment, labor response, payer leverage, service
+  continuity, and integration drag. Runtime consolidation remains deferred.

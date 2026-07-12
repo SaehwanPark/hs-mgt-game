@@ -1,41 +1,43 @@
-# Final Handoff - Current-Code Teachability Capture v0.11.12
+# Final Handoff - Regional Affiliation Design Gate v0.11.13
 
 ## Result
 
-- Added a current-code Phase 7 teachability and pacing capture after the
-  v0.11.11 all-tier validation.
-- Completed 9/9 Hard-difficulty runs across three profiles and seeds 42–44,
-  covering 216 committed months.
-- Preserved actor-visible observations, legal commands, submitted commands,
-  retries, histories, hashes, final observations, and debriefs.
-- Found no structural matrix, trace/hash, operating-boundary, or debrief gap.
-- Kept runtime promotion deferred.
+- Added an affiliation-first design gate for one fictional regional nonprofit
+  health-system partnership.
+- Defined partner fit, regulatory review, community benefit, labor, payer,
+  integration, capital, service continuity, access, and quality tradeoffs.
+- Preserved explicit distinctions among observations, actor utility,
+  organizational outcomes, social welfare, and educational evaluation.
+- Kept runtime consolidation work deferred pending a separate implementation
+  proposal and additional domain/design decisions.
 
 ## Version boundaries
 
-- Package: `0.11.12`
+- Package: `0.11.13`
 - Competitive ruleset: `competitive-ruleset-0.2.0`
 - Competitive state hash: `competitive-state-hash-v9`
-- Runtime mechanics, difficulty values, scoring, scenarios, replay formats,
-  MCP behavior, and state-hash logic remain unchanged.
+- Runtime mechanics, commands, scenarios, replay formats, MCP behavior, and
+  state-hash logic remain unchanged.
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/phase7-current-code-teachability-v0.11.12`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/150
-- Review Pass 1: found and fixed two Medium audit issues: malformed history
-  handling and active-streak calculation.
-- Review Pass 2: no actionable findings.
-- Review Pass 3: no actionable findings.
-- Follow-up review after fixes: no actionable findings.
-- Critical/High findings: none.
-- CI: GitHub Actions `check` passed; merge state is clean.
-- Merge-ready: yes, pending normal maintainer merge.
+- Working branch: `feat/regional-affiliation-design-v0.11.13`
+- PR: to be filled after push and PR creation.
+- Domain QA: Pass.
+- Code review: three independent passes required after PR creation, with
+  follow-up review after any Critical/High fix.
+- CI: pending GitHub Actions completion after push.
+- Merge-ready: pending PR review and CI.
 
 ## Verification
 
-- Focused artifact tests: 10 passed.
-- Current-code capture: 9/9 complete.
-- Audit: 216 committed months and 216 player operating-month records.
-- Normal seed-42 hold-control hash: `61357596d8800592`.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo test --all -- --test-threads=1` passed: 293 Rust tests.
+- `cargo test --test golden_competitive_seed42 -- --test-threads=1` passed:
+  2 competitive golden tests.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` passed: 163 tests.
+- `git diff --check` passed.
+- Record any review findings, fixes or accepted deferrals, PR replies, and the
+  final PR URL before declaring merge readiness.
