@@ -29,7 +29,7 @@ preserve.
   - `mcp/` — MCP session store, tool DTOs, and stdio server adapter
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-07-07
+Last Reviewed: 2026-07-12
 Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
@@ -218,6 +218,13 @@ unchanged. See ADR-0010.
 
 Last Reviewed: 2026-07-12
 Status: Verified; regional-affiliation runtime boundary documented
+
+The v0.12.1 Phase 7 capture also compares the typed affiliation observation to
+the MCP rendering boundary. The typed model retains alternatives, assumptions,
+and commitments, while the current MCP observation formatter does not render
+those fields. This is a bounded interface-context finding for a follow-up slice;
+it does not authorize changes to transition semantics, rulesets, or replay/hash
+contracts.
 
 ### Scenario and Actor Design
 

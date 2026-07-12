@@ -3,6 +3,21 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Audit Typed Observations Against Rendered Interfaces
+
+- Context: The v0.12.1 regional-affiliation capture compared the typed
+  `AffiliationObservation` with the MCP observation lines used by scripted
+  policies.
+- Symptom: The runtime retained alternatives, assumptions, and commitments,
+  but the player-facing MCP rendering omitted them while the debrief later
+  asked the player to compare alternatives.
+- Resolution: Recorded one structural decision-time context gap without changing
+  transitions, rulesets, or replay/hash contracts.
+- Prevention: When validating a new campaign, compare the typed observation
+  fields with every rendered CLI/MCP surface before making balance or learning
+  claims; keep omitted fields as an interface slice rather than leaking hidden
+  state into the player view.
+
 ## Keep New Campaign Contracts Separate from Competitive Golden Paths
 
 - Context: The regional affiliation slice needed new state, inputs, replay, and

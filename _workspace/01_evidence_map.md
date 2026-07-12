@@ -1,74 +1,76 @@
-# Evidence Map - Regional Affiliation Runtime Proposal v0.11.14
+# Evidence Map - Regional Affiliation Playtest Validation v0.12.1
 
 ## Scope
 
-Convert the completed v0.11.13 affiliation-first design gate into a bounded
-runtime proposal without presenting the game as a legal, financial, or policy
-forecast.
+This artifact validates the first post-runtime playtest surface for the
+opt-in `regional-affiliation-v1` scenario. It is Phase 7 evidence, not a new
+health-policy mechanism or a calibration exercise.
 
 ## Sources Reviewed
 
-- Existing DOJ/FTC merger-guideline and HHS consolidation sources cited in
-  `docs/expansion-proposal-review.md`.
-- `docs/proposal.md`, `docs/roadmap.md`, `docs/design_principles.md`,
-  `docs/system-boundary.md`, and `docs/scenario-format-draft.md`.
-- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
-  `_workspace/03_domain_qa.md` from v0.11.13 as the prior design checkpoint.
+- `SPEC.md` ranked queue and promotion rules.
+- `docs/roadmap.md` Phase 7.5–7.7 validation gates.
+- `docs/proposal.md` and `docs/design_principles.md` deterministic,
+  observation, actor-utility, social-welfare, and debrief boundaries.
+- `docs/decision-records/0010-regional-affiliation-runtime-slice.md`.
+- `src/model/affiliation.rs`, `src/inputs/resolve_affiliation.rs`,
+  `src/affiliation/`, `src/mcp/session.rs`, and `src/debrief/report.rs`.
+- The bundled `scenarios/regional-affiliation-v1.toml` fixture.
 
 ## Mechanisms and Institutions
 
-| Mechanism | Evidence status | Proposal implication |
-| --- | --- | --- |
-| Partner fit and solvency | Direction supported; values are abstractions | Expose reported partner signals while keeping true condition hidden |
-| Institutional review | Direction supported; outcome is not a legal forecast | Model approval, conditions, delay, and rejection as resolved outcomes |
-| Community benefit and continuity | Direction supported; metrics are design abstractions | Keep commitments distinct from Riverside financial utility |
-| Labor response | Direction supported; response thresholds are not calibrated | Resolve support, opposition, or disruption explicitly |
-| Payer leverage | Direction supported; post-affiliation effect is stylized | Record payer response separately from review and community response |
-| Integration drag | Mechanism direction is plausible; magnitude is uncalibrated | Use explicit delayed integration input and attributed effects |
+- One Riverside nonprofit system chooses independence, deferral, or pursuit of
+  one neighboring nonprofit affiliation.
+- Pursuit proceeds through commitments, partner response, review, actor
+  responses, and an integration decision.
+- Partner, review, labor, payer, and community outcomes are explicit resolved
+  inputs and are not controlled by the Riverside command alone.
+- The capture uses the existing MCP observation and transition summaries; it
+  does not infer unexposed true-state values.
 
 ## Actor Incentives and Information
 
-- Riverside values solvency, autonomy, access, workforce stability, and mission.
-- The partner values solvency, service continuity, mission fit, autonomy, and
-  outside options.
-- Review institutions value competition, continuity, and public commitments but
-  are not controlled by Riverside.
-- Labor, payer, and community actors respond to commitments and perceived risk
-  from their own observations rather than hidden true state.
-- Educational evaluation must remain separate from all actor utilities and
-  organizational outcome metrics.
+- The player policy uses only the MCP observation and legal command hints.
+- The typed affiliation observation contains reported partner condition,
+  commitments, alternatives, and assumptions, while the MCP formatter exposes
+  only a subset of those fields.
+- Actor response labels are read from committed transition/debrief output and
+  remain separate from Riverside cash, access, quality, workforce, community,
+  and market-share outcomes.
 
 ## Assumptions
 
-- The first runtime target is one fictional neighboring nonprofit partner.
-- The scenario is opt-in, six monthly stages, and does not modify the default
-  competitive campaign.
-- Numeric bounds, command syntax, and concrete Rust types are implementation
-  decisions for a later PR.
-- All uncertain partner, review, labor, payer, community, and integration
-  outcomes are explicit resolved inputs.
+- Seeds 42, 43, and 44 are deterministic replay coordinates, not a statistical
+  sample or calibration basis.
+- The three policies are scripted observation-driven probes: independent and
+  deferred hold after their posture choice; pursuit submits a maximum legal
+  commitment package and begins integration only when the legal surface allows.
+- A missing decision-time field is a product/evidence gap only when it is absent
+  across the captured observation matrix and the typed model makes the field
+  available; it is not evidence that the underlying mechanism is wrong.
 
 ## Unresolved Questions
 
-- Exact scenario-loader representation and command spelling remain deferred to
-  the implementation PR.
-- Numeric commitment costs, review timing, and integration effects require
-  separate gameplay and domain validation.
-- Replay and state-hash versioning must be chosen if affiliation inputs become
-  part of the competitive transition wire shape.
+- Whether displaying alternatives, assumptions, commitments, and actor response
+  context at decision time improves human comprehension is not measured here.
+- Whether the numeric commitment thresholds produce multiple defensible paths
+  is not established by this nine-run capture.
+- No legal, financial, policy, winnability, balance, or educational-effect claim
+  follows from the artifact.
 
 ## Design Implications
 
-- Prefer a localized staged interaction over a general actor or deal-market
-  framework.
-- Preserve immutable decision-time observations and append-only outcomes.
-- Require a debrief comparison among independence, deferral, and affiliation.
-- Treat all regulatory language as a stylized educational abstraction.
+- Preserve runtime promotion deferral for balance or ruleset changes.
+- Treat the repeated omission of typed observation context from the MCP
+  formatter as one bounded candidate for the next interface slice.
+- Any follow-up must add focused MCP observation tests and preserve competitive
+  golden hashes and affiliation replay determinism.
 
 ## Risks
 
-- False legal precision if review outcomes look predictive.
-- Normative opacity if affiliation is rewarded or punished by a single score.
-- Replay instability if future implementation hides stochastic responses inside
-  transition evaluation.
-- Scope expansion if the proposal becomes a full acquisition simulator.
+- The matrix is small and scripted; it can expose structural trace gaps but not
+  general player behavior.
+- Debrief text is a rendered evidence surface, so its parsing contract must stay
+  explicit and deterministic.
+- Do not convert the observation-context gap into a claim about learning or
+  require a GUI or generalized analytics layer.

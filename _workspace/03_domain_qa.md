@@ -1,4 +1,4 @@
-# Domain QA - Regional Affiliation Runtime v0.12.0
+# Domain QA - Regional Affiliation Playtest Validation v0.12.1
 
 ## Status
 
@@ -6,30 +6,31 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.12.0 request summary, evidence map, and mechanism design.
-- `src/model/affiliation.rs`, `src/inputs/resolve_affiliation.rs`,
-  `src/affiliation/`, `src/scenario/mod.rs`, and the bundled scenario fixture.
-- CLI/MCP routing, replay artifact verification, state hashing, and debrief
-  surfaces.
-- ADR-0010, `docs/expansion-proposal-review.md`, `docs/roadmap.md`, `SPEC.md`,
-  `docs/system-boundary.md`, and `docs/scenario-format-draft.md`.
-- Existing deterministic transition, observation, history, replay, and debrief
-  boundaries.
+- v0.12.1 request summary, evidence map, mechanism design, and implementation
+  plan.
+- `_workspace/experiments/v0.12.1-affiliation-playtest-validation/results.json`
+  and `diagnostics.md`.
+- `docs/playtest-findings-v0.12.1.md`, `SPEC.md`, `docs/roadmap.md`, and the
+  v0.12.0 affiliation runtime boundary.
+- `src/model/affiliation.rs`, `src/affiliation/`, `src/mcp/session.rs`, and
+  `src/debrief/report.rs`.
+- Focused artifact tests and repository verification output.
 
 ## Findings
 
-- The implementation is an opt-in six-stage scenario and does not modify the
-  default competitive campaign or its hash/golden path.
-- Partner, review, labor, payer, and community roles have distinct authority,
-  incentives, and information boundaries.
-- True state, Riverside observation, actor utility, organizational outcomes,
-  social welfare, community effects, and educational evaluation remain
-  separate.
-- Regulatory outcomes are explicitly stylized or unresolved rather than legal
-  forecasts.
-- Stochastic affiliation outcomes are explicit resolved inputs and do not enter
-  deterministic transition logic implicitly.
-- Independence, deferral, and affiliation remain multiple defensible choices.
+- The artifact stays within Phase 7 validation and does not add a new actor,
+  transition, ruleset, scenario, or platform layer.
+- The 3-profile × 3-seed matrix is exact, complete, deterministic, and uses
+  only actor-visible observations and legal command hints.
+- Observation-before-command, append-only transition summaries, state hashes,
+  and debrief stage lines remain aligned for all 54 stages.
+- Riverside outcomes are reported separately from partner, review, labor,
+  payer, and community responses.
+- The typed-vs-rendered observation mismatch is grounded in the current code and
+  is recorded as one interface-context gap rather than a balance or learning
+  claim.
+- The artifact preserves the competitive golden boundary and the affiliation
+  replay/hash boundary.
 
 ## Required Fixes
 
@@ -37,22 +38,18 @@ None.
 
 ## Residual Risks
 
-- Numeric thresholds and commitment costs are explicit game abstractions, not
-  calibrated policy or legal parameters.
-- The partner's hidden condition remains out of the Riverside observation;
-  only resolved public/report signals are exposed.
-- A rejected or delayed affiliation still advances through the fixed schedule so
-  the debrief can distinguish choice quality from actor realization.
-- The six-stage slice does not establish legal validity, calibration, gameplay
-  value, or educational learning.
-- Full acquisition/deal-market breadth, AI-rival affiliation behavior, and
-  autosave expansion remain deferred.
+- The matrix is a small scripted simulated-policy sample and cannot establish
+  human comprehension, winnability, balance, calibration, legal validity, or
+  educational effectiveness.
+- Debrief-response parsing is intentionally tied to the current rendered stage
+  line contract and should be updated if that contract changes.
+- A future MCP observation-context fix must not expose hidden partner condition,
+  actor utility, or realized outcomes before they occur.
 
 ## Verification Evidence
 
-- Canonical documentation consistency review completed.
-- Runtime boundaries reviewed against existing scenario, replay, history, and
-  debrief documents.
-- `cargo test --all -- --test-threads=1`, competitive golden tests, Python
-  tests, clippy, formatting, and `git diff --check` passed.
-- Repository verification commands are recorded in the final handoff.
+- Focused artifact tests passed: 6 tests.
+- Capture and audit passed: 9 runs, 54 stages, 0 validation failures.
+- Full Rust suite passed: 306 tests.
+- Full Python suite passed: 169 tests.
+- Formatting, clippy, competitive golden, and diff checks passed.

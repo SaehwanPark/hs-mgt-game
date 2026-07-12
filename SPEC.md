@@ -3574,16 +3574,73 @@ reconstructing it from the diff.
   Verification:
   - Rust, Python, formatting, clippy, golden, replay, MCP, and diff checks pass.
 
+- Feature: Regional Affiliation Phase 7 Playtest Validation (v0.12.1)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.1
+
+  Summary:
+  Capture deterministic MCP evidence for the opt-in affiliation runtime across
+  three observation-driven postures and seeds 42, 43, and 44.
+
+  Done:
+  - Added a 9-run capture covering independent, deferred, and pursuit policies
+    with six committed stages per run and no validation failures.
+  - Validated 54 observation-before-command entries, transition/state-hash
+    alignment, actor-response coverage, and 54 debrief stage lines.
+  - Identified one bounded decision-time context gap: typed alternatives,
+    assumptions, and commitments are not rendered by the MCP observation.
+  - Preserved runtime promotion deferral for balance, ruleset, legal, and
+    educational-effect claims.
+  - Bumped package metadata to `0.12.1`.
+
+  Not Yet Done:
+  - A follow-up interface slice must decide whether to render the omitted typed
+    observation context, add focused MCP coverage, and rerun the capture.
+
+  Deferred / Non-Goals:
+  - No transition, ruleset, balance, replay/hash, command, scenario, GUI,
+    AI-rival, legal, calibration, winnability, or human-learning changes.
+
+  Verification:
+  - 9/9 matrix runs complete; 54/54 histories, hashes, observations, and
+    debrief stage links validated.
+  - Focused artifact tests, deterministic capture, full Rust/Python suites,
+    formatting, clippy, golden, and diff checks pass.
+
 ## Present
 
-- Competitive monthly operating-outcome debrief linkage and post-fix
-  validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
-  strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
-  difficulty resource scaling, v0.11.9 Expert difficulty validation,
-  v0.11.10 Phase 7 difficulty evidence synthesis, v0.11.11 post-change
-  all-tier difficulty validation, v0.11.12 current-code teachability capture,
-  and v0.11.13 regional affiliation design gate are complete; v0.12.0 adds the
-  bounded regional affiliation runtime implementation.
+- Feature: Regional Affiliation Observation Context (v0.12.2)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.1 merge
+
+  Summary:
+  Close the v0.12.1 Phase 7 finding by deciding and implementing the smallest
+  MCP observation rendering change that exposes the typed affiliation context
+  needed before staged commands.
+
+  Done:
+  - v0.12.1 captured 9/9 complete runs across independent, deferred, and
+    pursuit policies at seeds 42, 43, and 44.
+  - The audit grounded one repeated gap in the typed-vs-rendered observation
+    boundary and kept runtime promotion deferred for balance and ruleset work.
+
+  Not Yet Done:
+  - Render the agreed alternatives, assumptions, and commitments context in
+    affiliation MCP observations without exposing hidden partner utility or
+    true state.
+  - Add focused MCP observation tests and rerun the v0.12.1 matrix/audit.
+
+  Deferred / Non-Goals:
+  - No transition semantics, thresholds, ruleset, replay/hash schema, balance,
+    GUI, AI-rival affiliation behavior, legal forecast, or human-learning
+    claim.
+
+  Verification:
+  - Required before this item moves to Past: focused MCP tests, complete Rust
+    and Python suites, unchanged competitive golden hash, deterministic replay,
+    and a rerun showing the decision-time context is present.
 
 ## Future
 
@@ -3638,10 +3695,12 @@ strategic actors, or platform architecture.
   comparison, or debrief-use issue.
 
   Next actionable slice:
-  Preserve the evidence-only posture until a new artifact identifies a concrete
-  comprehension, pacing, traceability, strategy-comparison, or debrief-use gap
-  that the current observations, history, diagnostics, and debriefs cannot
-  explain. Do not promote runtime work from the v0.10.44 synthesis alone.
+  Implement only the v0.12.2 MCP observation-context follow-up identified by the
+  v0.12.1 affiliation capture, then rerun the same audit. After that fix,
+  preserve the evidence-only posture until a new artifact identifies another
+  concrete comprehension, pacing, traceability, strategy-comparison, or
+  debrief-use gap. Do not promote balance or transition work from descriptive
+  evidence alone.
 
   Verification target:
   Findings cite campaigns, seeds, difficulty, profiles/prompts, actor-visible
