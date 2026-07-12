@@ -1,41 +1,39 @@
-# Final Handoff - Expert Difficulty Validation v0.11.9
+# Final Handoff - Phase 7 Difficulty Evidence Synthesis v0.11.10
 
 ## Result
 
-- Added a reproducible Expert difficulty validation artifact after the v0.11.7
-  risk-posture and v0.11.8 rival resource-scaling changes.
-- Ran five deterministic policy lanes across seeds 42, 43, and 44 at Expert
-  difficulty.
-- Confirmed 15/15 runs completed the full 24-month competitive campaign with
-  zero validation failures.
-- Preserved actor-visible observations, legal command hints, submitted commands,
-  validation failures, histories, state hashes, final observations, and debriefs.
-- Recorded findings in `docs/playtest-findings-v0.11.9.md` and updated MCP
-  playtesting guidance, SPEC, changelog, lessons, README, and package metadata.
+- Added a deterministic read-only synthesis of the v0.11.6 all-tier strategy
+  comparison and v0.11.9 Expert validation artifacts.
+- Validated 60 baseline runs, 15 Expert runs, and 15 overlapping profile/seed
+  coordinates without launching new sessions.
+- Preserved source-specific evidence contracts and found no structural gap.
+- Kept runtime promotion deferred.
 
 ## Evidence
 
 - Artifact:
-  `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
+  `_workspace/experiments/v0.11.10-phase7-difficulty-synthesis/results.json`
 - Diagnostics:
-  `_workspace/experiments/v0.11.9-expert-difficulty-validation/diagnostics.md`
+  `_workspace/experiments/v0.11.10-phase7-difficulty-synthesis/diagnostics.md`
+- Findings: `docs/playtest-findings-v0.11.10.md`
 - Normal seed-42 hold-control hash remains `61357596d8800592`.
-- Python tests: 142/142 passed.
-- Rust tests: `cargo test --all -- --test-threads=1` passed.
-- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`,
-  `python3 scripts/run_automated_playtests.py`, JSON validation, and diff
-  checks pass.
-- Completion is bounded simulated-policy clearability evidence only.
+- Focused synthesis tests: 5 passed.
+- Python suite: 147 passed.
+- Rust suite: 293 passed.
+- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, automated
+  playtests, JSON validation, and `git diff --check` pass.
 
 ## Version Boundaries
 
-- Package: `0.11.9`
+- Package: `0.11.10`
 - Competitive ruleset: `competitive-ruleset-0.2.0`
 - Competitive state hash: `competitive-state-hash-v9`
+- Runtime mechanics, difficulty, scoring, balance, scenarios, replay formats,
+  MCP behavior, and state-hash logic remain unchanged.
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/expert-difficulty-validation-v0.11.9`
-- Runtime mechanics, difficulty values, scoring, balance, scenario behavior,
-  replay formats, MCP schema, and state-hash logic remain unchanged.
+- Working branch: `feat/phase7-difficulty-evidence-synthesis-v0.11.10`
+- PR URL, CI result, review passes, findings, and merge-readiness status will
+  be added after the handoff loop.

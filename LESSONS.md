@@ -3,6 +3,15 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Preserve Source-Specific Evidence Contracts
+
+- Context: The v0.11.10 synthesis combined the v0.11.6 strategy audit with the
+  v0.11.9 Expert capture, which expose different trace shapes and metadata.
+- Resolution: Validated each artifact independently and summarized only shared
+  coverage facts without normalizing raw evidence into a new schema.
+- Prevention: Treat cross-artifact continuity as a source-boundary audit; do not
+  infer causal outcome comparisons or shared fields that a source does not declare.
+
 ## Revalidate Expert After Difficulty Surface Changes
 
 - Context: The v0.11.7 and v0.11.8 slices changed AI risk posture and rival
