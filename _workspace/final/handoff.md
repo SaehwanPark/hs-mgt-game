@@ -23,11 +23,15 @@
 
 - Base branch: `main`
 - Working branch: `feat/phase7-current-code-teachability-v0.11.12`
-- PR: pending implementation handoff
-- Review passes: pending
-- Critical/High findings: pending
-- CI: pending
-- Merge-ready: no, until PR and review checklist are complete
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/150
+- Review Pass 1: found and fixed two Medium audit issues: malformed history
+  handling and active-streak calculation.
+- Review Pass 2: no actionable findings.
+- Review Pass 3: no actionable findings.
+- Follow-up review after fixes: no actionable findings.
+- Critical/High findings: none.
+- CI: GitHub Actions `check` passed; merge state is clean.
+- Merge-ready: yes, pending normal maintainer merge.
 
 ## Verification
 
