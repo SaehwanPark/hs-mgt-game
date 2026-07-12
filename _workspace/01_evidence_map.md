@@ -2,68 +2,64 @@
 
 ## Scope
 
-Test whether the current post-difficulty code preserves bounded clearability,
-strategy-trace variation, operating accounting, and decision-to-debrief
-inspectability across the existing competitive all-tier matrix.
+Test whether current v0.11.12 code preserves actor-visible observation capture,
+command/retry traceability, pacing proxies, operating-event boundaries, and
+debrief continuity for three observation-driven Hard-difficulty profiles.
 
 ## Sources Reviewed
 
-- `SPEC.md`, especially the Phase 7 validation gate and ranked queue.
-- `docs/roadmap.md`, `docs/design_principles.md`, and the active agent-playtest
-  protocol.
-- The v0.11.1 five-profile all-tier runner and operating audit.
-- The v0.11.9 post-change Expert validation artifact.
-- The v0.11.10 source-contract synthesis and findings.
+- `SPEC.md`, `docs/roadmap.md`, `docs/design_principles.md`, and the active
+  agent-playtest protocol.
+- The v0.11.11 current-code all-tier validation artifact.
+- The v0.10.50 observation-driven teachability capture and v0.10.52 pacing
+  audit, reused as historical implementation patterns only.
 
 ## Mechanisms and Institutions
 
-- Difficulty changes rival count, action budgets, starting rival resources, and
-  AI risk posture through existing competitive setup and actor logic.
-- The player remains evaluated through actor-visible observations and submitted
-  commands; committed history and debriefs provide retrospective explanation.
-- Operating effects are validated through demand, treated volume, unmet demand,
-  revenue, cost, and cash-margin identities.
+- The competitive campaign, MCP boundary, rival behavior, operating loop, and
+  debrief surface are existing runtime mechanisms and remain unchanged.
+- The capture treats the human-owned observation and command trace as the
+  decision-time surface; committed history and debriefs are retrospective
+  evidence.
+- Operating events owned by rivals are excluded from player-owned evidence.
 
 ## Actor Incentives and Information
 
-- Policy profiles are deterministic simulated-player lanes, not learner types,
+- The three profiles are deterministic simulated policies, not learner types,
   validated strategy classes, or utility functions.
-- Rival actions and rationales in committed history are engine evidence; they
-  must not be treated as information the player possessed unless exposed in the
-  actor-visible observation.
-- Player and rival operating outcomes remain separate evidence boundaries.
+- Policies receive only actor-visible observations and legal command hints.
+- True history, rival rationales, and instructor-revealed information must not
+  be interpreted as information available at decision time.
 
 ## Assumptions
 
-- The five existing profiles, three seeds, four difficulty tiers, 24-month
-  campaign, ruleset, and state-hash schema remain the active validation surface.
-- The seed-42 Normal hold-control hash is the compatibility control.
-- Current-code all-tier results may differ from historical policy trajectories;
-  those differences are descriptive and not cross-version causal comparisons.
+- The current package version is `0.11.12`; ruleset and state-hash schema remain
+  `competitive-ruleset-0.2.0` and `competitive-state-hash-v9`.
+- Hard difficulty is sufficient for this focused teachability slice because the
+  v0.11.11 artifact already covers all four tiers with five strategic profiles.
+- Historical artifacts remain immutable; the new artifact launches current-code
+  sessions rather than comparing historical endpoint hashes causally.
 
 ## Unresolved Questions
 
-- Whether the tested profiles represent broad player strategy space remains
+- Whether these three profiles represent broad player strategy space remains
   unresolved.
-- Whether completion or endpoint variation establishes balance, winnability,
-  strategy quality, or causal value remains unresolved.
-- Human comprehension, classroom learning, calibration, and policy validity
+- Whether action cadence or retry counts indicate actual comprehension or
+  cognitive burden remains unresolved.
+- Human learning, classroom effectiveness, calibration, and policy validity
   require separate evidence.
 
 ## Design Implications
 
-- Reuse the existing versioned artifact shape rather than creating a generalized
-  evidence schema.
-- Keep runtime promotion deferred and route any discovered gap to a separate
-  proposal or implementation slice.
-- Report action frequencies, trajectory counts, endpoint ranges, bottlenecks,
-  and threshold candidates as diagnostic signals only.
+- Reuse the existing MCP wrapper and retry-aware capture boundary.
+- Keep structural gaps separate from descriptive retry and pacing signals.
+- Preserve runtime promotion deferral unless a later review identifies a
+  concrete unexplained player-facing, instructor-facing, or domain gap.
 
 ## Risks
 
-- A failed or partial coordinate can be hidden by aggregate summaries; the
-  validator must require exact coordinate coverage and preserve failures.
-- Hidden engine state can leak into interpretation; findings must label true
-  history separately from actor-visible decision context.
-- Reusing historical artifacts could mask post-change behavior; this slice must
-  launch current-code sessions rather than compare old endpoint hashes.
+- A generated artifact can appear clean if retries or incomplete traces are
+  dropped; the runner must retain those fields.
+- Aggregate operating events can leak rival state into player evidence; the
+  audit must count ownership explicitly.
+- Profile and seed repetition does not establish general gameplay validity.

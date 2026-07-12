@@ -702,6 +702,19 @@ python3 _workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/r
 python3 -m json.tool _workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json
 ```
 
+As of `v0.11.12`, the current-code teachability capture reruns three existing
+observation-driven profiles across seeds `42`, `43`, and `44` at Hard
+difficulty. It records actor-visible observations, legal commands, submitted
+commands, retries, histories, hashes, and debriefs, then reports action cadence
+and traceability as descriptive proxies. It does not change runtime behavior
+or establish human comprehension, learning, balance, or winnability.
+
+```bash
+python3 _workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/run_sessions.py
+python3 _workspace/experiments/v0.11.12-phase7-current-code-teachability-capture/run_audit.py
+python3 -m unittest tests/test_phase7_current_code_teachability_capture.py
+```
+
 As of `v0.10.47`, the command-to-effect explainability audit checks the same
 12 Expert traces for action-specific transition evidence and monthly `Player:`
 debrief records. It is a read-only traceability check: the complete result does

@@ -6,22 +6,21 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.11 request summary, evidence map, capture runner, and audit adapter.
-- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json`.
-- `docs/playtest-findings-v0.11.11.md`, `SPEC.md`, `docs/roadmap.md`, design
+- v0.11.12 request summary and evidence map.
+- Current-code capture runner, audit, focused tests, generated artifact, and
+  diagnostics.
+- `docs/playtest-findings-v0.11.12.md`, `SPEC.md`, `docs/roadmap.md`, design
   principles, and the harness team specification.
 
 ## Findings
 
-- The slice stays within the Phase 7 evidence-only validation gate.
-- The current-code matrix contains 60/60 complete runs and 1,440 operating
-  months with complete decision-to-debrief coverage.
-- Player-owned operating evidence remains distinct from rival operating events;
-  engine history is not presented as actor-visible decision context.
-- The artifact reports trajectories, bottlenecks, and endpoint ranges as
-  descriptive diagnostics rather than causal or balance claims.
-- Runtime promotion remains deferred because no unexplained product or domain
-  gap was identified.
+- The slice remains within the Phase 7 evidence-only validation gate.
+- The artifact contains 9/9 complete runs and 216 committed months.
+- Player-owned operating months are distinct from rival operating events.
+- Observations and submitted commands are retained separately from committed
+  history and retrospective debrief output.
+- Action counts and retry counts are labeled as descriptive proxies.
+- Runtime promotion remains deferred because no unexplained gap was identified.
 
 ## Required Fixes
 
@@ -29,16 +28,14 @@ None.
 
 ## Residual Risks
 
-- The tested profiles and three seeds do not cover all strategies, stochastic
-  conditions, or player skill levels.
-- Completion and trajectory variation are not evidence of general Expert
-  winnability, balance, educational effectiveness, or calibrated policy
-  behavior.
+- Three profiles, three seeds, and Hard difficulty do not cover all strategies,
+  stochastic conditions, or player skill levels.
+- Complete traces do not establish human comprehension, learning, balance,
+  general winnability, causal strategy value, or policy validity.
 
 ## Verification Evidence
 
-- Focused v0.11.11 artifact tests: 6 passed.
-- Current-code capture: 60/60 runs completed.
-- Audit: 1,440 operating months and 60/60 decision-to-debrief traces supported.
-- Full Python/Rust suites, formatting, clippy, automated playtests, JSON
-  validation, and diff checks pass.
+- Focused v0.11.12 artifact tests: 10 passed.
+- Current-code capture: 9/9 runs completed.
+- Audit: 216 committed months and 216 player operating-month records supported.
+- Normal seed-42 hold-control hash: `61357596d8800592`.

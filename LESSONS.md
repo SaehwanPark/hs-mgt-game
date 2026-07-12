@@ -3,6 +3,16 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Current-Code Teachability Captures Should Reuse Policy and Retry Contracts
+
+- Context: The v0.11.12 continuation needed current-code observation and pacing
+  evidence after the broader v0.11.11 all-tier matrix.
+- Resolution: Reused the historical observation-driven policy and retry-aware
+  MCP boundary while adapting only the versioned artifact and audit contract.
+- Prevention: Keep historical evidence immutable, preserve rejected-command
+  metadata, and use a focused profile/seed matrix when the active question is
+  teachability rather than difficulty breadth.
+
 ## Re-run the Full Matrix After Difficulty Changes
 
 - Context: The v0.11.9 Expert capture and v0.11.10 source synthesis did not
