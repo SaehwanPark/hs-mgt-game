@@ -31,7 +31,7 @@
 - Domain QA: Pass for the bounded observation-only scope.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208611902](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208611902).
+- CI: `check` passed in run [29208641026](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208641026).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
