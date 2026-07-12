@@ -44,6 +44,7 @@
 - Base branch: `main`
 - Working branch: `feat/competitive-strategy-comparison-use-v0.11.6`
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/144
+- CI: GitHub `check` passed — https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29180126203/job/86616126508
 - Verification: 138 Python tests, 291 Rust tests, formatting, clippy, JSON
   validation, deterministic regeneration, golden seed-42 coverage, and diff
   checks pass.
@@ -52,4 +53,5 @@
   failures and rival-result leakage was fixed in `46400d7`; no Critical or High
   findings remain. Follow-up review completed after the fix.
 - PR disposition comment: https://github.com/SaehwanPark/hs-mgt-game/pull/144#issuecomment-4949984891
-- Merge-ready: pending final GitHub CI and comment triage.
+- Merge-ready: yes; PR is open, CI passed, review findings are triaged, and no
+  unresolved Critical or High findings remain.
