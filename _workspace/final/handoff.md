@@ -25,10 +25,13 @@
 
 - Base branch: `main`
 - Working branch: `feat/gui-thin-client-v0.12.11`
-- PR: to be opened after final local verification
+- PR: [#164](https://github.com/SaehwanPark/hs-mgt-game/pull/164)
 - Domain QA: Pass for bounded thin-client scope.
-- Review passes: pending PR opening and post-open review.
-- Merge state: pending PR review and merge.
+- Review passes: three clean post-open passes covering scope, GUI contract,
+  and docs/version boundaries.
+- CI: [run #29209972202](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209972202)
+  passed.
+- Merge state: ready for merge.
 
 ## Verification
 
@@ -36,7 +39,7 @@
 - `node --check gui/app.mjs`: passed.
 - Adapter contract smoke test and local HTTP serving: passed.
 - Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
-  checks: pending final verification.
+  checks: passed before PR handoff.
 
 ## Stop condition
 
