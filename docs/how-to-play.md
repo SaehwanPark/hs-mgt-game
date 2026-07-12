@@ -9,10 +9,12 @@ run starts going badly.
 You play as a health-system leader in a fictional US market. You make strategy
 decisions under pressure from finance, workforce, policy, and competitors.
 
-Two campaigns are currently visible in the CLI:
- 
- - `stabilization-v1` (implemented): five-turn executive demo.
- - `competitive-regional-v1` (implemented): 24-month competitive campaign loop with one human system and AI rivals.
+Three campaigns are currently visible in the CLI:
+
+- `stabilization-v1`: five-turn executive demo.
+- `competitive-regional-v1`: 24-month competitive campaign with one human
+  system and AI rivals.
+- `regional-affiliation-v1`: opt-in six-stage nonprofit affiliation decision.
 
 The game is deterministic for a given seed and set of choices. A poor outcome
 can still follow a reasonable decision when uncertainty and rival behavior
@@ -29,6 +31,7 @@ interact.
 2. Choose a campaign:
    - Enter or `1` for stabilization (recommended first run).
    - `2` or `c` for competitive.
+   - `3` or `a` for regional affiliation.
 3. If you picked competitive, choose a difficulty:
    - Easy: 1 AI rival, 4 AP/month.
    - Normal: 2 AI rivals, 3 AP/month.
@@ -69,6 +72,18 @@ At run end, you get replay verification and a debrief.
  5. Repeat next month with updated conditions.
  
  Note: the 24-month campaign features full autosave/resume, scenario loading, and replay export.
+
+## Regional affiliation (`regional-affiliation-v1`)
+
+Across six stages, you assess a fictional nonprofit partner, choose an
+independence/defer/pursue posture, set community/workforce/continuity
+commitments when applicable, submit or await review, and choose an integration
+approach. The campaign keeps partner observations, assumptions, commitments,
+resolved review inputs, history, replay verification, and debrief output
+explicit.
+
+This is a bounded educational scenario, not legal, antitrust, valuation, or
+transaction advice.
 
 ## Key terminology
 

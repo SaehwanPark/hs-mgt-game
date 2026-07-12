@@ -11,9 +11,12 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.13. It is intended for
-inspection, playtesting, portfolio review, and future educational design work.
-It is not a calibrated policy forecast or a model of any real institution.
+The current public milestone is a playable Rust prototype at v0.12.14. The
+project has completed its currently promoted runtime and validation queue and is
+waiting for a concrete evidence or release need before expanding again. It is
+intended for inspection, playtesting, portfolio review, and future educational
+design work. It is not a calibrated policy forecast or a model of any real
+institution.
 
 ## What You Can Play
 
@@ -62,6 +65,7 @@ Then choose:
 
 - Enter or `1` for the stabilization campaign.
 - `2` or `c` for the competitive campaign.
+- `3` or `a` for the regional affiliation campaign.
 - Enter for the default seed, or provide a numeric seed for a different
   deterministic run.
 
@@ -168,6 +172,10 @@ python3 scripts/run_automated_playtests.py
 The codebase is intentionally CLI-first. Core simulation transitions should stay
 deterministic, with randomness resolved into explicit inputs before transition
 evaluation.
+
+A dependency-free browser thin-client proof is available in [`gui/`](gui/).
+It renders injected MCP-shaped session data and does not replace the CLI, host a
+live server, or own simulation state.
 
 ## License
 

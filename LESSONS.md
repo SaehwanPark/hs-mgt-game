@@ -1378,3 +1378,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep proposal PRs separate from runtime implementation, preserve
   the default campaign golden path, and stop when a design requires a generic
   actor or deal-market framework.
+
+## Phase Roadmaps Need an Explicit Current-State Checkpoint
+
+- Context: Aligning canonical documents after the project had advanced from
+  initial research through three playable campaigns and repeated validation.
+- Symptom: The roadmap's detailed history was current, but its final
+  “Recommended Immediate Next Steps” still directed contributors to begin
+  Phase 0–2 setup, making the canonical document contradict the repository.
+- Resolution: Added a dated roadmap-position checkpoint and replaced the stale
+  startup list with the current evidence-gated Phase 7/8 posture.
+- Prevention: Keep durable phase descriptions intact, but review the roadmap's
+  current-position and immediate-next-step sections at each documentation or
+  release-status alignment change.

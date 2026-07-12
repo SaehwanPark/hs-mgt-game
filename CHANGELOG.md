@@ -4,6 +4,21 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.14] - 2026-07-12
+
+### Changed
+- Updated the proposal, roadmap, design principles, architecture, player guide,
+  and README to reflect the three playable campaigns, GUI thin-client proof,
+  completed promoted queue, and current evidence-gated maintenance posture.
+- Replaced the roadmap's obsolete Phase 0–2 immediate steps with current
+  Phase 7/8 validation, documentation, and release-readiness priorities.
+- Bumped package and public milestone metadata to `0.12.14`.
+
+### Evidence Limits
+- This documentation alignment changes no simulation, scenario, interface,
+  balance, packaging, publication, or deployment behavior and adds no claim of
+  calibration, policy validity, human learning, or classroom effectiveness.
+
 ## [0.12.13] - 2026-07-12
 
 ### Added

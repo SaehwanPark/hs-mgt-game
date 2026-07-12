@@ -1,42 +1,33 @@
-# Final Handoff - Release Metadata Check v0.12.13
+# Final Handoff — Documentation Alignment v0.12.14
 
 ## Result
 
-- Added a read-only version-consistency check for `Cargo.toml`, `Cargo.lock`,
-  README, and the latest changelog heading.
-- Documented the local command and added the same command to GitHub Actions.
-- Added focused tests for the current repository and a deliberate mismatch.
-- No Rust runtime, scenario, replay, ruleset, or debrief behavior changed.
+Canonical, player-facing, architectural, and release-facing documents now
+describe the current three-campaign prototype, thin-client GUI proof, completed
+promoted queue, and evidence-gated Phase 7/8 posture. Package and public release
+metadata are aligned at `0.12.14`.
 
-## Version boundaries
+## Commit chunks
 
-- Package: `0.12.13`
-- Change surface: metadata checker, focused Python tests, CI command, docs, and
-  queue status
-- Publication, packaging, tag automation, registry access, and deployment:
-  out of scope
-
-## Branch and PR handoff
-
-- Base branch: `main`
-- Working branch: `feat/release-metadata-check-v0.12.13`
-- PR: [#166](https://github.com/SaehwanPark/hs-mgt-game/pull/166)
-- Domain QA: Pass for bounded contributor-readiness scope.
-- Review passes: three clean post-open passes covering scope, checker behavior,
-  and docs/version/queue boundaries.
-- CI: [run #29210513712](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29210513712)
-  passed.
-- Merge state: pending PR review and merge.
+1. Canonical status alignment: proposal, roadmap, design principles,
+   architecture, and request framing.
+2. Player/release alignment: README, how-to-play guide, SPEC, changelog,
+   package metadata, release test, lesson, QA, and handoff.
 
 ## Verification
 
-- `python3 scripts/check_release_metadata.py`: passed.
-- Focused release metadata tests: 4 passed.
-- Full Rust (308) and Python (230) suites, formatting, clippy, CLI smoke,
-  golden, and diff checks: passed.
+- Release metadata check passed at `0.12.14`.
+- Rust formatting, clippy, and full test suite passed.
+- GUI JavaScript syntax and nine focused GUI/release tests passed.
+- Documentation diff whitespace check passed.
+- Domain QA status: `pass`.
 
-## Stop condition
+## Known limits and next dependencies
 
-After this check merges, the SPEC Future queue has no remaining item. Further
-packaging, publication, licensing, deployment, or contributor workflow work
-requires a new explicitly authorized requirement.
+- No runtime, balance, scenario, interface, packaging, or deployment behavior
+  changed.
+- Calibration, policy validity, human learning, and classroom effectiveness
+  remain unclaimed.
+- A new runtime slice requires a concrete evidence-backed need; remaining
+  Phase 8 candidates are compatibility/support expectations, instructor-facing
+  guidance, and a reproducible distribution decision.

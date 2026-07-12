@@ -4012,6 +4012,21 @@ reconstructing it from the diff.
     diff checks, focused proposal tests, and deterministic artifact validation
     pass.
 
+### Project document alignment and version bump (v0.12.14)
+
+- Reconciled the canonical proposal, roadmap, design principles, architecture,
+  README, and player guide with the three implemented campaigns, the GUI
+  thin-client proof, and the evidence-gated maintenance posture.
+- Replaced obsolete roadmap startup actions with the remaining bounded Phase 8
+  gaps and the promotion gate for any future runtime work.
+- Bumped package and public milestone metadata to `0.12.14` without changing
+  simulation behavior.
+
+Verification:
+
+- Release metadata, documentation diff/link review, Rust quality checks, and
+  GUI syntax/static contract checks pass.
+
 ## Present
 
 - Feature: Evidence-gated continuation
