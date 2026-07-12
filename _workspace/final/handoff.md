@@ -27,10 +27,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/workforce-capacity-observation-v0.12.6`
-- PR: to be opened after final local verification
+- PR: [#159](https://github.com/SaehwanPark/hs-mgt-game/pull/159)
 - Domain QA: Pass for the bounded observation-only scope.
-- Review passes: pending PR opening and post-open review.
-- Merge state: pending PR review and merge.
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in run [29208611902](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208611902).
+- Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
@@ -40,7 +42,7 @@
 - Source comparison: 60/60 all-tier histories and 15/15 Expert histories match
   exactly; all state-hash sequences match exactly.
 - Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
-  checks: pending final verification.
+  checks: passed locally; the PR check also passed.
 
 ## Next dependency
 
