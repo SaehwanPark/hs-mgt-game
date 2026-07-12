@@ -43,4 +43,6 @@ None.
 - `cargo test --all -- --test-threads=1` — 291 passed.
 - `python3 -m unittest discover -s tests -p 'test_*.py'` — 121 passed.
 - JSON validation and `git diff --check` — passed.
-- Three independent code-reviewer passes and CI status remain PR gates.
+- Three independent code-reviewer passes completed; one Medium privacy-audit
+  finding was fixed and no Critical/High findings remain.
+- GitHub CI `check` passed.

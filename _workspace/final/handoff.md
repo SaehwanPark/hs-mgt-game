@@ -40,6 +40,9 @@
 - Base branch: `main`
 - Working branch: `feat/competitive-post-v0.11.3-validation-v0.11.4`
 - PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/142
-- CI: to be recorded after the PR check completes.
-- Review loop: exactly three independent `code-reviewer` passes required.
-- Merge-ready: only after CI, review findings, and PR replies are complete.
+- CI: GitHub `check` passed.
+- Review loop: three independent passes completed. Pass 1 found one Medium
+  privacy-audit issue fixed in `be299a8`; Passes 2 and 3 found no actionable
+  issues. No Critical/High findings remain.
+- PR disposition comment: https://github.com/SaehwanPark/hs-mgt-game/pull/142#issuecomment-4949843017
+- Merge-ready: yes.
