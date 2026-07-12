@@ -23,10 +23,12 @@
 
 - Base branch: `main`
 - Working branch: `feat/difficulty-queue-closure-v0.12.9`
-- PR: to be opened after final local verification
+- PR: [#162](https://github.com/SaehwanPark/hs-mgt-game/pull/162)
 - Domain QA: Pass for evidence-gated closure.
-- Review passes: pending PR opening and post-open review.
-- Merge state: pending PR review and merge.
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in run [29209425910](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209425910).
+- Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
@@ -36,7 +38,7 @@
 - Observation evidence: 75 runs/1,800 entries, exact histories/hashes, zero
   hidden markers.
 - Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
-  smoke, golden, and diff checks: pending final verification.
+  smoke, golden, and diff checks: passed locally; the PR check also passed.
 
 ## Stop condition
 
