@@ -19,6 +19,20 @@ SPEC = importlib.util.spec_from_file_location(
 RUNNER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(RUNNER)
 
+SESSION_RUNNER_PATH = (
+  ROOT
+  / "_workspace"
+  / "experiments"
+  / "v0.11.11-phase7-post-change-all-tier-validation"
+  / "run_sessions.py"
+)
+SESSION_SPEC = importlib.util.spec_from_file_location(
+  "post_change_all_tier_session_runner",
+  SESSION_RUNNER_PATH,
+)
+SESSION_RUNNER = importlib.util.module_from_spec(SESSION_SPEC)
+SESSION_SPEC.loader.exec_module(SESSION_RUNNER)
+
 
 def make_transition(turn=1, demand=24, treated=20, revenue=35, cost=34):
   unmet = demand - treated
@@ -95,9 +109,12 @@ def make_artifact():
     "batch_id": RUNNER.SOURCE.BATCH_ID,
     "code_version": RUNNER.SOURCE.CODE_VERSION,
     "campaign": RUNNER.SOURCE.CAMPAIGN,
+    "ruleset": "competitive-ruleset-0.2.0",
+    "state_hash_schema": "competitive-state-hash-v9",
     "seeds": RUNNER.SOURCE.SEEDS,
     "difficulties": RUNNER.SOURCE.DIFFICULTIES,
     "profiles": RUNNER.SOURCE.PROFILES,
+    "runtime_promotion": "deferred",
     "runs": runs,
   }
 
@@ -138,6 +155,13 @@ class PostChangeAllTierValidationTests(unittest.TestCase):
 
     self.assertEqual(audit["rival_operating_event_count"], 1)
     self.assertEqual(audit["runtime_promotion"], "deferred")
+
+  def test_capture_contract_rejects_mismatched_history_hashes(self):
+    artifact = make_artifact()
+    artifact["runs"][0]["state_hashes"][0] = "wrong-hash"
+
+    with self.assertRaises(AssertionError):
+      SESSION_RUNNER.validate_artifact(artifact)
 
   def test_rendering_is_deterministic(self):
     audit = RUNNER.build_audit(make_artifact())

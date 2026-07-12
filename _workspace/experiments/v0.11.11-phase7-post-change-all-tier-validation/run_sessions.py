@@ -141,6 +141,7 @@ def validate_artifact(artifact):
   assert artifact["seeds"] == SEEDS
   assert artifact["difficulties"] == DIFFICULTIES
   assert artifact["profiles"] == PROFILES
+  assert artifact["runtime_promotion"] == "deferred"
 
   runs = artifact["runs"]
   coordinates = [
@@ -160,8 +161,18 @@ def validate_artifact(artifact):
     assert run.get("final_observation") is not None
     assert run.get("debrief") is not None
 
-    for trace_entry in run["turn_trace"]:
+    history_hashes = [
+      transition.get("state_hash") for transition in run["history"]
+    ]
+    assert run["state_hashes"] == history_hashes
+    assert run["final_hash"] == (history_hashes[-1] if history_hashes else None)
+
+    for index, trace_entry in enumerate(run["turn_trace"]):
       assert REQUIRED_TRACE_FIELDS <= set(trace_entry)
+      latest_transition = trace_entry["latest_transition"]
+      if latest_transition is not None:
+        assert index < len(history_hashes)
+        assert latest_transition.get("state_hash") == history_hashes[index]
 
     if run["completion_status"] == "complete":
       assert run["transition_count"] == EXPECTED_TRANSITIONS
