@@ -4,6 +4,18 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.6] - 2026-07-12
+
+### Added
+- Added a deterministic read-only strategy-comparison use audit over the
+  frozen v0.11.4 competitive capture.
+
+### Changed
+- Recorded profile and difficulty trajectory summaries while preserving the
+  runtime, MCP, replay, ruleset, state-hash, balance, and difficulty
+  boundaries.
+- Bumped the package to `0.11.6`.
+
 ## [0.11.5] - 2026-07-12
 
 ### Added

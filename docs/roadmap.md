@@ -859,6 +859,10 @@ matches, 1,440 exact debrief outcome matches, 441 non-terminal
 signal-to-next-command opportunities, and 28 expected terminal signals; these
 remain descriptive traceability evidence rather than causal or learning
 evidence.
+The v0.11.6 strategy-comparison use audit groups the same frozen capture by
+profile, seed, and difficulty, confirms complete traceability across all 60
+runs, and identifies no structural strategy-comparison or debrief-use gap;
+runtime promotion remains deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
 

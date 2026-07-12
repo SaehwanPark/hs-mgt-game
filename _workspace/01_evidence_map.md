@@ -2,57 +2,52 @@
 
 ## Scope
 
-Audit the existing v0.11.4 competitive capture for operating-outcome
-visibility, temporal observation alignment, next-command trace continuity, and
-player-owned debrief linkage.
+Audit whether the latest frozen competitive evidence supports descriptive
+strategy comparison by profile, seed, and difficulty while preserving the
+existing operating-outcome observation, transition, hash, and debrief links.
 
 ## Sources Reviewed
 
+- `SPEC.md`, the v0.11.5 baseline, and the ranked teachability queue.
 - `docs/roadmap.md`, Phase 7 validation and educational artifact gates.
-- `SPEC.md`, the v0.11.4 baseline and ranked teachability queue.
 - `docs/design_principles.md`, especially deterministic replay, observation
   boundaries, inspectable causality, and evidence limits.
 - `_workspace/experiments/v0.11.4-operating-outcome-debrief-validation/capture.json`.
-- The v0.11.4 audit parser and focused contract tests.
+- The v0.11.5 operating-outcome audit parser and focused contract tests.
 
-## Mechanisms and Institutions
+## Evidence-backed facts
 
-The audit does not add or tune a health-policy mechanism. Its signal categories
-reuse the existing operating-loop diagnostic labels: capacity/demand,
-operating loss, and workforce capacity.
+- The source matrix has five profiles, three seeds, four difficulty tiers, and
+  60 complete runs.
+- The source contains 1,440 committed months, 1,380 prior-month observation
+  matches, 1,440 exact player-owned debrief matches, 441 response opportunities,
+  and 28 terminal signals.
+- Existing source-specific parsing already distinguishes terminal signals,
+  rival-owned operating results, and player-owned monthly outcomes.
 
-## Actor Incentives and Information
+## Design abstraction
 
-The player command is linked only to the player-visible prior-month observation.
-Rival-owned operating values remain a regression signal and are never counted
-as player evidence.
+Normalized command families and profile summaries are descriptive groupings for
+inspection. They are not validated strategy classes, utility functions, or
+causal estimators.
 
-## Assumptions
+## Assumptions and boundaries
 
 - The v0.11.4 capture is authoritative and remains deterministic.
-- A month-two observation describes the committed month-one result; it must not
-  be compared with the current month transition.
-- A final-month signal has no later command and is therefore a terminal signal,
-  not a missing response.
+- A prior-month signal is compared with the following submitted command.
+- A final-month signal has no later command and is terminal, not missing.
+- Rival operating values remain outside player evidence.
 
-## Unresolved Questions
+## Routing result
 
-- Whether a person finds the operating-result surface clear remains untested.
+The audit must record a concrete structural gap when evidence is incomplete. If
+all contracts pass, record no unexplained gap and keep runtime promotion
+deferred.
+
+## Unresolved questions
+
+- Whether a person finds the strategy/debrief surface clear remains untested.
 - Whether any response distribution reflects good strategy or causal effect
   remains unresolved.
 - Human learning, classroom use, calibration, and policy validity require
   separate evidence.
-
-## Design Implications
-
-- Keep the audit read-only and source-specific.
-- Preserve exact observation, command, transition, hash, and debrief fields.
-- Route runtime promotion only from a concrete unexplained product or domain
-  gap.
-
-## Risks
-
-- Deterministic scripted policies are not human players.
-- Signal-to-command counts can be overinterpreted as causal response evidence.
-- Visible integer game units must not be presented as calibrated financial or
-  clinical quantities.

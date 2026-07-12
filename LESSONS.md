@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Compare Strategy Traces Across the Latest Frozen Matrix
+
+- Context: The v0.11.6 continuation needed to test whether the v0.11.5
+  operating-outcome evidence supported profile-level strategy comparison.
+- Resolution: Reused the latest frozen v0.11.4 capture, composed the existing
+  observation/debrief contract, and grouped traces by profile, seed, and
+  difficulty without launching new sessions or changing runtime behavior.
+- Prevention: Treat trajectory and signal-response differences as descriptive
+  evidence only; require a concrete unexplained product or domain gap before
+  promoting runtime work.
+
 ## Re-run Evidence After a Debrief Surface Fix
 
 - Context: The v0.11.2 audit identified 469 operating signal-months with no

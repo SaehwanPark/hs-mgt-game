@@ -3305,10 +3305,48 @@ reconstructing it from the diff.
     diff checks pass.
 
 
+- Feature: Strategy-Comparison Use Audit
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.11.6
+
+  Summary:
+  Grouped the frozen v0.11.4 competitive capture by profile, seed, and
+  difficulty to test whether the existing operating-outcome evidence supports
+  descriptive strategy comparison without weakening observation or debrief
+  boundaries.
+
+  Done:
+  - Reused the frozen capture without launching new sessions or changing
+    runtime behavior.
+  - Confirmed 60 complete runs, 1,440 committed months, 1,380 prior-month
+    observation matches, 1,440 exact debrief outcome matches, 441 response
+    opportunities, and 28 terminal signals.
+  - Reported profile and difficulty trajectory summaries, action-family
+    coverage, hold rates, and signal-to-command counts.
+  - Identified no structural strategy-comparison, traceability, or debrief-use
+    gap.
+
+  Not Yet Done:
+  - No human comprehension, classroom, causal, balance, winnability,
+    calibration, or policy-validity evaluation has been performed.
+
+  Deferred / Non-Goals:
+  - No runtime, MCP, scenario, replay, ruleset, state-hash, balance, difficulty,
+    scoring, or debrief wording change.
+  - No strategy-quality, dominance, causal, learning, or general-balance claim.
+
+  Verification:
+  - Seven focused audit tests, full Python/Rust suites, formatting, clippy,
+    JSON validation, deterministic regeneration, golden seed-42 coverage, and
+    diff checks pass.
+
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
-  validation, plus the v0.11.5 operating-outcome use audit, are complete.
+  validation, plus the v0.11.5 operating-outcome use audit and v0.11.6
+  strategy-comparison use audit, are complete.
 
 ## Future
 
