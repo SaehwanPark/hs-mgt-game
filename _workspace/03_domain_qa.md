@@ -1,20 +1,20 @@
-# Domain QA — Affiliation Queue Closure v0.12.10
+# Domain QA — GUI Thin-Client Proof v0.12.11
 
 ## Decision
 
-Pass for queue synchronization.
+Pass for a bounded interface proof.
 
 ## Checks
 
-- The fictional affiliation abstraction does not imply legal or antitrust
-  prediction.
-- Partner, review, labor, payer, community, and integration responses remain
-  distinct.
-- Organizational outcomes, actor utility, and social welfare remain separate.
-- The default competitive campaign remains isolated.
-- Broader acquisition and consolidation are explicitly deferred.
+- The surface exposes actor-visible information without inventing hidden state.
+- Legal commands are presented as server-provided hints; client submission does
+  not claim local rule authority.
+- History/state hashes and debrief output remain inspectable.
+- No external assets, network behavior, or GUI-only policy semantics are added.
+- The visual-browser check is explicitly limited by the unavailable in-app
+  browser backend; no human usability claim is made.
 
 ## Reopening condition
 
-Require concrete evidence of a boundary or educational gap before expanding the
-affiliation runtime.
+Require a concrete audience-access, playtest, or review finding before adding
+hosting, richer interaction, or production GUI behavior.

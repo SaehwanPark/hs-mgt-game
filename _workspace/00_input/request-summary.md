@@ -1,17 +1,17 @@
-# Request Summary — Affiliation Queue Closure v0.12.10
+# Request Summary — GUI Thin-Client Proof v0.12.11
 
 ## Decision
 
-Remove the affiliation/acquisition Future queue item because the existing
-opt-in runtime and v0.12.7 proposal already satisfy its minimum contract.
+Implement one small browser surface over existing MCP-shaped outputs and close
+the GUI Future item without changing simulation ownership.
 
 ## Target slice
 
-- Validate six state/observation/input/transition/history/debrief contracts.
-- Preserve 9-run/54-stage evidence and source-version limits.
-- Record deferred broader acquisition scope and reopening condition.
+- Render observations, legal command hints, history/state hashes, and debrief.
+- Delegate submission and legality to an injected MCP adapter.
+- Audit assets and verify the static surface locally.
 
 ## Explicit non-goals
 
-No new affiliation mechanic, acquisition simulator, deal finance, legal
-forecast, generic actor framework, or competitive-campaign change.
+No duplicated simulation state, parser, transition logic, network service,
+hosting, authentication, GUI-only scenario behavior, or CLI/MCP replacement.

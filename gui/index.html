@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A thin client for actor-visible Health Policy Strategy Game sessions."
+    />
+    <title>Health Policy Strategy Game — Session Console</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17232d;
+        --muted: #60707b;
+        --paper: #f7f9f8;
+        --panel: #ffffff;
+        --line: #d9e3e1;
+        --teal: #0b6e69;
+        --teal-soft: #e5f3f0;
+        --orange: #c96b31;
+        --shadow: 0 18px 50px rgb(28 55 60 / 10%);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: radial-gradient(circle at top right, #e5f3ef 0, var(--paper) 38rem);
+        color: var(--ink);
+        font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif;
+      }
+
+      header, main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+
+      header { padding: 3.5rem 0 2rem; }
+
+      .eyebrow {
+        color: var(--teal);
+        font-size: .78rem;
+        font-weight: 800;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+      }
+
+      h1, h2, p { margin-top: 0; }
+      h1 { max-width: 760px; font-size: clamp(2.2rem, 6vw, 4.8rem); line-height: .98; margin-bottom: 1rem; }
+      h2 { font-size: 1.08rem; margin-bottom: .8rem; }
+      .lede { color: var(--muted); max-width: 680px; font-size: 1.05rem; }
+
+      .status {
+        align-items: center;
+        background: var(--teal-soft);
+        border: 1px solid #b9dfd8;
+        border-radius: 999px;
+        color: var(--teal);
+        display: inline-flex;
+        font-size: .85rem;
+        font-weight: 700;
+        gap: .5rem;
+        padding: .45rem .8rem;
+      }
+
+      .status::before { background: #36a79c; border-radius: 50%; content: ""; height: .55rem; width: .55rem; }
+
+      .layout { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .85fr); padding-bottom: 4rem; }
+      .panel { background: rgb(255 255 255 / 88%); border: 1px solid var(--line); border-radius: 1.25rem; box-shadow: var(--shadow); padding: 1.25rem; }
+      .panel-wide { grid-column: 1 / -1; }
+
+      .panel-heading { align-items: baseline; display: flex; justify-content: space-between; gap: 1rem; }
+      .panel-heading span { color: var(--muted); font-size: .8rem; }
+
+      .observation { display: grid; gap: .5rem; }
+      .observation p, .history-item, .debrief li { background: #f2f7f6; border-radius: .7rem; margin: 0; padding: .7rem .85rem; }
+      .observation p:first-child { background: var(--teal-soft); color: #075952; font-weight: 750; }
+
+      .commands { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
+      .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .86rem; padding: .4rem .65rem; }
+      .empty { color: var(--muted); font-style: italic; }
+
+      form { display: flex; gap: .6rem; margin-top: 1rem; }
+      input { background: var(--panel); border: 1px solid #b9cbc8; border-radius: .65rem; color: var(--ink); flex: 1; font: inherit; min-width: 0; padding: .75rem .85rem; }
+      button { background: var(--teal); border: 0; border-radius: .65rem; color: white; cursor: pointer; font: inherit; font-weight: 750; padding: .75rem 1rem; }
+      button:hover { background: #075952; }
+      .command-status { color: var(--muted); font-size: .85rem; margin: .65rem 0 0; min-height: 1.3em; }
+
+      .history, .debrief { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
+      .history-item { display: grid; gap: .15rem; grid-template-columns: 5rem 1fr; }
+      .history-item strong { color: var(--teal); }
+      .hash { color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; font-size: .78rem; grid-column: 2; overflow-wrap: anywhere; }
+
+      footer { color: var(--muted); font-size: .82rem; padding: 0 0 2rem; }
+
+      @media (max-width: 760px) {
+        header { padding-top: 2.25rem; }
+        .layout { grid-template-columns: 1fr; }
+        .panel-wide { grid-column: auto; }
+        form { flex-direction: column; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="eyebrow">Actor-visible session console</div>
+      <h1>Make the decision surface inspectable.</h1>
+      <p class="lede">
+        A small client for observations, legal command hints, committed history,
+        and debrief output. Simulation state and command legality remain on the
+        MCP adapter behind this page.
+      </p>
+      <div class="status" id="session-status" role="status">Demo envelope loaded</div>
+    </header>
+
+    <main class="layout" aria-live="polite">
+      <section class="panel" aria-labelledby="observation-heading">
+        <div class="panel-heading">
+          <h2 id="observation-heading">Current observation</h2>
+          <span id="session-meta">—</span>
+        </div>
+        <div class="observation" id="observation-list"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="commands-heading">
+        <div class="panel-heading">
+          <h2 id="commands-heading">Legal command surface</h2>
+          <span>server-authoritative</span>
+        </div>
+        <ul class="commands" id="legal-command-list"></ul>
+        <form id="command-form">
+          <label class="sr-only" for="command-input">Command</label>
+          <input id="command-input" autocomplete="off" placeholder="Type a command to submit" />
+          <button type="submit">Submit</button>
+        </form>
+        <p class="command-status" id="command-status"></p>
+      </section>
+
+      <section class="panel panel-wide" aria-labelledby="history-heading">
+        <div class="panel-heading">
+          <h2 id="history-heading">Committed history</h2>
+          <span>replay/state-hash output</span>
+        </div>
+        <ol class="history" id="history-list"></ol>
+      </section>
+
+      <section class="panel panel-wide" aria-labelledby="debrief-heading">
+        <div class="panel-heading">
+          <h2 id="debrief-heading">Debrief</h2>
+          <span>retrospective, not a score-only view</span>
+        </div>
+        <ul class="debrief" id="debrief-list"></ul>
+      </section>
+    </main>
+
+    <footer>
+      Thin-client proof: HTML/CSS/JavaScript only. No external assets, fonts,
+      network calls, or duplicate simulation state are bundled.
+    </footer>
+    <script type="module" src="./app.mjs"></script>
+  </body>
+</html>

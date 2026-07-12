@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Keep GUI Proofs Thin and Adapter-Owned
+
+- Context: The GUI Future item called for one surface consuming existing game
+  outputs without weakening core inspectability.
+- Symptom: A browser prototype could accidentally duplicate command parsing,
+  transitions, hidden state, or external asset/network assumptions.
+- Resolution: Implemented rendering plus an injected `submitTurn` adapter,
+  empty-input checking only, no external assets, and static contract tests; the
+  unavailable browser backend was recorded as a verification limit.
+- Prevention: Keep GUI state presentation-only, make the server authoritative,
+  audit assets/network calls, and separate visual verification limits from user
+  usability claims.
+
 ## Synchronize Queue Text With Completed Runtime Proposals
 
 - Context: The v0.12.7 affiliation proposal was complete, but the related

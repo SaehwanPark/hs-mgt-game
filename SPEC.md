@@ -3884,6 +3884,36 @@ reconstructing it from the diff.
   - 308 Rust tests, 214 Python tests, formatting, clippy, CLI smoke, golden,
     diff checks, focused closure tests, and deterministic audit validation pass.
 
+- Feature: GUI Thin-Client Proof (v0.12.11)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.11
+
+  Summary:
+  Prototype one dependency-free browser surface over existing MCP-shaped
+  observation, command-hint, history/replay, and debrief outputs.
+
+  Done:
+  - Added `gui/index.html`, `gui/app.mjs`, and an adapter contract that keeps
+    command legality and transitions server/core-owned.
+  - Added static contract tests, JavaScript syntax validation, local HTTP
+    serving verification, and a zero-external-asset/network audit.
+  - Removed the GUI thin-client item from the Future queue while preserving
+    hosting, richer interaction, and production usability as gated work.
+  - Recorded the unavailable in-app browser backend as a visual-QA limitation
+    without making a visual usability claim.
+  - Bumped package metadata to `0.12.11`.
+
+  Deferred / Non-Goals:
+  - No simulation state, parser, transition, network service, authentication,
+    hosting, GUI-only scenario behavior, downloaded assets, or CLI/MCP change.
+
+  Verification:
+  - Static GUI tests, JavaScript syntax, adapter smoke, and local HTTP serving
+    pass; no external assets or network calls are bundled.
+  - 308 Rust tests, 219 Python tests, formatting, clippy, CLI smoke, golden,
+    and diff checks pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3988,27 +4018,7 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: GUI thin-client proof
-  Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
-  review evidence shows a graphical surface would improve usability without
-  weakening core inspectability.
-
-  Next actionable slice:
-  Prototype one GUI surface that consumes existing observations, command
-  validation, history/replay, and debrief outputs. Complete an asset-license
-  audit before distributing any downloaded pixel assets.
-
-  Verification target:
-  GUI work preserves CLI/MCP behavior, does not duplicate simulation state, and
-  keeps rendering, input, assets, layout, and packaging outside the deterministic
-  core. Asset manifests record source and license before distribution.
-
-  Deferred / Non-Goals:
-  No GUI-only scenario behavior, runtime semantics fork, release packaging
-  commitment, non-audited assets, replacement of CLI/MCP, HTTP multiplayer,
-  auth, or durable session persistence.
-
-2. Track: Broader simulation breadth and strategic actors
+1. Track: Broader simulation breadth and strategic actors
   Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
   domain-review evidence shows current campaign limits block meaningful strategy
   or learning.
@@ -4037,7 +4047,7 @@ strategic actors, or platform architecture.
   global equilibrium AI, speculative generalized frameworks, and broad
   scenario-authoring infrastructure.
 
-3. Track: Release automation and contributor readiness
+2. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 

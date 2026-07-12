@@ -4,6 +4,23 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.11] - 2026-07-12
+
+### Added
+- Added a dependency-free GUI thin-client proof rendering existing observation,
+  legal-command, history/state-hash, and debrief outputs.
+- Added an injected adapter boundary, static GUI contract tests, JavaScript
+  syntax verification, and a zero-external-asset audit.
+
+### Changed
+- Bumped package metadata to `0.12.11`.
+- Removed the GUI thin-client Future item without changing Rust runtime, CLI,
+  MCP, transition, or replay behavior.
+
+### Evidence Limits
+- The surface is a thin-client proof, not production hosting, accessibility
+  certification, human usability evidence, or a measured learning effect.
+
 ## [0.12.10] - 2026-07-12
 
 ### Added

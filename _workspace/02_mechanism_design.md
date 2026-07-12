@@ -1,13 +1,13 @@
-# Mechanism Design — Affiliation Queue Closure v0.12.10
+# Mechanism Design — GUI Thin-Client Proof v0.12.11
 
-This slice adds no mechanism. It synchronizes the queue with the existing
-six-stage opt-in affiliation boundary and preserves:
+The GUI is an interface adapter, not a simulation layer:
 
-1. typed true state;
-2. actor-visible observations and alternatives;
-3. explicit resolved stochastic inputs;
-4. deterministic transition and hash evaluation;
-5. append-only history/replay; and
-6. utility/welfare-aware debriefing.
+1. `renderEnvelope` consumes existing observation/history/debrief fields;
+2. `validateCommand` checks only empty input and displays server-authoritative
+   command hints;
+3. `createThinClient` calls an injected `submitTurn` adapter;
+4. the returned envelope replaces the current display; and
+5. no local state transition or parser exists.
 
-Broader acquisition remains gated by new evidence.
+The demo envelope is explicitly display fixture data. Production wiring remains
+an adapter integration decision outside this proof.

@@ -1,11 +1,12 @@
-# Evidence Map — Affiliation Queue Closure v0.12.10
+# Evidence Map — GUI Thin-Client Proof v0.12.11
 
-| Requirement | Authority | Result |
-| --- | --- | --- |
-| Minimum contracts | v0.12.7 proposal artifact | 6 supported |
-| Runtime implementation | ADR-0010 and source markers | Existing opt-in runtime |
-| Observation/debrief evidence | v0.12.2 artifact | 9 runs, 54 stages, 54 observations |
-| Default campaign isolation | ADR/system boundary | `competitive-regional-v1` unchanged |
-| Broader scope | proposal limits | Deferred |
+| Requirement | Authority | Result | Limit |
+| --- | --- | --- | --- |
+| Existing output contract | `gui/app.mjs` + MCP envelope fields | observation, legal commands, history, debrief rendered | Demo envelope is fixture data. |
+| Server authority | adapter boundary and submit smoke test | legality/submission delegated | No live adapter in static proof. |
+| No duplicated state | static source audit | no transition/parser/network code | Not a production security audit. |
+| Asset license | `gui/README.md` and source scan | zero external assets | No downloaded asset review needed. |
+| Local accessibility of surface | local HTTP server | both files served | Browser backend unavailable for visual QA. |
 
-No new runtime gap was identified.
+Conclusion: thin-client proof is supported; production GUI promotion remains
+out of scope.
