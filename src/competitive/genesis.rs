@@ -223,6 +223,24 @@ pub fn genesis_competitive_world_with_ruleset(
     let system_id = (index + 1) as u32;
     let mut resources = PlayerResources::genesis(difficulty, ruleset);
     resources.ap_budget = difficulty.cpu_ap_per_month();
+    match difficulty {
+      Difficulty::Easy => {
+        resources.cash = 40;
+        resources.political_capital = 5;
+      }
+      Difficulty::Normal => {
+        resources.cash = 60;
+        resources.political_capital = 8;
+      }
+      Difficulty::Hard => {
+        resources.cash = 80;
+        resources.political_capital = 12;
+      }
+      Difficulty::Expert => {
+        resources.cash = 100;
+        resources.political_capital = 15;
+      }
+    }
     systems.push(system_from_template(system_id, rival, resources));
     let risk_posture = match difficulty {
       Difficulty::Easy => RiskPosture::Conservative,

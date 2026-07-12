@@ -3367,12 +3367,24 @@ reconstructing it from the diff.
   - Formatting, clippy, and diff checks pass.
 
 
+- Feature: Difficulty Resource Scaling (v0.11.8)
+  Summary:
+  Scale rival starting resources (cash and political capital) at genesis according to difficulty levels (Easy: 40/5, Normal: 60/8, Hard: 80/12, Expert: 100/15) and present these resource details in the difficulty selection menu.
+  Done:
+  - Scaled starting cash and political capital for rivals based on difficulty in the genesis generator.
+  - Kept human player (Riverside) starting resources invariant at 60 cash and 8 PC.
+  - Updated CLI difficulty selection menu to present rival starting cash, PC, and risk posture.
+  - Added focused unit tests verifying starting resource scaling across all difficulties.
+  Verification:
+  - All 293 Rust tests and 138 Python tests pass successfully.
+  - State-hash invariance for Normal seed-42 is preserved.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
   validation, plus the v0.11.5 operating-outcome use audit, v0.11.6
-  strategy-comparison use audit, and v0.11.7 difficulty expansion, are
-  complete.
+  strategy-comparison use audit, v0.11.7 difficulty expansion, and v0.11.8
+  difficulty resource scaling, are complete.
 
 ## Future
 
