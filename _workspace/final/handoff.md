@@ -22,17 +22,19 @@
 
 - Base branch: `main`
 - Working branch: `feat/affiliation-queue-closure-v0.12.10`
-- PR: to be opened after final local verification
+- PR: [#163](https://github.com/SaehwanPark/hs-mgt-game/pull/163)
 - Domain QA: Pass for queue synchronization.
-- Review passes: pending PR opening and post-open review.
-- Merge state: pending PR review and merge.
+- Review passes: three post-open passes completed; no actionable code, data,
+  scope, or documentation findings.
+- CI: `check` passed in run [29209652285](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209652285).
+- Merge state: open and ready for merge after this handoff update.
 
 ## Verification
 
 - Closure source markers: supported.
 - Proposal evidence: six contracts, 9/9 runs, 54 stages, 54 observations.
 - Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
-  smoke, golden, and diff checks: pending final verification.
+  smoke, golden, and diff checks: passed locally; the PR check also passed.
 
 ## Stop condition
 
