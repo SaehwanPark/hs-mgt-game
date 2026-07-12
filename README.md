@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.12. It is intended for
+The current public milestone is a playable Rust prototype at v0.12.13. It is intended for
 inspection, playtesting, portfolio review, and future educational design work.
 It is not a calibrated policy forecast or a model of any real institution.
 
@@ -144,10 +144,14 @@ archived at [docs/README-dev-archive-v0.1.61.md](docs/README-dev-archive-v0.1.61
 Run the standard checks:
 
 ```bash
+python3 scripts/check_release_metadata.py
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo test
 ```
+
+The release metadata command is documented in
+[`docs/contributor-release-check.md`](docs/contributor-release-check.md).
 
 Run the local MCP server used for bounded agent playtesting:
 

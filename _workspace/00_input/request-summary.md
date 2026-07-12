@@ -1,21 +1,18 @@
-# Request Summary — Simulation Breadth and Strategic Actors Queue Closure v0.12.12
+# Request Summary — Release Metadata Check v0.12.13
 
 ## Decision
 
-Audit the existing bounded competitive breadth and close the Future queue item
-only if committed evidence identifies no concrete unexplained strategy,
-traceability, or learning gap.
+Implement one lightweight contributor/release-readiness check that validates
+version metadata locally and in CI, then close the final release Future item.
 
 ## Target slice
 
-- Inventory service-line/capacity, operating/community, capital/market,
-  public-payer, rival-information, and debrief mechanisms.
-- Preserve the true-state, player-observation, private-rival, and debrief
-  boundaries.
-- Remove the breadth queue item without adding speculative runtime behavior.
+- Check the package version in `Cargo.toml` and `Cargo.lock`.
+- Check the README milestone and latest changelog heading.
+- Document `python3 scripts/check_release_metadata.py` for contributors.
+- Add the same command to the existing CI workflow.
 
 ## Explicit non-goals
 
-No new state, command, transition, strategic actor, individual patient,
-public-payer utility, portfolio optimizer, generalized framework, calibration,
-or human-learning claim.
+No packaging, publishing, tag automation, registry access, dependency
+installation, broad CI redesign, or simulation/runtime behavior change.

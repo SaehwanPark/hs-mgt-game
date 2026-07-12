@@ -936,6 +936,10 @@ command trajectories without a structural trace gap, so no new actor, patient,
 public-payer, or generalized breadth runtime is authorized without a new
 concrete finding.
 
+The v0.12.13 release-readiness slice adds one read-only metadata consistency
+check with documented local usage and CI coverage. It does not authorize
+packaging, publication, licensing, deployment, or broader release automation.
+
 The v0.12.6 follow-up renders the safe staffing and physical-capacity fields
 from `PlayerObservation` and validates 75 complete runs with 1,800 transitions.
 All source histories and state-hash sequences match exactly, closing the

@@ -1,27 +1,22 @@
-# Domain QA — Simulation Breadth and Strategic Actors Queue Closure v0.12.12
+# Domain QA — Release Metadata Check v0.12.13
 
 ## Decision
 
-Pass for an evidence-only queue closure. No new runtime mechanism is
-authorized by the current evidence.
+Pass for a bounded contributor-readiness check.
 
 ## Checks
 
-- Existing capacity and service-line choices expose player-facing resource and
-  timing tradeoffs.
-- Operating, access, trust, market-share, and quality fields are kept as
-  bounded game abstractions rather than clinical or equity claims.
-- Rival private information remains outside the player observation unless a
-  permitted public or monitoring path reveals it.
-- Committed effects, actor responses, and debrief lessons provide attribution
-  surfaces without rewriting history.
-- Medicare and Medicaid interactions remain explicitly bounded payer effects;
-  no public-payer utility or social-welfare conclusion is inferred.
-- Existing playtest evidence shows strategy variation and no structural
-  traceability gap, so adding an actor or patient model would be premature.
+- The check enforces the repository's documented modified semantic-version
+  shape without inventing a new release convention.
+- It catches the common failure mode where a package bump leaves the lockfile,
+  README milestone, or changelog heading stale.
+- It is read-only and has no access to simulation state, scenario data, replay
+  artifacts, or external registries.
+- The same command is documented for local use and executed in CI.
+- A focused test covers both the current repository and a deliberate mismatch.
 
 ## Reopening condition
 
-Reopen the breadth track only when a new playtest, instructor, scenario,
-debrief, or domain-review finding identifies a specific unexplained strategy or
-learning limitation that the current bounded structures cannot represent.
+Reopen release-readiness work only for a separately authorized packaging,
+publication, licensing, deployment, or contributor workflow need. Do not grow
+this check into a release platform without a concrete requirement.

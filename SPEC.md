@@ -3948,6 +3948,36 @@ reconstructing it from the diff.
   - Full Rust/Python suites, formatting, clippy, CLI smoke, golden, and diff
     checks pass.
 
+- Feature: Release Metadata Check (v0.12.13)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.13
+
+  Summary:
+  Add one read-only package-version consistency check with documented local
+  usage and the same command in CI, then close the final release Future item.
+
+  Done:
+  - Added `scripts/check_release_metadata.py` to compare the package version in
+    `Cargo.toml` with `Cargo.lock`, the README milestone, and the latest
+    changelog heading.
+  - Added focused tests for the current repository, valid modified-semver
+    shape, projection mismatch, and invalid package version.
+  - Documented local usage in `docs/contributor-release-check.md` and README,
+    and added the command to `.github/workflows/ci.yml`.
+  - Removed the release automation and contributor-readiness item from the
+    Future queue while preserving publication, licensing, deployment, and
+    packaging as deferred scope.
+  - Bumped package metadata to `0.12.13`.
+
+  Deferred / Non-Goals:
+  - No package publication, tag automation, registry access, licensing,
+    deployment, broad CI restructuring, or simulation/runtime behavior change.
+
+  Verification:
+  - Local metadata command, focused checker tests, full Rust/Python suites,
+    formatting, clippy, CLI smoke, golden, JSON, and diff checks pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3990,17 +4020,16 @@ reconstructing it from the diff.
   Branch: none
 
   Summary:
-  All currently promoted runtime slices and their bounded follow-ups are
-  complete. No new runtime Future item is authorized until playtest, instructor,
-  scenario, or domain evidence identifies a specific unexplained need. Release
-  readiness remains a separate non-runtime governance queue item.
+  All currently promoted runtime slices, bounded follow-ups, and the release
+  readiness check are complete. No Future item remains queued. New work must
+  satisfy the promotion rules below with a specific evidence or release need.
 
   Not Yet Done:
-  - No new runtime slice currently authorized.
+  - None currently queued.
 
   Deferred / Non-Goals:
-  - Do not infer a GUI, broader simulation, acquisition expansion, or difficulty
-    tuning task from the absence of an active runtime slice.
+  - Do not infer packaging, publication, licensing, deployment, or a new runtime
+    slice from the absence of a queued item.
 
   Verification:
   - A new Present item must satisfy the promotion rules below and name its
@@ -4048,24 +4077,7 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-The first runnable prototype is complete enough that the next risk is not
-engine proof. The next risk is whether repeated play remains explainable,
-teachable, and strategically interesting before the project expands mechanics,
-strategic actors, or platform architecture.
-
-1. Track: Release automation and contributor readiness
-  Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
-  preparation becomes the active priority.
-
-  Next actionable slice:
-  Add one lightweight quality or release check with documented local command
-  usage, starting with non-invasive checks before release packaging.
-
-  Verification target:
-  Local command passes, CI documentation is updated, and the change does not
-  alter simulation behavior or require release conventions beyond
-  `docs/versioning-policy.md`.
-
-  Deferred / Non-Goals:
-  No public release packaging, publication automation, data/licensing
-  finalization, or broad repository restructuring.
+No Future items are currently queued. A new item must satisfy the promotion
+rules above, identify its evidence or release need, name a bounded artifact or
+runtime behavior, and state its verification criteria and non-goals before it
+is promoted into `Present`.
