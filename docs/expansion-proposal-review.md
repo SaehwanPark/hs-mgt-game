@@ -120,6 +120,22 @@ Risks:
 - Scope creep into finance, law, and market modeling before one slice proves
   teachability.
 
+### v0.11.13 Gate Decision
+
+Proceed with an affiliation-first design gate for one fictional neighboring
+nonprofit system. The design should compare independence, affiliation, and
+deferral as defensible choices while keeping direct acquisition as a future
+comparison branch. It must define partner fit, review authority, community
+benefit, labor response, payer leverage, integration drag, capital access,
+service continuity, and access/quality consequences without adding runtime
+state, commands, scenario fields, or legal forecasts.
+
+The gate closes only when the evidence map, mechanism design, and domain-QA
+handoff distinguish actor utility, organizational outcomes, social welfare,
+community effects, and educational evaluation. Runtime promotion requires a
+separate implementation proposal after those artifacts identify the minimum
+state, observation, resolved-input, and debrief contracts.
+
 ## Proposal 3: GUI Layer
 
 The GUI should be a thin client over the existing deterministic core, not a

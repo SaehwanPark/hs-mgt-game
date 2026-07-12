@@ -157,7 +157,7 @@ Future expansion boundaries:
 
 Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 
-## Deferred Ontology Work
+## Deferred Ontology and Runtime Work
 
 - Formal actor-card template covering objectives, authority, constraints,
   information, outside options, risk posture, time horizon, and decision
@@ -167,6 +167,8 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal belief-state representation beyond observation snapshots.
 - Parameter ledger separating empirical ranges, design abstractions, balancing
   choices, and normative scoring.
-- Regional consolidation vocabulary, including affiliation, acquisition,
-  regulatory review, community-benefit commitment, and integration drag, once
-  an M&A slice is promoted.
+- Regional consolidation runtime ontology remains deferred. The v0.11.13
+  affiliation-first design gate defines the preliminary vocabulary of
+  affiliation, regulatory review, community-benefit commitment, labor response,
+  payer leverage, service continuity, and integration drag without promoting
+  those concepts into runtime state.

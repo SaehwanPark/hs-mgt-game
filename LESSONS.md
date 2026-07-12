@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Consolidation Design Must Precede Consolidation Runtime
+
+- Context: The next roadmap candidate after the v0.11.12 validation checkpoint
+  was regional affiliation/acquisition work.
+- Resolution: Narrowed the first slice to one affiliation-first design gate and
+  kept acquisition, runtime state, legal outcomes, and transaction finance out
+  of scope.
+- Prevention: Require evidence mapping, explicit actor/observation boundaries,
+  domain QA, and debrief contracts before promoting any consolidation mechanic
+  into `SPEC.md` Present or runtime code.
+
 ## Current-Code Teachability Captures Should Reuse Policy and Retry Contracts
 
 - Context: The v0.11.12 continuation needed current-code observation and pacing

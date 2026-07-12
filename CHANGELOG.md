@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.13] - 2026-07-12
+
+### Added
+- Added an affiliation-first regional consolidation design gate for one
+  fictional nonprofit health-system partnership.
+- Added evidence, mechanism, domain-QA, and final-handoff artifacts covering
+  partner fit, institutional review, community benefit, labor, payer leverage,
+  integration, capital, service continuity, and access/quality tradeoffs.
+
+### Changed
+- Bumped the package version to `0.11.13`.
+- Recorded the design boundary without promoting runtime consolidation work.
+
+### Evidence Limits
+- The design is literature-grounded in direction but contains no calibrated
+  legal, financial, policy, or educational-effect claims.
+- Runtime mechanics, commands, scenarios, replay, MCP behavior, rulesets, and
+  state-hash logic remain unchanged.
+
 ## [0.11.12] - 2026-07-12
 
 ### Added

@@ -1,4 +1,4 @@
-# Domain QA
+# Domain QA - Regional Affiliation Design Gate v0.11.13
 
 ## Status
 
@@ -6,21 +6,25 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.12 request summary and evidence map.
-- Current-code capture runner, audit, focused tests, generated artifact, and
-  diagnostics.
-- `docs/playtest-findings-v0.11.12.md`, `SPEC.md`, `docs/roadmap.md`, design
-  principles, and the harness team specification.
+- v0.11.13 request summary, evidence map, and mechanism design.
+- `docs/expansion-proposal-review.md`, `docs/roadmap.md`, `SPEC.md`, and
+  project boundary documents.
+- Existing deterministic-core, observation, history, replay, and debrief
+  principles in the canonical docs and team specification.
 
 ## Findings
 
-- The slice remains within the Phase 7 evidence-only validation gate.
-- The artifact contains 9/9 complete runs and 216 committed months.
-- Player-owned operating months are distinct from rival operating events.
-- Observations and submitted commands are retained separately from committed
-  history and retrospective debrief output.
-- Action counts and retry counts are labeled as descriptive proxies.
-- Runtime promotion remains deferred because no unexplained gap was identified.
+- The slice is limited to an affiliation-first design gate and does not promote
+  runtime consolidation mechanics.
+- Partner, regulator, labor, payer, and community roles have distinct authority,
+  incentives, and information boundaries.
+- Organizational utility, social welfare, community effects, and educational
+  evaluation remain separate.
+- Regulatory outcomes are labeled stylized or unresolved rather than presented
+  as legal forecasts.
+- Future stochastic outcomes are assigned to explicit resolved inputs and do
+  not enter the deterministic core implicitly.
+- The design preserves multiple defensible choices and includes debrief hooks.
 
 ## Required Fixes
 
@@ -28,14 +32,22 @@ None.
 
 ## Residual Risks
 
-- Three profiles, three seeds, and Hard difficulty do not cover all strategies,
-  stochastic conditions, or player skill levels.
-- Complete traces do not establish human comprehension, learning, balance,
-  general winnability, causal strategy value, or policy validity.
+- The design is not evidence of legal validity, calibration, gameplay value, or
+  educational learning.
+- Partner data visibility, commitment vocabulary, and distributional measures
+  require another design decision before runtime implementation.
+- Acquisition remains intentionally deferred and must not be inferred as part
+  of the affiliation-first slice.
 
 ## Verification Evidence
 
-- Focused v0.11.12 artifact tests: 10 passed.
-- Current-code capture: 9/9 runs completed.
-- Audit: 216 committed months and 216 player operating-month records supported.
-- Normal seed-42 hold-control hash: `61357596d8800592`.
+- Canonical documentation consistency review completed.
+- Runtime boundaries reviewed against `docs/system-boundary.md` and
+  `docs/scenario-format-draft.md`.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo test --all -- --test-threads=1` passed: 293 Rust tests.
+- `cargo test --test golden_competitive_seed42 -- --test-threads=1` passed:
+  2 competitive golden tests.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` passed: 163 tests.
+- `git diff --check` passed.

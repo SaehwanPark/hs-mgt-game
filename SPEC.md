@@ -3470,6 +3470,46 @@ reconstructing it from the diff.
     validation, full Python/Rust suites, formatting, clippy, and diff checks
     pass.
 
+- Feature: Regional Affiliation Design Gate (v0.11.13)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.11.13
+
+  Summary:
+  Define the smallest credible regional consolidation design as an
+  affiliation-first partnership between Riverside and one fictional nonprofit
+  system, while preserving runtime and legal-boundary deferral.
+
+  Done:
+  - Added evidence, mechanism, domain-QA, and final-handoff artifacts.
+  - Defined partner fit, institutional review, community benefit, labor, payer
+    leverage, integration drag, capital access, service continuity, and
+    access/quality tradeoffs.
+  - Updated the expansion review, roadmap, system boundary, evidence registry,
+    lessons, changelog, README, and package metadata.
+  - Recorded separate distinctions for actor utility, organizational outcomes,
+    social welfare, community effects, and educational evaluation.
+
+  Not Yet Done:
+  - A future runtime proposal must identify minimum state, observations,
+    commands, resolved inputs, and debrief contracts before implementation.
+
+  Deferred / Non-Goals:
+  - No runtime mechanics, commands, scenario schema, replay, MCP, ruleset,
+    state-hash, acquisition, transaction-finance, or legal-forecasting work.
+  - No new playtest, calibration, balance, human-learning, or policy-validity
+    claim.
+
+  Verification:
+  - Domain QA returned `Pass`.
+  - `cargo fmt --check` passed.
+  - `cargo clippy --all-targets -- -D warnings` passed.
+  - `cargo test --all -- --test-threads=1` passed: 293 Rust tests.
+  - `cargo test --test golden_competitive_seed42 -- --test-threads=1` passed:
+    2 competitive golden tests.
+  - `python3 -m unittest discover -s tests -p 'test_*.py'` passed: 163 tests.
+  - `git diff --check` passed.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
@@ -3477,8 +3517,8 @@ reconstructing it from the diff.
   strategy-comparison use audit, v0.11.7 difficulty expansion, v0.11.8
   difficulty resource scaling, v0.11.9 Expert difficulty validation,
   v0.11.10 Phase 7 difficulty evidence synthesis, v0.11.11 post-change
-  all-tier difficulty validation, and v0.11.12 current-code teachability
-  capture are complete.
+  all-tier difficulty validation, v0.11.12 current-code teachability capture,
+  and v0.11.13 regional affiliation design gate are complete.
 
 ## Future
 
@@ -3579,10 +3619,9 @@ strategic actors, or platform architecture.
   approve one bounded US regional affiliation or acquisition scenario.
 
   Next actionable slice:
-  Draft one regional affiliation/acquisition scenario design covering partner
-  fit, regulatory review, community-benefit commitments, payer leverage, labor
-  response, integration drag, capital access, service continuity, and
-  access/quality consequences.
+  Promote the completed affiliation-first design into a separate runtime
+  proposal only after it specifies the minimum state, observation, resolved
+  input, and debrief contracts.
 
   Verification target:
   The design distinguishes organizational utility, actor incentives, social
@@ -3592,8 +3631,8 @@ strategic actors, or platform architecture.
   Deferred / Non-Goals:
   No national consolidation simulator, private-equity rollup model, detailed
   deal-financing system, calibrated antitrust forecast, multi-transaction
-  strategy framework, or scenario-schema/runtime implementation before the
-  design slice closes.
+  strategy framework, or scenario-schema/runtime implementation in the design
+  gate. These remain deferred until a separate runtime proposal is approved.
 
 4. Track: GUI thin-client proof
   Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
