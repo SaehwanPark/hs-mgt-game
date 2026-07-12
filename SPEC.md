@@ -3214,15 +3214,44 @@ reconstructing it from the diff.
     pass.
 
 
+- Feature: Monthly Operating-Outcome Debrief Linkage
+  Status: Complete
+  Started: 2026-07-11
+  Version: 0.11.3
+
+  Summary:
+  Added a month-specific player-owned operating-result line to the competitive
+  end-of-run debrief so each committed month links its player decision to its
+  realized demand, treated volume, unmet demand, revenue, cost, and margin.
+
+  Done:
+  - Derived the line from the player system in each committed transition's
+    `next` state.
+  - Preserved rival-private operating state, active observations, global
+    attribution summaries, transition semantics, and state hashes.
+  - Added focused direct-debrief and MCP end-session tests.
+
+  Deferred / Non-Goals:
+  - No new operating mechanism, actor, command, scenario, replay format,
+    ruleset, balance, difficulty, calibration, or learning claim.
+  - Reported values remain visible game units rather than calibrated dollars,
+    encounters, or policy forecasts.
+
+  Verification:
+  - Focused debrief and MCP tests, full Rust/Python suites, formatting, clippy,
+    golden seed-42 coverage, and diff checks pass.
+
+
 ## Present
 
-None. All scheduled features are complete.
+- Competitive monthly operating-outcome debrief linkage is complete in v0.11.3.
 
 ## Future
 
-The v0.11.0 operating loop and v0.11.2 explainability audit are the current
-gameplay-maturity baseline. Before adding actors, commands, service lines, or
-platform layers, validate it with AI strategy archetypes across seeds and rival
+The v0.11.0 operating loop, v0.11.2 explainability audit, and v0.11.3
+month-specific debrief linkage are the current gameplay-maturity baseline.
+Before adding actors, commands, service lines, or platform layers, validate it
+with AI strategy archetypes across seeds and rival
 configurations. Required diagnostics
 are effect attribution, monthly bottlenecks, unused or dominated actions,
 trajectory diversity, low-influence state variables, stable marginal effects,

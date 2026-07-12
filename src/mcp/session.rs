@@ -1109,6 +1109,29 @@ mod tests {
   }
 
   #[test]
+  fn competitive_debrief_includes_monthly_operating_result() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let session = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id,
+        command_text: "hold".to_string(),
+      })
+      .expect("advance one month");
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: session.session_id,
+      })
+      .expect("end session");
+    let text = ended.debrief.join("\n");
+
+    assert!(text.contains("Operating result: treated "));
+    assert!(text.contains("operating revenue "));
+    assert!(text.contains("operating cost "));
+    assert!(text.contains("operating margin "));
+  }
+
+  #[test]
   fn invalid_stabilization_command_does_not_advance() {
     let mut store = GameSessionStore::default();
     let session = start(&mut store, "stabilization-v1");

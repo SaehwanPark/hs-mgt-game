@@ -76,6 +76,12 @@ month-level debrief outcome linkage, and global debrief attribution. It is
 descriptive traceability evidence, not causal, balance, or human-learning
 evidence.
 
+Competitive end-session debriefs now also include one `Operating result:` line
+per committed player month. The line is derived from committed player state and
+reports visible game-unit demand, treated volume, unmet demand, revenue, cost,
+and margin; it is a post-run outcome link, not a calibrated financial or clinical
+measure.
+
 This matrix runs five deterministic policy lanes across seeds `42`, `43`, `44`
 and Easy/Normal/Hard/Expert. It is descriptive gameplay-validation evidence;
 it does not establish causal marginal effects, dominance, balance, calibration,

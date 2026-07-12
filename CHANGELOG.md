@@ -4,6 +4,20 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.3] - 2026-07-11
+
+### Added
+- Added month-specific player-owned operating-result lines to competitive
+  end-of-run debriefs, including treated demand, unmet demand, operating
+  revenue, operating cost, and operating margin.
+- Added focused Rust coverage for direct debrief and MCP end-session output.
+
+### Changed
+- Derived the new debrief line from each committed player `next` state without
+  changing transitions, observations, rulesets, state hashes, replay formats,
+  balance, or difficulty.
+- Bumped the package to `0.11.3`.
+
 ## [0.11.2] - 2026-07-11
 
 ### Added

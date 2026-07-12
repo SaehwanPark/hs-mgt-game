@@ -848,7 +848,9 @@ descriptive routing evidence only; runtime promotion remains deferred pending a
 concrete unexplained player-facing, instructor-facing, or domain-review gap.
 The v0.11.2 read-only audit confirms complete decision and transition linkage but
 no month-specific operating-outcome debrief linkage; this remains a debrief
-review candidate, not a runtime tuning basis.
+review candidate, not a runtime tuning basis. The v0.11.3 debrief follow-up
+closes that reporting-surface gap using committed player outcomes without
+changing transition semantics or promoting balance, causal, or learning claims.
 
 ## 7.6 Educational Artifact and Debrief Review
 
