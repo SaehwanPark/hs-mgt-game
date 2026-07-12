@@ -23,11 +23,11 @@
 
 - Base branch: `main`
 - Working branch: `feat/regional-affiliation-design-v0.11.13`
-- PR: to be filled after push and PR creation.
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/151
 - Domain QA: Pass.
 - Code review: three independent passes required after PR creation, with
   follow-up review after any Critical/High fix.
-- CI: pending GitHub Actions completion after push.
+- CI: pending GitHub Actions completion.
 - Merge-ready: pending PR review and CI.
 
 ## Verification
