@@ -1,32 +1,41 @@
-# Final Handoff - Difficulty Resource Scaling v0.11.8
+# Final Handoff - Expert Difficulty Validation v0.11.9
 
 ## Result
 
-- Scaled starting cash and political capital for rivals based on difficulty in the genesis world creator:
-  - **Easy**: Rivals start with 40 cash and 5 political capital (PC), with a conservative posture.
-  - **Normal**: Rivals start with 60 cash and 8 PC, with a moderate posture (default baseline).
-  - **Hard**: Rivals start with 80 cash and 12 PC, with an aggressive posture.
-  - **Expert**: Rivals start with 100 cash and 15 PC, with an aggressive posture.
-- Kept the player's starting resources (Riverside) invariant across all difficulties (default 60 cash and 8 PC).
-- Updated CLI difficulty selection menu descriptions in `src/cli/display/prompt.rs` to show the starting resource and risk posture pressures for each difficulty tier.
-- Added focused unit tests in `src/competitive/genesis_tests.rs` verifying starting resource scaling across all difficulties.
+- Added a reproducible Expert difficulty validation artifact after the v0.11.7
+  risk-posture and v0.11.8 rival resource-scaling changes.
+- Ran five deterministic policy lanes across seeds 42, 43, and 44 at Expert
+  difficulty.
+- Confirmed 15/15 runs completed the full 24-month competitive campaign with
+  zero validation failures.
+- Preserved actor-visible observations, legal command hints, submitted commands,
+  validation failures, histories, state hashes, final observations, and debriefs.
+- Recorded findings in `docs/playtest-findings-v0.11.9.md` and updated MCP
+  playtesting guidance, SPEC, changelog, lessons, README, and package metadata.
 
 ## Evidence
 
-- Rust Tests: 293/293 passed (including the new `genesis_rivals_resources_scale_by_difficulty` test).
-- Python Tests: 138/138 passed.
-- Formatting and Clippy checks pass cleanly.
-- State-hash Invariance: Seed-42 Normal hold-control hash remains unchanged (state hashes are invariant).
-- Backward compatibility for session serialization is preserved.
+- Artifact:
+  `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
+- Diagnostics:
+  `_workspace/experiments/v0.11.9-expert-difficulty-validation/diagnostics.md`
+- Normal seed-42 hold-control hash remains `61357596d8800592`.
+- Python tests: 142/142 passed.
+- Rust tests: `cargo test --all -- --test-threads=1` passed.
+- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`,
+  `python3 scripts/run_automated_playtests.py`, JSON validation, and diff
+  checks pass.
+- Completion is bounded simulated-policy clearability evidence only.
 
 ## Version Boundaries
 
-- Package: `0.11.8`
+- Package: `0.11.9`
 - Competitive ruleset: `competitive-ruleset-0.2.0`
 - Competitive state hash: `competitive-state-hash-v9`
 
 ## PR Handoff
 
 - Base branch: `main`
-- Working branch: `feat/difficulty-resource-scaling-v0.11.8`
-- Verification: formatting, clippy, Rust and Python test suites pass cleanly.
+- Working branch: `feat/expert-difficulty-validation-v0.11.9`
+- Runtime mechanics, difficulty values, scoring, balance, scenario behavior,
+  replay formats, MCP schema, and state-hash logic remain unchanged.

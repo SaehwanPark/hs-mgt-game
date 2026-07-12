@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Revalidate Expert After Difficulty Surface Changes
+
+- Context: The v0.11.7 and v0.11.8 slices changed AI risk posture and rival
+  starting resources, so older Expert clearability evidence no longer covered
+  the current difficulty surface.
+- Resolution: Ran a fresh Expert-only matrix over five deterministic policy
+  lanes and three named seeds while preserving the Normal seed-42 control hash.
+- Prevention: Treat difficulty changes as needing post-change clearability
+  evidence before claiming Expert remains severe but playable; do not tune
+  balance from a completion matrix alone.
+
 ## Compare Strategy Traces Across the Latest Frozen Matrix
 
 - Context: The v0.11.6 continuation needed to test whether the v0.11.5

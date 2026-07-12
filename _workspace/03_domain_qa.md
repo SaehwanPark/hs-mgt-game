@@ -6,17 +6,25 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.11.7 request summary and implementation plan.
-- Updated source code files: `campaign.rs`, `competitive_world.rs`, `genesis.rs`, `scenario/mod.rs`, and `ai_player.rs`.
-- `SPEC.md`, `docs/roadmap.md`, design principles, and the harness team specification.
+- v0.11.9 request summary and implementation plan.
+- Expert validation artifact:
+  `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
+- `docs/playtest-findings-v0.11.9.md`, `SPEC.md`, `docs/roadmap.md`,
+  design principles, and the harness team specification.
 
 ## Findings
 
-- The slice stays within the Phase 7/9 difficulty depth and winnability gate, introducing expressive difficulty setting without hidden rival omniscience or punitive resource cuts.
-- The mapping from difficulty levels (Easy -> Conservative, Normal -> Moderate, Hard/Expert -> Aggressive) successfully changes the AI strategic risk-taking profile.
-- Scoring modifiers for Holds, aggressive Negotiations, and large Investments are isolated to AI scoring weight offsets and keep core transition rules untouched.
-- Cash pressure adjustments reflect institutional risk tolerance under Aggressive difficulty.
-- Backward compatibility for session serialization is preserved, and state hashes remain invariant for `Difficulty::Normal`.
+- The slice stays within the Phase 7/9 difficulty depth and winnability gate.
+- The artifact validates bounded Expert clearability after the recent
+  difficulty surface changes without changing runtime mechanics.
+- The matrix records actor-visible observations, legal command hints, submitted
+  commands, validation failures, transition histories, state hashes, and
+  debriefs for all tested runs.
+- The findings correctly separate deterministic simulated-policy completion from
+  general Expert winnability, human-learning evidence, empirical calibration, or
+  policy validity.
+- Runtime promotion remains deferred because the artifact identifies no concrete
+  unexplained player-facing, instructor-facing, or domain-review gap.
 
 ## Required Fixes
 
@@ -24,12 +32,14 @@ None.
 
 ## Residual Risks
 
-- Parameter scoring modifiers (e.g. -10 for aggressive negotiations under Conservative, or +5 under Aggressive) are stylized abstractions and do not represent calibrated human behavior or formal health system optimal strategies.
-- Winnability of Expert difficulty remains descriptive until further playtesting.
+- Five deterministic policy lanes and three seeds do not cover all plausible
+  player strategies or stochastic conditions.
+- Completion is a clearability proxy, not a formal win condition or balance
+  proof.
 
 ## Verification Evidence
 
-- All 292 Rust unit and integration tests passed (including the new `test_risk_postures_score_command` test).
-- All 138 Python tests passed.
-- Formatting and clippy checks pass.
-- State-hash invariance verified (seed-42 Normal hold-control hash remains unchanged).
+- 15/15 Expert validation runs completed with zero validation failures.
+- Normal seed-42 hold-control hash remains `61357596d8800592`.
+- Focused artifact tests, JSON validation, formatting, clippy, Rust/Python
+  suites, automated playtests, and diff checks pass.
