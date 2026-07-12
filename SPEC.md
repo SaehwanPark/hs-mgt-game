@@ -3794,36 +3794,62 @@ reconstructing it from the diff.
     1,800/1,800 exact source history matches, 1,800/1,800 exact state-hash
     matches, and deferred runtime promotion.
 
-## Present
-
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.6 merge
+  Version: 0.12.7
 
   Summary:
-  Convert the completed affiliation-first design into a bounded runtime
-  proposal with explicit minimum state, actor observations, resolved inputs,
-  and debrief contracts before any new runtime changes.
+  Reconcile the completed affiliation-first design with the existing opt-in
+  runtime and verify the minimum state, observation, resolved-input,
+  history/replay, and debrief contracts.
 
   Done:
-  - v0.12.6 closes the bounded workforce-capacity MCP observation gap with
-    unchanged histories and state hashes.
-
-  Not Yet Done:
-  - Re-audit the existing affiliation design and runtime boundary.
-  - Produce a narrow proposal and domain-QA decision for the minimum next
-    affiliation runtime slice.
+  - Audited the ADR, model, observation, input-resolution, transition, replay,
+    MCP, scenario, and debrief source boundaries.
+  - Confirmed the existing `regional-affiliation-v1` runtime satisfies all six
+    minimum proposal contracts.
+  - Validated the committed v0.12.2 artifact with 9/9 complete runs, 54/54
+    stages, and typed commitments, alternatives, and assumptions in every
+    decision-time observation.
+  - Confirmed no new runtime change is authorized; direct acquisition, deal
+    finance, national markets, legal forecasts, generic actor frameworks, and
+    changes to `competitive-regional-v1` remain deferred.
+  - Bumped package metadata to `0.12.7`.
 
   Deferred / Non-Goals:
   - No acquisition expansion, deal financing, new actor class, legal forecast,
-    multi-transaction framework, or runtime implementation before the proposal
-    is approved.
+    multi-transaction framework, competitive-campaign change, or new runtime
+    implementation.
 
   Verification:
-  - Required before this item moves to Past: evidence map, mechanism design,
-    domain QA, explicit state/observation/input/debrief contracts, and focused
-    proposal tests or source-boundary checks.
+  - Proposal source markers supported across all required boundaries.
+  - 308 Rust tests, 199 Python tests, formatting, clippy, CLI smoke, golden,
+    diff checks, focused proposal tests, and deterministic artifact validation
+    pass.
+
+## Present
+
+- Feature: Evidence-gated continuation
+  Status: Waiting for a new concrete evidence gap
+  Started: 2026-07-12
+  Branch: none
+
+  Summary:
+  All currently promoted slices and their bounded follow-ups are complete. No
+  Future item is authorized until playtest, instructor, scenario, domain, or
+  release evidence identifies a specific unexplained need.
+
+  Not Yet Done:
+  - None currently authorized.
+
+  Deferred / Non-Goals:
+  - Do not infer a GUI, broader simulation, acquisition expansion, difficulty
+    tuning, or release-automation task from the absence of an active slice.
+
+  Verification:
+  - A new Present item must satisfy the promotion rules below and name its
+    evidence source, narrow target slice, acceptance criteria, and non-goals.
 
 ## Future
 
@@ -3924,9 +3950,10 @@ strategic actors, or platform architecture.
   approve one bounded US regional affiliation or acquisition scenario.
 
   Next actionable slice:
-  Promote the completed affiliation-first design into a separate runtime
-  proposal only after it specifies the minimum state, observation, resolved
-  input, and debrief contracts.
+  The v0.12.7 proposal confirms that the existing opt-in runtime already
+  satisfies the minimum state, observation, resolved-input, history/replay, and
+  debrief contracts. Keep broader affiliation/acquisition work deferred until
+  new evidence identifies a concrete gap.
 
   Verification target:
   The design distinguishes organizational utility, actor incentives, social

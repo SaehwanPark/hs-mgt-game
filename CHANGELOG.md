@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.7] - 2026-07-12
+
+### Added
+- Added an affiliation runtime-boundary proposal artifact that maps the
+  existing opt-in runtime to true-state, actor-observation, resolved-input,
+  deterministic-transition, history/replay, and debrief contracts.
+- Added focused validation against the committed 9-run/54-stage affiliation
+  observation-context artifact and required source markers.
+
+### Changed
+- Bumped package metadata to `0.12.7`.
+- Closed the stale affiliation runtime-proposal queue item without adding a new
+  mechanism or authorizing additional runtime changes.
+
+### Evidence Limits
+- The proposal is deterministic source-boundary and trace evidence; it is not
+  human-learning, calibration, legal-validity, balance, winnability, or
+  social-welfare evidence.
+
 ## [0.12.6] - 2026-07-12
 
 ### Added

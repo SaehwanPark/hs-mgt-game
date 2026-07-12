@@ -249,6 +249,13 @@ and state-hash equality against the immutable all-tier and Expert controls, so
 the change remains outside the deterministic transition core. Difficulty,
 balance, scoring, and winnability promotion remain deferred.
 
+The v0.12.7 affiliation boundary proposal reconciles the existing opt-in
+`regional-affiliation-v1` implementation with its design contract. The runtime
+keeps true state, actor observations, resolved stochastic inputs, deterministic
+transitions, append-only replay/history, and debrief utility/welfare separation
+as explicit boundaries. No new affiliation mechanism or generic actor
+framework is authorized by this proposal.
+
 ### Scenario and Actor Design
 
 Responsible for:

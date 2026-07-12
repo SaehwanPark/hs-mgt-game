@@ -1,0 +1,150 @@
+{
+  "artifact_type": "affiliation_runtime_boundary_proposal",
+  "batch_id": "v0.12.7-affiliation-runtime-boundary-proposal",
+  "campaign": "regional-affiliation-v1",
+  "code_version": "0.12.7",
+  "decision": "The existing regional-affiliation-v1 runtime satisfies the bounded state/observation/resolved-input/history/replay/debrief proposal. No additional runtime slice is authorized without a new concrete evidence gap.",
+  "deferred_scope": [
+    "direct acquisition branch",
+    "national consolidation or multi-deal market",
+    "private-equity rollups",
+    "detailed transaction financing",
+    "calibrated legal or antitrust forecasts",
+    "new generic actor framework",
+    "changes to competitive-regional-v1"
+  ],
+  "evidence_contract": {
+    "code_version": "0.12.2",
+    "observation_count": 54,
+    "path": "_workspace/experiments/v0.12.2-affiliation-observation-context/results.json",
+    "run_count": 9,
+    "status": "supported",
+    "transition_count": 54
+  },
+  "evidence_limits": [
+    "This is a source-boundary and deterministic trace review, not human-learning, classroom, calibration, legal-validity, or policy-forecast evidence.",
+    "The 9-run/54-stage artifact supports contract coverage for named policies and seeds; it does not establish general balance, winnability, or social-welfare validity.",
+    "Affiliation response and review outcomes are stylized game abstractions and must not be read as legal or antitrust predictions."
+  ],
+  "implementation_status": "existing_opt_in_runtime_confirmed",
+  "minimum_contracts": {
+    "actor_observation": [
+      "reported partner condition and existing Riverside metrics",
+      "commitment totals, review status, public labor/payer/community signals",
+      "alternatives and visible assumptions at the MCP boundary"
+    ],
+    "debrief": [
+      "report Riverside organizational outcomes separately from actor responses",
+      "separate actor utility and social welfare",
+      "invite comparison of independence and deferral alternatives"
+    ],
+    "deterministic_core": [
+      "resolve stochastic inputs before transition evaluation",
+      "validate the stage-specific command against the prior snapshot",
+      "apply one deterministic transition and compute a versioned state hash"
+    ],
+    "history_and_replay": [
+      "retain prior state, command, observation, resolved inputs, actor decisions, effects, next state, and hash",
+      "replay observations and resolved inputs against append-only transitions",
+      "serialize and verify a versioned affiliation replay artifact"
+    ],
+    "resolved_inputs": [
+      "partner report noise and partner response",
+      "review, labor, payer, and community responses",
+      "integration drag and continuity shock"
+    ],
+    "true_state": [
+      "scenario_id, stage, status, and turn",
+      "Riverside cash, access, quality, workforce trust, community trust, and market share",
+      "partner condition, fit, autonomy need, and continuity risk",
+      "commitments, review state, integration progress, and actor response state"
+    ]
+  },
+  "new_runtime_changes_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_contract": {
+    "docs/decision-records/0010-regional-affiliation-runtime-slice.md": {
+      "markers": [
+        "**Status:** Implemented in v0.12.0",
+        "true affiliation state",
+        "explicit resolved inputs",
+        "debrief output separating actor utility"
+      ],
+      "status": "supported"
+    },
+    "scenarios/regional-affiliation-v1.toml": {
+      "markers": [
+        "campaign_id = \"regional-affiliation-v1\"",
+        "learning_objectives = [",
+        "[affiliation]"
+      ],
+      "status": "supported"
+    },
+    "src/affiliation/observe.rs": {
+      "markers": [
+        "pub fn observe_affiliation",
+        "alternatives",
+        "assumptions"
+      ],
+      "status": "supported"
+    },
+    "src/affiliation/transition.rs": {
+      "markers": [
+        "pub fn resolve_affiliation_turn(",
+        "let inputs = resolve_affiliation_inputs",
+        "pub fn replay_affiliation("
+      ],
+      "status": "supported"
+    },
+    "src/artifact/affiliation.rs": {
+      "markers": [
+        "pub fn serialize_affiliation_replay",
+        "pub fn verify_affiliation_replay"
+      ],
+      "status": "supported"
+    },
+    "src/debrief/report.rs": {
+      "markers": [
+        "Regional affiliation debrief",
+        "Actor utility and social welfare are separate",
+        "Alternatives for discussion"
+      ],
+      "status": "supported"
+    },
+    "src/inputs/resolve_affiliation.rs": {
+      "markers": [
+        "pub fn resolve_affiliation_inputs(",
+        "stream_rng"
+      ],
+      "status": "supported"
+    },
+    "src/mcp/session.rs": {
+      "markers": [
+        "fn format_affiliation_observation(",
+        "\"Commitments: community",
+        "format!(\"Alternative: {alternative}\")",
+        "format!(\"Assumption: {assumption}\")",
+        "fn affiliation_legal_commands("
+      ],
+      "status": "supported"
+    },
+    "src/model/affiliation.rs": {
+      "markers": [
+        "pub struct AffiliationWorldState",
+        "pub struct AffiliationObservation",
+        "pub struct AffiliationResolvedInputs",
+        "pub struct AffiliationTransition",
+        "pub struct AffiliationHistory",
+        "pub struct AffiliationReplayArtifact"
+      ],
+      "status": "supported"
+    },
+    "src/scenario/mod.rs": {
+      "markers": [
+        "pub fn initial_affiliation_world_state",
+        "pub fn validate_regional_affiliation_scenario"
+      ],
+      "status": "supported"
+    }
+  }
+}
