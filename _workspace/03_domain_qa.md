@@ -37,7 +37,7 @@ None.
 
 ## Verification Evidence
 
-- Focused v0.11.11 artifact tests: 5 passed.
+- Focused v0.11.11 artifact tests: 6 passed.
 - Current-code capture: 60/60 runs completed.
 - Audit: 1,440 operating months and 60/60 decision-to-debrief traces supported.
 - Full Python/Rust suites, formatting, clippy, automated playtests, JSON
