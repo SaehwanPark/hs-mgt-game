@@ -159,6 +159,8 @@ def audit_run(run):
       and base["trace_hash_match_count"] == base["transition_count"]
       and debrief_gap_count == 0
       and base["response_gap_count"] == 0
+      and base["validation_failure_count"] == 0
+      and base["rival_operating_result_count"] == 0
     )
     else "limited"
   )
@@ -278,6 +280,8 @@ def build_audit(artifact):
             "debrief_gap": report["debrief_gap_count"] > 0,
             "response_gap": report["response_gap_count"] > 0,
             "unknown_command": report["unknown_command_count"] > 0,
+            "validation_failure": report["validation_failure_count"] > 0,
+            "rival_operating_result": report["rival_operating_result_count"] > 0,
           }.items() if value
         ],
       })
@@ -393,6 +397,8 @@ def validate_audit(audit):
   assert audit["trace_hash_match_count"] == audit["transition_count"]
   assert audit["debrief_outcome_gap_count"] == 0
   assert audit["response_gap_count"] == 0
+  assert audit["validation_failure_count"] == 0
+  assert audit["rival_operating_result_count"] == 0
   assert audit["unexplained_gaps"] == []
   if not audit["fixture"]:
     assert audit["transition_count"] == EXPECTED_RUN_COUNT * EXPECTED_MONTHS

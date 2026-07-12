@@ -52,6 +52,7 @@ def make_run(
   include_signal=True,
   include_debrief=True,
   status="complete",
+  validation_failure=False,
 ):
   commands = commands or [
     "recruit role=nurse headcount=1",
@@ -126,7 +127,8 @@ def make_run(
     "state_hashes": [transition["state_hash"] for transition in history],
     "turn_trace": trace,
     "debrief": debrief,
-    "validation_failures": [],
+    "validation_failures": [{"message": "expected probe"}]
+    if validation_failure else [],
   }
 
 
@@ -174,6 +176,12 @@ class StrategyComparisonUseAuditTests(unittest.TestCase):
 
     self.assertEqual(report["status"], "limited")
     self.assertEqual(report["debrief_gap_count"], 3)
+
+  def test_validation_failure_is_limited_and_reported(self):
+    report = RUNNER.audit_run(make_run(validation_failure=True))
+
+    self.assertEqual(report["status"], "limited")
+    self.assertEqual(report["validation_failure_count"], 1)
 
   def test_profile_summary_and_matrix_validation(self):
     artifact = RUNNER.make_minimal_artifact(make_run())
