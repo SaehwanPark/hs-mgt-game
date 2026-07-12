@@ -1,74 +1,79 @@
-# Mechanism Design - Difficulty Depth Evidence Review v0.12.4
+# Mechanism Design - Workforce Capacity Difficulty Design Gate v0.12.5
 
 ## Goal and Roadmap Phase
 
-Phase 7/9 difficulty-depth evidence gate after the v0.12.3 teachability review.
-This is a read-only audit, not a new difficulty mechanism.
+Phase 7/9 difficulty-depth design gate following the v0.12.4 candidate signal.
+This is an observation-contract proposal, not a new difficulty mechanism.
 
 ## Slice Boundary
 
-- Inputs: exactly the v0.11.11 all-tier and v0.11.9 Expert JSON artifacts.
-- Output: deterministic source validation, per-tier pressure summaries,
-  clearability coverage, candidate-signal classification, and evidence limits.
-- Unit: 24 committed operating months per run; 60 all-tier runs plus 15
-  standalone Expert runs.
-- Excluded: new sessions, parameter tuning, ruleset changes, scoring, hidden
-  rival omniscience, player-resource cuts, GUI, and human evaluation.
+- Inputs: v0.12.4 evidence plus current typed observation, MCP projection,
+  transition, and debrief source.
+- Output: a deterministic design contract for a possible MCP presentation
+  follow-up.
+- Proposed next slice: render only safe typed Riverside staffing/capacity
+  context, add boundary tests, and rerun the unchanged v0.12.4 matrix.
+- Excluded: difficulty values, balance, scoring, transition formulas, hidden
+  targets, effective staffing calculations, rival state, GUI, and human
+  evaluation.
 
 ## Actors and Authority
 
-The audit treats each source's actor-visible observation and submitted command
-as the player-facing boundary. Rival private actions and instructor-revealed
-outcomes remain source records; the report does not infer them as player
-knowledge or utility.
+Riverside may observe its own current staffing counts and physical capacities.
+The player does not observe hidden staffing targets, allocation priorities,
+future pending effects, rival private workforce state, or realized future
+responses before transition resolution.
 
-## State, Beliefs, and Observations
+## Current observation contract
 
-Pressure is represented only by committed operating records and source-provided
-trace fields: workforce-capacity markers, capacity/demand markers, operating
-loss, action-family trajectories, final tradeoff summaries, and debrief
-explanation markers. No hidden state is added.
+The typed `PlayerObservation` already carries:
 
-## Commands, Events, and Effects
+- workforce trust summary and nursing-vacancy wording;
+- nurses, physicians, and admins;
+- staffed beds, outpatient, emergency, ICU, obstetrics, psychiatric,
+  cardiology, oncology, infusion, neurology, and ASC capacities;
+- prior demand, treated volume, unmet demand, revenue, cost, and margin; and
+- labor-market delay/cost guidance and state-conditioned consultant options.
 
-No command, event, effect, transition, resolved input, state-hash, or replay
-behavior changes. Existing events/effects are parsed to classify descriptive
-operating bottlenecks.
+The current MCP formatter renders the trust summary, prior operations, labor
+guidance, and consultant options but omits the numeric staffing/capacity fields.
 
-## Strategic Interaction
+## Proposed projection contract
 
-The all-tier source preserves five scripted profiles over four difficulty tiers;
-the Expert source preserves the same five profile names over three seeds. The
-audit reports profile/seed/tier coverage and action trajectories but assigns no
-utility, quality, or optimality judgment.
+If promoted into the next implementation slice, render exactly two compact
+lines from `PlayerObservation`:
 
-## Candidate Pressure Dimension
+1. `Staffing: nurses <n>, physicians <n>, admins <n>`.
+2. `Physical capacity: staffed beds <n>, outpatient <n>, emergency <n>, ICU <n>, obstetrics <n>, psychiatric <n>, cardiology <n>, oncology <n>, infusion <n>, neurology <n>, ASC <n>`.
 
-`workforce_capacity` is a candidate only if the recomputed all-tier counts are
-nondecreasing across Easy, Normal, Hard, and Expert. If supported, the finding
-means the current artifacts expose an operating-pressure signal worth a later
-design gate. It does not mean the signal is correctly calibrated or that
-runtime tuning is authorized.
+The projection must not calculate or expose effective capacity, role targets,
+allocation queues, hidden pending hires, or future outcomes. Existing typed
+fields are the only source.
 
-## Educational and Debrief Hooks
+## Transition and debrief boundaries
 
-- Each run must retain the decision-time observation/command surface.
-- Each accepted month must link to a committed transition and state hash.
-- Each run must retain month-level debrief coverage and decision-quality
-  framing.
-- The report must distinguish bounded clearability evidence from winnability
-  and human learning.
+No command, event, effect, transition, resolved input, state hash, replay
+artifact, or debrief causal wording changes. Existing staffing deficit and
+staffing capacity constraint events remain the realized follow-through. The
+next evidence run must prove that history/state hashes and the v0.12.4 golden
+boundary are unchanged.
 
-## Determinism and Replay Notes
+## Decision and educational hooks
 
-The audit reads committed JSON only and emits stable JSON/Markdown summaries. It
-does not regenerate a transition, alter a hash, or rewrite a source artifact.
+The proposed lines let a player inspect the current staffing/capacity context
+before choosing recruit, invest, monitor, pledge, or hold. They make the
+existing labor-market and consultant tradeoffs more interpretable without
+claiming that the line improves learning or that any action is optimal.
 
-## Open Questions
+## Routing decision
 
-- Whether workforce-capacity pressure is legible or appropriately paced to a
-  human player remains unmeasured.
-- Whether Expert is generally winnable remains untested beyond the named
-  profiles and seeds.
-- A later runtime change requires a separate design gate with focused tests and
-  an explicit decision about balance and difficulty semantics.
+The candidate signal warrants a bounded observation-context implementation
+follow-up, not a difficulty-value or balance change. Keep runtime promotion for
+mechanics deferred until a later evidence gate establishes a concrete need.
+
+## Open questions
+
+- Whether the compact line is understandable to humans remains unmeasured.
+- Whether all service-line capacities belong in one line or need a later
+  presentation review is an interface question, not a simulation question.
+- Expert clearability remains limited to the named scripted profiles and seeds.

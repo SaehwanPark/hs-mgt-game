@@ -1,0 +1,118 @@
+{
+  "artifact_type": "workforce_capacity_difficulty_design_gate",
+  "batch_id": "v0.12.5-workforce-capacity-design",
+  "candidate_signal": {
+    "all_tier_counts": {
+      "easy": 0,
+      "expert": 160,
+      "hard": 30,
+      "normal": 15
+    },
+    "dimension": "workforce_capacity",
+    "interpretation": "descriptive operating-pressure signal, not causal difficulty evidence",
+    "source_artifact": "_workspace/experiments/v0.12.4-difficulty-depth-evidence/results.json"
+  },
+  "code_version": "0.12.5",
+  "current_visible_context": [
+    "workforce_trust_summary",
+    "nursing vacancy wording",
+    "prior_month_operations",
+    "labor_market_delay_and_cost_note",
+    "state_conditioned_consultant_options",
+    "staffing_events_and_attributed_debrief_mechanisms"
+  ],
+  "evidence_limits": [
+    "This is a design and observation-contract review, not human-learning evidence.",
+    "The v0.12.4 signal is deterministic simulated-policy evidence, not causal balance or winnability evidence.",
+    "Current typed fields are safe to project but their presence does not establish comprehension or educational effectiveness."
+  ],
+  "hidden_fields_excluded": [
+    "role_targets",
+    "effective_capacity",
+    "allocation_queues",
+    "pending_hire_outcomes",
+    "rival_private_workforce_state",
+    "future_actor_responses"
+  ],
+  "next_implementation_verification": [
+    "focused MCP session-boundary test for exact safe labels and values",
+    "rerun the v0.12.4 75-run/1800-transition compatible evidence matrix",
+    "compare pre/post history and state hashes exactly",
+    "keep runtime difficulty, balance, scoring, and winnability promotion deferred"
+  ],
+  "observation_context_follow_up_required": true,
+  "preserved_contracts": [
+    "deterministic transitions",
+    "immutable history",
+    "state hashes",
+    "replay verification",
+    "command grammar and legality",
+    "competitive seed-42 golden path",
+    "debrief attribution"
+  ],
+  "proposed_next_projection": {
+    "lines": [
+      "Staffing: nurses <n>, physicians <n>, admins <n>",
+      "Physical capacity: staffed beds <n>, outpatient <n>, emergency <n>, ICU <n>, obstetrics <n>, psychiatric <n>, cardiology <n>, oncology <n>, infusion <n>, neurology <n>, ASC <n>"
+    ],
+    "not_a_new_mechanism": true,
+    "purpose": "make the existing workforce-capacity decision context inspectable before commands",
+    "source": "PlayerObservation"
+  },
+  "runtime_difficulty_change_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_contract": {
+    "src/debrief/report.rs": {
+      "markers": [
+        "Attributed mechanisms to inspect:",
+        "Decision quality and outcome quality remain separate:"
+      ],
+      "status": "supported"
+    },
+    "src/mcp/session.rs": {
+      "markers": [
+        "fn format_competitive_observation(",
+        "Workforce trust:"
+      ],
+      "status": "supported"
+    },
+    "src/model/campaign.rs": {
+      "markers": [
+        "pub nurses: i32",
+        "pub staffed_beds: i32"
+      ],
+      "status": "supported"
+    },
+    "src/sim/observe_competitive.rs": {
+      "markers": [
+        "workforce_trust_summary:",
+        "nurses: human.nurses",
+        "Labor market note: recruit commands"
+      ],
+      "status": "supported"
+    },
+    "src/sim/transition_competitive.rs": {
+      "markers": [
+        "\"staffing capacity constraint\"",
+        "understaffing reduces operational capacity"
+      ],
+      "status": "supported"
+    }
+  },
+  "typed_fields_omitted_by_mcp": [
+    "nurses",
+    "physicians",
+    "admins",
+    "staffed_beds",
+    "outpatient_capacity",
+    "emergency_capacity",
+    "icu_capacity",
+    "obstetrics_capacity",
+    "psychiatric_capacity",
+    "cardiology_capacity",
+    "oncology_capacity",
+    "infusion_capacity",
+    "neurology_capacity",
+    "asc_capacity"
+  ]
+}

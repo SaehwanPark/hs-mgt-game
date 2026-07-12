@@ -3,6 +3,20 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Separate Pressure Signals From Their Decision-Time Context
+
+- Context: The v0.12.4 workforce-capacity signal was visible in operating
+  consequences, but the MCP formatter omitted typed staffing and capacity
+  counts that could help interpret it before a command.
+- Symptom: Trust labels, labor guidance, and debrief attribution were present,
+  while the numeric staffing/capacity context was absent from the player view.
+- Resolution: Defined an observation-only follow-up from `PlayerObservation` and
+  explicitly excluded targets, effective allocations, future hires, and rival
+  private state.
+- Prevention: Audit typed-vs-rendered fields after identifying a mechanism signal;
+  route omissions to the owning presentation boundary before changing balance or
+  difficulty values.
+
 ## Treat Difficulty Signals as Routing Evidence
 
 - Context: The v0.12.4 review compared existing all-tier and standalone Expert

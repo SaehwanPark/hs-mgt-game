@@ -3720,36 +3720,73 @@ reconstructing it from the diff.
   - 307 Rust tests, 184 Python tests, formatting, clippy, CLI smoke, golden,
     and diff checks pass.
 
-## Present
-
 - Feature: Workforce Capacity Difficulty Design Gate (v0.12.5)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.4 merge
+  Version: 0.12.5
 
   Summary:
-  Decide whether the candidate workforce-capacity signal should become a
-  bounded visible difficulty design surface before any runtime tuning.
+  Decide whether the v0.12.4 workforce-capacity pressure signal is sufficiently
+  visible at decision time and specify the smallest safe observation follow-up.
 
   Done:
-  - v0.12.4 identifies a monotonic workforce-capacity bottleneck signal in the
-    existing all-tier artifact.
+  - Reviewed the v0.12.4 artifact and the typed observation, MCP formatter,
+    staffing transition, and debrief boundaries.
+  - Confirmed visible trust/labor/operations/consultant/debrief context while
+    identifying omitted typed Riverside staffing and physical-capacity counts.
+  - Added a deterministic design contract requiring an observation-only
+    follow-up using `PlayerObservation` and excluding hidden targets, effective
+    allocations, future hires, and rival private state.
+  - Preserved runtime difficulty, balance, scoring, transition, replay/hash,
+    and winnability deferral.
+  - Bumped package metadata to `0.12.5`.
 
   Not Yet Done:
-  - Design the smallest pressure/observation proposal and state whether it is
-    already sufficiently visible or requires a separate runtime proposal.
-  - Preserve Expert clearability and avoid inferring human-perceived difficulty
-    from the simulated signal.
+  - Implement the bounded MCP projection follow-up and rerun the compatible
+    v0.12.4 evidence matrix before considering the interface gap closed.
 
   Deferred / Non-Goals:
-  - No runtime tuning, broad balance pass, hidden rival omniscience, punitive
-    player-resource cut, scoring redesign, GUI, legal forecast, calibration,
-    winnability, or human-learning claim without a separately justified gate.
+  - No difficulty values, balance pass, scoring, transition, command, scenario,
+    replay/hash, GUI, hidden-state, calibration, winnability, or human-learning
+    changes.
 
   Verification:
-  - Required before this item moves to Past: named mechanism/evidence sources,
-    actor/observation boundary, deterministic design artifact, domain QA, and
-    full repository checks.
+  - Design source markers supported; observation follow-up required; runtime
+    difficulty change unauthorized.
+  - 307 Rust tests, 189 Python tests, formatting, clippy, CLI smoke, golden,
+    and diff checks pass.
+
+## Present
+
+- Feature: Workforce Capacity Observation Context (v0.12.6)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.5 merge
+
+  Summary:
+  Render the safe typed staffing and physical-capacity context at the MCP
+  boundary and validate that the candidate pressure signal remains
+  observation-only.
+
+  Done:
+  - v0.12.5 identifies the typed-vs-rendered workforce context gap and defines
+    the exact two-line projection contract.
+
+  Not Yet Done:
+  - Implement the `Staffing:` and `Physical capacity:` MCP lines from
+    `PlayerObservation`.
+  - Add session-boundary tests and rerun the unchanged v0.12.4-compatible
+    evidence matrix with exact history/state-hash comparison.
+
+  Deferred / Non-Goals:
+  - No difficulty tuning, broad balance pass, hidden rival omniscience, derived
+    effective-capacity model, scoring redesign, GUI, legal forecast, calibration,
+    winnability, or human-learning claim.
+
+  Verification:
+  - Required before this item moves to Past: focused MCP tests, compatible
+    matrix, exact history/hash comparison, domain QA, and full repository
+    checks.
 
 ## Future
 
@@ -3830,10 +3867,10 @@ strategic actors, or platform architecture.
   express.
 
   Next actionable slice:
-  v0.12.4 identifies workforce capacity as a candidate visible pressure
-  dimension. Design the smallest player/actor observation and mechanism gate
-  for that signal before changing default balance; Expert should remain
-  severe-but-winnable evidence, not an assumption.
+  v0.12.5 confirms a typed-vs-rendered workforce context gap. Implement only
+  the safe `PlayerObservation` staffing/capacity projection and rerun the
+  compatible evidence matrix before considering any difficulty or balance
+  change; Expert should remain severe-but-winnable evidence, not an assumption.
 
   Verification target:
   Findings cite seeds, profiles, difficulty tiers, validation failures or

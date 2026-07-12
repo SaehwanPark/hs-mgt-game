@@ -1,55 +1,56 @@
-# Request Summary - Difficulty Depth Evidence Review v0.12.4
+# Request Summary - Workforce Capacity Difficulty Design Gate v0.12.5
 
 ## Scope
 
-- Continue from merged PR #156 and the v0.12.3 teachability review.
-- Audit the existing post-change all-tier difficulty artifact and standalone
-  Expert validation artifact without launching new sessions.
-- Ask whether a visible pressure dimension is expressed across difficulty tiers
-  and whether Expert completion remains a bounded clearability proxy.
-- Report one candidate signal, if present, while keeping runtime promotion,
-  balance, and winnability claims deferred.
+- Continue from merged PR #157 and the v0.12.4 candidate workforce-capacity
+  pressure signal.
+- Review the typed competitive observation, MCP formatter, transition events,
+  and debrief boundary to decide whether the signal is sufficiently visible at
+  decision time.
+- Specify the smallest observation-only follow-up if safe typed staffing and
+  capacity fields are omitted from MCP output.
+- Keep difficulty values, balance, winnability, and transition semantics
+  deferred until a separately justified implementation gate.
 
 ## Non-goals
 
-- No new capture, state, transition, ruleset, threshold, scoring, balance,
-  difficulty value, command, scenario, replay/hash, or GUI changes.
-- No causal comparison across source versions; endpoint outcomes are descriptive
-  only because the sources were produced at different code versions.
-- No general Expert winnability, human-learning, calibration, legal-validity,
-  policy-forecasting, or optimal-strategy claim.
+- No runtime code, state, transition, ruleset, threshold, scoring, balance,
+  difficulty, command, scenario, replay/hash, or GUI changes in this design
+  gate.
+- No hidden staffing targets, effective-capacity calculations, rival private
+  workforce state, future hiring resolution, or actor utility exposure.
+- No human-learning, calibration, legal-validity, policy-forecasting, or general
+  Expert winnability claim.
 
 ## Sources
 
 - `SPEC.md`, `docs/roadmap.md`, `docs/design_principles.md`, and
   `docs/proposal.md`.
-- `_workspace/experiments/v0.11.11-phase7-post-change-all-tier-validation/results.json`
-  and its diagnostics.
-- `_workspace/experiments/v0.11.9-expert-difficulty-validation/results.json`
-  and its diagnostics.
-- `docs/playtest-findings-v0.11.10.md`, `docs/playtest-findings-v0.11.11.md`,
-  and the existing source audit contracts.
+- v0.12.4 difficulty-depth report and source artifact:
+  `_workspace/experiments/v0.12.4-difficulty-depth-evidence/`.
+- `src/model/campaign.rs` (`PlayerObservation`),
+  `src/sim/observe_competitive.rs`, `src/mcp/session.rs`,
+  `src/sim/transition_competitive.rs`, and `src/debrief/report.rs`.
+- Existing competitive MCP/session tests and v0.11.11/v0.11.12 findings.
 
 ## Expected files
 
-- `_workspace/experiments/v0.12.4-difficulty-depth-evidence/` audit script,
-  results, and diagnostics.
-- `tests/test_difficulty_depth_evidence.py` for source contracts, pressure
-  summaries, malformed-input rejection, and deterministic rendering.
-- `docs/playtest-findings-v0.12.4.md`, `SPEC.md`, `CHANGELOG.md`, README,
-  architecture/roadmap/lesson notes, and workspace handoffs.
-- `Cargo.toml` and `Cargo.lock` for version `0.12.4`.
+- `_workspace/experiments/v0.12.5-workforce-capacity-design/` deterministic
+  design contract and diagnostics.
+- `tests/test_workforce_capacity_design.py` for the design contract.
+- `docs/playtest-findings-v0.12.5.md`, `docs/workforce-capacity-design-v0.12.5.md`,
+  `SPEC.md`, `CHANGELOG.md`, README, architecture/roadmap/lesson notes, and
+  workspace handoffs.
+- `Cargo.toml` and `Cargo.lock` for version `0.12.5`.
 
 ## Validation target
 
-- The two named artifacts contain 75 complete runs and 1,800 committed
-  transitions in total: 60 all-tier plus 15 Expert.
-- The all-tier matrix covers five profiles × three seeds × four difficulty
-  tiers, with complete trace/hash/debrief contracts and zero validation
-  failures.
-- The Expert artifact covers the same five profiles × three seeds at Expert,
-  with 15/15 complete runs and zero validation failures.
-- The audit reports per-tier workforce-capacity signals, action trajectories,
-  final tradeoff ranges, and the overlap/source-version limitation.
+- The design artifact names the v0.12.4 candidate signal and distinguishes
+  existing visible fields from omitted typed fields.
+- The proposal stays observation-only: render safe staffing/capacity fields at
+  the MCP boundary using `PlayerObservation`, with no hidden-state inference.
+- The artifact specifies focused tests and the unchanged v0.12.4 matrix as the
+  next implementation gate, while keeping runtime promotion for mechanics and
+  balance deferred.
 - Domain QA returns `Pass`; full Rust/Python, formatting, clippy, golden, CLI,
   and diff checks pass under default parallel CI tests.
