@@ -884,6 +884,9 @@ across seeds 42–44 with complete six-stage trace/debrief linkage. It identifie
 one bounded MCP observation-context gap—the typed alternatives, assumptions,
 and commitments are not rendered at decision time—while keeping transition,
 ruleset, balance, legal, and educational-effect changes deferred.
+The v0.12.2 follow-up renders those existing typed fields at the MCP boundary
+and reruns the same 9-run matrix with 54/54 observations carrying the context;
+no transition, ruleset, balance, or learning claim is promoted.
 Broader deal-market mechanics and legal forecasting remain deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
@@ -933,8 +936,8 @@ Current proposal-review candidates:
   Full deal-market simulation, private-equity rollups, and national
   consolidation strategy remain deferred.
   The v0.11.13 affiliation-first design gate, v0.11.14 runtime proposal, and
-  v0.12.0 bounded runtime implementation are complete. The v0.12.1 Phase 7
-  capture found a narrow observation-context issue for a possible MCP follow-up;
+  v0.12.0 bounded runtime implementation and v0.12.2 observation-context
+  follow-up are complete. The post-fix evidence closes the structural MCP gap;
   broader runtime breadth still requires separate implementation and
   domain/design review.
 - **GUI thin client:** design a graphical layer that reuses the same core,

@@ -847,7 +847,7 @@ fn summarize_affiliation_transition(transition: &AffiliationTransition) -> Trans
 fn format_affiliation_observation(
   observation: &crate::model::AffiliationObservation,
 ) -> Vec<String> {
-  vec![
+  let mut lines = vec![
     format!("Stage {}: {:?}", observation.turn, observation.stage),
     format!("Riverside cash: {}", observation.cash),
     format!(
@@ -863,7 +863,27 @@ fn format_affiliation_observation(
       .reported_condition
       .map(|condition| format!("Reported partner condition: {condition:?}"))
       .unwrap_or_else(|| "Reported partner condition: not yet assessed".to_string()),
-  ]
+    format!(
+      "Commitments: community {}, workforce {}, continuity {}, total {}",
+      observation.commitments.community,
+      observation.commitments.workforce,
+      observation.commitments.continuity,
+      observation.commitments.total()
+    ),
+  ];
+  lines.extend(
+    observation
+      .alternatives
+      .iter()
+      .map(|alternative| format!("Alternative: {alternative}")),
+  );
+  lines.extend(
+    observation
+      .assumptions
+      .iter()
+      .map(|assumption| format!("Assumption: {assumption}")),
+  );
+  lines
 }
 
 fn affiliation_legal_commands(state: &AffiliationWorldState) -> Vec<String> {
@@ -1593,6 +1613,68 @@ mod tests {
         .debrief
         .iter()
         .any(|line| line.contains("Regional affiliation debrief"))
+    );
+  }
+
+  #[test]
+  fn affiliation_observation_includes_context() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "regional-affiliation-v1");
+    assert!(
+      session
+        .observation
+        .iter()
+        .any(|line| line == "Commitments: community 0, workforce 0, continuity 0, total 0")
+    );
+    assert_eq!(
+      session
+        .observation
+        .iter()
+        .filter(|line| line.starts_with("Alternative:"))
+        .count(),
+      2
+    );
+    assert_eq!(
+      session
+        .observation
+        .iter()
+        .filter(|line| line.starts_with("Assumption:"))
+        .count(),
+      2
+    );
+
+    let assessed = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "assess".to_string(),
+      })
+      .expect("assessment");
+    assert_eq!(
+      assessed
+        .observation
+        .iter()
+        .filter(|line| line.starts_with("Alternative:"))
+        .count(),
+      3
+    );
+
+    let pursuing = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: assessed.session_id.clone(),
+        command_text: "posture choice=pursue".to_string(),
+      })
+      .expect("posture");
+    let committed = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: pursuing.session_id,
+        command_text: "commit community=6 workforce=6 continuity=6".to_string(),
+      })
+      .expect("commitments");
+    assert!(
+      committed
+        .observation
+        .iter()
+        .any(|line| line == "Commitments: community 6, workforce 6, continuity 6, total 18")
     );
   }
 

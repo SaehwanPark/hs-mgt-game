@@ -11,8 +11,9 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Symptom: The runtime retained alternatives, assumptions, and commitments,
   but the player-facing MCP rendering omitted them while the debrief later
   asked the player to compare alternatives.
-- Resolution: Recorded one structural decision-time context gap without changing
-  transitions, rulesets, or replay/hash contracts.
+- Resolution: Recorded the structural gap in v0.12.1, then rendered only the
+  existing safe typed fields through the MCP boundary in v0.12.2 without
+  changing transitions, rulesets, or replay/hash contracts.
 - Prevention: When validating a new campaign, compare the typed observation
   fields with every rendered CLI/MCP surface before making balance or learning
   claims; keep omitted fields as an interface slice rather than leaking hidden

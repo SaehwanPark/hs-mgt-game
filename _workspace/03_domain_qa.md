@@ -1,4 +1,4 @@
-# Domain QA - Regional Affiliation Playtest Validation v0.12.1
+# Domain QA - Regional Affiliation Observation Context v0.12.2
 
 ## Status
 
@@ -6,31 +6,25 @@ Pass.
 
 ## Reviewed Inputs
 
-- v0.12.1 request summary, evidence map, mechanism design, and implementation
+- v0.12.2 request summary, evidence map, mechanism design, and implementation
   plan.
-- `_workspace/experiments/v0.12.1-affiliation-playtest-validation/results.json`
-  and `diagnostics.md`.
-- `docs/playtest-findings-v0.12.1.md`, `SPEC.md`, `docs/roadmap.md`, and the
-  v0.12.0 affiliation runtime boundary.
-- `src/model/affiliation.rs`, `src/affiliation/`, `src/mcp/session.rs`, and
-  `src/debrief/report.rs`.
-- Focused artifact tests and repository verification output.
+- `src/mcp/session.rs` formatter and focused session test.
+- The immutable v0.12.1 capture and the v0.12.2 post-fix artifact/diagnostics.
+- `docs/playtest-findings-v0.12.2.md`, `SPEC.md`, `docs/roadmap.md`, and
+  `src/model/affiliation.rs` / `src/affiliation/observe.rs`.
 
 ## Findings
 
-- The artifact stays within Phase 7 validation and does not add a new actor,
-  transition, ruleset, scenario, or platform layer.
-- The 3-profile × 3-seed matrix is exact, complete, deterministic, and uses
-  only actor-visible observations and legal command hints.
-- Observation-before-command, append-only transition summaries, state hashes,
-  and debrief stage lines remain aligned for all 54 stages.
-- Riverside outcomes are reported separately from partner, review, labor,
-  payer, and community responses.
-- The typed-vs-rendered observation mismatch is grounded in the current code and
-  is recorded as one interface-context gap rather than a balance or learning
-  claim.
-- The artifact preserves the competitive golden boundary and the affiliation
-  replay/hash boundary.
+- The change is a presentation-only projection from the typed affiliation
+  observation and stays outside deterministic transition evaluation.
+- Commitments, alternatives, and assumptions are safe, explicit fields; hidden
+  partner state and future actor responses remain unrendered.
+- The MCP session test exercises initial, choose-posture, and post-commitment
+  observations rather than only testing a private formatter helper.
+- The same 9-coordinate matrix has 54/54 observations with the required labels,
+  complete history/hash/debrief linkage, and zero validation failures.
+- The v0.12.1 evidence remains immutable and the competitive golden boundary is
+  unchanged.
 
 ## Required Fixes
 
@@ -38,18 +32,20 @@ None.
 
 ## Residual Risks
 
-- The matrix is a small scripted simulated-policy sample and cannot establish
-  human comprehension, winnability, balance, calibration, legal validity, or
-  educational effectiveness.
-- Debrief-response parsing is intentionally tied to the current rendered stage
-  line contract and should be updated if that contract changes.
-- A future MCP observation-context fix must not expose hidden partner condition,
-  actor utility, or realized outcomes before they occur.
+- The post-fix matrix does not establish human comprehension, educational
+  effectiveness, winnability, balance, calibration, legal validity, or policy
+  forecasting.
+- Rendered labels are now an evidence-artifact contract and should remain
+  explicit if the MCP presentation changes again.
+- Future observation fields require the same hidden-state and actor-authority
+  review before exposure.
 
 ## Verification Evidence
 
-- Focused artifact tests passed: 6 tests.
-- Capture and audit passed: 9 runs, 54 stages, 0 validation failures.
-- Full Rust suite passed: 306 tests.
-- Full Python suite passed: 169 tests.
+- Focused Rust MCP test passed.
+- Focused Python post-fix tests passed: 4 tests.
+- Post-fix capture passed: 9 runs, 54 stages, zero validation failures, zero
+  missing typed-context fields.
+- Full Rust suite passed: 307 tests.
+- Full Python suite passed: 173 tests.
 - Formatting, clippy, competitive golden, and diff checks passed.

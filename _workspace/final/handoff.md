@@ -1,48 +1,47 @@
-# Final Handoff - Regional Affiliation Playtest Validation v0.12.1
+# Final Handoff - Regional Affiliation Observation Context v0.12.2
 
 ## Result
 
-- Captured and audited the opt-in `regional-affiliation-v1` campaign across
-  independent, deferred, and pursuit policies at seeds 42, 43, and 44.
-- Validated 9/9 complete six-stage runs, 54 observation-before-command links,
-  54 transition/state-hash links, and 54 debrief stage lines.
-- Preserved the affiliation runtime transition/replay/hash boundary and the
-  competitive seed-42 golden path.
-- Identified one concrete bounded gap: typed alternatives, assumptions, and
-  commitments are not rendered in MCP affiliation observations.
+- Rendered typed affiliation commitments, staged alternatives, and explicit
+  stylized assumptions in MCP observations.
+- Added a focused Rust session-boundary regression covering initial,
+  choose-posture, and post-commitment stages.
+- Re-ran the immutable v0.12.1 policy matrix at seeds 42, 43, and 44 as a new
+  v0.12.2 artifact: 9/9 complete runs, 54 stages, zero validation failures,
+  zero missing context fields.
+- Preserved affiliation transition/replay/hash behavior and the competitive
+  seed-42 golden path.
 
 ## Version boundaries
 
-- Package: `0.12.1`
-- Affiliation transitions, ruleset, state hash, replay artifact, scenario, and
+- Package: `0.12.2`
+- Change surface: MCP presentation and focused tests plus post-fix evidence
+- Affiliation transitions, ruleset, state hash, replay artifact semantics, and
   command parser: unchanged
 - Competitive ruleset, state hash, and golden trajectory: unchanged
-- Runtime promotion: deferred for balance, ruleset, legal, and educational
-  effect claims
+- Runtime promotion for balance/transition changes: deferred
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/affiliation-playtest-validation-v0.12.1`
-- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/154
+- Working branch: `feat/affiliation-observation-context-v0.12.2`
+- PR: to be opened after local verification
 - Domain QA: Pass.
-- Review Pass 1: no actionable issues found (semantic/evidence contract).
-- Review Pass 2: no actionable issues found (determinism/failure handling).
-- Review Pass 3: no actionable issues found (scope/spec alignment).
-- CI: GitHub Actions `check` passed.
-- No unresolved review threads were present.
-- Merge state: ready to merge.
+- Review passes: pending implementation completion
+- Merge state: pending PR review and merge
 
 ## Verification
 
-- Focused artifact tests: 6 passed.
-- Deterministic capture: 9 runs, 54 committed stages, 0 validation failures.
-- Full Rust suite: 306 tests passed.
-- Full Python suite: 169 tests passed.
+- Focused Rust MCP test: passed.
+- Focused Python post-fix tests: 4 passed.
+- Post-fix capture: 9 runs, 54 stages, zero validation failures, zero missing
+  typed-context fields.
+- Full Rust suite: 307 tests passed.
+- Full Python suite: 173 tests passed.
 - Formatting, clippy, competitive golden (2 tests), and diff checks passed.
 
 ## Next dependency
 
-The next Present item is the bounded v0.12.2 MCP observation-context slice.
-It should render only safe typed context, add focused observation tests, rerun
-this exact matrix, and avoid transition/ruleset/balance changes.
+After merge, re-audit the teachability queue. Continue evidence-only validation
+unless a new concrete player-facing, instructor-facing, or domain-review gap
+justifies another bounded change.

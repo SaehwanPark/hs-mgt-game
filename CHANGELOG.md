@@ -4,6 +4,26 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.2] - 2026-07-12
+
+### Added
+- Rendered typed affiliation commitments, staged alternatives, and explicit
+  stylized assumptions in the `regional-affiliation-v1` MCP observation.
+- Added a focused MCP session regression for initial, choose-posture, and
+  post-commitment observation surfaces.
+- Added a separate post-fix 9-run × 3-seed validation artifact with 54/54
+  observations carrying the required context and zero validation failures.
+
+### Changed
+- Bumped package metadata to `0.12.2`.
+- Closed the v0.12.1 observation-context gap without changing transitions,
+  rulesets, state hashes, replay artifacts, or the competitive golden path.
+
+### Evidence Limits
+- The post-fix capture is deterministic simulated-policy evidence, not
+  human-learning, classroom-effectiveness, winnability, balance, calibration,
+  legal-validity, or policy-forecasting evidence.
+
 ## [0.12.1] - 2026-07-12
 
 ### Added

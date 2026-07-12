@@ -1,0 +1,2860 @@
+{
+  "artifact_type": "regional-affiliation-observation-context",
+  "batch_id": "v0.12.2-affiliation-observation-context",
+  "campaign": "regional-affiliation-v1",
+  "code_version": "0.12.2",
+  "profiles": [
+    "independent",
+    "deferred",
+    "pursuit"
+  ],
+  "runs": [
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Independent",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Independent }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "00025c494e6299ae",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Independent",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Independent }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Independent posture"
+          ],
+          "state_hash": "31c9e7e5e7cc16fd",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "ee38360229afe70c",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "0a1a88f40ee9bba5",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "5ca716a1c0ce6826",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "00025c494e6299ae",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, remain independent, and preserve cash and optionality.",
+      "posture": "independent",
+      "profile_id": "independent",
+      "profile_name": "Independent posture",
+      "seed": 42,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "31c9e7e5e7cc16fd",
+        "ee38360229afe70c",
+        "0a1a88f40ee9bba5",
+        "5ca716a1c0ce6826",
+        "00025c494e6299ae"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Independent }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Independent posture"
+            ],
+            "state_hash": "31c9e7e5e7cc16fd",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=independent",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "ee38360229afe70c",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "0a1a88f40ee9bba5",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "5ca716a1c0ce6826",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "00025c494e6299ae",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Independent",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Independent }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "00025c494e6299ae",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Independent",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Independent }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Independent posture"
+          ],
+          "state_hash": "31c9e7e5e7cc16fd",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "ee38360229afe70c",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "0a1a88f40ee9bba5",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "5ca716a1c0ce6826",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "00025c494e6299ae",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, remain independent, and preserve cash and optionality.",
+      "posture": "independent",
+      "profile_id": "independent",
+      "profile_name": "Independent posture",
+      "seed": 43,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "31c9e7e5e7cc16fd",
+        "ee38360229afe70c",
+        "0a1a88f40ee9bba5",
+        "5ca716a1c0ce6826",
+        "00025c494e6299ae"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Independent }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Independent posture"
+            ],
+            "state_hash": "31c9e7e5e7cc16fd",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=independent",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "ee38360229afe70c",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "0a1a88f40ee9bba5",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "5ca716a1c0ce6826",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "00025c494e6299ae",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Independent",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Independent }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "00025c494e6299ae",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Independent",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Independent }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Independent posture"
+          ],
+          "state_hash": "31c9e7e5e7cc16fd",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "ee38360229afe70c",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "0a1a88f40ee9bba5",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "5ca716a1c0ce6826",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "00025c494e6299ae",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, remain independent, and preserve cash and optionality.",
+      "posture": "independent",
+      "profile_id": "independent",
+      "profile_name": "Independent posture",
+      "seed": 44,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "31c9e7e5e7cc16fd",
+        "ee38360229afe70c",
+        "0a1a88f40ee9bba5",
+        "5ca716a1c0ce6826",
+        "00025c494e6299ae"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Independent }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Independent posture"
+            ],
+            "state_hash": "31c9e7e5e7cc16fd",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=independent",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "ee38360229afe70c",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "0a1a88f40ee9bba5",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "5ca716a1c0ce6826",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "00025c494e6299ae",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Independent",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Deferred",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Deferred }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "055c79f733def09b",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Deferred",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Deferred }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Deferred posture"
+          ],
+          "state_hash": "69877189922328e2",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "278118e674357c25",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "029dbe0b65f65a9a",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "888aee16d7169463",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "055c79f733def09b",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, defer pursuit, and gather no further commitment exposure.",
+      "posture": "defer",
+      "profile_id": "deferred",
+      "profile_name": "Deferred posture",
+      "seed": 42,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "69877189922328e2",
+        "278118e674357c25",
+        "029dbe0b65f65a9a",
+        "888aee16d7169463",
+        "055c79f733def09b"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Deferred }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Deferred posture"
+            ],
+            "state_hash": "69877189922328e2",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=defer",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "278118e674357c25",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "029dbe0b65f65a9a",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "888aee16d7169463",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "055c79f733def09b",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Deferred",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Deferred }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "055c79f733def09b",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Deferred",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Deferred }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Deferred posture"
+          ],
+          "state_hash": "69877189922328e2",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "278118e674357c25",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "029dbe0b65f65a9a",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "888aee16d7169463",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "055c79f733def09b",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, defer pursuit, and gather no further commitment exposure.",
+      "posture": "defer",
+      "profile_id": "deferred",
+      "profile_name": "Deferred posture",
+      "seed": 43,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "69877189922328e2",
+        "278118e674357c25",
+        "029dbe0b65f65a9a",
+        "888aee16d7169463",
+        "055c79f733def09b"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Deferred }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Deferred posture"
+            ],
+            "state_hash": "69877189922328e2",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=defer",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "278118e674357c25",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "029dbe0b65f65a9a",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "888aee16d7169463",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "055c79f733def09b",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Deferred",
+        "Riverside outcomes: cash -2, access +0, quality +0, workforce trust +0, community trust +0",
+        "Commitments: community 0, workforce 0, continuity 0",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Deferred }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 4 SubmitReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 6 IntegrateOrDecline: command Hold; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "055c79f733def09b",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Deferred",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Deferred }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Deferred posture"
+          ],
+          "state_hash": "69877189922328e2",
+          "turn": 2
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "278118e674357c25",
+          "turn": 3
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "029dbe0b65f65a9a",
+          "turn": 4
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "888aee16d7169463",
+          "turn": 5
+        },
+        {
+          "command": "Hold",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside held its current affiliation posture"
+          ],
+          "state_hash": "055c79f733def09b",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, defer pursuit, and gather no further commitment exposure.",
+      "posture": "defer",
+      "profile_id": "deferred",
+      "profile_name": "Deferred posture",
+      "seed": 44,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "69877189922328e2",
+        "278118e674357c25",
+        "029dbe0b65f65a9a",
+        "888aee16d7169463",
+        "055c79f733def09b"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Deferred }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Deferred posture"
+            ],
+            "state_hash": "69877189922328e2",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=defer",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "278118e674357c25",
+            "turn": 3
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "029dbe0b65f65a9a",
+            "turn": 4
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "888aee16d7169463",
+            "turn": 5
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "Hold",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside held its current affiliation posture"
+            ],
+            "state_hash": "055c79f733def09b",
+            "turn": 6
+          },
+          "legal_commands": [
+            "hold"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Deferred",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "hold",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Integrated",
+        "Riverside outcomes: cash -36, access -3, quality -3, workforce trust +1, community trust +6",
+        "Commitments: community 6, workforce 6, continuity 6",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Pursue }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command SetCommitments { community: 6, workforce: 6, continuity: 6 }; partner Conditioned, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "  partner \u2192 conditioned (The partner accepted the relationship with an explicit continuity condition.)",
+        "Stage 4 SubmitReview: command SubmitReview; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command AwaitReview; partner NotEngaged, review Approved, labor Concern, payer Support, community Support",
+        "  review \u2192 Approved (Review response is a stylized institutional outcome, not a legal prediction.)",
+        "  labor \u2192 Concern (Labor response reflects workforce commitment and perceived disruption risk.)",
+        "  payer \u2192 Support (Payer response reflects continuity commitments and concentration concerns.)",
+        "  community \u2192 Support (Community response reflects continuity and public-benefit commitments.)",
+        "Stage 6 IntegrateOrDecline: command ChooseIntegration { decision: Begin }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "23dc28d4394cc5f2",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Integrated",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Pursue }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Pursue posture"
+          ],
+          "state_hash": "b2d0f88e0ecab19c",
+          "turn": 2
+        },
+        {
+          "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+          "consultant_options": [],
+          "effects": [
+            "affiliation commitments changed cash by -18",
+            "affiliation commitments changed workforce_trust by 3",
+            "affiliation commitments changed community_trust by 3",
+            "affiliation commitments changed access_index by 3"
+          ],
+          "events": [
+            "riverside: Riverside proposed 18 commitment points"
+          ],
+          "state_hash": "f8edc81ff7020072",
+          "turn": 3
+        },
+        {
+          "command": "SubmitReview",
+          "consultant_options": [],
+          "effects": [
+            "institutional review submission changed cash by -6"
+          ],
+          "events": [
+            "review: Riverside submitted the affiliation package for institutional review"
+          ],
+          "state_hash": "8774957b2eded327",
+          "turn": 4
+        },
+        {
+          "command": "AwaitReview",
+          "consultant_options": [],
+          "effects": [
+            "external response changed workforce_trust by -1",
+            "external response changed cash by 4",
+            "external response changed community_trust by 3"
+          ],
+          "events": [
+            "review: Institutional review resolved as Approved"
+          ],
+          "state_hash": "76d3b61862f6872b",
+          "turn": 5
+        },
+        {
+          "command": "ChooseIntegration { decision: Begin }",
+          "consultant_options": [],
+          "effects": [
+            "integration start changed cash by -14",
+            "integration drag changed quality_index by -3",
+            "continuity shock changed access_index by -6"
+          ],
+          "events": [
+            "integration: Riverside began early integration with initial drag and continuity effects"
+          ],
+          "state_hash": "23dc28d4394cc5f2",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, submit the maximum legal commitment package, and integrate when approved.",
+      "posture": "pursue",
+      "profile_id": "pursuit",
+      "profile_name": "Affiliation pursuit",
+      "seed": 42,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "b2d0f88e0ecab19c",
+        "f8edc81ff7020072",
+        "8774957b2eded327",
+        "76d3b61862f6872b",
+        "23dc28d4394cc5f2"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Pursue }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Pursue posture"
+            ],
+            "state_hash": "b2d0f88e0ecab19c",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=pursue",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+            "consultant_options": [],
+            "effects": [
+              "affiliation commitments changed cash by -18",
+              "affiliation commitments changed workforce_trust by 3",
+              "affiliation commitments changed community_trust by 3",
+              "affiliation commitments changed access_index by 3"
+            ],
+            "events": [
+              "riverside: Riverside proposed 18 commitment points"
+            ],
+            "state_hash": "f8edc81ff7020072",
+            "turn": 3
+          },
+          "legal_commands": [
+            "commit community=1..8 workforce=1..8 continuity=1..8"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Pursuing",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "commit community=6 workforce=6 continuity=6",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SubmitReview",
+            "consultant_options": [],
+            "effects": [
+              "institutional review submission changed cash by -6"
+            ],
+            "events": [
+              "review: Riverside submitted the affiliation package for institutional review"
+            ],
+            "state_hash": "8774957b2eded327",
+            "turn": 4
+          },
+          "legal_commands": [
+            "submit_review"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 40",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: PartnerConditioned",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "submit_review",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AwaitReview",
+            "consultant_options": [],
+            "effects": [
+              "external response changed workforce_trust by -1",
+              "external response changed cash by 4",
+              "external response changed community_trust by 3"
+            ],
+            "events": [
+              "review: Institutional review resolved as Approved"
+            ],
+            "state_hash": "76d3b61862f6872b",
+            "turn": 5
+          },
+          "legal_commands": [
+            "await_review"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 34",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: ReviewPending",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "await_review",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "ChooseIntegration { decision: Begin }",
+            "consultant_options": [],
+            "effects": [
+              "integration start changed cash by -14",
+              "integration drag changed quality_index by -3",
+              "continuity shock changed access_index by -6"
+            ],
+            "events": [
+              "integration: Riverside began early integration with initial drag and continuity effects"
+            ],
+            "state_hash": "23dc28d4394cc5f2",
+            "turn": 6
+          },
+          "legal_commands": [
+            "integrate decision=begin|decline"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 38",
+            "Access 71, quality 72, workforce trust 62, community trust 70",
+            "Partner: Pine Valley Community Health",
+            "Status: Approved",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "integrate decision=begin",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Integrated",
+        "Riverside outcomes: cash -33, access -1, quality -1, workforce trust +4, community trust +6",
+        "Commitments: community 6, workforce 6, continuity 6",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Pursue }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command SetCommitments { community: 6, workforce: 6, continuity: 6 }; partner Accepted, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "  partner \u2192 accepted (The package met the partner's fit and continuity threshold.)",
+        "Stage 4 SubmitReview: command SubmitReview; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command AwaitReview; partner NotEngaged, review Approved, labor Support, payer Support, community Support",
+        "  review \u2192 Approved (Review response is a stylized institutional outcome, not a legal prediction.)",
+        "  labor \u2192 Support (Labor response reflects workforce commitment and perceived disruption risk.)",
+        "  payer \u2192 Support (Payer response reflects continuity commitments and concentration concerns.)",
+        "  community \u2192 Support (Community response reflects continuity and public-benefit commitments.)",
+        "Stage 6 IntegrateOrDecline: command ChooseIntegration { decision: Begin }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "9acaa2a18bb979e3",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Integrated",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Pursue }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Pursue posture"
+          ],
+          "state_hash": "b2d0f88e0ecab19c",
+          "turn": 2
+        },
+        {
+          "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+          "consultant_options": [],
+          "effects": [
+            "affiliation commitments changed cash by -18",
+            "affiliation commitments changed workforce_trust by 3",
+            "affiliation commitments changed community_trust by 3",
+            "affiliation commitments changed access_index by 3"
+          ],
+          "events": [
+            "riverside: Riverside proposed 18 commitment points"
+          ],
+          "state_hash": "9a2a05d0d1b39897",
+          "turn": 3
+        },
+        {
+          "command": "SubmitReview",
+          "consultant_options": [],
+          "effects": [
+            "institutional review submission changed cash by -6"
+          ],
+          "events": [
+            "review: Riverside submitted the affiliation package for institutional review"
+          ],
+          "state_hash": "0695c131eecce155",
+          "turn": 4
+        },
+        {
+          "command": "AwaitReview",
+          "consultant_options": [],
+          "effects": [
+            "external response changed workforce_trust by 2",
+            "external response changed cash by 4",
+            "external response changed community_trust by 3"
+          ],
+          "events": [
+            "review: Institutional review resolved as Approved"
+          ],
+          "state_hash": "cccbee2f2c726ced",
+          "turn": 5
+        },
+        {
+          "command": "ChooseIntegration { decision: Begin }",
+          "consultant_options": [],
+          "effects": [
+            "integration start changed cash by -11",
+            "integration drag changed quality_index by -1",
+            "continuity shock changed access_index by -4"
+          ],
+          "events": [
+            "integration: Riverside began early integration with initial drag and continuity effects"
+          ],
+          "state_hash": "9acaa2a18bb979e3",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, submit the maximum legal commitment package, and integrate when approved.",
+      "posture": "pursue",
+      "profile_id": "pursuit",
+      "profile_name": "Affiliation pursuit",
+      "seed": 43,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "b2d0f88e0ecab19c",
+        "9a2a05d0d1b39897",
+        "0695c131eecce155",
+        "cccbee2f2c726ced",
+        "9acaa2a18bb979e3"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Pursue }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Pursue posture"
+            ],
+            "state_hash": "b2d0f88e0ecab19c",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=pursue",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+            "consultant_options": [],
+            "effects": [
+              "affiliation commitments changed cash by -18",
+              "affiliation commitments changed workforce_trust by 3",
+              "affiliation commitments changed community_trust by 3",
+              "affiliation commitments changed access_index by 3"
+            ],
+            "events": [
+              "riverside: Riverside proposed 18 commitment points"
+            ],
+            "state_hash": "9a2a05d0d1b39897",
+            "turn": 3
+          },
+          "legal_commands": [
+            "commit community=1..8 workforce=1..8 continuity=1..8"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Pursuing",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "commit community=6 workforce=6 continuity=6",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SubmitReview",
+            "consultant_options": [],
+            "effects": [
+              "institutional review submission changed cash by -6"
+            ],
+            "events": [
+              "review: Riverside submitted the affiliation package for institutional review"
+            ],
+            "state_hash": "0695c131eecce155",
+            "turn": 4
+          },
+          "legal_commands": [
+            "submit_review"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 40",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: PartnerAccepted",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "submit_review",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AwaitReview",
+            "consultant_options": [],
+            "effects": [
+              "external response changed workforce_trust by 2",
+              "external response changed cash by 4",
+              "external response changed community_trust by 3"
+            ],
+            "events": [
+              "review: Institutional review resolved as Approved"
+            ],
+            "state_hash": "cccbee2f2c726ced",
+            "turn": 5
+          },
+          "legal_commands": [
+            "await_review"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 34",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: ReviewPending",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "await_review",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "ChooseIntegration { decision: Begin }",
+            "consultant_options": [],
+            "effects": [
+              "integration start changed cash by -11",
+              "integration drag changed quality_index by -1",
+              "continuity shock changed access_index by -4"
+            ],
+            "events": [
+              "integration: Riverside began early integration with initial drag and continuity effects"
+            ],
+            "state_hash": "9acaa2a18bb979e3",
+            "turn": 6
+          },
+          "legal_commands": [
+            "integrate decision=begin|decline"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 38",
+            "Access 71, quality 72, workforce trust 65, community trust 70",
+            "Partner: Pine Valley Community Health",
+            "Status: Approved",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "integrate decision=begin",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "completion_status": "complete",
+      "debrief": [
+        "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+        "Stages committed: 6",
+        "Final status: Integrated",
+        "Riverside outcomes: cash -32, access +0, quality -1, workforce trust +1, community trust +6",
+        "Commitments: community 6, workforce 6, continuity 6",
+        "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.",
+        "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.",
+        "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?",
+        "Stage 1 AssessPartner: command AssessPartner; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 2 ChoosePosture: command ChoosePosture { posture: Pursue }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 3 NegotiateCommitments: command SetCommitments { community: 6, workforce: 6, continuity: 6 }; partner Accepted, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "  partner \u2192 accepted (The package met the partner's fit and continuity threshold.)",
+        "Stage 4 SubmitReview: command SubmitReview; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged",
+        "Stage 5 ResolveReview: command AwaitReview; partner NotEngaged, review Approved, labor Concern, payer Support, community Support",
+        "  review \u2192 Approved (Review response is a stylized institutional outcome, not a legal prediction.)",
+        "  labor \u2192 Concern (Labor response reflects workforce commitment and perceived disruption risk.)",
+        "  payer \u2192 Support (Payer response reflects continuity commitments and concentration concerns.)",
+        "  community \u2192 Support (Community response reflects continuity and public-benefit commitments.)",
+        "Stage 6 IntegrateOrDecline: command ChooseIntegration { decision: Begin }; partner NotEngaged, review NotEngaged, labor NotEngaged, payer NotEngaged, community NotEngaged"
+      ],
+      "decision_source": "deterministic policy using only actor-visible observations and legal command hints",
+      "difficulty": null,
+      "final_hash": "caed6892ddb71dc3",
+      "final_observation": [
+        "Session complete.",
+        "Committed stages: 6"
+      ],
+      "final_status": "Integrated",
+      "history": [
+        {
+          "command": "AssessPartner",
+          "consultant_options": [],
+          "effects": [
+            "partner assessment changed cash by -2"
+          ],
+          "events": [
+            "partner: Riverside received a bounded partner condition report"
+          ],
+          "state_hash": "9d38e1d2ebc1e05d",
+          "turn": 1
+        },
+        {
+          "command": "ChoosePosture { posture: Pursue }",
+          "consultant_options": [],
+          "effects": [],
+          "events": [
+            "riverside: Riverside chose the Pursue posture"
+          ],
+          "state_hash": "b2d0f88e0ecab19c",
+          "turn": 2
+        },
+        {
+          "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+          "consultant_options": [],
+          "effects": [
+            "affiliation commitments changed cash by -18",
+            "affiliation commitments changed workforce_trust by 3",
+            "affiliation commitments changed community_trust by 3",
+            "affiliation commitments changed access_index by 3"
+          ],
+          "events": [
+            "riverside: Riverside proposed 18 commitment points"
+          ],
+          "state_hash": "9a2a05d0d1b39897",
+          "turn": 3
+        },
+        {
+          "command": "SubmitReview",
+          "consultant_options": [],
+          "effects": [
+            "institutional review submission changed cash by -6"
+          ],
+          "events": [
+            "review: Riverside submitted the affiliation package for institutional review"
+          ],
+          "state_hash": "0695c131eecce155",
+          "turn": 4
+        },
+        {
+          "command": "AwaitReview",
+          "consultant_options": [],
+          "effects": [
+            "external response changed workforce_trust by -1",
+            "external response changed cash by 4",
+            "external response changed community_trust by 3"
+          ],
+          "events": [
+            "review: Institutional review resolved as Approved"
+          ],
+          "state_hash": "8dfd92635cf15049",
+          "turn": 5
+        },
+        {
+          "command": "ChooseIntegration { decision: Begin }",
+          "consultant_options": [],
+          "effects": [
+            "integration start changed cash by -10",
+            "integration drag changed quality_index by -1",
+            "continuity shock changed access_index by -3"
+          ],
+          "events": [
+            "integration: Riverside began early integration with initial drag and continuity effects"
+          ],
+          "state_hash": "caed6892ddb71dc3",
+          "turn": 6
+        }
+      ],
+      "policy_description": "Assess the partner, submit the maximum legal commitment package, and integrate when approved.",
+      "posture": "pursue",
+      "profile_id": "pursuit",
+      "profile_name": "Affiliation pursuit",
+      "seed": 44,
+      "state_hashes": [
+        "9d38e1d2ebc1e05d",
+        "b2d0f88e0ecab19c",
+        "9a2a05d0d1b39897",
+        "0695c131eecce155",
+        "8dfd92635cf15049",
+        "caed6892ddb71dc3"
+      ],
+      "transition_count": 6,
+      "turn_trace": [
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AssessPartner",
+            "consultant_options": [],
+            "effects": [
+              "partner assessment changed cash by -2"
+            ],
+            "events": [
+              "partner: Riverside received a bounded partner condition report"
+            ],
+            "state_hash": "9d38e1d2ebc1e05d",
+            "turn": 1
+          },
+          "legal_commands": [
+            "assess"
+          ],
+          "observation": [
+            "Stage 1: AssessPartner",
+            "Riverside cash: 60",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: not yet assessed",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "assess",
+          "turn": 1,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "ChoosePosture { posture: Pursue }",
+            "consultant_options": [],
+            "effects": [],
+            "events": [
+              "riverside: Riverside chose the Pursue posture"
+            ],
+            "state_hash": "b2d0f88e0ecab19c",
+            "turn": 2
+          },
+          "legal_commands": [
+            "posture choice=independent|defer|pursue"
+          ],
+          "observation": [
+            "Stage 2: ChoosePosture",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Unassessed",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Alternative: Pursue: spend resources for possible continuity and regional leverage",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "posture choice=pursue",
+          "turn": 2,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SetCommitments { community: 6, workforce: 6, continuity: 6 }",
+            "consultant_options": [],
+            "effects": [
+              "affiliation commitments changed cash by -18",
+              "affiliation commitments changed workforce_trust by 3",
+              "affiliation commitments changed community_trust by 3",
+              "affiliation commitments changed access_index by 3"
+            ],
+            "events": [
+              "riverside: Riverside proposed 18 commitment points"
+            ],
+            "state_hash": "9a2a05d0d1b39897",
+            "turn": 3
+          },
+          "legal_commands": [
+            "commit community=1..8 workforce=1..8 continuity=1..8"
+          ],
+          "observation": [
+            "Stage 3: NegotiateCommitments",
+            "Riverside cash: 58",
+            "Access 68, quality 72, workforce trust 60, community trust 64",
+            "Partner: Pine Valley Community Health",
+            "Status: Pursuing",
+            "Reported partner condition: Stable",
+            "Commitments: community 0, workforce 0, continuity 0, total 0",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "commit community=6 workforce=6 continuity=6",
+          "turn": 3,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "SubmitReview",
+            "consultant_options": [],
+            "effects": [
+              "institutional review submission changed cash by -6"
+            ],
+            "events": [
+              "review: Riverside submitted the affiliation package for institutional review"
+            ],
+            "state_hash": "0695c131eecce155",
+            "turn": 4
+          },
+          "legal_commands": [
+            "submit_review"
+          ],
+          "observation": [
+            "Stage 4: SubmitReview",
+            "Riverside cash: 40",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: PartnerAccepted",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "submit_review",
+          "turn": 4,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": false,
+          "latest_transition": {
+            "command": "AwaitReview",
+            "consultant_options": [],
+            "effects": [
+              "external response changed workforce_trust by -1",
+              "external response changed cash by 4",
+              "external response changed community_trust by 3"
+            ],
+            "events": [
+              "review: Institutional review resolved as Approved"
+            ],
+            "state_hash": "8dfd92635cf15049",
+            "turn": 5
+          },
+          "legal_commands": [
+            "await_review"
+          ],
+          "observation": [
+            "Stage 5: ResolveReview",
+            "Riverside cash: 34",
+            "Access 71, quality 72, workforce trust 63, community trust 67",
+            "Partner: Pine Valley Community Health",
+            "Status: ReviewPending",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "await_review",
+          "turn": 5,
+          "validation_failures": []
+        },
+        {
+          "done_after_submit": true,
+          "latest_transition": {
+            "command": "ChooseIntegration { decision: Begin }",
+            "consultant_options": [],
+            "effects": [
+              "integration start changed cash by -10",
+              "integration drag changed quality_index by -1",
+              "continuity shock changed access_index by -3"
+            ],
+            "events": [
+              "integration: Riverside began early integration with initial drag and continuity effects"
+            ],
+            "state_hash": "caed6892ddb71dc3",
+            "turn": 6
+          },
+          "legal_commands": [
+            "integrate decision=begin|decline"
+          ],
+          "observation": [
+            "Stage 6: IntegrateOrDecline",
+            "Riverside cash: 38",
+            "Access 71, quality 72, workforce trust 62, community trust 70",
+            "Partner: Pine Valley Community Health",
+            "Status: Approved",
+            "Reported partner condition: Stable",
+            "Commitments: community 6, workforce 6, continuity 6, total 18",
+            "Alternative: Remain independent: preserve cash and autonomy without affiliation effects",
+            "Alternative: Defer: preserve the option while accepting no immediate affiliation benefit",
+            "Assumption: Partner condition and institutional review are stylized game inputs, not legal forecasts.",
+            "Assumption: Community, labor, payer, and integration responses are outside Riverside authority."
+          ],
+          "submitted_command": "integrate decision=begin",
+          "turn": 6,
+          "validation_failures": []
+        }
+      ],
+      "validation_failures": []
+    }
+  ],
+  "runtime_promotion": "deferred",
+  "seeds": [
+    42,
+    43,
+    44
+  ]
+}
