@@ -4,6 +4,24 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.8] - 2026-07-12
+
+### Added
+- Added a reproducible closure audit for the competitive teachability and
+  validation-loop queue item.
+- Added focused validation for 2 source lanes, 18 complete runs, 270 committed
+  transitions, source-specific coverage, and zero structural gaps.
+
+### Changed
+- Bumped package metadata to `0.12.8`.
+- Removed the completed teachability item from the SPEC Future queue while
+  preserving a concrete reopening condition and deferred runtime promotion.
+
+### Evidence Limits
+- The closure is deterministic simulated-policy traceability evidence; it is
+  not human-learning, classroom, balance, winnability, or comprehension
+  evidence.
+
 ## [0.12.7] - 2026-07-12
 
 ### Added

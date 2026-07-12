@@ -1,22 +1,14 @@
-# Mechanism Design — Affiliation Runtime Boundary Proposal v0.12.7
+# Mechanism Design — Teachability Queue Closure v0.12.8
 
-## Existing mechanism boundary
+This slice adds no mechanism. It freezes the current teachability contract as
+an evidence boundary:
 
-The runtime has one human-led Riverside system and one localized nonprofit
-partner across six stages: assess, posture, commitments, review submission,
-review resolution, and integrate-or-decline.
+1. actor-visible decision context;
+2. action and validation response;
+3. accepted transition and state hash;
+4. complete outcome and final hash;
+5. source-specific debrief explanation; and
+6. strategy/profile comparison.
 
-The design is already separated into:
-
-1. true state in `AffiliationWorldState`;
-2. actor-visible projection in `AffiliationObservation` and MCP formatting;
-3. explicit stochastic outcomes in `AffiliationResolvedInputs`;
-4. deterministic evaluation in `transition_affiliation`;
-5. immutable transition/history/replay records; and
-6. retrospective organizational, actor, and social-welfare debrief lines.
-
-## Boundary decision
-
-The implementation satisfies the minimum proposal. No new mechanism should be
-added in v0.12.7. Direct acquisition and broader consolidation remain future
-work gated by concrete evidence.
+The two campaigns retain distinct context vocabularies and stage/month units.
+No runtime change is authorized without a new concrete gap.

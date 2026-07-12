@@ -3,6 +3,18 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Remove Completed Queue Items Without Making Learning Claims
+
+- Context: The v0.12.3 cross-campaign teachability review had already found no
+  structural gap, but its Future queue entry remained active text.
+- Symptom: Leaving the item in the queue obscured the actual next work, while
+  promoting trace coverage as learner evidence would overstate the result.
+- Resolution: Added a closure artifact with source-specific coverage, 18 runs,
+  270 transitions, and zero gaps; removed the item and recorded a concrete
+  reopening condition without changing runtime behavior.
+- Prevention: Close queue entries only with scope-matched evidence and preserve
+  explicit limits and reopening criteria.
+
 ## Reconcile Runtime Proposals Before Adding Another Mechanism
 
 - Context: The v0.12.7 SPEC item called for a separate affiliation runtime

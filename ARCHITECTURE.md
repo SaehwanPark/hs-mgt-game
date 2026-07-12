@@ -256,6 +256,12 @@ transitions, append-only replay/history, and debrief utility/welfare separation
 as explicit boundaries. No new affiliation mechanism or generic actor
 framework is authorized by this proposal.
 
+The v0.12.8 teachability closure keeps the existing decision-context,
+action/response, transition/hash, outcome, debrief, and strategy-comparison
+contracts as validation surfaces rather than adding a new runtime mechanism.
+The source-specific affiliation and competitive context boundaries remain
+explicit, and any future change requires a concrete evidence gap.
+
 ### Scenario and Actor Design
 
 Responsible for:

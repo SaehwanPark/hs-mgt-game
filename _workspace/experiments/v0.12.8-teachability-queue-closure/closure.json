@@ -1,0 +1,140 @@
+{
+  "artifact_type": "competitive_teachability_queue_closure",
+  "batch_id": "v0.12.8-teachability-queue-closure",
+  "closure_status": "complete_no_actionable_gap",
+  "code_version": "0.12.8",
+  "evidence_limits": [
+    "This is deterministic simulated-policy traceability evidence, not human or classroom evidence.",
+    "No structural gap does not establish comprehension, debrief clarity, strategy quality, causality, balance, winnability, or optimality.",
+    "The affiliation and competitive source lanes have different stage/month units and are audited with source-specific contracts."
+  ],
+  "next_action": "Wait for a new concrete comprehension, pacing, traceability, strategy-comparison, or debrief-use finding before opening another teachability slice.",
+  "queue_action": "remove_item_from_future_queue",
+  "runtime_change_authorized": false,
+  "runtime_promotion": "deferred",
+  "source_batch_id": "v0.12.3-phase7-teachability-review",
+  "source_marker_contract": {
+    "_workspace/experiments/v0.12.3-phase7-teachability-review/diagnostics.md": {
+      "markers": [
+        "**Runs reviewed:** 18 of 18",
+        "**Committed transitions reviewed:** 270",
+        "No structural decision-to-debrief or source-context gap",
+        "**Runtime promotion:** deferred"
+      ],
+      "status": "supported"
+    },
+    "_workspace/experiments/v0.12.3-phase7-teachability-review/run_audit.py": {
+      "markers": [
+        "REVIEW_STEPS = (",
+        "\"finding\": \"no_structural_gap\"",
+        "assert report[\"aggregate\"][\"gap_count\"] == 0",
+        "assert report[\"finding\"] == \"no_structural_gap\""
+      ],
+      "status": "supported"
+    },
+    "docs/playtest-findings-v0.12.3.md": {
+      "markers": [
+        "## Promotion decision",
+        "No structural player-facing, instructor-facing, or domain-review gap",
+        "Runtime promotion remains deferred."
+      ],
+      "status": "supported"
+    }
+  },
+  "source_report": {
+    "artifact_type": "phase7_teachability_review",
+    "batch_id": "v0.12.3-phase7-teachability-review",
+    "code_version": "0.12.3",
+    "complete_run_count": 18,
+    "finding": "no_structural_gap",
+    "gap_count": 0,
+    "run_count": 18,
+    "runtime_promotion": "deferred",
+    "source_count": 2,
+    "sources": [
+      {
+        "campaign": "regional-affiliation-v1",
+        "complete_run_count": 9,
+        "coverage": {
+          "action_response": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "debrief_explanation": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "decision_context": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "outcome_context": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "strategy_comparison": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "transition_follow_through": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          }
+        },
+        "run_count": 9,
+        "source_code_version": "0.12.2",
+        "source_id": "affiliation",
+        "status": "supported",
+        "transition_count": 54
+      },
+      {
+        "campaign": "competitive-regional-v1",
+        "complete_run_count": 9,
+        "coverage": {
+          "action_response": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "debrief_explanation": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "decision_context": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "outcome_context": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "strategy_comparison": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          },
+          "transition_follow_through": {
+            "eligible_runs": 9,
+            "status": "supported",
+            "supported_runs": 9
+          }
+        },
+        "run_count": 9,
+        "source_code_version": "0.11.12",
+        "source_id": "competitive",
+        "status": "supported",
+        "transition_count": 216
+      }
+    ],
+    "transition_count": 270
+  }
+}
