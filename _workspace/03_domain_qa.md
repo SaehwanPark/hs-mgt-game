@@ -36,7 +36,7 @@ None.
 
 ## Verification Evidence
 
-- Focused v0.11.4 audit tests — 5 passed.
+- Focused v0.11.4 audit tests — 6 passed.
 - Matrix capture and audit output — 60 runs, 1,440 months, 469/469 links.
 - `cargo fmt --check` — passed.
 - `cargo clippy --all-targets -- -D warnings` — passed.

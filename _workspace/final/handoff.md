@@ -39,7 +39,7 @@
 
 - Base branch: `main`
 - Working branch: `feat/competitive-post-v0.11.3-validation-v0.11.4`
-- PR URL: to be recorded after opening.
+- PR URL: https://github.com/SaehwanPark/hs-mgt-game/pull/142
 - CI: to be recorded after the PR check completes.
 - Review loop: exactly three independent `code-reviewer` passes required.
 - Merge-ready: only after CI, review findings, and PR replies are complete.
