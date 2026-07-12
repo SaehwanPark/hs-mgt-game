@@ -4,6 +4,27 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.4] - 2026-07-12
+
+### Added
+- Added a deterministic read-only difficulty-depth audit across the v0.11.11
+  post-change all-tier artifact and the v0.11.9 standalone Expert artifact.
+- Added focused validation for 75 runs, 1,800 committed transitions, exact
+  profile/seed/tier matrices, per-tier bottleneck summaries, and deterministic
+  candidate-signal rendering.
+
+### Changed
+- Bumped package metadata to `0.12.4`.
+- Recorded a candidate `workforce_capacity` pressure signal rising from 0,
+  15, 30, and 160 operating months across Easy, Normal, Hard, and Expert.
+- Kept runtime promotion deferred; the result is descriptive evidence and does
+  not establish balance, causality, or general Expert winnability.
+
+### Evidence Limits
+- The review uses deterministic simulated-policy artifacts from different code
+  versions. It is not human-learning, classroom, calibration, legal-validity,
+  policy-forecasting, causal, balance, or general-winnability evidence.
+
 ## [0.12.3] - 2026-07-12
 
 ### Added

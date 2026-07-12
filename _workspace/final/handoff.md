@@ -1,52 +1,48 @@
-# Final Handoff - Phase 7 Teachability Evidence Review v0.12.3
+# Final Handoff - Difficulty Depth Evidence Review v0.12.4
 
 ## Result
 
-- Audited the v0.12.2 regional-affiliation post-fix artifact against the
-  approved v0.11.12 competitive teachability capture.
-- Covered 18/18 complete runs and 270 committed transitions across the two
-  source lanes.
-- Confirmed decision context, action/response, transition/hash, outcome,
-  debrief, source-specific context, and profile/seed matrix coverage with zero
-  structural gaps.
-- Preserved both source artifacts and the competitive seed-42 golden boundary.
+- Audited the v0.11.11 post-change all-tier artifact and v0.11.9 standalone
+  Expert artifact without launching new sessions.
+- Covered 75/75 complete runs and 1,800 committed transitions across five
+  profiles, three seeds, and the declared difficulty matrices.
+- Recomputed per-tier operating bottlenecks, action-family counts, trajectory
+  diversity, final tradeoff ranges, and Expert overlap/clearability.
+- Identified a candidate `workforce_capacity` pressure signal rising from 0,
+  15, 30, and 160 operating months across Easy, Normal, Hard, and Expert.
+- Kept runtime promotion deferred and preserved the competitive seed-42 golden
+  boundary.
 
 ## Version boundaries
 
-- Package: `0.12.3`
-- Change surface: read-only cross-campaign evidence audit, focused tests, and a
-  test-only persistence-path synchronization guard required by parallel CI
-- Affiliation and competitive transitions, rulesets, state hashes, replay
-  artifact semantics, and command parsers: unchanged
-- Production persistence behavior: unchanged; the shared save-path mutex is
-  compiled only into the test module.
-- Runtime promotion for balance/transition changes: deferred
+- Package: `0.12.4`
+- Change surface: read-only difficulty evidence audit and focused tests
+- Competitive and affiliation transitions, rulesets, state hashes, replay
+  artifact semantics, command parsers, and persistence behavior: unchanged
+- Runtime promotion for difficulty/balance/winnability changes: deferred
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/phase7-teachability-review-v0.12.3`
-- PR: [#156](https://github.com/SaehwanPark/hs-mgt-game/pull/156)
+- Working branch: `feat/difficulty-depth-evidence-v0.12.4`
+- PR: to be opened after local verification
 - Domain QA: Pass.
-- Review passes: three post-open passes and three post-fix follow-up passes
-  completed; no actionable code, data, scope, or documentation findings.
-- CI: initial `check` passed in run 29207189584; run 29207222842 exposed the
-  pre-existing parallel persistence-test race; fixed in `770ba38`; fresh
-  `check` passed in run 29207339197.
-- Merge state: open; ready to merge after this final handoff update is checked.
+- Review passes: pending implementation completion
+- Merge state: pending PR review and merge
 
 ## Verification
 
-- Focused Python audit tests: 5 passed.
-- Read-only audit: 18 runs, 270 transitions, zero structural gaps.
-- Full Rust suite: 307 tests passed with both serial and default parallel
-  execution.
-- Full Python suite: 178 tests passed.
+- Focused Python evidence tests: 6 passed.
+- Read-only audit: 75 runs, 1,800 transitions, candidate workforce-capacity
+  signal, zero source-contract gaps.
+- Full Rust suite: 307 tests passed with serial and default parallel execution.
+- Full Python suite: 184 tests passed.
 - Formatting, clippy, CLI smoke, competitive golden (2 tests), and diff checks
   passed.
 
 ## Next dependency
 
-After merge, re-audit the teachability queue. Continue evidence-only validation
-unless a new concrete player-facing, instructor-facing, or domain-review gap
-justifies another bounded change.
+After merge, promote the candidate workforce-capacity signal into a separate
+difficulty design gate only if the next bounded review can specify visible
+pressure, actor/player observation boundaries, and Expert winnability limits.
+Keep runtime tuning deferred until that gate is complete.

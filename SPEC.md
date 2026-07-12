@@ -3681,37 +3681,75 @@ reconstructing it from the diff.
   - 307 Rust tests pass under serial and default parallel execution; 178 Python
     tests, formatting, clippy, CLI smoke, golden, and diff checks pass.
 
-## Present
-
 - Feature: Difficulty Depth Evidence Review (v0.12.4)
-  Status: Active
+  Status: Complete
   Started: 2026-07-12
-  Branch: next feature branch after v0.12.3 merge
+  Version: 0.12.4
 
   Summary:
-  Review existing all-tier and Expert evidence for one visible difficulty
-  pressure dimension that current tiers may not express, before any runtime
-  tuning.
+  Audit the existing v0.11.11 all-tier and v0.11.9 Expert artifacts for a
+  visible difficulty pressure signal and bounded Expert clearability.
 
   Done:
-  - v0.12.3 finds no structural teachability gap across the current affiliation
-    and competitive artifacts.
+  - Added a deterministic read-only audit preserving both source versions and
+    source-specific contracts.
+  - Validated 75/75 complete runs and 1,800 committed transitions across the
+    all-tier and standalone Expert matrices.
+  - Recomputed per-tier operating bottlenecks, action-family counts, trajectory
+    diversity, final tradeoff ranges, history/state-hash alignment, and debrief
+    coverage.
+  - Identified a candidate `workforce_capacity` pressure signal rising from 0,
+    15, 30, and 160 operating months across Easy, Normal, Hard, and Expert.
+  - Preserved runtime promotion deferral because the finding is descriptive and
+    does not establish causality, balance, or general Expert winnability.
+  - Bumped package metadata to `0.12.4`.
 
   Not Yet Done:
-  - Design a read-only Phase 7/9 difficulty evidence question from the existing
-    all-tier and Expert artifacts.
-  - Identify one visible pressure dimension, if any, before changing rules or
-    balance and keep Expert winnability claims explicitly gated.
+  - A separate difficulty design gate must specify visible pressure semantics,
+    player/actor observation boundaries, and winnability limits before runtime
+    tuning is considered.
 
   Deferred / Non-Goals:
-  - No runtime tuning, broad balance pass, hidden rival omniscience, scoring
-    redesign, GUI, legal forecast, calibration, winnability, or human-learning
-    claim without a separately justified evidence gate.
+  - No difficulty values, resource scaling, rival AI, scoring, balance,
+    transition, command, scenario, GUI, replay/hash, calibration, winnability,
+    or human-learning changes.
 
   Verification:
-  - Required before this item moves to Past: named all-tier/Expert sources,
-    exact matrix/trace contract, deterministic audit, domain QA, and full
-    repository checks.
+  - 2 source artifacts, 75 runs, 1,800 transitions, and zero source-contract
+    gaps.
+  - 307 Rust tests, 184 Python tests, formatting, clippy, CLI smoke, golden,
+    and diff checks pass.
+
+## Present
+
+- Feature: Workforce Capacity Difficulty Design Gate (v0.12.5)
+  Status: Active
+  Started: 2026-07-12
+  Branch: next feature branch after v0.12.4 merge
+
+  Summary:
+  Decide whether the candidate workforce-capacity signal should become a
+  bounded visible difficulty design surface before any runtime tuning.
+
+  Done:
+  - v0.12.4 identifies a monotonic workforce-capacity bottleneck signal in the
+    existing all-tier artifact.
+
+  Not Yet Done:
+  - Design the smallest pressure/observation proposal and state whether it is
+    already sufficiently visible or requires a separate runtime proposal.
+  - Preserve Expert clearability and avoid inferring human-perceived difficulty
+    from the simulated signal.
+
+  Deferred / Non-Goals:
+  - No runtime tuning, broad balance pass, hidden rival omniscience, punitive
+    player-resource cut, scoring redesign, GUI, legal forecast, calibration,
+    winnability, or human-learning claim without a separately justified gate.
+
+  Verification:
+  - Required before this item moves to Past: named mechanism/evidence sources,
+    actor/observation boundary, deterministic design artifact, domain QA, and
+    full repository checks.
 
 ## Future
 
@@ -3792,12 +3830,10 @@ strategic actors, or platform architecture.
   express.
 
   Next actionable slice:
-  Design a read-only review of the existing all-tier and Expert artifacts for
-  one visible difficulty dimension, such as rival resource access, information
-  delay, monitoring depth, implementation capacity, or risk/aggression posture.
-  Validate whether the evidence names a concrete pressure gap before changing
-  default balance; Expert should remain severe-but-winnable evidence, not an
-  assumption.
+  v0.12.4 identifies workforce capacity as a candidate visible pressure
+  dimension. Design the smallest player/actor observation and mechanism gate
+  for that signal before changing default balance; Expert should remain
+  severe-but-winnable evidence, not an assumption.
 
   Verification target:
   Findings cite seeds, profiles, difficulty tiers, validation failures or
