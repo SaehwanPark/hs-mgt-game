@@ -4,17 +4,19 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use crate::cli::{
-  parse_coalition_command, parse_competitive_batch, parse_competitor_command, parse_policy_command,
-  parse_stabilize_access_command, parse_workforce_command,
+  parse_affiliation_command, parse_coalition_command, parse_competitive_batch,
+  parse_competitor_command, parse_policy_command, parse_stabilize_access_command,
+  parse_workforce_command,
 };
 use crate::competitive::{genesis_competitive_world_with_ruleset, resolve_competitive_month};
-use crate::debrief::{competitive_debrief, educational_debrief};
+use crate::debrief::{affiliation_debrief, competitive_debrief, educational_debrief};
 use crate::inputs::resolve_inputs;
 use crate::model::{
+  AffiliationHistory, AffiliationRuleset, AffiliationTransition, AffiliationWorldState,
   AggregatedMonthlyActions, CampaignId, CompetitiveHistory, CompetitiveRuleset,
   CompetitiveTransition, CompetitiveWorldState, Difficulty, History, INTERACTIVE_TURN_COUNT,
   Observation, PlayerObservation, Ruleset, SystemMonthlyBatch, Transition,
-  default_competitive_ruleset, default_ruleset,
+  default_affiliation_ruleset, default_competitive_ruleset, default_ruleset,
 };
 use crate::scenario::{
   Scenario, default_stabilization_scenario, validate_competitive_scenario,
@@ -124,6 +126,7 @@ pub struct GameSessionStore {
 enum GameSession {
   Stabilization(StabilizationSession),
   Competitive(CompetitiveSession),
+  Affiliation(AffiliationSession),
 }
 
 #[derive(Debug)]
@@ -142,6 +145,15 @@ struct CompetitiveSession {
   history: CompetitiveHistory,
   current: CompetitiveWorldState,
   prior_aggregated: Option<AggregatedMonthlyActions>,
+  done: bool,
+}
+
+#[derive(Debug)]
+struct AffiliationSession {
+  seed: u64,
+  ruleset: AffiliationRuleset,
+  history: AffiliationHistory,
+  current: AffiliationWorldState,
   done: bool,
 }
 
@@ -223,6 +235,9 @@ impl GameSessionStore {
         };
         GameSession::Competitive(start_competitive(seed, difficulty, custom_scenario)?)
       }
+      CampaignId::RegionalAffiliationV1 => {
+        GameSession::Affiliation(start_affiliation(seed, custom_scenario)?)
+      }
     };
 
     self.sessions.insert(session_id.clone(), session);
@@ -259,6 +274,10 @@ impl GameSessionStore {
       GameSession::Competitive(session) => {
         let transition = advance_competitive(session, &request.command_text)?;
         Some(summarize_competitive_transition(&transition))
+      }
+      GameSession::Affiliation(session) => {
+        let transition = advance_affiliation(session, &request.command_text)?;
+        Some(summarize_affiliation_transition(&transition))
       }
     };
 
@@ -302,6 +321,18 @@ impl GameSessionStore {
           .map(summarize_competitive_transition)
           .collect(),
       },
+      GameSession::Affiliation(session) => HistoryEnvelope {
+        session_id: request.session_id,
+        campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
+        seed: session.seed,
+        transition_count: session.history.transitions.len(),
+        transitions: session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_affiliation_transition)
+          .collect(),
+      },
     })
   }
 
@@ -330,6 +361,13 @@ impl GameSessionStore {
         seed: session.seed,
         done: session.done,
         debrief: competitive_debrief(&session.history),
+      },
+      GameSession::Affiliation(session) => EndSessionEnvelope {
+        session_id: request.session_id,
+        campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
+        seed: session.seed,
+        done: session.done,
+        debrief: affiliation_debrief(&session.history),
       },
     })
   }
@@ -418,6 +456,38 @@ impl GameSessionStore {
           latest_transition: None,
         }
       }
+      GameSession::Affiliation(session) => {
+        if session.done {
+          return Ok(SessionEnvelope {
+            session_id: session_id.to_string(),
+            campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
+            seed: session.seed,
+            difficulty: None,
+            turn: session.current.turn,
+            max_turns: crate::model::AFFILIATION_TURN_COUNT,
+            done: true,
+            observation: vec![
+              "Session complete.".to_string(),
+              format!("Committed stages: {}", session.history.transitions.len()),
+            ],
+            legal_commands: Vec::new(),
+            latest_transition: None,
+          });
+        }
+        let observation = crate::affiliation::observe_affiliation(&session.current);
+        SessionEnvelope {
+          session_id: session_id.to_string(),
+          campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
+          seed: session.seed,
+          difficulty: None,
+          turn: session.current.turn + 1,
+          max_turns: crate::model::AFFILIATION_TURN_COUNT,
+          done: session.done,
+          observation: format_affiliation_observation(&observation),
+          legal_commands: affiliation_legal_commands(&session.current),
+          latest_transition: None,
+        }
+      }
     })
   }
 }
@@ -427,6 +497,7 @@ impl GameSession {
     match self {
       GameSession::Stabilization(session) => session.done,
       GameSession::Competitive(session) => session.done,
+      GameSession::Affiliation(session) => session.done,
     }
   }
 
@@ -434,6 +505,7 @@ impl GameSession {
     match self {
       GameSession::Stabilization(session) => session.done = true,
       GameSession::Competitive(session) => session.done = true,
+      GameSession::Affiliation(session) => session.done = true,
     }
   }
 }
@@ -498,6 +570,33 @@ fn start_competitive(
   })
 }
 
+fn start_affiliation(
+  seed: u64,
+  custom_scenario: Option<Scenario>,
+) -> Result<AffiliationSession, McpErrorMessage> {
+  let ruleset = default_affiliation_ruleset();
+  let scenario = match custom_scenario {
+    Some(scenario) => scenario,
+    None => crate::scenario::default_regional_affiliation_scenario()
+      .map_err(|error| error_message(format!("default affiliation scenario: {error}")))?,
+  };
+  crate::scenario::validate_regional_affiliation_scenario(&scenario, &ruleset)
+    .map_err(|error| error_message(format!("invalid affiliation scenario: {error}")))?;
+  let genesis = scenario
+    .initial_affiliation_world_state()
+    .map_err(|error| error_message(format!("failed to initialize affiliation state: {error}")))?;
+  Ok(AffiliationSession {
+    seed,
+    ruleset,
+    history: AffiliationHistory {
+      genesis: genesis.clone(),
+      transitions: Vec::new(),
+    },
+    current: genesis,
+    done: false,
+  })
+}
+
 fn advance_stabilization(
   session: &mut StabilizationSession,
   command_text: &str,
@@ -549,6 +648,24 @@ fn advance_competitive(
   Ok(transition)
 }
 
+fn advance_affiliation(
+  session: &mut AffiliationSession,
+  command_text: &str,
+) -> Result<AffiliationTransition, McpErrorMessage> {
+  let command = parse_affiliation_command(command_text).map_err(error_message)?;
+  let transition = crate::affiliation::resolve_affiliation_turn(
+    &session.current,
+    command,
+    session.seed,
+    &session.ruleset,
+  )
+  .map_err(|error| error_message(error.message()))?;
+  session.current = transition.next.clone();
+  session.history.transitions.push(transition.clone());
+  session.done = session.current.turn >= crate::model::AFFILIATION_TURN_COUNT;
+  Ok(transition)
+}
+
 type CommandParser = fn(&str) -> Result<crate::model::PlayerCommand, crate::model::CliError>;
 
 fn stabilization_parser(turn_number: u32) -> Result<CommandParser, McpErrorMessage> {
@@ -568,6 +685,7 @@ fn parse_campaign(input: &str) -> Result<CampaignId, McpErrorMessage> {
   match input {
     "stabilization-v1" => Ok(CampaignId::StabilizationV1),
     "competitive-regional-v1" => Ok(CampaignId::CompetitiveRegionalV1),
+    "regional-affiliation-v1" => Ok(CampaignId::RegionalAffiliationV1),
     other => Err(error_message(format!("unsupported campaign '{other}'"))),
   }
 }
@@ -712,6 +830,85 @@ fn summarize_competitive_transition(transition: &CompetitiveTransition) -> Trans
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
     consultant_options: transition.consultant_options.clone(),
+  }
+}
+
+fn summarize_affiliation_transition(transition: &AffiliationTransition) -> TransitionSummary {
+  TransitionSummary {
+    turn: transition.next.turn,
+    command: format!("{:?}", transition.command),
+    events: transition.events.iter().map(format_event).collect(),
+    effects: transition.effects.iter().map(format_effect).collect(),
+    state_hash: transition.state_hash.clone(),
+    consultant_options: Vec::new(),
+  }
+}
+
+fn format_affiliation_observation(
+  observation: &crate::model::AffiliationObservation,
+) -> Vec<String> {
+  vec![
+    format!("Stage {}: {:?}", observation.turn, observation.stage),
+    format!("Riverside cash: {}", observation.cash),
+    format!(
+      "Access {}, quality {}, workforce trust {}, community trust {}",
+      observation.access_index,
+      observation.quality_index,
+      observation.workforce_trust,
+      observation.community_trust
+    ),
+    format!("Partner: {}", observation.partner_name),
+    format!("Status: {:?}", observation.status),
+    observation
+      .reported_condition
+      .map(|condition| format!("Reported partner condition: {condition:?}"))
+      .unwrap_or_else(|| "Reported partner condition: not yet assessed".to_string()),
+  ]
+}
+
+fn affiliation_legal_commands(state: &AffiliationWorldState) -> Vec<String> {
+  match state.stage {
+    crate::model::AffiliationStage::AssessPartner => vec!["assess".to_string()],
+    crate::model::AffiliationStage::ChoosePosture => {
+      vec!["posture choice=independent|defer|pursue".to_string()]
+    }
+    crate::model::AffiliationStage::NegotiateCommitments => {
+      if state.status == crate::model::AffiliationStatus::Pursuing {
+        vec!["commit community=1..8 workforce=1..8 continuity=1..8".to_string()]
+      } else {
+        vec!["hold".to_string()]
+      }
+    }
+    crate::model::AffiliationStage::SubmitReview => {
+      if matches!(
+        state.status,
+        crate::model::AffiliationStatus::PartnerAccepted
+          | crate::model::AffiliationStatus::PartnerConditioned
+      ) {
+        vec!["submit_review".to_string()]
+      } else {
+        vec!["hold".to_string()]
+      }
+    }
+    crate::model::AffiliationStage::ResolveReview => {
+      if state.status == crate::model::AffiliationStatus::ReviewPending {
+        vec!["await_review".to_string()]
+      } else {
+        vec!["hold".to_string()]
+      }
+    }
+    crate::model::AffiliationStage::IntegrateOrDecline => {
+      if matches!(
+        state.status,
+        crate::model::AffiliationStatus::Approved
+          | crate::model::AffiliationStatus::ConditionallyApproved
+      ) {
+        vec!["integrate decision=begin|decline".to_string()]
+      } else {
+        vec!["hold".to_string()]
+      }
+    }
+    crate::model::AffiliationStage::Complete => Vec::new(),
   }
 }
 
@@ -1362,5 +1559,59 @@ mod tests {
     assert!(result.is_err());
     let err = result.unwrap_err();
     assert!(err.error.contains("expects 2 systems"));
+  }
+
+  #[test]
+  fn affiliation_session_completes_six_stages_and_debriefs() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "regional-affiliation-v1");
+    let commands = [
+      "assess",
+      "posture choice=independent",
+      "hold",
+      "hold",
+      "hold",
+      "hold",
+    ];
+    let mut current = session;
+    for command in commands {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id,
+          command_text: command.to_string(),
+        })
+        .expect("affiliation stage");
+    }
+    assert!(current.done);
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: current.session_id,
+      })
+      .expect("debrief");
+    assert!(
+      ended
+        .debrief
+        .iter()
+        .any(|line| line.contains("Regional affiliation debrief"))
+    );
+  }
+
+  #[test]
+  fn affiliation_invalid_command_does_not_advance() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "regional-affiliation-v1");
+    let error = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect_err("hold is invalid before assessment");
+    assert!(error.error.contains("not valid"));
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+    assert_eq!(current.turn, 1);
   }
 }

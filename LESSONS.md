@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Keep New Campaign Contracts Separate from Competitive Golden Paths
+
+- Context: The regional affiliation slice needed new state, inputs, replay, and
+  debrief behavior while the competitive campaign has a frozen seed-42 contract.
+- Resolution: Kept affiliation state, canonical hashing, replay artifact version,
+  scenario fields, and transition modules campaign-specific; only the campaign
+  router and shared interface surfaces were extended.
+- Prevention: Before sharing a new field or hash schema, prove that it is truly
+  campaign-neutral. Otherwise add a narrow typed boundary and regression-test the
+  unchanged golden path.
+
 ## Consolidation Design Must Precede Consolidation Runtime
 
 - Context: The next roadmap candidate after the v0.11.12 validation checkpoint

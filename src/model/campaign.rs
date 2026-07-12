@@ -2,6 +2,7 @@
 pub enum CampaignId {
   StabilizationV1,
   CompetitiveRegionalV1,
+  RegionalAffiliationV1,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
@@ -96,6 +97,7 @@ impl CampaignId {
     match self {
       CampaignId::StabilizationV1 => "stabilization-v1",
       CampaignId::CompetitiveRegionalV1 => "competitive-regional-v1",
+      CampaignId::RegionalAffiliationV1 => "regional-affiliation-v1",
     }
   }
 }

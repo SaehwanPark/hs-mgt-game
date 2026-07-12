@@ -21,6 +21,18 @@ fn competitive_campaign_alias_is_parsed() {
 }
 
 #[test]
+fn affiliation_campaign_aliases_are_parsed() {
+  assert_eq!(
+    parse_campaign_choice("3").unwrap(),
+    CampaignId::RegionalAffiliationV1
+  );
+  assert_eq!(
+    parse_campaign_choice("a").unwrap(),
+    CampaignId::RegionalAffiliationV1
+  );
+}
+
+#[test]
 fn empty_difficulty_choice_defaults_to_normal() {
   assert_eq!(parse_difficulty_choice("").unwrap(), Difficulty::Normal);
 }

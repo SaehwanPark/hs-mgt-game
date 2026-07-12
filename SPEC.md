@@ -3545,6 +3545,35 @@ reconstructing it from the diff.
   - Existing Rust, Python, golden-trajectory, formatting, clippy, and diff
     checks pass.
 
+- Feature: Regional Affiliation Runtime (v0.12.0)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.0
+
+  Summary:
+  Implement the opt-in `regional-affiliation-v1` six-stage runtime slice while
+  preserving the competitive campaign and its golden state-hash contract.
+
+  Done:
+  - Added typed affiliation state, commands, ruleset, observations, explicit
+    resolved inputs, deterministic transitions, immutable history, hashing,
+    replay verification, and debrief output.
+  - Added the bundled TOML scenario plus CLI and MCP campaign routing.
+  - Added focused scenario, transition, MCP, campaign-selection, and replay
+    regression coverage.
+  - Bumped package metadata to `0.12.0`.
+
+  Not Yet Done:
+  - Broader playtest evidence and educational review of balance remain future
+    validation work; this slice is not a claim of general winnability.
+
+  Deferred / Non-Goals:
+  - No full acquisition/deal market, legal or financial forecast, autosave
+    expansion, AI-rival affiliation behavior, GUI, or competitive hash change.
+
+  Verification:
+  - Rust, Python, formatting, clippy, golden, replay, MCP, and diff checks pass.
+
 ## Present
 
 - Competitive monthly operating-outcome debrief linkage and post-fix
@@ -3553,7 +3582,8 @@ reconstructing it from the diff.
   difficulty resource scaling, v0.11.9 Expert difficulty validation,
   v0.11.10 Phase 7 difficulty evidence synthesis, v0.11.11 post-change
   all-tier difficulty validation, v0.11.12 current-code teachability capture,
-  and v0.11.13 regional affiliation design gate are complete.
+  and v0.11.13 regional affiliation design gate are complete; v0.12.0 adds the
+  bounded regional affiliation runtime implementation.
 
 ## Future
 

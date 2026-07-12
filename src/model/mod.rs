@@ -1,4 +1,6 @@
 mod actors;
+mod affiliation;
+mod affiliation_hash;
 mod campaign;
 mod command;
 mod competitive_batch;
@@ -20,6 +22,8 @@ mod session_save;
 mod state;
 
 pub use actors::*;
+pub use affiliation::*;
+pub use affiliation_hash::*;
 pub use campaign::*;
 pub use command::*;
 pub use competitive_batch::*;

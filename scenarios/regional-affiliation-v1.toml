@@ -1,0 +1,28 @@
+format_version = "scenario-toml-0.1.40"
+campaign_id = "regional-affiliation-v1"
+scenario_id = "regional-affiliation-v1"
+scenario_version = "1.0.0"
+turn_unit = "month"
+ruleset_id = "regional-affiliation-ruleset-0.1.0"
+title = "Riverside and Pine Valley: A Regional Affiliation Decision"
+default_seed = 42
+
+learning_objectives = [
+  "Distinguish partner fit, public commitments, institutional review, and integration risk.",
+  "Compare independence, deferral, and affiliation pursuit under incomplete information.",
+  "Separate organizational outcomes from community, workforce, payer, and review responses.",
+]
+
+[affiliation]
+riverside_name = "Riverside Community Health"
+riverside_cash = 60
+riverside_access_index = 68
+riverside_quality_index = 72
+riverside_workforce_trust = 60
+riverside_community_trust = 64
+riverside_market_share_index = 24
+partner_name = "Pine Valley Community Health"
+partner_condition_index = 58
+partner_fit_index = 72
+partner_autonomy_need = 6
+partner_continuity_risk = 7

@@ -1,3 +1,4 @@
+mod affiliation;
 mod beginner;
 mod campaign;
 mod competitive_parse;
@@ -14,6 +15,8 @@ mod repl;
 mod session;
 mod strategy;
 
+pub use affiliation::parse_affiliation_command;
+pub use affiliation::run_affiliation_campaign;
 pub use competitive_parse::{
   competitive_command_help_lines, parse_competitive_batch, parse_competitive_command,
 };

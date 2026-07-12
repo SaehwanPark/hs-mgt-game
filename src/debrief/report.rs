@@ -1,8 +1,56 @@
 use crate::model::{
-  AttributedEffect, CompetitiveCommand, CompetitiveHistory, CompetitiveTransition,
-  CompetitiveWorldState, Event, History, InvestDomain, MonitorTarget, PayerId, PlayerCommand,
-  PledgeType, ProjectKind, RatePosture, RecruitRole,
+  AffiliationHistory, AttributedEffect, CompetitiveCommand, CompetitiveHistory,
+  CompetitiveTransition, CompetitiveWorldState, Event, History, InvestDomain, MonitorTarget,
+  PayerId, PlayerCommand, PledgeType, ProjectKind, RatePosture, RecruitRole,
 };
+
+pub fn affiliation_debrief(history: &AffiliationHistory) -> Vec<String> {
+  let final_state = history.final_state();
+  let genesis = &history.genesis;
+  let mut lines = vec![
+    "Regional affiliation debrief (stylized educational scenario; not legal advice)".to_string(),
+    format!("Stages committed: {}", history.transitions.len()),
+    format!("Final status: {:?}", final_state.status),
+    format!(
+      "Riverside outcomes: cash {:+}, access {:+}, quality {:+}, workforce trust {:+}, community trust {:+}",
+      final_state.riverside.cash - genesis.riverside.cash,
+      final_state.riverside.access_index - genesis.riverside.access_index,
+      final_state.riverside.quality_index - genesis.riverside.quality_index,
+      final_state.riverside.workforce_trust - genesis.riverside.workforce_trust,
+      final_state.riverside.community_trust - genesis.riverside.community_trust,
+    ),
+    format!(
+      "Commitments: community {}, workforce {}, continuity {}",
+      final_state.commitments.community,
+      final_state.commitments.workforce,
+      final_state.commitments.continuity,
+    ),
+    "Decision quality: review the observations recorded before each command; an unfavorable realization does not by itself make the decision poor.".to_string(),
+    "Actor utility and social welfare are separate: partner, review, labor, payer, and community responses are reported independently from Riverside metrics.".to_string(),
+    "Alternatives for discussion: what would independence or deferral have preserved under the same reported information?".to_string(),
+  ];
+
+  for transition in &history.transitions {
+    lines.push(format!(
+      "Stage {} {:?}: command {:?}; partner {:?}, review {:?}, labor {:?}, payer {:?}, community {:?}",
+      transition.prior.turn + 1,
+      transition.prior.stage,
+      transition.command,
+      transition.resolved_inputs.partner_response,
+      transition.resolved_inputs.review_response,
+      transition.resolved_inputs.labor_response,
+      transition.resolved_inputs.payer_response,
+      transition.resolved_inputs.community_response,
+    ));
+    for decision in &transition.actor_decisions {
+      lines.push(format!(
+        "  {} → {} ({})",
+        decision.actor, decision.outcome, decision.rationale
+      ));
+    }
+  }
+  lines
+}
 use crate::sim::is_public_command;
 
 pub fn educational_debrief(history: &History) -> Vec<String> {

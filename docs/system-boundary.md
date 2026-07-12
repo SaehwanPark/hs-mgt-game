@@ -167,10 +167,9 @@ Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
 - Formal belief-state representation beyond observation snapshots.
 - Parameter ledger separating empirical ranges, design abstractions, balancing
   choices, and normative scoring.
-- Regional consolidation runtime ontology remains deferred from the current
-  campaigns. The v0.11.14 proposal defines an opt-in `regional-affiliation-v1`
-  scenario using a localized partner actor and six staged monthly decisions.
-  It may reuse competitive transition and history primitives, but it must not
-  change `competitive-regional-v1` until a separate implementation PR is
-  approved. See ADR-0010 for the proposed state, observation, resolved-input,
-  and debrief contracts.
+- Regional consolidation remains bounded to the opt-in
+  `regional-affiliation-v1` runtime slice. It uses one localized partner, six
+  staged monthly decisions, explicit resolved inputs, a separate state-hash and
+  replay schema, and observation-only partner signals. It does not change
+  `competitive-regional-v1`, add a generic actor framework, or model a full
+  acquisition/deal market. See ADR-0010 for the implemented contracts.

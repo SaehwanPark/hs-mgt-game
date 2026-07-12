@@ -1,7 +1,8 @@
 mod report;
 
 pub use report::{
-  competitive_debrief, competitive_instructor_summary, educational_debrief, instructor_run_summary,
+  affiliation_debrief, competitive_debrief, competitive_instructor_summary, educational_debrief,
+  instructor_run_summary,
 };
 
 #[cfg(test)]

@@ -1,19 +1,19 @@
-# Request Summary - Regional Affiliation Runtime Proposal v0.11.14
+# Request Summary - Regional Affiliation Runtime v0.12.0
 
 ## Scope
 
-- Continue from merged PR #151 and the v0.11.13 affiliation-first design gate.
-- Define an opt-in `regional-affiliation-v1` runtime proposal using existing
-  competitive transition, observation, history, replay, and debrief concepts.
-- Specify the minimum true-state, actor-observation, command, resolved-input,
-  replay, and educational-debrief contracts needed by a later implementation.
+- Continue from merged PR #152 and the v0.11.14 runtime proposal.
+- Implement the opt-in `regional-affiliation-v1` runtime using existing
+  transition, observation, history, replay, and debrief boundaries.
+- Deliver a concrete six-stage scenario, CLI/MCP command surface, ruleset,
+  deterministic inputs, replay artifact, and educational debrief.
 - Preserve the default `competitive-regional-v1` campaign and its seed-42
   golden path.
 
 ## Non-goals
 
-- No Rust runtime mechanics, public commands, scenario TOML, scenario-loader
-  changes, replay format, MCP schema, ruleset, or state-hash changes.
+- No changes to the competitive runtime hash, golden trajectory, or default
+  campaign behavior.
 - No direct acquisition, national deal market, private-equity rollup, detailed
   transaction finance, calibrated legal outcome, or policy forecast.
 - No generic actor framework, AI rival expansion, GUI work, balance change, new
@@ -33,11 +33,11 @@
 - ADR-0010 and synchronized expansion, roadmap, architecture, boundary,
   scenario, specification, changelog, README, lesson, and workspace handoff
   documents.
-- `Cargo.toml` and `Cargo.lock` for the required `0.11.14` patch bump.
+- `Cargo.toml` and `Cargo.lock` for the meaningful `0.12.0` feature bump.
 
 ## Validation target
 
-- Domain QA returns `Pass`.
+- Domain QA returns `Pass` for the bounded implementation.
 - The proposal distinguishes actor authority, observations, actor utility,
   organizational outcomes, social welfare, community effects, and educational
   evaluation.

@@ -7,6 +7,10 @@ fn campaign_id_matches_scenario_format_strings() {
     CampaignId::CompetitiveRegionalV1.as_str(),
     "competitive-regional-v1"
   );
+  assert_eq!(
+    CampaignId::RegionalAffiliationV1.as_str(),
+    "regional-affiliation-v1"
+  );
 }
 
 #[test]

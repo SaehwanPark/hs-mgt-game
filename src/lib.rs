@@ -1,4 +1,5 @@
 pub mod actors;
+pub mod affiliation;
 pub mod artifact;
 pub mod cli;
 pub mod competitive;
