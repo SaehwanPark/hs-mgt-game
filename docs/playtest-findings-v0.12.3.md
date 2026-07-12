@@ -32,6 +32,10 @@ identified in these artifacts. Runtime promotion remains deferred. The result
 supports continued evidence-only review and does not justify balance,
 transition, ruleset, difficulty, or interface changes.
 
+The CI follow-up added only a test-module mutex around the shared competitive
+save-path tests after parallel CI exposed a pre-existing filesystem race. It
+does not change production persistence behavior or any evidence result.
+
 ## Evidence limits
 
 This is deterministic simulated-policy traceability evidence, not human or

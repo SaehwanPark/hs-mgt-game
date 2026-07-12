@@ -15,6 +15,8 @@
 
 - No new session capture, state, transition, ruleset, threshold, balance,
   command-parser, or replay/hash-schema changes.
+- A CI follow-up may isolate shared filesystem tests, but must not change
+  production runtime semantics.
 - No cross-campaign normalization that erases source-specific observation
   boundaries or treats different debrief vocabulary as missing evidence.
 - No GUI, generalized observation framework, legal forecast, calibration,
@@ -37,6 +39,8 @@
   results, and diagnostics.
 - `tests/test_phase7_teachability_review.py` for source contracts, coverage,
   malformed-input rejection, and deterministic rendering.
+- `src/cli/persistence.rs` only if CI exposes a test-isolation defect; no
+  production persistence behavior is in scope.
 - `docs/playtest-findings-v0.12.3.md`, `SPEC.md`, `CHANGELOG.md`, README,
   architecture/roadmap/lesson notes, and workspace handoffs.
 - `Cargo.toml` and `Cargo.lock` for version `0.12.3`.
@@ -53,4 +57,4 @@
 - The audit reports no structural gap, preserves the competitive control hash,
   and keeps runtime promotion deferred.
 - Domain QA returns `Pass`; full Rust/Python, formatting, clippy, golden, and
-  diff checks pass.
+  diff checks pass under the repository's default parallel test command.

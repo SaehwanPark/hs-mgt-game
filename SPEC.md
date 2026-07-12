@@ -3655,6 +3655,9 @@ reconstructing it from the diff.
 
   Done:
   - Added a deterministic read-only audit over the two pinned source artifacts.
+  - Added a test-only mutex around the shared competitive persistence-path tests
+    after CI exposed a pre-existing parallel filesystem race; production
+    persistence behavior is unchanged.
   - Validated 18/18 complete runs and 270 committed transitions across the
     affiliation and competitive evidence lanes.
   - Confirmed actor-visible decision context, action/response, transition/hash,
@@ -3675,8 +3678,8 @@ reconstructing it from the diff.
 
   Verification:
   - 2 source artifacts, 18 runs, 270 transitions, and zero structural gaps.
-  - 307 Rust tests, 178 Python tests, formatting, clippy, CLI smoke, golden,
-    and diff checks pass.
+  - 307 Rust tests pass under serial and default parallel execution; 178 Python
+    tests, formatting, clippy, CLI smoke, golden, and diff checks pass.
 
 ## Present
 

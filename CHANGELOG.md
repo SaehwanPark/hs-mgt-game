@@ -13,12 +13,16 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Added focused validation for source identity, 18-run/270-transition
   decision-to-debrief coverage, source-specific context, and deterministic
   diagnostics rendering.
+- Added a test-only mutex around shared competitive persistence-path tests so
+  the default parallel CI suite cannot race on the same save file.
 
 ### Changed
 - Bumped package metadata to `0.12.3`.
 - Kept runtime promotion deferred because the cross-campaign artifact review
   identified no structural gap and makes no human-learning, balance, or
   winnability claim.
+- Production persistence behavior remains unchanged; the CI fix is confined to
+  the test module.
 
 ### Evidence Limits
 - This is deterministic simulated-policy traceability evidence, not human or

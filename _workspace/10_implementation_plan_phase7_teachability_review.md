@@ -37,7 +37,9 @@ capture, stop and report the limitation rather than broadening the task.
 4. Add focused Python tests for success, malformed source rejection, missing
    marker detection, and deterministic report rendering.
 5. Update findings, SPEC, changelog, README, architecture, roadmap, lessons,
-   version metadata, and final handoff; run all repository checks.
+  version metadata, and final handoff; run all repository checks.
+6. If CI exposes a pre-existing shared-test filesystem race, add only a
+   test-scoped synchronization guard and rerun the default parallel suite.
 
 ## Files and functions likely to change
 
@@ -45,18 +47,23 @@ capture, stop and report the limitation rather than broadening the task.
 - `_workspace/experiments/v0.12.3-phase7-teachability-review/results.json` and
   `diagnostics.md`.
 - `tests/test_phase7_teachability_review.py`.
+- `src/cli/persistence.rs` only for a test-scoped shared-path isolation guard
+  if CI requires it.
 - `docs/playtest-findings-v0.12.3.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
   `ARCHITECTURE.md`, `docs/roadmap.md`, `LESSONS.md`, and workspace handoff.
 - `Cargo.toml` and `Cargo.lock` for package version `0.12.3`.
 
-Avoid editing `src/` unless a focused source-contract mismatch is discovered;
-the planned slice is evidence-only. Do not alter either source artifact.
+Avoid editing production `src/` behavior; the planned slice is evidence-only.
+Do not alter either source artifact. A test-only synchronization guard is an
+allowed CI follow-up if the shared persistence path races under parallel tests.
 
 ## Tests and checks
 
 - `python3 _workspace/experiments/v0.12.3-phase7-teachability-review/run_audit.py`.
 - `python3 -m unittest tests/test_phase7_teachability_review.py`.
 - `cargo test --all -- --test-threads=1`.
+- `cargo test` (default parallel CI command; required after any test-isolation
+  follow-up).
 - `cargo test --test golden_competitive_seed42 -- --test-threads=1`.
 - `python3 -m unittest discover -s tests -p 'test_*.py'`.
 - `cargo fmt --check`.
@@ -70,6 +77,7 @@ the planned slice is evidence-only. Do not alter either source artifact.
 - All review dimensions are supported for every eligible run; missing markers
   and trace/hash mismatches are reported as failures.
 - No new runtime capture, state mutation, or hidden-state inference occurs.
+- Any CI follow-up changes tests only and leaves production semantics intact.
 - The report explicitly says whether a concrete gap exists and keeps runtime
   promotion deferred when none is found.
 - Package/docs identify v0.12.3 and all repository checks pass.

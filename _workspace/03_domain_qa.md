@@ -48,4 +48,6 @@ None for the planned evidence-only slice.
   rendering.
 - Planned report coverage: 18 complete runs, 270 committed transitions, and no
   missing review steps or context markers.
-- No runtime code or source artifact is mutated by the audit.
+- No production runtime code or source artifact is mutated by the audit. A
+  test-only synchronization guard is acceptable if CI exposes a shared-path
+  race under parallel execution.

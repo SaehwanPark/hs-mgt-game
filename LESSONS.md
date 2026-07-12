@@ -16,6 +16,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   explicit, and never turn deterministic trace coverage into a comprehension,
   balance, winnability, or learning claim.
 
+## Isolate Tests That Share User-Scoped Files
+
+- Context: CI ran persistence tests in parallel against the shared
+  `competitive_session.save` path.
+- Symptom: A delete-idempotency test could remove the file while a round-trip
+  test was loading it, producing a missing-file failure that serial tests hid.
+- Resolution: Added a test-module mutex around the shared-path tests without
+  changing production persistence behavior.
+- Prevention: Run the default parallel test command before handoff and isolate
+  tests that mutate user-scoped filesystem paths.
+
 ## Audit Typed Observations Against Rendered Interfaces
 
 - Context: The v0.12.1 regional-affiliation capture compared the typed
