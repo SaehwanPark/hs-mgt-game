@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.11.11] - 2026-07-12
+
+### Added
+- Added a current-code Phase 7 all-tier validation matrix across five policy
+  profiles, seeds 42–44, and Easy/Normal/Hard/Expert difficulty.
+- Added focused Python coverage for exact matrix coordinates, malformed traces,
+  player/rival evidence boundaries, and deterministic audit rendering.
+
+### Changed
+- Bumped the package version to `0.11.11`.
+- Preserved runtime promotion deferral pending a concrete unexplained gap.
+
+### Evidence Limits
+- The matrix is deterministic simulated-policy evidence, not human learning,
+  causal strategy, balance, general winnability, calibration, or policy-validity
+  evidence.
+- Runtime mechanics, difficulty values, scoring, scenarios, replay, MCP
+  behavior, rulesets, and state-hash logic remain unchanged.
+
 ## [0.11.10] - 2026-07-12
 
 ### Added

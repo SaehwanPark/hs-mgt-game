@@ -2,52 +2,68 @@
 
 ## Scope
 
-Audit whether the latest frozen competitive evidence supports descriptive
-strategy comparison by profile, seed, and difficulty while preserving the
-existing operating-outcome observation, transition, hash, and debrief links.
+Test whether the current post-difficulty code preserves bounded clearability,
+strategy-trace variation, operating accounting, and decision-to-debrief
+inspectability across the existing competitive all-tier matrix.
 
 ## Sources Reviewed
 
-- `SPEC.md`, the v0.11.5 baseline, and the ranked teachability queue.
-- `docs/roadmap.md`, Phase 7 validation and educational artifact gates.
-- `docs/design_principles.md`, especially deterministic replay, observation
-  boundaries, inspectable causality, and evidence limits.
-- `_workspace/experiments/v0.11.4-operating-outcome-debrief-validation/capture.json`.
-- The v0.11.5 operating-outcome audit parser and focused contract tests.
+- `SPEC.md`, especially the Phase 7 validation gate and ranked queue.
+- `docs/roadmap.md`, `docs/design_principles.md`, and the active agent-playtest
+  protocol.
+- The v0.11.1 five-profile all-tier runner and operating audit.
+- The v0.11.9 post-change Expert validation artifact.
+- The v0.11.10 source-contract synthesis and findings.
 
-## Evidence-backed facts
+## Mechanisms and Institutions
 
-- The source matrix has five profiles, three seeds, four difficulty tiers, and
-  60 complete runs.
-- The source contains 1,440 committed months, 1,380 prior-month observation
-  matches, 1,440 exact player-owned debrief matches, 441 response opportunities,
-  and 28 terminal signals.
-- Existing source-specific parsing already distinguishes terminal signals,
-  rival-owned operating results, and player-owned monthly outcomes.
+- Difficulty changes rival count, action budgets, starting rival resources, and
+  AI risk posture through existing competitive setup and actor logic.
+- The player remains evaluated through actor-visible observations and submitted
+  commands; committed history and debriefs provide retrospective explanation.
+- Operating effects are validated through demand, treated volume, unmet demand,
+  revenue, cost, and cash-margin identities.
 
-## Design abstraction
+## Actor Incentives and Information
 
-Normalized command families and profile summaries are descriptive groupings for
-inspection. They are not validated strategy classes, utility functions, or
-causal estimators.
+- Policy profiles are deterministic simulated-player lanes, not learner types,
+  validated strategy classes, or utility functions.
+- Rival actions and rationales in committed history are engine evidence; they
+  must not be treated as information the player possessed unless exposed in the
+  actor-visible observation.
+- Player and rival operating outcomes remain separate evidence boundaries.
 
-## Assumptions and boundaries
+## Assumptions
 
-- The v0.11.4 capture is authoritative and remains deterministic.
-- A prior-month signal is compared with the following submitted command.
-- A final-month signal has no later command and is terminal, not missing.
-- Rival operating values remain outside player evidence.
+- The five existing profiles, three seeds, four difficulty tiers, 24-month
+  campaign, ruleset, and state-hash schema remain the active validation surface.
+- The seed-42 Normal hold-control hash is the compatibility control.
+- Current-code all-tier results may differ from historical policy trajectories;
+  those differences are descriptive and not cross-version causal comparisons.
 
-## Routing result
+## Unresolved Questions
 
-The audit must record a concrete structural gap when evidence is incomplete. If
-all contracts pass, record no unexplained gap and keep runtime promotion
-deferred.
+- Whether the tested profiles represent broad player strategy space remains
+  unresolved.
+- Whether completion or endpoint variation establishes balance, winnability,
+  strategy quality, or causal value remains unresolved.
+- Human comprehension, classroom learning, calibration, and policy validity
+  require separate evidence.
 
-## Unresolved questions
+## Design Implications
 
-- Whether a person finds the strategy/debrief surface clear remains untested.
-- Whether any response distribution reflects good strategy or causal effect
-  remains unresolved.
-- Human learning, classroom use, calibration, and policy validity require
-  separate evidence.
+- Reuse the existing versioned artifact shape rather than creating a generalized
+  evidence schema.
+- Keep runtime promotion deferred and route any discovered gap to a separate
+  proposal or implementation slice.
+- Report action frequencies, trajectory counts, endpoint ranges, bottlenecks,
+  and threshold candidates as diagnostic signals only.
+
+## Risks
+
+- A failed or partial coordinate can be hidden by aggregate summaries; the
+  validator must require exact coordinate coverage and preserve failures.
+- Hidden engine state can leak into interpretation; findings must label true
+  history separately from actor-visible decision context.
+- Reusing historical artifacts could mask post-change behavior; this slice must
+  launch current-code sessions rather than compare old endpoint hashes.

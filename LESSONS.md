@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Re-run the Full Matrix After Difficulty Changes
+
+- Context: The v0.11.9 Expert capture and v0.11.10 source synthesis did not
+  establish current all-tier behavior after the v0.11.7 risk-posture and v0.11.8
+  rival-resource changes.
+- Resolution: Reran the five-profile, three-seed, four-tier matrix on current
+  code and audited 1,440 committed months while preserving the Normal hold
+  control hash.
+- Prevention: Do not infer current all-tier clearability or trajectory behavior
+  from a pre-change matrix plus an Expert-only post-change capture.
+
 ## Preserve Source-Specific Evidence Contracts
 
 - Context: The v0.11.10 synthesis combined the v0.11.6 strategy audit with the
