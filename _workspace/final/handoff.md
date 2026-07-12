@@ -24,10 +24,14 @@
 
 - Base branch: `main`
 - Working branch: `feat/affiliation-playtest-validation-v0.12.1`
-- PR: to be opened after local verification
+- PR: https://github.com/SaehwanPark/hs-mgt-game/pull/154
 - Domain QA: Pass.
-- Review passes: pending implementation completion
-- Merge state: pending PR review and merge
+- Review Pass 1: no actionable issues found (semantic/evidence contract).
+- Review Pass 2: no actionable issues found (determinism/failure handling).
+- Review Pass 3: no actionable issues found (scope/spec alignment).
+- CI: GitHub Actions `check` passed.
+- No unresolved review threads were present.
+- Merge state: ready to merge.
 
 ## Verification
 
