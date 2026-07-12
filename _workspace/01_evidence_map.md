@@ -1,12 +1,10 @@
-# Evidence Map — Teachability Queue Closure v0.12.8
+# Evidence Map — Difficulty Queue Closure v0.12.9
 
-| Requirement | Authority | Result |
-| --- | --- | --- |
-| Two source lanes remain valid | v0.12.3 `run_audit.py` | Supported |
-| Decision/action/transition/outcome/debrief chain | v0.12.3 audit coverage | Supported for 18/18 runs |
-| Source-specific observation context | v0.12.2 affiliation and v0.11.12 competitive contracts | Supported |
-| Strategy comparison matrix | pinned profiles × seeds | Supported |
-| Structural gap status | aggregate audit | 0 gaps |
+| Question | Authority | Result | Limit |
+| --- | --- | --- | --- |
+| Is there a candidate pressure dimension? | v0.12.4 audit | workforce capacity, 0 → 160 across tested tiers | Descriptive, not causal. |
+| Is the context visible? | v0.12.6 artifact | 75 runs/1,800 entries; exact hashes | Observation-only evidence. |
+| Are tested Expert paths clearable? | v0.12.4 overlap | 15/15 named profile/seed runs | Not general winnability. |
+| Is a new gap unexplained? | v0.12.4 + v0.12.6 controls | No | Source versions differ. |
 
-The evidence is deterministic simulated-policy traceability evidence. It does
-not support human-learning, balance, winnability, or comprehension claims.
+Conclusion: close the queue item and keep tuning deferred.

@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.9] - 2026-07-12
+
+### Added
+- Added a reproducible closure audit for the difficulty-depth and winnability
+  queue item, reconciling the v0.12.4 pressure evidence with the v0.12.6
+  observation controls.
+- Added focused validation for 75 runs, 1,800 transitions, 15 named Expert
+  clearability runs, exact histories/hashes, and hidden-field exclusion.
+
+### Changed
+- Bumped package metadata to `0.12.9`.
+- Removed the completed difficulty-depth queue item while preserving evidence
+  limits and a reopening condition; no difficulty or balance values changed.
+
+### Evidence Limits
+- The closure is descriptive simulated-policy evidence, not causal difficulty,
+  balance, general winnability, calibration, or human-perceived difficulty
+  evidence.
+
 ## [0.12.8] - 2026-07-12
 
 ### Added

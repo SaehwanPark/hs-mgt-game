@@ -3825,6 +3825,37 @@ reconstructing it from the diff.
   - 308 Rust tests, 204 Python tests, formatting, clippy, CLI smoke, golden,
     diff checks, focused closure tests, and deterministic audit validation pass.
 
+- Feature: Difficulty Depth Queue Closure (v0.12.9)
+  Status: Complete
+  Started: 2026-07-12
+  Version: 0.12.9
+
+  Summary:
+  Close the difficulty-depth and winnability Future item after reconciling the
+  v0.12.4 pressure/clearability evidence with the v0.12.6 observation controls.
+
+  Done:
+  - Revalidated 75 runs and 1,800 transitions with workforce-capacity counts
+    Easy 0, Normal 15, Hard 30, Expert 160.
+  - Revalidated the 15/15 named Expert profile/seed clearability overlap.
+  - Revalidated exact v0.12.6 observation histories and state hashes with zero
+    hidden markers.
+  - Confirmed no unexplained pressure, clearability, or player-facing gap
+    authorizes difficulty or balance tuning.
+  - Removed the completed difficulty item from the Future queue and preserved a
+    reopening condition and source-version limits.
+  - Bumped package metadata to `0.12.9`.
+
+  Deferred / Non-Goals:
+  - No difficulty values, resource scaling, balance pass, scoring change, rival
+    AI change, hidden omniscience, winnability claim, or transition change.
+
+  Verification:
+  - Closure artifact reports the pinned pressure signal, 15-run clearability
+    overlap, exact observation controls, and deferred runtime promotion.
+  - 308 Rust tests, 209 Python tests, formatting, clippy, CLI smoke, golden,
+    diff checks, focused closure tests, and deterministic audit validation pass.
+
 - Feature: Affiliation Runtime Boundary Proposal (v0.12.7)
   Status: Complete
   Started: 2026-07-12
@@ -3929,28 +3960,7 @@ engine proof. The next risk is whether repeated play remains explainable,
 teachable, and strategically interesting before the project expands mechanics,
 strategic actors, or platform architecture.
 
-1. Track: Difficulty depth and winnability
-  Phase / Gate: Phase 7/9; proceed only after the expansion proposal review and
-  difficulty evidence identify one pressure dimension current tiers do not
-  express.
-
-  Next actionable slice:
-  v0.12.6 closes the typed-vs-rendered workforce context gap with exact
-  history/hash equality. Keep runtime promotion deferred; any future difficulty
-  work requires a new unexplained evidence gap and a separate design gate.
-
-  Verification target:
-  Findings cite seeds, profiles, difficulty tiers, validation failures or
-  retries, final tradeoff metrics, rival pressure, and debrief traceability.
-  Expert should show at least one clearable path without hidden omniscience or
-  one locked optimal strategy.
-
-  Deferred / Non-Goals:
-  No broad balance pass, hidden rival omniscience, punitive player-resource cut,
-  scoring redesign, runtime tuning from a single run, or difficulty claim from
-  one profile/seed/campaign.
-
-2. Track: Regional affiliation/acquisition slice
+1. Track: Regional affiliation/acquisition slice
   Phase / Gate: Phase 7/9; proceed only after proposal review and domain QA
   approve one bounded US regional affiliation or acquisition scenario.
 
@@ -3971,7 +3981,7 @@ strategic actors, or platform architecture.
   strategy framework, or scenario-schema/runtime implementation in the design
   gate. These remain deferred until a separate runtime proposal is approved.
 
-3. Track: GUI thin-client proof
+2. Track: GUI thin-client proof
   Phase / Gate: Phase 8/9; proceed only after audience-access, playtest, or
   review evidence shows a graphical surface would improve usability without
   weakening core inspectability.
@@ -3991,7 +4001,7 @@ strategic actors, or platform architecture.
   commitment, non-audited assets, replacement of CLI/MCP, HTTP multiplayer,
   auth, or durable session persistence.
 
-4. Track: Broader simulation breadth and strategic actors
+3. Track: Broader simulation breadth and strategic actors
   Phase / Gate: Phase 6/9; proceed only after playtest, instructor, scenario, or
   domain-review evidence shows current campaign limits block meaningful strategy
   or learning.
@@ -4020,7 +4030,7 @@ strategic actors, or platform architecture.
   global equilibrium AI, speculative generalized frameworks, and broad
   scenario-authoring infrastructure.
 
-5. Track: Release automation and contributor readiness
+4. Track: Release automation and contributor readiness
   Phase / Gate: Phase 0/8; proceed when contributor-readiness or release
   preparation becomes the active priority.
 

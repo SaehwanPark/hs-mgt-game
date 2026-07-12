@@ -1,43 +1,44 @@
-# Final Handoff - Teachability Queue Closure v0.12.8
+# Final Handoff - Difficulty Depth Queue Closure v0.12.9
 
 ## Result
 
-- Closed the competitive teachability and validation-loop Future item using the
-  committed v0.12.3 cross-campaign review.
-- Confirmed 2 source lanes, 18/18 complete runs, 270 committed transitions, and
-  zero structural gaps across source-specific review contracts.
-- Authorized no new runtime change; reopen only for a concrete comprehension,
-  pacing, traceability, strategy-comparison, or debrief-use finding.
+- Closed the difficulty-depth and winnability Future item.
+- Revalidated the v0.12.4 candidate workforce-capacity signal: 75 runs,
+  1,800 transitions, and tier counts Easy 0, Normal 15, Hard 30, Expert 160.
+- Revalidated the 15/15 named Expert profile/seed clearability overlap.
+- Revalidated the v0.12.6 observation-only controls: 75 runs, 1,800 trace
+  entries, exact histories/hashes, and zero hidden markers.
+- Authorized no difficulty or balance tuning; reopen only for a new unexplained
+  pressure, clearability, or player-facing gap.
 
 ## Version boundaries
 
-- Package: `0.12.8`
-- Change surface: queue-closure artifact, focused Python tests, and canonical
+- Package: `0.12.9`
+- Change surface: evidence closure artifact, focused Python tests, and canonical
   documentation
-- Rust runtime behavior, commands, scenario fields, state hashes, replay
-  formats, and campaign behavior: unchanged
+- Runtime difficulty, balance, scoring, rival AI, transition, and replay/hash
+  behavior: unchanged
 
 ## Branch and PR handoff
 
 - Base branch: `main`
-- Working branch: `feat/teachability-queue-closure-v0.12.8`
-- PR: [#161](https://github.com/SaehwanPark/hs-mgt-game/pull/161)
-- Domain QA: Pass for queue closure.
-- Review passes: three post-open passes completed; no actionable code, data,
-  scope, or documentation findings.
-- CI: `check` passed in run [29209204446](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29209204446).
-- Merge state: open and ready for merge after this handoff update.
+- Working branch: `feat/difficulty-queue-closure-v0.12.9`
+- PR: to be opened after final local verification
+- Domain QA: Pass for evidence-gated closure.
+- Review passes: pending PR opening and post-open review.
+- Merge state: pending PR review and merge.
 
 ## Verification
 
-- Queue-closure source markers: supported.
-- Existing teachability audit: 18/18 complete runs, 270 stages, zero gaps.
+- Closure source markers: supported.
+- Difficulty evidence: 75 runs/1,800 transitions, candidate signal, 15-run
+  clearability overlap.
+- Observation evidence: 75 runs/1,800 entries, exact histories/hashes, zero
+  hidden markers.
 - Focused closure tests, full Rust/Python suites, formatting, clippy, CLI
-  smoke, golden, audit, and diff checks: passed locally; the PR check also
-  passed.
+  smoke, golden, and diff checks: pending final verification.
 
 ## Stop condition
 
-After this closure merges, this Future item is removed. A new teachability
-slice requires concrete playtest, instructor, scenario, or domain evidence
-identifying an unexplained gap and a new bounded proposal.
+After this closure merges, the difficulty item is removed. Any tuning requires
+a new evidence-backed design gate and must not be inferred from this signal.

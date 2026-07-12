@@ -262,6 +262,11 @@ contracts as validation surfaces rather than adding a new runtime mechanism.
 The source-specific affiliation and competitive context boundaries remain
 explicit, and any future change requires a concrete evidence gap.
 
+The v0.12.9 difficulty closure keeps the workforce-capacity signal as a
+descriptive evidence route only. The visible observation controls and bounded
+Expert clearability evidence do not alter the deterministic core or authorize
+difficulty, balance, scoring, or winnability changes.
+
 ### Scenario and Actor Design
 
 Responsible for:
