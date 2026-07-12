@@ -41,7 +41,7 @@ None.
 - `cargo fmt --check` — passed.
 - `cargo clippy --all-targets -- -D warnings` — passed.
 - `cargo test --all -- --test-threads=1` — 291 passed.
-- `python3 -m unittest discover -s tests -p 'test_*.py'` — 121 passed.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 122 passed.
 - JSON validation and `git diff --check` — passed.
 - Three independent code-reviewer passes completed; one Medium privacy-audit
   finding was fixed and no Critical/High findings remain.
