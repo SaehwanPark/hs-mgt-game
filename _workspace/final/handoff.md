@@ -31,7 +31,7 @@
 - Domain QA: Pass.
 - Review passes: three post-open passes completed; no actionable code, data,
   scope, or documentation findings.
-- CI: `check` passed in run [29208148870](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208148870).
+- CI: `check` passed in run [29208220762](https://github.com/SaehwanPark/hs-mgt-game/actions/runs/29208220762).
 - Merge state: open and ready for merge after this handoff update.
 
 ## Verification
