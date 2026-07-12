@@ -225,6 +225,12 @@ commitments were omitted. v0.12.2 renders those existing typed fields through
 the MCP observation without changing transition semantics, rulesets, or
 replay/hash contracts. The projection remains outside the deterministic core.
 
+The v0.12.3 Phase 7 review audits the v0.12.2 affiliation post-fix artifact
+against the approved v0.11.12 competitive teachability capture. It compares
+decision-context, action/response, transition/hash, outcome, debrief, and
+source-specific context coverage without merging campaign semantics or
+changing runtime behavior. Runtime promotion remains deferred.
+
 ### Scenario and Actor Design
 
 Responsible for:

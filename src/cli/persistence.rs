@@ -166,9 +166,13 @@ pub fn mark_first_run_complete() -> Result<(), SessionSaveError> {
 mod tests {
   use super::*;
   use crate::model::{ExperienceMode, History, SessionSave, genesis_state};
+  use std::sync::Mutex;
+
+  static PERSISTENCE_TEST_LOCK: Mutex<()> = Mutex::new(());
 
   #[test]
   fn delete_session_save_is_idempotent_when_missing() {
+    let _lock = PERSISTENCE_TEST_LOCK.lock().unwrap();
     let _ = delete_session_save();
   }
 
@@ -239,11 +243,13 @@ mod tests {
 
   #[test]
   fn delete_competitive_session_save_is_idempotent_when_missing() {
+    let _lock = PERSISTENCE_TEST_LOCK.lock().unwrap();
     let _ = delete_competitive_session_save();
   }
 
   #[test]
   fn competitive_persistence_write_load_delete_round_trip() {
+    let _lock = PERSISTENCE_TEST_LOCK.lock().unwrap();
     use crate::competitive::genesis_competitive_world;
     use crate::model::{
       CompetitiveHistory, CompetitiveSessionSave, Difficulty, default_competitive_ruleset,

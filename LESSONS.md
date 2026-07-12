@@ -3,6 +3,30 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Compare Evidence Lanes Without Flattening Campaign Semantics
+
+- Context: The v0.12.3 Phase 7 review joined the v0.12.2 affiliation post-fix
+  artifact with the approved v0.11.12 competitive teachability capture.
+- Symptom: Both lanes expose decision, transition, outcome, and debrief records,
+  but their stage/month units and context vocabulary differ.
+- Resolution: Used a shared structural audit with source-specific context and
+  debrief markers, preserving pinned source versions and reporting 18 runs and
+  270 transitions without a new capture.
+- Prevention: Normalize only audit metadata. Keep campaign-specific contracts
+  explicit, and never turn deterministic trace coverage into a comprehension,
+  balance, winnability, or learning claim.
+
+## Isolate Tests That Share User-Scoped Files
+
+- Context: CI ran persistence tests in parallel against the shared
+  `competitive_session.save` path.
+- Symptom: A delete-idempotency test could remove the file while a round-trip
+  test was loading it, producing a missing-file failure that serial tests hid.
+- Resolution: Added a test-module mutex around the shared-path tests without
+  changing production persistence behavior.
+- Prevention: Run the default parallel test command before handoff and isolate
+  tests that mutate user-scoped filesystem paths.
+
 ## Audit Typed Observations Against Rendered Interfaces
 
 - Context: The v0.12.1 regional-affiliation capture compared the typed

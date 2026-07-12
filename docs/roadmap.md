@@ -887,6 +887,11 @@ ruleset, balance, legal, and educational-effect changes deferred.
 The v0.12.2 follow-up renders those existing typed fields at the MCP boundary
 and reruns the same 9-run matrix with 54/54 observations carrying the context;
 no transition, ruleset, balance, or learning claim is promoted.
+The v0.12.3 Phase 7 review audits that post-fix affiliation artifact against the
+approved competitive teachability capture: 18 complete runs and 270 committed
+transitions retain decision-context, action/response, transition/hash, outcome,
+debrief, and source-specific context coverage with no structural gap. Runtime
+promotion remains deferred.
 Broader deal-market mechanics and legal forecasting remain deferred.
 
 ## 7.6 Educational Artifact and Debrief Review
