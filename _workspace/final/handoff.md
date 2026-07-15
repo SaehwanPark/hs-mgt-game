@@ -1,39 +1,51 @@
-# Final Handoff — Visual and Audio SDD Alignment v0.12.15
+# Final Handoff — Visual and Audio Phase 0 Alignment v0.12.16
 
 ## Result
 
-The visual/audio proposal now has a complete SDD Future track without implying
-that planned features exist. The plan covers the persistent executive desktop,
-canonical action path, monthly causal resolution, visual language, audio,
-assets, accessibility, campaign expansion, first competitive-month slice,
-phases 0–9, verification, contributor boundaries, risk controls, and evidence
-limits. Budget-dependent human testplays are replaced by reproducible AI-agent
-testplays while human-experience claims remain deferred. Metadata is aligned at
-`0.12.15`.
+Phase 0 of the visual/audio Future track is complete as a product and
+architecture alignment artifact. The repository now has an accepted
+browser-native thin-client decision, a one-month competitive experience
+contract, current actor-visible source inventory, wireframe, visible-only audio
+catalogs, asset-license policy, hidden-state exclusions, accessibility gates,
+and a sequential promotion rule for Phase 1.
 
-## Commit chunks
+## Changed files
 
-1. `98bf030` — adapt the proposal and request framing to AI-agent testplay.
-2. `c0959f1` — specify the complete visual/audio track and planned architecture.
-3. Final chunk — record QA, changelog/history, lesson, version metadata, and
-   this handoff.
+- `docs/visual-audio-phase0-alignment-v0.12.16.md`
+- `docs/decision-records/0011-browser-native-presentation-client.md`
+- `docs/decision-records/README.md`
+- `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`, `LESSONS.md`
+- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
+  `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, and
+  `_workspace/19_implementation_plan_visual_audio_phase0.md`
+- `tests/test_visual_audio_phase0.py`
+- package metadata at `0.12.16`
 
 ## Verification
 
-- Proposal-to-SPEC coverage review passed across all proposal sections and
-  phases.
-- Planned human-testplay wording review passed; AI evidence limits are explicit.
-- Release metadata check passed at `0.12.15`.
-- Documentation diff whitespace check passed.
+- Phase 0 contract test: passed (5 tests).
+- Full Python test discovery: passed (235 tests).
+- Release metadata check: passed (`0.12.16`).
+- Documentation whitespace check: passed.
+- Rust formatting: passed.
+- Clippy with warnings denied: passed.
+- Serial Rust suite: passed (308 unit tests plus integration/golden/doc-test
+  targets).
 - Domain QA status: `pass`.
+
+## Workflow state
+
+- Task type: development continuation / documentation-boundary feature.
+- Base branch: `main`.
+- Working branch: `feat/visual-audio-phase0-alignment-v0.12.16`.
+- Next candidate: Phase 1 static injected-data executive desktop.
 
 ## Known limits and next dependencies
 
-- No runtime, balance, scenario, interface implementation, asset, dependency,
-  packaging, publication, or deployment behavior changed.
-- Phase 0 must still choose the bounded technology/adapter direction, inventory
-  actor-visible DTO needs, define exact wireframes and catalogs, and adopt asset
-  policy/ADRs before implementation.
+- No GUI runtime, typed DTO, action workflow, live adapter, animation, audio
+  playback, asset, packaging, deployment, or campaign expansion was added.
+- Phase 1 must validate the wireframe and status language with injected
+  actor-visible fixtures before Phase 2 promotes structured live projections.
 - Human usability, engagement, lived accessibility, learning, classroom
   effectiveness, domain-expert validity, calibration, balance, and policy
   validity remain unclaimed.

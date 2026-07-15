@@ -3,6 +3,17 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Close Presentation Gates Before Adding DTOs or Assets
+
+- Context: The visual/audio proposal listed a broad GUI, audio, and asset track,
+  while the current repository had only an injected-data thin-client proof.
+- Symptom: Starting with typed DTOs or decorative assets would blur the host
+  authority boundary and make later source gaps harder to audit.
+- Resolution: Closed Phase 0 with a source inventory, one-month contract,
+  wireframe, visible-only cue catalog, and license policy before implementation.
+- Prevention: Treat technology, source ownership, hidden-state exclusions, and
+  promotion gates as deliverables before adding presentation runtime code.
+
 ## Keep Release Checks Read-Only and Metadata-Scoped
 
 - Context: The final release-readiness queue item called for one lightweight

@@ -1,23 +1,79 @@
-# Mechanism Design — Release Metadata Check v0.12.13
+# Mechanism Design — Visual and Audio Phase 0 Alignment v0.12.16
 
-The check is a pure repository-boundary function:
+## Goal and Roadmap Phase
 
-1. read the package version from the `[package]` section of `Cargo.toml`;
-2. read the `hs-mgt-game` package version from `Cargo.lock`;
-3. read the public milestone version from the README;
-4. read the first version heading from `CHANGELOG.md`;
-5. validate the modified `x.y.z` integer format and equality; and
-6. return a non-zero exit status with file-specific errors when a value is
-   missing or inconsistent.
+Close the visual/audio proposal's Phase 0 product and architecture alignment
+gate. The smallest useful slice is one actor-controlled competitive month,
+without a new simulation mechanism.
 
-The checker never imports the Rust crate, runs a simulation, edits files,
-contacts a registry, creates a tag, or publishes an artifact. CI and local
-contributors invoke the same command, so the quality signal is reproducible
-at the repository boundary.
+## Slice Boundary
 
-## Boundary decision
+The setting is `competitive-regional-v1`; Riverside is the human system, the
+duration is one month, and the player acts as an executive allocating attention,
+resources, workforce, payer/policy posture, commitments, and strategy. The
+presentation surface includes briefing, schematic region, institution/facility
+detail, action draft/preview, pending processes, resolution, replay, and debrief.
+Stabilization and affiliation remain future campaign-specific work.
 
-The package version remains the expected source value. The lockfile, README,
-and changelog are checked projections. `SPEC.md` and the versioning policy
-remain human-maintained design/governance records and are updated in the same
-PR, but they are not parsed as package metadata by this lightweight check.
+## Actors and Authority
+
+The Rust host and existing MCP adapter own simulation authority. The player sees
+the actor-visible projection. Rival systems remain strategic actors, but private
+rival actions are excluded from the standard client. Client navigation,
+selection, drafts, animation, and preferences are non-authoritative.
+
+## State, Beliefs, and Observations
+
+True state includes fields in `CompetitiveWorldState`, resolved inputs, and
+private actor actions. The player observation includes organization identity,
+reported access/quality, trust summaries, staffing, capacity, demand, treated and
+unmet volume, revenue/cost/margin, project status, runway, market/policy bullets,
+consultant options, and information gaps. The client must never infer omitted
+values, private utility, or future outcomes.
+
+## Commands, Events, and Effects
+
+The first slice uses existing `CompetitiveCommand` variants: hold, recruit,
+invest, monitor, negotiate, commit, and project. A form preview shows canonical
+command, costs, delays, visible constraints, validation result, and uncertainty;
+it does not promise the outcome. Committed `TransitionSummary` events/effects
+and the next observation supply resolution and cue sources. Validation failure
+does not advance history.
+
+## Strategic Interaction
+
+The player responds to visible workforce/capacity pressure and public payer,
+policy, market, and rival signals. Private rival actions and resolved stochastic
+inputs remain hidden until an authorized visible report or committed effect
+reveals them. No new payoff or actor rule is introduced by the presentation.
+
+## Assumptions and Parameters
+
+Browser-native HTML/CSS/ES modules plus native SVG are the initial stack. A
+future client may use Web Audio API playback, but cue classification is a pure
+visible-event mapping. Music states are menu, stable operations, pressure, and
+debrief; UI and event cue counts remain bounded by the proposal.
+
+## Educational Debrief Hooks
+
+The surface keeps decision quality separate from outcome quality, links visible
+causes to committed effects, preserves observation-time information, and asks
+the player to inspect tradeoffs, pending processes, and revisions. It does not
+claim that an agent or static checker learned or understood the material.
+
+## Determinism and Replay Notes
+
+The client does not resolve randomness or mutate history. Replaying visible
+history may regenerate animation/audio cues, but playback is not recorded in
+simulation history. Presentation changes must leave commands, transitions,
+replay artifacts, state hashes, and deterministic outcomes unchanged.
+
+## Open Questions
+
+- Which structured adapter projections are needed after Phase 1 fixture review?
+- What host mode and asset storage are justified by evidence?
+- What recording sink and browser fallback are appropriate for Phase 5 audio?
+
+The Phase 0 artifact never imports the Rust crate, runs a simulation, adds a
+browser dependency, downloads assets, or publishes an artifact. The static
+contract test checks that the boundary and source inventory remain explicit.

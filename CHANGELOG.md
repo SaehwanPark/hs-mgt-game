@@ -4,6 +4,28 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.16] - 2026-07-14
+
+### Added
+- Completed visual/audio Phase 0 product and architecture alignment for one
+  `competitive-regional-v1` month, including the thin-client boundary,
+  actor-visible source inventory, wireframe, audio catalogs, asset policy, and
+  hidden-state exclusions.
+- Added ADR-0011 and a dependency-free contract test for the Phase 0 deliverables.
+
+### Changed
+- Accepted browser-native HTML/CSS/ES modules plus native SVG as the initial
+  presentation stack while keeping the host/MCP boundary authoritative.
+- Promoted Phase 1 static executive desktop as the next gated Future item and
+  bumped package/public metadata to `0.12.16`.
+
+### Evidence Limits
+- No simulation, command, scenario, replay, state-hash, audio-playback, asset,
+  packaging, deployment, or human-evaluation behavior changed.
+- AI/static checks remain technical development proxies and do not establish
+  human usability, engagement, lived accessibility, learning, calibration,
+  balance, or policy validity.
+
 ## [0.12.15] - 2026-07-14
 
 ### Added

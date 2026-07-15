@@ -246,9 +246,12 @@ separate authorization boundary and must not weaken the standard player's
 historical observation boundary.
 
 Last Reviewed: 2026-07-14
-Status: Needs Review
+Status: Verified
 
-This is a planned boundary, not current implementation.
+Phase 0 alignment is accepted in
+[`docs/visual-audio-phase0-alignment-v0.12.16.md`](docs/visual-audio-phase0-alignment-v0.12.16.md)
+and ADR-0011. The static client, structured live adapter, action workflow,
+animation, audio playback, and asset pipeline remain planned implementations.
 
 ## Durable Constraints
 
