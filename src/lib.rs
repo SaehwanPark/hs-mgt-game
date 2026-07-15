@@ -4,6 +4,7 @@ pub mod artifact;
 pub mod cli;
 pub mod competitive;
 pub mod debrief;
+pub mod gui_server;
 pub mod inputs;
 pub mod mcp;
 pub mod model;

@@ -1472,7 +1472,6 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       const result = render(envelope);
       if (result.ok) {
         await regionalWorldClient.load(requestedSessionId);
-        await campaignCoverageClient.load(requestedSessionId);
         sessionId = requestedSessionId;
       }
       if (!result.ok) {
@@ -1780,7 +1779,6 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           audioClient.setMusicFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           await regionalWorldClient.load(sessionId);
-          await campaignCoverageClient.load(sessionId);
         }
       } catch (error) {
         renderEnvelope(response, root);
@@ -1791,7 +1789,6 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       }
     } else {
       renderEnvelope(response, root);
-      await campaignCoverageClient.load(sessionId);
     }
     setActionControls(root, true);
     renderDraftState();
@@ -1804,10 +1801,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     const requestedSessionId = String(nextSessionId ?? "").trim();
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
     configureRecovery(root, () => load(requestedSessionId), recorder);
-    setActionControls(root, false);
-    renderActions([], root);
     const actionMode = root.querySelector("#action-mode");
-    if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
+    if (!replacingSession) {
+      setActionControls(root, false);
+      renderActions([], root);
+      if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
+    }
     setPresentationState(root, "Loading action catalog…");
     if (adapter && !requestedSessionId) {
       setPresentationState(root, "A host session ID is required before loading actions.");
@@ -1851,7 +1850,6 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         recordVisibleEnvelope(recorder, presentation);
         audioClient.setMusicFromVisible(presentation);
         await regionalWorldClient.load(requestedSessionId);
-        await campaignCoverageClient.load(requestedSessionId);
       }
       catalog = nextCatalog;
       renderActionCatalog(catalog, root, (spec, params, form) => {
@@ -1887,14 +1885,18 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       });
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
       sessionId = requestedSessionId;
+      adapter.activateSession?.(requestedSessionId);
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "action_adapter_error", message);
-      if (replacingSession) setPresentationState(root, `Replacement session could not be loaded; the current session remains active: ${message}`);
-      setActionControls(root, false);
-      if (actionMode) actionMode.textContent = "read-only view · action adapter unavailable";
-      setPresentationState(root, `Action adapter error: ${message}`);
+      if (replacingSession) {
+        setPresentationState(root, `Replacement session could not be loaded; the current session remains active: ${message}`);
+      } else {
+        setActionControls(root, false);
+        if (actionMode) actionMode.textContent = "read-only view · action adapter unavailable";
+        setPresentationState(root, `Action adapter error: ${message}`);
+      }
       showRecovery(root, `Action adapter error: ${message}`);
       return { ok: false, code: "action_adapter_error", message };
     }
@@ -2226,7 +2228,13 @@ if (typeof document !== "undefined") {
   const actionAdapter = globalThis.HsMgtGameActionAdapter;
   if (actionAdapter) {
     const client = createActionClient({ root: document });
-    client.load();
+    if (actionAdapter.sessionId) {
+      client.load();
+    } else {
+      renderEnvelope(demoEnvelope, document);
+      setActionControls(document, false);
+      setPresentationState(document, "Demo fixture loaded; start a host session to play");
+    }
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
