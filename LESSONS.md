@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Make Static Interfaces Useful Without Making Them Authoritative
+
+- Context: Phase 1 needed to expose finance, workforce, capacity, access, and
+  public rival context before live presentation DTOs were justified.
+- Symptom: Reusing a raw observation list alone preserved authority but left a
+  reviewer searching through CLI-shaped text; adding local rules would create a
+  second engine.
+- Resolution: Added a display-only fixture, source labels, responsive semantic
+  panels, selection-only navigation, and adapter-owned command entry.
+- Prevention: Improve information architecture with injected actor-visible data
+  first; keep selection and preview state local and reserve validation,
+  transition, and outcome logic for the host boundary.
+
 ## Close Presentation Gates Before Adding DTOs or Assets
 
 - Context: The visual/audio proposal listed a broad GUI, audio, and asset track,

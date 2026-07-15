@@ -5,114 +5,318 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A thin client for actor-visible Health Policy Strategy Game sessions."
+      content="A static executive desktop for actor-visible Health Policy Strategy Game sessions."
     />
-    <title>Health Policy Strategy Game — Session Console</title>
+    <title>Health Policy Strategy Game — Executive Desktop</title>
     <style>
       :root {
         color-scheme: light;
         --ink: #17232d;
         --muted: #60707b;
-        --paper: #f7f9f8;
+        --paper: #f4f7f6;
         --panel: #ffffff;
-        --line: #d9e3e1;
+        --panel-soft: #eef5f3;
+        --line: #d6e2df;
         --teal: #0b6e69;
-        --teal-soft: #e5f3f0;
-        --orange: #c96b31;
-        --shadow: 0 18px 50px rgb(28 55 60 / 10%);
+        --teal-dark: #075952;
+        --teal-soft: #e1f1ee;
+        --orange: #a95226;
+        --orange-soft: #fff0e8;
+        --purple: #5d4b89;
+        --purple-soft: #eeeafd;
+        --blue: #2b5f87;
+        --blue-soft: #e9f2fa;
+        --green: #2f6e4f;
+        --green-soft: #e8f4eb;
+        --yellow: #7a5a11;
+        --yellow-soft: #fff5d8;
+        --red: #8d302c;
+        --red-soft: #fdecea;
+        --shadow: 0 18px 50px rgb(28 55 60 / 9%);
+        --radius: 1rem;
+        --space-1: .35rem;
+        --space-2: .6rem;
+        --space-3: .9rem;
+        --space-4: 1.25rem;
+        --space-5: 1.8rem;
       }
 
       * { box-sizing: border-box; }
 
       body {
         margin: 0;
-        background: radial-gradient(circle at top right, #e5f3ef 0, var(--paper) 38rem);
+        background: radial-gradient(circle at top right, #e4f2ef 0, var(--paper) 38rem);
         color: var(--ink);
         font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif;
       }
 
-      header, main { width: min(1180px, calc(100% - 2rem)); margin: 0 auto; }
+      button, input { font: inherit; }
+      button { cursor: pointer; }
+      h1, h2, h3, p { margin-top: 0; }
+      h2 { font-size: 1.08rem; margin-bottom: var(--space-3); }
+      h3 { font-size: .98rem; margin-bottom: var(--space-2); }
+      ul, ol, dl { margin: 0; padding: 0; }
+      .sr-only {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
 
-      header { padding: 3.5rem 0 2rem; }
+      .page-header, main, footer {
+        margin: 0 auto;
+        width: min(1440px, calc(100% - 2rem));
+      }
 
+      .page-header { padding: 2.5rem 0 var(--space-5); }
+      .topline, .panel-heading, .entity-heading, .timeline-row, .action-heading {
+        align-items: baseline;
+        display: flex;
+        gap: var(--space-3);
+        justify-content: space-between;
+      }
       .eyebrow {
         color: var(--teal);
-        font-size: .78rem;
+        font-size: .76rem;
         font-weight: 800;
         letter-spacing: .16em;
         text-transform: uppercase;
       }
-
-      h1, h2, p { margin-top: 0; }
-      h1 { max-width: 760px; font-size: clamp(2.2rem, 6vw, 4.8rem); line-height: .98; margin-bottom: 1rem; }
-      h2 { font-size: 1.08rem; margin-bottom: .8rem; }
-      .lede { color: var(--muted); max-width: 680px; font-size: 1.05rem; }
+      .topline span:last-child, .panel-heading span, .source, .muted { color: var(--muted); }
+      .topline span:last-child, .panel-heading span, .source { font-size: .82rem; }
+      h1 { font-size: clamp(2rem, 4vw, 4.2rem); line-height: 1; margin: var(--space-3) 0; max-width: 850px; }
+      .lede { color: var(--muted); margin-bottom: var(--space-4); max-width: 820px; }
 
       .status {
         align-items: center;
-        background: var(--teal-soft);
-        border: 1px solid #b9dfd8;
+        border: 1px solid currentColor;
         border-radius: 999px;
-        color: var(--teal);
         display: inline-flex;
-        font-size: .85rem;
-        font-weight: 700;
-        gap: .5rem;
-        padding: .45rem .8rem;
+        font-size: .78rem;
+        font-weight: 800;
+        gap: .35rem;
+        padding: .22rem .55rem;
+        white-space: nowrap;
       }
+      .status::before { content: "◆"; font-size: .62rem; }
+      .status--stable, .status--improving { background: var(--green-soft); color: var(--green); }
+      .status--watch, .status--uncertain { background: var(--yellow-soft); color: var(--yellow); }
+      .status--constrained, .status--delayed { background: var(--orange-soft); color: var(--orange); }
+      .status--critical { background: var(--red-soft); color: var(--red); }
+      .status--revised { background: var(--purple-soft); color: var(--purple); }
 
-      .status::before { background: #36a79c; border-radius: 50%; content: ""; height: .55rem; width: .55rem; }
+      .metric-grid {
+        display: grid;
+        gap: var(--space-2);
+        grid-template-columns: repeat(7, minmax(0, 1fr));
+        list-style: none;
+      }
+      .metric {
+        background: rgb(255 255 255 / 82%);
+        border: 1px solid var(--line);
+        border-radius: .8rem;
+        padding: .75rem;
+      }
+      .metric dt { color: var(--muted); font-size: .74rem; font-weight: 750; }
+      .metric dd { font-size: 1.05rem; font-weight: 800; margin: .1rem 0 0; }
 
-      .layout { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1.45fr) minmax(280px, .85fr); padding-bottom: 4rem; }
-      .panel { background: rgb(255 255 255 / 88%); border: 1px solid var(--line); border-radius: 1.25rem; box-shadow: var(--shadow); padding: 1.25rem; }
-      .panel-wide { grid-column: 1 / -1; }
+      .desktop-grid {
+        display: grid;
+        gap: var(--space-3);
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        padding-bottom: 3rem;
+      }
+      .panel {
+        background: rgb(255 255 255 / 92%);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        min-width: 0;
+        padding: var(--space-4);
+      }
+      .panel--briefing { grid-column: span 4; }
+      .panel--map { grid-column: span 8; }
+      .panel--entity { grid-column: span 7; }
+      .panel--actions { grid-column: span 5; }
+      .panel--timeline, .panel--result, .panel--observation, .panel--history, .panel--debrief { grid-column: span 6; }
+      .panel-heading { margin-bottom: var(--space-3); }
+      .panel-heading h2 { margin-bottom: 0; }
 
-      .panel-heading { align-items: baseline; display: flex; justify-content: space-between; gap: 1rem; }
-      .panel-heading span { color: var(--muted); font-size: .8rem; }
+      .briefing-list, .entity-list, .facility-list, .action-list, .timeline, .result-list, .history, .debrief, .observation {
+        display: grid;
+        gap: var(--space-2);
+        list-style: none;
+      }
+      .briefing-item, .facility-card, .action-card, .timeline-item, .result-item, .observation p, .history-item, .debrief li {
+        background: var(--panel-soft);
+        border: 1px solid transparent;
+        border-radius: .75rem;
+        padding: .75rem .85rem;
+      }
+      .briefing-item { border-left: 4px solid var(--orange); }
+      .briefing-item p, .facility-card p, .action-card p, .timeline-item p, .result-item p { margin-bottom: .25rem; }
+      .briefing-item:last-child, .facility-card:last-child, .action-card:last-child, .timeline-item:last-child, .result-item:last-child { margin-bottom: 0; }
 
-      .observation { display: grid; gap: .5rem; }
-      .observation p, .history-item, .debrief li { background: #f2f7f6; border-radius: .7rem; margin: 0; padding: .7rem .85rem; }
-      .observation p:first-child { background: var(--teal-soft); color: #075952; font-weight: 750; }
+      .entity-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .entity-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: .8rem;
+        color: var(--ink);
+        min-height: 7.5rem;
+        padding: .85rem;
+        text-align: left;
+        transition: border-color .15s ease, box-shadow .15s ease, transform .15s ease;
+        width: 100%;
+      }
+      .entity-card:hover, .entity-card:focus-visible, .entity-card[aria-current="true"] {
+        border-color: var(--teal);
+        box-shadow: 0 8px 20px rgb(11 110 105 / 12%);
+        outline: 0;
+        transform: translateY(-1px);
+      }
+      .entity-card strong { display: block; margin: .35rem 0; }
+      .entity-icon, .facility-icon { color: var(--teal); font-size: 1.35rem; font-weight: 900; }
+      .entity-card p, .facility-card p { color: var(--muted); font-size: .86rem; margin-bottom: .5rem; }
 
-      .commands { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
-      .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .86rem; padding: .4rem .65rem; }
+      .entity-heading { align-items: center; justify-content: flex-start; }
+      .entity-heading .status { margin-left: auto; }
+      .detail-summary { color: var(--muted); margin-bottom: var(--space-3); }
+      .detail-metrics { display: grid; gap: var(--space-2); grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: var(--space-4); }
+      .detail-metrics div { border-left: 3px solid var(--teal); padding-left: .65rem; }
+      .detail-metrics dt { color: var(--muted); font-size: .74rem; }
+      .detail-metrics dd { font-weight: 800; margin: 0; }
+      .facility-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .facility-card { background: #f8fbfa; }
+
+      .action-card { background: var(--orange-soft); border-color: #f4d5c4; }
+      .action-heading { align-items: center; }
+      .action-heading strong { color: var(--orange); }
+      .command-preview { background: rgb(255 255 255 / 72%); border-radius: .45rem; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; overflow-wrap: anywhere; padding: .35rem .5rem; }
+      .action-meta { color: var(--muted); display: grid; font-size: .82rem; gap: .1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .commands { display: grid; gap: .45rem; list-style: none; margin: var(--space-3) 0 0; padding: 0; }
+      .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; padding: .35rem .6rem; }
+
+      .timeline-item { border-left: 4px solid var(--purple); }
+      .timeline-row { align-items: center; }
+      .result-item { border-left: 4px solid var(--blue); }
+      .result-item strong { color: var(--blue); }
+      .source { display: block; margin-top: .35rem; }
+
+      .observation p:first-child { background: var(--teal-soft); color: var(--teal-dark); font-weight: 750; }
+      .history, .debrief { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .history-item { display: grid; gap: .15rem; grid-template-columns: 4rem 1fr; }
+      .history-item strong { color: var(--teal); }
+      .hash { color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; font-size: .76rem; grid-column: 2; overflow-wrap: anywhere; }
       .empty { color: var(--muted); font-style: italic; }
 
-      form { display: flex; gap: .6rem; margin-top: 1rem; }
-      input { background: var(--panel); border: 1px solid #b9cbc8; border-radius: .65rem; color: var(--ink); flex: 1; font: inherit; min-width: 0; padding: .75rem .85rem; }
-      button { background: var(--teal); border: 0; border-radius: .65rem; color: white; cursor: pointer; font: inherit; font-weight: 750; padding: .75rem 1rem; }
-      button:hover { background: #075952; }
-      .command-status { color: var(--muted); font-size: .85rem; margin: .65rem 0 0; min-height: 1.3em; }
+      .command-form { display: flex; gap: .6rem; margin-top: var(--space-3); }
+      input { background: var(--panel); border: 1px solid #b9cbc8; border-radius: .65rem; color: var(--ink); flex: 1; min-width: 0; padding: .7rem .8rem; }
+      button[type="submit"] { background: var(--teal); border: 0; border-radius: .65rem; color: white; font-weight: 750; padding: .7rem 1rem; }
+      button[type="submit"]:hover, button[type="submit"]:focus-visible { background: var(--teal-dark); }
+      .command-status { color: var(--muted); font-size: .82rem; margin: .6rem 0 0; min-height: 1.3em; }
+      footer { color: var(--muted); font-size: .8rem; padding-bottom: 2rem; }
 
-      .history, .debrief { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
-      .history-item { display: grid; gap: .15rem; grid-template-columns: 5rem 1fr; }
-      .history-item strong { color: var(--teal); }
-      .hash { color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; font-size: .78rem; grid-column: 2; overflow-wrap: anywhere; }
-
-      footer { color: var(--muted); font-size: .82rem; padding: 0 0 2rem; }
+      @media (max-width: 1120px) {
+        .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        .panel--briefing, .panel--map, .panel--entity, .panel--actions { grid-column: span 6; }
+        .panel--timeline, .panel--result, .panel--observation, .panel--history, .panel--debrief { grid-column: span 6; }
+      }
 
       @media (max-width: 760px) {
-        header { padding-top: 2.25rem; }
-        .layout { grid-template-columns: 1fr; }
-        .panel-wide { grid-column: auto; }
-        form { flex-direction: column; }
+        .page-header { padding-top: 1.8rem; }
+        .metric-grid, .entity-list, .facility-list, .detail-metrics, .history, .debrief { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .panel--briefing, .panel--map, .panel--entity, .panel--actions, .panel--timeline, .panel--result, .panel--observation, .panel--history, .panel--debrief { grid-column: 1 / -1; }
+      }
+
+      @media (max-width: 500px) {
+        .page-header, main, footer { width: min(100% - 1rem, 1440px); }
+        .metric-grid, .entity-list, .facility-list, .detail-metrics, .history, .debrief { grid-template-columns: 1fr; }
+        .command-form { flex-direction: column; }
+        .action-meta { grid-template-columns: 1fr; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; }
       }
     </style>
   </head>
   <body>
-    <header>
-      <div class="eyebrow">Actor-visible session console</div>
-      <h1>Make the decision surface inspectable.</h1>
+    <header class="page-header">
+      <div class="topline">
+        <div class="eyebrow">Actor-visible executive desktop</div>
+        <span id="session-status" role="status">Demo fixture loaded</span>
+      </div>
+      <h1>See the pressure before choosing the response.</h1>
       <p class="lede">
-        A small client for observations, legal command hints, committed history,
-        and debrief output. Simulation state and command legality remain on the
-        MCP adapter behind this page.
+        A static information-architecture prototype for an executive leading a
+        regional nonprofit health system. It shows visible signals, pending
+        processes, and committed results; command legality remains with the host
+        adapter.
       </p>
-      <div class="status" id="session-status" role="status">Demo envelope loaded</div>
+      <dl class="metric-grid" id="header-metrics" aria-label="Executive metrics"></dl>
     </header>
 
-    <main class="layout" aria-live="polite">
-      <section class="panel" aria-labelledby="observation-heading">
+    <main class="desktop-grid" id="desktop" aria-live="polite">
+      <section class="panel panel--briefing" aria-labelledby="briefing-heading">
+        <div class="panel-heading">
+          <h2 id="briefing-heading">Executive briefing</h2>
+          <span>source-linked alerts</span>
+        </div>
+        <ul class="briefing-list" id="briefing-list"></ul>
+      </section>
+
+      <section class="panel panel--map" aria-labelledby="map-heading">
+        <div class="panel-heading">
+          <h2 id="map-heading">Regional market</h2>
+          <span>schematic · public signals only</span>
+        </div>
+        <div class="entity-list" id="map-list"></div>
+      </section>
+
+      <section class="panel panel--entity" aria-labelledby="entity-heading">
+        <div class="panel-heading">
+          <h2 id="entity-heading">Selected system and facilities</h2>
+          <span>actor-visible detail</span>
+        </div>
+        <div id="entity-detail"></div>
+      </section>
+
+      <section class="panel panel--actions" aria-labelledby="actions-heading">
+        <div class="panel-heading">
+          <h2 id="actions-heading">Contextual action panel</h2>
+          <span>preview only in Phase 1</span>
+        </div>
+        <div class="action-list" id="action-preview-list"></div>
+        <ul class="commands" id="legal-command-list" aria-label="Existing legal command surface"></ul>
+        <form class="command-form" id="command-form">
+          <label class="sr-only" for="command-input">Canonical command</label>
+          <input id="command-input" autocomplete="off" placeholder="Type a canonical command for the adapter" />
+          <button type="submit">Send to adapter</button>
+        </form>
+        <p class="command-status" id="command-status"></p>
+      </section>
+
+      <section class="panel panel--timeline" aria-labelledby="timeline-heading">
+        <div class="panel-heading">
+          <h2 id="timeline-heading">Pending processes</h2>
+          <span>visible commitments, not promises</span>
+        </div>
+        <ol class="timeline" id="pending-list"></ol>
+      </section>
+
+      <section class="panel panel--result" aria-labelledby="result-heading">
+        <div class="panel-heading">
+          <h2 id="result-heading">Monthly result</h2>
+          <span>committed prior month</span>
+        </div>
+        <ul class="result-list" id="result-list"></ul>
+      </section>
+
+      <section class="panel panel--observation" aria-labelledby="observation-heading">
         <div class="panel-heading">
           <h2 id="observation-heading">Current observation</h2>
           <span id="session-meta">—</span>
@@ -120,21 +324,7 @@
         <div class="observation" id="observation-list"></div>
       </section>
 
-      <section class="panel" aria-labelledby="commands-heading">
-        <div class="panel-heading">
-          <h2 id="commands-heading">Legal command surface</h2>
-          <span>server-authoritative</span>
-        </div>
-        <ul class="commands" id="legal-command-list"></ul>
-        <form id="command-form">
-          <label class="sr-only" for="command-input">Command</label>
-          <input id="command-input" autocomplete="off" placeholder="Type a command to submit" />
-          <button type="submit">Submit</button>
-        </form>
-        <p class="command-status" id="command-status"></p>
-      </section>
-
-      <section class="panel panel-wide" aria-labelledby="history-heading">
+      <section class="panel panel--history" aria-labelledby="history-heading">
         <div class="panel-heading">
           <h2 id="history-heading">Committed history</h2>
           <span>replay/state-hash output</span>
@@ -142,7 +332,7 @@
         <ol class="history" id="history-list"></ol>
       </section>
 
-      <section class="panel panel-wide" aria-labelledby="debrief-heading">
+      <section class="panel panel--debrief" aria-labelledby="debrief-heading">
         <div class="panel-heading">
           <h2 id="debrief-heading">Debrief</h2>
           <span>retrospective, not a score-only view</span>
@@ -152,8 +342,8 @@
     </main>
 
     <footer>
-      Thin-client proof: HTML/CSS/JavaScript only. No external assets, fonts,
-      network calls, or duplicate simulation state are bundled.
+      Phase 1 static fixture: HTML/CSS/JavaScript only. No external assets,
+      fonts, network calls, hidden-state fields, or duplicate simulation state.
     </footer>
     <script type="module" src="./app.mjs"></script>
   </body>

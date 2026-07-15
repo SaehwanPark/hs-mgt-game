@@ -1,79 +1,66 @@
-# Mechanism Design — Visual and Audio Phase 0 Alignment v0.12.16
+# Mechanism Design — Visual and Audio Phase 1 Static Desktop v0.12.17
 
 ## Goal and Roadmap Phase
 
-Close the visual/audio proposal's Phase 0 product and architecture alignment
-gate. The smallest useful slice is one actor-controlled competitive month,
-without a new simulation mechanism.
+Validate the Phase 0 information architecture with a static executive desktop
+before adding live read-only DTOs. This is roadmap Phase 1.
 
 ## Slice Boundary
 
-The setting is `competitive-regional-v1`; Riverside is the human system, the
-duration is one month, and the player acts as an executive allocating attention,
-resources, workforce, payer/policy posture, commitments, and strategy. The
-presentation surface includes briefing, schematic region, institution/facility
-detail, action draft/preview, pending processes, resolution, replay, and debrief.
-Stabilization and affiliation remain future campaign-specific work.
+One actor-visible `competitive-regional-v1` month with Riverside Community
+Health and public rival summaries. The screen includes header metrics, briefing,
+schematic regional cards, selected system/facility detail, action previews,
+pending processes, monthly result, history, and debrief. No transition is run.
 
 ## Actors and Authority
 
-The Rust host and existing MCP adapter own simulation authority. The player sees
-the actor-visible projection. Rival systems remain strategic actors, but private
-rival actions are excluded from the standard client. Client navigation,
-selection, drafts, animation, and preferences are non-authoritative.
+The browser owns only fixture rendering, entity selection, focus/navigation, and
+local presentation state. Existing MCP/host code remains authoritative for
+observation, legal commands, command submission, stochastic inputs, transitions,
+history, hashes, and debriefs.
 
 ## State, Beliefs, and Observations
 
-True state includes fields in `CompetitiveWorldState`, resolved inputs, and
-private actor actions. The player observation includes organization identity,
-reported access/quality, trust summaries, staffing, capacity, demand, treated and
-unmet volume, revenue/cost/margin, project status, runway, market/policy bullets,
-consultant options, and information gaps. The client must never infer omitted
-values, private utility, or future outcomes.
+Fixture fields are limited to actor-visible values: finance, workforce,
+capacity, access/quality, public market/rival signals, visible timing, direct
+monthly results, and source labels. Private rival actions, true state, resolved
+inputs, private utility, and hidden outcomes are unavailable or excluded.
 
 ## Commands, Events, and Effects
 
-The first slice uses existing `CompetitiveCommand` variants: hold, recruit,
-invest, monitor, negotiate, commit, and project. A form preview shows canonical
-command, costs, delays, visible constraints, validation result, and uncertainty;
-it does not promise the outcome. Committed `TransitionSummary` events/effects
-and the next observation supply resolution and cue sources. Validation failure
-does not advance history.
+Action cards preview existing `recruit`, `invest`, and `monitor` command families
+with canonical text, cost, delay, visible constraint, and uncertainty. They are
+not submit controls. The existing command field continues to call
+`HsMgtGameAdapter.submitTurn`; no new command or GUI-only resolution exists.
 
 ## Strategic Interaction
 
-The player responds to visible workforce/capacity pressure and public payer,
-policy, market, and rival signals. Private rival actions and resolved stochastic
-inputs remain hidden until an authorized visible report or committed effect
-reveals them. No new payoff or actor rule is introduced by the presentation.
+The player compares visible workforce/capacity pressure with public rival
+signals and pending commitments. Entity selection supports inspection, not a
+strategic action. The prototype preserves the distinction between a visible
+signal and a private rival response.
 
 ## Assumptions and Parameters
 
-Browser-native HTML/CSS/ES modules plus native SVG are the initial stack. A
-future client may use Web Audio API playback, but cue classification is a pure
-visible-event mapping. Music states are menu, stable operations, pressure, and
-debrief; UI and event cue counts remain bounded by the proposal.
+The browser-native stack from ADR-0011 is retained. CSS custom properties define
+design tokens. Statuses use text plus a diamond marker and color-independent
+wording. Grid breakpoints support typical desktop/laptop widths; reduced motion
+removes transitions.
 
 ## Educational Debrief Hooks
 
-The surface keeps decision quality separate from outcome quality, links visible
-causes to committed effects, preserves observation-time information, and asks
-the player to inspect tradeoffs, pending processes, and revisions. It does not
-claim that an agent or static checker learned or understood the material.
+The desktop makes decision context, pending effects, direct monthly drivers,
+observation gaps, history, and debrief links visible. It does not claim that a
+reviewer learned, understood, or preferred the interface.
 
 ## Determinism and Replay Notes
 
-The client does not resolve randomness or mutate history. Replaying visible
-history may regenerate animation/audio cues, but playback is not recorded in
-simulation history. Presentation changes must leave commands, transitions,
-replay artifacts, state hashes, and deterministic outcomes unchanged.
+No transition, RNG, history, replay artifact, or hash is touched. Selecting an
+entity rerenders fixture detail only. Existing adapter submission behavior is
+unchanged, and future replay visualization remains a separate phase.
 
 ## Open Questions
 
-- Which structured adapter projections are needed after Phase 1 fixture review?
-- What host mode and asset storage are justified by evidence?
-- What recording sink and browser fallback are appropriate for Phase 5 audio?
-
-The Phase 0 artifact never imports the Rust crate, runs a simulation, adds a
-browser dependency, downloads assets, or publishes an artifact. The static
-contract test checks that the boundary and source inventory remain explicit.
+- Which fixture fields are actually needed for a typed Phase 2 adapter?
+- Which loading/error/empty states need structured host responses?
+- What evidence would justify live projection or a richer visual component?
