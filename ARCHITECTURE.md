@@ -179,10 +179,11 @@ Status: Verified
 Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
 fixture-driven static executive desktop, Phase 2 adds a typed, read-only
 host/MCP projection, Phase 3 adds host-catalogued contextual action submission,
-Phase 4 adds a host-derived monthly resolution envelope, and Phase 5 adds
-optional generated browser audio for `competitive-regional-v1` in `gui/`. The
-GUI remains a non-authoritative thin client; broad map/world assets and other
-campaign audio remain future work. All future work should follow this
+Phase 4 adds a host-derived monthly resolution envelope, Phase 5 adds
+optional generated browser audio, and Phase 6 adds a bounded actor-visible
+schematic regional-world projection for `competitive-regional-v1` in `gui/`.
+The GUI remains a non-authoritative thin client; broad map/world assets and
+other campaign coverage remain future work. All future work should follow this
 one-way authority flow:
 
 ```text
@@ -225,7 +226,12 @@ parser, validator, observation, history, effect, cost, and submission
 boundaries rather than introducing a second command or outcome engine. Phase 5
 keeps audio classification and playback in the browser, derives it only from
 visible conditions or explicit UI outcomes, and records generated provenance
-outside the core.
+outside the core. Phase 6 keeps the regional-world projection additive and
+read-only: the host filters owned player detail and lagged public rival signals
+into `competitive-regional-world-v1`, while the browser owns schematic layout,
+selection, overlay display, and navigation only. Layout slots are not geography,
+and no private rival metrics, project queues, effect queues, or map formulas
+cross the standard player boundary.
 
 Visible observations and committed effects are the only sources for graphical
 status, animation, advisory bottleneck text, music mood, and event cues. Missing,
@@ -275,6 +281,8 @@ Phase 4 resolution scope is documented in
 [`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
 Phase 5 foundational audio scope is documented in
 [`docs/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/visual-audio-phase5-foundational-audio-v0.12.21.md).
+Phase 6 regional-world scope is documented in
+[`docs/visual-audio-phase6-regional-world-v0.12.22.md`](docs/visual-audio-phase6-regional-world-v0.12.22.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain

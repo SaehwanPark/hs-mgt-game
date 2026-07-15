@@ -1,70 +1,66 @@
-# Evidence Map — Visual and Audio Phase 5 Foundational Audio v0.12.21
+# Evidence Map — Visual and Audio Phase 6 Regional World v0.12.22
 
 ## Scope
 
-Phase 5 adds optional browser audio to the existing one-month competitive
-surface. Audio is a presentation consequence of visible page state or an
-explicit local UI action; it is not a simulation input or history record.
+Phase 6 turns the existing report/map panel into a persistent, navigable
+schematic regional view backed by a host projection. It does not add geography
+or new simulation state.
 
 ## Sources Reviewed
 
-- Phase 5 and first-vertical-slice requirements in
+- Phase 6 and first-vertical-slice requirements in
   `docs/visual_audio_upgrade_proposal.md`.
-- Phase 0 audio-state/cue catalog and asset/license policy.
-- ADR-0011 and the Phase 1–4 GUI/MCP contracts.
-- `ReadOnlyPresentationEnvelope`, `ResolutionEnvelope`, visible action status,
-  and current DOM controls in `gui/`.
-- README, SPEC, architecture, design principles, lessons, and harness spec.
+- Phase 0 source/hidden-state/map policy and Phase 1–5 GUI/MCP contracts.
+- `PlayerObservation`, `CompetitiveWorldState.public_action_log`,
+  `ReadOnlyPresentationEnvelope`, and existing pending-process sources.
+- README, SPEC, architecture, design principles, and harness spec.
 
 ## Mechanisms and Institutions
 
-The player remains a health-system executive deciding among institutional
-tradeoffs. Music communicates the current visible presentation mode; cues mark
-local interaction or already committed visible events. No audio cue represents a
-private rival decision, hidden stochastic input, or an inferred causal edge.
+The map presents the regional institution set as an executive information
+surface. The human system gets owned facility/process detail and visible
+operating overlays. Rival markers communicate identity and public signals only;
+their private operating state remains unavailable.
 
 ## Actor Incentives and Information
 
-Audio can reinforce category, timing, and attention without saying whether an
-organizational outcome is universally good or bad. The visual/text equivalent
-remains authoritative and complete when muted, unfocused, reduced-notification,
-or unsupported by the browser.
+Player demand, access, unmet demand, capacity, and projects are shown with
+source labels. Rival public actions appear only through the existing one-month
+observation lag and are labeled observed/reported. No map marker is a proxy for
+unobserved rival utility, hidden capacity, geographic influence, or outcome.
 
 ## Assumptions
 
-- Web Audio API synthesis is sufficient for a first technical vertical slice;
-  no external file or license download is required.
-- Phase 0's four music modes and eight cue IDs are the approved catalog; no new
-  semantic event taxonomy is needed.
-- Visible observation fields and explicit UI outcomes are sufficient for a
-  deterministic classifier; no true-state or hidden transition access is
-  justified.
-- Local settings can be held in the audio client without a persisted settings
-  schema or simulation mutation.
+- Existing player observation plus public action log are sufficient for a first
+  regional-world DTO; no true-state serialization is required.
+- A stable schematic position derived from public entity ordering is display
+  layout, not a geography claim or simulation coordinate.
+- The host can classify the human system and public rival identities while
+  filtering rival private metrics and projects.
+- Existing `get_presentation` can remain unchanged; an additive
+  `competitive-regional-world-v1` read is safer than widening unrelated DTOs.
 
 ## Unresolved Questions
 
-- Which synthesized timbres remain restrained across repeated monthly play?
-- Should asset-backed music replace generated loops after an evidence gap is
-  identified, and what provenance gate would authorize that change?
-- Which focus behavior best fits later AI-agent capture without claiming human
-  accessibility?
+- Which visual relationship signals are truly public enough to deserve a map
+  edge rather than a linked briefing item?
+- When should public rival signals age out of the map versus remain in history?
+- What evidence would justify real geography, distance, or richer asset work?
 
 ## Design Implications
 
-- Add one pure catalog/classifier boundary that maps visible envelopes and
-  explicit UI actions to stable cue/music IDs.
-- Add one browser audio client with independent channel volumes, master mute,
-  focus/reduced-notification policy, event throttling, and no-op fallback.
-- Record generated source, ownership, license status, and credits in a registry;
-  keep the simulation core free of audio paths, volumes, and playback rules.
-- Test classification through a recording sink and test playback behavior with
-  injected fake contexts where possible; browser visual/audio hardware checks
-  remain residual limits.
+- Add a typed regional-world envelope with entities, owned facilities, public
+  signals, visible overlays, active player processes, source labels, and layout
+  metadata.
+- Keep map selection, active overlay, and panel navigation local; reload the
+  projection for current/historical presentation without mutation.
+- Build rival signals from the same lagged visible public source used by human
+  observation, not from rival `HealthSystemState` fields.
+- Make missing public signal, unavailable rival detail, and absent player
+  process explicit in the UI.
 
 ## Risks
 
-Audio can become a hidden score, reveal unobserved state, fatigue repeated play,
-or make muted play incomplete. Keep every mapping source-labeled, restrained,
-throttled, independently controllable, and paired with existing visual/text
-content.
+Map polish can imply false geography, hidden rival knowledge, or a city-builder
+scope. Use a schematic legend, source/lag labels, minimal markers, and a QA gate
+that rejects any client-side metric reconstruction or private rival field.

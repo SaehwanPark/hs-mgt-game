@@ -1,4 +1,4 @@
-# Domain QA — Visual and Audio Phase 5 Foundational Audio v0.12.21
+# Domain QA — Visual and Audio Phase 6 Regional World v0.12.22
 
 ## Status
 
@@ -7,54 +7,57 @@ pass
 ## Reviewed Inputs
 
 - User request and `_workspace/00_input/request-summary.md`.
-- `_workspace/24_implementation_plan_visual_audio_phase5.md`.
+- `_workspace/25_implementation_plan_visual_audio_phase6.md`.
 - `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
-  `docs/visual-audio-phase5-foundational-audio-v0.12.21.md`.
-- Phase 0 audio catalog/asset policy, ADR-0011, and merged Phase 1–4 docs.
-- `gui/audio.mjs`, `gui/audio-catalog.json`, `gui/ASSET_CREDITS.md`,
-  `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and Phase 5 tests.
+  `docs/visual-audio-phase6-regional-world-v0.12.22.md`.
+- `PlayerObservation`, public action history, Phase 1–5 presentation contracts,
+  and the canonical proposal/design principles.
+- `src/mcp/regional_world.rs`, `src/mcp/session.rs`, `src/mcp/server.rs`,
+  `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and Phase 6 tests.
 
 ## Findings
 
-- The catalog contains the four approved music states and all sixteen approved
-  interface/event cue IDs. Each entry has a visible source and equivalent;
-  registry entries record generated source, ownership/license status, and
-  approval with no third-party asset.
-- Music/event classification reads only explicit page stage, actor-visible
-  observations, visible resolution text/effects, or explicit local UI outcomes.
-  It does not read true state, private rival actions, resolved stochastic
-  inputs, effect queues, or simulation internals.
-- Audio playback is browser-owned and generated through Web Audio after a user
-  gesture. Master/music/interface/event/ambience controls, mute, focus loss,
-  reduced notifications, cooldowns, and unsupported fallback leave visual/text
-  results complete and do not call the transition boundary.
-- Recording-sink events preserve cue ID, visible source, and equivalent without
-  requiring an audio context or asset load. Audio is not stored in history,
-  hashes, replay, or Rust/MCP state.
-- Action and Phase 4 resolution integrations use existing host outcomes only;
-  no command, observation, transition, or replay contract changed.
+- The host exposes a typed, additive `competitive-regional-world-v1` envelope
+  through non-mutating `get_regional_world`; it includes session/replay
+  metadata, stable schematic entities, source labels, overlays, navigation,
+  and explicit missingness.
+- Player detail is restricted to actor-visible observation and owned capacity/
+  process fields. Rival entities expose public identity and public action text
+  only at the existing one-month observation lag.
+- Rival private operations, facilities, resources, projects, true coordinates,
+  effect queues, resolved stochastic inputs, and hidden state are not serialized;
+  Rust tests assert non-mutation and serialized-field exclusion.
+- The browser owns selection, schematic layout, overlay display, and navigation.
+  It does not submit commands, reconstruct regional formulas, call a network,
+  or replace the existing action/resolution/audio/history/debrief paths.
+- Empty, unsupported, missing-signal, and adapter-error states remain explicit;
+  adapter failure clears only regional overlays/navigation and preserves the
+  base presentation.
 
 ## Required Fixes
 
-None.
+None. The single planned code-review pass found and closed the browser omission
+of host process/missingness detail before handoff.
 
 ## Residual Risks
 
-- Browser audio hardware/focus/autoplay behavior and viewport rendering could
-  not be exercised because no Chromium/Chrome binary is installed.
-- Synthesized recipes are a technical first slice, not evidence of polished
-  sound design, restrained repeated-session mix, or asset-backed production.
+- Browser hardware/rendering and keyboard behavior could not be visually
+  exercised because no Chromium/Chrome binary is installed.
+- Deterministic layout slots and identity markers are technical presentation
+  aids, not evidence for geography, relationships, travel, or market reach.
+- The current projection is one competitive campaign slice; stabilization and
+  affiliation semantics remain intentionally unimplemented.
 - Static/AI checks do not establish human comprehension, usability, lived
   accessibility, engagement, learning, domain-expert validity, calibration,
   balance, or policy validity.
-- Phase 6 must keep map/world expansion subordinate to visible decisions and
-  explanations and preserve rival observation lag.
 
 ## Verification Evidence
 
-- Focused audio/resolution/contextual/read-only GUI tests: 20 passed.
-- Full Python discovery: 262 tests passed.
-- Serial Rust tests: 317 unit tests plus 13 integration/golden/scenario tests
+- Focused regional/audio/resolution/read-only GUI tests: 13 passed.
+- Full Python discovery: 266 tests passed.
+- Serial Rust suite: 320 unit tests plus 13 integration/golden/scenario tests
   passed; doc-tests passed with zero tests.
-- Node syntax, JSON validation, Rust formatting, Clippy with warnings denied,
-  release metadata, and whitespace checks: passed at `0.12.21`.
+- Focused Rust regional-world tests: 3 passed.
+- Node syntax, Rust formatting, Clippy with warnings denied, release metadata,
+  and whitespace checks passed at `0.12.22`.
+- Code review: one pass completed; no P0–P3 findings remain.

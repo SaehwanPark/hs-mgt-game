@@ -79,6 +79,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep early release checks read-only, compare only documented
   metadata, and require a separate authorized slice for publication workflows.
 
+## Keep Schematic Maps Actor-Visible
+
+- Context: Phase 6 needed a persistent regional view without turning the GUI
+  into a second geography or rival-state simulation.
+- Symptom: Reusing true system objects for map cards would expose private rival
+  operations and make display positions look like unsupported geography.
+- Resolution: Added an additive host projection with owned player detail,
+  lagged public rival signals, explicit source/missingness fields, and
+  deterministic layout slots that the browser treats as presentation only.
+- Prevention: Test serialized output for hidden fields, preserve the existing
+  observation lag, label public timing, and leave the base presentation intact
+  when the optional regional adapter is empty or unavailable.
+
 ## Close Breadth Only With Scope-Matched Evidence
 
 - Context: The breadth queue offered several attractive expansion directions,

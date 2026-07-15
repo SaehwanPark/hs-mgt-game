@@ -62,6 +62,11 @@ pub struct GetResolutionRequest {
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetRegionalWorldRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct GetActionCatalogRequest {
   pub session_id: String,
 }
@@ -482,6 +487,37 @@ impl GameSessionStore {
       prior_aggregated,
       session.history.transitions.len(),
       summarize_competitive_transition(transition),
+    ))
+  }
+
+  pub fn get_regional_world(
+    &self,
+    request: GetRegionalWorldRequest,
+  ) -> Result<crate::mcp::regional_world::RegionalWorldEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    let GameSession::Competitive(session) = session else {
+      return Err(error_message(
+        "regional world currently supports competitive-regional-v1 only",
+      ));
+    };
+    let state_hash = session
+      .history
+      .transitions
+      .last()
+      .map(|transition| transition.state_hash.clone());
+    Ok(crate::mcp::regional_world::from_competitive_world(
+      request.session_id,
+      session.seed,
+      session.done,
+      &session.current,
+      session.prior_aggregated.as_ref(),
+      session.history.transitions.len(),
+      state_hash,
     ))
   }
 
@@ -2157,6 +2193,107 @@ mod tests {
       turn: None,
     });
     assert!(result.is_err());
+  }
+
+  #[test]
+  fn regional_world_projection_is_actor_visible_and_non_mutating() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let before = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation before regional world");
+    let world = store
+      .get_regional_world(GetRegionalWorldRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("regional world");
+    let after = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation after regional world");
+    let json = serde_json::to_string(&world).expect("regional world json");
+
+    assert_eq!(world.schema_version, "competitive-regional-world-v1");
+    assert!(
+      world
+        .entities
+        .iter()
+        .any(|entity| entity.visibility == "owned")
+    );
+    assert!(
+      world
+        .entities
+        .iter()
+        .any(|entity| entity.visibility == "public identity")
+    );
+    assert!(world.overlays.iter().any(|overlay| overlay.id == "demand"));
+    assert!(
+      world
+        .missing
+        .iter()
+        .any(|missing| missing.id.ends_with("private-detail"))
+    );
+    assert!(
+      world
+        .missing
+        .iter()
+        .any(|missing| missing.id.ends_with("-process"))
+    );
+    assert_eq!(before, after);
+    for forbidden in [
+      "CompetitiveWorldState",
+      "HealthSystemState",
+      "effect_queue",
+      "event_metadata",
+      "resolved_inputs",
+      "monthly_operating_margin",
+    ] {
+      assert!(!json.contains(forbidden), "found {forbidden}");
+    }
+  }
+
+  #[test]
+  fn regional_world_public_signals_respect_observation_lag() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let mut current = session;
+    for _ in 0..2 {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("competitive month");
+    }
+    let world = store
+      .get_regional_world(GetRegionalWorldRequest {
+        session_id: current.session_id,
+      })
+      .expect("regional world");
+
+    let session_turn = world.session.turn;
+    for entity in world.entities {
+      for signal in entity.signals {
+        assert!(signal.observed_month < session_turn);
+        assert!(signal.source.contains("one-month observation lag"));
+      }
+    }
+  }
+
+  #[test]
+  fn regional_world_rejects_unsupported_campaign() {
+    let mut store = GameSessionStore::default();
+    let stabilization = start(&mut store, "stabilization-v1");
+    assert!(
+      store
+        .get_regional_world(GetRegionalWorldRequest {
+          session_id: stabilization.session_id,
+        })
+        .is_err()
+    );
   }
 
   #[test]

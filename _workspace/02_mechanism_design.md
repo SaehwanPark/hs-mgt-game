@@ -1,88 +1,83 @@
-# Mechanism Design — Visual and Audio Phase 5 Foundational Audio v0.12.21
+# Mechanism Design — Visual and Audio Phase 6 Regional World v0.12.22
 
 ## Goal and Roadmap Phase
 
-Add optional, source-traceable audio to the one-month competitive presentation
-without changing simulation semantics, replay artifacts, or the completeness of
-visual/text communication. This is roadmap Phase 5 after the merged Phase 4
-resolution slice.
+Make one competitive regional situation navigable as an evolving institutional
+system rather than a set of disconnected reports. This is roadmap Phase 6 after
+the merged action, resolution, and optional-audio slices.
 
 ## Slice Boundary
 
-The browser owns a small audio catalog, a visible-only classifier, synthesized
-music/cue playback, local settings, and a recording-sink interface. The catalog
-contains four music states and the eight Phase 0 interface/event cues. There are
-no audio files, fetches, asset URLs, or audio DTOs in Rust in this slice.
+The host exposes `competitive-regional-world-v1` as a non-mutating read for
+`competitive-regional-v1`. It contains a schematic layout, public entity
+identity, owned player facilities/processes, actor-visible demand/access and
+operating overlays, public rival signals at the existing lag, and source/lag
+metadata. It does not contain true coordinates, rival private metrics, or map
+simulation.
 
 ## Actors and Authority
 
-Rust/MCP remains authoritative for actions, transitions, observations, committed
-events/effects, history, hashes, and debriefs. The browser audio client owns only
-playback and settings. A catalog entry's `visible_source` and `equivalent` are
-documentation metadata, not new simulation authority.
+Rust/MCP owns projection, identity filtering, public-signal timing, observations,
+history, and hashes. The browser owns selected entity, active overlay, panel
+navigation, viewport, and display geometry. Audio remains the existing optional
+client layer; map selection does not trigger simulation or hidden audio state.
 
 ## State, Beliefs, and Observations
 
-Music state classification consumes explicit page stage or actor-visible
-`ReadOnlyPresentationEnvelope`/`ResolutionEnvelope` fields. Pressure may use
-visible margin, unmet demand, runway signal, staffing labels, or a visible alert;
-stable operations is the fallback. Debrief is selected only from explicit page
-debrief state. No private rival, true-state, resolved-input, or effect-queue
-field is read.
+The human entity may expose owned facility names, visible capacity metrics,
+operations, access, demand, unmet demand, and in-flight projects. Rival entities
+expose name, public role, public signal text, observed month, and explicit detail
+unavailability. Overlay values use actor-visible player observations and are
+labeled as reported/observed; missing or lagged information remains visible.
 
 ## Commands, Events, and Effects
 
-Catalog IDs:
+The read returns:
 
-- music: `menu`, `stable_operations`, `pressure`, `debrief`;
-- interface: `ui.action-confirm`, `ui.action-reject`, `ui.action-add`,
-  `ui.action-remove`, `ui.submit`, `ui.advance-month`, `ui.report-received`,
-  `ui.save-complete`;
-- events: `event.project-complete`, `event.staffing-constraint`,
-  `event.operating-loss`, `event.operating-recovery`, `event.payer-decision`,
-  `event.regulatory-decision`, `event.rival-expansion`,
-  `event.affiliation-milestone`.
+1. a schema/session/replay envelope;
+2. schematic `entities` with stable IDs, role, label, layout position, status,
+   source, facilities, and public signals;
+3. `overlays` for visible demand, access, unmet demand, capacity pressure, and
+   process categories with value/label/source/equivalent;
+4. `navigation` targets for briefing, map, detail, and pending timeline; and
+5. explicit `missing`/`unavailable` notes.
 
-Each entry has a visible equivalent, source, generated-audio recipe, cooldown,
-and accessibility classification. The audio client reports missing support as a
-non-fatal status and never calls `submitTurn`.
+`get_regional_world(session_id)` is read-only and never calls `submit_turn`.
+Entity selection and overlay changes are client-only presentation state.
 
 ## Strategic Interaction
 
-Audio should draw attention to institutional responses and operating pressure,
-not reward a single score or imply optimal strategy. Repeated holds, rival
-signals, and negative months remain understandable through the visible result;
-audio only adds restrained category/timing emphasis.
+The map supports executive questions: where is the player's visible bottleneck,
+which owned facility/process explains it, and what public rival signal deserves
+attention? It does not optimize routes, rank institutions, imply social welfare,
+or reveal a rival's hidden strategy.
 
 ## Assumptions and Parameters
 
-- Schema: `audio-catalog-v1`.
+- Schema: `competitive-regional-world-v1`.
 - First supported campaign: `competitive-regional-v1`.
-- Four generated music recipes, one optional ambience recipe, and sixteen
-  total interface/event cues are sufficient for the first technical slice.
-- Master, music, interface, event, and ambience channels are independent;
-  default event cooldown is 1,500 ms and repeated event IDs are coalesced.
-- Browser audio starts only after a user gesture; muted and unsupported paths
-  are complete and visible.
+- Schematic positions are deterministic layout slots, not geographic data.
+- Public signals use the existing one-month lag and source text; no new lag
+  formula is introduced.
+- Empty public signals, no active process, unsupported campaign, and unavailable
+  historical projection are explicit read errors/states.
 
 ## Educational Debrief Hooks
 
-The page keeps source text and visual equivalents adjacent to audio controls.
-Cue logs used by tests identify the source ID and visible equivalent, allowing a
-later AI-agent trace to compare visible event text with audio classification.
-This phase makes no claim about learning, engagement, or human accessibility.
+The map links visible overlays to facility, briefing, and pending-process source
+labels. A learner can distinguish owned detail from public rival identity and
+reported signal timing. This phase does not claim comprehension, learning,
+calibration, or domain validity.
 
 ## Determinism and Replay Notes
 
-Classification is a pure mapping over visible input snapshots and explicit UI
-actions. Playback timing, oscillator phase, focus, and volume are presentation
-state only. Replay may regenerate the same cue IDs from the same visible
-resolution envelope, but audio playback is never stored in history or hashes.
+The host derives the envelope from current actor-visible observation and public
+history without changing session state. Repeated reads preserve turn, history,
+hash, and audio state; historical reads are bounded to committed presentation
+sources if enabled. Layout slot selection is deterministic and presentation-only.
 
 ## Open Questions
 
-- What evidence would justify replacing generated recipes with licensed files?
-- Which visible pressure combinations should be grouped before a richer typed
-  audio-event contract is needed?
-- What repeated-session capture threshold should reopen cue throttling or mix
-  decisions?
+- Is the identity/signal map enough to justify a later relationship layer?
+- Which overlay combinations remain legible at smaller viewports?
+- What evidence would authorize asset-backed map identity or true geography?
