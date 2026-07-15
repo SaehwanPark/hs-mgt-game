@@ -3,6 +3,19 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Make Graphical Commands Host-Shaped
+
+- Context: Phase 3 needed to remove CLI syntax friction while preserving the
+  existing competitive command and transition contracts.
+- Symptom: Rebuilding enum lists, numeric bounds, or costs in the browser would
+  create a second legality engine and make previews drift from the host.
+- Resolution: The host supplies catalog templates and validates the complete
+  canonical batch; local draft edits invalidate prior validation, and submit is
+  gated on an unchanged valid response.
+- Prevention: Keep browser interaction state reversible and presentation-only;
+  derive costs and legality from the parser/validator boundary and test invalid
+  validation and rejected submission as non-mutating paths.
+
 ## Make Static Interfaces Useful Without Making Them Authoritative
 
 - Context: Phase 1 needed to expose finance, workforce, capacity, access, and

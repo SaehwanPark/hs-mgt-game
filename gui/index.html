@@ -199,6 +199,18 @@
       .action-heading strong { color: var(--orange); }
       .command-preview { background: rgb(255 255 255 / 72%); border-radius: .45rem; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; overflow-wrap: anywhere; padding: .35rem .5rem; }
       .action-meta { color: var(--muted); display: grid; font-size: .82rem; gap: .1rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .action-builder { display: grid; gap: var(--space-2); margin-top: var(--space-3); }
+      .action-builder-form { background: var(--panel); border: 1px solid var(--line); border-radius: .7rem; display: grid; gap: .55rem; padding: .75rem; }
+      .action-builder-form h3 { margin-bottom: 0; }
+      .action-builder-form label { color: var(--muted); display: grid; font-size: .8rem; gap: .2rem; }
+      .action-builder-form select, .action-builder-form input { border: 1px solid #b9cbc8; border-radius: .45rem; min-width: 0; padding: .45rem .55rem; }
+      .action-builder-form button, .action-controls button, .draft-action button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-size: .82rem; font-weight: 750; padding: .5rem .7rem; }
+      .action-controls { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: var(--space-2); }
+      .action-controls button:last-child { background: var(--orange); }
+      .draft-actions { display: grid; gap: .45rem; list-style: decimal; margin: var(--space-3) 0 0; padding-left: 1.4rem; }
+      .draft-action { align-items: center; background: var(--teal-soft); border-radius: .55rem; display: flex; gap: .6rem; justify-content: space-between; padding: .5rem .65rem; }
+      .draft-action code { overflow-wrap: anywhere; }
+      .draft-action span { display: flex; flex-shrink: 0; gap: .35rem; }
       .commands { display: grid; gap: .45rem; list-style: none; margin: var(--space-3) 0 0; padding: 0; }
       .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; padding: .35rem .6rem; }
 
@@ -239,6 +251,8 @@
         .metric-grid, .entity-list, .facility-list, .detail-metrics, .history, .debrief { grid-template-columns: 1fr; }
         .command-form { flex-direction: column; }
         .action-meta { grid-template-columns: 1fr; }
+        .draft-action { align-items: stretch; flex-direction: column; }
+        .draft-action span { justify-content: flex-end; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -291,9 +305,16 @@
       <section class="panel panel--actions" aria-labelledby="actions-heading">
         <div class="panel-heading">
           <h2 id="actions-heading">Contextual action panel</h2>
-          <span>read-only view · actions deferred to Phase 3</span>
+          <span id="action-mode">read-only view · actions deferred to Phase 3</span>
         </div>
         <div class="action-list" id="action-preview-list"></div>
+        <div class="action-builder" id="action-builder" hidden></div>
+        <ol class="draft-actions" id="draft-action-list" hidden></ol>
+        <div class="action-controls">
+          <button type="button" id="validate-actions" hidden>Validate draft with host</button>
+          <button type="button" id="submit-month" hidden>Submit validated month</button>
+        </div>
+        <p class="command-status" id="validation-status">Draft actions need host validation before submission.</p>
         <ul class="commands" id="legal-command-list" aria-label="Existing legal command surface"></ul>
         <form class="command-form" id="command-form" hidden>
           <label class="sr-only" for="command-input">Canonical command</label>

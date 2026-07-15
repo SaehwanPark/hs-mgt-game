@@ -11,10 +11,10 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.18. Its
-visual/audio Phase 2 typed live/recorded read-only executive viewer is complete;
-contextual action submission is the next evidence-gated slice. It is intended
-for inspection, playtesting, portfolio review, and future educational design
+The current public milestone is a playable Rust prototype at v0.12.19. Its
+visual/audio Phase 3 host-validated contextual action path is complete for one
+competitive month; resolution feedback is the next evidence-gated slice. It is
+intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 
 ## What You Can Play
@@ -173,8 +173,9 @@ deterministic, with randomness resolved into explicit inputs before transition
 evaluation.
 
 A dependency-free browser thin-client proof is available in [`gui/`](gui/).
-It renders injected MCP-shaped session data and does not replace the CLI, host a
-live server, or own simulation state.
+It renders injected MCP-shaped session data and, when an action adapter is
+provided, builds host-validated canonical command batches. It does not replace
+the CLI, host a live server, or own simulation state.
 
 ## License
 

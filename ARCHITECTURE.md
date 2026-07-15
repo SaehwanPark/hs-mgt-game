@@ -153,10 +153,11 @@ randomness or mutate the core directly.
 
 The `gui/` proof renders an injected session envelope or the typed
 `competitive-read-only-v1` projection through
-`window.HsMgtGameReadOnlyAdapter`. The Phase 2 page is read-only and does not
-call `submitTurn`; the legacy `window.HsMgtGameAdapter` thin-client export
-remains available for the later action workflow. The included demo envelope is
-a display fixture, not a browser-owned simulation.
+`window.HsMgtGameReadOnlyAdapter`. When a
+`window.HsMgtGameActionAdapter` is supplied, the Phase 3 page renders a host
+catalogue, keeps draft rows locally, validates canonical batches through the
+host, and calls `submitTurn` only for an unchanged valid batch. The included
+demo envelope is a display fixture, not a browser-owned simulation.
 
 Last Reviewed: 2026-07-12
 Status: Verified
@@ -174,10 +175,11 @@ Status: Verified
 ### Planned Visual and Audio Presentation Architecture
 
 Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
-fixture-driven static executive desktop, and Phase 2 adds a typed, read-only
-host/MCP projection for `competitive-regional-v1` in `gui/`. The GUI remains a
-non-authoritative thin client; action workflow, animation, audio playback, and
-the asset pipeline remain future work. All future work should follow this
+fixture-driven static executive desktop, Phase 2 adds a typed, read-only
+host/MCP projection, and Phase 3 adds host-catalogued contextual action
+submission for `competitive-regional-v1` in `gui/`. The GUI remains a
+non-authoritative thin client; animation, audio playback, and the asset
+pipeline remain future work. All future work should follow this
 one-way authority flow:
 
 ```text
@@ -212,9 +214,11 @@ Candidate serializable presentation contracts are:
 - audio presentation events.
 
 These are contract responsibilities, not a license to expose simulation state.
-Phase 2 now promotes only the narrowest typed read-only projection needed for
-the first competitive slice; Phase 3 must establish any additional action
-contract from existing MCP/CLI surfaces before adding fields.
+Phase 2 promoted the narrowest typed read-only projection needed for the first
+competitive slice. Phase 3 adds only the action catalog and validation fields
+needed to remove command-entry friction; it reuses existing parser, validator,
+cost, and submission boundaries rather than introducing a second command
+engine.
 
 Visible observations and committed effects are the only sources for graphical
 status, animation, advisory bottleneck text, music mood, and event cues. Missing,
@@ -258,9 +262,12 @@ and ADR-0011. Phase 1 static-desktop scope is documented in
 [`docs/visual-audio-phase1-static-desktop-v0.12.17.md`](docs/visual-audio-phase1-static-desktop-v0.12.17.md).
 Phase 2 live read-only scope is documented in
 [`docs/visual-audio-phase2-live-read-only-v0.12.18.md`](docs/visual-audio-phase2-live-read-only-v0.12.18.md).
-The projection is display-only and does not establish action authority; action
-workflow, animation, audio playback, and the asset pipeline remain planned
-implementations.
+Phase 3 contextual action scope is documented in
+[`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
+The projection remains display-only, while the action catalog/validation tools
+are non-mutating and `submit_turn` remains the sole transition boundary.
+Resolution animation, causal overlays, audio playback, and the asset pipeline
+remain planned implementations.
 
 ## Durable Constraints
 

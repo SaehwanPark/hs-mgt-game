@@ -63,7 +63,7 @@ class VisualAudioPhase0Tests(unittest.TestCase):
   def test_later_phases_remain_gated(self):
     self.assertIn("Phase 0 acceptance does not promote structured DTOs", self.spec)
     self.assertIn("Phase 1 static executive desktop", self.spec)
-    self.assertIn("Phases 3–9 remain sequentially gated", self.spec)
+    self.assertIn("Phases 4–9 remain sequentially gated", self.spec)
     self.assertIn("remain future work", self.architecture)
 
   def test_phase0_does_not_claim_runtime_or_human_validation(self):
