@@ -297,6 +297,19 @@
       .session-launch-form button, .session-load-form button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-weight: 750; padding: .5rem .7rem; }
       .session-launch-form button:disabled, .session-load-form button:disabled { cursor: wait; opacity: .65; }
       .session-launch-status { color: var(--muted); font-size: .82rem; margin: 0; min-height: 1.3em; }
+      .first-month-flow { border-top: 1px solid var(--line); margin-top: var(--space-3); padding-top: var(--space-3); }
+      .first-month-flow-state { color: var(--teal); font-size: .82rem; font-weight: 800; }
+      .first-month-flow-detail { color: var(--muted); font-size: .82rem; margin: .35rem 0 0; }
+      .first-month-flow-list { display: grid; gap: .45rem; list-style: none; margin-top: var(--space-3); }
+      .first-month-flow-item { align-items: start; border: 1px solid var(--line); border-radius: .55rem; display: grid; gap: .15rem .55rem; grid-template-columns: auto 1fr; padding: .5rem .6rem; }
+      .first-month-flow-item strong, .first-month-flow-item p { grid-column: 2; }
+      .first-month-flow-item p { color: var(--muted); font-size: .78rem; margin: 0; }
+      .first-month-flow-item--completed { background: var(--green-soft); border-color: var(--green); }
+      .first-month-flow-item--current { background: var(--teal-soft); border-color: var(--teal); box-shadow: 0 0 0 2px rgb(11 110 105 / 12%); }
+      .first-month-flow-item--upcoming { background: var(--panel); }
+      .first-month-flow-marker { border: 1px solid currentColor; border-radius: 999px; color: var(--muted); font-size: .68rem; font-weight: 800; grid-row: span 2; min-width: 3.15rem; padding: .12rem .3rem; text-align: center; }
+      .first-month-flow-item--completed .first-month-flow-marker { color: var(--green); }
+      .first-month-flow-item--current .first-month-flow-marker { color: var(--teal-dark); }
       .recovery-panel { border-color: var(--amber); }
 
       .entity-heading { align-items: center; justify-content: flex-start; }
@@ -507,6 +520,15 @@
             <li><span class="status-pattern status-pattern--reported" data-symbol="•" aria-hidden="true"></span><span><strong>Reported</strong><small>Host-reported visible information.</small></span></li>
           </ul>
         </details>
+      </section>
+
+      <section class="panel readiness-panel first-month-flow" id="first-month-flow" aria-labelledby="first-month-flow-heading">
+        <div class="panel-heading">
+          <h2 id="first-month-flow-heading">First-month path</h2>
+          <span id="first-month-flow-state" aria-live="polite">Start or load · 1 of 7</span>
+        </div>
+        <p class="first-month-flow-detail" id="first-month-flow-detail">Use the host to start a competitive session or load an existing session. This rail reports presentation handoffs; the host owns commands and outcomes.</p>
+        <ol class="first-month-flow-list" id="first-month-flow-list"></ol>
       </section>
 
       <section class="panel readiness-panel recovery-panel" id="recovery-panel" aria-labelledby="recovery-heading" hidden>

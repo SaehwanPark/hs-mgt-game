@@ -1,4 +1,5 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
+import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 
@@ -1405,6 +1406,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
   let currentEnvelope = null;
   let sessionId = adapter?.sessionId;
+  const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
@@ -1477,7 +1479,10 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         recordPlaytestFailure(recorder, result.code, "The read-only presentation schema is unavailable.");
         showRecovery(root, "The host returned an unsupported presentation. Retry the current read or use a compatible adapter.");
       }
-      if (result.ok) audioClient.playCue("ui.report-received");
+      if (result.ok) {
+        firstMonthFlow.update({ sessionLoaded: true });
+        audioClient.playCue("ui.report-received");
+      }
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -1489,7 +1494,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   }
 
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, render, renderStaticFixture, sessionLauncher, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -1639,6 +1644,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let validation = null;
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
+  const firstMonthFlow = createFirstMonthFlow({ root });
   const resolutionClient = createResolutionClient({ adapter, root });
   const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
@@ -1652,6 +1658,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   function invalidateDraft() {
     validation = null;
+    firstMonthFlow.update({ draftCount: drafts.length, validated: false });
     renderValidation(null, root);
     setPresentationState(root, "Draft changed; host validation is required again.");
   }
@@ -1695,6 +1702,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       validation = result;
       recorder?.recordValidation({ valid: Boolean(result.valid), code: result.code, message: result.error ?? result.message });
       renderValidation(validation, root);
+      firstMonthFlow.update({ validated: Boolean(validation.valid) });
       audioClient.playCue(validation.valid ? "ui.action-confirm" : "ui.action-reject");
       setPresentationState(root, validation.valid ? "Host validation passed; review before submitting." : "Host validation rejected the draft; revise and retry.");
       return { ok: Boolean(validation.valid), envelope: validation };
@@ -1736,12 +1744,20 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     drafts = [];
     validation = null;
     editingIndex = null;
+    firstMonthFlow.update({
+      draftCount: 0,
+      validated: false,
+      submitted: true,
+      resolutionVisible: false,
+      refreshed: false,
+    });
     audioClient.playCue("ui.submit");
     let refreshMessage = "Committed response received from the host adapter.";
     if (typeof adapter.getResolution === "function") {
       const resolution = await resolutionClient.load(response.latest_transition?.turn, sessionId);
       if (!resolution.ok) refreshMessage += " Resolution presentation was unavailable.";
       else {
+        firstMonthFlow.update({ resolutionVisible: true });
         audioClient.playCue("ui.advance-month");
         audioClient.setMusicFromVisible(resolution.envelope.after);
         for (const cueId of visibleEventCues(resolution.envelope)) audioClient.playCue(cueId);
@@ -1760,6 +1776,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           clearRecovery(root);
           renderOnboarding(presentation, root, recorder);
           recordVisibleEnvelope(recorder, presentation);
+          firstMonthFlow.update({ refreshed: true });
           audioClient.setMusicFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           await regionalWorldClient.load(sessionId);
@@ -1842,6 +1859,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         if (editingIndex == null) drafts.push(draft);
         else drafts[editingIndex] = draft;
         editingIndex = null;
+        firstMonthFlow.update({
+          sessionLoaded: true,
+          actionCatalogLoaded: true,
+          draftCount: drafts.length,
+          validated: false,
+        });
         const button = form.querySelector("button[type=submit]");
         if (button) button.textContent = "Add to draft";
         invalidateDraft();
@@ -1853,6 +1876,15 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       if (actionMode) actionMode.textContent = "host-catalogued draft builder";
       renderDraftState();
       renderValidation(null, root);
+      firstMonthFlow.update({
+        sessionLoaded: true,
+        actionCatalogLoaded: true,
+        draftCount: drafts.length,
+        validated: false,
+        submitted: false,
+        resolutionVisible: false,
+        refreshed: false,
+      });
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
       sessionId = requestedSessionId;
       return { ok: true, catalog };
@@ -1871,7 +1903,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, sessionLauncher, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2199,6 +2231,7 @@ if (typeof document !== "undefined") {
       client,
       AUDIO_CATALOG,
       VISUAL_CATALOG,
+      FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,
       createAudioClient,
@@ -2226,6 +2259,7 @@ if (typeof document !== "undefined") {
       client,
       AUDIO_CATALOG,
       VISUAL_CATALOG,
+      FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,
       createAudioClient,

@@ -1,6 +1,6 @@
-# GUI executive desktop, campaign launch/load, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, visual identity/markers, and optional audio
+# GUI executive desktop, campaign launch/load, first-month continuity, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, visual identity/markers, and optional audio
 
-This is a dependency-free Phase 2/3/4/5/6/7/8/10/11/12 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7/8/10/11/12/13 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -113,7 +113,7 @@ The analysis preserves campaign/role/task/seed/accessibility distinctions and
 emits only deterministic evidence-gap/recovery hypotheses plus explicit limits;
 it never changes the GUI, simulation, or host history.
 
-Phase 2/3/4/5/6/7/8/10/11/12 review checklist:
+Phase 2/3/4/5/6/7/8/10/11/12/13 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -158,6 +158,13 @@ Phase 2/3/4/5/6/7/8/10/11/12 review checklist:
 - exercise missing start capability, malformed session envelopes, invalid seed,
   and failed replacement loads without losing the current rendered session or
   calling command submission.
+- follow the first-month path rail from start/load through visible inspection,
+  two local drafts, host validation, unchanged submission, resolution, and
+  refreshed presentation; confirm it reaches Continue only after both host reads
+  succeed.
+- revise or remove a draft after validation and confirm the rail returns to its
+  draft/validation handoff without limiting the existing draft controls; reject
+  a host operation and confirm the current session and path remain recoverable.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -179,7 +186,10 @@ diagnostics plus Phase 9 comparison are optional, allowlisted, and
 presentation state and does not establish human accessibility. Phase 11
 session launch/load is an optional host adapter boundary and does not create
 local session state. Phase 12 visual identity/marker lookup is a generated,
-visible-only vocabulary and does not create host facts or local game state.
+visible-only vocabulary and does not create host facts or local game state. Phase
+13 first-month continuity is a local text-first stage projection; it does not
+create a host payload, client-side legality/outcome rule, transition, or local
+simulation state.
 Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.

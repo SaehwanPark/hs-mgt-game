@@ -4341,7 +4341,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     pass; no Rust/MCP behavior changed.
 
 - Feature: Visual/audio Phase 12 visual identity and marker provenance
-  Status: Active; implementation and exactly one general code review complete; PR/merge pending
+  Status: Closed; Phase 13 first-month continuity is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase12-visual-identity-v0.12.28
 
@@ -4364,7 +4364,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     metadata to `0.12.28`.
 
   Not Yet Done:
-  - Finish CI/PR/merge and re-audit the queue.
+  - No further Phase 12 implementation is planned; preserve its technical
+    visual-vocabulary and provenance limits while the next bounded slice
+    proceeds.
 
   Deferred / Non-Goals:
   - No Rust/MCP schema, simulation, command, transition, stochastic,
@@ -4377,13 +4379,51 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Node syntax, Rust tests/formatting/Clippy, release metadata, diff checks,
     and domain QA pass; no Rust/MCP source changed.
 
+- Feature: Visual/audio Phase 13 first-month continuity
+  Status: Implemented and verified; exactly one general code-review pass complete; PR/merge pending
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase13-first-month-continuity-v0.12.29
+
+  Summary:
+  Phase 13 connects the existing launch/load, actor-visible inspection,
+  contextual action, validation, submission, resolution, and refreshed-read
+  surfaces with a local, text-first first-month path rail. The rail reports
+  presentation handoffs only; the host remains authoritative for commands,
+  transitions, stochastic outcomes, history, hashes, replay, and debrief.
+
+  Planned Done:
+  - Add the `competitive-first-month-v1` stage catalog and pure local stage
+    derivation for start, inspect, draft, validate, submit, resolution, and
+    continue.
+  - Render current, completed, and upcoming stage text in the competitive
+    desktop without relying on color, audio, or motion.
+  - Advance stages only after the existing host-shaped client operations
+    succeed; preserve rejection/recovery and read-only submit exclusion.
+  - Verify a complete adapter-driven one-month handoff with at least two local
+    draft actions and no host/simulation boundary change.
+
+  Not Yet Done:
+  - CI/PR/merge and post-merge re-audit remain.
+
+  Deferred / Non-Goals:
+  - No Rust/MCP schema, simulation, command, transition, stochastic,
+    history/hash/replay, debrief, campaign, audio-source, asset, network,
+    dependency, or browser-transport change.
+  - No human usability, lived accessibility, learning, engagement,
+    calibration, balance, policy-validity, or domain-expert claim.
+
+  Verification:
+  - Focused stage, semantic rendering, adapter-sequence, rejection/recovery,
+    read-only, boundary, full Python, Rust, release-metadata, Node syntax,
+    formatting, Clippy, and diff checks pass; no Rust/MCP source changed.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 11 launch/load is implemented and Phase 12 visual identity is
-the active bounded slice; the broader product contract and first competitive
+Status: Phase 12 visual identity is closed and Phase 13 first-month continuity
+is the active bounded slice; the broader product contract and first competitive
 vertical slice remain incomplete.
 No later feature should be read as implemented merely because the current `gui/`
 prototype or Phase 6–10 documents exist.
@@ -4399,8 +4439,9 @@ prototype or Phase 6–10 documents exist.
   settings/recovery, allowlisted testplay capture/diagnostics, and a
   non-authoritative repeated-capture analyzer/decision log, plus Phase 10
   keyboard navigation, status language, text scaling, and cue-explanation
-  controls, Phase 11 session launch/load, and the Phase 12 visual identity
-  catalog on the active branch. It remains a thin client and is not the
+  controls, Phase 11 session launch/load, the Phase 12 visual identity catalog,
+  and the Phase 13 first-month continuity rail on the active branch. It remains
+  a thin client and is not the
   campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
@@ -4701,6 +4742,7 @@ prototype or Phase 6–10 documents exist.
 | 10. Accessibility and visual-language hardening | Keyboard landmarks, non-color status vocabulary, local text scaling, and optional cue-explanation control | Static semantic, settings, responsive, reduced-motion, and boundary checks pass without changing host state or claiming lived access |
 | 11. First-session launch/load boundary | Host-authoritative competitive session start/load handoff into the existing first-month presentation | Start/load calls map to the existing host session contract, malformed/failed responses recover, and no transition or local simulation is introduced |
 | 12. Visual identity and marker provenance | Generated system identities, facility/metric/process markers, explicit generic fallback, and machine-readable visual registry | Known and unknown visible entities render stable semantic tokens, provenance is complete, and no host/simulation boundary changes |
+| 13. First-month continuity | Local text-first path rail and adapter-driven launch-to-refresh handoff evidence for one competitive month | Stage order is deterministic, two-draft review is visible, confirmed host handoffs reach continue, and failures do not advance or mutate state |
 
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
 slice; do not start broad campaign, map, or asset production merely because that
@@ -4849,9 +4891,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Complete and close Phase 12 visual identity/marker provenance, then audit
-   the remaining first-month product contract against the proposal before
-   selecting the next bounded item.
+1. Complete and close Phase 13 first-month continuity, then audit the remaining
+  first-month product contract against the proposal before selecting the next
+  bounded item.
 2. Human usability, lived accessibility, learning, engagement, calibration,
   balance, policy validity, and domain-expert evaluation remain separately
   gated Future work.
