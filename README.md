@@ -11,9 +11,9 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.20. Its
-visual/audio Phase 4 host-derived resolution and causal-feedback path is
-complete for one competitive month; foundational audio is the next
+The current public milestone is a playable Rust prototype at v0.12.21. Its
+visual/audio Phase 5 optional generated-audio layer is complete for the
+one-month competitive surface; persistent regional world expansion is the next
 evidence-gated slice. It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
@@ -174,8 +174,9 @@ deterministic, with randomness resolved into explicit inputs before transition
 evaluation.
 
 A dependency-free browser thin-client proof is available in [`gui/`](gui/). It
-can build and submit a host-validated competitive batch, then review the
-committed monthly resolution without owning simulation state.
+can build and submit a host-validated competitive batch, review the committed
+monthly resolution, and optionally play visible-only generated audio without
+owning simulation state.
 It renders injected MCP-shaped session data and, when an action adapter is
 provided, builds host-validated canonical command batches. It does not replace
 the CLI, host a live server, or own simulation state.

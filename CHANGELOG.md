@@ -4,6 +4,32 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.21] - 2026-07-15
+
+### Added
+- Added `audio-catalog-v1` with four visible-state music modes and the eight
+  approved interface plus eight approved event cue IDs.
+- Added generated Web Audio playback with lazy user-gesture enablement,
+  independent master/music/interface/event/ambience controls, mute, focus
+  handling, reduced notifications, unsupported fallback, and repeat throttling.
+- Added visible-only music/event mapping, deterministic recording-sink events,
+  machine-readable generated-audio registry, and credits with no third-party
+  files.
+- Added Phase 5 GUI/audio contract tests and documentation.
+
+### Changed
+- Integrated optional audio with existing action and resolution status paths;
+  audio remains outside Rust, MCP, transitions, history, hashes, and replay, and
+  visual/text results remain complete when muted or unsupported.
+- Promoted visual/audio Phase 6 persistent regional world as the next gated
+  candidate and bumped package/public metadata to `0.12.21`.
+
+### Evidence Limits
+- Static catalog, recording-sink, and JavaScript checks are
+  technical/interface-task evidence only; they do not establish human
+  comprehension, usability, lived accessibility, engagement, learning,
+  calibration, balance, or policy validity.
+
 ## [0.12.20] - 2026-07-15
 
 ### Added

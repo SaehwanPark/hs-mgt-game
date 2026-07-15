@@ -1,77 +1,70 @@
-# Evidence Map — Visual and Audio Phase 4 Resolution/Causal Feedback v0.12.20
+# Evidence Map — Visual and Audio Phase 5 Foundational Audio v0.12.21
 
 ## Scope
 
-Phase 4 presents one committed competitive transition as a sequence of visible
-decision, response, process, operating, resource, information, and pending-work
-states. It does not alter how the transition is resolved.
+Phase 5 adds optional browser audio to the existing one-month competitive
+surface. Audio is a presentation consequence of visible page state or an
+explicit local UI action; it is not a simulation input or history record.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 4 and first-vertical-slice
-  requirements.
-- Phase 0 alignment, Phase 1 static desktop, Phase 2 read-only projection, and
-  Phase 3 contextual action contract.
-- `src/model/competitive_history.rs`, `src/model/events.rs`,
-  `src/sim/observe_competitive.rs`, `src/mcp/presentation.rs`, and
-  `src/mcp/session.rs`.
-- README, SPEC, architecture, design principles, and project harness spec.
+- Phase 5 and first-vertical-slice requirements in
+  `docs/visual_audio_upgrade_proposal.md`.
+- Phase 0 audio-state/cue catalog and asset/license policy.
+- ADR-0011 and the Phase 1–4 GUI/MCP contracts.
+- `ReadOnlyPresentationEnvelope`, `ResolutionEnvelope`, visible action status,
+  and current DOM controls in `gui/`.
+- README, SPEC, architecture, design principles, lessons, and harness spec.
 
 ## Mechanisms and Institutions
 
-The player is the executive of the human health system. A committed monthly
-transition already contains player/rival responses, process changes, operating
-effects, resource changes, and actor-visible information. Phase 4 gives those
-existing institutional consequences separate presentation homes without adding
-an actor or a new decision rule.
+The player remains a health-system executive deciding among institutional
+tradeoffs. Music communicates the current visible presentation mode; cues mark
+local interaction or already committed visible events. No audio cue represents a
+private rival decision, hidden stochastic input, or an inferred causal edge.
 
 ## Actor Incentives and Information
 
-The browser may show the player's submitted batch, the host's committed event
-and effect summaries, before/after player-visible operations/resources, updated
-observations, and pending processes. It must not expose true world state,
-unresolved stochastic inputs, private rival actions, or a causal story inferred
-from hidden fields. Replay uses the same actor-visible envelope for the selected
-committed transition.
+Audio can reinforce category, timing, and attention without saying whether an
+organizational outcome is universally good or bad. The visual/text equivalent
+remains authoritative and complete when muted, unfocused, reduced-notification,
+or unsupported by the browser.
 
 ## Assumptions
 
-- `CompetitiveTransition.prior`, `next`, `events`, `effects`, and history are
-  sufficient to build the first typed resolution envelope after safe actor-
-  visible projection.
-- `observe_for_human` remains the authoritative projection for decision-time and
-  post-transition observations; no browser snapshot becomes simulation state.
-- A before/after value comparison is presentation logic, not a causal formula.
-- Existing `TransitionSummary` event/effect text is already an accepted player-
-  visible source and can be reused without exposing new private fields.
-- CSS/DOM reveal pacing is sufficient for Phase 4; audio and asset work remain
-  gated to Phase 5.
+- Web Audio API synthesis is sufficient for a first technical vertical slice;
+  no external file or license download is required.
+- Phase 0's four music modes and eight cue IDs are the approved catalog; no new
+  semantic event taxonomy is needed.
+- Visible observation fields and explicit UI outcomes are sufficient for a
+  deterministic classifier; no true-state or hidden transition access is
+  justified.
+- Local settings can be held in the audio client without a persisted settings
+  schema or simulation mutation.
 
 ## Unresolved Questions
 
-- Which event/effect labels deserve grouping before a later structured causal
-  DTO is justified?
-- How should a later replay browser expose multiple months without making the
-  first one-month surface a general replay editor?
-- Which visible bottleneck cues are understandable to first-time users rather
-  than merely traceable to source strings?
+- Which synthesized timbres remain restrained across repeated monthly play?
+- Should asset-backed music replace generated loops after an evidence gap is
+  identified, and what provenance gate would authorize that change?
+- Which focus behavior best fits later AI-agent capture without claiming human
+  accessibility?
 
 ## Design Implications
 
-- Add one versioned `competitive-resolution-v1` read-only contract with safe
-  before/after snapshots, ordered presentation steps, direct committed effects,
-  operating/resource breakdowns, and state-hash metadata.
-- Store no presentation timeline in the simulation history; resolve the
-  selected transition from immutable session history on each read.
-- Keep textual results in the DOM before any animated reveal. Pause and reduced
-  motion must change pacing, not content.
-- Make replay lookup explicit and non-mutating so a later review cannot call
-  `submit_turn` or alter the current session.
+- Add one pure catalog/classifier boundary that maps visible envelopes and
+  explicit UI actions to stable cue/music IDs.
+- Add one browser audio client with independent channel volumes, master mute,
+  focus/reduced-notification policy, event throttling, and no-op fallback.
+- Record generated source, ownership, license status, and credits in a registry;
+  keep the simulation core free of audio paths, volumes, and playback rules.
+- Test classification through a recording sink and test playback behavior with
+  injected fake contexts where possible; browser visual/audio hardware checks
+  remain residual limits.
 
 ## Risks
 
-The phrase “causal” can overclaim if the UI turns correlated effects or
-before/after differences into an inferred graph. Render only host-attributed
-effects and label simple comparisons as changes, not explanations. A technically
-complete sequence is not evidence of human comprehension, learning, or domain
-validity.
+Audio can become a hidden score, reveal unobserved state, fatigue repeated play,
+or make muted play incomplete. Keep every mapping source-labeled, restrained,
+throttled, independently controllable, and paired with existing visual/text
+content.

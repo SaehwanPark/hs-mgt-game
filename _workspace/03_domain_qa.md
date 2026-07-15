@@ -1,4 +1,4 @@
-# Domain QA — Visual and Audio Phase 4 Resolution and Causal Feedback v0.12.20
+# Domain QA — Visual and Audio Phase 5 Foundational Audio v0.12.21
 
 ## Status
 
@@ -7,35 +7,32 @@ pass
 ## Reviewed Inputs
 
 - User request and `_workspace/00_input/request-summary.md`.
-- `_workspace/23_implementation_plan_visual_audio_phase4.md`.
+- `_workspace/24_implementation_plan_visual_audio_phase5.md`.
 - `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
-  `docs/visual-audio-phase4-resolution-causal-v0.12.20.md`.
-- The accepted Phase 0 alignment/ADR-0011 and merged Phase 1/2/3 documents.
-- `SPEC.md`, `ARCHITECTURE.md`, `docs/visual_audio_upgrade_proposal.md`,
-  canonical product docs, and the harness team spec.
-- `src/mcp/resolution.rs`, `src/mcp/presentation.rs`, `src/mcp/session.rs`,
-  `src/mcp/server.rs`, `gui/app.mjs`, `gui/index.html`, and Phase 4 tests.
+  `docs/visual-audio-phase5-foundational-audio-v0.12.21.md`.
+- Phase 0 audio catalog/asset policy, ADR-0011, and merged Phase 1–4 docs.
+- `gui/audio.mjs`, `gui/audio-catalog.json`, `gui/ASSET_CREDITS.md`,
+  `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and Phase 5 tests.
 
 ## Findings
 
-- `competitive-resolution-v1` is a read-only host envelope over committed
-  `CompetitiveTransition` history. It supports latest and selected historical
-  competitive turns and returns explicit errors for unsupported campaigns,
-  missing history, and unavailable turns.
-- Before/after resources, operations, and pending processes are derived through
-  the existing actor-visible `observe_for_human`/presentation projection. The
-  browser receives no true world state, resolved stochastic inputs, private
-  rival actions, or effect queue.
-- The eight resolution steps reuse the accepted `TransitionSummary` command,
-  event, and effect surfaces plus actor-visible information. Source labels keep
-  committed effects distinct from presentation-level before/after comparison;
-  no inferred causal graph or new causal engine was added.
-- Historical reads preserve the session observation and state hash. Browser
-  play/pause/skip/review and reduced-motion behavior are local presentation
-  state; all result text remains available immediately in the DOM.
-- A successful `submit_turn` is reported separately from optional resolution or
-  presentation refresh errors. Existing parser, validator, action catalog, and
-  transition boundaries remain authoritative.
+- The catalog contains the four approved music states and all sixteen approved
+  interface/event cue IDs. Each entry has a visible source and equivalent;
+  registry entries record generated source, ownership/license status, and
+  approval with no third-party asset.
+- Music/event classification reads only explicit page stage, actor-visible
+  observations, visible resolution text/effects, or explicit local UI outcomes.
+  It does not read true state, private rival actions, resolved stochastic
+  inputs, effect queues, or simulation internals.
+- Audio playback is browser-owned and generated through Web Audio after a user
+  gesture. Master/music/interface/event/ambience controls, mute, focus loss,
+  reduced notifications, cooldowns, and unsupported fallback leave visual/text
+  results complete and do not call the transition boundary.
+- Recording-sink events preserve cue ID, visible source, and equivalent without
+  requiring an audio context or asset load. Audio is not stored in history,
+  hashes, replay, or Rust/MCP state.
+- Action and Phase 4 resolution integrations use existing host outcomes only;
+  no command, observation, transition, or replay contract changed.
 
 ## Required Fixes
 
@@ -43,23 +40,21 @@ None.
 
 ## Residual Risks
 
-- Browser rendering and viewport checks could not be exercised because no
-  Chromium/Chrome binary is installed; browser-native QA remains a follow-up.
-- The resolution step strings reuse existing committed summaries and are not a
-  richer structured causal model; future clarity work must preserve the same
-  source and observation boundary.
+- Browser audio hardware/focus/autoplay behavior and viewport rendering could
+  not be exercised because no Chromium/Chrome binary is installed.
+- Synthesized recipes are a technical first slice, not evidence of polished
+  sound design, restrained repeated-session mix, or asset-backed production.
 - Static/AI checks do not establish human comprehension, usability, lived
-  accessibility, learning, engagement, domain-expert validity, calibration,
+  accessibility, engagement, learning, domain-expert validity, calibration,
   balance, or policy validity.
-- Phase 5 must keep audio optional, visible-only, provenance-backed, and
-  independent of simulation state, hashes, and replay semantics.
+- Phase 6 must keep map/world expansion subordinate to visible decisions and
+  explanations and preserve rival observation lag.
 
 ## Verification Evidence
 
-- Focused resolution/contextual/read-only GUI tests: 15 passed.
-- Node syntax check, Rust formatting, and Clippy with warnings denied: passed.
-- Full Python discovery: 257 tests passed.
+- Focused audio/resolution/contextual/read-only GUI tests: 20 passed.
+- Full Python discovery: 262 tests passed.
 - Serial Rust tests: 317 unit tests plus 13 integration/golden/scenario tests
   passed; doc-tests passed with zero tests.
-- Node syntax, Rust formatting, Clippy with warnings denied, release metadata,
-  and whitespace checks: passed at `0.12.20`.
+- Node syntax, JSON validation, Rust formatting, Clippy with warnings denied,
+  release metadata, and whitespace checks: passed at `0.12.21`.

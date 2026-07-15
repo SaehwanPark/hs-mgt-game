@@ -1,8 +1,9 @@
-# GUI executive desktop and contextual action builder
+# GUI executive desktop, contextual action builder, and optional audio
 
-This is a dependency-free Phase 2/3/4 browser surface over typed actor-visible
-MCP presentation, action, and resolution contracts. Open `index.html` through a
-static file server and provide a live or recorded read-only adapter:
+This is a dependency-free Phase 2/3/4/5 browser surface over typed actor-visible
+MCP presentation, action, and resolution contracts plus optional generated
+audio. Open `index.html` through a static file server and provide a live or
+recorded read-only adapter:
 
 ```js
 window.HsMgtGameReadOnlyAdapter = {
@@ -52,7 +53,7 @@ historical-turn read are local presentation controls; `getResolution` never
 advances the session. Text remains in the DOM when paused or reduced motion is
 enabled.
 
-Phase 2/3/4 review checklist:
+Phase 2/3/4/5 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -68,13 +69,15 @@ Phase 2/3/4 review checklist:
   before/after snapshots without treating differences as inferred causality;
 - pause, skip, review a historical committed turn, and enable reduced motion;
   confirm text remains complete and no session transition occurs.
+- enable optional audio, exercise independent channels, mute, focus loss, and
+  reduced notifications; confirm the same visual/text result remains complete.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
 
-Asset audit: zero downloaded assets, external fonts, network calls, or image
-files. CSS, HTML, and JavaScript are the complete surface. The typed projection
-contains no true-world state, resolved stochastic inputs, private rival actions,
-or client-side cost formula. Resolution animation, causal overlays, audio,
-assets, and campaign expansion remain later phases. Phase 4 resolution pacing is
-presentation-only and has no audio playback or downloaded assets.
+Asset audit: zero downloaded assets, external fonts, network calls, or image/audio
+files. CSS, HTML, JavaScript, and generated Web Audio recipes are the complete
+surface. The typed projection contains no true-world state, resolved stochastic
+inputs, private rival actions, or client-side cost formula. Phase 5 audio is
+optional, visible-only, registry-recorded, and presentation-only; richer causal
+overlays, recorded assets, and campaign expansion remain later phases.

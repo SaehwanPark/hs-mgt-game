@@ -4048,59 +4048,57 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 4 resolution and causal feedback
-  Status: Complete; Phase 5 is the next gated candidate
+- Feature: Visual/audio Phase 5 foundational audio
+  Status: Complete; Phase 6 is the next gated candidate
   Started: 2026-07-15
-  Branch: feat/visual-audio-phase4-resolution-causal-v0.12.20
+  Branch: feat/visual-audio-phase5-foundational-audio-v0.12.21
 
   Summary:
-  Phase 4 adds one graphical competitive-month decision-to-consequence path.
-  The host returns a typed, actor-visible resolution envelope for the latest or
-  selected committed transition. The browser renders eight ordered steps,
-  before/after operating and resource snapshots, direct committed effects,
-  newly visible information, pending processes, and local play/pause/skip/review
-  controls without taking ownership of simulation state.
+  Phase 5 adds optional, browser-only generated audio to the one-month
+  competitive action and resolution surface. Four visible-state music modes and
+  the Phase 0 interface/event cue catalog are mapped through deterministic
+  presentation logic, with independent controls, fallback behavior, registry,
+  credits, and recording-sink coverage.
 
   Done:
-  - Added `competitive-resolution-v1` typed host output and the non-mutating
-    `get_resolution` MCP tool for latest and immutable historical competitive
-    transitions.
-  - Derived decision-time and post-transition snapshots through the existing
-    actor-visible observation projection, and reused committed transition event
-    and effect summaries as source-labeled resolution content.
-  - Added the browser resolution panel with eight visible steps, operating and
-    resource before/after summaries, effect sources, committed state hash,
-    historical review, local pacing controls, skip/pause/review behavior, and
-    reduced-motion handling.
-  - Kept all resolution text in the DOM immediately; local controls change
-    presentation state only, and successful submission remains distinct from
-    optional resolution/presentation refresh errors.
-  - Added Phase 4 contract documentation, GUI/Rust tests, and explicit
-    evidence limits; no browser formulas, causal inference graph, audio, or
-    asset behavior was added.
-  - Bumped package and public metadata to `0.12.20`.
+  - Added `audio-catalog-v1` with `menu`, `stable_operations`, `pressure`, and
+    `debrief` music modes plus all eight interface and eight event cue IDs from
+    the Phase 0 catalog.
+  - Added generated Web Audio recipes, deterministic visible-only music/event
+    mapping, recording-sink events, cooldown throttling, unsupported-audio
+    fallback, lazy user-gesture enablement, focus handling, reduced
+    notifications, mute, and independent channel controls.
+  - Integrated audio status and controls into the existing GUI; audio calls are
+    tied only to local action outcomes and Phase 4 actor-visible resolution or
+    presentation data. Text, visual equivalents, action submission, and replay
+    remain complete when audio is unavailable or muted.
+  - Added machine-readable generated-audio registry and credits with no
+    third-party assets, downloads, network behavior, or simulation paths.
+  - Added Phase 5 contract documentation and focused static/JavaScript tests;
+    no Rust, MCP, transition, history, hash, or replay behavior changed.
+  - Bumped package and public metadata to `0.12.21`.
 
   Not Yet Done:
-  - Promote Phase 5 only for bounded, visible, optional foundational audio
-    after this resolution surface is reviewed as a complete one-month
-    graphical decision surface.
+  - Promote Phase 6 only for persistent regional map/world expansion after the
+    optional audio and provenance gate is reviewed as complete.
 
   Deferred / Non-Goals:
-  - No audio playback, assets, mobile support, campaign expansion, packaging,
-    deployment, or human evaluation.
-  - No inferred causal graph, private rival reveal, true-state view, resolved
-    stochastic-input exposure, general replay editor, or audio-driven state.
+  - No recorded or downloaded audio files, dynamic composition, spatial audio,
+    pitch-only signaling, broad asset production, mobile support, campaign
+    expansion, packaging, deployment, or human evaluation.
+  - No private rival reveal, true-state view, resolved stochastic-input
+    exposure, audio history, audio-driven state, or general settings framework.
   - No transition formulas, randomness, replay verification, history/hash
     semantics, scenario rules, or existing command families changed.
-  - Phases 5–9 remain sequentially gated by their own evidence and acceptance
+  - Phases 6–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - Host and GUI contracts pass for typed eight-step resolution coverage,
-    source-labeled actor-visible snapshots, historical hash stability,
-    non-mutating reads, local control behavior, reduced-motion handling,
-    separate refresh errors, no-network/no-asset behavior, and JavaScript
-    syntax.
+  - GUI/audio contracts pass for all four music modes and sixteen cues, visible
+    sources/equivalents, registry completeness, deterministic mapping,
+    recording-sink behavior, controls, mute/focus/reduced-notification states,
+    throttling, unsupported fallback, no-network/no-asset behavior, and
+    JavaScript syntax.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
@@ -4109,9 +4107,9 @@ Verification:
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 4 complete; Phase 5 is the next ranked candidate. No later feature
+Status: Phase 5 complete; Phase 6 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 4 document exists.
+prototype or Phase 5 document exists.
 
 #### Existing foundation (`Done`)
 
@@ -4120,8 +4118,8 @@ prototype or Phase 4 document exists.
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
 - The dependency-free `gui/` surface renders typed actor-visible data and a
   host-validated competitive action and resolution workflow. It proves a
-  thin-client/live-decision direction; it is not the persistent regional world,
-  audio layer, or campaign-complete GUI described here.
+  thin-client/live-decision direction with optional generated audio; it is not
+  the persistent regional world or campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4201,6 +4199,27 @@ prototype or Phase 4 document exists.
   reduced-motion behavior without mutating the session.
 - Phase 4 is documented in
   [`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
+  Technical/interface-task checks do not establish human comprehension,
+  usability, lived accessibility, learning, engagement, calibration, balance,
+  domain validity, or policy validity.
+
+#### Phase 5 foundational audio (`Done`)
+
+- The browser exposes `audio-catalog-v1` with four visible-state music modes and
+  all Phase 0 interface/event cue IDs, each with a source and visual/text
+  equivalent.
+- Generated Web Audio recipes are selected only from explicit page stage,
+  actor-visible observation, committed resolution text/effects, or explicit
+  local UI outcomes. Private rival behavior, true state, stochastic inputs, and
+  effect queues are unavailable to the classifier.
+- Master, music, interface, event, and ambience controls are independent;
+  mute, focus loss, reduced notifications, repeated-cue throttling, user-gesture
+  enablement, and unsupported-audio fallback preserve complete visual/text play.
+- A machine-readable registry and credits record project-generated ownership
+  and the absence of third-party audio files. Recording-sink tests verify cue
+  IDs/source/equivalent without loading assets.
+- Phase 5 is documented in
+  [`docs/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/visual-audio-phase5-foundational-audio-v0.12.21.md).
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
@@ -4346,13 +4365,13 @@ prototype or Phase 4 document exists.
 | 2. Live read-only integration | Typed live/recorded adapter, observations, entity detail, pending/history/hash views, replay prototype, loading/error/empty states | CLI/MCP visible-fact parity, no duplicated formulas, stable fixtures, and explicit missingness |
 | 3. Contextual action submission | Action forms/batch builder, command preview, validation/retry, one graphical competitive month | Generated commands are equivalent, costs/delays are visible, rejection is non-mutating, and no stochastic certainty is implied |
 | 4. Resolution and causal feedback (`Done`) | One committed month, typed sequencing, operating breakdown, source-labeled direct effects, skip/pause/review/historical read | Principal drivers are traceable to committed effects; textual results are immediate; historical reads are non-mutating |
-| 5. Foundational audio | Four music states, bounded UI/event cues, controls, registry/credits, deterministic cue mapping | Audio leaves state/hash/replay unchanged, muted play is complete, music leaks no hidden state, provenance is complete, repeated cues are restrained |
+| 5. Foundational audio (`Done`) | Four music states, bounded UI/event cues, controls, generated-audio registry/credits, deterministic cue mapping | Audio leaves state/hash/replay unchanged, muted play is complete, music leaks no hidden state, provenance is complete, repeated cues are restrained |
 | 6. Persistent regional world | Expanded map, demand/access overlays, identities, public projects/rival actions, navigation, relationships, timeline/assets | Map supports decisions/explanations, respects rival observation lag, and decorative complexity does not obscure state |
 | 7. Campaign coverage | Tutorial-oriented stabilization flow and affiliation partner/fit/commitment/review/integration flow with shared plus campaign-specific visuals/audio | Components are reused without flattening campaign semantics or requiring GUI-driven simulation changes |
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 
-Do not start broad map or asset production before Phase 5 closes. Do not
+Do not start broad map or asset production before Phase 6 closes. Do not
 extend presentation primitives to stabilization or affiliation before the
 competitive slice demonstrates their semantics. A phase may move into
 `Present` only with its own concise `Done`, `Not Yet Done`, verification, and
@@ -4499,9 +4518,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 5 foundational audio is the next candidate. It must map
-   only visible committed conditions to optional cues, provide complete visual
-   equivalents and independent controls, and preserve state/hash/replay
-   behavior.
-2. Phases 6–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 6 persistent regional world is the next candidate. It must
+   support decisions and explanations, preserve observation lag, and keep
+   decorative complexity subordinate to visible state.
+2. Phases 7–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

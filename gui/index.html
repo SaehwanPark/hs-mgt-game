@@ -224,6 +224,12 @@
       .resolution-columns section { background: var(--teal-soft); border-radius: .65rem; padding: .7rem .85rem; }
       .resolution-columns h3 { font-size: .95rem; margin-top: 0; }
       .resolution-columns ul { margin: 0; padding-left: 1.1rem; }
+      .audio-panel { grid-column: 1 / -1; }
+      .audio-controls { align-items: center; display: flex; flex-wrap: wrap; gap: .65rem 1rem; }
+      .audio-controls button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-size: .82rem; font-weight: 750; padding: .5rem .7rem; }
+      .audio-controls label { align-items: center; color: var(--muted); display: flex; gap: .35rem; font-size: .78rem; }
+      .audio-controls input[type="range"] { accent-color: var(--teal); width: 5rem; }
+      .audio-equivalent { color: var(--muted); font-size: .78rem; margin: .65rem 0 0; }
       .commands { display: grid; gap: .45rem; list-style: none; margin: var(--space-3) 0 0; padding: 0; }
       .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; padding: .35rem .6rem; }
 
@@ -354,6 +360,24 @@
         <ul class="result-list" id="result-list"></ul>
       </section>
 
+      <section class="panel audio-panel" id="audio-panel" aria-labelledby="audio-heading">
+        <div class="panel-heading">
+          <h2 id="audio-heading">Optional audio</h2>
+          <span id="audio-state" aria-live="polite">Audio off; visual and text equivalents are active.</span>
+        </div>
+        <div class="audio-controls" aria-label="Audio controls">
+          <button type="button" id="audio-enable">Enable audio</button>
+          <button type="button" id="audio-mute" aria-pressed="false">Mute audio</button>
+          <label><input type="checkbox" id="audio-reduced-notifications" /> Reduced notifications</label>
+          <label for="audio-master-volume">Master <input id="audio-master-volume" type="range" min="0" max="1" step=".05" value="1" /></label>
+          <label for="audio-music-volume">Music <input id="audio-music-volume" type="range" min="0" max="1" step=".05" value=".55" /></label>
+          <label for="audio-interface-volume">Interface <input id="audio-interface-volume" type="range" min="0" max="1" step=".05" value=".7" /></label>
+          <label for="audio-event-volume">Events <input id="audio-event-volume" type="range" min="0" max="1" step=".05" value=".8" /></label>
+          <label for="audio-ambience-volume">Ambience <input id="audio-ambience-volume" type="range" min="0" max="1" step=".05" value=".25" /></label>
+        </div>
+        <p class="audio-equivalent">Audio only emphasizes visible category and timing. Muting, reduced notifications, focus loss, or unavailable browser audio never removes the written result.</p>
+      </section>
+
       <section class="panel resolution-panel" id="resolution-panel" aria-labelledby="resolution-heading" hidden>
         <div class="panel-heading">
           <h2 id="resolution-heading">Monthly resolution</h2>
@@ -412,7 +436,7 @@
     </main>
 
     <footer>
-      Phase 2/3 viewer and Phase 4 resolution review: HTML/CSS/JavaScript only. Live or recorded
+      Phase 2/3/4 viewer and Phase 5 optional audio: HTML/CSS/JavaScript only. Live or recorded
       host data remains authoritative; no external assets, fonts, network calls,
       hidden-state fields, or duplicate simulation state are used here.
     </footer>
