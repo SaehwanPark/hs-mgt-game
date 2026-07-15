@@ -1,6 +1,6 @@
-# GUI executive desktop, contextual action builder, and optional audio
+# GUI executive desktop, campaign coverage, contextual action builder, and optional audio
 
-This is a dependency-free Phase 2/3/4/5 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -11,6 +11,8 @@ window.HsMgtGameReadOnlyAdapter = {
   async getPresentation(sessionId) {
     // Call get_presentation or return a recorded envelope with the same schema.
   },
+  async getRegionalWorld(sessionId) {},
+  async getCampaignCoverage(sessionId) {},
 };
 ```
 
@@ -35,6 +37,7 @@ window.HsMgtGameActionAdapter = {
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
   async submitTurn(commandText) {},
+  async getCampaignCoverage(sessionId) {},
 };
 ```
 
@@ -60,7 +63,16 @@ schematic identity map, visible demand/access/process overlays, owned facility
 detail, and lagged public rival signals. Map selection and navigation are local
 presentation state; rival private detail remains explicitly unavailable.
 
-Phase 2/3/4/5 review checklist:
+When supplied, `getCampaignCoverage(sessionId)` returns
+`schema_version: "campaign-coverage-v1"` for the `stabilization` or
+`regional-affiliation` campaign. The projection keeps each campaign's briefing,
+visible metrics, actor signals, process status, decision forms, immutable
+history, replay metadata, and host-provided debrief distinct. Decision forms
+substitute only host-provided parameter values into the host command template;
+the existing `submitTurn` path remains the only mutation path. Host rejection is
+shown as a recoverable error and does not fabricate a local transition.
+
+Phase 2/3/4/5/6/7 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -81,6 +93,11 @@ Phase 2/3/4/5 review checklist:
 - load the regional-world projection, select each public/owned entity, switch
   overlays, follow navigation links, and confirm public-signal lag and missing
   private detail remain labeled.
+- load stabilization and regional-affiliation campaign coverage, confirm their
+  distinct role/stage/briefing/metric/actor/process surfaces, and submit a
+  host-shaped decision through the canonical command path.
+- exercise a rejected campaign command, confirm the error is recoverable, and
+  verify history/replay/debrief output remains host-sourced.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -88,8 +105,8 @@ lived-accessibility evidence.
 Asset audit: zero downloaded assets, external fonts, network calls, or image/audio
 files. CSS, HTML, JavaScript, and generated Web Audio recipes are the complete
 surface. The typed projection contains no true-world state, resolved stochastic
-inputs, private rival actions, or client-side cost formula. Phase 5 audio and
-Phase 6 regional-world projection are
-optional, visible-only, registry-recorded, and presentation-only; richer causal
-overlays, recorded assets, true geography, and campaign expansion remain later
+inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase 6
+regional-world projection, and Phase 7 campaign coverage are optional,
+visible-only, registry-recorded, and presentation-only; richer causal overlays,
+recorded assets, true geography, and broader campaign expansion remain later
 phases.

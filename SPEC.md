@@ -4046,7 +4046,14 @@ Verification:
 - Proposal-to-SPEC coverage, domain-boundary QA, AI-testplay wording review,
   release metadata consistency, and documentation diff checks pass.
 
-## Present
+## Past
+
+### Visual/audio Phase 6 closure (v0.12.22)
+
+Phase 6 closed the bounded schematic regional-world slice with its typed host
+read, browser map/overlay/navigation surface, observation-lag checks, and
+explicit missingness. Campaign coverage was intentionally left as the next
+gated slice. Package and public metadata were bumped to `0.12.22`.
 
 - Feature: Visual/audio Phase 6 regional world
   Status: Complete; Phase 7 is the next gated candidate
@@ -4100,24 +4107,80 @@ Verification:
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
+## Present
+
+- Feature: Visual/audio Phase 7 campaign coverage
+  Status: Complete; Phase 8 is the next gated candidate
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase7-campaign-coverage-v0.12.23
+
+  Summary:
+  Phase 7 extends the additive presentation boundary to the existing
+  `stabilization-v1` and `regional-affiliation-v1` campaigns. A shared browser
+  shell renders each campaign's own stage, briefing, visible metrics, actors,
+  processes, decisions, history, replay metadata, and debrief without making
+  their observations or decision semantics interchangeable.
+
+  Done:
+  - Added the typed `campaign-coverage-v1` envelope and non-mutating
+    `get_campaign_coverage` MCP read for stabilization and affiliation sessions.
+  - Added stabilization coverage for its five-turn executive loop and
+    stage-specific host commands, visible cash/capacity/access/quality reports,
+    policy/market signals, uncertainty, history, and educational debrief.
+  - Added affiliation coverage for partner condition, posture, commitments,
+    review, labor/payer/community responses, integration/decline, explicit
+    actor distinctions, visible obligations, history, and affiliation debrief.
+  - Added host-shaped browser decision forms that substitute only host-provided
+    parameters into canonical command templates; the existing `submit_turn`
+    path remains the only mutation boundary and rejection is recoverable.
+  - Reused the existing visible-only audio catalog for campaign pressure,
+    completion, and affiliation milestone cues; written content remains
+    complete when audio is unavailable or muted.
+  - Added typed Rust, browser, static, documentation, and non-mutation contract
+    tests and the Phase 7 evidence/design/QA artifacts.
+  - Bumped package and public metadata to `0.12.23`.
+
+  Not Yet Done:
+  - Promote Phase 8 only after campaign-specific coverage, form recovery,
+    source visibility, and competitive regression checks are reviewed as
+    complete.
+
+  Deferred / Non-Goals:
+  - No new simulation state, command family, transition formula, stochastic
+    input, effect queue, true-state/instructor view, universal campaign model,
+    asset-backed identity, mobile redesign, deployment, or human evaluation.
+  - No browser legality engine, client-side cost formula, private future outcome,
+    partner forecast, competitive-regional-world semantic change, or campaign
+    flattening.
+  - Phases 8–9 remain sequentially gated by their own evidence and acceptance
+    criteria.
+
+  Verification:
+  - Stabilization/affiliation coverage, competitive regional-world, audio,
+    resolution, action, and read-only GUI contracts pass with source labels,
+    hidden-field exclusion, non-mutation, rejection recovery, and JavaScript
+    syntax checks.
+  - Release metadata, documentation, formatting, clippy, and the full Python
+    and Rust suites pass.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 6 complete; Phase 7 is the next ranked candidate. No later feature
+Status: Phase 7 complete; Phase 8 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 6 document exists.
+prototype or Phase 6/7 document exists.
 
 #### Existing foundation (`Done`)
 
 - The deterministic Rust engine, explicit resolved stochastic inputs,
   actor-visible observations, canonical commands, immutable history, replay
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
-- The dependency-free `gui/` surface renders typed actor-visible data and a
-  host-validated competitive action and resolution workflow. It proves a
-  thin-client/live-decision direction with optional generated audio; it is not
-  the persistent regional world or campaign-complete GUI described here.
+- The dependency-free `gui/` surface renders typed actor-visible data,
+  competitive action/resolution, regional-world, and bounded campaign-coverage
+  workflows with optional generated audio. It remains a thin client and is not
+  the campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4243,6 +4306,29 @@ prototype or Phase 6 document exists.
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
+
+#### Phase 7 campaign coverage (`Done`)
+
+- The host exposes `campaign-coverage-v1` through the non-mutating
+  `get_campaign_coverage` read for `stabilization-v1` and
+  `regional-affiliation-v1` sessions.
+- Stabilization retains its onboarding-oriented five-turn executive loop with
+  visible reports, stage-specific commands, uncertainty, immutable history, and
+  existing educational debrief output.
+- Affiliation retains its partner/fit/obligation semantics with condition,
+  posture, commitments, review, labor/payer/community responses,
+  integration/decline, explicit actors, and campaign-specific debrief output.
+- Shared browser primitives render each coverage field with source labels,
+  host-shaped parameter forms, recoverable rejection, keyboard/reduced-motion
+  text completeness, history/replay metadata, and terminal debrief content.
+- Existing generated audio maps only visible campaign pressure, completion, and
+  affiliation milestone events; audio remains optional and outside state,
+  history, hashes, replay, and transitions.
+- Phase 7 is documented in
+  [`docs/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/visual-audio-phase7-campaign-coverage-v0.12.23.md).
+  Technical/interface-task checks do not establish human comprehension,
+  usability, lived accessibility, learning, engagement, calibration, balance,
+  domain validity, policy validity, or legal validity.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4392,10 +4478,9 @@ prototype or Phase 6 document exists.
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 
-Phase 6 is closed only for the bounded schematic slice; do not start broad map
-or asset production merely because that gate exists. Do not extend presentation
-primitives to stabilization or affiliation before the competitive slice
-demonstrates their semantics. A phase may move into
+Phase 7 is closed only for the bounded stabilization and affiliation coverage
+slice; do not start broad campaign, map, or asset production merely because that
+gate exists. A phase may move into
 `Present` only with its own concise `Done`, `Not Yet Done`, verification, and
 non-goal fields.
 
@@ -4540,7 +4625,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 7 campaign coverage is the next candidate. It must reuse
-   shared primitives without flattening stabilization or affiliation semantics.
-2. Phases 8–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 8 AI-agent testplay readiness is the next candidate. It
+   must exercise campaign coverage, settings/accessibility/error recovery, and
+   structured interaction capture without changing simulation semantics.
+2. Phase 9 remains sequentially gated Future work. It may not be promoted from
    this queue merely because its requirements are documented.

@@ -1,66 +1,84 @@
-# Evidence Map — Visual and Audio Phase 6 Regional World v0.12.22
+# Evidence Map — Visual and Audio Phase 7 Campaign Coverage v0.12.23
 
 ## Scope
 
-Phase 6 turns the existing report/map panel into a persistent, navigable
-schematic regional view backed by a host projection. It does not add geography
-or new simulation state.
+Phase 7 extends the validated presentation boundary to the existing
+`stabilization-v1` and `regional-affiliation-v1` campaigns. It is a presentation
+and host-projection slice, not a new campaign or simulation framework.
 
 ## Sources Reviewed
 
-- Phase 6 and first-vertical-slice requirements in
-  `docs/visual_audio_upgrade_proposal.md`.
-- Phase 0 source/hidden-state/map policy and Phase 1–5 GUI/MCP contracts.
-- `PlayerObservation`, `CompetitiveWorldState.public_action_log`,
-  `ReadOnlyPresentationEnvelope`, and existing pending-process sources.
-- README, SPEC, architecture, design principles, and harness spec.
+- `docs/visual_audio_upgrade_proposal.md` Phase 7 campaign-coverage section.
+- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, `SPEC.md`, and the harness team spec.
+- Existing stabilization `WorldState`, `Observation`, `PlayerCommand`,
+  `History`, and `educational_debrief` sources.
+- Existing affiliation `AffiliationObservation`, stage/status/commitments,
+  canonical commands, `AffiliationHistory`, and `affiliation_debrief` sources.
+- Merged Phase 1–6 typed presentation, resolution, audio, and regional-world
+  contracts.
 
 ## Mechanisms and Institutions
 
-The map presents the regional institution set as an executive information
-surface. The human system gets owned facility/process detail and visible
-operating overlays. Rival markers communicate identity and public signals only;
-their private operating state remains unavailable.
+Stabilization is an onboarding-oriented executive loop: the player sees current
+cash/capacity and reported access/quality/policy/market information, then
+chooses a stage-specific resource or commitment response. Its teaching value is
+the sequence of workforce, policy, coalition, and competitive pressures rather
+than a regional map.
+
+Affiliation is a bounded institutional-fit and obligation process: Riverside
+assesses a partner, chooses an independent/deferred/pursue posture, proposes
+commitments, passes review, and chooses integration or decline. Partner,
+review, labor, payer, and community responses remain separate actor-visible
+signals rather than one affiliation score.
 
 ## Actor Incentives and Information
 
-Player demand, access, unmet demand, capacity, and projects are shown with
-source labels. Rival public actions appear only through the existing one-month
-observation lag and are labeled observed/reported. No map marker is a proxy for
-unobserved rival utility, hidden capacity, geographic influence, or outcome.
+- Stabilization exposes only the existing player observation and stage-appropriate
+  command surface. Resolved measurement inputs remain behind the established
+  observation boundary even when their reported effects are visible.
+- Affiliation exposes the existing reported partner condition, commitments,
+  stage/status, and stakeholder response observations. Private true condition,
+  resolved response inputs, and future outcomes remain unavailable.
+- The host supplies command templates, parameter labels, uncertainty, and
+  constraints; the browser does not derive legality or outcome formulas.
 
 ## Assumptions
 
-- Existing player observation plus public action log are sufficient for a first
-  regional-world DTO; no true-state serialization is required.
-- A stable schematic position derived from public entity ordering is display
-  layout, not a geography claim or simulation coordinate.
-- The host can classify the human system and public rival identities while
-  filtering rival private metrics and projects.
-- Existing `get_presentation` can remain unchanged; an additive
-  `competitive-regional-world-v1` read is safer than widening unrelated DTOs.
+- An additive `campaign-coverage-v1` read can reuse existing observation,
+  history, hash, command, and debrief functions without widening competitive
+  DTOs.
+- Host-shaped parameter metadata reduces command syntax friction while leaving
+  parsing, validation, stochastic resolution, and transitions authoritative.
+- A shared stage/briefing/metric/process/history shell can carry both campaigns
+  if role labels and campaign-specific actor/obligation sections remain explicit.
+- Phase 7 audio can reuse generated recipes: visible campaign stage/status maps
+  to existing music states, and committed affiliation stage changes may use the
+  existing affiliation milestone cue.
 
 ## Unresolved Questions
 
-- Which visual relationship signals are truly public enough to deserve a map
-  edge rather than a linked briefing item?
-- When should public rival signals age out of the map versus remain in history?
-- What evidence would justify real geography, distance, or richer asset work?
+- What onboarding evidence would justify defaults or stronger guidance beyond
+  host-provided command constraints?
+- Which stabilization and affiliation responses deserve distinct event cues
+  without making unfavorable outcomes sound like failure or success signals?
+- Does the shared shell remain legible when affiliation commitments and actor
+  responses are shown together at narrow viewports?
 
 ## Design Implications
 
-- Add a typed regional-world envelope with entities, owned facilities, public
-  signals, visible overlays, active player processes, source labels, and layout
-  metadata.
-- Keep map selection, active overlay, and panel navigation local; reload the
-  projection for current/historical presentation without mutation.
-- Build rival signals from the same lagged visible public source used by human
-  observation, not from rival `HealthSystemState` fields.
-- Make missing public signal, unavailable rival detail, and absent player
-  process explicit in the UI.
+- Add a typed coverage envelope with campaign role, stage, source-labeled
+  briefing, metrics, campaign actors, processes/obligations, decisions,
+  committed history, replay metadata, and terminal debrief lines.
+- Use explicit visibility/uncertainty text and a stable campaign role label.
+- Render forms from host parameter metadata and submit only host-shaped command
+  text through the existing adapter; refresh the coverage envelope afterward.
+- Keep the competitive action/resolution/regional-world paths unchanged and
+  make campaign coverage optional when its adapter is absent.
 
 ## Risks
 
-Map polish can imply false geography, hidden rival knowledge, or a city-builder
-scope. Use a schematic legend, source/lag labels, minimal markers, and a QA gate
-that rejects any client-side metric reconstruction or private rival field.
+The shared shell could flatten campaign semantics, turn assumptions into hidden
+rules, expose resolved affiliation responses, or make an affiliation stage look
+like a competitive monthly turn. Use campaign roles, stage-specific labels,
+source fields, explicit unavailable notes, and tests that reject hidden fields.

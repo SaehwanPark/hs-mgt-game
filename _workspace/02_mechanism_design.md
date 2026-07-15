@@ -1,83 +1,89 @@
-# Mechanism Design — Visual and Audio Phase 6 Regional World v0.12.22
+# Mechanism Design — Visual and Audio Phase 7 Campaign Coverage v0.12.23
 
 ## Goal and Roadmap Phase
 
-Make one competitive regional situation navigable as an evolving institutional
-system rather than a set of disconnected reports. This is roadmap Phase 6 after
-the merged action, resolution, and optional-audio slices.
+Implement roadmap Phase 7: extend the validated presentation system to
+stabilization and affiliation while preserving their incompatible campaign
+semantics and canonical command boundaries.
 
 ## Slice Boundary
 
-The host exposes `competitive-regional-world-v1` as a non-mutating read for
-`competitive-regional-v1`. It contains a schematic layout, public entity
-identity, owned player facilities/processes, actor-visible demand/access and
-operating overlays, public rival signals at the existing lag, and source/lag
-metadata. It does not contain true coordinates, rival private metrics, or map
-simulation.
+The host exposes `campaign-coverage-v1` through a non-mutating
+`get_campaign_coverage` read for `stabilization-v1` and
+`regional-affiliation-v1`. The envelope includes shared session/stage/briefing/
+metric/history/replay/debrief primitives plus campaign-specific actors,
+processes, and decisions. Competitive presentation remains on its existing
+contracts.
 
 ## Actors and Authority
 
-Rust/MCP owns projection, identity filtering, public-signal timing, observations,
-history, and hashes. The browser owns selected entity, active overlay, panel
-navigation, viewport, and display geometry. Audio remains the existing optional
-client layer; map selection does not trigger simulation or hidden audio state.
+Rust/MCP owns campaign state, actor-visible observations, stage legality,
+canonical command parsing/validation, resolved inputs, transitions, history,
+hashes, and educational debriefs. The browser owns panel visibility, local form
+drafts, selected campaign decision, navigation, and audio playback. The browser
+does not own campaign state or infer outcome meaning.
 
 ## State, Beliefs, and Observations
 
-The human entity may expose owned facility names, visible capacity metrics,
-operations, access, demand, unmet demand, and in-flight projects. Rival entities
-expose name, public role, public signal text, observed month, and explicit detail
-unavailability. Overlay values use actor-visible player observations and are
-labeled as reported/observed; missing or lagged information remains visible.
+Stabilization presents reported access/quality, current cash/staffed beds,
+policy/market briefing, stage-specific decision metadata, and explicit
+uncertainty. Affiliation presents partner identity/condition when reported,
+Riverside visible metrics, commitments, stage/status, stakeholder response
+signals, assumptions, and integration/review obligations. True states and
+resolved stochastic inputs remain unavailable.
 
 ## Commands, Events, and Effects
 
-The read returns:
-
-1. a schema/session/replay envelope;
-2. schematic `entities` with stable IDs, role, label, layout position, status,
-   source, facilities, and public signals;
-3. `overlays` for visible demand, access, unmet demand, capacity pressure, and
-   process categories with value/label/source/equivalent;
-4. `navigation` targets for briefing, map, detail, and pending timeline; and
-5. explicit `missing`/`unavailable` notes.
-
-`get_regional_world(session_id)` is read-only and never calls `submit_turn`.
-Entity selection and overlay changes are client-only presentation state.
+The envelope returns host-shaped decisions with command templates and parameter
+metadata. The browser substitutes only entered values into the host-provided
+template and sends the resulting canonical text to the existing `submit_turn`
+adapter. Host rejection leaves the current coverage envelope and session intact;
+success reloads the read and committed history. Existing transition events,
+attributed effects, hashes, and debrief lines are reused as source-labeled
+history rather than recomputed.
 
 ## Strategic Interaction
 
-The map supports executive questions: where is the player's visible bottleneck,
-which owned facility/process explains it, and what public rival signal deserves
-attention? It does not optimize routes, rank institutions, imply social welfare,
-or reveal a rival's hidden strategy.
+Stabilization keeps the player focused on sequencing short-term capacity,
+policy, workforce, coalition, and competitive commitments. Affiliation keeps
+partner fit, review authority, labor, payer, community, and integration as
+separate interacting institutions. The UI may clarify the next stage and visible
+tradeoffs but may not rank a universally optimal posture or merge actor utility
+with Riverside outcomes.
 
 ## Assumptions and Parameters
 
-- Schema: `competitive-regional-world-v1`.
-- First supported campaign: `competitive-regional-v1`.
-- Schematic positions are deterministic layout slots, not geographic data.
-- Public signals use the existing one-month lag and source text; no new lag
-  formula is introduced.
-- Empty public signals, no active process, unsupported campaign, and unavailable
-  historical projection are explicit read errors/states.
+- Schema: `campaign-coverage-v1`.
+- Stabilization: five turns, one stage-specific command form, existing ruleset
+  constraints, and existing observation/debrief sources.
+- Affiliation: six stages, existing posture/commitment/review/integration
+  commands, `AffiliationRuleset` commitment/cost bounds, and existing response
+  observations.
+- `get_campaign_coverage` and browser navigation are non-mutating.
+- Existing generated audio maps done state to debrief, visible pressure text to
+  pressure music, and committed affiliation-stage refreshes to the existing
+  affiliation milestone cue; muting preserves all text.
 
 ## Educational Debrief Hooks
 
-The map links visible overlays to facility, briefing, and pending-process source
-labels. A learner can distinguish owned detail from public rival identity and
-reported signal timing. This phase does not claim comprehension, learning,
-calibration, or domain validity.
+The shared surface links current decisions to source labels, committed history,
+state hashes, and the existing campaign-specific debrief. Stabilization retains
+actor rationales and attributed mechanisms. Affiliation retains alternatives,
+actor response separation, obligations, and the independence/deferral question.
+No score-only summary or human learning claim is added.
 
 ## Determinism and Replay Notes
 
-The host derives the envelope from current actor-visible observation and public
-history without changing session state. Repeated reads preserve turn, history,
-hash, and audio state; historical reads are bounded to committed presentation
-sources if enabled. Layout slot selection is deterministic and presentation-only.
+The host derives coverage from current actor-visible observation and immutable
+history. Repeated reads preserve turn, transition count, latest hash, and audio
+state. Parameter metadata is descriptive; it does not resolve commands or
+randomness. Existing replay verification remains untouched.
 
 ## Open Questions
 
-- Is the identity/signal map enough to justify a later relationship layer?
-- Which overlay combinations remain legible at smaller viewports?
-- What evidence would authorize asset-backed map identity or true geography?
+- Which campaign-specific form errors need additional host guidance after
+  adapter traces are available?
+- Should later coverage add historical stage review, or is committed history
+  sufficient for the first campaign-complete presentation slice?
+- What evidence would authorize campaign-specific visual identity assets or
+  richer audio beyond generated cues?
