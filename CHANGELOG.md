@@ -4,6 +4,30 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.22] - 2026-07-15
+
+### Added
+- Added the typed `competitive-regional-world-v1` host projection and
+  non-mutating `get_regional_world` MCP tool for the competitive campaign.
+- Added actor-visible player facilities/processes, demand/access/unmet-demand/
+  capacity overlays, lagged public rival signals, source labels, navigation,
+  replay metadata, and explicit missingness.
+- Added browser schematic map/entity selection, overlay rendering, keyboard
+  navigation, and recoverable regional-world adapter states.
+- Added Phase 6 contract and visibility-boundary tests and documentation.
+
+### Changed
+- Kept private rival state, true geography, map simulation, formulas, assets,
+  network behavior, transitions, history, hashes, replay, and audio unchanged.
+- Promoted visual/audio Phase 7 campaign coverage as the next gated candidate
+  and bumped package/public metadata to `0.12.22`.
+
+### Evidence Limits
+- Host, browser, formatting, and static contract checks are technical or
+  interface-task evidence only; they do not establish human comprehension,
+  usability, lived accessibility, engagement, learning, calibration, balance,
+  or policy validity.
+
 ## [0.12.21] - 2026-07-15
 
 ### Added

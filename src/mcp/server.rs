@@ -9,9 +9,9 @@ use rmcp::{
 
 use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
-  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetResolutionRequest,
-  HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
-  ValidateTurnRequest,
+  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
+  GetResolutionRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest,
+  SubmitTurnRequest, ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -80,6 +80,17 @@ impl McpGameServer {
     Parameters(request): Parameters<GetResolutionRequest>,
   ) -> CallToolResult {
     self.with_store(|store| store.get_resolution(request))
+  }
+
+  #[tool(
+    name = "get_regional_world",
+    description = "Return the actor-visible schematic regional world for the current competitive session without advancing it."
+  )]
+  async fn get_regional_world(
+    &self,
+    Parameters(request): Parameters<GetRegionalWorldRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_regional_world(request))
   }
 
   #[tool(
@@ -171,7 +182,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_resolution, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, validate_turn, and get_resolution are non-mutating actor-visible reads.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, validate_turn, get_resolution, and get_regional_world are non-mutating actor-visible reads.",
       )
   }
 }

@@ -1,5 +1,6 @@
 mod action;
 mod presentation;
+mod regional_world;
 mod resolution;
 mod server;
 mod session;
@@ -9,6 +10,7 @@ pub use action::{
   VALIDATION_SCHEMA_VERSION, ValidateTurnEnvelope,
 };
 pub use presentation::{PRESENTATION_SCHEMA_VERSION, ReadOnlyPresentationEnvelope};
+pub use regional_world::{REGIONAL_WORLD_SCHEMA_VERSION, RegionalWorldEnvelope};
 pub use resolution::{
   RESOLUTION_SCHEMA_VERSION, ResolutionEffect, ResolutionEnvelope, ResolutionSnapshot,
   ResolutionStep,

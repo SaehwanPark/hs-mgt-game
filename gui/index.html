@@ -183,6 +183,14 @@
       .entity-card strong { display: block; margin: .35rem 0; }
       .entity-icon, .facility-icon { color: var(--teal); font-size: 1.35rem; font-weight: 900; }
       .entity-card p, .facility-card p { color: var(--muted); font-size: .86rem; margin-bottom: .5rem; }
+      .regional-navigation { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 var(--space-3); }
+      .regional-navigation button { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; color: var(--teal); font-size: .78rem; font-weight: 750; padding: .4rem .55rem; }
+      .regional-overlays { background: var(--teal-soft); border-radius: .65rem; margin-top: var(--space-3); padding: .7rem .85rem; }
+      .regional-overlays h3 { font-size: .95rem; margin: 0 0 .5rem; }
+      .regional-overlay-list { display: grid; gap: .4rem; list-style: none; margin: 0; padding: 0; }
+      .regional-overlay-list li { display: grid; gap: .12rem; grid-template-columns: 1fr auto; }
+      .regional-overlay-list li p, .regional-overlay-list li .source { grid-column: 1 / -1; }
+      .regional-overlay-list li p { color: var(--muted); font-size: .78rem; margin: 0; }
 
       .entity-heading { align-items: center; justify-content: flex-start; }
       .entity-heading .status { margin-left: auto; }
@@ -311,7 +319,12 @@
           <h2 id="map-heading">Regional market</h2>
           <span>schematic · public signals only</span>
         </div>
+        <nav class="regional-navigation" id="regional-navigation" aria-label="Regional world navigation"></nav>
         <div class="entity-list" id="map-list"></div>
+        <div class="regional-overlays">
+          <h3>Visible overlays</h3>
+          <ul class="regional-overlay-list" id="regional-overlay-list"></ul>
+        </div>
       </section>
 
       <section class="panel panel--entity" aria-labelledby="entity-heading">

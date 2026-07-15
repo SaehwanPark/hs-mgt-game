@@ -4048,57 +4048,55 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 5 foundational audio
-  Status: Complete; Phase 6 is the next gated candidate
+- Feature: Visual/audio Phase 6 regional world
+  Status: Complete; Phase 7 is the next gated candidate
   Started: 2026-07-15
-  Branch: feat/visual-audio-phase5-foundational-audio-v0.12.21
+  Branch: feat/visual-audio-phase6-regional-world-v0.12.22
 
   Summary:
-  Phase 5 adds optional, browser-only generated audio to the one-month
-  competitive action and resolution surface. Four visible-state music modes and
-  the Phase 0 interface/event cue catalog are mapped through deterministic
-  presentation logic, with independent controls, fallback behavior, registry,
-  credits, and recording-sink coverage.
+  Phase 6 adds a host-derived, actor-visible schematic regional world to the
+  one-month competitive presentation. The host supplies stable institutional
+  identity, owned detail, visible overlays, lagged public rival signals, source
+  labels, navigation targets, and explicit missingness; the browser supplies
+  selection, layout, overlays, and local navigation.
 
   Done:
-  - Added `audio-catalog-v1` with `menu`, `stable_operations`, `pressure`, and
-    `debrief` music modes plus all eight interface and eight event cue IDs from
-    the Phase 0 catalog.
-  - Added generated Web Audio recipes, deterministic visible-only music/event
-    mapping, recording-sink events, cooldown throttling, unsupported-audio
-    fallback, lazy user-gesture enablement, focus handling, reduced
-    notifications, mute, and independent channel controls.
-  - Integrated audio status and controls into the existing GUI; audio calls are
-    tied only to local action outcomes and Phase 4 actor-visible resolution or
-    presentation data. Text, visual equivalents, action submission, and replay
-    remain complete when audio is unavailable or muted.
-  - Added machine-readable generated-audio registry and credits with no
-    third-party assets, downloads, network behavior, or simulation paths.
-  - Added Phase 5 contract documentation and focused static/JavaScript tests;
-    no Rust, MCP, transition, history, hash, or replay behavior changed.
-  - Bumped package and public metadata to `0.12.21`.
+  - Added the typed `competitive-regional-world-v1` envelope and non-mutating
+    `get_regional_world` MCP read for competitive sessions.
+  - Exposed player-owned facilities, visible capacity/process detail, demand,
+    access, unmet-demand, and pending-process overlays with source/equivalent
+    labels; public rivals expose identity and only one-month-lagged public
+    action signals.
+  - Kept rival private operations, facilities, resources, projects, true
+    coordinates, effect queues, and hidden state outside the DTO; missing
+    signal and unavailable private detail are explicit.
+  - Added browser map/entity selection, overlay rendering, keyboard-reachable
+    navigation links, and recoverable empty/unsupported/adapter-error handling
+    without replacing the existing action, resolution, audio, history, or
+    debrief paths.
+  - Added host/browser visibility, lag, non-mutation, no-formula, no-network,
+    and no-geography contract tests and Phase 6 design/QA documentation.
+  - Bumped package and public metadata to `0.12.22`.
 
   Not Yet Done:
-  - Promote Phase 6 only for persistent regional map/world expansion after the
-    optional audio and provenance gate is reviewed as complete.
+  - Promote Phase 7 only for campaign coverage after the regional-world slice
+    and its observation-boundary gate are reviewed as complete.
 
   Deferred / Non-Goals:
-  - No recorded or downloaded audio files, dynamic composition, spatial audio,
-    pitch-only signaling, broad asset production, mobile support, campaign
-    expansion, packaging, deployment, or human evaluation.
+  - No true geography, distances, routes, patient movement, city-builder
+    mechanics, relationship/equilibrium model, map assets, campaign expansion,
+    packaging, deployment, or human evaluation.
   - No private rival reveal, true-state view, resolved stochastic-input
-    exposure, audio history, audio-driven state, or general settings framework.
+    exposure, browser-owned regional state, or map-derived audio/state.
   - No transition formulas, randomness, replay verification, history/hash
     semantics, scenario rules, or existing command families changed.
-  - Phases 6–9 remain sequentially gated by their own evidence and acceptance
+  - Phases 7–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - GUI/audio contracts pass for all four music modes and sixteen cues, visible
-    sources/equivalents, registry completeness, deterministic mapping,
-    recording-sink behavior, controls, mute/focus/reduced-notification states,
-    throttling, unsupported fallback, no-network/no-asset behavior, and
-    JavaScript syntax.
+  - Regional-world, audio, resolution, and contextual/read-only GUI contracts
+    pass with visible sources/equivalents, lag, hidden-field exclusion,
+    non-mutation, error recovery, controls, and JavaScript syntax.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
@@ -4107,9 +4105,9 @@ Verification:
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 5 complete; Phase 6 is the next ranked candidate. No later feature
+Status: Phase 6 complete; Phase 7 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 5 document exists.
+prototype or Phase 6 document exists.
 
 #### Existing foundation (`Done`)
 
@@ -4224,15 +4222,38 @@ prototype or Phase 5 document exists.
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
 
+#### Phase 6 persistent regional world (`Done`)
+
+- The host exposes `competitive-regional-world-v1` through the non-mutating
+  `get_regional_world` read for `competitive-regional-v1` sessions.
+- The envelope contains stable schematic entities, owned player facilities and
+  processes, actor-visible demand/access/unmet-demand/capacity overlays,
+  source/equivalent labels, navigation targets, replay metadata, and explicit
+  missingness.
+- Public rivals expose identity and public action signals only through the
+  existing one-month observation lag. Private rival operations, facilities,
+  resources, projects, true coordinates, effect queues, and hidden state are
+  excluded by construction and tests.
+- The browser renders the host projection as a selectable schematic map with
+  detail, overlays, and keyboard-reachable links to existing briefing/detail/
+  timeline surfaces. Empty, unsupported, and adapter-error paths preserve the
+  base presentation and do not submit commands.
+- Phase 6 is documented in
+  [`docs/visual-audio-phase6-regional-world-v0.12.22.md`](docs/visual-audio-phase6-regional-world-v0.12.22.md).
+  Technical/interface-task checks do not establish human comprehension,
+  usability, lived accessibility, learning, engagement, calibration, balance,
+  domain validity, or policy validity.
+
 #### Product contract (`Not Yet Done`)
 
 - Make `competitive-regional-v1` the first target and preserve the executive,
   turn-based perspective. The player allocates attention, resources, workforce,
   payer and policy posture, commitments, and long-term strategy rather than
   managing individual patients or workers.
-- Present a persistent, navigable regional world whose facilities, systems,
+- Extend the implemented schematic regional world so facilities, systems,
   rivals, demand zones, workforce markets, payer/policy influence, projects,
-  commitments, and delayed processes have visible institutional homes.
+  commitments, and delayed processes have visible institutional homes without
+  implying unsupported geography or private knowledge.
 - Reduce command-entry and onboarding friction without simplifying simulation
   rules. Contextual graphical actions must preview and submit the same canonical
   commands accepted by CLI/MCP and must never promise stochastic outcomes.
@@ -4366,14 +4387,15 @@ prototype or Phase 5 document exists.
 | 3. Contextual action submission | Action forms/batch builder, command preview, validation/retry, one graphical competitive month | Generated commands are equivalent, costs/delays are visible, rejection is non-mutating, and no stochastic certainty is implied |
 | 4. Resolution and causal feedback (`Done`) | One committed month, typed sequencing, operating breakdown, source-labeled direct effects, skip/pause/review/historical read | Principal drivers are traceable to committed effects; textual results are immediate; historical reads are non-mutating |
 | 5. Foundational audio (`Done`) | Four music states, bounded UI/event cues, controls, generated-audio registry/credits, deterministic cue mapping | Audio leaves state/hash/replay unchanged, muted play is complete, music leaks no hidden state, provenance is complete, repeated cues are restrained |
-| 6. Persistent regional world | Expanded map, demand/access overlays, identities, public projects/rival actions, navigation, relationships, timeline/assets | Map supports decisions/explanations, respects rival observation lag, and decorative complexity does not obscure state |
+| 6. Persistent regional world (`Done`) | Actor-visible schematic map, demand/access overlays, identities, lagged public rival signals, navigation, owned facilities/processes, and explicit missingness | Host/browser contracts pass; map supports decisions/explanations, respects rival observation lag, and decorative complexity does not obscure state |
 | 7. Campaign coverage | Tutorial-oriented stabilization flow and affiliation partner/fit/commitment/review/integration flow with shared plus campaign-specific visuals/audio | Components are reused without flattening campaign semantics or requiring GUI-driven simulation changes |
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 
-Do not start broad map or asset production before Phase 6 closes. Do not
-extend presentation primitives to stabilization or affiliation before the
-competitive slice demonstrates their semantics. A phase may move into
+Phase 6 is closed only for the bounded schematic slice; do not start broad map
+or asset production merely because that gate exists. Do not extend presentation
+primitives to stabilization or affiliation before the competitive slice
+demonstrates their semantics. A phase may move into
 `Present` only with its own concise `Done`, `Not Yet Done`, verification, and
 non-goal fields.
 
@@ -4518,8 +4540,7 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 6 persistent regional world is the next candidate. It must
-   support decisions and explanations, preserve observation lag, and keep
-   decorative complexity subordinate to visible state.
-2. Phases 7–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 7 campaign coverage is the next candidate. It must reuse
+   shared primitives without flattening stabilization or affiliation semantics.
+2. Phases 8–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

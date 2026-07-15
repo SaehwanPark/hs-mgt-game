@@ -30,6 +30,7 @@ and submits only an unchanged batch that the host marked valid:
 window.HsMgtGameActionAdapter = {
   sessionId: "session-1",
   async getPresentation(sessionId) {},
+  async getRegionalWorld(sessionId) {},
   async getActionCatalog(sessionId) {},
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
@@ -53,6 +54,12 @@ historical-turn read are local presentation controls; `getResolution` never
 advances the session. Text remains in the DOM when paused or reduced motion is
 enabled.
 
+When supplied, `getRegionalWorld(sessionId)` returns
+`schema_version: "competitive-regional-world-v1"`. The page renders a
+schematic identity map, visible demand/access/process overlays, owned facility
+detail, and lagged public rival signals. Map selection and navigation are local
+presentation state; rival private detail remains explicitly unavailable.
+
 Phase 2/3/4/5 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
@@ -71,6 +78,9 @@ Phase 2/3/4/5 review checklist:
   confirm text remains complete and no session transition occurs.
 - enable optional audio, exercise independent channels, mute, focus loss, and
   reduced notifications; confirm the same visual/text result remains complete.
+- load the regional-world projection, select each public/owned entity, switch
+  overlays, follow navigation links, and confirm public-signal lag and missing
+  private detail remain labeled.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -78,6 +88,8 @@ lived-accessibility evidence.
 Asset audit: zero downloaded assets, external fonts, network calls, or image/audio
 files. CSS, HTML, JavaScript, and generated Web Audio recipes are the complete
 surface. The typed projection contains no true-world state, resolved stochastic
-inputs, private rival actions, or client-side cost formula. Phase 5 audio is
+inputs, private rival actions, or client-side cost formula. Phase 5 audio and
+Phase 6 regional-world projection are
 optional, visible-only, registry-recorded, and presentation-only; richer causal
-overlays, recorded assets, and campaign expansion remain later phases.
+overlays, recorded assets, true geography, and campaign expansion remain later
+phases.

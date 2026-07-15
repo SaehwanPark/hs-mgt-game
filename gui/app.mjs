@@ -191,6 +191,7 @@ const demoEnvelope = {
 };
 
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
+const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 let selectedEntityId = null;
 
 function appendText(parent, text) {
@@ -364,6 +365,166 @@ function renderSelectedEntity(entities, root) {
   }
   if (!entity.facilities?.length) emptyState(facilities, "No visible facility detail available.");
   detail.append(heading, summary, metrics, facilitiesHeading, facilities);
+  if (entity.processes || entity.missing) {
+    const processHeading = document.createElement("h3");
+    processHeading.textContent = "Visible processes";
+    const processes = document.createElement("ul");
+    processes.className = "facility-list";
+    for (const process of entity.processes ?? []) {
+      const item = document.createElement("li");
+      item.className = "facility-card";
+      const title = document.createElement("strong");
+      title.textContent = String(process.label ?? "Visible process");
+      const processDetail = document.createElement("p");
+      processDetail.textContent = String(process.detail ?? "No visible process detail.");
+      item.append(title, processDetail);
+      appendSource(item, process.source);
+      processes.append(item);
+    }
+    if (!entity.processes?.length) emptyState(processes, "No visible process reported.");
+    detail.append(processHeading, processes);
+  }
+  if (entity.missing?.length) {
+    const missingHeading = document.createElement("h3");
+    missingHeading.textContent = "Unavailable detail";
+    const missing = document.createElement("ul");
+    missing.className = "facility-list";
+    for (const entry of entity.missing) {
+      const item = document.createElement("li");
+      item.className = "facility-card";
+      const title = document.createElement("strong");
+      title.textContent = String(entry.label ?? "Unavailable detail");
+      const missingDetail = document.createElement("p");
+      missingDetail.textContent = String(entry.detail ?? "Detail is unavailable.");
+      item.append(title, missingDetail);
+      appendSource(item, entry.source);
+      missing.append(item);
+    }
+    detail.append(missingHeading, missing);
+  }
+}
+
+function regionalEntitiesToFixture(envelope) {
+  const missingByEntity = new Map();
+  for (const missing of envelope.missing ?? []) {
+    const entityId = String(missing.id ?? "").replace(/-(?:private-detail|public-signal|process)$/, "");
+    if (!entityId) continue;
+    const entries = missingByEntity.get(entityId) ?? [];
+    entries.push(missing);
+    missingByEntity.set(entityId, entries);
+  }
+  return (envelope.entities ?? []).map((entity) => ({
+    id: entity.id,
+    icon: entity.visibility === "owned" ? "▣" : "◇",
+    type: entity.role,
+    name: entity.name,
+    status: entity.status,
+    status_label: entity.status_label,
+    summary: entity.visibility === "owned"
+      ? `Owned detail · ${entity.source}`
+      : "Public identity only; private rival detail remains unavailable.",
+    public_signal: entity.signals?.length
+      ? entity.signals.map((signal) => `${signal.text} (observed month ${signal.observed_month})`).join(" · ")
+      : entity.visibility === "owned"
+        ? "Player-owned facilities and processes are shown in selected detail."
+        : "No public signal reported for the observed month.",
+    metrics: [],
+    facilities: (entity.facilities ?? []).map((facility) => ({
+      icon: "▥",
+      name: facility.name,
+      kind: facility.kind,
+      status: entity.status,
+      status_label: entity.status_label,
+      detail: (facility.metrics ?? []).map((metric) => `${metric.label}: ${metric.value}`).join(" · ") || "No visible facility metric.",
+    })),
+    processes: (entity.processes ?? []).map((process) => ({
+      label: process.label,
+      detail: process.detail,
+      source: process.source,
+    })),
+    missing: missingByEntity.get(entity.id) ?? [],
+  }));
+}
+
+function renderRegionalOverlays(overlays, root) {
+  const list = root.querySelector("#regional-overlay-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const overlay of overlays ?? []) {
+    const item = document.createElement("li");
+    const heading = document.createElement("strong");
+    heading.textContent = String(overlay.label ?? "Visible overlay");
+    const value = document.createElement("span");
+    value.textContent = `${overlay.value ?? "Unavailable"} ${overlay.unit ?? ""}`.trim();
+    const equivalent = document.createElement("p");
+    equivalent.textContent = String(overlay.equivalent ?? "Visible source-linked overlay.");
+    item.append(heading, value, equivalent);
+    appendSource(item, overlay.source);
+    list.append(item);
+  }
+  if (!overlays?.length) emptyState(list, "No visible regional overlays available.");
+}
+
+function renderRegionalNavigation(navigation, root) {
+  const nav = root.querySelector("#regional-navigation");
+  if (!nav) return;
+  nav.replaceChildren();
+  for (const entry of navigation ?? []) {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = String(entry.label ?? entry.id ?? "View");
+    button.addEventListener("click", () => {
+      const target = root.querySelector(entry.target);
+      target?.scrollIntoView?.({ behavior: "smooth", block: "start" });
+      target?.focus?.({ preventScroll: true });
+    });
+    nav.append(button);
+  }
+  if (!navigation?.length) emptyState(nav, "Regional navigation is unavailable.");
+}
+
+export function renderRegionalWorld(envelope, root = document) {
+  if (!envelope || envelope.schema_version !== REGIONAL_WORLD_SCHEMA) {
+    renderRegionalOverlays([], root);
+    renderRegionalNavigation([], root);
+    return { ok: false, code: envelope ? "unsupported_regional_world_schema" : "empty_regional_world" };
+  }
+  const entities = regionalEntitiesToFixture(envelope);
+  if (!entities.some((entity) => entity.id === selectedEntityId)) selectedEntityId = entities[0]?.id;
+  renderMap(entities, root);
+  renderSelectedEntity(entities, root);
+  renderRegionalOverlays(envelope.overlays, root);
+  renderRegionalNavigation(envelope.navigation, root);
+  return { ok: true, envelope };
+}
+
+export function createRegionalWorldClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document } = {}) {
+  let currentEnvelope = null;
+
+  async function load(sessionId = adapter?.sessionId) {
+    if (!adapter || typeof adapter.getRegionalWorld !== "function") {
+      return { ok: false, code: "regional_world_adapter_missing" };
+    }
+    try {
+      const envelope = await adapter.getRegionalWorld(sessionId);
+      const result = renderRegionalWorld(envelope, root);
+      currentEnvelope = result.ok ? envelope : null;
+      if (!result.ok) {
+        const state = root.querySelector("#presentation-state");
+        if (state) state.textContent = "Regional world presentation is unavailable; base presentation remains active.";
+      }
+      return result;
+    } catch (error) {
+      currentEnvelope = null;
+      renderRegionalOverlays([], root);
+      renderRegionalNavigation([], root);
+      const state = root.querySelector("#presentation-state");
+      if (state) state.textContent = `Regional world adapter error: ${error instanceof Error ? error.message : String(error)}`;
+      return { ok: false, code: "regional_world_adapter_error" };
+    }
+  }
+
+  return { load, get envelope() { return currentEnvelope; } };
 }
 
 function renderActions(actions, root) {
@@ -645,6 +806,7 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document } = {}) {
   let currentEnvelope = null;
   const audioClient = createAudioClient({ root });
+  const regionalWorldClient = createRegionalWorldClient({ adapter, root });
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
@@ -675,6 +837,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         return { ok: false, code: "empty_presentation" };
       }
       const result = render(envelope);
+      if (result.ok) await regionalWorldClient.load(sessionId);
       if (result.ok) audioClient.playCue("ui.report-received");
       return result;
     } catch (error) {
@@ -684,7 +847,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     }
   }
 
-  return { load, render, renderStaticFixture, audio: audioClient, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, audio: audioClient, regionalWorld: regionalWorldClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -836,6 +999,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let sessionId = adapter?.sessionId;
   const resolutionClient = createResolutionClient({ adapter, root });
   const audioClient = createAudioClient({ root });
+  const regionalWorldClient = createRegionalWorldClient({ adapter, root });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -937,6 +1101,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         } else {
           audioClient.setMusicFromVisible(presentation);
           audioClient.playCue("ui.report-received");
+          await regionalWorldClient.load(sessionId);
         }
       } catch (error) {
         renderEnvelope(response, root);
@@ -970,6 +1135,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         const rendered = renderReadOnlyEnvelope(presentation, root);
         if (!rendered.ok) return rendered;
         audioClient.setMusicFromVisible(presentation);
+        await regionalWorldClient.load(sessionId);
       }
       catalog = await adapter.getActionCatalog(sessionId);
       if (!catalog || catalog.schema_version !== "competitive-actions-v1") {
@@ -1004,7 +1170,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
-  return { load, validate: validateDraft, submit, audio: audioClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, audio: audioClient, regionalWorld: regionalWorldClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -1333,6 +1499,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       createAudioClient,
       createActionClient,
+      createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
       createThinClient,
@@ -1340,6 +1507,7 @@ if (typeof document !== "undefined") {
       renderPresentation,
       renderReadOnlyEnvelope,
       renderResolution,
+      renderRegionalWorld,
       validateCommand,
       validateReadOnlyEnvelope,
     };
@@ -1351,6 +1519,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       createAudioClient,
       createActionClient,
+      createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
       createThinClient,
@@ -1358,6 +1527,7 @@ if (typeof document !== "undefined") {
       renderPresentation,
       renderReadOnlyEnvelope,
       renderResolution,
+      renderRegionalWorld,
       validateCommand,
       validateReadOnlyEnvelope,
     };
