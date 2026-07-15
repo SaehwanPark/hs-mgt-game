@@ -4,6 +4,30 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.17] - 2026-07-15
+
+### Added
+- Implemented the Phase 1 static executive desktop in `gui/` with responsive
+  header metrics, briefing, regional system cards, facility detail, contextual
+  action previews, pending processes, monthly result, history, and debrief.
+- Added a display-only actor-visible presentation fixture, entity selection,
+  status/icon language, responsive design tokens, and a Phase 1 review checklist.
+
+### Changed
+- Preserved the existing MCP-shaped fallback and `HsMgtGameAdapter.submitTurn`
+  authority boundary; fixture selection does not advance simulation or create
+  GUI-only commands.
+- Promoted Phase 2 typed live read-only integration as the next gated Future
+  item and bumped package/public metadata to `0.12.17`.
+
+### Evidence Limits
+- Static interface checks are technical and interface-task proxies. They do not
+  establish human usability, engagement, lived accessibility, learning,
+  classroom effectiveness, domain-expert validity, calibration, balance, or
+  policy validity.
+- No Rust, MCP, scenario, replay, ruleset, asset, audio-playback, network, or
+  deployment behavior changed.
+
 ## [0.12.16] - 2026-07-14
 
 ### Added

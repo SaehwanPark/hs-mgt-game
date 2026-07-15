@@ -4048,53 +4048,58 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 0 product and architecture alignment
-  Status: Complete; Phase 1 is the next gated candidate
-  Started: 2026-07-14
-  Branch: feat/visual-audio-phase0-alignment-v0.12.16
+- Feature: Visual/audio Phase 1 static executive desktop
+  Status: Complete; Phase 2 is the next gated candidate
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase1-static-desktop-v0.12.17
 
   Summary:
-  Phase 0 closes the product and architecture alignment gate for one
-  `competitive-regional-v1` month. It accepts a browser-native thin client over
-  the existing host/MCP authority boundary and records the first-slice
-  experience, actor-visible source inventory, wireframe, audio catalogs, asset
-  policy, and hidden-state exclusions.
+  Phase 1 validates the accepted information architecture with a responsive,
+  fixture-driven executive desktop for one actor-visible
+  `competitive-regional-v1` month. It keeps the browser non-authoritative and
+  makes finance, workforce, capacity, access, public rival signals, pending
+  processes, and committed monthly results inspectable without raw JSON or CLI
+  output.
 
   Done:
-  - Added `docs/visual-audio-phase0-alignment-v0.12.16.md` with the approved
-    interface boundary, first-month contract, DTO inventory, wireframe, visible
-    audio mappings, asset policy, verification gate, and non-goals.
-  - Accepted ADR-0011 for the browser-native HTML/CSS/ES-module/SVG stack and
-    host-authoritative presentation boundary.
-  - Added a dependency-free Phase 0 contract test and verified that no Rust
-    production, scenario, replay, ruleset, or asset files changed.
-  - Bumped package and public metadata to `0.12.16`.
+  - Extended `gui/` with a semantic responsive desktop containing the executive
+    header, briefing, regional system cards, selected facility detail,
+    contextual action previews, pending timeline, monthly result, history, and
+    debrief.
+  - Added the display-only `presentation_fixture` and non-authoritative entity
+    selection while preserving live envelope fallback and adapter submission.
+  - Added `docs/visual-audio-phase1-static-desktop-v0.12.17.md`, GUI review
+    checklist, responsive/status tokens, and static contract tests.
+  - Verified that no Rust production, MCP, scenario, replay, ruleset, asset,
+    audio, or network behavior changed.
+  - Bumped package and public metadata to `0.12.17`.
 
   Not Yet Done:
-  - Promote Phase 1 only for a static injected-data executive desktop after the
-    Phase 0 artifact and contract test remain stable.
+  - Promote Phase 2 only for typed live/recorded actor-visible adapter
+    integration after a concrete structured-projection need is demonstrated.
 
   Deferred / Non-Goals:
-  - No typed DTO implementation, live adapter, action forms, animation, audio
-    playback, asset acquisition, packaging, deployment, or human evaluation.
-  - Phases 2–9 remain sequentially gated by their own evidence and acceptance
+  - No live read-only DTOs, command validation forms, resolution animation,
+    audio playback, assets, replay visualization, campaign expansion, packaging,
+    deployment, or human evaluation.
+  - Phases 3–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - `tests/test_visual_audio_phase0.py` checks all Phase 0 deliverables,
-    command-family bounds, visible-only audio, technology choice, and later
-    phase gates.
-  - Release metadata, documentation, formatting, clippy, and the full Rust
-    suite pass.
+  - GUI contracts pass for the existing adapter and Phase 1 desktop; JavaScript
+    syntax, responsive/status markers, visible-source fields, and no-network
+    checks pass.
+  - Release metadata, documentation, formatting, clippy, and the full Python
+    and Rust suites pass.
 
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 0 complete; Phase 1 is the next ranked candidate. No later feature
+Status: Phase 1 complete; Phase 2 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-proof or Phase 0 alignment document exists.
+prototype or Phase 1 document exists.
 
 #### Existing foundation (`Done`)
 
@@ -4116,6 +4121,21 @@ proof or Phase 0 alignment document exists.
   client and keeps optional future audio playback outside the simulation core.
 - Phase 0 acceptance does not promote structured DTOs, live actions, animation,
   audio playback, assets, or later campaigns.
+
+#### Phase 1 static executive desktop (`Done`)
+
+- `gui/` now renders a responsive fixture-driven executive desktop with header
+  metrics, briefing, regional system cards, selected detail/facilities,
+  contextual action previews, pending processes, monthly result, history, and
+  debrief.
+- Entity-card selection changes presentation detail only. Existing
+  `HsMgtGameAdapter.submitTurn` remains the only non-empty command submission
+  path, and live envelopes without the fixture still render through fallback
+  contracts.
+- The fixture and tests expose finance, workforce, capacity, access, quality,
+  and public rival information while labeling private activity unavailable.
+- Phase 1 remains a static information-architecture prototype; it does not
+  establish live DTO parity, human usability, or polished visual design.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4411,9 +4431,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 1 static executive desktop is the next candidate. It must
-   render injected actor-visible fixtures in the accepted browser-native stack,
-   preserve the wireframe/status language, and pass hidden-state and viewport
-   checks before promotion.
-2. Phases 2–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 2 live read-only integration is the next candidate. It must
+   prove a typed live/recorded adapter need, preserve visible-fact parity, show
+   explicit missingness, and keep formulas and authority in the host boundary.
+2. Phases 3–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.
