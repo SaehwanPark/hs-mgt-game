@@ -1,4 +1,4 @@
-# Domain QA — Visual and Audio Phase 9 AI-Agent Evaluation and Revision v0.12.25
+# Domain QA — Phase 10 accessibility and visual-language hardening v0.12.26
 
 ## Status
 
@@ -6,61 +6,54 @@ pass
 
 ## Reviewed Inputs
 
-- User request and `_workspace/00_input/request-summary.md`.
-- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
-  `_workspace/28_implementation_plan_visual_audio_phase9.md`.
-- `docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`, the Phase 8
-  capture/diagnostic contract, and the visual/audio proposal's Phase 9 gate.
-- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `ARCHITECTURE.md`, and the harness team spec.
-- `scripts/analyze_gui_playtests.py`, the five matrix fixtures,
-  `tests/test_gui_playtest_analysis.py`, and the existing Phase 8 tests.
+- User objective: implement the planned SPEC/proposal items through the
+  design → implementation → one-review → PR/CI/merge loop.
+- `SPEC.md` Phase 10 Present entry and remaining visual/audio Future contract.
+- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
+  `_workspace/02_mechanism_design.md`, and the Phase 10 implementation plan.
+- `gui/index.html`, `gui/app.mjs`, focused accessibility tests, and existing
+  GUI contracts.
+- `docs/visual-audio-upgrade-proposal.md`, canonical project docs, and the
+  harness team spec.
 
 ## Findings
 
-- The analyzer consumes only the validated Phase 8 artifact boundary and emits
-  no raw event payloads, true/private state, resolved inputs, effect queues,
-  model reasoning, strategy score, or simulation mutation.
-- Campaign, role, task, seed, interface, and accessibility dimensions remain
-  explicit. Stabilization, competitive, and affiliation traces are summarized
-  together only as declared coverage; no incompatible institutional meanings
-  are collapsed into one outcome measure.
-- Fixed P0/P1/P2 findings are operational triage labels. The product decision
-  log identifies the context-aware rejection/history revision, retains a valid
-  evidence-gap recommendation, and defers UI/runtime changes from synthetic
-  fixtures.
-- Rejected commands are correctly distinguished from accepted commands lacking
-  committed history. This preserves rejection atomicity and avoids interpreting
-  an expected unchanged history as a failed user task.
-- No actors, utilities, social-welfare scores, policy mechanisms, transition
-  formulas, stochastic inputs, replay semantics, or educational debrief outputs
-  were changed. The analyzer cannot infer causality, strategy quality, or
-  learning from a trace.
+- The slice is presentation-only and addresses an explicit remaining contract:
+  keyboard access, readable scaling, non-color status language, and visible
+  written equivalents.
+- No new actor, authority, policy, strategic interaction, game command, or
+  outcome category is introduced. Existing host/fixture status categories are
+  preserved and rendered with text plus a symbol/pattern cue.
+- Local settings are clearly distinct from actor-visible observations and do
+  not reach commands, host requests, stochastic resolution, history, hashes,
+  replay, audio-source classification, or debrief output.
+- The whole-desktop live region was removed in favor of targeted status/live
+  nodes, reducing presentation noise without changing the information supplied
+  by the host.
+- The cue-equivalent preference is scoped to the optional audio explanation;
+  essential written result, observation, history, resolution, and debrief text
+  remains present.
+- The slice does not pretend to prove human accessibility, learning, policy
+  validity, or domain expertise. Those limits are documented.
 
 ## Required Fixes
 
-None identified by domain QA. The user-required single code-review pass is
-recorded separately and is not duplicated by this domain review.
+None. General code review remains a separate gate.
 
 ## Residual Risks
 
-- The five-run matrix is synthetic protocol coverage, not a record of real
-  browser/agent sessions; its P2 finding is an intentional artifact-quality
-  example rather than a product usability result.
-- No Chromium, Chrome, or Firefox binary is installed, so browser layout,
-  focus, keyboard, audio-device, and reduced-motion behavior remain untested.
-- Future real-agent traces may reveal interpretation mismatches that cannot be
-  resolved by aggregate counts alone; those require a new bounded decision.
-- Human usability, lived accessibility, learning, engagement, classroom
-  effectiveness, calibration, balance, policy/legal validity, and
-  domain-expert validity remain unclaimed.
+- Static checks cannot verify screen-reader announcements, actual contrast,
+  browser zoom behavior, viewport overflow, or lived cognitive accessibility.
+- The status legend's descriptions remain presentation language, not empirical
+  clinical or policy interpretation.
+- Asset governance and a real campaign launch/session-creation experience remain
+  separate SPEC items; this slice does not imply they are complete.
 
 ## Verification Evidence
 
-- Focused Phase 9 analysis plus Phase 8 GUI readiness tests: 11 passed.
-- Full Python discovery: 281 tests passed.
-- Serial Rust suite: 322 unit tests plus 13 integration/golden/scenario tests
-  passed; doc-tests passed with zero tests.
-- `cargo fmt -- --check`, `cargo clippy --all-targets -- -D warnings`, Node
-  syntax checks, matrix diagnostic repeated-output comparison, release
-  metadata, and `git diff --check` passed at `0.12.25`.
+- Focused Phase 10/accessibility, existing GUI, and release tests: 56 passed.
+- Full Python suite: 288 passed.
+- Rust: 322 unit tests, 3 competitive-AI tests, 2 golden-competitive tests, 1
+  golden-stabilization test, 7 scenario tests, and 0 doc-test failures passed.
+- `cargo fmt -- --check`, `cargo clippy --all-targets -- -D warnings`,
+  `node --check gui/app.mjs`, release metadata, and `git diff --check` passed.

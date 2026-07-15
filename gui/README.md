@@ -1,6 +1,6 @@
-# GUI executive desktop, campaign coverage, AI-testplay readiness, contextual action builder, and optional audio
+# GUI executive desktop, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, and optional audio
 
-This is a dependency-free Phase 2/3/4/5/6/7/8 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7/8/10 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -111,7 +111,7 @@ The analysis preserves campaign/role/task/seed/accessibility distinctions and
 emits only deterministic evidence-gap/recovery hypotheses plus explicit limits;
 it never changes the GUI, simulation, or host history.
 
-Phase 2/3/4/5/6/7/8 review checklist:
+Phase 2/3/4/5/6/7/8/10 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -142,6 +142,14 @@ Phase 2/3/4/5/6/7/8 review checklist:
   and verify semantic snapshots contain only allowlisted visible controls.
 - run the deterministic diagnostic on the capture twice and confirm failure
   classes and evidence lanes are stable.
+- use the skip link or presentation navigation to reach briefing, actions,
+  resolution, and debrief without pointer input;
+- switch Standard/Large text size and confirm the local setting is reflected
+  without changing host commands or session data;
+- open the status-language legend and confirm each status has text plus a
+  non-color symbol/pattern cue;
+- hide optional cue explanations and confirm written results, observations,
+  history, resolution, and debrief remain visible.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -153,5 +161,7 @@ inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase
 regional-world projection, and Phase 7 campaign coverage are optional,
 visible-only, registry-recorded, and presentation-only; Phase 8 capture and
 diagnostics plus Phase 9 comparison are optional, allowlisted, and
-presentation/test evidence only. Richer causal overlays, recorded assets, true
-geography, and broader campaign expansion require a new proposal.
+presentation/test evidence only. Phase 10 accessibility behavior is local
+presentation state and does not establish human accessibility. Richer causal
+overlays, recorded assets, true geography, and broader campaign expansion
+require a new bounded proposal.

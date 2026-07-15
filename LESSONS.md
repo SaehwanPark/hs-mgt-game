@@ -1542,3 +1542,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Interpret event absence with its declared failure context, cite
   the source capture, and keep every revision finding as a bounded hypothesis
   rather than a strategy, human, or policy conclusion.
+## Phase 10: Presentation settings must have observable effects
+
+- Context: The visual/audio contract required readable scaling, non-color status
+  language, and written equivalents, but the existing `text_equivalents` setting
+  was persisted without changing presentation behavior.
+- Symptom: A control can appear in a readiness capture while silently doing
+  nothing, weakening both user trust and the evidence contract.
+- Resolution: Keep local settings narrowly scoped and test their DOM/CSS effect;
+  hide only optional cue explanation text while leaving decision, observation,
+  result, history, resolution, and debrief text present.
+- Prevention: For every user-facing setting, pair a stable control with an
+  observable effect, a storage fallback, and a boundary test proving it cannot
+  reach host commands or simulation state.

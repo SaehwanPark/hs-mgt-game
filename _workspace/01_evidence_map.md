@@ -1,79 +1,100 @@
-# Evidence Map — Visual and Audio Phase 9 AI-Agent Evaluation and Revision v0.12.25
+# Evidence Map — Phase 10 accessibility and visual-language hardening v0.12.26
 
 ## Scope
 
-Phase 9 evaluates repeated Phase 8 capture artifacts as technical and
-interface-task evidence. It adds deterministic comparison and decision logging;
-it does not run agents, infer cognition, or alter the game.
+This map supports a presentation-only accessibility slice. It does not support
+claims about lived accessibility or human comprehension. The artifact must make
+the existing actor-visible GUI easier to navigate and interpret while keeping
+host authority, written results, and campaign semantics unchanged.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 9 gate and AI-agent testplay
-  testing strategy.
-- `SPEC.md`, `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `ARCHITECTURE.md`, and the harness team spec.
-- Phase 8 protocol/documentation, `gui/playtest.mjs`,
-  `scripts/diagnose_gui_playtests.py`, the valid capture fixture, and focused
-  tests.
+- `SPEC.md` sections `Visual and motion language`, `Assets, licensing, and
+  accessibility`, `First competitive vertical slice`, and `Verification and AI
+  testplay`.
+- `docs/visual_audio_upgrade_proposal.md` Sections 6.3–6.9, 7, 9, 13, 14,
+  15, and 16.
+- `gui/index.html`: current semantic sections, CSS status classes, controls,
+  responsive breakpoints, and reduced-motion media rule.
+- `gui/app.mjs`: local presentation settings, status rendering, onboarding,
+  and the host-bound read/action/resolution clients.
+- Existing GUI tests and Phase 8 readiness protocol.
+- Canonical project docs and the harness team spec.
 
 ## Mechanisms and Institutions
 
-The mechanism is evidence comparison across interface-task traces, not a new
-health-policy mechanism. Existing campaign institutions, actor authority,
-observations, and debrief meanings remain the source of any policy content
-that appears in a capture. The analyzer treats campaign, role, task, seed,
-interface mode, and accessibility mode as declared context so it does not pool
-stabilization, competitive, and affiliation meanings into one score.
+This slice has no new simulation mechanism or actor. The presentation mechanism
+is a visible information hierarchy:
+
+```text
+first-run player intent
+  -> keyboard landmark/skip navigation
+  -> briefing, action, result, or debrief surface
+  -> explicit status language and source/equivalent text
+```
+
+The executive player remains the only user authority in the client. The host
+continues to own command legality, transition resolution, stochastic inputs,
+history, hashes, replay, and debrief content.
 
 ## Actor Incentives and Information
 
-- The capture producer controls which declared role/task and input artifacts are
-  submitted; the analyzer cannot know whether a role declaration describes a
-  real cognitive profile.
-- Product/contributor reviewers use summaries to decide whether a visible
-  interface hypothesis deserves a bounded revision.
-- The analyzer sees only allowlisted event evidence, failure classes, and
-  declared metadata. It must not recover hidden state, raw payloads, model
-  reasoning, or private rival actions.
-- No actor utility, organizational objective, social welfare, or educational
-  score is computed. A revision priority is an operational triage label only.
+- The player needs to distinguish observed, uncertain, delayed, revised, and
+  committed information without relying on color, animation, or audio.
+- A keyboard-only or enlarged-text user needs a predictable route to the same
+  visible information and controls.
+- The AI-agent test harness needs stable semantic IDs and deterministic setting
+  state; it must not receive hidden model or simulation fields.
+- Contributors need a small presentation contract that can be inspected without
+  a browser driver.
 
 ## Assumptions
 
-- Phase 8 diagnostics is the single capture-schema authority; Phase 9 consumes
-  its result rather than reimplementing hidden browser or simulation rules.
-- Repeated fixture/capture sets can reveal coverage gaps and artifact failures,
-  but not why a person or agent behaved as it did.
-- Stable ordering by declared file/session key is sufficient for reproducible
-  comparison without timestamps or random sampling.
-- A product decision log is the appropriate boundary for hypotheses and
-  deferred revisions because capture analysis must not mutate the product.
+- Native HTML landmarks, focus behavior, CSS custom properties, and local
+  storage are sufficient; no accessibility framework or browser dependency is
+  required.
+- Status labels already supplied by the host or fixture are the authoritative
+  category vocabulary; the client may add shape/pattern cues but may not infer
+  a new severity or outcome.
+- Text scaling is a local presentation preference and must not change layout
+  data, command text, host validation, history, hashes, or audio classification.
+- Cue-equivalent visibility can be scoped to explanatory audio text while the
+  written monthly result, observation, and debrief remain always present.
 
 ## Unresolved Questions
 
-- Which future real-agent traces, if authorized, will supply evidence beyond
-  contract fixtures and static checks?
-- How should repeated interpretation mismatches be investigated without
-  converting them into unsupported human or policy claims?
-- Which product owner should approve a UI revision when a finding is only a
-  technical proxy rather than an observed human problem?
+- Lived screen-reader behavior, contrast perception, cognitive load, and text
+  scaling comfort require people and remain outside this technical slice.
+- Whether the first competitive experience needs a browser launch/session API
+  cannot be answered by the current host contracts and is deferred rather than
+  simulated locally.
+- Exact visual identity, licensed art, and map assets remain separate future
+  governance work; this slice uses existing CSS/generated symbols only.
 
 ## Design Implications
 
-- Add one small standard-library Python analyzer that consumes paths or a
-  directory of Phase 8 captures and calls the existing validator.
-- Report coverage dimensions, per-run counts, failure classes, evidence lanes,
-  deterministic comparisons, and prioritized revision candidates with an
-  explicit hypothesis/limit field.
-- Keep invalid captures visible as data-quality findings and keep valid
-  unresolved human questions separate from technical completion.
-- Check that recommended revisions are deduplicated and sorted by fixed
-  priority/category keys; never auto-edit GUI or simulation files.
+- Add a skip link and a small navigation landmark to make the current briefing,
+  action, resolution, result, and debrief regions reachable in a stable order.
+- Keep `main` out of the live-region boundary; use targeted status/live nodes so
+  a refresh does not make the entire desktop noisy to assistive technology.
+- Add a visible status legend with text, symbol, and pattern language for every
+  supported status category. Status rendering must expose a machine-readable
+  status value and accessible label.
+- Add a persisted standard/large text-scale control and keep reduced motion
+  independent. The setting must apply immediately and degrade safely when
+  storage is unavailable.
+- Make the existing cue-equivalent setting actually control only optional audio
+  explanatory copy; never hide decision results or causal/debrief text.
+- Add focused static tests for the contract because browser automation is out of
+  scope; label these checks as technical proxies.
 
 ## Risks
 
-The main risk is false interpretation: a missing event may reflect a harness
-omission, an adapter failure, or a task mismatch rather than interface friction.
-The analyzer must label these as hypotheses, retain source capture IDs, and
-route decisions to a human/contributor log. It must also fail closed on invalid
-captures and preserve the Phase 8 hidden-field boundary.
+- A global live region can cause excessive announcements; targeted status nodes
+  and a skip path reduce that risk without changing host data.
+- Scaling may expose overflow at small widths; existing responsive breakpoints
+  and focused CSS markers must remain intact.
+- A cue-equivalent preference could accidentally hide essential information;
+  the implementation must scope it to optional audio explanation only.
+- A client-side status mapping could leak or invent hidden state; it must use
+  only the existing status string/category and never derive a score.

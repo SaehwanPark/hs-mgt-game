@@ -4213,7 +4213,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
 ## Present
 
 - Feature: Visual/audio Phase 9 AI-agent evaluation and revision
-  Status: Complete; current visual/audio upgrade sequence is closed
+  Status: Closed; Phase 10 accessibility and visual-language hardening is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase9-agent-evaluation-v0.12.25
 
@@ -4254,14 +4254,59 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     schema-valid versus task-evidence-valid classification were fixed and
     reverified.
 
+- Feature: Visual/audio Phase 10 accessibility and visual-language hardening
+  Status: Implemented and verified; ready for PR/CI/merge handoff
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase10-accessibility-v0.12.26
+
+  Summary:
+  Phase 10 closes a concrete part of the remaining accessibility and visual
+  language contract: keyboard skip/landmark navigation, explicit non-color
+  status language, persistent text scaling, and a functional optional
+  cue-explanation preference. The slice remains presentation-only and does not
+  create a browser-owned simulation or campaign-launch path.
+
+  Done:
+  - Added the Phase 10 request, evidence, mechanism, and implementation-plan
+    handoffs plus a bounded protocol document.
+  - Added keyboard-focus skip navigation, a presentation navigation landmark,
+    stable anchors, targeted live/status semantics, and visible focus styling.
+  - Added the non-color status vocabulary/legend, persistent Standard/Large
+    text scaling, and a functional optional cue-explanation preference while
+    keeping essential written content visible.
+  - Added focused contract tests for stable landmarks, status vocabulary and
+    metadata, settings persistence, targeted live regions, and boundary
+    exclusions.
+  - Completed domain QA and exactly one general code-review pass; the review's
+    skip-focus, unused-variable, and duplicate-rule findings were fixed.
+
+  Not Yet Done:
+  - Complete PR/CI, merge, and the post-merge audit for the Phase 10 behavior.
+
+  Deferred / Non-Goals:
+  - No host/MCP endpoint, simulation, command, transition, stochastic input,
+    history/hash/replay, debrief, campaign, audio-source, asset, or deployment
+    change.
+  - No browser automation, screen-reader certification, contrast study, or
+    human usability/lived-accessibility/learning/engagement claim.
+
+  Verification:
+  - Focused Phase 10/accessibility, existing GUI, and release tests: 56 passed;
+    full Python discovery: 288 passed.
+  - Rust, formatting, clippy, Node syntax, release metadata, and diff checks
+    pass; no Rust simulation or host-boundary tests changed.
+  - Domain QA passed and exactly one general code-review pass completed with
+    all actionable findings fixed and reverified.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 9 is complete; no later visual/audio item is currently specified.
+Status: Phase 10 presentation hardening is implemented; the broader product
+contract and first competitive vertical slice remain incomplete.
 No later feature should be read as implemented merely because the current `gui/`
-prototype or Phase 6–9 documents exist.
+prototype or Phase 6–10 documents exist.
 
 #### Existing foundation (`Done`)
 
@@ -4272,8 +4317,10 @@ prototype or Phase 6–9 documents exist.
   competitive action/resolution, regional-world, and bounded campaign-coverage
   workflows with optional generated audio, plus Phase 8 onboarding, local
   settings/recovery, allowlisted testplay capture/diagnostics, and a
-  non-authoritative repeated-capture analyzer/decision log. It remains a thin
-  client and is not the campaign-complete GUI described here.
+  non-authoritative repeated-capture analyzer/decision log, plus Phase 10
+  keyboard navigation, status language, text scaling, and cue-explanation
+  controls on the active branch. It remains a thin client and is not the
+  campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4570,6 +4617,7 @@ prototype or Phase 6–9 documents exist.
 | 7. Campaign coverage | Tutorial-oriented stabilization flow and affiliation partner/fit/commitment/review/integration flow with shared plus campaign-specific visuals/audio | Components are reused without flattening campaign semantics or requiring GUI-driven simulation changes |
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
+| 10. Accessibility and visual-language hardening | Keyboard landmarks, non-color status vocabulary, local text scaling, and optional cue-explanation control | Static semantic, settings, responsive, reduced-motion, and boundary checks pass without changing host state or claiming lived access |
 
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
 slice; do not start broad campaign, map, or asset production merely because that
@@ -4718,8 +4766,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. No later visual/audio phase is currently specified. A new item requires a
-   bounded proposal, evidence source, and promotion gate.
+1. Complete and close Phase 10 accessibility/visual-language hardening, then
+   audit the remaining product contract and first competitive vertical slice
+   against the proposal before selecting the next bounded item.
 2. Human usability, lived accessibility, learning, engagement, calibration,
-   balance, policy validity, and domain-expert evaluation remain separately
-   gated Future work.
+  balance, policy validity, and domain-expert evaluation remain separately
+  gated Future work.
