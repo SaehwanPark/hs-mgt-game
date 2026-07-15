@@ -1,65 +1,70 @@
-# Request Summary — Phase 10 accessibility and visual-language hardening v0.12.26
+# Request Summary — Visual/audio Phase 11 first-session launch/load v0.12.27
+
+## User request
+
+Continue implementing the planned items in `SPEC.md` and
+`docs/visual_audio_upgrade_proposal.md` through the repository workflow:
+design the next bounded slice, implement it, perform exactly one general code
+review, hand it off through a PR, merge `main`, and re-audit the remaining
+SPEC queue.
+
+## Current context
+
+- Phase 10 accessibility and visual-language hardening is merged on `main` at
+  `bcef897` as version `0.12.26`.
+- The GUI already renders host-provided competitive presentation, regional
+  world, action, resolution, campaign, audio, settings, and accessibility
+  surfaces.
+- The planned first competitive vertical slice still begins with “Start or
+  load a campaign,” but the GUI assumes an adapter already owns `sessionId`.
+- The existing MCP host already exposes `start_session`, which creates a
+  session without advancing a turn and returns a session envelope.
+
+## Selected bounded slice
+
+Add a visible GUI session-launch boundary for
+`competitive-regional-v1`: choose a seed and difficulty to call an optional
+host adapter `startSession`, or enter an existing session ID to load through
+the current read/action presentation path. The host remains authoritative for
+session creation, scenario validation, observations, commands, transitions,
+history, hashes, replay, and debriefs.
+
+## User/use context
+
+The primary user is a first-time executive player who opens the GUI without a
+preconfigured session ID and needs a truthful path from campaign choice to the
+first actor-visible briefing. Contributors and AI-agent testplay harnesses
+need the same adapter boundary to remain explicit and inspectable.
 
 ## Scope
 
-Implement the next bounded item left explicitly `Not Yet Done` in `SPEC.md`:
-make the existing dependency-free GUI's first-run surface more usable through
-keyboard landmarks and skip navigation, persistent text scaling, explicit
-non-color status language, and a functional cue-equivalent preference. This
-slice is derived from the accessibility, cognitive-accessibility, visual and
-motion, and first-slice requirements in `docs/visual_audio_upgrade_proposal.md`.
-The branch is `feat/visual-audio-phase10-accessibility-v0.12.26` and targets
-version `0.12.26`.
-
-## User and use context
-
-The immediate users are a first-time executive player using a laptop browser,
-an AI-agent test profile exercising semantic controls, and a contributor
-reviewing the presentation boundary without a browser driver. Their job is to
-find the current briefing, understand status language, reach a decision or
-result panel, and keep written information available when audio or motion is
-not useful.
+- Add semantic launch/load controls and status/recovery copy.
+- Add the smallest browser adapter contract that maps to existing
+  `start_session` inputs and the existing `getPresentation`/action reads.
+- Replace the active adapter session ID after a successful start/load.
+- Record only the existing visible session-loaded event after a successful
+  presentation read.
+- Add focused tests for start/load calls, malformed responses, failed starts,
+  no-transition behavior, and session replacement.
+- Bump version to `0.12.27` and update SPEC/design/architecture/handoff docs.
 
 ## Non-goals
 
-- No new host/MCP endpoint, browser automation, network call, dependency,
-  screenshot, asset download, or deployment convention.
-- No simulation, command legality, transition, stochastic input, history/hash,
-  replay, debrief, campaign, or audio-source semantics change.
-- No claim of human usability, lived accessibility, learning, engagement,
-  calibration, balance, or policy validity; static and Node checks remain
-  technical proxies.
-- No local GUI simulation or fake campaign-start flow.
-- Exactly one general code-review pass is required for this PR-equivalent
-  change, overriding the generic workflow's three-pass default.
+- No Rust simulation or MCP schema change.
+- No new campaign, scenario authoring, save persistence, auth, transport,
+  network, browser automation, asset, audio-source, command, transition,
+  stochastic, history/hash/replay, or debrief behavior.
+- No local browser-owned session state or automatic first-month action.
+- No claim that a launch flow establishes human usability or learning.
 
-## Sources
+## Branch and workflow constraint
 
-- `SPEC.md`: visual-language, presentation-boundary, assets/accessibility,
-  first-vertical-slice, and verification requirements still marked incomplete.
-- `docs/visual_audio_upgrade_proposal.md`: Sections 6, 7, 9, 13, 14, 15, and
-  16.
-- `gui/index.html`, `gui/app.mjs`, `gui/audio.mjs`, `gui/playtest.mjs`.
-- Existing GUI contract tests and `docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`.
-- `docs/harness/health-policy-strategy-game/team-spec.md` and canonical project
-  docs.
-
-## Expected files
-
-- `_workspace/01_evidence_map.md`
-- `_workspace/02_mechanism_design.md`
-- `_workspace/03_domain_qa.md`
-- `_workspace/29_implementation_plan_visual-audio-phase10-accessibility-v0.12.26.md`
-- `_workspace/final/handoff.md`
-- `gui/index.html`, `gui/app.mjs`, and focused GUI tests
-- `docs/visual-audio-phase10-accessibility-v0.12.26.md`
-- `SPEC.md`, `ARCHITECTURE.md`, `README.md`, `gui/README.md`, `CHANGELOG.md`,
-  `LESSONS.md`, and release metadata.
+- Branch: `feat/visual-audio-phase11-session-launch-v0.12.27`.
+- Exactly one general code-review pass is permitted for this item; fix its
+  actionable findings and do not invoke a second pass.
 
 ## Validation target
 
-Verify the new semantic landmarks, skip link, focus treatment, status legend,
-text-scale persistence, and cue-equivalent behavior with focused static tests
-and Node syntax checks. Then run the full Python and Rust suites, clippy,
-formatting, metadata, and whitespace checks. Domain QA must pass, followed by
-exactly one general code-review pass and the PR/CI/merge workflow.
+Focused GUI/session-launch tests, full Python tests, Rust tests, formatting,
+Clippy, Node syntax, release metadata, and diff checks must pass before PR
+handoff. CI must pass before squash-merging `main`.

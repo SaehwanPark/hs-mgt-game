@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.27] - 2026-07-15
+
+- Added a host-authoritative GUI launch/load boundary for the first competitive
+  session: fixed campaign selection, seed/difficulty setup, existing session
+  loading, recoverable adapter errors, and typed presentation refresh.
+- Preserved the existing MCP/session envelope, command boundary, simulation,
+  transition, stochastic, history/hash/replay, audio, and debrief behavior.
+- Added Phase 11 protocol/design documentation and focused session-launch
+  contract coverage; launch checks are technical interface proxies only.
+
 All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).

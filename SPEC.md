@@ -4255,7 +4255,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     reverified.
 
 - Feature: Visual/audio Phase 10 accessibility and visual-language hardening
-  Status: Implemented and verified; ready for PR/CI/merge handoff
+  Status: Closed; Phase 11 first-session launch/load is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase10-accessibility-v0.12.26
 
@@ -4281,7 +4281,8 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     skip-focus, unused-variable, and duplicate-rule findings were fixed.
 
   Not Yet Done:
-  - Complete PR/CI, merge, and the post-merge audit for the Phase 10 behavior.
+  - No further Phase 10 implementation is planned; preserve its technical
+    accessibility proxy limits while the next bounded slice proceeds.
 
   Deferred / Non-Goals:
   - No host/MCP endpoint, simulation, command, transition, stochastic input,
@@ -4297,6 +4298,47 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     pass; no Rust simulation or host-boundary tests changed.
   - Domain QA passed and exactly one general code-review pass completed with
     all actionable findings fixed and reverified.
+
+- Feature: Visual/audio Phase 11 first-session launch/load boundary
+  Status: Active; design complete and implementation is pending
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase11-session-launch-v0.12.27
+
+  Summary:
+  Phase 11 closes the first remaining entry-point gap in the planned competitive
+  vertical slice: a first-time executive can start a competitive session with
+  host-supported seed/difficulty inputs or load an existing session ID, then
+  reach the existing actor-visible GUI surfaces. The browser remains a thin
+  client over the existing host session operation.
+
+  Done:
+  - Added the Phase 11 request, evidence map, mechanism design,
+    implementation plan, and protocol document.
+  - Confirmed the existing MCP `start_session` request/envelope is sufficient;
+    no Rust/MCP schema change is planned.
+  - Added accessible start/load controls for the fixed competitive campaign,
+    seed/difficulty validation, existing session loading, recoverable failures,
+    and host-typed presentation refresh for read-only and action clients.
+  - Added focused boundary tests and updated GUI/project documentation and
+    release metadata to `0.12.27`.
+  - Completed domain QA and exactly one general code-review pass; the review's
+    actionable findings were fixed and reverified.
+
+  Not Yet Done:
+  - Complete PR/CI/merge and the post-merge audit; exactly one general code
+    review is complete with its actionable findings fixed.
+
+  Deferred / Non-Goals:
+  - No scenario picker, saved-session persistence, auth, web transport,
+    campaign expansion, auto-action, asset/audio change, or simulation change.
+  - No human usability, accessibility, learning, onboarding, or policy-validity
+    claim follows from technical launch tests.
+
+  Verification:
+  - Focused Phase 11/accessibility/release tests: 17 passed; full Python suite:
+    294 passed.
+  - Rust, formatting, Clippy, Node syntax, release metadata, and diff checks
+    pass; no Rust/MCP behavior changed.
 
 ## Future
 
@@ -4618,6 +4660,7 @@ prototype or Phase 6–10 documents exist.
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 | 10. Accessibility and visual-language hardening | Keyboard landmarks, non-color status vocabulary, local text scaling, and optional cue-explanation control | Static semantic, settings, responsive, reduced-motion, and boundary checks pass without changing host state or claiming lived access |
+| 11. First-session launch/load boundary | Host-authoritative competitive session start/load handoff into the existing first-month presentation | Start/load calls map to the existing host session contract, malformed/failed responses recover, and no transition or local simulation is introduced |
 
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
 slice; do not start broad campaign, map, or asset production merely because that
@@ -4766,9 +4809,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Complete and close Phase 10 accessibility/visual-language hardening, then
-   audit the remaining product contract and first competitive vertical slice
-   against the proposal before selecting the next bounded item.
+1. Complete and close Phase 11 first-session launch/load, then audit the
+   remaining first-month action/resolution/audio/asset contract against the
+   proposal before selecting the next bounded item.
 2. Human usability, lived accessibility, learning, engagement, calibration,
   balance, policy validity, and domain-expert evaluation remain separately
   gated Future work.

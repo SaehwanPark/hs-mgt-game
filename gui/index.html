@@ -275,6 +275,14 @@
       .readiness-controls label { align-items: center; color: var(--muted); display: flex; gap: .35rem; font-size: .8rem; }
       .readiness-controls button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-weight: 750; padding: .5rem .7rem; }
       .readiness-detail { color: var(--muted); font-size: .82rem; margin: .45rem 0 0; }
+      .session-launch { border-top: 1px solid var(--line); display: grid; gap: .55rem; margin-top: var(--space-3); padding-top: var(--space-3); }
+      .session-launch h3 { margin-bottom: 0; }
+      .session-launch-form, .session-load-form { align-items: end; display: flex; flex-wrap: wrap; gap: .55rem .8rem; }
+      .session-launch-form label, .session-load-form label { color: var(--muted); display: grid; font-size: .78rem; gap: .18rem; }
+      .session-launch-form input, .session-launch-form select, .session-load-form input { background: var(--panel); border: 1px solid #b9cbc8; border-radius: .4rem; color: var(--ink); min-width: 8rem; padding: .42rem .5rem; }
+      .session-launch-form button, .session-load-form button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-weight: 750; padding: .5rem .7rem; }
+      .session-launch-form button:disabled, .session-load-form button:disabled { cursor: wait; opacity: .65; }
+      .session-launch-status { color: var(--muted); font-size: .82rem; margin: 0; min-height: 1.3em; }
       .recovery-panel { border-color: var(--amber); }
 
       .entity-heading { align-items: center; justify-content: flex-start; }
@@ -423,6 +431,35 @@
         <p id="onboarding-campaign">Review the visible briefing, then choose a host-shaped decision.</p>
         <div class="readiness-controls">
           <button type="button" id="onboarding-next" data-playtest-event="onboarding_next">Review the current briefing</button>
+        </div>
+        <div class="session-launch" id="session-launch" aria-labelledby="session-launch-heading">
+          <h3 id="session-launch-heading">Start or load a campaign</h3>
+          <form class="session-launch-form" id="session-launch-form">
+            <label for="session-campaign">Campaign
+              <select id="session-campaign">
+                <option value="competitive-regional-v1">Competitive regional market</option>
+              </select>
+            </label>
+            <label for="session-seed">Seed
+              <input id="session-seed" type="number" min="0" step="1" value="42" inputmode="numeric" required />
+            </label>
+            <label for="session-difficulty">Difficulty
+              <select id="session-difficulty">
+                <option value="easy">Easy</option>
+                <option value="normal" selected>Normal</option>
+                <option value="hard">Hard</option>
+                <option value="expert">Expert</option>
+              </select>
+            </label>
+            <button type="submit" id="session-start">Start competitive session</button>
+          </form>
+          <form class="session-load-form" id="session-load-form">
+            <label for="session-id">Existing session ID
+              <input id="session-id" type="text" autocomplete="off" placeholder="session-1" />
+            </label>
+            <button type="button" id="session-load">Load existing session</button>
+          </form>
+          <p class="session-launch-status" id="session-launch-status" role="status" aria-live="polite">A configured host adapter can start or load a session.</p>
         </div>
       </section>
 

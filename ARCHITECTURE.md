@@ -304,6 +304,14 @@ transitions, histories, state hashes, replay artifacts, or debriefs. Targeted
 status/live nodes are used instead of making the whole desktop a live region;
 host-provided status categories remain the source of truth.
 
+Phase 11 adds only a browser-side launch/load handoff for the existing host
+`start_session` operation. The optional adapter accepts the existing campaign,
+seed, and difficulty inputs, returns a host session envelope with `session_id`,
+and then reuses the existing typed presentation/action reads. Failed or
+malformed replacement loads preserve the current view. The launcher never
+submits a command, creates a transition, owns a simulation state, or changes
+history, hashes, replay, audio classification, or debrief output.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -329,6 +337,8 @@ Phase 9 AI-agent evaluation/revision scope is documented in
 [`docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md).
 Phase 10 accessibility and visual-language scope is documented in
 [`docs/visual-audio-phase10-accessibility-v0.12.26.md`](docs/visual-audio-phase10-accessibility-v0.12.26.md).
+Phase 11 first-session launch/load scope is documented in
+[`docs/visual-audio-phase11-session-launch-v0.12.27.md`](docs/visual-audio-phase11-session-launch-v0.12.27.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain
