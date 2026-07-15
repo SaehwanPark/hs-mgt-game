@@ -49,7 +49,7 @@ class GuiLiveReadOnlyTests(unittest.TestCase):
     self.assertIn("getPresentation", client_source)
     self.assertNotIn("submitTurn", client_source)
     self.assertIn("createThinClient", self.app)
-    self.assertIn("not wired into the Phase 3 page", self.readme)
+    self.assertIn("not wired into the Phase 3/4 page", self.readme)
 
   def test_rust_projection_and_tool_are_explicitly_read_only(self):
     for marker in (

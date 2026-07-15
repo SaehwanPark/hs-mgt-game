@@ -1,70 +1,77 @@
-# Evidence Map — Visual and Audio Phase 3 Contextual Action Submission v0.12.19
+# Evidence Map — Visual and Audio Phase 4 Resolution/Causal Feedback v0.12.20
 
 ## Scope
 
-Phase 3 adds the first graphical decision-to-submit path for one
-`competitive-regional-v1` month. It reuses canonical command parsing,
-validation, costs, and transition submission; it does not resolve or animate a
-month in the browser.
+Phase 4 presents one committed competitive transition as a sequence of visible
+decision, response, process, operating, resource, information, and pending-work
+states. It does not alter how the transition is resolved.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 3 requirements and exit gate.
-- Phase 0 alignment, Phase 1 static desktop, Phase 2 live read-only document,
-  ADR-0011, and merged GUI.
-- `src/cli/competitive_parse.rs`, `src/model/competitive_command.rs`,
-  `src/model/resources.rs`, `src/sim/validate_competitive.rs`,
-  `src/mcp/session.rs`, and existing command/transition tests.
+- `docs/visual_audio_upgrade_proposal.md` Phase 4 and first-vertical-slice
+  requirements.
+- Phase 0 alignment, Phase 1 static desktop, Phase 2 read-only projection, and
+  Phase 3 contextual action contract.
+- `src/model/competitive_history.rs`, `src/model/events.rs`,
+  `src/sim/observe_competitive.rs`, `src/mcp/presentation.rs`, and
+  `src/mcp/session.rs`.
 - README, SPEC, architecture, design principles, and project harness spec.
 
 ## Mechanisms and Institutions
 
-The player drafts institutional commands for workforce, capacity, intelligence,
-payer, policy/pledge, and project decisions. The host supplies the action
-catalog and validates the entire batch against current resources/rules. The
-browser only composes canonical text from host-provided templates and keeps a
-local draft until validation and submission.
+The player is the executive of the human health system. A committed monthly
+transition already contains player/rival responses, process changes, operating
+effects, resource changes, and actor-visible information. Phase 4 gives those
+existing institutional consequences separate presentation homes without adding
+an actor or a new decision rule.
 
 ## Actor Incentives and Information
 
-The player sees selected action parameters, canonical previews, host-derived
-AP/cash/political-capital totals, visible constraints, delays, and uncertainty.
-The player does not see hidden rival actions, resolved stochastic inputs, future
-outcomes, or a client-calculated “best” action. A rejected batch leaves the
-current observation/history/hash untouched.
+The browser may show the player's submitted batch, the host's committed event
+and effect summaries, before/after player-visible operations/resources, updated
+observations, and pending processes. It must not expose true world state,
+unresolved stochastic inputs, private rival actions, or a causal story inferred
+from hidden fields. Replay uses the same actor-visible envelope for the selected
+committed transition.
 
 ## Assumptions
 
-- Existing seven competitive command families are the complete Phase 3 catalog.
-- Host action metadata is descriptive presentation information; validation and
-  costs remain model/host-owned.
-- Draft actions are local and reversible; submit is a single host operation.
-- A successful submit returns the existing committed session envelope; monthly
-  resolution animation and causal explanation remain Phase 4.
+- `CompetitiveTransition.prior`, `next`, `events`, `effects`, and history are
+  sufficient to build the first typed resolution envelope after safe actor-
+  visible projection.
+- `observe_for_human` remains the authoritative projection for decision-time and
+  post-transition observations; no browser snapshot becomes simulation state.
+- A before/after value comparison is presentation logic, not a causal formula.
+- Existing `TransitionSummary` event/effect text is already an accepted player-
+  visible source and can be reused without exposing new private fields.
+- CSS/DOM reveal pacing is sufficient for Phase 4; audio and asset work remain
+  gated to Phase 5.
 
 ## Unresolved Questions
 
-- Which command family should receive the first contextual default for later
-  taskplay without implying an optimal strategy?
-- How should Phase 4 sequence a committed response when a batch has multiple
-  action families and delayed effects?
-- Which action metadata requires domain review before broader campaign support?
+- Which event/effect labels deserve grouping before a later structured causal
+  DTO is justified?
+- How should a later replay browser expose multiple months without making the
+  first one-month surface a general replay editor?
+- Which visible bottleneck cues are understandable to first-time users rather
+  than merely traceable to source strings?
 
 ## Design Implications
 
-- A separate non-mutating validation read is safer than using a rejected submit
-  as a preview and gives the browser recoverable errors.
-- Canonical templates must be host-supplied or derived from the existing parser
-  vocabulary; the browser must not recreate enum lists or numeric bounds.
-- Aggregate costs must be returned by the host using existing command cost
-  methods so the client cannot drift from simulation legality.
-- The UI must distinguish draft, host-validated, submitted, rejected, and
-  committed states; only the last two can reference transition history.
+- Add one versioned `competitive-resolution-v1` read-only contract with safe
+  before/after snapshots, ordered presentation steps, direct committed effects,
+  operating/resource breakdowns, and state-hash metadata.
+- Store no presentation timeline in the simulation history; resolve the
+  selected transition from immutable session history on each read.
+- Keep textual results in the DOM before any animated reveal. Pause and reduced
+  motion must change pacing, not content.
+- Make replay lookup explicit and non-mutating so a later review cannot call
+  `submit_turn` or alter the current session.
 
 ## Risks
 
-The action builder can appear authoritative if it labels a draft as accepted or
-predicts an outcome. Contract tests must require canonical command previews,
-host validation, no local cost formulas, no submit before validation, and
-unchanged state after rejection. Technical task checks do not prove human
-usability, learning, strategic quality, or policy validity.
+The phrase “causal” can overclaim if the UI turns correlated effects or
+before/after differences into an inferred graph. Render only host-attributed
+effects and label simple comparisons as changes, not explanations. A technically
+complete sequence is not evidence of human comprehension, learning, or domain
+validity.

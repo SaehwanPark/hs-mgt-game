@@ -211,6 +211,19 @@
       .draft-action { align-items: center; background: var(--teal-soft); border-radius: .55rem; display: flex; gap: .6rem; justify-content: space-between; padding: .5rem .65rem; }
       .draft-action code { overflow-wrap: anywhere; }
       .draft-action span { display: flex; flex-shrink: 0; gap: .35rem; }
+      .resolution-panel { grid-column: 1 / -1; }
+      .resolution-controls { align-items: center; display: flex; flex-wrap: wrap; gap: .5rem; margin: var(--space-2) 0; }
+      .resolution-controls button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-size: .82rem; font-weight: 750; padding: .5rem .7rem; }
+      .resolution-controls button:nth-child(3) { background: var(--orange); }
+      .resolution-controls label { color: var(--muted); display: flex; gap: .35rem; align-items: center; font-size: .82rem; }
+      .resolution-controls input { border: 1px solid #b9cbc8; border-radius: .45rem; padding: .45rem .55rem; width: 5rem; }
+      .resolution-steps { display: grid; gap: .65rem; list-style: decimal; margin: var(--space-3) 0; padding-left: 1.5rem; }
+      .resolution-step { background: var(--panel); border: 1px solid var(--line); border-radius: .65rem; padding: .7rem .85rem; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+      .resolution-step--active { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal-soft); transform: translateX(.2rem); }
+      .resolution-columns { display: grid; gap: var(--space-3); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .resolution-columns section { background: var(--teal-soft); border-radius: .65rem; padding: .7rem .85rem; }
+      .resolution-columns h3 { font-size: .95rem; margin-top: 0; }
+      .resolution-columns ul { margin: 0; padding-left: 1.1rem; }
       .commands { display: grid; gap: .45rem; list-style: none; margin: var(--space-3) 0 0; padding: 0; }
       .commands li { border-left: 3px solid var(--orange); color: #5b3d28; font-family: ui-monospace, SFMono-Regular, monospace; font-size: .82rem; padding: .35rem .6rem; }
 
@@ -253,6 +266,7 @@
         .action-meta { grid-template-columns: 1fr; }
         .draft-action { align-items: stretch; flex-direction: column; }
         .draft-action span { justify-content: flex-end; }
+        .resolution-columns { grid-template-columns: 1fr; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -340,6 +354,38 @@
         <ul class="result-list" id="result-list"></ul>
       </section>
 
+      <section class="panel resolution-panel" id="resolution-panel" aria-labelledby="resolution-heading" hidden>
+        <div class="panel-heading">
+          <h2 id="resolution-heading">Monthly resolution</h2>
+          <span id="resolution-state" aria-live="polite">No committed resolution loaded.</span>
+        </div>
+        <div class="resolution-controls" aria-label="Resolution presentation controls">
+          <button type="button" id="resolution-play">Play</button>
+          <button type="button" id="resolution-pause">Pause</button>
+          <button type="button" id="resolution-skip">Skip to result</button>
+          <button type="button" id="resolution-review">Review all</button>
+          <label for="resolution-turn">Committed turn
+            <input id="resolution-turn" type="number" min="1" max="24" inputmode="numeric" />
+          </label>
+          <button type="button" id="load-resolution">Load review</button>
+        </div>
+        <ol class="resolution-steps" id="resolution-step-list"></ol>
+        <div class="resolution-columns">
+          <section aria-labelledby="resolution-before-heading">
+            <h3 id="resolution-before-heading">Before decision</h3>
+            <ul id="resolution-before-list"></ul>
+          </section>
+          <section aria-labelledby="resolution-after-heading">
+            <h3 id="resolution-after-heading">After resolution</h3>
+            <ul id="resolution-after-list"></ul>
+          </section>
+          <section aria-labelledby="resolution-effect-heading">
+            <h3 id="resolution-effect-heading">Direct committed effects</h3>
+            <ul id="resolution-effect-list"></ul>
+          </section>
+        </div>
+      </section>
+
       <section class="panel panel--observation" aria-labelledby="observation-heading">
         <div class="panel-heading">
           <h2 id="observation-heading">Current observation</h2>
@@ -366,7 +412,7 @@
     </main>
 
     <footer>
-      Phase 2 read-only viewer: HTML/CSS/JavaScript only. Live or recorded
+      Phase 2/3 viewer and Phase 4 resolution review: HTML/CSS/JavaScript only. Live or recorded
       host data remains authoritative; no external assets, fonts, network calls,
       hidden-state fields, or duplicate simulation state are used here.
     </footer>

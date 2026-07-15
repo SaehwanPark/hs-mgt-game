@@ -9,8 +9,9 @@ use rmcp::{
 
 use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
-  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, HistoryEnvelope,
-  McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetResolutionRequest,
+  HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
+  ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -68,6 +69,17 @@ impl McpGameServer {
     Parameters(request): Parameters<GetActionCatalogRequest>,
   ) -> CallToolResult {
     self.with_store(|store| store.get_action_catalog(request))
+  }
+
+  #[tool(
+    name = "get_resolution",
+    description = "Return a committed competitive-month resolution for the latest or selected turn without advancing the session."
+  )]
+  async fn get_resolution(
+    &self,
+    Parameters(request): Parameters<GetResolutionRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_resolution(request))
   }
 
   #[tool(
@@ -159,7 +171,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, and validate_turn are non-mutating actor-visible reads.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_resolution, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, validate_turn, and get_resolution are non-mutating actor-visible reads.",
       )
   }
 }

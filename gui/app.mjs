@@ -827,6 +827,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let validation = null;
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
+  const resolutionClient = createResolutionClient({ adapter, root });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -906,6 +907,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     validation = null;
     editingIndex = null;
     let refreshMessage = "Committed response received from the host adapter.";
+    if (typeof adapter.getResolution === "function") {
+      const resolution = await resolutionClient.load(response.latest_transition?.turn, sessionId);
+      if (!resolution.ok) refreshMessage += " Resolution presentation was unavailable.";
+    }
     if (typeof adapter.getPresentation === "function") {
       try {
         const presentation = await adapter.getPresentation(sessionId);
@@ -978,6 +983,218 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   return { load, validate: validateDraft, submit, get drafts() { return drafts; } };
+}
+
+function reducedMotion(root) {
+  return Boolean(
+    root.documentElement?.dataset.reducedMotion === "true"
+      || globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches,
+  );
+}
+
+function appendResolutionItems(list, items, emptyMessage) {
+  list.replaceChildren();
+  for (const value of items ?? []) {
+    const item = document.createElement("li");
+    item.textContent = String(value);
+    list.append(item);
+  }
+  if (!items?.length) emptyState(list, emptyMessage);
+}
+
+function snapshotItems(snapshot) {
+  const operations = snapshot?.observation?.operations ?? {};
+  const resources = snapshot?.resources ?? {};
+  return [
+    `Cash: ${resources.cash ?? "—"}`,
+    `Action points: ${resources.action_points ?? "—"}`,
+    `Political capital: ${resources.political_capital ?? "—"}`,
+    `Demand: ${operations.demand ?? "—"}`,
+    `Treated volume: ${operations.treated_volume ?? "—"}`,
+    `Unmet demand: ${operations.unmet_demand ?? "—"}`,
+    `Revenue: ${operations.revenue ?? "—"}`,
+    `Cost: ${operations.cost ?? "—"}`,
+    `Margin: ${operations.margin ?? "—"}`,
+  ];
+}
+
+export function renderResolution(envelope, root = document) {
+  const panel = root.querySelector("#resolution-panel");
+  const status = root.querySelector("#resolution-state");
+  const steps = root.querySelector("#resolution-step-list");
+  const before = root.querySelector("#resolution-before-list");
+  const after = root.querySelector("#resolution-after-list");
+  const effects = root.querySelector("#resolution-effect-list");
+  if (!panel || !status || !steps || !before || !after || !effects) {
+    return { ok: false, code: "resolution_surface_missing" };
+  }
+  panel.hidden = false;
+  steps.replaceChildren();
+  if (!envelope) {
+    status.textContent = "No committed resolution is available.";
+    appendResolutionItems(before, [], "Decision-time snapshot unavailable.");
+    appendResolutionItems(after, [], "Post-resolution snapshot unavailable.");
+    appendResolutionItems(effects, [], "No direct committed effects available.");
+    return { ok: false, code: "empty_resolution" };
+  }
+  for (const step of envelope.steps ?? []) {
+    const item = document.createElement("li");
+    item.className = "resolution-step";
+    item.dataset.stepId = step.id ?? "";
+    const heading = document.createElement("div");
+    heading.className = "timeline-row";
+    const label = document.createElement("strong");
+    label.textContent = String(step.label ?? step.id ?? "Resolution step");
+    heading.append(label);
+    const source = document.createElement("small");
+    source.className = "source";
+    source.textContent = `Source: ${step.source ?? "host resolution"}`;
+    item.append(heading, source);
+    for (const value of step.items ?? []) {
+      const detail = document.createElement("p");
+      detail.textContent = String(value);
+      item.append(detail);
+    }
+    if (!step.items?.length) {
+      const detail = document.createElement("p");
+      detail.className = "empty";
+      detail.textContent = "No additional visible detail.";
+      item.append(detail);
+    }
+    steps.append(item);
+  }
+  if (!envelope.steps?.length) emptyState(steps, "No resolution steps available.");
+  appendResolutionItems(before, snapshotItems(envelope.before), "Decision-time snapshot unavailable.");
+  appendResolutionItems(after, snapshotItems(envelope.after), "Post-resolution snapshot unavailable.");
+  appendResolutionItems(
+    effects,
+    (envelope.effects ?? []).map((effect) => `${effect.text ?? "Effect"} · Source: ${effect.source ?? "host"}`),
+    "No direct committed effects available.",
+  );
+  status.textContent = `Committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`;
+  return { ok: true, envelope };
+}
+
+export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+  let envelope = null;
+  let activeIndex = 0;
+  let paused = true;
+  let timer = null;
+
+  function steps() {
+    return envelope?.steps ?? [];
+  }
+
+  function updateControls() {
+    const items = root.querySelectorAll("#resolution-step-list .resolution-step");
+    items.forEach((item, index) => {
+      const active = index === activeIndex;
+      item.classList.toggle("resolution-step--active", active);
+      if (active) item.setAttribute("aria-current", "step");
+      else item.removeAttribute("aria-current");
+    });
+    const state = root.querySelector("#resolution-state");
+    if (state && envelope) {
+      state.textContent = paused
+        ? `Reviewing committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`
+        : `Playing committed turn ${envelope.turn ?? "—"} · step ${Math.min(activeIndex + 1, steps().length)} of ${steps().length}`;
+    }
+  }
+
+  function stopTimer() {
+    if (timer != null) globalThis.clearTimeout(timer);
+    timer = null;
+  }
+
+  function setStep(index) {
+    activeIndex = Math.max(0, Math.min(index, Math.max(steps().length - 1, 0)));
+    updateControls();
+  }
+
+  function tick() {
+    if (paused || activeIndex >= steps().length - 1) {
+      paused = true;
+      stopTimer();
+      updateControls();
+      return;
+    }
+    setStep(activeIndex + 1);
+    timer = globalThis.setTimeout(tick, 700);
+  }
+
+  function play() {
+    if (!envelope) return { ok: false, code: "resolution_missing" };
+    if (reducedMotion(root)) return skip();
+    paused = false;
+    if (activeIndex >= steps().length - 1) activeIndex = 0;
+    updateControls();
+    stopTimer();
+    timer = globalThis.setTimeout(tick, 700);
+    return { ok: true };
+  }
+
+  function pause() {
+    paused = true;
+    stopTimer();
+    updateControls();
+    return { ok: true };
+  }
+
+  function skip() {
+    paused = true;
+    stopTimer();
+    setStep(Math.max(steps().length - 1, 0));
+    return { ok: true };
+  }
+
+  function review() {
+    paused = true;
+    stopTimer();
+    setStep(0);
+    const state = root.querySelector("#resolution-state");
+    if (state && envelope) state.textContent = "Review mode: all committed resolution text remains available.";
+    return { ok: true };
+  }
+
+  function render(nextEnvelope) {
+    envelope = nextEnvelope;
+    activeIndex = 0;
+    paused = true;
+    stopTimer();
+    const result = renderResolution(envelope, root);
+    updateControls();
+    return result;
+  }
+
+  async function load(turn, sessionId = adapter?.sessionId) {
+    if (!adapter || typeof adapter.getResolution !== "function") {
+      return { ok: false, code: "resolution_adapter_missing" };
+    }
+    try {
+      const nextEnvelope = await adapter.getResolution(sessionId, turn ?? null);
+      if (!nextEnvelope || nextEnvelope.schema_version !== "competitive-resolution-v1") {
+        throw new Error("Unsupported resolution schema.");
+      }
+      return render(nextEnvelope);
+    } catch (error) {
+      envelope = null;
+      stopTimer();
+      renderResolution(null, root);
+      const state = root.querySelector("#resolution-state");
+      if (state) state.textContent = `Resolution adapter error: ${error instanceof Error ? error.message : String(error)}`;
+      return { ok: false, code: "resolution_adapter_error" };
+    }
+  }
+
+  root.querySelector("#resolution-play")?.addEventListener("click", play);
+  root.querySelector("#resolution-pause")?.addEventListener("click", pause);
+  root.querySelector("#resolution-skip")?.addEventListener("click", skip);
+  root.querySelector("#resolution-review")?.addEventListener("click", review);
+  root.querySelector("#load-resolution")?.addEventListener("click", () => {
+    const input = root.querySelector("#resolution-turn");
+    load(input?.value ? Number(input.value) : undefined);
+  });
+  return { load, render, play, pause, skip, review, get envelope() { return envelope; } };
 }
 
 export function renderPresentation(envelope, root = document) {
@@ -1092,11 +1309,13 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       createActionClient,
+      createResolutionClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,
+      renderResolution,
       validateCommand,
       validateReadOnlyEnvelope,
     };
@@ -1106,11 +1325,13 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       createActionClient,
+      createResolutionClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,
+      renderResolution,
       validateCommand,
       validateReadOnlyEnvelope,
     };

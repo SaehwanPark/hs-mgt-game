@@ -4,6 +4,32 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.20] - 2026-07-15
+
+### Added
+- Added the typed `competitive-resolution-v1` envelope and non-mutating
+  `get_resolution` MCP tool for latest and historical committed competitive
+  transitions.
+- Added the browser monthly-resolution panel with eight source-labeled steps,
+  before/after operating and resource snapshots, direct committed effects,
+  pending processes, state-hash/replay metadata, historical review, and local
+  play/pause/skip/review controls.
+- Added Phase 4 contract, GUI, and Rust coverage for non-mutating reads,
+  complete textual results, reduced motion, and recoverable adapter errors.
+
+### Changed
+- Kept resolution presentation derived from actor-visible projections and
+  committed transition summaries; no browser formulas, causal inference graph,
+  audio, assets, or transition changes were added.
+- Promoted visual/audio Phase 5 foundational audio as the next gated candidate
+  and bumped package/public metadata to `0.12.20`.
+
+### Evidence Limits
+- Contract tests and host/browser checks are technical/interface-task evidence
+  only; they do not establish human comprehension, usability, lived
+  accessibility, learning, engagement, calibration, balance, or policy
+  validity.
+
 ## [0.12.19] - 2026-07-15
 
 ### Added
