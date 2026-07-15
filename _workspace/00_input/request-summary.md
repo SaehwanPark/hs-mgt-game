@@ -1,42 +1,38 @@
-# Request Summary — Visual/audio first-month contract audit v0.12.30
+# Request Summary — Live competitive GUI repair v0.12.31
 
-## User objective
+## Objective
 
-Continue the SPEC/proposal visual and audio upgrade through bounded,
-evidence-gated slices. After the merged Phase 13 rail, verify the complete
-technical first-month contract against the proposal and close the bounded
-visual/audio sequence only if current source and focused tests prove every
-required handoff.
+Review the current visual/audio GUI, identify why a scenario cannot start from a
+normal checkout, repair the live competitive path, and document exact player
+steps that minimize launch and recovery failures.
 
-## Selected slice
+## Classification and scope
 
-Add a dependency-free, deterministic contract audit for the existing
-`competitive-regional-v1` first-month experience. Use it to record source/test
-evidence for launch, inspection, bottleneck and rival/payer context, two-action
-review, canonical submission, resolution metrics/causal effects, optional audio,
-and continuation. Align `SPEC.md` and release documentation with the result.
+- Roadmap/output: bounded technical-prototype repair after a source-backed
+  browser-transport gap.
+- Runtime: one loopback-only, in-memory GUI host over `GameSessionStore`.
+- Player path: `competitive-regional-v1` start through one committed month.
+- Documentation: README quickstart plus canonical GUI player guide and
+  troubleshooting.
 
-## Required behavior
+## Root causes
 
-- The audit must emit stable machine-readable JSON with one result per
-  first-month contract obligation and explicit evidence paths.
-- A passing result must prove source markers and focused test markers for every
-  required handoff; missing source, test, or boundary evidence must fail closed.
-- The audit must report technical/interface-task evidence separately from
-  human usability, lived accessibility, learning, engagement, calibration,
-  balance, policy-validity, and domain-expert questions.
-- The audit must verify the browser boundary remains presentation-only and does
-  not add simulation, network, hidden-state, or GUI-only outcome logic.
-- `SPEC.md`, the changelog, version projections, and a durable audit document
-  must describe the bounded sequence as closed while retaining explicit
-  deferred work.
+- The shipped page had no injected adapter and browsers cannot call the stdio
+  MCP host directly.
+- Tests used mock adapters and did not cross the shipped transport boundary.
+- Competitive live reads attempted unsupported campaign-coverage calls and
+  could show false recovery.
 
-## Explicit non-goals
+## Non-goals
 
-- No Rust/MCP DTO, command, transition, stochastic, history/hash/replay,
-  debrief, campaign, browser transport, dependency, or runtime behavior change.
-- No browser-owned simulation state, client-side cost/outcome formula,
-  downloaded asset, audio-source change, network call, or new phase beyond the
-  bounded audit/closure artifact.
-- No claim of human usability, lived accessibility, learning, engagement,
-  calibration, balance, policy validity, or domain-expert agreement.
+- No other GUI campaigns, persistence, remote bind, authentication, multiplayer,
+  packaging, simulation, balance, or audio-source change.
+- No human usability, lived accessibility, learning, calibration, policy, or
+  domain-expert claim.
+
+## Validation target
+
+One real loopback transport test must start seed-42 Normal competitive play,
+load typed presentation/actions, validate and submit a command, and read the
+committed resolution. Player docs must state the exact command, URL, live/demo
+distinction, session lifetime, audio gesture, alternate port, and recovery.

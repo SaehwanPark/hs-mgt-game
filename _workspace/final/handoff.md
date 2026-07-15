@@ -1,57 +1,50 @@
-# Final Handoff — Visual/audio first-month contract audit v0.12.30
+# Final Handoff — Live competitive GUI repair v0.12.31
 
 ## Result
 
-The bounded technical visual/audio sequence is complete. The new
-`visual-audio-first-month-contract-v1` audit proves the proposal's first
-`competitive-regional-v1` month from host launch/load through continuation using
-current GUI source, focused tests, phase documents, provenance files, and an
-explicit presentation-boundary check.
+The competitive GUI is playable from a normal checkout with:
 
-## Changed files
+```bash
+cargo run --bin hs-mgt-game-gui
+```
 
-- `scripts/audit_visual_audio_contract.py`: deterministic fail-closed audit.
-- `tests/test_visual_audio_contract_audit.py`: complete, missing-evidence, and
-  forbidden-boundary coverage.
-- `docs/visual-audio-first-month-contract-v0.12.30.md` and
-  `_workspace/experiments/v0.12.30-first-month-contract-audit/audit.json`:
-  durable evidence and limits.
-- `SPEC.md`, `README.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, `LESSONS.md`,
-  `Cargo.toml`, `Cargo.lock`, and release metadata test: closure and v0.12.30.
-- `_workspace/00_input/`, `_workspace/01_evidence_map.md`,
-  `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, and this
-  handoff: durable design, QA, and workflow state.
+The binary prints a loopback URL, serves the existing browser client, injects a
+same-origin adapter, and delegates start/read/validate/submit/resolution work to
+the existing authoritative session store.
+
+## Changed areas
+
+- Rust: loopback-only Axum server, embedded GUI assets, narrow competitive start
+  DTO, binary entry point, and real transport tests.
+- Browser: same-origin action adapter, live-without-session demo bootstrap,
+  transactional active-session replacement, and competitive coverage fix.
+- Player docs: README quickstart, shared How to Play routing, canonical GUI
+  guide/troubleshooting, and developer adapter reference.
+- Project records: ADR-0012, proposal/roadmap/spec/architecture/changelog,
+  lessons, handoffs, and v0.12.31 metadata.
 
 ## Verification
 
-- Audit: complete; 10/10 obligations pass, 14/14 phase documents present,
-  3/3 provenance files present, zero boundary violations.
-- Focused audit and release tests: 9 passed; GUI-focused discovery: 74 passed;
-  full Python discovery: 309 passed.
-- Serial Rust tests passed: 322 library tests, 3 competitive-AI tests, 2
-  competitive golden tests, 1 stabilization golden test, 7 scenario tests,
-  and no doctest failures.
-- `python3 scripts/check_release_metadata.py`, Node syntax, Rust formatting,
-  Clippy, and `git diff --check` pass.
+- 316 Python tests passed; 81 are GUI-focused.
+- 328 Rust library tests and all binary/integration/golden/scenario/doctest
+  targets passed.
+- Release metadata, Node syntax, Rust formatting, Clippy, and diff checks pass.
+- A real `127.0.0.1:8787` process served the injected page and started a seed-42
+  Normal competitive session.
 
-## Workflow state
+## Review and deviations
 
-- Task type: development continuation; post-merge evidence/closure slice.
-- Base branch: `main`.
-- Working branch: `feat/visual-audio-first-month-contract-v0.12.30`.
-- One general code-review pass is required by the user workflow for this slice;
-  the repository's preferred-workflow three-pass default is intentionally
-  reduced by the user's explicit instruction.
-- After review, push/open PR, merge to `main`, delete the temporary branch
-  locally and remotely, and re-run the completion audit on `main`.
+- Code review found one initial security/scope issue: the HTTP start request
+  reused MCP `scenario_path`. The final implementation uses a narrow DTO,
+  rejects unknown fields and noncompetitive campaigns, and never accepts a
+  scenario path.
+- No implementation deviations from the approved functional scope remain.
 
-## Known limits and non-goals
+## Known limits
 
-- No Rust/MCP, simulation, stochastic, history/hash/replay, debrief, campaign,
-  browser transport, dependency, asset, audio-source, or runtime behavior
-  changed.
-- No browser transport, viewport/contrast/screen-reader/hardware-audio check,
-  human usability, lived accessibility, learning, engagement, calibration,
-  balance, policy-validity, or domain-expert claim.
-- No further technical visual/audio slice is authorized without a new
-  source-backed gap; human and educational evaluation remain separately gated.
+- Competitive GUI only; use the CLI for other or custom scenarios.
+- Sessions are process-local and nonpersistent.
+- No remote hosting, authentication, multiplayer, packaging, or production
+  deployment.
+- Viewport, screen-reader, and hardware-audio verification remains unclaimed
+  because the configured in-app browser controller was unavailable.

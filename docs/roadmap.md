@@ -879,8 +879,11 @@ evidence.
 
 The v0.12.11 GUI thin-client proof demonstrates one dependency-free surface over
 existing observations, command hints, history/state hashes, and debrief output.
-It adds no GUI-only scenario behavior or hosting commitment; richer GUI work
-requires new audience-access or playtest evidence.
+The v0.12.31 repair adds a loopback-only, in-memory host for the competitive
+first-month path after real launch behavior exposed the missing browser
+transport. It adds no GUI-only scenario behavior, remote hosting, persistence,
+or broader campaign commitment; richer GUI work requires new audience-access or
+playtest evidence.
 The v0.11.6 strategy-comparison use audit groups the same frozen capture by
 profile, seed, and difficulty, confirms complete traceability across all 60
 runs, and identifies no structural strategy-comparison or debrief-use gap;
@@ -1021,10 +1024,11 @@ Current proposal-review candidates:
   follow-up are complete. The post-fix evidence closes the structural MCP gap;
   broader runtime breadth still requires separate implementation and
   domain/design review.
-- **GUI thin client:** design a graphical layer that reuses the same core,
-  scenario, observation, replay, and debrief data as the CLI/MCP interfaces.
-  Publicly downloadable pixel assets require license review, with CC0 sources
-  preferred.
+- **GUI expansion:** the competitive thin client and local loopback host reuse
+  the existing core, observations, validation, replay, and debrief boundaries.
+  Other campaigns, persistence, packaging, remote hosting, and downloaded
+  assets remain separately gated; any asset must pass license review, with CC0
+  sources preferred.
 - **Differentiated in-house advisors:** evaluate a shared, scarce advisor market
   against repaired state-conditioned monthly advice before adding a roster,
   payroll, candidate availability, or hire/fire mechanic. Any future slice must

@@ -1,9 +1,26 @@
-# GUI executive desktop, campaign launch/load, first-month continuity, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, visual identity/markers, and optional audio
+# GUI executive desktop and adapter reference
 
-This is a dependency-free Phase 2/3/4/5/6/7/8/10/11/12/13 browser surface over typed actor-visible
-MCP presentation, action, and resolution contracts plus optional generated
-audio. Open `index.html` through a static file server and provide a live or
-recorded read-only adapter:
+## Players: use the live GUI host
+
+From the repository root, run:
+
+```bash
+cargo run --bin hs-mgt-game-gui
+```
+
+Keep the process running and open the printed loopback URL. The live GUI
+currently supports `competitive-regional-v1`. Complete instructions and
+troubleshooting are in [`docs/gui-how-to-play.md`](../docs/gui-how-to-play.md).
+
+Opening `gui/index.html` directly or through a generic static server intentionally
+shows fixture/demo mode; it cannot start a live scenario by itself.
+
+## Developers: adapter contracts
+
+This is a dependency-free browser surface over typed actor-visible MCP
+presentation, action, and resolution contracts plus optional generated audio.
+For static integration work, open `gui/index.html` through a static file server and
+provide a live or recorded read-only adapter:
 
 ```js
 window.HsMgtGameReadOnlyAdapter = {

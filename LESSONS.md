@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Test the Shipped GUI Transport, Not Only Injected Adapters
+
+- Context: The browser source had complete mocked launch/action contracts, but
+  a normal checkout supplied no adapter that a browser could use.
+- Symptom: The page rendered demo data while Start reported that a host adapter
+  was missing; all focused tests still passed.
+- Cause: Tests injected fake adapters and the first-month audit explicitly
+  excluded browser transport, while the real Rust host used stdio MCP.
+- Resolution: Added a loopback-only GUI host, same-origin adapter, real transport
+  test, and player instructions that distinguish live and static modes.
+- Prevention: Every player-facing launch control must have one documented
+  shipped command and an integration test crossing its real process/transport
+  boundary.
+
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 

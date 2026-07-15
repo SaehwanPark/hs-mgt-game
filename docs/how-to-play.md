@@ -1,8 +1,8 @@
 # How To Play
 
-This guide is for first-time players of the Health Policy Strategy Game CLI.
-It teaches what to do each turn, what commands mean, and how to recover when a
-run starts going badly.
+This guide introduces both terminal and GUI play. The CLI supports all three
+campaigns. The live GUI currently supports the competitive campaign and has a
+separate step-by-step guide at [`gui-how-to-play.md`](gui-how-to-play.md).
 
 ## What this game is
 
@@ -20,7 +20,7 @@ The game is deterministic for a given seed and set of choices. A poor outcome
 can still follow a reasonable decision when uncertainty and rival behavior
 interact.
 
-## First session quickstart
+## CLI first-session quickstart
 
 1. Run the game:
 
@@ -46,6 +46,26 @@ interact.
 7. Use global commands any time:
    - `?` or `help` for context
    - `q`, `quit`, or `exit` to leave
+
+## GUI first-session quickstart
+
+1. From the repository root, start the live GUI host:
+
+   ```bash
+   cargo run --bin hs-mgt-game-gui
+   ```
+
+2. Keep that terminal running and open the printed URL, normally
+   `http://127.0.0.1:7878`.
+3. Select `competitive-regional-v1`, seed `42`, and Normal difficulty.
+4. Choose **Start competitive session**.
+5. Inspect the briefing and regional market, add at least two action drafts,
+   validate the unchanged draft, submit it, then review or skip the resolution.
+
+Do not open `gui/index.html` directly when you want to play: direct/static mode
+contains demonstration data and no live game host. For audio controls, alternate
+ports, session lifetime, and recovery steps, use
+[`gui-how-to-play.md`](gui-how-to-play.md).
 
 ## Game structure from your perspective
 

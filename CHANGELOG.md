@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.31] - 2026-07-15
+
+- Added `hs-mgt-game-gui`, a loopback-only local host that serves the browser
+  client and delegates competitive sessions to the existing authoritative
+  session store.
+- Fixed the shipped Start path, live-adapter bootstrap, and false competitive
+  campaign-coverage recovery state while preserving static demo mode.
+- Added end-to-end local transport and adapter tests plus exact GUI quickstart,
+  first-month, audio, session-lifetime, alternate-port, and troubleshooting
+  documentation.
+- Bumped package/public metadata to `0.12.31`; simulation, command, stochastic,
+  history/hash/replay, and debrief behavior remain unchanged.
+
 ## [0.12.30] - 2026-07-15
 
 - Added a deterministic `visual-audio-first-month-contract-v1` audit covering

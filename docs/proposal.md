@@ -9,7 +9,7 @@
 
 ## Current Implementation Checkpoint
 
-As of 2026-07-12, the proposal has progressed beyond its initial concept and
+As of 2026-07-15, the proposal has progressed beyond its initial concept and
 vertical-slice stages into a playable, evidence-gated prototype. The repository
 contains three deterministic campaign paths:
 
@@ -20,7 +20,9 @@ contains three deterministic campaign paths:
 The implementation includes a CLI, a local stdio MCP adapter for bounded agent
 playtesting, replay and state-hash verification, scenario loading, competitive
 autosave/resume, educational debriefs, and a dependency-free GUI thin-client
-proof over existing MCP-shaped outputs. Current numerical mechanisms remain
+over existing MCP-shaped outputs. A loopback-only local GUI host now makes the
+competitive first-month path playable without manual adapter injection while
+leaving the Rust session store authoritative. Current numerical mechanisms remain
 documented game abstractions rather than calibrated forecasts, and AI-agent
 playtests remain gameplay and explanation evidence rather than evidence of
 human learning.

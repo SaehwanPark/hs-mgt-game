@@ -1,42 +1,32 @@
-# Mechanism Design — Visual/audio first-month contract audit v0.12.30
+# Mechanism Design — Loopback GUI host v0.12.31
 
-## Goal and roadmap gate
+## Authority and data flow
 
-Close the remaining SPEC bookkeeping gap by proving the proposal's bounded
-technical first-month experience from current source and focused tests. Add no
-new game mechanism.
+```text
+browser forms/drafts
+  -> same-origin host adapter
+  -> loopback HTTP routes
+  -> GameSessionStore
+  -> actor-visible typed envelopes
+  -> browser rendering and optional audio
+```
 
-## Audit contract
+- The browser owns setup fields, selection, drafts, playback, and settings.
+- `GameSessionStore` owns session identity, validation, stochastic resolution,
+  transitions, observations, history, hashes, replay, and debriefs.
+- The HTTP edge performs only routing, JSON extraction/serialization, loopback
+  enforcement, and error-status mapping.
 
-The audit emits `visual-audio-first-month-contract-v1` with:
+## Failure behavior
 
-- one stable record for each required first-month surface;
-- source files and exact source markers;
-- focused test files and exact test markers;
-- a presentation-boundary check for forbidden simulation/network markers; and
-- explicit technical/interface-task evidence limits.
+- Invalid setup and host/domain errors return structured recoverable messages.
+- A replacement session becomes active only after its presentation and action
+  catalog both load successfully.
+- Competitive paths do not request stabilization/affiliation campaign coverage.
+- Static/direct serving retains fixture mode and cannot claim a live session.
 
-The result is `complete` only when all records and the boundary check pass.
+## Scope boundaries
 
-## Required first-month surfaces
-
-1. Host-authoritative start/load.
-2. Actor-visible regional market and Riverside/facility inspection.
-3. Workforce/capacity bottleneck plus public payer/rival context.
-4. At least two local contextual drafts with host metadata and canonical
-   command preview.
-5. Host validation, unchanged submit, and recoverable rejection.
-6. Committed resolution with updated operating/resource metrics and direct
-   causal effects.
-7. Optional audio plus complete visual/text equivalents and continuation to the
-   next observation.
-
-## Authority and failure rules
-
-- The audit reads repository files only; it never starts a session, calls the
-  network, runs a simulation transition, or interprets hidden state.
-- A missing source marker, focused test marker, required file, or boundary
-  exclusion fails closed.
-- A passing audit closes only the bounded technical sequence. It cannot close
-  human evaluation or claims about learning, accessibility lived experience,
-  balance, calibration, policy validity, or domain expertise.
+The live GUI supports competitive play only and stores sessions only for the
+host process lifetime. Remote access, persistence, authentication, and other
+campaigns require separate decisions.

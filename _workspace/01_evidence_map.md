@@ -1,65 +1,30 @@
-# Evidence Map — Visual/audio first-month contract audit v0.12.30
+# Evidence Map — Live competitive GUI repair v0.12.31
 
-## Scope
+## Repository evidence
 
-Audit the existing technical first-month `competitive-regional-v1` contract
-after the Phase 13 merge. This is a source-and-test evidence task, not a new
-simulation or user-study claim.
+- `gui/app.mjs` required `HsMgtGameActionAdapter` or
+  `HsMgtGameReadOnlyAdapter`; without one it rendered a fixture and rejected
+  session start.
+- `src/bin/hs-mgt-game-mcp.rs` exposed only stdio transport.
+- `src/mcp/session.rs` already owned all required competitive operations and
+  typed actor-visible envelopes.
+- Existing session-launch tests injected fake adapters; the v0.12.30 audit
+  explicitly excluded browser transport correctness.
+- Competitive `get_campaign_coverage` is intentionally unsupported, while the
+  live action/read path called it unconditionally.
 
-## Sources Reviewed
+## Design conclusions
 
-- `SPEC.md`, `docs/visual_audio_upgrade_proposal.md`, and the Phase 0–13
-  protocol documents.
-- `gui/app.mjs`, `gui/audio.mjs`, `gui/first-month.mjs`, `gui/visual.mjs`,
-  `gui/index.html`, and focused GUI tests.
-- The merged Phase 13 handoff and current `main` history/PR state.
+- The gap belongs at the I/O adapter boundary, not in simulation or scenario
+  mechanics.
+- A same-origin loopback host can reuse `GameSessionStore` without exposing
+  private state or duplicating formulas.
+- Static demo mode remains useful and must remain distinct from live serving.
+- Audio is gesture-gated by design and needs live verification/documentation,
+  not core changes.
 
-## Mechanisms and Institutions
+## Evidence limits
 
-- The executive uses one presentation path to inspect the regional market,
-  owned facilities, workforce/capacity pressure, and public payer/rival
-  context before choosing actions.
-- The host/core remains the authority for command legality, costs, delays,
-  stochastic resolution, committed effects, observations, history, replay, and
-  debriefs.
-- The browser only presents host-visible data, local drafts/settings/pacing,
-  and visible audio equivalents.
-
-## Actor Incentives and Information
-
-- The player acts on actor-visible observations, not true or private rival
-  state. Public rival information remains limited by the existing host
-  projection.
-- The audit records interface-task traceability, not player utility, social
-  welfare, or educational learning.
-
-## Assumptions
-
-- The merged Phase 0–13 contracts are the current implementation of the
-  proposal's bounded technical sequence.
-- Source/test marker checks are appropriate for a dependency-free repository
-  audit; they do not replace browser execution or human evaluation.
-- The existing release metadata checker is the version authority.
-
-## Unresolved Questions
-
-- Browser transport, visual rendering at real viewports, contrast measurement,
-  screen-reader behavior, and live audio hardware remain unverified here.
-- Human usability, lived accessibility, learning, engagement, calibration,
-  balance, policy validity, and domain-expert agreement remain separately
-  authorized work.
-
-## Design Implications
-
-- Close the bounded technical sequence only with a deterministic audit artifact
-  that fails closed when an obligation loses its source or test evidence.
-- Keep deferred human and asset-production work visible as explicit limits rather
-  than turning technical coverage into a product-success claim.
-
-## Risks
-
-- Marker audits can overfit source text. Mitigate with focused behavioral Node
-  tests, existing host-boundary tests, and a review of the surrounding code.
-- A closed technical sequence can be mistaken for a polished or validated
-  release. Mitigate with claim-class and evidence-limit fields in the artifact
-  and closure document.
+Automated transport and browser-contract checks prove technical integration.
+They do not establish human usability, lived accessibility, learning,
+calibration, balance, or policy validity.

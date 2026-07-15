@@ -13,8 +13,8 @@ preserve.
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - MCP executable: `src/bin/hs-mgt-game-mcp.rs` serving a local stdio MCP server
   for bounded autonomous-agent play
-- Browser proof: dependency-free files in `gui/` rendering injected fixtures or
-  typed actor-visible read-only MCP projections without owning simulation state
+- GUI executable: `src/bin/hs-mgt-game-gui.rs` serving the dependency-free
+  browser client and a loopback-only API over an in-memory session store
 - Library modules:
   - `model/` — typed world state, commands, competitive and affiliation state,
     resources, history, session types, campaign types
@@ -29,9 +29,11 @@ preserve.
   - `debrief/` — educational debrief generation
   - `cli/` — terminal I/O, parsers, session loop, display
   - `mcp/` — MCP session store, tool DTOs, and stdio server adapter
+  - `gui_server.rs` — embedded static assets and same-origin HTTP adapter over
+    the existing session store
 - Canonical design docs: `README.md` and `docs/`
 
-Last Reviewed: 2026-07-12
+Last Reviewed: 2026-07-15
 Status: Verified
 
 The current implementation includes a competitive campaign path with genesis
@@ -163,7 +165,15 @@ draft, validation, submission, resolution, and refreshed-presentation handoffs.
 The included demo envelope is a display fixture, not a browser-owned
 simulation.
 
-Last Reviewed: 2026-07-12
+`cargo run --bin hs-mgt-game-gui` binds only to a loopback address, embeds the
+same browser files, and injects `host-adapter.mjs` into the served index. The
+adapter maps same-origin `/api/v1/sessions` requests to the existing
+`GameSessionStore` operations for competitive start, presentation, action
+catalog, validation, submission, resolution, and regional-world reads. The
+store remains in memory for the lifetime of the process. Static/direct serving
+does not inject the adapter and remains fixture or external-adapter mode.
+
+Last Reviewed: 2026-07-15
 Status: Verified
 
 Future GUI work should be a thin client over the same scenario, observation,
@@ -339,6 +349,13 @@ records source/test evidence for the complete bounded first-month path. It is a
 read-only repository check and does not claim browser transport, human
 usability, lived accessibility, learning, engagement, calibration, balance,
 policy validity, or domain-expert agreement.
+
+The v0.12.31 live-host repair reopens only the browser-transport evidence gap
+identified by real launch behavior. It adds a local I/O edge around the existing
+session store; it does not add a second simulation state, remote service,
+persistence, authentication, cross-origin access, or GUI-only rules. The live
+host currently routes `competitive-regional-v1` only, while CLI and stdio MCP
+campaign coverage remain unchanged.
 
 Last Reviewed: 2026-07-15
 Status: Verified

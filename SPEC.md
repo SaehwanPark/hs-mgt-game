@@ -4454,19 +4454,48 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   - Focused/full Python, Node syntax, release metadata, Rust formatting,
     Clippy, serial Rust tests, and diff checks pass.
 
+### Live competitive GUI host repair (v0.12.31)
+
+- Feature: Loopback live GUI host and player quickstart
+  Status: Closed; implementation and verification complete
+  Started: 2026-07-15
+
+  Summary:
+  The shipped browser page can now start and play `competitive-regional-v1`
+  through one local Cargo command. A loopback-only HTTP edge delegates to the
+  existing in-memory session store; the browser remains non-authoritative.
+
+  Done:
+  - Added the `hs-mgt-game-gui` binary, embedded static serving, same-origin
+    adapter, structured errors, and non-loopback rejection.
+  - Fixed no-session live bootstrap and removed unsupported competitive
+    campaign-coverage reads from the live presentation/action path.
+  - Added real transport, adapter, documentation, and existing GUI regression
+    coverage.
+  - Added exact README and player-guide instructions for launch, first-month
+    flow, audio, alternate ports, in-memory sessions, shutdown, and recovery.
+
+  Deferred / Non-Goals:
+  - No stabilization/affiliation GUI, persistence, remote host, authentication,
+    multiplayer, packaging, simulation, balance, or audio-source change.
+  - No human usability, lived accessibility, learning, calibration, policy, or
+    domain-expert claim.
+
 ## Present
 
-No active visual/audio implementation slice. Further technical work requires a
-new source-backed gap; human and educational evaluation remain separately gated
-Future work.
+No active visual/audio implementation slice. v0.12.31 closed the source-backed
+browser-transport gap with a loopback-only competitive GUI host and exact player
+documentation. Human and educational evaluation remain separately gated Future
+work.
 
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Bounded technical sequence closed at v0.12.30; human evaluation and
-explicit non-goals remain separately gated Future work.
+Status: Bounded technical sequence closed at v0.12.30 and local competitive
+transport repaired at v0.12.31; human evaluation and explicit non-goals remain
+separately gated Future work.
 No later feature should be read as implemented merely because the current `gui/`
 prototype or Phase 6–10 documents exist.
 
@@ -4937,7 +4966,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. The bounded visual/audio technical sequence is complete at v0.12.30. Do not
+1. The bounded visual/audio technical sequence is complete at v0.12.30 and its
+   local competitive transport gap is repaired at v0.12.31. Do not
   promote another presentation runtime item without a new source-backed gap;
   use the contract audit as the reopening gate.
 2. Human usability, lived accessibility, learning, engagement, calibration,

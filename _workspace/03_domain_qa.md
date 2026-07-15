@@ -1,65 +1,53 @@
-# Domain QA — Visual/audio first-month contract audit v0.12.30
+# Domain QA — Live competitive GUI repair v0.12.31
 
 ## Status
 
-pass
+Pass.
 
-## Reviewed Inputs
+## Reviewed inputs
 
-- User continuation request and the merged Phase 13 state.
-- `SPEC.md`, `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `docs/visual_audio_upgrade_proposal.md`, and
-  the harness team spec.
-- `scripts/audit_visual_audio_contract.py`, its compact JSON artifact,
-  `docs/visual-audio-first-month-contract-v0.12.30.md`, and the focused audit
-  tests.
-- `gui/app.mjs`, `gui/audio.mjs`, `gui/first-month.mjs`, `gui/visual.mjs`,
-  existing host projections, and the focused GUI contract tests.
+- User request and approved implementation plan.
+- Canonical project docs and harness team spec.
+- `src/gui_server.rs`, `gui/host-adapter.mjs`, `gui/app.mjs`, tests, ADR,
+  player docs, project records, and verification output.
 
 ## Findings
 
-- The audit is a repository evidence projection, not a new actor, policy lever,
-  utility, welfare measure, calibrated parameter, scenario rule, or debrief
-  claim.
-- The ten audited obligations preserve the executive perspective: market and
-  facility inspection, visible workforce/capacity and payer/rival context,
-  canonical actions, committed resolution, direct effects, optional audio, and
-  continuation.
-- The host remains authoritative for commands, legality, costs, delays,
-  stochastic resolution, committed effects, observations, history, hashes,
-  replay, and debriefs. The audit never executes a transition or reads hidden
-  state.
-- The compact artifact and full JSON output distinguish technical/interface-task
-  evidence from unresolved human, accessibility, educational, calibration,
-  balance, policy-validity, and domain-expert questions.
-- Phase 0–13 documents and generated visual/audio provenance files are present;
-  the first-month presentation boundary has no forbidden transition,
-  resolved-input, effect-queue, network, or WebSocket marker.
+- Scope: the change is limited to competitive browser transport and player
+  instructions; it does not expand actors, mechanisms, balance, or campaigns.
+- Determinism: HTTP and browser code are I/O adapters around the existing
+  `GameSessionStore`. No core transition reads network state, time, or hidden
+  randomness.
+- Observation boundary: responses reuse actor-visible presentation, catalog,
+  regional-world, resolution, and session envelopes. No true/private state DTO
+  was added.
+- History and causality: submission remains host-owned and resolution remains a
+  read of committed history; browser audio and progress state do not enter
+  hashes or replay.
+- Scope/security correction: code review found that the initial HTTP DTO exposed
+  MCP `scenario_path` and unsupported campaigns. The final DTO rejects unknown
+  fields, forces `scenario_path: None`, and permits only the competitive GUI
+  campaign.
 
-## Required Fixes
+## Required fixes
 
-None.
+None remaining.
 
-## Residual Risks
+## Residual risks
 
-- Marker audits can overfit source text. Existing focused Node/Python contract
-  tests and the one general code-review pass remain required safeguards.
-- The evidence does not establish browser transport, viewport rendering,
-  contrast, screen-reader behavior, hardware audio, human usability, lived
-  accessibility, learning, engagement, calibration, balance, policy validity,
-  or domain-expert agreement.
-- Third-party asset acquisition, detailed geography, mobile support, and
-  production deployment remain outside the bounded closure.
+- Sessions are intentionally in memory and disappear on process exit.
+- No live viewport, screen-reader, or hardware-audio claim is made because the
+  in-app browser controller was unavailable during this implementation.
+- Loopback transport is a local prototype boundary, not authenticated or
+  production hosting.
 
-## Verification Evidence
+## Verification evidence
 
-- `python3 scripts/audit_visual_audio_contract.py`: status `complete`; ten
-  requirements pass, 14 phase documents and three provenance files are present,
-  and boundary violations are empty.
-- Focused audit/release tests: 9 passed.
-- GUI-focused discovery: 74 passed; full Python discovery: 309 passed.
-- Serial Rust tests passed: 322 library tests, 3 competitive-AI tests, 2
-  competitive golden tests, 1 stabilization golden test, 7 scenario tests,
-  and no doctest failures.
-- Node syntax, release metadata, Rust formatting, Clippy, and `git diff --check`
-  passed.
+- Full Python suite: 316 passed.
+- GUI-focused suite: 81 passed.
+- Rust: 328 library tests plus all integration, golden, scenario, and doctest
+  targets passed.
+- Node syntax, release metadata, formatting, Clippy with denied warnings, real
+  process/curl launch, and diff checks passed.
+- One severity-ranked code-review pass completed; its one blocking finding was
+  fixed and reverified. Final review: no actionable issues found.

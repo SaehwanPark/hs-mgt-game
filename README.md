@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.30. Its
+The current public milestone is a playable Rust prototype at v0.12.31. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -20,7 +20,9 @@ explanation controls; Phase 11 adds a host-authoritative competitive session
 start/load handoff; Phase 12 adds generated visual identity and marker tokens
 with explicit provenance; Phase 13 adds a text-first first-month continuity
 rail, and v0.12.30 closes the bounded technical first-month contract with
-explicit evidence limits. It is
+explicit evidence limits. v0.12.31 adds the loopback-only live GUI host and
+player troubleshooting guide needed to run that competitive path from a normal
+checkout. It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 
@@ -61,7 +63,9 @@ Prerequisites:
 
 - Rust toolchain with Cargo.
 
-Run the game:
+### Play in the terminal
+
+Run all three campaigns through the CLI:
 
 ```bash
 cargo run
@@ -78,6 +82,22 @@ Then choose:
 For a first session, start with `stabilization-v1` in beginner mode. For the
 competitive campaign, Normal difficulty gives a compact introduction to monthly
 action budgeting and rival pressure.
+
+### Play in the GUI
+
+The live GUI currently supports `competitive-regional-v1` only.
+
+```bash
+cargo run --bin hs-mgt-game-gui
+```
+
+Keep that terminal running, open the printed URL (normally
+`http://127.0.0.1:7878`), select seed `42` and Normal difficulty, then choose
+**Start competitive session**. Opening `gui/index.html` directly shows the
+static demo and does not start a live scenario.
+
+See [How to Play in GUI Mode](docs/gui-how-to-play.md) for the complete first
+month, audio controls, alternate ports, session lifetime, and troubleshooting.
 
 ## Competitive Command Examples
 
@@ -130,6 +150,7 @@ Relevant blog posts:
 Start here:
 
 - [How to Play](docs/how-to-play.md)
+- [How to Play in GUI Mode](docs/gui-how-to-play.md)
 - [Core Loop Spec](docs/core-loop-spec.md)
 - [Competitive Scenario Brief](docs/competitive-scenario-brief.md)
 - [Design Principles](docs/design_principles.md)
@@ -187,13 +208,12 @@ The codebase is intentionally CLI-first. Core simulation transitions should stay
 deterministic, with randomness resolved into explicit inputs before transition
 evaluation.
 
-A dependency-free browser thin-client proof is available in [`gui/`](gui/). It
-can build and submit a host-validated competitive batch, review the committed
-monthly resolution, and optionally play visible-only generated audio without
-owning simulation state.
-It renders injected MCP-shaped session data and, when an action adapter is
-provided, builds host-validated canonical command batches. It does not replace
-the CLI, host a live server, or own simulation state.
+A dependency-free browser client is available in [`gui/`](gui/). The
+`hs-mgt-game-gui` binary serves it with a loopback-only, in-memory host so a
+player can start and play the competitive campaign. The client builds
+host-validated batches, reviews committed resolution, and optionally plays
+visible-only generated audio without owning simulation state. Direct static
+serving remains available for fixture and externally injected-adapter work.
 
 ## License
 
