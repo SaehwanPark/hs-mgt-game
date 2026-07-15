@@ -8,9 +8,9 @@ use rmcp::{
 };
 
 use super::session::{
-  EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetHistoryRequest,
-  GetObservationRequest, GetPresentationRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope,
-  StartSessionRequest, SubmitTurnRequest,
+  EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
+  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, HistoryEnvelope,
+  McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -57,6 +57,28 @@ impl McpGameServer {
     Parameters(request): Parameters<GetObservationRequest>,
   ) -> CallToolResult {
     self.with_store(|store| store.get_observation(request))
+  }
+
+  #[tool(
+    name = "get_action_catalog",
+    description = "Return the host-owned competitive action catalog and parameter metadata without advancing the session."
+  )]
+  async fn get_action_catalog(
+    &self,
+    Parameters(request): Parameters<GetActionCatalogRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_action_catalog(request))
+  }
+
+  #[tool(
+    name = "validate_turn",
+    description = "Validate a canonical competitive command batch without advancing the session or resolving outcomes."
+  )]
+  async fn validate_turn(
+    &self,
+    Parameters(request): Parameters<ValidateTurnRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.validate_turn(request))
   }
 
   #[tool(
@@ -137,7 +159,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation is a non-mutating actor-visible read-only view.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, and validate_turn are non-mutating actor-visible reads.",
       )
   }
 }

@@ -4048,48 +4048,52 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 2 live read-only integration
-  Status: Complete; Phase 3 is the next gated candidate
+- Feature: Visual/audio Phase 3 contextual action submission
+  Status: Complete; Phase 4 is the next gated candidate
   Started: 2026-07-15
-  Branch: feat/visual-audio-phase2-live-read-only-v0.12.18
+  Branch: feat/visual-audio-phase3-contextual-actions-v0.12.19
 
   Summary:
-  Phase 2 promotes a typed, non-mutating host/MCP presentation projection for
-  live or recorded `competitive-regional-v1` sessions. It keeps the browser
-  non-authoritative while rendering actor-visible observations, player
-  institution/facility metrics, public signals, pending processes, committed
-  history/state hashes, replay metadata, and explicit missing/error states.
+  Phase 3 adds one graphical competitive-month decision-to-submit path. The
+  browser renders a host-supplied action catalog, keeps add/revise/remove draft
+  state locally, asks the host to validate the canonical batch, shows exact
+  host-returned costs and descriptive timing/uncertainty/constraint previews,
+  and submits only an unchanged validated batch through the existing mutation
+  boundary.
 
   Done:
-  - Added the `competitive-read-only-v1` typed Rust projection and non-mutating
-    `get_presentation` MCP tool without exposing true world state, commands,
-    resolved inputs, private rival actions, or client formulas.
-  - Added the browser `HsMgtGameReadOnlyAdapter` and `createReadOnlyClient`
-    path for live or recorded envelopes, typed mapping, replay/hash display,
-    and loading/error/empty/missing/unsupported states.
-  - Added projection serialization/no-transition/hidden-field tests,
-    read-only browser contract tests, and
-    `docs/visual-audio-phase2-live-read-only-v0.12.18.md`.
-  - Preserved legacy MCP tools and thin-client exports; no transition,
-    randomness, replay verification, scenario, asset, audio, or network core
-    behavior changed.
-  - Bumped package and public metadata to `0.12.18`.
+  - Added `competitive-actions-v1` and `competitive-validation-v1` typed host
+    contracts and non-mutating `get_action_catalog`/`validate_turn` MCP tools
+    for the existing seven competitive command families.
+  - Reused the existing parser, batch validator, action costs, and
+    `submit_turn` transition boundary; validation and rejection leave the
+    session unchanged.
+  - Added the browser `HsMgtGameActionAdapter` and generic catalog-driven
+    forms with canonical command previews, local draft add/revise/remove,
+    host validation, recoverable errors, and submit gating.
+  - Added Phase 3 contract documentation, GUI/Rust tests, and explicit
+    evidence limits; no browser-side cost, legality, stochastic, or outcome
+    formulas were added.
+  - Bumped package and public metadata to `0.12.19`.
 
   Not Yet Done:
-  - Promote Phase 3 only for canonical contextual action submission after the
-    read-only projection proves the command/action contract need.
+  - Promote Phase 4 only for committed monthly resolution sequencing and
+    direct causal feedback after this action path is reviewed as a complete
+    one-month graphical decision surface.
 
   Deferred / Non-Goals:
-  - No graphical actions, command validation/submission, batch revision,
-    resolution animation, causal overlays, audio playback, assets, replay
-    playback, campaign expansion, packaging, deployment, or human evaluation.
-  - Phases 3–9 remain sequentially gated by their own evidence and acceptance
+  - No resolution animation, causal overlays, replay playback, audio
+    playback, assets, mobile support, campaign expansion, packaging,
+    deployment, or human evaluation.
+  - No transition formulas, randomness, replay verification, history/hash
+    semantics, scenario rules, or existing command families changed.
+  - Phases 4–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - Projection and GUI contracts pass for schema, source fields, hidden-field
-    exclusion, no-transition behavior, read-only no-submit behavior, mapping,
-    missingness, and no-network/no-asset checks.
+  - Host and GUI contracts pass for catalog coverage, canonical command
+    wiring, exact host costs, non-mutating validation/rejection, unchanged
+    validation gating, no-network/no-asset behavior, and JavaScript syntax.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
@@ -4098,19 +4102,19 @@ Verification:
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 2 complete; Phase 3 is the next ranked candidate. No later feature
+Status: Phase 3 complete; Phase 4 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 2 document exists.
+prototype or Phase 3 document exists.
 
 #### Existing foundation (`Done`)
 
 - The deterministic Rust engine, explicit resolved stochastic inputs,
   actor-visible observations, canonical commands, immutable history, replay
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
-- The dependency-free `gui/` surface renders injected fixtures and typed
-  actor-visible read-only MCP data. It proves a thin-client/live-viewer
-  direction; it is not the persistent regional world, action workflow,
-  resolution system, audio layer, or campaign-complete GUI described here.
+- The dependency-free `gui/` surface renders typed actor-visible data and a
+  host-validated competitive action workflow. It proves a thin-client/live-
+  decision direction; it is not the persistent regional world, resolution
+  system, audio layer, or campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4150,7 +4154,27 @@ prototype or Phase 2 document exists.
   and non-observation flags; repeated reads preserve the session.
 - The browser read-only client renders the typed envelope and explicit loading,
   empty, missing, adapter-error, and unsupported-schema states without calling
-  `submitTurn`. Phase 2 does not establish human usability or replay playback.
+  `submitTurn`. Phase 2 did not establish human usability or replay playback.
+
+#### Phase 3 contextual action submission (`Done`)
+
+- The MCP host exposes `competitive-actions-v1` and
+  `competitive-validation-v1` through non-mutating catalog/validation tools
+  for `hold`, `invest`, `recruit`, `monitor`, `negotiate`, `commit`, and
+  `project`.
+- The browser action adapter renders generic forms from the host catalog,
+  maintains local draft add/revise/remove state, previews canonical command
+  text, displays host-returned exact costs and descriptive timing/uncertainty/
+  constraint metadata, and submits only unchanged valid batches.
+- Invalid validation and rejected submission are recoverable without replacing
+  the current session; existing parser, batch validator, action costs, and
+  `submit_turn` remain authoritative. No local formula or GUI-only command was
+  added.
+- Phase 3 is documented in
+  [`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
+  Static contracts and Rust tests are technical evidence only; no human
+  usability, accessibility, learning, calibration, or policy-validity claim
+  follows.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4446,8 +4470,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 3 contextual action submission is the next candidate. It
-   must reuse canonical commands, host validation, rejection atomicity, visible
-   costs/delays, and explicit stochastic uncertainty.
-2. Phases 4–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 4 resolution and causal feedback is the next candidate.
+   It must sequence one committed month, trace direct visible effects, remain
+   skippable/reviewable, and preserve non-mutating replay/presentation behavior.
+2. Phases 5–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

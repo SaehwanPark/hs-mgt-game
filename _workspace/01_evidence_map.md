@@ -1,71 +1,70 @@
-# Evidence Map — Visual and Audio Phase 2 Live Read-Only Integration v0.12.18
+# Evidence Map — Visual and Audio Phase 3 Contextual Action Submission v0.12.19
 
 ## Scope
 
-Phase 2 promotes only a typed read-only projection for one
-`competitive-regional-v1` viewer. It connects live or recorded host data to the
-Phase 1 presentation surfaces without enabling actions or claiming human
-usability.
+Phase 3 adds the first graphical decision-to-submit path for one
+`competitive-regional-v1` month. It reuses canonical command parsing,
+validation, costs, and transition submission; it does not resolve or animate a
+month in the browser.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 2 requirements and exit gate.
-- Phase 0 alignment, ADR-0011, Phase 1 static-desktop document, and merged GUI.
-- `src/mcp/session.rs`, `src/mcp/server.rs`, `src/sim/observe_competitive.rs`,
-  `PlayerObservation`, `CompetitiveTransition`, and existing MCP tests.
+- `docs/visual_audio_upgrade_proposal.md` Phase 3 requirements and exit gate.
+- Phase 0 alignment, Phase 1 static desktop, Phase 2 live read-only document,
+  ADR-0011, and merged GUI.
+- `src/cli/competitive_parse.rs`, `src/model/competitive_command.rs`,
+  `src/model/resources.rs`, `src/sim/validate_competitive.rs`,
+  `src/mcp/session.rs`, and existing command/transition tests.
 - README, SPEC, architecture, design principles, and project harness spec.
 
 ## Mechanisms and Institutions
 
-The host computes the competitive observation and committed history. A typed
-presentation projection selects the player's visible institution/capacity
-metrics, public market signals, visible pending processes, and transition
-summaries. The browser renders those values and can identify a selected player
-facility, but does not model a regional world of its own.
+The player drafts institutional commands for workforce, capacity, intelligence,
+payer, policy/pledge, and project decisions. The host supplies the action
+catalog and validates the entire batch against current resources/rules. The
+browser only composes canonical text from host-provided templates and keeps a
+local draft until validation and submission.
 
 ## Actor Incentives and Information
 
-The player receives the same actor-visible facts already supplied through the
-MCP observation plus typed session resources, public signals, explicit gaps,
-pending process text, and committed hashes. Legal commands are deliberately not
-part of the Phase 2 read-only envelope. Private rival commands, true world
-state, effect queues, event metadata, resolved stochastic inputs, and non-player
-private utility remain excluded.
+The player sees selected action parameters, canonical previews, host-derived
+AP/cash/political-capital totals, visible constraints, delays, and uncertainty.
+The player does not see hidden rival actions, resolved stochastic inputs, future
+outcomes, or a client-calculated “best” action. A rejected batch leaves the
+current observation/history/hash untouched.
 
 ## Assumptions
 
-- `PlayerObservation` and committed transition summaries are the authoritative
-  source for the DTO; the projection does not recalculate outcomes.
-- The first typed contract targets the competitive campaign only and can be
-  returned by either a live MCP adapter or a recorded fixture provider.
-- Facility detail means observed player capacity/staffing lines until a future
-  structured facility source is justified.
-- Loading, errors, empty arrays, missing fields, and unsupported campaigns are
-  meaningful states, not reasons to guess or silently fall back to true state.
+- Existing seven competitive command families are the complete Phase 3 catalog.
+- Host action metadata is descriptive presentation information; validation and
+  costs remain model/host-owned.
+- Draft actions are local and reversible; submit is a single host operation.
+- A successful submit returns the existing committed session envelope; monthly
+  resolution animation and causal explanation remain Phase 4.
 
 ## Unresolved Questions
 
-- Whether later phases need typed public rival identities beyond market bullets.
-- Which structured action catalog fields should be promoted for Phase 3 without
-  duplicating command costing/validation.
-- How much replay navigation is useful after the first non-mutating history
-  view; Phase 2 only establishes the view and metadata.
+- Which command family should receive the first contextual default for later
+  taskplay without implying an optimal strategy?
+- How should Phase 4 sequence a committed response when a batch has multiple
+  action families and delayed effects?
+- Which action metadata requires domain review before broader campaign support?
 
 ## Design Implications
 
-- The MCP contract needs a separate read-only presentation request/tool rather
-  than overloading `submit_turn` or exposing `CompetitiveWorldState`.
-- The browser adapter needs a versioned envelope and must not depend on whether
-  the host source is live or recorded.
-- State hashes and transition summaries belong to immutable committed history;
-  selection and loading state remain local presentation state.
-- Unsupported campaigns and missing fields must be visible so a later campaign
-  cannot silently inherit competitive semantics.
+- A separate non-mutating validation read is safer than using a rejected submit
+  as a preview and gives the browser recoverable errors.
+- Canonical templates must be host-supplied or derived from the existing parser
+  vocabulary; the browser must not recreate enum lists or numeric bounds.
+- Aggregate costs must be returned by the host using existing command cost
+  methods so the client cannot drift from simulation legality.
+- The UI must distinguish draft, host-validated, submitted, rejected, and
+  committed states; only the last two can reference transition history.
 
 ## Risks
 
-Typed fields can create false confidence if they drift from CLI/MCP formatting,
-or if DTO projection accidentally serializes true-world fields. Rust parity and
-JSON exclusion tests are therefore promotion gates. Browser static checks are
-technical interface proxies and cannot establish human usability, lived
-accessibility, learning, or domain validity.
+The action builder can appear authoritative if it labels a draft as accepted or
+predicts an outcome. Contract tests must require canonical command previews,
+host validation, no local cost formulas, no submit before validation, and
+unchanged state after rejection. Technical task checks do not prove human
+usability, learning, strategic quality, or policy validity.

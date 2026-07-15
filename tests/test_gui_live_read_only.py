@@ -44,12 +44,12 @@ class GuiLiveReadOnlyTests(unittest.TestCase):
 
   def test_read_only_client_does_not_submit_commands(self):
     start = self.app.index("export function createReadOnlyClient")
-    end = self.app.index("export function renderPresentation")
+    end = self.app.index("export function createActionClient")
     client_source = self.app[start:end]
     self.assertIn("getPresentation", client_source)
     self.assertNotIn("submitTurn", client_source)
     self.assertIn("createThinClient", self.app)
-    self.assertIn("not wired into the Phase 2 page", self.readme)
+    self.assertIn("not wired into the Phase 3 page", self.readme)
 
   def test_rust_projection_and_tool_are_explicitly_read_only(self):
     for marker in (

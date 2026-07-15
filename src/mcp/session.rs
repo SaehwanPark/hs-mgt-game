@@ -56,6 +56,17 @@ pub struct GetPresentationRequest {
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetActionCatalogRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct ValidateTurnRequest {
+  pub session_id: String,
+  pub command_text: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct EndSessionRequest {
   pub session_id: String,
 }
@@ -387,6 +398,96 @@ impl GameSessionStore {
       player,
       &observation,
       &history,
+    ))
+  }
+
+  pub fn get_action_catalog(
+    &self,
+    request: GetActionCatalogRequest,
+  ) -> Result<crate::mcp::action::ActionCatalogEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    let GameSession::Competitive(session) = session else {
+      return Err(error_message(
+        "typed action catalog currently supports competitive-regional-v1 only",
+      ));
+    };
+    if session.done {
+      return Err(error_message("session is already complete"));
+    }
+    let player = session
+      .current
+      .human_system()
+      .expect("competitive session must include human system");
+    Ok(crate::mcp::action::competitive_action_catalog(
+      request.session_id,
+      session.current.turn + 1,
+      crate::mcp::presentation::ReadOnlyResources {
+        cash: player.resources.cash,
+        action_points: player.resources.ap_budget,
+        political_capital: player.resources.political_capital,
+      },
+    ))
+  }
+
+  pub fn validate_turn(
+    &self,
+    request: ValidateTurnRequest,
+  ) -> Result<crate::mcp::action::ValidateTurnEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    let GameSession::Competitive(session) = session else {
+      return Err(error_message(
+        "typed action validation currently supports competitive-regional-v1 only",
+      ));
+    };
+    if session.done {
+      return Ok(crate::mcp::action::validation_envelope(
+        request.session_id,
+        &request.command_text,
+        &[],
+        false,
+        vec!["session is already complete".to_string()],
+      ));
+    }
+    let commands = match parse_competitive_batch(&request.command_text) {
+      Ok(commands) => commands,
+      Err(error) => {
+        return Ok(crate::mcp::action::validation_envelope(
+          request.session_id,
+          &request.command_text,
+          &[],
+          false,
+          vec![crate::cli::describe_cli_error(&error)],
+        ));
+      }
+    };
+    let player = session
+      .current
+      .human_system()
+      .expect("competitive session must include human system");
+    let result = validate_competitive_batch(&commands, &player.resources, &session.ruleset);
+    let (valid, errors) = match result {
+      Ok(()) => (true, Vec::new()),
+      Err(error) => {
+        let message = competitive_validation_error_message(error);
+        (false, vec![message.error])
+      }
+    };
+    Ok(crate::mcp::action::validation_envelope(
+      request.session_id,
+      &request.command_text,
+      &commands,
+      valid,
+      errors,
     ))
   }
 
@@ -1867,5 +1968,126 @@ mod tests {
       })
       .expect("observation");
     assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn action_catalog_covers_existing_competitive_command_families() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let catalog = store
+      .get_action_catalog(GetActionCatalogRequest {
+        session_id: session.session_id,
+      })
+      .expect("action catalog");
+    let ids = catalog
+      .actions
+      .iter()
+      .map(|action| action.id.as_str())
+      .collect::<Vec<_>>();
+
+    assert_eq!(catalog.schema_version, "competitive-actions-v1");
+    assert_eq!(
+      ids,
+      [
+        "hold",
+        "invest",
+        "recruit",
+        "monitor",
+        "negotiate",
+        "commit",
+        "project"
+      ]
+    );
+    assert_eq!(
+      catalog
+        .actions
+        .iter()
+        .map(|action| action.command_template.as_str())
+        .collect::<Vec<_>>(),
+      [
+        "hold",
+        "invest domain={{domain}} amount={{amount}}",
+        "recruit role={{role}} headcount={{headcount}}",
+        "monitor target={{target}} depth={{depth}}",
+        "negotiate payer={{payer}} rate_posture={{rate_posture}}",
+        "commit pledge_type={{pledge_type}} level={{level}}",
+        "project kind={{kind}} budget={{budget}}",
+      ]
+    );
+    assert!(
+      catalog
+        .actions
+        .iter()
+        .all(|action| { action.command_template == "hold" || !action.parameters.is_empty() })
+    );
+  }
+
+  #[test]
+  fn action_validation_returns_host_costs_without_advancing() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let before = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation before validation");
+    let validation = store
+      .validate_turn(ValidateTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "recruit role=nurse headcount=2; invest domain=beds amount=10".to_string(),
+      })
+      .expect("validation");
+    let after = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation after validation");
+    let cost = validation.cost.expect("host cost");
+
+    assert_eq!(validation.schema_version, "competitive-validation-v1");
+    assert!(validation.valid);
+    assert_eq!(
+      validation.canonical_command_text,
+      "recruit role=nurse headcount=2; invest domain=beds amount=10"
+    );
+    assert_eq!(cost.action_points, 2);
+    assert_eq!(cost.cash_cost, 20);
+    assert_eq!(validation.previews.len(), 2);
+    assert_eq!(
+      validation.previews[0].canonical_command,
+      "recruit role=nurse headcount=2"
+    );
+    assert_eq!(before, after);
+  }
+
+  #[test]
+  fn invalid_action_validation_is_recoverable_and_non_mutating() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let before = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation before validation");
+    let validation = store
+      .validate_turn(ValidateTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "recruit role=nurse headcount=99".to_string(),
+      })
+      .expect("validation response");
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+
+    assert!(!validation.valid);
+    assert!(
+      validation
+        .errors
+        .iter()
+        .any(|error| error.contains("outside range"))
+    );
+    assert_eq!(current, before);
   }
 }

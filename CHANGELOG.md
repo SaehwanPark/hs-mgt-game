@@ -4,6 +4,29 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.19] - 2026-07-15
+
+### Added
+- Added typed `competitive-actions-v1` and `competitive-validation-v1`
+  contracts plus non-mutating MCP catalog/validation tools for the seven
+  existing competitive command families.
+- Added a catalog-driven browser action builder with local add/revise/remove
+  drafts, canonical previews, host-returned costs and uncertainty metadata,
+  recoverable validation, and submit gating.
+- Added Phase 3 contract documentation and focused GUI/Rust coverage.
+
+### Changed
+- Reused the existing parser, batch validator, action-cost calculation, and
+  `submit_turn` mutation boundary; no transition or browser-side simulation
+  formulas were added.
+- Promoted visual/audio Phase 4 resolution and causal feedback as the next
+  gated candidate and bumped package/public metadata to `0.12.19`.
+
+### Evidence Limits
+- Contract tests and host checks are technical/interface-task evidence only;
+  they do not establish human usability, engagement, lived accessibility,
+  learning, calibration, balance, or policy validity.
+
 ## [0.12.18] - 2026-07-15
 
 ### Added

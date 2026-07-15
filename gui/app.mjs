@@ -680,6 +680,306 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   return { load, render, renderStaticFixture, get envelope() { return currentEnvelope; } };
 }
 
+function setActionControls(root, enabled) {
+  for (const selector of ["#action-builder", "#draft-action-list", "#validate-actions", "#submit-month"]) {
+    const node = root.querySelector(selector);
+    if (node) node.hidden = !enabled;
+  }
+}
+
+function actionCommand(spec, params) {
+  return spec.command_template.replace(/\{\{(.*?)\}\}/g, (_, name) => String(params[name] ?? ""));
+}
+
+function renderDraftActions(drafts, root, onRemove, onRevise) {
+  const list = root.querySelector("#draft-action-list");
+  list.replaceChildren();
+  for (const [index, draft] of drafts.entries()) {
+    const item = document.createElement("li");
+    item.className = "draft-action";
+    const command = document.createElement("code");
+    command.textContent = draft.command;
+    const controls = document.createElement("span");
+    const revise = document.createElement("button");
+    revise.type = "button";
+    revise.textContent = "Revise";
+    revise.addEventListener("click", () => onRevise(index));
+    const remove = document.createElement("button");
+    remove.type = "button";
+    remove.textContent = "Remove";
+    remove.addEventListener("click", () => onRemove(index));
+    controls.append(revise, remove);
+    item.append(command, controls);
+    list.append(item);
+  }
+  if (!drafts.length) emptyState(list, "No draft actions. Add Hold or another host-catalogued action.");
+}
+
+function renderActionCatalog(catalog, root, onAdd) {
+  const list = root.querySelector("#action-preview-list");
+  list.replaceChildren();
+  const builder = root.querySelector("#action-builder");
+  builder.replaceChildren();
+  for (const spec of catalog.actions ?? []) {
+    const item = document.createElement("article");
+    item.className = "action-card action-catalog-card";
+    const heading = document.createElement("div");
+    heading.className = "action-heading";
+    const title = document.createElement("strong");
+    title.textContent = spec.label ?? spec.id ?? "Action";
+    heading.append(title, createStatus("reported", "Host catalog"));
+    const command = document.createElement("p");
+    command.className = "command-preview";
+    command.textContent = spec.command_template ?? "Canonical template unavailable";
+    const meta = document.createElement("div");
+    meta.className = "action-meta";
+    for (const value of [spec.delay_label, spec.constraint_label, spec.uncertainty_label]) {
+      const line = document.createElement("span");
+      line.textContent = String(value ?? "Host metadata unavailable");
+      meta.append(line);
+    }
+    item.append(heading, command, meta);
+    appendSource(item, `ActionCatalog.${spec.id ?? "unknown"}`);
+    list.append(item);
+
+    const form = document.createElement("form");
+    form.className = "action-builder-form";
+    form.dataset.actionId = spec.id ?? "";
+    const formHeading = document.createElement("h3");
+    formHeading.textContent = `Add ${spec.label ?? spec.id ?? "action"}`;
+    form.append(formHeading);
+    for (const parameter of spec.parameters ?? []) {
+      const label = document.createElement("label");
+      label.textContent = parameter.label ?? parameter.name;
+      let input;
+      if (parameter.input_type === "select") {
+        input = document.createElement("select");
+        for (const option of parameter.options ?? []) {
+          const optionNode = document.createElement("option");
+          optionNode.value = option;
+          optionNode.textContent = option;
+          input.append(optionNode);
+        }
+      } else {
+        input = document.createElement("input");
+        input.type = parameter.input_type ?? "text";
+        if (parameter.min != null) input.min = String(parameter.min);
+        if (parameter.max != null) input.max = String(parameter.max);
+      }
+      input.name = parameter.name;
+      input.required = true;
+      label.append(input);
+      form.append(label);
+    }
+    const add = document.createElement("button");
+    add.type = "submit";
+    add.textContent = "Add to draft";
+    form.append(add);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const params = {};
+      for (const parameter of spec.parameters ?? []) {
+        const input = form.elements.namedItem(parameter.name);
+        params[parameter.name] = input?.value ?? "";
+      }
+      if ((spec.parameters ?? []).some((parameter) => !params[parameter.name])) {
+        setPresentationState(root, "Complete each required action field before adding it.");
+        return;
+      }
+      onAdd(spec, params, form);
+    });
+    builder.append(form);
+  }
+  if (!catalog.actions?.length) emptyState(list, "No host action catalog is available.");
+}
+
+function renderValidation(validation, root) {
+  const status = root.querySelector("#validation-status");
+  const submit = root.querySelector("#submit-month");
+  if (!validation) {
+    if (status) status.textContent = "Draft actions need host validation before submission.";
+    if (submit) submit.hidden = true;
+    return;
+  }
+  if (status) {
+    status.textContent = validation.valid
+      ? `Host validation passed: ${validation.cost?.action_points ?? "?"} AP · ${validation.cost?.cash_cost ?? "?"} cash · ${validation.cost?.political_capital ?? "?"} political capital.`
+      : `Host validation rejected the draft: ${(validation.errors ?? []).join(" ")}`;
+  }
+  if (submit) submit.hidden = !validation.valid;
+  renderActions(
+    (validation.previews ?? []).map((preview) => ({
+      label: preview.action_id ?? "Validated action",
+      command: preview.canonical_command,
+      cost: `${preview.cost?.action_points ?? "?"} AP · ${preview.cost?.cash_cost ?? "?"} cash · ${preview.cost?.political_capital ?? "?"} political capital`,
+      delay: preview.delay_label,
+      uncertainty: preview.uncertainty_label,
+      constraint: preview.constraint_label,
+      source: "ValidateTurn.host",
+    })),
+    root,
+  );
+}
+
+export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+  let catalog = null;
+  let drafts = [];
+  let validation = null;
+  let editingIndex = null;
+  let sessionId = adapter?.sessionId;
+
+  function draftCommand() {
+    return drafts.map((draft) => draft.command).join("; ");
+  }
+
+  function invalidateDraft() {
+    validation = null;
+    renderValidation(null, root);
+    setPresentationState(root, "Draft changed; host validation is required again.");
+  }
+
+  function renderDraftState() {
+    renderDraftActions(
+      drafts,
+      root,
+      (index) => {
+        drafts.splice(index, 1);
+        invalidateDraft();
+        renderDraftState();
+      },
+      (index) => {
+        const draft = drafts[index];
+        const form = root.querySelector(`form[data-action-id="${draft.action_id}"]`);
+        if (!form) return;
+        for (const [name, value] of Object.entries(draft.params)) {
+          const input = form.elements.namedItem(name);
+          if (input) input.value = value;
+        }
+        editingIndex = index;
+        const button = form.querySelector("button[type=submit]");
+        if (button) button.textContent = "Replace draft";
+        setPresentationState(root, `Revising draft action ${index + 1}.`);
+      },
+    );
+  }
+
+  async function validateDraft() {
+    if (!adapter || typeof adapter.validateTurn !== "function") {
+      setPresentationState(root, "No host validation adapter configured; no submission was attempted.");
+      return { ok: false, code: "validation_adapter_missing" };
+    }
+    setPresentationState(root, "Validating draft with the host…");
+    try {
+      const result = await adapter.validateTurn(sessionId, draftCommand());
+      validation = result;
+      renderValidation(validation, root);
+      setPresentationState(root, validation.valid ? "Host validation passed; review before submitting." : "Host validation rejected the draft; revise and retry.");
+      return { ok: Boolean(validation.valid), envelope: validation };
+    } catch (error) {
+      validation = null;
+      renderValidation(null, root);
+      const message = error instanceof Error ? error.message : String(error);
+      setPresentationState(root, `Validation adapter error: ${message}`);
+      return { ok: false, code: "validation_adapter_error", message };
+    }
+  }
+
+  async function submit() {
+    if (!validation?.valid || validation.canonical_command_text !== draftCommand()) {
+      setPresentationState(root, "Validate the unchanged draft before submitting.");
+      return { ok: false, code: "validation_required" };
+    }
+    if (!adapter || typeof adapter.submitTurn !== "function") {
+      setPresentationState(root, "No submit adapter configured; no transition was attempted.");
+      return { ok: false, code: "submit_adapter_missing" };
+    }
+    let response;
+    try {
+      response = await adapter.submitTurn(validation.canonical_command_text);
+      if (response?.error) throw new Error(response.error);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setPresentationState(root, `Submission rejected; current session was not replaced: ${message}`);
+      return { ok: false, code: "submit_rejected", message };
+    }
+    drafts = [];
+    validation = null;
+    editingIndex = null;
+    let refreshMessage = "Committed response received from the host adapter.";
+    if (typeof adapter.getPresentation === "function") {
+      try {
+        const presentation = await adapter.getPresentation(sessionId);
+        if (!renderReadOnlyEnvelope(presentation, root).ok) {
+          renderEnvelope(response, root);
+          refreshMessage = "Committed response received; read-only refresh was unavailable.";
+        }
+      } catch (error) {
+        renderEnvelope(response, root);
+        const message = error instanceof Error ? error.message : String(error);
+        refreshMessage = `Committed response received; read-only refresh failed: ${message}`;
+      }
+    } else {
+      renderEnvelope(response, root);
+    }
+    setActionControls(root, true);
+    renderDraftState();
+    renderValidation(null, root);
+    setPresentationState(root, refreshMessage);
+    return { ok: true, envelope: response };
+  }
+
+  async function load(nextSessionId = adapter?.sessionId) {
+    sessionId = nextSessionId;
+    setActionControls(root, false);
+    renderActions([], root);
+    const actionMode = root.querySelector("#action-mode");
+    if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
+    setPresentationState(root, "Loading action catalog…");
+    if (!adapter || typeof adapter.getActionCatalog !== "function" || typeof adapter.validateTurn !== "function") {
+      setPresentationState(root, "Action adapter unavailable; read-only mode remains active.");
+      return { ok: false, code: "action_adapter_missing" };
+    }
+    try {
+      if (typeof adapter.getPresentation === "function") {
+        const presentation = await adapter.getPresentation(sessionId);
+        const rendered = renderReadOnlyEnvelope(presentation, root);
+        if (!rendered.ok) return rendered;
+      }
+      catalog = await adapter.getActionCatalog(sessionId);
+      if (!catalog || catalog.schema_version !== "competitive-actions-v1") {
+        throw new Error("Unsupported action catalog schema.");
+      }
+      renderActionCatalog(catalog, root, (spec, params, form) => {
+        const draft = { action_id: spec.id, params, command: actionCommand(spec, params) };
+        if (editingIndex == null) drafts.push(draft);
+        else drafts[editingIndex] = draft;
+        editingIndex = null;
+        const button = form.querySelector("button[type=submit]");
+        if (button) button.textContent = "Add to draft";
+        invalidateDraft();
+        renderDraftState();
+        setActionControls(root, true);
+      });
+      setActionControls(root, true);
+      if (actionMode) actionMode.textContent = "host-catalogued draft builder";
+      renderDraftState();
+      renderValidation(null, root);
+      setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
+      return { ok: true, catalog };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      setActionControls(root, false);
+      if (actionMode) actionMode.textContent = "read-only view · action adapter unavailable";
+      setPresentationState(root, `Action adapter error: ${message}`);
+      return { ok: false, code: "action_adapter_error", message };
+    }
+  }
+
+  root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
+  root.querySelector("#submit-month")?.addEventListener("click", submit);
+  return { load, validate: validateDraft, submit, get drafts() { return drafts; } };
+}
+
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   if (!fixture) {
@@ -785,18 +1085,36 @@ export function createThinClient({ adapter = globalThis.HsMgtGameAdapter, root =
 }
 
 if (typeof document !== "undefined") {
-  const client = createReadOnlyClient({ root: document });
-  client.load();
-  globalThis.HsMgtGui = {
-    client,
-    createReadOnlyClient,
-    createThinClient,
-    renderEnvelope,
-    renderPresentation,
-    renderReadOnlyEnvelope,
-    validateCommand,
-    validateReadOnlyEnvelope,
-  };
+  const actionAdapter = globalThis.HsMgtGameActionAdapter;
+  if (actionAdapter) {
+    const client = createActionClient({ root: document });
+    client.load();
+    globalThis.HsMgtGui = {
+      client,
+      createActionClient,
+      createReadOnlyClient,
+      createThinClient,
+      renderEnvelope,
+      renderPresentation,
+      renderReadOnlyEnvelope,
+      validateCommand,
+      validateReadOnlyEnvelope,
+    };
+  } else {
+    const client = createReadOnlyClient({ root: document });
+    client.load();
+    globalThis.HsMgtGui = {
+      client,
+      createActionClient,
+      createReadOnlyClient,
+      createThinClient,
+      renderEnvelope,
+      renderPresentation,
+      renderReadOnlyEnvelope,
+      validateCommand,
+      validateReadOnlyEnvelope,
+    };
+  }
 }
 
 export {
