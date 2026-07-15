@@ -1,4 +1,4 @@
-# Domain QA — Visual and Audio Phase 3 Contextual Action Submission v0.12.19
+# Domain QA — Visual and Audio Phase 4 Resolution and Causal Feedback v0.12.20
 
 ## Status
 
@@ -7,37 +7,35 @@ pass
 ## Reviewed Inputs
 
 - User request and `_workspace/00_input/request-summary.md`.
-- `_workspace/22_implementation_plan_visual_audio_phase3.md`.
-- `docs/visual-audio-phase3-contextual-actions-v0.12.19.md`, the accepted
-  Phase 0 alignment/ADR-0011, and the merged Phase 1/2 documents.
+- `_workspace/23_implementation_plan_visual_audio_phase4.md`.
+- `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, and
+  `docs/visual-audio-phase4-resolution-causal-v0.12.20.md`.
+- The accepted Phase 0 alignment/ADR-0011 and merged Phase 1/2/3 documents.
 - `SPEC.md`, `ARCHITECTURE.md`, `docs/visual_audio_upgrade_proposal.md`,
   canonical product docs, and the harness team spec.
-- `src/mcp/action.rs`, `src/mcp/presentation.rs`, `src/mcp/session.rs`,
-  `src/mcp/server.rs`, `gui/app.mjs`, `gui/index.html`, and Phase 3 tests.
+- `src/mcp/resolution.rs`, `src/mcp/presentation.rs`, `src/mcp/session.rs`,
+  `src/mcp/server.rs`, `gui/app.mjs`, `gui/index.html`, and Phase 4 tests.
 
 ## Findings
 
-- The new `competitive-actions-v1` catalog covers all seven existing
-  competitive command families with host-owned templates, parameter options,
-  bounds, and descriptive timing/uncertainty/constraint metadata. It does not
-  expose true world state, private rival actions, resolved stochastic inputs,
-  or an outcome forecast.
-- `get_action_catalog` and `validate_turn` are read-only MCP operations.
-  Validation reuses the existing parser, batch validator, and `ActionCost`
-  methods; invalid syntax/resource/ruleset results are returned as data for
-  revision rather than as a browser-side legality decision.
-- The browser path renders generic forms, local draft add/revise/remove, host
-  exact aggregate costs and previews, and submit gating. Draft changes clear
-  prior validation, and a rejected submit leaves the current session and draft
-  available for retry.
-- `competitive-read-only-v1` remains the presentation source for current
-  actor-visible observations, pending work, committed history, hashes, and
-  replay metadata. No projection or browser code recalculates operating
-  outcomes, rival behavior, delays, or causal claims.
-- Legacy MCP tools and thin-client exports remain available. The action path
-  uses only the existing `submit_turn` mutation boundary; no simulation,
-  randomness, replay verification, scenario, audio, asset, or network core
-  behavior changed.
+- `competitive-resolution-v1` is a read-only host envelope over committed
+  `CompetitiveTransition` history. It supports latest and selected historical
+  competitive turns and returns explicit errors for unsupported campaigns,
+  missing history, and unavailable turns.
+- Before/after resources, operations, and pending processes are derived through
+  the existing actor-visible `observe_for_human`/presentation projection. The
+  browser receives no true world state, resolved stochastic inputs, private
+  rival actions, or effect queue.
+- The eight resolution steps reuse the accepted `TransitionSummary` command,
+  event, and effect surfaces plus actor-visible information. Source labels keep
+  committed effects distinct from presentation-level before/after comparison;
+  no inferred causal graph or new causal engine was added.
+- Historical reads preserve the session observation and state hash. Browser
+  play/pause/skip/review and reduced-motion behavior are local presentation
+  state; all result text remains available immediately in the DOM.
+- A successful `submit_turn` is reported separately from optional resolution or
+  presentation refresh errors. Existing parser, validator, action catalog, and
+  transition boundaries remain authoritative.
 
 ## Required Fixes
 
@@ -47,23 +45,21 @@ None.
 
 - Browser rendering and viewport checks could not be exercised because no
   Chromium/Chrome binary is installed; browser-native QA remains a follow-up.
-- Typed projection parity can drift if future observation fields are added
-  without source-map and serialization updates.
-- Static/AI checks do not establish human usability, lived accessibility,
-  learning, engagement, domain-expert validity, or policy validity.
-- Phase 4 must keep committed resolution and causal presentation sourced from
-  visible committed effects and must not turn the action builder into client
-  authority.
+- The resolution step strings reuse existing committed summaries and are not a
+  richer structured causal model; future clarity work must preserve the same
+  source and observation boundary.
+- Static/AI checks do not establish human comprehension, usability, lived
+  accessibility, learning, engagement, domain-expert validity, calibration,
+  balance, or policy validity.
+- Phase 5 must keep audio optional, visible-only, provenance-backed, and
+  independent of simulation state, hashes, and replay semantics.
 
 ## Verification Evidence
 
-- Focused GUI/action/read-only tests: 23 passed.
-- Full Python test discovery: 253 tests passed.
-- Node syntax check: passed.
-- Focused action/projection tests: 6 passed.
-- `cargo fmt --check`: passed.
-- `cargo clippy --all-targets -- -D warnings`: passed.
-- `cargo test --all -- --test-threads=1`: passed (314 unit tests plus
-  integration/golden/doc-test targets).
-- `python3 scripts/check_release_metadata.py`: passed at `0.12.19`.
-- `git diff --check`: passed.
+- Focused resolution/contextual/read-only GUI tests: 15 passed.
+- Node syntax check, Rust formatting, and Clippy with warnings denied: passed.
+- Full Python discovery: 257 tests passed.
+- Serial Rust tests: 317 unit tests plus 13 integration/golden/scenario tests
+  passed; doc-tests passed with zero tests.
+- Node syntax, Rust formatting, Clippy with warnings denied, release metadata,
+  and whitespace checks: passed at `0.12.20`.

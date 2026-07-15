@@ -24,7 +24,7 @@ use crate::scenario::{
 };
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
-const COMPETITIVE_MONTH_LIMIT: u32 = 24;
+pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct StartSessionRequest {
@@ -53,6 +53,12 @@ pub struct GetHistoryRequest {
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct GetPresentationRequest {
   pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetResolutionRequest {
+  pub session_id: String,
+  pub turn: Option<u32>,
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
@@ -431,6 +437,51 @@ impl GameSessionStore {
         action_points: player.resources.ap_budget,
         political_capital: player.resources.political_capital,
       },
+    ))
+  }
+
+  pub fn get_resolution(
+    &self,
+    request: GetResolutionRequest,
+  ) -> Result<crate::mcp::resolution::ResolutionEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    let GameSession::Competitive(session) = session else {
+      return Err(error_message(
+        "typed resolution currently supports competitive-regional-v1 only",
+      ));
+    };
+    let Some(latest_index) = session.history.transitions.len().checked_sub(1) else {
+      return Err(error_message(
+        "no committed competitive transition is available",
+      ));
+    };
+    let index = match request.turn {
+      Some(turn) => session
+        .history
+        .transitions
+        .iter()
+        .position(|transition| transition.next.turn == turn)
+        .ok_or_else(|| error_message(format!("no committed transition for turn {turn}")))?,
+      None => latest_index,
+    };
+    let transition = &session.history.transitions[index];
+    let prior_aggregated = index
+      .checked_sub(1)
+      .and_then(|prior_index| session.history.transitions.get(prior_index))
+      .map(|prior| &prior.aggregated);
+    Ok(crate::mcp::resolution::from_competitive_transition(
+      request.session_id,
+      session.seed,
+      session.current.difficulty,
+      transition,
+      prior_aggregated,
+      session.history.transitions.len(),
+      summarize_competitive_transition(transition),
     ))
   }
 
@@ -990,7 +1041,9 @@ fn summarize_stabilization_transition(transition: &Transition) -> TransitionSumm
   }
 }
 
-fn summarize_competitive_transition(transition: &CompetitiveTransition) -> TransitionSummary {
+pub(crate) fn summarize_competitive_transition(
+  transition: &CompetitiveTransition,
+) -> TransitionSummary {
   let command = transition
     .aggregated
     .batch_for_system(0)
@@ -1968,6 +2021,142 @@ mod tests {
       })
       .expect("observation");
     assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn resolution_returns_eight_host_sourced_steps_without_advancing() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let advanced = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("competitive month");
+    let before = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation before resolution read");
+    let resolution = store
+      .get_resolution(GetResolutionRequest {
+        session_id: session.session_id,
+        turn: None,
+      })
+      .expect("resolution");
+    let after = store
+      .get_observation(GetObservationRequest {
+        session_id: advanced.session_id.clone(),
+      })
+      .expect("observation after resolution read");
+    let ids = resolution
+      .steps
+      .iter()
+      .map(|step| step.id.as_str())
+      .collect::<Vec<_>>();
+    let json = serde_json::to_string(&resolution).expect("resolution json");
+
+    assert_eq!(resolution.schema_version, "competitive-resolution-v1");
+    assert_eq!(resolution.turn, 1);
+    assert_eq!(
+      ids,
+      [
+        "submitted",
+        "responses",
+        "processes",
+        "operations",
+        "resources",
+        "effects",
+        "information",
+        "pending"
+      ]
+    );
+    assert_eq!(
+      resolution.replay.state_hash,
+      advanced
+        .latest_transition
+        .as_ref()
+        .expect("latest transition")
+        .state_hash
+    );
+    assert_eq!(before, after);
+    for forbidden in [
+      "CompetitiveWorldState",
+      "resolved_inputs",
+      "effect_queue",
+      "event_metadata",
+      "rna_strike_active",
+    ] {
+      assert!(!json.contains(forbidden), "found {forbidden}");
+    }
+  }
+
+  #[test]
+  fn resolution_historical_lookup_is_hash_stable_and_recoverable() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let mut current = session;
+    for _ in 0..2 {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("competitive month");
+    }
+    let history = store
+      .get_history(GetHistoryRequest {
+        session_id: current.session_id.clone(),
+      })
+      .expect("history");
+    let resolution = store
+      .get_resolution(GetResolutionRequest {
+        session_id: current.session_id.clone(),
+        turn: Some(1),
+      })
+      .expect("historical resolution");
+    let after = store
+      .get_observation(GetObservationRequest {
+        session_id: current.session_id.clone(),
+      })
+      .expect("current observation");
+
+    assert_eq!(resolution.turn, 1);
+    assert_eq!(
+      resolution.replay.state_hash,
+      history.transitions[0].state_hash
+    );
+    assert_eq!(resolution.replay.transition_count, 2);
+    assert_eq!(after.turn, 3);
+    assert!(
+      store
+        .get_resolution(GetResolutionRequest {
+          session_id: current.session_id,
+          turn: Some(99),
+        })
+        .is_err()
+    );
+  }
+
+  #[test]
+  fn resolution_rejects_unsupported_campaign_and_empty_history() {
+    let mut store = GameSessionStore::default();
+    let stabilization = start(&mut store, "stabilization-v1");
+    assert!(
+      store
+        .get_resolution(GetResolutionRequest {
+          session_id: stabilization.session_id,
+          turn: None,
+        })
+        .is_err()
+    );
+
+    let competitive = start(&mut store, "competitive-regional-v1");
+    let result = store.get_resolution(GetResolutionRequest {
+      session_id: competitive.session_id,
+      turn: None,
+    });
+    assert!(result.is_err());
   }
 
   #[test]

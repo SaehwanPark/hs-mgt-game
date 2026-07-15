@@ -1,52 +1,57 @@
-# Request Summary — Visual and Audio Phase 3 Contextual Action Submission v0.12.19
+# Request Summary — Visual and Audio Phase 4 Resolution/Causal Feedback v0.12.20
 
 ## Scope
 
-- Promote the next SPEC item after the merged Phase 2 read-only viewer.
-- Let an executive build, revise, validate, and submit one competitive month
-  graphically without learning CLI syntax.
-- Use host-supplied action catalog/validation data and the existing canonical
-  `submit_turn` transition boundary.
-- Preserve explicit costs, delays, constraints, uncertainty, rejection
-  atomicity, observation boundaries, and version `0.12.19`.
+- Continue the merged visual/audio track after Phase 3 contextual action
+  submission.
+- Make one committed `competitive-regional-v1` month understandable through a
+  host-supplied resolution sequence, operating/resource breakdown, and direct
+  committed-effect presentation.
+- Let the browser play, pause, skip, and review the presentation locally while
+  replay lookup remains a non-mutating host read.
+- Preserve actor-visible information boundaries, explicit uncertainty, replay
+  hashes, and version `0.12.20` for the implementation PR.
 
 ## Sources
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 3 requirements.
-- Phase 0 alignment, Phase 1 static desktop, Phase 2 read-only projection,
-  ADR-0011, and merged GUI/MCP surfaces.
-- Existing competitive command parser/specs, command costs, validator,
-  transition boundary, MCP tests, CLI tests, and replay/golden tests.
+- `docs/visual_audio_upgrade_proposal.md` Phase 4 requirements and exit gate.
+- Merged Phase 0–3 alignment, architecture, GUI, MCP, and action contracts.
+- Existing `CompetitiveTransition`, `TransitionSummary`, `PlayerObservation`,
+  `AttributedEffect`, `ReadOnlyPresentationEnvelope`, and replay/history code.
 - Canonical proposal, roadmap, design principles, harness team spec, SPEC,
   architecture, changelog, lessons, and versioning policy.
 
 ## Expected files
 
-- Typed Rust action catalog/validation DTOs and non-mutating MCP reads.
-- Browser contextual action builder, draft batch/revision/removal, validation,
-  retry, and host-owned submit flow.
-- Phase 3 contract document, SPEC/architecture/version records, tests, evidence,
+- Typed read-only resolution DTO and `get_resolution` MCP/session tool.
+- Browser resolution renderer integrated after a successful graphical submit,
+  with local step, pause, skip, review, and reduced-motion behavior.
+- Phase 4 contract document, SPEC/architecture/version records, tests, evidence,
   domain QA, lessons, and final handoff.
 
 ## Validation target
 
-- Canonical command equivalence and host-derived costs/constraints.
-- Non-mutating valid/invalid validation and rejected-submit atomicity.
-- Graphical draft workflow, no-submit-before-validation, error recovery,
-  explicit uncertainty, syntax, metadata, and no-network/no-asset checks.
-- Full Python and Rust verification plus one code-review pass and CI.
+- Resolution steps are sourced from committed transition/history data and
+  actor-visible before/after observations.
+- Operating and resource changes are explicit before/after values; causal
+  presentation uses direct host effects or documented display comparison only.
+- Replay lookup does not advance, rewrite, or alter state, history, or hashes.
+- Textual results are available immediately and remain complete when paused,
+  skipped, reduced-motion, or refreshed.
+- Full Python and Rust verification plus exactly one code-review pass and CI.
 
 ## Explicit non-goals
 
-No browser formulas, second parser, new command family, hidden outcome forecast,
-resolution animation, causal overlay, audio, assets, replay playback, campaign
-expansion, mobile support, deployment, or human-usability claim. No transition
-path other than the existing host/MCP `submit_turn` boundary.
+No new transition formula, stochastic input, causal inference engine, hidden
+true-state field, private rival reveal, audio playback, asset pipeline, broad
+replay UI, other campaign support, mobile redesign, deployment, or human-
+usability claim. No browser-owned outcome calculation or second simulation.
 
 ## Global workflow
 
-Use the repo orchestrator and end-user experience workflow for the action
-builder, the global simple-code/spec-driven/plan-design skills, and the
-preferred workflow with exactly one code reviewer. Implement on a feature
-branch, verify, open a PR, review once, merge into `main`, and then design
-Phase 4.
+Use the repo orchestrator, evidence mapper, mechanism designer, domain QA, and
+end-user experience workflow for the bounded resolution surface; use global
+simple-code/spec-driven/plan-design skills and the preferred workflow with
+exactly one code reviewer. Implement on a feature branch, verify, open a PR,
+review once, merge into `main`, and then design Phase 5 audio only after the
+Phase 4 gate closes.

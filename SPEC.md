@@ -4048,52 +4048,59 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 3 contextual action submission
-  Status: Complete; Phase 4 is the next gated candidate
+- Feature: Visual/audio Phase 4 resolution and causal feedback
+  Status: Complete; Phase 5 is the next gated candidate
   Started: 2026-07-15
-  Branch: feat/visual-audio-phase3-contextual-actions-v0.12.19
+  Branch: feat/visual-audio-phase4-resolution-causal-v0.12.20
 
   Summary:
-  Phase 3 adds one graphical competitive-month decision-to-submit path. The
-  browser renders a host-supplied action catalog, keeps add/revise/remove draft
-  state locally, asks the host to validate the canonical batch, shows exact
-  host-returned costs and descriptive timing/uncertainty/constraint previews,
-  and submits only an unchanged validated batch through the existing mutation
-  boundary.
+  Phase 4 adds one graphical competitive-month decision-to-consequence path.
+  The host returns a typed, actor-visible resolution envelope for the latest or
+  selected committed transition. The browser renders eight ordered steps,
+  before/after operating and resource snapshots, direct committed effects,
+  newly visible information, pending processes, and local play/pause/skip/review
+  controls without taking ownership of simulation state.
 
   Done:
-  - Added `competitive-actions-v1` and `competitive-validation-v1` typed host
-    contracts and non-mutating `get_action_catalog`/`validate_turn` MCP tools
-    for the existing seven competitive command families.
-  - Reused the existing parser, batch validator, action costs, and
-    `submit_turn` transition boundary; validation and rejection leave the
-    session unchanged.
-  - Added the browser `HsMgtGameActionAdapter` and generic catalog-driven
-    forms with canonical command previews, local draft add/revise/remove,
-    host validation, recoverable errors, and submit gating.
-  - Added Phase 3 contract documentation, GUI/Rust tests, and explicit
-    evidence limits; no browser-side cost, legality, stochastic, or outcome
-    formulas were added.
-  - Bumped package and public metadata to `0.12.19`.
+  - Added `competitive-resolution-v1` typed host output and the non-mutating
+    `get_resolution` MCP tool for latest and immutable historical competitive
+    transitions.
+  - Derived decision-time and post-transition snapshots through the existing
+    actor-visible observation projection, and reused committed transition event
+    and effect summaries as source-labeled resolution content.
+  - Added the browser resolution panel with eight visible steps, operating and
+    resource before/after summaries, effect sources, committed state hash,
+    historical review, local pacing controls, skip/pause/review behavior, and
+    reduced-motion handling.
+  - Kept all resolution text in the DOM immediately; local controls change
+    presentation state only, and successful submission remains distinct from
+    optional resolution/presentation refresh errors.
+  - Added Phase 4 contract documentation, GUI/Rust tests, and explicit
+    evidence limits; no browser formulas, causal inference graph, audio, or
+    asset behavior was added.
+  - Bumped package and public metadata to `0.12.20`.
 
   Not Yet Done:
-  - Promote Phase 4 only for committed monthly resolution sequencing and
-    direct causal feedback after this action path is reviewed as a complete
-    one-month graphical decision surface.
+  - Promote Phase 5 only for bounded, visible, optional foundational audio
+    after this resolution surface is reviewed as a complete one-month
+    graphical decision surface.
 
   Deferred / Non-Goals:
-  - No resolution animation, causal overlays, replay playback, audio
-    playback, assets, mobile support, campaign expansion, packaging,
+  - No audio playback, assets, mobile support, campaign expansion, packaging,
     deployment, or human evaluation.
+  - No inferred causal graph, private rival reveal, true-state view, resolved
+    stochastic-input exposure, general replay editor, or audio-driven state.
   - No transition formulas, randomness, replay verification, history/hash
     semantics, scenario rules, or existing command families changed.
-  - Phases 4–9 remain sequentially gated by their own evidence and acceptance
+  - Phases 5–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - Host and GUI contracts pass for catalog coverage, canonical command
-    wiring, exact host costs, non-mutating validation/rejection, unchanged
-    validation gating, no-network/no-asset behavior, and JavaScript syntax.
+  - Host and GUI contracts pass for typed eight-step resolution coverage,
+    source-labeled actor-visible snapshots, historical hash stability,
+    non-mutating reads, local control behavior, reduced-motion handling,
+    separate refresh errors, no-network/no-asset behavior, and JavaScript
+    syntax.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
@@ -4102,9 +4109,9 @@ Verification:
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 3 complete; Phase 4 is the next ranked candidate. No later feature
+Status: Phase 4 complete; Phase 5 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 3 document exists.
+prototype or Phase 4 document exists.
 
 #### Existing foundation (`Done`)
 
@@ -4112,9 +4119,9 @@ prototype or Phase 3 document exists.
   actor-visible observations, canonical commands, immutable history, replay
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
 - The dependency-free `gui/` surface renders typed actor-visible data and a
-  host-validated competitive action workflow. It proves a thin-client/live-
-  decision direction; it is not the persistent regional world, resolution
-  system, audio layer, or campaign-complete GUI described here.
+  host-validated competitive action and resolution workflow. It proves a
+  thin-client/live-decision direction; it is not the persistent regional world,
+  audio layer, or campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4175,6 +4182,28 @@ prototype or Phase 3 document exists.
   Static contracts and Rust tests are technical evidence only; no human
   usability, accessibility, learning, calibration, or policy-validity claim
   follows.
+
+#### Phase 4 resolution and causal feedback (`Done`)
+
+- The MCP host exposes `competitive-resolution-v1` through non-mutating
+  `get_resolution`, selecting the latest committed competitive transition or
+  an immutable historical turn.
+- The envelope contains eight ordered, source-labeled steps: submitted batch,
+  visible responses, process advancement, operating result, resource changes,
+  direct committed effects, newly visible information, and updated pending
+  processes.
+- Before/after resources and operations are derived from actor-visible
+  projections. Direct effects reuse committed transition summaries; the
+  browser does not infer causal graphs, reveal hidden state, or calculate
+  outcomes.
+- The browser renders the complete textual result immediately and adds local
+  play/pause/skip/review pacing, historical loading, state-hash display, and
+  reduced-motion behavior without mutating the session.
+- Phase 4 is documented in
+  [`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
+  Technical/interface-task checks do not establish human comprehension,
+  usability, lived accessibility, learning, engagement, calibration, balance,
+  domain validity, or policy validity.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4316,14 +4345,14 @@ prototype or Phase 3 document exists.
 | 1. Static executive desktop | Navigable injected-data desktop, responsive layout, design tokens, entity/status language, initial icons | AI review profiles locate finance/workforce/capacity/access/rival information without raw JSON; hidden-state and viewport checks pass |
 | 2. Live read-only integration | Typed live/recorded adapter, observations, entity detail, pending/history/hash views, replay prototype, loading/error/empty states | CLI/MCP visible-fact parity, no duplicated formulas, stable fixtures, and explicit missingness |
 | 3. Contextual action submission | Action forms/batch builder, command preview, validation/retry, one graphical competitive month | Generated commands are equivalent, costs/delays are visible, rejection is non-mutating, and no stochastic certainty is implied |
-| 4. Resolution and causal feedback | One polished month, sequencing, animation, operating breakdown, causal overlays, skip/pause/review/replay | Principal drivers are traceable to committed effects; textual results are immediate; replay is non-mutating |
+| 4. Resolution and causal feedback (`Done`) | One committed month, typed sequencing, operating breakdown, source-labeled direct effects, skip/pause/review/historical read | Principal drivers are traceable to committed effects; textual results are immediate; historical reads are non-mutating |
 | 5. Foundational audio | Four music states, bounded UI/event cues, controls, registry/credits, deterministic cue mapping | Audio leaves state/hash/replay unchanged, muted play is complete, music leaks no hidden state, provenance is complete, repeated cues are restrained |
 | 6. Persistent regional world | Expanded map, demand/access overlays, identities, public projects/rival actions, navigation, relationships, timeline/assets | Map supports decisions/explanations, respects rival observation lag, and decorative complexity does not obscure state |
 | 7. Campaign coverage | Tutorial-oriented stabilization flow and affiliation partner/fit/commitment/review/integration flow with shared plus campaign-specific visuals/audio | Components are reused without flattening campaign semantics or requiring GUI-driven simulation changes |
 | 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 
-Do not start broad map or asset production before Phases 0–4 close. Do not
+Do not start broad map or asset production before Phase 5 closes. Do not
 extend presentation primitives to stabilization or affiliation before the
 competitive slice demonstrates their semantics. A phase may move into
 `Present` only with its own concise `Done`, `Not Yet Done`, verification, and
@@ -4470,8 +4499,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 4 resolution and causal feedback is the next candidate.
-   It must sequence one committed month, trace direct visible effects, remain
-   skippable/reviewable, and preserve non-mutating replay/presentation behavior.
-2. Phases 5–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 5 foundational audio is the next candidate. It must map
+   only visible committed conditions to optional cues, provide complete visual
+   equivalents and independent controls, and preserve state/hash/replay
+   behavior.
+2. Phases 6–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

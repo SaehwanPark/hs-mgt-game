@@ -154,10 +154,12 @@ randomness or mutate the core directly.
 The `gui/` proof renders an injected session envelope or the typed
 `competitive-read-only-v1` projection through
 `window.HsMgtGameReadOnlyAdapter`. When a
-`window.HsMgtGameActionAdapter` is supplied, the Phase 3 page renders a host
+`window.HsMgtGameActionAdapter` is supplied, the Phase 3/4 page renders a host
 catalogue, keeps draft rows locally, validates canonical batches through the
-host, and calls `submitTurn` only for an unchanged valid batch. The included
-demo envelope is a display fixture, not a browser-owned simulation.
+host, calls `submitTurn` only for an unchanged valid batch, and reads the typed
+`competitive-resolution-v1` envelope through `getResolution` after a commit.
+The included demo envelope is a display fixture, not a browser-owned
+simulation.
 
 Last Reviewed: 2026-07-12
 Status: Verified
@@ -176,10 +178,11 @@ Status: Verified
 
 Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
 fixture-driven static executive desktop, Phase 2 adds a typed, read-only
-host/MCP projection, and Phase 3 adds host-catalogued contextual action
-submission for `competitive-regional-v1` in `gui/`. The GUI remains a
-non-authoritative thin client; animation, audio playback, and the asset
-pipeline remain future work. All future work should follow this
+host/MCP projection, Phase 3 adds host-catalogued contextual action submission,
+and Phase 4 adds a host-derived monthly resolution envelope for
+`competitive-regional-v1` in `gui/`. The GUI remains a non-authoritative thin
+client; audio playback and the asset pipeline remain future work. All future
+work should follow this
 one-way authority flow:
 
 ```text
@@ -216,9 +219,10 @@ Candidate serializable presentation contracts are:
 These are contract responsibilities, not a license to expose simulation state.
 Phase 2 promoted the narrowest typed read-only projection needed for the first
 competitive slice. Phase 3 adds only the action catalog and validation fields
-needed to remove command-entry friction; it reuses existing parser, validator,
-cost, and submission boundaries rather than introducing a second command
-engine.
+needed to remove command-entry friction, and Phase 4 adds only the committed
+resolution read needed to explain one completed month. Both reuse existing
+parser, validator, observation, history, effect, cost, and submission
+boundaries rather than introducing a second command or outcome engine.
 
 Visible observations and committed effects are the only sources for graphical
 status, animation, advisory bottleneck text, music mood, and event cues. Missing,
@@ -264,10 +268,12 @@ Phase 2 live read-only scope is documented in
 [`docs/visual-audio-phase2-live-read-only-v0.12.18.md`](docs/visual-audio-phase2-live-read-only-v0.12.18.md).
 Phase 3 contextual action scope is documented in
 [`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
+Phase 4 resolution scope is documented in
+[`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
 The projection remains display-only, while the action catalog/validation tools
-are non-mutating and `submit_turn` remains the sole transition boundary.
-Resolution animation, causal overlays, audio playback, and the asset pipeline
-remain planned implementations.
+and `get_resolution` are non-mutating; `submit_turn` remains the sole
+transition boundary. Audio playback and the asset pipeline remain planned
+implementations.
 
 ## Durable Constraints
 

@@ -29,6 +29,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   first; keep selection and preview state local and reserve validation,
   transition, and outcome logic for the host boundary.
 
+## Keep Resolution Presentation Derived From History
+
+- Context: Phase 4 needed to make one committed competitive month legible after
+  graphical action submission without creating a second outcome engine.
+- Symptom: A browser timeline could appear causal while silently recomputing
+  operations, revealing hidden state, or hiding result text behind animation.
+- Resolution: Added a host-derived resolution envelope with actor-visible
+  before/after snapshots, committed event/effect source labels, historical hash
+  metadata, and local-only pacing. All textual steps are rendered immediately.
+- Prevention: Treat resolution as a read of immutable history; label direct
+  committed effects separately from presentation comparisons, keep skipped and
+  reduced-motion views complete, and never infer a causal graph in the client.
+
 ## Close Presentation Gates Before Adding DTOs or Assets
 
 - Context: The visual/audio proposal listed a broad GUI, audio, and asset track,
