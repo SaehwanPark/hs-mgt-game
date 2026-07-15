@@ -4,6 +4,22 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.18] - 2026-07-15
+
+### Added
+- Promoted the visual/audio Phase 2 `competitive-read-only-v1` typed MCP
+  presentation projection with actor-visible session, observation, resources,
+  institution/facility, pending-process, history, hash, and replay metadata.
+- Added the non-mutating `get_presentation` MCP tool and browser
+  `HsMgtGameReadOnlyAdapter`/`createReadOnlyClient` path with explicit loading,
+  error, empty, missing, and unsupported-schema states.
+- Added projection hidden-field/no-transition tests, live-read-only browser
+  contract tests, and the Phase 2 contract document.
+
+### Changed
+- Kept graphical action submission outside the Phase 2 viewer for Phase 3 and
+  bumped package/public metadata to `0.12.18`.
+
 ## [0.12.17] - 2026-07-15
 
 ### Added

@@ -1429,3 +1429,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   every human-experience claim as deferred.
 - Prevention: For each validation gate, name both what the affordable method can
   establish and what still requires separately funded work with people.
+
+## Typed Read-Only Projections Must Exclude Commands by Construction
+
+- Context: Promoting the Phase 2 browser fixture to real live/recorded session
+  data after Phase 1 exposed the risk of treating a presentation DTO as a
+  convenient mirror of simulation state.
+- Symptom: A broad session envelope could silently carry legal commands,
+  resolved inputs, effect queues, or private rival data into a client that only
+  needs to display observations and committed history.
+- Resolution: Added a separate versioned `get_presentation` projection that
+  selects actor-visible observation/resource fields and committed transition
+  summaries, with serialization tests for hidden-field exclusion and no-turn
+  mutation.
+- Prevention: Keep read-only DTOs separate from action envelopes, derive them
+  from existing observation/history sources, and require an explicit Phase 3
+  contract before adding graphical command submission.

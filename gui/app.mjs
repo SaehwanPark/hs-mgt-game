@@ -188,6 +188,7 @@ const demoEnvelope = {
   presentation_fixture: presentationFixture,
 };
 
+const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 let selectedEntityId = null;
 
 function appendText(parent, text) {
@@ -206,6 +207,22 @@ function emptyState(parent, message) {
 function setStatus(root, message) {
   const node = root.querySelector("#session-status");
   if (node) node.textContent = message;
+}
+
+function setPresentationState(root, message) {
+  setStatus(root, message);
+  const node = root.querySelector("#presentation-state");
+  if (node) node.textContent = message;
+}
+
+function setReadOnlyControls(root, readOnly) {
+  const form = root.querySelector("#command-form");
+  if (form) form.hidden = readOnly;
+  const commands = root.querySelector("#legal-command-list");
+  if (readOnly && commands) {
+    commands.replaceChildren();
+    emptyState(commands, "Action submission is deferred to Phase 3.");
+  }
 }
 
 function createStatus(status, label) {
@@ -423,6 +440,242 @@ function renderMonthlyResult(result, root) {
   list.append(headline);
 }
 
+function renderHistory(entries, root) {
+  const list = root.querySelector("#history-list");
+  list.replaceChildren();
+  for (const entry of entries ?? []) {
+    const item = document.createElement("li");
+    item.className = "history-item";
+    const turn = document.createElement("strong");
+    turn.textContent = `Turn ${entry.turn ?? "—"}`;
+    const command = document.createElement("span");
+    command.textContent = String(entry.command ?? "—");
+    const hash = document.createElement("span");
+    hash.className = "hash";
+    hash.textContent = `state hash: ${entry.state_hash ?? "—"}`;
+    item.append(turn, command, hash);
+    list.append(item);
+  }
+  if (!entries?.length) emptyState(list, "No committed transitions yet.");
+}
+
+function renderObservationLines(observation, root) {
+  const list = root.querySelector("#observation-list");
+  list.replaceChildren();
+  if (!observation) {
+    emptyState(list, "No current observation available.");
+    return;
+  }
+  const staffing = (observation.staffing ?? [])
+    .map((metric) => `${metric.label ?? "Staffing"} ${metric.value ?? "Unavailable"}`)
+    .join(", ");
+  const capacity = (observation.capacity ?? [])
+    .map((metric) => `${metric.label ?? "Capacity"} ${metric.value ?? "Unavailable"}`)
+    .join(", ");
+  const operations = observation.operations ?? {};
+  for (const line of [
+    `Organization: ${observation.organization_name ?? "Unavailable"}`,
+    `Reported access index: ${observation.access_index ?? "Unavailable"}`,
+    `Reported quality index: ${observation.quality_index ?? "Unavailable"}`,
+    `Workforce trust: ${observation.workforce_trust ?? "Unavailable"}`,
+    `Community trust: ${observation.community_trust ?? "Unavailable"}`,
+    `Staffing: ${staffing || "Unavailable"}`,
+    `Physical capacity: ${capacity || "Unavailable"}`,
+    `Prior-month operations: treated ${operations.treated_volume ?? "Unavailable"}/${operations.demand ?? "Unavailable"} demand units (${operations.unmet_demand ?? "Unavailable"} unmet); revenue ${operations.revenue ?? "Unavailable"}, cost ${operations.cost ?? "Unavailable"}, margin ${operations.margin ?? "Unavailable"}`,
+    `Cash runway: ${observation.cash_runway_signal ?? "Unavailable"}`,
+    `In-flight projects: ${observation.in_flight_projects ?? "Unavailable"}`,
+  ]) appendText(list, line);
+}
+
+function readOnlyEnvelopeToFixture(envelope) {
+  const observation = envelope.observation ?? {};
+  const session = envelope.session ?? {};
+  const resources = envelope.resources ?? {};
+  const operations = observation.operations ?? {};
+  const institutions = (envelope.institutions ?? []).map((institution) => ({
+    id: institution.id ?? "institution",
+    icon: "▣",
+    type: institution.role ?? "Institution",
+    name: institution.name ?? "Unavailable institution",
+    status: "reported",
+    status_label: "Host-reported",
+    summary: "Actor-visible institution detail supplied by the host.",
+    public_signal: "Actor-visible institution",
+    metrics: [
+      { label: "Access", value: observation.access_index ?? "Unavailable" },
+      { label: "Quality", value: observation.quality_index ?? "Unavailable" },
+      { label: "Workforce", value: observation.workforce_trust ?? "Unavailable" },
+      { label: "Margin", value: operations.margin ?? "Unavailable" },
+    ],
+    facilities: (institution.facilities ?? []).map((facility) => ({
+      icon: "▥",
+      name: facility.name ?? "Observed facility detail",
+      kind: facility.kind ?? "Host-reported",
+      status: "reported",
+      status_label: "Host-reported",
+      detail: (facility.metrics ?? [])
+        .map((metric) => `${metric.label ?? "Metric"} ${metric.value ?? "Unavailable"}`)
+        .join(" · ") || "No visible facility metrics available.",
+    })),
+  }));
+  const briefing = [
+    ...(observation.market_bullets ?? []).map((detail) => ({
+      kind: "Market signal",
+      title: detail,
+      detail: "Public actor-visible market information.",
+      status: "reported",
+      status_label: "Reported",
+      source: "ReadOnlyObservation.market_bullets",
+    })),
+    ...(observation.policy_bullets ?? []).map((detail) => ({
+      kind: "Policy signal",
+      title: detail,
+      detail: "Actor-visible policy information.",
+      status: "reported",
+      status_label: "Reported",
+      source: "ReadOnlyObservation.policy_bullets",
+    })),
+    ...(observation.information_gaps ?? []).map((detail) => ({
+      kind: "Information gap",
+      title: detail,
+      detail: "Unavailable information remains explicit; no private state is inferred.",
+      status: "uncertain",
+      status_label: "Unavailable",
+      source: "ReadOnlyObservation.information_gaps",
+    })),
+  ];
+  const latest = envelope.latest_transition;
+  const transitionEffects = [
+    ...(latest?.events ?? []),
+    ...(latest?.effects ?? []),
+  ];
+  return {
+    header_metrics: [
+      { label: "Turn", value: `${session.turn ?? "Unavailable"} / ${session.max_turns ?? "Unavailable"}` },
+      { label: "Cash", value: `${resources.cash ?? "Unavailable"} units` },
+      { label: "Action points", value: `${resources.action_points ?? "Unavailable"} AP` },
+      { label: "Political capital", value: resources.political_capital ?? "Unavailable" },
+      { label: "Workforce trust", value: observation.workforce_trust ?? "Unavailable" },
+      { label: "Session", value: session.session_id ?? "Unavailable" },
+    ],
+    briefing,
+    entities: institutions,
+    selected_entity_id: institutions[0]?.id,
+    actions: [],
+    pending: (envelope.pending_effects ?? []).map((effect) => ({
+      title: effect.label ?? "Pending process",
+      status: "reported",
+      status_label: "Host-reported",
+      timing: "Timing supplied by the host observation",
+      detail: effect.detail ?? "No visible process detail available.",
+      source: effect.source ?? "ReadOnlyPresentation.pending_effects",
+    })),
+    monthly_result: {
+      status: "reported",
+      status_label: "Host-reported",
+      headline: `Committed observation for turn ${session.turn ?? "Unavailable"}`,
+      metrics: [
+        `Treated volume: ${operations.treated_volume ?? "Unavailable"} / ${operations.demand ?? "Unavailable"} demand units`,
+        `Unmet demand: ${operations.unmet_demand ?? "Unavailable"} units`,
+        `Revenue: ${operations.revenue ?? "Unavailable"} · cost: ${operations.cost ?? "Unavailable"} · margin: ${operations.margin ?? "Unavailable"}`,
+      ],
+      effects: transitionEffects.length ? transitionEffects : ["No committed transition is available yet."],
+      source: "ReadOnlyPresentation.observation and committed history",
+    },
+  };
+}
+
+function clearReadOnlySurface(root, message) {
+  renderPresentation({ presentation_fixture: undefined }, root);
+  renderObservationLines(null, root);
+  renderHistory([], root);
+  const debrief = root.querySelector("#debrief-list");
+  debrief.replaceChildren();
+  emptyState(debrief, "Debrief is unavailable in the read-only session view.");
+  const commands = root.querySelector("#legal-command-list");
+  commands.replaceChildren();
+  emptyState(commands, "Action submission is deferred to Phase 3.");
+  setReadOnlyControls(root, true);
+  setPresentationState(root, message);
+}
+
+export function validateReadOnlyEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") {
+    return { ok: false, message: "No read-only presentation envelope was supplied." };
+  }
+  if (envelope.schema_version !== READ_ONLY_PRESENTATION_SCHEMA) {
+    return { ok: false, message: "Unsupported read-only presentation schema." };
+  }
+  if (!envelope.session || !envelope.observation) {
+    return { ok: false, message: "Read-only presentation is missing session or observation data." };
+  }
+  return { ok: true, envelope };
+}
+
+export function renderReadOnlyEnvelope(envelope, root = document) {
+  const validation = validateReadOnlyEnvelope(envelope);
+  if (!validation.ok) {
+    clearReadOnlySurface(root, validation.message);
+    return validation;
+  }
+  const fixture = readOnlyEnvelopeToFixture(envelope);
+  renderPresentation({ presentation_fixture: fixture }, root);
+  renderObservationLines(envelope.observation, root);
+  renderHistory(envelope.history, root);
+  const debrief = root.querySelector("#debrief-list");
+  debrief.replaceChildren();
+  emptyState(debrief, "Debrief is supplied by the host end-session view.");
+  const commands = root.querySelector("#legal-command-list");
+  commands.replaceChildren();
+  emptyState(commands, "Action submission is deferred to Phase 3.");
+  setReadOnlyControls(root, true);
+  const latestHash = envelope.replay?.latest_state_hash ?? "no committed hash yet";
+  const session = envelope.session;
+  const meta = root.querySelector("#session-meta");
+  if (meta) meta.textContent = `${session.campaign ?? "session"} · turn ${session.turn ?? "—"}/${session.max_turns ?? "—"} · hash ${latestHash}`;
+  setPresentationState(root, "Live or recorded read-only presentation loaded");
+  return { ok: true, envelope };
+}
+
+export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document } = {}) {
+  let currentEnvelope = null;
+
+  function render(envelope) {
+    const result = renderReadOnlyEnvelope(envelope, root);
+    if (result.ok) currentEnvelope = envelope;
+    return result;
+  }
+
+  function renderStaticFixture(fixture = presentationFixture) {
+    renderEnvelope({ ...demoEnvelope, legal_commands: [], presentation_fixture: fixture }, root);
+    setReadOnlyControls(root, true);
+    setPresentationState(root, "Static fixture loaded; no live adapter configured");
+    return { ok: true, fixture };
+  }
+
+  async function load(sessionId = adapter?.sessionId) {
+    setReadOnlyControls(root, true);
+    setPresentationState(root, "Loading read-only presentation…");
+    if (!adapter || typeof adapter.getPresentation !== "function") {
+      return renderStaticFixture();
+    }
+    try {
+      const envelope = await adapter.getPresentation(sessionId);
+      if (!envelope) {
+        clearReadOnlySurface(root, "The read-only adapter returned no presentation data.");
+        return { ok: false, code: "empty_presentation" };
+      }
+      return render(envelope);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      clearReadOnlySurface(root, `Read-only adapter error: ${message}`);
+      return { ok: false, code: "adapter_error", message };
+    }
+  }
+
+  return { load, render, renderStaticFixture, get envelope() { return currentEnvelope; } };
+}
+
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   if (!fixture) {
@@ -435,7 +688,10 @@ export function renderPresentation(envelope, root = document) {
     renderMonthlyResult(null, root);
     return;
   }
-  selectedEntityId = selectedEntityId ?? fixture.selected_entity_id ?? fixture.entities?.[0]?.id;
+  const entityIds = new Set((fixture.entities ?? []).map((entity) => entity.id));
+  if (!entityIds.has(selectedEntityId)) {
+    selectedEntityId = fixture.selected_entity_id ?? fixture.entities?.[0]?.id;
+  }
   renderMetricList(fixture.header_metrics, root);
   renderBriefing(fixture.briefing, root);
   renderMap(fixture.entities, root);
@@ -480,20 +736,7 @@ export function renderEnvelope(envelope, root = document) {
   }
   if (!envelope.legal_commands?.length) emptyState(commandList, "No legal commands available.");
 
-  for (const entry of envelope.history ?? []) {
-    const item = document.createElement("li");
-    item.className = "history-item";
-    const turn = document.createElement("strong");
-    turn.textContent = `Turn ${entry.turn ?? "—"}`;
-    const command = document.createElement("span");
-    command.textContent = String(entry.command ?? "—");
-    const hash = document.createElement("span");
-    hash.className = "hash";
-    hash.textContent = `state hash: ${entry.state_hash ?? "—"}`;
-    item.append(turn, command, hash);
-    historyList.append(item);
-  }
-  if (!envelope.history?.length) emptyState(historyList, "No committed transitions yet.");
+  renderHistory(envelope.history, root);
 
   for (const line of envelope.debrief ?? []) {
     const item = document.createElement("li");
@@ -503,6 +746,7 @@ export function renderEnvelope(envelope, root = document) {
   if (!envelope.debrief?.length) emptyState(debriefList, "Debrief becomes available after a committed session.");
 
   if (meta) meta.textContent = `${envelope.campaign ?? "session"} · turn ${envelope.turn ?? "—"}/${envelope.max_turns ?? "—"}`;
+  setReadOnlyControls(root, false);
   renderPresentation(envelope, root);
 }
 
@@ -537,15 +781,22 @@ export function createThinClient({ adapter = globalThis.HsMgtGameAdapter, root =
 }
 
 if (typeof document !== "undefined") {
-  const client = createThinClient({ root: document });
-  client.render(demoEnvelope);
-  document.querySelector("#command-form").addEventListener("submit", async (event) => {
-    event.preventDefault();
-    const input = document.querySelector("#command-input");
-    await client.submit(input.value);
-    input.value = "";
-  });
-  globalThis.HsMgtGui = { client, createThinClient, renderEnvelope, renderPresentation, validateCommand };
+  const client = createReadOnlyClient({ root: document });
+  client.load();
+  globalThis.HsMgtGui = {
+    client,
+    createReadOnlyClient,
+    createThinClient,
+    renderEnvelope,
+    renderPresentation,
+    renderReadOnlyEnvelope,
+    validateCommand,
+    validateReadOnlyEnvelope,
+  };
 }
 
-export { demoEnvelope, presentationFixture };
+export {
+  demoEnvelope,
+  presentationFixture,
+  READ_ONLY_PRESENTATION_SCHEMA,
+};

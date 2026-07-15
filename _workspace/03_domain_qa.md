@@ -1,4 +1,4 @@
-# Domain QA — Visual and Audio Phase 1 Static Desktop v0.12.17
+# Domain QA — Visual and Audio Phase 2 Live Read-Only Integration v0.12.18
 
 ## Status
 
@@ -7,33 +7,34 @@ pass
 ## Reviewed Inputs
 
 - User request and `_workspace/00_input/request-summary.md`.
-- `_workspace/20_implementation_plan_visual_audio_phase1.md`.
-- `docs/visual-audio-phase1-static-desktop-v0.12.17.md` and the accepted
-  Phase 0 alignment/ADR-0011.
+- `_workspace/21_implementation_plan_visual_audio_phase2.md`.
+- `docs/visual-audio-phase2-live-read-only-v0.12.18.md`, the accepted Phase 0
+  alignment/ADR-0011, and the merged Phase 1 document.
 - `SPEC.md`, `ARCHITECTURE.md`, `docs/visual_audio_upgrade_proposal.md`,
   canonical product docs, and the harness team spec.
-- `gui/index.html`, `gui/app.mjs`, `gui/README.md`, and
-  `tests/test_gui_static_desktop.py`.
+- `src/mcp/presentation.rs`, `src/mcp/session.rs`, `src/mcp/server.rs`,
+  `gui/app.mjs`, `gui/index.html`, and Phase 2 tests.
 
 ## Findings
 
-- The static prototype exposes finance, workforce, capacity, access, and
-  public rival information through executive-facing surfaces without raw JSON
-  or CLI output.
-- The regional schematic, facility cards, selected detail, briefing, action
-  preview, pending-effects timeline, and monthly result all use display-only
-  fixture data for one competitive month.
-- Selection is presentation state only. The prototype does not import or
-  duplicate `CompetitiveWorldState`, transition logic, resolved inputs,
-  command legality, history, replay hashes, or debrief authority.
-- Action cards show canonical command names, costs, delay, uncertainty,
-  constraints, and source labels without pretending that the client can
-  validate or execute them.
-- Statuses have text equivalents, controls are keyboard-operable buttons, the
-  layout has responsive breakpoints, reduced motion is respected, and the
-  prototype uses no downloaded assets, fonts, or network calls.
-- The fixture preserves the actor-observation boundary: public rival
-  intelligence is shown while private rival state remains unavailable.
+- The new `competitive-read-only-v1` envelope selects typed session/resources,
+  `PlayerObservation` facts, player-owned capacity/facility lines, visible
+  pending text, and committed transition/history/hash summaries.
+- `get_presentation` is a read-only MCP operation. Rust tests verify that it
+  leaves the session unchanged, carries committed hashes, rejects unsupported
+  campaigns explicitly, and omits legal commands, true world state, effect
+  queues, event metadata, resolved inputs, private actions, and non-observation
+  flags.
+- The browser path accepts live or recorded envelopes through the same versioned
+  adapter, renders state/hash history, and labels loading, empty, missing,
+  adapter-error, and unsupported-schema states without calling `submitTurn`.
+- The projection does not recalculate margin, capacity, trust, delays, rival
+  behavior, outcomes, or causal claims. Facility detail is explicitly limited
+  to observed player capacity lines until a structured facility source is
+  justified.
+- Legacy MCP tools and thin-client exports remain available, while the Phase 2
+  page defaults to read-only behavior. No simulation, randomness, replay
+  verification, scenario, audio, asset, or network core behavior changed.
 
 ## Required Fixes
 
@@ -41,24 +42,24 @@ None.
 
 ## Residual Risks
 
-- Browser rendering and viewport checks could not be exercised in this
-  environment because no Chromium/Chrome binary is installed; browser-native
-  QA remains a follow-up.
-- Static technical checks do not establish human usability, lived
-  accessibility, learning, engagement, or domain-expert validity.
-- Phase 2 must promote only justified actor-visible DTOs and must not turn the
-  fixture into a second simulation state or client-side command authority.
+- Browser rendering and viewport checks could not be exercised because no
+  Chromium/Chrome binary is installed; browser-native QA remains a follow-up.
+- Typed projection parity can drift if future observation fields are added
+  without source-map and serialization updates.
+- Static/AI checks do not establish human usability, lived accessibility,
+  learning, engagement, domain-expert validity, or policy validity.
+- Phase 3 must establish any action DTO from canonical command/validation
+  sources and must not turn this read-only projection into client authority.
 
 ## Verification Evidence
 
-- `python3 -m unittest tests/test_gui_thin_client.py
-  tests/test_gui_static_desktop.py tests/test_release_metadata.py`: 16 tests
-  passed.
-- `node --check gui/app.mjs`: passed.
-- `python3 scripts/check_release_metadata.py`: passed at `0.12.17`.
-- `git diff --check`: passed.
+- Focused GUI/thin-client/read-only tests: 18 passed.
+- Full Python test discovery: 248 tests passed.
+- Node syntax check: passed.
+- Focused projection tests: 3 passed.
 - `cargo fmt --check`: passed.
 - `cargo clippy --all-targets -- -D warnings`: passed.
-- `cargo test --all -- --test-threads=1`: passed.
-- No Rust, MCP, scenario, ruleset, replay, or asset files were changed for
-  Phase 1.
+- `cargo test --all -- --test-threads=1`: passed (311 unit tests plus
+  integration/golden/doc-test targets).
+- `python3 scripts/check_release_metadata.py`: passed at `0.12.18`.
+- `git diff --check`: passed.

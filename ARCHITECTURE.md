@@ -13,9 +13,8 @@ preserve.
 - Executable: thin `src/main.rs` entry calling `cli::run()`
 - MCP executable: `src/bin/hs-mgt-game-mcp.rs` serving a local stdio MCP server
   for bounded autonomous-agent play
-- Browser proof: dependency-free files in `gui/` rendering injected
-  MCP-shaped observations, command hints, history, and debrief data without
-  owning simulation state
+- Browser proof: dependency-free files in `gui/` rendering injected fixtures or
+  typed actor-visible read-only MCP projections without owning simulation state
 - Library modules:
   - `model/` — typed world state, commands, competitive and affiliation state,
     resources, history, session types, campaign types
@@ -152,10 +151,12 @@ summaries, and ending a session. The MCP layer reuses existing parsers,
 observation helpers, validation, and transition functions; it does not read
 randomness or mutate the core directly.
 
-The `gui/` proof renders an injected session envelope and delegates turn
-submission to `window.HsMgtGameAdapter`. It performs only empty-input checking;
-server/core validation remains authoritative. The included demo envelope is a
-display fixture, not a browser-owned simulation.
+The `gui/` proof renders an injected session envelope or the typed
+`competitive-read-only-v1` projection through
+`window.HsMgtGameReadOnlyAdapter`. The Phase 2 page is read-only and does not
+call `submitTurn`; the legacy `window.HsMgtGameAdapter` thin-client export
+remains available for the later action workflow. The included demo envelope is
+a display fixture, not a browser-owned simulation.
 
 Last Reviewed: 2026-07-12
 Status: Verified
@@ -172,11 +173,12 @@ Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture
 
-Phase 0 alignment is accepted, and Phase 1 now implements a dependency-free,
-fixture-driven static executive desktop in `gui/`. The GUI remains an
-injected-data thin-client proof; the structured live adapter, action workflow,
-animation, audio playback, and asset pipeline remain future work. All future
-work should follow this one-way authority flow:
+Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
+fixture-driven static executive desktop, and Phase 2 adds a typed, read-only
+host/MCP projection for `competitive-regional-v1` in `gui/`. The GUI remains a
+non-authoritative thin client; action workflow, animation, audio playback, and
+the asset pipeline remain future work. All future work should follow this
+one-way authority flow:
 
 ```text
 deterministic simulation and committed history
@@ -209,10 +211,10 @@ Candidate serializable presentation contracts are:
 - replay and debrief views; and
 - audio presentation events.
 
-These are contract responsibilities, not approved Rust type names. Phase 2
-must inventory existing MCP/CLI surfaces before selecting a technology stack or
-adding DTOs, and should extend the narrowest existing adapter that can express
-the first one-month competitive slice.
+These are contract responsibilities, not a license to expose simulation state.
+Phase 2 now promotes only the narrowest typed read-only projection needed for
+the first competitive slice; Phase 3 must establish any additional action
+contract from existing MCP/CLI surfaces before adding fields.
 
 Visible observations and committed effects are the only sources for graphical
 status, animation, advisory bottleneck text, music mood, and event cues. Missing,
@@ -254,9 +256,11 @@ Phase 0 alignment is accepted in
 [`docs/visual-audio-phase0-alignment-v0.12.16.md`](docs/visual-audio-phase0-alignment-v0.12.16.md)
 and ADR-0011. Phase 1 static-desktop scope is documented in
 [`docs/visual-audio-phase1-static-desktop-v0.12.17.md`](docs/visual-audio-phase1-static-desktop-v0.12.17.md).
-The fixture is display-only and does not establish a live DTO or simulation
-boundary; those, plus action workflow, animation, audio playback, and the asset
-pipeline, remain planned implementations.
+Phase 2 live read-only scope is documented in
+[`docs/visual-audio-phase2-live-read-only-v0.12.18.md`](docs/visual-audio-phase2-live-read-only-v0.12.18.md).
+The projection is display-only and does not establish action authority; action
+workflow, animation, audio playback, and the asset pipeline remain planned
+implementations.
 
 ## Durable Constraints
 
