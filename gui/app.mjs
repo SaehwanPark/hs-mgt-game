@@ -589,6 +589,8 @@ function clearReadOnlySurface(root, message) {
   renderPresentation({ presentation_fixture: undefined }, root);
   renderObservationLines(null, root);
   renderHistory([], root);
+  const meta = root.querySelector("#session-meta");
+  if (meta) meta.textContent = "—";
   const debrief = root.querySelector("#debrief-list");
   debrief.replaceChildren();
   emptyState(debrief, "Debrief is unavailable in the read-only session view.");
@@ -642,11 +644,12 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
-    if (result.ok) currentEnvelope = envelope;
+    currentEnvelope = result.ok ? envelope : null;
     return result;
   }
 
   function renderStaticFixture(fixture = presentationFixture) {
+    currentEnvelope = null;
     renderEnvelope({ ...demoEnvelope, legal_commands: [], presentation_fixture: fixture }, root);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
