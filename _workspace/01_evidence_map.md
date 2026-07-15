@@ -1,88 +1,92 @@
-# Evidence Map — Visual/audio Phase 11 first-session launch/load v0.12.27
+# Evidence Map — Visual/audio Phase 12 visual identity and marker provenance v0.12.28
 
 ## Scope
 
-This slice addresses the first remaining product-contract gap after Phase 10:
-the planned competitive first-month experience begins with starting or loading
-a campaign, while the current GUI requires a preconfigured adapter session ID.
-The proposed behavior is a presentation-to-host handoff, not a new game
-mechanism.
+This slice addresses the next narrow gap after the merged first-session
+launch/load boundary: the first-month regional desktop has generic symbols but
+no explicit, reusable visual vocabulary connecting system identity, facility
+type, visible pressure, and process category. The change is a browser
+presentation contract, not a health-policy mechanism.
 
 ## Sources Reviewed
 
 - User objective and `_workspace/00_input/request-summary.md`.
-- `SPEC.md` Future sections for product contract, first competitive vertical
-  slice, presentation/action boundary, and verification.
-- `docs/visual_audio_upgrade_proposal.md` sections 7, 8, 14, 15, and 16.
-- `docs/mcp-agent-interface.md` and `src/mcp/session.rs` for the existing
-  `start_session` request/envelope and non-transitioning session creation.
-- `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and existing GUI tests.
+- `SPEC.md` product contract, intended experience, visual/motion language,
+  presentation/action boundary, asset/accessibility rules, and first
+  competitive vertical-slice requirements.
+- `docs/visual_audio_upgrade_proposal.md` sections 6, 7, 8, 9, 12, 13, 15,
+  and 16.
+- `docs/visual-audio-phase0-alignment-v0.12.16.md` asset and hidden-state
+  policy.
+- `gui/app.mjs`, `gui/index.html`, `gui/README.md`, `gui/audio.mjs`, and
+  existing GUI/asset tests.
 - `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
   `docs/design_principles.md`, and the harness team spec.
 
 ## Mechanisms and Institutions
 
-- No health-policy actor, institution, utility, policy lever, or transition
-  mechanism is added.
-- Existing host session creation selects a campaign, seed, difficulty, and
-  optional validated scenario path, then creates a session at its initial
-  state. It does not submit a command or resolve a month.
-- The GUI needs only a browser adapter mapping for the existing host operation:
-  `startSession({ campaign, seed, difficulty })` returns the existing
-  session-envelope shape or an explicit error.
-- Existing `getPresentation(sessionId)` and optional action/regional/resolution
-  reads remain the source of the first briefing and first-month surfaces.
+- No policy, workforce, payer, regulator, rival, or community mechanism is
+  added. Riverside, Northlake, and Summit remain the existing actor-visible
+  systems.
+- A visual identity token is a stable presentation mapping for an existing
+  visible system ID/name. It does not assert ownership, private activity, or
+  outcome quality beyond the host-provided status.
+- A marker token labels an already displayed facility, metric, process, or
+  timeline category. It is a semantic index, not a new measurement.
+- The registry records generated text/glyph/CSS primitives. It deliberately
+  contains no third-party asset or downloadable path.
 
 ## Actor Incentives and Information
 
-- The executive chooses a campaign-start parameter set, not an operating
-  strategy. Seed and difficulty are session setup inputs and must not be
-  presented as performance choices.
-- The player sees only the host-returned session/presentation envelope after a
-  successful start or load. The browser must not infer resources, rivals,
-  policy pressure, or outcomes from the selected seed/difficulty.
-- No rival, payer, labor, regulator, community, or AI actor is changed. No
-  private information becomes available through the launcher.
+- The executive needs to locate the owned system, public rivals, facilities,
+  capacity/workforce pressures, and pending processes while preserving the
+  distinction between owned detail and lagged public signals.
+- The browser may use visible identity IDs, names, kinds, labels, and marker
+  fields already present in the presentation envelope. It may not inspect true
+  state, private rival data, resolved inputs, or infer severity from a number.
+- Unknown entities and marker kinds must use a clearly labeled generic token so
+  missingness remains visible rather than silently becoming a known identity.
 
 ## Assumptions
 
-- A supplied browser adapter can map `startSession` to the existing MCP
-  `start_session` operation and expose the returned `session_id`.
-- The existing presentation/action clients can reload from a replacement
-  session ID without changing their host contracts.
-- An unavailable `startSession` method is a supported adapter capability gap,
-  not a reason to fabricate a local session.
-- The first target is `competitive-regional-v1`; the launcher does not broaden
-  campaign coverage in this slice.
+- Existing entity IDs and presentation labels are stable enough for a small
+  first-slice mapping; if a host uses an unknown ID, the generic fallback is
+  correct and no host schema change is justified.
+- Unicode symbols plus text labels are sufficient for the current dependency-
+  free browser surface and satisfy the non-color requirement when paired with
+  existing status text/patterns.
+- The current status vocabulary remains the single source of status meaning;
+  this slice only gives it a registry entry and does not change its mapping.
 
 ## Unresolved Questions
 
-- Which future browser transport or host integration will implement the
-  adapter in a deployed environment is not decided here.
-- Whether scenario selection should be exposed to human players remains a
-  separate scenario-authoring and release decision.
-- Whether a launch flow improves human onboarding or learning requires later
-  browser/human evidence and is not established by static tests.
+- Whether later campaigns need campaign-specific identity catalogs remains a
+  separate coverage decision.
+- Whether generated primitives should later be replaced with licensed SVG or
+  raster assets requires a separate provenance/release decision.
+- Human recognition, visual comfort, lived accessibility, and learning remain
+  unresolved questions; static semantic checks are only technical proxies.
 
 ## Design Implications
 
-- Keep launch controls in the existing readiness/onboarding region so the user
-  reaches the briefing through one visible path.
-- Use native select/number/input controls and clear host-boundary status text.
-- On start success, replace the client session ID and call the existing read
-  path; do not render a predicted fixture as a substitute for host data.
-- On load failure, preserve the current surface and offer retry; a failed
-  start/load must not call `submitTurn` or alter an existing session.
-- Reuse existing `session_loaded` capture behavior after the presentation read;
-  no new raw session or true-state capture event is needed.
+- Keep the visual catalog dependency-free and pure; DOM rendering belongs in
+  existing `app.mjs` functions.
+- Render a text label and symbol together, with `aria-label`/visible source
+  context, so color and shape are never the only distinction.
+- Apply tokens only at existing regional-world/detail/process/overlay surfaces;
+  do not create a new navigation metaphor or map geometry.
+- Keep the generic fallback explicit and source-linked so unknown or missing
+  actor-visible data cannot be mistaken for a known institution.
+- Record the visual registry and credits as project-generated primitives; do not
+  introduce a third-party asset pipeline for this slice.
 
 ## Risks
 
-- A browser adapter may implement `startSession` with a different response
-  shape; tests must require the explicit existing `session_id` field and show a
-  recoverable error for malformed responses.
-- Replacing an active session ID could desynchronize action, regional, and
-  campaign clients if only one client updates. The shared launcher callback
-  must route through each client's existing `load` function.
-- Static tests cannot establish a real MCP/browser transport, authentication,
-  browser usability, or first-time human comprehension.
+- Name-based fallback could accidentally classify a future entity. Prefer exact
+  known IDs first, use conservative aliases, and fall back to generic.
+- Replacing existing icons too aggressively could reduce compatibility with
+  fixture tests or obscure source labels. Preserve existing text and add the
+  catalog token alongside it.
+- A registry can create false confidence about polished visual design. Keep the
+  phase explicitly limited to identity/marker consistency and technical
+  provenance.

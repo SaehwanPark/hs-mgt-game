@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.28] - 2026-07-15
+
+- Added a generated `visual-catalog-v1` for Riverside, Northlake, Summit, and
+  explicit generic identity fallback, plus facility, demand, capacity,
+  project, staffing, payer/policy, timeline, and status markers.
+- Added semantic visual tokens to the existing regional map, entity/facility
+  detail, overlays, pending processes, and campaign process rows while keeping
+  source/status text visible.
+- Added machine-readable visual provenance and credits with no third-party
+  assets, and closed the merged Phase 11 SPEC bookkeeping.
+
 ## [0.12.27] - 2026-07-15
 
 - Added a host-authoritative GUI launch/load boundary for the first competitive

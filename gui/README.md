@@ -1,6 +1,6 @@
-# GUI executive desktop, campaign launch/load, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, and optional audio
+# GUI executive desktop, campaign launch/load, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, visual identity/markers, and optional audio
 
-This is a dependency-free Phase 2/3/4/5/6/7/8/10/11 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7/8/10/11/12 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -113,7 +113,7 @@ The analysis preserves campaign/role/task/seed/accessibility distinctions and
 emits only deterministic evidence-gap/recovery hypotheses plus explicit limits;
 it never changes the GUI, simulation, or host history.
 
-Phase 2/3/4/5/6/7/8/10/11 review checklist:
+Phase 2/3/4/5/6/7/8/10/11/12 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -162,9 +162,15 @@ Phase 2/3/4/5/6/7/8/10/11 review checklist:
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
 
+Visual identity and marker tokens come from the project-generated
+`visual-catalog-v1` in `visual.mjs`; they label visible systems, facilities,
+overlays, and processes while preserving source/status text. Unknown identities
+and categories use explicit generic fallbacks. The registry and credits are
+`visual-catalog.json` and `ASSET_CREDITS.md`.
+
 Asset audit: zero downloaded assets, external fonts, network calls, or image/audio
-files. CSS, HTML, JavaScript, and generated Web Audio recipes are the complete
-surface. The typed projection contains no true-world state, resolved stochastic
+files. CSS, HTML, JavaScript, generated visual glyphs, and generated Web Audio
+recipes are the complete surface. The typed projection contains no true-world state, resolved stochastic
 inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase 6
 regional-world projection, and Phase 7 campaign coverage are optional,
 visible-only, registry-recorded, and presentation-only; Phase 8 capture and
@@ -172,6 +178,8 @@ diagnostics plus Phase 9 comparison are optional, allowlisted, and
  presentation/test evidence only. Phase 10 accessibility behavior is local
 presentation state and does not establish human accessibility. Phase 11
 session launch/load is an optional host adapter boundary and does not create
-local session state. Richer causal
+local session state. Phase 12 visual identity/marker lookup is a generated,
+visible-only vocabulary and does not create host facts or local game state.
+Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.

@@ -1,0 +1,32 @@
+{
+  "schema_version": "visual-catalog-v1",
+  "generated_source": "gui/visual.mjs",
+  "third_party_assets": [],
+  "identities": [
+    {"id":"riverside","label":"Riverside","symbol":"▣","token_class":"identity-riverside","source":"Visible system identity","equivalent":"Player system identity","license":"project-generated","approval_status":"approved"},
+    {"id":"northlake","label":"Northlake","symbol":"◇","token_class":"identity-northlake","source":"Visible system identity","equivalent":"Public rival identity","license":"project-generated","approval_status":"approved"},
+    {"id":"summit","label":"Summit","symbol":"◈","token_class":"identity-summit","source":"Visible system identity","equivalent":"Public rival identity","license":"project-generated","approval_status":"approved"},
+    {"id":"generic-institution","label":"Institution","symbol":"◆","token_class":"identity-generic","source":"Visible identity fallback","equivalent":"Institution identity unavailable","license":"project-generated","approval_status":"approved"}
+  ],
+  "markers": [
+    {"id":"facility","label":"Facility","symbol":"▥","token_class":"marker-facility","source":"Visible facility context","equivalent":"Facility marker","license":"project-generated","approval_status":"approved"},
+    {"id":"demand","label":"Demand","symbol":"⌁","token_class":"marker-demand","source":"Visible demand overlay","equivalent":"Demand marker","license":"project-generated","approval_status":"approved"},
+    {"id":"capacity","label":"Capacity","symbol":"▤","token_class":"marker-capacity","source":"Visible capacity overlay","equivalent":"Capacity marker","license":"project-generated","approval_status":"approved"},
+    {"id":"project","label":"Project","symbol":"◌","token_class":"marker-project","source":"Visible project process","equivalent":"Project marker","license":"project-generated","approval_status":"approved"},
+    {"id":"staffing","label":"Staffing","symbol":"♙","token_class":"marker-staffing","source":"Visible workforce context","equivalent":"Staffing marker","license":"project-generated","approval_status":"approved"},
+    {"id":"payer-policy","label":"Payer/policy","symbol":"⚖","token_class":"marker-payer-policy","source":"Visible payer or policy context","equivalent":"Payer/policy marker","license":"project-generated","approval_status":"approved"},
+    {"id":"timeline","label":"Timeline","symbol":"↳","token_class":"marker-timeline","source":"Visible process timing","equivalent":"Timeline marker","license":"project-generated","approval_status":"approved"},
+    {"id":"generic","label":"Visible information","symbol":"•","token_class":"marker-generic","source":"Visible category fallback","equivalent":"Category marker unavailable","license":"project-generated","approval_status":"approved"}
+  ],
+  "statuses": [
+    {"id":"stable","label":"Stable","symbol":"●","token_class":"status-stable","source":"Visible status language","equivalent":"Stable status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"watch","label":"Watch","symbol":"▲","token_class":"status-watch","source":"Visible status language","equivalent":"Watch status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"constrained","label":"Constrained","symbol":"!","token_class":"status-constrained","source":"Visible status language","equivalent":"Constrained status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"critical","label":"Critical","symbol":"×","token_class":"status-critical","source":"Visible status language","equivalent":"Critical status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"improving","label":"Improving","symbol":"↗","token_class":"status-improving","source":"Visible status language","equivalent":"Improving status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"uncertain","label":"Uncertain","symbol":"?","token_class":"status-uncertain","source":"Visible status language","equivalent":"Uncertain status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"delayed","label":"Delayed","symbol":"…","token_class":"status-delayed","source":"Visible status language","equivalent":"Delayed status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"revised","label":"Revised","symbol":"↻","token_class":"status-revised","source":"Visible status language","equivalent":"Revised status text and symbol","license":"project-generated","approval_status":"approved"},
+    {"id":"reported","label":"Reported","symbol":"•","token_class":"status-reported","source":"Visible status language","equivalent":"Reported status text and symbol","license":"project-generated","approval_status":"approved"}
+  ]
+}

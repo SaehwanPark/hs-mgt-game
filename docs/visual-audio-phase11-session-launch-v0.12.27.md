@@ -1,6 +1,6 @@
 # Visual/audio Phase 11 — First-session launch and load boundary
 
-**Status:** Implemented and verified; one code-review pass complete; PR/CI/merge pending
+**Status:** Implemented, verified, reviewed once, and merged in PR #178
 **Scope:** Host-authoritative competitive session start/load handoff
 **Version:** 0.12.27
 

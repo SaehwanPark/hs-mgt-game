@@ -1,5 +1,6 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
+import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 
 const presentationFixture = {
   header_metrics: [
@@ -379,23 +380,28 @@ function setReadOnlyControls(root, readOnly) {
 function createStatus(status, label) {
   const node = document.createElement("span");
   const normalizedStatus = String(status ?? "uncertain").toLowerCase();
-  const statusSymbols = {
-    stable: "●",
-    improving: "↗",
-    watch: "▲",
-    uncertain: "?",
-    constrained: "!",
-    delayed: "…",
-    critical: "×",
-    revised: "↻",
-    reported: "•",
-  };
   const text = String(label ?? status ?? "Uncertain");
   node.className = `status status--${normalizedStatus}`;
   node.dataset.status = normalizedStatus;
-  node.dataset.symbol = statusSymbols[normalizedStatus] ?? statusSymbols.uncertain;
+  node.dataset.symbol = visualStatusFor(normalizedStatus)?.symbol ?? "?";
   node.setAttribute("aria-label", text);
   node.textContent = text;
+  return node;
+}
+
+function createVisualToken(entry, role = "marker") {
+  const node = document.createElement("span");
+  node.className = `visual-token visual-token--${role} ${entry.token_class}`;
+  node.dataset.visualId = entry.id;
+  node.setAttribute("aria-label", `${entry.label}: ${entry.equivalent}`);
+  const symbol = document.createElement("span");
+  symbol.className = "visual-token-symbol";
+  symbol.setAttribute("aria-hidden", "true");
+  symbol.textContent = entry.symbol;
+  const label = document.createElement("span");
+  label.className = "visual-token-label";
+  label.textContent = entry.label;
+  node.append(symbol, label);
   return node;
 }
 
@@ -454,10 +460,8 @@ function renderMap(entities, root) {
     card.className = "entity-card";
     card.dataset.entityId = entity.id;
     card.setAttribute("aria-current", entity.id === selectedEntityId ? "true" : "false");
-    const icon = document.createElement("span");
-    icon.className = "entity-icon";
-    icon.setAttribute("aria-hidden", "true");
-    icon.textContent = entity.icon ?? "◆";
+    const icon = createVisualToken(visualIdentityFor(entity), "identity");
+    icon.classList.add("entity-icon");
     const type = document.createElement("small");
     type.className = "source";
     type.textContent = String(entity.type ?? "Institution");
@@ -486,10 +490,8 @@ function renderSelectedEntity(entities, root) {
   }
   const heading = document.createElement("div");
   heading.className = "entity-heading";
-  const icon = document.createElement("span");
-  icon.className = "entity-icon";
-  icon.setAttribute("aria-hidden", "true");
-  icon.textContent = entity.icon ?? "◆";
+  const icon = createVisualToken(visualIdentityFor(entity), "identity");
+  icon.classList.add("entity-icon");
   const title = document.createElement("h3");
   title.textContent = String(entity.name);
   heading.append(icon, title, createStatus(entity.status, entity.status_label));
@@ -519,12 +521,13 @@ function renderSelectedEntity(entities, root) {
     const name = document.createElement("strong");
     name.textContent = String(facility.name ?? "Facility");
     row.append(name, createStatus(facility.status, facility.status_label));
+    const marker = createVisualToken(visualMarkerFor(facility.kind), "marker");
     const kind = document.createElement("small");
     kind.className = "source";
-    kind.textContent = `${facility.icon ?? "▥"} ${facility.kind ?? "Facility"}`;
+    kind.textContent = String(facility.kind ?? "Facility");
     const detailText = document.createElement("p");
     detailText.textContent = String(facility.detail ?? "No visible facility detail.");
-    item.append(row, kind, detailText);
+    item.append(row, marker, kind, detailText);
     facilities.append(item);
   }
   if (!entity.facilities?.length) emptyState(facilities, "No visible facility detail available.");
@@ -537,11 +540,12 @@ function renderSelectedEntity(entities, root) {
     for (const process of entity.processes ?? []) {
       const item = document.createElement("li");
       item.className = "facility-card";
+      const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker");
       const title = document.createElement("strong");
       title.textContent = String(process.label ?? "Visible process");
       const processDetail = document.createElement("p");
       processDetail.textContent = String(process.detail ?? "No visible process detail.");
-      item.append(title, processDetail);
+      item.append(marker, title, processDetail);
       appendSource(item, process.source);
       processes.append(item);
     }
@@ -616,13 +620,17 @@ function renderRegionalOverlays(overlays, root) {
   list.replaceChildren();
   for (const overlay of overlays ?? []) {
     const item = document.createElement("li");
+    const marker = createVisualToken(visualMarkerFor(overlay.marker ?? overlay.kind ?? overlay.label), "marker");
+    const headingRow = document.createElement("div");
+    headingRow.className = "timeline-row";
     const heading = document.createElement("strong");
     heading.textContent = String(overlay.label ?? "Visible overlay");
     const value = document.createElement("span");
     value.textContent = `${overlay.value ?? "Unavailable"} ${overlay.unit ?? ""}`.trim();
     const equivalent = document.createElement("p");
     equivalent.textContent = String(overlay.equivalent ?? "Visible source-linked overlay.");
-    item.append(heading, value, equivalent);
+    headingRow.append(marker, heading);
+    item.append(headingRow, value, equivalent);
     appendSource(item, overlay.source);
     list.append(item);
   }
@@ -722,11 +730,12 @@ function renderCampaignCoverageProcesses(processes, root) {
   list.replaceChildren();
   for (const process of processes ?? []) {
     const item = document.createElement("li");
+    const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker");
     const heading = document.createElement("div");
     heading.className = "timeline-row";
     const title = document.createElement("strong");
     title.textContent = String(process.label ?? "Process");
-    heading.append(title, createStatus(process.status, process.status));
+    heading.append(marker, title, createStatus(process.status, process.status));
     const detail = document.createElement("p");
     detail.textContent = String(process.detail ?? "No visible process detail.");
     item.append(heading, detail);
@@ -1016,9 +1025,10 @@ function renderPending(items, root) {
     item.className = "timeline-item";
     const row = document.createElement("div");
     row.className = "timeline-row";
+    const marker = createVisualToken(visualMarkerFor(entry.marker ?? entry.title), "marker");
     const title = document.createElement("strong");
     title.textContent = String(entry.title ?? "Pending process");
-    row.append(title, createStatus(entry.status, entry.status_label));
+    row.append(marker, title, createStatus(entry.status, entry.status_label));
     const timing = document.createElement("p");
     timing.textContent = String(entry.timing ?? "Visible timing unavailable.");
     const detail = document.createElement("p");
@@ -2188,6 +2198,7 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      VISUAL_CATALOG,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,
       createAudioClient,
@@ -2214,6 +2225,7 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      VISUAL_CATALOG,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,
       createAudioClient,
