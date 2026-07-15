@@ -69,7 +69,8 @@ However, new human players must currently perform substantial mental translation
 - reconstruct a persistent regional world from sequential reports;
 - and recognize which changes are immediate, delayed, uncertain, or rival-driven.
 
-These demands are appropriate for expert inspection but create unnecessary friction for broad human playtesting.
+These demands are appropriate for expert inspection but create unnecessary
+friction for the intended broader human audience.
 
 ### 2.2 Product Opportunity
 
@@ -120,7 +121,7 @@ A player should be able to see not only that a metric changed, but also:
 
 The visual and audio upgrade should:
 
-1. Increase the number and diversity of human playtesters willing to try the game.
+1. Make the game approachable to a broader range of intended human players.
 2. Reduce onboarding and command-entry friction.
 3. Improve players' ability to form a mental model of the regional health system.
 4. Make operational and institutional bottlenecks visible.
@@ -1255,11 +1256,12 @@ Extend the validated presentation system to the other campaigns.
 
 ---
 
-# Phase 8: Human Playtest Readiness
+# Phase 8: AI-Agent Playtest Readiness
 
 ## Objective
 
-Prepare the upgraded experience for external human testing.
+Prepare the upgraded experience for reproducible AI-agent testplay across
+different strategy, familiarity, accessibility, and error-recovery profiles.
 
 ## Work
 
@@ -1267,63 +1269,69 @@ Prepare the upgraded experience for external human testing.
 - add guided first-run flow;
 - add settings and accessibility review;
 - improve error recovery;
-- instrument non-sensitive interaction events where appropriate;
+- expose non-sensitive interaction events to the test harness where appropriate;
 - prepare a playtest build;
-- create a facilitator protocol;
-- define observation and interview questions;
-- establish bug-report and feedback channels.
+- create structured AI-agent roles and task protocols;
+- capture screenshots, UI semantics, commands, validation results, audio-cue
+  events, histories, and replay hashes;
+- define deterministic diagnostics and issue-classification rules;
+- establish machine-readable failure reports and evidence artifacts.
 
 ## Deliverables
 
 - playtest-ready build;
 - onboarding flow;
 - accessibility checklist;
-- tester guide;
-- facilitator protocol;
-- structured feedback form.
+- AI-agent testplay guide;
+- role and task protocol;
+- reproducible capture and structured findings format.
 
 ## Exit Criteria
 
-- A new player can install or launch the game and complete a session without developer intervention.
-- Testers can mute audio and reduce motion.
+- AI test agents can launch the game and complete representative sessions
+  without developer intervention.
+- AI test agents can exercise mute, reduced-motion, keyboard-only, invalid-action,
+  and recovery paths.
 - Major errors provide actionable recovery.
-- The test protocol distinguishes usability, engagement, institutional plausibility, and educational claims.
+- The protocol distinguishes functional completion, interface legibility proxies,
+  strategic behavior, traceability, domain-consistency review, and claims that
+  remain untested without people.
 
 ---
 
-# Phase 9: External Evaluation and Revision
+# Phase 9: AI-Agent Evaluation and Revision
 
 ## Objective
 
-Use real player evidence to determine subsequent development.
+Use reproducible AI-agent testplay evidence to prioritize bounded revisions
+while reserving human-experience and learning claims for separately funded work.
 
 ## Work
 
 Conduct separate evidence tracks:
 
-1. **Usability observation**
+1. **Interface-task evaluation**
    - navigation;
    - action entry;
    - error recovery;
-   - information overload;
+   - information-density and truncation proxies;
    - onboarding.
 
-2. **Game-experience observation**
+2. **Strategy and replay evaluation**
    - strategy formation;
-   - perceived agency;
-   - surprise;
-   - desire to replay;
-   - pacing;
-   - emotional engagement.
+   - action-option use;
+   - response to new observations;
+   - strategy diversity across profiles and seeds;
+   - resolution pacing and interruption behavior.
 
-3. **Domain review**
+3. **Document-grounded domain consistency review**
    - institutional plausibility;
    - terminology;
    - authority;
    - consequence interpretation.
 
-4. **Educational evaluation**
-   - deferred to an appropriately designed and resourced study.
+4. **Human usability, engagement, accessibility, domain-expert, and educational evaluation**
+   - deferred to appropriately designed and resourced work with people.
 
 ## Deliverables
 
@@ -1334,9 +1342,12 @@ Conduct separate evidence tracks:
 
 ## Exit Criteria
 
-- The next major development decision is grounded in observed human use.
-- Automated traces are not substituted for human experience claims.
-- Major misunderstandings between player mental models and simulation behavior are documented.
+- The next major development decision is grounded in reproducible AI-agent
+  traces across declared roles, tasks, seeds, and viewport/accessibility modes.
+- Automated traces and AI interpretations are not substituted for human
+  usability, engagement, lived accessibility, learning, or expert-validity claims.
+- Repeated mismatches between AI-agent interpretations and committed simulation
+  behavior are documented as interface hypotheses, not human mental-model evidence.
 - The project can decide whether to prioritize polish, mechanics revision, onboarding, or broader release.
 
 ---
@@ -1431,9 +1442,9 @@ Test:
 - text scaling;
 - and complete muted play.
 
-### 16.5 Human Playtests
+### 16.5 AI-Agent Playtests
 
-Observe:
+Capture across declared AI-agent profiles, seeds, and interface modes:
 
 - time to first valid action;
 - ability to identify current bottlenecks;
@@ -1441,10 +1452,12 @@ Observe:
 - use of map versus briefing;
 - recovery from validation errors;
 - comprehension of pending effects;
-- interpretation of audio cues;
+- correspondence between visible events, textual equivalents, and audio-cue logs;
 - and post-run causal explanations.
 
-These observations should be treated as product evidence, not formal learning evidence unless collected under an appropriate study design.
+These captures are development proxies for task completion, traceability, and
+interface interpretation. They are not evidence of human usability, engagement,
+accessibility lived experience, learning, or domain-expert agreement.
 
 ---
 
@@ -1506,12 +1519,12 @@ The project may organize contributions into the following workstreams.
 - source archiving;
 - release-asset optimization.
 
-### Playtesting
+### AI Testplay
 
-- recruitment;
-- protocols;
-- observation;
-- interviews;
+- agent-role design;
+- task and seed protocols;
+- screenshot, semantic-tree, event, and replay capture;
+- deterministic comparison;
 - issue triage;
 - evidence classification.
 
@@ -1549,9 +1562,10 @@ Contributors should avoid changing simulation mechanics merely to solve presenta
 
 **Mitigation:** Include keyboard, reduced-motion, color-independent, and mute requirements in the first vertical slice.
 
-### Risk: Visual Polish Delays Human Testing
+### Risk: Visual Polish Delays AI Testplay
 
-**Mitigation:** Test the static prototype and first live month before broad asset production.
+**Mitigation:** Run AI-agent reviews of the static prototype and first live month
+before broad asset production.
 
 ### Risk: Automated Validation Is Mistaken for Human Evidence
 
@@ -1575,14 +1589,15 @@ The visual and audio upgrade should be considered successful when:
 - audio reinforces events without becoming required or exhausting;
 - players can explain important outcomes using visible consequence chains;
 - the GUI preserves replay and observation boundaries;
-- external testers demonstrate willingness to complete and replay sessions;
-- and subsequent development priorities are informed by observed human use.
+- diverse AI-agent profiles complete and replay sessions across declared seeds
+  and accessibility modes;
+- and subsequent development priorities are informed by reproducible testplay traces.
 
 The upgrade should not be considered validated solely because:
 
 - the interface renders;
 - all automated tests pass;
-- agents can complete sessions;
+- one agent profile can complete a session;
 - the game appears more polished;
 - or players report that it “looks good.”
 
@@ -1598,7 +1613,7 @@ The upgrade should not be considered validated solely because:
 6. Define the audio cue and music-state catalogs.
 7. Adopt the asset licensing and provenance policy.
 8. Build the static executive desktop using injected session data.
-9. Review the prototype with developers and a small number of prospective testers.
+9. Review the prototype with developers and reproducible AI-agent testplay profiles.
 10. Proceed to live read-only integration only after the information architecture is understandable.
 
 ---

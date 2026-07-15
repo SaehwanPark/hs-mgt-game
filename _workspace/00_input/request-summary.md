@@ -1,38 +1,46 @@
-# Request Summary — Documentation Alignment v0.12.14
+# Request Summary — Visual and Audio SDD Alignment v0.12.15
 
 ## Scope
 
-- Update project documents and README to reflect the current development state.
-- Commit coherent documentation and release-metadata chunks separately.
-- Classify this as Phase 7 validation closure plus a bounded Phase 8
-  release-readiness/documentation maintenance slice.
+- Translate `docs/visual_audio_upgrade_proposal.md` into complete, durable SDD
+  requirements without claiming that the proposed interface already exists.
+- Replace budget-dependent human testplay work with reproducible AI-agent
+  testplay protocols wherever the visual/audio plan calls for validation.
+- Record presentation-layer architecture boundaries, phased promotion gates,
+  verification targets, explicit non-goals, and version `0.12.15` metadata.
+- Commit the proposal adaptation, SDD specification, and final metadata/handoff
+  as coherent chunks.
 
 ## Sources
 
-- Current Rust, GUI, scenario, and script surfaces.
-- Recent merged milestones through v0.12.13.
-- Canonical docs, SPEC, architecture, changelog, and versioning policy.
+- `docs/visual_audio_upgrade_proposal.md` at checkpoint `43e14a6`.
+- Current Rust, MCP, GUI proof, scenario, replay, and debrief surfaces.
+- Canonical proposal, roadmap, design principles, harness team spec, SPEC,
+  architecture, changelog, lessons, and versioning policy.
 
 ## Expected files
 
-- Canonical status documents and architecture index.
-- README and release metadata.
-- SPEC/changelog history and durable task handoff.
+- AI-testplay-adjusted visual/audio proposal.
+- `SPEC.md`, `ARCHITECTURE.md`, and `CHANGELOG.md`.
+- Release metadata, lessons, request framing, and durable handoff.
 
 ## Validation target
 
-- Documentation status and link review.
+- Full proposal-to-SPEC coverage review.
+- Human-testplay wording review for planned visual/audio validation.
 - Release metadata consistency check.
-- Rust formatting, clippy, and tests.
-- GUI syntax and static contract checks.
+- Documentation diff and whitespace checks.
 
 ## Explicit non-goals
 
-No simulation, balance, scenario, interface, packaging, publication,
-deployment, or calibration changes. No new claims of human learning, classroom
-effectiveness, or policy validity.
+No simulation, balance, scenario, interface implementation, asset acquisition,
+packaging, publication, deployment, or calibration changes. No claim that AI
+testplays establish human usability, engagement, accessibility lived
+experience, learning, classroom effectiveness, domain-expert validity, or
+policy validity.
 
 ## Global workflow
 
-Use spec-driven documentation synchronization. No Rust implementation workflow
-is required unless the audit uncovers a code defect.
+Use the repo orchestrator for Phase 8/9 audience-access planning and the global
+spec-driven documentation workflow. No Rust implementation workflow is
+required unless the audit uncovers a code defect.
