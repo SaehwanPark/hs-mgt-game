@@ -186,7 +186,8 @@ Phase 7 adds bounded campaign coverage for stabilization and affiliation, and
 Phase 8 adds local readiness controls, recovery, and allowlisted AI-agent
 testplay capture/diagnostics. The GUI remains a non-authoritative thin client;
 broad map/world assets remain future work, while Phase 9 adds deterministic
-capture comparison and decision logging outside the client/core. All future work
+capture comparison and decision logging outside the client/core, and Phase 10
+adds local accessibility/visual-language presentation controls. All future work
 should follow
 this one-way authority flow:
 
@@ -294,6 +295,15 @@ ranking strategies or automatically changing the browser, simulation, history,
 hashes, replay, or debriefs. The analyzer is a test-evidence boundary, not a
 new authority or causal model.
 
+Phase 10 keeps keyboard navigation, status symbols/labels, text scaling, and
+optional cue-explanation visibility in the browser presentation boundary. The
+client's `text_scale`, `text_equivalents`, and `reduced_motion` settings are
+local-only preferences. They are applied through DOM/CSS attributes and never
+enter host requests, canonical commands, audio-source classification,
+transitions, histories, state hashes, replay artifacts, or debriefs. Targeted
+status/live nodes are used instead of making the whole desktop a live region;
+host-provided status categories remain the source of truth.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -317,6 +327,8 @@ Phase 8 AI-agent testplay-readiness scope is documented in
 [`docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`](docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md).
 Phase 9 AI-agent evaluation/revision scope is documented in
 [`docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md).
+Phase 10 accessibility and visual-language scope is documented in
+[`docs/visual-audio-phase10-accessibility-v0.12.26.md`](docs/visual-audio-phase10-accessibility-v0.12.26.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain

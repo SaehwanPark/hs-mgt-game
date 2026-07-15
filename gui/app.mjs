@@ -220,6 +220,14 @@ function setPresentationState(root, message) {
   if (node) node.textContent = message;
 }
 
+function bindSkipNavigation(root) {
+  const link = root.querySelector("#skip-to-content");
+  const target = root.querySelector("#briefing-region");
+  if (!link || !target || link.__hsMgtSkipNavigationBound) return;
+  link.__hsMgtSkipNavigationBound = true;
+  link.addEventListener("click", () => target.focus?.({ preventScroll: true }));
+}
+
 function configureRecovery(root, retry, recorder) {
   const button = root.querySelector("#recovery-retry");
   if (!button) return;
@@ -295,6 +303,7 @@ function recordPlaytestFailure(recorder, code, message, recoverable = true) {
 
 export function createPresentationSettings({ root = document, recorder, storage } = {}) {
   if (root.__hsMgtPresentationSettings) return root.__hsMgtPresentationSettings;
+  bindSkipNavigation(root);
   let persisted = {};
   try {
     persisted = JSON.parse((storage ?? globalThis.localStorage)?.getItem?.("hs-mgt-presentation-settings") ?? "{}");
@@ -304,6 +313,7 @@ export function createPresentationSettings({ root = document, recorder, storage 
   const state = {
     reduced_motion: persisted.reduced_motion ?? Boolean(globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches),
     text_equivalents: persisted.text_equivalents ?? true,
+    text_scale: persisted.text_scale === "large" ? "large" : "standard",
   };
   const save = () => {
     try {
@@ -315,12 +325,19 @@ export function createPresentationSettings({ root = document, recorder, storage 
   const apply = () => {
     root.documentElement?.dataset && (root.documentElement.dataset.reducedMotion = String(state.reduced_motion));
     root.documentElement?.dataset && (root.documentElement.dataset.textEquivalents = String(state.text_equivalents));
+    root.documentElement?.dataset && (root.documentElement.dataset.textScale = state.text_scale);
     const motion = root.querySelector("#settings-reduced-motion");
     const text = root.querySelector("#settings-text-equivalents");
+    const scale = root.querySelector("#settings-text-scale");
     if (motion) motion.checked = state.reduced_motion;
     if (text) text.checked = state.text_equivalents;
+    if (scale) scale.value = state.text_scale;
     const status = root.querySelector("#settings-state");
-    if (status) status.textContent = state.reduced_motion ? "Reduced motion is active; written results remain complete." : "Standard motion is active; written results remain complete.";
+    if (status) {
+      const motionLabel = state.reduced_motion ? "Reduced motion is active." : "Standard motion is active.";
+      const cueLabel = state.text_equivalents ? "Optional cue explanations are visible." : "Optional cue explanations are hidden.";
+      status.textContent = `${motionLabel} ${cueLabel} Written results remain complete.`;
+    }
   };
   root.querySelector("#settings-reduced-motion")?.addEventListener("change", (event) => {
     event.__hsMgtPlaytestRecorded = true;
@@ -333,6 +350,13 @@ export function createPresentationSettings({ root = document, recorder, storage 
     event.__hsMgtPlaytestRecorded = true;
     state.text_equivalents = Boolean(event.target.checked);
     recorder?.record("settings_changed", { setting: "text_equivalents", value: state.text_equivalents });
+    save();
+    apply();
+  });
+  root.querySelector("#settings-text-scale")?.addEventListener("change", (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    state.text_scale = event.target.value === "large" ? "large" : "standard";
+    recorder?.record("settings_changed", { setting: "text_scale", value: state.text_scale });
     save();
     apply();
   });
@@ -354,8 +378,24 @@ function setReadOnlyControls(root, readOnly) {
 
 function createStatus(status, label) {
   const node = document.createElement("span");
-  node.className = `status status--${status ?? "uncertain"}`;
-  node.textContent = label ?? status ?? "Uncertain";
+  const normalizedStatus = String(status ?? "uncertain").toLowerCase();
+  const statusSymbols = {
+    stable: "●",
+    improving: "↗",
+    watch: "▲",
+    uncertain: "?",
+    constrained: "!",
+    delayed: "…",
+    critical: "×",
+    revised: "↻",
+    reported: "•",
+  };
+  const text = String(label ?? status ?? "Uncertain");
+  node.className = `status status--${normalizedStatus}`;
+  node.dataset.status = normalizedStatus;
+  node.dataset.symbol = statusSymbols[normalizedStatus] ?? statusSymbols.uncertain;
+  node.setAttribute("aria-label", text);
+  node.textContent = text;
   return node;
 }
 

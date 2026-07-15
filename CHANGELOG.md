@@ -4,6 +4,25 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.26] - 2026-07-15
+
+### Added
+- Added keyboard skip/landmark navigation, a text-and-symbol status legend,
+  persistent Standard/Large text scaling, and an optional cue-explanation
+  presentation control to the dependency-free GUI.
+- Added focused Phase 10 accessibility contract tests and documentation.
+
+### Changed
+- Replaced the whole-desktop live region with targeted status/live nodes while
+  preserving host-provided observations and existing GUI authority boundaries.
+- Bumped package/public metadata to `0.12.26`; no presentation setting reaches
+  commands, simulation state, history, hashes, replay, or debrief output.
+
+### Evidence Limits
+- Static semantic and Node checks are technical interface proxies. They do not
+  establish human usability, lived accessibility, learning, engagement,
+  calibration, balance, or policy validity.
+
 ## [0.12.25] - 2026-07-15
 
 ### Added

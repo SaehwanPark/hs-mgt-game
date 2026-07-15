@@ -1,69 +1,65 @@
-# Request Summary — Visual and Audio Phase 9 AI-Agent Evaluation and Revision v0.12.25
+# Request Summary — Phase 10 accessibility and visual-language hardening v0.12.26
 
-## User request
+## Scope
 
-Continue the visual/audio upgrade sequence after merged Phase 8 readiness. For
-each bounded SPEC item, design, implement, perform exactly one code-review pass,
-open a PR, wait for CI, merge to `main`, and continue until the visual/audio
-upgrade sequence is complete.
+Implement the next bounded item left explicitly `Not Yet Done` in `SPEC.md`:
+make the existing dependency-free GUI's first-run surface more usable through
+keyboard landmarks and skip navigation, persistent text scaling, explicit
+non-color status language, and a functional cue-equivalent preference. This
+slice is derived from the accessibility, cognitive-accessibility, visual and
+motion, and first-slice requirements in `docs/visual_audio_upgrade_proposal.md`.
+The branch is `feat/visual-audio-phase10-accessibility-v0.12.26` and targets
+version `0.12.26`.
 
-## Bounded target
+## User and use context
 
-Implement Phase 9 as a dependency-free, deterministic analyzer for repeated
-`gui-playtest-v1` captures. Compare declared roles, tasks, campaigns, seeds,
-interface/accessibility modes, event coverage, failure classes, and evidence
-lanes; emit prioritized observable revision candidates and a product decision
-log without scoring strategy or claiming human experience.
+The immediate users are a first-time executive player using a laptop browser,
+an AI-agent test profile exercising semantic controls, and a contributor
+reviewing the presentation boundary without a browser driver. Their job is to
+find the current briefing, understand status language, reach a decision or
+result panel, and keep written information available when audio or motion is
+not useful.
 
-## Explicit non-goals
+## Non-goals
 
-- No browser automation, model/network service, deployment, screenshot capture,
-  or external agent orchestration.
-- No simulation, Rust/MCP schema, command legality, transition, stochastic
-  input, effect queue, history/hash/replay, debrief, or campaign observation
-  change.
-- No inferred causal graph, optimal strategy, balance/calibration conclusion,
-  human usability/accessibility/learning/engagement claim, or domain-policy
-  validity claim.
-- No automatic product mutation from a capture; revisions are prioritized
-  recommendations and explicit decisions for human/contributor review.
+- No new host/MCP endpoint, browser automation, network call, dependency,
+  screenshot, asset download, or deployment convention.
+- No simulation, command legality, transition, stochastic input, history/hash,
+  replay, debrief, campaign, or audio-source semantics change.
+- No claim of human usability, lived accessibility, learning, engagement,
+  calibration, balance, or policy validity; static and Node checks remain
+  technical proxies.
+- No local GUI simulation or fake campaign-start flow.
+- Exactly one general code-review pass is required for this PR-equivalent
+  change, overriding the generic workflow's three-pass default.
 
-## Sources reviewed
+## Sources
 
-- Phase 9 row, success/stop rules, and AI-agent playtest requirements in
-  `docs/visual_audio_upgrade_proposal.md` and `SPEC.md`.
-- Phase 8 `gui-playtest-v1` protocol, recorder, diagnostic script, fixture,
-  and evidence limits.
-- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `ARCHITECTURE.md`, and the harness team spec.
+- `SPEC.md`: visual-language, presentation-boundary, assets/accessibility,
+  first-vertical-slice, and verification requirements still marked incomplete.
+- `docs/visual_audio_upgrade_proposal.md`: Sections 6, 7, 9, 13, 14, 15, and
+  16.
+- `gui/index.html`, `gui/app.mjs`, `gui/audio.mjs`, `gui/playtest.mjs`.
+- Existing GUI contract tests and `docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`.
+- `docs/harness/health-policy-strategy-game/team-spec.md` and canonical project
+  docs.
 
 ## Expected files
 
-- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
-  `_workspace/02_mechanism_design.md`, Phase 9 implementation plan, QA, and
-  final handoff.
-- `scripts/analyze_gui_playtests.py`, a deterministic matrix fixture, and
-  focused tests.
-- Phase 9 decision-log/protocol documentation, SPEC/architecture/changelog/
-  README/lessons updates, and v0.12.25 metadata.
+- `_workspace/01_evidence_map.md`
+- `_workspace/02_mechanism_design.md`
+- `_workspace/03_domain_qa.md`
+- `_workspace/29_implementation_plan_visual-audio-phase10-accessibility-v0.12.26.md`
+- `_workspace/final/handoff.md`
+- `gui/index.html`, `gui/app.mjs`, and focused GUI tests
+- `docs/visual-audio-phase10-accessibility-v0.12.26.md`
+- `SPEC.md`, `ARCHITECTURE.md`, `README.md`, `gui/README.md`, `CHANGELOG.md`,
+  `LESSONS.md`, and release metadata.
 
 ## Validation target
 
-- The analyzer accepts a bounded set of valid captures, validates each through
-  the Phase 8 contract, and produces stable sorted summaries for the same input
-  files.
-- Coverage and revision candidates cite observable capture fields and retain
-  campaign/role/task/mode distinctions.
-- Failure priorities are deterministic and do not become strategy scores or
-  human-evaluation claims.
-- A product decision log records decisions, evidence, hypotheses, limits, and
-  deferred work; no recommendation changes simulation behavior automatically.
-- Existing Phase 2–8 contracts and the full Rust/Python/Node/metadata checks
-  remain green before the one review/PR/merge cycle.
-
-## Generic skills
-
-Use simple-code-writing, plan-designer, spec-driven records, end-user-XP, and
-preferred workflow. Project-local orchestration, evidence mapping, mechanism
-design, and domain QA are required. The user instruction overrides the generic
-workflow's default three-review loop: Phase 9 uses exactly one code-review pass.
+Verify the new semantic landmarks, skip link, focus treatment, status legend,
+text-scale persistence, and cue-equivalent behavior with focused static tests
+and Node syntax checks. Then run the full Python and Rust suites, clippy,
+formatting, metadata, and whitespace checks. Domain QA must pass, followed by
+exactly one general code-review pass and the PR/CI/merge workflow.

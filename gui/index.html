@@ -42,13 +42,16 @@
         --space-5: 1.8rem;
       }
 
+      html[data-text-scale="large"] { font-size: 112.5%; }
+      html[data-text-equivalents="false"] .audio-equivalent { display: none; }
+
       * { box-sizing: border-box; }
 
       body {
         margin: 0;
         background: radial-gradient(circle at top right, #e4f2ef 0, var(--paper) 38rem);
         color: var(--ink);
-        font: 16px/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif;
+        font: 1rem/1.5 ui-sans-serif, system-ui, -apple-system, sans-serif;
       }
 
       button, input { font: inherit; }
@@ -66,6 +69,20 @@
         white-space: nowrap;
         width: 1px;
       }
+
+      .skip-link {
+        background: var(--teal-dark);
+        border-radius: 0 0 .55rem .55rem;
+        color: white;
+        left: .75rem;
+        padding: .6rem .85rem;
+        position: absolute;
+        text-decoration: none;
+        top: 0;
+        transform: translateY(-140%);
+        z-index: 10;
+      }
+      .skip-link:focus-visible { transform: translateY(0); }
 
       .page-header, main, footer {
         margin: 0 auto;
@@ -102,13 +119,49 @@
         padding: .22rem .55rem;
         white-space: nowrap;
       }
-      .status::before { content: "◆"; font-size: .62rem; }
+      .status::before { content: attr(data-symbol); font-size: .72rem; }
       .status--stable, .status--improving { background: var(--green-soft); color: var(--green); }
       .status--watch, .status--uncertain { background: var(--yellow-soft); color: var(--yellow); }
       .status--constrained, .status--delayed { background: var(--orange-soft); color: var(--orange); }
       .status--critical { background: var(--red-soft); color: var(--red); }
       .status--revised { background: var(--purple-soft); color: var(--purple); }
       .status--reported { background: var(--reported-soft); color: var(--blue); }
+
+      .status-language-legend {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: .7rem;
+        margin-top: var(--space-3);
+        padding: .7rem .85rem;
+      }
+      .status-language-legend summary { cursor: pointer; font-weight: 800; }
+      .status-language-list {
+        display: grid;
+        gap: .45rem 1rem;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        list-style: none;
+        margin-top: .65rem;
+      }
+      .status-language-list li { align-items: center; display: flex; gap: .45rem; }
+      .status-language-list small { color: var(--muted); display: block; }
+      .status-pattern {
+        align-items: center;
+        border: 2px solid currentColor;
+        border-radius: .25rem;
+        display: inline-flex;
+        flex: 0 0 1.45rem;
+        height: 1.45rem;
+        justify-content: center;
+        line-height: 1;
+        width: 1.45rem;
+      }
+      .status-pattern::before { content: attr(data-symbol); font-size: .78rem; font-weight: 900; }
+      .status-pattern--stable, .status-pattern--improving { color: var(--green); }
+      .status-pattern--watch, .status-pattern--uncertain { color: var(--yellow); }
+      .status-pattern--constrained, .status-pattern--delayed { color: var(--orange); }
+      .status-pattern--critical { color: var(--red); }
+      .status-pattern--revised { color: var(--purple); }
+      .status-pattern--reported { color: var(--blue); }
 
       .metric-grid {
         display: grid;
@@ -180,6 +233,11 @@
         outline: 0;
         transform: translateY(-1px);
       }
+      :where(a, button, input, select, textarea):focus-visible {
+        outline: 3px solid var(--teal);
+        outline-offset: 3px;
+      }
+      .entity-card:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
       .entity-card strong { display: block; margin: .35rem 0; }
       .entity-icon, .facility-icon { color: var(--teal); font-size: 1.35rem; font-weight: 900; }
       .entity-card p, .facility-card p { color: var(--muted); font-size: .86rem; margin-bottom: .5rem; }
@@ -288,6 +346,21 @@
       .command-status { color: var(--muted); font-size: .82rem; margin: .6rem 0 0; min-height: 1.3em; }
       footer { color: var(--muted); font-size: .8rem; padding-bottom: 2rem; }
 
+      .presentation-navigation {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .45rem .75rem;
+        margin: 0 0 var(--space-4);
+      }
+      .presentation-navigation a {
+        border-bottom: 2px solid var(--teal);
+        color: var(--teal-dark);
+        font-size: .84rem;
+        font-weight: 800;
+        padding: .2rem .1rem;
+      }
+
       @media (max-width: 1120px) {
         .metric-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
         .panel--briefing, .panel--map, .panel--entity, .panel--actions { grid-column: span 6; }
@@ -298,6 +371,7 @@
         .page-header { padding-top: 1.8rem; }
         .metric-grid, .entity-list, .facility-list, .detail-metrics, .history, .debrief { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         .panel--briefing, .panel--map, .panel--entity, .panel--actions, .panel--timeline, .panel--result, .panel--observation, .panel--history, .panel--debrief { grid-column: 1 / -1; }
+        .status-language-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       }
 
       @media (max-width: 500px) {
@@ -317,6 +391,7 @@
     </style>
   </head>
   <body>
+    <a class="skip-link" id="skip-to-content" href="#briefing-region">Skip to executive briefing</a>
     <header class="page-header">
       <div class="topline">
         <div class="eyebrow">Actor-visible executive desktop</div>
@@ -330,10 +405,16 @@
         processes, and committed results; command legality remains with the host
         adapter.
       </p>
+      <nav class="presentation-navigation" id="presentation-navigation" aria-label="Presentation sections">
+        <a href="#briefing-region">Briefing</a>
+        <a href="#action-region">Actions</a>
+        <a href="#resolution-panel">Resolution</a>
+        <a href="#debrief-region">Debrief</a>
+      </nav>
       <dl class="metric-grid" id="header-metrics" aria-label="Executive metrics"></dl>
     </header>
 
-    <main class="desktop-grid" id="desktop" aria-live="polite">
+    <main class="desktop-grid" id="desktop">
       <section class="panel readiness-panel" id="onboarding-panel" aria-labelledby="onboarding-heading">
         <div class="panel-heading">
           <h2 id="onboarding-heading">Start here</h2>
@@ -352,9 +433,29 @@
         </div>
         <div class="readiness-controls">
           <label><input type="checkbox" id="settings-reduced-motion" data-playtest-setting="reduced_motion" /> Reduced motion</label>
-          <label><input type="checkbox" id="settings-text-equivalents" data-playtest-setting="text_equivalents" checked /> Keep written equivalents visible</label>
+          <label><input type="checkbox" id="settings-text-equivalents" data-playtest-setting="text_equivalents" checked /> Show optional cue explanations</label>
+          <label for="settings-text-scale">Text size
+            <select id="settings-text-scale" data-playtest-setting="text_scale">
+              <option value="standard">Standard</option>
+              <option value="large">Large</option>
+            </select>
+          </label>
         </div>
-        <p class="readiness-detail">Audio mute, reduced notifications, focus behavior, and independent channel volumes remain available in the optional audio panel.</p>
+        <p class="readiness-detail">Written decisions, observations, results, history, and debrief remain visible at every setting. Audio mute, reduced notifications, focus behavior, and independent channel volumes remain available in the optional audio panel.</p>
+        <details class="status-language-legend" id="status-language-legend">
+          <summary>Status language: text and symbol cues are used together</summary>
+          <ul class="status-language-list">
+            <li><span class="status-pattern status-pattern--stable" data-symbol="●" aria-hidden="true"></span><span><strong>Stable</strong><small>No visible pressure signal.</small></span></li>
+            <li><span class="status-pattern status-pattern--improving" data-symbol="↗" aria-hidden="true"></span><span><strong>Improving</strong><small>Visible direction is improving.</small></span></li>
+            <li><span class="status-pattern status-pattern--watch" data-symbol="▲" aria-hidden="true"></span><span><strong>Watch</strong><small>Monitor a visible pressure.</small></span></li>
+            <li><span class="status-pattern status-pattern--uncertain" data-symbol="?" aria-hidden="true"></span><span><strong>Uncertain</strong><small>Information is incomplete.</small></span></li>
+            <li><span class="status-pattern status-pattern--constrained" data-symbol="!" aria-hidden="true"></span><span><strong>Constrained</strong><small>A visible constraint is active.</small></span></li>
+            <li><span class="status-pattern status-pattern--delayed" data-symbol="…" aria-hidden="true"></span><span><strong>Delayed</strong><small>Timing or reporting is delayed.</small></span></li>
+            <li><span class="status-pattern status-pattern--critical" data-symbol="×" aria-hidden="true"></span><span><strong>Critical</strong><small>Immediate visible pressure.</small></span></li>
+            <li><span class="status-pattern status-pattern--revised" data-symbol="↻" aria-hidden="true"></span><span><strong>Revised</strong><small>Visible information changed.</small></span></li>
+            <li><span class="status-pattern status-pattern--reported" data-symbol="•" aria-hidden="true"></span><span><strong>Reported</strong><small>Host-reported visible information.</small></span></li>
+          </ul>
+        </details>
       </section>
 
       <section class="panel readiness-panel recovery-panel" id="recovery-panel" aria-labelledby="recovery-heading" hidden>
@@ -368,7 +469,7 @@
         </div>
       </section>
 
-      <section class="panel panel--briefing" aria-labelledby="briefing-heading">
+      <section class="panel panel--briefing presentation-target" id="briefing-region" tabindex="-1" aria-labelledby="briefing-heading">
         <div class="panel-heading">
           <h2 id="briefing-heading">Executive briefing</h2>
           <span>source-linked alerts</span>
@@ -435,7 +536,7 @@
         <div id="entity-detail"></div>
       </section>
 
-      <section class="panel panel--actions" aria-labelledby="actions-heading">
+      <section class="panel panel--actions" id="action-region" aria-labelledby="actions-heading">
         <div class="panel-heading">
           <h2 id="actions-heading">Contextual action panel</h2>
           <span id="action-mode">read-only view · actions deferred to Phase 3</span>
@@ -488,7 +589,7 @@
           <label for="audio-event-volume">Events <input id="audio-event-volume" type="range" min="0" max="1" step=".05" value=".8" /></label>
           <label for="audio-ambience-volume">Ambience <input id="audio-ambience-volume" type="range" min="0" max="1" step=".05" value=".25" /></label>
         </div>
-        <p class="audio-equivalent">Audio only emphasizes visible category and timing. Muting, reduced notifications, focus loss, or unavailable browser audio never removes the written result.</p>
+        <p class="audio-equivalent" id="audio-equivalent">Audio only emphasizes visible category and timing. Muting, reduced notifications, focus loss, or unavailable browser audio never removes the written result.</p>
       </section>
 
       <section class="panel resolution-panel" id="resolution-panel" aria-labelledby="resolution-heading" hidden>
@@ -539,7 +640,7 @@
         <ol class="history" id="history-list"></ol>
       </section>
 
-      <section class="panel panel--debrief" aria-labelledby="debrief-heading">
+      <section class="panel panel--debrief" id="debrief-region" aria-labelledby="debrief-heading">
         <div class="panel-heading">
           <h2 id="debrief-heading">Debrief</h2>
           <span>retrospective, not a score-only view</span>
