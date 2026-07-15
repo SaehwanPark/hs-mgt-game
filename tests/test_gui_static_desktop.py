@@ -59,9 +59,9 @@ class GuiStaticDesktopTests(unittest.TestCase):
       "renderSelectedEntity",
       "dataset.entityId",
       "renderPresentation",
-      "preview only in Phase 1",
+      "actions deferred to Phase 3",
     ):
-      self.assertIn(marker, self.html if marker == "preview only in Phase 1" else self.app)
+      self.assertIn(marker, self.html if marker == "actions deferred to Phase 3" else self.app)
     self.assertNotIn("transition_competitive", self.app)
     self.assertNotIn("CompetitiveWorldState", self.app)
     self.assertNotIn("resolved_inputs", self.app)

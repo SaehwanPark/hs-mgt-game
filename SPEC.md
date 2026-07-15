@@ -4048,47 +4048,48 @@ Verification:
 
 ## Present
 
-- Feature: Visual/audio Phase 1 static executive desktop
-  Status: Complete; Phase 2 is the next gated candidate
+- Feature: Visual/audio Phase 2 live read-only integration
+  Status: Complete; Phase 3 is the next gated candidate
   Started: 2026-07-15
-  Branch: feat/visual-audio-phase1-static-desktop-v0.12.17
+  Branch: feat/visual-audio-phase2-live-read-only-v0.12.18
 
   Summary:
-  Phase 1 validates the accepted information architecture with a responsive,
-  fixture-driven executive desktop for one actor-visible
-  `competitive-regional-v1` month. It keeps the browser non-authoritative and
-  makes finance, workforce, capacity, access, public rival signals, pending
-  processes, and committed monthly results inspectable without raw JSON or CLI
-  output.
+  Phase 2 promotes a typed, non-mutating host/MCP presentation projection for
+  live or recorded `competitive-regional-v1` sessions. It keeps the browser
+  non-authoritative while rendering actor-visible observations, player
+  institution/facility metrics, public signals, pending processes, committed
+  history/state hashes, replay metadata, and explicit missing/error states.
 
   Done:
-  - Extended `gui/` with a semantic responsive desktop containing the executive
-    header, briefing, regional system cards, selected facility detail,
-    contextual action previews, pending timeline, monthly result, history, and
-    debrief.
-  - Added the display-only `presentation_fixture` and non-authoritative entity
-    selection while preserving live envelope fallback and adapter submission.
-  - Added `docs/visual-audio-phase1-static-desktop-v0.12.17.md`, GUI review
-    checklist, responsive/status tokens, and static contract tests.
-  - Verified that no Rust production, MCP, scenario, replay, ruleset, asset,
-    audio, or network behavior changed.
-  - Bumped package and public metadata to `0.12.17`.
+  - Added the `competitive-read-only-v1` typed Rust projection and non-mutating
+    `get_presentation` MCP tool without exposing true world state, commands,
+    resolved inputs, private rival actions, or client formulas.
+  - Added the browser `HsMgtGameReadOnlyAdapter` and `createReadOnlyClient`
+    path for live or recorded envelopes, typed mapping, replay/hash display,
+    and loading/error/empty/missing/unsupported states.
+  - Added projection serialization/no-transition/hidden-field tests,
+    read-only browser contract tests, and
+    `docs/visual-audio-phase2-live-read-only-v0.12.18.md`.
+  - Preserved legacy MCP tools and thin-client exports; no transition,
+    randomness, replay verification, scenario, asset, audio, or network core
+    behavior changed.
+  - Bumped package and public metadata to `0.12.18`.
 
   Not Yet Done:
-  - Promote Phase 2 only for typed live/recorded actor-visible adapter
-    integration after a concrete structured-projection need is demonstrated.
+  - Promote Phase 3 only for canonical contextual action submission after the
+    read-only projection proves the command/action contract need.
 
   Deferred / Non-Goals:
-  - No live read-only DTOs, command validation forms, resolution animation,
-    audio playback, assets, replay visualization, campaign expansion, packaging,
-    deployment, or human evaluation.
+  - No graphical actions, command validation/submission, batch revision,
+    resolution animation, causal overlays, audio playback, assets, replay
+    playback, campaign expansion, packaging, deployment, or human evaluation.
   - Phases 3–9 remain sequentially gated by their own evidence and acceptance
     criteria.
 
   Verification:
-  - GUI contracts pass for the existing adapter and Phase 1 desktop; JavaScript
-    syntax, responsive/status markers, visible-source fields, and no-network
-    checks pass.
+  - Projection and GUI contracts pass for schema, source fields, hidden-field
+    exclusion, no-transition behavior, read-only no-submit behavior, mapping,
+    missingness, and no-network/no-asset checks.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
@@ -4097,18 +4098,18 @@ Verification:
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 1 complete; Phase 2 is the next ranked candidate. No later feature
+Status: Phase 2 complete; Phase 3 is the next ranked candidate. No later feature
 described below should be read as implemented merely because the current `gui/`
-prototype or Phase 1 document exists.
+prototype or Phase 2 document exists.
 
 #### Existing foundation (`Done`)
 
 - The deterministic Rust engine, explicit resolved stochastic inputs,
   actor-visible observations, canonical commands, immutable history, replay
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
-- The dependency-free `gui/` proof renders injected MCP-shaped data and
-  delegates submission through an adapter. It proves a thin-client direction;
-  it is not the persistent regional world, live viewer, action workflow,
+- The dependency-free `gui/` surface renders injected fixtures and typed
+  actor-visible read-only MCP data. It proves a thin-client/live-viewer
+  direction; it is not the persistent regional world, action workflow,
   resolution system, audio layer, or campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
@@ -4136,6 +4137,20 @@ prototype or Phase 1 document exists.
   and public rival information while labeling private activity unavailable.
 - Phase 1 remains a static information-architecture prototype; it does not
   establish live DTO parity, human usability, or polished visual design.
+
+#### Phase 2 live read-only integration (`Done`)
+
+- The MCP host now exposes a versioned `competitive-read-only-v1` projection
+  through non-mutating `get_presentation` for live or recorded adapter use.
+- The projection contains actor-visible session/resources/observation fields,
+  player capacity/facility detail, public signals and information gaps, pending
+  processes, committed transition summaries, state hashes, and replay metadata.
+- Rust serialization tests exclude legal commands, true world state, effect
+  queues, event metadata, resolved stochastic inputs, private rival actions,
+  and non-observation flags; repeated reads preserve the session.
+- The browser read-only client renders the typed envelope and explicit loading,
+  empty, missing, adapter-error, and unsupported-schema states without calling
+  `submitTurn`. Phase 2 does not establish human usability or replay playback.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4431,8 +4446,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 2 live read-only integration is the next candidate. It must
-   prove a typed live/recorded adapter need, preserve visible-fact parity, show
-   explicit missingness, and keep formulas and authority in the host boundary.
-2. Phases 3–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 3 contextual action submission is the next candidate. It
+   must reuse canonical commands, host validation, rejection atomicity, visible
+   costs/delays, and explicit stochastic uncertainty.
+2. Phases 4–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

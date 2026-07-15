@@ -51,6 +51,11 @@ pub struct GetHistoryRequest {
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetPresentationRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct EndSessionRequest {
   pub session_id: String,
 }
@@ -334,6 +339,55 @@ impl GameSessionStore {
           .collect(),
       },
     })
+  }
+
+  pub fn get_presentation(
+    &self,
+    request: GetPresentationRequest,
+  ) -> Result<crate::mcp::presentation::ReadOnlyPresentationEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    let GameSession::Competitive(session) = session else {
+      return Err(error_message(
+        "typed read-only presentation currently supports competitive-regional-v1 only",
+      ));
+    };
+    let observation = observe_for_human(&session.current, session.prior_aggregated.as_ref());
+    let player = session
+      .current
+      .human_system()
+      .expect("competitive session must include human system");
+    let history = session
+      .history
+      .transitions
+      .iter()
+      .map(summarize_competitive_transition)
+      .collect::<Vec<_>>();
+    Ok(crate::mcp::presentation::from_competitive_observation(
+      crate::mcp::presentation::ReadOnlySession {
+        session_id: request.session_id,
+        campaign: CampaignId::CompetitiveRegionalV1.as_str().to_string(),
+        seed: session.seed,
+        difficulty: Some(session.current.difficulty.label().to_string()),
+        year: session.current.policy_calendar.year,
+        month: session.current.policy_calendar.month_in_year,
+        month_name: session.current.policy_calendar.month_name().to_string(),
+        turn: if session.done {
+          session.current.turn
+        } else {
+          session.current.turn + 1
+        },
+        max_turns: COMPETITIVE_MONTH_LIMIT,
+        done: session.done,
+      },
+      player,
+      &observation,
+      &history,
+    ))
   }
 
   pub fn end_session(
@@ -1723,6 +1777,90 @@ mod tests {
       })
       .expect_err("hold is invalid before assessment");
     assert!(error.error.contains("not valid"));
+    let current = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id,
+      })
+      .expect("observation");
+    assert_eq!(current.turn, 1);
+  }
+
+  #[test]
+  fn presentation_is_typed_read_only_and_excludes_hidden_fields() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let before = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation before presentation");
+    let presentation = store
+      .get_presentation(GetPresentationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("presentation");
+    let after = store
+      .get_observation(GetObservationRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("observation after presentation");
+    let json = serde_json::to_value(&presentation).expect("presentation JSON");
+
+    assert_eq!(presentation.schema_version, "competitive-read-only-v1");
+    assert_eq!(presentation.session.turn, before.turn);
+    assert_eq!(presentation.replay.transition_count, 0);
+    assert_eq!(presentation.institutions.len(), 1);
+    assert_eq!(
+      presentation.institutions[0].name,
+      "Riverside Community Health"
+    );
+    assert_eq!(before, after);
+    for forbidden in [
+      "legal_commands",
+      "CompetitiveWorldState",
+      "resolved_inputs",
+      "effect_queue",
+      "event_metadata",
+      "rna_strike_active",
+    ] {
+      assert!(!json.to_string().contains(forbidden), "found {forbidden}");
+    }
+  }
+
+  #[test]
+  fn presentation_carries_committed_history_and_hash() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let advanced = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("competitive month");
+    let presentation = store
+      .get_presentation(GetPresentationRequest {
+        session_id: session.session_id,
+      })
+      .expect("presentation");
+
+    let transition = advanced.latest_transition.expect("latest transition");
+    assert_eq!(presentation.history.len(), 1);
+    assert_eq!(presentation.replay.transition_count, 1);
+    assert_eq!(
+      presentation.replay.latest_state_hash,
+      Some(transition.state_hash.clone())
+    );
+    assert_eq!(presentation.latest_transition, Some(transition));
+  }
+
+  #[test]
+  fn presentation_rejects_other_campaigns_without_mutation() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "stabilization-v1");
+    let result = store.get_presentation(GetPresentationRequest {
+      session_id: session.session_id.clone(),
+    });
+    assert!(result.is_err());
     let current = store
       .get_observation(GetObservationRequest {
         session_id: session.session_id,

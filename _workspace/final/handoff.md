@@ -1,46 +1,51 @@
-# Final Handoff — Visual and Audio Phase 1 Static Desktop v0.12.17
+# Final Handoff — Visual and Audio Phase 2 Live Read-Only Integration v0.12.18
 
 ## Result
 
-Phase 1 of the visual/audio Future track is complete as a fixture-driven,
-static executive desktop prototype. It validates the information architecture
-for a one-month competitive slice while keeping the host/MCP boundary
-authoritative and leaving live integration for Phase 2.
+Phase 2 of the visual/audio Future track is complete for
+`competitive-regional-v1`. The host now exposes a typed, actor-visible,
+non-mutating presentation envelope, and the browser can render live or recorded
+session data with committed history/hash metadata without enabling actions.
 
 ## Changed files
 
+- `src/mcp/presentation.rs`, `src/mcp/session.rs`, `src/mcp/server.rs`, and
+  `src/mcp/mod.rs`
 - `gui/index.html`, `gui/app.mjs`, and `gui/README.md`
-- `docs/visual-audio-phase1-static-desktop-v0.12.17.md`
-- `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`, `LESSONS.md`
+- `docs/visual-audio-phase2-live-read-only-v0.12.18.md`
+- `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`, and `LESSONS.md`
 - `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
   `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, and
-  `_workspace/20_implementation_plan_visual_audio_phase1.md`
-- `tests/test_gui_static_desktop.py` and release metadata
-- package metadata at `0.12.17`
+  `_workspace/21_implementation_plan_visual_audio_phase2.md`
+- `tests/test_gui_live_read_only.py`, updated GUI/Phase 0 contracts, and
+  release metadata at `0.12.18`
 
 ## Verification
 
-- Focused GUI, thin-client, and metadata tests: passed (16 tests).
-- Full Python test discovery: passed.
-- Node syntax check: passed.
-- Release metadata check: passed (`0.12.17`).
-- Documentation whitespace check: passed.
-- Rust formatting, clippy with warnings denied, and serial Rust tests: passed.
+- Focused GUI/thin-client/read-only tests: passed (18 tests).
+- Full Python test discovery: passed (248 tests).
+- Projection tests: passed (3 tests).
+- Node syntax, Rust formatting, clippy with warnings denied, and serial Rust
+  tests: passed (311 unit tests plus integration/golden/doc-test targets).
+- Release metadata and whitespace checks: passed (`0.12.18`).
 - Domain QA status: `pass`.
 
 ## Workflow state
 
-- Task type: development continuation / bounded presentation feature.
-- Base branch: `main` at the Phase 0 merge.
-- Working branch: `feat/visual-audio-phase1-static-desktop-v0.12.17`.
+- Task type: development continuation / bounded host-to-browser presentation
+  feature.
+- Base branch: `main` at the Phase 1 merge.
+- Working branch: `feat/visual-audio-phase2-live-read-only-v0.12.18`.
 - Pull request: to be opened after the single code-review pass is prepared.
-- Next candidate: Phase 2 typed live read-only actor-visible integration.
+- Next candidate: Phase 3 contextual action submission.
 
 ## Known limits and next dependencies
 
-- No live DTO, live read-only adapter, command workflow, transition,
-  randomness, history, replay, debrief, animation, audio, asset, packaging,
-  deployment, or campaign expansion was added.
+- No graphical actions, command validation/submission, batch revision, monthly
+  resolution animation, causal overlays, audio, assets, replay playback,
+  campaign expansion, or deployment was added.
+- The typed projection currently supports only `competitive-regional-v1` and
+  represents facility detail as observed player capacity lines.
 - Browser-native rendering could not be visually exercised because no browser
   binary is available in the environment.
 - Human usability, engagement, lived accessibility, learning, classroom

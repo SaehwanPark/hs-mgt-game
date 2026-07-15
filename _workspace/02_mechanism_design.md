@@ -1,66 +1,78 @@
-# Mechanism Design — Visual and Audio Phase 1 Static Desktop v0.12.17
+# Mechanism Design — Visual and Audio Phase 2 Live Read-Only Integration v0.12.18
 
 ## Goal and Roadmap Phase
 
-Validate the Phase 0 information architecture with a static executive desktop
-before adding live read-only DTOs. This is roadmap Phase 1.
+Render one real or recorded `competitive-regional-v1` session through a typed
+actor-visible projection. This is roadmap Phase 2 and deliberately precedes
+graphical action submission.
 
 ## Slice Boundary
 
-One actor-visible `competitive-regional-v1` month with Riverside Community
-Health and public rival summaries. The screen includes header metrics, briefing,
-schematic regional cards, selected system/facility detail, action previews,
-pending processes, monthly result, history, and debrief. No transition is run.
+The host exposes a versioned read-only presentation envelope containing session
+summary/resources, current player observation, observed player capacity/facility
+detail, public market signals and information gaps, pending processes, committed
+transition summaries, state hashes, and replay metadata. The browser renders
+the envelope through the Phase 1 surfaces and supports loading/error/empty and
+unsupported-campaign states. No transition is run by this path.
 
 ## Actors and Authority
 
-The browser owns only fixture rendering, entity selection, focus/navigation, and
-local presentation state. Existing MCP/host code remains authoritative for
-observation, legal commands, command submission, stochastic inputs, transitions,
-history, hashes, and debriefs.
+The Rust engine and MCP store remain authoritative for observation generation,
+legal commands, resolved stochastic inputs, transitions, pending effects,
+immutable history, replay hashes, and debriefs. The typed projection is a
+read-only host boundary. The browser owns only rendering, selection, loading,
+error, focus, and recorded/live source state; it has no command authority.
 
 ## State, Beliefs, and Observations
 
-Fixture fields are limited to actor-visible values: finance, workforce,
-capacity, access/quality, public market/rival signals, visible timing, direct
-monthly results, and source labels. Private rival actions, true state, resolved
-inputs, private utility, and hidden outcomes are unavailable or excluded.
+DTO fields are selected from `PlayerObservation`, player-owned visible resource
+fields, public market signals, and committed `CompetitiveTransition` summaries.
+The projection omits `CompetitiveWorldState`, `effect_queue`, `event_metadata`,
+resolved inputs, legal commands, private rival actions, and non-observation
+flags. Missing values remain `null`/empty with an explicit UI label.
 
 ## Commands, Events, and Effects
 
-Action cards preview existing `recruit`, `invest`, and `monitor` command families
-with canonical text, cost, delay, visible constraint, and uncertainty. They are
-not submit controls. The existing command field continues to call
-`HsMgtGameAdapter.submitTurn`; no new command or GUI-only resolution exists.
+`get_presentation` is a non-mutating MCP read. It returns committed transition
+events/effects and hashes for the replay prototype but cannot parse, validate,
+or submit commands. `submit_turn` remains a separate legacy tool and is not
+called by the Phase 2 read-only browser client.
 
 ## Strategic Interaction
 
-The player compares visible workforce/capacity pressure with public rival
-signals and pending commitments. Entity selection supports inspection, not a
-strategic action. The prototype preserves the distinction between a visible
-signal and a private rival response.
+The player can inspect visible capacity/workforce pressure and public market
+signals in context, then review the committed history that produced the current
+observation. The slice intentionally does not offer an action response; that
+choice is reserved for Phase 3 where canonical command equivalence and
+rejection atomicity can be tested.
 
 ## Assumptions and Parameters
 
-The browser-native stack from ADR-0011 is retained. CSS custom properties define
-design tokens. Statuses use text plus a diamond marker and color-independent
-wording. Grid breakpoints support typical desktop/laptop widths; reduced motion
-removes transitions.
+- Contract schema version: `competitive-read-only-v1`.
+- First supported campaign: `competitive-regional-v1`.
+- Recorded providers return the same envelope as live providers.
+- A player facility is represented by observed capacity/staffing metrics, not
+  an inferred hidden facility object.
+- No client-side numeric formula, status classifier, timer, or stochastic
+  forecast is introduced.
 
 ## Educational Debrief Hooks
 
-The desktop makes decision context, pending effects, direct monthly drivers,
-observation gaps, history, and debrief links visible. It does not claim that a
-reviewer learned, understood, or preferred the interface.
+Committed command summaries, visible events/effects, and hashes remain
+reviewable without claiming that the browser has established causal learning.
+Debrief generation remains host-owned; no instructor true-state view is added.
 
 ## Determinism and Replay Notes
 
-No transition, RNG, history, replay artifact, or hash is touched. Selecting an
-entity rerenders fixture detail only. Existing adapter submission behavior is
-unchanged, and future replay visualization remains a separate phase.
+`get_presentation` must not change turn, history length, state hash, or session
+resources. Repeated reads of the same live/recorded session must serialize
+equivalent visible facts. Replay metadata is a view over committed history, not
+new simulation history.
 
 ## Open Questions
 
-- Which fixture fields are actually needed for a typed Phase 2 adapter?
-- Which loading/error/empty states need structured host responses?
-- What evidence would justify live projection or a richer visual component?
+- Whether public rival identities need a separate structured source in Phase 3+
+  rather than current market bullets.
+- Whether the Phase 3 action catalog can be promoted without extending the
+  presentation projection beyond visible command metadata.
+- Which replay navigation controls are justified after a static history view.

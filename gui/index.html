@@ -32,6 +32,7 @@
         --yellow-soft: #fff5d8;
         --red: #8d302c;
         --red-soft: #fdecea;
+        --reported-soft: #e9f2fa;
         --shadow: 0 18px 50px rgb(28 55 60 / 9%);
         --radius: 1rem;
         --space-1: .35rem;
@@ -107,6 +108,7 @@
       .status--constrained, .status--delayed { background: var(--orange-soft); color: var(--orange); }
       .status--critical { background: var(--red-soft); color: var(--red); }
       .status--revised { background: var(--purple-soft); color: var(--purple); }
+      .status--reported { background: var(--reported-soft); color: var(--blue); }
 
       .metric-grid {
         display: grid;
@@ -251,6 +253,7 @@
         <span id="session-status" role="status">Demo fixture loaded</span>
       </div>
       <h1>See the pressure before choosing the response.</h1>
+      <p id="presentation-state" class="source" aria-live="polite">Loading read-only presentation…</p>
       <p class="lede">
         A static information-architecture prototype for an executive leading a
         regional nonprofit health system. It shows visible signals, pending
@@ -288,11 +291,11 @@
       <section class="panel panel--actions" aria-labelledby="actions-heading">
         <div class="panel-heading">
           <h2 id="actions-heading">Contextual action panel</h2>
-          <span>preview only in Phase 1</span>
+          <span>read-only view · actions deferred to Phase 3</span>
         </div>
         <div class="action-list" id="action-preview-list"></div>
         <ul class="commands" id="legal-command-list" aria-label="Existing legal command surface"></ul>
-        <form class="command-form" id="command-form">
+        <form class="command-form" id="command-form" hidden>
           <label class="sr-only" for="command-input">Canonical command</label>
           <input id="command-input" autocomplete="off" placeholder="Type a canonical command for the adapter" />
           <button type="submit">Send to adapter</button>
@@ -326,8 +329,8 @@
 
       <section class="panel panel--history" aria-labelledby="history-heading">
         <div class="panel-heading">
-          <h2 id="history-heading">Committed history</h2>
-          <span>replay/state-hash output</span>
+          <h2 id="history-heading">Committed history and replay</h2>
+          <span>state-hash output</span>
         </div>
         <ol class="history" id="history-list"></ol>
       </section>
@@ -342,8 +345,9 @@
     </main>
 
     <footer>
-      Phase 1 static fixture: HTML/CSS/JavaScript only. No external assets,
-      fonts, network calls, hidden-state fields, or duplicate simulation state.
+      Phase 2 read-only viewer: HTML/CSS/JavaScript only. Live or recorded
+      host data remains authoritative; no external assets, fonts, network calls,
+      hidden-state fields, or duplicate simulation state are used here.
     </footer>
     <script type="module" src="./app.mjs"></script>
   </body>

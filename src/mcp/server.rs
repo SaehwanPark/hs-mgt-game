@@ -9,8 +9,8 @@ use rmcp::{
 
 use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetHistoryRequest,
-  GetObservationRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest,
-  SubmitTurnRequest,
+  GetObservationRequest, GetPresentationRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope,
+  StartSessionRequest, SubmitTurnRequest,
 };
 
 #[derive(Clone)]
@@ -82,6 +82,17 @@ impl McpGameServer {
   }
 
   #[tool(
+    name = "get_presentation",
+    description = "Return a typed actor-visible read-only presentation projection without advancing the session or enabling commands."
+  )]
+  async fn get_presentation(
+    &self,
+    Parameters(request): Parameters<GetPresentationRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_presentation(request))
+  }
+
+  #[tool(
     name = "end_session",
     description = "End a session and return its final debrief summary."
   )]
@@ -126,7 +137,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions.",
+        "Use start_session, get_observation, get_presentation, submit_turn, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation is a non-mutating actor-visible read-only view.",
       )
   }
 }
