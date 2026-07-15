@@ -15,7 +15,7 @@ The MCP `get_presentation` read is non-mutating and returns
 
 | Field | Purpose | Authority/source |
 | --- | --- | --- |
-| `session` | Session id, campaign, seed metadata, difficulty, turn, limit, done | MCP session metadata and current competitive session |
+| `session` | Session id, campaign, seed metadata, difficulty, year/month, turn, limit, done | MCP session metadata and current competitive session |
 | `resources` | Cash, action points, political capital | Player-owned visible resources |
 | `observation` | Access/quality, trust, staffing, capacity, operations, market/policy bullets, gaps, and advisory options | `PlayerObservation` |
 | `institutions` | Player institution and observed capacity/facility lines | Player-owned fields already used by the observation |

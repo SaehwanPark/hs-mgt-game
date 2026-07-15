@@ -373,6 +373,9 @@ impl GameSessionStore {
         campaign: CampaignId::CompetitiveRegionalV1.as_str().to_string(),
         seed: session.seed,
         difficulty: Some(session.current.difficulty.label().to_string()),
+        year: session.current.policy_calendar.year,
+        month: session.current.policy_calendar.month_in_year,
+        month_name: session.current.policy_calendar.month_name().to_string(),
         turn: if session.done {
           session.current.turn
         } else {

@@ -60,6 +60,7 @@ class GuiLiveReadOnlyTests(unittest.TestCase):
       "ReadOnlyReplayMetadata",
       "PRESENTATION_SCHEMA_VERSION",
       "from_competitive_observation",
+      "month_name",
     ):
       self.assertIn(marker, self.presentation)
     self.assertIn("GetPresentationRequest", self.session)

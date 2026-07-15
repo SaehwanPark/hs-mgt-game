@@ -551,6 +551,7 @@ function readOnlyEnvelopeToFixture(envelope) {
   ];
   return {
     header_metrics: [
+      { label: "Month", value: `Year ${session.year ?? "Unavailable"} · ${session.month_name ?? "Unavailable"}` },
       { label: "Turn", value: `${session.turn ?? "Unavailable"} / ${session.max_turns ?? "Unavailable"}` },
       { label: "Cash", value: `${resources.cash ?? "Unavailable"} units` },
       { label: "Action points", value: `${resources.action_points ?? "Unavailable"} AP` },
