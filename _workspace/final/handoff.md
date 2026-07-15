@@ -1,57 +1,59 @@
-# Final Handoff — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
+# Final Handoff — Visual and Audio Phase 9 AI-Agent Evaluation and Revision v0.12.25
 
 ## Result
 
-Phase 8 adds a dependency-free browser readiness boundary for declared
-AI-agent interface tasks. It provides first-run guidance, local presentation
-settings, actionable read/submission recovery, an optional allowlisted
-`gui-playtest-v1` recorder, deterministic diagnostics, a fixture, and the
-role/task protocol while preserving host authority and simulation semantics.
+Phase 9 adds a deterministic comparison surface for repeated validated
+`gui-playtest-v1` artifacts. It preserves declared campaign/role/task/seed/
+accessibility context, reports fixed-priority evidence-gap and recovery
+hypotheses, and records product decisions without ranking strategies or
+automatically changing the GUI or simulation.
+
+This closes the currently specified visual/audio upgrade sequence after Phase
+0–8 presentation work.
 
 ## Changed files
 
-- `gui/playtest.mjs`, `gui/app.mjs`, `gui/audio.mjs`, and `gui/index.html`
-- `scripts/diagnose_gui_playtests.py`
-- `tests/test_gui_playtest.py` and `tests/fixtures/gui_playtest_capture.json`
-- `gui/README.md` and
-  `docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`
-- `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`, and `LESSONS.md`
-- Cargo metadata at `0.12.24`
+- `scripts/analyze_gui_playtests.py`
+- `tests/test_gui_playtest_analysis.py` and
+  `tests/fixtures/gui_playtest_matrix/` (five captures)
+- `docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`
+- `README.md`, `gui/README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`,
+  and `LESSONS.md`
+- Cargo metadata and release expectation at `0.12.25`
 - `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
   `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`,
-  `_workspace/27_implementation_plan_visual_audio_phase8.md`, and this handoff
+  `_workspace/28_implementation_plan_visual_audio_phase9.md`, and this handoff
 
 ## Verification
 
-- Focused Phase 8 recorder/diagnostic/UI tests: 5 passed.
-- Full Python discovery: 275 tests passed.
+- Focused Phase 9 analysis plus Phase 8 GUI readiness tests: 11 passed.
+- Full Python discovery: 281 tests passed.
 - Serial Rust suite: 322 unit tests plus 13 integration/golden/scenario tests
   passed; doc-tests passed with zero tests.
-- Node syntax checks, fixture diagnostics, `cargo fmt -- --check`, Clippy with
-  warnings denied, release metadata, and `git diff --check` passed.
+- Node syntax checks, deterministic repeated matrix output, `cargo fmt --
+  --check`, Clippy with warnings denied, release metadata, and `git diff --check`
+  passed.
 - Domain QA status: `pass`.
-- Exactly one Phase 8 code-review pass completed. It found and fixed
-  unsupported-schema exit handling, nested/camelCase forbidden-field gaps,
-  timing-sensitive audio trace capture, and malformed snapshot handling.
+- Exactly one Phase 9 code-review pass completed; missing-input reporting and
+  schema-valid versus task-evidence-valid classification were fixed and
+  reverified.
 
 ## Workflow state
 
-- Task type: bounded visual/audio readiness implementation.
-- Base branch: `main` at the Phase 7 merge.
-- Working branch: `feat/visual-audio-phase8-ai-testplay-v0.12.24`.
-- PR handoff: ready for publish, CI, and merge to `main`.
-- Next candidate: Phase 9 AI-agent evaluation and revision, still gated.
+- Task type: bounded visual/audio evaluation and revision.
+- Base branch: `main` at Phase 8 merge `e992ff4`.
+- Working branch: `feat/visual-audio-phase9-agent-evaluation-v0.12.25`.
+- PR handoff: ready to publish after the final commit.
+- Next dependency: no later visual/audio phase is currently specified; any new
+  work requires a new proposal and promotion gate.
 
 ## Known limits and non-goals
 
-- No simulation, MCP schema, command legality, transition formula, stochastic
-  input, effect queue, history/hash/replay, debrief, or campaign observation
-  change was added.
-- No browser automation, network/service, deployment, game-generated/uploaded
-  screenshots, external model orchestration, or new dependency was added.
-- No Chromium/Chrome/Firefox binary is available, so real-browser layout,
-  focus, keyboard, audio-device, and reduced-motion behavior remain untested.
-- Capture and diagnostics are technical/interface-task evidence only; they do
-  not establish human usability, lived accessibility, learning, engagement,
-  classroom effectiveness, calibration, balance, policy/legal validity, or
-  domain-expert validity.
+- Matrix fixtures are synthetic protocol coverage, not real-agent or human
+  sessions. No browser automation, model/network service, screenshots,
+  deployment, or external orchestration was added.
+- No simulation/MCP/GUI transition/audio/history/hash/replay/debrief/campaign
+  behavior changed, and analyzer output cannot mutate product state.
+- Capture analysis is technical/interface-task proxy evidence only. It does not
+  establish human usability, lived accessibility, learning, engagement,
+  calibration, balance, policy/legal validity, or domain-expert validity.

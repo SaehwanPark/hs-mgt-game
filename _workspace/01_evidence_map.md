@@ -1,81 +1,79 @@
-# Evidence Map — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
+# Evidence Map — Visual and Audio Phase 9 AI-Agent Evaluation and Revision v0.12.25
 
 ## Scope
 
-Phase 8 prepares the existing browser presentation for reproducible AI-agent
-task traces. It is a testability and recovery surface, not an evaluation of
-people or a new simulation layer.
+Phase 9 evaluates repeated Phase 8 capture artifacts as technical and
+interface-task evidence. It adds deterministic comparison and decision logging;
+it does not run agents, infer cognition, or alter the game.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 8 and testing strategy.
-- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `SPEC.md`, and the harness team spec.
-- Existing GUI clients, audio recording sink/catalog, campaign coverage,
-  resolution/replay surfaces, and `gui/README.md`.
-- Existing MCP `scripts/play_game.py` and `scripts/diagnose_runs.py` patterns
-  for declared sessions, validation failures, history, hashes, and debriefs.
+- `docs/visual_audio_upgrade_proposal.md` Phase 9 gate and AI-agent testplay
+  testing strategy.
+- `SPEC.md`, `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, `ARCHITECTURE.md`, and the harness team spec.
+- Phase 8 protocol/documentation, `gui/playtest.mjs`,
+  `scripts/diagnose_gui_playtests.py`, the valid capture fixture, and focused
+  tests.
 
 ## Mechanisms and Institutions
 
-The relevant mechanism is the interface-to-authority boundary: an agent must
-recognize the current campaign role, choose a canonical host-shaped action,
-recover from a rejection, and inspect committed visible results. The health
-policy institutions remain those already modeled by each campaign; Phase 8
-does not introduce actors or new institutional behavior.
-
-The readiness artifact therefore records interaction steps and source-linked
-outcomes rather than scoring whether an agent understood policy or made a good
-decision. Competitive, stabilization, and affiliation campaign identifiers are
-retained so diagnostics cannot silently pool incompatible meanings.
+The mechanism is evidence comparison across interface-task traces, not a new
+health-policy mechanism. Existing campaign institutions, actor authority,
+observations, and debrief meanings remain the source of any policy content
+that appears in a capture. The analyzer treats campaign, role, task, seed,
+interface mode, and accessibility mode as declared context so it does not pool
+stabilization, competitive, and affiliation meanings into one score.
 
 ## Actor Incentives and Information
 
-- The player/agent sees only the current presentation and host responses.
-- The recorder may capture submitted canonical command text, validation result
-  metadata, committed history/hash values, visible audio cue IDs, and a bounded
-  semantic snapshot.
-- The recorder must not capture raw adapter envelopes, true state, resolved
-  inputs, effect queues, private rival actions, hidden DOM payloads, or model
-  chain-of-thought.
-- Settings are local presentation preferences; they do not change commands,
-  transitions, randomness, history, hashes, or replay.
+- The capture producer controls which declared role/task and input artifacts are
+  submitted; the analyzer cannot know whether a role declaration describes a
+  real cognitive profile.
+- Product/contributor reviewers use summaries to decide whether a visible
+  interface hypothesis deserves a bounded revision.
+- The analyzer sees only allowlisted event evidence, failure classes, and
+  declared metadata. It must not recover hidden state, raw payloads, model
+  reasoning, or private rival actions.
+- No actor utility, organizational objective, social welfare, or educational
+  score is computed. A revision priority is an operational triage label only.
 
 ## Assumptions
 
-- A browser-side recorder can be injected as an optional adapter/client concern
-  without changing the host contracts.
-- Existing audio recording-sink events are sufficient for cue evidence when
-  combined with visible source/equivalent labels.
-- Existing MCP playtest wrapper and diagnostics conventions can inform role/task
-  fields without merging GUI traces with simulation state.
-- A deterministic event sequence is more useful for Phase 8 than an external
-  screenshot or agent service that would add dependencies and operational risk.
+- Phase 8 diagnostics is the single capture-schema authority; Phase 9 consumes
+  its result rather than reimplementing hidden browser or simulation rules.
+- Repeated fixture/capture sets can reveal coverage gaps and artifact failures,
+  but not why a person or agent behaved as it did.
+- Stable ordering by declared file/session key is sufficient for reproducible
+  comparison without timestamps or random sampling.
+- A product decision log is the appropriate boundary for hypotheses and
+  deferred revisions because capture analysis must not mutate the product.
 
 ## Unresolved Questions
 
-- Which future browser runtime will provide real semantic DOM and screenshot
-  capture for agent runs, if that is authorized after this readiness slice?
-- Which task failures represent interface friction versus strategy disagreement?
-- What evidence would justify changing onboarding copy rather than recording a
-  bounded interface hypothesis?
+- Which future real-agent traces, if authorized, will supply evidence beyond
+  contract fixtures and static checks?
+- How should repeated interpretation mismatches be investigated without
+  converting them into unsupported human or policy claims?
+- Which product owner should approve a UI revision when a finding is only a
+  technical proxy rather than an observed human problem?
 
 ## Design Implications
 
-- Add explicit onboarding and recovery controls with stable IDs and text.
-- Add a local settings panel for reduced motion, text equivalents, mute, and
-  audio channels; default to complete written play.
-- Define `gui-playtest-v1` with allowlisted events, declared role/task/mode,
-  semantic snapshot, optional screenshot reference, and separate evidence lanes.
-- Validate/classify capture files deterministically and fail closed on unknown
-  schema or forbidden fields.
-- Keep capture, settings, and diagnostics outside simulation transitions and
-  preserve all Phase 2–7 contracts.
+- Add one small standard-library Python analyzer that consumes paths or a
+  directory of Phase 8 captures and calls the existing validator.
+- Report coverage dimensions, per-run counts, failure classes, evidence lanes,
+  deterministic comparisons, and prioritized revision candidates with an
+  explicit hypothesis/limit field.
+- Keep invalid captures visible as data-quality findings and keep valid
+  unresolved human questions separate from technical completion.
+- Check that recommended revisions are deduplicated and sorted by fixed
+  priority/category keys; never auto-edit GUI or simulation files.
 
 ## Risks
 
-The recorder could become a hidden state export, diagnostics could overinterpret
-agent behavior as human evidence, or recovery controls could silently retry a
-mutation. Prevent this with explicit allowlists, source/evidence labels,
-non-mutating retry reads, canonical submit-only commands, schema tests, and
-documentation that calls AI/static traces interface-task proxies only.
+The main risk is false interpretation: a missing event may reflect a harness
+omission, an adapter failure, or a task mismatch rather than interface friction.
+The analyzer must label these as hypotheses, retain source capture IDs, and
+route decisions to a human/contributor log. It must also fail closed on invalid
+captures and preserve the Phase 8 hidden-field boundary.

@@ -105,6 +105,12 @@ interface-task evidence only; it does not score strategies or establish human
 usability, accessibility, learning, engagement, calibration, balance, or policy
 validity.
 
+For repeated declared captures, run the Phase 9 comparison with
+`python3 scripts/analyze_gui_playtests.py tests/fixtures/gui_playtest_matrix`.
+The analysis preserves campaign/role/task/seed/accessibility distinctions and
+emits only deterministic evidence-gap/recovery hypotheses plus explicit limits;
+it never changes the GUI, simulation, or host history.
+
 Phase 2/3/4/5/6/7/8 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
@@ -146,6 +152,6 @@ surface. The typed projection contains no true-world state, resolved stochastic
 inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase 6
 regional-world projection, and Phase 7 campaign coverage are optional,
 visible-only, registry-recorded, and presentation-only; Phase 8 capture and
-diagnostics are optional, allowlisted, and presentation/test evidence only.
-Richer causal overlays, recorded assets, true geography, broader campaign
-expansion, and Phase 9 evaluation remain later phases.
+diagnostics plus Phase 9 comparison are optional, allowlisted, and
+presentation/test evidence only. Richer causal overlays, recorded assets, true
+geography, and broader campaign expansion require a new proposal.

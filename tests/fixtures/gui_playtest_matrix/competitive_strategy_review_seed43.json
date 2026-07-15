@@ -1,0 +1,23 @@
+{
+  "schema_version": "gui-playtest-v1",
+  "session": {
+    "session_id": "matrix-competitive-review",
+    "campaign": "competitive-regional-v1",
+    "seed": 43,
+    "role": "strategy-review",
+    "task": "inspect-committed-result",
+    "viewport": "desktop-1440x900",
+    "interface_mode": "browser-adapter",
+    "accessibility_mode": "standard",
+    "capture_method": "semantic-recorder"
+  },
+  "events": [
+    {"sequence": 0, "type": "session_loaded", "campaign": "competitive-regional-v1", "turn": 1, "done": false, "schema": "competitive-read-only-v1"},
+    {"sequence": 1, "type": "semantic_snapshot", "sections": [{"id": "presentation-state", "hidden": false, "text": "Presentation loaded"}], "controls": [{"id": "action-builder", "role": "section", "label": "Action builder", "disabled": false, "hidden": false}], "status": "Presentation loaded"},
+    {"sequence": 2, "type": "command_submitted", "campaign": "competitive-regional-v1", "command": "hold", "turn": 1},
+    {"sequence": 3, "type": "validation_result", "valid": true, "code": "accepted", "message": "Host accepted the command"},
+    {"sequence": 4, "type": "history_observed", "turn": 1, "state_hash": "hash-competitive-1", "transition_count": 1},
+    {"sequence": 5, "type": "task_completed", "role": "strategy-review", "task": "inspect-committed-result", "result": "completed"}
+  ],
+  "evidence": {"commands": [], "validations": [], "audio_cues": [], "history_hashes": [], "failures": []}
+}

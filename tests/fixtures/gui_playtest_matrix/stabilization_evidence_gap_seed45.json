@@ -1,0 +1,21 @@
+{
+  "schema_version": "gui-playtest-v1",
+  "session": {
+    "session_id": "matrix-stabilization-evidence-gap",
+    "campaign": "stabilization-v1",
+    "seed": 45,
+    "role": "first-time",
+    "task": "complete-first-decision",
+    "viewport": "desktop-1280x900",
+    "interface_mode": "browser-adapter",
+    "accessibility_mode": "standard",
+    "capture_method": "semantic-recorder"
+  },
+  "events": [
+    {"sequence": 0, "type": "semantic_snapshot", "sections": [{"id": "presentation-state", "hidden": false, "text": "Presentation loaded"}], "controls": [{"id": "onboarding-next", "role": "button", "label": "Review the current briefing", "disabled": false, "hidden": false}], "status": "Presentation loaded"},
+    {"sequence": 1, "type": "command_submitted", "campaign": "stabilization-v1", "command": "12 20 106", "turn": 1},
+    {"sequence": 2, "type": "validation_result", "valid": true, "code": "accepted", "message": "Host accepted the command"},
+    {"sequence": 3, "type": "task_completed", "role": "first-time", "task": "complete-first-decision", "result": "completed"}
+  ],
+  "evidence": {"commands": [], "validations": [], "audio_cues": [], "history_hashes": [], "failures": []}
+}
