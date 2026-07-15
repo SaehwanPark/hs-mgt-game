@@ -4,6 +4,28 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.25] - 2026-07-15
+
+### Added
+- Added deterministic `scripts/analyze_gui_playtests.py` comparison for
+  repeated `gui-playtest-v1` captures, preserving declared campaign/role/task/
+  seed/accessibility dimensions and fixed-priority evidence-gap hypotheses.
+- Added a five-capture protocol matrix, Phase 9 evaluation/revision decision
+  log, focused analysis tests, and final visual/audio sequence documentation.
+
+### Changed
+- Kept Phase 8 capture validation, GUI behavior, audio mappings, host authority,
+  Rust simulation, MCP schemas, commands, transitions, history/hash/replay,
+  campaign semantics, and debriefs unchanged.
+- Bumped package/public metadata to `0.12.25`; no analyzer recommendation
+  automatically mutates the product.
+
+### Evidence Limits
+- Matrix output is deterministic technical/interface-task proxy evidence and
+  artifact triage only; it does not establish human usability, lived
+  accessibility, learning, engagement, calibration, balance, or policy/domain
+  validity.
+
 ## [0.12.24] - 2026-07-15
 
 ### Added

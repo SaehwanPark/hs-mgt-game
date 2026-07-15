@@ -1,0 +1,23 @@
+{
+  "schema_version": "gui-playtest-v1",
+  "session": {
+    "session_id": "matrix-affiliation-recovery",
+    "campaign": "regional-affiliation-v1",
+    "seed": 44,
+    "role": "recovery-check",
+    "task": "recover-from-rejected-decision",
+    "viewport": "desktop-1280x900",
+    "interface_mode": "browser-adapter",
+    "accessibility_mode": "muted",
+    "capture_method": "semantic-recorder"
+  },
+  "events": [
+    {"sequence": 0, "type": "onboarding_opened", "campaign": "regional-affiliation-v1", "next_action": "Review the current briefing"},
+    {"sequence": 1, "type": "semantic_snapshot", "sections": [{"id": "recovery-panel", "hidden": false, "text": "Recovery needed"}], "controls": [{"id": "recovery-retry", "role": "button", "label": "Retry current read", "disabled": false, "hidden": false}], "status": "Current session is unchanged"},
+    {"sequence": 2, "type": "command_submitted", "campaign": "regional-affiliation-v1", "command": "integrate", "turn": 3},
+    {"sequence": 3, "type": "failure", "class": "submit_rejected", "message": "Host rejected the decision", "recoverable": true},
+    {"sequence": 4, "type": "recovery_retry", "target": "current-read"},
+    {"sequence": 5, "type": "task_completed", "role": "recovery-check", "task": "recover-from-rejected-decision", "result": "recovered"}
+  ],
+  "evidence": {"commands": [], "validations": [], "audio_cues": [], "history_hashes": [], "failures": []}
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "gui-playtest-v1",
+  "session": {
+    "session_id": "matrix-stabilization-access",
+    "campaign": "stabilization-v1",
+    "seed": 42,
+    "role": "access-check",
+    "task": "complete-first-decision",
+    "viewport": "desktop-1280x900",
+    "interface_mode": "browser-adapter",
+    "accessibility_mode": "reduced-motion",
+    "capture_method": "semantic-recorder"
+  },
+  "events": [
+    {"sequence": 0, "type": "settings_changed", "setting": "reduced_motion", "value": true},
+    {"sequence": 1, "type": "settings_changed", "setting": "text_equivalents", "value": true},
+    {"sequence": 2, "type": "semantic_snapshot", "sections": [{"id": "settings-panel", "hidden": false, "text": "Accessibility and settings"}], "controls": [{"id": "settings-reduced-motion", "role": "checkbox", "label": "Reduced motion", "disabled": false, "hidden": false}], "status": "Reduced motion is active"},
+    {"sequence": 3, "type": "audio_cue", "id": "ui.action-confirm", "source": "Local form result", "equivalent": "Confirmed draft status"},
+    {"sequence": 4, "type": "command_submitted", "campaign": "stabilization-v1", "command": "12 20 106", "turn": 1},
+    {"sequence": 5, "type": "validation_result", "valid": true, "code": "accepted", "message": "Host accepted the command"},
+    {"sequence": 6, "type": "history_observed", "turn": 1, "state_hash": "hash-stabilization-1", "transition_count": 1},
+    {"sequence": 7, "type": "task_completed", "role": "access-check", "task": "complete-first-decision", "result": "completed"}
+  ],
+  "evidence": {"commands": [], "validations": [], "audio_cues": [], "history_hashes": [], "failures": []}
+}

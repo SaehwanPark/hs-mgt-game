@@ -11,9 +11,10 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.24. Its
-visual/audio Phase 8 AI-agent testplay-readiness layer is complete for bounded
-onboarding, settings, recovery, and structured capture diagnostics. It is
+The current public milestone is a playable Rust prototype at v0.12.25. Its
+visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
+analysis are complete for bounded onboarding, settings, recovery, structured
+capture diagnostics, and revision decision logging. It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 
@@ -106,6 +107,8 @@ Current limits:
   calibrated parameters;
 - AI-agent playtest findings are validation aids for gameplay and explanation,
   not evidence of measured human learning.
+- Phase 9 capture-matrix findings are deterministic technical/interface-task
+  hypotheses; they do not automatically revise the interface or simulation.
 - monthly demand, volume, revenue, and cost use visible game units rather than
   calibrated encounters or dollars.
 
@@ -137,6 +140,7 @@ Deeper project context:
 - [Architecture Decision Records](docs/decision-records/README.md)
 - [MCP Agent Interface](docs/mcp-agent-interface.md)
 - [Agent Playtest Protocol](docs/agent-playtest-protocol.md)
+- [Visual/audio Phase 9 evaluation and revision](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md)
 
 Historical and internal development notes, including older playtest findings,
 are kept in `docs/` for transparency. The previous developer-focused README is

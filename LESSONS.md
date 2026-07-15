@@ -1527,3 +1527,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep settings and recovery outside the transition boundary,
   retain visible source/equivalent labels, and classify captures as technical or
   interface-task evidence rather than human usability or learning evidence.
+
+## Rejected Commands Should Not Be Treated as Missing Committed History
+
+- Context: Comparing repeated v0.12.25 GUI playtest captures for the Phase 9
+  evaluation/revision gate.
+- Symptom: A generic command-without-history rule would flag an intentional
+  rejected-command recovery task even though rejection must leave history
+  unchanged.
+- Resolution: Make the deterministic analyzer context-aware: require history
+  evidence after an accepted command, but suppress that finding when the trace
+  records an adapter or submission rejection; retain the gap for valid accepted
+  command traces.
+- Prevention: Interpret event absence with its declared failure context, cite
+  the source capture, and keep every revision finding as a bounded hypothesis
+  rather than a strategy, human, or policy conclusion.

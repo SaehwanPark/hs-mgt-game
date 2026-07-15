@@ -4163,10 +4163,10 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
-## Present
+### Phase 8 AI-agent testplay readiness closure
 
 - Feature: Visual/audio Phase 8 AI-agent testplay readiness
-  Status: Complete; Phase 9 remains gated
+  Status: Closed; Phase 9 is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase8-ai-testplay-v0.12.24
 
@@ -4210,14 +4210,58 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     nested forbidden-field checks, timing-independent audio capture, and
     malformed snapshot handling were fixed and reverified.
 
+## Present
+
+- Feature: Visual/audio Phase 9 AI-agent evaluation and revision
+  Status: Complete; current visual/audio upgrade sequence is closed
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase9-agent-evaluation-v0.12.25
+
+  Summary:
+  Phase 9 compares repeated validated `gui-playtest-v1` capture artifacts
+  across declared campaigns, roles, tasks, seeds, and accessibility modes. It
+  produces deterministic evidence-gap/recovery hypotheses and a product
+  decision log without ranking strategies or changing the product automatically.
+
+  Done:
+  - Added `scripts/analyze_gui_playtests.py`, which reuses the Phase 8 validator,
+    preserves declared matrix dimensions, emits stable capture/event/failure/
+    evidence summaries, and assigns fixed P0–P2 triage priorities.
+  - Added a five-capture synthetic protocol matrix covering stabilization,
+    competitive, affiliation, first-time, access, strategy-review, and recovery
+    paths, including context-aware rejected-command handling.
+  - Added the Phase 9 evaluation/revision document with the matrix, product
+    decision log, accepted analyzer revision, deferred UI/runtime revision, and
+    explicit evidence limits.
+  - Bumped package and public metadata to `0.12.25`.
+
+  Not Yet Done:
+  - No further Phase 9 implementation is planned; preserve the decision-log
+    gate for any future visual/audio proposal.
+
+  Deferred / Non-Goals:
+  - No browser automation, model/network service, screenshots, deployment,
+    external orchestration, new dependency, or new capture schema.
+  - No simulation/MCP/GUI transition/audio/history/hash/replay/debrief/campaign
+    change and no automatic product mutation from analysis output.
+  - No strategy score, causal inference, calibration, balance, policy validity,
+    human usability, lived accessibility, learning, engagement, or domain claim.
+
+  Verification:
+  - Focused analysis/Phase 8 tests, deterministic repeated-output comparison,
+    full Rust/Python/Node/metadata/formatting/clippy checks pass.
+  - Exactly one code-review pass completed; missing-input reporting and
+    schema-valid versus task-evidence-valid classification were fixed and
+    reverified.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 8 is complete; Phase 9 is the next ranked candidate
-and remains gated. No later feature described below should be read as implemented
-merely because the current `gui/` prototype or Phase 6–8 documents exist.
+Status: Phase 9 is complete; no later visual/audio item is currently specified.
+No later feature should be read as implemented merely because the current `gui/`
+prototype or Phase 6–9 documents exist.
 
 #### Existing foundation (`Done`)
 
@@ -4227,8 +4271,9 @@ merely because the current `gui/` prototype or Phase 6–8 documents exist.
 - The dependency-free `gui/` surface renders typed actor-visible data,
   competitive action/resolution, regional-world, and bounded campaign-coverage
   workflows with optional generated audio, plus Phase 8 onboarding, local
-  settings/recovery, and allowlisted testplay capture/diagnostics. It remains a
-  thin client and is not the campaign-complete GUI described here.
+  settings/recovery, allowlisted testplay capture/diagnostics, and a
+  non-authoritative repeated-capture analyzer/decision log. It remains a thin
+  client and is not the campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4673,9 +4718,8 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 9 AI-agent evaluation and revision is the next candidate.
-   It must use repeated declared traces and a product decision log while
-   preserving the evidence-classification boundary.
+1. No later visual/audio phase is currently specified. A new item requires a
+   bounded proposal, evidence source, and promotion gate.
 2. Human usability, lived accessibility, learning, engagement, calibration,
    balance, policy validity, and domain-expert evaluation remain separately
    gated Future work.

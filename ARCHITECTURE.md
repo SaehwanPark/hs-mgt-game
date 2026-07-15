@@ -185,8 +185,9 @@ schematic regional-world projection for `competitive-regional-v1` in `gui/`,
 Phase 7 adds bounded campaign coverage for stabilization and affiliation, and
 Phase 8 adds local readiness controls, recovery, and allowlisted AI-agent
 testplay capture/diagnostics. The GUI remains a non-authoritative thin client;
-broad map/world assets and Phase 9 evaluation/revision remain future work. All
-future work should follow
+broad map/world assets remain future work, while Phase 9 adds deterministic
+capture comparison and decision logging outside the client/core. All future work
+should follow
 this one-way authority flow:
 
 ```text
@@ -286,6 +287,13 @@ remain intact. A future instructor or analytic true-state view requires a
 separate authorization boundary and must not weaken the standard player's
 historical observation boundary.
 
+Phase 9 analysis consumes only validated `gui-playtest-v1` artifacts. It groups
+declared role/task/campaign/seed/accessibility context, emits fixed-priority
+artifact/recovery/evidence hypotheses, and records product decisions without
+ranking strategies or automatically changing the browser, simulation, history,
+hashes, replay, or debriefs. The analyzer is a test-evidence boundary, not a
+new authority or causal model.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -307,6 +315,8 @@ Phase 7 campaign-coverage scope is documented in
 [`docs/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/visual-audio-phase7-campaign-coverage-v0.12.23.md).
 Phase 8 AI-agent testplay-readiness scope is documented in
 [`docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`](docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md).
+Phase 9 AI-agent evaluation/revision scope is documented in
+[`docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain
