@@ -1,80 +1,89 @@
-# Mechanism Design — Visual/audio Phase 12 visual identity and marker provenance v0.12.28
+# Mechanism Design — Visual/audio Phase 13 first-month continuity v0.12.29
 
-## Goal and Roadmap Phase
+## Goal and roadmap gate
 
-Complete the smallest remaining visual-language/asset-contract slice needed to
-make the existing competitive first-month regional world readable after the
-Phase 11 launch/load handoff. This is presentation-layer Phase 12 work; no
-simulation mechanism changes.
+Close the technical continuity gap in the proposal's exact one-month
+`competitive-regional-v1` experience without adding a new game mechanism.
+Phase 13 is a presentation/action-boundary slice following the merged Phase 12
+visual vocabulary.
 
-## Slice Boundary
+## Local flow vocabulary
 
-- Campaign surfaces: existing competitive regional map and its selected entity,
-  facility, overlay, and visible process rows.
-- System identities: Riverside, Northlake, Summit, plus an explicit generic
-  institution fallback.
-- Markers: facility, demand, capacity, project, staffing, payer/policy, and
-  timeline, plus generic visible information fallback.
-- Status: existing stable/watch/constrained/critical/improving/uncertain/
-  delayed/revised/reported vocabulary is catalogued but not recalculated.
-- Asset policy: generated text/glyph/CSS tokens only; no external files.
+The rail has seven ordered stages:
 
-## Actors and Authority
+1. `start` — start or load a host session;
+2. `inspect` — read the current actor-visible briefing and regional world;
+3. `draft` — choose and revise host-catalogued actions;
+4. `validate` — review at least two draft commands and host-returned metadata;
+5. `submit` — submit the unchanged host-validated batch;
+6. `resolution` — read, skip, pause, or review the committed resolution and
+   refreshed presentation;
+7. `continue` — the next actor-visible observation is available.
 
-- The executive uses tokens for orientation and progressive disclosure.
-- The browser owns only presentation rendering and local selection state.
-- The host/MCP projection owns entity identity facts, facility facts, metric
-  values, status values, process values, source labels, and missingness.
-- The visual catalog owns no actor utility, payoff, constraint, or strategy.
+The stage is derived from local booleans and a draft count. It describes client
+handoff progress, not a simulation state or player success state.
 
-## State, Beliefs, and Observations
+## Actors and authority
 
-- True state, private rival operations, stochastic inputs, effect queues, and
-  hidden coordinates remain unavailable.
-- Identity mapping reads only exact visible IDs or conservative visible names;
-  marker mapping reads visible kind/label/category strings.
-- A missing/unknown value renders the generic token and a visible source or
-  unavailable label. No token implies a hidden value.
-- Catalog selection is deterministic and does not enter commands, transitions,
-  history, hashes, replay, or debrief output.
+- Executive: uses the rail to orient to the next presentation step.
+- Browser: owns the rail, local draft count, stage display, and local selection.
+- Host/core: owns session existence, command catalog, legality, costs, delays,
+  stochastic resolution, committed effects, observations, history, hashes, and
+  debriefs.
 
-## Commands, Events, and Effects
+The browser never marks a step complete from a guessed result. A failed start,
+load, validation, submit, resolution read, or refresh leaves the stage at the
+last confirmed handoff and keeps existing recovery behavior.
 
-- No commands, events, or effects are added.
-- Map selection continues to change only local presentation selection.
-- Existing host-provided statuses, source labels, and metrics remain unchanged.
-- Registry/credits files document generated presentation primitives only.
+## State and transition rules
 
-## Strategic Interaction
+The local flow state contains only:
 
-There is no new strategic interaction. The visual system supports recognition of
-existing owned and public systems and their visible pressures without changing
-the information available to any actor.
+```text
+session_loaded: bool
+action_catalog_loaded: bool
+draft_count: non-negative integer
+validated: bool
+submitted: bool
+resolution_visible: bool
+refreshed: bool
+```
 
-## Assumptions and Parameters
+The pure stage function applies these rules in order:
 
-- Known system IDs are `riverside`, `northlake`, and `summit`.
-- Each catalog entry has a stable ID, visible label, symbol, token class,
-  source/equivalent description, generated ownership, and approval status.
-- Unknown IDs, empty kinds, and unsupported categories use `generic`.
+- no session → `start`;
+- session without action catalog → `inspect`;
+- submitted without both resolution and refreshed presentation → `resolution`;
+- submitted with both resolution and refreshed presentation → `continue`;
+- fewer than two drafts → `draft`;
+- drafts without valid host validation → `validate`;
+- valid validation without submit → `submit`;
+- otherwise → `continue`.
 
-## Educational Debrief Hooks
+Changing or clearing drafts clears local validation and cannot advance the
+simulation. Resolution playback controls remain local and do not change the
+stage or host state.
 
-- No new debrief claim is introduced. The visual token may make an existing
-  source/equivalent easier to locate, while causal attribution and learning
-  remain host-provided and separately unevaluated.
+## Presentation contract
 
-## Determinism and Replay Notes
+`gui/first-month.mjs` provides a frozen `competitive-first-month-v1` stage
+catalog, a pure `firstMonthStageFor` function, and a DOM-only flow client. The
+rail renders visible stage labels, current/upcoming/completed text, and a
+plain-language boundary note. It uses no external assets and no adapter data.
 
-- Lookup is a pure deterministic function of visible input text.
-- Rendering and registry metadata are outside the Rust core and cannot alter
-  state hashes or replay artifacts.
-- Replaying a host envelope regenerates the same visual tokens for the same
-  visible IDs/categories, including generic fallback.
+## Educational and replay boundaries
 
-## Open Questions
+The rail adds no causal claim and no debrief content. It must not be recorded as
+simulation history, state hash input, replay content, audio classification, or
+an outcome. A replay of the same local envelope may render the same stage only
+when the same local handoff state is supplied.
 
-- A later campaign-specific visual identity layer may need a host-provided
-  campaign namespace; this phase intentionally does not introduce one.
-- Licensed/recorded assets, SVG production, and visual human evaluation remain
-  future gates.
+## Risks and controls
+
+- Risk: the rail could imply a host operation succeeded before its response.
+  Control: update only after the existing client receives the expected result.
+- Risk: two drafts could be read as two valid actions. Control: label this as a
+  local review threshold; host validation remains authoritative.
+- Risk: a generic progress bar could flatten campaign semantics. Control: keep
+  the stage vocabulary competitive-first-month-specific and do not wire it into
+  campaign coverage clients.

@@ -1,60 +1,60 @@
-# Final Handoff — Visual/audio Phase 12 Visual Identity and Marker Provenance v0.12.28
+# Final Handoff — Visual/audio Phase 13 First-month Continuity v0.12.29
 
 ## Result
 
-Phase 12 adds a generated, presentation-only `visual-catalog-v1` for the first
-competitive regional desktop. Riverside, Northlake, Summit, and an explicit
-generic identity fallback now have stable text-plus-symbol tokens. Facility,
-demand, capacity, project, staffing, payer/policy, timeline, generic, and
-existing status categories are labeled across the map, selected detail,
-overlays, pending processes, and campaign process rows. Source/status text and
-host authority remain intact.
+Phase 13 is implemented and verified. The competitive browser surface now
+renders a local, text-first `competitive-first-month-v1` rail for start/load,
+visible inspection, contextual drafting, host validation, unchanged submit,
+resolution, refreshed presentation, and continuation. It is an orientation
+projection only; the host remains authoritative for all game behavior.
 
 ## Changed files
 
-- `gui/visual.mjs` and `gui/visual-catalog.json`: pure lookup catalog and
-  machine-readable generated provenance.
-- `gui/app.mjs` and `gui/index.html`: semantic token rendering and styling at
-  existing presentation surfaces.
-- `gui/ASSET_CREDITS.md`: visual registry/credits with no third-party assets.
-- `tests/test_gui_visual_identity.py`: catalog, fallback, semantic, and
-  boundary tests.
-- `docs/visual-audio-phase12-visual-identity-v0.12.28.md` and aligned
-  `SPEC.md`, `README.md`, `gui/README.md`, `ARCHITECTURE.md`, `CHANGELOG.md`,
-  and `LESSONS.md`.
-- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
-  `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, the
-  implementation plan, and this handoff.
-- Closed the merged Phase 11 SPEC bookkeeping and bumped metadata to `0.12.28`.
+- `gui/first-month.mjs`: frozen seven-stage catalog, pure stage derivation, and
+  semantic current/completed/upcoming renderer.
+- `gui/app.mjs`: confirmed-handoff updates, draft invalidation recovery, and
+  exported flow clients without changing adapter or simulation contracts.
+- `gui/index.html` and `gui/playtest.mjs`: text-first rail surface, responsive
+  styling, and allowlisted semantic capture coverage.
+- `tests/test_gui_first_month.py` and `tests/test_release_metadata.py`: stage,
+  renderer, host-sequence/rejection, boundary, syntax, and v0.12.29 metadata
+  coverage.
+- `README.md`, `gui/README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`,
+  `Cargo.toml`, and `Cargo.lock`: aligned release and architecture records.
+- `docs/visual-audio-phase13-first-month-continuity-v0.12.29.md` and the
+  `_workspace/` request, evidence, mechanism, plan, QA, and handoff artifacts.
 
 ## Verification
 
-- Focused visual identity plus existing GUI/audio/accessibility/regional/static/
-  release tests: 32 passed.
-- Full Python discovery: 299 passed.
-- `node --check gui/app.mjs`, `node --check gui/visual.mjs`, formatting,
-  Clippy with warnings denied, serial Rust tests, release metadata, and diff
-  checks pass.
-- Domain QA status: `pass`.
-- Exactly one general code-review pass completed. It found and fixed the
-  broad identity-substring fallback and duplicate status-symbol mapping; no
-  second reviewer pass was run.
+- Focused Phase 13 tests: 5 passed.
+- GUI-focused discovery: 74 passed.
+- Full Python discovery: 304 passed.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo test --all -- --test-threads=1` passed: 322 library tests, 3
+  competitive-AI tests, 2 competitive golden tests, 1 stabilization golden
+  test, 7 scenario tests, and no doctest failures.
+- Release metadata, Node syntax, and `git diff --check` passed.
+- Domain QA: `pass`.
+- General code review: exactly one pass; no actionable findings.
 
 ## Workflow state
 
-- Task type: bounded presentation visual-language and asset-provenance slice.
-- Base branch: `main` at Phase 11 merge `c89d93a`.
-- Working branch: `feat/visual-audio-phase12-visual-identity-v0.12.28`.
-- PR handoff: ready after final verification.
-- Next dependency: CI/merge and a post-merge audit of the remaining product
-  contract and first competitive vertical slice.
+- Task type: development continuation; bounded presentation/interface slice.
+- Base branch: `main`.
+- Working branch: `feat/visual-audio-phase13-first-month-continuity-v0.12.29`.
+- PR/commit/push: publication handoff requested; this file records the state
+  immediately before the remote PR/merge operation.
+- Next dependency: CI/PR/merge, followed by a post-merge audit of the remaining
+  first-month product contract.
 
 ## Known limits and non-goals
 
-- No host/MCP schema, simulation, command, transition, stochastic,
-  history/hash/replay, debrief, network, geography, animation, audio source,
-  or licensed asset changed.
-- Generated glyphs are a technical vocabulary, not evidence of polished visual
-  design, human recognition, lived accessibility, learning, or policy validity.
-- Unknown/future identities intentionally fall back to a generic visible token;
-  campaign-specific identity and asset-backed art require a later bounded gate.
+- No Rust/MCP schema, command, transition, stochastic input, history/hash,
+  replay, debrief, campaign, browser transport, dependency, audio source,
+  asset, or network behavior changed.
+- The two-draft threshold is local review guidance and never constrains host
+  action batches.
+- Technical/interface-task evidence does not establish human usability, lived
+  accessibility, learning, engagement, calibration, balance, policy validity,
+  or domain-expert agreement.

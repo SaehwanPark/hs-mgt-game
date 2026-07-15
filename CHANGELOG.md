@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.29] - 2026-07-15
+
+- Added a local `competitive-first-month-v1` text-first rail connecting the
+  existing launch/load, inspection, draft, host validation, unchanged submit,
+  resolution, and refreshed-presentation handoffs.
+- Preserved add/revise/remove draft behavior and recoverable host rejection;
+  the rail does not limit commands or create client-side simulation state.
+- Added adapter-sequence, semantic rendering, stage-derivation, and boundary
+  coverage; no Rust/MCP, simulation, stochastic, history/hash/replay, debrief,
+  audio-source, asset, or browser-transport behavior changed.
+
 ## [0.12.28] - 2026-07-15
 
 - Added a generated `visual-catalog-v1` for Riverside, Northlake, Summit, and

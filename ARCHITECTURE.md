@@ -158,6 +158,8 @@ The `gui/` proof renders an injected session envelope or the typed
 catalogue, keeps draft rows locally, validates canonical batches through the
 host, calls `submitTurn` only for an unchanged valid batch, and reads the typed
 `competitive-resolution-v1` envelope through `getResolution` after a commit.
+Phase 13 adds a local text-first rail over the existing launch, inspection,
+draft, validation, submission, resolution, and refreshed-presentation handoffs.
 The included demo envelope is a display fixture, not a browser-owned
 simulation.
 
@@ -187,7 +189,8 @@ Phase 8 adds local readiness controls, recovery, and allowlisted AI-agent
 testplay capture/diagnostics. The GUI remains a non-authoritative thin client;
 broad map/world assets remain future work, while Phase 9 adds deterministic
 capture comparison and decision logging outside the client/core, and Phase 10
-adds local accessibility/visual-language presentation controls. All future work
+adds local accessibility/visual-language presentation controls. Phase 13 adds
+first-month continuity evidence without changing authority. All future work
 should follow
 this one-way authority flow:
 
@@ -319,6 +322,14 @@ symbol tokens with an explicit generic fallback. It does not calculate status,
 read hidden fields, add host DTO data, or enter commands, transitions, state
 hashes, replay artifacts, audio classification, or debrief output.
 
+Phase 13 adds only a browser-side `competitive-first-month-v1` stage projection.
+The seven stages are derived from local confirmed handoffs and visible text;
+the two-draft threshold is orientation guidance, not a command limit. The rail
+advances only after existing adapter operations succeed, keeps validation and
+resolution/refresh failures recoverable, and never enters host payloads,
+client-side legality or outcome formulas, transitions, stochastic inputs,
+histories, hashes, replay artifacts, audio classification, or debrief output.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -348,6 +359,8 @@ Phase 11 first-session launch/load scope is documented in
 [`docs/visual-audio-phase11-session-launch-v0.12.27.md`](docs/visual-audio-phase11-session-launch-v0.12.27.md).
 Phase 12 visual identity/marker scope is documented in
 [`docs/visual-audio-phase12-visual-identity-v0.12.28.md`](docs/visual-audio-phase12-visual-identity-v0.12.28.md).
+Phase 13 first-month continuity scope is documented in
+[`docs/visual-audio-phase13-first-month-continuity-v0.12.29.md`](docs/visual-audio-phase13-first-month-continuity-v0.12.29.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain

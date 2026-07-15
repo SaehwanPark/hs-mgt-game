@@ -40,6 +40,7 @@ const SESSION_FIELDS = [
 
 const SNAPSHOT_IDS = [
   "onboarding-panel",
+  "first-month-flow",
   "presentation-state",
   "campaign-coverage-panel",
   "campaign-decision-list",
