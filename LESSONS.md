@@ -42,6 +42,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   committed effects separately from presentation comparisons, keep skipped and
   reduced-motion views complete, and never infer a causal graph in the client.
 
+## Make Audio Optional and Source-Traceable
+
+- Context: Phase 5 needed restrained feedback for the visible action/resolution
+  loop without turning sound into a hidden score or an asset-governance detour.
+- Symptom: Audio can leak private state, make muted play incomplete, fatigue
+  repeated sessions, or silently introduce unlicensed files and network paths.
+- Resolution: Used generated Web Audio recipes, a visible-only classifier,
+  independent channels, focus/reduced-notification/mute fallback, cooldowns,
+  recording-sink events, and a registry/credits record with no third-party
+  assets.
+- Prevention: Keep every cue paired with visible text/status, record provenance
+  before adding files, start audio only after a gesture, and treat playback as
+  client state that never enters transitions, hashes, or replay history.
+
 ## Close Presentation Gates Before Adding DTOs or Assets
 
 - Context: The visual/audio proposal listed a broad GUI, audio, and asset track,

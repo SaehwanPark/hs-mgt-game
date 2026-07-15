@@ -1,93 +1,88 @@
-# Mechanism Design — Visual and Audio Phase 4 Resolution/Causal Feedback v0.12.20
+# Mechanism Design — Visual and Audio Phase 5 Foundational Audio v0.12.21
 
 ## Goal and Roadmap Phase
 
-Make one already committed competitive month legible and reviewable through a
-host-owned resolution presentation. This is roadmap Phase 4 and follows the
-Phase 3 graphical action path; it precedes audio, assets, and broader replay.
+Add optional, source-traceable audio to the one-month competitive presentation
+without changing simulation semantics, replay artifacts, or the completeness of
+visual/text communication. This is roadmap Phase 5 after the merged Phase 4
+resolution slice.
 
 ## Slice Boundary
 
-The host exposes the latest or a selected historical competitive transition as
-`competitive-resolution-v1`. The envelope contains actor-visible before/after
-snapshots, ordered presentation steps, existing committed event/effect text,
-operating/resource breakdowns, pending processes, and state-hash metadata. The
-browser renders the full textual result immediately and may reveal steps with
-local play/pause/skip/review controls. There is no new transition call.
+The browser owns a small audio catalog, a visible-only classifier, synthesized
+music/cue playback, local settings, and a recording-sink interface. The catalog
+contains four music states and the eight Phase 0 interface/event cues. There are
+no audio files, fetches, asset URLs, or audio DTOs in Rust in this slice.
 
 ## Actors and Authority
 
-The Rust simulation and MCP host own transition evaluation, explicit stochastic
-inputs, actor observations, committed events/effects, resources, pending
-processes, history, hashes, and debriefs. The browser owns only step index,
-paused/skipped/review mode, reduced-motion preference, selection, and DOM/CSS
-pacing. A replay read is host-derived and non-mutating.
+Rust/MCP remains authoritative for actions, transitions, observations, committed
+events/effects, history, hashes, and debriefs. The browser audio client owns only
+playback and settings. A catalog entry's `visible_source` and `equivalent` are
+documentation metadata, not new simulation authority.
 
 ## State, Beliefs, and Observations
 
-The true `CompetitiveWorldState` remains behind the host boundary. The host
-projects `CompetitiveTransition.prior` and `.next` through the same human
-observation path used by the read-only viewer. Decision-time and post-transition
-snapshots are labeled separately. Existing events/effects are rendered as
-committed source text; no hidden rival action, resolved input, or inferred
-causal edge is reconstructed in the client.
+Music state classification consumes explicit page stage or actor-visible
+`ReadOnlyPresentationEnvelope`/`ResolutionEnvelope` fields. Pressure may use
+visible margin, unmet demand, runway signal, staffing labels, or a visible alert;
+stable operations is the fallback. Debrief is selected only from explicit page
+debrief state. No private rival, true-state, resolved-input, or effect-queue
+field is read.
 
 ## Commands, Events, and Effects
 
-`get_resolution(session_id, turn?)` reads a committed transition from history;
-omitting `turn` selects the latest. The ordered presentation steps are:
+Catalog IDs:
 
-1. submitted batch;
-2. visible institutional responses;
-3. process advancement;
-4. operating result;
-5. resource changes;
-6. direct committed effects;
-7. newly visible information; and
-8. updated pending processes.
+- music: `menu`, `stable_operations`, `pressure`, `debrief`;
+- interface: `ui.action-confirm`, `ui.action-reject`, `ui.action-add`,
+  `ui.action-remove`, `ui.submit`, `ui.advance-month`, `ui.report-received`,
+  `ui.save-complete`;
+- events: `event.project-complete`, `event.staffing-constraint`,
+  `event.operating-loss`, `event.operating-recovery`, `event.payer-decision`,
+  `event.regulatory-decision`, `event.rival-expansion`,
+  `event.affiliation-milestone`.
 
-Each step has a stable ID, label, source, and text/items. Invalid session,
-unsupported campaign, unavailable turn, and no-history cases are recoverable
-read errors. `submit_turn` remains the sole mutation.
+Each entry has a visible equivalent, source, generated-audio recipe, cooldown,
+and accessibility classification. The audio client reports missing support as a
+non-fatal status and never calls `submitTurn`.
 
 ## Strategic Interaction
 
-The resolution presentation shows that the player's action is one institutional
-input among rival and environmental responses. It may show public responses and
-player-owned consequences already present in the accepted transition summary,
-but it does not reveal private rival choices or imply that sequence order caused
-the outcome. A valid command can still produce an unfavorable result.
+Audio should draw attention to institutional responses and operating pressure,
+not reward a single score or imply optimal strategy. Repeated holds, rival
+signals, and negative months remain understandable through the visible result;
+audio only adds restrained category/timing emphasis.
 
 ## Assumptions and Parameters
 
-- Schema: `competitive-resolution-v1`.
+- Schema: `audio-catalog-v1`.
 - First supported campaign: `competitive-regional-v1`.
-- The envelope uses current host observation/resource types and existing
-  `TransitionSummary` source strings before any richer structured effect schema.
-- Comparison display may show `before → after` values for visible metrics; it
-  must not call that comparison a causal explanation.
-- CSS reveal timing is intentionally short, skippable, and reduced-motion safe.
+- Four generated music recipes, one optional ambience recipe, and sixteen
+  total interface/event cues are sufficient for the first technical slice.
+- Master, music, interface, event, and ambience channels are independent;
+  default event cooldown is 1,500 ms and repeated event IDs are coalesced.
+- Browser audio starts only after a user gesture; muted and unsupported paths
+  are complete and visible.
 
 ## Educational Debrief Hooks
 
-The sequence separates what was submitted, what became visible, and what the
-host attributes directly to committed effects. Review mode preserves the full
-textual record and state hash so a learner or instructor can ask which facts
-were available before the decision and which appeared afterward. This phase
-does not claim comprehension or learning.
+The page keeps source text and visual equivalents adjacent to audio controls.
+Cue logs used by tests identify the source ID and visible equivalent, allowing a
+later AI-agent trace to compare visible event text with audio classification.
+This phase makes no claim about learning, engagement, or human accessibility.
 
 ## Determinism and Replay Notes
 
-Resolution reads derive only from immutable committed history and the same
-actor-visible projection used by the live viewer. They do not resolve random
-inputs, write presentation state into the simulation, advance turns, rewrite
-history, or change hashes. Replaying a selected month calls only the read-only
-resolution path.
+Classification is a pure mapping over visible input snapshots and explicit UI
+actions. Playback timing, oscillator phase, focus, and volume are presentation
+state only. Replay may regenerate the same cue IDs from the same visible
+resolution envelope, but audio playback is never stored in history or hashes.
 
 ## Open Questions
 
-- Is a future structured causal-effect DTO needed after the first sequence is
-  inspected, or are accepted source strings sufficient?
-- Which direct effect groups should be promoted into visual overlay categories?
-- What evidence is required before expanding the action workflow to other
-  campaigns or adding richer contextual entity filters?
+- What evidence would justify replacing generated recipes with licensed files?
+- Which visible pressure combinations should be grouped before a richer typed
+  audio-event contract is needed?
+- What repeated-session capture threshold should reopen cue throttling or mix
+  decisions?

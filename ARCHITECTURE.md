@@ -179,10 +179,10 @@ Status: Verified
 Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
 fixture-driven static executive desktop, Phase 2 adds a typed, read-only
 host/MCP projection, Phase 3 adds host-catalogued contextual action submission,
-and Phase 4 adds a host-derived monthly resolution envelope for
-`competitive-regional-v1` in `gui/`. The GUI remains a non-authoritative thin
-client; audio playback and the asset pipeline remain future work. All future
-work should follow this
+Phase 4 adds a host-derived monthly resolution envelope, and Phase 5 adds
+optional generated browser audio for `competitive-regional-v1` in `gui/`. The
+GUI remains a non-authoritative thin client; broad map/world assets and other
+campaign audio remain future work. All future work should follow this
 one-way authority flow:
 
 ```text
@@ -222,7 +222,10 @@ competitive slice. Phase 3 adds only the action catalog and validation fields
 needed to remove command-entry friction, and Phase 4 adds only the committed
 resolution read needed to explain one completed month. Both reuse existing
 parser, validator, observation, history, effect, cost, and submission
-boundaries rather than introducing a second command or outcome engine.
+boundaries rather than introducing a second command or outcome engine. Phase 5
+keeps audio classification and playback in the browser, derives it only from
+visible conditions or explicit UI outcomes, and records generated provenance
+outside the core.
 
 Visible observations and committed effects are the only sources for graphical
 status, animation, advisory bottleneck text, music mood, and event cues. Missing,
@@ -270,10 +273,12 @@ Phase 3 contextual action scope is documented in
 [`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
 Phase 4 resolution scope is documented in
 [`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
+Phase 5 foundational audio scope is documented in
+[`docs/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/visual-audio-phase5-foundational-audio-v0.12.21.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
-transition boundary. Audio playback and the asset pipeline remain planned
-implementations.
+transition boundary. Generated audio playback and registry metadata remain
+presentation/distribution concerns; broad asset-backed audio remains planned.
 
 ## Durable Constraints
 

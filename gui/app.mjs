@@ -1,3 +1,5 @@
+import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
+
 const presentationFixture = {
   header_metrics: [
     { label: "Month", value: "Year 1 · January" },
@@ -642,10 +644,12 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
 
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document } = {}) {
   let currentEnvelope = null;
+  const audioClient = createAudioClient({ root });
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
     currentEnvelope = result.ok ? envelope : null;
+    if (result.ok) audioClient.setMusicFromVisible(envelope);
     return result;
   }
 
@@ -654,6 +658,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     renderEnvelope({ ...demoEnvelope, legal_commands: [], presentation_fixture: fixture }, root);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
+    audioClient.setMusicState("stable_operations");
     return { ok: true, fixture };
   }
 
@@ -669,7 +674,9 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         clearReadOnlySurface(root, "The read-only adapter returned no presentation data.");
         return { ok: false, code: "empty_presentation" };
       }
-      return render(envelope);
+      const result = render(envelope);
+      if (result.ok) audioClient.playCue("ui.report-received");
+      return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       clearReadOnlySurface(root, `Read-only adapter error: ${message}`);
@@ -677,7 +684,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     }
   }
 
-  return { load, render, renderStaticFixture, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, audio: audioClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -828,6 +835,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
   const resolutionClient = createResolutionClient({ adapter, root });
+  const audioClient = createAudioClient({ root });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -845,6 +853,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       root,
       (index) => {
         drafts.splice(index, 1);
+        audioClient.playCue("ui.action-remove");
         invalidateDraft();
         renderDraftState();
       },
@@ -874,11 +883,13 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       const result = await adapter.validateTurn(sessionId, draftCommand());
       validation = result;
       renderValidation(validation, root);
+      audioClient.playCue(validation.valid ? "ui.action-confirm" : "ui.action-reject");
       setPresentationState(root, validation.valid ? "Host validation passed; review before submitting." : "Host validation rejected the draft; revise and retry.");
       return { ok: Boolean(validation.valid), envelope: validation };
     } catch (error) {
       validation = null;
       renderValidation(null, root);
+      audioClient.playCue("ui.action-reject");
       const message = error instanceof Error ? error.message : String(error);
       setPresentationState(root, `Validation adapter error: ${message}`);
       return { ok: false, code: "validation_adapter_error", message };
@@ -906,10 +917,16 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     drafts = [];
     validation = null;
     editingIndex = null;
+    audioClient.playCue("ui.submit");
     let refreshMessage = "Committed response received from the host adapter.";
     if (typeof adapter.getResolution === "function") {
       const resolution = await resolutionClient.load(response.latest_transition?.turn, sessionId);
       if (!resolution.ok) refreshMessage += " Resolution presentation was unavailable.";
+      else {
+        audioClient.playCue("ui.advance-month");
+        audioClient.setMusicFromVisible(resolution.envelope.after);
+        for (const cueId of visibleEventCues(resolution.envelope)) audioClient.playCue(cueId);
+      }
     }
     if (typeof adapter.getPresentation === "function") {
       try {
@@ -917,6 +934,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         if (!renderReadOnlyEnvelope(presentation, root).ok) {
           renderEnvelope(response, root);
           refreshMessage = "Committed response received; read-only refresh was unavailable.";
+        } else {
+          audioClient.setMusicFromVisible(presentation);
+          audioClient.playCue("ui.report-received");
         }
       } catch (error) {
         renderEnvelope(response, root);
@@ -949,6 +969,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         const presentation = await adapter.getPresentation(sessionId);
         const rendered = renderReadOnlyEnvelope(presentation, root);
         if (!rendered.ok) return rendered;
+        audioClient.setMusicFromVisible(presentation);
       }
       catalog = await adapter.getActionCatalog(sessionId);
       if (!catalog || catalog.schema_version !== "competitive-actions-v1") {
@@ -962,6 +983,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         const button = form.querySelector("button[type=submit]");
         if (button) button.textContent = "Add to draft";
         invalidateDraft();
+        audioClient.playCue("ui.action-add");
         renderDraftState();
         setActionControls(root, true);
       });
@@ -982,7 +1004,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
-  return { load, validate: validateDraft, submit, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, audio: audioClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -1308,6 +1330,8 @@ if (typeof document !== "undefined") {
     client.load();
     globalThis.HsMgtGui = {
       client,
+      AUDIO_CATALOG,
+      createAudioClient,
       createActionClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -1324,6 +1348,8 @@ if (typeof document !== "undefined") {
     client.load();
     globalThis.HsMgtGui = {
       client,
+      AUDIO_CATALOG,
+      createAudioClient,
       createActionClient,
       createResolutionClient,
       createReadOnlyClient,
