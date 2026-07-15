@@ -212,6 +212,12 @@
       .campaign-decision-form input, .campaign-decision-form select { background: var(--panel); border: 1px solid var(--line); border-radius: .35rem; color: var(--ink); padding: .4rem; }
       .campaign-history-list, .campaign-debrief-list { display: grid; gap: .35rem; list-style: none; margin: 0; padding: 0; }
       .campaign-history-list li, .campaign-debrief-list li { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; padding: .45rem .55rem; }
+      .readiness-panel { grid-column: 1 / -1; }
+      .readiness-controls { align-items: center; display: flex; flex-wrap: wrap; gap: .55rem 1rem; }
+      .readiness-controls label { align-items: center; color: var(--muted); display: flex; gap: .35rem; font-size: .8rem; }
+      .readiness-controls button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-weight: 750; padding: .5rem .7rem; }
+      .readiness-detail { color: var(--muted); font-size: .82rem; margin: .45rem 0 0; }
+      .recovery-panel { border-color: var(--amber); }
 
       .entity-heading { align-items: center; justify-content: flex-start; }
       .entity-heading .status { margin-left: auto; }
@@ -328,6 +334,40 @@
     </header>
 
     <main class="desktop-grid" id="desktop" aria-live="polite">
+      <section class="panel readiness-panel" id="onboarding-panel" aria-labelledby="onboarding-heading">
+        <div class="panel-heading">
+          <h2 id="onboarding-heading">Start here</h2>
+          <span>first-run guidance</span>
+        </div>
+        <p id="onboarding-campaign">Review the visible briefing, then choose a host-shaped decision.</p>
+        <div class="readiness-controls">
+          <button type="button" id="onboarding-next" data-playtest-event="onboarding_next">Review the current briefing</button>
+        </div>
+      </section>
+
+      <section class="panel readiness-panel" id="settings-panel" aria-labelledby="settings-heading">
+        <div class="panel-heading">
+          <h2 id="settings-heading">Accessibility and settings</h2>
+          <span id="settings-state" aria-live="polite">Written results remain complete.</span>
+        </div>
+        <div class="readiness-controls">
+          <label><input type="checkbox" id="settings-reduced-motion" data-playtest-setting="reduced_motion" /> Reduced motion</label>
+          <label><input type="checkbox" id="settings-text-equivalents" data-playtest-setting="text_equivalents" checked /> Keep written equivalents visible</label>
+        </div>
+        <p class="readiness-detail">Audio mute, reduced notifications, focus behavior, and independent channel volumes remain available in the optional audio panel.</p>
+      </section>
+
+      <section class="panel readiness-panel recovery-panel" id="recovery-panel" aria-labelledby="recovery-heading" hidden>
+        <div class="panel-heading">
+          <h2 id="recovery-heading">Recovery needed</h2>
+          <span>current session is unchanged</span>
+        </div>
+        <p class="readiness-detail" id="recovery-detail">Retry the current host read.</p>
+        <div class="readiness-controls">
+          <button type="button" id="recovery-retry" data-playtest-event="recovery_retry">Retry current read</button>
+        </div>
+      </section>
+
       <section class="panel panel--briefing" aria-labelledby="briefing-heading">
         <div class="panel-heading">
           <h2 id="briefing-heading">Executive briefing</h2>
@@ -509,7 +549,7 @@
     </main>
 
     <footer>
-      Phase 2/3/4 viewer and Phase 5 optional audio: HTML/CSS/JavaScript only. Live or recorded
+      Phase 2/3/4/5/6/7/8 viewer, optional audio, and testplay capture: HTML/CSS/JavaScript only. Live or recorded
       host data remains authoritative; no external assets, fonts, network calls,
       hidden-state fields, or duplicate simulation state are used here.
     </footer>

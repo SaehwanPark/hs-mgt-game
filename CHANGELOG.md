@@ -4,6 +4,31 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.24] - 2026-07-15
+
+### Added
+- Added dependency-free `gui-playtest-v1` capture with declared campaign,
+  role/task, accessibility mode, semantic snapshots, allowlisted UI/command/
+  validation/audio/history/hash events, and explicit evidence lanes.
+- Added first-run onboarding, local reduced-motion/written-equivalent settings,
+  actionable read/submission recovery, and optional recorder hooks across the
+  existing browser clients.
+- Added deterministic `scripts/diagnose_gui_playtests.py`, a fixture capture,
+  Phase 8 role/task protocol, and contract tests for forbidden-field exclusion,
+  failure classification, and stable diagnostics.
+
+### Changed
+- Kept Rust simulation, MCP schemas, command legality, transitions, state
+  hashes, replay, debriefs, campaign observations, audio source mapping, and
+  existing Phase 2–7 presentation contracts unchanged.
+- Promoted visual/audio Phase 9 AI-agent evaluation and revision as the next
+  gated candidate and bumped package/public metadata to `0.12.24`.
+
+### Evidence Limits
+- Recorder, diagnostic, browser, formatting, and static checks are technical or
+  interface-task evidence only; they do not establish human usability, lived
+  accessibility, learning, engagement, calibration, balance, or policy validity.
+
 ## [0.12.23] - 2026-07-15
 
 ### Added
