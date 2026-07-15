@@ -1,69 +1,71 @@
-# Request Summary — Visual and Audio Phase 7 Campaign Coverage v0.12.23
+# Request Summary — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
 
 ## User request
 
-Continue the visual/audio upgrade sequence after the merged Phase 6 regional
-world slice. Follow the repository workflow: bounded design, implementation,
-exactly one code-review pass, PR handoff, CI, merge to `main`, then repeat for
-the next phase.
+Continue the visual/audio upgrade sequence after merged Phase 7 campaign
+coverage. For each bounded SPEC item, design, implement, perform exactly one
+code-review pass, open a PR, wait for CI, merge to `main`, and continue to the
+next phase without stopping.
 
 ## Bounded target
 
-Promote Phase 7 for a shared campaign-coverage presentation contract and browser
-router covering the existing `stabilization-v1` and
-`regional-affiliation-v1` campaigns. Keep campaign-specific observations,
-stages, decisions, commitments, actor responses, pending obligations, hashes,
-and debrief meanings intact.
-
-The host supplies an additive, non-mutating `campaign-coverage-v1` envelope.
-The browser renders shared stage/briefing/metric/history/debrief primitives,
-campaign-specific actors and processes, and host-shaped decision forms. Submit
-still uses the existing canonical `submit_turn` boundary; rejected commands
-remain recoverable and non-mutating.
+Promote Phase 8 as a dependency-free readiness slice for reproducible AI-agent
+testplay across the existing competitive, stabilization, and affiliation
+presentation surfaces. Add first-run guidance, local settings/accessibility
+review, recoverable retry/error states, a sanitized `gui-playtest-v1` interaction
+capture contract, a role/task protocol, and deterministic diagnostic output.
 
 ## Explicit non-goals
 
-- No competitive campaign regression or replacement of the Phase 6 regional
-  world projection.
-- No new simulation actors, commands, state variables, transition formulas,
-  stochastic-input exposure, true state, or replay semantics.
-- No flattening stabilization into competitive monthly operations or affiliation
-  into a generic market/relationship dashboard.
-- No human usability, accessibility, learning, policy-validity, or domain-expert
-  claim; no external assets, network calls, deployment, or mobile redesign.
+- No browser automation dependency, network service, deployment, screenshot
+  generator, or external agent/model orchestration.
+- No simulation state, command, transition, formula, resolved input, effect
+  queue, history/hash/replay semantics, or campaign observation change.
+- No private state, true-state view, raw adapter payload dump, hidden future
+  outcome, or client-side legality/causal inference.
+- No human usability, lived accessibility, learning, engagement, calibration,
+  policy-validity, or domain-expert claim.
 
 ## Sources reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 7 campaign-coverage objective,
-  stabilization/affiliation work, deliverables, and exit criteria.
+- `docs/visual_audio_upgrade_proposal.md` Phase 8 objective, work,
+  deliverables, and exit criteria.
 - `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `SPEC.md`, and the harness team spec.
-- Existing `SessionEnvelope`, stabilization `Observation`/commands/history,
-  `AffiliationObservation`/stage/commands/history, debrief functions, and the
-  merged Phase 1–6 presentation contracts.
+  `docs/design_principles.md`, `SPEC.md`, `ARCHITECTURE.md`, and the harness
+  team spec.
+- Existing `gui/app.mjs`, `gui/audio.mjs`, `gui/index.html`, `gui/README.md`,
+  Phase 5–7 contracts, audio recording sink, MCP playtest wrapper, and
+  diagnostics scripts.
 
 ## Expected files
 
 - `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`,
-  `_workspace/26_implementation_plan_visual_audio_phase7.md`, and final handoff.
-- `src/mcp/campaign_coverage.rs`, MCP session/server/module wiring, and tests.
-- `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and campaign-coverage tests.
-- Phase 7 contract, SPEC/architecture/README/changelog/lessons, and v0.12.23
-  metadata.
+  `_workspace/27_implementation_plan_visual_audio_phase8.md`, and final handoff.
+- `gui/playtest.mjs`, `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and
+  `gui/PLAYTEST_GUIDE.md`.
+- `scripts/diagnose_gui_playtests.py`, a fixture capture, and focused tests.
+- Phase 8 contract doc, SPEC/architecture/README/changelog/lessons, QA, and
+  v0.12.24 metadata.
 
 ## Validation target
 
-- Host coverage reads are typed, actor-visible, non-mutating, schema-versioned,
-  and exclude true state/resolved inputs.
-- Stabilization and affiliation retain distinct stage, briefing, decision,
-  actor, obligation, and debrief semantics.
-- Browser forms are host-shaped, keyboard reachable, recoverable on rejection,
-  and keep visual/text results complete when audio is muted or unavailable.
-- `cargo fmt`, `cargo test`, Clippy, full Python tests, JavaScript syntax,
-  metadata, and diff checks pass before the one review/PR/merge cycle.
+- A first-run user sees a concise next action and can open settings without
+  leaving the current presentation.
+- Reduced motion, text-equivalent, mute, and audio-channel preferences are
+  explicit local presentation state with stable defaults.
+- Adapter and submission failures expose retry/recovery actions and do not
+  fabricate transitions.
+- The recorder emits only allowlisted UI, command, validation, audio,
+  history/hash, semantic-snapshot, and failure fields with deterministic
+  ordering and no raw hidden payload.
+- The diagnostic script validates captures, classifies failure classes, and
+  reports evidence lanes separately.
+- `cargo fmt`, `cargo test`, Clippy, full Python tests, Node syntax, metadata,
+  and diff checks pass before the one review/PR/merge cycle.
 
 ## Generic skills
 
-Use simple-code-writing for the implementation, code-reviewer exactly once,
-spec-driven records, and end-user-XP review. Project-local orchestration,
-evidence mapping, mechanism design, and domain QA are required.
+Use simple-code-writing, spec-driven records, end-user-XP, and preferred
+workflow. Project-local orchestration, evidence mapping, mechanism design, and
+domain QA are required. The user instruction overrides the generic workflow's
+default three-review loop: Phase 8 uses exactly one code-review pass.

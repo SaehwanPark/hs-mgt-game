@@ -1514,3 +1514,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep read-only DTOs separate from action envelopes, derive them
   from existing observation/history sources, and require an explicit Phase 3
   contract before adding graphical command submission.
+
+## Capture Evidence Must Stay Visible and Allowlisted
+
+- Context: Adding the v0.12.24 browser readiness recorder for reproducible
+  AI-agent interface tasks without introducing a second simulation state.
+- Symptom: A convenient DOM or adapter mirror could leak hidden sections, raw
+  payloads, true/private state, or duplicate interaction events into a trace.
+- Resolution: Record only declared session/event/evidence fields, blank hidden
+  semantic text, deduplicate direct and delegated DOM hooks, and fail closed on
+  unknown or forbidden capture fields with deterministic diagnostics.
+- Prevention: Keep settings and recovery outside the transition boundary,
+  retain visible source/equivalent labels, and classify captures as technical or
+  interface-task evidence rather than human usability or learning evidence.

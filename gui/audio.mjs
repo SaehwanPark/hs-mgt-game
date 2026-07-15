@@ -176,6 +176,7 @@ export function createAudioClient({
   root = globalThis.document,
   AudioContextCtor,
   sink = createRecordingSink(),
+  recorder,
 } = {}) {
   const contextConstructor = audioConstructor(AudioContextCtor);
   const volumes = { master: 1, music: 0.55, interface: 0.7, event: 0.8, ambience: 0.25 };
@@ -286,7 +287,13 @@ export function createAudioClient({
     const next = musicEntry(state) ? state : classifyMusicState(input);
     if (currentMusic === next) return { ok: true, state: next };
     currentMusic = next;
-    sink.record?.({ type: "music", id: next, source: musicEntry(next).visible_source });
+    const event = { type: "music", id: next, source: musicEntry(next).visible_source };
+    sink.record?.(event);
+    recorder?.recordAudio?.({
+      id: next,
+      source: musicEntry(next).visible_source,
+      equivalent: musicEntry(next).equivalent,
+    });
     scheduleMusic();
     return { ok: true, state: next };
   }
@@ -298,6 +305,8 @@ export function createAudioClient({
   function playCue(cueId) {
     const entry = cueEntry(cueId);
     if (!entry) return { ok: false, code: "unknown_audio_id" };
+    const traceEvent = { id: entry.id, source: entry.visible_source, equivalent: entry.equivalent };
+    recorder?.recordAudio?.(traceEvent);
     const now = Date.now();
     const previous = lastCueAt.get(cueId);
     if (previous != null && now - previous < entry.cooldown_ms) {

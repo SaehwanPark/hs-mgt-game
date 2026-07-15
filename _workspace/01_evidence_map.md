@@ -1,84 +1,81 @@
-# Evidence Map — Visual and Audio Phase 7 Campaign Coverage v0.12.23
+# Evidence Map — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
 
 ## Scope
 
-Phase 7 extends the validated presentation boundary to the existing
-`stabilization-v1` and `regional-affiliation-v1` campaigns. It is a presentation
-and host-projection slice, not a new campaign or simulation framework.
+Phase 8 prepares the existing browser presentation for reproducible AI-agent
+task traces. It is a testability and recovery surface, not an evaluation of
+people or a new simulation layer.
 
 ## Sources Reviewed
 
-- `docs/visual_audio_upgrade_proposal.md` Phase 7 campaign-coverage section.
+- `docs/visual_audio_upgrade_proposal.md` Phase 8 and testing strategy.
 - `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
   `docs/design_principles.md`, `SPEC.md`, and the harness team spec.
-- Existing stabilization `WorldState`, `Observation`, `PlayerCommand`,
-  `History`, and `educational_debrief` sources.
-- Existing affiliation `AffiliationObservation`, stage/status/commitments,
-  canonical commands, `AffiliationHistory`, and `affiliation_debrief` sources.
-- Merged Phase 1–6 typed presentation, resolution, audio, and regional-world
-  contracts.
+- Existing GUI clients, audio recording sink/catalog, campaign coverage,
+  resolution/replay surfaces, and `gui/README.md`.
+- Existing MCP `scripts/play_game.py` and `scripts/diagnose_runs.py` patterns
+  for declared sessions, validation failures, history, hashes, and debriefs.
 
 ## Mechanisms and Institutions
 
-Stabilization is an onboarding-oriented executive loop: the player sees current
-cash/capacity and reported access/quality/policy/market information, then
-chooses a stage-specific resource or commitment response. Its teaching value is
-the sequence of workforce, policy, coalition, and competitive pressures rather
-than a regional map.
+The relevant mechanism is the interface-to-authority boundary: an agent must
+recognize the current campaign role, choose a canonical host-shaped action,
+recover from a rejection, and inspect committed visible results. The health
+policy institutions remain those already modeled by each campaign; Phase 8
+does not introduce actors or new institutional behavior.
 
-Affiliation is a bounded institutional-fit and obligation process: Riverside
-assesses a partner, chooses an independent/deferred/pursue posture, proposes
-commitments, passes review, and chooses integration or decline. Partner,
-review, labor, payer, and community responses remain separate actor-visible
-signals rather than one affiliation score.
+The readiness artifact therefore records interaction steps and source-linked
+outcomes rather than scoring whether an agent understood policy or made a good
+decision. Competitive, stabilization, and affiliation campaign identifiers are
+retained so diagnostics cannot silently pool incompatible meanings.
 
 ## Actor Incentives and Information
 
-- Stabilization exposes only the existing player observation and stage-appropriate
-  command surface. Resolved measurement inputs remain behind the established
-  observation boundary even when their reported effects are visible.
-- Affiliation exposes the existing reported partner condition, commitments,
-  stage/status, and stakeholder response observations. Private true condition,
-  resolved response inputs, and future outcomes remain unavailable.
-- The host supplies command templates, parameter labels, uncertainty, and
-  constraints; the browser does not derive legality or outcome formulas.
+- The player/agent sees only the current presentation and host responses.
+- The recorder may capture submitted canonical command text, validation result
+  metadata, committed history/hash values, visible audio cue IDs, and a bounded
+  semantic snapshot.
+- The recorder must not capture raw adapter envelopes, true state, resolved
+  inputs, effect queues, private rival actions, hidden DOM payloads, or model
+  chain-of-thought.
+- Settings are local presentation preferences; they do not change commands,
+  transitions, randomness, history, hashes, or replay.
 
 ## Assumptions
 
-- An additive `campaign-coverage-v1` read can reuse existing observation,
-  history, hash, command, and debrief functions without widening competitive
-  DTOs.
-- Host-shaped parameter metadata reduces command syntax friction while leaving
-  parsing, validation, stochastic resolution, and transitions authoritative.
-- A shared stage/briefing/metric/process/history shell can carry both campaigns
-  if role labels and campaign-specific actor/obligation sections remain explicit.
-- Phase 7 audio can reuse generated recipes: visible campaign stage/status maps
-  to existing music states, and committed affiliation stage changes may use the
-  existing affiliation milestone cue.
+- A browser-side recorder can be injected as an optional adapter/client concern
+  without changing the host contracts.
+- Existing audio recording-sink events are sufficient for cue evidence when
+  combined with visible source/equivalent labels.
+- Existing MCP playtest wrapper and diagnostics conventions can inform role/task
+  fields without merging GUI traces with simulation state.
+- A deterministic event sequence is more useful for Phase 8 than an external
+  screenshot or agent service that would add dependencies and operational risk.
 
 ## Unresolved Questions
 
-- What onboarding evidence would justify defaults or stronger guidance beyond
-  host-provided command constraints?
-- Which stabilization and affiliation responses deserve distinct event cues
-  without making unfavorable outcomes sound like failure or success signals?
-- Does the shared shell remain legible when affiliation commitments and actor
-  responses are shown together at narrow viewports?
+- Which future browser runtime will provide real semantic DOM and screenshot
+  capture for agent runs, if that is authorized after this readiness slice?
+- Which task failures represent interface friction versus strategy disagreement?
+- What evidence would justify changing onboarding copy rather than recording a
+  bounded interface hypothesis?
 
 ## Design Implications
 
-- Add a typed coverage envelope with campaign role, stage, source-labeled
-  briefing, metrics, campaign actors, processes/obligations, decisions,
-  committed history, replay metadata, and terminal debrief lines.
-- Use explicit visibility/uncertainty text and a stable campaign role label.
-- Render forms from host parameter metadata and submit only host-shaped command
-  text through the existing adapter; refresh the coverage envelope afterward.
-- Keep the competitive action/resolution/regional-world paths unchanged and
-  make campaign coverage optional when its adapter is absent.
+- Add explicit onboarding and recovery controls with stable IDs and text.
+- Add a local settings panel for reduced motion, text equivalents, mute, and
+  audio channels; default to complete written play.
+- Define `gui-playtest-v1` with allowlisted events, declared role/task/mode,
+  semantic snapshot, optional screenshot reference, and separate evidence lanes.
+- Validate/classify capture files deterministically and fail closed on unknown
+  schema or forbidden fields.
+- Keep capture, settings, and diagnostics outside simulation transitions and
+  preserve all Phase 2–7 contracts.
 
 ## Risks
 
-The shared shell could flatten campaign semantics, turn assumptions into hidden
-rules, expose resolved affiliation responses, or make an affiliation stage look
-like a competitive monthly turn. Use campaign roles, stage-specific labels,
-source fields, explicit unavailable notes, and tests that reject hidden fields.
+The recorder could become a hidden state export, diagnostics could overinterpret
+agent behavior as human evidence, or recovery controls could silently retry a
+mutation. Prevent this with explicit allowlists, source/evidence labels,
+non-mutating retry reads, canonical submit-only commands, schema tests, and
+documentation that calls AI/static traces interface-task proxies only.

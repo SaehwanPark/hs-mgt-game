@@ -1,6 +1,6 @@
-# GUI executive desktop, campaign coverage, contextual action builder, and optional audio
+# GUI executive desktop, campaign coverage, AI-testplay readiness, contextual action builder, and optional audio
 
-This is a dependency-free Phase 2/3/4/5/6/7 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7/8 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -72,7 +72,40 @@ substitute only host-provided parameter values into the host command template;
 the existing `submitTurn` path remains the only mutation path. Host rejection is
 shown as a recoverable error and does not fabricate a local transition.
 
-Phase 2/3/4/5/6/7 review checklist:
+For reproducible interface-task traces, inject an optional recorder from
+`playtest.mjs` into any client. It emits `schema_version: "gui-playtest-v1"`
+with declared campaign/role/task metadata, allowlisted onboarding/settings/
+recovery/command/validation/audio/history/hash/semantic-snapshot events, and
+separate evidence lanes. It never stores raw adapter payloads, true state,
+resolved inputs, effect queues, private rival actions, hidden DOM payloads, or
+model hidden reasoning:
+
+```js
+import { createPlaytestRecorder } from "./playtest.mjs";
+
+const recorder = createPlaytestRecorder({
+  metadata: {
+    campaign: "stabilization-v1",
+    role: "first-time",
+    task: "complete-first-decision",
+    interface_mode: "browser-adapter",
+    accessibility_mode: "reduced-motion",
+    capture_method: "semantic-recorder",
+  },
+});
+const client = HsMgtGui.createReadOnlyClient({ recorder });
+recorder.attach(document);
+await client.load();
+console.log(recorder.toJSON());
+```
+
+Run the deterministic diagnostic over a capture with
+`python3 scripts/diagnose_gui_playtests.py capture.json`. The protocol records
+interface-task evidence only; it does not score strategies or establish human
+usability, accessibility, learning, engagement, calibration, balance, or policy
+validity.
+
+Phase 2/3/4/5/6/7/8 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -98,6 +131,11 @@ Phase 2/3/4/5/6/7 review checklist:
   host-shaped decision through the canonical command path.
 - exercise a rejected campaign command, confirm the error is recoverable, and
   verify history/replay/debrief output remains host-sourced.
+- open onboarding/settings, toggle reduced motion and written equivalents,
+  activate retry after an adapter failure, attach a `gui-playtest-v1` recorder,
+  and verify semantic snapshots contain only allowlisted visible controls.
+- run the deterministic diagnostic on the capture twice and confirm failure
+  classes and evidence lanes are stable.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -107,6 +145,7 @@ files. CSS, HTML, JavaScript, and generated Web Audio recipes are the complete
 surface. The typed projection contains no true-world state, resolved stochastic
 inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase 6
 regional-world projection, and Phase 7 campaign coverage are optional,
-visible-only, registry-recorded, and presentation-only; richer causal overlays,
-recorded assets, true geography, and broader campaign expansion remain later
-phases.
+visible-only, registry-recorded, and presentation-only; Phase 8 capture and
+diagnostics are optional, allowlisted, and presentation/test evidence only.
+Richer causal overlays, recorded assets, true geography, broader campaign
+expansion, and Phase 9 evaluation remain later phases.

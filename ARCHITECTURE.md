@@ -171,7 +171,7 @@ network-dependent core behavior, or GUI-only transition semantics. Asset loading
 and license attribution belong at the interface/distribution boundary, not in
 the core engine.
 
-Last Reviewed: 2026-07-14
+Last Reviewed: 2026-07-15
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture
@@ -180,11 +180,13 @@ Phase 0 alignment is accepted, Phase 1 implements a dependency-free,
 fixture-driven static executive desktop, Phase 2 adds a typed, read-only
 host/MCP projection, Phase 3 adds host-catalogued contextual action submission,
 Phase 4 adds a host-derived monthly resolution envelope, Phase 5 adds
-optional generated browser audio, and Phase 6 adds a bounded actor-visible
+optional generated browser audio, Phase 6 adds a bounded actor-visible
 schematic regional-world projection for `competitive-regional-v1` in `gui/`,
-and Phase 7 adds bounded campaign coverage for stabilization and affiliation.
-The GUI remains a non-authoritative thin client; broad map/world assets and
-AI-agent testplay readiness remain future work. All future work should follow
+Phase 7 adds bounded campaign coverage for stabilization and affiliation, and
+Phase 8 adds local readiness controls, recovery, and allowlisted AI-agent
+testplay capture/diagnostics. The GUI remains a non-authoritative thin client;
+broad map/world assets and Phase 9 evaluation/revision remain future work. All
+future work should follow
 this one-way authority flow:
 
 ```text
@@ -268,13 +270,23 @@ play, and independent audio controls must be designed into the first slice.
 AI-agent and static accessibility checks provide development evidence only and
 must not be presented as lived human accessibility validation.
 
+Phase 8 capture is an optional browser-side evidence boundary, not a second
+simulation state. It may record declared role/task metadata, visible control
+snapshots, canonical command text, validation outcomes, visible audio
+equivalents, and committed history/hash metadata. Its allowlist and deterministic
+diagnostic reject raw adapter payloads, true or private state, resolved inputs,
+effect queues, hidden DOM content, and model hidden reasoning. Local settings and
+retry controls cannot submit commands or alter transitions, hashes, replay, or
+debriefs; externally supplied screenshot references remain harness metadata and
+are never generated or uploaded by the game.
+
 Shared presentation primitives may later support stabilization and affiliation,
 but campaign-specific observations, commands, stages, and debrief meanings must
 remain intact. A future instructor or analytic true-state view requires a
 separate authorization boundary and must not weaken the standard player's
 historical observation boundary.
 
-Last Reviewed: 2026-07-14
+Last Reviewed: 2026-07-15
 Status: Verified
 
 Phase 0 alignment is accepted in
@@ -293,6 +305,8 @@ Phase 6 regional-world scope is documented in
 [`docs/visual-audio-phase6-regional-world-v0.12.22.md`](docs/visual-audio-phase6-regional-world-v0.12.22.md).
 Phase 7 campaign-coverage scope is documented in
 [`docs/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/visual-audio-phase7-campaign-coverage-v0.12.23.md).
+Phase 8 AI-agent testplay-readiness scope is documented in
+[`docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`](docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain

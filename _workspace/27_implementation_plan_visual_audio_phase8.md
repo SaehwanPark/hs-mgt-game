@@ -1,0 +1,133 @@
+# Implementation Plan — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
+
+Status: Implemented and verified; exactly one code-review pass completed with
+targeted fixes applied. Ready for PR handoff and merge before Phase 9.
+
+## Task restatement
+
+Add a dependency-free, optional readiness layer for reproducible AI-agent
+testplay over the existing GUI. Preserve all Phase 2–7 host contracts and
+simulation behavior.
+
+## Current understanding
+
+- `gui/app.mjs` owns the existing read-only, action, resolution, regional-world,
+  and campaign-coverage clients.
+- `gui/audio.mjs` already exposes a recording sink and visible cue metadata.
+- `gui/index.html` has audio controls and reduced-motion CSS but no explicit
+  settings panel, first-run guidance, or retry control.
+- `scripts/play_game.py` and `scripts/diagnose_runs.py` provide bounded MCP
+  capture/diagnostic conventions, but no browser trace contract exists.
+- The existing clients have recoverable status messages but do not expose a
+  consistent machine-readable interaction capture.
+
+## Assumptions
+
+- A browser-side optional recorder and local settings are sufficient for this
+  readiness phase; no browser driver or external service is required.
+- Existing adapter responses, audio sink events, histories, and state hashes
+  are the only host evidence sources needed.
+- If the current DOM/client structure cannot support a bounded recorder without
+  changing public simulation contracts, stop and report the mismatch.
+
+## Minimal implementation plan
+
+1. Add `gui/playtest.mjs` with `gui-playtest-v1` schema constants, an allowlisted
+   recorder, semantic snapshot helper, stable failure classes, and JSON export.
+2. Add optional recorder hooks to existing clients for load, retry, command,
+   validation, adapter error, submission rejection, history/hash, and audio
+   recording events; keep raw adapter payloads out of capture.
+3. Add first-run guidance, settings/accessibility controls, and a retry/recovery
+   action to `gui/index.html`; wire local settings and recovery callbacks in
+   `gui/app.mjs` without mutating host state.
+4. Add `scripts/diagnose_gui_playtests.py`, a small fixture capture, and focused
+   static/behavioral tests for schema allowlists, deterministic classification,
+   forbidden-field exclusion, controls, and Node syntax.
+5. Add the Phase 8 protocol guide and project documentation/version updates.
+6. Run focused/full checks, perform exactly one code-review pass per the user
+   instruction, fix review findings, and stop before Phase 9 until merge.
+
+## Files and functions likely to change
+
+- `gui/playtest.mjs`: recorder, schema, semantic snapshot, failure classes.
+- `gui/app.mjs`: optional recorder/settings/retry hooks and exports.
+- `gui/index.html`: onboarding, settings, recovery, and semantic control IDs.
+- `gui/README.md`, `gui/PLAYTEST_GUIDE.md`: adapter/protocol usage.
+- `scripts/diagnose_gui_playtests.py`: deterministic capture validation and
+  evidence classification.
+- `tests/test_gui_playtest.py`, `tests/fixtures/gui_playtest_capture.json`:
+  focused contract and diagnostic tests.
+- `docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`, `SPEC.md`,
+  `ARCHITECTURE.md`, `README.md`, `CHANGELOG.md`, `LESSONS.md`, metadata, QA,
+  and handoff records.
+
+Avoid changing Rust files unless discovery proves an existing host field is
+required; if that happens, stop and report why the GUI-only boundary is
+insufficient.
+
+## Tests and checks
+
+- `node --check gui/app.mjs && node --check gui/playtest.mjs`
+- `python3 -m unittest tests.test_gui_playtest tests.test_release_metadata`
+- `python3 scripts/diagnose_gui_playtests.py tests/fixtures/gui_playtest_capture.json`
+- `cargo fmt -- --check`
+- `cargo test --all -- --test-threads=1`
+- `cargo clippy --all-targets -- -D warnings`
+- `python3 -m unittest discover -s tests -p 'test_*.py'`
+- `python3 scripts/check_release_metadata.py && git diff --check`
+
+Expected result: existing simulation, presentation, audio, and campaign tests
+remain green, and the fixture diagnostic output is deterministic.
+
+## Acceptance criteria
+
+- First-run guidance names the current task and next action without hiding
+  campaign-specific content.
+- Settings expose reduced motion, written equivalents, mute, and independent
+  audio channels with local-only, stable defaults.
+- Adapter/submission errors expose retry/recovery text and controls; retry reads
+  do not submit or advance a session.
+- `gui-playtest-v1` capture contains declared role/task/mode metadata and only
+  allowlisted visible interaction evidence, with optional screenshot reference.
+- Diagnostics reject unknown schema/forbidden fields, classify failures
+  deterministically, and keep evidence lanes separate.
+- Existing Phase 2–7 contracts, commands, transitions, hashes, replay, and
+  debrief outputs are unchanged.
+
+## Non-goals
+
+- Do not add browser automation, network calls, screenshots generated by the
+  game, model orchestration, or external dependencies.
+- Do not expose true state, resolved inputs, effect queues, private rival data,
+  raw payloads, hidden DOM state, or model hidden reasoning.
+- Do not change Rust simulation behavior, public MCP schemas, command legality,
+  replay/hash semantics, or campaign rules.
+- Do not claim human usability, accessibility, learning, engagement, balance,
+  calibration, or policy validity.
+
+## Stop conditions
+
+Stop and report if the recorder requires a new host DTO, a public simulation
+change, a dependency installation, browser-only behavior unavailable to static
+tests, or more than the named GUI/script/test/doc files.
+
+## Review checklist
+
+- Capture fields are explicitly allowlisted and no raw payload or hidden state
+  can enter the artifact.
+- Retry is read-only; submit/rejection capture matches existing mutation/error
+  semantics.
+- Settings and recorder state cannot affect transitions, hashes, replay, or
+  audio source classification.
+- Campaign identifiers and evidence lanes remain distinct.
+- Unknown/malformed capture data fails closed with actionable diagnostics.
+- Existing clients and tests remain compatible; no speculative framework was
+  introduced.
+
+## Risk label
+
+Risk: medium
+
+Reason: The slice changes several user-facing client paths and introduces a
+machine-readable evidence boundary, but it remains outside simulation state and
+uses no new dependency or persistence format.

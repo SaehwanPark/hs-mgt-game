@@ -1,89 +1,89 @@
-# Mechanism Design — Visual and Audio Phase 7 Campaign Coverage v0.12.23
+# Mechanism Design — Visual and Audio Phase 8 AI-Agent Testplay Readiness v0.12.24
 
 ## Goal and Roadmap Phase
 
-Implement roadmap Phase 7: extend the validated presentation system to
-stabilization and affiliation while preserving their incompatible campaign
-semantics and canonical command boundaries.
+Implement roadmap Phase 8 as a readiness boundary for reproducible AI-agent
+interface tasks across the existing presentation clients. The deliverable is
+capture/recovery infrastructure and a diagnostic protocol, not a new game
+mechanism.
 
 ## Slice Boundary
 
-The host exposes `campaign-coverage-v1` through a non-mutating
-`get_campaign_coverage` read for `stabilization-v1` and
-`regional-affiliation-v1`. The envelope includes shared session/stage/briefing/
-metric/history/replay/debrief primitives plus campaign-specific actors,
-processes, and decisions. Competitive presentation remains on its existing
-contracts.
+The browser adds first-run guidance, local settings/accessibility controls,
+recoverable read/submission errors, and an optional `gui-playtest-v1` recorder.
+The recorder captures a declared session role/task/mode plus allowlisted UI,
+command, validation, audio, history/hash, semantic-snapshot, and failure
+events. A dependency-free Python diagnostic consumes capture JSON and emits
+machine-readable evidence lanes and issue classes.
 
 ## Actors and Authority
 
-Rust/MCP owns campaign state, actor-visible observations, stage legality,
-canonical command parsing/validation, resolved inputs, transitions, history,
-hashes, and educational debriefs. The browser owns panel visibility, local form
-drafts, selected campaign decision, navigation, and audio playback. The browser
-does not own campaign state or infer outcome meaning.
+The host/MCP server remains authoritative for campaign state, observation,
+command legality, stochastic inputs, transitions, history, hashes, replay, and
+debrief. The agent is a test participant whose role/task metadata is declared in
+the capture; it is not a simulated institution. The browser owns local settings,
+onboarding visibility, recovery buttons, semantic snapshot selection, and the
+recorder buffer only.
 
 ## State, Beliefs, and Observations
 
-Stabilization presents reported access/quality, current cash/staffed beds,
-policy/market briefing, stage-specific decision metadata, and explicit
-uncertainty. Affiliation presents partner identity/condition when reported,
-Riverside visible metrics, commitments, stage/status, stakeholder response
-signals, assumptions, and integration/review obligations. True states and
-resolved stochastic inputs remain unavailable.
+Recorder fields are presentation evidence, not simulation state. Visible
+observations may be summarized by stable labels, campaign/stage identifiers,
+source labels, and committed history/hash metadata. Raw envelopes, true state,
+resolved inputs, effect queues, private outcomes, DOM secrets, and model hidden
+reasoning remain unavailable. A screenshot field, when supplied by an external
+agent harness, is a reference string rather than browser-generated content.
 
 ## Commands, Events, and Effects
 
-The envelope returns host-shaped decisions with command templates and parameter
-metadata. The browser substitutes only entered values into the host-provided
-template and sends the resulting canonical text to the existing `submit_turn`
-adapter. Host rejection leaves the current coverage envelope and session intact;
-success reloads the read and committed history. Existing transition events,
-attributed effects, hashes, and debrief lines are reused as source-labeled
-history rather than recomputed.
+Onboarding and settings events are local and non-mutating. Retry invokes the
+existing host read path. A submitted command is recorded only after the existing
+client calls the canonical adapter submission path; rejected commands record the
+error class and leave the current view/session unchanged. Audio events reuse the
+existing recording sink shape and carry cue source/equivalent metadata.
+
+The diagnostic script classifies `adapter_error`, `submit_rejected`,
+`unsupported_schema`, `missing_control`, `semantic_gap`, `capture_invalid`, and
+`task_incomplete` without recommending strategies or inferring causality.
 
 ## Strategic Interaction
 
-Stabilization keeps the player focused on sequencing short-term capacity,
-policy, workforce, coalition, and competitive commitments. Affiliation keeps
-partner fit, review authority, labor, payer, community, and integration as
-separate interacting institutions. The UI may clarify the next stage and visible
-tradeoffs but may not rank a universally optimal posture or merge actor utility
-with Riverside outcomes.
+Phase 8 does not add strategic actions or change actor responses. Role/task
+profiles deliberately cover first-time onboarding, strategy-oriented decision
+review, keyboard/reduced-motion access, mute/audio fallback, and invalid-action
+recovery so that the same existing campaign semantics are exercised through
+different interface paths.
 
 ## Assumptions and Parameters
 
-- Schema: `campaign-coverage-v1`.
-- Stabilization: five turns, one stage-specific command form, existing ruleset
-  constraints, and existing observation/debrief sources.
-- Affiliation: six stages, existing posture/commitment/review/integration
-  commands, `AffiliationRuleset` commitment/cost bounds, and existing response
-  observations.
-- `get_campaign_coverage` and browser navigation are non-mutating.
-- Existing generated audio maps done state to debrief, visible pressure text to
-  pressure music, and committed affiliation-stage refreshes to the existing
-  affiliation milestone cue; muting preserves all text.
+- Schema: `gui-playtest-v1`.
+- Capture ordering is append-only within one client session.
+- Event payloads are JSON-safe, allowlisted, and bounded to visible metadata.
+- Settings defaults are written-text complete: reduced motion off unless the
+  browser preference says on, text equivalents on, audio muted/off until a
+  user gesture, and all audio channels independently adjustable.
+- Diagnostic output is deterministic for the same capture JSON and does not use
+  wall-clock time, randomness, network, or model calls.
 
 ## Educational Debrief Hooks
 
-The shared surface links current decisions to source labels, committed history,
-state hashes, and the existing campaign-specific debrief. Stabilization retains
-actor rationales and attributed mechanisms. Affiliation retains alternatives,
-actor response separation, obligations, and the independence/deferral question.
-No score-only summary or human learning claim is added.
+The capture retains committed commands, validation outcomes, visible history,
+state hashes, and debrief availability so an agent trace can be compared with
+the host record. Diagnostics label the result as technical correctness,
+interface-task proxy, strategic trace, document-grounded domain consistency, or
+unresolved human question. They do not score learning or decision quality.
 
 ## Determinism and Replay Notes
 
-The host derives coverage from current actor-visible observation and immutable
-history. Repeated reads preserve turn, transition count, latest hash, and audio
-state. Parameter metadata is descriptive; it does not resolve commands or
-randomness. Existing replay verification remains untouched.
+Settings and recorder events are outside transitions and replay hashes. A
+repeated host session with the same seed and commands must retain the existing
+hash/replay result even when settings or recording are changed. Diagnostic JSON
+sorts output lists by declared input order and uses fixed class labels.
 
 ## Open Questions
 
-- Which campaign-specific form errors need additional host guidance after
-  adapter traces are available?
-- Should later coverage add historical stage review, or is committed history
-  sufficient for the first campaign-complete presentation slice?
-- What evidence would authorize campaign-specific visual identity assets or
-  richer audio beyond generated cues?
+- Which future browser driver should supply real screenshots and accessibility
+  tree snapshots without making the game bundle network-dependent?
+- Which repeated semantic gaps should become Phase 9 product hypotheses?
+- How should future captures link multiple browser sessions to one replay while
+  preserving campaign-specific semantics?

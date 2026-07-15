@@ -4107,10 +4107,10 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
-## Present
+### Phase 7 campaign coverage closure
 
 - Feature: Visual/audio Phase 7 campaign coverage
-  Status: Complete; Phase 8 is the next gated candidate
+  Status: Closed; Phase 8 is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase7-campaign-coverage-v0.12.23
 
@@ -4163,14 +4163,61 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Release metadata, documentation, formatting, clippy, and the full Python
     and Rust suites pass.
 
+## Present
+
+- Feature: Visual/audio Phase 8 AI-agent testplay readiness
+  Status: Complete; Phase 9 remains gated
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase8-ai-testplay-v0.12.24
+
+  Summary:
+  Phase 8 adds a dependency-free browser readiness boundary for declared
+  AI-agent interface tasks. It makes first-run guidance, local presentation
+  settings, read/submission recovery, and sanitized interaction evidence
+  inspectable without changing host authority or simulation semantics.
+
+  Done:
+  - Added the optional `gui-playtest-v1` recorder with declared campaign,
+    role/task, interface/accessibility mode, capture method, and optional
+    externally supplied screenshot references.
+  - Added allowlisted onboarding, settings, retry, semantic snapshot,
+    command, validation, audio, committed history/hash, failure, and task
+    completion evidence lanes; raw payload and hidden-state fields are
+    excluded by construction and diagnostics fail closed.
+  - Added local reduced-motion and written-equivalent controls, actionable
+    adapter/submission recovery, the role/task protocol, deterministic
+    diagnostics, a fixture, and focused contract tests.
+  - Bumped package and public metadata to `0.12.24`.
+
+  Not Yet Done:
+  - No further Phase 8 implementation is planned; preserve the readiness gate
+    before considering Phase 9.
+
+  Deferred / Non-Goals:
+  - No browser automation, network/service, deployment, screenshot
+    generation/upload, external model orchestration, or new dependency.
+  - No Rust simulation, MCP schema, command legality, transition formula,
+    stochastic input, effect queue, history/hash/replay, debrief, or campaign
+    observation change.
+  - No true/private/raw state exposure, hidden DOM/model reasoning capture, or
+    human usability, lived accessibility, learning, engagement, calibration,
+    balance, policy, legal, or domain-expert claim.
+
+  Verification:
+  - Focused recorder/diagnostic and Node syntax checks, full Rust/Python
+    suites, formatting, clippy, metadata, and whitespace checks pass.
+  - Exactly one code-review pass completed; unsupported-schema exit behavior,
+    nested forbidden-field checks, timing-independent audio capture, and
+    malformed snapshot handling were fixed and reverified.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 7 complete; Phase 8 is the next ranked candidate. No later feature
-described below should be read as implemented merely because the current `gui/`
-prototype or Phase 6/7 document exists.
+Status: Phase 8 is complete; Phase 9 is the next ranked candidate
+and remains gated. No later feature described below should be read as implemented
+merely because the current `gui/` prototype or Phase 6–8 documents exist.
 
 #### Existing foundation (`Done`)
 
@@ -4179,8 +4226,9 @@ prototype or Phase 6/7 document exists.
   hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
 - The dependency-free `gui/` surface renders typed actor-visible data,
   competitive action/resolution, regional-world, and bounded campaign-coverage
-  workflows with optional generated audio. It remains a thin client and is not
-  the campaign-complete GUI described here.
+  workflows with optional generated audio, plus Phase 8 onboarding, local
+  settings/recovery, and allowlisted testplay capture/diagnostics. It remains a
+  thin client and is not the campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4625,8 +4673,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 8 AI-agent testplay readiness is the next candidate. It
-   must exercise campaign coverage, settings/accessibility/error recovery, and
-   structured interaction capture without changing simulation semantics.
-2. Phase 9 remains sequentially gated Future work. It may not be promoted from
-   this queue merely because its requirements are documented.
+1. Visual/audio Phase 9 AI-agent evaluation and revision is the next candidate.
+   It must use repeated declared traces and a product decision log while
+   preserving the evidence-classification boundary.
+2. Human usability, lived accessibility, learning, engagement, calibration,
+   balance, policy validity, and domain-expert evaluation remain separately
+   gated Future work.

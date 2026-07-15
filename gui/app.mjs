@@ -1,4 +1,5 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
+import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 
 const presentationFixture = {
   header_metrics: [
@@ -217,6 +218,128 @@ function setPresentationState(root, message) {
   setStatus(root, message);
   const node = root.querySelector("#presentation-state");
   if (node) node.textContent = message;
+}
+
+function configureRecovery(root, retry, recorder) {
+  const button = root.querySelector("#recovery-retry");
+  if (!button) return;
+  button.onclick = async (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    recorder?.record("recovery_retry", { target: "current-read" });
+    await retry?.();
+  };
+}
+
+function showRecovery(root, message) {
+  const panel = root.querySelector("#recovery-panel");
+  const detail = root.querySelector("#recovery-detail");
+  if (detail) detail.textContent = String(message);
+  if (panel) panel.hidden = false;
+}
+
+function clearRecovery(root) {
+  const panel = root.querySelector("#recovery-panel");
+  if (panel) panel.hidden = true;
+}
+
+function renderOnboarding(envelope, root, recorder) {
+  const panel = root.querySelector("#onboarding-panel");
+  const campaign = root.querySelector("#onboarding-campaign");
+  const next = root.querySelector("#onboarding-next");
+  if (!panel || !campaign || !next) return;
+  const session = envelope?.session ?? envelope ?? {};
+  const campaignId = session.campaign ?? "the current campaign";
+  campaign.textContent = `${campaignId} · start with the visible briefing and one host-shaped decision.`;
+  next.textContent = session.done ? "Review the debrief" : "Review the current briefing";
+  next.onclick = (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    recorder?.record("onboarding_next", { target: session.done ? "campaign-debrief-list" : "briefing-list" });
+    const target = root.querySelector(session.done ? "#campaign-debrief-list, #debrief-list" : "#campaign-coverage-panel, #briefing-list");
+    target?.scrollIntoView?.({ behavior: reducedMotion(root) ? "auto" : "smooth", block: "start" });
+    target?.focus?.({ preventScroll: true });
+  };
+  panel.hidden = false;
+  recorder?.record("onboarding_opened", { campaign: campaignId, next_action: next.textContent });
+  recorder?.recordSnapshot(root);
+}
+
+function recordVisibleEnvelope(recorder, envelope) {
+  if (!recorder || !envelope) return;
+  const session = envelope.session ?? {};
+  recorder.record("session_loaded", {
+    campaign: session.campaign ?? envelope.campaign,
+    turn: session.turn ?? envelope.turn,
+    done: session.done ?? envelope.done,
+    schema: envelope.schema_version,
+  });
+  const history = Array.isArray(envelope.history) ? envelope.history : [];
+  const replay = envelope.replay ?? {};
+  const latest = history[history.length - 1];
+  if (latest || replay.state_hash || replay.latest_state_hash) {
+    recorder.recordHistory({
+      turn: latest?.turn ?? session.turn ?? envelope.turn,
+      state_hash: latest?.state_hash ?? replay.state_hash ?? replay.latest_state_hash,
+      transition_count: replay.transition_count ?? history.length,
+    });
+  }
+}
+
+function recordPlaytestFailure(recorder, code, message, recoverable = true) {
+  if (!recorder) return;
+  const failureClass = code?.includes("unsupported") ? "unsupported_schema"
+    : code?.includes("submit") ? "submit_rejected"
+      : code?.includes("adapter") ? "adapter_error"
+        : code?.includes("schema") ? "unsupported_schema" : "capture_invalid";
+  recorder.recordFailure({ class: failureClass, message, recoverable });
+}
+
+export function createPresentationSettings({ root = document, recorder, storage } = {}) {
+  if (root.__hsMgtPresentationSettings) return root.__hsMgtPresentationSettings;
+  let persisted = {};
+  try {
+    persisted = JSON.parse((storage ?? globalThis.localStorage)?.getItem?.("hs-mgt-presentation-settings") ?? "{}");
+  } catch {
+    persisted = {};
+  }
+  const state = {
+    reduced_motion: persisted.reduced_motion ?? Boolean(globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches),
+    text_equivalents: persisted.text_equivalents ?? true,
+  };
+  const save = () => {
+    try {
+      (storage ?? globalThis.localStorage)?.setItem?.("hs-mgt-presentation-settings", JSON.stringify(state));
+    } catch {
+      // Settings remain session-local when storage is unavailable.
+    }
+  };
+  const apply = () => {
+    root.documentElement?.dataset && (root.documentElement.dataset.reducedMotion = String(state.reduced_motion));
+    root.documentElement?.dataset && (root.documentElement.dataset.textEquivalents = String(state.text_equivalents));
+    const motion = root.querySelector("#settings-reduced-motion");
+    const text = root.querySelector("#settings-text-equivalents");
+    if (motion) motion.checked = state.reduced_motion;
+    if (text) text.checked = state.text_equivalents;
+    const status = root.querySelector("#settings-state");
+    if (status) status.textContent = state.reduced_motion ? "Reduced motion is active; written results remain complete." : "Standard motion is active; written results remain complete.";
+  };
+  root.querySelector("#settings-reduced-motion")?.addEventListener("change", (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    state.reduced_motion = Boolean(event.target.checked);
+    recorder?.record("settings_changed", { setting: "reduced_motion", value: state.reduced_motion });
+    save();
+    apply();
+  });
+  root.querySelector("#settings-text-equivalents")?.addEventListener("change", (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    state.text_equivalents = Boolean(event.target.checked);
+    recorder?.record("settings_changed", { setting: "text_equivalents", value: state.text_equivalents });
+    save();
+    apply();
+  });
+  apply();
+  const client = { apply, get state() { return { ...state }; } };
+  root.__hsMgtPresentationSettings = client;
+  return client;
 }
 
 function setReadOnlyControls(root, readOnly) {
@@ -696,12 +819,17 @@ export function createCampaignCoverageClient({
   adapter = globalThis.HsMgtGameCampaignAdapter ?? globalThis.HsMgtGameActionAdapter ?? globalThis.HsMgtGameReadOnlyAdapter,
   root = document,
   audio,
+  recorder,
 } = {}) {
   let currentEnvelope = null;
-  const audioClient = audio ?? createAudioClient({ root });
+  const audioClient = audio ?? createAudioClient({ root, recorder });
+  const settings = createPresentationSettings({ root, recorder });
 
   async function load(sessionId = adapter?.sessionId) {
+    configureRecovery(root, () => load(sessionId), recorder);
     if (!adapter || typeof adapter.getCampaignCoverage !== "function") {
+      recordPlaytestFailure(recorder, "campaign_coverage_adapter_missing", "Campaign coverage adapter is unavailable.");
+      showRecovery(root, "Campaign coverage is unavailable. Load a campaign adapter, then retry the current read.");
       return { ok: false, code: "campaign_coverage_adapter_missing" };
     }
     try {
@@ -709,16 +837,23 @@ export function createCampaignCoverageClient({
       const result = renderCampaignCoverage(envelope, root, submit);
       if (!result.ok) {
         currentEnvelope = null;
+        recordPlaytestFailure(recorder, result.code, "Campaign coverage schema is unavailable.");
         setPresentationState(root, "Campaign coverage is unavailable; existing presentation remains active.");
+        showRecovery(root, "Campaign coverage could not be read. Retry the current host read when the adapter is available.");
         return result;
       }
       currentEnvelope = envelope;
+      clearRecovery(root);
+      renderOnboarding(envelope, root, recorder);
+      recordVisibleEnvelope(recorder, envelope);
       audioClient.setMusicFromVisible(campaignAudioInput(envelope));
       return result;
     } catch (error) {
       currentEnvelope = null;
       const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "campaign_coverage_adapter_error", message);
       setPresentationState(root, `Campaign coverage adapter error: ${message}`);
+      showRecovery(root, `Campaign coverage could not be read: ${message}`);
       return { ok: false, code: "campaign_coverage_adapter_error", message };
     }
   }
@@ -726,11 +861,14 @@ export function createCampaignCoverageClient({
   async function submit(command) {
     if (!adapter || typeof adapter.submitTurn !== "function") {
       setPresentationState(root, "No campaign submit adapter configured; no transition was attempted.");
+      recordPlaytestFailure(recorder, "campaign_submit_adapter_missing", "Campaign submit adapter is unavailable.");
+      showRecovery(root, "Campaign submission is unavailable. Review the current read or load a submit-capable host adapter.");
       audioClient.playCue("ui.action-reject");
       return { ok: false, code: "campaign_submit_adapter_missing" };
     }
     try {
       setPresentationState(root, "Submitting the canonical campaign decision…");
+      recorder?.record("command_submitted", { campaign: currentEnvelope?.session?.campaign, command, turn: currentEnvelope?.session?.turn });
       const response = await adapter.submitTurn(command);
       if (response?.error) throw new Error(response.error);
       audioClient.playCue("ui.submit");
@@ -745,13 +883,15 @@ export function createCampaignCoverageClient({
       return { ok: true, envelope: result.envelope };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "campaign_submit_rejected", message);
       audioClient.playCue("ui.action-reject");
       setPresentationState(root, `Campaign decision rejected; current stage remains active: ${message}`);
+      showRecovery(root, "The host rejected this decision. Review the visible constraints, then retry the current read or choose another decision.");
       return { ok: false, code: "campaign_submit_rejected", message };
     }
   }
 
-  return { load, submit, audio: audioClient, get envelope() { return currentEnvelope; } };
+  return { load, submit, audio: audioClient, settings, get envelope() { return currentEnvelope; } };
 }
 
 export function renderRegionalWorld(envelope, root = document) {
@@ -1074,17 +1214,23 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
   return { ok: true, envelope };
 }
 
-export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document } = {}) {
+export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
   let currentEnvelope = null;
-  const audioClient = createAudioClient({ root });
+  const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
-  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient });
+  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
+  const settings = createPresentationSettings({ root, recorder });
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
     currentEnvelope = result.ok ? envelope : null;
-    if (result.ok) audioClient.setMusicFromVisible(envelope);
+    if (result.ok) {
+      clearRecovery(root);
+      renderOnboarding(envelope, root, recorder);
+      recordVisibleEnvelope(recorder, envelope);
+      audioClient.setMusicFromVisible(envelope);
+    }
     return result;
   }
 
@@ -1098,18 +1244,23 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   }
 
   async function load(sessionId = adapter?.sessionId) {
+    configureRecovery(root, () => load(sessionId), recorder);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Loading read-only presentation…");
     if (!adapter || typeof adapter.getPresentation !== "function") {
       if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
         return campaignCoverageClient.load(sessionId);
       }
+      recordPlaytestFailure(recorder, "read_only_adapter_missing", "No read-only presentation adapter is configured.");
+      showRecovery(root, "No live read adapter is configured. Load a host adapter, then retry the current read.");
       return renderStaticFixture();
     }
     try {
       const envelope = await adapter.getPresentation(sessionId);
       if (!envelope) {
         clearReadOnlySurface(root, "The read-only adapter returned no presentation data.");
+        recordPlaytestFailure(recorder, "adapter_error", "The read-only adapter returned no presentation data.");
+        showRecovery(root, "The host returned no presentation. Retry the current read.");
         return { ok: false, code: "empty_presentation" };
       }
       const result = render(envelope);
@@ -1117,16 +1268,22 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         await regionalWorldClient.load(sessionId);
         await campaignCoverageClient.load(sessionId);
       }
+      if (!result.ok) {
+        recordPlaytestFailure(recorder, result.code, "The read-only presentation schema is unavailable.");
+        showRecovery(root, "The host returned an unsupported presentation. Retry the current read or use a compatible adapter.");
+      }
       if (result.ok) audioClient.playCue("ui.report-received");
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       clearReadOnlySurface(root, `Read-only adapter error: ${message}`);
+      recordPlaytestFailure(recorder, "read_only_adapter_error", message);
+      showRecovery(root, `Read-only adapter error: ${message}`);
       return { ok: false, code: "adapter_error", message };
     }
   }
 
-  return { load, render, renderStaticFixture, audio: audioClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -1270,17 +1427,18 @@ function renderValidation(validation, root) {
   );
 }
 
-export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null } = {}) {
   let catalog = null;
   let drafts = [];
   let validation = null;
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
   const resolutionClient = createResolutionClient({ adapter, root });
-  const audioClient = createAudioClient({ root });
+  const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
-  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient });
+  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
+  const settings = createPresentationSettings({ root, recorder });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -1321,12 +1479,15 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   async function validateDraft() {
     if (!adapter || typeof adapter.validateTurn !== "function") {
       setPresentationState(root, "No host validation adapter configured; no submission was attempted.");
+      recordPlaytestFailure(recorder, "validation_adapter_missing", "Host validation adapter is unavailable.");
+      showRecovery(root, "Validation is unavailable. Load a host adapter before submitting a decision.");
       return { ok: false, code: "validation_adapter_missing" };
     }
     setPresentationState(root, "Validating draft with the host…");
     try {
       const result = await adapter.validateTurn(sessionId, draftCommand());
       validation = result;
+      recorder?.recordValidation({ valid: Boolean(result.valid), code: result.code, message: result.error ?? result.message });
       renderValidation(validation, root);
       audioClient.playCue(validation.valid ? "ui.action-confirm" : "ui.action-reject");
       setPresentationState(root, validation.valid ? "Host validation passed; review before submitting." : "Host validation rejected the draft; revise and retry.");
@@ -1336,7 +1497,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       renderValidation(null, root);
       audioClient.playCue("ui.action-reject");
       const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "validation_adapter_error", message);
       setPresentationState(root, `Validation adapter error: ${message}`);
+      showRecovery(root, `Validation could not be read: ${message}`);
       return { ok: false, code: "validation_adapter_error", message };
     }
   }
@@ -1348,15 +1511,20 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     }
     if (!adapter || typeof adapter.submitTurn !== "function") {
       setPresentationState(root, "No submit adapter configured; no transition was attempted.");
+      recordPlaytestFailure(recorder, "submit_adapter_missing", "Submit adapter is unavailable.");
+      showRecovery(root, "Submission is unavailable. Review the validated draft or load a submit-capable host adapter.");
       return { ok: false, code: "submit_adapter_missing" };
     }
     let response;
     try {
+      recorder?.record("command_submitted", { campaign: "competitive-regional-v1", command: validation.canonical_command_text, turn: catalog?.turn });
       response = await adapter.submitTurn(validation.canonical_command_text);
       if (response?.error) throw new Error(response.error);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "submit_rejected", message);
       setPresentationState(root, `Submission rejected; current session was not replaced: ${message}`);
+      showRecovery(root, "The host rejected this command. Review the validation message, revise the draft, and retry.");
       return { ok: false, code: "submit_rejected", message };
     }
     drafts = [];
@@ -1376,10 +1544,16 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     if (typeof adapter.getPresentation === "function") {
       try {
         const presentation = await adapter.getPresentation(sessionId);
-        if (!renderReadOnlyEnvelope(presentation, root).ok) {
+        const rendered = renderReadOnlyEnvelope(presentation, root);
+        if (!rendered.ok) {
+          recordPlaytestFailure(recorder, rendered.code, "The refreshed action presentation schema is unavailable.");
+          showRecovery(root, "The committed result loaded, but its refreshed presentation is unavailable. Retry the current read.");
           renderEnvelope(response, root);
           refreshMessage = "Committed response received; read-only refresh was unavailable.";
         } else {
+          clearRecovery(root);
+          renderOnboarding(presentation, root, recorder);
+          recordVisibleEnvelope(recorder, presentation);
           audioClient.setMusicFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           await regionalWorldClient.load(sessionId);
@@ -1388,6 +1562,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       } catch (error) {
         renderEnvelope(response, root);
         const message = error instanceof Error ? error.message : String(error);
+        recordPlaytestFailure(recorder, "adapter_error", message);
+        showRecovery(root, `Committed response received, but the refreshed read failed: ${message}`);
         refreshMessage = `Committed response received; read-only refresh failed: ${message}`;
       }
     } else {
@@ -1403,6 +1579,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   async function load(nextSessionId = adapter?.sessionId) {
     sessionId = nextSessionId;
+    configureRecovery(root, () => load(sessionId), recorder);
     setActionControls(root, false);
     renderActions([], root);
     const actionMode = root.querySelector("#action-mode");
@@ -1413,13 +1590,22 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         return campaignCoverageClient.load(sessionId);
       }
       setPresentationState(root, "Action adapter unavailable; read-only mode remains active.");
+      recordPlaytestFailure(recorder, "action_adapter_missing", "No action catalog and validation adapter is configured.");
+      showRecovery(root, "Action mode is unavailable. Use a read-only or campaign adapter, then retry the current read.");
       return { ok: false, code: "action_adapter_missing" };
     }
     try {
       if (typeof adapter.getPresentation === "function") {
         const presentation = await adapter.getPresentation(sessionId);
         const rendered = renderReadOnlyEnvelope(presentation, root);
-        if (!rendered.ok) return rendered;
+        if (!rendered.ok) {
+          recordPlaytestFailure(recorder, rendered.code, "The action presentation schema is unavailable.");
+          showRecovery(root, "The host returned an unsupported presentation. Retry the current read or use a compatible adapter.");
+          return rendered;
+        }
+        clearRecovery(root);
+        renderOnboarding(presentation, root, recorder);
+        recordVisibleEnvelope(recorder, presentation);
         audioClient.setMusicFromVisible(presentation);
         await regionalWorldClient.load(sessionId);
         await campaignCoverageClient.load(sessionId);
@@ -1448,16 +1634,18 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "action_adapter_error", message);
       setActionControls(root, false);
       if (actionMode) actionMode.textContent = "read-only view · action adapter unavailable";
       setPresentationState(root, `Action adapter error: ${message}`);
+      showRecovery(root, `Action adapter error: ${message}`);
       return { ok: false, code: "action_adapter_error", message };
     }
   }
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
-  return { load, validate: validateDraft, submit, audio: audioClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -1784,9 +1972,12 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      PLAYTEST_CAPTURE_SCHEMA,
+      createPlaytestRecorder,
       createAudioClient,
       createActionClient,
       createCampaignCoverageClient,
+      createPresentationSettings,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -1806,9 +1997,12 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      PLAYTEST_CAPTURE_SCHEMA,
+      createPlaytestRecorder,
       createAudioClient,
       createActionClient,
       createCampaignCoverageClient,
+      createPresentationSettings,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -1829,5 +2023,6 @@ export {
   demoEnvelope,
   presentationFixture,
   CAMPAIGN_COVERAGE_SCHEMA,
+  PLAYTEST_CAPTURE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
 };
