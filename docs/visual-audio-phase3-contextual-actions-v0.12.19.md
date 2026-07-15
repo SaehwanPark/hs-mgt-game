@@ -1,6 +1,6 @@
 # Visual and Audio Phase 3 — Contextual Action Submission
 
-Status: Implemented for the `competitive-regional-v1` campaign.
+Status: Implemented and merged for the `competitive-regional-v1` campaign in PR #170.
 
 Date: 2026-07-15
 

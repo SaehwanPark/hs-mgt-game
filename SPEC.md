@@ -4052,11 +4052,10 @@ Verification:
 
 Phase 6 closed the bounded schematic regional-world slice with its typed host
 read, browser map/overlay/navigation surface, observation-lag checks, and
-explicit missingness. Campaign coverage was intentionally left as the next
-gated slice. Package and public metadata were bumped to `0.12.22`.
+explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 - Feature: Visual/audio Phase 6 regional world
-  Status: Complete; Phase 7 is the next gated candidate
+  Status: Closed; merged in PR #173
   Started: 2026-07-15
   Branch: feat/visual-audio-phase6-regional-world-v0.12.22
 
@@ -4085,9 +4084,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     and no-geography contract tests and Phase 6 design/QA documentation.
   - Bumped package and public metadata to `0.12.22`.
 
-  Not Yet Done:
-  - Promote Phase 7 only for campaign coverage after the regional-world slice
-    and its observation-boundary gate are reviewed as complete.
+  Closure note:
+  - Phase 7 campaign coverage was subsequently completed in PR #174; this
+    record remains scoped to the Phase 6 regional-world slice.
 
   Deferred / Non-Goals:
   - No true geography, distances, routes, patient movement, city-builder
@@ -4110,7 +4109,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
 ### Phase 7 campaign coverage closure
 
 - Feature: Visual/audio Phase 7 campaign coverage
-  Status: Closed; Phase 8 is the active gated slice
+  Status: Closed; merged in PR #174
   Started: 2026-07-15
   Branch: feat/visual-audio-phase7-campaign-coverage-v0.12.23
 
@@ -4140,10 +4139,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     tests and the Phase 7 evidence/design/QA artifacts.
   - Bumped package and public metadata to `0.12.23`.
 
-  Not Yet Done:
-  - Promote Phase 8 only after campaign-specific coverage, form recovery,
-    source visibility, and competitive regression checks are reviewed as
-    complete.
+  Closure note:
+  - Phase 8 readiness was subsequently completed in PR #175; this record
+    remains scoped to the Phase 7 campaign-coverage slice.
 
   Deferred / Non-Goals:
   - No new simulation state, command family, transition formula, stochastic
@@ -4166,7 +4164,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
 ### Phase 8 AI-agent testplay readiness closure
 
 - Feature: Visual/audio Phase 8 AI-agent testplay readiness
-  Status: Closed; Phase 9 is the active gated slice
+  Status: Closed; merged in PR #175
   Started: 2026-07-15
   Branch: feat/visual-audio-phase8-ai-testplay-v0.12.24
 
@@ -4189,9 +4187,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     diagnostics, a fixture, and focused contract tests.
   - Bumped package and public metadata to `0.12.24`.
 
-  Not Yet Done:
-  - No further Phase 8 implementation is planned; preserve the readiness gate
-    before considering Phase 9.
+  Closure note:
+  - No further Phase 8 implementation is planned; preserve its readiness
+    limits and the Phase 9 evidence boundary.
 
   Deferred / Non-Goals:
   - No browser automation, network/service, deployment, screenshot
@@ -4210,10 +4208,10 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     nested forbidden-field checks, timing-independent audio capture, and
     malformed snapshot handling were fixed and reverified.
 
-## Present
+## Past
 
 - Feature: Visual/audio Phase 9 AI-agent evaluation and revision
-  Status: Closed; Phase 10 accessibility and visual-language hardening is the active gated slice
+  Status: Closed; merged in PR #176
   Started: 2026-07-15
   Branch: feat/visual-audio-phase9-agent-evaluation-v0.12.25
 
@@ -4235,7 +4233,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     explicit evidence limits.
   - Bumped package and public metadata to `0.12.25`.
 
-  Not Yet Done:
+  Closure note:
   - No further Phase 9 implementation is planned; preserve the decision-log
     gate for any future visual/audio proposal.
 
@@ -4255,7 +4253,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     reverified.
 
 - Feature: Visual/audio Phase 10 accessibility and visual-language hardening
-  Status: Closed; Phase 11 first-session launch/load is the active gated slice
+  Status: Closed; merged in PR #177
   Started: 2026-07-15
   Branch: feat/visual-audio-phase10-accessibility-v0.12.26
 
@@ -4280,9 +4278,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Completed domain QA and exactly one general code-review pass; the review's
     skip-focus, unused-variable, and duplicate-rule findings were fixed.
 
-  Not Yet Done:
+  Closure note:
   - No further Phase 10 implementation is planned; preserve its technical
-    accessibility proxy limits while the next bounded slice proceeds.
+    accessibility proxy limits.
 
   Deferred / Non-Goals:
   - No host/MCP endpoint, simulation, command, transition, stochastic input,
@@ -4300,7 +4298,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     all actionable findings fixed and reverified.
 
 - Feature: Visual/audio Phase 11 first-session launch/load boundary
-  Status: Closed; Phase 12 visual identity and marker provenance is the active gated slice
+  Status: Closed; merged in PR #178
   Started: 2026-07-15
   Branch: feat/visual-audio-phase11-session-launch-v0.12.27
 
@@ -4324,9 +4322,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Completed domain QA and exactly one general code-review pass; the review's
     actionable findings were fixed and reverified.
 
-  Not Yet Done:
+  Closure note:
   - No further Phase 11 implementation is planned; preserve its technical
-    launch/load proxy limits while the next bounded slice proceeds.
+    launch/load proxy limits.
 
   Deferred / Non-Goals:
   - No scenario picker, saved-session persistence, auth, web transport,
@@ -4341,7 +4339,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     pass; no Rust/MCP behavior changed.
 
 - Feature: Visual/audio Phase 12 visual identity and marker provenance
-  Status: Closed; Phase 13 first-month continuity is the active gated slice
+  Status: Closed; merged in PR #179
   Started: 2026-07-15
   Branch: feat/visual-audio-phase12-visual-identity-v0.12.28
 
@@ -4363,10 +4361,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Added focused visual identity tests, provenance credits, and bumped release
     metadata to `0.12.28`.
 
-  Not Yet Done:
+  Closure note:
   - No further Phase 12 implementation is planned; preserve its technical
-    visual-vocabulary and provenance limits while the next bounded slice
-    proceeds.
+    visual-vocabulary and provenance limits.
 
   Deferred / Non-Goals:
   - No Rust/MCP schema, simulation, command, transition, stochastic,
@@ -4380,7 +4377,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     and domain QA pass; no Rust/MCP source changed.
 
 - Feature: Visual/audio Phase 13 first-month continuity
-  Status: Implemented and verified; exactly one general code-review pass complete; PR/merge pending
+  Status: Closed; merged in PR #180
   Started: 2026-07-15
   Branch: feat/visual-audio-phase13-first-month-continuity-v0.12.29
 
@@ -4391,7 +4388,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   presentation handoffs only; the host remains authoritative for commands,
   transitions, stochastic outcomes, history, hashes, replay, and debrief.
 
-  Planned Done:
+  Done:
   - Add the `competitive-first-month-v1` stage catalog and pure local stage
     derivation for start, inspect, draft, validate, submit, resolution, and
     continue.
@@ -4402,8 +4399,9 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Verify a complete adapter-driven one-month handoff with at least two local
     draft actions and no host/simulation boundary change.
 
-  Not Yet Done:
-  - CI/PR/merge and post-merge re-audit remain.
+  Closure note:
+  - CI/PR/merge completed in PR #180; the post-merge contract audit is recorded
+    as the v0.12.30 follow-up closure below.
 
   Deferred / Non-Goals:
   - No Rust/MCP schema, simulation, command, transition, stochastic,
@@ -4417,14 +4415,58 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     read-only, boundary, full Python, Rust, release-metadata, Node syntax,
     formatting, Clippy, and diff checks pass; no Rust/MCP source changed.
 
+### Visual/audio first-month contract closure (v0.12.30)
+
+- Feature: Visual/audio first-month contract audit
+  Status: Closed; bounded technical sequence complete
+  Started: 2026-07-15
+  Branch: feat/visual-audio-first-month-contract-v0.12.30
+
+  Summary:
+  The deterministic `visual-audio-first-month-contract-v1` audit reconciles
+  the proposal's exact one-month experience with the merged Phase 0–13 source
+  and focused tests. It closes the technical presentation sequence without
+  turning technical evidence into a human, educational, calibration, balance,
+  policy-validity, or domain-expert claim.
+
+  Done:
+  - Added the fail-closed source/test audit for launch/load, market and
+    facility inspection, visible pressure and payer/rival context, contextual
+    drafts, canonical validation/submission, resolution metrics/effects,
+    optional audio, and continuation.
+  - Added phase-document, generated-provenance, and presentation-boundary
+    checks plus a compact JSON evidence artifact and contract tests.
+  - Updated the active spec, architecture, README, changelog, lessons, and
+    release metadata to record the bounded closure at `0.12.30`.
+
+  Deferred / Non-Goals:
+  - No Rust/MCP, simulation, stochastic, history/hash/replay, debrief,
+    campaign, browser transport, dependency, asset, audio-source, or runtime
+    behavior change.
+  - No browser transport, viewport, contrast, screen-reader, hardware-audio,
+    human usability, lived accessibility, learning, engagement, calibration,
+    balance, policy-validity, or domain-expert claim.
+
+  Verification:
+  - Audit status `complete`: ten first-month requirements pass, all 14 phase
+    documents and three provenance files are present, and boundary violations
+    are empty.
+  - Focused/full Python, Node syntax, release metadata, Rust formatting,
+    Clippy, serial Rust tests, and diff checks pass.
+
+## Present
+
+No active visual/audio implementation slice. Further technical work requires a
+new source-backed gap; human and educational evaluation remain separately gated
+Future work.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 12 visual identity is closed and Phase 13 first-month continuity
-is the active bounded slice; the broader product contract and first competitive
-vertical slice remain incomplete.
+Status: Bounded technical sequence closed at v0.12.30; human evaluation and
+explicit non-goals remain separately gated Future work.
 No later feature should be read as implemented merely because the current `gui/`
 prototype or Phase 6–10 documents exist.
 
@@ -4440,9 +4482,9 @@ prototype or Phase 6–10 documents exist.
   non-authoritative repeated-capture analyzer/decision log, plus Phase 10
   keyboard navigation, status language, text scaling, and cue-explanation
   controls, Phase 11 session launch/load, the Phase 12 visual identity catalog,
-  and the Phase 13 first-month continuity rail on the active branch. It remains
-  a thin client and is not the
-  campaign-complete GUI described here.
+  and the Phase 13 first-month continuity rail on merged `main`. The v0.12.30
+  contract audit closes the bounded technical sequence. It remains a thin
+  client and is not the campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
 
@@ -4592,7 +4634,7 @@ prototype or Phase 6–10 documents exist.
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, policy validity, or legal validity.
 
-#### Product contract (`Not Yet Done`)
+#### Product contract (`Done for bounded technical sequence`)
 
 - Make `competitive-regional-v1` the first target and preserve the executive,
   turn-based perspective. The player allocates attention, resources, workforce,
@@ -4615,7 +4657,7 @@ prototype or Phase 6–10 documents exist.
   visualization, campaign-specific identity, possible instructor/analyst views,
   localization, and accessibility as bounded follow-ups after the first slice.
 
-#### Intended experience and screen surfaces (`Not Yet Done`)
+#### Intended experience and screen surfaces (`Done for bounded first month`)
 
 - A responsive executive desktop for typical laptop and desktop widths with:
   a resource/status header; regional market view; executive briefing; selected
@@ -4650,7 +4692,7 @@ prototype or Phase 6–10 documents exist.
   knowable at decision time and may expose hashes, action/observation history,
   consequence chains, advisor comparison, and strategy summaries.
 
-#### Visual and motion language (`Not Yet Done`)
+#### Visual and motion language (`Done for generated bounded vocabulary`)
 
 - Use a serious, inviting, contemporary institutional style: information-rich
   without becoming a generic card dashboard or retro city-builder imitation.
@@ -4662,7 +4704,7 @@ prototype or Phase 6–10 documents exist.
   project progress, demand/capacity movement, review stages, affiliations, month
   transitions, and changed causal contributors. Keep it brief and skippable.
 
-#### Presentation and action boundary (`Not Yet Done`)
+#### Presentation and action boundary (`Done`)
 
 - Establish stable serializable, actor-visible DTOs or equivalent adapter
   contracts for campaign summary, regional map, institutions, facilities,
@@ -4681,7 +4723,7 @@ prototype or Phase 6–10 documents exist.
   browser-hosting, networking, or generalized GUI platform conventions before
   the first slice proves their need.
 
-#### Audio system (`Not Yet Done`)
+#### Audio system (`Done for optional generated presentation`)
 
 - Provide independently controlled music, interface/notification effects, and
   ambience/event effects with master, per-channel, mute, unfocused-mute,
@@ -4703,7 +4745,7 @@ prototype or Phase 6–10 documents exist.
   stay outside the simulation; replay may regenerate cues from committed visible
   history without recording playback in simulation history.
 
-#### Assets, licensing, and accessibility (`Not Yet Done`)
+#### Assets, licensing, and accessibility (`Done for generated provenance and accessibility contract`)
 
 - Prefer CC0/public-domain, manageable CC BY, or individually reviewed
   permissive game-asset licenses. Reject unclear, personal-use-only,
@@ -4725,7 +4767,7 @@ prototype or Phase 6–10 documents exist.
   delays, and uncertainty; separate current decisions from retrospective
   explanation; and allow skipped resolution to be reviewed.
 
-#### Evidence-gated development sequence (`Not Yet Done`)
+#### Evidence-gated development sequence (`Done for bounded technical phases 0–13`)
 
 | Phase | Bounded output | Promotion/exit gate |
 | --- | --- | --- |
@@ -4745,12 +4787,14 @@ prototype or Phase 6–10 documents exist.
 | 13. First-month continuity | Local text-first path rail and adapter-driven launch-to-refresh handoff evidence for one competitive month | Stage order is deterministic, two-draft review is visible, confirmed host handoffs reach continue, and failures do not advance or mutate state |
 
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
-slice; do not start broad campaign, map, or asset production merely because that
-gate exists. A phase may move into
-`Present` only with its own concise `Done`, `Not Yet Done`, verification, and
-non-goal fields.
+slice; broad campaign, map, and asset production remain explicit non-goals. The
+audit at
+[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md)
+closes the technical Phase 0–13 sequence with source/test evidence. Human and
+educational evaluation remain separately gated and are not implied by this
+closure.
 
-#### First competitive vertical slice (`Not Yet Done`)
+#### First competitive vertical slice (`Done for technical/interface-task evidence`)
 
 The first polished implementation is exactly one month of
 `competitive-regional-v1`:
@@ -4769,28 +4813,30 @@ The first polished implementation is exactly one month of
 Initial assets are limited to three system identities; facility, demand,
 capacity, project, staffing, payer/policy, and timeline markers; a schematic
 map; status/severity language; four music tracks; eight UI sounds; eight event
-sounds; and at most two optional ambience loops.
+sounds; and at most two optional ambience loops. The current implementation
+uses project-generated glyphs/CSS and generated Web Audio recipes with explicit
+registry/credits; no third-party release assets are required for this bounded
+closure.
 
-#### Verification and AI testplay (`Not Yet Done`)
+#### Verification and AI testplay (`Done for technical/proxy evidence; human evaluation deferred`)
 
 - Architecture: presentation DTO use, hidden-field exclusion, canonical action
   mapping, rejection atomicity, visible-only cue/mood derivation, and unchanged
   golden hashes/replays.
-- Rendering: normal, empty, missing, extreme, uncertain, delayed, and revised
-  states; long text; all difficulty tiers; and representative viewport sizes.
+- Rendering: static contracts cover normal, empty, missing, uncertain, delayed,
+  revised, long-text, and reduced-motion states; real viewport rendering and
+  contrast measurement remain unresolved browser/human questions.
 - Audio: event/cue and visible-state/music mappings, mute and independent
   channels, focus behavior, reduced notifications, repetition throttling, and
   missing-asset fallback through a recording sink or equivalent.
 - Accessibility: keyboard paths, semantic structure, color-independent status,
-  contrast, reduced motion, text scaling, complete muted play, and textual cue
-  equivalence. AI/static checks are proxies and do not establish lived access.
-- AI-agent testplay: declare model/version, role, task, seed, viewport, interface
-  mode, and capture method; record time/steps to first valid action, bottleneck
-  identification, directional prediction, map-versus-briefing use, invalid-action
-  recovery, pending-effect comprehension, visible-event/cue-log alignment,
-  causal explanation, commands, histories, hashes, screenshots/semantics, and
-  failures. Use multiple strategy and familiarity profiles and deterministic
-  reruns where supported.
+  reduced motion, text scaling, complete muted play, and textual cue
+  equivalence have static/Node coverage; contrast, screen-reader behavior, and
+  lived access remain unresolved.
+- AI-agent testplay: Phase 8/9 covers declared roles, tasks, seeds, settings,
+  recovery, visible events, commands, histories, hashes, and deterministic
+  artifact diagnostics. Browser automation, screenshots, model/network
+  orchestration, and human interpretation remain outside this closure.
 - Classify evidence separately as technical correctness, interface-task proxy,
   strategic trace, document-grounded domain consistency, or unresolved human
   question. AI testplays do not prove human usability, engagement, accessibility
@@ -4891,9 +4937,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Complete and close Phase 13 first-month continuity, then audit the remaining
-  first-month product contract against the proposal before selecting the next
-  bounded item.
+1. The bounded visual/audio technical sequence is complete at v0.12.30. Do not
+  promote another presentation runtime item without a new source-backed gap;
+  use the contract audit as the reopening gate.
 2. Human usability, lived accessibility, learning, engagement, calibration,
   balance, policy validity, and domain-expert evaluation remain separately
   gated Future work.

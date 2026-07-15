@@ -1,6 +1,6 @@
 # Visual and Audio Phase 1 — Static Executive Desktop
 
-Status: Implemented as a fixture-only information-architecture prototype.
+Status: Implemented and merged as a fixture-only information-architecture prototype in PR #168.
 
 Date: 2026-07-15
 

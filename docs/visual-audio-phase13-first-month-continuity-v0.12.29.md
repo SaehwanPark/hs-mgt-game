@@ -1,6 +1,6 @@
 # Visual/audio Phase 13 — First-month continuity
 
-**Status:** Implemented and verified; exactly one general code-review pass complete
+**Status:** Implemented, verified, reviewed once, and merged in PR #180
 **Scope:** Presentation-only first-month handoff rail and integration evidence
 **Version target:** 0.12.29
 

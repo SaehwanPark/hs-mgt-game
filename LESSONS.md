@@ -3,6 +3,20 @@
 Use this file to record practical lessons that would save future contributors or
 agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
+## Close Presentation Tracks With Scope-Matched Audits
+
+- Context: After thirteen visual/audio slices, the source and focused tests
+  covered the bounded first-month experience, but `SPEC.md` still described it
+  as incomplete.
+- Symptom: A stale Future heading made it unclear whether another runtime
+  feature was required and could encourage unsupported GUI expansion.
+- Resolution: Added a deterministic source/test contract audit with explicit
+  evidence paths, boundary exclusions, provenance checks, and claim limits;
+  then closed only the bounded technical sequence in the active spec.
+- Prevention: Before promoting another presentation mechanism, run the audit,
+  reconcile phase docs and merge state, and preserve human-evaluation and asset
+  production as separate gates.
+
 ## Make Graphical Commands Host-Shaped
 
 - Context: Phase 3 needed to remove CLI syntax friction while preserving the

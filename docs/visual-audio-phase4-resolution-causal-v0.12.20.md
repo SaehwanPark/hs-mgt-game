@@ -1,7 +1,6 @@
 # Visual and Audio Phase 4 — Resolution and Causal Feedback
 
-Status: Implemented on the Phase 4 branch; ready for the single code-review
-pass and PR handoff.
+Status: Implemented, reviewed once, and merged in PR #171.
 
 Phase 4 makes one committed `competitive-regional-v1` month legible without
 changing the transition. The host returns a typed, actor-visible resolution

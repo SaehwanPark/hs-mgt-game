@@ -1,6 +1,6 @@
 # Visual/audio Phase 10 — Accessibility and visual-language hardening
 
-**Status:** Implemented and verified on the Phase 10 branch; PR/CI/merge pending
+**Status:** Implemented, verified, reviewed once, and merged in PR #177
 **Scope:** Keyboard navigation, text scaling, status language, and optional cue-explanation presentation
 **Version:** 0.12.26
 

@@ -1,7 +1,6 @@
 # Visual and Audio Phase 5 — Foundational Audio
 
-Status: Implemented on the Phase 5 branch; ready for the single code-review
-pass and PR handoff.
+Status: Implemented, reviewed once, and merged in PR #172.
 
 Phase 5 adds optional browser audio to the existing Phase 3/4 competitive
 action and monthly-resolution surface. The first implementation uses generated

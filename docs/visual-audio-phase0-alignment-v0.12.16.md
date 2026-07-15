@@ -1,6 +1,6 @@
 # Visual and Audio Phase 0 Alignment
 
-Status: Accepted for Phase 0; implementation remains sequentially gated.
+Status: Accepted and merged as the Phase 0 alignment gate in PR #167.
 
 Date: 2026-07-14
 

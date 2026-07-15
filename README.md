@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.29. Its
+The current public milestone is a playable Rust prototype at v0.12.30. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -19,7 +19,8 @@ navigation, non-color status language, local text scaling, and optional cue
 explanation controls; Phase 11 adds a host-authoritative competitive session
 start/load handoff; Phase 12 adds generated visual identity and marker tokens
 with explicit provenance; Phase 13 adds a text-first first-month continuity
-rail. It is
+rail, and v0.12.30 closes the bounded technical first-month contract with
+explicit evidence limits. It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 
@@ -150,6 +151,7 @@ Deeper project context:
 - [Visual/audio Phase 11 first-session launch/load](docs/visual-audio-phase11-session-launch-v0.12.27.md)
 - [Visual/audio Phase 12 visual identity and marker provenance](docs/visual-audio-phase12-visual-identity-v0.12.28.md)
 - [Visual/audio Phase 13 first-month continuity](docs/visual-audio-phase13-first-month-continuity-v0.12.29.md)
+- [Visual/audio first-month contract audit](docs/visual-audio-first-month-contract-v0.12.30.md)
 
 Historical and internal development notes, including older playtest findings,
 are kept in `docs/` for transparency. The previous developer-focused README is
