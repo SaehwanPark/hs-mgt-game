@@ -1,4 +1,5 @@
 mod action;
+mod campaign_coverage;
 mod presentation;
 mod regional_world;
 mod resolution;
@@ -9,6 +10,7 @@ pub use action::{
   ACTION_CATALOG_SCHEMA_VERSION, ActionCatalogEnvelope, ActionParameter, ActionPreview, ActionSpec,
   VALIDATION_SCHEMA_VERSION, ValidateTurnEnvelope,
 };
+pub use campaign_coverage::{CAMPAIGN_COVERAGE_SCHEMA_VERSION, CampaignCoverageEnvelope};
 pub use presentation::{PRESENTATION_SCHEMA_VERSION, ReadOnlyPresentationEnvelope};
 pub use regional_world::{REGIONAL_WORLD_SCHEMA_VERSION, RegionalWorldEnvelope};
 pub use resolution::{
@@ -17,7 +19,8 @@ pub use resolution::{
 };
 pub use server::{McpGameServer, run_stdio_server};
 pub use session::{
-  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
-  GetObservationRequest, GetPresentationRequest, GetResolutionRequest, McpErrorMessage,
-  SessionEnvelope, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetCampaignCoverageRequest,
+  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
+  GetResolutionRequest, McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
+  ValidateTurnRequest,
 };

@@ -191,6 +191,27 @@
       .regional-overlay-list li { display: grid; gap: .12rem; grid-template-columns: 1fr auto; }
       .regional-overlay-list li p, .regional-overlay-list li .source { grid-column: 1 / -1; }
       .regional-overlay-list li p { color: var(--muted); font-size: .78rem; margin: 0; }
+      .campaign-coverage-panel { grid-column: 1 / -1; }
+      .campaign-stage { background: var(--teal-soft); border-radius: .65rem; margin: var(--space-3) 0; padding: .75rem .9rem; }
+      .campaign-stage strong { display: block; color: var(--teal); }
+      .campaign-coverage-grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .campaign-coverage-grid > section { min-width: 0; }
+      .campaign-coverage-grid h3 { font-size: .95rem; margin: 0 0 .5rem; }
+      .campaign-briefing-list, .campaign-actor-list, .campaign-process-list, .campaign-decision-list, .campaign-debrief-list { display: grid; gap: .55rem; list-style: none; margin: 0; padding: 0; }
+      .campaign-briefing-list li, .campaign-actor-card, .campaign-process-list li, .campaign-decision-card { background: var(--panel); border: 1px solid var(--line); border-radius: .55rem; padding: .6rem .7rem; }
+      .campaign-briefing-list p, .campaign-actor-card p, .campaign-process-list p, .campaign-decision-card p { color: var(--muted); font-size: .82rem; margin: .3rem 0; }
+      .campaign-metric-list { display: grid; gap: .35rem; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; }
+      .campaign-metric-list > div { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; padding: .45rem .55rem; }
+      .campaign-metric-list dt { color: var(--muted); font-size: .76rem; }
+      .campaign-metric-list dd { font-weight: 800; margin: .12rem 0; }
+      .campaign-metric-list .source { display: block; }
+      .campaign-decision-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .campaign-decision-card h4 { margin: 0; }
+      .campaign-decision-form { display: grid; gap: .45rem; }
+      .campaign-decision-form label { display: grid; gap: .18rem; color: var(--muted); font-size: .78rem; }
+      .campaign-decision-form input, .campaign-decision-form select { background: var(--panel); border: 1px solid var(--line); border-radius: .35rem; color: var(--ink); padding: .4rem; }
+      .campaign-history-list, .campaign-debrief-list { display: grid; gap: .35rem; list-style: none; margin: 0; padding: 0; }
+      .campaign-history-list li, .campaign-debrief-list li { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; padding: .45rem .55rem; }
 
       .entity-heading { align-items: center; justify-content: flex-start; }
       .entity-heading .status { margin-left: auto; }
@@ -281,6 +302,7 @@
         .draft-action { align-items: stretch; flex-direction: column; }
         .draft-action span { justify-content: flex-end; }
         .resolution-columns { grid-template-columns: 1fr; }
+        .campaign-coverage-grid, .campaign-decision-list { grid-template-columns: 1fr; }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -312,6 +334,44 @@
           <span>source-linked alerts</span>
         </div>
         <ul class="briefing-list" id="briefing-list"></ul>
+      </section>
+
+      <section class="panel campaign-coverage-panel" id="campaign-coverage-panel" aria-labelledby="campaign-coverage-heading" hidden>
+        <div class="panel-heading">
+          <h2 id="campaign-coverage-heading">Campaign coverage</h2>
+          <span id="campaign-role">campaign-specific role</span>
+        </div>
+        <p class="campaign-stage"><strong id="campaign-stage">Current campaign stage</strong><span id="campaign-coverage-meta">—</span></p>
+        <div class="campaign-coverage-grid">
+          <section aria-labelledby="campaign-briefing-heading">
+            <h3 id="campaign-briefing-heading">Stage briefing</h3>
+            <ul class="campaign-briefing-list" id="campaign-briefing-list"></ul>
+          </section>
+          <section aria-labelledby="campaign-metric-heading">
+            <h3 id="campaign-metric-heading">Visible metrics</h3>
+            <dl class="campaign-metric-list" id="campaign-metric-list"></dl>
+          </section>
+          <section aria-labelledby="campaign-actor-heading">
+            <h3 id="campaign-actor-heading">Campaign actors</h3>
+            <ul class="campaign-actor-list" id="campaign-actor-list"></ul>
+          </section>
+          <section aria-labelledby="campaign-process-heading">
+            <h3 id="campaign-process-heading">Processes and obligations</h3>
+            <ul class="campaign-process-list" id="campaign-process-list"></ul>
+          </section>
+          <section aria-labelledby="campaign-decision-heading">
+            <h3 id="campaign-decision-heading">Host-shaped decision</h3>
+            <div class="campaign-decision-list" id="campaign-decision-list"></div>
+          </section>
+          <section aria-labelledby="campaign-history-heading">
+            <h3 id="campaign-history-heading">Committed campaign history</h3>
+            <ol class="campaign-history-list" id="campaign-history-list"></ol>
+          </section>
+          <section aria-labelledby="campaign-debrief-heading">
+            <h3 id="campaign-debrief-heading">Campaign debrief</h3>
+            <ul class="campaign-debrief-list" id="campaign-debrief-list"></ul>
+          </section>
+        </div>
       </section>
 
       <section class="panel panel--map" aria-labelledby="map-heading">

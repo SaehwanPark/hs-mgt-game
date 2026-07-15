@@ -9,9 +9,9 @@ use rmcp::{
 
 use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
-  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
-  GetResolutionRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope, StartSessionRequest,
-  SubmitTurnRequest, ValidateTurnRequest,
+  GetCampaignCoverageRequest, GetHistoryRequest, GetObservationRequest, GetPresentationRequest,
+  GetRegionalWorldRequest, GetResolutionRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope,
+  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -91,6 +91,17 @@ impl McpGameServer {
     Parameters(request): Parameters<GetRegionalWorldRequest>,
   ) -> CallToolResult {
     self.with_store(|store| store.get_regional_world(request))
+  }
+
+  #[tool(
+    name = "get_campaign_coverage",
+    description = "Return actor-visible stage, decision, actor, process, history, and debrief coverage for stabilization or affiliation without advancing the session."
+  )]
+  async fn get_campaign_coverage(
+    &self,
+    Parameters(request): Parameters<GetCampaignCoverageRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.get_campaign_coverage(request))
   }
 
   #[tool(
@@ -182,7 +193,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, get_action_catalog, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, validate_turn, get_resolution, and get_regional_world are non-mutating actor-visible reads.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, get_resolution, and get_regional_world are non-mutating actor-visible reads.",
       )
   }
 }

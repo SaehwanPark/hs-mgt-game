@@ -4,6 +4,32 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.23] - 2026-07-15
+
+### Added
+- Added the typed `campaign-coverage-v1` host projection and non-mutating
+  `get_campaign_coverage` MCP tool for stabilization and regional-affiliation
+  sessions.
+- Added shared browser campaign stage, briefing, metric, actor, process,
+  decision, history, replay, and debrief surfaces with campaign-specific
+  stabilization and affiliation semantics.
+- Added host-shaped campaign decision forms, recoverable canonical submission
+  rejection, visible-only campaign audio mapping, and Phase 7 contract tests and
+  documentation.
+
+### Changed
+- Kept competitive presentation/action/resolution, regional-world, simulation
+  rules, state, formulas, randomness, history, replay, assets, and network
+  behavior unchanged.
+- Promoted visual/audio Phase 8 AI-agent testplay readiness as the next gated
+  candidate and bumped package/public metadata to `0.12.23`.
+
+### Evidence Limits
+- Host, browser, formatting, and static contract checks are technical or
+  interface-task evidence only; they do not establish human comprehension,
+  usability, lived accessibility, engagement, learning, calibration, balance,
+  or policy validity.
+
 ## [0.12.22] - 2026-07-15
 
 ### Added

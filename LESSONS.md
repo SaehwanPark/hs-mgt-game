@@ -92,6 +92,22 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   observation lag, label public timing, and leave the base presentation intact
   when the optional regional adapter is empty or unavailable.
 
+## Keep Campaign Semantics in Shared UI
+
+- Context: Phase 7 needed one browser route to cover stabilization and regional
+  affiliation without turning either campaign into a generic dashboard.
+- Symptom: A universal stage or score model would erase stabilization's
+  onboarding loop and affiliation's partner, obligation, and stakeholder
+  distinctions; local command templates would also create a second legality
+  engine.
+- Resolution: Added one host-owned `campaign-coverage-v1` envelope with shared
+  rendering primitives, campaign-specific stage/actor/process/decision data,
+  source labels, and canonical command templates. The browser substitutes only
+  host-provided values and treats rejection as a non-mutating recoverable state.
+- Prevention: Share presentation structure, not simulation meaning; test each
+  campaign's visible distinctions, hidden-field exclusions, command equivalence,
+  history/replay continuity, and complete text/audio fallback independently.
+
 ## Close Breadth Only With Scope-Matched Evidence
 
 - Context: The breadth queue offered several attractive expansion directions,

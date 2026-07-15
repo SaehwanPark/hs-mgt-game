@@ -192,6 +192,7 @@ const demoEnvelope = {
 
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
+const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
 
 function appendText(parent, text) {
@@ -481,6 +482,276 @@ function renderRegionalNavigation(navigation, root) {
     nav.append(button);
   }
   if (!navigation?.length) emptyState(nav, "Regional navigation is unavailable.");
+}
+
+function campaignAudioInput(envelope) {
+  return {
+    done: envelope?.session?.done,
+    observation: {
+      market_bullets: (envelope?.briefing ?? []).map((entry) => entry.detail),
+      workforce_trust: (envelope?.actors ?? []).map((entry) => entry.status).join(" "),
+      in_flight_projects: (envelope?.processes ?? []).map((entry) => entry.detail).join(" "),
+    },
+  };
+}
+
+function renderCampaignCoverageBriefing(items, root) {
+  const list = root.querySelector("#campaign-briefing-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const entry of items ?? []) {
+    const item = document.createElement("li");
+    const title = document.createElement("strong");
+    title.textContent = String(entry.title ?? entry.kind ?? "Briefing");
+    const detail = document.createElement("p");
+    detail.textContent = String(entry.detail ?? "No visible campaign detail.");
+    item.append(title, detail);
+    appendSource(item, entry.source);
+    list.append(item);
+  }
+  if (!items?.length) emptyState(list, "No campaign briefing is available.");
+}
+
+function renderCampaignCoverageMetrics(metrics, root) {
+  const list = root.querySelector("#campaign-metric-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const metric of metrics ?? []) {
+    const item = document.createElement("div");
+    const label = document.createElement("dt");
+    label.textContent = String(metric.label ?? "Metric");
+    const value = document.createElement("dd");
+    value.textContent = `${metric.value ?? "Unavailable"} ${metric.unit ?? ""}`.trim();
+    item.append(label, value);
+    appendSource(item, `${metric.source ?? "Visible campaign source"} · ${metric.equivalent ?? "Written equivalent"}`);
+    list.append(item);
+  }
+  if (!metrics?.length) emptyState(list, "No visible campaign metrics are available.");
+}
+
+function renderCampaignCoverageActors(actors, root) {
+  const list = root.querySelector("#campaign-actor-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const actor of actors ?? []) {
+    const item = document.createElement("li");
+    item.className = "campaign-actor-card";
+    const heading = document.createElement("div");
+    heading.className = "timeline-row";
+    const title = document.createElement("strong");
+    title.textContent = String(actor.label ?? "Actor");
+    heading.append(title, createStatus("reported", actor.status));
+    const role = document.createElement("small");
+    role.className = "source";
+    role.textContent = String(actor.role ?? "Actor");
+    const detail = document.createElement("p");
+    detail.textContent = String(actor.detail ?? "No visible actor detail.");
+    item.append(heading, role, detail);
+    appendSource(item, actor.source);
+    list.append(item);
+  }
+  if (!actors?.length) emptyState(list, "No campaign actor signals are available.");
+}
+
+function renderCampaignCoverageProcesses(processes, root) {
+  const list = root.querySelector("#campaign-process-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const process of processes ?? []) {
+    const item = document.createElement("li");
+    const heading = document.createElement("div");
+    heading.className = "timeline-row";
+    const title = document.createElement("strong");
+    title.textContent = String(process.label ?? "Process");
+    heading.append(title, createStatus(process.status, process.status));
+    const detail = document.createElement("p");
+    detail.textContent = String(process.detail ?? "No visible process detail.");
+    item.append(heading, detail);
+    appendSource(item, process.source);
+    list.append(item);
+  }
+  if (!processes?.length) emptyState(list, "No campaign process is available.");
+}
+
+function renderCampaignCoverageHistory(entries, root) {
+  const list = root.querySelector("#campaign-history-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const entry of entries ?? []) {
+    const item = document.createElement("li");
+    const turn = document.createElement("strong");
+    turn.textContent = `Turn ${entry.turn ?? "—"}`;
+    const command = document.createElement("span");
+    command.textContent = ` · ${entry.command ?? "—"}`;
+    const hash = document.createElement("small");
+    hash.className = "hash";
+    hash.textContent = ` · state hash: ${entry.state_hash ?? "—"}`;
+    item.append(turn, command, hash);
+    list.append(item);
+  }
+  if (!entries?.length) emptyState(list, "No committed campaign transitions yet.");
+}
+
+function coverageCommand(decision, form) {
+  let command = String(decision.command_template ?? "");
+  for (const parameter of decision.parameters ?? []) {
+    const input = form.elements.namedItem(parameter.name);
+    const value = input?.value ?? "";
+    if (!value) return { ok: false, message: `Enter ${parameter.label ?? parameter.name}.` };
+    command = command.replaceAll(`{{${parameter.name}}}`, value);
+  }
+  return { ok: true, command };
+}
+
+function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
+  const list = root.querySelector("#campaign-decision-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const decision of decisions ?? []) {
+    const item = document.createElement("article");
+    item.className = "campaign-decision-card";
+    const heading = document.createElement("h4");
+    heading.textContent = String(decision.label ?? "Campaign decision");
+    const uncertainty = document.createElement("p");
+    uncertainty.textContent = String(decision.uncertainty ?? "Future response remains uncertain.");
+    const form = document.createElement("form");
+    form.className = "campaign-decision-form";
+    for (const parameter of decision.parameters ?? []) {
+      const label = document.createElement("label");
+      label.textContent = String(parameter.label ?? parameter.name);
+      let input;
+      if (parameter.input_type === "select") {
+        input = document.createElement("select");
+        for (const option of parameter.options ?? []) {
+          const optionNode = document.createElement("option");
+          optionNode.value = String(option.value);
+          optionNode.textContent = String(option.label ?? option.value);
+          input.append(optionNode);
+        }
+      } else {
+        input = document.createElement("input");
+        input.type = parameter.input_type ?? "text";
+        if (parameter.min != null) input.min = String(parameter.min);
+        if (parameter.max != null) input.max = String(parameter.max);
+        input.inputMode = parameter.input_type === "number" ? "numeric" : "text";
+      }
+      input.name = parameter.name;
+      input.required = true;
+      label.append(input);
+      form.append(label);
+    }
+    const button = document.createElement("button");
+    button.type = "submit";
+    button.textContent = decision.parameters?.length ? "Submit host-shaped decision" : "Commit decision";
+    form.append(button);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const result = coverageCommand(decision, form);
+      if (!result.ok) {
+        setPresentationState(root, result.message);
+        return;
+      }
+      onSubmit(result.command);
+    });
+    item.append(heading, uncertainty, form);
+    appendSource(item, decision.source);
+    list.append(item);
+  }
+  if (!decisions?.length) emptyState(list, "No campaign decision is available.");
+}
+
+export function renderCampaignCoverage(envelope, root = document, onSubmit = () => {}) {
+  const panel = root.querySelector("#campaign-coverage-panel");
+  if (!envelope || envelope.schema_version !== CAMPAIGN_COVERAGE_SCHEMA) {
+    if (panel) panel.hidden = true;
+    return { ok: false, code: envelope ? "unsupported_campaign_coverage_schema" : "empty_campaign_coverage" };
+  }
+  if (panel) panel.hidden = false;
+  const role = root.querySelector("#campaign-role");
+  const stage = root.querySelector("#campaign-stage");
+  const meta = root.querySelector("#campaign-coverage-meta");
+  if (role) role.textContent = String(envelope.campaign_role ?? "Campaign coverage");
+  if (stage) stage.textContent = `${envelope.stage?.label ?? "Current stage"}: ${envelope.stage?.detail ?? "Visible stage detail unavailable."}`;
+  if (meta) meta.textContent = `${envelope.session?.campaign ?? "campaign"} · turn ${envelope.session?.turn ?? "—"}/${envelope.session?.max_turns ?? "—"}`;
+  renderCampaignCoverageBriefing(envelope.briefing, root);
+  renderCampaignCoverageMetrics(envelope.metrics, root);
+  renderCampaignCoverageActors(envelope.actors, root);
+  renderCampaignCoverageProcesses(envelope.processes, root);
+  renderCampaignCoverageDecisions(envelope.decisions, root, onSubmit);
+  renderCampaignCoverageHistory(envelope.history, root);
+  const debrief = root.querySelector("#campaign-debrief-list");
+  if (debrief) {
+    debrief.replaceChildren();
+    for (const line of envelope.debrief ?? []) {
+      const item = document.createElement("li");
+      item.textContent = String(line);
+      debrief.append(item);
+    }
+    if (!envelope.debrief?.length) emptyState(debrief, "Campaign debrief becomes available after completion.");
+  }
+  return { ok: true, envelope };
+}
+
+export function createCampaignCoverageClient({
+  adapter = globalThis.HsMgtGameCampaignAdapter ?? globalThis.HsMgtGameActionAdapter ?? globalThis.HsMgtGameReadOnlyAdapter,
+  root = document,
+  audio,
+} = {}) {
+  let currentEnvelope = null;
+  const audioClient = audio ?? createAudioClient({ root });
+
+  async function load(sessionId = adapter?.sessionId) {
+    if (!adapter || typeof adapter.getCampaignCoverage !== "function") {
+      return { ok: false, code: "campaign_coverage_adapter_missing" };
+    }
+    try {
+      const envelope = await adapter.getCampaignCoverage(sessionId);
+      const result = renderCampaignCoverage(envelope, root, submit);
+      if (!result.ok) {
+        currentEnvelope = null;
+        setPresentationState(root, "Campaign coverage is unavailable; existing presentation remains active.");
+        return result;
+      }
+      currentEnvelope = envelope;
+      audioClient.setMusicFromVisible(campaignAudioInput(envelope));
+      return result;
+    } catch (error) {
+      currentEnvelope = null;
+      const message = error instanceof Error ? error.message : String(error);
+      setPresentationState(root, `Campaign coverage adapter error: ${message}`);
+      return { ok: false, code: "campaign_coverage_adapter_error", message };
+    }
+  }
+
+  async function submit(command) {
+    if (!adapter || typeof adapter.submitTurn !== "function") {
+      setPresentationState(root, "No campaign submit adapter configured; no transition was attempted.");
+      audioClient.playCue("ui.action-reject");
+      return { ok: false, code: "campaign_submit_adapter_missing" };
+    }
+    try {
+      setPresentationState(root, "Submitting the canonical campaign decision…");
+      const response = await adapter.submitTurn(command);
+      if (response?.error) throw new Error(response.error);
+      audioClient.playCue("ui.submit");
+      const result = await load(adapter.sessionId);
+      if (!result.ok) return result;
+      audioClient.playCue("ui.report-received");
+      audioClient.playCue("ui.advance-month");
+      if (result.envelope.session?.campaign === "regional-affiliation-v1") {
+        audioClient.playCue("event.affiliation-milestone");
+      }
+      setPresentationState(root, "Campaign decision committed; current stage refreshed from the host.");
+      return { ok: true, envelope: result.envelope };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      audioClient.playCue("ui.action-reject");
+      setPresentationState(root, `Campaign decision rejected; current stage remains active: ${message}`);
+      return { ok: false, code: "campaign_submit_rejected", message };
+    }
+  }
+
+  return { load, submit, audio: audioClient, get envelope() { return currentEnvelope; } };
 }
 
 export function renderRegionalWorld(envelope, root = document) {
@@ -807,6 +1078,8 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   let currentEnvelope = null;
   const audioClient = createAudioClient({ root });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
+  const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
+  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient });
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
@@ -828,6 +1101,9 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     setReadOnlyControls(root, true);
     setPresentationState(root, "Loading read-only presentation…");
     if (!adapter || typeof adapter.getPresentation !== "function") {
+      if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
+        return campaignCoverageClient.load(sessionId);
+      }
       return renderStaticFixture();
     }
     try {
@@ -837,7 +1113,10 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         return { ok: false, code: "empty_presentation" };
       }
       const result = render(envelope);
-      if (result.ok) await regionalWorldClient.load(sessionId);
+      if (result.ok) {
+        await regionalWorldClient.load(sessionId);
+        await campaignCoverageClient.load(sessionId);
+      }
       if (result.ok) audioClient.playCue("ui.report-received");
       return result;
     } catch (error) {
@@ -847,7 +1126,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     }
   }
 
-  return { load, render, renderStaticFixture, audio: audioClient, regionalWorld: regionalWorldClient, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, audio: audioClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -1000,6 +1279,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const resolutionClient = createResolutionClient({ adapter, root });
   const audioClient = createAudioClient({ root });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
+  const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
+  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -1102,6 +1383,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           audioClient.setMusicFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           await regionalWorldClient.load(sessionId);
+          await campaignCoverageClient.load(sessionId);
         }
       } catch (error) {
         renderEnvelope(response, root);
@@ -1110,6 +1392,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       }
     } else {
       renderEnvelope(response, root);
+      await campaignCoverageClient.load(sessionId);
     }
     setActionControls(root, true);
     renderDraftState();
@@ -1126,6 +1409,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
     setPresentationState(root, "Loading action catalog…");
     if (!adapter || typeof adapter.getActionCatalog !== "function" || typeof adapter.validateTurn !== "function") {
+      if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
+        return campaignCoverageClient.load(sessionId);
+      }
       setPresentationState(root, "Action adapter unavailable; read-only mode remains active.");
       return { ok: false, code: "action_adapter_missing" };
     }
@@ -1136,6 +1422,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         if (!rendered.ok) return rendered;
         audioClient.setMusicFromVisible(presentation);
         await regionalWorldClient.load(sessionId);
+        await campaignCoverageClient.load(sessionId);
       }
       catalog = await adapter.getActionCatalog(sessionId);
       if (!catalog || catalog.schema_version !== "competitive-actions-v1") {
@@ -1170,7 +1457,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
-  return { load, validate: validateDraft, submit, audio: audioClient, regionalWorld: regionalWorldClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, audio: audioClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -1499,6 +1786,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       createAudioClient,
       createActionClient,
+      createCampaignCoverageClient,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -1508,6 +1796,7 @@ if (typeof document !== "undefined") {
       renderReadOnlyEnvelope,
       renderResolution,
       renderRegionalWorld,
+      renderCampaignCoverage,
       validateCommand,
       validateReadOnlyEnvelope,
     };
@@ -1519,6 +1808,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       createAudioClient,
       createActionClient,
+      createCampaignCoverageClient,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -1528,6 +1818,7 @@ if (typeof document !== "undefined") {
       renderReadOnlyEnvelope,
       renderResolution,
       renderRegionalWorld,
+      renderCampaignCoverage,
       validateCommand,
       validateReadOnlyEnvelope,
     };
@@ -1537,5 +1828,6 @@ if (typeof document !== "undefined") {
 export {
   demoEnvelope,
   presentationFixture,
+  CAMPAIGN_COVERAGE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
 };

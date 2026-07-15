@@ -67,6 +67,11 @@ pub struct GetRegionalWorldRequest {
 }
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetCampaignCoverageRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct GetActionCatalogRequest {
   pub session_id: String,
 }
@@ -519,6 +524,57 @@ impl GameSessionStore {
       session.history.transitions.len(),
       state_hash,
     ))
+  }
+
+  pub fn get_campaign_coverage(
+    &self,
+    request: GetCampaignCoverageRequest,
+  ) -> Result<crate::mcp::campaign_coverage::CampaignCoverageEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    match session {
+      GameSession::Stabilization(session) => {
+        let history = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_stabilization_transition)
+          .collect::<Vec<_>>();
+        Ok(crate::mcp::campaign_coverage::from_stabilization(
+          request.session_id,
+          session.seed,
+          session.done,
+          &session.current,
+          &session.ruleset,
+          &history,
+          &session.history,
+        ))
+      }
+      GameSession::Affiliation(session) => {
+        let history = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_affiliation_transition)
+          .collect::<Vec<_>>();
+        Ok(crate::mcp::campaign_coverage::from_affiliation(
+          request.session_id,
+          session.seed,
+          session.done,
+          &session.current,
+          &session.ruleset,
+          &history,
+          &session.history,
+        ))
+      }
+      GameSession::Competitive(_) => Err(error_message(
+        "campaign coverage currently supports stabilization-v1 and regional-affiliation-v1 only",
+      )),
+    }
   }
 
   pub fn validate_turn(
@@ -1046,7 +1102,7 @@ fn format_competitive_observation(
   lines
 }
 
-fn stabilization_legal_commands(turn_number: u32) -> Vec<String> {
+pub(crate) fn stabilization_legal_commands(turn_number: u32) -> Vec<String> {
   match turn_number {
     1 => vec!["staffed_beds capital_spend requested_rate".to_string()],
     2 => vec!["advocacy_spend access_commitment".to_string()],
@@ -1066,7 +1122,7 @@ fn competitive_legal_commands(ap: u32, cash: i32, political_capital: u32) -> Vec
   commands
 }
 
-fn summarize_stabilization_transition(transition: &Transition) -> TransitionSummary {
+pub(crate) fn summarize_stabilization_transition(transition: &Transition) -> TransitionSummary {
   TransitionSummary {
     turn: transition.next.turn,
     command: format!("{:?}", transition.command),
@@ -1095,7 +1151,9 @@ pub(crate) fn summarize_competitive_transition(
   }
 }
 
-fn summarize_affiliation_transition(transition: &AffiliationTransition) -> TransitionSummary {
+pub(crate) fn summarize_affiliation_transition(
+  transition: &AffiliationTransition,
+) -> TransitionSummary {
   TransitionSummary {
     turn: transition.next.turn,
     command: format!("{:?}", transition.command),
@@ -1148,7 +1206,7 @@ fn format_affiliation_observation(
   lines
 }
 
-fn affiliation_legal_commands(state: &AffiliationWorldState) -> Vec<String> {
+pub(crate) fn affiliation_legal_commands(state: &AffiliationWorldState) -> Vec<String> {
   match state.stage {
     crate::model::AffiliationStage::AssessPartner => vec!["assess".to_string()],
     crate::model::AffiliationStage::ChoosePosture => {
@@ -1953,6 +2011,134 @@ mod tests {
         .observation
         .iter()
         .any(|line| line == "Commitments: community 6, workforce 6, continuity 6, total 18")
+    );
+  }
+
+  #[test]
+  fn campaign_coverage_preserves_campaign_specific_observations() {
+    let mut store = GameSessionStore::default();
+    let stabilization = start(&mut store, "stabilization-v1");
+    let stabilization_before = store
+      .get_observation(GetObservationRequest {
+        session_id: stabilization.session_id.clone(),
+      })
+      .expect("stabilization before coverage");
+    let stabilization_coverage = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: stabilization.session_id.clone(),
+      })
+      .expect("stabilization coverage");
+    let stabilization_after = store
+      .get_observation(GetObservationRequest {
+        session_id: stabilization.session_id,
+      })
+      .expect("stabilization after coverage");
+    let stabilization_json =
+      serde_json::to_string(&stabilization_coverage).expect("stabilization coverage json");
+    assert_eq!(
+      stabilization_coverage.schema_version,
+      "campaign-coverage-v1"
+    );
+    assert_eq!(
+      stabilization_coverage.campaign_role,
+      "tutorial-oriented stabilization"
+    );
+    assert_eq!(stabilization_coverage.stage.id, "turn-1");
+    assert_eq!(stabilization_coverage.decisions.len(), 1);
+    assert_eq!(stabilization_coverage.decisions[0].parameters.len(), 3);
+    assert_eq!(stabilization_before, stabilization_after);
+
+    let affiliation = start(&mut store, "regional-affiliation-v1");
+    let affiliation_coverage = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: affiliation.session_id,
+      })
+      .expect("affiliation coverage");
+    let affiliation_json =
+      serde_json::to_string(&affiliation_coverage).expect("affiliation coverage json");
+    assert_eq!(
+      affiliation_coverage.campaign_role,
+      "institutional fit and obligation process"
+    );
+    assert_eq!(affiliation_coverage.stage.id, "assesspartner");
+    assert!(
+      affiliation_coverage
+        .actors
+        .iter()
+        .any(|actor| actor.role == "Potential partner")
+    );
+    assert!(
+      affiliation_coverage
+        .metrics
+        .iter()
+        .any(|metric| metric.label == "Continuity commitment")
+    );
+    for json in [stabilization_json, affiliation_json] {
+      for forbidden in [
+        "WorldState",
+        "AffiliationWorldState",
+        "ResolvedInputs",
+        "resolved_inputs",
+        "effect_queue",
+        "integration_drag",
+        "condition_index",
+      ] {
+        assert!(!json.contains(forbidden), "found {forbidden}");
+      }
+    }
+
+    let competitive = start(&mut store, "competitive-regional-v1");
+    let competitive_before = store
+      .get_observation(GetObservationRequest {
+        session_id: competitive.session_id.clone(),
+      })
+      .expect("competitive before unsupported coverage");
+    let error = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: competitive.session_id.clone(),
+      })
+      .expect_err("competitive coverage is intentionally unsupported");
+    assert!(error.error.contains("stabilization-v1"));
+    let competitive_after = store
+      .get_observation(GetObservationRequest {
+        session_id: competitive.session_id,
+      })
+      .expect("competitive after unsupported coverage");
+    assert_eq!(competitive_before, competitive_after);
+  }
+
+  #[test]
+  fn campaign_coverage_terminal_affiliation_includes_debrief() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "regional-affiliation-v1");
+    let commands = [
+      "assess",
+      "posture choice=independent",
+      "hold",
+      "hold",
+      "hold",
+      "hold",
+    ];
+    let mut current = session;
+    for command in commands {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id,
+          command_text: command.to_string(),
+        })
+        .expect("affiliation stage");
+    }
+    let coverage = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: current.session_id,
+      })
+      .expect("terminal affiliation coverage");
+    assert!(coverage.session.done);
+    assert!(
+      coverage
+        .debrief
+        .iter()
+        .any(|line| line.contains("Regional affiliation debrief"))
     );
   }
 
