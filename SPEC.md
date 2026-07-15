@@ -4048,38 +4048,53 @@ Verification:
 
 ## Present
 
-- Feature: Evidence-gated continuation
-  Status: Visual/audio proposal accepted for future promotion
-  Started: 2026-07-12
-  Branch: none
+- Feature: Visual/audio Phase 0 product and architecture alignment
+  Status: Complete; Phase 1 is the next gated candidate
+  Started: 2026-07-14
+  Branch: feat/visual-audio-phase0-alignment-v0.12.16
 
   Summary:
-  All currently promoted runtime slices, bounded follow-ups, and the release
-  readiness check are complete. The visual/audio upgrade is now the ranked
-  future development track, but no implementation phase has been promoted into
-  active work. Each phase must still satisfy the promotion rules below.
+  Phase 0 closes the product and architecture alignment gate for one
+  `competitive-regional-v1` month. It accepts a browser-native thin client over
+  the existing host/MCP authority boundary and records the first-slice
+  experience, actor-visible source inventory, wireframe, audio catalogs, asset
+  policy, and hidden-state exclusions.
+
+  Done:
+  - Added `docs/visual-audio-phase0-alignment-v0.12.16.md` with the approved
+    interface boundary, first-month contract, DTO inventory, wireframe, visible
+    audio mappings, asset policy, verification gate, and non-goals.
+  - Accepted ADR-0011 for the browser-native HTML/CSS/ES-module/SVG stack and
+    host-authoritative presentation boundary.
+  - Added a dependency-free Phase 0 contract test and verified that no Rust
+    production, scenario, replay, ruleset, or asset files changed.
+  - Bumped package and public metadata to `0.12.16`.
 
   Not Yet Done:
-  - Promote only Phase 0 of the visual/audio track after its technology,
-    boundary, first-month slice, DTO, asset-license, and audio-catalog decisions
-    are bounded.
+  - Promote Phase 1 only for a static injected-data executive desktop after the
+    Phase 0 artifact and contract test remain stable.
 
   Deferred / Non-Goals:
-  - Do not infer packaging, publication, licensing, deployment, or a new runtime
-    slice from the existence of a documented Future track.
+  - No typed DTO implementation, live adapter, action forms, animation, audio
+    playback, asset acquisition, packaging, deployment, or human evaluation.
+  - Phases 2–9 remain sequentially gated by their own evidence and acceptance
+    criteria.
 
   Verification:
-  - A new Present item must satisfy the promotion rules below and name its
-    evidence source, narrow target slice, acceptance criteria, and non-goals.
+  - `tests/test_visual_audio_phase0.py` checks all Phase 0 deliverables,
+    command-family bounds, visible-only audio, technology choice, and later
+    phase gates.
+  - Release metadata, documentation, formatting, clippy, and the full Rust
+    suite pass.
 
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Planned; Phase 0 is the next ranked candidate, and no feature described
-below should be read as implemented merely because the current `gui/` proof
-exists.
+Status: Phase 0 complete; Phase 1 is the next ranked candidate. No later feature
+described below should be read as implemented merely because the current `gui/`
+proof or Phase 0 alignment document exists.
 
 #### Existing foundation (`Done`)
 
@@ -4090,6 +4105,17 @@ exists.
   delegates submission through an adapter. It proves a thin-client direction;
   it is not the persistent regional world, live viewer, action workflow,
   resolution system, audio layer, or campaign-complete GUI described here.
+
+#### Phase 0 alignment (`Done`)
+
+- The browser-native presentation stack, host/MCP authority boundary, one-month
+  competitive experience, current actor-visible source inventory, preliminary
+  wireframe, audio catalog, asset policy, and hidden-state exclusions are
+  recorded in `docs/visual-audio-phase0-alignment-v0.12.16.md`.
+- ADR-0011 accepts semantic HTML/CSS/ES modules plus native SVG for the initial
+  client and keeps optional future audio playback outside the simulation core.
+- Phase 0 acceptance does not promote structured DTOs, live actions, animation,
+  audio playback, assets, or later campaigns.
 
 #### Product contract (`Not Yet Done`)
 
@@ -4385,10 +4411,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Visual/audio Phase 0 product and architecture alignment is the next candidate.
-   It must bound the one-month competitive slice, technology choice,
-   actor-visible DTOs, canonical action path, hidden-state exclusions, visual
-   wireframe, audio catalogs, asset policy, verification, and non-goals before
-   promotion.
-2. Phases 1–9 remain sequentially gated Future work. None may be promoted from
+1. Visual/audio Phase 1 static executive desktop is the next candidate. It must
+   render injected actor-visible fixtures in the accepted browser-native stack,
+   preserve the wireframe/status language, and pass hidden-state and viewport
+   checks before promotion.
+2. Phases 2–9 remain sequentially gated Future work. None may be promoted from
    this queue merely because its requirements are documented.

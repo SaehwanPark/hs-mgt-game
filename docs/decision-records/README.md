@@ -28,6 +28,7 @@ consequential technical and design choices in the Health Policy Strategy Game.
 - [ADR-0007: Minimal stabilization scenario TOML](0007-minimal-stabilization-scenario-toml.md)
 - [ADR-0008: MCP agent interface](0008-mcp-agent-interface.md)
 - [ADR-0009: AI-agent playtest validation path](0009-ai-agent-playtest-validation-path.md)
+- [ADR-0011: Browser-native presentation client and host authority](0011-browser-native-presentation-client.md)
 
 ## Proposed Records
 

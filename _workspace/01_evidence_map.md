@@ -1,17 +1,58 @@
-# Evidence Map — Release Metadata Check v0.12.13
+# Evidence Map — Visual and Audio Phase 0 Alignment v0.12.16
 
-| Requirement | Authority | Result | Limit |
-| --- | --- | --- | --- |
-| Package metadata is authoritative | `Cargo.toml` `[package]` version | Checker reads the package version as the expected value | It does not validate every Cargo field |
-| Lockfile stays aligned | `Cargo.lock` package block | Checker compares the `hs-mgt-game` package version | It does not regenerate or edit the lockfile |
-| User-facing version is aligned | README milestone line and `CHANGELOG.md` first version heading | Checker catches stale visible release metadata | It does not judge release-note completeness |
-| Local contributor usage | `docs/contributor-release-check.md`, README | One copyable Python command is documented | It assumes the repository's existing `python3` command is available |
-| CI coverage | `.github/workflows/ci.yml` | CI runs the same read-only check before Rust checks | It is not a package publication or deployment gate |
-| Runtime safety | no `src/` or scenario changes | Simulation, replay, and ruleset behavior are untouched | The check cannot prove all semantic behavior is unchanged |
+## Scope
 
-## Conclusion
+Phase 0 translates the visual/audio proposal into a bounded presentation
+decision for one competitive month. It does not implement the client.
 
-This is a narrow metadata consistency check appropriate for the final release
-readiness queue item. It adds no release automation beyond the existing
-versioning policy and leaves publication, packaging, licensing, and deployment
-for a later explicitly authorized slice.
+## Sources Reviewed
+
+- `docs/visual_audio_upgrade_proposal.md`, especially Sections 11–14.
+- `SPEC.md`, `ARCHITECTURE.md`, canonical product documents, and ADR-0008/0009.
+- `src/mcp/session.rs`, `src/model/campaign.rs`, competitive observation and
+  command modules, `gui/`, and existing GUI contract tests.
+
+## Mechanisms and Institutions
+
+The game remains an executive institutional strategy simulation. The first
+presentation target is Riverside Community Health in a regional competitive
+market. The client exposes workforce, capacity, access, operations, payer/policy,
+market, rival-public-information, project, and debrief surfaces only when they
+are already actor-visible.
+
+## Actor Incentives and Information
+
+The player sees `PlayerObservation`, visible legal-command hints, committed
+transition summaries, history hashes, and debrief output. Rival private commands,
+resolved stochastic inputs, true unreported values, private utility, and future
+hidden effects remain excluded. Advisor text is advisory, not binding.
+
+## Assumptions
+
+- Browser-native HTML/CSS/ES modules and SVG are sufficient for the first static
+  desktop; no new dependency is needed.
+- Current MCP envelopes are inventory evidence, while structured DTOs remain a
+  later adapter gap.
+- Audio and mood are presentation mappings from visible/committed events, not
+  simulation state.
+
+## Unresolved Questions
+
+- Which Phase 2 adapter projections are necessary after static fixture review?
+- Which browser hosting mode is justified by later evidence?
+- Which individual assets pass provenance review when Phase 5 is promoted?
+
+## Design Implications
+
+- Every graphical action must round-trip through an existing competitive command
+  family and host validation.
+- Every displayed value and audio cue needs a visible source or an explicit
+  missingness label.
+- Visual and audio feedback must keep organizational outcomes, actor utility,
+  social welfare, decision quality, and educational evaluation distinct.
+
+## Risks
+
+The current MCP surface is partly string-based, so a later DTO promotion could
+accidentally duplicate formulas or expose hidden state. AI/static accessibility
+checks are technical proxies only; they cannot establish lived human access.
