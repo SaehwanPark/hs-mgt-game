@@ -1,93 +1,100 @@
-# Mechanism Design — Phase 10 accessibility and visual-language hardening v0.12.26
+# Mechanism Design — Visual/audio Phase 11 first-session launch/load v0.12.27
 
 ## Goal and Roadmap Phase
 
-Close a narrow part of the `SPEC.md` product contract and first competitive
-vertical-slice requirements: a keyboard-reachable, text-scalable, non-color-only
-presentation surface. This is a Phase 10 follow-up derived from the proposal's
-accessibility and visual-language exit criteria after the numbered Phase 0–9
-slices.
+Implement the launch/load boundary required by the first competitive vertical
+slice in the visual/audio proposal. This is Phase 11 after the merged Phase 10
+presentation hardening. The slice is an adapter/UI lifecycle boundary, not a
+new simulation mechanism.
 
 ## Slice Boundary
 
-Included:
-
-- semantic skip link and presentation navigation landmark;
-- stable anchors for briefing, regional/action, resolution/result, and debrief;
-- visible status legend and shape/pattern cues;
-- standard/large text scale persisted locally;
-- functional optional cue-explanation visibility preference;
-- targeted live/status semantics and visible focus styling;
-- static contract tests and documentation.
-
-Excluded:
-
-- browser launch/session creation, real assets, visual map redesign, screen-reader
-  certification, contrast measurement by people, or human evaluation;
-- any host, MCP, Rust, simulation, transition, or command change.
+- Campaign: `competitive-regional-v1` only for new starts.
+- Setup: seed (default 42) and difficulty (`easy`, `normal`, `hard`, or
+  `expert`) selected in the browser.
+- Load: an existing session ID entered by the user and read through the
+  existing presentation/action clients.
+- Outcome: an initial host envelope is rendered, with briefing, regional
+  market, player system, facilities, legal action surface, and session status
+  available through existing components.
+- Excluded: campaign transitions, command submission, scenario file input,
+  session persistence, authentication, transport, assets, and audio changes.
 
 ## Actors and Authority
 
-- Player: selects navigation targets and local presentation preferences.
-- AI-agent test profile: exercises stable controls and records visible settings.
-- Host/core: sole authority for observations, commands, validation, stochastic
-  resolution, history, hashes, replay, and debrief.
+- The human executive owns only the setup choice and load request.
+- The browser launcher owns form state, pending/error status, and the currently
+  selected adapter session ID.
+- The host/MCP session store owns campaign parsing, seed/difficulty validation,
+  scenario validation, session allocation, initial state, actor observations,
+  and all subsequent transitions.
+- No actor strategy or utility is changed.
 
 ## State, Beliefs, and Observations
 
-No true game state changes. Local GUI state consists only of `reduced_motion`,
-`text_scale`, and `text_equivalents`. These values are not sent to the host,
-included in command text, or used to classify visible audio sources. Host data
-continues to be rendered as actor-visible facts, labels, uncertainty, delays,
-revisions, or explicit missingness.
+- Before start, there is no browser-owned game state and no valid first-month
+  observation to display as live data.
+- A successful `startSession` returns the host's session envelope, including
+  `session_id`, campaign, seed, difficulty, turn, max turns, done state, and
+  initial observation/legal-command fields. The GUI then obtains the typed
+  `competitive-read-only-v1` presentation by session ID.
+- A successful load reads an existing host session by ID. The launcher does not
+  inspect hidden state or reconstruct a session from local settings.
+- Failed or malformed start/load responses preserve the current rendered
+  session, show a recoverable status, and expose no guessed data.
 
 ## Commands, Events, and Effects
 
-No new game commands or transition events exist. The client adds only local
-navigation and settings events to the existing allowlisted playtest recorder:
-
-- `settings_changed(setting=text_scale|text_equivalents, value=...)`;
-- `onboarding_next(target=<stable panel>)`.
-
-Skip navigation, legend expansion, and text scaling produce no host request or
-simulation effect. The cue-equivalent preference may hide the optional audio
-explanation paragraph only; it never hides the written result, observation,
-history, resolution, or debrief.
+- `startSession` maps to the existing host `start_session` operation and does
+  not submit a game command or advance a turn.
+- `loadSession` calls the existing client `load(sessionId)` path and does not
+  submit a command or advance a turn.
+- The existing `session_loaded` event remains the only capture event emitted
+  after a successful visible presentation load.
+- No stochastic inputs, delayed effects, transition summaries, history entries,
+  hashes, replay records, or debrief lines are created by the launcher itself.
 
 ## Strategic Interaction
 
-There is no new strategic interaction. Existing player decisions remain
-host-shaped and host-validated. The presentation must not imply that a status
-label, cue, or visual emphasis is an objective score or a universal good/bad
-judgment across organizational performance, actor utility, social welfare, and
-decision quality.
+There is no new strategic interaction. Campaign, seed, difficulty, and session
+ID are lifecycle inputs. The launcher must not rank difficulty, promise a
+strategy, label a seed as favorable, or imply that starting a session is an
+outcome.
 
 ## Assumptions and Parameters
 
-- `standard` text scale is the current root size; `large` is a modest CSS scale
-  using the platform's normal layout flow rather than a second layout engine.
-- Status symbols are decorative but paired with visible status text and a
-  machine-readable `data-status` value.
-- Browser `localStorage` may fail or be absent; settings remain session-local.
-- Existing `prefers-reduced-motion` behavior remains an independent fallback.
+- New start always sends `campaign: "competitive-regional-v1"`.
+- Seed is a finite non-negative integer; invalid or empty input is rejected
+  before the adapter call.
+- Difficulty is allowlisted to the four host-supported labels and defaults to
+  `normal`.
+- Adapter response must expose a non-empty `session_id`; alias-only or
+  malformed responses are rejected so the browser never guesses authority.
+- The active session ID is replaced only after a successful subsequent
+  presentation load, preventing a failed start from discarding the current
+  view.
 
 ## Educational Debrief Hooks
 
-Navigation and status language should make it easier to reach the existing
-briefing, pending-process, resolution, causal, history, and debrief surfaces.
-The slice makes no claim that this improves learning. Existing debrief content
-and decision/outcome distinction remain host-provided and unchanged.
+The launcher only improves access to the existing observation and decision
+surfaces. It does not add guidance, strategy advice, causal explanations, or
+learning claims. Existing history, resolution, and debrief content remain
+host-provided after play.
 
 ## Determinism and Replay Notes
 
-Local settings and CSS transitions are presentation-only. They do not affect
-commands, validation, resolved inputs, state transitions, history, hashes,
-replay artifacts, or committed debriefs. Replaying the same host envelope with
-different local text scale must render the same host facts.
+Starting with the same host-supported campaign, seed, difficulty, and scenario
+produces the same host initial state under existing session semantics. The
+browser contributes no randomness and stores no simulation state. Navigation,
+form state, and the selected session ID are presentation/client state and do
+not enter commands, transitions, history, hashes, replay artifacts, or
+debriefs.
 
 ## Open Questions
 
-- A real browser accessibility audit still requires an appropriately designed
-  human or assistive-technology evaluation.
-- The visual asset registry and first competitive session-launch experience
-  remain separate future slices after this local presentation contract.
+- A deployed browser transport for `startSession` remains future integration
+  work; this slice tests the adapter boundary with a fake host adapter.
+- A user-facing scenario picker and saved-session browser require separate
+  scope and release decisions.
+- Real first-time launch success and accessibility require browser/agent or
+  human evidence beyond static tests.

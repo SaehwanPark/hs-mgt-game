@@ -1,100 +1,88 @@
-# Evidence Map — Phase 10 accessibility and visual-language hardening v0.12.26
+# Evidence Map — Visual/audio Phase 11 first-session launch/load v0.12.27
 
 ## Scope
 
-This map supports a presentation-only accessibility slice. It does not support
-claims about lived accessibility or human comprehension. The artifact must make
-the existing actor-visible GUI easier to navigate and interpret while keeping
-host authority, written results, and campaign semantics unchanged.
+This slice addresses the first remaining product-contract gap after Phase 10:
+the planned competitive first-month experience begins with starting or loading
+a campaign, while the current GUI requires a preconfigured adapter session ID.
+The proposed behavior is a presentation-to-host handoff, not a new game
+mechanism.
 
 ## Sources Reviewed
 
-- `SPEC.md` sections `Visual and motion language`, `Assets, licensing, and
-  accessibility`, `First competitive vertical slice`, and `Verification and AI
-  testplay`.
-- `docs/visual_audio_upgrade_proposal.md` Sections 6.3–6.9, 7, 9, 13, 14,
-  15, and 16.
-- `gui/index.html`: current semantic sections, CSS status classes, controls,
-  responsive breakpoints, and reduced-motion media rule.
-- `gui/app.mjs`: local presentation settings, status rendering, onboarding,
-  and the host-bound read/action/resolution clients.
-- Existing GUI tests and Phase 8 readiness protocol.
-- Canonical project docs and the harness team spec.
+- User objective and `_workspace/00_input/request-summary.md`.
+- `SPEC.md` Future sections for product contract, first competitive vertical
+  slice, presentation/action boundary, and verification.
+- `docs/visual_audio_upgrade_proposal.md` sections 7, 8, 14, 15, and 16.
+- `docs/mcp-agent-interface.md` and `src/mcp/session.rs` for the existing
+  `start_session` request/envelope and non-transitioning session creation.
+- `gui/app.mjs`, `gui/index.html`, `gui/README.md`, and existing GUI tests.
+- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
+  `docs/design_principles.md`, and the harness team spec.
 
 ## Mechanisms and Institutions
 
-This slice has no new simulation mechanism or actor. The presentation mechanism
-is a visible information hierarchy:
-
-```text
-first-run player intent
-  -> keyboard landmark/skip navigation
-  -> briefing, action, result, or debrief surface
-  -> explicit status language and source/equivalent text
-```
-
-The executive player remains the only user authority in the client. The host
-continues to own command legality, transition resolution, stochastic inputs,
-history, hashes, replay, and debrief content.
+- No health-policy actor, institution, utility, policy lever, or transition
+  mechanism is added.
+- Existing host session creation selects a campaign, seed, difficulty, and
+  optional validated scenario path, then creates a session at its initial
+  state. It does not submit a command or resolve a month.
+- The GUI needs only a browser adapter mapping for the existing host operation:
+  `startSession({ campaign, seed, difficulty })` returns the existing
+  session-envelope shape or an explicit error.
+- Existing `getPresentation(sessionId)` and optional action/regional/resolution
+  reads remain the source of the first briefing and first-month surfaces.
 
 ## Actor Incentives and Information
 
-- The player needs to distinguish observed, uncertain, delayed, revised, and
-  committed information without relying on color, animation, or audio.
-- A keyboard-only or enlarged-text user needs a predictable route to the same
-  visible information and controls.
-- The AI-agent test harness needs stable semantic IDs and deterministic setting
-  state; it must not receive hidden model or simulation fields.
-- Contributors need a small presentation contract that can be inspected without
-  a browser driver.
+- The executive chooses a campaign-start parameter set, not an operating
+  strategy. Seed and difficulty are session setup inputs and must not be
+  presented as performance choices.
+- The player sees only the host-returned session/presentation envelope after a
+  successful start or load. The browser must not infer resources, rivals,
+  policy pressure, or outcomes from the selected seed/difficulty.
+- No rival, payer, labor, regulator, community, or AI actor is changed. No
+  private information becomes available through the launcher.
 
 ## Assumptions
 
-- Native HTML landmarks, focus behavior, CSS custom properties, and local
-  storage are sufficient; no accessibility framework or browser dependency is
-  required.
-- Status labels already supplied by the host or fixture are the authoritative
-  category vocabulary; the client may add shape/pattern cues but may not infer
-  a new severity or outcome.
-- Text scaling is a local presentation preference and must not change layout
-  data, command text, host validation, history, hashes, or audio classification.
-- Cue-equivalent visibility can be scoped to explanatory audio text while the
-  written monthly result, observation, and debrief remain always present.
+- A supplied browser adapter can map `startSession` to the existing MCP
+  `start_session` operation and expose the returned `session_id`.
+- The existing presentation/action clients can reload from a replacement
+  session ID without changing their host contracts.
+- An unavailable `startSession` method is a supported adapter capability gap,
+  not a reason to fabricate a local session.
+- The first target is `competitive-regional-v1`; the launcher does not broaden
+  campaign coverage in this slice.
 
 ## Unresolved Questions
 
-- Lived screen-reader behavior, contrast perception, cognitive load, and text
-  scaling comfort require people and remain outside this technical slice.
-- Whether the first competitive experience needs a browser launch/session API
-  cannot be answered by the current host contracts and is deferred rather than
-  simulated locally.
-- Exact visual identity, licensed art, and map assets remain separate future
-  governance work; this slice uses existing CSS/generated symbols only.
+- Which future browser transport or host integration will implement the
+  adapter in a deployed environment is not decided here.
+- Whether scenario selection should be exposed to human players remains a
+  separate scenario-authoring and release decision.
+- Whether a launch flow improves human onboarding or learning requires later
+  browser/human evidence and is not established by static tests.
 
 ## Design Implications
 
-- Add a skip link and a small navigation landmark to make the current briefing,
-  action, resolution, result, and debrief regions reachable in a stable order.
-- Keep `main` out of the live-region boundary; use targeted status/live nodes so
-  a refresh does not make the entire desktop noisy to assistive technology.
-- Add a visible status legend with text, symbol, and pattern language for every
-  supported status category. Status rendering must expose a machine-readable
-  status value and accessible label.
-- Add a persisted standard/large text-scale control and keep reduced motion
-  independent. The setting must apply immediately and degrade safely when
-  storage is unavailable.
-- Make the existing cue-equivalent setting actually control only optional audio
-  explanatory copy; never hide decision results or causal/debrief text.
-- Add focused static tests for the contract because browser automation is out of
-  scope; label these checks as technical proxies.
+- Keep launch controls in the existing readiness/onboarding region so the user
+  reaches the briefing through one visible path.
+- Use native select/number/input controls and clear host-boundary status text.
+- On start success, replace the client session ID and call the existing read
+  path; do not render a predicted fixture as a substitute for host data.
+- On load failure, preserve the current surface and offer retry; a failed
+  start/load must not call `submitTurn` or alter an existing session.
+- Reuse existing `session_loaded` capture behavior after the presentation read;
+  no new raw session or true-state capture event is needed.
 
 ## Risks
 
-- A global live region can cause excessive announcements; targeted status nodes
-  and a skip path reduce that risk without changing host data.
-- Scaling may expose overflow at small widths; existing responsive breakpoints
-  and focused CSS markers must remain intact.
-- A cue-equivalent preference could accidentally hide essential information;
-  the implementation must scope it to optional audio explanation only.
-- A client-side status mapping could leak or invent hidden state; it must use
-  only the existing status string/category and never derive a score.
+- A browser adapter may implement `startSession` with a different response
+  shape; tests must require the explicit existing `session_id` field and show a
+  recoverable error for malformed responses.
+- Replacing an active session ID could desynchronize action, regional, and
+  campaign clients if only one client updates. The shared launcher callback
+  must route through each client's existing `load` function.
+- Static tests cannot establish a real MCP/browser transport, authentication,
+  browser usability, or first-time human comprehension.

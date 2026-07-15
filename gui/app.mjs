@@ -1254,8 +1254,147 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
   return { ok: true, envelope };
 }
 
+const SESSION_LAUNCH_CAMPAIGN = "competitive-regional-v1";
+const SESSION_LAUNCH_DIFFICULTIES = new Set(["easy", "normal", "hard", "expert"]);
+
+function sessionLaunchStatus(root, message) {
+  const node = root.querySelector("#session-launch-status");
+  if (node) node.textContent = message;
+}
+
+function readSessionLaunchOptions(root) {
+  const campaign = root.querySelector("#session-campaign")?.value;
+  const seedText = String(root.querySelector("#session-seed")?.value ?? "").trim();
+  const difficulty = String(root.querySelector("#session-difficulty")?.value ?? "").toLowerCase();
+  if (campaign !== SESSION_LAUNCH_CAMPAIGN) {
+    return { ok: false, code: "unsupported_campaign", message: "This launcher supports the competitive regional campaign only." };
+  }
+  if (!/^\d+$/.test(seedText)) {
+    return { ok: false, code: "invalid_seed", message: "Enter a non-negative integer seed before starting." };
+  }
+  const seed = Number(seedText);
+  if (!Number.isSafeInteger(seed) || seed < 0) {
+    return { ok: false, code: "invalid_seed", message: "Enter a safe, non-negative integer seed before starting." };
+  }
+  if (!SESSION_LAUNCH_DIFFICULTIES.has(difficulty)) {
+    return { ok: false, code: "invalid_difficulty", message: "Choose Easy, Normal, Hard, or Expert before starting." };
+  }
+  return { ok: true, options: { campaign, seed, difficulty } };
+}
+
+export function createSessionLauncher({ adapter, root = document, load, recorder = null } = {}) {
+  const form = root.querySelector("#session-launch-form");
+  const start = root.querySelector("#session-start");
+  const existingId = root.querySelector("#session-id");
+  const loadButton = root.querySelector("#session-load");
+  let busy = false;
+
+  const setBusy = (value) => {
+    busy = value;
+    if (start) start.disabled = value;
+    if (loadButton) loadButton.disabled = value;
+  };
+
+  async function loadExisting(event) {
+    event?.preventDefault?.();
+    if (busy) return { ok: false, code: "session_launch_busy" };
+    const sessionId = String(existingId?.value ?? "").trim();
+    if (!sessionId) {
+      sessionLaunchStatus(root, "Enter an existing session ID before loading.");
+      return { ok: false, code: "session_id_missing" };
+    }
+    if (!adapter) {
+      sessionLaunchStatus(root, "Loading an existing session requires a host adapter; the demo fixture was not replaced.");
+      return { ok: false, code: "session_load_adapter_missing" };
+    }
+    if (typeof load !== "function") {
+      sessionLaunchStatus(root, "Session loading is unavailable in this client.");
+      return { ok: false, code: "session_load_unavailable" };
+    }
+    setBusy(true);
+    sessionLaunchStatus(root, "Loading the host session…");
+    try {
+      const result = await load(sessionId);
+      if (!result?.ok) {
+        sessionLaunchStatus(root, result?.message ?? "The host session could not be loaded; the current view remains active.");
+        return result ?? { ok: false, code: "session_load_failed" };
+      }
+      sessionLaunchStatus(root, `Host session loaded: ${sessionId}`);
+      return result;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recorder?.recordFailure({ class: "adapter_error", message, recoverable: true });
+      sessionLaunchStatus(root, `Session load failed; the current view remains active: ${message}`);
+      return { ok: false, code: "session_load_error", message };
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function startSession(event) {
+    event?.preventDefault?.();
+    if (busy) return { ok: false, code: "session_launch_busy" };
+    const input = readSessionLaunchOptions(root);
+    if (!input.ok) {
+      sessionLaunchStatus(root, input.message);
+      return input;
+    }
+    if (!adapter || typeof adapter.startSession !== "function") {
+      sessionLaunchStatus(root, "Starting a session requires a host start-session adapter; no local session was created.");
+      return { ok: false, code: "start_session_adapter_missing" };
+    }
+    if (typeof load !== "function") {
+      sessionLaunchStatus(root, "Session loading is unavailable in this client.");
+      return { ok: false, code: "session_load_unavailable" };
+    }
+    setBusy(true);
+    sessionLaunchStatus(root, "Starting a host session…");
+    let response;
+    try {
+      response = await adapter.startSession(input.options);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recorder?.recordFailure({ class: "adapter_error", message, recoverable: true });
+      sessionLaunchStatus(root, `Host session start failed: ${message}`);
+      setBusy(false);
+      return { ok: false, code: "start_session_adapter_error", message };
+    }
+    const sessionId = typeof response?.session_id === "string" ? response.session_id.trim() : "";
+    if (!sessionId) {
+      sessionLaunchStatus(root, "The host start response did not include a valid session ID; the current view remains active.");
+      setBusy(false);
+      return { ok: false, code: "session_id_missing" };
+    }
+    try {
+      const result = await load(sessionId);
+      if (!result?.ok) {
+        sessionLaunchStatus(root, result?.message ?? "The new host session could not be loaded; the current view remains active.");
+        return result ?? { ok: false, code: "session_load_failed" };
+      }
+      if (existingId) existingId.value = sessionId;
+      sessionLaunchStatus(root, `Competitive session loaded: ${sessionId}`);
+      return { ok: true, session_id: sessionId, envelope: result.envelope ?? response };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recorder?.recordFailure({ class: "adapter_error", message, recoverable: true });
+      sessionLaunchStatus(root, `Session started, but its presentation could not be loaded: ${message}`);
+      return { ok: false, code: "session_load_error", message };
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  form?.addEventListener("submit", startSession);
+  loadButton?.addEventListener("click", loadExisting);
+  if (!adapter?.startSession) {
+    sessionLaunchStatus(root, "Configure a host adapter to start or load a session; the demo fixture remains available.");
+  }
+  return { start: startSession, load: loadExisting };
+}
+
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
   let currentEnvelope = null;
+  let sessionId = adapter?.sessionId;
   const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
@@ -1283,30 +1422,46 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     return { ok: true, fixture };
   }
 
-  async function load(sessionId = adapter?.sessionId) {
-    configureRecovery(root, () => load(sessionId), recorder);
+  async function load(nextSessionId = sessionId) {
+    const requestedSessionId = String(nextSessionId ?? "").trim();
+    const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
+    configureRecovery(root, () => load(requestedSessionId), recorder);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Loading read-only presentation…");
+    if (adapter && !requestedSessionId) {
+      setPresentationState(root, "A host session ID is required before loading presentation data.");
+      showRecovery(root, "Enter or start a host session before loading the presentation.");
+      return { ok: false, code: "session_id_missing" };
+    }
     if (!adapter || typeof adapter.getPresentation !== "function") {
       if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
-        return campaignCoverageClient.load(sessionId);
+        const result = await campaignCoverageClient.load(requestedSessionId);
+        if (result.ok) sessionId = requestedSessionId;
+        return result;
       }
       recordPlaytestFailure(recorder, "read_only_adapter_missing", "No read-only presentation adapter is configured.");
       showRecovery(root, "No live read adapter is configured. Load a host adapter, then retry the current read.");
       return renderStaticFixture();
     }
     try {
-      const envelope = await adapter.getPresentation(sessionId);
+      const envelope = await adapter.getPresentation(requestedSessionId);
       if (!envelope) {
-        clearReadOnlySurface(root, "The read-only adapter returned no presentation data.");
+        if (!replacingSession) clearReadOnlySurface(root, "The read-only adapter returned no presentation data.");
         recordPlaytestFailure(recorder, "adapter_error", "The read-only adapter returned no presentation data.");
         showRecovery(root, "The host returned no presentation. Retry the current read.");
         return { ok: false, code: "empty_presentation" };
       }
+      const validation = validateReadOnlyEnvelope(envelope);
+      if (!validation.ok) {
+        recordPlaytestFailure(recorder, validation.code, "The replacement presentation schema is unavailable.");
+        showRecovery(root, "The host returned an unsupported presentation. The current session remains active.");
+        return validation;
+      }
       const result = render(envelope);
       if (result.ok) {
-        await regionalWorldClient.load(sessionId);
-        await campaignCoverageClient.load(sessionId);
+        await regionalWorldClient.load(requestedSessionId);
+        await campaignCoverageClient.load(requestedSessionId);
+        sessionId = requestedSessionId;
       }
       if (!result.ok) {
         recordPlaytestFailure(recorder, result.code, "The read-only presentation schema is unavailable.");
@@ -1316,14 +1471,15 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      clearReadOnlySurface(root, `Read-only adapter error: ${message}`);
+      if (!replacingSession) clearReadOnlySurface(root, `Read-only adapter error: ${message}`);
       recordPlaytestFailure(recorder, "read_only_adapter_error", message);
       showRecovery(root, `Read-only adapter error: ${message}`);
       return { ok: false, code: "adapter_error", message };
     }
   }
 
-  return { load, render, renderStaticFixture, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
+  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
+  return { load, render, renderStaticFixture, sessionLauncher, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -1617,17 +1773,25 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     return { ok: true, envelope: response };
   }
 
-  async function load(nextSessionId = adapter?.sessionId) {
-    sessionId = nextSessionId;
-    configureRecovery(root, () => load(sessionId), recorder);
+  async function load(nextSessionId = sessionId) {
+    const requestedSessionId = String(nextSessionId ?? "").trim();
+    const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
+    configureRecovery(root, () => load(requestedSessionId), recorder);
     setActionControls(root, false);
     renderActions([], root);
     const actionMode = root.querySelector("#action-mode");
     if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
     setPresentationState(root, "Loading action catalog…");
+    if (adapter && !requestedSessionId) {
+      setPresentationState(root, "A host session ID is required before loading actions.");
+      showRecovery(root, "Enter or start a host session before loading the action catalog.");
+      return { ok: false, code: "session_id_missing" };
+    }
     if (!adapter || typeof adapter.getActionCatalog !== "function" || typeof adapter.validateTurn !== "function") {
       if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
-        return campaignCoverageClient.load(sessionId);
+        const result = await campaignCoverageClient.load(requestedSessionId);
+        if (result.ok) sessionId = requestedSessionId;
+        return result;
       }
       setPresentationState(root, "Action adapter unavailable; read-only mode remains active.");
       recordPlaytestFailure(recorder, "action_adapter_missing", "No action catalog and validation adapter is configured.");
@@ -1635,8 +1799,20 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       return { ok: false, code: "action_adapter_missing" };
     }
     try {
+      const presentation = typeof adapter.getPresentation === "function"
+        ? await adapter.getPresentation(requestedSessionId)
+        : null;
+      const nextCatalog = await adapter.getActionCatalog(requestedSessionId);
+      if (!nextCatalog || nextCatalog.schema_version !== "competitive-actions-v1") {
+        throw new Error("Unsupported action catalog schema.");
+      }
       if (typeof adapter.getPresentation === "function") {
-        const presentation = await adapter.getPresentation(sessionId);
+        const validation = validateReadOnlyEnvelope(presentation);
+        if (!validation.ok) {
+          recordPlaytestFailure(recorder, validation.code, "The replacement action presentation schema is unavailable.");
+          showRecovery(root, "The host returned an unsupported presentation. The current session remains active.");
+          return validation;
+        }
         const rendered = renderReadOnlyEnvelope(presentation, root);
         if (!rendered.ok) {
           recordPlaytestFailure(recorder, rendered.code, "The action presentation schema is unavailable.");
@@ -1647,13 +1823,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         renderOnboarding(presentation, root, recorder);
         recordVisibleEnvelope(recorder, presentation);
         audioClient.setMusicFromVisible(presentation);
-        await regionalWorldClient.load(sessionId);
-        await campaignCoverageClient.load(sessionId);
+        await regionalWorldClient.load(requestedSessionId);
+        await campaignCoverageClient.load(requestedSessionId);
       }
-      catalog = await adapter.getActionCatalog(sessionId);
-      if (!catalog || catalog.schema_version !== "competitive-actions-v1") {
-        throw new Error("Unsupported action catalog schema.");
-      }
+      catalog = nextCatalog;
       renderActionCatalog(catalog, root, (spec, params, form) => {
         const draft = { action_id: spec.id, params, command: actionCommand(spec, params) };
         if (editingIndex == null) drafts.push(draft);
@@ -1671,10 +1844,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       renderDraftState();
       renderValidation(null, root);
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
+      sessionId = requestedSessionId;
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "action_adapter_error", message);
+      if (replacingSession) setPresentationState(root, `Replacement session could not be loaded; the current session remains active: ${message}`);
       setActionControls(root, false);
       if (actionMode) actionMode.textContent = "read-only view · action adapter unavailable";
       setPresentationState(root, `Action adapter error: ${message}`);
@@ -1685,7 +1860,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
-  return { load, validate: validateDraft, submit, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
+  return { load, validate: validateDraft, submit, sessionLauncher, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2017,6 +2193,7 @@ if (typeof document !== "undefined") {
       createAudioClient,
       createActionClient,
       createCampaignCoverageClient,
+      createSessionLauncher,
       createPresentationSettings,
       createRegionalWorldClient,
       createResolutionClient,
@@ -2042,6 +2219,7 @@ if (typeof document !== "undefined") {
       createAudioClient,
       createActionClient,
       createCampaignCoverageClient,
+      createSessionLauncher,
       createPresentationSettings,
       createRegionalWorldClient,
       createResolutionClient,

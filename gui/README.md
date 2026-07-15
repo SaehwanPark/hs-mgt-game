@@ -1,6 +1,6 @@
-# GUI executive desktop, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, and optional audio
+# GUI executive desktop, campaign launch/load, campaign coverage, AI-testplay readiness, accessibility, contextual action builder, and optional audio
 
-This is a dependency-free Phase 2/3/4/5/6/7/8/10 browser surface over typed actor-visible
+This is a dependency-free Phase 2/3/4/5/6/7/8/10/11 browser surface over typed actor-visible
 MCP presentation, action, and resolution contracts plus optional generated
 audio. Open `index.html` through a static file server and provide a live or
 recorded read-only adapter:
@@ -8,6 +8,7 @@ recorded read-only adapter:
 ```js
 window.HsMgtGameReadOnlyAdapter = {
   sessionId: "session-1",
+  async startSession({ campaign, seed, difficulty }) {},
   async getPresentation(sessionId) {
     // Call get_presentation or return a recorded envelope with the same schema.
   },
@@ -31,6 +32,7 @@ and submits only an unchanged batch that the host marked valid:
 ```js
 window.HsMgtGameActionAdapter = {
   sessionId: "session-1",
+  async startSession({ campaign, seed, difficulty }) {},
   async getPresentation(sessionId) {},
   async getRegionalWorld(sessionId) {},
   async getActionCatalog(sessionId) {},
@@ -111,7 +113,7 @@ The analysis preserves campaign/role/task/seed/accessibility distinctions and
 emits only deterministic evidence-gap/recovery hypotheses plus explicit limits;
 it never changes the GUI, simulation, or host history.
 
-Phase 2/3/4/5/6/7/8/10 review checklist:
+Phase 2/3/4/5/6/7/8/10/11 review checklist:
 
 - load a live or recorded envelope and observe the loading-to-loaded state;
 - locate typed cash, AP, political capital, trust, and session metadata;
@@ -150,6 +152,12 @@ Phase 2/3/4/5/6/7/8/10 review checklist:
   non-color symbol/pattern cue;
 - hide optional cue explanations and confirm written results, observations,
   history, resolution, and debrief remain visible.
+- start `competitive-regional-v1` through an adapter that maps to the existing
+  host session-start operation, confirm the returned session ID loads typed
+  presentation, then load an existing session ID;
+- exercise missing start capability, malformed session envelopes, invalid seed,
+  and failed replacement loads without losing the current rendered session or
+  calling command submission.
 
 This checklist is a technical/interface-task proxy, not human usability or
 lived-accessibility evidence.
@@ -161,7 +169,9 @@ inputs, private rival actions, or client-side cost formula. Phase 5 audio, Phase
 regional-world projection, and Phase 7 campaign coverage are optional,
 visible-only, registry-recorded, and presentation-only; Phase 8 capture and
 diagnostics plus Phase 9 comparison are optional, allowlisted, and
-presentation/test evidence only. Phase 10 accessibility behavior is local
-presentation state and does not establish human accessibility. Richer causal
+ presentation/test evidence only. Phase 10 accessibility behavior is local
+presentation state and does not establish human accessibility. Phase 11
+session launch/load is an optional host adapter boundary and does not create
+local session state. Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.

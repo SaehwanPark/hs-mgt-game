@@ -1555,3 +1555,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: For every user-facing setting, pair a stable control with an
   observable effect, a storage fallback, and a boundary test proving it cannot
   reach host commands or simulation state.
+
+## Phase 11: Session launch must commit only after the replacement read succeeds
+
+- Context: The GUI previously assumed an adapter-owned `sessionId`, while the
+  planned first competitive slice begins with starting or loading a campaign.
+- Risk: Replacing the active ID immediately after a start response could leave
+  the action, regional, and campaign clients pointed at a session whose typed
+  presentation failed to load.
+- Resolution: Keep the current view until the existing presentation/action
+  load path succeeds, then replace the active session ID and refresh shared
+  surfaces. Treat missing start capability and malformed envelopes as
+  recoverable adapter conditions, never as an invitation to create local game
+  state.
+- Prevention: Test valid start/load, malformed responses, failed replacement
+  loads, and the absence of command submission as one boundary contract.
