@@ -4,6 +4,32 @@ All notable project changes should be recorded here.
 
 The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
 
+## [0.12.15] - 2026-07-14
+
+### Added
+- Added a complete evidence-gated visual/audio Future track to `SPEC.md`,
+  covering the persistent regional interface, canonical graphical actions,
+  causal resolution, audio, assets, accessibility, campaign rollout, the first
+  competitive-month slice, phase gates, and verification.
+- Added the planned presentation architecture for actor-visible DTOs,
+  non-authoritative client state, visible-only audio mappings, asset provenance,
+  replay safety, accessibility, and campaign-specific reuse.
+
+### Changed
+- Replaced budget-dependent human testplay phases in the visual/audio proposal
+  with reproducible AI-agent roles, tasks, capture artifacts, diagnostics, and
+  evidence classifications.
+- Ranked visual/audio Phase 0 as the next Future candidate without promoting or
+  implementing it, and bumped package/public metadata to `0.12.15`.
+
+### Evidence Limits
+- AI testplays are development proxies for task completion, traceability, and
+  interface interpretation. They do not establish human usability, engagement,
+  lived accessibility, learning, classroom effectiveness, domain-expert
+  validity, calibration, balance, or policy validity.
+- No simulation, interface implementation, asset, dependency, packaging,
+  publication, or deployment behavior changed.
+
 ## [0.12.14] - 2026-07-12
 
 ### Changed

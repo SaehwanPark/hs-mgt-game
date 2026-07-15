@@ -4027,6 +4027,25 @@ Verification:
 - Release metadata, documentation diff/link review, Rust quality checks, and
   GUI syntax/static contract checks pass.
 
+### Visual and audio SDD planning (v0.12.15)
+
+- Adapted the visual/audio proposal so reproducible AI-agent playtests replace
+  budget-dependent human testplays while human-experience claims remain
+  explicitly deferred.
+- Added the complete phased Future contract, first competitive-month slice,
+  visual/audio/asset/accessibility requirements, promotion gates, AI-testplay
+  protocol, evidence limits, contributor boundaries, risk controls, and stop
+  rules to this specification.
+- Added the planned thin-client presentation boundary to `ARCHITECTURE.md` and
+  ranked only Phase 0 as the next promotion candidate.
+- Bumped package and public milestone metadata to `0.12.15` without changing
+  runtime behavior.
+
+Verification:
+
+- Proposal-to-SPEC coverage, domain-boundary QA, AI-testplay wording review,
+  release metadata consistency, and documentation diff checks pass.
+
 ## Present
 
 - Feature: Evidence-gated continuation

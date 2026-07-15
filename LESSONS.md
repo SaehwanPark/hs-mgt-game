@@ -1391,3 +1391,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep durable phase descriptions intact, but review the roadmap's
   current-position and immediate-next-step sections at each documentation or
   release-status alignment change.
+
+## Separate Intended Users From Affordable Validation
+
+- Context: Translating the visual/audio proposal into an implementable SDD plan
+  when recruited human testplays were outside the available budget.
+- Symptom: Replacing people with agents can accidentally turn an affordable
+  development proxy into unsupported claims about human usability, enjoyment,
+  accessibility, domain expertise, or learning.
+- Resolution: Preserved humans as the intended audience, replaced only the
+  testplay method with declared AI roles/tasks/seeds and reproducible UI,
+  command, cue, history, replay, screenshot, and semantic captures, and labeled
+  every human-experience claim as deferred.
+- Prevention: For each validation gate, name both what the affordable method can
+  establish and what still requires separately funded work with people.
