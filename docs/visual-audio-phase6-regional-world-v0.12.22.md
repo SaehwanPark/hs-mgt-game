@@ -1,6 +1,6 @@
 # Visual and Audio Phase 6 — Regional Map and Persistent World
 
-Status: Implemented and reviewed on the Phase 6 branch; ready for PR handoff.
+Status: Implemented, reviewed once, and merged in PR #173.
 
 Phase 6 makes the `competitive-regional-v1` situation navigable as a schematic
 institutional world. The host supplies actor-visible identities, owned detail,

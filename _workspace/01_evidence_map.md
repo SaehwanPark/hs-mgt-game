@@ -1,53 +1,65 @@
-# Evidence Map — Visual/audio Phase 13 first-month continuity v0.12.29
+# Evidence Map — Visual/audio first-month contract audit v0.12.30
 
-## Sources reviewed
+## Scope
 
-- `SPEC.md` product contract, intended experience, presentation/action
-  boundary, evidence-gated sequence, first competitive vertical slice, and
-  promotion rules.
-- `docs/visual_audio_upgrade_proposal.md` sections 4, 7, 8, 9, 14, 15, and
-  16, especially the exact one-month experience and integration test gate.
-- Phase 0–12 alignment/protocol documents and their focused test contracts.
-- `gui/app.mjs`, `gui/index.html`, `gui/README.md`, `gui/audio.mjs`,
-  `gui/playtest.mjs`, and existing GUI launch/action/resolution tests.
-- Canonical README, proposal, roadmap, design principles, architecture, and
-  harness team spec.
+Audit the existing technical first-month `competitive-regional-v1` contract
+after the Phase 13 merge. This is a source-and-test evidence task, not a new
+simulation or user-study claim.
 
-## Observed gap
+## Sources Reviewed
 
-The browser already has separate working boundaries for session launch/load,
-read-only presentation, regional-world reads, campaign coverage, action
-catalog/validation, resolution, refreshed presentation, and optional audio.
-The client does not expose one explicit, testable presentation contract that
-connects those handoffs into the planned first-month path. Existing behavior
-is therefore available but difficult to audit as a complete vertical slice.
+- `SPEC.md`, `docs/visual_audio_upgrade_proposal.md`, and the Phase 0–13
+  protocol documents.
+- `gui/app.mjs`, `gui/audio.mjs`, `gui/first-month.mjs`, `gui/visual.mjs`,
+  `gui/index.html`, and focused GUI tests.
+- The merged Phase 13 handoff and current `main` history/PR state.
 
-## Evidence classification
+## Mechanisms and Institutions
 
-- Technical correctness: a deterministic stage vocabulary and adapter-sequence
-  test can verify the handoff order and failure behavior.
-- Interface-task proxy: the visible rail can expose where the client is in the
-  host-shaped workflow and preserve text when actions or resolution are not
-  available.
-- Unresolved human question: whether the rail improves comprehension, reduces
-  friction, or feels inviting requires later human evaluation and is not
-  promoted by this slice.
+- The executive uses one presentation path to inspect the regional market,
+  owned facilities, workforce/capacity pressure, and public payer/rival
+  context before choosing actions.
+- The host/core remains the authority for command legality, costs, delays,
+  stochastic resolution, committed effects, observations, history, replay, and
+  debriefs.
+- The browser only presents host-visible data, local drafts/settings/pacing,
+  and visible audio equivalents.
 
-## Boundary evidence
+## Actor Incentives and Information
 
-- `createSessionLauncher` owns only host start/load requests and delegates the
-  presentation read to the existing client loader.
-- `createActionClient` already keeps draft actions local, requires unchanged
-  host validation, submits only through `submitTurn`, reads resolution without
-  advancing it, and refreshes actor-visible presentation afterward.
-- `createReadOnlyClient` remains submit-free.
-- `createFirstMonthFlow` will own only local stage rendering and a small
-  serializable state projection; it will not receive adapter payloads or enter
-  replay/history/hash data.
+- The player acts on actor-visible observations, not true or private rival
+  state. Public rival information remains limited by the existing host
+  projection.
+- The audit records interface-task traceability, not player utility, social
+  welfare, or educational learning.
 
-## Unresolved questions
+## Assumptions
 
-- Whether a later browser host needs a richer flow event contract remains
-  separate; this slice uses the current local client boundary.
-- Whether a first-month rail should become campaign-specific is deferred until
-  a later campaign coverage gate.
+- The merged Phase 0–13 contracts are the current implementation of the
+  proposal's bounded technical sequence.
+- Source/test marker checks are appropriate for a dependency-free repository
+  audit; they do not replace browser execution or human evaluation.
+- The existing release metadata checker is the version authority.
+
+## Unresolved Questions
+
+- Browser transport, visual rendering at real viewports, contrast measurement,
+  screen-reader behavior, and live audio hardware remain unverified here.
+- Human usability, lived accessibility, learning, engagement, calibration,
+  balance, policy validity, and domain-expert agreement remain separately
+  authorized work.
+
+## Design Implications
+
+- Close the bounded technical sequence only with a deterministic audit artifact
+  that fails closed when an obligation loses its source or test evidence.
+- Keep deferred human and asset-production work visible as explicit limits rather
+  than turning technical coverage into a product-success claim.
+
+## Risks
+
+- Marker audits can overfit source text. Mitigate with focused behavioral Node
+  tests, existing host-boundary tests, and a review of the surrounding code.
+- A closed technical sequence can be mistaken for a polished or validated
+  release. Mitigate with claim-class and evidence-limit fields in the artifact
+  and closure document.

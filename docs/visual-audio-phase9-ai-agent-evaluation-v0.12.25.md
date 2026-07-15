@@ -1,6 +1,6 @@
 # Visual and Audio Phase 9 — AI-Agent Evaluation and Revision
 
-Status: Implemented, verified, and reviewed once on the Phase 9 branch.
+Status: Implemented, verified, reviewed once, and merged in PR #176.
 
 Phase 9 closes the current visual/audio sequence with a deterministic comparison
 surface for repeated `gui-playtest-v1` artifacts. It reports declared coverage,

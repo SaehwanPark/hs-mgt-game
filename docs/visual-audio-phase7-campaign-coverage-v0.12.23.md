@@ -1,6 +1,6 @@
 # Visual and Audio Phase 7 — Campaign Coverage
 
-Status: Implemented, verified, and reviewed on the Phase 7 branch.
+Status: Implemented, verified, reviewed once, and merged in PR #174.
 
 Phase 7 extends the validated presentation boundary to the existing
 `stabilization-v1` and `regional-affiliation-v1` campaigns. It adds a shared

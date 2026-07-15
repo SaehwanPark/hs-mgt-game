@@ -1,0 +1,25 @@
+{
+  "schema_version": "visual-audio-first-month-contract-v1",
+  "status": "complete",
+  "scope": "bounded technical first-month visual/audio contract",
+  "requirements": [
+    {"id": "launch_load", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_session_launch.py"]},
+    {"id": "market_inspection", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_regional_world.py"]},
+    {"id": "owned_facilities", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_static_desktop.py"]},
+    {"id": "visible_pressure_intelligence", "status": "pass", "source_evidence": ["gui/app.mjs", "gui/visual-catalog.json"], "test_evidence": ["tests/test_gui_regional_world.py", "tests/test_gui_static_desktop.py"]},
+    {"id": "contextual_actions", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_contextual_actions.py", "tests/test_gui_first_month.py"]},
+    {"id": "canonical_submission", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_contextual_actions.py", "tests/test_gui_first_month.py"]},
+    {"id": "resolution_metrics", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_resolution.py"]},
+    {"id": "causal_feedback", "status": "pass", "source_evidence": ["gui/app.mjs"], "test_evidence": ["tests/test_gui_resolution.py"]},
+    {"id": "optional_audio", "status": "pass", "source_evidence": ["gui/audio.mjs", "gui/index.html"], "test_evidence": ["tests/test_gui_accessibility.py", "tests/test_gui_audio.py"]},
+    {"id": "continuation", "status": "pass", "source_evidence": ["gui/app.mjs", "gui/first-month.mjs"], "test_evidence": ["tests/test_gui_first_month.py"]}
+  ],
+  "phase_documents": {"status": "pass", "count": 14},
+  "provenance": {"status": "pass", "files": ["gui/audio-catalog.json", "gui/visual-catalog.json", "gui/ASSET_CREDITS.md"]},
+  "presentation_boundary": {"status": "pass", "violations": []},
+  "evidence_limits": [
+    "No browser transport, viewport rendering, contrast, screen-reader, or hardware-audio claim.",
+    "No human usability, lived accessibility, learning, engagement, calibration, balance, policy-validity, or domain-expert claim.",
+    "No claim that technical coverage is a production release or a calibrated policy forecast."
+  ]
+}

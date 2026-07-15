@@ -1,6 +1,6 @@
 # Visual/audio Phase 12 — Visual identity and marker provenance
 
-**Status:** Implemented and verified; exactly one general code-review pass complete
+**Status:** Implemented, verified, reviewed once, and merged in PR #179
 **Scope:** Presentation-only identity, marker, and generated-asset provenance
 **Version:** 0.12.28
 

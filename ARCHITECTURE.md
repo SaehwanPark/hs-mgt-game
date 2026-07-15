@@ -187,11 +187,14 @@ schematic regional-world projection for `competitive-regional-v1` in `gui/`,
 Phase 7 adds bounded campaign coverage for stabilization and affiliation, and
 Phase 8 adds local readiness controls, recovery, and allowlisted AI-agent
 testplay capture/diagnostics. The GUI remains a non-authoritative thin client;
-broad map/world assets remain future work, while Phase 9 adds deterministic
-capture comparison and decision logging outside the client/core, and Phase 10
-adds local accessibility/visual-language presentation controls. Phase 13 adds
-first-month continuity evidence without changing authority. All future work
-should follow
+broad map/world assets remain future work outside the bounded sequence, while
+Phase 9 adds deterministic capture comparison and decision logging outside the
+client/core,
+Phase 10 adds local accessibility/visual-language presentation controls, Phase
+11 adds launch/load, Phase 12 adds generated visual identity, and Phase 13 adds
+first-month continuity evidence without changing authority. The v0.12.30
+first-month contract audit closes the bounded Phase 0–13 technical sequence;
+all future work should follow
 this one-way authority flow:
 
 ```text
@@ -330,6 +333,13 @@ resolution/refresh failures recoverable, and never enters host payloads,
 client-side legality or outcome formulas, transitions, stochastic inputs,
 histories, hashes, replay artifacts, audio classification, or debrief output.
 
+The v0.12.30 audit at
+[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md)
+records source/test evidence for the complete bounded first-month path. It is a
+read-only repository check and does not claim browser transport, human
+usability, lived accessibility, learning, engagement, calibration, balance,
+policy validity, or domain-expert agreement.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -361,10 +371,13 @@ Phase 12 visual identity/marker scope is documented in
 [`docs/visual-audio-phase12-visual-identity-v0.12.28.md`](docs/visual-audio-phase12-visual-identity-v0.12.28.md).
 Phase 13 first-month continuity scope is documented in
 [`docs/visual-audio-phase13-first-month-continuity-v0.12.29.md`](docs/visual-audio-phase13-first-month-continuity-v0.12.29.md).
+The bounded first-month audit is documented in
+[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain
-presentation/distribution concerns; broad asset-backed audio remains planned.
+presentation/distribution concerns; third-party asset acquisition and broad
+asset-backed production remain explicitly outside this bounded closure.
 
 ## Durable Constraints
 

@@ -1,6 +1,6 @@
 # Visual and Audio Phase 8 — AI-Agent Testplay Readiness
 
-Status: Implemented, verified, and reviewed once on the Phase 8 branch.
+Status: Implemented, verified, reviewed once, and merged in PR #175.
 
 Phase 8 prepares the dependency-free browser presentation for reproducible
 AI-agent interface tasks. It adds onboarding, local settings/accessibility

@@ -1,6 +1,6 @@
 # Visual and Audio Phase 2 — Live Read-Only Integration
 
-Status: Implemented for the `competitive-regional-v1` campaign.
+Status: Implemented and merged for the `competitive-regional-v1` campaign in PR #169.
 
 Date: 2026-07-15
 

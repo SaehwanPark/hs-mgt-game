@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.12.30] - 2026-07-15
+
+- Added a deterministic `visual-audio-first-month-contract-v1` audit covering
+  the bounded competitive first-month presentation path from host-authoritative
+  launch through continuation.
+- Recorded source/test evidence for market and facility inspection, visible
+  pressure and rival/payer context, canonical action validation/submission,
+  resolution metrics/effects, optional audio, and provenance files.
+- Closed the bounded technical visual/audio sequence in the active SPEC while
+  preserving browser, human-evaluation, asset-production, calibration, balance,
+  policy-validity, and domain-expert limits.
+- Bumped package/public metadata to `0.12.30`; no Rust/MCP or runtime behavior
+  changed.
+
 ## [0.12.29] - 2026-07-15
 
 - Added a local `competitive-first-month-v1` text-first rail connecting the
