@@ -240,6 +240,20 @@
       .entity-card:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
       .entity-card strong { display: block; margin: .35rem 0; }
       .entity-icon, .facility-icon { color: var(--teal); font-size: 1.35rem; font-weight: 900; }
+      .visual-token { align-items: center; border: 1px solid currentColor; border-radius: 999px; display: inline-flex; gap: .25rem; line-height: 1.2; max-width: 100%; padding: .18rem .45rem; width: fit-content; }
+      .visual-token--identity { font-weight: 800; }
+      .visual-token--marker { color: var(--teal-dark); font-size: .78rem; font-weight: 750; }
+      .visual-token-symbol { font-weight: 900; }
+      .visual-token-label { overflow-wrap: anywhere; }
+      .identity-riverside { color: var(--teal-dark); }
+      .identity-northlake { color: var(--blue); }
+      .identity-summit { color: var(--purple); }
+      .identity-generic, .marker-generic { color: var(--muted); }
+      .marker-facility, .marker-capacity { color: var(--teal-dark); }
+      .marker-demand, .marker-staffing { color: var(--orange); }
+      .marker-project, .marker-timeline { color: var(--blue); }
+      .marker-payer-policy { color: var(--purple); }
+      .visual-legend { color: var(--muted); font-size: .8rem; margin: var(--space-3) 0 0; }
       .entity-card p, .facility-card p { color: var(--muted); font-size: .86rem; margin-bottom: .5rem; }
       .regional-navigation { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 var(--space-3); }
       .regional-navigation button { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; color: var(--teal); font-size: .78rem; font-weight: 750; padding: .4rem .55rem; }
@@ -563,6 +577,7 @@
           <h3>Visible overlays</h3>
           <ul class="regional-overlay-list" id="regional-overlay-list"></ul>
         </div>
+        <p class="visual-legend">Identity and marker vocabulary: labels and symbols orient the visible map, facility, pressure, and process categories. They do not add hidden information.</p>
       </section>
 
       <section class="panel panel--entity" aria-labelledby="entity-heading">

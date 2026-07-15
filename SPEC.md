@@ -4300,7 +4300,7 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     all actionable findings fixed and reverified.
 
 - Feature: Visual/audio Phase 11 first-session launch/load boundary
-  Status: Active; design complete and implementation is pending
+  Status: Closed; Phase 12 visual identity and marker provenance is the active gated slice
   Started: 2026-07-15
   Branch: feat/visual-audio-phase11-session-launch-v0.12.27
 
@@ -4325,8 +4325,8 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
     actionable findings were fixed and reverified.
 
   Not Yet Done:
-  - Complete PR/CI/merge and the post-merge audit; exactly one general code
-    review is complete with its actionable findings fixed.
+  - No further Phase 11 implementation is planned; preserve its technical
+    launch/load proxy limits while the next bounded slice proceeds.
 
   Deferred / Non-Goals:
   - No scenario picker, saved-session persistence, auth, web transport,
@@ -4340,13 +4340,51 @@ gated slice. Package and public metadata were bumped to `0.12.22`.
   - Rust, formatting, Clippy, Node syntax, release metadata, and diff checks
     pass; no Rust/MCP behavior changed.
 
+- Feature: Visual/audio Phase 12 visual identity and marker provenance
+  Status: Active; implementation and exactly one general code review complete; PR/merge pending
+  Started: 2026-07-15
+  Branch: feat/visual-audio-phase12-visual-identity-v0.12.28
+
+  Summary:
+  Phase 12 narrows the remaining first-slice visual-language gap to a stable,
+  generated vocabulary for system identity, facility/metric/process markers,
+  and the existing non-color status language. The browser uses only visible
+  IDs, names, kinds, labels, and categories; the host remains authoritative.
+
+  Done:
+  - Added the Phase 12 request, evidence map, mechanism design,
+    implementation plan, and protocol document.
+  - Added the generated `visual-catalog-v1` module and machine-readable
+    registry for system identities, category markers, status vocabulary, and
+    explicit generic fallback.
+  - Added semantic identity/marker tokens to the regional map, selected detail,
+    facilities, overlays, pending processes, and campaign process rows while
+    retaining source/status text.
+  - Added focused visual identity tests, provenance credits, and bumped release
+    metadata to `0.12.28`.
+
+  Not Yet Done:
+  - Finish CI/PR/merge and re-audit the queue.
+
+  Deferred / Non-Goals:
+  - No Rust/MCP schema, simulation, command, transition, stochastic,
+    history/hash/replay, debrief, audio-source, network, geography, animation,
+    licensed asset, campaign, or human-evaluation change.
+
+  Verification:
+  - Focused visual-catalog plus existing GUI/audio/accessibility/regional/static/
+    release tests: 32 passed; full Python discovery: 299 passed.
+  - Node syntax, Rust tests/formatting/Clippy, release metadata, diff checks,
+    and domain QA pass; no Rust/MCP source changed.
+
 ## Future
 
 ### Visual and audio experience upgrade
 
 Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
-Status: Phase 10 presentation hardening is implemented; the broader product
-contract and first competitive vertical slice remain incomplete.
+Status: Phase 11 launch/load is implemented and Phase 12 visual identity is
+the active bounded slice; the broader product contract and first competitive
+vertical slice remain incomplete.
 No later feature should be read as implemented merely because the current `gui/`
 prototype or Phase 6–10 documents exist.
 
@@ -4361,7 +4399,8 @@ prototype or Phase 6–10 documents exist.
   settings/recovery, allowlisted testplay capture/diagnostics, and a
   non-authoritative repeated-capture analyzer/decision log, plus Phase 10
   keyboard navigation, status language, text scaling, and cue-explanation
-  controls on the active branch. It remains a thin client and is not the
+  controls, Phase 11 session launch/load, and the Phase 12 visual identity
+  catalog on the active branch. It remains a thin client and is not the
   campaign-complete GUI described here.
 
 #### Phase 0 alignment (`Done`)
@@ -4661,6 +4700,7 @@ prototype or Phase 6–10 documents exist.
 | 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
 | 10. Accessibility and visual-language hardening | Keyboard landmarks, non-color status vocabulary, local text scaling, and optional cue-explanation control | Static semantic, settings, responsive, reduced-motion, and boundary checks pass without changing host state or claiming lived access |
 | 11. First-session launch/load boundary | Host-authoritative competitive session start/load handoff into the existing first-month presentation | Start/load calls map to the existing host session contract, malformed/failed responses recover, and no transition or local simulation is introduced |
+| 12. Visual identity and marker provenance | Generated system identities, facility/metric/process markers, explicit generic fallback, and machine-readable visual registry | Known and unknown visible entities render stable semantic tokens, provenance is complete, and no host/simulation boundary changes |
 
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
 slice; do not start broad campaign, map, or asset production merely because that
@@ -4809,9 +4849,9 @@ names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-1. Complete and close Phase 11 first-session launch/load, then audit the
-   remaining first-month action/resolution/audio/asset contract against the
-   proposal before selecting the next bounded item.
+1. Complete and close Phase 12 visual identity/marker provenance, then audit
+   the remaining first-month product contract against the proposal before
+   selecting the next bounded item.
 2. Human usability, lived accessibility, learning, engagement, calibration,
   balance, policy validity, and domain-expert evaluation remain separately
   gated Future work.

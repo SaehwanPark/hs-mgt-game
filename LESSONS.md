@@ -1570,3 +1570,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   state.
 - Prevention: Test valid start/load, malformed responses, failed replacement
   loads, and the absence of command submission as one boundary contract.
+
+## Phase 12: Visual tokens must remain presentation vocabulary
+
+- Context: The first competitive regional desktop used generic glyphs even
+  though the proposal requires stable system identities and category markers.
+- Risk: A visual catalog can accidentally become a second source of actor
+  state, infer severity from metrics, or introduce unreviewed asset rights.
+- Resolution: Map only visible IDs/names/kinds/labels to generated text-plus-
+  symbol tokens, keep source/status text alongside each token, and use an
+  explicit generic fallback. Record the catalog and credits as project-
+  generated metadata with no external files.
+- Prevention: Treat identity/marker lookup as pure presentation code; assert
+  hidden fields, network calls, and third-party assets remain absent before
+  expanding the visual language.

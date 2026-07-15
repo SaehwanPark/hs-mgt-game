@@ -1,58 +1,60 @@
-# Final Handoff — Visual/audio Phase 11 First-Session Launch/Load v0.12.27
+# Final Handoff — Visual/audio Phase 12 Visual Identity and Marker Provenance v0.12.28
 
 ## Result
 
-Phase 11 adds a host-authoritative GUI entry point for the first competitive
-vertical slice. A user can choose the fixed competitive campaign, seed, and
-difficulty for an optional host `startSession` adapter, or load an existing
-session ID. The existing typed presentation/action/regional/campaign paths then
-render the host result. No browser simulation or host/MCP schema change was
-added.
+Phase 12 adds a generated, presentation-only `visual-catalog-v1` for the first
+competitive regional desktop. Riverside, Northlake, Summit, and an explicit
+generic identity fallback now have stable text-plus-symbol tokens. Facility,
+demand, capacity, project, staffing, payer/policy, timeline, generic, and
+existing status categories are labeled across the map, selected detail,
+overlays, pending processes, and campaign process rows. Source/status text and
+host authority remain intact.
 
 ## Changed files
 
-- `gui/index.html`: accessible start/load controls and status copy.
-- `gui/app.mjs`: shared session launcher, start/load validation, and delayed
-  active-session replacement in read-only/action clients.
-- `tests/test_gui_session_launch.py`: focused lifecycle, malformed-response,
-  capability-gap, and no-transition contract tests.
-- `docs/visual-audio-phase11-session-launch-v0.12.27.md` and aligned
+- `gui/visual.mjs` and `gui/visual-catalog.json`: pure lookup catalog and
+  machine-readable generated provenance.
+- `gui/app.mjs` and `gui/index.html`: semantic token rendering and styling at
+  existing presentation surfaces.
+- `gui/ASSET_CREDITS.md`: visual registry/credits with no third-party assets.
+- `tests/test_gui_visual_identity.py`: catalog, fallback, semantic, and
+  boundary tests.
+- `docs/visual-audio-phase12-visual-identity-v0.12.28.md` and aligned
   `SPEC.md`, `README.md`, `gui/README.md`, `ARCHITECTURE.md`, `CHANGELOG.md`,
   and `LESSONS.md`.
 - `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
   `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, the
   implementation plan, and this handoff.
-- Cargo/package metadata and release expectation at `0.12.27`.
+- Closed the merged Phase 11 SPEC bookkeeping and bumped metadata to `0.12.28`.
 
 ## Verification
 
-- Focused Phase 11/accessibility/release tests: 17 passed.
-- Full Python discovery: 294 passed.
-- Serial Rust suite: 322 unit tests, 3 competitive-AI tests, 2 golden-
-  competitive tests, 1 golden-stabilization test, 7 scenario tests, and zero
-  doc-test failures passed.
-- `cargo fmt -- --check`, Clippy with warnings denied, Node syntax checks,
-  release metadata, and `git diff --check` passed.
+- Focused visual identity plus existing GUI/audio/accessibility/regional/static/
+  release tests: 32 passed.
+- Full Python discovery: 299 passed.
+- `node --check gui/app.mjs`, `node --check gui/visual.mjs`, formatting,
+  Clippy with warnings denied, serial Rust tests, release metadata, and diff
+  checks pass.
 - Domain QA status: `pass`.
 - Exactly one general code-review pass completed. It found and fixed the
-  demo-fixture false-success path, replacement-session transactional ordering,
-  and start/load error-state handling; no second reviewer pass was run.
+  broad identity-substring fallback and duplicate status-symbol mapping; no
+  second reviewer pass was run.
 
 ## Workflow state
 
-- Task type: bounded first-session launch/load handoff.
-- Base branch: `main` at Phase 10 merge `bcef897`.
-- Working branch: `feat/visual-audio-phase11-session-launch-v0.12.27`.
-- PR handoff: ready after the final commit.
-- Next dependency: CI/merge and a post-merge audit of the remaining first-month
-  action, resolution, audio, asset, and human-evaluation contract.
+- Task type: bounded presentation visual-language and asset-provenance slice.
+- Base branch: `main` at Phase 11 merge `c89d93a`.
+- Working branch: `feat/visual-audio-phase12-visual-identity-v0.12.28`.
+- PR handoff: ready after final verification.
+- Next dependency: CI/merge and a post-merge audit of the remaining product
+  contract and first competitive vertical slice.
 
 ## Known limits and non-goals
 
-- The optional `startSession` method is an adapter boundary; no browser
-  transport, authentication, persistence, scenario picker, or deployment was
-  added.
-- Failed or malformed replacement loads preserve the existing active session
-  and do not submit commands or create local state.
-- Static checks cannot establish browser transport correctness, human
-  usability, accessibility, learning, engagement, or policy validity.
+- No host/MCP schema, simulation, command, transition, stochastic,
+  history/hash/replay, debrief, network, geography, animation, audio source,
+  or licensed asset changed.
+- Generated glyphs are a technical vocabulary, not evidence of polished visual
+  design, human recognition, lived accessibility, learning, or policy validity.
+- Unknown/future identities intentionally fall back to a generic visible token;
+  campaign-specific identity and asset-backed art require a later bounded gate.

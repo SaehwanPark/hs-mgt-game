@@ -312,6 +312,13 @@ malformed replacement loads preserve the current view. The launcher never
 submits a command, creates a transition, owns a simulation state, or changes
 history, hashes, replay, audio classification, or debrief output.
 
+Phase 12 adds only a browser-side `visual-catalog-v1` for generated system
+identity, facility/metric/process markers, and status-language provenance. The
+catalog maps visible IDs, names, kinds, labels, and categories to text-plus-
+symbol tokens with an explicit generic fallback. It does not calculate status,
+read hidden fields, add host DTO data, or enter commands, transitions, state
+hashes, replay artifacts, audio classification, or debrief output.
+
 Last Reviewed: 2026-07-15
 Status: Verified
 
@@ -339,6 +346,8 @@ Phase 10 accessibility and visual-language scope is documented in
 [`docs/visual-audio-phase10-accessibility-v0.12.26.md`](docs/visual-audio-phase10-accessibility-v0.12.26.md).
 Phase 11 first-session launch/load scope is documented in
 [`docs/visual-audio-phase11-session-launch-v0.12.27.md`](docs/visual-audio-phase11-session-launch-v0.12.27.md).
+Phase 12 visual identity/marker scope is documented in
+[`docs/visual-audio-phase12-visual-identity-v0.12.28.md`](docs/visual-audio-phase12-visual-identity-v0.12.28.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain

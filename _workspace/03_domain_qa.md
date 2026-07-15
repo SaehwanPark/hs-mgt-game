@@ -1,4 +1,4 @@
-# Domain QA — Visual/audio Phase 11 first-session launch/load v0.12.27
+# Domain QA — Visual/audio Phase 12 visual identity and marker provenance v0.12.28
 
 ## Status
 
@@ -6,58 +6,60 @@ pass
 
 ## Reviewed Inputs
 
-- User objective and Phase 11 request summary.
-- Phase 11 evidence map, mechanism design, implementation plan, and protocol
-  document.
-- `SPEC.md` first competitive vertical-slice requirements and the visual/audio
-  upgrade proposal's start/load requirements.
-- Existing `src/mcp/session.rs` `StartSessionRequest`/`SessionEnvelope` and
-  `docs/mcp-agent-interface.md`.
-- `gui/index.html`, `gui/app.mjs`, `gui/README.md`, and focused session-launch
-  and accessibility tests.
-- Canonical `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, and the harness team spec.
+- `SPEC.md` product contract, visual/motion language, presentation/action
+  boundary, asset/accessibility rules, Phase 11 closure, and Phase 12 entry.
+- `docs/visual_audio_upgrade_proposal.md` first vertical slice, visual identity,
+  asset registry, accessibility, and testing sections.
+- `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,
+  `_workspace/02_mechanism_design.md`, and the Phase 12 implementation plan.
+- `gui/visual.mjs`, `gui/visual-catalog.json`, `gui/app.mjs`,
+  `gui/index.html`, `gui/ASSET_CREDITS.md`, and focused tests.
+- Canonical README, proposal, roadmap, design principles, and harness team
+  spec.
 
 ## Findings
 
-- The slice adds no health-policy actor, institution, utility, strategic
-  interaction, command, outcome category, or transition mechanism. It only
-  exposes the existing host session lifecycle to the presentation layer.
-- New starts are fixed to `competitive-regional-v1`; seed and difficulty are
-  host session inputs, not strategy recommendations or outcome claims.
-- The optional `startSession` adapter maps to the existing MCP `start_session`
-  request/envelope. The browser requires a host-returned `session_id` and then
-  reads typed presentation/action data; it does not fabricate a fixture after a
-  successful start.
-- Failed or malformed replacement loads preserve the current active session
-  ID and rendered view. No launch/load path calls `submitTurn` or creates a
-  transition, stochastic input, history entry, hash, replay record, or debrief.
-- Read-only and action clients update their active session ID only after their
-  existing typed load path succeeds, preventing cross-client session drift.
-- The launcher exposes no private rival, payer, workforce, policy, community,
-  true-state, or hidden outcome information beyond the host envelopes already
-  supported by the GUI.
+- The change is presentation-only. The catalog maps visible IDs/names/kinds/
+  labels to tokens and does not add actors, policy levers, utilities,
+  measurements, formulas, or transition behavior.
+- Owned Riverside and public Northlake/Summit identity labels remain distinct;
+  the generic fallback makes unknown or missing visible identity explicit.
+- Facility, demand, capacity, project, staffing, payer/policy, timeline, and
+  generic markers are category labels, not claims about severity or outcome.
+- Existing host status text, status symbols/patterns, source labels, public
+  rival limitation text, and unavailable detail remain rendered alongside the
+  new tokens. No private rival state or unsupported geography is exposed.
+- Lookup is deterministic pure browser code. It does not enter commands,
+  transitions, stochastic inputs, history, hashes, replay, audio classification,
+  or debrief output.
+- Registry and credits explicitly record project-generated glyph/CSS primitives
+  and no third-party/downloaded assets. No Rust/MCP DTO change is present.
 
 ## Required Fixes
 
-None identified by domain QA. The user-required single general code-review pass
-remains a separate gate and must not be duplicated here.
+None for domain scope, observation boundaries, determinism, or educational
+claim discipline.
 
 ## Residual Risks
 
-- Static tests cannot verify a real browser-to-MCP transport, authentication,
-  deployment, or human first-time comprehension.
-- A future adapter could map setup inputs incorrectly; integration tests at the
-  transport boundary remain required when such an adapter exists.
-- Scenario selection, saved-session discovery, and cross-campaign launch remain
-  separate product decisions.
+- Name aliases could be too permissive for a future campaign; the current
+  aliases are limited to the three known competitive systems and unknown values
+  fall back explicitly.
+- Unicode glyph appearance and visual comfort vary by font/platform; human
+  recognition and lived accessibility remain unevaluated.
+- The registry proves provenance for generated primitives, not visual polish or
+  license readiness for future external assets.
+- Browser transport, real host integration, and human first-session outcomes
+  remain outside this technical slice.
 
 ## Verification Evidence
 
-- Focused Phase 11 launch/accessibility/release tests: 17 passed.
-- Full Python suite: 294 passed.
-- Rust: 322 unit tests, 3 competitive-AI tests, 2 golden-competitive tests, 1
-  golden-stabilization test, 7 scenario tests, and zero doc-test failures
-  passed.
-- `cargo fmt -- --check`, `cargo clippy --all-targets -- -D warnings`, Node
-  syntax checks, release metadata, and `git diff --check` passed.
+- Focused visual identity plus existing GUI/audio/accessibility/regional/static/
+  release tests: 32 passed.
+- Full Python discovery: 299 passed.
+- `node --check gui/app.mjs` and `node --check gui/visual.mjs` passed.
+- `cargo fmt -- --check`, `cargo clippy --all-targets -- -D warnings`, and
+  serial `cargo test --all -- --test-threads=1` passed: 322 library tests,
+  3 competitive-AI tests, 2 competitive golden tests, 1 stabilization golden
+  test, 7 scenario tests, and no doctest failures.
+- Release metadata and `git diff --check` passed for v0.12.28.
