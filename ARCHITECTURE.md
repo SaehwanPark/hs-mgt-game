@@ -167,8 +167,88 @@ network-dependent core behavior, or GUI-only transition semantics. Asset loading
 and license attribution belong at the interface/distribution boundary, not in
 the core engine.
 
-Last Reviewed: 2026-07-09
+Last Reviewed: 2026-07-14
 Status: Verified
+
+### Planned Visual and Audio Presentation Architecture
+
+The visual/audio upgrade is planned but not implemented. The current `gui/`
+directory remains an injected-data thin-client proof. Future work should follow
+this one-way authority flow:
+
+```text
+deterministic simulation and committed history
+  -> actor-visible projection
+  -> stable presentation DTO or host adapter
+  -> non-authoritative client state
+  -> rendering, animation, and audio playback
+
+client action form
+  -> canonical command preview
+  -> existing validation and transition boundary
+  -> committed result or non-mutating rejection
+```
+
+The host boundary remains authoritative for scenario genesis, observations,
+legal-command validation, resolved stochastic inputs, transitions, pending
+effects, history, replay hashes, and debriefs. The client may own navigation,
+selection, draft batches, viewport state, animation progress, audio playback,
+and local accessibility/settings preferences. It may not own or infer true
+simulation state.
+
+Candidate serializable presentation contracts are:
+
+- campaign and executive summary;
+- regional map, institution, and facility views;
+- executive briefing;
+- action catalog and validated action preview;
+- pending-process timeline;
+- monthly resolution and direct causal attribution;
+- replay and debrief views; and
+- audio presentation events.
+
+These are contract responsibilities, not approved Rust type names. Phase 0
+must inventory existing MCP/CLI surfaces before selecting a technology stack or
+adding DTOs, and should extend the narrowest existing adapter that can express
+the first one-month competitive slice.
+
+Visible observations and committed effects are the only sources for graphical
+status, animation, advisory bottleneck text, music mood, and event cues. Missing,
+delayed, revised, uncertain, or unavailable information must remain explicit.
+Validation failure must not advance a turn, and presentation changes must not
+change commands, histories, replay artifacts, state hashes, or deterministic
+outcomes.
+
+Audio cue classification should be a deterministic presentation mapping that
+can be tested with a recording sink without loading or playing assets. Playback,
+crossfades, focus behavior, volume, mute, and asset paths remain client concerns.
+Music must derive only from actor-visible conditions or explicit campaign stage;
+replay may regenerate cues from committed visible history without recording
+playback as simulation history.
+
+Visual/audio assets require a machine-readable provenance and license registry
+plus generated or derivable credits. Processed release assets belong at a
+documented presentation/distribution path; original sources and large-file
+storage require an explicit Phase 0 decision. The simulation core must never
+contain asset paths, licenses, volumes, or playback rules.
+
+Accessibility is part of the presentation contract: semantic and keyboard
+operation, color-independent status, readable scaling, reduced motion,
+skippable/reviewable resolution, visual equivalents for audio, complete muted
+play, and independent audio controls must be designed into the first slice.
+AI-agent and static accessibility checks provide development evidence only and
+must not be presented as lived human accessibility validation.
+
+Shared presentation primitives may later support stabilization and affiliation,
+but campaign-specific observations, commands, stages, and debrief meanings must
+remain intact. A future instructor or analytic true-state view requires a
+separate authorization boundary and must not weaken the standard player's
+historical observation boundary.
+
+Last Reviewed: 2026-07-14
+Status: Needs Review
+
+This is a planned boundary, not current implementation.
 
 ## Durable Constraints
 
@@ -184,6 +264,9 @@ Status: Verified
 - Freeze major new abstractions unless playtest, scenario-authoring, debrief, or
   domain-review evidence identifies a concrete need that current structures
   cannot satisfy.
+- Keep visual rendering, animation, audio, assets, and client settings outside
+  deterministic transitions; derive presentation only from actor-visible or
+  committed information.
 - Treat simultaneous resolution as a semantic contract. System-local actions
   may be applied in canonical order only while permutation tests prove order
   independence. Before adding contested hiring, shared capacity, negotiation

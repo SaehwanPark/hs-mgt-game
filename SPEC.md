@@ -4030,27 +4030,301 @@ Verification:
 ## Present
 
 - Feature: Evidence-gated continuation
-  Status: Waiting for a new concrete evidence gap
+  Status: Visual/audio proposal accepted for future promotion
   Started: 2026-07-12
   Branch: none
 
   Summary:
   All currently promoted runtime slices, bounded follow-ups, and the release
-  readiness check are complete. No Future item remains queued. New work must
-  satisfy the promotion rules below with a specific evidence or release need.
+  readiness check are complete. The visual/audio upgrade is now the ranked
+  future development track, but no implementation phase has been promoted into
+  active work. Each phase must still satisfy the promotion rules below.
 
   Not Yet Done:
-  - None currently queued.
+  - Promote only Phase 0 of the visual/audio track after its technology,
+    boundary, first-month slice, DTO, asset-license, and audio-catalog decisions
+    are bounded.
 
   Deferred / Non-Goals:
   - Do not infer packaging, publication, licensing, deployment, or a new runtime
-    slice from the absence of a queued item.
+    slice from the existence of a documented Future track.
 
   Verification:
   - A new Present item must satisfy the promotion rules below and name its
     evidence source, narrow target slice, acceptance criteria, and non-goals.
 
 ## Future
+
+### Visual and audio experience upgrade
+
+Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
+Status: Planned; Phase 0 is the next ranked candidate, and no feature described
+below should be read as implemented merely because the current `gui/` proof
+exists.
+
+#### Existing foundation (`Done`)
+
+- The deterministic Rust engine, explicit resolved stochastic inputs,
+  actor-visible observations, canonical commands, immutable history, replay
+  hashes, CLI, bounded MCP adapter, and educational debrief surfaces exist.
+- The dependency-free `gui/` proof renders injected MCP-shaped data and
+  delegates submission through an adapter. It proves a thin-client direction;
+  it is not the persistent regional world, live viewer, action workflow,
+  resolution system, audio layer, or campaign-complete GUI described here.
+
+#### Product contract (`Not Yet Done`)
+
+- Make `competitive-regional-v1` the first target and preserve the executive,
+  turn-based perspective. The player allocates attention, resources, workforce,
+  payer and policy posture, commitments, and long-term strategy rather than
+  managing individual patients or workers.
+- Present a persistent, navigable regional world whose facilities, systems,
+  rivals, demand zones, workforce markets, payer/policy influence, projects,
+  commitments, and delayed processes have visible institutional homes.
+- Reduce command-entry and onboarding friction without simplifying simulation
+  rules. Contextual graphical actions must preview and submit the same canonical
+  commands accepted by CLI/MCP and must never promise stochastic outcomes.
+- Make direct, committed causal attribution, pending effects, observation-time
+  information, realized results, revisions, and unavailable information easy to
+  distinguish. Do not invent inferred causal graphs or false precision.
+- Use visual and audio feedback to communicate category, direction,
+  significance, and timing without collapsing organizational outcomes, actor
+  utility, social welfare, or decision quality into a universal good/bad signal.
+- Support screenshots, demonstrations, remote AI-agent testplay, later replay
+  visualization, campaign-specific identity, possible instructor/analyst views,
+  localization, and accessibility as bounded follow-ups after the first slice.
+
+#### Intended experience and screen surfaces (`Not Yet Done`)
+
+- A responsive executive desktop for typical laptop and desktop widths with:
+  a resource/status header; regional market view; executive briefing; selected
+  institution/facility detail; contextual actions; pending-process timeline;
+  monthly result view; causal overlays; replay; and debrief. Mobile is not a
+  first-release requirement.
+- The header must expose actor-visible date/stage, cash, monthly margin, action
+  points, political capital, workforce/community trust, strategic alerts, and
+  save/session status where the campaign provides them.
+- Briefing items must cover major risks, changes, decisions, delayed reports,
+  rival intelligence, policy developments, and advisor recommendations and link
+  to their relevant entity or process.
+- Inspectable entities must use actor-visible capacity, treated volume, unmet
+  demand, quality/access, workforce, game-unit finance, payer pressure,
+  projects, commitments, events, and legal actions. Plain-language bottleneck
+  interpretations must derive only from visible observations.
+- Contextual action surfaces must support the commands relevant to a selected
+  facility, payer, competitor, policy process, or affiliation partner; expose
+  AP/cash/political-capital costs, delays, constraints, and uncertainty; allow
+  batch revision/removal; and show canonical command previews.
+- The pending-effects timeline must cover recruitment, capital/technology
+  work, annual policy events, contract and regulatory milestones, affiliation
+  stages, delayed reports, and prior commitments when present.
+- Monthly resolution must sequence submitted actions, visible responses,
+  process advancement, operating results, resource and outcome changes, newly
+  visible information, and updated pending processes. It must be skippable,
+  pausable, reviewable, reduced-motion compatible, and replayable without a
+  state transition.
+- Causal overlays must begin with direct committed effects and documented
+  presentation formulas for operating drivers, access, workforce, capacity,
+  projects, and other supported outcomes. Replay/debrief must preserve what was
+  knowable at decision time and may expose hashes, action/observation history,
+  consequence chains, advisor comparison, and strategy summaries.
+
+#### Visual and motion language (`Not Yet Done`)
+
+- Use a serious, inviting, contemporary institutional style: information-rich
+  without becoming a generic card dashboard or retro city-builder imitation.
+- Give each health system a consistent emblem/icon, restrained color identity,
+  facility markers, and cross-screen identity. Never rely on color alone.
+- Represent stable, watch, constrained, critical, improving, uncertain,
+  delayed, and revised states with text plus icon, shape, or pattern.
+- Use animation only to explain committed visible changes such as recruitment,
+  project progress, demand/capacity movement, review stages, affiliations, month
+  transitions, and changed causal contributors. Keep it brief and skippable.
+
+#### Presentation and action boundary (`Not Yet Done`)
+
+- Establish stable serializable, actor-visible DTOs or equivalent adapter
+  contracts for campaign summary, regional map, institutions, facilities,
+  briefing, action catalog/preview, pending processes, monthly resolution,
+  causal attribution, debrief, and audio presentation events.
+- Keep client navigation, selection, draft action batches, animation, audio,
+  and local settings non-authoritative. The core or existing host boundary owns
+  command legality, stochastic resolution, transitions, history, and hashes.
+- Validation rejection must leave simulation state unchanged. Presentation
+  changes, animation, and audio must leave commands, replay artifacts, histories,
+  outcomes, and golden hashes unchanged.
+- Missing, delayed, uncertain, revised, or hidden information must be explicit;
+  the client must not guess, query private state, duplicate formulas, create
+  GUI-only rules, or resolve randomness.
+- The technology stack remains a Phase 0 decision. Do not introduce deployment,
+  browser-hosting, networking, or generalized GUI platform conventions before
+  the first slice proves their need.
+
+#### Audio system (`Not Yet Done`)
+
+- Provide independently controlled music, interface/notification effects, and
+  ambience/event effects with master, per-channel, mute, unfocused-mute,
+  reduced-notification, and persistent-setting controls.
+- Start browser audio only after user interaction and keep complete play
+  possible when muted. Every audio-signaled event needs a visual/textual
+  equivalent; spoken or broadcast content needs labels or subtitles.
+- Begin with loopable menu, stable-operations, pressure, and debrief music.
+  Later visible-state mappings may distinguish workforce strain, regulatory
+  scrutiny, competition, and affiliation. Crossfades and classifications must
+  derive deterministically from visible conditions or campaign stage.
+- Provide restrained UI cues for confirm/reject, add/remove action, submit,
+  month advance, report receipt, save, and useful focus changes; and event cues
+  for project, staffing, operating, payer, regulatory, rival, community,
+  affiliation, and revised-information events supported by visible committed
+  history.
+- Optional ambience must avoid sensational clinical distress, alarms,
+  resuscitation, or sirens as entertainment. Playback paths, volume, and assets
+  stay outside the simulation; replay may regenerate cues from committed visible
+  history without recording playback in simulation history.
+
+#### Assets, licensing, and accessibility (`Not Yet Done`)
+
+- Prefer CC0/public-domain, manageable CC BY, or individually reviewed
+  permissive game-asset licenses. Reject unclear, personal-use-only,
+  noncommercial-only, redistribution-hostile, or copyright-claim-prone assets.
+- Maintain a machine-readable registry with stable ID, release path, type,
+  title, creator, source, retrieval date, license and URL, modifications, and
+  original/release hashes. Generate or support `ASSET_CREDITS.md`, in-game
+  credits, audit, and replacement. Keep originals outside the release tree or
+  in an explicitly adopted large-file store; keep optimized release assets and
+  provenance text under documented paths.
+- Establish coherent original art direction through license-compatible
+  recoloring, cropping, simplification, line weight, perspective, and resolution
+  normalization rather than accumulating visually inconsistent assets.
+- From the first slice, support sufficient contrast, readable scaling/zoom,
+  labels plus icons, keyboard navigation, semantic labels, color-independent
+  status, reduced motion, no essential hover-only content, complete mute,
+  independent audio channels, and non-spatial/non-pitch-only cues.
+- Keep terminology consistent with canonical docs; explain game units, costs,
+  delays, and uncertainty; separate current decisions from retrospective
+  explanation; and allow skipped resolution to be reviewed.
+
+#### Evidence-gated development sequence (`Not Yet Done`)
+
+| Phase | Bounded output | Promotion/exit gate |
+| --- | --- | --- |
+| 0. Product and architecture alignment | Interface boundary, one-month experience spec, DTO inventory, wireframes, audio catalogs, asset policy, stack/ADR decisions | No client-owned simulation state; every first-slice action is canonical; every value and audio cue has a visible source |
+| 1. Static executive desktop | Navigable injected-data desktop, responsive layout, design tokens, entity/status language, initial icons | AI review profiles locate finance/workforce/capacity/access/rival information without raw JSON; hidden-state and viewport checks pass |
+| 2. Live read-only integration | Typed live/recorded adapter, observations, entity detail, pending/history/hash views, replay prototype, loading/error/empty states | CLI/MCP visible-fact parity, no duplicated formulas, stable fixtures, and explicit missingness |
+| 3. Contextual action submission | Action forms/batch builder, command preview, validation/retry, one graphical competitive month | Generated commands are equivalent, costs/delays are visible, rejection is non-mutating, and no stochastic certainty is implied |
+| 4. Resolution and causal feedback | One polished month, sequencing, animation, operating breakdown, causal overlays, skip/pause/review/replay | Principal drivers are traceable to committed effects; textual results are immediate; replay is non-mutating |
+| 5. Foundational audio | Four music states, bounded UI/event cues, controls, registry/credits, deterministic cue mapping | Audio leaves state/hash/replay unchanged, muted play is complete, music leaks no hidden state, provenance is complete, repeated cues are restrained |
+| 6. Persistent regional world | Expanded map, demand/access overlays, identities, public projects/rival actions, navigation, relationships, timeline/assets | Map supports decisions/explanations, respects rival observation lag, and decorative complexity does not obscure state |
+| 7. Campaign coverage | Tutorial-oriented stabilization flow and affiliation partner/fit/commitment/review/integration flow with shared plus campaign-specific visuals/audio | Components are reused without flattening campaign semantics or requiring GUI-driven simulation changes |
+| 8. AI-agent testplay readiness | Onboarding, settings, accessibility/error recovery, AI roles/tasks, UI/event/cue/replay capture, structured diagnostics | Agents complete declared tasks and exercise mute, reduced-motion, keyboard, rejection, and recovery paths; claim classes remain separate |
+| 9. AI-agent evaluation and revision | Reproducible multi-role/seed/mode findings, prioritized revisions, product decision log | Decisions cite captured traces; interpretation mismatches are hypotheses; human usability, engagement, lived accessibility, learning, and expert validity remain unclaimed |
+
+Do not start broad map or asset production before Phases 0–4 close. Do not
+extend presentation primitives to stabilization or affiliation before the
+competitive slice demonstrates their semantics. A phase may move into
+`Present` only with its own concise `Done`, `Not Yet Done`, verification, and
+non-goal fields.
+
+#### First competitive vertical slice (`Not Yet Done`)
+
+The first polished implementation is exactly one month of
+`competitive-regional-v1`:
+
+1. Start or load a campaign and inspect the regional market, Riverside, and its
+   facilities.
+2. Identify one actor-visible workforce or capacity bottleneck and inspect
+   recent payer/rival information.
+3. Choose at least two contextual actions; review canonical commands, costs,
+   constraints, uncertainty, and delays; revise if needed; then submit.
+4. Watch or skip resolution and inspect updated volume, unmet demand, revenue,
+   cost, margin, pending processes, and direct causal attribution.
+5. Receive restrained music/event cues with complete visual equivalents and
+   continue to the next actor-visible observation.
+
+Initial assets are limited to three system identities; facility, demand,
+capacity, project, staffing, payer/policy, and timeline markers; a schematic
+map; status/severity language; four music tracks; eight UI sounds; eight event
+sounds; and at most two optional ambience loops.
+
+#### Verification and AI testplay (`Not Yet Done`)
+
+- Architecture: presentation DTO use, hidden-field exclusion, canonical action
+  mapping, rejection atomicity, visible-only cue/mood derivation, and unchanged
+  golden hashes/replays.
+- Rendering: normal, empty, missing, extreme, uncertain, delayed, and revised
+  states; long text; all difficulty tiers; and representative viewport sizes.
+- Audio: event/cue and visible-state/music mappings, mute and independent
+  channels, focus behavior, reduced notifications, repetition throttling, and
+  missing-asset fallback through a recording sink or equivalent.
+- Accessibility: keyboard paths, semantic structure, color-independent status,
+  contrast, reduced motion, text scaling, complete muted play, and textual cue
+  equivalence. AI/static checks are proxies and do not establish lived access.
+- AI-agent testplay: declare model/version, role, task, seed, viewport, interface
+  mode, and capture method; record time/steps to first valid action, bottleneck
+  identification, directional prediction, map-versus-briefing use, invalid-action
+  recovery, pending-effect comprehension, visible-event/cue-log alignment,
+  causal explanation, commands, histories, hashes, screenshots/semantics, and
+  failures. Use multiple strategy and familiarity profiles and deterministic
+  reruns where supported.
+- Classify evidence separately as technical correctness, interface-task proxy,
+  strategic trace, document-grounded domain consistency, or unresolved human
+  question. AI testplays do not prove human usability, engagement, accessibility
+  lived experience, learning, classroom effectiveness, domain-expert validity,
+  calibration, balance, or policy validity.
+
+#### Contributor boundaries and risk controls
+
+- Product/UX owns information architecture, wireframes, onboarding, action
+  flow, and resolution pacing; visual design owns maps, icons, identity, motion,
+  and visual accessibility; front-end work owns client state, adapter use,
+  rendering, settings, audio playback, and UI tests.
+- Rust/interface work owns only justified actor-visible projections, DTO/adapter
+  contracts, canonical validation integration, and replay/debrief access. Audio
+  work owns cue taxonomy, selection, normalization, mixing, and playback rules;
+  asset governance owns license review, registry, credits, source retention, and
+  release optimization; AI-testplay work owns roles, protocols, capture,
+  comparison, triage, and evidence classification.
+- Prevent a parallel engine with hidden-field exclusion, command-equivalence,
+  rejection-atomicity, and unchanged-hash tests. Prevent dashboard-only polish
+  by promoting causal overlays and process timelines before decorative assets.
+- Prevent city-builder scope by requiring each map element to support a decision
+  or explanation. Prevent fatigue and hidden-state leakage with visible-only
+  mappings, throttling, independent controls, and repeated-session tests.
+- Prevent license and accessibility debt by making registry completeness and
+  first-slice accessibility checks phase gates. Prevent campaign flattening by
+  sharing primitives without sharing incompatible semantics.
+
+#### Track-level success and stop rules
+
+The track may be considered technically successful when intended players can
+act without command syntax in the designed interface; major pressures, pending
+effects, monthly consequences, and visible causal chains have explicit homes;
+graphical commands remain canonical; audio remains optional and restrained;
+observation/replay boundaries hold; and diverse AI-agent profiles complete and
+replay declared tasks across seeds and accessibility modes with reproducible
+artifacts.
+
+Rendering alone, passing automation alone, one successful AI profile, polish,
+or subjective AI commentary is insufficient. Stop or narrow the phase when it
+requires simulation changes solely for presentation, exposes hidden state,
+duplicates formulas, lacks asset rights, makes audio essential, or cannot be
+verified without claiming human experience.
+
+#### Deferred / Non-goals
+
+- No simulation rewrite, browser-owned state, GUI-only command or rule, hidden
+  outcome calculation, real-time core, network multiplayer, city/patient or
+  hospital-interior simulation, individual-worker placement, general visual
+  scenario editor, or production deployment platform.
+- No initial mobile requirement, dynamic music composition, broad inferred
+  causal graph, detailed geography, large asset pipeline, or forced common
+  screen metaphor across campaigns.
+- Instructor/analytic true-state views must remain a later, separately
+  authorized mode and must never weaken standard-player historical information
+  boundaries.
+- Human usability, engagement, lived accessibility, domain-expert review, and
+  educational evaluation are deferred until separately funded; AI testplay is
+  the development validation method, not a substitute claim.
 
 The v0.11.0 operating loop, v0.11.2 explainability audit, v0.11.3
 month-specific debrief linkage, v0.11.4 post-fix validation, and v0.11.5
@@ -4079,7 +4353,7 @@ they do not each require a new runtime release or synchronized ceremony.
 Before any Future item moves into `Present`, the new Present entry must name:
 
 - the roadmap phase or gate it satisfies;
-- the evidence source, proposal review, playtest finding, domain QA note, or
+- the evidence source, proposal review, AI-agent testplay finding, domain QA note, or
   release need that justifies promotion;
 - the narrow artifact or runtime behavior being changed;
 - verification criteria needed before the slice can close; and
@@ -4087,12 +4361,15 @@ Before any Future item moves into `Present`, the new Present entry must name:
 
 Major architecture, scenario-generalization, documentation-taxonomy, GUI, MCP,
 or release-automation work remains frozen by default. Permit it only when a
-playtest, authoring, QA, debrief, audience-access, or release-readiness finding
+AI-agent testplay, authoring, QA, debrief, audience-access, or release-readiness finding
 names a concrete need that current structures cannot meet.
 
 ### Ranked next-development queue
 
-No Future items are currently queued. A new item must satisfy the promotion
-rules above, identify its evidence or release need, name a bounded artifact or
-runtime behavior, and state its verification criteria and non-goals before it
-is promoted into `Present`.
+1. Visual/audio Phase 0 product and architecture alignment is the next candidate.
+   It must bound the one-month competitive slice, technology choice,
+   actor-visible DTOs, canonical action path, hidden-state exclusions, visual
+   wireframe, audio catalogs, asset policy, verification, and non-goals before
+   promotion.
+2. Phases 1–9 remain sequentially gated Future work. None may be promoted from
+   this queue merely because its requirements are documented.
