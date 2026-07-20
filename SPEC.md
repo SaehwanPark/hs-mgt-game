@@ -4900,6 +4900,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   markers, and interaction behavior remain separate future slices with no live
   GUI or host behavior changed.
 
+### Visual/audio Phase 3.2 uncertainty-overlays contract (v0.12.61)
+
+- Status: Partial; deterministic fixture-only uncertainty-overlay catalog
+  complete
+- Branch: `feat/visual-audio-phase3-uncertainty-overlays-v0.12.61`
+- Added `gui/map-uncertainty.mjs` with stale, missing, and revised visible
+  information patterns, no-severity defaults, static reduced-motion behavior,
+  and a generic fallback.
+- Added registry/hash/credits provenance and deterministic uncertainty tests.
+- Checked the Phase 3.2 uncertainty overlays item; event markers and
+  interaction behavior remain separate future slices with no live GUI or host
+  behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

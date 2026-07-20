@@ -173,6 +173,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.uncertainty-overlays",
+      "asset_type": "visual",
+      "semantic_role": "overlay",
+      "source_path": "gui/map-uncertainty.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic uncertainty overlay catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only uncertainty vocabulary.",
+      "original_hash": "sha256:65e503f4d6455be488746a7893250ca7b0807b76a3dd2148b3233b1b6d90ea38",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Information-status label, non-color pattern, reduced-motion mode, and generic overlay fallback",
+      "visible_source": "Fixture-only symbolic uncertainty vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

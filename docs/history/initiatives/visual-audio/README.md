@@ -2,7 +2,7 @@
 
 **Status:** Bounded technical sequence closed; production foundation active
 
-**Version range:** v0.12.16–v0.12.60
+**Version range:** v0.12.16–v0.12.61
 **Principal conclusion:** The dependency-free GUI supports the bounded,
 host-authoritative competitive first-month presentation contract. Technical
 checks do not establish human usability, accessibility experience, learning,
@@ -57,5 +57,6 @@ calibration, balance, or policy validity.
 | 3.2 | v0.12.58 | [Parcel-system contract](visual-audio-phase3-parcel-system-v0.12.58.md) |
 | 3.2 | v0.12.59 | [Relationship-line styles contract](visual-audio-phase3-relationship-lines-v0.12.59.md) |
 | 3.2 | v0.12.60 | [Service-area overlays contract](visual-audio-phase3-service-area-overlays-v0.12.60.md) |
+| 3.2 | v0.12.61 | [Uncertainty overlays contract](visual-audio-phase3-uncertainty-overlays-v0.12.61.md) |
 
 The executable audit remains `python3 scripts/audit_visual_audio_contract.py`.
