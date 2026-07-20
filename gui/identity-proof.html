@@ -26,6 +26,7 @@
       <div class="controls" aria-label="Identity proof controls">
         <button type="button" id="riverside">Show Riverside</button>
         <button type="button" id="northlake">Show Northlake</button>
+        <button type="button" id="summit">Show Summit</button>
         <button type="button" id="unknown">Show generic fallback</button>
       </div>
       <img class="logo" id="logo" src="../assets/release/visual/svg/riverside.svg" alt="Riverside fictional system logo mark" />
@@ -59,6 +60,7 @@
 
       document.querySelector("#riverside").addEventListener("click", () => render("riverside"));
       document.querySelector("#northlake").addEventListener("click", () => render("northlake"));
+      document.querySelector("#summit").addEventListener("click", () => render("summit"));
       document.querySelector("#unknown").addEventListener("click", () => render("unknown"));
       render("riverside");
     </script>

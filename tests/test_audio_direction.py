@@ -37,7 +37,7 @@ class AudioDirectionTests(unittest.TestCase):
       const northlake = AUDIO_DIRECTION.prototypes.find((entry) => entry.id === "audio.direction-northlake-motif");
       const required = [
         "audio.direction-confirm", "audio.direction-reject", "audio.direction-report",
-        "audio.direction-riverside-motif", "audio.direction-northlake-motif", "audio.direction-neutral-bed",
+        "audio.direction-riverside-motif", "audio.direction-northlake-motif", "audio.direction-summit-motif", "audio.direction-neutral-bed",
         "audio.direction-pressure-layer", "audio.direction-environmental-loop",
       ];
       if (entries.length !== required.length || !required.every((id) => entries.some((entry) => entry.id === id))) process.exit(1);
@@ -49,7 +49,7 @@ class AudioDirectionTests(unittest.TestCase):
     )
     self.assertEqual(result.returncode, 0, result.stderr)
     payload = json.loads(result.stdout)
-    self.assertEqual(len(payload["entries"]), 8)
+    self.assertEqual(len(payload["entries"]), 9)
 
   def test_cues_are_distinguishable_and_loops_are_bounded(self):
     result = run_node(

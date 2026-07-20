@@ -229,6 +229,11 @@ motif references remain local labels; they do not infer rival state, alter
 observability, or enter host/session, simulation, history, replay, or debrief
 contracts.
 
+The v0.12.41 Summit kit completes the three-system fixture vocabulary with a
+third distinct source/release pair and motif reference. The shared proof remains
+local presentation state; no identity token becomes a host fact or live
+simulation signal through this asset slice.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

@@ -24,7 +24,7 @@ def render(root: Path) -> str:
     "# Asset Credits", "",
     "This file is generated from `assets/registry/*.json`. Do not edit it",
     "directly; update a registry entry and run the credits check.", "",
-    "No third-party release assets are included in v0.12.40. Runtime-generated",
+    "No third-party release assets are included in v0.12.41. Runtime-generated",
     "visual tokens and Web Audio recipes remain optional presentation layers.", "",
     "| Type | ID | Source/generation | License | Attribution | Approval |",
     "| --- | --- | --- | --- | --- | --- |",

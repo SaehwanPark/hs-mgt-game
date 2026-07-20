@@ -24,13 +24,14 @@ reachable SVG controls, and includes explicit generic/uncertain fallbacks. The
 proof page is fixture-only: it does not load a host, submit a command, or create
 simulation state.
 
-## Riverside identity proof
+## Riverside identity proof — shared health-system kits
 
 Open `gui/identity-proof.html` directly or through a static server to inspect
-the first Phase 2.1 fictional Riverside identity kit. It shows the source and
-release marks, monochrome treatment, compact marker, facility sign, report
-header, RV badge, audio motif reference, and generic fallback. The proof is
-fixture-only and does not load host state or change a session.
+the Phase 2.1 fictional Riverside, Northlake, and Summit identity kits. It
+shows the selected source and release mark, monochrome treatment, compact
+marker, facility sign, report header, text badge, audio motif reference, and
+generic fallback. The proof is fixture-only and does not load host state or
+change a session.
 
 ## Audio direction proof
 

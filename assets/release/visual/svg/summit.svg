@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="title desc">
+  <title id="title">Summit fictional health-system mark</title>
+  <desc id="desc">Compact release derivative of the fictional Summit logo mark and wordmark.</desc>
+  <path d="M9 76 39 18h18l30 58H67l-7-15H36l-7 15zm34-30h11l-5-12z" fill="#6b4e8d"/>
+  <path d="M11 84c15-7 29-7 44 0 10 5 19 5 30 0" fill="none" stroke="#c2872f" stroke-linecap="round" stroke-width="7"/>
+  <text x="124" y="58" fill="#17232d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Summit</text>
+</svg>

@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 2.1 Northlake identity v0.12.40
+# Presentation Domain QA — Phase 2.1 Summit identity v0.12.41
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 2.1 Northlake lane, identity contract, Northlake
+- Request summary, Phase 2.1 Summit lane, identity contract, Summit
   source/release SVGs, shared catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional Northlake fixture work only.
+The slice is fictional Summit fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: Northlake surfaces derive only from visible identity and preserve the
+- Pass: Summit surfaces derive only from visible identity and preserve the
   name/monogram/shape without color.
 - Pass: the audio motif is identity-only; no private rival condition or intent
   is encoded.
@@ -31,7 +31,7 @@ The slice is fictional Northlake fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: Northlake source/release files and generated module are registry-backed
+- Pass: Summit source/release files and generated module are registry-backed
   with hashes, project provenance, approval, and no external references.
 - Pass: the fictional design is distinct from Riverside and has no third-party
   brand or downloaded asset.
@@ -47,12 +47,12 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-Summit consistency, live promotion, human art direction, and broader identity
-review remain separate slices.
+Live promotion, human art direction, and broader identity review remain
+separate slices.
 
 ## Verification Evidence
 
-- Focused Northlake/Riverside identity and audio tests.
+- Focused Summit/Northlake/Riverside identity and audio tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.
