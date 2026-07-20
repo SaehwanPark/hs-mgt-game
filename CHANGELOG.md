@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.43] - 2026-07-20
+
+- Added the first reusable fictional general-hospital base facility component
+  with base, identity, capacity, project, pressure, selection, and uncertainty
+  layer vocabulary.
+- Added source/release SVG derivatives, registry hashes, accessible labels,
+  generic facility fallback, and a fixture-only proof page with non-color layer
+  patterns.
+- Completed the general-hospital-base per-component Phase 3.1 checklist
+  without changing live GUI or host behavior.
+- Bumped package/public metadata to `0.12.43`.
+
 ## [0.12.42] - 2026-07-20
 
 - Added a fixture-only actor-family language catalog and proof for payer,

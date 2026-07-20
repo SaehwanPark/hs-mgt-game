@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Facility Component Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef4f8; }
+      body { margin: 0 auto; max-width: 1080px; padding: 1.5rem; }
+      main { background: #fff; border: 1px solid #d4e0e8; border-radius: 1rem; padding: 1rem; }
+      .proof-grid { display: grid; gap: 1rem; grid-template-columns: minmax(18rem, 1fr) minmax(18rem, 1fr); }
+      .surface, .layer { border: 1px solid #d4e0e8; border-radius: .7rem; padding: .8rem; }
+      .surface h2, .surface p, .layer h2, .layer p { margin: 0 0 .45rem; }
+      .surface img { background: #f8fbfd; border: 1px solid #d4e0e8; display: block; height: auto; max-width: 100%; }
+      .layers { display: grid; gap: .55rem; margin: 0; }
+      .layer[data-kind="pressure"] { border-left: .7rem solid #c2872f; }
+      .layer[data-kind="project"] { border-left: .7rem double #315a89; }
+      .layer[data-kind="uncertainty"] { border-left: .7rem dashed #60707b; }
+      .layer[data-kind="selection"] { border-left: .7rem dotted #17232d; }
+      .layer[data-kind="identity"] { border-left: .7rem solid #315a89; }
+      .layer[data-kind="capacity"] { border-left: .7rem double #c2872f; }
+      .layer[data-kind="base"] { border-left: .7rem solid #17232d; }
+      .source { color: #60707b; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; padding: .7rem; }
+      @media (max-width: 700px) { .proof-grid { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1 id="heading">General hospital base component</h1>
+      <p class="source">Fictional, fixture-only facility proof. It consumes visible facility vocabulary and does not load host state or alter a session.</p>
+      <div class="proof-grid">
+        <section class="surface" aria-labelledby="asset-heading">
+          <h2 id="asset-heading">Release derivative</h2>
+          <img src="../assets/release/visual/svg/general-hospital-base.svg" alt="General hospital base with visible identity badge and entrance" />
+          <p id="facility-status" role="status"></p>
+        </section>
+        <section class="surface" aria-labelledby="layers-heading">
+          <h2 id="layers-heading">Composable layers</h2>
+          <div class="layers" id="layers" aria-label="Facility layer contract"></div>
+        </section>
+      </div>
+      <p class="fallback">Visible labels, monochrome-safe geometry, layer patterns, and generic facility fallback remain available when color, assets, or host detail are unavailable.</p>
+    </main>
+    <script type="module">
+      import { facilityComponentFor, facilityLayerSummary } from "./facility-components.mjs";
+
+      const component = facilityComponentFor("general-hospital-base");
+      document.title = `${component.label} Component Proof`;
+      document.querySelector("#facility-status").textContent = `${component.source}. ${component.equivalent}. Grid: ${component.grid}.`;
+      document.querySelector("#layers").replaceChildren(...facilityLayerSummary().map((layer) => {
+        const card = document.createElement("article");
+        card.className = "layer";
+        card.dataset.kind = layer.id;
+        card.innerHTML = `<h2>${layer.label}</h2><p>${layer.source}</p><small>Written equivalent: ${layer.equivalent}</small>`;
+        return card;
+      }));
+    </script>
+  </body>
+</html>

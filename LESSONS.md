@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Make Facility Layers Composable Before Adding More Buildings
+
+- Context: Phase 3.1 needs many facility types and several visible consequence
+  layers without one-off illustrations for every state.
+- Symptom: A single finished building illustration can hide missing identity,
+  project, pressure, uncertainty, or accessibility contracts.
+- Resolution: Proved the general-hospital base as one source/release pair with
+  seven named layers, shared grid/color variables, written equivalents, and a
+  generic fallback.
+- Prevention: Complete the layer contract on one reusable component before
+  expanding the library to new facility types.
+
 ## Give Actor Families One Shared Vocabulary
 
 - Context: Phase 2.2 needs eight recurring actor families to remain distinct

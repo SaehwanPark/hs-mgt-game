@@ -241,6 +241,12 @@ notification styles, optional identity-sonic tags, written equivalents, and
 generic fallback are local presentation vocabulary; they consume no private
 actor state and are not imported by the live GUI.
 
+The v0.12.43 general-hospital base component adds a registry-backed source and
+release SVG pair plus a fixture layer catalog for base, identity, capacity,
+project, pressure, selection, and uncertainty presentation. Layer sources are
+visible fields or local focus state; the component does not create facility
+facts, infer hidden status, or enter live board rendering.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 
