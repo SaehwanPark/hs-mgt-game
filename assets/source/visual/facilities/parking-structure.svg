@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="title desc">
+  <title id="title">Parking structure facility component</title>
+  <desc id="desc">Fixture source sheet for a reusable fictional parking structure with identity, capacity, project, pressure, selection, and uncertainty layers.</desc>
+  <style>
+    :root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-ink: #17232d; --facility-paper: #f8fbfd; --facility-muted: #60707b; }
+    .ink { fill: var(--facility-ink); font-family: system-ui, sans-serif; }
+    .small { font-size: 13px; letter-spacing: .03em; }
+    .title { font-size: 22px; font-weight: 700; }
+    .label { font-size: 14px; font-weight: 700; }
+  </style>
+  <defs>
+    <symbol id="parking-structure" viewBox="0 0 180 112"><path d="M18 102V28h144v74z" fill="var(--facility-primary)"/><path d="M18 48h144M18 70h144M18 92h144" stroke="var(--facility-secondary)" stroke-width="5"/><path d="M30 40 62 60 30 82M150 40 118 60l32 22" fill="none" stroke="var(--facility-paper)" stroke-linecap="round" stroke-width="5"/><path d="M34 28V14h112v14" fill="none" stroke="var(--facility-secondary)" stroke-width="5"/><rect x="80" y="80" width="20" height="22" fill="var(--facility-paper)"/><path d="M90 85v12M84 91h12" stroke="var(--facility-secondary)" stroke-width="4"/></symbol>
+    <symbol id="identity-layer" viewBox="0 0 180 112"><rect x="22" y="52" width="34" height="24" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="39" y="69" text-anchor="middle" class="ink" font-size="14" font-weight="800">ID</text></symbol>
+    <symbol id="capacity-layer" viewBox="0 0 180 112"><path d="M12 106h156M18 106V82h28v24m10 0V62h28v44m10 0V42h28v64m10 0V22h28v84" fill="none" stroke="var(--facility-secondary)" stroke-width="6"/></symbol>
+    <symbol id="project-layer" viewBox="0 0 180 112"><path d="M14 104h152M28 104V34h8v70m116 0V34h8v70M32 34h120" fill="none" stroke="var(--facility-secondary)" stroke-width="4"/><path d="M78 34 90 10l12 24z" fill="var(--facility-secondary)"/></symbol>
+    <symbol id="pressure-layer" viewBox="0 0 180 112"><path d="M150 8 174 48h-48z" fill="var(--facility-secondary)"/><path d="M150 20v14m0 7v3" stroke="var(--facility-paper)" stroke-linecap="round" stroke-width="4"/></symbol>
+    <symbol id="selection-layer" viewBox="0 0 180 112"><rect x="4" y="4" width="172" height="104" rx="10" fill="none" stroke="var(--facility-secondary)" stroke-dasharray="8 5" stroke-width="5"/></symbol>
+    <symbol id="uncertainty-layer" viewBox="0 0 180 112"><path d="M10 98 170 14M-5 82 145 2M35 112 180 34" stroke="var(--facility-muted)" stroke-dasharray="5 6" stroke-width="10" opacity=".32"/></symbol>
+  </defs>
+  <rect width="760" height="500" fill="var(--facility-paper)"/>
+  <text x="32" y="38" class="ink title">Parking structure · fictional reusable component</text>
+  <text x="32" y="61" class="ink small">Shared 8px grid; tiered deck silhouette identifies the facility type, not parking availability or access.</text>
+  <g id="parking-structure-base" transform="translate(42 92)"><use href="#parking-structure" width="180" height="112"/><use href="#identity-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Deck + identity layer</text></g>
+  <g id="capacity-overlay" transform="translate(270 92)"><use href="#parking-structure" width="180" height="112"/><use href="#capacity-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Capacity/service-line layer</text></g>
+  <g id="project-overlay" transform="translate(498 92)"><use href="#parking-structure" width="180" height="112"/><use href="#project-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Project layer</text></g>
+  <g id="pressure-overlay" transform="translate(42 290)"><use href="#parking-structure" width="180" height="112"/><use href="#pressure-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Operational-pressure layer</text></g>
+  <g id="selection-overlay" transform="translate(270 290)"><use href="#parking-structure" width="180" height="112"/><use href="#selection-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Selection/focus layer</text></g>
+  <g id="uncertainty-overlay" transform="translate(498 290)"><use href="#parking-structure" width="180" height="112"/><use href="#uncertainty-layer" width="180" height="112"/><text x="0" y="143" class="ink label">Uncertainty/stale-observation layer</text></g>
+  <text x="42" y="480" class="ink small">Monochrome, small-size, fallback, pressure, and project variants remain text-labeled in the proof.</text>
+</svg>

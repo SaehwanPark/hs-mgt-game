@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.49. Runtime-generated
+No third-party release assets are included in v0.12.50. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval |
@@ -21,6 +21,7 @@ visual tokens and Web Audio recipes remain optional presentation layers.
 | Visual | `visual.facility.ambulatory-center` | `assets/source/visual/facilities/ambulatory-center.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.emergency-department` | `assets/source/visual/facilities/emergency-department.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.general-hospital-base` | `assets/source/visual/facilities/general-hospital-base.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
+| Visual | `visual.facility.parking-structure` | `assets/source/visual/facilities/parking-structure.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.patient-tower` | `assets/source/visual/facilities/patient-tower.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.rural-clinic` | `assets/source/visual/facilities/rural-clinic.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.specialty-center` | `assets/source/visual/facilities/specialty-center.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |

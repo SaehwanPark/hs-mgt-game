@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc">
+  <title id="title">Parking structure facility</title>
+  <desc id="desc">Compact fictional parking structure component with visible identity badge and tiered deck silhouette; type cue, not a parking availability or access claim.</desc>
+  <style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style>
+  <rect width="260" height="160" fill="var(--facility-paper)"/>
+  <path d="M28 132V52h204v80z" fill="var(--facility-primary)"/>
+  <path d="M28 74h204M28 98h204M28 122h204" stroke="var(--facility-secondary)" stroke-width="5"/>
+  <path d="M44 66 82 87 44 110M216 66l-38 21 38 23" fill="none" stroke="var(--facility-paper)" stroke-linecap="round" stroke-width="5"/>
+  <path d="M50 52V38h160v14" fill="none" stroke="var(--facility-secondary)" stroke-width="5"/>
+  <rect x="118" y="104" width="24" height="28" fill="var(--facility-paper)"/><path d="M130 110v16M123 118h14" stroke="var(--facility-secondary)" stroke-width="4"/>
+  <rect x="32" y="58" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="50" y="75" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text>
+  <text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">PARKING STRUCTURE</text>
+</svg>
