@@ -1,42 +1,43 @@
-# Presentation Contract — Phase 3.2 map-grid v0.12.55
+# Presentation Contract — Phase 3.2 road-tiles v0.12.56
 
 ## Goal and Authorization
 
-Define a deterministic symbolic regional map coordinate contract for facility,
-map, report, and consequence surfaces while preserving the completed identity
-and generic fallback contracts.
+Define deterministic symbolic road-segment tokens for facility, map, report,
+and consequence surfaces while preserving the completed identity and generic
+fallback contracts.
 
 ## Player Questions and Consequences
 
 - Which recurring public system is involved?
 - Which visible entity or facility is involved?
-- Which named coordinate organizes the visible relationship?
+- Which visible road orientation is involved?
+- Which path role explains the road token?
 - Can the layout remain understandable when geography is symbolic?
-- What appears when a coordinate or entity is unavailable?
+- What appears when a road token is unavailable?
 
 ## Actor-Visible Source Ledger
 
 | Surface | Visible source | Prohibited inference | Equivalent |
 | --- | --- | --- | --- |
-| Map coordinate | Fixture-only symbolic layout coordinate | Real-world distance or geography | Named column/row coordinate |
-| Entity placement | Visible entity/facility ID | Hidden location or relationship | Visible label and coordinate equivalent |
-| Missing coordinate | Missing/unknown layout coordinate | Guessed position | Explicit unavailable coordinate |
+| Road token | Fixture-only symbolic road-segment vocabulary | Real-world geometry or travel time | Orientation and path-role labels |
+| Path role | Token-defined surface/centerline role | Hidden traffic or capacity fact | Written path-role equivalent |
+| Missing road | Missing/unknown road token | Guessed segment | Generic road fallback |
 
 ## Visual, Motion, and Audio Semantics
 
-- The regional map uses a stable 960x600 viewport and deterministic 24px cells.
-- Grid coordinates organize symbolic relationships and attention; they do not
-  establish real-world distance, travel time, jurisdiction, or geography.
+- Road tokens use a stable 96x96 viewBox and deterministic 24px grid.
+- Segments organize symbolic relationships and attention; they do not establish
+  real-world road geometry, travel time, jurisdiction, or geography.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.
 
 ## Accessibility and Fallbacks
 
-- The contract carries a written symbolic-geography disclaimer and named
-  coordinate equivalent.
-- Unknown or unavailable coordinates remain explicitly unavailable rather than
-  being inferred by the client.
+- Tokens carry written orientation/path-role equivalents and a symbolic-
+  geography disclaimer.
+- Unknown or unavailable road IDs use `road-generic` rather than being inferred
+  by the client.
 
 ## Authority, History, and Replay Boundaries
 

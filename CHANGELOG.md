@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.56] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic road tile set with horizontal,
+  vertical, and quarter-curve segments plus a generic fallback.
+- Added registry provenance, hash coverage, accessible path-role equivalents,
+  and regression tests for the Phase 3.2 road-tile slice.
+- Checked the Phase 3.2 road tile-set item without changing live GUI or host
+  behavior.
+- Bumped package/public metadata to `0.12.56`.
+
 ## [0.12.55] - 2026-07-20
 
 - Added the deterministic, fixture-only regional map grid contract with a
