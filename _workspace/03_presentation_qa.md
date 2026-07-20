@@ -52,9 +52,11 @@ integration.
 
 ## Required fixes
 
-None identified by this bounded QA pass. The single light code-review pass is
-required before merge; no second reviewer will be spawned under the task
-constraint.
+None identified by this bounded QA pass or the single light code-review pass.
+The reviewer checked the catalog, live GUI integration, proof variants,
+authority boundary, accessibility/text preservation, registry/version
+bookkeeping, focused tests, and diff cleanliness. No second reviewer was
+spawned under the task constraint.
 
 ## Verification evidence
 
