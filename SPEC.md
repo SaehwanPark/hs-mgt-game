@@ -4507,6 +4507,37 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   - No GUI, asset, audio, simulation, command, stochastic, history/hash/replay,
     debrief, calibration, policy-validity, or human-evaluation change.
 
+### Visual/audio Phase 0 foundation (v0.12.34)
+
+- Status: Closed; product brief, asset repository, validation, and credits
+  implementation and verification complete
+- Started: 2026-07-20
+- Branch: `feat/visual-audio-phase0-foundation-v0.12.34`
+
+  Done:
+  - Added the product brief for the flat-vector executive direction, first
+    competitive-month slice, supported desktop targets, optional hybrid audio,
+    reduced motion, accessibility, license allowlist/denylist, AI-generation
+    policy, review ownership, and host-authority boundary.
+  - Added separated `assets/source`, `assets/generated`, `assets/release`, and
+    `assets/registry` paths with visual/audio schemas and project-generated
+    baseline manifests.
+  - Added dependency-free validation for metadata, semantic roles, licenses,
+    approvals, stable IDs, source/release hashes, and unregistered release
+    files, plus deterministic generated credits and a contributor checklist.
+  - Checked only the demonstrated Phase 0.1 and 0.2 roadmap items.
+
+  Verification:
+  - Focused and full Python tests, asset validation/credits, documentation
+    links, release metadata, Rust format/clippy/tests, Node syntax, and diff
+    checks pass.
+
+  Deferred / Non-Goals:
+  - No asset acquisition or generation, GUI redesign, host/MCP schema, command,
+    transition, stochastic input, history/hash/replay, debrief, or human,
+    legal, artistic, hardware-audio, learning, calibration, balance, or policy
+    validity claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4540,10 +4571,10 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-No active documentation or visual/audio implementation slice. v0.12.33 adds
-reusable agent coordination for future presentation work without promoting a
-roadmap milestone. Human and educational evaluation remain separately gated
-Future work.
+No active documentation or visual/audio implementation slice. v0.12.34 closes
+the Phase 0 product brief and asset-foundation gate; Phase 1 art-direction and
+rendering prototypes remain Future work. Human and educational evaluation remain
+separately gated Future work.
 
 ## Future
 

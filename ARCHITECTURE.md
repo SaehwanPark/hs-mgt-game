@@ -183,7 +183,18 @@ network-dependent core behavior, or GUI-only transition semantics. Asset loading
 and license attribution belong at the interface/distribution boundary, not in
 the core engine.
 
-Last Reviewed: 2026-07-15
+### Presentation Asset Repository
+
+Visual and audio source, generated, release, and registry files live under
+`assets/` at the presentation/distribution boundary. The dependency-free
+`scripts/validate_assets.py` gate owns manifest completeness, semantic-role and
+license policy, approval, source/release hashes, and release-file coverage.
+`scripts/generate_asset_credits.py` derives attribution from the registries.
+These tools do not read or mutate simulation state; asset paths, licenses,
+playback rules, and accessibility metadata must never enter deterministic
+transitions, state hashes, replay artifacts, or debriefs.
+
+Last Reviewed: 2026-07-20
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture

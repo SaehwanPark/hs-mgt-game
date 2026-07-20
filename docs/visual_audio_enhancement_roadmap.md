@@ -148,6 +148,9 @@ Establish the governance, constraints, test surfaces, and asset pipeline require
 
 ## Milestone 0.1: Visual/audio product brief approved
 
+**Status:** Complete in v0.12.34
+**Evidence:** `docs/history/initiatives/visual-audio/visual-audio-phase0-foundation-v0.12.34.md`
+
 ### Deliverables
 
 - A concise visual/audio product brief.
@@ -171,18 +174,18 @@ Establish the governance, constraints, test surfaces, and asset pipeline require
 
 ### Checklist
 
-- [ ] Product brief written.
-- [ ] Target visual style approved.
-- [ ] Target audio style approved.
-- [ ] First vertical-slice scenario selected.
-- [ ] Supported resolutions documented.
-- [ ] Reduced-motion behavior documented.
-- [ ] License allowlist documented.
-- [ ] License denylist documented.
-- [ ] AI-generation policy documented.
-- [ ] Asset review ownership assigned.
-- [ ] Simulation-authority boundary documented.
-- [ ] Accessibility requirements documented.
+- [x] Product brief written.
+- [x] Target visual style approved.
+- [x] Target audio style approved.
+- [x] First vertical-slice scenario selected.
+- [x] Supported resolutions documented.
+- [x] Reduced-motion behavior documented.
+- [x] License allowlist documented.
+- [x] License denylist documented.
+- [x] AI-generation policy documented.
+- [x] Asset review ownership assigned.
+- [x] Simulation-authority boundary documented.
+- [x] Accessibility requirements documented.
 
 ### Exit criteria
 
@@ -193,6 +196,10 @@ Establish the governance, constraints, test surfaces, and asset pipeline require
 ---
 
 ## Milestone 0.2: Asset repository architecture implemented
+
+**Status:** Complete in v0.12.34
+**Evidence:** `assets/README.md`, `scripts/validate_assets.py`, and
+`scripts/generate_asset_credits.py`
 
 ### Recommended structure
 
@@ -245,17 +252,17 @@ assets/
 
 ### Checklist
 
-- [ ] Source and release assets are separated.
-- [ ] Registry schema validates.
-- [ ] Every release asset requires a registry entry.
-- [ ] Original and release hashes are computed automatically.
-- [ ] Missing license fields fail validation.
-- [ ] Missing source or generation metadata fail validation.
-- [ ] Attribution output is generated automatically.
-- [ ] Duplicate asset IDs fail validation.
-- [ ] Unknown semantic roles fail validation.
-- [ ] CI runs asset validation.
-- [ ] Asset review checklist is added to contribution docs.
+- [x] Source and release assets are separated.
+- [x] Registry schema validates.
+- [x] Every release asset requires a registry entry.
+- [x] Original and release hashes are computed automatically.
+- [x] Missing license fields fail validation.
+- [x] Missing source or generation metadata fail validation.
+- [x] Attribution output is generated automatically.
+- [x] Duplicate asset IDs fail validation.
+- [x] Unknown semantic roles fail validation.
+- [x] CI runs asset validation.
+- [x] Asset review checklist is added to contribution docs.
 
 ### Exit criteria
 

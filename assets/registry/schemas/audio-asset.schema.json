@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hs-mgt-game.invalid/schemas/audio-asset.schema.json",
+  "title": "Health Policy Strategy Game audio asset entry",
+  "type": "object",
+  "required": ["id", "asset_type", "semantic_role", "source_path", "release_path", "creator", "creation_method", "license", "modifications", "original_hash", "release_hash", "attribution_text", "accessible_equivalent", "visible_source", "approval_status"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "asset_type": {"const": "audio"},
+    "semantic_role": {"type": "string", "minLength": 1},
+    "source_path": {"type": ["string", "null"]},
+    "release_path": {"type": ["string", "null"]},
+    "creator": {"type": "string", "minLength": 1},
+    "creation_method": {"type": "string", "minLength": 1},
+    "license": {"type": "string", "minLength": 1},
+    "modifications": {"type": "string", "minLength": 1},
+    "original_hash": {"type": ["string", "null"]},
+    "release_hash": {"type": ["string", "null"]},
+    "attribution_text": {"type": "string", "minLength": 1},
+    "accessible_equivalent": {"type": "string", "minLength": 1},
+    "visible_source": {"type": "string", "minLength": 1},
+    "approval_status": {"enum": ["approved", "pending", "rejected"]}
+  }
+}

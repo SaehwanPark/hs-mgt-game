@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Put Provenance Checks Before Asset Production
+
+- Context: The visual/audio roadmap separates generated runtime recipes from
+  future distributable SVG, raster, and audio files.
+- Symptom: A catalog or credits file can look complete while a future release
+  file has no stable ID, source hash, license, fallback, or approval record.
+- Resolution: Added separated source/generated/release paths, manifests with
+  semantic and accessibility metadata, fail-closed hash/license/coverage
+  validation, and deterministic credits before adding new production assets.
+- Prevention: Treat registry validation and credits freshness as the gate for
+  every later asset slice; keep runtime-generated recipes registered even when
+  they have no release file.
+
 ## Give Presentation Semantics Their Own Contract
 
 - Context: Future visual/audio work needs domain-specific coordination, but the
