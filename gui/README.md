@@ -110,6 +110,22 @@ a deterministic simultaneous-overlay stack with explicit overflow count. The
 proof is fixture-only and does not infer severity, intent, causality, future
 outcomes, or host/session state.
 
+## Static regional-board proof
+
+Open `gui/regional-board-proof.html` directly or through a static server to
+inspect the Phase 4.1 host-shaped regional board. `regional-board.mjs` maps a
+recorded `competitive-regional-world-v1` envelope into the existing SVG
+identity, facility, status, overlay, source, and missingness vocabulary. The
+proof keeps institution/facility selection local, shows generic fallbacks, and
+preserves keyboard and written equivalents. It is fixture-only: it does not
+load a host, submit a command, create simulation state, or assert real
+geography.
+
+The main `index.html` mounts the same SVG board beside the existing semantic map
+and detail panels. `app.mjs` routes board, report, and semantic-list focus
+through one local selected-entity state; the host DTO remains authoritative for
+all visible values and future transitions.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

@@ -454,7 +454,7 @@
       "creation_method": "hand-authored deterministic SVG renderer",
       "license": "project-generated",
       "modifications": "None; fixture-only proof renderer.",
-      "original_hash": "sha256:60d81ec64ab0d7c4f3bb0a56d052b4a1b4e3818c09ca1ec2e0d86abcbe84b965",
+      "original_hash": "sha256:89d7269d97d639175fcf3093122bad51faaed3dda58ce858eb8b9e4e17f9f672",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Keyboard-reachable SVG controls plus visible labels and symbols",
@@ -544,6 +544,23 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Overlay category, glyph, non-color pattern, visible source, written equivalent, collision state, and generic fallback",
       "visible_source": "Actor-visible fields named by each operational-overlay contract",
+      "approval_status": "approved"
+    },
+    {
+      "id": "visual.runtime-regional-board-adapter",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/regional-board.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic host-DTO scene adapter",
+      "license": "project-generated",
+      "modifications": "None; maps actor-visible regional-world fields to the existing SVG scene vocabulary.",
+      "original_hash": "sha256:2b82d699ad853ce692b2fbca017e0fec06075198aa8fdf8233bb79deda68839d",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Mapped identity, facility, status, source, missingness, overlay, and keyboard selection labels",
+      "visible_source": "RegionalWorldEnvelope actor-visible fields",
       "approval_status": "approved"
     }
   ]

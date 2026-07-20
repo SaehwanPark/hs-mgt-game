@@ -1,91 +1,74 @@
-# Presentation Contract — Phase 3.3 operational overlays v0.12.63
+# Presentation Contract — Phase 4.1 static regional board v0.12.64
 
-## Goal and Authorization
+## Goal and authorization
 
-Complete the reusable operational-overlay library for the twelve required
-visible categories. The output is a fixture catalog and proof only; it must not
-be promoted into the live regional board or create a browser legality,
-simulation, or outcome engine.
+Promote the proven identity, facility, status, map, and overlay vocabulary into
+the first static board integration. The board consumes only the existing typed
+actor-visible `competitive-regional-world-v1` envelope or the equivalent static
+presentation fixture.
 
-## Player Questions and Consequences
+## DTO-to-scene source ledger
 
-- Which visible field/category does this overlay summarize?
-- Can several visible pressures share a readable, deterministic stack?
-- Which overlay is displayed first when space is limited?
-- Can meaning survive color removal, motion reduction, missing data, or an
-  unknown overlay ID?
-- Does the overlay describe a committed/observed fact without claiming hidden
-  severity, intent, causality, or future outcome?
+| Scene field | Actor-visible source | Boundary |
+| --- | --- | --- |
+| Institution identity/name/role | `RegionalWorldEntity.id`, `.name`, `.role`, `.visibility` | No hidden identity, role, or private detail |
+| Institution status | `RegionalWorldEntity.status` | Text/symbol status only; no client severity |
+| Institution ordering | `RegionalWorldEntity.layout_slot`, then stable ID | Local layout order; not geography or importance |
+| Facility label/kind | `RegionalWorldFacility.name`, `.kind` | Generic facility fallback for unknown kind |
+| Overlay label/value/unit | `RegionalWorldOverlay` | Visible source-linked value only |
+| Source labels | Entity/facility/overlay/missing `.source` | Source remains visible beside the interpretation |
+| Missingness | `RegionalWorldMissing.id`, `.label`, `.detail`, `.source` | Unavailable detail is shown, not inferred |
+| Report focus | Existing fixture briefing `.target_id` | Local focus/navigation only; no transition |
 
-## Actor-Visible Source Ledger
+## Visual and interaction contract
 
-| Overlay | Triggering visible field | Prohibited inference | Equivalent |
-| --- | --- | --- | --- |
-| Staffing constraint | `ReadOnlyObservation.staffing` / `PlayerObservation.nurses` and related visible staffing fields | Hidden staffing cause, quality, or future labor outcome | Staffing label, hatch pattern, and source text |
-| Capacity constraint | `ReadOnlyObservation.capacity` / visible facility capacity metrics | Unobserved throughput, access, or clinical performance | Capacity label, double-line pattern, and exact visible metric |
-| Demand pressure | `ReadOnlyObservation.operations.unmet_demand` / `PlayerObservation.monthly_unmet_demand` | Causal attribution, future demand, or population geography | Demand label, wave pattern, and visible value text |
-| Active capital project | `ReadOnlyObservation.in_flight_projects` | Funding success, completion, or private project detail | Active-project label and text timeline |
-| Delayed project | Host-provided visible project timing/status within `ReadOnlyObservation.in_flight_projects` | Hidden reason, risk, or eventual completion | Delayed label, dashed pattern, and timing text |
-| Project completion | `ReadOnlyPresentation.latest_transition` committed visible effects | Unobserved benefit, causality beyond host text, or future performance | Completion label, double-ring pattern, and effect text |
-| Payer/network change | `ReadOnlyObservation.market_bullets` / visible payer or market bullet | Private negotiation intent or guaranteed rate/outcome | Payer/network label and written market signal |
-| Regulatory review | `ReadOnlyObservation.annual_policy_review` / `policy_bullets` | Regulatory decision, probability, or compliance outcome | Review label, dotted frame, and review text |
-| Community-trust concern | `ReadOnlyObservation.community_trust` | Hidden sentiment cause, legitimacy, or future response | Trust label, crosshatch pattern, and visible trust text |
-| Financial distress | `ReadOnlyResources.cash` + `ReadOnlyObservation.cash_runway_signal` | Insolvency forecast, private finances, or optimal action | Financial label, diagonal hatch, and visible runway/cash text |
-| Operational recovery | `ReadOnlyObservation.operations.margin` / visible monthly operating result | Durable recovery, causal certainty, or future trend | Recovery label, ascending pattern, and exact result text |
-| Uncertain or stale intelligence | `ReadOnlyObservation.information_gaps` / `prior_access_revision` | Hidden probability, severity, truth, or future outcome | Uncertainty label, dot-dash pattern, and missingness text |
+- `gui/regional-board.mjs` is a pure, deterministic adapter. It normalizes
+  missing or unknown IDs and preserves visible fields without deriving hidden
+  severity, geography, causality, intent, probability, or future outcome.
+- `gui/scene.mjs` renders the mapped entities, facilities, status text, source
+  text, and up to four visible overlay cards with an explicit overflow count.
+  The SVG uses an accessible group role so its keyboard descendants remain
+  exposed to assistive technology.
+- `gui/app.mjs` mounts the SVG beside the existing semantic map/list/detail
+  surface. Entity and facility SVG controls focus the owning institution; the
+  existing detail panel remains the semantic fallback and selection source.
+- Visible report target buttons call the same local selection path as board
+  cards. No selection state enters the host or simulation.
+- The board is static under reduced motion. Glyphs, labels, status text, source
+  text, focus rings, and missingness remain available without color, motion, or
+  audio.
 
-## Visual, Motion, and Audio Semantics
+## Accessibility and fallback requirements
 
-- Every overlay has a stable ID, semantic role, glyph, shape/pattern, visible
-  source, and written equivalent.
-- Non-color patterns are the primary semantic fallback; color is supplementary.
-- Every overlay has `severity_encoding: "none"` and `motion: "none"`.
-- Display priority is a deterministic ordering aid only. It is explicitly not
-  severity, urgency, probability, or strategic importance.
-- Collision behavior uses a bounded stacked layout with deterministic
-  ID-based tie-breaking and an explicit overflow count; hidden overlays are
-  summarized as `N additional visible overlays` rather than discarded.
-- The proof contains no audio and no consequence animation. Reduced motion is
-  the same static layout and text.
+- Screen-reader order is heading/navigation, graphical board, semantic entity
+  list, overlay list, then selected detail; the semantic list/detail remains
+  available when SVG is unavailable.
+- SVG entity/facility controls are keyboard reachable with Enter/Space handling
+  and visible focus rings. The static proof repeats this contract.
+- Unknown institution IDs use the generic identity token; unknown facility kinds
+  use the generic marker. Missing detail is rendered as explicit text.
+- The deterministic snapshot fixture protects output changes without claiming
+  human usability or screenshot-based design validation.
 
-## Accessibility and Fallbacks
+## Authority, history, and replay boundaries
 
-- Exact visible values remain in text; unknown or missing values are not
-  fabricated.
-- Every overlay has a text equivalent, non-color pattern, and generic fallback.
-- Simultaneous overlay cards expose their source and collision state.
-- The proof uses semantic headings, labels, focus-visible cards, compact/wide
-  responsive layout, and reduced-motion CSS.
-- Unknown IDs normalize to `operational-overlay-generic`; invalid max-visible
-  values use a safe default.
+The adapter and renderer accept DTO/fixture values only. They do not call a
+host, submit commands, mutate simulation state, resolve stochastic inputs,
+write history, compute hashes, alter replay, drive audio, or create debrief
+facts. Live DTO authority remains in `src/mcp/regional_world.rs`.
 
-## Authority, History, and Replay Boundaries
+## Asset provenance and verification
 
-The catalog accepts fixture IDs/visible field labels only. Sorting and layout
-are local presentation functions. They do not read host state, submit
-commands, evaluate transitions, resolve stochastic inputs, mutate history,
-produce hashes, alter replay, drive audio, or write debrief facts.
+`visual.runtime-regional-board-adapter` and the updated SVG scene renderer are
+project-generated, registry-approved semantic assets with source hashes and
+written equivalents. Focused adapter/snapshot tests, existing GUI tests, asset
+validation, credits, metadata, syntax, Rust, Python, documentation-link, and
+presentation-contract checks are required before handoff.
 
-## Asset Provenance and Release Requirements
+## Non-goals and next gate
 
-`visual.runtime-operational-overlays` is a hand-authored project-generated
-semantic asset with registry coverage, source hash, accessible equivalent,
-visible source, modification note, and approved status. It has no external or
-release image file.
-
-## Verification and Evidence Limits
-
-Focused tests must cover all twelve categories, all required contract fields,
-generic fallback, no-severity/no-motion semantics, deterministic priority and
-ID tie-breaking, bounded collision/overflow layout, simultaneous rendering,
-registry/hash/credits, and syntax. These are technical checks only; they do
-not substitute for human design, lived accessibility, learning, calibration,
-policy validity, or live-browser evaluation.
-
-## Non-Goals and Open Questions
-
-- Do not alter live host DTOs or integrate the catalog into `gui/app.mjs`.
-- Do not infer an overlay trigger from hidden state or client-derived severity.
-- Do not add animation, audio, external assets, or a second operational model.
-- Future Phase 4 integration must map each overlay from actor-visible data and
-  preserve host-provided timing, missingness, and history semantics.
+This slice does not implement consequence linkage, project-state transitions,
+rival observability timing, replay visual sequencing, or first-month integration
+tests. Those remain Phase 4.2. It does not replace the host with a browser
+simulation or assert real geography, distance, travel time, ownership,
+jurisdiction, or performance.

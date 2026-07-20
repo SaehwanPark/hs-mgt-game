@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Regional Board Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1080px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+      button { background: #ffffff; border: 2px solid #0b6e69; border-radius: .5rem; color: #075952; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .source { color: #60707b; }
+      #board { overflow-x: auto; }
+      #board svg { display: block; height: auto; min-width: 760px; width: 100%; }
+      #detail { background: #f4f7f6; border-radius: .6rem; margin-top: 1rem; padding: .8rem; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>Static regional board integration proof</h1>
+      <p class="source">Fixture-only host-shaped DTO. No host, command, network request, or simulation state is loaded.</p>
+      <div class="controls" aria-label="Board selection controls">
+        <button type="button" data-select="riverside">Select Riverside</button>
+        <button type="button" data-select="northlake">Select Northlake</button>
+        <button type="button" data-select="unknown-system">Select generic fallback</button>
+      </div>
+      <div id="board" aria-live="polite"></div>
+      <section id="detail" aria-labelledby="detail-heading"></section>
+      <p class="fallback">Labels, symbols, source text, status text, and focus rings remain available when color, motion, or audio is unavailable. Missing and private detail stay explicit.</p>
+    </main>
+    <script type="module">
+      import { regionalWorldToSceneData } from "./regional-board.mjs";
+      import { renderRegionalSvg } from "./scene.mjs";
+
+      const fixture = {
+        schema_version: "competitive-regional-world-v1",
+        entities: [
+          { id: "riverside", name: "Riverside Community Health", role: "Player system", visibility: "owned", layout_slot: "player", status: "constrained", source: "PlayerObservation visible fields", facilities: [{ name: "Riverside Medical Center", kind: "general hospital" }, { name: "Riverside Clinics", kind: "ambulatory center" }] },
+          { id: "northlake", name: "Northlake Health", role: "Public rival", visibility: "public", layout_slot: "rival-1", status: "uncertain", source: "PublicActionEntry via one-month observation lag", facilities: [] },
+          { id: "unknown-system", name: "Unlisted institution", role: "Institution unavailable", visibility: "unknown", layout_slot: "rival-2", status: "not-provided", source: "RegionalWorldEntity.source", facilities: [{ name: "Unlisted facility", kind: "unknown kind" }] },
+        ],
+        overlays: [
+          { id: "demand", label: "Demand pressure", value: "12", unit: "units", source: "PlayerObservation.monthly_unmet_demand", equivalent: "Written demand pressure." },
+          { id: "project", label: "Project process", value: "Pending", unit: "", source: "PlayerObservation.in_flight_projects", equivalent: "Written project status." },
+        ],
+        missing: [{ id: "northlake-private-detail", label: "Private rival operations", detail: "Unavailable", source: "RegionalWorldMissing.source" }],
+      };
+      const board = document.querySelector("#board");
+      const detail = document.querySelector("#detail");
+      const scene = regionalWorldToSceneData(fixture);
+      let selectedId = "riverside";
+
+      function renderDetail() {
+        const entity = scene.entities.find((candidate) => candidate.id === selectedId) ?? scene.entities[0];
+        detail.replaceChildren();
+        const heading = document.createElement("h2");
+        heading.id = "detail-heading";
+        heading.textContent = entity ? entity.name : "No visible institution";
+        const summary = document.createElement("p");
+        summary.textContent = entity?.summary ?? "No visible detail available.";
+        detail.append(heading, summary);
+      }
+
+      function render() {
+        board.innerHTML = renderRegionalSvg(scene, { selectedId });
+        renderDetail();
+      }
+
+      document.querySelectorAll("[data-select]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedId = button.dataset.select;
+          render();
+        });
+      });
+      board.addEventListener("click", (event) => {
+        const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
+        if (!target) return;
+        event.preventDefault();
+        selectedId = target.dataset.entityId ?? target.parentElement?.closest?.("[data-entity-container-id]")?.dataset.entityContainerId;
+        render();
+      });
+      board.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
+        if (!target) return;
+        event.preventDefault();
+        selectedId = target.dataset.entityId ?? target.parentElement?.closest?.("[data-entity-container-id]")?.dataset.entityContainerId;
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>

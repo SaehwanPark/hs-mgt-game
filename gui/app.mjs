@@ -1,6 +1,8 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
 import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
+import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regional-board.mjs";
+import { renderRegionalSvg } from "./scene.mjs";
 import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 
 const presentationFixture = {
@@ -197,6 +199,17 @@ const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
+let selectedBoardId = null;
+let currentMapEntities = [];
+let currentBoardScene = null;
+
+function boardEntityFor(id) {
+  return currentBoardScene?.entities?.find((entity) => entity.id === id || entity.source_id === id);
+}
+
+function boardIdFor(id) {
+  return boardEntityFor(id)?.id ?? id;
+}
 
 function appendText(parent, text) {
   const node = document.createElement("p");
@@ -446,6 +459,21 @@ function renderBriefing(items, root) {
     const explanation = document.createElement("p");
     explanation.textContent = String(entry.detail ?? "No further visible detail.");
     item.append(heading, detail, explanation);
+    if (entry.target_id) {
+      const focus = document.createElement("button");
+      focus.type = "button";
+      focus.className = "briefing-focus";
+      focus.textContent = "View on regional board";
+      focus.addEventListener("click", () => {
+        selectedEntityId = String(entry.target_id);
+        selectedBoardId = boardIdFor(selectedEntityId);
+        renderMap(currentMapEntities, root);
+        renderSelectedEntity(currentMapEntities, root);
+        renderRegionalBoard(currentBoardScene, root);
+        root.querySelector("#regional-board")?.scrollIntoView?.({ behavior: "smooth", block: "start" });
+      });
+      item.append(focus);
+    }
     appendSource(item, entry.source);
     list.append(item);
   }
@@ -453,6 +481,7 @@ function renderBriefing(items, root) {
 }
 
 function renderMap(entities, root) {
+  currentMapEntities = entities ?? [];
   const list = root.querySelector("#map-list");
   list.replaceChildren();
   for (const entity of entities ?? []) {
@@ -473,12 +502,43 @@ function renderMap(entities, root) {
     card.append(icon, type, name, summary, createStatus(entity.status, entity.status_label));
     card.addEventListener("click", () => {
       selectedEntityId = entity.id;
+      selectedBoardId = boardIdFor(entity.id);
       renderMap(entities, root);
       renderSelectedEntity(entities, root);
+      renderRegionalBoard(currentBoardScene, root);
     });
     list.append(card);
   }
   if (!entities?.length) emptyState(list, "No regional institutions available.");
+}
+
+function renderRegionalBoard(scene, root) {
+  const mount = root.querySelector("#regional-board");
+  if (!mount) return;
+  currentBoardScene = scene;
+  mount.replaceChildren();
+  if (!scene) return;
+  mount.innerHTML = renderRegionalSvg(scene, { selectedId: boardIdFor(selectedBoardId ?? selectedEntityId) });
+  if (mount.dataset.bound === "true") return;
+  mount.dataset.bound = "true";
+  const selectTarget = (event) => {
+    const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
+    if (!target) return;
+    event.preventDefault();
+    const boardOwnerId = target.dataset.entityId
+      ?? target.parentElement?.closest?.("[data-entity-container-id]")?.dataset.entityContainerId;
+    const boardEntity = boardEntityFor(boardOwnerId);
+    selectedEntityId = boardEntity?.source_id ?? boardOwnerId;
+    selectedBoardId = target.dataset.facilityId ?? boardEntity?.id ?? boardOwnerId;
+    if (!currentMapEntities.some((entity) => entity.id === selectedEntityId)) return;
+    renderMap(currentMapEntities, root);
+    renderSelectedEntity(currentMapEntities, root);
+    renderRegionalBoard(currentBoardScene, root);
+  };
+  mount.addEventListener("click", selectTarget);
+  mount.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") selectTarget(event);
+  });
 }
 
 function renderSelectedEntity(entities, root) {
@@ -529,6 +589,7 @@ function renderSelectedEntity(entities, root) {
     const detailText = document.createElement("p");
     detailText.textContent = String(facility.detail ?? "No visible facility detail.");
     item.append(row, marker, kind, detailText);
+    appendSource(item, facility.source);
     facilities.append(item);
   }
   if (!entity.facilities?.length) emptyState(facilities, "No visible facility detail available.");
@@ -605,6 +666,7 @@ function regionalEntitiesToFixture(envelope) {
       status: entity.status,
       status_label: entity.status_label,
       detail: (facility.metrics ?? []).map((metric) => `${metric.label}: ${metric.value}`).join(" · ") || "No visible facility metric.",
+      source: facility.source,
     })),
     processes: (entity.processes ?? []).map((process) => ({
       label: process.label,
@@ -952,8 +1014,10 @@ export function renderRegionalWorld(envelope, root = document) {
   }
   const entities = regionalEntitiesToFixture(envelope);
   if (!entities.some((entity) => entity.id === selectedEntityId)) selectedEntityId = entities[0]?.id;
+  selectedBoardId = selectedEntityId;
   renderMap(entities, root);
   renderSelectedEntity(entities, root);
+  renderRegionalBoard(regionalWorldToSceneData(envelope), root);
   renderRegionalOverlays(envelope.overlays, root);
   renderRegionalNavigation(envelope.navigation, root);
   return { ok: true, envelope };
@@ -2130,16 +2194,19 @@ export function renderPresentation(envelope, root = document) {
     renderActions([], root);
     renderPending([], root);
     renderMonthlyResult(null, root);
+    renderRegionalBoard(null, root);
     return;
   }
   const entityIds = new Set((fixture.entities ?? []).map((entity) => entity.id));
   if (!entityIds.has(selectedEntityId)) {
     selectedEntityId = fixture.selected_entity_id ?? fixture.entities?.[0]?.id;
   }
+  selectedBoardId = selectedEntityId;
   renderMetricList(fixture.header_metrics, root);
   renderBriefing(fixture.briefing, root);
   renderMap(fixture.entities, root);
   renderSelectedEntity(fixture.entities, root);
+  renderRegionalBoard(presentationFixtureToSceneData(fixture), root);
   renderActions(fixture.actions, root);
   renderPending(fixture.pending, root);
   renderMonthlyResult(fixture.monthly_result, root);

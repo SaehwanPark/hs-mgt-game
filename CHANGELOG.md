@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.64] - 2026-07-20
+
+- Added the first Phase 4.1 static regional-board integration with a pure
+  actor-visible regional-world DTO-to-scene adapter and deterministic SVG
+  overlay rendering.
+- Mounted the board in the existing GUI with synchronized institution/facility
+  focus, report-to-board links, visible status/source/missingness text, generic
+  fallbacks, keyboard controls, and a static proof page.
+- Added a deterministic SVG snapshot fixture, focused adapter tests, registry/
+  credits provenance, and completed the Phase 4.1/static-board checklist.
+- Bumped package/public metadata to `0.12.64`.
+
 ## [0.12.63] - 2026-07-20
 
 - Added the deterministic, fixture-only Phase 3.3 operational overlay catalog
