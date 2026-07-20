@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Reuse the Layer Contract Across Facility Types
+
+- Context: The patient tower shares consequence layers with the general
+  hospital but needs a visibly distinct silhouette.
+- Symptom: A second proof page could drift in fallback, source labels, or
+  non-color behavior while appearing visually complete.
+- Resolution: Extended one catalog/proof selector with the patient tower and
+  kept the same seven layer IDs, written equivalents, registry fields, and
+  generic fallback.
+- Prevention: Add new facility types as data against the established layer
+  contract before creating another rendering path.
+
 ## Make Facility Layers Composable Before Adding More Buildings
 
 - Context: Phase 3.1 needs many facility types and several visible consequence

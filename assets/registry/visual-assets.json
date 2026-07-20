@@ -139,6 +139,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.patient-tower",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/patient-tower.svg",
+      "release_path": "assets/release/visual/svg/patient-tower.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the tower silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:9e14ac4a57941aafec71eb5af6bdd228017ecf9d871b80fcc63c81f1d00f40b5",
+      "release_hash": "sha256:7d5609762e85ff1e5e1f9d429bdd31ff31e24c28c78630271c281467307e608b",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Patient tower label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",

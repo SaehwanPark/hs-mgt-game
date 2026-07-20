@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 general-hospital base v0.12.43
+# Presentation Contract — Phase 3.1 patient-tower v0.12.44
 
 ## Goal and Authorization
 
-Make a fictional general-hospital base reusable across facility, map, report,
+Make a fictional patient tower reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,8 +27,8 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The base silhouette uses a shared 8px grid, system color variables, and a
-  stable viewBox.
+- The tower silhouette uses a shared 8px grid, system color variables, and a
+  stable viewBox distinct from the general-hospital base.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.

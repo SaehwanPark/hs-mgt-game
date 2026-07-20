@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 general-hospital base v0.12.43
+# Presentation Domain QA — Phase 3.1 patient-tower v0.12.44
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 general-hospital base lane, facility contract,
+- Request summary, Phase 3.1 patient-tower lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional general-hospital fixture work only.
+The slice is fictional patient-tower fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the base and seven layers derive only from visible facility kind,
+- Pass: the tower and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional general-hospital fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: source/release SVGs and component catalog are registry-backed with
+- Pass: patient-tower source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional facility component has no third-party brand or downloaded
+- Pass: the fictional patient-tower component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,8 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused facility component, layer, fallback, registry, and syntax tests.
+- Focused patient-tower/general-hospital component, layer, fallback, registry,
+  and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.

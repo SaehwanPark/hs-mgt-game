@@ -4674,6 +4674,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   facility types remain separate future slices and no live GUI or host behavior
   changed.
 
+### Visual/audio Phase 3.1 patient-tower component (v0.12.44)
+
+- Status: Partial; patient-tower component and shared fixture proof complete
+- Branch: `feat/visual-audio-phase3-patient-tower-v0.12.44`
+- Added a distinct fictional patient-tower source/release SVG pair using the
+  shared 8px grid, system color variables, accessible labels, and the same
+  seven base/identity/capacity/project/pressure/selection/uncertainty layers.
+- Extended the shared facility catalog/proof selector with patient tower,
+  generic fallback, deterministic hashes, and boundary tests.
+- Checked all 13 patient-tower per-component items; other Phase 3.1 facility
+  types remain separate future slices and no live GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

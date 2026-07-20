@@ -2,7 +2,7 @@
 
 **Status:** Bounded technical sequence closed; production foundation active
 
-**Version range:** v0.12.16–v0.12.43
+**Version range:** v0.12.16–v0.12.44
 **Principal conclusion:** The dependency-free GUI supports the bounded,
 host-authoritative competitive first-month presentation contract. Technical
 checks do not establish human usability, accessibility experience, learning,
@@ -40,5 +40,6 @@ calibration, balance, or policy validity.
 | 2.1 | v0.12.41 | [Summit identity kit proof](visual-audio-phase2-summit-identity-v0.12.41.md); Phase 2.1 complete |
 | 2.2 | v0.12.42 | [Actor-family identity language proof](visual-audio-phase2-actor-family-language-v0.12.42.md) |
 | 3.1 | v0.12.43 | [General-hospital base component proof](visual-audio-phase3-general-hospital-base-v0.12.43.md) |
+| 3.1 | v0.12.44 | [Patient-tower component proof](visual-audio-phase3-patient-tower-v0.12.44.md) |
 
 The executable audit remains `python3 scripts/audit_visual_audio_contract.py`.
