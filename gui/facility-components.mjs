@@ -148,6 +148,29 @@ const UTILITY_PLANT = Object.freeze({
   fallback: Object.freeze({ id: "generic-facility", label: "Facility", equivalent: "Facility label and generic marker" }),
 });
 
+const RESEARCH_EDUCATION_BUILDING = Object.freeze({
+  schema_version: "facility-component-v1",
+  id: "research-education-building",
+  label: "Research and education building",
+  source: "Visible facility kind and actor-visible status context",
+  equivalent: "Research and education building label, wing-and-tower silhouette, identity badge, and written layer labels",
+  source_path: "assets/source/visual/facilities/research-education-building.svg",
+  release_path: "assets/release/visual/svg/research-education-building.svg",
+  grid: "8px",
+  view_box: "0 0 760 500",
+  css_variables: ["--facility-primary", "--facility-secondary", "--facility-ink", "--facility-paper", "--facility-muted"],
+  layers: [
+    Object.freeze({ id: "base", label: "Base structure", source: "Visible facility kind" }),
+    Object.freeze({ id: "identity", label: "System identity layer", source: "Visible owning-system identity" }),
+    Object.freeze({ id: "capacity", label: "Capacity/service-line layer", source: "Visible capacity or service-line field" }),
+    Object.freeze({ id: "project", label: "Project layer", source: "Visible project status" }),
+    Object.freeze({ id: "pressure", label: "Operational-pressure layer", source: "Visible pressure status" }),
+    Object.freeze({ id: "selection", label: "Selection/focus layer", source: "Local selected-facility presentation state" }),
+    Object.freeze({ id: "uncertainty", label: "Uncertainty/stale-observation layer", source: "Visible observation freshness or missingness" }),
+  ],
+  fallback: Object.freeze({ id: "generic-facility", label: "Facility", equivalent: "Facility label and generic marker" }),
+});
+
 const AMBULATORY_CENTER = Object.freeze({
   schema_version: "facility-component-v1",
   id: "ambulatory-center",
@@ -238,6 +261,7 @@ export const FACILITY_COMPONENTS = Object.freeze({
   "patient-tower": PATIENT_TOWER,
   "parking-structure": PARKING_STRUCTURE,
   "utility-plant": UTILITY_PLANT,
+  "research-education-building": RESEARCH_EDUCATION_BUILDING,
   "emergency-department": EMERGENCY_DEPARTMENT,
   "ambulatory-center": AMBULATORY_CENTER,
   "specialty-center": SPECIALTY_CENTER,

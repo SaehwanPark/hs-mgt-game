@@ -621,7 +621,7 @@ Create the reusable graphical vocabulary needed to represent the regional market
 
 ## Milestone 3.1: Facility component library
 
-**Status:** Partial in v0.12.51; general hospital base, patient tower, emergency department, ambulatory center, specialty center, rural clinic, administrative headquarters, parking structure, and utility plant components complete
+**Status:** Partial in v0.12.52; general hospital base, patient tower, emergency department, ambulatory center, specialty center, rural clinic, administrative headquarters, parking structure, utility plant, and research/education building components complete
 **Evidence:** `assets/source/visual/facilities/general-hospital-base.svg`,
 `assets/release/visual/svg/general-hospital-base.svg`,
 `gui/facility-components.mjs`, `gui/facility-proof.html`, and
@@ -629,7 +629,8 @@ Create the reusable graphical vocabulary needed to represent the regional market
 `tests/test_patient_tower.py`, `tests/test_emergency_department.py`, and
 `tests/test_ambulatory_center.py`, `tests/test_specialty_center.py`, and
 `tests/test_rural_clinic.py`, `tests/test_administrative_headquarters.py`,
-`tests/test_parking_structure.py`, and `tests/test_utility_plant.py`.
+`tests/test_parking_structure.py`, `tests/test_utility_plant.py`, and
+`tests/test_research_education_building.py`.
 
 ### Core modules
 
@@ -686,8 +687,8 @@ Each facility should support:
 
 ### Future component lanes
 
-Research/education building, construction crane, and undeveloped parcel remain
-separate bounded component slices.
+Construction crane and undeveloped parcel remain separate bounded component
+slices.
 
 ### Checklist: Patient tower component
 
@@ -802,6 +803,22 @@ separate bounded component slices.
 - [x] Deterministic output hash recorded.
 
 ### Checklist: Utility plant component
+
+- [x] Source SVG completed.
+- [x] Geometry uses shared grid.
+- [x] ViewBox standardized.
+- [x] System color variables supported.
+- [x] Monochrome rendering tested.
+- [x] Small-size rendering tested.
+- [x] Pressure overlays tested.
+- [x] Project overlays tested.
+- [x] Accessibility label defined.
+- [x] Registry entry complete.
+- [x] No embedded external fonts.
+- [x] SVG optimization verified.
+- [x] Deterministic output hash recorded.
+
+### Checklist: Research and education building component
 
 - [x] Source SVG completed.
 - [x] Geometry uses shared grid.

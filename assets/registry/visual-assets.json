@@ -173,6 +173,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.research-education-building",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/research-education-building.svg",
+      "release_path": "assets/release/visual/svg/research-education-building.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the wing-and-tower silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:a3c35cc98a8771250487b11efba23be820978b5570c908b47573bec5f37ce8f9",
+      "release_hash": "sha256:2f56aecaa91423549641acdeefbcaaced231afd7c433a077ecd6037b9febf1dd",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Research and education building label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",

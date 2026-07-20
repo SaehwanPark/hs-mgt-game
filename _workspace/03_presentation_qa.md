@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 utility-plant v0.12.51
+# Presentation Domain QA — Phase 3.1 research-education-building v0.12.52
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 utility-plant lane, facility contract,
+- Request summary, Phase 3.1 research-education-building lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional utility-plant fixture work only.
+The slice is fictional research-education-building fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the utility-plant shape and seven layers derive only from visible facility kind,
+- Pass: the research-education-building shape and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional utility-plant fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: utility-plant source/release SVGs and component catalog are registry-backed with
+- Pass: research-education-building source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional utility-plant component has no third-party brand or downloaded
+- Pass: the fictional research-education-building component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused utility-plant/parking-structure/administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
+- Focused research-education-building/utility-plant/parking-structure/administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
   and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
