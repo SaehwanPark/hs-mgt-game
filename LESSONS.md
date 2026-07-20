@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep District Tokens Separate From Land-Use Claims
+
+- Context: The district tile set needed reusable commercial, residential,
+  employer-center, and government vocabulary before parcels or overlays were
+  modeled.
+- Symptom: A district label, block pattern, or civic mark can imply real-world
+  land use, population, ownership, zoning, travel time, or jurisdiction that
+  is not visible.
+- Resolution: Used deterministic symbolic district tokens with non-color
+  patterns, written equivalents, a generic fallback, and an explicit
+  non-geographic boundary.
+- Prevention: Treat districts as presentation vocabulary until a scenario
+  explicitly supplies geographic or institutional semantics.
+
 ## Keep Road Tokens Separate From Travel Claims
 
 - Context: The road tile set needed reusable segments before intersections and

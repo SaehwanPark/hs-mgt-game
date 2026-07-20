@@ -877,12 +877,13 @@ remain separate future slices.
 
 ## Milestone 3.2: Regional map tile and environment kit
 
-**Status:** Partial in v0.12.56; the deterministic map-grid contract and road tile set are complete
+**Status:** Partial in v0.12.57; the deterministic map-grid, road tile set, and district tile set are complete
 **Evidence:** `gui/map-environment.mjs`, `gui/map-tiles.mjs`,
-`tests/test_map_grid.py`, and `tests/test_road_tiles.py`
+`gui/map-districts.mjs`, `tests/test_map_grid.py`, `tests/test_road_tiles.py`,
+and `tests/test_district_tiles.py`
 
-The road tile-set slice extends the map/environment vocabulary without
-promoting it into live board rendering.
+The road and district tile-set slices extend the map/environment vocabulary
+without promoting it into live board rendering.
 
 ### Components
 
@@ -909,7 +910,7 @@ Geography must remain symbolic unless a scenario explicitly models geography. Sp
 
 - [x] Map grid specified.
 - [x] Road tile set completed.
-- [ ] District tile set completed.
+- [x] District tile set completed.
 - [ ] Parcel system completed.
 - [ ] Relationship-line styles completed.
 - [ ] Service-area overlays completed.

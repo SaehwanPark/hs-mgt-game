@@ -67,6 +67,11 @@ intersection and district slices. Horizontal, vertical, and quarter-curve
 segments have written orientation labels and a generic fallback; they do not
 assert real-world road geometry or travel time.
 
+`map-districts.mjs` adds the fixture-only symbolic district tile set with
+commercial, residential, employer-center, and government tokens. Each token
+has a non-color pattern and generic fallback; it does not assert real-world
+land use, population, ownership, zoning, travel time, or jurisdiction.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the
