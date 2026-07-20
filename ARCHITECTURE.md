@@ -294,6 +294,10 @@ distinct dashed parcel-boundary silhouette and explicit type-only description.
 Its shape does not imply development potential, ownership, future use, or
 hidden outcome.
 
+The v0.12.55 regional map grid is a deterministic fixture-only coordinate
+contract for symbolic layout. Its 24px cells organize relationships and
+attention; they do not assert real-world distance or geography.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

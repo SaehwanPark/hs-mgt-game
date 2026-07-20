@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 undeveloped-parcel v0.12.54
+# Presentation Domain QA — Phase 3.2 map-grid v0.12.55
 
 ## Status
 
@@ -6,36 +6,31 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 undeveloped-parcel lane, facility contract,
-  source/release SVGs, component catalog/proof, registry/credits, tests, and
-  architecture.
+- Request summary, Phase 3.2 map-grid lane, presentation contract,
+  coordinate module, registry/credits, tests, and architecture.
 
-The slice is fictional undeveloped-parcel fixture work only.
+The slice is deterministic symbolic map-grid fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the undeveloped-parcel shape and seven layers derive only from visible facility kind,
-  status, freshness, or local selection context.
-- Pass: pressure, project, capacity, and uncertainty layers do not encode
-  private facility condition or infer unobserved outcomes.
-- Pass: the component proof preserves generic facility fallback for unknown
-  kinds.
+- Pass: the map-grid module exposes only explicit fixture coordinates and does
+  not infer real-world distance, jurisdiction, or hidden relationships.
+- Pass: coordinate conversion is deterministic and dimensionally constrained.
+- Pass: unavailable coordinates remain explicit rather than being guessed.
 
 ## Accessibility and Fallback Findings
 
-- Pass: source/release title/description, system-ui text, written layer labels,
-  and generic fallback are present.
-- Pass: shared-grid geometry, monochrome-safe structure, small-size derivative,
-  non-color layer patterns, and native document semantics remain available.
+- Pass: symbolic-geography disclaimer and named coordinate equivalent are
+  present.
+- Pass: the module has no browser, network, random, or host/session side effects.
 - Evidence limit: static checks do not establish human contrast, screen-reader,
   viewport, or lived-accessibility outcomes.
 
 ## Provenance and Rights Findings
 
-- Pass: undeveloped-parcel source/release SVGs and component catalog are registry-backed with
+- Pass: map-grid source module and catalog entry are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional undeveloped-parcel component has no third-party brand or downloaded
-  asset.
+- Pass: the fictional map-grid contract has no third-party or downloaded asset.
 
 ## Authority and Replay Findings
 
@@ -53,8 +48,8 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused undeveloped-parcel/construction-crane/research-education-building/utility-plant/parking-structure/administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
-  and syntax tests.
+- Focused map-grid contract, deterministic coordinate, registry, metadata, and
+  syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.

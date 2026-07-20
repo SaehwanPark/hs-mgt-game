@@ -1,50 +1,42 @@
-# Presentation Contract — Phase 3.1 undeveloped-parcel v0.12.54
+# Presentation Contract — Phase 3.2 map-grid v0.12.55
 
 ## Goal and Authorization
 
-Make a fictional undeveloped parcel reusable across facility, map, report,
-and consequence surfaces while preserving the completed identity and generic
-fallback contracts.
+Define a deterministic symbolic regional map coordinate contract for facility,
+map, report, and consequence surfaces while preserving the completed identity
+and generic fallback contracts.
 
 ## Player Questions and Consequences
 
 - Which recurring public system is involved?
-- Which visible facility kind is involved?
-- Which visible layer explains the facility presentation?
-- Can the component remain recognizable in monochrome and at small size?
-- What appears when a public identity is unavailable?
+- Which visible entity or facility is involved?
+- Which named coordinate organizes the visible relationship?
+- Can the layout remain understandable when geography is symbolic?
+- What appears when a coordinate or entity is unavailable?
 
 ## Actor-Visible Source Ledger
 
 | Surface | Visible source | Prohibited inference | Equivalent |
 | --- | --- | --- | --- |
-| Facility base | Visible facility kind | Unobserved facility condition | Facility label and base silhouette |
-| Identity layer | Visible owning-system identity | Hidden ownership or intent | Identity badge and written label |
-| Capacity/project/pressure layers | Visible status fields | Hidden metric or outcome | Layer pattern and written label |
-| Selection layer | Local selected-facility presentation state | Host selection fact | Focus outline and selected label |
-| Uncertainty layer | Visible freshness/missingness | Guessed current state | Stale/uncertain pattern and text |
-| Missing facility | Missing/unknown visible kind | Guessed facility type | Generic facility fallback |
+| Map coordinate | Fixture-only symbolic layout coordinate | Real-world distance or geography | Named column/row coordinate |
+| Entity placement | Visible entity/facility ID | Hidden location or relationship | Visible label and coordinate equivalent |
+| Missing coordinate | Missing/unknown layout coordinate | Guessed position | Explicit unavailable coordinate |
 
 ## Visual, Motion, and Audio Semantics
 
-- The dashed parcel-boundary silhouette uses a shared 8px grid, system color variables,
-  and a stable viewBox distinct from the general-hospital base, patient tower,
-  emergency department, ambulatory center, specialty center, rural clinic,
-  administrative headquarters, parking structure, utility plant, research and
-  education building, and construction crane.
-- The dashed parcel-boundary silhouette is a type cue only; it does not
-  establish development potential, ownership, future use, or hidden outcome.
+- The regional map uses a stable 960x600 viewport and deterministic 24px cells.
+- Grid coordinates organize symbolic relationships and attention; they do not
+  establish real-world distance, travel time, jurisdiction, or geography.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.
 
 ## Accessibility and Fallbacks
 
-- Source/release SVGs carry title/description, system-ui labels, and a written
-  layer equivalent.
-- Shared proof controls are native keyboard buttons and retain visible labels.
-- Unknown facility kinds use `generic-facility`; unavailable assets leave the
-  facility label and written equivalent.
+- The contract carries a written symbolic-geography disclaimer and named
+  coordinate equivalent.
+- Unknown or unavailable coordinates remain explicitly unavailable rather than
+  being inferred by the client.
 
 ## Authority, History, and Replay Boundaries
 

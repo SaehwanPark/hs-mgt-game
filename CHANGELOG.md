@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.55] - 2026-07-20
+
+- Added the deterministic, fixture-only regional map grid contract with a
+  symbolic 24px coordinate system and explicit non-geographic meaning.
+- Added registry provenance, hash coverage, coordinate tests, and SDD records
+  for the first Phase 3.2 map/environment slice.
+- Checked the Phase 3.2 map-grid item without changing live GUI or host behavior.
+- Bumped package/public metadata to `0.12.55`.
+
 ## [0.12.54] - 2026-07-20
 
 - Added a distinct fictional undeveloped-parcel source/release facility
