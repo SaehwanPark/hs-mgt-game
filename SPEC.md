@@ -4850,6 +4850,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   relationship lines, overlays, event markers, and interaction behavior remain
   separate future slices with no live GUI or host behavior changed.
 
+### Visual/audio Phase 3.2 district-tiles contract (v0.12.57)
+
+- Status: Partial; deterministic fixture-only district tile-set contract
+  complete
+- Branch: `feat/visual-audio-phase3-district-tiles-v0.12.57`
+- Added `gui/map-districts.mjs` with commercial, residential, employer-center,
+  and government symbolic district tokens on the shared 24px grid, plus
+  non-color patterns and a generic fallback.
+- Added registry/hash/credits provenance and deterministic district-token tests.
+- Checked the Phase 3.2 district tile-set item; intersections, parcels,
+  relationship lines, overlays, event markers, and interaction behavior remain
+  separate future slices with no live GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

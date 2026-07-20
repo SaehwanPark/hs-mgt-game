@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.57] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic district tile set with
+  commercial, residential, employer-center, and government tokens plus a
+  generic fallback.
+- Added non-color pattern equivalents, registry provenance, hash coverage, and
+  regression tests for the Phase 3.2 district-tile slice.
+- Checked the Phase 3.2 district tile-set item without changing live GUI or
+  host behavior.
+- Bumped package/public metadata to `0.12.57`.
+
 ## [0.12.56] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic road tile set with horizontal,

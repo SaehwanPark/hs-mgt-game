@@ -105,6 +105,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.district-tile-set",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/map-districts.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic district-tile catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only district vocabulary.",
+      "original_hash": "sha256:4ba909fa855a4ac371be00c6e7110a96b9e2daab229c07ff70aedbec04599b1e",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "District type label, non-color pattern, and generic district fallback",
+      "visible_source": "Fixture-only symbolic district vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

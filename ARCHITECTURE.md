@@ -302,6 +302,12 @@ The v0.12.56 road tile set adds deterministic horizontal, vertical, and
 quarter-curve symbolic segments with a generic fallback. It organizes visual
 relationships and does not assert real-world road geometry or travel time.
 
+The v0.12.57 district tile set adds deterministic commercial, residential,
+employer-center, and government tokens on the shared 24px grid. Its block,
+campus, and civic patterns organize symbolic relationships and do not assert
+real-world land use, population, ownership, zoning, travel time, or
+jurisdiction.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 
