@@ -126,6 +126,16 @@ and detail panels. `app.mjs` routes board, report, and semantic-list focus
 through one local selected-entity state; the host DTO remains authoritative for
 all visible values and future transitions.
 
+## Visible consequence linkage
+
+`consequence-links.mjs` projects actor-visible regional signals/processes and
+host-committed resolution effects into deterministic, source-linked list items.
+Public rival signals retain their observed month and private-detail boundary;
+resolution effects without a host target remain targetless. The main page links
+reports to entities, entities to related reports/consequences, and consequence
+items back to board focus using local keyboard controls. Replay helpers preserve
+turn/state-hash sequence entries without rewriting current host history.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

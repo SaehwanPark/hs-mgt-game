@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.65] - 2026-07-20
+
+- Added deterministic visible-consequence links for regional public signals,
+  host-reported processes, committed resolution effects, and replay turn/hash
+  sequences.
+- Added bidirectional report/entity focus controls, linked consequence board
+  focus, explicit targetless effects, automatic-scroll-free focus behavior, and
+  first-month integration coverage while preserving rival observability and
+  historical presentation boundaries.
+- Completed the Phase 4.2 visible consequence linkage checklist and added
+  registry/credits/SDD provenance.
+- Bumped package/public metadata to `0.12.65`.
+
 ## [0.12.64] - 2026-07-20
 
 - Added the first Phase 4.1 static regional-board integration with a pure

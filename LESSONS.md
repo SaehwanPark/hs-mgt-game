@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Link Consequences Only When the Host Names the Target
+
+- Context: Phase 4.2 connects regional reports, board entities, resolution
+  effects, and replay review without changing host authority.
+- Symptom: A client-side metric/source match can look like a causal or spatial
+  link even when the host did not identify the affected actor or facility.
+- Resolution: Regional signals/processes use explicit visible entity IDs;
+  resolution effects remain targetless unless a host-provided target exists;
+  deterministic links retain source, observed month, turn, and state hash.
+- Prevention: Treat focus as local navigation, preserve the semantic report
+  fallback, and never infer private rival detail, project outcome, causality, or
+  target identity from text alone.
+
 ## Keep the Semantic Board as the Fallback
 
 - Context: Phase 4.1 integrates a graphical SVG board with an existing typed

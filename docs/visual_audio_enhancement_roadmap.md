@@ -1032,6 +1032,15 @@ SVG snapshot, report focus links, and static fixture path.
 
 ## Milestone 4.2: Visible consequence linkage
 
+**Status:** Complete in v0.12.65
+
+Evidence: `gui/consequence-links.mjs` provides deterministic regional-signal,
+visible-process, committed-effect, and replay-sequence projections;
+`gui/app.mjs`/`gui/index.html` expose bidirectional report/entity focus and
+linked consequence controls; existing resolution/regional-world adapters and
+`tests/test_consequence_links.py`, `tests/test_gui_first_month.py`, and
+`tests/test_gui_resolution.py` cover the first-month and historical paths.
+
 ### Required interactions
 
 - Selecting a report highlights the relevant facility or actor.
@@ -1043,16 +1052,16 @@ SVG snapshot, report focus links, and static fixture path.
 
 ### Checklist
 
-- [ ] Report-to-entity links implemented.
-- [ ] Entity-to-report links implemented.
-- [ ] Project-state transitions render correctly.
-- [ ] Rival observability delays respected.
-- [ ] Unknown locations handled safely.
-- [ ] Simultaneous updates use deterministic order.
-- [ ] Focus state does not rely on animation.
-- [ ] Historical state is not overwritten.
-- [ ] Replay produces the same visual sequence.
-- [ ] Integration tests cover first-month workflow.
+- [x] Report-to-entity links implemented.
+- [x] Entity-to-report links implemented.
+- [x] Project-state transitions render correctly.
+- [x] Rival observability delays respected.
+- [x] Unknown locations handled safely.
+- [x] Simultaneous updates use deterministic order.
+- [x] Focus state does not rely on animation.
+- [x] Historical state is not overwritten.
+- [x] Replay produces the same visual sequence.
+- [x] Integration tests cover first-month workflow.
 
 ### Exit criteria
 
