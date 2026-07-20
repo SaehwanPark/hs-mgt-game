@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Complete Symbolic Map Vocabulary Before Board Integration
+
+- Context: Event markers and viewport interaction were the final explicit
+  Phase 3.2 map/environment contracts after grid, roads, districts, parcels,
+  relationships, service areas, and uncertainty were proven separately.
+- Symptom: A board proof can appear complete while missing marker categories,
+  target-size behavior, keyboard order, or bounded viewport recovery.
+- Resolution: Composed one fixture proof from the shared catalogs, declared
+  target viewports and focus order, clamped zoom/pan locally, and kept every
+  marker static, text-equivalent, and severity-free.
+- Prevention: Close the reusable vocabulary and its interaction contract in
+  fixture space before introducing live host projection or custom board logic.
+
 ## Keep Uncertainty Status Separate From Hidden Severity
 
 - Context: Uncertainty overlays needed stale, missing, and revised vocabulary

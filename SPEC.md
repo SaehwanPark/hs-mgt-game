@@ -4913,6 +4913,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   interaction behavior remain separate future slices with no live GUI or host
   behavior changed.
 
+### Visual/audio Phase 3.2 event-markers contract (v0.12.62)
+
+- Status: Complete; deterministic fixture-only event-marker and map-interaction
+  proof implemented and verified
+- Branch: `feat/visual-audio-phase3-event-markers-v0.12.62`
+- Added `gui/map-event-markers.mjs` with policy, workforce, community, and
+  project visible-category markers, written equivalents, no severity/priority
+  encoding, static reduced-motion behavior, and a generic fallback.
+- Added `gui/map-environment-proof.html` with shared map vocabulary, symbolic
+  geography disclaimer, compact/standard/wide target metadata, fixed keyboard
+  order, bounded zoom/pan controls, and visible local-state text.
+- Added registry/hash/credits provenance and deterministic event-marker and
+  interaction tests; checked every explicit Phase 3.2 map/environment item.
+- Deferred: operational overlay library, live regional board integration, and
+  host-sourced event semantics remain separately gated Future work.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 
@@ -12,6 +13,14 @@ REGISTRIES = (
   ("assets/registry/visual-assets.json", "Visual"),
   ("assets/registry/audio-assets.json", "Audio"),
 )
+
+
+def project_version(root: Path) -> str:
+  cargo = (root / "Cargo.toml").read_text(encoding="utf-8")
+  match = re.search(r'^version\s*=\s*"([0-9]+\.[0-9]+\.[0-9]+)"$', cargo, re.MULTILINE)
+  if match is None:
+    raise ValueError("Cargo.toml package version is unavailable")
+  return match.group(1)
 
 
 def render(root: Path) -> str:
@@ -24,7 +33,7 @@ def render(root: Path) -> str:
     "# Asset Credits", "",
     "This file is generated from `assets/registry/*.json`. Do not edit it",
     "directly; update a registry entry and run the credits check.", "",
-    "No third-party release assets are included in v0.12.61. Runtime-generated",
+    f"No third-party release assets are included in v{project_version(root)}. Runtime-generated",
     "visual tokens and Web Audio recipes remain optional presentation layers.", "",
     "| Type | ID | Source/generation | License | Attribution | Approval |",
     "| --- | --- | --- | --- | --- | --- |",

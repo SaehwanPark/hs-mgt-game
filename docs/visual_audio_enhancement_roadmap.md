@@ -877,14 +877,15 @@ remain separate future slices.
 
 ## Milestone 3.2: Regional map tile and environment kit
 
-**Status:** Partial in v0.12.61; the deterministic map-grid, road tile set, district tile set, parcel system, relationship-line styles, service-area overlays, and uncertainty overlays are complete
+**Status:** Complete in v0.12.62
 **Evidence:** `gui/map-environment.mjs`, `gui/map-tiles.mjs`,
 `gui/map-districts.mjs`, `gui/map-parcels.mjs`, `tests/test_map_grid.py`,
 `tests/test_road_tiles.py`, `tests/test_district_tiles.py`, and
 `tests/test_parcels.py`, `gui/map-relationships.mjs`, and
 `tests/test_relationship_lines.py`, `gui/map-service-areas.mjs`, and
-`tests/test_service_area_overlays.py`, `gui/map-uncertainty.mjs`, and
-`tests/test_uncertainty_overlays.py`
+`tests/test_service_area_overlays.py`, `gui/map-uncertainty.mjs`,
+`tests/test_uncertainty_overlays.py`, `gui/map-event-markers.mjs`,
+`gui/map-environment-proof.html`, and `tests/test_event_markers.py`
 
 The road, district, parcel, relationship-line, service-area, and uncertainty
 slices extend the map/environment vocabulary without promoting it into live
@@ -920,13 +921,13 @@ Geography must remain symbolic unless a scenario explicitly models geography. Sp
 - [x] Relationship-line styles completed.
 - [x] Service-area overlays completed.
 - [x] Uncertainty overlays completed.
-- [ ] Event-marker set completed.
-- [ ] Symbolic geography disclaimer documented.
-- [ ] Layout works at target resolutions.
-- [ ] Keyboard navigation order defined.
-- [ ] Zoom behavior tested.
-- [ ] Pan behavior tested if included.
-- [ ] Registry complete.
+- [x] Event-marker set completed.
+- [x] Symbolic geography disclaimer documented.
+- [x] Layout works at target resolutions.
+- [x] Keyboard navigation order defined.
+- [x] Zoom behavior tested.
+- [x] Pan behavior tested in the fixture proof.
+- [x] Registry complete.
 
 ### Exit criteria
 
