@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Make Overlay Priority Explicitly Non-Semantic
+
+- Context: Phase 3.3 requires deterministic ordering and collision behavior for
+  multiple operational overlays while the host remains the authority for
+  visible fields and outcomes.
+- Symptom: A high display priority or a stacked card can be read as hidden
+  urgency, severity, causality, or strategic importance.
+- Resolution: Each overlay records `severity_encoding: "none"` and a
+  display-only priority rule; bounded layout preserves visible overflow as an
+  explicit count and stable-ID tie-breaks.
+- Prevention: Treat priority as a rendering constraint, not a model signal;
+  keep trigger fields, text equivalents, and unknown fallbacks adjacent to
+  every semantic overlay token.
+
 ## Complete Symbolic Map Vocabulary Before Board Integration
 
 - Context: Event markers and viewport interaction were the final explicit

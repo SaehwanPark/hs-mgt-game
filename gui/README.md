@@ -101,6 +101,15 @@ bounded pan. Coordinates and controls remain symbolic local presentation state;
 they do not assert geography, distance, travel time, ownership, jurisdiction,
 or host/session behavior.
 
+## Operational overlay proof
+
+Open `gui/operational-overlay-proof.html` directly or through a static server
+to inspect the twelve Phase 3.3 operational overlay contracts. It shows each
+visible source, non-color pattern, written equivalent, reduced-motion rule, and
+a deterministic simultaneous-overlay stack with explicit overflow count. The
+proof is fixture-only and does not infer severity, intent, causality, future
+outcomes, or host/session state.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

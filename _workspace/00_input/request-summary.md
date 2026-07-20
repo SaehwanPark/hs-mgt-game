@@ -1,41 +1,40 @@
-# Request Summary — Visual/audio Phase 3.2 event markers v0.12.62
+# Request Summary — Visual/audio Phase 3.3 operational overlays v0.12.63
 
 ## Authorized outcome
 
-Complete the remaining deterministic, fixture-only Phase 3.2 regional map-kit
-lane with event-marker vocabulary and an inspectable interaction proof.
+Complete the Phase 3.3 operational overlay library as a deterministic,
+fixture-only, data-driven catalog for the twelve required visible overlay
+categories.
 
 ## Slice boundary
 
-- Add symbolic event markers with stable IDs, written equivalents, explicit
-  visible-source boundaries, no severity or outcome inference, and a generic
-  fallback.
-- Add a fixture proof for the shared map vocabulary at compact, standard, and
-  wide target resolutions.
-- Define and test keyboard order, bounded zoom, and bounded pan behavior.
-- Record the symbolic-geography disclaimer and register the new catalog with
-  provenance and a deterministic source hash.
-- Keep live GUI promotion, host/session behavior, simulation state, commands,
-  transitions, stochastic inputs, history, hashes, replay, and audio out of
-  scope.
+- Add staffing, capacity, demand, project, payer/network, regulatory,
+  community-trust, financial, operational-recovery, and uncertain/stale
+  intelligence overlay contracts.
+- Document the actor-visible triggering field, semantic role, non-color pattern,
+  text equivalent, reduced-motion behavior, collision behavior, deterministic
+  display priority, and generic fallback for every overlay.
+- Add deterministic sorting, bounded collision/overflow layout, simultaneous
+  overlay proof, registry/hash/credits coverage, and focused tests.
+- Keep live board promotion, host/session DTO changes, simulation transitions,
+  stochastic inputs, commands, history, hashes, replay, audio, and debriefs out
+  of scope.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Phase 3.2.
-- `docs/design_principles.md` — presentation authority and accessibility.
-- `gui/map-environment.mjs`, `gui/map-tiles.mjs`, `gui/map-districts.mjs`,
-  `gui/map-parcels.mjs`, `gui/map-relationships.mjs`,
-  `gui/map-service-areas.mjs`, and `gui/map-uncertainty.mjs`.
-- Existing Phase 3.2 focused tests and asset-registry validators.
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 3.3.
+- `docs/design_principles.md` — actor-visible presentation and accessibility.
+- `src/mcp/presentation.rs` and `src/mcp/regional_world.rs` — existing visible
+  field names and observation boundaries.
+- `gui/visual.mjs` and existing Phase 3.2 catalogs — local token conventions.
 
 ## Validation target
 
-Focused event-marker, map-proof, registry, credits, and JavaScript syntax tests;
-then the repository Rust, Python, asset, metadata, documentation-link, and
-diff checks required by the handoff.
+Focused operational-overlay, collision, registry, credits, and syntax tests;
+then full Rust/Python, asset, metadata, documentation-link, and diff checks.
 
 ## Evidence limits
 
-Static fixture checks establish deterministic contracts and fallback coverage.
-They do not establish human design quality, contrast, lived accessibility,
-learning, calibration, policy validity, or live-board usability.
+Static fixture checks establish deterministic vocabulary, fallback, and layout
+contracts. They do not establish human design quality, contrast, lived
+accessibility, learning, calibration, policy validity, or live-board usability.

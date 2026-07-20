@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.63] - 2026-07-20
+
+- Added the deterministic, fixture-only Phase 3.3 operational overlay catalog
+  covering staffing, capacity, demand, projects, payer/network, regulatory,
+  community-trust, financial, recovery, and uncertain/stale intelligence
+  categories.
+- Added visible-field source contracts, non-color/text equivalents,
+  reduced-motion behavior, generic fallback, deterministic priority, bounded
+  collision stacking, and simultaneous-overlay proof/tests.
+- Completed the Phase 3.3 operational overlay checklist without changing live
+  board, host, simulation, history, or replay behavior.
+- Bumped package/public metadata to `0.12.63`.
+
 ## [0.12.62] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic event-marker catalog for

@@ -939,6 +939,11 @@ Geography must remain symbolic unless a scenario explicitly models geography. Sp
 
 ## Milestone 3.3: Operational overlay library
 
+**Status:** Complete in v0.12.63
+**Evidence:** `gui/operational-overlays.mjs`,
+`gui/operational-overlay-proof.html`, `tests/test_operational_overlays.py`,
+and the registry/credits manifests
+
 ### Required overlays
 
 - staffing constraint;
@@ -956,16 +961,16 @@ Geography must remain symbolic unless a scenario explicitly models geography. Sp
 
 ### Checklist per overlay
 
-- [ ] Semantic role documented.
-- [ ] Triggering visible field documented.
-- [ ] Non-color representation implemented.
-- [ ] Reduced-motion rendering defined.
-- [ ] Text equivalent defined.
-- [ ] Collision behavior tested.
-- [ ] Multiple simultaneous overlays tested.
-- [ ] Priority rule documented.
-- [ ] Generic fallback exists.
-- [ ] Registry complete.
+- [x] Semantic role documented for all twelve overlays.
+- [x] Triggering visible field documented for all twelve overlays.
+- [x] Non-color representation implemented for all twelve overlays.
+- [x] Reduced-motion rendering defined for all twelve overlays.
+- [x] Text equivalent defined for all twelve overlays.
+- [x] Collision behavior tested for all twelve overlays.
+- [x] Multiple simultaneous overlays tested.
+- [x] Priority rule documented and deterministic.
+- [x] Generic fallback exists.
+- [x] Registry complete.
 
 ### Exit criteria
 
@@ -2224,9 +2229,9 @@ The visual/audio enhancement program should be considered successful when the fo
 - [x] Create Northlake identity kit.
 - [x] Create Summit identity kit.
 - [x] Create the general-hospital base module.
-- [ ] Create the emergency department module.
-- [ ] Create the ambulatory-center module.
-- [ ] Create construction and staffing overlays.
+- [x] Create the emergency department module.
+- [x] Create the ambulatory-center module.
+- [x] Create construction and staffing overlays.
 - [ ] Integrate one static regional board fixture.
 - [ ] Add screenshot regression tests.
 - [x] Refine the first five audio cues.
