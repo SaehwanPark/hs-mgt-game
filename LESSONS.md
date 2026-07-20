@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Infrastructure Symbols From Becoming Reliability Claims
+
+- Context: The utility-plant component needed a recognizable pipe-and-tank
+  silhouette while reliability, safety, and service are not encoded by a
+  fixture shape.
+- Symptom: Pipes, tanks, or a plant label can be read as operational assurance
+  or risk evidence that is not an actor-visible field.
+- Resolution: Used the infrastructure geometry as a type-only cue and tested
+  explicit non-claim wording for reliability, safety, and service.
+- Prevention: Keep support-infrastructure illustrations descriptive and route
+  operational meaning through visible layers with written equivalents.
+
 ## Keep Parking Geometry Separate From Availability Claims
 
 - Context: The parking-structure component needed a recognizable stacked-deck

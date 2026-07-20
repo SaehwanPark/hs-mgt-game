@@ -4769,6 +4769,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   research/education building, construction crane, and undeveloped parcel remain
   separate future slices and no live GUI or host behavior changed.
 
+### Visual/audio Phase 3.1 utility-plant component (v0.12.51)
+
+- Status: Partial; utility-plant component and shared fixture proof complete
+- Branch: `feat/visual-audio-phase3-utility-plant-v0.12.51`
+- Added a distinct fictional utility-plant source/release SVG pair using the
+  shared 8px grid, system color variables, accessible labels, and the same
+  seven base/identity/capacity/project/pressure/selection/uncertainty layers.
+- Extended the shared facility catalog/proof selector with utility plant,
+  generic fallback, deterministic hashes, and boundary tests.
+- Checked all 13 utility-plant per-component items; research/education building,
+  construction crane, and undeveloped parcel remain separate future slices and
+  no live GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

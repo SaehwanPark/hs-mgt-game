@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.50. Runtime-generated
+No third-party release assets are included in v0.12.51. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval |
@@ -25,6 +25,7 @@ visual tokens and Web Audio recipes remain optional presentation layers.
 | Visual | `visual.facility.patient-tower` | `assets/source/visual/facilities/patient-tower.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.rural-clinic` | `assets/source/visual/facilities/rural-clinic.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.facility.specialty-center` | `assets/source/visual/facilities/specialty-center.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
+| Visual | `visual.facility.utility-plant` | `assets/source/visual/facilities/utility-plant.svg` | project-generated | Hand-authored in this repository; fictional facility component with no third-party asset. | approved |
 | Visual | `visual.identity.northlake-kit` | `assets/source/visual/identity/northlake-kit.svg` | project-generated | Hand-authored in this repository; fictional identity with no third-party asset. | approved |
 | Visual | `visual.identity.riverside-kit` | `assets/source/visual/identity/riverside-kit.svg` | project-generated | Hand-authored in this repository; fictional identity with no third-party asset. | approved |
 | Visual | `visual.identity.summit-kit` | `assets/source/visual/identity/summit-kit.svg` | project-generated | Hand-authored in this repository; fictional identity with no third-party asset. | approved |
