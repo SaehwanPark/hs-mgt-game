@@ -4602,6 +4602,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   cooldowns, audio modes, and reduced-audio preference behavior remain Future.
 - No live audio-client, host, simulation, history/hash/replay, or debrief change.
 
+### Visual/audio Phase 1.3 audio policy (v0.12.38)
+
+- Status: Closed; recipe policy prototype and verification complete
+- Branch: `feat/visual-audio-phase1-audio-policy-v0.12.38`
+- Added deterministic event/interface/music/ambience priority, -8 dB music
+  ducking metadata, per-entry cooldowns, full/cues-only/muted modes, and
+  reduced-audio preference behavior to the fixture proof.
+- Preserved visible sources and text equivalents for allowed, filtered,
+  throttled, unsupported, and muted results.
+- Checked all Phase 1.3 roadmap items; no live audio-client or host behavior
+  changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4635,9 +4647,9 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-The Phase 1.3 audio direction standards and fixture proof are complete for the
-v0.12.37 slice. Audio priority/mode behavior, broader production, and human or
-educational evaluation remain separately gated Future work.
+The Phase 1.3 audio direction standards and policy fixture proof are complete
+through v0.12.38. Broader production and human or educational evaluation remain
+separately gated Future work.
 
 ## Future
 

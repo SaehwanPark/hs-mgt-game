@@ -80,7 +80,7 @@
       "creation_method": "hand-authored deterministic Web Audio direction recipes",
       "license": "project-generated",
       "modifications": "None; fixture-only preview recipes generated after user gesture.",
-      "original_hash": "sha256:7be53913bba400c2d53c1491d4e98f842ce9d8b59f90c05696a40210a745a97e",
+      "original_hash": "sha256:f627a6d3365767eaf55e9819ebdf7de10bd998830dc72c7786b62bcddfe14095",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible source, text equivalent, and unavailable-audio fallback",
