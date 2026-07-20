@@ -388,6 +388,13 @@ interpretation; `gui/app.mjs` renders only a metric descriptor that explicitly
 supplies a visualization, so visual geometry never becomes a second host or
 simulation source.
 
+The v0.12.68 Phase 6.1 motion catalog defines nine restrained presentation
+categories with explicit duration/easing, reduced-motion replacement,
+interruption, replay order, input, simultaneous-load, and declared frame-budget
+rules. `gui/motion-catalog.mjs` plans local presentation events only; the
+fixture proof demonstrates the policy without timers or host transitions, so
+motion remains supplementary to text and actor-visible state.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

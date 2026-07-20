@@ -3,6 +3,23 @@
   "asset_type": "visual",
   "entries": [
     {
+      "id": "visual.runtime-motion-catalog",
+      "asset_type": "visual",
+      "semantic_role": "marker",
+      "source_path": "gui/motion-catalog.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic motion specification catalog",
+      "license": "project-generated",
+      "modifications": "None; local presentation motion rules preserve written evidence, reduced-motion replacements, interruption, replay order, and input boundaries.",
+      "original_hash": "sha256:fb90d2f1e5dad3c3039804f4c25b2718849776e05dace65f2db263fbff53a83c",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Written motion purpose, timing, easing, replacement, interruption, replay, input, and performance rules",
+      "visible_source": "Actor-visible presentation categories and local motion policy",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-metric-visualizations",
       "asset_type": "visual",
       "semantic_role": "status",

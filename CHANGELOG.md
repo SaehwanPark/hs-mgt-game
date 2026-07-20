@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.68] - 2026-07-20
+
+- Added the Phase 6.1 deterministic motion catalog for nine visible presentation
+  categories with semantic purpose, duration, easing, reduced-motion,
+  interruption, replay-order, input, and performance-budget rules.
+- Added a fixture-only motion proof for deterministic replay order, interruption
+  replacement, reduced-motion output, simultaneous-animation limits, and print/
+  responsive behavior without adding runtime animation.
+- Completed the Phase 6.1 motion specification checklist and bumped package/
+  public metadata to `0.12.68`.
+
 ## [0.12.67] - 2026-07-20
 
 - Added the Phase 5.2 metric/trend visualization catalog for sparklines,

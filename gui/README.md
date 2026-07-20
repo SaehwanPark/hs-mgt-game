@@ -166,6 +166,20 @@ only when an actor-visible metric descriptor supplies `visualization_kind` and
 its corresponding values. It never converts absent fields into trends or
 percentages.
 
+## Motion specification proof
+
+Open `motion-proof.html` directly or through a static server to inspect the
+Phase 6.1 focus, report-arrival, month-transition, project, public-rival,
+status, metric-delta, and relationship-line motion contracts. The proof shows
+deterministic replay order, reduced-motion replacements, interruption results,
+simultaneous-animation limits, and a declared local frame budget without
+starting timers or animations. It is fixture-only and does not load a host,
+submit a command, create simulation state, or consume hidden data.
+
+`motion-catalog.mjs` is a policy/planning catalog for later motion
+implementation; it never owns focus, commands, transitions, randomness,
+history, hashes, replay authority, or debrief facts.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the
