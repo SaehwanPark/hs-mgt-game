@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 parking-structure v0.12.50
+# Presentation Contract — Phase 3.1 utility-plant v0.12.51
 
 ## Goal and Authorization
 
-Make a fictional parking structure reusable across facility, map, report,
+Make a fictional utility plant reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,12 +27,12 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The tiered deck silhouette uses a shared 8px grid, system color variables,
+- The pipe-and-tank silhouette uses a shared 8px grid, system color variables,
   and a stable viewBox distinct from the general-hospital base, patient tower,
-  emergency department, ambulatory center, specialty center, rural clinic, and
-  administrative headquarters.
-- The tiered deck silhouette is a type cue only; it does not establish parking
-  availability, access, ownership, or hidden outcome.
+  emergency department, ambulatory center, specialty center, rural clinic,
+  administrative headquarters, and parking structure.
+- The pipe-and-tank silhouette is a type cue only; it does not establish
+  reliability, safety, service, ownership, or hidden outcome.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.

@@ -156,6 +156,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.utility-plant",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/utility-plant.svg",
+      "release_path": "assets/release/visual/svg/utility-plant.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the pipe-and-tank silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:439f2dbe721eddfda24e9d602f45b8b25901882c47859b1eed569cefc5e3c2f8",
+      "release_hash": "sha256:bf971c25c6ae65bf4c8099968c89face6f2b66c07ba6365b115732ddcf6e882d",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Utility plant label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",
