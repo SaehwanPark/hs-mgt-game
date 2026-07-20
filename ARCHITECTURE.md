@@ -260,6 +260,10 @@ The v0.12.46 ambulatory-center component reuses the same contract with a
 distinct low-rise arc silhouette and explicit type-only description. Its shape
 does not imply throughput, service quality, ownership, or hidden outcome.
 
+The v0.12.47 specialty-center component reuses the same contract with a
+distinct peaked-canopy silhouette and explicit type-only description. Its shape
+does not imply clinical scope, capacity, ownership, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

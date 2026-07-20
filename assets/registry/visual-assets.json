@@ -190,6 +190,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.specialty-center",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/specialty-center.svg",
+      "release_path": "assets/release/visual/svg/specialty-center.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the peaked canopy silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:b23330b8bc276f52d1c1d03ca0abd88cfeabbcd5c19cf55e7a41af8f55a48ddb",
+      "release_hash": "sha256:e5cddc4d5beaac6cecaa7bf36539203656734e83e0661bcb2f4795e7d82db58a",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Specialty center label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",

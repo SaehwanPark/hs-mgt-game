@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Modular Type Cues Distinct Without Expanding Claims
+
+- Context: The specialty center needed a third compact geometry after the
+  low-rise ambulatory center and emergency entrance wing.
+- Symptom: A stronger shape cue can be mistaken for a claim about clinical
+  scope or capacity.
+- Resolution: Used a peaked canopy as a type-only marker, with explicit written
+  non-claim language and the shared seven-layer boundary.
+- Prevention: Vary geometry for recognition while keeping every accessible
+  description and layer source tied to visible fields.
+
 ## Distinct Geometry Must Keep Type Claims Narrow
 
 - Context: The ambulatory center needed a low-rise visual distinction from the
