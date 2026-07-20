@@ -298,6 +298,10 @@ The v0.12.55 regional map grid is a deterministic fixture-only coordinate
 contract for symbolic layout. Its 24px cells organize relationships and
 attention; they do not assert real-world distance or geography.
 
+The v0.12.56 road tile set adds deterministic horizontal, vertical, and
+quarter-curve symbolic segments with a generic fallback. It organizes visual
+relationships and does not assert real-world road geometry or travel time.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

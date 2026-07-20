@@ -4838,6 +4838,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   relationship lines, overlays, event markers, and interaction behavior remain
   separate future slices with no live GUI or host behavior changed.
 
+### Visual/audio Phase 3.2 road-tiles contract (v0.12.56)
+
+- Status: Partial; deterministic fixture-only road tile-set contract complete
+- Branch: `feat/visual-audio-phase3-road-tiles-v0.12.56`
+- Added `gui/map-tiles.mjs` with horizontal, vertical, and quarter-curve
+  symbolic road tokens, 24px grid metadata, path-role labels, and generic
+  fallback.
+- Added registry/hash/credits provenance and deterministic road-token tests.
+- Checked the Phase 3.2 road tile-set item; intersections, districts, parcels,
+  relationship lines, overlays, event markers, and interaction behavior remain
+  separate future slices with no live GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

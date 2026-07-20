@@ -88,6 +88,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.road-tile-set",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/map-tiles.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic road-tile catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only road-segment vocabulary.",
+      "original_hash": "sha256:a8283e16e8849e78793d06b854a2d467496445a5114b83eb71c88b9fedf4e0ba",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Road orientation label, path role labels, and generic road fallback",
+      "visible_source": "Fixture-only symbolic road-segment vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

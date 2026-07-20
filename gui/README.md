@@ -62,6 +62,11 @@ deterministic cell coordinates used by later map/environment slices. The grid
 is symbolic: coordinates organize relationships and attention without asserting
 real-world distance or geography.
 
+`map-tiles.mjs` adds the fixture-only symbolic road tile set used by later
+intersection and district slices. Horizontal, vertical, and quarter-curve
+segments have written orientation labels and a generic fallback; they do not
+assert real-world road geometry or travel time.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

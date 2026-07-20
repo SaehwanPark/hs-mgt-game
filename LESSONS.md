@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Road Tokens Separate From Travel Claims
+
+- Context: The road tile set needed reusable segments before intersections and
+  districts were modeled.
+- Symptom: Orientation, centerlines, or a road label can imply travel time,
+  traffic, capacity, jurisdiction, or real-world geometry that is not visible.
+- Resolution: Used deterministic symbolic path tokens with written roles and a
+  generic fallback, plus an explicit non-geographic boundary.
+- Prevention: Treat roads as presentation vocabulary until scenarios provide
+  geographic or operational semantics explicitly.
+
 ## Make Symbolic Map Coordinates Explicit
 
 - Context: Phase 3.2 needed a reusable map coordinate system before adding
