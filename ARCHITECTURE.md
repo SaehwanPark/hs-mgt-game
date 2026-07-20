@@ -247,6 +247,11 @@ project, pressure, selection, and uncertainty presentation. Layer sources are
 visible fields or local focus state; the component does not create facility
 facts, infer hidden status, or enter live board rendering.
 
+The v0.12.44 patient-tower component reuses that layer contract with a distinct
+vertical silhouette and shared selector proof. Its type cue is a presentation
+label only; it does not assert bed count, service capacity, ownership, or any
+other unobserved facility fact.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

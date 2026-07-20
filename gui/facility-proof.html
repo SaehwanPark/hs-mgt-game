@@ -12,6 +12,9 @@
       .surface, .layer { border: 1px solid #d4e0e8; border-radius: .7rem; padding: .8rem; }
       .surface h2, .surface p, .layer h2, .layer p { margin: 0 0 .45rem; }
       .surface img { background: #f8fbfd; border: 1px solid #d4e0e8; display: block; height: auto; max-width: 100%; }
+      .controls { display: flex; flex-wrap: wrap; gap: .55rem; margin: .8rem 0; }
+      button { background: #315a89; border: 2px solid #1d3d62; border-radius: .5rem; color: #fff; cursor: pointer; font: inherit; padding: .4rem .65rem; }
+      button:focus-visible { outline: 3px solid #b26b1f; outline-offset: 3px; }
       .layers { display: grid; gap: .55rem; margin: 0; }
       .layer[data-kind="pressure"] { border-left: .7rem solid #c2872f; }
       .layer[data-kind="project"] { border-left: .7rem double #315a89; }
@@ -30,6 +33,7 @@
       <p><a href="index.html">Return to the executive desktop</a></p>
       <h1 id="heading">General hospital base component</h1>
       <p class="source">Fictional, fixture-only facility proof. It consumes visible facility vocabulary and does not load host state or alter a session.</p>
+      <div class="controls" id="controls" aria-label="Facility component proof controls"></div>
       <div class="proof-grid">
         <section class="surface" aria-labelledby="asset-heading">
           <h2 id="asset-heading">Release derivative</h2>
@@ -44,18 +48,38 @@
       <p class="fallback">Visible labels, monochrome-safe geometry, layer patterns, and generic facility fallback remain available when color, assets, or host detail are unavailable.</p>
     </main>
     <script type="module">
-      import { facilityComponentFor, facilityLayerSummary } from "./facility-components.mjs";
+      import { FACILITY_COMPONENTS, facilityComponentFor, facilityLayerSummary } from "./facility-components.mjs";
 
-      const component = facilityComponentFor("general-hospital-base");
-      document.title = `${component.label} Component Proof`;
-      document.querySelector("#facility-status").textContent = `${component.source}. ${component.equivalent}. Grid: ${component.grid}.`;
-      document.querySelector("#layers").replaceChildren(...facilityLayerSummary().map((layer) => {
-        const card = document.createElement("article");
-        card.className = "layer";
-        card.dataset.kind = layer.id;
-        card.innerHTML = `<h2>${layer.label}</h2><p>${layer.source}</p><small>Written equivalent: ${layer.equivalent}</small>`;
-        return card;
-      }));
+      const heading = document.querySelector("#heading");
+      const image = document.querySelector(".surface img");
+      const status = document.querySelector("#facility-status");
+      const layers = document.querySelector("#layers");
+
+      function render(id) {
+        const component = facilityComponentFor(id);
+        heading.textContent = `${component.label} component`;
+        document.title = `${component.label} Component Proof`;
+        image.hidden = !component.release_path;
+        if (component.release_path) image.src = `../${component.release_path}`;
+        image.alt = `${component.label}; ${component.equivalent}`;
+        status.textContent = `${component.source}. ${component.equivalent}. Grid: ${component.grid}.`;
+        layers.replaceChildren(...facilityLayerSummary(id).map((layer) => {
+          const card = document.createElement("article");
+          card.className = "layer";
+          card.dataset.kind = layer.id;
+          card.innerHTML = `<h2>${layer.label}</h2><p>${layer.source}</p><small>Written equivalent: ${layer.equivalent}</small>`;
+          return card;
+        }));
+      }
+
+      for (const component of Object.values(FACILITY_COMPONENTS)) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = `Show ${component.label}`;
+        button.addEventListener("click", () => render(component.id));
+        document.querySelector("#controls").append(button);
+      }
+      render("general-hospital-base");
     </script>
   </body>
 </html>
