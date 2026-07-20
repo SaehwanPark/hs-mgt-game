@@ -1,13 +1,13 @@
-# Request Summary — Visual/audio Phase 3.1 patient-tower v0.12.44
+# Request Summary — Visual/audio Phase 3.1 emergency-department v0.12.45
 
 ## Authorized outcome
 
-Implement one reusable fixture-only patient-tower component against
+Implement one reusable fixture-only emergency-department component against
 the established visual asset and identity contracts.
 
 ## Slice boundary
 
-- Provide source/release SVG derivatives for the tower silhouette and explicit
+- Provide source/release SVG derivatives for the entrance-wing silhouette and explicit
   identity, capacity, project, pressure, selection, and uncertainty layers.
 - Include shared 8px grid, system color variables, accessible labels,
   non-color layer patterns, registry hashes, and generic facility fallback.
@@ -15,7 +15,7 @@ the established visual asset and identity contracts.
 
 ## Required bookkeeping
 
-Check all 13 patient-tower Phase 3.1 items, bump to v0.12.44, and align SPEC,
+Check all 13 emergency-department Phase 3.1 items, bump to v0.12.45, and align SPEC,
 architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 

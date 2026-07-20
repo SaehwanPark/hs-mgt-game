@@ -252,6 +252,10 @@ vertical silhouette and shared selector proof. Its type cue is a presentation
 label only; it does not assert bed count, service capacity, ownership, or any
 other unobserved facility fact.
 
+The v0.12.45 emergency-department component reuses the same contract with a
+distinct entrance-wing silhouette and explicit type-only description. Its ED
+marker does not imply service performance, acuity, staffing, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

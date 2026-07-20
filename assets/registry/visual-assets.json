@@ -156,6 +156,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.emergency-department",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/emergency-department.svg",
+      "release_path": "assets/release/visual/svg/emergency-department.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the entrance-wing silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:838fb974500960ee90d5d97920e32a700a41005d48e83c0987c2a0d5691e37cd",
+      "release_hash": "sha256:a6ecafd6bc8a729fdfd626410807d3cd3e929abe5e1098e5e74f565ce2beab70",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Emergency department label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",

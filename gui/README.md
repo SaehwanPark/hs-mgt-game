@@ -45,7 +45,8 @@ fixture-only and does not load host state or change a session.
 ## Facility component proof
 
 Open `gui/facility-proof.html` directly or through a static server to inspect
-the Phase 3.1 fictional general-hospital base and patient-tower components. It
+the Phase 3.1 fictional general-hospital base, patient-tower, and
+emergency-department components. It
 shows the selected compact release derivative, seven composable layers, visible
 layer sources, written equivalents, non-color patterns, and generic facility
 fallback. The proof is fixture-only and does not load host state or change a

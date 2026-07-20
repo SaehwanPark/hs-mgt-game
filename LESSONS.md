@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Facility Type Descriptions Within the Information Boundary
+
+- Context: An emergency-department release description needed to explain its
+  entrance-wing shape for non-visual users.
+- Symptom: Calling a type silhouette a “capacity cue” could make accessible
+  text imply unsupported service performance.
+- Resolution: Described the mark as a type cue only and added a regression test
+  for the explicit non-claim wording.
+- Prevention: Review accessible descriptions for implied facts, not only for
+  missing labels or color alternatives.
+
 ## Reuse the Layer Contract Across Facility Types
 
 - Context: The patient tower shares consequence layers with the general
