@@ -80,7 +80,7 @@
       "creation_method": "hand-authored deterministic symbolic map-grid contract",
       "license": "project-generated",
       "modifications": "None; fixture-only map coordinate contract.",
-      "original_hash": "sha256:9b51664d973edbb690b923cf8ca846235f2914a128e27e35b78665dc80934308",
+      "original_hash": "sha256:5dbfbfd17ab1e515543182a86ae46af50a11259c4524d61b8fbe6ec9d0b61619",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Named grid coordinates and visible layout labels",

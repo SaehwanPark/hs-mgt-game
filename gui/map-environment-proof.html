@@ -39,8 +39,8 @@
   </head>
   <body>
     <main>
-      <p><a href="index.html">Return to the executive desktop</a></p>
       <h1 id="board-heading">Regional map environment proof</h1>
+      <p><a id="return-link" href="index.html">Return to the executive desktop</a></p>
       <p class="source">Fixture-only symbolic map vocabulary. Coordinates organize relationships and attention; they do not assert real-world distance, geography, travel time, or jurisdiction.</p>
       <div class="proof-grid">
         <section class="surface" aria-labelledby="viewport-heading">
@@ -128,12 +128,21 @@
       for (const marker of [...EVENT_MARKER_SET, eventMarkerFor("missing")]) {
         const card = document.createElement("article");
         card.className = "token";
+        card.id = marker.id;
+        card.tabIndex = 0;
+        card.setAttribute("role", "group");
+        card.setAttribute("aria-label", marker.label);
         card.dataset.shape = marker.marker_shape;
         card.innerHTML = `<h3>${marker.glyph} ${marker.label}</h3><p>${marker.text_equivalent}</p><small>${marker.non_color_pattern}</small>`;
         document.querySelector("#event-marker-list").append(card);
       }
       for (const entry of MAP_TARGET_VIEWPORTS) {
-        document.querySelector("#legend").append(tokenCard(`${entry.label} target`, `${entry.width}×${entry.height}; text scale ${entry.text_scale}`));
+        const card = tokenCard(`${entry.label} target`, `${entry.width}×${entry.height}; text scale ${entry.text_scale}`);
+        card.id = `map-target-${entry.id}`;
+        card.tabIndex = 0;
+        card.setAttribute("role", "group");
+        card.setAttribute("aria-label", `${entry.label} target viewport`);
+        document.querySelector("#legend").append(card);
       }
       document.querySelector("#board-heading").dataset.keyboardOrder = MAP_KEYBOARD_NAVIGATION_ORDER.join(" > ");
       renderBoard();

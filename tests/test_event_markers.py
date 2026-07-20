@@ -73,6 +73,8 @@ class EventMarkerTests(unittest.TestCase):
       "prefers-reduced-motion",
       "MAP_TARGET_VIEWPORTS",
       "text_scale",
+      "card.tabIndex = 0",
+      "card.id = marker.id",
       "Symbolic geography disclaimer",
       "ArrowUp",
       "ArrowRight",
@@ -85,7 +87,7 @@ class EventMarkerTests(unittest.TestCase):
     result = subprocess.run(
       [
         "node", "--input-type=module", "-e",
-        "import { MAP_TARGET_VIEWPORTS, MAP_KEYBOARD_NAVIGATION_ORDER, MAP_ZOOM_STEPS, MAP_PAN_BOUNDS, normalizeMapZoom, clampMapPan } from './gui/map-environment.mjs'; if (MAP_TARGET_VIEWPORTS.length !== 3 || MAP_TARGET_VIEWPORTS[0].width !== 320 || MAP_TARGET_VIEWPORTS[2].width !== 1280) process.exit(1); if (MAP_KEYBOARD_NAVIGATION_ORDER.join(',') !== 'board-heading,map-viewport,zoom-controls,pan-controls,event-marker-list,map-legend') process.exit(2); if (JSON.stringify(MAP_ZOOM_STEPS) !== '[0.75,1,1.25,1.5]' || normalizeMapZoom(99) !== 1.5 || normalizeMapZoom(-99) !== 0.75) process.exit(3); const pan = clampMapPan({ x: 999, y: -999 }); if (pan.x !== MAP_PAN_BOUNDS.x.max || pan.y !== MAP_PAN_BOUNDS.y.min) process.exit(4); console.log(JSON.stringify({ MAP_TARGET_VIEWPORTS, MAP_KEYBOARD_NAVIGATION_ORDER, MAP_ZOOM_STEPS, MAP_PAN_BOUNDS, pan }));",
+        "import { MAP_TARGET_VIEWPORTS, MAP_KEYBOARD_NAVIGATION_ORDER, MAP_ZOOM_STEPS, MAP_PAN_BOUNDS, normalizeMapZoom, clampMapPan } from './gui/map-environment.mjs'; if (MAP_TARGET_VIEWPORTS.length !== 3 || MAP_TARGET_VIEWPORTS[0].width !== 320 || MAP_TARGET_VIEWPORTS[2].width !== 1280) process.exit(1); if (MAP_KEYBOARD_NAVIGATION_ORDER.join(',') !== 'board-heading,return-link,map-viewport,zoom-controls,pan-controls,event-marker-policy,event-marker-workforce,event-marker-community,event-marker-project,event-marker-generic,map-target-compact,map-target-standard,map-target-wide') process.exit(2); if (JSON.stringify(MAP_ZOOM_STEPS) !== '[0.75,1,1.25,1.5]' || normalizeMapZoom(99) !== 1.5 || normalizeMapZoom(-99) !== 0.75) process.exit(3); const pan = clampMapPan({ x: 999, y: -999 }); if (pan.x !== MAP_PAN_BOUNDS.x.max || pan.y !== MAP_PAN_BOUNDS.y.min) process.exit(4); console.log(JSON.stringify({ MAP_TARGET_VIEWPORTS, MAP_KEYBOARD_NAVIGATION_ORDER, MAP_ZOOM_STEPS, MAP_PAN_BOUNDS, pan }));",
       ],
       cwd=ROOT,
       capture_output=True,

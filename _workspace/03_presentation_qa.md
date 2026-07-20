@@ -31,7 +31,8 @@ Pass for the bounded fixture-only event-marker and map-interaction contract.
 - Pass: each marker includes glyph, shape, non-color pattern, and written
   equivalent; missing IDs use `event-marker-generic`.
 - Pass: the proof exposes semantic headings/region, visible status text,
-  focus-visible controls, fixed keyboard order, and reduced-motion CSS.
+  focus-visible controls and marker/legend cards, fixed keyboard order, and
+  reduced-motion CSS.
 - Pass: compact, standard, and wide target metadata are visible in the proof
   and covered by the interaction test.
 - Evidence limit: automated/static checks do not establish lived accessibility,

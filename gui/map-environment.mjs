@@ -20,11 +20,18 @@ const MAP_TARGET_VIEWPORTS = Object.freeze([
 
 const MAP_KEYBOARD_NAVIGATION_ORDER = Object.freeze([
   "board-heading",
+  "return-link",
   "map-viewport",
   "zoom-controls",
   "pan-controls",
-  "event-marker-list",
-  "map-legend",
+  "event-marker-policy",
+  "event-marker-workforce",
+  "event-marker-community",
+  "event-marker-project",
+  "event-marker-generic",
+  "map-target-compact",
+  "map-target-standard",
+  "map-target-wide",
 ]);
 
 const MAP_ZOOM_STEPS = Object.freeze([0.75, 1, 1.25, 1.5]);

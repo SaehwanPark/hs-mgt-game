@@ -34,14 +34,15 @@ authorized to enter the live GUI or create a browser simulation model.
   marker and text treatment.
 - Zoom is limited to declared fixture steps. Pan is limited to declared local
   offsets. Neither control changes map facts or host state.
-- The proof preserves a fixed document/keyboard order: heading, viewport, zoom
-  controls, pan controls, marker list, then legend.
+- The proof preserves a fixed document/keyboard order: heading, return link,
+  viewport, zoom controls, pan controls, each marker card, then each target-size
+  legend card.
 
 ## Accessibility and Fallbacks
 
 - Every marker has a written equivalent and a non-color pattern.
-- The proof uses semantic headings, landmarks, buttons, visible current-state
-  text, and focus-visible styling.
+- The proof uses semantic headings, landmarks, buttons, keyboard-focusable
+  marker/legend cards, visible current-state text, and focus-visible styling.
 - Compact, standard, and wide CSS layouts retain labels without requiring
   horizontal scrolling in the proof surface.
 - Unknown marker IDs use `event-marker-generic`; invalid zoom or pan values are
