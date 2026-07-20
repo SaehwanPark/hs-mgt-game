@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 2.1 Summit identity v0.12.41
+# Presentation Domain QA — Phase 2.2 actor-family identity language v0.12.42
 
 ## Status
 
@@ -6,35 +6,34 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 2.1 Summit lane, identity contract, Summit
-  source/release SVGs, shared catalog/proof, registry/credits, tests, and
-  architecture.
+- Request summary, Phase 2.2 actor-family lane, identity contract, shared
+  catalog/proof, registry/credits, tests, and architecture.
 
-The slice is fictional Summit fixture work only.
+The slice is fictional actor-family fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: Summit surfaces derive only from visible identity and preserve the
-  name/monogram/shape without color.
-- Pass: the audio motif is identity-only; no private rival condition or intent
-  is encoded.
-- Pass: shared proof selection preserves generic fallback for unknown IDs.
+- Pass: all eight family records derive only from visible family IDs and
+  preserve glyph, frame, and written labels without color.
+- Pass: optional sonic tags are identity-only; no private actor condition or
+  intent is encoded.
+- Pass: the shared proof preserves generic fallback for unknown IDs.
 
 ## Accessibility and Fallback Findings
 
-- Pass: source/release SVG title/description and text labels are present;
-  selector buttons are keyboard-operable.
-- Pass: monochrome, shape, NL text, and generic fallback remain available when
-  color, assets, or audio are unavailable.
+- Pass: family glyphs, frame patterns, visible labels, written notifications,
+  and native keyboard buttons are present.
+- Pass: non-color pattern cues and generic fallback remain available when
+  color or optional audio is unavailable.
 - Evidence limit: static checks do not establish human contrast, screen-reader,
   viewport, or lived-accessibility outcomes.
 
 ## Provenance and Rights Findings
 
-- Pass: Summit source/release files and generated module are registry-backed
-  with hashes, project provenance, approval, and no external references.
-- Pass: the fictional design is distinct from Riverside and has no third-party
-  brand or downloaded asset.
+- Pass: the generated family catalog is registry-backed with a current hash,
+  project provenance, approval, and no external references.
+- Pass: all family language is fictional and has no third-party brand or
+  downloaded asset.
 
 ## Authority and Replay Findings
 
@@ -52,7 +51,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused Summit/Northlake/Riverside identity and audio tests.
+- Focused actor-family catalog, fallback, pattern, registry, and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.

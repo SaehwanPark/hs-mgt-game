@@ -1,21 +1,21 @@
-# Request Summary — Visual/audio Phase 2.1 Summit identity v0.12.41
+# Request Summary — Visual/audio Phase 2.2 actor-family identity language v0.12.42
 
 ## Authorized outcome
 
-Implement one complete fictional Summit identity kit against the established
-Riverside and Northlake surface contract, closing Phase 2.1.
+Implement one shared fixture-only actor-family identity language against the
+completed institutional identity surface contract.
 
 ## Slice boundary
 
-- Provide Summit logo, monochrome, compact marker, SM monogram, facility
-  signage, report-header, compact badge, and audio motif.
-- Extend the shared fixture proof and generic fallback across all three
-  fictional systems.
+- Provide stable language for payer, regulator, labor, employer, community,
+  board, policy coalition, and independent provider families.
+- Include glyphs, report frames, notification styles, optional identity-sonic
+  tags, visible sources, written equivalents, and generic fallback.
 - Keep live GUI promotion out of scope.
 
 ## Required bookkeeping
 
-Check Summit's explicit Phase 2.1 lane, bump to v0.12.41, and align SPEC,
+Check all Phase 2.2 actor-family checklist items, bump to v0.12.42, and align SPEC,
 architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 

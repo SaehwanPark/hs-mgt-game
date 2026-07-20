@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Give Actor Families One Shared Vocabulary
+
+- Context: Phase 2.2 needs eight recurring actor families to remain distinct
+  across reports and notifications without eight bespoke proof pages.
+- Symptom: Independent family assets would make labels, fallbacks, and
+  color-independent cues drift between institutional sources.
+- Resolution: Stored glyph, frame, notification, optional identity-sonic tag,
+  source, and written equivalent in one catalog consumed by one proof page.
+- Prevention: Add families as data to the shared language contract, and test
+  unknown IDs before promoting any family treatment into runtime UI.
+
 ## Finish the Identity Matrix Before Cross-Screen Promotion
 
 - Context: Phase 2.1 spans three recurring systems and the same map, facility,

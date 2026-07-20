@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Actor-family Language Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #f1f4f7; }
+      body { margin: 0 auto; max-width: 1120px; padding: 1.5rem; }
+      main { background: #fff; border: 1px solid #d2dbe3; border-radius: 1rem; padding: 1rem; }
+      .controls, .family-grid { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1rem 0; }
+      button { background: #315a89; border: 2px solid #1d3d62; border-radius: .5rem; color: #fff; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #b26b1f; outline-offset: 3px; }
+      .family-card { border: 3px solid #315a89; border-radius: .75rem; flex: 1 1 20rem; min-width: 18rem; padding: .85rem; }
+      .family-card[data-frame="ledger"] { border-style: double; }
+      .family-card[data-frame="docket"] { border-style: dashed; }
+      .family-card[data-frame="agreement"] { border-style: groove; }
+      .family-card[data-frame="brief"] { border-style: solid; }
+      .family-card[data-frame="listening"] { border-style: dotted; }
+      .family-card[data-frame="minutes"] { border-style: ridge; }
+      .family-card[data-frame="coalition"] { border-style: double; border-width: 5px; }
+      .family-card[data-frame="practice"] { border-style: outset; }
+      .family-card[data-frame="generic"] { border-color: #60707b; border-style: dotted; }
+      .family-icon { align-items: center; background: #f1f4f7; border: 3px solid #17232d; display: flex; font-weight: 800; height: 3.1rem; justify-content: center; letter-spacing: .03em; margin-bottom: .5rem; width: 3.1rem; }
+      .family-icon[data-shape="hexagon"] { clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0 50%); }
+      .family-icon[data-shape="shield"] { border-radius: 45% 45% 55% 55% / 25% 25% 75% 75%; }
+      .family-icon[data-shape="stripe"] { background: repeating-linear-gradient(135deg, #f1f4f7 0 7px, #17232d 7px 10px); color: #fff; }
+      .family-icon[data-shape="square"] { border-radius: .25rem; }
+      .family-icon[data-shape="circle"] { border-radius: 50%; }
+      .family-icon[data-shape="diamond"] { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
+      .family-icon[data-shape="double-ring"] { border: 6px double #17232d; border-radius: 50%; }
+      .family-icon[data-shape="triangle"] { clip-path: polygon(50% 0, 100% 100%, 0 100%); }
+      .family-icon[data-shape="fallback"] { border-style: dashed; border-radius: 50%; }
+      .family-card h2, .family-card p { margin: 0 0 .45rem; }
+      .family-card small, .source { color: #60707b; }
+      dl { display: grid; grid-template-columns: max-content 1fr; gap: .2rem .7rem; margin: .7rem 0 0; }
+      dt { font-weight: 700; }
+      dd { margin: 0; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; padding: .7rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1 id="heading">Payer actor-family language</h1>
+      <p class="source">Fictional, fixture-only actor-family proof. It consumes only visible family IDs and does not load host state or alter a session.</p>
+      <div class="controls" id="controls" aria-label="Actor-family proof controls"></div>
+      <p id="family-status" role="status"></p>
+      <section class="family-grid" id="family-surfaces" aria-label="Actor-family visual language"></section>
+      <p class="fallback">Glyph, frame pattern, visible label, written notification, and generic fallback remain available when color or optional sound is unavailable.</p>
+    </main>
+    <script type="module">
+      import { ACTOR_FAMILIES, actorFamilyFor, actorFamilySummary } from "./actor-families.mjs";
+
+      const heading = document.querySelector("#heading");
+      const status = document.querySelector("#family-status");
+      const controls = document.querySelector("#controls");
+      const surfaces = document.querySelector("#family-surfaces");
+
+      function render(id) {
+        const family = actorFamilySummary(id);
+        heading.textContent = `${family.label} actor-family language`;
+        document.title = `${family.label} Actor-family Language Proof`;
+        status.textContent = `${family.source}. ${family.equivalent}.`;
+        const card = document.createElement("article");
+        card.className = "family-card";
+        card.dataset.frame = family.report_frame;
+        card.innerHTML = `<div class="family-icon" data-shape="${family.icon_shape}" aria-hidden="true">${family.glyph}</div><h2>${family.label}</h2><p>Written notification: ${family.notification_style} style</p><dl><dt>Report frame</dt><dd>${family.report_frame}</dd><dt>Monogram</dt><dd>${family.monogram}</dd><dt>Sonic tag</dt><dd>${family.sonic_tag ?? "None; written equivalent retained"}</dd><dt>Equivalent</dt><dd>${family.equivalent}</dd></dl>`;
+        surfaces.replaceChildren(card);
+      }
+
+      for (const family of ACTOR_FAMILIES) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = `Show ${family.label}`;
+        button.addEventListener("click", () => render(family.id));
+        controls.append(button);
+      }
+      const fallbackButton = document.createElement("button");
+      fallbackButton.type = "button";
+      fallbackButton.textContent = "Show generic fallback";
+      fallbackButton.addEventListener("click", () => render("unknown"));
+      controls.append(fallbackButton);
+      render("payer");
+    </script>
+  </body>
+</html>

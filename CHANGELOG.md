@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.42] - 2026-07-20
+
+- Added a fixture-only actor-family language catalog and proof for payer,
+  regulator, labor, employer, community, board, policy coalition, and
+  independent provider identities.
+- Added stable glyph, report-frame, notification-style, optional identity-sonic
+  tag, visible source, written equivalent, and generic fallback metadata with
+  registry coverage.
+- Completed the Phase 2.2 actor-family identity-language checklist without
+  changing live GUI or host behavior.
+- Bumped package/public metadata to `0.12.42`.
+
 ## [0.12.41] - 2026-07-20
 
 - Added the fictional Summit identity kit with peak geometry, layered line,

@@ -1,59 +1,62 @@
-# Presentation Contract — Phase 2.1 Summit identity v0.12.41
+# Presentation Contract — Phase 2.2 actor-family identity language v0.12.42
 
 ## Goal and Authorization
 
-Make fictional Summit recognizable across required map, facility, report,
-compact, and audio surfaces while preserving the shared Riverside/Northlake
-proof contract.
+Make recurring actor families recognizable across report, notification, and
+optional audio surfaces while preserving the completed institutional identity
+and generic-fallback contracts.
 
 ## Player Questions and Consequences
 
 - Which recurring public system is involved?
-- Can Summit be recognized in color, monochrome, compact, and text forms?
+- Which actor family is the source of this visible message?
+- Can the family be recognized from glyph, frame, pattern, and text without
+  color or optional sound?
 - What appears when a public identity is unavailable?
 
 ## Actor-Visible Source Ledger
 
 | Surface | Visible source | Prohibited inference | Equivalent |
 | --- | --- | --- | --- |
-| Summit identity | Visible Summit system ID/name | True rival intent or condition | Name, mark, monogram |
-| Facility/report surfaces | Visible Summit ownership/source | Hidden facility state | Sign/header label |
-| Audio motif | Visible Summit identity | Private rival state | Name, marker, header |
+| Actor-family identity | Visible family ID/name | Private actor intent or condition | Family label, glyph, monogram |
+| Report surface | Visible family source | Hidden actor state | Frame pattern and written header |
+| Notification surface | Visible family source | Unobserved consequence | Written notification style |
+| Optional sonic tag | Visible family identity | Hidden urgency, outcome, or power | Written identity equivalent |
 | Missing identity | Missing/unknown visible ID | Guessed institution | Generic Institution fallback |
 
 ## Visual, Motion, and Audio Semantics
 
-- Peak geometry, layered summit line, triangular marker, and SM monogram persist
-  without depending on color.
-- Facility signage, market-signal report header, and compact badge retain the
-  same mark and visible name.
-- `audio.direction-summit-motif` is identity-only and visible-source linked.
+- Each family has a stable glyph/monogram and non-color frame pattern.
+- Report frames and notification styles vary structure, not hidden state.
+- Optional sonic tags are identity-only and always accompanied by written
+  equivalents.
 
 ## Accessibility and Fallbacks
 
-- Source/release SVGs carry title/description and system-ui text.
+- The catalog carries stable family labels and visible equivalents.
 - Shared proof controls are native keyboard buttons and retain visible labels.
-- Unknown IDs use `generic-institution`; unavailable asset/audio leaves text.
+- Unknown IDs use `generic-actor`; unavailable optional audio leaves text.
 
 ## Authority, History, and Replay Boundaries
 
-The Summit catalog and proof consume only local fixture IDs and labels. They
+The actor-family catalog and proof consume only local fixture IDs and labels. They
 do not load host DTOs, infer rival information, submit commands, create session
 state, or alter transitions, history, hashes, replay, audio state, or debriefs.
 
 ## Asset Provenance and Release Requirements
 
-Source/release SVGs and the generated audio module remain registry-backed with
-current hashes, project provenance, accessible equivalents, visible sources,
-approval, and no third-party or external references.
+The generated family catalog remains registry-backed with a current hash,
+project provenance, accessible equivalents, visible sources, approval, and no
+third-party or external references.
 
 ## Verification and Evidence Limits
 
-Focused tests cover Summit variants, shared selector/fallback, audio motif,
+Focused tests cover all family records, shared fallback, non-color patterns,
 asset boundary, and syntax. These are technical checks, not human design,
 contrast, accessibility, learning, or policy evidence.
 
 ## Non-Goals and Open Questions
 
-Do not promote any identity into live GUI rendering, or claim real-world
-branding, rival intent, or human evaluation in this slice.
+Do not promote actor-family language into live GUI rendering, encode private
+actor state, or claim human design, accessibility, learning, or policy evidence
+in this slice.
