@@ -234,6 +234,13 @@ third distinct source/release pair and motif reference. The shared proof remains
 local presentation state; no identity token becomes a host fact or live
 simulation signal through this asset slice.
 
+The v0.12.42 actor-family language catalog extends the same fixture-only
+boundary to payer, regulator, labor, employer, community, board, policy
+coalition, and independent-provider IDs. Its glyphs, frame patterns,
+notification styles, optional identity-sonic tags, written equivalents, and
+generic fallback are local presentation vocabulary; they consume no private
+actor state and are not imported by the live GUI.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

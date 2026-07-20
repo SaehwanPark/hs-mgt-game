@@ -2,7 +2,7 @@
 
 **Status:** Bounded technical sequence closed; production foundation active
 
-**Version range:** v0.12.16–v0.12.41
+**Version range:** v0.12.16–v0.12.42
 **Principal conclusion:** The dependency-free GUI supports the bounded,
 host-authoritative competitive first-month presentation contract. Technical
 checks do not establish human usability, accessibility experience, learning,
@@ -38,5 +38,6 @@ calibration, balance, or policy validity.
 | 2.1 | v0.12.39 | Riverside identity kit proof |
 | 2.1 | v0.12.40 | Northlake identity kit proof |
 | 2.1 | v0.12.41 | [Summit identity kit proof](visual-audio-phase2-summit-identity-v0.12.41.md); Phase 2.1 complete |
+| 2.2 | v0.12.42 | [Actor-family identity language proof](visual-audio-phase2-actor-family-language-v0.12.42.md) |
 
 The executable audit remains `python3 scripts/audit_visual_audio_contract.py`.

@@ -105,6 +105,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.actor-family-language",
+      "asset_type": "visual",
+      "semantic_role": "identity",
+      "source_path": "gui/actor-families.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored semantic family catalog and proof vocabulary",
+      "license": "project-generated",
+      "modifications": "None; fixture-only glyph, frame, notification, and identity-tag definitions.",
+      "original_hash": "sha256:fe538f92d7599819101de8d8d3180aa204efa4a9d328957d8202af52bf67a136",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Visible actor-family label, glyph, written notification, frame pattern, and generic fallback",
+      "visible_source": "Visible actor-family ID from the presentation contract",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",

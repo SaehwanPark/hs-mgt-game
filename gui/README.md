@@ -33,6 +33,15 @@ marker, facility sign, report header, text badge, audio motif reference, and
 generic fallback. The proof is fixture-only and does not load host state or
 change a session.
 
+## Actor-family language proof
+
+Open `gui/actor-family-proof.html` directly or through a static server to
+inspect the shared Phase 2.2 fictional payer, regulator, labor, employer,
+community, board, policy coalition, and independent-provider language. It
+shows each family’s glyph, report-frame pattern, written notification style,
+optional identity-sonic tag, visible source, and generic fallback. The proof is
+fixture-only and does not load host state or change a session.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

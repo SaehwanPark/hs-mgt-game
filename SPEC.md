@@ -4647,6 +4647,20 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked all Phase 2.1 per-system identity items; no live GUI or host behavior
   changed.
 
+### Visual/audio Phase 2.2 actor-family identity language (v0.12.42)
+
+- Status: Closed; shared actor-family catalog and fixture proof complete
+- Branch: `feat/visual-audio-phase2-actor-family-language-v0.12.42`
+- Added stable payer, regulator, labor, employer, community, board, policy
+  coalition, and independent-provider records with glyphs, report frames,
+  notification styles, optional identity-sonic tags, visible sources, written
+  equivalents, and generic fallback.
+- Added registry-backed provenance and deterministic proof/tests for semantic
+  labels, color-independent pattern cues, unknown-family fallback, and the
+  presentation-only boundary.
+- Checked all Phase 2.2 actor-family identity-language items; no live GUI or
+  host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

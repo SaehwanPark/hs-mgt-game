@@ -571,6 +571,10 @@ Make recurring systems and actors immediately recognizable across the map, repor
 
 ## Milestone 2.2: Actor-family identity language
 
+**Status:** Complete in v0.12.42
+**Evidence:** `gui/actor-families.mjs`, `gui/actor-family-proof.html`, and
+`tests/test_actor_families.py`.
+
 ### Actor families
 
 - payer;
@@ -592,15 +596,15 @@ Make recurring systems and actors immediately recognizable across the map, repor
 
 ### Checklist
 
-- [ ] Actor families finalized.
-- [ ] Icon set completed.
-- [ ] Notification frames completed.
-- [ ] Report-header treatments completed.
-- [ ] Generic fallback completed.
-- [ ] Semantic labels tested.
-- [ ] Color-independent recognition tested.
-- [ ] Registry coverage complete.
-- [ ] Unknown actor type handled safely.
+- [x] Actor families finalized.
+- [x] Icon set completed.
+- [x] Notification frames completed.
+- [x] Report-header treatments completed.
+- [x] Generic fallback completed.
+- [x] Semantic labels tested.
+- [x] Color-independent recognition tested.
+- [x] Registry coverage complete.
+- [x] Unknown actor type handled safely.
 
 ### Exit criteria
 
