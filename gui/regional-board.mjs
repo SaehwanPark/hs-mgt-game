@@ -53,6 +53,7 @@ function normalizeEntity(entity, missing, index) {
   const entityMissing = missingFor(String(entity?.id ?? id), missing);
   return {
     id,
+    source_id: entity?.id,
     name: text(entity?.name, "Institution unavailable"),
     role: text(entity?.role, "Institution"),
     status: text(entity?.status, "uncertain"),
@@ -92,6 +93,7 @@ export function regionalWorldToSceneData(envelope = {}) {
 export function presentationFixtureToSceneData(fixture = {}) {
   const entities = (Array.isArray(fixture.entities) ? fixture.entities : []).map((entity, index) => ({
     id: safeId(entity?.id, `institution-${index + 1}`),
+    source_id: entity?.id,
     name: text(entity?.name, "Institution unavailable"),
     role: text(entity?.type, "Institution"),
     status: text(entity?.status, "uncertain"),

@@ -203,6 +203,14 @@ let selectedBoardId = null;
 let currentMapEntities = [];
 let currentBoardScene = null;
 
+function boardEntityFor(id) {
+  return currentBoardScene?.entities?.find((entity) => entity.id === id || entity.source_id === id);
+}
+
+function boardIdFor(id) {
+  return boardEntityFor(id)?.id ?? id;
+}
+
 function appendText(parent, text) {
   const node = document.createElement("p");
   node.textContent = String(text);
@@ -458,7 +466,7 @@ function renderBriefing(items, root) {
       focus.textContent = "View on regional board";
       focus.addEventListener("click", () => {
         selectedEntityId = String(entry.target_id);
-        selectedBoardId = selectedEntityId;
+        selectedBoardId = boardIdFor(selectedEntityId);
         renderMap(currentMapEntities, root);
         renderSelectedEntity(currentMapEntities, root);
         renderRegionalBoard(currentBoardScene, root);
@@ -494,7 +502,7 @@ function renderMap(entities, root) {
     card.append(icon, type, name, summary, createStatus(entity.status, entity.status_label));
     card.addEventListener("click", () => {
       selectedEntityId = entity.id;
-      selectedBoardId = entity.id;
+      selectedBoardId = boardIdFor(entity.id);
       renderMap(entities, root);
       renderSelectedEntity(entities, root);
       renderRegionalBoard(currentBoardScene, root);
@@ -510,17 +518,18 @@ function renderRegionalBoard(scene, root) {
   currentBoardScene = scene;
   mount.replaceChildren();
   if (!scene) return;
-  mount.innerHTML = renderRegionalSvg(scene, { selectedId: selectedBoardId ?? selectedEntityId });
+  mount.innerHTML = renderRegionalSvg(scene, { selectedId: boardIdFor(selectedBoardId ?? selectedEntityId) });
   if (mount.dataset.bound === "true") return;
   mount.dataset.bound = "true";
   const selectTarget = (event) => {
     const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
     if (!target) return;
     event.preventDefault();
-    const owner = target.dataset.entityId
+    const boardOwnerId = target.dataset.entityId
       ?? target.parentElement?.closest?.("[data-entity-container-id]")?.dataset.entityContainerId;
-    selectedEntityId = owner;
-    selectedBoardId = target.dataset.facilityId ?? owner;
+    const boardEntity = boardEntityFor(boardOwnerId);
+    selectedEntityId = boardEntity?.source_id ?? boardOwnerId;
+    selectedBoardId = target.dataset.facilityId ?? boardEntity?.id ?? boardOwnerId;
     if (!currentMapEntities.some((entity) => entity.id === selectedEntityId)) return;
     renderMap(currentMapEntities, root);
     renderSelectedEntity(currentMapEntities, root);

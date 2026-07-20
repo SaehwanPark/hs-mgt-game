@@ -38,13 +38,13 @@ class RegionalBoardTests(unittest.TestCase):
       const scene = regionalWorldToSceneData({
         schema_version: 'competitive-regional-world-v1',
         entities: [
-          { id: 'rival-z', name: 'Zeta', role: 'Public rival', visibility: 'public', layout_slot: 'rival-2', status: 'uncertain', source: 'visible-source', facilities: [] },
+          { id: 'rival z', name: 'Zeta', role: 'Public rival', visibility: 'public', layout_slot: 'rival-2', status: 'uncertain', source: 'visible-source', facilities: [] },
           { id: 'unknown-system', name: 'Unlisted', role: 'Institution unavailable', visibility: 'unknown', layout_slot: 'rival-1', status: 'not-provided', source: 'visible-source', facilities: [{ name: 'Unlisted facility', kind: 'unknown kind' }] },
         ],
         missing: [{ id: 'unknown-system-private-detail', label: 'Private detail', source: 'missing-source' }],
         overlays: [{ id: 'demand', label: 'Demand pressure', value: '12', unit: 'units', source: 'overlay-source', equivalent: 'Written equivalent.' }],
       });
-      if (scene.entities[0].id !== 'unknown-system' || scene.entities[1].id !== 'rival-z') process.exit(1);
+      if (scene.entities[0].id !== 'unknown-system' || scene.entities[1].id !== 'rival-z' || scene.entities[1].source_id !== 'rival z') process.exit(1);
       if (!scene.entities[0].summary.includes('Private detail')) process.exit(2);
       if (scene.entities[0].facilities[0].id !== 'unknown-system-unlisted-facility') process.exit(3);
       if (scene.overlays[0].source !== 'overlay-source') process.exit(4);

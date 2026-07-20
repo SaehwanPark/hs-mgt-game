@@ -188,7 +188,7 @@ export function renderRegionalSvg(scene = SVG_SCENE_FIXTURE, { selectedId = "riv
     ? normalized.entities.map((entity, index) => renderEntity(entity, index, selected?.id, selectedId)).join("")
     : `<text x=\"42\" y=\"160\" class=\"sub-label\" font-size=\"18\">No visible institutions available.</text>`;
   const overlays = renderOverlays(normalized.overlays);
-  return `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${BOARD.width}\" height=\"${BOARD.height}\" viewBox=\"0 0 ${BOARD.width} ${BOARD.height}\" role=\"img\" aria-labelledby=\"scene-title scene-desc\" data-motion=\"${reducedMotion ? "reduced" : "standard"}\">
+  return `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${BOARD.width}\" height=\"${BOARD.height}\" viewBox=\"0 0 ${BOARD.width} ${BOARD.height}\" role=\"group\" aria-labelledby=\"scene-title scene-desc\" data-motion=\"${reducedMotion ? "reduced" : "standard"}\">
   <title id=\"scene-title\">${escapeXml(normalized.title)}</title>
   <desc id=\"scene-desc\">${escapeXml(normalized.source)}. Labels and symbols remain visible when color, motion, or audio is unavailable.</desc>
   <style>

@@ -27,6 +27,8 @@ presentation fixture.
   severity, geography, causality, intent, probability, or future outcome.
 - `gui/scene.mjs` renders the mapped entities, facilities, status text, source
   text, and up to four visible overlay cards with an explicit overflow count.
+  The SVG uses an accessible group role so its keyboard descendants remain
+  exposed to assistive technology.
 - `gui/app.mjs` mounts the SVG beside the existing semantic map/list/detail
   surface. Entity and facility SVG controls focus the owning institution; the
   existing detail panel remains the semantic fallback and selection source.

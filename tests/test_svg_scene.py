@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCENE = ROOT / "gui" / "scene.mjs"
 PROOF = ROOT / "gui" / "svg-proof.html"
 README = ROOT / "gui" / "README.md"
-SNAPSHOT_HASH = "d1732b58703acebdeee60fcea7a8503eacae229a353785da2ca860877e56e3b5"
+SNAPSHOT_HASH = "8d277abe6351f74829dcb6ea8b5d10f522dc8b6f1dc413a52c5c14025c75bdad"
 
 
 def run_node(script):
