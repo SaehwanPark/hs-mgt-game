@@ -264,6 +264,10 @@ The v0.12.47 specialty-center component reuses the same contract with a
 distinct peaked-canopy silhouette and explicit type-only description. Its shape
 does not imply clinical scope, capacity, ownership, or hidden outcome.
 
+The v0.12.48 rural-clinic component reuses the same contract with a distinct
+compact pitched-roof silhouette and explicit type-only description. Its shape
+does not imply geographic access, quality, ownership, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 
