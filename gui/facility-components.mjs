@@ -52,6 +52,33 @@ const PATIENT_TOWER = Object.freeze({
   }),
 });
 
+const EMERGENCY_DEPARTMENT = Object.freeze({
+  schema_version: "facility-component-v1",
+  id: "emergency-department",
+  label: "Emergency department",
+  source: "Visible facility kind and actor-visible status context",
+  equivalent: "Emergency department label, entrance-wing silhouette, identity badge, and written layer labels",
+  source_path: "assets/source/visual/facilities/emergency-department.svg",
+  release_path: "assets/release/visual/svg/emergency-department.svg",
+  grid: "8px",
+  view_box: "0 0 760 500",
+  css_variables: ["--facility-primary", "--facility-secondary", "--facility-ink", "--facility-paper", "--facility-muted"],
+  layers: [
+    Object.freeze({ id: "base", label: "Base structure", source: "Visible facility kind" }),
+    Object.freeze({ id: "identity", label: "System identity layer", source: "Visible owning-system identity" }),
+    Object.freeze({ id: "capacity", label: "Capacity/service-line layer", source: "Visible capacity or service-line field" }),
+    Object.freeze({ id: "project", label: "Project layer", source: "Visible project status" }),
+    Object.freeze({ id: "pressure", label: "Operational-pressure layer", source: "Visible pressure status" }),
+    Object.freeze({ id: "selection", label: "Selection/focus layer", source: "Local selected-facility presentation state" }),
+    Object.freeze({ id: "uncertainty", label: "Uncertainty/stale-observation layer", source: "Visible observation freshness or missingness" }),
+  ],
+  fallback: Object.freeze({
+    id: "generic-facility",
+    label: "Facility",
+    equivalent: "Facility label and generic marker",
+  }),
+});
+
 const GENERIC_FACILITY = Object.freeze({
   schema_version: "facility-component-v1",
   id: "generic-facility",
@@ -70,6 +97,7 @@ const GENERIC_FACILITY = Object.freeze({
 export const FACILITY_COMPONENTS = Object.freeze({
   "general-hospital-base": GENERAL_HOSPITAL_BASE,
   "patient-tower": PATIENT_TOWER,
+  "emergency-department": EMERGENCY_DEPARTMENT,
   "generic-facility": GENERIC_FACILITY,
 });
 

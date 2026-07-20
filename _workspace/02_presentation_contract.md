@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 patient-tower v0.12.44
+# Presentation Contract — Phase 3.1 emergency-department v0.12.45
 
 ## Goal and Authorization
 
-Make a fictional patient tower reusable across facility, map, report,
+Make a fictional emergency department reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,8 +27,9 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The tower silhouette uses a shared 8px grid, system color variables, and a
-  stable viewBox distinct from the general-hospital base.
+- The entrance-wing silhouette uses a shared 8px grid, system color variables,
+  and a stable viewBox distinct from the general-hospital base and patient
+  tower.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.
