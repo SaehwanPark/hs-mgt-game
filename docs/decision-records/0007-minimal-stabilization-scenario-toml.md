@@ -6,7 +6,7 @@
 
 ## Context
 
-`docs/scenario-format-draft.md` required an ADR before adding a runtime
+`docs/design/scenario-format-draft.md` required an ADR before adding a runtime
 scenario loader. Phase 6.2 calls for versioned, validated scenario files that
 compose known mechanisms without arbitrary executable logic.
 
@@ -68,6 +68,6 @@ data while preserving deterministic transition, replay, and save boundaries.
 
 ## Related Documents
 
-- [`scenario-format-draft.md`](../scenario-format-draft.md)
+- [`scenario-format-draft.md`](../design/scenario-format-draft.md)
 - [ADR-0001](0001-deterministic-transition-and-stochastic-input-boundary.md)
 - [ADR-0002](0002-mid-run-session-save.md)

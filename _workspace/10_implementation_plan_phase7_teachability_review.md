@@ -49,7 +49,7 @@ capture, stop and report the limitation rather than broadening the task.
 - `tests/test_phase7_teachability_review.py`.
 - `src/cli/persistence.rs` only for a test-scoped shared-path isolation guard
   if CI requires it.
-- `docs/playtest-findings-v0.12.3.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
+- `docs/history/playtests/v0.12/playtest-findings-v0.12.3.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
   `ARCHITECTURE.md`, `docs/roadmap.md`, `LESSONS.md`, and workspace handoff.
 - `Cargo.toml` and `Cargo.lock` for package version `0.12.3`.
 

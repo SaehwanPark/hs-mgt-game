@@ -50,7 +50,7 @@ stop and report the limitation instead of launching a replacement capture.
 - `_workspace/experiments/v0.12.4-difficulty-depth-evidence/results.json` and
   `diagnostics.md`.
 - `tests/test_difficulty_depth_evidence.py`.
-- `docs/playtest-findings-v0.12.4.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
+- `docs/history/playtests/v0.12/playtest-findings-v0.12.4.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
   `ARCHITECTURE.md`, `docs/roadmap.md`, `LESSONS.md`, and workspace handoff.
 - `Cargo.toml` and `Cargo.lock` for package version `0.12.4`.
 

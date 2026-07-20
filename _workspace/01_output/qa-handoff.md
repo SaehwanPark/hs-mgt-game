@@ -3,7 +3,7 @@
 This document details the implementation of the `competitive-exemplary-v1` scenario, including its timeline events, delayed consequences, and the RNA strike / CON challenge mechanics.
 
 ## Verified Scope
-- **Scenario File Created:** [scenarios/competitive-exemplary-v1.toml](file:///Users/saehwan/repos/hs-mgt-game/scenarios/competitive-exemplary-v1.toml) defines the starting parameters for:
+- **Scenario File Created:** [scenarios/competitive-exemplary-v1.toml](../../scenarios/competitive-exemplary-v1.toml) defines the starting parameters for:
   - Riverside Community Health (Human, cash=500, political_capital=4, staffed_beds=118)
   - Northlake Health (AI, growth style, cash=1200, political_capital=2, staffed_beds=132)
   - Summit Care (AI, margin style, cash=900, political_capital=2, staffed_beds=104)

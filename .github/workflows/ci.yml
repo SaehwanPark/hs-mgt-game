@@ -21,6 +21,9 @@ jobs:
       - name: Check release metadata
         run: python3 scripts/check_release_metadata.py
 
+      - name: Check documentation links
+        run: python3 scripts/check_documentation_links.py
+
       - name: Check formatting
         run: cargo fmt --check
 

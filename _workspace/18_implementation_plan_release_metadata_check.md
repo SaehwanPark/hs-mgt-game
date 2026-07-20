@@ -13,7 +13,7 @@ check in GitHub Actions.
 - `tests/test_release_metadata.py`: checker behavior and current-repository
   contract tests.
 - `.github/workflows/ci.yml`: run the check in CI.
-- `docs/contributor-release-check.md` and `README.md`: local usage and scope.
+- `docs/guides/contributor-release-check.md` and `README.md`: local usage and scope.
 - `Cargo.toml`, `Cargo.lock`, `CHANGELOG.md`, `SPEC.md`: v0.12.13 release
   metadata and queue status.
 - `ARCHITECTURE.md`, `docs/roadmap.md`, `LESSONS.md`, and SDD handoff files:

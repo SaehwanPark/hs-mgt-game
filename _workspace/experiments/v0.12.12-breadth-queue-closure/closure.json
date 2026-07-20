@@ -164,7 +164,7 @@
   "runtime_change_authorized": false,
   "runtime_promotion": "deferred",
   "source_marker_contract": {
-    "docs/playtest-findings-v0.11.11.md": {
+    "docs/history/playtests/v0.11/playtest-findings-v0.11.11.md": {
       "markers": [
         "60/60 runs completed",
         "Ten distinct command trajectories",
@@ -173,7 +173,7 @@
       ],
       "status": "supported"
     },
-    "docs/playtest-findings-v0.11.12.md": {
+    "docs/history/playtests/v0.11/playtest-findings-v0.11.12.md": {
       "markers": [
         "9/9 runs completed",
         "No structural matrix, history/hash, trace, or debrief gap"

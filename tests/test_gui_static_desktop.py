@@ -8,7 +8,7 @@ GUI_DIR = ROOT / "gui"
 HTML = GUI_DIR / "index.html"
 APP = GUI_DIR / "app.mjs"
 README = GUI_DIR / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase1-static-desktop-v0.12.17.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase1-static-desktop-v0.12.17.md"
 
 
 class GuiStaticDesktopTests(unittest.TestCase):

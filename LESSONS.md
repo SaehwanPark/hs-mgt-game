@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Migrate Document Paths From a Frozen Manifest
+
+- Context: Moving 136 top-level documents affected current guides, historical
+  evidence, Markdown links, path strings, Python audits, tests, scenarios, and
+  old workspace handoffs.
+- Symptom: Direct string replacement updates root-relative paths but breaks
+  sibling links inside files that move to different directory depths; assembled
+  path constants can also escape ordinary searches.
+- Resolution: Classified every source path first, resolved relative Markdown
+  links from each file's former location, updated plain references from the same
+  manifest, and added a tracked-Markdown link check to CI.
+- Prevention: For future documentation moves, freeze an old-to-new manifest,
+  migrate relative and plain references separately, search constructed path
+  consumers, and run the link checker before broader tests.
+
 ## Test the Shipped GUI Transport, Not Only Injected Adapters
 
 - Context: The browser source had complete mocked launch/action contracts, but
@@ -1237,7 +1252,9 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 
 - Context: Updating workspace pipeline files (`_workspace/*`) under the harness team spec.
 - Symptom: `write_to_file` returned a tool error when writing to `_workspace/00_input/request-summary.md` with `ArtifactMetadata` specified.
-- Cause: Specifying `ArtifactMetadata` flags the file as an agent artifact, which the tool restricts to the absolute path `/home/saehwan/.gemini/antigravity-cli/brain/`.
+- Cause: Specifying `ArtifactMetadata` flags the file as an agent artifact,
+  which the tool restricts to its configured artifact directory outside the
+  repository.
 - Resolution: Omit `ArtifactMetadata` entirely when creating or modifying standard workspace and codebase files outside the conversation-specific artifacts directory.
 - Prevention: Do not include `ArtifactMetadata` in `write_to_file` arguments unless writing a conversation report/plan directly to the chat artifacts directory.
 
@@ -1282,7 +1299,7 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Context: Updating `CHANGELOG.md` to align with the new versioning policy (0.0.1 bump per PR/PR-equivalent change, 0.1 minor bump for major features/milestones with lower digits reset).
 - Symptom: Commit history shows versions (like `0.5.0`) merged to `main` in PRs without corresponding entries in `CHANGELOG.md`, causing a mismatch between `Cargo.toml` and the changelog.
 - Cause: Developers sometimes bump `Cargo.toml` version during PR development but forget to add the changelog section for that version.
-- Resolution: Added the release notes for `0.5.0` (campaign extension, autosave, replay export), bumped the package version to `0.5.1` in both `Cargo.toml` and `CHANGELOG.md` for the alignment change itself, and aligned `docs/versioning-policy.md` to match the exact rules in `AGENTS.md`.
+- Resolution: Added the release notes for `0.5.0` (campaign extension, autosave, replay export), bumped the package version to `0.5.1` in both `Cargo.toml` and `CHANGELOG.md` for the alignment change itself, and aligned `docs/reference/versioning-policy.md` to match the exact rules in `AGENTS.md`.
 - Prevention: Always check that `CHANGELOG.md` includes the entry for the version in `Cargo.toml` before merging a PR, and perform a `0.0.1` bump for every PR-equivalent change (including changelog/documentation updates).
 
 

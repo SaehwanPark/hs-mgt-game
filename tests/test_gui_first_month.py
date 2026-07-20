@@ -9,7 +9,7 @@ APP = ROOT / "gui" / "app.mjs"
 FLOW = ROOT / "gui" / "first-month.mjs"
 HTML = ROOT / "gui" / "index.html"
 README = ROOT / "gui" / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase13-first-month-continuity-v0.12.29.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase13-first-month-continuity-v0.12.29.md"
 
 
 class GuiFirstMonthTests(unittest.TestCase):

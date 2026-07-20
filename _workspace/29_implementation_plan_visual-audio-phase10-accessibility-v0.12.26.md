@@ -55,7 +55,7 @@ the host adapter and all existing simulation-facing behavior.
   CSS presentation/accessibility rules.
 - `gui/app.mjs`: `createPresentationSettings`, `createStatus`, and exports only.
 - `tests/test_gui_accessibility.py`: focused static contract tests.
-- `docs/visual-audio-phase10-accessibility-v0.12.26.md`: scope, contract,
+- `docs/history/initiatives/visual-audio/visual-audio-phase10-accessibility-v0.12.26.md`: scope, contract,
   verification, and evidence limits.
 - `SPEC.md`, `ARCHITECTURE.md`, `README.md`, `gui/README.md`, `CHANGELOG.md`,
   `LESSONS.md`, release metadata, and `_workspace` handoffs.

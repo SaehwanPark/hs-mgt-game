@@ -10,7 +10,7 @@ cargo run --bin hs-mgt-game-gui
 
 Keep the process running and open the printed loopback URL. The live GUI
 currently supports `competitive-regional-v1`. Complete instructions and
-troubleshooting are in [`docs/gui-how-to-play.md`](../docs/gui-how-to-play.md).
+troubleshooting are in [`docs/guides/gui-how-to-play.md`](../docs/guides/gui-how-to-play.md).
 
 Opening `gui/index.html` directly or through a generic static server intentionally
 shows fixture/demo mode; it cannot start a live scenario by itself.

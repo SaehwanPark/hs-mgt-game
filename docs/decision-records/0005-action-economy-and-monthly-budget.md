@@ -36,7 +36,7 @@ strategic limits.
    AP floors documented in competitive scenario brief (minimum 2 Expert).
 
 6. **Catalog as source of truth.** Costs defined in
-   [`action-catalog-draft.md`](../action-catalog-draft.md); ruleset may scale by
+   [`action-catalog-draft.md`](../design/action-catalog-draft.md); ruleset may scale by
    scenario without changing verb semantics.
 
 7. **Stabilization unchanged.** Five-turn demo keeps existing per-field caps;
@@ -80,5 +80,5 @@ strategic limits.
 ## Related Documents
 
 - [ADR-0004](0004-multi-system-player-state.md)
-- [`action-catalog-draft.md`](../action-catalog-draft.md)
-- [`executive-report-format.md`](../executive-report-format.md)
+- [`action-catalog-draft.md`](../design/action-catalog-draft.md)
+- [`executive-report-format.md`](../design/executive-report-format.md)

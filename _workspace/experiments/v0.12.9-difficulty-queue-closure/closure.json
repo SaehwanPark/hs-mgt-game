@@ -50,7 +50,7 @@
       ],
       "status": "supported"
     },
-    "docs/playtest-findings-v0.12.5.md": {
+    "docs/history/playtests/v0.12/playtest-findings-v0.12.5.md": {
       "markers": [
         "- Runtime difficulty change: not authorized",
         "v0.12.4 workforce-capacity signal",
@@ -58,7 +58,7 @@
       ],
       "status": "supported"
     },
-    "docs/playtest-findings-v0.12.6.md": {
+    "docs/history/playtests/v0.12/playtest-findings-v0.12.6.md": {
       "markers": [
         "Runs: 75 complete.",
         "Transitions: 1,800.",

@@ -57,7 +57,7 @@ code or broadening the artifact.
   rendered audit.
 - `tests/test_affiliation_playtest_validation.py`: focused artifact contract
   tests.
-- `docs/playtest-findings-v0.12.1.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
+- `docs/history/playtests/v0.12/playtest-findings-v0.12.1.md`, `SPEC.md`, `CHANGELOG.md`, `README.md`,
   `docs/roadmap.md`, and `_workspace/final/handoff.md`: synchronized project
   state.
 - `Cargo.toml` and `Cargo.lock`: patch version `0.12.1`.

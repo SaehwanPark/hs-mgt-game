@@ -49,7 +49,7 @@ slice.
   and `diagnostics.md`: committed post-fix evidence.
 - `tests/test_affiliation_observation_context.py`: artifact contract tests.
 - `SPEC.md`, `CHANGELOG.md`, `README.md`, `ARCHITECTURE.md`, `docs/roadmap.md`,
-  `docs/playtest-findings-v0.12.2.md`, `LESSONS.md`, and workspace handoffs.
+  `docs/history/playtests/v0.12/playtest-findings-v0.12.2.md`, `LESSONS.md`, and workspace handoffs.
 - `Cargo.toml` and `Cargo.lock`: version `0.12.2`.
 
 Avoid editing transition, model, input, scenario, replay, or hash modules. If

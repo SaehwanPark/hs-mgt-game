@@ -10,7 +10,7 @@ README = ROOT / "gui" / "README.md"
 COVERAGE = ROOT / "src" / "mcp" / "campaign_coverage.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 SERVER = ROOT / "src" / "mcp" / "server.rs"
-DOC = ROOT / "docs" / "visual-audio-phase7-campaign-coverage-v0.12.23.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase7-campaign-coverage-v0.12.23.md"
 
 
 class GuiCampaignCoverageTests(unittest.TestCase):

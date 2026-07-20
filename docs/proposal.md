@@ -434,8 +434,8 @@ decision points. A **parallel competitive campaign** (`competitive-regional-v1`)
 is now specified separately with **monthly turns**, **1 human + K AI health-system
 players**, simultaneous monthly actions, an action economy, executive-report
 briefings, and a Stata-like CLI. See
-[`docs/gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md) and
-[`docs/competitive-scenario-brief.md`](competitive-scenario-brief.md).
+[`docs/design/gameplay-competitive-sketch.md`](design/gameplay-competitive-sketch.md) and
+[`docs/design/competitive-scenario-brief.md`](design/competitive-scenario-brief.md).
 
 The purpose of the vertical slice is to validate:
 
@@ -522,7 +522,7 @@ After validating the US regional-market model, the project may expand toward:
 - rural and academic health-system variants;
 - value-based payment and insurance-market scenarios;
 - multiplayer or role-based classroom use (distinct from K AI competitor systems
-  in the competitive campaign; see [`core-loop-spec.md`](core-loop-spec.md));
+  in the competitive campaign; see [`core-loop-spec.md`](design/core-loop-spec.md));
 - richer instructor tooling;
 - comparative model assumptions;
 - and non-US health systems.

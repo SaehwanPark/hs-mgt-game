@@ -1,50 +1,49 @@
-# Final Handoff — Live competitive GUI repair v0.12.31
+# Final Handoff — Documentation information architecture v0.12.32
 
 ## Result
 
-The competitive GUI is playable from a normal checkout with:
-
-```bash
-cargo run --bin hs-mgt-game-gui
-```
-
-The binary prints a loopback URL, serves the existing browser client, injects a
-same-origin adapter, and delegates start/read/validate/submit/resolution work to
-the existing authoritative session store.
+Contributor documentation now starts at `docs/README.md` with equal software,
+game/domain-design, and validation routes. Current guidance is grouped by
+purpose, while immutable evidence and superseded project material are isolated
+under indexed history paths.
 
 ## Changed areas
 
-- Rust: loopback-only Axum server, embedded GUI assets, narrow competitive start
-  DTO, binary entry point, and real transport tests.
-- Browser: same-origin action adapter, live-without-session demo bootstrap,
-  transactional active-session replacement, and competitive coverage fix.
-- Player docs: README quickstart, shared How to Play routing, canonical GUI
-  guide/troubleshooting, and developer adapter reference.
-- Project records: ADR-0012, proposal/roadmap/spec/architecture/changelog,
-  lessons, handoffs, and v0.12.31 metadata.
+- Navigation: contributor landing page plus history, playtest, and visual/audio
+  indexes.
+- Organization: 136 documents moved from the `docs/` root into current or
+  historical cohorts; the three canonical project documents stayed fixed.
+- Validation: current agent protocol consolidated with reusable human-session
+  safeguards; all 85 playtest reports and 15 visual/audio records preserved.
+- Safeguards: dependency-free link checker, CI integration, migrated audits,
+  tests, scenario references, and tracked workspace references.
+- Project records: SPEC, README, changelog, lessons, request summary, and
+  v0.12.32 release metadata.
 
 ## Verification
 
-- 316 Python tests passed; 81 are GUI-focused.
-- 328 Rust library tests and all binary/integration/golden/scenario/doctest
-  targets passed.
-- Release metadata, Node syntax, Rust formatting, Clippy, and diff checks pass.
-- A real `127.0.0.1:8787` process served the injected page and started a seed-42
-  Normal competitive session.
+- Documentation link check passed across 258 Markdown files.
+- Release metadata check passed at v0.12.32.
+- Visual/audio contract audit status is `complete`; all 14 phase documents are
+  present.
+- 318 Python tests passed with the bundled Python and Node runtimes.
+- `cargo fmt --check`, Clippy with warnings denied, 328 Rust library tests, and
+  all integration, golden, scenario-selection, and doc-test targets passed.
 
-## Review and deviations
+## Deviations and review
 
-- Code review found one initial security/scope issue: the HTTP start request
-  reused MCP `scenario_path`. The final implementation uses a narrow DTO,
-  rejects unknown fields and noncompetitive campaigns, and never accepts a
-  scenario path.
-- No implementation deviations from the approved functional scope remain.
+- No redirect stubs were added, as planned.
+- Historical evidence was preserved with summaries; no evidence conclusion was
+  rewritten.
+- Existing machine-local links in two historical workspace handoffs were also
+  converted because the new repository-wide check correctly rejected them.
+- Project-specific domain QA was not invoked because no simulation mechanism,
+  evidence claim, or educational conclusion changed.
 
 ## Known limits
 
-- Competitive GUI only; use the CLI for other or custom scenarios.
-- Sessions are process-local and nonpersistent.
-- No remote hosting, authentication, multiplayer, packaging, or production
-  deployment.
-- Viewport, screen-reader, and hardware-audio verification remains unclaimed
-  because the configured in-app browser controller was unavailable.
+- External deep links to former GitHub document paths may no longer resolve.
+- The link checker validates local targets but does not validate heading
+  fragments or external URLs.
+- Opaque citation tokens in the historical Phase 1 literature framework remain
+  unresolved and are labeled as such in the history index.

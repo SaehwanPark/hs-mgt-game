@@ -1,6 +1,6 @@
 # Operational Implementation Plan: Neurology & Stroke Center Service Line
 
-This plan describes the continuation of development in the **Broader simulation breadth (Track 5)** of the Health Policy Strategy Game. It outlines how to implement a **Neurology & Stroke Center** service line using the project's [preferred-workflow](file:///home/saehwan/.gemini/skills/preferred-workflow/SKILL.md) and [plan-designer](file:///home/saehwan/.gemini/skills/plan-designer/SKILL.md) guidelines.
+This plan describes the continuation of development in the **Broader simulation breadth (Track 5)** of the Health Policy Strategy Game. It outlines how to implement a **Neurology & Stroke Center** service line using the project's `preferred-workflow` and `plan-designer` guidelines.
 
 ---
 
@@ -35,8 +35,8 @@ Implement the **Neurology & Stroke Center** service line in the competitive regi
 
 ## 3. Assumptions
 
-- Adding `InvestDomain::Neurology` and `ProjectKind::NeurologyUnit` is backward-compatible because we exhaustively update all match statements across the codebase, as documented in the "Exhaustive Enum Match" lesson of [LESSONS.md](file:///home/saehwan/repos/hs-mgt-game/LESSONS.md).
-- Default starting capacity for Neurology must be `0` to prevent turn-1 staffing deficits or discrepancies for old scenarios and unit tests, as per the "Default Capacities" lesson in [LESSONS.md](file:///home/saehwan/repos/hs-mgt-game/LESSONS.md).
+- Adding `InvestDomain::Neurology` and `ProjectKind::NeurologyUnit` is backward-compatible because we exhaustively update all match statements across the codebase, as documented in the "Exhaustive Enum Match" lesson of [LESSONS.md](../LESSONS.md).
+- Default starting capacity for Neurology must be `0` to prevent turn-1 staffing deficits or discrepancies for old scenarios and unit tests, as per the "Default Capacities" lesson in [LESSONS.md](../LESSONS.md).
 - The state hash format will append a `|neuro={}` slot to maintain deterministic validation.
 
 ---
@@ -57,21 +57,21 @@ Implement the **Neurology & Stroke Center** service line in the competitive regi
 
 ### Step B: State and Model Changes
 1. **System State Expansion:**
-   - In [competitive_world.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_world.rs), add `#[serde(default)] pub neurology_capacity: i32` to `HealthSystemState`.
+   - In [competitive_world.rs](../src/model/competitive_world.rs), add `#[serde(default)] pub neurology_capacity: i32` to `HealthSystemState`.
    - Add `NeurologyCapacity { capacity_delta: i32, project_draw: Option<i32> }` variant to `PendingEffectKind`.
 2. **Command Vocabulary:**
-   - In [competitive_command.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_command.rs), add `Neurology` (aliases: `"neurology"`, `"neuro"`) to `InvestDomain`.
+   - In [competitive_command.rs](../src/model/competitive_command.rs), add `Neurology` (aliases: `"neurology"`, `"neuro"`) to `InvestDomain`.
    - Add `NeurologyUnit` (aliases: `"neurology_unit"`, `"neuro_unit"`) to `ProjectKind`.
    - Map `ProjectKind::NeurologyUnit` in `resolve_months` to return `6` months.
    - Update `action_cost` mapping for `ProjectKind::NeurologyUnit` to cost `2` AP and draw `budget / 6` per month (requiring divisibility by 6).
 3. **Player Observations:**
-   - In [campaign.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/campaign.rs), add `pub neurology_capacity: i32` to `PlayerObservation`.
-   - In [observe_ai.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/observe_ai.rs), add `pub neurology_capacity: i32` to `AiPlayerObservation` and map it.
+   - In [campaign.rs](../src/model/campaign.rs), add `pub neurology_capacity: i32` to `PlayerObservation`.
+   - In [observe_ai.rs](../src/sim/observe_ai.rs), add `pub neurology_capacity: i32` to `AiPlayerObservation` and map it.
 
 ### Step C: Transition and Mechanics Integration
 1. **Payer and Project Resolution:**
-   - In [effects_competitive.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/effects_competitive.rs), implement resolution logic for `PendingEffectKind::NeurologyCapacity`. If a nurse strike is active, suspend monthly project progress (matching Tower and ICU rules).
-   - In [transition_competitive.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/transition_competitive.rs):
+   - In [effects_competitive.rs](../src/sim/effects_competitive.rs), implement resolution logic for `PendingEffectKind::NeurologyCapacity`. If a nurse strike is active, suspend monthly project progress (matching Tower and ICU rules).
+   - In [transition_competitive.rs](../src/sim/transition_competitive.rs):
      - In `apply_command`, handle `InvestDomain::Neurology`: immediate cash cost = `amount`, yields immediate access/market share increases, and schedules a `NeurologyCapacity { capacity_delta = amount / 20, project_draw: None }` effect resolving next month.
      - Handle `ProjectKind::NeurologyUnit`: schedules `NeurologyCapacity { capacity_delta = 6, project_draw = Some(monthly_draw) }` resolving in 6 months.
 2. **Staffing Targets and Hierarchical Allocation:**
@@ -88,52 +88,52 @@ Implement the **Neurology & Stroke Center** service line in the competitive regi
    - Event logging: Log if `boarded_neuro > 0` or `diverted_neuro > 0`.
 
 ### Step D: State Hash Update
-1. In [competitive_hash.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_hash.rs), bump schema version prefix (e.g., to `v7` if v6 is current) and append `|neuro={}` to the state hashing string. Feed `system.neurology_capacity` into the hash.
+1. In [competitive_hash.rs](../src/model/competitive_hash.rs), bump schema version prefix (e.g., to `v7` if v6 is current) and append `|neuro={}` to the state hashing string. Feed `system.neurology_capacity` into the hash.
 
 ### Step E: CLI Parser and Autocomplete
-1. In [competitive_parse.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/competitive_parse.rs), support parsing `"neurology"` and `"neuro"` domains, and `"neurology_unit"` and `"neuro_unit"` project kinds.
-2. In [repl.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/repl.rs), add autocomplete strings.
-3. In [guidance.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/guidance.rs), update help guides for `invest` and `project` commands.
-4. In [executive_report.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/display/executive_report.rs), render Neurology capacity, effective capacity, and ED boarding count.
+1. In [competitive_parse.rs](../src/cli/competitive_parse.rs), support parsing `"neurology"` and `"neuro"` domains, and `"neurology_unit"` and `"neuro_unit"` project kinds.
+2. In [repl.rs](../src/cli/repl.rs), add autocomplete strings.
+3. In [guidance.rs](../src/cli/guidance.rs), update help guides for `invest` and `project` commands.
+4. In [executive_report.rs](../src/cli/display/executive_report.rs), render Neurology capacity, effective capacity, and ED boarding count.
 
 ### Step F: Scenario Loader and AI Updates
-1. In [mod.rs](file:///home/saehwan/repos/hs-mgt-game/src/scenario/mod.rs), support `neurology_capacity` under `[[systems]]` in the scenario TOML, defaulting to 0 if omitted.
-2. In [genesis.rs](file:///home/saehwan/repos/hs-mgt-game/src/competitive/genesis.rs) and [fixtures.rs](file:///home/saehwan/repos/hs-mgt-game/src/competitive/fixtures.rs), initialize `neurology_capacity` to 0.
-3. In [ai_player.rs](file:///home/saehwan/repos/hs-mgt-game/src/actors/ai_player.rs), handle the new domain/project variants in target calculations and match arms.
+1. In [mod.rs](../src/scenario/mod.rs), support `neurology_capacity` under `[[systems]]` in the scenario TOML, defaulting to 0 if omitted.
+2. In [genesis.rs](../src/competitive/genesis.rs) and [fixtures.rs](../src/competitive/fixtures.rs), initialize `neurology_capacity` to 0.
+3. In [ai_player.rs](../src/actors/ai_player.rs), handle the new domain/project variants in target calculations and match arms.
 
 ---
 
 ## 5. Files and Functions Likely to Change
 
 - **State and Command Enums:**
-  - [src/model/competitive_world.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_world.rs): `HealthSystemState`, `PendingEffectKind`
-  - [src/model/competitive_command.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_command.rs): `InvestDomain`, `ProjectKind`, `resolve_months`, `action_cost`
+  - [src/model/competitive_world.rs](../src/model/competitive_world.rs): `HealthSystemState`, `PendingEffectKind`
+  - [src/model/competitive_command.rs](../src/model/competitive_command.rs): `InvestDomain`, `ProjectKind`, `resolve_months`, `action_cost`
 - **Data Transfer and Loading:**
-  - [src/model/campaign.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/campaign.rs): `PlayerObservation`
-  - [src/sim/observe_ai.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/observe_ai.rs): `AiPlayerObservation`
-  - [src/scenario/mod.rs](file:///home/saehwan/repos/hs-mgt-game/src/scenario/mod.rs): `ScenarioSystemState`
-  - [src/competitive/genesis.rs](file:///home/saehwan/repos/hs-mgt-game/src/competitive/genesis.rs): `genesis_competitive_world`
-  - [src/competitive/fixtures.rs](file:///home/saehwan/repos/hs-mgt-game/src/competitive/fixtures.rs): Initial state setups
+  - [src/model/campaign.rs](../src/model/campaign.rs): `PlayerObservation`
+  - [src/sim/observe_ai.rs](../src/sim/observe_ai.rs): `AiPlayerObservation`
+  - [src/scenario/mod.rs](../src/scenario/mod.rs): `ScenarioSystemState`
+  - [src/competitive/genesis.rs](../src/competitive/genesis.rs): `genesis_competitive_world`
+  - [src/competitive/fixtures.rs](../src/competitive/fixtures.rs): Initial state setups
 - **Transition and Effects Engine:**
-  - [src/sim/effects_competitive.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/effects_competitive.rs): `resolve_pending_effects`
-  - [src/sim/transition_competitive.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/transition_competitive.rs): `apply_command`, `apply_staffing_constraints`
-  - [src/model/competitive_hash.rs](file:///home/saehwan/repos/hs-mgt-game/src/model/competitive_hash.rs): `record_competitive_hash`
+  - [src/sim/effects_competitive.rs](../src/sim/effects_competitive.rs): `resolve_pending_effects`
+  - [src/sim/transition_competitive.rs](../src/sim/transition_competitive.rs): `apply_command`, `apply_staffing_constraints`
+  - [src/model/competitive_hash.rs](../src/model/competitive_hash.rs): `record_competitive_hash`
 - **CLI REPL Presentation:**
-  - [src/cli/competitive_parse.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/competitive_parse.rs): Parser logic
-  - [src/cli/repl.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/repl.rs): Autocomplete
-  - [src/cli/guidance.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/guidance.rs): Topic help
-  - [src/cli/display/executive_report.rs](file:///home/saehwan/repos/hs-mgt-game/src/cli/display/executive_report.rs): rendering
+  - [src/cli/competitive_parse.rs](../src/cli/competitive_parse.rs): Parser logic
+  - [src/cli/repl.rs](../src/cli/repl.rs): Autocomplete
+  - [src/cli/guidance.rs](../src/cli/guidance.rs): Topic help
+  - [src/cli/display/executive_report.rs](../src/cli/display/executive_report.rs): rendering
 - **Strategic Rivals:**
-  - [src/actors/ai_player.rs](file:///home/saehwan/repos/hs-mgt-game/src/actors/ai_player.rs): target calculation matching
+  - [src/actors/ai_player.rs](../src/actors/ai_player.rs): target calculation matching
 - **Verification Tests:**
-  - [tests/golden_competitive_seed42.rs](file:///home/saehwan/repos/hs-mgt-game/tests/golden_competitive_seed42.rs): State hash assertion
+  - [tests/golden_competitive_seed42.rs](../tests/golden_competitive_seed42.rs): State hash assertion
 
 ---
 
 ## 6. Tests and Checks
 
 1. **Unit Verification:**
-   - Add a test `test_neurology_department_mechanics` in [transition_competitive.rs](file:///home/saehwan/repos/hs-mgt-game/src/sim/transition_competitive.rs) checking:
+   - Add a test `test_neurology_department_mechanics` in [transition_competitive.rs](../src/sim/transition_competitive.rs) checking:
      - Priority allocation (nurses/physicians allocated to Neurology after Psychiatric and before Oncology).
      - Full capacity staffing vs understaffed boarding.
      - ED boarding math and diverted quality/trust penalties.

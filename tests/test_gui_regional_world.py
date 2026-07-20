@@ -10,7 +10,7 @@ README = ROOT / "gui" / "README.md"
 REGIONAL = ROOT / "src" / "mcp" / "regional_world.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 SERVER = ROOT / "src" / "mcp" / "server.rs"
-DOC = ROOT / "docs" / "visual-audio-phase6-regional-world-v0.12.22.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase6-regional-world-v0.12.22.md"
 
 
 class GuiRegionalWorldTests(unittest.TestCase):

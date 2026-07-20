@@ -10,7 +10,7 @@ README = ROOT / "gui" / "README.md"
 ACTION = ROOT / "src" / "mcp" / "action.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 SERVER = ROOT / "src" / "mcp" / "server.rs"
-DOC = ROOT / "docs" / "visual-audio-phase3-contextual-actions-v0.12.19.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase3-contextual-actions-v0.12.19.md"
 
 
 class GuiContextualActionTests(unittest.TestCase):

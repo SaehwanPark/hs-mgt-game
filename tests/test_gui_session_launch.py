@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "gui" / "index.html"
 APP = ROOT / "gui" / "app.mjs"
 README = ROOT / "gui" / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase11-session-launch-v0.12.27.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase11-session-launch-v0.12.27.md"
 
 
 class GuiSessionLaunchTests(unittest.TestCase):

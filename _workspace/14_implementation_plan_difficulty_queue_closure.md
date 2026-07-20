@@ -11,7 +11,7 @@ pressure/clearability review plus the v0.12.6 observation-only validation.
   evidence closure artifact.
 - `tests/test_difficulty_queue_closure.py`: focused evidence-limit and
   reopening-condition tests.
-- `docs/difficulty-depth-queue-closure-v0.12.9.md`: durable decision.
+- `docs/history/milestones/difficulty-depth-queue-closure-v0.12.9.md`: durable decision.
 - `SPEC.md`, canonical docs, and `LESSONS.md`: remove the completed queue item.
 
 ## Non-goals

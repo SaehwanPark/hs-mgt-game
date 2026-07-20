@@ -51,7 +51,7 @@ code or selecting a new dependency.
 
 ## Files and functions likely to change
 
-- `docs/visual-audio-phase0-alignment-v0.12.16.md`: new Phase 0 decision and
+- `docs/history/initiatives/visual-audio/visual-audio-phase0-alignment-v0.12.16.md`: new Phase 0 decision and
   deliverables.
 - `docs/decision-records/0011-browser-native-presentation-client.md`: accepted
   technology and authority-boundary decision.

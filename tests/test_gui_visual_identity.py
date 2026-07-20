@@ -10,7 +10,7 @@ VISUAL = ROOT / "gui" / "visual.mjs"
 REGISTRY = ROOT / "gui" / "visual-catalog.json"
 HTML = ROOT / "gui" / "index.html"
 README = ROOT / "gui" / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase12-visual-identity-v0.12.28.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase12-visual-identity-v0.12.28.md"
 
 
 class GuiVisualIdentityTests(unittest.TestCase):

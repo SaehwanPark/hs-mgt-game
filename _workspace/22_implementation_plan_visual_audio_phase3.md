@@ -77,7 +77,7 @@ Add a bounded graphical action workflow for `competitive-regional-v1`:
    - Add Python/Node GUI contract tests for form generation, draft
      add/revise/remove, host validation, no local cost formula, no-submit-before
      validation, rejection/error recovery, and no-network/no-asset behavior.
-   - Add `docs/visual-audio-phase3-contextual-actions-v0.12.19.md` with source
+   - Add `docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md` with source
      mapping, command equivalence, user checklist, evidence limits, and Phase 4
      gate.
 

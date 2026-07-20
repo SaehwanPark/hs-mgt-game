@@ -18,12 +18,12 @@ OBSERVATION_EVIDENCE_PATH = (
 )
 
 SOURCE_MARKERS = {
-  "docs/playtest-findings-v0.12.5.md": [
+  "docs/history/playtests/v0.12/playtest-findings-v0.12.5.md": [
     "- Runtime difficulty change: not authorized",
     "v0.12.4 workforce-capacity signal",
     "No difficulty values, transition formulas, balance",
   ],
-  "docs/playtest-findings-v0.12.6.md": [
+  "docs/history/playtests/v0.12/playtest-findings-v0.12.6.md": [
     "Runs: 75 complete.",
     "Transitions: 1,800.",
     "Source comparison: 60 all-tier histories and 15 Expert histories match",

@@ -57,7 +57,7 @@ Do not add a browser simulation or change host/MCP schemas.
 - `gui/app.mjs`: shared launch helper, `createReadOnlyClient`,
   `createActionClient`, and client exports if needed.
 - `tests/test_gui_session_launch.py`: focused static and Node contract tests.
-- `docs/visual-audio-phase11-session-launch-v0.12.27.md` and aligned project
+- `docs/history/initiatives/visual-audio/visual-audio-phase11-session-launch-v0.12.27.md` and aligned project
   docs/metadata.
 - Do not change `src/`, `gui/audio.mjs`, `gui/playtest.mjs`, or MCP DTOs unless
   discovery proves the adapter contract cannot map to existing host behavior.

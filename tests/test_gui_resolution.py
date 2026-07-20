@@ -10,7 +10,7 @@ README = ROOT / "gui" / "README.md"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 SERVER = ROOT / "src" / "mcp" / "server.rs"
-DOC = ROOT / "docs" / "visual-audio-phase4-resolution-causal-v0.12.20.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase4-resolution-causal-v0.12.20.md"
 
 
 class GuiResolutionTests(unittest.TestCase):

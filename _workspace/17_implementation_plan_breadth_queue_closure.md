@@ -19,7 +19,7 @@ patient modeling.
 - `src/model/competitive_command.rs`, `src/model/competitive_world.rs`,
   `src/sim/observe_competitive.rs`, `src/debrief/report.rs`: runtime boundary
   markers for capacity, outcomes, actors, observations, and debriefs.
-- `docs/breadth-strategic-actor-queue-closure-v0.12.12.md` and the reproducible
+- `docs/history/milestones/breadth-strategic-actor-queue-closure-v0.12.12.md` and the reproducible
   closure artifact: decision, limits, and reopening condition.
 - `tests/test_breadth_queue_closure.py`: deterministic source/evidence contract
   checks.

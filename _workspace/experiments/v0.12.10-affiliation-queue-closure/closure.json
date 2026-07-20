@@ -41,7 +41,7 @@
       ],
       "status": "supported"
     },
-    "docs/affiliation-runtime-boundary-v0.12.7.md": {
+    "docs/history/milestones/affiliation-runtime-boundary-v0.12.7.md": {
       "markers": [
         "The existing opt-in `regional-affiliation-v1` runtime already satisfies",
         "True state:",

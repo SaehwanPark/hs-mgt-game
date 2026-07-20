@@ -58,27 +58,27 @@ actor_stub = "rival_health_system"
 
 [[actor_stubs]]
 id = "commercial_insurer"
-card_ref = "actor-cards.md#commercial-insurer"
+card_ref = "docs/design/actor-cards.md#commercial-insurer"
 turn = 1
 
 [[actor_stubs]]
 id = "state_policy"
-card_ref = "actor-cards.md#state-policy-actor"
+card_ref = "docs/design/actor-cards.md#state-policy-actor"
 turn = 2
 
 [[actor_stubs]]
 id = "labor_representative"
-card_ref = "actor-cards.md#labor-organization"
+card_ref = "docs/design/actor-cards.md#labor-organization"
 turn = 3
 
 [[actor_stubs]]
 id = "coalition_liaison"
-card_ref = "actor-cards.md#regional-access-coalition"
+card_ref = "docs/design/actor-cards.md#regional-access-coalition"
 turn = 4
 
 [[actor_stubs]]
 id = "rival_health_system"
-card_ref = "actor-cards.md#competing-health-system"
+card_ref = "docs/design/actor-cards.md#competing-health-system"
 turn = 5
 
 [evaluation_profile]

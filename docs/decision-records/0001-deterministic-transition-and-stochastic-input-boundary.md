@@ -66,7 +66,7 @@ run configuration.
 
 ### Follow-ups
 
-- Scenario/ruleset format design (see [`scenario-format-draft.md`](../scenario-format-draft.md)).
+- Scenario/ruleset format design (see [`scenario-format-draft.md`](../design/scenario-format-draft.md)).
 - Forecast preview UI must use observation and ruleset bounds only, not future
   resolved inputs.
 - Consider ADR for scenario loader when runtime format is approved.
@@ -90,5 +90,5 @@ run configuration.
 ## Related Documents
 
 - [`ARCHITECTURE.md`](../../ARCHITECTURE.md)
-- [`docs/versioning-policy.md`](../versioning-policy.md)
-- [`docs/evidence-registry.md`](../evidence-registry.md)
+- [`docs/reference/versioning-policy.md`](../reference/versioning-policy.md)
+- [`docs/research/evidence-registry.md`](../research/evidence-registry.md)

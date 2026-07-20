@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.31. Its
+The current public milestone is a playable Rust prototype at v0.12.32. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -22,7 +22,8 @@ with explicit provenance; Phase 13 adds a text-first first-month continuity
 rail, and v0.12.30 closes the bounded technical first-month contract with
 explicit evidence limits. v0.12.31 adds the loopback-only live GUI host and
 player troubleshooting guide needed to run that competitive path from a normal
-checkout. It is
+checkout, and v0.12.32 reorganizes contributor documentation around current
+guidance and indexed historical evidence. It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 
@@ -96,7 +97,7 @@ Keep that terminal running, open the printed URL (normally
 **Start competitive session**. Opening `gui/index.html` directly shows the
 static demo and does not start a live scenario.
 
-See [How to Play in GUI Mode](docs/gui-how-to-play.md) for the complete first
+See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete first
 month, audio controls, alternate ports, session lifetime, and troubleshooting.
 
 ## Competitive Command Examples
@@ -143,40 +144,14 @@ or policy decisions.
 
 ## Documentation
 
-Relevant blog posts:
+Contributors should start with the [documentation index](docs/README.md), which
+provides separate software, game/domain-design, and validation paths while
+keeping historical evidence out of the current instruction flow.
 
-- [A Management Game Where the Market Talks Back (design essay)](docs/blog-posts/health-policy-strategy-game.md): [Medium](https://medium.com/@saehwanpark/a-management-game-where-the-market-talks-back-388fb2955f26)
-
-Start here:
-
-- [How to Play](docs/how-to-play.md)
-- [How to Play in GUI Mode](docs/gui-how-to-play.md)
-- [Core Loop Spec](docs/core-loop-spec.md)
-- [Competitive Scenario Brief](docs/competitive-scenario-brief.md)
-- [Design Principles](docs/design_principles.md)
-- [Architecture](ARCHITECTURE.md)
-- [Project Specification](SPEC.md)
-
-Deeper project context:
-
-- [Project Proposal](docs/proposal.md)
-- [Roadmap](docs/roadmap.md)
-- [Glossary](docs/glossary.md)
-- [Evidence Registry](docs/evidence-registry.md)
-- [Expansion Proposal Review](docs/expansion-proposal-review.md)
-- [Architecture Decision Records](docs/decision-records/README.md)
-- [MCP Agent Interface](docs/mcp-agent-interface.md)
-- [Agent Playtest Protocol](docs/agent-playtest-protocol.md)
-- [Visual/audio Phase 9 evaluation and revision](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md)
-- [Visual/audio Phase 10 accessibility and visual-language hardening](docs/visual-audio-phase10-accessibility-v0.12.26.md)
-- [Visual/audio Phase 11 first-session launch/load](docs/visual-audio-phase11-session-launch-v0.12.27.md)
-- [Visual/audio Phase 12 visual identity and marker provenance](docs/visual-audio-phase12-visual-identity-v0.12.28.md)
-- [Visual/audio Phase 13 first-month continuity](docs/visual-audio-phase13-first-month-continuity-v0.12.29.md)
-- [Visual/audio first-month contract audit](docs/visual-audio-first-month-contract-v0.12.30.md)
-
-Historical and internal development notes, including older playtest findings,
-are kept in `docs/` for transparency. The previous developer-focused README is
-archived at [docs/README-dev-archive-v0.1.61.md](docs/README-dev-archive-v0.1.61.md).
+Players can go directly to [How to Play](docs/guides/how-to-play.md) or
+[How to Play in GUI Mode](docs/guides/gui-how-to-play.md). The design essay
+[A Management Game Where the Market Talks Back](docs/blog-posts/health-policy-strategy-game.md)
+is also available on [Medium](https://medium.com/@saehwanpark/a-management-game-where-the-market-talks-back-388fb2955f26).
 
 ## Development
 
@@ -184,13 +159,14 @@ Run the standard checks:
 
 ```bash
 python3 scripts/check_release_metadata.py
+python3 scripts/check_documentation_links.py
 cargo fmt --check
 cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
 The release metadata command is documented in
-[`docs/contributor-release-check.md`](docs/contributor-release-check.md).
+[`docs/guides/contributor-release-check.md`](docs/guides/contributor-release-check.md).
 
 Run the local MCP server used for bounded agent playtesting:
 

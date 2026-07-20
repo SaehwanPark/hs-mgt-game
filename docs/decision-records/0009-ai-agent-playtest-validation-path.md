@@ -52,9 +52,9 @@ classroom effectiveness, empirical calibration, or policy forecasting validity.
 
 ## Validation
 
-- `docs/agent-playtest-protocol.md` defines required run artifacts, profiles,
+- `docs/validation/playtesting.md` defines required run artifacts, profiles,
   rubric dimensions, synthesis format, and evidence limits.
-- `docs/mcp-playtesting-guide.md` remains the operational runbook for the
+- `docs/guides/mcp-playtesting-guide.md` remains the operational runbook for the
   existing MCP automation.
 - Future playtest findings should cite campaign, seed, difficulty, agent
   profile, and evidence artifacts.

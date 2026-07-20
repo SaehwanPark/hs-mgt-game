@@ -50,7 +50,7 @@ Files for this design gate:
 
 - `_workspace/experiments/v0.12.5-workforce-capacity-design/`.
 - `tests/test_workforce_capacity_design.py`.
-- `docs/workforce-capacity-design-v0.12.5.md` and related governance docs.
+- `docs/history/milestones/workforce-capacity-design-v0.12.5.md` and related governance docs.
 
 ## Acceptance criteria
 

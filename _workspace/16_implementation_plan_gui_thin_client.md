@@ -10,7 +10,7 @@ observation, legal-command, history/replay, and debrief outputs.
 - `gui/index.html`, `gui/app.mjs`, `gui/README.md`: thin client and adapter
   contract.
 - `tests/test_gui_thin_client.py`: static and JavaScript contract tests.
-- `docs/gui-thin-client-v0.12.11.md`: scope, asset audit, and verification.
+- `docs/history/milestones/gui-thin-client-v0.12.11.md`: scope, asset audit, and verification.
 - `SPEC.md`, canonical docs, and `LESSONS.md`: close the GUI Future item.
 
 ## Non-goals

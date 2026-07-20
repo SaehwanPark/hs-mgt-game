@@ -424,7 +424,7 @@ The design should explicitly distinguish a good decision made under uncertainty 
 
 ## Deliverables
 
-- Core loop specification — see [`core-loop-spec.md`](core-loop-spec.md)
+- Core loop specification — see [`core-loop-spec.md`](design/core-loop-spec.md)
 - Initial action catalog
 - Strategic interaction briefs
 - First campaign brief
@@ -644,12 +644,12 @@ regional market campaign (`competitive-regional-v1`) adds:
 
 **Deliverables (design):**
 
-- [`gameplay-competitive-sketch.md`](gameplay-competitive-sketch.md)
-- [`core-loop-spec.md`](core-loop-spec.md)
-- [`competitive-scenario-brief.md`](competitive-scenario-brief.md)
-- [`executive-report-format.md`](executive-report-format.md)
-- [`action-catalog-draft.md`](action-catalog-draft.md)
-- [`cli-command-grammar-draft.md`](cli-command-grammar-draft.md)
+- [`gameplay-competitive-sketch.md`](design/gameplay-competitive-sketch.md)
+- [`core-loop-spec.md`](design/core-loop-spec.md)
+- [`competitive-scenario-brief.md`](design/competitive-scenario-brief.md)
+- [`executive-report-format.md`](design/executive-report-format.md)
+- [`action-catalog-draft.md`](design/action-catalog-draft.md)
+- [`cli-command-grammar-draft.md`](design/cli-command-grammar-draft.md)
 - ADRs 0003–0006
 
 **Runtime slices delivered:** campaign router (I1), monthly executive report
