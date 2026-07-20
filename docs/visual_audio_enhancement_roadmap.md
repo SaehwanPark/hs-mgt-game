@@ -280,6 +280,10 @@ Validate the preferred visual style and rendering approach through a small numbe
 
 ## Milestone 1.1: Art-direction reference board
 
+**Status:** Complete in v0.12.35
+**Evidence:** `docs/design/visual-audio-art-direction-board.md` and
+`docs/decision-records/0012-visual-audio-art-direction.md`
+
 ### Deliverables
 
 A committed reference board covering:
@@ -324,15 +328,15 @@ Flat-vector isometric should remain the default unless another prototype materia
 
 ### Checklist
 
-- [ ] Three reference variants produced.
-- [ ] Evaluation criteria scored.
-- [ ] Preferred style selected.
-- [ ] Rejected styles documented with reasons.
-- [ ] Color-blind review completed.
-- [ ] Small-size rendering reviewed.
-- [ ] Large-text rendering reviewed.
-- [ ] Screenshot examples committed.
-- [ ] Art-direction ADR approved.
+- [x] Three reference variants produced.
+- [x] Evaluation criteria scored.
+- [x] Preferred style selected.
+- [x] Rejected styles documented with reasons.
+- [x] Color-blind review completed.
+- [x] Small-size rendering reviewed.
+- [x] Large-text rendering reviewed.
+- [x] Screenshot examples committed.
+- [x] Art-direction ADR approved.
 
 ### Exit criteria
 

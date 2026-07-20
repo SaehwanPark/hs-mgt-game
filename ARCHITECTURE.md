@@ -194,6 +194,11 @@ These tools do not read or mutate simulation state; asset paths, licenses,
 playback rules, and accessibility metadata must never enter deterministic
 transitions, state hashes, replay artifacts, or debriefs.
 
+The v0.12.35 art-direction record selects a flat institutional SVG vocabulary
+for the next rendering proof. Its schematic relationship layouts are design
+references, not true geography; rejected terrain and dashboard variants remain
+comparison evidence and are not runtime semantics.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

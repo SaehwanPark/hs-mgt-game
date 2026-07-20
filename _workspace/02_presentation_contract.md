@@ -1,67 +1,67 @@
-# Presentation Contract — Phase 0 foundation v0.12.34
+# Presentation Contract — Phase 1.1 art-direction reference board v0.12.35
 
 ## Goal and Authorization
 
-Authorized slice: close the visual/audio roadmap's Phase 0.1 product brief and
-0.2 asset-repository foundation. This contract governs metadata and release
-checks; it does not authorize new runtime assets or host changes.
+Authorized slice: produce three source-only art-direction reference variants,
+score them, select one for future rendering, and record rejected alternatives.
+No selected variant is yet a shipped GUI asset or runtime semantic mapping.
 
 ## Player Questions and Consequences
 
-The future first-month presentation must help the player answer: which visible
-institution is involved, what changed, what remains in process, what is known or
-uncertain, and where the next decision belongs. Registry metadata supports those
-surfaces but is not itself player state.
+The selected direction must make the future player question legible: where is a
+visible institution, what facility/process/status is being discussed, and which
+relationship deserves attention next. It must support compact executive density
+without turning symbolic layout into true geography or hidden-state disclosure.
 
 ## Actor-Visible Source Ledger
 
-| Semantic family | Source | Timing/missingness | Client prohibition |
+| Reference element | Source authority | Missingness | Prohibited inference |
 | --- | --- | --- | --- |
-| Identity, marker, status token | `gui/visual.mjs`, current catalog | Visible fixture/host data; generic fallback | No hidden severity or intent inference |
-| UI/event/music cue | `gui/audio.mjs`, visible transition/interaction | Visible event or explicit page stage; mute/unsupported fallback | No private rival or resolved-input mapping |
-| Release asset metadata | `assets/registry/*.json` | Build/release time | Never enters commands, transitions, hashes, or replay |
+| Institution name/marker | Visible host or fixture identity | Generic label/token | No private rival identity |
+| Facility/status labels | Visible host/fixture category and status | Generic marker/text | No client-derived severity |
+| Relationship arrows/lines | Decorative reference vocabulary only | Omit if no visible relationship | No causal or geographic claim |
+| Palette/shape treatment | Decorative style decision | Monochrome/text fallback | No color-only meaning |
 
 ## Visual, Motion, and Audio Semantics
 
-Known semantic roles are validated against a fixed allowlist. Text labels and
-symbols remain the meaning-bearing channel. Audio and motion are secondary,
-short, and deterministic from visible inputs. The registry records the source,
-role, accessible equivalent, and approval state for every registered unit.
+Variant A uses a flat institutional panel/grid language and is the selected
+direction. Variant B uses civic terrain/road motifs and is rejected because it
+invites unsupported geography. Variant C uses editorial dashboard tiles and is
+rejected because it weakens persistent spatial relationship cues. No motion or
+audio is added in this slice.
 
 ## Accessibility and Fallbacks
 
-The product brief requires keyboard operation, non-color status language, large
-text support, reduced motion, complete written equivalents, mute, reduced
-notifications, and generic missing-asset fallbacks. A registry or asset failure
-blocks release validation; a runtime asset failure falls back to text/status
-rendering.
+Every SVG includes a title, description, visible labels, shapes, and a
+`viewBox`. Meaning is repeated in text and shape, not color alone. Small-size
+review uses the compact marker/group in each board; large-text review uses
+ordinary text labels rather than rasterized text. Missing or unsupported SVG
+rendering falls back to the existing text-first GUI; reduced motion has no
+additional behavior because these are static references.
 
 ## Authority, History, and Replay Boundaries
 
-The asset scripts read files only. They do not parse or mutate simulation state,
-call the network, resolve randomness, or affect history, hashes, replay, or
-debrief output. Browser presentation remains downstream of actor-visible host
-data and committed history.
+The reference board is source/design material only. It does not enter browser
+state, commands, transition evaluation, stochastic inputs, history, hashes,
+replay, audio classification, or debrief output. Layout slots are not geography.
 
 ## Asset Provenance and Release Requirements
 
-Registries require stable IDs, semantic roles, source or generation metadata,
-creator, license, attribution, approval, accessible equivalents, and source/
-release hash fields. Hashes are checked against paths when present. Release
-files under `assets/release/` must be named by a registry entry with approved
-license metadata. The allowlist/denylist and AI-generation requirements are in
-the product brief and `assets/README.md`.
+The three SVGs are hand-authored project-generated source references under
+`assets/source/visual/art-direction/`, registered with hashes and no release
+path. They use no external images, fonts, scripts, or network references. A
+future release derivative requires a new approved registry entry and hash.
 
 ## Verification and Evidence Limits
 
-Focused Python tests exercise valid and invalid manifests, duplicate IDs,
-unknown roles, stale hashes, missing metadata, release coverage, and generated
-credits. CI checks the validator and credits. These are technical governance
-checks; they do not prove visual quality, human accessibility, license counsel,
-or learning outcomes.
+Focused tests parse all SVGs, require accessibility text and viewBox/role
+markers, reject external references and color-only content, and verify the
+selection matrix and ADR. This is a technical design proxy, not a human color-
+blind, screen-reader, contrast, usability, or art-direction study.
 
 ## Non-Goals and Open Questions
 
-No actual third-party or recorded assets are acquired here. Phase 1 must decide
-the art-direction comparison evidence and SVG rendering proof. Later work must
-revisit whether large source files need an external store before adding them.
+No renderer, browser integration, screenshot automation, facility geometry
+library, audio motif, or production asset derivative is authorized. Phase 1.2
+must prove deterministic SVG rendering with the selected vocabulary before
+broader facility/map work.

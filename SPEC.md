@@ -4538,6 +4538,32 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
     legal, artistic, hardware-audio, learning, calibration, balance, or policy
     validity claim.
 
+### Visual/audio Phase 1.1 art direction (v0.12.35)
+
+- Status: Closed; reference board, selection ADR, registry, and technical
+  verification complete
+- Started: 2026-07-20
+- Branch: `feat/visual-audio-phase1-art-direction-v0.12.35`
+
+  Done:
+  - Added three labeled, source-only SVG references: institutional flat, civic
+    terrain, and editorial desktop.
+  - Scored strategic clarity, semantic compactness, institutional tone,
+    color-independent accessibility path, modular reuse, and implementation
+    risk; selected Variant A and rejected B/C with explicit reasons.
+  - Recorded color-blind, small-size, large-text, reduced-motion, provenance,
+    and schematic/non-geographic boundaries in a design board and ADR-0012.
+  - Checked only the demonstrated Phase 1.1 roadmap items.
+
+  Verification:
+  - XML/static SVG, registry/credits, focused/full Python, documentation-link,
+    release-metadata, formatting, Node syntax, and diff checks pass.
+
+  Deferred / Non-Goals:
+  - No SVG renderer, GUI integration, facility/map production kit, animation,
+    audio, third-party asset, runtime host/simulation change, or human design,
+    accessibility, learning, calibration, balance, or policy-validity claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4571,10 +4597,10 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-No active documentation or visual/audio implementation slice. v0.12.34 closes
-the Phase 0 product brief and asset-foundation gate; Phase 1 art-direction and
-rendering prototypes remain Future work. Human and educational evaluation remain
-separately gated Future work.
+No active documentation or visual/audio implementation slice. v0.12.35 closes
+the Phase 1.1 art-direction gate; Phase 1.2 rendering and all broader production
+remain Future work. Human and educational evaluation remain separately gated
+Future work.
 
 ## Future
 

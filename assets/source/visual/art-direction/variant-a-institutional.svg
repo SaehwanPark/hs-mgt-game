@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Variant A — institutional flat executive board</title>
+  <desc id="desc">A restrained flat-vector regional board with three labeled institutions, a selected facility, visible staffing pressure, and a compact executive report panel.</desc>
+  <rect width="960" height="600" fill="#f4f7f6"/>
+  <rect x="32" y="28" width="896" height="62" rx="12" fill="#17232d"/>
+  <text x="58" y="67" fill="#ffffff" font-family="system-ui, sans-serif" font-size="25" font-weight="700">REGIONAL OPERATING BOARD</text>
+  <text x="760" y="66" fill="#b8d8d3" font-family="system-ui, sans-serif" font-size="16">MONTH 01 · REPORTED</text>
+  <rect x="32" y="112" width="590" height="444" rx="16" fill="#e1f1ee" stroke="#9ec7c1" stroke-width="3"/>
+  <text x="58" y="145" fill="#075952" font-family="system-ui, sans-serif" font-size="18" font-weight="700">VISIBLE MARKET RELATIONSHIPS</text>
+  <path d="M160 262 L360 220 L510 344" fill="none" stroke="#5d4b89" stroke-width="5" stroke-dasharray="12 9"/>
+  <path d="M360 220 L510 344" fill="none" stroke="#a95226" stroke-width="5"/>
+  <g role="group" aria-label="Riverside visible institution">
+    <rect x="92" y="220" width="138" height="92" rx="12" fill="#ffffff" stroke="#0b6e69" stroke-width="5"/>
+    <text x="114" y="256" fill="#17232d" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Riverside</text>
+    <text x="114" y="283" fill="#60707b" font-family="system-ui, sans-serif" font-size="16">PLAYER SYSTEM</text>
+    <circle cx="206" cy="248" r="10" fill="#2f6e4f"/>
+  </g>
+  <g role="group" aria-label="Northlake public rival">
+    <rect x="292" y="178" width="138" height="92" rx="12" fill="#ffffff" stroke="#2b5f87" stroke-width="4"/>
+    <text x="314" y="214" fill="#17232d" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Northlake</text>
+    <text x="314" y="241" fill="#60707b" font-family="system-ui, sans-serif" font-size="16">PUBLIC SIGNAL</text>
+    <path d="M399 202 l10 18 h-20 z" fill="#7a5a11"/>
+  </g>
+  <g role="group" aria-label="Summit public rival">
+    <rect x="442" y="302" width="138" height="92" rx="12" fill="#ffffff" stroke="#5d4b89" stroke-width="4"/>
+    <text x="464" y="338" fill="#17232d" font-family="system-ui, sans-serif" font-size="20" font-weight="700">Summit</text>
+    <text x="464" y="365" fill="#60707b" font-family="system-ui, sans-serif" font-size="16">PUBLIC SIGNAL</text>
+    <path d="M548 328 l9 9 l-9 9 l-9-9 z" fill="#5d4b89"/>
+  </g>
+  <g role="group" aria-label="Riverside facility with staffing pressure">
+    <rect x="90" y="370" width="250" height="124" rx="12" fill="#ffffff" stroke="#a95226" stroke-width="5"/>
+    <rect x="112" y="393" width="42" height="42" fill="#fff0e8" stroke="#a95226" stroke-width="3"/>
+    <path d="M123 414 h20 M133 404 v20" stroke="#a95226" stroke-width="4"/>
+    <text x="172" y="412" fill="#17232d" font-family="system-ui, sans-serif" font-size="19" font-weight="700">General hospital</text>
+    <text x="172" y="439" fill="#a95226" font-family="system-ui, sans-serif" font-size="17">! STAFFING CONSTRAINED</text>
+    <text x="112" y="472" fill="#60707b" font-family="system-ui, sans-serif" font-size="15">Visible facility detail · source: host</text>
+  </g>
+  <rect x="648" y="112" width="280" height="444" rx="16" fill="#ffffff" stroke="#d6e2df" stroke-width="3"/>
+  <text x="674" y="150" fill="#075952" font-family="system-ui, sans-serif" font-size="18" font-weight="700">EXECUTIVE BRIEF</text>
+  <rect x="674" y="177" width="228" height="86" rx="10" fill="#eef5f3"/>
+  <text x="692" y="207" fill="#17232d" font-family="system-ui, sans-serif" font-size="17" font-weight="700">Inspect staffing</text>
+  <text x="692" y="233" fill="#60707b" font-family="system-ui, sans-serif" font-size="15">before choosing an action</text>
+  <text x="674" y="304" fill="#60707b" font-family="system-ui, sans-serif" font-size="15">STATUS LANGUAGE</text>
+  <text x="674" y="337" fill="#2f6e4f" font-family="system-ui, sans-serif" font-size="18">● Stable</text>
+  <text x="674" y="370" fill="#7a5a11" font-family="system-ui, sans-serif" font-size="18">▲ Watch</text>
+  <text x="674" y="403" fill="#a95226" font-family="system-ui, sans-serif" font-size="18">! Constrained</text>
+  <text x="674" y="451" fill="#60707b" font-family="system-ui, sans-serif" font-size="14">Labels and symbols carry meaning;</text>
+  <text x="674" y="475" fill="#60707b" font-family="system-ui, sans-serif" font-size="14">color is never the only channel.</text>
+  <text x="674" y="524" fill="#5d4b89" font-family="system-ui, sans-serif" font-size="14" font-weight="700">A · FLAT INSTITUTIONAL</text>
+</svg>

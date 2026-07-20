@@ -1,48 +1,44 @@
-# Final Handoff — Visual/audio Phase 0 foundation v0.12.34
+# Final Handoff — Visual/audio Phase 1.1 art direction v0.12.35
 
 ## Result
 
-The first roadmap execution loop closes Phase 0.1 and 0.2 with a product brief,
-asset repository boundary, machine-readable registries, fail-closed provenance
-validation, and deterministic credits. No runtime presentation or simulation
-behavior was expanded.
+Phase 1.1 is complete: three source-only SVG reference boards were produced,
+scored, and reviewed. Variant A's flat institutional direction is selected for
+the next deterministic SVG proof. Variants B and C remain preserved with
+explicit rejection reasons.
 
 ## Changed files and behavior
 
-- Added `docs/history/initiatives/visual-audio/visual-audio-phase0-foundation-v0.12.34.md`
-  with style, audio, accessibility, licensing, AI-generation, ownership,
-  supported-target, and authority decisions.
-- Added `assets/` source/generated/release/registry structure, schemas,
-  manifests, and generated `ASSET_CREDITS.md`.
-- Added `scripts/validate_assets.py` and
-  `scripts/generate_asset_credits.py`, plus focused registry tests and CI hooks.
-- Added the contributor asset checklist and aligned the roadmap checklists,
-  SPEC, architecture, changelog, README, docs index, and LESSONS.
-- Preserved existing `gui/` catalogs, host adapters, simulation, replay,
-  hashes, debriefs, and command semantics.
+- Added `assets/source/visual/art-direction/variant-a-institutional.svg`,
+  `variant-b-civic-terrain.svg`, and `variant-c-editorial-desktop.svg`.
+- Added the comparison board at
+  `docs/design/visual-audio-art-direction-board.md` and ADR-0012.
+- Registered all three source references with hashes and deterministic credits.
+- Added XML/static accessibility, no-external-reference, selection, and
+  authority-boundary tests.
+- Checked Phase 1.1 roadmap items and aligned SPEC, architecture, changelog,
+  README, history, LESSONS, and `_workspace` handoffs.
+- No runtime GUI, host, simulation, audio, history, replay, or debrief behavior
+  changed.
 
 ## Verification
 
-- 323 Python tests passed.
-- `cargo test` passed: 328 library tests plus integration, golden, scenario,
-  binary, and doc-test targets.
-- `cargo clippy --all-targets -- -D warnings` passed.
-- `cargo fmt --check`, Node syntax, release metadata, documentation links,
-  asset validation, credits freshness, and `git diff --check` passed.
+- Focused art-direction, asset, and release tests passed.
+- Asset validator and generated credits checks passed.
+- Documentation links, metadata, `cargo fmt --check`, Node syntax, and diff
+  checks passed.
 
 ## Handoff and review
 
-- Base: `main` at `cf85dfd`.
-- Working branch: `feat/visual-audio-phase0-foundation-v0.12.34`.
-- One light independent code-review pass completed. Empty/non-token IDs,
-  empty modifications, and focused CI coverage were fixed; no actionable
-  findings remain.
+- Base: `main` at `0ce4249`.
+- Working branch: `feat/visual-audio-phase1-art-direction-v0.12.35`.
+- Presentation-domain QA: pass; evidence limits recorded.
+- One light independent code-review pass completed; no actionable issues found.
 - PR handoff and merge to `main` are the next workflow actions.
 
 ## Limits and next slice
 
-This closes governance, not artistic quality, human usability, lived
-accessibility, legal approval, hardware audio, learning, balance, calibration,
-or policy validity. The next wise slice is Phase 1 art-direction comparison and
-the deterministic SVG rendering proof, subject to the same presentation
-contract and review gates.
+This is a technical design proxy, not human art-direction, contrast,
+screen-reader, color-vision, usability, learning, or policy evidence. The next
+bounded candidate is Phase 1.2's deterministic SVG rendering proof using Variant
+A's primitives.

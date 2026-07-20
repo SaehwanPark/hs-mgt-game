@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.35] - 2026-07-20
+
+- Added three source-only flat-vector art-direction reference boards with
+  labels, accessibility text, deterministic viewBoxes, and no external assets.
+- Scored and selected the institutional flat direction for the next SVG proof;
+  rejected terrain/geography-forward and dashboard-only alternatives with an
+  ADR and explicit evidence limits.
+- Registered and credited the reference sources without changing the GUI,
+  simulation, host authority, or release asset set.
+- Bumped package/public metadata to `0.12.35`.
+
 ## [0.12.34] - 2026-07-20
 
 - Added the Phase 0 visual/audio product brief covering the first competitive
