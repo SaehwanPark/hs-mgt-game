@@ -217,6 +217,12 @@ priority, -8 dB music-ducking, cooldown, mode, and reduced-audio decisions use
 only declared cue metadata and local controls. They are not host settings,
 simulation transitions, history, hashes, replay artifacts, or debrief facts.
 
+The v0.12.39 Riverside identity kit lives in the source/release asset boundary
+and `gui/identity-kits.mjs`/`gui/identity-proof.html`. It provides fictional
+surface variants and a generic fallback without being imported by the live GUI;
+the asset registry owns provenance and the identity module owns only local
+fixture labels, not host identity facts.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

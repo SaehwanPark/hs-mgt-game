@@ -120,6 +120,23 @@
       "accessible_equivalent": "Keyboard-reachable SVG controls plus visible labels and symbols",
       "visible_source": "Static actor-visible fixture; no host state is created",
       "approval_status": "approved"
+    },
+    {
+      "id": "visual.identity.riverside-kit",
+      "asset_type": "visual",
+      "semantic_role": "identity",
+      "source_path": "assets/source/visual/identity/riverside-kit.svg",
+      "release_path": "assets/release/visual/svg/riverside.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional SVG identity kit",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the mark and wordmark from the source kit.",
+      "original_hash": "sha256:7db5fb8b5a7d555792f57d9a2f24b785b6010a2f564558410a9edcf579cfa855",
+      "release_hash": "sha256:8cbbdb0cf83931aa61afc6c2f4bdf7b9fbb5aba4a15cdd384d6a4e61bbc9dd7b",
+      "attribution_text": "Hand-authored in this repository; fictional identity with no third-party asset.",
+      "accessible_equivalent": "Riverside name, RV monogram, text labels, and generic fallback",
+      "visible_source": "Visible Riverside system identity",
+      "approval_status": "approved"
     }
   ]
 }

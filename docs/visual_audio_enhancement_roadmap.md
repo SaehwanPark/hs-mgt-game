@@ -476,6 +476,11 @@ Make recurring systems and actors immediately recognizable across the map, repor
 
 ## Milestone 2.1: Health-system identity kits
 
+**Status:** Partial in v0.12.39; Riverside kit complete
+**Evidence:** `assets/source/visual/identity/riverside-kit.svg`,
+`assets/release/visual/svg/riverside.svg`, `gui/identity-kits.mjs`,
+`gui/identity-proof.html`, and `tests/test_riverside_identity.py`
+
 ### Initial systems
 
 - Riverside
@@ -505,6 +510,40 @@ Make recurring systems and actors immediately recognizable across the map, repor
 - Compatible with SVG and CSS variables.
 
 ### Checklist per system
+
+#### Riverside
+
+- [x] Logo mark completed.
+- [x] Monochrome mark completed.
+- [x] Compact marker completed.
+- [x] Text monogram completed.
+- [x] Palette passes contrast review.
+- [x] Shape remains recognizable without color.
+- [x] Facility signage variant completed.
+- [x] Report-header variant completed.
+- [x] Audio motif completed.
+- [x] Registry entries completed.
+- [x] Source files committed.
+- [x] Release derivatives generated.
+- [x] Cross-screen consistency tested.
+
+#### Northlake
+
+- [ ] Logo mark completed.
+- [ ] Monochrome mark completed.
+- [ ] Compact marker completed.
+- [ ] Text monogram completed.
+- [ ] Palette passes contrast review.
+- [ ] Shape remains recognizable without color.
+- [ ] Facility signage variant completed.
+- [ ] Report-header variant completed.
+- [ ] Audio motif completed.
+- [ ] Registry entries completed.
+- [ ] Source files committed.
+- [ ] Release derivatives generated.
+- [ ] Cross-screen consistency tested.
+
+#### Summit
 
 - [ ] Logo mark completed.
 - [ ] Monochrome mark completed.

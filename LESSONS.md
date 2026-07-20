@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Identity Kits Surface-Complete Before Runtime Promotion
+
+- Context: Phase 2.1 requires one fictional system to persist across map,
+  facility, report, event, and audio surfaces.
+- Symptom: A logo-only asset could look finished while missing monochrome,
+  signage, report, compact, fallback, or provenance behavior.
+- Resolution: Added a Riverside source/release kit, static cross-surface proof,
+  generic fallback, and registry/hash coverage before live GUI integration.
+- Prevention: Complete and test every identity surface for each system before
+  promoting shared identity tokens into runtime rendering.
+
 ## Keep Audio Policy Local Until the Vocabulary Is Accepted
 
 - Context: The direction board needed priority, cooldown, and preference

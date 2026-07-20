@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.38. Its
+The current public milestone is a playable Rust prototype at v0.12.39. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -35,6 +35,8 @@ audio direction board with generated preview recipes, explicit sound
 standards, and visible text equivalents without changing the live audio client.
 v0.12.38 adds deterministic audio priority, cooldown, mode, and reduced-audio
 policy controls to that fixture proof without changing the live audio client.
+v0.12.39 adds the fictional Riverside identity kit and cross-surface proof
+without promoting it into the live GUI.
 It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.

@@ -1,62 +1,65 @@
-# Presentation Contract — Phase 1.3 audio policy prototype v0.12.38
+# Presentation Contract — Phase 2.1 Riverside identity v0.12.39
 
 ## Goal and Authorization
 
-Add deterministic policy behavior to the fixture-only audio-direction proof.
-The roadmap authorizes priority, cooldown, mode, and reduced-audio behavior in
-the prototype; the live audio client remains outside this slice.
+Make fictional Riverside recognizable across required presentation surfaces.
+The roadmap authorizes one source/release kit and fixture proof; it does not
+authorize live host/render integration or real-world brand resemblance.
 
 ## Player Questions and Consequences
 
-- Which visible cue takes precedence when several presentation signals occur?
-- Why was a repeated cue suppressed?
-- What remains audible in full, cues-only, muted, or reduced-audio modes?
-
-Every answer remains visible through source-linked text and status messaging.
+- Which recurring system is involved?
+- Can I recognize it in a map marker, facility sign, report header, compact
+  badge, or audio motif without relying on color?
+- What should appear when identity data or the asset is unavailable?
 
 ## Actor-Visible Source Ledger
 
-| Policy | Allowed source | Prohibited source | Equivalent |
+| Surface | Visible source | Prohibited inference | Equivalent |
 | --- | --- | --- | --- |
-| Priority/ducking | Declared cue channel and visible event class | Hidden severity or outcome | Visible event/report text |
-| Cooldown | Local preview request timing and declared cue ID | Simulation time or host state | Status text when throttled |
-| Modes/preferences | Local user control | Host settings or hidden state | Mode label and written result |
+| Riverside identity | Visible system ID/name | True-world affiliation or reputation | Name, mark, monogram |
+| Facility/report surfaces | Visible Riverside ownership/source | Hidden facility condition | Sign/header label |
+| Audio motif | Visible Riverside identity | Hidden system state | Name, marker, header |
+| Missing identity | Missing/unknown visible ID | Guessed actor or real brand | Generic Institution fallback |
 
 ## Visual, Motion, and Audio Semantics
 
-- Event > interface > music > ambience is the deterministic priority order.
-- Event/interface decisions carry the -8 dB music-ducking instruction.
-- Cooldowns are per prototype entry and return a visible throttled result.
-- Cues-only retains interface/event decisions; muted suppresses all playback;
-  reduced audio suppresses music/ambience while retaining text.
+- The R silhouette, river-line shape, circular marker, and RV monogram persist
+  in color and monochrome.
+- Palette is a token, not the sole identity channel.
+- Facility signage, report header, and compact badge retain the same mark and
+  visible name.
+- The existing `audio.direction-riverside-motif` is a visible-identity cue.
 
 ## Accessibility and Fallbacks
 
-- Native mode buttons and a reduced-audio checkbox are keyboard-operable.
-- Filtered, throttled, unsupported, and muted results retain the entry's text
-  equivalent and visible source.
-- Audio policy never removes the page's written content.
+- Source/release SVGs include title/description and system-ui text.
+- The proof shows name, monogram, surface labels, and generic fallback text.
+- Unknown IDs use `generic-institution`; missing asset/audio does not erase the
+  visible identity label.
 
 ## Authority, History, and Replay Boundaries
 
-The policy consumes only local fixture IDs, declared channels, and local user
-preference/request timing. It does not read host state, submit commands, create
-session state, or alter transitions, history, hashes, replay, or debriefs.
+`identity-kits.mjs` reads only local fixture IDs and labels. It does not load
+host DTOs, infer ownership, submit commands, create session state, or alter
+transitions, history, hashes, replay, audio state, or debrief output.
 
 ## Asset Provenance and Release Requirements
 
-The same registered project-generated `gui/audio-direction.mjs` source remains
-the only audio-direction asset. Its hash is refreshed for v0.12.38; no release
-file or third-party source is introduced.
+The source kit and release derivative are registry entries with creator,
+generation method, project-generated license, modifications, accessible
+equivalent, visible source, approval, and source/release hashes. No external
+font, URL, or third-party brand is used.
 
 ## Verification and Evidence Limits
 
-Focused tests cover priority, ducking, cooldown, modes, reduced audio, text
-equivalents, and fallback. These are technical checks, not calibrated loudness,
-human listening, accessibility, learning, engagement, balance, or policy
-evidence.
+Focused tests cover SVG labels/variants, asset boundary, identity surfaces,
+generic fallback, audio motif linkage, and syntax. These checks do not establish
+human art direction, contrast, accessibility experience, learning, or policy
+validity.
 
 ## Non-Goals and Open Questions
 
-Do not integrate the policy into `gui/audio.mjs`, add recorded assets, add
-adaptive composition, or claim human perception or hardware behavior.
+Do not integrate the kit into live map/report/facility rendering, add Northlake
+or Summit assets, claim real-world branding, or generate human-evaluation
+evidence in this slice.
