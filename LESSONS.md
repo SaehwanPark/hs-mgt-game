@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Parking Geometry Separate From Availability Claims
+
+- Context: The parking-structure component needed a recognizable stacked-deck
+  cue while parking availability and access are not encoded by the fixture.
+- Symptom: Deck count, arrows, or a parking label can be read as occupancy,
+  accessibility, or service-availability evidence that is not visible state.
+- Resolution: Used tier lines and ramps as a type-only cue and tested explicit
+  non-claim wording for parking availability and access.
+- Prevention: Treat support-facility geometry as vocabulary only; keep capacity,
+  pressure, and uncertainty in visible layers with written equivalents.
+
 ## Keep Administrative Type Cues From Becoming Authority Claims
 
 - Context: The administrative-headquarters component needed an office-like

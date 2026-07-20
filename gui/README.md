@@ -46,8 +46,8 @@ fixture-only and does not load host state or change a session.
 
 Open `gui/facility-proof.html` directly or through a static server to inspect
 the Phase 3.1 fictional general-hospital base, patient-tower,
-emergency-department, ambulatory-center, specialty-center, rural-clinic, and
-administrative-headquarters components. It
+emergency-department, ambulatory-center, specialty-center, rural-clinic,
+administrative-headquarters, and parking-structure components. It
 shows the selected compact release derivative, seven composable layers, visible
 layer sources, written equivalents, non-color patterns, and generic facility
 fallback. The proof is fixture-only and does not load host state or change a

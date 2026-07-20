@@ -75,6 +75,29 @@ const PATIENT_TOWER = Object.freeze({
   }),
 });
 
+const PARKING_STRUCTURE = Object.freeze({
+  schema_version: "facility-component-v1",
+  id: "parking-structure",
+  label: "Parking structure",
+  source: "Visible facility kind and actor-visible status context",
+  equivalent: "Parking structure label, tiered deck silhouette, identity badge, and written layer labels",
+  source_path: "assets/source/visual/facilities/parking-structure.svg",
+  release_path: "assets/release/visual/svg/parking-structure.svg",
+  grid: "8px",
+  view_box: "0 0 760 500",
+  css_variables: ["--facility-primary", "--facility-secondary", "--facility-ink", "--facility-paper", "--facility-muted"],
+  layers: [
+    Object.freeze({ id: "base", label: "Base structure", source: "Visible facility kind" }),
+    Object.freeze({ id: "identity", label: "System identity layer", source: "Visible owning-system identity" }),
+    Object.freeze({ id: "capacity", label: "Capacity/service-line layer", source: "Visible capacity or service-line field" }),
+    Object.freeze({ id: "project", label: "Project layer", source: "Visible project status" }),
+    Object.freeze({ id: "pressure", label: "Operational-pressure layer", source: "Visible pressure status" }),
+    Object.freeze({ id: "selection", label: "Selection/focus layer", source: "Local selected-facility presentation state" }),
+    Object.freeze({ id: "uncertainty", label: "Uncertainty/stale-observation layer", source: "Visible observation freshness or missingness" }),
+  ],
+  fallback: Object.freeze({ id: "generic-facility", label: "Facility", equivalent: "Facility label and generic marker" }),
+});
+
 const EMERGENCY_DEPARTMENT = Object.freeze({
   schema_version: "facility-component-v1",
   id: "emergency-department",
@@ -190,6 +213,7 @@ export const FACILITY_COMPONENTS = Object.freeze({
   "general-hospital-base": GENERAL_HOSPITAL_BASE,
   "administrative-headquarters": ADMINISTRATIVE_HEADQUARTERS,
   "patient-tower": PATIENT_TOWER,
+  "parking-structure": PARKING_STRUCTURE,
   "emergency-department": EMERGENCY_DEPARTMENT,
   "ambulatory-center": AMBULATORY_CENTER,
   "specialty-center": SPECIALTY_CENTER,

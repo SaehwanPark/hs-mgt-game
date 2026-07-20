@@ -139,6 +139,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.parking-structure",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/parking-structure.svg",
+      "release_path": "assets/release/visual/svg/parking-structure.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the tiered deck silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:c255fd7a70242316a30689acfa2468adef78e1ac834c10c00eb509eeb9fa4076",
+      "release_hash": "sha256:12fa988dd00ff94ce83a03bc1ea53e7fd62417b31c21d341e2b92784d247f29b",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Parking structure label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",

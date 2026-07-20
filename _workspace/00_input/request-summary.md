@@ -1,13 +1,13 @@
-# Request Summary — Visual/audio Phase 3.1 administrative-headquarters v0.12.49
+# Request Summary — Visual/audio Phase 3.1 parking-structure v0.12.50
 
 ## Authorized outcome
 
-Implement one reusable fixture-only administrative-headquarters component against
+Implement one reusable fixture-only parking-structure component against
 the established visual asset and identity contracts.
 
 ## Slice boundary
 
-- Provide source/release SVG derivatives for the stepped office silhouette and explicit
+- Provide source/release SVG derivatives for the tiered deck silhouette and explicit
   identity, capacity, project, pressure, selection, and uncertainty layers.
 - Include shared 8px grid, system color variables, accessible labels,
   non-color layer patterns, registry hashes, and generic facility fallback.
@@ -15,7 +15,7 @@ the established visual asset and identity contracts.
 
 ## Required bookkeeping
 
-Check all 13 administrative-headquarters Phase 3.1 items, bump to v0.12.49, and align SPEC,
+Check all 13 parking-structure Phase 3.1 items, bump to v0.12.50, and align SPEC,
 architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 

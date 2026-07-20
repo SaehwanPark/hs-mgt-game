@@ -272,6 +272,10 @@ The v0.12.49 administrative-headquarters component reuses the same contract
 with a distinct stepped office silhouette and explicit type-only description.
 Its shape does not imply authority, performance, ownership, or hidden outcome.
 
+The v0.12.50 parking-structure component reuses the same contract with a
+distinct tiered-deck silhouette and explicit type-only description. Its shape
+does not imply parking availability, access, ownership, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 
