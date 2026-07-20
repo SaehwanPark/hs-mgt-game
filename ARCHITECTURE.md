@@ -280,6 +280,11 @@ The v0.12.51 utility-plant component reuses the same contract with a distinct
 pipe-and-tank silhouette and explicit type-only description. Its shape does not
 imply reliability, safety, service, ownership, or hidden outcome.
 
+The v0.12.52 research-and-education-building component reuses the same contract
+with a distinct wing-and-tower silhouette and explicit type-only description.
+Its shape does not imply research or education outcome, ownership, or hidden
+capacity.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

@@ -4782,6 +4782,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   construction crane, and undeveloped parcel remain separate future slices and
   no live GUI or host behavior changed.
 
+### Visual/audio Phase 3.1 research-education-building component (v0.12.52)
+
+- Status: Partial; research-education-building component and shared fixture
+  proof complete
+- Branch: `feat/visual-audio-phase3-research-education-building-v0.12.52`
+- Added a distinct fictional research-and-education-building source/release
+  SVG pair using the shared 8px grid, system color variables, accessible
+  labels, and the same seven base/identity/capacity/project/pressure/
+  selection/uncertainty layers.
+- Extended the shared facility catalog/proof selector with research and
+  education building, generic fallback, deterministic hashes, and boundary
+  tests.
+- Checked all 13 research-education-building per-component items; construction
+  crane and undeveloped parcel remain separate future slices and no live GUI or
+  host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

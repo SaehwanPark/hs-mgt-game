@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Education Symbols From Becoming Outcome Claims
+
+- Context: The research-and-education-building component needed a recognizable
+  wing-and-tower form while research and education outcomes are not encoded by
+  a fixture shape.
+- Symptom: A tower, building name, or study-like geometry can be read as proof
+  of research quality, educational effect, or capacity that is not visible.
+- Resolution: Used the geometry as a type-only cue and tested explicit
+  non-claim wording for research, education, and capacity.
+- Prevention: Keep institutional building cues descriptive and route outcome
+  meaning through visible status layers with written equivalents.
+
 ## Keep Infrastructure Symbols From Becoming Reliability Claims
 
 - Context: The utility-plant component needed a recognizable pipe-and-tank

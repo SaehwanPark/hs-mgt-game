@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.52] - 2026-07-20
+
+- Added a distinct fictional research-and-education-building source/release
+  facility component with base, identity, capacity, project, pressure,
+  selection, and uncertainty layer vocabulary.
+- Extended the shared facility proof and catalog with research-and-education
+  building selection, generic fallback, registry hashes, accessible labels,
+  and non-color patterns.
+- Completed the research-and-education-building per-component Phase 3.1
+  checklist without changing live GUI or host behavior.
+- Bumped package/public metadata to `0.12.52`.
+
 ## [0.12.51] - 2026-07-20
 
 - Added a distinct fictional utility-plant source/release facility component
