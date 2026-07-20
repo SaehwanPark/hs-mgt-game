@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 emergency-department v0.12.45
+# Presentation Domain QA — Phase 3.1 ambulatory-center v0.12.46
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 emergency-department lane, facility contract,
+- Request summary, Phase 3.1 ambulatory-center lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional emergency-department fixture work only.
+The slice is fictional ambulatory-center fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the emergency-department shape and seven layers derive only from visible facility kind,
+- Pass: the ambulatory-center shape and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional emergency-department fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: emergency-department source/release SVGs and component catalog are registry-backed with
+- Pass: ambulatory-center source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional emergency-department component has no third-party brand or downloaded
+- Pass: the fictional ambulatory-center component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
+- Focused ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
   and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.

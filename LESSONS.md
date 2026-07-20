@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Distinct Geometry Must Keep Type Claims Narrow
+
+- Context: The ambulatory center needed a low-rise visual distinction from the
+  general hospital, patient tower, and emergency department.
+- Symptom: A compact type cue can accidentally sound like a performance or
+  throughput claim when reused in a report or screen-reader description.
+- Resolution: Kept the arc silhouette as a type-only cue, retained all written
+  layer labels, and tested the explicit non-claim description.
+- Prevention: Describe what a facility shape identifies and explicitly state
+  what it does not establish before release.
+
 ## Keep Facility Type Descriptions Within the Information Boundary
 
 - Context: An emergency-department release description needed to explain its
