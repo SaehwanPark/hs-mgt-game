@@ -105,6 +105,24 @@
       }
       .topline span:last-child, .panel-heading span, .source, .muted { color: var(--muted); }
       .topline span:last-child, .panel-heading span, .source { font-size: .82rem; }
+      .semantic-container { border-top: 4px double var(--teal); }
+      .semantic-container .panel-heading::before { border: 1px solid currentColor; border-radius: .25rem; color: var(--teal-dark); content: "•"; display: inline-grid; flex: 0 0 1.35rem; font-size: .9rem; height: 1.35rem; place-items: center; width: 1.35rem; }
+      .semantic-container--board-packet { border-top-style: double; }
+      .semantic-container--board-packet .panel-heading::before { content: "▣"; }
+      .semantic-container--operations-ledger { border-top-style: solid; }
+      .semantic-container--operations-ledger .panel-heading::before { content: "▤"; }
+      .semantic-container--intelligence-report { border-top-style: dotted; }
+      .semantic-container--intelligence-report .panel-heading::before { content: "◇"; }
+      .semantic-container--regulatory-letter { border-top-style: solid; }
+      .semantic-container--regulatory-letter .panel-heading::before { content: "⚖"; }
+      .semantic-container--project-sheet { border-top-style: dashed; }
+      .semantic-container--project-sheet .panel-heading::before { content: "◌"; }
+      .semantic-container--news-wire { border-top-style: solid; }
+      .semantic-container--news-wire .panel-heading::before { content: "↯"; }
+      .semantic-container--executive-action-queue { border-top-style: double; }
+      .semantic-container--executive-action-queue .panel-heading::before { content: "▶"; }
+      .semantic-container--after-action-report { border-top-style: solid; }
+      .semantic-container--after-action-report .panel-heading::before { content: "↻"; }
       h1 { font-size: clamp(2rem, 4vw, 4.2rem); line-height: 1; margin: var(--space-3) 0; max-width: 850px; }
       .lede { color: var(--muted); margin-bottom: var(--space-4); max-width: 820px; }
 
@@ -551,7 +569,7 @@
         </div>
       </section>
 
-      <section class="panel panel--briefing presentation-target" id="briefing-region" tabindex="-1" aria-labelledby="briefing-heading">
+      <section class="panel panel--briefing presentation-target semantic-container semantic-container--intelligence-report" data-semantic-container="intelligence-report" id="briefing-region" tabindex="-1" aria-labelledby="briefing-heading">
         <div class="panel-heading">
           <h2 id="briefing-heading">Executive briefing</h2>
           <span>source-linked alerts</span>
@@ -597,7 +615,7 @@
         </div>
       </section>
 
-      <section class="panel panel--map" aria-labelledby="map-heading">
+      <section class="panel panel--map semantic-container semantic-container--board-packet" data-semantic-container="board-packet" aria-labelledby="map-heading">
         <div class="panel-heading">
           <h2 id="map-heading">Regional market</h2>
           <span>schematic · public signals only</span>
@@ -616,7 +634,7 @@
         <p class="visual-legend">Identity and marker vocabulary: labels and symbols orient the visible map, facility, pressure, and process categories. They do not add hidden information.</p>
       </section>
 
-      <section class="panel panel--entity" aria-labelledby="entity-heading">
+      <section class="panel panel--entity semantic-container semantic-container--operations-ledger" data-semantic-container="operations-ledger" aria-labelledby="entity-heading">
         <div class="panel-heading">
           <h2 id="entity-heading">Selected system and facilities</h2>
           <span>actor-visible detail</span>
@@ -624,7 +642,7 @@
         <div id="entity-detail"></div>
       </section>
 
-      <section class="panel panel--actions" id="action-region" aria-labelledby="actions-heading">
+      <section class="panel panel--actions semantic-container semantic-container--executive-action-queue" data-semantic-container="executive-action-queue" id="action-region" aria-labelledby="actions-heading">
         <div class="panel-heading">
           <h2 id="actions-heading">Contextual action panel</h2>
           <span id="action-mode">read-only view · actions deferred to Phase 3</span>
@@ -646,7 +664,7 @@
         <p class="command-status" id="command-status"></p>
       </section>
 
-      <section class="panel panel--timeline" aria-labelledby="timeline-heading">
+      <section class="panel panel--timeline semantic-container semantic-container--project-sheet" data-semantic-container="project-sheet" aria-labelledby="timeline-heading">
         <div class="panel-heading">
           <h2 id="timeline-heading">Pending processes</h2>
           <span>visible commitments, not promises</span>
@@ -654,7 +672,7 @@
         <ol class="timeline" id="pending-list"></ol>
       </section>
 
-      <section class="panel panel--result" aria-labelledby="result-heading">
+      <section class="panel panel--result semantic-container semantic-container--after-action-report" data-semantic-container="after-action-report" aria-labelledby="result-heading">
         <div class="panel-heading">
           <h2 id="result-heading">Monthly result</h2>
           <span>committed prior month</span>
@@ -680,7 +698,7 @@
         <p class="audio-equivalent" id="audio-equivalent">Audio only emphasizes visible category and timing. Muting, reduced notifications, focus loss, or unavailable browser audio never removes the written result.</p>
       </section>
 
-      <section class="panel resolution-panel" id="resolution-panel" aria-labelledby="resolution-heading" hidden>
+      <section class="panel resolution-panel semantic-container semantic-container--after-action-report" data-semantic-container="after-action-report" id="resolution-panel" aria-labelledby="resolution-heading" hidden>
         <div class="panel-heading">
           <h2 id="resolution-heading">Monthly resolution</h2>
           <span id="resolution-state" aria-live="polite">No committed resolution loaded.</span>
@@ -712,7 +730,7 @@
         </div>
       </section>
 
-      <section class="panel panel--observation" aria-labelledby="observation-heading">
+      <section class="panel panel--observation semantic-container semantic-container--regulatory-letter" data-semantic-container="regulatory-letter" aria-labelledby="observation-heading">
         <div class="panel-heading">
           <h2 id="observation-heading">Current observation</h2>
           <span id="session-meta">—</span>
@@ -720,7 +738,7 @@
         <div class="observation" id="observation-list"></div>
       </section>
 
-      <section class="panel panel--history" aria-labelledby="history-heading">
+      <section class="panel panel--history semantic-container semantic-container--news-wire" data-semantic-container="news-wire" aria-labelledby="history-heading">
         <div class="panel-heading">
           <h2 id="history-heading">Committed history and replay</h2>
           <span>state-hash output</span>

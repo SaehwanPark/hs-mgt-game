@@ -4980,6 +4980,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked every Phase 4.2 visible consequence linkage item. Later roadmap
   phases remain separate slices.
 
+### Visual/audio Phase 5.1 semantic information-container contract (v0.12.66)
+
+- Status: Complete; eight semantic information-container contracts, GUI
+  differentiation, and responsive/print proof implemented and verified
+- Branch: `feat/visual-audio-phase5-semantic-containers-v0.12.66`
+- Added `gui/semantic-containers.mjs` for board packet, operations ledger,
+  intelligence report, regulatory letter, project sheet, news wire, executive
+  action queue, and after-action report classes.
+- Each class documents semantic purpose, header treatment, marker, compact and
+  expanded variants, accessibility semantics, large-text/narrow-width/print
+  behavior, reduced motion, and source/status preservation. The existing GUI
+  applies the classes without changing text or host/simulation authority.
+- Added `gui/semantic-container-proof.html`, focused tests, registry/credits,
+  and completed every Phase 5.1 checklist item.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

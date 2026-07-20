@@ -1,70 +1,67 @@
-# Presentation Contract — Phase 4.2 visible consequence linkage v0.12.65
+# Presentation Contract — Phase 5.1 semantic information containers v0.12.66
 
 ## Goal and authorization
 
-Make the static board traceable to visible reports and host-committed
-resolution/projection data without creating a client-side causal or simulation
-model.
+Differentiate the executive desktop’s major information classes through
+structure, typography, iconography, and restrained header treatment without
+creating a client-side causal or simulation model.
 
-## Link source ledger
+## Container source ledger
 
-| Link | Source | Allowed presentation |
+| Container | Existing surface | Allowed presentation |
 | --- | --- | --- |
-| Public signal → entity | `RegionalWorldEntity.signals[].observed_month/source` | Focus entity and show public signal timing |
-| Visible process → entity | `RegionalWorldEntity.processes[].source` | Focus entity and show host-reported process detail |
-| Report → entity | Explicit fixture/host-visible `target_id` or visible name match | Local board focus; no hidden target inference |
-| Resolution effect | `ResolutionEnvelope.effects[].metric/delta/text/source` | Show committed effect; target remains absent unless host supplies it |
-| Replay sequence | `ResolutionEnvelope.turn/replay.selected_turn/replay.state_hash` | Immutable local historical review sequence |
-| Entity → reports | Local selected entity ID and explicit report target IDs | Filter/relate visible reports only |
+| Board packet | Regional board and public signal panel | Orient actor-visible regional state with period/source context |
+| Operations ledger | Selected system and facility detail | Show visible operating commitments, resources, and status |
+| Intelligence report | Executive briefing | Separate public signals, timing, source, and information gaps |
+| Regulatory letter | Current observation | Present bounded oversight/policy notice language |
+| Project sheet | Pending processes | Track host-reported commitments and timing without promises |
+| News wire | Committed history and replay | Group dated public reports and visible signal history |
+| Executive action queue | Contextual action panel | Present host-catalogued decisions and local draft state |
+| After-action report | Monthly result and resolution | Explain committed effects, history, and retrospective evidence |
 
 ## Visual and interaction contract
 
-- `gui/consequence-links.mjs` emits stable `public-signal`, `visible-process`,
-  and `committed-effect` links. Regional links retain observed month and
-  source; effects retain turn and state hash. Stable sorting uses turn, target,
-  kind, source, and ID fields.
-- Resolution effects without a host-provided `target_id` remain targetless;
-  the UI shows them but offers no invented board focus.
-- `gui/app.mjs` renders a linked-consequence list, report “View on regional
-  board” controls, and selected-detail “Show related reports and consequences.”
-  Each focus action updates the existing local selection and semantic detail
-  path. Focus scrolling uses `behavior: "auto"`; selection does not depend on
-  animation.
-- Regional public signals retain observed month text and the private-rival
-  boundary. Unknown IDs remain generic or targetless and never become hidden
-  locations or inferred facilities.
+- `gui/semantic-containers.mjs` is the single catalog for eight classes. Each
+  entry documents semantic purpose, header treatment, icon/marker,
+  compact/expanded variants, accessibility label, large-text behavior,
+  narrow-width behavior, print behavior, reduced-motion behavior, and the
+  source/status preservation rule.
+- `gui/index.html` applies one semantic-container class and data attribute to
+  each existing panel. Non-color marker patterns and restrained borders add
+  hierarchy while the current heading, source, status, exact-value, and text
+  surfaces remain intact.
+- `gui/semantic-container-proof.html` renders all catalog entries in a shared
+  grid with a compact/expanded toggle, print/export control, responsive
+  single-column reflow, and reduced-motion static behavior.
 
 ## Accessibility and fallback requirements
 
-- Consequence links are semantic list items with visible labels, detail, source,
-  and ordinary keyboard buttons.
-- The existing report, map, detail, resolution, history, and text surfaces stay
-  in the DOM; linked controls add navigation but do not replace text.
-- Missing detail and targetless effects remain explicit. Color, motion, and
-  optional audio are not required to understand the link.
+- Container distinctions use existing headings, visible text, ordinary DOM
+  semantics, and non-color markers. Color, motion, and optional audio are not
+  required to identify or understand the content.
+- Compact and expanded variants preserve text meaning; large text reflows,
+  narrow widths stack headers/content, and print keeps headings, borders,
+  source/status text, and labels.
+- The live panel content remains in the DOM and retains keyboard navigation.
 
 ## Authority, history, and replay boundaries
 
-The link module accepts envelope values only. It does not call a host, submit a
-command, mutate simulation state, resolve stochastic inputs, rewrite history,
-change a state hash, or create debrief facts. `replayConsequenceSequence`
-returns distinct immutable turn/hash entries; historical review does not
-overwrite the current board or host session. Resolution links are scoped by the
-host-provided `session_id`; a new/static session clears prior effects while a
-same-session presentation refresh preserves them.
+The catalog and proof accept static presentation definitions only. They do not
+call a host, submit a command, mutate simulation state, resolve stochastic
+inputs, rewrite history, change a state hash, or create debrief facts. Existing
+host-sourced source/status language and actor-visible data remain authoritative.
 
 ## Asset provenance and verification
 
-`visual.runtime-consequence-links` is a project-generated registry-approved
+`visual.runtime-semantic-containers` is a project-generated registry-approved
 semantic asset with source hash, visible-source description, accessible
-equivalent, and no release image. Focused consequence-link tests, existing GUI
-resolution/first-month/regional tests, asset/credits/metadata/documentation
-checks, full Python/Rust, formatting, presentation-contract, and diff checks
-are required before handoff.
+equivalent, and no release image. Focused semantic-container tests, existing
+GUI tests, asset/credits/metadata/documentation checks, full Python/Rust,
+formatting, presentation-contract, and diff checks are required before merge.
 
 ## Non-goals and next gate
 
-This slice does not add new host target fields, facility geometry transitions,
-client-side causality, private rival actions, or a browser replay engine. Later
-roadmap phases own executive information containers, metric visualization,
-motion, audio, and broader testing/QA.
+This slice does not add new host fields, facility geometry transitions,
+client-side causality, private rival actions, metric visualization, motion,
+audio, or a browser replay engine. Later roadmap phases own metric
+visualization, motion, audio, and broader testing/QA.

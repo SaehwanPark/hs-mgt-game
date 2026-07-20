@@ -136,6 +136,20 @@ reports to entities, entities to related reports/consequences, and consequence
 items back to board focus using local keyboard controls. Replay helpers preserve
 turn/state-hash sequence entries without rewriting current host history.
 
+## Semantic information-container proof
+
+Open `semantic-container-proof.html` directly or through a static server to
+inspect the Phase 5.1 board packet, operations ledger, intelligence report,
+regulatory letter, project sheet, news wire, executive action queue, and
+after-action report contracts. The proof toggles compact/expanded variants and
+keeps headings, markers, source/status language, exact visible text, responsive
+reflow, print output, and reduced-motion behavior inspectable. It is fixture-only
+and does not load a host, submit a command, create simulation state, or consume
+hidden data.
+
+`semantic-containers.mjs` is a presentation catalog; its structural distinctions
+do not imply severity, priority, causality, authority, or outcome.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

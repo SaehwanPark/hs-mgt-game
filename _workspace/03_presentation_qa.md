@@ -1,67 +1,70 @@
-# Presentation QA — Phase 4.2 visible consequence linkage v0.12.65
+# Presentation QA — Phase 5.1 semantic information containers v0.12.66
 
 ## Status
 
-Pass for the bounded deterministic consequence-link projection and GUI focus
+Pass for the bounded semantic-container catalog, proof page, and existing GUI
 integration.
 
 ## Reviewed inputs and authorization
 
 - Request: `_workspace/00_input/request-summary.md`.
 - Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 4.2.
-- Produced files: `gui/consequence-links.mjs`, `gui/app.mjs`,
-  `gui/index.html`, and `tests/test_consequence_links.py`.
-- Authorization is limited to local projection and focus behavior over existing
-  actor-visible DTOs. Host and simulation authority remain unchanged.
+- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 5.1.
+- Produced files: `gui/semantic-containers.mjs`,
+  `gui/semantic-container-proof.html`, `gui/index.html`,
+  `gui/README.md`, and `tests/test_semantic_containers.py`.
+- Authorization is limited to local presentation structure over existing
+  actor-visible panels. Host and simulation authority remain unchanged.
 
 ## Information and causality findings
 
-- Pass: regional links retain explicit entity IDs, public signal observed month,
-  process source, and private-rival boundary.
-- Pass: resolution effects retain host metric/text/source/turn/hash values and
-  remain targetless unless a target is supplied by the host.
-- Pass: no project outcome, hidden severity, causality, rival private action,
-  unknown location, or future result is inferred from client text.
-- Pass: deterministic sort and replay-sequence helpers preserve all historical
-  turn/hash entries without rewriting current state.
+- Pass: all eight classes distinguish observations, decisions, commitments,
+  consequences, or retrospective explanation by structure and language rather
+  than invented severity or priority.
+- Pass: source/status, exact visible text, and existing panel content remain in
+  the DOM; no hidden state is consumed or inferred.
+- Pass: the shared grid and catalog preserve one interface surface instead of
+  creating disconnected paper-like screens.
 
 ## Accessibility and fallback findings
 
-- Pass: report/entity/consequence controls are semantic keyboard buttons with
-  visible written detail and source labels.
-- Pass: existing board, report, selected-detail, resolution, history, and text
-  surfaces remain available as fallbacks; focus does not depend on animation.
+- Pass: proof and live panels retain semantic headings, labels, visible markers,
+  compact/expanded text, and ordinary DOM focus behavior.
+- Pass: large-text and narrow-width rules reflow content without hiding values;
+  print/export rules retain headings and source/status text.
+- Pass: reduced-motion behavior is static and comprehension does not depend on
+  animation or audio.
 - Evidence limit: static checks do not establish lived accessibility, browser
   behavior, contrast, human comprehension, or first-month usability.
 
 ## Provenance and rights findings
 
-- Pass: `visual.runtime-consequence-links` has registry/hash/credits provenance,
-  accessible equivalent, visible source, and approved project-generated status.
+- Pass: `visual.runtime-semantic-containers` has registry/hash/credits
+  provenance, accessible equivalent, visible source, and approved
+  project-generated status.
 - Pass: no external assets, fonts, URLs, or third-party files were introduced.
 
 ## Authority and replay findings
 
-- Pass: module functions are pure over envelope values and local arrays.
-- Pass: focus actions only re-render existing presentation state; no host,
-  command, simulation, stochastic, history, hash, replay-authority, audio, or
-  debrief mutation path was added.
-- Pass: resolution links are scoped to host-provided session IDs; new/static
-  session loads clear prior effects while same-session refreshes preserve them.
+- Pass: catalog functions are pure over static definitions and local arrays.
+- Pass: no host, command, simulation, stochastic, history, hash,
+  replay-authority, audio, or debrief mutation path was added.
 
 ## Required fixes
 
-None for this bounded slice.
-
-The single light code-review pass identified two Medium occurrences of the same
-session-isolation risk: stale resolution links could survive presentation or
-regional-world replacement. `0f103e4` fixed the issue by scoping links
-to `session_id`; no second reviewer was spawned under the task constraint.
+None identified by this bounded QA pass or the single light code-review pass.
+The reviewer checked the catalog, live GUI integration, proof variants,
+authority boundary, accessibility/text preservation, registry/version
+bookkeeping, focused tests, and diff cleanliness. No second reviewer was
+spawned under the task constraint.
 
 ## Verification evidence
 
-- `python3 -m unittest tests.test_consequence_links tests.test_gui_resolution tests.test_gui_first_month -v` — passed.
-- Asset registry/credits, release metadata, documentation links,
-  presentation-contract audit, syntax, full Python, full Rust, formatting, and
-  diff checks are required before merge.
+- `python3 -m unittest tests.test_semantic_containers -v` — 3 passed.
+- Full Python discovery — 445 passed.
+- `cargo fmt -- --check` — passed.
+- `cargo test` — 328 Rust unit tests plus 13 integration/golden/scenario tests
+  passed.
+- Release metadata, documentation links (339 Markdown files), asset registry,
+  asset credits, presentation-contract audit, Node syntax, and `git diff
+  --check` — passed.
