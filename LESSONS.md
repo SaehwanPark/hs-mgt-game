@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Avoid Letting “Rural” Become a Geographic Claim
+
+- Context: The rural-clinic component needed a recognizable compact roof cue
+  while the roadmap treats geography as symbolic unless modeled explicitly.
+- Symptom: A facility label or illustration can imply real distance, access,
+  service quality, or community conditions that are not visible fields.
+- Resolution: Kept the pitched roof as a type-only cue and tested explicit
+  non-claim language for access and quality.
+- Prevention: Treat regional/facility descriptors as fictional vocabulary and
+  keep geographic meaning in host-provided visible data only.
+
 ## Keep Modular Type Cues Distinct Without Expanding Claims
 
 - Context: The specialty center needed a third compact geometry after the

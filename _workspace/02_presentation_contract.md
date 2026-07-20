@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 specialty-center v0.12.47
+# Presentation Contract — Phase 3.1 rural-clinic v0.12.48
 
 ## Goal and Authorization
 
-Make a fictional specialty center reusable across facility, map, report,
+Make a fictional rural clinic reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,9 +27,9 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The peaked-canopy silhouette uses a shared 8px grid, system color variables,
+- The pitched-roof silhouette uses a shared 8px grid, system color variables,
   and a stable viewBox distinct from the general-hospital base, patient tower,
-  emergency department, and ambulatory center.
+  emergency department, ambulatory center, and specialty center.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.

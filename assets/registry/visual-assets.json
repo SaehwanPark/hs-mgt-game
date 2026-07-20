@@ -207,6 +207,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.rural-clinic",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/rural-clinic.svg",
+      "release_path": "assets/release/visual/svg/rural-clinic.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the pitched-roof silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:819ff18c3ebd2d85cee770dc3271a0a5c00a968c06a2f64d5364c450c2c46153",
+      "release_hash": "sha256:6939d8dc05902db45f79f0d6e29569f6adffbb03084c636a992b8391623ebc53",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Rural clinic label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",
