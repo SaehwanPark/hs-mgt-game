@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.34] - 2026-07-20
+
+- Added the Phase 0 visual/audio product brief covering the first competitive
+  month, flat-vector direction, optional hybrid audio, accessibility,
+  provenance, licensing, AI-generation, and host-authority boundaries.
+- Added separated source/generated/release asset paths, visual/audio registry
+  schemas and manifests, dependency-free validation, and deterministic credits.
+- Added the contributor asset checklist and CI registry/credits checks; no
+  third-party asset or runtime simulation behavior changed.
+- Bumped package/public metadata to `0.12.34`.
+
 ## [0.12.33] - 2026-07-20
 
 - Added reusable presentation-contract and presentation-domain-QA agent skills

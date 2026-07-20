@@ -56,6 +56,8 @@ Additional current design references:
    questions, runs, and limits before opening a new validation slice.
 4. Use the [visual/audio initiative index](history/initiatives/visual-audio/README.md)
    when evaluating the bounded GUI first-month presentation contract.
+5. Follow the [visual/audio asset contribution checklist](guides/asset-contribution-checklist.md)
+   before adding a registered visual or audio source or release derivative.
 
 ## Player Guides
 

@@ -1,45 +1,48 @@
-# Final Handoff — Visual/audio agent harness v0.12.33
+# Final Handoff — Visual/audio Phase 0 foundation v0.12.34
 
 ## Result
 
-Future visual/audio work now has a reusable project-specific producer-reviewer
-track. The producer defines actor-visible presentation semantics and the
-reviewer audits information, causality, accessibility, provenance, authority,
-and replay boundaries. No roadmap feature was started.
+The first roadmap execution loop closes Phase 0.1 and 0.2 with a product brief,
+asset repository boundary, machine-readable registries, fail-closed provenance
+validation, and deterministic credits. No runtime presentation or simulation
+behavior was expanded.
 
-## Changed areas
+## Changed files and behavior
 
-- Skills: `hs-presentation-contract-designer` and
-  `hs-presentation-domain-qa`.
-- Routing: the health-policy orchestrator selects simulation, presentation, or
-  combined QA tracks without duplicating global skills.
-- Contracts: deterministic presentation handoffs and normal/failure scenarios
-  added to the team spec.
-- Governance: repo guidance, lesson, request summary, SPEC, changelog, README,
-  and v0.12.33 metadata aligned.
+- Added `docs/history/initiatives/visual-audio/visual-audio-phase0-foundation-v0.12.34.md`
+  with style, audio, accessibility, licensing, AI-generation, ownership,
+  supported-target, and authority decisions.
+- Added `assets/` source/generated/release/registry structure, schemas,
+  manifests, and generated `ASSET_CREDITS.md`.
+- Added `scripts/validate_assets.py` and
+  `scripts/generate_asset_credits.py`, plus focused registry tests and CI hooks.
+- Added the contributor asset checklist and aligned the roadmap checklists,
+  SPEC, architecture, changelog, README, docs index, and LESSONS.
+- Preserved existing `gui/` catalogs, host adapters, simulation, replay,
+  hashes, debriefs, and command semantics.
 
 ## Verification
 
-- Harness structure check passed across all six repo-local skills; new discovery
-  frontmatter, orchestrator routing, team-spec paths, and handoff names agree.
-- Normal and hidden-state failure scenario assertions passed by inspection of
-  the producer, reviewer, and team-spec contracts.
-- Documentation link check passed across 261 Markdown files.
-- Release metadata check passed at v0.12.33.
-- `cargo fmt --check` passed.
-- `cargo test` passed: 328 library tests plus all binary, integration, golden,
-  scenario-selection, and doc-test targets.
+- 323 Python tests passed.
+- `cargo test` passed: 328 library tests plus integration, golden, scenario,
+  binary, and doc-test targets.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo fmt --check`, Node syntax, release metadata, documentation links,
+  asset validation, credits freshness, and `git diff --check` passed.
 
-## Deviations and review
+## Handoff and review
 
-- The presentation track is selective; ordinary simulation work still uses the
-  existing evidence, mechanism, and domain-QA skills.
-- Generic UX/accessibility, code review, Rust implementation, and legal advice
-  remain outside the repo-local specialist roles.
+- Base: `main` at `cf85dfd`.
+- Working branch: `feat/visual-audio-phase0-foundation-v0.12.34`.
+- One light independent code-review pass completed. Empty/non-token IDs,
+  empty modifications, and focused CI coverage were fixed; no actionable
+  findings remain.
+- PR handoff and merge to `main` are the next workflow actions.
 
-## Known limits
+## Limits and next slice
 
-- The harness defines work contracts but does not itself prove human usability,
-  lived accessibility, learning, calibration, balance, policy validity, or
-  asset-license approval.
-- Roadmap work still requires a separately authorized, bounded request.
+This closes governance, not artistic quality, human usability, lived
+accessibility, legal approval, hardware audio, learning, balance, calibration,
+or policy validity. The next wise slice is Phase 1 art-direction comparison and
+the deterministic SVG rendering proof, subject to the same presentation
+contract and review gates.
