@@ -36,7 +36,7 @@ selected detail, resolution, history, and replay-review surfaces.
 - Working branch: `feat/visual-audio-phase4-consequence-links-v0.12.65`.
 - Presentation-domain QA: pass; evidence limits recorded.
 - One light code-review pass completed. Its session-isolation finding was fixed
-  in `a190f28`; no second reviewer was spawned under the task-level constraint.
+  in `0f103e4`; no second reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 

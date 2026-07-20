@@ -56,7 +56,7 @@ None for this bounded slice.
 
 The single light code-review pass identified two Medium occurrences of the same
 session-isolation risk: stale resolution links could survive presentation or
-regional-world replacement. `a190f28` was fixed before merge by scoping links
+regional-world replacement. `0f103e4` fixed the issue by scoping links
 to `session_id`; no second reviewer was spawned under the task constraint.
 
 ## Verification evidence
