@@ -1,40 +1,38 @@
-# Final Handoff — Visual/audio Phase 1.2 SVG rendering proof v0.12.36
+# Final Handoff — Visual/audio Phase 1.3 audio-direction prototype v0.12.37
 
 ## Result
 
-Phase 1.2 is complete: the selected institutional art direction now has a
-deterministic, fixture-only SVG rendering proof with keyboard interaction,
-text equivalents, uncertainty treatment, generic fallback, reduced-motion
-handling, snapshot coverage, and a bounded render-time check.
+The standards and direction-definition slice of Phase 1.3 is complete. Seven
+fixture-only generated Web Audio recipes are previewable with visible source
+and text-equivalent metadata.
 
 ## Changed files and behavior
 
-- Added `gui/scene.mjs` with the explicit fixture schema and pure SVG renderer.
-- Added `gui/svg-proof.html` as a static proof page with local selection and
-  reduced-motion controls.
-- Added focused renderer/accessibility/authority/snapshot tests and registered
-  the generated renderer in the asset catalog and credits.
-- Checked all Phase 1.2 roadmap items and aligned SPEC, architecture, changelog,
-  README, history, LESSONS, and `_workspace` handoffs.
-- No live GUI host integration, simulation, commands, audio, history, replay,
-  or debrief behavior changed.
+- Added `gui/audio-direction.mjs` with seven recipes and explicit audio
+  standards.
+- Added `gui/audio-proof.html` with keyboard-operable preview controls and
+  unavailable-audio fallback.
+- Added the direction board, ADR-0013, focused tests, registry/credits entry,
+  and SDD bookkeeping.
+- Checked the first seven Phase 1.3 roadmap items.
+- No live audio-client, host, simulation, commands, transitions, stochastic
+  inputs, history/hash/replay, or debrief behavior changed.
 
 ## Verification
 
-- Focused SVG scene, asset, and release metadata tests passed.
-- Asset validator and generated credits checks passed.
-- Full Python suite, Rust tests, Clippy, formatting, Node syntax,
-  documentation links, release metadata, and diff checks passed.
+- Focused recipe/fallback/boundary tests passed.
+- Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
+  documentation-link, and diff checks passed.
 
 ## Handoff and review
 
-- Base: `main` at `f4b0804`.
-- Working branch: `feat/visual-audio-phase1-svg-proof-v0.12.36`.
+- Base: `main` at `7bc9291`.
+- Working branch: `feat/visual-audio-phase1-audio-direction-v0.12.37`.
 - Presentation-domain QA: pass; evidence limits recorded.
 - One light independent code-review pass is required before merge.
 
 ## Limits and next slice
 
-This is a technical rendering proxy, not human visual, contrast,
-screen-reader, color-vision, usability, learning, or policy evidence. The next
-bounded candidate is Phase 1.3's audio direction and cue taxonomy.
+This is a recipe-direction proof, not calibrated loudness or human listening
+evidence. The next bounded candidate implements audio priority, repeat-cue
+cooldown, and mute/cues-only/full-audio mode behavior.

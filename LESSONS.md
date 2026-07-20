@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Define Audio Direction Before Adding Playback Policy
+
+- Context: The existing browser audio client had a broad oscillator catalog but
+  no reviewed vocabulary for cue contour, ambience, identity, or pressure.
+- Symptom: Adding priority or mode behavior first could make a technically
+  correct scheduler amplify an unreviewed or hidden-state signal.
+- Resolution: Added a fixture-only recipe board with explicit source,
+  equivalent, loudness, peak, duration, loop, ducking, and masking targets.
+- Prevention: Review and test the semantic sound vocabulary first; add runtime
+  priority, cooldown, mute modes, and preferences only in a separate slice.
+
 ## Keep Rendering Proofs Fixture-Only Until the Scene Contract Is Stable
 
 - Context: The selected visual direction needed a concrete viability test, but

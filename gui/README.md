@@ -24,6 +24,15 @@ reachable SVG controls, and includes explicit generic/uncertain fallbacks. The
 proof page is fixture-only: it does not load a host, submit a command, or create
 simulation state.
 
+## Audio direction proof
+
+Open `gui/audio-proof.html` directly or through a static server to inspect the
+Phase 1.3 generated Web Audio direction candidates. It documents loudness,
+peak, duration, loop, and ducking targets and exposes visible source/text
+equivalents beside confirmation, rejection, report, identity, ambience,
+pressure, and environmental previews. The proof is fixture-only: it does not
+load a host, change a session, or replace the live audio client.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

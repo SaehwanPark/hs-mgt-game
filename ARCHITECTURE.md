@@ -205,6 +205,13 @@ values to explicit fallbacks, and owns only local selection/reduced-motion
 presentation state. It is not imported by the live host path and cannot submit
 commands or alter simulation/replay state.
 
+The v0.12.37 audio direction proof lives in `gui/audio-direction.mjs` and
+`gui/audio-proof.html` as a fixture-only generated Web Audio vocabulary. It
+records visible sources, text equivalents, bounded loudness/peak/duration/loop
+targets, and unsupported-audio fallback behavior. It is not imported by the
+live audio client and cannot read hidden state, create host/session state, or
+alter commands, transitions, history, hashes, replay, or debrief output.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

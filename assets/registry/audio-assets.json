@@ -69,6 +69,23 @@
       "accessible_equivalent": "No decision-relevant information; written interface remains complete",
       "visible_source": "Optional presentation ambience only",
       "approval_status": "approved"
+    },
+    {
+      "id": "audio.direction-prototype",
+      "asset_type": "audio",
+      "semantic_role": "ambience",
+      "source_path": "gui/audio-direction.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic Web Audio direction recipes",
+      "license": "project-generated",
+      "modifications": "None; fixture-only preview recipes generated after user gesture.",
+      "original_hash": "sha256:7be53913bba400c2d53c1491d4e98f842ce9d8b59f90c05696a40210a745a97e",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Visible source, text equivalent, and unavailable-audio fallback",
+      "visible_source": "Explicit actor-visible cue, identity, pressure category, or optional ambience",
+      "approval_status": "approved"
     }
   ]
 }

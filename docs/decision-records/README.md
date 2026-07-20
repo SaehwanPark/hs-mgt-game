@@ -30,6 +30,7 @@ consequential technical and design choices in the Health Policy Strategy Game.
 - [ADR-0009: AI-agent playtest validation path](0009-ai-agent-playtest-validation-path.md)
 - [ADR-0011: Browser-native presentation client and host authority](0011-browser-native-presentation-client.md)
 - [ADR-0012: Loopback GUI host](0012-loopback-gui-host.md)
+- [ADR-0013: Fixture-only audio direction prototype](0013-audio-direction-prototype.md)
 
 ## Proposed Records
 
