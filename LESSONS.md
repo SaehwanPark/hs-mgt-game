@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Keep Service-Area Overlays Separate From Catchment Claims
+
+- Context: Service-area overlays needed reusable contour vocabulary before
+  geographic or operational map semantics were modeled.
+- Symptom: A contour, hatch, or “primary area” label can imply catchment,
+  distance, travel time, population, access, jurisdiction, or performance that
+  is not visible.
+- Resolution: Used deterministic symbolic contour/fill patterns with no metric
+  or direction encoding, written equivalents, a generic fallback, and an
+  explicit information boundary.
+- Prevention: Treat service areas as relationship vocabulary until a scenario
+  explicitly supplies geographic or operational semantics.
+
 ## Keep Relationship Lines From Becoming Causal Claims
 
 - Context: Relationship-line styles needed to distinguish visible categories

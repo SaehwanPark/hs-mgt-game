@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.2 relationship-lines v0.12.59
+# Presentation Domain QA — Phase 3.2 service-area-overlays v0.12.60
 
 ## Status
 
@@ -6,23 +6,24 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.2 relationship-line lane, presentation contract,
-  relationship-style module, registry/credits, tests, and architecture.
+- Request summary, Phase 3.2 service-area lane, presentation contract,
+  service-area module, registry/credits, tests, and architecture.
 
-The slice is deterministic symbolic relationship-line fixture work only.
+The slice is deterministic symbolic service-area overlay fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the style module exposes only explicit symbolic categories and does
-  not infer hidden intent, causality, strength, direction, distance, or future
-  outcome.
-- Pass: line styles default to no arrowheads and no encoded direction.
-- Pass: unavailable relationship IDs use an explicit generic fallback.
+- Pass: the overlay module exposes only explicit symbolic categories and does
+  not infer catchment, distance, travel time, population, access, jurisdiction,
+  performance, or hidden relationships.
+- Pass: geometry is explicitly symbolic, metrics are not encoded, and
+  directionality defaults to absent.
+- Pass: unavailable service-area IDs use an explicit generic fallback.
 
 ## Accessibility and Fallback Findings
 
-- Pass: information-boundary disclaimer, relationship labels, and non-color
-  pattern equivalents are present.
+- Pass: information-boundary disclaimer, category labels, and non-color
+  contour/fill pattern equivalents are present.
 - Pass: the module has no browser, network, random, or host/session side
   effects.
 - Evidence limit: static checks do not establish human contrast, screen-reader,
@@ -30,11 +31,10 @@ The slice is deterministic symbolic relationship-line fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: relationship-style source module and catalog entry are registry-backed
-  with current hashes, project provenance, approval, and no external
-  references.
-- Pass: the fictional relationship-style contract has no third-party or
-  downloaded asset.
+- Pass: service-area source module and catalog entry are registry-backed with
+  current hashes, project provenance, approval, and no external references.
+- Pass: the fictional service-area contract has no third-party or downloaded
+  asset.
 
 ## Authority and Replay Findings
 
@@ -52,7 +52,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused relationship-style, fallback, registry, metadata, and syntax tests.
+- Focused service-area, fallback, registry, metadata, and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.

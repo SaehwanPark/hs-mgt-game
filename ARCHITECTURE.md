@@ -318,6 +318,12 @@ policy, and uncertain styles with non-color patterns, round caps, and no
 arrowheads. The catalog organizes actor-visible relationships without inferring
 hidden intent, causality, strength, direction, distance, or future outcome.
 
+The v0.12.60 service-area overlay catalog adds deterministic primary, shared,
+and coordinated symbolic contours with metric-free, non-directional defaults.
+The overlays organize actor-visible service relationships without establishing
+real-world catchment, distance, travel time, population, access, jurisdiction,
+or performance.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

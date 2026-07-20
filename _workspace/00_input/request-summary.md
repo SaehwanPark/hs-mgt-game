@@ -1,24 +1,24 @@
-# Request Summary — Visual/audio Phase 3.2 relationship-lines v0.12.59
+# Request Summary — Visual/audio Phase 3.2 service-area-overlays v0.12.60
 
 ## Authorized outcome
 
-Implement the deterministic fixture-only symbolic relationship-line style
-catalog against the established map-grid, road, district, and parcel
+Implement the deterministic fixture-only symbolic service-area overlay catalog
+against the established map-grid, road, district, parcel, and relationship
 contracts.
 
 ## Slice boundary
 
-- Provide peer, service, policy, and uncertain relationship-line styles with a
+- Provide primary, shared, and coordinated service-area overlay tokens with a
   generic fallback.
-- Include non-color patterns, non-directional defaults, registry
-  hash/provenance, actor-visible boundary, accessible equivalents, and
+- Include contour/fill non-color patterns, no metric or direction encoding,
+  registry hash/provenance, actor-visible boundary, accessible equivalents, and
   deterministic tests.
-- Keep live GUI promotion, host/session behavior, relationship instances, and
-  causal or hidden-state inference out of scope.
+- Keep live GUI promotion, host/session behavior, service-area instances, and
+  geographic catchment claims out of scope.
 
 ## Required bookkeeping
 
-Check the Phase 3.2 relationship-line styles item, bump to v0.12.59, and align
+Check the Phase 3.2 service-area overlays item, bump to v0.12.60, and align
 SPEC, architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 
