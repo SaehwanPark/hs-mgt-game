@@ -49,7 +49,9 @@ The link module accepts envelope values only. It does not call a host, submit a
 command, mutate simulation state, resolve stochastic inputs, rewrite history,
 change a state hash, or create debrief facts. `replayConsequenceSequence`
 returns distinct immutable turn/hash entries; historical review does not
-overwrite the current board or host session.
+overwrite the current board or host session. Resolution links are scoped by the
+host-provided `session_id`; a new/static session clears prior effects while a
+same-session presentation refresh preserves them.
 
 ## Asset provenance and verification
 

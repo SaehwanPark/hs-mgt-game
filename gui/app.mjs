@@ -207,6 +207,7 @@ let currentBriefingItems = [];
 let briefingFocusEntityId = null;
 let currentRegionalLinks = [];
 let currentResolutionLinks = [];
+let currentResolutionSessionId = null;
 
 function boardEntityFor(id) {
   return currentBoardScene?.entities?.find((entity) => entity.id === id || entity.source_id === id);
@@ -1082,6 +1083,11 @@ export function renderRegionalWorld(envelope, root = document) {
   const entities = regionalEntitiesToFixture(envelope);
   if (!entities.some((entity) => entity.id === selectedEntityId)) selectedEntityId = entities[0]?.id;
   selectedBoardId = selectedEntityId;
+  const regionalSessionId = envelope.session?.session_id;
+  if (currentResolutionSessionId && regionalSessionId !== currentResolutionSessionId) {
+    currentResolutionLinks = [];
+    currentResolutionSessionId = null;
+  }
   currentRegionalLinks = regionalWorldConsequenceLinks(envelope);
   renderMap(entities, root);
   renderSelectedEntity(entities, root);
@@ -2098,6 +2104,7 @@ export function renderResolution(envelope, root = document) {
   steps.replaceChildren();
   if (!envelope) {
     currentResolutionLinks = [];
+    currentResolutionSessionId = null;
     renderConsequenceLinks(currentRegionalLinks, root);
     status.textContent = "No committed resolution is available.";
     appendResolutionItems(before, [], "Decision-time snapshot unavailable.");
@@ -2140,6 +2147,7 @@ export function renderResolution(envelope, root = document) {
     "No direct committed effects available.",
   );
   currentResolutionLinks = resolutionConsequenceLinks(envelope);
+  currentResolutionSessionId = envelope.session_id ?? null;
   renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root);
   status.textContent = `Committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`;
   return { ok: true, envelope };
@@ -2271,6 +2279,11 @@ export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   currentRegionalLinks = [];
   briefingFocusEntityId = null;
+  const presentationSessionId = envelope.session?.session_id;
+  if (!presentationSessionId || (currentResolutionSessionId && presentationSessionId !== currentResolutionSessionId)) {
+    currentResolutionLinks = [];
+    currentResolutionSessionId = null;
+  }
   renderConsequenceLinks(currentResolutionLinks, root);
   if (!fixture) {
     renderMetricList([], root);

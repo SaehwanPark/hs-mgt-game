@@ -14,6 +14,8 @@ selected detail, resolution, history, and replay-review surfaces.
 - Integrated bidirectional report/entity focus and linked consequence board focus
   into `gui/app.mjs`/`gui/index.html`, preserving observed-month rival timing,
   missingness, source labels, semantic fallback, and non-animated focus.
+- Scoped resolution links to the host-provided session ID so same-session
+  refreshes preserve effects while new or static sessions clear stale links.
 - Added focused tests, registry/credits provenance, roadmap completion, and
   v0.12.65 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
 - No host DTO, simulation, command, transition, stochastic, history, hash,
@@ -33,8 +35,8 @@ selected detail, resolution, history, and replay-review surfaces.
 - Base: `main` at v0.12.64.
 - Working branch: `feat/visual-audio-phase4-consequence-links-v0.12.65`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass is required by the task-level workflow before
-  merge.
+- One light code-review pass completed. Its session-isolation finding was fixed
+  in `a190f28`; no second reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 
