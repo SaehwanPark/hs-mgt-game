@@ -11,7 +11,7 @@ missing-value estimates, or client-side authority.
 
 1. Define `gui/metric-visualizations.mjs` for eight deterministic visual forms,
    with precision, uncertainty, missingness, exact-text, color-independent,
-   large-text, and screenshot rules.
+   large-text, and deterministic SVG snapshot rules.
 2. Add the fixture-only `gui/metric-visualization-proof.html` with responsive,
    print, large-text, and reduced-motion inspection.
 3. Add opt-in live rendering to existing header metrics only when a descriptor

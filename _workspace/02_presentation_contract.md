@@ -23,8 +23,8 @@ missingness, causality, or hidden state.
 
 - `gui/metric-visualizations.mjs` is the single catalog. Each form documents
   source precision, uncertainty rendering, missingness rendering, exact text,
-  color-independent interpretation, large-text behavior, and a screenshot
-  fixture.
+  color-independent interpretation, large-text behavior, and a deterministic
+  SVG snapshot fixture.
 - `renderMetricVisualizationSvg` emits deterministic SVG with written title,
   description, exact text, source, and status. Geometry is supplementary and
   never normalizes absent fields.

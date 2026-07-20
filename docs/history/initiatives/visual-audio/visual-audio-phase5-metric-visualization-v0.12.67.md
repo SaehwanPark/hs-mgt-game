@@ -5,7 +5,7 @@
 The project now has deterministic actor-visible contracts for sparklines,
 month-over-month deltas, capacity bars, staffing composition, project progress,
 payer-mix summaries, trust/legitimacy trends, and visible uncertainty
-intervals. A fixture-only proof and SVG snapshot cover the forms; the live GUI
+intervals. A fixture-only proof and deterministic SVG snapshot cover the forms; the live GUI
 renders only explicit metric descriptors.
 
 ## Boundary
