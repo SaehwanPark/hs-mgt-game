@@ -2,7 +2,7 @@
 
 **Status:** Bounded technical sequence closed; production foundation active
 
-**Version range:** v0.12.16–v0.12.35
+**Version range:** v0.12.16–v0.12.36
 **Principal conclusion:** The dependency-free GUI supports the bounded,
 host-authoritative competitive first-month presentation contract. Technical
 checks do not establish human usability, accessibility experience, learning,
@@ -33,5 +33,6 @@ calibration, balance, or policy validity.
 | 13 | v0.12.29 | [First-month continuity](visual-audio-phase13-first-month-continuity-v0.12.29.md) |
 | Foundation | v0.12.34 | [Product brief and asset foundation](visual-audio-phase0-foundation-v0.12.34.md) |
 | 1.1 | v0.12.35 | [Art-direction reference board](../../../design/visual-audio-art-direction-board.md) |
+| 1.2 | v0.12.36 | Fixture-only SVG rendering proof |
 
 The executable audit remains `python3 scripts/audit_visual_audio_contract.py`.

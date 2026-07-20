@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Rendering Proofs Fixture-Only Until the Scene Contract Is Stable
+
+- Context: The selected visual direction needed a concrete viability test, but
+  the live GUI already has an authoritative host adapter and presentation path.
+- Symptom: Integrating a new renderer early could create a parallel scene model,
+  hidden-state inference, or browser-owned geography.
+- Resolution: Added a pure fixture-driven SVG renderer and keyboard proof page
+  with snapshot, fallback, boundary, and performance tests; the live route is
+  unchanged.
+- Prevention: Prove scene semantics and accessibility equivalents in isolation,
+  then promote only a justified host projection in a separate slice.
+
 ## Resolve Visual Style Before Building Asset Breadth
 
 - Context: The roadmap offers both map-like and dashboard-like visual paths

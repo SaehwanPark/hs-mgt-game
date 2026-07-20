@@ -348,6 +348,10 @@ Flat-vector isometric should remain the default unless another prototype materia
 
 ## Milestone 1.2: SVG rendering proof of concept
 
+**Status:** Complete in v0.12.36
+**Evidence:** `gui/scene.mjs`, `gui/svg-proof.html`, and
+`tests/test_svg_scene.py`
+
 ### Scope
 
 Create a non-authoritative prototype rendering:
@@ -388,18 +392,18 @@ The scene model must consume only visible host data or static fixture data match
 
 ### Checklist
 
-- [ ] Scene model defined.
-- [ ] SVG renderer implemented.
-- [ ] Facilities are selectable by keyboard.
-- [ ] Every meaningful graphic has a text equivalent.
-- [ ] System identity is not color-only.
-- [ ] Uncertainty has a distinct pattern or shape.
-- [ ] Unknown states render generic fallbacks.
-- [ ] No hidden-state field is consumed.
-- [ ] Static fixture produces deterministic SVG output.
-- [ ] Screenshot regression tests added.
-- [ ] Reduced-motion rendering tested.
-- [ ] Render time meets target.
+- [x] Scene model defined.
+- [x] SVG renderer implemented.
+- [x] Facilities are selectable by keyboard.
+- [x] Every meaningful graphic has a text equivalent.
+- [x] System identity is not color-only.
+- [x] Uncertainty has a distinct pattern or shape.
+- [x] Unknown states render generic fallbacks.
+- [x] No hidden-state field is consumed.
+- [x] Static fixture produces deterministic SVG output.
+- [x] Screenshot regression tests added.
+- [x] Reduced-motion rendering tested.
+- [x] Render time meets target.
 
 ### Exit criteria
 

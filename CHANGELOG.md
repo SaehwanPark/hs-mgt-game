@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.36] - 2026-07-20
+
+- Added a fixture-only deterministic SVG scene model and renderer using the
+  selected institutional visual vocabulary.
+- Added a keyboard-reachable SVG proof page with text/symbol equivalents,
+  uncertainty patterns, generic identity/status fallbacks, reduced-motion
+  behavior, snapshot stability, and render-time checks.
+- Preserved the existing live GUI, host authority, simulation, and replay path;
+  no new runtime state or command boundary was introduced.
+- Bumped package/public metadata to `0.12.36`.
+
 ## [0.12.35] - 2026-07-20
 
 - Added three source-only flat-vector art-direction reference boards with

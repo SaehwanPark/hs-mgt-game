@@ -15,6 +15,15 @@ troubleshooting are in [`docs/guides/gui-how-to-play.md`](../docs/guides/gui-how
 Opening `gui/index.html` directly or through a generic static server intentionally
 shows fixture/demo mode; it cannot start a live scenario by itself.
 
+## SVG rendering proof
+
+Open `gui/svg-proof.html` directly or through a static server to inspect the
+Phase 1.2 deterministic SVG fixture. It uses `scene.mjs` and the selected
+Variant A vocabulary, exposes institution/facility selection through keyboard
+reachable SVG controls, and includes explicit generic/uncertain fallbacks. The
+proof page is fixture-only: it does not load a host, submit a command, or create
+simulation state.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP
