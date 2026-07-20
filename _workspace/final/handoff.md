@@ -23,7 +23,8 @@ board beside its semantic map/detail surface.
 
 - Focused adapter, SVG, GUI, registry, credits, metadata, documentation-link,
   presentation-contract, full Python, full Rust, formatting, and diff checks
-  passed before merge.
+  passed before merge. The full Python suite passed 438 tests; Rust passed 328
+  unit tests plus all integration/golden/scenario targets.
 - Static checks establish technical determinism and information-boundary
   preservation only; they do not establish human usability, lived
   accessibility, learning, calibration, contrast, or policy validity.
@@ -33,8 +34,8 @@ board beside its semantic map/detail surface.
 - Base: `main` at v0.12.63.
 - Working branch: `feat/visual-audio-phase4-static-board-v0.12.64`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass is required by the task-level workflow before
-  merge.
+- One light code-review pass completed. Its two Medium findings were fixed in
+  `c031bbe`; no second reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 

@@ -55,11 +55,20 @@ static proof.
 
 None for this bounded slice.
 
+The single light code-review pass identified two Medium findings in the
+initial implementation: the SVG image role could hide keyboard descendants,
+and sanitized scene IDs were not mapped back to raw DTO IDs. Both were fixed in
+`c031bbe` and covered by focused tests; no second reviewer was spawned under the
+task-level one-reviewer constraint.
+
 ## Verification evidence
 
 - `python3 -m unittest tests.test_regional_board tests.test_svg_scene -v` — passed.
 - `python3 scripts/validate_assets.py` — passed.
 - `python3 scripts/generate_asset_credits.py --check` — passed.
 - `node --check gui/regional-board.mjs gui/scene.mjs gui/app.mjs` — passed.
-- Full Python, Rust, metadata, documentation-link, presentation-contract,
-  formatting, and diff checks are required before merge.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 438 tests passed.
+- `cargo fmt -- --check` and `cargo test` — passed, including 328 Rust unit
+  tests and all integration/golden/scenario targets.
+- Release metadata, documentation links, asset registry/credits, presentation
+  contract, and `git diff --check` — passed.
