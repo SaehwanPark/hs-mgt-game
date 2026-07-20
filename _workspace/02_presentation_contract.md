@@ -1,74 +1,68 @@
-# Presentation Contract — Phase 4.1 static regional board v0.12.64
+# Presentation Contract — Phase 4.2 visible consequence linkage v0.12.65
 
 ## Goal and authorization
 
-Promote the proven identity, facility, status, map, and overlay vocabulary into
-the first static board integration. The board consumes only the existing typed
-actor-visible `competitive-regional-world-v1` envelope or the equivalent static
-presentation fixture.
+Make the static board traceable to visible reports and host-committed
+resolution/projection data without creating a client-side causal or simulation
+model.
 
-## DTO-to-scene source ledger
+## Link source ledger
 
-| Scene field | Actor-visible source | Boundary |
+| Link | Source | Allowed presentation |
 | --- | --- | --- |
-| Institution identity/name/role | `RegionalWorldEntity.id`, `.name`, `.role`, `.visibility` | No hidden identity, role, or private detail |
-| Institution status | `RegionalWorldEntity.status` | Text/symbol status only; no client severity |
-| Institution ordering | `RegionalWorldEntity.layout_slot`, then stable ID | Local layout order; not geography or importance |
-| Facility label/kind | `RegionalWorldFacility.name`, `.kind` | Generic facility fallback for unknown kind |
-| Overlay label/value/unit | `RegionalWorldOverlay` | Visible source-linked value only |
-| Source labels | Entity/facility/overlay/missing `.source` | Source remains visible beside the interpretation |
-| Missingness | `RegionalWorldMissing.id`, `.label`, `.detail`, `.source` | Unavailable detail is shown, not inferred |
-| Report focus | Existing fixture briefing `.target_id` | Local focus/navigation only; no transition |
+| Public signal → entity | `RegionalWorldEntity.signals[].observed_month/source` | Focus entity and show public signal timing |
+| Visible process → entity | `RegionalWorldEntity.processes[].source` | Focus entity and show host-reported process detail |
+| Report → entity | Explicit fixture/host-visible `target_id` or visible name match | Local board focus; no hidden target inference |
+| Resolution effect | `ResolutionEnvelope.effects[].metric/delta/text/source` | Show committed effect; target remains absent unless host supplies it |
+| Replay sequence | `ResolutionEnvelope.turn/replay.selected_turn/replay.state_hash` | Immutable local historical review sequence |
+| Entity → reports | Local selected entity ID and explicit report target IDs | Filter/relate visible reports only |
 
 ## Visual and interaction contract
 
-- `gui/regional-board.mjs` is a pure, deterministic adapter. It normalizes
-  missing or unknown IDs and preserves visible fields without deriving hidden
-  severity, geography, causality, intent, probability, or future outcome.
-- `gui/scene.mjs` renders the mapped entities, facilities, status text, source
-  text, and up to four visible overlay cards with an explicit overflow count.
-  The SVG uses an accessible group role so its keyboard descendants remain
-  exposed to assistive technology.
-- `gui/app.mjs` mounts the SVG beside the existing semantic map/list/detail
-  surface. Entity and facility SVG controls focus the owning institution; the
-  existing detail panel remains the semantic fallback and selection source.
-- Visible report target buttons call the same local selection path as board
-  cards. No selection state enters the host or simulation.
-- The board is static under reduced motion. Glyphs, labels, status text, source
-  text, focus rings, and missingness remain available without color, motion, or
-  audio.
+- `gui/consequence-links.mjs` emits stable `public-signal`, `visible-process`,
+  and `committed-effect` links. Regional links retain observed month and
+  source; effects retain turn and state hash. Stable sorting uses turn, target,
+  kind, source, and ID fields.
+- Resolution effects without a host-provided `target_id` remain targetless;
+  the UI shows them but offers no invented board focus.
+- `gui/app.mjs` renders a linked-consequence list, report “View on regional
+  board” controls, and selected-detail “Show related reports and consequences.”
+  Each focus action updates the existing local selection and semantic detail
+  path. Focus scrolling uses `behavior: "auto"`; selection does not depend on
+  animation.
+- Regional public signals retain observed month text and the private-rival
+  boundary. Unknown IDs remain generic or targetless and never become hidden
+  locations or inferred facilities.
 
 ## Accessibility and fallback requirements
 
-- Screen-reader order is heading/navigation, graphical board, semantic entity
-  list, overlay list, then selected detail; the semantic list/detail remains
-  available when SVG is unavailable.
-- SVG entity/facility controls are keyboard reachable with Enter/Space handling
-  and visible focus rings. The static proof repeats this contract.
-- Unknown institution IDs use the generic identity token; unknown facility kinds
-  use the generic marker. Missing detail is rendered as explicit text.
-- The deterministic snapshot fixture protects output changes without claiming
-  human usability or screenshot-based design validation.
+- Consequence links are semantic list items with visible labels, detail, source,
+  and ordinary keyboard buttons.
+- The existing report, map, detail, resolution, history, and text surfaces stay
+  in the DOM; linked controls add navigation but do not replace text.
+- Missing detail and targetless effects remain explicit. Color, motion, and
+  optional audio are not required to understand the link.
 
 ## Authority, history, and replay boundaries
 
-The adapter and renderer accept DTO/fixture values only. They do not call a
-host, submit commands, mutate simulation state, resolve stochastic inputs,
-write history, compute hashes, alter replay, drive audio, or create debrief
-facts. Live DTO authority remains in `src/mcp/regional_world.rs`.
+The link module accepts envelope values only. It does not call a host, submit a
+command, mutate simulation state, resolve stochastic inputs, rewrite history,
+change a state hash, or create debrief facts. `replayConsequenceSequence`
+returns distinct immutable turn/hash entries; historical review does not
+overwrite the current board or host session.
 
 ## Asset provenance and verification
 
-`visual.runtime-regional-board-adapter` and the updated SVG scene renderer are
-project-generated, registry-approved semantic assets with source hashes and
-written equivalents. Focused adapter/snapshot tests, existing GUI tests, asset
-validation, credits, metadata, syntax, Rust, Python, documentation-link, and
-presentation-contract checks are required before handoff.
+`visual.runtime-consequence-links` is a project-generated registry-approved
+semantic asset with source hash, visible-source description, accessible
+equivalent, and no release image. Focused consequence-link tests, existing GUI
+resolution/first-month/regional tests, asset/credits/metadata/documentation
+checks, full Python/Rust, formatting, presentation-contract, and diff checks
+are required before handoff.
 
 ## Non-goals and next gate
 
-This slice does not implement consequence linkage, project-state transitions,
-rival observability timing, replay visual sequencing, or first-month integration
-tests. Those remain Phase 4.2. It does not replace the host with a browser
-simulation or assert real geography, distance, travel time, ownership,
-jurisdiction, or performance.
+This slice does not add new host target fields, facility geometry transitions,
+client-side causality, private rival actions, or a browser replay engine. Later
+roadmap phases own executive information containers, metric visualization,
+motion, audio, and broader testing/QA.

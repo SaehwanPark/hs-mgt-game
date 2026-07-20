@@ -530,6 +530,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.runtime-consequence-links",
+      "asset_type": "visual",
+      "semantic_role": "overlay",
+      "source_path": "gui/consequence-links.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic actor-visible consequence-link projection",
+      "license": "project-generated",
+      "modifications": "None; local links preserve host sources, timing, hashes, missingness, and public-observation boundaries.",
+      "original_hash": "sha256:21d3bb1189ec897d2a0269e05e03dc554c2f6f103f710f6750b8f4904f2e7d56",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Visible consequence label, detail, source, turn/hash context, and optional board focus control",
+      "visible_source": "RegionalWorldEnvelope and ResolutionEnvelope actor-visible fields",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-operational-overlays",
       "asset_type": "visual",
       "semantic_role": "overlay",

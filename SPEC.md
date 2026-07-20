@@ -4962,6 +4962,24 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked every Phase 4.1 static regional-board checklist item. Visible
   consequence linkage and first-month integration remain Phase 4.2 work.
 
+### Visual/audio Phase 4.2 visible consequence linkage contract (v0.12.65)
+
+- Status: Complete; deterministic regional/process/effect links and replay
+  sequence projection implemented and verified
+- Branch: `feat/visual-audio-phase4-consequence-links-v0.12.65`
+- Added `gui/consequence-links.mjs` for public regional signals, visible
+  processes, host-committed resolution effects, targetless effects, and
+  immutable replay turn/hash sequence entries.
+- Integrated bidirectional report/entity focus and linked consequence board
+  focus in `gui/app.mjs`/`gui/index.html`; focus uses local selection and does
+  not depend on animation.
+- Preserved observed-month rival delay, private-detail/missingness boundaries,
+  deterministic ordering, historical state, and host-provided project/process
+  status. Existing resolution and first-month tests remain the integration
+  evidence; no Rust DTO or simulation change was required.
+- Checked every Phase 4.2 visible consequence linkage item. Later roadmap
+  phases remain separate slices.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

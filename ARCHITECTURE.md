@@ -359,6 +359,17 @@ the browser presentation layer. The adapter and board remain non-authoritative:
 they do not mutate simulation state, commands, transitions, stochastic inputs,
 history, hashes, replay, audio, or debrief output.
 
+The v0.12.65 Phase 4.2 consequence-link projection adds
+`gui/consequence-links.mjs` for deterministic links from actor-visible regional
+signals/processes, host-committed resolution effects, and replay turn/hash
+metadata. `gui/app.mjs` renders those links beside the board, connects report
+and entity focus in both directions, and leaves effects without host-provided
+targets targetless rather than guessing. Public rival signals retain their
+observed month and private-detail boundary; historical sequence helpers return
+immutable turn/hash snapshots. These are local presentation projections and do
+not overwrite history or enter host, simulation, stochastic, audio, or debrief
+authority.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

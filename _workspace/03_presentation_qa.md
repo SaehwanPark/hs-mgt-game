@@ -1,74 +1,60 @@
-# Presentation QA — Phase 4.1 static regional board v0.12.64
+# Presentation QA — Phase 4.2 visible consequence linkage v0.12.65
 
 ## Status
 
-Pass for the bounded static regional-board adapter, integrated SVG mount, and
-static proof.
+Pass for the bounded deterministic consequence-link projection and GUI focus
+integration.
 
 ## Reviewed inputs and authorization
 
 - Request: `_workspace/00_input/request-summary.md`.
 - Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 4.1.
-- Produced files: `gui/regional-board.mjs`, `gui/regional-board-proof.html`,
-  `gui/scene.mjs`, `gui/app.mjs`, `gui/index.html`, and
-  `tests/test_regional_board.py`.
-- Authorization is limited to mapping existing actor-visible DTO fields into a
-  local presentation scene. Host and simulation authority remain unchanged.
+- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 4.2.
+- Produced files: `gui/consequence-links.mjs`, `gui/app.mjs`,
+  `gui/index.html`, and `tests/test_consequence_links.py`.
+- Authorization is limited to local projection and focus behavior over existing
+  actor-visible DTOs. Host and simulation authority remain unchanged.
 
 ## Information and causality findings
 
-- Pass: entity/facility/overlay values are mapped from the existing typed DTO;
-  layout-slot ordering is local deterministic presentation state.
-- Pass: status, source, and missingness remain explicit in the scene summary,
-  overlay cards, semantic detail, and fallback proof text.
-- Pass: unknown identity and facility IDs use generic visual vocabulary without
-  inventing private rival detail, severity, geography, causality, or outcomes.
-- Pass: report focus uses the existing visible `target_id` as local navigation;
-  it does not enter a command or transition path.
+- Pass: regional links retain explicit entity IDs, public signal observed month,
+  process source, and private-rival boundary.
+- Pass: resolution effects retain host metric/text/source/turn/hash values and
+  remain targetless unless a target is supplied by the host.
+- Pass: no project outcome, hidden severity, causality, rival private action,
+  unknown location, or future result is inferred from client text.
+- Pass: deterministic sort and replay-sequence helpers preserve all historical
+  turn/hash entries without rewriting current state.
 
 ## Accessibility and fallback findings
 
-- Pass: SVG entity/facility controls are keyboard reachable and the semantic
-  map/detail list remains in the DOM as a fallback.
-- Pass: screen-reader order is declared and tested through the board mount
-  followed by entity, overlay, and detail regions.
-- Pass: status/source/missingness text, symbols, and focus treatment remain
-  available without color, motion, or audio.
-- Evidence limit: static DOM and SVG checks do not establish lived
-  accessibility, contrast, browser compatibility, or human comprehension.
+- Pass: report/entity/consequence controls are semantic keyboard buttons with
+  visible written detail and source labels.
+- Pass: existing board, report, selected-detail, resolution, history, and text
+  surfaces remain available as fallbacks; focus does not depend on animation.
+- Evidence limit: static checks do not establish lived accessibility, browser
+  behavior, contrast, human comprehension, or first-month usability.
 
 ## Provenance and rights findings
 
-- Pass: the regional-board adapter and updated scene renderer have registry
-  provenance, source hashes, accessible equivalents, and approved status.
+- Pass: `visual.runtime-consequence-links` has registry/hash/credits provenance,
+  accessible equivalent, visible source, and approved project-generated status.
 - Pass: no external assets, fonts, URLs, or third-party files were introduced.
 
 ## Authority and replay findings
 
-- Pass: the adapter is pure and local; app selection only re-renders existing
-  presentation state.
-- Pass: no host, command, simulation, stochastic, history, hash, replay, audio,
-  or debrief path was added.
+- Pass: module functions are pure over envelope values and local arrays.
+- Pass: focus actions only re-render existing presentation state; no host,
+  command, simulation, stochastic, history, hash, replay-authority, audio, or
+  debrief mutation path was added.
 
 ## Required fixes
 
 None for this bounded slice.
 
-The single light code-review pass identified two Medium findings in the
-initial implementation: the SVG image role could hide keyboard descendants,
-and sanitized scene IDs were not mapped back to raw DTO IDs. Both were fixed in
-`c031bbe` and covered by focused tests; no second reviewer was spawned under the
-task-level one-reviewer constraint.
-
 ## Verification evidence
 
-- `python3 -m unittest tests.test_regional_board tests.test_svg_scene -v` — passed.
-- `python3 scripts/validate_assets.py` — passed.
-- `python3 scripts/generate_asset_credits.py --check` — passed.
-- `node --check gui/regional-board.mjs gui/scene.mjs gui/app.mjs` — passed.
-- `python3 -m unittest discover -s tests -p 'test_*.py'` — 438 tests passed.
-- `cargo fmt -- --check` and `cargo test` — passed, including 328 Rust unit
-  tests and all integration/golden/scenario targets.
-- Release metadata, documentation links, asset registry/credits, presentation
-  contract, and `git diff --check` — passed.
+- `python3 -m unittest tests.test_consequence_links tests.test_gui_resolution tests.test_gui_first_month -v` — passed.
+- Asset registry/credits, release metadata, documentation links,
+  presentation-contract audit, syntax, full Python, full Rust, formatting, and
+  diff checks are required before merge.

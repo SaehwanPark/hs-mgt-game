@@ -1,4 +1,5 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
+import { consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
 import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regional-board.mjs";
@@ -202,6 +203,10 @@ let selectedEntityId = null;
 let selectedBoardId = null;
 let currentMapEntities = [];
 let currentBoardScene = null;
+let currentBriefingItems = [];
+let briefingFocusEntityId = null;
+let currentRegionalLinks = [];
+let currentResolutionLinks = [];
 
 function boardEntityFor(id) {
   return currentBoardScene?.entities?.find((entity) => entity.id === id || entity.source_id === id);
@@ -444,9 +449,13 @@ function renderMetricList(metrics, root) {
 }
 
 function renderBriefing(items, root) {
+  currentBriefingItems = items ?? [];
   const list = root.querySelector("#briefing-list");
   list.replaceChildren();
-  for (const entry of items ?? []) {
+  const visibleItems = briefingFocusEntityId
+    ? currentBriefingItems.filter((entry) => !entry.target_id || entry.target_id === briefingFocusEntityId)
+    : currentBriefingItems;
+  for (const entry of visibleItems) {
     const item = document.createElement("li");
     item.className = "briefing-item";
     const heading = document.createElement("div");
@@ -467,17 +476,19 @@ function renderBriefing(items, root) {
       focus.addEventListener("click", () => {
         selectedEntityId = String(entry.target_id);
         selectedBoardId = boardIdFor(selectedEntityId);
+        briefingFocusEntityId = selectedEntityId;
         renderMap(currentMapEntities, root);
         renderSelectedEntity(currentMapEntities, root);
+        renderBriefing(currentBriefingItems, root);
         renderRegionalBoard(currentBoardScene, root);
-        root.querySelector("#regional-board")?.scrollIntoView?.({ behavior: "smooth", block: "start" });
+        root.querySelector("#regional-board")?.scrollIntoView?.({ behavior: "auto", block: "start" });
       });
       item.append(focus);
     }
     appendSource(item, entry.source);
     list.append(item);
   }
-  if (!items?.length) emptyState(list, "No briefing items available.");
+  if (!visibleItems.length) emptyState(list, "No briefing items are linked to the selected institution.");
 }
 
 function renderMap(entities, root) {
@@ -503,8 +514,10 @@ function renderMap(entities, root) {
     card.addEventListener("click", () => {
       selectedEntityId = entity.id;
       selectedBoardId = boardIdFor(entity.id);
+      briefingFocusEntityId = entity.id;
       renderMap(entities, root);
       renderSelectedEntity(entities, root);
+      renderBriefing(currentBriefingItems, root);
       renderRegionalBoard(currentBoardScene, root);
     });
     list.append(card);
@@ -530,15 +543,53 @@ function renderRegionalBoard(scene, root) {
     const boardEntity = boardEntityFor(boardOwnerId);
     selectedEntityId = boardEntity?.source_id ?? boardOwnerId;
     selectedBoardId = target.dataset.facilityId ?? boardEntity?.id ?? boardOwnerId;
+    briefingFocusEntityId = selectedEntityId;
     if (!currentMapEntities.some((entity) => entity.id === selectedEntityId)) return;
     renderMap(currentMapEntities, root);
     renderSelectedEntity(currentMapEntities, root);
+    renderBriefing(currentBriefingItems, root);
     renderRegionalBoard(currentBoardScene, root);
   };
   mount.addEventListener("click", selectTarget);
   mount.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === " ") selectTarget(event);
   });
+}
+
+function renderConsequenceLinks(links, root) {
+  const list = root.querySelector("#consequence-link-list");
+  if (!list) return;
+  list.replaceChildren();
+  for (const link of links ?? []) {
+    const item = document.createElement("li");
+    item.className = "consequence-link";
+    const heading = document.createElement("div");
+    heading.className = "timeline-row";
+    const title = document.createElement("strong");
+    title.textContent = String(link.label ?? "Visible consequence");
+    heading.append(title);
+    if (link.target_id && currentMapEntities.some((entity) => entity.id === link.target_id)) {
+      const focus = document.createElement("button");
+      focus.type = "button";
+      focus.textContent = "Focus board";
+      focus.addEventListener("click", () => {
+        selectedEntityId = link.target_id;
+        selectedBoardId = boardIdFor(link.target_id);
+        briefingFocusEntityId = link.target_id;
+        renderMap(currentMapEntities, root);
+        renderSelectedEntity(currentMapEntities, root);
+        renderBriefing(currentBriefingItems, root);
+        renderRegionalBoard(currentBoardScene, root);
+      });
+      heading.append(focus);
+    }
+    const detail = document.createElement("p");
+    detail.textContent = String(link.detail ?? "No visible consequence detail available.");
+    item.append(heading, detail);
+    appendSource(item, link.source);
+    list.append(item);
+  }
+  if (!links?.length) emptyState(list, "No linked visible consequences are available.");
 }
 
 function renderSelectedEntity(entities, root) {
@@ -559,6 +610,22 @@ function renderSelectedEntity(entities, root) {
   const summary = document.createElement("p");
   summary.className = "detail-summary";
   summary.textContent = String(entity.summary ?? "No visible summary available.");
+  const related = [
+    ...consequenceLinksForTarget(currentRegionalLinks, entity.id),
+    ...consequenceLinksForTarget(currentResolutionLinks, entity.id),
+  ];
+  if (related.length || currentBriefingItems.some((entry) => entry.target_id === entity.id)) {
+    const reports = document.createElement("button");
+    reports.type = "button";
+    reports.textContent = "Show related reports and consequences";
+    reports.addEventListener("click", () => {
+      briefingFocusEntityId = entity.id;
+      renderBriefing(currentBriefingItems, root);
+      renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root);
+      root.querySelector("#briefing-list")?.scrollIntoView?.({ behavior: "auto", block: "start" });
+    });
+    summary.append(document.createTextNode(" "), reports);
+  }
   const metrics = document.createElement("dl");
   metrics.className = "detail-metrics";
   for (const metric of entity.metrics ?? []) {
@@ -1015,9 +1082,11 @@ export function renderRegionalWorld(envelope, root = document) {
   const entities = regionalEntitiesToFixture(envelope);
   if (!entities.some((entity) => entity.id === selectedEntityId)) selectedEntityId = entities[0]?.id;
   selectedBoardId = selectedEntityId;
+  currentRegionalLinks = regionalWorldConsequenceLinks(envelope);
   renderMap(entities, root);
   renderSelectedEntity(entities, root);
   renderRegionalBoard(regionalWorldToSceneData(envelope), root);
+  renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root);
   renderRegionalOverlays(envelope.overlays, root);
   renderRegionalNavigation(envelope.navigation, root);
   return { ok: true, envelope };
@@ -1176,6 +1245,14 @@ function renderObservationLines(observation, root) {
   ]) appendText(list, line);
 }
 
+function visibleTargetId(detail, institutions) {
+  const normalized = String(detail ?? "").toLowerCase();
+  return institutions.find((institution) => {
+    const name = String(institution.name ?? "").toLowerCase().trim();
+    return name && normalized.includes(name);
+  })?.id;
+}
+
 function readOnlyEnvelopeToFixture(envelope) {
   const observation = envelope.observation ?? {};
   const session = envelope.session ?? {};
@@ -1215,6 +1292,7 @@ function readOnlyEnvelopeToFixture(envelope) {
       status: "reported",
       status_label: "Reported",
       source: "ReadOnlyObservation.market_bullets",
+      target_id: visibleTargetId(detail, institutions),
     })),
     ...(observation.policy_bullets ?? []).map((detail) => ({
       kind: "Policy signal",
@@ -1223,6 +1301,7 @@ function readOnlyEnvelopeToFixture(envelope) {
       status: "reported",
       status_label: "Reported",
       source: "ReadOnlyObservation.policy_bullets",
+      target_id: visibleTargetId(detail, institutions),
     })),
     ...(observation.information_gaps ?? []).map((detail) => ({
       kind: "Information gap",
@@ -2018,6 +2097,8 @@ export function renderResolution(envelope, root = document) {
   panel.hidden = false;
   steps.replaceChildren();
   if (!envelope) {
+    currentResolutionLinks = [];
+    renderConsequenceLinks(currentRegionalLinks, root);
     status.textContent = "No committed resolution is available.";
     appendResolutionItems(before, [], "Decision-time snapshot unavailable.");
     appendResolutionItems(after, [], "Post-resolution snapshot unavailable.");
@@ -2058,6 +2139,8 @@ export function renderResolution(envelope, root = document) {
     (envelope.effects ?? []).map((effect) => `${effect.text ?? "Effect"} · Source: ${effect.source ?? "host"}`),
     "No direct committed effects available.",
   );
+  currentResolutionLinks = resolutionConsequenceLinks(envelope);
+  renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root);
   status.textContent = `Committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`;
   return { ok: true, envelope };
 }
@@ -2186,6 +2269,9 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
 
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
+  currentRegionalLinks = [];
+  briefingFocusEntityId = null;
+  renderConsequenceLinks(currentResolutionLinks, root);
   if (!fixture) {
     renderMetricList([], root);
     renderBriefing([], root);

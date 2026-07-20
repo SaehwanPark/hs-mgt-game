@@ -1,45 +1,43 @@
-# Final Handoff — Visual/audio Phase 4.1 static regional board v0.12.64
+# Final Handoff — Visual/audio Phase 4.2 visible consequence linkage v0.12.65
 
 ## Result
 
-Phase 4.1 is complete. The existing actor-visible regional-world DTO now has a
-deterministic scene adapter and the existing GUI mounts a production-shaped SVG
-board beside its semantic map/detail surface.
+Phase 4.2 is complete. Visible regional signals/processes and host-committed
+resolution effects now have deterministic local links across the board, reports,
+selected detail, resolution, history, and replay-review surfaces.
 
 ## Changed files and behavior
 
-- Added `gui/regional-board.mjs` for deterministic DTO-to-scene mapping with
-  layout-slot ordering, generic identity/facility fallback, visible source,
-  status, overlay, and explicit missingness handling.
-- Extended `gui/scene.mjs` with bounded visible overlay rendering and integrated
-  the SVG board in `gui/app.mjs`/`gui/index.html`.
-- Added local institution/facility focus synchronization, report-to-board
-  buttons, keyboard handling, static proof page, SVG snapshot fixture, focused
-  tests, and registry/credits provenance.
+- Added `gui/consequence-links.mjs` with public-signal, visible-process,
+  committed-effect, targetless-effect, deterministic sorting, and immutable
+  replay turn/hash sequence projections.
+- Integrated bidirectional report/entity focus and linked consequence board focus
+  into `gui/app.mjs`/`gui/index.html`, preserving observed-month rival timing,
+  missingness, source labels, semantic fallback, and non-animated focus.
+- Added focused tests, registry/credits provenance, roadmap completion, and
+  v0.12.65 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
 - No host DTO, simulation, command, transition, stochastic, history, hash,
-  replay, audio, or debrief behavior changed.
+  replay-authority, audio, or debrief behavior changed.
 
 ## Verification
 
-- Focused adapter, SVG, GUI, registry, credits, metadata, documentation-link,
-  presentation-contract, full Python, full Rust, formatting, and diff checks
-  passed before merge. The full Python suite passed 438 tests; Rust passed 328
-  unit tests plus all integration/golden/scenario targets.
-- Static checks establish technical determinism and information-boundary
-  preservation only; they do not establish human usability, lived
-  accessibility, learning, calibration, contrast, or policy validity.
+- Focused consequence, resolution, first-month, GUI, asset, credits, metadata,
+  documentation-link, presentation-contract, full Python, full Rust, formatting,
+  and diff checks passed before merge.
+- Evidence is technical and does not establish human usability, lived
+  accessibility, learning, calibration, contrast, browser replay behavior, or
+  policy validity.
 
 ## Handoff and review
 
-- Base: `main` at v0.12.63.
-- Working branch: `feat/visual-audio-phase4-static-board-v0.12.64`.
+- Base: `main` at v0.12.64.
+- Working branch: `feat/visual-audio-phase4-consequence-links-v0.12.65`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass completed. Its two Medium findings were fixed in
-  `c031bbe`; no second reviewer was spawned under the task-level constraint.
+- One light code-review pass is required by the task-level workflow before
+  merge.
 
 ## Limits and next slice
 
-Phase 4.2 still owns visible consequence linkage, project-state transitions,
-rival observability timing, historical/replay visual sequencing, and first-month
-integration tests. This slice is the static board foundation, not a browser
-simulation or proof of first-month human usability.
+Later roadmap phases own executive information containers, metric visualization,
+motion, audio, and broader testing/QA. This slice does not add host target
+fields, client-side causality, private rival actions, or a browser replay engine.
