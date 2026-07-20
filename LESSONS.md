@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Construction Cues Separate From Project Status
+
+- Context: The construction-crane component needed a recognizable boom and
+  tower while project status is supplied by a separate visible layer.
+- Symptom: A crane can be read as proof that work is active, complete, funded,
+  or successful even when no such field is present.
+- Resolution: Used the crane as a type-only cue and tested explicit non-claim
+  wording for project status and completion.
+- Prevention: Keep base geometry descriptive and make project meaning explicit
+  through the shared project and uncertainty layers.
+
 ## Keep Education Symbols From Becoming Outcome Claims
 
 - Context: The research-and-education-building component needed a recognizable

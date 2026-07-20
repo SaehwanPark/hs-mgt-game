@@ -171,6 +171,29 @@ const RESEARCH_EDUCATION_BUILDING = Object.freeze({
   fallback: Object.freeze({ id: "generic-facility", label: "Facility", equivalent: "Facility label and generic marker" }),
 });
 
+const CONSTRUCTION_CRANE = Object.freeze({
+  schema_version: "facility-component-v1",
+  id: "construction-crane",
+  label: "Construction crane",
+  source: "Visible facility kind and actor-visible status context",
+  equivalent: "Construction crane label, boom-and-tower silhouette, identity badge, and written layer labels",
+  source_path: "assets/source/visual/facilities/construction-crane.svg",
+  release_path: "assets/release/visual/svg/construction-crane.svg",
+  grid: "8px",
+  view_box: "0 0 760 500",
+  css_variables: ["--facility-primary", "--facility-secondary", "--facility-ink", "--facility-paper", "--facility-muted"],
+  layers: [
+    Object.freeze({ id: "base", label: "Base structure", source: "Visible facility kind" }),
+    Object.freeze({ id: "identity", label: "System identity layer", source: "Visible owning-system identity" }),
+    Object.freeze({ id: "capacity", label: "Capacity/service-line layer", source: "Visible capacity or service-line field" }),
+    Object.freeze({ id: "project", label: "Project layer", source: "Visible project status" }),
+    Object.freeze({ id: "pressure", label: "Operational-pressure layer", source: "Visible pressure status" }),
+    Object.freeze({ id: "selection", label: "Selection/focus layer", source: "Local selected-facility presentation state" }),
+    Object.freeze({ id: "uncertainty", label: "Uncertainty/stale-observation layer", source: "Visible observation freshness or missingness" }),
+  ],
+  fallback: Object.freeze({ id: "generic-facility", label: "Facility", equivalent: "Facility label and generic marker" }),
+});
+
 const AMBULATORY_CENTER = Object.freeze({
   schema_version: "facility-component-v1",
   id: "ambulatory-center",
@@ -262,6 +285,7 @@ export const FACILITY_COMPONENTS = Object.freeze({
   "parking-structure": PARKING_STRUCTURE,
   "utility-plant": UTILITY_PLANT,
   "research-education-building": RESEARCH_EDUCATION_BUILDING,
+  "construction-crane": CONSTRUCTION_CRANE,
   "emergency-department": EMERGENCY_DEPARTMENT,
   "ambulatory-center": AMBULATORY_CENTER,
   "specialty-center": SPECIALTY_CENTER,
