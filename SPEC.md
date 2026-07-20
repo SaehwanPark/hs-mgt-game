@@ -4929,6 +4929,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Deferred: operational overlay library, live regional board integration, and
   host-sourced event semantics remain separately gated Future work.
 
+### Visual/audio Phase 3.3 operational-overlays contract (v0.12.63)
+
+- Status: Complete; deterministic fixture-only operational-overlay catalog and
+  collision proof implemented and verified
+- Branch: `feat/visual-audio-phase3-operational-overlays-v0.12.63`
+- Added all twelve required overlay categories with semantic role, actor-visible
+  triggering field, non-color pattern, static reduced-motion behavior, text
+  equivalent, collision behavior, display-only priority rule, and generic
+  fallback.
+- Added deterministic ordering, stable-ID tie-breaking, bounded simultaneous
+  stack layout, explicit overflow count, proof page, registry/hash/credits,
+  and focused tests.
+- Checked the Phase 3.3 operational overlay checklist; live board integration,
+  host DTO changes, and outcome inference remain separately gated Future work.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

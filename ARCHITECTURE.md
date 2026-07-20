@@ -340,6 +340,15 @@ coordinates and viewport controls do not assert geography, distance, travel
 time, ownership, jurisdiction, host facts, commands, transitions, history,
 hashes, replay, or debrief output.
 
+The v0.12.63 operational-overlay catalog adds twelve fixture-only data tokens
+for staffing, capacity, demand, projects, payer/network, regulatory,
+community-trust, financial, recovery, and uncertain/stale intelligence. Each
+token names its actor-visible triggering field, non-color/text equivalent,
+static reduced-motion behavior, collision rule, and display-only priority.
+`layoutOperationalOverlays` uses stable priority/ID ordering, a bounded stack,
+and explicit overflow counts; it cannot enter host DTOs, simulation transitions,
+stochastic inputs, history, hashes, replay, audio, or debrief output.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

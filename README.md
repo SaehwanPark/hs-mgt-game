@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.62. Its
+The current public milestone is a playable Rust prototype at v0.12.63. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -71,7 +71,10 @@ v0.12.61 adds fixture-only uncertainty overlays; v0.12.62 completes the
 fixture-only Phase 3.2 map/environment kit with event markers, a symbolic
 geography disclaimer, target-resolution metadata, keyboard order, bounded zoom
 and pan proof controls, and registry coverage; operational overlays and live
-board integration remain bounded future slices.
+board integration remain bounded future slices. v0.12.63 completes the
+fixture-only Phase 3.3 operational overlay library with twelve visible-field
+contracts, deterministic collision/priority layout, text/non-color equivalents,
+and generic fallback coverage; live board integration remains a Phase 4 slice.
 It is
 intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.

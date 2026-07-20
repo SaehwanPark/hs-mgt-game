@@ -528,6 +528,23 @@
       "accessible_equivalent": "Event category label, glyph, shape pattern, written equivalent, and generic fallback",
       "visible_source": "Fixture-only symbolic event-marker vocabulary",
       "approval_status": "approved"
+    },
+    {
+      "id": "visual.runtime-operational-overlays",
+      "asset_type": "visual",
+      "semantic_role": "overlay",
+      "source_path": "gui/operational-overlays.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic operational-overlay catalog and collision layout",
+      "license": "project-generated",
+      "modifications": "None; fixture-only visible-field vocabulary with generic fallback and bounded stack layout.",
+      "original_hash": "sha256:5bc1b18dbd6158d513e5ae50db50beb215bc991e2d45975993aa5c5bae588da3",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Overlay category, glyph, non-color pattern, visible source, written equivalent, collision state, and generic fallback",
+      "visible_source": "Actor-visible fields named by each operational-overlay contract",
+      "approval_status": "approved"
     }
   ]
 }

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Operational Overlay Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef4f8; }
+      body { margin: 0 auto; max-width: 1180px; padding: 1rem; }
+      main { background: #fff; border: 1px solid #d4e0e8; border-radius: 1rem; padding: 1rem; }
+      .proof-grid { display: grid; gap: 1rem; grid-template-columns: minmax(0, 2fr) minmax(18rem, 1fr); }
+      .surface, .overlay-card { border: 1px solid #d4e0e8; border-radius: .7rem; padding: .75rem; }
+      .surface h2, .surface p, .overlay-card h3, .overlay-card p { margin: 0 0 .45rem; }
+      .overlays { display: grid; gap: .65rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .overlay-card { background: #f8fbfd; border-left: .55rem solid #315a89; }
+      .overlay-card[data-pattern*="hatch"] { border-left-style: dashed; }
+      .overlay-card[data-pattern*="dotted"], .overlay-card[data-pattern*="dot-dash"] { border-left-style: dotted; }
+      .overlay-card[data-pattern*="double"] { border-left-style: double; }
+      .overlay-card[data-pattern*="dash-dot"] { border-left-style: dashed; }
+      .overlay-card[data-pattern*="crosshatch"] { border-left-style: double; }
+      .overlay-card:focus-visible { outline: 3px solid #b26b1f; outline-offset: 3px; }
+      .source { color: #60707b; }
+      .status, .boundary { background: #f7fafc; border-left: .45rem solid #315a89; padding: .65rem; }
+      .boundary { border-left-color: #7a5a11; }
+      .stack { display: grid; gap: .5rem; margin: .6rem 0; }
+      .stack .overlay-card { margin-left: calc(var(--slot) * .45rem); }
+      @media (max-width: 740px) { .proof-grid, .overlays { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { .overlay-card { transition: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 id="heading">Operational overlay library proof</h1>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <p class="source">Fixture-only operational overlay vocabulary. Each card names an actor-visible field and does not infer hidden severity, intent, causality, or future outcome.</p>
+      <div class="proof-grid">
+        <section class="surface" aria-labelledby="catalog-heading">
+          <h2 id="catalog-heading">All required overlay categories</h2>
+          <div id="overlay-catalog" class="overlays" aria-label="Operational overlay catalog"></div>
+        </section>
+        <aside class="surface" aria-labelledby="collision-heading">
+          <h2 id="collision-heading">Simultaneous overlay layout</h2>
+          <p id="collision-status" class="status" role="status"></p>
+          <div id="collision-stack" class="stack" aria-label="Deterministic collision stack"></div>
+          <p class="boundary">Display priority is ordering only, not severity or urgency. Overflow remains visible as a count.</p>
+        </aside>
+      </div>
+    </main>
+    <script type="module">
+      import { OPERATIONAL_OVERLAY_SET, layoutOperationalOverlays } from "./operational-overlays.mjs";
+
+      function card(entry) {
+        const element = document.createElement("article");
+        element.className = "overlay-card";
+        element.tabIndex = 0;
+        element.dataset.pattern = entry.non_color_pattern;
+        element.setAttribute("role", "group");
+        element.setAttribute("aria-label", entry.label);
+        element.innerHTML = `<h3>${entry.glyph} ${entry.label}</h3><p>${entry.text_equivalent}</p><small>Source: ${entry.triggering_visible_field}</small><br /><small>Pattern: ${entry.non_color_pattern}</small><br /><small>Reduced motion: ${entry.reduced_motion}</small>`;
+        return element;
+      }
+
+      document.querySelector("#overlay-catalog").replaceChildren(...OPERATIONAL_OVERLAY_SET.map(card));
+      const layout = layoutOperationalOverlays(OPERATIONAL_OVERLAY_SET.map((entry) => entry.id), 5);
+      document.querySelector("#collision-status").textContent = `${layout.visible.length} visible cards; ${layout.overflow_text}. ${layout.collision_behavior}`;
+      document.querySelector("#collision-stack").replaceChildren(...layout.visible.map((entry) => {
+        const element = card(entry);
+        element.style.setProperty("--slot", entry.slot);
+        element.dataset.collision = entry.collision_state;
+        return element;
+      }));
+    </script>
+  </body>
+</html>
