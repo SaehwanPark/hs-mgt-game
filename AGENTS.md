@@ -21,9 +21,10 @@ Keep this file short and repo-wide. Detailed workflow rules live in
 ## How
 - Before major changes, read the canonical docs and the harness team spec at
   `docs/harness/health-policy-strategy-game/team-spec.md`.
-- Use repo-local skills only for project-specific health-policy simulation
-  workflow. Use global skills for generic functional programming, Rust quality,
-  code review, comments, spec maintenance, planning, and release preparation.
+- Use repo-local skills only for project-specific health-policy simulation and
+  actor-visible presentation workflows. Use global skills for generic
+  functional programming, Rust quality, UX, code review, comments, spec
+  maintenance, planning, and release preparation.
 - Current Rust commands: `cargo fmt`, `cargo test`, and `cargo run`.
 - Do not invent build, CI, scenario, data, or release conventions until the
   roadmap phase calls for them and they are documented.

@@ -2,9 +2,10 @@
 
 ## Domain Summary
 
-This project is an early-phase Rust CLI strategy simulation about leading a
-fictional nonprofit US health system under financial, clinical, regulatory,
-political, labor, market, and educational constraints.
+This project is a playable, CLI-first Rust strategy simulation with a bounded
+browser thin client. The player leads a fictional nonprofit US health system
+under financial, clinical, regulatory, political, labor, market, and
+educational constraints.
 
 The harness exists to keep agent work aligned with the canonical project docs:
 
@@ -42,22 +43,27 @@ Use global skills for these generic responsibilities:
 | `preferred-workflow` | branch, commit, PR, and review-loop workflow |
 | `release-preparer` | public release packaging and publication readiness |
 | `harness` | creating or revising this harness architecture |
+| `end-user-xp-improver` | generic user workflow, usability, accessibility, and recovery design |
 
 Repo-local skills are allowed only when the request depends on health-policy
 simulation semantics, the roadmap phase gates, actor and mechanism modeling,
-educational debriefing, or deterministic replay as defined by this project.
+educational debriefing, deterministic replay, actor-visible presentation, or
+project-specific visual/audio asset governance as defined by this project.
 
 ## Chosen Architecture
 
-Pattern: Pipeline with a Producer-Reviewer gate.
+Pattern: Pipeline with an Expert Pool and Producer-Reviewer gates.
 
 Reason: the roadmap requires ordered work. Research and assumptions feed
 conceptual design; conceptual design feeds game and educational design; those
 feed the deterministic technical prototype; implementation is reviewed against
 domain, reproducibility, and educational criteria.
 
-Parallel work is allowed only for bounded research slices that share the same
-input snapshot and write separate `_workspace/` artifacts before synthesis.
+The orchestrator selects the simulation/domain track, presentation track, or
+both. Each track has a producer and an explicit project-specific reviewer.
+Parallel work is allowed only for bounded read-heavy or non-overlapping slices
+that share the same input snapshot and write separate `_workspace/` artifacts
+before synthesis.
 
 ## Roles
 
@@ -67,6 +73,8 @@ input snapshot and write separate `_workspace/` artifacts before synthesis.
 | Evidence Mapper | Convert research and precedent material into assumptions, mechanisms, and unresolved questions | `.agents/skills/hs-policy-evidence-mapper/SKILL.md` | `_workspace/01_evidence_map.md` |
 | Mechanism Designer | Shape actor, policy, scenario, and causal mechanics for the first vertical slice | `.agents/skills/hs-policy-mechanism-designer/SKILL.md` | `_workspace/02_mechanism_design.md` |
 | Domain QA Reviewer | Review proposed work against project-specific risks and phase gates | `.agents/skills/hs-policy-domain-qa/SKILL.md` | `_workspace/03_domain_qa.md` |
+| Presentation Contract Designer | Define actor-visible visual, audio, consequence, fallback, and asset contracts | `.agents/skills/hs-presentation-contract-designer/SKILL.md` | `_workspace/02_presentation_contract.md` |
+| Presentation Domain QA Reviewer | Review presentation work for information leaks, false causality, inaccessible meaning, provenance gaps, and replay-boundary drift | `.agents/skills/hs-presentation-domain-qa/SKILL.md` | `_workspace/03_presentation_qa.md` |
 
 Generic implementation and code review are intentionally not local roles. When
 Rust code is changed, use the relevant global skills alongside the local domain
@@ -102,9 +110,23 @@ QA gate.
 - Completion criteria: design can be prototyped as a narrow slice and does not
   require a general framework before proving gameplay value.
 
+### Phase 2P: Presentation Contract Design
+
+- Trigger: GUI, visual, audio, animation, consequence-presentation, or asset
+  work is explicitly in scope.
+- Input sources: request summary, visual/audio roadmap, current host and browser
+  contracts, relevant asset governance, and design principles.
+- Actions: define player questions, actor-visible source ledger, semantic
+  vocabulary, accessibility equivalents, fallbacks, authority/replay boundaries,
+  provenance requirements, and evidence limits.
+- Output files: `_workspace/02_presentation_contract.md`.
+- Completion criteria: the slice can be produced without hidden-state leakage,
+  local outcome inference, inaccessible meaning, or unregistered assets.
+
 ### Phase 3: Implementation or Document Production
 
-- Input sources: mechanism design, existing docs or Rust code.
+- Input sources: mechanism design or presentation contract, plus existing docs,
+  assets, browser files, or Rust code as applicable.
 - Actions: produce the requested artifact. For code, use global implementation
   skills where relevant and keep I/O, randomness, persistence, and terminal
   rendering outside the deterministic transition core.
@@ -122,9 +144,23 @@ QA gate.
 - Output files: `_workspace/03_domain_qa.md`.
 - Completion criteria: review returns `pass`, `fix`, or `redo` with evidence.
 
+### Phase 4P: Presentation Domain QA
+
+- Trigger: project-specific GUI, visual, audio, animation, or asset work was
+  produced.
+- Input sources: original request, presentation contract, produced artifacts,
+  host projection/history contracts, registries, and verification output.
+- Actions: trace visible and audible meaning to authorized actor-visible data;
+  audit causality, accessibility equivalents, fallbacks, provenance, rights,
+  browser authority, and replay isolation.
+- Output files: `_workspace/03_presentation_qa.md`.
+- Completion criteria: review returns `pass`, `fix`, or `redo` with evidence and
+  explicit human-evaluation and legal-review limits.
+
 ### Phase 5: Final Handoff
 
-- Input sources: produced artifact, verification output, domain QA result.
+- Input sources: produced artifact, verification output, and the applicable
+  domain or presentation QA result.
 - Actions: summarize changed files, validation performed, known limitations, and
   next phase dependencies.
 - Output files: `_workspace/final/handoff.md` when the task is substantial.
@@ -140,6 +176,9 @@ QA gate.
 | Mechanism Designer | Implementer or Writer | `_workspace/02_mechanism_design.md` | Gives the smallest coherent design surface to build or document |
 | Implementer or Writer | Domain QA Reviewer | Changed files and `_workspace/02_mechanism_design.md` | Lets QA compare output against intent and project principles |
 | Domain QA Reviewer | Orchestrator | `_workspace/03_domain_qa.md` | Records pass/fix/redo status and project-specific risks |
+| Presentation Contract Designer | Implementer, Writer, or Asset Producer | `_workspace/02_presentation_contract.md` | Defines authorized sources, semantics, fallbacks, provenance, and evidence limits |
+| Implementer, Writer, or Asset Producer | Presentation Domain QA Reviewer | Changed files and `_workspace/02_presentation_contract.md` | Lets QA compare presentation output against its actor-visible contract |
+| Presentation Domain QA Reviewer | Orchestrator | `_workspace/03_presentation_qa.md` | Records pass/fix/redo status and presentation-specific risks |
 | Orchestrator | Contributor | `_workspace/final/handoff.md` | Captures final result, tests, and follow-up dependencies |
 
 ## Artifact Naming
@@ -149,7 +188,9 @@ Use deterministic names:
 - `_workspace/00_input/request-summary.md`
 - `_workspace/01_evidence_map.md`
 - `_workspace/02_mechanism_design.md`
+- `_workspace/02_presentation_contract.md`
 - `_workspace/03_domain_qa.md`
+- `_workspace/03_presentation_qa.md`
 - `_workspace/final/handoff.md`
 - `_workspace/research/{topic-slug}.md` for bounded research branches
 - `_workspace/experiments/{run}/results.tsv` only for explicit autonomous
@@ -163,9 +204,14 @@ Use deterministic names:
   add an unresolved evidence question instead of fabricating certainty.
 - Scope pressure: defer broad mechanisms unless they are necessary for the
   current roadmap phase or first vertical slice.
-- Reviewer status `fix`: make targeted revisions, then rerun Domain QA once.
-- Reviewer status `redo`: return to Phase 1 or Phase 2 and preserve the failed
-  artifact for comparison.
+- Reviewer status `fix`: make targeted revisions, then rerun the applicable QA
+  reviewer once.
+- Reviewer status `redo`: return to the relevant evidence, mechanism, or
+  presentation-contract phase and preserve the failed artifact for comparison.
+- Presentation scope without authorization: document the proposed contract or
+  harness only when requested; do not create assets or start a roadmap milestone.
+- Missing or conflicting asset rights: block release use, preserve the source
+  record for audit, and use an approved generic fallback.
 - Conflicting domain assumptions: document both positions and choose the
   narrower reversible abstraction for the current slice.
 
@@ -180,6 +226,10 @@ Use deterministic names:
   outcomes.
 - Proposed scenarios include decision logs, causal explanation, and debrief
   hooks when gameplay or education is in scope.
+- Presentation semantics trace to actor-visible host sources or committed
+  history, and unknown values have explicit fallbacks.
+- Meaningful visual/audio assets have accessibility equivalents, registry
+  records, provenance, license basis, hashes, and approval state.
 
 ## Test Scenarios
 
@@ -209,3 +259,30 @@ Expected behavior:
 - The mechanism designer narrows to one regional market or one policy process.
 - Domain QA returns `fix` or `redo` if the artifact still requires a broad
   framework or unsupported forecasting claim.
+
+### Presentation Normal Flow
+
+Request: "Add a visible staffing-pressure treatment to the regional board."
+
+Expected outputs:
+
+- `_workspace/00_input/request-summary.md` names the authorized milestone and
+  rejects unrelated roadmap expansion.
+- `_workspace/02_presentation_contract.md` maps staffing-pressure semantics to
+  actor-visible host fields, including observation timing and unknown state.
+- The contract defines text/symbol, reduced-motion, muted, and missing-asset
+  behavior before implementation.
+- `_workspace/03_presentation_qa.md` traces the implementation to those sources
+  and records provenance plus evidence limits.
+
+### Presentation Failure Flow
+
+Failure point: a proposed music state derives urgency from private rival intent
+or true-state deterioration not present in the actor-visible projection.
+
+Expected behavior:
+
+- The contract designer rejects the hidden source and selects a visible signal
+  or non-informational ambience.
+- Presentation QA returns `redo` if the hidden-state classifier remains.
+- Muted play and visible text remain strategically complete.

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.33] - 2026-07-20
+
+- Added reusable presentation-contract and presentation-domain-QA agent skills
+  for actor-visible GUI, visual, audio, consequence, and asset work.
+- Extended the project orchestrator and team spec with selective simulation and
+  presentation tracks, deterministic handoffs, bounded review loops, and normal
+  plus hidden-state failure scenarios.
+- Documented roadmap authorization, accessibility-equivalence, provenance,
+  host-authority, replay, and evidence-limit gates without starting a visual or
+  audio implementation milestone.
+- Bumped package/public metadata to `0.12.33`; no GUI, asset, audio, simulation,
+  command, stochastic, history/hash/replay, or debrief behavior changed.
+
 ## [0.12.32] - 2026-07-20
 
 - Added a contributor documentation index with equal software, game/domain

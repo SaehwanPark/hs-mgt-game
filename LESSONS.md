@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Give Presentation Semantics Their Own Contract
+
+- Context: Future visual/audio work needs domain-specific coordination, but the
+  existing harness routed all project work through evidence and simulation
+  mechanism artifacts.
+- Symptom: A GUI or audio task could either skip project boundaries or misuse a
+  mechanism design as a presentation specification, obscuring host sources,
+  accessibility equivalents, and asset provenance.
+- Resolution: Added a selective presentation producer-reviewer track with an
+  actor-visible source ledger and a separate presentation QA handoff.
+- Prevention: Route presentation work through its own contract; invoke policy
+  mechanism design only when simulation semantics or domain claims also change.
+
 ## Migrate Document Paths From a Frozen Manifest
 
 - Context: Moving 136 top-level documents affected current guides, historical

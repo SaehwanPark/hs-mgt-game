@@ -1,49 +1,45 @@
-# Final Handoff — Documentation information architecture v0.12.32
+# Final Handoff — Visual/audio agent harness v0.12.33
 
 ## Result
 
-Contributor documentation now starts at `docs/README.md` with equal software,
-game/domain-design, and validation routes. Current guidance is grouped by
-purpose, while immutable evidence and superseded project material are isolated
-under indexed history paths.
+Future visual/audio work now has a reusable project-specific producer-reviewer
+track. The producer defines actor-visible presentation semantics and the
+reviewer audits information, causality, accessibility, provenance, authority,
+and replay boundaries. No roadmap feature was started.
 
 ## Changed areas
 
-- Navigation: contributor landing page plus history, playtest, and visual/audio
-  indexes.
-- Organization: 136 documents moved from the `docs/` root into current or
-  historical cohorts; the three canonical project documents stayed fixed.
-- Validation: current agent protocol consolidated with reusable human-session
-  safeguards; all 85 playtest reports and 15 visual/audio records preserved.
-- Safeguards: dependency-free link checker, CI integration, migrated audits,
-  tests, scenario references, and tracked workspace references.
-- Project records: SPEC, README, changelog, lessons, request summary, and
-  v0.12.32 release metadata.
+- Skills: `hs-presentation-contract-designer` and
+  `hs-presentation-domain-qa`.
+- Routing: the health-policy orchestrator selects simulation, presentation, or
+  combined QA tracks without duplicating global skills.
+- Contracts: deterministic presentation handoffs and normal/failure scenarios
+  added to the team spec.
+- Governance: repo guidance, lesson, request summary, SPEC, changelog, README,
+  and v0.12.33 metadata aligned.
 
 ## Verification
 
-- Documentation link check passed across 258 Markdown files.
-- Release metadata check passed at v0.12.32.
-- Visual/audio contract audit status is `complete`; all 14 phase documents are
-  present.
-- 318 Python tests passed with the bundled Python and Node runtimes.
-- `cargo fmt --check`, Clippy with warnings denied, 328 Rust library tests, and
-  all integration, golden, scenario-selection, and doc-test targets passed.
+- Harness structure check passed across all six repo-local skills; new discovery
+  frontmatter, orchestrator routing, team-spec paths, and handoff names agree.
+- Normal and hidden-state failure scenario assertions passed by inspection of
+  the producer, reviewer, and team-spec contracts.
+- Documentation link check passed across 261 Markdown files.
+- Release metadata check passed at v0.12.33.
+- `cargo fmt --check` passed.
+- `cargo test` passed: 328 library tests plus all binary, integration, golden,
+  scenario-selection, and doc-test targets.
 
 ## Deviations and review
 
-- No redirect stubs were added, as planned.
-- Historical evidence was preserved with summaries; no evidence conclusion was
-  rewritten.
-- Existing machine-local links in two historical workspace handoffs were also
-  converted because the new repository-wide check correctly rejected them.
-- Project-specific domain QA was not invoked because no simulation mechanism,
-  evidence claim, or educational conclusion changed.
+- The presentation track is selective; ordinary simulation work still uses the
+  existing evidence, mechanism, and domain-QA skills.
+- Generic UX/accessibility, code review, Rust implementation, and legal advice
+  remain outside the repo-local specialist roles.
 
 ## Known limits
 
-- External deep links to former GitHub document paths may no longer resolve.
-- The link checker validates local targets but does not validate heading
-  fragments or external URLs.
-- Opaque citation tokens in the historical Phase 1 literature framework remain
-  unresolved and are labeled as such in the history index.
+- The harness defines work contracts but does not itself prove human usability,
+  lived accessibility, learning, calibration, balance, policy validity, or
+  asset-license approval.
+- Roadmap work still requires a separately authorized, bounded request.

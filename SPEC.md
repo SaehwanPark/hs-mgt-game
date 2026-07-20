@@ -4481,6 +4481,32 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   - No human usability, lived accessibility, learning, calibration, policy, or
     domain-expert claim.
 
+### Visual/audio agent harness (v0.12.33)
+
+- Status: Closed; harness implementation and structural verification complete
+- Started: 2026-07-20
+
+  Done:
+  - Added a presentation-contract specialist that maps every semantic visual,
+    motion, and audio signal to actor-visible sources, fallbacks, provenance,
+    authority boundaries, and evidence limits before production.
+  - Added a presentation-domain QA specialist with pass/fix/redo review for
+    hidden-state leakage, unsupported causality, accessibility equivalence,
+    asset rights/provenance, graceful degradation, and replay isolation.
+  - Extended the existing orchestrator and team spec with selective simulation
+    and presentation tracks plus deterministic handoffs and failure scenarios.
+
+  Verification:
+  - New skills contain valid discovery frontmatter and complete input, output,
+    workflow, validation, and reference contracts.
+  - Orchestrator and team-spec paths and handoff names agree; documentation-link
+    and release-metadata checks pass.
+
+  Deferred / Non-Goals:
+  - No visual/audio roadmap milestone was started or promoted.
+  - No GUI, asset, audio, simulation, command, stochastic, history/hash/replay,
+    debrief, calibration, policy-validity, or human-evaluation change.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4514,9 +4540,10 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-No active documentation or visual/audio implementation slice. v0.12.32 closes
-the contributor documentation information-architecture refactor. Human and
-educational evaluation remain separately gated Future work.
+No active documentation or visual/audio implementation slice. v0.12.33 adds
+reusable agent coordination for future presentation work without promoting a
+roadmap milestone. Human and educational evaluation remain separately gated
+Future work.
 
 ## Future
 

@@ -1,42 +1,41 @@
-# Request Summary — Documentation information architecture v0.12.32
+# Request Summary — Visual/audio agent harness v0.12.33
 
 ## Classification and scope
 
-- Roadmap/output: cross-phase documentation governance and contributor
-  navigation; behavior-preserving document production and relocation.
-- Reorganize `docs/` around equal software, design/research, and validation
-  contributor paths.
-- Preserve canonical documents and immutable evidence, consolidate playtest
-  protocols, repair references, add a dependency-free link checker, and align
-  release metadata at v0.12.32.
+- Roadmap/output: reusable project-specific agent workflow supporting future
+  visual/audio roadmap work; harness and contributor documentation only.
+- Add a presentation-contract producer and presentation-domain QA reviewer, and
+  route them selectively through the existing health-policy orchestrator.
+- Preserve the current roadmap, GUI, asset tree, simulation, and release gates.
 
 ## Sources
 
-- `README.md`, `SPEC.md`, `ARCHITECTURE.md`, and `CHANGELOG.md`.
-- `docs/proposal.md`, `docs/roadmap.md`, `docs/design_principles.md`, and the
-  harness team spec.
-- Repository instructions and the approved implementation plan.
+- `README.md`, `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, and `LESSONS.md`.
+- `docs/proposal.md`, `docs/roadmap.md`, `docs/design_principles.md`,
+  `docs/visual_audio_enhancement_roadmap.md`, and the existing harness team spec.
+- Repo-local and global harness instructions.
 
 ## Expected files
 
-- Contributor and history indexes plus relocated documentation.
-- Consolidated playtesting guidance.
-- Documentation checker, CI integration, and updated reference tests.
-- Project-state documentation and final handoff.
+- Two repo-local presentation specialist skills.
+- Updated orchestrator, team spec, and concise repo-wide pointer.
+- Request/handoff, lesson, specification, changelog, and patch-version records.
 
 ## Non-goals
 
-- No simulation, scenario, command, replay, GUI, calibration, policy-validity,
-  research-conclusion, or evidence-conclusion changes.
-- No compatibility stubs for moved document paths.
+- No visual/audio roadmap implementation, asset generation/acquisition, GUI or
+  simulation change, milestone promotion, external research, or legal approval.
+- No generic UX, code-review, Rust, or release skill duplication.
 
 ## Validation target
 
-- Four Markdown files at the `docs/` root.
-- All current documents reachable within two links.
-- All versioned evidence preserved.
-- No broken or machine-local Markdown links.
-- Visual/audio, release, Python, and Rust checks pass.
+- Every new skill has valid frontmatter and deterministic handoff contracts.
+- Skill paths and handoff names agree with the orchestrator and team spec.
+- Normal and failure presentation scenarios cover hidden-state, accessibility,
+  provenance, authorization, and replay boundaries.
+- Documentation links and release metadata pass; no roadmap feature files are
+  introduced.
 
-Global preferred-workflow, spec-driven-developer, and simple-code-writer skills
-apply. Project-specific mechanism or evidence redesign does not.
+Global `harness` and `spec-driven-developer` skills apply. Existing health-policy
+orchestration governs project-specific scope. Mechanism/evidence redesign and
+roadmap execution do not apply.
