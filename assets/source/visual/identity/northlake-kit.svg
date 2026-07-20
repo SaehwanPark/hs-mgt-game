@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Northlake fictional health-system identity kit</title>
+  <desc id="desc">Source vector sheet for a fictional Northlake system: logo mark, monochrome mark, compact marker, facility sign, report header, compact badge, and NL text monogram.</desc>
+  <style>
+    :root { --northlake-primary: #315a89; --northlake-secondary: #7c4d8f; --northlake-ink: #17232d; --northlake-paper: #f3f6fa; }
+    .ink { fill: var(--northlake-ink); font-family: system-ui, sans-serif; }
+    .small { font-size: 13px; letter-spacing: .04em; }
+    .title { font-size: 22px; font-weight: 700; }
+    .label { font-size: 14px; font-weight: 700; }
+  </style>
+  <defs>
+    <symbol id="northlake-mark" viewBox="0 0 96 96">
+      <path d="M14 76V20h17l34 31V20h17v56H65L31 45v31z" fill="var(--northlake-primary)"/>
+      <path d="M11 84c14-8 29-8 43 0 12 7 24 7 31 0" fill="none" stroke="var(--northlake-secondary)" stroke-linecap="round" stroke-width="7"/>
+    </symbol>
+    <symbol id="northlake-mark-mono" viewBox="0 0 96 96">
+      <path d="M14 76V20h17l34 31V20h17v56H65L31 45v31z" fill="currentColor"/>
+      <path d="M11 84c14-8 29-8 43 0 12 7 24 7 31 0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="7"/>
+    </symbol>
+    <symbol id="northlake-compact" viewBox="0 0 48 48">
+      <rect x="3" y="3" width="42" height="42" rx="10" fill="var(--northlake-primary)"/>
+      <path d="M11 36V12h7l13 12V12h7v24h-7L18 24v12z" fill="#fff"/>
+      <path d="M9 39c8-4 16-4 27 0" fill="none" stroke="var(--northlake-secondary)" stroke-linecap="round" stroke-width="3"/>
+    </symbol>
+  </defs>
+  <rect width="720" height="420" fill="var(--northlake-paper)"/>
+  <text x="32" y="38" class="ink title">Northlake identity kit · fictional system</text>
+  <text x="32" y="61" class="ink small">Stable geometric mark; layered lake line is a shape cue, not a geographic claim.</text>
+
+  <g id="logo-mark" transform="translate(42 92)">
+    <use href="#northlake-mark" width="96" height="96"/>
+    <text x="116" y="55" class="ink" font-size="34" font-weight="700">Northlake</text>
+  </g>
+  <text x="42" y="214" class="ink label">Logo mark + wordmark</text>
+
+  <g id="monochrome-mark" transform="translate(300 92)" color="#17232d">
+    <use href="#northlake-mark-mono" width="96" height="96"/>
+    <text x="116" y="55" class="ink" font-size="34" font-weight="700">Northlake</text>
+  </g>
+  <text x="300" y="214" class="ink label">Monochrome mark</text>
+
+  <g id="compact-marker" transform="translate(590 98)">
+    <use href="#northlake-compact" width="64" height="64"/>
+    <text x="-5" y="93" class="ink label">Map marker</text>
+  </g>
+
+  <g id="facility-sign" transform="translate(42 250)">
+    <rect width="238" height="74" rx="10" fill="#fff" stroke="var(--northlake-primary)" stroke-width="3"/>
+    <use href="#northlake-compact" x="12" y="14" width="46" height="46"/>
+    <text x="72" y="33" class="ink" font-size="17" font-weight="700">Northlake Clinic</text>
+    <text x="72" y="55" class="ink small">FACILITY SIGNAGE</text>
+  </g>
+
+  <g id="report-header" transform="translate(300 250)">
+    <rect width="238" height="74" rx="10" fill="var(--northlake-primary)"/>
+    <use href="#northlake-mark-mono" x="12" y="10" width="54" height="54" color="#fff"/>
+    <text x="78" y="34" fill="#fff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Northlake</text>
+    <text x="78" y="55" fill="#e1e9f5" font-family="system-ui, sans-serif" class="small">PUBLIC SIGNAL</text>
+  </g>
+
+  <g id="compact-badge" transform="translate(590 250)">
+    <rect width="88" height="74" rx="10" fill="#fff" stroke="var(--northlake-secondary)" stroke-width="3"/>
+    <text x="44" y="50" text-anchor="middle" class="ink" font-size="30" font-weight="800">NL</text>
+  </g>
+  <text x="590" y="345" class="ink label">NL monogram</text>
+  <text x="42" y="382" class="ink small">Color-independent recognition: N geometry, layered line, square marker, and NL text remain distinct in monochrome.</text>
+</svg>

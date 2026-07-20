@@ -223,6 +223,12 @@ surface variants and a generic fallback without being imported by the live GUI;
 the asset registry owns provenance and the identity module owns only local
 fixture labels, not host identity facts.
 
+The v0.12.40 Northlake kit extends the same fixture-only contract with a
+separate fictional vocabulary and source/release pair. Its identity and audio
+motif references remain local labels; they do not infer rival state, alter
+observability, or enter host/session, simulation, history, replay, or debrief
+contracts.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

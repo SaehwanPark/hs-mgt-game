@@ -31,6 +31,39 @@ const RIVERSIDE_IDENTITY_KIT = Object.freeze({
   }),
 });
 
+const NORTHLAKE_IDENTITY_KIT = Object.freeze({
+  schema_version: "identity-kit-v1",
+  id: "northlake",
+  label: "Northlake",
+  monogram: "NL",
+  source: "Visible Northlake system identity",
+  equivalent: "Northlake name, mark, monogram, and text label",
+  palette: Object.freeze({
+    primary: "#315a89",
+    secondary: "#7c4d8f",
+    ink: "#17232d",
+    paper: "#f3f6fa",
+  }),
+  asset: Object.freeze({
+    source_path: "assets/source/visual/identity/northlake-kit.svg",
+    release_path: "assets/release/visual/svg/northlake.svg",
+  }),
+  surfaces: Object.freeze({
+    logo_mark: "N geometry with layered lake line",
+    monochrome_mark: "Single-color N geometry with layered line",
+    compact_marker: "Rounded-square N marker",
+    facility_signage: "Northlake Clinic sign treatment",
+    report_header: "Northlake public-signal report header",
+    compact_badge: "NL text badge",
+    audio_motif: "audio.direction-northlake-motif",
+  }),
+  fallback: Object.freeze({
+    id: "generic-institution",
+    label: "Institution",
+    equivalent: "Institution identity unavailable",
+  }),
+});
+
 const GENERIC_IDENTITY_KIT = Object.freeze({
   schema_version: "identity-kit-v1",
   id: "generic-institution",
@@ -54,6 +87,7 @@ const GENERIC_IDENTITY_KIT = Object.freeze({
 
 export const IDENTITY_KITS = Object.freeze({
   riverside: RIVERSIDE_IDENTITY_KIT,
+  northlake: NORTHLAKE_IDENTITY_KIT,
   "generic-institution": GENERIC_IDENTITY_KIT,
 });
 

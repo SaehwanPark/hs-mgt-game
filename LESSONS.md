@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Reuse the Surface Contract While Varying Identity Vocabulary
+
+- Context: Northlake needed a distinct kit without creating a second proof
+  architecture or weakening the Riverside fallback contract.
+- Symptom: Copying a whole proof page per system would allow accessibility,
+  provenance, and cross-surface rules to drift.
+- Resolution: Added Northlake data/assets to the shared identity catalog and
+  selector, while keeping its geometry, palette, labels, and motif distinct.
+- Prevention: Reuse the tested surface contract and generic fallback; vary only
+  the fictional vocabulary and registry-backed assets.
+
 ## Keep Identity Kits Surface-Complete Before Runtime Promotion
 
 - Context: Phase 2.1 requires one fictional system to persist across map,

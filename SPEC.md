@@ -4626,6 +4626,17 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - No live GUI, host, simulation, history/hash/replay, or debrief behavior
   changed.
 
+### Visual/audio Phase 2.1 Northlake identity kit (v0.12.40)
+
+- Status: Partial; Northlake kit and shared fixture proof complete
+- Branch: `feat/visual-audio-phase2-northlake-identity-v0.12.40`
+- Added a distinct fictional Northlake source/release SVG kit and
+  `audio.direction-northlake-motif`; the shared proof selector covers both
+  systems and generic fallback.
+- Checked Riverside and Northlake per-system lanes; Summit remains Future.
+- No live GUI, host, simulation, history/hash/replay, or debrief behavior
+  changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
