@@ -139,6 +139,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.relationship-line-styles",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/map-relationships.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic relationship-line style catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only relationship-line vocabulary.",
+      "original_hash": "sha256:3ecdef403ada296456ac081bf081ee2288fee89b97ea407d9a79009378e765ee",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Relationship type label, line-pattern label, and generic relationship fallback",
+      "visible_source": "Fixture-only symbolic relationship-line vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

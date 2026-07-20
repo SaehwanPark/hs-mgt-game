@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Relationship Lines From Becoming Causal Claims
+
+- Context: Relationship-line styles needed to distinguish visible categories
+  before relationship instances or live map rendering were modeled.
+- Symptom: Arrows, line weight, or a “service” label can imply hidden intent,
+  causality, strength, direction, distance, or future outcome that is not
+  visible.
+- Resolution: Used deterministic non-color patterns with round caps, no
+  arrowheads, a generic fallback, written equivalents, and an explicit
+  information boundary.
+- Prevention: Keep relationship style vocabulary non-directional; permit
+  direction or causal meaning only when an actor-visible instance contract
+  explicitly supplies it.
+
 ## Keep Parcel Tokens Separate From Ownership and Future Use
 
 - Context: The parcel system needed reusable facility and undeveloped-land

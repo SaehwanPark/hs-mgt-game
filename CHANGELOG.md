@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.59] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic relationship-line style
+  catalog for peer, service, policy, and uncertain visible relationships.
+- Added non-color patterns, non-directional defaults, registry provenance, hash
+  coverage, and regression tests for the Phase 3.2 relationship-line slice.
+- Checked the Phase 3.2 relationship-line styles item without changing live GUI
+  or host behavior.
+- Bumped package/public metadata to `0.12.59`.
+
 ## [0.12.58] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic parcel system with facility
