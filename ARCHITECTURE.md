@@ -308,6 +308,11 @@ campus, and civic patterns organize symbolic relationships and do not assert
 real-world land use, population, ownership, zoning, travel time, or
 jurisdiction.
 
+The v0.12.58 parcel system adds deterministic facility and undeveloped-land
+placement tokens on a shared 24px grid. Its boundary, footprint, and open-area
+patterns organize symbolic placement and do not assert ownership, availability,
+development potential, land value, zoning, geography, or future use.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

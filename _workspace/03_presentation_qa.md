@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.2 district-tiles v0.12.57
+# Presentation Domain QA — Phase 3.2 parcel-system v0.12.58
 
 ## Status
 
@@ -6,22 +6,23 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.2 district-tile lane, presentation contract,
-  district-token module, registry/credits, tests, and architecture.
+- Request summary, Phase 3.2 parcel-system lane, presentation contract,
+  parcel-token module, registry/credits, tests, and architecture.
 
-The slice is deterministic symbolic district-token fixture work only.
+The slice is deterministic symbolic parcel-token fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the district-token module exposes only explicit symbolic types and
-  patterns and does not infer land use, population, ownership, zoning, travel
-  time, jurisdiction, or hidden relationships.
+- Pass: the parcel-token module exposes only explicit symbolic parcel types and
+  patterns and does not infer ownership, availability, operational status,
+  development potential, land value, zoning, geography, future use, or hidden
+  relationships.
 - Pass: token definitions are deterministic and dimensionally constrained.
-- Pass: unavailable district IDs use an explicit generic fallback.
+- Pass: unavailable parcel IDs use an explicit generic fallback.
 
 ## Accessibility and Fallback Findings
 
-- Pass: symbolic-geography disclaimer, district labels, and non-color pattern
+- Pass: symbolic-placement disclaimer, parcel labels, and non-color pattern
   equivalents are present.
 - Pass: the module has no browser, network, random, or host/session side
   effects.
@@ -30,9 +31,9 @@ The slice is deterministic symbolic district-token fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: district-token source module and catalog entry are registry-backed with
+- Pass: parcel-token source module and catalog entry are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional district-token contract has no third-party or downloaded
+- Pass: the fictional parcel-token contract has no third-party or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -51,8 +52,8 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused district-token, deterministic fallback, registry, metadata, and
-  syntax tests.
+- Focused parcel-token, deterministic fallback, registry, metadata, and syntax
+  tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.
