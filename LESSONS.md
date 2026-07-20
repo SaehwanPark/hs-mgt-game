@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Uncertainty Status Separate From Hidden Severity
+
+- Context: Uncertainty overlays needed stale, missing, and revised vocabulary
+  before live intelligence or consequence rendering was modeled.
+- Symptom: Hatching, emphasis, or a “revised” label can imply hidden risk,
+  severity, probability, truth, or future outcome that is not visible.
+- Resolution: Used deterministic non-color patterns with no severity encoding,
+  static reduced-motion behavior, written equivalents, a generic fallback, and
+  an explicit information boundary.
+- Prevention: Treat uncertainty as an explicit visible information-status field;
+  never turn uncertainty styling into an unobserved risk scale.
+
 ## Keep Service-Area Overlays Separate From Catchment Claims
 
 - Context: Service-area overlays needed reusable contour vocabulary before

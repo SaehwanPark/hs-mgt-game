@@ -324,6 +324,12 @@ The overlays organize actor-visible service relationships without establishing
 real-world catchment, distance, travel time, population, access, jurisdiction,
 or performance.
 
+The v0.12.61 uncertainty-overlay catalog adds deterministic stale, missing, and
+revised visible-information patterns with no severity encoding and static
+reduced-motion behavior. The catalog identifies explicit information status
+without quantifying hidden risk, severity, probability, truth, or future
+outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.61] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic uncertainty-overlay catalog
+  for stale, missing, and revised visible information.
+- Added non-color patterns, no-severity and reduced-motion defaults, registry
+  provenance, hash coverage, and regression tests for the Phase 3.2
+  uncertainty-overlay slice.
+- Checked the Phase 3.2 uncertainty overlays item without changing live GUI or
+  host behavior.
+- Bumped package/public metadata to `0.12.61`.
+
 ## [0.12.60] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic service-area overlay catalog

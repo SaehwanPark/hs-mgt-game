@@ -87,6 +87,11 @@ service-area overlays with symbolic contour/fill patterns, no metric encoding,
 and a generic fallback. The overlays do not establish real-world catchment,
 distance, travel time, population, access, jurisdiction, or performance.
 
+`map-uncertainty.mjs` adds fixture-only stale, missing, and revised
+visible-information overlays with non-color patterns, no severity encoding,
+static reduced-motion behavior, and a generic fallback. The overlays do not
+quantify hidden risk, severity, probability, truth, or future outcome.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the
