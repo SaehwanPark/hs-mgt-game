@@ -48,7 +48,8 @@ Open `gui/facility-proof.html` directly or through a static server to inspect
 the Phase 3.1 fictional general-hospital base, patient-tower,
 emergency-department, ambulatory-center, specialty-center, rural-clinic,
 administrative-headquarters, parking-structure, utility-plant,
-research-education-building, and construction-crane components. It
+research-education-building, construction-crane, and undeveloped-parcel
+components. It
 shows the selected compact release derivative, seven composable layers, visible
 layer sources, written equivalents, non-color patterns, and generic facility
 fallback. The proof is fixture-only and does not load host state or change a

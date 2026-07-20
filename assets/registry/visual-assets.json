@@ -207,6 +207,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.undeveloped-parcel",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/undeveloped-parcel.svg",
+      "release_path": "assets/release/visual/svg/undeveloped-parcel.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the dashed parcel-boundary silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:b11213f31827a86c64b678bea6c8b0320c9b038641037659f017d534f65e9af0",
+      "release_hash": "sha256:4211eff1c6fbff95ac3ed58ffdc4a79dd9725063262ffc172d987e08f9cd4f39",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Undeveloped parcel label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",

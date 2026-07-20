@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Parcel Boundaries From Becoming Future-Use Claims
+
+- Context: The undeveloped-parcel component needed to organize a board without
+  asserting what the land will become or who controls it.
+- Symptom: A parcel boundary or “undeveloped” label can imply development
+  potential, ownership, availability, or a forecast that is not visible.
+- Resolution: Used a dashed boundary as a type-only cue and tested explicit
+  non-claim wording for potential, ownership, and future use.
+- Prevention: Keep land vocabulary symbolic and route future projects through
+  visible project and uncertainty layers only.
+
 ## Keep Construction Cues Separate From Project Status
 
 - Context: The construction-crane component needed a recognizable boom and

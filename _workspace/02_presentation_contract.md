@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 construction-crane v0.12.53
+# Presentation Contract — Phase 3.1 undeveloped-parcel v0.12.54
 
 ## Goal and Authorization
 
-Make a fictional construction crane reusable across facility, map, report,
+Make a fictional undeveloped parcel reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,13 +27,13 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The boom-and-tower silhouette uses a shared 8px grid, system color variables,
+- The dashed parcel-boundary silhouette uses a shared 8px grid, system color variables,
   and a stable viewBox distinct from the general-hospital base, patient tower,
   emergency department, ambulatory center, specialty center, rural clinic,
-  administrative headquarters, parking structure, utility plant, and research
-  and education building.
-- The boom-and-tower silhouette is a type cue only; it does not establish
-  project status, completion, ownership, or hidden outcome.
+  administrative headquarters, parking structure, utility plant, research and
+  education building, and construction crane.
+- The dashed parcel-boundary silhouette is a type cue only; it does not
+  establish development potential, ownership, future use, or hidden outcome.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.

@@ -2,7 +2,7 @@
 
 **Status:** Bounded technical sequence closed; production foundation active
 
-**Version range:** v0.12.16–v0.12.53
+**Version range:** v0.12.16–v0.12.54
 **Principal conclusion:** The dependency-free GUI supports the bounded,
 host-authoritative competitive first-month presentation contract. Technical
 checks do not establish human usability, accessibility experience, learning,
@@ -50,5 +50,6 @@ calibration, balance, or policy validity.
 | 3.1 | v0.12.51 | [Utility-plant component proof](visual-audio-phase3-utility-plant-v0.12.51.md) |
 | 3.1 | v0.12.52 | [Research-and-education-building component proof](visual-audio-phase3-research-education-building-v0.12.52.md) |
 | 3.1 | v0.12.53 | [Construction-crane component proof](visual-audio-phase3-construction-crane-v0.12.53.md) |
+| 3.1 | v0.12.54 | [Undeveloped-parcel component proof](visual-audio-phase3-undeveloped-parcel-v0.12.54.md) |
 
 The executable audit remains `python3 scripts/audit_visual_audio_contract.py`.

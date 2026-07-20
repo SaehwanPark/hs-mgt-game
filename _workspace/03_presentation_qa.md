@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 construction-crane v0.12.53
+# Presentation Domain QA — Phase 3.1 undeveloped-parcel v0.12.54
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 construction-crane lane, facility contract,
+- Request summary, Phase 3.1 undeveloped-parcel lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional construction-crane fixture work only.
+The slice is fictional undeveloped-parcel fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the construction-crane shape and seven layers derive only from visible facility kind,
+- Pass: the undeveloped-parcel shape and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional construction-crane fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: construction-crane source/release SVGs and component catalog are registry-backed with
+- Pass: undeveloped-parcel source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional construction-crane component has no third-party brand or downloaded
+- Pass: the fictional undeveloped-parcel component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused construction-crane/research-education-building/utility-plant/parking-structure/administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
+- Focused undeveloped-parcel/construction-crane/research-education-building/utility-plant/parking-structure/administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
   and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
