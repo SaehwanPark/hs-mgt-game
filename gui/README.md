@@ -72,6 +72,11 @@ commercial, residential, employer-center, and government tokens. Each token
 has a non-color pattern and generic fallback; it does not assert real-world
 land use, population, ownership, zoning, travel time, or jurisdiction.
 
+`map-parcels.mjs` adds the fixture-only symbolic facility and undeveloped-land
+parcel tokens on the shared grid. Each token has a non-color pattern and
+generic fallback; it does not assert ownership, availability, development
+potential, land value, zoning, geography, or future use.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

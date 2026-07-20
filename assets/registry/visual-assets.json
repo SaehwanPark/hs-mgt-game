@@ -122,6 +122,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.parcel-system",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/map-parcels.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic parcel catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only parcel vocabulary.",
+      "original_hash": "sha256:77c7700e928563fe03e8f8454174f9d55eba2b48a010820fb302f1d0d0a574d1",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Parcel type label, non-color pattern, and generic parcel fallback",
+      "visible_source": "Fixture-only symbolic parcel vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Keep Parcel Tokens Separate From Ownership and Future Use
+
+- Context: The parcel system needed reusable facility and undeveloped-land
+  placement vocabulary before projects or overlays were modeled.
+- Symptom: A parcel boundary, footprint, or open-area mark can imply ownership,
+  availability, development potential, land value, zoning, geography, or
+  future use that is not visible.
+- Resolution: Used deterministic symbolic parcel tokens with non-color
+  patterns, written equivalents, a generic fallback, and an explicit
+  non-claim boundary.
+- Prevention: Treat parcels as placement vocabulary until a scenario explicitly
+  supplies ownership, land-use, or project semantics.
+
 ## Keep District Tokens Separate From Land-Use Claims
 
 - Context: The district tile set needed reusable commercial, residential,

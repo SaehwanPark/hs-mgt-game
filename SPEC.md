@@ -4863,6 +4863,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   relationship lines, overlays, event markers, and interaction behavior remain
   separate future slices with no live GUI or host behavior changed.
 
+### Visual/audio Phase 3.2 parcel-system contract (v0.12.58)
+
+- Status: Partial; deterministic fixture-only parcel-system contract complete
+- Branch: `feat/visual-audio-phase3-parcel-system-v0.12.58`
+- Added `gui/map-parcels.mjs` with facility and undeveloped-land symbolic parcel
+  tokens on the shared 24px grid, plus non-color patterns and a generic
+  fallback.
+- Added registry/hash/credits provenance and deterministic parcel-system tests.
+- Checked the Phase 3.2 parcel-system item; relationship lines, overlays, event
+  markers, and interaction behavior remain separate future slices with no live
+  GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

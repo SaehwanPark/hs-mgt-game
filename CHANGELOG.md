@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.58] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic parcel system with facility
+  and undeveloped-land parcel tokens plus a generic fallback.
+- Added non-color pattern equivalents, registry provenance, hash coverage, and
+  regression tests for the Phase 3.2 parcel-system slice.
+- Checked the Phase 3.2 parcel-system item without changing live GUI or host
+  behavior.
+- Bumped package/public metadata to `0.12.58`.
+
 ## [0.12.57] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic district tile set with
