@@ -55,6 +55,13 @@ layer sources, written equivalents, non-color patterns, and generic facility
 fallback. The proof is fixture-only and does not load host state or change a
 session.
 
+## Regional map grid contract
+
+`map-environment.mjs` defines the fixture-only 24px regional map grid and
+deterministic cell coordinates used by later map/environment slices. The grid
+is symbolic: coordinates organize relationships and attention without asserting
+real-world distance or geography.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

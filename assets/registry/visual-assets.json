@@ -71,6 +71,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.regional-grid",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/map-environment.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic map-grid contract",
+      "license": "project-generated",
+      "modifications": "None; fixture-only map coordinate contract.",
+      "original_hash": "sha256:5bb00b093ca31ef6064009775d49845a07e73cf246509946f75b31214c2be83b",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Named grid coordinates and visible layout labels",
+      "visible_source": "Fixture-only symbolic layout coordinates",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

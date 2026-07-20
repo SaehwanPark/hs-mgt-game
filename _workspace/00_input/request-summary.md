@@ -1,21 +1,21 @@
-# Request Summary — Visual/audio Phase 3.1 undeveloped-parcel v0.12.54
+# Request Summary — Visual/audio Phase 3.2 map-grid v0.12.55
 
 ## Authorized outcome
 
-Implement one reusable fixture-only undeveloped-parcel component against
+Implement the deterministic fixture-only regional map-grid contract against
 the established visual asset and identity contracts.
 
 ## Slice boundary
 
-- Provide source/release SVG derivatives for the dashed parcel-boundary silhouette and explicit
-  identity, capacity, project, pressure, selection, and uncertainty layers.
-- Include shared 8px grid, system color variables, accessible labels,
-  non-color layer patterns, registry hashes, and generic facility fallback.
+- Provide a 960x600 symbolic map viewport with a deterministic 24px coordinate
+  grid, named origin, and coordinate conversion helper.
+- Include registry hash/provenance, symbolic-geography disclaimer, accessible
+  coordinate equivalent, and deterministic tests.
 - Keep live GUI promotion out of scope.
 
 ## Required bookkeeping
 
-Check all 13 undeveloped-parcel Phase 3.1 items, bump to v0.12.54, and align SPEC,
+Check the Phase 3.2 map-grid item, bump to v0.12.55, and align SPEC,
 architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 

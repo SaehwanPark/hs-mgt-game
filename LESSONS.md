@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Make Symbolic Map Coordinates Explicit
+
+- Context: Phase 3.2 needed a reusable map coordinate system before adding
+  roads, districts, or relationships.
+- Symptom: A grid can quietly suggest real distance, jurisdiction, travel time,
+  or geographic truth if its meaning is not stated.
+- Resolution: Defined a deterministic 24px fixture grid with named coordinates,
+  a pure conversion helper, and an explicit non-geographic disclaimer.
+- Prevention: Treat map placement as presentation vocabulary until a scenario
+  explicitly supplies geographic semantics.
+
 ## Keep Parcel Boundaries From Becoming Future-Use Claims
 
 - Context: The undeveloped-parcel component needed to organize a board without

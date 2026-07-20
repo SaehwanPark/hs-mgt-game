@@ -4826,6 +4826,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   and optional facility modules remain separate future slices and no live GUI
   or host behavior changed.
 
+### Visual/audio Phase 3.2 map-grid contract (v0.12.55)
+
+- Status: Partial; deterministic fixture-only map-grid contract complete
+- Branch: `feat/visual-audio-phase3-map-grid-v0.12.55`
+- Added `gui/map-environment.mjs` with a 960x600 symbolic viewport, 24px
+  coordinate cells, named origin, explicit geography boundary, and a pure
+  `mapGridCell` helper.
+- Added registry/hash/credits provenance and deterministic coordinate tests.
+- Checked the Phase 3.2 map-grid item; road tiles, districts, parcels,
+  relationship lines, overlays, event markers, and interaction behavior remain
+  separate future slices with no live GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
