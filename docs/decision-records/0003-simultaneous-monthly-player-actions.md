@@ -76,5 +76,5 @@ semantics and ADR-0001 determinism.
 ## Related Documents
 
 - [ADR-0001](0001-deterministic-transition-and-stochastic-input-boundary.md)
-- [`core-loop-spec.md`](../core-loop-spec.md)
-- [`gameplay-competitive-sketch.md`](../gameplay-competitive-sketch.md)
+- [`core-loop-spec.md`](../design/core-loop-spec.md)
+- [`gameplay-competitive-sketch.md`](../design/gameplay-competitive-sketch.md)

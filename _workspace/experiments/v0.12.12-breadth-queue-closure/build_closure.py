@@ -58,13 +58,13 @@ SOURCE_MARKERS = {
     "Capital project lesson:",
     "Decision quality and outcome quality remain separate:",
   ],
-  "docs/playtest-findings-v0.11.11.md": [
+  "docs/history/playtests/v0.11/playtest-findings-v0.11.11.md": [
     "60/60 runs completed",
     "Ten distinct command trajectories",
     "No common first-month action",
     "Final tradeoff ranges remain varied",
   ],
-  "docs/playtest-findings-v0.11.12.md": [
+  "docs/history/playtests/v0.11/playtest-findings-v0.11.12.md": [
     "9/9 runs completed",
     "No structural matrix, history/hash, trace, or debrief gap",
   ],

@@ -344,7 +344,7 @@ client-side legality or outcome formulas, transitions, stochastic inputs,
 histories, hashes, replay artifacts, audio classification, or debrief output.
 
 The v0.12.30 audit at
-[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md)
+[`docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md`](docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md)
 records source/test evidence for the complete bounded first-month path. It is a
 read-only repository check and does not claim browser transport, human
 usability, lived accessibility, learning, engagement, calibration, balance,
@@ -361,35 +361,35 @@ Last Reviewed: 2026-07-15
 Status: Verified
 
 Phase 0 alignment is accepted in
-[`docs/visual-audio-phase0-alignment-v0.12.16.md`](docs/visual-audio-phase0-alignment-v0.12.16.md)
+[`docs/history/initiatives/visual-audio/visual-audio-phase0-alignment-v0.12.16.md`](docs/history/initiatives/visual-audio/visual-audio-phase0-alignment-v0.12.16.md)
 and ADR-0011. Phase 1 static-desktop scope is documented in
-[`docs/visual-audio-phase1-static-desktop-v0.12.17.md`](docs/visual-audio-phase1-static-desktop-v0.12.17.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase1-static-desktop-v0.12.17.md`](docs/history/initiatives/visual-audio/visual-audio-phase1-static-desktop-v0.12.17.md).
 Phase 2 live read-only scope is documented in
-[`docs/visual-audio-phase2-live-read-only-v0.12.18.md`](docs/visual-audio-phase2-live-read-only-v0.12.18.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase2-live-read-only-v0.12.18.md`](docs/history/initiatives/visual-audio/visual-audio-phase2-live-read-only-v0.12.18.md).
 Phase 3 contextual action scope is documented in
-[`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md).
 Phase 4 resolution scope is documented in
-[`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md).
 Phase 5 foundational audio scope is documented in
-[`docs/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/visual-audio-phase5-foundational-audio-v0.12.21.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/history/initiatives/visual-audio/visual-audio-phase5-foundational-audio-v0.12.21.md).
 Phase 6 regional-world scope is documented in
-[`docs/visual-audio-phase6-regional-world-v0.12.22.md`](docs/visual-audio-phase6-regional-world-v0.12.22.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase6-regional-world-v0.12.22.md`](docs/history/initiatives/visual-audio/visual-audio-phase6-regional-world-v0.12.22.md).
 Phase 7 campaign-coverage scope is documented in
-[`docs/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/visual-audio-phase7-campaign-coverage-v0.12.23.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/history/initiatives/visual-audio/visual-audio-phase7-campaign-coverage-v0.12.23.md).
 Phase 8 AI-agent testplay-readiness scope is documented in
-[`docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`](docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`](docs/history/initiatives/visual-audio/visual-audio-phase8-ai-agent-testplay-v0.12.24.md).
 Phase 9 AI-agent evaluation/revision scope is documented in
-[`docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`](docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`](docs/history/initiatives/visual-audio/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md).
 Phase 10 accessibility and visual-language scope is documented in
-[`docs/visual-audio-phase10-accessibility-v0.12.26.md`](docs/visual-audio-phase10-accessibility-v0.12.26.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase10-accessibility-v0.12.26.md`](docs/history/initiatives/visual-audio/visual-audio-phase10-accessibility-v0.12.26.md).
 Phase 11 first-session launch/load scope is documented in
-[`docs/visual-audio-phase11-session-launch-v0.12.27.md`](docs/visual-audio-phase11-session-launch-v0.12.27.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase11-session-launch-v0.12.27.md`](docs/history/initiatives/visual-audio/visual-audio-phase11-session-launch-v0.12.27.md).
 Phase 12 visual identity/marker scope is documented in
-[`docs/visual-audio-phase12-visual-identity-v0.12.28.md`](docs/visual-audio-phase12-visual-identity-v0.12.28.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase12-visual-identity-v0.12.28.md`](docs/history/initiatives/visual-audio/visual-audio-phase12-visual-identity-v0.12.28.md).
 Phase 13 first-month continuity scope is documented in
-[`docs/visual-audio-phase13-first-month-continuity-v0.12.29.md`](docs/visual-audio-phase13-first-month-continuity-v0.12.29.md).
+[`docs/history/initiatives/visual-audio/visual-audio-phase13-first-month-continuity-v0.12.29.md`](docs/history/initiatives/visual-audio/visual-audio-phase13-first-month-continuity-v0.12.29.md).
 The bounded first-month audit is documented in
-[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md).
+[`docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md`](docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md).
 The projection remains display-only, while the action catalog/validation tools
 and `get_resolution` are non-mutating; `submit_turn` remains the sole
 transition boundary. Generated audio playback and registry metadata remain
@@ -441,7 +441,7 @@ recommendations derived from each owning system's observation, explicit resolved
 inputs for outside arrivals and contested hires, and append-only records of
 payroll, advice, and employment changes. It must not expose hidden state,
 create a generic worker framework, or claim that advisor quality predicts
-outcomes. See `docs/expansion-proposal-review.md`.
+outcomes. See `docs/design/expansion-proposal-review.md`.
 
 Last Reviewed: 2026-07-09
 Status: Verified; future advisor-market boundary documented
@@ -533,9 +533,9 @@ Responsible for:
 - educational debrief hooks
 - explicit scenario non-goals and evidence gaps
 
-Current design artifacts include `docs/actor-cards.md`,
-`docs/first-scenario-brief.md`, `docs/competitive-scenario-brief.md`,
-`docs/core-loop-spec.md`, and `docs/gameplay-competitive-sketch.md`. Runtime
+Current design artifacts include `docs/design/actor-cards.md`,
+`docs/design/first-scenario-brief.md`, `docs/design/competitive-scenario-brief.md`,
+`docs/design/core-loop-spec.md`, and `docs/design/gameplay-competitive-sketch.md`. Runtime
 scenario loading is implemented for `stabilization-v1`,
 `competitive-regional-v1`, and `regional-affiliation-v1`; scenario migration
 tooling and broader authoring workflows remain deferred until a bounded slice
@@ -584,7 +584,7 @@ Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI
   tests are colocated with owning modules under `#[cfg(test)]`; a crate-root
   golden integration test lives in `tests/golden_seed42.rs`.
 - Ruleset and scenario versioning format: design draft at
-  `docs/scenario-format-draft.md`; the accepted runtime loader parses and validates
+  `docs/design/scenario-format-draft.md`; the accepted runtime loader parses and validates
   both stabilization and competitive scenario files.
 - Decision-record convention: **addressed** by
   `docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`.

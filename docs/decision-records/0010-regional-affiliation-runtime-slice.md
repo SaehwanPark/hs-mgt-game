@@ -100,7 +100,7 @@ deferred.
 
 ## Related Documents
 
-- [`docs/expansion-proposal-review.md`](../expansion-proposal-review.md)
-- [`docs/system-boundary.md`](../system-boundary.md)
-- [`docs/scenario-format-draft.md`](../scenario-format-draft.md)
+- [`docs/design/expansion-proposal-review.md`](../design/expansion-proposal-review.md)
+- [`docs/design/system-boundary.md`](../design/system-boundary.md)
+- [`docs/design/scenario-format-draft.md`](../design/scenario-format-draft.md)
 - [`docs/roadmap.md`](../roadmap.md)

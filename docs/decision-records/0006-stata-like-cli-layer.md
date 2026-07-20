@@ -24,7 +24,7 @@ violate ADR-0001 by entangling I/O with `transition()`.
    maps command strings to typed `PlayerCommand` values. Validation and
    simulation remain in `sim/` and `model/`.
 
-3. **Grammar.** `verb arg=value` per [`cli-command-grammar-draft.md`](../cli-command-grammar-draft.md).
+3. **Grammar.** `verb arg=value` per [`cli-command-grammar-draft.md`](../design/cli-command-grammar-draft.md).
    Meta commands (`help`, `quit`, `status`, `log`) handled in REPL, not passed
    to transition.
 
@@ -78,5 +78,5 @@ violate ADR-0001 by entangling I/O with `transition()`.
 ## Related Documents
 
 - [ADR-0001](0001-deterministic-transition-and-stochastic-input-boundary.md)
-- [`cli-command-grammar-draft.md`](../cli-command-grammar-draft.md)
+- [`cli-command-grammar-draft.md`](../design/cli-command-grammar-draft.md)
 - [`LESSONS.md`](../../LESSONS.md)

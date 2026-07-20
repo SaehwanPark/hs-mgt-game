@@ -51,7 +51,7 @@ code.
 
 - `scripts/audit_visual_audio_contract.py`: audit manifest and JSON projection.
 - `tests/test_visual_audio_contract_audit.py`: complete/fail-closed audit tests.
-- `docs/visual-audio-first-month-contract-v0.12.30.md`: evidence and limits.
+- `docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md`: evidence and limits.
 - `SPEC.md`, `README.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, `LESSONS.md`:
   closure and release alignment.
 - `Cargo.toml`, `Cargo.lock`, `tests/test_release_metadata.py`: patch version.

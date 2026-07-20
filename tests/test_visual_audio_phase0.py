@@ -3,7 +3,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ALIGNMENT = ROOT / "docs" / "visual-audio-phase0-alignment-v0.12.16.md"
+ALIGNMENT = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase0-alignment-v0.12.16.md"
 ADR = ROOT / "docs" / "decision-records" / "0011-browser-native-presentation-client.md"
 SPEC = ROOT / "SPEC.md"
 ARCHITECTURE = ROOT / "ARCHITECTURE.md"

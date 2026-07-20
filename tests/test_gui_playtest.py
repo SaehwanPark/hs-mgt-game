@@ -11,7 +11,7 @@ AUDIO = ROOT / "gui" / "audio.mjs"
 PLAYTEST = ROOT / "gui" / "playtest.mjs"
 HTML = ROOT / "gui" / "index.html"
 README = ROOT / "gui" / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase8-ai-agent-testplay-v0.12.24.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase8-ai-agent-testplay-v0.12.24.md"
 SCRIPT = ROOT / "scripts" / "diagnose_gui_playtests.py"
 FIXTURE = ROOT / "tests" / "fixtures" / "gui_playtest_capture.json"
 

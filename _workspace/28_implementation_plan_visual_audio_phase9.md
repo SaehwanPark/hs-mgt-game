@@ -51,7 +51,7 @@ technical proxies and human/domain evidence.
   aggregation, deterministic finding prioritization, and CLI output.
 - `tests/test_gui_playtest_analysis.py` and
   `tests/fixtures/gui_playtest_matrix/`: focused matrix contract tests/fixtures.
-- `docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`: protocol,
+- `docs/history/initiatives/visual-audio/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md`: protocol,
   findings, decision log, revision status, and evidence limits.
 - `README.md`, `gui/README.md`, `ARCHITECTURE.md`, `SPEC.md`, `CHANGELOG.md`,
   `LESSONS.md`, metadata, `_workspace/03_domain_qa.md`, and final handoff.

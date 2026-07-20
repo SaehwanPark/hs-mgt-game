@@ -38,7 +38,7 @@ SOURCE_MARKERS = {
     "No structural decision-to-debrief or source-context gap",
     "**Runtime promotion:** deferred",
   ],
-  "docs/playtest-findings-v0.12.3.md": [
+  "docs/history/playtests/v0.12/playtest-findings-v0.12.3.md": [
     "## Promotion decision",
     "No structural player-facing, instructor-facing, or domain-review gap",
     "Runtime promotion remains deferred.",

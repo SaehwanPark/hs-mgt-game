@@ -71,12 +71,12 @@ and controller assignment without breaking the stabilization demo.
 
 ## Verification
 
-- `docs/competitive-scenario-brief.md` and mechanism design align
+- `docs/design/competitive-scenario-brief.md` and mechanism design align
 - Stabilization `cargo test` golden hash unchanged until competitive code lands
 - Future: competitive genesis + 1-month replay test
 
 ## Related Documents
 
 - [ADR-0003](0003-simultaneous-monthly-player-actions.md)
-- [`system-boundary.md`](../system-boundary.md)
-- [`actor-cards.md`](../actor-cards.md) (AI player card)
+- [`system-boundary.md`](../design/system-boundary.md)
+- [`actor-cards.md`](../design/actor-cards.md) (AI player card)

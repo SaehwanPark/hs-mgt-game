@@ -9,8 +9,12 @@ class GuiDocumentationTests(unittest.TestCase):
   @classmethod
   def setUpClass(cls):
     cls.readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    cls.how_to = (ROOT / "docs" / "how-to-play.md").read_text(encoding="utf-8")
-    cls.gui = (ROOT / "docs" / "gui-how-to-play.md").read_text(encoding="utf-8")
+    cls.how_to = (ROOT / "docs" / "guides" / "how-to-play.md").read_text(
+      encoding="utf-8"
+    )
+    cls.gui = (ROOT / "docs" / "guides" / "gui-how-to-play.md").read_text(
+      encoding="utf-8"
+    )
     cls.gui_readme = (ROOT / "gui" / "README.md").read_text(encoding="utf-8")
 
   def test_quickstarts_agree_on_command_url_and_campaign(self):
@@ -41,10 +45,10 @@ class GuiDocumentationTests(unittest.TestCase):
       self.assertIn("demo", text.lower())
 
   def test_gui_guide_links_resolve(self):
-    self.assertTrue((ROOT / "docs" / "gui-how-to-play.md").is_file())
-    self.assertIn("docs/gui-how-to-play.md", self.readme)
+    self.assertTrue((ROOT / "docs" / "guides" / "gui-how-to-play.md").is_file())
+    self.assertIn("docs/guides/gui-how-to-play.md", self.readme)
     self.assertIn("gui-how-to-play.md", self.how_to)
-    self.assertIn("../docs/gui-how-to-play.md", self.gui_readme)
+    self.assertIn("../docs/guides/gui-how-to-play.md", self.gui_readme)
 
 
 if __name__ == "__main__":

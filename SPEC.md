@@ -12,7 +12,7 @@ Canonical product and domain direction lives in:
 - `docs/design_principles.md`
 - `docs/harness/health-policy-strategy-game/team-spec.md`
 
-Full per-slice completion history: [`docs/spec-past-archive.md`](docs/spec-past-archive.md)
+Full per-slice completion history: [`docs/history/archives/spec-past-archive.md`](docs/history/archives/spec-past-archive.md)
 
 ## Spec Maintenance Rule
 
@@ -241,7 +241,7 @@ reconstructing it from the diff.
   60-cash scale.
 
   Done:
-  - Extended `docs/expansion-proposal-review.md` with evidence limits, fixture
+  - Extended `docs/design/expansion-proposal-review.md` with evidence limits, fixture
     outcomes, a 24-month payroll sensitivity matrix, promotion conditions, and
     non-goals.
   - Documented future-only architecture, roadmap, scenario, command, evidence,
@@ -312,7 +312,7 @@ reconstructing it from the diff.
   - Extended live-capture diagnostics with optional rival-information signal
     counts for monitor intel, public rival lines, private activity gaps, and no
     public signal lines.
-  - Added `docs/playtest-findings-v0.10.37.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.37.md` and updated the MCP playtesting
     guide with the evidence-routing checkpoint.
   - Preserved runtime mechanics, command validation, stochastic inputs,
     scenarios, MCP DTOs, replay formats, state hashes, ruleset values,
@@ -352,7 +352,7 @@ reconstructing it from the diff.
   unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.36.md` with the design intent, tier
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.36.md` with the design intent, tier
     shape, promotion criteria, non-promotions, and evidence limits for rival
     information pressure.
   - Updated the MCP playtesting guide with a `v0.10.36` routing checkpoint.
@@ -398,7 +398,7 @@ reconstructing it from the diff.
   slice keeps runtime mechanics and balance unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.35.md` with the current difficulty
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.35.md` with the current difficulty
     surface, selected dimension, recommended next slice, non-promotions, and
     evidence limits.
   - Updated the MCP playtesting guide with a `v0.10.35` routing checkpoint.
@@ -446,7 +446,7 @@ reconstructing it from the diff.
   unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.34.md` with a facilitation sequence,
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.34.md` with a facilitation sequence,
     comparison prompts, routing guidance, and evidence limits.
   - Updated the MCP playtesting guide with a `v0.10.34` routing checkpoint.
   - Preserved runtime mechanics, command validation, stochastic inputs,
@@ -490,7 +490,7 @@ reconstructing it from the diff.
   slice keeps runtime mechanics and balance unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.33.md` with growth/capacity signals,
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.33.md` with growth/capacity signals,
     evidence reading, instructor prompts, routing guidance, and evidence limits.
   - Updated the MCP playtesting guide with a `v0.10.33` routing checkpoint.
   - Preserved runtime mechanics, command validation, stochastic inputs,
@@ -571,16 +571,16 @@ reconstructing it from the diff.
   client over the existing deterministic core.
 
   Done:
-  - Added `docs/expansion-proposal-review.md` with proposal-review posture,
+  - Added `docs/design/expansion-proposal-review.md` with proposal-review posture,
     source links, recommended gates, design implications, risks, and promotion
     rules.
   - Updated `docs/roadmap.md` with a Phase 7 expansion proposal review gate and
     Phase 9 routing for difficulty depth, regional consolidation, and GUI
     thin-client work.
   - Propagated future-boundary guidance into `ARCHITECTURE.md`,
-    `docs/design_principles.md`, `docs/competitive-scenario-brief.md`,
-    `docs/system-boundary.md`, `docs/scenario-format-draft.md`, and
-    `docs/evidence-registry.md`.
+    `docs/design_principles.md`, `docs/design/competitive-scenario-brief.md`,
+    `docs/design/system-boundary.md`, `docs/design/scenario-format-draft.md`, and
+    `docs/research/evidence-registry.md`.
   - Bumped package metadata to `0.10.31`.
 
   Deferred / Non-Goals:
@@ -613,7 +613,7 @@ reconstructing it from the diff.
   mechanics and balance unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.30.md` with workforce-protective
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.30.md` with workforce-protective
     signals, interpretation limits, instructor prompts, routing guidance, and
     evidence limits.
   - Updated the MCP playtesting guide with a `v0.10.30` routing checkpoint.
@@ -657,7 +657,7 @@ reconstructing it from the diff.
   traceability. The slice keeps runtime mechanics and balance unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.29.md` with a compact comparison table,
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.29.md` with a compact comparison table,
     strategy posture prompts, recommended use, follow-up routing, and evidence
     limits.
   - Updated the MCP playtesting guide with a `v0.10.29` routing checkpoint.
@@ -699,7 +699,7 @@ reconstructing it from the diff.
   unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.28.md` with cross-run strategy-space
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.28.md` with cross-run strategy-space
     signals, interpretation limits, follow-up routing, and evidence limits.
   - Updated the MCP playtesting guide with a `v0.10.28` routing checkpoint.
   - Preserved runtime mechanics, command validation, stochastic inputs,
@@ -741,7 +741,7 @@ reconstructing it from the diff.
   quality. The slice keeps runtime mechanics and balance unchanged.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.27.md` with prompts for public
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.27.md` with prompts for public
     commitments, cash runway, workforce follow-through, payer posture, rival
     pressure, and repeated-play comparison.
   - Updated the MCP playtesting guide with a `v0.10.27` routing checkpoint.
@@ -781,7 +781,7 @@ reconstructing it from the diff.
   routing checkpoint without reopening runtime tuning.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.26.md` comparing the recent live
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.26.md` comparing the recent live
     difficulty, live-capture, access comprehension, and access evidence
     synthesis findings.
   - Updated the MCP playtesting guide with a `v0.10.26` routing checkpoint.
@@ -821,7 +821,7 @@ reconstructing it from the diff.
   mechanics finding.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.25.md` summarizing the live-capture
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.25.md` summarizing the live-capture
     synthesis, access comprehension review, debrief wording slice, and bounded
     trigger/control validation.
   - Updated the MCP playtesting guide with a `v0.10.25` routing checkpoint.
@@ -866,7 +866,7 @@ reconstructing it from the diff.
     under-followed repeated access pledges, a single-pledge low-cash control,
     and a repeated-pledge followed-through control.
   - Documented the validation results and evidence limits in
-    `docs/playtest-findings-v0.10.24.md`.
+    `docs/history/playtests/v0.10/playtest-findings-v0.10.24.md`.
   - Updated the MCP playtesting guide and bumped package metadata to `0.10.24`.
 
   Deferred / Non-Goals:
@@ -937,7 +937,7 @@ reconstructing it from the diff.
   runtime tuning.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.22.md` comparing the Live Access
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.22.md` comparing the Live Access
     Operator Normal and Hard runs, access pledge counts, live retry counts,
     cash-overrun retries, final tradeoff metrics, and debrief visibility.
   - Updated the MCP playtesting guide with the v0.10.22 routing note.
@@ -978,7 +978,7 @@ reconstructing it from the diff.
   follow-through under cash pressure.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.21.md` summarizing the live evidence
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.21.md` summarizing the live evidence
     matrix, retry-visibility interpretation, evidence limits, and recommended
     next gate.
   - Updated the MCP playtesting guide with the v0.10.21 routing note.
@@ -1021,7 +1021,7 @@ reconstructing it from the diff.
   legacy fallback.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.20.md` summarizing the v0.10.17-v0.10.19
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.20.md` summarizing the v0.10.17-v0.10.19
     retry visibility path and its limits.
   - Updated the MCP playtesting guide with the v0.10.20 routing note.
   - Kept runtime tuning, command-cost changes, access-pledge cooldowns, and
@@ -1068,7 +1068,7 @@ reconstructing it from the diff.
     legacy string-only artifact entries.
   - Refreshed the `v0.10.15` live difficulty-gate exemplar retry metadata and
     regenerated its diagnostic report.
-  - Added `docs/playtest-findings-v0.10.19.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.19.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.19`.
 
@@ -1110,7 +1110,7 @@ reconstructing it from the diff.
     and insufficient political capital.
   - Added focused MCP session tests for cash-overrun structure, code-only
     validation errors, parser-error plain shape, and non-advancement.
-  - Added `docs/playtest-findings-v0.10.18.md` and updated MCP docs.
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.18.md` and updated MCP docs.
   - Bumped package metadata to `0.10.18`.
 
   Deferred / Non-Goals:
@@ -1146,8 +1146,8 @@ reconstructing it from the diff.
     compact diagnostic check.
   - Regenerated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
     with a `Live Retry Signals` table.
-  - Added `docs/playtest-findings-v0.10.17.md` and updated
-    `docs/mcp-playtesting-guide.md`.
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.17.md` and updated
+    `docs/guides/mcp-playtesting-guide.md`.
   - Bumped package metadata to `0.10.17`.
 
   Deferred / Non-Goals:
@@ -1180,7 +1180,7 @@ reconstructing it from the diff.
   any runtime tuning.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.16.md`.
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.16.md`.
   - Synthesized session counts, seeds, difficulty tiers, profile families,
     validation failures/retries, access-heavy behavior, and evidence limits
     across `v0.10.12` through `v0.10.15`.
@@ -1226,7 +1226,7 @@ reconstructing it from the diff.
     did not complete.
   - Generated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/results.json`
     and `diagnostics.md`.
-  - Added `docs/playtest-findings-v0.10.15.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.15.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.15`.
 
@@ -1267,7 +1267,7 @@ reconstructing it from the diff.
     validation failures.
   - Generated `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/results.json`
     and `diagnostics.md`.
-  - Added `docs/playtest-findings-v0.10.14.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.14.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.14`.
 
@@ -1310,7 +1310,7 @@ reconstructing it from the diff.
     validation failures.
   - Generated `_workspace/experiments/v0.10.13-live-static-adaptive-capture/results.json`
     and `diagnostics.md`.
-  - Added `docs/playtest-findings-v0.10.13.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.13.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.13`.
 
@@ -1351,7 +1351,7 @@ reconstructing it from the diff.
     validation failures.
   - Generated `_workspace/experiments/v0.10.12-live-difficulty-pressure/results.json`
     and `diagnostics.md`.
-  - Added `docs/playtest-findings-v0.10.12.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.12.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.12`.
 
@@ -1392,7 +1392,7 @@ reconstructing it from the diff.
     validation failures.
   - Generated `_workspace/experiments/v0.10.11-live-capture-matrix/results.json`
     and `diagnostics.md`.
-  - Added `docs/playtest-findings-v0.10.11.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.11.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.11`.
 
@@ -1433,7 +1433,7 @@ reconstructing it from the diff.
   - Added a compact live-capture fixture under `tests/fixtures/`.
   - Generated `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`
     from the v0.10.9 capture artifact.
-  - Added `docs/playtest-findings-v0.10.10.md` and updated the MCP playtesting
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.10.md` and updated the MCP playtesting
     guide.
   - Bumped package metadata to `0.10.10`.
 
@@ -1473,7 +1473,7 @@ reconstructing it from the diff.
     existing caller behavior.
   - Captured three deterministic persona-policy runs for Hard competitive play
     at seed `42`, all completing 24 months with zero validation failures.
-  - Added `docs/playtest-findings-v0.10.9.md` and replay artifacts under
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.9.md` and replay artifacts under
     `_workspace/experiments/v0.10.9-live-mcp-capture/`.
   - Bumped package metadata to `0.10.9`.
 
@@ -1539,7 +1539,7 @@ reconstructing it from the diff.
     at seed `42`.
   - Replayed the accepted command sequences through the MCP harness with zero
     validation failures across three completed 24-month sessions.
-  - Added `docs/playtest-findings-v0.10.7.md` and replay artifacts under
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.7.md` and replay artifacts under
     `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/`.
   - Bumped package metadata to `0.10.7`.
 
@@ -1603,7 +1603,7 @@ reconstructing it from the diff.
   runs or changing runtime behavior.
 
   Done:
-  - Added `docs/playtest-findings-v0.10.5.md` with source matrix, synthesis
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.5.md` with source matrix, synthesis
     findings, evidence limits, and next evidence gate.
   - Updated the MCP playtesting guide to point access-pledge follow-up work to
     the v0.10.5 synthesis.
@@ -1644,7 +1644,7 @@ reconstructing it from the diff.
   - Ran 18 Hard competitive sessions: three free-form profiles, three seeds,
     and two policy variants, with zero validation failures across 24 months
     each.
-  - Added `docs/playtest-findings-v0.10.4.md` with command totals, endpoint
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.4.md` with command totals, endpoint
     comparison, hypotheses, evidence limits, and follow-up routing.
   - Added `_workspace/experiments/v0.10.4-post-guidance-validation/` operator
     capture script and generated JSON artifact.
@@ -1713,7 +1713,7 @@ reconstructing it from the diff.
   Done:
   - Ran 27 Hard competitive sessions: three free-form profiles, three seeds, and
     three policy variants, with zero validation failures across 24 months each.
-  - Added `docs/playtest-findings-v0.10.2.md` with variant definitions, command
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.2.md` with variant definitions, command
     totals, endpoint comparison, evidence limits, and follow-up routing.
   - Added `_workspace/experiments/v0.10.2-access-loop-diagnostic/` operator
     capture script and generated JSON artifact.
@@ -1750,7 +1750,7 @@ reconstructing it from the diff.
   - Ran three free-form profiles (Fiscal Steward, Access Expansion Advocate,
     First-Time Executive) at Hard difficulty across seeds 42, 43, and 44, with
     zero validation failures across 24 months each.
-  - Added `docs/playtest-findings-v0.10.1.md` with session matrix, outcome
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.1.md` with session matrix, outcome
     table, action-frequency signals, evidence limits, and follow-up routing.
   - Added `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/`
     operator capture script and generated JSON artifact.
@@ -1789,7 +1789,7 @@ reconstructing it from the diff.
   - Ran three free-form profiles (Fiscal Steward, Access Expansion Advocate,
     First-Time Executive) at Hard difficulty, seed 42, with zero validation
     failures across 24 months each.
-  - Added `docs/playtest-findings-v0.10.0.md` with session matrix, outcome
+  - Added `docs/history/playtests/v0.10/playtest-findings-v0.10.0.md` with session matrix, outcome
     comparison vs v0.9.9 adaptive Hard baselines, evidence limits, and
     follow-up routing.
   - Updated the MCP playtesting guide with the free-form Hard competitive
@@ -1827,7 +1827,7 @@ reconstructing it from the diff.
     with `adapt_command` and `with_difficulty` policy wrappers.
   - Extended `scripts/diagnose_runs.py` with difficulty-adaptive action-frequency
     comparison notes for batch artifacts.
-  - Added `docs/playtest-findings-v0.9.9.md` documenting the completed targeted
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.9.md` documenting the completed targeted
     batch, evidence limits, and follow-up routing.
   - Updated the MCP playtesting guide with the difficulty-adaptive target.
   - Bumped package metadata to `0.9.9`.
@@ -1861,7 +1861,7 @@ reconstructing it from the diff.
     while preserving the default baseline batch.
   - Extended `scripts/diagnose_runs.py` with per-difficulty and
     profile-by-difficulty outcome tables for batch artifacts.
-  - Added `docs/playtest-findings-v0.9.8.md` documenting the completed targeted
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.8.md` documenting the completed targeted
     batch, evidence limits, and follow-up routing.
   - Updated the MCP playtesting guide with the difficulty-sweep target.
   - Bumped package metadata to `0.9.8`.
@@ -1898,7 +1898,7 @@ reconstructing it from the diff.
     seeds `42`, `43`, and `44`.
   - Extended `scripts/diagnose_runs.py` to report project-command counts,
     project kinds, final active projects, and final monthly draws.
-  - Added `docs/playtest-findings-v0.9.7.md` documenting the completed targeted
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.7.md` documenting the completed targeted
     batch, evidence limits, and follow-up routing.
   - Updated the MCP playtesting guide with the target command.
   - Recorded a project-command concurrency lesson in `LESSONS.md`.
@@ -1932,7 +1932,7 @@ reconstructing it from the diff.
   Done:
   - Updated the competitive branches of the four scripted policies in
     `scripts/run_automated_playtests.py`.
-  - Added `docs/playtest-findings-v0.9.6.md` documenting the completed batch,
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.6.md` documenting the completed batch,
     action-frequency diagnostics, evidence limits, and follow-up routing.
   - Updated the MCP playtesting guide with the v0.9.6 artifact commands and
     coverage description.
@@ -1969,7 +1969,7 @@ reconstructing it from the diff.
     `scripts/run_automated_playtests.py`.
   - Extended `scripts/diagnose_runs.py` to accept automated playtest batch JSON
     in addition to existing competitive replay JSON.
-  - Added `docs/playtest-findings-v0.9.5.md` documenting strategy-space
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.5.md` documenting strategy-space
     diagnostic results, evidence limits, and follow-up routing.
   - Updated the MCP playtesting guide with the JSON artifact and diagnostic
     commands.
@@ -2001,7 +2001,7 @@ reconstructing it from the diff.
   limits explicit.
 
   Done:
-  - Added `docs/playtest-findings-v0.9.4.md` with session matrix, metric
+  - Added `docs/history/playtests/v0.9/playtest-findings-v0.9.4.md` with session matrix, metric
     ranges, representative hashes, rubric scores, evidence limits, and
     follow-up recommendations.
   - Verified 12 stabilization and 12 competitive scripted MCP sessions
@@ -2145,7 +2145,7 @@ reconstructing it from the diff.
   Aligned project documentation with implemented 24-month campaign loop, autosave/resume, scenario loading, and new service line features.
 
   Done:
-  - Updated `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/how-to-play.md`, `docs/versioning-policy.md`, `docs/core-loop-spec.md`, `docs/system-boundary.md`, `docs/competitive-scenario-brief.md`, `docs/first-scenario-brief.md`, and `docs/agent-playtest-protocol.md` to remove outdated "three-month" and "deferred" statements.
+  - Updated `README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/guides/how-to-play.md`, `docs/reference/versioning-policy.md`, `docs/design/core-loop-spec.md`, `docs/design/system-boundary.md`, `docs/design/competitive-scenario-brief.md`, `docs/design/first-scenario-brief.md`, and `docs/validation/playtesting.md` to remove outdated "three-month" and "deferred" statements.
   - Bumped Cargo package version to `0.8.2`.
 
   Deferred / Non-Goals:
@@ -2421,10 +2421,10 @@ reconstructing it from the diff.
   Version: 0.5.1
 
   Summary:
-  Aligned versioning policy documentation in docs/versioning-policy.md and version history in CHANGELOG.md with the repository rules (0.0.1 bump per PR/PR-equivalent change, 0.1 minor bump for major features/milestones with lower digits reset).
+  Aligned versioning policy documentation in docs/reference/versioning-policy.md and version history in CHANGELOG.md with the repository rules (0.0.1 bump per PR/PR-equivalent change, 0.1 minor bump for major features/milestones with lower digits reset).
 
   Done:
-  - Updated docs/versioning-policy.md to specify the exact semver bump rules.
+  - Updated docs/reference/versioning-policy.md to specify the exact semver bump rules.
   - Documented release notes for v0.5.0 and v0.5.1 in CHANGELOG.md.
   - Bumped Cargo.toml and Cargo.lock package version to v0.5.1.
 
@@ -3390,7 +3390,7 @@ reconstructing it from the diff.
   - Confirmed 15/15 Expert runs completed the 24-month campaign with zero
     validation failures.
   - Added focused Python artifact-contract tests and recorded findings in
-    `docs/playtest-findings-v0.11.9.md`.
+    `docs/history/playtests/v0.11/playtest-findings-v0.11.9.md`.
   Deferred / Non-Goals:
   - No runtime mechanics, difficulty values, scoring, balance, scenario,
     ruleset, replay, MCP schema, or state-hash changes.
@@ -3435,7 +3435,7 @@ reconstructing it from the diff.
   - Recorded ten distinct command trajectories, varied operating bottlenecks,
     and no candidate common or near-dominant first-month action.
   - Preserved runtime promotion deferral and recorded findings in
-    `docs/playtest-findings-v0.11.11.md`.
+    `docs/history/playtests/v0.11/playtest-findings-v0.11.11.md`.
   Deferred / Non-Goals:
   - No runtime mechanics, difficulty values, AI scoring, balance, scenario,
     ruleset, replay, MCP schema, or state-hash changes.
@@ -3458,7 +3458,7 @@ reconstructing it from the diff.
     three profiles and seeds 42, 43, and 44.
   - Preserved the Normal seed-42 hold-control hash and excluded rival operating
     events from player-owned evidence.
-  - Recorded findings in `docs/playtest-findings-v0.11.12.md` and retained
+  - Recorded findings in `docs/history/playtests/v0.11/playtest-findings-v0.11.12.md` and retained
     deferred runtime promotion.
   Deferred / Non-Goals:
   - No runtime mechanics, difficulty values, AI scoring, balance, scenario,
@@ -3963,7 +3963,7 @@ reconstructing it from the diff.
     changelog heading.
   - Added focused tests for the current repository, valid modified-semver
     shape, projection mismatch, and invalid package version.
-  - Documented local usage in `docs/contributor-release-check.md` and README,
+  - Documented local usage in `docs/guides/contributor-release-check.md` and README,
     and added the command to `.github/workflows/ci.yml`.
   - Removed the release automation and contributor-readiness item from the
     Future queue while preserving publication, licensing, deployment, and
@@ -4481,18 +4481,48 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   - No human usability, lived accessibility, learning, calibration, policy, or
     domain-expert claim.
 
+### Contributor documentation information architecture (v0.12.32)
+
+- Status: Closed; implementation and verification complete
+- Started: 2026-07-20
+- Branch: `codex/docs-information-architecture`
+
+  Done:
+  - Added equal software, design/research, and validation routes from one
+    `docs/README.md` landing page while preserving the canonical proposal,
+    roadmap, design-principles, and harness paths.
+  - Moved current guidance into purpose-based directories and all 85 playtest
+    plus 15 visual/audio evidence records into indexed history cohorts without
+    changing their conclusions.
+  - Consolidated current AI-agent guidance and reusable historical human-session
+    guidance into one active validation protocol.
+  - Added a dependency-free CI check for broken repository-local Markdown links
+    and machine-local filesystem paths.
+
+  Verification:
+  - Exactly four Markdown files remain at the `docs/` root; the checker passes
+    across 258 Markdown files; release metadata and the 14-phase visual/audio
+    contract audit pass.
+  - All 318 Python tests pass with the bundled Python/Node runtimes.
+  - Rust formatting, Clippy, 328 library tests, and all integration, golden,
+    scenario-selection, and doc-test targets pass.
+
+  Deferred / Non-Goals:
+  - No runtime, simulation, scenario, command, stochastic, history/hash/replay,
+    debrief, GUI, calibration, policy-validity, or research-conclusion change.
+  - No redirect stubs for old external document URLs.
+
 ## Present
 
-No active visual/audio implementation slice. v0.12.31 closed the source-backed
-browser-transport gap with a loopback-only competitive GUI host and exact player
-documentation. Human and educational evaluation remain separately gated Future
-work.
+No active documentation or visual/audio implementation slice. v0.12.32 closes
+the contributor documentation information-architecture refactor. Human and
+educational evaluation remain separately gated Future work.
 
 ## Future
 
 ### Visual and audio experience upgrade
 
-Source: [`docs/visual_audio_upgrade_proposal.md`](docs/visual_audio_upgrade_proposal.md)
+Source: [`docs/history/initiatives/visual-audio/visual-audio-upgrade-proposal.md`](docs/history/initiatives/visual-audio/visual-audio-upgrade-proposal.md)
 Status: Bounded technical sequence closed at v0.12.30 and local competitive
 transport repaired at v0.12.31; human evaluation and explicit non-goals remain
 separately gated Future work.
@@ -4520,7 +4550,7 @@ prototype or Phase 6–10 documents exist.
 - The browser-native presentation stack, host/MCP authority boundary, one-month
   competitive experience, current actor-visible source inventory, preliminary
   wireframe, audio catalog, asset policy, and hidden-state exclusions are
-  recorded in `docs/visual-audio-phase0-alignment-v0.12.16.md`.
+  recorded in `docs/history/initiatives/visual-audio/visual-audio-phase0-alignment-v0.12.16.md`.
 - ADR-0011 accepts semantic HTML/CSS/ES modules plus native SVG for the initial
   client and keeps optional future audio playback outside the simulation core.
 - Phase 0 acceptance does not promote structured DTOs, live actions, animation,
@@ -4570,7 +4600,7 @@ prototype or Phase 6–10 documents exist.
   `submit_turn` remain authoritative. No local formula or GUI-only command was
   added.
 - Phase 3 is documented in
-  [`docs/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/visual-audio-phase3-contextual-actions-v0.12.19.md).
+  [`docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md`](docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md).
   Static contracts and Rust tests are technical evidence only; no human
   usability, accessibility, learning, calibration, or policy-validity claim
   follows.
@@ -4592,7 +4622,7 @@ prototype or Phase 6–10 documents exist.
   play/pause/skip/review pacing, historical loading, state-hash display, and
   reduced-motion behavior without mutating the session.
 - Phase 4 is documented in
-  [`docs/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/visual-audio-phase4-resolution-causal-v0.12.20.md).
+  [`docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md`](docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md).
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
@@ -4613,7 +4643,7 @@ prototype or Phase 6–10 documents exist.
   and the absence of third-party audio files. Recording-sink tests verify cue
   IDs/source/equivalent without loading assets.
 - Phase 5 is documented in
-  [`docs/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/visual-audio-phase5-foundational-audio-v0.12.21.md).
+  [`docs/history/initiatives/visual-audio/visual-audio-phase5-foundational-audio-v0.12.21.md`](docs/history/initiatives/visual-audio/visual-audio-phase5-foundational-audio-v0.12.21.md).
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
@@ -4635,7 +4665,7 @@ prototype or Phase 6–10 documents exist.
   timeline surfaces. Empty, unsupported, and adapter-error paths preserve the
   base presentation and do not submit commands.
 - Phase 6 is documented in
-  [`docs/visual-audio-phase6-regional-world-v0.12.22.md`](docs/visual-audio-phase6-regional-world-v0.12.22.md).
+  [`docs/history/initiatives/visual-audio/visual-audio-phase6-regional-world-v0.12.22.md`](docs/history/initiatives/visual-audio/visual-audio-phase6-regional-world-v0.12.22.md).
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, or policy validity.
@@ -4658,7 +4688,7 @@ prototype or Phase 6–10 documents exist.
   affiliation milestone events; audio remains optional and outside state,
   history, hashes, replay, and transitions.
 - Phase 7 is documented in
-  [`docs/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/visual-audio-phase7-campaign-coverage-v0.12.23.md).
+  [`docs/history/initiatives/visual-audio/visual-audio-phase7-campaign-coverage-v0.12.23.md`](docs/history/initiatives/visual-audio/visual-audio-phase7-campaign-coverage-v0.12.23.md).
   Technical/interface-task checks do not establish human comprehension,
   usability, lived accessibility, learning, engagement, calibration, balance,
   domain validity, policy validity, or legal validity.
@@ -4818,7 +4848,7 @@ prototype or Phase 6–10 documents exist.
 Phase 7 is closed only for the bounded stabilization and affiliation coverage
 slice; broad campaign, map, and asset production remain explicit non-goals. The
 audit at
-[`docs/visual-audio-first-month-contract-v0.12.30.md`](docs/visual-audio-first-month-contract-v0.12.30.md)
+[`docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md`](docs/history/initiatives/visual-audio/visual-audio-first-month-contract-v0.12.30.md)
 closes the technical Phase 0–13 sequence with source/test evidence. Human and
 educational evaluation remain separately gated and are not implied by this
 closure.

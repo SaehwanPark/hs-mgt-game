@@ -83,7 +83,7 @@ adding a broader causal abstraction.
   and reduced-motion presentation styles.
 - `gui/README.md`: Phase 4 adapter contract and review checklist.
 - `tests/test_gui_resolution.py`: static browser/adapter/source-boundary tests.
-- `docs/visual-audio-phase4-resolution-causal-v0.12.20.md`: contract, source
+- `docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md`: contract, source
   map, user checklist, evidence limits, and Phase 5 gate.
 - `SPEC.md`, `ARCHITECTURE.md`, `README.md`, `CHANGELOG.md`, `LESSONS.md`,
   `_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`,

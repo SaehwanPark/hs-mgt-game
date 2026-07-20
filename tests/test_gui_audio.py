@@ -11,7 +11,7 @@ HTML = ROOT / "gui" / "index.html"
 README = ROOT / "gui" / "README.md"
 REGISTRY = ROOT / "gui" / "audio-catalog.json"
 CREDITS = ROOT / "gui" / "ASSET_CREDITS.md"
-DOC = ROOT / "docs" / "visual-audio-phase5-foundational-audio-v0.12.21.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase5-foundational-audio-v0.12.21.md"
 
 
 class GuiAudioTests(unittest.TestCase):

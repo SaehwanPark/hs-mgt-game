@@ -10,7 +10,7 @@ README = ROOT / "gui" / "README.md"
 PRESENTATION = ROOT / "src" / "mcp" / "presentation.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 SERVER = ROOT / "src" / "mcp" / "server.rs"
-DOC = ROOT / "docs" / "visual-audio-phase2-live-read-only-v0.12.18.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase2-live-read-only-v0.12.18.md"
 
 
 class GuiLiveReadOnlyTests(unittest.TestCase):

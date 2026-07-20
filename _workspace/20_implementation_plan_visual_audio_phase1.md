@@ -62,7 +62,7 @@ adapter, dependency, or simulation-facing API.
   `renderPresentation`, and selection-only client state; preserve
   `renderEnvelope`, `validateCommand`, and `createThinClient` behavior.
 - `gui/README.md`: describe the static desktop fixture and Phase 1 review scope.
-- `docs/visual-audio-phase1-static-desktop-v0.12.17.md`: experience contract,
+- `docs/history/initiatives/visual-audio/visual-audio-phase1-static-desktop-v0.12.17.md`: experience contract,
   fixture mapping, checklist, limitations, and exit evidence.
 - `tests/test_gui_static_desktop.py`: Phase 1 source contract tests.
 - `SPEC.md`, `README.md`, `CHANGELOG.md`, `Cargo.toml`, `Cargo.lock`,

@@ -9,7 +9,7 @@ in the owning source boundaries.
 
 ## Files
 
-- `docs/affiliation-runtime-boundary-v0.12.7.md`: durable proposal decision and
+- `docs/history/milestones/affiliation-runtime-boundary-v0.12.7.md`: durable proposal decision and
   limits.
 - `_workspace/experiments/v0.12.7-affiliation-runtime-boundary-proposal/`:
   source-marker and evidence-contract artifact.

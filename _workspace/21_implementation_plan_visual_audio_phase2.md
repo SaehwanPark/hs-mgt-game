@@ -7,7 +7,7 @@ Branch: `feat/visual-audio-phase2-live-read-only-v0.12.18`
 ## User request and context
 
 Continue the visual/audio Future track from `SPEC.md` and
-`docs/visual_audio_upgrade_proposal.md` using the preferred workflow. Phase 0
+`docs/history/initiatives/visual-audio/visual-audio-upgrade-proposal.md` using the preferred workflow. Phase 0
 accepted the host-authoritative browser boundary and Phase 1 validated the
 fixture-driven executive information architecture. Phase 2 should render a
 real or recorded competitive session through a typed read-only presentation
@@ -83,7 +83,7 @@ browser, expose resolved stochastic inputs, or create a second simulation.
    - Add Python/Node contract coverage for the typed browser adapter, mapping,
      loading/error/empty states, read-only non-submission, and no-network/no-
      asset behavior.
-   - Add `docs/visual-audio-phase2-live-read-only-v0.12.18.md` with the contract,
+   - Add `docs/history/initiatives/visual-audio/visual-audio-phase2-live-read-only-v0.12.18.md` with the contract,
      source map, boundary, checklist, limitations, and Phase 3 gate.
 
 5. Project records

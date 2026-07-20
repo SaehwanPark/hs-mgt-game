@@ -57,7 +57,7 @@ simulation behavior.
   evidence classification.
 - `tests/test_gui_playtest.py`, `tests/fixtures/gui_playtest_capture.json`:
   focused contract and diagnostic tests.
-- `docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`, `SPEC.md`,
+- `docs/history/initiatives/visual-audio/visual-audio-phase8-ai-agent-testplay-v0.12.24.md`, `SPEC.md`,
   `ARCHITECTURE.md`, `README.md`, `CHANGELOG.md`, `LESSONS.md`, metadata, QA,
   and handoff records.
 

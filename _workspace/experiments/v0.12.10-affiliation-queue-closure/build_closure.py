@@ -15,7 +15,7 @@ PROPOSAL_PATH = (
 )
 
 SOURCE_MARKERS = {
-  "docs/affiliation-runtime-boundary-v0.12.7.md": [
+  "docs/history/milestones/affiliation-runtime-boundary-v0.12.7.md": [
     "The existing opt-in `regional-affiliation-v1` runtime already satisfies",
     "True state:",
     "Actor observation:",

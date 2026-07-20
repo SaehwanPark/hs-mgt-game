@@ -9,20 +9,20 @@ from pathlib import Path
 CONTRACT_SCHEMA = "visual-audio-first-month-contract-v1"
 PHASE_DOCUMENTS = tuple(
   [
-    "docs/visual-audio-phase0-alignment-v0.12.16.md",
-    "docs/visual-audio-phase1-static-desktop-v0.12.17.md",
-    "docs/visual-audio-phase2-live-read-only-v0.12.18.md",
-    "docs/visual-audio-phase3-contextual-actions-v0.12.19.md",
-    "docs/visual-audio-phase4-resolution-causal-v0.12.20.md",
-    "docs/visual-audio-phase5-foundational-audio-v0.12.21.md",
-    "docs/visual-audio-phase6-regional-world-v0.12.22.md",
-    "docs/visual-audio-phase7-campaign-coverage-v0.12.23.md",
-    "docs/visual-audio-phase8-ai-agent-testplay-v0.12.24.md",
-    "docs/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md",
-    "docs/visual-audio-phase10-accessibility-v0.12.26.md",
-    "docs/visual-audio-phase11-session-launch-v0.12.27.md",
-    "docs/visual-audio-phase12-visual-identity-v0.12.28.md",
-    "docs/visual-audio-phase13-first-month-continuity-v0.12.29.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase0-alignment-v0.12.16.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase1-static-desktop-v0.12.17.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase2-live-read-only-v0.12.18.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase3-contextual-actions-v0.12.19.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase5-foundational-audio-v0.12.21.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase6-regional-world-v0.12.22.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase7-campaign-coverage-v0.12.23.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase8-ai-agent-testplay-v0.12.24.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase9-ai-agent-evaluation-v0.12.25.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase10-accessibility-v0.12.26.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase11-session-launch-v0.12.27.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase12-visual-identity-v0.12.28.md",
+    "docs/history/initiatives/visual-audio/visual-audio-phase13-first-month-continuity-v0.12.29.md",
   ]
 )
 PROVENANCE_FILES = (

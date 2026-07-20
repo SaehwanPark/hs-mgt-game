@@ -10,7 +10,7 @@ queue-closure artifact and remove the completed item from `SPEC.md` Future.
 - `_workspace/experiments/v0.12.8-teachability-queue-closure/`: rerunnable
   source-audit and closure artifact.
 - `tests/test_teachability_queue_closure.py`: focused closure-contract tests.
-- `docs/teachability-validation-queue-closure-v0.12.8.md`: durable decision and
+- `docs/history/milestones/teachability-validation-queue-closure-v0.12.8.md`: durable decision and
   reopening condition.
 - `SPEC.md`, canonical docs, and `LESSONS.md`: record the completed queue item.
 

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.32] - 2026-07-20
+
+- Added a contributor documentation index with equal software, game/domain
+  design, and validation entry paths.
+- Moved current guidance into purpose-based directories and preserved 85
+  playtest reports plus 15 visual/audio records under indexed history cohorts.
+- Consolidated active agent-playtest guidance and reusable historical human
+  facilitation safeguards into one current protocol.
+- Added a dependency-free documentation-link check to CI and removed
+  machine-local links from tracked Markdown.
+- Bumped package/public metadata to `0.12.32`; runtime, simulation, scenario,
+  replay, and evidence conclusions remain unchanged.
+
 ## [0.12.31] - 2026-07-15
 
 - Added `hs-mgt-game-gui`, a loopback-only local host that serves the browser
@@ -61,7 +74,7 @@
 
 All notable project changes should be recorded here.
 
-The project follows the versioning policy defined in [`docs/versioning-policy.md`](docs/versioning-policy.md).
+The project follows the versioning policy defined in [`docs/reference/versioning-policy.md`](docs/reference/versioning-policy.md).
 
 ## [0.12.26] - 2026-07-15
 
@@ -1201,7 +1214,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 - Added paired Hard/Expert live MCP capture evidence comparing monitored and
   unmonitored rival-information policies at seed `42`.
-- Added `docs/playtest-findings-v0.10.37.md` documenting monitor-value evidence
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.37.md` documenting monitor-value evidence
   and limits.
 - Added optional rival-information signal counts to live-capture diagnostics.
 
@@ -1213,7 +1226,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.36] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.36.md`, a Phase 7 design note defining
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.36.md`, a Phase 7 design note defining
   rival information delay, monitor value, and public disclosure as the bounded
   difficulty pressure surface to test before runtime tuning.
 
@@ -1226,7 +1239,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.35] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.35.md`, a Phase 7 difficulty pressure
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.35.md`, a Phase 7 difficulty pressure
   dimension gate selecting rival information and monitoring pressure visibility
   as the next bounded difficulty surface to design or test.
 
@@ -1239,7 +1252,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.34] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.34.md`, a Phase 7 instructor debrief
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.34.md`, a Phase 7 instructor debrief
   facilitation note connecting recent comparison, workforce-protective, and
   growth/capacity evidence into repeated-run discussion prompts.
 
@@ -1252,7 +1265,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.33] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.33.md`, a Phase 7 focused evidence
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.33.md`, a Phase 7 focused evidence
   review for interpreting growth/capacity-oriented competitive play across
   existing simulated-agent, deterministic-policy, reviewer-policy, and
   operator-authored artifacts.
@@ -1274,7 +1287,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.31] - 2026-07-09
 
 ### Added
-- Added `docs/expansion-proposal-review.md`, a Phase 7 proposal-review artifact
+- Added `docs/design/expansion-proposal-review.md`, a Phase 7 proposal-review artifact
   for richer Capitalism-style difficulty tiers, a regional healthcare
   affiliation/acquisition slice, and a GUI thin client over the existing core.
 
@@ -1287,7 +1300,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.30] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.30.md`, a Phase 7 focused evidence
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.30.md`, a Phase 7 focused evidence
   review for interpreting workforce-protective competitive play across existing
   simulated-agent, deterministic-policy, reviewer-policy, and operator-authored
   artifacts.
@@ -1303,7 +1316,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.29] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.29.md`, a Phase 7 debrief comparison
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.29.md`, a Phase 7 debrief comparison
   surface for comparing decision quality, outcome quality, cash runway,
   durable follow-through, rival pressure, and debrief traceability across
   repeated competitive runs.
@@ -1318,7 +1331,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.28] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.28.md`, a Phase 7 strategy-space
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.28.md`, a Phase 7 strategy-space
   synthesis comparing finance-first, access-heavy, workforce-protective, and
   growth-oriented signals across existing competitive evidence.
 
@@ -1331,7 +1344,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.27] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.27.md`, a Phase 7 instructor-facing
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.27.md`, a Phase 7 instructor-facing
   comparison note for discussing decision quality versus outcome quality across
   existing competitive evidence.
 
@@ -1344,7 +1357,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.26] - 2026-07-09
 
 ### Added
-- Added `docs/playtest-findings-v0.10.26.md`, a Phase 7 synthesis comparing
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.26.md`, a Phase 7 synthesis comparing
   recent competitive playtest findings for teachability, debrief coherence, and
   repeated-play interest.
 
@@ -1357,7 +1370,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.25] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.25.md`, a Phase 7 synthesis of the
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.25.md`, a Phase 7 synthesis of the
   access-heavy evidence chain from `v0.10.21` through `v0.10.24`.
 
 ### Changed
@@ -1371,7 +1384,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 - Added bounded MCP trigger/control validation for the access follow-through
   debrief note in `_workspace/experiments/v0.10.24-access-debrief-validation/`.
-- Added `docs/playtest-findings-v0.10.24.md` documenting the debrief-surface
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.24.md` documenting the debrief-surface
   validation and evidence limits.
 
 ### Changed
@@ -1384,7 +1397,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 - Added an explanatory competitive debrief note for low-cash access-heavy runs
   where public access pledges outnumber durable operational follow-through.
-- Added `docs/playtest-findings-v0.10.23.md` documenting the Phase 7 debrief
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.23.md` documenting the Phase 7 debrief
   wording slice and evidence limits.
 
 ### Changed
@@ -1395,7 +1408,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.22] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.22.md`, a Phase 7 evidence review of
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.22.md`, a Phase 7 evidence review of
   access-heavy player comprehension using existing live-capture artifacts.
 
 ### Changed
@@ -1406,7 +1419,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.21] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.21.md`, a Phase 7 synthesis of the
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.21.md`, a Phase 7 synthesis of the
   live-capture, difficulty, and retry-visibility evidence from `v0.10.12`
   through `v0.10.20`.
 
@@ -1419,7 +1432,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.20] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.20.md`, a Phase 7 checkpoint closing the
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.20.md`, a Phase 7 checkpoint closing the
   current live retry visibility gate after the structured retry metadata slices.
 
 ### Changed
@@ -1433,7 +1446,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 - Added focused Python wrapper tests covering structured MCP error
   normalization and structured-versus-legacy cash-retry classification.
-- Added `docs/playtest-findings-v0.10.19.md` documenting the live-capture
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.19.md` documenting the live-capture
   structured retry metadata follow-up.
 
 ### Changed
@@ -1455,18 +1468,18 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   for cash, action-point, and political-capital overspends.
 - Added focused MCP session tests for structured cash-overrun errors,
   code-only validation errors, and plain parser errors.
-- Added `docs/playtest-findings-v0.10.18.md` documenting the structured-error
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.18.md` documenting the structured-error
   follow-up to the live retry cash-pressure diagnostics.
 
 ### Changed
 - Documented the additive MCP error payload shape in
-  `docs/mcp-agent-interface.md`.
+  `docs/reference/mcp-agent-interface.md`.
 - Bumped the package version to `0.10.18`.
 
 ## [0.10.17] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.17.md`, a Phase 7 diagnostic visibility
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.17.md`, a Phase 7 diagnostic visibility
   note for live validation retries and cash-overrun pressure in the `v0.10.15`
   live LLM difficulty gate.
 - Added live retry signal reporting to `scripts/diagnose_runs.py` for
@@ -1481,7 +1494,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.16] - 2026-07-08
 
 ### Added
-- Added `docs/playtest-findings-v0.10.16.md`, a Phase 7 synthesis comparing
+- Added `docs/history/playtests/v0.10/playtest-findings-v0.10.16.md`, a Phase 7 synthesis comparing
   live difficulty evidence from `v0.10.12` through `v0.10.15`.
 - Selected cash-pressure and validation-retry visibility for access-heavy Hard
   live agents as the next bounded follow-up issue before runtime tuning.
@@ -1496,7 +1509,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   profiles, seed `42`, and Normal/Hard competitive difficulty tiers.
 - Generated `_workspace/experiments/v0.10.15-live-llm-difficulty-gate/diagnostics.md`
   from the live-decision artifact.
-- Recorded `docs/playtest-findings-v0.10.15.md` with live-decision findings,
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.15.md` with live-decision findings,
   validation retry notes, and evidence limits.
 
 ### Changed
@@ -1512,7 +1525,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   Normal/Hard competitive difficulty tiers.
 - Generated `_workspace/experiments/v0.10.14-independent-reviewer-agent-capture/diagnostics.md`
   from the reviewer-agent artifact.
-- Recorded `docs/playtest-findings-v0.10.14.md` with reviewer-policy findings
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.14.md` with reviewer-policy findings
   and evidence limits.
 
 ### Changed
@@ -1528,7 +1541,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   competitive difficulty tiers, and static/adaptive policy variants.
 - Generated `_workspace/experiments/v0.10.13-live-static-adaptive-capture/diagnostics.md`
   from the static/adaptive artifact.
-- Recorded `docs/playtest-findings-v0.10.13.md` with policy-wrapper comparison
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.13.md` with policy-wrapper comparison
   findings and evidence limits.
 
 ### Changed
@@ -1544,7 +1557,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   Normal/Hard competitive difficulty tiers.
 - Generated `_workspace/experiments/v0.10.12-live-difficulty-pressure/diagnostics.md`
   from the pressure-policy artifact.
-- Recorded `docs/playtest-findings-v0.10.12.md` with Normal/Hard pressure
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.12.md` with Normal/Hard pressure
   findings and evidence limits.
 
 ### Changed
@@ -1560,7 +1573,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   difficulty tiers.
 - Generated `_workspace/experiments/v0.10.11-live-capture-matrix/diagnostics.md`
   from the matrix artifact.
-- Recorded `docs/playtest-findings-v0.10.11.md` with findings and evidence
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.11.md` with findings and evidence
   limits for the live-capture matrix.
 
 ### Changed
@@ -1575,7 +1588,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   pledges, final hashes, and evidence limits.
 - Added a live-capture diagnostics fixture and generated
   `_workspace/experiments/v0.10.10-live-capture-diagnostics/diagnostics.md`.
-- Recorded `docs/playtest-findings-v0.10.10.md` for the diagnostic report slice.
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.10.md` for the diagnostic report slice.
 
 ### Changed
 - Documented the live-capture diagnostics command in the MCP playtesting guide.
@@ -1605,7 +1618,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.7] - 2026-07-07
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.7.md` with a bounded sub-agent
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.7.md` with a bounded sub-agent
   access-pledge evidence slice for Hard competitive play at seed `42`.
 - Added replayable MCP artifact capture at
   `_workspace/experiments/v0.10.7-llm-access-pledge-evidence/`.
@@ -1628,7 +1641,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.5] - 2026-07-07
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.5.md` synthesizing the existing
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.5.md` synthesizing the existing
   `v0.10.0` through `v0.10.4` free-form Hard competitive evidence.
 - Documented evidence de-duplication and the next evidence gate for access
   pledge loops before any runtime cooldown or balance-tuning work.
@@ -1639,13 +1652,13 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.4] - 2026-07-06
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.4.md` with post-guidance validation
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.4.md` with post-guidance validation
   comparing unchanged free-form Hard policies against a guidance-aware access
   pledge policy across three profiles and seeds `42`, `43`, and `44`.
 - Added operator capture script and JSON artifact at
   `_workspace/experiments/v0.10.4-post-guidance-validation/`.
 - Documented the post-guidance validation procedure in
-  `docs/mcp-playtesting-guide.md`.
+  `docs/guides/mcp-playtesting-guide.md`.
 
 ### Changed
 - Bumped the package version to `0.10.4`.
@@ -1663,13 +1676,13 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.2] - 2026-07-06
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.2.md` with a free-form Hard
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.2.md` with a free-form Hard
   access-loop diagnostic comparing unchanged baseline policies against bounded
   access-pledge cooldown and reported-access-threshold variants.
 - Added operator capture script and JSON artifact at
   `_workspace/experiments/v0.10.2-access-loop-diagnostic/`.
 - Documented the access-loop diagnostic procedure in
-  `docs/mcp-playtesting-guide.md`.
+  `docs/guides/mcp-playtesting-guide.md`.
 
 ### Changed
 - Bumped the package version to `0.10.2`.
@@ -1677,13 +1690,13 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.1] - 2026-07-06
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.1.md` with free-form Hard competitive
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.1.md` with free-form Hard competitive
   MCP seed-variation evidence for three observation-driven profiles across
   seeds `42`, `43`, and `44`.
 - Added operator capture script and JSON artifact at
   `_workspace/experiments/v0.10.1-free-form-hard-seed-variation/`.
 - Documented the free-form Hard seed-variation procedure in
-  `docs/mcp-playtesting-guide.md`.
+  `docs/guides/mcp-playtesting-guide.md`.
 
 ### Changed
 - Bumped the package version to `0.10.1`.
@@ -1691,14 +1704,14 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.10.0] - 2026-07-06
 
 ### Added
-- Recorded `docs/playtest-findings-v0.10.0.md` with free-form Hard competitive
+- Recorded `docs/history/playtests/v0.10/playtest-findings-v0.10.0.md` with free-form Hard competitive
   MCP playtest evidence for three observation-driven profiles on the full
   24-month campaign at seed 42.
 - Added operator capture script and JSON artifact at
   `_workspace/experiments/v0.10.0-free-form-hard/` for reproducible free-form
   Hard sessions.
 - Documented the free-form Hard competitive operator procedure in
-  `docs/mcp-playtesting-guide.md`.
+  `docs/guides/mcp-playtesting-guide.md`.
 
 ### Changed
 - Bumped the package version to `0.10.0` (minor milestone for Phase 7 free-form
@@ -1711,7 +1724,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   rival-aware scripted policy adjustments at Easy and Hard competitive difficulty.
 - Extended strategy diagnostics with difficulty-adaptive action-frequency
   comparison notes for automated playtest batch artifacts.
-- Recorded `docs/playtest-findings-v0.9.9.md` with the targeted Phase 7
+- Recorded `docs/history/playtests/v0.9/playtest-findings-v0.9.9.md` with the targeted Phase 7
   simulated-agent evidence and limits.
 
 ### Changed
@@ -1725,7 +1738,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Extended strategy diagnostics to report competitive outcomes grouped by
   difficulty and profile-by-difficulty cross-tabs for automated playtest batch
   artifacts.
-- Recorded `docs/playtest-findings-v0.9.8.md` with the targeted Phase 7
+- Recorded `docs/history/playtests/v0.9/playtest-findings-v0.9.8.md` with the targeted Phase 7
   simulated-agent evidence and limits.
 
 ### Changed
@@ -1739,7 +1752,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Extended strategy diagnostics to report project-command counts, project kinds,
   final active projects, and final active project monthly draws for automated
   playtest batch artifacts.
-- Recorded `docs/playtest-findings-v0.9.7.md` with the targeted Phase 7
+- Recorded `docs/history/playtests/v0.9/playtest-findings-v0.9.7.md` with the targeted Phase 7
   simulated-agent evidence and limits.
 
 ### Changed
@@ -1753,7 +1766,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Added direct scripted coverage for newer service-line investments, public
   payers, staffing, monitoring, and commitment commands without changing
   simulation behavior.
-- Recorded `docs/playtest-findings-v0.9.6.md` with the updated Phase 7
+- Recorded `docs/history/playtests/v0.9/playtest-findings-v0.9.6.md` with the updated Phase 7
   simulated-agent evidence and limits.
 - Bumped the package version to `0.9.6`.
 
@@ -1762,16 +1775,16 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 - Added optional JSON batch artifact output to `scripts/run_automated_playtests.py` for Phase 7 strategy-space diagnostics.
 - Extended `scripts/diagnose_runs.py` to read automated playtest batch JSON while preserving existing competitive replay JSON diagnostics.
-- Recorded `docs/playtest-findings-v0.9.5.md` with strategy-space diagnostic findings for the current scripted MCP batch.
+- Recorded `docs/history/playtests/v0.9/playtest-findings-v0.9.5.md` with strategy-space diagnostic findings for the current scripted MCP batch.
 
 ### Changed
-- Documented the playtest JSON artifact and diagnostic workflow in `docs/mcp-playtesting-guide.md`.
+- Documented the playtest JSON artifact and diagnostic workflow in `docs/guides/mcp-playtesting-guide.md`.
 - Bumped the package version to `0.9.5` for the diagnostics tooling and evidence PR-equivalent change.
 
 ## [0.9.4] - 2026-07-06
 
 ### Added
-- Recorded a Phase 7 scripted AI-agent playtest synthesis for the current `v0.9.4` prototype in `docs/playtest-findings-v0.9.4.md`.
+- Recorded a Phase 7 scripted AI-agent playtest synthesis for the current `v0.9.4` prototype in `docs/history/playtests/v0.9/playtest-findings-v0.9.4.md`.
 - Ran both playable campaigns across four scripted profiles and seeds `42`, `43`, and `44` through the local MCP playtest harness.
 
 ### Changed
@@ -1839,7 +1852,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.8.2] - 2026-07-05
 
 ### Changed
-- Aligned project documentation (`README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/how-to-play.md`, `docs/versioning-policy.md`, `docs/core-loop-spec.md`, `docs/system-boundary.md`, `docs/competitive-scenario-brief.md`, `docs/first-scenario-brief.md`, and `docs/agent-playtest-protocol.md`) with the implemented 24-month campaign loop, custom scenario loading, autosave/resume, and new service line additions.
+- Aligned project documentation (`README.md`, `ARCHITECTURE.md`, `SPEC.md`, `docs/roadmap.md`, `docs/guides/how-to-play.md`, `docs/reference/versioning-policy.md`, `docs/design/core-loop-spec.md`, `docs/design/system-boundary.md`, `docs/design/competitive-scenario-brief.md`, `docs/design/first-scenario-brief.md`, and `docs/validation/playtesting.md`) with the implemented 24-month campaign loop, custom scenario loading, autosave/resume, and new service line additions.
 - Bumped package version to `0.8.2`.
 
 ## [0.8.1] - 2026-07-05
@@ -1951,7 +1964,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.5.1] - 2026-07-04
 
 ### Changed
-- Aligned versioning policy documentation in `docs/versioning-policy.md` and version history in `CHANGELOG.md` with the new repository rules.
+- Aligned versioning policy documentation in `docs/reference/versioning-policy.md` and version history in `CHANGELOG.md` with the new repository rules.
 - Documented release notes for `0.5.0` and bumped package version to `0.5.1`.
 
 ## [0.5.0] - 2026-07-04
@@ -2039,15 +2052,15 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ## [0.2.4] - 2026-07-03
 
 ### Added
-- Created the first dedicated parameter and evidence ledger for the Nursing Workforce & Retention mechanism (`docs/workforce-ledger.md`), mapping game variables and formulas to literature context (BLS occupational reports, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
+- Created the first dedicated parameter and evidence ledger for the Nursing Workforce & Retention mechanism (`docs/research/workforce-ledger.md`), mapping game variables and formulas to literature context (BLS occupational reports, California AB 394 safe staffing, Aiken JAMA 2002 nurse burnout).
 - Assigned confidence labels distinguishing empirical calibration candidates, literature-grounded behaviors, stylized abstractions, and gameplay-driven limits.
-- Extended the main evidence registry (`docs/evidence-registry.md`) to link and index the new workforce ledger.
+- Extended the main evidence registry (`docs/research/evidence-registry.md`) to link and index the new workforce ledger.
 - Bumps package version to `0.2.4`.
 
 ## [0.2.3] - 2026-07-03
 
 ### Added
-- Drafted the first exemplary scenario brief for the competitive campaign (`docs/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences.
+- Drafted the first exemplary scenario brief for the competitive campaign (`docs/design/exemplary-scenario-brief.md`), modeling workforce conflicts, certificate of need legal challenges, Blue Shield payer negotiations, and delayed EHR consequences.
 - Created repository-local workspace pipeline artifacts (`_workspace/00_input/request-summary.md`, `_workspace/01_evidence_map.md`, `_workspace/02_mechanism_design.md`, `_workspace/03_domain_qa.md`, and `_workspace/final/handoff.md`).
 - Bumps package version to `0.2.3`.
 
@@ -2081,7 +2094,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Added a public-facing `README.md` focused on the playable CLI prototype,
   current campaigns, quickstart, limitations, and documentation paths.
 - Archived the previous developer-focused README at
-  `docs/README-dev-archive-v0.1.61.md`.
+  `docs/history/archives/README-dev-archive-v0.1.61.md`.
 
 ### Changed
 
@@ -2103,7 +2116,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Changed
 
 - Cleaned up `SPEC.md` to simplify active and completed feature tracking, making the Past-Present-Future distinction more straightforward.
-- Archived completed feature slices from `v0.1.40` through `v0.1.54` into `docs/spec-past-archive.md`.
+- Archived completed feature slices from `v0.1.40` through `v0.1.54` into `docs/history/archives/spec-past-archive.md`.
 - Reduced `Present` section in `SPEC.md` to focus strictly on active tasks.
 - Bumps project version to `0.1.61`.
 
@@ -2134,7 +2147,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.58.md` detailing the follow-up playtest sessions using v0.1.57 command help and prompt cues.
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.58.md` detailing the follow-up playtest sessions using v0.1.57 command help and prompt cues.
 
 ### Changed
 
@@ -2157,7 +2170,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.56.md` with lightweight strategy-space
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.56.md` with lightweight strategy-space
   diagnostics over existing scripted and free-form MCP playtest evidence.
 
 ### Changed
@@ -2169,7 +2182,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.55.md` with two additional free-form MCP
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.55.md` with two additional free-form MCP
   profiles across both current campaigns at seed 42.
 
 ### Changed
@@ -2182,7 +2195,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.54.md` with a free-form MCP first-time
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.54.md` with a free-form MCP first-time
   executive profile across both current campaigns at seed 42.
 
 ### Changed
@@ -2206,7 +2219,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.52.md` with scripted MCP naive-profile
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.52.md` with scripted MCP naive-profile
   evidence across seeds 42, 43, and 44.
 
 ### Changed
@@ -2219,7 +2232,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.51.md` with scripted MCP seed-variation
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.51.md` with scripted MCP seed-variation
   evidence across seeds 42, 43, and 44.
 
 ### Changed
@@ -2245,7 +2258,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/playtest-findings-v0.1.49.md` with Phase 7 scripted MCP playtest
+- Added `docs/history/playtests/v0.1/playtest-findings-v0.1.49.md` with Phase 7 scripted MCP playtest
   findings for the current stabilization and competitive preview campaigns.
 
 ### Changed
@@ -2273,7 +2286,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added `docs/agent-playtest-protocol.md` as the active Phase 7 validation
+- Added `docs/validation/playtesting.md` as the active Phase 7 validation
   protocol for AI-agent and sub-agent playtests.
 - Added ADR-0009 accepting AI-agent playtests as the validation path replacing
   planned external human playtest recruitment.
@@ -2321,7 +2334,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Comprehensive gameplay playtest findings report at `docs/playtest-findings-v0.1.42.md` documenting play session results, winnability, strategic tension, and entertainment value.
+- Comprehensive gameplay playtest findings report at `docs/history/playtests/v0.1/playtest-findings-v0.1.42.md` documenting play session results, winnability, strategic tension, and entertainment value.
 - Automated Python playtest scripts (`play_fiscal.py`, `play_growth.py`, `play_balanced.py`) and logs verifying MCP stdio game sessions.
 
 ### Changed
@@ -2349,7 +2362,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - MCP tools for starting sessions, reading actor-visible observations,
   submitting one turn/month, inspecting append-only history summaries, and
   ending sessions with a debrief summary.
-- `docs/mcp-agent-interface.md` and ADR-0008 documenting the MCP interface
+- `docs/reference/mcp-agent-interface.md` and ADR-0008 documenting the MCP interface
   boundary, tool contract, and deferred transports.
 
 ### Changed
@@ -2388,7 +2401,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- External playtest protocol at `docs/external-playtest-protocol.md` covering
+- External playtest protocol at `docs/validation/playtesting.md` covering
   stabilization and competitive-preview session scripts, observation rubric,
   post-session prompts, privacy cautions, and synthesis guidance.
 
@@ -2401,7 +2414,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- New player-facing manual at `docs/how-to-play.md` covering quickstart,
+- New player-facing manual at `docs/guides/how-to-play.md` covering quickstart,
   campaign flow, terminology, commands, worked interaction example, and
   difficulty recovery tips.
 
@@ -2537,7 +2550,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Changed
 
-- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `docs/phase5-scope-register.md`,
+- `ARCHITECTURE.md`, `SPEC.md`, `README.md`, `docs/history/foundations/phase5-scope-register.md`,
   `_workspace/final/handoff.md`.
 
 ### Notes
@@ -2558,8 +2571,8 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Changed
 
 - `mock_observation_month1` derives human-system metrics from genesis state.
-- `SPEC.md` reconciled with `docs/spec-past-archive.md` and restored `Present` section.
-- `ARCHITECTURE.md`, `README.md`, `_workspace/final/handoff.md`, `docs/phase5-scope-register.md`.
+- `SPEC.md` reconciled with `docs/history/archives/spec-past-archive.md` and restored `Present` section.
+- `ARCHITECTURE.md`, `README.md`, `_workspace/final/handoff.md`, `docs/history/foundations/phase5-scope-register.md`.
 
 ### Notes
 
@@ -2597,14 +2610,14 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 - Competitive campaign types: `CampaignId`, `Difficulty`, `PolicyCalendar`,
   `PlayerObservation` (`src/model/campaign.rs`).
 - Monthly executive report renderer with six sections per
-  `docs/executive-report-format.md` (`src/cli/display/executive_report.rs`).
+  `docs/design/executive-report-format.md` (`src/cli/display/executive_report.rs`).
 - Observation-only mock fixtures for competitive month-1 preview (`src/competitive/`).
 - `SessionOutcome::CompetitivePreview` for competitive stub exit.
 
 ### Changed
 
 - `run()` flow: campaign selection after autosave resume; stabilization path unchanged.
-- `ARCHITECTURE.md`, `docs/core-loop-spec.md`, `docs/phase5-scope-register.md`,
+- `ARCHITECTURE.md`, `docs/design/core-loop-spec.md`, `docs/history/foundations/phase5-scope-register.md`,
   `SPEC.md`, `README.md`, `_workspace/final/handoff.md`.
 - Bumped package version from `0.1.28` to `0.1.29`.
 
@@ -2618,20 +2631,20 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 
 - Competitive gameplay design package for parallel `competitive-regional-v1` campaign:
-  `docs/gameplay-competitive-sketch.md`, `docs/core-loop-spec.md`,
-  `docs/competitive-scenario-brief.md`, `docs/executive-report-format.md`,
-  `docs/action-catalog-draft.md`, `docs/cli-command-grammar-draft.md`.
+  `docs/design/gameplay-competitive-sketch.md`, `docs/design/core-loop-spec.md`,
+  `docs/design/competitive-scenario-brief.md`, `docs/design/executive-report-format.md`,
+  `docs/design/action-catalog-draft.md`, `docs/design/cli-command-grammar-draft.md`.
 - ADRs 0003–0006: simultaneous monthly actions, multi-system player state,
   action economy, Stata-like CLI layer.
-- AI health-system player card template in `docs/actor-cards.md`.
+- AI health-system player card template in `docs/design/actor-cards.md`.
 - Glossary entries for action points, simultaneous resolution, AI player vs NPC.
 
 ### Changed
 
 - `docs/proposal.md`, `docs/roadmap.md` (Phase 6.0 competitive track),
-  `docs/system-boundary.md`, `docs/scenario-format-draft.md`,
-  `docs/first-scenario-brief.md`, `docs/phase5-scope-register.md`,
-  `docs/phase1-implications-memo.md`, `LESSONS.md`.
+  `docs/design/system-boundary.md`, `docs/design/scenario-format-draft.md`,
+  `docs/design/first-scenario-brief.md`, `docs/history/foundations/phase5-scope-register.md`,
+  `docs/history/foundations/phase1-implications-memo.md`, `LESSONS.md`.
 - `SPEC.md`, `ARCHITECTURE.md`, workspace handoff artifacts, `README.md`, and
   `docs/decision-records/README.md`.
 - Bumped package version from `0.1.27` to `0.1.28`.
@@ -2694,7 +2707,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 ### Added
 
 - Turn uncertainty preview in interactive CLI play (`src/cli/display/forecast.rs`).
-- [`docs/playtest-findings-v0.1.25.md`](docs/playtest-findings-v0.1.25.md).
+- [`docs/history/playtests/v0.1/playtest-findings-v0.1.25.md`](docs/history/playtests/v0.1/playtest-findings-v0.1.25.md).
 
 ### Changed
 
@@ -2714,7 +2727,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 - [`docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md`](docs/decision-records/0001-deterministic-transition-and-stochastic-input-boundary.md)
   — first accepted ADR for pure transition core and stochastic input boundary.
-- [`docs/scenario-format-draft.md`](docs/scenario-format-draft.md) — Phase 6.2
+- [`docs/design/scenario-format-draft.md`](docs/design/scenario-format-draft.md) — Phase 6.2
   scenario format design draft (no runtime loader).
 
 ### Changed
@@ -2732,16 +2745,16 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Changed
 
-- Refreshed [`docs/phase5-scope-register.md`](docs/phase5-scope-register.md) for
+- Refreshed [`docs/history/foundations/phase5-scope-register.md`](docs/history/foundations/phase5-scope-register.md) for
   five-turn v0.1.21+ closure, competitor achieved, and updated next-slice pointers.
-- Updated [`docs/system-boundary.md`](docs/system-boundary.md) with
+- Updated [`docs/design/system-boundary.md`](docs/design/system-boundary.md) with
   `RespondToCompetitorCapacityMove` and rival capacity competition inclusion.
-- Updated [`docs/evidence-registry.md`](docs/evidence-registry.md) competitor
+- Updated [`docs/research/evidence-registry.md`](docs/research/evidence-registry.md) competitor
   ledger row to `linked`; five-turn wording.
 - Expanded [`SPEC.md`](SPEC.md) `Future` backlog and closed reconciliation slice
   in `Past`.
 - Marked superseded next-slice note in
-  [`docs/playtest-findings-v0.1.21.md`](docs/playtest-findings-v0.1.21.md).
+  [`docs/history/playtests/v0.1/playtest-findings-v0.1.21.md`](docs/history/playtests/v0.1/playtest-findings-v0.1.21.md).
 
 ### Notes
 
@@ -2751,9 +2764,9 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- [`docs/glossary.md`](docs/glossary.md) — core ontology terms for contributors.
+- [`docs/reference/glossary.md`](docs/reference/glossary.md) — core ontology terms for contributors.
 - [`docs/decision-records/`](docs/decision-records/) — ADR README and template.
-- [`docs/versioning-policy.md`](docs/versioning-policy.md) — code, ruleset, and
+- [`docs/reference/versioning-policy.md`](docs/reference/versioning-policy.md) — code, ruleset, and
   replay artifact versioning rules.
 
 ### Changed
@@ -2771,9 +2784,9 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 - Fifth-turn competitor capacity interaction with
   `RespondToCompetitorCapacityMove` command and rival health system actor.
-- Competitor actor card in [`docs/actor-cards.md`](docs/actor-cards.md).
+- Competitor actor card in [`docs/design/actor-cards.md`](docs/design/actor-cards.md).
 - `competitor_market_signal` random stream (active on turn 5 only).
-- [`docs/playtest-findings-v0.1.21.md`](docs/playtest-findings-v0.1.21.md).
+- [`docs/history/playtests/v0.1/playtest-findings-v0.1.21.md`](docs/history/playtests/v0.1/playtest-findings-v0.1.21.md).
 
 ### Changed
 
@@ -2791,11 +2804,11 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added [`docs/phase1-implications-memo.md`](docs/phase1-implications-memo.md)
+- Added [`docs/history/foundations/phase1-implications-memo.md`](docs/history/foundations/phase1-implications-memo.md)
   converting Phase 1 research into adopted, modified, and rejected design
   patterns plus mechanism implications for the stabilization slice.
 - Added parameter-source ledger section to
-  [`docs/evidence-registry.md`](docs/evidence-registry.md).
+  [`docs/research/evidence-registry.md`](docs/research/evidence-registry.md).
 
 ### Changed
 
@@ -2811,10 +2824,10 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
 
 ### Added
 
-- Added [`docs/phase5-scope-register.md`](docs/phase5-scope-register.md) closing
+- Added [`docs/history/foundations/phase5-scope-register.md`](docs/history/foundations/phase5-scope-register.md) closing
   Phase 5 with achieved scope, deferrals, risks, exit-criteria assessment, and
   next-slice recommendation.
-- Added [`docs/playtest-findings-v0.1.19.md`](docs/playtest-findings-v0.1.19.md)
+- Added [`docs/history/playtests/v0.1/playtest-findings-v0.1.19.md`](docs/history/playtests/v0.1/playtest-findings-v0.1.19.md)
   refreshing internal playtest notes for the post-refactor codebase and CI.
 
 ### Changed
@@ -2975,7 +2988,7 @@ The project follows the versioning policy defined in [`docs/versioning-policy.md
   committed history.
 - Added focused tests for genesis revision bounds, later-turn revision
   briefings, and debrief revision notes.
-- Added initial `docs/system-boundary.md` and `docs/evidence-registry.md`
+- Added initial `docs/design/system-boundary.md` and `docs/research/evidence-registry.md`
   design stubs.
 
 ### Changed

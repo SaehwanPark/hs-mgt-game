@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "gui" / "index.html"
 APP = ROOT / "gui" / "app.mjs"
 README = ROOT / "gui" / "README.md"
-DOC = ROOT / "docs" / "visual-audio-phase10-accessibility-v0.12.26.md"
+DOC = ROOT / "docs" / "history" / "initiatives" / "visual-audio" / "visual-audio-phase10-accessibility-v0.12.26.md"
 
 
 class GuiAccessibilityTests(unittest.TestCase):
