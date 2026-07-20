@@ -64,6 +64,39 @@ const NORTHLAKE_IDENTITY_KIT = Object.freeze({
   }),
 });
 
+const SUMMIT_IDENTITY_KIT = Object.freeze({
+  schema_version: "identity-kit-v1",
+  id: "summit",
+  label: "Summit",
+  monogram: "SM",
+  source: "Visible Summit system identity",
+  equivalent: "Summit name, mark, monogram, and text label",
+  palette: Object.freeze({
+    primary: "#6b4e8d",
+    secondary: "#c2872f",
+    ink: "#17232d",
+    paper: "#f8f5fb",
+  }),
+  asset: Object.freeze({
+    source_path: "assets/source/visual/identity/summit-kit.svg",
+    release_path: "assets/release/visual/svg/summit.svg",
+  }),
+  surfaces: Object.freeze({
+    logo_mark: "Peak geometry with layered line",
+    monochrome_mark: "Single-color peak geometry with layered line",
+    compact_marker: "Triangular Summit marker",
+    facility_signage: "Summit Center sign treatment",
+    report_header: "Summit market-signal report header",
+    compact_badge: "SM text badge",
+    audio_motif: "audio.direction-summit-motif",
+  }),
+  fallback: Object.freeze({
+    id: "generic-institution",
+    label: "Institution",
+    equivalent: "Institution identity unavailable",
+  }),
+});
+
 const GENERIC_IDENTITY_KIT = Object.freeze({
   schema_version: "identity-kit-v1",
   id: "generic-institution",
@@ -88,6 +121,7 @@ const GENERIC_IDENTITY_KIT = Object.freeze({
 export const IDENTITY_KITS = Object.freeze({
   riverside: RIVERSIDE_IDENTITY_KIT,
   northlake: NORTHLAKE_IDENTITY_KIT,
+  summit: SUMMIT_IDENTITY_KIT,
   "generic-institution": GENERIC_IDENTITY_KIT,
 });
 

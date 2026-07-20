@@ -476,11 +476,12 @@ Make recurring systems and actors immediately recognizable across the map, repor
 
 ## Milestone 2.1: Health-system identity kits
 
-**Status:** Partial in v0.12.40; Riverside and Northlake kits complete
+**Status:** Complete in v0.12.41
 **Evidence:** `assets/source/visual/identity/riverside-kit.svg`,
 `assets/release/visual/svg/riverside.svg`, `gui/identity-kits.mjs`,
-`gui/identity-proof.html`, and `tests/test_riverside_identity.py`
-plus `tests/test_northlake_identity.py` and `tests/test_audio_direction.py`.
+`gui/identity-proof.html`, `tests/test_riverside_identity.py`,
+`tests/test_northlake_identity.py`, `tests/test_summit_identity.py`, and
+`tests/test_audio_direction.py`.
 
 ### Initial systems
 
@@ -546,19 +547,19 @@ plus `tests/test_northlake_identity.py` and `tests/test_audio_direction.py`.
 
 #### Summit
 
-- [ ] Logo mark completed.
-- [ ] Monochrome mark completed.
-- [ ] Compact marker completed.
-- [ ] Text monogram completed.
-- [ ] Palette passes contrast review.
-- [ ] Shape remains recognizable without color.
-- [ ] Facility signage variant completed.
-- [ ] Report-header variant completed.
-- [ ] Audio motif completed.
-- [ ] Registry entries completed.
-- [ ] Source files committed.
-- [ ] Release derivatives generated.
-- [ ] Cross-screen consistency tested.
+- [x] Logo mark completed.
+- [x] Monochrome mark completed.
+- [x] Compact marker completed.
+- [x] Text monogram completed.
+- [x] Palette passes contrast review.
+- [x] Shape remains recognizable without color.
+- [x] Facility signage variant completed.
+- [x] Report-header variant completed.
+- [x] Audio motif completed.
+- [x] Registry entries completed.
+- [x] Source files committed.
+- [x] Release derivatives generated.
+- [x] Cross-screen consistency tested.
 
 ### Exit criteria
 
@@ -1995,31 +1996,31 @@ The visual/audio enhancement program should be considered successful when the fo
 
 ## Foundation sprint
 
-- [ ] Write and approve the visual/audio product brief.
-- [ ] Add the asset directory structure.
-- [ ] Define visual and audio registry schemas.
-- [ ] Add CI validation for registry completeness and hashes.
-- [ ] Write the asset licensing policy.
-- [ ] Write the local AI-generation policy.
-- [ ] Create the art-direction comparison board.
-- [ ] Create the SVG regional-board proof of concept.
-- [ ] Create the hybrid audio proof of concept.
-- [ ] Record an ADR selecting the production visual and audio direction.
+- [x] Write and approve the visual/audio product brief.
+- [x] Add the asset directory structure.
+- [x] Define visual and audio registry schemas.
+- [x] Add CI validation for registry completeness and hashes.
+- [x] Write the asset licensing policy.
+- [x] Write the local AI-generation policy.
+- [x] Create the art-direction comparison board.
+- [x] Create the SVG regional-board proof of concept.
+- [x] Create the hybrid audio proof of concept.
+- [x] Record an ADR selecting the production visual and audio direction.
 
 ## First production sprint
 
-- [ ] Create Riverside identity kit.
-- [ ] Create Northlake identity kit.
-- [ ] Create Summit identity kit.
+- [x] Create Riverside identity kit.
+- [x] Create Northlake identity kit.
+- [x] Create Summit identity kit.
 - [ ] Create the general-hospital base module.
 - [ ] Create the emergency department module.
 - [ ] Create the ambulatory-center module.
 - [ ] Create construction and staffing overlays.
 - [ ] Integrate one static regional board fixture.
 - [ ] Add screenshot regression tests.
-- [ ] Refine the first five audio cues.
-- [ ] Add one environmental loop.
-- [ ] Implement the initial audio priority manager.
+- [x] Refine the first five audio cues.
+- [x] Add one environmental loop.
+- [x] Implement the initial audio priority manager.
 
 ## Vertical-slice sprint
 

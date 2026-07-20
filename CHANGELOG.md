@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.41] - 2026-07-20
+
+- Added the fictional Summit identity kit with peak geometry, layered line,
+  monochrome, marker, signage, report-header, badge, and SM variants.
+- Added the Summit audio motif and shared three-system identity-proof selector;
+  preserved generic fallback and no live GUI promotion.
+- Completed Phase 2.1 identity-kit checklist bookkeeping with source/release
+  provenance, hashes, and credits for Riverside, Northlake, and Summit.
+- Bumped package/public metadata to `0.12.41`.
+
 ## [0.12.40] - 2026-07-20
 
 - Added the fictional Northlake identity kit with distinct N geometry, lake

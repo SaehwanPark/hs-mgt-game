@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Finish the Identity Matrix Before Cross-Screen Promotion
+
+- Context: Phase 2.1 spans three recurring systems and the same map, facility,
+  report, compact, and audio surfaces.
+- Symptom: Promoting one polished system early could make the shared GUI path
+  imply incomplete or inconsistent identity coverage.
+- Resolution: Kept Riverside, Northlake, and Summit in explicit roadmap lanes,
+  completed each through the shared proof, and retained generic fallback.
+- Prevention: Close the full identity matrix in fixture space before promoting
+  identity assets into live cross-screen rendering.
+
 ## Reuse the Surface Contract While Varying Identity Vocabulary
 
 - Context: Northlake needed a distinct kit without creating a second proof

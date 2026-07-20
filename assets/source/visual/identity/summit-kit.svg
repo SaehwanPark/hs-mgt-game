@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Summit fictional health-system identity kit</title>
+  <desc id="desc">Source vector sheet for a fictional Summit system: logo mark, monochrome mark, compact marker, facility sign, report header, compact badge, and SM text monogram.</desc>
+  <style>
+    :root { --summit-primary: #6b4e8d; --summit-secondary: #c2872f; --summit-ink: #17232d; --summit-paper: #f8f5fb; }
+    .ink { fill: var(--summit-ink); font-family: system-ui, sans-serif; }
+    .small { font-size: 13px; letter-spacing: .04em; }
+    .title { font-size: 22px; font-weight: 700; }
+    .label { font-size: 14px; font-weight: 700; }
+  </style>
+  <defs>
+    <symbol id="summit-mark" viewBox="0 0 96 96">
+      <path d="M9 76 39 18h18l30 58H67l-7-15H36l-7 15zm34-30h11l-5-12z" fill="var(--summit-primary)"/>
+      <path d="M11 84c15-7 29-7 44 0 10 5 19 5 30 0" fill="none" stroke="var(--summit-secondary)" stroke-linecap="round" stroke-width="7"/>
+    </symbol>
+    <symbol id="summit-mark-mono" viewBox="0 0 96 96">
+      <path d="M9 76 39 18h18l30 58H67l-7-15H36l-7 15zm34-30h11l-5-12z" fill="currentColor"/>
+      <path d="M11 84c15-7 29-7 44 0 10 5 19 5 30 0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="7"/>
+    </symbol>
+    <symbol id="summit-compact" viewBox="0 0 48 48">
+      <path d="M24 3 45 43H3z" fill="var(--summit-primary)"/>
+      <path d="M17 35h14l-7-16z" fill="#fff"/>
+      <path d="M10 40c9-4 18-4 28 0" fill="none" stroke="var(--summit-secondary)" stroke-linecap="round" stroke-width="3"/>
+    </symbol>
+  </defs>
+  <rect width="720" height="420" fill="var(--summit-paper)"/>
+  <text x="32" y="38" class="ink title">Summit identity kit · fictional system</text>
+  <text x="32" y="61" class="ink small">Stable geometric mark; peak line is a shape cue, not a geographic claim.</text>
+
+  <g id="logo-mark" transform="translate(42 92)">
+    <use href="#summit-mark" width="96" height="96"/>
+    <text x="116" y="55" class="ink" font-size="34" font-weight="700">Summit</text>
+  </g>
+  <text x="42" y="214" class="ink label">Logo mark + wordmark</text>
+
+  <g id="monochrome-mark" transform="translate(300 92)" color="#17232d">
+    <use href="#summit-mark-mono" width="96" height="96"/>
+    <text x="116" y="55" class="ink" font-size="34" font-weight="700">Summit</text>
+  </g>
+  <text x="300" y="214" class="ink label">Monochrome mark</text>
+
+  <g id="compact-marker" transform="translate(590 98)">
+    <use href="#summit-compact" width="64" height="64"/>
+    <text x="-5" y="93" class="ink label">Map marker</text>
+  </g>
+
+  <g id="facility-sign" transform="translate(42 250)">
+    <rect width="238" height="74" rx="10" fill="#fff" stroke="var(--summit-primary)" stroke-width="3"/>
+    <use href="#summit-compact" x="12" y="14" width="46" height="46"/>
+    <text x="72" y="33" class="ink" font-size="17" font-weight="700">Summit Center</text>
+    <text x="72" y="55" class="ink small">FACILITY SIGNAGE</text>
+  </g>
+
+  <g id="report-header" transform="translate(300 250)">
+    <rect width="238" height="74" rx="10" fill="var(--summit-primary)"/>
+    <use href="#summit-mark-mono" x="12" y="10" width="54" height="54" color="#fff"/>
+    <text x="78" y="34" fill="#fff" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Summit</text>
+    <text x="78" y="55" fill="#f0e7fa" font-family="system-ui, sans-serif" class="small">MARKET SIGNAL</text>
+  </g>
+
+  <g id="compact-badge" transform="translate(590 250)">
+    <rect width="88" height="74" rx="10" fill="#fff" stroke="var(--summit-secondary)" stroke-width="3"/>
+    <text x="44" y="50" text-anchor="middle" class="ink" font-size="30" font-weight="800">SM</text>
+  </g>
+  <text x="590" y="345" class="ink label">SM monogram</text>
+  <text x="42" y="382" class="ink small">Color-independent recognition: peak geometry, line, triangle marker, and SM text remain distinct in monochrome.</text>
+</svg>
