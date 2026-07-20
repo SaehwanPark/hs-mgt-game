@@ -1,44 +1,38 @@
-# Request Summary — Visual/audio roadmap execution v0.12.34
+# Request Summary — Visual/audio roadmap execution v0.12.35
 
 ## Classification and scope
 
-- Track: presentation; Phase 0 foundation.
-- Slice: product brief plus asset repository architecture and provenance gate.
-- Target scenario: one month of `competitive-regional-v1`.
+- Track: presentation; Phase 1.1 art-direction reference board.
+- Slice: three flat-vector SVG variants, scored selection/rejection record,
+  technical color/size/accessibility review, and an art-direction ADR.
+- Dependency: Phase 0 product brief and asset registry from v0.12.34.
 - Workflow: preferred branch/verification/PR handoff, one light independent code
   review, autonomous merge to `main`, then select the next bounded slice.
 
 ## Sources
 
-- `README.md`, `docs/proposal.md`, `docs/roadmap.md`,
-  `docs/design_principles.md`, `SPEC.md`, and `ARCHITECTURE.md`.
-- `docs/visual_audio_enhancement_roadmap.md` Phase 0 milestones 0.1 and 0.2.
-- `docs/harness/health-policy-strategy-game/team-spec.md` and the existing
-  visual/audio history through v0.12.33.
+- `docs/visual_audio_enhancement_roadmap.md` Phase 1.1.
+- `docs/history/initiatives/visual-audio/visual-audio-phase0-foundation-v0.12.34.md`.
+- `README.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/design_principles.md`, and
+  `docs/harness/health-policy-strategy-game/team-spec.md`.
 
 ## Expected files
 
-- Product brief/history, asset repository README, registry schemas/manifests,
-  validation and credits scripts, generated credits, contributor checklist,
-  focused tests, CI invocation, roadmap/SPEC/architecture/changelog/lesson
-  bookkeeping, and required `_workspace` handoffs.
+- Three source SVG reference variants, art-direction comparison/decision record,
+  ADR, focused static/SVG tests, updated asset registry/credits, roadmap/SPEC,
+  architecture/changelog/lesson records, and `_workspace` handoffs.
 
 ## Non-goals
 
-- No new host DTO, command, transition, stochastic input, history/hash/replay,
-  debrief, browser simulation state, third-party asset, recorded audio, or
-  broad visual production.
-- No human usability, lived accessibility, legal, calibration, balance, policy,
-  or educational-effectiveness claim.
-- No implementation of Phase 1+ runtime behavior in this slice.
+- No live GUI renderer, facility production kit, map integration, animation,
+  audio production, third-party asset, runtime host/MCP/simulation change, or
+  human usability/accessibility claim.
 
 ## Acceptance and validation
 
-- Product/style/audio/accessibility/licensing/authority decisions are explicit.
-- Source/release directories and machine-readable registries exist.
-- Validator fails closed for metadata, roles, IDs, hashes, licenses, approvals,
-  and unregistered release files.
-- Credits are deterministic and CI-checkable.
-- Phase 0.1 and 0.2 checklists are checked only for demonstrated deliverables.
-- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, `cargo test`,
-  Python tests, metadata, docs links, Node syntax, and diff checks pass.
+- Three variants are committed, well-formed, labeled, and text-equivalent.
+- Evaluation criteria are scored; one style is selected and two are rejected
+  with explicit reasons.
+- Color-independent, small-size, large-text, reduced-motion, provenance, and
+  no-external-reference checks are recorded and automated where practical.
+- Phase 1.1 checklist items are checked only for demonstrated evidence.

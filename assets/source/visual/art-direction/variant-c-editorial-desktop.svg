@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="600" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Variant C — editorial executive desktop</title>
+  <desc id="desc">A high-contrast editorial desktop made from report tiles, large labels, and a small relationship diagram for visible institutions.</desc>
+  <rect width="960" height="600" fill="#f8f5ef"/>
+  <rect x="34" y="32" width="892" height="536" fill="#fffdf8" stroke="#29251f" stroke-width="3"/>
+  <rect x="34" y="32" width="892" height="72" fill="#29251f"/>
+  <text x="60" y="77" fill="#fffdf8" font-family="system-ui, sans-serif" font-size="26" font-weight="700">EXECUTIVE DISPATCH</text>
+  <text x="762" y="76" fill="#f2c14e" font-family="system-ui, sans-serif" font-size="16">MONTH 01</text>
+  <rect x="60" y="130" width="260" height="170" fill="#e5eef0" stroke="#29251f" stroke-width="2"/>
+  <text x="82" y="166" fill="#29251f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">BRIEFING</text>
+  <text x="82" y="207" fill="#29251f" font-family="system-ui, sans-serif" font-size="16">Inspect staffing before</text>
+  <text x="82" y="233" fill="#29251f" font-family="system-ui, sans-serif" font-size="16">choosing an action.</text>
+  <text x="82" y="273" fill="#9a3d2f" font-family="system-ui, sans-serif" font-size="17" font-weight="700">! CONSTRAINED</text>
+  <rect x="346" y="130" width="554" height="170" fill="#f2ede4" stroke="#29251f" stroke-width="2"/>
+  <text x="370" y="166" fill="#29251f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">INSTITUTIONS</text>
+  <g role="group" aria-label="Institution relationship cards">
+    <rect x="374" y="194" width="128" height="70" fill="#fffdf8" stroke="#147d7b" stroke-width="4"/>
+    <text x="391" y="224" fill="#29251f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Riverside</text>
+    <text x="391" y="247" fill="#5f625e" font-family="system-ui, sans-serif" font-size="13">PLAYER</text>
+    <rect x="544" y="194" width="128" height="70" fill="#fffdf8" stroke="#4b7190" stroke-width="4"/>
+    <text x="561" y="224" fill="#29251f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Northlake</text>
+    <text x="561" y="247" fill="#5f625e" font-family="system-ui, sans-serif" font-size="13">PUBLIC</text>
+    <rect x="714" y="194" width="128" height="70" fill="#fffdf8" stroke="#786299" stroke-width="4"/>
+    <text x="731" y="224" fill="#29251f" font-family="system-ui, sans-serif" font-size="18" font-weight="700">Summit</text>
+    <text x="731" y="247" fill="#5f625e" font-family="system-ui, sans-serif" font-size="13">PUBLIC</text>
+  </g>
+  <rect x="60" y="330" width="840" height="202" fill="#29251f"/>
+  <text x="86" y="370" fill="#fffdf8" font-family="system-ui, sans-serif" font-size="18" font-weight="700">VISIBLE CONSEQUENCE NOTES</text>
+  <text x="86" y="412" fill="#f2c14e" font-family="system-ui, sans-serif" font-size="18">● Stable</text>
+  <text x="238" y="412" fill="#f2c14e" font-family="system-ui, sans-serif" font-size="18">▲ Watch</text>
+  <text x="386" y="412" fill="#f2c14e" font-family="system-ui, sans-serif" font-size="18">! Constrained</text>
+  <text x="86" y="457" fill="#d9d2c5" font-family="system-ui, sans-serif" font-size="15">Clear labels survive mute, grayscale, and large text.</text>
+  <text x="86" y="490" fill="#d9d2c5" font-family="system-ui, sans-serif" font-size="15">C · EDITORIAL DESKTOP</text>
+  <text x="86" y="515" fill="#d9d2c5" font-family="system-ui, sans-serif" font-size="13">Strong reports; too much dashboard, not enough persistent place.</text>
+</svg>

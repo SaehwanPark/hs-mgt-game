@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Resolve Visual Style Before Building Asset Breadth
+
+- Context: The roadmap offers both map-like and dashboard-like visual paths
+  before a renderer or facility library exists.
+- Symptom: Choosing an attractive motif without a scored comparison can imply
+  unsupported geography or flatten the game into a generic dashboard.
+- Resolution: Committed three labeled SVG references, scored strategic clarity,
+  accessibility, reuse, tone, and implementation risk, then selected the flat
+  institutional direction through an ADR.
+- Prevention: Keep rejected variants as evidence, select one vocabulary before
+  renderer/facility production, and label schematic layout as non-geographic.
+
 ## Put Provenance Checks Before Asset Production
 
 - Context: The visual/audio roadmap separates generated runtime recipes from
