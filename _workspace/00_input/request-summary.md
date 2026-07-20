@@ -1,23 +1,25 @@
-# Request Summary — Visual/audio Phase 3.2 parcel-system v0.12.58
+# Request Summary — Visual/audio Phase 3.2 relationship-lines v0.12.59
 
 ## Authorized outcome
 
-Implement the deterministic fixture-only symbolic parcel-system contract
-against the established map-grid, road-token, and district-token contracts.
+Implement the deterministic fixture-only symbolic relationship-line style
+catalog against the established map-grid, road, district, and parcel
+contracts.
 
 ## Slice boundary
 
-- Provide facility-parcel and undeveloped-land-parcel tokens on the shared 24px
-  grid with a generic fallback.
-- Include non-color patterns, registry hash/provenance, symbolic-placement
-  disclaimer, accessible type equivalents, and deterministic tests.
-- Keep live GUI promotion, host/session behavior, ownership, zoning, future-use,
-  and project semantics out of scope.
+- Provide peer, service, policy, and uncertain relationship-line styles with a
+  generic fallback.
+- Include non-color patterns, non-directional defaults, registry
+  hash/provenance, actor-visible boundary, accessible equivalents, and
+  deterministic tests.
+- Keep live GUI promotion, host/session behavior, relationship instances, and
+  causal or hidden-state inference out of scope.
 
 ## Required bookkeeping
 
-Check the Phase 3.2 parcel-system item, bump to v0.12.58, and align SPEC,
-architecture, changelog, README, LESSONS, history, registry, credits,
+Check the Phase 3.2 relationship-line styles item, bump to v0.12.59, and align
+SPEC, architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 
 ## Evidence limits

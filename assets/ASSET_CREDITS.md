@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.58. Runtime-generated
+No third-party release assets are included in v0.12.59. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval |
@@ -35,6 +35,7 @@ visual tokens and Web Audio recipes remain optional presentation layers.
 | Visual | `visual.map.district-tile-set` | `gui/map-districts.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.map.parcel-system` | `gui/map-parcels.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.map.regional-grid` | `gui/map-environment.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
+| Visual | `visual.map.relationship-line-styles` | `gui/map-relationships.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.map.road-tile-set` | `gui/map-tiles.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-identities` | `gui/visual.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-markers` | `gui/visual.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |

@@ -4875,6 +4875,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   markers, and interaction behavior remain separate future slices with no live
   GUI or host behavior changed.
 
+### Visual/audio Phase 3.2 relationship-lines contract (v0.12.59)
+
+- Status: Partial; deterministic fixture-only relationship-line style catalog
+  complete
+- Branch: `feat/visual-audio-phase3-relationship-lines-v0.12.59`
+- Added `gui/map-relationships.mjs` with peer, service, policy, and uncertain
+  non-color line styles, no-arrowhead defaults, and a generic fallback.
+- Added registry/hash/credits provenance and deterministic relationship-style
+  tests.
+- Checked the Phase 3.2 relationship-line styles item; overlays, event markers,
+  and interaction behavior remain separate future slices with no live GUI or
+  host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

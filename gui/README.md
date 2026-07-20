@@ -77,6 +77,11 @@ parcel tokens on the shared grid. Each token has a non-color pattern and
 generic fallback; it does not assert ownership, availability, development
 potential, land value, zoning, geography, or future use.
 
+`map-relationships.mjs` adds fixture-only peer, service, policy, and uncertain
+relationship-line styles with non-color patterns, no arrowheads, and a generic
+fallback. The styles do not infer hidden intent, causality, strength, direction,
+distance, or future outcome.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

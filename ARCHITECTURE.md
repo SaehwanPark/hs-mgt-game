@@ -313,6 +313,11 @@ placement tokens on a shared 24px grid. Its boundary, footprint, and open-area
 patterns organize symbolic placement and do not assert ownership, availability,
 development potential, land value, zoning, geography, or future use.
 
+The v0.12.59 relationship-line catalog adds deterministic peer, service,
+policy, and uncertain styles with non-color patterns, round caps, and no
+arrowheads. The catalog organizes actor-visible relationships without inferring
+hidden intent, causality, strength, direction, distance, or future outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

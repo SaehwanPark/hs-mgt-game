@@ -1,0 +1,91 @@
+const RELATIONSHIP_INFORMATION_BOUNDARY = "Relationship-line styles organize actor-visible relationships; they do not infer hidden intent, causality, strength, direction, distance, or future outcome.";
+
+const RELATIONSHIP_LINE_FALLBACK = Object.freeze({
+  schema_version: "regional-relationship-line-v1",
+  id: "relationship-generic",
+  label: "Relationship unavailable",
+  relationship_type: "unknown",
+  line_pattern: "dotted",
+  dasharray: "2 4",
+  line_width: "2px",
+  line_cap: "round",
+  arrowhead: "none",
+  directionality: "not encoded",
+  non_color_pattern: "dotted line with text label",
+  text_equivalent: "Relationship type unavailable",
+  visible_source: "Fixture-only symbolic relationship-line vocabulary",
+  information_boundary: RELATIONSHIP_INFORMATION_BOUNDARY,
+});
+
+const RELATIONSHIP_LINE_SET = Object.freeze([
+  Object.freeze({
+    schema_version: "regional-relationship-line-v1",
+    id: "relationship-peer",
+    label: "Visible peer relationship",
+    relationship_type: "peer",
+    line_pattern: "solid",
+    dasharray: "none",
+    line_width: "2px",
+    line_cap: "round",
+    arrowhead: "none",
+    directionality: "not encoded",
+    non_color_pattern: "solid line",
+    text_equivalent: "Visible peer relationship; undirected solid-line style",
+    visible_source: "Fixture-only symbolic relationship-line vocabulary",
+    information_boundary: RELATIONSHIP_INFORMATION_BOUNDARY,
+  }),
+  Object.freeze({
+    schema_version: "regional-relationship-line-v1",
+    id: "relationship-service",
+    label: "Visible service relationship",
+    relationship_type: "service",
+    line_pattern: "double",
+    dasharray: "none",
+    line_width: "2px",
+    line_cap: "round",
+    arrowhead: "none",
+    directionality: "not encoded",
+    non_color_pattern: "paired parallel lines",
+    text_equivalent: "Visible service relationship; undirected paired-line style",
+    visible_source: "Fixture-only symbolic relationship-line vocabulary",
+    information_boundary: RELATIONSHIP_INFORMATION_BOUNDARY,
+  }),
+  Object.freeze({
+    schema_version: "regional-relationship-line-v1",
+    id: "relationship-policy",
+    label: "Visible policy relationship",
+    relationship_type: "policy",
+    line_pattern: "dash-dot",
+    dasharray: "8 3 2 3",
+    line_width: "2px",
+    line_cap: "round",
+    arrowhead: "none",
+    directionality: "not encoded",
+    non_color_pattern: "dash-dot line",
+    text_equivalent: "Visible policy relationship; undirected dash-dot style",
+    visible_source: "Fixture-only symbolic relationship-line vocabulary",
+    information_boundary: RELATIONSHIP_INFORMATION_BOUNDARY,
+  }),
+  Object.freeze({
+    schema_version: "regional-relationship-line-v1",
+    id: "relationship-uncertain",
+    label: "Uncertain visible relationship",
+    relationship_type: "uncertain",
+    line_pattern: "dotted",
+    dasharray: "2 4",
+    line_width: "2px",
+    line_cap: "round",
+    arrowhead: "none",
+    directionality: "not encoded",
+    non_color_pattern: "dotted line with uncertainty label",
+    text_equivalent: "Uncertain or stale visible relationship; undirected dotted style",
+    visible_source: "Fixture-only symbolic relationship-line vocabulary",
+    information_boundary: RELATIONSHIP_INFORMATION_BOUNDARY,
+  }),
+]);
+
+export { RELATIONSHIP_LINE_SET, RELATIONSHIP_LINE_FALLBACK, RELATIONSHIP_INFORMATION_BOUNDARY };
+
+export function relationshipLineStyleFor(id) {
+  return RELATIONSHIP_LINE_SET.find((style) => style.id === id) ?? RELATIONSHIP_LINE_FALLBACK;
+}
