@@ -1,67 +1,62 @@
-# Presentation Contract — Phase 1.1 art-direction reference board v0.12.35
+# Presentation Contract — Phase 1.2 SVG rendering proof v0.12.36
 
 ## Goal and Authorization
 
-Authorized slice: produce three source-only art-direction reference variants,
-score them, select one for future rendering, and record rejected alternatives.
-No selected variant is yet a shipped GUI asset or runtime semantic mapping.
+Authorized slice: implement a fixture-only, deterministic SVG scene model and
+renderer using the accepted Variant A vocabulary. The proof page may expose
+local selection and reduced-motion controls but may not load or mutate a host.
 
 ## Player Questions and Consequences
 
-The selected direction must make the future player question legible: where is a
-visible institution, what facility/process/status is being discussed, and which
-relationship deserves attention next. It must support compact executive density
-without turning symbolic layout into true geography or hidden-state disclosure.
+The proof demonstrates that a player can identify a visible institution,
+select a facility, distinguish reported/uncertain/constrained status, and
+recover when identity or facility data is unavailable.
 
 ## Actor-Visible Source Ledger
 
-| Reference element | Source authority | Missingness | Prohibited inference |
+| Scene field | Source | Unknown behavior | Client prohibition |
 | --- | --- | --- | --- |
-| Institution name/marker | Visible host or fixture identity | Generic label/token | No private rival identity |
-| Facility/status labels | Visible host/fixture category and status | Generic marker/text | No client-derived severity |
-| Relationship arrows/lines | Decorative reference vocabulary only | Omit if no visible relationship | No causal or geographic claim |
-| Palette/shape treatment | Decorative style decision | Monochrome/text fallback | No color-only meaning |
+| `id`, `name`, `role`, `summary` | Fixture-visible projection | Generic institution label | No private actor inference |
+| `status` | Visible status language | Uncertain `?` pattern | No severity formula |
+| `facility.kind`, `marker`, `label` | Visible facility/category | Generic marker `•` | No client category engine beyond vocabulary lookup |
+| Layout position | Static design slot | Omit/empty state | Not geography or distance |
 
 ## Visual, Motion, and Audio Semantics
 
-Variant A uses a flat institutional panel/grid language and is the selected
-direction. Variant B uses civic terrain/road motifs and is rejected because it
-invites unsupported geography. Variant C uses editorial dashboard tiles and is
-rejected because it weakens persistent spatial relationship cues. No motion or
-audio is added in this slice.
+The renderer uses stable cards, labels, symbols, flat fills, and dashed
+uncertainty/delay outlines. The proof has no animation or audio. `data-motion`
+records the local reduced-motion choice and never enters a host payload.
 
 ## Accessibility and Fallbacks
 
-Every SVG includes a title, description, visible labels, shapes, and a
-`viewBox`. Meaning is repeated in text and shape, not color alone. Small-size
-review uses the compact marker/group in each board; large-text review uses
-ordinary text labels rather than rasterized text. Missing or unsupported SVG
-rendering falls back to the existing text-first GUI; reduced motion has no
-additional behavior because these are static references.
+SVG root title/description, visible text, symbols, `role="button"`, `tabindex=0`,
+and keyboard event handling keep the proof operable without color or audio.
+Unknown institutions/facilities/statuses use explicit generic/uncertain text.
+If SVG is unsupported, the proof page's text fallback explains the same limits.
 
 ## Authority, History, and Replay Boundaries
 
-The reference board is source/design material only. It does not enter browser
-state, commands, transition evaluation, stochastic inputs, history, hashes,
-replay, audio classification, or debrief output. Layout slots are not geography.
+`gui/scene.mjs` consumes only a fixture-shaped visible scene. It does not own
+true state, parse commands, resolve outcomes, call the network, or write
+history, hashes, replay, audio classification, or debrief data. The proof page
+is not part of the live host route.
 
 ## Asset Provenance and Release Requirements
 
-The three SVGs are hand-authored project-generated source references under
-`assets/source/visual/art-direction/`, registered with hashes and no release
-path. They use no external images, fonts, scripts, or network references. A
-future release derivative requires a new approved registry entry and hash.
+The renderer is registered as a project-generated source reference with a
+current hash and no release derivative. It uses no external images, fonts,
+scripts, or network references. Any future live integration or release asset
+requires a new bounded proposal and registry update.
 
 ## Verification and Evidence Limits
 
-Focused tests parse all SVGs, require accessibility text and viewBox/role
-markers, reject external references and color-only content, and verify the
-selection matrix and ADR. This is a technical design proxy, not a human color-
-blind, screen-reader, contrast, usability, or art-direction study.
+Node/Python tests assert deterministic SVG snapshot output, keyboard markers,
+uncertainty patterns, fallbacks, reduced-motion output, no forbidden authority
+markers, and a 500-render local performance target. These are technical proxies,
+not human usability, screen-reader, contrast, or lived-accessibility evidence.
 
 ## Non-Goals and Open Questions
 
-No renderer, browser integration, screenshot automation, facility geometry
-library, audio motif, or production asset derivative is authorized. Phase 1.2
-must prove deterministic SVG rendering with the selected vocabulary before
-broader facility/map work.
+No live client integration, screenshot capture/upload, facility geometry system,
+true geography, animation timeline, or audio cue mapping is included. Phase 1.3
+audio direction is a separate slice.

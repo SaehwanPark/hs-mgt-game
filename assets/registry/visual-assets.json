@@ -103,6 +103,23 @@
       "accessible_equivalent": "Visible status label and non-color symbol",
       "visible_source": "Host- or fixture-provided visible status language",
       "approval_status": "approved"
+    },
+    {
+      "id": "visual.runtime-svg-scene-proof",
+      "asset_type": "visual",
+      "semantic_role": "map",
+      "source_path": "gui/scene.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic SVG renderer",
+      "license": "project-generated",
+      "modifications": "None; fixture-only proof renderer.",
+      "original_hash": "sha256:60d81ec64ab0d7c4f3bb0a56d052b4a1b4e3818c09ca1ec2e0d86abcbe84b965",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Keyboard-reachable SVG controls plus visible labels and symbols",
+      "visible_source": "Static actor-visible fixture; no host state is created",
+      "approval_status": "approved"
     }
   ]
 }

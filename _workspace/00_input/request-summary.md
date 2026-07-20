@@ -1,38 +1,36 @@
-# Request Summary — Visual/audio roadmap execution v0.12.35
+# Request Summary — Visual/audio roadmap execution v0.12.36
 
 ## Classification and scope
 
-- Track: presentation; Phase 1.1 art-direction reference board.
-- Slice: three flat-vector SVG variants, scored selection/rejection record,
-  technical color/size/accessibility review, and an art-direction ADR.
-- Dependency: Phase 0 product brief and asset registry from v0.12.34.
-- Workflow: preferred branch/verification/PR handoff, one light independent code
-  review, autonomous merge to `main`, then select the next bounded slice.
+- Track: presentation; Phase 1.2 SVG rendering proof of concept.
+- Slice: pure fixture-driven scene model/renderer, static proof page, keyboard
+  selection, text/symbol fallbacks, uncertainty/unknown handling, deterministic
+  snapshot, and render-time checks.
+- Dependency: selected Variant A from v0.12.35.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` Phase 1.1.
-- `docs/history/initiatives/visual-audio/visual-audio-phase0-foundation-v0.12.34.md`.
+- `docs/visual_audio_enhancement_roadmap.md` Phase 1.2.
+- `docs/design/visual-audio-art-direction-board.md` and ADR-0012.
 - `README.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/design_principles.md`, and
   `docs/harness/health-policy-strategy-game/team-spec.md`.
 
 ## Expected files
 
-- Three source SVG reference variants, art-direction comparison/decision record,
-  ADR, focused static/SVG tests, updated asset registry/credits, roadmap/SPEC,
-  architecture/changelog/lesson records, and `_workspace` handoffs.
+- `gui/scene.mjs`, `gui/svg-proof.html`, focused scene tests, registry/credits,
+  Phase 1.2 history/SDD/QA/handoff records, and roadmap checklist updates.
 
 ## Non-goals
 
-- No live GUI renderer, facility production kit, map integration, animation,
-  audio production, third-party asset, runtime host/MCP/simulation change, or
-  human usability/accessibility claim.
+- No live GUI integration, host DTO, command, transition, stochastic input,
+  browser simulation state, production facility/map kit, audio, animation,
+  third-party asset, or human usability/accessibility claim.
 
 ## Acceptance and validation
 
-- Three variants are committed, well-formed, labeled, and text-equivalent.
-- Evaluation criteria are scored; one style is selected and two are rejected
-  with explicit reasons.
-- Color-independent, small-size, large-text, reduced-motion, provenance, and
-  no-external-reference checks are recorded and automated where practical.
-- Phase 1.1 checklist items are checked only for demonstrated evidence.
+- Scene model and deterministic SVG renderer are implemented.
+- Institutions and facilities are keyboard reachable; labels/symbols remain
+  available without color, motion, or audio.
+- Uncertainty has a pattern/symbol and unknown data has generic fallbacks.
+- Static fixture output is snapshot-stable, no hidden-state field is consumed,
+  reduced motion is tested, and render time meets the proof target.

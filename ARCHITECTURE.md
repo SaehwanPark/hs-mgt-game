@@ -199,6 +199,12 @@ for the next rendering proof. Its schematic relationship layouts are design
 references, not true geography; rejected terrain and dashboard variants remain
 comparison evidence and are not runtime semantics.
 
+The v0.12.36 SVG proof lives in `gui/scene.mjs` and `gui/svg-proof.html` as a
+fixture-only renderer. It accepts visible scene fields, normalizes unknown
+values to explicit fallbacks, and owns only local selection/reduced-motion
+presentation state. It is not imported by the live host path and cannot submit
+commands or alter simulation/replay state.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

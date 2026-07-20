@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — SVG Rendering Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1040px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .proof-nav { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem; }
+      button { background: #ffffff; border: 2px solid #0b6e69; border-radius: .5rem; color: #075952; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .source { color: #60707b; }
+      #scene { overflow-x: auto; }
+      #scene svg { display: block; height: auto; min-width: 760px; width: 100%; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>SVG rendering proof</h1>
+      <p class="source">Static fixture only. This page does not load a host, submit a command, or create simulation state.</p>
+      <nav class="proof-nav" aria-label="SVG proof controls">
+        <button type="button" data-select="riverside">Select Riverside</button>
+        <button type="button" data-select="northlake">Select Northlake</button>
+        <button type="button" data-select="future-system">Select generic fallback</button>
+        <button type="button" id="reduced-motion">Toggle reduced motion</button>
+      </nav>
+      <div id="scene" aria-live="polite"></div>
+      <p class="fallback">Text labels, symbols, and the selection controls remain available when SVG, color, motion, or audio is unavailable.</p>
+    </main>
+    <script type="module">
+      import { SVG_SCENE_FIXTURE, renderRegionalSvg } from "./scene.mjs";
+
+      const scene = document.querySelector("#scene");
+      let selectedId = "riverside";
+      let reducedMotion = false;
+
+      function render() {
+        scene.innerHTML = renderRegionalSvg(SVG_SCENE_FIXTURE, { selectedId, reducedMotion });
+      }
+
+      document.querySelectorAll("[data-select]").forEach((button) => {
+        button.addEventListener("click", () => {
+          selectedId = button.dataset.select;
+          render();
+        });
+      });
+      document.querySelector("#reduced-motion").addEventListener("click", () => {
+        reducedMotion = !reducedMotion;
+        render();
+      });
+      scene.addEventListener("click", (event) => {
+        const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
+        if (target) selectedId = target.dataset.entityId ?? target.dataset.facilityId;
+        render();
+      });
+      scene.addEventListener("keydown", (event) => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const target = event.target.closest?.("[data-entity-id], [data-facility-id]");
+        if (!target) return;
+        event.preventDefault();
+        selectedId = target.dataset.entityId ?? target.dataset.facilityId;
+        render();
+      });
+      render();
+    </script>
+  </body>
+</html>

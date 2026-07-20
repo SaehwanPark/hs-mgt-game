@@ -4564,6 +4564,33 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
     audio, third-party asset, runtime host/simulation change, or human design,
     accessibility, learning, calibration, balance, or policy-validity claim.
 
+### Visual/audio Phase 1.2 SVG proof (v0.12.36)
+
+- Status: Closed; fixture-driven renderer, keyboard proof, and technical
+  verification complete
+- Started: 2026-07-20
+- Branch: `feat/visual-audio-phase1-svg-proof-v0.12.36`
+
+  Done:
+  - Added `gui/scene.mjs` with a narrow visible scene model, deterministic SVG
+    output, text/symbol status semantics, uncertainty pattern, and generic
+    identity/marker/status fallbacks.
+  - Added `gui/svg-proof.html` with local institution/facility keyboard
+    selection and reduced-motion controls; it never loads or mutates a host.
+  - Added snapshot, keyboard/fallback, reduced-motion, boundary, and render-time
+    tests; registered the renderer as project-generated source provenance.
+  - Checked only the demonstrated Phase 1.2 roadmap items.
+
+  Verification:
+  - 327 Python tests, 328 Rust library tests plus integration/golden/doc targets,
+    Clippy, asset/credits, documentation links, release metadata, formatting,
+    Node syntax, and diff checks pass.
+
+  Deferred / Non-Goals:
+  - No live GUI integration, host DTO, command, transition, stochastic input,
+    browser simulation state, true geography, animation, audio, third-party
+    asset, or human usability/accessibility/design claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4597,10 +4624,10 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-No active documentation or visual/audio implementation slice. v0.12.35 closes
-the Phase 1.1 art-direction gate; Phase 1.2 rendering and all broader production
-remain Future work. Human and educational evaluation remain separately gated
-Future work.
+No active documentation or visual/audio implementation slice. v0.12.36 closes
+the Phase 1.2 SVG proof gate; audio direction and all broader production remain
+Future work. Human and educational evaluation remain separately gated Future
+work.
 
 ## Future
 

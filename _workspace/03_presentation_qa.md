@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 1.1 art-direction v0.12.35
+# Presentation Domain QA — Phase 1.2 SVG rendering proof v0.12.36
 
 ## Status
 
@@ -6,50 +6,51 @@
 
 ## Reviewed Inputs and Authorization
 
-- User request, `_workspace/00_input/request-summary.md`, and Phase 0 contract.
-- Phase 1.1 roadmap checklist, art-direction board, and ADR-0012.
-- Three source SVGs, visual registry/credits, focused XML/static tests, and
-  current host-authority architecture.
+- User request, `_workspace/00_input/request-summary.md`, and the Phase 1.2
+  presentation contract.
+- The Phase 1.2 roadmap checklist, selected Variant A direction, fixture scene,
+  renderer, proof page, registry, credits, and focused tests.
+- Current host-authority architecture and the fixture-only scope of this slice.
 
-The slice is source/design-only. It does not promote a renderer or release
-asset and stays within the authorized art-direction milestone.
+The slice is an additive technical proof. It does not wire the renderer into
+the live host, promote external assets, or change simulation behavior.
 
 ## Information and Causality Findings
 
-- Pass: all variants use visible institution/facility/status labels and mark
-  relationship lines as schematic references; no hidden severity, intent,
-  future result, or true geography is encoded.
-- Pass: Variant B's terrain/road metaphor is explicitly rejected for geographic
-  overclaiming; Variant C is rejected for dashboard-only semantics.
-- Pass: the selected Variant A is compatible with actor-visible host projections
-  and progressive disclosure.
+- Pass: the fixture exposes only declared entity, facility, relationship, and
+  status fields; labels and markers are derived from the same visible records.
+- Pass: uncertain and delayed states use labels, symbols, and dashed treatment,
+  so color is not the only status channel.
+- Pass: the generic fallback is visibly labeled and does not invent a facility
+  or policy outcome; no hidden/private field or competitive transition enters
+  rendering.
+- Pass: deterministic snapshot output and a bounded render-time test protect
+  replay-safe presentation behavior without claiming simulation authority.
 
 ## Accessibility and Fallback Findings
 
-- Pass: all SVGs have title, description, role, viewBox, visible labels, and
-  text-plus-shape status meaning; no external images, fonts, scripts, or URLs.
-- Pass: the board records color-independent, small-size, large-text, and
-  reduced-motion decisions. Existing text-first GUI fallback remains the
-  recovery path.
-- Evidence limit: XML/static checks do not establish human color-vision,
-  contrast, screen-reader, viewport, or usability outcomes.
+- Pass: the SVG includes a title, description, visible text labels, keyboard
+  focus targets, Enter/Space activation, and a text fallback paragraph.
+- Pass: reduced-motion mode is explicit and the proof contains no animation;
+  uncertainty remains legible through text, pattern, and stroke treatment.
+- Evidence limit: static and fixture tests do not establish human contrast,
+  screen-reader, viewport, or usability outcomes.
 
 ## Provenance and Rights Findings
 
-- Pass: all three source references are registry entries with current SHA-256
-  hashes, project-generated provenance, accessible equivalents, and no release
-  path.
-- Pass: deterministic credits include the three references; no third-party or
-  proprietary asset was added.
-- Evidence limit: repository policy and project-generated status are not legal
-  advice or independent rights counsel.
+- Pass: the renderer is registered with a current SHA-256 hash, project-owned
+  provenance, an accessible equivalent, and no release path.
+- Pass: deterministic credits include the generated proof source; no external
+  asset, font, image, or URL was added.
+- Evidence limit: repository provenance is not independent legal advice.
 
 ## Authority and Replay Findings
 
-- Pass: the SVGs and design documents are not imported by runtime code and do
-  not enter commands, transitions, stochastic inputs, history, hashes, replay,
-  audio classification, or debriefs.
-- Pass: focused boundary tests reject simulation/private-state markers.
+- Pass: `gui/scene.mjs` consumes an explicit fixture and returns SVG markup; it
+  does not import host state, commands, transitions, stochastic inputs,
+  history, hashes, replay data, audio classification, or debriefs.
+- Pass: the proof page has local controls only and no network, websocket, or
+  host submission path.
 
 ## Required Fixes
 
@@ -57,15 +58,15 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-The selected vocabulary still needs a deterministic renderer proof, rendered
-small/large viewport inspection, and later human design/accessibility review.
-The schematic board must retain its non-geographic disclaimer when integrated.
+The proof still needs human visual/accessibility review, real viewport testing,
+and a stable scene contract before live integration. The fixture must remain
+clearly labeled as a technical proof until those boundaries are approved.
 
 ## Verification Evidence
 
 - `python3 scripts/validate_assets.py`
 - `python3 scripts/generate_asset_credits.py --check`
-- `python3 -m unittest tests.test_visual_audio_art_direction tests.test_asset_registry tests.test_release_metadata`
-- Documentation links, release metadata, `cargo fmt --check`, Node syntax, and
-  `git diff --check`
-- One light independent code-review pass completed: no actionable issues found.
+- Focused SVG scene, asset registry, and release metadata tests.
+- Full Python suite, Rust tests, Clippy, formatting, Node syntax,
+  documentation links, release metadata, and diff checks.
+- One light independent code-review pass completed; no actionable issues found.
