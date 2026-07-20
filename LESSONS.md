@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Keep the Semantic Board as the Fallback
+
+- Context: Phase 4.1 integrates a graphical SVG board with an existing typed
+  regional-world projection and semantic map/detail panels.
+- Symptom: A visual board can look like a replacement surface while dropping
+  source labels, missingness, keyboard reachability, or the existing selection
+  contract.
+- Resolution: Map DTO fields through a pure adapter, mount SVG beside the
+  semantic surface, route both paths through one local selection state, and
+  preserve explicit status/source/missingness text plus a deterministic SVG
+  snapshot.
+- Prevention: Treat the graphical board as an additional projection of the
+  actor-visible DTO; never let local focus become simulation state or hide the
+  semantic fallback.
+
 ## Make Overlay Priority Explicitly Non-Semantic
 
 - Context: Phase 3.3 requires deterministic ordering and collision behavior for

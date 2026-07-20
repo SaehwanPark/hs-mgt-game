@@ -349,6 +349,16 @@ static reduced-motion behavior, collision rule, and display-only priority.
 and explicit overflow counts; it cannot enter host DTOs, simulation transitions,
 stochastic inputs, history, hashes, replay, audio, or debrief output.
 
+The v0.12.64 Phase 4.1 static regional-board integration adds
+`gui/regional-board.mjs`, a pure adapter from the existing
+`competitive-regional-world-v1` actor-visible DTO into the SVG scene vocabulary.
+`gui/app.mjs` mounts the deterministic SVG beside the existing semantic map and
+detail panels, keeping institution/facility focus, report links, status/source
+labels, missingness, generic identity/facility fallbacks, and keyboard order in
+the browser presentation layer. The adapter and board remain non-authoritative:
+they do not mutate simulation state, commands, transitions, stochastic inputs,
+history, hashes, replay, audio, or debrief output.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

@@ -82,6 +82,7 @@ function normalizeFacility(facility, index) {
     label: text(facility?.label, "Facility unavailable"),
     marker,
     status: statusFor(facility?.status),
+    source: text(facility?.source, ""),
   };
 }
 
@@ -99,12 +100,26 @@ function normalizeEntity(entity, index) {
   };
 }
 
+function normalizeOverlay(overlay, index) {
+  return {
+    id: safeId(overlay?.id, `overlay-${index + 1}`),
+    label: text(overlay?.label, "Visible overlay"),
+    value: text(overlay?.value, "Unavailable"),
+    unit: text(overlay?.unit, ""),
+    marker: visualMarkerFor(overlay?.marker ?? overlay?.label),
+    source: text(overlay?.source, "Visible source unavailable"),
+    equivalent: text(overlay?.equivalent, "Visible source-linked overlay."),
+  };
+}
+
 export function normalizeScene(scene = SVG_SCENE_FIXTURE) {
   const entities = Array.isArray(scene?.entities) ? scene.entities : [];
+  const overlays = Array.isArray(scene?.overlays) ? scene.overlays : [];
   return {
     title: text(scene?.title, "Regional operating board"),
     source: text(scene?.source, "Visible source unavailable"),
     entities: entities.map(normalizeEntity),
+    overlays: overlays.map(normalizeOverlay),
   };
 }
 
@@ -115,18 +130,19 @@ function statusAttributes(status) {
 
 function renderFacility(facility, x, y, selectedId) {
   const selected = facility.id === selectedId;
-  const label = `${facility.label}; ${facility.status.label}; ${facility.marker.label}`;
+  const label = `${facility.label}; ${facility.status.label}; ${facility.marker.label}${facility.source ? `; Source: ${facility.source}` : ""}`;
+  const detail = `${facility.status.symbol} ${facility.status.label} · ${facility.marker.label}${facility.source ? ` · Source: ${facility.source}` : ""}`;
   return `
     <a href=\"#${escapeXml(facility.id)}\" role=\"button\" tabindex=\"0\" data-facility-id=\"${escapeXml(facility.id)}\" aria-label=\"Select ${escapeXml(label)}\">
       <rect x=\"${x}\" y=\"${y}\" width=\"250\" height=\"52\" rx=\"8\" fill=\"#ffffff\" stroke=\"${selected ? "#0b6e69" : "#9ec7c1"}\" stroke-width=\"${selected ? "4" : "2"}\" ${statusAttributes(facility.status)}/>
       <text x=\"${x + 14}\" y=\"${y + 22}\" class=\"label\" font-size=\"16\">${escapeXml(facility.marker.symbol)} ${escapeXml(facility.label)}</text>
-      <text x=\"${x + 14}\" y=\"${y + 42}\" class=\"sub-label\" font-size=\"13\">${escapeXml(facility.status.symbol)} ${escapeXml(facility.status.label)} · ${escapeXml(facility.marker.label)}</text>
+      <text x=\"${x + 14}\" y=\"${y + 42}\" class=\"sub-label\" font-size=\"13\">${escapeXml(detail)}</text>
     </a>`;
 }
 
-function renderEntity(entity, index, selectedId) {
+function renderEntity(entity, index, selectedEntityId, selectedId) {
   const [x, y] = POSITIONS[index % POSITIONS.length];
-  const selected = entity.id === selectedId;
+  const selected = entity.id === selectedEntityId;
   const facilities = entity.facilities.length
     ? entity.facilities.map((facility, facilityIndex) => renderFacility(facility, x + 14, y + 142 + facilityIndex * 60, selectedId)).join("")
     : `<text x=\"${x + 14}\" y=\"${y + 166}\" class=\"sub-label\" font-size=\"14\">No visible facility detail.</text>`;
@@ -144,12 +160,34 @@ function renderEntity(entity, index, selectedId) {
     </g>`;
 }
 
+function renderOverlays(overlays) {
+  if (!overlays.length) return "";
+  const visible = overlays.slice(0, 4);
+  const cards = visible.map((overlay, index) => {
+    const x = 32 + index * 232;
+    const value = `${overlay.value} ${overlay.unit}`.trim();
+    return `<g data-overlay-id="${escapeXml(overlay.id)}">
+      <rect x="${x}" y="474" width="216" height="78" rx="8" fill="#ffffff" stroke="#c5d8d3" stroke-width="2"/>
+      <text x="${x + 12}" y="496" class="label" font-size="13">${escapeXml(overlay.marker.symbol)} ${escapeXml(overlay.label)}</text>
+      <text x="${x + 12}" y="516" class="sub-label" font-size="12">${escapeXml(value)}</text>
+      <text x="${x + 12}" y="536" class="sub-label" font-size="10">${escapeXml(overlay.source)}</text>
+    </g>`;
+  }).join("");
+  const overflow = overlays.length > visible.length
+    ? `<text x="42" y="574" class="sub-label" font-size="12">+${overlays.length - visible.length} more visible overlays</text>`
+    : "";
+  return `${cards}${overflow}`;
+}
+
 export function renderRegionalSvg(scene = SVG_SCENE_FIXTURE, { selectedId = "riverside", reducedMotion = false } = {}) {
   const normalized = normalizeScene(scene);
-  const selected = normalized.entities.some((entity) => entity.id === selectedId) ? selectedId : normalized.entities[0]?.id;
+  const selected = normalized.entities.find((entity) => entity.id === selectedId)
+    ?? normalized.entities.find((entity) => entity.facilities.some((facility) => facility.id === selectedId))
+    ?? normalized.entities[0];
   const entities = normalized.entities.length
-    ? normalized.entities.map((entity, index) => renderEntity(entity, index, selected)).join("")
+    ? normalized.entities.map((entity, index) => renderEntity(entity, index, selected?.id, selectedId)).join("")
     : `<text x=\"42\" y=\"160\" class=\"sub-label\" font-size=\"18\">No visible institutions available.</text>`;
+  const overlays = renderOverlays(normalized.overlays);
   return `<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"${BOARD.width}\" height=\"${BOARD.height}\" viewBox=\"0 0 ${BOARD.width} ${BOARD.height}\" role=\"img\" aria-labelledby=\"scene-title scene-desc\" data-motion=\"${reducedMotion ? "reduced" : "standard"}\">
   <title id=\"scene-title\">${escapeXml(normalized.title)}</title>
   <desc id=\"scene-desc\">${escapeXml(normalized.source)}. Labels and symbols remain visible when color, motion, or audio is unavailable.</desc>
@@ -164,6 +202,6 @@ export function renderRegionalSvg(scene = SVG_SCENE_FIXTURE, { selectedId = "riv
   <text x=\"52\" y=\"59\" fill=\"#ffffff\" font-family=\"system-ui, sans-serif\" font-size=\"22\" font-weight=\"700\">${escapeXml(normalized.title)}</text>
   <text x=\"696\" y=\"58\" fill=\"#b8d8d3\" font-family=\"system-ui, sans-serif\" font-size=\"14\">KEYBOARD-REACHABLE PROOF</text>
   <text x=\"42\" y=\"96\" class=\"sub-label\" font-size=\"14\">${escapeXml(normalized.source)} · Select an institution or facility</text>
-  ${entities}
+  ${entities}${overlays}
 </svg>`;
 }

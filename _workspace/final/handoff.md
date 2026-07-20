@@ -1,44 +1,44 @@
-# Final Handoff — Visual/audio Phase 3.3 operational overlays v0.12.63
+# Final Handoff — Visual/audio Phase 4.1 static regional board v0.12.64
 
 ## Result
 
-The Phase 3.3 operational overlay library is complete. Twelve required
-visible-field overlay categories now share one deterministic contract and
-fixture proof.
+Phase 4.1 is complete. The existing actor-visible regional-world DTO now has a
+deterministic scene adapter and the existing GUI mounts a production-shaped SVG
+board beside its semantic map/detail surface.
 
 ## Changed files and behavior
 
-- Added `gui/operational-overlays.mjs` with twelve categories, visible-field
-  sources, non-color/text equivalents, static reduced-motion behavior,
-  display-only priority, collision behavior, and generic fallback.
-- Added deterministic priority/ID ordering, bounded simultaneous stack layout,
-  and explicit overflow count.
-- Added `gui/operational-overlay-proof.html` and focused tests.
-- Added registry/hash/credits provenance, roadmap checklist completion, and
-  v0.12.63 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
-- No live board, host, simulation, commands, transitions, stochastic inputs,
-  history/hash/replay, audio, or debrief behavior changed.
+- Added `gui/regional-board.mjs` for deterministic DTO-to-scene mapping with
+  layout-slot ordering, generic identity/facility fallback, visible source,
+  status, overlay, and explicit missingness handling.
+- Extended `gui/scene.mjs` with bounded visible overlay rendering and integrated
+  the SVG board in `gui/app.mjs`/`gui/index.html`.
+- Added local institution/facility focus synchronization, report-to-board
+  buttons, keyboard handling, static proof page, SVG snapshot fixture, focused
+  tests, and registry/credits provenance.
+- No host DTO, simulation, command, transition, stochastic, history, hash,
+  replay, audio, or debrief behavior changed.
 
 ## Verification
 
-- Focused Phase 3.3 tests: passed.
-- Asset validation and credits checks: passed.
-- Full Python suite: 434 tests passed.
-- Rust formatting and `cargo test`: passed, including 328 Rust unit tests and
-  all integration/golden/scenario targets.
-- Metadata, documentation-link, asset, and presentation QA checks: passed.
+- Focused adapter, SVG, GUI, registry, credits, metadata, documentation-link,
+  presentation-contract, full Python, full Rust, formatting, and diff checks
+  passed before merge.
+- Static checks establish technical determinism and information-boundary
+  preservation only; they do not establish human usability, lived
+  accessibility, learning, calibration, contrast, or policy validity.
 
 ## Handoff and review
 
-- Base: `main` at v0.12.62.
-- Working branch: `feat/visual-audio-phase3-operational-overlays-v0.12.63`.
+- Base: `main` at v0.12.63.
+- Working branch: `feat/visual-audio-phase4-static-board-v0.12.64`.
 - Presentation-domain QA: pass; evidence limits recorded.
 - One light code-review pass is required by the task-level workflow before
   merge.
 
 ## Limits and next slice
 
-This is reusable fixture infrastructure, not live board integration, human
-art-direction evidence, lived accessibility evidence, learning evidence,
-calibration, or policy evidence. The next roadmap target is Phase 4.1 static
-regional-board integration.
+Phase 4.2 still owns visible consequence linkage, project-state transitions,
+rival observability timing, historical/replay visual sequencing, and first-month
+integration tests. This slice is the static board foundation, not a browser
+simulation or proof of first-month human usability.

@@ -988,6 +988,14 @@ Replace the current abstract map surface with the first production-quality strat
 
 ## Milestone 4.1: Static regional board integration
 
+**Status:** Complete in v0.12.64
+
+Evidence: `gui/regional-board.mjs`, the integrated `#regional-board` SVG mount
+in `gui/index.html`/`gui/app.mjs`, `gui/regional-board-proof.html`, and
+`tests/test_regional_board.py` provide the host-shaped adapter, synchronized
+selection, source/missingness/status text, keyboard controls, deterministic
+SVG snapshot, report focus links, and static fixture path.
+
 ### Deliverables
 
 - Production scene adapter.
@@ -1001,18 +1009,18 @@ Replace the current abstract map surface with the first production-quality strat
 
 ### Checklist
 
-- [ ] Existing host DTOs mapped to scene data.
-- [ ] No simulation-state changes required unless explicitly approved.
-- [ ] Unknown IDs render generic assets.
-- [ ] Selected detail and map remain synchronized.
-- [ ] Status text remains visible.
-- [ ] Source labels remain visible.
-- [ ] Missingness remains explicit.
-- [ ] Screen-reader order tested.
-- [ ] Keyboard focus tested.
-- [ ] Screenshot regression tests pass.
-- [ ] Existing GUI tests pass.
-- [ ] Static demo still functions.
+- [x] Existing host DTOs mapped to scene data.
+- [x] No simulation-state changes required unless explicitly approved.
+- [x] Unknown IDs render generic assets.
+- [x] Selected detail and map remain synchronized.
+- [x] Status text remains visible.
+- [x] Source labels remain visible.
+- [x] Missingness remains explicit.
+- [x] Screen-reader order tested.
+- [x] Keyboard focus tested.
+- [x] Screenshot regression tests pass.
+- [x] Existing GUI tests pass.
+- [x] Static demo still functions.
 
 ### Exit criteria
 
@@ -2232,8 +2240,8 @@ The visual/audio enhancement program should be considered successful when the fo
 - [x] Create the emergency department module. Evidence: `assets/source/visual/facilities/emergency-department.svg`, `gui/facility-components.mjs`, and `tests/test_emergency_department.py`.
 - [x] Create the ambulatory-center module. Evidence: `assets/source/visual/facilities/ambulatory-center.svg`, `gui/facility-components.mjs`, and `tests/test_ambulatory_center.py`.
 - [x] Create construction and staffing overlays. Evidence: `assets/source/visual/facilities/construction-crane.svg`, `tests/test_construction_crane.py`, `gui/operational-overlays.mjs`, and `tests/test_operational_overlays.py`.
-- [ ] Integrate one static regional board fixture.
-- [ ] Add screenshot regression tests.
+- [x] Integrate one static regional board fixture. Evidence: `gui/regional-board-proof.html`, `gui/regional-board.mjs`, and the integrated `#regional-board` mount in `gui/index.html`.
+- [x] Add screenshot regression tests. Evidence: `tests/test_regional_board.py` and `tests/fixtures/regional_board_snapshot.sha256`.
 - [x] Refine the first five audio cues.
 - [x] Add one environmental loop.
 - [x] Implement the initial audio priority manager.

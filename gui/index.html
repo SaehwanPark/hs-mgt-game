@@ -257,6 +257,9 @@
       .entity-card p, .facility-card p { color: var(--muted); font-size: .86rem; margin-bottom: .5rem; }
       .regional-navigation { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 var(--space-3); }
       .regional-navigation button { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; color: var(--teal); font-size: .78rem; font-weight: 750; padding: .4rem .55rem; }
+      .regional-board { background: var(--teal-soft); border: 1px solid var(--line); border-radius: .65rem; margin: 0 0 var(--space-3); overflow-x: auto; padding: .35rem; }
+      .regional-board:empty { display: none; }
+      .regional-board svg { display: block; height: auto; min-width: 760px; width: 100%; }
       .regional-overlays { background: var(--teal-soft); border-radius: .65rem; margin-top: var(--space-3); padding: .7rem .85rem; }
       .regional-overlays h3 { font-size: .95rem; margin: 0 0 .5rem; }
       .regional-overlay-list { display: grid; gap: .4rem; list-style: none; margin: 0; padding: 0; }
@@ -594,6 +597,7 @@
           <span>schematic · public signals only</span>
         </div>
         <nav class="regional-navigation" id="regional-navigation" aria-label="Regional world navigation"></nav>
+        <div class="regional-board" id="regional-board" aria-label="Graphical regional operating board"></div>
         <div class="entity-list" id="map-list"></div>
         <div class="regional-overlays">
           <h3>Visible overlays</h3>

@@ -4944,6 +4944,24 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked the Phase 3.3 operational overlay checklist; live board integration,
   host DTO changes, and outcome inference remain separately gated Future work.
 
+### Visual/audio Phase 4.1 static regional-board contract (v0.12.64)
+
+- Status: Complete; static regional-board adapter, GUI mount, and deterministic
+  SVG snapshot proof implemented and verified
+- Branch: `feat/visual-audio-phase4-static-board-v0.12.64`
+- Added `gui/regional-board.mjs` to map the existing
+  `competitive-regional-world-v1` actor-visible DTO into scene entities,
+  facilities, overlays, sources, statuses, and explicit missingness.
+- Integrated the SVG board into `gui/index.html`/`gui/app.mjs` with local
+  institution/facility focus, report-to-board links, generic fallbacks,
+  keyboard-reachable controls, and synchronized semantic detail panels.
+- Added `gui/regional-board-proof.html`, a static snapshot hash fixture, focused
+  adapter tests, and registry/credits provenance. No host DTO, simulation,
+  command, transition, stochastic, history, hash, replay, audio, or debrief
+  behavior changed.
+- Checked every Phase 4.1 static regional-board checklist item. Visible
+  consequence linkage and first-month integration remain Phase 4.2 work.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

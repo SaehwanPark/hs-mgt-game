@@ -1,75 +1,65 @@
-# Presentation QA — Phase 3.3 operational overlays v0.12.63
+# Presentation QA — Phase 4.1 static regional board v0.12.64
 
 ## Status
 
-Pass for the bounded fixture-only operational-overlay catalog and collision
-proof.
+Pass for the bounded static regional-board adapter, integrated SVG mount, and
+static proof.
 
-## Reviewed Inputs and Authorization
+## Reviewed inputs and authorization
 
 - Request: `_workspace/00_input/request-summary.md`.
 - Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 3.3.
-- Produced files: `gui/operational-overlays.mjs`,
-  `gui/operational-overlay-proof.html`, `tests/test_operational_overlays.py`,
-  and registry/credits updates.
-- Authorization is limited to reusable fixture contracts and local proof
-  layout; live board/host promotion is explicitly out of scope.
+- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 4.1.
+- Produced files: `gui/regional-board.mjs`, `gui/regional-board-proof.html`,
+  `gui/scene.mjs`, `gui/app.mjs`, `gui/index.html`, and
+  `tests/test_regional_board.py`.
+- Authorization is limited to mapping existing actor-visible DTO fields into a
+  local presentation scene. Host and simulation authority remain unchanged.
 
-## Information and Causality Findings
+## Information and causality findings
 
-- Pass: all twelve overlay categories name an actor-visible triggering field
-  drawn from the existing presentation/regional-world contracts.
-- Pass: each token explicitly sets `severity_encoding` and `motion` to `none`
-  and states that priority is display ordering only.
-- Pass: no token infers hidden intent, severity, causality, probability,
-  project outcome, rival private detail, or future result.
-- Pass: active/delayed/completed project distinctions are labeled as requiring
-  host-provided visible timing/status/effects rather than client inference.
+- Pass: entity/facility/overlay values are mapped from the existing typed DTO;
+  layout-slot ordering is local deterministic presentation state.
+- Pass: status, source, and missingness remain explicit in the scene summary,
+  overlay cards, semantic detail, and fallback proof text.
+- Pass: unknown identity and facility IDs use generic visual vocabulary without
+  inventing private rival detail, severity, geography, causality, or outcomes.
+- Pass: report focus uses the existing visible `target_id` as local navigation;
+  it does not enter a command or transition path.
 
-## Accessibility and Fallback Findings
+## Accessibility and fallback findings
 
-- Pass: every token has a glyph, non-color pattern, written equivalent, source,
-  static reduced-motion rule, generic fallback, and focusable proof card.
-- Pass: simultaneous cards expose collision state and preserve overflow as an
-  explicit count instead of silently dropping information.
-- Pass: compact responsive layout, semantic labels, and focus-visible styles
-  are present; proof has no motion-dependent meaning.
-- Evidence limit: static checks do not establish lived accessibility, contrast,
-  browser compatibility, or human comprehension.
+- Pass: SVG entity/facility controls are keyboard reachable and the semantic
+  map/detail list remains in the DOM as a fallback.
+- Pass: screen-reader order is declared and tested through the board mount
+  followed by entity, overlay, and detail regions.
+- Pass: status/source/missingness text, symbols, and focus treatment remain
+  available without color, motion, or audio.
+- Evidence limit: static DOM and SVG checks do not establish lived
+  accessibility, contrast, browser compatibility, or human comprehension.
 
-## Provenance and Rights Findings
+## Provenance and rights findings
 
-- Pass: `visual.runtime-operational-overlays` has project-generated provenance,
-  source hash, accessible equivalent, visible source, and approved status.
+- Pass: the regional-board adapter and updated scene renderer have registry
+  provenance, source hashes, accessible equivalents, and approved status.
 - Pass: no external assets, fonts, URLs, or third-party files were introduced.
 
-## Authority and Replay Findings
+## Authority and replay findings
 
-- Pass: catalog sorting/layout accepts local IDs/visible labels only and has no
-  host, command, transition, stochastic, history, hash, replay, audio, or
-  debrief path.
-- Pass: proof collision state is local presentation state and cannot enter
-  authoritative data.
+- Pass: the adapter is pure and local; app selection only re-renders existing
+  presentation state.
+- Pass: no host, command, simulation, stochastic, history, hash, replay, audio,
+  or debrief path was added.
 
-## Required Fixes
+## Required fixes
 
 None for this bounded slice.
 
-## Residual Risks and Evidence Limits
+## Verification evidence
 
-Phase 4 must map each overlay from a host-projected field with explicit timing
-and missingness. This slice does not establish production-board usability,
-human design, learning, calibration, policy validity, or legal review.
-
-## Verification Evidence
-
-- `python3 -m unittest tests.test_operational_overlays -v` — passed.
+- `python3 -m unittest tests.test_regional_board tests.test_svg_scene -v` — passed.
 - `python3 scripts/validate_assets.py` — passed.
 - `python3 scripts/generate_asset_credits.py --check` — passed.
-- `python3 scripts/check_release_metadata.py` — passed.
-- `python3 scripts/check_documentation_links.py` — passed.
-- `node --check gui/operational-overlays.mjs` — passed.
-- `python3 -m unittest discover -s tests -p 'test_*.py'` — 434 tests passed.
-- `cargo fmt -- --check` and `cargo test` — passed, including 328 Rust unit
-  tests and all integration/golden/scenario targets.
+- `node --check gui/regional-board.mjs gui/scene.mjs gui/app.mjs` — passed.
+- Full Python, Rust, metadata, documentation-link, presentation-contract,
+  formatting, and diff checks are required before merge.
