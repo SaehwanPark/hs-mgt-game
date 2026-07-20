@@ -621,13 +621,13 @@ Create the reusable graphical vocabulary needed to represent the regional market
 
 ## Milestone 3.1: Facility component library
 
-**Status:** Partial in v0.12.46; general hospital base, patient tower, emergency department, and ambulatory center components complete
+**Status:** Partial in v0.12.47; general hospital base, patient tower, emergency department, ambulatory center, and specialty center components complete
 **Evidence:** `assets/source/visual/facilities/general-hospital-base.svg`,
 `assets/release/visual/svg/general-hospital-base.svg`,
 `gui/facility-components.mjs`, `gui/facility-proof.html`, and
 `tests/test_general_hospital_base.py` plus
 `tests/test_patient_tower.py`, `tests/test_emergency_department.py`, and
-`tests/test_ambulatory_center.py`.
+`tests/test_ambulatory_center.py` plus `tests/test_specialty_center.py`.
 
 ### Core modules
 
@@ -684,7 +684,7 @@ Each facility should support:
 
 ### Future component lanes
 
-Specialty center, rural clinic,
+Rural clinic,
 administrative headquarters, parking structure, utility plant,
 research/education building, construction crane, and undeveloped parcel remain
 separate bounded component slices.
@@ -722,6 +722,22 @@ separate bounded component slices.
 - [x] Deterministic output hash recorded.
 
 ### Checklist: Ambulatory center component
+
+- [x] Source SVG completed.
+- [x] Geometry uses shared grid.
+- [x] ViewBox standardized.
+- [x] System color variables supported.
+- [x] Monochrome rendering tested.
+- [x] Small-size rendering tested.
+- [x] Pressure overlays tested.
+- [x] Project overlays tested.
+- [x] Accessibility label defined.
+- [x] Registry entry complete.
+- [x] No embedded external fonts.
+- [x] SVG optimization verified.
+- [x] Deterministic output hash recorded.
+
+### Checklist: Specialty center component
 
 - [x] Source SVG completed.
 - [x] Geometry uses shared grid.

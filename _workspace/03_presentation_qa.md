@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 ambulatory-center v0.12.46
+# Presentation Domain QA — Phase 3.1 specialty-center v0.12.47
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 ambulatory-center lane, facility contract,
+- Request summary, Phase 3.1 specialty-center lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional ambulatory-center fixture work only.
+The slice is fictional specialty-center fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the ambulatory-center shape and seven layers derive only from visible facility kind,
+- Pass: the specialty-center shape and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional ambulatory-center fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: ambulatory-center source/release SVGs and component catalog are registry-backed with
+- Pass: specialty-center source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional ambulatory-center component has no third-party brand or downloaded
+- Pass: the fictional specialty-center component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
+- Focused specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
   and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.

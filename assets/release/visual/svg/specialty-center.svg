@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc">
+  <title id="title">Specialty center facility</title>
+  <desc id="desc">Compact fictional specialty center component with visible identity badge and peaked canopy silhouette; type cue, not a clinical-scope claim.</desc>
+  <style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style>
+  <rect width="260" height="160" fill="var(--facility-paper)"/>
+  <rect x="28" y="74" width="204" height="58" rx="9" fill="var(--facility-primary)"/>
+  <path d="M70 74 130 22l60 52z" fill="var(--facility-primary)"/>
+  <path d="M58 92h22v18H58zm38 0h22v18H96zm38 0h22v18h-22z" fill="var(--facility-paper)" opacity=".9"/>
+  <path d="M130 22v28M118 36h24" stroke="var(--facility-secondary)" stroke-linecap="round" stroke-width="7"/>
+  <rect x="118" y="104" width="24" height="28" fill="var(--facility-paper)"/><path d="M130 110v16M123 118h14" stroke="var(--facility-secondary)" stroke-width="4"/>
+  <rect x="32" y="80" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="50" y="97" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text>
+  <text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">SPECIALTY CENTER</text>
+</svg>
