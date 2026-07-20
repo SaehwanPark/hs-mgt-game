@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 1.3 audio-direction prototype v0.12.37
+# Presentation Domain QA — Phase 1.3 audio policy prototype v0.12.38
 
 ## Status
 
@@ -6,45 +6,41 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 1.3 roadmap scope, and the audio presentation contract.
-- Audio-direction board, ADR-0013, declarative recipes, proof page, registry,
-  credits, focused tests, and current host/audio architecture.
+- Request summary, Phase 1.3 roadmap, v0.12.37 direction board, and this
+  policy contract.
+- Fixture policy, proof controls, tests, registry/credits, and host/audio
+  architecture.
 
-The slice is fixture-only. It does not integrate the live audio client or
-change simulation, host, history, replay, or debrief behavior.
+This slice is prototype-only and leaves the live audio client unchanged.
 
 ## Information and Causality Findings
 
-- Pass: every prototype has a visible source and text equivalent.
-- Pass: pressure audio is explicitly restricted to actor-visible pressure
-  categories; no private rival, true-state, resolved-input, or future field is
-  consumed.
-- Pass: confirmation, rejection, and report cues use distinct contour metadata;
-  low-level beds are declared non-semantic.
-- Pass: environmental audio is specified without speech, names, sirens, or
-  decision signals and remains below the documented reading/masking target.
+- Pass: priority uses declared cue channels and does not infer severity,
+  intent, true deterioration, private rival state, or future outcomes.
+- Pass: cooldown and mode decisions are local presentation outcomes with
+  explicit status/equivalent text.
+- Pass: event/interface priority carries a declared -8 dB music-ducking
+  instruction; the policy does not invent a hidden event class.
 
 ## Accessibility and Fallback Findings
 
-- Pass: preview controls are keyboard-operable native buttons and source/equivalent
-  text is adjacent to each candidate.
-- Pass: unsupported browser audio returns an explicit visual-only result; no
-  decision depends on sound.
-- Evidence limit: static recipe checks do not establish calibrated loudness,
-  human perception, contrast, screen-reader behavior, or lived accessibility.
+- Pass: full-audio, cues-only, muted, and reduced-audio controls are native
+  keyboard controls with visible labels.
+- Pass: filtered/throttled/unsupported results retain text equivalents and do
+  not remove written meaning.
+- Evidence limit: static and deterministic policy tests do not establish human
+  listening, hardware response, screen-reader behavior, or lived access.
 
 ## Provenance and Rights Findings
 
-- Pass: the recipe source is registry-backed with a current hash, generated
-  provenance, accessible equivalent, visible source, and no release path.
-- Pass: no third-party file, network source, external font, or unidentified
-  recording was added.
+- Pass: the updated generated recipe source remains registry-backed with a
+  current hash, project provenance, accessible equivalent, and no release path.
+- Pass: no third-party or network audio asset was added.
 
 ## Authority and Replay Findings
 
-- Pass: the proof uses only declarative fixtures and local preview state; it
-  cannot submit commands or alter session, transition, history, hash, replay,
-  or debrief data.
+- Pass: policy state is local to the fixture player and cannot submit commands
+  or alter host/session, transitions, history, hashes, replay, or debrief data.
 
 ## Required Fixes
 
@@ -52,12 +48,13 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-Actual LUFS/peak measurement, hardware playback, human listening, priority
-fatigue, preference modes, and live catalog integration remain open gates.
+Live catalog integration, calibrated audio measurement, fatigue tuning, human
+listening, and production asset review remain separate gates.
 
 ## Verification Evidence
 
-- Focused audio-direction tests and Node syntax checks.
-- Asset registry/credits, full Python, Rust, Clippy, formatting, metadata,
+- Focused policy and fallback tests.
+- Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
-- One light independent code-review pass required after final implementation.
+- One light independent code-review pass completed; findings were fixed and
+  author verification was rerun.

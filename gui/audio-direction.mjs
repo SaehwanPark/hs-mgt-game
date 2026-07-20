@@ -11,6 +11,19 @@ const AUDIO_STANDARDS = Object.freeze({
   minimum_preview_gain: 0.25,
 });
 
+export const AUDIO_MODES = Object.freeze({
+  FULL_AUDIO: "full-audio",
+  CUES_ONLY: "cues-only",
+  MUTED: "muted",
+});
+
+export const AUDIO_POLICY = Object.freeze({
+  schema_version: "audio-policy-v1",
+  priority_order: Object.freeze(["event", "interface", "music", "ambience"]),
+  ducking_db: -8,
+  reduced_audio_channels: Object.freeze(["music", "ambience"]),
+});
+
 const PROTOTYPES = Object.freeze([
   {
     id: "audio.direction-confirm",
@@ -23,6 +36,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 240,
     peak_dbfs: -12,
     loopable: false,
+    priority: 2,
+    cooldown_ms: 700,
     pattern: "ascending-major-second",
     recipe: Object.freeze({
       kind: "partials",
@@ -45,6 +60,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 280,
     peak_dbfs: -12,
     loopable: false,
+    priority: 2,
+    cooldown_ms: 700,
     pattern: "descending-minor-second",
     recipe: Object.freeze({
       kind: "partials",
@@ -67,6 +84,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 420,
     peak_dbfs: -15,
     loopable: false,
+    priority: 3,
+    cooldown_ms: 1500,
     pattern: "soft-open-triad",
     recipe: Object.freeze({
       kind: "partials",
@@ -90,6 +109,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 1800,
     peak_dbfs: -24,
     loopable: false,
+    priority: 1,
+    cooldown_ms: 0,
     pattern: "open-fifth-pulse",
     recipe: Object.freeze({
       kind: "partials",
@@ -112,6 +133,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 6000,
     peak_dbfs: -30,
     loopable: true,
+    priority: 0,
+    cooldown_ms: 0,
     pattern: "filtered-neutral-noise",
     recipe: Object.freeze({ kind: "filtered-noise", filter_hz: 700, tone_hz: 110, tone_gain: 0.12 }),
   },
@@ -126,6 +149,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 6000,
     peak_dbfs: -28,
     loopable: true,
+    priority: 1,
+    cooldown_ms: 0,
     pattern: "slow-low-pulse",
     recipe: Object.freeze({ kind: "filtered-noise", filter_hz: 420, tone_hz: 146.83, tone_gain: 0.16 }),
   },
@@ -140,6 +165,8 @@ const PROTOTYPES = Object.freeze([
     duration_ms: 6000,
     peak_dbfs: -32,
     loopable: true,
+    priority: 0,
+    cooldown_ms: 0,
     pattern: "filtered-environmental-noise",
     recipe: Object.freeze({ kind: "filtered-noise", filter_hz: 900, tone_hz: 73.42, tone_gain: 0.08 }),
   },
@@ -147,6 +174,7 @@ const PROTOTYPES = Object.freeze([
 
 export const AUDIO_DIRECTION = Object.freeze({
   standards: AUDIO_STANDARDS,
+  policy: AUDIO_POLICY,
   prototypes: PROTOTYPES,
 });
 
@@ -157,7 +185,7 @@ export function audioDirectionEntry(id) {
 }
 
 export function audioDirectionSummary() {
-  return PROTOTYPES.map(({ id, label, channel, visible_source, equivalent, purpose, duration_ms, peak_dbfs, loopable, pattern }) => ({
+  return PROTOTYPES.map(({ id, label, channel, visible_source, equivalent, purpose, duration_ms, peak_dbfs, loopable, pattern, priority, cooldown_ms }) => ({
     id,
     label,
     channel,
@@ -168,7 +196,75 @@ export function audioDirectionSummary() {
     peak_dbfs,
     loopable,
     pattern,
+    priority,
+    cooldown_ms,
   }));
+}
+
+export function audioPriorityOrder(ids = PROTOTYPES.map((entry) => entry.id)) {
+  return ids
+    .map((id) => audioDirectionEntry(id))
+    .filter(Boolean)
+    .sort((left, right) => right.priority - left.priority || left.id.localeCompare(right.id))
+    .map((entry) => entry.id);
+}
+
+export function createAudioDirectionPolicy({ clock = () => Date.now() } = {}) {
+  let mode = AUDIO_MODES.FULL_AUDIO;
+  let reducedAudio = false;
+  const lastRequestedAt = new Map();
+
+  function decision(entry, ok, code = null) {
+    return {
+      ok,
+      code,
+      id: entry.id,
+      entry,
+      equivalent: entry.equivalent,
+      priority: entry.priority,
+      duck_music_db: entry.priority >= 2 ? AUDIO_POLICY.ducking_db : 0,
+      mode,
+      reducedAudio,
+    };
+  }
+
+  function request(id, { commit = true } = {}) {
+    const entry = audioDirectionEntry(id);
+    if (!entry) return { ok: false, code: "unknown_audio_direction_id" };
+    const modeBlocks = mode === AUDIO_MODES.MUTED
+      || (mode === AUDIO_MODES.CUES_ONLY && !["interface", "event"].includes(entry.channel));
+    const preferenceBlocks = reducedAudio && AUDIO_POLICY.reduced_audio_channels.includes(entry.channel);
+    if (modeBlocks || preferenceBlocks) return decision(entry, false, "visual_only");
+    const now = Number(clock());
+    const previous = lastRequestedAt.get(entry.id);
+    if (previous != null && now - previous < entry.cooldown_ms) return decision(entry, false, "throttled");
+    if (commit) lastRequestedAt.set(entry.id, now);
+    return decision(entry, true);
+  }
+
+  function commit(id) {
+    const entry = audioDirectionEntry(id);
+    if (!entry) return { ok: false, code: "unknown_audio_direction_id" };
+    lastRequestedAt.set(entry.id, Number(clock()));
+    return { ok: true, id: entry.id };
+  }
+
+  function setMode(next) {
+    if (!Object.values(AUDIO_MODES).includes(next)) return { ok: false, code: "unknown_audio_mode", mode };
+    mode = next;
+    return { ok: true, mode };
+  }
+
+  function setReducedAudio(value) {
+    reducedAudio = Boolean(value);
+    return { ok: true, reducedAudio };
+  }
+
+  function state() {
+    return { mode, reducedAudio };
+  }
+
+  return { request, commit, setMode, setReducedAudio, state };
 }
 
 function linearGain(decibels) {
@@ -229,7 +325,7 @@ function createNoiseBuffer(context, entry) {
   return buffer;
 }
 
-export function createAudioDirectionPlayer({ AudioContextCtor, sink = { record() {} } } = {}) {
+export function createAudioDirectionPlayer({ AudioContextCtor, sink = { record() {} }, policy = createAudioDirectionPolicy() } = {}) {
   const contextConstructor = AudioContextCtor ?? globalThis.AudioContext ?? globalThis.webkitAudioContext ?? null;
   let context = null;
   let activeNodes = [];
@@ -249,6 +345,8 @@ export function createAudioDirectionPlayer({ AudioContextCtor, sink = { record()
   async function play(id) {
     const entry = audioDirectionEntry(id);
     if (!entry) return { ok: false, code: "unknown_audio_direction_id" };
+    const admission = policy.request(id, { commit: false });
+    if (!admission.ok) return admission;
     if (!contextConstructor) return { ok: false, code: "audio_unsupported", entry };
     try {
       context ??= new contextConstructor();
@@ -257,49 +355,61 @@ export function createAudioDirectionPlayer({ AudioContextCtor, sink = { record()
       context = null;
       return { ok: false, code: "audio_unsupported", entry };
     }
-    stop();
-    const now = context.currentTime;
-    const peak = linearGain(entry.peak_dbfs);
-    if (entry.recipe.kind === "filtered-noise") {
-      const source = context.createBufferSource();
-      const filter = context.createBiquadFilter();
-      const gain = context.createGain();
-      source.buffer = createNoiseBuffer(context, entry);
-      source.loop = entry.loopable;
-      source.loopStart = 0;
-      source.loopEnd = entry.duration_ms / 1000;
-      filter.type = "lowpass";
-      filter.frequency.value = entry.recipe.filter_hz;
-      gain.gain.value = peak;
-      source.connect(filter);
-      filter.connect(gain);
-      gain.connect(context.destination);
-      source.start(now);
-      source.stop(now + entry.duration_ms / 1000);
-      activeNodes = [source];
-    } else {
-      activeNodes = entry.recipe.partials.map((partial) => {
-        const oscillator = context.createOscillator();
+    try {
+      stop();
+      const now = context.currentTime;
+      const peak = linearGain(entry.peak_dbfs);
+      if (entry.recipe.kind === "filtered-noise") {
+        const source = context.createBufferSource();
+        const filter = context.createBiquadFilter();
         const gain = context.createGain();
-        oscillator.type = partial.waveform;
-        oscillator.frequency.value = partial.frequency_hz;
-        oscillator.connect(gain);
+        source.buffer = createNoiseBuffer(context, entry);
+        source.loop = entry.loopable;
+        source.loopStart = 0;
+        source.loopEnd = entry.duration_ms / 1000;
+        filter.type = "lowpass";
+        filter.frequency.value = entry.recipe.filter_hz;
+        gain.gain.value = peak;
+        source.connect(filter);
+        filter.connect(gain);
         gain.connect(context.destination);
-        scheduleEnvelope(
-          gain,
-          now,
-          entry.duration_ms,
-          entry.recipe.attack_ms,
-          entry.recipe.release_ms,
-          peak * partial.gain,
-        );
-        oscillator.start(now);
-        oscillator.stop(now + entry.duration_ms / 1000);
-        return oscillator;
-      });
+        source.start(now);
+        source.stop(now + entry.duration_ms / 1000);
+        activeNodes = [source];
+      } else {
+        activeNodes = entry.recipe.partials.map((partial) => {
+          const oscillator = context.createOscillator();
+          const gain = context.createGain();
+          oscillator.type = partial.waveform;
+          oscillator.frequency.value = partial.frequency_hz;
+          oscillator.connect(gain);
+          gain.connect(context.destination);
+          scheduleEnvelope(
+            gain,
+            now,
+            entry.duration_ms,
+            entry.recipe.attack_ms,
+            entry.recipe.release_ms,
+            peak * partial.gain,
+          );
+          oscillator.start(now);
+          oscillator.stop(now + entry.duration_ms / 1000);
+          return oscillator;
+        });
+      }
+      policy.commit(entry.id);
+      sink.record?.({ type: "audio-direction-preview", id: entry.id, source: entry.visible_source, equivalent: entry.equivalent, priority: admission.priority, duck_music_db: admission.duck_music_db });
+      return { ...admission, ok: true };
+    } catch {
+      stop();
+      try {
+        context?.close?.();
+      } catch {
+        // The context may already be closed after a device failure.
+      }
+      context = null;
+      return { ...admission, ok: false, code: "audio_unsupported" };
     }
-    sink.record?.({ type: "audio-direction-preview", id: entry.id, source: entry.visible_source, equivalent: entry.equivalent });
-    return { ok: true, id: entry.id };
   }
 
   function destroy() {
@@ -308,5 +418,5 @@ export function createAudioDirectionPlayer({ AudioContextCtor, sink = { record()
     context = null;
   }
 
-  return { play, stop, destroy };
+  return { play, stop, destroy, policy };
 }

@@ -67,6 +67,35 @@ class AudioDirectionTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_priority_cooldown_modes_and_reduced_audio_policy(self):
+    result = run_node(
+      """
+      import { AUDIO_MODES, audioPriorityOrder, createAudioDirectionPolicy } from "./gui/audio-direction.mjs";
+      let now = 1000;
+      const policy = createAudioDirectionPolicy({ clock: () => now });
+      const first = policy.request("audio.direction-confirm");
+      const repeated = policy.request("audio.direction-confirm");
+      now += 701;
+      const afterCooldown = policy.request("audio.direction-confirm");
+      if (!first.ok || first.priority !== 2 || first.duck_music_db !== -8) process.exit(1);
+      if (repeated.ok || repeated.code !== "throttled" || !repeated.equivalent) process.exit(2);
+      if (!afterCooldown.ok) process.exit(3);
+      if (audioPriorityOrder()[0] !== "audio.direction-report") process.exit(4);
+      policy.setMode(AUDIO_MODES.CUES_ONLY);
+      if (policy.request("audio.direction-neutral-bed").code !== "visual_only") process.exit(5);
+      if (!policy.request("audio.direction-reject").ok) process.exit(6);
+      policy.setMode(AUDIO_MODES.FULL_AUDIO);
+      policy.setReducedAudio(true);
+      if (policy.request("audio.direction-pressure-layer").code !== "visual_only") process.exit(7);
+      if (!policy.request("audio.direction-report").equivalent) process.exit(8);
+      policy.setMode(AUDIO_MODES.MUTED);
+      if (policy.request("audio.direction-report").code !== "visual_only") process.exit(9);
+      console.log("pass");
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_loop_crossfade_reduces_boundary_delta(self):
     result = run_node(
       """
@@ -92,6 +121,20 @@ class AudioDirectionTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_failed_playback_does_not_consume_cooldown(self):
+    result = run_node(
+      """
+      import { createAudioDirectionPlayer } from "./gui/audio-direction.mjs";
+      const player = createAudioDirectionPlayer({ AudioContextCtor: null });
+      const first = await player.play("audio.direction-confirm");
+      const second = await player.play("audio.direction-confirm");
+      if (first.code !== "audio_unsupported" || second.code !== "audio_unsupported") process.exit(1);
+      console.log("pass");
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_preview_player_catches_audio_context_failure(self):
     result = run_node(
       """
@@ -108,10 +151,29 @@ class AudioDirectionTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_preview_player_catches_node_construction_failure(self):
+    result = run_node(
+      """
+      import { createAudioDirectionPlayer } from "./gui/audio-direction.mjs";
+      class BrokenContext {
+        get currentTime() { return 0; }
+        async resume() {}
+        createOscillator() { throw new Error("device failure"); }
+        close() {}
+      }
+      const player = createAudioDirectionPlayer({ AudioContextCtor: BrokenContext });
+      const preview = await player.play("audio.direction-confirm");
+      if (preview.ok || preview.code !== "audio_unsupported" || !preview.entry.equivalent) process.exit(1);
+      console.log("pass");
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_proof_page_and_module_are_presentation_only(self):
-    for marker in ("AUDIO_DIRECTION", "audio-direction-v1", "loudness_target_lufs", "peak_ceiling_dbfs", "loopable"):
+    for marker in ("AUDIO_DIRECTION", "audio-direction-v1", "audio-policy-v1", "loudness_target_lufs", "peak_ceiling_dbfs", "loopable", "cooldown_ms"):
       self.assertIn(marker, self.audio + self.proof)
-    for marker in ("visible_source", "equivalent", "Play preview", "Audio is optional", "text equivalent"):
+    for marker in ("visible_source", "equivalent", "Play preview", "Audio is optional", "text equivalent", "data-mode", "cues-only", "reduced-audio", "audioPriorityOrder", "duck_music_db"):
       self.assertIn(marker, self.proof)
     for forbidden in ("CompetitiveWorldState", "resolved_inputs", "effect_queue", "private_rival", "transition_competitive", "fetch(", "WebSocket"):
       self.assertNotIn(forbidden, self.audio + self.proof)

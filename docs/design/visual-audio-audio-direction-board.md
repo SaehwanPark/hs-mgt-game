@@ -1,6 +1,6 @@
 # Audio-direction prototype board — Phase 1.3
 
-**Status:** Partial implementation in v0.12.37
+**Status:** Complete in v0.12.38
 **Prototype:** `gui/audio-proof.html`
 **Recipe source:** `gui/audio-direction.mjs`
 
@@ -67,6 +67,16 @@ validity.
 
 ## Deferred next slice
 
-Audio priority order, repeat-cue cooldown behavior, mute/cues-only/full-audio
-modes, and reduced-audio preference behavior remain separate implementation
-work. They should be added only after this vocabulary is accepted.
+Broader production assets, calibrated measurement, and human listening remain
+separate gates. The policy prototype now covers deterministic priority order,
+music ducking metadata, cooldown, full/cues-only/muted modes, and reduced-audio
+preference behavior.
+
+## Policy prototype — v0.12.38
+
+The same fixture now exposes a deterministic policy layer. Event cues outrank
+interface cues, which outrank music, which outranks ambience. A higher-priority
+cue carries the -8 dB music-ducking decision. Repeated cues are suppressed by
+their per-entry cooldown. Full-audio, cues-only, and muted modes are explicit;
+the reduced-audio preference suppresses music and ambience while retaining
+interface/event text and cue decisions.

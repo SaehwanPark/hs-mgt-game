@@ -1,38 +1,37 @@
-# Final Handoff — Visual/audio Phase 1.3 audio-direction prototype v0.12.37
+# Final Handoff — Visual/audio Phase 1.3 audio policy prototype v0.12.38
 
 ## Result
 
-The standards and direction-definition slice of Phase 1.3 is complete. Seven
-fixture-only generated Web Audio recipes are previewable with visible source
-and text-equivalent metadata.
+Phase 1.3 is complete: the fixture audio-direction proof now includes
+deterministic priority/ducking policy, repeat-cue cooldown, full-audio,
+cues-only, muted, and reduced-audio modes, with text equivalents retained.
 
 ## Changed files and behavior
 
-- Added `gui/audio-direction.mjs` with seven recipes and explicit audio
-  standards.
-- Added `gui/audio-proof.html` with keyboard-operable preview controls and
-  unavailable-audio fallback.
-- Added the direction board, ADR-0013, focused tests, registry/credits entry,
-  and SDD bookkeeping.
-- Checked the first seven Phase 1.3 roadmap items.
+- Extended `gui/audio-direction.mjs` with policy modes, priority order,
+  ducking metadata, cooldowns, and reduced-audio filtering.
+- Extended `gui/audio-proof.html` with native mode/preference controls and
+  policy status text.
+- Added policy tests and v0.12.38 roadmap/SDD/history bookkeeping.
 - No live audio-client, host, simulation, commands, transitions, stochastic
   inputs, history/hash/replay, or debrief behavior changed.
 
 ## Verification
 
-- Focused recipe/fallback/boundary tests passed.
+- Focused policy tests passed.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks passed.
 
 ## Handoff and review
 
-- Base: `main` at `7bc9291`.
-- Working branch: `feat/visual-audio-phase1-audio-direction-v0.12.37`.
+- Base: `main` at `6bc33dd`.
+- Working branch: `feat/visual-audio-phase1-audio-policy-v0.12.38`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light independent code-review pass is required before merge.
+- One light independent code-review pass completed; findings fixed and checks
+  rerun before handoff.
 
 ## Limits and next slice
 
-This is a recipe-direction proof, not calibrated loudness or human listening
-evidence. The next bounded candidate implements audio priority, repeat-cue
-cooldown, and mute/cues-only/full-audio mode behavior.
+Phase 1.3 remains generated-recipe prototype evidence, not calibrated loudness
+or human listening evidence. The next candidate is Phase 2.1's first
+institutional identity kit slice.

@@ -416,10 +416,10 @@ The scene model must consume only visible host data or static fixture data match
 
 ## Milestone 1.3: Audio-direction prototype
 
-**Status:** Partial in v0.12.37; standards and direction board complete
+**Status:** Complete in v0.12.38
 **Evidence:** `gui/audio-direction.mjs`, `gui/audio-proof.html`,
 `docs/design/visual-audio-audio-direction-board.md`, and
-`tests/test_audio_direction.py`
+`tests/test_audio_direction.py` and the v0.12.38 policy extension
 
 ### Scope
 
@@ -453,11 +453,11 @@ Create a prototype containing:
 - [x] UI cues remain distinguishable at low volume.
 - [x] Environmental loop does not mask speech or reading.
 - [x] Pressure music does not reveal hidden state.
-- [ ] Audio priority order implemented in prototype.
-- [ ] Repeat-cue cooldown tested.
-- [ ] Mute, cues-only, and full-audio modes tested.
-- [ ] Text equivalents remain available.
-- [ ] Reduced-audio preference tested.
+- [x] Audio priority order implemented in prototype.
+- [x] Repeat-cue cooldown tested.
+- [x] Mute, cues-only, and full-audio modes tested.
+- [x] Text equivalents remain available.
+- [x] Reduced-audio preference tested.
 
 ### Exit criteria
 

@@ -212,6 +212,11 @@ targets, and unsupported-audio fallback behavior. It is not imported by the
 live audio client and cannot read hidden state, create host/session state, or
 alter commands, transitions, history, hashes, replay, or debrief output.
 
+The v0.12.38 extension keeps the policy local to that fixture proof. Its
+priority, -8 dB music-ducking, cooldown, mode, and reduced-audio decisions use
+only declared cue metadata and local controls. They are not host settings,
+simulation transitions, history, hashes, replay artifacts, or debrief facts.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

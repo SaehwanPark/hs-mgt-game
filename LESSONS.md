@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Keep Audio Policy Local Until the Vocabulary Is Accepted
+
+- Context: The direction board needed priority, cooldown, and preference
+  behavior before any live audio integration could be justified.
+- Symptom: Putting scheduler policy into the live client first could couple
+  unreviewed sound semantics to host timing or make muted states incomplete.
+- Resolution: Added a fixture-local policy with explicit priority, ducking,
+  cooldown, modes, and reduced-audio filtering; every result retains text.
+- Prevention: Promote policy to the live client only through a separately
+  reviewed host-independent integration slice with calibrated evidence.
+
 ## Define Audio Direction Before Adding Playback Policy
 
 - Context: The existing browser audio client had a broad oscillator catalog but

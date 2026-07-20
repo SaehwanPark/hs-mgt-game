@@ -29,21 +29,39 @@
         <h2 id="standards-heading">Prototype standards</h2>
         <div id="standards"></div>
       </section>
+      <div class="modes" aria-label="Audio mode controls">
+        <button type="button" data-mode="full-audio">Full audio</button>
+        <button type="button" data-mode="cues-only">Cues only</button>
+        <button type="button" data-mode="muted">Mute</button>
+        <label><input type="checkbox" id="reduced-audio" /> Reduced-audio preference</label>
+      </div>
       <p id="audio-status" role="status">Audio is optional. The visible source and written equivalent remain complete.</p>
+      <p id="priority-order" class="source"></p>
       <section id="prototypes" aria-labelledby="prototypes-heading">
         <h2 id="prototypes-heading">Direction candidates</h2>
       </section>
       <p class="fallback">Mute or unavailable audio never removes the visible source, status, or written equivalent. The direction prototype intentionally defers priority scheduling and preference modes to the next implementation slice.</p>
     </main>
     <script type="module">
-      import { AUDIO_DIRECTION, createAudioDirectionPlayer } from "./audio-direction.mjs";
+      import { AUDIO_DIRECTION, audioPriorityOrder, createAudioDirectionPlayer } from "./audio-direction.mjs";
 
       const standards = document.querySelector("#standards");
       const prototypes = document.querySelector("#prototypes");
       const status = document.querySelector("#audio-status");
-      const player = createAudioDirectionPlayer({ sink: { record: (event) => { status.textContent = `Previewed ${event.id}; ${event.equivalent}.`; } } });
+      const player = createAudioDirectionPlayer({ sink: { record: (event) => { status.textContent = `Previewed ${event.id}; priority ${event.priority}; music duck ${event.duck_music_db} dB. ${event.equivalent}.`; } } });
 
       standards.textContent = `Target ${AUDIO_DIRECTION.standards.loudness_target_lufs} LUFS ±${AUDIO_DIRECTION.standards.loudness_tolerance_lufs}; peak ≤${AUDIO_DIRECTION.standards.peak_ceiling_dbfs} dBFS; cues ${AUDIO_DIRECTION.standards.cue_duration_ms.min}–${AUDIO_DIRECTION.standards.cue_duration_ms.max} ms; loops ${AUDIO_DIRECTION.standards.loop_duration_ms.min}–${AUDIO_DIRECTION.standards.loop_duration_ms.max} ms; speech duck ${AUDIO_DIRECTION.standards.speech_duck_db} dB.`;
+      document.querySelector("#priority-order").textContent = `Priority order: ${audioPriorityOrder().join(" → ")}. Higher-priority cues duck music by ${AUDIO_DIRECTION.policy?.ducking_db ?? -8} dB.`;
+      document.querySelectorAll("[data-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const result = player.policy.setMode(button.dataset.mode);
+          status.textContent = result.ok ? `Audio mode: ${result.mode}. Written equivalents remain active.` : "Unknown audio mode; written equivalents remain active.";
+        });
+      });
+      document.querySelector("#reduced-audio").addEventListener("change", (event) => {
+        const result = player.policy.setReducedAudio(event.target.checked);
+        status.textContent = result.reducedAudio ? "Reduced-audio preference enabled; music and ambience are visual-only." : "Reduced-audio preference disabled.";
+      });
       for (const entry of AUDIO_DIRECTION.prototypes) {
         const card = document.createElement("article");
         card.className = "prototype";
@@ -53,7 +71,9 @@
         button.textContent = "Play preview";
         button.addEventListener("click", async () => {
           const result = await player.play(entry.id);
-          if (!result.ok) status.textContent = `${entry.label} unavailable; visual and text equivalents remain active.`;
+          if (!result.ok) status.textContent = result.code === "throttled"
+            ? `${entry.label} repeated too soon; visual and text equivalents remain active.`
+            : `${entry.label} is visual-only in the current audio mode or browser; visual and text equivalents remain active.`;
         });
         card.append(button);
         prototypes.append(card);

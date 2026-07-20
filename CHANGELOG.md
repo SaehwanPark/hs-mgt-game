@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.38] - 2026-07-20
+
+- Completed the Phase 1.3 fixture audio policy with deterministic priority and
+  music-ducking decisions, repeat-cue cooldowns, full/cues-only/muted modes,
+  and reduced-audio preference behavior.
+- Kept visible sources and text equivalents complete in every filtered,
+  throttled, unsupported, or muted result; the live audio client is unchanged.
+- Bumped package/public metadata to `0.12.38`.
+
 ## [0.12.37] - 2026-07-20
 
 - Added a fixture-only audio direction proof with confirmation, rejection,

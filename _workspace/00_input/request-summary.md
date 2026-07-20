@@ -1,26 +1,26 @@
-# Request Summary — Visual/audio Phase 1.3 audio-direction prototype v0.12.37
+# Request Summary — Visual/audio Phase 1.3 audio policy prototype v0.12.38
 
 ## Authorized outcome
 
-Implement one bounded slice from `docs/visual_audio_enhancement_roadmap.md`:
-the standards and direction-definition portion of Milestone 1.3.
+Close the remaining Phase 1.3 audio-direction checklist items on top of the
+v0.12.37 recipe board.
 
 ## Slice boundary
 
-- Add seven fixture-only generated Web Audio direction recipes.
-- Provide a static keyboard-operable preview board.
-- Document loudness, peak, cue duration, loop/crossfade, ducking, and
-  low-volume targets.
-- Keep visible sources and text equivalents beside every preview.
-- Do not integrate the live audio client or add priority/mode behavior yet.
+- Implement deterministic priority/ducking policy in the fixture prototype.
+- Test repeat-cue cooldown behavior.
+- Test full-audio, cues-only, muted, and reduced-audio preference modes.
+- Preserve text equivalents and visible-source metadata in every result.
+- Do not replace the live audio client or add host/simulation behavior.
 
 ## Required bookkeeping
 
-Update the roadmap checklist, SPEC, architecture, changelog, README, LESSONS,
-history index, asset registry/credits, presentation contract, QA, implementation
-plan, and final handoff for v0.12.37.
+Mark all Phase 1.3 checklist items complete, bump the project to v0.12.38, and
+align SPEC, architecture, changelog, README, LESSONS, history, registry,
+credits, contract, QA, plan, and final handoff records.
 
 ## Evidence limits
 
-Recipe metadata and static tests do not establish calibrated loudness, human
-perception, lived accessibility, learning, balance, or policy validity.
+Policy tests establish deterministic presentation behavior only. They do not
+establish calibrated loudness, human listening, lived accessibility, learning,
+balance, or policy validity.
