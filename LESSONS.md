@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Visualize Supplied Metrics Without Inventing Precision
+
+- Context: Phase 5.2 needs small visuals that make visible constraints easier to
+  scan while the model may provide missing, stale, categorical, or uncertain
+  values.
+- Symptom: Normalizing every metric to a percentage or numeric trend can imply
+  precision, comparability, probability, or hidden state that the host did not
+  provide.
+- Resolution: Use one catalog with per-form precision, uncertainty,
+  missingness, exact-text, color-independent, and large-text rules; render only
+  when an actor-visible metric descriptor explicitly supplies a visualization.
+- Prevention: Keep exact text and source/status beside every SVG, leave missing
+  periods visible, use patterns/labels/shapes as equivalents, and snapshot the
+  deterministic proof output.
+
 ## Differentiate Containers Without Hiding Evidence
 
 - Context: Phase 5.1 needs the executive desktop to distinguish information

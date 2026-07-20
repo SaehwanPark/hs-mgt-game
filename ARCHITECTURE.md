@@ -379,6 +379,15 @@ source/status rules. `gui/index.html` applies the shared semantic-container
 classes and non-color markers to existing panels; the catalog and proof remain
 presentation-only and do not consume hidden state or change host authority.
 
+The v0.12.67 Phase 5.2 metric-visualization catalog adds eight deterministic
+actor-visible visual forms: sparklines, month-over-month deltas, capacity bars,
+staffing composition, project progress, payer mix, trust/legitimacy trend, and
+visible uncertainty interval. `gui/metric-visualizations.mjs` preserves source
+precision, explicit uncertainty/missingness, exact text, and non-color
+interpretation; `gui/app.mjs` renders only a metric descriptor that explicitly
+supplies a visualization, so visual geometry never becomes a second host or
+simulation source.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

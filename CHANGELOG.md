@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.67] - 2026-07-20
+
+- Added the Phase 5.2 metric/trend visualization catalog for sparklines,
+  deltas, capacity, staffing composition, project progress, payer mix, trust
+  trends, and visible uncertainty intervals.
+- Added deterministic SVG proof/screenshot coverage with precision,
+  uncertainty, missingness, exact-text, color-independent, large-text, print,
+  and reduced-motion contracts.
+- Added opt-in rendering for actor-visible metric descriptors in the existing
+  GUI without consuming hidden state or changing host authority.
+- Bumped package/public metadata to `0.12.67`.
+
 ## [0.12.66] - 2026-07-20
 
 - Added the eight-container Phase 5.1 semantic information catalog with

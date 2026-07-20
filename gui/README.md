@@ -150,6 +150,22 @@ hidden data.
 `semantic-containers.mjs` is a presentation catalog; its structural distinctions
 do not imply severity, priority, causality, authority, or outcome.
 
+## Metric and trend visualization proof
+
+Open `metric-visualization-proof.html` directly or through a static server to
+inspect the Phase 5.2 sparkline, month-over-month delta, capacity bar, staffing
+composition, project progress, payer-mix, trust/legitimacy trend, and visible
+uncertainty interval contracts. The proof keeps exact values, source/status,
+uncertainty, and missingness in text; it also exposes large-text, print, and
+reduced-motion behavior. A deterministic SVG snapshot guards the fixture
+output. It is fixture-only and does not load a host, submit a command, create
+simulation state, or consume hidden data.
+
+`metric-visualizations.mjs` is an opt-in adapter: the live GUI renders a visual
+only when an actor-visible metric descriptor supplies `visualization_kind` and
+its corresponding values. It never converts absent fields into trends or
+percentages.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

@@ -1,70 +1,70 @@
-# Presentation QA — Phase 5.1 semantic information containers v0.12.66
+# Presentation QA — Phase 5.2 metric and trend visualization v0.12.67
 
 ## Status
 
-Pass for the bounded semantic-container catalog, proof page, and existing GUI
-integration.
+Pass for the bounded metric-visualization catalog, deterministic SVG proof,
+snapshot, and explicit live-rendering integration.
 
 ## Reviewed inputs and authorization
 
 - Request: `_workspace/00_input/request-summary.md`.
 - Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 5.1.
-- Produced files: `gui/semantic-containers.mjs`,
-  `gui/semantic-container-proof.html`, `gui/index.html`,
-  `gui/README.md`, and `tests/test_semantic_containers.py`.
-- Authorization is limited to local presentation structure over existing
-  actor-visible panels. Host and simulation authority remain unchanged.
+- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 5.2.
+- Produced files: `gui/metric-visualizations.mjs`,
+  `gui/metric-visualization-proof.html`, `gui/app.mjs`, `gui/index.html`,
+  `tests/test_metric_visualizations.py`, and the SVG snapshot fixture.
+- Authorization is limited to local deterministic presentation over explicit
+  actor-visible metric descriptors. Host and simulation authority remain
+  unchanged.
 
-## Information and causality findings
+## Information and precision findings
 
-- Pass: all eight classes distinguish observations, decisions, commitments,
-  consequences, or retrospective explanation by structure and language rather
-  than invented severity or priority.
-- Pass: source/status, exact visible text, and existing panel content remain in
-  the DOM; no hidden state is consumed or inferred.
-- Pass: the shared grid and catalog preserve one interface surface instead of
-  creating disconnected paper-like screens.
+- Pass: all eight forms document precision, uncertainty, missingness, exact
+  text, and color-independent interpretation.
+- Pass: missing periods remain visible and no visual calculates a value from an
+  absent field; categorical trust language is not converted into a score.
+- Pass: uncertainty intervals retain visible bounds and are labeled as
+  intervals rather than probabilities or forecasts.
+- Pass: SVG output includes exact text, source, status, title, and description.
 
 ## Accessibility and fallback findings
 
-- Pass: proof and live panels retain semantic headings, labels, visible markers,
-  compact/expanded text, and ordinary DOM focus behavior.
-- Pass: large-text and narrow-width rules reflow content without hiding values;
-  print/export rules retain headings and source/status text.
-- Pass: reduced-motion behavior is static and comprehension does not depend on
-  animation or audio.
+- Pass: exact value/source/status text remains in the ordinary DOM beside the
+  opt-in live visual and in each proof card.
+- Pass: patterns, labels, line styles, point shapes, and legends supplement
+  color; large-text, print, and reduced-motion proof behavior is static and
+  inspectable.
 - Evidence limit: static checks do not establish lived accessibility, browser
   behavior, contrast, human comprehension, or first-month usability.
 
 ## Provenance and rights findings
 
-- Pass: `visual.runtime-semantic-containers` has registry/hash/credits
+- Pass: `visual.runtime-metric-visualizations` has registry/hash/credits
   provenance, accessible equivalent, visible source, and approved
   project-generated status.
 - Pass: no external assets, fonts, URLs, or third-party files were introduced.
 
 ## Authority and replay findings
 
-- Pass: catalog functions are pure over static definitions and local arrays.
-- Pass: no host, command, simulation, stochastic, history, hash,
-  replay-authority, audio, or debrief mutation path was added.
+- Pass: catalog/model/SVG functions are pure over explicit metric descriptors.
+- Pass: opt-in live rendering does not call a host, submit a command, mutate
+  simulation, stochastic inputs, history, hashes, replay authority, audio, or
+  debrief.
 
 ## Required fixes
 
-None identified by this bounded QA pass or the single light code-review pass.
-The reviewer checked the catalog, live GUI integration, proof variants,
-authority boundary, accessibility/text preservation, registry/version
-bookkeeping, focused tests, and diff cleanliness. No second reviewer was
-spawned under the task constraint.
+None identified by this bounded QA pass. The single light code-review pass is
+required before merge; no second reviewer will be spawned under the task
+constraint.
 
 ## Verification evidence
 
-- `python3 -m unittest tests.test_semantic_containers -v` — 3 passed.
-- Full Python discovery — 445 passed.
+- `python3 -m unittest tests.test_metric_visualizations tests.test_gui_static_desktop tests.test_gui_accessibility -v` — 18 passed.
+- Full Python discovery — 449 passed.
 - `cargo fmt -- --check` — passed.
-- `cargo test` — 328 Rust unit tests plus 13 integration/golden/scenario tests
-  passed.
-- Release metadata, documentation links (339 Markdown files), asset registry,
-  asset credits, presentation-contract audit, Node syntax, and `git diff
-  --check` — passed.
+- Parallel `cargo test` encountered three existing persistence-test interference
+  failures; serial `cargo test -- --test-threads=1` passed with 328 Rust unit
+  tests plus 13 integration/golden/scenario tests.
+- Release metadata, documentation links (341 Markdown files), asset registry,
+  asset credits, presentation-contract audit, Node syntax, SVG snapshot, and
+  `git diff --check` — passed.

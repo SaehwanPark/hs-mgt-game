@@ -4995,6 +4995,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Added `gui/semantic-container-proof.html`, focused tests, registry/credits,
   and completed every Phase 5.1 checklist item.
 
+### Visual/audio Phase 5.2 metric and trend visualization contract (v0.12.67)
+
+- Status: Complete; eight deterministic actor-visible metric visualization
+  contracts, SVG proof, screenshot snapshot, and opt-in GUI rendering verified
+- Branch: `feat/visual-audio-phase5-metric-visualization-v0.12.67`
+- Added `gui/metric-visualizations.mjs` for sparklines, deltas, capacity bars,
+  staffing composition, project progress, payer mix, trust trends, and visible
+  uncertainty intervals.
+- Each contract documents source precision, uncertainty, missingness, exact
+  text, color-independent interpretation, large-text behavior, and proof
+  fixture coverage. `gui/app.mjs` renders only explicit actor-visible metric
+  descriptors and retains their written value/source/status text.
+- Added deterministic SVG screenshot hash and focused tests, registry/credits,
+  and completed every Phase 5.2 checklist item without consuming hidden state.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

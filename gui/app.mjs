@@ -4,16 +4,17 @@ import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regional-board.mjs";
 import { renderRegionalSvg } from "./scene.mjs";
+import { renderMetricVisualizationSvg } from "./metric-visualizations.mjs";
 import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 
 const presentationFixture = {
   header_metrics: [
     { label: "Month", value: "Year 1 · January" },
-    { label: "Cash", value: "60 units" },
-    { label: "Monthly margin", value: "+12 units" },
+    { label: "Cash", value: "60 units", visualization: { visualization_kind: "capacity-bar", value: 60, max: 100, exact_text: "Cash: 60 units", source: "PlayerObservation.cash" } },
+    { label: "Monthly margin", value: "+12 units", visualization: { visualization_kind: "sparkline", exact_text: "Monthly margin: +9, +12, +12 units", source: "PlayerObservation.monthly_margin", values: [{ period: "Nov", value: 9, display: "+9 units" }, { period: "Dec", value: 12, display: "+12 units" }, { period: "Jan", value: 12, display: "+12 units" }] } },
     { label: "Action points", value: "3 AP" },
     { label: "Political capital", value: "10" },
-    { label: "Workforce trust", value: "Moderate" },
+    { label: "Workforce trust", value: "Moderate", visualization: { visualization_kind: "trust-trend", exact_text: "Workforce trust: moderate, moderate, moderate", source: "PlayerObservation.workforce_trust_summary", values: [{ period: "Nov", value: 1, display: "Moderate" }, { period: "Dec", value: 1, display: "Moderate" }, { period: "Jan", value: 1, display: "Moderate" }] } },
     { label: "Session", value: "Injected fixture" },
   ],
   briefing: [
@@ -444,6 +445,13 @@ function renderMetricList(metrics, root) {
     const value = document.createElement("dd");
     value.textContent = String(metric.value ?? "Unavailable");
     item.append(label, value);
+    if (metric.visualization?.visualization_kind) {
+      const visual = document.createElement("div");
+      visual.className = "metric-visual-container";
+      visual.innerHTML = renderMetricVisualizationSvg(metric.visualization, metric.visualization.visualization_kind);
+      item.append(visual);
+    }
+    appendSource(item, metric.source);
     list.append(item);
   }
   if (!metrics?.length) emptyState(list, "No executive metrics available.");
