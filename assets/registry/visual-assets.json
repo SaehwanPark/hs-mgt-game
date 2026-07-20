@@ -3,6 +3,23 @@
   "asset_type": "visual",
   "entries": [
     {
+      "id": "visual.runtime-metric-visualizations",
+      "asset_type": "visual",
+      "semantic_role": "status",
+      "source_path": "gui/metric-visualizations.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic actor-visible metric visualization catalog",
+      "license": "project-generated",
+      "modifications": "None; SVG forms preserve supplied precision, uncertainty, missingness, exact text, and source/status language.",
+      "original_hash": "sha256:addd828615a036d81bfe6591ee67f88032d68175ef489c70195a38114fe0b132",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Exact metric text, source/status, uncertainty/missingness labels, patterns, and deterministic SVG geometry",
+      "visible_source": "Explicit actor-visible metric descriptor supplied by the host-shaped presentation",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-identities",
       "asset_type": "visual",
       "semantic_role": "identity",

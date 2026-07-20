@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Metric Visualization Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1180px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .source { color: #60707b; }
+      .controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+      button { background: #ffffff; border: 2px solid #0b6e69; border-radius: .5rem; color: #075952; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .visual-grid { display: grid; gap: .8rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .metric-card { border: 1px solid #d6e2df; border-radius: .7rem; min-width: 0; padding: .85rem; }
+      .metric-card__heading { align-items: baseline; border-bottom: 3px double #0b6e69; display: flex; gap: .5rem; justify-content: space-between; margin-bottom: .55rem; padding-bottom: .4rem; }
+      .metric-card__heading small { color: #60707b; }
+      .metric-card__rules { color: #33434d; font-size: .9rem; margin: .35rem 0 0; }
+      .metric-card__text { margin: .35rem 0 0; }
+      .metric-visual { display: block; height: auto; max-width: 100%; overflow: visible; width: 100%; }
+      .metric-visual .track { fill: #ffffff; stroke: #60707b; stroke-dasharray: 4 3; stroke-width: 1.5; }
+      .metric-visual .value-pattern, .metric-visual .segment-pattern { fill: #b9ded9; stroke: #075952; stroke-width: 1.5; }
+      .metric-visual .segment-1 { fill: #f3d5bb; stroke: #8a401e; }
+      .metric-visual .segment-2 { fill: #d9cef2; stroke: #5a397c; }
+      .metric-visual .missing-pattern { fill: #ffffff; stroke: #60707b; stroke-dasharray: 2 2; stroke-width: 1.5; }
+      .metric-visual .trend-line { fill: none; stroke: #075952; stroke-dasharray: 7 3; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3; }
+      .metric-visual .trend-point, .metric-visual .categorical-point { fill: #ffffff; stroke: #075952; stroke-width: 2; }
+      .metric-visual .categorical-sequence { stroke: #60707b; stroke-dasharray: 3 3; stroke-width: 2; }
+      .metric-visual .interval, .metric-visual .cap { stroke: #8a401e; stroke-width: 3; }
+      .metric-visual .estimate { fill: #ffffff; stroke: #075952; stroke-width: 3; }
+      .metric-visual text { fill: #17232d; font-family: system-ui, sans-serif; }
+      .metric-visual .exact-label { font-size: 9px; font-weight: 700; }
+      .metric-visual .source-label { fill: #60707b; font-size: 8px; }
+      .metric-visual .delta-label { font-size: 13px; font-weight: 800; }
+      .large-text { font-size: 1.25rem; }
+      .large-text .metric-card__rules { font-size: 1rem; }
+      .note { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+      @media (max-width: 720px) { .visual-grid { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+      @media print { body { background: #ffffff; padding: 0; } main { border: 0; } .controls, .note { display: none; } .visual-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>Metric and trend visualization proof</h1>
+      <p class="source">Fixture-only actor-visible metric contracts. No host, command, simulation state, or external asset is loaded.</p>
+      <div class="controls" aria-label="Metric proof controls">
+        <button type="button" id="toggle-large-text">Use large text</button>
+        <button type="button" id="print-proof">Print/export proof</button>
+      </div>
+      <section class="visual-grid" id="visual-grid" aria-label="Metric visualization catalog"></section>
+      <p class="note">Exact values, source, status, uncertainty, and missingness stay in written text. Patterns, line styles, labels, and shapes remain meaningful without color, motion, or audio. Numeric visuals never add precision beyond supplied fields and do not establish a probability, forecast, or hidden state.</p>
+    </main>
+    <script type="module">
+      import { METRIC_VISUALIZATION_PROOF_FIXTURES, metricVisualizationFor, renderMetricVisualizationSvg } from "./metric-visualizations.mjs";
+
+      const grid = document.querySelector("#visual-grid");
+      let largeText = false;
+      function render() {
+        document.body.classList.toggle("large-text", largeText);
+        grid.replaceChildren();
+        for (const fixture of METRIC_VISUALIZATION_PROOF_FIXTURES) {
+          const contract = metricVisualizationFor(fixture.visualization_kind);
+          const card = document.createElement("article");
+          card.className = "metric-card";
+          const heading = document.createElement("div");
+          heading.className = "metric-card__heading";
+          const title = document.createElement("strong");
+          title.textContent = contract.label;
+          const kind = document.createElement("small");
+          kind.textContent = fixture.label;
+          heading.append(title, kind);
+          const visual = document.createElement("div");
+          visual.innerHTML = renderMetricVisualizationSvg(fixture, fixture.visualization_kind);
+          const exact = document.createElement("p");
+          exact.className = "metric-card__text";
+          exact.textContent = fixture.exact_text;
+          const rules = document.createElement("p");
+          rules.className = "metric-card__rules";
+          rules.textContent = `${contract.precision_rule} ${contract.missingness_rule} Source: ${fixture.source}`;
+          card.append(heading, visual, exact, rules);
+          grid.append(card);
+        }
+      }
+      document.querySelector("#toggle-large-text").addEventListener("click", (event) => {
+        largeText = !largeText;
+        event.currentTarget.textContent = largeText ? "Use standard text" : "Use large text";
+        render();
+      });
+      document.querySelector("#print-proof").addEventListener("click", () => globalThis.print?.());
+      render();
+    </script>
+  </body>
+</html>

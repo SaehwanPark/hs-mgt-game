@@ -1245,15 +1245,28 @@ Introduce small, deterministic, actor-visible visualizations:
 
 ### Checklist
 
-- [ ] Metric visualization catalog defined.
-- [ ] Data precision rules documented.
-- [ ] Uncertainty rendering documented.
-- [ ] Missingness rendering documented.
-- [ ] Exact values available in text.
-- [ ] Color-independent interpretation tested.
-- [ ] Large-text behavior tested.
-- [ ] Screenshot tests added.
-- [ ] No hidden state consumed.
+**Status:** Complete in v0.12.67.
+
+Evidence: `gui/metric-visualizations.mjs` defines the eight-form catalog and
+precision/uncertainty/missingness/exact-text rules;
+`gui/metric-visualization-proof.html` demonstrates color-independent,
+large-text, print, and reduced-motion behavior; `gui/app.mjs` opts into
+rendering only from explicit actor-visible metric descriptors;
+`tests/test_metric_visualizations.py` and
+`tests/fixtures/metric_visualization_snapshot.sha256` cover model boundaries,
+deterministic SVG output, proof integration, and forbidden hidden-state
+markers; `visual.runtime-metric-visualizations` is recorded in the registry and
+credits.
+
+- [x] Metric visualization catalog defined.
+- [x] Data precision rules documented.
+- [x] Uncertainty rendering documented.
+- [x] Missingness rendering documented.
+- [x] Exact values available in text.
+- [x] Color-independent interpretation tested.
+- [x] Large-text behavior tested.
+- [x] Screenshot tests added.
+- [x] No hidden state consumed.
 
 ### Exit criteria
 

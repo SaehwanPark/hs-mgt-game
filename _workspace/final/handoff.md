@@ -1,50 +1,51 @@
-# Final Handoff — Visual/audio Phase 5.1 semantic information containers v0.12.66
+# Final Handoff — Visual/audio Phase 5.2 metric and trend visualization v0.12.67
 
 ## Result
 
-Phase 5.1 is complete. Eight semantic information-container contracts now
-differentiate the existing executive desktop through restrained structure,
-markers, and typography while preserving visible evidence and authority.
+Phase 5.2 is complete. Eight deterministic metric visualization forms now have
+precision, uncertainty, missingness, exact-text, color-independent,
+large-text, print, reduced-motion, and deterministic SVG snapshot contracts.
 
 ## Changed files and behavior
 
-- Added `gui/semantic-containers.mjs` with board packet, operations ledger,
-  intelligence report, regulatory letter, project sheet, news wire, executive
-  action queue, and after-action report contracts.
-- Integrated classes and non-color markers into the existing
-  `gui/index.html` panels; added compact/expanded, responsive, print, and
-  reduced-motion proof behavior in `gui/semantic-container-proof.html`.
-- Preserved headings, exact visible values, source/status language, shared grid,
-  keyboard access, and actor-visible boundaries.
-- Added focused tests, registry/credits provenance, roadmap completion, and
-  v0.12.66 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
+- Added `gui/metric-visualizations.mjs` with sparkline, delta, capacity,
+  staffing, project progress, payer mix, trust trend, and uncertainty interval
+  contracts plus deterministic SVG output.
+- Added `gui/metric-visualization-proof.html` with all eight fixture forms,
+  large-text and print controls, responsive layout, reduced-motion behavior,
+  and written fallbacks.
+- Added opt-in live rendering for explicit actor-visible metric descriptors in
+  `gui/app.mjs`; current metric values/source/status remain visible text.
+- Added focused tests and deterministic SVG snapshot, registry/credits
+  provenance, roadmap completion, and v0.12.67 SPEC/ARCHITECTURE/CHANGELOG/
+  history/lessons records.
+- No host field, simulation, stochastic, history, hash, replay, audio, or
+  debrief behavior changed.
 
 ## Verification
 
-- Focused semantic-container tests — 3 passed; full Python discovery — 445
-  passed.
-- `cargo fmt -- --check` passed; `cargo test` passed with 328 Rust unit tests
-  plus 13 integration/golden/scenario tests.
-- Release metadata, 339 Markdown documentation links, asset registry, asset
-  credits, presentation-contract audit, Node syntax, and `git diff --check`
-  passed.
-- Evidence is technical and does not establish human usability, lived
-  accessibility, learning, calibration, contrast, browser behavior, or policy
-  validity.
+- Focused metric-visualization/GUI tests — 18 passed; full Python discovery —
+  449 passed.
+- `cargo fmt -- --check` passed; serial `cargo test -- --test-threads=1`
+  passed with 328 Rust unit tests plus 13 integration/golden/scenario tests.
+  The initial parallel run exposed three existing persistence-test interference
+  failures; no Phase 5.2 path was involved.
+- Release metadata, 341 Markdown documentation links, asset registry, asset
+  credits, presentation-contract audit, Node syntax, SVG snapshot, and
+  `git diff --check` passed.
 
 ## Handoff and review
 
-- Base: `main` at v0.12.65.
-- Working branch: `feat/visual-audio-phase5-semantic-containers-v0.12.66`.
+- Base: `main` at v0.12.66.
+- Working branch: `feat/visual-audio-phase5-metric-visualization-v0.12.67`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass completed with no actionable findings. It covered
-  the catalog, live GUI, proof variants, authority boundary,
-  accessibility/text preservation, registry/version bookkeeping, focused tests,
-  and diff cleanliness. No second reviewer was spawned under the task-level
-  constraint.
+- One light code-review pass identified four evidence-boundary issues. The
+  branch fixes unavailable composition redistribution, missing-period
+  sparkline joins, categorical trust numeric scoring, and screenshot wording;
+  no second reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 
-Later roadmap phases own metric visualization, motion, audio, and broader
-testing/QA. This slice does not add host fields, client-side causality, private
-rival actions, or a browser replay engine.
+Later roadmap phases own motion, audio, broader capture, and QA. This slice does
+not add metric history storage, forecasting, probability calibration, or a
+browser screenshot engine.
