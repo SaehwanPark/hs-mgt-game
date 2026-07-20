@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Audio Direction Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1060px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .standards, .prototype { border: 1px solid #d6e2df; border-radius: .7rem; margin-top: 1rem; padding: .8rem; }
+      .standards { background: #f4f7f6; }
+      .prototype { display: grid; gap: .35rem; grid-template-columns: minmax(10rem, 1fr) minmax(12rem, 2fr) auto; align-items: start; }
+      .prototype h2, .prototype p { margin: 0; }
+      .prototype small { color: #60707b; }
+      button { background: #0b6e69; border: 2px solid #075952; border-radius: .5rem; color: #ffffff; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .source { color: #60707b; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+      @media (max-width: 700px) { .prototype { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>Audio direction proof</h1>
+      <p class="source">Generated Web Audio recipes only. This page is a comparison fixture and does not change a session or reveal hidden state.</p>
+      <section class="standards" aria-labelledby="standards-heading">
+        <h2 id="standards-heading">Prototype standards</h2>
+        <div id="standards"></div>
+      </section>
+      <p id="audio-status" role="status">Audio is optional. The visible source and written equivalent remain complete.</p>
+      <section id="prototypes" aria-labelledby="prototypes-heading">
+        <h2 id="prototypes-heading">Direction candidates</h2>
+      </section>
+      <p class="fallback">Mute or unavailable audio never removes the visible source, status, or written equivalent. The direction prototype intentionally defers priority scheduling and preference modes to the next implementation slice.</p>
+    </main>
+    <script type="module">
+      import { AUDIO_DIRECTION, createAudioDirectionPlayer } from "./audio-direction.mjs";
+
+      const standards = document.querySelector("#standards");
+      const prototypes = document.querySelector("#prototypes");
+      const status = document.querySelector("#audio-status");
+      const player = createAudioDirectionPlayer({ sink: { record: (event) => { status.textContent = `Previewed ${event.id}; ${event.equivalent}.`; } } });
+
+      standards.textContent = `Target ${AUDIO_DIRECTION.standards.loudness_target_lufs} LUFS ±${AUDIO_DIRECTION.standards.loudness_tolerance_lufs}; peak ≤${AUDIO_DIRECTION.standards.peak_ceiling_dbfs} dBFS; cues ${AUDIO_DIRECTION.standards.cue_duration_ms.min}–${AUDIO_DIRECTION.standards.cue_duration_ms.max} ms; loops ${AUDIO_DIRECTION.standards.loop_duration_ms.min}–${AUDIO_DIRECTION.standards.loop_duration_ms.max} ms; speech duck ${AUDIO_DIRECTION.standards.speech_duck_db} dB.`;
+      for (const entry of AUDIO_DIRECTION.prototypes) {
+        const card = document.createElement("article");
+        card.className = "prototype";
+        card.innerHTML = `<div><h2>${entry.label}</h2><small>${entry.channel} · ${entry.pattern}</small></div><div><p>${entry.purpose}</p><small>Visible source: ${entry.visible_source}<br />Text equivalent: ${entry.equivalent}</small></div>`;
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Play preview";
+        button.addEventListener("click", async () => {
+          const result = await player.play(entry.id);
+          if (!result.ok) status.textContent = `${entry.label} unavailable; visual and text equivalents remain active.`;
+        });
+        card.append(button);
+        prototypes.append(card);
+      }
+    </script>
+  </body>
+</html>

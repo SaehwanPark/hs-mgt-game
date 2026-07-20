@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 1.2 SVG rendering proof v0.12.36
+# Presentation Domain QA — Phase 1.3 audio-direction prototype v0.12.37
 
 ## Status
 
@@ -6,51 +6,45 @@
 
 ## Reviewed Inputs and Authorization
 
-- User request, `_workspace/00_input/request-summary.md`, and the Phase 1.2
-  presentation contract.
-- The Phase 1.2 roadmap checklist, selected Variant A direction, fixture scene,
-  renderer, proof page, registry, credits, and focused tests.
-- Current host-authority architecture and the fixture-only scope of this slice.
+- Request summary, Phase 1.3 roadmap scope, and the audio presentation contract.
+- Audio-direction board, ADR-0013, declarative recipes, proof page, registry,
+  credits, focused tests, and current host/audio architecture.
 
-The slice is an additive technical proof. It does not wire the renderer into
-the live host, promote external assets, or change simulation behavior.
+The slice is fixture-only. It does not integrate the live audio client or
+change simulation, host, history, replay, or debrief behavior.
 
 ## Information and Causality Findings
 
-- Pass: the fixture exposes only declared entity, facility, relationship, and
-  status fields; labels and markers are derived from the same visible records.
-- Pass: uncertain and delayed states use labels, symbols, and dashed treatment,
-  so color is not the only status channel.
-- Pass: the generic fallback is visibly labeled and does not invent a facility
-  or policy outcome; no hidden/private field or competitive transition enters
-  rendering.
-- Pass: deterministic snapshot output and a bounded render-time test protect
-  replay-safe presentation behavior without claiming simulation authority.
+- Pass: every prototype has a visible source and text equivalent.
+- Pass: pressure audio is explicitly restricted to actor-visible pressure
+  categories; no private rival, true-state, resolved-input, or future field is
+  consumed.
+- Pass: confirmation, rejection, and report cues use distinct contour metadata;
+  low-level beds are declared non-semantic.
+- Pass: environmental audio is specified without speech, names, sirens, or
+  decision signals and remains below the documented reading/masking target.
 
 ## Accessibility and Fallback Findings
 
-- Pass: the SVG includes a title, description, visible text labels, keyboard
-  focus targets, Enter/Space activation, and a text fallback paragraph.
-- Pass: reduced-motion mode is explicit and the proof contains no animation;
-  uncertainty remains legible through text, pattern, and stroke treatment.
-- Evidence limit: static and fixture tests do not establish human contrast,
-  screen-reader, viewport, or usability outcomes.
+- Pass: preview controls are keyboard-operable native buttons and source/equivalent
+  text is adjacent to each candidate.
+- Pass: unsupported browser audio returns an explicit visual-only result; no
+  decision depends on sound.
+- Evidence limit: static recipe checks do not establish calibrated loudness,
+  human perception, contrast, screen-reader behavior, or lived accessibility.
 
 ## Provenance and Rights Findings
 
-- Pass: the renderer is registered with a current SHA-256 hash, project-owned
-  provenance, an accessible equivalent, and no release path.
-- Pass: deterministic credits include the generated proof source; no external
-  asset, font, image, or URL was added.
-- Evidence limit: repository provenance is not independent legal advice.
+- Pass: the recipe source is registry-backed with a current hash, generated
+  provenance, accessible equivalent, visible source, and no release path.
+- Pass: no third-party file, network source, external font, or unidentified
+  recording was added.
 
 ## Authority and Replay Findings
 
-- Pass: `gui/scene.mjs` consumes an explicit fixture and returns SVG markup; it
-  does not import host state, commands, transitions, stochastic inputs,
-  history, hashes, replay data, audio classification, or debriefs.
-- Pass: the proof page has local controls only and no network, websocket, or
-  host submission path.
+- Pass: the proof uses only declarative fixtures and local preview state; it
+  cannot submit commands or alter session, transition, history, hash, replay,
+  or debrief data.
 
 ## Required Fixes
 
@@ -58,15 +52,12 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-The proof still needs human visual/accessibility review, real viewport testing,
-and a stable scene contract before live integration. The fixture must remain
-clearly labeled as a technical proof until those boundaries are approved.
+Actual LUFS/peak measurement, hardware playback, human listening, priority
+fatigue, preference modes, and live catalog integration remain open gates.
 
 ## Verification Evidence
 
-- `python3 scripts/validate_assets.py`
-- `python3 scripts/generate_asset_credits.py --check`
-- Focused SVG scene, asset registry, and release metadata tests.
-- Full Python suite, Rust tests, Clippy, formatting, Node syntax,
-  documentation links, release metadata, and diff checks.
-- One light independent code-review pass completed; no actionable issues found.
+- Focused audio-direction tests and Node syntax checks.
+- Asset registry/credits, full Python, Rust, Clippy, formatting, metadata,
+  documentation-link, and diff checks.
+- One light independent code-review pass required after final implementation.

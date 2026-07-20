@@ -1,36 +1,26 @@
-# Request Summary — Visual/audio roadmap execution v0.12.36
+# Request Summary — Visual/audio Phase 1.3 audio-direction prototype v0.12.37
 
-## Classification and scope
+## Authorized outcome
 
-- Track: presentation; Phase 1.2 SVG rendering proof of concept.
-- Slice: pure fixture-driven scene model/renderer, static proof page, keyboard
-  selection, text/symbol fallbacks, uncertainty/unknown handling, deterministic
-  snapshot, and render-time checks.
-- Dependency: selected Variant A from v0.12.35.
+Implement one bounded slice from `docs/visual_audio_enhancement_roadmap.md`:
+the standards and direction-definition portion of Milestone 1.3.
 
-## Sources
+## Slice boundary
 
-- `docs/visual_audio_enhancement_roadmap.md` Phase 1.2.
-- `docs/design/visual-audio-art-direction-board.md` and ADR-0012.
-- `README.md`, `SPEC.md`, `ARCHITECTURE.md`, `docs/design_principles.md`, and
-  `docs/harness/health-policy-strategy-game/team-spec.md`.
+- Add seven fixture-only generated Web Audio direction recipes.
+- Provide a static keyboard-operable preview board.
+- Document loudness, peak, cue duration, loop/crossfade, ducking, and
+  low-volume targets.
+- Keep visible sources and text equivalents beside every preview.
+- Do not integrate the live audio client or add priority/mode behavior yet.
 
-## Expected files
+## Required bookkeeping
 
-- `gui/scene.mjs`, `gui/svg-proof.html`, focused scene tests, registry/credits,
-  Phase 1.2 history/SDD/QA/handoff records, and roadmap checklist updates.
+Update the roadmap checklist, SPEC, architecture, changelog, README, LESSONS,
+history index, asset registry/credits, presentation contract, QA, implementation
+plan, and final handoff for v0.12.37.
 
-## Non-goals
+## Evidence limits
 
-- No live GUI integration, host DTO, command, transition, stochastic input,
-  browser simulation state, production facility/map kit, audio, animation,
-  third-party asset, or human usability/accessibility claim.
-
-## Acceptance and validation
-
-- Scene model and deterministic SVG renderer are implemented.
-- Institutions and facilities are keyboard reachable; labels/symbols remain
-  available without color, motion, or audio.
-- Uncertainty has a pattern/symbol and unknown data has generic fallbacks.
-- Static fixture output is snapshot-stable, no hidden-state field is consumed,
-  reduced motion is tested, and render time meets the proof target.
+Recipe metadata and static tests do not establish calibrated loudness, human
+perception, lived accessibility, learning, balance, or policy validity.

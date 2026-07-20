@@ -416,6 +416,11 @@ The scene model must consume only visible host data or static fixture data match
 
 ## Milestone 1.3: Audio-direction prototype
 
+**Status:** Partial in v0.12.37; standards and direction board complete
+**Evidence:** `gui/audio-direction.mjs`, `gui/audio-proof.html`,
+`docs/design/visual-audio-audio-direction-board.md`, and
+`tests/test_audio_direction.py`
+
 ### Scope
 
 Create a prototype containing:
@@ -441,13 +446,13 @@ Create a prototype containing:
 
 ### Checklist
 
-- [ ] Audio loudness target documented.
-- [ ] Peak ceiling documented.
-- [ ] Cue duration ranges documented.
-- [ ] Loop points are seamless.
-- [ ] UI cues remain distinguishable at low volume.
-- [ ] Environmental loop does not mask speech or reading.
-- [ ] Pressure music does not reveal hidden state.
+- [x] Audio loudness target documented.
+- [x] Peak ceiling documented.
+- [x] Cue duration ranges documented.
+- [x] Loop points are seamless.
+- [x] UI cues remain distinguishable at low volume.
+- [x] Environmental loop does not mask speech or reading.
+- [x] Pressure music does not reveal hidden state.
 - [ ] Audio priority order implemented in prototype.
 - [ ] Repeat-cue cooldown tested.
 - [ ] Mute, cues-only, and full-audio modes tested.

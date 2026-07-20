@@ -4591,6 +4591,17 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
     browser simulation state, true geography, animation, audio, third-party
     asset, or human usability/accessibility/design claim.
 
+### Visual/audio Phase 1.3 audio direction (v0.12.37)
+
+- Status: Partial; fixture-only standards and recipe board complete
+- Branch: `feat/visual-audio-phase1-audio-direction-v0.12.37`
+- Added seven generated Web Audio direction recipes and a static preview board.
+- Documented loudness, peak, cue duration, loop, crossfade, ducking, and
+  low-volume targets with visible-source/text-equivalent mappings.
+- Checked the first seven Phase 1.3 roadmap items only; priority scheduling,
+  cooldowns, audio modes, and reduced-audio preference behavior remain Future.
+- No live audio-client, host, simulation, history/hash/replay, or debrief change.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
@@ -4624,10 +4635,9 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
-No active documentation or visual/audio implementation slice. v0.12.36 closes
-the Phase 1.2 SVG proof gate; audio direction and all broader production remain
-Future work. Human and educational evaluation remain separately gated Future
-work.
+The Phase 1.3 audio direction standards and fixture proof are complete for the
+v0.12.37 slice. Audio priority/mode behavior, broader production, and human or
+educational evaluation remain separately gated Future work.
 
 ## Future
 

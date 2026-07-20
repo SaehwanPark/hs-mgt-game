@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.37] - 2026-07-20
+
+- Added a fixture-only audio direction proof with confirmation, rejection,
+  report, identity, neutral-bed, visible-pressure, and environmental recipes.
+- Documented loudness, peak, cue-duration, loop, crossfade, ducking, and
+  low-volume direction targets with visible sources and text equivalents.
+- Preserved the live audio client, GUI host, simulation, history/hash/replay,
+  and debrief paths; priority scheduling and audio modes remain future slices.
+- Bumped package/public metadata to `0.12.37`.
+
 ## [0.12.36] - 2026-07-20
 
 - Added a fixture-only deterministic SVG scene model and renderer using the
