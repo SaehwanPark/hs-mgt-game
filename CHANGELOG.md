@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.39] - 2026-07-20
+
+- Added the fictional Riverside identity kit with logo, monochrome, marker,
+  signage, report-header, compact-badge, and RV monogram variants.
+- Added a static cross-surface identity proof with generic fallback and linked
+  the existing Riverside audio motif without changing the live GUI.
+- Added source/release SVG provenance, hashes, credits, and the first per-system
+  Phase 2.1 roadmap checklist bookkeeping.
+- Bumped package/public metadata to `0.12.39`.
+
 ## [0.12.38] - 2026-07-20
 
 - Completed the Phase 1.3 fixture audio policy with deterministic priority and

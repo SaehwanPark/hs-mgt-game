@@ -1,37 +1,36 @@
-# Final Handoff — Visual/audio Phase 1.3 audio policy prototype v0.12.38
+# Final Handoff — Visual/audio Phase 2.1 Riverside identity v0.12.39
 
 ## Result
 
-Phase 1.3 is complete: the fixture audio-direction proof now includes
-deterministic priority/ducking policy, repeat-cue cooldown, full-audio,
-cues-only, muted, and reduced-audio modes, with text equivalents retained.
+The Riverside lane of Phase 2.1 is complete. A fictional identity kit now
+covers logo, monochrome, compact marker, RV monogram, facility signage, report
+header, compact badge, and existing Riverside audio motif reference.
 
 ## Changed files and behavior
 
-- Extended `gui/audio-direction.mjs` with policy modes, priority order,
-  ducking metadata, cooldowns, and reduced-audio filtering.
-- Extended `gui/audio-proof.html` with native mode/preference controls and
-  policy status text.
-- Added policy tests and v0.12.38 roadmap/SDD/history bookkeeping.
-- No live audio-client, host, simulation, commands, transitions, stochastic
-  inputs, history/hash/replay, or debrief behavior changed.
+- Added source/release Riverside SVG assets and registry/hash/credits coverage.
+- Added `gui/identity-kits.mjs` and `gui/identity-proof.html` with deterministic
+  cross-surface labels and generic fallback.
+- Expanded the roadmap into explicit Riverside, Northlake, and Summit lanes;
+  checked Riverside only.
+- No live GUI, host, simulation, commands, transitions, history/hash/replay,
+  audio playback, or debrief behavior changed.
 
 ## Verification
 
-- Focused policy tests passed.
+- Focused identity tests passed.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks passed.
 
 ## Handoff and review
 
-- Base: `main` at `6bc33dd`.
-- Working branch: `feat/visual-audio-phase1-audio-policy-v0.12.38`.
+- Base: `main` at `f7aabd5`.
+- Working branch: `feat/visual-audio-phase2-riverside-identity-v0.12.39`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light independent code-review pass completed; findings fixed and checks
-  rerun before handoff.
+- One light independent code-review pass is required before merge.
 
 ## Limits and next slice
 
-Phase 1.3 remains generated-recipe prototype evidence, not calibrated loudness
-or human listening evidence. The next candidate is Phase 2.1's first
-institutional identity kit slice.
+This is a fictional identity proof, not human art-direction, brand, contrast,
+learning, or policy evidence. The next bounded candidate is the Northlake
+identity kit using the same surface contract.

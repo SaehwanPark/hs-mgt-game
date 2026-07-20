@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Riverside Identity Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1060px; padding: 1.5rem; }
+      main { background: #fff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .controls, .surfaces { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1rem 0; }
+      .surface { border: 1px solid #d6e2df; border-radius: .7rem; flex: 1 1 15rem; min-width: 15rem; padding: .8rem; }
+      .surface h2, .surface p { margin: 0 0 .4rem; }
+      .surface small, .source { color: #60707b; }
+      .logo { background: #f4f7f6; border-radius: .5rem; display: block; height: auto; margin: .6rem 0; max-width: 100%; }
+      button { background: #0b6e69; border: 2px solid #075952; border-radius: .5rem; color: #fff; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; padding: .7rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1 id="heading">Riverside identity kit</h1>
+      <p class="source">Fictional, fixture-only identity proof. It does not load host state or alter a session.</p>
+      <div class="controls" aria-label="Identity proof controls">
+        <button type="button" id="riverside">Show Riverside</button>
+        <button type="button" id="unknown">Show generic fallback</button>
+      </div>
+      <img class="logo" id="logo" src="../assets/release/visual/svg/riverside.svg" alt="Riverside fictional system logo mark" />
+      <p id="identity-status" role="status"></p>
+      <section class="surfaces" id="surfaces" aria-label="Identity surfaces"></section>
+      <p class="fallback">Shape, monogram, visible labels, and generic fallback remain available when color, the asset, or audio is unavailable.</p>
+    </main>
+    <script type="module">
+      import { identityKitFor, identitySurfaceSummary } from "./identity-kits.mjs";
+
+      const heading = document.querySelector("#heading");
+      const logo = document.querySelector("#logo");
+      const status = document.querySelector("#identity-status");
+      const surfaces = document.querySelector("#surfaces");
+
+      function render(id) {
+        const kit = identityKitFor(id);
+        heading.textContent = `${kit.label} identity kit`;
+        logo.hidden = kit.id !== "riverside";
+        logo.alt = `${kit.label} identity mark; ${kit.equivalent}`;
+        status.textContent = `${kit.source}. ${kit.equivalent}. Monogram: ${kit.monogram}.`;
+        surfaces.replaceChildren(...identitySurfaceSummary(id).map((entry) => {
+          const card = document.createElement("article");
+          card.className = "surface";
+          card.innerHTML = `<h2>${entry.surface.replaceAll("_", " ")}</h2><p>${entry.treatment}</p><small>Visible equivalent: ${entry.equivalent}</small>`;
+          return card;
+        }));
+      }
+
+      document.querySelector("#riverside").addEventListener("click", () => render("riverside"));
+      document.querySelector("#unknown").addEventListener("click", () => render("unknown"));
+      render("riverside");
+    </script>
+  </body>
+</html>

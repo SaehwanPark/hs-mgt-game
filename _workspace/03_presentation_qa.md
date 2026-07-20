@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 1.3 audio policy prototype v0.12.38
+# Presentation Domain QA — Phase 2.1 Riverside identity v0.12.39
 
 ## Status
 
@@ -6,41 +6,41 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 1.3 roadmap, v0.12.37 direction board, and this
-  policy contract.
-- Fixture policy, proof controls, tests, registry/credits, and host/audio
-  architecture.
+- Request summary, Phase 2.1 Riverside lane, identity contract, source/release
+  SVGs, identity catalog/proof, registry/credits, tests, and architecture.
 
-This slice is prototype-only and leaves the live audio client unchanged.
+The slice is one fictional identity kit and static proof only.
 
 ## Information and Causality Findings
 
-- Pass: priority uses declared cue channels and does not infer severity,
-  intent, true deterioration, private rival state, or future outcomes.
-- Pass: cooldown and mode decisions are local presentation outcomes with
-  explicit status/equivalent text.
-- Pass: event/interface priority carries a declared -8 dB music-ducking
-  instruction; the policy does not invent a hidden event class.
+- Pass: all surfaces are derived from visible Riverside identity and keep the
+  name/monogram/shape available without color.
+- Pass: the audio motif is linked to visible identity only; no operational,
+  competitive, private, or future state is encoded.
+- Pass: unknown identity returns generic institution fallback rather than a
+  guessed real or unlisted system.
 
 ## Accessibility and Fallback Findings
 
-- Pass: full-audio, cues-only, muted, and reduced-audio controls are native
-  keyboard controls with visible labels.
-- Pass: filtered/throttled/unsupported results retain text equivalents and do
-  not remove written meaning.
-- Evidence limit: static and deterministic policy tests do not establish human
-  listening, hardware response, screen-reader behavior, or lived access.
+- Pass: source/release SVGs contain title/description and text labels; proof
+  controls are native keyboard buttons.
+- Pass: monochrome mark, shape, RV text, visible labels, and fallback text keep
+  identity meaningful without color or audio.
+- Evidence limit: static tests do not establish human contrast, screen-reader,
+  viewport, or lived-accessibility outcomes.
 
 ## Provenance and Rights Findings
 
-- Pass: the updated generated recipe source remains registry-backed with a
-  current hash, project provenance, accessible equivalent, and no release path.
-- Pass: no third-party or network audio asset was added.
+- Pass: source and release files are registry-backed with hashes, project-
+  generated provenance, approval, accessible equivalents, and no external URLs.
+- Pass: the fictional mark is not copied from a real institution or third-party
+  asset.
 
 ## Authority and Replay Findings
 
-- Pass: policy state is local to the fixture player and cannot submit commands
-  or alter host/session, transitions, history, hashes, replay, or debrief data.
+- Pass: the identity catalog/proof uses local fixture data only and cannot
+  affect host/session, commands, transitions, history, hashes, replay, audio,
+  or debrief output.
 
 ## Required Fixes
 
@@ -48,13 +48,12 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-Live catalog integration, calibrated audio measurement, fatigue tuning, human
-listening, and production asset review remain separate gates.
+Northlake/Summit consistency, live cross-screen promotion, human art direction,
+and broader identity review remain separate slices.
 
 ## Verification Evidence
 
-- Focused policy and fallback tests.
+- Focused Riverside identity and SVG/asset tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
-- One light independent code-review pass completed; findings were fixed and
-  author verification was rerun.
+- One light independent code-review pass required after final implementation.

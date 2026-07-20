@@ -4614,6 +4614,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked all Phase 1.3 roadmap items; no live audio-client or host behavior
   changed.
 
+### Visual/audio Phase 2.1 Riverside identity kit (v0.12.39)
+
+- Status: Partial; Riverside kit and fixture proof complete
+- Branch: `feat/visual-audio-phase2-riverside-identity-v0.12.39`
+- Added fictional source/release SVG variants for logo, monochrome, marker,
+  signage, report header, compact badge, and RV monogram, plus a linked
+  Riverside audio motif reference and generic fallback.
+- Checked the Riverside per-system checklist only; Northlake and Summit remain
+  Future slices.
+- No live GUI, host, simulation, history/hash/replay, or debrief behavior
+  changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
