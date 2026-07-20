@@ -42,6 +42,14 @@ shows each family’s glyph, report-frame pattern, written notification style,
 optional identity-sonic tag, visible source, and generic fallback. The proof is
 fixture-only and does not load host state or change a session.
 
+## Facility component proof
+
+Open `gui/facility-proof.html` directly or through a static server to inspect
+the Phase 3.1 fictional general-hospital base component. It shows the compact
+release derivative, seven composable layers, visible layer sources, written
+equivalents, non-color patterns, and generic facility fallback. The proof is
+fixture-only and does not load host state or change a session.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

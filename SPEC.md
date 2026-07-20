@@ -4661,6 +4661,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Checked all Phase 2.2 actor-family identity-language items; no live GUI or
   host behavior changed.
 
+### Visual/audio Phase 3.1 general-hospital base component (v0.12.43)
+
+- Status: Partial; general-hospital base component and fixture proof complete
+- Branch: `feat/visual-audio-phase3-general-hospital-base-v0.12.43`
+- Added registry-backed source/release SVG derivatives with shared 8px grid,
+  system color variables, accessible labels, and seven composable layers for
+  base, identity, capacity, project, pressure, selection, and uncertainty.
+- Added a fixture component catalog, generic facility fallback, non-color layer
+  patterns, deterministic hashes, and focused boundary tests.
+- Checked all 13 general-hospital-base per-component items; other Phase 3.1
+  facility types remain separate future slices and no live GUI or host behavior
+  changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

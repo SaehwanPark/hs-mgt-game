@@ -1,21 +1,21 @@
-# Request Summary — Visual/audio Phase 2.2 actor-family identity language v0.12.42
+# Request Summary — Visual/audio Phase 3.1 general-hospital base v0.12.43
 
 ## Authorized outcome
 
-Implement one shared fixture-only actor-family identity language against the
-completed institutional identity surface contract.
+Implement one reusable fixture-only general-hospital base component against
+the established visual asset and identity contracts.
 
 ## Slice boundary
 
-- Provide stable language for payer, regulator, labor, employer, community,
-  board, policy coalition, and independent provider families.
-- Include glyphs, report frames, notification styles, optional identity-sonic
-  tags, visible sources, written equivalents, and generic fallback.
+- Provide source/release SVG derivatives for the base silhouette and explicit
+  identity, capacity, project, pressure, selection, and uncertainty layers.
+- Include shared 8px grid, system color variables, accessible labels,
+  non-color layer patterns, registry hashes, and generic facility fallback.
 - Keep live GUI promotion out of scope.
 
 ## Required bookkeeping
 
-Check all Phase 2.2 actor-family checklist items, bump to v0.12.42, and align SPEC,
+Check all 13 general-hospital-base Phase 3.1 items, bump to v0.12.43, and align SPEC,
 architecture, changelog, README, LESSONS, history, registry, credits,
 contract, QA, plan, and final handoff.
 

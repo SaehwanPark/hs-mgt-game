@@ -621,6 +621,12 @@ Create the reusable graphical vocabulary needed to represent the regional market
 
 ## Milestone 3.1: Facility component library
 
+**Status:** Partial in v0.12.43; general hospital base component complete
+**Evidence:** `assets/source/visual/facilities/general-hospital-base.svg`,
+`assets/release/visual/svg/general-hospital-base.svg`,
+`gui/facility-components.mjs`, `gui/facility-proof.html`, and
+`tests/test_general_hospital_base.py`.
+
 ### Core modules
 
 - general hospital base;
@@ -658,21 +664,28 @@ Each facility should support:
 6. Selection/focus layer.
 7. Uncertainty or stale-observation layer.
 
-### Checklist per component
+### Checklist: General hospital base component
 
-- [ ] Source SVG completed.
-- [ ] Geometry uses shared grid.
-- [ ] ViewBox standardized.
-- [ ] System color variables supported.
-- [ ] Monochrome rendering tested.
-- [ ] Small-size rendering tested.
-- [ ] Pressure overlays tested.
-- [ ] Project overlays tested.
-- [ ] Accessibility label defined.
-- [ ] Registry entry complete.
-- [ ] No embedded external fonts.
-- [ ] SVG optimization verified.
-- [ ] Deterministic output hash recorded.
+- [x] Source SVG completed.
+- [x] Geometry uses shared grid.
+- [x] ViewBox standardized.
+- [x] System color variables supported.
+- [x] Monochrome rendering tested.
+- [x] Small-size rendering tested.
+- [x] Pressure overlays tested.
+- [x] Project overlays tested.
+- [x] Accessibility label defined.
+- [x] Registry entry complete.
+- [x] No embedded external fonts.
+- [x] SVG optimization verified.
+- [x] Deterministic output hash recorded.
+
+### Future component lanes
+
+Patient tower, emergency department, ambulatory center, specialty center,
+rural clinic, administrative headquarters, parking structure, utility plant,
+research/education building, construction crane, and undeveloped parcel remain
+separate bounded component slices.
 
 ### Exit criteria
 
@@ -2016,7 +2029,7 @@ The visual/audio enhancement program should be considered successful when the fo
 - [x] Create Riverside identity kit.
 - [x] Create Northlake identity kit.
 - [x] Create Summit identity kit.
-- [ ] Create the general-hospital base module.
+- [x] Create the general-hospital base module.
 - [ ] Create the emergency department module.
 - [ ] Create the ambulatory-center module.
 - [ ] Create construction and staffing overlays.

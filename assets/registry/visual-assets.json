@@ -122,6 +122,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.general-hospital-base",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/general-hospital-base.svg",
+      "release_path": "assets/release/visual/svg/general-hospital-base.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the base silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:16509609581ef1d4f4cb84588d91a2e063c76897bdf2fc9cdc0e7e55b37e2428",
+      "release_hash": "sha256:69273072f0d13017a4c6c06cc3d34b9644f3e3278e3537e2a35573ddbd567fec",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "General hospital label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-svg-scene-proof",
       "asset_type": "visual",
       "semantic_role": "map",
