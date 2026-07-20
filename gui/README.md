@@ -92,6 +92,15 @@ visible-information overlays with non-color patterns, no severity encoding,
 static reduced-motion behavior, and a generic fallback. The overlays do not
 quantify hidden risk, severity, probability, truth, or future outcome.
 
+`map-event-markers.mjs` adds fixture-only policy, workforce, community, and
+project event-marker categories with stable glyph/shape labels, no severity or
+priority encoding, static reduced-motion behavior, and a generic fallback.
+`map-environment-proof.html` composes the shared map vocabulary and documents
+compact, standard, and wide target layouts, keyboard order, bounded zoom, and
+bounded pan. Coordinates and controls remain symbolic local presentation state;
+they do not assert geography, distance, travel time, ownership, jurisdiction,
+or host/session behavior.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

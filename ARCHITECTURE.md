@@ -330,6 +330,16 @@ reduced-motion behavior. The catalog identifies explicit information status
 without quantifying hidden risk, severity, probability, truth, or future
 outcome.
 
+The v0.12.62 event-marker catalog adds deterministic policy, workforce,
+community, and project visible-category tokens with no severity or priority
+encoding, static reduced-motion behavior, and a generic fallback. The composed
+`gui/map-environment-proof.html` demonstrates the shared symbolic vocabulary at
+declared compact, standard, and wide target sizes with a fixed keyboard order
+and bounded local zoom/pan state. The proof remains fixture-only: symbolic
+coordinates and viewport controls do not assert geography, distance, travel
+time, ownership, jurisdiction, host facts, commands, transitions, history,
+hashes, replay, or debrief output.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

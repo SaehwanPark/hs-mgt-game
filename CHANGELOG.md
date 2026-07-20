@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.62] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic event-marker catalog for
+  policy, workforce, community, and project visible categories.
+- Added a composed regional-map proof with symbolic-geography disclaimer,
+  compact/standard/wide target metadata, keyboard order, bounded zoom and pan,
+  and reduced-motion behavior.
+- Completed the Phase 3.2 map/environment kit checklist with registry/hash/
+  credits coverage without changing live GUI or host behavior.
+- Bumped package/public metadata to `0.12.62`.
+
 ## [0.12.61] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic uncertainty-overlay catalog
