@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.60] - 2026-07-20
+
+- Added the deterministic, fixture-only symbolic service-area overlay catalog
+  for primary, shared, and coordinated visible service relationships.
+- Added contour/fill non-color patterns, metric-free defaults, registry
+  provenance, hash coverage, and regression tests for the Phase 3.2
+  service-area slice.
+- Checked the Phase 3.2 service-area overlays item without changing live GUI or
+  host behavior.
+- Bumped package/public metadata to `0.12.60`.
+
 ## [0.12.59] - 2026-07-20
 
 - Added the deterministic, fixture-only symbolic relationship-line style

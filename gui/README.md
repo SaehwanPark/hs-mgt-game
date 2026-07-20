@@ -82,6 +82,11 @@ relationship-line styles with non-color patterns, no arrowheads, and a generic
 fallback. The styles do not infer hidden intent, causality, strength, direction,
 distance, or future outcome.
 
+`map-service-areas.mjs` adds fixture-only primary, shared, and coordinated
+service-area overlays with symbolic contour/fill patterns, no metric encoding,
+and a generic fallback. The overlays do not establish real-world catchment,
+distance, travel time, population, access, jurisdiction, or performance.
+
 ## Audio direction proof
 
 Open `gui/audio-proof.html` directly or through a static server to inspect the

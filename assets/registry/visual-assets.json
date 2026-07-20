@@ -156,6 +156,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.map.service-area-overlays",
+      "asset_type": "visual",
+      "semantic_role": "overlay",
+      "source_path": "gui/map-service-areas.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic symbolic service-area overlay catalog",
+      "license": "project-generated",
+      "modifications": "None; fixture-only service-area vocabulary.",
+      "original_hash": "sha256:1dcc7d92d5212ab8bc535beffca79ceef8c31ece25de15ac2b3d8f38920f194e",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Service-area category label, contour/fill pattern, and generic overlay fallback",
+      "visible_source": "Fixture-only symbolic service-area vocabulary",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-markers",
       "asset_type": "visual",
       "semantic_role": "marker",

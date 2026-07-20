@@ -4888,6 +4888,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   and interaction behavior remain separate future slices with no live GUI or
   host behavior changed.
 
+### Visual/audio Phase 3.2 service-area-overlays contract (v0.12.60)
+
+- Status: Partial; deterministic fixture-only service-area overlay catalog
+  complete
+- Branch: `feat/visual-audio-phase3-service-area-overlays-v0.12.60`
+- Added `gui/map-service-areas.mjs` with primary, shared, and coordinated
+  symbolic contour/fill patterns, metric-free defaults, and a generic fallback.
+- Added registry/hash/credits provenance and deterministic service-area tests.
+- Checked the Phase 3.2 service-area overlays item; uncertainty overlays, event
+  markers, and interaction behavior remain separate future slices with no live
+  GUI or host behavior changed.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
