@@ -137,6 +137,23 @@
       "accessible_equivalent": "Riverside name, RV monogram, text labels, and generic fallback",
       "visible_source": "Visible Riverside system identity",
       "approval_status": "approved"
+    },
+    {
+      "id": "visual.identity.northlake-kit",
+      "asset_type": "visual",
+      "semantic_role": "identity",
+      "source_path": "assets/source/visual/identity/northlake-kit.svg",
+      "release_path": "assets/release/visual/svg/northlake.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional SVG identity kit",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the mark and wordmark from the source kit.",
+      "original_hash": "sha256:064ec106aef643b9132c080b18a09a84d8f6b8efd5086f4a2a218e980bcbcb96",
+      "release_hash": "sha256:76965f3a89054d56e79c627649313879750ac8cd86848b325572db635df86190",
+      "attribution_text": "Hand-authored in this repository; fictional identity with no third-party asset.",
+      "accessible_equivalent": "Northlake name, NL monogram, text labels, and generic fallback",
+      "visible_source": "Visible Northlake system identity",
+      "approval_status": "approved"
     }
   ]
 }

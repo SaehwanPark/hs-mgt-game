@@ -34,20 +34,22 @@ class AudioDirectionTests(unittest.TestCase):
       import { AUDIO_DIRECTION, audioDirectionSummary } from "./gui/audio-direction.mjs";
       const standards = AUDIO_DIRECTION.standards;
       const entries = audioDirectionSummary();
+      const northlake = AUDIO_DIRECTION.prototypes.find((entry) => entry.id === "audio.direction-northlake-motif");
       const required = [
         "audio.direction-confirm", "audio.direction-reject", "audio.direction-report",
-        "audio.direction-riverside-motif", "audio.direction-neutral-bed",
+        "audio.direction-riverside-motif", "audio.direction-northlake-motif", "audio.direction-neutral-bed",
         "audio.direction-pressure-layer", "audio.direction-environmental-loop",
       ];
       if (entries.length !== required.length || !required.every((id) => entries.some((entry) => entry.id === id))) process.exit(1);
       if (standards.loudness_target_lufs !== -24 || standards.peak_ceiling_dbfs !== -6) process.exit(2);
       if (standards.cue_duration_ms.min !== 80 || standards.cue_duration_ms.max !== 500) process.exit(3);
+      if (northlake.recipe.partials[1].frequency_hz !== 391.995) process.exit(4);
       console.log(JSON.stringify({ standards, entries }));
       """
     )
     self.assertEqual(result.returncode, 0, result.stderr)
     payload = json.loads(result.stdout)
-    self.assertEqual(len(payload["entries"]), 7)
+    self.assertEqual(len(payload["entries"]), 8)
 
   def test_cues_are_distinguishable_and_loops_are_bounded(self):
     result = run_node(

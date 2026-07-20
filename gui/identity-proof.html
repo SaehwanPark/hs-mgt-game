@@ -25,6 +25,7 @@
       <p class="source">Fictional, fixture-only identity proof. It does not load host state or alter a session.</p>
       <div class="controls" aria-label="Identity proof controls">
         <button type="button" id="riverside">Show Riverside</button>
+        <button type="button" id="northlake">Show Northlake</button>
         <button type="button" id="unknown">Show generic fallback</button>
       </div>
       <img class="logo" id="logo" src="../assets/release/visual/svg/riverside.svg" alt="Riverside fictional system logo mark" />
@@ -43,7 +44,9 @@
       function render(id) {
         const kit = identityKitFor(id);
         heading.textContent = `${kit.label} identity kit`;
-        logo.hidden = kit.id !== "riverside";
+        document.title = `${kit.label} Identity Proof`;
+        logo.hidden = !kit.asset.release_path;
+        if (kit.asset.release_path) logo.src = `../${kit.asset.release_path}`;
         logo.alt = `${kit.label} identity mark; ${kit.equivalent}`;
         status.textContent = `${kit.source}. ${kit.equivalent}. Monogram: ${kit.monogram}.`;
         surfaces.replaceChildren(...identitySurfaceSummary(id).map((entry) => {
@@ -55,6 +58,7 @@
       }
 
       document.querySelector("#riverside").addEventListener("click", () => render("riverside"));
+      document.querySelector("#northlake").addEventListener("click", () => render("northlake"));
       document.querySelector("#unknown").addEventListener("click", () => render("unknown"));
       render("riverside");
     </script>

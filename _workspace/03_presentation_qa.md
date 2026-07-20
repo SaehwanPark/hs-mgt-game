@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 2.1 Riverside identity v0.12.39
+# Presentation Domain QA — Phase 2.1 Northlake identity v0.12.40
 
 ## Status
 
@@ -6,41 +6,40 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 2.1 Riverside lane, identity contract, source/release
-  SVGs, identity catalog/proof, registry/credits, tests, and architecture.
+- Request summary, Phase 2.1 Northlake lane, identity contract, Northlake
+  source/release SVGs, shared catalog/proof, registry/credits, tests, and
+  architecture.
 
-The slice is one fictional identity kit and static proof only.
+The slice is fictional Northlake fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: all surfaces are derived from visible Riverside identity and keep the
-  name/monogram/shape available without color.
-- Pass: the audio motif is linked to visible identity only; no operational,
-  competitive, private, or future state is encoded.
-- Pass: unknown identity returns generic institution fallback rather than a
-  guessed real or unlisted system.
+- Pass: Northlake surfaces derive only from visible identity and preserve the
+  name/monogram/shape without color.
+- Pass: the audio motif is identity-only; no private rival condition or intent
+  is encoded.
+- Pass: shared proof selection preserves generic fallback for unknown IDs.
 
 ## Accessibility and Fallback Findings
 
-- Pass: source/release SVGs contain title/description and text labels; proof
-  controls are native keyboard buttons.
-- Pass: monochrome mark, shape, RV text, visible labels, and fallback text keep
-  identity meaningful without color or audio.
-- Evidence limit: static tests do not establish human contrast, screen-reader,
+- Pass: source/release SVG title/description and text labels are present;
+  selector buttons are keyboard-operable.
+- Pass: monochrome, shape, NL text, and generic fallback remain available when
+  color, assets, or audio are unavailable.
+- Evidence limit: static checks do not establish human contrast, screen-reader,
   viewport, or lived-accessibility outcomes.
 
 ## Provenance and Rights Findings
 
-- Pass: source and release files are registry-backed with hashes, project-
-  generated provenance, approval, accessible equivalents, and no external URLs.
-- Pass: the fictional mark is not copied from a real institution or third-party
-  asset.
+- Pass: Northlake source/release files and generated module are registry-backed
+  with hashes, project provenance, approval, and no external references.
+- Pass: the fictional design is distinct from Riverside and has no third-party
+  brand or downloaded asset.
 
 ## Authority and Replay Findings
 
-- Pass: the identity catalog/proof uses local fixture data only and cannot
-  affect host/session, commands, transitions, history, hashes, replay, audio,
-  or debrief output.
+- Pass: catalog/proof uses local fixtures and cannot affect host/session,
+  simulation, history, hashes, replay, audio playback, or debrief.
 
 ## Required Fixes
 
@@ -48,12 +47,12 @@ None.
 
 ## Residual Risks and Evidence Limits
 
-Northlake/Summit consistency, live cross-screen promotion, human art direction,
-and broader identity review remain separate slices.
+Summit consistency, live promotion, human art direction, and broader identity
+review remain separate slices.
 
 ## Verification Evidence
 
-- Focused Riverside identity and SVG/asset tests.
+- Focused Northlake/Riverside identity and audio tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.
 - One light independent code-review pass required after final implementation.

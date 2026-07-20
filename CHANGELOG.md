@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.40] - 2026-07-20
+
+- Added the fictional Northlake identity kit with distinct N geometry, lake
+  line, monochrome, marker, signage, report-header, badge, and NL variants.
+- Added the Northlake audio motif recipe and shared identity-proof selector;
+  preserved generic fallback and no live GUI promotion.
+- Added Northlake source/release provenance, hashes, credits, and Phase 2.1
+  per-system checklist bookkeeping.
+- Bumped package/public metadata to `0.12.40`.
+
 ## [0.12.39] - 2026-07-20
 
 - Added the fictional Riverside identity kit with logo, monochrome, marker,
