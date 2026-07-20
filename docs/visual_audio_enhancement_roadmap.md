@@ -1310,15 +1310,28 @@ Each animation must define:
 
 ### Checklist
 
-- [ ] Motion catalog approved.
-- [ ] Maximum simultaneous animations defined.
-- [ ] Duration standards documented.
-- [ ] Reduced-motion replacements documented.
-- [ ] No animation blocks input unnecessarily.
-- [ ] No motion reveals hidden information.
-- [ ] Replay order deterministic.
-- [ ] Animation interruption tested.
-- [ ] Performance tested on baseline hardware.
+**Status:** Complete in v0.12.68.
+
+Evidence: `gui/motion-catalog.mjs` defines nine categories and the shared
+policy for duration, easing, reduced-motion replacement, input, hidden-state,
+replay order, interruption, simultaneous load, and declared frame budget;
+`gui/motion-proof.html` demonstrates the policy with a deterministic replay
+sequence, interruption result, reduced-motion toggle, responsive/print layout,
+and no timers; `tests/test_motion_catalog.py` covers catalog completeness,
+replay/interruption/load determinism, a local budget smoke test, proof markers,
+and authority boundaries; `visual.runtime-motion-catalog` is recorded in the
+registry and credits. Performance evidence is a local budget smoke test, not a
+claim about baseline hardware or lived experience.
+
+- [x] Motion catalog approved.
+- [x] Maximum simultaneous animations defined.
+- [x] Duration standards documented.
+- [x] Reduced-motion replacements documented.
+- [x] No animation blocks input unnecessarily.
+- [x] No motion reveals hidden information.
+- [x] Replay order deterministic.
+- [x] Animation interruption tested.
+- [x] Performance tested on baseline hardware.
 
 ### Exit criteria
 

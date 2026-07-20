@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Motion Specification Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1180px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .source { color: #60707b; }
+      .controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+      button { background: #ffffff; border: 2px solid #0b6e69; border-radius: .5rem; color: #075952; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .motion-grid { display: grid; gap: .8rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .motion-card { border: 1px solid #d6e2df; border-radius: .7rem; min-width: 0; padding: .85rem; }
+      .motion-card__heading { align-items: baseline; border-bottom: 3px double #0b6e69; display: flex; gap: .5rem; justify-content: space-between; margin-bottom: .55rem; padding-bottom: .4rem; }
+      .motion-card__heading small, .motion-card__meta { color: #60707b; }
+      .motion-card__meta { font-size: .9rem; }
+      .timeline { border-left: 3px dotted #0b6e69; display: grid; gap: .35rem; list-style: none; margin: 1rem 0; padding-left: 1rem; }
+      .timeline li { background: #f4faf8; border: 1px solid #d6e2df; border-radius: .45rem; padding: .45rem .6rem; }
+      .motion-card code { background: #eef5f3; border: 1px solid #d6e2df; border-radius: .25rem; padding: .1rem .25rem; }
+      .note { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+      .reduced .timeline { border-left-style: solid; }
+      @media (max-width: 720px) { .motion-grid { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+      @media print { body { background: #ffffff; padding: 0; } main { border: 0; } .controls { display: none; } .motion-grid { grid-template-columns: 1fr 1fr; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>Motion specification proof</h1>
+      <p class="source">Fixture-only motion contract catalog. No host, command, simulation state, timer, animation, or external asset is loaded.</p>
+      <div class="controls" aria-label="Motion proof controls">
+        <button type="button" id="toggle-reduced">Show reduced-motion replacements</button>
+        <button type="button" id="interrupt">Show interruption result</button>
+        <button type="button" id="print-proof">Print/export proof</button>
+      </div>
+      <p id="policy-summary" class="motion-card__meta">Motion policy: maximum 3 simultaneous; declared frame budget 16 ms.</p>
+      <ol id="motion-sequence" class="timeline" aria-label="Deterministic replay order"></ol>
+      <section class="motion-grid" id="motion-grid" aria-label="Motion catalog"></section>
+      <p id="interrupt-result" class="note" hidden></p>
+      <p class="note">Motion is supplementary attention guidance. Text, source/status, exact values, actor-visible timing, reduced-motion replacements, and keyboard input remain available without animation. Local proof timing is a declared budget smoke check, not a hardware, usability, or policy claim.</p>
+    </main>
+    <script type="module">
+      import { MOTION_CATALOG, MOTION_POLICY, interruptMotion, orderedMotionCatalog, motionLoadReport, replayMotionSequence } from "./motion-catalog.mjs";
+
+      const grid = document.querySelector("#motion-grid");
+      const sequenceRoot = document.querySelector("#motion-sequence");
+      const policySummary = document.querySelector("#policy-summary");
+      let reducedMotion = false;
+      const events = orderedMotionCatalog().map((entry, index) => ({ motion_id: entry.id, sequence: index, batch: Math.floor(index / 3), target_id: `proof-${entry.id}`, visible_label: entry.label, source: "Fixture-visible motion contract" }));
+
+      function render() {
+        document.body.classList.toggle("reduced", reducedMotion);
+        const replay = replayMotionSequence(events, { reduced_motion: reducedMotion });
+        const load = motionLoadReport(events);
+        policySummary.textContent = `${MOTION_CATALOG.entries.length} categories · maximum ${MOTION_POLICY.max_simultaneous_animations} simultaneous · declared frame budget ${MOTION_POLICY.baseline_frame_budget_ms} ms · proof load maximum ${load.maximum_simultaneous} · within budget ${load.within_simultaneous_budget ? "yes" : "no"}`;
+        sequenceRoot.replaceChildren();
+        for (const event of replay) {
+          const item = document.createElement("li");
+          item.textContent = `${event.replay_index + 1}. ${event.visible_label} · ${event.duration_ms} ms · ${event.replacement ?? event.easing}`;
+          sequenceRoot.append(item);
+        }
+        grid.replaceChildren();
+        for (const entry of orderedMotionCatalog()) {
+          const card = document.createElement("article");
+          card.className = "motion-card";
+          const heading = document.createElement("div");
+          heading.className = "motion-card__heading";
+          const title = document.createElement("strong");
+          title.textContent = entry.label;
+          const duration = document.createElement("small");
+          duration.textContent = `${entry.duration_ms} ms · ${entry.easing}`;
+          heading.append(title, duration);
+          const purpose = document.createElement("p");
+          purpose.textContent = entry.semantic_purpose;
+          const rules = document.createElement("p");
+          rules.className = "motion-card__meta";
+          rules.textContent = `Reduced motion: ${entry.reduced_motion_replacement} Interruption: ${entry.interruption_behavior}`;
+          const order = document.createElement("p");
+          order.className = "motion-card__meta";
+          order.textContent = `Replay ${entry.replay_behavior} Input: ${entry.input_behavior} Budget: ${entry.performance_budget_ms} ms.`;
+          card.append(heading, purpose, rules, order);
+          grid.append(card);
+        }
+      }
+      document.querySelector("#toggle-reduced").addEventListener("click", (event) => {
+        reducedMotion = !reducedMotion;
+        event.currentTarget.textContent = reducedMotion ? "Show motion timing" : "Show reduced-motion replacements";
+        render();
+      });
+      document.querySelector("#interrupt").addEventListener("click", () => {
+        const result = interruptMotion("report-arrival", "status-change");
+        const root = document.querySelector("#interrupt-result");
+        root.hidden = false;
+        root.textContent = `Interrupted ${result.interrupted}; replacement ${result.replacement}; host state changed ${result.host_state_changed}; written information retained ${result.written_information_retained}.`;
+      });
+      document.querySelector("#print-proof").addEventListener("click", () => globalThis.print?.());
+      render();
+    </script>
+  </body>
+</html>

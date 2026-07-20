@@ -1,40 +1,41 @@
-# Request Summary — Visual/audio Phase 5.2 metric visualization v0.12.67
+# Request Summary — Visual/audio Phase 6.1 motion specification v0.12.68
 
 ## Authorized outcome
 
-Complete the Phase 5.2 metric and trend visualization checklist while
-preserving actor-visible evidence and host authority.
+Complete the Phase 6.1 motion specification checklist as a bounded policy and
+proof slice without adding runtime animation or changing host authority.
 
 ## Slice boundary
 
-- Define eight small deterministic forms: sparkline, month-over-month delta,
-  capacity bar, staffing composition, project progress, payer-mix summary,
-  trust/legitimacy trend, and visible uncertainty interval.
-- Document source precision, uncertainty, missingness, exact-text,
-  color-independent, large-text, print, reduced-motion, and screenshot rules.
-- Add a fixture-only proof and deterministic SVG snapshot test.
-- Add opt-in live rendering only for metric descriptors that explicitly supply
-  actor-visible visualization data; retain written value/source/status text.
+- Define nine restrained motion categories: focus transition, report arrival,
+  month transition, project progress, project completion, new visible rival
+  action, status change, metric delta reveal, and relationship-line change.
+- Document semantic purpose, duration, easing, reduced-motion replacement,
+  interruption behavior, replay behavior/order, input behavior, simultaneous
+  load, and declared frame-budget rules.
+- Add deterministic replay/interruption planning and a fixture-only proof page.
+- Test the local catalog’s declared performance budget without claiming baseline
+  hardware, human usability, or production animation performance.
 - Do not change Rust DTOs, simulation state, commands, transitions, stochastic
   inputs, history, hashes, replay authority, audio, or debrief behavior.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Phase 5.2.
-- `gui/metric-visualizations.mjs` — deterministic catalog and SVG adapter.
-- `gui/metric-visualization-proof.html` — fixture proof.
-- `gui/app.mjs` and `gui/index.html` — existing metric surface and opt-in path.
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 6.1.
+- `gui/motion-catalog.mjs` — pure motion policy and planning functions.
+- `gui/motion-proof.html` — fixture proof.
+- `gui/index.html` — existing reduced-motion and transition surface context.
 - `docs/design_principles.md` — actor-visible boundaries and accessibility.
 
 ## Validation target
 
-Focused metric-visualization, GUI, registry, credits, metadata,
-documentation-link, full Python, full Rust, formatting, presentation-contract,
-snapshot, and diff checks.
+Focused motion-catalog, GUI, registry, credits, metadata, documentation-link,
+full Python, full Rust, formatting, presentation-contract, performance-smoke,
+and diff checks.
 
 ## Evidence limits
 
-Static deterministic models and SVG checks establish technical fidelity and
-authority boundaries only. They do not establish human usability, lived
-accessibility, contrast, learning, calibration, browser behavior, or policy
-validity.
+Static catalog/planning checks and local smoke timing establish technical policy
+coverage only. They do not establish browser animation behavior, baseline
+hardware performance, lived accessibility, usability, learning, calibration,
+or policy validity.

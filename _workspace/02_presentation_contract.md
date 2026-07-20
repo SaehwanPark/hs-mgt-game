@@ -1,66 +1,66 @@
-# Presentation Contract — Phase 5.2 metric and trend visualization v0.12.67
+# Presentation Contract — Phase 6.1 motion specification v0.12.68
 
 ## Goal and authorization
 
-Make supplied actor-visible trends and constraints easier to scan through
-small deterministic visuals without inferring precision, uncertainty,
-missingness, causality, or hidden state.
+Specify restrained motion that can make visible consequence order easier to
+follow without allowing client timing to become a second transition authority.
 
-## Visualization source ledger
+## Motion source ledger
 
-| Form | Explicit source fields | Allowed presentation |
+| Category | Visible trigger/source | Allowed presentation |
 | --- | --- | --- |
-| Sparkline | Visible ordered numeric periods | Compact line with gaps for missing periods |
-| Month-over-month delta | Two visible comparable values | Written increase/decrease/unchanged label |
-| Capacity bar | Visible used and total units | Patterned relative bar plus exact units |
-| Staffing composition | Visible category units | Patterned composition plus category legend |
-| Project progress | Visible completed and total units | Track plus completed/total text; no promise |
-| Payer-mix summary | Visible payer categories and values | Patterned mix plus exact category text |
-| Trust/legitimacy trend | Visible categorical period labels | Labeled sequence; never numeric scoring |
-| Uncertainty interval | Visible lower/estimate/upper fields | Whisker and exact bounds; not probability |
+| Focus transition | Local selected visible target | Focus emphasis only; no state change |
+| Report arrival | Actor-visible report insertion | Attention cue plus written report/source/status |
+| Month transition | Host-committed month marker | Local orientation after committed text is available |
+| Project progress | Host-reported progress field | Emphasize reported progress; no interpolation/promise |
+| Project completion | Host-reported completion | Emphasize conclusion; do not predict completion |
+| New visible rival action | Public observed action/timing | Emphasize public signal; retain private-detail boundary |
+| Status change | Visible status label/pattern | Emphasize label; add no severity |
+| Metric delta reveal | Explicit before/after/delta text | Emphasize exact values; do not recompute |
+| Relationship-line change | Explicit visible line/pattern update | Emphasize visible pattern; infer no direction/cause |
 
-## Visual and interaction contract
+## Motion contract
 
-- `gui/metric-visualizations.mjs` is the single catalog. Each form documents
-  source precision, uncertainty rendering, missingness rendering, exact text,
-  color-independent interpretation, large-text behavior, and a screenshot
-  fixture.
-- `renderMetricVisualizationSvg` emits deterministic SVG with written title,
-  description, exact text, source, and status. Geometry is supplementary and
-  never normalizes absent fields.
-- `gui/app.mjs` renders a visual only when a metric descriptor explicitly
-  supplies `visualization_kind` and its values. Existing written metric values
-  remain the primary fallback.
-- `gui/metric-visualization-proof.html` exposes all eight forms with large-text,
-  print, and reduced-motion controls and no host or network path.
+- `gui/motion-catalog.mjs` is the single catalog. Every entry defines semantic
+  purpose, duration, easing, reduced-motion replacement, interruption,
+  replay, input, deterministic order, and a declared frame budget.
+- `MOTION_POLICY` caps simultaneous effects at three, sets a 16 ms declared
+  frame budget, requires deterministic batch/sequence/category/target order,
+  and states that motion never owns focus or blocks host input.
+- `replayMotionSequence` returns immutable local plans. Reduced motion sets
+  duration to zero and supplies the same-information static replacement.
+- `interruptMotion` reports a local replacement while explicitly retaining
+  written information and leaving host state unchanged.
+- `gui/motion-proof.html` demonstrates the policy without timers, animation,
+  network, host calls, or simulation state.
 
 ## Accessibility and fallback requirements
 
-- Exact values, source/status, uncertainty, and missingness remain in ordinary
-  DOM text. SVG title/description text is supplementary, not the only label.
-- Color-independent patterns, line styles, point shapes, legends, and explicit
-  written labels carry meaning when color or audio is unavailable.
-- Large text stacks or reflows labels; print retains visual headings and exact
-  text; reduced motion is static because animation is not used.
+- Motion is supplementary; visible text, source/status, exact values, focus
+  semantics, and keyboard input remain available without it.
+- Reduced-motion replacement is immediate and static. Interrupting an effect
+  never removes its report, metric, status, or consequence text.
+- The proof’s print and responsive layout retains the complete catalog and
+  evidence limits; no animation is required for comprehension.
 
 ## Authority, history, and replay boundaries
 
-The catalog accepts only explicit metric descriptor fields. It does not call a
-host, submit a command, mutate simulation state, resolve stochastic inputs,
-rewrite history, change a state hash, or create debrief facts. It does not
-convert missing values into estimates or categorical trust labels into scores.
+The catalog accepts explicit local motion events only. It does not call a host,
+submit a command, mutate simulation state, resolve stochastic inputs, rewrite
+history, change a state hash, reveal hidden information, or create audio or
+debrief facts. Replay order is a presentation plan, not replay authority.
 
 ## Asset provenance and verification
 
-`visual.runtime-metric-visualizations` is a project-generated registry-approved
+`visual.runtime-motion-catalog` is a project-generated registry-approved
 semantic asset with source hash, visible-source description, accessible
-equivalent, and no release image. Focused tests include deterministic SVG
-snapshot hashing; full Python/Rust, formatting, registry/credits/metadata,
-documentation, presentation-contract, and diff checks are required before
-merge.
+equivalent, and no release image. Focused catalog/proof tests include a local
+performance-budget smoke check; full Python/Rust, formatting,
+registry/credits/metadata, documentation, presentation-contract, and diff
+checks are required before merge.
 
 ## Non-goals and next gate
 
-This slice does not add host fields, metric history storage, client-side
-forecasting, probability calibration, animation, audio, or a browser screenshot
-engine. Later roadmap phases own motion, audio, broader capture, and QA.
+This slice does not add CSS/JS runtime animation, host sequencing, audio
+synchronization, metric transitions, browser performance measurement, or a
+first-month resolution sequence. Later Phase 6.2 owns the first-month sequence.

@@ -1,51 +1,42 @@
-# Final Handoff — Visual/audio Phase 5.2 metric and trend visualization v0.12.67
+# Final Handoff — Visual/audio Phase 6.1 motion specification v0.12.68
 
 ## Result
 
-Phase 5.2 is complete. Eight deterministic metric visualization forms now have
-precision, uncertainty, missingness, exact-text, color-independent,
-large-text, print, reduced-motion, and deterministic SVG snapshot contracts.
+Phase 6.1 is complete. Nine visible motion categories now have explicit
+semantic purpose, timing, easing, reduced-motion, interruption, replay-order,
+input, simultaneous-load, and declared performance-budget contracts.
 
 ## Changed files and behavior
 
-- Added `gui/metric-visualizations.mjs` with sparkline, delta, capacity,
-  staffing, project progress, payer mix, trust trend, and uncertainty interval
-  contracts plus deterministic SVG output.
-- Added `gui/metric-visualization-proof.html` with all eight fixture forms,
-  large-text and print controls, responsive layout, reduced-motion behavior,
-  and written fallbacks.
-- Added opt-in live rendering for explicit actor-visible metric descriptors in
-  `gui/app.mjs`; current metric values/source/status remain visible text.
-- Added focused tests and deterministic SVG snapshot, registry/credits
-  provenance, roadmap completion, and v0.12.67 SPEC/ARCHITECTURE/CHANGELOG/
-  history/lessons records.
-- No host field, simulation, stochastic, history, hash, replay, audio, or
-  debrief behavior changed.
+- Added `gui/motion-catalog.mjs` with pure catalog, deterministic replay plan,
+  interruption result, and simultaneous-load report.
+- Added `gui/motion-proof.html` with reduced-motion, interruption, replay order,
+  responsive, print, and local budget smoke proof; it starts no timers or
+  animations.
+- Added focused tests, registry/credits provenance, roadmap completion, and
+  v0.12.68 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
+- No runtime animation, host sequencing, command, simulation, stochastic,
+  history, hash, replay-authority, audio, or debrief behavior changed.
 
 ## Verification
 
-- Focused metric-visualization/GUI tests — 18 passed; full Python discovery —
-  449 passed.
+- Focused motion-catalog tests — 4 passed; full Python discovery — 454 passed.
 - `cargo fmt -- --check` passed; serial `cargo test -- --test-threads=1`
   passed with 328 Rust unit tests plus 13 integration/golden/scenario tests.
-  The initial parallel run exposed three existing persistence-test interference
-  failures; no Phase 5.2 path was involved.
-- Release metadata, 341 Markdown documentation links, asset registry, asset
-  credits, presentation-contract audit, Node syntax, SVG snapshot, and
-  `git diff --check` passed.
+- Release metadata, 343 Markdown documentation links, asset registry, asset
+  credits, presentation-contract audit, Node syntax, local performance smoke,
+  and `git diff --check` passed.
 
 ## Handoff and review
 
-- Base: `main` at v0.12.66.
-- Working branch: `feat/visual-audio-phase5-metric-visualization-v0.12.67`.
+- Base: `main` at v0.12.67.
+- Working branch: `feat/visual-audio-phase6-motion-spec-v0.12.68`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass identified four evidence-boundary issues. The
-  branch fixes unavailable composition redistribution, missing-period
-  sparkline joins, categorical trust numeric scoring, and screenshot wording;
-  no second reviewer was spawned under the task-level constraint.
+- One light code-review pass is required. No second reviewer will be spawned
+  under the task-level constraint.
 
 ## Limits and next slice
 
-Later roadmap phases own motion, audio, broader capture, and QA. This slice does
-not add metric history storage, forecasting, probability calibration, or a
-browser screenshot engine.
+Phase 6.2 owns runtime first-month sequencing and synchronization. This slice
+does not add browser animation, audio synchronization, or a first-month
+resolution sequence.

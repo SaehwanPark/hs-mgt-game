@@ -5010,6 +5010,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Added deterministic SVG snapshot hash and focused tests, registry/credits,
   and completed every Phase 5.2 checklist item without consuming hidden state.
 
+### Visual/audio Phase 6.1 motion specification contract (v0.12.68)
+
+- Status: Complete; nine deterministic motion categories, replay/interruption
+  planning, reduced-motion proof, load-budget smoke test, and fixture proof
+  verified
+- Branch: `feat/visual-audio-phase6-motion-spec-v0.12.68`
+- Added `gui/motion-catalog.mjs` for focus, report arrival, month transition,
+  project progress/completion, visible rival action, status, metric delta, and
+  relationship-line changes.
+- Every category documents semantic purpose, duration, easing, reduced-motion
+  replacement, interruption behavior, replay behavior/order, input behavior,
+  and a declared performance budget. The catalog never starts timers or changes
+  host/simulation state.
+- Added `gui/motion-proof.html`, focused tests, registry/credits, and completed
+  every Phase 6.1 checklist item; local performance evidence is a smoke budget
+  check, not a hardware or usability claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

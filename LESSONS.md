@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Specify Motion Before Scheduling Motion
+
+- Context: Phase 6.1 needs consequence animation to aid comprehension without
+  letting client timing become a second transition authority.
+- Symptom: Unbounded animation can block input, reveal hidden information,
+  reorder replay, or make reduced-motion users lose the written consequence.
+- Resolution: Define each category’s semantic purpose, timing, replacement,
+  interruption, replay, input, and load rules in one pure catalog; prove the
+  policy with planned events rather than timers.
+- Prevention: Keep motion supplementary, keep exact text in the DOM, cap
+  simultaneous effects, and treat local performance smoke results as budgets
+  rather than hardware or usability claims.
+
 ## Visualize Supplied Metrics Without Inventing Precision
 
 - Context: Phase 5.2 needs small visuals that make visible constraints easier to

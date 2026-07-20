@@ -1,75 +1,64 @@
-# Presentation QA — Phase 5.2 metric and trend visualization v0.12.67
+# Presentation QA — Phase 6.1 motion specification v0.12.68
 
 ## Status
 
-Pass for the bounded metric-visualization catalog, deterministic SVG proof,
-snapshot, and explicit live-rendering integration.
+Pass for the bounded motion catalog, deterministic planning proof, interruption
+policy, reduced-motion replacement, and local performance-budget smoke test.
 
 ## Reviewed inputs and authorization
 
 - Request: `_workspace/00_input/request-summary.md`.
 - Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 5.2.
-- Produced files: `gui/metric-visualizations.mjs`,
-  `gui/metric-visualization-proof.html`, `gui/app.mjs`, `gui/index.html`,
-  `tests/test_metric_visualizations.py`, and the SVG snapshot fixture.
-- Authorization is limited to local deterministic presentation over explicit
-  actor-visible metric descriptors. Host and simulation authority remain
-  unchanged.
+- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 6.1.
+- Produced files: `gui/motion-catalog.mjs`, `gui/motion-proof.html`, and
+  `tests/test_motion_catalog.py`.
+- Authorization is limited to local presentation policy/planning. Host and
+  simulation authority remain unchanged.
 
-## Information and precision findings
+## Information and causality findings
 
-- Pass: all eight forms document precision, uncertainty, missingness, exact
-  text, and color-independent interpretation.
-- Pass: missing periods remain visible and no visual calculates a value from an
-  absent field; categorical trust language is not converted into a score.
-- Pass: uncertainty intervals retain visible bounds and are labeled as
-  intervals rather than probabilities or forecasts.
-- Pass: SVG output includes exact text, source, status, title, and description.
+- Pass: every category names visible source/trigger and prohibits hidden
+  information, prediction, interpolation, or added severity.
+- Pass: project completion, rival action, metric delta, and relationship-line
+  motion preserve host/observation boundaries and written evidence.
+- Pass: replay planning sorts explicit local events deterministically and never
+  replaces replay authority.
 
 ## Accessibility and fallback findings
 
-- Pass: exact value/source/status text remains in the ordinary DOM beside the
-  opt-in live visual and in each proof card.
-- Pass: patterns, labels, line styles, point shapes, and legends supplement
-  color; large-text, print, and reduced-motion proof behavior is static and
-  inspectable.
-- Evidence limit: static checks do not establish lived accessibility, browser
-  behavior, contrast, human comprehension, or first-month usability.
+- Pass: reduced-motion plans are immediate static replacements with the same
+  written information; interruption retains written content.
+- Pass: proof keeps catalog text, input rules, source boundaries, and print/
+  responsive layout without timers or animation.
+- Evidence limit: static checks do not establish browser animation behavior,
+  lived accessibility, contrast, human comprehension, or first-month usability.
 
 ## Provenance and rights findings
 
-- Pass: `visual.runtime-metric-visualizations` has registry/hash/credits
-  provenance, accessible equivalent, visible source, and approved
-  project-generated status.
+- Pass: `visual.runtime-motion-catalog` has registry/hash/credits provenance,
+  accessible equivalent, visible source, and approved project-generated status.
 - Pass: no external assets, fonts, URLs, or third-party files were introduced.
 
-## Authority and replay findings
+## Authority and performance findings
 
-- Pass: catalog/model/SVG functions are pure over explicit metric descriptors.
-- Pass: opt-in live rendering does not call a host, submit a command, mutate
-  simulation, stochastic inputs, history, hashes, replay authority, audio, or
-  debrief.
+- Pass: catalog/planning/interruption/load functions are pure over local events.
+- Pass: no host, command, simulation, stochastic, history, hash,
+  replay-authority, audio, or debrief mutation path was added.
+- Pass: local smoke test checks the declared load budget; this is not a
+  baseline-hardware or production-performance claim.
 
 ## Required fixes
 
-The single light code-review pass identified four issues, all fixed on this
-branch without a second reviewer: missing staffing/payer categories were
-reserved as explicit patterned segments instead of being redistributed;
-sparklines now split at missing periods; trust/legitimacy uses labeled
-categorical points rather than numeric scoring; and documentation now calls
-the guard a deterministic SVG snapshot rather than a browser screenshot.
+None identified by this bounded QA pass. The single light code-review pass is
+required before merge; no second reviewer will be spawned under the task
+constraint.
 
 ## Verification evidence
 
-- `python3 -m unittest tests.test_metric_visualizations -v` — 5 passed after
-  review fixes.
-- Full Python discovery, asset, metadata, documentation, presentation audit,
-  formatting, Rust, and diff checks will be rerun before merge.
-- `cargo fmt -- --check` — passed.
-- Parallel `cargo test` encountered three existing persistence-test interference
-  failures; serial `cargo test -- --test-threads=1` passed with 328 Rust unit
-  tests plus 13 integration/golden/scenario tests.
-- Release metadata, documentation links (341 Markdown files), asset registry,
-  asset credits, presentation-contract audit, Node syntax, SVG snapshot, and
-  `git diff --check` — passed.
+- `python3 -m unittest tests.test_motion_catalog -v` — 4 passed.
+- Full Python discovery — 454 passed.
+- `cargo fmt -- --check` — passed; serial `cargo test -- --test-threads=1`
+  passed with 328 Rust unit tests plus 13 integration/golden/scenario tests.
+- Release metadata, documentation links (343 Markdown files), asset registry,
+  asset credits, presentation-contract audit, Node syntax, local performance
+  smoke, and `git diff --check` — passed.
