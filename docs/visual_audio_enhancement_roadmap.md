@@ -2229,9 +2229,9 @@ The visual/audio enhancement program should be considered successful when the fo
 - [x] Create Northlake identity kit.
 - [x] Create Summit identity kit.
 - [x] Create the general-hospital base module.
-- [x] Create the emergency department module.
-- [x] Create the ambulatory-center module.
-- [x] Create construction and staffing overlays.
+- [x] Create the emergency department module. Evidence: `assets/source/visual/facilities/emergency-department.svg`, `gui/facility-components.mjs`, and `tests/test_emergency_department.py`.
+- [x] Create the ambulatory-center module. Evidence: `assets/source/visual/facilities/ambulatory-center.svg`, `gui/facility-components.mjs`, and `tests/test_ambulatory_center.py`.
+- [x] Create construction and staffing overlays. Evidence: `assets/source/visual/facilities/construction-crane.svg`, `tests/test_construction_crane.py`, `gui/operational-overlays.mjs`, and `tests/test_operational_overlays.py`.
 - [ ] Integrate one static regional board fixture.
 - [ ] Add screenshot regression tests.
 - [x] Refine the first five audio cues.
