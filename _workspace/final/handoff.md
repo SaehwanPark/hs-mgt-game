@@ -1,45 +1,47 @@
-# Final Handoff — Visual/audio Phase 4.2 visible consequence linkage v0.12.65
+# Final Handoff — Visual/audio Phase 5.1 semantic information containers v0.12.66
 
 ## Result
 
-Phase 4.2 is complete. Visible regional signals/processes and host-committed
-resolution effects now have deterministic local links across the board, reports,
-selected detail, resolution, history, and replay-review surfaces.
+Phase 5.1 is complete. Eight semantic information-container contracts now
+differentiate the existing executive desktop through restrained structure,
+markers, and typography while preserving visible evidence and authority.
 
 ## Changed files and behavior
 
-- Added `gui/consequence-links.mjs` with public-signal, visible-process,
-  committed-effect, targetless-effect, deterministic sorting, and immutable
-  replay turn/hash sequence projections.
-- Integrated bidirectional report/entity focus and linked consequence board focus
-  into `gui/app.mjs`/`gui/index.html`, preserving observed-month rival timing,
-  missingness, source labels, semantic fallback, and non-animated focus.
-- Scoped resolution links to the host-provided session ID so same-session
-  refreshes preserve effects while new or static sessions clear stale links.
+- Added `gui/semantic-containers.mjs` with board packet, operations ledger,
+  intelligence report, regulatory letter, project sheet, news wire, executive
+  action queue, and after-action report contracts.
+- Integrated classes and non-color markers into the existing
+  `gui/index.html` panels; added compact/expanded, responsive, print, and
+  reduced-motion proof behavior in `gui/semantic-container-proof.html`.
+- Preserved headings, exact visible values, source/status language, shared grid,
+  keyboard access, and actor-visible boundaries.
 - Added focused tests, registry/credits provenance, roadmap completion, and
-  v0.12.65 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
-- No host DTO, simulation, command, transition, stochastic, history, hash,
-  replay-authority, audio, or debrief behavior changed.
+  v0.12.66 SPEC/ARCHITECTURE/CHANGELOG/history/lessons records.
 
 ## Verification
 
-- Focused consequence, resolution, first-month, GUI, asset, credits, metadata,
-  documentation-link, presentation-contract, full Python, full Rust, formatting,
-  and diff checks passed before merge.
+- Focused semantic-container tests — 3 passed; full Python discovery — 445
+  passed.
+- `cargo fmt -- --check` passed; `cargo test` passed with 328 Rust unit tests
+  plus 13 integration/golden/scenario tests.
+- Release metadata, 339 Markdown documentation links, asset registry, asset
+  credits, presentation-contract audit, Node syntax, and `git diff --check`
+  passed.
 - Evidence is technical and does not establish human usability, lived
-  accessibility, learning, calibration, contrast, browser replay behavior, or
-  policy validity.
+  accessibility, learning, calibration, contrast, browser behavior, or policy
+  validity.
 
 ## Handoff and review
 
-- Base: `main` at v0.12.64.
-- Working branch: `feat/visual-audio-phase4-consequence-links-v0.12.65`.
+- Base: `main` at v0.12.65.
+- Working branch: `feat/visual-audio-phase5-semantic-containers-v0.12.66`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass completed. Its session-isolation finding was fixed
-  in `0f103e4`; no second reviewer was spawned under the task-level constraint.
+- One light code-review pass is required. No second reviewer will be spawned
+  under the task-level constraint.
 
 ## Limits and next slice
 
-Later roadmap phases own executive information containers, metric visualization,
-motion, audio, and broader testing/QA. This slice does not add host target
-fields, client-side causality, private rival actions, or a browser replay engine.
+Later roadmap phases own metric visualization, motion, audio, and broader
+testing/QA. This slice does not add host fields, client-side causality, private
+rival actions, or a browser replay engine.

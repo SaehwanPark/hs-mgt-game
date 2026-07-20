@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.66] - 2026-07-20
+
+- Added the eight-container Phase 5.1 semantic information catalog with
+  structural header, marker, compact/expanded, accessibility, large-text,
+  narrow-width, print, and source/status rules.
+- Integrated restrained semantic container borders and non-color markers into
+  the existing GUI and added a fixture-only responsive/print proof page.
+- Completed the Phase 5.1 semantic information-container checklist with
+  registry/credits/SDD provenance.
+- Bumped package/public metadata to `0.12.66`.
+
 ## [0.12.65] - 2026-07-20
 
 - Added deterministic visible-consequence links for regional public signals,

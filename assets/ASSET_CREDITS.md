@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.65. Runtime-generated
+No third-party release assets are included in v0.12.66. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval |
@@ -45,6 +45,7 @@ visual tokens and Web Audio recipes remain optional presentation layers.
 | Visual | `visual.runtime-markers` | `gui/visual.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-operational-overlays` | `gui/operational-overlays.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-regional-board-adapter` | `gui/regional-board.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
+| Visual | `visual.runtime-semantic-containers` | `gui/semantic-containers.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-statuses` | `gui/visual.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 | Visual | `visual.runtime-svg-scene-proof` | `gui/scene.mjs` | project-generated | Generated in this repository; no third-party asset. | approved |
 

@@ -370,6 +370,15 @@ immutable turn/hash snapshots. These are local presentation projections and do
 not overwrite history or enter host, simulation, stochastic, audio, or debrief
 authority.
 
+The v0.12.66 Phase 5.1 semantic-container catalog adds eight restrained
+information classes—board packet, operations ledger, intelligence report,
+regulatory letter, project sheet, news wire, executive action queue, and
+after-action report. Each class has structural header/marker, compact and
+expanded, accessibility, large-text, narrow-width, print, reduced-motion, and
+source/status rules. `gui/index.html` applies the shared semantic-container
+classes and non-color markers to existing panels; the catalog and proof remain
+presentation-only and do not consume hidden state or change host authority.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

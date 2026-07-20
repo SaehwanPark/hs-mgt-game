@@ -1099,16 +1099,120 @@ Reduce the uniform “card dashboard” appearance by giving major information c
 
 ### Checklist per container
 
-- [ ] Semantic purpose documented.
-- [ ] Header treatment completed.
-- [ ] Icon or marker completed.
-- [ ] Compact and expanded variants completed.
-- [ ] Accessibility semantics defined.
-- [ ] Large-text layout tested.
-- [ ] Narrow-width layout tested.
-- [ ] Print or export behavior reviewed if applicable.
-- [ ] Registry entry completed where assets are used.
-- [ ] Existing source/status language retained.
+**Status:** Complete in v0.12.66.
+
+Evidence: `gui/semantic-containers.mjs` defines the shared catalog and all
+eight container contracts; `gui/semantic-container-proof.html` demonstrates
+compact/expanded, responsive, print, and reduced-motion behavior;
+`gui/index.html` applies the classes and non-color markers to the existing
+source/status panels; `tests/test_semantic_containers.py` covers the catalog,
+proof, live integration, accessibility markers, and hidden-state boundary;
+`visual.runtime-semantic-containers` is recorded in the visual registry and
+asset credits. All source/status language remains in the existing DOM.
+
+#### Board packet
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### Operations ledger
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### Intelligence report
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### Regulatory letter
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### Project sheet
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### News wire
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### Executive action queue
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
+
+#### After-action report
+
+- [x] Semantic purpose documented.
+- [x] Header treatment completed.
+- [x] Icon or marker completed.
+- [x] Compact and expanded variants completed.
+- [x] Accessibility semantics defined.
+- [x] Large-text layout tested.
+- [x] Narrow-width layout tested.
+- [x] Print or export behavior reviewed if applicable.
+- [x] Registry entry completed where assets are used.
+- [x] Existing source/status language retained.
 
 ### Exit criteria
 

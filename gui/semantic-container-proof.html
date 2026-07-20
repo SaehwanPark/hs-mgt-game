@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Health Policy Strategy Game — Semantic Container Proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; color: #17232d; background: #eef5f3; }
+      body { margin: 0 auto; max-width: 1120px; padding: 1.5rem; }
+      main { background: #ffffff; border: 1px solid #d6e2df; border-radius: 1rem; padding: 1rem; }
+      .controls { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1rem 0; }
+      button { background: #ffffff; border: 2px solid #0b6e69; border-radius: .5rem; color: #075952; cursor: pointer; font: inherit; padding: .45rem .7rem; }
+      button:focus-visible { outline: 3px solid #a95226; outline-offset: 3px; }
+      .source { color: #60707b; }
+      .container-grid { display: grid; gap: .75rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .semantic-container { border: 1px solid #d6e2df; border-radius: .7rem; min-width: 0; padding: .85rem; }
+      .semantic-container__header { border-bottom: 3px double #0b6e69; display: flex; gap: .5rem; justify-content: space-between; margin-bottom: .65rem; padding-bottom: .45rem; }
+      .semantic-container__body { color: #33434d; }
+      .semantic-container--compact .expanded { display: none; }
+      .semantic-container--expanded .compact { display: none; }
+      .marker { border: 1px solid #60707b; border-radius: .25rem; font-size: .75rem; padding: .1rem .3rem; }
+      .fallback { background: #fff5d8; border: 1px solid #7a5a11; border-radius: .5rem; margin-top: 1rem; padding: .7rem; }
+      @media (max-width: 700px) { .container-grid { grid-template-columns: 1fr; } }
+      @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+      @media print { body { background: #ffffff; padding: 0; } main { border: 0; } .controls, .fallback { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p><a href="index.html">Return to the executive desktop</a></p>
+      <h1>Semantic information-container proof</h1>
+      <p class="source">Fixture-only structure catalog. No host, command, simulation state, or external asset is loaded.</p>
+      <div class="controls" aria-label="Container proof controls">
+        <button type="button" id="toggle-variant">Show compact variants</button>
+        <button type="button" id="print-proof">Print/export proof</button>
+      </div>
+      <section class="container-grid" id="container-grid" aria-label="Semantic information containers"></section>
+      <p class="fallback">Structure, typography, marker patterns, source/status text, and headings remain available when color, motion, or audio is unavailable. Exact values belong to the host-sourced content in the live GUI.</p>
+    </main>
+    <script type="module">
+      import { orderedSemanticContainers } from "./semantic-containers.mjs";
+
+      const grid = document.querySelector("#container-grid");
+      let compact = false;
+      function render() {
+        grid.replaceChildren();
+        for (const entry of orderedSemanticContainers()) {
+          const card = document.createElement("article");
+          card.className = `semantic-container semantic-container--${compact ? "compact" : "expanded"}`;
+          card.setAttribute("aria-label", entry.aria_label);
+          const header = document.createElement("div");
+          header.className = "semantic-container__header";
+          const title = document.createElement("strong");
+          title.textContent = `${entry.icon} ${entry.label}`;
+          const marker = document.createElement("span");
+          marker.className = "marker";
+          marker.textContent = entry.marker_pattern;
+          header.append(title, marker);
+          const purpose = document.createElement("p");
+          purpose.className = "semantic-container__body";
+          purpose.textContent = entry.semantic_purpose;
+          const compactText = document.createElement("p");
+          compactText.className = "compact";
+          compactText.textContent = entry.compact_variant;
+          const expandedText = document.createElement("p");
+          expandedText.className = "expanded";
+          expandedText.textContent = entry.expanded_variant;
+          const source = document.createElement("small");
+          source.className = "source";
+          source.textContent = `${entry.header_treatment} ${entry.source_status_rule}`;
+          card.append(header, purpose, compactText, expandedText, source);
+          grid.append(card);
+        }
+      }
+      document.querySelector("#toggle-variant").addEventListener("click", (event) => {
+        compact = !compact;
+        event.currentTarget.textContent = compact ? "Show expanded variants" : "Show compact variants";
+        render();
+      });
+      document.querySelector("#print-proof").addEventListener("click", () => globalThis.print?.());
+      render();
+    </script>
+  </body>
+</html>

@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Differentiate Containers Without Hiding Evidence
+
+- Context: Phase 5.1 needs the executive desktop to distinguish information
+  classes while retaining dense source-linked text and accessibility fallbacks.
+- Symptom: Color-only panel styling or compact cards can fragment the shared
+  grid, imply unsupported priority, or hide exact values at narrow/large-text
+  sizes.
+- Resolution: Use one catalog for structural header, non-color marker,
+  compact/expanded, large-text, narrow-width, print, reduced-motion, and
+  source/status rules; apply restrained classes to the existing semantic panels.
+- Prevention: Change hierarchy and structure before decoration, keep all text in
+  the DOM, and test the proof at compact, expanded, responsive, print, and
+  reduced-motion states.
+
 ## Link Consequences Only When the Host Names the Target
 
 - Context: Phase 4.2 connects regional reports, board entities, resolution

@@ -207,6 +207,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.runtime-semantic-containers",
+      "asset_type": "visual",
+      "semantic_role": "marker",
+      "source_path": "gui/semantic-containers.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic semantic information-container catalog",
+      "license": "project-generated",
+      "modifications": "None; structural, typography, marker, accessibility, responsive, and print contracts for eight information classes.",
+      "original_hash": "sha256:e3c417594ad720439dde03dfc45bd6f35bd36b0c08b8d1f3c9b41f07290d37ae",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Semantic purpose, heading, marker, compact/expanded text, source/status, large-text, narrow-width, and print rules",
+      "visible_source": "Existing actor-visible GUI information classes",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-statuses",
       "asset_type": "visual",
       "semantic_role": "status",
