@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Administrative Type Cues From Becoming Authority Claims
+
+- Context: The administrative-headquarters component needed an office-like
+  silhouette while the simulation does not expose institutional authority or
+  performance from a facility shape.
+- Symptom: A stepped office form or headquarters label can imply control,
+  legitimacy, effectiveness, or ownership that is not an actor-visible field.
+- Resolution: Used the stepped silhouette as a type-only cue and tested explicit
+  non-claim wording for authority and performance.
+- Prevention: Keep administrative vocabulary tied to visible facility kind and
+  require accessible descriptions to state the limit of the cue.
+
 ## Avoid Letting “Rural” Become a Geographic Claim
 
 - Context: The rural-clinic component needed a recognizable compact roof cue

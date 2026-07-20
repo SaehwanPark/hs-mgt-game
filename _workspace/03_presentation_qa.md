@@ -1,4 +1,4 @@
-# Presentation Domain QA — Phase 3.1 rural-clinic v0.12.48
+# Presentation Domain QA — Phase 3.1 administrative-headquarters v0.12.49
 
 ## Status
 
@@ -6,15 +6,15 @@
 
 ## Reviewed Inputs and Authorization
 
-- Request summary, Phase 3.1 rural-clinic lane, facility contract,
+- Request summary, Phase 3.1 administrative-headquarters lane, facility contract,
   source/release SVGs, component catalog/proof, registry/credits, tests, and
   architecture.
 
-The slice is fictional rural-clinic fixture work only.
+The slice is fictional administrative-headquarters fixture work only.
 
 ## Information and Causality Findings
 
-- Pass: the rural-clinic shape and seven layers derive only from visible facility kind,
+- Pass: the administrative-headquarters shape and seven layers derive only from visible facility kind,
   status, freshness, or local selection context.
 - Pass: pressure, project, capacity, and uncertainty layers do not encode
   private facility condition or infer unobserved outcomes.
@@ -32,9 +32,9 @@ The slice is fictional rural-clinic fixture work only.
 
 ## Provenance and Rights Findings
 
-- Pass: rural-clinic source/release SVGs and component catalog are registry-backed with
+- Pass: administrative-headquarters source/release SVGs and component catalog are registry-backed with
   current hashes, project provenance, approval, and no external references.
-- Pass: the fictional rural-clinic component has no third-party brand or downloaded
+- Pass: the fictional administrative-headquarters component has no third-party brand or downloaded
   asset.
 
 ## Authority and Replay Findings
@@ -53,7 +53,7 @@ separate slices.
 
 ## Verification Evidence
 
-- Focused rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
+- Focused administrative-headquarters/rural-clinic/specialty-center/ambulatory-center/emergency-department/patient-tower/general-hospital component, layer, fallback, registry,
   and syntax tests.
 - Full Python, Rust, Clippy, formatting, Node, asset/credits, metadata,
   documentation-link, and diff checks.

@@ -1,8 +1,8 @@
-# Presentation Contract — Phase 3.1 rural-clinic v0.12.48
+# Presentation Contract — Phase 3.1 administrative-headquarters v0.12.49
 
 ## Goal and Authorization
 
-Make a fictional rural clinic reusable across facility, map, report,
+Make a fictional administrative headquarters reusable across facility, map, report,
 and consequence surfaces while preserving the completed identity and generic
 fallback contracts.
 
@@ -27,9 +27,11 @@ fallback contracts.
 
 ## Visual, Motion, and Audio Semantics
 
-- The pitched-roof silhouette uses a shared 8px grid, system color variables,
+- The stepped office silhouette uses a shared 8px grid, system color variables,
   and a stable viewBox distinct from the general-hospital base, patient tower,
-  emergency department, ambulatory center, and specialty center.
+  emergency department, ambulatory center, specialty center, and rural clinic.
+- The stepped office silhouette is a type cue only; it does not establish
+  authority, performance, ownership, or hidden outcome.
 - Each layer varies visible structure and pattern, not hidden state.
 - Selection is local presentation state; uncertainty remains explicitly stale
   or missing rather than being resolved by the client.

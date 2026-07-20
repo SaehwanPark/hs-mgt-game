@@ -122,6 +122,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.administrative-headquarters",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/administrative-headquarters.svg",
+      "release_path": "assets/release/visual/svg/administrative-headquarters.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the stepped office silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:de9d2a836f7ad598bd5df5966a0c3ae5837ce6076e94b99e745f09ccfe4e9ddb",
+      "release_hash": "sha256:e12ee927b1869a0bb0ee3238c944ab79e719b945f429e0507746acdfbe5697f4",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Administrative headquarters label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",
