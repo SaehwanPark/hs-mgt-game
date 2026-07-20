@@ -256,6 +256,10 @@ The v0.12.45 emergency-department component reuses the same contract with a
 distinct entrance-wing silhouette and explicit type-only description. Its ED
 marker does not imply service performance, acuity, staffing, or hidden outcome.
 
+The v0.12.46 ambulatory-center component reuses the same contract with a
+distinct low-rise arc silhouette and explicit type-only description. Its shape
+does not imply throughput, service quality, ownership, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 
