@@ -190,6 +190,23 @@
       "approval_status": "approved"
     },
     {
+      "id": "visual.facility.construction-crane",
+      "asset_type": "visual",
+      "semantic_role": "facility",
+      "source_path": "assets/source/visual/facilities/construction-crane.svg",
+      "release_path": "assets/release/visual/svg/construction-crane.svg",
+      "creator": "project contributors",
+      "creation_method": "hand-authored fictional modular SVG facility component",
+      "license": "project-generated",
+      "modifications": "Release derivative preserves the boom-and-tower silhouette, identity badge, and accessible label from the source component.",
+      "original_hash": "sha256:0574b22645f17db044f23ad23ff8b8f3a9764330bd0c77af07c59db2998b8d5d",
+      "release_hash": "sha256:c4a883a2a1909212d5114a2590250ae45752e7265dcc44bfa19a4fd3339025c7",
+      "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
+      "accessible_equivalent": "Construction crane label, identity badge, layer labels, and generic facility fallback",
+      "visible_source": "Visible facility kind and actor-visible status context",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.facility.general-hospital-base",
       "asset_type": "visual",
       "semantic_role": "facility",

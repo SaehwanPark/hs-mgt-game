@@ -285,6 +285,10 @@ with a distinct wing-and-tower silhouette and explicit type-only description.
 Its shape does not imply research or education outcome, ownership, or hidden
 capacity.
 
+The v0.12.53 construction-crane component reuses the same contract with a
+distinct boom-and-tower silhouette and explicit type-only description. Its shape
+does not imply project status, completion, ownership, or hidden outcome.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

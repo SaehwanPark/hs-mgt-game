@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc">
+  <title id="title">Construction crane facility</title>
+  <desc id="desc">Compact fictional construction crane component with visible identity badge and boom-and-tower silhouette; type cue, not a project status or completion claim.</desc>
+  <style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style>
+  <rect width="260" height="160" fill="var(--facility-paper)"/>
+  <path d="M80 132V34h10v98M85 34h140M85 44l-46 88h92z" fill="none" stroke="var(--facility-primary)" stroke-width="7"/>
+  <path d="M85 34 130 66h95" fill="none" stroke="var(--facility-secondary)" stroke-width="6"/>
+  <path d="M178 34v32M178 66h12v14h-24V66z" fill="none" stroke="var(--facility-secondary)" stroke-width="6"/>
+  <rect x="28" y="114" width="204" height="18" rx="4" fill="var(--facility-primary)"/>
+  <rect x="118" y="104" width="24" height="28" fill="var(--facility-paper)"/><path d="M130 110v16M123 118h14" stroke="var(--facility-secondary)" stroke-width="4"/>
+  <rect x="32" y="74" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="50" y="91" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text>
+  <text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">CONSTRUCTION CRANE</text>
+</svg>
