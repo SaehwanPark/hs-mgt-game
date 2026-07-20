@@ -34,7 +34,7 @@ class MetricVisualizationTests(unittest.TestCase):
       """
       import { METRIC_VISUALIZATION_SCHEMA, metricVisualizationFor, orderedMetricVisualizations } from './gui/metric-visualizations.mjs';
       const required = ['capacity-bar', 'delta', 'payer-mix', 'project-progress', 'sparkline', 'staffing-composition', 'trust-trend', 'uncertainty-interval'];
-      const fields = ['semantic_purpose', 'precision_rule', 'uncertainty_rule', 'missingness_rule', 'exact_text_rule', 'color_independent_rule', 'large_text_rule', 'screenshot_fixture'];
+      const fields = ['semantic_purpose', 'precision_rule', 'uncertainty_rule', 'missingness_rule', 'exact_text_rule', 'color_independent_rule', 'large_text_rule', 'snapshot_fixture'];
       if (METRIC_VISUALIZATION_SCHEMA !== 'metric-visualization-v1') process.exit(1);
       if (JSON.stringify(orderedMetricVisualizations().map((entry) => entry.id)) !== JSON.stringify(required)) process.exit(2);
       for (const id of required) if (!fields.every((field) => metricVisualizationFor(id)[field])) process.exit(3);
@@ -60,7 +60,7 @@ class MetricVisualizationTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
-  def test_deterministic_svg_screenshot_snapshot_is_stable(self):
+  def test_deterministic_svg_snapshot_is_stable(self):
     expected = SNAPSHOT.read_text(encoding="utf-8").strip()
     result = run_node(
       """
@@ -86,6 +86,22 @@ class MetricVisualizationTests(unittest.TestCase):
     for path in (MODULE, APP):
       result = subprocess.run(["node", "--check", str(path)], capture_output=True, text=True, check=False)
       self.assertEqual(result.returncode, 0, result.stderr)
+
+  def test_missing_and_categorical_visuals_do_not_reallocate_or_score(self):
+    result = run_node(
+      """
+      import { METRIC_VISUALIZATION_PROOF_FIXTURES, renderMetricVisualizationSvg } from './gui/metric-visualizations.mjs';
+      const spark = renderMetricVisualizationSvg(METRIC_VISUALIZATION_PROOF_FIXTURES[0], 'sparkline');
+      const staffing = renderMetricVisualizationSvg(METRIC_VISUALIZATION_PROOF_FIXTURES[3], 'staffing-composition');
+      const trust = renderMetricVisualizationSvg(METRIC_VISUALIZATION_PROOF_FIXTURES[6], 'trust-trend');
+      if ((spark.match(/class="trend-line"/g) ?? []).length !== 1 || !spark.includes('class="trend-point"')) process.exit(1);
+      if (!staffing.includes('category unavailable; not redistributed') || !staffing.includes('class="missing-pattern"')) process.exit(2);
+      if (!trust.includes('categorical-point point-') || trust.includes('class="trend-line"') || !trust.includes('Moderate') || !trust.includes('High')) process.exit(3);
+      console.log('pass');
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
 
 
 if __name__ == "__main__":

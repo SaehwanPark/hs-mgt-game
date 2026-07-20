@@ -12,7 +12,7 @@
       "creation_method": "hand-authored deterministic actor-visible metric visualization catalog",
       "license": "project-generated",
       "modifications": "None; SVG forms preserve supplied precision, uncertainty, missingness, exact text, and source/status language.",
-      "original_hash": "sha256:55b0aeb75567d5a8d384ed50783f9b1410141163c113cb0b54488151353a3836",
+      "original_hash": "sha256:addd828615a036d81bfe6591ee67f88032d68175ef489c70195a38114fe0b132",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Exact metric text, source/status, uncertainty/missingness labels, patterns, and deterministic SVG geometry",

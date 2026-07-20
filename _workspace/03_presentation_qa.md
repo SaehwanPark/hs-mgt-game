@@ -53,14 +53,19 @@ snapshot, and explicit live-rendering integration.
 
 ## Required fixes
 
-None identified by this bounded QA pass. The single light code-review pass is
-required before merge; no second reviewer will be spawned under the task
-constraint.
+The single light code-review pass identified four issues, all fixed on this
+branch without a second reviewer: missing staffing/payer categories were
+reserved as explicit patterned segments instead of being redistributed;
+sparklines now split at missing periods; trust/legitimacy uses labeled
+categorical points rather than numeric scoring; and documentation now calls
+the guard a deterministic SVG snapshot rather than a browser screenshot.
 
 ## Verification evidence
 
-- `python3 -m unittest tests.test_metric_visualizations tests.test_gui_static_desktop tests.test_gui_accessibility -v` — 18 passed.
-- Full Python discovery — 449 passed.
+- `python3 -m unittest tests.test_metric_visualizations -v` — 5 passed after
+  review fixes.
+- Full Python discovery, asset, metadata, documentation, presentation audit,
+  formatting, Rust, and diff checks will be rerun before merge.
 - `cargo fmt -- --check` — passed.
 - Parallel `cargo test` encountered three existing persistence-test interference
   failures; serial `cargo test -- --test-threads=1` passed with 328 Rust unit

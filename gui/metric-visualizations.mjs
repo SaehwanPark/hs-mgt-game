@@ -11,7 +11,7 @@ const CATALOG = [
     exact_text_rule: "Keep every supplied period and exact value in text.",
     color_independent_rule: "Use a line, period labels, and text; color is supplementary.",
     large_text_rule: "Keep the line bounded while allowing labels and exact text to reflow.",
-    screenshot_fixture: "numeric trend with a missing middle period",
+    snapshot_fixture: "numeric trend with a missing middle period",
   },
   {
     id: "delta",
@@ -23,7 +23,7 @@ const CATALOG = [
     exact_text_rule: "Show both source values and the resulting visible delta in text.",
     color_independent_rule: "Use an explicit increase, decrease, or unchanged label.",
     large_text_rule: "Stack the two values and delta label when text grows.",
-    screenshot_fixture: "visible increase with exact source values",
+    snapshot_fixture: "visible increase with exact source values",
   },
   {
     id: "capacity-bar",
@@ -35,7 +35,7 @@ const CATALOG = [
     exact_text_rule: "Show used, total, and unit text exactly as supplied.",
     color_independent_rule: "Use a patterned fill, track, and written used/total values.",
     large_text_rule: "Keep the bar shallow and let the exact values stack below it.",
-    screenshot_fixture: "staffed capacity compared with visible total",
+    snapshot_fixture: "staffed capacity compared with visible total",
   },
   {
     id: "staffing-composition",
@@ -47,7 +47,7 @@ const CATALOG = [
     exact_text_rule: "Retain every category and exact supplied count in the legend.",
     color_independent_rule: "Give each category a distinct pattern and written label.",
     large_text_rule: "Move the category legend below the composition when text grows.",
-    screenshot_fixture: "three visible staffing categories",
+    snapshot_fixture: "three visible staffing categories",
   },
   {
     id: "project-progress",
@@ -59,7 +59,7 @@ const CATALOG = [
     exact_text_rule: "Show completed, total, timing, and status text exactly as supplied.",
     color_independent_rule: "Use a progress track plus completed/total labels and patterns.",
     large_text_rule: "Stack progress labels and status below the track.",
-    screenshot_fixture: "visible project units completed of total",
+    snapshot_fixture: "visible project units completed of total",
   },
   {
     id: "payer-mix",
@@ -71,7 +71,7 @@ const CATALOG = [
     exact_text_rule: "Show each payer category and exact supplied value in text.",
     color_independent_rule: "Use segment patterns and payer names in a written legend.",
     large_text_rule: "Stack the mix legend below the track when needed.",
-    screenshot_fixture: "two supplied payer categories and one missing category",
+    snapshot_fixture: "two supplied payer categories and one missing category",
   },
   {
     id: "trust-trend",
@@ -83,7 +83,7 @@ const CATALOG = [
     exact_text_rule: "Show each period’s exact visible label and source text.",
     color_independent_rule: "Use point shapes, connecting rules, and written categories.",
     large_text_rule: "Allow period/category labels to wrap below the trend.",
-    screenshot_fixture: "moderate-to-high visible trust labels",
+    snapshot_fixture: "moderate-to-high visible trust labels",
   },
   {
     id: "uncertainty-interval",
@@ -95,7 +95,7 @@ const CATALOG = [
     exact_text_rule: "Show lower, estimate, upper, unit, and source text in the DOM.",
     color_independent_rule: "Use a whisker, point, end caps, and written bounds.",
     large_text_rule: "Stack bound labels below the whisker when text grows.",
-    screenshot_fixture: "host-supplied lower, estimate, and upper values",
+    snapshot_fixture: "host-supplied lower, estimate, and upper values",
   },
 ].map((entry) => Object.freeze({ ...entry }));
 
@@ -106,7 +106,7 @@ export const METRIC_VISUALIZATION_PROOF_FIXTURES = Object.freeze([
   Object.freeze({ label: "Staffing composition", visualization_kind: "staffing-composition", exact_text: "Nurses 24; physicians 12; other staff unavailable", source: "PlayerObservation.staffing", values: [{ label: "Nurses", value: 24, display: "24" }, { label: "Physicians", value: 12, display: "12" }, { label: "Other staff", display: "Unavailable", status: "missing" }] }),
   Object.freeze({ label: "Capital project", visualization_kind: "project-progress", value: 3, max: 6, exact_text: "Capital project: 3 of 6 visible units; completion remains uncertain", source: "PlayerObservation.active_projects", status: "uncertain", uncertainty: "Completion timing remains uncertain." }),
   Object.freeze({ label: "Payer mix", visualization_kind: "payer-mix", exact_text: "Medicare 44%; Medicaid unavailable; commercial 31%", source: "PlayerObservation.payer_mix", values: [{ label: "Medicare", value: 44, display: "44%" }, { label: "Medicaid", display: "Unavailable", status: "missing" }, { label: "Commercial", value: 31, display: "31%" }] }),
-  Object.freeze({ label: "Workforce trust", visualization_kind: "trust-trend", exact_text: "Workforce trust: moderate, moderate, high", source: "PlayerObservation.workforce_trust_summary", values: [{ period: "Jan", value: 1, display: "Moderate" }, { period: "Feb", value: 1, display: "Moderate" }, { period: "Mar", value: 2, display: "High" }] }),
+  Object.freeze({ label: "Workforce trust", visualization_kind: "trust-trend", exact_text: "Workforce trust: moderate, moderate, high", source: "PlayerObservation.workforce_trust_summary", values: [{ period: "Jan", display: "Moderate", status: "reported" }, { period: "Feb", display: "Moderate", status: "reported" }, { period: "Mar", display: "High", status: "reported" }] }),
   Object.freeze({ label: "Visible access interval", visualization_kind: "uncertainty-interval", lower: 62, estimate: 68, upper: 74, exact_text: "Visible access interval: 62–68–74 points", source: "PlayerObservation.access_interval", status: "uncertain", uncertainty: "Visible interval; not a probability." }),
 ]);
 
@@ -175,7 +175,7 @@ export function metricVisualizationModel(metric = {}, kind = metric?.visualizati
   const lower = finite(metric?.lower);
   const estimate = finite(metric?.estimate ?? metric?.value);
   const upper = finite(metric?.upper);
-  const missing = values.filter((entry) => entry.value === null);
+  const missing = values.filter((entry) => entry.status === "missing" || entry.display === "Unavailable");
   const suppliedText = values.length
     ? values.map((entry) => `${entry.period}: ${entry.display}`).join("; ")
     : text(metric?.value, "Unavailable");
@@ -207,17 +207,34 @@ function formatNumber(value) {
   return value === null ? "Unavailable" : String(value);
 }
 
-function pointsFor(values, width, height) {
+function pointCoordinates(values, width, height) {
   const numeric = values.map((entry) => entry.value).filter((value) => value !== null);
-  if (numeric.length < 2) return "";
+  if (numeric.length < 1) return [];
   const min = Math.min(...numeric);
   const max = Math.max(...numeric);
   const span = max - min || 1;
   const step = width / Math.max(values.length - 1, 1);
   return values
-    .map((entry, index) => entry.value === null ? null : `${(index * step).toFixed(2)},${(height - ((entry.value - min) / span) * height).toFixed(2)}`)
-    .filter(Boolean)
-    .join(" ");
+    .map((entry, index) => entry.value === null ? null : {
+      x: index * step,
+      y: height - ((entry.value - min) / span) * height,
+    });
+}
+
+function pointSegments(values, width, height) {
+  const coordinates = pointCoordinates(values, width, height);
+  const segments = [];
+  let current = [];
+  coordinates.forEach((point) => {
+    if (point === null) {
+      if (current.length > 1) segments.push(current);
+      current = [];
+      return;
+    }
+    current.push(point);
+  });
+  if (current.length > 1) segments.push(current);
+  return { coordinates, segments };
 }
 
 function svgText(x, y, value, className = "label") {
@@ -232,16 +249,41 @@ function renderTrack(model) {
 }
 
 function renderComposition(model) {
-  const numeric = model.values.map((entry) => entry.value ?? 0);
-  const total = numeric.reduce((sum, value) => sum + value, 0);
-  if (!total) return '<rect class="missing-pattern" x="12" y="24" width="236" height="18" rx="3" />';
+  const known = model.values.filter((entry) => entry.value !== null);
+  const missing = model.values.filter((entry) => entry.value === null);
+  const total = known.reduce((sum, entry) => sum + entry.value, 0);
+  if (!total) return `<rect class="missing-pattern" x="12" y="24" width="236" height="18" rx="3" />${missing.length ? svgText(12, 18, `${missing.length} category unavailable`, "source-label") : ""}`;
+  const missingWidth = missing.length ? Math.min(96, Math.max(28, missing.length * 28)) : 0;
+  const knownWidth = 236 - missingWidth;
   let offset = 12;
-  return numeric.map((value, index) => {
-    const width = 236 * value / total;
+  const segments = known.map((entry, index) => {
+    const width = knownWidth * entry.value / total;
     const segment = `<rect class="segment-pattern segment-${index % 3}" x="${offset.toFixed(2)}" y="24" width="${width.toFixed(2)}" height="18" />`;
     offset += width;
     return segment;
   }).join("");
+  const missingSegment = missing.length
+    ? `<rect class="missing-pattern" x="${offset.toFixed(2)}" y="24" width="${missingWidth.toFixed(2)}" height="18" rx="3" />${svgText(12, 18, `${missing.length} category unavailable; not redistributed`, "source-label")}`
+    : "";
+  return segments + missingSegment;
+}
+
+function renderCategoricalSequence(model) {
+  const values = model.values;
+  const step = 236 / Math.max(values.length - 1, 1);
+  const rules = values.slice(1).map((entry, index) => {
+    const previous = values[index];
+    if (previous.status === "missing" || entry.status === "missing") return "";
+    const x1 = 12 + index * step;
+    const x2 = 12 + (index + 1) * step;
+    return `<line class="categorical-sequence" x1="${x1.toFixed(2)}" y1="34" x2="${x2.toFixed(2)}" y2="34" />`;
+  }).join("");
+  const points = values.map((entry, index) => {
+    const x = 12 + index * step;
+    const label = entry.status === "missing" ? "Unavailable" : entry.display;
+    return `${entry.status === "missing" ? svgText(x - 3, 38, "?", "missing-label") : `<circle class="categorical-point point-${index % 3}" cx="${x.toFixed(2)}" cy="34" r="5" />${svgText(Math.max(0, x - 20), 18, label, "categorical-label")}`}${svgText(Math.max(0, x - 14), 52, entry.period, "source-label")}`;
+  }).join("");
+  return rules + points;
 }
 
 function renderUncertainty(model) {
@@ -259,15 +301,17 @@ export function renderMetricVisualizationSvg(metric = {}, kind = metric?.visuali
   const title = `${model.label}: ${model.exact_text}`;
   const common = `<title>${escapeXml(title)}</title><desc>${escapeXml(model.accessible_text)}</desc>`;
   let graphic = "";
-  if (contract.id === "sparkline" || contract.id === "trust-trend") {
-    const points = pointsFor(model.values, 236, 30);
-    graphic = points
-      ? `<polyline class="trend-line" points="${points}" transform="translate(12 12)" />`
-      : '<rect class="missing-pattern" x="12" y="24" width="236" height="18" rx="3" />';
+  if (contract.id === "sparkline") {
+    const { coordinates, segments } = pointSegments(model.values, 236, 30);
+    const lines = segments.map((segment) => `<polyline class="trend-line" points="${segment.map((point) => `${point.x.toFixed(2)},${(point.y + 12).toFixed(2)}`).join(" ")}" />`).join("");
+    const markers = coordinates.filter(Boolean).map((point) => `<circle class="trend-point" cx="${(point.x + 12).toFixed(2)}" cy="${(point.y + 12).toFixed(2)}" r="3" />`).join("");
+    graphic = lines + markers || '<rect class="missing-pattern" x="12" y="24" width="236" height="18" rx="3" />';
+  } else if (contract.id === "trust-trend") {
+    graphic = renderCategoricalSequence(model);
   } else if (contract.id === "delta") {
     const previous = model.values.at(-2)?.value;
     const current = model.values.at(-1)?.value;
-    const delta = previous !== null && current !== null ? current - previous : null;
+    const delta = previous != null && current != null ? current - previous : null;
     graphic = svgText(12, 38, delta === null ? "Delta unavailable" : `Visible change: ${delta > 0 ? "+" : ""}${formatNumber(delta)}`, "delta-label");
   } else if (contract.id === "uncertainty-interval") {
     graphic = renderUncertainty(model);

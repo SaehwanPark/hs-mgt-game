@@ -5,7 +5,7 @@
 - Added the Phase 5.2 metric/trend visualization catalog for sparklines,
   deltas, capacity, staffing composition, project progress, payer mix, trust
   trends, and visible uncertainty intervals.
-- Added deterministic SVG proof/screenshot coverage with precision,
+- Added deterministic SVG proof/snapshot coverage with precision,
   uncertainty, missingness, exact-text, color-independent, large-text, print,
   and reduced-motion contracts.
 - Added opt-in rendering for actor-visible metric descriptors in the existing

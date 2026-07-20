@@ -4,7 +4,7 @@
 
 Phase 5.2 is complete. Eight deterministic metric visualization forms now have
 precision, uncertainty, missingness, exact-text, color-independent,
-large-text, print, reduced-motion, and screenshot contracts.
+large-text, print, reduced-motion, and deterministic SVG snapshot contracts.
 
 ## Changed files and behavior
 
@@ -39,8 +39,10 @@ large-text, print, reduced-motion, and screenshot contracts.
 - Base: `main` at v0.12.66.
 - Working branch: `feat/visual-audio-phase5-metric-visualization-v0.12.67`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass is required. No second reviewer will be spawned
-  under the task-level constraint.
+- One light code-review pass identified four evidence-boundary issues. The
+  branch fixes unavailable composition redistribution, missing-period
+  sparkline joins, categorical trust numeric scoring, and screenshot wording;
+  no second reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 
