@@ -49,9 +49,10 @@ policy, reduced-motion replacement, and local performance-budget smoke test.
 
 ## Required fixes
 
-None identified by this bounded QA pass. The single light code-review pass is
-required before merge; no second reviewer will be spawned under the task
-constraint.
+None identified by this bounded QA pass or the single light code-review pass.
+The review covered the motion catalog, deterministic ordering, reduced-motion
+and interruption behavior, fixture authority boundaries, and the local load
+budget. No second reviewer was spawned under the task constraint.
 
 ## Verification evidence
 

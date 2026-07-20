@@ -32,8 +32,8 @@ input, simultaneous-load, and declared performance-budget contracts.
 - Base: `main` at v0.12.67.
 - Working branch: `feat/visual-audio-phase6-motion-spec-v0.12.68`.
 - Presentation-domain QA: pass; evidence limits recorded.
-- One light code-review pass is required. No second reviewer will be spawned
-  under the task-level constraint.
+- One light code-review pass completed with no actionable findings. No second
+  reviewer was spawned under the task-level constraint.
 
 ## Limits and next slice
 
