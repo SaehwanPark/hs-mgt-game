@@ -797,6 +797,7 @@ function renderRegionalNavigation(navigation, root) {
 
 function campaignAudioInput(envelope) {
   return {
+    campaign: envelope?.session?.campaign,
     done: envelope?.session?.done,
     observation: {
       market_bullets: (envelope?.briefing ?? []).map((entry) => entry.detail),
@@ -1035,7 +1036,9 @@ export function createCampaignCoverageClient({
       clearRecovery(root);
       renderOnboarding(envelope, root, recorder);
       recordVisibleEnvelope(recorder, envelope);
-      audioClient.setMusicFromVisible(campaignAudioInput(envelope));
+      const audioInput = campaignAudioInput(envelope);
+      audioClient.setMusicFromVisible(audioInput);
+      audioClient.setAmbienceFromVisible(audioInput);
       return result;
     } catch (error) {
       currentEnvelope = null;
@@ -1579,6 +1582,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       renderOnboarding(envelope, root, recorder);
       recordVisibleEnvelope(recorder, envelope);
       audioClient.setMusicFromVisible(envelope);
+      audioClient.setAmbienceFromVisible(envelope);
     }
     return result;
   }
@@ -1935,6 +1939,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           recordVisibleEnvelope(recorder, presentation);
           firstMonthFlow.update({ refreshed: true });
           audioClient.setMusicFromVisible(presentation);
+          audioClient.setAmbienceFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           await regionalWorldClient.load(sessionId);
         }

@@ -413,7 +413,20 @@ ambience in cues-only mode. Cue metadata, cooldown timestamps, and playback
 never enter host payloads, simulation state, history, hashes, replay artifacts,
 or debriefs. Every cue retains visible source and written equivalents.
 
-Last Reviewed: 2026-07-20
+The v0.12.71 Phase 7.2 ambience library adds
+`gui/ambience-contract.mjs` as the provenance and safety catalog for seven
+fictional environmental settings. `gui/audio.mjs` maps the catalog into the
+optional runtime audio surface and selects only the actor-visible regional city
+bed by default. Recipes are deterministic filtered-noise beds generated at
+playback time; there is no release audio file or release hash. The per-setting
+GUI catalog repeats the source hash. Setting selection, recipe metadata, timers, and
+playback remain local presentation details and never enter host payloads,
+simulation state, history, hashes, replay artifacts, or debriefs. Each entry
+retains source/generation, license, source-hash basis, loop/noise/loudness,
+no-speech/music/name/alarm constraints, written equivalent, and reduced-audio
+fallback metadata.
+
+Last Reviewed: 2026-07-21
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture

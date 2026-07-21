@@ -5060,6 +5060,29 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   measured loudness, fatigue, musical quality, lived accessibility, human
   comprehension, learning, calibration, or policy validity.
 
+### Visual/audio Phase 7.2 environmental ambience library (v0.12.71)
+
+- Status: Complete; seven deterministic fictional-setting ambience recipes,
+  provenance/rights metadata, loop/noise/loudness/safety contracts,
+  reduced-audio behavior, fixture proof, and registry coverage verified
+- Branch: `feat/visual-audio-phase7-ambience-library-v0.12.71`
+- Added `gui/ambience-contract.mjs` for executive office, hospital lobby,
+  hospital campus exterior, construction site, boardroom, press/policy event,
+  and regional city bed settings. `gui/audio.mjs` exposes these entries while
+  selecting only the actor-visible regional city bed as the default.
+- Each setting uses a deterministic filtered-noise recipe, retains a written
+  equivalent and fallback, forbids identifying speech, copyrighted music, real
+  institution names, and clinical alarms, and records source hash basis plus
+  the explicit no-release-file derivative rule.
+- Added `gui/ambience-proof.html`, focused tests, and catalog/registry/credits
+  provenance. The per-setting catalog repeats the source hash; release hashes
+  are explicitly null because no release audio file is distributed. No
+  recorded audio, host/simulation state, hidden-state selection, or
+  clinical-severity claim was introduced.
+- Contract/tests are technical consistency evidence only; they do not claim
+  measured loudness, fatigue, musical quality, lived accessibility, human
+  comprehension, learning, calibration, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

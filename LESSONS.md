@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Ambience Optional and Non-Clinical
+
+- Context: Phase 7.2 needed environmental atmosphere for seven fictional
+  settings without turning sound into a second information channel.
+- Symptom: An ambience bed can imply geography, urgency, clinical severity, or
+  a real institution even when the visible interface does not support that
+  claim; repeated or speech-like loops can also interfere with reading.
+- Resolution: Store each setting in one deterministic recipe contract with
+  provenance, source-hash basis, no-speech/music/name/alarm constraints, noise
+  and loudness targets, reviewed seamless-loop metadata, written equivalent,
+  reduced-audio behavior, and fallback. Select only the visible regional city
+  bed by default.
+- Prevention: Keep setting selection explicit and presentation-only, preserve
+  cues-only/mute/unavailable behavior, and document that runtime recipes have
+  no release hash because no audio file is distributed.
+
 ## Put Cue Standards in One Catalog
 
 - Context: Phase 7.1 needed to refine repeated UI/event cues without creating

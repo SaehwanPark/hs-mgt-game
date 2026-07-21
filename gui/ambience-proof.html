@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Environmental ambience library proof</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+    body { background: #f3f7f6; color: #18312f; margin: 0; padding: 2rem; }
+    main { background: white; border: 1px solid #bed1cd; border-radius: .8rem; margin: auto; max-width: 1250px; padding: 1.5rem; }
+    .notice { background: #e8f5f1; border-left: .3rem solid #0b6e69; padding: .7rem 1rem; }
+    table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
+    th, td { border: 1px solid #bed1cd; padding: .5rem; text-align: left; vertical-align: top; }
+    th { background: #e8f5f1; }
+    code { white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Environmental ambience library</h1>
+    <p class="notice">Fixture-only deterministic Web Audio recipes. These optional beds contain no recorded audio, speech, copyrighted music, clinical alarms, or real institution names. Written context remains complete when audio is reduced, muted, unavailable, or unsupported.</p>
+    <p id="summary" aria-live="polite">Loading ambience contracts…</p>
+    <table>
+      <thead><tr><th>Setting</th><th>Provenance / rights</th><th>Loop / levels</th><th>Safety constraints</th><th>Written equivalent / fallback</th></tr></thead>
+      <tbody id="ambience-list"></tbody>
+    </table>
+  </main>
+  <script type="module">
+    import { AMBIENCE_CONTRACT, validateAmbienceContracts } from "./ambience-contract.mjs";
+
+    const list = document.querySelector("#ambience-list");
+    const addCell = (row, value, code = false) => {
+      const cell = document.createElement("td");
+      if (code) {
+        const node = document.createElement("code");
+        node.textContent = value;
+        cell.append(node);
+      } else {
+        cell.textContent = value;
+      }
+      row.append(cell);
+    };
+    for (const entry of AMBIENCE_CONTRACT.entries) {
+      const row = document.createElement("tr");
+      addCell(row, `${entry.label} (${entry.id})`);
+      addCell(row, `${entry.source_or_generation}; ${entry.license}; source hash basis: ${entry.source_hash_basis}; ${entry.release_derivative}`);
+      addCell(row, `${entry.loop.start_ms}–${entry.loop.end_ms} ms; seamless ${entry.loop.seamless}; reviewed ${entry.loop.reviewed}; crossfade ${entry.loop.crossfade_ms} ms; ${entry.loudness_target_db} dB target; ${entry.peak_ceiling_dbfs} dBFS ceiling; noise ${entry.noise_floor_db} dB`);
+      addCell(row, `Speech: ${entry.no_identifying_speech}; music: ${entry.no_copyrighted_music}; institution names: ${entry.no_real_institution_names}; clinical alarm: ${entry.no_clinical_alarm}; siren policy: ${entry.siren_policy}`);
+      addCell(row, `${entry.text_equivalent} ${entry.reduced_audio} ${entry.fallback}`);
+      list.append(row);
+    }
+    document.querySelector("#summary").textContent = `${AMBIENCE_CONTRACT.entries.length} ambience contracts · default ${AMBIENCE_CONTRACT.default_id} · validation errors: ${validateAmbienceContracts().length}`;
+  </script>
+</body>
+</html>

@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.70. Its
+The current public milestone is a playable Rust prototype at v0.12.71. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -103,6 +103,9 @@ metadata, optional stage-aligned cues, explicit advance/skip controls, and
 deterministic retention/replay checks without changing host authority. v0.12.70
 adds per-cue semantic, priority, duration, loudness, peak, cooldown, and text
 contracts for all 16 UI/event cues plus an explicit optional cues-only mode.
+v0.12.71 adds a seven-setting deterministic environmental ambience library
+with provenance, safety, loop, loudness, reduced-audio, and written fallback
+contracts; the regional city bed is the only default runtime bed.
 It is intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 

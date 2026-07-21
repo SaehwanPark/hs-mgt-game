@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.71] - 2026-07-21
+
+- Added the Phase 7.2 deterministic environmental ambience library for seven
+  fictional settings, with source/generation, license, hash basis, loop,
+  noise, loudness, safety, text-equivalent, and fallback metadata.
+- Added a fixture proof, focused tests, and catalog/registry/credits coverage;
+  only the visible competitive-month regional city bed is selected by default.
+- Completed the Phase 7.2 checklist without recorded audio, host changes,
+  simulation state, hidden-state selection, or clinical-severity claims.
+
 ## [0.12.70] - 2026-07-21
 
 - Added the Phase 7.1 generated Web Audio cue contract for all 16 existing
