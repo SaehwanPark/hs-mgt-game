@@ -1,4 +1,5 @@
 import { AUDIO_CUE_POLICY, audioCueContractFor } from "./audio-cue-contract.mjs";
+import { AMBIENCE_CONTRACT } from "./ambience-contract.mjs";
 
 const MUSIC_ENTRIES = [
   {
@@ -77,14 +78,15 @@ function withCueContract(entry) {
   };
 }
 
-const AMBIENCE_ENTRIES = [{
-  id: "regional_ambience",
-  channel: "ambience",
-  visible_source: "active competitive month",
-  equivalent: "regional market panel and current date",
+// Keep the legacy catalog ID visible for older fixture readers while the
+// active catalog uses the explicit setting IDs from the ambience contract.
+const LEGACY_REGIONAL_AMBIENCE_ID = "regional_ambience";
+const AMBIENCE_ENTRIES = AMBIENCE_CONTRACT.entries.map((entry) => ({
+  ...entry,
+  equivalent: entry.text_equivalent,
   cooldown_ms: 0,
-  recipe: { waveform: "sine", frequency: 110, duration_ms: 4200 },
-}];
+  recipe: { ...entry.recipe },
+}));
 
 export const AUDIO_CATALOG = Object.freeze({
   schema_version: "audio-catalog-v1",
@@ -186,6 +188,13 @@ function audioConstructor(provided) {
   return provided ?? globalThis.AudioContext ?? globalThis.webkitAudioContext ?? null;
 }
 
+function visibleAmbienceId(input = {}) {
+  const requested = input.ambience_id ?? input.presentation_ambience_id;
+  if (requested != null) return AMBIENCE_BY_ID.has(String(requested).trim()) ? String(requested).trim() : null;
+  const campaign = input.campaign ?? input.session?.campaign ?? input.after?.session?.campaign;
+  return campaign === "competitive-regional-v1" ? AMBIENCE_CONTRACT.default_id : null;
+}
+
 export function createAudioClient({
   root = globalThis.document,
   AudioContextCtor,
@@ -202,6 +211,7 @@ export function createAudioClient({
   let mode = "full";
   let reducedNotifications = false;
   let currentMusic = "menu";
+  let currentAmbience = null;
   let musicTimer = null;
   let ambienceTimer = null;
   let visibilityHandler = null;
@@ -237,18 +247,46 @@ export function createAudioClient({
   function playTone(entry, channel) {
     if (!context || gainValue(channel) === 0) return false;
     const now = context.currentTime;
-    const oscillator = context.createOscillator();
     const gain = context.createGain();
     const recipe = entry.recipe;
-    oscillator.type = recipe.waveform;
-    oscillator.frequency.value = recipe.frequency;
+    const duration = recipe.duration_ms / 1000;
+    const fade = Math.min(Math.max((recipe.crossfade_ms ?? 20) / 1000, 0.02), duration / 2);
+    let source = null;
+    let filter = null;
+    if (recipe.waveform === "noise" && context.createBuffer && context.createBufferSource) {
+      const sampleRate = context.sampleRate || 44100;
+      const frameCount = Math.max(1, Math.floor(sampleRate * duration));
+      const buffer = context.createBuffer(1, frameCount, sampleRate);
+      const samples = buffer.getChannelData(0);
+      let seed = recipe.seed >>> 0;
+      for (let index = 0; index < samples.length; index += 1) {
+        seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+        samples[index] = ((seed / 4294967296) * 2 - 1) * recipe.noise_amplitude;
+      }
+      source = context.createBufferSource();
+      source.buffer = buffer;
+      filter = context.createBiquadFilter?.() ?? null;
+      if (filter) {
+        filter.type = recipe.filter;
+        filter.frequency.value = recipe.cutoff_hz;
+      }
+    } else {
+      source = context.createOscillator();
+      source.type = recipe.waveform;
+      source.frequency.value = recipe.frequency;
+    }
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, gainValue(channel) * (entry.normalization_gain ?? AUDIO_CUE_POLICY.normalization_gain)), now + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + recipe.duration_ms / 1000);
-    oscillator.connect(gain);
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, gainValue(channel) * (entry.normalization_gain ?? AUDIO_CUE_POLICY.normalization_gain)), now + fade);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + duration - fade);
+    if (filter) {
+      source.connect(filter);
+      filter.connect(gain);
+    } else {
+      source.connect(gain);
+    }
     gain.connect(context.destination);
-    oscillator.start(now);
-    oscillator.stop(now + recipe.duration_ms / 1000);
+    source.start(now);
+    source.stop(now + duration);
     return true;
   }
 
@@ -272,8 +310,9 @@ export function createAudioClient({
 
   function scheduleAmbience() {
     stopAmbience();
-    const entry = AMBIENCE_BY_ID.get("regional_ambience");
-    if (!entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
+    const activeId = currentAmbience || LEGACY_REGIONAL_AMBIENCE_ID;
+    const entry = AMBIENCE_BY_ID.get(activeId);
+    if (!currentAmbience || !entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
     playTone(entry, "ambience");
     ambienceTimer = globalThis.setTimeout(scheduleAmbience, entry.recipe.duration_ms);
   }
@@ -317,6 +356,13 @@ export function createAudioClient({
 
   function setMusicFromVisible(input) {
     return setMusicState(classifyMusicState(input), input);
+  }
+
+  function setAmbienceFromVisible(input = {}) {
+    currentAmbience = visibleAmbienceId(input);
+    if (currentAmbience) scheduleAmbience();
+    else stopAmbience();
+    return { ok: true, id: currentAmbience };
   }
 
   function playCue(cueId) {
@@ -400,7 +446,7 @@ export function createAudioClient({
   }
 
   function state() {
-    return { enabled, muted, focused, mode, reducedNotifications, music: currentMusic, volumes: { ...volumes } };
+    return { enabled, muted, focused, mode, reducedNotifications, music: currentMusic, ambience: currentAmbience, volumes: { ...volumes } };
   }
 
   function destroy() {
@@ -426,6 +472,7 @@ export function createAudioClient({
     enable,
     setMusicState,
     setMusicFromVisible,
+    setAmbienceFromVisible,
     playCue,
     setVolume,
     setMuted,

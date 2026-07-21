@@ -1,43 +1,42 @@
-# Request Summary — Visual/audio Phase 7.1 UI and event cue refinement v0.12.70
+# Request Summary — Visual/audio Phase 7.2 environmental ambience library v0.12.71
 
 ## Authorized outcome
 
-Complete Milestone 7.1 of `docs/visual_audio_enhancement_roadmap.md` as a
-bounded generated-audio standards and client-control slice. Existing optional
-Web Audio playback remains presentation-only.
+Complete Milestone 7.2 as a bounded, fixture-verifiable ambience recipe library
+for seven fictional settings. Keep ambience subtle, optional, non-clinical, and
+outside deterministic host/simulation state.
 
 ## Slice boundary
 
-- Cover all 16 existing interface and event cue IDs.
-- Add a pure per-cue contract for semantic purpose, priority class, duration,
-  loudness target, peak ceiling, cooldown, text equivalent, distinction, and
-  visible trigger source.
-- Apply the shared normalization/peak metadata to the existing synthesis path.
-- Add an explicit local cues-only mode that disables music/ambience while
-  preserving interface/event cues and written equivalents.
-- Add a fixture proof and tests for every cue, visible-only trigger mapping,
-  cues-only behavior, unsupported audio, mute, and safe fallbacks.
-- Do not add downloaded/recorded audio, change host DTOs, simulation state,
-  commands, transitions, stochastic inputs, history, hashes, replay authority,
-  or debrief behavior.
+- Cover executive office, hospital lobby, hospital campus exterior, construction
+  site, boardroom, press/policy event, and regional city bed.
+- Define generation method, project-generated license, per-setting source hash
+  records, and the explicit no-release-file derivative rule,
+  noise floor, loop points, loudness, speech/music/institution-name exclusions,
+  reduced-audio behavior, written equivalent, and generic fallback.
+- Add all seven entries to the runtime ambience catalog while keeping the
+  existing regional city bed as the only active default selection.
+- Add a fixture proof and tests for catalog completeness, deterministic recipe
+  metadata, optional/muted/cues-only behavior, and no hidden-state selection.
+- Do not add recorded audio, network assets, clinical alarms, real institutions,
+  adaptive music, or simulation/host/replay changes.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Phase 7.1.
-- `gui/audio.mjs` — existing generated Web Audio client and cue vocabulary.
-- `gui/audio-catalog.json` — existing fixture catalog.
-- `docs/design_principles.md` — optional audio and actor-visible boundaries.
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 7.2.
+- `gui/audio.mjs` — existing optional generated ambience playback.
+- `gui/audio-cue-contract.mjs` — shared generated-audio boundary.
 - `assets/registry/audio-assets.json` — provenance and release gate.
+- `docs/design_principles.md` — optional audio and information boundaries.
 
 ## Validation target
 
-Focused cue-contract/audio tests, fixture proof checks, registry/credits,
-metadata, documentation links, full Python, full Rust, formatting, and diff
-checks.
+Focused ambience/audio tests, fixture proof checks, registry/credits, metadata,
+documentation links, full Python, full Rust, formatting, and diff checks.
 
 ## Evidence limits
 
-Contract metadata and generated-tone tests establish technical consistency only;
-they do not establish loudness on baseline hardware, lived accessibility,
-fatigue, musical quality, human comprehension, learning, calibration, or policy
-validity.
+Generated filtered-noise recipe metadata, deterministic source hashes, and
+static loop checks establish technical coverage only. They do not establish
+audibility, atmospheric quality, fatigue, lived accessibility, classroom
+suitability, human comprehension, or policy validity.

@@ -203,6 +203,22 @@ music and ambience while retaining interface/event cues and their visible/text
 equivalents. Mute, unavailable browser audio, reduced notifications, and focus
 loss remain complete presentation fallbacks.
 
+## Environmental ambience library proof
+
+Open `gui/ambience-proof.html` directly or through a static server to inspect
+the Phase 7.2 executive office, hospital lobby, hospital campus exterior,
+construction site, boardroom, press/policy event, and regional city bed
+contracts. Each row exposes generation/license/hash basis, explicit no-release-
+file derivative status, noise floor, reviewed seamless loop, loudness/peak
+targets, no-speech/music/name/alarm constraints, and written/reduced-audio
+fallbacks. The fixture is dependency-free and does not load recorded audio,
+host state, hidden state, or network resources.
+
+`ambience-contract.mjs` is the pure runtime catalog. The optional live client
+keeps the regional city bed as the only default ambience selection; explicit
+setting selection remains a presentation contract and never changes simulation
+or replay state.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

@@ -1,56 +1,49 @@
-# Presentation Contract — Phase 7.1 UI and event cue refinement
+# Presentation Contract — Phase 7.2 environmental ambience library
 
 ## Authorized outcome
 
-Refine the existing generated Web Audio cue vocabulary so each visible cue has
-an inspectable semantic contract, consistent synthesis envelope, explicit
-cooldown, and a complete text equivalent. Audio remains optional and cannot
-create information unavailable in the actor-visible host projection.
+Provide seven optional, fictional environmental ambience recipes that can make
+the setting feel inhabited without adding clinical severity, real institutions,
+or decision-relevant hidden information. The current regional-city bed remains
+the live default; the other entries are catalogued and fixture-proven for later
+visible-context selection.
 
-## Cue source and output ledger
+## Source and output ledger
 
-| Cue family | Authorized trigger | Output | Fallback |
+| Setting | Authorized source | Output | Safe fallback |
 | --- | --- | --- | --- |
-| Interface | Local visible control result or host validation result | Short normalized interface tone | Visible control/status text |
-| Event | Host-committed visible event/effect or actor-visible result | Short normalized event tone | Written event/effect and source |
+| Executive office | Explicit presentation setting only | Subtle generated room-bed recipe | Silence and executive desktop text |
+| Hospital lobby | Explicit visible setting label | Subtle generated public-space recipe | Silence and facility label |
+| Hospital campus exterior | Explicit visible setting label | Subtle generated exterior-bed recipe | Silence and regional board text |
+| Construction site | Explicit visible project/context label | Subtle generated worksite-bed recipe | Silence and project status text |
+| Boardroom | Explicit visible meeting/context label | Subtle generated room-bed recipe | Silence and board packet text |
+| Press/policy event | Explicit visible event/context label | Subtle generated public-event recipe | Silence and report/event text |
+| Regional city bed | Existing active competitive-month context | Subtle generated city-bed recipe | Silence and current-month text |
 
-Every cue contract names its visible source, text equivalent, priority class,
-duration, target loudness, peak ceiling, cooldown, and a distinction label. The
-distinction label prevents two cue IDs from sharing an unexplained meaning; it
-does not claim a real-world acoustic or clinical distinction.
+Every entry is a hand-authored filtered-noise Web Audio recipe with no speech, no music, no
+clinical alarms, no real institution names, and no severity encoding. The
+recipe metadata records a long bounded loop, reviewed loop points, noise floor,
+target loudness, reduced-audio behavior, and an exact written equivalent.
 
 ## Audio behavior
 
-- `full` mode permits the existing optional music, ambience, interface, and
-  event channels.
-- `cues-only` mode suppresses music and ambience while retaining interface/event
-  cues and their text equivalents.
-- Mute, unavailable browser audio, reduced notifications, and focus loss leave
-  written status, source, and result information complete.
-- The synthesis path uses one bounded normalization gain and the contract’s
-  duration/peak metadata; this is a recipe invariant, not a measured hardware
-  loudness claim.
+- Ambience is optional and independently suppressible through mute, cues-only,
+  reduced-audio settings, focus loss, or unavailable browser audio.
+- Ambience does not mask visible text, event cues, or reading controls.
+- Only the explicit active context may choose a recipe. No private rival state,
+  true state, inferred clinical acuity, or hidden outcome may select it.
+- Missing or unknown setting IDs use a generic silent fallback.
 
-## Authority and replay boundary
+## Provenance and authority
 
-The cue contract accepts only explicit cue IDs and visible trigger metadata.
-`visibleEventCues` may classify committed visible text and observations but may
-not read true state, private rival intent, resolved inputs, effect queues, or
-client-side formulas. Audio playback and cooldown timestamps remain local
-presentation state and never enter commands, transitions, history, hashes,
-replay artifacts, or debrief output.
-
-## Accessibility and provenance
-
-- Every cue has an adjacent text equivalent and visible source.
-- Cues-only, muted, and unavailable-audio paths are complete without sound.
-- No new recorded or third-party asset is introduced; the generated recipe
-  module is registered with source hash, project-generated license basis,
-  accessible equivalent, visible source, and approval state.
+All seven recipes are project-generated in the repository. The per-setting
+catalog repeats the deterministic recipe-module source hash; release hashes are
+explicitly null because no release audio file is distributed. Recipe selection
+and playback timers remain local presentation state and never enter commands,
+transitions, history, hashes, replay, or debrief.
 
 ## Evidence limits
 
-The proof and tests establish contract coverage, trigger mapping, and local
-fallback behavior. They do not establish audibility, fatigue, musical quality,
-lived accessibility, human comprehension, learning, calibration, or policy
-validity.
+The proof/tests establish metadata completeness, deterministic recipe shape,
+safe fallback, and reduced-audio behavior. They do not establish acoustic
+quality, audibility, fatigue, lived accessibility, or human preference.

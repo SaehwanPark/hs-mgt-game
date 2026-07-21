@@ -1457,6 +1457,19 @@ Retain synthesis where appropriate, but improve:
 
 ## Milestone 7.2: Environmental ambience library
 
+**Status:** Complete in v0.12.71
+
+**Evidence:** `gui/ambience-contract.mjs` is the deterministic seven-setting
+recipe catalog; `gui/audio.mjs` exposes the catalog and schedules only the
+visible competitive-month regional city bed by default; and
+`gui/ambience-proof.html` plus `tests/test_ambience_contract.py` cover
+provenance, safety, loop, loudness, reduced-audio, and written fallback
+contracts. The source hash is recorded in `assets/registry/audio-assets.json`;
+the per-setting GUI catalog repeats that module hash for all seven settings.
+There is no release hash because these are runtime-generated recipes and no
+audio file is distributed; both registries record that release derivative
+explicitly.
+
 ### Initial ambience targets
 
 - executive office;
@@ -1477,18 +1490,19 @@ Retain synthesis where appropriate, but improve:
 
 ### Checklist per ambience asset
 
-- [ ] Source or generation method documented.
-- [ ] License approved.
-- [ ] Source hash recorded.
-- [ ] Release hash recorded.
-- [ ] Noise floor reviewed.
-- [ ] Loop points reviewed.
-- [ ] Loudness normalized.
-- [ ] No identifying speech included.
-- [ ] No unintended copyrighted music included.
-- [ ] No real institution names audible.
-- [ ] Reduced-audio behavior tested.
-- [ ] Registry entry approved.
+- [x] Source or generation method documented.
+- [x] License approved.
+- [x] Source hash recorded.
+- [x] Release hash reviewed: no release audio file is distributed; the
+  runtime-generated derivative is documented in the registry.
+- [x] Noise floor reviewed.
+- [x] Loop points reviewed.
+- [x] Loudness normalized.
+- [x] No identifying speech included.
+- [x] No unintended copyrighted music included.
+- [x] No real institution names audible.
+- [x] Reduced-audio behavior tested.
+- [x] Registry entry approved.
 
 ### Exit criteria
 

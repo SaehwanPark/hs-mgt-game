@@ -56,7 +56,7 @@ class GuiAudioTests(unittest.TestCase):
       self.assertIn(marker, self.audio)
     self.assertEqual(self.registry["schema_version"], "audio-registry-v1")
     self.assertEqual(self.registry["third_party_assets"], [])
-    self.assertEqual(len(self.registry["entries"]), 21)
+    self.assertEqual(len(self.registry["entries"]), 27)
     for entry in self.registry["entries"]:
       for field in (
         "id",
@@ -112,6 +112,7 @@ class GuiAudioTests(unittest.TestCase):
       "setVolume",
       "setMuted",
       "setFocused",
+      "setAmbienceFromVisible",
     ):
       self.assertIn(marker, self.audio + self.app)
     for selector in (
