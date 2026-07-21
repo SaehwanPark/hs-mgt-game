@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.72] - 2026-07-21
+
+- Added the Phase 7.3 seven-state adaptive music stem contract for menu/
+  planning, stable operations, pressure, regulatory scrutiny, competitive
+  escalation, affiliation/negotiation, and debrief.
+- Added five bounded generated stem roles per state, visible-only classifier
+  and replay-sequence planning, crossfade metadata, fixture proof/tests, and a
+  local music-only mute control alongside full mute and cues-only behavior.
+- Completed the Phase 7.3 checklist without recorded audio, hidden-state
+  selection, host/simulation/replay changes, or Phase 7.4 priority management.
+
 ## [0.12.71] - 2026-07-21
 
 - Added the Phase 7.2 deterministic environmental ambience library for seven

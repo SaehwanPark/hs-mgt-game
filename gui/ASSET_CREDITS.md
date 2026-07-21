@@ -1,13 +1,14 @@
 # Generated audio credits
 
-The project ships no third-party audio files. The four music recipes, seven
-environmental ambience recipes, and sixteen interface/event cue recipes are
-generated at runtime by [`audio.mjs`](audio.mjs) and
+The project ships no third-party audio files. The seven music states/five-stem
+recipes, seven environmental ambience recipes, and sixteen interface/event cue
+recipes are generated at runtime by [`audio.mjs`](audio.mjs),
+[`music-stem-contract.mjs`](music-stem-contract.mjs), and
 [`ambience-contract.mjs`](ambience-contract.mjs) with the Web Audio API.
 
 | Registry | Source | Ownership/license | Status |
 | --- | --- | --- | --- |
-| [`audio-catalog.json`](audio-catalog.json) | `gui/audio.mjs` and `gui/ambience-contract.mjs` generated recipes | Project-generated; no third-party asset | Approved for the Phase 7.2 technical slice |
+| [`audio-catalog.json`](audio-catalog.json) | `gui/audio.mjs`, `gui/music-stem-contract.mjs`, and `gui/ambience-contract.mjs` generated recipes | Project-generated; no third-party asset | Approved for the Phase 7.3 technical slice |
 
 Any future replacement with recorded or licensed files must add retrieval date,
 source URL, hashes, license URL, attribution, modifications, and approval to the

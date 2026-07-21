@@ -1514,6 +1514,20 @@ explicitly.
 
 ## Milestone 7.3: Adaptive music stem system
 
+**Status:** Complete in v0.12.72
+
+**Evidence:** `gui/music-stem-contract.mjs` is the pure seven-state/five-stem
+catalog and visible-only classifier; `gui/audio.mjs` maps it to optional local
+Web Audio playback with bounded voice release; and `gui/music-stem-proof.html`
+plus `tests/test_music_stem_contract.py` cover contract completeness, approved
+visible-field projection, deterministic replay planning, fake-runtime stem
+transitions, bounded crossfade release, mute behavior, and fallbacks. The
+music stem source hash is recorded in `assets/registry/audio-assets.json`.
+
+The evidence is technical contract coverage only. It does not establish
+measured loudness, musical quality, fatigue, lived accessibility, human
+comprehension, learning, calibration, or policy validity.
+
 ### Initial music states
 
 - menu and planning;
@@ -1544,18 +1558,18 @@ base pulse
 
 ### Checklist
 
-- [ ] Music-state catalog approved.
-- [ ] Visible-state trigger rules documented.
-- [ ] Hidden-state leak review completed.
-- [ ] Stem loop points verified.
-- [ ] Crossfade durations defined.
-- [ ] Institutional motifs integrated.
-- [ ] Pressure escalation bounded.
-- [ ] Debrief transition completed.
-- [ ] Music-only mute control tested.
-- [ ] Full mute tested.
-- [ ] Registry complete.
-- [ ] Replay produces same music-state sequence.
+- [x] Music-state catalog approved.
+- [x] Visible-state trigger rules documented.
+- [x] Hidden-state leak review completed.
+- [x] Stem loop points verified.
+- [x] Crossfade durations defined.
+- [x] Institutional motifs integrated.
+- [x] Pressure escalation bounded.
+- [x] Debrief transition completed.
+- [x] Music-only mute control tested.
+- [x] Full mute tested.
+- [x] Registry complete.
+- [x] Replay produces same music-state sequence.
 
 ### Exit criteria
 

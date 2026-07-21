@@ -1,36 +1,15 @@
 import { AUDIO_CUE_POLICY, audioCueContractFor } from "./audio-cue-contract.mjs";
 import { AMBIENCE_CONTRACT } from "./ambience-contract.mjs";
+import { MUSIC_STEM_CONTRACT, classifyVisibleMusicState } from "./music-stem-contract.mjs";
 
-const MUSIC_ENTRIES = [
-  {
-    id: "menu",
-    channel: "music",
-    visible_source: "explicit page stage",
-    equivalent: "menu heading and start/load controls",
-    recipe: { waveform: "sine", frequency: 196, duration_ms: 1800 },
-  },
-  {
-    id: "stable_operations",
-    channel: "music",
-    visible_source: "PlayerObservation.operations and visible status",
-    equivalent: "stable operating summary and status label",
-    recipe: { waveform: "triangle", frequency: 261.63, duration_ms: 2200 },
-  },
-  {
-    id: "pressure",
-    channel: "music",
-    visible_source: "visible margin, unmet demand, runway, or pressure label",
-    equivalent: "source-linked pressure banner and affected metric",
-    recipe: { waveform: "sawtooth", frequency: 146.83, duration_ms: 1400 },
-  },
-  {
-    id: "debrief",
-    channel: "music",
-    visible_source: "explicit debrief page stage",
-    equivalent: "debrief heading and retrospective timeline",
-    recipe: { waveform: "sine", frequency: 329.63, duration_ms: 2600 },
-  },
-];
+const MUSIC_ENTRIES = MUSIC_STEM_CONTRACT.entries.map((entry) => ({
+  ...entry,
+  visible_source: entry.visible_trigger_source,
+  equivalent: entry.text_equivalent,
+  recipe: { ...entry.stems.base_pulse },
+}));
+// The contract preserves id: "menu", id: "stable_operations", id: "pressure", id: "regulatory_scrutiny", id: "competitive_escalation", id: "affiliation_negotiation", and id: "debrief".
+// The menu trigger remains an explicit page stage; visible classification delegates operations.margin, operations.unmet_demand, and cash_runway_signal to the contract.
 
 const INTERFACE_CUES = [
   ["ui.action-confirm", "Local form result or host validation response", "Confirmed draft or validation status"],
@@ -98,31 +77,8 @@ export const AUDIO_CATALOG = Object.freeze({
 const MUSIC_BY_ID = new Map(MUSIC_ENTRIES.map((entry) => [entry.id, entry]));
 const CUE_BY_ID = new Map(AUDIO_CATALOG.cues.map((entry) => [entry.id, entry]));
 const AMBIENCE_BY_ID = new Map(AMBIENCE_ENTRIES.map((entry) => [entry.id, entry]));
-const PRESSURE_WORDS = /watch|strained|pressure|shortage|constraint|unmet|negative/i;
-
-function visibleString(value) {
-  return JSON.stringify(value ?? "").toLowerCase();
-}
-
 export function classifyMusicState(input = {}) {
-  const stage = input.stage ?? input.page_stage ?? input.session?.stage;
-  if (stage === "menu" || stage === "debrief") return stage;
-  if (input.done === true || input.session?.done === true) return "debrief";
-  const observation = input.observation ?? input.after?.observation ?? {};
-  const operations = observation.operations ?? {};
-  const visibleSummary = visibleString({
-    cash_runway_signal: observation.cash_runway_signal,
-    workforce_trust: observation.workforce_trust,
-    in_flight_projects: observation.in_flight_projects,
-    market_bullets: observation.market_bullets,
-    policy_bullets: observation.policy_bullets,
-  });
-  if (
-    Number(operations.margin) < 0
-    || Number(operations.unmet_demand) > 0
-    || PRESSURE_WORDS.test(visibleSummary)
-  ) return "pressure";
-  return "stable_operations";
+  return classifyVisibleMusicState(input);
 }
 
 export function cueEntry(cueId) {
@@ -131,6 +87,10 @@ export function cueEntry(cueId) {
 
 export function musicEntry(state) {
   return MUSIC_BY_ID.get(state) ?? null;
+}
+
+function visibleString(value) {
+  return JSON.stringify(value ?? "").toLowerCase();
 }
 
 export function createRecordingSink() {
@@ -207,12 +167,15 @@ export function createAudioClient({
   let context = null;
   let enabled = false;
   let muted = false;
+  let musicMuted = false;
   let focused = true;
   let mode = "full";
   let reducedNotifications = false;
   let currentMusic = "menu";
   let currentAmbience = null;
   let musicTimer = null;
+  const musicStemTimers = new Set();
+  const activeMusicVoices = new Set();
   let ambienceTimer = null;
   let visibilityHandler = null;
 
@@ -237,10 +200,12 @@ export function createAudioClient({
     if (reduced) reduced.checked = reducedNotifications;
     const modeSelect = root?.querySelector?.("#audio-mode");
     if (modeSelect) modeSelect.value = mode;
+    const musicMute = root?.querySelector?.("#audio-music-mute");
+    if (musicMute) musicMute.checked = musicMuted;
   }
 
   function gainValue(channel) {
-    if (muted || !focused || (mode === "cues-only" && (channel === "music" || channel === "ambience"))) return 0;
+    if (muted || !focused || (channel === "music" && musicMuted) || (mode === "cues-only" && (channel === "music" || channel === "ambience"))) return 0;
     return volumes.master * (channel === "master" ? 1 : volumes[channel]);
   }
 
@@ -285,6 +250,17 @@ export function createAudioClient({
       source.connect(gain);
     }
     gain.connect(context.destination);
+    if (channel === "music") {
+      const voice = {
+        source,
+        gain,
+        crossfade_ms: recipe.crossfade_ms ?? entry.crossfade_ms ?? 260,
+      };
+      const cleanup = () => activeMusicVoices.delete(voice);
+      voice.cleanup = cleanup;
+      activeMusicVoices.add(voice);
+      source.onended = cleanup;
+    }
     source.start(now);
     source.stop(now + duration);
     return true;
@@ -292,7 +268,27 @@ export function createAudioClient({
 
   function stopMusic() {
     if (musicTimer != null) globalThis.clearTimeout(musicTimer);
+    for (const timer of musicStemTimers) globalThis.clearTimeout(timer);
+    musicStemTimers.clear();
     musicTimer = null;
+    const now = context?.currentTime ?? 0;
+    for (const voice of activeMusicVoices) {
+      const release = Math.max(0.02, Number(voice.crossfade_ms ?? 260) / 1000);
+      const currentGain = Math.max(0.0001, Number(voice.gain.gain.value) || 0.0001);
+      try {
+        voice.gain.gain.cancelScheduledValues(now);
+        voice.gain.gain.setValueAtTime(currentGain, now);
+        voice.gain.gain.exponentialRampToValueAtTime(0.0001, now + release);
+      } catch {
+        // A context may be closing; stopping the source remains best effort.
+      }
+      try {
+        voice.source.stop(now + release);
+      } catch {
+        // The source may already have ended naturally.
+      }
+      voice.cleanup();
+    }
   }
 
   function stopAmbience() {
@@ -303,9 +299,21 @@ export function createAudioClient({
   function scheduleMusic() {
     stopMusic();
     const entry = musicEntry(currentMusic);
-    if (!entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
-    playTone(entry, "music");
-    musicTimer = globalThis.setTimeout(scheduleMusic, entry.recipe.duration_ms);
+    if (!entry || !enabled || !context || muted || musicMuted || !focused || mode === "cues-only") return;
+    for (const stemId of entry.stem_order) {
+      const stemRecipe = entry.stems[stemId];
+      const playStem = () => playTone({ ...entry, recipe: stemRecipe, normalization_gain: entry.normalization_gain }, "music");
+      if (stemRecipe.offset_ms > 0) {
+        const timer = globalThis.setTimeout(() => {
+          musicStemTimers.delete(timer);
+          playStem();
+        }, stemRecipe.offset_ms);
+        musicStemTimers.add(timer);
+      } else {
+        playStem();
+      }
+    }
+    musicTimer = globalThis.setTimeout(scheduleMusic, entry.loop_duration_ms);
   }
 
   function scheduleAmbience() {
@@ -445,8 +453,17 @@ export function createAudioClient({
     return { ok: true, mode };
   }
 
+  function setMusicMuted(value) {
+    musicMuted = Boolean(value);
+    if (musicMuted) stopMusic();
+    else scheduleMusic();
+    statusText(musicMuted ? "Music muted; ambience, cues, and written equivalents remain available." : "Music unmuted.");
+    updateDom();
+    return { ok: true, musicMuted };
+  }
+
   function state() {
-    return { enabled, muted, focused, mode, reducedNotifications, music: currentMusic, ambience: currentAmbience, volumes: { ...volumes } };
+    return { enabled, muted, musicMuted, focused, mode, reducedNotifications, music: currentMusic, ambience: currentAmbience, volumes: { ...volumes } };
   }
 
   function destroy() {
@@ -461,6 +478,7 @@ export function createAudioClient({
   root?.addEventListener?.("visibilitychange", visibilityHandler);
   root?.querySelector?.("#audio-enable")?.addEventListener("click", enable);
   root?.querySelector?.("#audio-mute")?.addEventListener("click", () => setMuted(!muted));
+  root?.querySelector?.("#audio-music-mute")?.addEventListener("change", (event) => setMusicMuted(event.target.checked));
   root?.querySelector?.("#audio-mode")?.addEventListener("change", (event) => setMode(event.target.value));
   root?.querySelector?.("#audio-reduced-notifications")?.addEventListener("change", (event) => setReducedNotifications(event.target.checked));
   for (const channel of Object.keys(volumes)) {
@@ -476,6 +494,7 @@ export function createAudioClient({
     playCue,
     setVolume,
     setMuted,
+    setMusicMuted,
     setMode,
     setFocused,
     setReducedNotifications,
