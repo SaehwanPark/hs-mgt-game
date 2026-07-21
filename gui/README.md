@@ -189,6 +189,20 @@ equivalents beside confirmation, rejection, report, identity, ambience,
 pressure, and environmental previews. The proof is fixture-only: it does not
 load a host, change a session, or replace the live audio client.
 
+## Audio cue refinement proof
+
+Open `gui/audio-cue-proof.html` directly or through a static server to inspect
+the Phase 7.1 contract for all 16 existing interface and event cues. Each row
+shows semantic purpose, priority, duration, normalized recipe target, peak
+ceiling, cooldown, visible trigger source, text equivalent, and a distinct
+cue label. The page is fixture-only and does not load a host, use hidden state,
+or play recorded audio.
+
+The live audio panel exposes `Full audio` and `Cues only`. Cues-only suppresses
+music and ambience while retaining interface/event cues and their visible/text
+equivalents. Mute, unavailable browser audio, reduced notifications, and focus
+loss remain complete presentation fallbacks.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

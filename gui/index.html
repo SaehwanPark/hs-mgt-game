@@ -704,6 +704,12 @@
         <div class="audio-controls" aria-label="Audio controls">
           <button type="button" id="audio-enable">Enable audio</button>
           <button type="button" id="audio-mute" aria-pressed="false">Mute audio</button>
+          <label for="audio-mode">Mode
+            <select id="audio-mode">
+              <option value="full">Full audio</option>
+              <option value="cues-only">Cues only</option>
+            </select>
+          </label>
           <label><input type="checkbox" id="audio-reduced-notifications" /> Reduced notifications</label>
           <label for="audio-master-volume">Master <input id="audio-master-volume" type="range" min="0" max="1" step=".05" value="1" /></label>
           <label for="audio-music-volume">Music <input id="audio-music-volume" type="range" min="0" max="1" step=".05" value=".55" /></label>

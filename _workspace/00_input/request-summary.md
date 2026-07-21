@@ -1,42 +1,43 @@
-# Request Summary — Visual/audio Phase 6.2 first-month resolution sequence v0.12.69
+# Request Summary — Visual/audio Phase 7.1 UI and event cue refinement v0.12.70
 
 ## Authorized outcome
 
-Complete the Phase 6.2 first-month resolution sequence checklist as a bounded
-presentation-contract and client-orchestration slice without changing the Rust
-transition, host authority, or public host DTO schema.
+Complete Milestone 7.1 of `docs/visual_audio_enhancement_roadmap.md` as a
+bounded generated-audio standards and client-control slice. Existing optional
+Web Audio playback remains presentation-only.
 
 ## Slice boundary
 
-- Add a pure first-month storyboard that names host-owned handoffs, display-only
-  attention priority, synchronized map/report/metric surfaces, optional audio
-  cue IDs, and deterministic replay order.
-- Wire the existing resolution client to the storyboard for play, pause,
-  advance, skip, review, reduced-motion, and keyboard-visible progress.
-- Preserve all committed step text in the DOM before any local pacing occurs;
-  skipping changes only local presentation state.
-- Exercise a recorded first-month envelope, missing/unsupported data, replay
-  determinism, keyboard-reachable controls, and the existing host boundary.
-- Do not change Rust DTOs, simulation state, commands, transitions, stochastic
-  inputs, history, hashes, replay authority, or debrief behavior.
+- Cover all 16 existing interface and event cue IDs.
+- Add a pure per-cue contract for semantic purpose, priority class, duration,
+  loudness target, peak ceiling, cooldown, text equivalent, distinction, and
+  visible trigger source.
+- Apply the shared normalization/peak metadata to the existing synthesis path.
+- Add an explicit local cues-only mode that disables music/ambience while
+  preserving interface/event cues and written equivalents.
+- Add a fixture proof and tests for every cue, visible-only trigger mapping,
+  cues-only behavior, unsupported audio, mute, and safe fallbacks.
+- Do not add downloaded/recorded audio, change host DTOs, simulation state,
+  commands, transitions, stochastic inputs, history, hashes, replay authority,
+  or debrief behavior.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Phase 6.2.
-- `gui/app.mjs` — existing host adapter and resolution controls.
-- `gui/first-month.mjs` — existing onboarding rail and handoff state.
-- `gui/motion-catalog.mjs` — existing reduced-motion policy.
-- `src/mcp/resolution.rs` — existing host-owned typed envelope.
-- `docs/design_principles.md` — actor-visible boundaries and accessibility.
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 7.1.
+- `gui/audio.mjs` — existing generated Web Audio client and cue vocabulary.
+- `gui/audio-catalog.json` — existing fixture catalog.
+- `docs/design_principles.md` — optional audio and actor-visible boundaries.
+- `assets/registry/audio-assets.json` — provenance and release gate.
 
 ## Validation target
 
-Focused sequence, first-month, resolution, registry, credits, metadata,
-documentation-link, full Python, full Rust, formatting, presentation-contract,
-keyboard-oriented, and diff checks.
+Focused cue-contract/audio tests, fixture proof checks, registry/credits,
+metadata, documentation links, full Python, full Rust, formatting, and diff
+checks.
 
 ## Evidence limits
 
-Static sequence/replay checks and keyboard-oriented fixture tests establish
-technical contract coverage only. They do not establish human comprehension,
-lived accessibility, learning, calibration, or policy validity.
+Contract metadata and generated-tone tests establish technical consistency only;
+they do not establish loudness on baseline hardware, lived accessibility,
+fatigue, musical quality, human comprehension, learning, calibration, or policy
+validity.

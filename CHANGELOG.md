@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.70] - 2026-07-21
+
+- Added the Phase 7.1 generated Web Audio cue contract for all 16 existing
+  interface and event cues, including visible sources, semantic purpose,
+  priority, duration, normalization, peak ceiling, cooldown, distinction, and
+  text equivalents.
+- Added fixture proof/tests and an explicit optional cues-only mode that keeps
+  interface/event cues while suppressing music and ambience.
+- Completed the Phase 7.1 checklist without adding recorded audio or changing
+  host, simulation, history, replay, or debrief authority.
+
 ## [0.12.69] - 2026-07-21
 
 - Added the Phase 6.2 first-month resolution storyboard over the existing

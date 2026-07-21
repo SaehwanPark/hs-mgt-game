@@ -404,6 +404,15 @@ local play, pause, advance, skip, review, or reduced-motion emphasis. The
 planner preserves unknown stages and explicit fallbacks, and cannot submit
 commands, resolve randomness, mutate history, write hashes, or infer causality.
 
+The v0.12.70 Phase 7.1 audio cue contract adds
+`gui/audio-cue-contract.mjs` as the single standards catalog for the existing
+16 generated interface/event cues. `gui/audio.mjs` decorates runtime entries
+from that catalog and uses one bounded normalization gain, duration, and peak
+ceiling recipe; its local `full`/`cues-only` mode suppresses only music and
+ambience in cues-only mode. Cue metadata, cooldown timestamps, and playback
+never enter host payloads, simulation state, history, hashes, replay artifacts,
+or debriefs. Every cue retains visible source and written equivalents.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

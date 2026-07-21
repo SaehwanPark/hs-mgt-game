@@ -1395,6 +1395,14 @@ Expand the current Web Audio system into a coherent, fatigue-resistant soundscap
 
 ## Milestone 7.1: UI and event cue refinement
 
+**Status:** Complete in v0.12.70
+**Evidence:** `gui/audio-cue-contract.mjs`, `gui/audio.mjs`,
+`gui/audio-cue-proof.html`, `gui/index.html`, and
+`tests/test_audio_cue_contract.py` define and verify all 16 existing interface
+and event cues with visible sources, standards metadata, shared normalization,
+peak ceilings, cooldowns, text equivalents, distinction labels, cues-only mode,
+and unavailable-audio fallbacks. No recorded or third-party audio was added.
+
 ### Cue families
 
 - selection;
@@ -1427,17 +1435,17 @@ Retain synthesis where appropriate, but improve:
 
 ### Checklist per cue
 
-- [ ] Semantic purpose documented.
-- [ ] Priority class assigned.
-- [ ] Duration within standard.
-- [ ] Loudness normalized.
-- [ ] Peak ceiling respected.
-- [ ] Cooldown behavior specified.
-- [ ] Text equivalent exists.
-- [ ] Cues-only mode tested.
-- [ ] No ambiguity with another cue.
-- [ ] Registry entry updated.
-- [ ] Unit or integration test covers trigger.
+- [x] Semantic purpose documented for all 16 cues.
+- [x] Priority class assigned for all 16 cues.
+- [x] Duration within the shared cue standard.
+- [x] Loudness normalized through the bounded generated-tone recipe.
+- [x] Peak ceiling respected by the shared synthesis metadata.
+- [x] Cooldown behavior specified for all 16 cues.
+- [x] Text equivalent exists for all 16 cues.
+- [x] Cues-only mode tested; interface/event cues remain available.
+- [x] No ambiguity with another cue; distinction labels are unique.
+- [x] Registry entry updated for the generated cue contract.
+- [x] Unit/integration tests cover every cue contract and visible trigger class.
 
 ### Exit criteria
 

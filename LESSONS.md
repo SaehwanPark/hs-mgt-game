@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Put Cue Standards in One Catalog
+
+- Context: Phase 7.1 needed to refine repeated UI/event cues without creating
+  a separate uninspectable audio pipeline.
+- Symptom: A cue can have a visible source and cooldown yet still drift in
+  duration, level, peak, text equivalent, or distinction when each runtime
+  entry carries its own partial recipe.
+- Resolution: Store the 16 cue contracts in one pure catalog and decorate the
+  existing generated Web Audio entries from it. Use one bounded normalization
+  gain and expose cues-only mode as a local channel policy.
+- Prevention: Keep cue metadata informational rather than clinical, retain
+  visible/text equivalents, suppress only music/ambience in cues-only mode, and
+  never let audio timestamps or classifications enter host/replay state.
+
 ## Sequence Visible Resolution Before Local Pacing
 
 - Context: Phase 6.2 needs a first-month presentation that is easier to follow
