@@ -1,41 +1,42 @@
-# Request Summary — Visual/audio Phase 6.1 motion specification v0.12.68
+# Request Summary — Visual/audio Phase 6.2 first-month resolution sequence v0.12.69
 
 ## Authorized outcome
 
-Complete the Phase 6.1 motion specification checklist as a bounded policy and
-proof slice without adding runtime animation or changing host authority.
+Complete the Phase 6.2 first-month resolution sequence checklist as a bounded
+presentation-contract and client-orchestration slice without changing the Rust
+transition, host authority, or public host DTO schema.
 
 ## Slice boundary
 
-- Define nine restrained motion categories: focus transition, report arrival,
-  month transition, project progress, project completion, new visible rival
-  action, status change, metric delta reveal, and relationship-line change.
-- Document semantic purpose, duration, easing, reduced-motion replacement,
-  interruption behavior, replay behavior/order, input behavior, simultaneous
-  load, and declared frame-budget rules.
-- Add deterministic replay/interruption planning and a fixture-only proof page.
-- Test the local catalog’s declared performance budget without claiming baseline
-  hardware, human usability, or production animation performance.
+- Add a pure first-month storyboard that names host-owned handoffs, display-only
+  attention priority, synchronized map/report/metric surfaces, optional audio
+  cue IDs, and deterministic replay order.
+- Wire the existing resolution client to the storyboard for play, pause,
+  advance, skip, review, reduced-motion, and keyboard-visible progress.
+- Preserve all committed step text in the DOM before any local pacing occurs;
+  skipping changes only local presentation state.
+- Exercise a recorded first-month envelope, missing/unsupported data, replay
+  determinism, keyboard-reachable controls, and the existing host boundary.
 - Do not change Rust DTOs, simulation state, commands, transitions, stochastic
-  inputs, history, hashes, replay authority, audio, or debrief behavior.
+  inputs, history, hashes, replay authority, or debrief behavior.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Phase 6.1.
-- `gui/motion-catalog.mjs` — pure motion policy and planning functions.
-- `gui/motion-proof.html` — fixture proof.
-- `gui/index.html` — existing reduced-motion and transition surface context.
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 6.2.
+- `gui/app.mjs` — existing host adapter and resolution controls.
+- `gui/first-month.mjs` — existing onboarding rail and handoff state.
+- `gui/motion-catalog.mjs` — existing reduced-motion policy.
+- `src/mcp/resolution.rs` — existing host-owned typed envelope.
 - `docs/design_principles.md` — actor-visible boundaries and accessibility.
 
 ## Validation target
 
-Focused motion-catalog, GUI, registry, credits, metadata, documentation-link,
-full Python, full Rust, formatting, presentation-contract, performance-smoke,
-and diff checks.
+Focused sequence, first-month, resolution, registry, credits, metadata,
+documentation-link, full Python, full Rust, formatting, presentation-contract,
+keyboard-oriented, and diff checks.
 
 ## Evidence limits
 
-Static catalog/planning checks and local smoke timing establish technical policy
-coverage only. They do not establish browser animation behavior, baseline
-hardware performance, lived accessibility, usability, learning, calibration,
-or policy validity.
+Static sequence/replay checks and keyboard-oriented fixture tests establish
+technical contract coverage only. They do not establish human comprehension,
+lived accessibility, learning, calibration, or policy validity.

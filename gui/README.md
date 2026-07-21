@@ -380,7 +380,14 @@ local session state. Phase 12 visual identity/marker lookup is a generated,
 visible-only vocabulary and does not create host facts or local game state. Phase
 13 first-month continuity is a local text-first stage projection; it does not
 create a host payload, client-side legality/outcome rule, transition, or local
-simulation state.
+simulation state. Phase 6.2 first-month resolution sequencing is a pure local
+storyboard over the host-owned `competitive-resolution-v1` envelope. It renders
+every committed stage immediately, annotates display-only priority and
+board/report/metric synchronization targets, aligns optional cues to visible
+stages, and exposes native advance, skip, pause, and review controls. Skip and
+reduced motion alter only local emphasis; they retain all written reports and
+effects. The sequence planner has no transition, randomness, network, history,
+hash, or hidden-state authority.
 Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.

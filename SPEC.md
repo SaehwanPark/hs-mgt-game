@@ -5027,6 +5027,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   every Phase 6.1 checklist item; local performance evidence is a smoke budget
   check, not a hardware or usability claim.
 
+### Visual/audio Phase 6.2 first-month resolution sequence (v0.12.69)
+
+- Status: Complete; the committed monthly resolution now has an explicit pure
+  storyboard, display-only attention ordering, synchronized surface metadata,
+  optional stage-aligned cues, keyboard-visible advance/skip controls, and
+  deterministic skip/replay checks.
+- Added `gui/resolution-sequence.mjs` over the existing
+  `competitive-resolution-v1` envelope. Missing canonical steps render explicit
+  written fallbacks and unknown host stages remain visible rather than being
+  dropped.
+- Updated `gui/app.mjs` and `gui/index.html` so every host step is rendered
+  before local pacing; local play, pause, advance, skip, review, and reduced
+  motion never change host state or remove committed reports.
+- Evidence is technical contract coverage only. The keyboard-oriented
+  first-time task proxy is not a human-comprehension, usability, accessibility,
+  learning, calibration, or policy-validity claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

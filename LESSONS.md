@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Sequence Visible Resolution Before Local Pacing
+
+- Context: Phase 6.2 needs a first-month presentation that is easier to follow
+  without making browser timing another transition authority.
+- Symptom: If a client only inserts or reveals one resolution step at a time,
+  skip, reduced motion, an interrupted timer, or a refresh failure can hide a
+  committed report or make local order look like causal order.
+- Resolution: Normalize the host-owned eight-stage envelope into a pure
+  storyboard, render every stage and source immediately, and use local controls
+  only to emphasize an existing stage. Unknown stages and missing data retain
+  explicit written fallbacks.
+- Prevention: Keep priority display-only, map/report/metric synchronization as
+  metadata, cue IDs optional, and replay/skip tests focused on text retention;
+  never infer severity, causality, or hidden rival state from pacing.
+
 ## Specify Motion Before Scheduling Motion
 
 - Context: Phase 6.1 needs consequence animation to aid comprehension without

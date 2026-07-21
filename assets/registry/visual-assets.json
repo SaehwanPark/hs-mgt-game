@@ -3,6 +3,23 @@
   "asset_type": "visual",
   "entries": [
     {
+      "id": "visual.runtime-resolution-sequence",
+      "asset_type": "visual",
+      "semantic_role": "status",
+      "source_path": "gui/resolution-sequence.mjs",
+      "release_path": null,
+      "creator": "project contributors",
+      "creation_method": "hand-authored deterministic first-month resolution storyboard",
+      "license": "project-generated",
+      "modifications": "None; local stage planning preserves host-written steps, display-only priority, synchronization metadata, cue IDs, skip retention, and replay order.",
+      "original_hash": "sha256:e05b82810df41cb4910df9a8ad96c3496358bfa78bf967d75e244e77b655e26c",
+      "release_hash": null,
+      "attribution_text": "Generated in this repository; no third-party asset.",
+      "accessible_equivalent": "Written stage labels, source text, surface synchronization text, fallback text, and native review controls",
+      "visible_source": "Host-owned competitive-resolution-v1 stage envelope",
+      "approval_status": "approved"
+    },
+    {
       "id": "visual.runtime-motion-catalog",
       "asset_type": "visual",
       "semantic_role": "marker",
