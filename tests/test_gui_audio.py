@@ -31,6 +31,9 @@ class GuiAudioTests(unittest.TestCase):
       'id: "menu"',
       'id: "stable_operations"',
       'id: "pressure"',
+      'regulatory_scrutiny',
+      'competitive_escalation',
+      'affiliation_negotiation',
       'id: "debrief"',
       'ui.action-confirm',
       'ui.action-reject',
@@ -52,11 +55,12 @@ class GuiAudioTests(unittest.TestCase):
       'visible_source',
       'equivalent',
       'cooldown_ms',
+      'MUSIC_STEM_CONTRACT',
     ):
       self.assertIn(marker, self.audio)
     self.assertEqual(self.registry["schema_version"], "audio-registry-v1")
     self.assertEqual(self.registry["third_party_assets"], [])
-    self.assertEqual(len(self.registry["entries"]), 27)
+    self.assertEqual(len(self.registry["entries"]), 30)
     for entry in self.registry["entries"]:
       for field in (
         "id",
@@ -119,6 +123,7 @@ class GuiAudioTests(unittest.TestCase):
       'id="audio-panel"',
       'id="audio-enable"',
       'id="audio-mute"',
+      'id="audio-music-mute"',
       'id="audio-reduced-notifications"',
       'id="audio-master-volume"',
       'id="audio-music-volume"',

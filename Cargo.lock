@@ -341,7 +341,7 @@ dependencies = [
 
 [[package]]
 name = "hs-mgt-game"
-version = "0.12.71"
+version = "0.12.72"
 dependencies = [
  "axum",
  "rmcp",

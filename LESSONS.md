@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Music Contextual and Visible-Only
+
+- Context: Phase 7.3 needed adaptive music states without turning harmony into
+  a hidden score, moral judgment, or second transition authority.
+- Symptom: A classifier can accidentally treat private rival activity,
+  resolved inputs, or an unmodeled outcome as a musical cue; layered stems can
+  also become unbounded or remove the written context when muted.
+- Resolution: Store seven states and five stem roles in one pure contract,
+  classify only explicit actor-visible stage/observation/report/process text,
+  plan replay sequences from the same visible inputs, cap loop/crossfade
+  timings, and expose music-only/full mute plus written fallbacks.
+- Prevention: Preserve stable legacy state IDs, leave priority/fatigue/ducking
+  to Phase 7.4, keep all stem recipes generated locally, and treat replay
+  sequence checks as deterministic technical evidence rather than musical or
+  learning validation.
+
 ## Keep Ambience Optional and Non-Clinical
 
 - Context: Phase 7.2 needed environmental atmosphere for seven fictional

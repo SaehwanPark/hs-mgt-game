@@ -5083,6 +5083,28 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   measured loudness, fatigue, musical quality, lived accessibility, human
   comprehension, learning, calibration, or policy validity.
 
+### Visual/audio Phase 7.3 adaptive music stems (v0.12.72)
+
+- Status: Complete; seven visible-state music contracts, five bounded stem
+  roles per state, visible-only classifier/replay planning, crossfade metadata,
+  music-only/full mute behavior, fixture proof, and registry coverage verified
+- Branch: `feat/visual-audio-phase7-adaptive-music-v0.12.72`
+- Added `gui/music-stem-contract.mjs` for menu/planning, stable operations,
+  pressure, regulatory scrutiny, competitive escalation,
+  affiliation/negotiation, and debrief. Existing IDs remain stable while the
+  new states use the same generated-audio boundary.
+- Updated `gui/audio.mjs` and `gui/index.html` to play bounded base-pulse,
+  institutional-motif, visible-pressure, policy, and transition-cadence stems
+  from actor-visible state only. Music-only mute, full mute, cues-only, focus,
+  reduced, and unavailable-audio fallbacks retain written context.
+- Added `gui/music-stem-proof.html`, focused tests, catalog/registry/credits
+  provenance, and deterministic replay-state sequence checks. No recorded
+  audio, hidden-state selection, host/simulation/replay change, or Phase 7.4
+  priority/fatigue manager was introduced.
+- Contract/tests are technical consistency evidence only; they do not claim
+  measured loudness, musical quality, fatigue, lived accessibility, human
+  comprehension, learning, calibration, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

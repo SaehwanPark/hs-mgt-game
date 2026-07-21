@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Adaptive music stem proof</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+    body { background: #f3f7f6; color: #18312f; margin: 0; padding: 2rem; }
+    main { background: white; border: 1px solid #bed1cd; border-radius: .8rem; margin: auto; max-width: 1250px; padding: 1.5rem; }
+    .notice { background: #e8f5f1; border-left: .3rem solid #0b6e69; padding: .7rem 1rem; }
+    table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
+    th, td { border: 1px solid #bed1cd; padding: .5rem; text-align: left; vertical-align: top; }
+    th { background: #e8f5f1; }
+    code { white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Adaptive music stem system</h1>
+    <p class="notice">Fixture-only generated Web Audio contracts. Each visible state uses five bounded stem roles; state selection reads only actor-visible context. Music is optional, cannot encode hidden intent or victory/defeat, and never replaces written status, source, or result text. The <code>music-only</code> mute path remains local.</p>
+    <p id="summary" aria-live="polite">Loading music contracts…</p>
+    <table>
+      <thead><tr><th>State</th><th>Visible trigger / purpose</th><th>Stem roles</th><th>Timing</th><th>Written equivalent / fallback</th></tr></thead>
+      <tbody id="music-list"></tbody>
+    </table>
+  </main>
+  <script type="module">
+    import { MUSIC_STEM_CONTRACT, validateMusicStemContracts } from "./music-stem-contract.mjs";
+
+    const list = document.querySelector("#music-list");
+    for (const entry of MUSIC_STEM_CONTRACT.entries) {
+      const row = document.createElement("tr");
+      const cells = [
+        `${entry.label} (${entry.id})`,
+        `${entry.visible_trigger_source} ${entry.semantic_purpose}`,
+        entry.stem_order.map((role) => `${role}: ${entry.stems[role].waveform} ${entry.stems[role].frequency} Hz`).join("; "),
+        `${entry.loop_duration_ms} ms loop; ${entry.crossfade_ms} ms state fade; cadence ${entry.stems.transition_cadence.duration_ms} ms`,
+        `${entry.text_equivalent} ${entry.fallback}`,
+      ];
+      for (const value of cells) {
+        const cell = document.createElement("td");
+        cell.textContent = value;
+        row.append(cell);
+      }
+      list.append(row);
+    }
+    document.querySelector("#summary").textContent = `${MUSIC_STEM_CONTRACT.entries.length} music states · ${MUSIC_STEM_CONTRACT.stem_roles.length} stem roles per state · validation errors: ${validateMusicStemContracts().length}`;
+  </script>
+</body>
+</html>

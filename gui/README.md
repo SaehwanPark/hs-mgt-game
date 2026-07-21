@@ -219,6 +219,20 @@ keeps the regional city bed as the only default ambience selection; explicit
 setting selection remains a presentation contract and never changes simulation
 or replay state.
 
+## Adaptive music stem proof
+
+Open `gui/music-stem-proof.html` directly or through a static server to inspect
+the Phase 7.3 menu/planning, stable operations, pressure, regulatory scrutiny,
+competitive escalation, affiliation/negotiation, and debrief states. Each row
+shows the five stem roles, visible trigger, bounded loop/crossfade metadata,
+written equivalent, and fallback. The proof is fixture-only and does not load
+host state, hidden data, network resources, or recorded audio.
+
+`music-stem-contract.mjs` is the pure visible-state catalog and replay-sequence
+planner. The live panel keeps music optional, exposes `Music only mute`, and
+continues to support full mute and cues-only mode without removing written
+context.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

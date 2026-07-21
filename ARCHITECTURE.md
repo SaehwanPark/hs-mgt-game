@@ -426,6 +426,17 @@ retains source/generation, license, source-hash basis, loop/noise/loudness,
 no-speech/music/name/alarm constraints, written equivalent, and reduced-audio
 fallback metadata.
 
+The v0.12.72 Phase 7.3 music stem contract adds
+`gui/music-stem-contract.mjs` as the seven-state/five-role visible-context
+catalog. `gui/audio.mjs` plays its generated base pulse, institutional motif,
+visible pressure, policy, and transition cadence recipes with bounded local
+fades; `gui/app.mjs` supplies only actor-visible stage/presentation envelopes.
+The classifier and replay planner never read true state, private rival detail,
+resolved inputs, or client formulas. Music-only mute, full mute, cues-only,
+focus, reduced, and unavailable-audio behavior preserve written content.
+Stem state, recipes, crossfade metadata, timers, and playback never enter host
+payloads, simulation state, history, hashes, replay artifacts, or debriefs.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 
