@@ -5044,6 +5044,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   first-time task proxy is not a human-comprehension, usability, accessibility,
   learning, calibration, or policy-validity claim.
 
+### Visual/audio Phase 7.1 UI and event cue refinement (v0.12.70)
+
+- Status: Complete; all 16 existing interface/event cue IDs now use one
+  generated-audio standards contract and optional cues-only control.
+- Added `gui/audio-cue-contract.mjs` with semantic purpose, priority class,
+  duration, loudness target, peak ceiling, normalization gain, cooldown,
+  visible trigger source, distinction label, and text equivalent for each cue.
+- Updated `gui/audio.mjs` to decorate runtime cues from the contract and expose
+  local `full`/`cues-only` mode. Cues-only suppresses music/ambience while
+  interface/event cues, visible sources, and written equivalents remain.
+- Added `gui/audio-cue-proof.html`, focused tests, and registry/credits
+  provenance. No recorded or third-party audio was introduced.
+- Contract/tests are technical consistency evidence only; they do not claim
+  measured loudness, fatigue, musical quality, lived accessibility, human
+  comprehension, learning, calibration, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

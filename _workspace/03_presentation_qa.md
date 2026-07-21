@@ -1,4 +1,4 @@
-# Presentation QA — Phase 6.2 first-month resolution sequence v0.12.69
+# Presentation QA — Phase 7.1 UI and event cue refinement v0.12.70
 
 ## Status
 
@@ -6,83 +6,83 @@
 
 ## Reviewed Inputs and Authorization
 
-- User request to complete roadmap items iteratively.
-- `docs/visual_audio_enhancement_roadmap.md`, Milestone 6.2.
+- User request to complete roadmap items through bounded plan/implementation/
+  review/merge loops.
+- `docs/visual_audio_enhancement_roadmap.md`, Milestone 7.1.
 - `_workspace/00_input/request-summary.md`.
 - `_workspace/02_presentation_contract.md`.
-- `src/mcp/resolution.rs` and the existing `competitive-resolution-v1` tests.
-- Produced files: `gui/resolution-sequence.mjs`, `gui/app.mjs`,
-  `gui/index.html`, and `tests/test_resolution_sequence.py`.
+- Existing `gui/audio.mjs`, `gui/audio-catalog.json`, and audio registry.
+- Produced files: `gui/audio-cue-contract.mjs`, `gui/audio.mjs`,
+  `gui/audio-cue-proof.html`, `gui/index.html`, and
+  `tests/test_audio_cue_contract.py`.
 
-The slice is limited to local presentation sequencing. No later audio
-production, asset generation, campaign expansion, instructor true-state view,
-or human evaluation milestone was promoted.
+No recorded audio, third-party asset, later ambience/music-stem/fatigue
+milestone, or simulation/runtime authority change was promoted.
 
 ## Information and Causality Findings
 
-- The planner consumes only the host-owned `steps`, `source`, and `items` plus
-  the existing visible envelope metadata.
-- Stage priority is explicitly tagged as display-order-only and cannot encode
-  severity, probability, moral valence, hidden state, or causal strength.
-- Board/report/metric synchronization is a static stage-to-surface mapping;
-  the browser does not infer targets or causal links from text.
-- Unknown stages remain visible and missing canonical stages receive explicit
-  written fallbacks.
+- All 16 cue IDs are mapped to visible UI results, host validation, committed
+  events/effects, or actor-visible operating/market results.
+- `visibleEventCues` remains a visible-text/observation classifier. It does not
+  read true state, private rival intent, resolved inputs, effect queues, or
+  client-side formulas.
+- Priority and distinction labels are audio presentation metadata. They do not
+  encode clinical severity, moral valence, probability, causality, or hidden
+  strategic information.
 
 ## Accessibility and Fallback Findings
 
-- All eight stages are rendered as written list content before local pacing.
-- Native play, pause, advance, skip, review, turn input, and load controls
-  remain keyboard-reachable in `gui/index.html`.
-- Reduced motion uses the existing local preference path; skip and reduced
-  motion retain the complete written stage list.
-- Audio cue IDs are optional and stage-aligned. Muted, unavailable, or reduced
-  notifications leave written resolution and board/report/metric surfaces.
-- Focused tests cover malformed/missing stages, skip retention, JavaScript
-  syntax, and host-boundary forbidden markers.
+- Every cue contract has a written equivalent and visible trigger source.
+- The live panel exposes native `Full audio` and `Cues only` controls.
+- Cues-only suppresses only music/ambience; interface/event cues and written
+  status/effect text remain available.
+- Mute, reduced notifications, focus loss, and unavailable browser audio retain
+  the existing visual/text fallback.
+- `tests/test_audio_cue_contract.py` exercises all 16 contracts, cues-only mode,
+  visible cue playback fallback, and unsupported audio behavior.
 
 ## Provenance and Rights Findings
 
-- `visual.runtime-resolution-sequence` is registered with source hash,
-  project-generated license basis, accessible equivalent, visible source, and
-  approved status.
-- No new raster, vector, external font, downloaded, or third-party audio asset
-  entered the slice.
+- `audio.runtime-cue-refinement` is registered with source hash, project-
+  generated license basis, accessible equivalent, visible source, and approved
+  status.
+- Existing `gui/audio.mjs` source hashes were refreshed after the runtime
+  contract integration; generated credits and registry validation pass.
+- No downloaded, recorded, external-font, or third-party audio asset entered
+  the slice.
 
 ## Authority and Replay Findings
 
-- `gui/resolution-sequence.mjs` is pure planning code. It does not call the
-  host, submit commands, resolve randomness, mutate history, write hashes, or
-  access network APIs.
-- `gui/app.mjs` uses local timers only for emphasis pacing after the committed
-  envelope is loaded. Advance, skip, pause, review, and reduced motion change
-  local presentation state only.
-- Replay planning is deterministic for the same envelope and contract. The
-  host-owned resolution DTO and Rust transition code are unchanged.
+- `gui/audio-cue-contract.mjs` is pure metadata/validation code.
+- Audio mode, cooldown timestamps, playback timers, and generated oscillator
+  recipes are local presentation state. They never enter commands, transitions,
+  stochastic inputs, history, state hashes, replay artifacts, or debrief facts.
+- Cues-only scheduling guards prevent silent background music/ambience timers
+  after a later visible music-state update.
 
 ## Required Fixes
 
-None. The review pass found and fixed a pre-review missing-envelope skip guard;
-focused tests were rerun afterward.
+None. The code-review pass found and fixed the cues-only rescheduling issue;
+focused tests and registry checks were rerun afterward.
 
 ## Residual Risks and Evidence Limits
 
-- The tests establish technical contract coverage and a keyboard-oriented task
-  proxy, not first-time human comprehension, lived accessibility, learning,
-  browser animation performance, policy validity, or calibration.
-- The existing audio client remains a later production/fatigue scope; this
-  slice only aligns optional cue IDs to visible stages.
-- Human and legal review of future audio/assets remains separately gated.
+- Metadata and generated-tone tests do not establish measured loudness on
+  baseline hardware, musical quality, fatigue, lived accessibility, human
+  comprehension, learning, calibration, or policy validity.
+- Environmental loops, adaptive music stems, priority/fatigue management, AI
+  assets, licensing hardening, and structured evaluation remain later roadmap
+  slices.
 
 ## Verification Evidence
 
-- `python3 -m unittest tests/test_resolution_sequence.py tests/test_gui_first_month.py tests/test_gui_resolution.py tests/test_asset_registry.py tests/test_visual_audio_contract_audit.py`
-- `node --check gui/app.mjs`
-- `node --check gui/resolution-sequence.mjs`
+- `python3 -m unittest tests/test_audio_cue_contract.py tests/test_gui_audio.py tests/test_asset_registry.py tests/test_release_metadata.py`
+- `node --check gui/audio-cue-contract.mjs`
+- `node --check gui/audio.mjs`
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/generate_asset_credits.py --check`
 - `python3 scripts/check_release_metadata.py`
 - `python3 scripts/check_documentation_links.py`
-- `python3 scripts/generate_asset_credits.py --check`
-- `python3 scripts/validate_assets.py`
 - `git diff --check`
 
 All checks passed at the time of QA.

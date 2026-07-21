@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Audio cue refinement proof</title>
+  <style>
+    :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+    body { background: #f3f7f6; color: #18312f; margin: 0; padding: 2rem; }
+    main { background: white; border: 1px solid #bed1cd; border-radius: .8rem; margin: auto; max-width: 1100px; padding: 1.5rem; }
+    .notice { background: #e8f5f1; border-left: .3rem solid #0b6e69; padding: .7rem 1rem; }
+    table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
+    th, td { border: 1px solid #bed1cd; padding: .5rem; text-align: left; vertical-align: top; }
+    th { background: #e8f5f1; }
+    code { white-space: nowrap; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>UI and event cue refinement</h1>
+    <p class="notice">Fixture-only generated Web Audio standards. Cues are optional; every row retains visible source and text. No recorded assets, host calls, or simulation state are used.</p>
+    <p id="summary" aria-live="polite">Loading cue contracts…</p>
+    <table>
+      <thead><tr><th>Cue</th><th>Priority / duration</th><th>Level / cooldown</th><th>Visible trigger</th><th>Written equivalent</th><th>Distinction</th></tr></thead>
+      <tbody id="cue-list"></tbody>
+    </table>
+  </main>
+  <script type="module">
+    import { AUDIO_CUE_CONTRACT, AUDIO_CUE_POLICY, orderedAudioCueContracts, validateAudioCueContracts } from "./audio-cue-contract.mjs";
+    const list = document.querySelector("#cue-list");
+    const entries = orderedAudioCueContracts();
+    for (const entry of entries) {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td><code>${entry.id}</code><br>${entry.semantic_purpose}</td><td>${entry.priority_class}<br>${entry.duration_ms} ms</td><td>${entry.loudness_target_db} dB target<br>${entry.peak_ceiling_dbfs} dBFS ceiling<br>${entry.cooldown_ms} ms cooldown</td><td>${entry.visible_trigger_source}</td><td>${entry.text_equivalent}</td><td>${entry.distinction}</td>`;
+      list.append(row);
+    }
+    document.querySelector("#summary").textContent = `${AUDIO_CUE_CONTRACT.entries.length} cue contracts · ${AUDIO_CUE_POLICY.cues_only_channels.join(" / ")} remain available in cues-only mode · validation errors: ${validateAudioCueContracts().length}`;
+  </script>
+</body>
+</html>

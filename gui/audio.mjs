@@ -1,3 +1,5 @@
+import { AUDIO_CUE_POLICY, audioCueContractFor } from "./audio-cue-contract.mjs";
+
 const MUSIC_ENTRIES = [
   {
     id: "menu",
@@ -45,7 +47,7 @@ const INTERFACE_CUES = [
   equivalent,
   cooldown_ms: 700,
   recipe: { waveform: "square", frequency: 440, duration_ms: 90 },
-}));
+})).map(withCueContract);
 
 const EVENT_CUES = [
   ["event.project-complete", "Committed visible event/effect", "Project completion event and changed process marker"],
@@ -63,7 +65,17 @@ const EVENT_CUES = [
   equivalent,
   cooldown_ms: 1500,
   recipe: { waveform: index % 2 ? "triangle" : "sine", frequency: 523.25 + index * 32, duration_ms: 150 },
-}));
+})).map(withCueContract);
+
+function withCueContract(entry) {
+  const contract = audioCueContractFor(entry.id);
+  if (!contract) return entry;
+  return {
+    ...entry,
+    ...contract,
+    recipe: { ...entry.recipe, duration_ms: contract.duration_ms },
+  };
+}
 
 const AMBIENCE_ENTRIES = [{
   id: "regional_ambience",
@@ -136,6 +148,8 @@ export function recordCue(sink, cueId) {
     id: entry.id,
     source: entry.visible_source,
     equivalent: entry.equivalent,
+    semantic_purpose: entry.semantic_purpose,
+    priority_class: entry.priority_class,
   };
   sink?.record?.(event);
   return { ok: true, entry, event };
@@ -185,6 +199,7 @@ export function createAudioClient({
   let enabled = false;
   let muted = false;
   let focused = true;
+  let mode = "full";
   let reducedNotifications = false;
   let currentMusic = "menu";
   let musicTimer = null;
@@ -210,10 +225,12 @@ export function createAudioClient({
     }
     const reduced = root?.querySelector?.("#audio-reduced-notifications");
     if (reduced) reduced.checked = reducedNotifications;
+    const modeSelect = root?.querySelector?.("#audio-mode");
+    if (modeSelect) modeSelect.value = mode;
   }
 
   function gainValue(channel) {
-    if (muted || !focused) return 0;
+    if (muted || !focused || (mode === "cues-only" && (channel === "music" || channel === "ambience"))) return 0;
     return volumes.master * (channel === "master" ? 1 : volumes[channel]);
   }
 
@@ -226,7 +243,7 @@ export function createAudioClient({
     oscillator.type = recipe.waveform;
     oscillator.frequency.value = recipe.frequency;
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, gainValue(channel) * 0.08), now + 0.02);
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, gainValue(channel) * (entry.normalization_gain ?? AUDIO_CUE_POLICY.normalization_gain)), now + 0.02);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + recipe.duration_ms / 1000);
     oscillator.connect(gain);
     gain.connect(context.destination);
@@ -248,7 +265,7 @@ export function createAudioClient({
   function scheduleMusic() {
     stopMusic();
     const entry = musicEntry(currentMusic);
-    if (!entry || !enabled || !context || muted || !focused) return;
+    if (!entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
     playTone(entry, "music");
     musicTimer = globalThis.setTimeout(scheduleMusic, entry.recipe.duration_ms);
   }
@@ -256,7 +273,7 @@ export function createAudioClient({
   function scheduleAmbience() {
     stopAmbience();
     const entry = AMBIENCE_BY_ID.get("regional_ambience");
-    if (!entry || !enabled || !context || muted || !focused) return;
+    if (!entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
     playTone(entry, "ambience");
     ambienceTimer = globalThis.setTimeout(scheduleAmbience, entry.recipe.duration_ms);
   }
@@ -364,8 +381,26 @@ export function createAudioClient({
     return { ok: true, reducedNotifications };
   }
 
+  function setMode(value) {
+    const next = String(value ?? "").trim().toLowerCase();
+    if (!new Set(["full", "cues-only"]).has(next)) return { ok: false, code: "unknown_audio_mode" };
+    mode = next;
+    if (mode === "cues-only") {
+      stopMusic();
+      stopAmbience();
+    } else {
+      scheduleMusic();
+      scheduleAmbience();
+    }
+    statusText(mode === "cues-only"
+      ? "Cues-only mode enabled; music and ambience are off while interface/event cues remain available."
+      : "Full audio mode enabled; visual and text equivalents remain active.");
+    updateDom();
+    return { ok: true, mode };
+  }
+
   function state() {
-    return { enabled, muted, focused, reducedNotifications, music: currentMusic, volumes: { ...volumes } };
+    return { enabled, muted, focused, mode, reducedNotifications, music: currentMusic, volumes: { ...volumes } };
   }
 
   function destroy() {
@@ -380,6 +415,7 @@ export function createAudioClient({
   root?.addEventListener?.("visibilitychange", visibilityHandler);
   root?.querySelector?.("#audio-enable")?.addEventListener("click", enable);
   root?.querySelector?.("#audio-mute")?.addEventListener("click", () => setMuted(!muted));
+  root?.querySelector?.("#audio-mode")?.addEventListener("change", (event) => setMode(event.target.value));
   root?.querySelector?.("#audio-reduced-notifications")?.addEventListener("change", (event) => setReducedNotifications(event.target.checked));
   for (const channel of Object.keys(volumes)) {
     root?.querySelector?.(`#audio-${channel}-volume`)?.addEventListener("input", (event) => setVolume(channel, event.target.value));
@@ -393,6 +429,7 @@ export function createAudioClient({
     playCue,
     setVolume,
     setMuted,
+    setMode,
     setFocused,
     setReducedNotifications,
     state,
