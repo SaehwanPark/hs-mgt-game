@@ -1,65 +1,88 @@
-# Presentation QA — Phase 6.1 motion specification v0.12.68
+# Presentation QA — Phase 6.2 first-month resolution sequence v0.12.69
 
 ## Status
 
-Pass for the bounded motion catalog, deterministic planning proof, interruption
-policy, reduced-motion replacement, and local performance-budget smoke test.
+`pass`
 
-## Reviewed inputs and authorization
+## Reviewed Inputs and Authorization
 
-- Request: `_workspace/00_input/request-summary.md`.
-- Contract: `_workspace/02_presentation_contract.md`.
-- Roadmap: `docs/visual_audio_enhancement_roadmap.md`, Phase 6.1.
-- Produced files: `gui/motion-catalog.mjs`, `gui/motion-proof.html`, and
-  `tests/test_motion_catalog.py`.
-- Authorization is limited to local presentation policy/planning. Host and
-  simulation authority remain unchanged.
+- User request to complete roadmap items iteratively.
+- `docs/visual_audio_enhancement_roadmap.md`, Milestone 6.2.
+- `_workspace/00_input/request-summary.md`.
+- `_workspace/02_presentation_contract.md`.
+- `src/mcp/resolution.rs` and the existing `competitive-resolution-v1` tests.
+- Produced files: `gui/resolution-sequence.mjs`, `gui/app.mjs`,
+  `gui/index.html`, and `tests/test_resolution_sequence.py`.
 
-## Information and causality findings
+The slice is limited to local presentation sequencing. No later audio
+production, asset generation, campaign expansion, instructor true-state view,
+or human evaluation milestone was promoted.
 
-- Pass: every category names visible source/trigger and prohibits hidden
-  information, prediction, interpolation, or added severity.
-- Pass: project completion, rival action, metric delta, and relationship-line
-  motion preserve host/observation boundaries and written evidence.
-- Pass: replay planning sorts explicit local events deterministically and never
-  replaces replay authority.
+## Information and Causality Findings
 
-## Accessibility and fallback findings
+- The planner consumes only the host-owned `steps`, `source`, and `items` plus
+  the existing visible envelope metadata.
+- Stage priority is explicitly tagged as display-order-only and cannot encode
+  severity, probability, moral valence, hidden state, or causal strength.
+- Board/report/metric synchronization is a static stage-to-surface mapping;
+  the browser does not infer targets or causal links from text.
+- Unknown stages remain visible and missing canonical stages receive explicit
+  written fallbacks.
 
-- Pass: reduced-motion plans are immediate static replacements with the same
-  written information; interruption retains written content.
-- Pass: proof keeps catalog text, input rules, source boundaries, and print/
-  responsive layout without timers or animation.
-- Evidence limit: static checks do not establish browser animation behavior,
-  lived accessibility, contrast, human comprehension, or first-month usability.
+## Accessibility and Fallback Findings
 
-## Provenance and rights findings
+- All eight stages are rendered as written list content before local pacing.
+- Native play, pause, advance, skip, review, turn input, and load controls
+  remain keyboard-reachable in `gui/index.html`.
+- Reduced motion uses the existing local preference path; skip and reduced
+  motion retain the complete written stage list.
+- Audio cue IDs are optional and stage-aligned. Muted, unavailable, or reduced
+  notifications leave written resolution and board/report/metric surfaces.
+- Focused tests cover malformed/missing stages, skip retention, JavaScript
+  syntax, and host-boundary forbidden markers.
 
-- Pass: `visual.runtime-motion-catalog` has registry/hash/credits provenance,
-  accessible equivalent, visible source, and approved project-generated status.
-- Pass: no external assets, fonts, URLs, or third-party files were introduced.
+## Provenance and Rights Findings
 
-## Authority and performance findings
+- `visual.runtime-resolution-sequence` is registered with source hash,
+  project-generated license basis, accessible equivalent, visible source, and
+  approved status.
+- No new raster, vector, external font, downloaded, or third-party audio asset
+  entered the slice.
 
-- Pass: catalog/planning/interruption/load functions are pure over local events.
-- Pass: no host, command, simulation, stochastic, history, hash,
-  replay-authority, audio, or debrief mutation path was added.
-- Pass: local smoke test checks the declared load budget; this is not a
-  baseline-hardware or production-performance claim.
+## Authority and Replay Findings
 
-## Required fixes
+- `gui/resolution-sequence.mjs` is pure planning code. It does not call the
+  host, submit commands, resolve randomness, mutate history, write hashes, or
+  access network APIs.
+- `gui/app.mjs` uses local timers only for emphasis pacing after the committed
+  envelope is loaded. Advance, skip, pause, review, and reduced motion change
+  local presentation state only.
+- Replay planning is deterministic for the same envelope and contract. The
+  host-owned resolution DTO and Rust transition code are unchanged.
 
-None identified by this bounded QA pass or the single light code-review pass.
-The review covered the motion catalog, deterministic ordering, reduced-motion
-and interruption behavior, fixture authority boundaries, and the local load
-budget. No second reviewer was spawned under the task constraint.
+## Required Fixes
 
-## Verification evidence
+None. The review pass found and fixed a pre-review missing-envelope skip guard;
+focused tests were rerun afterward.
 
-- `python3 -m unittest tests.test_motion_catalog -v` — 4 passed.
-- Full Python discovery — 454 passed.
-- `cargo fmt -- --check` — passed; serial `cargo test -- --test-threads=1`
-  passed with 328 Rust unit tests plus 13 integration/golden/scenario tests.
-- Release metadata, documentation links (343 Markdown files), asset registry,
-  asset credits, presentation-contract audit, Node syntax, local performance
-  smoke, and `git diff --check` — passed.
+## Residual Risks and Evidence Limits
+
+- The tests establish technical contract coverage and a keyboard-oriented task
+  proxy, not first-time human comprehension, lived accessibility, learning,
+  browser animation performance, policy validity, or calibration.
+- The existing audio client remains a later production/fatigue scope; this
+  slice only aligns optional cue IDs to visible stages.
+- Human and legal review of future audio/assets remains separately gated.
+
+## Verification Evidence
+
+- `python3 -m unittest tests/test_resolution_sequence.py tests/test_gui_first_month.py tests/test_gui_resolution.py tests/test_asset_registry.py tests/test_visual_audio_contract_audit.py`
+- `node --check gui/app.mjs`
+- `node --check gui/resolution-sequence.mjs`
+- `python3 scripts/check_release_metadata.py`
+- `python3 scripts/check_documentation_links.py`
+- `python3 scripts/generate_asset_credits.py --check`
+- `python3 scripts/validate_assets.py`
+- `git diff --check`
+
+All checks passed at the time of QA.

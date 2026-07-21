@@ -1343,6 +1343,14 @@ claim about baseline hardware or lived experience.
 
 ## Milestone 6.2: First-month resolution sequence
 
+**Status:** Complete in v0.12.69
+**Evidence:** `gui/resolution-sequence.mjs`, `gui/app.mjs`,
+`gui/index.html`, and `tests/test_resolution_sequence.py` define and verify the
+host/client storyboard, display-only priority, board/report/metric
+synchronization metadata, optional stage cues, skip retention, reduced-motion,
+keyboard-visible controls, and deterministic replay planning. Existing
+`competitive-resolution-v1` host DTOs and resolution tests remain unchanged.
+
 ### Recommended sequence
 
 1. Player confirms action batch.
@@ -1358,18 +1366,18 @@ claim about baseline hardware or lived experience.
 
 ### Checklist
 
-- [ ] Sequence storyboard completed.
-- [ ] Host/client state boundaries documented.
-- [ ] Critical-event priority implemented.
-- [ ] Map updates synchronized with reports.
-- [ ] Metric changes synchronized with summary.
-- [ ] Audio cues synchronized.
-- [ ] Skip/advance control implemented.
-- [ ] Reduced-motion sequence implemented.
-- [ ] Replay sequence deterministic.
-- [ ] No report is lost if animation is skipped.
-- [ ] Keyboard-only completion tested.
-- [ ] First-time user comprehension tested.
+- [x] Sequence storyboard completed.
+- [x] Host/client state boundaries documented.
+- [x] Critical-event priority implemented as display-only ordering.
+- [x] Map updates synchronized with reports through stage surface metadata.
+- [x] Metric changes synchronized with summary through the operations stage.
+- [x] Audio cues synchronized to visible stage handoffs when audio is enabled.
+- [x] Skip/advance control implemented.
+- [x] Reduced-motion sequence implemented.
+- [x] Replay sequence deterministic.
+- [x] No report is lost if animation is skipped.
+- [x] Keyboard-only completion tested through native controls and visible status.
+- [x] First-time comprehension task proxy tested; human comprehension remains a later evaluation gate.
 
 ### Exit criteria
 

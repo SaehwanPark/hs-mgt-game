@@ -6,6 +6,7 @@ import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regi
 import { renderRegionalSvg } from "./scene.mjs";
 import { renderMetricVisualizationSvg } from "./metric-visualizations.mjs";
 import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
+import { planResolutionSequence, sequenceForSkip } from "./resolution-sequence.mjs";
 
 const presentationFixture = {
   header_metrics: [
@@ -1801,8 +1802,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
   const firstMonthFlow = createFirstMonthFlow({ root });
-  const resolutionClient = createResolutionClient({ adapter, root });
   const audioClient = createAudioClient({ root, recorder });
+  const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
@@ -2105,6 +2106,7 @@ export function renderResolution(envelope, root = document) {
   const before = root.querySelector("#resolution-before-list");
   const after = root.querySelector("#resolution-after-list");
   const effects = root.querySelector("#resolution-effect-list");
+  const progress = root.querySelector("#resolution-progress");
   if (!panel || !status || !steps || !before || !after || !effects) {
     return { ok: false, code: "resolution_surface_missing" };
   }
@@ -2115,19 +2117,23 @@ export function renderResolution(envelope, root = document) {
     currentResolutionSessionId = null;
     renderConsequenceLinks(currentRegionalLinks, root);
     status.textContent = "No committed resolution is available.";
+    if (progress) progress.textContent = "No written resolution stages are loaded.";
     appendResolutionItems(before, [], "Decision-time snapshot unavailable.");
     appendResolutionItems(after, [], "Post-resolution snapshot unavailable.");
     appendResolutionItems(effects, [], "No direct committed effects available.");
     return { ok: false, code: "empty_resolution" };
   }
-  for (const step of envelope.steps ?? []) {
+  const sequence = planResolutionSequence(envelope);
+  for (const step of sequence) {
     const item = document.createElement("li");
     item.className = "resolution-step";
-    item.dataset.stepId = step.id ?? "";
+    item.dataset.stepId = step.stage_id ?? "";
+    item.dataset.attentionPriority = String(step.attention_priority);
+    item.dataset.surfaceSync = step.surface_sync.join(",");
     const heading = document.createElement("div");
     heading.className = "timeline-row";
     const label = document.createElement("strong");
-    label.textContent = String(step.label ?? step.id ?? "Resolution step");
+    label.textContent = String(step.label ?? step.stage_id ?? "Resolution step");
     heading.append(label);
     const source = document.createElement("small");
     source.className = "source";
@@ -2146,7 +2152,8 @@ export function renderResolution(envelope, root = document) {
     }
     steps.append(item);
   }
-  if (!envelope.steps?.length) emptyState(steps, "No resolution steps available.");
+  if (!sequence.length) emptyState(steps, "No resolution steps available.");
+  if (progress) progress.textContent = `${sequence.length} written stages loaded; local pacing never removes committed text.`;
   appendResolutionItems(before, snapshotItems(envelope.before), "Decision-time snapshot unavailable.");
   appendResolutionItems(after, snapshotItems(envelope.after), "Post-resolution snapshot unavailable.");
   appendResolutionItems(
@@ -2161,14 +2168,14 @@ export function renderResolution(envelope, root = document) {
   return { ok: true, envelope };
 }
 
-export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, audio = null } = {}) {
   let envelope = null;
   let activeIndex = 0;
   let paused = true;
   let timer = null;
 
   function steps() {
-    return envelope?.steps ?? [];
+    return planResolutionSequence(envelope ?? {});
   }
 
   function updateControls() {
@@ -2181,9 +2188,10 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
     });
     const state = root.querySelector("#resolution-state");
     if (state && envelope) {
+      const current = steps()[activeIndex];
       state.textContent = paused
-        ? `Reviewing committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`
-        : `Playing committed turn ${envelope.turn ?? "—"} · step ${Math.min(activeIndex + 1, steps().length)} of ${steps().length}`;
+        ? `Reviewing committed turn ${envelope.turn ?? "—"} · ${current?.label ?? "resolution"} · state hash ${envelope.replay?.state_hash ?? "—"}`
+        : `Playing committed turn ${envelope.turn ?? "—"} · step ${Math.min(activeIndex + 1, steps().length)} of ${steps().length} · ${current?.label ?? "resolution"}`;
     }
   }
 
@@ -2197,6 +2205,11 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
     updateControls();
   }
 
+  function announceStep() {
+    const entry = steps()[activeIndex];
+    if (entry?.audio_cue) audio?.playCue?.(entry.audio_cue);
+  }
+
   function tick() {
     if (paused || activeIndex >= steps().length - 1) {
       paused = true;
@@ -2205,6 +2218,7 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
       return;
     }
     setStep(activeIndex + 1);
+    announceStep();
     timer = globalThis.setTimeout(tick, 700);
   }
 
@@ -2216,6 +2230,7 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
     updateControls();
     stopTimer();
     timer = globalThis.setTimeout(tick, 700);
+    announceStep();
     return { ok: true };
   }
 
@@ -2227,10 +2242,21 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
   }
 
   function skip() {
+    if (!envelope) return { ok: false, code: "resolution_missing" };
     paused = true;
     stopTimer();
-    setStep(Math.max(steps().length - 1, 0));
-    return { ok: true };
+    const skipped = sequenceForSkip(envelope);
+    setStep(skipped.active_index);
+    return { ok: true, ...skipped };
+  }
+
+  function advance() {
+    if (!envelope) return { ok: false, code: "resolution_missing" };
+    paused = true;
+    stopTimer();
+    setStep(activeIndex + 1);
+    announceStep();
+    return { ok: true, active_index: activeIndex, complete: activeIndex >= steps().length - 1 };
   }
 
   function review() {
@@ -2274,13 +2300,16 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
 
   root.querySelector("#resolution-play")?.addEventListener("click", play);
   root.querySelector("#resolution-pause")?.addEventListener("click", pause);
+  root.querySelector("#resolution-next")?.addEventListener("click", () => {
+    advance();
+  });
   root.querySelector("#resolution-skip")?.addEventListener("click", skip);
   root.querySelector("#resolution-review")?.addEventListener("click", review);
   root.querySelector("#load-resolution")?.addEventListener("click", () => {
     const input = root.querySelector("#resolution-turn");
     load(input?.value ? Number(input.value) : undefined);
   });
-  return { load, render, play, pause, skip, review, get envelope() { return envelope; } };
+  return { load, render, play, pause, skip, review, advance, get envelope() { return envelope; } };
 }
 
 export function renderPresentation(envelope, root = document) {

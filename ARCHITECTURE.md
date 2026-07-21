@@ -395,6 +395,15 @@ rules. `gui/motion-catalog.mjs` plans local presentation events only; the
 fixture proof demonstrates the policy without timers or host transitions, so
 motion remains supplementary to text and actor-visible state.
 
+The v0.12.69 Phase 6.2 resolution sequence adds a pure
+`gui/resolution-sequence.mjs` storyboard over the host-owned
+`competitive-resolution-v1` envelope. It maps the eight committed stages to
+display-only attention priority, regional-board/report/metric synchronization
+targets, and optional audio cue IDs. `gui/app.mjs` renders all stage text before
+local play, pause, advance, skip, review, or reduced-motion emphasis. The
+planner preserves unknown stages and explicit fallbacks, and cannot submit
+commands, resolve randomness, mutate history, write hashes, or infer causality.
+
 Last Reviewed: 2026-07-20
 Status: Verified
 

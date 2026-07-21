@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.69] - 2026-07-21
+
+- Added the Phase 6.2 first-month resolution storyboard over the existing
+  host-owned `competitive-resolution-v1` envelope.
+- Added display-only attention priority, board/report/metric synchronization
+  metadata, optional stage-aligned audio cue IDs, deterministic replay planning,
+  explicit advance/skip controls, and skip/reduced-motion text-retention tests.
+- Completed the Phase 6.2 checklist without changing simulation, host DTOs,
+  commands, randomness, history, hashes, replay authority, or debrief output.
+
 ## [0.12.68] - 2026-07-20
 
 - Added the Phase 6.1 deterministic motion catalog for nine visible presentation
