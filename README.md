@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.12.84. Its
+The current public milestone is a playable Rust prototype at v0.12.85. Its
 visual/audio Phase 8 readiness layer and Phase 9 deterministic capture-matrix
 analysis are complete for bounded onboarding, settings, recovery, structured
 capture diagnostics, and revision decision logging; Phase 10 adds keyboard
@@ -134,6 +134,9 @@ equivalents remain active without recorded audio, network, or host access.
 v0.12.84 adds a dependency-free SVG metadata sanitizer for explicit derivatives
 and a read-only approved-release check; canonical assets, accessibility title/
 description content, hashes, manifests, and runtime authority remain unchanged.
+v0.12.85 closes the Phase 9 automated license/provenance, credits, security,
+metadata, fallback, hash, and reproducibility evidence ledger without claiming
+legal clearance, asset quality, accessibility, ownership, or human review.
 It is intended for inspection, playtesting, portfolio review, and future educational design
 work. It is not a calibrated policy forecast or a model of any real institution.
 

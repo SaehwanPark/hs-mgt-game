@@ -1,3 +1,73 @@
+# Presentation Contract — Phase 9 technical closure v0.12.85
+
+## Goal and Authorization
+
+Record the completed automated Phase 9.1/9.2 release gates in the roadmap and
+protect their evidence limits. This slice is a contributor/release audit of
+existing validators, generated projections, manifests, fallbacks, and the SVG
+derivative check. It does not approve assets or add a player-facing signal.
+
+## Player Questions and Consequences
+
+There is no new player-facing behavior. Contributor-facing questions are:
+
+- Are the automated license, provenance, security, hash, reproducibility,
+  metadata, fallback, and credits gates present and passing?
+- Does the roadmap distinguish technical evidence from human legal, portrait,
+  accessibility, quality, decoder, and ownership review?
+
+No policy outcome, actor identity, severity, intent, or simulation state is
+derived from a checklist or validator result.
+
+## Actor-Visible Source Ledger
+
+| Artifact | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| License/provenance record | Canonical visual/audio registries | Validator fails on missing, invalid, or incompatible fields | No inference of legal clearance or ownership |
+| Release integrity | Security scanner, sanitizer, registry hashes, and manifest | Fail closed on unsafe content, metadata, missing files, or changed bytes | No automatic approval or promotion |
+| Presentation fallback | Existing local availability/playback contracts | Preserve written equivalents and generic fallbacks | No hidden-state or host inference |
+| Roadmap evidence | Passing tests and committed documentation | Keep unresolved human gates explicit | A checked technical item is not human review |
+
+## Visual, Motion, and Audio Semantics
+
+No runtime visual, motion, or audio behavior changes. Existing identity,
+facility, resolution, audio, fallback, and credits surfaces remain authoritative
+only for their existing actor-visible or local presentation contracts.
+
+## Accessibility and Fallbacks
+
+The audit requires existing written equivalents, mute/reduced-audio behavior,
+generic missing-asset fallback, and explicit missingness language to remain
+documented. It does not claim human accessibility quality.
+
+## Authority, History, and Replay Boundaries
+
+The audit reads repository files and test evidence only. It never changes host
+DTOs, commands, transitions, stochastic inputs, observations, history, hashes,
+replay artifacts, debrief facts, or runtime state.
+
+## Asset Provenance and Release Requirements
+
+Technical completion does not approve a current or future asset. Registry,
+source/release hash, license, provenance, accessibility, and human approval
+gates remain required for any release change.
+
+## Verification and Evidence Limits
+
+The roadmap closure test, asset validators, release manifest/credits checks,
+SVG release check, full Python/Rust/JavaScript checks, formatting, Clippy, and
+documentation checks are required. They establish automated technical evidence
+only, not legal clearance, decoder safety, quality, accessibility, ownership,
+or human review.
+
+## Non-Goals and Open Questions
+
+- No asset, dependency, registry, manifest, runtime, host, or simulation change.
+- No portrait approval, legal audit, browser/decoder study, or user evaluation.
+- Future human and product gates remain open until separately authorized.
+
+---
+
 # Presentation Contract — Phase 9.2 SVG metadata sanitizer v0.12.84
 
 ## Goal and Authorization

@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Roadmap Checklists Bound to Evidence
+
+- Context: Phase 9 technical work was implemented across several slices, but
+  the roadmap retained unchecked checklist items and “in progress” evidence
+  statuses.
+- Symptom: Stale planning text makes complete technical gates look unfinished,
+  while blindly checking every item could overclaim legal, quality, or human
+  review.
+- Resolution: Add a focused regression test for technical evidence closure and
+  record automated completion separately from explicit external review gates.
+- Prevention: Update checklist status in the same PR as the implementation,
+  cite concrete validators/tests/projections, and keep legal, ownership,
+  decoder, accessibility, quality, portrait, and human-review limits visible.
+
 ## Keep Release Transforms Explicit and Read-Only
 
 - Context: Phase 9.2 needed a way to remove SVG metadata after the release

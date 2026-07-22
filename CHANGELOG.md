@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.85] - 2026-07-21
+
+- Reconciled the Phase 9.1/9.2 roadmap with the passing automated license,
+  provenance, credits, security, metadata, fallback, hash, and reproducibility
+  gates.
+- Added a regression test that keeps technically evidenced release checklists
+  closed while preserving explicit human legal, portrait, decoder,
+  accessibility, ownership, quality, and review limits.
+- No asset, registry, release hash, manifest, runtime, host, simulation,
+  history, replay, or debrief artifact changed.
+
 ## [0.12.84] - 2026-07-21
 
 - Added a dependency-free SVG metadata sanitizer that removes only parsed
