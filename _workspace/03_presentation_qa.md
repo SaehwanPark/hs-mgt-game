@@ -31,8 +31,10 @@
   rival facility detail remains absent.
 - The presentation path imports pure catalogs only and does not fetch, submit
   commands, read core state, mutate history, or alter replay authority.
-- No asset bytes or registry entries change; known release paths are metadata
-  from the existing catalog and generic fallback has no release path.
+- No new asset bytes or registry entries are added; original hashes for the two
+  changed hand-authored adapter/renderer registry entries are refreshed. Known
+  release paths are metadata from the existing catalog and generic fallback
+  has no release path.
 
 ### Required Fixes
 

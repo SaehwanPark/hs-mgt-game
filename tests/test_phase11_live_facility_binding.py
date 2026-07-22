@@ -59,7 +59,13 @@ const detailEntities = regionalEntitiesToFixture({
 });
 const [detailKnown, detailFallback] = detailEntities[0].facilities;
 if (detailKnown.component_label !== 'General hospital base' || detailKnown.component_source !== 'Visible facility kind and actor-visible status context') process.exit(8);
-if (detailFallback.component_id !== 'generic-facility' || detailFallback.component_label !== 'Facility') process.exit(9);
+if (
+  detailFallback.component_id !== 'generic-facility'
+  || detailFallback.component_label !== 'Facility'
+  || detailFallback.component_source !== 'Missing or unknown visible facility kind'
+  || detailFallback.component_equivalent !== 'Facility label and generic marker'
+  || detailFallback.component_release_path !== null
+) process.exit(9);
 const svg = renderRegionalSvg(scene, { selectedId: known.id });
 for (const marker of [
   'data-component-id="general-hospital-base"',
