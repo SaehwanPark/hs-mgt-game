@@ -5245,6 +5245,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Automated file-shape checks do not establish legal clearance, decoder safety,
   audio quality, human accessibility, ownership, or human approval.
 
+### Visual/audio Phase 9.2 release reproducibility (v0.12.81)
+
+- Status: In progress; `scripts/verify_asset_release.py` derives a stable
+  manifest from approved registry release paths with sorted paths, byte sizes,
+  SHA-256 values, and a canonical manifest digest.
+- Release-only image/audio metadata checks fail closed for unexpected text,
+  EXIF/comment, application, tag, and descriptive metadata markers. Source
+  previews remain non-release inputs and are not rewritten by the audit.
+- The manifest and metadata checks are contributor/release artifacts only;
+  they cannot enter host DTOs, commands, simulation state, observations,
+  history, hashes, replay artifacts, or debrief facts. They do not establish
+  legal clearance, decoder safety, accessibility, ownership, or human review.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

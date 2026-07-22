@@ -1,0 +1,81 @@
+{
+  "schema_version": "asset-release-manifest-v1",
+  "files": [
+    {
+      "path": "assets/release/visual/svg/administrative-headquarters.svg",
+      "bytes": 1518,
+      "sha256": "sha256:e12ee927b1869a0bb0ee3238c944ab79e719b945f429e0507746acdfbe5697f4"
+    },
+    {
+      "path": "assets/release/visual/svg/ambulatory-center.svg",
+      "bytes": 1519,
+      "sha256": "sha256:1122c783d141f6aaf01e72eee1e3e1d63d35c8810181473117a6adf918f17923"
+    },
+    {
+      "path": "assets/release/visual/svg/construction-crane.svg",
+      "bytes": 1555,
+      "sha256": "sha256:c4a883a2a1909212d5114a2590250ae45752e7265dcc44bfa19a4fd3339025c7"
+    },
+    {
+      "path": "assets/release/visual/svg/emergency-department.svg",
+      "bytes": 1653,
+      "sha256": "sha256:a6ecafd6bc8a729fdfd626410807d3cd3e929abe5e1098e5e74f565ce2beab70"
+    },
+    {
+      "path": "assets/release/visual/svg/general-hospital-base.svg",
+      "bytes": 1524,
+      "sha256": "sha256:69273072f0d13017a4c6c06cc3d34b9644f3e3278e3537e2a35573ddbd567fec"
+    },
+    {
+      "path": "assets/release/visual/svg/northlake.svg",
+      "bytes": 617,
+      "sha256": "sha256:76965f3a89054d56e79c627649313879750ac8cd86848b325572db635df86190"
+    },
+    {
+      "path": "assets/release/visual/svg/parking-structure.svg",
+      "bytes": 1533,
+      "sha256": "sha256:12fa988dd00ff94ce83a03bc1ea53e7fd62417b31c21d341e2b92784d247f29b"
+    },
+    {
+      "path": "assets/release/visual/svg/patient-tower.svg",
+      "bytes": 1564,
+      "sha256": "sha256:7d5609762e85ff1e5e1f9d429bdd31ff31e24c28c78630271c281467307e608b"
+    },
+    {
+      "path": "assets/release/visual/svg/research-education-building.svg",
+      "bytes": 1646,
+      "sha256": "sha256:2f56aecaa91423549641acdeefbcaaced231afd7c433a077ecd6037b9febf1dd"
+    },
+    {
+      "path": "assets/release/visual/svg/riverside.svg",
+      "bytes": 676,
+      "sha256": "sha256:8cbbdb0cf83931aa61afc6c2f4bdf7b9fbb5aba4a15cdd384d6a4e61bbc9dd7b"
+    },
+    {
+      "path": "assets/release/visual/svg/rural-clinic.svg",
+      "bytes": 1496,
+      "sha256": "sha256:6939d8dc05902db45f79f0d6e29569f6adffbb03084c636a992b8391623ebc53"
+    },
+    {
+      "path": "assets/release/visual/svg/specialty-center.svg",
+      "bytes": 1488,
+      "sha256": "sha256:e5cddc4d5beaac6cecaa7bf36539203656734e83e0661bcb2f4795e7d82db58a"
+    },
+    {
+      "path": "assets/release/visual/svg/summit.svg",
+      "bytes": 623,
+      "sha256": "sha256:6a253e8272f69f23cc005ab31dd3b265bccc55c8af3815047b3751f341730fe6"
+    },
+    {
+      "path": "assets/release/visual/svg/undeveloped-parcel.svg",
+      "bytes": 1615,
+      "sha256": "sha256:4211eff1c6fbff95ac3ed58ffdc4a79dd9725063262ffc172d987e08f9cd4f39"
+    },
+    {
+      "path": "assets/release/visual/svg/utility-plant.svg",
+      "bytes": 1654,
+      "sha256": "sha256:bf971c25c6ae65bf4c8099968c89face6f2b66c07ba6365b115732ddcf6e882d"
+    }
+  ],
+  "manifest_sha256": "sha256:34e17c3f39203b75710b2f4534e89e392e3f0758ceb8a415db894d50e5aa6cdb"
+}

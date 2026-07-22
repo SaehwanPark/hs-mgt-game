@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.81] - 2026-07-21
+
+- Added release-only metadata auditing for image/audio files and a
+  deterministic registry-derived release manifest with byte sizes, hashes, and
+  a canonical digest.
+- Added stale-manifest, ordering, missing-file, hash-mismatch, and metadata
+  fixture coverage; CI and contributor guidance now check reproducibility.
+- Kept the audit non-mutating and left pending portraits outside runtime and
+  release authority.
+
 ## [0.12.80] - 2026-07-21
 
 - Added a dependency-free asset security scanner for registered source/release

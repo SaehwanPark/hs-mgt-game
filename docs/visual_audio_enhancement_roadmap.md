@@ -1849,6 +1849,26 @@ actual seed; per-portrait human review remains required.
   safety only; it does not establish legal clearance, decoder safety, audio
   quality, accessibility, ownership, or human review.
 
+### v0.12.81 release reproducibility target slice
+
+- Status: In progress in v0.12.81. The bounded Phase 9.2 slice adds a
+  non-mutating metadata audit for release image/audio files and a deterministic
+  manifest projection for approved registry release paths.
+- The manifest will record sorted relative paths, byte sizes, SHA-256 values,
+  and a canonical digest; CI will reject stale output, missing files, changed
+  hashes, and nondeterministic ordering.
+- Metadata checks fail closed for unexpected release image/audio metadata,
+  including image text/EXIF/comments, audio descriptive/application/tag
+  blocks, while documenting the preserved source-preview boundary. No file is
+  stripped, rewritten, promoted, or added by this slice.
+- Evidence: `scripts/verify_asset_release.py`,
+  `assets/ASSET_RELEASE_MANIFEST.json`, release metadata fixtures, CI wiring,
+  and the v0.12.81 implementation/QA records.
+- Evidence will remain limited: manifest parity and metadata shape do not
+  establish legal clearance, decoder safety, ownership, accessibility, audio
+  quality, or human review. Graceful runtime loading fallback remains a later
+  Phase 9.2 target.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

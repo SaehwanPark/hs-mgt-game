@@ -2249,3 +2249,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep security validation separate from registry metadata and
   human/legal review, report every failure deterministically, and never rewrite
   or delete an asset as part of validation.
+
+## Phase 16: Release manifests must be projections, not a second asset registry
+
+- Context: Phase 9.2 needed reproducible release evidence while the canonical
+  visual/audio registries remain the only authority for asset identity,
+  approval, and hashes.
+- Risk: A hand-maintained package inventory could drift in ordering, omit a
+  release file, or imply that metadata auditing had sanitized the source.
+- Resolution: Derive a sorted manifest from approved registry release paths,
+  compare recorded hashes and sizes, and audit release metadata without
+  rewriting bytes. Keep source previews outside the release-only metadata rule.
+- Prevention: Treat the manifest as a checked projection, require stale-output
+  failure in CI, and state that reproducibility evidence is not legal,
+  accessibility, decoder, or human-review evidence.
