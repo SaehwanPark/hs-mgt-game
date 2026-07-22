@@ -5349,6 +5349,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Deferred / Non-Goals: no runtime, asset, host, simulation, stochastic,
   history, replay, debrief, or authority change.
 
+### Visual/audio Phase 11.1 live facility-component binding (v0.12.89)
+
+- Status: In progress; the current actor-visible player facility groups now
+  have stable catalog bindings, while full campaign facility coverage remains
+  incomplete.
+- Done: explicit `component_id` fields in the regional-world DTO; exact
+  bindings for inpatient, outpatient, emergency/ICU, and specialty groups;
+  catalog-backed generic fallback; accessible board metadata; selected-detail
+  component label/source/equivalent; and deterministic Rust/Node/Python
+  evidence.
+- Not Yet Done: complete campaign facility taxonomy, asset-registry coverage,
+  screenshots, save/load/replay continuity, performance/compatibility, and
+  human quality review.
+- Deferred / Non-Goals: no new asset, host authority, simulation rule,
+  stochastic input, hidden-state projection, rival facility detail, history,
+  replay, or external network path.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -2415,6 +2415,24 @@ mod tests {
         .iter()
         .any(|entity| entity.visibility == "public identity")
     );
+    let owned_facilities = world
+      .entities
+      .iter()
+      .find(|entity| entity.visibility == "owned")
+      .expect("owned regional-world entity")
+      .facilities
+      .iter()
+      .map(|facility| facility.component_id.as_str())
+      .collect::<Vec<_>>();
+    assert_eq!(
+      owned_facilities,
+      vec![
+        "general-hospital-base",
+        "ambulatory-center",
+        "emergency-department",
+        "specialty-center",
+      ]
+    );
     assert!(world.overlays.iter().any(|overlay| overlay.id == "demand"));
     assert!(
       world

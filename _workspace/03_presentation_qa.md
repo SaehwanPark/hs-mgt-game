@@ -1,4 +1,72 @@
-# Presentation QA — Phase 11.1 campaign-coverage evidence v0.12.88
+# Presentation QA — Phase 11.1 live facility binding v0.12.89
+
+## Current slice: Phase 11.1 live facility-component binding v0.12.89
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Phase 11.1 in `docs/visual_audio_enhancement_roadmap.md`, the request
+  summary, implementation plan, presentation contract, Rust regional-world
+  projection, facility catalog, board/scene/app adapters, and focused tests.
+- This slice is authorized to bind current actor-visible facility groups to
+  existing catalog descriptors. Full campaign coverage, screenshots,
+  performance, compatibility, and human quality remain out of scope.
+
+### Information, Causality, Accessibility, and Audio Findings
+
+- Four current player-visible groups have exact component IDs; the emergency/
+  ICU group is documented as a bounded emergency-department equivalent.
+- Unknown IDs remain generic with source/equivalent text. Component identity
+  does not encode hidden state, severity, intent, causality, or outcome.
+- Board accessibility metadata and selected-detail written semantics are
+  covered by automated assertions; human accessibility and audio quality are
+  not inferred.
+
+### Provenance, Authority, and Replay Findings
+
+- The DTO derives component IDs from actor-visible `PlayerObservation` fields;
+  rival facility detail remains absent.
+- The presentation path imports pure catalogs only and does not fetch, submit
+  commands, read core state, mutate history, or alter replay authority.
+- No new asset bytes or registry entries are added; original hashes for the two
+  changed hand-authored adapter/renderer registry entries are refreshed. Known
+  release paths are metadata from the existing catalog and generic fallback
+  has no release path.
+
+### Required Fixes
+
+- The initial review requested a safe own-key fallback lookup, explicit
+  registry-hash wording, runtime selected-detail coverage, and current
+  verification evidence; all findings were addressed and the focused suite
+  passes.
+
+### Single code-review disposition
+
+The designated single code reviewer approved the final diff with no remaining
+actionable findings after the fallback, documentation, detail-coverage, and
+verification-evidence fixes; no second code reviewer was used.
+
+### Residual Risks and Evidence Limits
+
+Current binding evidence does not establish full facility taxonomy, registry
+completeness, campaign screenshots, save/load/replay continuity, performance,
+browser compatibility, asset quality, accessibility quality, audio usefulness,
+legal clearance, educational benefit, or human review.
+
+### Verification Evidence
+
+- Focused facility-binding, regional-board, GUI-contract, and release tests;
+  full Python suite (543 tests); Rust tests (328 unit tests plus integration/
+  golden suites); asset/security/release/credits/generation checks;
+  documentation links (368 Markdown files); JavaScript syntax, formatting,
+  and Clippy all pass locally.
+
+---
+
+# Historical Presentation QA — Phase 11.1 campaign-coverage evidence v0.12.88
 
 ## Current slice: Phase 11.1 bounded campaign-coverage evidence v0.12.88
 

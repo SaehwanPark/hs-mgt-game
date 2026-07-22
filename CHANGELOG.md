@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.89] - 2026-07-22
+
+- Bound the four current actor-visible player facility groups to stable
+  registered visual-component IDs in the regional-world DTO and board.
+- Added generic fallback, accessible component/source/equivalent semantics, and
+  selected facility detail presentation with focused regression coverage.
+- Kept full campaign facility coverage, asset completeness, continuity,
+  screenshot, performance, compatibility, and human-quality gates open.
+
 ## [0.12.88] - 2026-07-21
 
 - Added an exact Phase 11.1 coverage ledger for the current competitive

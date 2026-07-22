@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Live Facility Vocabulary Host-Shaped
+
+- Context: The regional board exposed four actor-visible facility groups while
+  the visual catalog contained more specific reusable components.
+- Risk: Inferring a hidden facility taxonomy or implying that a combined
+  emergency/ICU observation is an exact asset match would overstate what the
+  player can know.
+- Resolution: Add stable component IDs at the host projection boundary, bind
+  them through the existing pure catalog, and document `emergency-department`
+  as a bounded presentation equivalent. Keep rival facility detail absent and
+  use the generic descriptor for unknown content.
+- Prevention: Treat component IDs as presentation vocabulary, not simulation
+  state; require source/equivalent text and an explicit fallback in tests.
+
 ## Keep Campaign Coverage Bounded and Exact
 
 - Context: Phase 11.1 names a broad full-campaign expansion, while the

@@ -1,3 +1,4 @@
+import { facilityComponentFor } from "./facility-components.mjs";
 import { visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 
 const BOARD = Object.freeze({ width: 960, height: 600 });
@@ -71,6 +72,7 @@ function statusFor(value) {
 }
 
 function normalizeFacility(facility, index) {
+  const component = facilityComponentFor(facility?.component_id);
   const marker = visualMarkerFor({
     id: facility?.id,
     kind: facility?.kind,
@@ -83,6 +85,11 @@ function normalizeFacility(facility, index) {
     marker,
     status: statusFor(facility?.status),
     source: text(facility?.source, ""),
+    component_id: component.id,
+    component_label: component.label,
+    component_source: component.source,
+    component_equivalent: component.equivalent,
+    component_release_path: component.release_path ?? null,
   };
 }
 
@@ -130,10 +137,12 @@ function statusAttributes(status) {
 
 function renderFacility(facility, x, y, selectedId) {
   const selected = facility.id === selectedId;
-  const label = `${facility.label}; ${facility.status.label}; ${facility.marker.label}${facility.source ? `; Source: ${facility.source}` : ""}`;
-  const detail = `${facility.status.symbol} ${facility.status.label} · ${facility.marker.label}${facility.source ? ` · Source: ${facility.source}` : ""}`;
+  const label = `${facility.label}; ${facility.status.label}; ${facility.marker.label}; Component: ${facility.component_label}${facility.source ? `; Source: ${facility.source}` : ""}`;
+  const detail = `${facility.status.symbol} ${facility.status.label} · ${facility.marker.label} · ${facility.component_label}${facility.source ? ` · Source: ${facility.source}` : ""}`;
+  const componentDescription = `Visual component: ${facility.component_label}; Source: ${facility.component_source}; Equivalent: ${facility.component_equivalent}`;
   return `
-    <a href=\"#${escapeXml(facility.id)}\" role=\"button\" tabindex=\"0\" data-facility-id=\"${escapeXml(facility.id)}\" aria-label=\"Select ${escapeXml(label)}\">
+    <a href=\"#${escapeXml(facility.id)}\" role=\"button\" tabindex=\"0\" data-facility-id=\"${escapeXml(facility.id)}\" data-component-id=\"${escapeXml(facility.component_id)}\" aria-label=\"Select ${escapeXml(label)}\">
+      <title>${escapeXml(componentDescription)}</title>
       <rect x=\"${x}\" y=\"${y}\" width=\"250\" height=\"52\" rx=\"8\" fill=\"#ffffff\" stroke=\"${selected ? "#0b6e69" : "#9ec7c1"}\" stroke-width=\"${selected ? "4" : "2"}\" ${statusAttributes(facility.status)}/>
       <text x=\"${x + 14}\" y=\"${y + 22}\" class=\"label\" font-size=\"16\">${escapeXml(facility.marker.symbol)} ${escapeXml(facility.label)}</text>
       <text x=\"${x + 14}\" y=\"${y + 42}\" class=\"sub-label\" font-size=\"13\">${escapeXml(detail)}</text>
