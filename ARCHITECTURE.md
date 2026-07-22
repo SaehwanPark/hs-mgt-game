@@ -437,6 +437,17 @@ focus, reduced, and unavailable-audio behavior preserve written content.
 Stem state, recipes, crossfade metadata, timers, and playback never enter host
 payloads, simulation state, history, hashes, replay artifacts, or debriefs.
 
+The v0.12.73 Phase 7.4 priority manager adds
+`gui/audio-priority-contract.mjs` as a pure fixed policy for critical, major,
+routine, and ambient cue ordering. `gui/audio.mjs` batches synchronous visible
+cue requests, selects at most one critical cue per batch, aggregates routine
+requests, caps transient queue/voice counts, and applies bounded local ducking
+to background music/ambience. Explicit local audio preferences may persist in
+browser storage, but queue state, timers, ducking, and preferences never enter
+host payloads, simulation state, history, hashes, replay artifacts, or debriefs.
+Written visible consequences remain complete under mute, reduction, storage
+failure, focus loss, and unavailable audio.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

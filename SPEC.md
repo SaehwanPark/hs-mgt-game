@@ -5105,6 +5105,27 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   measured loudness, musical quality, fatigue, lived accessibility, human
   comprehension, learning, calibration, or policy validity.
 
+### Visual/audio Phase 7.4 audio priority and fatigue manager (v0.12.73)
+
+- Status: Complete; fixed priority policy, one-critical batching, routine
+  aggregation, duplicate suppression, bounded queue/voice behavior, ducking,
+  preference persistence, proof fixture, and stress coverage verified
+- Added `gui/audio-priority-contract.mjs` for pure deterministic cue-batch
+  planning. Critical cues precede major cues; routine requests aggregate; one
+  critical cue is selected per local batch; and queue/voice limits remain fixed.
+- Updated `gui/audio.mjs` to dispatch at most one transient cue voice, duck
+  ambience for major/critical cues and music for critical cues, and persist
+  only explicit local audio preferences when browser storage is available.
+- Added `gui/audio-priority-proof.html` and focused fake-Web-Audio/timer tests.
+  Written results, source/status text, mute/fallback controls, and live-region
+  behavior remain complete while queueing, aggregation, ducking, or storage
+  failure are local presentation states.
+- No host DTO, simulation transition, actor observation, history, hash, replay,
+  debrief, recorded-audio, network, or hidden-state change was introduced.
+- Contract/tests are technical consistency evidence only; they do not claim
+  measured loudness, fatigue reduction, lived accessibility, screen-reader
+  usability, human comprehension, learning, calibration, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

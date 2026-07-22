@@ -56,6 +56,9 @@ class GuiAudioTests(unittest.TestCase):
       'equivalent',
       'cooldown_ms',
       'MUSIC_STEM_CONTRACT',
+      'AUDIO_PRIORITY_POLICY',
+      'planAudioCueBatch',
+      'audio-priority-manager-v1',
     ):
       self.assertIn(marker, self.audio)
     self.assertEqual(self.registry["schema_version"], "audio-registry-v1")
@@ -117,6 +120,10 @@ class GuiAudioTests(unittest.TestCase):
       "setMuted",
       "setFocused",
       "setAmbienceFromVisible",
+      "AUDIO_PRIORITY_POLICY",
+      "queued_cues",
+      "ducking",
+      "persistAudioPreferences",
     ):
       self.assertIn(marker, self.audio + self.app)
     for selector in (

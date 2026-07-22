@@ -233,6 +233,22 @@ planner. The live panel keeps music optional, exposes `Music only mute`, and
 continues to support full mute and cues-only mode without removing written
 context.
 
+## Audio priority and fatigue proof
+
+Open `gui/audio-priority-proof.html` directly or through a static server to
+inspect the Phase 7.4 fixed priority order, one-critical-per-batch rule,
+routine aggregation, queue cap, simultaneous transient-voice bound, bounded
+ducking, local preference boundary, and written equivalents. The proof is
+fixture-only and does not load host state, submit a command, play audio, or use
+network resources.
+
+`audio-priority-contract.mjs` plans visible cue batches deterministically.
+`audio.mjs` dispatches at most one transient cue voice, suppresses repeats,
+ducks ambience for major/critical cues and music for critical cues, and stores
+only explicit local audio preferences when browser storage is available. All
+reports, sources, status text, and controls remain available when sound is
+queued, aggregated, ducked, muted, reduced, unsupported, or interrupted.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

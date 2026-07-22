@@ -170,10 +170,12 @@ class MusicStemContractTests(unittest.TestCase):
         const startsBeforeCue = started.length;
         client.setMusicMuted(true);
         client.playCue('ui.action-confirm');
+        await Promise.resolve();
         if (started.length !== startsBeforeCue + 1) process.exit(4);
         const startsBeforeFullMute = started.length;
         client.setMuted(true);
         client.playCue('ui.action-confirm');
+        await Promise.resolve();
         if (started.length !== startsBeforeFullMute) process.exit(5);
         client.destroy();
         console.log('pass');

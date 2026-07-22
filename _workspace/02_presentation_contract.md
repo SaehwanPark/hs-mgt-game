@@ -1,53 +1,94 @@
-# Presentation Contract — Phase 7.3 adaptive music stems
+# Presentation Contract — Phase 7.4 audio priority and fatigue manager
 
-## Authorized outcome
+## Goal and Authorization
 
-Provide seven optional generated music states that clarify visible strategic
-context and pacing without adding moral valence, hidden information, or a
-second authority. Existing state IDs remain stable; new states are selected only
-from actor-visible context.
+The player should be able to read a dense committed resolution without audio
+stacking, repeated tones, or background layers masking an important visible
+consequence. This slice authorizes a local priority/queue policy for the
+existing generated cues, music stems, and ambience bed. It does not authorize
+simulation, host, history, replay, or asset-source changes.
 
-## Source and output ledger
+## Player Questions and Consequences
 
-| State | Authorized source | Output | Safe fallback |
+| Player question | Visible source | Audio treatment | Written fallback |
 | --- | --- | --- | --- |
-| Menu/planning | Explicit page stage | Five generated stems with short planning cadence | Menu heading and controls |
-| Stable operations | Actor-visible operating summary | Base pulse plus low-intensity institutional/policy layers | Operations summary and status |
-| Pressure | Visible margin, unmet demand, runway, or pressure text | Bounded pressure layer and transition cadence | Pressure banner and affected metric |
-| Regulatory scrutiny | Visible regulatory/policy report or stage | Bounded policy layer | Regulatory report and status |
-| Competitive escalation | Visible public rival/market escalation | Bounded competitive layer | Public market signal and source |
-| Affiliation/negotiation | Visible affiliation or negotiation stage | Bounded institutional motif and cadence | Partner/negotiation text |
-| Debrief | Explicit debrief stage or completed session | Closing cadence | Debrief heading and timeline |
+| What needs attention first? | Committed visible critical/major cue entry | Priority order and one active transient voice | Existing heading, status, event, and source text |
+| Did several visible reports arrive together? | Same synchronous resolution batch | Routine/minor requests collapse to one representative cue with count metadata | All reports remain in the visible list |
+| Is the signal repeated? | Cue ID plus local request time | Existing cue cooldown and in-batch duplicate suppression | Repeated visible text remains unchanged |
+| Is background audio masking the consequence? | Local cue priority and active background layers | Bounded ambience/music ducking | Visible consequence and audio-equivalent text remain complete |
+| What are my local preferences? | Local browser storage only | Restore mode, mute, reduced notifications, and volumes when available | Controls and written results work when storage is absent |
 
-Every state has base pulse, institutional motif, visible pressure layer, policy
-layer, and transition cadence recipes. Music is generated at playback time with
-no speech, no real institution names, and no hidden-state or victory/defeat
-encoding. Crossfades are bounded metadata and runtime fades, not a promise of
-measured musical quality.
+## Actor-Visible Source Ledger
 
-## Audio behavior
+| Semantic element | Authorized source and timing | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Cue priority | `audio-cue-contract.mjs` priority class attached to an already visible cue request | Unknown cue is rejected without sound | No local severity, intent, probability, or outcome classification |
+| Batch membership | Synchronous local calls between queue flushes | A single request forms a one-item batch | No reconstruction of host transition boundaries |
+| Duplicate/cooldown state | Local cue ID and browser clock | Suppress sound but retain visible result | No hidden state or true-state timing |
+| Ducking target | Local channel and cue priority policy | No background gain change when audio is unavailable | No inferred urgency beyond the cue contract label |
+| Preferences | Explicit user controls and local storage | Defaults/session-local state | No account, host, or cross-session identity data |
 
-- Music is optional and independently suppressible through music-only mute, full
-  mute, cues-only, focus loss, reduced notifications, or unavailable audio.
-- Music does not mask visible text, event cues, or reading controls.
-- Only explicit actor-visible stage, report, observation, or process text may
-  select a state. No private rival state, true state, resolved input, inferred
-  severity, or hidden outcome may select it.
-- Missing or unknown state inputs use stable operations with a written generic
-  fallback; unsupported audio is silent.
+## Visual, Motion, and Audio Semantics
 
-## Provenance and authority
+- Priority classes are ordering controls, not moral valence, clinical severity,
+  actor intent, probability, or a forecast.
+- Critical beats major, major beats routine, and routine/minor requests may be
+  aggregated. At most one critical request is selected per local batch.
+- One transient interface/event cue voice is active at a time. Music stems and
+  one ambience bed remain separate optional background layers.
+- Major and critical cues apply bounded local ducking: ambience ducks for both;
+  music ducks for critical only. Ducking ramps must have explicit attack and
+  release bounds and must not replace visible content.
+- Queue overflow is bounded and reported as suppressed/aggregated metadata;
+  it never creates an uncontrolled sound stack.
+- Focus loss, reduced notifications, cues-only, music-only mute, full mute,
+  unavailable audio, and storage failure leave written state complete.
 
-All seven states and their stems are project-generated in the repository. The
-catalog records the module source hash and no release audio file is distributed.
-State selection, stem recipes, crossfade metadata, timers, and playback remain
-local presentation state and never enter commands, transitions, history,
-hashes, replay, or debrief.
+## Accessibility and Fallbacks
 
-## Evidence limits
+- `#audio-state` remains a polite live status region; control labels and
+  `#audio-equivalent` explain optional audio state in text.
+- No meaning depends on pitch, loudness, timing, or background sound alone.
+- Reduced notifications suppress eligible transient audio while preserving
+  visible event text and source/status labels.
+- Full mute, music-only mute, cues-only, unsupported Web Audio, reduced motion,
+  and blocked local storage use complete visual/text fallbacks.
+- Rapid queue draining must not reorder DOM updates or steal focus from the
+  active form/control.
 
-The proof/tests establish metadata completeness, deterministic recipe shape,
-visible-only classification, replay sequence determinism, safe fallback, and
-mute behavior. They do not establish acoustic quality, audibility, fatigue,
-lived accessibility, musical preference, human comprehension, learning,
-calibration, or policy validity.
+## Authority, History, and Replay Boundaries
+
+The browser queue, cooldowns, timers, ducking gains, active voices, and stored
+preferences are reversible local presentation state. They never enter command
+payloads, host transitions, true state, observations, immutable history, state
+hashes, replay artifacts, or debrief facts. The host remains authoritative for
+all visible cue triggers and written consequences.
+
+## Asset Provenance and Release Requirements
+
+This slice reuses the existing project-generated Web Audio recipes and adds no
+recorded files or third-party dependencies. The cue, music, and ambience source
+hashes and approval records remain in `assets/registry/audio-assets.json`;
+generated catalog/credits checks must pass. The priority manager is code and
+policy metadata, not a releasable audio asset.
+
+## Verification and Evidence Limits
+
+Focused tests must cover pure batch planning, one-critical selection,
+duplicate/cooldown/aggregation behavior, queue cap, ducking targets, fake
+Web-Audio voice counts, preference persistence/failure, rapid input, dense
+month-resolution requests, and text/live-region markers. Full repository
+checks remain required. These checks do not establish measured loudness,
+fatigue reduction, lived accessibility, screen-reader usability, human
+comprehension, learning, calibration, or policy validity.
+
+## Non-Goals and Open Questions
+
+- No priority changes to the simulation or host contracts.
+- No audio scoring, adaptive difficulty, hidden-state alerting, or automatic
+  severity derivation.
+- Human review remains needed for cue audibility, screen-reader coexistence,
+  fatigue, and classroom suitability.
+- Later work may revisit user-configurable priority preferences only with an
+  explicit contract; this slice uses fixed policy order and local mute/volume
+  controls.
