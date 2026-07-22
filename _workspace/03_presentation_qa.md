@@ -1,4 +1,81 @@
-# Presentation QA — Phase 9.1 in-game credits v0.12.79
+# Presentation QA — Phase 9.2 asset security scanner v0.12.80
+
+## Current slice: Phase 9.2 asset security scanner v0.12.80
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.2 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- The canonical registries, source/release roots, preserved portrait previews,
+  security scanner, release guidance, CI wiring, and focused fixture tests.
+- This is a contributor/release-only validation gate. No asset was rewritten,
+  deleted, downloaded, approved, or promoted.
+
+### Information and Causality Findings
+
+- The scanner produces deterministic security diagnostics only. It does not
+  derive player outcomes, actor intent, severity, causality, or hidden state.
+- File paths and signatures are release artifacts and do not alter actor-visible
+  observations or runtime presentation.
+
+### Accessibility and Fallback Findings
+
+- No runtime asset loading or fallback behavior changed. Existing written
+  equivalents, generic fallbacks, reduced-motion, mute, and missing-asset
+  contracts remain untouched.
+- Rejected files fail the contributor/release check before packaging; the
+  scanner does not silently transform a file into a different presentation.
+
+### Provenance and Rights Findings
+
+- SVG executable content, external references, raster embedding, foreign
+  objects, metadata, external fonts/imports, entities, malformed XML, file
+  size, view-box, raster-dimension, and audio-signature checks are explicit and
+  fail closed.
+- The security gate complements registry license/provenance and hash checks;
+  it does not establish legal clearance, ownership, decoder safety, audio
+  quality, or human review.
+
+### Authority and Replay Findings
+
+- `scripts/validate_asset_security.py` is read-only and dependency-free. It
+  uses no network, commands, host/session data, simulation transitions,
+  stochastic inputs, history, hashes, replay, or debrief paths.
+- No scanner output enters runtime payloads, actor observations, state hashes,
+  immutable history, replay artifacts, or debrief facts.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no
+actionable findings. The review confirmed decoded SVG CSS/style URLs and XML
+stylesheet references are bounded to internal fragments, registry parsing and
+scope are fail-closed, oversized files are not loaded, binary payload/frame
+checks reject truncated containers, and dimension grammars remain strict.
+
+### Residual Risks and Evidence Limits
+
+The scanner detects bounded classes of unsafe content and malformed signatures
+only. It does not prove that every decoder is safe, an asset is legally
+distributable, audio is high quality, content is accessible, or human review
+has occurred.
+
+### Verification Evidence
+
+- `python3 scripts/validate_asset_security.py` (40 repository files)
+- `python3 -m unittest tests.test_asset_security` (7 tests)
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (502 tests)
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/check_release_metadata.py`
+- JavaScript syntax checks and `git diff --check`
 
 ## Current slice: Phase 9.1 in-game credits v0.12.79
 

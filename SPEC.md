@@ -5233,6 +5233,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   replay, or debrief authority changed; the panel is not human accessibility
   or legal-review evidence.
 
+### Visual/audio Phase 9.2 asset security scanner (v0.12.80)
+
+- Status: In progress; `scripts/validate_asset_security.py` scans current
+  source/release files and preserved portrait previews without mutation or
+  network access.
+- The gate rejects unsafe SVG content, malformed XML, oversized files,
+  excessive dimensions, and mismatched PNG/JPEG/GIF/WAV/OGG/MP3/FLAC
+  signatures. It is independent of runtime, host, simulation, and replay
+  authority.
+- Automated file-shape checks do not establish legal clearance, decoder safety,
+  audio quality, human accessibility, ownership, or human approval.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

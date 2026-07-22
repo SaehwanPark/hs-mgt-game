@@ -1,30 +1,31 @@
-# Request Summary — Visual/audio Phase 9.1 in-game credits v0.12.79
+# Request Summary — Visual/audio Phase 9.2 asset security scanner v0.12.80
 
 ## Authorized outcome
 
-Expose a read-only, keyboard-accessible in-game credits surface backed by the
-canonical generated asset provenance projection, without inventing external
-sources or promoting the pending portrait previews.
+Add a dependency-free asset security/integrity scanner for the visual/audio
+asset paths in scope, with fail-closed SVG safety, file-size/dimension limits,
+audio signature checks, and focused tests without adding external assets.
 
 ## Target slice
 
-- Generate `gui/asset-credits.mjs` from the canonical registry and keep it
-  stale-checkable alongside the existing credits/notices outputs.
-- Add a visible Asset credits and provenance panel in the static executive
-  desktop with source, license, approval, provenance, accessibility, and
-  release-status text for each registry entry.
-- Preserve text-first, keyboard, large-text, reduced-motion, and no-network
-  behavior; the panel must remain available when host/session data is absent.
-- Keep all current entries repository-authored with no third-party or
-  portrait-release assets.
+- Add `scripts/validate_asset_security.py` to scan registered source/release
+  files plus preserved generation previews in a bounded asset root.
+- Reject SVG scripts, event handlers, external references, embedded raster
+  images, foreign objects, external fonts, entity declarations, and malformed
+  or overlarge view boxes; enforce a per-file byte limit.
+- Validate PNG/JPEG/GIF dimensions and WAV/OGG/MP3/FLAC signatures when those
+  files are present; fail closed on unsupported audio extensions or signatures.
+- Add focused malicious-fixture, dimension, size, codec, and repository-scan
+  tests and wire the scanner into CI/release guidance.
+- Keep all current assets unchanged and keep pending portraits outside runtime
+  and release authority.
 
 ## Sources
 
-- `docs/visual_audio_enhancement_roadmap.md` — Milestone 9.1.
+- `docs/visual_audio_enhancement_roadmap.md` — Milestone 9.2.
 - `assets/registry/visual-assets.json` and `audio-assets.json`.
-- `scripts/generate_asset_credits.py`, `assets/ASSET_CREDITS.md`, and
-  `assets/THIRD_PARTY_NOTICES.md`.
-- `gui/index.html`, `gui/app.mjs`, and current static GUI tests.
+- `assets/source/`, `assets/release/`, and preserved generation previews.
+- `scripts/validate_assets.py` and current release guidance.
 - `docs/design_principles.md`, `LESSONS.md`, and the current presentation QA.
 
 ## Non-goals
@@ -38,14 +39,15 @@ sources or promoting the pending portrait previews.
 
 ## Validation target
 
-Generated runtime credits, registry/projection parity, HTML/DOM accessibility,
-no-network/static-boundary checks, existing generation/release/documentation
-checks, full Python/Rust tests, formatting, Clippy, JavaScript, and diff
-checks.
+Asset security scanner, registry/release hash checks, malicious fixtures,
+dimension/size/audio signature checks, existing generation/credits/release/
+documentation checks, full Python/Rust tests, formatting, Clippy, JavaScript,
+and diff checks.
 
 ## Evidence limits
 
-The in-game panel makes the current registry projection visible but does not
-perform a legal review or establish human accessibility. Portrait human
+The scanner establishes bounded file-shape and signature safety only; it does
+not sanitize or rewrite files, prove legal clearance, establish human
+accessibility, validate audio quality, or replace human review. Portrait human
 decisions, approved local model/seed provenance, release derivatives, and
 registry bridges remain explicit external gates.

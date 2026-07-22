@@ -16,6 +16,7 @@ Validate the repository with:
 
 ```bash
 python3 scripts/validate_assets.py
+python3 scripts/validate_asset_security.py
 python3 scripts/generate_asset_credits.py --check
 python3 scripts/generate_asset_credits.py --notices
 python3 scripts/generate_asset_credits.py --runtime
@@ -40,3 +41,5 @@ reviewer checks the repository and metadata; the project maintainer approves
 release use. Contributors must preserve source outputs and modification notes.
 The static GUI's in-game credits disclosure is generated from the same registry
 projection at `gui/asset-credits.mjs`; it is not a separate source of rights.
+The security scanner checks bounded SVG content, binary dimensions, file sizes,
+and audio signatures without rewriting files.

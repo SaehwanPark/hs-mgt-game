@@ -19,6 +19,7 @@ Before opening a pull request that adds or changes a visual or audio asset:
 - Confirm meaning survives no color, reduced motion, mute, missing assets, and
   large text. Decorative assets must be labeled decorative.
 - Run `python3 scripts/validate_assets.py` and
+  `python3 scripts/validate_asset_security.py`, then
   `python3 scripts/generate_asset_credits.py --check`. The latter checks both
   generated credits, `assets/THIRD_PARTY_NOTICES.md`, and the in-game
   `gui/asset-credits.mjs` projection.

@@ -490,6 +490,14 @@ static presentation surface: it uses no network or commands and cannot enter
 host payloads, simulation state, actor observations, history, hashes, replay,
 or debrief artifacts.
 
+The v0.12.80 Phase 9.2 security gate scans bounded asset roots and registered
+source/release paths with dependency-free signature and content checks. It
+rejects executable or external SVG constructs, oversized files, excessive
+dimensions, malformed raster headers, and mismatched audio signatures without
+rewriting bytes. The scanner is a contributor/release boundary and cannot
+enter host payloads, simulation state, actor observations, history, hashes,
+replay artifacts, or debriefs.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

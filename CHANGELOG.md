@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.80] - 2026-07-21
+
+- Added a dependency-free asset security scanner for registered source/release
+  files and preserved portrait previews.
+- Added fail-closed SVG content checks, file-size/pixel/dimension bounds, and
+  PNG/JPEG/GIF/WAV/OGG/MP3/FLAC signature validation with fixture coverage.
+- Wired the scanner into CI and release guidance without rewriting assets or
+  changing runtime/simulation authority.
+
 ## [0.12.79] - 2026-07-21
 
 - Added a read-only, keyboard-accessible in-game asset credits and provenance
