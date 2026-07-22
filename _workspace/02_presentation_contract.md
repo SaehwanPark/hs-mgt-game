@@ -1,12 +1,12 @@
-# Presentation Contract — Phase 8.2 fictional actor portrait slice
+# Presentation Contract — Phase 8.2 remaining fictional actor portrait previews
 
 ## Goal and Authorization
 
 Fictional actor portraits must be traceable from an approved local model and
 prompt request through preserved source output, post-processing, human review,
-and release-asset registry entry. This first slice defines the set and prepares
-one reviewable candidate; it does not promote an unverified output into the
-runtime or release manifest.
+and release-asset registry entry. This slice prepares the six remaining role
+previews under the existing set contract; it does not promote unverified
+outputs into the runtime or release manifest.
 
 ## Player Questions and Consequences
 
@@ -17,7 +17,7 @@ Portraits add only a bounded identity aid. Contributor-facing questions are:
   output, post-processing, and release derivative?
 - Can the project reject resemblance, protected marks, clinical implausibility,
   missing alt text, incomplete provenance, or unreviewed release state?
-- Can a portrait be disabled without losing written actor identity or role?
+- Can each portrait be disabled without losing written actor identity or role?
 - Does a future asset fail closed when source/release hashes or registry links
   are missing?
 
@@ -71,7 +71,7 @@ references, source hash, optional release path/hash, human-review checklist,
 approval status, and target visual/audio registry ID. The approved-model file
 records the model-card review date, immutable repository revision, and scope
 limitations. No model weights or hosted inference outputs are committed by
-this first portrait slice.
+this bounded preview slice.
 
 ## Verification and Evidence Limits
 
@@ -86,7 +86,7 @@ plausibility, accessibility, learning, or policy validity.
 
 ## Non-Goals and Open Questions
 
-- No runtime portrait set or approved output asset is in scope until the
+- No runtime portrait set or approved output asset is in scope until each
   per-portrait generation and human-review gate passes.
 - `FLUX.1-schnell` is listed only as a local prototype candidate under its
   model-card license statement and access conditions; legal review remains

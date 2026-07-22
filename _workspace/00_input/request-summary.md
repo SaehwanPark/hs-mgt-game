@@ -1,25 +1,26 @@
-# Request Summary — Visual/audio Phase 8.2 first fictional actor portrait slice v0.12.75
+# Request Summary — Visual/audio Phase 8.2 remaining actor portrait previews v0.12.76
 
 ## Authorized outcome
 
-Complete the first bounded Phase 8.2 portrait slice: define the coherent
-fictional actor-portrait contract and prepare a reviewable rival-system
-executive candidate without leaking outcome, severity, or hidden state through
-the image. Preserve provenance, reproducibility, human review, and release
-gates. Do not approve a portrait for runtime/release until the Phase 8.1
-metadata validator accepts its source/release hashes, model revision, registry
-bridge, and human-review fields.
+Complete the second bounded Phase 8.2 portrait slice: prepare the remaining
+six fictional actor-role previews under the existing coherent portrait
+contract, without leaking outcome, severity, or hidden state through the image.
+Preserve provenance, reproducibility, human review, and release gates. Do not
+approve any portrait for runtime/release until the Phase 8.1 metadata validator
+accepts its source/release hashes, model revision, registry bridge, and
+portrait-specific review fields.
 
 ## Target slice
 
 - Define the seven-role portrait set and shared editorial style contract.
-- Define the first target role as a rival system executive with a chest-up,
-  consistent-crop, neutral institutional-background composition.
+- Prepare payer negotiator, regulator, labor representative, community leader,
+  board chair, and affiliation partner executive previews with the same
+  chest-up, consistent-crop, neutral institutional-background composition.
 - Capture the exact portrait prompt, negative prompt, seed, settings, source
   output, post-processing, accessible equivalent, and fallback requirements.
 - Add portrait-set proof and focused contract tests while keeping approval
   fail-closed through the Phase 8.1 generation validator.
-- Keep the first candidate outside the approved release manifest if its model
+- Keep every candidate outside the approved release manifest if its model
   identity or human review cannot be verified in this environment.
 
 ## Sources

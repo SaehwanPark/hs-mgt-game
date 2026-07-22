@@ -1728,12 +1728,12 @@ asset, or release asset is included in this slice.
 
 ## Milestone 8.2: Fictional actor portrait set
 
-**Status:** In progress in v0.12.75. The seven-role portrait contract and
-shared editorial style are defined, and the rival-system-executive preview is
-preserved as an explicitly unverified candidate. The preview is not in the
-visual asset registry, release directory, or generation manifest because the
-preview tool does not expose the approved local model revision or actual seed;
-per-portrait human review remains required.
+**Status:** In progress in v0.12.76. The seven-role portrait contract and
+shared editorial style are defined, and one preserved preview now exists for
+each canonical role. All seven candidates remain explicitly unverified and are
+not in the visual asset registry, release directory, or generation manifest
+because the preview tool does not expose the approved local model revision or
+actual seed; per-portrait human review remains required.
 
 ### Initial portrait roles
 
@@ -1772,6 +1772,24 @@ per-portrait human review remains required.
   release rule without network or host access. Contract checks do not establish
   human recognition, legal clearance, quality, accessibility, or educational
   benefit.
+
+### v0.12.76 remaining-role evidence and limits
+
+- Six additional preserved PNG previews cover payer negotiator, regulator,
+  labor representative, community leader, board chair, and affiliation partner
+  executive. Each entry records the role-specific prompt and negative prompt,
+  source path/hash, dimensions, capture date, contributor, written equivalent,
+  generic fallback, and pending portrait-review fields.
+- assets/generation/portrait-previews.json now requires exactly one preview for
+  every canonical role. portrait-set.json marks the six current-slice targets,
+  while all candidates remain outside the visual registry, release directory,
+  runtime GUI, and generation manifest.
+- The proof displays the complete candidate gallery and the focused tests cover
+  exact role coverage, current-slice targeting, hash binding, null model/seed
+  provenance, fallback/review fields, and blocked registry promotion.
+- This preview packaging does not establish human recognition, legal
+  clearance, training-data provenance, output ownership, measured quality,
+  lived accessibility, learning, or policy validity.
 
 ### Checklist per portrait
 

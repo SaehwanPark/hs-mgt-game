@@ -417,3 +417,61 @@ focused tests and registry checks were rerun afterward.
 - `git diff --check`
 
 All checks passed at the time of QA.
+# Presentation QA — Phase 8.2 remaining actor portrait previews v0.12.76
+
+## Current slice: Phase 8.2 remaining actor portrait previews v0.12.76
+
+### Status
+
+`pass`
+
+### Reviewed inputs and scope
+
+- Milestone 8.2 in `docs/visual_audio_enhancement_roadmap.md`;
+  `_workspace/00_input/request-summary.md`; and
+  `_workspace/02_presentation_contract.md`.
+- The seven-role portrait set, seven preserved preview PNGs, preview metadata,
+  proof gallery, generation validator, and focused portrait tests.
+
+The current slice adds payer negotiator, regulator, labor representative,
+community leader, board chair, and affiliation partner executive previews.
+They remain identity-only decorations with written role labels, accessible
+equivalents, generic fallbacks, and no score, severity, intent, outcome, or
+hidden-state meaning. All candidates remain pending because the preview tool
+does not expose the approved local model revision or actual seed.
+
+### Review gates
+
+- Exact canonical role coverage and one preview per role.
+- Hash-bound source PNGs with matching dimensions and repository-relative paths.
+- Null model/revision/seed, pending approval, empty release/registry bridge,
+  and empty generation manifest for every unverified candidate.
+- Small-size/grayscale requirements, generic fallback, no public-figure or
+  protected-mark implication, and no runtime/host/simulation authority change.
+
+### Single code-review disposition
+
+The one designated read-only reviewer identified five findings; all were
+resolved before handoff. Validation now binds each role to a unique
+role-derived source path, requires explicit settings/source-reference/date and
+nullable provenance fields, rejects absolute paths, and blocks unverified
+model/license/card/sampler/seed claims. Proof tests now cover canonical role
+labels, families, fallbacks, accessible equivalents, and preview paths. The
+duplicate QA section was removed.
+
+### Evidence limits
+
+Preview packaging does not establish human recognition, cross-cultural
+interpretation, legal clearance, training-data provenance, output ownership,
+measured quality, lived accessibility, clinical plausibility, learning, or
+policy validity.
+
+### Verification evidence
+
+- `python3 -m unittest tests.test_portrait_workflow`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (483 tests)
+- `python3 scripts/validate_generation_metadata.py`
+- `cargo test -- --test-threads=1`
+- `git diff --check`
+
+# Presentation QA — Phase 8.2 first fictional actor portrait slice v0.12.75

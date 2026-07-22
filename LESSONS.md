@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Keep a Complete Preview Set Explicitly Unreleased
+
+- Context: The second Phase 8.2 slice added the remaining six fictional actor
+  portrait candidates after the first rival-system-executive preview.
+- Symptom: A partial preview manifest can drift from the canonical role set,
+  making a polished candidate look more complete or approved than it is.
+- Resolution: Require exactly one hash-bound preview for every canonical role,
+  mark the six current-slice targets explicitly, show all candidates in the
+  fixture proof, and keep model/seed/review/registry gates pending.
+- Prevention: Validate the role set and preview set together, test duplicate and
+  missing-role failures, and maintain generic written fallbacks when previews
+  are disabled or withheld.
+
 ## Keep Portrait Identity Decorative and Provenance Honest
 
 - Context: Phase 8.2 introduced fictional actor portrait work after the local

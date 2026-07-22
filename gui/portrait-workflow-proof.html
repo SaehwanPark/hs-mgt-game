@@ -9,6 +9,9 @@
       body { background: #f3f7f6; color: #173c3a; margin: 0 auto; max-width: 72rem; padding: 2rem 1rem 4rem; }
       main { background: #fff; border: 1px solid #c6d7d4; border-radius: .8rem; padding: 1.25rem; }
       .grid { display: grid; gap: 1rem; grid-template-columns: minmax(12rem, 18rem) 1fr; }
+      .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); margin: 1rem 0; }
+      .gallery figure { margin: 0; }
+      .gallery figcaption { font-size: .85rem; margin-top: .25rem; }
       img { border: 1px solid #c6d7d4; border-radius: .6rem; display: block; max-width: 100%; }
       table { border-collapse: collapse; margin: 1rem 0 1.5rem; width: 100%; }
       th, td { border: 1px solid #c6d7d4; padding: .55rem; text-align: left; vertical-align: top; }
@@ -20,7 +23,7 @@
   <body>
     <main>
       <h1>Fictional actor portrait workflow</h1>
-      <p class="note">Fixture-only Phase 8.2 proof. The candidate below is an unverified preview: it is not in the release manifest, visual asset registry, or runtime GUI.</p>
+      <p class="note">Fixture-only Phase 8.2 proof. All seven candidates below are unverified previews: they are not in the release manifest, visual asset registry, or runtime GUI.</p>
       <div class="grid">
         <figure>
           <img src="../assets/generation/portrait-previews/rival-system-executive-preview.png" alt="Fictional rival health-system executive portrait; identity decoration only." />
@@ -32,9 +35,17 @@
           <p id="release-rule" class="blocked"></p>
         </div>
       </div>
+      <div class="gallery" aria-label="Remaining role preview candidates">
+        <figure><img src="../assets/generation/portrait-previews/payer-negotiator-preview.png" alt="Fictional payer negotiator portrait; identity decoration only." /><figcaption>Payer negotiator</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/regulator-preview.png" alt="Fictional regulator portrait; identity decoration only." /><figcaption>Regulator</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/labor-representative-preview.png" alt="Fictional labor representative portrait; identity decoration only." /><figcaption>Labor representative</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/community-leader-preview.png" alt="Fictional community leader portrait; identity decoration only." /><figcaption>Community leader</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/board-chair-preview.png" alt="Fictional nonprofit board chair portrait; identity decoration only." /><figcaption>Board chair</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/affiliation-partner-executive-preview.png" alt="Fictional affiliation partner executive portrait; identity decoration only." /><figcaption>Affiliation partner executive</figcaption></figure>
+      </div>
       <table>
         <caption>Portrait roles</caption>
-        <thead><tr><th>Role</th><th>Family</th><th>Fallback</th><th>First slice</th></tr></thead>
+        <thead><tr><th>Role</th><th>Family</th><th>Fallback</th><th>First slice</th><th>Current slice</th></tr></thead>
         <tbody id="roles"></tbody>
       </table>
       <table>
@@ -45,13 +56,13 @@
     </main>
     <script type="module">
       const roles = [
-        ["Rival system executive", "competitor", "Competitor actor marker + role label", "yes"],
-        ["Payer negotiator", "payer", "Payer actor marker + role label", "later"],
-        ["Regulator", "regulator", "Regulator actor marker + role label", "later"],
-        ["Labor representative", "labor", "Labor actor marker + role label", "later"],
-        ["Community leader", "community", "Community actor marker + role label", "later"],
-        ["Board chair", "board", "Board actor marker + role label", "later"],
-        ["Affiliation partner executive", "partner", "Partner actor marker + role label", "later"],
+        ["Rival system executive", "competitor", "Competitor actor marker with the written role label.", "yes", "previous"],
+        ["Payer negotiator", "payer", "Payer actor marker with the written role label.", "later", "yes"],
+        ["Regulator", "regulator", "Regulator actor marker with the written role label.", "later", "yes"],
+        ["Labor representative", "labor", "Labor actor marker with the written role label.", "later", "yes"],
+        ["Community leader", "community", "Community actor marker with the written role label.", "later", "yes"],
+        ["Board chair", "board", "Board actor marker with the written role label.", "later", "yes"],
+        ["Affiliation partner executive", "partner", "Partner actor marker with the written role label.", "later", "yes"],
       ];
       const reviews = [
         ["Identity consistency", "Role is recognizable without implying a real person."],
@@ -74,7 +85,7 @@
       }
       appendRows(document.querySelector("#roles"), roles);
       appendRows(document.querySelector("#reviews"), reviews);
-      document.querySelector("#candidate-status").textContent = "Candidate status: unverified preview";
+      document.querySelector("#candidate-status").textContent = "Candidate status: seven unverified previews; six added in the current slice";
       document.querySelector("#style-summary").textContent = "Shared style: non-photorealistic editorial illustration, chest-up square crop, neutral institutional background, muted teal/slate/sand/off-white palette, identity decoration only.";
       document.querySelector("#release-rule").textContent = "Release blocked until the approved local model revision and actual seed are captured, human review is complete, hashes match, and the visual registry bridge is approved.";
     </script>
