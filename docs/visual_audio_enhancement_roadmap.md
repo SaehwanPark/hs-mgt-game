@@ -1893,6 +1893,18 @@ actual seed; per-portrait human review remains required.
   local status text, and no-authority tests. No recorded audio, decoder,
   network fetch, external asset, host field, or simulation change is planned.
 
+### v0.12.84 SVG metadata sanitizer target slice
+
+- Status: Complete in v0.12.84. Added a deterministic, dependency-free transform for explicit
+  SVG derivatives that removes `<metadata>` while preserving `<title>` and
+  `<desc>` accessibility content.
+- The read-only release check verifies all approved release SVGs are already
+  sanitized without rewriting canonical files, registry hashes, or manifests.
+- Evidence will remain limited to transformation fixtures, path/symlink
+  failures, release-root parity, and existing security/release checks. Raster,
+  audio, legal, ownership, decoder, and human-review questions remain outside
+  the slice.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

@@ -19,9 +19,15 @@ Before opening a pull request that adds or changes a visual or audio asset:
 - Confirm meaning survives no color, reduced motion, mute, missing assets, and
   large text. Decorative assets must be labeled decorative.
 - Run `python3 scripts/validate_assets.py` and
-  `python3 scripts/validate_asset_security.py`, then
+  `python3 scripts/validate_asset_security.py`, then use
+  `python3 scripts/sanitize_svg_metadata.py INPUT.svg --output
+  assets/generation/svg-derivatives/NAME.svg` for an explicit SVG derivative
+  when metadata must be removed. The sanitizer never rewrites its input and
+  rejects collisions, symlinks, malformed SVG, and output paths outside its
+  derivative boundary. Then run
   `python3 scripts/verify_asset_release.py` when release paths change and
   `python3 scripts/verify_asset_release.py --check` before committing, then
+  `python3 scripts/sanitize_svg_metadata.py --check-release` and
   `python3 scripts/generate_asset_credits.py --check`. The latter checks both
   generated credits, `assets/THIRD_PARTY_NOTICES.md`, and the in-game
   `gui/asset-credits.mjs` projection.

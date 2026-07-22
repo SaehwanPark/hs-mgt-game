@@ -5273,7 +5273,7 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.2 audio playback fallback (v0.12.83)
 
-- Status: In progress; `audioPresentationFor` reuses the fail-closed local
+- Status: Closed; implementation and verification complete. `audioPresentationFor` reuses the fail-closed local
   availability contract for existing cue, music, and ambience catalog entries.
 - Unsupported Web Audio setup and thrown generated-cue/background playback
   publish a visible local fallback status and preserve the catalog source and
@@ -5283,6 +5283,17 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Evidence remains limited to pure projections, fake-context recovery, and
   static/automated checks; it does not establish browser compatibility,
   loudness, audio quality, fatigue, accessibility, or human review.
+
+### Visual/audio Phase 9.2 SVG metadata sanitizer (v0.12.84)
+
+- Status: Closed; implementation and verification complete. A dependency-free transform removes SVG `<metadata>`
+  from explicit derivatives while preserving `<title>`/`<desc>` content.
+- The approved-release check is read-only and fails closed on removable
+  metadata, malformed input, unsafe paths, symlinks, missing files, or output
+  collisions. It never updates canonical hashes or manifests.
+- Evidence is limited to transformation fixtures and release/security checks;
+  it does not establish decoder safety, legal clearance, accessibility,
+  ownership, quality, or human review.
 
 ### Contributor documentation information architecture (v0.12.32)
 

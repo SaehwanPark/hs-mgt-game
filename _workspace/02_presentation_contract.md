@@ -1,3 +1,79 @@
+# Presentation Contract — Phase 9.2 SVG metadata sanitizer v0.12.84
+
+## Goal and Authorization
+
+Provide a deterministic, dependency-free transformation for an explicit SVG
+derivative that removes `<metadata>` elements while preserving accessible
+`<title>` and `<desc>` content. The release check must confirm current
+registry-controlled SVGs are already sanitized without rewriting them. This is
+asset-governance work, not runtime presentation or simulation work.
+
+## Player Questions and Consequences
+
+There is no new player-facing signal. The contributor/release questions are:
+
+- Can metadata be removed from a proposed SVG derivative deterministically?
+- Are title/description accessibility elements and visible geometry preserved?
+- Does the check fail closed without changing approved bytes or hashes?
+
+No player outcome, institution identity, severity, intent, or policy meaning is
+derived from metadata presence or removal.
+
+## Actor-Visible Source Ledger
+
+| Artifact | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| SVG bytes | Explicit contributor-provided local input | Malformed XML or unbalanced metadata fails without output | No reconstruction from screenshots or runtime state |
+| Metadata element | `<metadata>` element in the supplied SVG | Remove only the metadata element and its contents | Do not remove `<title>`/`<desc>` or infer whether metadata is legally safe |
+| Release check | Approved registry release paths under `assets/release/` | Any removable metadata or unsafe path is a deterministic check failure | No auto-promotion, hash update, or approval inference |
+
+## Visual, Motion, and Audio Semantics
+
+The transform has no visual/audio runtime semantics. It preserves all non-
+metadata SVG markup byte-for-byte where possible and leaves the existing asset
+security, accessibility, and release-manifest contracts authoritative.
+
+## Accessibility and Fallbacks
+
+- `<title>` and `<desc>` remain present and unchanged in sanitized output.
+- Malformed XML, missing input, unbalanced metadata, output collisions, and
+  paths outside the explicit derivative boundary fail closed.
+- Runtime fallback behavior remains the existing generic/text contract; the
+  sanitizer does not remove an asset from the GUI or change its label.
+
+## Authority, History, and Replay Boundaries
+
+The sanitizer reads local files and optionally writes only a caller-selected
+derivative path. It never reads host/session payloads, commands, observations,
+simulation state, stochastic inputs, history, hashes, replay artifacts, or
+debrief facts. The `--check-release` path is read-only.
+
+## Asset Provenance and Release Requirements
+
+Sanitized output is not approved automatically. If a contributor uses the
+output as a future release derivative, the existing registry source/release
+hash, provenance, license, accessibility, and human approval gates still apply.
+No current registry entry or release hash is changed by this slice.
+
+## Verification and Evidence Limits
+
+Focused tests must cover removal, title/description preservation, malformed and
+unbalanced input, safe output paths, and current release-root parity. Existing
+security, manifest, registry, credits, release, Python, Rust, formatting,
+Clippy, JavaScript, and documentation checks remain required. These checks do
+not establish decoder safety, legal clearance, ownership, accessibility,
+quality, or human review.
+
+## Non-Goals and Open Questions
+
+- No raster, audio, EXIF, ID3, or other non-SVG metadata transformation.
+- No canonical asset rewrite, registry mutation, release promotion, or new
+  dependency.
+- Whether a sanitized derivative should replace any future source/release file
+  remains a separately approved asset-review decision.
+
+---
+
 # Presentation Contract — Phase 9.2 audio playback fallback v0.12.83
 
 ## Goal and Authorization

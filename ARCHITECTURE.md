@@ -519,6 +519,15 @@ playback expose local fallback status and preserve catalog source/equivalent
 text; retryable local cue failure does not enter host payloads, commands,
 simulation state, observations, history, hashes, replay, or debriefs.
 
+The v0.12.84 Phase 9.2 SVG metadata sanitizer is a dependency-free release
+boundary for explicit derivatives. It validates SVG/XML with the standard
+library and removes only parsed `<metadata>` elements while preserving
+`<title>`, `<desc>`, geometry, and other bytes. Its approved-release check is
+read-only, reuses canonical registry path/hash checks, rejects removable
+metadata and unsafe paths, and never changes canonical assets, manifests,
+runtime presentation, host payloads, simulation state, observations, history,
+hashes, replay, or debriefs.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

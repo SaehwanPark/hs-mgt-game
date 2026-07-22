@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.84] - 2026-07-21
+
+- Added a dependency-free SVG metadata sanitizer that removes only parsed
+  `<metadata>` elements from explicit derivatives while preserving title,
+  description, geometry, and other markup.
+- Added bounded output-path checks and a read-only approved-release check with
+  fixture coverage for malformed input, symlinks, missing inputs, and collisions.
+- Wired the check into CI without changing canonical assets, registry hashes,
+  release manifests, runtime behavior, or host/simulation authority.
+
 ## [0.12.83] - 2026-07-21
 
 - Added a catalog-aware audio presentation fallback for loaded, unavailable,
