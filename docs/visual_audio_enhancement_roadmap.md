@@ -1882,6 +1882,17 @@ actual seed; per-portrait human review remains required.
   accessibility, legal clearance, asset quality, ownership, or educational
   benefit.
 
+### v0.12.83 audio playback fallback target slice
+
+- Status: Complete in v0.12.83. The bounded Phase 9.2 slice extends graceful fallback to
+  unsupported Web Audio setup and thrown generated-cue playback.
+- Known catalog entries retain their visible source and written equivalent;
+  unavailable, malformed, contradictory, and unknown audio outcomes clear any
+  optional release path and expose a generic local fallback status.
+- Evidence will be limited to pure projections, fake-context failure recovery,
+  local status text, and no-authority tests. No recorded audio, decoder,
+  network fetch, external asset, host field, or simulation change is planned.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

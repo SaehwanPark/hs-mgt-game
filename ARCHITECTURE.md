@@ -513,6 +513,12 @@ written equivalents while clearing the release path. The adapters and proof
 do not fetch, decode, inspect host/session data, enter commands, or influence
 simulation state, observations, history, hashes, replay, or debriefs.
 
+The v0.12.83 Phase 9.2 audio fallback reuses that pure availability boundary
+for the existing generated Web Audio catalog. Unsupported setup and thrown
+playback expose local fallback status and preserve catalog source/equivalent
+text; retryable local cue failure does not enter host payloads, commands,
+simulation state, observations, history, hashes, replay, or debriefs.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

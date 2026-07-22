@@ -1,3 +1,83 @@
+# Presentation Contract — Phase 9.2 audio playback fallback v0.12.83
+
+## Goal and Authorization
+
+When optional Web Audio setup or generated cue playback is unavailable, the
+client must expose a deterministic local fallback descriptor and preserve the
+cue's visible source and written equivalent. This is the bounded v0.12.83
+Phase 9.2 runtime slice; it does not add recorded audio or change host
+authority.
+
+## Player Questions and Consequences
+
+- Is audio available, muted, unsupported, or failed?
+- What visible event or interface meaning remains available when sound cannot
+  play?
+- Does a playback exception stop only optional audio while the current visual,
+  text, and session presentation remains usable?
+
+The player consequence is presentation-only: unavailable sound never hides or
+changes the host-reported event, action, observation, or outcome.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Cue/music/ambience identity | Existing local audio catalog entry | Preserve `visible_source` and `equivalent`; use generic audio fallback when the ID is unknown | No inference of severity, intent, or outcome from a sound failure |
+| Playback availability | Local Web Audio setup/playback result | Normalize unsupported, missing, failed, malformed, contradictory, and unknown results as unavailable | No host/session or decoder state is synthesized |
+| Failure status | Local presentation state and `#audio-state` text | Announce that visual and written equivalents remain active | No command, transition, history, hash, or debrief mutation |
+
+## Visual, Motion, and Audio Semantics
+
+Successful generated tones retain the existing catalog identity and priority
+rules. Unsupported setup or thrown playback switches to a visible text status
+and an explicit fallback descriptor; no meaning depends on hearing the sound.
+Mute, cues-only, reduced-notification, unfocused-page, and missing-audio states
+retain the existing visible controls and text equivalents.
+
+## Accessibility and Fallbacks
+
+- Unsupported context creation returns an unavailable fallback without
+  throwing through the client.
+- Cue playback exceptions clear optional audio work and report the cue's written
+  equivalent through the existing status region.
+- Unknown or malformed catalog IDs use a generic “Audio unavailable” marker and
+  never expose a release path.
+- Color, motion, and sound are never the only channel for event meaning.
+
+## Authority, History, and Replay Boundaries
+
+Audio context, timers, playback failures, fallback descriptors, and status text
+remain local browser presentation state. They never enter commands, host DTOs,
+simulation transitions, stochastic inputs, observations, immutable history,
+state hashes, replay artifacts, or debrief facts. A playback failure cannot
+replace or retry a host transition.
+
+## Asset Provenance and Release Requirements
+
+No new asset or registry entry is authorized. Existing generated recipes and
+written equivalents remain the sole local catalog inputs; pending portraits and
+all external/license questions remain unchanged.
+
+## Verification and Evidence Limits
+
+Focused tests must cover unsupported setup, thrown cue playback, successful
+recording, fallback descriptor fields, visible status text, and no-authority
+markers. Existing audio, asset, release, documentation, Python, Rust,
+formatting, Clippy, JavaScript, and diff checks remain required. Automated
+checks do not establish measured loudness, browser compatibility, human
+accessibility, fatigue, audio quality, learning, or policy validity.
+
+## Non-Goals and Open Questions
+
+- No recorded audio, file decoder, network fetch, audio download, or new audio
+  asset is in scope.
+- No catalog taxonomy, priority policy, music-state classifier, or host API is
+  redesigned.
+- Human listening and classroom/accessibility review remain open evidence gates.
+
+---
+
 # Presentation Contract — Phase 8.2 review-ready fictional actor portrait approval worksheet
 
 ## Goal and Authorization

@@ -2276,3 +2276,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Test loaded, missing, failed, malformed, and unknown outcomes;
   forbid network/host access and do not infer outcomes, severity, or hidden
   state from asset availability.
+
+## Phase 18: Audio failure must remain optional and recoverable
+
+- Context: Phase 9.2 needed runtime fallback evidence for unsupported Web Audio
+  setup and generated-cue playback exceptions, not only static asset status.
+- Risk: A browser audio exception can interrupt a queue or make sound appear to
+  be an authoritative outcome channel; permanently disabling a recoverable
+  context would also regress existing retry behavior.
+- Resolution: Reuse the pure availability projection, expose the catalog source
+  and written equivalent in a local fallback descriptor/status, clear the failed
+  cue without changing host data, and permit a later cue to retry when a local
+  context remains available.
+- Prevention: Test setup failure, thrown cue playback, unknown/contradictory
+  statuses, successful retry, mute/visual-only behavior, and forbidden
+  authority/network markers; keep recorded audio and decoder integration out of
+  the slice.

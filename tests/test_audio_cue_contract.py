@@ -67,7 +67,7 @@ class AudioCueContractTests(unittest.TestCase):
             if (client.setMode('cues-only').mode !== 'cues-only' || client.state().mode !== 'cues-only') process.exit(3);
             if (client.setMode('unknown').ok) process.exit(4);
             if (client.setMusicState('pressure').state !== 'pressure') process.exit(5);
-            if (client.playCue('ui.action-confirm').code !== 'visual_only') process.exit(6);
+            if (client.playCue('ui.action-confirm').code !== 'audio_unavailable') process.exit(6);
             if (cueEntry('event.operating-loss').peak_ceiling_dbfs !== -3) process.exit(7);
             client.destroy();
             console.log('pass');

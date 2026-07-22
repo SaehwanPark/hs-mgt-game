@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.83] - 2026-07-21
+
+- Added a catalog-aware audio presentation fallback for loaded, unavailable,
+  failed, malformed, contradictory, and unknown playback outcomes.
+- Web Audio setup and generated-cue playback failures now return recoverable
+  results, expose visible fallback status, and preserve written equivalents;
+  later cue playback can recover when the local context becomes usable.
+- Added fake-context failure tests and CI coverage without adding recorded audio
+  or changing host, simulation, history, replay, or debrief authority.
+
 ## [0.12.82] - 2026-07-21
 
 - Added a pure asset-availability projection for loaded, missing, failed,

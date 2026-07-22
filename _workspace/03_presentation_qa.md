@@ -1,3 +1,64 @@
+# Presentation QA — Phase 9.2 audio playback fallback v0.12.83
+
+## Current slice: Phase 9.2 audio playback fallback v0.12.83
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.2 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- `gui/audio.mjs`, the shared availability contract, existing audio catalog/
+  priority behavior, and focused fake-context tests.
+- This is local presentation recovery only. No recorded audio, decoder,
+  network, host/session data, command, simulation, history, replay, or debrief
+  authority is in scope.
+
+### Information, Causality, and Accessibility Findings
+
+- Known catalog entries preserve their visible source and written equivalent
+  when Web Audio is unsupported or playback fails.
+- Failure status is visible in the existing audio status region and does not
+  replace, reinterpret, or hide host-reported consequences.
+- Muted, visual-only, cues-only, reduced-notification, and retry behavior keep
+  sound optional and preserve non-audio meaning.
+
+### Provenance, Authority, and Replay Findings
+
+- `audioPresentationFor` consumes only local catalog descriptors and the local
+  availability result; it does not inspect host/session state or decode files.
+- Failure records and fallback descriptors remain local presentation/diagnostic
+  state and cannot enter commands, transitions, observations, history, hashes,
+  replay artifacts, or debrief facts.
+- No new audio asset, registry entry, release path, or portrait approval was
+  added.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no actionable
+findings after unknown catalog IDs were made fail-closed, successful cue retry
+cleared stale fallback status, and roadmap evidence was updated.
+
+### Residual Risks and Evidence Limits
+
+This slice proves deterministic local failure recovery only. It does not prove
+browser/Web Audio compatibility, measured loudness, audio quality, fatigue,
+human accessibility, classroom suitability, learning, or policy validity.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_audio_fallback tests.test_gui_audio`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (514 tests)
+- Full Rust, asset, release, documentation, JavaScript, formatting, Clippy,
+  and diff checks
+
 # Presentation QA — Phase 9.2 graceful asset fallback v0.12.82
 
 ## Current slice: Phase 9.2 graceful asset fallback v0.12.82
