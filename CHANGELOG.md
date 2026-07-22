@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.87] - 2026-07-21
+
+- Added a privacy-bounded Phase 10.2 structured-evaluation protocol with
+  stable first-session, recognition, consequence-tracing, accessibility, and
+  audio tasks, ratings, finding categories, and a blank decision record.
+- Added a facilitator guide, empty anonymized revision log, and regression
+  coverage that prevents fabricated participant evidence or premature
+  go/no-go closure.
+- Kept participant collection, findings, accessibility quality, audio
+  usefulness/fatigue, educational usability, legal, ownership, and human
+  approval gates explicit.
+
 ## [0.12.86] - 2026-07-21
 
 - Added exact Phase 10.1 first-month technical acceptance coverage across the

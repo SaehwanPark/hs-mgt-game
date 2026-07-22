@@ -1,4 +1,74 @@
-# Presentation Contract — Phase 10.1 first-month slice v0.12.86
+# Presentation Contract — Phase 10.2 evaluation preparation v0.12.87
+
+## Goal and Authorization
+
+Define a reproducible, privacy-bounded human-evaluation preparation slice for
+the existing Phase 10.1 first-month visual/audio presentation. The repository
+may define tasks, instruments, evidence categories, and decision boundaries;
+it may not invent participant evidence or authorize release.
+
+## Player Questions and Consequences
+
+The protocol asks whether participants can identify institutions, facilities,
+visible pressures, source/status labels, and committed consequence chains; use
+keyboard, text-scale, reduced-motion, skip/review, mute, cues-only, and written
+equivalents; and distinguish public, uncertain, missing, and committed
+information. It does not teach an intended answer or expose hidden state.
+
+## Actor-Visible Source Ledger
+
+| Evaluation surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| First-month tasks | Existing seeded host-connected presentation | Record not-observed when a task is skipped or uninterpretable | No private rival action or hidden outcome |
+| Recognition tasks | Visible labels, tokens, facilities, pressures, and source/status text | Preserve missingness and generic fallback text | No inference from color alone or from true state |
+| Consequence tasks | Host-committed resolution, history, replay, and written equivalents | Keep uncertain, stale, missing, and committed states distinct | No predicted or recomputed consequence |
+| Accessibility/audio tasks | Existing local controls and equivalent written content | Audio is optional; unavailable playback remains reviewable in text | No audio-only meaning or severity channel |
+| Findings/decision | Anonymized bounded feedback and authorized review | Empty/pending until human evidence exists | No automated go/no-go or legal approval |
+
+## Visual, Motion, and Audio Semantics
+
+The protocol evaluates existing visuals, motion, music/cues, fallback status,
+and written equivalents. It adds no asset, playback path, animation, or
+runtime behavior. Ratings describe participant experience and are not policy
+outcomes or simulation validation.
+
+## Accessibility and Fallbacks
+
+Tasks explicitly cover keyboard navigation, larger text, reduced motion,
+skip/review, mute, cues-only mode, reduced notifications, unavailable audio,
+and equivalent written content. The protocol records no conclusion about
+universal accessibility; it only defines what an authorized evaluator may
+observe.
+
+## Authority, History, and Replay Boundaries
+
+Participants interact with the existing host-authoritative path. The protocol
+must not add commands, transition logic, stochastic inputs, hidden-state
+projections, history mutations, replay mutations, or client authority.
+
+## Provenance/Release
+
+No asset or registry entry is added or promoted. Existing provenance, credits,
+security, release, and human-review gates remain authoritative. Evaluation
+artifacts are repository documentation and bounded JSON, not release approval.
+
+## Verification/Evidence Limits
+
+`tests/test_phase10_evaluation_prep.py` binds the JSON protocol, guide,
+revision-log blank state, privacy restrictions, and exact Phase 10.2
+preparation checklist. No participant results, legal conclusion, accessibility
+claim, educational claim, or go/no-go decision may be inferred from the test.
+
+## Non-goals
+
+- No sessions, participant recruitment, interviews, recordings, personal data,
+  private game state, or fabricated findings.
+- No runtime, asset, host, simulation, history, replay, or debrief change.
+- No automatic release, legal, accessibility, or educational approval.
+
+---
+
+# Historical Presentation Contract — Phase 10.1 first-month slice v0.12.86
 
 ## Goal and Authorization
 

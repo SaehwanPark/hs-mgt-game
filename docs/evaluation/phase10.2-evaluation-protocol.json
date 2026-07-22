@@ -1,0 +1,89 @@
+{
+  "schema_version": "visual-audio-phase10-2-evaluation-v1",
+  "status": "ready-for-human-evaluation",
+  "campaign": "competitive-regional-v1",
+  "seed_policy": "Use a documented seeded run; do not record private state.",
+  "participant_groups": [
+    "project-owner-or-contributor",
+    "strategy-game-player",
+    "health-policy-or-management-expert",
+    "accessibility-oriented-reviewer",
+    "first-time-user"
+  ],
+  "tasks": [
+    {
+      "id": "first-session-start-to-resolution",
+      "category": "first-session",
+      "prompt": "Start, draft two actions, validate, submit, review resolution, and describe what refreshed.",
+      "success_observation": "Participant completes the host handoff without facilitator teaching the intended answer."
+    },
+    {
+      "id": "recognize-three-systems",
+      "category": "recognition",
+      "prompt": "Identify Riverside, Northlake, and Summit and explain how each is labeled.",
+      "success_observation": "Participant identifies each from visible labels/tokens without hidden information."
+    },
+    {
+      "id": "recognize-facility-pressure-source",
+      "category": "recognition",
+      "prompt": "Identify one facility, project/capacity signal, pressure signal, public rival observation, and source/status label.",
+      "success_observation": "Participant points to visible entities and their source/status or missingness text."
+    },
+    {
+      "id": "trace-visible-consequence",
+      "category": "consequence-tracing",
+      "prompt": "Trace one drafted action through validation, submission, resolution, and a visible consequence.",
+      "success_observation": "Participant distinguishes committed effects from uncertain or future responses."
+    },
+    {
+      "id": "reconstruct-first-month",
+      "category": "consequence-tracing",
+      "prompt": "Use the resolution stages, history, and replay context to reconstruct the first month.",
+      "success_observation": "Participant describes the written sequence without inventing hidden state."
+    },
+    {
+      "id": "keyboard-large-text-reduced-motion",
+      "category": "accessibility",
+      "prompt": "Repeat recognition and tracing with keyboard navigation, larger text, reduced motion, and skip/review.",
+      "success_observation": "Participant can reach and review equivalent written content."
+    },
+    {
+      "id": "audio-preference-and-equivalent",
+      "category": "audio",
+      "prompt": "Try full audio, cues-only, mute, reduced notifications, unavailable audio, and written equivalents.",
+      "success_observation": "Participant reports usefulness, fatigue, and any lost meaning without sound."
+    }
+  ],
+  "rating_dimensions": [
+    "institutional-recognition",
+    "facility-recognition",
+    "map-legibility",
+    "consequence-comprehension",
+    "information-density",
+    "cognitive-load",
+    "animation-usefulness",
+    "audio-usefulness",
+    "audio-fatigue",
+    "perceived-game-identity",
+    "accessibility",
+    "trust-in-information-boundaries"
+  ],
+  "rating_scale": "1=very poor or confusing; 5=very clear or useful; not-observed is allowed.",
+  "finding_categories": ["defect", "preference", "scope-expansion"],
+  "privacy": {
+    "repository_may_contain": ["anonymized role/category", "task outcome", "bounded feedback", "revision classification"],
+    "repository_must_not_contain": ["names", "contact details", "health information", "private game state", "identifying recordings"]
+  },
+  "decision": {
+    "status": "pending-human-evidence",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "No participant results are included in this preparation artifact.",
+    "Preparation does not establish legal clearance, universal accessibility, clinical validity, policy forecasting accuracy, or educational effectiveness.",
+    "Human evaluation and any go/no-go decision remain separate authorization gates."
+  ]
+}

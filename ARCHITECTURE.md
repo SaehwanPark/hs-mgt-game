@@ -543,6 +543,13 @@ provenance evidence without adding a second runtime path. Phase 10.2 human
 comprehension, quality, fatigue, educational, legal, ownership, and review
 questions remain outside the technical contract.
 
+The v0.12.87 Phase 10.2 preparation slice adds repository-safe evaluation
+protocol, facilitator, and revision-log artifacts only. Stable tasks reference
+the existing actor-visible first-month path; ratings and findings remain human
+evidence, and the decision record remains pending. No participant data,
+recordings, asset, runtime behavior, host field, simulation rule, hidden-state
+projection, history, replay, or debrief authority is added.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

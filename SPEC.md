@@ -5322,6 +5322,20 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   educational-usability, legal, ownership, and human-review questions remain
   explicit external gates.
 
+### Visual/audio Phase 10.2 evaluation preparation (v0.12.87)
+
+- Status: In progress; the protocol, facilitator guide, anonymized revision
+  template, and regression test are present, but no participant evidence has
+  been collected.
+- Done: stable first-session, recognition, consequence-tracing,
+  accessibility, and audio tasks; bounded rating dimensions; exact finding
+  categories; privacy restrictions; and a blank human decision record.
+- Not Yet Done: audio feedback collection, quantitative ratings, qualitative
+  interviews, classified findings, revisions, and go/no-go authorization.
+- Deferred / Non-Goals: no participant data or recordings, legal or
+  accessibility conclusions, educational claims, runtime behavior, asset
+  changes, or host/simulation authority changes.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
