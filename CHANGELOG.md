@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.74] - 2026-07-21
+
+- Added the Phase 8.1 local-generation provenance workflow with a conditional
+  approved-model registry, prompt/template and human-review contracts, and an
+  intentionally empty generation manifest.
+- Added metadata capture/validation for model identity/license, prompts, seeds,
+  settings, dimensions, source/release hashes, post-processing, accessibility,
+  and visual/audio asset-registry bridges.
+- Completed the Phase 8.1 technical checklist without downloading weights,
+  running inference, generating assets, or changing host/simulation authority.
+
 ## [0.12.73] - 2026-07-21
 
 - Added the Phase 7.4 local audio priority/fatigue manager with deterministic

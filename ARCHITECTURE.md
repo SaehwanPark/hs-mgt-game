@@ -448,6 +448,18 @@ host payloads, simulation state, history, hashes, replay artifacts, or debriefs.
 Written visible consequences remain complete under mute, reduction, storage
 failure, focus loss, and unavailable audio.
 
+The v0.12.74 Phase 8.1 generation workflow adds a contributor/release-only
+boundary under `assets/generation/`. The approved-model registry, prompt
+templates, review checklist, capture CLI, validation CLI, and empty manifest
+record model/license identity and immutable repository commit SHA, prompt and
+seed/settings, source/release hashes,
+post-processing, accessible equivalents, and human approval before any bridge
+to the existing visual/audio asset registries. Unknown or incomplete records
+fail closed. Generation metadata, model files, outputs, approvals, and release
+paths never enter host payloads, simulation state, actor observations,
+history, hashes, replay artifacts, or debriefs; no model weights or generated
+asset are committed in this slice.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

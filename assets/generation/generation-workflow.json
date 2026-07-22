@@ -1,0 +1,78 @@
+{
+  "schema_version": "generation-workflow-v1",
+  "approved_model_registry": "assets/generation/approved-models.json",
+  "generation_manifest": "assets/generation/generation-manifest.json",
+  "asset_registries": [
+    "assets/registry/visual-assets.json",
+    "assets/registry/audio-assets.json"
+  ],
+  "allowed_licenses": [
+    "project-generated",
+    "CC0-1.0",
+    "CC-BY-4.0",
+    "CC-BY-SA-4.0",
+    "MIT",
+    "Apache-2.0",
+    "GPL-3.0-or-later",
+    "OFL-1.1"
+  ],
+  "required_metadata_fields": [
+    "schema_version",
+    "captured_at",
+    "asset_id",
+    "asset_type",
+    "semantic_role",
+    "model_id",
+    "model_name",
+    "model_version",
+    "model_revision",
+    "model_license",
+    "model_card_url",
+    "generation_application",
+    "prompt",
+    "negative_prompt",
+    "seed",
+    "sampler",
+    "settings",
+    "dimensions",
+    "generation_date",
+    "contributor",
+    "post_processing",
+    "source_image_references",
+    "accessible_equivalent",
+    "source_output_path",
+    "source_hash",
+    "release_output_path",
+    "release_hash",
+    "human_review",
+    "approval_status",
+    "asset_registry_id"
+  ],
+  "required_human_review_fields": [
+    "real_person_resemblance_reviewed",
+    "logo_trademark_reviewed",
+    "clinical_plausibility_reviewed",
+    "accessibility_equivalent_written",
+    "artifact_quality_reviewed",
+    "source_output_preserved",
+    "release_derivative_reviewed"
+  ],
+  "approval_statuses": ["pending", "approved", "rejected"],
+  "prompt_policy": {
+    "fictional_only": true,
+    "no_public_figure_resemblance": true,
+    "no_protected_marks": true,
+    "no_hidden_simulation_state": true,
+    "no_deterministic_simulation_parameter_encoding": true,
+    "no_clinical_claim_without_human_review": true
+  },
+  "release_policy": {
+    "source_output_required": true,
+    "source_hash_required": true,
+    "release_hash_required_when_release_path_exists": true,
+    "human_review_required": true,
+    "asset_registry_id_required": true,
+    "no_model_weights_in_repository": true,
+    "no_hosted_inference_dependency": true
+  }
+}

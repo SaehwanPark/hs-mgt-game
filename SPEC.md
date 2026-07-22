@@ -5126,6 +5126,32 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   measured loudness, fatigue reduction, lived accessibility, screen-reader
   usability, human comprehension, learning, calibration, or policy validity.
 
+### Visual/audio Phase 8.1 approved local generation workflow (v0.12.74)
+
+- Status: Complete; local generation provenance capture, model/license scope,
+  prompt templates, human review, registry bridging, proof, and fail-closed
+  validation are verified
+- Added `assets/generation/approved-models.json`,
+  `generation-workflow.json`, `prompt-templates.json`,
+  `human-review-checklist.json`, and an intentionally empty
+  `generation-manifest.json`. The model listing records a primary model-card
+  basis and access/review limitations; it does not establish training-data
+  provenance, output ownership, or legal clearance.
+- Added `scripts/capture_generation_metadata.py` and
+  `scripts/validate_generation_metadata.py` to capture prompts, negative
+  prompts, seed/settings, dimensions, application, source references,
+  post-processing, accessibility, human-review fields, source/release paths,
+  and SHA-256 hashes. Unknown models/licenses, missing or mismatched hashes,
+  incomplete review, unapproved releases, and invalid registry bridges fail
+  closed.
+- Added `gui/generation-workflow-proof.html` and focused tests. No model
+  weights, inference, generated asset, hosted service, runtime presentation,
+  host DTO, simulation transition, history, replay, or debrief change was
+  introduced.
+- Technical checks demonstrate metadata consistency and release gating only;
+  they do not establish legal clearance, output quality, human resemblance,
+  clinical plausibility, lived accessibility, learning, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

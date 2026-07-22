@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Local generation workflow proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+      body { background: #f3f7f6; color: #173c3a; margin: 0 auto; max-width: 72rem; padding: 2rem 1rem 4rem; }
+      main { background: white; border: 1px solid #c6d7d4; border-radius: .8rem; padding: 1.25rem; }
+      table { border-collapse: collapse; margin: 1rem 0 1.5rem; width: 100%; }
+      th, td { border: 1px solid #c6d7d4; padding: .55rem; text-align: left; vertical-align: top; }
+      th { background: #e2f0ed; }
+      .note { background: #fff7e5; border-left: .25rem solid #b46b1d; padding: .7rem .9rem; }
+      .blocked { color: #8a3d18; font-weight: 750; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Approved local generation workflow</h1>
+      <p class="note">Fixture-only proof. No model weights are downloaded, no inference runs, no asset is generated, and no network resource is loaded.</p>
+      <p id="model-summary"></p>
+      <table>
+        <caption>Required generation metadata</caption>
+        <thead><tr><th>Field group</th><th>Required record</th><th>Why it matters</th></tr></thead>
+        <tbody id="metadata-fields"></tbody>
+      </table>
+      <table>
+        <caption>Human review gate</caption>
+        <thead><tr><th>Review</th><th>Required decision</th><th>Release consequence</th></tr></thead>
+        <tbody id="review-fields"></tbody>
+      </table>
+      <p class="blocked" id="release-rule"></p>
+    </main>
+    <script type="module">
+      const metadata = [
+        ["Model", "model_id · model_name · model_version · model_revision · model_license · model_card_url", "The model-card basis and exact generation context remain inspectable."],
+        ["Prompt", "prompt · negative_prompt · seed · sampler · settings", "A contributor can repeat the request without guessing hidden parameters."],
+        ["Output", "dimensions · source_output_path · source_hash · release_output_path · release_hash", "Source and release derivatives remain distinct and hash-verifiable."],
+        ["Context", "generation_application · generation_date · captured_at · contributor · post_processing · source_image_references", "Tooling, capture time, and edits are part of the audit trail."],
+        ["Registry", "asset_type · semantic_role · accessible_equivalent · asset_registry_id", "Future approved output joins the existing visual/audio release gate."],
+      ];
+      const reviews = [
+        ["Real-person resemblance", "No public-figure or identifiable-person resemblance", "Approval remains blocked until reviewed."],
+        ["Logo/trademark", "No protected or copied marks", "Approval remains blocked until reviewed."],
+        ["Clinical plausibility", "Qualified review where clinical context appears", "No clinical claim enters release by default."],
+        ["Accessibility", "Alt text/written equivalent and generic fallback", "Asset can be disabled without losing meaning."],
+        ["Artifact quality", "Anatomy, crop, small-size, grayscale, contrast", "Release derivative receives separate review."],
+        ["Preservation", "Source output and release derivative are hash-recorded", "Missing hashes fail closed."],
+      ];
+      function appendRows(target, rows) {
+        for (const rowData of rows) {
+          const row = document.createElement("tr");
+          for (const value of rowData) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.append(cell);
+          }
+          target.append(row);
+        }
+      }
+      appendRows(document.querySelector("#metadata-fields"), metadata);
+      appendRows(document.querySelector("#review-fields"), reviews);
+      document.querySelector("#model-summary").textContent = "Candidate: black-forest-labs/FLUX.1-schnell · model-card basis: Apache-2.0 · local prototype scope only · access and legal/output review conditions remain explicit.";
+      document.querySelector("#release-rule").textContent = "Release blocked until every human-review field is true, source/release hashes match, and the output has an approved visual/audio asset-registry ID. The committed generation manifest is intentionally empty.";
+    </script>
+  </body>
+</html>

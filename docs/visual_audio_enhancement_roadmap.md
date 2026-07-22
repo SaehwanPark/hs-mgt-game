@@ -1644,6 +1644,11 @@ Use local AI generation selectively for assets that benefit from custom identity
 
 ## Milestone 8.1: Approved local generation workflow
 
+**Status:** Complete in v0.12.74. The local generation workflow, provenance
+capture, fail-closed validation, prompt templates, human-review checklist, and
+registry bridge are implemented. No model weights, inference run, generated
+asset, or release asset is included in this slice.
+
 ### Recommended uses
 
 - fictional executive portraits;
@@ -1682,18 +1687,36 @@ Use local AI generation selectively for assets that benefit from custom identity
 
 ### Checklist
 
-- [ ] Approved local models listed.
-- [ ] Model licenses reviewed.
-- [ ] Prompt template established.
-- [ ] Metadata capture automated.
-- [ ] Seed capture automated.
-- [ ] Source outputs preserved.
-- [ ] Post-processing steps documented.
-- [ ] Human review checklist implemented.
-- [ ] Real-person resemblance review included.
-- [ ] Logo and trademark review included.
-- [ ] Clinical plausibility review included.
-- [ ] Registry integration complete.
+- [x] Approved local models listed.
+- [x] Model licenses reviewed.
+- [x] Prompt template established.
+- [x] Metadata capture automated.
+- [x] Seed capture automated.
+- [x] Source outputs preserved.
+- [x] Post-processing steps documented.
+- [x] Human review checklist implemented.
+- [x] Real-person resemblance review included.
+- [x] Logo and trademark review included.
+- [x] Clinical plausibility review included.
+- [x] Registry integration complete.
+
+### v0.12.74 evidence and limits
+
+- `assets/generation/approved-models.json` records the conditionally approved
+  local prototype model, primary model-card/license basis, and immutable
+  repository commit SHA. The listing is not a conclusion about training-data
+  provenance, output ownership, or legal clearance.
+- `assets/generation/generation-workflow.json` defines required provenance,
+  review, approval, and release fields. `prompt-templates.json` and
+  `human-review-checklist.json` make prompt and human gates inspectable.
+- `scripts/capture_generation_metadata.py` preserves repository-relative
+  source/release paths and computes SHA-256 hashes; validation rejects unknown
+  models, missing fields, hash mismatches, incomplete review, unapproved
+  release records, and invalid visual/audio registry bridges.
+- `assets/generation/generation-manifest.json` is intentionally empty. The
+  fixture proof and focused tests demonstrate the workflow without claiming
+  generated-asset quality, accessibility, clinical plausibility, or policy
+  validity.
 
 ### Exit criteria
 
