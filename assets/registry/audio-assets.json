@@ -17,7 +17,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible cue source, semantic purpose, priority, text equivalent, mute, cues-only, and unavailable-audio fallback",
       "visible_source": "Existing actor-visible UI result or committed event cue ID",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.runtime-music",
@@ -34,7 +40,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible campaign/status text and written cue explanation",
       "visible_source": "Actor-visible condition or explicit campaign stage",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.runtime-music-stems",
@@ -51,7 +63,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible music state, text equivalent, music-only/full mute, cues-only, and unavailable-audio fallback",
       "visible_source": "Actor-visible page stage, operating summary, report, process, or debrief context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.runtime-ui-cues",
@@ -68,7 +86,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible control/status text",
       "visible_source": "Explicit visible browser interaction result",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.runtime-event-cues",
@@ -85,7 +109,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible committed event text",
       "visible_source": "Actor-visible committed transition event",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.runtime-ambience-library",
@@ -102,7 +132,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible setting, text equivalent, reduced-audio/mute/silent fallback",
       "visible_source": "Explicit presentation setting or active competitive-month context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "audio.direction-prototype",
@@ -119,7 +155,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible source, text equivalent, and unavailable-audio fallback",
       "visible_source": "Explicit actor-visible cue, identity, pressure category, or optional ambience",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     }
   ]
 }

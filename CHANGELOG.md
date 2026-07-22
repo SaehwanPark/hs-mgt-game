@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.12.78] - 2026-07-21
+
+- Added per-entry provenance metadata and fail-closed source/license/date
+  validation for the canonical visual and audio registries.
+- Added reproducible provenance columns to asset credits and generated a
+  third-party notice projection; stale outputs now fail the asset check.
+- Kept all current entries repository-authored with no external release assets
+  and left pending portrait candidates outside the registry and release set.
+
 ## [0.12.77] - 2026-07-21
 
 - Added a seven-role review-ready portrait approval queue with explicit

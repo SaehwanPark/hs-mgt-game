@@ -7,7 +7,9 @@ import hashlib
 import json
 import re
 import sys
+from datetime import date
 from pathlib import Path
+from urllib.parse import urlparse
 
 
 ALLOWLIST = {
@@ -17,7 +19,12 @@ ALLOWLIST = {
 DENYLIST_MARKERS = (
   "all-rights-reserved", "personal-use", "non-commercial", "noncommercial",
   "redistribution-hostile", "unclear", "proprietary", "capitalism 2",
+  "cc-by-nc", "cc-by-nd", "by-nc", "by-nd", "personal use", "pinterest",
+  "aggregator", "game screenshot", "protected artwork", "uncertain terms",
 )
+PROVENANCE_KINDS = {"repository-authored", "local-generation", "external"}
+PROVENANCE_FIELDS = ("kind", "source_url", "retrieval_date", "license_reference")
+DATE_PATTERN = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 SEMANTIC_ROLES = {
   "identity", "marker", "status", "facility", "map", "overlay", "ui-cue",
   "event-cue", "ambience", "music-state", "decorative",
@@ -26,7 +33,7 @@ REQUIRED_FIELDS = (
   "id", "asset_type", "semantic_role", "source_path", "release_path",
   "creator", "creation_method", "license", "modifications", "original_hash",
   "release_hash", "attribution_text", "accessible_equivalent", "visible_source",
-  "approval_status",
+  "approval_status", "provenance",
 )
 REGISTRIES = (
   ("assets/registry/visual-assets.json", "visual"),
@@ -52,6 +59,83 @@ def _path_from_registry(root: Path, value: str) -> Path:
   if root.resolve() not in path.parents and path != root.resolve():
     raise ValueError("path escapes repository root")
   return path
+
+
+def _is_https_url(value: object) -> bool:
+  if not isinstance(value, str) or not value.startswith("https://"):
+    return False
+  try:
+    parsed = urlparse(value)
+    hostname = parsed.hostname
+    parsed.port
+  except ValueError:
+    return False
+  return parsed.scheme == "https" and bool(hostname) and not any(character.isspace() for character in value)
+
+
+def _validate_reference(root: Path, value: str, location: str, field: str) -> list[str]:
+  if value.startswith("https://"):
+    if not _is_https_url(value):
+      return [f"{location}: {field} must be a valid HTTPS URL"]
+    return []
+  try:
+    resolved = _path_from_registry(root, value)
+  except ValueError as error:
+    return [f"{location}: invalid {field} ({error})"]
+  if not resolved.is_file():
+    return [f"{location}: {field} does not exist: {value}"]
+  return []
+
+
+def _validate_provenance(root: Path, entry: dict, location: str) -> list[str]:
+  errors: list[str] = []
+  provenance = entry.get("provenance")
+  if not isinstance(provenance, dict):
+    return [f"{location}: provenance must be an object"]
+  for field in PROVENANCE_FIELDS:
+    if field not in provenance:
+      errors.append(f"{location}: provenance missing field {field!r}")
+
+  kind = provenance.get("kind")
+  if kind not in PROVENANCE_KINDS:
+    errors.append(f"{location}: unknown provenance kind {kind!r}")
+
+  source_url = provenance.get("source_url")
+  if source_url is not None and not _is_https_url(source_url):
+    errors.append(f"{location}: provenance source_url must be null or a valid HTTPS URL")
+
+  retrieval_date = provenance.get("retrieval_date")
+  valid_date = False
+  if isinstance(retrieval_date, str) and DATE_PATTERN.fullmatch(retrieval_date):
+    try:
+      date.fromisoformat(retrieval_date)
+      valid_date = True
+    except ValueError:
+      pass
+  if retrieval_date is not None and not valid_date:
+    errors.append(f"{location}: provenance retrieval_date must be null or YYYY-MM-DD")
+
+  license_reference = provenance.get("license_reference")
+  if not isinstance(license_reference, str) or not license_reference.strip():
+    errors.append(f"{location}: provenance license_reference is required")
+  else:
+    errors.extend(_validate_reference(root, license_reference, location, "provenance license_reference"))
+
+  if kind == "repository-authored":
+    if entry.get("license") != "project-generated":
+      errors.append(f"{location}: repository-authored entries require project-generated license")
+    if source_url is not None:
+      errors.append(f"{location}: repository-authored source_url must be null")
+    if retrieval_date is not None:
+      errors.append(f"{location}: repository-authored retrieval_date must be null")
+  elif kind in {"local-generation", "external"}:
+    if entry.get("license") == "project-generated":
+      errors.append(f"{location}: {kind} entries cannot use project-generated license")
+    if source_url is None:
+      errors.append(f"{location}: {kind} entries require provenance source_url")
+    if retrieval_date is None:
+      errors.append(f"{location}: {kind} entries require provenance retrieval_date")
+  return errors
 
 
 def _validate_entry(root: Path, entry: dict, expected_type: str, location: str) -> list[str]:
@@ -81,6 +165,7 @@ def _validate_entry(root: Path, entry: dict, expected_type: str, location: str) 
 
   if entry.get("approval_status") not in {"approved", "pending", "rejected"}:
     errors.append(f"{location}: invalid approval_status")
+  errors.extend(_validate_provenance(root, entry, location))
   if entry.get("release_path") and entry.get("approval_status") != "approved":
     errors.append(f"{location}: release asset must be approved")
 

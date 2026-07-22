@@ -27,6 +27,10 @@ class AssetRegistryTests(unittest.TestCase):
       CREDITS.render(ROOT),
       (ROOT / "assets" / "ASSET_CREDITS.md").read_text(encoding="utf-8"),
     )
+    self.assertEqual(
+      CREDITS.render_notices(ROOT),
+      (ROOT / "assets" / "THIRD_PARTY_NOTICES.md").read_text(encoding="utf-8"),
+    )
 
   def test_duplicate_ids_and_unknown_roles_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:
@@ -67,6 +71,98 @@ class AssetRegistryTests(unittest.TestCase):
       self.assertTrue(any("id must be a non-empty token" in error for error in errors))
       self.assertTrue(any("modifications is required" in error for error in errors))
 
+  def test_external_provenance_requires_retrieval_and_license_basis(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "source.txt"
+      source.write_text("source", encoding="utf-8")
+      (root / "license.txt").write_text("CC0 license reference", encoding="utf-8")
+      entry = self._entry(root, "external", "marker")
+      entry["license"] = "CC0-1.0"
+      entry["provenance"] = {
+        "kind": "external",
+        "source_url": "https://example.test/source",
+        "retrieval_date": "2026-07-21",
+        "license_reference": "license.txt",
+      }
+      self.assertEqual(CHECK._validate_entry(root, entry, "visual", "fixture"), [])
+      entry["license"] = "project-generated"
+      errors = CHECK._validate_entry(root, entry, "visual", "fixture")
+      self.assertTrue(any("cannot use project-generated license" in error for error in errors))
+      entry["license"] = "CC0-1.0"
+      entry["provenance"]["retrieval_date"] = None
+      errors = CHECK._validate_entry(root, entry, "visual", "fixture")
+      self.assertTrue(any("require provenance retrieval_date" in error for error in errors))
+
+  def test_provenance_date_and_denylisted_text_fail_closed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "source.txt"
+      source.write_text("source", encoding="utf-8")
+      entry = self._entry(root, "asset", "marker")
+      entry["provenance"]["retrieval_date"] = "2026-99-99"
+      entry["visible_source"] = "Pinterest aggregator screenshot"
+      errors = CHECK._validate_entry(root, entry, "visual", "fixture")
+      self.assertTrue(any("retrieval_date must be null or YYYY-MM-DD" in error for error in errors))
+      self.assertTrue(any("denylisted provenance marker 'pinterest'" in error for error in errors))
+
+  def test_malformed_https_provenance_url_fails_closed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "source.txt"
+      source.write_text("source", encoding="utf-8")
+      (root / "license.txt").write_text("CC0 license reference", encoding="utf-8")
+      entry = self._entry(root, "external", "marker")
+      entry["license"] = "CC0-1.0"
+      entry["provenance"] = {
+        "kind": "external",
+        "source_url": "https://example.com:bad",
+        "retrieval_date": "2026-07-21",
+        "license_reference": "license.txt",
+      }
+      errors = CHECK._validate_entry(root, entry, "visual", "fixture")
+      self.assertTrue(any("source_url must be null or a valid HTTPS URL" in error for error in errors))
+
+  def test_external_release_appears_in_credits_and_notices(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      (root / "assets" / "registry").mkdir(parents=True)
+      (root / "assets" / "release").mkdir(parents=True)
+      (root / "Cargo.toml").write_text('[package]\nversion = "1.0.0"\n', encoding="utf-8")
+      source = root / "source.txt"
+      source.write_text("source", encoding="utf-8")
+      (root / "license.txt").write_text("CC0 license reference", encoding="utf-8")
+      release = root / "assets" / "release" / "external.svg"
+      release.write_text("release", encoding="utf-8")
+      entry = self._entry(root, "external", "marker")
+      entry.update({
+        "license": "CC0-1.0",
+        "release_path": "assets/release/external.svg",
+        "release_hash": CHECK._sha256(release),
+        "provenance": {
+          "kind": "external",
+          "source_url": "https://example.test/source",
+          "retrieval_date": "2026-07-21",
+          "license_reference": "license.txt",
+        },
+      })
+      (root / "assets" / "registry" / "visual-assets.json").write_text(
+        json.dumps({"schema_version": "asset-registry-v1", "asset_type": "visual", "entries": [entry]}),
+        encoding="utf-8",
+      )
+      (root / "assets" / "registry" / "audio-assets.json").write_text(
+        json.dumps({"schema_version": "asset-registry-v1", "asset_type": "audio", "entries": []}),
+        encoding="utf-8",
+      )
+      self.assertIn("Third-party release assets in v1.0.0", CREDITS.render(root))
+      self.assertIn("`external`", CREDITS.render_notices(root))
+      entry["approval_status"] = "pending"
+      (root / "assets" / "registry" / "visual-assets.json").write_text(
+        json.dumps({"schema_version": "asset-registry-v1", "asset_type": "visual", "entries": [entry]}),
+        encoding="utf-8",
+      )
+      self.assertNotIn("`external`", CREDITS.render_notices(root))
+
   def test_unregistered_release_file_fails_closed(self):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)
@@ -85,6 +181,7 @@ class AssetRegistryTests(unittest.TestCase):
   @staticmethod
   def _entry(root, asset_id, role):
     source = root / "source.txt"
+    (root / "policy.md").write_text("policy", encoding="utf-8")
     return {
       "id": asset_id,
       "asset_type": "visual",
@@ -101,6 +198,12 @@ class AssetRegistryTests(unittest.TestCase):
       "accessible_equivalent": "text",
       "visible_source": "visible fixture",
       "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": None,
+        "retrieval_date": None,
+        "license_reference": "policy.md",
+      },
     }
 
 

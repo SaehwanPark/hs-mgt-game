@@ -2204,4 +2204,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   generated metadata with no external files.
 - Prevention: Treat identity/marker lookup as pure presentation code; assert
   hidden fields, network calls, and third-party assets remain absent before
-  expanding the visual language.
+expanding the visual language.
+
+## Phase 13: Provenance fields must distinguish repository sources from retrievals
+
+- Context: Phase 9.1 needed to close the licensing checklist without adding
+  third-party files or pretending that repository-authored sources had been
+  retrieved from the web.
+- Risk: Requiring a URL/date for every entry would create false provenance;
+  allowing free-form metadata would make future external assets easy to ship
+  without a license basis or reproducible notice.
+- Resolution: Add a constrained provenance kind. Repository-authored entries
+  require a local policy reference and null external fields, while external and
+  locally generated entries require HTTPS source/license references and an ISO
+  retrieval date. Generate credits and notices from the same registry input.
+- Prevention: Keep source/release hashes and human approval separate from
+  provenance shape checks, fail closed on denylisted text, and describe the
+  remaining legal-audit limit explicitly in release documentation.

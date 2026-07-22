@@ -5205,6 +5205,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   hash, replay, debrief, or asset-registry entry changed. The worksheet makes
   human review actionable but does not perform or imply human approval.
 
+### Visual/audio Phase 9.1 provenance and notices (v0.12.78)
+
+- Status: In progress; canonical visual/audio registry entries now carry
+  machine-checked provenance kind, source URL, retrieval date, and license
+  reference fields.
+- Repository-authored entries use the project policy reference with null
+  external URL/date fields. External and local-generation entries are
+  fail-closed until source/license references and retrieval dates are present.
+- Credits now include provenance columns and the third-party notice projection
+  is generated from the same registries. No external release asset or pending
+  portrait preview entered the registry.
+- No runtime GUI, host DTO, simulation transition, actor observation, history,
+  hash, replay, or debrief authority changed. Automated checks do not perform
+  a legal or human license audit.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
