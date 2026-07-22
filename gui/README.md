@@ -266,6 +266,18 @@ review, unapproved release records, and invalid visual/audio registry bridges.
 Future assets must retain written equivalents, generic fallbacks, and the
 existing asset-registry approval boundary.
 
+## Fictional actor portrait proof
+
+Open `gui/portrait-workflow-proof.html` directly or through a static server to
+inspect the Phase 8.2 seven-role portrait contract, identity-only meaning,
+small-size/grayscale checks, generic actor-marker fallback, and the preserved
+rival-system-executive preview. The preview is explicitly unverified and is
+outside the runtime GUI, visual asset registry, release directory, and
+generation manifest because its tool does not expose the approved local model
+revision or actual seed. `scripts/validate_generation_metadata.py` enforces
+the preview hash/dimension/path boundary and blocks promotion until approved
+model/seed provenance and portrait review fields are complete.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

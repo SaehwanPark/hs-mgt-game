@@ -5152,6 +5152,27 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   they do not establish legal clearance, output quality, human resemblance,
   clinical plausibility, lived accessibility, learning, or policy validity.
 
+### Visual/audio Phase 8.2 first fictional actor portrait slice (v0.12.75)
+
+- Status: In progress; seven-role identity contract, shared editorial style,
+  fallback/accessibility requirements, and a preserved rival-system-executive
+  preview are verified, while the preview remains pending and outside release
+- Added `assets/generation/portrait-set.json` for rival system executive, payer
+  negotiator, regulator, labor representative, community leader, board chair,
+  and affiliation partner executive roles. The contract keeps portraits
+  decorative and identity-only; they do not encode score, severity, intent,
+  outcome, private action, or hidden simulation state.
+- Added `assets/generation/portrait-previews.json`, the preserved preview PNG,
+  `gui/portrait-workflow-proof.html`, and focused tests. The preview records its
+  source hash, prompt, negative prompt, accessible equivalent, generic
+  fallback, and pending review, but has no approved local model/seed
+  provenance, release derivative, asset registry ID, or generation-manifest
+  entry.
+- No runtime GUI, host DTO, simulation transition, actor observation, history,
+  hash, replay, debrief, or asset-registry release entry was changed. Technical
+  checks do not establish human recognition, legal clearance, quality, lived
+  accessibility, or educational benefit.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

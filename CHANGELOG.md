@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.75] - 2026-07-21
+
+- Added the Phase 8.2 seven-role fictional actor portrait contract with shared
+  editorial, accessibility, small-size, grayscale, fallback, and prohibited-
+  content requirements.
+- Preserved a rival-system-executive preview candidate with prompt, negative
+  prompt, source hash, accessible equivalent, and pending-review metadata.
+- Kept the preview outside the visual release registry, runtime GUI, and
+  generation manifest because the preview tool does not expose the approved
+  local model revision or actual seed; no host/simulation authority changed.
+
 ## [0.12.74] - 2026-07-21
 
 - Added the Phase 8.1 local-generation provenance workflow with a conditional

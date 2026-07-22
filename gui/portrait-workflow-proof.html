@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fictional actor portrait workflow proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+      body { background: #f3f7f6; color: #173c3a; margin: 0 auto; max-width: 72rem; padding: 2rem 1rem 4rem; }
+      main { background: #fff; border: 1px solid #c6d7d4; border-radius: .8rem; padding: 1.25rem; }
+      .grid { display: grid; gap: 1rem; grid-template-columns: minmax(12rem, 18rem) 1fr; }
+      img { border: 1px solid #c6d7d4; border-radius: .6rem; display: block; max-width: 100%; }
+      table { border-collapse: collapse; margin: 1rem 0 1.5rem; width: 100%; }
+      th, td { border: 1px solid #c6d7d4; padding: .55rem; text-align: left; vertical-align: top; }
+      th { background: #e2f0ed; }
+      .note { background: #fff7e5; border-left: .25rem solid #b46b1d; padding: .7rem .9rem; }
+      .blocked { color: #8a3d18; font-weight: 750; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Fictional actor portrait workflow</h1>
+      <p class="note">Fixture-only Phase 8.2 proof. The candidate below is an unverified preview: it is not in the release manifest, visual asset registry, or runtime GUI.</p>
+      <div class="grid">
+        <figure>
+          <img src="../assets/generation/portrait-previews/rival-system-executive-preview.png" alt="Fictional rival health-system executive portrait; identity decoration only." />
+          <figcaption>Preview candidate: rival system executive.</figcaption>
+        </figure>
+        <div>
+          <h2 id="candidate-status"></h2>
+          <p id="style-summary"></p>
+          <p id="release-rule" class="blocked"></p>
+        </div>
+      </div>
+      <table>
+        <caption>Portrait roles</caption>
+        <thead><tr><th>Role</th><th>Family</th><th>Fallback</th><th>First slice</th></tr></thead>
+        <tbody id="roles"></tbody>
+      </table>
+      <table>
+        <caption>Per-portrait review</caption>
+        <thead><tr><th>Check</th><th>Required outcome</th></tr></thead>
+        <tbody id="reviews"></tbody>
+      </table>
+    </main>
+    <script type="module">
+      const roles = [
+        ["Rival system executive", "competitor", "Competitor actor marker + role label", "yes"],
+        ["Payer negotiator", "payer", "Payer actor marker + role label", "later"],
+        ["Regulator", "regulator", "Regulator actor marker + role label", "later"],
+        ["Labor representative", "labor", "Labor actor marker + role label", "later"],
+        ["Community leader", "community", "Community actor marker + role label", "later"],
+        ["Board chair", "board", "Board actor marker + role label", "later"],
+        ["Affiliation partner executive", "partner", "Partner actor marker + role label", "later"],
+      ];
+      const reviews = [
+        ["Identity consistency", "Role is recognizable without implying a real person."],
+        ["Resemblance and marks", "No public-figure resemblance, logo, trademark, or readable text."],
+        ["Artifact quality", "Anatomy, crop, contrast, small-size, and grayscale checks pass."],
+        ["Accessibility", "Alt text and generic fallback preserve the written identity."],
+        ["Provenance", "Approved model/revision, prompt, seed, settings, source hash, and post-processing are recorded."],
+        ["Release gate", "Human review is complete and the artifact-bound registry bridge is approved."],
+      ];
+      function appendRows(target, rows) {
+        for (const values of rows) {
+          const row = document.createElement("tr");
+          for (const value of values) {
+            const cell = document.createElement("td");
+            cell.textContent = value;
+            row.append(cell);
+          }
+          target.append(row);
+        }
+      }
+      appendRows(document.querySelector("#roles"), roles);
+      appendRows(document.querySelector("#reviews"), reviews);
+      document.querySelector("#candidate-status").textContent = "Candidate status: unverified preview";
+      document.querySelector("#style-summary").textContent = "Shared style: non-photorealistic editorial illustration, chest-up square crop, neutral institutional background, muted teal/slate/sand/off-white palette, identity decoration only.";
+      document.querySelector("#release-rule").textContent = "Release blocked until the approved local model revision and actual seed are captured, human review is complete, hashes match, and the visual registry bridge is approved.";
+    </script>
+  </body>
+</html>

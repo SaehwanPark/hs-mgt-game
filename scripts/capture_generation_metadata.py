@@ -58,7 +58,7 @@ def approved_models() -> dict[str, dict]:
   document = load_json(APPROVED_MODELS_PATH)
   if not isinstance(document, dict) or not isinstance(document.get("entries"), list):
     return {}
-  return {entry.get("id"): entry for entry in document["entries"] if isinstance(entry, dict)}
+  return {entry["id"]: entry for entry in document["entries"] if isinstance(entry, dict) and isinstance(entry.get("id"), str)}
 
 
 def registry_entries() -> dict[str, dict]:
@@ -68,7 +68,7 @@ def registry_entries() -> dict[str, dict]:
     if not isinstance(document, dict) or not isinstance(document.get("entries"), list):
       continue
     for entry in document["entries"]:
-      if isinstance(entry, dict) and entry.get("id"):
+      if isinstance(entry, dict) and isinstance(entry.get("id"), str) and entry.get("id"):
         result[entry["id"]] = entry
   return result
 

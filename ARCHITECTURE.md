@@ -460,6 +460,15 @@ paths never enter host payloads, simulation state, actor observations,
 history, hashes, replay artifacts, or debriefs; no model weights or generated
 asset are committed in this slice.
 
+The v0.12.75 Phase 8.2 portrait slice adds `assets/generation/portrait-set.json`
+as a seven-role identity-only contract and preserves one
+`rival-system-executive` preview under `assets/generation/portrait-previews/`.
+The preview is deliberately outside the visual registry, release directory,
+runtime GUI, and generation manifest because the preview tool does not expose
+the approved local model revision or actual seed. Portraits require written
+identity, generic actor-marker fallback, small-size/grayscale checks, and
+per-portrait human review before a host-shaped presentation may use them.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

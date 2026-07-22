@@ -1728,6 +1728,13 @@ asset, or release asset is included in this slice.
 
 ## Milestone 8.2: Fictional actor portrait set
 
+**Status:** In progress in v0.12.75. The seven-role portrait contract and
+shared editorial style are defined, and the rival-system-executive preview is
+preserved as an explicitly unverified candidate. The preview is not in the
+visual asset registry, release directory, or generation manifest because the
+preview tool does not expose the approved local model revision or actual seed;
+per-portrait human review remains required.
+
 ### Initial portrait roles
 
 - rival system executive;
@@ -1747,6 +1754,24 @@ asset, or release asset is included in this slice.
 - no public-figure resemblance;
 - no photorealistic dependency;
 - diverse but plausible fictional cast.
+
+### v0.12.75 first-slice evidence and limits
+
+- `assets/generation/portrait-set.json` defines stable role IDs for the rival
+  system executive, payer negotiator, regulator, labor representative,
+  community leader, board chair, and affiliation partner executive, plus the
+  shared crop, palette, small-size, grayscale, fallback, and prohibited-content
+  contract.
+- `assets/generation/portrait-previews.json` records the first role’s preserved
+  preview path and SHA-256 hash, exact prompt/negative prompt, accessible
+  equivalent, generic fallback, and pending review state. The matching PNG is
+  a source preview only; it has no approved model/seed provenance and no
+  release derivative.
+- `gui/portrait-workflow-proof.html` and `tests/test_portrait_workflow.py`
+  expose the identity-only meaning, seven-role set, fallback, and fail-closed
+  release rule without network or host access. Contract checks do not establish
+  human recognition, legal clearance, quality, accessibility, or educational
+  benefit.
 
 ### Checklist per portrait
 

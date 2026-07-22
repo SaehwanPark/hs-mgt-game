@@ -1,5 +1,22 @@
 # Lessons Learned
 
+## Keep Portrait Identity Decorative and Provenance Honest
+
+- Context: Phase 8.2 introduced fictional actor portrait work after the local
+  generation workflow was available, but the built-in preview path did not
+  expose the approved local model revision or actual seed.
+- Symptom: A polished portrait can imply real-person identity, score,
+  severity, intent, or future outcome, and its appearance can tempt a release
+  record to overstate provenance or human review.
+- Resolution: Define the full seven-role contract first, preserve the first
+  candidate as an explicitly unverified preview with source hash, prompt,
+  accessible equivalent, and generic fallback, and keep it outside the asset
+  registry, release directory, runtime GUI, and generation manifest.
+- Prevention: Treat portraits as optional identity decoration, require
+  small-size/grayscale and written-fallback checks, reject unknown model/seed
+  provenance, and never substitute automated visual inspection for human
+  resemblance, accessibility, legal, or clinical review.
+
 ## Make Generation Provenance Fail Closed
 
 - Context: Phase 8.1 needed a local workflow for future fictional visual/audio
