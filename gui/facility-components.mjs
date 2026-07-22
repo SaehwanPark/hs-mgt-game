@@ -1,3 +1,5 @@
+import { assetPresentationFor } from "./asset-availability.mjs";
+
 const GENERAL_HOSPITAL_BASE = Object.freeze({
   schema_version: "facility-component-v1",
   id: "general-hospital-base",
@@ -298,7 +300,11 @@ const GENERIC_FACILITY = Object.freeze({
   view_box: null,
   css_variables: [],
   layers: [],
-  fallback: null,
+  fallback: Object.freeze({
+    id: "generic-facility",
+    label: "Facility",
+    equivalent: "Facility label and generic marker",
+  }),
 });
 
 export const FACILITY_COMPONENTS = Object.freeze({
@@ -319,6 +325,15 @@ export const FACILITY_COMPONENTS = Object.freeze({
 
 export function facilityComponentFor(id) {
   return FACILITY_COMPONENTS[id] ?? GENERIC_FACILITY;
+}
+
+export function facilityPresentationFor(id, availability = "loaded") {
+  const component = facilityComponentFor(id);
+  return Object.freeze({
+    ...assetPresentationFor(component, availability),
+    component_id: component.id,
+    layer_count: component.layers.length,
+  });
 }
 
 export function facilityLayerSummary(id = "general-hospital-base") {

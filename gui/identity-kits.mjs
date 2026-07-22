@@ -1,3 +1,5 @@
+import { assetPresentationFor } from "./asset-availability.mjs";
+
 const RIVERSIDE_IDENTITY_KIT = Object.freeze({
   schema_version: "identity-kit-v1",
   id: "riverside",
@@ -115,7 +117,11 @@ const GENERIC_IDENTITY_KIT = Object.freeze({
     compact_badge: "IN text badge",
     audio_motif: null,
   }),
-  fallback: null,
+  fallback: Object.freeze({
+    id: "generic-institution",
+    label: "Institution",
+    equivalent: "Institution identity unavailable",
+  }),
 });
 
 export const IDENTITY_KITS = Object.freeze({
@@ -127,6 +133,21 @@ export const IDENTITY_KITS = Object.freeze({
 
 export function identityKitFor(id) {
   return IDENTITY_KITS[id] ?? GENERIC_IDENTITY_KIT;
+}
+
+export function identityPresentationFor(id, availability = "loaded") {
+  const kit = identityKitFor(id);
+  return Object.freeze({
+    ...assetPresentationFor({
+      id: kit.id,
+      label: kit.label,
+      source: kit.source,
+      equivalent: kit.equivalent,
+      release_path: kit.asset.release_path,
+      fallback: kit.fallback,
+    }, availability),
+    identity_id: kit.id,
+  });
 }
 
 export function identitySurfaceSummary(id = "riverside") {

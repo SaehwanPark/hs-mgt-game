@@ -1,3 +1,64 @@
+# Presentation QA — Phase 9.2 graceful asset fallback v0.12.82
+
+## Current slice: Phase 9.2 graceful asset fallback v0.12.82
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.2 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- The availability projection, facility/identity adapters, fallback proof,
+  focused tests, and existing asset/release/security contracts.
+- This is presentation-only fallback behavior. No asset is loaded, decoded,
+  downloaded, rewritten, approved, promoted, or connected to host/session
+  authority.
+
+### Information, Causality, and Accessibility Findings
+
+- Loaded and fallback descriptors report only caller-supplied availability;
+  they do not derive player outcomes, actor intent, severity, causality, or
+  hidden state.
+- Fallback rows preserve the requested visible label and written equivalent,
+  expose an explicit status/reason, and remove the unavailable release path.
+  The proof uses text, table structure, and keyboard-visible content rather
+  than color or audio as the only channel.
+
+### Provenance, Authority, and Replay Findings
+
+- The adapters consume existing local component/identity descriptors and have
+  no network, command, host DTO, session, simulation, stochastic, history,
+  hash, replay, or debrief path.
+- Pending portraits and release registries remain unchanged; the fallback
+  contract does not infer approval or asset quality.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no actionable
+findings after fail-closed contradictory availability handling and roadmap
+evidence correction. The review confirmed loaded, missing, failed, malformed,
+contradictory, and unknown outcomes clear unavailable release paths while
+preserving requested labels and written equivalents.
+
+### Residual Risks and Evidence Limits
+
+The contract proves deterministic presentation recovery only. It does not
+prove browser decoder safety, human accessibility, asset quality, legal
+clearance, ownership, educational benefit, or policy validity.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_asset_fallback`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (512 tests)
+- JavaScript syntax checks and `git diff --check`
+
 # Presentation QA — Phase 9.2 release reproducibility v0.12.81
 
 ## Current slice: Phase 9.2 release metadata and reproducibility v0.12.81

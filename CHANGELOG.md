@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.82] - 2026-07-21
+
+- Added a pure asset-availability projection for loaded, missing, failed,
+  malformed, and unknown optional visual asset outcomes.
+- Added facility/identity fallback adapters and an accessible proof that keeps
+  requested labels, written equivalents, and explicit generic markers visible
+  when a release asset is unavailable.
+- Added no-network/no-host/no-hidden-state tests; no asset, portrait, release
+  path, or simulation authority was added or changed.
+
 ## [0.12.81] - 2026-07-21
 
 - Added release-only metadata auditing for image/audio files and a

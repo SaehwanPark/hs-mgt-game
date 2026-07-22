@@ -1864,10 +1864,23 @@ actual seed; per-portrait human review remains required.
 - Evidence: `scripts/verify_asset_release.py`,
   `assets/ASSET_RELEASE_MANIFEST.json`, release metadata fixtures, CI wiring,
   and the v0.12.81 implementation/QA records.
-- Evidence will remain limited: manifest parity and metadata shape do not
-  establish legal clearance, decoder safety, ownership, accessibility, audio
-  quality, or human review. Graceful runtime loading fallback remains a later
-  Phase 9.2 target.
+
+### v0.12.82 graceful asset-load fallback target slice
+
+- Status: Complete in v0.12.82. The bounded Phase 9.2 slice makes optional
+  release asset availability explicit and recoverable at the presentation
+  boundary.
+- Loaded assets preserve their requested identity and release path; missing,
+  failed, malformed, contradictory, and unknown outcomes preserve visible
+  labels and written equivalents while switching to a generic marker/fallback.
+- Evidence: `gui/asset-availability.mjs`, facility/identity adapters,
+  `gui/asset-fallback-proof.html`, and focused no-network/no-authority tests.
+  The contract is local, deterministic, keyboard-visible, and independent of
+  host/session data, decoders, commands, and hidden simulation state.
+- No asset is downloaded, rewritten, promoted, or added. Evidence remains
+  limited: the fallback contract does not prove browser decoder safety, human
+  accessibility, legal clearance, asset quality, ownership, or educational
+  benefit.
 
 ### Checklist per portrait
 

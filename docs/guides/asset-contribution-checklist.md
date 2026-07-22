@@ -29,3 +29,6 @@ Before opening a pull request that adds or changes a visual or audio asset:
 Asset metadata and presentation code must not add simulation state, command
 legality, hidden-state inference, randomness, history, hashes, replay, or
 debrief semantics to the browser.
+Optional asset failures must retain the requested visible label and written
+equivalent, switch to an explicit generic fallback, and clear the unavailable
+release path; test the fallback contract without network or host access.

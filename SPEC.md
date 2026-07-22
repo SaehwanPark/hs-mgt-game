@@ -5258,6 +5258,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   history, hashes, replay artifacts, or debrief facts. They do not establish
   legal clearance, decoder safety, accessibility, ownership, or human review.
 
+### Visual/audio Phase 9.2 graceful asset fallback (v0.12.82)
+
+- Status: In progress; `gui/asset-availability.mjs` maps caller-supplied
+  loaded, missing, failed, malformed, and unknown results to deterministic
+  presentation statuses without loading files or reading host state.
+- Facility and identity adapters preserve requested labels and written
+  equivalents while removing the release path and switching to an explicit
+  generic fallback when an optional asset is unavailable. The proof is
+  keyboard-visible and uses no network, commands, hidden fields, or simulation
+  authority.
+- The fallback contract is not browser decoder, human accessibility, legal,
+  quality, ownership, or educational evidence.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

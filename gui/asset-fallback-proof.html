@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Asset fallback proof</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #17232d; background: #f4f7f6; }
+    body { margin: 0; padding: 2rem; max-width: 64rem; }
+    main { background: #fff; border: 1px solid #b8c5ca; border-radius: .6rem; padding: 1.5rem; }
+    table { border-collapse: collapse; width: 100%; margin-top: 1rem; }
+    th, td { border: 1px solid #b8c5ca; padding: .7rem; text-align: left; vertical-align: top; }
+    th { background: #e7eeee; }
+    .fallback { background: #fff8e8; }
+    .marker { display: inline-block; border: 2px solid #60707b; border-radius: 50%; padding: .2rem .45rem; font-weight: 700; }
+    .status { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <main aria-labelledby="title">
+    <h1 id="title">Optional asset fallback proof</h1>
+    <p>Fixture-only proof. Availability is supplied locally; no network, host session, command, decoder, or simulation state is used.</p>
+    <p id="summary" role="status" aria-live="polite"></p>
+    <table>
+      <caption>Loaded and unavailable presentation outcomes</caption>
+      <thead><tr><th>Requested asset</th><th>Rendered presentation</th><th>Status</th><th>Written equivalent</th><th>Release path</th></tr></thead>
+      <tbody id="outcomes"></tbody>
+    </table>
+  </main>
+  <script type="module">
+    import { facilityPresentationFor } from "./facility-components.mjs";
+    import { identityPresentationFor } from "./identity-kits.mjs";
+
+    const outcomes = [
+      facilityPresentationFor("general-hospital-base", "loaded"),
+      facilityPresentationFor("general-hospital-base", "missing"),
+      identityPresentationFor("northlake", { ok: false, reason: "failed" }),
+      identityPresentationFor("unknown", { status: "malformed" }),
+    ];
+    const body = document.querySelector("#outcomes");
+    for (const outcome of outcomes) {
+      const row = document.createElement("tr");
+      if (outcome.display_mode === "fallback") row.className = "fallback";
+      const values = [
+        { text: outcome.requested_label },
+        { text: outcome.rendered_label, className: "marker" },
+        { text: outcome.asset_status, className: "status" },
+        { text: outcome.equivalent },
+        { text: outcome.release_path ?? "Not used in fallback" },
+      ];
+      for (const value of values) {
+        const cell = document.createElement("td");
+        if (value.className) {
+          const span = document.createElement("span");
+          span.className = value.className;
+          span.textContent = value.text;
+          cell.append(span);
+        } else cell.textContent = value.text;
+        row.append(cell);
+      }
+      body.append(row);
+    }
+    document.querySelector("#summary").textContent = `${outcomes.filter((outcome) => outcome.display_mode === "fallback").length} of ${outcomes.length} examples use explicit generic fallbacks.`;
+  </script>
+</body>
+</html>
