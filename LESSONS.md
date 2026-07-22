@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Campaign Coverage Bounded and Exact
+
+- Context: Phase 11.1 names a broad full-campaign expansion, while the
+  repository already contains several pure visual/audio catalogs and a
+  bounded first-month path.
+- Risk: A checklist or catalog count can imply full campaign coverage even
+  when screenshot, continuity, performance, and human-quality evidence is
+  absent.
+- Resolution: Compare a committed ledger with live module exports, assert
+  visible source/equivalent and fallback semantics, and close only the exact
+  actor-family/fallback entries supported by the probe.
+- Prevention: State catalog scope and open campaign limits beside every
+  coverage ledger; keep host/core authority outside presentation evidence.
+
 ## Prepare Evaluation Without Fabricating Human Evidence
 
 - Context: Phase 10.1 technical integration was complete, while Phase 10.2

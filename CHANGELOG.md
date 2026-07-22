@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.88] - 2026-07-21
+
+- Added an exact Phase 11.1 coverage ledger for the current competitive
+  facility, overlay, actor-family, event-marker, event-cue, and music-state
+  presentation catalogs.
+- Added pure Node-backed parity, visible-equivalent, unknown-fallback, and
+  bounded continuity-surface checks; no host, simulation, asset, or runtime
+  behavior changed.
+- Closed only actor-family catalog and unknown-content fallback technical
+  entries while keeping full-campaign, screenshot, performance, compatibility,
+  and human-quality gates open.
+
 ## [0.12.87] - 2026-07-21
 
 - Added a privacy-bounded Phase 10.2 structured-evaluation protocol with

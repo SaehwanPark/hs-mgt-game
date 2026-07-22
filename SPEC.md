@@ -5336,6 +5336,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   accessibility conclusions, educational claims, runtime behavior, asset
   changes, or host/simulation authority changes.
 
+### Visual/audio Phase 11.1 campaign-coverage evidence (v0.12.88)
+
+- Status: In progress; bounded catalog parity and fallback evidence are being
+  recorded, while full-campaign coverage remains incomplete.
+- Done: exact facility, overlay, actor-family, event-marker, event-cue, and
+  music-state ledger IDs; visible source/equivalent checks; unknown fallback
+  checks; and bounded first-month continuity surface references.
+- Not Yet Done: full facility/overlay/event/history/debrief/save-load/replay
+  coverage, screenshot suite, performance/compatibility validation, and human
+  quality review.
+- Deferred / Non-Goals: no runtime, asset, host, simulation, stochastic,
+  history, replay, debrief, or authority change.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

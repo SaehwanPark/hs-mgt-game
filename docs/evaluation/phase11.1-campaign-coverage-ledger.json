@@ -1,0 +1,130 @@
+{
+  "schema_version": "competitive-campaign-coverage-ledger-v1",
+  "status": "bounded-technical-ledger",
+  "campaign": "competitive-regional-v1",
+  "scope": "Committed presentation catalogs and the bounded first-month continuity path; not full-campaign or screenshot completion.",
+  "catalogs": {
+    "facilities": {
+      "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
+      "fallback_id": "generic-facility",
+      "ids": [
+        "general-hospital-base",
+        "administrative-headquarters",
+        "patient-tower",
+        "parking-structure",
+        "utility-plant",
+        "research-education-building",
+        "construction-crane",
+        "undeveloped-parcel",
+        "emergency-department",
+        "ambulatory-center",
+        "specialty-center",
+        "rural-clinic",
+        "generic-facility"
+      ]
+    },
+    "operational_overlays": {
+      "source": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_SET",
+      "fallback_id": "operational-overlay-generic",
+      "ids": [
+        "operational-staffing-constraint",
+        "operational-capacity-constraint",
+        "operational-demand-pressure",
+        "operational-active-capital-project",
+        "operational-delayed-project",
+        "operational-project-completion",
+        "operational-payer-network-change",
+        "operational-regulatory-review",
+        "operational-community-trust-concern",
+        "operational-financial-distress",
+        "operational-recovery",
+        "operational-uncertain-stale-intelligence"
+      ]
+    },
+    "actor_families": {
+      "source": "gui/actor-families.mjs: ACTOR_FAMILIES",
+      "fallback_id": "generic-actor",
+      "ids": [
+        "payer",
+        "regulator",
+        "labor",
+        "employer",
+        "community",
+        "board",
+        "policy-coalition",
+        "independent-provider"
+      ]
+    },
+    "event_markers": {
+      "source": "gui/map-event-markers.mjs: EVENT_MARKER_SET",
+      "fallback_id": "event-marker-generic",
+      "ids": [
+        "event-marker-policy",
+        "event-marker-workforce",
+        "event-marker-community",
+        "event-marker-project"
+      ]
+    },
+    "event_cues": {
+      "source": "gui/audio-cue-contract.mjs: AUDIO_CUE_CONTRACT.entries",
+      "fallback_id": null,
+      "ids": [
+        "ui.action-confirm",
+        "ui.action-reject",
+        "ui.action-add",
+        "ui.action-remove",
+        "ui.submit",
+        "ui.advance-month",
+        "ui.report-received",
+        "ui.save-complete",
+        "event.project-complete",
+        "event.staffing-constraint",
+        "event.operating-loss",
+        "event.operating-recovery",
+        "event.payer-decision",
+        "event.regulatory-decision",
+        "event.rival-expansion",
+        "event.affiliation-milestone"
+      ]
+    },
+    "music_states": {
+      "source": "gui/music-stem-contract.mjs: MUSIC_STEM_CONTRACT.entries",
+      "fallback_id": null,
+      "ids": [
+        "menu",
+        "stable_operations",
+        "pressure",
+        "regulatory_scrutiny",
+        "competitive_escalation",
+        "affiliation_negotiation",
+        "debrief"
+      ]
+    }
+  },
+  "continuity": {
+    "status": "bounded-first-month-evidence",
+    "surfaces": [
+      "gui/first-month.mjs",
+      "gui/resolution-sequence.mjs",
+      "gui/consequence-links.mjs",
+      "gui/playtest.mjs",
+      "gui/app.mjs",
+      "tests/test_phase10_first_month.py"
+    ],
+    "boundary": "History, debrief, replay, save/load, and hashes remain host/core-owned; this ledger verifies presentation references only."
+  },
+  "fallbacks": {
+    "facility_unknown": "generic-facility",
+    "actor_family_unknown": "generic-actor",
+    "operational_overlay_unknown": "operational-overlay-generic",
+    "event_marker_unknown": "event-marker-generic",
+    "asset_unknown_display_mode": "fallback",
+    "audio_cue_unknown": null,
+    "music_state_unknown": null
+  },
+  "open_limits": [
+    "Full competitive-campaign facility, overlay, event, history, debrief, save/load, and replay coverage is not established by this bounded ledger.",
+    "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
+    "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
+  ]
+}

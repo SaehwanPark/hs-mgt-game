@@ -2227,6 +2227,9 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
+**Status:** Bounded catalog evidence recorded in v0.12.88; full campaign
+coverage, continuity validation, performance, and screenshot gates remain open.
+
 ### Scope
 
 - all facility types used in the campaign;
@@ -2242,16 +2245,32 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 - [ ] Facility asset coverage complete.
 - [ ] Overlay coverage complete.
-- [ ] Actor-family coverage complete.
+- [x] Actor-family coverage complete.
 - [ ] Event cue coverage complete.
 - [ ] Music-state coverage complete.
 - [ ] History view updated.
 - [ ] Debrief view updated.
 - [ ] Save/load visual continuity tested.
 - [ ] Replay visual continuity tested.
-- [ ] Unknown content fallbacks tested.
+- [x] Unknown content fallbacks tested.
 - [ ] Asset registry coverage is 100%.
 - [ ] Full campaign screenshot suite passes.
+
+### v0.12.88 bounded campaign-coverage evidence and limits
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` inventories the
+  current facility, operational-overlay, actor-family, event-marker, event-cue,
+  and music-state catalogs by exact live module IDs. It records the bounded
+  first-month/history/debrief/replay presentation surfaces and their host/core
+  authority boundary.
+- `tests/test_phase11_campaign_coverage.py` compares every ledger ID to the
+  live JavaScript exports, checks visible source/equivalent semantics, and
+  exercises generic unknown/fallback paths. The existing asset validators
+  remain authoritative for registry/release coverage.
+- This closes only the actor-family catalog and unknown-content fallback
+  technical entries. Full campaign facility/overlay/event/history/debrief/
+  save-load/replay coverage, screenshot coverage, performance, compatibility,
+  and human quality remain open.
 
 ### Exit criteria
 
