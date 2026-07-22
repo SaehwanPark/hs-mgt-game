@@ -5311,6 +5311,17 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - No asset, registry, release hash, manifest, runtime, host, simulation,
   history, replay, or debrief artifact is changed.
 
+### Visual/audio Phase 10.1 first-month technical slice (v0.12.86)
+
+- Status: Closed; implementation and verification complete. A machine-checkable
+  acceptance test binds every Phase 10.1 technical checklist item to the existing integrated GUI, host DTO,
+  resolution, replay, accessibility, audio, fallback, and provenance surfaces.
+- The probe remains deterministic and presentation-only. It cannot submit a
+  command, advance a session, read hidden state, or rewrite history/hashes.
+- Phase 10.2 first-time-user, accessibility-quality, audio-fatigue,
+  educational-usability, legal, ownership, and human-review questions remain
+  explicit external gates.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

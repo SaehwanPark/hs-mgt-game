@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.86] - 2026-07-21
+
+- Added exact Phase 10.1 first-month technical acceptance coverage across the
+  regional board, executive surfaces, host resolution, replay, accessibility,
+  optional audio, fallbacks, and provenance evidence.
+- Added deterministic first-month stage, visible-music, skip, and no-authority
+  probes without creating a duplicate runtime path or changing host state.
+- Kept Phase 10.2 user comprehension, accessibility quality, audio fatigue,
+  educational usability, legal, ownership, and human-review gates explicit.
+
 ## [0.12.85] - 2026-07-21
 
 - Reconciled the Phase 9.1/9.2 roadmap with the passing automated license,

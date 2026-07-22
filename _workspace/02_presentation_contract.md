@@ -1,3 +1,80 @@
+# Presentation Contract — Phase 10.1 first-month slice v0.12.86
+
+## Goal and Authorization
+
+Bind the existing first-month `competitive-regional-v1` path to a deterministic
+technical acceptance contract across the regional board, executive desktop,
+host resolution, optional audio, replay, accessibility, fallback, and
+provenance surfaces. This slice adds evidence, not a second runtime path.
+
+## Player Questions and Consequences
+
+The technical path must make these visible without inventing hidden state:
+
+- Which three systems, facilities, projects, pressures, and rival observations
+  are visible at the current point in the first month?
+- What was drafted, validated, submitted, committed, and refreshed by the host?
+- Which resolution stages, written consequences, audio equivalents, replay
+  hashes, and uncertain/missing values remain reviewable?
+
+First-time-user comprehension, game feel, audio usefulness/fatigue, and
+educational usability are not inferred from these contracts.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Regional board | Actor-visible regional-world DTO and observed public signals | Preserve source, lag, missingness, and generic identity/facility fallback | No true geography or private rival detail |
+| Executive desktop | Presentation DTO, action catalog, and local selection state | Keep text/source/status labels visible | No simulation transition or client command authority |
+| Resolution | Host-committed resolution envelope, history, and replay metadata | Preserve written stages, skip/review, and stable hashes | No predicted effects or recomputed outcomes |
+| Audio | Existing visible classifier, catalog, priority, and fallback contracts | Keep mute/cues-only/text equivalents available | No hidden intent, severity, or outcome channel |
+| Provenance | Existing registries, manifest, credits, and generation gates | Fail closed when records are incomplete | No automatic legal or human approval |
+
+## Visual, Motion, and Audio Semantics
+
+The integrated first-month path uses the existing schematic regional board,
+institution/facility tokens, semantic containers, eight-stage resolution
+sequence, optional ambience/cues/adaptive music, and written equivalents.
+Skip/reduced-motion/review modes preserve committed text and replay order.
+
+## Accessibility and Fallbacks
+
+Keyboard landmarks, non-color status language, text scale, reduced motion,
+mute/cues-only modes, written audio equivalents, missingness labels, and
+generic unknown content fallbacks remain required. Technical presence does not
+establish human accessibility quality.
+
+## Authority, History, and Replay Boundaries
+
+The browser consumes actor-visible host DTOs and local presentation state only.
+Commands, transitions, stochastic inputs, true state, immutable history, state
+hashes, replay artifacts, and debrief facts remain host/core-owned. Selection,
+animation, audio, skip, and first-month stage state cannot advance the session.
+
+## Asset Provenance and Release Requirements
+
+The slice uses existing registered assets/catalog projections and does not add
+or promote an asset. Existing hash, license, provenance, fallback, and human
+review gates remain authoritative for release changes.
+
+## Verification and Evidence Limits
+
+`tests/test_phase10_first_month.py` must assert every Phase 10.1 technical label,
+live mount/source marker, no-authority boundary, deterministic first-month
+stage path, visible music sequence, skip behavior, and JavaScript syntax.
+Existing GUI, host, replay, audio, accessibility, asset, and Rust checks remain
+required. No check establishes first-time-user comprehension, audio quality or
+fatigue, educational usability, legal clearance, ownership, or human review.
+
+## Non-Goals and Open Questions
+
+- No new asset, dependency, host field, simulation rule, hidden-state projection,
+  or duplicate proof runtime.
+- No Phase 10.2 participant protocol, human evaluation, or go/no-go decision.
+- How the first-month slice performs with new players remains an open gate.
+
+---
+
 # Presentation Contract — Phase 9 technical closure v0.12.85
 
 ## Goal and Authorization

@@ -535,6 +535,14 @@ language that automated validation is not legal clearance, decoder safety,
 quality, accessibility, ownership, portrait approval, or human review. This
 audit changes no runtime or simulation authority and no canonical asset bytes.
 
+The v0.12.86 Phase 10.1 slice adds an acceptance ledger over the existing
+first-month `competitive-regional-v1` presentation path. It binds regional
+board and facility identity, semantic desktop surfaces, host resolution,
+optional audio, accessibility controls, replay/hash metadata, fallback, and
+provenance evidence without adding a second runtime path. Phase 10.2 human
+comprehension, quality, fatigue, educational, legal, ownership, and review
+questions remain outside the technical contract.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 
