@@ -18,6 +18,7 @@ Validate the repository with:
 python3 scripts/validate_assets.py
 python3 scripts/generate_asset_credits.py --check
 python3 scripts/generate_asset_credits.py --notices
+python3 scripts/generate_asset_credits.py --runtime
 ```
 
 ## Registry contract
@@ -37,3 +38,5 @@ all-rights-reserved, proprietary-game, and unapproved assets are rejected.
 The visual/audio maintainer owns semantic and accessibility review; the PR
 reviewer checks the repository and metadata; the project maintainer approves
 release use. Contributors must preserve source outputs and modification notes.
+The static GUI's in-game credits disclosure is generated from the same registry
+projection at `gui/asset-credits.mjs`; it is not a separate source of rights.

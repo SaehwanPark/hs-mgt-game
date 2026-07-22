@@ -5220,6 +5220,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   hash, replay, or debrief authority changed. Automated checks do not perform
   a legal or human license audit.
 
+### Visual/audio Phase 9.1 in-game credits (v0.12.79)
+
+- Status: In progress; the static executive desktop now exposes a text-first,
+  keyboard-accessible asset credits/provenance disclosure before and after
+  host/session loading.
+- The generated `gui/asset-credits.mjs` projection lists canonical registry
+  entries with source, license, attribution, approval, provenance, release
+  status, and written equivalents. Stale projection output fails CI.
+- The renderer uses `textContent` and local static data only. No runtime GUI,
+  host DTO, command, simulation transition, actor observation, history, hash,
+  replay, or debrief authority changed; the panel is not human accessibility
+  or legal-review evidence.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

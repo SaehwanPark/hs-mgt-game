@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.79] - 2026-07-21
+
+- Added a read-only, keyboard-accessible in-game asset credits and provenance
+  disclosure backed by a generated registry projection.
+- Added projection parity and no-network/no-authority tests; the credits
+  surface remains available without host/session data and preserves written
+  equivalents and release status.
+- No portrait preview, external asset, release derivative, or simulation/
+  history/replay/debrief authority was added or changed.
+
 ## [0.12.78] - 2026-07-21
 
 - Added per-entry provenance metadata and fail-closed source/license/date

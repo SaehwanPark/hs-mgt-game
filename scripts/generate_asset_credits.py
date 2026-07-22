@@ -14,6 +14,7 @@ REGISTRIES = (
   ("assets/registry/audio-assets.json", "Audio"),
 )
 NOTICE_TARGET = "assets/THIRD_PARTY_NOTICES.md"
+RUNTIME_TARGET = "gui/asset-credits.mjs"
 
 
 def project_version(root: Path) -> str:
@@ -24,12 +25,16 @@ def project_version(root: Path) -> str:
   return match.group(1)
 
 
-def render(root: Path) -> str:
+def _registry_entries(root: Path) -> list[tuple[str, dict]]:
   entries: list[tuple[str, dict]] = []
   for relative_path, category in REGISTRIES:
     document = json.loads((root / relative_path).read_text(encoding="utf-8"))
     entries.extend((category, entry) for entry in document["entries"])
-  entries.sort(key=lambda item: (item[0], item[1]["id"]))
+  return sorted(entries, key=lambda item: (item[0], item[1]["id"]))
+
+
+def render(root: Path) -> str:
+  entries = _registry_entries(root)
   version = project_version(root)
   has_third_party_release = any(
     entry["provenance"]["kind"] != "repository-authored"
@@ -64,15 +69,50 @@ def render(root: Path) -> str:
     "", "Every entry also records its semantic role, visible source, accessible",
     "equivalent, modifications, and source/release hash fields in the registry.",
     f"Third-party release notices are generated separately in `{NOTICE_TARGET}`.", "",
+    f"The static GUI credits disclosure is generated separately in `{RUNTIME_TARGET}`.", "",
   ])
   return "\n".join(lines)
 
 
+def render_runtime(root: Path) -> str:
+  entries = _registry_entries(root)
+  records = []
+  for category, entry in entries:
+    records.append({
+      "asset_type": category.lower(),
+      "id": entry["id"],
+      "source": entry["source_path"] or entry["creation_method"],
+      "license": entry["license"],
+      "attribution": entry["attribution_text"],
+      "approval_status": entry["approval_status"],
+      "provenance": entry["provenance"],
+      "accessible_equivalent": entry["accessible_equivalent"],
+      "release_status": "approved-release" if entry["release_path"] and entry["approval_status"] == "approved" else "not-released",
+      "release_path": entry["release_path"],
+    })
+  third_party_release_count = sum(
+    record["provenance"]["kind"] != "repository-authored"
+    and record["release_status"] == "approved-release"
+    for record in records
+  )
+  document = {
+    "schema_version": "asset-credits-v1",
+    "package_version": project_version(root),
+    "registry_source": "assets/registry/*.json",
+    "third_party_release_count": third_party_release_count,
+    "entries": records,
+  }
+  payload = json.dumps(document, ensure_ascii=False, indent=2)
+  return "\n".join([
+    "// Generated from assets/registry/*.json; do not edit directly.",
+    "// Regenerate with: python3 scripts/generate_asset_credits.py --runtime",
+    f"export const ASSET_CREDITS = Object.freeze({payload});",
+    "",
+  ])
+
+
 def render_notices(root: Path) -> str:
-  entries: list[dict] = []
-  for relative_path, _category in REGISTRIES:
-    document = json.loads((root / relative_path).read_text(encoding="utf-8"))
-    entries.extend(document["entries"])
+  entries = [entry for _category, entry in _registry_entries(root)]
   entries = [
     entry for entry in entries
     if entry["provenance"]["kind"] != "repository-authored"
@@ -111,8 +151,12 @@ def main() -> int:
   parser = argparse.ArgumentParser()
   parser.add_argument("--check", action="store_true", help="check the generated file")
   parser.add_argument("--notices", action="store_true", help="render third-party notices")
+  parser.add_argument("--runtime", action="store_true", help="render the GUI runtime projection")
   args = parser.parse_args()
   root = Path(__file__).resolve().parents[1]
+  if args.runtime:
+    print(render_runtime(root), end="")
+    return 0
   if args.notices:
     print(render_notices(root), end="")
     return 0
@@ -126,6 +170,10 @@ def main() -> int:
     notices = root / NOTICE_TARGET
     if notices.read_text(encoding="utf-8") != render_notices(root):
       print(f"asset credits check: stale {notices}")
+      return 1
+    runtime = root / RUNTIME_TARGET
+    if runtime.read_text(encoding="utf-8") != render_runtime(root):
+      print(f"asset credits check: stale {runtime}")
       return 1
     print("asset credits check: passed")
     return 0
