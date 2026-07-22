@@ -4,7 +4,7 @@
 
 ### Status
 
-`in progress`
+`pass`
 
 ### Reviewed Inputs and Authorization
 
@@ -40,13 +40,14 @@
 
 - The initial review requested a safe own-key fallback lookup, explicit
   registry-hash wording, runtime selected-detail coverage, and current
-  verification evidence; those fixes are now applied locally. Final reviewer
-  disposition remains pending.
+  verification evidence; all findings were addressed and the focused suite
+  passes.
 
 ### Single code-review disposition
 
-The designated single code reviewer must inspect the final diff and focused
-evidence; no second code reviewer is authorized.
+The designated single code reviewer approved the final diff with no remaining
+actionable findings after the fallback, documentation, detail-coverage, and
+verification-evidence fixes; no second code reviewer was used.
 
 ### Residual Risks and Evidence Limits
 
