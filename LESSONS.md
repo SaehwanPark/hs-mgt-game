@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Prepare Evaluation Without Fabricating Human Evidence
+
+- Context: Phase 10.1 technical integration was complete, while Phase 10.2
+  required first-time-user, accessibility, audio, and consequence-comprehension
+  evidence that was not available in the repository.
+- Risk: Checking evaluation outcomes or writing plausible participant findings
+  would turn a preparation artifact into an unsupported product claim.
+- Resolution: Separate stable task/rating definitions from collection, finding
+  classification, revision, and go/no-go authorization. Keep the revision log
+  empty and prohibit identifying/private data in repository artifacts.
+- Prevention: Treat human evidence as an explicit external gate; automated
+  tests may verify protocol shape and blank decision state only.
+
 ## Bind Integrated Slice Checklists to Live Evidence
 
 - Context: The first-month board, executive, resolution, replay, and audio

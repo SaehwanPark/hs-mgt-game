@@ -2158,6 +2158,9 @@ educational-usability evaluation remains a separate human gate.
 
 ## Milestone 10.2: Structured evaluation
 
+**Status:** Preparation complete in v0.12.87; participant collection, findings,
+and go/no-go remain explicit human-evaluation gates.
+
 ### Participants
 
 - project owner and contributors;
@@ -2183,17 +2186,29 @@ educational-usability evaluation remains a separate human gate.
 
 ### Checklist
 
-- [ ] Test protocol written.
-- [ ] First-session tasks defined.
-- [ ] Recognition tasks defined.
-- [ ] Consequence-tracing tasks defined.
-- [ ] Accessibility tasks defined.
+- [x] Test protocol written.
+- [x] First-session tasks defined.
+- [x] Recognition tasks defined.
+- [x] Consequence-tracing tasks defined.
+- [x] Accessibility tasks defined.
 - [ ] Audio preference feedback collected.
 - [ ] Quantitative ratings collected.
 - [ ] Qualitative interviews completed.
 - [ ] Findings classified as defect, preference, or scope expansion.
-- [ ] Revision log created.
+- [x] Revision log created.
 - [ ] Go/no-go decision recorded.
+
+### v0.12.87 evaluation-preparation evidence and limits
+
+- `docs/evaluation/phase10.2-evaluation-protocol.json` defines stable task IDs,
+  participant groups, rating dimensions, audio/accessibility prompts, finding
+  categories, privacy restrictions, and a blank decision record.
+- `docs/guides/phase10.2-structured-evaluation.md` provides the facilitator
+  sequence and explicitly prohibits teaching hidden outcomes or recording
+  identifying/private data. `docs/evaluation/phase10.2-revision-log.md` is an
+  empty, anonymized findings template.
+- No audio feedback, quantitative ratings, interviews, classified findings, or
+  go/no-go decision has been fabricated or recorded. These remain human gates.
 
 ### Exit criteria
 

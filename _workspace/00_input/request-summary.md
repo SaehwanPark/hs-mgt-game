@@ -1,4 +1,59 @@
-# Request Summary — Visual/audio Phase 10.1 first-month slice v0.12.86
+# Request Summary — Visual/audio Phase 10.2 evaluation preparation v0.12.87
+
+## Authorized outcome
+
+Prepare a privacy-bounded, machine-readable and facilitator-readable
+structured evaluation protocol for the Phase 10.1 first-month visual/audio
+slice. Close only the preparation items that can be evidenced in the
+repository; keep participant evidence, findings, and go/no-go authorization
+open.
+
+## Target slice
+
+- Add a canonical JSON protocol with stable task IDs, rating dimensions,
+  finding categories, privacy restrictions, and a blank decision record.
+- Add a facilitator guide covering first-session, recognition,
+  consequence-tracing, accessibility, and audio tasks.
+- Add an empty anonymized revision-log template and a regression test that
+  prevents fabricated human evidence or premature roadmap closure.
+- Update project records, version projections, CI, and lessons without adding
+  runtime behavior or collecting participant data.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 10.2 evaluation gates.
+- `docs/evaluation/phase10.2-evaluation-protocol.json` — canonical task and
+  decision schema.
+- `docs/guides/phase10.2-structured-evaluation.md` — facilitator sequence.
+- `docs/design_principles.md`, `LESSONS.md`, and the current presentation
+  contract and QA record.
+
+## Non-goals
+
+- Do not conduct or simulate sessions, fabricate ratings/interviews/findings,
+  or record a go/no-go decision.
+- Do not collect or commit names, contact details, health information,
+  identifying recordings, private game state, or external participant data.
+- Do not claim legal clearance, universal accessibility, educational benefit,
+  clinical validity, policy forecasting accuracy, or human approval.
+- Do not add assets, dependencies, runtime behavior, host fields, simulation
+  rules, hidden-state projections, or client authority.
+
+## Validation target
+
+Focused evaluation-preparation and release-metadata tests, full Python/Rust
+tests, asset/security/release/credits/version/documentation checks, formatting,
+Clippy, JavaScript syntax, and diff checks.
+
+## Evidence limits
+
+This slice establishes evaluation readiness only. It contains no participant
+results, and human evaluation, finding classification, revision approval, and
+go/no-go remain separately authorized gates.
+
+---
+
+# Historical Request Summary — Visual/audio Phase 10.1 first-month slice v0.12.86
 
 ## Authorized outcome
 
