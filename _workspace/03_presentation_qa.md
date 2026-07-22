@@ -79,8 +79,6 @@ accessibility, educational benefit, clinical plausibility, or policy validity.
 
 ## Current slice: Phase 8.2 review-ready portrait approval worksheet v0.12.77
 
-## Current slice: Phase 8.2 review-ready portrait approval worksheet v0.12.77
-
 ### Status
 
 `pass`

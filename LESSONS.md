@@ -2204,7 +2204,7 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   generated metadata with no external files.
 - Prevention: Treat identity/marker lookup as pure presentation code; assert
   hidden fields, network calls, and third-party assets remain absent before
-expanding the visual language.
+  expanding the visual language.
 
 ## Phase 13: Provenance fields must distinguish repository sources from retrievals
 
