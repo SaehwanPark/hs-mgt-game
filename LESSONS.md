@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Bound Audio Priority and Preserve Written Consequences
+
+- Context: Phase 7.4 needed dense month resolutions to remain readable while
+  retaining the existing optional music, ambience, and visible event cues.
+- Symptom: Immediate cue playback can stack repeated reports, mask a critical
+  consequence with a background layer, and leave preferences inconsistent when
+  browser storage is unavailable.
+- Resolution: Plan synchronous visible requests with a pure priority contract,
+  select one critical cue per batch, aggregate routine requests, cap queue and
+  transient voices, duck only background layers with bounded ramps, and persist
+  only explicit local audio controls with safe session fallback.
+- Prevention: Treat priority as ordering rather than severity, keep all visible
+  text/source/status output intact, test fake timers and Web Audio voice bounds,
+  and leave host, simulation, history, replay, and debrief authority untouched.
+
 ## Keep Music Contextual and Visible-Only
 
 - Context: Phase 7.3 needed adaptive music states without turning harmony into

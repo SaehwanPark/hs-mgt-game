@@ -1581,6 +1581,21 @@ base pulse
 
 ## Milestone 7.4: Audio priority and fatigue manager
 
+**Status:** Complete in v0.12.73
+
+**Evidence:** `gui/audio-priority-contract.mjs` defines the pure fixed
+priority/queue policy; `gui/audio.mjs` batches visible cue requests, limits
+transient voices, aggregates routine requests, applies bounded music/ambience
+ducking, and persists explicit local preferences when storage is available.
+`gui/audio-priority-proof.html` and `tests/test_audio_priority.py` cover
+priority selection, one-critical batching, cooldown/duplicate suppression,
+queue caps, fake Web Audio/timer stress, ducking, live-region/fallback markers,
+and preference failure behavior.
+
+This is technical presentation evidence only. It does not establish measured
+loudness, fatigue reduction, lived accessibility, screen-reader usability,
+human comprehension, learning, calibration, or policy validity.
+
 ### Priority order
 
 1. Critical visible consequence.
@@ -1602,16 +1617,16 @@ base pulse
 
 ### Checklist
 
-- [ ] Priority queue implemented.
-- [ ] Cooldowns implemented.
-- [ ] Duplicate suppression implemented.
-- [ ] Ducking implemented.
-- [ ] Batch aggregation implemented.
-- [ ] Maximum simultaneous voices defined.
-- [ ] Preference persistence tested.
-- [ ] Rapid-input stress test completed.
-- [ ] Month-resolution stress test completed.
-- [ ] Screen-reader and audio coexistence reviewed.
+- [x] Priority queue implemented.
+- [x] Cooldowns implemented.
+- [x] Duplicate suppression implemented.
+- [x] Ducking implemented.
+- [x] Batch aggregation implemented.
+- [x] Maximum simultaneous voices defined.
+- [x] Preference persistence tested.
+- [x] Rapid-input stress test completed.
+- [x] Month-resolution stress test completed.
+- [x] Screen-reader and audio coexistence reviewed.
 
 ### Exit criteria
 

@@ -1,6 +1,10 @@
 import { AUDIO_CUE_POLICY, audioCueContractFor } from "./audio-cue-contract.mjs";
+import { AUDIO_PRIORITY_POLICY, planAudioCueBatch, priorityValue } from "./audio-priority-contract.mjs";
 import { AMBIENCE_CONTRACT } from "./ambience-contract.mjs";
 import { MUSIC_STEM_CONTRACT, classifyVisibleMusicState } from "./music-stem-contract.mjs";
+
+// AUDIO_PRIORITY_POLICY follows audio-priority-manager-v1; its pure batch plan
+// keeps visible cue ordering separate from host transitions and written output.
 
 const MUSIC_ENTRIES = MUSIC_STEM_CONTRACT.entries.map((entry) => ({
   ...entry,
@@ -148,6 +152,28 @@ function audioConstructor(provided) {
   return provided ?? globalThis.AudioContext ?? globalThis.webkitAudioContext ?? null;
 }
 
+function resolveAudioStorage(storage) {
+  if (storage !== undefined) return storage;
+  try {
+    return globalThis.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function readAudioPreferences(storage) {
+  try {
+    const parsed = JSON.parse(storage?.getItem?.(AUDIO_PRIORITY_POLICY.storage_key) ?? "{}");
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch {
+    return {};
+  }
+}
+
+function persistedBoolean(value, fallback = false) {
+  return typeof value === "boolean" ? value : fallback;
+}
+
 function visibleAmbienceId(input = {}) {
   const requested = input.ambience_id ?? input.presentation_ambience_id;
   if (requested != null) return AMBIENCE_BY_ID.has(String(requested).trim()) ? String(requested).trim() : null;
@@ -160,24 +186,53 @@ export function createAudioClient({
   AudioContextCtor,
   sink = createRecordingSink(),
   recorder,
+  storage,
 } = {}) {
   const contextConstructor = audioConstructor(AudioContextCtor);
+  const audioStorage = resolveAudioStorage(storage);
+  const persisted = readAudioPreferences(audioStorage);
   const volumes = { master: 1, music: 0.55, interface: 0.7, event: 0.8, ambience: 0.25 };
+  for (const channel of Object.keys(volumes)) {
+    if (Number.isFinite(Number(persisted.volumes?.[channel]))) volumes[channel] = clamp(persisted.volumes[channel]);
+  }
   const lastCueAt = new Map();
+  const pendingCueRequests = [];
+  const queuedCueRequests = [];
   let context = null;
   let enabled = false;
-  let muted = false;
-  let musicMuted = false;
+  let muted = persistedBoolean(persisted.muted);
+  let musicMuted = persistedBoolean(persisted.musicMuted);
   let focused = true;
-  let mode = "full";
-  let reducedNotifications = false;
+  let mode = ["full", "cues-only"].includes(persisted.mode) ? persisted.mode : "full";
+  let reducedNotifications = persistedBoolean(persisted.reducedNotifications);
   let currentMusic = "menu";
   let currentAmbience = null;
   let musicTimer = null;
   const musicStemTimers = new Set();
   const activeMusicVoices = new Set();
+  const activeAmbienceVoices = new Set();
+  const activeCueVoices = new Set();
+  let cueBatchTimer = null;
+  let cueDrainTimer = null;
+  let cueBusy = false;
+  let duckTimer = null;
+  let duckingPriority = null;
   let ambienceTimer = null;
   let visibilityHandler = null;
+
+  function persistAudioPreferences() {
+    try {
+      audioStorage?.setItem?.(AUDIO_PRIORITY_POLICY.storage_key, JSON.stringify({
+        muted,
+        musicMuted,
+        mode,
+        reducedNotifications,
+        volumes,
+      }));
+    } catch {
+      // Preferences remain session-local when browser storage is unavailable.
+    }
+  }
 
   function statusText(message) {
     const node = root?.querySelector?.("#audio-state");
@@ -209,6 +264,78 @@ export function createAudioClient({
     return volumes.master * (channel === "master" ? 1 : volumes[channel]);
   }
 
+  function linearGain(decibels) {
+    return 10 ** (Number(decibels) / 20);
+  }
+
+  function duckFactor(channel) {
+    if (channel === "music" && duckingPriority === "critical") return linearGain(AUDIO_PRIORITY_POLICY.ducking_db.critical);
+    if (channel === "ambience" && duckingPriority) return linearGain(AUDIO_PRIORITY_POLICY.ducking_db[duckingPriority]);
+    return 1;
+  }
+
+  function backgroundVoices() {
+    return [...activeMusicVoices, ...activeAmbienceVoices];
+  }
+
+  function scheduleVoiceTarget(voice, factor) {
+    if (!context || voice.released) return;
+    const now = context.currentTime;
+    const attack = Math.max(0.02, AUDIO_PRIORITY_POLICY.duck_attack_ms / 1000);
+    const target = Math.max(0.0001, voice.base_gain * factor);
+    const releaseAt = Math.max(now + attack, voice.end_time - voice.fade_seconds);
+    try {
+      const currentGain = Math.max(0.0001, Number(voice.gain.gain.value) || 0.0001);
+      voice.gain.gain.cancelScheduledValues(now);
+      voice.gain.gain.setValueAtTime(currentGain, now);
+      voice.gain.gain.exponentialRampToValueAtTime(target, now + attack);
+      voice.gain.gain.exponentialRampToValueAtTime(0.0001, releaseAt);
+    } catch {
+      // A closing or unsupported context keeps the visible fallback complete.
+    }
+  }
+
+  function applyDucking() {
+    for (const voice of backgroundVoices()) scheduleVoiceTarget(voice, duckFactor(voice.channel));
+  }
+
+  function beginDucking(priority, durationMs) {
+    if (!(priority === "critical" || priority === "major")) return;
+    if (!duckingPriority || priorityValue(priority) > priorityValue(duckingPriority)) duckingPriority = priority;
+    applyDucking();
+    if (duckTimer != null) globalThis.clearTimeout(duckTimer);
+    duckTimer = globalThis.setTimeout(() => {
+      duckTimer = null;
+      duckingPriority = null;
+      applyDucking();
+    }, Math.max(0, Number(durationMs) || 0) + AUDIO_PRIORITY_POLICY.duck_release_ms);
+  }
+
+  function releaseVoice(voice, releaseMs = voice.crossfade_ms ?? 40) {
+    if (!voice || voice.released) return;
+    voice.released = true;
+    const now = context?.currentTime ?? 0;
+    const release = Math.max(0.02, Number(releaseMs) / 1000);
+    try {
+      const currentGain = Math.max(0.0001, Number(voice.gain.gain.value) || 0.0001);
+      voice.gain.gain.cancelScheduledValues(now);
+      voice.gain.gain.setValueAtTime(currentGain, now);
+      voice.gain.gain.exponentialRampToValueAtTime(0.0001, now + release);
+    } catch {
+      // A context may be closing; stopping the source remains best effort.
+    }
+    try {
+      voice.source.stop(now + release);
+    } catch {
+      // The source may already have ended naturally.
+    }
+    voice.cleanup();
+  }
+
+  function stopVoiceSet(voices, releaseMs) {
+    for (const voice of [...voices]) releaseVoice(voice, releaseMs);
+  }
+
   function playTone(entry, channel) {
     if (!context || gainValue(channel) === 0) return false;
     const now = context.currentTime;
@@ -216,6 +343,7 @@ export function createAudioClient({
     const recipe = entry.recipe;
     const duration = recipe.duration_ms / 1000;
     const fade = Math.min(Math.max((recipe.crossfade_ms ?? 20) / 1000, 0.02), duration / 2);
+    const baseGain = Math.max(0.0001, gainValue(channel) * (entry.normalization_gain ?? AUDIO_CUE_POLICY.normalization_gain));
     let source = null;
     let filter = null;
     if (recipe.waveform === "noise" && context.createBuffer && context.createBufferSource) {
@@ -241,7 +369,7 @@ export function createAudioClient({
       source.frequency.value = recipe.frequency;
     }
     gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, gainValue(channel) * (entry.normalization_gain ?? AUDIO_CUE_POLICY.normalization_gain)), now + fade);
+    gain.gain.exponentialRampToValueAtTime(Math.max(0.0001, baseGain * duckFactor(channel)), now + fade);
     gain.gain.exponentialRampToValueAtTime(0.0001, now + duration - fade);
     if (filter) {
       source.connect(filter);
@@ -250,15 +378,21 @@ export function createAudioClient({
       source.connect(gain);
     }
     gain.connect(context.destination);
-    if (channel === "music") {
+    if (channel === "music" || channel === "ambience" || channel === "interface" || channel === "event") {
+      const voiceSet = channel === "music" ? activeMusicVoices
+        : channel === "ambience" ? activeAmbienceVoices : activeCueVoices;
       const voice = {
         source,
         gain,
+        channel,
+        base_gain: baseGain,
+        end_time: now + duration,
+        fade_seconds: fade,
         crossfade_ms: recipe.crossfade_ms ?? entry.crossfade_ms ?? 260,
       };
-      const cleanup = () => activeMusicVoices.delete(voice);
+      const cleanup = () => voiceSet.delete(voice);
       voice.cleanup = cleanup;
-      activeMusicVoices.add(voice);
+      voiceSet.add(voice);
       source.onended = cleanup;
     }
     source.start(now);
@@ -271,29 +405,13 @@ export function createAudioClient({
     for (const timer of musicStemTimers) globalThis.clearTimeout(timer);
     musicStemTimers.clear();
     musicTimer = null;
-    const now = context?.currentTime ?? 0;
-    for (const voice of activeMusicVoices) {
-      const release = Math.max(0.02, Number(voice.crossfade_ms ?? 260) / 1000);
-      const currentGain = Math.max(0.0001, Number(voice.gain.gain.value) || 0.0001);
-      try {
-        voice.gain.gain.cancelScheduledValues(now);
-        voice.gain.gain.setValueAtTime(currentGain, now);
-        voice.gain.gain.exponentialRampToValueAtTime(0.0001, now + release);
-      } catch {
-        // A context may be closing; stopping the source remains best effort.
-      }
-      try {
-        voice.source.stop(now + release);
-      } catch {
-        // The source may already have ended naturally.
-      }
-      voice.cleanup();
-    }
+    stopVoiceSet(activeMusicVoices, 260);
   }
 
   function stopAmbience() {
     if (ambienceTimer != null) globalThis.clearTimeout(ambienceTimer);
     ambienceTimer = null;
+    stopVoiceSet(activeAmbienceVoices, 260);
   }
 
   function scheduleMusic() {
@@ -323,6 +441,118 @@ export function createAudioClient({
     if (!currentAmbience || !entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
     playTone(entry, "ambience");
     ambienceTimer = globalThis.setTimeout(scheduleAmbience, entry.recipe.duration_ms);
+  }
+
+  function dispatchCue(request) {
+    const played = playTone(request.entry, request.entry.channel);
+    if (played) beginDucking(request.entry.priority_class, request.entry.duration_ms);
+    return played;
+  }
+
+  function enqueuePendingCue(entry) {
+    const request = { id: entry.id };
+    const currentSize = pendingCueRequests.length + queuedCueRequests.length;
+    if (currentSize < AUDIO_PRIORITY_POLICY.maximum_queued_cues) {
+      pendingCueRequests.push(request);
+      return true;
+    }
+    const replaceableIndex = pendingCueRequests.findIndex((pending) => {
+      const pendingEntry = cueEntry(pending.id);
+      return pendingEntry && priorityValue(entry.priority_class) > priorityValue(pendingEntry.priority_class);
+    });
+    if (replaceableIndex >= 0) {
+      pendingCueRequests[replaceableIndex] = request;
+      return true;
+    }
+    recorder?.record?.("audio_queue_bounded", {
+      id: entry.id,
+      priority: entry.priority_class,
+      overflow_count: 1,
+    });
+    return false;
+  }
+
+  function finishCueVoices() {
+    for (const voice of [...activeCueVoices]) voice.cleanup();
+  }
+
+  function drainCueQueue() {
+    cueDrainTimer = null;
+    if (cueBusy || muted || !enabled || !focused || !context || !queuedCueRequests.length) return;
+    const request = queuedCueRequests.shift();
+    cueBusy = true;
+    try {
+      if (!dispatchCue(request)) {
+        cueBusy = false;
+        drainCueQueue();
+        return;
+      }
+    } catch {
+      stopVoiceSet(activeCueVoices, 40);
+      cueBusy = false;
+      recorder?.record?.("audio_playback_failed", { id: request.id, message: "Optional audio cue playback failed." });
+      drainCueQueue();
+      return;
+    }
+    cueDrainTimer = globalThis.setTimeout(() => {
+      finishCueVoices();
+      cueBusy = false;
+      drainCueQueue();
+    }, request.entry.duration_ms);
+  }
+
+  function flushCueBatch() {
+    cueBatchTimer = null;
+    if (!pendingCueRequests.length) return;
+    const requests = pendingCueRequests.splice(0, pendingCueRequests.length);
+    const plan = planAudioCueBatch(requests, AUDIO_CATALOG.cues);
+    for (const request of plan.selected) {
+      if (queuedCueRequests.length >= AUDIO_PRIORITY_POLICY.maximum_queued_cues) {
+        recorder?.record?.("audio_queue_bounded", {
+          id: request.id,
+          priority: request.priority,
+          overflow_count: plan.overflow_count + 1,
+        });
+        continue;
+      }
+      queuedCueRequests.push(request);
+    }
+    if (plan.duplicate_ids.length || plan.routine_aggregated_count || plan.overflow_count) {
+      recorder?.record?.("audio_batch_planned", {
+        request_count: plan.request_count,
+        duplicate_count: plan.duplicate_ids.length,
+        routine_aggregated_count: plan.routine_aggregated_count,
+        overflow_count: plan.overflow_count,
+      });
+    }
+    drainCueQueue();
+  }
+
+  function scheduleCueBatchFlush() {
+    if (cueBatchTimer != null) return;
+    cueBatchTimer = true;
+    if (globalThis.queueMicrotask) globalThis.queueMicrotask(flushCueBatch);
+    else globalThis.setTimeout(flushCueBatch, 0);
+  }
+
+  function stopCueVoices() {
+    if (cueDrainTimer != null) globalThis.clearTimeout(cueDrainTimer);
+    cueDrainTimer = null;
+    cueBusy = false;
+    stopVoiceSet(activeCueVoices, 40);
+  }
+
+  function clearCueQueue() {
+    pendingCueRequests.length = 0;
+    queuedCueRequests.length = 0;
+    stopCueVoices();
+  }
+
+  function clearDucking() {
+    if (duckTimer != null) globalThis.clearTimeout(duckTimer);
+    duckTimer = null;
+    duckingPriority = null;
+    applyDucking();
   }
 
   async function enable() {
@@ -383,33 +613,45 @@ export function createAudioClient({
     if (previous != null && now - previous < entry.cooldown_ms) {
       return { ok: false, code: "throttled", id: cueId };
     }
+    const duplicatePending = pendingCueRequests.some((request) => request.id === entry.id)
+      || queuedCueRequests.some((request) => request.id === entry.id);
     lastCueAt.set(cueId, now);
     const recorded = recordCue(sink, cueId);
+    if (duplicatePending) return { ...recorded, code: "duplicate_suppressed", id: cueId };
     if (reducedNotifications && entry.channel !== "music") {
       return { ...recorded, code: "reduced_notifications" };
     }
     if (muted || !enabled || !focused || !context) {
       return { ...recorded, code: muted ? "muted" : "visual_only" };
     }
-    playTone(entry, entry.channel);
-    return { ...recorded, code: "played" };
+    const enqueued = enqueuePendingCue(entry);
+    if (!enqueued) return { ...recorded, code: "queue_bounded", queue_size: pendingCueRequests.length + queuedCueRequests.length };
+    scheduleCueBatchFlush();
+    return { ...recorded, code: "queued", queue_size: pendingCueRequests.length + queuedCueRequests.length };
   }
 
   function setVolume(channel, value) {
     if (!(channel in volumes)) return { ok: false, code: "unknown_channel" };
     volumes[channel] = clamp(value);
+    persistAudioPreferences();
     updateDom();
     return { ok: true, channel, value: volumes[channel] };
   }
 
   function setMuted(value) {
     muted = Boolean(value);
-    if (muted) stopMusic();
+    if (muted) {
+      clearCueQueue();
+      stopMusic();
+      stopAmbience();
+      stopCueVoices();
+      clearDucking();
+    }
     else {
       scheduleMusic();
       scheduleAmbience();
     }
-    if (muted) stopAmbience();
+    persistAudioPreferences();
     statusText(muted ? "Audio muted; visual and text equivalents remain active." : "Audio unmuted.");
     updateDom();
     return { ok: true, muted };
@@ -421,8 +663,10 @@ export function createAudioClient({
       scheduleMusic();
       scheduleAmbience();
     } else {
+      clearCueQueue();
       stopMusic();
       stopAmbience();
+      clearDucking();
     }
     statusText(focused ? "Audio focus restored." : "Audio paused while the page is unfocused.");
     return { ok: true, focused };
@@ -430,6 +674,7 @@ export function createAudioClient({
 
   function setReducedNotifications(value) {
     reducedNotifications = Boolean(value);
+    persistAudioPreferences();
     statusText(reducedNotifications ? "Reduced notifications enabled." : "Full notifications enabled.");
     updateDom();
     return { ok: true, reducedNotifications };
@@ -442,10 +687,12 @@ export function createAudioClient({
     if (mode === "cues-only") {
       stopMusic();
       stopAmbience();
+      clearDucking();
     } else {
       scheduleMusic();
       scheduleAmbience();
     }
+    persistAudioPreferences();
     statusText(mode === "cues-only"
       ? "Cues-only mode enabled; music and ambience are off while interface/event cues remain available."
       : "Full audio mode enabled; visual and text equivalents remain active.");
@@ -457,18 +704,34 @@ export function createAudioClient({
     musicMuted = Boolean(value);
     if (musicMuted) stopMusic();
     else scheduleMusic();
+    persistAudioPreferences();
     statusText(musicMuted ? "Music muted; ambience, cues, and written equivalents remain available." : "Music unmuted.");
     updateDom();
     return { ok: true, musicMuted };
   }
 
   function state() {
-    return { enabled, muted, musicMuted, focused, mode, reducedNotifications, music: currentMusic, ambience: currentAmbience, volumes: { ...volumes } };
+    return {
+      enabled,
+      muted,
+      musicMuted,
+      focused,
+      mode,
+      reducedNotifications,
+      music: currentMusic,
+      ambience: currentAmbience,
+      queued_cues: pendingCueRequests.length + queuedCueRequests.length,
+      active_cue_voices: activeCueVoices.size,
+      ducking: duckingPriority,
+      volumes: { ...volumes },
+    };
   }
 
   function destroy() {
+    clearCueQueue();
     stopMusic();
     stopAmbience();
+    clearDucking();
     if (visibilityHandler && root?.removeEventListener) root.removeEventListener("visibilitychange", visibilityHandler);
     context?.close?.();
     context = null;

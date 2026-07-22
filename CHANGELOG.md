@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.73] - 2026-07-21
+
+- Added the Phase 7.4 local audio priority/fatigue manager with deterministic
+  critical/major/routine batching, duplicate suppression, routine aggregation,
+  bounded queue/voice limits, and visible/text equivalents.
+- Added bounded ambience/music ducking, rapid-input and month-resolution stress
+  coverage, and safe local preference persistence with session-only fallback.
+- Completed the Phase 7.4 technical checklist without host/simulation/replay
+  changes, hidden-state inference, recorded audio, or fatigue/accessibility
+  claims.
+
 ## [0.12.72] - 2026-07-21
 
 - Added the Phase 7.3 seven-state adaptive music stem contract for menu/

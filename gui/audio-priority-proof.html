@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Audio priority and fatigue proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+      body { background: #f3f7f6; color: #173c3a; margin: 0 auto; max-width: 72rem; padding: 2rem 1rem 4rem; }
+      main { background: white; border: 1px solid #c6d7d4; border-radius: .8rem; padding: 1.25rem; }
+      table { border-collapse: collapse; margin-top: 1rem; width: 100%; }
+      th, td { border: 1px solid #c6d7d4; padding: .55rem; text-align: left; vertical-align: top; }
+      th { background: #e2f0ed; }
+      .note { background: #fff7e5; border-left: .25rem solid #b46b1d; padding: .7rem .9rem; }
+      code { overflow-wrap: anywhere; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Audio priority and fatigue manager</h1>
+      <p class="note">Fixture-only proof. It does not load a host, submit a command, create simulation state, play audio, or use a network resource.</p>
+      <p id="summary">Loading fixed policy…</p>
+      <table>
+        <caption>Bounded local policy</caption>
+        <thead><tr><th>Rule</th><th>Value</th><th>Written equivalent</th></tr></thead>
+        <tbody id="policy"></tbody>
+      </table>
+      <table>
+        <caption>Representative committed cue batch</caption>
+        <thead><tr><th>Selected cue</th><th>Priority</th><th>Batch treatment</th><th>Fallback</th></tr></thead>
+        <tbody id="batch"></tbody>
+      </table>
+    </main>
+    <script type="module">
+      import { AUDIO_PRIORITY_POLICY, planAudioCueBatch } from "./audio-priority-contract.mjs";
+      import { AUDIO_CUE_CONTRACT } from "./audio-cue-contract.mjs";
+
+      const policyRows = [
+        ["Priority order", AUDIO_PRIORITY_POLICY.priority_order.join(" → "), "Written event/source text keeps its order-independent meaning."],
+        ["Critical limit", `${AUDIO_PRIORITY_POLICY.maximum_critical_per_batch} per local batch`, "All visible critical text remains in the report."],
+        ["Transient voices", String(AUDIO_PRIORITY_POLICY.maximum_simultaneous_cue_voices), "No cue meaning depends on simultaneous sound."],
+        ["Queue cap", String(AUDIO_PRIORITY_POLICY.maximum_queued_cues), "Overflow is suppressed/aggregated in local metadata."],
+        ["Ducking", "Major: ambience · Critical: music + ambience", "Visible consequences remain complete during ducking."],
+        ["Preferences", "Local browser storage only", "Controls and written results work without storage."],
+      ];
+      const policyBody = document.querySelector("#policy");
+      for (const [rule, value, equivalent] of policyRows) {
+        const row = document.createElement("tr");
+        for (const text of [rule, value, equivalent]) {
+          const cell = document.createElement("td");
+          cell.textContent = text;
+          row.append(cell);
+        }
+        policyBody.append(row);
+      }
+      const plan = planAudioCueBatch([
+        "event.operating-loss",
+        "event.regulatory-decision",
+        "event.project-complete",
+        "ui.action-add",
+        "ui.action-confirm",
+      ]);
+      const batchBody = document.querySelector("#batch");
+      for (const request of plan.selected) {
+        const row = document.createElement("tr");
+        for (const text of [request.id, request.priority, request.batch_reason, request.entry.text_equivalent]) {
+          const cell = document.createElement("td");
+          cell.textContent = String(text);
+          row.append(cell);
+        }
+        batchBody.append(row);
+      }
+      document.querySelector("#summary").textContent = `Policy ${AUDIO_PRIORITY_POLICY.schema_version}: ${plan.selected.length} cues selected, ${plan.critical_suppressed_count} critical cue suppressed, ${plan.routine_aggregated_count} routine requests represented. Audio remains optional.`;
+    </script>
+  </body>
+</html>

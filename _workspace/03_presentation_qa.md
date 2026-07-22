@@ -1,5 +1,66 @@
 # Presentation QA — Phase 7.1 UI and event cue refinement v0.12.70
 
+## Current slice: Phase 7.4 audio priority and fatigue manager v0.12.73
+
+### Status
+
+`pass`
+
+### Reviewed inputs and findings
+
+- `docs/visual_audio_enhancement_roadmap.md`, Milestone 7.4;
+  `_workspace/00_input/request-summary.md`; and
+  `_workspace/02_presentation_contract.md`.
+- `gui/audio-priority-contract.mjs`, `gui/audio.mjs`,
+  `gui/audio-priority-proof.html`, `gui/index.html`, and
+  `tests/test_audio_priority.py`.
+- Existing cue, music, and ambience contracts plus asset registry/credits.
+
+The priority manager orders only already-visible cue IDs. It selects at most
+one critical request per local synchronous batch, aggregates routine requests,
+suppresses duplicates, caps the queue, and keeps one transient cue voice active
+at a time. Major/critical ducking is local background gain behavior; it does
+not encode a score, severity, hidden intent, or future outcome.
+
+### Information, accessibility, and authority findings
+
+- Written reports, source/status labels, live audio status, controls, and
+  `audio-equivalent` text remain complete while requests are queued,
+  aggregated, ducked, muted, reduced, unsupported, or storage-local.
+- Music ducks only for critical cues; ambience ducks for major and critical
+  cues. Background layers remain independent from the transient queue.
+- Queue, cooldown, timer, ducking, active-voice, and local-preference state
+  never enters commands, host transitions, observations, history, hashes,
+  replay artifacts, or debrief facts.
+- No new audio asset is introduced; existing generated recipes and provenance
+  records remain the release boundary.
+
+### Required fixes
+
+The single designated code review found five medium issues, all resolved before
+handoff: playback exceptions now release voices and reopen the queue; pending
+requests are bounded at intake; persisted booleans require actual booleans;
+queue/planning/playback metadata is allowlisted by the playtest recorder; and
+stress tests cover those regressions plus ducking restoration and preference
+fallback.
+
+### Residual risks and evidence limits
+
+Automated fake-runtime checks do not establish measured loudness, fatigue
+reduction, lived accessibility, screen-reader coexistence, human
+comprehension, learning, calibration, or policy validity. Human listening and
+screen-reader review remain required evidence limits.
+
+### Verification evidence
+
+- `python3 -m unittest tests.test_audio_priority tests.test_audio_cue_contract tests.test_music_stem_contract`
+- `python3 -m unittest discover -s tests -p 'test_*.py'`
+- `node --check gui/audio-priority-contract.mjs`
+- `node --check gui/audio.mjs`
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/generate_asset_credits.py --check`
+- `git diff --check`
+
 ## Current slice: Phase 7.3 adaptive music stems v0.12.72
 
 ### Status
