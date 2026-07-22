@@ -1,4 +1,81 @@
-# Presentation QA — Phase 9.1 provenance and notices v0.12.78
+# Presentation QA — Phase 9.1 in-game credits v0.12.79
+
+## Current slice: Phase 9.1 in-game credits v0.12.79
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.1 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- The canonical registries, generated Markdown credits/notices, generated
+  `gui/asset-credits.mjs` projection, renderer, executive desktop, release
+  guidance, and focused tests.
+- This is a contributor/release disclosure only. No external asset or pending
+  portrait preview was approved or promoted.
+
+### Information and Causality Findings
+
+- The disclosure reports asset provenance and release metadata only; it does
+  not present player outcomes, actor intent, severity, causality, or hidden
+  state.
+- The projection is independent of host/session data and is available before
+  loading or starting a campaign.
+
+### Accessibility and Fallback Findings
+
+- The credits surface is a native keyboard-focusable `details` disclosure with
+  a labeled list, live summary, explicit written equivalents, and text-only
+  approval/release/provenance fields.
+- Missing or empty catalogs receive a written empty state. Large text, reduced
+  motion, mute, no-color meaning, and host recovery behavior remain unchanged.
+
+### Provenance and Rights Findings
+
+- `gui/asset-credits.mjs` is generated from the canonical registry and the
+  existing credits check rejects stale runtime output.
+- The renderer displays source, license, attribution, approval, provenance,
+  release status, and written equivalents without synthesizing legal claims.
+- No new asset, URL, font, model, seed, derivative, or license claim was
+  introduced; the human license-audit gate remains explicit.
+
+### Authority and Replay Findings
+
+- The renderer uses local static data and `textContent`; it has no network,
+  command, transition, stochastic, history, hash, replay, or debrief path.
+- The projection and disclosure do not enter host payloads, actor observations,
+  simulation state, immutable history, state hashes, replay artifacts, or
+  debrief facts.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated read-only code reviewer found no actionable issues. The
+review covered the generated projection, stale-output check, HTML/DOM
+accessibility and fallback, text-content rendering, and no-network/no-authority
+boundary; the post-spawn provenance-field display was also reviewed.
+
+### Residual Risks and Evidence Limits
+
+Automated parity and DOM-boundary tests establish reproducible presentation
+metadata only. They do not establish human accessibility, legal clearance,
+ownership, training-data provenance, educational benefit, learning, clinical
+plausibility, or policy validity.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_in_game_credits tests.test_asset_registry`
+- `python3 -m unittest tests.test_gui_static_desktop tests.test_gui_accessibility`
+- `python3 scripts/generate_asset_credits.py --check`
+- `python3 scripts/validate_assets.py`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (495 tests)
+- JavaScript syntax checks and `git diff --check`
 
 ## Current slice: Phase 9.1 provenance and notices v0.12.78
 

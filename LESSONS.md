@@ -2221,3 +2221,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep source/release hashes and human approval separate from
   provenance shape checks, fail closed on denylisted text, and describe the
   remaining legal-audit limit explicitly in release documentation.
+
+## Phase 14: In-game credits must consume the canonical registry projection
+
+- Context: Phase 9.1 required credits to be accessible in-game while the
+  canonical registry remained the only source of asset rights metadata.
+- Risk: A hand-authored GUI credits list could drift from the release registry,
+  omit written equivalents, or become a hidden network/host dependency.
+- Resolution: Generate a static ES-module projection from the registries and
+  render it through a text-only disclosure that exists before host/session
+  loading. Check projection parity and exercise a minimal DOM fallback.
+- Prevention: Keep the renderer outside command/session code, use `textContent`
+  rather than HTML injection, and treat the panel as contributor/release
+  evidence rather than human accessibility or legal clearance.

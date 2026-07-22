@@ -1819,6 +1819,21 @@ actual seed; per-portrait human review remains required.
   external or portrait asset was added, and no human license audit was
   performed.
 
+### v0.12.79 in-game credits evidence and limits
+
+- Status: In progress in v0.12.79. The static executive desktop now exposes a
+  keyboard-accessible “Asset credits and provenance” disclosure independent of
+  host/session data. It lists registry IDs, type, source/generation, license,
+  attribution, approval, provenance, release status, and written equivalents.
+- `gui/asset-credits.mjs` is generated from the canonical visual/audio
+  registries and stale output fails `scripts/generate_asset_credits.py --check`.
+  The renderer uses text content only and adds no network, command,
+  simulation, history, replay, or debrief authority.
+- Focused tests cover registry/projection parity, 45-entry runtime loading,
+  HTML landmarks, no-network/no-boundary expansion, and a minimal-catalog
+  renderer fallback. This does not establish human accessibility, legal
+  clearance, learning, or policy validity.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

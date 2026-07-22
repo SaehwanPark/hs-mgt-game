@@ -486,3 +486,14 @@ hash, or hidden-state authority.
 Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.
+
+## In-game asset credits
+
+The settings panel includes an accessible, text-first “Asset credits and
+provenance” disclosure. `asset-credits.mjs` is generated from the canonical
+`assets/registry/*.json` manifests; `asset-credits-renderer.mjs` renders only
+text content, approval/release status, attribution, source, license,
+provenance, and written equivalents. It is available before host/session data
+loads and uses no network, command, simulation, history, replay, or debrief
+authority. The generated module is checked by
+`python3 scripts/generate_asset_credits.py --check`.

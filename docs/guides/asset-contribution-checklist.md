@@ -20,7 +20,8 @@ Before opening a pull request that adds or changes a visual or audio asset:
   large text. Decorative assets must be labeled decorative.
 - Run `python3 scripts/validate_assets.py` and
   `python3 scripts/generate_asset_credits.py --check`. The latter checks both
-  generated credits and `assets/THIRD_PARTY_NOTICES.md`.
+  generated credits, `assets/THIRD_PARTY_NOTICES.md`, and the in-game
+  `gui/asset-credits.mjs` projection.
 
 Asset metadata and presentation code must not add simulation state, command
 legality, hidden-state inference, randomness, history, hashes, replay, or

@@ -10,6 +10,8 @@ fields; external and locally generated entries must provide an HTTPS source,
 retrieval date, and license reference before they can be release-ready.
 
 Use `scripts/generate_asset_credits.py` to inspect the deterministic attribution
-projection. `--notices` renders the third-party notice projection. Do not
-hand-edit `assets/ASSET_CREDITS.md` or `assets/THIRD_PARTY_NOTICES.md` without
-changing the registries and regenerating the outputs.
+projection. `--notices` renders the third-party notice projection and
+`--runtime` renders the GUI's read-only credits module. Do not hand-edit
+`assets/ASSET_CREDITS.md`, `assets/THIRD_PARTY_NOTICES.md`, or
+`gui/asset-credits.mjs` without changing the registries and regenerating the
+outputs.

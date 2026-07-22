@@ -28,7 +28,7 @@ jobs:
         run: |
           python3 scripts/validate_assets.py
           python3 scripts/generate_asset_credits.py --check
-          python3 -m unittest tests.test_asset_registry
+          python3 -m unittest tests.test_asset_registry tests.test_in_game_credits
 
       - name: Check generation provenance and portrait review gates
         run: |

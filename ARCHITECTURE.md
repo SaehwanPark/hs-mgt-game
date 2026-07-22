@@ -482,6 +482,14 @@ simulation state, actor observations, history, replay artifacts, or debriefs.
 No current entry is external or release-distributed, and this automation does
 not substitute for a human legal audit.
 
+The v0.12.79 Phase 9.1 in-game credits surface consumes only the generated
+`gui/asset-credits.mjs` registry projection. A pure text renderer exposes
+source, license, attribution, approval, provenance, release status, and written
+equivalents in a disclosure available without a host session. The panel is a
+static presentation surface: it uses no network or commands and cannot enter
+host payloads, simulation state, actor observations, history, hashes, replay,
+or debrief artifacts.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

@@ -1,4 +1,6 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
+import { ASSET_CREDITS } from "./asset-credits.mjs";
+import { renderAssetCredits } from "./asset-credits-renderer.mjs";
 import { consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
 import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
@@ -2433,6 +2435,7 @@ export function createThinClient({ adapter = globalThis.HsMgtGameAdapter, root =
 }
 
 if (typeof document !== "undefined") {
+  renderAssetCredits({ root: document });
   const actionAdapter = globalThis.HsMgtGameActionAdapter;
   if (actionAdapter) {
     const client = createActionClient({ root: document });
@@ -2446,6 +2449,7 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      ASSET_CREDITS,
       VISUAL_CATALOG,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
@@ -2455,6 +2459,7 @@ if (typeof document !== "undefined") {
       createCampaignCoverageClient,
       createSessionLauncher,
       createPresentationSettings,
+      renderAssetCredits,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,
@@ -2474,6 +2479,7 @@ if (typeof document !== "undefined") {
     globalThis.HsMgtGui = {
       client,
       AUDIO_CATALOG,
+      ASSET_CREDITS,
       VISUAL_CATALOG,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
@@ -2483,6 +2489,7 @@ if (typeof document !== "undefined") {
       createCampaignCoverageClient,
       createSessionLauncher,
       createPresentationSettings,
+      renderAssetCredits,
       createRegionalWorldClient,
       createResolutionClient,
       createReadOnlyClient,

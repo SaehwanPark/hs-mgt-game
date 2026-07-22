@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.78. Runtime-generated
+No third-party release assets are included in v0.12.79. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval | Provenance | Source URL | Retrieved | License reference |
@@ -57,3 +57,5 @@ visual tokens and Web Audio recipes remain optional presentation layers.
 Every entry also records its semantic role, visible source, accessible
 equivalent, modifications, and source/release hash fields in the registry.
 Third-party release notices are generated separately in `assets/THIRD_PARTY_NOTICES.md`.
+
+The static GUI credits disclosure is generated separately in `gui/asset-credits.mjs`.
