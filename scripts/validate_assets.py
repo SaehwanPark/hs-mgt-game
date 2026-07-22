@@ -39,6 +39,7 @@ REGISTRIES = (
   ("assets/registry/visual-assets.json", "visual"),
   ("assets/registry/audio-assets.json", "audio"),
 )
+RELEASE_PREFIX = "assets/release/"
 ID_PATTERN = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
 
 
@@ -59,6 +60,19 @@ def _path_from_registry(root: Path, value: str) -> Path:
   if root.resolve() not in path.parents and path != root.resolve():
     raise ValueError("path escapes repository root")
   return path
+
+
+def _contains_symlink(root: Path, path: Path) -> bool:
+  try:
+    relative = path.relative_to(root)
+  except ValueError:
+    return False
+  current = root
+  for part in relative.parts:
+    current /= part
+    if current.is_symlink():
+      return True
+  return False
 
 
 def _is_https_url(value: object) -> bool:
@@ -189,12 +203,20 @@ def _validate_entry(root: Path, entry: dict, expected_type: str, location: str) 
   if release_path is not None and not isinstance(release_path, str):
     errors.append(f"{location}: release_path must be a string or null")
   elif release_path:
+    if not release_path.startswith(RELEASE_PREFIX):
+      errors.append(f"{location}: release_path must be under {RELEASE_PREFIX}")
+    candidate = root / release_path
+    if _contains_symlink(root, candidate):
+      errors.append(f"{location}: release_path cannot contain symlinks")
     try:
       resolved = _path_from_registry(root, release_path)
     except ValueError as error:
       errors.append(f"{location}: invalid release_path ({error})")
     else:
-      if not resolved.is_file():
+      resolved_relative = resolved.relative_to(root.resolve()).as_posix()
+      if not resolved_relative.startswith(RELEASE_PREFIX):
+        errors.append(f"{location}: resolved release_path must remain under {RELEASE_PREFIX}")
+      elif not resolved.is_file():
         errors.append(f"{location}: release_path does not exist: {release_path}")
       elif entry.get("release_hash") != _sha256(resolved):
         errors.append(f"{location}: release_hash does not match {release_path}")

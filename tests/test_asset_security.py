@@ -167,6 +167,59 @@ class AssetSecurityTests(unittest.TestCase):
       errors = SECURITY.validate(root)
       self.assertTrue(any("visual-assets.json: registry document must be an object" in error for error in errors))
 
+  def test_release_metadata_fails_but_source_preview_metadata_is_allowed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      release = root / "assets" / "release"
+      release.mkdir(parents=True)
+      release_png = release / "metadata.png"
+      png = (
+        b"\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR"
+        + struct.pack(">II", 1, 1)
+        + b"\x08\x06\x00\x00\x00\x00\x00\x00\x00"
+        + b"\x00\x00\x00\x09tEXtkey\x00value\x00\x00\x00\x00"
+        + b"\x00\x00\x00\x0bIDAT" + zlib.compress(b"\x00\x00\x00\x00\x00") + b"\x00\x00\x00\x00"
+        + b"\x00\x00\x00\x00IEND\x00\x00\x00\x00"
+      )
+      release_png.write_bytes(png)
+      errors = SECURITY.validate_file(root, "assets/release/metadata.png")
+      self.assertTrue(any("rejected release metadata (tEXt)" in error for error in errors))
+
+      preview = root / "assets" / "generation" / "portrait-previews"
+      preview.mkdir(parents=True)
+      (preview / "metadata.png").write_bytes(png)
+      errors = SECURITY.validate_file(root, "assets/generation/portrait-previews/metadata.png")
+      self.assertFalse(any("rejected release metadata" in error for error in errors))
+
+  def test_release_metadata_classes_fail_closed_for_image_and_audio_formats(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      release = root / "assets" / "release"
+      release.mkdir(parents=True)
+      files = {
+        "metadata.jpg": (
+          b"\xff\xd8\xff\xe1\x00\x06Exif"
+          b"\xff\xc0\x00\x0b\x08\x00\x01\x00\x01\x01\x01\x11\x00"
+          b"\xff\xda\x00\x08\x01\x01\x00\x00\x3f\x00\x00\xff\xd9"
+        ),
+        "metadata.gif": b"GIF89a" + struct.pack("<HH", 1, 1) + b"\x00\x00\x00\x21\xfe\x01x\x00\x3b",
+        "metadata.wav": (
+          b"RIFF\x30\x00\x00\x00WAVEfmt \x10\x00\x00\x00"
+          + b"\x01\x00\x01\x00\x44\xac\x00\x00\x88\x58\x01\x00\x02\x00\x10\x00"
+          + b"LIST\x04\x00\x00\x00INFOdata\x00\x00\x00\x00"
+        ),
+        "metadata.ogg": b"OggS" + b"\x00" * 22 + b"\x01\x07\x03vorbis",
+        "metadata.flac": b"fLaC\x00\x00\x00\x22" + b"\x00" * 34 + b"\x84\x00\x00\x01x\xff\xf8",
+        "metadata.mp3": b"ID3\x04\x00\x00\x00\x00\x00\x00\xff\xfb\x90\x64" + b"\x00" * 413,
+        "metadata-flac-application.flac": b"fLaC\x00\x00\x00\x22" + b"\x00" * 34 + b"\x82\x00\x00\x01x\x84\x00\x00\x01x\xff\xf8",
+        "metadata-mp3-id3v1.mp3": b"\xff\xfb\x90\x64" + b"\x00" * 413 + b"TAG" + b"\x00" * 125,
+        "metadata-mp3-ape.mp3": b"\xff\xfb\x90\x64" + b"\x00" * 413 + b"\x00" * 24 + b"APETAGEX" + b"\x00" * 24,
+      }
+      for name, data in files.items():
+        (release / name).write_bytes(data)
+        errors = SECURITY.validate_file(root, f"assets/release/{name}")
+        self.assertTrue(any("rejected release metadata" in error for error in errors), name)
+
   def test_mismatched_audio_signature_fails_closed(self):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)

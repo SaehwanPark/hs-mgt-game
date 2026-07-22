@@ -30,6 +30,9 @@ RASTER_SUFFIXES = {".gif", ".jpeg", ".jpg", ".png"}
 AUDIO_SUFFIXES = {".flac", ".mp3", ".ogg", ".wav"}
 SVG_SUFFIXES = {".svg"}
 SUPPORTED_SUFFIXES = RASTER_SUFFIXES | AUDIO_SUFFIXES | SVG_SUFFIXES
+RELEASE_PREFIX = "assets/release/"
+PNG_METADATA_CHUNKS = {b"tEXt", b"zTXt", b"iTXt", b"eXIf", b"tIME"}
+WAV_METADATA_CHUNKS = {b"LIST", b"bext", b"iXML", b"ID3 "}
 NUMBER = r"[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?"
 NUMBER_PATTERN = re.compile(rf"^{NUMBER}$")
 LENGTH_PATTERN = re.compile(rf"^{NUMBER}(?:px|pt|pc|mm|cm|in)?$", re.IGNORECASE)
@@ -60,6 +63,19 @@ def _safe_path(root: Path, path: Path) -> tuple[Path | None, list[str]]:
     errors.append(f"{path}: file does not exist")
     return None, errors
   return resolved, errors
+
+
+def _contains_symlink(root: Path, path: Path) -> bool:
+  try:
+    relative = path.relative_to(root)
+  except ValueError:
+    return False
+  current = root
+  for part in relative.parts:
+    current /= part
+    if current.is_symlink():
+      return True
+  return False
 
 
 def _number(value: str, allow_units: bool = True) -> float | None:
@@ -249,6 +265,7 @@ def _validate_raster(relative: str, suffix: str, data: bytes) -> list[str]:
     errors.append(f"{relative}: cannot determine {suffix} dimensions")
   else:
     errors.extend(_check_dimensions(relative, *dimensions))
+  errors.extend(_release_metadata_errors(relative, suffix, data))
   return errors
 
 
@@ -261,7 +278,90 @@ def _validate_audio(relative: str, suffix: str, data: bytes) -> list[str]:
     valid = _valid_flac(data)
   else:
     valid = _valid_mp3(data)
-  return [] if valid else [f"{relative}: invalid {suffix} audio signature"]
+  errors = [] if valid else [f"{relative}: invalid {suffix} audio signature"]
+  errors.extend(_release_metadata_errors(relative, suffix, data))
+  return errors
+
+
+def _release_metadata_errors(relative: str, suffix: str, data: bytes) -> list[str]:
+  if not relative.startswith(RELEASE_PREFIX):
+    return []
+  labels: list[str] = []
+  if suffix == ".png":
+    offset = 8
+    while offset + 12 <= len(data):
+      chunk_length = int.from_bytes(data[offset:offset + 4], "big")
+      chunk_end = offset + 12 + chunk_length
+      if chunk_end > len(data):
+        break
+      chunk_type = data[offset + 4:offset + 8]
+      if chunk_type in PNG_METADATA_CHUNKS:
+        labels.append(chunk_type.decode("ascii"))
+      if chunk_type == b"IEND":
+        break
+      offset = chunk_end
+  elif suffix in {".jpg", ".jpeg"}:
+    offset = 2
+    while offset + 3 < len(data):
+      if data[offset] != 0xFF:
+        offset += 1
+        continue
+      while offset < len(data) and data[offset] == 0xFF:
+        offset += 1
+      if offset >= len(data) or data[offset] in {0xD8, 0xD9}:
+        offset += 1
+        continue
+      if offset + 2 > len(data):
+        break
+      marker = data[offset]
+      segment_length = int.from_bytes(data[offset + 1:offset + 3], "big")
+      if segment_length < 2 or offset + 1 + segment_length > len(data):
+        break
+      if marker == 0xFE or 0xE1 <= marker <= 0xEF:
+        labels.append(f"JPEG marker 0x{marker:02x}")
+      offset += 1 + segment_length
+  elif suffix == ".gif":
+    if b"\x21\xfe" in data:
+      labels.append("GIF comment extension")
+    if b"\x21\xff" in data:
+      labels.append("GIF application extension")
+  elif suffix == ".wav":
+    offset = 12
+    while offset + 8 <= len(data):
+      chunk_size = int.from_bytes(data[offset + 4:offset + 8], "little")
+      chunk_end = offset + 8 + chunk_size
+      if chunk_end > len(data):
+        break
+      chunk_type = data[offset:offset + 4]
+      if chunk_type in WAV_METADATA_CHUNKS:
+        labels.append(chunk_type.decode("ascii", errors="replace"))
+      offset = chunk_end + (chunk_size & 1)
+  elif suffix == ".ogg":
+    if b"\x03vorbis" in data:
+      labels.append("Vorbis comment packet")
+    if b"OpusTags" in data:
+      labels.append("OpusTags packet")
+  elif suffix == ".flac":
+    offset = 4
+    while offset + 4 <= len(data):
+      block_header = data[offset:offset + 4]
+      block_length = int.from_bytes(block_header[1:4], "big")
+      block_end = offset + 4 + block_length
+      if block_end > len(data):
+        break
+      if block_header[0] & 0x7F in {2, 4, 5, 6}:
+        labels.append(f"FLAC metadata block {block_header[0] & 0x7F}")
+      offset = block_end
+      if block_header[0] & 0x80:
+        break
+  elif suffix == ".mp3":
+    if data[:3] == b"ID3":
+      labels.append("ID3 tag")
+    if len(data) >= 128 and data[-128:-125] == b"TAG":
+      labels.append("ID3v1 tag")
+    if b"APETAGEX" in data[-160:]:
+      labels.append("APE tag")
+  return [f"{relative}: rejected release metadata ({label})" for label in labels]
 
 
 def _valid_wav(data: bytes) -> bool:
@@ -418,6 +518,20 @@ def _registry_paths(root: Path) -> tuple[set[str], list[str]]:
         suffix = Path(candidate).suffix.lower()
         if suffix in REGISTERED_RUNTIME_SUFFIXES:
           continue
+        if field == "release_path":
+          if not candidate.startswith(RELEASE_PREFIX):
+            errors.append(f"{registry.as_posix()}: release_path must be under {RELEASE_PREFIX}: {candidate}")
+          else:
+            candidate_path = root / candidate
+            if _contains_symlink(root, candidate_path):
+              errors.append(f"{registry.as_posix()}: release_path cannot contain symlinks: {candidate}")
+            try:
+              resolved = candidate_path.resolve()
+              resolved_relative = resolved.relative_to(root.resolve()).as_posix()
+              if not resolved_relative.startswith(RELEASE_PREFIX):
+                errors.append(f"{registry.as_posix()}: resolved release_path must remain under {RELEASE_PREFIX}: {candidate}")
+            except ValueError:
+              errors.append(f"{registry.as_posix()}: release_path escapes repository root: {candidate}")
         paths.add(candidate)
   return paths, errors
 

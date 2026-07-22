@@ -1,22 +1,21 @@
-# Request Summary — Visual/audio Phase 9.2 asset security scanner v0.12.80
+# Request Summary — Visual/audio Phase 9.2 release reproducibility v0.12.81
 
 ## Authorized outcome
 
-Add a dependency-free asset security/integrity scanner for the visual/audio
-asset paths in scope, with fail-closed SVG safety, file-size/dimension limits,
-audio signature checks, and focused tests without adding external assets.
+Add a dependency-free metadata audit and deterministic release-manifest check
+for the visual/audio asset paths in scope, without adding external assets or
+mutating contributor files.
 
 ## Target slice
 
-- Add `scripts/validate_asset_security.py` to scan registered source/release
-  files plus preserved generation previews in a bounded asset root.
-- Reject SVG scripts, event handlers, external references, embedded raster
-  images, foreign objects, external fonts, entity declarations, and malformed
-  or overlarge view boxes; enforce a per-file byte limit.
-- Validate PNG/JPEG/GIF dimensions and WAV/OGG/MP3/FLAC signatures when those
-  files are present; fail closed on unsupported audio extensions or signatures.
-- Add focused malicious-fixture, dimension, size, codec, and repository-scan
-  tests and wire the scanner into CI/release guidance.
+- Add `scripts/verify_asset_release.py` to derive a sorted release manifest
+  from approved registry release paths, including byte size, SHA-256, and a
+  canonical manifest digest.
+- Add metadata checks to the dependency-free asset security gate for raster
+  text/EXIF/comment chunks and audio metadata markers, with explicit source
+  versus release scope and no asset rewriting.
+- Add a committed manifest projection and stale-output/reproducibility tests;
+  wire the check into CI and contributor/release guidance.
 - Keep all current assets unchanged and keep pending portraits outside runtime
   and release authority.
 
@@ -39,15 +38,15 @@ audio signature checks, and focused tests without adding external assets.
 
 ## Validation target
 
-Asset security scanner, registry/release hash checks, malicious fixtures,
-dimension/size/audio signature checks, existing generation/credits/release/
-documentation checks, full Python/Rust tests, formatting, Clippy, JavaScript,
-and diff checks.
+Metadata audit, deterministic release-manifest generation/check, registry and
+release hash checks, focused malformed-metadata fixtures, existing security/
+generation/credits/release/documentation checks, full Python/Rust tests,
+formatting, Clippy, JavaScript, and diff checks.
 
 ## Evidence limits
 
-The scanner establishes bounded file-shape and signature safety only; it does
-not sanitize or rewrite files, prove legal clearance, establish human
-accessibility, validate audio quality, or replace human review. Portrait human
-decisions, approved local model/seed provenance, release derivatives, and
-registry bridges remain explicit external gates.
+The audit and manifest establish bounded metadata and reproducibility evidence
+only; they do not sanitize or rewrite files, prove legal clearance, establish
+human accessibility, validate audio quality, or replace human review. Portrait
+human decisions, approved local model/seed provenance, release derivatives,
+and registry bridges remain explicit external gates.

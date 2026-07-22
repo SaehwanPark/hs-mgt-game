@@ -1,3 +1,65 @@
+# Presentation QA — Phase 9.2 release reproducibility v0.12.81
+
+## Current slice: Phase 9.2 release metadata and reproducibility v0.12.81
+
+### Status
+
+`in progress`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.2 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- The canonical registries, release paths, security scanner, release
+  manifest generator/projection, contributor guidance, CI wiring, and focused
+  metadata/reproducibility tests.
+- This is a contributor/release-only audit. No file is stripped, rewritten,
+  deleted, downloaded, approved, promoted, or loaded by the runtime.
+
+### Information, Causality, and Accessibility Findings
+
+- The audit and manifest report file metadata, hashes, sizes, and release
+  inventory only. They do not present player outcomes, actor intent, severity,
+  causality, hidden state, or decision guidance.
+- Existing runtime fallbacks and written equivalents remain unchanged. Source
+  preview metadata is outside the release-only metadata rule and remains
+  pending review.
+
+### Provenance, Authority, and Replay Findings
+
+- The manifest is a deterministic projection of approved registry release
+  paths; it is not a second asset-identity registry and does not change
+  provenance or approval fields.
+- The scripts use local files only and do not enter host payloads, commands,
+  simulation state, observations, history, state hashes, replay artifacts, or
+  debrief facts.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no
+actionable findings. The review confirmed canonical release-root enforcement,
+traversal and symlink rejection in the registry, manifest, and security gates;
+image metadata checks; FLAC application and descriptive metadata checks; and
+trailing MP3 ID3v1/APE metadata checks.
+
+### Residual Risks and Evidence Limits
+
+Metadata and manifest parity establish bounded release evidence only. They do
+not establish legal clearance, decoder safety, ownership, accessibility,
+audio quality, educational benefit, policy validity, or human review.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_asset_security tests.test_asset_release`
+- `python3 -m unittest discover -s tests -p 'test_*.py'`
+- `python3 scripts/validate_asset_security.py`
+- `python3 scripts/verify_asset_release.py --check`
+
 # Presentation QA — Phase 9.2 asset security scanner v0.12.80
 
 ## Current slice: Phase 9.2 asset security scanner v0.12.80

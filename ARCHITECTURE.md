@@ -498,6 +498,14 @@ rewriting bytes. The scanner is a contributor/release boundary and cannot
 enter host payloads, simulation state, actor observations, history, hashes,
 replay artifacts, or debriefs.
 
+The v0.12.81 Phase 9.2 release-hardening gate audits metadata only on approved
+release image/audio paths and generates a sorted, hash-bound release manifest
+from the canonical registries. It fails closed on stale output, missing files,
+changed hashes, and metadata markers without stripping or rewriting bytes. The
+manifest and audit remain contributor/release artifacts and cannot enter host
+payloads, simulation state, actor observations, history, hashes, replay, or
+debrief artifacts.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 
