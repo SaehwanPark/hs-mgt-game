@@ -1,5 +1,23 @@
 # Lessons Learned
 
+## Make Generation Provenance Fail Closed
+
+- Context: Phase 8.1 needed a local workflow for future fictional visual/audio
+  assets without quietly treating a model card or an automated record as full
+  legal, quality, accessibility, or human-review clearance.
+- Symptom: A generated file can look complete while its model revision,
+  prompt, seed, source output, hash, post-processing, accessible equivalent,
+  or reviewer decisions are missing or unverifiable.
+- Resolution: Keep an approved-model registry and generation manifest separate
+  from the existing release asset registries; capture source/release hashes and
+  explicit settings; require all review fields and a matching registry bridge
+  before approved/release status; leave the manifest empty until an authorized
+  asset slice supplies a preserved output.
+- Prevention: Treat model-card licensing as a documented basis rather than
+  blanket clearance, preserve generic/written fallbacks, reject unknown or
+  mismatched records, and keep generation artifacts outside simulation,
+  observation, history, replay, and debrief authority.
+
 ## Bound Audio Priority and Preserve Written Consequences
 
 - Context: Phase 7.4 needed dense month resolutions to remain readable while

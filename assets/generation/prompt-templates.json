@@ -1,0 +1,14 @@
+{
+  "schema_version": "generation-prompt-templates-v1",
+  "templates": [
+    {
+      "id": "fictional-actor-editorial-v1",
+      "asset_type": "visual",
+      "intended_use": "Future Phase 8.2 fictional actor portrait candidate; not an approved output.",
+      "prompt": "Editorial illustration, chest-up fictional {role}, diverse plausible adult, neutral institutional background, restrained professional clothing, clear silhouette, non-photorealistic, no text, no logo, no public-figure resemblance, consistent crop and lighting.",
+      "negative_prompt": "photorealistic public figure, celebrity likeness, real person, logo, trademark, readable text, watermark, medical diagnosis, clinical claim, political campaign symbol, distorted anatomy, extra fingers, duplicated features, violent imagery, hidden simulation state",
+      "required_request_fields": ["role", "style_notes", "seed", "dimensions", "sampler", "settings"],
+      "review_notes": "Use only with an approved local model and capture the exact expanded prompt, negative prompt, seed, settings, source output, and human checklist."
+    }
+  ]
+}

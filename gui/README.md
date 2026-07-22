@@ -249,6 +249,23 @@ only explicit local audio preferences when browser storage is available. All
 reports, sources, status text, and controls remain available when sound is
 queued, aggregated, ducked, muted, reduced, unsupported, or interrupted.
 
+## Local generation workflow proof
+
+Open `gui/generation-workflow-proof.html` directly or through a static server
+to inspect the Phase 8.1 approved-model scope, generation metadata contract,
+prompt template, human-review checklist, fail-closed release gate, and empty
+manifest. The proof is contributor-facing and fixture-only: it does not load
+model weights, run inference, create an asset, call a hosted service, or use
+network resources.
+
+`scripts/capture_generation_metadata.py` captures prompts, negative prompts,
+seeds, settings, source/release hashes, post-processing, accessibility, and
+review metadata from a local request. `scripts/validate_generation_metadata.py`
+rejects unknown models/licenses, missing or mismatched hashes, incomplete human
+review, unapproved release records, and invalid visual/audio registry bridges.
+Future assets must retain written equivalents, generic fallbacks, and the
+existing asset-registry approval boundary.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP

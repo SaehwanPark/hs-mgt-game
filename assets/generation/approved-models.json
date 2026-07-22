@@ -1,0 +1,23 @@
+{
+  "schema_version": "approved-generation-models-v1",
+  "reviewed_at": "2026-07-21",
+  "entries": [
+    {
+      "id": "black-forest-labs.flux-1-schnell",
+      "model_name": "black-forest-labs/FLUX.1-schnell",
+      "model_version": "FLUX.1-schnell",
+      "model_revision": "741f7c3ce8b383c54771c7003378a50191e9efe9",
+      "model_revision_type": "Hugging Face repository commit SHA",
+      "model_revision_source_url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell/tree/741f7c3ce8b383c54771c7003378a50191e9efe9",
+      "model_license": "Apache-2.0",
+      "model_card_url": "https://huggingface.co/black-forest-labs/FLUX.1-schnell",
+      "generation_application": "Local Diffusers pipeline or approved local UI",
+      "approval_status": "approved-for-local-prototype",
+      "scope": "Fictional editorial prototype generation only; every output remains pending human and release review.",
+      "access_conditions": "The model repository currently requires accepting its access conditions before downloading model files.",
+      "review_basis": "The primary model card identifies the model as Apache-2.0 and documents local Diffusers/local-app use; the repository metadata API supplied the recorded commit SHA. This record is not legal advice and does not clear training-data provenance or generated-output release.",
+      "reviewer": "project contributors",
+      "review_date": "2026-07-21"
+    }
+  ]
+}

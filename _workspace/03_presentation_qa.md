@@ -1,4 +1,69 @@
-# Presentation QA — Phase 7.1 UI and event cue refinement v0.12.70
+# Presentation QA — Phase 8.1 approved local generation workflow v0.12.74
+
+## Current slice: Phase 8.1 approved local generation workflow v0.12.74
+
+### Status
+
+`pass`
+
+### Reviewed inputs and findings
+
+- `docs/visual_audio_enhancement_roadmap.md`, Milestone 8.1;
+  `_workspace/00_input/request-summary.md`; and
+  `_workspace/02_presentation_contract.md`.
+- `assets/generation/approved-models.json`,
+  `generation-workflow.json`, `prompt-templates.json`,
+  `human-review-checklist.json`, and the empty `generation-manifest.json`.
+- `scripts/capture_generation_metadata.py`,
+  `scripts/validate_generation_metadata.py`,
+  `gui/generation-workflow-proof.html`, and
+  `tests/test_generation_workflow.py`.
+
+The workflow captures a future asset’s model identity/revision and license
+basis, application, prompt/negative prompt, seed/settings, dimensions, source
+references, post-processing, accessibility, source/release paths and hashes,
+and human-review decisions. Validation requires a known approved model,
+allowlisted license, preserved source output, matching hashes, complete review,
+and a valid bridge to the existing visual/audio registry before release.
+
+### Information, accessibility, and authority findings
+
+- The proof is contributor-facing and contains no player-facing signal. Future
+  generated assets still require written equivalents, generic fallbacks, and
+  disabled-asset behavior in their runtime presentation contracts.
+- Generation metadata, local model files, outputs, approvals, and release paths
+  remain release artifacts; they never enter host commands, simulation
+  transitions, actor observations, history, state hashes, replay artifacts, or
+  debrief facts.
+- The manifest is empty, no model weights are committed, and no inference or
+  hosted generation was performed. Existing asset registry and credits checks
+  remain the release boundary for any future output.
+
+### Required fixes
+
+The single designated code review found seven issues, all resolved before
+handoff: registry bridges now match asset IDs, paths, and hashes; capture
+outputs are dedicated non-overwriting records; the approved model uses an
+immutable repository commit SHA; record schema/timestamps and malformed
+configuration shapes fail closed; model approval status is exact; and this QA
+record’s slice headings/status are consistent. No generated output may be
+approved in this slice.
+
+### Residual risks and evidence limits
+
+Metadata and fail-closed validation do not establish legal clearance,
+training-data provenance, output ownership, human resemblance, logo/trademark
+absence, clinical plausibility, measured quality, lived accessibility,
+learning, or policy validity. Those require appropriate human and domain review
+for each future asset.
+
+### Verification evidence
+
+- `python3 scripts/validate_generation_metadata.py`
+- `python3 -m unittest tests.test_generation_workflow`
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/generate_asset_credits.py --check`
+- `git diff --check`
 
 ## Current slice: Phase 7.4 audio priority and fatigue manager v0.12.73
 

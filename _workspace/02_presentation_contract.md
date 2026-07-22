@@ -1,94 +1,91 @@
-# Presentation Contract — Phase 7.4 audio priority and fatigue manager
+# Presentation Contract — Phase 8.1 approved local generation workflow
 
 ## Goal and Authorization
 
-The player should be able to read a dense committed resolution without audio
-stacking, repeated tones, or background layers masking an important visible
-consequence. This slice authorizes a local priority/queue policy for the
-existing generated cues, music stems, and ambience bed. It does not authorize
-simulation, host, history, replay, or asset-source changes.
+Future generated assets must be traceable from an approved local model and
+prompt request through preserved source output, post-processing, human review,
+and release-asset registry entry. This slice authorizes the workflow and
+validation boundary only; no generated asset is produced or shipped.
 
 ## Player Questions and Consequences
 
-| Player question | Visible source | Audio treatment | Written fallback |
-| --- | --- | --- | --- |
-| What needs attention first? | Committed visible critical/major cue entry | Priority order and one active transient voice | Existing heading, status, event, and source text |
-| Did several visible reports arrive together? | Same synchronous resolution batch | Routine/minor requests collapse to one representative cue with count metadata | All reports remain in the visible list |
-| Is the signal repeated? | Cue ID plus local request time | Existing cue cooldown and in-batch duplicate suppression | Repeated visible text remains unchanged |
-| Is background audio masking the consequence? | Local cue priority and active background layers | Bounded ambience/music ducking | Visible consequence and audio-equivalent text remain complete |
-| What are my local preferences? | Local browser storage only | Restore mode, mute, reduced notifications, and volumes when available | Controls and written results work when storage is absent |
+This workflow does not add a player-facing signal. Its contributor-facing
+questions are:
+
+- Can a contributor reproduce how an asset was created?
+- Can a reviewer identify the model/license, prompt, seed, settings, source
+  output, post-processing, and release derivative?
+- Can the project reject resemblance, protected marks, clinical implausibility,
+  missing alt text, incomplete provenance, or unreviewed release state?
+- Does a future asset fail closed when source/release hashes or registry links
+  are missing?
 
 ## Actor-Visible Source Ledger
 
-| Semantic element | Authorized source and timing | Missing/unknown behavior | Prohibited inference |
+| Workflow element | Authorized source | Missing/unknown behavior | Prohibited inference |
 | --- | --- | --- | --- |
-| Cue priority | `audio-cue-contract.mjs` priority class attached to an already visible cue request | Unknown cue is rejected without sound | No local severity, intent, probability, or outcome classification |
-| Batch membership | Synchronous local calls between queue flushes | A single request forms a one-item batch | No reconstruction of host transition boundaries |
-| Duplicate/cooldown state | Local cue ID and browser clock | Suppress sound but retain visible result | No hidden state or true-state timing |
-| Ducking target | Local channel and cue priority policy | No background gain change when audio is unavailable | No inferred urgency beyond the cue contract label |
-| Preferences | Explicit user controls and local storage | Defaults/session-local state | No account, host, or cross-session identity data |
+| Model and license | Approved local model registry and primary model card | Capture is rejected if model is not listed or license is not allowlisted | No assumption that model-card license clears training data or every output |
+| Prompt/settings | Contributor request file and captured command metadata | Required prompt, negative prompt, seed, sampler, dimensions, and settings must be explicit | No reconstruction from an image or filename |
+| Source output | Preserved local source file and hash | No release record without an existing hashed source output | No claim that a release derivative is the original |
+| Human review | Checklist fields for resemblance, marks, plausibility, accessibility, and release | Approval remains pending until every required review field is true | No automated proxy for human approval |
+| Registry bridge | Existing visual/audio asset registry ID | Approved output must point to a matching registry entry | No asset becomes release-safe merely by being generated |
 
 ## Visual, Motion, and Audio Semantics
 
-- Priority classes are ordering controls, not moral valence, clinical severity,
-  actor intent, probability, or a forecast.
-- Critical beats major, major beats routine, and routine/minor requests may be
-  aggregated. At most one critical request is selected per local batch.
-- One transient interface/event cue voice is active at a time. Music stems and
-  one ambience bed remain separate optional background layers.
-- Major and critical cues apply bounded local ducking: ambience ducks for both;
-  music ducks for critical only. Ducking ramps must have explicit attack and
-  release bounds and must not replace visible content.
-- Queue overflow is bounded and reported as suppressed/aggregated metadata;
-  it never creates an uncontrolled sound stack.
-- Focus loss, reduced notifications, cues-only, music-only mute, full mute,
-  unavailable audio, and storage failure leave written state complete.
+The workflow is presentation governance, not a new runtime presentation channel.
+Prompt templates must describe fictional, non-photorealistic, editorial or
+otherwise approved output goals. Generated assets must retain written labels,
+alt text, generic fallback, and disabled-asset behavior in their eventual
+presentation contract. Assets must not encode hidden simulation state, future
+outcomes, clinical severity, real-person identity, protected logos, or exact
+simulation parameters.
 
 ## Accessibility and Fallbacks
 
-- `#audio-state` remains a polite live status region; control labels and
-  `#audio-equivalent` explain optional audio state in text.
-- No meaning depends on pitch, loudness, timing, or background sound alone.
-- Reduced notifications suppress eligible transient audio while preserving
-  visible event text and source/status labels.
-- Full mute, music-only mute, cues-only, unsupported Web Audio, reduced motion,
-  and blocked local storage use complete visual/text fallbacks.
-- Rapid queue draining must not reorder DOM updates or steal focus from the
-  active form/control.
+- Every future visual asset record requires an accessible equivalent/alt-text
+  field and a generic fallback plan.
+- Every future audio record requires a written equivalent, mute/unavailable
+  fallback, and safe reduced-audio behavior.
+- Missing source output, metadata, review, or release derivative blocks release;
+  the application uses the existing generic/project-authored fallback.
+- Prompt and post-processing records remain readable without an image viewer.
 
 ## Authority, History, and Replay Boundaries
 
-The browser queue, cooldowns, timers, ducking gains, active voices, and stored
-preferences are reversible local presentation state. They never enter command
-payloads, host transitions, true state, observations, immutable history, state
-hashes, replay artifacts, or debrief facts. The host remains authoritative for
-all visible cue triggers and written consequences.
+Generation requests, seeds, outputs, hashes, approvals, and local model files
+are contributor/release artifacts. They never enter simulation transitions,
+actor observations, commands, history, state hashes, replay artifacts, or
+debrief facts. A future asset may decorate a host-authoritative presentation
+only after its asset-registry entry is approved.
 
 ## Asset Provenance and Release Requirements
 
-This slice reuses the existing project-generated Web Audio recipes and adds no
-recorded files or third-party dependencies. The cue, music, and ambience source
-hashes and approval records remain in `assets/registry/audio-assets.json`;
-generated catalog/credits checks must pass. The priority manager is code and
-policy metadata, not a releasable audio asset.
+The workflow records model name/version or immutable revision, model license and
+source URL, generation application/version, prompt, negative prompt, seed,
+sampler/settings, dimensions, date, contributor, post-processing, source image
+references, source hash, optional release path/hash, human-review checklist,
+approval status, and target visual/audio registry ID. The approved-model file
+records the model-card review date and scope limitations. No model weights or
+hosted inference outputs are committed.
 
 ## Verification and Evidence Limits
 
-Focused tests must cover pure batch planning, one-critical selection,
-duplicate/cooldown/aggregation behavior, queue cap, ducking targets, fake
-Web-Audio voice counts, preference persistence/failure, rapid input, dense
-month-resolution requests, and text/live-region markers. Full repository
-checks remain required. These checks do not establish measured loudness,
-fatigue reduction, lived accessibility, screen-reader usability, human
-comprehension, learning, calibration, or policy validity.
+Focused tests must capture a complete record, compute source/release hashes,
+reject unknown models and missing fields, reject unapproved releases, validate
+registry bridges, and preserve a pending-review state. A fixture proof must
+show the metadata contract, prompt template, human checklist, model/license
+scope, and fail-closed release rule. Existing asset, credits, release, docs,
+Python, Rust, formatting, and Clippy checks remain required. These checks do
+not establish legal clearance, training-data provenance, output ownership,
+human resemblance, clinical plausibility, accessibility, learning, or policy
+validity.
 
 ## Non-Goals and Open Questions
 
-- No priority changes to the simulation or host contracts.
-- No audio scoring, adaptive difficulty, hidden-state alerting, or automatic
-  severity derivation.
-- Human review remains needed for cue audibility, screen-reader coexistence,
-  fatigue, and classroom suitability.
-- Later work may revisit user-configurable priority preferences only with an
-  explicit contract; this slice uses fixed policy order and local mute/volume
-  controls.
+- No generated portrait set or other output asset is in scope; Phase 8.2 must
+  separately authorize roles, prompts, outputs, and per-portrait review.
+- `FLUX.1-schnell` is listed only as a local prototype candidate under its
+  model-card license statement and access conditions; legal review remains
+  required before release use.
+- Future audio generation needs the same metadata schema but may require extra
+  model/license fields and an acoustic human-review track.
