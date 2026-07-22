@@ -2,6 +2,7 @@ import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs"
 import { ASSET_CREDITS } from "./asset-credits.mjs";
 import { renderAssetCredits } from "./asset-credits-renderer.mjs";
 import { consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
+import { facilityComponentFor } from "./facility-components.mjs";
 import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regional-board.mjs";
@@ -665,9 +666,15 @@ function renderSelectedEntity(entities, root) {
     const kind = document.createElement("small");
     kind.className = "source";
     kind.textContent = String(facility.kind ?? "Facility");
+    const component = document.createElement("small");
+    component.className = "source";
+    component.textContent = `Visual component: ${String(facility.component_label ?? "Facility")}`;
+    const componentDetail = document.createElement("p");
+    componentDetail.textContent = String(facility.component_equivalent ?? "Facility component equivalent unavailable.");
     const detailText = document.createElement("p");
     detailText.textContent = String(facility.detail ?? "No visible facility detail.");
-    item.append(row, marker, kind, detailText);
+    item.append(row, marker, kind, component, componentDetail, detailText);
+    appendSource(item, facility.component_source);
     appendSource(item, facility.source);
     facilities.append(item);
   }
@@ -738,15 +745,23 @@ function regionalEntitiesToFixture(envelope) {
         ? "Player-owned facilities and processes are shown in selected detail."
         : "No public signal reported for the observed month.",
     metrics: [],
-    facilities: (entity.facilities ?? []).map((facility) => ({
-      icon: "▥",
-      name: facility.name,
-      kind: facility.kind,
-      status: entity.status,
-      status_label: entity.status_label,
-      detail: (facility.metrics ?? []).map((metric) => `${metric.label}: ${metric.value}`).join(" · ") || "No visible facility metric.",
-      source: facility.source,
-    })),
+    facilities: (entity.facilities ?? []).map((facility) => {
+      const component = facilityComponentFor(facility.component_id);
+      return {
+        icon: "▥",
+        name: facility.name,
+        kind: facility.kind,
+        status: entity.status,
+        status_label: entity.status_label,
+        detail: (facility.metrics ?? []).map((metric) => `${metric.label}: ${metric.value}`).join(" · ") || "No visible facility metric.",
+        source: facility.source,
+        component_id: component.id,
+        component_label: component.label,
+        component_source: component.source,
+        component_equivalent: component.equivalent,
+        component_release_path: component.release_path ?? null,
+      };
+    }),
     processes: (entity.processes ?? []).map((process) => ({
       label: process.label,
       detail: process.detail,

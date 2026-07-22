@@ -557,6 +557,15 @@ generic unknown fallbacks without starting the browser host or changing
 history, replay, simulation, assets, or client authority. Full-campaign
 coverage remains a separate future gate.
 
+The v0.12.89 Phase 11.1 live-facility slice adds stable component IDs to the
+actor-visible regional-world facility DTO and resolves them through the
+existing pure facility catalog in the board, SVG, and selected-detail paths.
+Unknown IDs remain the explicit generic facility fallback, rival facilities
+remain outside the projection, and the emergency/ICU group uses an explicitly
+bounded emergency-department presentation equivalent. This does not close
+full campaign facility taxonomy, asset completeness, continuity, screenshot,
+performance, compatibility, or human-quality gates.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

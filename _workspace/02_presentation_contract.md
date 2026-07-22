@@ -1,4 +1,78 @@
-# Presentation Contract — Phase 11.1 campaign-coverage evidence v0.12.88
+# Presentation Contract — Phase 11.1 live facility binding v0.12.89
+
+## Goal and Authorization
+
+Bind the current actor-visible player facility groups to stable registered
+visual-component IDs across the regional board and selected-detail view. This
+is a bounded presentation binding; it does not establish full campaign asset
+coverage or change simulation authority.
+
+## Player Questions and Consequences
+
+The player may identify the current facility group, its registered visual
+component equivalent, and the visible source of that presentation. A missing
+or unknown component remains a generic facility. The component label must not
+imply hidden capacity, geography, severity, intent, causality, or future
+outcome; the combined emergency/ICU group is explicitly only an
+`emergency-department` presentation equivalent.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Player facilities | `PlayerObservation` capacity groups projected by `RegionalWorldFacility.component_id` | Existing `generic-facility` catalog descriptor | No hidden facility topology or private state |
+| Component metadata | `FACILITY_COMPONENTS` via pure board/scene adapters | Generic label, source, and written equivalent | No claim that a catalog equivalent is an exact asset match |
+| Rival facilities | No facility DTO emitted for public rivals | Private detail remains unavailable | No rival capacity, projects, or facility inference |
+| Board accessibility | `data-component-id`, component-aware label/title, written detail | Generic component metadata remains readable | No color, motion, or audio-only meaning |
+| Selected detail | `component_label`, `component_source`, `component_equivalent` | Generic detail text | No client transition or simulation authority |
+
+## Visual, Motion, and Audio Semantics
+
+The board remains a schematic SVG. Component IDs and catalog equivalents add
+semantic identity and source text; they do not load a new asset or create a
+second rendering path. Existing reduced-motion, written, and optional-audio
+behavior remains authoritative for presentation.
+
+## Accessibility and Fallbacks
+
+Facility anchors expose the component ID and component-aware accessible label;
+the SVG title carries source/equivalent semantics, and selected detail repeats
+them as text. Missing or unknown IDs resolve to the registered generic
+descriptor. This is automated contract evidence, not human accessibility or
+browser-compatibility approval.
+
+## Authority, History, and Replay Boundaries
+
+The component ID is host-shaped presentation vocabulary derived from the
+actor-visible `PlayerObservation` projection. It is not true simulation state,
+does not expose rival facilities, and cannot submit commands, advance a
+session, mutate history, alter replay hashes, or authorize transitions.
+
+## Provenance/Release
+
+No asset bytes or registry entries change. Known IDs reuse existing catalog
+source/release metadata; generic fallback has no release path. Existing asset
+validators, credits, hashes, provenance, and human-review gates remain
+authoritative.
+
+## Verification/Evidence Limits
+
+`tests/test_phase11_live_facility_binding.py` and the Rust projection assertion
+prove exact current IDs, catalog fallback, visible source/equivalent semantics,
+and forbidden authority/network markers. They do not prove full campaign
+facility coverage, registry completeness, screenshots, performance,
+compatibility, accessibility quality, audio usefulness, legal clearance,
+educational benefit, or human review.
+
+## Non-goals
+
+- No new assets, runtime network path, simulation, stochastic, history, replay,
+  debrief, rival-private, or client-authority change.
+- No closure of the full Phase 11.1 facility checklist.
+
+---
+
+# Historical Presentation Contract — Phase 11.1 campaign-coverage evidence v0.12.88
 
 ## Goal and Authorization
 

@@ -1,3 +1,5 @@
+import { facilityComponentFor } from "./facility-components.mjs";
+
 export const REGIONAL_BOARD_SCHEMA = "regional-board-scene-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 
@@ -36,6 +38,17 @@ function entitySummary(entity, missing) {
   return `${visibility} · ${authority}.${unavailable}`;
 }
 
+function normalizeFacilityComponent(facility) {
+  const component = facilityComponentFor(facility?.component_id);
+  return {
+    component_id: component.id,
+    component_label: component.label,
+    component_source: component.source,
+    component_equivalent: component.equivalent,
+    component_release_path: component.release_path ?? null,
+  };
+}
+
 function normalizeFacility(facility, entityId, index) {
   const label = text(facility?.name, "Facility unavailable");
   return {
@@ -45,6 +58,7 @@ function normalizeFacility(facility, entityId, index) {
     marker: text(facility?.kind, "facility"),
     status: "reported",
     source: facility?.source,
+    ...normalizeFacilityComponent(facility),
   };
 }
 
@@ -106,6 +120,7 @@ export function presentationFixtureToSceneData(fixture = {}) {
       marker: text(facility?.kind, "facility"),
       status: text(facility?.status, "uncertain"),
       source: facility?.source,
+      ...normalizeFacilityComponent(facility),
     })),
   }));
   return {

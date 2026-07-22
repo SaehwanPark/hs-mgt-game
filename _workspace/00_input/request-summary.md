@@ -1,4 +1,56 @@
-# Request Summary — Visual/audio Phase 11.1 campaign-coverage evidence v0.12.88
+# Request Summary — Visual/audio Phase 11.1 live facility binding v0.12.89
+
+## Authorized outcome
+
+Bind the current actor-visible competitive facility groups to stable existing
+facility-component catalog IDs in the regional board and selected facility
+detail view. Close only this bounded live binding evidence; keep full campaign
+facility coverage and human-quality claims open.
+
+## Target slice
+
+- Add explicit `component_id` values to the four player facility groups in the
+  `competitive-regional-v1` regional-world DTO.
+- Resolve IDs through `FACILITY_COMPONENTS`, expose source/equivalent semantics
+  and release paths, and use the registered generic fallback for missing or
+  unknown IDs.
+- Preserve the rival privacy boundary and add deterministic Rust, Node, and
+  Python evidence plus project-record/version updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 facility coverage.
+- `src/mcp/regional_world.rs` — actor-visible facility projection.
+- `gui/facility-components.mjs`, `gui/regional-board.mjs`, `gui/scene.mjs`,
+  and `gui/app.mjs` — catalog and presentation paths.
+- `_workspace/83_implementation_plan_visual-audio-phase11-live-facilities-v0.12.89.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not claim full campaign facility taxonomy, asset-registry completeness,
+  screenshot, performance, compatibility, accessibility quality, or human
+  review completion.
+- Do not add assets, dependencies, hidden-state fields, rival facility detail,
+  simulation behavior, client authority, or network access.
+- Do not treat the emergency/ICU group as an exact ICU-specific asset; it uses
+  an explicitly documented emergency-department presentation equivalent.
+
+## Validation target
+
+Focused facility-binding, regional-board, GUI-contract, release, full Python/
+Rust, asset/security/credits, documentation, JavaScript, formatting, and
+Clippy checks.
+
+## Evidence limits
+
+This slice proves current live DTO-to-catalog binding, accessible metadata,
+selected-detail semantics, and generic fallback behavior only. Full campaign
+facility coverage and remaining Phase 11.1/11.2+ gates remain open.
+
+---
+
+# Historical Request Summary — Visual/audio Phase 11.1 campaign-coverage evidence v0.12.88
 
 ## Authorized outcome
 

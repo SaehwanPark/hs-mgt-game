@@ -39,6 +39,7 @@ pub struct RegionalWorldEntity {
 pub struct RegionalWorldFacility {
   pub name: String,
   pub kind: String,
+  pub component_id: String,
   pub metrics: Vec<ReadOnlyMetric>,
   pub source: String,
 }
@@ -252,11 +253,13 @@ fn player_facilities(observation: &PlayerObservation) -> Vec<RegionalWorldFacili
     facility(
       "Inpatient beds",
       "Owned capacity",
+      "general-hospital-base",
       vec![metric("Staffed beds", observation.staffed_beds)],
     ),
     facility(
       "Outpatient clinics",
       "Owned capacity",
+      "ambulatory-center",
       vec![metric(
         "Outpatient capacity",
         observation.outpatient_capacity,
@@ -265,6 +268,7 @@ fn player_facilities(observation: &PlayerObservation) -> Vec<RegionalWorldFacili
     facility(
       "Emergency and ICU",
       "Owned capacity",
+      "emergency-department",
       vec![
         metric("Emergency", observation.emergency_capacity),
         metric("ICU", observation.icu_capacity),
@@ -273,6 +277,7 @@ fn player_facilities(observation: &PlayerObservation) -> Vec<RegionalWorldFacili
     facility(
       "Specialty lines",
       "Owned capacity",
+      "specialty-center",
       vec![
         metric("Obstetrics", observation.obstetrics_capacity),
         metric("Psychiatric", observation.psychiatric_capacity),
@@ -286,10 +291,16 @@ fn player_facilities(observation: &PlayerObservation) -> Vec<RegionalWorldFacili
   ]
 }
 
-fn facility(name: &str, kind: &str, metrics: Vec<ReadOnlyMetric>) -> RegionalWorldFacility {
+fn facility(
+  name: &str,
+  kind: &str,
+  component_id: &str,
+  metrics: Vec<ReadOnlyMetric>,
+) -> RegionalWorldFacility {
   RegionalWorldFacility {
     name: name.to_string(),
     kind: kind.to_string(),
+    component_id: component_id.to_string(),
     metrics,
     source: "PlayerObservation capacity fields".to_string(),
   }

@@ -2227,8 +2227,9 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded catalog evidence recorded in v0.12.88; full campaign
-coverage, continuity validation, performance, and screenshot gates remain open.
+**Status:** Bounded live facility-component binding recorded in v0.12.89;
+full campaign facility coverage, continuity validation, performance, and
+screenshot gates remain open.
 
 ### Scope
 
@@ -2271,6 +2272,26 @@ coverage, continuity validation, performance, and screenshot gates remain open.
   technical entries. Full campaign facility/overlay/event/history/debrief/
   save-load/replay coverage, screenshot coverage, performance, compatibility,
   and human quality remain open.
+
+### v0.12.89 bounded live facility-component evidence and limits
+
+- The actor-visible `RegionalWorldFacility` projection now carries an explicit
+  stable `component_id` for the four current player groups: inpatient beds
+  (`general-hospital-base`), outpatient clinics (`ambulatory-center`),
+  emergency and ICU (`emergency-department` as a bounded presentation
+  equivalent), and specialty lines (`specialty-center`). Rival facilities
+  remain unavailable at the projection boundary.
+- `gui/regional-board.mjs` and `gui/scene.mjs` resolve IDs through the existing
+  `FACILITY_COMPONENTS` registry. Missing or unknown IDs use the registered
+  `generic-facility` descriptor with explicit source/equivalent text; the
+  board exposes the resolved ID in its data and accessible label, and selected
+  detail shows the component label, source, and equivalent.
+- `tests/test_phase11_live_facility_binding.py`, the regional-board snapshot,
+  and the Rust projection test prove exact ID mapping, fallback behavior,
+  visible semantics, and the unchanged hidden-state/network boundary. This
+  closes only the current live binding evidence; full facility taxonomy,
+  registry completeness, campaign screenshots, save/load/replay continuity,
+  performance, compatibility, and human quality remain open.
 
 ### Exit criteria
 
