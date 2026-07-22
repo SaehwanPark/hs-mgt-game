@@ -1,4 +1,55 @@
-# Request Summary — Visual/audio Phase 10.2 evaluation preparation v0.12.87
+# Request Summary — Visual/audio Phase 11.1 campaign-coverage evidence v0.12.88
+
+## Authorized outcome
+
+Record a machine-checkable, bounded technical coverage ledger for the current
+`competitive-regional-v1` presentation catalogs and first-month continuity
+surfaces. Close only actor-family catalog and unknown-content fallback items
+that are directly evidenced; keep full-campaign and human-quality claims open.
+
+## Target slice
+
+- Add `docs/evaluation/phase11.1-campaign-coverage-ledger.json` with exact live
+  facility, overlay, actor-family, event-marker, event-cue, and music-state IDs.
+- Add a Node-backed regression test for ledger parity, visible source/
+  equivalent semantics, unknown fallbacks, and bounded continuity paths.
+- Reconcile only the supported Phase 11.1 checklist entries and update project
+  records/version projections without changing runtime behavior or assets.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 coverage scope.
+- `gui/facility-components.mjs`, `gui/operational-overlays.mjs`,
+  `gui/actor-families.mjs`, `gui/map-event-markers.mjs`,
+  `gui/audio-cue-contract.mjs`, and `gui/music-stem-contract.mjs`.
+- `gui/first-month.mjs`, `gui/resolution-sequence.mjs`,
+  `gui/consequence-links.mjs`, `gui/playtest.mjs`, `gui/app.mjs`, and existing
+  Phase 10.1 integration evidence.
+
+## Non-goals
+
+- Do not claim full competitive-campaign facility, overlay, event, history,
+  debrief, save/load, replay, screenshot, performance, or browser coverage.
+- Do not add assets, dependencies, host fields, simulation rules, hidden-state
+  projections, client authority, or a second runtime path.
+- Do not infer asset quality, accessibility quality, audio usefulness, legal
+  clearance, educational benefit, or human review from catalog presence.
+
+## Validation target
+
+Focused campaign-coverage tests, full Python/Rust tests, asset/security/
+release/credits/version/documentation checks, formatting, Clippy, JavaScript
+syntax, and diff checks.
+
+## Evidence limits
+
+This slice proves catalog parity and bounded fallback semantics only. Full
+campaign continuity, screenshot/performance/compatibility gates, and human
+evaluation remain open.
+
+---
+
+# Historical Request Summary — Visual/audio Phase 10.2 evaluation preparation v0.12.87
 
 ## Authorized outcome
 

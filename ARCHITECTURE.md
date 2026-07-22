@@ -550,6 +550,13 @@ evidence, and the decision record remains pending. No participant data,
 recordings, asset, runtime behavior, host field, simulation rule, hidden-state
 projection, history, replay, or debrief authority is added.
 
+The v0.12.88 Phase 11.1 coverage slice adds an exact ledger and pure-module
+probe for the current competitive presentation catalogs and bounded first-month
+continuity references. It verifies visible source/equivalent semantics and
+generic unknown fallbacks without starting the browser host or changing
+history, replay, simulation, assets, or client authority. Full-campaign
+coverage remains a separate future gate.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

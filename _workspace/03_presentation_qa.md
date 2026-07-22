@@ -1,4 +1,62 @@
-# Presentation QA — Phase 10.2 evaluation preparation v0.12.87
+# Presentation QA — Phase 11.1 campaign-coverage evidence v0.12.88
+
+## Current slice: Phase 11.1 bounded campaign-coverage evidence v0.12.88
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Phase 11.1 in `docs/visual_audio_enhancement_roadmap.md`, the request
+  summary, implementation plan, coverage ledger, and pure GUI catalog modules.
+- This slice is authorized to establish catalog parity and fallback evidence
+  only. Full-campaign coverage, screenshots, performance, and human quality
+  remain out of scope.
+
+### Information, Causality, Accessibility, and Audio Findings
+
+- The ledger inventories exact facility, overlay, actor-family, event-marker,
+  event-cue, and music-state IDs with visible source/equivalent semantics.
+- Unknown catalog and asset paths remain explicit generic or absent outcomes;
+  catalog presence does not encode severity, intent, causality, or outcome.
+- Existing optional audio and written equivalents remain presentation-only;
+  human accessibility and audio-quality findings are not inferred.
+
+### Provenance, Authority, and Replay Findings
+
+- The Node probe imports pure modules only and does not start a server, fetch,
+  submit commands, read hidden state, or mutate history/replay authority.
+- No asset, registry, release hash, host DTO, simulation rule, or runtime path
+  changes.
+
+### Required Fixes
+
+- None for the bounded campaign-coverage slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no
+actionable findings after exact fallback-descriptor, ledger-reference,
+import-authority, and resolved-ID assertions were added; no additional
+reviewer was used.
+
+### Residual Risks and Evidence Limits
+
+The bounded ledger does not establish full campaign continuity, screenshot
+coverage, performance, browser compatibility, asset quality, accessibility
+quality, audio usefulness, legal clearance, educational benefit, or human
+review.
+
+### Verification Evidence
+
+- Focused campaign-coverage test; full Python suite (540 tests), Rust tests
+  (328 unit tests plus integration/golden suites), asset/security/release/
+  credits, documentation, JavaScript, formatting, and Clippy checks.
+
+---
+
+# Historical Presentation QA — Phase 10.2 evaluation preparation v0.12.87
 
 ## Current slice: Phase 10.2 structured-evaluation preparation v0.12.87
 

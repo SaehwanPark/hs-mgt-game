@@ -1,4 +1,73 @@
-# Presentation Contract — Phase 10.2 evaluation preparation v0.12.87
+# Presentation Contract — Phase 11.1 campaign-coverage evidence v0.12.88
+
+## Goal and Authorization
+
+Bind the current competitive presentation catalog to exact, inspectable
+coverage evidence without presenting a bounded catalog ledger as full-campaign
+completion. This slice records pure module exports and fallback semantics; it
+does not add a runtime path or approve quality.
+
+## Player Questions and Consequences
+
+The ledger supports visible identity, facility, overlay, event, cue, and music
+labels with written equivalents. It must not imply severity, intent, causality,
+probability, future outcome, or hidden rival information from a catalog entry or
+fallback.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Facilities | `FACILITY_COMPONENTS` and visible facility context | Generic facility label/marker | No hidden facility state or true geography |
+| Operational overlays | `OPERATIONAL_OVERLAY_SET` and explicit visible fields | Generic overlay with text and no severity encoding | No inferred severity, intent, or causality |
+| Actor families | `ACTOR_FAMILIES` and visible family ID | Generic actor marker, frame, and written notification | No private actor identity or intent |
+| Event markers | `EVENT_MARKER_SET` and visible category | Generic unknown-category marker | No urgency or resolution meaning |
+| Event cues/music | Audio cue/music contracts and visible trigger source | Unknown cue/music is absent; written UI/result remains authoritative | No audio-only outcome channel |
+| Continuity | Existing first-month/history/debrief/replay presentation references | Host/core retains history and hash authority | No ledger-derived state transition |
+
+## Visual, Motion, and Audio Semantics
+
+The ledger covers existing static catalog semantics and optional audio states.
+It does not add a facility, overlay, event, cue, music stem, screenshot, or
+animation. Existing written equivalents, reduced-audio behavior, and generic
+fallbacks remain required.
+
+## Accessibility and Fallbacks
+
+The regression test requires visible source/equivalent fields and exercises
+unknown facility, actor, overlay, event-marker, and asset paths. It does not
+establish human accessibility quality or browser compatibility.
+
+## Authority, History, and Replay Boundaries
+
+The test imports pure browser modules only. It cannot submit commands, advance a
+session, read true state, mutate history, alter replay hashes, or authorize a
+client transition. First-month/history/debrief/replay references remain
+presentation-only evidence of existing host/core-owned surfaces.
+
+## Provenance/Release
+
+No asset or registry entry changes. Existing asset validators, release hashes,
+credits, provenance, and human-review gates remain authoritative.
+
+## Verification/Evidence Limits
+
+`tests/test_phase11_campaign_coverage.py` compares the JSON ledger with live
+module exports and checks fallback/equivalent semantics. It does not prove full
+campaign coverage, screenshot completion, performance, compatibility, asset
+quality, audio usefulness, accessibility quality, legal clearance, or
+educational benefit.
+
+## Non-goals
+
+- No runtime, host, simulation, stochastic, history, replay, debrief, or asset
+  change.
+- No full-campaign screenshot suite, device benchmark, browser matrix, or human
+  quality finding.
+
+---
+
+# Historical Presentation Contract — Phase 10.2 evaluation preparation v0.12.87
 
 ## Goal and Authorization
 
