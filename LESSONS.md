@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Release Transforms Explicit and Read-Only
+
+- Context: Phase 9.2 needed a way to remove SVG metadata after the release
+  security audit began rejecting it, without turning a release check into an
+  implicit canonical-asset rewrite.
+- Symptom: A metadata audit can identify a problem but cannot provide a safe,
+  reproducible derivative operation; an automatic rewrite could silently change
+  registry hashes or release manifests.
+- Resolution: Validate SVG/XML with the standard library, delete only parsed
+  `<metadata>` elements into a new caller-selected derivative under an explicit
+  boundary, and keep approved-release checking read-only.
+- Prevention: Preserve `<title>`/`<desc>` and all other bytes, reject malformed
+  input, symlinked paths, missing inputs, and output collisions, and retain
+  legal, accessibility, decoder, quality, ownership, and human-review gates as
+  separate evidence requirements.
+
 ## Make Human Review Explicit Without Simulating Approval
 
 - Context: After preserving all seven portrait previews, Phase 8.2 still
