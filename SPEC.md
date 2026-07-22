@@ -5191,6 +5191,20 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   changed. Checks do not establish legal clearance, quality, accessibility,
   learning, or policy validity.
 
+### Visual/audio Phase 8.2 review-ready portrait approval worksheet (v0.12.77)
+
+- Status: In progress; the seven preserved preview candidates now have
+  per-role review packets, but no packet is approved or release eligible.
+- Added `assets/generation/portrait-review-queue.json` with source path/hash
+  bindings, written equivalents, generic fallbacks, explicit review gates,
+  pending human-review metadata, and null release/registry fields.
+- Added `gui/portrait-review-proof.html` and focused tests. The validator
+  rejects role/hash/path drift, incomplete reviewer metadata, attempted
+  promotion, and any registry bridge while release eligibility is false.
+- No runtime GUI, host DTO, simulation transition, actor observation, history,
+  hash, replay, debrief, or asset-registry entry changed. The worksheet makes
+  human review actionable but does not perform or imply human approval.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

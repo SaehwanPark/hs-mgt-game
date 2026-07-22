@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.12.77] - 2026-07-21
+
+- Added a seven-role review-ready portrait approval queue with explicit
+  identity, role, resemblance/marks, artifact, accessibility, small-size,
+  grayscale, provenance, derivative, and registry gates.
+- Added a static review proof and fail-closed queue validation/tests. Every
+  packet remains pending with human reviewer fields, release fields, and
+  registry bridges empty; no portrait was approved or added to the manifest.
+- No host/simulation/history/replay/debrief authority changed.
+
 ## [0.12.76] - 2026-07-21
 
 - Added six remaining fictional actor portrait previews for payer negotiator,

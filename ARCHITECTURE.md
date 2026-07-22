@@ -468,6 +468,9 @@ directory, runtime GUI, and generation manifest because the preview tool does
 not expose the approved local model revision or actual seed. Portraits require
 written identity, generic actor-marker fallback, small-size/grayscale checks,
 and per-portrait human review before a host-shaped presentation may use them.
+The v0.12.77 review queue binds each role to its preview path/hash and keeps
+human reviewer decisions, release derivatives, and registry bridges explicit;
+the worksheet is not runtime authority and does not perform human approval.
 
 Last Reviewed: 2026-07-21
 Status: Verified

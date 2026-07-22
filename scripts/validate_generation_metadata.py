@@ -18,6 +18,7 @@ MODELS = ROOT / "assets" / "generation" / "approved-models.json"
 MANIFEST = ROOT / "assets" / "generation" / "generation-manifest.json"
 PORTRAIT_SET = ROOT / "assets" / "generation" / "portrait-set.json"
 PORTRAIT_PREVIEWS = ROOT / "assets" / "generation" / "portrait-previews.json"
+PORTRAIT_REVIEW_QUEUE = ROOT / "assets" / "generation" / "portrait-review-queue.json"
 PORTRAIT_PREVIEW_ROOT = ROOT / "assets" / "generation" / "portrait-previews"
 PORTRAIT_REVIEW_FIELDS = (
   "identity_only_reviewed",
@@ -35,6 +36,19 @@ PORTRAIT_NULLABLE_PROVENANCE_FIELDS = (
   "release_path",
   "release_hash",
   "asset_registry_id",
+)
+PORTRAIT_REVIEW_QUEUE_GATES = (
+  "identity_only",
+  "role_consistency",
+  "real_person_resemblance",
+  "protected_marks_and_text",
+  "artifact_quality",
+  "accessible_equivalent",
+  "small_size",
+  "grayscale",
+  "model_and_seed_provenance",
+  "release_derivative",
+  "registry_bridge",
 )
 EXPECTED_PORTRAIT_ROLES = {
   "rival-system-executive",
@@ -247,6 +261,120 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
   return errors
 
 
+def validate_portrait_review_queue(portrait_set, previews, queue, registry_ids: set[str], root: Path = ROOT) -> list[str]:
+  errors: list[str] = []
+  if not isinstance(queue, dict):
+    return ["portrait-review-queue: top-level JSON must be an object"]
+  if queue.get("schema_version") != "fictional-portrait-review-queue-v1":
+    errors.append("portrait-review-queue: unsupported schema")
+  if queue.get("release_eligible") is not False:
+    errors.append("portrait-review-queue: release_eligible must remain false")
+  if queue.get("review_status") != "pending-human-review":
+    errors.append("portrait-review-queue: review_status must remain pending-human-review")
+  if queue.get("required_gates") != list(PORTRAIT_REVIEW_QUEUE_GATES):
+    errors.append("portrait-review-queue.required_gates: must match the canonical gate list")
+  entries = queue.get("entries")
+  if not isinstance(entries, list) or not entries:
+    errors.append("portrait-review-queue.entries: must be a non-empty list")
+    entries = []
+  preview_entries = previews.get("entries") if isinstance(previews, dict) else None
+  if not isinstance(preview_entries, list):
+    errors.append("portrait-review-queue: previews.entries must be a list")
+    preview_entries = []
+  previews_by_role = {
+    entry.get("role_id"): entry
+    for entry in preview_entries
+    if isinstance(entry, dict) and isinstance(entry.get("role_id"), str)
+  }
+  queue_role_ids = []
+  source_paths = set()
+  for index, entry in enumerate(entries):
+    location = f"portrait-review-queue.entries[{index}]"
+    if not isinstance(entry, dict):
+      errors.append(f"{location}: entry must be an object")
+      continue
+    role_id = entry.get("role_id")
+    if not isinstance(role_id, str) or role_id not in EXPECTED_PORTRAIT_ROLES:
+      errors.append(f"{location}: unknown role_id")
+      preview = None
+    else:
+      queue_role_ids.append(role_id)
+      preview = previews_by_role.get(role_id)
+    if entry.get("asset_id") != f"visual.portrait.{role_id}":
+      errors.append(f"{location}: asset_id must match role_id")
+    for field in ("source_output_path", "source_hash", "accessible_equivalent", "generic_fallback", "decision", "approval_status", "block_reason"):
+      if field not in entry or not isinstance(entry.get(field), str) or not entry[field].strip():
+        errors.append(f"{location}: missing {field}")
+    source_output_path = entry.get("source_output_path")
+    if isinstance(source_output_path, str):
+      if Path(source_output_path).is_absolute():
+        errors.append(f"{location}: source_output_path must be repository-relative")
+      if isinstance(role_id, str) and source_output_path != f"assets/generation/portrait-previews/{role_id}-preview.png":
+        errors.append(f"{location}: source_output_path must match role_id")
+      if source_output_path in source_paths:
+        errors.append(f"{location}: source_output_path must be unique")
+      source_paths.add(source_output_path)
+      try:
+        source = (root / source_output_path).resolve()
+      except (OSError, TypeError):
+        source = None
+      if source is None or PORTRAIT_PREVIEW_ROOT.resolve() not in source.parents or not source.is_file():
+        errors.append(f"{location}: source_output_path must identify an existing portrait preview")
+      elif entry.get("source_hash") != sha256(source):
+        errors.append(f"{location}: source_hash does not match source output")
+    if isinstance(entry.get("asset_id"), str) and entry["asset_id"] in registry_ids:
+      errors.append(f"{location}: review packet must remain outside the visual registry")
+    if preview is None:
+      errors.append(f"{location}: matching preview entry is required")
+    else:
+      for field in ("asset_id", "source_output_path", "source_hash", "accessible_equivalent", "generic_fallback"):
+        if entry.get(field) != preview.get(field):
+          errors.append(f"{location}: {field} must match portrait-previews")
+      if previews.get("release_eligible") is not False:
+        errors.append(f"{location}: portrait-previews release_eligible must remain false")
+      if preview.get("preview_status") != "unverified-preview" or preview.get("approval_status") != "pending":
+        errors.append(f"{location}: matching preview must remain unverified and pending")
+      if any(preview.get(field) is not None for field in ("release_path", "release_hash", "asset_registry_id")):
+        errors.append(f"{location}: matching preview release fields must remain null")
+    reviewer = entry.get("reviewer")
+    if not isinstance(reviewer, dict) or set(reviewer) != {"name", "type", "reviewed_at", "notes"}:
+      errors.append(f"{location}: reviewer must contain name, type, reviewed_at, and notes")
+    else:
+      if reviewer.get("name") is not None and (not isinstance(reviewer["name"], str) or not reviewer["name"].strip()):
+        errors.append(f"{location}: reviewer.name must be non-empty text or null")
+      if reviewer.get("type") != "human-review-required":
+        errors.append(f"{location}: reviewer.type must be human-review-required")
+      if reviewer.get("reviewed_at") is not None:
+        try:
+          dt.date.fromisoformat(str(reviewer["reviewed_at"]))
+        except ValueError:
+          errors.append(f"{location}: reviewer.reviewed_at must be an ISO date or null")
+      if reviewer.get("notes") is not None and (not isinstance(reviewer["notes"], str) or not reviewer["notes"].strip()):
+        errors.append(f"{location}: reviewer.notes must be non-empty text or null")
+    gates = entry.get("gates")
+    if not isinstance(gates, dict) or set(gates) != set(PORTRAIT_REVIEW_QUEUE_GATES):
+      errors.append(f"{location}: gates must contain the canonical review gates")
+      gates = {}
+    else:
+      for gate in PORTRAIT_REVIEW_QUEUE_GATES:
+        if not isinstance(gates.get(gate), bool):
+          errors.append(f"{location}: gates.{gate} must be boolean")
+    if entry.get("decision") != "pending" or entry.get("approval_status") != "pending":
+      errors.append(f"{location}: review packet must remain pending")
+    for field in ("release_path", "release_hash", "asset_registry_id"):
+      if field not in entry:
+        errors.append(f"{location}: missing {field}")
+      elif entry[field] is not None:
+        errors.append(f"{location}: {field} must remain null before human approval")
+    if any(gates.get(gate) is True for gate in PORTRAIT_REVIEW_QUEUE_GATES) and (
+      not isinstance(reviewer, dict) or not isinstance(reviewer.get("name"), str) or not reviewer.get("name").strip() or reviewer.get("reviewed_at") is None
+    ):
+      errors.append(f"{location}: completed review gates require a named human reviewer and date")
+  if set(queue_role_ids) != EXPECTED_PORTRAIT_ROLES or len(queue_role_ids) != len(EXPECTED_PORTRAIT_ROLES):
+    errors.append("portrait-review-queue.entries: must contain exactly one packet for each canonical role")
+  return errors
+
+
 def validate() -> list[str]:
   errors: list[str] = []
   try:
@@ -255,6 +383,7 @@ def validate() -> list[str]:
     manifest = load(MANIFEST)
     portrait_set = load(PORTRAIT_SET)
     portrait_previews = load(PORTRAIT_PREVIEWS)
+    portrait_review_queue = load(PORTRAIT_REVIEW_QUEUE)
   except (OSError, json.JSONDecodeError) as error:
     return [f"cannot read generation workflow: {error}"]
   if not isinstance(workflow, dict): return ["workflow: top-level JSON must be an object"]
@@ -299,6 +428,7 @@ def validate() -> list[str]:
     errors.append(f"portrait registry: cannot read asset registries ({error})")
     registry_ids = set()
   errors.extend(validate_portrait_documents(portrait_set, portrait_previews, manifest, registry_ids))
+  errors.extend(validate_portrait_review_queue(portrait_set, portrait_previews, portrait_review_queue, registry_ids))
   return errors
 
 

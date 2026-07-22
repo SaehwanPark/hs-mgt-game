@@ -1791,6 +1791,19 @@ actual seed; per-portrait human review remains required.
   clearance, training-data provenance, output ownership, measured quality,
   lived accessibility, learning, or policy validity.
 
+### v0.12.77 review-ready approval worksheet evidence and limits
+
+- Status: In progress in v0.12.77. A per-role review queue is bound to all
+  seven preview IDs, source paths, hashes, written equivalents, and generic
+  fallbacks. Every decision remains pending with reviewer identity/date/notes
+  empty until an authorized human completes the review.
+- Added a static review proof and fail-closed validator/tests for role binding,
+  hash/path binding, required identity-only and accessibility gates, reviewer
+  metadata, disabled/fallback behavior, and attempted promotion.
+- This worksheet makes the remaining human-review gate actionable; it does
+  not perform human review, establish legal clearance, prove quality, or
+  approve a release derivative or registry bridge.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

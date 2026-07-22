@@ -279,6 +279,11 @@ enforces the exact role set, preview hash/dimension/path boundary, and blocks
 promotion until approved model/seed provenance and portrait review fields are
 complete.
 
+Open `portrait-review-proof.html` to inspect the seven per-role human-review
+packets, explicit pending gates, written equivalents, generic fallbacks, and
+release-block rule. The worksheet is contributor/release-only; it does not
+perform human review or add portrait authority to the runtime GUI.
+
 ## Developers: adapter contracts
 
 This is a dependency-free browser surface over typed actor-visible MCP
