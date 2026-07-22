@@ -13,6 +13,7 @@ REGISTRIES = (
   ("assets/registry/visual-assets.json", "Visual"),
   ("assets/registry/audio-assets.json", "Audio"),
 )
+NOTICE_TARGET = "assets/THIRD_PARTY_NOTICES.md"
 
 
 def project_version(root: Path) -> str:
@@ -29,39 +30,102 @@ def render(root: Path) -> str:
     document = json.loads((root / relative_path).read_text(encoding="utf-8"))
     entries.extend((category, entry) for entry in document["entries"])
   entries.sort(key=lambda item: (item[0], item[1]["id"]))
+  version = project_version(root)
+  has_third_party_release = any(
+    entry["provenance"]["kind"] != "repository-authored"
+    and entry["approval_status"] == "approved"
+    and entry["release_path"]
+    for _category, entry in entries
+  )
+  release_summary = (
+    f"Third-party release assets in v{version} are detailed in the generated notice file."
+    if has_third_party_release
+    else f"No third-party release assets are included in v{version}."
+  )
   lines = [
     "# Asset Credits", "",
     "This file is generated from `assets/registry/*.json`. Do not edit it",
     "directly; update a registry entry and run the credits check.", "",
-    f"No third-party release assets are included in v{project_version(root)}. Runtime-generated",
+    f"{release_summary} Runtime-generated",
     "visual tokens and Web Audio recipes remain optional presentation layers.", "",
-    "| Type | ID | Source/generation | License | Attribution | Approval |",
-    "| --- | --- | --- | --- | --- | --- |",
+    "| Type | ID | Source/generation | License | Attribution | Approval | Provenance | Source URL | Retrieved | License reference |",
+    "| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |",
   ]
   for category, entry in entries:
     source = entry["source_path"] or entry["creation_method"]
+    provenance = entry["provenance"]
     lines.append(
       f"| {category} | `{entry['id']}` | `{source}` | {entry['license']} | "
-      f"{entry['attribution_text']} | {entry['approval_status']} |"
+      f"{entry['attribution_text']} | {entry['approval_status']} | {provenance['kind']} | "
+      f"{provenance['source_url'] or '—'} | {provenance['retrieval_date'] or '—'} | "
+      f"`{provenance['license_reference']}` |"
     )
   lines.extend([
     "", "Every entry also records its semantic role, visible source, accessible",
-    "equivalent, modifications, and source/release hash fields in the registry.", "",
+    "equivalent, modifications, and source/release hash fields in the registry.",
+    f"Third-party release notices are generated separately in `{NOTICE_TARGET}`.", "",
   ])
+  return "\n".join(lines)
+
+
+def render_notices(root: Path) -> str:
+  entries: list[dict] = []
+  for relative_path, _category in REGISTRIES:
+    document = json.loads((root / relative_path).read_text(encoding="utf-8"))
+    entries.extend(document["entries"])
+  entries = [
+    entry for entry in entries
+    if entry["provenance"]["kind"] != "repository-authored"
+    and entry["approval_status"] == "approved"
+    and entry["release_path"]
+  ]
+  entries.sort(key=lambda entry: entry["id"])
+  lines = [
+    "# Third-party notices", "",
+    "This file is generated from `assets/registry/*.json`. Do not edit it",
+    "directly; update a registry entry and run the credits check.", "",
+  ]
+  if not entries:
+    lines.extend([
+      f"No third-party release assets are included in v{project_version(root)}.",
+      "All current release-capable entries are repository-authored and use the",
+      "project asset-licensing policy as their license reference.", "",
+    ])
+    return "\n".join(lines)
+  lines.extend([f"The following third-party assets are distributed in v{project_version(root)}:", ""])
+  for entry in entries:
+    provenance = entry["provenance"]
+    lines.extend([
+      f"## `{entry['id']}`", "",
+      f"- License: {entry['license']}",
+      f"- Attribution: {entry['attribution_text']}",
+      f"- Source URL: {provenance['source_url']}",
+      f"- Retrieved: {provenance['retrieval_date']}",
+      f"- License reference: `{provenance['license_reference']}`",
+      f"- Release path: `{entry['release_path']}`", "",
+    ])
   return "\n".join(lines)
 
 
 def main() -> int:
   parser = argparse.ArgumentParser()
   parser.add_argument("--check", action="store_true", help="check the generated file")
+  parser.add_argument("--notices", action="store_true", help="render third-party notices")
   args = parser.parse_args()
   root = Path(__file__).resolve().parents[1]
+  if args.notices:
+    print(render_notices(root), end="")
+    return 0
   output = render(root)
   target = root / "assets" / "ASSET_CREDITS.md"
   if args.check:
     actual = target.read_text(encoding="utf-8")
     if actual != output:
       print(f"asset credits check: stale {target}")
+      return 1
+    notices = root / NOTICE_TARGET
+    if notices.read_text(encoding="utf-8") != render_notices(root):
+      print(f"asset credits check: stale {notices}")
       return 1
     print("asset credits check: passed")
     return 0

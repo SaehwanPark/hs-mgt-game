@@ -3,7 +3,7 @@
   "$id": "https://hs-mgt-game.invalid/schemas/audio-asset.schema.json",
   "title": "Health Policy Strategy Game audio asset entry",
   "type": "object",
-  "required": ["id", "asset_type", "semantic_role", "source_path", "release_path", "creator", "creation_method", "license", "modifications", "original_hash", "release_hash", "attribution_text", "accessible_equivalent", "visible_source", "approval_status"],
+  "required": ["id", "asset_type", "semantic_role", "source_path", "release_path", "creator", "creation_method", "license", "modifications", "original_hash", "release_hash", "attribution_text", "accessible_equivalent", "visible_source", "approval_status", "provenance"],
   "properties": {
     "id": {"type": "string", "minLength": 1},
     "asset_type": {"const": "audio"},
@@ -19,6 +19,17 @@
     "attribution_text": {"type": "string", "minLength": 1},
     "accessible_equivalent": {"type": "string", "minLength": 1},
     "visible_source": {"type": "string", "minLength": 1},
-    "approval_status": {"enum": ["approved", "pending", "rejected"]}
+    "approval_status": {"enum": ["approved", "pending", "rejected"]},
+    "provenance": {
+      "type": "object",
+      "required": ["kind", "source_url", "retrieval_date", "license_reference"],
+      "properties": {
+        "kind": {"enum": ["repository-authored", "local-generation", "external"]},
+        "source_url": {"type": ["string", "null"]},
+        "retrieval_date": {"type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+        "license_reference": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
   }
 }

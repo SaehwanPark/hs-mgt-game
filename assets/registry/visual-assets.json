@@ -17,7 +17,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Written stage labels, source text, surface synchronization text, fallback text, and native review controls",
       "visible_source": "Host-owned competitive-resolution-v1 stage envelope",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-motion-catalog",
@@ -34,7 +40,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Written motion purpose, timing, easing, replacement, interruption, replay, input, and performance rules",
       "visible_source": "Actor-visible presentation categories and local motion policy",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-metric-visualizations",
@@ -51,7 +63,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Exact metric text, source/status, uncertainty/missingness labels, patterns, and deterministic SVG geometry",
       "visible_source": "Explicit actor-visible metric descriptor supplied by the host-shaped presentation",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-identities",
@@ -68,7 +86,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible identity label and symbol",
       "visible_source": "Actor-visible institution identity",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.art-direction.variant-a",
@@ -85,7 +109,13 @@
       "attribution_text": "Hand-authored in this repository; no third-party asset.",
       "accessible_equivalent": "Visible institution, facility, and status labels",
       "visible_source": "Design reference for actor-visible host projections",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.art-direction.variant-b",
@@ -102,7 +132,13 @@
       "attribution_text": "Hand-authored in this repository; no third-party asset.",
       "accessible_equivalent": "Visible institution, facility, and status labels",
       "visible_source": "Design reference only; not a geographic claim",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.art-direction.variant-c",
@@ -119,7 +155,13 @@
       "attribution_text": "Hand-authored in this repository; no third-party asset.",
       "accessible_equivalent": "Visible institution, facility, and status labels",
       "visible_source": "Design reference for actor-visible executive surfaces",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.regional-grid",
@@ -136,7 +178,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Named grid coordinates and visible layout labels",
       "visible_source": "Fixture-only symbolic layout coordinates",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.road-tile-set",
@@ -153,7 +201,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Road orientation label, path role labels, and generic road fallback",
       "visible_source": "Fixture-only symbolic road-segment vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.district-tile-set",
@@ -170,7 +224,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "District type label, non-color pattern, and generic district fallback",
       "visible_source": "Fixture-only symbolic district vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.parcel-system",
@@ -187,7 +247,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Parcel type label, non-color pattern, and generic parcel fallback",
       "visible_source": "Fixture-only symbolic parcel vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.relationship-line-styles",
@@ -204,7 +270,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Relationship type label, line-pattern label, and generic relationship fallback",
       "visible_source": "Fixture-only symbolic relationship-line vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.service-area-overlays",
@@ -221,7 +293,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Service-area category label, contour/fill pattern, and generic overlay fallback",
       "visible_source": "Fixture-only symbolic service-area vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.uncertainty-overlays",
@@ -238,7 +316,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Information-status label, non-color pattern, reduced-motion mode, and generic overlay fallback",
       "visible_source": "Fixture-only symbolic uncertainty vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-markers",
@@ -255,7 +339,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible marker label and symbol",
       "visible_source": "Actor-visible facility, process, or metric category",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-semantic-containers",
@@ -272,7 +362,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Semantic purpose, heading, marker, compact/expanded text, source/status, large-text, narrow-width, and print rules",
       "visible_source": "Existing actor-visible GUI information classes",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-statuses",
@@ -289,7 +385,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible status label and non-color symbol",
       "visible_source": "Host- or fixture-provided visible status language",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.actor-family-language",
@@ -306,7 +408,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible actor-family label, glyph, written notification, frame pattern, and generic fallback",
       "visible_source": "Visible actor-family ID from the presentation contract",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.administrative-headquarters",
@@ -323,7 +431,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Administrative headquarters label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.parking-structure",
@@ -340,7 +454,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Parking structure label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.utility-plant",
@@ -357,7 +477,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Utility plant label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.research-education-building",
@@ -374,7 +500,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Research and education building label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.construction-crane",
@@ -391,7 +523,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Construction crane label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.undeveloped-parcel",
@@ -408,7 +546,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Undeveloped parcel label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.general-hospital-base",
@@ -425,7 +569,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "General hospital label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.patient-tower",
@@ -442,7 +592,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Patient tower label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.emergency-department",
@@ -459,7 +615,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Emergency department label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.ambulatory-center",
@@ -476,7 +638,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Ambulatory center label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.specialty-center",
@@ -493,7 +661,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Specialty center label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.facility.rural-clinic",
@@ -510,7 +684,13 @@
       "attribution_text": "Hand-authored in this repository; fictional facility component with no third-party asset.",
       "accessible_equivalent": "Rural clinic label, identity badge, layer labels, and generic facility fallback",
       "visible_source": "Visible facility kind and actor-visible status context",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-svg-scene-proof",
@@ -527,7 +707,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Keyboard-reachable SVG controls plus visible labels and symbols",
       "visible_source": "Static actor-visible fixture; no host state is created",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.identity.riverside-kit",
@@ -544,7 +730,13 @@
       "attribution_text": "Hand-authored in this repository; fictional identity with no third-party asset.",
       "accessible_equivalent": "Riverside name, RV monogram, text labels, and generic fallback",
       "visible_source": "Visible Riverside system identity",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.identity.northlake-kit",
@@ -561,7 +753,13 @@
       "attribution_text": "Hand-authored in this repository; fictional identity with no third-party asset.",
       "accessible_equivalent": "Northlake name, NL monogram, text labels, and generic fallback",
       "visible_source": "Visible Northlake system identity",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.identity.summit-kit",
@@ -578,7 +776,13 @@
       "attribution_text": "Hand-authored in this repository; fictional identity with no third-party asset.",
       "accessible_equivalent": "Summit name, SM monogram, text labels, and generic fallback",
       "visible_source": "Visible Summit system identity",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.map.event-marker-set",
@@ -595,7 +799,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Event category label, glyph, shape pattern, written equivalent, and generic fallback",
       "visible_source": "Fixture-only symbolic event-marker vocabulary",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-consequence-links",
@@ -612,7 +822,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible consequence label, detail, source, turn/hash context, and optional board focus control",
       "visible_source": "RegionalWorldEnvelope and ResolutionEnvelope actor-visible fields",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-operational-overlays",
@@ -629,7 +845,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Overlay category, glyph, non-color pattern, visible source, written equivalent, collision state, and generic fallback",
       "visible_source": "Actor-visible fields named by each operational-overlay contract",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     },
     {
       "id": "visual.runtime-regional-board-adapter",
@@ -646,7 +868,13 @@
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Mapped identity, facility, status, source, missingness, overlay, and keyboard selection labels",
       "visible_source": "RegionalWorldEnvelope actor-visible fields",
-      "approval_status": "approved"
+      "approval_status": "approved",
+      "provenance": {
+        "kind": "repository-authored",
+        "source_url": null,
+        "retrieval_date": null,
+        "license_reference": "docs/reference/asset-licensing-policy.md"
+      }
     }
   ]
 }

@@ -17,15 +17,17 @@ Validate the repository with:
 ```bash
 python3 scripts/validate_assets.py
 python3 scripts/generate_asset_credits.py --check
+python3 scripts/generate_asset_credits.py --notices
 ```
 
 ## Registry contract
 
 Each entry has a stable ID, asset type, known semantic role, source or
 generation method, creator, license, attribution, accessibility equivalent,
-approval status, and source/release hash fields. A path-backed source or
-release file must exist and match its recorded SHA-256 hash. Runtime-generated
-recipes may omit a release path but must record how they are generated.
+approval status, provenance, and source/release hash fields. A path-backed
+source or release file must exist and match its recorded SHA-256 hash.
+Runtime-generated recipes may omit a release path but must record how they are
+generated.
 
 The default license allowlist is `project-generated`, `CC0-1.0`, `CC-BY-4.0`,
 `CC-BY-SA-4.0`, `MIT`, `Apache-2.0`, `GPL-3.0-or-later`, and `OFL-1.1`.

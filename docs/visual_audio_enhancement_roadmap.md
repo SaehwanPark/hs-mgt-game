@@ -1804,6 +1804,21 @@ actual seed; per-portrait human review remains required.
   not perform human review, establish legal clearance, prove quality, or
   approve a release derivative or registry bridge.
 
+### v0.12.78 provenance and third-party notice evidence and limits
+
+- Status: In progress in v0.12.78. The canonical visual/audio registries now
+  require per-entry provenance kind, source URL, retrieval date, and license
+  reference fields. Current entries are all repository-authored and therefore
+  carry null external URL/date fields and a repository policy reference.
+- The allowlist/denylist, provenance-kind compatibility, HTTPS/reference/date
+  shape, path/hash, approval, and release-path rules are validated by
+  `scripts/validate_assets.py`. Credits now project provenance fields and
+  `assets/THIRD_PARTY_NOTICES.md` is generated from the same registry data.
+- Focused tests cover valid external metadata, missing retrieval metadata,
+  invalid dates, denylisted provenance text, and stale generated outputs. No
+  external or portrait asset was added, and no human license audit was
+  performed.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

@@ -472,6 +472,16 @@ The v0.12.77 review queue binds each role to its preview path/hash and keeps
 human reviewer decisions, release derivatives, and registry bridges explicit;
 the worksheet is not runtime authority and does not perform human approval.
 
+The v0.12.78 Phase 9.1 release-hardening slice makes canonical visual/audio
+registry provenance explicit with repository-authored, local-generation, and
+external kinds. Source URLs, retrieval dates, license references, allowlist/
+denylist checks, and path/hash bindings are validated without network access.
+Credits and third-party notices are deterministic projections of registry data;
+they remain contributor/release artifacts and do not enter host payloads,
+simulation state, actor observations, history, replay artifacts, or debriefs.
+No current entry is external or release-distributed, and this automation does
+not substitute for a human legal audit.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

@@ -1,4 +1,81 @@
-# Presentation QA — Phase 8.2 review-ready portrait approval worksheet v0.12.77
+# Presentation QA — Phase 9.1 provenance and notices v0.12.78
+
+## Current slice: Phase 9.1 provenance and notices v0.12.78
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Milestone 9.1 in `docs/visual_audio_enhancement_roadmap.md`,
+  `_workspace/00_input/request-summary.md`, the implementation plan, and
+  `_workspace/02_presentation_contract.md`.
+- The canonical visual/audio registries, JSON schemas, licensing policy,
+  validator, generated credits, third-party notices, release guidance, and
+  focused tests.
+- The slice is contributor/release metadata only. No portrait preview was
+  approved or promoted, and no external asset was added.
+
+### Information and Causality Findings
+
+- Credits and notices expose asset source, approval, license, and provenance
+  information; they do not present player outcomes, actor intent, severity, or
+  causal claims.
+- Current entries remain project-authored runtime recipes or repository source
+  references. No asset metadata is inferred from hidden simulation state.
+
+### Accessibility and Fallback Findings
+
+- Existing asset entries retain their written equivalents, visible sources,
+  and approval/fallback metadata. This slice adds release provenance columns
+  without making visual or audio assets decision-relevant.
+- The generated outputs are documentation/release artifacts and do not alter
+  reduced-motion, mute, text, missing-asset, keyboard, or recovery behavior.
+
+### Provenance and Rights Findings
+
+- Provenance kind, allowlist/denylist, HTTPS URL shape, real ISO date, local
+  license reference, source/release hash, approval, and release-path rules are
+  fail-closed in `scripts/validate_assets.py`.
+- The one designated code reviewer found three medium findings; all were
+  resolved. Non-repository entries cannot use `project-generated`, malformed
+  HTTPS authorities are rejected, and notices include approved entries only.
+- Credits and `assets/THIRD_PARTY_NOTICES.md` are deterministic projections;
+  all current registry entries are repository-authored and no third-party
+  release notice is emitted.
+
+### Authority and Replay Findings
+
+- Registry provenance, credits, and notices do not enter host commands,
+  transition evaluation, stochastic inputs, state hashes, actor observations,
+  immutable history, replay artifacts, or debrief facts.
+- Release files remain outside the simulation authority boundary and degrade to
+  the existing runtime-generated/fallback presentation contract.
+
+### Required Fixes
+
+- None for the bounded technical slice. The remaining human license audit,
+  legal clearance, and any future external asset review are separate gates.
+
+### Residual Risks and Evidence Limits
+
+Automated registry and notice checks establish metadata shape, path/hash
+binding, and reproducible projections only. They do not establish legal
+clearance, ownership, training-data provenance, output rights, human
+accessibility, educational benefit, clinical plausibility, or policy validity.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_asset_registry` (9 tests)
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (491 tests)
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/generate_asset_credits.py --check`
+- `python3 scripts/check_release_metadata.py`
+- `python3 scripts/check_documentation_links.py`
+- `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`,
+  `cargo test -- --test-threads=1`
+- JavaScript syntax checks and `git diff --check`
 
 ## Current slice: Phase 8.2 review-ready portrait approval worksheet v0.12.77
 
