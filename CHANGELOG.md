@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.76] - 2026-07-21
+
+- Added six remaining fictional actor portrait previews for payer negotiator,
+  regulator, labor representative, community leader, board chair, and
+  affiliation partner executive, with source hashes, prompts, written
+  equivalents, fallbacks, and pending review metadata.
+- Extended the portrait proof and fail-closed validator to require exactly one
+  preview for each of the seven canonical roles and to keep every unverified
+  candidate outside the release/runtime registries and generation manifest.
+- No host/simulation/history/replay/debrief authority changed; the preview
+  tool still does not expose the approved local model revision or actual seed.
+
 ## [0.12.75] - 2026-07-21
 
 - Added the Phase 8.2 seven-role fictional actor portrait contract with shared

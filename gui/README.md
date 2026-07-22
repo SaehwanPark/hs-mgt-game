@@ -270,13 +270,14 @@ existing asset-registry approval boundary.
 
 Open `gui/portrait-workflow-proof.html` directly or through a static server to
 inspect the Phase 8.2 seven-role portrait contract, identity-only meaning,
-small-size/grayscale checks, generic actor-marker fallback, and the preserved
-rival-system-executive preview. The preview is explicitly unverified and is
+small-size/grayscale checks, generic actor-marker fallback, and all seven
+preserved preview candidates. Every preview is explicitly unverified and is
 outside the runtime GUI, visual asset registry, release directory, and
-generation manifest because its tool does not expose the approved local model
-revision or actual seed. `scripts/validate_generation_metadata.py` enforces
-the preview hash/dimension/path boundary and blocks promotion until approved
-model/seed provenance and portrait review fields are complete.
+generation manifest because the preview tool does not expose the approved
+local model revision or actual seed. `scripts/validate_generation_metadata.py`
+enforces the exact role set, preview hash/dimension/path boundary, and blocks
+promotion until approved model/seed provenance and portrait review fields are
+complete.
 
 ## Developers: adapter contracts
 

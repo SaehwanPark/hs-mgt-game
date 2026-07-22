@@ -5173,6 +5173,24 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   checks do not establish human recognition, legal clearance, quality, lived
   accessibility, or educational benefit.
 
+### Visual/audio Phase 8.2 remaining fictional actor portrait previews (v0.12.76)
+
+- Status: In progress; all seven canonical role previews are preserved as
+  unverified candidates, with six added in this slice. None is approved for
+  runtime or release use.
+- Added six role-specific PNG previews, source hashes, prompt/negative-prompt
+  records, dimensions, capture dates, contributors, written equivalents,
+  generic fallbacks, and pending portrait-review fields. The built-in preview
+  tool does not expose the approved local model revision or actual seed, so
+  those fields remain null and release remains blocked.
+- Extended the generation validator to require exact role coverage and to
+  reject unverified model/revision/seed metadata, and extended the proof/tests
+  to show and check all seven candidates and the six current-slice targets.
+- No runtime GUI authority, host DTO, simulation transition, actor
+  observation, history, hash, replay, debrief, or asset-registry entry
+  changed. Checks do not establish legal clearance, quality, accessibility,
+  learning, or policy validity.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

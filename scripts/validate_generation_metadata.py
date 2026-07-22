@@ -7,6 +7,7 @@ import json
 import hashlib
 import struct
 import sys
+import datetime as dt
 from pathlib import Path
 
 from capture_generation_metadata import APPROVED_MODEL_STATUS, MODEL_REVISION_PATTERN, ROOT, approved_models, registry_entries, validate_record
@@ -25,6 +26,16 @@ PORTRAIT_REVIEW_FIELDS = (
   "small_size_reviewed",
   "grayscale_reviewed",
 )
+PORTRAIT_NULLABLE_PROVENANCE_FIELDS = (
+  "model_id",
+  "model_revision",
+  "model_license",
+  "model_card_url",
+  "sampler",
+  "release_path",
+  "release_hash",
+  "asset_registry_id",
+)
 EXPECTED_PORTRAIT_ROLES = {
   "rival-system-executive",
   "payer-negotiator",
@@ -34,6 +45,7 @@ EXPECTED_PORTRAIT_ROLES = {
   "board-chair",
   "affiliation-partner-executive",
 }
+CURRENT_PORTRAIT_ROLES = EXPECTED_PORTRAIT_ROLES - {"rival-system-executive"}
 
 
 def load(path: Path):
@@ -84,10 +96,21 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
         errors.append(f"{location}: missing {field}")
     if not isinstance(role.get("target_in_first_slice"), bool):
       errors.append(f"{location}: target_in_first_slice must be boolean")
+    if not isinstance(role.get("target_in_current_slice"), bool):
+      errors.append(f"{location}: target_in_current_slice must be boolean")
   if set(role_ids) != EXPECTED_PORTRAIT_ROLES or len(role_ids) != len(EXPECTED_PORTRAIT_ROLES):
     errors.append("portrait-set.roles: must contain the exact seven unique roadmap roles")
   if sum(role.get("target_in_first_slice") is True for role in roles if isinstance(role, dict)) != 1:
     errors.append("portrait-set.roles: exactly one first-slice target is required")
+  current_target_ids = {
+    role.get("id")
+    for role in roles
+    if isinstance(role, dict)
+    and role.get("target_in_current_slice") is True
+    and isinstance(role.get("id"), str)
+  }
+  if current_target_ids != CURRENT_PORTRAIT_ROLES:
+    errors.append("portrait-set.roles: current slice must target the six remaining roles")
   shared_style = portrait_set.get("shared_style")
   if not isinstance(shared_style, dict):
     errors.append("portrait-set.shared_style: must be an object")
@@ -114,6 +137,8 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
     manifest_entries = []
   manifest_ids = {entry.get("asset_id") for entry in manifest_entries if isinstance(entry, dict) and isinstance(entry.get("asset_id"), str)}
   approved_model_entries = approved_models()
+  preview_role_ids = []
+  source_paths = set()
   for index, entry in enumerate(entries):
     location = f"portrait-previews.entries[{index}]"
     if not isinstance(entry, dict):
@@ -122,11 +147,39 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
     role_id = entry.get("role_id")
     if not isinstance(role_id, str) or role_id not in EXPECTED_PORTRAIT_ROLES:
       errors.append(f"{location}: unknown role_id")
+    else:
+      preview_role_ids.append(role_id)
     if entry.get("asset_id") != f"visual.portrait.{role_id}":
       errors.append(f"{location}: asset_id must match role_id")
-    for field in ("source_output_path", "source_hash", "captured_at", "contributor", "generation_application", "model_identity_status", "seed_status", "provenance_note", "prompt", "negative_prompt", "post_processing", "accessible_equivalent", "generic_fallback", "approval_status", "preview_status"):
+    for field in ("source_output_path", "source_hash", "captured_at", "generation_date", "contributor", "generation_application", "model_identity_status", "seed_status", "sampler_status", "provenance_note", "prompt", "negative_prompt", "post_processing", "accessible_equivalent", "generic_fallback", "approval_status", "preview_status"):
       if not isinstance(entry.get(field), str) or not entry[field].strip():
         errors.append(f"{location}: missing {field}")
+    source_output_path = entry.get("source_output_path")
+    if isinstance(source_output_path, str):
+      if Path(source_output_path).is_absolute():
+        errors.append(f"{location}: source_output_path must be repository-relative")
+      if isinstance(role_id, str):
+        expected_path = f"assets/generation/portrait-previews/{role_id}-preview.png"
+        if source_output_path != expected_path:
+          errors.append(f"{location}: source_output_path must match role_id")
+      if source_output_path in source_paths:
+        errors.append(f"{location}: source_output_path must be unique")
+      source_paths.add(source_output_path)
+    source_image_references = entry.get("source_image_references")
+    if not isinstance(source_image_references, list) or not all(isinstance(value, str) and value.strip() for value in source_image_references):
+      errors.append(f"{location}: source_image_references must be a list of strings")
+    settings = entry.get("settings")
+    if not isinstance(settings, dict) or not settings:
+      errors.append(f"{location}: settings must be a non-empty object")
+    for field in PORTRAIT_NULLABLE_PROVENANCE_FIELDS:
+      value = entry.get(field)
+      if value is not None and (not isinstance(value, str) or not value.strip()):
+        errors.append(f"{location}: {field} must be non-empty text or null")
+    for field in ("captured_at", "generation_date"):
+      try:
+        dt.date.fromisoformat(str(entry.get(field)))
+      except ValueError:
+        errors.append(f"{location}: {field} must be an ISO date")
     try:
       source = (root / entry.get("source_output_path", "")).resolve()
     except (OSError, TypeError):
@@ -148,6 +201,8 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
       errors.append(f"{location}: preview asset must remain outside manifest and visual registry")
     if previews.get("release_eligible") is False and (entry.get("release_path") is not None or entry.get("asset_registry_id") is not None):
       errors.append(f"{location}: unverified preview cannot carry release_path or asset_registry_id")
+    if entry.get("release_path") is None and entry.get("release_hash") is not None:
+      errors.append(f"{location}: release_hash requires release_path")
     human_review = entry.get("human_review")
     if not isinstance(human_review, dict):
       errors.append(f"{location}: human_review must be an object")
@@ -174,14 +229,21 @@ def validate_portrait_documents(portrait_set, previews, manifest, registry_ids: 
         errors.append(f"{location}: promoted portrait model_revision does not match approved model")
       if not isinstance(entry.get("seed"), int) or isinstance(entry.get("seed"), bool) or entry["seed"] < 0:
         errors.append(f"{location}: promoted portrait requires non-negative seed")
+      for field in ("model_license", "model_card_url", "sampler"):
+        if not isinstance(entry.get(field), str) or not entry[field].strip():
+          errors.append(f"{location}: promoted portrait requires {field}")
       if not all(portrait_review.get(field) is True for field in PORTRAIT_REVIEW_FIELDS):
         errors.append(f"{location}: promoted portrait requires complete portrait review")
     elif entry.get("preview_status") != "unverified-preview" or entry.get("approval_status") != "pending":
       errors.append(f"{location}: unpromoted portrait must remain an unverified pending preview")
+    elif any(entry.get(field) is not None for field in ("model_id", "model_revision", "model_license", "model_card_url", "sampler", "seed")):
+      errors.append(f"{location}: unverified preview must keep model/license/card/sampler/seed provenance null")
     if entry.get("model_id") is not None and not isinstance(entry.get("model_id"), str):
       errors.append(f"{location}: model_id must be text or null")
     if entry.get("seed") is not None and (not isinstance(entry.get("seed"), int) or isinstance(entry.get("seed"), bool) or entry["seed"] < 0):
       errors.append(f"{location}: seed must be a non-negative integer or null")
+  if set(preview_role_ids) != EXPECTED_PORTRAIT_ROLES or len(preview_role_ids) != len(EXPECTED_PORTRAIT_ROLES):
+    errors.append("portrait-previews.entries: must contain exactly one preview for each canonical role")
   return errors
 
 

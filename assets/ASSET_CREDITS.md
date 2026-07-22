@@ -3,7 +3,7 @@
 This file is generated from `assets/registry/*.json`. Do not edit it
 directly; update a registry entry and run the credits check.
 
-No third-party release assets are included in v0.12.75. Runtime-generated
+No third-party release assets are included in v0.12.76. Runtime-generated
 visual tokens and Web Audio recipes remain optional presentation layers.
 
 | Type | ID | Source/generation | License | Attribution | Approval |

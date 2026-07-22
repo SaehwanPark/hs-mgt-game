@@ -1,7 +1,7 @@
 {
   "schema_version": "fictional-portrait-set-v1",
   "phase": "8.2",
-  "status": "first-role-preview-pending-review",
+  "status": "remaining-role-previews-pending-review",
   "shared_style": {
     "medium": "non-photorealistic editorial illustration",
     "composition": "chest-up, centered, consistent square crop, generous head and shoulder margin",
@@ -27,7 +27,8 @@
       "family": "competitor",
       "alt_text_guidance": "Fictional rival health-system executive portrait; identity decoration only.",
       "fallback": "Competitor actor marker with the written role label.",
-      "target_in_first_slice": true
+      "target_in_first_slice": true,
+      "target_in_current_slice": false
     },
     {
       "id": "payer-negotiator",
@@ -35,7 +36,8 @@
       "family": "payer",
       "alt_text_guidance": "Fictional payer negotiator portrait; identity decoration only.",
       "fallback": "Payer actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     },
     {
       "id": "regulator",
@@ -43,7 +45,8 @@
       "family": "regulator",
       "alt_text_guidance": "Fictional regulator portrait; identity decoration only.",
       "fallback": "Regulator actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     },
     {
       "id": "labor-representative",
@@ -51,7 +54,8 @@
       "family": "labor",
       "alt_text_guidance": "Fictional labor representative portrait; identity decoration only.",
       "fallback": "Labor actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     },
     {
       "id": "community-leader",
@@ -59,7 +63,8 @@
       "family": "community",
       "alt_text_guidance": "Fictional community leader portrait; identity decoration only.",
       "fallback": "Community actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     },
     {
       "id": "board-chair",
@@ -67,7 +72,8 @@
       "family": "board",
       "alt_text_guidance": "Fictional board chair portrait; identity decoration only.",
       "fallback": "Board actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     },
     {
       "id": "affiliation-partner-executive",
@@ -75,7 +81,8 @@
       "family": "partner",
       "alt_text_guidance": "Fictional affiliation partner executive portrait; identity decoration only.",
       "fallback": "Partner actor marker with the written role label.",
-      "target_in_first_slice": false
+      "target_in_first_slice": false,
+      "target_in_current_slice": true
     }
   ],
   "review_requirements": [
