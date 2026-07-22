@@ -48,7 +48,7 @@ class RiversideIdentityTests(unittest.TestCase):
       const fallback = identityKitFor("future-system");
       const surfaces = identitySurfaceSummary("riverside");
       if (riverside.id !== "riverside" || riverside.monogram !== "RV" || surfaces.length !== 7) process.exit(1);
-      if (fallback.id !== "generic-institution" || fallback.fallback !== null) process.exit(2);
+      if (fallback.id !== "generic-institution" || fallback.fallback?.label !== "Institution" || fallback.fallback?.equivalent !== "Institution identity unavailable") process.exit(2);
       if (JSON.stringify(riverside).includes("private") || JSON.stringify(fallback).includes("private")) process.exit(3);
       console.log(JSON.stringify({ riverside, fallback, surfaces }));
       """

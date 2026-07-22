@@ -506,6 +506,13 @@ manifest and audit remain contributor/release artifacts and cannot enter host
 payloads, simulation state, actor observations, history, hashes, replay, or
 debrief artifacts.
 
+The v0.12.82 Phase 9.2 fallback contract maps only caller-supplied local
+availability results into loaded or generic presentation descriptors. Missing,
+failed, malformed, and unknown results retain visible requested labels and
+written equivalents while clearing the release path. The adapters and proof
+do not fetch, decode, inspect host/session data, enter commands, or influence
+simulation state, observations, history, hashes, replay, or debriefs.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

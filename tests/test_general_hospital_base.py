@@ -35,7 +35,7 @@ class GeneralHospitalBaseTests(unittest.TestCase):
 
   def test_component_catalog_and_generic_fallback(self):
     result = subprocess.run(
-      ["node", "--input-type=module", "-e", "import { facilityComponentFor, facilityLayerSummary } from './gui/facility-components.mjs'; const component = facilityComponentFor('general-hospital-base'); const fallback = facilityComponentFor('future-facility'); if (component.layers.length !== 7 || component.grid !== '8px' || component.view_box !== '0 0 760 500') process.exit(1); if (facilityLayerSummary().length !== 7 || fallback.id !== 'generic-facility' || fallback.fallback !== null) process.exit(2); if (JSON.stringify(component).includes('resolved_inputs') || JSON.stringify(component).includes('private')) process.exit(3); console.log(JSON.stringify({ component, fallback }));"],
+      ["node", "--input-type=module", "-e", "import { facilityComponentFor, facilityLayerSummary } from './gui/facility-components.mjs'; const component = facilityComponentFor('general-hospital-base'); const fallback = facilityComponentFor('future-facility'); if (component.layers.length !== 7 || component.grid !== '8px' || component.view_box !== '0 0 760 500') process.exit(1); if (facilityLayerSummary().length !== 7 || fallback.id !== 'generic-facility' || fallback.fallback?.label !== 'Facility' || fallback.fallback?.equivalent !== 'Facility label and generic marker') process.exit(2); if (JSON.stringify(component).includes('resolved_inputs') || JSON.stringify(component).includes('private')) process.exit(3); console.log(JSON.stringify({ component, fallback }));"],
       cwd=ROOT,
       capture_output=True,
       text=True,

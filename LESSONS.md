@@ -2263,3 +2263,16 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Treat the manifest as a checked projection, require stale-output
   failure in CI, and state that reproducibility evidence is not legal,
   accessibility, decoder, or human-review evidence.
+
+## Phase 17: Asset failure must preserve meaning, not pretend a file loaded
+
+- Context: Phase 9.2 requires optional release assets to fail gracefully while
+  the browser remains a presentation-only client.
+- Risk: A missing illustration can remove an institution/facility label or a
+  stale release path can imply that an unavailable asset is still visible.
+- Resolution: Normalize caller-supplied availability results and project an
+  explicit generic fallback with the requested label, written equivalent,
+  status, reason, and cleared release path. Keep the proof local and static.
+- Prevention: Test loaded, missing, failed, malformed, and unknown outcomes;
+  forbid network/host access and do not infer outcomes, severity, or hidden
+  state from asset availability.
