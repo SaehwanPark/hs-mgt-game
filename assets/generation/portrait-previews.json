@@ -1,0 +1,50 @@
+{
+  "schema_version": "fictional-portrait-preview-v1",
+  "release_eligible": false,
+  "entries": [
+    {
+      "asset_id": "visual.portrait.rival-system-executive",
+      "role_id": "rival-system-executive",
+      "preview_status": "unverified-preview",
+      "source_output_path": "assets/generation/portrait-previews/rival-system-executive-preview.png",
+      "source_hash": "sha256:f2e99a7a57f77bb5a22906a627f0e3a1720b0ae5d7d4bc185ed9c41c59da53aa",
+      "captured_at": "2026-07-21",
+      "contributor": "Codex preview generation",
+      "dimensions": {"width": 1254, "height": 1254},
+      "generation_application": "Codex built-in image_gen preview",
+      "model_identity_status": "not-exposed-by-preview-tool",
+      "model_id": null,
+      "model_revision": null,
+      "model_license": null,
+      "seed": null,
+      "seed_status": "not-exposed-by-preview-tool",
+      "provenance_note": "The built-in preview tool does not expose an approved local model identity, immutable revision, or actual seed; this candidate is not release eligible.",
+      "prompt": "Use case: illustration-story\nAsset type: fictional actor portrait concept for a health-policy strategy game, preview-only\nPrimary request: Create a single fictional rival health-system executive portrait for an editorial actor-identity system.\nSubject: A fictional adult executive, poised and approachable, chest-up, facing slightly toward camera, professional institutional attire with no visible insignia or text, clearly not resembling any public figure or identifiable real person.\nStyle/medium: non-photorealistic editorial illustration with clean simplified shapes, subtle paper-like texture, restrained institutional visual language, polished but not glossy.\nScene/backdrop: a neutral institutional office background with soft geometric panels, no readable text, no logos, no geographic or real-institution cues.\nComposition/framing: centered chest-up portrait, consistent portrait crop, generous margin around head and shoulders, clear silhouette, suitable for a small square thumbnail and grayscale rendering.\nLighting/mood: soft even studio-editorial lighting, calm professional mood, no drama or implied severity.\nColor palette: muted teal, slate, warm sand, and off-white, compatible with a flat institutional SVG interface.\nConstraints: fictional identity only; no hidden simulation state; no score, severity, outcome, intent, clinical claim, public-figure likeness, protected mark, readable text, watermark, or name.\nAvoid: photorealism, celebrity resemblance, identifiable real person, logo, trademark, text, watermark, medical diagnosis, hospital emergency imagery, political campaign symbol, dramatic threat, violence, distorted anatomy, extra fingers, duplicated facial features, cropped head, harsh shadow.",
+      "negative_prompt": "photorealistic public figure, celebrity likeness, real person, logo, trademark, readable text, watermark, medical diagnosis, clinical claim, political campaign symbol, distorted anatomy, extra fingers, duplicated features, violent imagery, hidden simulation state",
+      "settings": {"tool_mode": "built-in", "requested_style": "editorial illustration", "requested_crop": "chest-up square"},
+      "post_processing": "None; preview source preserved byte-for-byte.",
+      "accessible_equivalent": "Fictional rival health-system executive portrait; identity decoration only.",
+      "generic_fallback": "Competitor actor marker with the written role label.",
+      "human_review": {
+        "real_person_resemblance_reviewed": false,
+        "logo_trademark_reviewed": false,
+        "clinical_plausibility_reviewed": false,
+        "accessibility_equivalent_written": true,
+        "artifact_quality_reviewed": false,
+        "source_output_preserved": true,
+        "release_derivative_reviewed": false
+      },
+      "portrait_review": {
+        "identity_only_reviewed": false,
+        "role_consistency_reviewed": false,
+        "generic_fallback_reviewed": false,
+        "small_size_reviewed": false,
+        "grayscale_reviewed": false
+      },
+      "approval_status": "pending",
+      "release_path": null,
+      "asset_registry_id": null,
+      "release_block_reason": "Preview tool does not expose the approved local model revision or actual seed; human review and artifact-bound release registration are incomplete."
+    }
+  ]
+}

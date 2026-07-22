@@ -1,0 +1,91 @@
+{
+  "schema_version": "fictional-portrait-set-v1",
+  "phase": "8.2",
+  "status": "first-role-preview-pending-review",
+  "shared_style": {
+    "medium": "non-photorealistic editorial illustration",
+    "composition": "chest-up, centered, consistent square crop, generous head and shoulder margin",
+    "background": "neutral institutional office with soft geometric panels and no readable text",
+    "lighting": "soft even studio-editorial lighting",
+    "palette": ["muted teal", "slate", "warm sand", "off-white"],
+    "small_size_target": "recognizable silhouette and role marker at 96px square",
+    "grayscale_target": "face, clothing, background, and role marker remain distinguishable without hue",
+    "fallback": "generic actor-family marker, role label, and written identity description"
+  },
+  "prohibited_content": [
+    "public-figure or identifiable-real-person resemblance",
+    "protected logos, trademarks, institutional marks, or readable text",
+    "photorealistic identity claim",
+    "clinical diagnosis, severity, or treatment claim",
+    "hidden simulation state, score, intent, private action, or future outcome",
+    "watermark, signature, or generated name"
+  ],
+  "roles": [
+    {
+      "id": "rival-system-executive",
+      "label": "Rival system executive",
+      "family": "competitor",
+      "alt_text_guidance": "Fictional rival health-system executive portrait; identity decoration only.",
+      "fallback": "Competitor actor marker with the written role label.",
+      "target_in_first_slice": true
+    },
+    {
+      "id": "payer-negotiator",
+      "label": "Payer negotiator",
+      "family": "payer",
+      "alt_text_guidance": "Fictional payer negotiator portrait; identity decoration only.",
+      "fallback": "Payer actor marker with the written role label.",
+      "target_in_first_slice": false
+    },
+    {
+      "id": "regulator",
+      "label": "Regulator",
+      "family": "regulator",
+      "alt_text_guidance": "Fictional regulator portrait; identity decoration only.",
+      "fallback": "Regulator actor marker with the written role label.",
+      "target_in_first_slice": false
+    },
+    {
+      "id": "labor-representative",
+      "label": "Labor representative",
+      "family": "labor",
+      "alt_text_guidance": "Fictional labor representative portrait; identity decoration only.",
+      "fallback": "Labor actor marker with the written role label.",
+      "target_in_first_slice": false
+    },
+    {
+      "id": "community-leader",
+      "label": "Community leader",
+      "family": "community",
+      "alt_text_guidance": "Fictional community leader portrait; identity decoration only.",
+      "fallback": "Community actor marker with the written role label.",
+      "target_in_first_slice": false
+    },
+    {
+      "id": "board-chair",
+      "label": "Board chair",
+      "family": "board",
+      "alt_text_guidance": "Fictional board chair portrait; identity decoration only.",
+      "fallback": "Board actor marker with the written role label.",
+      "target_in_first_slice": false
+    },
+    {
+      "id": "affiliation-partner-executive",
+      "label": "Affiliation partner executive",
+      "family": "partner",
+      "alt_text_guidance": "Fictional affiliation partner executive portrait; identity decoration only.",
+      "fallback": "Partner actor marker with the written role label.",
+      "target_in_first_slice": false
+    }
+  ],
+  "review_requirements": [
+    "role and identity consistency",
+    "real-person resemblance",
+    "logo and trademark absence",
+    "anatomy and rendering artifacts",
+    "accessible equivalent and generic fallback",
+    "small-size rendering",
+    "grayscale rendering",
+    "source preservation and generation provenance"
+  ]
+}

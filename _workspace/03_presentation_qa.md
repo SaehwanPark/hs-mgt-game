@@ -1,4 +1,70 @@
-# Presentation QA — Phase 8.1 approved local generation workflow v0.12.74
+# Presentation QA — Phase 8.2 first fictional actor portrait slice v0.12.75
+
+## Current slice: Phase 8.2 first fictional actor portrait slice v0.12.75
+
+### Status
+
+`pass`
+
+### Reviewed inputs and findings
+
+- `docs/visual_audio_enhancement_roadmap.md`, Milestone 8.2;
+  `_workspace/00_input/request-summary.md`; and
+  `_workspace/02_presentation_contract.md`.
+- `assets/generation/portrait-set.json`, `portrait-previews.json`, the
+  preserved `rival-system-executive-preview.png`,
+  `gui/portrait-workflow-proof.html`, and
+  `tests/test_portrait_workflow.py`.
+- Phase 8.1 approved-model and generation validator contracts.
+
+The seven-role set uses stable fictional actor-family IDs and a shared
+non-photorealistic editorial contract: chest-up composition, consistent square
+crop, neutral institutional background, muted institutional palette, and no
+public-figure resemblance, protected mark, readable text, clinical claim, or
+hidden-state cue. The first rival-system-executive preview is a preserved
+source candidate only; its built-in preview tool does not expose the approved
+local model revision or actual seed.
+
+### Information, accessibility, and authority findings
+
+- Portraits are optional identity decoration. Written role labels, accessible
+  equivalents, generic actor markers, and disabled-asset behavior remain the
+  authoritative identity presentation when the image is absent.
+- The contract requires small-size and grayscale review so identity does not
+  depend on a large image or hue alone.
+- Preview metadata, source bytes, prompts, hashes, and review status are
+  contributor/release artifacts only. They never enter host commands,
+  simulation transitions, actor observations, history, hashes, replay
+  artifacts, or debrief facts.
+- The preview is outside the visual registry, release directory, runtime GUI,
+  and generation manifest. No runtime or release asset is approved.
+
+### Required fixes
+
+The single designated code review found five issues, all resolved before
+handoff: portrait metadata is now validated as part of the generation check;
+promotion requires approved model/revision/seed and portrait review fields;
+role/style contracts and malformed cases are tested; preview capture date,
+contributor, and provenance note are recorded; and the proof is checked against
+canonical role data and documented in the GUI guide. The candidate remains
+pending because approved local model/seed provenance and human review are not
+available.
+
+### Residual risks and evidence limits
+
+The preview and contract do not establish human recognition, cross-cultural
+interpretation, legal clearance, training-data provenance, output ownership,
+human resemblance, measured quality, lived accessibility, clinical
+plausibility, learning, or policy validity.
+
+### Verification evidence
+
+- `python3 -m unittest tests.test_portrait_workflow tests.test_generation_workflow`
+- `python3 scripts/validate_generation_metadata.py`
+- `python3 scripts/validate_assets.py`
+- `python3 scripts/generate_asset_credits.py --check`
+- `python3 scripts/check_documentation_links.py`
+- `git diff --check`
 
 ## Current slice: Phase 8.1 approved local generation workflow v0.12.74
 
