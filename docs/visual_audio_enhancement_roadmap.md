@@ -1834,6 +1834,21 @@ actual seed; per-portrait human review remains required.
   renderer fallback. This does not establish human accessibility, legal
   clearance, learning, or policy validity.
 
+### v0.12.80 asset security evidence and limits
+
+- Status: In progress in v0.12.80. `scripts/validate_asset_security.py` scans
+  registered source/release files and preserved portrait previews without
+  network access or mutation.
+- The scanner rejects SVG scripts, event handlers, external references,
+  embedded raster images, foreign objects, metadata, external fonts/imports,
+  entity declarations, malformed XML, unsafe view boxes, oversized files, and
+  excessive raster dimensions. Present PNG/JPEG/GIF and WAV/OGG/MP3/FLAC files
+  also require matching signatures.
+- Focused malicious-fixture, size/dimension, raster, audio-signature, and
+  repository-scan tests pass. The scanner establishes bounded file-shape
+  safety only; it does not establish legal clearance, decoder safety, audio
+  quality, accessibility, ownership, or human review.
+
 ### Checklist per portrait
 
 - [ ] Role defined.

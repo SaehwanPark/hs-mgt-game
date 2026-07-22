@@ -2234,3 +2234,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep the renderer outside command/session code, use `textContent`
   rather than HTML injection, and treat the panel as contributor/release
   evidence rather than human accessibility or legal clearance.
+
+## Phase 15: Security scanners must be strict without mutating source assets
+
+- Context: Phase 9.2 required file-integrity safeguards while source and
+  release assets remain reviewable, hash-bound repository artifacts.
+- Risk: A permissive SVG or malformed binary could reach a decoder; an
+  auto-sanitizing scanner could silently change approved bytes and invalidate
+  provenance hashes.
+- Resolution: Add a dependency-free, read-only scanner with explicit SVG
+  forbidden-content rules, file/pixel/dimension ceilings, and raster/audio
+  signature checks. Exercise malicious fixtures and scan the current roots in
+  CI.
+- Prevention: Keep security validation separate from registry metadata and
+  human/legal review, report every failure deterministically, and never rewrite
+  or delete an asset as part of validation.
