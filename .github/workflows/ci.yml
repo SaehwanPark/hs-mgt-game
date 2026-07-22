@@ -30,6 +30,11 @@ jobs:
           python3 scripts/generate_asset_credits.py --check
           python3 -m unittest tests.test_asset_registry
 
+      - name: Check generation provenance and portrait review gates
+        run: |
+          python3 scripts/validate_generation_metadata.py
+          python3 -m unittest tests.test_generation_workflow tests.test_portrait_workflow tests.test_portrait_review_queue
+
       - name: Check formatting
         run: cargo fmt --check
 

@@ -1,12 +1,12 @@
-# Presentation Contract — Phase 8.2 remaining fictional actor portrait previews
+# Presentation Contract — Phase 8.2 review-ready fictional actor portrait approval worksheet
 
 ## Goal and Authorization
 
 Fictional actor portraits must be traceable from an approved local model and
 prompt request through preserved source output, post-processing, human review,
-and release-asset registry entry. This slice prepares the six remaining role
-previews under the existing set contract; it does not promote unverified
-outputs into the runtime or release manifest.
+and release-asset registry entry. This slice prepares a review-ready worksheet
+for all seven preserved previews; it does not perform human review or promote
+unverified outputs into the runtime or release manifest.
 
 ## Player Questions and Consequences
 
@@ -30,6 +30,7 @@ Portraits add only a bounded identity aid. Contributor-facing questions are:
 | Source output | Preserved local source file and hash | No release record without an existing hashed source output | No claim that a release derivative is the original |
 | Human review | Checklist fields for resemblance, marks, plausibility, accessibility, and release | Approval remains pending until every required review field is true | No automated proxy for human approval |
 | Registry bridge | Existing visual/audio asset registry ID | Approved output must point to a matching registry entry | No asset becomes release-safe merely by being generated |
+| Review queue | Per-role worksheet bound to preview ID/path/hash | Reviewer identity, date, decision, and every required gate must be explicit | A checked schema is not human approval |
 | Portrait meaning | Explicit actor family/role and written label | Use generic actor marker and role text when the image is absent | No inference of score, severity, intent, outcome, or private action |
 
 ## Visual, Motion, and Audio Semantics
@@ -76,9 +77,9 @@ this bounded preview slice.
 ## Verification and Evidence Limits
 
 Focused tests must cover the role/style contract, prompt constraints, fallback
-fields, and pending-review release gate. A fixture proof must show the seven
-roles, the first target role, prompt/negative prompt constraints, accessible
-equivalent, small/grayscale checks, and fail-closed release rule. Existing
+fields, review-queue bindings, and pending-review release gate. A fixture proof
+must show all seven roles, per-role review gates, accessible equivalents,
+small/grayscale checks, and the fail-closed release rule. Existing
 generation, asset, credits, release, docs, Python, Rust, formatting, and
 Clippy checks remain required. These checks do not establish legal clearance,
 training-data provenance, output ownership, human resemblance, clinical

@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Make Human Review Explicit Without Simulating Approval
+
+- Context: After preserving all seven portrait previews, Phase 8.2 still
+  required human resemblance, accessibility, artifact, provenance, derivative,
+  and registry review.
+- Symptom: A boolean checklist or attractive proof can look like approval even
+  when no authorized human has reviewed the candidate.
+- Resolution: Add one hash-bound review packet per role with explicit gates,
+  pending decision, null reviewer/release fields, written equivalents, generic
+  fallbacks, and a review-only proof.
+- Prevention: Keep automated validation limited to schema, binding, and
+  fail-closed mechanics; never mark a gate complete or registry-safe without
+  human evidence.
+
 ## Keep a Complete Preview Set Explicitly Unreleased
 
 - Context: The second Phase 8.2 slice added the remaining six fictional actor

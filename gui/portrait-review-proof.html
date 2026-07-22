@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fictional actor portrait review queue proof</title>
+    <style>
+      :root { color-scheme: light; font: 16px/1.45 system-ui, sans-serif; }
+      body { background: #f3f7f6; color: #173c3a; margin: 0 auto; max-width: 82rem; padding: 2rem 1rem 4rem; }
+      main { background: #fff; border: 1px solid #c6d7d4; border-radius: .8rem; padding: 1.25rem; }
+      .note { background: #fff7e5; border-left: .25rem solid #b46b1d; padding: .7rem .9rem; }
+      .blocked { color: #8a3d18; font-weight: 750; }
+      .queue { border-collapse: collapse; margin: 1rem 0 1.5rem; width: 100%; }
+      th, td { border: 1px solid #c6d7d4; padding: .55rem; text-align: left; vertical-align: top; }
+      th { background: #e2f0ed; }
+      .pending { color: #8a3d18; font-weight: 700; }
+      .gallery { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr)); margin: 1rem 0; }
+      .gallery figure { margin: 0; }
+      .gallery img { border: 1px solid #c6d7d4; border-radius: .6rem; display: block; max-width: 100%; }
+      .gallery figcaption { font-size: .85rem; margin-top: .25rem; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Fictional actor portrait review queue</h1>
+      <p class="note">Review-only Phase 8.2 proof. No candidate is approved, released, registered, or used by the runtime GUI. A written role label and generic actor marker remain authoritative when portraits are disabled.</p>
+      <p id="queue-status" class="blocked"></p>
+      <div class="gallery" aria-label="Portrait candidates for human review">
+        <figure><img src="../assets/generation/portrait-previews/rival-system-executive-preview.png" alt="Fictional rival health-system executive portrait; identity decoration only." /><figcaption>Rival system executive</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/payer-negotiator-preview.png" alt="Fictional payer negotiator portrait; identity decoration only." /><figcaption>Payer negotiator</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/regulator-preview.png" alt="Fictional regulator portrait; identity decoration only." /><figcaption>Regulator</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/labor-representative-preview.png" alt="Fictional labor representative portrait; identity decoration only." /><figcaption>Labor representative</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/community-leader-preview.png" alt="Fictional community leader portrait; identity decoration only." /><figcaption>Community leader</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/board-chair-preview.png" alt="Fictional nonprofit board chair portrait; identity decoration only." /><figcaption>Board chair</figcaption></figure>
+        <figure><img src="../assets/generation/portrait-previews/affiliation-partner-executive-preview.png" alt="Fictional affiliation partner executive portrait; identity decoration only." /><figcaption>Affiliation partner executive</figcaption></figure>
+      </div>
+      <table class="queue">
+        <caption>Per-role human review packet</caption>
+        <thead><tr><th>Role</th><th>Accessible equivalent</th><th>Generic fallback</th><th>Source hash</th><th>Review gates</th><th>Decision</th></tr></thead>
+        <tbody id="review-rows"></tbody>
+      </table>
+      <p id="release-rule" class="blocked"></p>
+    </main>
+    <script type="module">
+      const gates = [
+        "Identity-only meaning", "Role consistency", "Real-person resemblance",
+        "Protected marks/text", "Artifact quality/anatomy", "Accessible equivalent",
+        "Small-size", "Grayscale", "Model/seed provenance",
+        "Release derivative", "Registry bridge",
+      ];
+      const packets = [
+        ["rival-system-executive", "Rival system executive", "Fictional rival health-system executive portrait; identity decoration only.", "Competitor actor marker with the written role label.", "rival-system-executive-preview.png", "sha256:f2e99a7a57f77bb5a22906a627f0e3a1720b0ae5d7d4bc185ed9c41c59da53aa"],
+        ["payer-negotiator", "Payer negotiator", "Fictional payer negotiator portrait; identity decoration only.", "Payer actor marker with the written role label.", "payer-negotiator-preview.png", "sha256:2552f95c749e0322737a6af83f0efd62fd1c2ac1b87134f18bd01403a38cd200"],
+        ["regulator", "Regulator", "Fictional regulator portrait; identity decoration only.", "Regulator actor marker with the written role label.", "regulator-preview.png", "sha256:1d79b7a1d406ef01cd7ee2fe1b39b8e2b258690878d9cfb0ce4ed6a48aff1a05"],
+        ["labor-representative", "Labor representative", "Fictional labor representative portrait; identity decoration only.", "Labor actor marker with the written role label.", "labor-representative-preview.png", "sha256:2d7d9aa3d1a681ede341c74d0e320492ab41f1fa28dccd43c6dbf7b9fd680346"],
+        ["community-leader", "Community leader", "Fictional community leader portrait; identity decoration only.", "Community actor marker with the written role label.", "community-leader-preview.png", "sha256:f31855428d36fe6debb7eb73548d6794adccf70aaf71f7c714618b0e2c061082"],
+        ["board-chair", "Board chair", "Fictional nonprofit board chair portrait; identity decoration only.", "Board actor marker with the written role label.", "board-chair-preview.png", "sha256:cbdc92fcae72ba668b594b6c522f806ba5cc90a249c10aeea92939add4132867"],
+        ["affiliation-partner-executive", "Affiliation partner executive", "Fictional affiliation partner executive portrait; identity decoration only.", "Partner actor marker with the written role label.", "affiliation-partner-executive-preview.png", "sha256:aaf52e91cbe9be1f32a04d4cb1ca6b78bf6ac677d99ba2c29fdc583242c5f218"],
+      ];
+      const rows = document.querySelector("#review-rows");
+      for (const [roleId, role, accessible, fallback, filename, sourceHash] of packets) {
+        const row = document.createElement("tr");
+        for (const value of [role, accessible, fallback]) {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.append(cell);
+        }
+        const hashCell = document.createElement("td");
+        hashCell.textContent = sourceHash;
+        row.append(hashCell);
+        const gatesCell = document.createElement("td");
+        gatesCell.textContent = gates.map((gate) => gate + ": pending").join("; ");
+        row.append(gatesCell);
+        const decision = document.createElement("td");
+        decision.className = "pending";
+        decision.textContent = "Pending human review";
+        row.append(decision);
+        rows.append(row);
+      }
+      document.querySelector("#queue-status").textContent = "Queue status: seven packets pending; all review gates are unchecked.";
+      document.querySelector("#release-rule").textContent = "Release blocked until an authorized human records review decisions, approved model/seed provenance, a release derivative, matching hashes, and an approved visual registry bridge.";
+    </script>
+  </body>
+</html>

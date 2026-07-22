@@ -1,3 +1,57 @@
+# Presentation QA — Phase 8.2 review-ready portrait approval worksheet v0.12.77
+
+## Current slice: Phase 8.2 review-ready portrait approval worksheet v0.12.77
+
+### Status
+
+`pass`
+
+### Reviewed inputs and scope
+
+- Milestone 8.2 in `docs/visual_audio_enhancement_roadmap.md`;
+  `_workspace/00_input/request-summary.md`; and
+  `_workspace/02_presentation_contract.md`.
+- The seven-entry review queue, preserved preview metadata, review proof,
+  generation validator, focused queue tests, and generic fallback contracts.
+
+The worksheet makes identity-only, role, resemblance/marks, artifact,
+accessibility, small-size, grayscale, provenance, derivative, and registry
+gates explicit for each role. Every packet remains pending, with no human
+reviewer decision, release derivative, registry bridge, or runtime authority.
+
+### Review gates
+
+- Exact one-to-one queue binding to canonical role IDs and preview
+  source paths/hashes.
+- Written accessible equivalent and generic fallback match preview metadata.
+- Reviewer identity/date/notes, decision, release path/hash, and registry ID
+  remain null/pending until authorized human review.
+- No network, host state, command submission, simulation transition, history,
+  replay, debrief, or hidden-state channel.
+
+### Single code-review disposition
+
+The one designated read-only reviewer identified five findings; all were
+resolved before handoff. Queue validation now cross-binds preview status and
+release fields, requires explicit null release keys, rejects malformed preview
+lists, and exact-checks proof packets against canonical role/accessibility/
+fallback/path/hash data. CI now runs the generation and portrait review checks.
+
+### Evidence limits
+
+The worksheet makes human review actionable and auditable but does not perform
+human review. Automated schema, hash, proof, and fallback checks do not
+establish resemblance, accessibility, legal clearance, provenance,
+ownership, quality, learning, clinical plausibility, or policy validity.
+
+### Verification evidence
+
+- `python3 -m unittest tests.test_portrait_workflow tests.test_portrait_review_queue`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` (487 tests)
+- `python3 scripts/validate_generation_metadata.py`
+- `cargo test -- --test-threads=1`
+- `git diff --check`
+
 # Presentation QA — Phase 8.2 first fictional actor portrait slice v0.12.75
 
 ## Current slice: Phase 8.2 first fictional actor portrait slice v0.12.75
