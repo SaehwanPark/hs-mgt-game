@@ -1,6 +1,7 @@
 import { AUDIO_CUE_POLICY, audioCueContractFor } from "./audio-cue-contract.mjs";
 import { AUDIO_PRIORITY_POLICY, planAudioCueBatch, priorityValue } from "./audio-priority-contract.mjs";
 import { AMBIENCE_CONTRACT } from "./ambience-contract.mjs";
+import { assetPresentationFor } from "./asset-availability.mjs";
 import { MUSIC_STEM_CONTRACT, classifyVisibleMusicState } from "./music-stem-contract.mjs";
 
 // AUDIO_PRIORITY_POLICY follows audio-priority-manager-v1; its pure batch plan
@@ -81,6 +82,33 @@ export const AUDIO_CATALOG = Object.freeze({
 const MUSIC_BY_ID = new Map(MUSIC_ENTRIES.map((entry) => [entry.id, entry]));
 const CUE_BY_ID = new Map(AUDIO_CATALOG.cues.map((entry) => [entry.id, entry]));
 const AMBIENCE_BY_ID = new Map(AMBIENCE_ENTRIES.map((entry) => [entry.id, entry]));
+
+function audioEntryFor(id) {
+  const normalized = String(id ?? "").trim();
+  return CUE_BY_ID.get(normalized) ?? MUSIC_BY_ID.get(normalized) ?? AMBIENCE_BY_ID.get(normalized) ?? null;
+}
+
+export function audioPresentationFor(id, availability = "loaded") {
+  const entry = audioEntryFor(id);
+  const normalizedId = String(id ?? "").trim();
+  const hasRequestedId = Boolean(normalizedId);
+  const fallback = {
+    id: "audio-unavailable",
+    label: "Audio unavailable",
+    equivalent: entry
+      ? `${entry.equivalent}; visual and written equivalent remains active`
+      : "Visual and written equivalent remains active",
+  };
+  return assetPresentationFor({
+    id: entry?.id ?? (hasRequestedId ? normalizedId : "audio-runtime"),
+    label: entry?.id ?? "Audio cue",
+    source: entry?.visible_source ?? "Local audio catalog",
+    equivalent: entry?.equivalent ?? "Visible audio meaning",
+    release_path: null,
+    fallback,
+  }, entry || !hasRequestedId ? availability : "malformed");
+}
+
 export function classifyMusicState(input = {}) {
   return classifyVisibleMusicState(input);
 }
@@ -219,6 +247,8 @@ export function createAudioClient({
   let duckingPriority = null;
   let ambienceTimer = null;
   let visibilityHandler = null;
+  let audioAvailability = contextConstructor ? "missing" : "unavailable";
+  let lastAudioFallback = null;
 
   function persistAudioPreferences() {
     try {
@@ -237,6 +267,31 @@ export function createAudioClient({
   function statusText(message) {
     const node = root?.querySelector?.("#audio-state");
     if (node) node.textContent = message;
+  }
+
+  function announceAudioFallback(id, availability) {
+    const presentation = audioPresentationFor(id, availability);
+    audioAvailability = presentation.asset_status;
+    lastAudioFallback = presentation;
+    statusText(`Audio unavailable; ${presentation.equivalent}.`);
+    updateDom();
+    recorder?.record?.("audio_fallback", {
+      id: presentation.requested_id,
+      status: presentation.asset_status,
+      display_mode: presentation.display_mode,
+      equivalent: presentation.equivalent,
+    });
+    return presentation;
+  }
+
+  function announceAudioRecovery() {
+    if (!lastAudioFallback) return;
+    const recoveredId = lastAudioFallback.requested_id;
+    audioAvailability = "loaded";
+    lastAudioFallback = null;
+    statusText("Audio enabled; visual and text equivalents remain active.");
+    updateDom();
+    recorder?.record?.("audio_recovered", { id: recoveredId });
   }
 
   function updateDom() {
@@ -400,6 +455,15 @@ export function createAudioClient({
     return true;
   }
 
+  function playBackgroundTone(entry, channel) {
+    try {
+      return playTone(entry, channel);
+    } catch {
+      announceAudioFallback(entry?.id, "failed");
+      return false;
+    }
+  }
+
   function stopMusic() {
     if (musicTimer != null) globalThis.clearTimeout(musicTimer);
     for (const timer of musicStemTimers) globalThis.clearTimeout(timer);
@@ -417,10 +481,11 @@ export function createAudioClient({
   function scheduleMusic() {
     stopMusic();
     const entry = musicEntry(currentMusic);
-    if (!entry || !enabled || !context || muted || musicMuted || !focused || mode === "cues-only") return;
+    if (!entry || !enabled || !context || audioAvailability !== "loaded" || muted || musicMuted || !focused || mode === "cues-only") return;
     for (const stemId of entry.stem_order) {
+      if (audioAvailability !== "loaded") break;
       const stemRecipe = entry.stems[stemId];
-      const playStem = () => playTone({ ...entry, recipe: stemRecipe, normalization_gain: entry.normalization_gain }, "music");
+      const playStem = () => playBackgroundTone({ ...entry, recipe: stemRecipe, normalization_gain: entry.normalization_gain }, "music");
       if (stemRecipe.offset_ms > 0) {
         const timer = globalThis.setTimeout(() => {
           musicStemTimers.delete(timer);
@@ -431,16 +496,16 @@ export function createAudioClient({
         playStem();
       }
     }
-    musicTimer = globalThis.setTimeout(scheduleMusic, entry.loop_duration_ms);
+    if (audioAvailability === "loaded") musicTimer = globalThis.setTimeout(scheduleMusic, entry.loop_duration_ms);
   }
 
   function scheduleAmbience() {
     stopAmbience();
     const activeId = currentAmbience || LEGACY_REGIONAL_AMBIENCE_ID;
     const entry = AMBIENCE_BY_ID.get(activeId);
-    if (!currentAmbience || !entry || !enabled || !context || muted || !focused || mode === "cues-only") return;
-    playTone(entry, "ambience");
-    ambienceTimer = globalThis.setTimeout(scheduleAmbience, entry.recipe.duration_ms);
+    if (!currentAmbience || !entry || !enabled || !context || audioAvailability !== "loaded" || muted || !focused || mode === "cues-only") return;
+    playBackgroundTone(entry, "ambience");
+    if (audioAvailability === "loaded") ambienceTimer = globalThis.setTimeout(scheduleAmbience, entry.recipe.duration_ms);
   }
 
   function dispatchCue(request) {
@@ -487,10 +552,16 @@ export function createAudioClient({
         drainCueQueue();
         return;
       }
+      announceAudioRecovery();
     } catch {
       stopVoiceSet(activeCueVoices, 40);
       cueBusy = false;
-      recorder?.record?.("audio_playback_failed", { id: request.id, message: "Optional audio cue playback failed." });
+      const presentation = announceAudioFallback(request.id, "failed");
+      recorder?.record?.("audio_playback_failed", {
+        id: request.id,
+        message: "Optional audio cue playback failed.",
+        equivalent: presentation.equivalent,
+      });
       drainCueQueue();
       return;
     }
@@ -557,23 +628,23 @@ export function createAudioClient({
 
   async function enable() {
     if (!contextConstructor) {
-      statusText("Audio unavailable; visual and text equivalents remain active.");
-      updateDom();
-      return { ok: false, code: "audio_unsupported" };
+      const presentation = announceAudioFallback(null, "unavailable");
+      return { ok: false, code: "audio_unsupported", presentation };
     }
     try {
       context ??= new contextConstructor();
       await context.resume?.();
+      audioAvailability = "loaded";
       enabled = true;
       scheduleMusic();
       scheduleAmbience();
+      if (audioAvailability !== "loaded") return { ok: false, code: "audio_playback_failed", presentation: lastAudioFallback };
       statusText("Audio enabled; visual and text equivalents remain active.");
       updateDom();
       return { ok: true };
-    } catch (error) {
-      statusText(`Audio unavailable: ${error instanceof Error ? error.message : String(error)}`);
-      updateDom();
-      return { ok: false, code: "audio_enable_failed" };
+    } catch {
+      const presentation = announceAudioFallback(null, "failed");
+      return { ok: false, code: "audio_enable_failed", presentation };
     }
   }
 
@@ -621,9 +692,16 @@ export function createAudioClient({
     if (reducedNotifications && entry.channel !== "music") {
       return { ...recorded, code: "reduced_notifications" };
     }
-    if (muted || !enabled || !focused || !context) {
-      return { ...recorded, code: muted ? "muted" : "visual_only" };
+    const canAttemptPlayback = enabled && focused && context && audioAvailability !== "unavailable";
+    if (muted || !canAttemptPlayback) {
+      const availability = audioAvailability === "unavailable" ? "unavailable" : audioAvailability;
+      return {
+        ...recorded,
+        code: muted ? "muted" : audioAvailability === "failed" || audioAvailability === "unavailable" ? "audio_unavailable" : "visual_only",
+        presentation: audioPresentationFor(entry.id, availability),
+      };
     }
+    if (audioAvailability === "failed") audioAvailability = "loaded";
     const enqueued = enqueuePendingCue(entry);
     if (!enqueued) return { ...recorded, code: "queue_bounded", queue_size: pendingCueRequests.length + queuedCueRequests.length };
     scheduleCueBatchFlush();
@@ -720,6 +798,8 @@ export function createAudioClient({
       reducedNotifications,
       music: currentMusic,
       ambience: currentAmbience,
+      audio_status: audioAvailability,
+      last_fallback: lastAudioFallback,
       queued_cues: pendingCueRequests.length + queuedCueRequests.length,
       active_cue_voices: activeCueVoices.size,
       ducking: duckingPriority,

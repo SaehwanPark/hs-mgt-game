@@ -5260,7 +5260,7 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.2 graceful asset fallback (v0.12.82)
 
-- Status: In progress; `gui/asset-availability.mjs` maps caller-supplied
+- Status: Closed; implementation and verification complete. `gui/asset-availability.mjs` maps caller-supplied
   loaded, missing, failed, malformed, and unknown results to deterministic
   presentation statuses without loading files or reading host state.
 - Facility and identity adapters preserve requested labels and written
@@ -5270,6 +5270,19 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   authority.
 - The fallback contract is not browser decoder, human accessibility, legal,
   quality, ownership, or educational evidence.
+
+### Visual/audio Phase 9.2 audio playback fallback (v0.12.83)
+
+- Status: In progress; `audioPresentationFor` reuses the fail-closed local
+  availability contract for existing cue, music, and ambience catalog entries.
+- Unsupported Web Audio setup and thrown generated-cue/background playback
+  publish a visible local fallback status and preserve the catalog source and
+  written equivalent. A later local cue can retry after a transient failure.
+- No recorded audio, decoder, network, host field, command, simulation state,
+  observation, history, hash, replay, or debrief authority is added.
+- Evidence remains limited to pure projections, fake-context recovery, and
+  static/automated checks; it does not establish browser compatibility,
+  loudness, audio quality, fatigue, accessibility, or human review.
 
 ### Contributor documentation information architecture (v0.12.32)
 
