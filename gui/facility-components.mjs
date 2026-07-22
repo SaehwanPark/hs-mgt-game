@@ -324,7 +324,9 @@ export const FACILITY_COMPONENTS = Object.freeze({
 });
 
 export function facilityComponentFor(id) {
-  return FACILITY_COMPONENTS[id] ?? GENERIC_FACILITY;
+  return Object.prototype.hasOwnProperty.call(FACILITY_COMPONENTS, id)
+    ? FACILITY_COMPONENTS[id]
+    : GENERIC_FACILITY;
 }
 
 export function facilityPresentationFor(id, availability = "loaded") {

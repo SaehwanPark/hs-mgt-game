@@ -14,6 +14,7 @@ MODULES = (
 NODE_PROBE = r'''
 import { regionalWorldToSceneData } from './gui/regional-board.mjs';
 import { renderRegionalSvg } from './gui/scene.mjs';
+import { regionalEntitiesToFixture } from './gui/app.mjs';
 
 const scene = regionalWorldToSceneData({
   schema_version: 'competitive-regional-world-v1',
@@ -40,6 +41,25 @@ if (known.component_release_path !== 'assets/release/visual/svg/general-hospital
 if (fallback.component_id !== 'generic-facility') process.exit(4);
 if (fallback.component_source !== 'Missing or unknown visible facility kind') process.exit(5);
 if (fallback.component_equivalent !== 'Facility label and generic marker') process.exit(6);
+const detailEntities = regionalEntitiesToFixture({
+  entities: [{
+    id: 'system-1',
+    name: 'Riverside',
+    role: 'Player system',
+    visibility: 'owned',
+    status: 'reported',
+    status_label: 'Reported',
+    source: 'PlayerObservation',
+    facilities: [
+      { name: 'Known', kind: 'Owned capacity', component_id: 'general-hospital-base', metrics: [], source: 'PlayerObservation' },
+      { name: 'Unknown', kind: 'Owned capacity', component_id: '__proto__', metrics: [], source: 'PlayerObservation' },
+    ],
+  }],
+  missing: [],
+});
+const [detailKnown, detailFallback] = detailEntities[0].facilities;
+if (detailKnown.component_label !== 'General hospital base' || detailKnown.component_source !== 'Visible facility kind and actor-visible status context') process.exit(8);
+if (detailFallback.component_id !== 'generic-facility' || detailFallback.component_label !== 'Facility') process.exit(9);
 const svg = renderRegionalSvg(scene, { selectedId: known.id });
 for (const marker of [
   'data-component-id="general-hospital-base"',
@@ -47,7 +67,7 @@ for (const marker of [
   'General hospital label, base silhouette, identity badge, and written layer labels',
   'data-component-id="generic-facility"',
 ]) {
-  if (!svg.includes(marker)) process.exit(7);
+  if (!svg.includes(marker)) process.exit(10);
 }
 console.log('pass');
 '''

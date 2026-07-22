@@ -36,7 +36,10 @@
 
 ### Required Fixes
 
-- Review and final verification remain pending for this working slice.
+- The initial review requested a safe own-key fallback lookup, explicit
+  registry-hash wording, runtime selected-detail coverage, and current
+  verification evidence; those fixes are now applied locally. Final reviewer
+  disposition remains pending.
 
 ### Single code-review disposition
 
@@ -52,8 +55,11 @@ legal clearance, educational benefit, or human review.
 
 ### Verification Evidence
 
-- Pending final focused, full Python/Rust, asset/security/release/credits,
-  documentation, JavaScript, formatting, and Clippy checks.
+- Focused facility-binding, regional-board, GUI-contract, and release tests;
+  full Python suite (543 tests); Rust tests (328 unit tests plus integration/
+  golden suites); asset/security/release/credits/generation checks;
+  documentation links (368 Markdown files); JavaScript syntax, formatting,
+  and Clippy all pass locally.
 
 ---
 

@@ -50,10 +50,11 @@ session, mutate history, alter replay hashes, or authorize transitions.
 
 ## Provenance/Release
 
-No asset bytes or registry entries change. Known IDs reuse existing catalog
-source/release metadata; generic fallback has no release path. Existing asset
-validators, credits, hashes, provenance, and human-review gates remain
-authoritative.
+No new asset bytes or registry entries are added. Existing registry hashes are
+refreshed for the changed hand-authored adapter/renderer sources; known IDs
+reuse existing catalog source/release metadata, and generic fallback has no
+release path. Existing asset validators, credits, hashes, provenance, and
+human-review gates remain authoritative.
 
 ## Verification/Evidence Limits
 
