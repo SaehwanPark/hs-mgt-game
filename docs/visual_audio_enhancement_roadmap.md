@@ -2077,61 +2077,82 @@ The slice should cover the first month of `competitive-regional-v1` and include:
 
 ## Milestone 10.1: Feature-complete slice
 
+**Status:** Complete for the technical first-month contract in v0.12.86.
+Phase 10.2 first-time-user, accessibility-quality, audio-fatigue, and
+educational-usability evaluation remains a separate human gate.
+
 ### Checklist
 
 #### Regional board
 
-- [ ] Three systems visible.
-- [ ] Facilities visually distinct.
-- [ ] Institutional identity consistent.
-- [ ] Facility selection works.
-- [ ] Uncertainty rendering works.
-- [ ] Project overlay works.
-- [ ] Pressure overlay works.
-- [ ] Rival observation timing respected.
+- [x] Three systems visible.
+- [x] Facilities visually distinct.
+- [x] Institutional identity consistent.
+- [x] Facility selection works.
+- [x] Uncertainty rendering works.
+- [x] Project overlay works.
+- [x] Pressure overlay works.
+- [x] Rival observation timing respected.
 
 #### Executive desktop
 
-- [ ] Briefing uses semantic container.
-- [ ] Action queue uses semantic container.
-- [ ] Reports use actor-family identities.
-- [ ] Metrics use appropriate visualizations.
-- [ ] Source and status labels remain visible.
+- [x] Briefing uses semantic container.
+- [x] Action queue uses semantic container.
+- [x] Reports use actor-family identities.
+- [x] Metrics use appropriate visualizations.
+- [x] Source and status labels remain visible.
 
 #### Resolution
 
-- [ ] Month sequence implemented.
-- [ ] Critical event prioritization works.
-- [ ] Map and reports update coherently.
-- [ ] Skip behavior works.
-- [ ] Reduced-motion behavior works.
-- [ ] Replay is deterministic.
+- [x] Month sequence implemented.
+- [x] Critical event prioritization works.
+- [x] Map and reports update coherently.
+- [x] Skip behavior works.
+- [x] Reduced-motion behavior works.
+- [x] Replay is deterministic.
 
 #### Audio
 
-- [ ] UI cues refined.
-- [ ] Environmental ambience available.
-- [ ] Adaptive music transition works.
-- [ ] Priority and cooldown manager works.
-- [ ] Full mute works.
-- [ ] Cues-only mode works.
-- [ ] Text equivalents remain available.
+- [x] UI cues refined.
+- [x] Environmental ambience available.
+- [x] Adaptive music transition works.
+- [x] Priority and cooldown manager works.
+- [x] Full mute works.
+- [x] Cues-only mode works.
+- [x] Text equivalents remain available.
 
 #### Provenance
 
-- [ ] Every asset registered.
-- [ ] Every asset hashed.
-- [ ] Every license approved.
-- [ ] Credits generated.
-- [ ] AI metadata complete where applicable.
+- [x] Every asset registered.
+- [x] Every asset hashed.
+- [x] Every license policy check passes; human legal review remains external.
+- [x] Credits generated.
+- [x] AI metadata complete where applicable.
+
+### v0.12.86 first-month technical evidence and limits
+
+- `tests/test_phase10_first_month.py` binds each checklist label to the live
+  GUI mounts, actor-visible host boundary markers, deterministic first-month
+  stages, visible music classification, skip behavior, replay/hash surfaces,
+  and JavaScript syntax.
+- Existing regional-world, facility, semantic-container, resolution, audio,
+  music, accessibility, fallback, provenance, and Rust replay tests remain the
+  underlying evidence. The new test is an integration ledger, not a second
+  runtime path.
+- Technical completeness does not establish that a new player understands the
+  slice, that audio is helpful or fatigue-free, or that accessibility and
+  educational usability are satisfactory. Those remain Phase 10.2 human gates.
 
 ### Exit criteria
 
-- A new player can complete the first month without developer intervention.
-- The player can identify the three systems and major facilities without repeatedly rereading labels.
-- The player can explain the major visible consequence chain.
-- The slice feels like a strategy game rather than a generic dashboard.
-- No architectural, accessibility, replay, or provenance regression is introduced.
+- The technical first-month path is host-connected, deterministic, replayable,
+  and covered by the integrated evidence test.
+- Board, executive, resolution, audio, fallback, accessibility, and provenance
+  surfaces retain their documented information boundaries.
+- No architectural, authority, replay, or provenance regression is introduced.
+- First-time player completion, recognition, consequence comprehension, game
+  feel, accessibility quality, audio usefulness/fatigue, and educational
+  usability remain Phase 10.2 evaluation gates.
 
 ---
 

@@ -1,3 +1,70 @@
+# Presentation QA — Phase 10.1 first-month slice v0.12.86
+
+## Current slice: Phase 10.1 first-month technical slice v0.12.86
+
+### Status
+
+`pass`
+
+### Reviewed Inputs and Authorization
+
+- Phase 10.1 in `docs/visual_audio_enhancement_roadmap.md`, the request
+  summary, implementation plan, presentation contract, and existing GUI,
+  host, replay, audio, accessibility, fallback, and provenance tests.
+- The live first-month GUI mounts, actor-visible regional-world/resolution
+  contracts, first-month flow, consequence links, audio/music contracts, and
+  current release evidence.
+- This is technical integration evidence only. No new asset, host field,
+  simulation rule, hidden-state projection, or human evaluation is in scope.
+
+### Information, Causality, and Accessibility Findings
+
+- The integrated contract binds each Phase 10.1 checklist item to existing live
+  GUI/source markers and deterministic probes for first-month stages, visible
+  music, skip, replay, and written consequences.
+- Regional/facility identity, pressure/project/uncertainty, source/status,
+  observation lag, and missingness remain actor-visible and explicit.
+- Keyboard, non-color, reduced-motion, text-scale, mute/cues-only, written
+  equivalents, and generic fallbacks remain required; human accessibility
+  quality is not inferred.
+
+### Provenance, Authority, and Replay Findings
+
+- The browser remains a thin client over host DTOs; local first-month,
+  selection, resolution, audio, skip, and replay presentation state cannot
+  advance a session or change history/hash authority.
+- Existing registered assets/catalogs, release hashes, credits, provenance,
+  and fallback gates remain unchanged.
+- Phase 10.2 first-time-user, audio-fatigue, educational-usability, and
+  human-review questions remain open.
+
+### Required Fixes
+
+- None for the bounded technical slice.
+
+### Single code-review disposition
+
+The one designated code reviewer approved the final worktree with no actionable
+findings after checklist-set parsing, recursive import-closure authority
+scanning, and pre-import network stubs were added; no additional reviewer was
+used.
+
+### Residual Risks and Evidence Limits
+
+The slice proves technical integration and information-boundary contracts only.
+It does not prove first-time-user comprehension, game feel, accessibility
+quality, audio usefulness/fatigue, educational usability, legal clearance,
+ownership, or human review.
+
+### Verification Evidence
+
+- Focused first-month acceptance test and existing GUI/host/replay/audio tests
+- Full Python suite (529 tests), Rust tests (328 unit tests plus integration/
+  golden suites), asset, documentation, JavaScript, formatting, Clippy, and
+  diff checks
+
+---
+
 # Presentation QA — Phase 9 technical closure v0.12.85
 
 ## Current slice: Phase 9 technical closure v0.12.85

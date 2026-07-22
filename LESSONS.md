@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Bind Integrated Slice Checklists to Live Evidence
+
+- Context: The first-month board, executive, resolution, replay, and audio
+  surfaces were implemented across earlier slices, while Phase 10.1 retained
+  an unverified feature checklist.
+- Symptom: Individual tests can pass while the roadmap loses a cross-surface
+  acceptance boundary or quietly gains client authority.
+- Resolution: Add one deterministic acceptance ledger that asserts each exact
+  technical checklist label, live mount/source marker, first-month stage path,
+  visible music sequence, skip behavior, replay/hash surface, and forbidden
+  authority markers.
+- Prevention: Keep integration evidence separate from Phase 10.2 human
+  comprehension, accessibility-quality, audio-fatigue, educational, legal,
+  ownership, and review conclusions.
+
 ## Keep Roadmap Checklists Bound to Evidence
 
 - Context: Phase 9 technical work was implemented across several slices, but
