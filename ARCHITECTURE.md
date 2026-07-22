@@ -528,6 +528,13 @@ metadata and unsafe paths, and never changes canonical assets, manifests,
 runtime presentation, host payloads, simulation state, observations, history,
 hashes, replay, or debriefs.
 
+The v0.12.85 Phase 9 closure records the existing automated release gates as a
+machine-checked technical evidence set. The roadmap test requires the Phase
+9.1/9.2 technical checklists to remain fully evidenced and requires explicit
+language that automated validation is not legal clearance, decoder safety,
+quality, accessibility, ownership, portrait approval, or human review. This
+audit changes no runtime or simulation authority and no canonical asset bytes.
+
 Last Reviewed: 2026-07-21
 Status: Verified
 

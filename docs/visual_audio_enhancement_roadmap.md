@@ -1806,7 +1806,7 @@ actual seed; per-portrait human review remains required.
 
 ### v0.12.78 provenance and third-party notice evidence and limits
 
-- Status: In progress in v0.12.78. The canonical visual/audio registries now
+- Status: Complete in v0.12.78 for automated technical gates; the canonical visual/audio registries now
   require per-entry provenance kind, source URL, retrieval date, and license
   reference fields. Current entries are all repository-authored and therefore
   carry null external URL/date fields and a repository policy reference.
@@ -1821,7 +1821,7 @@ actual seed; per-portrait human review remains required.
 
 ### v0.12.79 in-game credits evidence and limits
 
-- Status: In progress in v0.12.79. The static executive desktop now exposes a
+- Status: Complete in v0.12.79 for automated technical gates; the static executive desktop now exposes a
   keyboard-accessible “Asset credits and provenance” disclosure independent of
   host/session data. It lists registry IDs, type, source/generation, license,
   attribution, approval, provenance, release status, and written equivalents.
@@ -1836,7 +1836,7 @@ actual seed; per-portrait human review remains required.
 
 ### v0.12.80 asset security evidence and limits
 
-- Status: In progress in v0.12.80. `scripts/validate_asset_security.py` scans
+- Status: Complete in v0.12.80 for automated technical gates; `scripts/validate_asset_security.py` scans
   registered source/release files and preserved portrait previews without
   network access or mutation.
 - The scanner rejects SVG scripts, event handlers, external references,
@@ -1851,7 +1851,7 @@ actual seed; per-portrait human review remains required.
 
 ### v0.12.81 release reproducibility target slice
 
-- Status: In progress in v0.12.81. The bounded Phase 9.2 slice adds a
+- Status: Complete in v0.12.81 for automated technical gates; the bounded Phase 9.2 slice adds a
   non-mutating metadata audit for release image/audio files and a deterministic
   manifest projection for approved registry release paths.
 - The manifest will record sorted relative paths, byte sizes, SHA-256 values,
@@ -1936,6 +1936,10 @@ Ensure that all visual and audio assets are safe for long-term open-source distr
 
 ## Milestone 9.1: Asset license policy enforcement
 
+**Status:** Complete for automated technical gates in v0.12.85. Human legal
+clearance remains an explicit external review gate and is not inferred from
+repository validation.
+
 ### Allowed by default
 
 - project-authored;
@@ -1958,28 +1962,47 @@ Ensure that all visual and audio assets are safe for long-term open-source distr
 
 ### Checklist
 
-- [ ] License allowlist encoded in validation.
-- [ ] License denylist encoded in validation.
-- [ ] Attribution text generated.
-- [ ] Source URLs archived where practical.
-- [ ] Retrieval dates present.
-- [ ] Original licenses saved or referenced.
-- [ ] Modification descriptions present.
-- [ ] Approval status required.
-- [ ] Third-party notices generated.
-- [ ] Release package includes credits.
-- [ ] In-game credits accessible.
-- [ ] License audit completed before release.
+- [x] License allowlist encoded in validation.
+- [x] License denylist encoded in validation.
+- [x] Attribution text generated.
+- [x] Source URLs archived where practical.
+- [x] Retrieval dates present.
+- [x] Original licenses saved or referenced.
+- [x] Modification descriptions present.
+- [x] Approval status required.
+- [x] Third-party notices generated.
+- [x] Release package includes credits.
+- [x] In-game credits accessible.
+- [x] Automated license policy audit completed before release; human legal
+  review remains external.
+
+### v0.12.85 license-policy closure evidence and limits
+
+- `scripts/validate_assets.py` enforces the allowlist/denylist, provenance
+  shape, path/hash binding, approval status, and source/release requirements.
+  The current registry is repository-authored; future external entries must
+  provide the required URL, retrieval date, and license reference.
+- `scripts/generate_asset_credits.py --check` verifies deterministic credits,
+  third-party notices, and the static in-game credits projection.
+- These automated checks establish technical policy conformance only. They do
+  not establish legal clearance, training-data provenance, ownership, or human
+  license review.
 
 ### Exit criteria
 
-- Every distributed asset has a clear legal basis.
-- Future packaging is not blocked by noncommercial restrictions.
+- Every distributed asset has a recorded legal-basis field that passes the
+  repository policy validator; human legal clearance remains external.
+- Known noncommercial and unclear licensing bases are rejected by validation;
+  packaging decisions remain subject to human review.
 - Credits can be regenerated from registry data.
 
 ---
 
 ## Milestone 9.2: Asset security and integrity review
+
+**Status:** Complete for automated technical gates in v0.12.85. Decoder,
+quality, accessibility, ownership, and human review remain separate evidence
+requirements.
 
 ### Deliverables
 
@@ -1992,21 +2015,36 @@ Ensure that all visual and audio assets are safe for long-term open-source distr
 
 ### Checklist
 
-- [ ] SVG scripts and external references rejected.
-- [ ] Embedded raster images reviewed.
-- [ ] External fonts rejected.
-- [ ] Unexpected metadata stripped.
-- [ ] Audio codec validation implemented.
-- [ ] File-size limits enforced.
-- [ ] Dimension limits enforced.
-- [ ] Hashes verified in CI.
-- [ ] Release build reproducibility checked.
-- [ ] Asset loading failures degrade gracefully.
+- [x] SVG scripts and external references rejected.
+- [x] Embedded raster images reviewed.
+- [x] External fonts rejected.
+- [x] Unexpected metadata stripped.
+- [x] Audio codec validation implemented.
+- [x] File-size limits enforced.
+- [x] Dimension limits enforced.
+- [x] Hashes verified in CI.
+- [x] Release build reproducibility checked.
+- [x] Asset loading failures degrade gracefully.
+
+### v0.12.85 security/integrity closure evidence and limits
+
+- `scripts/validate_asset_security.py` rejects executable/external SVG content,
+  embedded raster images, external fonts/imports, malformed files, oversized
+  files, unsafe dimensions, and unsupported media signatures.
+- `scripts/sanitize_svg_metadata.py` creates explicit SVG derivatives and its
+  read-only release check rejects removable metadata without rewriting approved
+  bytes. `scripts/verify_asset_release.py --check` verifies registry hashes and
+  the deterministic manifest in CI.
+- Existing visual/audio availability and playback fallbacks keep missing or
+  failed optional assets from breaking the presentation. These checks do not
+  establish decoder safety, legal clearance, quality, accessibility, ownership,
+  or human review.
 
 ### Exit criteria
 
-- Untrusted asset content cannot execute code.
-- Corrupt or missing assets do not break the simulation.
+- Untrusted asset content is rejected by the bounded scanner before release.
+- Corrupt or missing optional assets degrade the presentation without changing
+  the simulation.
 - Release assets match approved hashes.
 
 ---

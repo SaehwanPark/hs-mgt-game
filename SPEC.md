@@ -5207,7 +5207,8 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.1 provenance and notices (v0.12.78)
 
-- Status: In progress; canonical visual/audio registry entries now carry
+- Status: Closed; implementation and verification complete for automated
+  technical gates. Canonical visual/audio registry entries now carry
   machine-checked provenance kind, source URL, retrieval date, and license
   reference fields.
 - Repository-authored entries use the project policy reference with null
@@ -5222,7 +5223,8 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.1 in-game credits (v0.12.79)
 
-- Status: In progress; the static executive desktop now exposes a text-first,
+- Status: Closed; implementation and verification complete for automated
+  technical gates. The static executive desktop now exposes a text-first,
   keyboard-accessible asset credits/provenance disclosure before and after
   host/session loading.
 - The generated `gui/asset-credits.mjs` projection lists canonical registry
@@ -5235,7 +5237,8 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.2 asset security scanner (v0.12.80)
 
-- Status: In progress; `scripts/validate_asset_security.py` scans current
+- Status: Closed; implementation and verification complete for automated
+  technical gates. `scripts/validate_asset_security.py` scans current
   source/release files and preserved portrait previews without mutation or
   network access.
 - The gate rejects unsafe SVG content, malformed XML, oversized files,
@@ -5247,7 +5250,8 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ### Visual/audio Phase 9.2 release reproducibility (v0.12.81)
 
-- Status: In progress; `scripts/verify_asset_release.py` derives a stable
+- Status: Closed; implementation and verification complete for automated
+  technical gates. `scripts/verify_asset_release.py` derives a stable
   manifest from approved registry release paths with sorted paths, byte sizes,
   SHA-256 values, and a canonical manifest digest.
 - Release-only image/audio metadata checks fail closed for unexpected text,
@@ -5294,6 +5298,18 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Evidence is limited to transformation fixtures and release/security checks;
   it does not establish decoder safety, legal clearance, accessibility,
   ownership, quality, or human review.
+
+### Visual/audio Phase 9 technical closure (v0.12.85)
+
+- Status: Closed; implementation and verification complete. The Phase 9.1/9.2
+  roadmap checklist is reconciled with passing automated license, provenance,
+  credits, security, metadata, fallback, hash, and reproducibility gates.
+- A regression test requires the exact technically evidenced checklist entries
+  and all v0.12.78–v0.12.84 completion statuses while preserving explicit human
+  legal, portrait, decoder, accessibility, ownership, quality, and review
+  boundaries.
+- No asset, registry, release hash, manifest, runtime, host, simulation,
+  history, replay, or debrief artifact is changed.
 
 ### Contributor documentation information architecture (v0.12.32)
 
