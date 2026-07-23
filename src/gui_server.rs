@@ -10,8 +10,8 @@ use serde::Deserialize;
 
 use crate::mcp::{
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
-  GetPresentationRequest, GetRegionalWorldRequest, GetResolutionRequest, McpErrorMessage,
-  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  GetPresentationRequest, GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest,
+  McpErrorMessage, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
@@ -116,6 +116,7 @@ fn gui_router() -> Router {
       get(get_regional_world),
     )
     .route("/api/v1/sessions/{session_id}/history", get(get_history))
+    .route("/api/v1/sessions/{session_id}/replay", get(get_replay))
     .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
     .with_state(GuiState::default())
@@ -216,6 +217,12 @@ async fn get_regional_world(
 async fn get_history(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
   with_store(&state, |store| {
     store.get_history(GetHistoryRequest { session_id })
+  })
+}
+
+async fn get_replay(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.get_replay(GetReplayRequest { session_id })
   })
 }
 
@@ -400,6 +407,14 @@ mod tests {
       assert_eq!(status, 200, "{suffix}: {body}");
     }
 
+    let replay_path = format!("/api/v1/sessions/{session_id}/replay");
+    let (status, body) = request(address, "GET", &replay_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let replay: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(replay["schema_version"], "competitive-replay-v1");
+    assert_eq!(replay["transition_count"], 0);
+    assert!(replay["latest_state_hash"].is_null());
+
     let validation_path = format!("/api/v1/sessions/{session_id}/validation");
     let (status, body) = request(
       address,
@@ -438,6 +453,15 @@ mod tests {
       history["transitions"][0]["state_hash"],
       resolution["replay"]["state_hash"]
     );
+    let (status, body) = request(address, "GET", &replay_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let replay: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(replay["schema_version"], "competitive-replay-v1");
+    assert_eq!(replay["transition_count"], 1);
+    assert_eq!(
+      replay["latest_state_hash"],
+      history["transitions"][0]["state_hash"]
+    );
 
     let end_path = format!("/api/v1/sessions/{session_id}/end");
     let (status, body) = request(address, "POST", &end_path, None).await;
@@ -470,6 +494,10 @@ mod tests {
       None,
     )
     .await;
+    assert_eq!(status, 404);
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert!(error["error"].as_str().unwrap().contains("unknown session"));
+    let (status, body) = request(address, "GET", "/api/v1/sessions/missing/replay", None).await;
     assert_eq!(status, 404);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert!(error["error"].as_str().unwrap().contains("unknown session"));

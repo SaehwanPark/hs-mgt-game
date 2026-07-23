@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Replay Continuity as Host Metadata, Not Browser Playback
+
+- Context: The live GUI had immutable history and historical-resolution reads,
+  but no dedicated replay envelope tying the visible sequence to a latest
+  state hash.
+- Risk: Adding browser-owned playback or hash calculation would create a
+  second replay authority and could make a visually coherent sequence diverge
+  from the host's committed history.
+- Resolution: Add `competitive-replay-v1` as a read-only projection over
+  `GameSessionStore::get_history`, validate seed/count/latest-hash alignment in
+  the browser, and render through the existing text-first history surface.
+- Prevention: Test empty and committed replay reads, malformed metadata,
+  render preservation after a failed refresh, unknown sessions, and the
+  absence of transition/simulation calls; keep persistence and replay
+  regeneration as separate contracts.
+
 ## Keep Dedicated History Reads Non-Mutating
 
 - Context: The live GUI already received history inside presentation and

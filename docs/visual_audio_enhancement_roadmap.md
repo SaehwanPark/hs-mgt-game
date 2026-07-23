@@ -2227,10 +2227,10 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live history handoff recorded in v0.12.94 after facility,
-operational-overlay, terminal-debrief, event-cue, and music-state slices; full
-campaign facility/event/music coverage, save/load/replay continuity,
-performance, and screenshot gates remain open.
+**Status:** Bounded live replay-continuity handoff recorded in v0.12.95 after
+facility, operational-overlay, terminal-debrief, event-cue, music-state, and
+history slices; full campaign facility/event/music coverage, save/load/replay
+continuity, performance, and screenshot gates remain open.
 
 ### Scope
 
@@ -2397,6 +2397,26 @@ performance, and screenshot gates remain open.
   screenshots, performance/compatibility, asset quality, and human quality
   remain open. No replay regeneration, persistence, simulation, audio, or
   asset behavior is introduced.
+
+### v0.12.95 bounded live replay-continuity handoff evidence
+
+- `ReplayEnvelope` now carries the versioned `competitive-replay-v1` schema,
+  session/campaign/seed identity, immutable visible transition summaries,
+  aligned transition count, and the latest visible state hash.
+- The MCP server and loopback GUI expose `get_replay` and
+  `GET /api/v1/sessions/{session_id}/replay`; the local adapter forwards the
+  read, and `gui/app.mjs` validates and renders the projection through the
+  existing text-first history/replay surface. Historical committed resolution
+  review remains the existing host `getResolution` read.
+- Rust session/MCP/transport assertions and
+  `tests/test_phase11_live_replay.py` cover empty and committed projections,
+  hash/count alignment, unknown sessions, render/failure preservation, syntax,
+  and the unchanged simulation/network/client-authority boundary.
+- This closes only the dedicated live replay metadata/history handoff. Full
+  campaign replay visual continuity, save/load persistence, replay
+  regeneration/playback, screenshots, performance/compatibility, asset
+  quality, and human quality remain open. No replay calculation, simulation,
+  audio, or asset behavior is introduced.
 
 ### Exit criteria
 

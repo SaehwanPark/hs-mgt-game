@@ -322,6 +322,7 @@ window.HsMgtGameActionAdapter = {
   async getPresentation(sessionId) {},
   async getRegionalWorld(sessionId) {},
   async getHistory(sessionId) {},
+  async getReplay(sessionId) {},
   async getActionCatalog(sessionId) {},
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
@@ -367,6 +368,14 @@ validates and renders this dedicated read through the existing text-first
 history view; unsupported, malformed, or failed reads preserve the current
 history and report a recoverable adapter error. The route never submits a
 turn, regenerates replay data, or creates save/load state.
+
+When supplied, `getReplay(sessionId)` returns
+`schema_version: "competitive-replay-v1"` with the same immutable summaries,
+seed, transition count, and latest visible state hash. The page validates the
+alignment and renders the existing history/replay list; failure preserves the
+current list. Historical committed resolution review remains the separate
+host-read `getResolution(sessionId, turn)` path, and no browser playback or
+replay regeneration is introduced.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

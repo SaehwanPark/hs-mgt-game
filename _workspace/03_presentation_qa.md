@@ -1686,3 +1686,64 @@ None for this bounded contract.
   security/generation checks, and visual/audio contract audit passed.
 
 ---
+# Presentation QA — Phase 11.1 live replay continuity v0.12.95
+
+## Status
+
+`pass` for the bounded live competitive replay-continuity handoff. This is
+technical presentation QA, not human accessibility, usability, legal,
+educational, audio-quality, or full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/89_implementation_plan_visual-audio-phase11-live-replay-v0.12.95.md`.
+- Changed paths: `src/mcp/session.rs`, `src/mcp/server.rs`,
+  `src/gui_server.rs`, `gui/host-adapter.mjs`, `gui/app.mjs`, focused tests,
+  and project records.
+- Roadmap gate: current dedicated live competitive replay read only.
+
+## Information and Causality Findings
+
+- Pass: the replay route projects only the existing host history and adds
+  seed/count/latest-visible-hash metadata; it does not submit or resolve a
+  turn.
+- Pass: the browser requires supported schema, identity, seed, aligned count,
+  nonblank transition hashes, and latest-hash equality before rendering.
+- Pass: the existing text-first history list and historical resolution read
+  remain meaning-bearing; no private rival action, hidden state, inferred
+  causality, or future outcome is exposed.
+
+## Accessibility and Fallback Findings
+
+- Pass: replay summaries remain written DOM content with turn, command, and
+  state-hash text, including explicit empty history.
+- Pass: missing, malformed, unsupported, and failed replay reads preserve the
+  current history view and return a recoverable adapter error.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, device compatibility, performance, or human
+  comprehension.
+
+## Provenance and Authority Findings
+
+- Pass: `get_replay` calls the existing immutable history source; no replay
+  regeneration, playback simulation, persistence, browser hash, asset, or
+  audio path was added.
+- Pass: MCP and loopback routes remain host boundaries, and the browser does
+  not call simulation/network APIs directly.
+- Evidence limit: this does not establish full campaign replay/save-load
+  continuity, legal clearance, or human review.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Verification Evidence
+
+- Rust tests — 336 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 565 passed, including the live replay continuity test.
+- Release metadata, 374 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+---

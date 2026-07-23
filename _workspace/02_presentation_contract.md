@@ -994,3 +994,72 @@ clearance, or educational benefit.
   host contract and evidence campaign.
 
 ---
+# Presentation Contract — Phase 11.1 live replay continuity v0.12.95
+
+## Goal and Authorization
+
+Define the bounded live replay handoff needed for the Phase 11.1 replay-view
+item. The host may expose immutable actor-visible transition summaries with
+replay metadata; the browser may validate and render them through the existing
+history surface. This slice does not authorize replay regeneration, playback
+simulation, save/load, or full campaign continuity.
+
+## Player Questions and Consequences
+
+The replay view should answer: “Which committed visible transitions can I
+review, and what final hash identifies this retained sequence?” It must not
+recompute outcomes, reveal hidden rival actions, or imply unobserved causality.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Replay list | Host `ReplayEnvelope.transitions` from existing history | Keep current history; show explicit empty state | No local replay synthesis |
+| Replay metadata | Host schema, seed, count, latest visible hash | Reject envelope and preserve current view | No browser-authored replay identity |
+| Transition turn/command/events/effects | Existing visible `TransitionSummary` fields | Render written fields or existing empty text | No hidden actor outcomes |
+| State hash | Existing host `TransitionSummary.state_hash` | Reject missing/blank values | No client hash calculation |
+| Unknown session | Existing structured host error/404 | Preserve current view and recovery state | No retry loop or replacement simulation |
+
+## Visual, Motion, and Audio Semantics
+
+The existing text-first committed-history list remains the meaning-bearing
+replay surface. This handoff adds no animation, audio, asset, or local playback
+state; historical resolution review remains the existing host read.
+
+## Accessibility and Fallbacks
+
+Each retained summary remains written DOM content with turn, command, and state
+hash text. Empty history and failed/missing replay reads preserve explicit
+current-view/recovery behavior. Automated checks do not establish human
+screen-reader, focus, contrast, device, or comprehension quality.
+
+## Authority, History, and Replay Boundaries
+
+The route calls only `GameSessionStore::get_history` through a typed replay
+projection. The response does not enter commands, transitions, stochastic
+inputs, hashes, save files, or debrief facts. The browser does not mutate,
+recalculate, rehash, regenerate, or simulate the replay.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Existing text, current credits, registry,
+release, metadata, and security checks remain the provenance boundary.
+
+## Verification and Evidence Limits
+
+Rust/session/MCP/transport tests must cover empty and committed replay reads,
+latest-hash/count alignment, unknown sessions, and non-mutation. Node/Python
+tests must cover validation, text rendering, capability/failure fallback,
+syntax, and forbidden authority/network markers. Full Rust, Python, asset,
+replay, documentation, and release checks remain required.
+
+## Non-Goals and Open Questions
+
+- No replay playback/regeneration, save/load, terminal redesign, screenshot
+  suite, performance benchmark, browser matrix, or new campaign path.
+- Open: persistence-backed save/load and full replay continuity need separate
+  host contracts and evidence campaigns.
+- Open: human replay comprehension and educational usefulness remain external
+  evaluation gates.
+
+---

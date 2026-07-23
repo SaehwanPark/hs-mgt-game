@@ -281,3 +281,48 @@ performance, compatibility, asset quality, human evaluation, and later Phase
 11.2–13 gates remain open.
 
 ---
+# Final Handoff — Visual/audio Phase 11.1 live replay continuity v0.12.95
+
+## Result
+
+The live competitive host now exposes a versioned, non-mutating replay
+projection over immutable visible history. The browser validates seed/count/
+latest-hash alignment and renders the result through the existing text-first
+history/replay view while preserving the current view when the read fails.
+
+## Changed files and behavior
+
+- Added `competitive-replay-v1`, `get_replay`, and
+  `GET /api/v1/sessions/{session_id}/replay` over the existing history source.
+- Added `getReplay`, strict browser validation/rendering, and failure
+  preservation; historical committed resolution remains host-read and no
+  replay regeneration, save/load, simulation, audio, or asset path changed.
+- Added Rust session/MCP/transport assertions and
+  `tests/test_phase11_live_replay.py`; updated roadmap, ledger, canonical
+  records, lessons, generated credits/version projections, and release notes.
+
+## Handoff and review
+
+- Base: `main` at v0.12.94.
+- Working branch: to be created after implementation verification.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Verification
+
+- Rust tests — 336 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 565 passed, including the live replay continuity test.
+- Release metadata, 374 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+## Limits and next slice
+
+This closes only the dedicated live replay metadata/history handoff. Full
+campaign replay visual continuity, save/load persistence, replay
+regeneration/playback, screenshots, performance, compatibility, asset quality,
+human evaluation, and later Phase 11.2–13 gates remain open.
+
+---

@@ -26,6 +26,7 @@ use crate::sim::{observe_for_human, observe_for_player, transition, validate_com
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
 pub const HISTORY_SCHEMA_VERSION: &str = "competitive-history-v1";
+pub const REPLAY_SCHEMA_VERSION: &str = "competitive-replay-v1";
 pub const END_SESSION_SCHEMA_VERSION: &str = "competitive-end-session-v1";
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
@@ -49,6 +50,11 @@ pub struct SubmitTurnRequest {
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct GetHistoryRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct GetReplayRequest {
   pub session_id: String,
 }
 
@@ -110,6 +116,17 @@ pub struct HistoryEnvelope {
   pub campaign: String,
   pub seed: u64,
   pub transition_count: usize,
+  pub transitions: Vec<TransitionSummary>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct ReplayEnvelope {
+  pub schema_version: String,
+  pub session_id: String,
+  pub campaign: String,
+  pub seed: u64,
+  pub transition_count: usize,
+  pub latest_state_hash: Option<String>,
   pub transitions: Vec<TransitionSummary>,
 }
 
@@ -383,6 +400,25 @@ impl GameSessionStore {
           .map(summarize_affiliation_transition)
           .collect(),
       },
+    })
+  }
+
+  pub fn get_replay(&self, request: GetReplayRequest) -> Result<ReplayEnvelope, McpErrorMessage> {
+    let history = self.get_history(GetHistoryRequest {
+      session_id: request.session_id,
+    })?;
+    let latest_state_hash = history
+      .transitions
+      .last()
+      .map(|transition| transition.state_hash.clone());
+    Ok(ReplayEnvelope {
+      schema_version: REPLAY_SCHEMA_VERSION.to_string(),
+      session_id: history.session_id,
+      campaign: history.campaign,
+      seed: history.seed,
+      transition_count: history.transition_count,
+      latest_state_hash,
+      transitions: history.transitions,
     })
   }
 
@@ -1523,6 +1559,46 @@ mod tests {
       .expect("history");
     assert_eq!(history.schema_version, HISTORY_SCHEMA_VERSION);
     assert_eq!(history.transition_count, 5);
+  }
+
+  #[test]
+  fn competitive_replay_projection_aligns_with_immutable_history() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let replay = store
+      .get_replay(GetReplayRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("empty replay");
+    assert_eq!(replay.schema_version, REPLAY_SCHEMA_VERSION);
+    assert_eq!(replay.transition_count, 0);
+    assert!(replay.latest_state_hash.is_none());
+
+    store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("advance one month");
+    let replay = store
+      .get_replay(GetReplayRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("committed replay");
+    let history = store
+      .get_history(GetHistoryRequest {
+        session_id: session.session_id,
+      })
+      .expect("history");
+    assert_eq!(replay.transition_count, 1);
+    assert_eq!(replay.transitions, history.transitions);
+    assert_eq!(
+      replay.latest_state_hash,
+      history
+        .transitions
+        .last()
+        .map(|transition| transition.state_hash.clone())
+    );
   }
 
   #[test]

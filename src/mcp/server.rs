@@ -10,8 +10,9 @@ use rmcp::{
 use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
   GetCampaignCoverageRequest, GetHistoryRequest, GetObservationRequest, GetPresentationRequest,
-  GetRegionalWorldRequest, GetResolutionRequest, HistoryEnvelope, McpErrorMessage, SessionEnvelope,
-  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest, HistoryEnvelope,
+  McpErrorMessage, ReplayEnvelope, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
+  ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -138,6 +139,14 @@ impl McpGameServer {
   }
 
   #[tool(
+    name = "get_replay",
+    description = "Return host-owned replay metadata and immutable transition summaries for a session without advancing or regenerating it."
+  )]
+  async fn get_replay(&self, Parameters(request): Parameters<GetReplayRequest>) -> CallToolResult {
+    self.with_store(|store| store.get_replay(request))
+  }
+
+  #[tool(
     name = "get_presentation",
     description = "Return a typed actor-visible read-only presentation projection without advancing the session or enabling commands."
   )]
@@ -193,7 +202,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, get_resolution, and get_regional_world are non-mutating actor-visible reads.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, get_replay, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, get_resolution, get_regional_world, get_history, and get_replay are non-mutating actor-visible reads.",
       )
   }
 }
@@ -208,6 +217,7 @@ pub async fn run_stdio_server() -> Result<(), Box<dyn std::error::Error>> {
 fn _assert_result_shapes(
   _: SessionEnvelope,
   _: HistoryEnvelope,
+  _: ReplayEnvelope,
   _: EndSessionEnvelope,
   _: ErrorData,
 ) {
