@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Define Packaging Budgets Before Runtime Performance Claims
+
+- Context: Phase 11.2 calls for asset-size, cache, render, decode, memory,
+  offline, device, and compatibility work, but the repository currently has a
+  small tracked release directory and larger source/preview trees.
+- Risk: A broad “performance hardened” label could conflate byte accounting
+  with runtime behavior and accidentally include non-release previews.
+- Resolution: Define named budgets against explicit `assets/release` roots and
+  emit a deterministic report with observed file count, total bytes, and the
+  largest file. Keep source references, generated previews, and runtime
+  measurements outside the slice.
+- Prevention: Require each future optimization or benchmark to declare its
+  measured surface, limit, and evidence boundary before changing assets or
+  loading behavior.
+
 ## Keep Live Checkpoints Host-Owned and Explicitly Ephemeral
 
 - Context: The CLI already has durable save artifacts, while the live GUI

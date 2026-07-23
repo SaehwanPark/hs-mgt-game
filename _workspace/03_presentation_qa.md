@@ -1805,3 +1805,46 @@ None for this bounded contract.
   security/generation checks, and visual/audio contract audit passed.
 
 ---
+# Presentation QA — Phase 11.2 asset-size budget v0.12.97
+
+## Status
+
+`pass` for the bounded release-asset budget contract. This is technical
+packaging QA, not runtime performance, accessibility, legal, educational,
+offline, compatibility, or asset-quality approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/91_implementation_plan_visual-audio-phase11-performance-budget-v0.12.97.md`.
+- Roadmap gate: Phase 11.2 asset-size budget definition only.
+
+## Findings
+
+- Pass: the two named classes resolve only tracked release files and exclude
+  source references and generated portrait previews.
+- Pass: the report exposes count, total bytes, largest file, limits, and status.
+- Pass: over-limit, empty, malformed, and escaped-path inputs fail closed.
+- Pass: no browser, audio, simulation, network, or asset content path changes.
+
+## Evidence limits
+
+Automated budget evidence will not establish cache size, decode/render time,
+memory use, offline operation, low-power suitability, browser compatibility,
+contrast, screen-reader behavior, legal clearance, or human comprehension.
+
+## Required fixes
+
+None for this bounded contract; the single code-reviewer pass found and
+resolved two fail-closed checker edge cases, with no remaining findings.
+
+## Verification evidence
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 576 passed, including the seven asset-budget tests.
+- Release metadata, 376 Markdown links, asset registry/credits/release,
+  security/generation checks, asset-budget report, and visual/audio contract
+  audit passed.
+
+---

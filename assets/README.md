@@ -21,7 +21,16 @@ python3 scripts/verify_asset_release.py --check
 python3 scripts/generate_asset_credits.py --check
 python3 scripts/generate_asset_credits.py --notices
 python3 scripts/generate_asset_credits.py --runtime
+python3 scripts/check_asset_budget.py
 ```
+
+`assets/asset-budget.json` defines the explicit `asset-budget-v1` limits for
+the tracked release SVG class and complete release package. The checker emits
+a deterministic JSON report with file count, total bytes, largest file, and
+pass/fail status. It measures only files under `assets/release`; source
+references and generated portrait previews are outside this budget, and a
+passing report is not a runtime performance, cache, decode, offline, or device
+compatibility claim.
 
 ## Registry contract
 
