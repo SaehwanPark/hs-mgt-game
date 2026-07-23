@@ -37,6 +37,18 @@ def _nonnegative_int(value: object) -> bool:
   return type(value) is int and value >= 0
 
 
+def _symlink_components(root: Path, relative: str) -> list[Path]:
+  current = root
+  symlinks = []
+  for part in Path(relative).parts:
+    if part in ("", "."):
+      continue
+    current /= part
+    if current.is_symlink():
+      symlinks.append(current)
+  return symlinks
+
+
 def _relative(root: Path, path: Path) -> str:
   return path.absolute().relative_to(root.resolve()).as_posix()
 
@@ -62,8 +74,10 @@ def validate_definition(root: Path, document: object) -> list[str]:
     else:
       if not resolved.is_dir():
         errors.append(f"release_root directory does not exist: {release_root}")
-      elif (root / release_root).is_symlink():
-        errors.append("release_root cannot be a symlink")
+      else:
+        symlink_components = _symlink_components(root, release_root)
+        if symlink_components:
+          errors.append("release_root path cannot contain symlinks")
 
   extensions = document.get("supported_extensions")
   if not isinstance(extensions, list) or not extensions or not all(

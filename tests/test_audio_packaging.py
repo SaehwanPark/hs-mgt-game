@@ -79,7 +79,20 @@ class AudioPackagingTests(unittest.TestCase):
       document = copy.deepcopy(self.document)
       document["release_root"] = "assets/release"
       errors = self.checker.validate_definition(root, document)
-      self.assertIn("release_root cannot be a symlink", errors)
+      self.assertIn("release_root path cannot contain symlinks", errors)
+
+  def test_release_root_parent_symlink_is_rejected(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      assets = root / "assets"
+      assets.mkdir()
+      real = assets / "real"
+      (real / "release").mkdir(parents=True)
+      (assets / "alias").symlink_to(real, target_is_directory=True)
+      document = copy.deepcopy(self.document)
+      document["release_root"] = "assets/alias/release"
+      errors = self.checker.validate_definition(root, document)
+      self.assertIn("release_root path cannot contain symlinks", errors)
 
   def test_scope_rejects_escaped_paths_and_wrong_decision(self):
     document = copy.deepcopy(self.document)
