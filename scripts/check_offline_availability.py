@@ -22,8 +22,11 @@ REQUIRED_FIELDS = (
   "embedded_resources",
 )
 RESOURCE_KINDS = {"entrypoint", "host-adapter", "module", "catalog"}
-REMOTE_SOURCE_PATTERN = re.compile(
-  r"(?:https?:)?//(?!www\.w3\.org/2000/svg)[A-Za-z0-9][A-Za-z0-9.-]*(?::\d+)?(?:/|$)",
+SOURCE_SCHEME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
+CODE_SCHEME_PATTERN = re.compile(r"\b(?:data|javascript|blob|file|ftp|https?|ws|wss):", re.IGNORECASE)
+HTML_EXTERNAL_SOURCE_PATTERN = re.compile(
+  r"<(?:script|link|img|audio|video|source)\b[^>]*"
+  r"(?:src|href|srcset)\s*=\s*[\"'](?:[A-Za-z][A-Za-z0-9+.-]*:|//)",
   re.IGNORECASE,
 )
 
@@ -124,6 +127,8 @@ def validate_definition(root: Path, document: object) -> list[str]:
     if not isinstance(source, str) or not source.strip():
       errors.append(f"embedded resource {index} source must be a path")
     else:
+      if SOURCE_SCHEME_PATTERN.match(source):
+        errors.append(f"embedded resource {index} source must be repository-local: {source}")
       try:
         resolved = _resolve(root, source)
       except ValueError as error:
@@ -178,14 +183,22 @@ def route_errors(root: Path, document: dict) -> list[str]:
   for resource in document["embedded_resources"]:
     source = resource["source"]
     source_marker = f'include_str!("../{source}")'
-    if source_marker not in server_text:
-      errors.append(f"server does not embed declared source: {source}")
-    for url in resource["urls"]:
-      if url not in server_text:
-        errors.append(f"server does not route declared URL: {url}")
+    route_marker = " | ".join(f'"{url}"' for url in resource["urls"]) + " => ("
+    route_start = server_text.find(route_marker)
+    if route_start < 0:
+      errors.append(f"server does not route declared URL set: {resource['urls']}")
+      route_arm = ""
+    else:
+      route_end = server_text.find("\n    ),", route_start)
+      route_arm = server_text[route_start:] if route_end < 0 else server_text[route_start:route_end]
+    if source_marker not in route_arm:
+      errors.append(f"server route does not embed its declared source: {resource['urls']} -> {source}")
     source_text = _resolve(root, source).read_text(encoding="utf-8")
-    if REMOTE_SOURCE_PATTERN.search(source_text):
-      errors.append(f"embedded source contains an external URL marker: {source}")
+    normalized_text = source_text.replace("http://www.w3.org/2000/svg", "")
+    if CODE_SCHEME_PATTERN.search(normalized_text):
+      errors.append(f"embedded source contains a non-local URL scheme: {source}")
+    if resource["kind"] == "entrypoint" and HTML_EXTERNAL_SOURCE_PATTERN.search(source_text):
+      errors.append(f"entrypoint contains an external HTML source: {source}")
   return errors
 
 
@@ -200,6 +213,7 @@ def build_report(root: Path, document: object) -> dict:
       "route_count": 0,
     }
 
+  loading_document = None
   try:
     loading_checker = _load_loading_checker()
     loading_document = _loading_document(root)
@@ -209,7 +223,7 @@ def build_report(root: Path, document: object) -> dict:
   if loading_report["status"] != "pass":
     errors.extend(f"loading policy: {error}" for error in loading_report.get("errors", []))
 
-  expected_sources = set(loading_document.get("live_files", [])) if "loading_document" in locals() else set()
+  expected_sources = set(loading_document.get("live_files", [])) if isinstance(loading_document, dict) else set()
   expected_sources.update({"gui/host-adapter.mjs", "gui/audio-catalog.json", "gui/visual-catalog.json"})
   actual_sources = {resource["source"] for resource in document["embedded_resources"]}
   for source in sorted(expected_sources - actual_sources):

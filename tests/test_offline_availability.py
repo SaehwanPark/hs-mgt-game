@@ -41,6 +41,15 @@ class OfflineAvailabilityTests(unittest.TestCase):
     self.assertEqual(report["status"], "fail")
     self.assertTrue(any("does not route declared URL" in error for error in report["errors"]))
 
+  def test_swapped_route_source_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    host_adapter = next(resource for resource in document["embedded_resources"] if resource["kind"] == "host-adapter")
+    app = next(resource for resource in document["embedded_resources"] if resource["source"] == "gui/app.mjs")
+    host_adapter["source"], app["source"] = app["source"], host_adapter["source"]
+    report = self.checker.build_report(ROOT, document)
+    self.assertEqual(report["status"], "fail")
+    self.assertTrue(any("does not embed its declared source" in error for error in report["errors"]))
+
   def test_loading_graph_drift_fails_closed(self):
     document = copy.deepcopy(self.document)
     document["embedded_resources"] = [
@@ -56,7 +65,13 @@ class OfflineAvailabilityTests(unittest.TestCase):
     document = copy.deepcopy(self.document)
     document["embedded_resources"][1]["source"] = "https://example.test/host-adapter.mjs"
     errors = self.checker.validate_definition(ROOT, document)
-    self.assertTrue(any("source does not exist" in error for error in errors))
+    self.assertTrue(any("must be repository-local" in error for error in errors))
+
+  def test_non_http_external_scheme_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"][1]["source"] = "data:text/javascript,alert(1)"
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("must be repository-local" in error for error in errors))
 
   def test_path_escape_and_non_loopback_fail_closed(self):
     document = copy.deepcopy(self.document)
@@ -83,6 +98,16 @@ class OfflineAvailabilityTests(unittest.TestCase):
     document["schema_version"] = "offline-policy-v0"
     errors = self.checker.validate_definition(ROOT, document)
     self.assertTrue(any("unsupported offline policy schema_version" in error for error in errors))
+
+  def test_malformed_loading_policy_returns_structured_failure(self):
+    original = self.checker._loading_document
+    self.checker._loading_document = lambda root: []
+    try:
+      report = self.checker.build_report(ROOT, self.document)
+    finally:
+      self.checker._loading_document = original
+    self.assertEqual(report["status"], "fail")
+    self.assertEqual(report["resource_count"], 23)
 
 
 if __name__ == "__main__":

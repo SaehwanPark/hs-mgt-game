@@ -453,36 +453,87 @@ mod tests {
   #[tokio::test]
   async fn live_gui_embeds_complete_offline_module_graph() {
     let (address, server) = test_server().await;
-    let paths = [
-      "/",
-      "/index.html",
-      "/host-adapter.mjs",
-      "/ambience-contract.mjs",
-      "/app.mjs",
-      "/asset-availability.mjs",
-      "/asset-credits-renderer.mjs",
-      "/asset-credits.mjs",
-      "/audio-cue-contract.mjs",
-      "/audio-priority-contract.mjs",
-      "/audio.mjs",
-      "/consequence-links.mjs",
-      "/facility-components.mjs",
-      "/first-month.mjs",
-      "/metric-visualizations.mjs",
-      "/music-stem-contract.mjs",
-      "/operational-overlays.mjs",
-      "/playtest.mjs",
-      "/regional-board.mjs",
-      "/resolution-sequence.mjs",
-      "/scene.mjs",
-      "/visual.mjs",
-      "/audio-catalog.json",
-      "/visual-catalog.json",
+    let resources = [
+      ("/host-adapter.mjs", include_str!("../gui/host-adapter.mjs")),
+      (
+        "/ambience-contract.mjs",
+        include_str!("../gui/ambience-contract.mjs"),
+      ),
+      ("/app.mjs", include_str!("../gui/app.mjs")),
+      (
+        "/asset-availability.mjs",
+        include_str!("../gui/asset-availability.mjs"),
+      ),
+      (
+        "/asset-credits-renderer.mjs",
+        include_str!("../gui/asset-credits-renderer.mjs"),
+      ),
+      (
+        "/asset-credits.mjs",
+        include_str!("../gui/asset-credits.mjs"),
+      ),
+      (
+        "/audio-cue-contract.mjs",
+        include_str!("../gui/audio-cue-contract.mjs"),
+      ),
+      (
+        "/audio-priority-contract.mjs",
+        include_str!("../gui/audio-priority-contract.mjs"),
+      ),
+      ("/audio.mjs", include_str!("../gui/audio.mjs")),
+      (
+        "/consequence-links.mjs",
+        include_str!("../gui/consequence-links.mjs"),
+      ),
+      (
+        "/facility-components.mjs",
+        include_str!("../gui/facility-components.mjs"),
+      ),
+      ("/first-month.mjs", include_str!("../gui/first-month.mjs")),
+      (
+        "/metric-visualizations.mjs",
+        include_str!("../gui/metric-visualizations.mjs"),
+      ),
+      (
+        "/music-stem-contract.mjs",
+        include_str!("../gui/music-stem-contract.mjs"),
+      ),
+      (
+        "/operational-overlays.mjs",
+        include_str!("../gui/operational-overlays.mjs"),
+      ),
+      ("/playtest.mjs", include_str!("../gui/playtest.mjs")),
+      (
+        "/regional-board.mjs",
+        include_str!("../gui/regional-board.mjs"),
+      ),
+      (
+        "/resolution-sequence.mjs",
+        include_str!("../gui/resolution-sequence.mjs"),
+      ),
+      ("/scene.mjs", include_str!("../gui/scene.mjs")),
+      ("/visual.mjs", include_str!("../gui/visual.mjs")),
+      (
+        "/audio-catalog.json",
+        include_str!("../gui/audio-catalog.json"),
+      ),
+      (
+        "/visual-catalog.json",
+        include_str!("../gui/visual-catalog.json"),
+      ),
     ];
-    for path in paths {
+    for (path, expected) in resources {
       let (status, body) = request(address, "GET", path, None).await;
       assert_eq!(status, 200, "{path}: {body}");
-      assert!(!body.is_empty(), "{path} returned an empty body");
+      assert_eq!(body, expected, "{path} did not return its embedded source");
+    }
+    for path in ["/", "/index.html"] {
+      let (status, body) = request(address, "GET", path, None).await;
+      assert_eq!(status, 200, "{path}: {body}");
+      assert!(
+        body.contains("host-adapter.mjs"),
+        "{path} omitted host adapter"
+      );
     }
     server.abort();
   }
