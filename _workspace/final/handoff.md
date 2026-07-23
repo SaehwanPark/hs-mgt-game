@@ -31,7 +31,7 @@ retains visible-only classification for older or malformed envelopes.
 ## Handoff and review
 
 - Base: `main` at v0.12.92.
-- Working branch: `feat/visual-audio-phase11-live-checkpoint-v0.12.96`.
+- Working branch: to be created after implementation verification.
 - Pull request: pending.
 - Presentation-domain QA: pass for the bounded contract; evidence limits are
   recorded in `_workspace/03_presentation_qa.md`.
@@ -350,12 +350,13 @@ on failure.
 ## Handoff and review
 
 - Base: `main` at v0.12.95.
-- Working branch: to be created after implementation verification.
-- Pull request: pending.
+- Working branch: `feat/visual-audio-phase11-live-checkpoint-v0.12.96`.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/245.
+- Review commit: `b123c62`.
 - Presentation-domain QA: pass for the bounded contract; evidence limits are
   recorded in `_workspace/03_presentation_qa.md`.
-- One code-reviewer skill is reserved for the required review passes; no other
-  reviewer will be used.
+- One code-reviewer skill completed the required review passes; no other
+  reviewer was used.
 
 ## Verification
 
