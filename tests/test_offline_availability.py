@@ -83,6 +83,10 @@ class OfflineAvailabilityTests(unittest.TestCase):
     self.assertTrue(self.checker._external_uri(r"\u002f\u002fcdn.example/app.js"))
     self.assertTrue(self.checker._external_uri(r"https\u003a//cdn.example/app.js"))
     self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri(r"http:\n//cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri("https:\t//cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri("https:\r//cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri("https:\x0b//cdn.example/app.js"))
 
   def test_html_external_attributes_fail_closed(self):
     tags = self.checker._html_tags(

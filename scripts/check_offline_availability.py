@@ -32,6 +32,18 @@ HTML_ATTRIBUTE_PATTERN = re.compile(
   re.IGNORECASE,
 )
 ESCAPED_CODEPOINT_PATTERN = re.compile(r"\\u\{([0-9a-fA-F]+)\}|\\u([0-9a-fA-F]{4})|\\x([0-9a-fA-F]{2})")
+ESCAPED_CONTROL_PATTERN = re.compile(r"\\(?:0|a|b|f|n|r|t|v)")
+ESCAPED_CONTROL_MAP = {
+  r"\0": "\x00",
+  r"\a": "\x07",
+  r"\b": "\x08",
+  r"\f": "\x0c",
+  r"\n": "\n",
+  r"\r": "\r",
+  r"\t": "\t",
+  r"\v": "\x0b",
+}
+CONTROL_CHARACTER_PATTERN = re.compile(r"[\x00-\x1f\x7f]")
 SVG_NAMESPACE = "http://www.w3.org/2000/svg"
 SHA256_PATTERN = re.compile(r"^sha256:[0-9a-fA-F]{64}$")
 
@@ -76,6 +88,8 @@ def _external_uri(value: str) -> bool:
       return match.group(0)
 
   decoded = ESCAPED_CODEPOINT_PATTERN.sub(decode_codepoint, decoded).replace("\\/", "/")
+  decoded = ESCAPED_CONTROL_PATTERN.sub(lambda match: ESCAPED_CONTROL_MAP[match.group(0)], decoded)
+  decoded = CONTROL_CHARACTER_PATTERN.sub("", decoded)
   decoded = decoded.strip()
   return decoded.startswith("//") or bool(URI_PREFIX_PATTERN.match(decoded))
 
