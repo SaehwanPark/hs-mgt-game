@@ -87,6 +87,7 @@ class OfflineAvailabilityTests(unittest.TestCase):
   def test_html_external_attributes_fail_closed(self):
     tags = self.checker._html_tags(
       '<!-- " <script src=//cdn.example/comment-hidden.js></script> -->'
+      '<div title="\\"><script src=//cdn.example/backslash-hidden.js></script>'
       '<script src=//cdn.example/app.js></script>'
       '<img alt=">" srcset="./local.png 1x, //cdn.example/remote.png 2x">'
     )
@@ -100,7 +101,14 @@ class OfflineAvailabilityTests(unittest.TestCase):
           for candidate in candidates
           if candidate.strip() and self.checker._external_uri(candidate.strip().split()[0])
         )
-    self.assertEqual(external, ["//cdn.example/app.js", "//cdn.example/remote.png"])
+    self.assertEqual(
+      external,
+      [
+        "//cdn.example/backslash-hidden.js",
+        "//cdn.example/app.js",
+        "//cdn.example/remote.png",
+      ],
+    )
     self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/remote.png"))
 
   def test_unclosed_html_comment_fails_closed(self):

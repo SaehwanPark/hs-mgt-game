@@ -103,7 +103,7 @@ def _html_tags(text: str) -> list[str]:
     while index < len(text):
       character = text[index]
       if quote is not None:
-        if character == quote and text[index - 1] != "\\":
+        if character == quote:
           quote = None
       elif character in ("\"", "'"):
         quote = character
