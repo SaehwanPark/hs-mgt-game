@@ -1,0 +1,89 @@
+import copy
+import importlib.util
+import json
+import subprocess
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SCRIPT = ROOT / "scripts" / "check_offline_availability.py"
+POLICY = ROOT / "assets" / "offline-policy.json"
+
+
+class OfflineAvailabilityTests(unittest.TestCase):
+  @classmethod
+  def setUpClass(cls):
+    spec = importlib.util.spec_from_file_location("check_offline_availability", SCRIPT)
+    cls.checker = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(cls.checker)
+    cls.document = json.loads(POLICY.read_text(encoding="utf-8"))
+
+  def test_current_policy_report_is_green(self):
+    report = self.checker.build_report(ROOT, self.document)
+    self.assertEqual(report["status"], "pass")
+    self.assertEqual(report["schema_version"], "offline-policy-report-v1")
+    self.assertEqual(report["resource_count"], 23)
+    self.assertEqual(report["route_count"], 24)
+    self.assertEqual(report["loading_policy_status"], "pass")
+
+  def test_cli_emits_green_json_report(self):
+    result = subprocess.run(
+      ["python3", str(SCRIPT)], cwd=ROOT, capture_output=True, text=True, check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(json.loads(result.stdout)["status"], "pass")
+
+  def test_missing_server_route_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"][1]["urls"] = ["/missing.mjs"]
+    report = self.checker.build_report(ROOT, document)
+    self.assertEqual(report["status"], "fail")
+    self.assertTrue(any("does not route declared URL" in error for error in report["errors"]))
+
+  def test_loading_graph_drift_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"] = [
+      resource
+      for resource in document["embedded_resources"]
+      if resource["source"] != "gui/scene.mjs"
+    ]
+    report = self.checker.build_report(ROOT, document)
+    self.assertEqual(report["status"], "fail")
+    self.assertTrue(any("not embedded in offline policy" in error for error in report["errors"]))
+
+  def test_external_source_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"][1]["source"] = "https://example.test/host-adapter.mjs"
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("source does not exist" in error for error in errors))
+
+  def test_path_escape_and_non_loopback_fail_closed(self):
+    document = copy.deepcopy(self.document)
+    document["server_source"] = "../gui_server.rs"
+    document["local_origin"]["binding"] = "all-interfaces"
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("path escapes repository root" in error for error in errors))
+    self.assertTrue(any("loopback-only" in error for error in errors))
+
+  def test_policy_rejects_wrong_kind_and_duplicate_route(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"][1]["kind"] = "service-worker"
+    document["embedded_resources"][2]["urls"] = ["/host-adapter.mjs"]
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("unsupported kind" in error for error in errors))
+    self.assertTrue(any("duplicate embedded route" in error for error in errors))
+
+  def test_policy_rejects_non_object_and_wrong_schema(self):
+    self.assertEqual(
+      self.checker.validate_definition(ROOT, []),
+      ["offline policy document must be an object"],
+    )
+    document = copy.deepcopy(self.document)
+    document["schema_version"] = "offline-policy-v0"
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("unsupported offline policy schema_version" in error for error in errors))
+
+
+if __name__ == "__main__":
+  unittest.main()

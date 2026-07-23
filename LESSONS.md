@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Verify the Embedded GUI Route Graph, Not Only the Source Graph
+
+- Context: The live GUI source graph was complete and loading-policy checked,
+  but the loopback Rust host embedded only a subset of those modules.
+- Risk: A normal-checkout user could receive the entrypoint while browser module
+  requests returned 404, making the nominal offline surface incomplete.
+- Resolution: Add explicit embedded routes for every live module, the injected
+  host adapter, and catalogs; compare the route table to the loading policy and
+  test every current route through the local server.
+- Prevention: Treat source closure and delivery closure as separate contracts;
+  re-open this evidence when adding a module, catalog, service worker, cache, or
+  deployed origin.
+
 ## Audit the Live Module Graph Before Adding Loading Machinery
 
 - Context: The live GUI renders the board inline and generates audio locally,

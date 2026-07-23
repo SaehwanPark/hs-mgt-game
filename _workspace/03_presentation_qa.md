@@ -2121,3 +2121,71 @@ legal clearance, human comprehension, or educational effectiveness.
   contract checks remain part of the final verification gate.
 
 ---
+# Presentation QA — Phase 11.2 offline package completeness v0.13.3
+
+## Status
+
+`pass` for the bounded local package and route-closure contract. This is
+technical delivery QA, not browser cache, low-power-device, compatibility,
+lived accessibility, legal, or human approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/96_implementation_plan_visual-audio-phase11-offline-package-v0.13.3.md`.
+- Roadmap gate: Phase 11.2 offline operation only.
+- Produced artifacts: `assets/offline-policy.json`,
+  `scripts/check_offline_availability.py`, `tests/test_offline_availability.py`,
+  and the expanded `src/gui_server.rs` static route table.
+
+## Information and Causality Findings
+
+- Pass: route availability is delivery evidence and does not add strategic
+  facts, hidden-state inference, load-timing signals, or future-outcome cues.
+- Pass: the local module graph, host adapter, and catalogs are explicit; the
+  Rust host remains the only source of session state and outcomes.
+- Pass: no command, transition, stochastic input, history, hash, replay,
+  debrief, or audio semantic path changed.
+
+## Accessibility and Fallback Findings
+
+- Pass: no loading spinner, timing cue, visual state, or audio behavior was
+  introduced; existing text-first error and presentation fallbacks remain.
+- Pass: a route failure is reported as a recoverable delivery error and cannot
+  alter the simulation or imply a strategic outcome.
+
+## Provenance and Rights Findings
+
+- Pass: every embedded resource is repository-local and mapped to an explicit
+  `include_str!` route; no external module or asset URL is permitted.
+- Pass: the offline policy reuses the v0.13.2 loading-policy report and keeps
+  release registry/provenance semantics unchanged.
+
+## Authority and Replay Findings
+
+- Pass: the loopback API prefix remains same-origin and the server enforces a
+  loopback bind; browser delivery remains presentation-only.
+- Pass: route completeness cannot enter transitions or alter immutable history,
+  hashes, replay, or debrief output.
+
+## Required Fixes
+
+None for this bounded package contract. A service worker, cache, external
+origin, or deployed host requires a new review with browser/device evidence.
+
+## Residual Risks and Evidence Limits
+
+Static route closure does not establish browser cache persistence, load timing,
+decode/render latency, memory use, low-power behavior, compatibility,
+screen-reader behavior, lived accessibility, legal clearance, human
+comprehension, or educational effectiveness.
+
+## Verification Evidence
+
+- Focused offline-policy tests, CLI report, Rust route-closure test, and the
+  existing loading-policy report pass.
+- Full Python/Rust, release, asset, security, documentation, and visual/audio
+  contract checks pass for the final PR gate.
+
+---

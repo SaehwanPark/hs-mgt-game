@@ -2455,9 +2455,9 @@ open.
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
 normalization, current catalog-level missing-asset fallback, raster
 release/preview boundary, current runtime-generated audio packaging decision,
-and the live no-lazy/no-preload loading policy are machine-checked in
-v0.12.97–v0.13.2; runtime measurements, offline, device, and compatibility
-gates remain open.
+and the live no-lazy/no-preload loading policy, and the loopback offline
+package are machine-checked in v0.12.97–v0.13.3; runtime measurements,
+low-power-device, and compatibility gates remain open.
 
 ### Targets to define
 
@@ -2490,7 +2490,10 @@ gates remain open.
   `assets/loading-policy.json`, `scripts/check_loading_policy.py`, and
   `tests/test_loading_policy.py`; the current live surface has no preload
   directive, and future file-backed assets require explicit loading metadata.
-- [ ] Offline operation verified.
+- [x] Offline operation verified. Evidence: `assets/offline-policy.json`,
+  `scripts/check_offline_availability.py`, `tests/test_offline_availability.py`,
+  and the Rust GUI-server route-closure test; every current live module,
+  host-adapter, and catalog is embedded and served from the loopback host.
 - [x] Missing-asset fallback tested. Evidence: `tests/test_asset_fallback.py`
   enumerates the live catalogs and visual registry.
 - [ ] Low-power device test completed.
@@ -2604,6 +2607,23 @@ gates remain open.
   items for the current inline/generated surface. Browser load order, cache,
   decode/render/memory, offline operation, low-power devices, compatibility,
   screenshots, asset quality, and human quality remain open.
+
+### v0.13.3 current offline package completeness evidence
+
+- `assets/offline-policy.json` defines `offline-policy-v1` for the live
+  entrypoint, injected host adapter, complete local module graph, and two live
+  catalogs. It requires a loopback-only origin and same-origin API prefix.
+- `scripts/check_offline_availability.py` emits a deterministic
+  `offline-policy-report-v1`, reuses the v0.13.2 loading-policy report, checks
+  repository-local source paths, and requires every declared source and URL to
+  appear as an `include_str!`-backed route in `src/gui_server.rs`.
+- `tests/test_offline_availability.py` and the Rust GUI-server route-closure
+  test cover the green report/CLI, complete current route set, graph drift,
+  missing routes, path/schema, external-source, and binding failures.
+- This closes only current offline package route completeness from a normal
+  checkout. It does not establish service-worker behavior, cache persistence,
+  browser compatibility, low-power suitability, screenshots, asset quality, or
+  human comprehension.
 
 ---
 

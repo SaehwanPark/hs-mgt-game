@@ -56,6 +56,12 @@ preload, external/escaped entrypoint sources, path/scope, or future-policy
 metadata violations. This is static policy evidence, not browser order, cache,
 decode, memory, offline, device, compatibility, or human-quality evidence.
 
+`assets/offline-policy.json` and `scripts/check_offline_availability.py` verify
+that the loopback Rust GUI embeds the complete live module graph, host adapter,
+and catalogs from repository-local source. This closes current package route
+completeness only; it is not service-worker, cache-persistence, deployment,
+browser-compatibility, device, or human-quality evidence.
+
 `scripts/optimize_release_svg.py --check` verifies that every tracked release
 SVG is idempotently normalized and that registry hashes and the release
 manifest match. `--write` applies only outer/inter-tag whitespace normalization

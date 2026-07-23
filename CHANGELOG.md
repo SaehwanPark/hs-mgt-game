@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.3] - 2026-07-23
+
+- Completed the local embedded route package for the live GUI entrypoint,
+  module graph, host adapter, and catalogs.
+- Added `offline-policy-v1` and a deterministic audit for route/source closure,
+  same-origin loopback binding, and the existing loading-policy boundary.
+- Closed only the current Phase 11.2 offline-operation item; no service worker,
+  CDN, browser cache, compatibility, or device-performance claim was added.
+
 ## [0.13.2] - 2026-07-23
 
 - Added `loading-policy-v1` and a deterministic live-entrypoint audit proving

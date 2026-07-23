@@ -5580,6 +5580,20 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   network, host DTO, simulation, stochastic input, history/hash, replay,
   debrief, or runtime performance behavior.
 
+### Visual/audio Phase 11.2 offline package completeness (v0.13.3)
+
+- Status: In progress; the live loopback GUI now embeds every current module,
+  host adapter, and catalog route, while browser cache, device, compatibility,
+  and human evidence remains open.
+- Done: `offline-policy-v1`; deterministic route/source report; complete local
+  module-graph route table; host-adapter/catalog embedding; same-origin API and
+  loopback-binding checks; loading-policy reuse; and focused route/policy tests.
+- Not Yet Done: browser cache persistence, low-power-device, browser
+  compatibility, screenshot, asset-quality, and human evaluation evidence.
+- Deferred / Non-Goals: no service worker, CDN, external dependency, deployed
+  environment, host DTO, simulation, stochastic input, history/hash, replay,
+  debrief, or audio behavior change.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -1,0 +1,178 @@
+{
+  "schema_version": "offline-policy-v1",
+  "server_source": "src/gui_server.rs",
+  "entrypoint_source": "gui/index.html",
+  "entrypoint_urls": [
+    "/",
+    "/index.html"
+  ],
+  "local_origin": {
+    "binding": "loopback-only",
+    "default_bind": "127.0.0.1:7878",
+    "api_prefix": "/api/v1/sessions"
+  },
+  "embedded_resources": [
+    {
+      "urls": [
+        "/",
+        "/index.html"
+      ],
+      "source": "gui/index.html",
+      "kind": "entrypoint"
+    },
+    {
+      "urls": [
+        "/host-adapter.mjs"
+      ],
+      "source": "gui/host-adapter.mjs",
+      "kind": "host-adapter"
+    },
+    {
+      "urls": [
+        "/ambience-contract.mjs"
+      ],
+      "source": "gui/ambience-contract.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/app.mjs"
+      ],
+      "source": "gui/app.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/asset-availability.mjs"
+      ],
+      "source": "gui/asset-availability.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/asset-credits-renderer.mjs"
+      ],
+      "source": "gui/asset-credits-renderer.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/asset-credits.mjs"
+      ],
+      "source": "gui/asset-credits.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/audio-cue-contract.mjs"
+      ],
+      "source": "gui/audio-cue-contract.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/audio-priority-contract.mjs"
+      ],
+      "source": "gui/audio-priority-contract.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/audio.mjs"
+      ],
+      "source": "gui/audio.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/consequence-links.mjs"
+      ],
+      "source": "gui/consequence-links.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/facility-components.mjs"
+      ],
+      "source": "gui/facility-components.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/first-month.mjs"
+      ],
+      "source": "gui/first-month.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/metric-visualizations.mjs"
+      ],
+      "source": "gui/metric-visualizations.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/music-stem-contract.mjs"
+      ],
+      "source": "gui/music-stem-contract.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/operational-overlays.mjs"
+      ],
+      "source": "gui/operational-overlays.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/playtest.mjs"
+      ],
+      "source": "gui/playtest.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/regional-board.mjs"
+      ],
+      "source": "gui/regional-board.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/resolution-sequence.mjs"
+      ],
+      "source": "gui/resolution-sequence.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/scene.mjs"
+      ],
+      "source": "gui/scene.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/visual.mjs"
+      ],
+      "source": "gui/visual.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
+        "/audio-catalog.json"
+      ],
+      "source": "gui/audio-catalog.json",
+      "kind": "catalog"
+    },
+    {
+      "urls": [
+        "/visual-catalog.json"
+      ],
+      "source": "gui/visual-catalog.json",
+      "kind": "catalog"
+    }
+  ]
+}

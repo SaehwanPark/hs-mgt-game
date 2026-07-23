@@ -293,13 +293,57 @@ async fn static_asset(uri: Uri) -> Response {
       "text/javascript; charset=utf-8",
       include_str!("../gui/app.mjs").to_string(),
     ),
+    "/ambience-contract.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/ambience-contract.mjs").to_string(),
+    ),
+    "/asset-availability.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/asset-availability.mjs").to_string(),
+    ),
+    "/asset-credits-renderer.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/asset-credits-renderer.mjs").to_string(),
+    ),
+    "/asset-credits.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/asset-credits.mjs").to_string(),
+    ),
+    "/audio-cue-contract.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/audio-cue-contract.mjs").to_string(),
+    ),
+    "/audio-priority-contract.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/audio-priority-contract.mjs").to_string(),
+    ),
     "/audio.mjs" => (
       "text/javascript; charset=utf-8",
       include_str!("../gui/audio.mjs").to_string(),
     ),
+    "/consequence-links.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/consequence-links.mjs").to_string(),
+    ),
+    "/facility-components.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/facility-components.mjs").to_string(),
+    ),
     "/first-month.mjs" => (
       "text/javascript; charset=utf-8",
       include_str!("../gui/first-month.mjs").to_string(),
+    ),
+    "/metric-visualizations.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/metric-visualizations.mjs").to_string(),
+    ),
+    "/music-stem-contract.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/music-stem-contract.mjs").to_string(),
+    ),
+    "/operational-overlays.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/operational-overlays.mjs").to_string(),
     ),
     "/host-adapter.mjs" => (
       "text/javascript; charset=utf-8",
@@ -308,6 +352,18 @@ async fn static_asset(uri: Uri) -> Response {
     "/playtest.mjs" => (
       "text/javascript; charset=utf-8",
       include_str!("../gui/playtest.mjs").to_string(),
+    ),
+    "/regional-board.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/regional-board.mjs").to_string(),
+    ),
+    "/resolution-sequence.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/resolution-sequence.mjs").to_string(),
+    ),
+    "/scene.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/scene.mjs").to_string(),
     ),
     "/visual.mjs" => (
       "text/javascript; charset=utf-8",
@@ -392,6 +448,43 @@ mod tests {
       .parse::<u16>()
       .unwrap();
     (status, body.to_string())
+  }
+
+  #[tokio::test]
+  async fn live_gui_embeds_complete_offline_module_graph() {
+    let (address, server) = test_server().await;
+    let paths = [
+      "/",
+      "/index.html",
+      "/host-adapter.mjs",
+      "/ambience-contract.mjs",
+      "/app.mjs",
+      "/asset-availability.mjs",
+      "/asset-credits-renderer.mjs",
+      "/asset-credits.mjs",
+      "/audio-cue-contract.mjs",
+      "/audio-priority-contract.mjs",
+      "/audio.mjs",
+      "/consequence-links.mjs",
+      "/facility-components.mjs",
+      "/first-month.mjs",
+      "/metric-visualizations.mjs",
+      "/music-stem-contract.mjs",
+      "/operational-overlays.mjs",
+      "/playtest.mjs",
+      "/regional-board.mjs",
+      "/resolution-sequence.mjs",
+      "/scene.mjs",
+      "/visual.mjs",
+      "/audio-catalog.json",
+      "/visual-catalog.json",
+    ];
+    for path in paths {
+      let (status, body) = request(address, "GET", path, None).await;
+      assert_eq!(status, 200, "{path}: {body}");
+      assert!(!body.is_empty(), "{path} returned an empty body");
+    }
+    server.abort();
   }
 
   #[tokio::test]
