@@ -31,7 +31,7 @@ retains visible-only classification for older or malformed envelopes.
 ## Handoff and review
 
 - Base: `main` at v0.12.92.
-- Working branch: to be created after implementation verification.
+- Working branch: `feat/visual-audio-phase11-live-checkpoint-v0.12.96`.
 - Pull request: pending.
 - Presentation-domain QA: pass for the bounded contract; evidence limits are
   recorded in `_workspace/03_presentation_qa.md`.
@@ -324,5 +324,52 @@ This closes only the dedicated live replay metadata/history handoff. Full
 campaign replay visual continuity, save/load persistence, replay
 regeneration/playback, screenshots, performance, compatibility, asset quality,
 human evaluation, and later Phase 11.2–13 gates remain open.
+
+---
+# Final Handoff — Visual/audio Phase 11.1 live checkpoint continuity v0.12.96
+
+## Result
+
+The live competitive host now supports an explicit in-memory checkpoint save /
+restore operation. The browser exposes labeled controls and refreshes all
+typed host presentation reads after restore while preserving the current view
+on failure.
+
+## Changed files and behavior
+
+- Added `competitive-save-v1`, MCP `save_session`/`load_session`, loopback
+  save/load routes, and cloned per-session host checkpoints.
+- Added `saveSession`/`loadSession`, strict metadata validation, accessible
+  controls, and host-read refresh of presentation/action/history/replay/
+  regional-world surfaces; no browser serialization, durable file, replay
+  regeneration, simulation, audio, or asset path changed.
+- Added Rust checkpoint/hash and transport assertions plus
+  `tests/test_phase11_live_checkpoint.py`; updated roadmap, ledger, canonical
+  records, lessons, generated credits/version projections, and release notes.
+
+## Handoff and review
+
+- Base: `main` at v0.12.95.
+- Working branch: to be created after implementation verification.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Verification
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 569 passed, including the live checkpoint continuity test.
+- Release metadata, 375 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+## Limits and next slice
+
+This closes only the current in-memory live checkpoint and visible refresh
+evidence. Durable file persistence, cross-process/browser-refresh recovery,
+full campaign save/load/replay continuity, replay regeneration/playback,
+screenshots, performance, compatibility, asset quality, human evaluation, and
+later Phase 11.2–13 gates remain open.
 
 ---

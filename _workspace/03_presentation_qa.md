@@ -1747,3 +1747,61 @@ None for this bounded contract.
   security/generation checks, and visual/audio contract audit passed.
 
 ---
+# Presentation QA — Phase 11.1 live checkpoint continuity v0.12.96
+
+## Status
+
+`pass` for the bounded live competitive in-memory checkpoint save/restore
+handoff. This is technical presentation QA, not human accessibility,
+usability, legal, educational, audio-quality, durable-persistence, or
+full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/90_implementation_plan_visual-audio-phase11-live-checkpoint-v0.12.96.md`.
+- Changed paths: `src/mcp/session.rs`, `src/mcp/server.rs`,
+  `src/gui_server.rs`, `gui/host-adapter.mjs`, `gui/app.mjs`,
+  `gui/index.html`, focused tests, and project records.
+- Roadmap gate: current in-memory live checkpoint and visible refresh only.
+
+## Information and Causality Findings
+
+- Pass: the host clones/restores the current `GameSession`; no browser payload
+  contains hidden state, resolved randomness, or private rival detail.
+- Pass: the save envelope exposes only operation, identity, visible count, and
+  latest visible hash; restore refreshes all current reads from the host.
+- Pass: restored history/hash state and deterministic continuation are asserted
+  in Rust and loopback transport tests.
+
+## Accessibility and Fallback Findings
+
+- Pass: Save and Restore controls are labeled, status text is live, and busy /
+  disabled behavior is explicit.
+- Pass: missing, malformed, unsupported, unknown, missing-checkpoint, and
+  failed-refresh operations preserve the current view and expose recovery.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, device compatibility, performance, durable
+  persistence, or human comprehension.
+
+## Provenance and Authority Findings
+
+- Pass: checkpoint mutation is host-owned; the browser does not serialize,
+  calculate hashes, submit transitions, or restore state locally.
+- Pass: no asset, audio, replay-regeneration, or durable-file path was added.
+- Evidence limit: this does not establish cross-process persistence, legal
+  clearance, or human review.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Verification Evidence
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 569 passed, including the live checkpoint continuity test.
+- Release metadata, 375 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+---

@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.96] - 2026-07-23
+
+- Added host-owned in-memory checkpoint save/restore operations through MCP,
+  the loopback GUI, and the local adapter, cloning and restoring the current
+  session without browser serialization or transition-rule changes.
+- Added accessible save/restore controls, strict checkpoint metadata
+  validation, and host-read refresh of presentation, action, history, replay,
+  and regional-world surfaces after restore; failed operations preserve the
+  current view.
+- Added Rust, MCP/transport, Node, and Python coverage while keeping durable
+  file persistence, cross-process recovery, full campaign continuity,
+  screenshots, performance, compatibility, and human-quality gates open.
+
 ## [0.12.95] - 2026-07-23
 
 - Added a versioned, non-mutating `competitive-replay-v1` projection through

@@ -523,3 +523,56 @@ screenshots, performance, compatibility, asset quality, human accessibility,
 legal clearance, and educational benefit remain open.
 
 ---
+# Request Summary — Visual/audio Phase 11.1 live checkpoint continuity v0.12.96
+
+## Authorized outcome
+
+Expose an explicit host-owned in-memory checkpoint save/restore operation for
+the live competitive GUI. Refresh visible host presentation, action catalog,
+history, replay, and regional-world reads after a successful restore; preserve
+the current view on failure and keep durable persistence/full-campaign claims
+open.
+
+## Target slice
+
+- Add `competitive-save-v1`, `save_session`, and `load_session` over cloned
+  host sessions.
+- Add loopback save/load routes and `saveSession`/`loadSession` adapter methods.
+- Add accessible browser controls, strict envelope validation, and a host-read
+  refresh after restore.
+- Add deterministic Rust, transport, Node, and Python evidence plus project
+  record/version updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 save/load continuity.
+- `src/model/session_save.rs` and `src/cli/persistence.rs` — existing durable
+  save-artifact contract and its explicit verification boundary.
+- `src/mcp/session.rs` and `src/gui_server.rs` — live ephemeral host store.
+- `gui/app.mjs`, `gui/index.html`, and `gui/host-adapter.mjs` — live browser
+  launch/read/action surface.
+- `_workspace/90_implementation_plan_visual-audio-phase11-live-checkpoint-v0.12.96.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not add durable files, cross-process import, browser serialization,
+  replay regeneration, hidden-state fields, stochastic behavior, new hashes,
+  assets, audio, screenshots, performance, compatibility, or client authority.
+- Do not claim durable persistence, full campaign save/load/replay continuity,
+  or human-quality completion.
+
+## Validation target
+
+Focused checkpoint, replay, history, resolution, session, release metadata,
+asset/security/credits, documentation, JavaScript, formatting, Clippy, and
+full Python/Rust checks.
+
+## Evidence limits
+
+This slice proves one in-memory host checkpoint and visible refresh path only.
+Durable save files, cross-process recovery, full campaign continuity, replay
+regeneration, screenshots, performance, compatibility, asset quality, human
+accessibility, legal clearance, and educational benefit remain open.
+
+---

@@ -11,7 +11,8 @@ use serde::Deserialize;
 use crate::mcp::{
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
   GetPresentationRequest, GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest,
-  McpErrorMessage, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  LoadSessionRequest, McpErrorMessage, SaveSessionRequest, StartSessionRequest, SubmitTurnRequest,
+  ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
@@ -117,6 +118,8 @@ fn gui_router() -> Router {
     )
     .route("/api/v1/sessions/{session_id}/history", get(get_history))
     .route("/api/v1/sessions/{session_id}/replay", get(get_replay))
+    .route("/api/v1/sessions/{session_id}/save", post(save_session))
+    .route("/api/v1/sessions/{session_id}/load", post(load_session))
     .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
     .with_state(GuiState::default())
@@ -223,6 +226,18 @@ async fn get_history(State(state): State<GuiState>, Path(session_id): Path<Strin
 async fn get_replay(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
   with_store(&state, |store| {
     store.get_replay(GetReplayRequest { session_id })
+  })
+}
+
+async fn save_session(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.save_session(SaveSessionRequest { session_id })
+  })
+}
+
+async fn load_session(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.load_session(LoadSessionRequest { session_id })
   })
 }
 
@@ -463,6 +478,36 @@ mod tests {
       history["transitions"][0]["state_hash"]
     );
 
+    let load_path = format!("/api/v1/sessions/{session_id}/load");
+    let (status, body) = request(address, "POST", &load_path, None).await;
+    assert_eq!(status, 400, "{body}");
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(error["code"], "checkpoint_missing");
+
+    let save_path = format!("/api/v1/sessions/{session_id}/save");
+    let (status, body) = request(address, "POST", &save_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(saved["schema_version"], "competitive-save-v1");
+    assert_eq!(saved["operation"], "saved");
+    assert_eq!(saved["transition_count"], 1);
+
+    let (status, body) = request(
+      address,
+      "POST",
+      &turns_path,
+      Some(r#"{"command_text":"hold"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let (status, body) = request(address, "POST", &load_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let loaded: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(loaded["schema_version"], "competitive-save-v1");
+    assert_eq!(loaded["operation"], "loaded");
+    assert_eq!(loaded["transition_count"], 1);
+    assert_eq!(loaded["latest_state_hash"], saved["latest_state_hash"]);
+
     let end_path = format!("/api/v1/sessions/{session_id}/end");
     let (status, body) = request(address, "POST", &end_path, None).await;
     assert_eq!(status, 200, "{body}");
@@ -498,6 +543,10 @@ mod tests {
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert!(error["error"].as_str().unwrap().contains("unknown session"));
     let (status, body) = request(address, "GET", "/api/v1/sessions/missing/replay", None).await;
+    assert_eq!(status, 404);
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert!(error["error"].as_str().unwrap().contains("unknown session"));
+    let (status, body) = request(address, "POST", "/api/v1/sessions/missing/save", None).await;
     assert_eq!(status, 404);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert!(error["error"].as_str().unwrap().contains("unknown session"));

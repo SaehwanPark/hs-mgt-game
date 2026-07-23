@@ -323,6 +323,8 @@ window.HsMgtGameActionAdapter = {
   async getRegionalWorld(sessionId) {},
   async getHistory(sessionId) {},
   async getReplay(sessionId) {},
+  async saveSession(sessionId) {},
+  async loadSession(sessionId) {},
   async getActionCatalog(sessionId) {},
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
@@ -376,6 +378,15 @@ alignment and renders the existing history/replay list; failure preserves the
 current list. Historical committed resolution review remains the separate
 host-read `getResolution(sessionId, turn)` path, and no browser playback or
 replay regeneration is introduced.
+
+When supplied, `saveSession(sessionId)` and `loadSession(sessionId)` return
+`schema_version: "competitive-save-v1"` with `saved`/`loaded` operation,
+identity, committed count, and latest visible hash. The live page exposes
+explicit Save host checkpoint and Restore host checkpoint controls. Restore
+uses the existing host read path to refresh presentation, action catalog,
+history, replay, and regional-world views; failed operations preserve the
+current view. The checkpoint is in-memory for the running host only—no browser
+serialization, durable file, or cross-process persistence is implied.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

@@ -620,6 +620,15 @@ resolution review remains a separate host read. No replay calculation,
 playback simulation, persistence, browser-authored hash, or client authority is
 introduced, and full campaign replay/save-load continuity remains open.
 
+The v0.12.96 Phase 11.1 live-checkpoint slice adds explicit host
+`save_session`/`load_session` operations over one cloned in-memory checkpoint
+per active session. The browser sends only the named operation, validates the
+`competitive-save-v1` metadata, and refreshes the existing host presentation,
+action, history, replay, and regional-world reads after restore. Failed
+operations preserve the current view; no browser serialization, durable file,
+cross-process recovery, replay regeneration, simulation, hash, or client
+authority is introduced.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

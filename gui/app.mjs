@@ -205,6 +205,7 @@ const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const END_SESSION_SCHEMA = "competitive-end-session-v1";
 const HISTORY_SCHEMA = "competitive-history-v1";
 const REPLAY_SCHEMA = "competitive-replay-v1";
+const SAVE_SCHEMA = "competitive-save-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
@@ -408,6 +409,13 @@ function setReadOnlyControls(root, readOnly) {
 function setEndSessionControl(root, enabled) {
   const button = root.querySelector("#session-end");
   if (button) button.disabled = !enabled;
+}
+
+function setCheckpointControls(root, enabled, busy = false) {
+  for (const selector of ["#session-save", "#session-restore"]) {
+    const button = root.querySelector(selector);
+    if (button) button.disabled = !enabled || busy;
+  }
 }
 
 function createStatus(status, label) {
@@ -1362,6 +1370,33 @@ export function renderReplayEnvelope(envelope, root = document) {
   return validation;
 }
 
+export function validateSaveEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") {
+    return { ok: false, code: "empty_save", message: "No host checkpoint envelope was supplied." };
+  }
+  if (envelope.schema_version !== SAVE_SCHEMA) {
+    return { ok: false, code: "unsupported_save_schema", message: "Unsupported host checkpoint schema." };
+  }
+  const latestHash = envelope.latest_state_hash;
+  if (
+    !["saved", "loaded"].includes(envelope.operation)
+    || typeof envelope.session_id !== "string"
+    || !envelope.session_id.trim()
+    || typeof envelope.campaign !== "string"
+    || !envelope.campaign.trim()
+    || !Number.isInteger(envelope.seed)
+    || envelope.seed < 0
+    || !Number.isInteger(envelope.transition_count)
+    || envelope.transition_count < 0
+    || (latestHash !== null && (typeof latestHash !== "string" || !latestHash.trim()))
+    || (envelope.transition_count === 0 && latestHash !== null)
+    || (envelope.transition_count > 0 && typeof latestHash !== "string")
+  ) {
+    return { ok: false, code: "incomplete_save", message: "Host checkpoint metadata is incomplete or misaligned." };
+  }
+  return { ok: true, envelope };
+}
+
 function renderObservationLines(observation, root) {
   const list = root.querySelector("#observation-list");
   list.replaceChildren();
@@ -2057,6 +2092,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
   const historyClient = createHistoryClient({ adapter, root });
   const replayClient = createReplayClient({ adapter, root });
+  const checkpointClient = createCheckpointClient({ adapter, root, recorder, refresh: load });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
@@ -2229,7 +2265,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
     configureRecovery(root, () => load(requestedSessionId), recorder);
     const actionMode = root.querySelector("#action-mode");
-    if (!replacingSession) {
+    if (!replacingSession && !sessionId) {
       setActionControls(root, false);
       renderActions([], root);
       if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
@@ -2326,6 +2362,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       sessionId = requestedSessionId;
       adapter.activateSession?.(requestedSessionId);
       setEndSessionControl(root, typeof adapter.endSession === "function");
+      checkpointClient.setEnabled(
+        typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
+      );
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -2350,6 +2389,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       editingIndex = null;
       sessionId = null;
       adapter.activateSession?.(null);
+      checkpointClient.setEnabled(false);
     }
     return result;
   }
@@ -2358,7 +2398,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, checkpoint: checkpointClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2661,6 +2701,80 @@ export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter
   return { load, get envelope() { return envelope; } };
 }
 
+export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, refresh } = {}) {
+  let envelope = null;
+  let enabled = false;
+  let busy = false;
+
+  function setEnabled(value) {
+    enabled = Boolean(value);
+    setCheckpointControls(root, enabled, busy);
+  }
+
+  async function save(sessionId = adapter?.sessionId) {
+    if (!enabled || !adapter || typeof adapter.saveSession !== "function") {
+      return { ok: false, code: "save_adapter_missing", message: "No host checkpoint-save adapter configured." };
+    }
+    if (busy) return { ok: false, code: "checkpoint_busy" };
+    busy = true;
+    setCheckpointControls(root, enabled, busy);
+    try {
+      const nextEnvelope = await adapter.saveSession(sessionId);
+      const validation = validateSaveEnvelope(nextEnvelope);
+      if (!validation.ok) return validation;
+      envelope = nextEnvelope;
+      sessionLaunchStatus(root, `Host checkpoint saved at ${nextEnvelope.transition_count} committed transitions.`);
+      return validation;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "checkpoint_save_error", message);
+      sessionLaunchStatus(root, `Checkpoint save failed; the current session remains active: ${message}`);
+      return { ok: false, code: "checkpoint_save_error", message };
+    } finally {
+      busy = false;
+      setCheckpointControls(root, enabled, busy);
+    }
+  }
+
+  async function load(sessionId = adapter?.sessionId) {
+    if (!enabled || !adapter || typeof adapter.loadSession !== "function") {
+      return { ok: false, code: "load_adapter_missing", message: "No host checkpoint-restore adapter configured." };
+    }
+    if (busy) return { ok: false, code: "checkpoint_busy" };
+    busy = true;
+    setCheckpointControls(root, enabled, busy);
+    try {
+      const nextEnvelope = await adapter.loadSession(sessionId);
+      const validation = validateSaveEnvelope(nextEnvelope);
+      if (!validation.ok) return validation;
+      const refreshed = typeof refresh === "function" ? await refresh(sessionId) : { ok: true };
+      if (!refreshed.ok) {
+        recordPlaytestFailure(recorder, "checkpoint_refresh_error", refreshed.message ?? "Restored checkpoint could not be refreshed.");
+        showRecovery(root, "The host checkpoint was restored, but the current presentation could not be refreshed. Retry the current read.");
+        return { ok: false, code: "checkpoint_refresh_error", message: refreshed.message, envelope: nextEnvelope };
+      }
+      envelope = nextEnvelope;
+      clearRecovery(root);
+      sessionLaunchStatus(root, `Host checkpoint restored at ${nextEnvelope.transition_count} committed transitions.`);
+      return { ...validation, envelope: nextEnvelope, refreshed: refreshed.envelope ?? refreshed };
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "checkpoint_load_error", message);
+      sessionLaunchStatus(root, `Checkpoint restore failed; the current session remains active: ${message}`);
+      showRecovery(root, `Checkpoint restore failed: ${message}`);
+      return { ok: false, code: error?.code === "checkpoint_missing" ? "checkpoint_missing" : "checkpoint_load_error", message };
+    } finally {
+      busy = false;
+      setCheckpointControls(root, enabled, busy);
+    }
+  }
+
+  root.querySelector("#session-save")?.addEventListener("click", () => save());
+  root.querySelector("#session-restore")?.addEventListener("click", () => load());
+  setCheckpointControls(root, false);
+  return { save, load, setEnabled, get envelope() { return envelope; } };
+}
+
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   currentRegionalLinks = [];
@@ -2806,6 +2920,7 @@ if (typeof document !== "undefined") {
       createResolutionClient,
       createHistoryClient,
       createReplayClient,
+      createCheckpointClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2822,6 +2937,7 @@ if (typeof document !== "undefined") {
       renderHistoryEnvelope,
       validateReplayEnvelope,
       renderReplayEnvelope,
+      validateSaveEnvelope,
     };
   } else {
     const client = createReadOnlyClient({ root: document });
@@ -2844,6 +2960,7 @@ if (typeof document !== "undefined") {
       createResolutionClient,
       createHistoryClient,
       createReplayClient,
+      createCheckpointClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2860,6 +2977,7 @@ if (typeof document !== "undefined") {
       renderHistoryEnvelope,
       validateReplayEnvelope,
       renderReplayEnvelope,
+      validateSaveEnvelope,
     };
   }
 }
@@ -2871,6 +2989,7 @@ export {
   END_SESSION_SCHEMA,
   HISTORY_SCHEMA,
   REPLAY_SCHEMA,
+  SAVE_SCHEMA,
   PLAYTEST_CAPTURE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
   regionalEntitiesToFixture,
