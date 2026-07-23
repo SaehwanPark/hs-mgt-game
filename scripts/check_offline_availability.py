@@ -23,10 +23,11 @@ REQUIRED_FIELDS = (
 )
 RESOURCE_KINDS = {"entrypoint", "host-adapter", "module", "catalog"}
 SOURCE_SCHEME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
-CODE_SCHEME_PATTERN = re.compile(r"\b(?:data|javascript|blob|file|ftp|https?|ws|wss):", re.IGNORECASE)
-HTML_EXTERNAL_SOURCE_PATTERN = re.compile(
-  r"<(?:script|link|img|audio|video|source)\b[^>]*"
-  r"(?:src|href|srcset)\s*=\s*[\"'](?:[A-Za-z][A-Za-z0-9+.-]*:|//)",
+URI_PREFIX_PATTERN = re.compile(r"^(?![A-Za-z][A-Za-z0-9+.-]*::)[A-Za-z][A-Za-z0-9+.-]*:\S")
+STRING_LITERAL_PATTERN = re.compile(r"[\"'](?:\\.|[^\"'\\])*[\"']")
+HTML_TAG_PATTERN = re.compile(r"<(?:script|link|img|audio|video|source)\b[^>]*>", re.IGNORECASE)
+HTML_ATTRIBUTE_PATTERN = re.compile(
+  r"\b(?P<name>src|href|srcset)\s*=\s*(?:\"(?P<double>[^\"]*)\"|'(?P<single>[^']*)'|(?P<bare>[^\s>]+))",
   re.IGNORECASE,
 )
 
@@ -58,6 +59,10 @@ def _valid_string_list(value: object) -> bool:
   return isinstance(value, list) and bool(value) and all(
     isinstance(item, str) and item.strip() for item in value
   )
+
+
+def _external_uri(value: str) -> bool:
+  return value.strip().startswith("//") or bool(URI_PREFIX_PATTERN.match(value.strip()))
 
 
 def validate_definition(root: Path, document: object) -> list[str]:
@@ -194,11 +199,23 @@ def route_errors(root: Path, document: dict) -> list[str]:
     if source_marker not in route_arm:
       errors.append(f"server route does not embed its declared source: {resource['urls']} -> {source}")
     source_text = _resolve(root, source).read_text(encoding="utf-8")
-    normalized_text = source_text.replace("http://www.w3.org/2000/svg", "")
-    if CODE_SCHEME_PATTERN.search(normalized_text):
-      errors.append(f"embedded source contains a non-local URL scheme: {source}")
-    if resource["kind"] == "entrypoint" and HTML_EXTERNAL_SOURCE_PATTERN.search(source_text):
-      errors.append(f"entrypoint contains an external HTML source: {source}")
+    for literal in STRING_LITERAL_PATTERN.findall(source_text):
+      value = literal[1:-1]
+      if value.startswith("http://www.w3.org/2000/svg"):
+        continue
+      if value.startswith("sha256:") and resource["kind"] == "catalog":
+        continue
+      if _external_uri(value):
+        errors.append(f"embedded source contains a non-local URL: {source} -> {value}")
+    if resource["kind"] == "entrypoint":
+      for tag in HTML_TAG_PATTERN.findall(source_text):
+        for match in HTML_ATTRIBUTE_PATTERN.finditer(tag):
+          value = match.group("double") or match.group("single") or match.group("bare") or ""
+          candidates = value.split(",") if match.group("name").lower() == "srcset" else [value]
+          for candidate in candidates:
+            candidate_value = candidate.strip().split()[0] if candidate.strip() else ""
+            if _external_uri(candidate_value):
+              errors.append(f"entrypoint contains an external HTML source: {source} -> {candidate_value}")
   return errors
 
 
@@ -223,7 +240,10 @@ def build_report(root: Path, document: object) -> dict:
   if loading_report["status"] != "pass":
     errors.extend(f"loading policy: {error}" for error in loading_report.get("errors", []))
 
-  expected_sources = set(loading_document.get("live_files", [])) if isinstance(loading_document, dict) else set()
+  loading_files = loading_document.get("live_files") if isinstance(loading_document, dict) else None
+  expected_sources = set(loading_files) if (
+    isinstance(loading_files, list) and all(isinstance(item, str) for item in loading_files)
+  ) else set()
   expected_sources.update({"gui/host-adapter.mjs", "gui/audio-catalog.json", "gui/visual-catalog.json"})
   actual_sources = {resource["source"] for resource in document["embedded_resources"]}
   for source in sorted(expected_sources - actual_sources):

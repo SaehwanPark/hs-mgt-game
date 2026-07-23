@@ -623,7 +623,7 @@ or asset source is needed.
 ## Verification
 
 - Rust tests — 338 passed; `cargo fmt --check`; Clippy with warnings denied.
-- Python discovery — 627 passed, including 11 focused offline-package tests.
+- Python discovery — 630 passed, including 14 focused offline-package tests.
 - Offline/loading/audio policy, release metadata, documentation links, asset,
   security, raster, credits, generation, and visual/audio contract checks
   passed.

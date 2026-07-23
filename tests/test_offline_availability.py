@@ -73,6 +73,30 @@ class OfflineAvailabilityTests(unittest.TestCase):
     errors = self.checker.validate_definition(ROOT, document)
     self.assertTrue(any("must be repository-local" in error for error in errors))
 
+  def test_protocol_relative_and_arbitrary_source_schemes_fail_closed(self):
+    document = copy.deepcopy(self.document)
+    document["embedded_resources"][1]["source"] = "gopher:host-adapter.mjs"
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("must be repository-local" in error for error in errors))
+    self.assertTrue(self.checker._external_uri("//cdn.example/app.js"))
+
+  def test_html_external_attributes_fail_closed(self):
+    tags = self.checker.HTML_TAG_PATTERN.findall(
+      '<script src=//cdn.example/app.js></script>'
+      '<img srcset="./local.png 1x, //cdn.example/remote.png 2x">'
+    )
+    external = []
+    for tag in tags:
+      for match in self.checker.HTML_ATTRIBUTE_PATTERN.finditer(tag):
+        value = match.group("double") or match.group("single") or match.group("bare") or ""
+        candidates = value.split(",") if match.group("name").lower() == "srcset" else [value]
+        external.extend(
+          candidate.strip().split()[0]
+          for candidate in candidates
+          if candidate.strip() and self.checker._external_uri(candidate.strip().split()[0])
+        )
+    self.assertEqual(external, ["//cdn.example/app.js", "//cdn.example/remote.png"])
+
   def test_path_escape_and_non_loopback_fail_closed(self):
     document = copy.deepcopy(self.document)
     document["server_source"] = "../gui_server.rs"
@@ -102,6 +126,16 @@ class OfflineAvailabilityTests(unittest.TestCase):
   def test_malformed_loading_policy_returns_structured_failure(self):
     original = self.checker._loading_document
     self.checker._loading_document = lambda root: []
+    try:
+      report = self.checker.build_report(ROOT, self.document)
+    finally:
+      self.checker._loading_document = original
+    self.assertEqual(report["status"], "fail")
+    self.assertEqual(report["resource_count"], 23)
+
+  def test_malformed_loading_file_shape_returns_structured_failure(self):
+    original = self.checker._loading_document
+    self.checker._loading_document = lambda root: {"live_files": [[]]}
     try:
       report = self.checker.build_report(ROOT, self.document)
     finally:
