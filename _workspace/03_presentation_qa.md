@@ -1938,3 +1938,47 @@ actionable findings.
   contract audit passed.
 
 ---
+# Presentation QA — Phase 11.2 raster scope and bounds v0.13.0
+
+## Status
+
+`pass` for the bounded release-raster prohibition and preview-bounds
+contract. This is technical packaging QA, not raster quality, browser
+rendering, runtime performance, accessibility, legal, compatibility, or human
+approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/94_implementation_plan_visual-audio-phase11-raster-scope-v0.13.0.md`.
+- Roadmap gate: Phase 11.2 raster derivative scope/bounds only.
+
+## Findings
+
+- Pass: release contains zero supported raster files.
+- Pass: all seven previews stay under dimensions/bytes/totals and remain
+  explicitly unverified and non-release.
+- Pass: malformed, missing, promoted, wrong-count, and path cases fail closed.
+- Pass: no asset, browser, audio, simulation, or network behavior changes.
+
+## Evidence limits
+
+Automated scope evidence will not establish raster quality, decode/render/cache
+time, memory use, offline operation, device suitability, browser compatibility,
+contrast, screen-reader behavior, legal clearance, or human comprehension.
+
+## Required fixes
+
+None for this bounded contract; the single code-reviewer pass found and
+resolved two fail-closed scope gaps.
+
+## Verification evidence
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 590 passed, including the eight raster-scope tests.
+- Release metadata, 379 Markdown links, asset registry/credits/release,
+  security/generation checks, optimizer/budget/raster reports, and
+  visual/audio contract audit passed.
+
+---

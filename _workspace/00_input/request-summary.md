@@ -721,3 +721,47 @@ and institution release descriptors. It does not prove every future campaign
 asset, browser rendering quality, device behavior, or human comprehension.
 
 ---
+# Request Summary — Visual/audio Phase 11.2 raster scope and bounds v0.13.0
+
+## Authorized outcome
+
+Define and machine-check the current raster boundary: release packages contain
+no raster derivatives, and the seven unverified portrait preview PNGs remain
+within explicit dimension/byte bounds and outside release eligibility.
+
+## Target slice
+
+- Add `raster-scope-v1` with explicit release prohibition and preview limits.
+- Add a deterministic JSON checker/report for release and preview surfaces.
+- Add focused coverage for current report, malformed/promoted/oversized paths,
+  and no-release-raster enforcement.
+- Update Phase 11.2 evidence and project records/version projections.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.2 raster derivatives.
+- `assets/generation/portrait-previews.json` and
+  `scripts/validate_generation_metadata.py` — existing preview-only boundary.
+- `assets/release` and `assets/registry` — approved release surface.
+- `_workspace/94_implementation_plan_visual-audio-phase11-raster-scope-v0.13.0.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not resize, compress, promote, or add raster assets; do not change source
+  hashes, preview provenance, browser loading, audio, simulation, or network.
+- Do not claim raster quality, decode/render/cache/memory performance, offline,
+  device, compatibility, screenshot, legal, or human-quality completion.
+
+## Validation target
+
+Focused raster-scope tests/checker, full Rust/Python checks, release metadata,
+documentation links, asset registry/release/credits/security/generation
+checks, and the visual/audio contract audit.
+
+## Evidence limits
+
+This slice proves only the current release-raster absence and preview bounds;
+it does not establish a future raster derivative pipeline or runtime behavior.
+
+---

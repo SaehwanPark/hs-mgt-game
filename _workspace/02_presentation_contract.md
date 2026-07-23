@@ -1285,3 +1285,50 @@ descriptors and preserve the no-network/no-authority boundary. Full project
 release gates remain required.
 
 ---
+# Presentation Contract — Phase 11.2 raster scope and bounds v0.13.0
+
+## Goal and authorization
+
+Define the raster packaging boundary for the current repository. The checker
+may inspect release files and the existing unverified portrait-preview
+metadata/PNGs, but may not rewrite, promote, resize, compress, or load them in
+the browser.
+
+## Source and budget ledger
+
+| Surface | Authorized source | Required boundary | Prohibited inference |
+| --- | --- | --- | --- |
+| Release package | `assets/release` | Zero supported raster files | No future raster absence claim |
+| Portrait previews | `assets/generation/portrait-previews` | 2048×2048 max, 3 MiB/file, 24 MiB total | No release eligibility |
+| Preview metadata | `portrait-previews.json` | Seven exact roles, `release_eligible: false`, no release path/registry ID | No provenance completion |
+| Report | `raster-scope-v1` output | Count, bytes, dimensions, status | No decode/render/memory claim |
+
+The preview bounds are an explicit repository review limit, not an assertion
+that 1254×1254 previews are suitable runtime derivatives.
+
+## Accessibility and presentation boundary
+
+No visual/audio runtime surface changes. Existing written equivalents,
+generic fallbacks, pending review status, and preview-only provenance remain
+authoritative.
+
+## Fail-closed behavior
+
+The checker fails on release raster files, missing/malformed PNG headers,
+oversized preview dimensions/bytes/totals, missing preview metadata, promoted
+release paths/registry IDs, or path escapes. It does not silently skip files.
+
+## Explicit non-goals and evidence limits
+
+- No image edit, raster derivative promotion, compression, lazy loading,
+  preload, browser matrix, offline test, device test, decode/render benchmark,
+  memory measurement, screenshot, legal clearance, or human evaluation.
+- Passing proves only current file/scope bounds and metadata separation.
+
+## Verification
+
+Tests must cover current counts/bytes/dimensions, release prohibition,
+oversize/malformed/promotion failures, and deterministic CLI output. Full
+project release gates remain required.
+
+---

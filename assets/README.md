@@ -23,6 +23,7 @@ python3 scripts/generate_asset_credits.py --notices
 python3 scripts/generate_asset_credits.py --runtime
 python3 scripts/check_asset_budget.py
 python3 scripts/optimize_release_svg.py --check
+python3 scripts/check_raster_scope.py
 ```
 
 `assets/asset-budget.json` defines the explicit `asset-budget-v1` limits for
@@ -32,6 +33,12 @@ pass/fail status. It measures only files under `assets/release`; source
 references and generated portrait previews are outside this budget, and a
 passing report is not a runtime performance, cache, decode, offline, or device
 compatibility claim.
+
+`assets/raster-scope.json` and `scripts/check_raster_scope.py` keep the current
+release/preview boundary explicit: supported raster files are prohibited under
+`assets/release`, while the seven unverified portrait previews are bounded and
+remain outside release eligibility. A passing report is scope evidence, not a
+raster-quality, decode, render, cache, device, or browser claim.
 
 `scripts/optimize_release_svg.py --check` verifies that every tracked release
 SVG is idempotently normalized and that registry hashes and the release

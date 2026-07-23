@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep Raster Preview Bounds Separate From Release Eligibility
+
+- Context: The repository has seven 1254×1254 generated portrait previews but
+  intentionally ships no raster derivative in `assets/release`.
+- Risk: Treating preview dimensions or byte limits as release readiness could
+  accidentally promote unverified images or imply runtime suitability.
+- Resolution: Add a scope report that requires zero release raster files,
+  bounds preview files, and rejects release paths/registry IDs while preserving
+  the existing generation metadata gate.
+- Prevention: Keep future raster optimization/promotion as a separate reviewed
+  contract with provenance, accessibility, derivative, and runtime evidence.
+
 ## Enumerate Fallback Coverage Against the Registry
 
 - Context: Selected fallback examples passed, but Phase 11.2 requires
