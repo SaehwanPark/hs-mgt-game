@@ -17,6 +17,7 @@
   "runtime_generated_sources": [
     "gui/audio.mjs",
     "gui/audio-cue-contract.mjs",
+    "gui/audio-direction.mjs",
     "gui/ambience-contract.mjs",
     "gui/music-stem-contract.mjs"
   ],

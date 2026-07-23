@@ -50,6 +50,37 @@ class AudioPackagingTests(unittest.TestCase):
         ["release audio file is not allowed in current scope: assets/release/unexpected.opus"],
       )
 
+  def test_release_tree_symlinks_are_rejected(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      release = root / "assets" / "release"
+      release.mkdir(parents=True)
+      outside = root / "outside"
+      outside.mkdir()
+      try:
+        (release / "linked").symlink_to(outside, target_is_directory=True)
+      except (OSError, NotImplementedError):
+        self.skipTest("symlinks are unavailable")
+      symlinks = self.checker._symlinks(root, "assets/release")
+      self.assertEqual([path.name for path in symlinks], ["linked"])
+      self.assertEqual(
+        self.checker.release_symlink_errors(root, symlinks),
+        ["release tree symlink is not allowed in current scope: assets/release/linked"],
+      )
+
+  def test_release_root_symlink_is_rejected(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      assets = root / "assets"
+      assets.mkdir()
+      target = root / "release-target"
+      target.mkdir()
+      (assets / "release").symlink_to(target, target_is_directory=True)
+      document = copy.deepcopy(self.document)
+      document["release_root"] = "assets/release"
+      errors = self.checker.validate_definition(root, document)
+      self.assertIn("release_root cannot be a symlink", errors)
+
   def test_scope_rejects_escaped_paths_and_wrong_decision(self):
     document = copy.deepcopy(self.document)
     document["release_root"] = "../outside"
@@ -72,8 +103,8 @@ class AudioPackagingTests(unittest.TestCase):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)
       registry = root / "audio.json"
-      registry.write_text(json.dumps({"entries": [{"release_path": "audio/test.opus"}]}), encoding="utf-8")
-      errors, entry_count = self.checker.registry_release_errors(root, ["audio.json"])
+      registry.write_text(json.dumps({"entries": [{"source": "gui/audio.mjs", "release_path": "audio/test.opus"}]}), encoding="utf-8")
+      errors, entry_count = self.checker.registry_release_errors(root, ["audio.json"], {"gui/audio.mjs"})
       self.assertEqual(entry_count, 1)
       self.assertTrue(any("must have an explicit null release_path" in error for error in errors))
 
@@ -82,9 +113,18 @@ class AudioPackagingTests(unittest.TestCase):
       root = Path(directory)
       registry = root / "audio.json"
       registry.write_text(json.dumps({"entries": [{}]}), encoding="utf-8")
-      errors, entry_count = self.checker.registry_release_errors(root, ["audio.json"])
+      errors, entry_count = self.checker.registry_release_errors(root, ["audio.json"], set())
       self.assertEqual(entry_count, 1)
       self.assertTrue(any("must have an explicit null release_path" in error for error in errors))
+
+  def test_registry_sources_must_be_declared(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      registry = root / "audio.json"
+      registry.write_text(json.dumps({"entries": [{"source": "gui/other.mjs", "release_path": None}]}), encoding="utf-8")
+      errors, entry_count = self.checker.registry_release_errors(root, ["audio.json"], {"gui/audio.mjs"})
+      self.assertEqual(entry_count, 1)
+      self.assertTrue(any("outside the declared runtime-generated scope" in error for error in errors))
 
 
 if __name__ == "__main__":

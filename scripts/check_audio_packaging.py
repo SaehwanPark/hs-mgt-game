@@ -38,7 +38,7 @@ def _nonnegative_int(value: object) -> bool:
 
 
 def _relative(root: Path, path: Path) -> str:
-  return path.resolve().relative_to(root.resolve()).as_posix()
+  return path.absolute().relative_to(root.resolve()).as_posix()
 
 
 def validate_definition(root: Path, document: object) -> list[str]:
@@ -62,6 +62,8 @@ def validate_definition(root: Path, document: object) -> list[str]:
     else:
       if not resolved.is_dir():
         errors.append(f"release_root directory does not exist: {release_root}")
+      elif (root / release_root).is_symlink():
+        errors.append("release_root cannot be a symlink")
 
   extensions = document.get("supported_extensions")
   if not isinstance(extensions, list) or not extensions or not all(
@@ -103,11 +105,26 @@ def _files(root: Path, relative_root: str, extensions: set[str]) -> list[Path]:
   )
 
 
+def _symlinks(root: Path, relative_root: str) -> list[Path]:
+  directory = _resolve(root, relative_root)
+  if not directory.is_dir():
+    return []
+  return sorted(path for path in directory.rglob("*") if path.is_symlink())
+
+
 def release_audio_errors(root: Path, files: list[Path]) -> list[str]:
   return [f"release audio file is not allowed in current scope: {_relative(root, path)}" for path in files]
 
 
-def registry_release_errors(root: Path, registry_paths: list[str]) -> tuple[list[str], int]:
+def release_symlink_errors(root: Path, paths: list[Path]) -> list[str]:
+  return [f"release tree symlink is not allowed in current scope: {_relative(root, path)}" for path in paths]
+
+
+def registry_release_errors(
+  root: Path,
+  registry_paths: list[str],
+  runtime_generated_sources: set[str],
+) -> tuple[list[str], int]:
   errors = []
   entry_count = 0
   for registry_path in registry_paths:
@@ -125,7 +142,14 @@ def registry_release_errors(root: Path, registry_paths: list[str]) -> tuple[list
     for index, entry in enumerate(entries):
       if not isinstance(entry, dict):
         errors.append(f"audio registry entry {index} must be an object: {_relative(root, path)}")
-      elif "release_path" not in entry or entry.get("release_path") is not None:
+        continue
+      source = entry.get("source_path", entry.get("source"))
+      if not isinstance(source, str) or source not in runtime_generated_sources:
+        errors.append(
+          f"audio registry entry {index} source is outside the declared runtime-generated scope: "
+          f"{_relative(root, path)}"
+        )
+      if "release_path" not in entry or entry.get("release_path") is not None:
         errors.append(
           f"audio registry entry {index} must have an explicit null release_path in current runtime-generated scope: "
           f"{_relative(root, path)}"
@@ -152,12 +176,18 @@ def build_report(root: Path, document: object) -> dict:
   extensions = set(document["supported_extensions"])
   release_files = _files(root, document["release_root"], extensions)
   errors.extend(release_audio_errors(root, release_files))
+  release_symlinks = _symlinks(root, document["release_root"])
+  errors.extend(release_symlink_errors(root, release_symlinks))
   total_bytes = sum(path.stat().st_size for path in release_files)
   if len(release_files) != document["expected_release_audio_count"]:
     errors.append("release audio file count does not match scope")
   if total_bytes > document["max_release_audio_total_bytes"]:
     errors.append("release audio total bytes exceed scope")
-  registry_errors, registry_entry_count = registry_release_errors(root, document["registry_paths"])
+  registry_errors, registry_entry_count = registry_release_errors(
+    root,
+    document["registry_paths"],
+    set(document["runtime_generated_sources"]),
+  )
   errors.extend(registry_errors)
   return {
     "schema_version": REPORT_SCHEMA_VERSION,
@@ -167,6 +197,7 @@ def build_report(root: Path, document: object) -> dict:
     "release_audio_count": len(release_files),
     "release_audio_total_bytes": total_bytes,
     "release_audio_files": [_relative(root, path) for path in release_files],
+    "release_symlinks": [_relative(root, path) for path in release_symlinks],
     "registry_entry_count": registry_entry_count,
     "runtime_generated_sources": document["runtime_generated_sources"],
   }

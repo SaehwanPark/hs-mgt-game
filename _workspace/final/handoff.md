@@ -537,8 +537,9 @@ have explicit null release paths, and compression is recorded as
 - Base: `main` at v0.13.0.
 - Working branch: `feat/visual-audio-audio-packaging-v0.13.1`.
 - Pull request: pending.
-- Presentation-domain QA: pass for the bounded package contract; one
-  code-reviewer is reserved for the user-requested PR review.
+- Presentation-domain QA: pass for the bounded package contract. The sole
+  code reviewer found two medium-risk fail-closed gaps; source closure and
+  release-tree symlink rejection are fixed, with follow-up review pending.
 
 ## Limits and next slice
 

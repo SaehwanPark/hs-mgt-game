@@ -1987,8 +1987,13 @@ approval.
 
 ## Required Fixes
 
-None for this bounded contract. A future file-backed audio addition requires a
-new reviewed scope with actual codec and browser/device evidence.
+The sole code reviewer identified two medium-risk fail-closed gaps in the
+initial implementation: one registered fixture source was omitted from the
+declared runtime-source closure, and release-tree symlinks were not rejected.
+Both are fixed on the PR branch with source-closure, release-root/child
+symlink checks, and focused regression tests. A future file-backed audio
+addition still requires a new reviewed scope with actual codec and
+browser/device evidence.
 
 ## Residual Risks and Evidence Limits
 
