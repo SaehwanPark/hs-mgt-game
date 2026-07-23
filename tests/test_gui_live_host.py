@@ -47,10 +47,12 @@ class GuiLiveHostTests(unittest.TestCase):
       await adapter.validateTurn("session-1", "hold");
       await adapter.submitTurn("hold");
       await adapter.getResolution("session-1", 1);
+      await adapter.endSession("session-1");
       if (calls[0].path !== "/api/v1/sessions" || calls[0].options.method !== "POST") process.exit(2);
       if (calls[2].path !== "/api/v1/sessions/session-1/validation") process.exit(3);
       if (JSON.parse(calls[3].options.body).command_text !== "hold") process.exit(4);
       if (!calls[4].path.endsWith("/resolution?turn=1")) process.exit(5);
+      if (calls[5].path !== "/api/v1/sessions/session-1/end" || calls[5].options.method !== "POST") process.exit(11);
       fail = true;
       try { await adapter.getPresentation("session-2"); process.exit(6); } catch (error) {
         if (!error.message.includes("unknown session")) process.exit(7);

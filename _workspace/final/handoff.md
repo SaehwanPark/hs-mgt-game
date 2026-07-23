@@ -1,3 +1,54 @@
+# Final Handoff — Visual/audio Phase 11.1 live terminal debrief v0.12.91
+
+## Result
+
+The live competitive host now returns a versioned terminal envelope containing
+the existing debrief plus the same immutable transition history and replay
+metadata that produced it. The loopback GUI forwards an explicit end-session
+request and renders a text-first final history/debrief view with the latest
+state hash and transition count.
+
+## Changed files and behavior
+
+- Extended `EndSessionEnvelope` with terminal schema, turn bounds, history, and
+  replay seed/count/latest-hash metadata for all current host campaigns.
+- Added `POST /api/v1/sessions/{session_id}/end` and `endSession` in the live
+  adapter; successful host termination removes the session and prevents later
+  action, while failure preserves the active view/session.
+- Added terminal envelope validation/rendering, explicit final control state,
+  written empty-state behavior, and optional debrief music selection in
+  `gui/app.mjs`; added the terminal control in `gui/index.html`.
+- Added Rust terminal-alignment, transport, Node, and Python contract tests;
+  updated roadmap/ledger, canonical records, lessons, request/contract/QA,
+  generated credits/version projections, and release notes.
+
+## Verification
+
+- `cargo test` — 330 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 549 passed, including the new live terminal debrief test.
+- Release metadata, documentation links, asset registry/credits/release, and
+  visual/audio contract audit checks passed.
+
+## Handoff and review
+
+- Base: `main` at v0.12.90.
+- Working branch: `feat/visual-audio-phase11-live-debrief-v0.12.91`.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/240
+- Review commit: `62f536b` before this handoff metadata-only amendment.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Limits and next slice
+
+This closes only the current live competitive terminal debrief/replay handoff.
+Full Phase 11.1 facility/overlay/event/history/debrief/save-load/replay
+continuity, full campaign screenshots, performance, compatibility, asset
+quality, human evaluation, and later Phase 11.2–13 gates remain open.
+
+---
+
 # Final Handoff — Visual/audio Phase 11.1 live operational overlays v0.12.90
 
 ## Result

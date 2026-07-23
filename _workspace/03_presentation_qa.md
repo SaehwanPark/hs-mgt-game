@@ -1,3 +1,85 @@
+# Presentation QA — Phase 11.1 live terminal debrief handoff v0.12.91
+
+## Status
+
+`pass` for the bounded live competitive terminal debrief/replay handoff. This
+is technical presentation QA, not human accessibility, usability, legal,
+educational, audio-quality, or full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/85_implementation_plan_visual-audio-phase11-live-debrief-v0.12.91.md`.
+- Changed paths: `src/mcp/session.rs`, `src/gui_server.rs`,
+  `gui/host-adapter.mjs`, `gui/app.mjs`, `gui/index.html`, focused tests, and
+  project records.
+- Roadmap gate: current live competitive terminal history/replay/debrief
+  evidence only.
+
+## Information and Causality Findings
+
+- Pass: the terminal envelope builds history, replay metadata, and debrief
+  lines from one host session history before removal; the browser does not
+  synthesize a retrospective or infer outcomes from hashes.
+- Pass: the final view keeps committed command/hash text and host-authored
+  debrief lines separate from hidden true state, private rival detail, and
+  local presentation state.
+- Pass: an unsupported or failed terminal response leaves the current session
+  active and recoverable; only a validated successful response disables later
+  actions and repeated termination.
+
+## Accessibility and Fallback Findings
+
+- Pass: history, transition count, latest hash, and debrief lines remain
+  written DOM content; empty history/debrief and missing hash values use
+  explicit text.
+- Pass: the terminal control has a descriptive label and is disabled after
+  successful termination. Optional debrief music is not required for meaning.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, viewport rendering, low-power behavior, or human
+  accessibility.
+
+## Provenance and Rights Findings
+
+- Pass: no asset bytes, release paths, or third-party material were added.
+- Pass: generated credits, asset registry/release validation, and hash checks
+  remain green for the existing catalog.
+- Evidence limit: automated provenance checks are not legal clearance or human
+  design/rights approval.
+
+## Authority and Replay Findings
+
+- Pass: `end_session` remains the host's only terminal mutation; the loopback
+  route forwards it without browser transition logic, retries, fetches,
+  WebSockets, or hidden-state imports.
+- Pass: the final replay seed/count/latest hash is host-provided and aligned to
+  the same history array rendered by the browser. The session is unavailable
+  through the host after successful termination.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Residual Risks and Evidence Limits
+
+- Full Phase 11.1 facility/overlay/event/history/debrief/save-load/replay
+  continuity remains open beyond this current live terminal path.
+- Screenshot, performance, low-power, browser compatibility, asset quality,
+  audio usefulness/fatigue, human accessibility, legal clearance, and
+  educational outcomes remain unestablished.
+
+## Verification Evidence
+
+- `cargo test` — 330 passed; `cargo fmt --check`; Clippy with warnings denied.
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 549 passed,
+  including the new live terminal debrief test.
+- Focused terminal, live-host, read-only, and campaign-coverage tests passed.
+- Release metadata, documentation links, asset registry/credits/release, and
+  visual/audio contract audit checks passed.
+
+---
+
 # Presentation QA — Phase 11.1 live operational-overlay binding v0.12.90
 
 ## Status

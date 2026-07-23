@@ -575,6 +575,16 @@ existing operational catalog and uses its generic fallback for unknown IDs.
 This projection does not enter simulation, history, replay, hashes, audio, or
 client authority, and full campaign overlay continuity remains open.
 
+The v0.12.91 Phase 11.1 live-debrief slice extends the existing host terminal
+envelope with a versioned schema, terminal turn bounds, the same immutable
+transition summaries used by history, and replay seed/count/latest-hash
+metadata. The loopback GUI exposes this through a terminal end-session route;
+the browser renders the host debrief beside those summaries and disables later
+action after successful removal of the session from the host store. No browser
+state, replay hash, simulation transition, rival detail, or local debrief
+synthesis is introduced, and full campaign save/load/replay continuity remains
+open.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

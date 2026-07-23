@@ -689,3 +689,76 @@ plausibility, accessibility, learning, or policy validity.
   required before release use.
 - Future audio generation needs the same metadata schema but may require extra
   model/license fields and an acoustic human-review track.
+# Presentation Contract — Phase 11.1 live debrief handoff v0.12.91
+
+## Goal and Authorization
+
+Define the terminal live-session presentation needed to expose the host's
+final debrief while preserving immutable history and replay metadata. The
+browser may render host-provided final text and hashes; it may not generate
+debrief facts or continue a terminated session.
+
+## Player Questions and Consequences
+
+The terminal view should answer: “What was committed, what history/hash can I
+review, and what host-authored lessons are available?” It must not answer
+unreported causality, hidden rival state, probability, or outcome quality by
+itself.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Final history | `EndSessionEnvelope.history` / `TransitionSummary` | Empty-history text remains visible | No local reconstruction of transitions |
+| Replay continuity | `EndSessionEnvelope.replay` | Unavailable hash/count text | No hash generation or replay validation in browser |
+| Debrief | `EndSessionEnvelope.debrief` | Explicit unavailable debrief text | No JavaScript debrief synthesis or scoring |
+| Terminal status | `EndSessionEnvelope.done`, turn, and max turns | Host-response error preserves current view | No local session completion |
+
+## Visual, Motion, and Audio Semantics
+
+The final screen is text-first: committed history, state hash, transition
+count, and debrief lines remain in the DOM. The optional audio client may select
+the existing `debrief` music state after a successful host terminal response;
+audio adds atmosphere only and never carries a terminal fact alone. No new
+asset or motion behavior is introduced.
+
+## Accessibility and Fallbacks
+
+The terminal control has a descriptive label and is disabled after successful
+termination. Empty history, missing replay values, and empty debrief arrays
+use explicit written messages. Existing reduced-motion, text scaling, mute,
+and focus behavior remain the source of truth; automated checks do not claim
+human screen-reader, contrast, or device approval.
+
+## Authority, History, and Replay Boundaries
+
+`end_session` remains the only terminal mutation and host debrief authority.
+The server removes the session after creating the final envelope. The browser
+does not call a transition function, infer from hashes, mutate history, or
+retry a successful terminal call. A failed request leaves the active view and
+session ID unchanged.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Changed JavaScript source hashes must be
+synchronized in the visual registry; generated credits and release checks must
+remain green.
+
+## Verification and Evidence Limits
+
+Rust and transport tests must prove terminal history/replay/debrief alignment,
+session removal, and structured unknown-session errors. Node/Python tests must
+prove schema validation, text rendering, disabled controls, failure
+preservation, syntax, and forbidden hidden-state/network markers. These checks
+do not establish full campaign continuity, persistence, screenshots,
+performance, compatibility, audio usefulness, human accessibility, legal
+clearance, or educational benefit.
+
+## Non-goals and Open Questions
+
+- No save/load format, replay regeneration, screenshot suite, new audio, or
+  additional campaign surface is included.
+- Open: full campaign save/load and replay continuity still requires a later
+  host contract and evidence campaign.
+
+---

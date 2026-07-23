@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.91] - 2026-07-22
+
+- Added a host-authoritative terminal end-session envelope carrying the
+  immutable transition history, replay seed/count/latest hash, and final
+  debrief for live competitive sessions.
+- Added the loopback GUI end-session route, adapter method, and text-first
+  terminal history/debrief view with explicit failure preservation and disabled
+  post-termination controls.
+- Kept full campaign save/load/replay continuity, screenshots, performance,
+  compatibility, asset quality, and human evaluation open.
+
 ## [0.12.90] - 2026-07-22
 
 - Added explicit host-shaped operational-overlay bindings for directly visible

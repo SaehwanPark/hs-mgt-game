@@ -324,6 +324,7 @@ window.HsMgtGameActionAdapter = {
   async getActionCatalog(sessionId) {},
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
+  async endSession(sessionId) {},
   async submitTurn(commandText) {},
   async getCampaignCoverage(sessionId) {},
 };
@@ -350,6 +351,15 @@ When supplied, `getRegionalWorld(sessionId)` returns
 schematic identity map, visible demand/access/process overlays, owned facility
 detail, and lagged public rival signals. Map selection and navigation are local
 presentation state; rival private detail remains explicitly unavailable.
+
+When supplied, `endSession(sessionId)` returns
+`schema_version: "competitive-end-session-v1"`. The host terminal response
+contains the immutable transition summaries, replay seed/count/latest hash, and
+host-authored debrief lines. The page renders those fields as a final
+text-first history/debrief view, disables further action, and does not retry or
+recreate a terminated session. A failed end-session request leaves the current
+presentation active. Optional debrief music is atmospheric only; written
+history, hashes, and debrief text remain complete when audio is muted.
 
 When supplied, `getCampaignCoverage(sessionId)` returns
 `schema_version: "campaign-coverage-v1"` for the `stabilization` or

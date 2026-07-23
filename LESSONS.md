@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Keep Terminal Debrief and Replay on One Host Envelope
+
+- Context: The host already generated final debrief text and removed sessions,
+  but the live browser had no terminal route and could not show the debrief with
+  the history that produced it.
+- Risk: Fetching debrief separately or rebuilding history in JavaScript could
+  produce a visually plausible but misaligned retrospective and could invite a
+  second client-owned terminal state.
+- Resolution: Extend one host-authoritative terminal envelope with immutable
+  transition summaries and replay metadata, render it text-first, and disable
+  post-termination controls only after the host response succeeds.
+- Prevention: Assert that history count, latest hash, replay metadata, and
+  debrief survive one terminal response; keep failed termination recoverable and
+  leave persistence/replay-campaign claims separate.
+
 ## Bind Operational Overlays Only From Explicit Visible Conditions
 
 - Context: The fixture operational-overlay catalog existed before the live
