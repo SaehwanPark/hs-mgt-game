@@ -483,7 +483,8 @@ preview PNGs without editing or promoting images.
 
 - Base: `main` at v0.12.99.
 - Working branch: `feat/visual-audio-phase11-raster-scope-v0.13.0`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/249.
+- Review commit: `2820fe4`.
 - Presentation-domain QA: pass for the bounded contract; the single
   code-reviewer pass found and resolved two fail-closed scope gaps, with no
   remaining findings.
