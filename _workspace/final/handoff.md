@@ -419,7 +419,8 @@ performance or player-facing asset behavior is authorized by this slice.
 
 - Base: `main` at v0.12.97.
 - Working branch: `feat/visual-audio-phase11-svg-optimization-v0.12.98`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/247.
+- Review commit: `64d7bc5`.
 - Presentation-domain QA: pass for the bounded contract; the single
   code-reviewer pass found and resolved one malformed-registry fail-closed edge
   case, with no remaining findings.
