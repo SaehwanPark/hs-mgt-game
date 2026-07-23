@@ -673,3 +673,51 @@ equivalence beyond the tested text/attribute boundary or any runtime
 performance outcome.
 
 ---
+# Request Summary — Visual/audio Phase 11.2 missing-asset fallback v0.12.99
+
+## Authorized outcome
+
+Extend machine-checked missing-asset fallback coverage from selected examples
+to every tracked facility and fictional institution release descriptor. Keep
+the existing written generic fallback boundary and registry/GUI authority
+unchanged.
+
+## Target slice
+
+- Enumerate facility and identity catalogs through their live JavaScript
+  exports.
+- Align every catalog release path to the canonical visual asset registry.
+- Exercise missing, failed, and malformed availability for every descriptor;
+  require fallback mode, null release path, and written equivalents.
+- Update Phase 11.2 evidence and project records/version projections.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.2 missing-asset
+  fallback checklist item.
+- `gui/asset-availability.mjs`, `gui/facility-components.mjs`, and
+  `gui/identity-kits.mjs` — existing fallback and catalog boundaries.
+- `assets/registry/visual-assets.json` — canonical release-path registry.
+- `_workspace/93_implementation_plan_visual-audio-phase11-missing-asset-fallback-v0.12.99.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not change fallback implementation, add/remove assets, optimize files,
+  change audio/simulation/browser authority, or add network access.
+- Do not claim full campaign coverage, browser/device compatibility, runtime
+  performance, human accessibility, or asset-quality completion.
+
+## Validation target
+
+Focused fallback/catalog/registry Node coverage, full Rust/Python checks,
+release metadata, documentation links, asset registry/release/credits/security
+/generation checks, and the visual/audio contract audit.
+
+## Evidence limits
+
+This slice proves catalog-level fallback coverage for current tracked facility
+and institution release descriptors. It does not prove every future campaign
+asset, browser rendering quality, device behavior, or human comprehension.
+
+---

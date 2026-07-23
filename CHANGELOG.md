@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.99] - 2026-07-23
+
+- Expanded missing, failed, malformed, and contradictory asset fallback
+  coverage to all 12 registered facility descriptors and three registered
+  fictional institution descriptors in the live GUI catalogs.
+- Added exact catalog-to-visual-registry release-path alignment assertions and
+  preserved written generic fallback, null release paths, and no-network/
+  no-simulation behavior.
+- Closed only the Phase 11.2 missing-asset fallback checklist item; future
+  campaign coverage, browser/device compatibility, runtime performance, and
+  human-quality gates remain open.
+
 ## [0.12.98] - 2026-07-23
 
 - Enabled a dependency-free whitespace-only normalization pass for the 15

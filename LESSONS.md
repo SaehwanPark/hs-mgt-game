@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Enumerate Fallback Coverage Against the Registry
+
+- Context: Selected fallback examples passed, but Phase 11.2 requires
+  confidence that every current release descriptor degrades safely.
+- Risk: A new facility or institution could be registered and rendered without
+  an exercised generic fallback, leaving an unavailable asset path blank or
+  accidentally authoritative.
+- Resolution: Enumerate live facility and identity catalogs in Node, align the
+  exact release-path set to the visual registry, and exercise missing, failed,
+  malformed, and contradictory availability for every descriptor.
+- Prevention: Keep catalog enumeration and registry alignment in the fallback
+  gate whenever a release descriptor is added; preserve written equivalents,
+  null release paths, and the no-network/no-simulation boundary.
+
 ## Optimize Release Derivatives Without Touching Source Semantics
 
 - Context: Phase 11.2 needed an SVG optimization step, while source sheets

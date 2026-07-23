@@ -643,6 +643,13 @@ idempotence, then refreshes release hashes and the deterministic manifest. It
 does not change source SVGs, geometry, attributes, styles, accessible text,
 browser loading, or runtime performance.
 
+The v0.12.99 Phase 11.2 slice extends test evidence across all current
+facility and fictional institution release descriptors. Node tests enumerate
+the live catalogs, align their release paths to the visual registry, and pass
+missing/failed/malformed availability through the existing written generic
+fallback. No fallback implementation, asset, browser, simulation, or network
+authority changes.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

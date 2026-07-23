@@ -1236,3 +1236,52 @@ count/bytes, malformed/path failures, and registry/manifest alignment. Full
 project release gates remain required.
 
 ---
+# Presentation Contract — Phase 11.2 missing-asset fallback v0.12.99
+
+## Goal and authorization
+
+Define the missing-asset fallback evidence boundary for all current facility
+and fictional institution release descriptors. The existing
+`assetPresentationFor`/catalog helpers remain authoritative; tests may invoke
+them with missing, failed, or malformed availability and inspect their written
+fallback output.
+
+## Source and coverage ledger
+
+| Surface | Authorized source | Required evidence | Prohibited inference |
+| --- | --- | --- | --- |
+| Facility descriptor | `FACILITY_COMPONENTS` | Every release path is registry-backed and fallback-tested | No new facility inference |
+| Institution descriptor | `IDENTITY_KITS` | Every release path is registry-backed and fallback-tested | No identity substitution |
+| Availability | `asset-availability.mjs` | Missing/failed/malformed becomes explicit fallback | No silent asset success |
+| Fallback view | Existing descriptor fallback | Non-empty label/equivalent, null release path | No hidden-state or outcome claim |
+| Registry | `assets/registry/visual-assets.json` | Catalog release-path set aligns exactly | No unregistered file acceptance |
+
+## Accessibility and presentation semantics
+
+Fallback output remains written text with explicit status, reason, source, and
+equivalent fields. No color-only signal, audio cue, animation, network fetch,
+or host/session read is introduced. Existing generic facility and institution
+labels remain the meaning-bearing fallback.
+
+## Fail-closed behavior
+
+Coverage fails if a catalog descriptor lacks a fallback, emits an asset release
+path while unavailable, has an empty equivalent, or references a release path
+absent from the canonical registry. Unknown/contradictory availability remains
+malformed fallback behavior.
+
+## Explicit non-goals and evidence limits
+
+- No new fallback code, asset mutation, registry change, source/release hash
+  change, browser matrix, device test, screenshot, runtime performance test,
+  human accessibility evaluation, or full-campaign asset claim.
+- Passing tests prove only the current enumerated catalog contract under Node;
+  they do not establish browser rendering or human comprehension.
+
+## Verification
+
+Focused Node/Python tests must enumerate all current facility/institution
+descriptors and preserve the no-network/no-authority boundary. Full project
+release gates remain required.
+
+---

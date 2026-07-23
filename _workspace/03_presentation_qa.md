@@ -1893,3 +1893,48 @@ resolved one malformed-registry fail-closed edge case.
   contract audit passed.
 
 ---
+# Presentation QA — Phase 11.2 missing-asset fallback v0.12.99
+
+## Status
+
+`pass` for the bounded catalog-level missing-asset fallback contract. This
+is technical fallback QA, not browser rendering, runtime performance,
+accessibility, legal, compatibility, or human approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/93_implementation_plan_visual-audio-phase11-missing-asset-fallback-v0.12.99.md`.
+- Roadmap gate: Phase 11.2 missing-asset fallback only.
+
+## Findings
+
+- Pass: every facility and institution release descriptor is enumerated.
+- Pass: catalog paths exactly align to the visual registry and every descriptor
+  has fallback fields.
+- Pass: missing, failed, malformed, and contradictory outcomes retain written
+  equivalents and null release paths.
+- Pass: no asset, audio, browser network, simulation, or host authority path
+  changes.
+
+## Evidence limits
+
+Automated Node/Python evidence will not establish browser rendering,
+screen-reader behavior, device compatibility, runtime performance, legal
+clearance, or human comprehension.
+
+## Required fixes
+
+None for this bounded contract; the single code-reviewer pass found no
+actionable findings.
+
+## Verification evidence
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 582 passed, including the expanded fallback coverage.
+- Release metadata, 378 Markdown links, asset registry/credits/release,
+  security/generation checks, optimizer/budget reports, and visual/audio
+  contract audit passed.
+
+---
