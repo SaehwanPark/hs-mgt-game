@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Bind Operational Overlays Only From Explicit Visible Conditions
+
+- Context: The fixture operational-overlay catalog existed before the live
+  regional-world projection carried category bindings.
+- Risk: Mapping every numeric metric to a category would turn presentation
+  vocabulary into an unsupported severity or causality classifier.
+- Resolution: Add an optional host-shaped binding only for named visible
+  conditions, keep raw demand/access/capacity metrics unchanged, and resolve
+  unknown IDs through the registered generic overlay.
+- Prevention: Keep the source ledger beside the DTO and test both bound and raw
+  overlays; do not add a category until the host exposes a direct visible
+  condition or committed history source.
+
 ## Keep Live Facility Vocabulary Host-Shaped
 
 - Context: The regional board exposed four actor-visible facility groups while

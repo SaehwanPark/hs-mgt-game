@@ -1,4 +1,52 @@
-# Final Handoff — Visual/audio Phase 6.1 motion specification v0.12.68
+# Final Handoff — Visual/audio Phase 11.1 live operational overlays v0.12.90
+
+## Result
+
+The current live `competitive-regional-world-v1` projection now binds directly
+visible operational conditions to the existing operational-overlay catalog.
+Raw demand/access/capacity metrics remain raw metrics; unknown explicit IDs use
+the generic overlay fallback.
+
+## Changed files and behavior
+
+- Added optional `operational_overlay_id` projection metadata and deterministic
+  condition bindings in `src/mcp/regional_world.rs`.
+- Resolved explicit catalog IDs and exposed source, written-equivalent,
+  non-color, and DOM accessibility metadata in `gui/regional-board.mjs` and
+  `gui/app.mjs`.
+- Added Rust and Node/Python focused coverage for visible condition bindings,
+  absent conditions, raw metric preservation, fallback, and no-authority rules.
+- Updated the Phase 11.1 ledger/evidence, canonical project records, lessons,
+  generated credits version projections, and v0.12.90 release notes.
+
+## Verification
+
+- `cargo test` — 329 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 546 passed, including the new live operational-overlay
+  test.
+- Release metadata, documentation links, asset registry/credits/release, and
+  visual/audio contract audit checks passed.
+
+## Handoff and review
+
+- Base: `main` at v0.12.89.
+- Working branch: `feat/visual-audio-phase11-live-overlays-v0.12.90`.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Limits and next slice
+
+Full Phase 11.1 facility/overlay/event/history/debrief/save-load/replay
+continuity, screenshots, performance, compatibility, asset quality, human
+evaluation, and later Phase 11.2–13 gates remain open. Remaining overlay
+categories require later host-committed visible sources and must not be inferred
+from arbitrary metrics.
+
+---
+
+# Historical Final Handoff — Visual/audio Phase 6.1 motion specification v0.12.68
 
 ## Result
 

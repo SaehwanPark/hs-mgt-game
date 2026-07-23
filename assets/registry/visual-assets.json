@@ -863,7 +863,7 @@
       "creation_method": "hand-authored deterministic host-DTO scene adapter",
       "license": "project-generated",
       "modifications": "None; maps actor-visible regional-world fields to the existing SVG scene vocabulary.",
-      "original_hash": "sha256:fe62a5ea4902839edfb25b2456d63c090637e0723055c8fa5519d38791153087",
+      "original_hash": "sha256:9f5f4e2e23328c6ce4cadb4932b39f3408d1e54c21ea298e77b725af4334c433",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Mapped identity, facility, status, source, missingness, overlay, and keyboard selection labels",

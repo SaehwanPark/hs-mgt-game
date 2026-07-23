@@ -1,4 +1,84 @@
-# Presentation QA — Phase 11.1 live facility binding v0.12.89
+# Presentation QA — Phase 11.1 live operational-overlay binding v0.12.90
+
+## Status
+
+`pass` for the bounded live operational-overlay binding contract. This is
+technical presentation QA, not human accessibility, usability, legal,
+educational, or full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/84_implementation_plan_visual-audio-phase11-live-overlays-v0.12.90.md`.
+- Changed paths: `src/mcp/regional_world.rs`, `gui/regional-board.mjs`,
+  `gui/app.mjs`, focused tests, and project records.
+- Roadmap gate: Phase 11.1 current live operational-overlay evidence only.
+
+## Information and Causality Findings
+
+- Pass: `operational_overlay_id` is emitted only from direct
+  `PlayerObservation` conditions: unmet demand, active project, financial
+  status, community-trust watch, and explicit intelligence gaps/revisions.
+- Pass: raw demand, access, and staffed-bed overlays remain raw metrics and are
+  not locally reclassified as severity.
+- Pass: catalog labels and priorities remain presentation vocabulary; no hidden
+  intent, severity, probability, causality, or future result is added.
+- Pass: rival facilities and private rival operations remain unavailable.
+
+## Accessibility and Fallback Findings
+
+- Pass: bound overlays retain visible value, source, written equivalent, and
+  DOM-level accessible label; catalog non-color pattern metadata is exposed.
+- Pass: absent conditions remain absent as categories while raw reports remain
+  available.
+- Pass: unknown explicit IDs resolve to `operational-overlay-generic` with
+  unavailable text; no color, motion, or audio is required for meaning.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, device compatibility, or lived accessibility.
+
+## Provenance and Rights Findings
+
+- Pass: no new asset or release file was added.
+- Pass: the changed repository-authored board adapter hash is synchronized in
+  `assets/registry/visual-assets.json`; credits and release checks pass.
+- Evidence limit: automated provenance checks are not legal clearance or human
+  design/rights approval.
+
+## Authority and Replay Findings
+
+- Pass: the optional ID is a read-only host projection; it does not enter
+  commands, transition evaluation, stochastic inputs, state hashes, history,
+  replay, audio, or debrief authority.
+- Pass: browser normalization and DOM attributes are local presentation state;
+  the adapter remains network-free and has no simulation imports.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Residual Risks and Evidence Limits
+
+- Full Phase 11.1 facility/overlay/event/history/debrief/save-load/replay
+  continuity remains open.
+- Screenshot, performance, low-power, browser compatibility, asset quality,
+  audio usefulness/fatigue, human accessibility, legal clearance, and
+  educational outcomes remain unestablished.
+- Remaining catalog categories require later host-committed visible sources;
+  they must not be inferred from arbitrary metrics.
+
+## Verification Evidence
+
+- `python3 -m unittest tests/test_phase11_live_operational_overlays.py`
+- `python3 -m unittest discover -s tests -p 'test_*.py'` — 546 passed.
+- `cargo test` — 329 passed.
+- `cargo fmt --check` and `cargo clippy --all-targets -- -D warnings`.
+- Release metadata, documentation links, asset registry/credits/release, and
+  visual/audio contract audit checks passed.
+
+---
+
+# Historical Presentation QA — Phase 11.1 live facility binding v0.12.89
 
 ## Current slice: Phase 11.1 live facility-component binding v0.12.89
 

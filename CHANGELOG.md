@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.90] - 2026-07-22
+
+- Added explicit host-shaped operational-overlay bindings for directly visible
+  unmet demand, active projects, financial distress, community-trust watch
+  status, and uncertain/stale intelligence conditions.
+- Bound the live regional-board adapter to the existing overlay catalog with
+  source/equivalent text, non-color semantics, deterministic generic fallback,
+  and focused Rust/Node/Python coverage while preserving raw metrics.
+- Kept full campaign overlay/event/history/debrief/save-load/replay coverage,
+  screenshots, performance, compatibility, asset quality, and human evaluation
+  open.
+
 ## [0.12.89] - 2026-07-22
 
 - Bound the four current actor-visible player facility groups to stable

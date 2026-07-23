@@ -2293,6 +2293,27 @@ screenshot gates remain open.
   registry completeness, campaign screenshots, save/load/replay continuity,
   performance, compatibility, and human quality remain open.
 
+### v0.12.90 bounded live operational-overlay evidence and limits
+
+- The actor-visible `RegionalWorldOverlay` projection now carries an optional
+  `operational_overlay_id` only for directly reported conditions: nonzero unmet
+  demand, active capital projects, reported financial distress, community-trust
+  watch status, and explicit uncertain/stale intelligence. Raw demand, access,
+  and staffed-bed metrics remain raw metric overlays without inferred category
+  labels.
+- `gui/regional-board.mjs` resolves explicit IDs through the existing
+  `OPERATIONAL_OVERLAY_SET`, preserves host source text, and exposes catalog
+  label, non-color pattern, source/equivalent text, and generic fallback in the
+  live overlay data and DOM. Unknown IDs use `operational-overlay-generic`.
+- `tests/test_phase11_live_operational_overlays.py` and the Rust projection test
+  prove deterministic binding, absent-condition behavior, raw metric
+  preservation, text-complete fallback, and the unchanged private-rival/
+  network-free boundary.
+- This closes only the currently supported live operational-overlay binding
+  evidence. Full campaign overlay taxonomy, event/history/debrief/save-load/
+  replay continuity, screenshot coverage, performance/compatibility, and human
+  quality remain open.
+
 ### Exit criteria
 
 - No core competitive-campaign entity falls back to an unintended generic representation.
