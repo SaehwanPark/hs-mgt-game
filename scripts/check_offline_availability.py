@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import html
 import importlib.util
 import json
 import re
@@ -30,6 +31,7 @@ HTML_ATTRIBUTE_PATTERN = re.compile(
   r"\b(?P<name>src|href|srcset)\s*=\s*(?:\"(?P<double>[^\"]*)\"|'(?P<single>[^']*)'|(?P<bare>[^\s>]+))",
   re.IGNORECASE,
 )
+ESCAPED_CODEPOINT_PATTERN = re.compile(r"\\u\{([0-9a-fA-F]+)\}|\\u([0-9a-fA-F]{4})|\\x([0-9a-fA-F]{2})")
 
 
 def _resolve(root: Path, relative: str) -> Path:
@@ -62,7 +64,18 @@ def _valid_string_list(value: object) -> bool:
 
 
 def _external_uri(value: str) -> bool:
-  return value.strip().startswith("//") or bool(URI_PREFIX_PATTERN.match(value.strip()))
+  decoded = html.unescape(value)
+
+  def decode_codepoint(match):
+    codepoint = match.group(1) or match.group(2) or match.group(3)
+    try:
+      return chr(int(codepoint, 16))
+    except ValueError:
+      return match.group(0)
+
+  decoded = ESCAPED_CODEPOINT_PATTERN.sub(decode_codepoint, decoded).replace("\\/", "/")
+  decoded = decoded.strip()
+  return decoded.startswith("//") or bool(URI_PREFIX_PATTERN.match(decoded))
 
 
 def validate_definition(root: Path, document: object) -> list[str]:

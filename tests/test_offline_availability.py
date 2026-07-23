@@ -79,6 +79,9 @@ class OfflineAvailabilityTests(unittest.TestCase):
     errors = self.checker.validate_definition(ROOT, document)
     self.assertTrue(any("must be repository-local" in error for error in errors))
     self.assertTrue(self.checker._external_uri("//cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri(r"\u002f\u002fcdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri(r"https\u003a//cdn.example/app.js"))
+    self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/app.js"))
 
   def test_html_external_attributes_fail_closed(self):
     tags = self.checker.HTML_TAG_PATTERN.findall(
@@ -96,6 +99,7 @@ class OfflineAvailabilityTests(unittest.TestCase):
           if candidate.strip() and self.checker._external_uri(candidate.strip().split()[0])
         )
     self.assertEqual(external, ["//cdn.example/app.js", "//cdn.example/remote.png"])
+    self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/remote.png"))
 
   def test_path_escape_and_non_loopback_fail_closed(self):
     document = copy.deepcopy(self.document)
