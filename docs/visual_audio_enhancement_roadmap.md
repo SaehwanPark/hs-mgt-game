@@ -2453,9 +2453,10 @@ open.
 ## Milestone 11.2: Performance and packaging hardening
 
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
-normalization, current catalog-level missing-asset fallback, and raster
-release/preview boundary are machine-checked in v0.12.97–v0.13.0; runtime
-measurements, offline, device, and compatibility gates remain open.
+normalization, current catalog-level missing-asset fallback, raster
+release/preview boundary, and current runtime-generated audio packaging
+decision are machine-checked in v0.12.97–v0.13.1; runtime measurements,
+offline, device, and compatibility gates remain open.
 
 ### Targets to define
 
@@ -2476,7 +2477,10 @@ measurements, offline, device, and compatibility gates remain open.
 - [x] Raster derivatives appropriately sized for the current scope. Evidence:
   `assets/raster-scope.json`, `scripts/check_raster_scope.py`, and
   `tests/test_raster_scope.py`; no raster derivative is currently shipped.
-- [ ] Audio compression reviewed.
+- [x] Audio compression reviewed. Evidence:
+  `assets/audio-packaging-scope.json`, `scripts/check_audio_packaging.py`, and
+  `tests/test_audio_packaging.py`; no file-backed audio is currently shipped,
+  so compression is `not-applicable-runtime-generated`.
 - [ ] Lazy loading implemented where useful.
 - [ ] Preloading limited to high-value assets.
 - [ ] Offline operation verified.
@@ -2556,6 +2560,23 @@ measurements, offline, device, and compatibility gates remain open.
   derivative is added or promoted; raster quality, audio packaging, loading,
   offline/device/compatibility, screenshots, asset quality, and human quality
   remain open.
+
+### v0.13.1 current audio packaging/compression review evidence
+
+- `assets/audio-packaging-scope.json` defines `audio-packaging-scope-v1` for
+  the complete `assets/release` tree, enumerates known audio suffixes, and
+  records zero permitted file-backed audio bytes because the current GUI uses
+  runtime-generated Web Audio recipes.
+- `scripts/check_audio_packaging.py` emits a deterministic
+  `audio-packaging-report-v1`, verifies all declared runtime sources and audio
+  registries, requires null release paths, and fails closed on a known audio
+  file, path escape, malformed scope, or attempted release-path promotion.
+- `tests/test_audio_packaging.py` covers the green report/CLI, release-file
+  rejection, path/schema failures, and registry release-path failures.
+- This closes only the Phase 11.2 audio-compression-review checklist item.
+  No audio file is added or compressed; lazy loading, preload policy, decode
+  and runtime measurements, offline operation, low-power devices, browser
+  compatibility, screenshots, asset quality, and human quality remain open.
 
 ---
 

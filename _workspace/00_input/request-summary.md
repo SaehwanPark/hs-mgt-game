@@ -765,3 +765,56 @@ This slice proves only the current release-raster absence and preview bounds;
 it does not establish a future raster derivative pipeline or runtime behavior.
 
 ---
+# Request Summary — Visual/audio Phase 11.2 audio packaging review v0.13.1
+
+## Scope
+
+Close the Phase 11.2 `Audio compression reviewed` checklist item for the
+current presentation package. The current GUI uses repository-authored Web
+Audio recipes and the release tree contains no file-backed audio. Add a
+machine-checked packaging-scope document and deterministic report that records
+this as an explicit not-applicable compression decision while failing closed if
+audio files are later placed in the release tree without a new reviewed scope.
+
+## Non-goals
+
+- Do not add, transcode, compress, or promote an audio file.
+- Do not change browser playback, audio semantics, simulation, host DTOs,
+  commands, history, hashes, replay, or debriefs.
+- Do not claim runtime decode, loudness, device, offline, or compatibility
+  performance.
+- Do not close lazy loading, preload, offline, low-power-device, browser
+  compatibility, screenshot, asset-quality, or human-evaluation gates.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2.
+- `assets/registry/audio-assets.json` and `gui/audio-catalog.json`.
+- `assets/README.md`, `ARCHITECTURE.md`, `SPEC.md`, and `LESSONS.md`.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  unmet technical slice.
+
+## Expected files
+
+- `assets/audio-packaging-scope.json`
+- `scripts/check_audio_packaging.py`
+- `tests/test_audio_packaging.py`
+- `_workspace/02_presentation_contract.md`
+- `_workspace/03_presentation_qa.md`
+- roadmap, canonical records, lessons, changelog, release metadata, and
+  handoff projections for v0.13.1.
+
+## Validation target
+
+The report must pass with zero release audio files, zero release audio bytes,
+and explicit runtime-generated entries. A temporary release audio file,
+unsupported path, malformed scope, or non-null release path must fail closed.
+Run the focused Python test, the checker CLI, Rust formatting/tests, asset and
+release metadata checks, and the project visual/audio contract audit.
+
+## Generic skills
+
+`simple-code-writer`, `preferred-workflow`, `plan-designer`, and one
+`code-reviewer` are used for implementation and handoff. The repo-local
+presentation contract designer and presentation domain QA are used because the
+  slice changes presentation asset governance, not the live simulation.

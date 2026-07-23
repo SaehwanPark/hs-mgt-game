@@ -1,0 +1,28 @@
+{
+  "schema_version": "audio-packaging-scope-v1",
+  "release_root": "assets/release",
+  "supported_extensions": [
+    ".aac",
+    ".flac",
+    ".m4a",
+    ".mp3",
+    ".ogg",
+    ".opus",
+    ".wav",
+    ".webm"
+  ],
+  "expected_release_audio_count": 0,
+  "max_release_audio_total_bytes": 0,
+  "compression_decision": "not-applicable-runtime-generated",
+  "runtime_generated_sources": [
+    "gui/audio.mjs",
+    "gui/audio-cue-contract.mjs",
+    "gui/audio-direction.mjs",
+    "gui/ambience-contract.mjs",
+    "gui/music-stem-contract.mjs"
+  ],
+  "registry_paths": [
+    "assets/registry/audio-assets.json",
+    "gui/audio-catalog.json"
+  ]
+}

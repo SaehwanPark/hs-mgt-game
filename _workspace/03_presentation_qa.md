@@ -1938,6 +1938,78 @@ actionable findings.
   contract audit passed.
 
 ---
+# Presentation QA — Phase 11.2 audio packaging/compression review v0.13.1
+
+## Status
+
+`pass` for the bounded current-release audio packaging contract. This is
+technical package-scope QA, not codec quality, loudness, decode latency,
+browser/device compatibility, lived accessibility, legal clearance, or human
+approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/95_implementation_plan_visual-audio-phase11-audio-packaging-v0.13.1.md`.
+- Roadmap gate: Phase 11.2 audio compression review only.
+- Produced artifacts: `assets/audio-packaging-scope.json`,
+  `scripts/check_audio_packaging.py`, and `tests/test_audio_packaging.py`.
+
+## Information and Causality Findings
+
+- Pass: the package report is read-only and records packaging status without
+  adding a player-visible game fact or inferring severity, intent, or outcome.
+- Pass: cue, music, and ambience sources remain tied to existing visible
+  interaction, event, stage, and setting contracts.
+- Pass: no host DTO, transition, history, hash, replay, or debrief path changed.
+
+## Accessibility and Fallback Findings
+
+- Pass: the current no-file decision does not remove optional-audio controls or
+  written equivalents; mute, reduced-audio, unsupported, failed, and missing
+  paths remain covered by the existing client contract.
+- Pass: the report and failure messages are text-first and do not rely on
+  color, motion, or sound.
+
+## Provenance and Rights Findings
+
+- Pass: all declared runtime sources exist, registry/catalog entries retain
+  null release paths, and the current GUI catalog has no third-party assets.
+- Pass: known audio suffixes under `assets/release` fail closed, so a future
+  file-backed asset cannot be silently treated as compressed/reviewed.
+
+## Authority and Replay Findings
+
+- Pass: the checker reads package files and registry metadata only; it cannot
+  enter commands, stochastic inputs, simulation transitions, state hashes,
+  immutable history, replay, or debrief output.
+
+## Required Fixes
+
+The sole code reviewer identified two medium-risk fail-closed gaps in the
+initial implementation: one registered fixture source was omitted from the
+declared runtime-source closure, and release-tree symlinks were not rejected.
+Both are fixed on the PR branch with source-closure, release-root/child
+symlink checks, and focused regression tests. A future file-backed audio
+addition still requires a new reviewed scope with actual codec and
+browser/device evidence.
+
+## Residual Risks and Evidence Limits
+
+The evidence does not establish compression quality, codec suitability,
+loudness, fatigue, decode/render/cache time, memory use, offline operation,
+low-power behavior, browser compatibility, legal clearance, screen-reader
+behavior, lived accessibility, human comprehension, learning, or policy
+validity.
+
+## Verification Evidence
+
+- Focused audio packaging tests and CLI report pass.
+- Asset registry, credits, release manifest, budget, raster scope, metadata,
+  and visual/audio contract checks pass.
+
+---
 # Presentation QA — Phase 11.2 raster scope and bounds v0.13.0
 
 ## Status

@@ -1332,3 +1332,81 @@ oversize/malformed/promotion failures, and deterministic CLI output. Full
 project release gates remain required.
 
 ---
+# Presentation Contract — Phase 11.2 audio packaging review v0.13.1
+
+## Goal and Authorization
+
+Record and machine-check the current audio packaging boundary. This slice is
+authorized only to review whether compression applies to the current release
+surface and to add a fail-closed scope report. The current answer is
+`not-applicable-runtime-generated`: browser audio is synthesized from local
+recipes after user gesture, and no audio file is distributed.
+
+## Player Questions and Consequences
+
+The player should be able to understand that optional audio is a presentation
+layer, not a source of additional game facts. Visible cue text, event text,
+history, and debrief content remain complete when audio is muted, unsupported,
+unavailable, or absent from the release package.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| UI/event cue recipe | `gui/audio.mjs` and `gui/audio-cue-contract.mjs` | Explicit visible interaction or committed visible event; playback can be unavailable | Do not infer an outcome from a sound that is not visible in the host response |
+| Music state recipe | `gui/music-stem-contract.mjs` and host-shaped visible resolution context | Active visible page/resolution context; malformed or absent state uses written fallback | Do not encode hidden state, intent, severity, or future outcome |
+| Ambience recipe | `gui/ambience-contract.mjs` and explicit visible presentation setting | Optional, reduced, muted, or unsupported | Do not imply clinical acuity, geography, or real institution identity |
+| Release packaging status | `assets/audio-packaging-scope.json` and audio registries | Read-only package inspection | Do not treat package absence as a simulation state |
+
+## Visual, Motion, and Audio Semantics
+
+- The report uses explicit text fields for `runtime-generated` and
+  `compression-not-applicable`; no visual or auditory signal is required to
+  interpret the packaging result.
+- The checker accepts no file-backed release audio in the current scope. A
+  future file-backed asset requires a separately reviewed codec, source,
+  release derivative, hash, license, size, decode, and accessibility contract.
+- No playback timing, cue priority, volume, music state, or ambience behavior
+  changes in this slice.
+
+## Accessibility and Fallbacks
+
+Mute, cues-only, reduced-audio, unsupported-Web-Audio, failed-playback, and
+missing-audio paths preserve written equivalents and visible source/status
+language. The packaging report itself is text-first. Reduced motion is not
+relevant because no animation is added.
+
+## Authority, History, and Replay Boundaries
+
+The packaging document and checker are read-only presentation/release
+governance. They do not enter commands, transition evaluation, stochastic
+inputs, state hashes, immutable history, replay, or debrief facts. The Rust
+host remains authoritative for all game state and outcomes; the browser remains
+responsible only for optional presentation playback and local preferences.
+
+## Asset Provenance and Release Requirements
+
+Current runtime-generated recipes remain registered with `release_path: null`,
+project-generated provenance, and written equivalents. The scope checker scans
+the release tree for known audio suffixes and requires zero matches. If a
+future file is introduced, it must not be silently covered by this decision;
+the scope document, registry, credits, hashes, security checks, and compression
+evidence must be updated in a new reviewed slice.
+
+## Verification and Evidence Limits
+
+`tests/test_audio_packaging.py` covers the current green report, CLI output,
+release-file rejection, path/schema validation, and registry/catalog release
+path semantics. Automated evidence establishes only the current packaging
+boundary. It does not establish codec quality, loudness, decode latency,
+fatigue, lived accessibility, device performance, browser compatibility,
+human comprehension, licensing counsel, or educational effectiveness.
+
+## Non-Goals and Open Questions
+
+- No audio file is added or compressed.
+- Lazy loading, preload policy, offline operation, low-power testing, browser
+  compatibility, screenshots, and human review remain open roadmap work.
+- If recorded or pre-rendered audio becomes necessary, choose a codec and
+  compression target through a separate plan with actual browser/device
+  evidence rather than changing this report's meaning.
