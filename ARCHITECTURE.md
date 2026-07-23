@@ -665,6 +665,14 @@ codec behavior, host authority, simulation, history, hashes, replay, or
 debriefs, and it does not claim decode, offline, device, browser, or human
 quality evidence.
 
+The v0.13.2 Phase 11.2 loading-policy slice adds a fail-closed static audit of
+the live GUI entrypoint and its declared local module graph. The current
+inline/generated board and runtime-generated audio need neither lazy loading nor preload
+directives; every local module source is declared, and file-backed media,
+speculative preload, external/escaped sources, and symlinked policy paths are
+rejected. No browser loader, host authority, simulation, history/hash, replay,
+debrief, or runtime-performance behavior changes.
+
 Last Reviewed: 2026-07-23
 Status: Verified
 

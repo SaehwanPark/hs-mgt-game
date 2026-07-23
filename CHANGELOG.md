@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.2] - 2026-07-23
+
+- Added `loading-policy-v1` and a deterministic live-entrypoint audit proving
+  that the current inline/generated GUI has no file-backed media, speculative
+  preload, or unlisted local module source.
+- Closed only the Phase 11.2 lazy-loading and preload-policy items for the
+  current surface; no loader, preload directive, media file, browser behavior,
+  or runtime-performance claim was added.
+
 ## [0.13.1] - 2026-07-23
 
 - Added `audio-packaging-scope-v1` and a deterministic checker proving that the

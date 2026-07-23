@@ -2454,9 +2454,10 @@ open.
 
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
 normalization, current catalog-level missing-asset fallback, raster
-release/preview boundary, and current runtime-generated audio packaging
-decision are machine-checked in v0.12.97–v0.13.1; runtime measurements,
-offline, device, and compatibility gates remain open.
+release/preview boundary, current runtime-generated audio packaging decision,
+and the live no-lazy/no-preload loading policy are machine-checked in
+v0.12.97–v0.13.2; runtime measurements, offline, device, and compatibility
+gates remain open.
 
 ### Targets to define
 
@@ -2481,8 +2482,14 @@ offline, device, and compatibility gates remain open.
   `assets/audio-packaging-scope.json`, `scripts/check_audio_packaging.py`, and
   `tests/test_audio_packaging.py`; no file-backed audio is currently shipped,
   so compression is `not-applicable-runtime-generated`.
-- [ ] Lazy loading implemented where useful.
-- [ ] Preloading limited to high-value assets.
+- [x] Lazy loading implemented where useful. Evidence:
+  `assets/loading-policy.json`, `scripts/check_loading_policy.py`, and
+  `tests/test_loading_policy.py`; the current inline/generated live surface
+  has no file-backed asset demand, so no lazy loader is needed.
+- [x] Preloading limited to high-value assets. Evidence:
+  `assets/loading-policy.json`, `scripts/check_loading_policy.py`, and
+  `tests/test_loading_policy.py`; the current live surface has no preload
+  directive, and future file-backed assets require explicit loading metadata.
 - [ ] Offline operation verified.
 - [x] Missing-asset fallback tested. Evidence: `tests/test_asset_fallback.py`
   enumerates the live catalogs and visual registry.
@@ -2577,6 +2584,26 @@ offline, device, and compatibility gates remain open.
   No audio file is added or compressed; lazy loading, preload policy, decode
   and runtime measurements, offline operation, low-power devices, browser
   compatibility, screenshots, asset quality, and human quality remain open.
+
+### v0.13.2 current live loading-policy audit evidence
+
+- `assets/loading-policy.json` defines `loading-policy-v1` for the current
+  live entrypoint and its declared local module graph, records no lazy-loading
+  need and no preload directives, enumerates forbidden file-backed media/preload markers,
+  and names the required future asset loading metadata.
+- `scripts/check_loading_policy.py` emits a deterministic
+  `loading-policy-report-v1`, validates repository-relative live files,
+  rejects symlinked policy paths, scans for preload/media/runtime file-load
+  markers, and requires every local module source referenced by `gui/index.html`
+  to be declared in the policy. Registry metadata may retain release paths; the
+  runtime-load marker only rejects executable file-backed load expressions.
+- `tests/test_loading_policy.py` covers the green report/CLI, preload/media
+  markers, unlisted/external/escaped entrypoint sources, path/scope failures,
+  and incomplete future-policy requirements.
+- This closes only the Phase 11.2 lazy-loading and preload-policy checklist
+  items for the current inline/generated surface. Browser load order, cache,
+  decode/render/memory, offline operation, low-power devices, compatibility,
+  screenshots, asset quality, and human quality remain open.
 
 ---
 

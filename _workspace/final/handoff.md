@@ -536,7 +536,8 @@ have explicit null release paths, and compression is recorded as
 
 - Base: `main` at v0.13.0.
 - Working branch: `feat/visual-audio-audio-packaging-v0.13.1`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/250.
+- Merge commit: `57f530e`; temporary branch removed locally and remotely.
 - Presentation-domain QA: pass for the bounded package contract. The sole
   code reviewer found two medium-risk fail-closed gaps; source closure and
   direct-root, lexical-parent, and nested release-tree symlink rejection are
@@ -545,8 +546,53 @@ have explicit null release paths, and compression is recorded as
 ## Limits and next slice
 
 This closes only the Phase 11.2 audio-compression-review item. File-backed
-audio/codec selection, lazy loading, preload policy, decode/runtime/offline/
-device/compatibility evidence, screenshots, asset quality, human evaluation,
-and the remaining Phase 11.1–13 gates remain open.
+audio/codec selection, browser loading policy, decode/runtime/offline/device/
+compatibility evidence, screenshots, asset quality, human evaluation, and the
+remaining Phase 11.1–13 gates remain open.
+
+---
+# Final Handoff — Visual/audio Phase 11.2 loading-policy audit v0.13.2
+
+## Result
+
+The current live GUI now has an explicit loading-policy audit. Its inline/
+generated regional presentation and runtime-generated audio require neither
+lazy loading nor preload directives; every local module referenced by the live
+HTML entrypoint is declared and scanned.
+
+## Changed files and behavior
+
+- Added `assets/loading-policy.json`, `scripts/check_loading_policy.py`, and
+  `tests/test_loading_policy.py` for deterministic live-file scope, marker,
+  source-closure, path, and future-policy checks.
+- Updated the Phase 11.2 roadmap, canonical records, lessons, asset guidance,
+  version projections, request/contract/QA, and changelog; corrected the prior
+  PR #250 handoff to record its merge and branch cleanup.
+- No loader, preload directive, media file, browser network, host DTO,
+  simulation, history/hash/replay, debrief, or audio behavior changed.
+
+## Verification
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 616 passed, including 15 focused loading-policy and
+  metadata tests.
+- Documentation, release metadata, asset/security/release, budget/raster,
+  audio-packaging, and visual/audio contract checks passed.
+
+## Handoff and review
+
+- Base: `main` at v0.13.1.
+- Working branch: `feat/visual-audio-loading-policy-v0.13.2`.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded static contract; the same single
+  code-reviewer will review the PR.
+
+## Limits and next slice
+
+This closes only the current Phase 11.2 lazy-loading and preload-policy items.
+Browser load order, cache/decode/render/memory measurements, offline operation,
+low-power devices, browser compatibility, screenshots, full campaign
+continuity, asset quality, human evaluation, and later roadmap gates remain
+open.
 
 ---

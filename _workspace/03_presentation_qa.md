@@ -2054,3 +2054,70 @@ resolved two fail-closed scope gaps.
   visual/audio contract audit passed.
 
 ---
+# Presentation QA — Phase 11.2 loading-policy audit v0.13.2
+
+## Status
+
+`pass` for the bounded static live-entrypoint loading contract. This is
+technical policy QA, not browser load-order, cache, decode, memory, device,
+offline, compatibility, lived accessibility, legal, or human approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/96_implementation_plan_visual-audio-phase11-loading-policy-v0.13.2.md`.
+- Roadmap gate: Phase 11.2 lazy-loading and preload policy only.
+- Produced artifacts: `assets/loading-policy.json`,
+  `scripts/check_loading_policy.py`, and `tests/test_loading_policy.py`.
+
+## Information and Causality Findings
+
+- Pass: the report is read-only and does not add a strategic fact, load-timing
+  signal, hidden-state inference, or future-outcome cue.
+- Pass: the exact live entrypoint/module set is declared; the local script
+  source in `gui/index.html` is discovered and included in the report.
+- Pass: no host DTO, command, transition, history, hash, replay, debrief, or
+  audio playback path changed.
+
+## Accessibility and Fallback Findings
+
+- Pass: no loader or preload directive was added, so existing visible text,
+  keyboard, scaling, reduced-motion, mute, and missing-asset fallbacks remain
+  the decision-relevant surfaces.
+- Pass: future policy requirements explicitly include fallback and written
+  equivalent fields before a file-backed asset can be connected.
+
+## Provenance and Rights Findings
+
+- Pass: current live files contain no file-backed media or executable
+  runtime-file-load marker; registry metadata may retain release paths, while
+  policy paths are repository-relative and symlink-rejected.
+- Pass: future asset requirements name registry, budget, trigger, fallback, and
+  provenance fields without promoting an asset.
+
+## Authority and Replay Findings
+
+- Pass: the checker reads local source and policy metadata only; it cannot
+  enter simulation, stochastic inputs, host/session state, hashes, history,
+  replay, or debrief output.
+
+## Required Fixes
+
+None for this bounded presentation contract. A future file-backed asset
+requires a new loading-policy review with browser/device evidence.
+
+## Residual Risks and Evidence Limits
+
+Static marker coverage does not establish actual browser loading order, cache
+behavior, decode/render latency, memory use, offline operation, low-power
+behavior, browser compatibility, screen-reader behavior, lived accessibility,
+legal clearance, human comprehension, or educational effectiveness.
+
+## Verification Evidence
+
+- Focused loading-policy tests and CLI report pass.
+- Existing asset, release, security, metadata, documentation, and visual/audio
+  contract checks remain part of the final verification gate.
+
+---
