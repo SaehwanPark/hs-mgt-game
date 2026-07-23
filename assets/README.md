@@ -22,6 +22,7 @@ python3 scripts/generate_asset_credits.py --check
 python3 scripts/generate_asset_credits.py --notices
 python3 scripts/generate_asset_credits.py --runtime
 python3 scripts/check_asset_budget.py
+python3 scripts/optimize_release_svg.py --check
 ```
 
 `assets/asset-budget.json` defines the explicit `asset-budget-v1` limits for
@@ -31,6 +32,12 @@ pass/fail status. It measures only files under `assets/release`; source
 references and generated portrait previews are outside this budget, and a
 passing report is not a runtime performance, cache, decode, offline, or device
 compatibility claim.
+
+`scripts/optimize_release_svg.py --check` verifies that every tracked release
+SVG is idempotently normalized and that registry hashes and the release
+manifest match. `--write` applies only outer/inter-tag whitespace normalization
+to release derivatives, refreshes their registry hashes, and regenerates the
+manifest; source SVGs and semantic content are not rewritten.
 
 ## Registry contract
 

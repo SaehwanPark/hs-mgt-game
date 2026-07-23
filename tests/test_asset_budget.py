@@ -30,13 +30,13 @@ class AssetBudgetTests(unittest.TestCase):
     self.assertEqual(
       [(item["id"], item["file_count"], item["total_bytes"]) for item in report["budgets"]],
       [
-        ("release-visual-svg", 15, 20681),
-        ("release-package", 15, 20681),
+        ("release-visual-svg", 15, 20198),
+        ("release-package", 15, 20198),
       ],
     )
     self.assertEqual(
       report["budgets"][0]["largest_file"],
-      {"path": "assets/release/visual/svg/utility-plant.svg", "bytes": 1654},
+      {"path": "assets/release/visual/svg/utility-plant.svg", "bytes": 1617},
     )
 
   def test_cli_emits_json_report(self):

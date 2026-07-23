@@ -2452,9 +2452,9 @@ open.
 
 ## Milestone 11.2: Performance and packaging hardening
 
-**Status:** The tracked release-asset byte/file-count budget is defined and
-machine-checked in v0.12.97; optimization, runtime measurements, offline,
-device, and compatibility gates remain open.
+**Status:** The tracked release-asset byte/file-count budget and conservative
+SVG normalization are machine-checked in v0.12.97–v0.12.98; runtime
+measurements, offline, device, and compatibility gates remain open.
 
 ### Targets to define
 
@@ -2470,7 +2470,8 @@ device, and compatibility gates remain open.
 
 - [x] Asset size budget defined. Evidence: `assets/asset-budget.json`,
   `scripts/check_asset_budget.py`, and `tests/test_asset_budget.py`.
-- [ ] SVG optimization enabled.
+- [x] SVG optimization enabled. Evidence: `scripts/optimize_release_svg.py`,
+  `tests/test_svg_optimization.py`, refreshed release hashes, and manifest.
 - [ ] Raster derivatives appropriately sized.
 - [ ] Audio compression reviewed.
 - [ ] Lazy loading implemented where useful.
@@ -2502,6 +2503,24 @@ device, and compatibility gates remain open.
   offline operation, low-power devices, browser compatibility, screenshots,
   asset quality, and human quality remain open. The report is not a runtime
   performance claim.
+
+### v0.12.98 tracked release-SVG optimization evidence
+
+- `scripts/optimize_release_svg.py` normalizes only outer/inter-tag formatting
+  whitespace in the 15 tracked `assets/release/visual/svg/*.svg` derivatives.
+  It compares a parsed tag/attribute/meaningful-text projection before and
+  after, requires idempotence, refreshes visual registry release hashes, and
+  regenerates the release manifest.
+- `svg-optimization-report-v1` reports 15 files and 20,198 bytes after the
+  pass, a 483-byte reduction from the v0.12.97 20,681-byte release package.
+  The release SVG class remains inside the v0.12.97 asset-size budget.
+- `tests/test_svg_optimization.py` covers whitespace-only text preservation,
+  idempotence, current report/CLI output, and missing-release failure.
+- This closes only the SVG optimization checklist item. Geometry/style
+  optimization, raster derivatives, audio compression, lazy loading, preload
+  policy, cache/decode/render/memory measurements, offline operation,
+  low-power devices, browser compatibility, screenshots, asset quality, and
+  human quality remain open. The pass is not a runtime performance claim.
 
 ---
 

@@ -636,6 +636,13 @@ per-file, and total-byte limits. The report reads filesystem byte lengths only;
 it does not optimize assets or establish cache, decode, render, memory,
 offline, device, or browser-compatibility performance.
 
+The v0.12.98 Phase 11.2 slice applies that boundary to the 15 tracked release
+SVG derivatives. `scripts/optimize_release_svg.py` removes only outer and
+inter-tag formatting whitespace, checks an XML semantic projection and
+idempotence, then refreshes release hashes and the deterministic manifest. It
+does not change source SVGs, geometry, attributes, styles, accessible text,
+browser loading, or runtime performance.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

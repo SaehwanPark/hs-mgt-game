@@ -1188,3 +1188,51 @@ empty classes, exceeded limits, and deterministic CLI output. Full project
 quality/release gates remain required.
 
 ---
+# Presentation Contract — Phase 11.2 SVG optimization v0.12.98
+
+## Goal and authorization
+
+Define the SVG optimization boundary for tracked release derivatives. The
+optimizer may remove formatting whitespace between XML tags and outer document
+whitespace only. The resulting release bytes must remain registry/manifest
+hash-aligned and idempotent under the same pass.
+
+## Source and transformation ledger
+
+| Surface | Authorized source | Allowed transformation | Prohibited change |
+| --- | --- | --- | --- |
+| Release SVG bytes | `assets/release/visual/svg/*.svg` | Outer/inter-tag whitespace normalization | Geometry, attributes, styles, URLs |
+| Accessible text | Existing `<title>`, `<desc>`, and text nodes | Byte placement only | Text removal or rewrite |
+| Registry | `assets/registry/visual-assets.json` | Matching `release_hash` refresh | Source/original hash changes |
+| Manifest | `assets/ASSET_RELEASE_MANIFEST.json` | Deterministic regeneration | Unregistered or extra release files |
+| Check report | Optimizer/checker output | File/count/byte/hash status | Runtime performance inference |
+
+## Player-facing and accessibility semantics
+
+No player-facing route, visual catalog, audio cue, motion, or host projection
+changes. Existing SVG titles, descriptions, written equivalents, non-color
+semantics, and fallback behavior remain the meaning-bearing boundary.
+
+## Fail-closed behavior
+
+The checker fails on missing/non-relative roots, malformed SVG/XML, missing
+release files, non-idempotent output, stale registry hashes, or stale release
+manifest data. It must not fetch, rewrite source files, or silently accept an
+untracked release derivative.
+
+## Explicit non-goals and evidence limits
+
+- No geometry simplification, path conversion, style minification, raster
+  derivative work, audio compression, lazy loading, preload policy, browser
+  measurement, render/decode benchmark, offline test, device matrix,
+  screenshot suite, or human evaluation.
+- A passing check proves repository-level normalization and hash alignment, not
+  visual equivalence on every browser or measurable runtime improvement.
+
+## Verification
+
+Tests must cover idempotence, text/attribute preservation, current release
+count/bytes, malformed/path failures, and registry/manifest alignment. Full
+project release gates remain required.
+
+---

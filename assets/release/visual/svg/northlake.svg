@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="title desc">
-  <title id="title">Northlake fictional health-system mark</title>
-  <desc id="desc">Compact release derivative of the fictional Northlake logo mark and wordmark.</desc>
-  <path d="M12 76V20h17l34 31V20h17v56H63L29 45v31z" fill="#315a89"/>
-  <path d="M11 84c14-8 29-8 43 0 12 7 24 7 31 0" fill="none" stroke="#7c4d8f" stroke-linecap="round" stroke-width="7"/>
-  <text x="124" y="58" fill="#17232d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Northlake</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="title desc"><title id="title">Northlake fictional health-system mark</title><desc id="desc">Compact release derivative of the fictional Northlake logo mark and wordmark.</desc><path d="M12 76V20h17l34 31V20h17v56H63L29 45v31z" fill="#315a89"/><path d="M11 84c14-8 29-8 43 0 12 7 24 7 31 0" fill="none" stroke="#7c4d8f" stroke-linecap="round" stroke-width="7"/><text x="124" y="58" fill="#17232d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Northlake</text></svg>

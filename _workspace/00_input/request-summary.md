@@ -625,3 +625,51 @@ cache behavior, low-power suitability, offline operation, compatibility, asset
 quality, legal clearance, or human comprehension.
 
 ---
+# Request Summary — Visual/audio Phase 11.2 SVG optimization v0.12.98
+
+## Authorized outcome
+
+Normalize the tracked release SVG derivatives with a conservative,
+dependency-free whitespace-only pass and machine-check that the result is
+idempotent, hash-aligned, and semantically text-preserving at the repository
+contract level.
+
+## Target slice
+
+- Add an optimizer/checker for `assets/release/visual/svg/*.svg`.
+- Collapse inter-tag formatting whitespace only; preserve text, attributes,
+  styles, dimensions, titles/descriptions, and source files.
+- Refresh registry release hashes and the deterministic release manifest.
+- Add focused tests and update Phase 11.2/project records and version
+  projections.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.2 SVG optimization.
+- `assets/asset-budget.json` — tracked release-asset scope and size evidence.
+- `assets/registry/visual-assets.json` and
+  `assets/ASSET_RELEASE_MANIFEST.json` — release hash authority.
+- `_workspace/92_implementation_plan_visual-audio-phase11-svg-optimization-v0.12.98.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not alter SVG geometry, text nodes, styles, URLs, accessibility content,
+  source files, raster assets, audio, browser loading, or runtime behavior.
+- Do not claim render-time, cache, memory, device, offline, compatibility,
+  screenshot, or human-quality completion.
+
+## Validation target
+
+Focused optimizer/checker tests, full Rust/Python checks, release metadata,
+documentation links, asset registry/release/credits/security/generation
+checks, and the visual/audio contract audit.
+
+## Evidence limits
+
+This slice proves only an idempotent whitespace-normalized release SVG
+derivative and aligned hashes/manifest. It does not establish semantic SVG
+equivalence beyond the tested text/attribute boundary or any runtime
+performance outcome.
+
+---

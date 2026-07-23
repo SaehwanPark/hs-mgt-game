@@ -1,7 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="title desc">
-  <title id="title">Riverside fictional health-system mark</title>
-  <desc id="desc">Compact release derivative of the fictional Riverside logo mark and wordmark.</desc>
-  <path d="M12 18h22c20 0 31 8 31 23 0 10-5 17-14 21l19 16H49L32 66v12H12zM32 34v17h3c7 0 11-3 11-9s-4-8-11-8z" fill="#0b6e69"/>
-  <path d="M11 84c16-9 32-9 48 0 10 6 18 6 26 0" fill="none" stroke="#a95226" stroke-linecap="round" stroke-width="7"/>
-  <text x="124" y="58" fill="#17232d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Riverside</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="96" viewBox="0 0 320 96" role="img" aria-labelledby="title desc"><title id="title">Riverside fictional health-system mark</title><desc id="desc">Compact release derivative of the fictional Riverside logo mark and wordmark.</desc><path d="M12 18h22c20 0 31 8 31 23 0 10-5 17-14 21l19 16H49L32 66v12H12zM32 34v17h3c7 0 11-3 11-9s-4-8-11-8z" fill="#0b6e69"/><path d="M11 84c16-9 32-9 48 0 10 6 18 6 26 0" fill="none" stroke="#a95226" stroke-linecap="round" stroke-width="7"/><text x="124" y="58" fill="#17232d" font-family="system-ui, sans-serif" font-size="34" font-weight="700">Riverside</text></svg>

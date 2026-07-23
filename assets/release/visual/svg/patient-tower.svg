@@ -1,15 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc">
-  <title id="title">Patient tower facility</title>
-  <desc id="desc">Compact fictional patient tower component with visible identity badge and vertical silhouette/type cue; not a capacity claim.</desc>
-  <style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style>
-  <rect width="260" height="160" fill="var(--facility-paper)"/>
-  <rect x="36" y="82" width="188" height="50" rx="7" fill="var(--facility-primary)"/>
-  <rect x="76" y="24" width="88" height="108" rx="7" fill="var(--facility-primary)"/>
-  <path d="M92 40h14v16H92zm30 0h14v16h-14zm30 0h14v16h-14zm-60 28h14v16H92zm30 0h14v16h-14zm30 0h14v16h-14z" fill="var(--facility-paper)" opacity=".9"/>
-  <path d="M66 82h128M58 132h144M120 12v20M108 22h24" stroke="var(--facility-secondary)" stroke-linecap="round" stroke-width="7"/>
-  <rect x="108" y="100" width="24" height="32" fill="var(--facility-paper)"/>
-  <path d="M120 106v16M113 113h14" stroke="var(--facility-secondary)" stroke-width="4"/>
-  <rect x="80" y="30" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/>
-  <text x="98" y="47" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text>
-  <text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">PATIENT TOWER</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc"><title id="title">Patient tower facility</title><desc id="desc">Compact fictional patient tower component with visible identity badge and vertical silhouette/type cue; not a capacity claim.</desc><style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style><rect width="260" height="160" fill="var(--facility-paper)"/><rect x="36" y="82" width="188" height="50" rx="7" fill="var(--facility-primary)"/><rect x="76" y="24" width="88" height="108" rx="7" fill="var(--facility-primary)"/><path d="M92 40h14v16H92zm30 0h14v16h-14zm30 0h14v16h-14zm-60 28h14v16H92zm30 0h14v16h-14zm30 0h14v16h-14z" fill="var(--facility-paper)" opacity=".9"/><path d="M66 82h128M58 132h144M120 12v20M108 22h24" stroke="var(--facility-secondary)" stroke-linecap="round" stroke-width="7"/><rect x="108" y="100" width="24" height="32" fill="var(--facility-paper)"/><path d="M120 106v16M113 113h14" stroke="var(--facility-secondary)" stroke-width="4"/><rect x="80" y="30" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="98" y="47" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text><text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">PATIENT TOWER</text></svg>
