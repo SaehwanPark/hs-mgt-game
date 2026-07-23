@@ -2453,9 +2453,9 @@ open.
 ## Milestone 11.2: Performance and packaging hardening
 
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
-normalization, and current catalog-level missing-asset fallback are
-machine-checked in v0.12.97–v0.12.99; runtime measurements, offline, device,
-and compatibility gates remain open.
+normalization, current catalog-level missing-asset fallback, and raster
+release/preview boundary are machine-checked in v0.12.97–v0.13.0; runtime
+measurements, offline, device, and compatibility gates remain open.
 
 ### Targets to define
 
@@ -2473,7 +2473,9 @@ and compatibility gates remain open.
   `scripts/check_asset_budget.py`, and `tests/test_asset_budget.py`.
 - [x] SVG optimization enabled. Evidence: `scripts/optimize_release_svg.py`,
   `tests/test_svg_optimization.py`, refreshed release hashes, and manifest.
-- [ ] Raster derivatives appropriately sized.
+- [x] Raster derivatives appropriately sized for the current scope. Evidence:
+  `assets/raster-scope.json`, `scripts/check_raster_scope.py`, and
+  `tests/test_raster_scope.py`; no raster derivative is currently shipped.
 - [ ] Audio compression reviewed.
 - [ ] Lazy loading implemented where useful.
 - [ ] Preloading limited to high-value assets.
@@ -2538,6 +2540,22 @@ and compatibility gates remain open.
   host-authority path. This closes only current catalog fallback coverage;
   future campaign assets, browser/device behavior, runtime performance,
   screenshots, asset quality, and human quality remain open.
+
+### v0.13.0 current raster scope and bounds evidence
+
+- `assets/raster-scope.json` defines `raster-scope-v1`: zero supported raster
+  files under `assets/release`; seven non-release preview PNGs bounded at
+  2048×2048, 3 MiB per file, and 24 MiB total; and explicit metadata separation.
+- `scripts/check_raster_scope.py` reports zero release raster files and seven
+  1254×1254 previews totaling 15,097,805 bytes. It fails closed on malformed
+  PNGs, missing/extra paths, oversized files/dimensions/totals, release files,
+  path escapes, or preview release promotion fields.
+- `tests/test_raster_scope.py` covers current report/CLI output, release-raster
+  prohibition, preview limits, malformed PNGs, and invalid scope definitions.
+- This closes only the current raster scope/bounds checklist item. No raster
+  derivative is added or promoted; raster quality, audio packaging, loading,
+  offline/device/compatibility, screenshots, asset quality, and human quality
+  remain open.
 
 ---
 

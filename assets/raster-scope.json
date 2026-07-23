@@ -1,0 +1,12 @@
+{
+  "schema_version": "raster-scope-v1",
+  "release_root": "assets/release",
+  "preview_root": "assets/generation/portrait-previews",
+  "preview_metadata": "assets/generation/portrait-previews.json",
+  "preview_expected_count": 7,
+  "supported_extensions": [".bmp", ".gif", ".jpeg", ".jpg", ".png", ".webp"],
+  "preview_max_width": 2048,
+  "preview_max_height": 2048,
+  "preview_max_file_bytes": 3145728,
+  "preview_max_total_bytes": 25165824
+}

@@ -650,6 +650,12 @@ missing/failed/malformed availability through the existing written generic
 fallback. No fallback implementation, asset, browser, simulation, or network
 authority changes.
 
+The v0.13.0 Phase 11.2 raster slice adds a fail-closed scope report: no
+supported raster files may appear in `assets/release`, and the existing seven
+unverified portrait previews must stay within explicit dimensions/bytes and
+without release paths or registry IDs. No image is edited or promoted, and no
+browser loading or runtime performance behavior is inferred.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

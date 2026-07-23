@@ -5531,6 +5531,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   removal, source/release hash change, audio path, browser network, simulation
   rule, stochastic input, or host-state projection.
 
+### Visual/audio Phase 11.2 raster scope and bounds (v0.13.0)
+
+- Status: In progress; the release package has zero supported raster files and
+  the seven unverified portrait previews have explicit dimension/byte bounds,
+  while raster derivatives and runtime packaging remain incomplete.
+- Done: `raster-scope-v1`; deterministic release/preview report; zero-release-
+  raster assertion; PNG header/dimension/byte/total checks; preview metadata
+  separation; focused malformed/promotion/path tests; and no image mutation.
+- Not Yet Done: raster quality or derivative creation, audio compression,
+  lazy loading, preload policy, cache/decode/render/memory measurements,
+  offline operation, low-power devices, browser compatibility, screenshots,
+  asset-quality review, and human evaluation.
+- Deferred / Non-Goals: no image edit, promotion, source/release hash change,
+  browser/audio/simulation behavior, stochastic input, or runtime claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

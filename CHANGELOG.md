@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.0] - 2026-07-23
+
+- Added `raster-scope-v1` evidence that the release package contains no raster
+  files and that all seven unverified portrait preview PNGs remain within
+  explicit dimension/byte bounds outside release eligibility.
+- Added a deterministic raster-scope report/checker and focused failure tests
+  for release promotion, malformed PNGs, path/type, and preview-boundary
+  violations without editing or promoting images.
+- Closed only the current Phase 11.2 raster scope/bounds item; raster quality,
+  audio packaging, loading/offline/device/compatibility, and human-quality
+  gates remain open.
+
 ## [0.12.99] - 2026-07-23
 
 - Expanded missing, failed, malformed, and contradictory asset fallback

@@ -472,3 +472,34 @@ compatibility, screenshots, human evaluation, and later Phase 11.2–13 gates
 remain open.
 
 ---
+# Final Handoff — Visual/audio Phase 11.2 raster scope and bounds v0.13.0
+
+## Result
+
+Machine-checked zero release raster files and bounded, non-release portrait
+preview PNGs without editing or promoting images.
+
+## Handoff and review
+
+- Base: `main` at v0.12.99.
+- Working branch: `feat/visual-audio-phase11-raster-scope-v0.13.0`.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; the single
+  code-reviewer pass found and resolved two fail-closed scope gaps, with no
+  remaining findings.
+
+## Verification
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 590 passed, including the eight raster-scope tests.
+- Release metadata, 379 Markdown links, asset registry/credits/release,
+  security/generation checks, optimizer/budget/raster reports, and
+  visual/audio contract audit passed.
+
+## Limits and next slice
+
+Raster quality, derivative creation/promotion, audio packaging, loading/offline/
+device/compatibility, screenshots, human evaluation, and later Phase 11.2–13
+gates remain open.
+
+---
