@@ -386,7 +386,8 @@ player-facing asset behavior is authorized by this slice.
 
 - Base: `main` at v0.12.96.
 - Working branch: `feat/visual-audio-phase11-performance-budget-v0.12.97`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/246.
+- Review commit: `0b0a969`.
 - Presentation-domain QA: pass for the bounded contract; the single
   code-reviewer pass found and resolved two fail-closed checker edge cases,
   with no remaining findings.
