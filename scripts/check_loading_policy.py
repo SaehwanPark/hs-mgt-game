@@ -22,10 +22,10 @@ REQUIRED_FIELDS = (
 )
 SCRIPT_SOURCE_PATTERN = re.compile(r"<script\b[^>]*\bsrc\s*=\s*[\"']([^\"']+)[\"']", re.IGNORECASE)
 MODULE_SOURCE_PATTERNS = (
-  re.compile(r"^\s*import\s+(?:[^;\n]*?\sfrom\s+)?[\"']([^\"']+)[\"']", re.MULTILINE),
-  re.compile(r"^\s*export\s+[^;\n]*?\sfrom\s+[\"']([^\"']+)[\"']", re.MULTILINE),
-  re.compile(r"\bimport\s*\(\s*[\"']([^\"']+)[\"']\s*\)"),
+  re.compile(r"^\s*import\s+(?:[^;]*?\sfrom\s+)?[\"']([^\"']+)[\"']", re.MULTILINE | re.DOTALL),
+  re.compile(r"^\s*export\s+[^;]*?\sfrom\s+[\"']([^\"']+)[\"']", re.MULTILINE | re.DOTALL),
 )
+DYNAMIC_MODULE_PATTERN = re.compile(r"\bimport\s*\(([^)]*)\)", re.DOTALL)
 
 
 def _resolve(root: Path, relative: str) -> Path:
@@ -191,6 +191,21 @@ def module_sources(root: Path, live_files: list[str]) -> tuple[list[str], list[s
           paths.append(_relative(root, resolved))
         except ValueError:
           errors.append(f"module source escapes repository root: {relative_path} -> {source}")
+    for match in DYNAMIC_MODULE_PATTERN.finditer(text):
+      body = match.group(1).strip()
+      literal = re.fullmatch(r"[\"']([^\"']+)[\"']", body)
+      if literal is None:
+        errors.append(f"dynamic module source must be a string literal: {relative_path} -> {body}")
+        continue
+      source = literal.group(1)
+      if "://" in source or source.startswith("/") or not source.startswith("./"):
+        errors.append(f"module source is not local: {relative_path} -> {source}")
+        continue
+      resolved = (source_path.parent / source).resolve()
+      try:
+        paths.append(_relative(root, resolved))
+      except ValueError:
+        errors.append(f"module source escapes repository root: {relative_path} -> {source}")
   return sorted(set(paths)), errors
 
 

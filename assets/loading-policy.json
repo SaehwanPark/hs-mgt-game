@@ -28,11 +28,11 @@
   "forbidden_markers": [
     {
       "id": "html-speculative-preload",
-      "pattern": "<link\\b[^>]*\\brel\\s*=\\s*[\"'](?:preload|modulepreload|prefetch)[\"']"
+      "pattern": "<link\\b[^>]*\\brel\\s*=\\s*[\"']?(?:preload|modulepreload|prefetch)[\"']?"
     },
     {
       "id": "html-file-backed-media",
-      "pattern": "<(?:img|audio|video)\\b[^>]*(?:src|href)\\s*="
+      "pattern": "<(?:img|audio|video|source)\\b[^>]*(?:src|srcset|href)\\s*="
     },
     {
       "id": "js-media-constructor",
@@ -40,7 +40,7 @@
     },
     {
       "id": "runtime-file-backed-load",
-      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|\\.src\\s*=|\\.href\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])[^\\n]*(?:assets/release|\\.(?:aac|flac|gif|jpeg|jpg|m4a|mp3|ogg|opus|png|svg|wav|webm)(?:[\"'?#]))"
+      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|\\.src\\s*=|\\.href\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])"
     }
   ],
   "future_asset_requirements": [

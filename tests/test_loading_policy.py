@@ -45,7 +45,7 @@ class LoadingPolicyTests(unittest.TestCase):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)
       source = root / "index.html"
-      source.write_text('<link rel="preload" href="x.woff2"><audio src="x.ogg"></audio>', encoding="utf-8")
+      source.write_text('<link rel=preload href="x.woff2"><source srcset="x.webp">', encoding="utf-8")
       errors = self.checker.scan_markers(root, "index.html", self.checker._markers(self.document))
       self.assertTrue(any("html-speculative-preload" in error for error in errors))
       self.assertTrue(any("html-file-backed-media" in error for error in errors))
@@ -88,6 +88,42 @@ class LoadingPolicyTests(unittest.TestCase):
       report = self.checker.build_report(root, document)
       self.assertEqual(report["status"], "fail")
       self.assertTrue(any("source is not declared" in error for error in report["errors"]))
+
+  def test_multiline_module_source_must_be_declared(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      (root / "index.html").write_text('<script type="module" src="./app.mjs"></script>', encoding="utf-8")
+      (root / "app.mjs").write_text(
+        'import {\n  value,\n} from "./unlisted.mjs";\n',
+        encoding="utf-8",
+      )
+      (root / "unlisted.mjs").write_text("export const value = 1;", encoding="utf-8")
+      document = copy.deepcopy(self.document)
+      document["live_entrypoint"] = "index.html"
+      document["live_files"] = ["index.html", "app.mjs"]
+      report = self.checker.build_report(root, document)
+      self.assertEqual(report["status"], "fail")
+      self.assertTrue(any("source is not declared" in error for error in report["errors"]))
+
+  def test_non_literal_dynamic_module_source_fails_closed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "app.mjs"
+      source.write_text("const load = (path) => import(path);", encoding="utf-8")
+      sources, errors = self.checker.module_sources(root, ["app.mjs"])
+      self.assertEqual(sources, [])
+      self.assertTrue(any("must be a string literal" in error for error in errors))
+
+  def test_executable_runtime_loads_fail_closed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "app.mjs"
+      source.write_text(
+        'fetch(asset.url);\nimage.src = asset.release_path;\nnew URL(asset.path);\n',
+        encoding="utf-8",
+      )
+      errors = self.checker.scan_markers(root, "app.mjs", self.checker._markers(self.document))
+      self.assertEqual(sum("runtime-file-backed-load" in error for error in errors), 3)
 
   def test_external_or_escaped_entrypoint_sources_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:
