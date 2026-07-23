@@ -452,7 +452,8 @@ generic fallback with registry-aligned release paths.
 
 - Base: `main` at v0.12.98.
 - Working branch: `feat/visual-audio-phase11-missing-asset-fallback-v0.12.99`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/248.
+- Review commit: `1d2f4c8`.
 - Presentation-domain QA: pass for the bounded contract; the single
   code-reviewer pass found no actionable findings.
 
