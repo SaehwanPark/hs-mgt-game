@@ -611,6 +611,15 @@ leave the current history visible. This is a non-mutating host handoff, not a
 new persistence, replay-regeneration, simulation, or client-authority path,
 and full campaign continuity remains open.
 
+The v0.12.95 Phase 11.1 live-replay slice adds a versioned
+`competitive-replay-v1` envelope and `get_replay` MCP/loopback reads built on
+the same immutable history source. It adds only seed/count/latest-visible-hash
+metadata; the browser validates that metadata and renders the existing
+text-first history/replay surface, preserving it on failure. Historical
+resolution review remains a separate host read. No replay calculation,
+playback simulation, persistence, browser-authored hash, or client authority is
+introduced, and full campaign replay/save-load continuity remains open.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

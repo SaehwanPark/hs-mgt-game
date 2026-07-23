@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.12.95] - 2026-07-23
+
+- Added a versioned, non-mutating `competitive-replay-v1` projection through
+  the MCP server, loopback GUI route, and local adapter, aligned to the host's
+  immutable visible transition history and latest state hash.
+- Added browser replay validation/client rendering with explicit empty,
+  malformed, unknown, and failure-preserving behavior through the existing
+  text-first history surface; historical resolution remains host-read.
+- Added Rust, MCP/transport, Node, and Python coverage while keeping replay
+  regeneration, save/load persistence, full campaign continuity, screenshots,
+  performance, compatibility, and human-quality gates open.
+
 ## [0.12.94] - 2026-07-23
 
 - Added a versioned, non-mutating live history route and adapter that return

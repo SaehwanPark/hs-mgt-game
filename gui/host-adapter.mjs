@@ -47,6 +47,10 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
       return request(sessionPath(sessionId, "history"));
     },
 
+    async getReplay(sessionId) {
+      return request(sessionPath(sessionId, "replay"));
+    },
+
     async endSession(sessionId) {
       return request(sessionPath(sessionId, "end"), { method: "POST" });
     },

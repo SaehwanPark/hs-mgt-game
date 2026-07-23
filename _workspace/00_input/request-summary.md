@@ -472,3 +472,54 @@ continuity, persistence, screenshots, performance, compatibility, audio
 usefulness, human accessibility, legal clearance, or educational benefit.
 
 ---
+# Request Summary — Visual/audio Phase 11.1 live replay continuity v0.12.95
+
+## Authorized outcome
+
+Expose the existing host-owned immutable history and replay metadata through a
+dedicated non-mutating loopback GUI read, rendering it through the existing
+text-first history/replay surface. Preserve the current view on endpoint or
+validation failure and keep save/load, replay regeneration, and full-campaign
+claims open.
+
+## Target slice
+
+- Add `competitive-replay-v1` with session/campaign/seed, transition count,
+  latest visible hash, and immutable transition summaries.
+- Add `GET /api/v1/sessions/{session_id}/replay`, MCP exposure, and `getReplay`
+  in the local adapter using the existing history source only.
+- Add browser validation/client/render handoff after successful live reads.
+- Add deterministic Rust, transport, Node, and Python evidence plus project
+  record/version updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 replay continuity.
+- `src/mcp/session.rs` — existing history and historical-resolution reads.
+- `src/mcp/server.rs` and `src/gui_server.rs` — host transport boundaries.
+- `gui/app.mjs` and `gui/host-adapter.mjs` — existing history/replay surface.
+- `_workspace/89_implementation_plan_visual-audio-phase11-live-replay-v0.12.95.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not add save/load persistence, replay regeneration/playback simulation,
+  new assets, hidden-state fields, stochastic behavior, new hashes, audio,
+  screenshots, performance, compatibility, or client authority.
+- Do not claim full campaign history/debrief/save-load/replay continuity or
+  human-quality completion.
+
+## Validation target
+
+Focused replay, history, resolution, session, release metadata, asset/security/
+credits, documentation, JavaScript, formatting, Clippy, and full Python/Rust
+checks.
+
+## Evidence limits
+
+This slice proves one dedicated non-mutating live replay handoff and safe
+history-view continuity only. Full campaign save/load/replay continuity,
+screenshots, performance, compatibility, asset quality, human accessibility,
+legal clearance, and educational benefit remain open.
+
+---

@@ -204,6 +204,7 @@ const demoEnvelope = {
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const END_SESSION_SCHEMA = "competitive-end-session-v1";
 const HISTORY_SCHEMA = "competitive-history-v1";
+const REPLAY_SCHEMA = "competitive-replay-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
@@ -1314,6 +1315,53 @@ export function renderHistoryEnvelope(envelope, root = document) {
   return validation;
 }
 
+export function validateReplayEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") {
+    return { ok: false, code: "empty_replay", message: "No host replay envelope was supplied." };
+  }
+  if (envelope.schema_version !== REPLAY_SCHEMA) {
+    return { ok: false, code: "unsupported_replay_schema", message: "Unsupported host replay schema." };
+  }
+  const transitions = Array.isArray(envelope.transitions) ? envelope.transitions : [];
+  const latestHash = transitions.at(-1)?.state_hash ?? null;
+  if (
+    typeof envelope.session_id !== "string"
+    || !envelope.session_id.trim()
+    || typeof envelope.campaign !== "string"
+    || !envelope.campaign.trim()
+    || !Number.isInteger(envelope.seed)
+    || envelope.seed < 0
+    || !Array.isArray(envelope.transitions)
+    || !Number.isInteger(envelope.transition_count)
+    || envelope.transition_count < 0
+    || envelope.transition_count !== transitions.length
+    || (envelope.latest_state_hash !== null
+      && (typeof envelope.latest_state_hash !== "string" || !envelope.latest_state_hash.trim()))
+    || (transitions.length === 0 && envelope.latest_state_hash !== null)
+    || (transitions.length > 0 && envelope.latest_state_hash !== latestHash)
+    || transitions.some((entry) => (
+      !entry
+      || typeof entry !== "object"
+      || typeof entry.state_hash !== "string"
+      || !entry.state_hash.trim()
+    ))
+  ) {
+    return { ok: false, code: "misaligned_replay", message: "Host replay metadata is not aligned with committed history." };
+  }
+  return { ok: true, envelope };
+}
+
+export function renderReplayEnvelope(envelope, root = document) {
+  const validation = validateReplayEnvelope(envelope);
+  if (!validation.ok) return validation;
+  renderHistory(envelope.transitions, root);
+  const meta = root.querySelector("#session-meta");
+  if (meta) {
+    meta.textContent = `${envelope.campaign} · replay ${envelope.transition_count} committed transitions · hash ${envelope.latest_state_hash ?? "no committed hash"}`;
+  }
+  return validation;
+}
+
 function renderObservationLines(observation, root) {
   const list = root.querySelector("#observation-list");
   list.replaceChildren();
@@ -2008,6 +2056,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const audioClient = createAudioClient({ root, recorder });
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
   const historyClient = createHistoryClient({ adapter, root });
+  const replayClient = createReplayClient({ adapter, root });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
@@ -2150,6 +2199,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
               recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
             }
           }
+          if (typeof adapter.getReplay === "function") {
+            const replay = await replayClient.load(sessionId);
+            if (!replay.ok) {
+              recordPlaytestFailure(recorder, replay.code, replay.message ?? "Live replay refresh was unavailable.");
+            }
+          }
           await regionalWorldClient.load(sessionId);
         }
       } catch (error) {
@@ -2227,6 +2282,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
             recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
           }
         }
+        if (typeof adapter.getReplay === "function") {
+          const replay = await replayClient.load(requestedSessionId);
+          if (!replay.ok) {
+            recordPlaytestFailure(recorder, replay.code, replay.message ?? "Live replay refresh was unavailable.");
+          }
+        }
         await regionalWorldClient.load(requestedSessionId);
       }
       catalog = nextCatalog;
@@ -2297,7 +2358,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2573,6 +2634,33 @@ export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapte
   return { load, get envelope() { return envelope; } };
 }
 
+export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+  let envelope = null;
+
+  async function load(sessionId = adapter?.sessionId) {
+    if (!adapter || typeof adapter.getReplay !== "function") {
+      return { ok: false, code: "replay_adapter_missing", message: "No live replay adapter configured." };
+    }
+    try {
+      const nextEnvelope = await adapter.getReplay(sessionId);
+      const validation = validateReplayEnvelope(nextEnvelope);
+      if (!validation.ok) return validation;
+      const rendered = renderReplayEnvelope(nextEnvelope, root);
+      if (!rendered.ok) return rendered;
+      envelope = nextEnvelope;
+      return { ...rendered, envelope: nextEnvelope };
+    } catch (error) {
+      return {
+        ok: false,
+        code: "replay_adapter_error",
+        message: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  return { load, get envelope() { return envelope; } };
+}
+
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   currentRegionalLinks = [];
@@ -2717,6 +2805,7 @@ if (typeof document !== "undefined") {
       createRegionalWorldClient,
       createResolutionClient,
       createHistoryClient,
+      createReplayClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2731,6 +2820,8 @@ if (typeof document !== "undefined") {
       validateEndSessionEnvelope,
       validateHistoryEnvelope,
       renderHistoryEnvelope,
+      validateReplayEnvelope,
+      renderReplayEnvelope,
     };
   } else {
     const client = createReadOnlyClient({ root: document });
@@ -2752,6 +2843,7 @@ if (typeof document !== "undefined") {
       createRegionalWorldClient,
       createResolutionClient,
       createHistoryClient,
+      createReplayClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2766,6 +2858,8 @@ if (typeof document !== "undefined") {
       validateEndSessionEnvelope,
       validateHistoryEnvelope,
       renderHistoryEnvelope,
+      validateReplayEnvelope,
+      renderReplayEnvelope,
     };
   }
 }
@@ -2776,6 +2870,7 @@ export {
   CAMPAIGN_COVERAGE_SCHEMA,
   END_SESSION_SCHEMA,
   HISTORY_SCHEMA,
+  REPLAY_SCHEMA,
   PLAYTEST_CAPTURE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
   regionalEntitiesToFixture,

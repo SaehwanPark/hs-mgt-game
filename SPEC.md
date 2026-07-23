@@ -5448,6 +5448,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   stochastic input, hidden-state projection, rival detail, browser history
   synthesis, audio asset, or client-owned history authority.
 
+### Visual/audio Phase 11.1 live replay continuity handoff (v0.12.95)
+
+- Status: In progress; the live competitive browser now has a dedicated
+  host-shaped replay metadata read over immutable visible history, while full
+  campaign continuity remains incomplete.
+- Done: versioned `competitive-replay-v1` envelope; `get_replay` MCP tool;
+  loopback replay route; `getReplay` adapter; aligned seed/count/latest-hash
+  validation; text-first history/replay rendering; failure preservation; Rust,
+  MCP/transport, Node/Python evidence; and unchanged simulation, hash, and
+  client authority.
+- Not Yet Done: full campaign replay visual continuity, save/load persistence,
+  replay regeneration/playback, screenshots, performance/compatibility,
+  asset-quality review, and human quality evaluation.
+- Deferred / Non-Goals: no replay calculation, persistence, simulation rule,
+  stochastic input, hidden-state projection, rival detail, browser-authored
+  hashes, audio asset, or client-owned replay authority.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete
