@@ -5383,6 +5383,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   input, hidden-state projection, rival detail, command, history, replay hash,
   or client authority change.
 
+### Visual/audio Phase 11.1 live debrief handoff (v0.12.91)
+
+- Status: In progress; the live competitive terminal path now carries
+  host-aligned history, replay metadata, and debrief text, while full campaign
+  continuity remains incomplete.
+- Done: versioned terminal envelope; loopback end-session route and adapter;
+  text-first final history/debrief renderer; final hash and transition count;
+  disabled post-termination controls; structured failure preservation; and
+  Rust/transport/Node/Python evidence.
+- Not Yet Done: full campaign save/load/replay continuity, screenshots,
+  performance/compatibility validation, asset-quality review, and human quality
+  evaluation.
+- Deferred / Non-Goals: no new asset, audio file, simulation rule, stochastic
+  input, hidden-state projection, rival detail, browser debrief synthesis, or
+  second terminal state.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -12,10 +12,10 @@ use crate::competitive::{genesis_competitive_world_with_ruleset, resolve_competi
 use crate::debrief::{affiliation_debrief, competitive_debrief, educational_debrief};
 use crate::inputs::resolve_inputs;
 use crate::model::{
-  AffiliationHistory, AffiliationRuleset, AffiliationTransition, AffiliationWorldState,
-  AggregatedMonthlyActions, CampaignId, CompetitiveHistory, CompetitiveRuleset,
-  CompetitiveTransition, CompetitiveWorldState, Difficulty, History, INTERACTIVE_TURN_COUNT,
-  Observation, PlayerObservation, Ruleset, SystemMonthlyBatch, Transition,
+  AFFILIATION_TURN_COUNT, AffiliationHistory, AffiliationRuleset, AffiliationTransition,
+  AffiliationWorldState, AggregatedMonthlyActions, CampaignId, CompetitiveHistory,
+  CompetitiveRuleset, CompetitiveTransition, CompetitiveWorldState, Difficulty, History,
+  INTERACTIVE_TURN_COUNT, Observation, PlayerObservation, Ruleset, SystemMonthlyBatch, Transition,
   default_affiliation_ruleset, default_competitive_ruleset, default_ruleset,
 };
 use crate::scenario::{
@@ -25,6 +25,7 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
+pub const END_SESSION_SCHEMA_VERSION: &str = "competitive-end-session-v1";
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct StartSessionRequest {
@@ -112,11 +113,23 @@ pub struct HistoryEnvelope {
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
 pub struct EndSessionEnvelope {
+  pub schema_version: String,
   pub session_id: String,
   pub campaign: String,
   pub seed: u64,
+  pub turn: u32,
+  pub max_turns: u32,
   pub done: bool,
+  pub history: Vec<TransitionSummary>,
   pub debrief: Vec<String>,
+  pub replay: EndSessionReplayMetadata,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct EndSessionReplayMetadata {
+  pub seed: u64,
+  pub transition_count: usize,
+  pub latest_state_hash: Option<String>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
@@ -646,27 +659,66 @@ impl GameSessionStore {
     };
     session.mark_done();
     Ok(match session {
-      GameSession::Stabilization(session) => EndSessionEnvelope {
-        session_id: request.session_id,
-        campaign: CampaignId::StabilizationV1.as_str().to_string(),
-        seed: session.seed,
-        done: session.done,
-        debrief: educational_debrief(&session.history),
-      },
-      GameSession::Competitive(session) => EndSessionEnvelope {
-        session_id: request.session_id,
-        campaign: CampaignId::CompetitiveRegionalV1.as_str().to_string(),
-        seed: session.seed,
-        done: session.done,
-        debrief: competitive_debrief(&session.history),
-      },
-      GameSession::Affiliation(session) => EndSessionEnvelope {
-        session_id: request.session_id,
-        campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
-        seed: session.seed,
-        done: session.done,
-        debrief: affiliation_debrief(&session.history),
-      },
+      GameSession::Stabilization(session) => {
+        let history: Vec<_> = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_stabilization_transition)
+          .collect();
+        EndSessionEnvelope {
+          schema_version: END_SESSION_SCHEMA_VERSION.to_string(),
+          session_id: request.session_id,
+          campaign: CampaignId::StabilizationV1.as_str().to_string(),
+          seed: session.seed,
+          turn: session.current.turn,
+          max_turns: INTERACTIVE_TURN_COUNT,
+          done: session.done,
+          history: history.clone(),
+          debrief: educational_debrief(&session.history),
+          replay: end_session_replay(session.seed, &history),
+        }
+      }
+      GameSession::Competitive(session) => {
+        let history: Vec<_> = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_competitive_transition)
+          .collect();
+        EndSessionEnvelope {
+          schema_version: END_SESSION_SCHEMA_VERSION.to_string(),
+          session_id: request.session_id,
+          campaign: CampaignId::CompetitiveRegionalV1.as_str().to_string(),
+          seed: session.seed,
+          turn: session.current.turn,
+          max_turns: COMPETITIVE_MONTH_LIMIT,
+          done: session.done,
+          history: history.clone(),
+          debrief: competitive_debrief(&session.history),
+          replay: end_session_replay(session.seed, &history),
+        }
+      }
+      GameSession::Affiliation(session) => {
+        let history: Vec<_> = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_affiliation_transition)
+          .collect();
+        EndSessionEnvelope {
+          schema_version: END_SESSION_SCHEMA_VERSION.to_string(),
+          session_id: request.session_id,
+          campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
+          seed: session.seed,
+          turn: session.current.turn,
+          max_turns: AFFILIATION_TURN_COUNT,
+          done: session.done,
+          history: history.clone(),
+          debrief: affiliation_debrief(&session.history),
+          replay: end_session_replay(session.seed, &history),
+        }
+      }
     })
   }
 
@@ -787,6 +839,14 @@ impl GameSessionStore {
         }
       }
     })
+  }
+}
+
+fn end_session_replay(seed: u64, history: &[TransitionSummary]) -> EndSessionReplayMetadata {
+  EndSessionReplayMetadata {
+    seed,
+    transition_count: history.len(),
+    latest_state_hash: history.last().map(|entry| entry.state_hash.clone()),
   }
 }
 
@@ -1682,6 +1742,40 @@ mod tests {
     assert!(text.contains("operating revenue "));
     assert!(text.contains("operating cost "));
     assert!(text.contains("operating margin "));
+  }
+
+  #[test]
+  fn competitive_end_session_keeps_history_replay_and_debrief_aligned() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let session = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id,
+        command_text: "hold".to_string(),
+      })
+      .expect("advance one month");
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: session.session_id.clone(),
+      })
+      .expect("end session");
+
+    assert_eq!(ended.schema_version, END_SESSION_SCHEMA_VERSION);
+    assert!(ended.done);
+    assert_eq!(ended.history.len(), ended.replay.transition_count);
+    assert_eq!(ended.history.len(), 1);
+    assert_eq!(
+      ended.history.last().map(|entry| &entry.state_hash),
+      ended.replay.latest_state_hash.as_ref()
+    );
+    assert!(!ended.debrief.is_empty());
+    assert!(
+      store
+        .get_history(GetHistoryRequest {
+          session_id: session.session_id,
+        })
+        .is_err()
+    );
   }
 
   #[test]

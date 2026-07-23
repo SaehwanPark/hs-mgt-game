@@ -2314,6 +2314,28 @@ screenshot gates remain open.
   replay continuity, screenshot coverage, performance/compatibility, and human
   quality remain open.
 
+### v0.12.91 bounded live terminal debrief and replay evidence
+
+- `EndSessionEnvelope` now carries the versioned terminal schema, final turn
+  bounds, the host's immutable `TransitionSummary` history, replay seed/count/
+  latest-hash metadata, and the existing host-authored debrief lines. The
+  terminal response is built from one session history before the host removes
+  the session from its mutable store.
+- The loopback GUI exposes `POST /api/v1/sessions/{session_id}/end`; the live
+  adapter forwards it through `endSession`, and `gui/app.mjs` renders a
+  text-first terminal history/debrief view with final hash/count semantics.
+  Successful termination disables action and repeated end controls; failed
+  termination leaves the current session active. Optional debrief music is
+  atmospheric only.
+- `tests/test_phase11_live_debrief.py`, the GUI transport test, and the Rust
+  terminal-alignment test cover schema validation, host removal, history/replay/
+  debrief alignment, text rendering, and the unchanged hidden-state/network
+  boundary.
+- This closes only the current live competitive terminal debrief/replay
+  handoff evidence. Broad Phase 11.1 history/debrief/save-load/replay coverage,
+  full campaign screenshots, performance/compatibility, and human quality
+  remain open.
+
 ### Exit criteria
 
 - No core competitive-campaign entity falls back to an unintended generic representation.

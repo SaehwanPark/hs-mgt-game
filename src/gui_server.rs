@@ -9,9 +9,9 @@ use axum::{Json, Router};
 use serde::Deserialize;
 
 use crate::mcp::{
-  GameSessionStore, GetActionCatalogRequest, GetPresentationRequest, GetRegionalWorldRequest,
-  GetResolutionRequest, McpErrorMessage, StartSessionRequest, SubmitTurnRequest,
-  ValidateTurnRequest,
+  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetPresentationRequest,
+  GetRegionalWorldRequest, GetResolutionRequest, McpErrorMessage, StartSessionRequest,
+  SubmitTurnRequest, ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
@@ -115,6 +115,7 @@ fn gui_router() -> Router {
       "/api/v1/sessions/{session_id}/regional-world",
       get(get_regional_world),
     )
+    .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
     .with_state(GuiState::default())
 }
@@ -208,6 +209,12 @@ async fn get_regional_world(
 ) -> Response {
   with_store(&state, |store| {
     store.get_regional_world(GetRegionalWorldRequest { session_id })
+  })
+}
+
+async fn end_session(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.end_session(EndSessionRequest { session_id })
   })
 }
 
@@ -405,6 +412,24 @@ mod tests {
     assert_eq!(status, 200, "{body}");
     let resolution: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(resolution["schema_version"], "competitive-resolution-v1");
+
+    let end_path = format!("/api/v1/sessions/{session_id}/end");
+    let (status, body) = request(address, "POST", &end_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let ended: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(ended["schema_version"], "competitive-end-session-v1");
+    assert_eq!(ended["replay"]["transition_count"], 1);
+    assert_eq!(ended["history"].as_array().unwrap().len(), 1);
+    assert!(!ended["debrief"].as_array().unwrap().is_empty());
+
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/presentation"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 404, "{body}");
 
     server.abort();
   }

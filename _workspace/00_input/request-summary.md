@@ -267,3 +267,52 @@ The slice establishes technical integration and deterministic boundary checks
 only; it does not establish first-time-user comprehension, accessibility
 quality, audio usefulness/fatigue, educational usability, legal clearance,
 ownership, or human review. Phase 10.2 remains an explicit external gate.
+# Request Summary — Visual/audio Phase 11.1 live debrief handoff v0.12.91
+
+## Authorized outcome
+
+Continue the roadmap loop with a bounded live-session continuity slice. Make
+the host-owned final competitive debrief available to the browser together
+with the immutable committed history and replay metadata that support it.
+
+## Target slice
+
+- Extend the existing terminal host envelope with schema, turn bounds, history,
+  and replay metadata aligned to the generated debrief.
+- Add the loopback GUI end-session route and adapter method.
+- Render a text-first terminal debrief view, preserve state hashes, and disable
+  further action after successful host termination.
+- Add deterministic Rust, transport, Node, and Python evidence plus project
+  record/version updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 history, debrief,
+  replay, and continuity gaps.
+- `src/mcp/session.rs` — host terminal/debrief authority and transition history.
+- `src/gui_server.rs` and `gui/host-adapter.mjs` — live loopback transport.
+- `gui/app.mjs` and `gui/index.html` — existing history/debrief presentation.
+- `_workspace/85_implementation_plan_visual-audio-phase11-live-debrief-v0.12.91.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not add save/load, screenshot suites, new assets, audio files, hidden
+  state, rival detail, client simulation, or a second debrief implementation.
+- Do not mark broad Phase 11.1 history/debrief/save-load/replay coverage,
+  performance, compatibility, or human-quality gates complete.
+
+## Validation target
+
+Focused terminal debrief, live transport, GUI contract, release metadata,
+asset/security/credits, documentation, JavaScript, formatting, Clippy, and
+full Python/Rust checks.
+
+## Evidence limits
+
+This slice proves only the current live terminal handoff and its aligned
+history/replay/debrief presentation. It does not prove full-campaign
+continuity, persistence, screenshots, performance, compatibility, audio
+usefulness, human accessibility, legal clearance, or educational benefit.
+
+---

@@ -202,6 +202,7 @@ const demoEnvelope = {
 };
 
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
+const END_SESSION_SCHEMA = "competitive-end-session-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
@@ -400,6 +401,11 @@ function setReadOnlyControls(root, readOnly) {
     commands.replaceChildren();
     emptyState(commands, "Action submission is deferred to Phase 3.");
   }
+}
+
+function setEndSessionControl(root, enabled) {
+  const button = root.querySelector("#session-end");
+  if (button) button.disabled = !enabled;
 }
 
 function createStatus(status, label) {
@@ -1416,6 +1422,7 @@ function clearReadOnlySurface(root, message) {
   const commands = root.querySelector("#legal-command-list");
   commands.replaceChildren();
   emptyState(commands, "Action submission is deferred to Phase 3.");
+  setEndSessionControl(root, false);
   setReadOnlyControls(root, true);
   setPresentationState(root, message);
 }
@@ -1456,6 +1463,100 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
   if (meta) meta.textContent = `${session.campaign ?? "session"} · turn ${session.turn ?? "—"}/${session.max_turns ?? "—"} · hash ${latestHash}`;
   setPresentationState(root, "Live or recorded read-only presentation loaded");
   return { ok: true, envelope };
+}
+
+export function validateEndSessionEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") {
+    return { ok: false, code: "empty_end_session", message: "No final host envelope was supplied." };
+  }
+  if (envelope.schema_version !== END_SESSION_SCHEMA) {
+    return { ok: false, code: "unsupported_end_session_schema", message: "Unsupported final host envelope schema." };
+  }
+  if (!envelope.session_id || !envelope.campaign || envelope.done !== true) {
+    return { ok: false, code: "invalid_end_session", message: "Final host envelope is missing terminal session fields." };
+  }
+  if (
+    !Array.isArray(envelope.history)
+    || !Array.isArray(envelope.debrief)
+    || !envelope.replay
+    || !Number.isInteger(envelope.replay.transition_count)
+    || envelope.replay.transition_count < 0
+    || envelope.replay.transition_count !== envelope.history.length
+  ) {
+    return { ok: false, code: "incomplete_end_session", message: "Final host envelope is missing history, replay, or debrief data." };
+  }
+  const latestHash = envelope.history.at(-1)?.state_hash ?? null;
+  if (envelope.replay.latest_state_hash !== latestHash) {
+    return { ok: false, code: "misaligned_end_session", message: "Final host replay metadata does not match committed history." };
+  }
+  return { ok: true, envelope };
+}
+
+export function renderEndSessionEnvelope(envelope, root = document) {
+  const validation = validateEndSessionEnvelope(envelope);
+  if (!validation.ok) return validation;
+  const historyList = root.querySelector("#history-list");
+  const debriefList = root.querySelector("#debrief-list");
+  const meta = root.querySelector("#session-meta");
+  if (historyList) renderHistory(envelope.history, root);
+  if (debriefList) {
+    debriefList.replaceChildren();
+    for (const line of envelope.debrief) {
+      const item = document.createElement("li");
+      item.textContent = String(line);
+      debriefList.append(item);
+    }
+    if (!envelope.debrief.length) emptyState(debriefList, "The host supplied no debrief lines.");
+  }
+  if (meta) {
+    const hash = envelope.replay.latest_state_hash ?? "no committed hash";
+    meta.textContent = `${envelope.campaign} · final turn ${envelope.turn}/${envelope.max_turns} · ${envelope.replay.transition_count} transitions · hash ${hash}`;
+  }
+  setReadOnlyControls(root, true);
+  setEndSessionControl(root, false);
+  setActionControls(root, false);
+  setPresentationState(root, "Host session ended; final history and debrief loaded");
+  return { ok: true, envelope };
+}
+
+async function endHostSession({ adapter, sessionId, root, recorder, audio }) {
+  if (!adapter || typeof adapter.endSession !== "function") {
+    const message = "No host end-session adapter configured; the current session remains active.";
+    setPresentationState(root, message);
+    showRecovery(root, "Ending the session is unavailable. Keep the current host session active or load a compatible adapter.");
+    recordPlaytestFailure(recorder, "end_session_adapter_missing", message);
+    return { ok: false, code: "end_session_adapter_missing" };
+  }
+  if (!String(sessionId ?? "").trim()) {
+    const message = "A live session ID is required before ending a session.";
+    setPresentationState(root, message);
+    return { ok: false, code: "session_id_missing", message };
+  }
+  setPresentationState(root, "Ending the host session…");
+  setEndSessionControl(root, false);
+  try {
+    const envelope = await adapter.endSession(sessionId);
+    const result = renderEndSessionEnvelope(envelope, root);
+    if (!result.ok) {
+      setEndSessionControl(root, typeof adapter.endSession === "function");
+      recordPlaytestFailure(recorder, result.code, result.message);
+      showRecovery(root, "The host returned an unsupported final envelope; the current session remains active.");
+      return result;
+    }
+    clearRecovery(root);
+    renderOnboarding(envelope, root, recorder);
+    recordVisibleEnvelope(recorder, envelope);
+    audio?.setMusicState("debrief");
+    audio?.setAmbienceFromVisible({ campaign: envelope.campaign, done: true });
+    return result;
+  } catch (error) {
+    setEndSessionControl(root, typeof adapter.endSession === "function");
+    const message = error instanceof Error ? error.message : String(error);
+    recordPlaytestFailure(recorder, "end_session_adapter_error", message);
+    setPresentationState(root, `End-session failed; the current session remains active: ${message}`);
+    showRecovery(root, `The host did not end the session: ${message}`);
+    return { ok: false, code: "end_session_adapter_error", message };
+  }
 }
 
 const SESSION_LAUNCH_CAMPAIGN = "competitive-regional-v1";
@@ -1610,6 +1711,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     const result = renderReadOnlyEnvelope(envelope, root);
     currentEnvelope = result.ok ? envelope : null;
     if (result.ok) {
+      setEndSessionControl(root, typeof adapter?.endSession === "function");
       clearRecovery(root);
       renderOnboarding(envelope, root, recorder);
       recordVisibleEnvelope(recorder, envelope);
@@ -1622,6 +1724,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   function renderStaticFixture(fixture = presentationFixture) {
     currentEnvelope = null;
     renderEnvelope({ ...demoEnvelope, legal_commands: [], presentation_fixture: fixture }, root);
+    setEndSessionControl(root, false);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
     audioClient.setMusicState("stable_operations");
@@ -1667,6 +1770,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       if (result.ok) {
         await regionalWorldClient.load(requestedSessionId);
         sessionId = requestedSessionId;
+        setEndSessionControl(root, typeof adapter?.endSession === "function");
       }
       if (!result.ok) {
         recordPlaytestFailure(recorder, result.code, "The read-only presentation schema is unavailable.");
@@ -1686,8 +1790,19 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     }
   }
 
+  async function endSession() {
+    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient });
+    if (result.ok) {
+      currentEnvelope = result.envelope;
+      sessionId = null;
+      adapter.activateSession?.(null);
+    }
+    return result;
+  }
+
+  root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, render, renderStaticFixture, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
+  return { load, render, renderStaticFixture, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -2081,6 +2196,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
       sessionId = requestedSessionId;
       adapter.activateSession?.(requestedSessionId);
+      setEndSessionControl(root, typeof adapter.endSession === "function");
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -2097,10 +2213,23 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     }
   }
 
+  async function endSession() {
+    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient });
+    if (result.ok) {
+      drafts = [];
+      validation = null;
+      editingIndex = null;
+      sessionId = null;
+      adapter.activateSession?.(null);
+    }
+    return result;
+  }
+
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
+  root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2497,11 +2626,13 @@ if (typeof document !== "undefined") {
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,
+      renderEndSessionEnvelope,
       renderResolution,
       renderRegionalWorld,
       renderCampaignCoverage,
       validateCommand,
       validateReadOnlyEnvelope,
+      validateEndSessionEnvelope,
     };
   } else {
     const client = createReadOnlyClient({ root: document });
@@ -2527,11 +2658,13 @@ if (typeof document !== "undefined") {
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,
+      renderEndSessionEnvelope,
       renderResolution,
       renderRegionalWorld,
       renderCampaignCoverage,
       validateCommand,
       validateReadOnlyEnvelope,
+      validateEndSessionEnvelope,
     };
   }
 }
@@ -2540,6 +2673,7 @@ export {
   demoEnvelope,
   presentationFixture,
   CAMPAIGN_COVERAGE_SCHEMA,
+  END_SESSION_SCHEMA,
   PLAYTEST_CAPTURE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
   regionalEntitiesToFixture,
