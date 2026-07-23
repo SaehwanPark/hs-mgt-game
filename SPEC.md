@@ -5415,6 +5415,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   hidden-state projection, rival detail, browser event inference for new
   envelopes, or client-owned cue authority.
 
+### Visual/audio Phase 11.1 live music-state projection (v0.12.93)
+
+- Status: In progress; live competitive resolution envelopes now expose one
+  explicit host-shaped music state, while full campaign music coverage remains
+  incomplete.
+- Done: additive `music_state_id`; visible priority for debrief, regulatory,
+  affiliation, competitive, pressure, and stable operations; actor-visible
+  source boundary; legacy/malformed/unknown fallback; catalog parity;
+  Rust/Node/Python evidence; and unchanged simulation/history/hash authority.
+- Not Yet Done: full campaign music taxonomy and continuity, event/history/
+  debrief/save-load/replay coverage, screenshots, performance/compatibility,
+  asset-quality review, audio usefulness/fatigue, and human quality evaluation.
+- Deferred / Non-Goals: no new audio asset, simulation rule, stochastic input,
+  hidden-state projection, rival detail, browser music inference for current
+  envelopes, or client-owned music authority.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

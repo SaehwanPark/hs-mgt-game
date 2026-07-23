@@ -1,3 +1,83 @@
+# Presentation Contract — Phase 11.1 live music-state projection v0.12.93
+
+## Goal and Authorization
+
+Define the live competitive resolution music-state projection needed for the
+bounded Phase 11.1 music item. The host may add one existing catalog state from
+committed actor-visible data; the browser may use it for optional music and
+retain visible-only classification for older/malformed envelopes. This slice
+does not authorize full campaign coverage or new assets.
+
+## Player Questions and Consequences
+
+Music may reinforce the visible context of a committed resolution: completed
+session, regulatory scrutiny, affiliation/negotiation, competitive escalation,
+operating pressure, or stable operations. Written resolution and source text
+remain authoritative. Music must not reveal hidden severity, private intent,
+probability, causality, or future outcome.
+
+## Actor-Visible Source Ledger
+
+| State | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| `debrief` | Explicit terminal transition boundary | Fall back to visible classifier | No victory/quality claim |
+| `regulatory_scrutiny` | Visible committed text containing regulatory, oversight, mandate, or policy-review language | Fall back to next visible state | No predicted review result |
+| `affiliation_negotiation` | Visible committed text containing affiliation, partner, coalition, negotiation, or commitment-review language | Fall back to next visible state | No agreement or partner intent |
+| `competitive_escalation` | Visible committed text containing rival, competitive, competition, market escalation, or public expansion | Fall back to next visible state | No private rival action |
+| `pressure` | After visible margin `< 0`, unmet demand `> 0`, or catalog pressure language | Fall back to stable operations | No hidden severity or solvency forecast |
+| `stable_operations` | No stronger visible state marker | Always safe fallback | No claim of favorable outcome |
+| Legacy/malformed envelope | Existing `classifyVisibleMusicState` over visible input | Use browser classifier | No hidden-field read or client transition |
+| Unknown explicit state | Existing audio client validation/fallback | Keep written resolution and use visible fallback | No local reinterpretation as a new state |
+
+## Visual, Motion, and Audio Semantics
+
+`music_state_id` uses the existing `MUSIC_STEM_CONTRACT` IDs and their visible
+source/equivalent text. Stem roles, crossfade, normalization, reduced-audio,
+mute, unavailable-audio, and cues-only policies remain unchanged. No new music
+asset or playback path is introduced.
+
+## Accessibility and Fallbacks
+
+Music remains optional atmospheric support. Resolution text, visible status,
+source, and result remain complete when muted, unavailable, reduced, or
+malformed. A non-array/non-string or unknown host value does not suppress the
+existing visible classifier or written fallback. Automated checks do not
+establish human accessibility or audio usefulness/fatigue.
+
+## Authority, History, and Replay Boundaries
+
+The field is additive presentation metadata generated after a committed
+transition. It is derived from `TransitionSummary`, actor-visible after
+observation, and the explicit terminal boundary; it does not enter commands,
+transition evaluation, stochastic inputs, immutable history, state hashes,
+replay verification, or debrief facts. The browser does not fetch, simulate,
+or reconstruct the transition.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Existing music-stem catalog, audio credits,
+registry, release, metadata, and security checks remain the provenance boundary.
+
+## Verification and Evidence Limits
+
+Rust tests must cover each live-selectable state, deterministic priority, and
+stable fallback. Node/Python tests must cover catalog parity, explicit valid,
+malformed, unknown, and legacy behavior, syntax, and no-authority markers.
+Existing full Rust, Python, asset, replay, documentation, and release checks
+remain required.
+
+## Non-Goals and Open Questions
+
+- No new audio asset, event taxonomy, history/debrief redesign, save/load/
+  replay continuity, screenshot suite, performance benchmark, or browser
+  matrix in this slice.
+- Open: which later host-committed event/history fields can support additional
+  music states without duplicating transition logic?
+- Open: full-campaign visual/audio continuity and human evaluation remain
+  separate gates.
+
+---
+
 # Presentation Contract — Phase 11.1 live event-cue projection v0.12.92
 
 ## Goal and Authorization

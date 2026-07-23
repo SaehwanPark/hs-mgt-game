@@ -1498,6 +1498,11 @@ export function resolutionAudioCueIds(envelope = {}) {
     : visibleEventCues(envelope);
 }
 
+export function resolutionMusicStateId(envelope = {}) {
+  const state = envelope?.music_state_id;
+  return typeof state === "string" && state.trim() ? state.trim() : null;
+}
+
 export function renderEndSessionEnvelope(envelope, root = document) {
   const validation = validateEndSessionEnvelope(envelope);
   if (!validation.ok) return validation;
@@ -2073,7 +2078,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       else {
         firstMonthFlow.update({ resolutionVisible: true });
         audioClient.playCue("ui.advance-month");
-        audioClient.setMusicFromVisible(resolution.envelope.after);
+        const musicStateId = resolutionMusicStateId(resolution.envelope);
+        if (musicStateId) audioClient.setMusicState(musicStateId, resolution.envelope.after);
+        else audioClient.setMusicFromVisible(resolution.envelope.after);
         const cueIds = resolutionAudioCueIds(resolution.envelope);
         for (const cueId of cueIds) audioClient.playCue(cueId);
       }

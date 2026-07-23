@@ -1,3 +1,52 @@
+# Final Handoff — Visual/audio Phase 11.1 live music-state projection v0.12.93
+
+## Result
+
+Live competitive resolution envelopes now include an additive `music_state_id`
+for the existing debrief, regulatory, affiliation, competitive, pressure, and
+stable-operations catalog states. The browser uses a valid host state and
+retains visible-only classification for older or malformed envelopes.
+
+## Changed files and behavior
+
+- Added deterministic host music-state selection in `src/mcp/resolution.rs`
+  from committed visible summary text, the actor-visible after snapshot, and
+  the terminal boundary.
+- Added the pure browser fallback helper and resolution integration in
+  `gui/app.mjs`; added Rust and `tests/test_phase11_live_music.py` coverage for
+  state priority, catalog parity, valid/malformed/unknown values, syntax, and
+  no-authority boundaries.
+- Updated the roadmap, Phase 11.1 coverage ledger, canonical records, lessons,
+  request/contract/QA, generated credits/version projections, and release
+  notes; no audio asset or simulation path changed.
+
+## Verification
+
+- `cargo test` — 335 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 555 passed, including the live music-state projection
+  test.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+## Handoff and review
+
+- Base: `main` at v0.12.92.
+- Working branch: to be created after implementation verification.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Limits and next slice
+
+This closes only the current live competitive music-state projection evidence.
+Full campaign music taxonomy and event/music continuity, history/debrief/
+save-load/replay continuity, screenshots, performance, compatibility, asset
+quality, human evaluation, and later Phase 11.2–13 gates remain open.
+
+---
+
 # Final Handoff — Visual/audio Phase 11.1 live event-cue projection v0.12.92
 
 ## Result

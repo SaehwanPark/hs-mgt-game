@@ -53,6 +53,8 @@ class GuiResolutionTests(unittest.TestCase):
       "getResolution",
       "audio_cue_ids",
       "visibleEventCues",
+      "music_state_id",
+      "resolutionMusicStateId",
       "resolution_adapter_error",
       "prefers-reduced-motion",
       "resolution-play",

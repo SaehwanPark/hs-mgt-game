@@ -1,3 +1,55 @@
+# Request Summary — Visual/audio Phase 11.1 live music-state projection v0.12.93
+
+## Authorized outcome
+
+Move the primary live competitive resolution music-state selection to an
+explicit host-shaped presentation projection derived from committed
+actor-visible resolution data. Preserve visible-only browser fallback for
+older or malformed envelopes and keep broad campaign music coverage open.
+
+## Target slice
+
+- Add `music_state_id` to the competitive resolution envelope.
+- Select one of the existing catalog IDs using committed events/effects,
+  actor-visible after text/operating values, and the explicit terminal boundary.
+- Prefer a valid explicit state in `gui/app.mjs`; use the existing visible
+  classifier only when no usable host field is present.
+- Add deterministic Rust, Node, and Python evidence plus project-record/version
+  updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 music-state coverage.
+- `src/mcp/resolution.rs` and `src/mcp/session.rs` — committed resolution
+  summary and actor-visible snapshot authority.
+- `gui/music-stem-contract.mjs`, `gui/audio.mjs`, and `gui/app.mjs` — existing
+  catalog, visible classifier, optional playback, and live resolution path.
+- `_workspace/87_implementation_plan_visual-audio-phase11-live-music-v0.12.93.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not add audio assets, dependencies, hidden-state fields, private rival
+  detail, simulation behavior, history/hash changes, client authority,
+  screenshots, performance, compatibility, or human-quality claims.
+- Do not claim full campaign music/event/continuity coverage or audio
+  usefulness/fatigue.
+
+## Validation target
+
+Focused live music, resolution, audio, release metadata, asset/security/
+credits, documentation, JavaScript, formatting, Clippy, and full Python/Rust
+checks.
+
+## Evidence limits
+
+This slice proves explicit host-shaped music IDs for currently supported live
+resolution states and safe legacy fallback only. Full campaign music taxonomy,
+screenshots, performance, compatibility, asset quality, human accessibility,
+audio usefulness, legal clearance, and educational benefit remain open.
+
+---
+
 # Request Summary — Visual/audio Phase 11.1 live event-cue projection v0.12.92
 
 ## Authorized outcome

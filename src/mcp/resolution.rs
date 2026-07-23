@@ -20,6 +20,7 @@ pub struct ResolutionEnvelope {
   pub steps: Vec<ResolutionStep>,
   pub effects: Vec<ResolutionEffect>,
   pub audio_cue_ids: Vec<String>,
+  pub music_state_id: String,
   pub replay: ResolutionReplayMetadata,
 }
 
@@ -148,6 +149,11 @@ pub(crate) fn from_competitive_transition(
     after.observation.operations.margin,
     &after.observation,
   );
+  let music_state_id = visible_music_state_id(
+    &summary,
+    &after.observation,
+    transition.next.turn >= COMPETITIVE_MONTH_LIMIT,
+  );
 
   ResolutionEnvelope {
     schema_version: RESOLUTION_SCHEMA_VERSION.to_string(),
@@ -159,6 +165,7 @@ pub(crate) fn from_competitive_transition(
     steps,
     effects,
     audio_cue_ids,
+    music_state_id,
     replay: ResolutionReplayMetadata {
       selected_turn: transition.next.turn,
       transition_count,
@@ -221,6 +228,88 @@ fn visible_event_cue_ids(
     cue_ids.push("event.affiliation-milestone".to_string());
   }
   cue_ids
+}
+
+fn visible_music_state_id(
+  summary: &TransitionSummary,
+  after_observation: &ReadOnlyObservation,
+  done: bool,
+) -> String {
+  if done {
+    return "debrief".to_string();
+  }
+  let mut visible_text = summary.events.join(" ");
+  visible_text.push(' ');
+  visible_text.push_str(&summary.effects.join(" "));
+  visible_text.push(' ');
+  visible_text.push_str(&after_observation.workforce_trust);
+  visible_text.push(' ');
+  visible_text.push_str(&after_observation.in_flight_projects);
+  visible_text.push(' ');
+  visible_text.push_str(&after_observation.cash_runway_signal);
+  for bullet in after_observation
+    .market_bullets
+    .iter()
+    .chain(after_observation.policy_bullets.iter())
+  {
+    visible_text.push(' ');
+    visible_text.push_str(bullet);
+  }
+  let visible_text = visible_text.to_lowercase();
+  if [
+    "regulat",
+    "oversight",
+    "mandate",
+    "policy review",
+    "review letter",
+  ]
+  .iter()
+  .any(|word| visible_text.contains(word))
+  {
+    return "regulatory_scrutiny".to_string();
+  }
+  if [
+    "affiliation",
+    "partner",
+    "coalition",
+    "negotiat",
+    "commitment review",
+  ]
+  .iter()
+  .any(|word| visible_text.contains(word))
+  {
+    return "affiliation_negotiation".to_string();
+  }
+  if [
+    "rival",
+    "competitive",
+    "competition",
+    "market escalation",
+    "public expansion",
+  ]
+  .iter()
+  .any(|word| visible_text.contains(word))
+  {
+    return "competitive_escalation".to_string();
+  }
+  if after_observation.operations.margin < 0
+    || after_observation.operations.unmet_demand > 0
+    || [
+      "watch",
+      "strained",
+      "pressure",
+      "shortage",
+      "constraint",
+      "unmet",
+      "negative",
+      "runway",
+    ]
+    .iter()
+    .any(|word| visible_text.contains(word))
+  {
+    return "pressure".to_string();
+  }
+  "stable_operations".to_string()
 }
 
 fn snapshot(
@@ -322,7 +411,7 @@ fn pending_items(pending: &[ReadOnlyPendingEffect]) -> Vec<String> {
 #[cfg(test)]
 mod tests {
   use super::super::presentation::{ReadOnlyMetric, ReadOnlyObservation, ReadOnlyOperations};
-  use super::visible_event_cue_ids;
+  use super::{visible_event_cue_ids, visible_music_state_id};
   use crate::mcp::session::TransitionSummary;
 
   fn observation() -> ReadOnlyObservation {
@@ -430,5 +519,81 @@ mod tests {
     );
 
     assert!(ids.is_empty());
+  }
+
+  #[test]
+  fn visible_music_state_projection_covers_live_resolution_states() {
+    let mut after = observation();
+    after.workforce_trust = "stable".to_string();
+    after.in_flight_projects = "none".to_string();
+    after.cash_runway_signal = "adequate".to_string();
+    after.operations.margin = 10;
+    after.operations.unmet_demand = 0;
+
+    let cases = [
+      (
+        vec!["Regulatory policy review was reported"],
+        "regulatory_scrutiny",
+      ),
+      (
+        vec!["Affiliation partner negotiation was reported"],
+        "affiliation_negotiation",
+      ),
+      (
+        vec!["Public rival expansion was observed"],
+        "competitive_escalation",
+      ),
+    ];
+    for (events, expected) in cases {
+      let summary = TransitionSummary {
+        events: events.into_iter().map(String::from).collect(),
+        effects: Vec::new(),
+        ..summary()
+      };
+      assert_eq!(visible_music_state_id(&summary, &after, false), expected);
+    }
+
+    let pressure_summary = TransitionSummary {
+      events: Vec::new(),
+      effects: Vec::new(),
+      ..summary()
+    };
+    let mut pressure = after.clone();
+    pressure.operations.margin = -1;
+    assert_eq!(
+      visible_music_state_id(&pressure_summary, &pressure, false),
+      "pressure"
+    );
+    assert_eq!(
+      visible_music_state_id(&pressure_summary, &after, false),
+      "stable_operations"
+    );
+    assert_eq!(
+      visible_music_state_id(&pressure_summary, &after, true),
+      "debrief"
+    );
+  }
+
+  #[test]
+  fn visible_music_state_projection_uses_higher_priority_visible_context() {
+    let mut after = observation();
+    after.workforce_trust = "stable".to_string();
+    after.in_flight_projects = "none".to_string();
+    after.cash_runway_signal = "adequate".to_string();
+    after.operations.margin = -10;
+    after.operations.unmet_demand = 10;
+    let summary = TransitionSummary {
+      events: vec![
+        "Public rival expansion was observed".to_string(),
+        "Regulatory policy review was reported".to_string(),
+      ],
+      effects: Vec::new(),
+      ..summary()
+    };
+
+    assert_eq!(
+      visible_music_state_id(&summary, &after, false),
+      "regulatory_scrutiny"
+    );
   }
 }

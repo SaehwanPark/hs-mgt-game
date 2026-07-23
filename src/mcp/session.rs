@@ -2374,6 +2374,17 @@ mod tests {
 
     assert_eq!(resolution.schema_version, "competitive-resolution-v1");
     assert_eq!(resolution.turn, 1);
+    assert!(
+      [
+        "debrief",
+        "regulatory_scrutiny",
+        "affiliation_negotiation",
+        "competitive_escalation",
+        "pressure",
+        "stable_operations",
+      ]
+      .contains(&resolution.music_state_id.as_str())
+    );
     assert_eq!(
       ids,
       [

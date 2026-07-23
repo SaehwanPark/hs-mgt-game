@@ -2227,10 +2227,10 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live event-cue projection recorded in v0.12.92 after
-facility, operational-overlay, and terminal-debrief slices; full campaign
-facility/event coverage, continuity validation, performance, and screenshot
-gates remain open.
+**Status:** Bounded live music-state projection recorded in v0.12.93 after
+facility, operational-overlay, terminal-debrief, and event-cue slices; full
+campaign facility/event/music coverage, continuity validation, performance,
+and screenshot gates remain open.
 
 ### Scope
 
@@ -2356,6 +2356,27 @@ gates remain open.
   campaign event taxonomy, music-state coverage, history/debrief/save-load/
   replay continuity, screenshots, performance/compatibility, and human
   quality remain open.
+
+### v0.12.93 bounded live music-state projection evidence
+
+- `ResolutionEnvelope.music_state_id` now carries one existing music-stem
+  catalog ID for each live competitive resolution: `debrief` at the explicit
+  terminal boundary; otherwise visible regulatory, affiliation, competitive,
+  pressure, or stable-operations context using the catalog's documented
+  priority.
+- `gui/app.mjs` uses a valid non-empty host state for the resolution music
+  handoff. Missing, malformed, and unknown values remain safe: older
+  envelopes use the existing visible-only classifier, and unknown playback
+  falls through the current audio fallback while written output remains.
+- `src/mcp/resolution.rs` Rust tests and
+  `tests/test_phase11_live_music.py` cover catalog parity, all live-selectable
+  states, priority conflicts, explicit/malformed/unknown fallback, syntax, and
+  the unchanged hidden-state/network boundary. No asset, simulation,
+  history/hash, or client-authority path changes.
+- This closes only the current live music-state projection evidence. Full
+  campaign music taxonomy, event/music continuity, history/debrief/save-load/
+  replay continuity, screenshots, performance/compatibility, and human
+  audio/accessibility quality remain open.
 
 ### Exit criteria
 

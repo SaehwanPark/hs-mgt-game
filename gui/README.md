@@ -353,6 +353,12 @@ list; envelopes from older adapters that omit the field use the existing
 visible-only `visibleEventCues` classifier. Cue playback remains optional and
 the catalog's written equivalents remain the meaning-bearing fallback.
 
+The same live resolution envelope may include `music_state_id`, one of the
+existing music-stem catalog states selected from committed visible context.
+The page uses a valid non-empty state when present and otherwise keeps the
+visible-only music classifier. Music remains optional atmospheric support;
+written resolution and status text remain complete when muted or unavailable.
+
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a
 schematic identity map, visible demand/access/process overlays, owned facility
