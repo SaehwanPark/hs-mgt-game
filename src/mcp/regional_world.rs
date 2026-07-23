@@ -1,5 +1,6 @@
 use crate::model::{
-  AggregatedMonthlyActions, CompetitiveWorldState, HealthSystemState, PlayerObservation,
+  AggregatedMonthlyActions, CashRunwaySignal, CompetitiveWorldState, HealthSystemState,
+  PlayerObservation,
 };
 use crate::sim::observe_for_human;
 
@@ -66,6 +67,7 @@ pub struct RegionalWorldOverlay {
   pub unit: String,
   pub source: String,
   pub equivalent: String,
+  pub operational_overlay_id: Option<String>,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
@@ -314,7 +316,7 @@ fn metric(label: &str, value: i32) -> ReadOnlyMetric {
 }
 
 fn overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOverlay> {
-  vec![
+  let mut overlays = vec![
     overlay(
       "demand",
       "Reported demand",
@@ -355,7 +357,90 @@ fn overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOverlay> {
       "PlayerObservation.in_flight_projects",
       "Pending timeline and selected detail",
     ),
-  ]
+  ];
+  overlays.extend(operational_overlays(observation));
+  overlays
+}
+
+fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOverlay> {
+  let mut overlays = Vec::new();
+  if observation.monthly_unmet_demand > 0 {
+    overlays.push(operational_overlay(
+      "operational-demand-pressure",
+      "Demand pressure",
+      observation.monthly_unmet_demand.to_string(),
+      "demand units",
+      "PlayerObservation.monthly_unmet_demand",
+      "Demand pressure; visible unmet-demand value is reported",
+    ));
+  }
+  if !observation.in_flight_projects.trim().is_empty()
+    && !observation.in_flight_projects.eq_ignore_ascii_case("none")
+  {
+    overlays.push(operational_overlay(
+      "operational-active-capital-project",
+      "Active capital project",
+      observation.in_flight_projects.clone(),
+      "reported process",
+      "PlayerObservation.in_flight_projects",
+      "Active capital project; host-reported project timing is visible",
+    ));
+  }
+  if observation.monthly_operating_margin < 0
+    || matches!(observation.cash_runway_signal, CashRunwaySignal::Strained)
+  {
+    overlays.push(operational_overlay(
+      "operational-financial-distress",
+      "Financial distress",
+      format!(
+        "margin {}; runway {}",
+        observation.monthly_operating_margin,
+        observation.cash_runway_signal.label()
+      ),
+      "reported status",
+      "PlayerObservation.monthly_operating_margin + PlayerObservation.cash_runway_signal",
+      "Financial distress; visible cash/runway signal is reported",
+    ));
+  }
+  if observation
+    .community_trust_summary
+    .eq_ignore_ascii_case("watch")
+  {
+    overlays.push(operational_overlay(
+      "operational-community-trust-concern",
+      "Community-trust concern",
+      observation.community_trust_summary.clone(),
+      "reported status",
+      "PlayerObservation.community_trust_summary",
+      "Community-trust concern; visible trust status is reported",
+    ));
+  }
+  if !observation.intel_gaps.is_empty() || observation.prior_access_revision.is_some() {
+    let gap_summary = observation.intel_gaps.join("; ");
+    let value = if let Some((turn, revised_value)) = observation.prior_access_revision {
+      format!(
+        "{}; prior access revision at turn {}: {}",
+        if gap_summary.is_empty() {
+          "No additional intelligence gap"
+        } else {
+          &gap_summary
+        },
+        turn,
+        revised_value
+      )
+    } else {
+      observation.intel_gaps.join("; ")
+    };
+    overlays.push(operational_overlay(
+      "operational-uncertain-stale-intelligence",
+      "Uncertain or stale intelligence",
+      value,
+      "reported information status",
+      "PlayerObservation.intel_gaps / PlayerObservation.prior_access_revision",
+      "Uncertain or stale intelligence; missingness or revision remains explicit",
+    ));
+  }
+  overlays
 }
 
 fn overlay(
@@ -373,6 +458,26 @@ fn overlay(
     unit: unit.to_string(),
     source: source.to_string(),
     equivalent: equivalent.to_string(),
+    operational_overlay_id: None,
+  }
+}
+
+fn operational_overlay(
+  id: &str,
+  label: &str,
+  value: String,
+  unit: &str,
+  source: &str,
+  equivalent: &str,
+) -> RegionalWorldOverlay {
+  RegionalWorldOverlay {
+    id: id.to_string(),
+    label: label.to_string(),
+    value,
+    unit: unit.to_string(),
+    source: source.to_string(),
+    equivalent: equivalent.to_string(),
+    operational_overlay_id: Some(id.to_string()),
   }
 }
 
@@ -381,5 +486,79 @@ fn navigation(id: &str, label: &str, target: &str) -> RegionalWorldNavigation {
     id: id.to_string(),
     label: label.to_string(),
     target: target.to_string(),
+  }
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn operational_overlay_bindings_use_only_direct_visible_conditions() {
+    let observation = PlayerObservation {
+      org_name: "Riverside".to_string(),
+      reported_access_index: 70,
+      prior_access_revision: Some((2, 68)),
+      reported_quality_index: 72,
+      workforce_trust_summary: "strained".to_string(),
+      community_trust_summary: "watch".to_string(),
+      staffed_beds: 100,
+      outpatient_capacity: 100,
+      emergency_capacity: 10,
+      icu_capacity: 5,
+      obstetrics_capacity: 4,
+      psychiatric_capacity: 4,
+      cardiology_capacity: 4,
+      oncology_capacity: 4,
+      infusion_capacity: 4,
+      neurology_capacity: 4,
+      asc_capacity: 4,
+      nurses: 10,
+      physicians: 10,
+      admins: 10,
+      monthly_demand: 120,
+      monthly_treated_volume: 108,
+      monthly_unmet_demand: 12,
+      monthly_operating_revenue: 90,
+      monthly_operating_cost: 100,
+      monthly_operating_margin: -10,
+      in_flight_projects: "tower (month 2 of 12)".to_string(),
+      cash_runway_signal: CashRunwaySignal::Strained,
+      market_bullets: Vec::new(),
+      policy_bullets: Vec::new(),
+      annual_policy_review: None,
+      consultant_options: Vec::new(),
+      intel_gaps: vec!["Northlake activity last month".to_string()],
+      rna_strike_active: false,
+    };
+
+    let categories = operational_overlays(&observation);
+    assert_eq!(
+      categories
+        .iter()
+        .map(|overlay| overlay.operational_overlay_id.as_deref())
+        .collect::<Vec<_>>(),
+      vec![
+        Some("operational-demand-pressure"),
+        Some("operational-active-capital-project"),
+        Some("operational-financial-distress"),
+        Some("operational-community-trust-concern"),
+        Some("operational-uncertain-stale-intelligence"),
+      ]
+    );
+    assert!(
+      categories
+        .iter()
+        .all(|overlay| overlay.source.starts_with("PlayerObservation"))
+    );
+
+    let all = overlays(&observation);
+    assert_eq!(
+      all
+        .iter()
+        .find(|overlay| overlay.id == "demand")
+        .and_then(|overlay| overlay.operational_overlay_id.as_deref()),
+      None
+    );
   }
 }

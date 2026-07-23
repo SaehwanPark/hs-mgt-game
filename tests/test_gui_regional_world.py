@@ -33,6 +33,7 @@ class GuiRegionalWorldTests(unittest.TestCase):
       "RegionalWorldSignal",
       "RegionalWorldProcess",
       "RegionalWorldOverlay",
+      "operational_overlay_id",
       "RegionalWorldNavigation",
       "RegionalWorldMissing",
       "PUBLIC_RIVAL_LAG_MONTHS",

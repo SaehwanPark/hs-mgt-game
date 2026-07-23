@@ -1,4 +1,60 @@
-# Request Summary — Visual/audio Phase 11.1 live facility binding v0.12.89
+# Request Summary — Visual/audio Phase 11.1 live operational-overlay binding v0.12.90
+
+## Authorized outcome
+
+Bind directly supported actor-visible conditions in the competitive regional
+world to the existing operational-overlay catalog. Preserve raw metric
+overlays, source/equivalent text, generic fallback behavior, and the host/core
+authority boundary.
+
+## Target slice
+
+- Add an optional `operational_overlay_id` to the host-projected regional-world
+  overlay contract.
+- Populate only visible conditions supported by `PlayerObservation`:
+  unmet-demand pressure, active capital projects, financial distress,
+  community-trust concern, and uncertain/stale intelligence.
+- Resolve explicit IDs in the live regional-board adapter and expose catalog
+  source/equivalent semantics with a generic fallback.
+- Add deterministic Rust, Node, and Python evidence plus project-record/version
+  updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 overlay coverage.
+- `src/mcp/regional_world.rs` and `src/model/campaign.rs` — actor-visible
+  observation projection.
+- `gui/operational-overlays.mjs`, `gui/regional-board.mjs`, and `gui/app.mjs` —
+  catalog and live presentation paths.
+- `_workspace/84_implementation_plan_visual-audio-phase11-live-overlays-v0.12.90.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not claim full campaign overlay coverage, screenshot, performance,
+  compatibility, accessibility quality, or human evaluation completion.
+- Do not add assets, dependencies, hidden-state fields, rival facility detail,
+  simulation behavior, client authority, or network access.
+- Do not classify raw demand, access, or staffed-bed metrics as operational
+  severity without a direct visible condition.
+
+## Validation target
+
+Focused overlay-binding, regional-world, GUI-contract, release metadata,
+asset/security/credits, documentation, JavaScript, formatting, Clippy, and
+full Python/Rust checks.
+
+## Evidence limits
+
+This slice proves explicit DTO-to-catalog binding and fallback semantics for the
+currently supported live conditions only. Full campaign overlay/event/history/
+debrief/save-load/replay coverage, screenshots, performance, compatibility,
+asset quality, human accessibility, audio usefulness, legal clearance, and
+educational benefit remain open.
+
+---
+
+# Historical Request Summary — Visual/audio Phase 11.1 live facility binding v0.12.89
 
 ## Authorized outcome
 

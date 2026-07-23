@@ -566,7 +566,16 @@ bounded emergency-department presentation equivalent. This does not close
 full campaign facility taxonomy, asset completeness, continuity, screenshot,
 performance, compatibility, or human-quality gates.
 
-Last Reviewed: 2026-07-21
+The v0.12.90 Phase 11.1 live-operational-overlay slice adds an optional
+`operational_overlay_id` to the actor-visible regional-world overlay DTO for
+directly reported unmet demand, active projects, financial distress,
+community-trust watch status, and uncertain/stale intelligence. Raw metric
+overlays remain unclassified; the browser resolves explicit IDs through the
+existing operational catalog and uses its generic fallback for unknown IDs.
+This projection does not enter simulation, history, replay, hashes, audio, or
+client authority, and full campaign overlay continuity remains open.
+
+Last Reviewed: 2026-07-22
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture

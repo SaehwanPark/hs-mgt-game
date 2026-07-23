@@ -1,4 +1,82 @@
-# Presentation Contract — Phase 11.1 live facility binding v0.12.89
+# Presentation Contract — Phase 11.1 live operational overlays v0.12.90
+
+## Goal and Authorization
+
+Define the live regional-world overlay binding needed to advance the Phase 11.1
+overlay-coverage slice. The host may add an optional catalog ID derived from a
+directly actor-visible condition; the browser may render that ID and its
+registered semantics. This slice does not authorize full campaign coverage or
+new assets.
+
+## Player Questions and Consequences
+
+The board should answer: “Which visible operational condition is currently
+reported, what source supports it, and what information remains unavailable?”
+The overlay must not answer hidden severity, actor intent, causal attribution,
+probability, or future outcome.
+
+## Actor-Visible Source Ledger
+
+| Binding | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| `operational-demand-pressure` | `PlayerObservation.monthly_unmet_demand > 0` | No binding when the reported value is zero; raw metric remains visible | No severity beyond the reported nonzero condition |
+| `operational-active-capital-project` | Non-empty `PlayerObservation.in_flight_projects` | No binding for `none`/empty | No completion, delay cause, or future result |
+| `operational-financial-distress` | `CashRunwaySignal::Strained` or reported margin `< 0` | No binding when neither condition is reported | No solvency or forecast claim |
+| `operational-community-trust-concern` | `PlayerObservation.community_trust_summary == "watch"` | No binding for stable/unknown | No latent sentiment or causal claim |
+| `operational-uncertain-stale-intelligence` | Non-empty `intel_gaps` or `prior_access_revision` | No binding when neither is present | No probability, truth, or hidden risk estimate |
+| Unknown explicit catalog ID | Host-shaped optional field | Browser uses `operational-overlay-generic` | No local reinterpretation |
+| Raw metric overlay | Existing actor-visible metric value | Keep existing label/value/source/equivalent | Do not relabel as an operational category |
+
+## Visual, Motion, and Audio Semantics
+
+The catalog supplies stable label, glyph, non-color pattern, text equivalent,
+source, and static reduced-motion semantics. The live board renders the
+explicit catalog ID alongside the raw value. Catalog priority remains display
+ordering only and never encodes severity. No new audio or motion is introduced.
+
+## Accessibility and Fallbacks
+
+Every bound overlay retains text, source, and equivalent content. Unknown IDs
+resolve to the registered generic overlay with an explicit unavailable label.
+Absent conditions are omitted as categories but retain raw metric/report text.
+Mute, reduced-motion, missing-asset, text-scaling, and unsupported-browser
+behavior remain unchanged because the slice adds no playback or asset load.
+
+## Authority, History, and Replay Boundaries
+
+The optional catalog ID is a host-shaped projection of `PlayerObservation`; it
+does not enter commands, transition evaluation, stochastic inputs, state hashes,
+immutable history, replay artifacts, or debrief facts. Browser normalization,
+selection, and DOM attributes remain reversible presentation state.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. The existing operational-overlay module remains
+the registry source and the changed regional-board adapter must keep its
+repository-authored hash current. Generic fallback remains registry-backed and
+release-free.
+
+## Verification and Evidence Limits
+
+Focused Rust tests must prove supported condition projection and unchanged
+observation reads. Node/Python tests must prove catalog resolution, fallback,
+DOM/source/equivalent exposure, and JavaScript syntax. Existing asset, replay,
+documentation, and full Rust/Python checks remain required. These checks do not
+establish human accessibility, audio usefulness, asset quality, legal clearance,
+educational benefit, or full campaign coverage.
+
+## Non-Goals and Open Questions
+
+- No event-cue/music mapping, history/debrief redesign, save/load/replay
+  screenshot suite, performance benchmark, or browser matrix in this slice.
+- Open: which later host-committed event/history fields can safely support the
+  remaining operational categories without duplicating transition logic?
+- Open: full-campaign visual continuity and human evaluation remain separate
+  gates.
+
+---
+
+# Historical Presentation Contract — Phase 11.1 live facility binding v0.12.89
 
 ## Goal and Authorization
 

@@ -5366,6 +5366,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   stochastic input, hidden-state projection, rival facility detail, history,
   replay, or external network path.
 
+### Visual/audio Phase 11.1 live operational-overlay binding (v0.12.90)
+
+- Status: In progress; directly visible live operational conditions now carry
+  optional catalog bindings, while full campaign overlay coverage remains
+  incomplete.
+- Done: host-shaped bindings for nonzero unmet demand, active capital projects,
+  reported financial distress, community-trust watch status, and explicit
+  uncertain/stale intelligence; raw metric preservation; catalog resolution;
+  generic fallback; source/equivalent text; and deterministic Rust/Node/Python
+  evidence.
+- Not Yet Done: remaining event/history/debrief/save-load/replay continuity,
+  full overlay taxonomy, screenshots, performance/compatibility validation,
+  asset-quality review, and human quality evaluation.
+- Deferred / Non-Goals: no new assets, audio, simulation mechanism, stochastic
+  input, hidden-state projection, rival detail, command, history, replay hash,
+  or client authority change.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -771,12 +771,21 @@ function regionalEntitiesToFixture(envelope) {
   }));
 }
 
-function renderRegionalOverlays(overlays, root) {
+export function renderRegionalOverlays(overlays, root) {
   const list = root.querySelector("#regional-overlay-list");
   if (!list) return;
   list.replaceChildren();
   for (const overlay of overlays ?? []) {
     const item = document.createElement("li");
+    item.dataset.overlayId = String(overlay.id ?? "");
+    item.dataset.operationalOverlayId = String(overlay.operational_overlay_id ?? "");
+    const catalogSemantics = overlay.operational_overlay_id
+      ? `; Catalog source: ${overlay.operational_source ?? "Unavailable"}; Non-color pattern: ${overlay.operational_pattern ?? "Unavailable"}`
+      : "";
+    item.setAttribute(
+      "aria-label",
+      `${overlay.label ?? "Visible overlay"}; ${overlay.value ?? "Unavailable"}; ${overlay.equivalent ?? "Visible source-linked overlay."}${catalogSemantics}`,
+    );
     const marker = createVisualToken(visualMarkerFor(overlay.marker ?? overlay.kind ?? overlay.label), "marker");
     const headingRow = document.createElement("div");
     headingRow.className = "timeline-row";
@@ -788,6 +797,12 @@ function renderRegionalOverlays(overlays, root) {
     equivalent.textContent = String(overlay.equivalent ?? "Visible source-linked overlay.");
     headingRow.append(marker, heading);
     item.append(headingRow, value, equivalent);
+    if (overlay.operational_overlay_id) {
+      const semantics = document.createElement("p");
+      semantics.className = "source";
+      semantics.textContent = catalogSemantics.slice(2);
+      item.append(semantics);
+    }
     appendSource(item, overlay.source);
     list.append(item);
   }

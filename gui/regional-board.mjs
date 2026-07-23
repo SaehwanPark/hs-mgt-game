@@ -1,4 +1,5 @@
 import { facilityComponentFor } from "./facility-components.mjs";
+import { operationalOverlayFor } from "./operational-overlays.mjs";
 
 export const REGIONAL_BOARD_SCHEMA = "regional-board-scene-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
@@ -79,14 +80,21 @@ function normalizeEntity(entity, missing, index) {
 }
 
 function normalizeOverlay(overlay, index) {
+  const hasOperationalBinding = Boolean(String(overlay?.operational_overlay_id ?? "").trim());
+  const operational = hasOperationalBinding
+    ? operationalOverlayFor(overlay.operational_overlay_id)
+    : null;
   return {
     id: safeId(overlay?.id, `overlay-${index + 1}`),
-    label: text(overlay?.label, "Visible overlay"),
+    operational_overlay_id: operational?.id ?? null,
+    label: text(operational?.label ?? overlay?.label, "Visible overlay"),
     value: text(overlay?.value, "Unavailable"),
     unit: text(overlay?.unit, ""),
-    marker: text(overlay?.label, "overlay"),
+    marker: text(operational?.label ?? overlay?.label, "overlay"),
     source: text(overlay?.source, "Visible regional-world source unavailable"),
-    equivalent: text(overlay?.equivalent, "Visible source-linked overlay."),
+    equivalent: text(operational?.text_equivalent ?? overlay?.equivalent, "Visible source-linked overlay."),
+    operational_source: operational?.visible_source ?? null,
+    operational_pattern: operational?.non_color_pattern ?? null,
   };
 }
 
