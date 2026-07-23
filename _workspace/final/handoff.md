@@ -574,7 +574,7 @@ HTML entrypoint is declared and scanned.
 ## Verification
 
 - Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
-- Python discovery — 615 passed, including 14 focused loading-policy and
+- Python discovery — 616 passed, including 15 focused loading-policy and
   metadata tests.
 - Documentation, release metadata, asset/security/release, budget/raster,
   audio-packaging, and visual/audio contract checks passed.

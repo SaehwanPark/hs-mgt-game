@@ -114,16 +114,29 @@ class LoadingPolicyTests(unittest.TestCase):
       self.assertEqual(sources, [])
       self.assertTrue(any("must be a string literal" in error for error in errors))
 
+  def test_comment_gap_module_source_fails_closed(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "app.mjs"
+      source.write_text(
+        'const first = import /* gap */ (moduleName);\n'
+        'import /* gap */ "./unlisted.mjs";\n',
+        encoding="utf-8",
+      )
+      sources, errors = self.checker.module_sources(root, ["app.mjs"])
+      self.assertEqual(sources, [])
+      self.assertEqual(sum("unsupported comment gap" in error for error in errors), 2)
+
   def test_executable_runtime_loads_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)
       source = root / "app.mjs"
       source.write_text(
-        'fetch(asset.url);\nimage.src = asset.release_path;\nnew URL(asset.path);\n',
+        'fetch(asset.url);\nimage.src = asset.release_path;\nimage["src"] = asset.path;\nnew URL(asset.path);\n',
         encoding="utf-8",
       )
       errors = self.checker.scan_markers(root, "app.mjs", self.checker._markers(self.document))
-      self.assertEqual(sum("runtime-file-backed-load" in error for error in errors), 3)
+      self.assertEqual(sum("runtime-file-backed-load" in error for error in errors), 4)
 
   def test_external_or_escaped_entrypoint_sources_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:

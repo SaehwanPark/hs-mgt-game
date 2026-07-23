@@ -28,7 +28,7 @@
   "forbidden_markers": [
     {
       "id": "html-speculative-preload",
-      "pattern": "<link\\b[^>]*\\brel\\s*=\\s*[\"']?(?:preload|modulepreload|prefetch)[\"']?"
+      "pattern": "<link\\b[^>]*\\brel\\s*=\\s*(?:[\"'][^\"']*\\b(?:preload|modulepreload|prefetch)\\b[^\"']*[\"']|[^\\s>]*\\b(?:preload|modulepreload|prefetch)\\b[^\\s>]*)"
     },
     {
       "id": "html-file-backed-media",
@@ -40,7 +40,7 @@
     },
     {
       "id": "runtime-file-backed-load",
-      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|\\.src\\s*=|\\.href\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])"
+      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|(?:\\.(?:src|href)|\\[\\s*[\"'](?:src|href)[\"']\\s*\\])\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])"
     }
   ],
   "future_asset_requirements": [
