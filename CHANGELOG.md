@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.12.93] - 2026-07-23
+
+- Added an explicit host-shaped `music_state_id` projection to live
+  competitive resolution envelopes for debrief, regulatory, affiliation,
+  competitive, pressure, and stable-operating contexts.
+- Kept the browser's visible-only music classifier as a safe fallback for
+  legacy, malformed, and unknown state values without adding audio assets or
+  client simulation.
+- Added Rust, Node, and Python coverage for state priority, catalog parity,
+  fallback behavior, and authority boundaries; full campaign music coverage,
+  screenshots, performance, compatibility, and human-quality gates remain
+  open.
+
 ## [0.12.92] - 2026-07-22
 
 - Added an explicit host-shaped `audio_cue_ids` projection to live competitive

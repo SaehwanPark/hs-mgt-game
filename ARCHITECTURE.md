@@ -593,6 +593,15 @@ uses its existing visible-only classifier only for legacy envelopes. No audio
 asset, simulation rule, history/hash value, hidden-state field, or client
 authority is introduced, and broad campaign event-cue coverage remains open.
 
+The v0.12.93 Phase 11.1 live-music slice adds `music_state_id` to the
+host-shaped competitive resolution envelope. The state is selected from the
+committed summary, actor-visible after observation, and explicit terminal
+boundary using the existing music contract's visible priority; the browser
+uses it when valid and falls back to visible classification for older or
+malformed envelopes. No audio asset, simulation rule, history/hash value,
+hidden-state field, or client authority is introduced, and broad campaign
+music-state coverage remains open.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Keep Music-State Priority Explicit and Visible
+
+- Context: The browser already classified music from visible presentation
+  values, but live resolution also had a committed transition summary and an
+  explicit terminal boundary owned by the host.
+- Risk: A browser-only classifier can drift from the committed resolution
+  context and can make terminal/debrief state dependent on a later refresh.
+- Resolution: Add one host-shaped `music_state_id` using the existing visible
+  priority—debrief, regulatory, affiliation, competitive, pressure, then
+  stable operations—and make the browser use it only when it is a usable
+  string. Legacy and malformed envelopes retain visible classification.
+- Prevention: Test priority conflicts and every live-selectable catalog state;
+  keep the ID out of simulation state, hashes, history, replay, and debrief
+  facts, and preserve written equivalents when audio is unavailable.
+
 ## Make Event-Cue Selection Host-Shaped but Presentation-Only
 
 - Context: The live resolution browser already classified event cues from
