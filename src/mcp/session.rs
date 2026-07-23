@@ -27,6 +27,7 @@ use crate::sim::{observe_for_human, observe_for_player, transition, validate_com
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
 pub const HISTORY_SCHEMA_VERSION: &str = "competitive-history-v1";
 pub const REPLAY_SCHEMA_VERSION: &str = "competitive-replay-v1";
+pub const SAVE_SCHEMA_VERSION: &str = "competitive-save-v1";
 pub const END_SESSION_SCHEMA_VERSION: &str = "competitive-end-session-v1";
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
@@ -55,6 +56,16 @@ pub struct GetHistoryRequest {
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct GetReplayRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct SaveSessionRequest {
+  pub session_id: String,
+}
+
+#[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
+pub struct LoadSessionRequest {
   pub session_id: String,
 }
 
@@ -131,6 +142,17 @@ pub struct ReplayEnvelope {
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct SaveEnvelope {
+  pub schema_version: String,
+  pub operation: String,
+  pub session_id: String,
+  pub campaign: String,
+  pub seed: u64,
+  pub transition_count: usize,
+  pub latest_state_hash: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
 pub struct EndSessionEnvelope {
   pub schema_version: String,
   pub session_id: String,
@@ -183,9 +205,10 @@ pub struct ResourceLimitError {
 pub struct GameSessionStore {
   next_id: u64,
   sessions: HashMap<String, GameSession>,
+  checkpoints: HashMap<String, GameSession>,
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 #[allow(clippy::large_enum_variant)]
 enum GameSession {
   Stabilization(StabilizationSession),
@@ -193,7 +216,7 @@ enum GameSession {
   Affiliation(AffiliationSession),
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct StabilizationSession {
   seed: u64,
   ruleset: Ruleset,
@@ -202,7 +225,7 @@ struct StabilizationSession {
   done: bool,
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct CompetitiveSession {
   seed: u64,
   ruleset: CompetitiveRuleset,
@@ -212,7 +235,7 @@ struct CompetitiveSession {
   done: bool,
 }
 
-#[derive(Debug)]
+#[derive(Clone, Debug)]
 struct AffiliationSession {
   seed: u64,
   ruleset: AffiliationRuleset,
@@ -226,6 +249,7 @@ impl Default for GameSessionStore {
     Self {
       next_id: 1,
       sessions: HashMap::new(),
+      checkpoints: HashMap::new(),
     }
   }
 }
@@ -419,6 +443,65 @@ impl GameSessionStore {
       transition_count: history.transition_count,
       latest_state_hash,
       transitions: history.transitions,
+    })
+  }
+
+  pub fn save_session(
+    &mut self,
+    request: SaveSessionRequest,
+  ) -> Result<SaveEnvelope, McpErrorMessage> {
+    let Some(session) = self.sessions.get(&request.session_id) else {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    };
+    self
+      .checkpoints
+      .insert(request.session_id.clone(), session.clone());
+    self.save_envelope(&request.session_id, "saved")
+  }
+
+  pub fn load_session(
+    &mut self,
+    request: LoadSessionRequest,
+  ) -> Result<SaveEnvelope, McpErrorMessage> {
+    if !self.sessions.contains_key(&request.session_id) {
+      return Err(error_message(format!(
+        "unknown session '{}'",
+        request.session_id
+      )));
+    }
+    let Some(snapshot) = self.checkpoints.get(&request.session_id).cloned() else {
+      return Err(McpErrorMessage {
+        error: format!("no checkpoint saved for session '{}'", request.session_id),
+        code: Some("checkpoint_missing".to_string()),
+        resource_limit: None,
+        hint: Some("Save a host checkpoint before restoring it.".to_string()),
+      });
+    };
+    if let Some(session) = self.sessions.get_mut(&request.session_id) {
+      *session = snapshot;
+    }
+    self.save_envelope(&request.session_id, "loaded")
+  }
+
+  fn save_envelope(
+    &self,
+    session_id: &str,
+    operation: &str,
+  ) -> Result<SaveEnvelope, McpErrorMessage> {
+    let replay = self.get_replay(GetReplayRequest {
+      session_id: session_id.to_string(),
+    })?;
+    Ok(SaveEnvelope {
+      schema_version: SAVE_SCHEMA_VERSION.to_string(),
+      operation: operation.to_string(),
+      session_id: replay.session_id,
+      campaign: replay.campaign,
+      seed: replay.seed,
+      transition_count: replay.transition_count,
+      latest_state_hash: replay.latest_state_hash,
     })
   }
 
@@ -698,6 +781,7 @@ impl GameSessionStore {
         request.session_id
       )));
     };
+    self.checkpoints.remove(&request.session_id);
     session.mark_done();
     Ok(match session {
       GameSession::Stabilization(session) => {
@@ -1598,6 +1682,61 @@ mod tests {
         .transitions
         .last()
         .map(|transition| transition.state_hash.clone())
+    );
+  }
+
+  #[test]
+  fn competitive_checkpoint_restore_rewinds_visible_history_and_hashes() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let session_id = session.session_id.clone();
+    store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("first month");
+    let saved = store
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("save checkpoint");
+    assert_eq!(saved.schema_version, SAVE_SCHEMA_VERSION);
+    assert_eq!(saved.operation, "saved");
+    assert_eq!(saved.transition_count, 1);
+    let second = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("second month");
+    let restored = store
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restore checkpoint");
+    assert_eq!(restored.operation, "loaded");
+    assert_eq!(restored.transition_count, 1);
+    let current = store
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored replay");
+    assert_eq!(current.transition_count, 1);
+    assert_eq!(current.latest_state_hash, restored.latest_state_hash);
+    let replayed = store
+      .submit_turn(SubmitTurnRequest {
+        session_id,
+        command_text: "hold".to_string(),
+      })
+      .expect("replayed month");
+    assert_eq!(
+      replayed
+        .latest_transition
+        .map(|transition| transition.state_hash),
+      second
+        .latest_transition
+        .map(|transition| transition.state_hash)
     );
   }
 

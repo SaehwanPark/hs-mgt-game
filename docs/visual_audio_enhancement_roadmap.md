@@ -2227,10 +2227,11 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live replay-continuity handoff recorded in v0.12.95 after
-facility, operational-overlay, terminal-debrief, event-cue, music-state, and
-history slices; full campaign facility/event/music coverage, save/load/replay
-continuity, performance, and screenshot gates remain open.
+**Status:** Bounded live checkpoint save/restore handoff recorded in v0.12.96
+after facility, operational-overlay, terminal-debrief, event-cue, music-state,
+history, and replay slices; full campaign facility/event/music coverage,
+durable save/load/replay continuity, performance, and screenshot gates remain
+open.
 
 ### Scope
 
@@ -2417,6 +2418,29 @@ continuity, performance, and screenshot gates remain open.
   regeneration/playback, screenshots, performance/compatibility, asset
   quality, and human quality remain open. No replay calculation, simulation,
   audio, or asset behavior is introduced.
+
+### v0.12.96 bounded live checkpoint save/restore evidence
+
+- `SaveEnvelope` now carries the versioned `competitive-save-v1` schema,
+  operation (`saved` or `loaded`), session/campaign/seed identity, committed
+  transition count, and latest visible state hash. The host stores one cloned
+  in-memory checkpoint per active session and restores it without entering a
+  new transition or changing transition rules.
+- MCP `save_session`/`load_session`, loopback `POST /save` and `/load`, and
+  adapter `saveSession`/`loadSession` provide the explicit host boundary. The
+  browser exposes labeled save/restore controls, validates metadata, and
+  refreshes presentation, action catalog, history, replay, and regional-world
+  reads after a successful restore; failures preserve the current view.
+- Rust checkpoint/hash tests, GUI transport assertions, and
+  `tests/test_phase11_live_checkpoint.py` cover clone/restore continuity,
+  missing/unknown operations, controls, validation, refresh, syntax, and the
+  unchanged client/simulation/network authority boundary.
+- This closes only the current in-memory live checkpoint and visible refresh
+  evidence. Durable file persistence, cross-process/browser-refresh recovery,
+  full campaign save/load/replay continuity, screenshots,
+  performance/compatibility, asset quality, and human quality remain open. No
+  browser serialization, replay regeneration, audio, or asset behavior is
+  introduced.
 
 ### Exit criteria
 

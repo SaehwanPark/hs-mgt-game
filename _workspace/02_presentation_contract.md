@@ -1063,3 +1063,76 @@ replay, documentation, and release checks remain required.
   evaluation gates.
 
 ---
+# Presentation Contract — Phase 11.1 live checkpoint continuity v0.12.96
+
+## Goal and Authorization
+
+Define the bounded live checkpoint save/restore handoff for the Phase 11.1
+save/load item. The host may clone and restore the current in-memory session;
+the browser may request the operation and reload typed host reads. This slice
+does not authorize durable persistence, browser serialization, or full campaign
+continuity.
+
+## Player Questions and Consequences
+
+The controls should answer: “Was the host checkpoint saved or restored, and
+what visible transition count/hash now identifies the current session?” They
+must not suggest that browser state or hidden outcomes were independently
+saved.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Save status | Host `SaveEnvelope` operation and visible count/hash | Show recoverable error; keep current view | No local save confirmation |
+| Restore status | Host `SaveEnvelope` plus refreshed host reads | Preserve current session/view on failure | No browser snapshot restore |
+| History/replay after restore | `get_presentation`, `get_history`, `get_replay` | Keep last valid view if a refresh fails | No local history/replay synthesis |
+| Action catalog after restore | Host `get_action_catalog` | Keep current catalog/session if unavailable | No browser legality reconstruction |
+| Checkpoint identity | Host session ID/campaign/seed | Reject malformed envelope | No inferred durability or cross-process identity |
+
+## Visual, Motion, and Audio Semantics
+
+Save and restore add status text and existing recovery messaging only. A
+successful restore reuses the existing text-first presentation, history,
+replay, action, and regional-world renderers; no new animation/audio/asset
+path is needed.
+
+## Accessibility and Fallbacks
+
+Controls have explicit labels, disabled/busy states, and live status text.
+Failed, unsupported, missing-checkpoint, and unknown-session operations preserve
+the current rendered session and offer the existing recoverable read path.
+Automated checks do not establish human screen-reader, focus, contrast, device,
+or comprehension quality.
+
+## Authority, History, and Replay Boundaries
+
+Only the host clones/restores `GameSession` values. The browser sends a named
+operation and then requests host reads; it does not serialize state, mutate
+history, calculate hashes, resolve transitions, or restore hidden fields.
+Checkpoint metadata does not enter simulation state or transition hashes.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Existing text, current credits, registry,
+release, metadata, and security checks remain the provenance boundary.
+
+## Verification and Evidence Limits
+
+Rust/session/MCP/transport tests must cover save/restore clone behavior,
+count/hash continuity, missing checkpoints, and unknown sessions. Node/Python
+tests must cover envelope validation, controls, refresh/failure preservation,
+syntax, and forbidden authority/network markers. Full Rust, Python, asset,
+replay, documentation, and release checks remain required.
+
+## Non-Goals and Open Questions
+
+- No durable save file, browser refresh persistence, cross-process recovery,
+  replay playback/regeneration, screenshot suite, performance benchmark,
+  browser matrix, or new campaign path.
+- Open: the existing CLI durable save artifact and future GUI persistence need
+  a separate storage/locking contract.
+- Open: human save/restore comprehension and educational usefulness remain
+  external evaluation gates.
+
+---

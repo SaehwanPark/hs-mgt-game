@@ -5465,6 +5465,25 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   stochastic input, hidden-state projection, rival detail, browser-authored
   hashes, audio asset, or client-owned replay authority.
 
+### Visual/audio Phase 11.1 live checkpoint continuity (v0.12.96)
+
+- Status: In progress; the live competitive browser now has host-owned
+  in-memory checkpoint save/restore with visible refresh, while durable
+  persistence and full campaign continuity remain incomplete.
+- Done: versioned `competitive-save-v1` envelope; `save_session` and
+  `load_session` MCP tools; loopback save/load routes; adapter operations;
+  labeled controls; checkpoint clone/restore; strict metadata validation;
+  host-read refresh of presentation/action/history/replay/regional-world
+  surfaces; failure preservation; Rust/Node/Python evidence; and unchanged
+  simulation/hash/client authority.
+- Not Yet Done: durable file persistence, cross-process/browser-refresh
+  recovery, full campaign save/load/replay continuity, screenshots,
+  performance/compatibility, asset-quality review, and human quality.
+- Deferred / Non-Goals: no browser serialization, durable save artifact,
+  replay regeneration/playback, simulation rule, stochastic input,
+  hidden-state projection, rival detail, new audio asset, or client-owned
+  checkpoint authority.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

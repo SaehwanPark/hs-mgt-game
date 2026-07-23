@@ -10,7 +10,9 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
     });
     const payload = await response.json().catch(() => null);
     if (!response.ok) {
-      throw new Error(payload?.error ?? `GUI host request failed (${response.status}).`);
+      const error = new Error(payload?.error ?? `GUI host request failed (${response.status}).`);
+      if (payload?.code) error.code = payload.code;
+      throw error;
     }
     return payload;
   }
@@ -49,6 +51,14 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
 
     async getReplay(sessionId) {
       return request(sessionPath(sessionId, "replay"));
+    },
+
+    async saveSession(sessionId) {
+      return request(sessionPath(sessionId, "save"), { method: "POST" });
+    },
+
+    async loadSession(sessionId) {
+      return request(sessionPath(sessionId, "load"), { method: "POST" });
     },
 
     async endSession(sessionId) {

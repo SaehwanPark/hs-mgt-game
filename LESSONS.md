@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Live Checkpoints Host-Owned and Explicitly Ephemeral
+
+- Context: The CLI already has durable save artifacts, while the live GUI
+  session store is intentionally in memory and had no save/restore boundary.
+- Risk: Letting the browser serialize presentation or history would create a
+  second state authority and could make a restored view differ from the host's
+  transition hash sequence.
+- Resolution: Add one cloned host checkpoint per active session, expose named
+  save/load operations, validate operation/count/hash metadata, and refresh all
+  visible reads from the host after restore. Keep the checkpoint explicitly
+  ephemeral until a separate storage contract exists.
+- Prevention: Test rewind and deterministic continuation after restore,
+  missing/unknown checkpoints, failed refresh preservation, and the absence of
+  browser serialization or simulation calls; keep durable persistence and
+  cross-process recovery separate.
+
 ## Keep Replay Continuity as Host Metadata, Not Browser Playback
 
 - Context: The live GUI had immutable history and historical-resolution reads,

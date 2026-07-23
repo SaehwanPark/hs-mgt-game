@@ -11,8 +11,8 @@ use super::session::{
   EndSessionEnvelope, EndSessionRequest, GameSessionStore, GetActionCatalogRequest,
   GetCampaignCoverageRequest, GetHistoryRequest, GetObservationRequest, GetPresentationRequest,
   GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest, HistoryEnvelope,
-  McpErrorMessage, ReplayEnvelope, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
-  ValidateTurnRequest,
+  LoadSessionRequest, McpErrorMessage, ReplayEnvelope, SaveEnvelope, SaveSessionRequest,
+  SessionEnvelope, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 #[derive(Clone)]
@@ -147,6 +147,28 @@ impl McpGameServer {
   }
 
   #[tool(
+    name = "save_session",
+    description = "Save an in-memory host checkpoint for a live session without serializing state in the client."
+  )]
+  async fn save_session(
+    &self,
+    Parameters(request): Parameters<SaveSessionRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.save_session(request))
+  }
+
+  #[tool(
+    name = "load_session",
+    description = "Restore an in-memory host checkpoint and return aligned save metadata without client-side state restoration."
+  )]
+  async fn load_session(
+    &self,
+    Parameters(request): Parameters<LoadSessionRequest>,
+  ) -> CallToolResult {
+    self.with_store(|store| store.load_session(request))
+  }
+
+  #[tool(
     name = "get_presentation",
     description = "Return a typed actor-visible read-only presentation projection without advancing the session or enabling commands."
   )]
@@ -202,7 +224,7 @@ impl ServerHandler for McpGameServer {
         implementation
       })
       .with_instructions(
-        "Use start_session, get_observation, get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, get_replay, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, get_resolution, get_regional_world, get_history, and get_replay are non-mutating actor-visible reads.",
+        "Use start_session, get_observation, get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, submit_turn, get_resolution, get_regional_world, get_history, get_replay, save_session, load_session, and end_session to play bounded deterministic campaign sessions. get_presentation, get_action_catalog, get_campaign_coverage, validate_turn, get_resolution, get_regional_world, get_history, and get_replay are non-mutating actor-visible reads; save_session and load_session are explicit host checkpoint operations.",
       )
   }
 }
@@ -218,6 +240,7 @@ fn _assert_result_shapes(
   _: SessionEnvelope,
   _: HistoryEnvelope,
   _: ReplayEnvelope,
+  _: SaveEnvelope,
   _: EndSessionEnvelope,
   _: ErrorData,
 ) {
