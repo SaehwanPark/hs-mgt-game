@@ -526,7 +526,7 @@ have explicit null release paths, and compression is recorded as
 ## Verification
 
 - Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
-- Python discovery — 597 passed, including 11 focused audio-packaging and
+- Python discovery — 601 passed, including 13 focused audio-packaging and
   metadata tests.
 - Documentation links, release metadata, asset credits/registry/release,
   generation/security checks, budget/raster reports, and visual/audio contract
@@ -539,7 +539,8 @@ have explicit null release paths, and compression is recorded as
 - Pull request: pending.
 - Presentation-domain QA: pass for the bounded package contract. The sole
   code reviewer found two medium-risk fail-closed gaps; source closure and
-  release-tree symlink rejection are fixed, with follow-up review pending.
+  direct-root, lexical-parent, and nested release-tree symlink rejection are
+  fixed, and the final follow-up review found no actionable issues.
 
 ## Limits and next slice
 
