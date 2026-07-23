@@ -84,9 +84,9 @@ class OfflineAvailabilityTests(unittest.TestCase):
     self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/app.js"))
 
   def test_html_external_attributes_fail_closed(self):
-    tags = self.checker.HTML_TAG_PATTERN.findall(
+    tags = self.checker._html_tags(
       '<script src=//cdn.example/app.js></script>'
-      '<img srcset="./local.png 1x, //cdn.example/remote.png 2x">'
+      '<img alt=">" srcset="./local.png 1x, //cdn.example/remote.png 2x">'
     )
     external = []
     for tag in tags:
@@ -100,6 +100,12 @@ class OfflineAvailabilityTests(unittest.TestCase):
         )
     self.assertEqual(external, ["//cdn.example/app.js", "//cdn.example/remote.png"])
     self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/remote.png"))
+
+  def test_embedded_literal_exemptions_are_exact(self):
+    self.assertTrue(self.checker._allowed_embedded_literal("http://www.w3.org/2000/svg", "module"))
+    self.assertFalse(self.checker._allowed_embedded_literal("http://www.w3.org/2000/svg.evil", "module"))
+    self.assertTrue(self.checker._allowed_embedded_literal("sha256:" + "a" * 64, "catalog"))
+    self.assertFalse(self.checker._allowed_embedded_literal("sha256://external", "catalog"))
 
   def test_path_escape_and_non_loopback_fail_closed(self):
     document = copy.deepcopy(self.document)

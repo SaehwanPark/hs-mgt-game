@@ -26,12 +26,14 @@ RESOURCE_KINDS = {"entrypoint", "host-adapter", "module", "catalog"}
 SOURCE_SCHEME_PATTERN = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
 URI_PREFIX_PATTERN = re.compile(r"^(?![A-Za-z][A-Za-z0-9+.-]*::)[A-Za-z][A-Za-z0-9+.-]*:\S")
 STRING_LITERAL_PATTERN = re.compile(r"[\"'](?:\\.|[^\"'\\])*[\"']")
-HTML_TAG_PATTERN = re.compile(r"<(?:script|link|img|audio|video|source)\b[^>]*>", re.IGNORECASE)
+HTML_TAG_NAME_PATTERN = re.compile(r"<(?:script|link|img|audio|video|source)\b", re.IGNORECASE)
 HTML_ATTRIBUTE_PATTERN = re.compile(
   r"\b(?P<name>src|href|srcset)\s*=\s*(?:\"(?P<double>[^\"]*)\"|'(?P<single>[^']*)'|(?P<bare>[^\s>]+))",
   re.IGNORECASE,
 )
 ESCAPED_CODEPOINT_PATTERN = re.compile(r"\\u\{([0-9a-fA-F]+)\}|\\u([0-9a-fA-F]{4})|\\x([0-9a-fA-F]{2})")
+SVG_NAMESPACE = "http://www.w3.org/2000/svg"
+SHA256_PATTERN = re.compile(r"^sha256:[0-9a-fA-F]{64}$")
 
 
 def _resolve(root: Path, relative: str) -> Path:
@@ -76,6 +78,31 @@ def _external_uri(value: str) -> bool:
   decoded = ESCAPED_CODEPOINT_PATTERN.sub(decode_codepoint, decoded).replace("\\/", "/")
   decoded = decoded.strip()
   return decoded.startswith("//") or bool(URI_PREFIX_PATTERN.match(decoded))
+
+
+def _allowed_embedded_literal(value: str, kind: str) -> bool:
+  return value == SVG_NAMESPACE or (kind == "catalog" and bool(SHA256_PATTERN.fullmatch(value)))
+
+
+def _html_tags(text: str) -> list[str]:
+  tags = []
+  start = None
+  quote = None
+  for index, character in enumerate(text):
+    if start is None:
+      if character == "<":
+        start = index
+      continue
+    if quote is not None:
+      if character == quote and (index == 0 or text[index - 1] != "\\"):
+        quote = None
+      continue
+    if character in ("\"", "'"):
+      quote = character
+    elif character == ">":
+      tags.append(text[start:index + 1])
+      start = None
+  return tags
 
 
 def validate_definition(root: Path, document: object) -> list[str]:
@@ -216,12 +243,14 @@ def route_errors(root: Path, document: dict) -> list[str]:
       value = literal[1:-1]
       if value.startswith("http://www.w3.org/2000/svg"):
         continue
-      if value.startswith("sha256:") and resource["kind"] == "catalog":
+      if _allowed_embedded_literal(value, resource["kind"]):
         continue
       if _external_uri(value):
         errors.append(f"embedded source contains a non-local URL: {source} -> {value}")
     if resource["kind"] == "entrypoint":
-      for tag in HTML_TAG_PATTERN.findall(source_text):
+      for tag in _html_tags(source_text):
+        if not HTML_TAG_NAME_PATTERN.match(tag):
+          continue
         for match in HTML_ATTRIBUTE_PATTERN.finditer(tag):
           value = match.group("double") or match.group("single") or match.group("bare") or ""
           candidates = value.split(",") if match.group("name").lower() == "srcset" else [value]
