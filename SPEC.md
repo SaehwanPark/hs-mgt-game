@@ -5431,6 +5431,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   hidden-state projection, rival detail, browser music inference for current
   envelopes, or client-owned music authority.
 
+### Visual/audio Phase 11.1 live history handoff (v0.12.94)
+
+- Status: In progress; the live competitive browser now has a dedicated
+  non-mutating host history read, while full campaign continuity remains
+  incomplete.
+- Done: versioned `competitive-history-v1` envelope; loopback history route;
+  `getHistory` adapter; aligned transition-count/state-hash validation;
+  text-first rendering through the existing history surface; failure and
+  malformed-envelope preservation; Rust transport and Node/Python boundary
+  evidence; and unchanged simulation, replay, hash, and client authority.
+- Not Yet Done: full campaign history/debrief taxonomy, save/load continuity,
+  replay visual continuity, screenshots, performance/compatibility,
+  asset-quality review, and human quality evaluation.
+- Deferred / Non-Goals: no replay regeneration, persistence, simulation rule,
+  stochastic input, hidden-state projection, rival detail, browser history
+  synthesis, audio asset, or client-owned history authority.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

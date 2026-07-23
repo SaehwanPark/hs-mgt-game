@@ -9,9 +9,9 @@ use axum::{Json, Router};
 use serde::Deserialize;
 
 use crate::mcp::{
-  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetPresentationRequest,
-  GetRegionalWorldRequest, GetResolutionRequest, McpErrorMessage, StartSessionRequest,
-  SubmitTurnRequest, ValidateTurnRequest,
+  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
+  GetPresentationRequest, GetRegionalWorldRequest, GetResolutionRequest, McpErrorMessage,
+  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
@@ -115,6 +115,7 @@ fn gui_router() -> Router {
       "/api/v1/sessions/{session_id}/regional-world",
       get(get_regional_world),
     )
+    .route("/api/v1/sessions/{session_id}/history", get(get_history))
     .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
     .with_state(GuiState::default())
@@ -209,6 +210,12 @@ async fn get_regional_world(
 ) -> Response {
   with_store(&state, |store| {
     store.get_regional_world(GetRegionalWorldRequest { session_id })
+  })
+}
+
+async fn get_history(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.get_history(GetHistoryRequest { session_id })
   })
 }
 
@@ -379,6 +386,14 @@ mod tests {
     let started: serde_json::Value = serde_json::from_str(&body).unwrap();
     let session_id = started["session_id"].as_str().unwrap();
 
+    let history_path = format!("/api/v1/sessions/{session_id}/history");
+    let (status, body) = request(address, "GET", &history_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let history: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(history["schema_version"], "competitive-history-v1");
+    assert_eq!(history["transition_count"], 0);
+    assert!(history["transitions"].as_array().unwrap().is_empty());
+
     for suffix in ["presentation", "regional-world", "action-catalog"] {
       let path = format!("/api/v1/sessions/{session_id}/{suffix}");
       let (status, body) = request(address, "GET", &path, None).await;
@@ -413,6 +428,17 @@ mod tests {
     let resolution: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(resolution["schema_version"], "competitive-resolution-v1");
 
+    let (status, body) = request(address, "GET", &history_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let history: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(history["schema_version"], "competitive-history-v1");
+    assert_eq!(history["transition_count"], 1);
+    assert_eq!(history["transitions"].as_array().unwrap().len(), 1);
+    assert_eq!(
+      history["transitions"][0]["state_hash"],
+      resolution["replay"]["state_hash"]
+    );
+
     let end_path = format!("/api/v1/sessions/{session_id}/end");
     let (status, body) = request(address, "POST", &end_path, None).await;
     assert_eq!(status, 200, "{body}");
@@ -444,6 +470,10 @@ mod tests {
       None,
     )
     .await;
+    assert_eq!(status, 404);
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert!(error["error"].as_str().unwrap().contains("unknown session"));
+    let (status, body) = request(address, "GET", "/api/v1/sessions/missing/history", None).await;
     assert_eq!(status, 404);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert!(error["error"].as_str().unwrap().contains("unknown session"));

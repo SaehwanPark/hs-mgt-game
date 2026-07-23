@@ -2227,10 +2227,10 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live music-state projection recorded in v0.12.93 after
-facility, operational-overlay, terminal-debrief, and event-cue slices; full
-campaign facility/event/music coverage, continuity validation, performance,
-and screenshot gates remain open.
+**Status:** Bounded live history handoff recorded in v0.12.94 after facility,
+operational-overlay, terminal-debrief, event-cue, and music-state slices; full
+campaign facility/event/music coverage, save/load/replay continuity,
+performance, and screenshot gates remain open.
 
 ### Scope
 
@@ -2377,6 +2377,26 @@ and screenshot gates remain open.
   campaign music taxonomy, event/music continuity, history/debrief/save-load/
   replay continuity, screenshots, performance/compatibility, and human
   audio/accessibility quality remain open.
+
+### v0.12.94 bounded live history handoff evidence
+
+- `HistoryEnvelope` now carries the versioned `competitive-history-v1` schema
+  alongside the host's immutable transition summaries, session/campaign
+  identity, transition count, and per-transition state hashes.
+- The loopback GUI exposes `GET /api/v1/sessions/{session_id}/history`; the
+  adapter forwards it through `getHistory`, and the browser validates aligned
+  count/hash entries before rendering the existing text-first history list.
+  Missing, malformed, unsupported, and failed reads preserve the current
+  history view and report a recoverable adapter failure.
+- Rust transport and session assertions plus
+  `tests/test_phase11_live_history.py` cover empty and committed reads,
+  unknown sessions, schema/count validation, syntax, and the unchanged
+  simulation/network/client-authority boundary.
+- This closes only the dedicated live history read and browser handoff. Full
+  campaign history/debrief coverage, save/load and replay visual continuity,
+  screenshots, performance/compatibility, asset quality, and human quality
+  remain open. No replay regeneration, persistence, simulation, audio, or
+  asset behavior is introduced.
 
 ### Exit criteria
 

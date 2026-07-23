@@ -21,6 +21,6 @@ pub use server::{McpGameServer, run_stdio_server};
 pub use session::{
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetCampaignCoverageRequest,
   GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
-  GetResolutionRequest, McpErrorMessage, SessionEnvelope, StartSessionRequest, SubmitTurnRequest,
-  ValidateTurnRequest,
+  GetResolutionRequest, HISTORY_SCHEMA_VERSION, McpErrorMessage, SessionEnvelope,
+  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };

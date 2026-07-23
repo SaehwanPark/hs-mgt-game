@@ -1,3 +1,54 @@
+# Request Summary — Visual/audio Phase 11.1 live history handoff v0.12.94
+
+## Authorized outcome
+
+Expose the existing host-owned immutable history through a dedicated non-
+mutating loopback GUI read and render it through the existing text-first history
+surface. Preserve current presentation history on endpoint failure and keep
+replay regeneration/save-load/full-campaign claims open.
+
+## Target slice
+
+- Add `competitive-history-v1` to the host history envelope.
+- Add `GET /api/v1/sessions/{session_id}/history` and `getHistory` in the local
+  adapter using `GameSessionStore::get_history` only.
+- Add browser validation/client/render handoff and refresh the existing history
+  list after a successful live presentation refresh when supported.
+- Add deterministic Rust, transport, Node, and Python evidence plus
+  project-record/version updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 history/replay view.
+- `src/mcp/session.rs` — existing immutable host history read.
+- `src/gui_server.rs` and `gui/host-adapter.mjs` — live loopback transport.
+- `gui/app.mjs` — existing text-first history renderer and live action path.
+- `_workspace/88_implementation_plan_visual-audio-phase11-live-history-v0.12.94.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not add replay regeneration/playback, save/load, new assets, hidden-state
+  fields, simulation behavior, new hashes, debrief synthesis, screenshots,
+  performance, compatibility, or client authority.
+- Do not claim full campaign history/debrief/save-load/replay continuity or
+  human-quality completion.
+
+## Validation target
+
+Focused live history, session, resolution, release metadata, asset/security/
+credits, documentation, JavaScript, formatting, Clippy, and full Python/Rust
+checks.
+
+## Evidence limits
+
+This slice proves one dedicated non-mutating live history handoff and safe
+presentation fallback only. Full campaign history/debrief/save-load/replay
+continuity, screenshots, performance, compatibility, asset quality, human
+accessibility, legal clearance, and educational benefit remain open.
+
+---
+
 # Request Summary — Visual/audio Phase 11.1 live music-state projection v0.12.93
 
 ## Authorized outcome

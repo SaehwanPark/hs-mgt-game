@@ -1629,3 +1629,60 @@ policy validity.
 - `git diff --check`
 
 # Presentation QA — Phase 8.2 first fictional actor portrait slice v0.12.75
+# Presentation QA — Phase 11.1 live history handoff v0.12.94
+
+## Status
+
+`pass` for the bounded live competitive history handoff. This is technical
+presentation QA, not human accessibility, usability, legal, educational,
+audio-quality, or full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/88_implementation_plan_visual-audio-phase11-live-history-v0.12.94.md`.
+- Changed paths: `src/mcp/session.rs`, `src/gui_server.rs`,
+  `gui/host-adapter.mjs`, `gui/app.mjs`, focused tests, and project records.
+- Roadmap gate: current dedicated live competitive history read only.
+
+## Information and Causality Findings
+
+- Pass: the route calls only `GameSessionStore::get_history` and returns the
+  host's immutable transition summaries; it does not submit or resolve a turn.
+- Pass: the browser requires the supported schema, session/campaign identity,
+  aligned transition count, and per-transition state hashes before rendering.
+- Pass: the view renders committed text and hashes without synthesizing replay,
+  private rival detail, causality, severity, or future outcomes.
+
+## Accessibility and Fallback Findings
+
+- Pass: the existing text-first history list remains the meaning-bearing
+  surface, including the empty-history state and visible state hashes.
+- Pass: missing, malformed, unsupported, and failed history reads preserve the
+  current history view and return a recoverable adapter error.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, device compatibility, performance, or human
+  comprehension.
+
+## Provenance and Authority Findings
+
+- Pass: the history schema, count, and hashes are host-shaped; no asset, audio,
+  persistence, replay-regeneration, or simulation path was added.
+- Pass: the loopback route remains the only live transport boundary, and the
+  browser does not call network or simulation APIs directly.
+- Evidence limit: this does not establish full campaign history/debrief,
+  save/load or replay visual continuity, legal clearance, or human review.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Verification Evidence
+
+- Rust tests — 335 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 560 passed, including the live history handoff test.
+- Release metadata, 373 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+---

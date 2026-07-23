@@ -203,6 +203,7 @@ const demoEnvelope = {
 
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const END_SESSION_SCHEMA = "competitive-end-session-v1";
+const HISTORY_SCHEMA = "competitive-history-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 let selectedEntityId = null;
@@ -1273,6 +1274,46 @@ function renderHistory(entries, root) {
   if (!entries?.length) emptyState(list, "No committed transitions yet.");
 }
 
+export function validateHistoryEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") {
+    return { ok: false, code: "empty_history", message: "No host history envelope was supplied." };
+  }
+  if (envelope.schema_version !== HISTORY_SCHEMA) {
+    return { ok: false, code: "unsupported_history_schema", message: "Unsupported host history schema." };
+  }
+  if (
+    typeof envelope.session_id !== "string"
+    || !envelope.session_id.trim()
+    || typeof envelope.campaign !== "string"
+    || !envelope.campaign.trim()
+    || !Array.isArray(envelope.transitions)
+    || !Number.isInteger(envelope.transition_count)
+    || envelope.transition_count < 0
+    || envelope.transition_count !== envelope.transitions.length
+    || envelope.transitions.some((entry) => (
+      !entry
+      || typeof entry !== "object"
+      || typeof entry.state_hash !== "string"
+      || !entry.state_hash.trim()
+    ))
+  ) {
+    return { ok: false, code: "incomplete_history", message: "Host history is missing aligned transition summaries." };
+  }
+  return { ok: true, envelope };
+}
+
+export function renderHistoryEnvelope(envelope, root = document) {
+  const validation = validateHistoryEnvelope(envelope);
+  if (!validation.ok) return validation;
+  renderHistory(envelope.transitions, root);
+  const meta = root.querySelector("#session-meta");
+  if (meta) {
+    const latestHash = envelope.transitions.at(-1)?.state_hash ?? "no committed hash";
+    meta.textContent = `${envelope.campaign} · ${envelope.transition_count} committed transitions · hash ${latestHash}`;
+  }
+  return validation;
+}
+
 function renderObservationLines(observation, root) {
   const list = root.querySelector("#observation-list");
   list.replaceChildren();
@@ -1966,6 +2007,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
+  const historyClient = createHistoryClient({ adapter, root });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
@@ -2102,6 +2144,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           audioClient.setMusicFromVisible(presentation);
           audioClient.setAmbienceFromVisible(presentation);
           audioClient.playCue("ui.report-received");
+          if (typeof adapter.getHistory === "function") {
+            const history = await historyClient.load(sessionId);
+            if (!history.ok) {
+              recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
+            }
+          }
           await regionalWorldClient.load(sessionId);
         }
       } catch (error) {
@@ -2173,6 +2221,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         renderOnboarding(presentation, root, recorder);
         recordVisibleEnvelope(recorder, presentation);
         audioClient.setMusicFromVisible(presentation);
+        if (typeof adapter.getHistory === "function") {
+          const history = await historyClient.load(requestedSessionId);
+          if (!history.ok) {
+            recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
+          }
+        }
         await regionalWorldClient.load(requestedSessionId);
       }
       catalog = nextCatalog;
@@ -2243,7 +2297,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -2492,6 +2546,33 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
   return { load, render, play, pause, skip, review, advance, get envelope() { return envelope; } };
 }
 
+export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+  let envelope = null;
+
+  async function load(sessionId = adapter?.sessionId) {
+    if (!adapter || typeof adapter.getHistory !== "function") {
+      return { ok: false, code: "history_adapter_missing", message: "No live history adapter configured." };
+    }
+    try {
+      const nextEnvelope = await adapter.getHistory(sessionId);
+      const validation = validateHistoryEnvelope(nextEnvelope);
+      if (!validation.ok) return validation;
+      const rendered = renderHistoryEnvelope(nextEnvelope, root);
+      if (!rendered.ok) return rendered;
+      envelope = nextEnvelope;
+      return { ...rendered, envelope: nextEnvelope };
+    } catch (error) {
+      return {
+        ok: false,
+        code: "history_adapter_error",
+        message: error instanceof Error ? error.message : String(error),
+      };
+    }
+  }
+
+  return { load, get envelope() { return envelope; } };
+}
+
 export function renderPresentation(envelope, root = document) {
   const fixture = envelope.presentation_fixture;
   currentRegionalLinks = [];
@@ -2635,6 +2716,7 @@ if (typeof document !== "undefined") {
       renderAssetCredits,
       createRegionalWorldClient,
       createResolutionClient,
+      createHistoryClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2647,6 +2729,8 @@ if (typeof document !== "undefined") {
       validateCommand,
       validateReadOnlyEnvelope,
       validateEndSessionEnvelope,
+      validateHistoryEnvelope,
+      renderHistoryEnvelope,
     };
   } else {
     const client = createReadOnlyClient({ root: document });
@@ -2667,6 +2751,7 @@ if (typeof document !== "undefined") {
       renderAssetCredits,
       createRegionalWorldClient,
       createResolutionClient,
+      createHistoryClient,
       createReadOnlyClient,
       createThinClient,
       renderEnvelope,
@@ -2679,6 +2764,8 @@ if (typeof document !== "undefined") {
       validateCommand,
       validateReadOnlyEnvelope,
       validateEndSessionEnvelope,
+      validateHistoryEnvelope,
+      renderHistoryEnvelope,
     };
   }
 }
@@ -2688,6 +2775,7 @@ export {
   presentationFixture,
   CAMPAIGN_COVERAGE_SCHEMA,
   END_SESSION_SCHEMA,
+  HISTORY_SCHEMA,
   PLAYTEST_CAPTURE_SCHEMA,
   READ_ONLY_PRESENTATION_SCHEMA,
   regionalEntitiesToFixture,
