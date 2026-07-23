@@ -5500,6 +5500,21 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   audio path, browser behavior, simulation rule, stochastic input, or runtime
   performance claim.
 
+### Visual/audio Phase 11.2 SVG optimization (v0.12.98)
+
+- Status: In progress; tracked release SVG derivatives are normalized and
+  hash-aligned, while broader packaging/runtime hardening remains incomplete.
+- Done: whitespace-only release normalization; XML semantic projection and
+  idempotence check; `svg-optimization-report-v1`; refreshed visual registry
+  hashes and release manifest; focused tests; and preserved source/original
+  hashes.
+- Not Yet Done: geometry/style optimization, raster derivatives, audio
+  compression, lazy loading, preload policy, cache/render/decode/memory
+  measurements, offline operation, low-power devices, browser compatibility,
+  screenshots, asset-quality review, and human evaluation.
+- Deferred / Non-Goals: no source rewrite, semantic SVG change, browser/audio/
+  simulation behavior, stochastic input, or runtime performance claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

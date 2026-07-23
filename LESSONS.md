@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Optimize Release Derivatives Without Touching Source Semantics
+
+- Context: Phase 11.2 needed an SVG optimization step, while source sheets
+  contain reusable design layers and accessible wording that release files
+  must preserve.
+- Risk: Generic minification can rewrite geometry, style, URL, or text content
+  and make registry/manifest hashes silently stale.
+- Resolution: Normalize only outer/inter-tag formatting whitespace, compare a
+  parsed tag/attribute/meaningful-text projection before and after, require
+  idempotence, and refresh release hashes/manifest in the same change.
+- Prevention: Keep source and release paths distinct; require a fail-closed
+  optimization report and hash checks before any future geometry/style or
+  raster/audio optimization.
+
 ## Define Packaging Budgets Before Runtime Performance Claims
 
 - Context: Phase 11.2 calls for asset-size, cache, render, decode, memory,

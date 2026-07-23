@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.98] - 2026-07-23
+
+- Enabled a dependency-free whitespace-only normalization pass for the 15
+  tracked release SVG derivatives, preserving geometry, attributes, styles,
+  dimensions, titles, descriptions, and text content.
+- Added an idempotent `svg-optimization-report-v1` checker and refreshed
+  registry release hashes plus the deterministic manifest; the release SVG
+  package is 20,198 bytes after a 483-byte formatting reduction.
+- Kept runtime render/cache/decode/memory, browser/device/offline, raster/audio,
+  screenshot, and human-quality gates open.
+
 ## [0.12.97] - 2026-07-23
 
 - Added `asset-budget-v1` with explicit per-file, total-byte, and file-count

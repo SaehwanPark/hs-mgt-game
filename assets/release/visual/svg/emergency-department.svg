@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc">
-  <title id="title">Emergency department facility</title>
-  <desc id="desc">Compact fictional emergency department component with visible identity badge and entrance wing; type cue, not a service-performance claim.</desc>
-  <style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style>
-  <rect width="260" height="160" fill="var(--facility-paper)"/>
-  <rect x="24" y="70" width="212" height="62" rx="7" fill="var(--facility-primary)"/>
-  <rect x="52" y="40" width="78" height="92" rx="6" fill="var(--facility-primary)"/>
-  <path d="M68 56h16v18H68zm32 0h16v18h-16zm-32 30h16v18H68zm32 0h16v18h-16z" fill="var(--facility-paper)" opacity=".9"/>
-  <path d="M130 70h72v62h-72zM130 92h72M160 70v62" fill="none" stroke="var(--facility-secondary)" stroke-width="6"/>
-  <path d="M91 40V20m-12 10h24" stroke="var(--facility-secondary)" stroke-linecap="round" stroke-width="7"/>
-  <rect x="150" y="104" width="24" height="28" fill="var(--facility-paper)"/>
-  <path d="M162 110v16M155 118h14" stroke="var(--facility-secondary)" stroke-width="4"/>
-  <rect x="56" y="46" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/>
-  <text x="74" y="63" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text>
-  <text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">EMERGENCY DEPARTMENT</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="260" height="160" viewBox="0 0 260 160" role="img" aria-labelledby="title desc"><title id="title">Emergency department facility</title><desc id="desc">Compact fictional emergency department component with visible identity badge and entrance wing; type cue, not a service-performance claim.</desc><style>:root { --facility-primary: #315a89; --facility-secondary: #c2872f; --facility-paper: #f8fbfd; } .label { font-family: system-ui, sans-serif; }</style><rect width="260" height="160" fill="var(--facility-paper)"/><rect x="24" y="70" width="212" height="62" rx="7" fill="var(--facility-primary)"/><rect x="52" y="40" width="78" height="92" rx="6" fill="var(--facility-primary)"/><path d="M68 56h16v18H68zm32 0h16v18h-16zm-32 30h16v18H68zm32 0h16v18h-16z" fill="var(--facility-paper)" opacity=".9"/><path d="M130 70h72v62h-72zM130 92h72M160 70v62" fill="none" stroke="var(--facility-secondary)" stroke-width="6"/><path d="M91 40V20m-12 10h24" stroke="var(--facility-secondary)" stroke-linecap="round" stroke-width="7"/><rect x="150" y="104" width="24" height="28" fill="var(--facility-paper)"/><path d="M162 110v16M155 118h14" stroke="var(--facility-secondary)" stroke-width="4"/><rect x="56" y="46" width="36" height="25" rx="4" fill="var(--facility-paper)" stroke="var(--facility-secondary)" stroke-width="3"/><text x="74" y="63" text-anchor="middle" fill="#17232d" class="label" font-size="14" font-weight="800">ID</text><text x="130" y="151" text-anchor="middle" fill="#17232d" class="label" font-size="13" font-weight="700">EMERGENCY DEPARTMENT</text></svg>
