@@ -1410,3 +1410,82 @@ human comprehension, licensing counsel, or educational effectiveness.
 - If recorded or pre-rendered audio becomes necessary, choose a codec and
   compression target through a separate plan with actual browser/device
   evidence rather than changing this report's meaning.
+
+---
+# Presentation Contract — Phase 11.2 loading-policy audit v0.13.2
+
+## Goal and Authorization
+
+Define and machine-check the current live GUI loading boundary. The current
+decision is `no-lazy-loading-needed` and `no-preload-directives`: the live
+regional scene is serialized inline from actor-visible DTOs, runtime audio is
+generated locally, and no file-backed presentation asset is loaded by the live
+entrypoint. This slice may add governance evidence only.
+
+## Player Questions and Consequences
+
+The player should receive the same visible board, reports, metrics, written
+audio equivalents, and recovery states whether optional file-backed assets are
+absent. Loading policy must never become a hidden source of strategic
+information, timing-dependent outcome, or severity signal.
+
+## Actor-Visible Source Ledger
+
+| Surface | Current source | Loading decision | Prohibited inference |
+| --- | --- | --- | --- |
+| Regional board and facility scene | `gui/scene.mjs` and actor-visible host DTOs | Inline/generated SVG; no file-backed lazy or preload path | Do not load or infer hidden facility, rival, or future-outcome data |
+| Executive desktop | `gui/index.html` and local modules | Static HTML/CSS/module graph; no media tags or preload directives | Do not use load timing to signal state or priority |
+| Optional UI/event audio | `gui/audio.mjs` and registered runtime recipes | Generated after user gesture; no file decode or preload | Do not infer a result from audio availability or timing |
+| Release assets | `assets/registry/*.json` and `assets/release` | No current live-entrypoint references; future paths require policy metadata | Do not treat an unlisted asset as approved or actor-visible |
+
+## Visual, Motion, and Audio Semantics
+
+- The checker reports explicit text decisions for no-lazy and no-preload
+  behavior; no color, motion, or sound conveys loading status.
+- A future high-value asset must declare a stable registry ID, live consumer,
+  load trigger, preload justification or lazy trigger, byte budget, fallback,
+  written equivalent, and provenance before entering the live surface.
+- No loading spinner, animation, audio cue, or timing behavior changes here.
+
+## Accessibility and Fallbacks
+
+The current no-file policy preserves keyboard navigation, visible source/status
+text, text scaling, reduced motion, mute/reduced-audio behavior, unsupported
+audio fallback, and missing-asset fallback. A future loading failure must
+preserve the existing generic visual/audio descriptor and written equivalent.
+
+## Authority, History, and Replay Boundaries
+
+The loading policy is a read-only presentation/release contract. It cannot
+enter commands, transition evaluation, stochastic inputs, host projections,
+state hashes, immutable history, replay, or debrief facts. The browser remains
+presentation-only and the Rust host remains authoritative.
+
+## Asset Provenance and Release Requirements
+
+The current report requires the live files to contain no file-backed media
+reference, runtime file-load expression, or preload directive and requires all
+declared policy paths to remain repository-relative. Registry metadata may
+retain release paths without loading them. Future file-backed assets must join
+the existing visual or audio registry, include provenance/hash/fallback metadata, and pass security,
+credits, release, and loading-policy checks. A policy exception is not an
+implicit release approval.
+
+## Verification and Evidence Limits
+
+`tests/test_loading_policy.py` covers the current green report and CLI,
+preload/media-marker rejection, unlisted source and path/schema failures, and
+policy metadata requirements. This is static contract evidence only; it does
+not establish browser loading order, cache behavior, decode/render latency,
+memory use, offline operation, device suitability, compatibility, lived
+accessibility, or human comprehension.
+
+## Non-Goals and Open Questions
+
+- Do not add a loader, preload tag, media file, browser network call, or runtime
+  behavior in this slice.
+- Offline operation, low-power devices, browser compatibility, screenshot
+  coverage, full campaign continuity, asset quality, and human evaluation
+  remain open.
+- If file-backed audio or raster assets become runtime-required, revisit the
+  loading decision with actual browser/device measurements.

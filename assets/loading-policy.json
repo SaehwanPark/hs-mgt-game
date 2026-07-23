@@ -1,0 +1,56 @@
+{
+  "schema_version": "loading-policy-v1",
+  "live_entrypoint": "gui/index.html",
+  "live_files": [
+    "gui/index.html",
+    "gui/app.mjs",
+    "gui/ambience-contract.mjs",
+    "gui/asset-availability.mjs",
+    "gui/asset-credits-renderer.mjs",
+    "gui/asset-credits.mjs",
+    "gui/audio-cue-contract.mjs",
+    "gui/scene.mjs",
+    "gui/audio.mjs",
+    "gui/audio-priority-contract.mjs",
+    "gui/consequence-links.mjs",
+    "gui/facility-components.mjs",
+    "gui/first-month.mjs",
+    "gui/metric-visualizations.mjs",
+    "gui/music-stem-contract.mjs",
+    "gui/operational-overlays.mjs",
+    "gui/playtest.mjs",
+    "gui/regional-board.mjs",
+    "gui/resolution-sequence.mjs",
+    "gui/visual.mjs"
+  ],
+  "lazy_loading_decision": "no-lazy-loading-needed",
+  "preloading_decision": "no-preload-directives",
+  "forbidden_markers": [
+    {
+      "id": "html-speculative-preload",
+      "pattern": "<link\\b[^>]*\\brel\\s*=\\s*[\"'](?:preload|modulepreload|prefetch)[\"']"
+    },
+    {
+      "id": "html-file-backed-media",
+      "pattern": "<(?:img|audio|video)\\b[^>]*(?:src|href)\\s*="
+    },
+    {
+      "id": "js-media-constructor",
+      "pattern": "\\bnew\\s+(?:Image|Audio)\\s*\\("
+    },
+    {
+      "id": "runtime-file-backed-load",
+      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|\\.src\\s*=|\\.href\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])[^\\n]*(?:assets/release|\\.(?:aac|flac|gif|jpeg|jpg|m4a|mp3|ogg|opus|png|svg|wav|webm)(?:[\"'?#]))"
+    }
+  ],
+  "future_asset_requirements": [
+    "registry_id",
+    "live_consumer",
+    "load_trigger",
+    "preload_justification_or_lazy_trigger",
+    "byte_budget",
+    "fallback",
+    "written_equivalent",
+    "provenance"
+  ]
+}

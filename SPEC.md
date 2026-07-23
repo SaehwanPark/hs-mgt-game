@@ -5563,6 +5563,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   browser playback, host DTO, simulation, stochastic input, history/hash,
   replay, debrief, or runtime performance claim.
 
+### Visual/audio Phase 11.2 loading-policy audit (v0.13.2)
+
+- Status: In progress; the current live entrypoint and its declared local module
+  graph have no file-backed media or speculative preload and every local module
+  source is declared, while browser order, cache, decode, device, offline, and
+  human evidence remains open.
+- Done: `loading-policy-v1`; deterministic report; exact live-file scope;
+  no-lazy/no-preload decisions; forbidden media/preload/release markers;
+  external/escaped entrypoint-source rejection; symlinked policy-path
+  rejection; future asset requirement metadata; and focused tests.
+- Not Yet Done: browser loading-order, cache, decode/render/memory, offline,
+  low-power-device, browser compatibility, screenshot, asset-quality, and human
+  evaluation evidence.
+- Deferred / Non-Goals: no loader, preload directive, media file, browser
+  network, host DTO, simulation, stochastic input, history/hash, replay,
+  debrief, or runtime performance behavior.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

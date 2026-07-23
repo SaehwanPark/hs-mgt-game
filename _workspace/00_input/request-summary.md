@@ -818,3 +818,61 @@ release metadata checks, and the project visual/audio contract audit.
 `code-reviewer` are used for implementation and handoff. The repo-local
 presentation contract designer and presentation domain QA are used because the
   slice changes presentation asset governance, not the live simulation.
+
+---
+# Request Summary — Visual/audio Phase 11.2 loading-policy audit v0.13.2
+
+## Scope
+
+Address the next Phase 11.2 packaging gaps for lazy loading and preloading.
+The current live GUI renders the regional scene as inline/generated SVG and
+uses runtime-generated Web Audio, with no file-backed asset tags or preload
+directives. Add a machine-checked loading policy that records the current
+no-lazy/no-preload decision and fails closed if future file-backed presentation
+assets appear without explicit high-value loading metadata.
+
+## Non-goals
+
+- Do not change the live browser loading path, host adapter, simulation, or
+  audio behavior.
+- Do not add lazy-loading or preload code where the current surface has no
+  file-backed asset demand.
+- Do not claim browser, cache, decode, memory, device, offline, or human
+  performance evidence.
+- Do not close offline, low-power-device, compatibility, screenshot, asset
+  quality, human-evaluation, or full-campaign coverage gates.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2.
+- `gui/index.html`, `gui/app.mjs`, `gui/scene.mjs`, and `gui/audio.mjs`.
+- `assets/audio-packaging-scope.json`, visual/audio registries, and the
+  current release tree.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  actionable packaging slice.
+
+## Expected files
+
+- `assets/loading-policy.json`
+- `scripts/check_loading_policy.py`
+- `tests/test_loading_policy.py`
+- `_workspace/02_presentation_contract.md`
+- `_workspace/03_presentation_qa.md`
+- roadmap, canonical records, lessons, changelog, release metadata, and
+  handoff projections for v0.13.2.
+
+## Validation target
+
+The report must pass with zero live preload directives and zero file-backed
+asset-loading markers in the current live entrypoint/modules. A temporary
+preload tag, file-backed media reference, unlisted loading source, malformed
+policy, or path escape must fail closed. Run focused Python tests, full Rust and
+Python checks, asset/release checks, documentation links, and the visual/audio
+contract audit.
+
+## Generic skills
+
+`simple-code-writer`, `preferred-workflow`, `plan-designer`, and one
+`code-reviewer` remain in use. The repo-local presentation contract designer
+and presentation domain QA apply because this slice governs actor-visible
+asset loading without changing simulation authority.

@@ -48,6 +48,14 @@ The checker fails closed if a known audio file enters the release tree or a
 registry entry gains a release path. This is package-scope evidence, not a
 codec, loudness, decode, offline, device, browser, or human-quality claim.
 
+`assets/loading-policy.json` and `scripts/check_loading_policy.py` keep the
+current live GUI loading boundary explicit: the entrypoint/module set uses
+inline/generated presentation, has no file-backed media or speculative preload,
+and must declare every local module source. The checker fails closed on media,
+preload, external/escaped entrypoint sources, path/scope, or future-policy
+metadata violations. This is static policy evidence, not browser order, cache,
+decode, memory, offline, device, compatibility, or human-quality evidence.
+
 `scripts/optimize_release_svg.py --check` verifies that every tracked release
 SVG is idempotently normalized and that registry hashes and the release
 manifest match. `--write` applies only outer/inter-tag whitespace normalization
