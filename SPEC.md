@@ -5515,6 +5515,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Deferred / Non-Goals: no source rewrite, semantic SVG change, browser/audio/
   simulation behavior, stochastic input, or runtime performance claim.
 
+### Visual/audio Phase 11.2 missing-asset fallback (v0.12.99)
+
+- Status: In progress; all current facility and fictional institution release
+  descriptors have catalog-level fallback coverage, while future campaign and
+  browser-quality evidence remains incomplete.
+- Done: enumeration of 12 facility and three institution release descriptors;
+  exact visual-registry path alignment; missing/failed/malformed/contradictory
+  fallback assertions; written-equivalent/null-path checks; and unchanged
+  network/simulation/client authority.
+- Not Yet Done: future campaign asset coverage, browser/device compatibility,
+  runtime performance, screenshots, asset-quality review, legal clearance,
+  human accessibility, and educational evaluation.
+- Deferred / Non-Goals: no fallback implementation change, asset addition or
+  removal, source/release hash change, audio path, browser network, simulation
+  rule, stochastic input, or host-state projection.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

@@ -440,3 +440,35 @@ measurements, offline operation, devices, browser compatibility, screenshots,
 human evaluation, and later Phase 11.2–13 gates remain open.
 
 ---
+# Final Handoff — Visual/audio Phase 11.2 missing-asset fallback v0.12.99
+
+## Result
+
+Enumerated every current facility/institution release descriptor and proved
+missing, failed, and malformed availability reaches the existing written
+generic fallback with registry-aligned release paths.
+
+## Handoff and review
+
+- Base: `main` at v0.12.98.
+- Working branch: `feat/visual-audio-phase11-missing-asset-fallback-v0.12.99`.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/248.
+- Review commit: `1d2f4c8`.
+- Presentation-domain QA: pass for the bounded contract; the single
+  code-reviewer pass found no actionable findings.
+
+## Verification
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 582 passed, including the expanded fallback coverage.
+- Release metadata, 378 Markdown links, asset registry/credits/release,
+  security/generation checks, optimizer/budget reports, and visual/audio
+  contract audit passed.
+
+## Limits and next slice
+
+Future campaign assets, raster/audio packaging, loading/offline/device/
+compatibility, screenshots, human evaluation, and later Phase 11.2–13 gates
+remain open.
+
+---

@@ -2452,9 +2452,10 @@ open.
 
 ## Milestone 11.2: Performance and packaging hardening
 
-**Status:** The tracked release-asset byte/file-count budget and conservative
-SVG normalization are machine-checked in v0.12.97–v0.12.98; runtime
-measurements, offline, device, and compatibility gates remain open.
+**Status:** The tracked release-asset byte/file-count budget, conservative SVG
+normalization, and current catalog-level missing-asset fallback are
+machine-checked in v0.12.97–v0.12.99; runtime measurements, offline, device,
+and compatibility gates remain open.
 
 ### Targets to define
 
@@ -2477,7 +2478,8 @@ measurements, offline, device, and compatibility gates remain open.
 - [ ] Lazy loading implemented where useful.
 - [ ] Preloading limited to high-value assets.
 - [ ] Offline operation verified.
-- [ ] Missing-asset fallback tested.
+- [x] Missing-asset fallback tested. Evidence: `tests/test_asset_fallback.py`
+  enumerates the live catalogs and visual registry.
 - [ ] Low-power device test completed.
 - [ ] Browser compatibility matrix completed.
 
@@ -2521,6 +2523,21 @@ measurements, offline, device, and compatibility gates remain open.
   policy, cache/decode/render/memory measurements, offline operation,
   low-power devices, browser compatibility, screenshots, asset quality, and
   human quality remain open. The pass is not a runtime performance claim.
+
+### v0.12.99 current catalog missing-asset fallback evidence
+
+- `tests/test_asset_fallback.py` enumerates all 12 current facility descriptors
+  and three fictional institution descriptors from the live JavaScript
+  catalogs, requiring an exact match to the 15 release paths in
+  `assets/registry/visual-assets.json`.
+- Missing, failed, malformed, and contradictory availability is passed through
+  the existing `assetPresentationFor`/facility/identity helpers for all 15
+  descriptors. Each result remains explicit fallback mode with a null release
+  path, non-empty written equivalent, and fallback reason.
+- The coverage test contains no browser network, simulation, hidden-state, or
+  host-authority path. This closes only current catalog fallback coverage;
+  future campaign assets, browser/device behavior, runtime performance,
+  screenshots, asset quality, and human quality remain open.
 
 ---
 
