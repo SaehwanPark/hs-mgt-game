@@ -1489,3 +1489,72 @@ accessibility, or human comprehension.
   remain open.
 - If file-backed audio or raster assets become runtime-required, revisit the
   loading decision with actual browser/device measurements.
+
+---
+# Presentation Contract — Phase 11.2 offline package completeness v0.13.3
+
+## Goal and Authorization
+
+Make the live GUI usable from a normal repository checkout without external
+asset or module sources. The loopback Rust host must embed the complete local
+entrypoint graph, host adapter, and catalogs required by the live desktop. This
+slice may add route coverage and static governance evidence only.
+
+## Player Questions and Consequences
+
+The player should receive the same actor-visible board, reports, actions,
+history, replay, debrief, written audio equivalents, and recovery states when
+the machine has no external network access. Offline package completeness must
+never become a hidden source of strategic information or a timing-dependent
+outcome signal.
+
+## Actor-Visible Source Ledger
+
+| Surface | Current source | Offline contract | Prohibited inference |
+| --- | --- | --- | --- |
+| Executive desktop | `gui/index.html` and embedded local modules | Served from the loopback host with no external module source | Do not infer state from missing network or route timing |
+| Host boundary | `gui/host-adapter.mjs` and `/api/v1/sessions` | Same-origin loopback API only | Do not move authority into the browser |
+| Catalogs | `gui/audio-catalog.json` and `gui/visual-catalog.json` | Embedded local JSON routes | Do not infer asset approval from route presence |
+
+## Visual, Motion, and Audio Semantics
+
+- No visual, motion, or audio cue changes in this slice.
+- Static route completeness does not establish decode, render, memory, device,
+  or browser-performance behavior.
+- Missing route or offline host failures remain written, recoverable errors;
+  they do not alter game state.
+
+## Accessibility and Fallbacks
+
+Existing keyboard, scaling, reduced-motion, mute/reduced-audio, written
+equivalent, and missing-asset fallbacks remain authoritative. The offline
+package audit adds no loading spinner, timing cue, or new visual state.
+
+## Authority, History, and Replay Boundaries
+
+The server continues to own session state, command validation, transitions,
+stochastic inputs, history, hashes, replay, and debrief facts. The offline
+policy and route table are delivery evidence; they cannot enter a transition
+or expose hidden state.
+
+## Asset Provenance and Release Requirements
+
+The embedded route table may serve only repository-local, reviewed source files.
+It does not promote release assets, change registry provenance, or authorize
+external URLs. A future external or file-backed dependency requires a new
+loading/offline review with explicit fallback and evidence.
+
+## Verification and Evidence Limits
+
+`tests/test_offline_availability.py` and the Rust GUI-server tests establish
+route/source closure, loopback binding, and current policy shape. They do not
+establish browser behavior, cache persistence, low-power suitability,
+compatibility, screen-reader behavior, lived accessibility, or human
+comprehension.
+
+## Non-Goals and Open Questions
+
+- Do not add a service worker, CDN, external module, or production deployment.
+- Do not treat proof pages or external documentation as the live offline
+  surface.
+- Low-power-device and browser-compatibility gates remain open.

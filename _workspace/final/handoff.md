@@ -583,16 +583,64 @@ HTML entrypoint is declared and scanned.
 
 - Base: `main` at v0.13.1.
 - Working branch: `feat/visual-audio-loading-policy-v0.13.2`.
-- Pull request: pending.
-- Presentation-domain QA: pass for the bounded static contract; the same single
-  code-reviewer will review the PR.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/251.
+- Merge commit: `cd9e6d7`; temporary branch removed locally and remotely.
+- Presentation-domain QA: pass for the bounded static contract. The same sole
+  code reviewer found two medium and three follow-up medium/low fail-closed
+  gaps; all were fixed and the final follow-up found no actionable issues.
 
 ## Limits and next slice
 
 This closes only the current Phase 11.2 lazy-loading and preload-policy items.
-Browser load order, cache/decode/render/memory measurements, offline operation,
-low-power devices, browser compatibility, screenshots, full campaign
+Browser load order, cache/decode/render/memory measurements, low-power devices,
+browser compatibility, screenshots, full campaign
 continuity, asset quality, human evaluation, and later roadmap gates remain
 open.
+
+---
+# Final Handoff — Visual/audio Phase 11.2 offline package completeness v0.13.3
+
+## Result
+
+The live loopback GUI now embeds and serves the complete current local module
+graph, injected host adapter, and audio/visual catalogs required by the live
+desktop. The package remains same-origin and loopback-only; no external module
+or asset source is needed.
+
+## Changed files and behavior
+
+- Added `assets/offline-policy.json`, `scripts/check_offline_availability.py`,
+  and `tests/test_offline_availability.py` for deterministic route/source
+  closure and loading-policy reuse.
+- Expanded `src/gui_server.rs` to serve every declared live module, the host
+  adapter, and both live catalogs through repository-embedded `include_str!`
+  routes; added a Rust route-closure test.
+- Updated roadmap, canonical records, lessons, asset guidance, version
+  projections, request/contract/QA, and changelog.
+- No service worker, CDN, browser cache, host DTO, simulation, history/hash,
+  replay, debrief, or audio behavior changed.
+
+## Verification
+
+- Rust tests — 338 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 632 passed, including 16 focused offline-package tests.
+- Offline/loading/audio policy, release metadata, documentation links, asset,
+  security, raster, credits, generation, and visual/audio contract checks
+  passed.
+
+## Handoff and review
+
+- Base: `main` at v0.13.2.
+- Working branch: `feat/visual-audio-offline-package-v0.13.3`.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/252.
+- Presentation-domain QA: pass for the bounded local package contract; the same
+  sole code-reviewer will review the PR.
+
+## Limits and next slice
+
+This closes only current offline package route completeness from a normal
+checkout. Service-worker behavior, cache persistence, low-power devices,
+browser compatibility, screenshots, asset quality, human evaluation, and later
+roadmap gates remain open.
 
 ---

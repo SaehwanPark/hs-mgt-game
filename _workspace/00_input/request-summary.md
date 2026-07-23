@@ -876,3 +876,55 @@ contract audit.
 `code-reviewer` remain in use. The repo-local presentation contract designer
 and presentation domain QA apply because this slice governs actor-visible
 asset loading without changing simulation authority.
+
+---
+# Request Summary — Visual/audio Phase 11.2 offline package completeness v0.13.3
+
+## Scope
+
+Close the Phase 11.2 offline-operation gate for the live GUI from a normal
+checkout. The loopback Rust GUI host currently embeds the entrypoint and only
+part of the local module graph; add the missing embedded module/catalog routes
+and a deterministic audit proving that the live graph is served locally.
+
+## Non-goals
+
+- Do not add a service worker, CDN, browser cache, or external dependency.
+- Do not change the host API, simulation, command validation, history, replay,
+  debrief, or audio semantics.
+- Do not claim offline support for proof pages, external documentation, or a
+  deployed production environment.
+- Do not claim browser/device compatibility or human usability evidence from a
+  static package audit.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2 offline operation.
+- `src/gui_server.rs`, `gui/index.html`, `gui/host-adapter.mjs`, and the
+  v0.13.2 live loading-policy module graph.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  actionable offline package slice.
+
+## Expected files
+
+- `assets/offline-policy.json`
+- `scripts/check_offline_availability.py`
+- `tests/test_offline_availability.py`
+- `src/gui_server.rs`
+- `_workspace` request/contract/QA/plan/handoff records, roadmap, canonical
+  docs, lessons, changelog, and version projections for v0.13.3.
+
+## Validation target
+
+Every live entrypoint module and catalog must have a repository-embedded local
+route in the loopback GUI host. Missing route coverage, external source,
+non-loopback binding, path escape, or malformed policy must fail closed. Run
+focused and full Python/Rust checks plus release, asset, documentation, and
+visual/audio contract audits.
+
+## Generic skills
+
+`simple-code-writer`, `preferred-workflow`, `plan-designer`, and one
+`code-reviewer` remain in use. The repo-local presentation contract designer
+and presentation domain QA apply because this slice changes the actor-visible
+delivery boundary without changing simulation authority.

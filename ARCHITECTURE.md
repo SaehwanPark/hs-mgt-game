@@ -673,6 +673,14 @@ speculative preload, external/escaped sources, and symlinked policy paths are
 rejected. No browser loader, host authority, simulation, history/hash, replay,
 debrief, or runtime-performance behavior changes.
 
+The v0.13.3 Phase 11.2 offline-package slice completes the loopback GUI's
+embedded static route table for the live module graph, host adapter, and audio/
+visual catalogs. `offline-policy-v1` compares each repository-local source to
+an `include_str!` route, reuses the loading-policy report, and requires the
+same-origin loopback API boundary. No service worker, cache, deployment,
+host-authority, simulation, history/hash, replay, debrief, or audio behavior
+changes.
+
 Last Reviewed: 2026-07-23
 Status: Verified
 
