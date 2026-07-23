@@ -631,10 +631,11 @@ or asset source is needed.
 ## Handoff and review
 
 - Base: `main` at v0.13.2.
-- Working branch: `feat/visual-audio-offline-package-v0.13.3`.
 - Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/252.
-- Presentation-domain QA: pass for the bounded local package contract; the same
-  sole code-reviewer will review the PR.
+- Merge commit: `1ef962a` on `main`.
+- Temporary branch: removed locally and remotely after merge.
+- Presentation-domain QA: pass for the bounded local package contract; the sole
+  code-reviewer final pass found no actionable issues.
 
 ## Limits and next slice
 
