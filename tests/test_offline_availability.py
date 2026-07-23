@@ -2,6 +2,7 @@ import copy
 import importlib.util
 import json
 import subprocess
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -85,6 +86,7 @@ class OfflineAvailabilityTests(unittest.TestCase):
 
   def test_html_external_attributes_fail_closed(self):
     tags = self.checker._html_tags(
+      '<!-- " <script src=//cdn.example/comment-hidden.js></script> -->'
       '<script src=//cdn.example/app.js></script>'
       '<img alt=">" srcset="./local.png 1x, //cdn.example/remote.png 2x">'
     )
@@ -100,6 +102,26 @@ class OfflineAvailabilityTests(unittest.TestCase):
         )
     self.assertEqual(external, ["//cdn.example/app.js", "//cdn.example/remote.png"])
     self.assertTrue(self.checker._external_uri("&#x2f;&#x2f;cdn.example/remote.png"))
+
+  def test_unclosed_html_comment_fails_closed(self):
+    document = copy.deepcopy(self.document)
+    entrypoint = next(
+      resource for resource in document["embedded_resources"] if resource["kind"] == "entrypoint"
+    )
+    entrypoint["source"] = "gui/index.html"
+    with tempfile.NamedTemporaryFile("w", encoding="utf-8", delete=False) as handle:
+      handle.write("<!-- unclosed")
+      source = Path(handle.name)
+    original_resolve = self.checker._resolve
+    self.checker._resolve = lambda root, relative: (
+      source if relative == "gui/index.html" else original_resolve(root, relative)
+    )
+    try:
+      errors = self.checker.route_errors(ROOT, document)
+    finally:
+      self.checker._resolve = original_resolve
+      source.unlink()
+    self.assertTrue(any("unclosed HTML comment" in error for error in errors))
 
   def test_embedded_literal_exemptions_are_exact(self):
     self.assertTrue(self.checker._allowed_embedded_literal("http://www.w3.org/2000/svg", "module"))

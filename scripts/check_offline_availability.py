@@ -86,22 +86,34 @@ def _allowed_embedded_literal(value: str, kind: str) -> bool:
 
 def _html_tags(text: str) -> list[str]:
   tags = []
-  start = None
-  quote = None
-  for index, character in enumerate(text):
-    if start is None:
-      if character == "<":
-        start = index
+  index = 0
+  while index < len(text):
+    if text.startswith("<!--", index):
+      comment_end = text.find("-->", index + 4)
+      if comment_end < 0:
+        break
+      index = comment_end + 3
       continue
-    if quote is not None:
-      if character == quote and (index == 0 or text[index - 1] != "\\"):
-        quote = None
+    if text[index] != "<":
+      index += 1
       continue
-    if character in ("\"", "'"):
-      quote = character
-    elif character == ">":
-      tags.append(text[start:index + 1])
-      start = None
+    start = index
+    index += 1
+    quote = None
+    while index < len(text):
+      character = text[index]
+      if quote is not None:
+        if character == quote and text[index - 1] != "\\":
+          quote = None
+      elif character in ("\"", "'"):
+        quote = character
+      elif character == ">":
+        tags.append(text[start:index + 1])
+        index += 1
+        break
+      index += 1
+    else:
+      break
   return tags
 
 
@@ -241,13 +253,13 @@ def route_errors(root: Path, document: dict) -> list[str]:
     source_text = _resolve(root, source).read_text(encoding="utf-8")
     for literal in STRING_LITERAL_PATTERN.findall(source_text):
       value = literal[1:-1]
-      if value.startswith("http://www.w3.org/2000/svg"):
-        continue
       if _allowed_embedded_literal(value, resource["kind"]):
         continue
       if _external_uri(value):
         errors.append(f"embedded source contains a non-local URL: {source} -> {value}")
     if resource["kind"] == "entrypoint":
+      if source_text.count("<!--") != source_text.count("-->"):
+        errors.append(f"entrypoint contains an unclosed HTML comment: {source}")
       for tag in _html_tags(source_text):
         if not HTML_TAG_NAME_PATTERN.match(tag):
           continue

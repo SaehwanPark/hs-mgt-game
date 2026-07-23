@@ -623,7 +623,7 @@ or asset source is needed.
 ## Verification
 
 - Rust tests — 338 passed; `cargo fmt --check`; Clippy with warnings denied.
-- Python discovery — 631 passed, including 15 focused offline-package tests.
+- Python discovery — 632 passed, including 16 focused offline-package tests.
 - Offline/loading/audio policy, release metadata, documentation links, asset,
   security, raster, credits, generation, and visual/audio contract checks
   passed.
@@ -632,7 +632,7 @@ or asset source is needed.
 
 - Base: `main` at v0.13.2.
 - Working branch: `feat/visual-audio-offline-package-v0.13.3`.
-- Pull request: pending.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/252.
 - Presentation-domain QA: pass for the bounded local package contract; the same
   sole code-reviewer will review the PR.
 
