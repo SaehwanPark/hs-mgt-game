@@ -576,3 +576,52 @@ regeneration, screenshots, performance, compatibility, asset quality, human
 accessibility, legal clearance, and educational benefit remain open.
 
 ---
+# Request Summary — Visual/audio Phase 11.2 asset-size budget v0.12.97
+
+## Authorized outcome
+
+Define and machine-check explicit byte and file-count budgets for the tracked
+release asset package. Emit a deterministic report that makes the current
+release SVG class and total release package size inspectable without claiming
+runtime performance.
+
+## Target slice
+
+- Add `asset-budget-v1` with named release SVG and complete-release classes.
+- Add a dependency-free checker and deterministic JSON report.
+- Add focused Python coverage for schema, counts, limits, path boundaries, and
+  script behavior.
+- Update Phase 11.2 roadmap evidence and project records/version projections.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.2 asset-size budget.
+- `assets/ASSET_RELEASE_MANIFEST.json` — current tracked release files and
+  byte/hash manifest.
+- `assets/registry/README.md` and `scripts/validate_assets.py` — existing
+  registry/provenance boundary.
+- `_workspace/91_implementation_plan_visual-audio-phase11-performance-budget-v0.12.97.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not optimize or rewrite assets, add dependencies, change audio playback,
+  claim cache/decode/render/memory performance, or claim offline/device/
+  compatibility completion.
+- Do not include source-only references or generated portrait previews in the
+  tracked release budget.
+
+## Validation target
+
+Focused budget/checker tests, full Rust/Python checks, release metadata,
+documentation links, asset registry/release/credits/security/generation
+checks, and the visual/audio contract audit.
+
+## Evidence limits
+
+This slice proves only a versioned byte/file-count budget and current report for
+tracked release files. It does not establish runtime performance, browser
+cache behavior, low-power suitability, offline operation, compatibility, asset
+quality, legal clearance, or human comprehension.
+
+---

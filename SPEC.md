@@ -5484,6 +5484,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   hidden-state projection, rival detail, new audio asset, or client-owned
   checkpoint authority.
 
+### Visual/audio Phase 11.2 asset-size budget (v0.12.97)
+
+- Status: In progress; tracked release assets now have a versioned,
+  machine-checked byte/file-count budget, while runtime performance and
+  packaging hardening remain incomplete.
+- Done: `asset-budget-v1`; named release SVG and complete-release classes;
+  file-count, per-file, and total-byte limits; deterministic JSON report;
+  schema/path/limit/empty-class tests; and updated asset guidance.
+- Not Yet Done: asset optimization, cache size, SVG render time, audio decode
+  time, memory, lazy loading, preload policy, offline operation, low-power
+  device testing, browser compatibility, screenshots, asset-quality review,
+  and human evaluation.
+- Deferred / Non-Goals: no source/preview budget, asset rewrite, new asset or
+  audio path, browser behavior, simulation rule, stochastic input, or runtime
+  performance claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

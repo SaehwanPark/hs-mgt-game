@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.97] - 2026-07-23
+
+- Added `asset-budget-v1` with explicit per-file, total-byte, and file-count
+  limits for the tracked release SVG class and complete release package.
+- Added a deterministic dependency-free JSON budget report and focused tests;
+  this records packaging size evidence without claiming runtime performance,
+  offline operation, device suitability, or browser compatibility.
+- Updated Phase 11.2 evidence and version projections while keeping asset
+  optimization, cache/decode/render/memory measurements, screenshots, and
+  human-quality gates open.
+
 ## [0.12.96] - 2026-07-23
 
 - Added host-owned in-memory checkpoint save/restore operations through MCP,

@@ -374,3 +374,36 @@ screenshots, performance, compatibility, asset quality, human evaluation, and
 later Phase 11.2–13 gates remain open.
 
 ---
+# Final Handoff — Visual/audio Phase 11.2 asset-size budget v0.12.97
+
+## Result
+
+Defined and machine-checked explicit byte/file-count budgets for tracked
+release assets, with a deterministic JSON report. No runtime performance or
+player-facing asset behavior is authorized by this slice.
+
+## Handoff and review
+
+- Base: `main` at v0.12.96.
+- Working branch: `feat/visual-audio-phase11-performance-budget-v0.12.97`.
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/246.
+- Review commit: `0b0a969`.
+- Presentation-domain QA: pass for the bounded contract; the single
+  code-reviewer pass found and resolved two fail-closed checker edge cases,
+  with no remaining findings.
+
+## Verification
+
+- Rust tests — 337 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 576 passed, including the seven asset-budget tests.
+- Release metadata, 376 Markdown links, asset registry/credits/release,
+  security/generation checks, asset-budget report, and visual/audio contract
+  audit passed.
+
+## Limits and next slice
+
+Cache size, render/decode time, memory, offline operation, low-power devices,
+browser compatibility, asset quality, screenshots, human evaluation, and
+later Phase 11.1/11.2–13 gates remain open.
+
+---

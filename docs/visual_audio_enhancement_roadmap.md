@@ -2452,6 +2452,10 @@ open.
 
 ## Milestone 11.2: Performance and packaging hardening
 
+**Status:** The tracked release-asset byte/file-count budget is defined and
+machine-checked in v0.12.97; optimization, runtime measurements, offline,
+device, and compatibility gates remain open.
+
 ### Targets to define
 
 - initial GUI load size;
@@ -2464,7 +2468,8 @@ open.
 
 ### Checklist
 
-- [ ] Asset size budget defined.
+- [x] Asset size budget defined. Evidence: `assets/asset-budget.json`,
+  `scripts/check_asset_budget.py`, and `tests/test_asset_budget.py`.
 - [ ] SVG optimization enabled.
 - [ ] Raster derivatives appropriately sized.
 - [ ] Audio compression reviewed.
@@ -2480,6 +2485,23 @@ open.
 - Asset richness does not materially degrade the first-session experience.
 - The game remains usable offline from a normal checkout.
 - The dependency-free client remains maintainable unless a future ADR explicitly changes that decision.
+
+### v0.12.97 tracked release-asset budget evidence
+
+- `assets/asset-budget.json` defines `asset-budget-v1` classes for the tracked
+  release SVG directory and complete `assets/release` package. Each class has
+  explicit file-count, per-file-byte, and total-byte limits.
+- `scripts/check_asset_budget.py` emits a deterministic
+  `asset-budget-report-v1` JSON report. The current report observes 15 release
+  files totaling 20,681 bytes; the largest file is the 1,654-byte
+  `utility-plant.svg`, and both classes pass their limits.
+- `tests/test_asset_budget.py` covers report shape, current observations, CLI
+  output, escaped roots, exceeded limits, and empty classes.
+- This closes only the asset-size-budget checklist item. Asset optimization,
+  cache/decode/render/memory measurements, lazy loading, preload policy,
+  offline operation, low-power devices, browser compatibility, screenshots,
+  asset quality, and human quality remain open. The report is not a runtime
+  performance claim.
 
 ---
 

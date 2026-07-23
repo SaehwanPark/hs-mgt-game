@@ -629,6 +629,13 @@ operations preserve the current view; no browser serialization, durable file,
 cross-process recovery, replay regeneration, simulation, hash, or client
 authority is introduced.
 
+The v0.12.97 Phase 11.2 slice adds `assets/asset-budget.json` and the
+dependency-free `scripts/check_asset_budget.py` report. Two explicit classes
+cover tracked release SVGs and the complete release package with file-count,
+per-file, and total-byte limits. The report reads filesystem byte lengths only;
+it does not optimize assets or establish cache, decode, render, memory,
+offline, device, or browser-compatibility performance.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

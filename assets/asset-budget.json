@@ -1,0 +1,24 @@
+{
+  "schema_version": "asset-budget-v1",
+  "scope": "tracked release assets",
+  "budgets": [
+    {
+      "id": "release-visual-svg",
+      "root": "assets/release/visual/svg",
+      "include": ["*.svg"],
+      "exclude": [],
+      "max_files": 32,
+      "max_file_bytes": 4096,
+      "max_total_bytes": 32768
+    },
+    {
+      "id": "release-package",
+      "root": "assets/release",
+      "include": ["*", "**/*"],
+      "exclude": ["README.md"],
+      "max_files": 64,
+      "max_file_bytes": 8192,
+      "max_total_bytes": 65536
+    }
+  ]
+}

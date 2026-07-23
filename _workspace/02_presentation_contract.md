@@ -1136,3 +1136,55 @@ replay, documentation, and release checks remain required.
   external evaluation gates.
 
 ---
+# Presentation Contract — Phase 11.2 asset-size budget v0.12.97
+
+## Goal and authorization
+
+Define the first Phase 11.2 packaging-hardening contract: explicit byte and
+file-count limits for tracked release assets, with a deterministic report that
+can be checked in a normal checkout. This is an engineering budget, not a
+runtime benchmark or a visual-quality approval.
+
+## Budget classes
+
+| Class | Scope | Per-file limit | Total limit | File-count limit |
+| --- | --- | ---: | ---: | ---: |
+| `release-visual-svg` | `assets/release/visual/svg/*.svg` | 4 KiB | 32 KiB | 32 |
+| `release-package` | all tracked files under `assets/release` except README | 8 KiB | 64 KiB | 64 |
+
+The checker reports observed file count, total bytes, and largest file for
+each class. Limits are intentionally explicit and conservative for the
+current small release package; later asset additions must update the budget in
+the same reviewed change.
+
+## Source and authority ledger
+
+| Field | Authorized source | Missing/invalid behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Budget class | `assets/asset-budget.json` | Checker fails closed | No implicit glob or limit |
+| Files | Resolved in-repository paths under declared root | Checker fails on escaped/missing root | No network or generated download |
+| Bytes | Filesystem byte length at check time | Checker reports limit failure | No compressed-size estimate |
+| Report | Deterministic checker output | Nonzero exit on failure | No performance conclusion |
+
+## Accessibility and presentation boundary
+
+The budget is documentation/tooling evidence and adds no player-facing visual,
+audio, motion, or interaction path. Existing text equivalents, fallback rules,
+and provenance checks remain unchanged.
+
+## Explicit non-goals and evidence limits
+
+- No asset optimization, raster derivative generation, audio compression,
+  lazy-loading, preload policy, browser cache measurement, SVG render timing,
+  audio decode timing, memory measurement, offline verification, low-power test,
+  browser matrix, screenshot suite, or human evaluation.
+- A passing report proves only that the named tracked files are within the
+  declared byte/file-count limits at check time.
+
+## Verification
+
+Tests must cover schema/report shape, current counts and bytes, escaped paths,
+empty classes, exceeded limits, and deterministic CLI output. Full project
+quality/release gates remain required.
+
+---
