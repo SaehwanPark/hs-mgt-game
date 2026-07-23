@@ -602,6 +602,15 @@ malformed envelopes. No audio asset, simulation rule, history/hash value,
 hidden-state field, or client authority is introduced, and broad campaign
 music-state coverage remains open.
 
+The v0.12.94 Phase 11.1 live-history slice adds a versioned
+`competitive-history-v1` envelope and a loopback `GET /history` route that
+calls only `GameSessionStore::get_history`. The browser adapter validates
+session/campaign identity, transition count, and per-transition hashes before
+rendering the existing text-first history surface; malformed or failed reads
+leave the current history visible. This is a non-mutating host handoff, not a
+new persistence, replay-regeneration, simulation, or client-authority path,
+and full campaign continuity remains open.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 

@@ -1,3 +1,75 @@
+# Presentation Contract — Phase 11.1 live history handoff v0.12.94
+
+## Goal and Authorization
+
+Define the bounded live history handoff needed for the Phase 11.1 history-view
+item. The host may expose its existing immutable transition summaries through a
+versioned non-mutating route; the browser may validate and render those
+summaries through the existing history list. This slice does not authorize
+replay regeneration, save/load, or full campaign continuity.
+
+## Player Questions and Consequences
+
+The history view should answer: “Which committed visible transitions occurred,
+in what order, and what state hash identifies each summary?” It must not reveal
+hidden rival actions, true state, future results, or client-reconstructed
+causality.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| History list | Host `HistoryEnvelope.transitions` from `GameSessionStore::get_history` | Keep presentation-provided history; show explicit empty state | No local history synthesis |
+| Transition count | Host `HistoryEnvelope.transition_count` equal to list length | Reject envelope and retain current view | No inferred missing turns |
+| Turn/command/events/effects | Existing visible `TransitionSummary` fields | Render written fields or existing empty text | No hidden actor outcomes |
+| State hash | Existing host `TransitionSummary.state_hash` | Render visible hash text; do not recalculate | No client hash authority |
+| Unknown session | Existing structured host error/404 | Preserve current history and recovery status | No retry loop or local replacement |
+| Missing adapter capability | Existing presentation history | Continue without dedicated refresh | No second data source or simulation |
+
+## Visual, Motion, and Audio Semantics
+
+The existing text-first `renderHistory` surface remains the meaning-bearing
+presentation. History refresh adds no animation, audio, asset, or motion path;
+existing optional audio and reduced-motion behavior remain unchanged.
+
+## Accessibility and Fallbacks
+
+Each committed summary remains written DOM content with turn, command, event,
+effect, and state-hash text. Empty history and failed/missing history reads
+retain explicit current-view/recovery behavior. Automated checks do not
+establish human screen-reader, focus, contrast, device, or usability quality.
+
+## Authority, History, and Replay Boundaries
+
+The route calls only the existing non-mutating `GameSessionStore::get_history`.
+The response does not enter commands, transitions, stochastic inputs, hashes,
+replay verification, save files, or debrief facts. The browser does not mutate,
+reconstruct, rehash, or regenerate the history.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Existing presentation/history text and current
+credits, registry, release, metadata, and security checks remain the boundary.
+
+## Verification and Evidence Limits
+
+Rust/session/transport tests must cover schema, count/hash alignment, one live
+turn, unknown-session errors, and non-mutation. Node/Python tests must cover
+validation, text rendering, capability/failure fallback, syntax, and forbidden
+authority/network markers. Full Rust, Python, asset, replay, documentation,
+and release checks remain required.
+
+## Non-Goals and Open Questions
+
+- No replay playback/regeneration, save/load, terminal redesign, screenshot
+  suite, performance benchmark, browser matrix, or new campaign path.
+- Open: later full-campaign save/load/replay continuity needs a separate host
+  contract and evidence campaign.
+- Open: human history comprehension and educational usefulness remain external
+  evaluation gates.
+
+---
+
 # Presentation Contract — Phase 11.1 live music-state projection v0.12.93
 
 ## Goal and Authorization

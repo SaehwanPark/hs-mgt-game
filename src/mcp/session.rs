@@ -25,6 +25,7 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
+pub const HISTORY_SCHEMA_VERSION: &str = "competitive-history-v1";
 pub const END_SESSION_SCHEMA_VERSION: &str = "competitive-end-session-v1";
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
@@ -104,6 +105,7 @@ pub struct SessionEnvelope {
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
 pub struct HistoryEnvelope {
+  pub schema_version: String,
   pub session_id: String,
   pub campaign: String,
   pub seed: u64,
@@ -343,6 +345,7 @@ impl GameSessionStore {
     };
     Ok(match session {
       GameSession::Stabilization(session) => HistoryEnvelope {
+        schema_version: HISTORY_SCHEMA_VERSION.to_string(),
         session_id: request.session_id,
         campaign: CampaignId::StabilizationV1.as_str().to_string(),
         seed: session.seed,
@@ -355,6 +358,7 @@ impl GameSessionStore {
           .collect(),
       },
       GameSession::Competitive(session) => HistoryEnvelope {
+        schema_version: HISTORY_SCHEMA_VERSION.to_string(),
         session_id: request.session_id,
         campaign: CampaignId::CompetitiveRegionalV1.as_str().to_string(),
         seed: session.seed,
@@ -367,6 +371,7 @@ impl GameSessionStore {
           .collect(),
       },
       GameSession::Affiliation(session) => HistoryEnvelope {
+        schema_version: HISTORY_SCHEMA_VERSION.to_string(),
         session_id: request.session_id,
         campaign: CampaignId::RegionalAffiliationV1.as_str().to_string(),
         seed: session.seed,
@@ -1516,6 +1521,7 @@ mod tests {
         session_id: current.session_id,
       })
       .expect("history");
+    assert_eq!(history.schema_version, HISTORY_SCHEMA_VERSION);
     assert_eq!(history.transition_count, 5);
   }
 

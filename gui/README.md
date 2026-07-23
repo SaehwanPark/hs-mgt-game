@@ -321,6 +321,7 @@ window.HsMgtGameActionAdapter = {
   async startSession({ campaign, seed, difficulty }) {},
   async getPresentation(sessionId) {},
   async getRegionalWorld(sessionId) {},
+  async getHistory(sessionId) {},
   async getActionCatalog(sessionId) {},
   async validateTurn(sessionId, commandText) {},
   async getResolution(sessionId, turn) {},
@@ -358,6 +359,14 @@ existing music-stem catalog states selected from committed visible context.
 The page uses a valid non-empty state when present and otherwise keeps the
 visible-only music classifier. Music remains optional atmospheric support;
 written resolution and status text remain complete when muted or unavailable.
+
+When supplied, `getHistory(sessionId)` returns
+`schema_version: "competitive-history-v1"` with the host's immutable
+transition summaries, aligned transition count, and state hashes. The page
+validates and renders this dedicated read through the existing text-first
+history view; unsupported, malformed, or failed reads preserve the current
+history and report a recoverable adapter error. The route never submits a
+turn, regenerates replay data, or creates save/load state.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

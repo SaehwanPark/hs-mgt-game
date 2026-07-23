@@ -43,6 +43,10 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
       return request(sessionPath(sessionId, "regional-world"));
     },
 
+    async getHistory(sessionId) {
+      return request(sessionPath(sessionId, "history"));
+    },
+
     async endSession(sessionId) {
       return request(sessionPath(sessionId, "end"), { method: "POST" });
     },

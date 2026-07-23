@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Dedicated History Reads Non-Mutating
+
+- Context: The live GUI already received history inside presentation and
+  terminal envelopes, but it had no dedicated route or adapter for refreshing
+  the existing history view.
+- Risk: Rebuilding history in the browser or coupling a refresh to a turn
+  submission would blur the host's immutable history boundary and could make
+  count/hash drift look like a valid visual update.
+- Resolution: Add a versioned host `HistoryEnvelope` backed only by
+  `GameSessionStore::get_history`, validate transition-count and state-hash
+  alignment in the browser, and preserve the current view on failure.
+- Prevention: Test empty and committed reads, unknown sessions, malformed
+  schemas/counts, and the absence of transition/simulation calls in the
+  history handler; keep save/load, replay regeneration, and persistence as
+  separate future slices.
+
 ## Keep Music-State Priority Explicit and Visible
 
 - Context: The browser already classified music from visible presentation

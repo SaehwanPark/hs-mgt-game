@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.94] - 2026-07-23
+
+- Added a versioned, non-mutating live history route and adapter that return
+  the host's immutable transition summaries with aligned count and hash data.
+- Added browser history-envelope validation, text-first rendering, and
+  failure-preserving fallback behavior without replay regeneration, save/load,
+  client simulation, or new audio/assets.
+- Added Rust transport and Node/Python boundary coverage while keeping full
+  campaign continuity, screenshots, performance, compatibility, and human
+  quality gates open.
+
 ## [0.12.93] - 2026-07-23
 
 - Added an explicit host-shaped `music_state_id` projection to live

@@ -38,6 +38,13 @@ retains visible-only classification for older or malformed envelopes.
 - One code-reviewer skill is reserved for the required review passes; no other
   reviewer will be used.
 
+## Verification
+
+- `cargo test` — 335 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 560 passed, including the live history handoff test.
+- Release metadata, 373 Markdown links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
 ## Limits and next slice
 
 This closes only the current live competitive music-state projection evidence.
@@ -236,3 +243,41 @@ input, simultaneous-load, and declared performance-budget contracts.
 Phase 6.2 owns runtime first-month sequencing and synchronization. This slice
 does not add browser animation, audio synchronization, or a first-month
 resolution sequence.
+# Final Handoff — Visual/audio Phase 11.1 live history handoff v0.12.94
+
+## Result
+
+The live competitive host now exposes a versioned, non-mutating history read.
+The browser validates and renders the host's immutable transition summaries
+through the existing text-first history view while preserving the current
+view when the read is unavailable or malformed.
+
+## Changed files and behavior
+
+- Added `competitive-history-v1` to `HistoryEnvelope` and exposed
+  `GET /api/v1/sessions/{session_id}/history` through the loopback GUI.
+- Added `getHistory`, count/hash/schema validation, and failure-preserving
+  browser rendering; no replay regeneration, save/load, simulation, audio, or
+  asset path changed.
+- Added Rust transport/session assertions and
+  `tests/test_phase11_live_history.py`; updated roadmap, ledger, canonical
+  records, lessons, generated credits/version projections, and release notes.
+
+## Handoff and review
+
+- Base: `main` at v0.12.93.
+- Working branch: to be created after implementation verification.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Limits and next slice
+
+This closes only the dedicated live history read and browser handoff. Full
+campaign history/debrief coverage, save/load/replay continuity, screenshots,
+performance, compatibility, asset quality, human evaluation, and later Phase
+11.2–13 gates remain open.
+
+---
