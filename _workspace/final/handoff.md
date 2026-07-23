@@ -1,3 +1,51 @@
+# Final Handoff — Visual/audio Phase 11.1 live event-cue projection v0.12.92
+
+## Result
+
+Live competitive resolution envelopes now expose an additive
+`audio_cue_ids` list for the eight currently supported visible event cues.
+The browser honors the host-shaped list, including an explicit empty list, and
+uses the existing visible-only classifier only when an older envelope omits
+the field.
+
+## Changed files and behavior
+
+- Added host-shaped cue selection in `src/mcp/resolution.rs` from committed
+  events/effects, before/after visible margins, and actor-visible observation
+  text.
+- Added Rust projection coverage and
+  `tests/test_phase11_live_event_cues.py` for catalog parity, legacy fallback,
+  explicit-empty behavior, syntax, and no-authority boundaries.
+- Updated the roadmap, Phase 11.1 coverage ledger, canonical records, lessons,
+  request/contract/QA, generated credits/version projections, and release
+  notes; no audio asset or simulation path changed.
+
+## Verification
+
+- `cargo test` — 333 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 552 passed, including the live event-cue projection test.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+## Handoff and review
+
+- Base: `main` at v0.12.91.
+- Working branch: to be created after implementation verification.
+- Pull request: pending.
+- Presentation-domain QA: pass for the bounded contract; evidence limits are
+  recorded in `_workspace/03_presentation_qa.md`.
+- One code-reviewer skill is reserved for the required review passes; no other
+  reviewer will be used.
+
+## Limits and next slice
+
+This closes only the current live competitive event-cue projection evidence.
+Full campaign event taxonomy, music-state coverage, history/debrief/save-load/
+replay continuity, screenshots, performance, compatibility, asset quality,
+human evaluation, and later Phase 11.2–13 gates remain open.
+
+---
+
 # Final Handoff — Visual/audio Phase 11.1 live terminal debrief v0.12.91
 
 ## Result

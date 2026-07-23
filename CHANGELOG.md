@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.12.92] - 2026-07-22
+
+- Added an explicit host-shaped `audio_cue_ids` projection to live competitive
+  resolution envelopes for the eight currently supported visible event cues.
+- Kept the browser classifier as a legacy-envelope fallback, with explicit
+  empty host lists respected and no new audio assets or client simulation.
+- Added Rust, Node, and Python coverage for cue parity, visible-source
+  boundaries, and recovery/empty projections; broad campaign cue coverage,
+  screenshots, performance, compatibility, and human-quality gates remain
+  open.
+
 ## [0.12.91] - 2026-07-22
 
 - Added a host-authoritative terminal end-session envelope carrying the

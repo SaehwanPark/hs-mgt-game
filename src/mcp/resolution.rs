@@ -19,6 +19,7 @@ pub struct ResolutionEnvelope {
   pub after: ResolutionSnapshot,
   pub steps: Vec<ResolutionStep>,
   pub effects: Vec<ResolutionEffect>,
+  pub audio_cue_ids: Vec<String>,
   pub replay: ResolutionReplayMetadata,
 }
 
@@ -141,6 +142,12 @@ pub(crate) fn from_competitive_transition(
       pending_items(&after.pending_effects),
     ),
   ];
+  let audio_cue_ids = visible_event_cue_ids(
+    &summary,
+    before.observation.operations.margin,
+    after.observation.operations.margin,
+    &after.observation,
+  );
 
   ResolutionEnvelope {
     schema_version: RESOLUTION_SCHEMA_VERSION.to_string(),
@@ -151,12 +158,69 @@ pub(crate) fn from_competitive_transition(
     after,
     steps,
     effects,
+    audio_cue_ids,
     replay: ResolutionReplayMetadata {
       selected_turn: transition.next.turn,
       transition_count,
       state_hash: transition.state_hash.clone(),
     },
   }
+}
+
+fn visible_event_cue_ids(
+  summary: &TransitionSummary,
+  before_margin: i32,
+  after_margin: i32,
+  after_observation: &ReadOnlyObservation,
+) -> Vec<String> {
+  let mut visible_text = summary.events.join(" ");
+  visible_text.push(' ');
+  visible_text.push_str(&summary.effects.join(" "));
+  visible_text.push(' ');
+  visible_text.push_str(&after_observation.workforce_trust);
+  visible_text.push(' ');
+  visible_text.push_str(&after_observation.in_flight_projects);
+  for metric in &after_observation.staffing {
+    visible_text.push(' ');
+    visible_text.push_str(&metric.label);
+    visible_text.push(' ');
+    visible_text.push_str(&metric.value.to_string());
+  }
+  let visible_text = visible_text.to_lowercase();
+  let mut cue_ids = Vec::new();
+  if visible_text.contains("project") && visible_text.contains("complete") {
+    cue_ids.push("event.project-complete".to_string());
+  }
+  if ["staffing", "staffed", "vacancy", "workforce constraint"]
+    .iter()
+    .any(|word| visible_text.contains(word))
+  {
+    cue_ids.push("event.staffing-constraint".to_string());
+  }
+  if after_margin < 0 {
+    cue_ids.push("event.operating-loss".to_string());
+  }
+  if after_margin > before_margin {
+    cue_ids.push("event.operating-recovery".to_string());
+  }
+  if visible_text.contains("payer") {
+    cue_ids.push("event.payer-decision".to_string());
+  }
+  if visible_text.contains("regulat") || visible_text.contains("policy decision") {
+    cue_ids.push("event.regulatory-decision".to_string());
+  }
+  if (visible_text.contains("rival")
+    && (visible_text.contains("expand") || visible_text.contains("expansion")))
+    || (visible_text.contains("expan") && visible_text.contains("rival"))
+  {
+    cue_ids.push("event.rival-expansion".to_string());
+  }
+  if visible_text.contains("affiliation milestone")
+    || visible_text.contains("integration milestone")
+  {
+    cue_ids.push("event.affiliation-milestone".to_string());
+  }
+  cue_ids
 }
 
 fn snapshot(
@@ -253,4 +317,118 @@ fn pending_items(pending: &[ReadOnlyPendingEffect]) -> Vec<String> {
     .iter()
     .map(|effect| format!("{}: {}", effect.label, effect.detail))
     .collect()
+}
+
+#[cfg(test)]
+mod tests {
+  use super::super::presentation::{ReadOnlyMetric, ReadOnlyObservation, ReadOnlyOperations};
+  use super::visible_event_cue_ids;
+  use crate::mcp::session::TransitionSummary;
+
+  fn observation() -> ReadOnlyObservation {
+    ReadOnlyObservation {
+      organization_name: "Test Health System".to_string(),
+      access_index: 60,
+      prior_access_revision: None,
+      quality_index: 70,
+      workforce_trust: "workforce constraint reported".to_string(),
+      community_trust: "stable".to_string(),
+      staffing: vec![ReadOnlyMetric {
+        label: "Nurses".to_string(),
+        value: 20,
+      }],
+      capacity: Vec::new(),
+      operations: ReadOnlyOperations {
+        demand: 100,
+        treated_volume: 90,
+        unmet_demand: 10,
+        revenue: 90,
+        cost: 100,
+        margin: -10,
+      },
+      in_flight_projects: "Project complete reported".to_string(),
+      cash_runway_signal: "strained".to_string(),
+      market_bullets: Vec::new(),
+      policy_bullets: Vec::new(),
+      annual_policy_review: None,
+      consultant_options: Vec::new(),
+      information_gaps: Vec::new(),
+    }
+  }
+
+  fn summary() -> TransitionSummary {
+    TransitionSummary {
+      turn: 1,
+      command: "hold".to_string(),
+      events: vec![
+        "Payer decision was reported".to_string(),
+        "Regulatory policy decision was reported".to_string(),
+        "Public rival expansion was observed".to_string(),
+        "Affiliation milestone was committed".to_string(),
+      ],
+      effects: vec!["Project complete reported".to_string()],
+      state_hash: "hash-1".to_string(),
+      consultant_options: Vec::new(),
+    }
+  }
+
+  #[test]
+  fn visible_event_cue_projection_covers_supported_event_cues() {
+    let ids = visible_event_cue_ids(&summary(), 10, -10, &observation());
+
+    assert_eq!(
+      ids,
+      vec![
+        "event.project-complete",
+        "event.staffing-constraint",
+        "event.operating-loss",
+        "event.payer-decision",
+        "event.regulatory-decision",
+        "event.rival-expansion",
+        "event.affiliation-milestone",
+      ]
+    );
+  }
+
+  #[test]
+  fn visible_event_cue_projection_emits_recovery_only_when_margin_improves() {
+    let mut after = observation();
+    after.workforce_trust = "stable".to_string();
+    after.in_flight_projects = "none".to_string();
+    after.operations.margin = 10;
+
+    let ids = visible_event_cue_ids(
+      &TransitionSummary {
+        events: Vec::new(),
+        effects: Vec::new(),
+        ..summary()
+      },
+      -10,
+      10,
+      &after,
+    );
+
+    assert_eq!(ids, vec!["event.operating-recovery"]);
+  }
+
+  #[test]
+  fn visible_event_cue_projection_is_empty_without_visible_triggers() {
+    let mut after = observation();
+    after.workforce_trust = "stable".to_string();
+    after.in_flight_projects = "none".to_string();
+    after.operations.margin = 10;
+
+    let ids = visible_event_cue_ids(
+      &TransitionSummary {
+        events: Vec::new(),
+        effects: Vec::new(),
+        ..summary()
+      },
+      10,
+      10,
+      &after,
+    );
+
+    assert!(ids.is_empty());
+  }
 }

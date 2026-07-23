@@ -2227,9 +2227,10 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live facility-component binding recorded in v0.12.89;
-full campaign facility coverage, continuity validation, performance, and
-screenshot gates remain open.
+**Status:** Bounded live event-cue projection recorded in v0.12.92 after
+facility, operational-overlay, and terminal-debrief slices; full campaign
+facility/event coverage, continuity validation, performance, and screenshot
+gates remain open.
 
 ### Scope
 
@@ -2335,6 +2336,26 @@ screenshot gates remain open.
   handoff evidence. Broad Phase 11.1 history/debrief/save-load/replay coverage,
   full campaign screenshots, performance/compatibility, and human quality
   remain open.
+
+### v0.12.92 bounded live event-cue projection evidence
+
+- `ResolutionEnvelope.audio_cue_ids` now carries an explicit host-shaped list
+  for the eight currently supported event cues: project completion, staffing
+  constraint, operating loss, operating recovery, payer decision, regulatory
+  decision, rival expansion, and affiliation milestone.
+- The projection reads only committed `TransitionSummary` events/effects,
+  before/after actor-visible operating margins, and visible observation text.
+  `gui/app.mjs` honors a present list including an explicit empty list; older
+  envelopes that omit the field use the existing visible-only classifier.
+- `src/mcp/resolution.rs` Rust tests and
+  `tests/test_phase11_live_event_cues.py` cover cue parity, catalog IDs,
+  recovery/empty cases, syntax, and the unchanged hidden-state/network
+  boundary. No asset, simulation, history/hash, or client-authority path
+  changes.
+- This closes only the current live event-cue projection evidence. Full
+  campaign event taxonomy, music-state coverage, history/debrief/save-load/
+  replay continuity, screenshots, performance/compatibility, and human
+  quality remain open.
 
 ### Exit criteria
 

@@ -5399,6 +5399,22 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
   input, hidden-state projection, rival detail, browser debrief synthesis, or
   second terminal state.
 
+### Visual/audio Phase 11.1 live event-cue projection (v0.12.92)
+
+- Status: In progress; live competitive resolution envelopes now expose an
+  explicit host-shaped list for currently supported visible event cues, while
+  full campaign cue coverage remains incomplete.
+- Done: additive `audio_cue_ids`; visible-only derivation from committed
+  events/effects, before/after margins, and actor-visible observation text;
+  explicit-empty-list semantics; legacy browser fallback; catalog parity;
+  Rust/Node/Python evidence; and unchanged simulation/history/hash authority.
+- Not Yet Done: full campaign event taxonomy, music-state coverage, history/
+  debrief/save-load/replay continuity, screenshots, performance/compatibility,
+  asset-quality review, and human quality evaluation.
+- Deferred / Non-Goals: no new audio asset, simulation rule, stochastic input,
+  hidden-state projection, rival detail, browser event inference for new
+  envelopes, or client-owned cue authority.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

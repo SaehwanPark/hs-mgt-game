@@ -2,7 +2,7 @@
   "schema_version": "competitive-campaign-coverage-ledger-v1",
   "status": "bounded-technical-ledger",
   "campaign": "competitive-regional-v1",
-  "scope": "Committed presentation catalogs, bounded first-month continuity, and the current live facility/operational-overlay/terminal-debrief bindings; not full-campaign or screenshot completion.",
+  "scope": "Committed presentation catalogs, bounded first-month continuity, and the current live facility/operational-overlay/terminal-debrief/event-cue bindings; not full-campaign or screenshot completion.",
   "catalogs": {
     "facilities": {
       "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
@@ -110,11 +110,13 @@
       "gui/playtest.mjs",
       "gui/app.mjs",
       "gui/host-adapter.mjs",
+      "src/mcp/resolution.rs",
       "src/mcp/session.rs",
       "src/gui_server.rs",
-      "tests/test_phase10_first_month.py"
+      "tests/test_phase10_first_month.py",
+      "tests/test_phase11_live_event_cues.py"
     ],
-    "boundary": "History, debrief, replay, save/load, and hashes remain host/core-owned; the live terminal slice verifies one host response and presentation references only."
+    "boundary": "History, debrief, replay, save/load, hashes, and cue authority remain host/core-owned; the live terminal and event-cue slices verify host responses and presentation references only."
   },
   "fallbacks": {
     "facility_unknown": "generic-facility",
@@ -126,7 +128,7 @@
     "music_state_unknown": null
   },
   "open_limits": [
-    "Full competitive-campaign facility, overlay, event, history, debrief, save/load, and replay coverage is not established by this bounded ledger; live bindings cover only directly supported current player conditions and the terminal handoff.",
+    "Full competitive-campaign facility, overlay, event, history, debrief, save/load, and replay coverage is not established by this bounded ledger; live bindings cover only directly supported current player conditions, the terminal handoff, and the current event-cue projection.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
   ]

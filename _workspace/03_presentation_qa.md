@@ -1,3 +1,76 @@
+# Presentation QA — Phase 11.1 live event-cue projection v0.12.92
+
+## Status
+
+`pass` for the bounded live competitive event-cue projection. This is
+technical presentation QA, not human accessibility, usability, legal,
+educational, audio-quality, or full-campaign approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/86_implementation_plan_visual-audio-phase11-live-event-cues-v0.12.92.md`.
+- Changed paths: `src/mcp/resolution.rs`, `gui/app.mjs`, focused tests, and
+  project records.
+- Roadmap gate: current live competitive event-cue projection evidence only.
+
+## Information and Causality Findings
+
+- Pass: cue IDs are derived from the committed `TransitionSummary`, visible
+  before/after operating margins, and actor-visible observation text only.
+- Pass: the eight supported IDs remain presentation vocabulary; no cue exposes
+  hidden rival intent, true-state detail, future outcome, or a new causal rule.
+- Pass: an explicit host-provided empty list means no cue, while an omitted
+  field is treated as a legacy envelope and uses the existing visible-only
+  browser classifier.
+
+## Accessibility and Fallback Findings
+
+- Pass: each supported cue retains the catalog's visible source and written
+  equivalent; text-first resolution content remains available independently.
+- Pass: missing legacy field fallback is deterministic and unknown audio
+  playback remains governed by the existing unavailable-audio fallback.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, device compatibility, low-power behavior, or human
+  audio usefulness/fatigue.
+
+## Provenance and Rights Findings
+
+- Pass: no audio asset, release path, or third-party material was added.
+- Pass: the existing catalog, credits, registry, and release validators remain
+  the provenance boundary.
+- Evidence limit: automated provenance checks are not legal clearance or human
+  design/rights approval.
+
+## Authority and Replay Findings
+
+- Pass: `audio_cue_ids` is additive presentation metadata on the resolution
+  envelope and is not stored in simulation state, transition hashes, history,
+  replay verification, or the client-owned draft state.
+- Pass: the browser prefers host-provided IDs and never fetches, simulates, or
+  reconstructs a transition; legacy fallback reads only visible envelope data.
+
+## Required Fixes
+
+None for this bounded contract.
+
+## Residual Risks and Evidence Limits
+
+- Full campaign event taxonomy, music-state coverage, history/debrief/save-load/
+  replay continuity, screenshots, performance, compatibility, asset quality,
+  human accessibility, legal clearance, educational outcomes, and audio
+  usefulness/fatigue remain unestablished.
+
+## Verification Evidence
+
+- Rust tests — 333 passed; `cargo fmt --check`; Clippy with warnings denied.
+- Python discovery — 552 passed, including the live event-cue projection test.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation checks, and visual/audio contract audit passed.
+
+---
+
 # Presentation QA — Phase 11.1 live terminal debrief handoff v0.12.91
 
 ## Status

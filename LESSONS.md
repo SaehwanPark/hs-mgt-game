@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Make Event-Cue Selection Host-Shaped but Presentation-Only
+
+- Context: The live resolution browser already classified event cues from
+  visible text, while the host owned the committed transition summary and
+  actor-visible before/after snapshots.
+- Risk: Keeping the primary classifier in the browser makes cue selection
+  harder to audit against the committed transition and can blur the legacy
+  envelope boundary.
+- Resolution: Add an additive `audio_cue_ids` projection to the host-shaped
+  resolution envelope using only visible events, effects, observation text,
+  and before/after margins. Honor an explicit empty list and retain the
+  browser classifier only when older envelopes omit the field.
+- Prevention: Test every supported cue against the catalog, keep cue IDs out
+  of simulation state and hashes, and document that cue selection is a
+  presentation projection rather than a new authority or event model.
+
 ## Keep Terminal Debrief and Replay on One Host Envelope
 
 - Context: The host already generated final debrief text and removed sessions,
