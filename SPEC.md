@@ -5546,6 +5546,23 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 - Deferred / Non-Goals: no image edit, promotion, source/release hash change,
   browser/audio/simulation behavior, stochastic input, or runtime claim.
 
+### Visual/audio Phase 11.2 audio packaging/compression review (v0.13.1)
+
+- Status: In progress; the current release has zero file-backed audio and the
+  registered audio recipes have explicit null release paths, while runtime
+  decode, offline, device, browser, and human-quality evidence remains open.
+- Done: `audio-packaging-scope-v1`; deterministic zero-file/zero-byte report;
+  known audio-suffix scan; runtime-source existence checks; registry/catalog
+  null-release-path checks; path/schema/release-promotion tests; and the
+  explicit `not-applicable-runtime-generated` compression decision.
+- Not Yet Done: audio-file compression or codec selection, lazy loading,
+  preload policy, decode/render/memory measurements, offline operation,
+  low-power devices, browser compatibility, screenshots, asset-quality review,
+  and human evaluation.
+- Deferred / Non-Goals: no audio file, release derivative, registry promotion,
+  browser playback, host DTO, simulation, stochastic input, history/hash,
+  replay, debrief, or runtime performance claim.
+
 ### Contributor documentation information architecture (v0.12.32)
 
 - Status: Closed; implementation and verification complete

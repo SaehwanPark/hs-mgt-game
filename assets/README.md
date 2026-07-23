@@ -40,6 +40,14 @@ release/preview boundary explicit: supported raster files are prohibited under
 remain outside release eligibility. A passing report is scope evidence, not a
 raster-quality, decode, render, cache, device, or browser claim.
 
+`assets/audio-packaging-scope.json` and `scripts/check_audio_packaging.py` keep
+the current audio package boundary explicit: no file-backed audio is shipped,
+and registered audio remains runtime-generated Web Audio with null release
+paths. The compression decision is therefore `not-applicable-runtime-generated`.
+The checker fails closed if a known audio file enters the release tree or a
+registry entry gains a release path. This is package-scope evidence, not a
+codec, loudness, decode, offline, device, browser, or human-quality claim.
+
 `scripts/optimize_release_svg.py --check` verifies that every tracked release
 SVG is idempotently normalized and that registry hashes and the release
 manifest match. `--write` applies only outer/inter-tag whitespace normalization

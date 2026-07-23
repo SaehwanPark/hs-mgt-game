@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.1] - 2026-07-23
+
+- Added `audio-packaging-scope-v1` and a deterministic checker proving that the
+  current release contains zero file-backed audio and that all registered audio
+  remains runtime-generated with null release paths.
+- Closed only the Phase 11.2 audio-compression-review item as
+  `not-applicable-runtime-generated`; no audio file was added, compressed, or
+  promoted, and runtime decode, offline, device, compatibility, and human
+  quality gates remain open.
+
 ## [0.13.0] - 2026-07-23
 
 - Added `raster-scope-v1` evidence that the release package contains no raster
