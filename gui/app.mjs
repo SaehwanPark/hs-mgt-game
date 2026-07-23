@@ -1492,6 +1492,12 @@ export function validateEndSessionEnvelope(envelope) {
   return { ok: true, envelope };
 }
 
+export function resolutionAudioCueIds(envelope = {}) {
+  return Array.isArray(envelope?.audio_cue_ids)
+    ? envelope.audio_cue_ids
+    : visibleEventCues(envelope);
+}
+
 export function renderEndSessionEnvelope(envelope, root = document) {
   const validation = validateEndSessionEnvelope(envelope);
   if (!validation.ok) return validation;
@@ -2068,7 +2074,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         firstMonthFlow.update({ resolutionVisible: true });
         audioClient.playCue("ui.advance-month");
         audioClient.setMusicFromVisible(resolution.envelope.after);
-        for (const cueId of visibleEventCues(resolution.envelope)) audioClient.playCue(cueId);
+        const cueIds = resolutionAudioCueIds(resolution.envelope);
+        for (const cueId of cueIds) audioClient.playCue(cueId);
       }
     }
     if (typeof adapter.getPresentation === "function") {

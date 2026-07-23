@@ -51,6 +51,8 @@ class GuiResolutionTests(unittest.TestCase):
       "createResolutionClient",
       "renderResolution",
       "getResolution",
+      "audio_cue_ids",
+      "visibleEventCues",
       "resolution_adapter_error",
       "prefers-reduced-motion",
       "resolution-play",

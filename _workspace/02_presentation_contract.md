@@ -1,3 +1,83 @@
+# Presentation Contract — Phase 11.1 live event-cue projection v0.12.92
+
+## Goal and Authorization
+
+Define the live competitive resolution event-cue projection needed for the
+bounded Phase 11.1 event-cue slice. The host may add explicit cue IDs derived
+from committed actor-visible transition data; the browser may play catalog
+cues and retain the existing visible-only fallback for legacy envelopes. This
+slice does not authorize full campaign coverage or new assets.
+
+## Player Questions and Consequences
+
+The resolution view may reinforce: “Which visible event or operating change
+was just committed, and what written explanation remains available?” A cue
+must not reveal hidden severity, actor intent, private rival action, causality
+not present in the envelope, probability, or future outcome.
+
+## Actor-Visible Source Ledger
+
+| Cue | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| `event.project-complete` | Visible committed event/effect or in-flight project text containing project + complete | Omit cue | No inferred completion from a project name alone |
+| `event.staffing-constraint` | Visible event/effect, workforce text, or staffing metric label containing a supported staffing term | Omit cue | No hidden vacancy severity or labor intent |
+| `event.operating-loss` | After actor-visible operations margin `< 0` | Omit cue when absent/nonnegative | No forecast or solvency claim |
+| `event.operating-recovery` | After visible margin is greater than before visible margin | Omit cue when unchanged/worse | No causal attribution beyond visible results |
+| `event.payer-decision` | Visible committed event/effect text containing payer | Omit cue | No private payer intent |
+| `event.regulatory-decision` | Visible committed event/effect text containing regulatory/policy decision | Omit cue | No hidden regulatory posture |
+| `event.rival-expansion` | Visible text containing rival and expand/expansion | Omit cue | No private rival action or intent |
+| `event.affiliation-milestone` | Visible text containing affiliation/integration milestone | Omit cue | No unobserved partner stage |
+| Legacy envelope without `audio_cue_ids` | Existing `visibleEventCues` classifier over visible envelope data | Use legacy classifier | No client transition or hidden-state read |
+| Explicit empty `audio_cue_ids` | Host-provided empty list | Play no event cue | Do not locally reinterpret absence as a trigger |
+
+## Visual, Motion, and Audio Semantics
+
+`audio_cue_ids` uses the existing `AUDIO_CUE_CONTRACT` IDs and their written
+equivalents. Cue priority, duration, cooldown, reduced-audio behavior, and
+unavailable-audio fallback remain catalog/client presentation policy. No new
+audio or motion is introduced, and text-first resolution remains complete when
+audio is muted or unavailable.
+
+## Accessibility and Fallbacks
+
+Each supported cue retains a visible source and text equivalent in the catalog.
+An omitted field is a backward-compatible legacy envelope; a present empty
+list is authoritative for that response. Unknown playback remains governed by
+the existing unavailable-audio fallback. Automated checks do not establish
+human accessibility or audio usefulness/fatigue.
+
+## Authority, History, and Replay Boundaries
+
+The host-shaped list is additive presentation metadata. It is derived from
+`TransitionSummary`, before/after `ReadOnlyObservation` data, and no hidden
+world state; it does not enter simulation transitions, commands, stochastic
+inputs, immutable history, state hashes, replay verification, or debrief
+facts. The browser does not fetch, simulate, or reconstruct the transition.
+
+## Asset Provenance and Release Requirements
+
+No asset is added or promoted. Existing audio catalog IDs, credits, registry,
+release, metadata, and security checks remain the provenance boundary.
+
+## Verification and Evidence Limits
+
+Rust tests must cover every supported event cue plus recovery and empty cases.
+Node/Python tests must cover catalog parity, explicit-list preference,
+legacy fallback, syntax, and the no-authority boundary. Existing full Rust,
+Python, asset, replay, documentation, and release checks remain required.
+
+## Non-Goals and Open Questions
+
+- No full campaign event taxonomy, music-state binding, history/debrief
+  redesign, save/load/replay continuity, screenshot suite, performance
+  benchmark, or browser matrix in this slice.
+- Open: which later host-committed event/history fields can safely support
+  additional cues without duplicating transition logic?
+- Open: full-campaign visual/audio continuity and human evaluation remain
+  separate gates.
+
+---
+
 # Presentation Contract — Phase 11.1 live operational overlays v0.12.90
 
 ## Goal and Authorization

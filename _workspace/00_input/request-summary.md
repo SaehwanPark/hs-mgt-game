@@ -1,3 +1,56 @@
+# Request Summary — Visual/audio Phase 11.1 live event-cue projection v0.12.92
+
+## Authorized outcome
+
+Move the primary live competitive event-cue selection to an explicit
+host-shaped presentation projection derived from committed actor-visible
+resolution data. Preserve a visible-only browser fallback for legacy
+envelopes and keep broad campaign coverage open.
+
+## Target slice
+
+- Add `audio_cue_ids` to the competitive resolution envelope.
+- Derive the eight currently supported event cues from committed events and
+  effects, before/after visible operating margins, and actor-visible
+  observation text.
+- Prefer the explicit list in `gui/app.mjs`, including an explicit empty list;
+  use `visibleEventCues` only when older envelopes omit the field.
+- Add deterministic Rust, Node, and Python evidence plus project-record/version
+  updates.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 11.1 event-cue coverage.
+- `src/mcp/resolution.rs` and `src/mcp/session.rs` — committed resolution
+  summary and actor-visible before/after projection.
+- `gui/audio-cue-contract.mjs`, `gui/audio.mjs`, and `gui/app.mjs` — existing
+  cue catalog, legacy visible classifier, and live resolution path.
+- `_workspace/86_implementation_plan_visual-audio-phase11-live-event-cues-v0.12.92.md`
+  — bounded implementation and review plan.
+
+## Non-goals
+
+- Do not claim full campaign event-cue or music-state coverage, screenshots,
+  performance, compatibility, accessibility quality, or human evaluation.
+- Do not add audio assets, dependencies, hidden-state fields, rival detail,
+  simulation behavior, history/hash changes, client authority, or network
+  access.
+
+## Validation target
+
+Focused event-cue, resolution, audio, release metadata, asset/security/credits,
+documentation, JavaScript, formatting, Clippy, and full Python/Rust checks.
+
+## Evidence limits
+
+This slice proves explicit host-shaped cue IDs for currently supported visible
+conditions and preserves legacy-envelope fallback semantics only. Full campaign
+event/history/debrief/save-load/replay coverage, screenshots, performance,
+compatibility, asset quality, human accessibility, audio usefulness, legal
+clearance, and educational benefit remain open.
+
+---
+
 # Request Summary — Visual/audio Phase 11.1 live operational-overlay binding v0.12.90
 
 ## Authorized outcome

@@ -346,6 +346,13 @@ historical-turn read are local presentation controls; `getResolution` never
 advances the session. Text remains in the DOM when paused or reduced motion is
 enabled.
 
+The live resolution envelope may also include `audio_cue_ids`, an additive
+host-shaped list of existing event-cue catalog IDs derived from committed,
+actor-visible data. The page honors that list, including an explicit empty
+list; envelopes from older adapters that omit the field use the existing
+visible-only `visibleEventCues` classifier. Cue playback remains optional and
+the catalog's written equivalents remain the meaning-bearing fallback.
+
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a
 schematic identity map, visible demand/access/process overlays, owned facility

@@ -585,6 +585,14 @@ state, replay hash, simulation transition, rival detail, or local debrief
 synthesis is introduced, and full campaign save/load/replay continuity remains
 open.
 
+The v0.12.92 Phase 11.1 live-event-cue slice adds `audio_cue_ids` to the
+host-shaped competitive resolution envelope. The projection derives only from
+the committed transition summary, before/after visible operating margins, and
+actor-visible observation text; the browser plays those IDs when present and
+uses its existing visible-only classifier only for legacy envelopes. No audio
+asset, simulation rule, history/hash value, hidden-state field, or client
+authority is introduced, and broad campaign event-cue coverage remains open.
+
 Last Reviewed: 2026-07-22
 Status: Verified
 
