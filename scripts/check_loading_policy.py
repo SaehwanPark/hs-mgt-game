@@ -27,6 +27,7 @@ MODULE_SOURCE_PATTERNS = (
 )
 DYNAMIC_MODULE_PATTERN = re.compile(r"\bimport\s*\(([^)]*)\)", re.DOTALL)
 COMMENT_GAP_MODULE_PATTERN = re.compile(r"\b(?:import|export)\s*/\*[\s\S]*?\*/")
+LINE_COMMENT_GAP_MODULE_PATTERN = re.compile(r"\b(?:import|export)\s*//[^\n]*(?:\n|$)")
 
 
 def _resolve(root: Path, relative: str) -> Path:
@@ -183,6 +184,11 @@ def module_sources(root: Path, live_files: list[str]) -> tuple[list[str], list[s
     source_path = _resolve(root, relative_path)
     text = source_path.read_text(encoding="utf-8")
     for match in COMMENT_GAP_MODULE_PATTERN.finditer(text):
+      line = text.count("\n", 0, match.start()) + 1
+      errors.append(
+        f"module declaration contains unsupported comment gap: {relative_path}:{line}"
+      )
+    for match in LINE_COMMENT_GAP_MODULE_PATTERN.finditer(text):
       line = text.count("\n", 0, match.start()) + 1
       errors.append(
         f"module declaration contains unsupported comment gap: {relative_path}:{line}"

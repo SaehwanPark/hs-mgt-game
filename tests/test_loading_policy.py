@@ -120,12 +120,14 @@ class LoadingPolicyTests(unittest.TestCase):
       source = root / "app.mjs"
       source.write_text(
         'const first = import /* gap */ (moduleName);\n'
-        'import /* gap */ "./unlisted.mjs";\n',
+        'import /* gap */ "./unlisted.mjs";\n'
+        'const second = import // gap\n (moduleName);\n'
+        'import // gap\n "./unlisted-again.mjs";\n',
         encoding="utf-8",
       )
       sources, errors = self.checker.module_sources(root, ["app.mjs"])
       self.assertEqual(sources, [])
-      self.assertEqual(sum("unsupported comment gap" in error for error in errors), 2)
+      self.assertEqual(sum("unsupported comment gap" in error for error in errors), 4)
 
   def test_executable_runtime_loads_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:
