@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.13.4] - 2026-07-23
+
+- Cleaned up and tightened `README.md` milestone introduction and summary.
+
 ## [0.13.3] - 2026-07-23
 
 - Completed the local embedded route package for the live GUI entrypoint,
