@@ -33,7 +33,8 @@ const unknownFacility = facilities.facilityPresentationFor("general-hospital-bas
 const unknownFacilityComponent = facilities.facilityComponentFor("unknown");
 console.log(JSON.stringify({
   facilities: Object.keys(facilities.FACILITY_COMPONENTS),
-  facility_assets: Object.values(facilities.FACILITY_COMPONENTS).map((entry) => ({
+  facility_assets: Object.entries(facilities.FACILITY_COMPONENTS).map(([key, entry]) => ({
+    key,
     id: entry.id,
     source_path: entry.source_path ?? null,
     release_path: entry.release_path ?? null,
@@ -197,6 +198,8 @@ console.log(JSON.stringify(resolved));
     self.assertEqual(coverage["status"], "complete")
     self.assertEqual(coverage["registry_id_prefix"], "visual.facility.")
     self.assertEqual(coverage["fallback_id"], "generic-facility")
+    for component in self.live["facility_assets"]:
+      self.assertEqual(component["key"], component["id"])
 
     file_backed = [entry for entry in self.live["facility_assets"] if entry["id"] != coverage["fallback_id"]]
     self.assertEqual(
