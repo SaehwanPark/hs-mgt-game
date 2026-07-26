@@ -979,3 +979,50 @@ visual/audio contract audits.
 `code-reviewer` remain in use. The repo-local presentation contract designer
 and presentation domain QA apply because this slice changes the actor-visible
 delivery boundary without changing simulation authority.
+
+---
+
+# Request Summary — Visual/audio Phase 11.1 facility asset coverage v0.13.6
+
+## Scope
+
+Close only the Phase 11.1 `Facility asset coverage complete` item by joining
+the live file-backed facility catalog to source SVGs, release SVGs, and
+approved visual registry entries with exact hashes. Preserve the generic
+facility fallback as a no-asset boundary.
+
+## Non-goals
+
+- Do not add new facility art or change runtime rendering, host DTOs,
+  simulation, audio, history, hashes, replay, debrief, or campaign placement.
+- Do not claim full campaign placement/use, screenshot, device, browser,
+  accessibility, or human visual-quality evidence.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.1.
+- `gui/facility-components.mjs` and
+  `assets/registry/visual-assets.json`.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  actionable technical coverage slice.
+
+## Expected files
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+- `tests/test_phase11_campaign_coverage.py`
+- `_workspace` plan/contract/QA/handoff records, roadmap, SDD, lessons,
+  changelog, and version projections for v0.13.6.
+
+## Validation target
+
+Every file-backed facility has existing source/release paths, maps exactly once
+to `visual.facility.<id>`, and has approved registry hashes. The generic
+fallback has no asset paths. Run focused/full Python and Rust checks plus
+release, asset, security, documentation, and visual/audio audits.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
+`fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
+contract and presentation-domain QA because this slice governs actor-visible
+asset/fallback coverage without changing simulation authority.

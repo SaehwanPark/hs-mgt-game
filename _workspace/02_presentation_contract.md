@@ -1626,3 +1626,62 @@ comprehension.
 - Do not treat proof pages or external documentation as the live offline
   surface.
 - Low-power-device and browser-compatibility gates remain open.
+
+---
+
+# Presentation Contract — Phase 11.1 facility asset coverage v0.13.6
+
+## Goal and authorization
+
+Prove that the live file-backed facility vocabulary has complete source and
+release asset wiring. This is a registry/catalog evidence slice only.
+
+## Player questions and consequences
+
+The player should see a stable facility label or the explicit generic facility
+fallback. Asset coverage must not create a new strategic fact, imply a facility
+outcome, or alter campaign placement.
+
+## Actor-visible source ledger
+
+| Surface | Source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Facility catalog | `gui/facility-components.mjs` | `generic-facility` with no asset paths | No browser- or registry-derived severity, capacity, ownership, or outcome |
+| Source/release assets | Catalog paths and `assets/release/visual/svg/` | Fail the coverage check if a declared path or hash is absent | No promotion of an unregistered or unapproved asset |
+| Registry evidence | `assets/registry/visual-assets.json` entries named `visual.facility.<id>` | Fail closed on missing, duplicate, mismatched, or unapproved entries | Registry presence is not a claim of visual quality or campaign placement |
+
+## Visual, motion, and audio semantics
+
+No visual geometry, motion, audio cue, or metric meaning changes. The coverage
+test validates existing bytes and metadata only.
+
+## Accessibility and fallbacks
+
+Existing facility labels, layer text, generic markers, and unavailable/error
+states remain authoritative. `generic-facility` is deliberately excluded from
+file-backed asset coverage and remains the safe fallback.
+
+## Authority, history, and replay boundaries
+
+The ledger and test are read-only governance evidence. They cannot enter
+commands, transitions, stochastic inputs, state hashes, immutable history,
+replay artifacts, or debrief facts. The host remains authoritative.
+
+## Asset provenance and release requirements
+
+Each file-backed facility must have matching source/release paths, approved
+status, and exact original/release hashes. Existing asset-registry,
+release-manifest, credits, and license validators remain required.
+
+## Verification and evidence limits
+
+The focused test proves catalog-to-registry wiring and byte hashes. It does not
+prove facility placement in every campaign month, screenshot completeness,
+render quality, device/browser performance, lived accessibility, or human
+visual-quality review.
+
+## Non-goals and open questions
+
+- No new facility asset or runtime renderer.
+- Open: full campaign placement/use, screenshot suite, continuity, performance,
+  compatibility, and human evaluation gates.

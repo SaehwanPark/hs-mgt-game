@@ -2227,11 +2227,11 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Bounded live checkpoint save/restore handoff recorded in v0.12.96
-after facility, operational-overlay, terminal-debrief, event-cue, music-state,
-history, and replay slices; full campaign facility/event/music coverage,
-durable save/load/replay continuity, performance, and screenshot gates remain
-open.
+**Status:** Facility asset catalog and release-registry coverage completed in
+v0.13.6 after the bounded live facility, operational-overlay, terminal-
+debrief, event-cue, music-state, history, replay, and checkpoint slices; full
+campaign placement/use, durable save/load/replay continuity, performance, and
+screenshot gates remain open.
 
 ### Scope
 
@@ -2246,7 +2246,7 @@ open.
 
 ### Checklist
 
-- [ ] Facility asset coverage complete.
+- [x] Facility asset coverage complete.
 - [ ] Overlay coverage complete.
 - [x] Actor-family coverage complete.
 - [ ] Event cue coverage complete.
@@ -2258,6 +2258,22 @@ open.
 - [x] Unknown content fallbacks tested.
 - [ ] Asset registry coverage is 100%.
 - [ ] Full campaign screenshot suite passes.
+
+### v0.13.6 facility asset coverage evidence
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` now records the
+  twelve file-backed facility IDs, their live catalog source, the
+  `visual.facility.` registry namespace, and the explicit `generic-facility`
+  fallback boundary.
+- `tests/test_phase11_campaign_coverage.py` joins every file-backed live
+  facility to its source SVG, release SVG, approved registry entry, and exact
+  original/release hashes. The generic fallback is required to have no asset
+  paths. Existing release-manifest and asset-registry validators remain the
+  authoritative release checks.
+- This closes only facility asset coverage. Facility placement/use coverage,
+  overlays, event/music coverage, history/debrief continuity, screenshot
+  review, low-power/device compatibility, and human quality remain open where
+  their checklist items are still unchecked.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

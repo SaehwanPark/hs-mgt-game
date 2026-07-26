@@ -2595,3 +2595,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   statuses, successful retry, mute/visual-only behavior, and forbidden
   authority/network markers; keep recorded audio and decoder integration out of
   the slice.
+
+## Phase 19: Catalog coverage must join runtime IDs to release IDs
+
+- Context: Phase 11.1 already listed facility IDs in a campaign ledger and the
+  asset registry already validated every release file, but neither artifact
+  alone proved that the live catalog and registry referred to the same assets.
+- Risk: A newly added facility could have a valid registry entry while the
+  runtime points at a different path, or a live catalog entry could bypass the
+  approved release registry entirely.
+- Resolution: Add a fail-closed join test that derives file-backed facilities
+  from `FACILITY_COMPONENTS`, maps them to the `visual.facility.<id>` namespace,
+  checks source/release paths and exact hashes, and requires the generic
+  fallback to remain pathless.
+- Prevention: Keep catalog-to-registry joins in focused coverage tests, retain
+  the general asset validator as the release gate, and distinguish asset
+  wiring from campaign placement, screenshot, quality, and human evidence.
