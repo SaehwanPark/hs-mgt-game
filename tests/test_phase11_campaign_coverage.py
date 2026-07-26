@@ -198,7 +198,7 @@ console.log(JSON.stringify(resolved));
     self.assertEqual(coverage["registry_id_prefix"], "visual.facility.")
     self.assertEqual(coverage["fallback_id"], "generic-facility")
 
-    file_backed = [entry for entry in self.live["facility_assets"] if entry["release_path"]]
+    file_backed = [entry for entry in self.live["facility_assets"] if entry["id"] != coverage["fallback_id"]]
     self.assertEqual(
       [entry["id"] for entry in file_backed],
       coverage["file_backed_ids"],
@@ -212,6 +212,16 @@ console.log(JSON.stringify(resolved));
     self.assertEqual(registry_facility_ids, sorted(coverage["file_backed_ids"]))
 
     for component in file_backed:
+      self.assertIsInstance(component["source_path"], str)
+      self.assertIsInstance(component["release_path"], str)
+      self.assertEqual(
+        component["source_path"],
+        f"assets/source/visual/facilities/{component['id']}.svg",
+      )
+      self.assertEqual(
+        component["release_path"],
+        f"assets/release/visual/svg/{component['id']}.svg",
+      )
       source_path = ROOT / component["source_path"]
       release_path = ROOT / component["release_path"]
       self.assertTrue(source_path.is_file(), component["id"])
