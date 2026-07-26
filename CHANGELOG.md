@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.7] - 2026-07-25
+
+- Closed the current Phase 11.1 event-cue coverage item by proving exact
+  parity between the eight event-channel cue contracts, host projection IDs,
+  and the legacy visible-only fallback.
+- Preserved explicit empty-list, unknown-cue, cues-only, and written-equivalent
+  boundaries; broader event taxonomy and audio-quality evaluation remain open.
+
 ## [0.13.6] - 2026-07-25
 
 - Completed the Phase 11.1 file-backed facility asset coverage audit by

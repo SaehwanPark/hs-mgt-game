@@ -5681,6 +5681,34 @@ Deferred / Non-Goals:
 - No new facility art, runtime renderer, host DTO, simulation, audio, history,
   hash, replay, debrief, or campaign placement behavior.
 
+### Visual/audio Phase 11.1 event-cue coverage (v0.13.7)
+
+Status: Complete for the current eight event-channel cue projection IDs;
+broader campaign event taxonomy, audio quality, and human evaluation remain
+open.
+
+Done:
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  event-channel cue IDs and host/browser projection sources.
+- `tests/test_phase11_campaign_coverage.py` requires exact parity between the
+  audio contract, `visible_event_cue_ids`, and `visibleEventCues`, with
+  visible-source, text-equivalent, and cues-only metadata for every cue.
+- Explicit empty host lists and unknown cue IDs remain presentation-only
+  fallbacks; no runtime, simulation, history/hash, replay, or asset behavior
+  changed.
+
+Not Yet Done:
+
+- Event taxonomy beyond the current supported projection, audio usefulness or
+  fatigue, music continuity, screenshot/device/browser evidence, and human
+  accessibility or quality evaluation.
+
+Deferred / Non-Goals:
+
+- No new cue, recorded audio, host event, simulation rule, or client-owned cue
+  authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

@@ -10,12 +10,13 @@ ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json"
 VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
+RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 
 
 NODE_PROBE = r'''
 globalThis.fetch = () => { throw new Error("network blocked"); };
 globalThis.WebSocket = class { constructor() { throw new Error("network blocked"); } };
-const [facilities, overlays, actors, markers, cues, music, availability] = await Promise.all([
+const [facilities, overlays, actors, markers, cues, music, availability, audio] = await Promise.all([
   import("./gui/facility-components.mjs"),
   import("./gui/operational-overlays.mjs"),
   import("./gui/actor-families.mjs"),
@@ -23,6 +24,7 @@ const [facilities, overlays, actors, markers, cues, music, availability] = await
   import("./gui/audio-cue-contract.mjs"),
   import("./gui/music-stem-contract.mjs"),
   import("./gui/asset-availability.mjs"),
+  import("./gui/audio.mjs"),
 ]);
 const unknownAsset = availability.assetPresentationFor({
   id: "unknown-asset",
@@ -31,6 +33,16 @@ const unknownAsset = availability.assetPresentationFor({
 }, "unknown");
 const unknownFacility = facilities.facilityPresentationFor("general-hospital-base", "unknown");
 const unknownFacilityComponent = facilities.facilityComponentFor("unknown");
+const legacyEventCueFixtures = [
+  { steps: ["Project complete was reported"] },
+  { observation: { workforce_trust: "Staffing constraint reported" } },
+  { before: { observation: { operations: { margin: 0 } } }, after: { observation: { operations: { margin: -1 } } } },
+  { before: { observation: { operations: { margin: -1 } } }, after: { observation: { operations: { margin: 0 } } } },
+  { steps: ["Payer decision was reported"] },
+  { steps: ["Regulatory policy decision was reported"] },
+  { steps: ["Public rival expansion was observed"] },
+  { steps: ["Affiliation milestone was committed"] },
+];
 console.log(JSON.stringify({
   facilities: Object.keys(facilities.FACILITY_COMPONENTS),
   facility_assets: Object.entries(facilities.FACILITY_COMPONENTS).map(([key, entry]) => ({
@@ -43,6 +55,13 @@ console.log(JSON.stringify({
   actor_families: actors.ACTOR_FAMILIES.map((entry) => entry.id),
   event_markers: markers.EVENT_MARKER_SET.map((entry) => entry.id),
   event_cues: cues.AUDIO_CUE_CONTRACT.entries.map((entry) => entry.id),
+  event_channel_cues: cues.AUDIO_CUE_CONTRACT.entries
+    .filter((entry) => entry.channel === "event")
+    .map((entry) => entry.id),
+  event_cue_contract: cues.AUDIO_CUE_CONTRACT.entries
+    .filter((entry) => entry.channel === "event")
+    .map((entry) => [entry.id, entry.visible_trigger_source, entry.text_equivalent, entry.cues_only]),
+  legacy_event_cues: [...new Set(legacyEventCueFixtures.map((fixture) => audio.visibleEventCues(fixture)).flat())],
   music_states: music.MUSIC_STEM_CONTRACT.entries.map((entry) => entry.id),
   semantics: {
     facilities: Object.values(facilities.FACILITY_COMPONENTS).map((entry) => [entry.id, entry.source, entry.equivalent]),
@@ -130,6 +149,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
   def setUpClass(cls):
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
+    cls.resolution = RESOLUTION.read_text(encoding="utf-8")
     roadmap = ROADMAP.read_text(encoding="utf-8")
     cls.phase11_1 = roadmap.split("## Milestone 11.1:", 1)[1].split("## Milestone 11.2:", 1)[0]
     result = subprocess.run(
@@ -175,7 +195,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -243,6 +263,26 @@ console.log(JSON.stringify(resolved));
     fallback = next(entry for entry in self.live["facility_assets"] if entry["id"] == coverage["fallback_id"])
     self.assertIsNone(fallback["source_path"])
     self.assertIsNone(fallback["release_path"])
+
+  def test_event_cue_catalog_matches_visible_projection_and_fallback(self):
+    coverage = self.ledger["event_cue_coverage"]
+    expected = coverage["ids"]
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(coverage["host_projection_source"], "src/mcp/resolution.rs: visible_event_cue_ids")
+    self.assertEqual(coverage["browser_fallback_source"], "gui/audio.mjs: visibleEventCues")
+    self.assertEqual(self.live["event_channel_cues"], expected)
+    event_contract_ids = [entry[0] for entry in self.live["event_cue_contract"]]
+    self.assertEqual(event_contract_ids, expected)
+    self.assertEqual(self.live["legacy_event_cues"], expected)
+    self.assertEqual(len(expected), len(set(expected)))
+    for cue_id, source, equivalent, cues_only in self.live["event_cue_contract"]:
+      self.assertIn(cue_id, self.live["event_cues"])
+      self.assertTrue(source)
+      self.assertTrue(equivalent)
+      self.assertTrue(cues_only)
+      self.assertIn(f'"{cue_id}"', self.resolution)
+    self.assertIn("audio_cue_ids", self.resolution)
+    self.assertIn("visible_event_cue_ids", self.resolution)
 
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
@@ -339,7 +379,7 @@ console.log(JSON.stringify(resolved));
       "Facility asset coverage complete.": "x",
       "Overlay coverage complete.": " ",
       "Actor-family coverage complete.": "x",
-      "Event cue coverage complete.": " ",
+      "Event cue coverage complete.": "x",
       "Music-state coverage complete.": " ",
       "History view updated.": " ",
       "Debrief view updated.": " ",

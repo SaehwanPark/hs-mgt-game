@@ -1026,3 +1026,52 @@ Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
 `fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
 contract and presentation-domain QA because this slice governs actor-visible
 asset/fallback coverage without changing simulation authority.
+
+---
+
+# Request Summary — Visual/audio Phase 11.1 event-cue coverage v0.13.7
+
+## Scope
+
+Close only the current Phase 11.1 event-cue coverage item by proving exact
+parity among the eight event-channel entries in `AUDIO_CUE_CONTRACT`, the host
+`visible_event_cue_ids` projection, and the legacy visible-only
+`visibleEventCues` fallback.
+
+## Non-goals
+
+- Do not add cues, recorded audio, host events, simulation rules, or client
+  authority.
+- Do not claim broader event taxonomy, audio usefulness/fatigue, music
+  continuity, screenshots, device/browser compatibility, accessibility, or
+  human quality evidence.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.1.
+- `gui/audio-cue-contract.mjs`, `gui/audio.mjs`, and
+  `src/mcp/resolution.rs`.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  actionable technical coverage slice.
+
+## Expected files
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+- `tests/test_phase11_campaign_coverage.py`
+- `_workspace` plan/contract/QA/handoff records, roadmap, SDD, lessons,
+  changelog, and version projections for v0.13.7.
+
+## Validation target
+
+The event-channel catalog, host projection, and browser fallback must contain
+the same eight IDs exactly once. Every cue must retain a visible trigger source,
+text equivalent, and cues-only metadata; explicit empty and unknown paths stay
+safe. Run focused/full Python and Rust checks plus release, asset, security,
+documentation, and visual/audio audits.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
+`fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
+contract and presentation-domain QA because this slice governs actor-visible
+audio equivalents without changing simulation authority.

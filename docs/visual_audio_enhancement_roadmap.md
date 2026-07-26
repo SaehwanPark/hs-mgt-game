@@ -2227,11 +2227,12 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Facility asset catalog and release-registry coverage completed in
-v0.13.6 after the bounded live facility, operational-overlay, terminal-
-debrief, event-cue, music-state, history, replay, and checkpoint slices; full
-campaign placement/use, durable save/load/replay continuity, performance, and
-screenshot gates remain open.
+**Status:** Facility asset catalog/release-registry coverage and the current
+visible event-cue catalog/projection parity completed in v0.13.7 after the
+bounded live facility, operational-overlay, terminal-debrief, event-cue,
+music-state, history, replay, and checkpoint slices; full campaign placement/
+use, event taxonomy beyond the current projection, durable save/load/replay
+continuity, performance, and screenshot gates remain open.
 
 ### Scope
 
@@ -2249,7 +2250,7 @@ screenshot gates remain open.
 - [x] Facility asset coverage complete.
 - [ ] Overlay coverage complete.
 - [x] Actor-family coverage complete.
-- [ ] Event cue coverage complete.
+- [x] Event cue coverage complete.
 - [ ] Music-state coverage complete.
 - [ ] History view updated.
 - [ ] Debrief view updated.
@@ -2274,6 +2275,19 @@ screenshot gates remain open.
   overlays, event/music coverage, history/debrief continuity, screenshot
   review, low-power/device compatibility, and human quality remain open where
   their checklist items are still unchecked.
+
+### v0.13.7 event-cue coverage evidence
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the eight
+  current event-channel cue IDs and their host projection and browser fallback
+  sources.
+- `tests/test_phase11_campaign_coverage.py` requires exact parity between the
+  event-channel contract, the host `visible_event_cue_ids` vocabulary, and the
+  legacy visible-only `visibleEventCues` fallback. It also requires visible
+  trigger-source, text-equivalent, and cues-only metadata for every cue.
+- This closes the current supported event-cue coverage item only. New event
+  taxonomy, cue/audio quality, music continuity, screenshots, device/browser
+  compatibility, and human quality remain separate gates.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 
