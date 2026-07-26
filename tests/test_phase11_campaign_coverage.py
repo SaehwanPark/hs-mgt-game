@@ -11,6 +11,7 @@ LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json
 VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
+HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 
 
 NODE_PROBE = r'''
@@ -167,6 +168,10 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
     cls.resolution = RESOLUTION.read_text(encoding="utf-8")
+    cls.app = (ROOT / "gui" / "app.mjs").read_text(encoding="utf-8")
+    cls.adapter = (ROOT / "gui" / "host-adapter.mjs").read_text(encoding="utf-8")
+    cls.server = (ROOT / "src" / "gui_server.rs").read_text(encoding="utf-8")
+    cls.session = (ROOT / "src" / "mcp" / "session.rs").read_text(encoding="utf-8")
     roadmap = ROADMAP.read_text(encoding="utf-8")
     cls.phase11_1 = roadmap.split("## Milestone 11.1:", 1)[1].split("## Milestone 11.2:", 1)[0]
     result = subprocess.run(
@@ -212,7 +217,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "music_state_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -326,6 +331,30 @@ console.log(JSON.stringify(resolved));
         self.assertIn(f'"{state_id}"', self.resolution)
     self.assertIn("visible_music_state_id", self.resolution)
 
+  def test_history_view_coverage_matches_the_live_read_only_handoff(self):
+    coverage = self.ledger["history_view_coverage"]
+    history_test = HISTORY_TEST.read_text(encoding="utf-8")
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(coverage["host_schema"], "competitive-history-v1")
+    self.assertEqual(coverage["row_contract"], ["turn", "state_hash"])
+    for marker in (
+      "competitive-history-v1",
+      "GetHistoryRequest",
+      "get_history",
+      "createHistoryClient",
+      "validateHistoryEnvelope",
+      "renderHistoryEnvelope",
+      "history_adapter_missing",
+      "history_adapter_error",
+      "state hash: hash-1",
+    ):
+      self.assertIn(marker, history_test + self.app + self.adapter + self.server + self.session)
+    self.assertIn("get_history(GetHistoryRequest {", self.session)
+    self.assertIn("session_id: request.session_id", self.session)
+    self.assertNotIn("submit_turn", history_test.split("def test_live_history_read", 1)[0])
+    for forbidden in ("transition_competitive", "resolved_inputs", "effect_queue", "CompetitiveWorldState", "WebSocket"):
+      self.assertNotIn(forbidden, self.app + self.adapter + self.server)
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -423,7 +452,7 @@ console.log(JSON.stringify(resolved));
       "Actor-family coverage complete.": "x",
       "Event cue coverage complete.": "x",
       "Music-state coverage complete.": "x",
-      "History view updated.": " ",
+      "History view updated.": "x",
       "Debrief view updated.": " ",
       "Save/load visual continuity tested.": " ",
       "Replay visual continuity tested.": " ",

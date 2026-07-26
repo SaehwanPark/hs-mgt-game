@@ -1804,3 +1804,55 @@ hardware/browser behavior, lived accessibility, or human usefulness.
   authority.
 - Open: broader campaign taxonomy/continuity, screenshots/device/browser
   evidence, audio quality, and human evaluation.
+
+---
+
+# Presentation Contract — Phase 11.1 history-view coverage v0.13.9
+
+## Goal and authorization
+
+Document the current live history-view handoff from the host-owned immutable
+history to the existing text-first browser surface. This bounded contract closes
+only the current history-view checklist item.
+
+## Player questions and consequences
+
+The view should answer: “Which committed visible transitions occurred, in what
+turn order, and what state hash identifies each row?” It must not imply hidden
+causes, private rival detail, severity, future outcomes, or replay authority.
+
+## Actor-visible source ledger
+
+| Surface | Source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Host history | `src/mcp/session.rs: get_history` with `competitive-history-v1` | Return the host error; do not synthesize rows | No true state, private detail, or local history |
+| Loopback route | `src/gui_server.rs: GET /api/v1/sessions/{session_id}/history` | Preserve structured failure for the adapter | No network or alternate data source |
+| Browser adapter | `gui/host-adapter.mjs: getHistory` | Expose recoverable adapter error | No command submission or simulation read |
+| History renderer | `gui/app.mjs: renderHistoryEnvelope` / `#history-list` | Keep the last valid view and show recovery status | No browser-derived causality or outcome |
+
+## Visual and semantic behavior
+
+Rows remain text-first and pair each committed `turn` with its corresponding
+`state_hash`. Valid data requires an aligned transition count and transition
+rows. Empty history is explicit; malformed, unsupported, missing, and failed
+reads fail closed without replacing valid content with invented data.
+
+## Accessibility and fallbacks
+
+The text list and visible recovery status are the meaning-bearing channels.
+Missing or throwing adapters preserve the last valid view and expose a
+recoverable error. Contrast, focus, screen-reader behavior, device behavior,
+and human comprehension remain unverified.
+
+## Authority, history, and replay boundaries
+
+The route calls only the existing non-mutating `GameSessionStore::get_history`.
+The browser validates and renders host-shaped data; it cannot submit commands,
+advance a session, reconstruct history, alter hashes, or regenerate replay.
+
+## Evidence limits and deferred work
+
+Focused tests establish current source parity, row alignment, validation, and
+failure preservation. They do not establish full campaign history/debrief,
+durable save/load/replay continuity, screenshots, browser/device compatibility,
+accessibility, or human educational usefulness.

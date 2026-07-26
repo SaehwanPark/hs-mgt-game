@@ -5736,6 +5736,34 @@ Deferred / Non-Goals:
 - No new stem, audio asset, host event, simulation rule, or browser-owned music
   authority was added.
 
+### Visual/audio Phase 11.1 history-view coverage (v0.13.9)
+
+Status: Complete for the current live `competitive-history-v1` handoff;
+broader campaign history, debrief, durable save/load/replay continuity,
+screenshots, device/browser behavior, and human evaluation remain open.
+
+Done:
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the host
+  history schema and source, loopback route, browser adapter/renderer, aligned
+  `turn`/`state_hash` row contract, and failure-preserving behavior.
+- `tests/test_phase11_campaign_coverage.py` joins those records to the live
+  history tests for valid rendering, incomplete/count and schema rejection,
+  missing/throwing adapter recovery, and the read-only authority boundary.
+- No history store, simulation, host authority, hash, replay, or asset behavior
+  changed; only the current history-view checklist item is closed.
+
+Not Yet Done:
+
+- Full campaign history/debrief coverage, durable save/load/replay visual
+  continuity, screenshot/device/browser gates, and human comprehension or
+  accessibility evaluation.
+
+Deferred / Non-Goals:
+
+- No new history fields, persistence mechanism, replay regeneration, command
+  path, simulation transition, or client-owned authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade
