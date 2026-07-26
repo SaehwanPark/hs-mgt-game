@@ -1491,6 +1491,74 @@ accessibility, or human comprehension.
   loading decision with actual browser/device measurements.
 
 ---
+
+# Presentation Contract — Phase 11.2 browser compatibility matrix v0.13.5
+
+## Goal and Authorization
+
+This slice authorizes a versioned technical compatibility matrix for the
+existing dependency-free GUI and its loopback host. It does not authorize a
+new browser framework, runtime asset loader, or simulation change.
+
+## Player Questions and Consequences
+
+The player should be able to launch the documented GUI, read the current
+actor-visible board and executive surfaces, use keyboard and text controls,
+and receive complete written feedback when optional SVG/audio/browser
+capabilities are unavailable. Compatibility evidence answers whether the
+presentation remains decision-complete across the documented target.
+
+## Actor-Visible Source Ledger
+
+| Semantic surface | Source | Timing | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- | --- |
+| Board, facilities, overlays, reports | Existing host-projected DTOs and committed history consumed by `gui/` | Current host read or committed resolution | Existing generic marker, source label, written equivalent, or unavailable state | No browser-derived severity, intent, outcome, or geography |
+| Audio cues and music | Existing host-shaped visible cue/state IDs with legacy visible-only fallback | Committed resolution or local presentation outcome | Mute, reduced-audio, unsupported-audio, or written equivalent | No private rival/true-state classifier |
+| Compatibility status | Versioned local policy/checker inputs and observed browser capability result | Before/while loading the page | Unsupported/unknown environment is explicit and does not become a support claim | No support inference from user-agent string alone |
+
+## Visual, Motion, and Audio Semantics
+
+Compatibility metadata is non-informational presentation evidence. It must not
+alter visual or audio meaning. Text, symbols, labels, and written resolution
+content remain the required equivalents for color, motion, and audio.
+
+## Accessibility and Fallbacks
+
+- Keyboard navigation and semantic HTML remain required on the supported target.
+- Reduced motion, mute, cues-only, text scaling, unavailable audio, missing
+  assets, and failed adapter reads retain existing written content.
+- Unsupported capability combinations report a recoverable status and use the
+  existing generic/disabled fallback; they do not block the simulation host.
+
+## Authority, History, and Replay Boundaries
+
+The compatibility checker is read-only. Browser capability results, viewport
+measurements, and fallback decisions never enter commands, transition
+evaluation, stochastic inputs, state hashes, immutable history, replay
+artifacts, or debrief facts. The host remains authoritative.
+
+## Asset Provenance and Release Requirements
+
+This slice adds no assets. Existing registry, release hashes, credits, and
+offline route policy remain the source of truth. The checker rejects a
+compatibility declaration that references an undeclared local policy or route.
+
+## Verification and Evidence Limits
+
+Automated policy checks establish documented capability requirements, route
+closure, syntax, and fallback contracts. A local browser smoke check establishes
+only the observed environment and visible page state. It does not establish
+all browser versions, device performance, contrast, screen-reader behavior, or
+lived accessibility.
+
+## Non-Goals and Open Questions
+
+- No universal browser/device certification.
+- No low-power benchmark in this slice.
+- Open: measured low-power device behavior, additional browser engines, and
+  human accessibility evaluation.
+
+---
 # Presentation Contract — Phase 11.2 offline package completeness v0.13.3
 
 ## Goal and Authorization

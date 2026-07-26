@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Append to Existing Handoff Artifacts
+
+- Context: The repository keeps durable `_workspace` request, presentation,
+  and QA records across roadmap slices.
+- Risk: Replacing a tracked handoff while adding a new slice silently erases
+  prior evidence and makes the final review incomplete.
+- Resolution: Restore the tracked artifact from `HEAD` when an accidental
+  replacement occurs, then append a dated/versioned slice section with an
+  additive patch.
+- Prevention: Inspect `git status` and the tail of every handoff before
+  editing; treat existing `_workspace` files as append-only operational state.
+
 ## Verify the Embedded GUI Route Graph, Not Only the Source Graph
 
 - Context: The live GUI source graph was complete and loading-policy checked,

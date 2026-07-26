@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.5] - 2026-07-25
+
+- Added a versioned browser-compatibility matrix and deterministic audit for
+  the loopback GUI's supported Chromium surface, required capabilities,
+  explicit non-certified engines, fallbacks, route closure, syntax, and
+  client-authority boundaries.
+- Closed only the Phase 11.2 browser-compatibility evidence item for the
+  documented target; Firefox/WebKit runtime certification, low-power devices,
+  and human accessibility remain separate evidence gates.
+
 ## [0.13.4] - 2026-07-23
 
 - Cleaned up and tightened `README.md` milestone introduction and summary.
