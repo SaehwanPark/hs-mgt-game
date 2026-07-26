@@ -1,0 +1,90 @@
+{
+  "schema_version": "browser-compatibility-v1",
+  "status": "completed-technical-matrix",
+  "surface": "loopback dependency-free GUI",
+  "entrypoint": "gui/index.html",
+  "supported_targets": [
+    {
+      "id": "chromium-evergreen-desktop",
+      "engine": "Chromium",
+      "minimum_major_version": 120,
+      "support": "supported",
+      "evidence": ["static-contract", "local-browser-smoke"],
+      "required_capabilities": ["es-modules", "fetch", "native-svg", "css-grid"]
+    }
+  ],
+  "not_certified_targets": [
+    {
+      "id": "firefox-desktop",
+      "engine": "Firefox",
+      "support": "not-certified",
+      "reason": "No Firefox runtime is available in the current verification environment."
+    },
+    {
+      "id": "webkit-desktop",
+      "engine": "WebKit",
+      "support": "not-certified",
+      "reason": "No WebKit runtime is available in the current verification environment."
+    },
+    {
+      "id": "legacy-browser",
+      "engine": "Legacy non-module browser",
+      "support": "unsupported",
+      "reason": "The live entrypoint requires native ECMAScript modules."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "es-modules",
+      "required": true,
+      "source": "gui/index.html module entrypoint and declared local imports",
+      "fallback": "Show a browser-support message; do not start a partial client."
+    },
+    {
+      "id": "fetch",
+      "required": true,
+      "source": "gui/host-adapter.mjs same-origin host requests",
+      "fallback": "Preserve the static shell and show a recoverable adapter error."
+    },
+    {
+      "id": "native-svg",
+      "required": true,
+      "source": "gui/scene.mjs regional-board SVG rendering",
+      "fallback": "Retain facility labels, markers, and written equivalents without SVG decoration."
+    },
+    {
+      "id": "css-grid",
+      "required": true,
+      "source": "gui/index.html responsive executive desktop layout",
+      "fallback": "The page remains readable as a single-column document flow."
+    },
+    {
+      "id": "web-audio",
+      "required": false,
+      "source": "gui/audio.mjs optional generated cues, ambience, and music",
+      "fallback": "Mute audio and keep all cue meaning in visible/text equivalents."
+    },
+    {
+      "id": "local-storage",
+      "required": false,
+      "source": "gui/app.mjs optional local presentation preferences",
+      "fallback": "Use session defaults; never block host state or command submission."
+    }
+  ],
+  "boundary_checks": {
+    "loading_policy": "assets/loading-policy.json",
+    "offline_policy": "assets/offline-policy.json",
+    "forbidden_client_authority_markers": [
+      "CompetitiveWorldState",
+      "HealthSystemState",
+      "resolved_inputs",
+      "effect_queue",
+      "Math.random"
+    ]
+  },
+  "evidence_limits": [
+    "The matrix certifies only the named target and documented capabilities.",
+    "Not-certified engines require a separate runtime check before support is claimed.",
+    "Automated checks do not establish lived accessibility, device performance, or human usability."
+  ]
+}

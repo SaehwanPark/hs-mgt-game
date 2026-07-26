@@ -7,8 +7,10 @@ JavaScript adapter injection.
 ## Requirements
 
 - A Rust toolchain with Cargo.
-- A current browser with JavaScript modules enabled. Audio is optional and uses
-  the browser Web Audio API.
+- A current Chromium-based desktop browser with JavaScript modules enabled.
+  The repository's compatibility matrix certifies the documented evergreen
+  Chromium surface; Firefox and WebKit are not certified yet. Audio is
+  optional and uses the browser Web Audio API.
 - A local checkout of this repository.
 
 The GUI currently supports `competitive-regional-v1`. Use `cargo run` for the

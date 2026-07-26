@@ -2455,9 +2455,9 @@ open.
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
 normalization, current catalog-level missing-asset fallback, raster
 release/preview boundary, current runtime-generated audio packaging decision,
-and the live no-lazy/no-preload loading policy, and the loopback offline
-package are machine-checked in v0.12.97–v0.13.3; runtime measurements,
-low-power-device, and compatibility gates remain open.
+the live no-lazy/no-preload loading policy, the loopback offline package, and
+the documented Chromium compatibility matrix are machine-checked in
+v0.12.97–v0.13.5; runtime measurements and low-power-device gates remain open.
 
 ### Targets to define
 
@@ -2497,7 +2497,7 @@ low-power-device, and compatibility gates remain open.
 - [x] Missing-asset fallback tested. Evidence: `tests/test_asset_fallback.py`
   enumerates the live catalogs and visual registry.
 - [ ] Low-power device test completed.
-- [ ] Browser compatibility matrix completed.
+- [x] Browser compatibility matrix completed. Evidence: `assets/browser-compatibility-policy.json`, `scripts/check_browser_compatibility.py`, and `tests/test_browser_compatibility.py`; the documented Chromium target passes the static and local smoke contract while Firefox/WebKit remain explicitly non-certified.
 
 ### Exit criteria
 
@@ -2624,6 +2624,22 @@ low-power-device, and compatibility gates remain open.
   checkout. It does not establish service-worker behavior, cache persistence,
   browser compatibility, low-power suitability, screenshots, asset quality, or
   human comprehension.
+
+### v0.13.5 browser compatibility matrix evidence
+
+- `assets/browser-compatibility-policy.json` records one supported evergreen
+  Chromium desktop target, explicit Firefox/WebKit non-certification, required
+  capabilities, optional capability fallbacks, and evidence limits.
+- `scripts/check_browser_compatibility.py` reuses the loading and offline
+  policy audits, cross-checks the live entrypoint, checks all declared module
+  syntax, and rejects client-authority markers in the live presentation graph.
+- `tests/test_browser_compatibility.py` covers the green report/CLI, required
+  capability and target-reason validation, policy-path failures, and loading
+  entrypoint drift. A local loopback browser smoke check loaded the GUI and
+  confirmed visible SVG, audio controls, and written fallback content.
+- This closes only the documented Phase 11.2 browser-compatibility item. It
+  does not certify other engines, low-power devices, device performance,
+  contrast, screen readers, or human accessibility/usability.
 
 ---
 

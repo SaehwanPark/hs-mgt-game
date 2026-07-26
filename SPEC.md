@@ -5631,6 +5631,31 @@ The Phase 1.3 audio direction standards and policy fixture proof are complete
 through v0.12.38. Broader production and human or educational evaluation remain
 separately gated Future work.
 
+### Browser compatibility evidence (v0.13.5)
+
+Status: Complete for the documented technical target; additional browser
+engines, low-power devices, and human evaluation remain open.
+
+Done:
+
+- Added `browser-compatibility-v1` with one supported Chromium evergreen
+  desktop target, explicit Firefox/WebKit non-certification, required browser
+  capabilities, and visible fallbacks.
+- Added a deterministic audit that reuses the loading/offline policies and
+  checks JavaScript syntax plus the unchanged browser-authority boundary.
+- Added CI and focused Python coverage; no host, simulation, history/hash,
+  replay, debrief, or asset behavior changed.
+
+Not Yet Done:
+
+- Runtime certification for Firefox/WebKit, low-power device measurements,
+  broad browser/device compatibility, and human accessibility evaluation.
+
+Deferred / Non-Goals:
+
+- No new browser framework, service worker, external network asset, or
+  browser-owned simulation state.
+
 ## Future
 
 ### Visual and audio experience upgrade

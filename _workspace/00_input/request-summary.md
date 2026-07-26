@@ -878,6 +878,57 @@ and presentation domain QA apply because this slice governs actor-visible
 asset loading without changing simulation authority.
 
 ---
+
+# Request Summary — Visual/audio Phase 11.2 browser compatibility matrix v0.13.5
+
+## Scope
+
+Close the Phase 11.2 browser-compatibility evidence item for the current
+dependency-free loopback GUI. Document one supported evergreen Chromium
+desktop target, explicitly list non-certified engines, and audit the existing
+loading/offline policies, JavaScript syntax, and presentation-only boundary.
+
+## Non-goals
+
+- Do not claim Firefox/WebKit certification, universal browser support, or
+  low-power-device suitability.
+- Do not add a browser framework, service worker, external asset, or network
+  dependency.
+- Do not change simulation, host authority, commands, stochastic inputs,
+  history, hashes, replay, debrief, or audio semantics.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2 compatibility gate.
+- `assets/loading-policy.json` and `assets/offline-policy.json`.
+- `gui/index.html`, the declared live module graph, and `src/gui_server.rs`.
+- Existing `_workspace/02_presentation_contract.md` handoff records.
+- User-authorized continuation of the roadmap loop.
+
+## Expected files
+
+- `assets/browser-compatibility-policy.json`
+- `scripts/check_browser_compatibility.py`
+- `tests/test_browser_compatibility.py`
+- CI, release metadata, changelog, roadmap, SDD, and final QA evidence.
+
+## Validation target
+
+The matrix must be schema-valid and deterministic. Its supported target must
+list every required capability exactly once, optional capabilities must have
+visible fallbacks, the compatibility entrypoint must match the loading policy,
+and all current live modules must pass syntax and authority-boundary checks.
+The available local browser must load the host-served GUI and expose the
+documented written/text fallbacks.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
+`fp-developer`, and exactly one `code-reviewer` handoff. Use the presentation
+contract and presentation QA skills because this slice governs actor-visible
+fallbacks and replay-safe delivery boundaries.
+
+---
 # Request Summary — Visual/audio Phase 11.2 offline package completeness v0.13.3
 
 ## Scope

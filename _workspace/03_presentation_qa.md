@@ -2189,3 +2189,76 @@ comprehension, or educational effectiveness.
   contract checks pass for the final PR gate.
 
 ---
+
+# Presentation Domain QA — Phase 11.2 browser compatibility matrix v0.13.5
+
+## Status
+
+`pass` for the documented Chromium evergreen desktop target. Firefox and
+WebKit are explicitly not certified; this is a recorded evidence limit rather
+than an accidental support claim.
+
+## Reviewed Inputs and Authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2.
+- Compatibility sections of `_workspace/00_input/request-summary.md` and
+  `_workspace/02_presentation_contract.md`.
+- `assets/browser-compatibility-policy.json`.
+- `scripts/check_browser_compatibility.py` and
+  `tests/test_browser_compatibility.py`.
+- Existing loading/offline policies, GUI source, and `src/gui_server.rs`.
+
+## Information and Causality Findings
+
+Pass. The policy is descriptive only. It does not classify severity, infer
+intent, derive outcomes, or add a browser-side causal model. The compatibility
+entrypoint is cross-checked against the canonical loading policy, and route
+closure is delegated to the existing offline policy audit.
+
+## Accessibility and Fallback Findings
+
+Pass for the bounded technical contract. Required text and semantic surfaces
+remain available in the local smoke check. Optional Web Audio and local
+storage rows have explicit fallbacks; existing mute, reduced-motion, scaling,
+missing-asset, and adapter-error contracts remain the source of meaning.
+
+Automated checks do not prove contrast, screen-reader behavior, low-power
+suitability, or lived accessibility.
+
+## Provenance and Rights Findings
+
+Pass. No visual or audio asset, registry entry, release derivative, or external
+source was added. Existing asset governance remains authoritative.
+
+## Authority and Replay Findings
+
+Pass. The checker reads policies and source files only. Its results cannot
+enter commands, transitions, stochastic inputs, state hashes, immutable
+history, replay, or debrief facts. The local browser smoke path loaded the
+loopback host without adding external module or asset sources.
+
+## Required Fixes
+
+None.
+
+## Residual Risks and Evidence Limits
+
+- Only the documented Chromium evergreen desktop target is supported by this
+  matrix.
+- Firefox and WebKit require separate runtime certification before support is
+  claimed.
+- Browser smoke and static checks do not establish device performance,
+  compatibility across versions, human usability, or lived accessibility.
+
+## Verification Evidence
+
+- `python3 scripts/check_browser_compatibility.py` — pass.
+- `python3 -m unittest tests.test_browser_compatibility
+  tests.test_loading_policy tests.test_offline_availability` — 40 tests pass.
+- `python3 scripts/check_release_metadata.py` — pass at v0.13.5.
+- `python3 scripts/check_documentation_links.py` — pass, 382 Markdown files.
+- Local loopback browser smoke at `http://127.0.0.1:7878/` — page loaded with
+  module entrypoint, SVG board, optional audio controls, and written fallback
+  content visible.
+
+---
