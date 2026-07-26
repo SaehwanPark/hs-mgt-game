@@ -1685,3 +1685,63 @@ visual-quality review.
 - No new facility asset or runtime renderer.
 - Open: full campaign placement/use, screenshot suite, continuity, performance,
   compatibility, and human evaluation gates.
+
+---
+
+# Presentation Contract — Phase 11.1 event-cue coverage v0.13.7
+
+## Goal and authorization
+
+Prove exact parity among the current event-channel audio cue catalog, the
+host-shaped visible event-cue projection, and the legacy browser fallback. This
+is a presentation evidence slice only.
+
+## Player questions and consequences
+
+When a committed visible event is reported, the player may receive an optional
+cue with the same written source/equivalent. A missing, muted, unknown, or
+explicitly empty cue list must leave the visible report intact and must not
+signal a hidden outcome.
+
+## Actor-visible source ledger
+
+| Surface | Source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Event cue contract | `gui/audio-cue-contract.mjs` event-channel entries | Keep source/equivalent text and cues-only metadata | No cue intensity as severity, intent, probability, or outcome |
+| Host projection | `src/mcp/resolution.rs: visible_event_cue_ids` | Empty list is valid; host remains authoritative | No private rival, true-state, stochastic, or effect-queue data |
+| Legacy browser fallback | `gui/audio.mjs: visibleEventCues` | Use visible text only for older envelopes; unknown IDs remain non-authoritative | No browser-derived event classification outside visible text |
+
+## Visual, motion, and audio semantics
+
+No audio recipe, timing, loudness, cue priority, or visual rendering changes.
+The audit verifies the existing cues-only and written-equivalent contracts.
+
+## Accessibility and fallbacks
+
+Mute, cues-only mode, written event text, explicit empty lists, malformed
+legacy inputs, and unknown cue IDs remain recoverable. Audio is supplementary;
+the visible report is the required semantic channel.
+
+## Authority, history, and replay boundaries
+
+The catalog/projection test is read-only. Cue IDs cannot enter commands,
+transitions, stochastic inputs, state hashes, immutable history, replay
+artifacts, or debrief facts. The host remains authoritative.
+
+## Asset provenance and release requirements
+
+No audio asset or registry entry is added. Existing generated-audio provenance,
+credits, normalization, and release checks remain authoritative.
+
+## Verification and evidence limits
+
+Parity tests prove current ID wiring and visible-only fallbacks. They do not
+prove full campaign event taxonomy, loudness, fatigue, musical quality,
+hardware/browser behavior, lived accessibility, or human usefulness.
+
+## Non-goals and open questions
+
+- No new cue, recorded audio, host event, simulation rule, or client-owned
+  authority.
+- Open: broader event taxonomy, music continuity, screenshot/device/browser
+  evidence, audio quality, and human evaluation.

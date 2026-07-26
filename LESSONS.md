@@ -2611,3 +2611,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep catalog-to-registry joins in focused coverage tests, retain
   the general asset validator as the release gate, and distinguish asset
   wiring from campaign placement, screenshot, quality, and human evidence.
+
+## Phase 20: Audio coverage must prove both host and fallback parity
+
+- Context: Phase 11.1 had a host event-cue projection test and an older browser
+  classifier test, but the campaign ledger did not prove that both vocabularies
+  matched the event-channel contract.
+- Risk: A cue could be documented without a host trigger, or a legacy fallback
+  could emit an ID that the host never declares; either drift would make audio
+  optional in theory but misleading in practice.
+- Resolution: Join the event-channel contract to the host projection and
+  visible-only fallback IDs, and require source/equivalent/cues-only metadata
+  for every cue while retaining explicit-empty and unknown boundaries.
+- Prevention: Keep parity evidence separate from claims about audio quality,
+  loudness, fatigue, device behavior, or human usefulness, and leave broader
+  event taxonomy open until it has its own source-backed projection.

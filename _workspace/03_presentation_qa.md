@@ -2324,6 +2324,69 @@ lived accessibility, and human visual-quality review remain open.
 - Focused Phase 11.1 campaign-coverage tests and asset-registry validation —
   required to pass on the final branch.
 - Full Python/Rust, release, security, documentation, and visual/audio
+contract checks — required before PR handoff.
+
+---
+
+# Presentation Domain QA — Phase 11.1 event-cue coverage v0.13.7
+
+## Status
+
+`pass` for the current event-channel catalog/projection parity contract. This
+is technical cue-wiring QA, not audio usefulness, fatigue, or human quality
+approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/98_implementation_plan_visual-audio-phase11-event-cues-v0.13.7.md`.
+- Roadmap gate: Phase 11.1 current event-cue coverage only.
+- Produced evidence: `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_campaign_coverage.py`, and the existing live event-cue
+  projection test.
+
+## Information and causality findings
+
+- Pass: the eight event cues have exact catalog, host projection, and visible
+  fallback parity; cue IDs do not classify hidden severity, intent, or outcome.
+- Pass: explicit empty host lists remain empty and malformed/legacy inputs use
+  the existing visible-only fallback.
+- Pass: no command, transition, stochastic input, history, hash, replay,
+  debrief, or client-authority path changed.
+
+## Accessibility and fallback findings
+
+- Pass: every cue retains a visible trigger source, text equivalent, and
+  cues-only metadata; mute and written output remain authoritative.
+- Pass: unknown cue IDs and unsupported audio remain recoverable without
+  removing the visible report.
+
+## Provenance and rights findings
+
+- Pass: no audio asset, registry entry, or external source was added; existing
+  generated-audio credits and release checks remain authoritative.
+
+## Authority and replay findings
+
+- Pass: the coverage test reads contract/source evidence only. Host/core
+  transition and replay authority remain unchanged.
+
+## Required fixes
+
+None for this bounded current-cue parity contract.
+
+## Residual risks and evidence limits
+
+Broader event taxonomy, audio loudness/fatigue/usefulness, music continuity,
+screenshots, device/browser compatibility, lived accessibility, and human
+quality remain open.
+
+## Verification evidence
+
+- Focused campaign/event-cue tests and asset/release validation — required to
+  pass on the final branch.
+- Full Python/Rust, release, security, documentation, and visual/audio
   contract checks — required before PR handoff.
 
 ---

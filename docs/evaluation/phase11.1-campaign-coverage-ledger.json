@@ -127,6 +127,27 @@
       "Registry and release-manifest/hash validators remain required release gates."
     ]
   },
+  "event_cue_coverage": {
+    "status": "complete",
+    "host_projection_source": "src/mcp/resolution.rs: visible_event_cue_ids",
+    "browser_fallback_source": "gui/audio.mjs: visibleEventCues",
+    "catalog_source": "gui/audio-cue-contract.mjs: AUDIO_CUE_CONTRACT.entries[channel=event]",
+    "ids": [
+      "event.project-complete",
+      "event.staffing-constraint",
+      "event.operating-loss",
+      "event.operating-recovery",
+      "event.payer-decision",
+      "event.regulatory-decision",
+      "event.rival-expansion",
+      "event.affiliation-milestone"
+    ],
+    "evidence": [
+      "Event-channel catalog IDs equal the host projection and visible legacy fallback IDs exactly once.",
+      "Every event cue retains visible trigger-source, text-equivalent, and cues-only metadata.",
+      "Explicit empty host lists and unknown cue IDs remain non-authoritative presentation outcomes."
+    ]
+  },
   "continuity": {
     "status": "bounded-first-month-evidence",
     "surfaces": [
