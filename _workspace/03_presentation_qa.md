@@ -2262,3 +2262,68 @@ None.
   content visible.
 
 ---
+
+# Presentation Domain QA — Phase 11.1 facility asset coverage v0.13.6
+
+## Status
+
+`pass` for the file-backed facility catalog-to-registry contract. This is
+technical provenance and release-wiring QA, not visual-quality or campaign
+placement approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/97_implementation_plan_visual-audio-phase11-facility-coverage-v0.13.6.md`.
+- Roadmap gate: Phase 11.1 facility asset coverage only.
+- Produced evidence: `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+  and the expanded `tests/test_phase11_campaign_coverage.py`.
+
+## Information and causality findings
+
+- Pass: catalog and registry joins are descriptive asset evidence only; no
+  severity, ownership, capacity, outcome, or timing is inferred.
+- Pass: the generic fallback has no release asset and remains explicit when a
+  facility is unknown or unavailable.
+- Pass: no command, transition, stochastic input, history, hash, replay,
+  debrief, or audio semantic path changed.
+
+## Accessibility and fallback findings
+
+- Pass: existing facility labels, layer labels, written equivalents, and
+  generic markers remain the source of meaning.
+- Pass: a missing or malformed asset remains a recoverable fallback; registry
+  presence is not presented as visual or accessibility approval.
+
+## Provenance and rights findings
+
+- Pass: all twelve file-backed facility descriptors map to approved
+  `visual.facility.<id>` entries with matching source/release paths and exact
+  original/release hashes.
+- Pass: existing asset, release-manifest, credits, and license checks remain
+  required; no new asset bytes or third-party sources were added.
+
+## Authority and replay findings
+
+- Pass: the ledger/test reads repository catalog and registry files only. It
+  cannot enter host state, commands, outcomes, history, replay, or debrief.
+
+## Required fixes
+
+None for this bounded asset-wiring contract.
+
+## Residual risks and evidence limits
+
+Full campaign facility placement/use, overlay/event/music coverage, screenshot
+review, save/load/replay continuity, performance, browser/device compatibility,
+lived accessibility, and human visual-quality review remain open.
+
+## Verification evidence
+
+- Focused Phase 11.1 campaign-coverage tests and asset-registry validation —
+  required to pass on the final branch.
+- Full Python/Rust, release, security, documentation, and visual/audio
+  contract checks — required before PR handoff.
+
+---

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.6] - 2026-07-25
+
+- Completed the Phase 11.1 file-backed facility asset coverage audit by
+  joining every live facility catalog entry to its source SVG, release SVG,
+  approved registry entry, and exact hashes.
+- Kept `generic-facility` as an explicit no-asset fallback; campaign placement,
+  screenshot, continuity, device, and human-quality gates remain separate.
+
 ## [0.13.5] - 2026-07-25
 
 - Added a versioned browser-compatibility matrix and deterministic audit for

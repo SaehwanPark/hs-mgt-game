@@ -1,3 +1,4 @@
+import hashlib
 import json
 import re
 import subprocess
@@ -7,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json"
+VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 
 
@@ -31,6 +33,12 @@ const unknownFacility = facilities.facilityPresentationFor("general-hospital-bas
 const unknownFacilityComponent = facilities.facilityComponentFor("unknown");
 console.log(JSON.stringify({
   facilities: Object.keys(facilities.FACILITY_COMPONENTS),
+  facility_assets: Object.entries(facilities.FACILITY_COMPONENTS).map(([key, entry]) => ({
+    key,
+    id: entry.id,
+    source_path: entry.source_path ?? null,
+    release_path: entry.release_path ?? null,
+  })),
   operational_overlays: overlays.OPERATIONAL_OVERLAY_SET.map((entry) => entry.id),
   actor_families: actors.ACTOR_FAMILIES.map((entry) => entry.id),
   event_markers: markers.EVENT_MARKER_SET.map((entry) => entry.id),
@@ -121,6 +129,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
   @classmethod
   def setUpClass(cls):
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
     roadmap = ROADMAP.read_text(encoding="utf-8")
     cls.phase11_1 = roadmap.split("## Milestone 11.1:", 1)[1].split("## Milestone 11.2:", 1)[0]
     result = subprocess.run(
@@ -166,7 +175,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -183,6 +192,57 @@ console.log(JSON.stringify(resolved));
       source_path, export_name = catalog["source"].split(": ", 1)
       self.assertTrue((ROOT / source_path).is_file())
       self.assertEqual(self.source_exports[catalog_name], catalog["ids"], catalog["source"])
+
+  def test_file_backed_facility_assets_cover_the_live_catalog_and_registry(self):
+    coverage = self.ledger["facility_asset_coverage"]
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(coverage["registry_id_prefix"], "visual.facility.")
+    self.assertEqual(coverage["fallback_id"], "generic-facility")
+    for component in self.live["facility_assets"]:
+      self.assertEqual(component["key"], component["id"])
+
+    file_backed = [entry for entry in self.live["facility_assets"] if entry["id"] != coverage["fallback_id"]]
+    self.assertEqual(
+      [entry["id"] for entry in file_backed],
+      coverage["file_backed_ids"],
+    )
+    self.assertEqual(len(file_backed), len(set(coverage["file_backed_ids"])))
+    registry_facility_ids = sorted(
+      entry["id"].removeprefix(coverage["registry_id_prefix"])
+      for entry in self.registry["entries"]
+      if entry["id"].startswith(coverage["registry_id_prefix"])
+    )
+    self.assertEqual(registry_facility_ids, sorted(coverage["file_backed_ids"]))
+
+    for component in file_backed:
+      self.assertIsInstance(component["source_path"], str)
+      self.assertIsInstance(component["release_path"], str)
+      self.assertEqual(
+        component["source_path"],
+        f"assets/source/visual/facilities/{component['id']}.svg",
+      )
+      self.assertEqual(
+        component["release_path"],
+        f"assets/release/visual/svg/{component['id']}.svg",
+      )
+      source_path = ROOT / component["source_path"]
+      release_path = ROOT / component["release_path"]
+      self.assertTrue(source_path.is_file(), component["id"])
+      self.assertTrue(release_path.is_file(), component["id"])
+      registry_id = f"{coverage['registry_id_prefix']}{component['id']}"
+      matches = [entry for entry in self.registry["entries"] if entry["id"] == registry_id]
+      self.assertEqual(len(matches), 1, registry_id)
+      entry = matches[0]
+      self.assertEqual(entry["semantic_role"], "facility")
+      self.assertEqual(entry["source_path"], component["source_path"])
+      self.assertEqual(entry["release_path"], component["release_path"])
+      self.assertEqual(entry["approval_status"], "approved")
+      self.assertEqual(entry["original_hash"], f"sha256:{hashlib.sha256(source_path.read_bytes()).hexdigest()}")
+      self.assertEqual(entry["release_hash"], f"sha256:{hashlib.sha256(release_path.read_bytes()).hexdigest()}")
+
+    fallback = next(entry for entry in self.live["facility_assets"] if entry["id"] == coverage["fallback_id"])
+    self.assertIsNone(fallback["source_path"])
+    self.assertIsNone(fallback["release_path"])
 
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
@@ -276,7 +336,7 @@ console.log(JSON.stringify(resolved));
 
   def test_roadmap_closes_only_catalog_and_fallback_items(self):
     expected = {
-      "Facility asset coverage complete.": " ",
+      "Facility asset coverage complete.": "x",
       "Overlay coverage complete.": " ",
       "Actor-family coverage complete.": "x",
       "Event cue coverage complete.": " ",

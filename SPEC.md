@@ -5656,6 +5656,31 @@ Deferred / Non-Goals:
 - No new browser framework, service worker, external network asset, or
   browser-owned simulation state.
 
+### Visual/audio Phase 11.1 facility asset coverage (v0.13.6)
+
+Status: Complete for the file-backed live facility catalog; twelve facility
+descriptors join to existing source/release SVGs and approved registry entries
+with exact original/release hashes.
+
+Done:
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  catalog-to-registry namespace and keeps `generic-facility` as the explicit
+  no-asset fallback.
+- `tests/test_phase11_campaign_coverage.py` proves path existence, exact
+  source/release path joins, approval status, and byte hashes. Existing asset
+  and release-manifest validators remain required.
+
+Not Yet Done:
+
+- Full campaign facility placement/use, screenshot, save/load/replay,
+  performance, browser/device, accessibility, and human visual-quality gates.
+
+Deferred / Non-Goals:
+
+- No new facility art, runtime renderer, host DTO, simulation, audio, history,
+  hash, replay, debrief, or campaign placement behavior.
+
 ## Future
 
 ### Visual and audio experience upgrade
