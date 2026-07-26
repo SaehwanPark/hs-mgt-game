@@ -341,6 +341,8 @@ console.log(JSON.stringify(resolved));
       "competitive-history-v1",
       "GetHistoryRequest",
       "get_history",
+      "get_competitive_history",
+      "unsupported_gui_campaign_history",
       "createHistoryClient",
       "validateHistoryEnvelope",
       "renderHistoryEnvelope",

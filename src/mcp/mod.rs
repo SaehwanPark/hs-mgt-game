@@ -21,7 +21,7 @@ pub use server::{McpGameServer, run_stdio_server};
 pub use session::{
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetCampaignCoverageRequest,
   GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
-  GetReplayRequest, GetResolutionRequest, HISTORY_SCHEMA_VERSION, LoadSessionRequest,
-  McpErrorMessage, REPLAY_SCHEMA_VERSION, SAVE_SCHEMA_VERSION, SaveSessionRequest, SessionEnvelope,
-  StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
+  GetReplayRequest, GetResolutionRequest, HISTORY_SCHEMA_VERSION, HistoryEnvelope,
+  LoadSessionRequest, McpErrorMessage, REPLAY_SCHEMA_VERSION, SAVE_SCHEMA_VERSION,
+  SaveSessionRequest, SessionEnvelope, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };

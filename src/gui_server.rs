@@ -11,12 +11,13 @@ use serde::Deserialize;
 use crate::mcp::{
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
   GetPresentationRequest, GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest,
-  LoadSessionRequest, McpErrorMessage, SaveSessionRequest, StartSessionRequest, SubmitTurnRequest,
-  ValidateTurnRequest,
+  HistoryEnvelope, LoadSessionRequest, McpErrorMessage, SaveSessionRequest, StartSessionRequest,
+  SubmitTurnRequest, ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
 const HOST_ADAPTER_MARKER: &str = "<!-- HS_MGT_GAME_HOST_ADAPTER -->";
+const GUI_HISTORY_CAMPAIGN: &str = "competitive-regional-v1";
 
 #[derive(Clone, Default)]
 struct GuiState {
@@ -129,7 +130,7 @@ async fn start_session(
   State(state): State<GuiState>,
   Json(request): Json<GuiStartSessionRequest>,
 ) -> Response {
-  if request.campaign != "competitive-regional-v1" {
+  if request.campaign != GUI_HISTORY_CAMPAIGN {
     return (
       StatusCode::BAD_REQUEST,
       Json(McpErrorMessage {
@@ -217,10 +218,24 @@ async fn get_regional_world(
   })
 }
 
+fn get_competitive_history(
+  store: &mut GameSessionStore,
+  session_id: String,
+) -> Result<HistoryEnvelope, McpErrorMessage> {
+  let history = store.get_history(GetHistoryRequest { session_id })?;
+  if history.campaign != GUI_HISTORY_CAMPAIGN {
+    return Err(McpErrorMessage {
+      error: "live GUI history currently supports competitive-regional-v1 only".to_string(),
+      code: Some("unsupported_gui_campaign_history".to_string()),
+      resource_limit: None,
+      hint: Some("Use the campaign-specific host history interface.".to_string()),
+    });
+  }
+  Ok(history)
+}
+
 async fn get_history(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
-  with_store(&state, |store| {
-    store.get_history(GetHistoryRequest { session_id })
-  })
+  with_store(&state, |store| get_competitive_history(store, session_id))
 }
 
 async fn get_replay(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
@@ -412,6 +427,25 @@ mod tests {
         7878
       ))
       .is_err()
+    );
+  }
+
+  #[test]
+  fn gui_history_rejects_noncompetitive_campaigns() {
+    let mut store = GameSessionStore::default();
+    let session = store
+      .start_session(StartSessionRequest {
+        campaign: "stabilization-v1".to_string(),
+        seed: Some(42),
+        difficulty: None,
+        scenario_path: None,
+      })
+      .expect("stabilization session");
+    let error = get_competitive_history(&mut store, session.session_id)
+      .expect_err("GUI history must reject stabilization");
+    assert_eq!(
+      error.code.as_deref(),
+      Some("unsupported_gui_campaign_history")
     );
   }
 

@@ -1826,7 +1826,7 @@ causes, private rival detail, severity, future outcomes, or replay authority.
 | Surface | Source | Missing/unknown behavior | Prohibited inference |
 | --- | --- | --- | --- |
 | Host history | `src/mcp/session.rs: get_history` with `competitive-history-v1` | Return the host error; do not synthesize rows | No true state, private detail, or local history |
-| Loopback route | `src/gui_server.rs: GET /api/v1/sessions/{session_id}/history` | Preserve structured failure for the adapter | No network or alternate data source |
+| Loopback route | `src/gui_server.rs: GET /api/v1/sessions/{session_id}/history` via `get_competitive_history` | Preserve structured failure for the adapter; reject noncompetitive sessions | No network or alternate data source |
 | Browser adapter | `gui/host-adapter.mjs: getHistory` | Expose recoverable adapter error | No command submission or simulation read |
 | History renderer | `gui/app.mjs: renderHistoryEnvelope` / `#history-list` | Keep the last valid view and show recovery status | No browser-derived causality or outcome |
 

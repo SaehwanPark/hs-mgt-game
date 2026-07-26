@@ -2476,8 +2476,9 @@ educational, device/browser, or human-quality approval.
 
 - Pass: the ledger joins the host schema and loopback route to the existing
   browser adapter and renderer.
-- Pass: valid rows retain turn/state-hash alignment; unsupported schemas and
-  incomplete counts are rejected before rendering.
+- Pass: valid rows retain turn/state-hash alignment; unsupported schemas,
+  campaigns, and incomplete/invalid turns or counts are rejected before
+  rendering.
 - Pass: the path is read-only and does not submit commands, advance the
   simulation, expose hidden state, or reconstruct replay data.
 
@@ -2495,6 +2496,8 @@ educational, device/browser, or human-quality approval.
 - Pass: no asset, audio, history-store, hash, replay, persistence, or
   simulation behavior changed.
 - Pass: the host remains authoritative for schema, count, rows, and hashes.
+- Pass: the GUI route and browser validator reject noncompetitive sessions for
+  this bounded competitive history schema.
 - Evidence limit: full campaign history/debrief, durable save/load/replay
   continuity, screenshots, browser/device gates, and human evaluation remain
   open.

@@ -181,7 +181,7 @@
     "status": "complete",
     "host_schema": "competitive-history-v1",
     "host_source": "src/mcp/session.rs: get_history",
-    "route_source": "src/gui_server.rs: GET /api/v1/sessions/{session_id}/history",
+    "route_source": "src/gui_server.rs: GET /api/v1/sessions/{session_id}/history via get_competitive_history",
     "browser_sources": [
       "gui/host-adapter.mjs: getHistory",
       "gui/app.mjs: createHistoryClient",
@@ -193,6 +193,7 @@
     "evidence": [
       "Valid history requires aligned transition_count and transition rows with state hashes.",
       "Unsupported schemas, incomplete counts, missing adapters, and thrown reads fail closed without simulation access.",
+      "The GUI route and browser validator reject noncompetitive sessions for this bounded history schema.",
       "The history read path remains read-only and cannot submit commands or expose hidden state."
     ]
   },

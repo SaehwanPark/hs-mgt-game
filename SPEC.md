@@ -5748,7 +5748,7 @@ Done:
   history schema and source, loopback route, browser adapter/renderer, aligned
   `turn`/`state_hash` row contract, and failure-preserving behavior.
 - `tests/test_phase11_campaign_coverage.py` joins those records to the live
-  history tests for valid rendering, incomplete/count and schema rejection,
+  history tests for valid rendering, turn/count/schema and campaign rejection,
   missing/throwing adapter recovery, and the read-only authority boundary.
 - No history store, simulation, host authority, hash, replay, or asset behavior
   changed; only the current history-view checklist item is closed.

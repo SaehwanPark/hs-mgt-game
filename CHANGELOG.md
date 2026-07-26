@@ -6,9 +6,10 @@
   `competitive-history-v1` host envelope and loopback route to the browser's
   text-first history adapter and renderer.
 - Added focused coverage for aligned turn/state-hash rows, unsupported or
-  incomplete history rejection, missing/throwing adapter recovery, and the
-  unchanged read-only authority boundary; debrief, durable save/load/replay,
-  screenshots, device/browser, and human-quality gates remain open.
+  incomplete history rejection, noncompetitive-scope rejection, visible
+  missing/throwing adapter recovery, and the unchanged read-only authority
+  boundary; debrief, durable save/load/replay, screenshots, device/browser, and
+  human-quality gates remain open.
 
 ## [0.13.8] - 2026-07-25
 
