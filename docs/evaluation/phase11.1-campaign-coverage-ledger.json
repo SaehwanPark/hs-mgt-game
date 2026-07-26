@@ -148,6 +148,35 @@
       "Explicit empty host lists and unknown cue IDs remain non-authoritative presentation outcomes."
     ]
   },
+  "music_state_coverage": {
+    "status": "complete",
+    "host_projection_source": "src/mcp/resolution.rs: visible_music_state_id",
+    "browser_classifier_source": "gui/music-stem-contract.mjs: classifyVisibleMusicState",
+    "catalog_source": "gui/music-stem-contract.mjs: MUSIC_STEM_CONTRACT.entries",
+    "ids": [
+      "menu",
+      "stable_operations",
+      "pressure",
+      "regulatory_scrutiny",
+      "competitive_escalation",
+      "affiliation_negotiation",
+      "debrief"
+    ],
+    "host_ids": [
+      "stable_operations",
+      "pressure",
+      "regulatory_scrutiny",
+      "competitive_escalation",
+      "affiliation_negotiation",
+      "debrief"
+    ],
+    "browser_only_ids": ["menu"],
+    "evidence": [
+      "Every catalog state has visible source, text equivalent, fallback, and ordered stem metadata.",
+      "The host projection emits only the six resolution states; menu remains an explicit browser stage.",
+      "Classifier priority and unknown-state fallback remain visible-only and deterministic."
+    ]
+  },
   "continuity": {
     "status": "bounded-first-month-evidence",
     "surfaces": [

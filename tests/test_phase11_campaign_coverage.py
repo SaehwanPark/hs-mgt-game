@@ -43,6 +43,15 @@ const legacyEventCueFixtures = [
   { steps: ["Public rival expansion was observed"] },
   { steps: ["Affiliation milestone was committed"] },
 ];
+const musicClassifierFixtures = [
+  { stage: "menu" },
+  { done: true },
+  { observation: { policy_bullets: ["Regulatory review letter reported"] } },
+  { observation: { market_bullets: ["Affiliation partner negotiation reported"] } },
+  { observation: { market_bullets: ["Public rival expansion reported"] } },
+  { observation: { operations: { margin: -1, unmet_demand: 0 } } },
+  { observation: { operations: { margin: 10, unmet_demand: 0 }, cash_runway_signal: "adequate", workforce_trust: "stable", in_flight_projects: "none" } },
+];
 console.log(JSON.stringify({
   facilities: Object.keys(facilities.FACILITY_COMPONENTS),
   facility_assets: Object.entries(facilities.FACILITY_COMPONENTS).map(([key, entry]) => ({
@@ -63,6 +72,14 @@ console.log(JSON.stringify({
     .map((entry) => [entry.id, entry.visible_trigger_source, entry.text_equivalent, entry.cues_only]),
   legacy_event_cues: [...new Set(legacyEventCueFixtures.map((fixture) => audio.visibleEventCues(fixture)).flat())],
   music_states: music.MUSIC_STEM_CONTRACT.entries.map((entry) => entry.id),
+  music_state_contract: music.MUSIC_STEM_CONTRACT.entries.map((entry) => [
+    entry.id,
+    entry.visible_trigger_source,
+    entry.text_equivalent,
+    entry.fallback,
+    entry.stem_order,
+  ]),
+  music_classifier_states: musicClassifierFixtures.map((fixture) => music.classifyVisibleMusicState(fixture)),
   semantics: {
     facilities: Object.values(facilities.FACILITY_COMPONENTS).map((entry) => [entry.id, entry.source, entry.equivalent]),
     operational_overlays: overlays.OPERATIONAL_OVERLAY_SET.map((entry) => [entry.id, entry.visible_source, entry.text_equivalent]),
@@ -195,7 +212,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "music_state_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -283,6 +300,31 @@ console.log(JSON.stringify(resolved));
       self.assertIn(f'"{cue_id}"', self.resolution)
     self.assertIn("audio_cue_ids", self.resolution)
     self.assertIn("visible_event_cue_ids", self.resolution)
+
+  def test_music_state_catalog_matches_host_and_browser_projections(self):
+    coverage = self.ledger["music_state_coverage"]
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(coverage["host_projection_source"], "src/mcp/resolution.rs: visible_music_state_id")
+    self.assertEqual(coverage["browser_classifier_source"], "gui/music-stem-contract.mjs: classifyVisibleMusicState")
+    self.assertEqual(self.live["music_states"], coverage["ids"])
+    self.assertEqual(
+      [entry[0] for entry in self.live["music_state_contract"]],
+      coverage["ids"],
+    )
+    self.assertEqual(
+      self.live["music_classifier_states"],
+      ["menu", "debrief", "regulatory_scrutiny", "affiliation_negotiation", "competitive_escalation", "pressure", "stable_operations"],
+    )
+    self.assertEqual(set(coverage["host_ids"]) | set(coverage["browser_only_ids"]), set(coverage["ids"]))
+    self.assertEqual(coverage["browser_only_ids"], ["menu"])
+    for state_id, source, equivalent, fallback, stem_order in self.live["music_state_contract"]:
+      self.assertTrue(source)
+      self.assertTrue(equivalent)
+      self.assertTrue(fallback)
+      self.assertEqual(stem_order, ["base_pulse", "institutional_motif", "pressure_layer", "policy_layer", "transition_cadence"])
+      if state_id in coverage["host_ids"]:
+        self.assertIn(f'"{state_id}"', self.resolution)
+    self.assertIn("visible_music_state_id", self.resolution)
 
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
@@ -380,7 +422,7 @@ console.log(JSON.stringify(resolved));
       "Overlay coverage complete.": " ",
       "Actor-family coverage complete.": "x",
       "Event cue coverage complete.": "x",
-      "Music-state coverage complete.": " ",
+      "Music-state coverage complete.": "x",
       "History view updated.": " ",
       "Debrief view updated.": " ",
       "Save/load visual continuity tested.": " ",

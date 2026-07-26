@@ -2227,8 +2227,9 @@ Extend the validated asset and interaction language to the remainder of the comp
 
 ## Milestone 11.1: Complete competitive campaign coverage
 
-**Status:** Facility asset catalog/release-registry coverage and the current
-visible event-cue catalog/projection parity completed in v0.13.7 after the
+**Status:** Facility asset catalog/release-registry coverage, current
+visible event-cue parity, and current music-state catalog/projection parity
+completed in v0.13.8 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use, event taxonomy beyond the current projection, durable save/load/replay
@@ -2251,7 +2252,7 @@ continuity, performance, and screenshot gates remain open.
 - [ ] Overlay coverage complete.
 - [x] Actor-family coverage complete.
 - [x] Event cue coverage complete.
-- [ ] Music-state coverage complete.
+- [x] Music-state coverage complete.
 - [ ] History view updated.
 - [ ] Debrief view updated.
 - [ ] Save/load visual continuity tested.
@@ -2288,6 +2289,19 @@ continuity, performance, and screenshot gates remain open.
 - This closes the current supported event-cue coverage item only. New event
   taxonomy, cue/audio quality, music continuity, screenshots, device/browser
   compatibility, and human quality remain separate gates.
+
+### v0.13.8 music-state coverage evidence
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the seven
+  current music-state IDs, the six host resolution IDs, and the browser-only
+  `menu` state.
+- `tests/test_phase11_campaign_coverage.py` requires every state to retain
+  visible source, text-equivalent, fallback, and ordered stem metadata; it
+  checks classifier coverage and the host projection source. Rust runtime
+  fixtures cover the host allowlist and priority cases.
+- This closes current music-state coverage only. Broader campaign music
+  taxonomy/continuity, audio quality, screenshots, device/browser
+  compatibility, and human quality remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

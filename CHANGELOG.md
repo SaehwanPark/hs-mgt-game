@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.8] - 2026-07-25
+
+- Closed the current Phase 11.1 music-state coverage item by proving parity
+  across all seven catalog states, six host resolution states, and the
+  browser-only menu state.
+- Added runtime allowlist/priority assertions while preserving visible-only
+  fallback boundaries; music quality, continuity, and human evaluation remain
+  open.
+
 ## [0.13.7] - 2026-07-25
 
 - Closed the current Phase 11.1 event-cue coverage item by proving exact

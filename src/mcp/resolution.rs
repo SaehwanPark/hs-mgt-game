@@ -555,7 +555,16 @@ mod tests {
         "competitive_escalation",
       ),
     ];
+    let allowed = [
+      "stable_operations",
+      "pressure",
+      "regulatory_scrutiny",
+      "competitive_escalation",
+      "affiliation_negotiation",
+      "debrief",
+    ];
     for (events, expected) in cases {
+      assert!(allowed.contains(&expected));
       let summary = TransitionSummary {
         events: events.into_iter().map(String::from).collect(),
         effects: Vec::new(),
@@ -571,6 +580,7 @@ mod tests {
     };
     let mut pressure = after.clone();
     pressure.operations.margin = -1;
+    assert!(allowed.contains(&"pressure"));
     assert_eq!(
       visible_music_state_id(&pressure_summary, &pressure, false),
       "pressure"
@@ -579,10 +589,12 @@ mod tests {
       visible_music_state_id(&pressure_summary, &after, false),
       "stable_operations"
     );
+    assert!(allowed.contains(&"stable_operations"));
     assert_eq!(
       visible_music_state_id(&pressure_summary, &after, true),
       "debrief"
     );
+    assert!(allowed.contains(&"debrief"));
   }
 
   #[test]

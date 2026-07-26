@@ -1075,3 +1075,51 @@ Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
 `fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
 contract and presentation-domain QA because this slice governs actor-visible
 audio equivalents without changing simulation authority.
+
+---
+
+# Request Summary — Visual/audio Phase 11.1 music-state coverage v0.13.8
+
+## Scope
+
+Close only the current Phase 11.1 music-state coverage item by proving parity
+among all seven `MUSIC_STEM_CONTRACT` states, the six host resolution states,
+and the browser-only `menu` state.
+
+## Non-goals
+
+- Do not add stems, audio assets, timing, host events, simulation rules, or
+  client-owned authority.
+- Do not claim broader campaign music taxonomy/continuity, musical usefulness,
+  fatigue, screenshots, device/browser compatibility, accessibility, or human
+  quality evidence.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.1.
+- `gui/music-stem-contract.mjs` and `src/mcp/resolution.rs`.
+- User-authorized continuation of the roadmap loop, bounded to the next
+  actionable technical coverage slice.
+
+## Expected files
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+- `tests/test_phase11_campaign_coverage.py`
+- `src/mcp/resolution.rs` runtime fixture assertions.
+- `_workspace` plan/contract/QA/handoff records, roadmap, SDD, lessons,
+  changelog, and version projections for v0.13.8.
+
+## Validation target
+
+Every state has visible source, text-equivalent, fallback, and ordered stem
+metadata. The host emits only its six allowlisted resolution states; the
+browser classifier covers all seven with `menu` explicit. Run focused/full
+Python and Rust checks plus release, asset, security, documentation, browser,
+and visual/audio audits.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
+`fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
+contract and presentation-domain QA because this slice governs actor-visible
+audio state semantics without changing simulation authority.
