@@ -2453,3 +2453,63 @@ quality remain open.
   contract checks — required before PR handoff.
 
 ---
+
+# Presentation Domain QA — Phase 11.1 history-view coverage v0.13.9
+
+## Status
+
+`pass` for the bounded live `competitive-history-v1` history-view handoff.
+This is technical presentation QA, not full campaign, accessibility,
+educational, device/browser, or human-quality approval.
+
+## Reviewed inputs and authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/100_implementation_plan_visual-audio-phase11-history-v0.13.9.md`.
+- Evidence: `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_campaign_coverage.py`, and
+  `tests/test_phase11_live_history.py`.
+- Roadmap gate: current Phase 11.1 history-view handoff only.
+
+## Information and causality findings
+
+- Pass: the ledger joins the host schema and loopback route to the existing
+  browser adapter and renderer.
+- Pass: valid rows retain turn/state-hash alignment; unsupported schemas,
+  campaigns, and incomplete/invalid turns or counts are rejected before
+  rendering.
+- Pass: the path is read-only and does not submit commands, advance the
+  simulation, expose hidden state, or reconstruct replay data.
+
+## Accessibility and fallback findings
+
+- Pass: the existing text-first history list remains the meaning-bearing
+  surface.
+- Pass: missing or throwing adapters expose recoverable errors and preserve the
+  last valid history view.
+- Evidence limit: automated tests do not establish contrast, focus,
+  screen-reader behavior, device compatibility, performance, or comprehension.
+
+## Provenance, authority, and residual limits
+
+- Pass: no asset, audio, history-store, hash, replay, persistence, or
+  simulation behavior changed.
+- Pass: the host remains authoritative for schema, count, rows, and hashes.
+- Pass: the GUI route and browser validator reject noncompetitive sessions for
+  this bounded competitive history schema.
+- Evidence limit: full campaign history/debrief, durable save/load/replay
+  continuity, screenshots, browser/device gates, and human evaluation remain
+  open.
+
+## Required fixes
+
+None for this bounded current-state contract.
+
+## Verification evidence
+
+- Focused history/campaign/release-metadata tests pass on the working branch.
+- Full Python/Rust, release, asset/security, documentation, browser, and
+  visual/audio audits remain required before PR handoff.
+
+---

@@ -26,6 +26,8 @@ class LiveHistoryHandoffTests(unittest.TestCase):
       "HISTORY_SCHEMA_VERSION",
       "GetHistoryRequest",
       "get_history",
+      "get_competitive_history",
+      "unsupported_gui_campaign_history",
       '"/api/v1/sessions/{session_id}/history"',
     ):
       self.assertIn(marker, self.server + self.session)
@@ -52,6 +54,10 @@ const valid = {{
 }};
 const invalidCount = {{ ...valid, transition_count: 2 }};
 const invalidSchema = {{ ...valid, schema_version: "future-history-v9" }};
+const invalidMissingTurn = {{ ...valid, transitions: [{{ state_hash: "hash-1" }}] }};
+const invalidStringTurn = {{ ...valid, transitions: [{{ turn: "1", state_hash: "hash-1" }}] }};
+const invalidNegativeTurn = {{ ...valid, transitions: [{{ turn: -1, state_hash: "hash-1" }}] }};
+const invalidCampaign = {{ ...valid, campaign: "stabilization-v1" }};
 const missingAdapter = await createHistoryClient({{ adapter: {{}}, root: {{}} }}).load("session-1");
 const throwingAdapter = await createHistoryClient({{
   adapter: {{ getHistory: async () => {{ throw new Error("read failed"); }} }},
@@ -61,6 +67,10 @@ console.log(JSON.stringify({{
   valid: validateHistoryEnvelope(valid).ok,
   invalidCount: validateHistoryEnvelope(invalidCount).code,
   invalidSchema: validateHistoryEnvelope(invalidSchema).code,
+  invalidMissingTurn: validateHistoryEnvelope(invalidMissingTurn).code,
+  invalidStringTurn: validateHistoryEnvelope(invalidStringTurn).code,
+  invalidNegativeTurn: validateHistoryEnvelope(invalidNegativeTurn).code,
+  invalidCampaign: validateHistoryEnvelope(invalidCampaign).code,
   missingAdapter: missingAdapter.code,
   throwingAdapter: throwingAdapter.code,
 }}));
@@ -78,6 +88,10 @@ console.log(JSON.stringify({{
         "valid": True,
         "invalidCount": "incomplete_history",
         "invalidSchema": "unsupported_history_schema",
+        "invalidMissingTurn": "incomplete_history",
+        "invalidStringTurn": "incomplete_history",
+        "invalidNegativeTurn": "incomplete_history",
+        "invalidCampaign": "unsupported_history_campaign",
         "missingAdapter": "history_adapter_missing",
         "throwingAdapter": "history_adapter_error",
       },
@@ -89,16 +103,33 @@ import {{ createHistoryClient }} from {APP.as_uri()!r};
 function node() {{
   return {{
     children: [],
+    hidden: false,
     append(...items) {{ this.children.push(...items); }},
     replaceChildren() {{ this.children = []; }},
     setAttribute() {{}},
     textContent: "",
+    onclick: null,
   }};
 }}
 const list = node();
 const meta = node();
+const status = node();
+const presentationState = node();
+const recoveryPanel = node();
+recoveryPanel.hidden = true;
+const recoveryDetail = node();
+const recoveryRetry = node();
 globalThis.document = {{ createElement: node }};
-const root = {{ querySelector(selector) {{ return selector === "#history-list" ? list : meta; }} }};
+const nodes = {{
+  "#history-list": list,
+  "#session-meta": meta,
+  "#session-status": status,
+  "#presentation-state": presentationState,
+  "#recovery-panel": recoveryPanel,
+  "#recovery-detail": recoveryDetail,
+  "#recovery-retry": recoveryRetry,
+}};
+const root = {{ querySelector(selector) {{ return nodes[selector] ?? null; }} }};
 let shouldFail = false;
 const adapter = {{
   async getHistory() {{
@@ -116,12 +147,20 @@ const client = createHistoryClient({{ adapter, root }});
 const first = await client.load("session-1");
 shouldFail = true;
 const failed = await client.load("session-1");
+const failureVisible = !recoveryPanel.hidden;
+const failureMessage = recoveryDetail.textContent;
+shouldFail = false;
+await recoveryRetry.onclick({{}});
 console.log(JSON.stringify({{
   first: first.ok,
   failed: failed.code,
   renderedItems: list.children.length,
   renderedHash: list.children[0]?.children[2]?.textContent,
   cachedHash: client.envelope.transitions[0].state_hash,
+  recoveryVisible: failureVisible,
+  recoveryMessage: failureMessage,
+  recoveryVisibleAfterRetry: !recoveryPanel.hidden,
+  statusAfterRetry: status.textContent,
 }}));
 """
     result = subprocess.run(
@@ -139,6 +178,10 @@ console.log(JSON.stringify({{
         "renderedItems": 1,
         "renderedHash": "state hash: hash-1",
         "cachedHash": "hash-1",
+        "recoveryVisible": True,
+        "recoveryMessage": "The current history view was preserved. Retry the live history read.",
+        "recoveryVisibleAfterRetry": False,
+        "statusAfterRetry": "Live history loaded from the host.",
       },
     )
 
@@ -153,7 +196,10 @@ console.log(JSON.stringify({{
       self.assertNotIn(forbidden, self.app)
       self.assertNotIn(forbidden, self.server)
     history_handler = self.server.split("async fn get_history", 1)[1].split("async fn end_session", 1)[0]
-    self.assertIn("store.get_history(GetHistoryRequest { session_id })", history_handler)
+    history_guard = self.server.split("fn get_competitive_history", 1)[1].split("async fn get_history", 1)[0]
+    self.assertIn("get_competitive_history(store, session_id)", history_handler)
+    self.assertIn("store.get_history(GetHistoryRequest { session_id })", history_guard)
+    self.assertIn("unsupported_gui_campaign_history", history_guard)
     self.assertNotIn("submit_turn", history_handler)
 
   def test_live_history_scripts_are_syntactically_valid(self):

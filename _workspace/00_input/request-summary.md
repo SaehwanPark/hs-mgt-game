@@ -1123,3 +1123,52 @@ Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
 `fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
 contract and presentation-domain QA because this slice governs actor-visible
 audio state semantics without changing simulation authority.
+
+---
+
+# Request Summary — Visual/audio Phase 11.1 history-view coverage v0.13.9
+
+## Scope
+
+Close only the current Phase 11.1 `History view updated` checklist item by
+recording and testing the existing live `competitive-history-v1` host-to-browser
+handoff. Preserve aligned turn/state-hash rows, text-first rendering, and the
+last valid view when a history read fails.
+
+## Non-goals
+
+- Do not change the history store, transition logic, hash generation, replay
+  semantics, save/load persistence, host authority, or simulation behavior.
+- Do not claim full campaign history/debrief coverage, durable save/load/replay
+  continuity, screenshots, device/browser compatibility, accessibility, or
+  human quality evidence.
+
+## Sources and authorization
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.1.
+- `src/mcp/session.rs`, `src/gui_server.rs`, `gui/host-adapter.mjs`,
+  `gui/app.mjs`, and `tests/test_phase11_live_history.py`.
+- User-authorized continuation of the roadmap loop, bounded to this next
+  technical coverage slice.
+
+## Expected files
+
+- `_workspace/100_implementation_plan_visual-audio-phase11-history-v0.13.9.md`
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+- `tests/test_phase11_campaign_coverage.py`
+- Roadmap, SPEC, presentation contract/QA, lessons, changelog, and v0.13.9
+  release projections.
+
+## Validation target
+
+The ledger and focused campaign test must bind the host schema/route to the
+browser adapter/renderer, prove aligned rows and explicit failure recovery, and
+retain the read-only boundary. Run focused/full Python and Rust checks plus
+release, asset, security, documentation, browser, and visual/audio audits.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
+`fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
+contract and presentation-domain QA because this slice governs actor-visible
+history without changing simulation authority.

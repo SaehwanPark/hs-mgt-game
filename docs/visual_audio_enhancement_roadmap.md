@@ -2228,8 +2228,8 @@ Extend the validated asset and interaction language to the remainder of the comp
 ## Milestone 11.1: Complete competitive campaign coverage
 
 **Status:** Facility asset catalog/release-registry coverage, current
-visible event-cue parity, and current music-state catalog/projection parity
-completed in v0.13.8 after the
+visible event-cue parity, current music-state catalog/projection parity, and
+history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use, event taxonomy beyond the current projection, durable save/load/replay
@@ -2253,7 +2253,7 @@ continuity, performance, and screenshot gates remain open.
 - [x] Actor-family coverage complete.
 - [x] Event cue coverage complete.
 - [x] Music-state coverage complete.
-- [ ] History view updated.
+- [x] History view updated.
 - [ ] Debrief view updated.
 - [ ] Save/load visual continuity tested.
 - [ ] Replay visual continuity tested.
@@ -2302,6 +2302,18 @@ continuity, performance, and screenshot gates remain open.
 - This closes current music-state coverage only. Broader campaign music
   taxonomy/continuity, audio quality, screenshots, device/browser
   compatibility, and human quality remain open.
+
+### v0.13.9 history-view coverage evidence
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  `competitive-history-v1` host schema, loopback route, browser adapter and
+  renderer, aligned turn/hash row contract, and failure-preserving behavior.
+- `tests/test_phase11_campaign_coverage.py` joins those sources to the live
+  history tests for valid rendering, incomplete/schema rejection, missing or
+  throwing adapter recovery, and the unchanged read-only authority boundary.
+- This closes only the current history-view handoff. Debrief, durable
+  save/load/replay continuity, screenshots, device/browser compatibility, and
+  human quality remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

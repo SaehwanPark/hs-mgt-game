@@ -2640,3 +2640,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep local stage, visible observation, and committed host
   projection sources explicit in contracts and never promote a presentation
   state into commands, transitions, history, replay, or debrief data.
+
+## Phase 22: History rows must preserve host alignment and recoverability
+
+- Context: Phase 11.1 history-view coverage uses an existing host envelope and
+  browser text surface rather than adding new history semantics.
+- Risk: Treating transition count, turn rows, and state hashes independently
+  could display a misleading history; clearing the last valid view after a
+  transient read failure would also erase useful player context.
+- Resolution: Require `competitive-history-v1` validation to accept only an
+  aligned count/row set, render turn and state-hash pairs together, and preserve
+  the last valid view while exposing a recoverable adapter error.
+- Prevention: Keep host schema/route, adapter, renderer, and failure behavior in
+  one ledger-backed focused test, and distinguish this handoff from full
+  campaign history/debrief, durable save/load/replay, and human-quality gates.

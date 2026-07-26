@@ -204,6 +204,7 @@ const demoEnvelope = {
 const READ_ONLY_PRESENTATION_SCHEMA = "competitive-read-only-v1";
 const END_SESSION_SCHEMA = "competitive-end-session-v1";
 const HISTORY_SCHEMA = "competitive-history-v1";
+const HISTORY_CAMPAIGN = "competitive-regional-v1";
 const REPLAY_SCHEMA = "competitive-replay-v1";
 const SAVE_SCHEMA = "competitive-save-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
@@ -1290,6 +1291,9 @@ export function validateHistoryEnvelope(envelope) {
   if (envelope.schema_version !== HISTORY_SCHEMA) {
     return { ok: false, code: "unsupported_history_schema", message: "Unsupported host history schema." };
   }
+  if (envelope.campaign !== HISTORY_CAMPAIGN) {
+    return { ok: false, code: "unsupported_history_campaign", message: "History is outside the supported competitive campaign." };
+  }
   if (
     typeof envelope.session_id !== "string"
     || !envelope.session_id.trim()
@@ -1302,6 +1306,8 @@ export function validateHistoryEnvelope(envelope) {
     || envelope.transitions.some((entry) => (
       !entry
       || typeof entry !== "object"
+      || !Number.isInteger(entry.turn)
+      || entry.turn < 0
       || typeof entry.state_hash !== "string"
       || !entry.state_hash.trim()
     ))
@@ -2090,7 +2096,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
-  const historyClient = createHistoryClient({ adapter, root });
+  const historyClient = createHistoryClient({ adapter, root, recorder });
   const replayClient = createReplayClient({ adapter, root });
   const checkpointClient = createCheckpointClient({ adapter, root, recorder, refresh: load });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
@@ -2230,10 +2236,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           audioClient.setAmbienceFromVisible(presentation);
           audioClient.playCue("ui.report-received");
           if (typeof adapter.getHistory === "function") {
-            const history = await historyClient.load(sessionId);
-            if (!history.ok) {
-              recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
-            }
+            await historyClient.load(sessionId);
           }
           if (typeof adapter.getReplay === "function") {
             const replay = await replayClient.load(sessionId);
@@ -2313,10 +2316,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         recordVisibleEnvelope(recorder, presentation);
         audioClient.setMusicFromVisible(presentation);
         if (typeof adapter.getHistory === "function") {
-          const history = await historyClient.load(requestedSessionId);
-          if (!history.ok) {
-            recordPlaytestFailure(recorder, history.code, history.message ?? "Live history refresh was unavailable.");
-          }
+          await historyClient.load(requestedSessionId);
         }
         if (typeof adapter.getReplay === "function") {
           const replay = await replayClient.load(requestedSessionId);
@@ -2647,27 +2647,42 @@ export function createResolutionClient({ adapter = globalThis.HsMgtGameActionAda
   return { load, render, play, pause, skip, review, advance, get envelope() { return envelope; } };
 }
 
-export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
+export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null } = {}) {
   let envelope = null;
+
+  function failure(result, sessionId) {
+    const message = result.message ?? "Live history refresh was unavailable.";
+    recordPlaytestFailure(recorder, result.code, message);
+    if (typeof root?.querySelector === "function") {
+      setPresentationState(root, `Live history refresh failed; current view preserved: ${message}`);
+      showRecovery(root, "The current history view was preserved. Retry the live history read.");
+      configureRecovery(root, () => load(sessionId), recorder);
+    }
+    return result;
+  }
 
   async function load(sessionId = adapter?.sessionId) {
     if (!adapter || typeof adapter.getHistory !== "function") {
-      return { ok: false, code: "history_adapter_missing", message: "No live history adapter configured." };
+      return failure({ ok: false, code: "history_adapter_missing", message: "No live history adapter configured." }, sessionId);
     }
     try {
       const nextEnvelope = await adapter.getHistory(sessionId);
       const validation = validateHistoryEnvelope(nextEnvelope);
-      if (!validation.ok) return validation;
+      if (!validation.ok) return failure(validation, sessionId);
       const rendered = renderHistoryEnvelope(nextEnvelope, root);
-      if (!rendered.ok) return rendered;
+      if (!rendered.ok) return failure(rendered, sessionId);
       envelope = nextEnvelope;
+      if (typeof root?.querySelector === "function") {
+        clearRecovery(root);
+        setPresentationState(root, "Live history loaded from the host.");
+      }
       return { ...rendered, envelope: nextEnvelope };
     } catch (error) {
-      return {
+      return failure({
         ok: false,
         code: "history_adapter_error",
         message: error instanceof Error ? error.message : String(error),
-      };
+      }, sessionId);
     }
   }
 
