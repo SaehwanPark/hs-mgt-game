@@ -464,6 +464,17 @@ mod tests {
   #[test]
   fn visible_event_cue_projection_covers_supported_event_cues() {
     let ids = visible_event_cue_ids(&summary(), 10, -10, &observation());
+    let allowed = [
+      "event.project-complete",
+      "event.staffing-constraint",
+      "event.operating-loss",
+      "event.operating-recovery",
+      "event.payer-decision",
+      "event.regulatory-decision",
+      "event.rival-expansion",
+      "event.affiliation-milestone",
+    ];
+    assert!(ids.iter().all(|id| allowed.contains(&id.as_str())));
 
     assert_eq!(
       ids,

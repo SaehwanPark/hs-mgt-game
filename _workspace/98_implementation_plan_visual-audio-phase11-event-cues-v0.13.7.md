@@ -23,7 +23,10 @@ rendered without a documented text/source contract.
 2. Extend the focused Phase 11.1 coverage test to load the live audio contract,
    require exact event-channel ID parity, require source/equivalent metadata,
    and verify the host projection test's visible-only boundary markers.
-3. Close only the current event-cue coverage checklist item. Retain broader
+3. Add a Rust runtime fixture assertion with an explicit event-cue allowlist
+   and exact emitted order so projection parity is exercised, not only read
+   from source text.
+4. Close only the current event-cue coverage checklist item. Retain broader
    event taxonomy, audio quality, music continuity, screenshot, device,
    compatibility, and human-evaluation gates as open.
 4. Record the contract, SDD status, roadmap evidence, QA, changelog, lessons,
@@ -47,6 +50,8 @@ re-audit the next unchecked roadmap item.
 
 - Event-channel catalog IDs equal the eight host-projected visible event-cue
   IDs exactly once.
+- The Rust runtime fixture emits only the allowlisted IDs in the expected
+  order.
 - Every event cue has a visible trigger source, text equivalent, and cues-only
   contract.
 - Explicit empty cue lists, legacy visible fallback, and unknown IDs remain
