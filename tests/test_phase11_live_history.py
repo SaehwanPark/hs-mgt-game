@@ -147,14 +147,20 @@ const client = createHistoryClient({{ adapter, root }});
 const first = await client.load("session-1");
 shouldFail = true;
 const failed = await client.load("session-1");
+const failureVisible = !recoveryPanel.hidden;
+const failureMessage = recoveryDetail.textContent;
+shouldFail = false;
+await recoveryRetry.onclick({{}});
 console.log(JSON.stringify({{
   first: first.ok,
   failed: failed.code,
   renderedItems: list.children.length,
   renderedHash: list.children[0]?.children[2]?.textContent,
   cachedHash: client.envelope.transitions[0].state_hash,
-  recoveryVisible: !recoveryPanel.hidden,
-  recoveryMessage: recoveryDetail.textContent,
+  recoveryVisible: failureVisible,
+  recoveryMessage: failureMessage,
+  recoveryVisibleAfterRetry: !recoveryPanel.hidden,
+  statusAfterRetry: status.textContent,
 }}));
 """
     result = subprocess.run(
@@ -174,6 +180,8 @@ console.log(JSON.stringify({{
         "cachedHash": "hash-1",
         "recoveryVisible": True,
         "recoveryMessage": "The current history view was preserved. Retry the live history read.",
+        "recoveryVisibleAfterRetry": False,
+        "statusAfterRetry": "Live history loaded from the host.",
       },
     )
 

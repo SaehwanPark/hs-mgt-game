@@ -2672,7 +2672,10 @@ export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapte
       const rendered = renderHistoryEnvelope(nextEnvelope, root);
       if (!rendered.ok) return failure(rendered, sessionId);
       envelope = nextEnvelope;
-      clearRecovery(root);
+      if (typeof root?.querySelector === "function") {
+        clearRecovery(root);
+        setPresentationState(root, "Live history loaded from the host.");
+      }
       return { ...rendered, envelope: nextEnvelope };
     } catch (error) {
       return failure({
