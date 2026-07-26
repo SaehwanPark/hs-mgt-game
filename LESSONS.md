@@ -2626,3 +2626,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep parity evidence separate from claims about audio quality,
   loudness, fatigue, device behavior, or human usefulness, and leave broader
   event taxonomy open until it has its own source-backed projection.
+
+## Phase 21: Separate browser stage states from host resolution states
+
+- Context: The music catalog includes a `menu` planning state while the host
+  resolution envelope emits only six committed-resolution states.
+- Risk: Treating every catalog entry as a host state would imply that local
+  browser stage classification is a simulation fact or that the host omitted
+  a required resolution state.
+- Resolution: Record catalog, host, and browser-only ID sets separately; test
+  classifier coverage for all seven and Rust runtime allowlist/priority for the
+  six host states.
+- Prevention: Keep local stage, visible observation, and committed host
+  projection sources explicit in contracts and never promote a presentation
+  state into commands, transitions, history, replay, or debrief data.

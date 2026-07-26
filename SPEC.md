@@ -5709,6 +5709,33 @@ Deferred / Non-Goals:
 - No new cue, recorded audio, host event, simulation rule, or client-owned cue
   authority was added.
 
+### Visual/audio Phase 11.1 music-state coverage (v0.13.8)
+
+Status: Complete for the current seven-state presentation contract; six host
+resolution states and the browser-only menu state are explicitly separated.
+Broader campaign music taxonomy, continuity, audio quality, and human
+evaluation remain open.
+
+Done:
+
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records all seven
+  catalog IDs, six host IDs, and the browser-only `menu` ID.
+- `tests/test_phase11_campaign_coverage.py` requires visible source,
+  text-equivalent, fallback, and ordered stem metadata plus classifier parity.
+- Rust runtime fixtures assert the six-state host allowlist and priority order;
+  no audio asset, runtime behavior, simulation, history/hash, replay, or
+  client authority changed.
+
+Not Yet Done:
+
+- Broader campaign music taxonomy/continuity, musical usefulness/fatigue,
+  screenshot/device/browser evidence, lived accessibility, and human review.
+
+Deferred / Non-Goals:
+
+- No new stem, audio asset, host event, simulation rule, or browser-owned music
+  authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

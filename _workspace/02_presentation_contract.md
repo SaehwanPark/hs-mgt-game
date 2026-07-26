@@ -1744,4 +1744,63 @@ hardware/browser behavior, lived accessibility, or human usefulness.
 - No new cue, recorded audio, host event, simulation rule, or client-owned
   authority.
 - Open: broader event taxonomy, music continuity, screenshot/device/browser
+evidence, audio quality, and human evaluation.
+
+---
+
+# Presentation Contract — Phase 11.1 music-state coverage v0.13.8
+
+## Goal and authorization
+
+Prove the current music-state catalog is consistent across the host resolution
+projection and browser classifier, with the browser-only menu state kept
+separate from host resolution.
+
+## Player questions and consequences
+
+Music may gently reflect a visible planning, operating, pressure, policy,
+competitive, affiliation, or debrief context. It must never reveal a private
+intent, hidden outcome, severity certainty, or future result.
+
+## Actor-visible source ledger
+
+| Surface | Source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Music catalog | `gui/music-stem-contract.mjs` | Retain heading/status/source/result text when unavailable or suppressed | No music state as hidden severity, intent, probability, or outcome |
+| Host resolution state | `src/mcp/resolution.rs: visible_music_state_id` | Explicit debrief/visible priority; existing browser fallback for missing/malformed values | No private rival, true-state, stochastic, or effect-queue data |
+| Menu/planning state | `classifyVisibleMusicState` local stage | Browser-only `menu` state; no host resolution claim | No local stage inference about simulation outcome |
+
+## Visual, motion, and audio semantics
+
+No stem recipe, loop duration, crossfade, gain, or visual rendering changes.
+The audit verifies existing ordered stem metadata and visible-source rules.
+
+## Accessibility and fallbacks
+
+Mute, music-only controls, cues-only mode, reduced-audio behavior, written
+headings/status/source/result text, and unknown/malformed state fallback remain
+authoritative. Audio is supplementary.
+
+## Authority, history, and replay boundaries
+
+The catalog/projection tests are read-only. Music state cannot enter commands,
+transitions, stochastic inputs, state hashes, immutable history, replay
+artifacts, or debrief facts. The host remains authoritative.
+
+## Asset provenance and release requirements
+
+No stem or audio asset is added. Existing generated-audio registry, credits,
+normalization, and release checks remain authoritative.
+
+## Verification and evidence limits
+
+Parity tests prove current state wiring, priority, and visible-only fallback.
+They do not prove full campaign continuity, loudness, fatigue, musical quality,
+hardware/browser behavior, lived accessibility, or human usefulness.
+
+## Non-goals and open questions
+
+- No new stem, audio asset, host event, simulation rule, or browser-owned music
+  authority.
+- Open: broader campaign taxonomy/continuity, screenshots/device/browser
   evidence, audio quality, and human evaluation.
