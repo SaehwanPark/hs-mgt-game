@@ -84,10 +84,10 @@ def validate_definition(root: Path, document: object) -> list[str]:
       errors.append(f"duplicate capability ID: {capability_id}")
     else:
       capability_ids.add(capability_id)
-    for field in ("required", "source", "fallback"):
-      if field not in capability or not isinstance(capability[field], (bool, str)) or (
-        isinstance(capability[field], str) and not capability[field].strip()
-      ):
+    if not isinstance(capability.get("required"), bool):
+      errors.append(f"capability {capability_id!r} has invalid required")
+    for field in ("source", "fallback"):
+      if not isinstance(capability.get(field), str) or not capability[field].strip():
         errors.append(f"capability {capability_id!r} has invalid {field}")
 
   supported = document.get("supported_targets")
@@ -114,7 +114,13 @@ def validate_definition(root: Path, document: object) -> list[str]:
     if not isinstance(evidence, list) or not evidence or not all(isinstance(item, str) and item.strip() for item in evidence):
       errors.append(f"supported target {target_id!r} needs evidence entries")
     required = target.get("required_capabilities")
-    if set(required or []) != {item["id"] for item in capabilities if isinstance(item, dict) and item.get("required") is True}:
+    expected_required = {
+      item["id"] for item in capabilities
+      if isinstance(item, dict) and item.get("required") is True
+    }
+    if not isinstance(required, list) or not all(isinstance(item, str) and item.strip() for item in required):
+      errors.append(f"supported target {target_id!r} must list required capabilities as strings")
+    elif len(required) != len(set(required)) or set(required) != expected_required:
       errors.append(f"supported target {target_id!r} must list every required capability exactly once")
 
   not_certified = document.get("not_certified_targets")
@@ -181,8 +187,10 @@ def build_report(root: Path, document: object) -> dict:
 
   loading_checker = _load_checker(root, "check_loading_policy.py", "browser_loading_policy")
   offline_checker = _load_checker(root, "check_offline_availability.py", "browser_offline_policy")
-  loading_document = json.loads((root / "assets" / "loading-policy.json").read_text(encoding="utf-8"))
-  offline_document = json.loads((root / "assets" / "offline-policy.json").read_text(encoding="utf-8"))
+  loading_path = _resolve(root, document["boundary_checks"]["loading_policy"])
+  offline_path = _resolve(root, document["boundary_checks"]["offline_policy"])
+  loading_document = json.loads(loading_path.read_text(encoding="utf-8"))
+  offline_document = json.loads(offline_path.read_text(encoding="utf-8"))
   if document["entrypoint"] != loading_document.get("live_entrypoint"):
     errors.append("compatibility entrypoint must match the loading-policy live_entrypoint")
   loading_report = loading_checker.build_report(root, loading_document)
@@ -195,19 +203,21 @@ def build_report(root: Path, document: object) -> dict:
     errors.extend(f"offline policy: {error}" for error in offline_report.get("errors", []))
 
   live_files = loading_document.get("live_files", [])
+  audited_files = list(dict.fromkeys([*live_files, "gui/host-adapter.mjs"]))
   syntax_errors = []
-  for relative in live_files:
+  for relative in audited_files:
     if not relative.endswith(".mjs"):
       continue
     result = subprocess.run(["node", "--check", str(root / relative)], capture_output=True, text=True, check=False)
     if result.returncode != 0:
       syntax_errors.append(f"{relative}: {result.stderr.strip() or 'node syntax check failed'}")
   report["syntax_status"] = "pass" if not syntax_errors else "fail"
+  report["syntax_files"] = audited_files
   errors.extend(syntax_errors)
 
   markers = document["boundary_checks"]["forbidden_client_authority_markers"]
   boundary_errors = []
-  for relative in live_files:
+  for relative in audited_files:
     path = root / relative
     if not path.is_file():
       continue

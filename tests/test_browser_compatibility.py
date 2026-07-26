@@ -27,6 +27,7 @@ class BrowserCompatibilityTests(unittest.TestCase):
     self.assertEqual(report["offline_policy_status"], "pass")
     self.assertEqual(report["syntax_status"], "pass")
     self.assertEqual(report["boundary_status"], "pass")
+    self.assertIn("gui/host-adapter.mjs", report["syntax_files"])
     self.assertEqual([target["id"] for target in report["supported_targets"]], ["chromium-evergreen-desktop"])
     self.assertEqual(
       {target["support"] for target in report["not_certified_targets"]},
@@ -43,6 +44,22 @@ class BrowserCompatibilityTests(unittest.TestCase):
     document["supported_targets"][0]["required_capabilities"].pop()
     errors = self.checker.validate_definition(ROOT, document)
     self.assertTrue(any("every required capability" in error for error in errors))
+
+  def test_matrix_rejects_duplicate_or_non_list_required_capabilities(self):
+    duplicate = copy.deepcopy(self.document)
+    duplicate["supported_targets"][0]["required_capabilities"].append("fetch")
+    errors = self.checker.validate_definition(ROOT, duplicate)
+    self.assertTrue(any("every required capability" in error for error in errors))
+    non_list = copy.deepcopy(self.document)
+    non_list["supported_targets"][0]["required_capabilities"] = "fetch"
+    errors = self.checker.validate_definition(ROOT, non_list)
+    self.assertTrue(any("as strings" in error for error in errors))
+
+  def test_matrix_rejects_non_string_fallback(self):
+    document = copy.deepcopy(self.document)
+    document["capabilities"][4]["fallback"] = False
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertTrue(any("invalid fallback" in error for error in errors))
 
   def test_matrix_rejects_unsupported_target_without_reason(self):
     document = copy.deepcopy(self.document)
@@ -62,6 +79,13 @@ class BrowserCompatibilityTests(unittest.TestCase):
     report = self.checker.build_report(ROOT, document)
     self.assertEqual(report["status"], "fail")
     self.assertTrue(any("entrypoint" in error or "loading policy" in error for error in report["errors"]))
+
+  def test_report_uses_declared_boundary_policy_paths(self):
+    document = copy.deepcopy(self.document)
+    document["boundary_checks"]["loading_policy"] = "assets/offline-policy.json"
+    report = self.checker.build_report(ROOT, document)
+    self.assertEqual(report["status"], "fail")
+    self.assertTrue(any("loading policy" in error for error in report["errors"]))
 
 
 if __name__ == "__main__":

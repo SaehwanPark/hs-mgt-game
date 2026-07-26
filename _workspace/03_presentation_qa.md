@@ -2254,7 +2254,7 @@ None.
 
 - `python3 scripts/check_browser_compatibility.py` — pass.
 - `python3 -m unittest tests.test_browser_compatibility
-  tests.test_loading_policy tests.test_offline_availability` — 37 tests pass.
+  tests.test_loading_policy tests.test_offline_availability` — 40 tests pass.
 - `python3 scripts/check_release_metadata.py` — pass at v0.13.5.
 - `python3 scripts/check_documentation_links.py` — pass, 382 Markdown files.
 - Local loopback browser smoke at `http://127.0.0.1:7878/` — page loaded with
