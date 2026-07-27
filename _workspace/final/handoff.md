@@ -645,3 +645,45 @@ browser compatibility, screenshots, asset quality, human evaluation, and later
 roadmap gates remain open.
 
 ---
+# Final Handoff — Phase 8.3 reproducible distribution v0.13.10
+
+## Result
+
+Defined the exact Git source checkout as the canonical v0.13.10 distribution
+unit. The guide records required tracked inputs, stable Rust/Cargo setup,
+read-only release checks, CLI and loopback-GUI support, first-build dependency
+network caveats, and deferred package formats and certification claims.
+
+No simulation, GUI runtime, MCP, history, replay, asset content, CI, public
+API, binary, archive, installer, registry, deployment, release-tag, or
+human-quality behavior changed.
+
+## Verification
+
+- Release metadata, documentation links, offline availability, browser
+  compatibility, asset registry/security/release, generation metadata, and
+  visual/audio contract audits passed.
+- Python unittest discovery — 645 passed.
+- `cargo fmt --check` passed.
+- `cargo clippy --all-targets -- -D warnings` passed.
+- `cargo test` — 339 passed.
+- Three independent review passes found no actionable issues.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.9, commit `f6eab82`.
+- Working branch: `feat/phase8-reproducible-distribution-v0.13.10`.
+- Commit: `899b91c` (`docs: establish reproducible distribution path`).
+- Pull request: https://github.com/SaehwanPark/hs-mgt-game/pull/258.
+- Hosted CI: passed.
+- Merge commit and local/remote temporary-branch deletion remain the final
+  guarded workflow actions after this handoff record.
+
+## Limits and next slice
+
+Instructor-facing documentation, broader browser/device certification, package
+publication, and human accessibility, usability, learning, or
+classroom-effectiveness evaluation remain open. No runtime expansion is
+authorized without a new bounded evidence or release need.
+
+---
