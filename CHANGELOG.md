@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.10] - 2026-07-27
+
+- Defined the canonical v0.13.10 distribution unit as an exact Git
+  source-checkout with stable Rust/Cargo, versioned scenarios, replay fixtures,
+  and the existing read-only release checks.
+- Documented current CLI/loopback-GUI support and explicitly deferred
+  prebuilt packages, archives, registry publication, additional browser/device
+  certification, and human-quality claims; no runtime behavior changed.
+
 ## [0.13.9] - 2026-07-25
 
 - Closed the current Phase 11.1 history-view item by joining the

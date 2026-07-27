@@ -24,7 +24,9 @@ overview and quickstart.
    will change.
 3. Follow the [versioning policy](reference/versioning-policy.md) and
    [release metadata check](guides/contributor-release-check.md).
-4. Consult the [architecture decision records](decision-records/README.md)
+4. Use the [reproducible distribution guide](guides/reproducible-distribution.md)
+   when preparing a checkout for review, playtesting, or release handoff.
+5. Consult the [architecture decision records](decision-records/README.md)
    before changing an accepted boundary.
 
 ## Game and Domain Design Contributor Path

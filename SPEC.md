@@ -5656,6 +5656,36 @@ Deferred / Non-Goals:
 - No new browser framework, service worker, external network asset, or
   browser-owned simulation state.
 
+### Phase 8.3 reproducible distribution decision (v0.13.10)
+
+Status: Complete for the exact source-checkout distribution contract; package
+publication, broader runtime certification, and human-quality evidence remain
+separately gated.
+
+Done:
+
+- Added `docs/guides/reproducible-distribution.md` defining the tracked
+  checkout inputs, stable Rust/Cargo build path, replay/run identity fields,
+  current CLI and loopback-GUI boundaries, and the complete read-only
+  validation sequence.
+- Kept the repository source checkout as the distribution unit and explicitly
+  deferred prebuilt binaries, archives, installers, containers, registry
+  publication, release tags, hosted deployment, and external runtime assets.
+- Bumped the package and public milestone projections to v0.13.10 without
+  changing simulation, GUI runtime, MCP, history, replay, asset, or CI
+  behavior.
+
+Not Yet Done:
+
+- Instructor-facing documentation, broader browser/device certification,
+  package publication, and human accessibility, usability, learning, or
+  classroom-effectiveness evaluation.
+
+Deferred / Non-Goals:
+
+- No new distribution archive, binary, installer, registry package, release
+  tag, deployment path, runtime dependency, or public API was added.
+
 ### Visual/audio Phase 11.1 facility asset coverage (v0.13.6)
 
 Status: Complete for the file-backed live facility catalog; twelve facility

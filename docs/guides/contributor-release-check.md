@@ -20,3 +20,7 @@ deployment. The same command runs in `.github/workflows/ci.yml`.
 When changing the package version, update the lockfile, README, changelog, and
 `SPEC.md` according to [`docs/reference/versioning-policy.md`](../reference/versioning-policy.md),
 then run this check before opening a pull request.
+
+This metadata check is one part of the broader source-checkout decision. For
+the required checkout contents, runtime support boundaries, and the complete
+read-only validation sequence, see [Reproducible Distribution](reproducible-distribution.md).
