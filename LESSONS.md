@@ -2654,3 +2654,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep host schema/route, adapter, renderer, and failure behavior in
   one ledger-backed focused test, and distinguish this handoff from full
   campaign history/debrief, durable save/load/replay, and human-quality gates.
+
+## Phase 23: A source checkout is a distribution decision, not a package claim
+
+- Context: Phase 8.3 needed a reproducible distribution boundary while the
+  project has no published binary or archive format.
+- Risk: Calling the repository a release package without naming its exact
+  inputs, build prerequisites, support evidence, and deferred publication
+  paths could make a clean checkout appear more portable or certified than it
+  is.
+- Resolution: Define the exact Git source checkout as the v0.13.10
+  distribution unit, preserve the existing read-only checks, distinguish
+  first-build dependency access from runtime offline behavior, and state
+  current browser/device limits explicitly.
+- Prevention: Treat archives, binaries, installers, registry publication,
+  broader certification, and human-quality evidence as separate release
+  decisions rather than implicit consequences of a passing source checkout.

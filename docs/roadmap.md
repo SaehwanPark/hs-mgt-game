@@ -1101,6 +1101,22 @@ Include:
 - example run;
 - and machine-readable run exports.
 
+### Phase 8.3 source-checkout decision (v0.13.10)
+
+Status: Complete for the v0.13.10 source-checkout contract. The repository is
+the canonical reproducibility package; no prebuilt binary, archive, installer,
+registry publication, or hosted deployment is implied.
+
+The distribution guide identifies the required tracked source, scenario, GUI,
+asset, test, replay-fixture, script, and documentation inputs. It also records
+the stable Rust/Cargo build path, the first-build dependency-network caveat,
+the loopback GUI boundary, the current Chromium desktop evidence, and the
+existing read-only validation commands.
+
+Not yet done: instructor-facing documentation, broader compatibility and
+low-power-device evidence, package publication, and human accessibility,
+usability, learning, or classroom-effectiveness evaluation.
+
 ## 8.4 Early Adoption
 
 Prepare the release for educational or expert review after the agent-playtest
@@ -1252,8 +1268,9 @@ At each phase gate, explicitly decide what will not be built next.
 2. Promote no runtime expansion until a playtest, scenario-authoring, debrief,
    domain-QA, audience-access, or release finding names a bounded unmet need.
 3. If initial-release work resumes, prioritize the remaining Phase 8 gaps:
-   explicit compatibility/support expectations, an instructor-facing guide,
-   and a reproducible distribution decision.
+   explicit compatibility/support expectations beyond the current evidence and
+   an instructor-facing guide; the source-checkout distribution decision is
+   documented at v0.13.10.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

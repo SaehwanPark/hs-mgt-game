@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.13.9.
+The current public milestone is a playable Rust prototype at v0.13.10.
 
 Key capabilities include:
 - **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.
@@ -94,6 +94,9 @@ static demo and does not start a live scenario.
 See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete first
 month, audio controls, alternate ports, session lifetime, and troubleshooting.
 
+See [Reproducible Distribution](docs/guides/reproducible-distribution.md) for
+the canonical source-checkout contents, support boundaries, and release checks.
+
 ## Competitive Command Examples
 
 Competitive mode uses short Stata-like commands. Commands can be chained with
@@ -161,6 +164,8 @@ cargo test
 
 The release metadata command is documented in
 [`docs/guides/contributor-release-check.md`](docs/guides/contributor-release-check.md).
+The complete source-checkout distribution decision is documented in
+[`docs/guides/reproducible-distribution.md`](docs/guides/reproducible-distribution.md).
 
 Run the local MCP server used for bounded agent playtesting:
 

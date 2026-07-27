@@ -1172,3 +1172,54 @@ Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`,
 `fp-developer`, and exactly one `code-reviewer` handoff. Use presentation
 contract and presentation-domain QA because this slice governs actor-visible
 history without changing simulation authority.
+
+---
+
+# Request Summary — Phase 8.3 reproducible distribution v0.13.10
+
+## Scope
+
+Define the canonical reproducible distribution path as an exact Git
+source-checkout built with stable Rust/Cargo. Document required tracked inputs,
+CLI and loopback-GUI support boundaries, first-build dependency access, and
+the existing read-only validation commands.
+
+## Non-goals
+
+- Do not add runtime, simulation, GUI, MCP, history, replay, asset, or CI
+  behavior.
+- Do not add prebuilt binaries, archives, installers, containers, registry
+  publication, release tags, hosted deployment, or external runtime assets.
+- Do not claim Firefox/WebKit certification, low-power-device support, human
+  accessibility, usability, learning, or classroom effectiveness.
+
+## Sources and authorization
+
+- `docs/roadmap.md`, Phase 8 initial-release preparation.
+- `README.md`, `docs/guides/contributor-release-check.md`,
+  `assets/offline-policy.json`, and `assets/browser-compatibility-policy.json`.
+- User-authorized continuation of the roadmap loop, bounded to the v0.13.10
+  release/documentation slice.
+
+## Expected files
+
+- `docs/guides/reproducible-distribution.md` and contributor documentation
+  links.
+- `Cargo.toml`, `Cargo.lock`, `README.md`, `CHANGELOG.md`, `SPEC.md`,
+  `docs/roadmap.md`, and `LESSONS.md`.
+- This request summary, an implementation plan, and the final handoff under
+  `_workspace/`.
+
+## Validation target
+
+Version metadata, documentation links, existing release/asset/offline/browser
+audits, Python tests, formatting, Clippy, and Rust tests pass without tracked
+generated-file changes. The PR must merge to `main`, and its temporary branch
+must be absent locally and remotely after verified merge.
+
+## Generic skills
+
+Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`, and
+the independent `code-reviewer` loop. No simulation, mechanism, or
+presentation-contract skill is required because this slice changes no runtime
+or actor-visible behavior.
