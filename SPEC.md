@@ -6122,6 +6122,39 @@ Deferred / Non-Goals:
   dependency, true-state view, counterfactual, educational claim, or human
   approval was added.
 
+### Visual/audio Phase 12 current campaign presentation reuse matrix (v0.13.22)
+
+Status: Complete for current reusable-asset decisions only; direct campaign
+audio mapping, campaign-specific presentation, human review, and educational
+usability remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-campaign-reuse-matrix.json` for exact reuse
+  decisions across shared identity, marker, status, facility-fallback, UI-cue,
+  stabilization-audio, and affiliation-audio primitives.
+- Added `tests/test_phase12_campaign_reuse_matrix.py` to require catalog IDs,
+  source markers, approved/provenance metadata, generated-audio null release
+  paths, written equivalents, and explicit campaign asset boundaries.
+- Checked only the Phase 12.1 and 12.2 reusable-assets items and synchronized
+  the presentation roadmap, canonical docs, lessons, version metadata,
+  generated credits, and additive request/contract/QA/handoff records; no
+  runtime, asset, audio, or authority behavior changed.
+
+Not Yet Done:
+
+- Direct stabilization audio-state mapping, tutorial and pressure taxonomy,
+  partner/stage-specific treatment, affiliation audio quality, replay/debrief
+  updates, and Phase 12.3 instructor visualization remain open.
+
+Deferred / Non-Goals:
+
+- No map, facility, portrait, stage-art, or file-backed audio asset was
+  created or promoted; reuse eligibility is not quality or campaign approval.
+- No campaign content, simulation transition, screenshot runner, persistence,
+  true-state view, counterfactual, educational claim, or human review was
+  added.
+
 ## Future
 
 ### Visual and audio experience upgrade

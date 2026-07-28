@@ -2352,3 +2352,33 @@ remain the relevant technical gates; no new asset was introduced.
 written-equivalent fields, supporting evidence paths, and the host-adapter
 boundary. Tutorial, pressure-state, stage-specific art/audio, replay/debrief,
 instructor, human comprehension, and educational usability remain open.
+
+# Presentation Contract — Phase 12 campaign presentation reuse matrix v0.13.22
+
+## Contract status
+
+Complete for current reusable-asset decisions only. This is not direct
+campaign audio mapping, campaign-specific art/stage completion, quality review,
+human evaluation, or educational usability approval.
+
+## Source and visible behavior
+
+- The matrix binds both campaigns to exact existing visual catalog IDs,
+  generated-audio IDs, the facility fallback registry, and written-equivalent
+  metadata.
+- Shared identity, marker, status, fallback, and UI primitives are eligible
+  for reuse; campaign audio rows are eligible but explicitly not direct
+  mappings into the current campaign-coverage envelope.
+
+## Fallback, authority, and provenance
+
+No catalog entry, asset bytes, runtime field, or authority path changes. The
+browser remains optional-audio and host-projection driven; missing visual or
+audio primitives retain written/fallback presentation.
+
+## Verification and limits
+
+`tests/test_phase12_campaign_reuse_matrix.py` checks IDs, source markers,
+approval/provenance, generated-audio null release paths, written equivalents,
+and the no-new-asset boundary. Direct mapping, quality, partner/stage art,
+replay/debrief, instructor, human, and educational gates remain open.

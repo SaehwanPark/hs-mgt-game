@@ -1,0 +1,122 @@
+{
+  "schema_version": "campaign-presentation-reuse-v1",
+  "status": "complete-current-reuse-matrix",
+  "campaigns": ["stabilization-v1", "regional-affiliation-v1"],
+  "source_contract": {
+    "inventory": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "visual_catalog": "gui/visual-catalog.json: visual-catalog-v1",
+    "audio_catalog": "gui/audio-catalog.json: audio-registry-v1",
+    "facility_catalog": "gui/facility-components.mjs: FACILITY_COMPONENTS",
+    "provenance_check": "scripts/validate_assets.py: asset registry check"
+  },
+  "shared_reuse": [
+    {
+      "id": "identity-language",
+      "reuse_decision": "current-contract-eligible",
+      "catalog_sources": [
+        {
+          "path": "gui/visual-catalog.json",
+          "group": "identities",
+          "ids": ["riverside", "generic-institution"]
+        }
+      ],
+      "visible_equivalent": "Identity label, symbol, and text fallback remain available."
+    },
+    {
+      "id": "semantic-markers",
+      "reuse_decision": "current-contract-eligible",
+      "catalog_sources": [
+        {
+          "path": "gui/visual-catalog.json",
+          "group": "markers",
+          "ids": ["facility", "demand", "capacity", "project", "staffing", "payer-policy", "timeline", "generic"]
+        }
+      ],
+      "visible_equivalent": "Marker label, source/equivalent text, and non-color distinction remain available."
+    },
+    {
+      "id": "status-language",
+      "reuse_decision": "current-contract-eligible",
+      "catalog_sources": [
+        {
+          "path": "gui/visual-catalog.json",
+          "group": "statuses",
+          "ids": ["stable", "watch", "constrained", "critical", "improving", "uncertain", "delayed", "revised", "reported"]
+        }
+      ],
+      "visible_equivalent": "Status label, symbol, and written state remain available without color-only meaning."
+    },
+    {
+      "id": "facility-fallback-boundary",
+      "reuse_decision": "fallback-only",
+      "catalog_sources": [
+        {
+          "path": "gui/facility-components.mjs",
+          "marker": "FACILITY_COMPONENTS",
+          "ids": ["generic-facility"]
+        }
+      ],
+      "visible_equivalent": "Generic facility label and marker remain available if a future campaign surface lacks a specific component."
+    },
+    {
+      "id": "ui-feedback-cues",
+      "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+      "catalog_sources": [
+        {
+          "path": "gui/audio-catalog.json",
+          "group": "entries",
+          "ids": ["ui.action-confirm", "ui.action-reject", "ui.submit", "ui.report-received", "ui.advance-month"]
+        }
+      ],
+      "visible_equivalent": "Audio remains optional; action and report meaning stays visible in text and control state."
+    }
+  ],
+  "campaign_reuse": {
+    "stabilization-v1": {
+      "current_surface": "Tutorial-oriented executive stabilization uses shared identity, marker, status, fallback, and host-authored debrief presentation.",
+      "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],
+      "audio_reuse": {
+        "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+        "catalog_sources": [
+          {
+            "path": "gui/audio-catalog.json",
+            "group": "entries",
+            "ids": ["stable_operations", "pressure", "regulatory_scrutiny", "debrief", "ambience.executive-office", "ambience.press-policy-event"]
+          }
+        ],
+        "visible_equivalent": "Written stage, status, and debrief content remains complete when optional audio is muted or unavailable."
+      },
+      "new_asset_need": "none-required-by-current-abstract-contract",
+      "open_work": ["campaign-specific tutorial presentation", "new pressure-state taxonomy", "direct campaign audio-state mapping", "audio/content quality review"]
+    },
+    "regional-affiliation-v1": {
+      "current_surface": "Stage/partner/commitment/review/integration signals use shared identity, marker, status, fallback, and host-authored debrief presentation.",
+      "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],
+      "audio_reuse": {
+        "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+        "catalog_sources": [
+          {
+            "path": "gui/audio-catalog.json",
+            "group": "entries",
+            "ids": ["affiliation_negotiation", "debrief", "ambience.boardroom", "ambience.regional-city-bed"]
+          }
+        ],
+        "visible_equivalent": "Written stage, commitment, review, integration, and debrief content remains complete when optional audio is muted or unavailable."
+      },
+      "new_asset_need": "none-required-by-current-stage-contract",
+      "open_work": ["partner-specific identity treatment", "stage-specific visual treatment", "affiliation audio motif quality", "full-stage replay/debrief review"]
+    }
+  },
+  "limits": [
+    "Reuse eligibility does not prove that every listed cue or ambience is directly mapped into the campaign-coverage envelope.",
+    "No new map, facility, portrait, stage-art, or file-backed audio asset is created or promoted by this matrix.",
+    "Existing technical accessibility, provenance, and written-equivalent checks do not establish human comprehension, audio usefulness, or visual quality.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."
+  ],
+  "evidence": [
+    "Shared visual primitives are cataloged with exact IDs and written-equivalent metadata.",
+    "Existing generated audio entries are cataloged as optional eligible cues or ambience without file-backed release promotion.",
+    "Each campaign records reuse sets, current asset need, and open work separately."
+  ],
+  "test_source": "tests/test_phase12_campaign_reuse_matrix.py"
+}

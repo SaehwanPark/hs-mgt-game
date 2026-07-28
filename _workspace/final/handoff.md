@@ -1002,3 +1002,25 @@ and educational work remain open.
 - Working branch: `feat/campaign-presentation-inventory-v0.13.21`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 campaign presentation reuse matrix v0.13.22
+
+## Result
+
+Recorded exact reusable visual, generated-audio, facility-fallback, UI-cue,
+and written-equivalent decisions for stabilization and regional affiliation.
+
+## Evidence boundary
+
+The matrix and parity test pass for current catalog eligibility. Generated
+audio remains optional and eligible-but-not-directly-mapped; no new asset was
+created or promoted. Direct campaign mapping, partner/stage treatment, quality,
+human, and educational gates remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.21.
+- Working branch: `feat/campaign-reuse-matrix-v0.13.22`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

@@ -1279,7 +1279,8 @@ At each phase gate, explicitly decide what will not be built next.
    evidence at v0.13.17, and current portrait-preview inventory integrity at
    v0.13.18, and current portrait role/source/equivalent metadata gates at
    v0.13.19, current Phase 13.1 technical-release evidence at v0.13.20, and
-   current Phase 12 campaign-specific presentation inventory at v0.13.21.
+   current Phase 12 campaign-specific presentation inventory at v0.13.21 and
+   current Phase 12 reusable-asset matrix at v0.13.22.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor
