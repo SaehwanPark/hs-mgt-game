@@ -2976,6 +2976,37 @@ and future provenance review remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 campaign map/facility asset-need decision v0.13.23
+
+## Status
+
+`pass` for bounded current map/facility-needs QA only. No placement, visual
+quality, screenshot, human, or future campaign-art approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: both campaign decisions resolve to the current typed inventory and
+  reuse matrix with no new map/facility requirement.
+- Pass: `generic-facility` and written equivalents remain explicit fallback
+  boundaries, with future geography/placement/causal-legibility triggers.
+- Pass: no asset, runtime, authority, screenshot, or quality claim is added.
+
+## Required fixes
+
+None for this bounded decision record.
+
+## Evidence limits
+
+Asset placement/use, visual quality, screenshots, device/browser behavior,
+campaign art, audio, replay/debrief, instructor views, human comprehension,
+and educational usability remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_campaign_asset_need_decision` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 campaign presentation reuse matrix v0.13.22
 
 ## Status

@@ -2855,3 +2855,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   audio rows per campaign; close only the reusable-assets checklist items.
 - Prevention: Keep reuse eligibility, direct runtime mapping, quality review,
   and human evaluation as separate gates in every asset matrix.
+
+## Phase 33: Record asset absence as a decision with reopen triggers
+
+- Context: The current stabilization and affiliation contracts have no visible
+  geography or facility-placement requirement, but the roadmap still had an
+  open “map or facility needs identified” item.
+- Risk: Leaving the item open obscured a useful scope decision; checking it
+  without a reopen condition could be misread as proof that future campaign
+  art, placement, quality, or screenshots will never be needed.
+- Resolution: Add a dedicated decision record joining both campaign surfaces
+  to the existing inventory, reuse matrix, facility fallback, and fallback
+  tests, with explicit triggers for future geography, placement, or causal-
+  legibility requirements.
+- Prevention: Treat “no new asset currently required” as a bounded decision,
+  not a permanent asset or quality conclusion.

@@ -783,6 +783,13 @@ eligible-but-not-directly-mapped, preserving the existing written-equivalent
 and optional-audio boundary. No catalog entry, asset bytes, runtime field, or
 authority path changes.
 
+The v0.13.23 Phase 12 decision record formalizes the current map/facility
+boundary for both campaigns: no new map or facility asset is required by the
+current abstract/stage contracts, while `generic-facility` remains an explicit
+fallback and future geography/placement/causal-legibility triggers can reopen
+the decision. This is evidence about current need, not placement, quality,
+screenshots, or human review; no runtime or asset boundary changes.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
