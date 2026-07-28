@@ -237,6 +237,40 @@
       "Rust session tests cover cloned host restore and aligned replay metadata without a new transition."
     ]
   },
+  "replay_view_coverage": {
+    "status": "complete-live-host-projection",
+    "schema": "competitive-replay-v1",
+    "host_source": "src/mcp/session.rs: get_replay",
+    "mcp_source": "src/mcp/server.rs: get_replay",
+    "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/replay",
+    "adapter_source": "gui/host-adapter.mjs: getReplay",
+    "browser_source": "gui/app.mjs: validateReplayEnvelope + renderReplayEnvelope + createReplayClient",
+    "test_source": "tests/test_phase11_live_replay.py",
+    "metadata_contract": [
+      "session_id",
+      "campaign",
+      "seed",
+      "transition_count",
+      "latest_state_hash"
+    ],
+    "row_contract": ["turn", "state_hash"],
+    "continuity_behavior": [
+      "Host returns immutable visible transition summaries without entering a new transition.",
+      "Replay metadata aligns seed, transition count, latest state hash, and visible rows.",
+      "Browser renders the projection through the existing text-first history surface.",
+      "Missing adapter, failed read, or malformed replay preserves the last valid view and exposes a recoverable error."
+    ],
+    "boundary": "Host/core owns replay metadata, immutable history, and state hashes; the browser validates and renders a read-only projection without playback, regeneration, or client authority.",
+    "limits": [
+      "No replay playback or regenerated simulation trace is established.",
+      "No durable replay persistence or browser-authored hash is established.",
+      "No screenshot, accessibility, usability, or human-learning claim is made."
+    ],
+    "evidence": [
+      "The live replay test covers schema/operation-independent metadata validation, empty and committed views, adapter fallback, rendering, failure preservation, route/source markers, syntax, and authority exclusions.",
+      "Rust session, MCP, and transport tests cover immutable history alignment and the read-only replay route."
+    ]
+  },
   "music_state_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_music_state_id",

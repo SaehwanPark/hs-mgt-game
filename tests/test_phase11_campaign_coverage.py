@@ -14,6 +14,7 @@ RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
 CHECKPOINT_TEST = ROOT / "tests" / "test_phase11_live_checkpoint.py"
+REPLAY_TEST = ROOT / "tests" / "test_phase11_live_replay.py"
 MCP_SERVER = ROOT / "src" / "mcp" / "server.rs"
 
 
@@ -220,7 +221,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -433,6 +434,37 @@ console.log(JSON.stringify(resolved));
     ):
       self.assertIn(boundary, checkpoint_test + mcp_server + self.session)
 
+  def test_replay_view_coverage_matches_the_live_host_projection(self):
+    coverage = self.ledger["replay_view_coverage"]
+    replay_test = REPLAY_TEST.read_text(encoding="utf-8")
+    mcp_server = MCP_SERVER.read_text(encoding="utf-8")
+    self.assertEqual(coverage["status"], "complete-live-host-projection")
+    self.assertEqual(coverage["schema"], "competitive-replay-v1")
+    self.assertEqual(
+      coverage["metadata_contract"],
+      ["session_id", "campaign", "seed", "transition_count", "latest_state_hash"],
+    )
+    self.assertEqual(coverage["row_contract"], ["turn", "state_hash"])
+    for marker in (
+      "competitive-replay-v1",
+      "ReplayEnvelope",
+      "get_replay",
+      '"/api/v1/sessions/{session_id}/replay"',
+      "getReplay",
+      "createReplayClient",
+      "validateReplayEnvelope",
+      "renderReplayEnvelope",
+      "replay_adapter_missing",
+      "replay_adapter_error",
+    ):
+      self.assertIn(marker, replay_test + self.app + self.adapter + self.server + mcp_server + self.session)
+    for boundary in (
+      "test_live_replay_read_does_not_expose_simulation_authority",
+      "self.get_history(GetHistoryRequest",
+      'self.assertNotIn("submit_turn", replay_handler)',
+    ):
+      self.assertIn(boundary, replay_test + mcp_server + self.session)
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -533,7 +565,7 @@ console.log(JSON.stringify(resolved));
       "History view updated.": "x",
       "Current competitive terminal debrief view covered. Evidence:": "x",
       "Current in-memory host checkpoint visual continuity covered. Evidence:": "x",
-      "Replay visual continuity tested.": " ",
+      "Current live replay visual continuity covered. Evidence:": "x",
       "Unknown content fallbacks tested.": "x",
       "Asset registry coverage is 100%.": " ",
       "Full campaign screenshot suite passes.": " ",

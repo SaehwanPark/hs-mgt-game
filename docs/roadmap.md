@@ -1273,7 +1273,8 @@ At each phase gate, explicitly decide what will not be built next.
    documented at v0.13.10, the current low-power GUI proxy evidence at
    v0.13.11, current operational-overlay coverage at v0.13.12, and current
    terminal debrief coverage at v0.13.13, and current in-memory checkpoint
-   visual-continuity coverage at v0.13.14.
+   visual-continuity coverage at v0.13.14, and current live replay
+   visual-continuity coverage at v0.13.15.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

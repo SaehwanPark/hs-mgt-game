@@ -1364,6 +1364,40 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 11.1 replay visual continuity v0.13.15
+
+## Scope
+
+Continue the roadmap with the next unmet Phase 11.1 item: replay visual
+continuity. Formalize the existing live competitive replay metadata/history
+projection as a bounded presentation contract.
+
+## Target slice
+
+- Record the `competitive-replay-v1` host/MCP envelope, loopback route, adapter,
+  browser validation/renderer, immutable visible rows, and aligned metadata.
+- Verify empty and committed views, hash/count alignment, and last-valid-view
+  preservation on missing or failing reads through the existing replay test.
+- Close only current live replay visual continuity; playback, regeneration,
+  durable persistence, screenshots, and human claims remain open.
+
+## Sources and expected files
+
+- `src/mcp/session.rs`, `src/mcp/server.rs`, `src/gui_server.rs`,
+  `gui/host-adapter.mjs`, and `gui/app.mjs` existing replay handoff.
+- `tests/test_phase11_live_replay.py`,
+  `tests/test_phase11_campaign_coverage.py`, and the Phase 11.1 ledger.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add playback controls, replay regeneration, durable serialization,
+  browser storage, new runtime fields, screenshots, assets, audio, browser
+  dependencies, telemetry, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Visual/audio Phase 11.1 checkpoint visual continuity v0.13.14
 
 ## Scope

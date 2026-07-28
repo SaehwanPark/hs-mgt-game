@@ -5917,6 +5917,35 @@ Deferred / Non-Goals:
   tooling, new simulation transition, asset/audio byte, or client-owned
   authority was added.
 
+### Visual/audio Phase 11.1 live replay visual continuity (v0.13.15)
+
+Status: Complete for the current live competitive replay view; playback,
+regeneration, durable persistence, screenshot, and human-learning evidence
+remain separately gated.
+
+Done:
+
+- Added `replay_view_coverage` for the `competitive-replay-v1` host/MCP
+  envelope, loopback route, adapter, browser validator/renderer, immutable
+  visible-row contract, aligned metadata, and failure-preserving behavior.
+- Linked the ledger to focused replay tests covering empty and committed views,
+  state-hash/count alignment, missing/throwing adapters, last-valid-view
+  preservation, route/source markers, syntax, and the unchanged read-only
+  authority boundary; existing Rust/MCP/transport tests cover immutable history.
+- Updated the Phase 11.1 checklist and synchronized patch-version and
+  presentation handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Replay playback/regeneration, durable persistence, screenshots, accessibility,
+  usability, audio usefulness, and human learning.
+
+Deferred / Non-Goals:
+
+- No playback control, regenerated simulation trace, durable serialization,
+  screenshot tooling, new simulation transition, asset/audio byte, or
+  client-owned replay authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade
