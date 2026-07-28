@@ -1,0 +1,56 @@
+{
+  "schema_version": "stabilization-debrief-presentation-v1",
+  "status": "complete-current-cli-host-debrief-contract",
+  "campaign": "stabilization-v1",
+  "scope": "current deterministic stabilization debrief presentation and shared host/browser boundary",
+  "source_contract": {
+    "cli_surface": "src/cli/display/interactive.rs: Educational debrief",
+    "debrief_report": "src/debrief/report.rs: Run-level tradeoff:",
+    "campaign_coverage": "src/mcp/campaign_coverage.rs: debrief: if done",
+    "end_session": "src/mcp/session.rs: debrief: educational_debrief(&session.history)",
+    "campaign_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "end_session_renderer": "gui/app.mjs: renderEndSessionEnvelope",
+    "browser_contract": "gui/README.md: text-first history/debrief view",
+    "optional_debrief_audio": "gui/README.md: Optional debrief music is atmospheric only"
+  },
+  "debrief_contract": {
+    "completion_gate": "Host end-session or completed campaign coverage only; incomplete stabilization coverage has no debrief lines.",
+    "sections": [
+      "run-level-tradeoff",
+      "actor-rationales-at-decision-time",
+      "attributed-mechanisms-to-inspect",
+      "reflection-prompt",
+      "decision-quality-versus-outcome-quality",
+      "observation-revision-note-when-present"
+    ],
+    "instructor_appendix": {
+      "status": "existing-cli-appendix-not-new-surface",
+      "source_marker": "=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===",
+      "boundary": "The current CLI report distinguishes player-observed reported metrics from true underlying states; this record does not add or promote a new instructor view."
+    },
+    "ownership": "Host/core debrief functions consume committed history; browser renderers display supplied lines and cannot author outcomes.",
+    "history_replay_alignment": "End-session envelopes align immutable transition summaries, replay transition count, and latest state hash before rendering.",
+    "written_equivalent": "Debrief lines, history, hashes, source-linked effects, and controls remain readable without audio or motion."
+  },
+  "presentation_surface": {
+    "current_cli": "The stabilization interactive result prints replay-match status, run seed/ruleset, and the educational debrief after the five-turn history.",
+    "shared_gui": "The campaign-coverage and end-session renderers can display supplied stabilization debrief lines alongside committed history and replay metadata.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization debrief route is claimed.",
+    "audio": "Optional debrief music uses the existing debrief state; written history, hashes, and debrief text remain complete when muted or unavailable.",
+    "new_asset_need": "none-required-by-current-cli-and-shared-debrief-contract"
+  },
+  "open_work": [
+    "browser-native stabilization debrief integration",
+    "visual stabilization debrief quality and replay review",
+    "direct stabilization debrief audio integration and motif quality",
+    "instructor-surface decision and human educational usability review"
+  ],
+  "limits": [
+    "This record covers current deterministic CLI/host/shared-renderer evidence; it does not establish a complete visual stabilization debrief.",
+    "The existing CLI instructor appendix is recorded as a boundary, not a new instructor authority path or a public true-state view.",
+    "No new debrief copy, route, runtime field, persistence, replay regeneration, asset, audio file, screenshot, or authority path is created or promoted.",
+    "Existing technical debrief, accessibility, audio, and provenance checks do not establish human comprehension, educational effectiveness, or policy validity.",
+    "No counterfactual, distributional visualization, hidden-state disclosure beyond the existing CLI appendix, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_stabilization_debrief_presentation.py"
+}

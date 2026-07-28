@@ -811,6 +811,13 @@ visible-only triggers. The stabilization CLI has no playback surface and the
 live GUI launcher remains competitive-regional-v1 only; direct campaign audio
 integration, new IDs/assets, and human quality review remain open.
 
+The v0.13.27 Phase 12 slice records the existing stabilization debrief
+contract: deterministic CLI tradeoffs, actor rationales, attributed effects,
+revision notes, host-authored history/replay alignment, and shared browser
+renderers. The existing CLI instructor appendix is preserved as a boundary;
+the live GUI remains competitive-regional-v1 only, and no new debrief route,
+runtime field, authority path, or educational claim is introduced.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

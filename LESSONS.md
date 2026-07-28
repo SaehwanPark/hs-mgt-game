@@ -2907,3 +2907,13 @@ mapping ledger now joins those IDs to visible trigger sources, audio-direction
 prototypes, written equivalents, and the current CLI/live-GUI boundary. Keep
 direct campaign-envelope audio and human quality review open until a real
 browser surface and audience evidence exist.
+
+## Phase 37: Separate current debrief rendering from educational validation (2026-07-28)
+
+The stabilization path already emits deterministic tradeoff, rationale,
+effect, revision, and replay-aligned debrief lines, and the shared browser
+renderers can display host-supplied debrief text. That does not establish a
+browser-native stabilization debrief, instructor-surface decision, or human
+educational result. Record the existing CLI instructor appendix explicitly so
+future visual work does not silently promote it into a new public true-state
+view.
