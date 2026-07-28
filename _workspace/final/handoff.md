@@ -714,8 +714,12 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - Local browser smoke: shell reload samples 49/52/50/52/50 ms; 818 DOM
   elements; four SVG elements; 367 ms host start; 259 ms adapter probe;
   written and audio-off fallbacks present.
-- Focused checker/tests pass; full Python/Rust/release checks remain required
-  before PR merge.
+- Focused checker/tests pass; the full Python suite (653 tests), serialized
+  Rust suite (339 library tests plus integration/golden/scenario/doc tests),
+  format, Clippy, release, documentation, asset, offline, browser-policy, and
+  visual/audio contract checks pass. The normal parallel Rust run still has the
+  known shared-persistence race documented in the PR; the targeted and
+  serialized runs pass.
 
 ## Handoff and merge gate
 
