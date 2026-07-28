@@ -1932,3 +1932,36 @@ promoting an unverified portrait preview or claiming browser-native coverage.
   legal, educational, or public-release claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12 regional-affiliation negotiation-stage visualization v0.13.31
+
+## Scope
+
+Record current `NegotiateCommitments` stage presentation for
+`regional-affiliation-v1` without claiming a browser-native affiliation route,
+stage-specific art/audio, or hidden-state access.
+
+## Target slice
+
+- Join the host-owned stage/process label, commitment decision fields, parameter
+  bounds, visible commitment values, stakeholder signals, and written
+  uncertainty.
+- Record the shared process/decision renderer, optional affiliation-negotiation
+  audio eligibility, no-new-asset decision, and current live-GUI boundary.
+
+## Sources and expected files
+
+- `src/model/affiliation.rs`, `src/mcp/campaign_coverage.rs`,
+  `gui/app.mjs`, `gui/music-stem-contract.mjs`, and existing campaign
+  presentation/asset-need ledgers and tests.
+- New negotiation-stage ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add stage art, maps, facilities, portraits, audio files, routes,
+  runtime fields, persistence, screenshots, instructor views, authority paths,
+  hidden thresholds, true responses, human review, or public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

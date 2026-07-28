@@ -6421,6 +6421,42 @@ Deferred / Non-Goals:
   intent, agreement probability, true condition, causal outcome, or future
   commitment is introduced.
 
+### Visual/audio Phase 12 current regional-affiliation negotiation-stage visualization (v0.13.31)
+
+Status: Complete for current `NegotiateCommitments` presentation evidence only;
+browser-native affiliation integration, stage-specific art/audio,
+commitment/review/integration completion, human quality/accessibility/legal/
+educational review, and public release remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-negotiation-stage.json`
+  for the typed stage/process projection, host-owned commitment decision
+  fields, parameter bounds, visible uncertainty, shared process/decision
+  renderers, and optional affiliation-negotiation audio eligibility.
+- Added `tests/test_phase12_regional_affiliation_negotiation_stage.py` to check
+  source markers, stage/process identity, commitment fields, canonical-command
+  and written-fallback boundaries, competitive-only live GUI scope, optional
+  audio, and the no-new-asset decision.
+- Checked only current negotiation-stage evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive
+  request/contract/QA/handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native affiliation presentation, stage-specific art/audio,
+  commitment/review/integration state visualization, stage transitions,
+  replay/debrief updates, and human quality, accessibility, legal,
+  educational, and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No hidden partner intent, commitment threshold, private review state, true
+  response, causal outcome, future agreement probability, asset, route,
+  persistence, instructor view, or authority path is introduced.
+- Optional audio remains a visible-only cue with complete written meaning and
+  cannot establish agreement, success, severity, or outcome certainty.
+
 ## Future
 
 ### Visual and audio experience upgrade

@@ -3005,7 +3005,12 @@ remains open.
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
   `tests/test_phase12_campaign_reuse_matrix.py`; partner-specific treatment,
   stage visualization, and audio quality remain open.
-- [ ] Negotiation-stage visualization completed.
+- [x] Current regional-affiliation negotiation-stage visualization recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-negotiation-stage.json`
+  and `tests/test_phase12_regional_affiliation_negotiation_stage.py`; the
+  host-owned stage/process, commitment decision, written uncertainty, and
+  optional-audio boundary are covered while browser integration and stage art
+  remain open.
 - [ ] Commitment and review states completed.
 - [ ] Integration-state visualization completed.
 - [ ] Affiliation audio motif completed.
@@ -3189,6 +3194,33 @@ Deferred / Non-Goals:
   is not evidence of resemblance, quality, legal clearance, or partner truth.
 - Host-reported identity does not expose private intent, agreement probability,
   true condition, causal outcome, or future commitment.
+
+### v0.13.31 current regional-affiliation negotiation-stage visualization
+
+- `docs/evaluation/phase12-regional-affiliation-negotiation-stage.json`
+  records the typed `NegotiateCommitments` stage, active institutional-stage
+  process, host-owned commitment decision fields, parameter bounds, visible
+  uncertainty, shared process/decision renderers, and optional
+  `affiliation_negotiation` audio eligibility.
+- `tests/test_phase12_regional_affiliation_negotiation_stage.py` checks the
+  source markers, stage/process identity, commitment parameter fields, shared
+  renderer and canonical-command boundaries, competitive-only live GUI limit,
+  optional-audio fallback, and no-new-asset decision.
+- This closes only current negotiation-stage evidence. It does not complete
+  browser-native affiliation integration, stage-specific art/audio, commitment
+  and review states, integration-state visualization, replay/debrief updates,
+  or human quality, accessibility, legal, educational, and public-release
+  review.
+
+Deferred / Non-Goals:
+
+- No stage art, map, facility, portrait, audio file, route, runtime field,
+  registry entry, screenshot, persistence, instructor view, or authority path
+  was added or promoted.
+- No hidden partner intent, commitment threshold, private review state, true
+  response, causal outcome, or future agreement probability is exposed.
+- Optional audio remains a visible presentation cue and cannot establish
+  agreement, success, severity, or outcome certainty.
 
 ### Exit criteria
 

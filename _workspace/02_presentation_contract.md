@@ -2625,3 +2625,38 @@ private intent, true condition, or future commitment is exposed.
 markers, host fields, fallback, portrait status, shared/live GUI boundaries,
 and the no-new-asset decision. Partner-specific visual/audio integration and
 human review remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation negotiation-stage visualization v0.13.31
+
+## Contract status
+
+Complete for current `NegotiateCommitments` presentation evidence only.
+Browser-native affiliation integration, stage-specific art/audio,
+commitment/review/integration completion, and human quality, accessibility,
+legal, educational, and public-release review remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the typed stage, active institutional-stage process, and
+  host-owned `set-commitments` decision with community, workforce, and
+  continuity fields and written uncertainty.
+- The shared renderer can display supplied process and decision fields and
+  preserves canonical-command submission through the host boundary.
+- Visible commitment values and reported partner/stakeholder signals remain
+  host-projected; hidden intent, thresholds, review state, and true responses
+  are not presented.
+
+## Fallback, authority, and provenance
+
+Written stage, process, parameter, uncertainty, validation, and status text
+remains complete. The reusable `affiliation_negotiation` music state is
+optional and visible-trigger based. The live GUI remains competitive-regional-
+v1 only; no new asset, route, runtime authority path, or registry entry is
+introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_negotiation_stage.py` checks source
+markers, stage/process identity, commitment fields, renderer and canonical
+command boundaries, live scope, optional audio, and the no-new-asset decision.
+Stage-specific art/audio, replay/debrief, and human review remain open.

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.31] - 2026-07-28
+
+- Recorded the current regional-affiliation `NegotiateCommitments` stage
+  presentation contract across the host-owned process label, commitment
+  decision fields, visible uncertainty, shared renderers, and optional
+  affiliation-negotiation audio.
+- Closed only current negotiation-stage evidence; browser-native integration,
+  stage art/audio, hidden-state boundaries, human quality, educational review,
+  and public-release gates remain open, with no runtime behavior changed.
+
 ## [0.13.30] - 2026-07-28
 
 - Recorded current regional-affiliation partner identity treatment across

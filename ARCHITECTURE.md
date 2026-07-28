@@ -838,6 +838,13 @@ preview. Shared campaign coverage can render supplied fields while the live
 GUI remains competitive-regional-v1 only; no partner asset, audio identity, or
 authority path is added.
 
+The v0.13.31 Phase 12 slice records the current regional-affiliation
+`NegotiateCommitments` presentation boundary: host-owned stage/process and
+commitment decision fields, visible uncertainty, shared process/decision
+renderers, and optional affiliation-negotiation audio. It does not complete a
+browser-native affiliation route, add stage art/audio, expose hidden state, or
+change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
