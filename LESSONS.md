@@ -3013,3 +3013,12 @@ Existing CLI/typed debrief details can support post-run review without becoming
 player-visible controls or a new browser true-state route. Record each
 campaign’s observation/detail boundary first, then keep true-state visual
 language, export, instructor design, and educational review as separate work.
+
+## Phase 49: Make true-state language explicit before visualizing it (2026-07-28)
+
+The current debrief already separates `Observed`, `True Prior`, `True Outcome`,
+and instructor-reveal text, but those labels are a textual post-run boundary,
+not a complete browser visual language. Source-link the distinction and keep
+browser-native visual design, export, causal/counterfactual/distributional
+views, accessibility, and human educational review open until each has its own
+evidence and authority contract.

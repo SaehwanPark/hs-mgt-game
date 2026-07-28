@@ -6699,6 +6699,40 @@ Deferred / Non-Goals:
 - Post-run CLI/typed detail is not a live player observation, browser control,
   legal conclusion, calibrated forecast, or educational result.
 
+### Visual/audio Phase 12.3 current true-state/player-visible language boundary (v0.13.39)
+
+Status: Complete for current textual language-boundary evidence only;
+browser-native true-state visual design, decision-time recovery, causal,
+counterfactual, distributional, export, instructor-surface, human educational,
+accessibility, and public-release work remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-true-state-language-boundary.json` for the
+  source-linked `Observed`, `True Prior`, `True Outcome`, and instructor-only
+  reveal labels, decision-quality distinction, host ownership, shared
+  read-only rendering, written fallback, and live-GUI boundary.
+- Added `tests/test_phase12_true_state_language_boundary.py` to check source
+  parity, language labels, presentation boundaries, and no-expansion limits.
+- Checked only the current textual language-boundary item and synchronized
+  canonical docs, lessons, version metadata, generated credits, and additive
+  request, contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native true-state visual language, decision-time recovery, causal
+  attribution, counterfactual differences, distributional outcomes, export,
+  instructor-surface design, and human educational usability remain open.
+
+Deferred / Non-Goals:
+
+- No browser route, true-state field, player control, persistence, screenshot,
+  asset, audio file, counterfactual, distributional view, export format, or
+  authority path is created or promoted.
+- True-state labels remain post-run debrief/instructor text and are not a live
+  actor observation, calibrated forecast, legal conclusion, or educational
+  result.
+
 ## Future
 
 ### Visual and audio experience upgrade

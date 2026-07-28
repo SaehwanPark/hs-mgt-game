@@ -1295,7 +1295,9 @@ At each phase gate, explicitly decide what will not be built next.
    regional-affiliation stage-transition sequence evidence at v0.13.35, and
    current regional-affiliation replay/debrief evidence at v0.13.36, and
    current regional-affiliation provenance evidence at v0.13.37, and current
-   Phase 12.3 instructor-authority boundary evidence at v0.13.38.
+   Phase 12.3 instructor-authority boundary evidence at v0.13.38, and current
+   Phase 12.3 true-state/player-visible language-boundary evidence at
+   v0.13.39.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

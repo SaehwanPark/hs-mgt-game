@@ -2905,3 +2905,35 @@ no new asset, route, runtime field, or registry entry is introduced.
 all three campaign boundaries, written fallback, live scope, and no-authority/
 no-true-state/counterfactual/human-review limits. Instructor design and human
 educational review remain open.
+
+# Presentation Contract — Phase 12.3 true-state language boundary v0.13.39
+
+## Contract status
+
+Complete for current textual language-boundary evidence only. Browser-native
+true-state visual design, decision-time recovery, causal, counterfactual,
+distributional, export, instructor-surface, accessibility, human educational,
+and public-release work remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds explicit `Observed`, `True Prior`, `True Outcome`, and
+  instructor-reveal labels in the existing debrief report, plus the separate
+  decision-quality/outcome-quality statement.
+- Host/core functions own labels and post-run detail; shared renderers display
+  supplied text without authoring state, outcomes, or authority.
+- The live GUI remains `competitive-regional-v1` only, and no browser-native
+  true-state route or control is implemented or claimed.
+
+## Fallback, authority, and provenance
+
+Text labels, committed history, hashes, debrief text, and authority notices
+remain readable without audio or visual decoration. The true-state distinction
+is a current textual contract, not a visual-quality or educational result.
+
+## Verification and limits
+
+`tests/test_phase12_true_state_language_boundary.py` checks source markers,
+language labels, written fallback, live scope, and no-expansion limits. Visual
+language, export, causal/counterfactual/distributional views, and human review
+remain open.
