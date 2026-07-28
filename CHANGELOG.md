@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.36] - 2026-07-28
+
+- Recorded current regional-affiliation replay/debrief coverage across the
+  versioned artifact and verification path, host history/replay metadata,
+  terminal debrief content, decision-quality language, alternatives, and
+  written shared rendering.
+- Closed only current technical replay/debrief evidence; browser-native views,
+  durable persistence, instructor/true-state presentation, human educational
+  review, and public-release gates remain open, with no runtime behavior
+  changed.
+
 ## [0.13.35] - 2026-07-28
 
 - Recorded the current deterministic regional-affiliation stage-transition

@@ -2801,3 +2801,40 @@ source markers, exact order/successors, command/uncertainty coverage,
 history/replay and read-only boundaries, shared-sequence scope, optional audio,
 live scope, and the no-new-asset decision. Browser sequencing and human review
 remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation replay/debrief views v0.13.36
+
+## Contract status
+
+Complete for current technical replay/debrief evidence only. Browser-native
+affiliation replay/debrief views, durable persistence/playback,
+instructor/true-state distinction, human visual/audio/accessibility/
+educational/legal review, and public release remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the versioned replay artifact, serializer, ruleset and
+  state/observation/hash verification, host history/replay envelopes, and
+  terminal affiliation debrief.
+- The debrief records stage count, final status, outcomes, commitments,
+  decision quality under reported observations, social-welfare distinction,
+  alternatives, and per-stage response detail as existing host/CLI text.
+- Shared campaign renderers preserve committed history, state hashes, debrief
+  lines, source/uncertainty text, and completion fallback without visual
+  decoration or new authority.
+
+## Fallback, authority, and provenance
+
+The host owns replay serialization/verification, state hashes, history, and
+debrief construction; presentation remains read-only. Post-resolution detail
+stays within existing typed replay/CLI terminal-debrief contracts and is not a
+live browser actor-view claim. No new asset, route, runtime authority path, or
+registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_replay_debrief.py` checks source
+markers, replay fields/integrity, debrief content, written history/debrief
+renderers, optional audio, live scope, resolved-detail boundaries, and the
+no-new-asset decision. Browser views, persistence, and human review remain
+open.

@@ -729,6 +729,29 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 12 regional-affiliation replay/debrief views v0.13.36
+
+## Result
+
+Recorded current versioned replay artifact verification, host history/replay
+metadata, terminal debrief content, decision-quality/alternative language,
+and written shared rendering.
+
+## Evidence boundary
+
+The ledger and parity test cover current technical replay/debrief evidence. No
+browser-native affiliation replay/debrief route, durable persistence/playback,
+instructor/true-state view, runtime authority path, asset promotion, or human
+visual/audio/accessibility/educational/legal/public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.35.
+- Working branch: `feat/regional-affiliation-replay-debrief-v0.13.36`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Phase 12 regional-affiliation stage-transition sequence v0.13.35
 
 ## Result

@@ -1,0 +1,69 @@
+{
+  "schema_version": "regional-affiliation-replay-debrief-v1",
+  "status": "complete-current-replay-debrief-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current versioned replay artifact, host history/replay metadata, terminal debrief content, and written rendering boundary",
+  "source_contract": {
+    "artifact_version": "src/model/affiliation.rs: pub const AFFILIATION_REPLAY_ARTIFACT_VERSION",
+    "artifact_model": "src/model/affiliation.rs: pub struct AffiliationReplayArtifact",
+    "history_model": "src/model/affiliation.rs: pub struct AffiliationHistory",
+    "replay_serialize": "src/artifact/affiliation.rs: pub fn serialize_affiliation_replay",
+    "replay_verify": "src/artifact/affiliation.rs: pub fn verify_affiliation_replay",
+    "replay_transition": "src/affiliation/transition.rs: pub fn replay_affiliation",
+    "history_summary": "src/mcp/session.rs: pub struct TransitionSummary",
+    "end_session_envelope": "src/mcp/session.rs: pub struct EndSessionEnvelope",
+    "end_affiliation_debrief": "src/mcp/session.rs: debrief: affiliation_debrief(&session.history)",
+    "coverage_debrief": "src/mcp/campaign_coverage.rs: debrief: if done {",
+    "debrief_function": "src/debrief/report.rs: pub fn affiliation_debrief",
+    "debrief_quality": "src/debrief/report.rs: Decision quality: review the observations recorded before each command",
+    "debrief_alternatives": "src/debrief/report.rs: Alternatives for discussion:",
+    "cli_export": "src/cli/affiliation.rs: Replay export complete",
+    "gui_history_renderer": "gui/app.mjs: function renderCampaignCoverageHistory(entries, root)",
+    "gui_debrief_renderer": "gui/app.mjs: for (const line of envelope.debrief ?? [])",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1"
+  },
+  "replay": {
+    "artifact_version": "regional-affiliation-replay-v1",
+    "serialized_fields": ["artifact_version", "seed", "ruleset_version", "history"],
+    "integrity": "Artifact version and ruleset version are checked; replay rechecks prior state, actor observation, transition result, and state hashes.",
+    "history": "Genesis plus typed affiliation transitions preserve commands, observations, resolved inputs, actor decisions, events, effects, next state, and state hashes in the existing replay artifact.",
+    "host_metadata": "The host summarizes committed transitions and returns transition count plus latest state hash in history/replay envelopes.",
+    "cli_boundary": "The CLI can export and immediately verify the versioned replay artifact; this is existing technical replay support, not durable public persistence."
+  },
+  "debrief": {
+    "title": "Regional affiliation debrief (stylized educational scenario; not legal advice)",
+    "content": [
+      "stages committed",
+      "final status",
+      "Riverside cash/access/quality/workforce/community outcomes",
+      "community/workforce/continuity commitments",
+      "decision quality under reported observations",
+      "actor utility and social welfare distinction",
+      "independence or deferral alternative prompt",
+      "per-stage command and reported response detail"
+    ],
+    "host_surface": "Campaign coverage and end-session envelopes carry debrief lines; the shared renderer preserves each line as written text.",
+    "quality_boundary": "The debrief separates decision quality from realized outcome quality and remains a stylized scenario, not legal advice, a calibrated forecast, or an educational result.",
+    "resolved_detail_boundary": "Existing CLI/terminal debrief and typed replay contracts may contain post-resolution response detail; no live browser actor-visible affiliation route is claimed."
+  },
+  "presentation_surface": {
+    "history_renderer": "Shared browser campaign coverage renders committed turn, command, and state-hash history as written list items.",
+    "debrief_renderer": "Shared browser campaign coverage renders host-supplied debrief lines as written list items with a completion fallback.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation replay/debrief route is claimed.",
+    "audio_boundary": "Existing optional visible-only affiliation audio may accompany supported text/events; it is not required for replay integrity or debrief meaning.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation replay/debrief views",
+    "durable affiliation persistence and replay playback/regeneration presentation",
+    "instructor/true-state distinction, educational usability, human visual/audio/accessibility review, and public release"
+  ],
+  "limits": [
+    "This record covers current technical replay/debrief contracts; it does not complete full-stage browser presentation or educational evaluation.",
+    "Resolved inputs and post-resolution response detail remain confined to existing typed replay/CLI terminal debrief contracts; they are not promoted into live actor-visible browser controls or forecasts.",
+    "No browser route, animation, persistence, screenshot, instructor view, map, facility, portrait, audio file, registry entry, runtime field, or authority path is created or promoted.",
+    "No human visual, audio, accessibility, educational, legal, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_replay_debrief.py"
+}

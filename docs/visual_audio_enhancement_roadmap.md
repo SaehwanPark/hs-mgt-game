@@ -3036,7 +3036,12 @@ remains open.
   the typed six-stage successor chain, terminal completion, command gates,
   visible labels, and replay-aligned history are covered while browser-native
   sequencing and stage-specific presentation remain open.
-- [ ] Replay and debrief views updated.
+- [x] Current regional-affiliation replay/debrief evidence recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-replay-debrief.json`
+  and `tests/test_phase12_regional_affiliation_replay_debrief.py`; versioned
+  artifact verification, host history/replay metadata, terminal debrief,
+  decision-quality language, alternatives, and written rendering are covered
+  while browser-native views and durable persistence remain open.
 - [ ] Provenance audit passes.
 
 ### v0.13.21 current campaign-specific presentation inventory
@@ -3343,6 +3348,31 @@ Deferred / Non-Goals:
 - Resolved stochastic inputs, private rationale, hidden thresholds, legal
   validity, causal certainty, and future partner/integration outcomes remain
   outside the actor-visible sequence.
+
+### v0.13.36 current regional-affiliation replay/debrief evidence
+
+- `docs/evaluation/phase12-regional-affiliation-replay-debrief.json` records
+  the versioned `regional-affiliation-replay-v1` artifact, serialization and
+  verification, host history/replay metadata, terminal debrief content,
+  decision-quality language, alternatives, written history/debrief renderers,
+  and live-GUI/no-new-asset boundaries.
+- `tests/test_phase12_regional_affiliation_replay_debrief.py` checks source
+  markers, replay fields/integrity, debrief content, written rendering,
+  optional audio, live scope, resolved-detail boundaries, and no-new-asset
+  limits.
+- This closes only current technical replay/debrief evidence; browser-native
+  affiliation views, durable persistence/playback, instructor/true-state
+  distinction, human visual/audio/accessibility/educational/legal review, and
+  public release remain open.
+
+Deferred / Non-Goals:
+
+- No browser replay/debrief route, animation, persistence, screenshot,
+  instructor view, map, facility, portrait, audio file, registry entry,
+  runtime field, or authority path is added.
+- Resolved inputs and post-resolution response detail remain in existing typed
+  replay/CLI terminal-debrief contracts and are not promoted into live
+  actor-visible browser controls or forecasts.
 
 ### Exit criteria
 

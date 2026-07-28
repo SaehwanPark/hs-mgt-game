@@ -1900,6 +1900,40 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12 regional-affiliation replay/debrief views v0.13.36
+
+## Scope
+
+Record current technical replay/debrief evidence for
+`regional-affiliation-v1` without claiming browser-native affiliation views,
+durable persistence, or educational effectiveness.
+
+## Target slice
+
+- Join versioned replay artifact serialization/verification and state/hash
+  integrity to host history/replay metadata and terminal debrief content.
+- Record decision-quality language, alternative prompt, written history/debrief
+  renderers, CLI/export boundary, optional audio, no-new-asset, and live-GUI
+  boundaries.
+
+## Sources and expected files
+
+- `src/model/affiliation.rs`, `src/artifact/affiliation.rs`,
+  `src/affiliation/transition.rs`, `src/mcp/session.rs`,
+  `src/mcp/campaign_coverage.rs`, `src/debrief/report.rs`,
+  `src/cli/affiliation.rs`, `gui/app.mjs`, and existing campaign ledgers/tests.
+- New replay/debrief ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add browser replay/debrief routes, animation, persistence, screenshots,
+  instructor views, assets, audio files, runtime fields, authority paths,
+  hidden-state controls, human review, or public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 12 regional-affiliation stage-transition sequence v0.13.35
 
 ## Scope
