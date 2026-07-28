@@ -6632,6 +6632,39 @@ Deferred / Non-Goals:
   replay/CLI terminal-debrief contracts and are not promoted into live
   actor-visible browser controls or forecasts.
 
+### Visual/audio Phase 12 current regional-affiliation provenance audit (v0.13.37)
+
+Status: Complete for current machine-checkable provenance evidence only;
+direct partner/stage assets, recorded audio, legal/training-data review,
+human visual/audio/accessibility/educational quality, and public release remain
+separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-provenance-audit.json`
+  for reusable catalog/registry sources, eight passing machine checks,
+  generated credits, release/security/audio packaging boundaries, no-new-asset
+  decision, and unreleased portrait-preview gates.
+- Added `tests/test_phase12_regional_affiliation_provenance_audit.py` to check
+  source markers, audit status/coverage, release counts, portrait gate, and
+  legal/training-data/human/public-release limits.
+- Checked only current technical provenance evidence and synchronized
+  canonical docs, lessons, version metadata, generated credits, and additive
+  request, contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Direct partner/stage assets, recorded audio, legal/training-data review,
+  human visual/audio/accessibility/educational quality, and public release
+  remain open.
+
+Deferred / Non-Goals:
+
+- No map, facility, portrait, stage art, raster, audio, registry entry, route,
+  runtime asset, or authority path is created or promoted.
+- Catalog eligibility and generated credits do not prove direct campaign use,
+  legal clearance, training-data provenance, asset quality, or audio usefulness.
+
 ## Future
 
 ### Visual and audio experience upgrade

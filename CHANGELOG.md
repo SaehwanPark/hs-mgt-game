@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.37] - 2026-07-28
+
+- Recorded the current regional-affiliation technical provenance audit across
+  reusable catalogs and registry sources, generated credits, release/security/
+  audio-packaging checks, the no-new-asset decision, and unreleased
+  portrait-preview gates.
+- Closed only machine-checkable provenance evidence; legal/training-data,
+  human visual/audio/accessibility/educational quality, partner/stage asset,
+  and public-release gates remain open, with no runtime behavior changed.
+
 ## [0.13.36] - 2026-07-28
 
 - Recorded current regional-affiliation replay/debrief coverage across the

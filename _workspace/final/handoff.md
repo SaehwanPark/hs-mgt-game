@@ -729,6 +729,29 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 12 regional-affiliation provenance audit v0.13.37
+
+## Result
+
+Recorded current reusable catalog/registry sources, generated credits,
+registry/security/release/generation/audio-packaging checks, no-new-asset
+decision, and unreleased portrait-preview gates.
+
+## Evidence boundary
+
+The ledger and parity test cover current machine-checkable provenance evidence.
+No direct partner/stage asset, recorded audio, portrait promotion, runtime
+authority path, legal/training-data, human quality, educational, or
+public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.36.
+- Working branch: `feat/regional-affiliation-provenance-audit-v0.13.37`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Phase 12 regional-affiliation replay/debrief views v0.13.36
 
 ## Result

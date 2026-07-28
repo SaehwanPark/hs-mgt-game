@@ -1,0 +1,98 @@
+{
+  "schema_version": "regional-affiliation-provenance-audit-v1",
+  "status": "complete-current-technical-provenance-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current reusable regional-affiliation visual/audio/fallback provenance, release boundary, and no-new-asset decision",
+  "source_contract": {
+    "reuse_matrix": "docs/evaluation/phase12-campaign-reuse-matrix.json: campaign-presentation-reuse-v1",
+    "asset_need_decision": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1",
+    "visual_catalog": "gui/visual-catalog.json: visual-catalog-v1",
+    "audio_catalog": "gui/audio-catalog.json: audio-registry-v1",
+    "registry_policy": "assets/registry/README.md: asset-registry-v1",
+    "asset_credits": "assets/ASSET_CREDITS.md: No third-party release assets are included",
+    "runtime_credits": "gui/asset-credits.mjs: third_party_release_count",
+    "portrait_boundary": "assets/generation/portrait-review-queue.json: Human review, approved model/seed provenance, release derivative, and registry bridge are incomplete",
+    "audio_packaging": "scripts/check_audio_packaging.py: audio-packaging-report-v1"
+  },
+  "audit_checks": [
+    {
+      "id": "asset-registry-validation",
+      "command": "python3 scripts/validate_assets.py",
+      "source": "scripts/validate_assets.py: asset registry check: passed",
+      "status": "pass",
+      "coverage": "Canonical visual/audio registry schema, hashes, provenance fields, license references, approval, and generated credit/notices parity."
+    },
+    {
+      "id": "asset-security-validation",
+      "command": "python3 scripts/validate_asset_security.py",
+      "source": "scripts/validate_asset_security.py: asset security check: passed",
+      "status": "pass",
+      "coverage": "Tracked asset path, content, and security policy checks."
+    },
+    {
+      "id": "release-manifest-validation",
+      "command": "python3 scripts/verify_asset_release.py --check",
+      "source": "scripts/verify_asset_release.py: asset release manifest check: passed",
+      "status": "pass",
+      "coverage": "Release-path, hash, and tracked-asset manifest consistency."
+    },
+    {
+      "id": "generation-metadata-validation",
+      "command": "python3 scripts/validate_generation_metadata.py",
+      "source": "scripts/validate_generation_metadata.py: generation workflow check: passed",
+      "status": "pass",
+      "coverage": "Generated preview metadata, hashes, dimensions, and unreleased portrait-review queue boundaries."
+    },
+    {
+      "id": "runtime-credits-projection",
+      "command": "python3 -m unittest tests.test_in_game_credits",
+      "source": "tests/test_in_game_credits.py: test_runtime_projection_is_generated_from_canonical_registries",
+      "status": "pass",
+      "coverage": "Visible text-first runtime credits projection from canonical registries without authority access."
+    },
+    {
+      "id": "campaign-reuse-provenance",
+      "command": "python3 -m unittest tests.test_phase12_campaign_reuse_matrix",
+      "source": "tests/test_phase12_campaign_reuse_matrix.py: test_catalog_sources_and_reuse_decisions_match_current_inventory",
+      "status": "pass",
+      "coverage": "Regional-affiliation shared visual/audio/fallback sources, optional mapping, and open direct-campaign work."
+    },
+    {
+      "id": "campaign-asset-need-boundary",
+      "command": "python3 -m unittest tests.test_phase12_campaign_asset_need_decision",
+      "source": "tests/test_phase12_campaign_asset_need_decision.py: test_decision_sources_campaigns_and_fallback_match",
+      "status": "pass",
+      "coverage": "No-new-asset decision, generic fallback, written equivalent, and future reopen triggers for regional affiliation."
+    },
+    {
+      "id": "audio-packaging-boundary",
+      "command": "python3 scripts/check_audio_packaging.py",
+      "source": "scripts/check_audio_packaging.py: audio-packaging-report-v1",
+      "status": "pass",
+      "coverage": "Runtime-generated audio, zero file-backed release audio, registry count, and no-release-file boundary."
+    }
+  ],
+  "campaign_boundary": {
+    "reusable_visuals": "Current identity, marker, status, and generic-facility vocabulary is repository-authored/project-generated and source-linked; it is eligible reuse, not direct partner/stage art promotion.",
+    "reusable_audio": "Current affiliation music/cue entries are runtime-generated or repository-authored with null file-backed release paths and written equivalents; direct campaign mapping and listening quality remain open.",
+    "new_asset_need": "none-required-by-current-stage-contract",
+    "third_party_release_count": 0,
+    "release_audio_count": 0,
+    "portrait_preview_status": "Unverified portrait previews remain inventory/hash-bound but unreleased; human review, approved model/seed provenance, release derivative, and registry bridge are incomplete.",
+    "future_reopen": "Future campaign geography, placement, partner identity, stage art, recorded audio, licensed assets, or portrait promotion requires a new provenance, approval, release, and human-review record."
+  },
+  "open_work": [
+    "future campaign asset, partner identity, stage-art, and recorded-audio provenance",
+    "portrait model/seed provenance, human review, and release derivative gates",
+    "legal/licensing and training-data review beyond current machine checks",
+    "human visual/audio quality, accessibility, educational, and public-release review"
+  ],
+  "limits": [
+    "This is a current technical provenance audit, not legal clearance, training-data provenance, output-quality approval, or human review.",
+    "No new map, facility, portrait, stage-art, raster, audio, registry entry, route, or runtime asset is created or promoted.",
+    "Runtime-generated audio has no shipped file-backed release path; catalog provenance and written equivalents do not imply direct campaign mapping or audio quality.",
+    "Unverified portrait previews remain unreleased and are not evidence that future partner identity or stage treatment is complete.",
+    "No instructor-only true-state view, counterfactual, public-release, educational, legal, or policy-validity claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_provenance_audit.py"
+}
