@@ -2744,3 +2744,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   and existing Rust/MCP/transport history tests.
 - Prevention: Name whether each replay slice is a read-only projection,
   playback engine, or regeneration path before closing any continuity item.
+
+## Phase 26: Define registry completeness without inflating asset claims
+
+- Context: The current visual/audio registries already pass schema, provenance,
+  approval, hash, release, security, and credits checks, but the Phase 11.1
+  registry-coverage checkbox remained open.
+- Risk: Calling registry validity “100% coverage” could imply that every future
+  campaign need has a file-backed asset, or that approval proves quality,
+  placement, screenshots, accessibility, or human review.
+- Resolution: Record `asset_registry_coverage` with exact current visual/audio
+  counts, approved/unique closure, the 15 release-path versus 30 null-path
+  boundary, validator sources, and explicit future/quality limits.
+- Prevention: Define the denominator before closing registry coverage and keep
+  current document/runtime registration separate from release-file promotion,
+  campaign placement, and human quality gates.

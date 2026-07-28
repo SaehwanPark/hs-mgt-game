@@ -148,6 +148,45 @@
       "Registry and release-manifest/hash validators remain required release gates."
     ]
   },
+  "asset_registry_coverage": {
+    "status": "complete-current-registries",
+    "schema": "asset-registry-v1",
+    "registry_sources": {
+      "visual": "assets/registry/visual-assets.json: entries",
+      "audio": "assets/registry/audio-assets.json: entries"
+    },
+    "entry_counts": {
+      "visual": 38,
+      "audio": 7,
+      "total": 45
+    },
+    "approval_contract": [
+      "Every current visual and audio entry is approved.",
+      "IDs are unique within each registry and required fields are complete.",
+      "Provenance, license, accessible-equivalent, visible-source, and hash checks pass."
+    ],
+    "release_boundary": {
+      "file_backed_release_entries": 15,
+      "runtime_or_catalog_entries_with_null_release_paths": 30,
+      "rule": "File-backed entries require approved release paths and manifest hashes; runtime-generated or catalog/documentation entries retain null release paths."
+    },
+    "validator_sources": [
+      "scripts/validate_assets.py: validate",
+      "scripts/verify_asset_release.py: check_manifest",
+      "scripts/validate_asset_security.py: validate",
+      "scripts/generate_asset_credits.py: render + render_notices"
+    ],
+    "test_source": "tests/test_asset_registry.py and tests/test_phase11_campaign_coverage.py",
+    "limits": [
+      "No future campaign asset inventory or placement/use claim is made.",
+      "Registry validity does not establish visual/audio quality, screenshot coverage, accessibility, or human review.",
+      "Runtime-generated audio and non-release GUI sources are not claimed to be file-backed release assets."
+    ],
+    "evidence": [
+      "Current visual and audio registries pass schema, provenance, license, path, hash, security, and approval validation.",
+      "The release manifest covers every current non-null release path and credits projections are generated deterministically."
+    ]
+  },
   "event_cue_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_event_cue_ids",

@@ -1364,6 +1364,42 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 11.1 current asset-registry coverage v0.13.16
+
+## Scope
+
+Continue the roadmap with the next unmet Phase 11.1 item: asset registry
+coverage. Formalize completeness of the current tracked visual and audio
+registry documents as a bounded release/presentation contract.
+
+## Target slice
+
+- Record all 38 visual and 7 audio entries, approval/ID closure, and the
+  `asset-registry-v1` source documents.
+- Distinguish 15 file-backed release paths from 30 intentional null-release
+  runtime/catalog entries and link registry, release, security, and credits
+  checks.
+- Close only current tracked registry completeness; future campaign inventory,
+  placement/use, asset/audio quality, screenshots, and human claims remain open.
+
+## Sources and expected files
+
+- `assets/registry/visual-assets.json`, `assets/registry/audio-assets.json`,
+  `scripts/validate_assets.py`, `scripts/verify_asset_release.py`,
+  `scripts/validate_asset_security.py`, and
+  `scripts/generate_asset_credits.py`.
+- `tests/test_asset_registry.py`, `tests/test_phase11_campaign_coverage.py`,
+  and the Phase 11.1 ledger.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add/remove assets, promote runtime-generated audio, create screenshots,
+  add browser dependencies, or make quality/human-evaluation claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  security, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 11.1 replay visual continuity v0.13.15
 
 ## Scope
