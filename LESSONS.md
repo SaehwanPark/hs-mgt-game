@@ -2840,3 +2840,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Separate current inventory evidence from implementation,
   provenance, human review, and educational usability before checking a
   campaign-specific roadmap item.
+
+## Phase 32: Distinguish reuse eligibility from direct campaign mapping
+
+- Context: The existing visual and generated-audio catalogs already provide
+  reusable identities, markers, statuses, UI cues, ambience, and campaign
+  motifs, while Phase 12 still lacked one matrix showing which primitives were
+  appropriate for each additional campaign.
+- Risk: Calling catalog presence “asset reuse” could imply that every cue is
+  already mapped into campaign state, that audio is required, or that a shared
+  fallback proves campaign-specific visual quality.
+- Resolution: Record exact catalog IDs, source/provenance status, written
+  equivalents, fallback-only decisions, and eligible-but-not-directly-mapped
+  audio rows per campaign; close only the reusable-assets checklist items.
+- Prevention: Keep reuse eligibility, direct runtime mapping, quality review,
+  and human evaluation as separate gates in every asset matrix.

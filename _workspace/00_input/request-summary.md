@@ -1364,6 +1364,40 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 12 campaign presentation reuse matrix v0.13.22
+
+## Scope
+
+Record exact reuse decisions for existing visual, generated-audio, facility,
+fallback, and written-equivalent primitives across the current stabilization
+and regional-affiliation campaign surfaces.
+
+## Target slice
+
+- Bind shared identity, semantic-marker, status, facility-fallback, UI-cue,
+  stabilization-audio, and affiliation-audio catalog IDs.
+- Record `current-contract-eligible`, `fallback-only`, and
+  `eligible-but-not-directly-mapped` decisions without claiming direct audio
+  mapping or campaign-specific quality.
+- Close only the Phase 12.1 and 12.2 reusable-assets checklist items.
+
+## Sources and expected files
+
+- `gui/visual-catalog.json`, `gui/audio-catalog.json`,
+  `gui/facility-components.mjs`, and the current Phase 12 inventory ledger.
+- New reuse matrix/parity test, existing asset/provenance/accessibility/audio
+  tests, and the campaign-coverage contract.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not create or promote map, facility, portrait, stage-art, or file-backed
+  audio assets; do not add direct audio mapping, tutorial, pressure, stage,
+  persistence, instructor, screenshot, or human-review behavior.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Visual/audio Phase 12 campaign-specific presentation inventory v0.13.21
 
 ## Scope

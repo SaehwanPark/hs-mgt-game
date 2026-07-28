@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.22] - 2026-07-28
+
+- Recorded the Phase 12 reusable-asset matrix for stabilization and regional
+  affiliation against the existing visual, generated-audio, and facility
+  fallback catalogs.
+- Closed only the reusable-assets checklist items; direct campaign audio
+  mapping, campaign-specific art/stage treatment, quality, human review, and
+  educational gates remain open, with no runtime or asset behavior changed.
+
 ## [0.13.21] - 2026-07-28
 
 - Recorded the current Phase 12 campaign-specific presentation inventory for

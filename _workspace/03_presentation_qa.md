@@ -2975,3 +2975,36 @@ and future provenance review remain open.
 - `python3 -m unittest tests.test_phase12_campaign_presentation_coverage` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
+
+# Presentation Domain QA — Phase 12 campaign presentation reuse matrix v0.13.22
+
+## Status
+
+`pass` for bounded current reusable-asset QA only. No direct campaign audio
+mapping, campaign-specific visual quality, human review, or educational
+usability approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: exact visual identity/marker/status IDs, facility fallback, UI cues,
+  stabilization motifs, and affiliation motifs resolve to current sources.
+- Pass: generated audio remains optional with null release paths; written
+  equivalents and fallback-only decisions remain explicit.
+- Pass: the matrix keeps current-contract eligibility separate from direct
+  campaign mapping and records no-new-asset boundaries for both campaigns.
+
+## Required fixes
+
+None for this bounded reuse matrix.
+
+## Evidence limits
+
+Direct campaign audio mapping, tutorial/pressure taxonomy, partner/stage art,
+audio/visual quality, replay/debrief implementation, instructor views, human
+comprehension, and educational usability remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_campaign_reuse_matrix` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.

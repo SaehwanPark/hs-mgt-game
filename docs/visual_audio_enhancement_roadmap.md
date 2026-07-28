@@ -2931,7 +2931,10 @@ open.
   contract requires no new map or facility asset, while tutorial, pressure,
   campaign-audio, and debrief work remain open.
 - [ ] Campaign-specific map or facility needs identified.
-- [ ] Reusable assets used where possible.
+- [x] Reusable assets used where possible. Evidence:
+  `docs/evaluation/phase12-campaign-reuse-matrix.json` and
+  `tests/test_phase12_campaign_reuse_matrix.py`; direct campaign audio mapping
+  and campaign-specific quality review remain open.
 - [ ] New pressure states registered.
 - [ ] Tutorial presentation updated.
 - [ ] Audio-state mapping completed.
@@ -2959,6 +2962,10 @@ remains open.
   contract requires no new map or facility asset, while stage-specific art,
   affiliation audio, and full-stage replay/debrief review remain open.
 - [ ] Partner identity treatment completed.
+- [x] Reusable assets used where possible. Evidence:
+  `docs/evaluation/phase12-campaign-reuse-matrix.json` and
+  `tests/test_phase12_campaign_reuse_matrix.py`; partner-specific treatment,
+  stage visualization, and audio quality remain open.
 - [ ] Negotiation-stage visualization completed.
 - [ ] Commitment and review states completed.
 - [ ] Integration-state visualization completed.
@@ -2981,6 +2988,19 @@ remains open.
   contract require no new map or facility asset. This is an inventory result,
   not a claim that future tutorial, pressure-state, stage-specific art,
   campaign-audio, replay/debrief, or human review work is complete.
+
+### v0.13.22 current campaign presentation reuse matrix
+
+- `docs/evaluation/phase12-campaign-reuse-matrix.json` records exact reuse
+  decisions for current identity, marker, status, facility-fallback, UI-cue,
+  stabilization-audio, and affiliation-audio presentation primitives.
+- `tests/test_phase12_campaign_reuse_matrix.py` checks catalog IDs, source
+  markers, approval/provenance metadata, null release paths for generated
+  audio, written equivalents, and the no-new-asset boundary.
+- This closes only the reusable-assets items for Phase 12.1 and 12.2. It does
+  not complete direct campaign audio mapping, tutorial/pressure taxonomy,
+  partner/stage-specific treatment, replay/debrief implementation, quality,
+  or human review.
 
 ### Exit criteria
 

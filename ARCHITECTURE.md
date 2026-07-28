@@ -775,6 +775,14 @@ tutorial, pressure, stage-art, audio, replay/debrief, instructor, and human
 review work remains open. No runtime, asset, audio, or authority boundary
 changes.
 
+The v0.13.22 Phase 12 reuse matrix records exact eligibility decisions against
+the existing visual catalog, runtime-generated audio catalog, and facility
+fallback registry. Stabilization and affiliation may reuse the shared identity,
+marker, status, fallback, and UI primitives; their campaign audio rows remain
+eligible-but-not-directly-mapped, preserving the existing written-equivalent
+and optional-audio boundary. No catalog entry, asset bytes, runtime field, or
+authority path changes.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
