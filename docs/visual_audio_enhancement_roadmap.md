@@ -3432,7 +3432,12 @@ Deferred / Non-Goals:
   `tests/test_phase12_true_state_language_boundary.py`; current textual
   `Observed`, `True Prior`, `True Outcome`, and instructor-reveal labels are
   source-linked while browser-native visual language remains open.
-- [ ] Decision-time information recoverable.
+- [x] Decision-time information recoverable. Evidence:
+  `docs/evaluation/phase12-decision-time-recovery-boundary.json` and
+  `tests/test_phase12_decision_time_recovery_boundary.py`; immutable core/CLI
+  history retains observation-before-command records and host history/replay
+  summaries remain hash-aligned, while full browser per-decision observation
+  recovery remains explicitly open.
 - [ ] Causal attribution visualized.
 - [ ] Counterfactual differences visualized.
 - [ ] Distributional outcomes represented responsibly.
@@ -3488,6 +3493,29 @@ Deferred / Non-Goals:
 - True-state labels remain post-run debrief/instructor text and do not claim
   live observation, calibrated forecasting, legal validity, or educational
   effectiveness.
+
+### v0.13.40 current decision-time recovery boundary
+
+- `docs/evaluation/phase12-decision-time-recovery-boundary.json` records the
+  immutable core `Transition` observation/command pairing, existing debrief
+  recovery and revision language, host history/replay summary/hash alignment,
+  text-first browser summary behavior, and written fallback.
+- `tests/test_phase12_decision_time_recovery_boundary.py` checks source parity,
+  recovery contracts, the narrower host/browser boundary, and explicit
+  no-expansion limits.
+- This closes only current technical decision-time recovery evidence. A
+  browser-native per-decision observation timeline, causal/counterfactual/
+  distributional views, export behavior, instructor-surface design, and human
+  educational/accessibility review remain open.
+
+Deferred / Non-Goals:
+
+- No new observation field, browser timeline route/control, persistence,
+  screenshot, asset, audio file, true-state view, causal graph,
+  counterfactual, distributional view, export format, or authority path is
+  created or promoted.
+- Host summaries remain narrower than core history and do not expose resolved
+  inputs, hidden state, or private rationale through live player history.
 
 ---
 

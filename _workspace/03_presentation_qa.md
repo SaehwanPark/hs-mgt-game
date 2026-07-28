@@ -3604,3 +3604,38 @@ human comprehension, educational usability, and public release remain open.
 - `python3 -m unittest tests.test_phase12_true_state_language_boundary` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
+
+# Presentation Domain QA — Phase 12.3 decision-time recovery boundary v0.13.40
+
+## Status
+
+`pass` for bounded current technical recovery-boundary QA only. No complete
+browser per-decision timeline, visual-quality, accessibility, educational, or
+public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: immutable core history retains the observation paired with each
+  command, and debrief text identifies the before-command decision-quality
+  review boundary.
+- Pass: prior committed observations remain unchanged when later reported
+  estimates are revised; host history/replay summaries remain count/hash
+  aligned.
+- Pass: the browser’s text-first summary renders supplied turn/command/hash
+  history read-only and leaves full historical observation playback explicit.
+
+## Required fixes
+
+None for this bounded recovery contract.
+
+## Evidence limits
+
+Browser-native per-decision observation playback, causal, counterfactual,
+distributional, export, instructor-surface, accessibility, human
+comprehension, educational usability, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_decision_time_recovery_boundary` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.

@@ -1412,3 +1412,27 @@ or human visual/accessibility/educational/public-release claim is introduced.
 - Working branch: `feat/true-state-language-boundary-v0.13.39`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12.3 decision-time recovery boundary v0.13.40
+
+## Result
+
+Recorded current decision-time observation retention in immutable core history,
+debrief recovery and revision language, host history/replay count/hash
+alignment, and the narrower text-first browser summary boundary.
+
+## Evidence boundary
+
+The ledger and parity test cover current technical recovery-boundary evidence.
+No browser-native per-decision timeline, observation field, player control,
+runtime authority path, export format, causal/counterfactual/distributional
+view, asset, audio, or human visual/accessibility/educational/public-release
+claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.39.
+- Working branch: `feat/decision-time-recovery-boundary-v0.13.40`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

@@ -6733,6 +6733,42 @@ Deferred / Non-Goals:
   actor observation, calibrated forecast, legal conclusion, or educational
   result.
 
+### Visual/audio Phase 12.3 current decision-time recovery boundary (v0.13.40)
+
+Status: Complete for current technical recovery-boundary evidence only; full
+browser per-decision observation playback, causal, counterfactual,
+distributional, export, instructor-surface, human educational, accessibility,
+and public-release work remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-decision-time-recovery-boundary.json` for the
+  immutable core `Transition` observation/command pairing, debrief timing and
+  revision language, host history/replay summary/hash alignment, text-first
+  browser summary behavior, and written fallback.
+- Added `tests/test_phase12_decision_time_recovery_boundary.py` to check source
+  parity, recovery contracts, narrower host/browser boundaries, and
+  no-expansion limits.
+- Checked only current technical decision-time recovery evidence and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request, contract, QA, and handoff records; no runtime behavior
+  changed.
+
+Not Yet Done:
+
+- Browser-native per-decision observation timeline, causal attribution,
+  counterfactual differences, distributional outcomes, export,
+  instructor-surface design, and human educational usability remain open.
+
+Deferred / Non-Goals:
+
+- No new observation field, browser timeline route/control, persistence,
+  screenshot, asset, audio file, true-state view, causal graph,
+  counterfactual, distributional view, export format, or authority path is
+  created or promoted.
+- Host summaries remain narrower than core history and do not expose resolved
+  inputs, hidden state, or private rationale through live player history.
+
 ## Future
 
 ### Visual and audio experience upgrade

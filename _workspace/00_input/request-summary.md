@@ -2239,3 +2239,36 @@ browser-native true-state view or expanding presentation authority.
   export formats, instructor authority paths, or human educational claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12.3 decision-time recovery boundary v0.13.40
+
+## Scope
+
+Record how the existing immutable core/CLI history recovers the observation
+available before each command, how host history/replay summaries remain aligned,
+and where the current text-first browser summary stops short of full
+per-decision observation playback.
+
+## Target slice
+
+- Join the core `Transition` observation/command pairing to debrief timing and
+  revision language.
+- Record host history/replay count/hash alignment, browser turn/command/hash
+  rendering, written fallback, and the competitive-only live-GUI boundary.
+
+## Sources and expected files
+
+- `src/model/history.rs`, `src/debrief/report.rs`, `src/mcp/session.rs`,
+  `gui/app.mjs`, and `gui/README.md`.
+- New decision-time recovery ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract, QA, and handoff records.
+
+## Non-goals and validation
+
+- Do not add observation fields, browser timeline controls/routes, persistence,
+  screenshots, assets, audio files, true-state views, causal graphs,
+  counterfactuals, distributional views, export formats, or human educational
+  claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

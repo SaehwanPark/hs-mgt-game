@@ -2937,3 +2937,34 @@ is a current textual contract, not a visual-quality or educational result.
 language labels, written fallback, live scope, and no-expansion limits. Visual
 language, export, causal/counterfactual/distributional views, and human review
 remain open.
+
+# Presentation Contract — Phase 12.3 decision-time recovery boundary v0.13.40
+
+## Contract status
+
+Complete for current technical recovery-boundary evidence only. Full browser
+per-decision observation playback, causal, counterfactual, distributional,
+export, instructor-surface, accessibility, human educational, and public-
+release work remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds immutable core observation/command retention, debrief
+  before-command and revision language, host history/replay summaries, and
+  text-first turn/command/hash rendering.
+- Core/host functions own recovery and hash alignment; shared renderers display
+  supplied summaries without authoring observations, outcomes, or authority.
+- The live GUI remains `competitive-regional-v1` only; it does not claim a
+  browser-native full decision-time observation timeline.
+
+## Fallback, authority, and provenance
+
+Commands, history, hashes, source/status text, and debrief lines remain
+readable without audio or visual decoration. Host summaries remain narrower
+than core history and do not expose resolved inputs or private rationale.
+
+## Verification and limits
+
+`tests/test_phase12_decision_time_recovery_boundary.py` checks source markers,
+recovery contracts, the narrower host/browser boundary, written fallback, and
+no-expansion limits. Full browser recovery and human review remain open.
