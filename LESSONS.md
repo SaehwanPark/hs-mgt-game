@@ -2807,3 +2807,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   small-size/grayscale, human review, and release promotion open.
 - Prevention: Name whether a checklist item verifies a field/path/hash or a
   human judgment before changing its roadmap state.
+
+## Phase 30: Aggregate technical release evidence without declaring release readiness
+
+- Context: The repository passed the current Rust, GUI, asset, offline,
+  browser, replay, checkpoint, and bounded screenshot checks, while the Phase
+  13.1 technical checklist remained visually indistinguishable from the open
+  product/content/human release gates.
+- Risk: Checking a broad “release candidate audit” could imply full-campaign
+  completeness, public-release approval, durable persistence, cross-browser
+  certification, or educational readiness.
+- Resolution: Add a Phase 13.1 technical ledger and check only the current
+  source-checkout evidence, with each command/source and narrower limits
+  explicit.
+- Prevention: Keep automated technical contracts, bounded local proxies,
+  product/content review, and human/public-release decisions as separate
+  checklist layers.

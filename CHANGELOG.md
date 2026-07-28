@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.20] - 2026-07-28
+
+- Recorded current Phase 13.1 technical-release coverage across Rust, GUI,
+  screenshot/structural, asset/license/hash/security, accessibility-contract,
+  offline, Chromium, replay, and in-memory checkpoint checks.
+- Kept product/content completeness, full-campaign raster coverage, durable
+  persistence, cross-browser/device certification, human quality/accessibility,
+  educational readiness, and public-release approval open; no runtime behavior
+  changed.
+
 ## [0.13.19] - 2026-07-28
 
 - Closed the current Phase 8.2 technical metadata gates for all seven portrait

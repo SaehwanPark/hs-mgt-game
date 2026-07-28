@@ -954,3 +954,27 @@ usability, audio usefulness, or educational benefit.
 - Working branch: `feat/visual-audio-phase11-overlay-v0.13.12`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 13.1 current technical-release coverage v0.13.20
+
+## Result
+
+Recorded the current source-checkout technical-release contract across Rust,
+GUI/governance, screenshot/structural, asset/license/hash/security,
+accessibility-contract, offline, Chromium, replay, and in-memory checkpoint
+checks.
+
+## Evidence boundary
+
+The ledger and parity test pass, but this is not public-release approval. Full
+product/content coverage, full-campaign raster evidence, durable persistence,
+cross-browser/device certification, human quality/accessibility/legal review,
+educational readiness, and release artifacts remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.19.
+- Working branch: `feat/technical-release-coverage-v0.13.20`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

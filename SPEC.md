@@ -6059,6 +6059,35 @@ Deferred / Non-Goals:
 - No image generation, model claim, release derivative, asset registry entry,
   GUI consumer, or human approval was added.
 
+### Visual/audio Phase 13.1 current technical-release coverage (v0.13.20)
+
+Status: Complete for the current source-checkout technical contract; product,
+content, human, educational, full-campaign, durable-persistence,
+cross-browser/device, and public-release gates remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-technical-coverage.json` joining current
+  Rust, GUI/governance, screenshot/structural, asset/license/hash/security,
+  accessibility-contract, offline, Chromium, replay, and in-memory checkpoint
+  evidence.
+- Added `tests/test_phase13_technical_coverage.py` requiring every named check
+  to retain an existing source, command, passing-status marker, and explicit
+  limits.
+- Updated the Phase 13.1 technical checklist and synchronized patch-version
+  and presentation handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Product/content release candidate work, full-campaign coverage, durable
+  persistence, cross-browser/device certification, human quality/accessibility,
+  legal/educational review, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No release artifact, campaign content, screenshot runner, browser engine,
+  durable storage, human evaluation, or authority path was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

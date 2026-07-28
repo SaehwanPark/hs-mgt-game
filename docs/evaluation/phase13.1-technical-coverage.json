@@ -1,0 +1,81 @@
+{
+  "schema_version": "current-technical-release-coverage-v1",
+  "status": "complete-current-technical-contract",
+  "scope": "Current source-checkout automated and bounded local-proxy release evidence; not public-release readiness.",
+  "package_version": "0.13.20",
+  "checks": [
+    {
+      "id": "rust-suite",
+      "status": "pass-current-suite",
+      "command": "cargo test -- --test-threads=1",
+      "sources": ["Cargo.toml", "src", "tests"]
+    },
+    {
+      "id": "gui-and-governance-suite",
+      "status": "pass-current-suite",
+      "command": "python3 -m unittest discover -s tests -p 'test_*.py'",
+      "sources": ["tests/test_gui_static_desktop.py", "tests/test_gui_campaign_coverage.py", "tests/test_portrait_workflow.py"]
+    },
+    {
+      "id": "screenshot-and-structural-regression",
+      "status": "pass-current-supported-surface",
+      "command": "python3 -m unittest tests.test_regional_board tests.test_phase11_campaign_coverage",
+      "sources": ["docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_regional_board.py", "tests/fixtures/regional_board_snapshot.sha256"]
+    },
+    {
+      "id": "asset-license-and-provenance",
+      "status": "pass-current-registries",
+      "command": "python3 scripts/validate_assets.py",
+      "sources": ["assets/registry/visual-assets.json", "assets/registry/audio-assets.json", "docs/reference/asset-licensing-policy.md", "tests/test_asset_registry.py"]
+    },
+    {
+      "id": "release-hash-and-security",
+      "status": "pass-current-release-boundary",
+      "command": "python3 scripts/verify_asset_release.py --check; python3 scripts/validate_asset_security.py",
+      "sources": ["scripts/verify_asset_release.py", "scripts/validate_asset_security.py", "assets/ASSET_RELEASE_MANIFEST.json", "tests/test_asset_release.py"]
+    },
+    {
+      "id": "accessibility-presentation-contract",
+      "status": "pass-technical-contract",
+      "command": "python3 -m unittest tests.test_gui_accessibility tests.test_device_performance",
+      "sources": ["tests/test_gui_accessibility.py", "tests/test_device_performance.py", "assets/device-performance-policy.json"]
+    },
+    {
+      "id": "offline-package",
+      "status": "pass-current-loopback-package",
+      "command": "python3 scripts/check_offline_availability.py",
+      "sources": ["scripts/check_offline_availability.py", "assets/offline-policy.json", "tests/test_offline_availability.py"]
+    },
+    {
+      "id": "chromium-compatibility",
+      "status": "pass-declared-target",
+      "command": "python3 scripts/check_browser_compatibility.py",
+      "sources": ["scripts/check_browser_compatibility.py", "assets/browser-compatibility-policy.json", "tests/test_browser_compatibility.py"]
+    },
+    {
+      "id": "immutable-replay",
+      "status": "pass-current-read-only-projection",
+      "command": "python3 -m unittest tests.test_phase11_live_replay",
+      "sources": ["tests/test_phase11_live_replay.py", "src/mcp/session.rs", "gui/app.mjs"]
+    },
+    {
+      "id": "in-memory-save-load",
+      "status": "pass-current-in-memory-continuity",
+      "command": "python3 -m unittest tests.test_phase11_live_checkpoint",
+      "sources": ["tests/test_phase11_live_checkpoint.py", "src/mcp/session.rs", "gui/app.mjs"]
+    }
+  ],
+  "limits": [
+    "This contract does not establish full-campaign product/content coverage or public-release readiness.",
+    "Current screenshot evidence is supported-surface structural/SVG/local-smoke evidence, not a full raster suite.",
+    "Replay evidence is an immutable text-first projection; checkpoint evidence is in-memory host continuity, not durable persistence or playback.",
+    "Chromium and emulated low-power checks do not certify Firefox/WebKit, real hardware, battery/thermal/memory behavior, or human accessibility.",
+    "Passing technical checks does not establish visual/audio quality, educational usability, legal approval, or human evaluation."
+  ],
+  "evidence": [
+    "Every check source and command resolves to an existing repository path.",
+    "Current bounded screenshot, asset, portrait, replay, checkpoint, offline, and browser/device ledgers retain their narrower evidence limits.",
+    "No simulation, authority, GUI behavior, asset, audio, persistence, or release artifact is changed by this contract."
+  ],
+  "test_source": "tests/test_phase13_technical_coverage.py"
+}

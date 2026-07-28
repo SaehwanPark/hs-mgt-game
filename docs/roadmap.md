@@ -1278,7 +1278,7 @@ At each phase gate, explicitly decide what will not be built next.
    completeness at v0.13.16, and current supported screenshot-surface
    evidence at v0.13.17, and current portrait-preview inventory integrity at
    v0.13.18, and current portrait role/source/equivalent metadata gates at
-   v0.13.19.
+   v0.13.19, and current Phase 13.1 technical-release evidence at v0.13.20.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor
