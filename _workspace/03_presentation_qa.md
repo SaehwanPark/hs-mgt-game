@@ -2582,7 +2582,7 @@ None for this bounded technical contract.
 ## Verification Evidence
 
 - `python3 scripts/check_device_performance.py` — pass.
-- `python3 -m unittest tests.test_device_performance` — 7 tests pass.
+- `python3 -m unittest tests.test_device_performance` — 8 tests pass.
 - Local browser smoke at 1024×768 — five shell reloads 49–52 ms, 818 DOM
   elements, four SVGs, 367 ms host start, 259 ms adapter probe; written and
   audio-off fallbacks present.

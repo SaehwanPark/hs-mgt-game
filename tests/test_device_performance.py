@@ -56,6 +56,13 @@ class DevicePerformanceTests(unittest.TestCase):
     errors = self.checker.validate_definition(ROOT, document)
     self.assertIn("certification.real_device must be false", errors)
 
+  def test_profile_target_is_fixed(self):
+    document = copy.deepcopy(self.document)
+    document["profile"]["viewport"]["width"] = 800
+    document["measurements"]["viewport"]["width"] = 800
+    errors = self.checker.validate_definition(ROOT, document)
+    self.assertIn("profile.viewport must be 1024x768 for the low-power proxy", errors)
+
   def test_invalid_profile_and_escaped_loading_policy_fail_closed(self):
     document = copy.deepcopy(self.document)
     document["profile"]["viewport"]["width"] = 0

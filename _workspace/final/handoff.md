@@ -703,7 +703,7 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - Added `scripts/check_device_performance.py` to recompute live source bytes
   from the loading policy and fail closed on drift, malformed values, limits,
   path escapes, or hardware-certification claims.
-- Added `tests/test_device_performance.py` with seven focused contract tests.
+- Added `tests/test_device_performance.py` with eight focused contract tests.
 - Updated roadmap, canonical records, asset guidance, reproducible-distribution
   documentation, lessons, request/contract/QA, and patch version projections.
 - No simulation, host DTO, history/hash, replay, debrief, audio semantic,

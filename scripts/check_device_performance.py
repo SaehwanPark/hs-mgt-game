@@ -10,6 +10,8 @@ from pathlib import Path
 
 POLICY_PATH = "assets/device-performance-policy.json"
 REPORT_SCHEMA_VERSION = "device-performance-report-v1"
+PROFILE_ID = "low-power-browser-proxy"
+PROFILE_VIEWPORT = {"width": 1024, "height": 768}
 REQUIRED_FIELDS = (
   "schema_version", "status", "surface", "live_entrypoint",
   "loading_policy", "profile", "limits", "measurements", "evidence",
@@ -71,8 +73,8 @@ def validate_definition(root: Path, document: object) -> list[str]:
   if not isinstance(profile, dict):
     errors.append("profile must be an object")
   else:
-    if not isinstance(profile.get("id"), str) or not profile["id"].strip():
-      errors.append("profile.id must be a non-empty string")
+    if profile.get("id") != PROFILE_ID:
+      errors.append(f"profile.id must be {PROFILE_ID!r}")
     viewport = profile.get("viewport")
     if not isinstance(viewport, dict):
       errors.append("profile.viewport must be an object")
@@ -80,6 +82,8 @@ def validate_definition(root: Path, document: object) -> list[str]:
       for field in ("width", "height"):
         if not _positive_int(viewport.get(field)):
           errors.append(f"profile.viewport.{field} must be a positive integer")
+      if viewport != PROFILE_VIEWPORT:
+        errors.append("profile.viewport must be 1024x768 for the low-power proxy")
     expected_modes = {
       "motion": "reduced",
       "audio": "off",
