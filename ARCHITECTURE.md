@@ -883,6 +883,11 @@ release/security/audio packaging checks, no-new-asset decision, and
 unreleased portrait-preview gates. It does not promote assets, claim legal or
 human approval, or change runtime authority.
 
+The v0.13.38 Phase 12.3 slice records current instructor-only authority
+boundaries: existing post-run CLI/typed detail, player-visible observation
+limits, host ownership, read-only shared rendering, and the absence of a new
+instructor or true-state browser route. It does not expand authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
