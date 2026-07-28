@@ -3046,6 +3046,43 @@ accessibility, educational usability, and public release remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 regional-affiliation negotiation-stage visualization v0.13.31
+
+## Status
+
+`pass` for bounded current negotiation-stage evidence only. No browser-native
+affiliation integration, stage-specific visual/audio quality, hidden-state
+access, human, legal, educational, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: `NegotiateCommitments` maps to the host `Negotiate commitments` stage
+  label and active institutional-stage process.
+- Pass: the host decision exposes community, workforce, and continuity
+  commitment fields with bounded parameters and written uncertainty.
+- Pass: shared process/decision renderers, canonical host submission, written
+  fallback, optional affiliation-negotiation audio, and competitive-only live
+  GUI scope remain explicit.
+- Pass: no stage art/audio, route, runtime field, registry entry, or authority
+  path is introduced.
+
+## Required fixes
+
+None for this bounded current negotiation-stage contract.
+
+## Evidence limits
+
+Browser-native affiliation presentation, stage-specific art/audio, commitment/
+review/integration state completion, stage transitions, replay/debrief updates,
+provenance/legal, human quality/accessibility, educational usability, and
+public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_negotiation_stage` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

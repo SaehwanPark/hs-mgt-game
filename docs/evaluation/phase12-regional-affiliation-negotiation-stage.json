@@ -1,0 +1,63 @@
+{
+  "schema_version": "regional-affiliation-negotiation-stage-v1",
+  "status": "complete-current-negotiation-stage-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current NegotiateCommitments stage process, decision, visible commitments, and optional audio boundary",
+  "source_contract": {
+    "stage_model": "src/model/affiliation.rs: NegotiateCommitments",
+    "stage_label": "src/mcp/campaign_coverage.rs: Negotiate commitments",
+    "stage_process": "src/mcp/campaign_coverage.rs: affiliation_processes",
+    "commitment_decision": "src/mcp/campaign_coverage.rs: set-commitments",
+    "command_surface": "src/mcp/campaign_coverage.rs: Affiliation legal command surface",
+    "command_template": "src/mcp/campaign_coverage.rs: commit community=1..8 workforce=1..8 continuity=1..8",
+    "commitment_fields": "src/mcp/campaign_coverage.rs: AffiliationObservation.commitments",
+    "stakeholder_fields": "src/mcp/campaign_coverage.rs: AffiliationObservation.commitments and stakeholder responses",
+    "process_renderer": "gui/app.mjs: renderCampaignCoverageProcesses",
+    "decision_renderer": "gui/app.mjs: renderCampaignCoverageDecisions",
+    "audio_state": "gui/music-stem-contract.mjs: affiliation_negotiation",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"
+  },
+  "negotiation_stage": {
+    "stage_enum": "NegotiateCommitments",
+    "stage_label": "Negotiate commitments",
+    "process_id": "affiliation-stage",
+    "process_label": "Institutional stage",
+    "process_status": "active",
+    "visible_equivalent": "Stage label, active process status, source text, and written uncertainty remain available.",
+    "decision": {
+      "id": "set-commitments",
+      "label": "Set affiliation commitments",
+      "command_template": "commit community={{community}} workforce={{workforce}} continuity={{continuity}}",
+      "parameters": [
+        {"id": "community", "label": "Community commitment", "minimum": 1, "maximum": 8},
+        {"id": "workforce", "label": "Workforce commitment", "minimum": 1, "maximum": 8},
+        {"id": "continuity", "label": "Continuity commitment", "minimum": 1, "maximum": 8}
+      ],
+      "uncertainty": "Partner fit and stakeholder responses remain uncertain after commitment."
+    },
+    "visible_commitments": "Current community, workforce, and continuity commitment values are host-projected fields; partner and stakeholder responses remain reported signals.",
+    "written_fallback": "Commitment labels, values, source text, process status, uncertainty, and validation feedback remain available without visual decoration."
+  },
+  "presentation_surface": {
+    "shared_process_renderer": "The shared campaign renderer can display the host-supplied institutional-stage process with a written label and status.",
+    "shared_decision_renderer": "The shared campaign renderer can display the host-supplied commitment decision fields and submit only the canonical host command.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation negotiation route is claimed.",
+    "audio_state": "The reusable affiliation_negotiation music state is optional, visible-trigger based, and text-complete; no direct campaign audio integration is claimed.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation negotiation-stage integration",
+    "stage-specific visual treatment and quality review",
+    "direct affiliation audio integration and human listening review",
+    "commitment/review/integration state completion and full-stage replay/debrief presentation"
+  ],
+  "limits": [
+    "This record covers the current host-projected negotiation stage; it does not complete the full affiliation campaign visualization.",
+    "No hidden partner intent, commitment threshold, private review state, true response, causal outcome, or future agreement probability is exposed.",
+    "Optional audio remains a presentation cue and cannot establish agreement, success, severity, or outcome certainty.",
+    "No new map, facility, portrait, stage art, audio file, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "No human accessibility, educational, legal, quality, listening, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_negotiation_stage.py"
+}

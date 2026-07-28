@@ -2943,3 +2943,12 @@ enough to promote the `affiliation-partner-executive` portrait preview or claim
 browser-native partner presentation. Keep identity decoration, partner-specific
 visual/audio work, provenance, legal review, and human identity/quality review
 as separate gates.
+
+## Phase 41: Treat negotiation-stage display as a host contract (2026-07-28)
+
+The affiliation host already exposes a typed `NegotiateCommitments` stage, an
+active institutional-stage process, a bounded commitment decision, visible
+commitment values, and written uncertainty. The shared renderer can present
+those supplied fields, while the reusable affiliation-negotiation music state
+remains optional. Keep browser integration, stage art/audio, hidden thresholds,
+true responses, replay/debrief completion, and human review as separate gates.

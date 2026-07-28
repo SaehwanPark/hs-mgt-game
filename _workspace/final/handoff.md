@@ -1203,3 +1203,26 @@ educational, or public-release claim is introduced.
 - Working branch: `feat/regional-affiliation-partner-identity-v0.13.30`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 regional-affiliation negotiation-stage visualization v0.13.31
+
+## Result
+
+Recorded the current host-owned `NegotiateCommitments` stage/process label,
+commitment decision fields, visible uncertainty, shared process/decision
+renderers, and optional affiliation-negotiation audio boundary.
+
+## Evidence boundary
+
+The ledger and parity test pass for current negotiation-stage evidence. No
+browser-native affiliation route, stage-specific art/audio, hidden state,
+runtime authority path, asset promotion, or human quality/legal, educational,
+or public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.30.
+- Working branch: `feat/regional-affiliation-negotiation-stage-v0.13.31`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
