@@ -6597,6 +6597,41 @@ Deferred / Non-Goals:
   validity, causal certainty, and future partner/integration outcomes remain
   outside the actor-visible sequence.
 
+### Visual/audio Phase 12 current regional-affiliation replay/debrief views (v0.13.36)
+
+Status: Complete for current technical replay/debrief evidence only;
+browser-native affiliation views, durable persistence/playback,
+instructor/true-state distinction, human visual/audio/accessibility/
+educational/legal review, and public release remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-replay-debrief.json`
+  for versioned replay artifact verification, host history/replay metadata,
+  terminal debrief content, decision-quality/alternative language, written
+  rendering, and resolved-detail boundaries.
+- Added `tests/test_phase12_regional_affiliation_replay_debrief.py` to check
+  source markers, artifact fields/integrity, debrief content, written
+  renderers, live scope, optional audio, and no-new-asset limits.
+- Checked only current replay/debrief evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive request,
+  contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native affiliation replay/debrief views, durable persistence/
+  playback, instructor/true-state distinction, and human visual/audio/
+  accessibility/educational/legal review remain open.
+
+Deferred / Non-Goals:
+
+- No browser route, animation, persistence, screenshot, instructor view, map,
+  facility, portrait, audio file, registry entry, runtime field, or authority
+  path is added.
+- Resolved inputs and post-resolution response detail remain in existing typed
+  replay/CLI terminal-debrief contracts and are not promoted into live
+  actor-visible browser controls or forecasts.
+
 ## Future
 
 ### Visual and audio experience upgrade

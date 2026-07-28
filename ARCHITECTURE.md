@@ -871,6 +871,12 @@ successors, legal command gates, visible stage labels/process, and
 replay-aligned committed history. It does not add browser sequencing,
 stage-specific assets, or change runtime authority.
 
+The v0.13.36 Phase 12 slice records current regional-affiliation replay and
+debrief contracts: versioned artifact verification, host history/replay
+metadata, terminal debrief content, decision-quality/alternative language,
+and written shared rendering. It does not add browser replay/debrief routes,
+durable persistence, instructor views, or change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

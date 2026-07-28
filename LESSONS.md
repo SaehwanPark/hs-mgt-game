@@ -2989,3 +2989,12 @@ Record that sequence without inventing browser animation or turning resolved
 inputs, private rationale, or future outcomes into actor-visible steps. Keep
 stage-specific presentation, persistence, instructor views, and human review
 separate.
+
+## Phase 46: Keep replay/debrief detail in its contract (2026-07-28)
+
+Regional-affiliation replay artifacts can verify version, ruleset, prior
+observation, transition, and state hashes, while the terminal debrief can
+explain outcomes, decision quality, and alternatives. Record those technical
+surfaces without promoting post-resolution response detail into a live browser
+actor view or claiming educational effectiveness. Keep browser views,
+persistence, instructor boundaries, and human review separate.

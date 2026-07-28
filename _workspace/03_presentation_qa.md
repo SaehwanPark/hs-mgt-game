@@ -3229,6 +3229,43 @@ remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
 
+# Presentation Domain QA — Phase 12 regional-affiliation replay/debrief views v0.13.36
+
+## Status
+
+`pass` for bounded current technical replay/debrief QA only. No browser-native
+affiliation view, durable persistence/playback, instructor/true-state,
+human, educational, legal, visual, audio, accessibility, or public-release
+approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: replay artifact version/ruleset checks and prior observation,
+  transition, and state-hash verification are source-linked.
+- Pass: host history/replay metadata, terminal debrief fields, decision-quality
+  language, alternative prompt, CLI export, and written renderers are explicit.
+- Pass: post-resolution response detail remains within existing typed/CLI
+  terminal-debrief boundaries; no live browser actor-view claim is made.
+- Pass: no new route, animation, persistence, asset, runtime field, authority
+  path, provenance, or public-release claim is added.
+
+## Required fixes
+
+None for this bounded replay/debrief contract.
+
+## Evidence limits
+
+Browser-native affiliation replay/debrief views, durable persistence/playback,
+instructor/true-state distinction, human visual/audio/accessibility review,
+educational usability, legal review, provenance clearance, and public release
+remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_replay_debrief` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status
