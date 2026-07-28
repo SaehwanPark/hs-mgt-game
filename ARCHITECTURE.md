@@ -731,6 +731,16 @@ manifest-checked while runtime-generated/catalog entries retain null release
 paths. This does not expand the campaign asset inventory or establish quality,
 placement, screenshot, accessibility, or human-review evidence.
 
+The v0.13.17 Phase 11.1 screenshot slice records the current supported
+actor-visible GUI composition as a screenshot-surface contract. The ledger
+names the executive desktop, briefing/board, deterministic regional scene,
+decision/consequence, and resolution/history/replay/debrief sources, while
+existing structural tests and the deterministic regional SVG hash remain the
+repeatable regression evidence. A loopback browser viewport was inspected
+after starting a competitive session, but the capture is not persisted or
+treated as a golden raster. Full-campaign screenshots, cross-browser/device
+capture, pixel-level quality, and human review remain outside this contract.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

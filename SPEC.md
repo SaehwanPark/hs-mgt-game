@@ -5974,6 +5974,35 @@ Deferred / Non-Goals:
 - No asset entry, release derivative, file-backed audio, screenshot tooling,
   simulation transition, or client-owned asset authority was added.
 
+### Visual/audio Phase 11.1 current screenshot-surface contract (v0.13.17)
+
+Status: Complete for the current supported actor-visible GUI screenshot
+surface; full-campaign raster coverage, cross-browser/device capture,
+pixel-level quality, and human review remain separately gated.
+
+Done:
+
+- Added `screenshot_coverage` for the executive desktop shell, briefing and
+  regional board, deterministic regional scene, decision/consequence views,
+  and resolution/history/replay/debrief surfaces.
+- Linked the ledger to the deterministic regional SVG snapshot, structural GUI
+  tests, live handoff tests, accessibility/audio/playtest checks, and the
+  local browser smoke route after starting a competitive session.
+- Kept the browser capture as inspection-only evidence; no raster golden,
+  browser dependency, runtime behavior, or authority path was added.
+
+Not Yet Done:
+
+- Full campaign state-by-state screenshots, cross-browser/device capture,
+  pixel-level visual quality, accessibility quality, usability, asset/audio
+  quality, and human comprehension/review.
+
+Deferred / Non-Goals:
+
+- No PNG/JPEG artifact, screenshot runner, upload, telemetry, campaign
+  expansion, simulation transition, or client-owned screenshot authority was
+  added.
+
 ## Future
 
 ### Visual and audio experience upgrade

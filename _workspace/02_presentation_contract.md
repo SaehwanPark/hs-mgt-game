@@ -2185,3 +2185,46 @@ the asset validator, release-manifest checker, security validator, and credits
 generator; the full asset/security/release/credits checks pass. Future assets,
 campaign placement/use, quality, screenshots, accessibility, and human review
 remain separately gated.
+
+# Presentation Contract — Phase 11.1 current screenshot-surface contract v0.13.17
+
+## Contract status
+
+Complete for the current supported actor-visible GUI screenshot surface. This
+is a source/structural/SVG/local-smoke contract, not a full-campaign raster,
+cross-browser/device, pixel-quality, accessibility-quality, or human-review
+approval.
+
+## Source and visible behavior
+
+- The ledger names the executive desktop shell, briefing/regional board,
+  deterministic regional scene, decision/consequence views, and
+  resolution/history/replay/debrief views.
+- `gui/index.html`, `gui/app.mjs`, and `gui/regional-board.mjs` provide the
+  current source markers; the browser renders actor-visible metrics, briefing,
+  campaign controls, settings, first-month path, and the live presentation
+  surfaces without inventing hidden state.
+- The deterministic regional SVG remains protected by
+  `tests/fixtures/regional_board_snapshot.sha256`; structural, live-handoff,
+  accessibility, audio, and playtest checks remain the repeatable evidence.
+
+## Fallback, authority, and provenance
+
+The browser remains a read-only presentation client for simulation facts. A
+local viewport screenshot is inspection-only evidence and is not a source of
+state, a hash authority, a persisted asset, or a cross-browser guarantee.
+Written and reduced-audio fallbacks remain part of the visible surface.
+
+## Verification and limits
+
+`tests/test_phase11_campaign_coverage.py` requires the named surfaces, source
+markers, SVG snapshot test, structural/live-handoff tests, playtest marker, and
+local smoke policy. Full-campaign state-by-state raster goldens,
+cross-browser/device capture, pixel-level visual quality, accessibility
+quality, usability, asset/audio quality, and human review remain separate
+gates.
+
+## Status
+
+`pass` for the current supported screenshot-surface contract. No screenshot
+artifact or runtime behavior was added.
