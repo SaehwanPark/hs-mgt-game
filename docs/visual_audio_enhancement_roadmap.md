@@ -3017,7 +3017,12 @@ remains open.
   commitment metrics, partner response statuses, pending review process,
   submit/await decisions, and written uncertainty are covered while browser
   integration and state-specific art/audio remain open.
-- [ ] Integration-state visualization completed.
+- [x] Current regional-affiliation integration-state visualization recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-integration-state.json`
+  and `tests/test_phase12_regional_affiliation_integration_state.py`; the
+  host integration process/decision, visible outcome statuses, and written
+  consequence boundary are covered while browser integration and state art
+  remain open.
 - [ ] Affiliation audio motif completed.
 - [ ] Stage-transition sequence completed.
 - [ ] Replay and debrief views updated.
@@ -3254,6 +3259,33 @@ Deferred / Non-Goals:
   regulatory, partner, or educational predictions.
 - Optional audio remains a visible-only cue and cannot establish approval,
   rejection, severity, or outcome certainty.
+
+### v0.13.33 current regional-affiliation integration-state visualization
+
+- `docs/evaluation/phase12-regional-affiliation-integration-state.json`
+  records the typed `IntegrateOrDecline` stage, visible
+  `integration-obligation` process, begin/decline decision, `Integrated` and
+  `IntegrationDeclined` statuses, written consequence boundary, shared
+  process/decision renderers, and optional `affiliation_negotiation` audio.
+- `tests/test_phase12_regional_affiliation_integration_state.py` checks source
+  markers, stage/process/decision identity, outcome statuses, hidden drag/shock
+  exclusions, canonical-command and written-fallback boundaries,
+  competitive-only live GUI scope, optional audio, and no-new-asset decision.
+- This closes only current integration-state evidence. It does not complete
+  browser-native integration, state-specific art/audio, stage transitions,
+  replay/debrief updates, persistence, or human quality, accessibility, legal,
+  educational, and public-release review.
+
+Deferred / Non-Goals:
+
+- No integration art, map, facility, portrait, audio file, route, runtime
+  field, registry entry, screenshot, persistence, instructor view, or authority
+  path was added or promoted.
+- Resolved integration drag and continuity shock remain outside the actor
+  observation; no private approval basis, hidden future obligation, legal
+  validity, causal certainty, or future integration trajectory is exposed.
+- Optional audio remains a visible-only cue and cannot establish integration,
+  decline, severity, or outcome certainty.
 
 ### Exit criteria
 

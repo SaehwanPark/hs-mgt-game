@@ -2000,3 +2000,39 @@ browser-native affiliation coverage.
   or public-release claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12 regional-affiliation integration-state visualization v0.13.33
+
+## Scope
+
+Record current host-projected integration-state presentation for
+`regional-affiliation-v1` without exposing resolved hidden inputs or claiming
+browser-native affiliation integration.
+
+## Target slice
+
+- Join the `IntegrateOrDecline` stage, `integration-obligation` process,
+  begin/decline decision, visible integrated/declined statuses, and written
+  consequence language.
+- Record the visible status/effect boundary versus resolved integration drag
+  and continuity shock, plus shared renderer, optional audio, no-new-asset,
+  and live-GUI boundaries.
+
+## Sources and expected files
+
+- `src/mcp/campaign_coverage.rs`, `src/model/affiliation.rs`,
+  `src/affiliation/transition.rs`, `gui/app.mjs`,
+  `gui/music-stem-contract.mjs`, and existing campaign presentation and
+  asset-need ledgers/tests.
+- New integration-state ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add integration art, maps, facilities, portraits, audio files, routes,
+  runtime fields, persistence, screenshots, instructor views, authority paths,
+  hidden integration inputs, private approval basis, human review, or
+  public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

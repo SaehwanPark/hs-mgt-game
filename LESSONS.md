@@ -2961,3 +2961,13 @@ process with submit/await commands and reported response/status values. Record
 that contract without exposing private deliberation, hidden thresholds, legal
 validity, or future integration results. Keep optional audio, state-specific
 art, browser integration, replay/debrief completion, and human review separate.
+
+## Phase 43: Keep integration consequences separate from hidden inputs (2026-07-28)
+
+The affiliation projection already exposes an integration-obligation process,
+begin/decline decision, and integrated/declined statuses with written
+consequence language. Integration drag and continuity shock are resolved inputs,
+not actor-visible forecasts. Record status and consequence boundaries without
+turning hidden inputs into visual controls or claims about future integration;
+keep browser integration, state-specific art/audio, replay/debrief, and human
+review separate.

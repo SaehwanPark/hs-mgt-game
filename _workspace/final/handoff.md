@@ -1249,3 +1249,27 @@ quality/legal, educational, or public-release claim is introduced.
 - Working branch: `feat/regional-affiliation-commitment-review-v0.13.32`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 regional-affiliation integration-state visualization v0.13.33
+
+## Result
+
+Recorded the current host-owned `IntegrateOrDecline` stage,
+integration-obligation process, begin/decline decision, visible outcome
+statuses, written consequence boundary, shared process/decision renderers, and
+optional affiliation-negotiation audio.
+
+## Evidence boundary
+
+The ledger and parity test pass for current integration-state evidence. No
+browser-native integration route, state-specific art/audio, resolved drag/shock
+input, hidden state, runtime authority path, asset promotion, or human
+quality/legal, educational, or public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.32.
+- Working branch: `feat/regional-affiliation-integration-state-v0.13.33`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

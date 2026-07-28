@@ -3120,6 +3120,43 @@ open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 regional-affiliation integration-state visualization v0.13.33
+
+## Status
+
+`pass` for bounded current integration-state evidence only. No browser-native
+integration, state-specific visual/audio quality, hidden-input access, private
+approval, legal, human, educational, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: `IntegrateOrDecline` maps to the host `Integrate or decline` stage and
+  visible `integration-obligation` process.
+- Pass: the host decision exposes begin/decline choices with written obligation
+  and uncertainty language; integrated/declined statuses are source-linked.
+- Pass: resolved integration drag and continuity shock remain explicitly
+  outside actor observation while host-projected status/consequence text stays
+  visible.
+- Pass: shared process/decision renderers, canonical host submission, written
+  fallback, optional affiliation-negotiation audio, competitive-only live GUI
+  scope, and no-new-asset decision remain explicit.
+
+## Required fixes
+
+None for this bounded current integration-state contract.
+
+## Evidence limits
+
+Browser-native integration, state-specific art/audio, stage transitions,
+replay/debrief updates, persistence, provenance/legal, human quality/
+accessibility, educational usability, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_integration_state` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

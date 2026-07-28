@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.33] - 2026-07-28
+
+- Recorded current regional-affiliation integration-state presentation across
+  the host `IntegrateOrDecline` stage, integration-obligation process,
+  begin/decline decision, visible outcome statuses, and written consequence
+  boundary.
+- Closed only current integration-state evidence; resolved drag/shock inputs,
+  browser-native integration, state-specific art/audio, human quality,
+  educational review, and public-release gates remain open, with no runtime
+  behavior changed.
+
 ## [0.13.32] - 2026-07-28
 
 - Recorded current regional-affiliation commitment and review presentation
