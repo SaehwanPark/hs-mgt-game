@@ -1159,3 +1159,25 @@ remain open; no runtime behavior changed.
 - Working branch: `feat/stabilization-accessibility-evidence-v0.13.28`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 stabilization provenance audit v0.13.29
+
+## Result
+
+Recorded current technical provenance for reusable stabilization visual/audio/
+facility sources, registry/release/credits checks, the no-new-asset decision,
+zero third-party release count, and the unreleased portrait-preview boundary.
+
+## Evidence boundary
+
+The ledger and parity test pass for current provenance evidence. Future asset
+and recorded-audio provenance, portrait/legal/human quality, educational, and
+public-release gates remain open; no asset or runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.28.
+- Working branch: `feat/stabilization-provenance-audit-v0.13.29`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

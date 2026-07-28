@@ -2965,7 +2965,12 @@ open.
   keyboard/focus, text/non-color, text-scale, reduced-motion, written-
   equivalent, and audio-fallback checks pass while human accessibility remains
   open.
-- [ ] Provenance audit passes.
+- [x] Current stabilization provenance audit passes. Evidence:
+  `docs/evaluation/phase12-stabilization-provenance-audit.json` and
+  `tests/test_phase12_stabilization_provenance_audit.py`; current catalogs,
+  registry/release/credits checks, no-new-asset decision, and unreleased
+  portrait-preview boundary are covered while legal and human review remain
+  open.
 
 ### Exit criteria
 
@@ -3135,6 +3140,26 @@ Deferred / Non-Goals:
   screenshot, persistence, instructor view, or authority path was added.
 - Technical interface proxies do not establish human accessibility, assistive-
   technology compatibility, device performance, or educational effectiveness.
+
+### v0.13.29 current stabilization provenance audit
+
+- `docs/evaluation/phase12-stabilization-provenance-audit.json` records current
+  reusable visual/audio/facility sources, registry/release-manifest/credits
+  checks, the no-new-asset decision, zero third-party release count, and the
+  unreleased portrait-preview boundary.
+- `tests/test_phase12_stabilization_provenance_audit.py` requires exact source
+  markers, six passing audit entries, repository-authored/runtime-generated
+  provenance boundaries, no-new-asset scope, and future reopen limits.
+- This closes only current stabilization technical provenance evidence. It
+  does not complete future asset provenance, portrait review, legal clearance,
+  human quality, educational, or public-release review.
+
+Deferred / Non-Goals:
+
+- No new map, facility, portrait, stage-art, raster, audio, registry entry,
+  route, or runtime asset was added or promoted.
+- Machine provenance fields are not legal clearance, training-data provenance,
+  output-quality approval, or human review.
 
 ### Exit criteria
 

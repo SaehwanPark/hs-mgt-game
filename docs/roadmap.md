@@ -1285,8 +1285,8 @@ At each phase gate, explicitly decide what will not be built next.
    pressure-state registration at v0.13.24, current stabilization
    tutorial-presentation evidence at v0.13.25, current stabilization
    audio-state mapping evidence at v0.13.26, current stabilization
-   debrief evidence at v0.13.27, and current stabilization accessibility
-   evidence at v0.13.28.
+   debrief evidence at v0.13.27, current stabilization accessibility evidence
+   at v0.13.28, and current stabilization provenance evidence at v0.13.29.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

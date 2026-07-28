@@ -6355,6 +6355,39 @@ Deferred / Non-Goals:
 - Technical interface proxies do not establish human accessibility or
   educational effectiveness.
 
+### Visual/audio Phase 12 current stabilization provenance audit (v0.13.29)
+
+Status: Complete for current technical stabilization provenance evidence only;
+future asset/legal provenance, portrait review, human quality, educational, and
+public-release review remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-stabilization-provenance-audit.json` for
+  current repository-authored/project-generated visual/audio/facility sources,
+  registry/release/credits checks, no-new-asset scope, zero third-party release
+  count, and the unreleased portrait-preview boundary.
+- Added `tests/test_phase12_stabilization_provenance_audit.py` to require exact
+  source markers, six passing audit entries, campaign provenance boundaries,
+  and no-new-asset/future-review limits.
+- Checked only current stabilization technical provenance evidence and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request/contract/QA/handoff records; no asset or runtime
+  behavior changed.
+
+Not Yet Done:
+
+- Future campaign asset/recorded-audio provenance, portrait model/seed and
+  release gates, legal review, human quality, educational review, and public
+  release remain open.
+
+Deferred / Non-Goals:
+
+- No new map, facility, portrait, stage-art, raster, audio, registry entry,
+  route, or runtime asset was added or promoted.
+- Machine provenance fields do not establish legal clearance, training-data
+  provenance, output quality, or human approval.
+
 ## Future
 
 ### Visual and audio experience upgrade
