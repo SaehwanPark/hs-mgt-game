@@ -757,6 +757,14 @@ metadata/release evidence only; they do not establish lived accessibility,
 quality, identity consistency, model/seed provenance, approval, or runtime
 use.
 
+The v0.13.20 Phase 13.1 slice aggregates current technical-release evidence
+without changing the architecture. The ledger joins automated Rust/GUI,
+source/structural/SVG, asset/license/hash/security, accessibility-contract,
+offline, Chromium, replay, and in-memory checkpoint checks. It remains a
+source-checkout contract: product/content readiness, durable persistence,
+cross-browser/device certification, human quality/accessibility, educational
+review, and public-release approval are not inferred.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

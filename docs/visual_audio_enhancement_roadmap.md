@@ -2994,6 +2994,11 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 
 ## Milestone 13.1: Release candidate audit
 
+**Status:** Current source-checkout technical evidence is recorded in
+v0.13.20. Product/content review, public-release approval, full-campaign
+coverage, durable persistence, cross-browser/device certification, and human
+educational/accessibility gates remain open.
+
 ### Product checklist
 
 - [ ] First-session workflow complete.
@@ -3007,17 +3012,44 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 
 ### Technical checklist
 
-- [ ] Rust tests pass.
-- [ ] GUI tests pass.
-- [ ] Screenshot tests pass.
-- [ ] Asset validation passes.
-- [ ] License validation passes.
-- [ ] Hash validation passes.
-- [ ] Accessibility checks pass.
-- [ ] Offline operation passes.
-- [ ] Replay verification passes.
-- [ ] Save/load verification passes.
-- [ ] Browser compatibility passes.
+- [x] Current Rust test suite passes. Evidence:
+  `phase13.1-technical-coverage.json` and `cargo test -- --test-threads=1`.
+- [x] Current GUI/governance test suite passes. Evidence:
+  `phase13.1-technical-coverage.json` and the full Python test suite.
+- [x] Current supported screenshot/structural regression passes. Evidence:
+  `phase11.1-campaign-coverage-ledger.json` and the regional SVG snapshot;
+  full-campaign raster screenshots remain open.
+- [x] Current asset validation passes. Evidence: `validate_assets.py` and the
+  current registry/release boundary.
+- [x] Current license/provenance validation passes. Evidence:
+  `validate_assets.py`, the asset licensing policy, and registry tests.
+- [x] Current hash/release validation passes. Evidence:
+  `verify_asset_release.py --check` and the release manifest.
+- [x] Current accessibility presentation-contract checks pass. Evidence:
+  GUI accessibility/device-contract tests; human accessibility review remains
+  open.
+- [x] Current offline loopback package passes. Evidence:
+  `check_offline_availability.py` and the offline policy.
+- [x] Current immutable replay verification passes. Evidence:
+  `test_phase11_live_replay.py`; playback/regeneration remain open.
+- [x] Current in-memory save/load visual continuity passes. Evidence:
+  `test_phase11_live_checkpoint.py`; durable persistence remains open.
+- [x] Current declared Chromium compatibility contract passes. Evidence:
+  `check_browser_compatibility.py`; Firefox/WebKit remain non-certified.
+
+### v0.13.20 current technical-release evidence
+
+- `docs/evaluation/phase13.1-technical-coverage.json` joins the current Rust,
+  Python/GUI, screenshot/structural, asset/license/hash/security,
+  accessibility-contract, offline, Chromium, replay, and in-memory checkpoint
+  checks with explicit commands and source paths.
+- `tests/test_phase13_technical_coverage.py` requires every named check to have
+  an existing source, passing-status marker, command, and explicit product/
+  human limits.
+- This closes only current source-checkout technical evidence. Product and
+  content completeness, full-campaign screenshots, durable save/load/replay,
+  cross-browser/device certification, human accessibility/quality, legal and
+  educational readiness, and public-release approval remain open.
 
 ### Content checklist
 

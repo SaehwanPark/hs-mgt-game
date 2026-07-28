@@ -2291,3 +2291,33 @@ source existence/hash, and written equivalent/fallback fields. Prompt/seed,
 crop/derivative, human identity/resemblance, protected marks, artifact
 quality, lived accessibility, small-size/grayscale, legal, release, registry,
 and runtime-use gates remain open.
+
+# Presentation Contract — Phase 13.1 current technical-release coverage v0.13.20
+
+## Contract status
+
+Complete for current source-checkout technical evidence. This is not a public
+release, product/content, full-campaign, durable-persistence,
+cross-browser/device, human-quality, or educational-readiness approval.
+
+## Source and visible behavior
+
+- The ledger joins existing Rust/GUI, source/structural/SVG,
+  asset/license/hash/security, accessibility-contract, offline, Chromium,
+  replay, and in-memory checkpoint checks.
+- No new presentation surface or behavior is introduced; existing written,
+  fallback, read-only, and bounded continuity contracts remain authoritative.
+
+## Fallback, authority, and provenance
+
+This is governance evidence only. It cannot enter simulation state, commands,
+observations, history, replay, debrief, or client authority. The narrower
+limits of each referenced ledger remain in force.
+
+## Verification and limits
+
+`tests/test_phase13_technical_coverage.py` requires each check to retain a
+source path, command, pass marker, and explicit limits. Product/content
+completion, full-campaign raster, durable save/load/replay, additional browser
+engines/real devices, human quality/accessibility/legal review, educational
+readiness, and public-release approval remain open.

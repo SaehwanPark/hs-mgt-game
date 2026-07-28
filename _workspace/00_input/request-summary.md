@@ -1364,6 +1364,38 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Phase 13.1 current technical-release coverage v0.13.20
+
+## Scope
+
+Aggregate the current source-checkout technical evidence into one bounded
+Phase 13.1 contract without calling it public-release readiness.
+
+## Target slice
+
+- Join current Rust and Python/GUI suites, screenshot/structural regression,
+  asset/license/hash/security, accessibility-contract, offline, Chromium,
+  replay, and in-memory checkpoint evidence.
+- Record commands, source paths, and narrower limits for each check.
+- Keep product/content completion, full-campaign raster coverage, durable
+  persistence, cross-browser/device certification, human review, educational
+  readiness, and release approval open.
+
+## Sources and validation
+
+- `docs/evaluation/phase13.1-technical-coverage.json` and
+  `tests/test_phase13_technical_coverage.py`.
+- Existing Rust/Python tests, asset/generation/release validators, offline,
+  browser/device, replay, checkpoint, and screenshot ledgers.
+- Run full Python/Rust/lint/release/documentation/generation/asset/offline/
+  browser/device/visual-audio checks.
+
+## Non-goals
+
+Do not add a release artifact, campaign content, screenshot runner, browser
+engine, durable storage, human evaluation, educational pilot material, or new
+authority path.
+
 # Request Summary — Phase 8.2 current portrait-preview inventory integrity v0.13.18
 
 ## Scope

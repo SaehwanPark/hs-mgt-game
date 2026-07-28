@@ -2907,3 +2907,37 @@ runtime-use, and human review remain open.
 - `python3 -m unittest tests.test_portrait_workflow` — pass.
 - Full generation, release, asset/security, documentation, offline,
   browser/device, and visual/audio checks — pass.
+
+# Presentation Domain QA — Phase 13.1 current technical-release coverage v0.13.20
+
+## Status
+
+`pass` for bounded current source-checkout technical QA. No public-release,
+product/content, full-campaign, durable-persistence, cross-browser/device,
+human-quality, or educational approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: the ledger identifies ten current technical check groups with commands,
+  source paths, pass statuses, and explicit limits.
+- Pass: existing narrower screenshot, asset, portrait, replay, checkpoint,
+  offline, browser/device, and accessibility contracts remain referenced
+  rather than reimplemented.
+- Pass: no runtime, authority, asset, audio, persistence, or release artifact
+  changed.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Product/content completion, full-campaign screenshots, durable persistence,
+cross-browser/device certification, human quality/accessibility/legal review,
+educational usability, and public-release approval remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_technical_coverage` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
