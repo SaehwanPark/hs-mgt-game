@@ -2697,3 +2697,38 @@ markers, commitment/review fields and statuses, renderers, canonical-command
 and written-fallback boundaries, live scope, optional audio, and the no-new-
 asset decision. State-specific art/audio, integration, replay/debrief, and
 human review remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation integration-state visualization v0.13.33
+
+## Contract status
+
+Complete for current host-projected integration-state evidence only.
+Browser-native integration, state-specific art/audio, stage transitions,
+replay/debrief updates, persistence, and human quality, accessibility, legal,
+educational, and public-release review remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the `IntegrateOrDecline` stage, visible
+  `integration-obligation` process, begin/decline decision, and
+  `Integrated`/`IntegrationDeclined` statuses.
+- Host-projected status, metrics, events, effects, commitments, stakeholder
+  responses, written consequence text, and uncertainty remain visible; resolved
+  integration drag and continuity shock remain outside actor observation.
+- Shared process/decision renderers preserve supplied fields and canonical host
+  submission with complete written equivalents.
+
+## Fallback, authority, and provenance
+
+The reusable `affiliation_negotiation` music state remains optional and
+visible-trigger based. The live GUI remains competitive-regional-v1 only; no
+browser-native integration route, new asset, runtime authority path, hidden
+input, or registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_integration_state.py` checks source
+markers, stage/process/decision identity, outcomes, hidden-input exclusions,
+renderers, canonical-command and written-fallback boundaries, live scope,
+optional audio, and the no-new-asset decision. State-specific art/audio,
+transitions, replay/debrief, persistence, and human review remain open.

@@ -6494,6 +6494,41 @@ Deferred / Non-Goals:
 - Review responses remain stylized host-resolved observations; optional audio
   remains visible-only with complete written meaning.
 
+### Visual/audio Phase 12 current regional-affiliation integration-state visualization (v0.13.33)
+
+Status: Complete for current host-projected integration-state evidence only;
+browser-native integration, state-specific art/audio, stage transitions,
+replay/debrief updates, persistence, human quality/accessibility/legal/
+educational review, and public release remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-integration-state.json`
+  for the typed integration stage, integration-obligation process,
+  begin/decline decision, visible outcome statuses, written consequence and
+  hidden drag/shock boundaries, shared renderers, and optional audio.
+- Added `tests/test_phase12_regional_affiliation_integration_state.py` to check
+  source markers, stage/process/decision identity, outcomes, hidden-input
+  exclusions, canonical-command and written-fallback boundaries,
+  competitive-only live GUI scope, optional audio, and the no-new-asset
+  decision.
+- Checked only current integration-state evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive
+  request/contract/QA/handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native affiliation integration, state-specific art/audio, stage
+  transitions, replay/debrief updates, persistence, and human quality,
+  accessibility, legal, educational, and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No integration drag, continuity shock, private approval basis, hidden future
+  obligation, legal validity, causal certainty, future trajectory, asset,
+  route, persistence, instructor view, or authority path is introduced.
+- Optional audio remains visible-only with complete written meaning.
+
 ## Future
 
 ### Visual and audio experience upgrade

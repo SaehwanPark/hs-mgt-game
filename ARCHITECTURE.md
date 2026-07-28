@@ -852,6 +852,13 @@ statuses, shared process/decision renderers, and optional affiliation audio.
 It does not expose private review deliberation or hidden state, add assets or a
 browser route, or change runtime authority.
 
+The v0.13.33 Phase 12 slice records current regional-affiliation integration
+state: the host `IntegrateOrDecline` stage, integration-obligation process,
+begin/decline decision, visible outcome statuses, and written consequence
+boundary. Resolved integration drag and continuity shock remain outside the
+actor observation; no browser route, asset, hidden state, or authority change
+is introduced.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

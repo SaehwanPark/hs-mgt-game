@@ -1,0 +1,65 @@
+{
+  "schema_version": "regional-affiliation-integration-state-v1",
+  "status": "complete-current-integration-state-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current host-projected IntegrateOrDecline process, decision, outcome statuses, and hidden-consequence boundary",
+  "source_contract": {
+    "stage_model": "src/model/affiliation.rs: IntegrateOrDecline",
+    "stage_label": "src/mcp/campaign_coverage.rs: Integrate or decline",
+    "integration_process": "src/mcp/campaign_coverage.rs: integration-obligation",
+    "integration_decision": "src/mcp/campaign_coverage.rs: choose-integration",
+    "command_surface": "src/mcp/campaign_coverage.rs: integrate decision=begin|decline",
+    "decision_model": "src/model/affiliation.rs: IntegrationDecision",
+    "integrated_status": "src/model/affiliation.rs: Integrated",
+    "declined_status": "src/model/affiliation.rs: IntegrationDeclined",
+    "visible_effect": "src/affiliation/transition.rs: integration start",
+    "visible_event": "src/affiliation/transition.rs: Riverside began early integration with initial drag and continuity effects",
+    "hidden_drag": "src/model/affiliation.rs: pub integration_drag: i32",
+    "hidden_shock": "src/model/affiliation.rs: pub continuity_shock: i32",
+    "process_renderer": "gui/app.mjs: renderCampaignCoverageProcesses",
+    "decision_renderer": "gui/app.mjs: renderCampaignCoverageDecisions",
+    "audio_state": "gui/music-stem-contract.mjs: affiliation_negotiation",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"
+  },
+  "integration_state": {
+    "stage_enum": "IntegrateOrDecline",
+    "stage_label": "Integrate or decline",
+    "process_id": "integration-obligation",
+    "process_label": "Integration obligation",
+    "process_status": "visible",
+    "process_text": "Review the visible commitments and stakeholder responses before choosing integration or decline.",
+    "decision": {
+      "id": "choose-integration",
+      "label": "Choose integration or decline",
+      "command_template": "integrate decision={{decision}}",
+      "options": ["begin", "decline"],
+      "uncertainty": "Integration creates obligations and drag; decline preserves a different path."
+    },
+    "outcome_statuses": ["Integrated", "IntegrationDeclined"],
+    "visible_consequence_boundary": "Host-projected status, metrics, events, effects, commitments, and stakeholder responses remain visible; resolved integration drag and continuity shock remain outside the actor observation.",
+    "written_equivalent": "Integration/decline label, decision options, status, consequence text, source attribution, and uncertainty remain available without visual decoration."
+  },
+  "presentation_surface": {
+    "shared_process_renderer": "The shared campaign renderer can display the host-supplied integration-obligation process with a written label and visible status.",
+    "shared_decision_renderer": "The shared campaign renderer can display begin/decline choices and submit only the canonical host command.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation integration route is claimed.",
+    "audio_state": "The reusable affiliation_negotiation music state is optional, visible-trigger based, and text-complete; no direct campaign integration audio is claimed.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation integration-state presentation",
+    "state-specific visual treatment and quality review",
+    "direct affiliation audio integration and human listening review",
+    "stage transitions, full replay/debrief presentation, persistence, and human educational review"
+  ],
+  "limits": [
+    "This record covers current host-projected integration state; it does not complete the full affiliation campaign visualization.",
+    "Integration drag and continuity shock are resolved inputs, not directly visible forecasts or player-controlled hidden values.",
+    "No private approval basis, hidden future obligation, legal validity, causal certainty, or future integration trajectory is exposed.",
+    "Optional audio remains a presentation cue and cannot establish integration, decline, severity, or outcome certainty.",
+    "No new map, facility, portrait, stage art, audio file, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "No human accessibility, educational, legal, quality, listening, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_integration_state.py"
+}
