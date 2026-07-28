@@ -2870,3 +2870,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   legibility requirements.
 - Prevention: Treat “no new asset currently required” as a bounded decision,
   not a permanent asset or quality conclusion.
+
+## Phase 34: Register shared pressure vocabulary without inventing severity
+
+- Context: Existing actor-visible operational overlays, statuses, event cues,
+  and music states already covered common workforce, demand, financial, policy,
+  trust, project, uncertainty, and recovery signals, but Phase 12 had no one
+  cross-catalog pressure-state registration record.
+- Risk: Adding a new pressure taxonomy without direct visible triggers could
+  leak hidden severity, expose inferred causality, or turn optional audio into
+  an outcome channel.
+- Resolution: Register only current visible-field categories, bind each to
+  existing overlay/status/audio IDs, retain text/pattern/reduced-motion
+  equivalents, and keep campaign-specific registration empty.
+- Prevention: Require a visible source, written equivalent, fallback, and
+  explicit direct-mapping boundary before promoting any future pressure state.
