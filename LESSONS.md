@@ -2998,3 +2998,11 @@ explain outcomes, decision quality, and alternatives. Record those technical
 surfaces without promoting post-resolution response detail into a live browser
 actor view or claiming educational effectiveness. Keep browser views,
 persistence, instructor boundaries, and human review separate.
+
+## Phase 47: Let provenance gates stop asset promotion (2026-07-28)
+
+The regional-affiliation technical audit can pass registry, security, release,
+generation, credits, reuse, asset-need, and audio-packaging checks while
+partner/stage art, recorded audio, portrait provenance, legal clearance, and
+human quality remain open. Keep machine provenance evidence separate from
+direct campaign use and public-release approval.

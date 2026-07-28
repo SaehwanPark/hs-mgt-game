@@ -2838,3 +2838,37 @@ markers, replay fields/integrity, debrief content, written history/debrief
 renderers, optional audio, live scope, resolved-detail boundaries, and the
 no-new-asset decision. Browser views, persistence, and human review remain
 open.
+
+# Presentation Contract — Phase 12 regional-affiliation provenance audit v0.13.37
+
+## Contract status
+
+Complete for current machine-checkable technical provenance evidence only.
+Direct partner/stage assets, recorded audio, legal/training-data review,
+human visual/audio/accessibility/educational quality, and public release remain
+separately gated.
+
+## Source and visible behavior
+
+- The ledger binds reusable visual/audio/fallback catalogs, registry policy,
+  generated credits, portrait review queue, and passing registry/security/
+  release/generation/credits/reuse/asset-need/audio-packaging checks.
+- The current regional-affiliation asset-need decision remains
+  `none-required-by-current-stage-contract`; generic fallback and written
+  equivalents remain available without promoting partner/stage assets.
+- Runtime-generated audio has no file-backed release path, and unreleased
+  portrait previews remain outside the release surface.
+
+## Fallback, authority, and provenance
+
+Catalog and registry evidence is technical and read-only; it does not grant
+asset authority, direct campaign mapping, legal clearance, training-data
+provenance, human approval, or public-release status. No new asset, route,
+runtime authority path, or registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_provenance_audit.py` checks source
+markers, all audit statuses/coverage, release counts, portrait gates, and
+legal/training-data/human/public-release limits. Direct assets, recorded audio,
+and human review remain open.

@@ -877,6 +877,12 @@ metadata, terminal debrief content, decision-quality/alternative language,
 and written shared rendering. It does not add browser replay/debrief routes,
 durable persistence, instructor views, or change runtime authority.
 
+The v0.13.37 Phase 12 slice records the current regional-affiliation technical
+provenance boundary: reusable catalogs/registry sources, generated credits,
+release/security/audio packaging checks, no-new-asset decision, and
+unreleased portrait-preview gates. It does not promote assets, claim legal or
+human approval, or change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

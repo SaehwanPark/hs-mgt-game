@@ -3042,7 +3042,12 @@ remains open.
   artifact verification, host history/replay metadata, terminal debrief,
   decision-quality language, alternatives, and written rendering are covered
   while browser-native views and durable persistence remain open.
-- [ ] Provenance audit passes.
+- [x] Current regional-affiliation provenance audit passes.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-provenance-audit.json`
+  and `tests/test_phase12_regional_affiliation_provenance_audit.py`; current
+  catalog/registry, credits, release/security/audio packaging, no-new-asset,
+  and unreleased portrait-preview gates are machine-checked while legal,
+  training-data, human quality, and public-release review remain open.
 
 ### v0.13.21 current campaign-specific presentation inventory
 
@@ -3373,6 +3378,28 @@ Deferred / Non-Goals:
 - Resolved inputs and post-resolution response detail remain in existing typed
   replay/CLI terminal-debrief contracts and are not promoted into live
   actor-visible browser controls or forecasts.
+
+### v0.13.37 current regional-affiliation provenance audit
+
+- `docs/evaluation/phase12-regional-affiliation-provenance-audit.json` records
+  current reusable visual/audio/fallback source contracts, eight passing
+  registry/security/release/generation/credits/reuse/asset-need/audio checks,
+  third-party and release-audio counts, no-new-asset decision, and unreleased
+  portrait-preview boundary.
+- `tests/test_phase12_regional_affiliation_provenance_audit.py` checks source
+  markers, every audit check and coverage, campaign provenance/release counts,
+  portrait gate, and legal/training-data/human/public-release limits.
+- This closes only machine-checkable current provenance evidence; direct
+  partner/stage assets, recorded audio, legal/training-data review, human
+  visual/audio/accessibility/educational quality, and public release remain
+  open.
+
+Deferred / Non-Goals:
+
+- No map, facility, portrait, stage art, raster, audio, registry entry, route,
+  runtime asset, or authority path is created or promoted.
+- Catalog eligibility and generated credits do not prove direct campaign use,
+  legal clearance, training-data provenance, asset quality, or audio usefulness.
 
 ### Exit criteria
 

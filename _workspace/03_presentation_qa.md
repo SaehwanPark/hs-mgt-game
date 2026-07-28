@@ -3266,6 +3266,41 @@ remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
 
+# Presentation Domain QA — Phase 12 regional-affiliation provenance audit v0.13.37
+
+## Status
+
+`pass` for bounded current machine-checkable provenance QA only. No direct
+partner/stage asset, recorded-audio, legal, training-data, human visual/audio,
+accessibility, educational, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: reusable catalog/registry sources, generated credits, portrait review
+  queue, no-new-asset decision, and future reopen triggers are source-linked.
+- Pass: registry, security, release-manifest, generation, runtime-credit,
+  reuse, asset-need, and audio-packaging audit checks are marked and covered.
+- Pass: runtime-generated audio has no file-backed release path and portrait
+  previews remain unreleased; no direct partner/stage promotion is claimed.
+- Pass: no new route, asset, runtime field, authority path, provenance claim,
+  or public-release approval is added.
+
+## Required fixes
+
+None for this bounded provenance contract.
+
+## Evidence limits
+
+Direct partner/stage assets, recorded audio, legal/licensing and training-data
+review, human visual/audio/accessibility quality, educational usability,
+provenance clearance, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_provenance_audit` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

@@ -1900,6 +1900,40 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12 regional-affiliation provenance audit v0.13.37
+
+## Scope
+
+Record the current machine-checkable provenance boundary for
+`regional-affiliation-v1` without promoting assets or claiming legal, human,
+training-data, or public-release approval.
+
+## Target slice
+
+- Join reusable visual/audio/fallback catalog and registry sources to registry,
+  security, release-manifest, generation-metadata, credits, reuse, asset-need,
+  and audio-packaging checks.
+- Record third-party/release-audio counts, no-new-asset decision, unreleased
+  portrait-preview gate, future reopen triggers, and written/public limits.
+
+## Sources and expected files
+
+- `docs/evaluation/phase12-campaign-reuse-matrix.json`,
+  `docs/evaluation/phase12-campaign-asset-need-decision.json`,
+  `gui/visual-catalog.json`, `gui/audio-catalog.json`, asset registry/credits,
+  portrait review queue, and existing validation scripts/tests.
+- New provenance ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add maps, facilities, portraits, stage art, raster, audio, routes,
+  runtime assets, authority paths, legal claims, human review claims, or
+  public-release approval.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 12 regional-affiliation replay/debrief views v0.13.36
 
 ## Scope
