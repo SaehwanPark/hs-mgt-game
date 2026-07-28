@@ -5946,6 +5946,34 @@ Deferred / Non-Goals:
   screenshot tooling, new simulation transition, asset/audio byte, or
   client-owned replay authority was added.
 
+### Visual/audio Phase 11.1 current asset-registry completeness (v0.13.16)
+
+Status: Complete for the current tracked visual and audio registries; future
+campaign inventory, placement/use, quality, screenshot, and human-review
+evidence remain separately gated.
+
+Done:
+
+- Added `asset_registry_coverage` for the `asset-registry-v1` visual/audio
+  documents, exact 38/7 entry counts, approved/unique closure, provenance and
+  hash requirements, and the file-backed/runtime-generated release boundary.
+- Linked the ledger to focused parity tests and the existing registry, release,
+  security, and credits validators; current 15 file-backed release paths and
+  30 intentional null-release runtime/catalog entries are explicit.
+- Updated the Phase 11.1 checklist and synchronized patch-version and
+  presentation handoff records; no registry contents or runtime behavior
+  changed.
+
+Not Yet Done:
+
+- Future campaign assets and placement/use, asset/audio quality, screenshots,
+  accessibility, usability, audio usefulness, and human review.
+
+Deferred / Non-Goals:
+
+- No asset entry, release derivative, file-backed audio, screenshot tooling,
+  simulation transition, or client-owned asset authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

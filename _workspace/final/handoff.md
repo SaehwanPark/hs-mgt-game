@@ -729,6 +729,29 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Visual/audio Phase 11.1 current asset-registry coverage v0.13.16
+
+## Result
+
+Recorded current tracked visual/audio asset-registry completeness. The ledger
+and parity tests cover 38 visual and 7 audio entries, approved/unique closure,
+15 file-backed release paths, 30 intentional null-release runtime/catalog
+entries, and the existing validator, release, security, and credits sources.
+
+## Evidence boundary
+
+This closes only current tracked registry completeness. Future campaign assets,
+placement/use, asset/audio quality, screenshots, accessibility, usability,
+audio usefulness, and human review remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.15.
+- Working branch: `feat/visual-audio-phase11-asset-registry-v0.13.16`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Visual/audio Phase 11.1 replay visual continuity v0.13.15
 
 ## Result

@@ -2150,3 +2150,38 @@ closure, empty/committed validation, row/count/hash alignment, adapter fallback,
 rendering preservation, syntax, and authority exclusions. Existing Rust/MCP/
 transport tests cover the immutable history source. Playback, regeneration,
 durable persistence, screenshots, and human review remain separately gated.
+
+# Presentation Contract — Phase 11.1 current asset-registry coverage v0.13.16
+
+## Contract status
+
+Complete for the current tracked visual and audio registries. This is a
+technical registry/release contract, not evidence of future campaign inventory,
+asset/audio quality, placement/use, screenshots, accessibility quality, or
+human review.
+
+## Source and visible behavior
+
+- `assets/registry/visual-assets.json` and `assets/registry/audio-assets.json`
+  are the source documents for the current 38 visual and 7 audio entries.
+- Every current entry is approved, unique within its registry, and validated for
+  required schema, provenance, license, hash, visible-source, and accessible-
+  equivalent fields.
+- Fifteen file-backed entries require approved release paths and manifest hashes;
+  30 runtime-generated or catalog/documentation entries intentionally retain
+  null release paths and are not missing release files.
+
+## Fallback, authority, and provenance
+
+Registry metadata does not enter simulation state, commands, transitions,
+stochastic inputs, hashes, history, replay, debrief facts, or client authority.
+Existing generic presentation fallbacks remain the behavior for unknown asset
+IDs. Credits and third-party notices remain generated from the registries.
+
+## Verification and limits
+
+The ledger parity test links both registries to `tests/test_asset_registry.py`,
+the asset validator, release-manifest checker, security validator, and credits
+generator; the full asset/security/release/credits checks pass. Future assets,
+campaign placement/use, quality, screenshots, accessibility, and human review
+remain separately gated.

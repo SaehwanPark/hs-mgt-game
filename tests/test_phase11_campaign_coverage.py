@@ -9,12 +9,18 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json"
 VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
+AUDIO_REGISTRY = ROOT / "assets" / "registry" / "audio-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
 CHECKPOINT_TEST = ROOT / "tests" / "test_phase11_live_checkpoint.py"
 REPLAY_TEST = ROOT / "tests" / "test_phase11_live_replay.py"
+ASSET_REGISTRY_TEST = ROOT / "tests" / "test_asset_registry.py"
+ASSET_VALIDATOR = ROOT / "scripts" / "validate_assets.py"
+ASSET_RELEASE = ROOT / "scripts" / "verify_asset_release.py"
+ASSET_SECURITY = ROOT / "scripts" / "validate_asset_security.py"
+ASSET_CREDITS = ROOT / "scripts" / "generate_asset_credits.py"
 MCP_SERVER = ROOT / "src" / "mcp" / "server.rs"
 
 
@@ -171,6 +177,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
   def setUpClass(cls):
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
+    cls.audio_registry = json.loads(AUDIO_REGISTRY.read_text(encoding="utf-8"))
     cls.resolution = RESOLUTION.read_text(encoding="utf-8")
     cls.app = (ROOT / "gui" / "app.mjs").read_text(encoding="utf-8")
     cls.adapter = (ROOT / "gui" / "host-adapter.mjs").read_text(encoding="utf-8")
@@ -221,7 +228,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -238,6 +245,51 @@ console.log(JSON.stringify(resolved));
       source_path, export_name = catalog["source"].split(": ", 1)
       self.assertTrue((ROOT / source_path).is_file())
       self.assertEqual(self.source_exports[catalog_name], catalog["ids"], catalog["source"])
+
+  def test_asset_registry_coverage_matches_current_validated_registries(self):
+    coverage = self.ledger["asset_registry_coverage"]
+    visual_entries = self.registry["entries"]
+    audio_entries = self.audio_registry["entries"]
+    all_entries = visual_entries + audio_entries
+    self.assertEqual(coverage["status"], "complete-current-registries")
+    self.assertEqual(coverage["schema"], "asset-registry-v1")
+    self.assertEqual(
+      coverage["entry_counts"],
+      {"visual": len(visual_entries), "audio": len(audio_entries), "total": len(all_entries)},
+    )
+    self.assertEqual(
+      coverage["entry_counts"],
+      {"visual": 38, "audio": 7, "total": 45},
+    )
+    for registry in (self.registry, self.audio_registry):
+      self.assertEqual(registry["schema_version"], "asset-registry-v1")
+      ids = [entry["id"] for entry in registry["entries"]]
+      self.assertEqual(len(ids), len(set(ids)))
+      self.assertTrue(all(entry["approval_status"] == "approved" for entry in registry["entries"]))
+    release_count = sum(bool(entry.get("release_path")) for entry in all_entries)
+    self.assertEqual(release_count, coverage["release_boundary"]["file_backed_release_entries"])
+    self.assertEqual(
+      len(all_entries) - release_count,
+      coverage["release_boundary"]["runtime_or_catalog_entries_with_null_release_paths"],
+    )
+    source = "".join(
+      path.read_text(encoding="utf-8")
+      for path in (
+        ASSET_REGISTRY_TEST,
+        ASSET_VALIDATOR,
+        ASSET_RELEASE,
+        ASSET_SECURITY,
+        ASSET_CREDITS,
+      )
+    )
+    for marker in (
+      "test_repository_registries_and_credits_are_current",
+      "validate(ROOT)",
+      "check_manifest",
+      "render_notices",
+    ):
+      self.assertIn(marker, source)
+    self.assertIn("null release paths", coverage["release_boundary"]["rule"])
 
   def test_current_operational_overlay_bindings_cover_the_registered_catalog(self):
     coverage = self.ledger["catalogs"]["operational_overlays"]
@@ -567,7 +619,7 @@ console.log(JSON.stringify(resolved));
       "Current in-memory host checkpoint visual continuity covered. Evidence:": "x",
       "Current live replay visual continuity covered. Evidence:": "x",
       "Unknown content fallbacks tested.": "x",
-      "Asset registry coverage is 100%.": " ",
+      "Current tracked visual/audio asset-registry coverage is 100%. Evidence:": "x",
       "Full campaign screenshot suite passes.": " ",
     }
     actual = {label: state for state, label in re.findall(r"^- \[([ x])\] (.+)$", self.phase11_1, re.MULTILINE)}

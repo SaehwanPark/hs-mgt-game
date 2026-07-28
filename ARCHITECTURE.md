@@ -723,6 +723,14 @@ failing reads preserve the last valid view and expose a recoverable error. No
 playback, regeneration, durable persistence, browser-authored hash, or client
 authority is added.
 
+The v0.13.16 Phase 11.1 asset-registry slice records current registry
+completeness as a presentation/release contract. The visual and audio registry
+documents remain the source of truth for approved IDs, provenance, accessible
+equivalents, visible sources, and hashes; file-backed release paths are
+manifest-checked while runtime-generated/catalog entries retain null release
+paths. This does not expand the campaign asset inventory or establish quality,
+placement, screenshot, accessibility, or human-review evidence.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

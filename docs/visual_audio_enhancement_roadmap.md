@@ -2233,6 +2233,7 @@ current supported operational-overlay catalog/projection coverage in v0.13.12,
 current competitive terminal debrief-view handoff evidence in v0.13.13, and
 current in-memory checkpoint visual-continuity evidence in v0.13.14, and
 current live replay visual-continuity evidence in v0.13.15, and
+current tracked visual/audio asset-registry completeness in v0.13.16, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
@@ -2276,7 +2277,11 @@ continuity, performance, and screenshot gates remain open.
   `tests/test_phase11_live_replay.py`; playback, regeneration, and durable
   persistence remain open.
 - [x] Unknown content fallbacks tested.
-- [ ] Asset registry coverage is 100%.
+- [x] Current tracked visual/audio asset-registry coverage is 100%. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `scripts/validate_assets.py`, and `tests/test_asset_registry.py`; future
+  campaign inventory, placement/use, quality, and screenshot gates remain
+  open.
 - [ ] Full campaign screenshot suite passes.
 
 ### v0.13.6 facility asset coverage evidence
@@ -2400,6 +2405,22 @@ continuity, performance, and screenshot gates remain open.
 - This closes only current live replay visual continuity. Playback,
   regeneration, durable persistence, screenshots, accessibility, and human
   learning remain open.
+
+### v0.13.16 current tracked asset-registry completeness evidence
+
+- `asset_registry_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records all 38
+  current visual entries and 7 current audio entries as approved, unique, and
+  covered by the `asset-registry-v1` schema. It distinguishes 15 file-backed
+  release paths from 30 intentional null-release runtime/catalog entries.
+- `tests/test_phase11_campaign_coverage.py` joins both registries to
+  `tests/test_asset_registry.py`, `scripts/validate_assets.py`,
+  `scripts/verify_asset_release.py`, `scripts/validate_asset_security.py`, and
+  `scripts/generate_asset_credits.py`; existing full release/security/credits
+  checks remain authoritative for path, hash, provenance, and attribution.
+- This closes only current tracked registry completeness. Future campaign
+  assets, placement/use, asset/audio quality, accessibility, screenshots, and
+  human review remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

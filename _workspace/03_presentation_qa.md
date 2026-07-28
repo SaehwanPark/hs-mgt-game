@@ -2770,3 +2770,36 @@ usability, audio usefulness, and human learning remain open.
 - `python3 -m unittest tests.test_phase11_live_replay` — pass.
 - `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
 - Existing Rust/MCP/transport replay tests and JavaScript syntax checks — pass.
+
+# Presentation Domain QA — Phase 11.1 current asset-registry coverage v0.13.16
+
+## Status
+
+`pass` for the current tracked visual/audio registry closure. This is bounded
+technical registry QA only; it is not asset/audio quality, campaign placement,
+screenshots, accessibility, usability, or human-review approval.
+
+## Reviewed inputs and findings
+
+- Pass: `asset_registry_coverage` names both registry sources, exact 38/7
+  counts, approval/ID closure, file-backed/null-release boundary, validator
+  sources, and limits.
+- Pass: registry, release-manifest, security, and credits checks cover current
+  provenance, license, path, hash, release, and attribution requirements.
+- Pass: runtime-generated audio and non-release catalog/documentation sources are
+  explicitly classified instead of being treated as missing release assets.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Future campaign inventory and placement/use, asset/audio quality, screenshots,
+accessibility, usability, and human review remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_asset_registry` — pass.
+- `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
+- Full asset, release-manifest, security, credits, and visual/audio checks — pass.

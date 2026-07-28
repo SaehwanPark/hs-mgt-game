@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.16] - 2026-07-28
+
+- Recorded current tracked visual/audio asset-registry completeness: 38 visual
+  and 7 audio entries are approved and validated, with 15 file-backed release
+  paths and 30 intentional null-release runtime/catalog entries.
+- Linked the ledger to registry, release-manifest, security, and credits
+  evidence while keeping future campaign inventory, placement/use, quality,
+  screenshot, accessibility, and human-review gates open; no registry contents
+  or runtime behavior changed.
+
 ## [0.13.15] - 2026-07-28
 
 - Recorded current live Phase 11.1 replay visual-continuity coverage for the
