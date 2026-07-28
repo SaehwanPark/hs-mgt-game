@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.15] - 2026-07-28
+
+- Recorded current live Phase 11.1 replay visual-continuity coverage for the
+  `competitive-replay-v1` host/MCP/loopback/browser handoff, including
+  immutable visible rows, aligned metadata, text-first rendering, and
+  last-valid-view failure preservation.
+- Linked the ledger to focused replay and Rust/MCP/transport evidence while
+  keeping playback, regeneration, durable persistence, screenshots,
+  accessibility, and human-learning gates open; no runtime behavior changed.
+
 ## [0.13.14] - 2026-07-28
 
 - Recorded current in-memory Phase 11.1 checkpoint visual-continuity coverage

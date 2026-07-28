@@ -714,6 +714,15 @@ failing checkpoint/refresh paths preserve a recoverable current view. No
 durable serialization, browser storage, cross-process recovery, or client
 authority is added.
 
+The v0.13.15 Phase 11.1 replay slice records the existing
+`competitive-replay-v1` read as a dedicated visual-continuity contract. The
+host derives seed, transition count, latest visible state hash, and immutable
+visible transition rows from its history; the browser validates and renders
+that projection through the existing text-first history surface. Missing or
+failing reads preserve the last valid view and expose a recoverable error. No
+playback, regeneration, durable persistence, browser-authored hash, or client
+authority is added.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

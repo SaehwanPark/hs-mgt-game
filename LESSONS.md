@@ -2729,3 +2729,18 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: For each continuity slice, name the storage owner, the metadata
   alignment guarantee, the recovery behavior, and the untested durability
   boundary before changing the roadmap checkbox.
+
+## Phase 25: Distinguish replay projection from replay playback
+
+- Context: The competitive GUI already reads immutable host history through a
+  versioned replay envelope and renders it through the text-first history view,
+  but the Phase 11.1 replay checkbox remained open.
+- Risk: Treating aligned replay metadata as a playback or regenerated-trace
+  feature would imply simulation reconstruction, persistence, or client-owned
+  hash authority that the current surface does not provide.
+- Resolution: Record `replay_view_coverage` with the exact host/MCP/route/
+  adapter/browser sources, row/count/hash contract, last-valid-view recovery,
+  and explicit playback/regeneration limits. Link it to focused replay tests
+  and existing Rust/MCP/transport history tests.
+- Prevention: Name whether each replay slice is a read-only projection,
+  playback engine, or regeneration path before closing any continuity item.

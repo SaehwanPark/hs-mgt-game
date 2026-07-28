@@ -2232,6 +2232,7 @@ visible event-cue parity, current music-state catalog/projection parity,
 current supported operational-overlay catalog/projection coverage in v0.13.12,
 current competitive terminal debrief-view handoff evidence in v0.13.13, and
 current in-memory checkpoint visual-continuity evidence in v0.13.14, and
+current live replay visual-continuity evidence in v0.13.15, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
@@ -2270,7 +2271,10 @@ continuity, performance, and screenshot gates remain open.
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
   `tests/test_phase11_live_checkpoint.py`; durable persistence,
   cross-process recovery, and browser-refresh recovery remain open.
-- [ ] Replay visual continuity tested.
+- [x] Current live replay visual continuity covered. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `tests/test_phase11_live_replay.py`; playback, regeneration, and durable
+  persistence remain open.
 - [x] Unknown content fallbacks tested.
 - [ ] Asset registry coverage is 100%.
 - [ ] Full campaign screenshot suite passes.
@@ -2380,6 +2384,22 @@ continuity, performance, and screenshot gates remain open.
   file/browser persistence, cross-process recovery, browser-refresh recovery,
   replay regeneration/playback, screenshots, accessibility, and human learning
   remain open.
+
+### v0.13.15 current live replay visual-continuity evidence
+
+- `replay_view_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  `competitive-replay-v1` host/MCP/loopback/adapter/browser sources, immutable
+  visible-row contract, seed/count/latest-hash metadata, text-first renderer,
+  and failure-preserving behavior.
+- `tests/test_phase11_live_replay.py` covers empty and committed views,
+  metadata/hash/count alignment, missing/throwing adapters, last-valid-view
+  preservation, route/source markers, syntax, and the unchanged read-only
+  authority boundary. Existing Rust/MCP/transport tests cover the immutable
+  history source.
+- This closes only current live replay visual continuity. Playback,
+  regeneration, durable persistence, screenshots, accessibility, and human
+  learning remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

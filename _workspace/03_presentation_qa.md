@@ -2735,3 +2735,38 @@ and human learning remain open.
 - `python3 -m unittest tests.test_phase11_live_checkpoint` — pass.
 - `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
 - Existing Rust checkpoint restore tests and JavaScript syntax checks — pass.
+
+# Presentation Domain QA — Phase 11.1 replay visual continuity v0.13.15
+
+## Status
+
+`pass` for the current live host replay projection. This is bounded technical
+QA only; it is not playback, regenerated-trace, durable-persistence, screenshot,
+accessibility, usability, audio, educational, or learning approval.
+
+## Reviewed inputs and findings
+
+- Pass: `replay_view_coverage` names the exact `competitive-replay-v1`
+  host/MCP/route/adapter/browser sources, immutable row contract, aligned
+  metadata, renderer, failure behavior, and limits.
+- Pass: focused replay tests cover empty and committed views, metadata/hash/
+  count validation, missing/throwing adapters, last-valid-view preservation,
+  route/source markers, syntax, and authority exclusions.
+- Pass: host/core supplies immutable history and hashes; the browser validates
+  and renders the read-only projection without playback, regeneration, or
+  client-owned simulation authority.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Replay playback/regeneration, durable persistence, screenshots, accessibility,
+usability, audio usefulness, and human learning remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase11_live_replay` — pass.
+- `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
+- Existing Rust/MCP/transport replay tests and JavaScript syntax checks — pass.

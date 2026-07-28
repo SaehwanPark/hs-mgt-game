@@ -2114,3 +2114,39 @@ routes, syntax, and authority exclusions. Existing Rust session tests cover
 cloned restore without a new transition. Durable file/browser persistence,
 cross-process/browser-refresh recovery, replay, screenshots, and human review
 remain separately gated.
+
+# Presentation Contract — Phase 11.1 replay visual continuity v0.13.15
+
+## Contract status
+
+Complete for the current live host replay projection. This is a technical
+presentation contract, not evidence of playback, regenerated simulation traces,
+durable persistence, screenshots, accessibility quality, or human learning.
+
+## Source and visible behavior
+
+- Host source: `src/mcp/session.rs` derives `competitive-replay-v1` from
+  immutable visible history and returns session/campaign/seed,
+  transition-count, latest-state-hash, and visible transition rows.
+- Boundary sources: `src/mcp/server.rs`, `src/gui_server.rs`, and
+  `gui/host-adapter.mjs` expose the read-only replay operation;
+  `gui/app.mjs` validates aligned metadata and renders the projection through
+  the existing text-first history surface.
+- Empty and committed views render as host-supplied history; a missing adapter,
+  failed read, unsupported schema, or misaligned envelope fails closed while
+  preserving the last valid view and exposing a recoverable error.
+
+## Fallback, authority, and provenance
+
+The host/core remains authoritative for immutable rows, transition count, seed,
+and state hashes. The browser does not calculate transitions, regenerate a
+trace, author hashes, or control simulation state. No asset or audio source is
+introduced.
+
+## Verification and limits
+
+`tests/test_phase11_live_replay.py` and the ledger parity test cover source
+closure, empty/committed validation, row/count/hash alignment, adapter fallback,
+rendering preservation, syntax, and authority exclusions. Existing Rust/MCP/
+transport tests cover the immutable history source. Playback, regeneration,
+durable persistence, screenshots, and human review remain separately gated.

@@ -729,6 +729,30 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Visual/audio Phase 11.1 replay visual continuity v0.13.15
+
+## Result
+
+Recorded current live replay visual continuity for the
+`competitive-replay-v1` host/MCP/loopback/browser handoff. The ledger and
+focused parity tests now identify the immutable visible-row contract, aligned
+seed/count/latest-hash metadata, text-first rendering, and last-valid-view
+failure behavior.
+
+## Evidence boundary
+
+This closes only the current live host replay projection. Playback, regenerated
+simulation traces, durable persistence, screenshots, accessibility, usability,
+audio usefulness, and human learning remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.14.
+- Working branch: `feat/visual-audio-phase11-replay-v0.13.15`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Visual/audio Phase 11.1 checkpoint visual continuity v0.13.14
 
 ## Result
