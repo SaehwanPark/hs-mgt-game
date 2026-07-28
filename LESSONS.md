@@ -3022,3 +3022,12 @@ not a complete browser visual language. Source-link the distinction and keep
 browser-native visual design, export, causal/counterfactual/distributional
 views, accessibility, and human educational review open until each has its own
 evidence and authority contract.
+
+## Phase 50: Preserve the decision-time record while naming the browser gap (2026-07-28)
+
+The immutable core history already pairs each command with the observation
+available before it, and the debrief preserves those observations when later
+reported estimates are revised. Host history/replay summaries are intentionally
+narrower and the current browser view shows summary turn/command/hash data.
+Document those layers separately so technical recoverability is not mistaken
+for complete browser playback or human decision-time comprehension.

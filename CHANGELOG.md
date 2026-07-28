@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.40] - 2026-07-28
+
+- Recorded current decision-time observation retention in immutable core
+  history, debrief recovery language, host history/replay alignment, and the
+  text-first browser summary boundary.
+- Closed only current technical recovery-boundary evidence; full browser
+  per-decision observation playback, adjacent debrief views, and human review
+  remain open, with no runtime behavior changed.
+
 ## [0.13.39] - 2026-07-28
 
 - Recorded the current Phase 12.3 textual boundary between player-visible
