@@ -2511,9 +2511,10 @@ continuity, performance, and screenshot gates remain open.
 **Status:** The tracked release-asset byte/file-count budget, conservative SVG
 normalization, current catalog-level missing-asset fallback, raster
 release/preview boundary, current runtime-generated audio packaging decision,
-the live no-lazy/no-preload loading policy, the loopback offline package, and
-the documented Chromium compatibility matrix are machine-checked in
-v0.12.97–v0.13.5; runtime measurements and low-power-device gates remain open.
+the live no-lazy/no-preload loading policy, the loopback offline package, the
+documented Chromium compatibility matrix, and a bounded emulated low-power
+profile are machine-checked in v0.12.97–v0.13.11. Real-device, runtime
+memory/thermal, and human-quality evidence remain open.
 
 ### Targets to define
 
@@ -2552,7 +2553,10 @@ v0.12.97–v0.13.5; runtime measurements and low-power-device gates remain open.
   host-adapter, and catalog is embedded and served from the loopback host.
 - [x] Missing-asset fallback tested. Evidence: `tests/test_asset_fallback.py`
   enumerates the live catalogs and visual registry.
-- [ ] Low-power device test completed.
+- [x] Low-power device test completed for the declared emulated
+  reduced-capability profile. Evidence: `assets/device-performance-policy.json`,
+  `scripts/check_device_performance.py`, and `tests/test_device_performance.py`;
+  no real-device certification is claimed.
 - [x] Browser compatibility matrix completed. Evidence: `assets/browser-compatibility-policy.json`, `scripts/check_browser_compatibility.py`, and `tests/test_browser_compatibility.py`; the documented Chromium target passes the static and local smoke contract while Firefox/WebKit remain explicitly non-certified.
 
 ### Exit criteria
@@ -2696,6 +2700,28 @@ v0.12.97–v0.13.5; runtime measurements and low-power-device gates remain open.
 - This closes only the documented Phase 11.2 browser-compatibility item. It
   does not certify other engines, low-power devices, device performance,
   contrast, screen readers, or human accessibility/usability.
+
+### v0.13.11 bounded low-power profile evidence
+
+- `assets/device-performance-policy.json` defines the current low-power
+  browser proxy: 1024×768 viewport, reduced-motion language, audio off,
+  unavailable optional storage, and loopback-only access. It records explicit
+  source/DOM/SVG/time limits and the local smoke observations.
+- `scripts/check_device_performance.py` recomputes the declared live-file
+  source bytes from `assets/loading-policy.json`, checks the captured DOM/SVG
+  and wall-clock values against limits, and fails closed on source drift,
+  malformed profiles, or a real-device certification claim.
+- `tests/test_device_performance.py` covers the green report/CLI, source drift,
+  limit violations, invalid profile/path values, sample alignment, and the
+  explicit `real_device: false` boundary.
+- The local browser smoke observed five shell reloads of 49–52 ms, 818 DOM
+  elements, four SVG elements, 367 ms host-session start, and 259 ms adapter
+  command response at 1024×768, with written equivalents and audio-off text
+  present. These are local proxy observations, not hardware benchmarks.
+- This closes only the Phase 11.2 low-power-profile checklist item. Real
+  low-power hardware, battery/thermal/memory/frame-rate behavior, additional
+  browser engines, screenshots, asset quality, and human evaluation remain
+  separate gates.
 
 ---
 

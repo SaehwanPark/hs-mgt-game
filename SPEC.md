@@ -5794,6 +5794,37 @@ Deferred / Non-Goals:
 - No new history fields, persistence mechanism, replay regeneration, command
   path, simulation transition, or client-owned authority was added.
 
+### Visual/audio Phase 11.2 low-power profile evidence (v0.13.11)
+
+Status: Complete for the declared emulated reduced-capability GUI proxy; real
+hardware, battery/thermal/memory/frame-rate, and human-quality evidence remain
+separately gated.
+
+Done:
+
+- Added `device-performance-v1` with a 1024×768 viewport, reduced-motion
+  language, audio-off, unavailable-storage, and loopback-only profile plus
+  conservative source/DOM/SVG/time limits and captured local smoke values.
+- Added `scripts/check_device_performance.py` to recompute source bytes from
+  the loading-policy graph and fail closed on missing paths, source drift,
+  limit violations, malformed profiles, or a real-device claim.
+- Added focused tests for the green report/CLI, measurements, source drift,
+  limit failure, malformed/path cases, sample maxima, and the explicit
+  `real_device: false` boundary.
+- Updated the reproducible-distribution guide and patch-version projections;
+  no runtime, asset, host, simulation, replay, or audio semantics changed.
+
+Not Yet Done:
+
+- Physical low-power-device measurement, battery/thermal/memory/frame-rate
+  behavior, additional browser engines, screenshot coverage, asset quality,
+  and human accessibility/usability/evaluation.
+
+Deferred / Non-Goals:
+
+- No browser automation dependency, device farm, runtime telemetry, GUI
+  optimization, simulation change, or client-owned authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

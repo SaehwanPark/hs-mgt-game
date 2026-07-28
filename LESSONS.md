@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Low-Power Evidence Explicitly Emulated
+
+- Context: Phase 11.2 required a low-power-device test, but the verification
+  environment did not provide a physical low-power device or standalone browser
+  binary.
+- Risk: Calling a local viewport smoke or wall-clock sample a hardware
+  certification would overstate battery, thermal, memory, frame-rate, and
+  accessibility evidence.
+- Resolution: Define `device-performance-v1` as a reduced-capability proxy,
+  record explicit source/DOM/SVG/time limits and local observations, retain
+  written/audio-off fallback checks, and fail closed on `real_device: true`.
+- Prevention: Keep proxy results and real-device validation as separate gates;
+  never infer hardware suitability from a passing static or local smoke report.
+
 ## Append to Existing Handoff Artifacts
 
 - Context: The repository keeps durable `_workspace` request, presentation,

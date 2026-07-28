@@ -681,7 +681,15 @@ same-origin loopback API boundary. No service worker, cache, deployment,
 host-authority, simulation, history/hash, replay, debrief, or audio behavior
 changes.
 
-Last Reviewed: 2026-07-23
+The v0.13.11 Phase 11.2 low-power slice adds an external-to-runtime
+`device-performance-v1` evidence policy and checker. It recomputes the
+loading-policy live-file byte scope and validates captured DOM/SVG and local
+loopback wall-clock observations for a 1024×768 reduced-capability proxy with
+audio off and written fallbacks present. The policy is not simulation state,
+does not feed commands, transitions, hashes, history, replay, debriefs, or
+host projections, and explicitly rejects real-device certification claims.
+
+Last Reviewed: 2026-07-28
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture

@@ -1223,3 +1223,56 @@ Use `preferred-workflow`, `spec-driven-developer`, `simple-code-writer`, and
 the independent `code-reviewer` loop. No simulation, mechanism, or
 presentation-contract skill is required because this slice changes no runtime
 or actor-visible behavior.
+# Request Summary — Visual/audio Phase 11.2 low-power profile evidence v0.13.11
+
+## Scope
+
+Continue the visual/audio roadmap with the next technically verifiable unmet
+item: Phase 11.2 `Low-power device test completed`. Define and check one
+bounded reduced-capability browser profile for the current dependency-free
+loopback GUI, using the local browser smoke measurement available in this
+environment.
+
+## Target slice
+
+- Profile: 1024×768 viewport, reduced-motion preference, audio off, optional
+  local storage unavailable, loopback-only host.
+- Evidence: static live-file source audit plus local browser smoke measurements
+  for initial shell reload, host-session start, and adapter command response.
+- Pass/fail: source size, DOM/SVG surface, and local wall-clock measurements
+  remain under explicit conservative limits.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.2.
+- `assets/loading-policy.json` and `assets/browser-compatibility-policy.json`.
+- `gui/index.html` and the current live module graph.
+- Local browser smoke measurement at `http://127.0.0.1:7878/`.
+
+## Expected files
+
+- `assets/device-performance-policy.json`
+- `scripts/check_device_performance.py`
+- `tests/test_device_performance.py`
+- `_workspace/02_presentation_contract.md`
+- `_workspace/03_presentation_qa.md`
+- `_workspace/105_implementation_plan_visual-audio-phase11-low-power-v0.13.11.md`
+- Roadmap, `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, `LESSONS.md`, and
+  `_workspace/final/handoff.md`.
+
+## Non-goals and evidence limits
+
+- Do not add a browser dependency, runtime performance instrumentation, or a
+  device farm.
+- Do not claim real low-power hardware certification, battery impact, thermal
+  behavior, lived accessibility, or human usability.
+- Do not change simulation, host projections, audio semantics, assets, or
+  browser authority boundaries.
+
+## Validation target
+
+`python3 scripts/check_device_performance.py`, focused Python tests, the full
+Python suite, Rust format/tests/Clippy, release/documentation/asset checks, and
+one presentation QA record. A passing result closes only the bounded Phase
+11.2 low-power-profile evidence item; real-device validation remains explicit
+follow-up evidence.

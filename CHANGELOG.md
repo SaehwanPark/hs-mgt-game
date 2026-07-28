@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.11] - 2026-07-28
+
+- Added a bounded `device-performance-v1` policy and dependency-free checker
+  for the current 1024×768 reduced-capability GUI profile, including source,
+  DOM/SVG, shell, host-start, and adapter-probe limits.
+- Recorded local browser smoke evidence with written and audio-off fallbacks
+  present, and fail-closed tests for source drift, limit violations, malformed
+  profiles, path escapes, and attempted real-device certification.
+- Closed only the Phase 11.2 low-power-profile evidence item; real hardware,
+  battery/thermal/memory/frame-rate, broader browser, and human-quality gates
+  remain open.
+
 ## [0.13.10] - 2026-07-27
 
 - Defined the canonical v0.13.10 distribution unit as an exact Git
