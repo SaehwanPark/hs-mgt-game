@@ -2562,3 +2562,33 @@ markers, six passing technical entries, local-settings ownership, the
 text-first/competitive-only boundary, and human-accessibility limits. Human
 accessibility, assistive technology, device, fatigue, and educational gates
 remain open.
+
+# Presentation Contract — Phase 12 stabilization provenance audit v0.13.29
+
+## Contract status
+
+Complete for current technical stabilization provenance evidence only. Future
+asset/legal provenance, portrait review, human quality, educational, and
+public-release review remain separately gated.
+
+## Source and visible behavior
+
+- The ledger joins current repository-authored/project-generated visual and
+  audio catalogs, reusable facility fallback, registry/release/credits checks,
+  the no-new-asset decision, and the unreleased portrait-preview boundary.
+- Runtime-generated audio has no file-backed release path; written equivalents
+  and optional mapping remain explicit.
+
+## Fallback, authority, and provenance
+
+No new asset, registry entry, route, runtime field, or authority path changes.
+Machine provenance fields and generated credits establish a technical release
+boundary only; they do not establish legal clearance, training-data provenance,
+output quality, or human approval.
+
+## Verification and limits
+
+`tests/test_phase12_stabilization_provenance_audit.py` checks source markers,
+six passing audit entries, catalog/release scope, zero third-party release
+count, no-new-asset decision, and unreleased preview limits. Future assets,
+portraits, legal, human-quality, and public-release gates remain open.

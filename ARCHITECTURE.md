@@ -825,6 +825,12 @@ coverage. These are local presentation contracts only; the stabilization CLI
 remains text-first, the live GUI remains competitive-regional-v1 only, and no
 human accessibility, assistive-technology, device, or authority claim is made.
 
+The v0.13.29 Phase 12 slice records the current stabilization provenance
+boundary across repository-authored/project-generated visual and audio catalogs,
+registry/release/credits checks, the no-new-asset decision, and unreleased
+portrait previews. It does not add or promote assets, change runtime authority,
+or infer legal clearance, output quality, human approval, or public release.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

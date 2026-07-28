@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.29] - 2026-07-28
+
+- Recorded the current stabilization technical provenance boundary across
+  reusable visual/audio/facility catalogs, registry/release/credits checks,
+  the no-new-asset decision, and the unreleased portrait-preview gate.
+- Closed only current provenance evidence; future asset/legal provenance,
+  portrait review, human quality, educational, and public-release gates remain
+  open, with no asset or runtime behavior changed.
+
 ## [0.13.28] - 2026-07-28
 
 - Recorded current stabilization-relevant technical accessibility evidence for

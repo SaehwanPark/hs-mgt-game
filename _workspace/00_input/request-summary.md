@@ -1866,3 +1866,36 @@ equivalents, optional-audio fallback, and semantic campaign coverage.
   views, screen-reader/device certification, or human evaluation.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
+
+# Request Summary — Visual/audio Phase 12 stabilization provenance audit v0.13.29
+
+## Scope
+
+Record current technical provenance for reusable stabilization visual/audio/
+facility sources, release checks, the no-new-asset decision, and the
+unreleased portrait-preview boundary.
+
+## Target slice
+
+- Join the reuse matrix, asset-need decision, visual/audio catalogs, registries,
+  generated credits/notices, release checks, and portrait review boundary.
+- Close only current technical provenance evidence while retaining legal,
+  human-quality, future-asset, and public-release gates.
+
+## Sources and expected files
+
+- `docs/evaluation/phase12-campaign-reuse-matrix.json`,
+  `docs/evaluation/phase12-campaign-asset-need-decision.json`,
+  `gui/visual-catalog.json`, `gui/audio-catalog.json`, asset registries,
+  credits, notices, and validation scripts.
+- New provenance ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive contract/QA/
+  handoff records.
+
+## Non-goals and validation
+
+- Do not promote portrait previews or add assets, audio files, registry entries,
+  routes, screenshots, runtime fields, legal clearance, human review, or
+  public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

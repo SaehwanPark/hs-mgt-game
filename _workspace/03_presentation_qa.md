@@ -2976,6 +2976,40 @@ and future provenance review remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 stabilization provenance audit v0.13.29
+
+## Status
+
+`pass` for bounded current technical stabilization provenance QA only. No legal
+clearance, training-data provenance, human quality, portrait approval, or
+public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: reusable visual/audio/facility sources, registry fields, release
+  manifest, generated credits/notices, and no-new-asset decision are linked.
+- Pass: runtime-generated audio has no file-backed release promotion and
+  written-equivalent/optional boundaries remain explicit.
+- Pass: unverified portrait previews remain outside the release-capable
+  stabilization surface; no new asset, registry, runtime, or authority path is
+  introduced.
+
+## Required fixes
+
+None for this bounded technical provenance record.
+
+## Evidence limits
+
+Future asset/recorded-audio provenance, portrait model/seed and release gates,
+legal review, training-data questions, human visual/audio quality, educational
+usability, and public-release decisions remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_stabilization_provenance_audit` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

@@ -2925,3 +2925,11 @@ language, text scale, reduced motion, written equivalents, and optional-audio
 fallback. A stabilization evidence ledger can join those checks to the current
 text-first/competitive-only boundary, but it must keep screen-reader, device,
 assistive-technology, lived accessibility, and educational findings open.
+
+## Phase 39: Treat machine provenance as a release boundary, not approval (2026-07-28)
+
+The current reusable stabilization surface is fully repository-authored or
+runtime-generated, with registry, release-manifest, credits, and no-new-asset
+checks. Unverified portrait previews remain unreleased. Keep legal clearance,
+training-data provenance, human quality, and public-release decisions open even
+when the technical audit is green.
