@@ -1090,3 +1090,25 @@ human, and educational gates remain open; no runtime behavior changed.
 - Working branch: `feat/stabilization-tutorial-presentation-v0.13.25`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 stabilization audio-state mapping v0.13.26
+
+## Result
+
+Mapped the eight current shared stabilization pressure/recovery categories to
+existing optional music-state, event-cue, and audio-direction contracts with
+visible triggers and written equivalents.
+
+## Evidence boundary
+
+The ledger and parity test pass for current shared mapping evidence. Direct
+campaign-envelope audio, browser-native integration, new audio content,
+quality, human, and educational gates remain open; no runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.25.
+- Working branch: `feat/stabilization-audio-state-mapping-v0.13.26`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

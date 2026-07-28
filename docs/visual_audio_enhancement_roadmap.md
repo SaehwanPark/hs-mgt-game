@@ -2949,7 +2949,11 @@ open.
   `tests/test_phase12_stabilization_tutorial_presentation.py`; the current
   CLI beginner flow and guide are covered, while browser-native integration,
   direct audio, and human review remain open.
-- [ ] Audio-state mapping completed.
+- [x] Current stabilization audio-state mapping recorded. Evidence:
+  `docs/evaluation/phase12-stabilization-audio-state-mapping.json` and
+  `tests/test_phase12_stabilization_audio_state_mapping.py`; the eight shared
+  categories map to existing optional music/cue/direction contracts, while
+  direct campaign-envelope integration, quality, and human review remain open.
 - [ ] Debrief presentation completed.
 - [ ] Accessibility tests pass.
 - [ ] Provenance audit passes.
@@ -3057,6 +3061,26 @@ remains open.
 - This closes only current stabilization tutorial-presentation evidence. It
   does not complete browser-native stabilization integration, direct tutorial
   audio, campaign-specific pacing/content, quality, or human review.
+
+### v0.13.26 current stabilization audio-state mapping
+
+- `docs/evaluation/phase12-stabilization-audio-state-mapping.json` maps the
+  eight current shared stabilization pressure/recovery categories to existing
+  music-state IDs, event-cue IDs, audio-direction prototypes, visible trigger
+  sources, and written equivalents.
+- `tests/test_phase12_stabilization_audio_state_mapping.py` joins the mapping
+  to the pressure-state registration and requires exact catalog/source parity,
+  optional-audio boundaries, and the competitive-only live GUI boundary.
+- This closes only current shared audio-state mapping evidence. It does not
+  complete browser-native stabilization integration, direct campaign-envelope
+  audio, campaign-specific motifs, quality, replay/debrief, or human review.
+
+Deferred / Non-Goals:
+
+- No new cue, music state, audio file, direction, route, asset, screenshot,
+  persistence, instructor view, or authority path was added.
+- Eligible visible-only mappings remain optional and do not imply hidden
+  severity, intent, probability, causality, or future outcome.
 
 ### Exit criteria
 

@@ -1773,3 +1773,32 @@ as a bounded presentation contract.
   browser dependencies, or human evaluation.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
+
+# Request Summary — Visual/audio Phase 12 stabilization audio-state mapping v0.13.26
+
+## Scope
+
+Map the current eight shared stabilization pressure/recovery categories to
+existing optional music, event-cue, and audio-direction contracts.
+
+## Target slice
+
+- Join the pressure-state registration to exact music/cue/direction IDs,
+  visible trigger sources, and written equivalents.
+- Preserve the text-first CLI tutorial and competitive-only live GUI boundary;
+  close only current shared audio-state mapping evidence.
+
+## Sources and expected files
+
+- `docs/evaluation/phase12-pressure-state-registration.json`,
+  `gui/music-stem-contract.mjs`, `gui/audio-cue-contract.mjs`,
+  `gui/audio-direction.mjs`, and campaign coverage.
+- New mapping ledger/parity test, roadmap/spec/architecture/changelog/lessons,
+  version projections, generated credits, and additive contract/QA/handoff.
+
+## Non-goals and validation
+
+- Do not add direct campaign-envelope audio, new IDs/files/routes, assets,
+  screenshots, persistence, instructor views, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.

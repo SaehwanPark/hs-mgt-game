@@ -1,0 +1,108 @@
+{
+  "schema_version": "stabilization-audio-state-mapping-v1",
+  "status": "complete-current-shared-audio-mapping",
+  "campaign": "stabilization-v1",
+  "scope": "current actor-visible stabilization pressure/recovery mapping to optional existing audio contracts",
+  "source_contract": {
+    "pressure_registration": "docs/evaluation/phase12-pressure-state-registration.json: pressure-state-registration-v1",
+    "music": "gui/music-stem-contract.mjs: MUSIC_STEM_CONTRACT",
+    "event_cues": "gui/audio-cue-contract.mjs: AUDIO_CUE_CONTRACT",
+    "direction": "gui/audio-direction.mjs: AUDIO_DIRECTION",
+    "campaign_coverage": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1"
+  },
+  "mappings": [
+    {
+      "id": "workforce-capacity",
+      "music_state_id": "pressure",
+      "event_cue_ids": ["event.staffing-constraint"],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible workforce trust, staffing, or capacity constraint",
+      "text_equivalent": "Staffing and capacity constraint; visible fields require attention.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "demand-access",
+      "music_state_id": "pressure",
+      "event_cue_ids": [],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible unmet demand or access pressure",
+      "text_equivalent": "Demand pressure; the visible unmet-demand value is reported.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "financial-operating",
+      "music_state_id": "pressure",
+      "event_cue_ids": ["event.operating-loss"],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible cash, runway, margin, or operating-loss result",
+      "text_equivalent": "Financial distress or operating loss; visible cash, runway, and result text remain available.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "regulatory-policy",
+      "music_state_id": "regulatory_scrutiny",
+      "event_cue_ids": ["event.regulatory-decision"],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible regulatory, oversight, mandate, or policy-review context",
+      "text_equivalent": "Regulatory review; visible review text and current status remain explicit.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "community-trust",
+      "music_state_id": "pressure",
+      "event_cue_ids": [],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible community-trust concern",
+      "text_equivalent": "Community-trust concern; visible trust status is reported.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "project-timing",
+      "music_state_id": "pressure",
+      "event_cue_ids": [],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible delayed project timing or status",
+      "text_equivalent": "Delayed project; visible timing and status are reported without a hidden cause.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "uncertain-intelligence",
+      "music_state_id": "pressure",
+      "event_cue_ids": [],
+      "direction_prototype_ids": ["audio.direction-pressure-layer"],
+      "visible_trigger_source": "Actor-visible information gap, staleness, or revision",
+      "text_equivalent": "Uncertain or stale intelligence; missingness or revision remains explicit.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    },
+    {
+      "id": "operational-recovery",
+      "music_state_id": "stable_operations",
+      "event_cue_ids": ["event.operating-recovery"],
+      "direction_prototype_ids": ["audio.direction-neutral-bed"],
+      "visible_trigger_source": "Actor-visible improved operating result or recovery text",
+      "text_equivalent": "Operational recovery; the visible monthly result is reported without a guaranteed future outcome.",
+      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+    }
+  ],
+  "campaign_surface": {
+    "current_cli": "The five-turn stabilization beginner flow is text-first and has no playback surface; its written choices, trade-offs, and uncertainty remain complete.",
+    "live_gui": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization audio route is claimed.",
+    "shared_mapping_status": "complete-current-shared-contract-mapping",
+    "direct_campaign_audio_status": "open-not-integrated",
+    "optional_audio_rule": "Audio may reinforce only supplied visible state; mute, unavailable, reduced, or unsupported audio preserves the same written meaning."
+  },
+  "open_work": [
+    "browser-native stabilization audio integration",
+    "direct stabilization tutorial or campaign audio mapping",
+    "campaign-specific motif and quality review",
+    "human comprehension, educational usability, and fatigue review"
+  ],
+  "limits": [
+    "The mapping reuses current visible categories and catalog IDs; it does not infer hidden severity, intent, probability, causality, or future outcome.",
+    "Eligible event cues, music states, and direction prototypes are optional visible-only channels, not direct stabilization campaign-envelope integration.",
+    "No new cue, music state, audio file, route, transition, asset, screenshot, persistence, or registry entry is created or promoted.",
+    "Existing technical audio, accessibility, and provenance checks do not establish audio quality, human comprehension, educational usability, or fatigue-free use.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_stabilization_audio_state_mapping.py"
+}

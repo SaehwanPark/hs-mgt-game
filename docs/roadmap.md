@@ -1282,8 +1282,9 @@ At each phase gate, explicitly decide what will not be built next.
    current Phase 12 campaign-specific presentation inventory at v0.13.21 and
    current Phase 12 reusable-asset matrix at v0.13.22, and current Phase 12
    map/facility asset-need decision at v0.13.23, and current shared
-   pressure-state registration at v0.13.24, and current stabilization
-   tutorial-presentation evidence at v0.13.25.
+   pressure-state registration at v0.13.24, current stabilization
+   tutorial-presentation evidence at v0.13.25, and current stabilization
+   audio-state mapping evidence at v0.13.26.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

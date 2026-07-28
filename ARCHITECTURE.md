@@ -804,6 +804,13 @@ campaign-coverage renderer while preserving the current live GUI competitive-
 only boundary; no browser-native stabilization rail, tutorial audio, content,
 or authority path is introduced.
 
+The v0.13.26 Phase 12 slice maps the eight shared actor-visible stabilization
+pressure/recovery categories to existing optional music states, event cues, and
+audio-direction prototypes, preserving source-linked written equivalents and
+visible-only triggers. The stabilization CLI has no playback surface and the
+live GUI launcher remains competitive-regional-v1 only; direct campaign audio
+integration, new IDs/assets, and human quality review remain open.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

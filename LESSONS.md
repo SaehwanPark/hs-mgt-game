@@ -2899,3 +2899,11 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   parity-checked ledger; keep browser-native integration and human review open.
 - Prevention: Name the current presentation surface and live-launch scope
   before checking any tutorial roadmap item.
+## Phase 36: Treat audio-state mapping as a visible-contract join (2026-07-28)
+
+The shared pressure taxonomy already named eligible music and event-cue IDs,
+but that did not by itself establish a campaign mapping. The stabilization
+mapping ledger now joins those IDs to visible trigger sources, audio-direction
+prototypes, written equivalents, and the current CLI/live-GUI boundary. Keep
+direct campaign-envelope audio and human quality review open until a real
+browser surface and audience evidence exist.
