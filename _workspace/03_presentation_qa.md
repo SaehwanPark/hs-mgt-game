@@ -3010,6 +3010,42 @@ usability, and public-release decisions remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 regional-affiliation partner identity v0.13.30
+
+## Status
+
+`pass` for bounded current partner-identity evidence only. No partner-specific
+visual/audio quality, browser-native integration, human identity, legal,
+educational, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: host partner name, condition, stage, and status fields resolve to the
+  current campaign-coverage source and preserve a written equivalent.
+- Pass: the actor-family catalog retains generic fallback language and the
+  shared renderer retains neutral written treatment when identity decoration is
+  unavailable.
+- Pass: the identity-only `affiliation-partner-executive` preview remains
+  explicitly unverified/unreleased and is not promoted as a released asset.
+- Pass: the shared renderer and competitive-only live GUI boundary are recorded;
+  no new asset is required by the current stage contract.
+
+## Required fixes
+
+None for this bounded current identity-treatment slice.
+
+## Evidence limits
+
+Browser-native regional-affiliation presentation, partner-specific art/audio,
+stage states, replay/debrief updates, provenance/legal, human quality,
+accessibility, educational usability, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_partner_identity` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

@@ -1,0 +1,52 @@
+{
+  "schema_version": "regional-affiliation-partner-identity-v1",
+  "status": "complete-current-partner-identity-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current host-reported partner identity, shared fallback, and identity-only preview boundary",
+  "source_contract": {
+    "partner_projection": "src/mcp/campaign_coverage.rs: Potential partner",
+    "partner_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.partner_name/reported_condition",
+    "status_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.status",
+    "stage_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.stage",
+    "actor_fallback": "gui/actor-families.mjs: Missing or unknown actor-family ID",
+    "actor_family_test": "tests/test_actor_families.py: ACTOR_FAMILIES",
+    "portrait_inventory": "docs/evaluation/portrait-preview-coverage.json: fictional-portrait-preview-coverage-v1",
+    "portrait_role": "assets/generation/portrait-set.json: affiliation-partner-executive",
+    "portrait_test": "tests/test_portrait_workflow.py: test_proof_exposes_identity_and_fallback_boundaries",
+    "campaign_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"
+  },
+  "identity_treatment": {
+    "host_fields": ["partner_name", "reported_condition", "status", "stage"],
+    "visible_equivalent": "Partner name, role/context label, condition/status text, stage source, and written uncertainty remain available.",
+    "shared_identity_fallback": "generic-actor",
+    "shared_fallback_equivalent": "Actor label, generic marker, neutral frame, and written notification.",
+    "portrait_preview": {
+      "role_id": "affiliation-partner-executive",
+      "status": "identity-only-preview-unverified-unreleased",
+      "equivalent": "Fictional affiliation partner executive portrait; identity decoration only."
+    },
+    "audio_identity": "No direct partner-specific audio identity is mapped; optional shared actor/campaign audio remains eligible but not directly integrated."
+  },
+  "presentation_surface": {
+    "current_host": "The host campaign-coverage projection exposes a partner briefing, actor role, stage, condition/status, and written uncertainty.",
+    "shared_gui": "The shared campaign renderer can display supplied partner identity and coverage fields with written fallback; the actor-family catalog supplies generic fallback language separately.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation partner route is claimed.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation partner identity integration",
+    "partner-specific visual treatment and released asset decision",
+    "direct affiliation audio motif and identity mapping",
+    "human identity, quality, accessibility, legal, and educational review"
+  ],
+  "limits": [
+    "This record covers current host-reported partner identity and shared fallback; it does not complete partner-specific visual treatment.",
+    "The portrait preview is identity decoration only and remains unverified/unreleased; it does not establish resemblance, quality, legal clearance, or partner truth.",
+    "No private partner intent, agreement probability, true condition, causal outcome, or future commitment is inferred.",
+    "No new portrait, stage art, audio, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "No human accessibility, educational, public-release, or policy-validity claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_partner_identity.py"
+}

@@ -831,6 +831,13 @@ registry/release/credits checks, the no-new-asset decision, and unreleased
 portrait previews. It does not add or promote assets, change runtime authority,
 or infer legal clearance, output quality, human approval, or public release.
 
+The v0.13.30 Phase 12 slice records the existing regional-affiliation partner
+identity contract: host-reported partner name/condition/stage fields, shared
+generic actor fallback, and the identity-only unverified/unreleased portrait
+preview. Shared campaign coverage can render supplied fields while the live
+GUI remains competitive-regional-v1 only; no partner asset, audio identity, or
+authority path is added.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
