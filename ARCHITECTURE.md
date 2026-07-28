@@ -865,6 +865,12 @@ affiliation milestone cue, visible trigger/text-equivalent/fallback contracts,
 and optional generated-audio boundary. It does not add audio content, direct
 browser-native affiliation integration, or change runtime authority.
 
+The v0.13.35 Phase 12 slice records the deterministic regional-affiliation
+stage chain from partner assessment through completion, including typed
+successors, legal command gates, visible stage labels/process, and
+replay-aligned committed history. It does not add browser sequencing,
+stage-specific assets, or change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

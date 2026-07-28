@@ -3191,6 +3191,44 @@ provenance clearance, and public release remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
 
+# Presentation Domain QA — Phase 12 regional-affiliation stage-transition sequence v0.13.35
+
+## Status
+
+`pass` for bounded current host-projected sequence QA only. No browser-native
+affiliation sequencing, stage-specific visual/audio quality, persistence,
+instructor, human, educational, legal, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: the typed six-stage successor chain and terminal completion match the
+  host model and one-transition advancement implementation.
+- Pass: legal command gates, visible stage/process labels, uncertainty,
+  committed history/replay, read-only host boundary, and competitive-only live
+  GUI scope are explicit.
+- Pass: resolved stochastic inputs, private rationale, future outcomes, and
+  the existing competitive-only browser resolution sequence remain outside the
+  actor-visible affiliation sequence.
+- Pass: no new route, asset, runtime field, persistence, authority path, or
+  provenance/public-release claim is added.
+
+## Required fixes
+
+None for this bounded sequence contract.
+
+## Evidence limits
+
+Browser-native affiliation sequencing, stage-specific visual/audio treatment,
+persistence, instructor views, human visual/audio/accessibility review,
+educational usability, legal review, provenance clearance, and public release
+remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_stage_transition_sequence` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

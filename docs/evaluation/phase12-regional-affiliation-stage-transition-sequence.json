@@ -1,0 +1,98 @@
+{
+  "schema_version": "regional-affiliation-stage-transition-sequence-v1",
+  "status": "complete-current-host-projected-stage-transition-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current deterministic six-stage affiliation sequence, terminal completion, visible labels, command gates, and replay-aligned history",
+  "source_contract": {
+    "stage_model": "src/model/affiliation.rs: pub enum AffiliationStage",
+    "successor_mapping": "src/model/affiliation.rs: pub fn next(self)",
+    "command_model": "src/model/affiliation.rs: pub enum AffiliationCommand",
+    "command_gate": "src/affiliation/transition.rs: validate_affiliation_command",
+    "transition_advance": "src/affiliation/transition.rs: next.stage = next.stage.next()",
+    "stage_labels": "src/mcp/campaign_coverage.rs: fn affiliation_stage_label",
+    "coverage_decisions": "src/mcp/campaign_coverage.rs: fn affiliation_decisions",
+    "stage_process": "src/mcp/campaign_coverage.rs: affiliation-stage",
+    "history_projection": "src/mcp/campaign_coverage.rs: history: history.to_vec()",
+    "replay_contract": "src/affiliation/transition.rs: pub fn replay_affiliation",
+    "command_surface": "src/mcp/session.rs: AffiliationStage::AssessPartner",
+    "completion_test": "src/affiliation/transition.rs: independent_path_completes_six_stages",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";",
+    "shared_sequence_boundary": "gui/resolution-sequence.mjs: competitive-first-month-resolution-v1"
+  },
+  "sequence": {
+    "decision_stages": [
+      {
+        "id": "assesspartner",
+        "label": "Assess partner",
+        "next": "chooseposture",
+        "command": "assess",
+        "uncertainty": "The report is bounded and noisy; it is not a true partner forecast."
+      },
+      {
+        "id": "chooseposture",
+        "label": "Choose posture",
+        "next": "negotiatecommitments",
+        "command": "posture independent|defer|pursue",
+        "uncertainty": "Independence, deferral, and pursuit preserve different outside options."
+      },
+      {
+        "id": "negotiatecommitments",
+        "label": "Negotiate commitments",
+        "next": "submitreview",
+        "command": "commit community=1..8 workforce=1..8 continuity=1..8",
+        "uncertainty": "Partner fit and stakeholder responses remain uncertain after commitment."
+      },
+      {
+        "id": "submitreview",
+        "label": "Submit review",
+        "next": "resolvereview",
+        "command": "submit_review",
+        "uncertainty": "Review may approve, condition, delay, or reject the proposal."
+      },
+      {
+        "id": "resolvereview",
+        "label": "Resolve review",
+        "next": "integrateordecline",
+        "command": "await_review",
+        "uncertainty": "Review timing and response remain outside Riverside authority."
+      },
+      {
+        "id": "integrateordecline",
+        "label": "Integrate or decline",
+        "next": "complete",
+        "command": "integrate begin|decline",
+        "uncertainty": "Integration creates obligations and drag; decline preserves a different path."
+      }
+    ],
+    "terminal": {
+      "id": "complete",
+      "label": "Affiliation complete",
+      "next": "complete",
+      "command": "none",
+      "uncertainty": "The committed history is available for review; no further affiliation command is available."
+    },
+    "advancement": "Each valid host command creates one immutable transition, advances to the recorded successor, and appends aligned history/replay evidence.",
+    "written_equivalent": "Stage label, process status, command/result, source, status, effects, uncertainty, and committed history remain available without visual decoration."
+  },
+  "presentation_surface": {
+    "host_boundary": "The host owns stage validation, stochastic input resolution, transition, state hash, and replay; the presentation surface is read-only for those results.",
+    "history_boundary": "Campaign coverage returns committed history and replay transition metadata; the sequence record does not add persistence or a new replay route.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation sequence route is claimed.",
+    "shared_sequence_boundary": "The existing browser resolution sequence is competitive-first-month only and is not promoted as affiliation coverage.",
+    "audio_boundary": "Existing optional visible-only affiliation audio may accompany supported text/events; it does not make the sequence complete or imply a future outcome.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation stage-transition sequence",
+    "stage-specific visual/audio treatment and human quality/accessibility review",
+    "full replay/debrief presentation, persistence, instructor views, and educational review"
+  ],
+  "limits": [
+    "This record covers current deterministic host stage transitions; it does not complete the full affiliation campaign visualization.",
+    "Resolved stochastic inputs, private rationale, hidden thresholds, legal validity, causal certainty, and future partner/integration outcomes remain outside the actor-visible sequence.",
+    "No browser animation, route, runtime field, persistence, screenshot, instructor view, map, facility, portrait, audio file, registry entry, or authority path is created or promoted.",
+    "No human visual, audio, accessibility, educational, legal, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_stage_transition_sequence.py"
+}

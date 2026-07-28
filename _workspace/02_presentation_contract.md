@@ -2765,3 +2765,39 @@ registry, or new asset boundary changes.
 IDs/properties, visible routing, written/audio-off fallback, live scope, and
 the no-new-asset boundary. Direct campaign audio integration and human
 listening/quality review remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation stage-transition sequence v0.13.35
+
+## Contract status
+
+Complete for current host-projected deterministic stage-sequence evidence only.
+Browser-native affiliation sequencing, stage-specific presentation,
+persistence, instructor views, and human visual/audio/accessibility/
+educational/legal/public-release review remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the typed six-stage successor chain and terminal completion
+  to host command validation, one-transition advancement, visible labels, and
+  the `affiliation-stage` process.
+- Each committed step retains the command/result, source, status, effects,
+  uncertainty, and aligned history/replay metadata; resolved stochastic inputs,
+  private rationale, and future outcomes remain outside the actor view.
+- The existing browser resolution sequence is explicitly competitive-first-
+  month only and is not promoted as affiliation coverage.
+
+## Fallback, authority, and provenance
+
+Written stage labels, process status, command/result, source, uncertainty, and
+committed history remain complete without animation or audio. The host owns
+validation, stochastic resolution, state hashing, and replay; the presentation
+surface remains read-only. No new asset, route, runtime authority path, or
+registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_stage_transition_sequence.py` checks
+source markers, exact order/successors, command/uncertainty coverage,
+history/replay and read-only boundaries, shared-sequence scope, optional audio,
+live scope, and the no-new-asset decision. Browser sequencing and human review
+remain open.

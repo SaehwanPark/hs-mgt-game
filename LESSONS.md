@@ -2980,3 +2980,12 @@ equivalents, and audio-off fallback. Record eligibility without turning audio
 into an agreement, severity, or outcome channel. Keep direct campaign
 integration, new audio, provenance, human listening, and public release
 separate.
+
+## Phase 45: Treat affiliation stage order as host evidence (2026-07-28)
+
+The affiliation campaign already has a deterministic typed stage successor
+chain, legal command gates, visible labels/process, and replay-aligned history.
+Record that sequence without inventing browser animation or turning resolved
+inputs, private rationale, or future outcomes into actor-visible steps. Keep
+stage-specific presentation, persistence, instructor views, and human review
+separate.

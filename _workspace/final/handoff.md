@@ -729,6 +729,30 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 12 regional-affiliation stage-transition sequence v0.13.35
+
+## Result
+
+Recorded the deterministic typed stage chain from Assess partner through
+Affiliation complete, successor mapping, legal command gates, visible
+stage/process labels, uncertainty, and replay-aligned committed history.
+
+## Evidence boundary
+
+The ledger and parity test cover current host-projected sequence evidence. No
+browser-native affiliation sequence, animation, stage-specific visual/audio
+treatment, persistence, instructor view, runtime authority path, asset
+promotion, or human visual/audio/accessibility/educational/legal/public-release
+claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.34.
+- Working branch: `feat/regional-affiliation-stage-transition-sequence-v0.13.35`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Phase 12 regional-affiliation audio motif v0.13.34
 
 ## Result
