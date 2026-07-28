@@ -2469,3 +2469,31 @@ markers, field counts, host ownership, written equivalents, and explicit
 no-browser-tutorial/no-human-learning limits. Browser integration, direct
 audio, content/pacing, quality, replay/debrief, human, and educational gates
 remain open.
+
+# Presentation Contract — Phase 12 stabilization audio-state mapping v0.13.26
+
+## Contract status
+
+Complete for current shared visible audio mapping only. Direct stabilization
+campaign-envelope audio, browser-native integration, audio quality, human
+review, and educational usability remain separately gated.
+
+## Source and visible behavior
+
+- The ledger joins eight pressure/recovery categories to existing music-state,
+  event-cue, and audio-direction IDs with visible trigger and written fields.
+- Audio remains optional; the stabilization CLI is text-first and the live GUI
+  launcher remains competitive-regional-v1 only.
+
+## Fallback, authority, and provenance
+
+Mute, unavailable, reduced, or unsupported audio preserves written meaning.
+No new route, asset, audio ID, runtime field, transition, or authority path
+changes; mappings do not infer hidden severity or future outcomes.
+
+## Verification and limits
+
+`tests/test_phase12_stabilization_audio_state_mapping.py` checks exact parity
+with pressure registration and current catalogs, plus direct-integration and
+human-quality boundaries. Browser integration, direct campaign audio, motif
+quality, replay/debrief, human, and educational gates remain open.

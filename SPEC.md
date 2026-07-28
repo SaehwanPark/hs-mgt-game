@@ -6255,6 +6255,39 @@ Deferred / Non-Goals:
   instructor view, or authority path was added.
 - The CLI beginner flow is not a human learning or optimal-policy claim.
 
+### Visual/audio Phase 12 current stabilization audio-state mapping (v0.13.26)
+
+Status: Complete for the current shared visible audio mapping only;
+browser-native stabilization integration, direct campaign-envelope audio,
+campaign-specific motifs, quality, human review, and educational usability
+remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-stabilization-audio-state-mapping.json` for
+  the eight shared pressure/recovery categories, existing music/cue/direction
+  IDs, visible triggers, written equivalents, and optional-audio boundaries.
+- Added `tests/test_phase12_stabilization_audio_state_mapping.py` to join the
+  mapping to pressure-state registration and require exact catalog/source
+  parity and bounded campaign/live-GUI limits.
+- Checked only current stabilization audio-state mapping evidence and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request/contract/QA/handoff records; no runtime behavior
+  changed.
+
+Not Yet Done:
+
+- Browser-native stabilization integration, direct campaign-envelope audio,
+  campaign-specific motif/content quality, replay/debrief presentation, and
+  human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No new cue, music state, audio file, route, asset, screenshot, persistence,
+  instructor view, or authority path was added.
+- Eligible visible-only mappings do not infer hidden severity, intent,
+  probability, causality, or future outcome.
+
 ## Future
 
 ### Visual and audio experience upgrade

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.26] - 2026-07-28
+
+- Recorded the current stabilization audio-state mapping across the eight
+  shared actor-visible pressure/recovery categories, existing music states,
+  event cues, audio-direction prototypes, and written equivalents.
+- Closed only current shared mapping evidence; browser-native integration,
+  direct campaign-envelope audio, new audio content, quality, human review,
+  and educational gates remain open, with no runtime behavior changed.
+
 ## [0.13.25] - 2026-07-28
 
 - Recorded the current stabilization tutorial-presentation contract: the

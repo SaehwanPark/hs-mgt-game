@@ -2976,6 +2976,38 @@ and future provenance review remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 stabilization audio-state mapping v0.13.26
+
+## Status
+
+`pass` for bounded current shared audio-state mapping QA only. No direct
+campaign-envelope audio, audio-quality, human, or educational approval is
+implied.
+
+## Reviewed inputs and findings
+
+- Pass: all eight pressure/recovery IDs join to the registered music and event
+  contracts, with direction prototypes, visible triggers, and written meaning.
+- Pass: optional-audio fallback, text-first CLI behavior, and the live GUI
+  competitive-regional-v1-only boundary remain explicit.
+- Pass: no runtime, route, asset, audio-file, or authority path is introduced.
+
+## Required fixes
+
+None for this bounded mapping record.
+
+## Evidence limits
+
+Browser-native stabilization audio, direct campaign-envelope mapping, motif
+quality, replay/debrief, instructor views, human comprehension, educational
+usability, and fatigue review remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_stabilization_audio_state_mapping` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 current pressure-state registration v0.13.24
 
 ## Status
