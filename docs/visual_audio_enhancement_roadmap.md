@@ -2231,6 +2231,7 @@ Extend the validated asset and interaction language to the remainder of the comp
 visible event-cue parity, current music-state catalog/projection parity,
 current supported operational-overlay catalog/projection coverage in v0.13.12,
 current competitive terminal debrief-view handoff evidence in v0.13.13, and
+current in-memory checkpoint visual-continuity evidence in v0.13.14, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
@@ -2265,7 +2266,10 @@ continuity, performance, and screenshot gates remain open.
   `tests/test_phase11_live_debrief.py`, and the existing
   `competitive-end-session-v1` host/browser handoff; full-campaign and
   instructor debrief remain open.
-- [ ] Save/load visual continuity tested.
+- [x] Current in-memory host checkpoint visual continuity covered. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `tests/test_phase11_live_checkpoint.py`; durable persistence,
+  cross-process recovery, and browser-refresh recovery remain open.
 - [ ] Replay visual continuity tested.
 - [x] Unknown content fallbacks tested.
 - [ ] Asset registry coverage is 100%.
@@ -2359,6 +2363,22 @@ continuity, performance, and screenshot gates remain open.
 - This closes only the current competitive terminal debrief-view item. Full
   campaign debrief taxonomy, instructor-only views, counterfactuals, durable
   save/load/replay continuity, screenshots, accessibility, and human learning
+  remain open.
+
+### v0.13.14 current in-memory checkpoint visual-continuity evidence
+
+- `checkpoint_view_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  `competitive-save-v1` host/MCP envelope, loopback route, adapter, browser
+  validator/refresh path, metadata contract, and failure-preserving behavior.
+- `tests/test_phase11_live_checkpoint.py` covers host checkpoint markers,
+  save/load metadata alignment, adapter calls, successful presentation refresh,
+  missing/failing recovery, controls/routes, syntax, and the unchanged
+  client-authority boundary. Existing Rust session coverage proves cloned host
+  restore without entering a new transition.
+- This closes only current in-memory host checkpoint visual continuity. Durable
+  file/browser persistence, cross-process recovery, browser-refresh recovery,
+  replay regeneration/playback, screenshots, accessibility, and human learning
   remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits

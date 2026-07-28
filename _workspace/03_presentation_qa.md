@@ -2698,3 +2698,40 @@ usefulness, and human learning remain open.
 - `python3 -m unittest tests.test_phase11_live_debrief` — pass.
 - `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
 - Existing JavaScript syntax and host route/source boundary checks — pass.
+
+# Presentation Domain QA — Phase 11.1 checkpoint visual continuity v0.13.14
+
+## Status
+
+`pass` for the current in-memory host checkpoint presentation handoff. This is
+bounded technical QA only; it is not durable persistence, cross-process or
+browser-refresh recovery, replay, screenshot, accessibility, usability, audio,
+educational, or learning approval.
+
+## Reviewed inputs and findings
+
+- Pass: `checkpoint_view_coverage` names the exact `competitive-save-v1`
+  host/MCP/route/adapter/browser sources, metadata contract, refresh behavior,
+  and failure limits.
+- Pass: focused checkpoint tests cover valid save/load metadata, state-hash and
+  transition-count alignment, adapter calls, successful presentation refresh,
+  missing/failing recovery, controls/routes, syntax, and authority exclusions.
+- Pass: host/core owns the cloned snapshot and restore; the browser validates
+  metadata and refreshes read-only projections without client-side state
+  restoration or a new transition.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Durable file/browser persistence, cross-process/browser-refresh recovery, replay
+visual continuity, screenshots, accessibility, usability, audio usefulness,
+and human learning remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase11_live_checkpoint` — pass.
+- `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
+- Existing Rust checkpoint restore tests and JavaScript syntax checks — pass.

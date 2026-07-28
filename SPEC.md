@@ -5887,6 +5887,36 @@ Deferred / Non-Goals:
   replay regeneration, screenshot tooling, asset/audio bytes, or client-owned
   authority were added.
 
+### Visual/audio Phase 11.1 in-memory checkpoint visual continuity (v0.13.14)
+
+Status: Complete for the current in-memory host checkpoint view; durable
+persistence, cross-process/browser-refresh recovery, replay, screenshot, and
+human-learning evidence remain separately gated.
+
+Done:
+
+- Added `checkpoint_view_coverage` for the `competitive-save-v1` host/MCP
+  envelope, loopback save/load routes, adapter, browser validation/refresh path,
+  aligned metadata, and recoverable failure behavior.
+- Linked the ledger to focused checkpoint tests covering host ownership,
+  save/load metadata, presentation refresh, missing/failing recovery, controls,
+  syntax, and the unchanged client-authority boundary; existing Rust session
+  tests prove cloned restore without a new transition.
+- Updated the Phase 11.1 checklist and synchronized patch-version and
+  presentation handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Durable file/browser persistence, cross-process/browser-refresh recovery,
+  replay visual continuity, screenshots, accessibility, usability, audio
+  usefulness, and human learning.
+
+Deferred / Non-Goals:
+
+- No durable serialization, browser storage, replay regeneration, screenshot
+  tooling, new simulation transition, asset/audio byte, or client-owned
+  authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

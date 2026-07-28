@@ -704,6 +704,16 @@ debrief facts; the loopback browser validates and renders the supplied
 text-first view, disables terminal actions after valid completion, and fails
 closed on malformed alignment. No new runtime or authority path is added.
 
+The v0.13.14 Phase 11.1 checkpoint slice records the existing
+`competitive-save-v1` in-memory host checkpoint as a dedicated visual-
+continuity contract. The host owns one cloned session snapshot per active
+session and returns aligned operation, transition-count, and state-hash
+metadata; the loopback browser validates the envelope and refreshes its
+actor-visible read-only presentation after a successful restore. Missing or
+failing checkpoint/refresh paths preserve a recoverable current view. No
+durable serialization, browser storage, cross-process recovery, or client
+authority is added.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
