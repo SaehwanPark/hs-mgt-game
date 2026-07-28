@@ -2661,3 +2661,40 @@ None for this bounded technical contract.
 - Python live/ledger tests: pass.
 - Catalog-to-host source-condition ledger: complete for the current supported
   vocabulary.
+
+# Presentation Domain QA — Phase 11.1 terminal debrief coverage v0.13.13
+
+## Status
+
+`pass` for the current competitive terminal debrief host/browser handoff. This
+is bounded technical presentation QA only; it is not full-campaign, instructor,
+counterfactual, accessibility, human-usability, audio-quality, educational,
+or learning approval.
+
+## Reviewed Inputs and Findings
+
+- Pass: `debrief_view_coverage` names the exact `competitive-end-session-v1`
+  host envelope, loopback route, adapter, renderer, history/replay/debrief
+  contracts, and test source.
+- Pass: valid terminal data render aligned history rows, replay metadata, and
+  host-authored written debrief lines; valid completion disables further action.
+- Pass: unknown schema, incomplete data, invalid counts, and hash mismatch fail
+  closed without browser-authored terminal state.
+- Pass: host/core remains authoritative for history, hashes, replay metadata,
+  and debrief facts; optional debrief audio remains non-semantic.
+
+## Required Fixes
+
+None for this bounded technical contract.
+
+## Evidence Limits
+
+Full campaign debrief taxonomy, instructor-only views, counterfactuals, durable
+save/load/replay continuity, screenshots, accessibility, usability, audio
+usefulness, and human learning remain open.
+
+## Verification Evidence
+
+- `python3 -m unittest tests.test_phase11_live_debrief` — pass.
+- `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
+- Existing JavaScript syntax and host route/source boundary checks — pass.

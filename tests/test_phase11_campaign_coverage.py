@@ -12,6 +12,7 @@ VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
+DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
 
 
 NODE_PROBE = r'''
@@ -217,7 +218,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -368,6 +369,38 @@ console.log(JSON.stringify(resolved));
     for forbidden in ("transition_competitive", "resolved_inputs", "effect_queue", "CompetitiveWorldState", "WebSocket"):
       self.assertNotIn(forbidden, self.app + self.adapter + self.server)
 
+  def test_debrief_view_coverage_matches_the_live_terminal_handoff(self):
+    coverage = self.ledger["debrief_view_coverage"]
+    debrief_test = DEBRIEF_TEST.read_text(encoding="utf-8")
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(coverage["schema"], "competitive-end-session-v1")
+    self.assertEqual(coverage["history_row_contract"], ["turn", "command", "state_hash"])
+    self.assertEqual(
+      coverage["replay_contract"],
+      ["seed", "transition_count", "latest_state_hash"],
+    )
+    for marker in (
+      "competitive-end-session-v1",
+      "renderEndSessionEnvelope",
+      "validateEndSessionEnvelope",
+      "endHostSession",
+      "final history and debrief",
+      'id="session-end"',
+      "/api/v1/sessions/{session_id}/end",
+      "EndSessionEnvelope",
+      "latest_state_hash",
+    ):
+      self.assertIn(marker, debrief_test + self.app + self.adapter + self.server)
+    for forbidden in (
+      "CompetitiveWorldState",
+      "HealthSystemState",
+      "resolved_inputs",
+      "effect_queue",
+      "transition_competitive",
+      "Math.random",
+    ):
+      self.assertNotIn(forbidden, self.app + self.adapter)
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -466,7 +499,7 @@ console.log(JSON.stringify(resolved));
       "Event cue coverage complete.": "x",
       "Music-state coverage complete.": "x",
       "History view updated.": "x",
-      "Debrief view updated.": " ",
+      "Current competitive terminal debrief view covered. Evidence:": "x",
       "Save/load visual continuity tested.": " ",
       "Replay visual continuity tested.": " ",
       "Unknown content fallbacks tested.": "x",

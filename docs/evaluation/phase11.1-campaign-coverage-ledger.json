@@ -169,6 +169,40 @@
       "Explicit empty host lists and unknown cue IDs remain non-authoritative presentation outcomes."
     ]
   },
+  "debrief_view_coverage": {
+    "status": "complete",
+    "schema": "competitive-end-session-v1",
+    "host_source": "src/mcp/session.rs: EndSessionEnvelope",
+    "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/end",
+    "adapter_source": "gui/host-adapter.mjs: endHostSession",
+    "browser_source": "gui/app.mjs: validateEndSessionEnvelope + renderEndSessionEnvelope",
+    "test_source": "tests/test_phase11_live_debrief.py",
+    "history_row_contract": [
+      "turn",
+      "command",
+      "state_hash"
+    ],
+    "replay_contract": [
+      "seed",
+      "transition_count",
+      "latest_state_hash"
+    ],
+    "debrief_contract": "Host-authored written debrief lines rendered as text",
+    "terminal_behavior": [
+      "Valid envelope renders history, replay metadata, and debrief together.",
+      "Successful terminal render disables further session action controls.",
+      "Optional debrief audio remains atmospheric and written text remains complete."
+    ],
+    "failure_behavior": [
+      "Unknown schema, invalid replay count, hash/count mismatch, or incomplete envelope fails closed.",
+      "Invalid terminal data does not mutate the current presentation into a completed state."
+    ],
+    "boundary": "Host/core owns history, replay metadata, and debrief facts; the browser validates and renders only the supplied terminal projection.",
+    "evidence": [
+      "The live terminal test covers schema validation, row rendering, hash/count alignment, terminal controls, failure rejection, route/source markers, and syntax.",
+      "No instructor-only, counterfactual, durable persistence, replay-regeneration, human-usability, or learning claim is made."
+    ]
+  },
   "music_state_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_music_state_id",

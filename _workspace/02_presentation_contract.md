@@ -1934,6 +1934,70 @@ accessibility, audio usefulness, or educational benefit.
   regeneration, runtime telemetry, or simulation mechanism is included.
 - Open: full campaign placement/use and visual continuity across durable
   save/load/replay remain separate Phase 11.1 gates.
+
+# Presentation Contract — Phase 11.1 terminal debrief coverage v0.13.13
+
+## Goal and Authorization
+
+Document the current competitive terminal debrief presentation as a bounded
+host/browser contract. Authorized evidence covers the existing end-session
+envelope, aligned history/replay metadata, host-authored debrief text, terminal
+controls, and failure handling. No new debrief content or authority is added.
+
+## Player Questions and Consequences
+
+The terminal view should answer: “What committed history, replay identity, and
+host-authored lessons can I inspect after this session ends?” It must not imply
+that a debrief line is a forecast, an instructor-only true-state view, a
+counterfactual, a causal proof, or evidence of learning.
+
+## Actor-Visible Source Ledger
+
+| Surface | Authorized source | Required behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Schema/session | `EndSessionEnvelope` from host end-session route | Reject unknown/incomplete schema | No browser-created terminal state |
+| History rows | Host immutable history with turn/command/hash | Render aligned rows | No replay regeneration or mutation |
+| Replay metadata | Host seed, transition count, latest hash | Require count/hash alignment | No hidden state or future outcome |
+| Debrief text | Host-authored `debrief` lines | Render written lines completely | No browser-authored lesson or quality claim |
+| Terminal controls | Valid host terminal result | Disable further session actions | No client authority over session end |
+
+## Visual, Motion, and Audio Semantics
+
+The existing text-first history/debrief view remains authoritative for meaning.
+Terminal debrief music is optional and atmospheric; muting it does not remove
+history, hashes, replay metadata, or written debrief lines. No new motion or
+asset is introduced.
+
+## Accessibility and Fallbacks
+
+Missing, malformed, unknown-schema, count-mismatched, and hash-mismatched
+envelopes fail closed and preserve the current presentation. Written history,
+replay, and debrief content remain present when audio is unavailable. This
+contract does not establish contrast, screen-reader, lived accessibility,
+usability, or learning quality.
+
+## Authority, History, and Replay Boundaries
+
+The host/core owns session history, state hashes, replay metadata, and debrief
+facts. The browser validates and renders the supplied projection only. No
+commands, transitions, stochastic inputs, hidden fields, or client-owned
+history/replay/debrief facts are introduced.
+
+## Verification and Evidence Limits
+
+`tests/test_phase11_live_debrief.py` covers valid rendering, aligned rows,
+count/hash/schema rejection, terminal controls, route/source markers, syntax,
+and authority exclusions. The ledger links those checks to the exact host,
+route, adapter, and renderer sources. Evidence is limited to the current
+competitive terminal view; full-campaign debrief taxonomy, instructor views,
+counterfactuals, screenshots, and human learning remain open.
+
+## Non-Goals and Open Questions
+
+- No new debrief mechanics, instructor export, counterfactual, durable
+  persistence, replay playback, screenshot tooling, asset, or audio file.
+- Open: which broader campaign/instructor debrief surfaces need separate
+  information-boundary and usability evidence?
 # Presentation Contract — Phase 11.2 low-power profile evidence v0.13.11
 
 ## Goal and Authorization

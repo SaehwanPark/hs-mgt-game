@@ -1329,3 +1329,37 @@ the host currently binds only five.
 Focused Rust/browser/ledger tests, full Python/Rust/Clippy checks, release,
 documentation, asset, offline, browser-policy, and visual/audio contract checks.
 The bounded result closes only current supported operational-overlay coverage.
+
+# Request Summary — Visual/audio Phase 11.1 terminal debrief coverage v0.13.13
+
+## Scope
+
+Continue the roadmap with the next unmet Phase 11.1 checklist item: `Debrief
+view updated`. Formalize the existing competitive terminal debrief host/browser
+handoff as a dedicated coverage record.
+
+## Target slice
+
+- Record the `competitive-end-session-v1` schema, loopback route, adapter,
+  browser validator/renderer, history-row contract, replay metadata, and
+  host-authored written debrief lines.
+- Verify terminal action disablement and failure-preserving validation through
+  the existing focused terminal-debrief test.
+- Close only current competitive terminal debrief coverage; keep full-campaign,
+  instructor, counterfactual, human, and educational claims open.
+
+## Sources and expected files
+
+- `src/mcp/session.rs`, `src/gui_server.rs`, `gui/host-adapter.mjs`, and
+  `gui/app.mjs` existing terminal handoff.
+- `tests/test_phase11_live_debrief.py` and
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
+- `tests/test_phase11_campaign_coverage.py`, roadmap/spec/architecture/
+  changelog/lessons, version projections, and additive presentation handoffs.
+
+## Non-goals and validation
+
+- Do not add debrief content, runtime fields, persistence, replay regeneration,
+  instructor exports, screenshots, browser dependencies, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.

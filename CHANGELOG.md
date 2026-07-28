@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.13] - 2026-07-28
+
+- Recorded current competitive terminal debrief-view coverage for the
+  `competitive-end-session-v1` host/browser handoff, including aligned
+  history, replay metadata, host-authored written lines, terminal controls,
+  and failure behavior.
+- Added ledger/test parity evidence and explicitly kept full-campaign,
+  instructor, counterfactual, continuity, screenshot, accessibility, and
+  human-learning gates open; no runtime behavior changed.
+
 ## [0.13.12] - 2026-07-28
 
 - Completed current supported Phase 11.1 operational-overlay coverage: all

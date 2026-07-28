@@ -28,6 +28,21 @@
   absence test, and authority-marker test for every catalog ID before marking
   current overlay coverage complete.
 
+## Separate Terminal Debrief Coverage from Learning Claims
+
+- Context: The competitive GUI already renders a host terminal envelope with
+  history, replay metadata, and debrief lines, but the Phase 11.1 checklist did
+  not have a dedicated coverage record.
+- Risk: Treating a passing text renderer as evidence of educational usefulness,
+  instructor readiness, or human comprehension would overstate what the test
+  can establish.
+- Resolution: Record exact schema/route/adapter/renderer sources, row/hash
+  alignment, failure behavior, and terminal controls in a ledger; keep full
+  campaign, instructor, counterfactual, accessibility, and learning gates open.
+- Prevention: Every debrief-view closure must name its host source and rendered
+  contract separately from human evaluation and educational-effectiveness
+  evidence.
+
 ## Append to Existing Handoff Artifacts
 
 - Context: The repository keeps durable `_workspace` request, presentation,

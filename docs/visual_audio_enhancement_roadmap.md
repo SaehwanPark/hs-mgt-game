@@ -2230,7 +2230,8 @@ Extend the validated asset and interaction language to the remainder of the comp
 **Status:** Facility asset catalog/release-registry coverage, current
 visible event-cue parity, current music-state catalog/projection parity,
 current supported operational-overlay catalog/projection coverage in v0.13.12,
-and history-view handoff evidence completed in v0.13.9 after the
+current competitive terminal debrief-view handoff evidence in v0.13.13, and
+history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use, event taxonomy beyond the current projection, durable save/load/replay
@@ -2259,7 +2260,11 @@ continuity, performance, and screenshot gates remain open.
 - [x] Event cue coverage complete.
 - [x] Music-state coverage complete.
 - [x] History view updated.
-- [ ] Debrief view updated.
+- [x] Current competitive terminal debrief view covered. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_live_debrief.py`, and the existing
+  `competitive-end-session-v1` host/browser handoff; full-campaign and
+  instructor debrief remain open.
 - [ ] Save/load visual continuity tested.
 - [ ] Replay visual continuity tested.
 - [x] Unknown content fallbacks tested.
@@ -2339,6 +2344,22 @@ continuity, performance, and screenshot gates remain open.
   coverage. Full competitive-campaign placement/use, durable save/load/replay
   visual continuity, screenshots, asset quality, device/browser quality, and
   human quality remain open.
+
+### v0.13.13 current competitive terminal debrief-view coverage evidence
+
+- `debrief_view_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  `competitive-end-session-v1` host envelope, loopback route, adapter,
+  browser validation/rendering, history row contract, replay metadata, and
+  host-authored written debrief contract.
+- `tests/test_phase11_live_debrief.py` covers aligned history/replay/debrief
+  rendering, state-hash/count rejection, unknown schema/incomplete-envelope
+  failure, terminal control disablement, route/source markers, syntax, and the
+  unchanged host-authority boundary.
+- This closes only the current competitive terminal debrief-view item. Full
+  campaign debrief taxonomy, instructor-only views, counterfactuals, durable
+  save/load/replay continuity, screenshots, accessibility, and human learning
+  remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 
