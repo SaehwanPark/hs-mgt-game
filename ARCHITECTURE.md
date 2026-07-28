@@ -818,6 +818,13 @@ renderers. The existing CLI instructor appendix is preserved as a boundary;
 the live GUI remains competitive-regional-v1 only, and no new debrief route,
 runtime field, authority path, or educational claim is introduced.
 
+The v0.13.28 Phase 12 slice records shared technical accessibility evidence:
+keyboard/focus landmarks, text and non-color status language, text scaling,
+reduced motion, written equivalents, audio fallback, and semantic campaign
+coverage. These are local presentation contracts only; the stabilization CLI
+remains text-first, the live GUI remains competitive-regional-v1 only, and no
+human accessibility, assistive-technology, device, or authority claim is made.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

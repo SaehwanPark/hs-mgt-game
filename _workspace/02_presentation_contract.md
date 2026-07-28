@@ -2529,3 +2529,36 @@ markers, section identity, completion gating, written fallback, live GUI scope,
 and the instructor/true-state boundary. Browser-native stabilization quality,
 instructor-surface decisions, replay/debrief expansion, human, and educational
 gates remain open.
+
+# Presentation Contract — Phase 12 stabilization accessibility evidence v0.13.28
+
+## Contract status
+
+Complete for current shared technical accessibility-contract evidence only.
+Browser-native stabilization integration, contrast/screen-reader/device
+certification, lived accessibility, human review, and educational usability
+remain separately gated.
+
+## Source and visible behavior
+
+- The ledger joins existing keyboard/focus, text/non-color status, text-scale,
+  reduced-motion, written-equivalent, optional-audio fallback, and semantic
+  campaign coverage checks.
+- The stabilization CLI remains text-first and the live GUI launcher remains
+  competitive-regional-v1 only; no browser-native stabilization flow is
+  certified.
+
+## Fallback, authority, and provenance
+
+Text scale, reduced motion, and written-equivalent preferences remain local
+presentation state and do not enter commands, transitions, randomness, history,
+hashes, or debrief output. Written meaning remains available when audio or
+motion is unavailable.
+
+## Verification and limits
+
+`tests/test_phase12_stabilization_accessibility_evidence.py` checks source
+markers, six passing technical entries, local-settings ownership, the
+text-first/competitive-only boundary, and human-accessibility limits. Human
+accessibility, assistive technology, device, fatigue, and educational gates
+remain open.

@@ -2959,7 +2959,12 @@ open.
   `tests/test_phase12_stabilization_debrief_presentation.py`; current CLI and
   shared host/browser renderers are covered while browser-native stabilization
   quality, instructor-surface decisions, and human review remain open.
-- [ ] Accessibility tests pass.
+- [x] Current stabilization-relevant accessibility contract checks pass.
+  Evidence: `docs/evaluation/phase12-stabilization-accessibility-evidence.json`
+  and `tests/test_phase12_stabilization_accessibility_evidence.py`; technical
+  keyboard/focus, text/non-color, text-scale, reduced-motion, written-
+  equivalent, and audio-fallback checks pass while human accessibility remains
+  open.
 - [ ] Provenance audit passes.
 
 ### Exit criteria
@@ -3108,6 +3113,28 @@ Deferred / Non-Goals:
   added.
 - The existing CLI instructor appendix is not a new public true-state view or
   a human educational-effectiveness claim.
+
+### v0.13.28 current stabilization accessibility evidence
+
+- `docs/evaluation/phase12-stabilization-accessibility-evidence.json` records
+  current shared technical checks for keyboard/focus landmarks, text and
+  non-color status language, text scale, reduced motion, written equivalents,
+  optional-audio fallback, and semantic campaign coverage.
+- `tests/test_phase12_stabilization_accessibility_evidence.py` requires source
+  markers, six passing technical check entries, local-settings ownership, the
+  text-first/competitive-only boundary, and explicit human-accessibility
+  limits.
+- This closes only current stabilization-relevant technical accessibility
+  evidence. It does not complete browser-native stabilization integration,
+  contrast/screen-reader/device certification, lived accessibility, fatigue,
+  or human/educational review.
+
+Deferred / Non-Goals:
+
+- No new accessibility behavior, route, runtime field, asset, audio file,
+  screenshot, persistence, instructor view, or authority path was added.
+- Technical interface proxies do not establish human accessibility, assistive-
+  technology compatibility, device performance, or educational effectiveness.
 
 ### Exit criteria
 

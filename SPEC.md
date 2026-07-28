@@ -6322,6 +6322,39 @@ Deferred / Non-Goals:
 - The existing CLI instructor appendix is not a new public true-state view or
   a human educational-effectiveness claim.
 
+### Visual/audio Phase 12 current stabilization accessibility evidence (v0.13.28)
+
+Status: Complete for current shared technical accessibility-contract evidence
+only; browser-native stabilization integration, contrast/screen-reader/device
+certification, lived accessibility, human review, and educational usability
+remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-stabilization-accessibility-evidence.json`
+  for keyboard/focus, text/non-color status, text scale, reduced motion,
+  written-equivalent, optional-audio fallback, and shared campaign checks.
+- Added `tests/test_phase12_stabilization_accessibility_evidence.py` to require
+  exact source markers, six passing technical checks, local-settings ownership,
+  the text-first/competitive-only boundary, and explicit human limits.
+- Checked only current stabilization-relevant technical accessibility evidence
+  and synchronized canonical docs, lessons, version metadata, generated
+  credits, and additive request/contract/QA/handoff records; no runtime
+  behavior changed.
+
+Not Yet Done:
+
+- Browser-native stabilization accessibility integration, contrast,
+  screen-reader/assistive-technology/device review, lived accessibility,
+  fatigue, and human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No new accessibility behavior, route, runtime field, asset, audio file,
+  screenshot, persistence, instructor view, or authority path was added.
+- Technical interface proxies do not establish human accessibility or
+  educational effectiveness.
+
 ## Future
 
 ### Visual and audio experience upgrade

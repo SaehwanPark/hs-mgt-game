@@ -1284,8 +1284,9 @@ At each phase gate, explicitly decide what will not be built next.
    map/facility asset-need decision at v0.13.23, and current shared
    pressure-state registration at v0.13.24, current stabilization
    tutorial-presentation evidence at v0.13.25, current stabilization
-   audio-state mapping evidence at v0.13.26, and current stabilization
-   debrief evidence at v0.13.27.
+   audio-state mapping evidence at v0.13.26, current stabilization
+   debrief evidence at v0.13.27, and current stabilization accessibility
+   evidence at v0.13.28.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor
