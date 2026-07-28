@@ -3438,7 +3438,11 @@ Deferred / Non-Goals:
   history retains observation-before-command records and host history/replay
   summaries remain hash-aligned, while full browser per-decision observation
   recovery remains explicitly open.
-- [ ] Causal attribution visualized.
+- [x] Causal attribution visualized. Evidence:
+  `docs/evaluation/phase12-causal-attribution-boundary.json` and
+  `tests/test_phase12_causal_attribution_boundary.py`; host-sourced direct
+  effects, before/after resolution context, and source-linked consequence
+  rendering remain descriptive while inferred causal graphs remain open.
 - [ ] Counterfactual differences visualized.
 - [ ] Distributional outcomes represented responsibly.
 - [ ] Export behavior documented.
@@ -3516,6 +3520,28 @@ Deferred / Non-Goals:
   created or promoted.
 - Host summaries remain narrower than core history and do not expose resolved
   inputs, hidden state, or private rationale through live player history.
+
+### v0.13.41 current direct-attribution boundary
+
+- `docs/evaluation/phase12-causal-attribution-boundary.json` records typed
+  `ResolutionEffect` source/metric/delta/text fields, ordered before/after and
+  direct-effect resolution stages, debrief attribution language,
+  source-linked consequence rendering, and written fallback.
+- `tests/test_phase12_causal_attribution_boundary.py` checks source parity,
+  attribution contracts, read-only/live scope, and explicit no-inference
+  limits.
+- This closes only current host-sourced direct-attribution evidence. Inferred
+  causal graphs, causal certainty, counterfactual/distributional views, export
+  behavior, instructor-surface design, and human educational/accessibility
+  review remain open.
+
+Deferred / Non-Goals:
+
+- No causal inference engine, hidden-state field, probability/calibration,
+  counterfactual, distributional view, export format, persistence, screenshot,
+  asset, audio file, route, or authority path is created or promoted.
+- Before/after comparisons and source labels do not claim causal certainty,
+  future outcomes, legal validity, or educational effectiveness.
 
 ---
 

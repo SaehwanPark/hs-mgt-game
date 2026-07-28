@@ -6769,6 +6769,39 @@ Deferred / Non-Goals:
 - Host summaries remain narrower than core history and do not expose resolved
   inputs, hidden state, or private rationale through live player history.
 
+### Visual/audio Phase 12.3 current direct-attribution boundary (v0.13.41)
+
+Status: Complete for current host-sourced direct-attribution evidence only;
+inferred causal graphs, causal certainty, counterfactual, distributional,
+export, instructor-surface, human educational, accessibility, and public-release
+work remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-causal-attribution-boundary.json` for typed
+  `ResolutionEffect` source/metric/delta/text fields, ordered before/after and
+  direct-effect resolution stages, descriptive debrief attribution,
+  source-linked consequence rendering, and written fallback.
+- Added `tests/test_phase12_causal_attribution_boundary.py` to check source
+  parity, attribution contracts, read-only/live scope, and no-inference limits.
+- Checked only current direct-attribution evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive request,
+  contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Inferred causal graph design, causal certainty, counterfactual differences,
+  distributional outcomes, export, instructor-surface design, and human
+  educational usability remain open.
+
+Deferred / Non-Goals:
+
+- No causal inference engine, hidden-state field, probability/calibration,
+  counterfactual, distributional view, export format, persistence, screenshot,
+  asset, audio file, route, or authority path is created or promoted.
+- Before/after comparisons and source labels do not claim causal certainty,
+  future outcomes, legal validity, or educational effectiveness.
+
 ## Future
 
 ### Visual and audio experience upgrade

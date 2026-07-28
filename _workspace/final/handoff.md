@@ -1436,3 +1436,27 @@ claim is introduced.
 - Working branch: `feat/decision-time-recovery-boundary-v0.13.40`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12.3 causal attribution boundary v0.13.41
+
+## Result
+
+Recorded current host-sourced direct-effect attribution, ordered before/after
+resolution context, descriptive debrief attribution, source-linked consequence
+rendering, and written fallback.
+
+## Evidence boundary
+
+The ledger and parity test cover current direct-attribution boundary evidence.
+No causal inference engine, hidden-state field, causal graph, player control,
+runtime authority path, export format, counterfactual/distributional view,
+asset, audio, or human visual/accessibility/educational/public-release claim
+is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.40.
+- Working branch: `feat/causal-attribution-boundary-v0.13.41`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

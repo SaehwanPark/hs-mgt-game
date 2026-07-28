@@ -1,0 +1,41 @@
+{
+  "schema_version": "phase12-causal-attribution-boundary-v1",
+  "status": "complete-current-direct-attribution-boundary-only",
+  "scope": "current host-sourced direct-effect and before/after presentation boundary without inferred causal graphs",
+  "source_contract": {
+    "typed_effect_record": "src/mcp/resolution.rs: pub struct ResolutionEffect",
+    "resolution_direct_effect_stage": "src/mcp/resolution.rs: Direct committed effects",
+    "debrief_attribution_language": "src/debrief/report.rs: Attributed mechanisms to inspect:",
+    "browser_effect_renderer": "gui/app.mjs: function appendResolutionItems",
+    "browser_consequence_links": "gui/consequence-links.mjs: export function resolutionConsequenceLinks(envelope = {})",
+    "consequence_inference_limit": "gui/consequence-links.mjs: Direct host-committed effect; no future outcome is inferred.",
+    "causal_graph_limit": "docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md: The client may compare before/after values to label a change.",
+    "written_contract": "gui/README.md: consequence-links.mjs",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+  },
+  "attribution_contract": {
+    "typed_effect": "Committed ResolutionEffect source, metric, delta, and text fields are host-supplied direct-effect evidence.",
+    "resolution_sequence": "The host orders decision-time snapshots, visible responses, process/operating/resource changes, direct effects, new information, and pending processes without changing the transition.",
+    "debrief": "The debrief presents attributed mechanisms to inspect and preserves effect source/metric/delta text as descriptive review material.",
+    "browser": "The browser renders direct effects and consequence links with source and state-hash context; it does not author effects or infer a causal graph.",
+    "written_fallback": "Effect text, source labels, before/after values, hashes, and consequence descriptions remain available without audio or decorative motion."
+  },
+  "presentation_surface": {
+    "host_authority": "Host/core resolution and debrief functions own effect source, metric, delta, text, and ordering; presentation remains read-only.",
+    "shared_rendering": "Shared resolution/consequence renderers display supplied direct-effect evidence and source labels without calculating new outcomes.",
+    "browser_boundary": "The live GUI supports competitive-regional-v1 only; current direct attribution is a source-linked descriptive layer, not a full causal model.",
+    "new_surface_need": "none-required-for-current-direct-attribution-boundary-record"
+  },
+  "open_work": [
+    "broader causal attribution model or graph with independently justified assumptions",
+    "counterfactual differences, distributional outcomes, export behavior, and instructor-surface design",
+    "human visual, accessibility, educational, domain, and policy-validity review"
+  ],
+  "limits": [
+    "This record documents current direct-effect attribution only; it does not establish causal certainty, a causal graph, a calibrated forecast, or policy validity.",
+    "Before/after comparisons and source labels are descriptive host evidence, not hidden-input disclosure, private-rationale disclosure, or future-outcome inference.",
+    "No causal inference engine, hidden-state field, probability, counterfactual, distributional view, export format, persistence, screenshot, asset, audio file, route, or authority path is created or promoted.",
+    "No human comprehension, classroom effectiveness, accessibility, legal, educational, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_causal_attribution_boundary.py"
+}
