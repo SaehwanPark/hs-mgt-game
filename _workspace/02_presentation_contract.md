@@ -2228,3 +2228,35 @@ gates.
 
 `pass` for the current supported screenshot-surface contract. No screenshot
 artifact or runtime behavior was added.
+
+# Presentation Contract — Phase 8.2 current portrait-preview inventory integrity v0.13.18
+
+## Contract status
+
+Complete for the current preserved preview inventory and source/hash boundary.
+This is not portrait approval, human quality/accessibility review, legal
+clearance, release readiness, or runtime integration.
+
+## Source and visible behavior
+
+- `docs/evaluation/portrait-preview-coverage.json` records the seven canonical
+  fictional actor roles, seven preserved square source previews, seven pending
+  review entries, and empty generation manifest.
+- The source previews retain repository-relative paths, SHA-256 bindings,
+  prompts/settings, written equivalents, and generic fallbacks; the preview
+  proof remains fixture-only and the candidates are not runtime consumers.
+
+## Fallback, authority, and provenance
+
+Portrait preview metadata is generation/release evidence only. It does not
+enter simulation state, commands, transitions, observations, history, replay,
+debrief facts, or client authority. Missing approved model/seed provenance,
+human review, and release data remain explicit blockers.
+
+## Verification and limits
+
+`tests/test_portrait_workflow.py` requires ledger parity and retains hash,
+dimension, pending-review, empty-manifest, fallback, and release-block checks.
+Human identity/role, resemblance, protected marks, artifact quality, lived
+accessibility, small-size/grayscale review, legal/ownership, release
+derivative, registry bridge, and runtime-use evidence remain open.

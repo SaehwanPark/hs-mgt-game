@@ -6003,6 +6003,34 @@ Deferred / Non-Goals:
   expansion, simulation transition, or client-owned screenshot authority was
   added.
 
+### Visual/audio Phase 8.2 current portrait-preview inventory integrity (v0.13.18)
+
+Status: Complete for the current preserved preview inventory; portrait human
+review, approved model/seed provenance, release promotion, and runtime use
+remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/portrait-preview-coverage.json` for the exact seven
+  canonical roles, seven source previews, seven pending review entries, and
+  empty generation manifest.
+- Linked role IDs, repository-relative source paths, square dimensions, source
+  hashes, written equivalents, generic fallbacks, and release-block state to
+  `tests/test_portrait_workflow.py` and the generation documents.
+- Preserved the fail-closed boundary: all previews remain unverified and
+  pending, with null model/seed/release/registry fields and no GUI consumer.
+
+Not Yet Done:
+
+- Human identity/role, resemblance, protected-mark, artifact, accessibility,
+  small-size, grayscale, legal, model/seed, release-derivative, registry, and
+  runtime-use review.
+
+Deferred / Non-Goals:
+
+- No portrait bytes, generation metadata, model claim, release derivative,
+  asset registry entry, GUI integration, or human approval was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

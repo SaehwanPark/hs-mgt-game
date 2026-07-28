@@ -2840,3 +2840,36 @@ study, asset/audio quality approval, or human evaluation was performed.
   playtest tests — pass.
 - The local browser smoke capture was visually inspected and intentionally not
   persisted or hashed.
+
+# Presentation Domain QA — Phase 8.2 current portrait-preview inventory integrity v0.13.18
+
+## Status
+
+`pass` for bounded current portrait-preview inventory/source-hash QA only. No
+portrait approval, human visual-quality, accessibility, legal, release, or
+runtime-use approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: the ledger binds exactly seven role IDs, preview source paths/hashes,
+  square dimensions, review-queue entries, and the empty generation manifest.
+- Pass: focused portrait workflow tests preserve unverified-preview,
+  pending-approval, missing-model/seed, fallback, and release-block behavior.
+- Pass: the source preview inventory remains outside the visual registry,
+  release directory, generation manifest, and GUI runtime.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Human identity/role, resemblance, protected marks, artifact quality, lived
+accessibility, small-size/grayscale, legal/ownership, model/seed, release
+derivative, registry bridge, and runtime-use review remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_portrait_workflow` — pass.
+- Generation metadata, portrait review-queue, asset, release, security, and
+  documentation checks remain pass/fail-closed as documented.

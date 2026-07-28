@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.18] - 2026-07-28
+
+- Recorded current Phase 8.2 portrait-preview inventory integrity: seven
+  canonical roles, seven preserved source previews with hash/path bindings,
+  seven pending review entries, and an empty generation manifest.
+- Kept all portrait candidates unverified and unreleased; human review,
+  model/seed provenance, quality/accessibility/legal gates, registry promotion,
+  and runtime use remain open, with no portrait bytes or behavior changed.
+
 ## [0.13.17] - 2026-07-28
 
 - Recorded current supported screenshot-surface evidence for the actor-visible

@@ -1733,7 +1733,8 @@ shared editorial style are defined, and one preserved preview now exists for
 each canonical role. All seven candidates remain explicitly unverified and are
 not in the visual asset registry, release directory, or generation manifest
 because the preview tool does not expose the approved local model revision or
-actual seed; per-portrait human review remains required.
+actual seed. Current preview-inventory/source-hash integrity is recorded in
+v0.13.18; per-portrait human review remains required.
 
 ### Initial portrait roles
 
@@ -1904,6 +1905,28 @@ actual seed; per-portrait human review remains required.
   failures, release-root parity, and existing security/release checks. Raster,
   audio, legal, ownership, decoder, and human-review questions remain outside
   the slice.
+
+### v0.13.18 current portrait-preview inventory integrity evidence
+
+- `docs/evaluation/portrait-preview-coverage.json` records the exact seven
+  canonical portrait roles, seven preserved source previews, seven pending
+  review-queue entries, and empty generation manifest. It binds the role,
+  preview, review, and source documents by repository-relative paths.
+- `tests/test_portrait_workflow.py` requires the ledger IDs and counts to match
+  the live generation documents and retains the source PNG SHA-256, square
+  dimension, unverified-preview, pending-approval, empty-manifest, and
+  release-block assertions.
+- This closes only current preview-inventory/source-hash integrity. Human
+  identity/role, resemblance, protected-mark, artifact, accessibility,
+  small-size, grayscale, model/seed, legal, release-derivative, registry, and
+  runtime-use gates remain open.
+
+### Current inventory boundary
+
+- [x] Current preview inventory and source-hash coverage recorded. Evidence:
+  `docs/evaluation/portrait-preview-coverage.json`,
+  `tests/test_portrait_workflow.py`, and the preserved source previews; this
+  does not approve any portrait or close the per-portrait human gates.
 
 ### Checklist per portrait
 

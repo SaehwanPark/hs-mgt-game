@@ -1364,6 +1364,43 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Phase 8.2 current portrait-preview inventory integrity v0.13.18
+
+## Scope
+
+Record the current seven fictional actor portrait previews as a bounded
+inventory/source-integrity contract. Preserve their unverified, pending,
+unreleased state and do not infer approval from preserved bytes or hashes.
+
+## Target slice
+
+- Bind the seven canonical role IDs to seven repository-relative source PNGs,
+  source hashes, square dimensions, written equivalents, and generic
+  fallbacks.
+- Bind the same IDs to the seven pending review-queue entries and empty
+  generation manifest.
+- Close only current preview-inventory/source-hash integrity; human review,
+  model/seed provenance, quality, legal, release, registry, and runtime gates
+  remain open.
+
+## Sources and expected files
+
+- `assets/generation/portrait-set.json`, `portrait-previews.json`,
+  `portrait-review-queue.json`, and `generation-manifest.json`.
+- `tests/test_portrait_workflow.py`, `scripts/validate_generation_metadata.py`,
+  and `docs/evaluation/portrait-preview-coverage.json`.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not generate or modify portrait bytes, add model/seed metadata, approve
+  human review, create release derivatives, add registry IDs, wire portraits
+  into the GUI, or claim legal/accessibility/quality approval.
+- Run focused/full Python and Rust checks plus generation, release,
+  documentation, asset, offline, browser-policy, device-policy, and
+  visual/audio checks.
+
 # Request Summary — Visual/audio Phase 11.1 current screenshot-surface contract v0.13.17
 
 ## Scope
