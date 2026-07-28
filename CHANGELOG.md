@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.32] - 2026-07-28
+
+- Recorded current regional-affiliation commitment and review presentation
+  states across visible commitment metrics, partner response statuses, the
+  pending institutional-review process, submit/await decisions, reported
+  review statuses, shared renderers, and optional audio.
+- Closed only current commitment/review evidence; browser-native integration,
+  state-specific art/audio, hidden review boundaries, human quality,
+  educational review, and public-release gates remain open, with no runtime
+  behavior changed.
+
 ## [0.13.31] - 2026-07-28
 
 - Recorded the current regional-affiliation `NegotiateCommitments` stage

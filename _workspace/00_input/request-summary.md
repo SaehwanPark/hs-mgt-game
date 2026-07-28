@@ -1965,3 +1965,38 @@ stage-specific art/audio, or hidden-state access.
   hidden thresholds, true responses, human review, or public-release claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12 regional-affiliation commitment and review states v0.13.32
+
+## Scope
+
+Record current host-projected commitment and institutional-review states for
+`regional-affiliation-v1` without exposing private review authority or claiming
+browser-native affiliation coverage.
+
+## Target slice
+
+- Join visible community/workforce/continuity commitment metrics and partner
+  response statuses to the pending institutional-review process, submit/await
+  decisions, and reported review response/status values.
+- Record shared process/decision rendering, written fallback, optional
+  affiliation-negotiation audio, no-new-asset decision, and live-GUI boundary.
+
+## Sources and expected files
+
+- `src/mcp/campaign_coverage.rs`, `src/model/affiliation.rs`,
+  `src/affiliation/transition.rs`, `gui/app.mjs`,
+  `gui/music-stem-contract.mjs`, and existing campaign presentation and
+  asset-need ledgers/tests.
+- New commitment/review ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add state art, maps, facilities, portraits, audio files, routes,
+  runtime fields, persistence, screenshots, instructor views, authority paths,
+  private review deliberation, hidden thresholds, legal validity, human review,
+  or public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

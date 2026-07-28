@@ -6457,6 +6457,43 @@ Deferred / Non-Goals:
 - Optional audio remains a visible-only cue with complete written meaning and
   cannot establish agreement, success, severity, or outcome certainty.
 
+### Visual/audio Phase 12 current regional-affiliation commitment and review states (v0.13.32)
+
+Status: Complete for current host-projected commitment/review evidence only;
+browser-native affiliation integration, state-specific art/audio,
+integration-state visualization, stage transitions, replay/debrief updates,
+human quality/accessibility/legal/educational review, and public release remain
+separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-commitment-review.json`
+  for visible commitment metrics, partner response statuses, the pending
+  institutional-review process, submit/await decisions, reported review
+  response/status vocabularies, shared renderers, and optional audio.
+- Added `tests/test_phase12_regional_affiliation_commitment_review.py` to check
+  source markers, commitment/review fields and statuses, canonical-command and
+  written-fallback boundaries, competitive-only live GUI scope, optional audio,
+  and the no-new-asset decision.
+- Checked only current commitment/review evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive
+  request/contract/QA/handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native affiliation presentation, state-specific art/audio,
+  integration-state visualization, stage transitions, replay/debrief updates,
+  and human quality, accessibility, legal, educational, and public-release
+  review remain open.
+
+Deferred / Non-Goals:
+
+- No private review deliberation, hidden threshold, agreement probability,
+  legal validity, true response, causal outcome, future integration result,
+  asset, route, persistence, instructor view, or authority path is introduced.
+- Review responses remain stylized host-resolved observations; optional audio
+  remains visible-only with complete written meaning.
+
 ## Future
 
 ### Visual and audio experience upgrade

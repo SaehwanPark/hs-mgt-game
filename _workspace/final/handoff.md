@@ -1226,3 +1226,26 @@ or public-release claim is introduced.
 - Working branch: `feat/regional-affiliation-negotiation-stage-v0.13.31`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 regional-affiliation commitment and review states v0.13.32
+
+## Result
+
+Recorded current visible commitment metrics, partner response statuses, pending
+institutional-review process, submit/await decisions, reported review statuses,
+shared process/decision renderers, and optional affiliation-negotiation audio.
+
+## Evidence boundary
+
+The ledger and parity test pass for current commitment/review evidence. No
+browser-native review route, state-specific art/audio, private review
+deliberation, hidden state, runtime authority path, asset promotion, or human
+quality/legal, educational, or public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.31.
+- Working branch: `feat/regional-affiliation-commitment-review-v0.13.32`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

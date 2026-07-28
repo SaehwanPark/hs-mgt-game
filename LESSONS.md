@@ -2952,3 +2952,12 @@ commitment values, and written uncertainty. The shared renderer can present
 those supplied fields, while the reusable affiliation-negotiation music state
 remains optional. Keep browser integration, stage art/audio, hidden thresholds,
 true responses, replay/debrief completion, and human review as separate gates.
+
+## Phase 42: Separate commitment visibility from review authority (2026-07-28)
+
+The affiliation projection already makes commitment metrics and partner
+response statuses visible, then represents institutional review as a pending
+process with submit/await commands and reported response/status values. Record
+that contract without exposing private deliberation, hidden thresholds, legal
+validity, or future integration results. Keep optional audio, state-specific
+art, browser integration, replay/debrief completion, and human review separate.
