@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.39] - 2026-07-28
+
+- Recorded the current Phase 12.3 textual boundary between player-visible
+  observed labels, post-run true-state labels, and instructor-only detail.
+- Closed only current source-verifiable language-boundary evidence; browser-
+  native visual language, export, causal/counterfactual/distributional views,
+  and human educational review remain open, with no runtime behavior changed.
+
 ## [0.13.38] - 2026-07-28
 
 - Documented current Phase 12.3 instructor-only authority boundaries across

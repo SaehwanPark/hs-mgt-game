@@ -1389,3 +1389,26 @@ quality/legal, educational, or public-release claim is introduced.
 - Working branch: `feat/regional-affiliation-integration-state-v0.13.33`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12.3 true-state language boundary v0.13.39
+
+## Result
+
+Recorded the current source-linked textual distinction between player-visible
+observed labels, post-run true-state labels, instructor-only reveal markers,
+and decision-quality language.
+
+## Evidence boundary
+
+The ledger and parity test pass for current textual language-boundary evidence.
+No browser-native true-state route, visual field, player control, runtime
+authority path, export format, counterfactual/distributional view, asset, audio,
+or human visual/accessibility/educational/public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.38.
+- Working branch: `feat/true-state-language-boundary-v0.13.39`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

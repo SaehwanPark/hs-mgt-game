@@ -2207,3 +2207,35 @@ browser-native affiliation integration.
   public-release claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12.3 true-state language boundary v0.13.39
+
+## Scope
+
+Record the current textual distinction between player-visible observations,
+post-run true-state labels, and instructor-only detail without adding a
+browser-native true-state view or expanding presentation authority.
+
+## Target slice
+
+- Join source-linked `Observed`, `True Prior`, `True Outcome`, and
+  `REVEALED FOR INSTRUCTOR REVIEW` labels to the existing decision-quality
+  boundary.
+- Record host ownership, read-only shared rendering, written fallback, and
+  the competitive-only live-GUI boundary.
+
+## Sources and expected files
+
+- `src/debrief/report.rs`, `docs/evaluation/phase12-instructor-authority-boundaries.json`,
+  `gui/app.mjs`, and `gui/README.md`.
+- New true-state language-boundary ledger/parity test, roadmap/spec/
+  architecture/changelog/lessons, version projections, generated credits,
+  and additive contract, QA, and handoff records.
+
+## Non-goals and validation
+
+- Do not add browser routes, true-state fields, player controls, persistence,
+  screenshots, assets, audio files, counterfactuals, distributional views,
+  export formats, instructor authority paths, or human educational claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

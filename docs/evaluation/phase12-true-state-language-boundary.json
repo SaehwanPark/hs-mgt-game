@@ -1,0 +1,44 @@
+{
+  "schema_version": "phase12-true-state-language-boundary-v1",
+  "status": "complete-current-textual-boundary-only",
+  "scope": "current textual distinction between player-visible observations, true-state debrief labels, and instructor-only detail",
+  "source_contract": {
+    "observation_true_note": "src/debrief/report.rs: Note: This summary distinguishes between player-observed reported metrics and true underlying states to evaluate decision quality vs outcome quality under uncertainty.",
+    "decision_quality_boundary": "src/debrief/report.rs: Decision quality and outcome quality are separate: replay preserves what each actor observed and why each modeled response occurred.",
+    "observed_label": "src/debrief/report.rs: Access Index: Observed =",
+    "true_prior_label": "src/debrief/report.rs: True Prior =",
+    "true_outcome_label": "src/debrief/report.rs: True Outcome: True Access =",
+    "instructor_reveal_label": "src/debrief/report.rs: REVEALED FOR INSTRUCTOR REVIEW",
+    "instructor_authority_boundary": "docs/evaluation/phase12-instructor-authority-boundaries.json: boundary-documented-no-new-instructor-surface",
+    "shared_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "written_boundary": "gui/README.md: text-first history/debrief view",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+  },
+  "language_contract": {
+    "player_visible": "Observed and reported labels describe actor-visible information and committed history; they do not imply access to resolved hidden state.",
+    "true_state": "True Prior and True Outcome labels identify underlying values only in the existing post-run debrief/instructor contract; they are not live player controls.",
+    "instructor_only": "REVEALED FOR INSTRUCTOR REVIEW marks unobserved detail as privileged post-run review text rather than ordinary actor observation.",
+    "decision_quality": "Decision quality is evaluated against what the actor observed and why the modeled response occurred, separately from realized outcome quality.",
+    "affiliation": "Regional-affiliation post-run detail remains typed/CLI contract text; no separate browser true-state route is claimed."
+  },
+  "presentation_surface": {
+    "host_ownership": "Host/core debrief functions own observation, true-state labeling, resolution, and any post-run instructor detail; presentation remains read-only.",
+    "shared_rendering": "Shared renderers may display supplied labels and debrief lines without authoring true state, outcomes, or authority.",
+    "browser_boundary": "The current live GUI supports competitive-regional-v1 only; this record does not establish browser-native true-state visual language.",
+    "written_fallback": "The distinction remains readable through text labels, history, hashes, and authority notices when audio or visual decoration is unavailable.",
+    "new_surface_need": "none-required-for-current-textual-boundary-record"
+  },
+  "open_work": [
+    "browser-native true-state visual language and direct visual-quality review",
+    "decision-time information recovery and causal attribution visualization",
+    "counterfactual differences and responsible distributional outcome views",
+    "instructor-surface design, export behavior, accessibility, and human educational usability review"
+  ],
+  "limits": [
+    "This record documents a current textual boundary only; it does not establish a complete visual language or approve an instructor product surface.",
+    "True-state labels are post-run debrief/instructor text, not a live actor observation, player control, calibrated forecast, legal conclusion, or educational result.",
+    "No true-state field, browser route, persistence, screenshot, asset, audio file, counterfactual, distributional view, export format, or authority path is created or promoted.",
+    "No human comprehension, classroom effectiveness, visual quality, accessibility, legal, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_true_state_language_boundary.py"
+}

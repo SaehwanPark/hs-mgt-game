@@ -3569,3 +3569,38 @@ comprehension, and educational usability remain open.
 - `python3 -m unittest tests.test_phase12_campaign_reuse_matrix` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
+
+# Presentation Domain QA — Phase 12.3 true-state language boundary v0.13.39
+
+## Status
+
+`pass` for bounded current textual language-boundary QA only. No complete
+browser visual language, instructor-surface, accessibility, educational, or
+public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: source-linked `Observed`, `True Prior`, `True Outcome`, and
+  `REVEALED FOR INSTRUCTOR REVIEW` labels remain distinct in the existing
+  host/debrief text contract.
+- Pass: decision quality is explicitly separated from realized outcome
+  quality, and true-state text remains post-run/instructor-only rather than a
+  live player control.
+- Pass: shared rendering stays read-only, written fallback remains available,
+  and the live GUI scope remains competitive-only.
+
+## Required fixes
+
+None for this bounded textual contract.
+
+## Evidence limits
+
+Browser-native true-state visual design, decision-time recovery, causal,
+counterfactual, distributional, export, instructor-surface, accessibility,
+human comprehension, educational usability, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_true_state_language_boundary` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.

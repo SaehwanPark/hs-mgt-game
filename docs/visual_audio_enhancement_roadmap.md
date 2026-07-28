@@ -3427,7 +3427,11 @@ Deferred / Non-Goals:
   `tests/test_phase12_instructor_authority_boundaries.py`; existing post-run
   CLI/typed detail is separated from player-visible observation and shared
   read-only rendering while no new instructor route is claimed.
-- [ ] True-state visual language distinct from player-visible state.
+- [x] True-state visual language distinct from player-visible state. Evidence:
+  `docs/evaluation/phase12-true-state-language-boundary.json` and
+  `tests/test_phase12_true_state_language_boundary.py`; current textual
+  `Observed`, `True Prior`, `True Outcome`, and instructor-reveal labels are
+  source-linked while browser-native visual language remains open.
 - [ ] Decision-time information recoverable.
 - [ ] Causal attribution visualized.
 - [ ] Counterfactual differences visualized.
@@ -3460,6 +3464,30 @@ Deferred / Non-Goals:
   path is created or promoted.
 - Post-run CLI/typed detail is not a live player observation, browser control,
   legal conclusion, calibrated forecast, or educational result.
+
+### v0.13.39 current true-state/player-visible language boundary
+
+- `docs/evaluation/phase12-true-state-language-boundary.json` records the
+  current source-linked textual distinction between player-visible observed
+  labels, post-run true-state labels, instructor-only reveal markers, and
+  decision-quality language, along with host ownership, shared read-only
+  rendering, written fallback, and live-GUI scope.
+- `tests/test_phase12_true_state_language_boundary.py` checks source parity,
+  language labels, campaign/browser boundaries, written fallback, and explicit
+  no-expansion limits.
+- This closes only current textual language-boundary evidence. Browser-native
+  true-state visual design, decision-time recovery, causal/counterfactual/
+  distributional views, export behavior, instructor-surface design, and human
+  educational/accessibility review remain open.
+
+Deferred / Non-Goals:
+
+- No browser true-state route, visual field, player control, persistence,
+  screenshot, asset, audio file, counterfactual, distributional view, export
+  format, or authority path is created or promoted.
+- True-state labels remain post-run debrief/instructor text and do not claim
+  live observation, calibrated forecasting, legal validity, or educational
+  effectiveness.
 
 ---
 
