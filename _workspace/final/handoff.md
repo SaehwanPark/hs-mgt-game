@@ -728,6 +728,41 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
 
+---
+# Final Handoff — Visual/audio Phase 11.1 terminal debrief coverage v0.13.13
+
+## Result
+
+Formalized the current competitive terminal debrief view as a dedicated
+Phase 11.1 coverage contract. Existing host/browser behavior is recorded for
+`competitive-end-session-v1`: aligned immutable history, replay metadata,
+host-authored written debrief lines, terminal controls, and failure handling.
+
+## Changed files and behavior
+
+- Added `debrief_view_coverage` to
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
+- Extended `tests/test_phase11_campaign_coverage.py` to require exact ledger
+  sources/contracts and link them to `tests/test_phase11_live_debrief.py`.
+- Updated roadmap, request/contract/QA, spec, architecture, changelog, lessons,
+  version projections, and this handoff.
+- No Rust runtime, GUI, adapter, simulation, asset, audio, persistence, or
+  replay behavior changed.
+
+## Evidence boundary
+
+This closes only the current competitive terminal debrief-view item. It does
+not claim full-campaign debrief taxonomy, instructor views, counterfactuals,
+durable save/load/replay continuity, screenshots, accessibility, usability,
+audio usefulness, or human learning.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.12.
+- Working branch: `feat/visual-audio-phase11-debrief-v0.13.13`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
 ## Limits and next slice
 
 This closes only the emulated Phase 11.2 low-power-profile evidence. Real

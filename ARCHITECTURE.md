@@ -697,6 +697,13 @@ labels, and unknown IDs retain the browser's generic fallback. These labels do
 not enter commands, transitions, stochastic inputs, hashes, history, replay,
 debriefs, or client authority.
 
+The v0.13.13 Phase 11.1 debrief slice records the existing
+`competitive-end-session-v1` terminal envelope as a dedicated coverage
+contract. The host owns immutable history, replay metadata, state hashes, and
+debrief facts; the loopback browser validates and renders the supplied
+text-first view, disables terminal actions after valid completion, and fails
+closed on malformed alignment. No new runtime or authority path is added.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

@@ -1271,7 +1271,8 @@ At each phase gate, explicitly decide what will not be built next.
    explicit compatibility/support expectations beyond the current evidence and
    an instructor-facing guide; the source-checkout distribution decision is
    documented at v0.13.10, the current low-power GUI proxy evidence at
-   v0.13.11, and current operational-overlay coverage at v0.13.12.
+   v0.13.11, current operational-overlay coverage at v0.13.12, and current
+   terminal debrief coverage at v0.13.13.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

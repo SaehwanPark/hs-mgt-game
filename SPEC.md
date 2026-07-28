@@ -5858,6 +5858,35 @@ Deferred / Non-Goals:
   projection, asset/audio byte, persistence mechanism, screenshot tool, or
   client-owned authority was added.
 
+### Visual/audio Phase 11.1 terminal debrief coverage (v0.13.13)
+
+Status: Complete for the current competitive terminal debrief view; full
+campaign/instructor/counterfactual debrief, continuity, screenshot, and human
+learning evidence remain separately gated.
+
+Done:
+
+- Added `debrief_view_coverage` for the `competitive-end-session-v1` host
+  envelope, loopback route, adapter, browser validator/renderer, aligned
+  history rows, replay metadata, and host-authored written debrief lines.
+- Linked the ledger to focused terminal tests covering valid rendering,
+  schema/count/hash failure, terminal controls, route/source markers, syntax,
+  and host/client authority exclusions.
+- Updated the Phase 11.1 checklist and synchronized patch-version and
+  presentation handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Full-campaign debrief taxonomy, instructor-only views, counterfactuals,
+  durable save/load/replay visual continuity, screenshots, accessibility,
+  usability, audio usefulness, and human learning.
+
+Deferred / Non-Goals:
+
+- No new debrief fields, simulation transitions, true-state data, persistence,
+  replay regeneration, screenshot tooling, asset/audio bytes, or client-owned
+  authority were added.
+
 ## Future
 
 ### Visual and audio experience upgrade
