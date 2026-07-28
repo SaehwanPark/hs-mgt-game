@@ -2,7 +2,7 @@
 
 ## Decision
 
-The canonical distribution unit for v0.13.10 is an exact Git source checkout
+The canonical distribution unit for v0.13.11 is an exact Git source checkout
 of this repository. The checkout is identified by its package version and
 commit SHA, and it is built with the stable Rust toolchain and Cargo. The
 repository itself is the reproducibility package; this decision does not
@@ -43,6 +43,7 @@ python3 scripts/check_release_metadata.py
 python3 scripts/check_documentation_links.py
 python3 scripts/check_offline_availability.py
 python3 scripts/check_browser_compatibility.py
+python3 scripts/check_device_performance.py
 python3 scripts/validate_assets.py
 python3 scripts/validate_asset_security.py
 python3 scripts/sanitize_svg_metadata.py --check-release
@@ -80,10 +81,13 @@ loopback address. The supported browser evidence covers Chromium evergreen
 desktop version 120 or newer with ECMAScript modules, `fetch`, native SVG, and
 CSS Grid. Web Audio and local presentation preferences remain optional.
 
-Firefox and WebKit are not runtime-certified by this contract. Legacy
-non-module browsers, low-power devices, cross-platform performance, and lived
-accessibility remain outside the current evidence boundary. When audio is
-unavailable, visible and written equivalents remain the authoritative meaning.
+Firefox and WebKit are not runtime-certified by this contract. The repository
+records a bounded 1024×768 reduced-capability browser proxy for the current
+low-power checklist, but it is not a real-device, battery, thermal, memory, or
+frame-rate certification. Legacy non-module browsers, cross-platform
+performance, and lived accessibility remain outside the current evidence
+boundary. When audio is unavailable, visible and written equivalents remain
+the authoritative meaning.
 
 ## Deferred distribution work
 
@@ -93,6 +97,6 @@ source-checkout contract:
 - prebuilt binaries, downloadable archives, installers, containers, or package
   registry publication;
 - release tags, deployment, hosted services, or external runtime assets;
-- Firefox/WebKit certification or low-power-device measurements;
+- Firefox/WebKit certification or real low-power-device measurements;
 - service-worker or browser-cache persistence; and
 - human accessibility, usability, learning, or classroom-effectiveness claims.

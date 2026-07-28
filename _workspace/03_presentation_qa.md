@@ -2513,3 +2513,78 @@ None for this bounded current-state contract.
   visual/audio audits remain required before PR handoff.
 
 ---
+# Presentation Domain QA — Phase 11.2 low-power profile evidence v0.13.11
+
+## Status
+
+`pass` for the declared emulated reduced-capability GUI proxy. This is
+technical presentation QA only; it is not real-device, battery, thermal,
+memory, frame-rate, browser-engine, accessibility, usability, audio-quality,
+legal, educational, or human-evaluation approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/105_implementation_plan_visual-audio-phase11-low-power-v0.13.11.md`.
+- Policy: `assets/device-performance-policy.json`.
+- Checker/tests: `scripts/check_device_performance.py` and
+  `tests/test_device_performance.py`.
+- Roadmap gate: Phase 11.2 low-power-profile evidence only.
+
+## Information and Causality Findings
+
+- Pass: source scope is derived from `assets/loading-policy.json`; no hidden
+  simulation field, severity classifier, outcome, intent, or causal rule is
+  introduced.
+- Pass: DOM/SVG and wall-clock values are descriptive proxy measurements only;
+  the report rejects a `real_device: true` claim and names its limits.
+- Pass: the smoke profile is loopback-only and does not add network, client
+  simulation, host projection, or state authority.
+
+## Accessibility and Fallback Findings
+
+- Pass: captured evidence requires written equivalents and audio-off text to
+  remain present; the profile records reduced-motion language and a 1024×768
+  viewport.
+- Pass: optional audio/storage conditions remain fallbacks, not required
+  channels for strategic meaning.
+- Evidence limit: no real viewport/contrast, screen-reader, low-power,
+  battery/thermal, or lived accessibility conclusion is established.
+
+## Provenance and Rights Findings
+
+- Pass: no asset, registry entry, release derivative, external source, or
+  dependency was added.
+- Pass: the policy is repository-authored and remains outside asset-release
+  provenance; existing asset/security/release validators remain the gate.
+
+## Authority and Replay Findings
+
+- Pass: policy, measurements, and checker output never enter commands,
+  transitions, stochastic inputs, state hashes, history, replay, debrief facts,
+  or host projections.
+- Pass: local browser smoke only reads the existing loopback presentation and
+  preserves the host-authoritative boundary.
+
+## Required Fixes
+
+None for this bounded technical contract.
+
+## Residual Risks and Evidence Limits
+
+- Physical low-power hardware, battery, thermal, memory, frame-rate, cache,
+  decoder, and additional browser-engine evidence remain open.
+- Automated checks do not establish human usability, lived accessibility,
+  audio usefulness/fatigue, asset quality, legal clearance, learning, or
+  policy validity.
+
+## Verification Evidence
+
+- `python3 scripts/check_device_performance.py` — pass.
+- `python3 -m unittest tests.test_device_performance` — 7 tests pass.
+- Local browser smoke at 1024×768 — five shell reloads 49–52 ms, 818 DOM
+  elements, four SVGs, 367 ms host start, 259 ms adapter probe; written and
+  audio-off fallbacks present.
+- Release metadata, documentation links, visual/audio contract audit, and
+  `git diff --check` — pass at v0.13.11.

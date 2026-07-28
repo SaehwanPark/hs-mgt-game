@@ -1856,3 +1856,80 @@ Focused tests establish current source parity, row alignment, validation, and
 failure preservation. They do not establish full campaign history/debrief,
 durable save/load/replay continuity, screenshots, browser/device compatibility,
 accessibility, or human educational usefulness.
+# Presentation Contract — Phase 11.2 low-power profile evidence v0.13.11
+
+## Goal and Authorization
+
+Define the narrow technical presentation contract for the Phase 11.2
+low-power-device checklist item. The authorized output is a read-only,
+emulated reduced-capability profile for the current loopback GUI and a
+fail-closed report over its source/DOM/SVG/time observations. This does not
+authorize runtime optimization, new assets, browser dependencies, or a real
+device-certification claim.
+
+## Player Questions and Consequences
+
+The evidence should answer: “Does the current first-session presentation retain
+its written meaning and bounded structural surface when motion and audio are
+reduced at a smaller viewport?” It must not imply that a device has a specific
+battery, thermal, frame-rate, or accessibility outcome.
+
+## Actor-Visible Source Ledger
+
+| Signal | Authorized source | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Live source bytes | `assets/loading-policy.json` `live_files` and repository file sizes | Fail the report if a declared path is missing or escapes | No download, cache, or decode estimate |
+| DOM/SVG counts | Local browser smoke observation of the static/live shell | Fail the captured report if the values are absent or non-integers | No frame-rate or render-time claim |
+| Shell/start/adapter time | Local loopback browser smoke wall-clock observations | Fail if values are missing, negative, or above the declared proxy limit | No hardware, thermal, battery, or network claim |
+| Written equivalent | Visible text in `gui/index.html` during the smoke | Fail if text fallback is absent | No claim about human comprehension |
+| Audio-off behavior | Existing visible `Audio off` state and audio fallback text | Fail if the captured surface omits it | No claim about loudness or fatigue |
+| Reduced-motion setting | Existing visible settings language and control | Preserve the current text contract; do not infer runtime preference support | No claim about lived accessibility |
+
+## Visual, Motion, and Audio Semantics
+
+The profile uses a 1024×768 viewport, reduced-motion preference, audio off,
+optional local storage unavailable, and loopback-only host access. These are
+test conditions, not simulation inputs or presentation state. The policy checks
+that the current written and audio-off fallbacks are present; it does not add
+new animation, audio, visual classification, or asset loading.
+
+## Accessibility and Fallbacks
+
+The test retains written results, source/status language, visible symbols, and
+fallback text when audio is off. Reduced-motion is a declared preference in
+the profile. Missing policy fields or unsupported measurements fail closed;
+they do not receive a generic “pass.” The evidence does not establish contrast,
+screen-reader behavior, device compatibility, battery life, or lived
+accessibility.
+
+## Authority, History, and Replay Boundaries
+
+The policy and report are outside simulation state. They do not enter commands,
+transition evaluation, stochastic inputs, hashes, immutable history, replay,
+debrief facts, or host projections. The browser smoke only reads the existing
+loopback presentation and does not reconstruct or mutate simulation state.
+
+## Asset Provenance and Release Requirements
+
+No asset bytes, registry entries, release paths, or external dependencies are
+added. The checker reuses the existing loading and offline policies; all
+provenance and release gates remain unchanged.
+
+## Verification and Evidence Limits
+
+Focused tests must cover green report/CLI output, live-source drift, limit
+violations, malformed profiles, path escapes, and an attempted real-device
+claim. Full release, documentation, Rust, and Python checks remain required.
+The smoke values are local wall-clock measurements from an emulated profile,
+not repeatable hardware benchmarks. They do not establish low-power device
+performance, browser-engine support, cache behavior, memory/thermal behavior,
+human usability, accessibility quality, audio quality, or learning.
+
+## Non-Goals and Open Questions
+
+- No browser automation dependency, device farm, runtime telemetry, or visual
+  optimization is included.
+- No real low-power device is available in this slice; a physical-device
+  check remains an external follow-up if the project needs certification.
+- Open: which named hardware/browser targets should be tested before public
+  release, and what representative workload should be used for each?

@@ -1,0 +1,65 @@
+{
+  "schema_version": "device-performance-v1",
+  "status": "completed-emulated-proxy",
+  "surface": "loopback dependency-free GUI",
+  "live_entrypoint": "gui/index.html",
+  "loading_policy": "assets/loading-policy.json",
+  "profile": {
+    "id": "low-power-browser-proxy",
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    },
+    "motion": "reduced",
+    "audio": "off",
+    "storage": "unavailable",
+    "network": "loopback-only"
+  },
+  "limits": {
+    "live_source_bytes": 400000,
+    "dom_elements": 900,
+    "svg_elements": 8,
+    "shell_reload_ms": 1000,
+    "host_start_ms": 1000,
+    "adapter_command_ms": 1000
+  },
+  "measurements": {
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    },
+    "live_source_bytes": 369749,
+    "dom_elements": 818,
+    "svg_elements": 4,
+    "shell_reload_samples_ms": [
+      52,
+      49,
+      50,
+      52,
+      50
+    ],
+    "shell_reload_max_ms": 52,
+    "host_start_ms": 367,
+    "adapter_command_ms": 259,
+    "written_equivalent_present": true,
+    "audio_off_present": true,
+    "reduced_motion_language_present": true
+  },
+  "evidence": [
+    "static-live-source-audit",
+    "local-browser-smoke",
+    "loopback-host-session-start",
+    "loopback-adapter-command-probe"
+  ],
+  "certification": {
+    "real_device": false,
+    "hardware_target": null,
+    "claim": "emulated reduced-capability proxy only"
+  },
+  "evidence_limits": [
+    "Measurements are local wall-clock observations, not hardware benchmarks.",
+    "No battery, thermal, memory, frame-rate, decoder, or cache conclusion is established.",
+    "No browser-engine certification beyond the existing compatibility policy is established.",
+    "Automated checks do not establish lived accessibility, human usability, audio quality, or learning."
+  ]
+}

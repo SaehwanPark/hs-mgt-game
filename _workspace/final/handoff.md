@@ -687,3 +687,46 @@ classroom-effectiveness evaluation remain open. No runtime expansion is
 authorized without a new bounded evidence or release need.
 
 ---
+# Final Handoff — Visual/audio Phase 11.2 low-power profile evidence v0.13.11
+
+## Result
+
+Closed the Phase 11.2 low-power checklist item for a declared emulated
+reduced-capability GUI proxy. The current live loopback GUI is measured at a
+1024×768 viewport with reduced-motion language, audio off, unavailable
+optional storage, and loopback-only access. No runtime behavior changed.
+
+## Changed files and behavior
+
+- Added `assets/device-performance-policy.json` with explicit limits,
+  measurements, evidence sources, and `real_device: false`.
+- Added `scripts/check_device_performance.py` to recompute live source bytes
+  from the loading policy and fail closed on drift, malformed values, limits,
+  path escapes, or hardware-certification claims.
+- Added `tests/test_device_performance.py` with seven focused contract tests.
+- Updated roadmap, canonical records, asset guidance, reproducible-distribution
+  documentation, lessons, request/contract/QA, and patch version projections.
+- No simulation, host DTO, history/hash, replay, debrief, audio semantic,
+  asset byte, browser-authority, or external-dependency change.
+
+## Verification
+
+- Local browser smoke: shell reload samples 49/52/50/52/50 ms; 818 DOM
+  elements; four SVG elements; 367 ms host start; 259 ms adapter probe;
+  written and audio-off fallbacks present.
+- Focused checker/tests pass; full Python/Rust/release checks remain required
+  before PR merge.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.10.
+- Working branch: `feat/visual-audio-phase11-low-power-v0.13.11`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+## Limits and next slice
+
+This closes only the emulated Phase 11.2 low-power-profile evidence. Real
+hardware, battery/thermal/memory/frame-rate, additional browser engines,
+portrait human review, participant evaluation, screenshots, full campaign
+continuity, asset quality, and later roadmap gates remain open.

@@ -22,6 +22,7 @@ python3 scripts/generate_asset_credits.py --check
 python3 scripts/generate_asset_credits.py --notices
 python3 scripts/generate_asset_credits.py --runtime
 python3 scripts/check_asset_budget.py
+python3 scripts/check_device_performance.py
 python3 scripts/optimize_release_svg.py --check
 python3 scripts/check_raster_scope.py
 ```
@@ -61,6 +62,14 @@ that the loopback Rust GUI embeds the complete live module graph, host adapter,
 and catalogs from repository-local source. This closes current package route
 completeness only; it is not service-worker, cache-persistence, deployment,
 browser-compatibility, device, or human-quality evidence.
+
+`assets/device-performance-policy.json` and
+`scripts/check_device_performance.py` define the current 1024×768
+reduced-capability browser proxy, recompute the live source-byte scope, and
+check captured DOM/SVG and loopback wall-clock observations. This is an
+emulated local smoke profile only; `real_device` is required to remain false,
+and the report does not claim battery, thermal, memory, frame-rate, browser,
+or human-quality evidence.
 
 `scripts/optimize_release_svg.py --check` verifies that every tracked release
 SVG is idempotently normalized and that registry hashes and the release
