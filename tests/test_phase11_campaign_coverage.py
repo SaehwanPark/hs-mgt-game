@@ -235,6 +235,17 @@ console.log(JSON.stringify(resolved));
       self.assertTrue((ROOT / source_path).is_file())
       self.assertEqual(self.source_exports[catalog_name], catalog["ids"], catalog["source"])
 
+  def test_current_operational_overlay_bindings_cover_the_registered_catalog(self):
+    coverage = self.ledger["catalogs"]["operational_overlays"]
+    self.assertEqual(coverage["status"], "complete")
+    self.assertEqual(
+      coverage["host_projection_source"],
+      "src/mcp/regional_world.rs: operational_overlays",
+    )
+    self.assertEqual(set(coverage["binding_conditions"]), set(coverage["ids"]))
+    self.assertTrue(all(value for value in coverage["binding_conditions"].values()))
+    self.assertTrue(coverage["evidence"])
+
   def test_file_backed_facility_assets_cover_the_live_catalog_and_registry(self):
     coverage = self.ledger["facility_asset_coverage"]
     self.assertEqual(coverage["status"], "complete")
@@ -450,7 +461,7 @@ console.log(JSON.stringify(resolved));
   def test_roadmap_closes_only_catalog_and_fallback_items(self):
     expected = {
       "Facility asset coverage complete.": "x",
-      "Overlay coverage complete.": " ",
+      "Current supported operational-overlay coverage complete. Evidence:": "x",
       "Actor-family coverage complete.": "x",
       "Event cue coverage complete.": "x",
       "Music-state coverage complete.": "x",

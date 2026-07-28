@@ -689,6 +689,14 @@ audio off and written fallbacks present. The policy is not simulation state,
 does not feed commands, transitions, hashes, history, replay, debriefs, or
 host projections, and explicitly rejects real-device certification claims.
 
+The v0.13.12 Phase 11.1 overlay slice extends the host-owned regional-world
+projection so all twelve current operational-overlay catalog IDs bind only to
+direct `PlayerObservation` fields or explicit visible project/market/policy
+text. Raw metric rows remain raw, missing conditions omit optional category
+labels, and unknown IDs retain the browser's generic fallback. These labels do
+not enter commands, transitions, stochastic inputs, hashes, history, replay,
+debriefs, or client authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

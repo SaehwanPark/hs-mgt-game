@@ -734,3 +734,42 @@ This closes only the emulated Phase 11.2 low-power-profile evidence. Real
 hardware, battery/thermal/memory/frame-rate, additional browser engines,
 portrait human review, participant evaluation, screenshots, full campaign
 continuity, asset quality, and later roadmap gates remain open.
+
+---
+# Final Handoff — Visual/audio Phase 11.1 operational-overlay coverage v0.13.12
+
+## Result
+
+Completed the current supported twelve-entry operational-overlay catalog in the
+live competitive regional-world projection. Each ID now binds to a direct
+`PlayerObservation` field or explicit visible project/market/policy text; raw
+metric rows and the generic fallback remain intact.
+
+## Changed files and behavior
+
+- Extended `src/mcp/regional_world.rs` with staffing, capacity, demand, active/
+  delayed/completed project, payer/network, regulatory, community, financial,
+  recovery, and uncertainty bindings.
+- Updated `gui/operational-overlays.mjs` source/equivalent text for the newly
+  aligned staffing, capacity, and project-completion boundaries.
+- Extended the Phase 11.1 coverage ledger and Rust/Python tests to prove all
+  twelve IDs, direct sources, absence behavior, raw metric preservation,
+  generic fallback, and the unchanged authority boundary.
+- Updated roadmap, canonical records, presentation contract/QA, lessons, and
+  patch-version projections to v0.13.12.
+- No new simulation rule, hidden-state projection, asset/audio byte,
+  persistence, screenshot, or browser dependency was added.
+
+## Evidence boundary
+
+This closes only current supported operational-overlay coverage. It does not
+establish full campaign placement/use, durable save/load or replay continuity,
+screenshots, asset quality, device/browser quality, accessibility, human
+usability, audio usefulness, or educational benefit.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.11.
+- Working branch: `feat/visual-audio-phase11-overlay-v0.13.12`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

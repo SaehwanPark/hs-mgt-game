@@ -2588,3 +2588,76 @@ None for this bounded technical contract.
   audio-off fallbacks present.
 - Release metadata, documentation links, visual/audio contract audit, and
   `git diff --check` — pass at v0.13.11.
+
+# Presentation Domain QA — Phase 11.1 operational-overlay coverage v0.13.12
+
+## Status
+
+`pass` for the bounded current supported operational-overlay catalog and live
+read-only host/browser handoff. This is technical presentation QA only; it is
+not full-campaign, screenshot, accessibility, human-usability, legal,
+educational, or policy-validity approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/106_implementation_plan_visual-audio-phase11-overlay-v0.13.12.md`.
+- Catalog: `gui/operational-overlays.mjs`.
+- Host projection: `src/mcp/regional_world.rs`.
+- Ledger/tests: `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_live_operational_overlays.py`, and
+  `tests/test_phase11_campaign_coverage.py`.
+
+## Information and Causality Findings
+
+- Pass: all twelve registered IDs now have direct visible host conditions;
+  source strings point to `PlayerObservation` fields or explicit visible text.
+- Pass: raw demand/access/capacity/process overlays remain raw metrics; the
+  operational IDs are optional presentation labels only.
+- Pass: no hidden severity, intent, causality, probability, future outcome,
+  rival-private state, transition input, effect queue, or client classifier was
+  introduced.
+
+## Accessibility and Fallback Findings
+
+- Pass: registered patterns, glyphs, stable ordering, source/equivalent text,
+  static reduced-motion behavior, and optional audio remain intact.
+- Pass: unknown IDs use the generic operational-overlay fallback; absent
+  conditions preserve the raw visible row without an invented category.
+- Evidence limit: no contrast, screen-reader, device, lived accessibility,
+  audio-quality, or human-comprehension conclusion is established.
+
+## Provenance and Rights Findings
+
+- Pass: no asset/audio bytes, registry entry, release derivative, or external
+  dependency changed.
+- Pass: existing catalog and release provenance checks remain the gate.
+
+## Authority and Replay Findings
+
+- Pass: host conditions read only actor-visible observation fields and explicit
+  visible bullets; the browser continues to resolve presentation fallbacks.
+- Pass: no command, transition, stochastic, hash, history, replay, debrief, or
+  client-authority path changed.
+
+## Required Fixes
+
+None for this bounded technical contract.
+
+## Residual Risks and Evidence Limits
+
+- Full campaign placement/use, durable save/load/replay visual continuity,
+  screenshots, asset quality, browser/device quality, and human evaluation
+  remain open.
+- “Operational recovery,” “financial distress,” and similar labels are limited
+  to the directly reported fields named in the contract; they are not forecasts
+  or causal conclusions.
+
+## Verification Evidence
+
+- Rust operational-overlay fixture: all twelve IDs and raw metric preservation
+  pass.
+- Python live/ledger tests: pass.
+- Catalog-to-host source-condition ledger: complete for the current supported
+  vocabulary.

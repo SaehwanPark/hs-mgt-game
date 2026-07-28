@@ -25,6 +25,27 @@
     },
     "operational_overlays": {
       "source": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_SET",
+      "status": "complete",
+      "host_projection_source": "src/mcp/regional_world.rs: operational_overlays",
+      "binding_conditions": {
+        "operational-staffing-constraint": "PlayerObservation.workforce_trust_summary",
+        "operational-capacity-constraint": "PlayerObservation capacity fields",
+        "operational-demand-pressure": "PlayerObservation.monthly_unmet_demand",
+        "operational-active-capital-project": "PlayerObservation.in_flight_projects",
+        "operational-delayed-project": "PlayerObservation.in_flight_projects explicit delayed text",
+        "operational-project-completion": "PlayerObservation visible project text",
+        "operational-payer-network-change": "PlayerObservation.market_bullets",
+        "operational-regulatory-review": "PlayerObservation.policy_bullets / annual_policy_review",
+        "operational-community-trust-concern": "PlayerObservation.community_trust_summary",
+        "operational-financial-distress": "PlayerObservation.monthly_operating_margin + PlayerObservation.cash_runway_signal",
+        "operational-recovery": "PlayerObservation.monthly_operating_margin + explicit visible recovery text",
+        "operational-uncertain-stale-intelligence": "PlayerObservation.intel_gaps / PlayerObservation.prior_access_revision"
+      },
+      "evidence": [
+        "Every current catalog ID has a direct visible host condition and source/equivalent text.",
+        "Raw demand, access, staffed-bed, and pending-process overlays remain raw metrics without inferred categories.",
+        "The Rust fixture and browser tests cover all IDs, absence behavior, generic fallback, and the unchanged client authority boundary."
+      ],
       "fallback_id": "operational-overlay-generic",
       "ids": [
         "operational-staffing-constraint",

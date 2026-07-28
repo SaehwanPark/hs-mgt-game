@@ -5825,6 +5825,39 @@ Deferred / Non-Goals:
 - No browser automation dependency, device farm, runtime telemetry, GUI
   optimization, simulation change, or client-owned authority was added.
 
+### Visual/audio Phase 11.1 operational-overlay coverage (v0.13.12)
+
+Status: Complete for the current supported twelve-entry operational-overlay
+catalog and direct competitive regional-world projection. Full-campaign
+placement/use, durable save/load/replay continuity, screenshots, and human
+quality remain separately gated.
+
+Done:
+
+- Added direct host bindings for all registered operational-overlay IDs using
+  only visible `PlayerObservation` fields or explicit visible project,
+  market, and policy text.
+- Preserved raw demand/access/capacity/process rows, host authority, static
+  reduced-motion behavior, non-color patterns, written equivalents, and the
+  generic unknown overlay fallback.
+- Extended Rust and Python tests plus the Phase 11.1 ledger to prove exact
+  twelve-ID coverage, absence behavior, source/equivalent text, syntax, and
+  the unchanged hidden-state/client-authority boundary.
+- Bumped the patch version and synchronized roadmap, presentation contract,
+  QA, architecture, changelog, lessons, and handoff records.
+
+Not Yet Done:
+
+- Full competitive-campaign placement/use, debrief, durable save/load/replay
+  visual continuity, screenshots, asset quality, device/browser quality, and
+  human accessibility/usability/evaluation.
+
+Deferred / Non-Goals:
+
+- No new simulation field, threshold classifier, causal inference, hidden-state
+  projection, asset/audio byte, persistence mechanism, screenshot tool, or
+  client-owned authority was added.
+
 ## Future
 
 ### Visual and audio experience upgrade
