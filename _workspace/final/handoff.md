@@ -729,6 +729,30 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Visual/audio Phase 11.1 checkpoint visual continuity v0.13.14
+
+## Result
+
+Recorded current in-memory host checkpoint visual continuity for the
+`competitive-save-v1` save/load handoff. The ledger and focused parity tests
+now identify the host/MCP/route/adapter/browser sources, aligned metadata,
+presentation refresh, and recoverable failure behavior.
+
+## Evidence boundary
+
+This closes only the current in-memory host checkpoint view. Durable file or
+browser persistence, cross-process/browser-refresh recovery, replay visual
+continuity, screenshots, accessibility, usability, audio usefulness, and human
+learning remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.13.
+- Working branch: `feat/visual-audio-phase11-save-load-v0.13.14`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Visual/audio Phase 11.1 terminal debrief coverage v0.13.13
 
 ## Result

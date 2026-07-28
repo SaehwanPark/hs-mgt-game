@@ -2713,3 +2713,19 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Treat archives, binaries, installers, registry publication,
   broader certification, and human-quality evidence as separate release
   decisions rather than implicit consequences of a passing source checkout.
+
+## Phase 24: Keep in-memory checkpoint claims bounded
+
+- Context: The existing competitive GUI already supports host-owned save/load
+  checkpoints, but the Phase 11.1 checklist still named save/load visual
+  continuity as untested.
+- Risk: Closing that item without distinguishing a live cloned session snapshot
+  from durable serialization, cross-process recovery, or browser-refresh
+  recovery would overstate the presentation contract.
+- Resolution: Record `checkpoint_view_coverage` with the exact
+  `competitive-save-v1` metadata, host/MCP/route/adapter/browser sources,
+  refresh/failure behavior, and explicit persistence limits. Link it to focused
+  checkpoint tests and existing Rust restore tests.
+- Prevention: For each continuity slice, name the storage owner, the metadata
+  alignment guarantee, the recovery behavior, and the untested durability
+  boundary before changing the roadmap checkbox.

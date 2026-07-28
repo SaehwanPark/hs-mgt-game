@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.14] - 2026-07-28
+
+- Recorded current in-memory Phase 11.1 checkpoint visual-continuity coverage
+  for the `competitive-save-v1` host/MCP/loopback/browser handoff, including
+  aligned metadata, restore refresh, and failure-preserving behavior.
+- Linked the ledger to focused checkpoint and Rust session evidence while
+  keeping durable persistence, cross-process/browser-refresh recovery, replay,
+  screenshots, accessibility, and human-learning gates open; no runtime
+  behavior changed.
+
 ## [0.13.13] - 2026-07-28
 
 - Recorded current competitive terminal debrief-view coverage for the

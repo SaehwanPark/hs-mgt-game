@@ -1363,3 +1363,38 @@ handoff as a dedicated coverage record.
   instructor exports, screenshots, browser dependencies, or human evaluation.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
+
+# Request Summary — Visual/audio Phase 11.1 checkpoint visual continuity v0.13.14
+
+## Scope
+
+Continue the roadmap with the next unmet Phase 11.1 item: save/load visual
+continuity. Formalize the existing in-memory host checkpoint save/restore view
+as a bounded presentation contract.
+
+## Target slice
+
+- Record the `competitive-save-v1` host/MCP envelope, loopback routes, adapter,
+  browser validation, presentation refresh, and aligned transition/hash metadata.
+- Verify missing/failing checkpoint and refresh paths preserve a recoverable
+  current view through the existing focused checkpoint test.
+- Close only current in-memory host checkpoint continuity; durable persistence,
+  cross-process/browser-refresh recovery, replay, screenshot, and human claims
+  remain open.
+
+## Sources and expected files
+
+- `src/mcp/session.rs`, `src/mcp/server.rs`, `src/gui_server.rs`,
+  `gui/host-adapter.mjs`, and `gui/app.mjs` existing checkpoint handoff.
+- `tests/test_phase11_live_checkpoint.py`,
+  `tests/test_phase11_campaign_coverage.py`, and the Phase 11.1 ledger.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add durable serialization, browser storage, cross-process recovery,
+  replay regeneration/playback, new runtime fields, screenshots, assets, audio,
+  browser dependencies, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.

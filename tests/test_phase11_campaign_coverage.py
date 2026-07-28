@@ -13,6 +13,8 @@ ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
+CHECKPOINT_TEST = ROOT / "tests" / "test_phase11_live_checkpoint.py"
+MCP_SERVER = ROOT / "src" / "mcp" / "server.rs"
 
 
 NODE_PROBE = r'''
@@ -218,7 +220,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -401,6 +403,36 @@ console.log(JSON.stringify(resolved));
     ):
       self.assertNotIn(forbidden, self.app + self.adapter)
 
+  def test_checkpoint_view_coverage_matches_the_live_in_memory_handoff(self):
+    coverage = self.ledger["checkpoint_view_coverage"]
+    checkpoint_test = CHECKPOINT_TEST.read_text(encoding="utf-8")
+    mcp_server = MCP_SERVER.read_text(encoding="utf-8")
+    self.assertEqual(coverage["status"], "complete-in-memory-host")
+    self.assertEqual(coverage["schema"], "competitive-save-v1")
+    self.assertEqual(
+      coverage["metadata_contract"],
+      ["operation", "session_id", "campaign", "seed", "transition_count", "latest_state_hash"],
+    )
+    for marker in (
+      "competitive-save-v1",
+      "SaveEnvelope",
+      "save_session",
+      "load_session",
+      "createCheckpointClient",
+      "validateSaveEnvelope",
+      "checkpoint_refresh_error",
+      "checkpoint_missing",
+      'id="session-save"',
+      'id="session-restore"',
+    ):
+      self.assertIn(marker, checkpoint_test + self.app + self.adapter + self.server + mcp_server + self.session)
+    for boundary in (
+      "in-memory host checkpoint",
+      "without client-side state restoration",
+      "test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
+    ):
+      self.assertIn(boundary, checkpoint_test + mcp_server + self.session)
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -500,7 +532,7 @@ console.log(JSON.stringify(resolved));
       "Music-state coverage complete.": "x",
       "History view updated.": "x",
       "Current competitive terminal debrief view covered. Evidence:": "x",
-      "Save/load visual continuity tested.": " ",
+      "Current in-memory host checkpoint visual continuity covered. Evidence:": "x",
       "Replay visual continuity tested.": " ",
       "Unknown content fallbacks tested.": "x",
       "Asset registry coverage is 100%.": " ",

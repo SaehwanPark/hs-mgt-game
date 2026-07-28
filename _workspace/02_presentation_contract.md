@@ -2075,3 +2075,42 @@ human usability, accessibility quality, audio quality, or learning.
   check remains an external follow-up if the project needs certification.
 - Open: which named hardware/browser targets should be tested before public
   release, and what representative workload should be used for each?
+
+# Presentation Contract — Phase 11.1 checkpoint visual continuity v0.13.14
+
+## Contract status
+
+Complete for the current in-memory host checkpoint view. This is a technical
+presentation contract, not evidence of durable save/load, cross-process
+recovery, browser-refresh recovery, replay playback, accessibility quality, or
+human learning.
+
+## Source and visible behavior
+
+- Host source: `src/mcp/session.rs` owns one cloned checkpoint per active
+  session and returns `competitive-save-v1` operation, campaign, seed,
+  transition-count, and latest-state-hash metadata.
+- Boundary sources: `src/mcp/server.rs`, `src/gui_server.rs`, and
+  `gui/host-adapter.mjs` expose explicit save/load operations; `gui/app.mjs`
+  validates the envelope and refreshes the actor-visible read-only view after
+  a successful load.
+- The visible contract keeps the save/restore controls host-gated and retains
+  the current view with a recoverable message when the checkpoint is missing or
+  the adapter/refresh path fails.
+
+## Fallback, authority, and provenance
+
+The host/core remains authoritative for checkpoint state, transition count, and
+state hash. The browser receives metadata and refreshes projections; it does not
+serialize or reconstruct true state. No asset or audio source is introduced.
+Missing or malformed envelopes fail closed, while current presentation remains
+available when recovery is possible.
+
+## Verification and limits
+
+`tests/test_phase11_live_checkpoint.py` and the ledger parity test cover schema,
+metadata alignment, adapter calls, refresh, missing/failing recovery, controls,
+routes, syntax, and authority exclusions. Existing Rust session tests cover
+cloned restore without a new transition. Durable file/browser persistence,
+cross-process/browser-refresh recovery, replay, screenshots, and human review
+remain separately gated.

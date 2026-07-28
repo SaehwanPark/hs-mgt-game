@@ -203,6 +203,40 @@
       "No instructor-only, counterfactual, durable persistence, replay-regeneration, human-usability, or learning claim is made."
     ]
   },
+  "checkpoint_view_coverage": {
+    "status": "complete-in-memory-host",
+    "schema": "competitive-save-v1",
+    "host_source": "src/mcp/session.rs: save_session + load_session",
+    "mcp_source": "src/mcp/server.rs: save_session + load_session",
+    "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/save + /load",
+    "adapter_source": "gui/host-adapter.mjs: saveSession + loadSession",
+    "browser_source": "gui/app.mjs: validateSaveEnvelope + createCheckpointClient",
+    "test_source": "tests/test_phase11_live_checkpoint.py",
+    "metadata_contract": [
+      "operation",
+      "session_id",
+      "campaign",
+      "seed",
+      "transition_count",
+      "latest_state_hash"
+    ],
+    "continuity_behavior": [
+      "Host stores and restores one cloned checkpoint per active session.",
+      "Restore returns aligned loaded metadata without entering a new transition.",
+      "Browser refreshes actor-visible presentation after successful restore.",
+      "Missing checkpoint, adapter, or refresh failure preserves a recoverable current view."
+    ],
+    "boundary": "Host/core owns checkpoint state and restore; the browser receives metadata and refreshes read-only projections without serializing true state.",
+    "limits": [
+      "No durable file persistence or browser storage is established.",
+      "No cross-process or browser-refresh recovery is established.",
+      "No replay regeneration, playback, screenshot, accessibility, or human-learning claim is made."
+    ],
+    "evidence": [
+      "The live checkpoint test covers schema/operation/hash/count validation, adapter save/load, refresh, missing/failure recovery, controls/routes, syntax, and authority exclusions.",
+      "Rust session tests cover cloned host restore and aligned replay metadata without a new transition."
+    ]
+  },
   "music_state_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_music_state_id",
