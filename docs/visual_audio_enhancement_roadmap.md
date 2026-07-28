@@ -3029,7 +3029,13 @@ remains open.
   affiliation/negotiation music, explicit milestone cue, visible routing, and
   written/audio-off fallback are covered while direct campaign integration and
   human listening review remain open.
-- [ ] Stage-transition sequence completed.
+- [x] Current regional-affiliation stage-transition sequence recorded.
+  Evidence:
+  `docs/evaluation/phase12-regional-affiliation-stage-transition-sequence.json`
+  and `tests/test_phase12_regional_affiliation_stage_transition_sequence.py`;
+  the typed six-stage successor chain, terminal completion, command gates,
+  visible labels, and replay-aligned history are covered while browser-native
+  sequencing and stage-specific presentation remain open.
 - [ ] Replay and debrief views updated.
 - [ ] Provenance audit passes.
 
@@ -3312,6 +3318,31 @@ Deferred / Non-Goals:
   entry, screenshot, persistence, instructor view, or authority path is added.
 - Audio remains optional and visible-only; it cannot imply agreement, severity,
   success, private intent, or future outcome.
+
+### v0.13.35 current regional-affiliation stage-transition sequence
+
+- `docs/evaluation/phase12-regional-affiliation-stage-transition-sequence.json`
+  records the typed Assess partner → Choose posture → Negotiate commitments →
+  Submit review → Resolve review → Integrate or decline → Affiliation complete
+  chain, successors, command gates, uncertainty, visible labels/process,
+  committed history, replay, and the competitive-only live-GUI boundary.
+- `tests/test_phase12_regional_affiliation_stage_transition_sequence.py`
+  checks source markers, exact order/successors, command/uncertainty coverage,
+  history/replay and read-only boundaries, shared-sequence scope, optional
+  audio, and the no-new-asset decision.
+- This closes only current host-projected sequence evidence; browser-native
+  affiliation sequencing, stage-specific visual/audio treatment, persistence,
+  instructor views, and human visual/audio/accessibility/educational/legal and
+  public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No browser animation, route, runtime field, persistence, screenshot,
+  instructor view, map, facility, portrait, audio file, registry entry, or
+  authority path is added.
+- Resolved stochastic inputs, private rationale, hidden thresholds, legal
+  validity, causal certainty, and future partner/integration outcomes remain
+  outside the actor-visible sequence.
 
 ### Exit criteria
 

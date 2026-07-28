@@ -1900,6 +1900,41 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12 regional-affiliation stage-transition sequence v0.13.35
+
+## Scope
+
+Record the current deterministic host-projected stage sequence for
+`regional-affiliation-v1` without claiming browser-native affiliation
+sequencing or exposing resolved inputs.
+
+## Target slice
+
+- Join the typed Assess partner → Choose posture → Negotiate commitments →
+  Submit review → Resolve review → Integrate or decline → Affiliation complete
+  chain to its successor mapping and one-transition advancement contract.
+- Record legal command gates, visible stage/process labels, uncertainty,
+  committed history/replay alignment, shared-sequence scope, optional audio,
+  no-new-asset, and live-GUI boundaries.
+
+## Sources and expected files
+
+- `src/model/affiliation.rs`, `src/affiliation/transition.rs`,
+  `src/mcp/campaign_coverage.rs`, `src/mcp/session.rs`, `gui/app.mjs`,
+  `gui/resolution-sequence.mjs`, and existing campaign presentation ledgers/
+  tests.
+- New stage-sequence ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add browser animation, routes, runtime fields, persistence,
+  screenshots, instructor views, assets, authority paths, hidden inputs,
+  private rationale, human review, or public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 12 regional-affiliation audio motif v0.13.34
 
 ## Scope

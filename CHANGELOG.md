@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.35] - 2026-07-28
+
+- Recorded the current deterministic regional-affiliation stage-transition
+  sequence from partner assessment through completion, including typed
+  successors, legal command gates, visible labels/process, and replay-aligned
+  committed history.
+- Closed only current host-projected sequence evidence; browser-native
+  affiliation sequencing, stage-specific presentation, persistence, instructor
+  views, human review, and public-release gates remain open, with no runtime
+  behavior changed.
+
 ## [0.13.34] - 2026-07-28
 
 - Recorded the current reusable regional-affiliation audio motif across the

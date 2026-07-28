@@ -6561,6 +6561,42 @@ Deferred / Non-Goals:
 - Audio remains optional and visible-only with complete written meaning; it
   cannot imply agreement, severity, success, private intent, or future outcome.
 
+### Visual/audio Phase 12 current regional-affiliation stage-transition sequence (v0.13.35)
+
+Status: Complete for current host-projected deterministic sequence evidence
+only; browser-native affiliation sequencing, stage-specific presentation,
+persistence, instructor views, human visual/audio/accessibility/educational/
+legal review, and public release remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-stage-transition-sequence.json`
+  for the ordered six-stage successor chain, terminal completion, command
+  gates, visible labels/process, uncertainty, history/replay, and presentation
+  boundaries.
+- Added `tests/test_phase12_regional_affiliation_stage_transition_sequence.py`
+  to check source markers, exact order/successors, command/uncertainty
+  coverage, read-only/history boundaries, shared-sequence scope, and the
+  no-new-asset decision.
+- Checked only current sequence evidence and synchronized canonical docs,
+  lessons, version metadata, generated credits, and additive request,
+  contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native affiliation sequencing, stage-specific visual/audio
+  treatment, persistence, instructor views, and human visual/audio/
+  accessibility/educational/legal review remain open.
+
+Deferred / Non-Goals:
+
+- No browser animation, route, runtime field, persistence, screenshot,
+  instructor view, map, facility, portrait, audio file, registry entry, or
+  authority path is added.
+- Resolved stochastic inputs, private rationale, hidden thresholds, legal
+  validity, causal certainty, and future partner/integration outcomes remain
+  outside the actor-visible sequence.
+
 ## Future
 
 ### Visual and audio experience upgrade
