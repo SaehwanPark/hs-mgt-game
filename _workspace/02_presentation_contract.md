@@ -2497,3 +2497,35 @@ changes; mappings do not infer hidden severity or future outcomes.
 with pressure registration and current catalogs, plus direct-integration and
 human-quality boundaries. Browser integration, direct campaign audio, motif
 quality, replay/debrief, human, and educational gates remain open.
+
+# Presentation Contract — Phase 12 stabilization debrief presentation v0.13.27
+
+## Contract status
+
+Complete for the current deterministic CLI/host/shared-renderer debrief
+contract only. Browser-native stabilization presentation, quality,
+instructor-surface decisions, human review, and educational usability remain
+separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the stabilization CLI's tradeoff, rationale, attributed
+  effect, reflection, decision/outcome, revision, and existing instructor
+  appendix sections to committed history/replay sources.
+- Host campaign/end-session envelopes supply debrief lines only after
+  completion; shared browser renderers display supplied text, while the live
+  GUI launcher remains competitive-regional-v1 only.
+
+## Fallback, authority, and provenance
+
+Debrief text, history, hashes, source-linked effects, and controls remain
+complete without audio or motion. The existing CLI instructor appendix is
+recorded as a boundary, not a new true-state view, route, or authority path.
+
+## Verification and limits
+
+`tests/test_phase12_stabilization_debrief_presentation.py` checks source
+markers, section identity, completion gating, written fallback, live GUI scope,
+and the instructor/true-state boundary. Browser-native stabilization quality,
+instructor-surface decisions, replay/debrief expansion, human, and educational
+gates remain open.

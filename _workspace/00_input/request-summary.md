@@ -1802,3 +1802,35 @@ existing optional music, event-cue, and audio-direction contracts.
   screenshots, persistence, instructor views, or human evaluation.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
+
+# Request Summary — Visual/audio Phase 12 stabilization debrief presentation v0.13.27
+
+## Scope
+
+Record the current deterministic stabilization debrief across CLI output,
+host-authored history/replay/end-session data, shared browser renderers, and
+optional-audio fallback.
+
+## Target slice
+
+- Bind run-level tradeoffs, actor rationales, attributed effects, reflection,
+  decision/outcome separation, revision notes, and the existing CLI instructor
+  appendix to source markers.
+- Preserve completion gating, host ownership, written fallback, and the live
+  competitive-only GUI boundary; close only current debrief evidence.
+
+## Sources and expected files
+
+- `src/cli/display/interactive.rs`, `src/debrief/report.rs`,
+  `src/mcp/campaign_coverage.rs`, `src/mcp/session.rs`, `gui/app.mjs`, and
+  `gui/README.md` existing debrief sources/renderers.
+- New debrief ledger/parity test, roadmap/spec/architecture/changelog/lessons,
+  version projections, generated credits, and additive contract/QA/handoff.
+
+## Non-goals and validation
+
+- Do not add debrief copy, browser routes, runtime fields, persistence, replay
+  regeneration, assets, audio files, screenshots, instructor exports, or human
+  evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.

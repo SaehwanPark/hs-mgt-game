@@ -1112,3 +1112,26 @@ quality, human, and educational gates remain open; no runtime behavior changed.
 - Working branch: `feat/stabilization-audio-state-mapping-v0.13.26`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 stabilization debrief presentation v0.13.27
+
+## Result
+
+Recorded the current deterministic stabilization debrief contract across CLI
+tradeoffs, actor rationales, attributed effects, reflection, revision notes,
+host-owned history/replay alignment, shared browser renderers, existing CLI
+instructor appendix boundaries, and optional-audio fallback.
+
+## Evidence boundary
+
+The ledger and parity test pass for current debrief evidence. Browser-native
+stabilization presentation, quality, instructor-surface decisions, human,
+educational, and public-release gates remain open; no runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.26.
+- Working branch: `feat/stabilization-debrief-presentation-v0.13.27`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

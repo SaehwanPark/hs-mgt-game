@@ -2954,7 +2954,11 @@ open.
   `tests/test_phase12_stabilization_audio_state_mapping.py`; the eight shared
   categories map to existing optional music/cue/direction contracts, while
   direct campaign-envelope integration, quality, and human review remain open.
-- [ ] Debrief presentation completed.
+- [x] Current stabilization debrief presentation recorded. Evidence:
+  `docs/evaluation/phase12-stabilization-debrief-presentation.json` and
+  `tests/test_phase12_stabilization_debrief_presentation.py`; current CLI and
+  shared host/browser renderers are covered while browser-native stabilization
+  quality, instructor-surface decisions, and human review remain open.
 - [ ] Accessibility tests pass.
 - [ ] Provenance audit passes.
 
@@ -3081,6 +3085,29 @@ Deferred / Non-Goals:
   persistence, instructor view, or authority path was added.
 - Eligible visible-only mappings remain optional and do not imply hidden
   severity, intent, probability, causality, or future outcome.
+
+### v0.13.27 current stabilization debrief presentation
+
+- `docs/evaluation/phase12-stabilization-debrief-presentation.json` records the
+  deterministic CLI run-level tradeoff, actor rationales, attributed effects,
+  reflection prompt, decision/outcome distinction, observation revisions,
+  existing instructor appendix boundary, host-owned history/replay alignment,
+  shared campaign/end-session renderers, and optional debrief-audio fallback.
+- `tests/test_phase12_stabilization_debrief_presentation.py` checks source
+  markers, section identity, completion gating, live GUI scope, written
+  fallback, and the existing instructor/true-state boundary.
+- This closes only current stabilization debrief evidence. It does not
+  complete browser-native stabilization presentation, visual/audio quality,
+  instructor-surface decisions, replay/debrief implementation, or human and
+  educational review.
+
+Deferred / Non-Goals:
+
+- No new debrief copy, route, runtime field, persistence, replay regeneration,
+  asset, audio file, screenshot, instructor export, or authority path was
+  added.
+- The existing CLI instructor appendix is not a new public true-state view or
+  a human educational-effectiveness claim.
 
 ### Exit criteria
 

@@ -6288,6 +6288,40 @@ Deferred / Non-Goals:
 - Eligible visible-only mappings do not infer hidden severity, intent,
   probability, causality, or future outcome.
 
+### Visual/audio Phase 12 current stabilization debrief presentation (v0.13.27)
+
+Status: Complete for the current deterministic CLI/host/shared-renderer debrief
+contract only; browser-native stabilization presentation, quality,
+instructor-surface decisions, human review, and educational usability remain
+separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-stabilization-debrief-presentation.json` for
+  current tradeoff, actor-rationale, attributed-effect, reflection,
+  decision/outcome, revision, instructor-appendix, history/replay, renderer,
+  and optional-audio boundaries.
+- Added `tests/test_phase12_stabilization_debrief_presentation.py` to require
+  source parity, completion gating, written fallback, live GUI scope, and the
+  existing instructor/true-state boundary.
+- Checked only current stabilization debrief evidence and synchronized
+  canonical docs, lessons, version metadata, generated credits, and additive
+  request/contract/QA/handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native stabilization debrief integration, visual/audio quality,
+  instructor-surface decisions, replay/debrief implementation beyond current
+  renderers, and human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No new debrief copy, route, runtime field, persistence, replay regeneration,
+  asset, audio file, screenshot, instructor export, or authority path was
+  added.
+- The existing CLI instructor appendix is not a new public true-state view or
+  a human educational-effectiveness claim.
+
 ## Future
 
 ### Visual and audio experience upgrade

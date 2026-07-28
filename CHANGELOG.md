@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.27] - 2026-07-28
+
+- Recorded the current stabilization debrief presentation contract across the
+  deterministic CLI tradeoff/rationale/effect/revision lines, host-authored
+  history/replay alignment, shared campaign/end-session renderers, and
+  optional debrief-audio fallback.
+- Closed only current debrief evidence; browser-native stabilization quality,
+  instructor-surface decisions, human educational review, and public-release
+  gates remain open, with no runtime behavior changed.
+
 ## [0.13.26] - 2026-07-28
 
 - Recorded the current stabilization audio-state mapping across the eight
