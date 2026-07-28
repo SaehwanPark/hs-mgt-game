@@ -2872,3 +2872,36 @@ runtime authority path, or registry entry is introduced.
 markers, all audit statuses/coverage, release counts, portrait gates, and
 legal/training-data/human/public-release limits. Direct assets, recorded audio,
 and human review remain open.
+
+# Presentation Contract — Phase 12.3 instructor-only authority boundaries v0.13.38
+
+## Contract status
+
+Complete for current authority-boundary documentation only. True-state visual
+language, instructor-surface design, decision-time recovery, causal,
+counterfactual, distributional, export, human educational, and public-release
+work remain separately gated.
+
+## Source and visible behavior
+
+- The ledger distinguishes existing stabilization CLI appendix, competitive
+  instructor summary, and regional-affiliation typed/CLI post-run detail from
+  player-visible observations.
+- Host/core debrief functions own post-run detail; shared renderers display
+  supplied text, history, hashes, and notices without authoring outcomes.
+- No regional-affiliation instructor route or browser true-state surface is
+  implemented or claimed; resolved inputs remain outside live controls.
+
+## Fallback, authority, and provenance
+
+Written observation labels, source attribution, committed history, hashes,
+debrief text, and authority notices remain readable without audio or visual
+decoration. The host remains authoritative and presentation remains read-only;
+no new asset, route, runtime field, or registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_instructor_authority_boundaries.py` checks source markers,
+all three campaign boundaries, written fallback, live scope, and no-authority/
+no-true-state/counterfactual/human-review limits. Instructor design and human
+educational review remain open.

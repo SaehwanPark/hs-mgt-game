@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.38] - 2026-07-28
+
+- Documented current Phase 12.3 instructor-only authority boundaries across
+  stabilization, competitive, and regional-affiliation debrief contracts,
+  separating post-run CLI/typed detail from player-visible observations and
+  shared read-only rendering.
+- Closed only the boundary-documentation item; true-state visual language,
+  instructor-surface design, educational review, and public-release gates
+  remain open, with no runtime behavior changed.
+
 ## [0.13.37] - 2026-07-28
 
 - Recorded the current regional-affiliation technical provenance audit across

@@ -2,7 +2,7 @@
 
 ## Decision
 
-The canonical distribution unit for v0.13.37 is an exact Git source checkout
+The canonical distribution unit for v0.13.38 is an exact Git source checkout
 of this repository. The checkout is identified by its package version and
 commit SHA, and it is built with the stable Rust toolchain and Cargo. The
 repository itself is the reproducibility package; this decision does not

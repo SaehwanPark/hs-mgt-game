@@ -3006,3 +3006,10 @@ generation, credits, reuse, asset-need, and audio-packaging checks while
 partner/stage art, recorded audio, portrait provenance, legal clearance, and
 human quality remain open. Keep machine provenance evidence separate from
 direct campaign use and public-release approval.
+
+## Phase 48: Document instructor authority before designing views (2026-07-28)
+
+Existing CLI/typed debrief details can support post-run review without becoming
+player-visible controls or a new browser true-state route. Record each
+campaign’s observation/detail boundary first, then keep true-state visual
+language, export, instructor design, and educational review as separate work.

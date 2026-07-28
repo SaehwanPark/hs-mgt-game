@@ -3422,7 +3422,11 @@ Deferred / Non-Goals:
 
 ### Checklist
 
-- [ ] Instructor-only authority boundaries documented.
+- [x] Instructor-only authority boundaries documented. Evidence:
+  `docs/evaluation/phase12-instructor-authority-boundaries.json` and
+  `tests/test_phase12_instructor_authority_boundaries.py`; existing post-run
+  CLI/typed detail is separated from player-visible observation and shared
+  read-only rendering while no new instructor route is claimed.
 - [ ] True-state visual language distinct from player-visible state.
 - [ ] Decision-time information recoverable.
 - [ ] Causal attribution visualized.
@@ -3435,6 +3439,27 @@ Deferred / Non-Goals:
 
 - Visual enhancements support debriefing rather than only play.
 - Decision quality remains distinguishable from realized outcome quality.
+
+### v0.13.38 current instructor-only authority boundaries
+
+- `docs/evaluation/phase12-instructor-authority-boundaries.json` records
+  existing stabilization CLI appendix, competitive instructor summary,
+  regional-affiliation typed/CLI post-run detail, host ownership, shared
+  read-only rendering, live-GUI limitation, and no-new-surface boundary.
+- `tests/test_phase12_instructor_authority_boundaries.py` checks source markers,
+  all three campaign boundaries, written fallback, live scope, and no-authority/
+  no-true-state/counterfactual/human-review limits.
+- This closes only current instructor-boundary documentation. True-state visual
+  language, causal/counterfactual/distributional views, instructor-surface
+  design, export behavior, and human educational review remain open.
+
+Deferred / Non-Goals:
+
+- No instructor route, true-state field, resolved-input control, counterfactual,
+  distributional view, persistence, screenshot, asset, audio file, or authority
+  path is created or promoted.
+- Post-run CLI/typed detail is not a live player observation, browser control,
+  legal conclusion, calibrated forecast, or educational result.
 
 ---
 

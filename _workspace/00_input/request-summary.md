@@ -1900,6 +1900,39 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12.3 instructor-only authority boundaries v0.13.38
+
+## Scope
+
+Document current instructor/post-run authority boundaries across the
+stabilization, competitive, and regional-affiliation contracts without adding
+an instructor route or live true-state view.
+
+## Target slice
+
+- Separate player-visible observations from existing post-run CLI/typed
+  debrief detail, host ownership, shared read-only rendering, and the
+  competitive-only live GUI boundary.
+- Record no-new-surface, no-authority-expansion, no-counterfactual,
+  no-distributional-view, and human-review limits.
+
+## Sources and expected files
+
+- Existing stabilization debrief ledger, `src/debrief/report.rs`,
+  `src/mcp/session.rs`, `gui/app.mjs`, `gui/README.md`, and current campaign
+  replay/debrief evidence.
+- New authority-boundary ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add instructor routes, true-state fields, resolved-input controls,
+  counterfactual/distributional views, persistence, screenshots, assets, audio
+  files, authority paths, educational claims, or public-release approval.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 12 regional-affiliation provenance audit v0.13.37
 
 ## Scope

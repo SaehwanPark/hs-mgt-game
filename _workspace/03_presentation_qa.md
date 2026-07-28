@@ -3301,6 +3301,42 @@ provenance clearance, and public release remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
 
+# Presentation Domain QA — Phase 12.3 instructor-only authority boundaries v0.13.38
+
+## Status
+
+`pass` for bounded current instructor/post-run authority-boundary QA only. No
+new instructor route, live true-state view, educational usability, legal,
+visual, audio, accessibility, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: stabilization CLI appendix, competitive instructor summary, and
+  regional-affiliation typed/CLI post-run detail are source-linked and kept
+  distinct from player-visible observation.
+- Pass: host ownership, read-only shared rendering, written fallback,
+  competitive-only live GUI scope, and no-new-surface boundary are explicit.
+- Pass: no true-state field, resolved-input control, counterfactual,
+  distributional view, new route, asset, runtime field, authority path, or
+  human/public-release claim is added.
+
+## Required fixes
+
+None for this bounded authority contract.
+
+## Evidence limits
+
+True-state visual language, decision-time recovery, causal attribution,
+counterfactual/distributional views, export behavior, instructor-surface design,
+human educational usability, accessibility, legal review, and public release
+remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_instructor_authority_boundaries` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

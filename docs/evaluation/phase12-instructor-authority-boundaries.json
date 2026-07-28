@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase12-instructor-authority-boundaries-v1",
+  "status": "complete-current-boundary-only",
+  "scope": "current instructor-only and post-run debrief authority boundaries across supported campaign contracts",
+  "source_contract": {
+    "stabilization_contract": "docs/evaluation/phase12-stabilization-debrief-presentation.json: stabilization-debrief-presentation-v1",
+    "stabilization_instructor_marker": "src/debrief/report.rs: === INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===",
+    "competitive_instructor_function": "src/debrief/report.rs: pub fn competitive_instructor_summary",
+    "competitive_hidden_detail": "src/debrief/report.rs: REVEALED FOR INSTRUCTOR REVIEW",
+    "affiliation_debrief_function": "src/debrief/report.rs: pub fn affiliation_debrief",
+    "affiliation_host_debrief": "src/mcp/session.rs: debrief: affiliation_debrief(&session.history)",
+    "coverage_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "end_session_renderer": "gui/app.mjs: renderEndSessionEnvelope",
+    "written_boundary": "gui/README.md: text-first history/debrief view",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+  },
+  "authority_contract": {
+    "stabilization-v1": {
+      "player_observation": "Reported metrics, committed history, and decision-time rationale remain the player-facing contract.",
+      "post_run_detail": "The existing CLI instructor appendix may distinguish reported metrics from true underlying states for post-run review.",
+      "authority": "Host/core debrief functions own the appendix; it is not a browser route or player command surface.",
+      "status": "existing-cli-boundary-documented"
+    },
+    "competitive-regional-v1": {
+      "player_observation": "Lagged/public rival information and committed player history remain the actor-visible contract.",
+      "post_run_detail": "The existing competitive instructor summary may reveal unobserved rival actions and rationales after play.",
+      "authority": "Host/core debrief functions own post-run instructor detail; the browser renders supplied text and cannot author outcomes.",
+      "status": "existing-cli-boundary-documented"
+    },
+    "regional-affiliation-v1": {
+      "player_observation": "Affiliation observations, committed transition summaries, and written stage/debrief text remain actor-visible; resolved inputs are not live controls.",
+      "post_run_detail": "Typed replay and CLI terminal debrief may retain post-resolution partner/stakeholder response detail under the existing contract.",
+      "authority": "No separate regional-affiliation instructor surface or browser true-state route is implemented or claimed.",
+      "status": "boundary-documented-no-new-instructor-surface"
+    }
+  },
+  "presentation_surface": {
+    "host_ownership": "Host/core contracts own observation, resolution, debrief, and any post-run instructor detail; presentation is read-only.",
+    "shared_rendering": "Shared campaign/end-session renderers display supplied text, history, hashes, and debrief lines without authoring true state or outcomes.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization or regional-affiliation instructor route is claimed.",
+    "written_fallback": "Labels, source attribution, committed history, hashes, debrief text, and authority notices remain readable without audio or visual decoration.",
+    "new_surface_need": "none-required-for-current-boundary-record"
+  },
+  "open_work": [
+    "true-state visual language distinct from player-visible state",
+    "decision-time information recovery, causal attribution, counterfactual, and distributional views",
+    "instructor-surface design, export behavior, human educational usability, accessibility, legal, and public-release review"
+  ],
+  "limits": [
+    "This record documents current authority boundaries; it does not create or approve an instructor-only product surface.",
+    "Post-run CLI/typed detail is not a live actor observation, browser control, legal conclusion, calibrated forecast, or educational result.",
+    "No true-state field, resolved-input control, counterfactual, distributional view, route, persistence, screenshot, asset, audio file, or authority path is created or promoted.",
+    "No human comprehension, classroom effectiveness, visual quality, accessibility, legal, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_instructor_authority_boundaries.py"
+}

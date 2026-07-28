@@ -729,6 +729,29 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 12.3 instructor-only authority boundaries v0.13.38
+
+## Result
+
+Documented existing post-run CLI/typed debrief authority boundaries across
+stabilization, competitive, and regional-affiliation contracts, separated from
+player-visible observation and shared read-only rendering.
+
+## Evidence boundary
+
+The ledger and parity test cover current boundaries only. No instructor route,
+true-state browser view, resolved-input control, counterfactual/distributional
+view, runtime authority path, asset promotion, or human educational/legal/
+public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.37.
+- Working branch: `feat/instructor-authority-boundaries-v0.13.38`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Phase 12 regional-affiliation provenance audit v0.13.37
 
 ## Result

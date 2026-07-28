@@ -6665,6 +6665,40 @@ Deferred / Non-Goals:
 - Catalog eligibility and generated credits do not prove direct campaign use,
   legal clearance, training-data provenance, asset quality, or audio usefulness.
 
+### Visual/audio Phase 12.3 current instructor-only authority boundaries (v0.13.38)
+
+Status: Complete for current boundary documentation only; true-state visual
+language, instructor-surface design, decision-time recovery, causal,
+counterfactual, distributional, export, human educational, and public-release
+work remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-instructor-authority-boundaries.json` for
+  existing stabilization CLI appendix, competitive instructor summary,
+  regional-affiliation typed/CLI post-run detail, host ownership, read-only
+  rendering, live-GUI limitation, and no-new-surface boundary.
+- Added `tests/test_phase12_instructor_authority_boundaries.py` to check source
+  markers, all campaign authority boundaries, written fallback, live scope,
+  and no-authority/true-state/counterfactual/human-review limits.
+- Checked only current authority-boundary evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive request,
+  contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- True-state visual language, decision-time information recovery, causal
+  attribution, counterfactual differences, distributional outcomes, export,
+  instructor-surface design, and human educational usability remain open.
+
+Deferred / Non-Goals:
+
+- No instructor route, true-state field, resolved-input control, counterfactual,
+  distributional view, persistence, screenshot, asset, audio file, or authority
+  path is created or promoted.
+- Post-run CLI/typed detail is not a live player observation, browser control,
+  legal conclusion, calibrated forecast, or educational result.
+
 ## Future
 
 ### Visual and audio experience upgrade
