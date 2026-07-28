@@ -6188,6 +6188,40 @@ Deferred / Non-Goals:
 - No campaign content, simulation transition, persistence, true-state view,
   counterfactual, educational claim, or human approval was added.
 
+### Visual/audio Phase 12 current shared pressure-state registration (v0.13.24)
+
+Status: Complete for the current actor-visible shared pressure/recovery
+taxonomy only; campaign-specific pressure design, tutorial, direct audio
+mapping, quality, human review, and educational usability remain separately
+gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-pressure-state-registration.json` for eight
+  current actor-visible pressure/recovery categories bound to operational
+  overlays, visual statuses, event-cue candidates, music states, written
+  equivalents, non-color patterns, and reduced-motion behavior.
+- Added `tests/test_phase12_pressure_state_registration.py` to require exact
+  source/catalog parity, empty campaign-specific registration sets, optional
+  audio boundaries, and no-new-asset/hidden-state limits.
+- Checked only the current shared pressure-state registration evidence and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request/contract/QA/handoff records; no runtime behavior
+  changed.
+
+Not Yet Done:
+
+- Campaign-specific pressure taxonomy, tutorial explanation, direct audio
+  mapping, visual quality, replay/debrief implementation, provenance review,
+  and human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No new pressure ID, transition, hidden-state field, asset, audio file,
+  screenshot, or registry entry was created or promoted.
+- Event cues and music states remain eligible visible-only channels, not direct
+  campaign-envelope audio mapping or outcome prediction.
+
 ## Future
 
 ### Visual and audio experience upgrade

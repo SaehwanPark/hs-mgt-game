@@ -1,0 +1,131 @@
+{
+  "schema_version": "pressure-state-registration-v1",
+  "status": "complete-current-shared-taxonomy",
+  "scope": "actor-visible current pressure and recovery presentation vocabulary",
+  "source_contract": {
+    "operational_catalog": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_SET",
+    "operational_fallback": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_FALLBACK",
+    "status_catalog": "gui/visual-catalog.json: visual-catalog-v1",
+    "event_cue_contract": "gui/audio-cue-contract.mjs: AUDIO_CUE_CONTRACT",
+    "music_contract": "gui/music-stem-contract.mjs: MUSIC_STEM_CONTRACT",
+    "coverage_inventory": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1"
+  },
+  "pressure_states": [
+    {
+      "id": "workforce-capacity",
+      "kind": "constraint",
+      "visible_trigger_fields": ["PlayerObservation.workforce_trust_summary", "PlayerObservation capacity fields"],
+      "overlay_ids": ["operational-staffing-constraint", "operational-capacity-constraint"],
+      "status_ids": ["watch", "constrained"],
+      "event_cue_ids": ["event.staffing-constraint"],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Staffing and capacity constraint; visible fields require attention.",
+      "non_color_motion": "Text label, hatch/double-line pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "demand-access",
+      "kind": "service-pressure",
+      "visible_trigger_fields": ["ReadOnlyObservation.operations.unmet_demand", "PlayerObservation.monthly_unmet_demand"],
+      "overlay_ids": ["operational-demand-pressure"],
+      "status_ids": ["watch", "constrained"],
+      "event_cue_ids": [],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Demand pressure; the visible unmet-demand value is reported.",
+      "non_color_motion": "Text label, wave-line pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "financial-operating",
+      "kind": "financial-pressure",
+      "visible_trigger_fields": ["ReadOnlyResources.cash", "ReadOnlyObservation.cash_runway_signal", "visible operating margin"],
+      "overlay_ids": ["operational-financial-distress"],
+      "status_ids": ["constrained", "critical"],
+      "event_cue_ids": ["event.operating-loss"],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Financial distress or operating loss; visible cash, runway, and result text remain available.",
+      "non_color_motion": "Text label, diagonal-hatch pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "regulatory-policy",
+      "kind": "policy-pressure",
+      "visible_trigger_fields": ["ReadOnlyObservation.annual_policy_review", "policy_bullets", "visible review stage"],
+      "overlay_ids": ["operational-regulatory-review"],
+      "status_ids": ["watch", "uncertain"],
+      "event_cue_ids": ["event.regulatory-decision"],
+      "music_state_id": "regulatory_scrutiny",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Regulatory review; visible review text and current status remain explicit.",
+      "non_color_motion": "Text label, dotted-frame pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "community-trust",
+      "kind": "institutional-pressure",
+      "visible_trigger_fields": ["ReadOnlyObservation.community_trust"],
+      "overlay_ids": ["operational-community-trust-concern"],
+      "status_ids": ["watch", "uncertain"],
+      "event_cue_ids": [],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Community-trust concern; visible trust status is reported.",
+      "non_color_motion": "Text label, crosshatch pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "project-timing",
+      "kind": "implementation-pressure",
+      "visible_trigger_fields": ["ReadOnlyObservation.in_flight_projects", "host-provided visible project timing/status"],
+      "overlay_ids": ["operational-delayed-project"],
+      "status_ids": ["delayed", "revised"],
+      "event_cue_ids": [],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Delayed project; visible timing and status are reported without a hidden cause.",
+      "non_color_motion": "Text label, dashed-ring pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "uncertain-intelligence",
+      "kind": "information-pressure",
+      "visible_trigger_fields": ["ReadOnlyObservation.information_gaps", "prior_access_revision"],
+      "overlay_ids": ["operational-uncertain-stale-intelligence"],
+      "status_ids": ["uncertain", "revised"],
+      "event_cue_ids": [],
+      "music_state_id": "pressure",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Uncertain or stale intelligence; missingness or revision remains explicit.",
+      "non_color_motion": "Text label, dot-dash pattern, and static reduced-motion presentation."
+    },
+    {
+      "id": "operational-recovery",
+      "kind": "recovery",
+      "visible_trigger_fields": ["PlayerObservation.monthly_operating_margin", "explicit visible recovery text"],
+      "overlay_ids": ["operational-recovery"],
+      "status_ids": ["improving", "stable"],
+      "event_cue_ids": ["event.operating-recovery"],
+      "music_state_id": "stable_operations",
+      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "written_equivalent": "Operational recovery; the visible monthly result is reported without a guaranteed future outcome.",
+      "non_color_motion": "Text label, ascending-mark pattern, and static reduced-motion presentation."
+    }
+  ],
+  "campaigns": {
+    "stabilization-v1": {
+      "shared_registered_state_ids": ["workforce-capacity", "demand-access", "financial-operating", "regulatory-policy", "community-trust", "project-timing", "uncertain-intelligence", "operational-recovery"],
+      "campaign_specific_registered_ids": [],
+      "open_work": ["campaign-specific pressure taxonomy", "tutorial explanation", "direct audio mapping", "human quality review"]
+    },
+    "regional-affiliation-v1": {
+      "shared_registered_state_ids": ["workforce-capacity", "demand-access", "financial-operating", "regulatory-policy", "community-trust", "project-timing", "uncertain-intelligence", "operational-recovery"],
+      "campaign_specific_registered_ids": [],
+      "open_work": ["stage-specific pressure taxonomy", "tutorial explanation", "direct affiliation audio mapping", "human quality review"]
+    }
+  },
+  "limits": [
+    "The taxonomy registers current actor-visible categories only; no hidden severity, intent, probability, causality, or future outcome is inferred.",
+    "Event cues and music states are eligible visible-only channels, not proof of direct campaign-envelope audio mapping.",
+    "No new campaign-specific pressure ID, transition, asset, audio file, screenshot, placement, or registry entry is created or promoted.",
+    "Existing technical text, pattern, reduced-motion, accessibility, and provenance checks do not establish human quality, comprehension, or educational usability.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_pressure_state_registration.py"
+}

@@ -2939,7 +2939,11 @@ open.
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
   `tests/test_phase12_campaign_reuse_matrix.py`; direct campaign audio mapping
   and campaign-specific quality review remain open.
-- [ ] New pressure states registered.
+- [x] Current shared pressure-state taxonomy registered. Evidence:
+  `docs/evaluation/phase12-pressure-state-registration.json` and
+  `tests/test_phase12_pressure_state_registration.py`; campaign-specific
+  pressure taxonomy, tutorial explanation, and direct audio mapping remain
+  open.
 - [ ] Tutorial presentation updated.
 - [ ] Audio-state mapping completed.
 - [ ] Debrief presentation completed.
@@ -3023,6 +3027,19 @@ remains open.
 - This closes only the current map/facility-needs identification items. It
   does not complete asset placement/use, quality, screenshots, tutorial,
   pressure, audio, partner/stage, replay/debrief, or human review work.
+
+### v0.13.24 current shared pressure-state registration
+
+- `docs/evaluation/phase12-pressure-state-registration.json` registers eight
+  current actor-visible pressure/recovery categories against the operational
+  overlay, status, event-cue, music, text-equivalent, non-color, and
+  reduced-motion contracts.
+- `tests/test_phase12_pressure_state_registration.py` checks source parity,
+  exact catalog IDs, empty campaign-specific registration sets, optional-audio
+  boundaries, and no-new-asset/hidden-state limits.
+- This closes only current shared pressure-state registration. It does not
+  complete campaign-specific pressure taxonomy, tutorial presentation, direct
+  audio mapping, visual quality, replay/debrief, or human review.
 
 ### Exit criteria
 

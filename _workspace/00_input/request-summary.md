@@ -1364,6 +1364,38 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 12 current pressure-state registration v0.13.24
+
+## Scope
+
+Register the current actor-visible pressure/recovery taxonomy across existing
+operational overlays, statuses, optional event cues, and music states.
+
+## Target slice
+
+- Bind eight visible-field categories to exact source IDs and written,
+  non-color, reduced-motion, fallback, and optional-audio boundaries.
+- Keep campaign-specific pressure registration empty and name open tutorial,
+  direct audio mapping, quality, and human-review work.
+- Close only current shared pressure-state registration evidence.
+
+## Sources and expected files
+
+- `gui/operational-overlays.mjs`, `gui/visual-catalog.json`,
+  `gui/audio-cue-contract.mjs`, `gui/music-stem-contract.mjs`, and the
+  current Phase 12 campaign inventory.
+- New pressure-state ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive presentation
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add pressure mechanics, hidden-state fields, campaign-specific IDs,
+  direct audio mapping, tutorial copy, animation, assets, screenshots,
+  instructor views, persistence, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Visual/audio Phase 12 campaign map/facility asset-need decision v0.13.23
 
 ## Scope

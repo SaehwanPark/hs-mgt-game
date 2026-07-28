@@ -2411,3 +2411,31 @@ remain the presentation boundary.
 campaign parity, fallback identity, written equivalents, reopen triggers, and
 bounded limits. Placement/use, quality, screenshots, audio, replay/debrief,
 instructor, human, and educational gates remain open.
+
+# Presentation Contract — Phase 12 current pressure-state registration v0.13.24
+
+## Contract status
+
+Complete for the current actor-visible shared pressure/recovery taxonomy only.
+This is not campaign-specific pressure design, direct audio mapping, quality,
+human review, or educational usability approval.
+
+## Source and visible behavior
+
+- The ledger registers eight current categories against operational overlays,
+  visual statuses, optional event-cue candidates, and optional music states.
+- Each category retains visible trigger fields, text equivalents, non-color
+  patterns, reduced-motion behavior, and explicit fallback/audio boundaries.
+
+## Fallback, authority, and provenance
+
+No hidden severity, intent, probability, causality, pressure mechanic, asset,
+runtime field, or authority path is added. Campaign-specific registration is
+empty, and existing unknown/fallback behavior remains authoritative.
+
+## Verification and limits
+
+`tests/test_phase12_pressure_state_registration.py` checks source/catalog parity,
+exact IDs, empty campaign-specific sets, optional audio, and no-new-asset/
+hidden-state limits. Tutorial, direct mapping, quality, replay/debrief,
+instructor, human, and educational gates remain open.

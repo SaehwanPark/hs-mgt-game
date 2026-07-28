@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.24] - 2026-07-28
+
+- Registered the current shared actor-visible pressure/recovery taxonomy across
+  operational overlays, statuses, optional event cues, music states, written
+  equivalents, and reduced-motion/non-color boundaries.
+- Closed only current shared pressure-state registration; campaign-specific
+  taxonomy, tutorial explanation, direct audio mapping, quality, human review,
+  and educational gates remain open, with no runtime behavior changed.
+
 ## [0.13.23] - 2026-07-28
 
 - Recorded the current Phase 12 map/facility asset-need decision for

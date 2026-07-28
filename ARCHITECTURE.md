@@ -790,6 +790,13 @@ fallback and future geography/placement/causal-legibility triggers can reopen
 the decision. This is evidence about current need, not placement, quality,
 screenshots, or human review; no runtime or asset boundary changes.
 
+The v0.13.24 Phase 12 slice registers the current actor-visible pressure and
+recovery taxonomy across operational overlays, visual statuses, optional event
+cues, and optional music states. It retains direct visible-field triggers,
+written equivalents, non-color/reduced-motion behavior, fallback handling, and
+an empty campaign-specific registration set; no hidden severity, new pressure
+mechanic, runtime field, asset, audio mapping, or authority path is introduced.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

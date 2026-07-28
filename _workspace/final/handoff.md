@@ -1046,3 +1046,25 @@ art, human, and educational gates remain open.
 - Working branch: `feat/campaign-asset-need-decision-v0.13.23`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 current pressure-state registration v0.13.24
+
+## Result
+
+Registered the current eight actor-visible pressure/recovery categories across
+operational overlays, statuses, optional event cues, music states, text
+equivalents, non-color patterns, and reduced-motion behavior.
+
+## Evidence boundary
+
+The ledger and parity test pass for the shared current taxonomy. Campaign-
+specific registration remains empty; direct audio mapping, tutorial, quality,
+human, and educational work remain open, with no runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.23.
+- Working branch: `feat/pressure-state-registration-v0.13.24`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

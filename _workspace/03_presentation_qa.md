@@ -2976,6 +2976,40 @@ and future provenance review remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 current pressure-state registration v0.13.24
+
+## Status
+
+`pass` for bounded current shared pressure/recovery registration QA only. No
+campaign-specific pressure, direct audio mapping, quality, human, or
+educational approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: eight states resolve to current visible operational overlays, visual
+  statuses, optional event cues/music, written equivalents, and patterns.
+- Pass: every state has visible trigger fields, static reduced-motion behavior,
+  and the same optional-audio boundary; campaign-specific registration stays
+  empty.
+- Pass: no hidden severity, new mechanic, asset, runtime, or authority path is
+  introduced.
+
+## Required fixes
+
+None for this bounded registration contract.
+
+## Evidence limits
+
+Campaign-specific pressure taxonomy, tutorial explanation, direct audio
+mapping, visual quality, replay/debrief, instructor views, human comprehension,
+and educational usability remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_pressure_state_registration` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 campaign map/facility asset-need decision v0.13.23
 
 ## Status
