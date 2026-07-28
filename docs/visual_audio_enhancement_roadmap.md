@@ -2930,7 +2930,11 @@ open.
   `tests/test_phase12_campaign_presentation_coverage.py`; the current abstract
   contract requires no new map or facility asset, while tutorial, pressure,
   campaign-audio, and debrief work remain open.
-- [ ] Campaign-specific map or facility needs identified.
+- [x] Current campaign-specific map or facility needs identified. Evidence:
+  `docs/evaluation/phase12-campaign-asset-need-decision.json` and
+  `tests/test_phase12_campaign_asset_need_decision.py`; neither current
+  abstract/stage contract requires a new map or facility asset, with reopen
+  triggers documented for future campaign geography or placement.
 - [x] Reusable assets used where possible. Evidence:
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
   `tests/test_phase12_campaign_reuse_matrix.py`; direct campaign audio mapping
@@ -2961,6 +2965,11 @@ remains open.
   `tests/test_phase12_campaign_presentation_coverage.py`; the current stage
   contract requires no new map or facility asset, while stage-specific art,
   affiliation audio, and full-stage replay/debrief review remain open.
+- [x] Current campaign-specific map or facility needs identified. Evidence:
+  `docs/evaluation/phase12-campaign-asset-need-decision.json` and
+  `tests/test_phase12_campaign_asset_need_decision.py`; neither current
+  abstract/stage contract requires a new map or facility asset, with reopen
+  triggers documented for future campaign geography or placement.
 - [ ] Partner identity treatment completed.
 - [x] Reusable assets used where possible. Evidence:
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
@@ -3001,6 +3010,19 @@ remains open.
   not complete direct campaign audio mapping, tutorial/pressure taxonomy,
   partner/stage-specific treatment, replay/debrief implementation, quality,
   or human review.
+
+### v0.13.23 current campaign map/facility asset-need decision
+
+- `docs/evaluation/phase12-campaign-asset-need-decision.json` records the
+  current no-new-map/facility decision for both campaigns, the generic-facility
+  fallback, text-complete equivalents, and explicit reopen triggers for future
+  geography, placement, or causal-legibility needs.
+- `tests/test_phase12_campaign_asset_need_decision.py` joins the decision to
+  the campaign inventory, reuse matrix, facility catalog, and fallback test;
+  it checks that no new asset or runtime authority is inferred.
+- This closes only the current map/facility-needs identification items. It
+  does not complete asset placement/use, quality, screenshots, tutorial,
+  pressure, audio, partner/stage, replay/debrief, or human review work.
 
 ### Exit criteria
 

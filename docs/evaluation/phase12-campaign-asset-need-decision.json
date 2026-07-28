@@ -1,0 +1,50 @@
+{
+  "schema_version": "campaign-asset-need-decision-v1",
+  "status": "complete-current-contract-decision",
+  "source_contract": {
+    "campaign_inventory": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "reuse_matrix": "docs/evaluation/phase12-campaign-reuse-matrix.json: campaign-presentation-reuse-v1",
+    "facility_catalog": "gui/facility-components.mjs: FACILITY_COMPONENTS",
+    "fallback_test": "tests/test_asset_fallback.py: facilityPresentationFor"
+  },
+  "campaigns": {
+    "stabilization-v1": {
+      "current_surface": "Abstract executive briefing, visible metrics, actor/process/decision rows, immutable history/replay, and debrief text.",
+      "asset_need_decision": "none-required-by-current-abstract-contract",
+      "existing_reuse_boundary": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary"],
+      "fallback_descriptor": "generic-facility",
+      "fallback_source": "gui/facility-components.mjs: generic-facility",
+      "written_equivalent": "Current briefing, metric, process, decision, history, replay, and debrief fields remain text-complete without a map or facility illustration.",
+      "reopen_triggers": [
+        "Campaign-specific geography becomes actor-visible.",
+        "Facility placement changes a visible decision or consequence.",
+        "A map or facility view becomes necessary to explain a stabilization causal chain."
+      ]
+    },
+    "regional-affiliation-v1": {
+      "current_surface": "Stage, partner, commitment, review, integration, immutable history/replay, and debrief text through the shared campaign contract.",
+      "asset_need_decision": "none-required-by-current-stage-contract",
+      "existing_reuse_boundary": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary"],
+      "fallback_descriptor": "generic-facility",
+      "fallback_source": "gui/facility-components.mjs: generic-facility",
+      "written_equivalent": "Current stage, partner, commitment, review, integration, replay, and debrief fields remain text-complete without a map or facility illustration.",
+      "reopen_triggers": [
+        "Affiliation geography or facility relationships become actor-visible.",
+        "Facility placement changes a visible partner, review, or integration consequence.",
+        "A map or facility view becomes necessary to explain a regional affiliation causal chain."
+      ]
+    }
+  },
+  "limits": [
+    "This decision does not establish asset placement/use, visual quality, screenshot coverage, device/browser compatibility, or human review.",
+    "The generic-facility descriptor is a fallback boundary, not evidence that future campaign art will never be needed.",
+    "No new map, facility, portrait, stage-art, raster, audio, registry, or runtime asset is created or promoted.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."
+  ],
+  "evidence": [
+    "Both current campaign surfaces are represented by the typed campaign-coverage inventory.",
+    "Both campaigns have an explicit current need decision, fallback descriptor, written equivalent, and reopen triggers.",
+    "The decision is consistent with the existing reusable-asset matrix and generic-facility fallback test."
+  ],
+  "test_source": "tests/test_phase12_campaign_asset_need_decision.py"
+}

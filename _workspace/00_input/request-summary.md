@@ -1364,6 +1364,37 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 12 campaign map/facility asset-need decision v0.13.23
+
+## Scope
+
+Identify current map/facility needs for `stabilization-v1` and
+`regional-affiliation-v1` and record the bounded no-new-asset decision.
+
+## Target slice
+
+- Join the decision to the current campaign inventory, reuse matrix, facility
+  catalog, and generic fallback test.
+- Record text-complete equivalents and future reopen triggers for geography,
+  placement, and causal legibility.
+- Close only the current Phase 12.1 and 12.2 map/facility-needs items.
+
+## Sources and expected files
+
+- Current campaign inventory/reuse ledgers, `gui/facility-components.mjs`, and
+  `tests/test_asset_fallback.py`.
+- New asset-need decision/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive presentation
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not create or promote map, facility, portrait, stage-art, raster, audio,
+  or registry assets; do not add placement, runtime, screenshot, persistence,
+  instructor, quality, or human-review behavior.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Visual/audio Phase 12 campaign presentation reuse matrix v0.13.22
 
 ## Scope

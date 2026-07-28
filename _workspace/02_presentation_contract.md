@@ -2382,3 +2382,32 @@ audio primitives retain written/fallback presentation.
 approval/provenance, generated-audio null release paths, written equivalents,
 and the no-new-asset boundary. Direct mapping, quality, partner/stage art,
 replay/debrief, instructor, human, and educational gates remain open.
+
+# Presentation Contract — Phase 12 campaign map/facility asset-need decision v0.13.23
+
+## Contract status
+
+Complete for the current map/facility need decision only. This is not asset
+placement/use, visual quality, screenshot coverage, human review, or future
+campaign-art approval.
+
+## Source and visible behavior
+
+- The decision joins both campaign IDs to the typed campaign inventory, reuse
+  matrix, facility catalog, and generic-facility fallback test.
+- Current abstract/stage surfaces remain text-complete without new map or
+  facility illustration; future geography, placement, and causal-legibility
+  triggers are explicitly recorded.
+
+## Fallback, authority, and provenance
+
+No asset, registry entry, runtime field, transition, or authority path changes.
+The generic-facility descriptor remains fallback-only, and written equivalents
+remain the presentation boundary.
+
+## Verification and limits
+
+`tests/test_phase12_campaign_asset_need_decision.py` checks source parity,
+campaign parity, fallback identity, written equivalents, reopen triggers, and
+bounded limits. Placement/use, quality, screenshots, audio, replay/debrief,
+instructor, human, and educational gates remain open.

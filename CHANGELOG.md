@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.23] - 2026-07-28
+
+- Recorded the current Phase 12 map/facility asset-need decision for
+  stabilization and regional affiliation, including generic fallback,
+  written-equivalent, and future reopen-trigger boundaries.
+- Closed only the current map/facility-needs identification items; placement,
+  quality, screenshots, campaign content, human review, and educational gates
+  remain open, with no runtime or asset behavior changed.
+
 ## [0.13.22] - 2026-07-28
 
 - Recorded the Phase 12 reusable-asset matrix for stabilization and regional

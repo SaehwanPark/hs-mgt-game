@@ -6155,6 +6155,39 @@ Deferred / Non-Goals:
   true-state view, counterfactual, educational claim, or human review was
   added.
 
+### Visual/audio Phase 12 current campaign map/facility asset-need decision (v0.13.23)
+
+Status: Complete for the current map/facility need decision only; asset
+placement/use, quality, campaign-specific presentation, human review, and
+educational usability remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-campaign-asset-need-decision.json` for the
+  current `stabilization-v1` and `regional-affiliation-v1` surfaces, their
+  no-new-map/facility decisions, generic fallback, written equivalents, and
+  future reopen triggers.
+- Added `tests/test_phase12_campaign_asset_need_decision.py` to join the
+  decision to the campaign inventory, reuse matrix, facility catalog, and
+  fallback test.
+- Checked only the Phase 12.1 and 12.2 current map/facility-needs items and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request/contract/QA/handoff records; no runtime or asset
+  behavior changed.
+
+Not Yet Done:
+
+- Asset placement/use, visual quality, screenshots, tutorial/pressure work,
+  audio mapping, partner/stage treatment, replay/debrief implementation,
+  provenance review, and human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No map, facility, portrait, stage-art, raster, audio, registry, or runtime
+  asset was created or promoted; the decision has explicit reopen triggers.
+- No campaign content, simulation transition, persistence, true-state view,
+  counterfactual, educational claim, or human approval was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

@@ -1024,3 +1024,25 @@ human, and educational gates remain open.
 - Working branch: `feat/campaign-reuse-matrix-v0.13.22`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 campaign map/facility asset-need decision v0.13.23
+
+## Result
+
+Recorded the current no-new-map/facility decision for stabilization and
+regional affiliation, including the generic-facility fallback, written
+equivalents, and future reopen triggers.
+
+## Evidence boundary
+
+The decision and parity test pass for current contract needs. No map/facility
+asset was created or promoted. Placement/use, quality, screenshots, campaign
+art, human, and educational gates remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.22.
+- Working branch: `feat/campaign-asset-need-decision-v0.13.23`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
