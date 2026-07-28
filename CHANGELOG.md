@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.25] - 2026-07-28
+
+- Recorded the current stabilization tutorial-presentation contract: the
+  five-turn CLI beginner flow, three written choices per turn, player-guide
+  source, shared GUI coverage boundary, and live competitive-only GUI limit.
+- Closed only current tutorial-presentation evidence; browser-native
+  stabilization integration, direct audio, campaign content, human review,
+  and educational gates remain open, with no runtime behavior changed.
+
 ## [0.13.24] - 2026-07-28
 
 - Registered the current shared actor-visible pressure/recovery taxonomy across

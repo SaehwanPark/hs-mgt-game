@@ -1364,6 +1364,36 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 12 stabilization tutorial presentation v0.13.25
+
+## Scope
+
+Record the current five-turn stabilization beginner/tutorial presentation and
+its boundary from the shared campaign-coverage renderer and live GUI launcher.
+
+## Target slice
+
+- Bind the CLI beginner menu, five-turn/three-choice fields, player guide,
+  beginner tests, written equivalents, and host-owned command boundary.
+- Record that the shared GUI can render supplied stabilization coverage while
+  the current live GUI launcher remains competitive-only.
+- Close only current stabilization tutorial-presentation evidence.
+
+## Sources and expected files
+
+- `src/cli/beginner.rs`, `src/cli/beginner_tests.rs`,
+  `docs/guides/how-to-play.md`, `gui/README.md`, and the campaign inventory.
+- New tutorial ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive presentation
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add browser stabilization integration, tutorial copy, direct audio,
+  assets, screenshots, persistence, instructor views, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Visual/audio Phase 12 current pressure-state registration v0.13.24
 
 ## Scope

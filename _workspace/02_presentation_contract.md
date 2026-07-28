@@ -2439,3 +2439,33 @@ empty, and existing unknown/fallback behavior remains authoritative.
 exact IDs, empty campaign-specific sets, optional audio, and no-new-asset/
 hidden-state limits. Tutorial, direct mapping, quality, replay/debrief,
 instructor, human, and educational gates remain open.
+
+# Presentation Contract — Phase 12 stabilization tutorial presentation v0.13.25
+
+## Contract status
+
+Complete for the current CLI beginner/tutorial contract only. This is not
+browser-native stabilization integration, direct audio, campaign-specific
+content, quality, human review, or educational usability approval.
+
+## Source and visible behavior
+
+- The ledger binds the five-turn beginner menu, three written choices per
+  turn, choice labels/pros/cons/trade-offs/recommendability, player guide, and
+  beginner-test sources.
+- Shared campaign coverage can render supplied stabilization projections, while
+  the current live GUI launcher remains competitive-only.
+
+## Fallback, authority, and provenance
+
+Beginner recommendations are explanatory metadata, not optimal policy claims;
+commands and outcomes remain host/core-owned. No route, asset, audio, runtime
+field, transition, or authority path changes.
+
+## Verification and limits
+
+`tests/test_phase12_stabilization_tutorial_presentation.py` checks source
+markers, field counts, host ownership, written equivalents, and explicit
+no-browser-tutorial/no-human-learning limits. Browser integration, direct
+audio, content/pacing, quality, replay/debrief, human, and educational gates
+remain open.

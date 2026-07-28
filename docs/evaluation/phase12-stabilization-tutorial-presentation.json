@@ -1,0 +1,40 @@
+{
+  "schema_version": "stabilization-tutorial-presentation-v1",
+  "status": "complete-current-cli-tutorial-contract",
+  "campaign": "stabilization-v1",
+  "tutorial_contract": {
+    "turn_count": 5,
+    "entry_mode": "beginner-guided-choices",
+    "choice_count": 3,
+    "choice_fields": ["label", "pros", "cons", "tradeoff", "recommendability"],
+    "command_owner": "host/core PlayerCommand and transition validation",
+    "visible_equivalent": "Each turn retains written choice labels, trade-offs, and input guidance; future outcomes remain uncertain."
+  },
+  "sources": {
+    "beginner_menu": "src/cli/beginner.rs: format_beginner_menu",
+    "beginner_options": "src/cli/beginner.rs: beginner_options",
+    "beginner_tests": "src/cli/beginner_tests.rs: beginner_options_have_metadata_for_each_turn",
+    "player_guide": "docs/guides/how-to-play.md: ## Stabilization (`stabilization-v1`)",
+    "shared_campaign_coverage": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "gui_campaign_boundary": "gui/README.md: campaign-coverage-v1"
+  },
+  "presentation_surface": {
+    "current": "CLI beginner menu plus player guide for the five-turn stabilization flow.",
+    "shared_gui": "The shared campaign-coverage contract can render supplied stabilization stage/briefing/metric/actor/process/decision/history/replay/debrief projections.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization tutorial rail is claimed.",
+    "new_asset_need": "none-required-by-current-cli-and-shared-coverage-contract"
+  },
+  "open_work": [
+    "browser-native stabilization tutorial integration",
+    "campaign-specific tutorial content and pacing review",
+    "direct tutorial audio mapping",
+    "human comprehension and educational usability review"
+  ],
+  "limits": [
+    "This record does not establish a visual browser tutorial, human learning, or educational effectiveness.",
+    "Beginner recommendability is explanatory presentation metadata, not an optimal policy or outcome guarantee.",
+    "No new tutorial copy, route, asset, audio, screenshot, persistence, or authority path is created or promoted.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_stabilization_tutorial_presentation.py"
+}

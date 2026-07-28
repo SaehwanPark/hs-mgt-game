@@ -3010,6 +3010,39 @@ and educational usability remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 stabilization tutorial presentation v0.13.25
+
+## Status
+
+`pass` for bounded current CLI stabilization tutorial QA only. No browser
+stabilization integration, direct audio, visual quality, human, or educational
+approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: the five-turn beginner menu and three-choice fields retain labels,
+  pros, cons, trade-offs, recommendability, and host-owned commands.
+- Pass: the player-guide and shared campaign-coverage sources remain linked;
+  the live GUI competitive-only boundary is explicit.
+- Pass: the tutorial surface remains text-first and no new route, asset, audio,
+  runtime, or authority path is introduced.
+
+## Required fixes
+
+None for this bounded tutorial contract.
+
+## Evidence limits
+
+Browser-native stabilization integration, direct tutorial audio,
+campaign-specific pacing/content, visual quality, replay/debrief, instructor
+views, human comprehension, and educational usability remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_stabilization_tutorial_presentation` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 campaign map/facility asset-need decision v0.13.23
 
 ## Status
