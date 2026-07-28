@@ -3022,8 +3022,9 @@ educational, or public-release approval is implied.
 
 - Pass: host partner name, condition, stage, and status fields resolve to the
   current campaign-coverage source and preserve a written equivalent.
-- Pass: shared actor-family/generic-actor fallback and neutral written
-  treatment remain available when identity decoration is unavailable.
+- Pass: the actor-family catalog retains generic fallback language and the
+  shared renderer retains neutral written treatment when identity decoration is
+  unavailable.
 - Pass: the identity-only `affiliation-partner-executive` preview remains
   explicitly unverified/unreleased and is not promoted as a released asset.
 - Pass: the shared renderer and competitive-only live GUI boundary are recorded;

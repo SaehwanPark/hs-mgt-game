@@ -6,6 +6,8 @@
   "source_contract": {
     "partner_projection": "src/mcp/campaign_coverage.rs: Potential partner",
     "partner_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.partner_name/reported_condition",
+    "status_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.status",
+    "stage_source": "src/mcp/campaign_coverage.rs: AffiliationObservation.stage",
     "actor_fallback": "gui/actor-families.mjs: Missing or unknown actor-family ID",
     "actor_family_test": "tests/test_actor_families.py: ACTOR_FAMILIES",
     "portrait_inventory": "docs/evaluation/portrait-preview-coverage.json: fictional-portrait-preview-coverage-v1",
@@ -29,7 +31,7 @@
   },
   "presentation_surface": {
     "current_host": "The host campaign-coverage projection exposes a partner briefing, actor role, stage, condition/status, and written uncertainty.",
-    "shared_gui": "The shared campaign renderer can display supplied partner identity and coverage fields with generic/written fallback.",
+    "shared_gui": "The shared campaign renderer can display supplied partner identity and coverage fields with written fallback; the actor-family catalog supplies generic fallback language separately.",
     "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation partner route is claimed.",
     "new_asset_need": "none-required-by-current-stage-contract"
   },

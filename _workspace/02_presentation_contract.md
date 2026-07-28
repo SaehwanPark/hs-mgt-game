@@ -2606,8 +2606,9 @@ public-release review remain separately gated.
 
 - The ledger binds partner name, reported condition, stage, and status to the
   current host campaign-coverage projection and preserves written uncertainty.
-- The shared renderer may display supplied partner identity with an actor-family
-  or generic-actor marker, neutral frame, and written fallback.
+- The shared renderer may display supplied partner identity and coverage fields
+  with a written fallback; the actor-family catalog separately retains the
+  generic-actor marker, neutral frame, and written-notification equivalent.
 - The `affiliation-partner-executive` portrait is identity decoration only and
   remains an unverified/unreleased preview.
 

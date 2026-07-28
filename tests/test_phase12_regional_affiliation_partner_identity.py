@@ -33,6 +33,8 @@ class Phase12RegionalAffiliationPartnerIdentityTests(unittest.TestCase):
   def test_partner_scope_and_preview_boundaries_remain_bounded(self):
     surface = self.ledger["presentation_surface"]
     self.assertIn("partner", surface["current_host"])
+    self.assertIn("written fallback", surface["shared_gui"])
+    self.assertIn("actor-family catalog", surface["shared_gui"])
     self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertTrue(self.ledger["open_work"])
