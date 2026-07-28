@@ -2592,3 +2592,35 @@ output quality, or human approval.
 six passing audit entries, catalog/release scope, zero third-party release
 count, no-new-asset decision, and unreleased preview limits. Future assets,
 portraits, legal, human-quality, and public-release gates remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation partner identity v0.13.30
+
+## Contract status
+
+Complete for current host-reported partner identity and shared fallback only.
+Browser-native regional-affiliation presentation, partner-specific visual/audio
+treatment, and human identity, quality, accessibility, legal, educational, and
+public-release review remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds partner name, reported condition, stage, and status to the
+  current host campaign-coverage projection and preserves written uncertainty.
+- The shared renderer may display supplied partner identity with an actor-family
+  or generic-actor marker, neutral frame, and written fallback.
+- The `affiliation-partner-executive` portrait is identity decoration only and
+  remains an unverified/unreleased preview.
+
+## Fallback, authority, and provenance
+
+The live GUI launcher remains competitive-regional-v1 only; no browser-native
+regional-affiliation route is claimed. No new asset is required by the current
+stage contract, and no partner-specific audio identity, runtime authority path,
+private intent, true condition, or future commitment is exposed.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_partner_identity.py` checks source
+markers, host fields, fallback, portrait status, shared/live GUI boundaries,
+and the no-new-asset decision. Partner-specific visual/audio integration and
+human review remain open.

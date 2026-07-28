@@ -2996,7 +2996,11 @@ remains open.
   `tests/test_phase12_campaign_asset_need_decision.py`; neither current
   abstract/stage contract requires a new map or facility asset, with reopen
   triggers documented for future campaign geography or placement.
-- [ ] Partner identity treatment completed.
+- [x] Current regional-affiliation partner identity treatment recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-partner-identity.json`
+  and `tests/test_phase12_regional_affiliation_partner_identity.py`; host
+  partner fields, generic fallback, and the identity-only portrait boundary are
+  covered while partner-specific art/audio and human review remain open.
 - [x] Reusable assets used where possible. Evidence:
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
   `tests/test_phase12_campaign_reuse_matrix.py`; partner-specific treatment,
@@ -3160,6 +3164,31 @@ Deferred / Non-Goals:
   route, or runtime asset was added or promoted.
 - Machine provenance fields are not legal clearance, training-data provenance,
   output-quality approval, or human review.
+
+### v0.13.30 current regional-affiliation partner identity
+
+- `docs/evaluation/phase12-regional-affiliation-partner-identity.json` records
+  the current host-reported partner name, condition, stage, and status fields,
+  the shared generic-actor/written fallback, and the existing
+  `affiliation-partner-executive` identity-only portrait-preview boundary.
+- `tests/test_phase12_regional_affiliation_partner_identity.py` checks the
+  source markers, field list, fallback, portrait status, shared campaign
+  renderer boundary, competitive-only live GUI boundary, and no-new-asset
+  decision.
+- This closes only current partner-identity evidence. It does not complete a
+  browser-native regional-affiliation route, partner-specific visual/audio
+  treatment, or human identity, quality, accessibility, legal, educational, or
+  public-release review.
+
+Deferred / Non-Goals:
+
+- No partner portrait, stage art, audio, route, runtime field, registry entry,
+  screenshot, persistence, instructor view, or authority path was added or
+  promoted.
+- The unverified/unreleased portrait preview is identity decoration only and
+  is not evidence of resemblance, quality, legal clearance, or partner truth.
+- Host-reported identity does not expose private intent, agreement probability,
+  true condition, causal outcome, or future commitment.
 
 ### Exit criteria
 

@@ -6388,6 +6388,39 @@ Deferred / Non-Goals:
 - Machine provenance fields do not establish legal clearance, training-data
   provenance, output quality, or human approval.
 
+### Visual/audio Phase 12 current regional-affiliation partner identity (v0.13.30)
+
+Status: Complete for current partner-identity evidence only; browser-native
+regional-affiliation integration, partner-specific visual/audio treatment,
+quality/accessibility/legal/educational review, and public release remain
+separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-partner-identity.json`
+  for the current host-reported partner name, condition, stage, and status
+  fields, shared generic-actor/written fallbacks, and the identity-only
+  `affiliation-partner-executive` portrait-preview boundary.
+- Added `tests/test_phase12_regional_affiliation_partner_identity.py` to check
+  source markers, field parity, fallback, portrait status, shared campaign
+  rendering, competitive-only live GUI scope, and the no-new-asset decision.
+- Checked only current partner-identity evidence and synchronized canonical
+  docs, lessons, version metadata, generated credits, and additive
+  request/contract/QA/handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Browser-native regional-affiliation presentation, negotiation/commitment/
+  integration-stage visualization, affiliation audio, replay/debrief updates,
+  partner-specific art, and human identity, quality, accessibility, legal,
+  educational, and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No portrait or other asset promotion, runtime authority path, private partner
+  intent, agreement probability, true condition, causal outcome, or future
+  commitment is introduced.
+
 ## Future
 
 ### Visual and audio experience upgrade

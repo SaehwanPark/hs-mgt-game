@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.30] - 2026-07-28
+
+- Recorded current regional-affiliation partner identity treatment across
+  host-reported partner fields, shared generic actor fallback, and the
+  identity-only unverified/unreleased partner portrait boundary.
+- Closed only current partner-identity evidence; partner-specific art/audio,
+  browser integration, human quality/legal review, and public-release gates
+  remain open, with no asset or runtime behavior changed.
+
 ## [0.13.29] - 2026-07-28
 
 - Recorded the current stabilization technical provenance boundary across

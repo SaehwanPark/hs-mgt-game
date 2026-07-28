@@ -728,7 +728,6 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
 
----
 # Final Handoff — Phase 8.2 current portrait metadata gates v0.13.19
 
 ## Result
@@ -1179,5 +1178,28 @@ public-release gates remain open; no asset or runtime behavior changed.
 
 - Base: `main` at v0.13.28.
 - Working branch: `feat/stabilization-provenance-audit-v0.13.29`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 regional-affiliation partner identity v0.13.30
+
+## Result
+
+Recorded current host-reported regional-affiliation partner identity fields,
+shared generic/written fallback, and the identity-only unverified/unreleased
+portrait-preview boundary.
+
+## Evidence boundary
+
+The ledger and parity test pass for current partner-identity evidence. No
+partner-specific visual/audio asset, browser-native regional-affiliation route,
+runtime authority path, private intent, or human identity/quality/legal,
+educational, or public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.29.
+- Working branch: `feat/regional-affiliation-partner-identity-v0.13.30`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.

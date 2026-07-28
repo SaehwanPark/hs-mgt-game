@@ -2933,3 +2933,13 @@ runtime-generated, with registry, release-manifest, credits, and no-new-asset
 checks. Unverified portrait previews remain unreleased. Keep legal clearance,
 training-data provenance, human quality, and public-release decisions open even
 when the technical audit is green.
+
+## Phase 40: Separate partner identity from portrait promotion (2026-07-28)
+
+Regional-affiliation host projections already expose a partner name, condition,
+stage, and status, and the shared renderer can provide a generic actor and
+written fallback. That is enough to record current identity treatment, but not
+enough to promote the `affiliation-partner-executive` portrait preview or claim
+browser-native partner presentation. Keep identity decoration, partner-specific
+visual/audio work, provenance, legal review, and human identity/quality review
+as separate gates.

@@ -1899,3 +1899,36 @@ unreleased portrait-preview boundary.
   public-release claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12 regional-affiliation partner identity v0.13.30
+
+## Scope
+
+Record the current regional-affiliation partner identity treatment without
+promoting an unverified portrait preview or claiming browser-native coverage.
+
+## Target slice
+
+- Join host-reported partner name, condition, stage, and status with the
+  existing actor-family/generic fallback, written equivalent, and
+  identity-only portrait-preview boundary.
+- Close only current partner-identity evidence while retaining partner-specific
+  art/audio, browser integration, provenance, legal, human-quality, and
+  public-release gates.
+
+## Sources and expected files
+
+- `src/mcp/campaign_coverage.rs`, `gui/actor-families.mjs`,
+  `gui/app.mjs`, portrait inventory/generation metadata, and existing
+  campaign presentation and asset-need ledgers/tests.
+- New partner-identity ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive contract/QA/
+  handoff records.
+
+## Non-goals and validation
+
+- Do not add or promote partner art, portraits, audio, routes, screenshots,
+  runtime fields, persistence, instructor views, authority paths, or human,
+  legal, educational, or public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
