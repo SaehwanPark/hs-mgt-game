@@ -38,7 +38,7 @@
         "operational-regulatory-review": "PlayerObservation.policy_bullets / annual_policy_review",
         "operational-community-trust-concern": "PlayerObservation.community_trust_summary",
         "operational-financial-distress": "PlayerObservation.monthly_operating_margin + PlayerObservation.cash_runway_signal",
-        "operational-recovery": "PlayerObservation.monthly_operating_margin",
+        "operational-recovery": "PlayerObservation.monthly_operating_margin + explicit visible recovery text",
         "operational-uncertain-stale-intelligence": "PlayerObservation.intel_gaps / PlayerObservation.prior_access_revision"
       },
       "evidence": [

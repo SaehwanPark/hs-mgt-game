@@ -135,7 +135,7 @@ const OPERATIONAL_OVERLAY_SET = Object.freeze([
     glyph: "↗",
     marker_shape: "ascending-mark badge",
     non_color_pattern: "ascending marks with ↗ glyph and text label",
-    triggering_visible_field: "ReadOnlyObservation.operations.margin / visible monthly operating result",
+    triggering_visible_field: "PlayerObservation.monthly_operating_margin + explicit visible recovery text",
     text_equivalent: "Operational recovery; visible monthly result is reported",
     display_priority: 50,
   }),

@@ -42,8 +42,9 @@ raw; operational overlays remain optional labels over the same host projection.
 - A condition is eligible when the relevant `PlayerObservation` field is
   present and explicitly indicates the catalog category; no new threshold is
   introduced unless the field already has a visible categorical value.
-- Positive monthly margin can support the existing “Operational recovery”
-  presentation because it is a direct visible result, not a prediction.
+- Positive monthly margin supports the existing “Operational recovery”
+  presentation only when explicit visible recovery text is present; the label
+  is not inferred from a raw positive number alone.
 - Project and payer/regulatory categories can bind only when their visible text
   explicitly contains the category signal; absence preserves the current
   no-overlay behavior.

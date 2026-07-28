@@ -373,12 +373,26 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
     .map(|items| items.join(" "))
     .unwrap_or_default()
     .to_ascii_lowercase();
-  let completion_text = format!("{project_text} {market_text} {policy_text} {annual_review_text}");
+  let project_completion_visible = std::iter::once(observation.in_flight_projects.as_str())
+    .chain(observation.market_bullets.iter().map(String::as_str))
+    .chain(observation.policy_bullets.iter().map(String::as_str))
+    .chain(
+      observation
+        .annual_policy_review
+        .iter()
+        .flatten()
+        .map(String::as_str),
+    )
+    .any(|line| {
+      let line = line.to_ascii_lowercase();
+      line.contains("project") && line.contains("complet")
+    });
 
   if observation
     .workforce_trust_summary
     .to_ascii_lowercase()
-    .contains("strained")
+    .trim_start()
+    .starts_with("strained")
   {
     overlays.push(operational_overlay(
       "operational-staffing-constraint",
@@ -447,7 +461,7 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
       "Delayed project; visible timing/status is reported without a hidden cause",
     ));
   }
-  if completion_text.contains("project") && completion_text.contains("complet") {
+  if project_completion_visible {
     overlays.push(operational_overlay(
       "operational-project-completion",
       "Project completion",
@@ -472,7 +486,12 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
       "Payer or network change; visible market signal is reported",
     ));
   }
-  if observation.annual_policy_review.is_some() || policy_text.contains("regulatory") {
+  if observation
+    .annual_policy_review
+    .as_ref()
+    .is_some_and(|items| !items.is_empty())
+    || policy_text.contains("regulatory")
+  {
     overlays.push(operational_overlay(
       "operational-regulatory-review",
       "Regulatory review",
@@ -515,13 +534,17 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
       "Financial distress; visible cash/runway signal is reported",
     ));
   }
-  if observation.monthly_operating_margin > 0 {
+  if observation.monthly_operating_margin > 0
+    && (market_text.contains("recovery")
+      || policy_text.contains("recovery")
+      || annual_review_text.contains("recovery"))
+  {
     overlays.push(operational_overlay(
       "operational-recovery",
       "Operational recovery",
       observation.monthly_operating_margin.to_string(),
       "reported margin",
-      "PlayerObservation.monthly_operating_margin",
+      "PlayerObservation.monthly_operating_margin + explicit visible recovery text",
       "Operational recovery; visible monthly result is reported",
     ));
   }
@@ -635,7 +658,8 @@ mod tests {
       in_flight_projects: "tower (delayed, month 2 of 12)".to_string(),
       cash_runway_signal: CashRunwaySignal::Strained,
       market_bullets: vec![
-        "Commercial payer/network change and project completed signal".to_string(),
+        "Commercial payer/network change, project completed, and operational recovery signal"
+          .to_string(),
       ],
       policy_bullets: vec!["Regulatory review reported".to_string()],
       annual_policy_review: None,

@@ -1888,7 +1888,7 @@ occurred, predict what will happen, or rank a strategy.
 | regulatory review | Visible regulatory policy bullet or annual review exists | No overlay when absent | No legal/compliance conclusion |
 | community trust | `PlayerObservation.community_trust_summary` is `watch` | No overlay for stable/absent status | No population judgment |
 | financial distress | Visible negative margin or strained cash runway | No overlay when neither is present | No solvency prediction |
-| operational recovery | Visible monthly margin is positive | No overlay when non-positive | No durable recovery claim |
+| operational recovery | Positive monthly margin plus explicit visible recovery text | No overlay when either is absent | No durable recovery claim |
 | uncertain/stale intelligence | Visible information gaps or prior access revision exists | No overlay when both are absent | No probability/truth estimate |
 
 ## Visual, Motion, and Audio Semantics

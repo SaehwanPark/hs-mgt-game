@@ -103,6 +103,7 @@ class Phase11LiveOperationalOverlayTests(unittest.TestCase):
       "PlayerObservation.policy_bullets / annual_policy_review",
       "PlayerObservation.community_trust_summary",
       "PlayerObservation.monthly_operating_margin + PlayerObservation.cash_runway_signal",
+      "PlayerObservation.monthly_operating_margin + explicit visible recovery text",
     ):
       self.assertIn(source, regional)
 
