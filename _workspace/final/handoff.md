@@ -729,6 +729,31 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Visual/audio Phase 11.1 current screenshot-surface contract v0.13.17
+
+## Result
+
+Recorded the current supported actor-visible screenshot surface in the Phase
+11.1 ledger. The contract covers the executive desktop shell,
+briefing/regional board, deterministic regional scene, decision/consequence
+views, and resolution/history/replay/debrief views.
+
+## Evidence boundary
+
+Deterministic SVG, structural, live-handoff, accessibility, audio, playtest,
+and local browser smoke evidence pass. The browser viewport was inspected after
+starting a competitive session but was not persisted or hashed as a golden
+raster artifact. Full-campaign screenshots, cross-browser/device capture,
+pixel-level quality, accessibility quality, and human review remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.16.
+- Working branch: `feat/visual-audio-phase11-screenshot-surface-v0.13.17`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Visual/audio Phase 11.1 current asset-registry coverage v0.13.16
 
 ## Result

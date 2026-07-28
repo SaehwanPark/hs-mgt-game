@@ -1364,6 +1364,50 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 11.1 current screenshot-surface contract v0.13.17
+
+## Scope
+
+Continue the roadmap's screenshot gate with a bounded contract for the current
+supported actor-visible GUI surface. The local browser smoke path is evidence
+of live composition, while deterministic SVG and structural tests remain the
+repeatable regression boundary.
+
+## Target slice
+
+- Record the executive desktop shell, briefing/regional board, deterministic
+  regional scene, decision/consequence views, and
+  resolution/history/replay/debrief views.
+- Link each surface to its GUI source, deterministic/structural/live-handoff
+  tests, and local browser smoke evidence.
+- Close only current supported screenshot-surface evidence; keep full-campaign
+  raster goldens, cross-browser/device capture, pixel-level quality,
+  accessibility quality, and human review open.
+
+## Sources and expected files
+
+- `gui/index.html`, `gui/app.mjs`, `gui/regional-board.mjs`, existing GUI
+  surface modules, and the local loopback browser route.
+- `tests/test_phase11_campaign_coverage.py`, the regional SVG snapshot test,
+  structural GUI tests, live handoff tests, and playtest/accessibility/audio
+  checks.
+- The Phase 11.1 ledger, roadmap/spec/architecture/changelog/lessons,
+  version projections, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add PNG/JPEG goldens, a browser dependency, screenshot uploads,
+  telemetry, new campaign states, runtime transitions, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
+## Evidence boundary
+
+The local browser capture is inspected but not persisted or hashed. The ledger
+does not claim that a single desktop viewport establishes full-campaign
+coverage, pixel-level quality, accessibility quality, device compatibility, or
+human comprehension.
+
 # Request Summary — Visual/audio Phase 11.1 current asset-registry coverage v0.13.16
 
 ## Scope

@@ -2,7 +2,7 @@
   "schema_version": "competitive-campaign-coverage-ledger-v1",
   "status": "bounded-technical-ledger",
   "campaign": "competitive-regional-v1",
-  "scope": "Committed presentation catalogs, bounded first-month continuity, and the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint bindings; not full-campaign or screenshot completion.",
+  "scope": "Committed presentation catalogs, bounded first-month continuity, the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint bindings, and the current supported screenshot surface; not full-campaign raster or screenshot completion.",
   "catalogs": {
     "facilities": {
       "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
@@ -185,6 +185,100 @@
     "evidence": [
       "Current visual and audio registries pass schema, provenance, license, path, hash, security, and approval validation.",
       "The release manifest covers every current non-null release path and credits projections are generated deterministically."
+    ]
+  },
+  "screenshot_coverage": {
+    "status": "complete-current-supported-surface",
+    "schema": "current-gui-screenshot-surface-v1",
+    "surface_sources": [
+      {
+        "surface": "executive-desktop-shell",
+        "source": "gui/index.html: id=\"desktop\"",
+        "visible_regions": [
+          "executive metrics",
+          "start or load a campaign",
+          "accessibility and settings",
+          "first-month path"
+        ]
+      },
+      {
+        "surface": "briefing-and-regional-board",
+        "source": "gui/app.mjs: renderPresentation",
+        "visible_regions": [
+          "executive briefing",
+          "regional market",
+          "selected system and facilities",
+          "operational overlays",
+          "consequence links"
+        ]
+      },
+      {
+        "surface": "deterministic-regional-scene",
+        "source": "gui/regional-board.mjs: presentationFixtureToSceneData",
+        "visible_regions": [
+          "actor-visible SVG board",
+          "source-aware entity selection",
+          "text-equivalent unknown content"
+        ]
+      },
+      {
+        "surface": "decision-and-consequence-views",
+        "source": "gui/index.html: id=\"action-region\"",
+        "visible_regions": [
+          "contextual action panel",
+          "pending processes",
+          "monthly result",
+          "optional audio"
+        ]
+      },
+      {
+        "surface": "resolution-history-replay-and-debrief",
+        "source": "gui/app.mjs: renderResolution",
+        "visible_regions": [
+          "resolution sequence",
+          "committed history",
+          "replay metadata",
+          "terminal debrief"
+        ]
+      }
+    ],
+    "deterministic_evidence": {
+      "svg_snapshot": "tests/test_regional_board.py: test_static_board_svg_snapshot_is_stable",
+      "structural_gui": [
+        "tests/test_gui_static_desktop.py",
+        "tests/test_gui_campaign_coverage.py",
+        "tests/test_gui_first_month.py",
+        "tests/test_gui_resolution.py",
+        "tests/test_gui_accessibility.py",
+        "tests/test_gui_audio.py"
+      ],
+      "live_handoff": [
+        "tests/test_phase11_live_history.py",
+        "tests/test_phase11_live_replay.py",
+        "tests/test_phase11_live_checkpoint.py",
+        "tests/test_phase11_live_debrief.py"
+      ],
+      "playtest_surface": "tests/test_gui_playtest.py: test_readiness_contract_and_controls_are_present"
+    },
+    "browser_smoke": {
+      "status": "inspected-local-only",
+      "route": "http://127.0.0.1:7878/",
+      "action": "Start competitive session",
+      "observed_on": "2026-07-28",
+      "result": "The live viewport rendered executive metrics, briefing, campaign controls, accessibility settings, and the first-month path together.",
+      "capture_policy": "A viewport screenshot was inspected in the local browser and is not persisted as a golden raster artifact."
+    },
+    "limits": [
+      "No full-campaign state-by-state screenshot suite is claimed.",
+      "No committed PNG/JPEG golden, cross-browser matrix, or device capture is claimed.",
+      "Structural and SVG evidence does not establish pixel-level visual quality, accessibility quality, or human comprehension.",
+      "Future campaign placement/use, asset/audio quality, and human review remain separate gates."
+    ],
+    "test_source": "tests/test_phase11_campaign_coverage.py",
+    "evidence": [
+      "All named current surfaces resolve to existing GUI sources and focused regression/structural tests.",
+      "The deterministic regional SVG snapshot remains stable and the local browser smoke route renders the current actor-visible desktop.",
+      "The browser remains read-only for simulation authority; screenshot inspection does not create or infer hidden state."
     ]
   },
   "event_cue_coverage": {

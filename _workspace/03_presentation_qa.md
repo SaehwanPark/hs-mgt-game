@@ -2803,3 +2803,40 @@ accessibility, usability, and human review remain open.
 - `python3 -m unittest tests.test_asset_registry` — pass.
 - `python3 -m unittest tests.test_phase11_campaign_coverage` — pass.
 - Full asset, release-manifest, security, credits, and visual/audio checks — pass.
+
+# Presentation Domain QA — Phase 11.1 current screenshot-surface contract v0.13.17
+
+## Status
+
+`pass` for bounded current screenshot-surface technical QA. This does not
+approve full-campaign raster coverage, cross-browser/device compatibility,
+pixel-level visual quality, accessibility quality, or human comprehension.
+
+## Reviewed inputs and findings
+
+- Pass: `screenshot_coverage` records five current actor-visible surface
+  groups, exact GUI source markers, regression/structural/live-handoff tests,
+  and explicit screenshot limits.
+- Pass: the local browser started a competitive session and rendered executive
+  metrics, briefing, campaign controls, accessibility settings, and the
+  first-month path together; this was inspected as smoke evidence only.
+- Pass: the deterministic regional SVG snapshot and source/DOM checks remain
+  repeatable; no client authority, hidden-state exposure, or external asset
+  boundary was changed.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+No raster golden, cross-browser/device capture, state-by-state full-campaign
+suite, pixel-level quality review, accessibility-quality review, usability
+study, asset/audio quality approval, or human evaluation was performed.
+
+## Verification evidence
+
+- Focused GUI, regional-board, campaign-ledger, accessibility, audio, and
+  playtest tests — pass.
+- The local browser smoke capture was visually inspected and intentionally not
+  persisted or hashed.

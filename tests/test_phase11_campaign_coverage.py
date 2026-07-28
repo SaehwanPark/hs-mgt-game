@@ -11,6 +11,7 @@ LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json
 VISUAL_REGISTRY = ROOT / "assets" / "registry" / "visual-assets.json"
 AUDIO_REGISTRY = ROOT / "assets" / "registry" / "audio-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
+HTML = ROOT / "gui" / "index.html"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
@@ -179,6 +180,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
     cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
     cls.audio_registry = json.loads(AUDIO_REGISTRY.read_text(encoding="utf-8"))
     cls.resolution = RESOLUTION.read_text(encoding="utf-8")
+    cls.html = HTML.read_text(encoding="utf-8")
     cls.app = (ROOT / "gui" / "app.mjs").read_text(encoding="utf-8")
     cls.adapter = (ROOT / "gui" / "host-adapter.mjs").read_text(encoding="utf-8")
     cls.server = (ROOT / "src" / "gui_server.rs").read_text(encoding="utf-8")
@@ -228,7 +230,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -290,6 +292,41 @@ console.log(JSON.stringify(resolved));
     ):
       self.assertIn(marker, source)
     self.assertIn("null release paths", coverage["release_boundary"]["rule"])
+
+  def test_screenshot_coverage_matches_current_supported_surface(self):
+    coverage = self.ledger["screenshot_coverage"]
+    self.assertEqual(coverage["status"], "complete-current-supported-surface")
+    self.assertEqual(coverage["schema"], "current-gui-screenshot-surface-v1")
+    self.assertGreaterEqual(len(coverage["surface_sources"]), 5)
+    source_text = {
+      "gui/index.html": self.html,
+      "gui/app.mjs": self.app,
+      "gui/regional-board.mjs": (ROOT / "gui" / "regional-board.mjs").read_text(encoding="utf-8"),
+    }
+    for surface in coverage["surface_sources"]:
+      source_path, marker = surface["source"].split(": ", 1)
+      path = ROOT / source_path
+      self.assertTrue(path.is_file(), surface["source"])
+      content = source_text.get(source_path, path.read_text(encoding="utf-8"))
+      self.assertIn(marker, content, surface["source"])
+      self.assertTrue(surface["visible_regions"])
+    snapshot_path, snapshot_marker = coverage["deterministic_evidence"]["svg_snapshot"].split(": ", 1)
+    self.assertTrue((ROOT / snapshot_path).is_file())
+    self.assertIn(snapshot_marker, (ROOT / snapshot_path).read_text(encoding="utf-8"))
+    for test_path in (
+      coverage["deterministic_evidence"]["structural_gui"]
+      + coverage["deterministic_evidence"]["live_handoff"]
+    ):
+      self.assertTrue((ROOT / test_path).is_file(), test_path)
+    playtest_path, playtest_marker = coverage["deterministic_evidence"]["playtest_surface"].split(": ", 1)
+    self.assertTrue((ROOT / playtest_path).is_file())
+    self.assertIn(playtest_marker, (ROOT / playtest_path).read_text(encoding="utf-8"))
+    browser = coverage["browser_smoke"]
+    self.assertEqual(browser["status"], "inspected-local-only")
+    self.assertEqual(browser["route"], "http://127.0.0.1:7878/")
+    self.assertEqual(browser["action"], "Start competitive session")
+    self.assertIn("not persisted", browser["capture_policy"])
+    self.assertIn("pixel-level visual quality", " ".join(coverage["limits"]))
 
   def test_current_operational_overlay_bindings_cover_the_registered_catalog(self):
     coverage = self.ledger["catalogs"]["operational_overlays"]
@@ -620,7 +657,7 @@ console.log(JSON.stringify(resolved));
       "Current live replay visual continuity covered. Evidence:": "x",
       "Unknown content fallbacks tested.": "x",
       "Current tracked visual/audio asset-registry coverage is 100%. Evidence:": "x",
-      "Full campaign screenshot suite passes.": " ",
+      "Current supported screenshot-surface contract passes. Evidence:": "x",
     }
     actual = {label: state for state, label in re.findall(r"^- \[([ x])\] (.+)$", self.phase11_1, re.MULTILINE)}
     self.assertEqual(actual, {label: state for label, state in expected.items()})

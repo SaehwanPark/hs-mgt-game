@@ -2759,3 +2759,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Define the denominator before closing registry coverage and keep
   current document/runtime registration separate from release-file promotion,
   campaign placement, and human quality gates.
+
+## Phase 27: Treat local screenshot inspection as bounded evidence
+
+- Context: The current GUI can render an actor-visible executive desktop in a
+  local browser, and the repository already has deterministic SVG and
+  structural presentation checks, but there is no committed raster screenshot
+  runner or cross-browser/device capture matrix.
+- Risk: Closing a “full campaign screenshot suite” merely because one local
+  viewport renders could imply pixel-level quality, full-state coverage,
+  accessibility, or human comprehension that has not been evaluated.
+- Resolution: Record `screenshot_coverage` as a current supported-surface
+  contract, link each named surface to its source and focused tests, and keep
+  the browser viewport capture as inspection-only evidence without hashing or
+  persisting it as a golden artifact.
+- Prevention: Separate source/structural/SVG regression, local smoke capture,
+  raster goldens, browser/device compatibility, and human visual review in
+  both the ledger and roadmap before checking a screenshot item.

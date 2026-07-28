@@ -2234,11 +2234,13 @@ current competitive terminal debrief-view handoff evidence in v0.13.13, and
 current in-memory checkpoint visual-continuity evidence in v0.13.14, and
 current live replay visual-continuity evidence in v0.13.15, and
 current tracked visual/audio asset-registry completeness in v0.13.16, and
+current supported screenshot-surface evidence in v0.13.17, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use, event taxonomy beyond the current projection, durable save/load/replay
-continuity, performance, and screenshot gates remain open.
+continuity, performance, full-campaign raster screenshots, and human visual
+quality gates remain open.
 
 ### Scope
 
@@ -2282,7 +2284,12 @@ continuity, performance, and screenshot gates remain open.
   `scripts/validate_assets.py`, and `tests/test_asset_registry.py`; future
   campaign inventory, placement/use, quality, and screenshot gates remain
   open.
-- [ ] Full campaign screenshot suite passes.
+- [x] Current supported screenshot-surface contract passes. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_campaign_coverage.py`, the deterministic regional SVG
+  snapshot, and the local browser smoke route; full-campaign raster goldens,
+  cross-browser/device capture, pixel-level quality, and human review remain
+  open.
 
 ### v0.13.6 facility asset coverage evidence
 
@@ -2421,6 +2428,30 @@ continuity, performance, and screenshot gates remain open.
 - This closes only current tracked registry completeness. Future campaign
   assets, placement/use, asset/audio quality, accessibility, screenshots, and
   human review remain open.
+
+### v0.13.17 current supported screenshot-surface evidence
+
+- `screenshot_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records five
+  current actor-visible surfaces: the executive desktop shell, briefing and
+  regional board, deterministic regional scene, decision/consequence views,
+  and resolution/history/replay/debrief views.
+- `tests/test_phase11_campaign_coverage.py` requires each named GUI source to
+  exist, links the deterministic regional SVG hash snapshot to its regression
+  test, and checks the current structural, live-handoff, accessibility,
+  audio, and playtest evidence paths. A local browser smoke capture confirmed
+  the live executive desktop composition after starting a competitive session.
+- The browser capture is inspection evidence only. It is not persisted or
+  hashed as a golden raster artifact, and this slice does not claim full
+  campaign screenshot coverage, cross-browser/device capture, pixel-level
+  visual quality, accessibility quality, or human comprehension.
+
+### v0.13.17 bounded screenshot evidence and limits
+
+- This slice closes only the current supported screenshot-surface contract.
+  Full campaign placement/use, state-by-state raster goldens, device/browser
+  matrices, accessibility quality, asset/audio quality, usability, and human
+  review remain separately gated.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.17] - 2026-07-28
+
+- Recorded current supported screenshot-surface evidence for the actor-visible
+  executive desktop, regional scene, decision/consequence, and
+  resolution/history/replay/debrief views.
+- Linked the ledger to deterministic SVG, structural, live-handoff,
+  accessibility, audio, playtest, and local browser smoke evidence while
+  keeping full-campaign raster, cross-browser/device, pixel-quality, and
+  human-review gates open; no runtime behavior changed.
+
 ## [0.13.16] - 2026-07-28
 
 - Recorded current tracked visual/audio asset-registry completeness: 38 visual
