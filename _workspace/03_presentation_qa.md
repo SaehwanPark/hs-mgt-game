@@ -2941,3 +2941,37 @@ educational usability, and public-release approval remain open.
 - `python3 -m unittest tests.test_phase13_technical_coverage` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
+
+# Presentation Domain QA — Phase 12 campaign-specific presentation inventory v0.13.21
+
+## Status
+
+`pass` for bounded current campaign-inventory QA only. No campaign-specific
+visual/audio completion, human quality, educational usability, or instructor
+true-state approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: both current campaign IDs retain the shared briefing, metric, actor,
+  process, decision, history/replay, debrief, and optional-audio sources.
+- Pass: the source parity test verifies host/browser markers, written
+  equivalents, supporting accessibility/audio/provenance paths, and the
+  read-only host-adapter boundary.
+- Pass: the current abstract/stage inventory requires no new map or facility
+  asset; future campaign-specific needs remain explicitly listed.
+
+## Required fixes
+
+None for this bounded inventory contract.
+
+## Evidence limits
+
+Tutorial, pressure-state taxonomy, stage-specific art/audio, replay/debrief
+implementation, instructor views, human comprehension, educational usability,
+and future provenance review remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_campaign_presentation_coverage` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.

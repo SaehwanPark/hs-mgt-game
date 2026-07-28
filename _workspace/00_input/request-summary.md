@@ -1364,6 +1364,40 @@ handoff as a dedicated coverage record.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
 
+# Request Summary — Visual/audio Phase 12 campaign-specific presentation inventory v0.13.21
+
+## Scope
+
+Record the current campaign-specific presentation inventory for the existing
+`stabilization-v1` and `regional-affiliation-v1` campaign-coverage surface.
+
+## Target slice
+
+- Bind the current campaign IDs and shared briefing, metric, actor, process,
+  decision, history/replay, debrief, and optional-audio host/browser sources.
+- Record the current abstract/stage boundary that requires no new map or
+  facility asset, while preserving open tutorial, pressure-state, stage-art,
+  campaign-audio, replay/debrief, and human-review work.
+- Keep the slice design/evidence-only: no runtime, asset, audio, authority,
+  screenshot, true-state, or educational behavior changes.
+
+## Sources and expected files
+
+- `src/mcp/campaign_coverage.rs`, `src/mcp/session.rs`, `src/mcp/server.rs`,
+  and `gui/app.mjs` existing campaign-coverage contract.
+- `tests/test_gui_campaign_coverage.py`, accessibility/audio tests, asset
+  validators, and the new Phase 12 campaign presentation ledger/test.
+- Roadmap/spec/architecture/changelog/lessons, version projections, generated
+  credits, and additive presentation contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not create campaign art/audio, tutorial or pressure-state mechanics,
+  stage animation, durable replay, instructor true-state views, screenshots,
+  browser dependencies, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.
+
 # Request Summary — Phase 13.1 current technical-release coverage v0.13.20
 
 ## Scope

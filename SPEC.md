@@ -6088,6 +6088,40 @@ Deferred / Non-Goals:
 - No release artifact, campaign content, screenshot runner, browser engine,
   durable storage, human evaluation, or authority path was added.
 
+### Visual/audio Phase 12 current campaign-specific presentation inventory (v0.13.21)
+
+Status: Complete for the current campaign-coverage inventory only; campaign-
+specific implementation, human review, and educational usability remain
+separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-campaign-presentation-coverage.json` for the
+  current `stabilization-v1` and `regional-affiliation-v1` campaign IDs,
+  shared briefing/metric/actor/process/decision/history/replay/debrief and
+  optional-audio surfaces, source markers, and campaign-specific boundaries.
+- Added `tests/test_phase12_campaign_presentation_coverage.py` to require
+  source parity, written-equivalent fields, supporting evidence paths, and
+  the read-only host-adapter boundary.
+- Updated the Phase 12.1 and 12.2 roadmap records and synchronized the
+  presentation contract, QA, changelog, lessons, and version projections;
+  no runtime, asset, audio, or authority behavior changed.
+
+Not Yet Done:
+
+- Stabilization tutorial/pressure/audio/debrief implementation, affiliation
+  stage-specific visual/audio/replay/debrief implementation, provenance and
+  accessibility review beyond existing contracts, and Phase 12.3 instructor
+  views remain open.
+
+Deferred / Non-Goals:
+
+- No new map or facility asset was added because neither current abstract or
+  stage contract requires one; this does not preclude future campaign art.
+- No campaign content, simulation transition, screenshot runner, browser
+  dependency, true-state view, counterfactual, educational claim, or human
+  approval was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

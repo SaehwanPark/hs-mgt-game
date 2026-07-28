@@ -978,3 +978,27 @@ educational readiness, and release artifacts remain open.
 - Working branch: `feat/technical-release-coverage-v0.13.20`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 campaign-specific presentation inventory v0.13.21
+
+## Result
+
+Recorded the current campaign-specific presentation inventory for
+`stabilization-v1` and `regional-affiliation-v1`, including their shared
+briefing, metric, actor, process, decision, history/replay, debrief, and
+optional-audio surfaces.
+
+## Evidence boundary
+
+The ledger and parity test pass for the current source inventory. The current
+abstract/stage contracts require no new map or facility asset, but tutorial,
+pressure-state, stage-specific art/audio, replay/debrief, instructor, human,
+and educational work remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.20.
+- Working branch: `feat/campaign-presentation-inventory-v0.13.21`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

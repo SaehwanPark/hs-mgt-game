@@ -765,6 +765,16 @@ source-checkout contract: product/content readiness, durable persistence,
 cross-browser/device certification, human quality/accessibility, educational
 review, and public-release approval are not inferred.
 
+The v0.13.21 Phase 12 slice records the current campaign-specific presentation
+inventory for stabilization and regional affiliation. The ledger binds their
+shared campaign-coverage briefing, metrics, actors, processes, decisions,
+history/replay, debrief, and optional-audio surfaces to existing host/browser
+sources and records that the current abstract/stage contracts require no new
+map or facility asset. This is an inventory boundary only; campaign-specific
+tutorial, pressure, stage-art, audio, replay/debrief, instructor, and human
+review work remains open. No runtime, asset, audio, or authority boundary
+changes.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

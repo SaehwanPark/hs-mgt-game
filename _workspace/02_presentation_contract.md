@@ -2321,3 +2321,34 @@ source path, command, pass marker, and explicit limits. Product/content
 completion, full-campaign raster, durable save/load/replay, additional browser
 engines/real devices, human quality/accessibility/legal review, educational
 readiness, and public-release approval remain open.
+
+# Presentation Contract — Phase 12 campaign-specific presentation inventory v0.13.21
+
+## Contract status
+
+Complete for the current campaign-coverage inventory only. This is not
+campaign-specific art/audio implementation, human review, educational
+usability, or Phase 12.3 instructor-view approval.
+
+## Source and visible behavior
+
+- The ledger binds `stabilization-v1` and `regional-affiliation-v1` to the
+  existing shared briefing, metric, actor, process, decision, history/replay,
+  debrief, and optional-audio host/browser presentation surfaces.
+- The current abstract stabilization and stage-based affiliation contracts
+  require no new map or facility asset; current written equivalents remain
+  visible and source-bound.
+
+## Fallback, authority, and provenance
+
+Campaign coverage remains a read-only host-adapter projection. The inventory
+does not enter simulation state, commands, transitions, history, replay,
+debrief facts, or client authority. Existing asset/audio provenance checks
+remain the relevant technical gates; no new asset was introduced.
+
+## Verification and limits
+
+`tests/test_phase12_campaign_presentation_coverage.py` requires source parity,
+written-equivalent fields, supporting evidence paths, and the host-adapter
+boundary. Tutorial, pressure-state, stage-specific art/audio, replay/debrief,
+instructor, human comprehension, and educational usability remain open.
