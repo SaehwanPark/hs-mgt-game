@@ -2971,3 +2971,12 @@ not actor-visible forecasts. Record status and consequence boundaries without
 turning hidden inputs into visual controls or claims about future integration;
 keep browser integration, state-specific art/audio, replay/debrief, and human
 review separate.
+
+## Phase 44: Keep affiliation audio tied to visible commitments (2026-07-28)
+
+The reusable `affiliation_negotiation` state and
+`event.affiliation-milestone` cue already have visible triggers, text
+equivalents, and audio-off fallback. Record eligibility without turning audio
+into an agreement, severity, or outcome channel. Keep direct campaign
+integration, new audio, provenance, human listening, and public release
+separate.

@@ -1290,7 +1290,8 @@ At each phase gate, explicitly decide what will not be built next.
    current regional-affiliation partner-identity evidence at v0.13.30, and
    current regional-affiliation negotiation-stage evidence at v0.13.31, and
    current regional-affiliation commitment/review evidence at v0.13.32, and
-   current regional-affiliation integration-state evidence at v0.13.33.
+   current regional-affiliation integration-state evidence at v0.13.33, and
+   current regional-affiliation audio-motif evidence at v0.13.34.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

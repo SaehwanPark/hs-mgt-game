@@ -3023,7 +3023,12 @@ remains open.
   host integration process/decision, visible outcome statuses, and written
   consequence boundary are covered while browser integration and state art
   remain open.
-- [ ] Affiliation audio motif completed.
+- [x] Current regional-affiliation audio motif recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-audio-motif.json`
+  and `tests/test_phase12_regional_affiliation_audio_motif.py`; reusable
+  affiliation/negotiation music, explicit milestone cue, visible routing, and
+  written/audio-off fallback are covered while direct campaign integration and
+  human listening review remain open.
 - [ ] Stage-transition sequence completed.
 - [ ] Replay and debrief views updated.
 - [ ] Provenance audit passes.
@@ -3286,6 +3291,27 @@ Deferred / Non-Goals:
   validity, causal certainty, or future integration trajectory is exposed.
 - Optional audio remains a visible-only cue and cannot establish integration,
   decline, severity, or outcome certainty.
+
+### v0.13.34 current regional-affiliation audio motif
+
+- `docs/evaluation/phase12-regional-affiliation-audio-motif.json` records the
+  reusable `affiliation_negotiation` music state, visible trigger and text
+  equivalent, explicit `event.affiliation-milestone` cue, routing, generated
+  properties, written fallback, and no-release-file boundary.
+- `tests/test_phase12_regional_affiliation_audio_motif.py` checks source
+  markers, IDs and properties, visible routing, audio-off and live-GUI
+  boundaries, and the no-new-asset decision.
+- This closes only current reusable audio-motif evidence; direct browser-native
+  campaign integration, new or stage-specific content, and human listening,
+  quality, accessibility, legal, educational, and public-release review remain
+  open.
+
+Deferred / Non-Goals:
+
+- No recorded/release audio, new stem, cue, route, runtime field, registry
+  entry, screenshot, persistence, instructor view, or authority path is added.
+- Audio remains optional and visible-only; it cannot imply agreement, severity,
+  success, private intent, or future outcome.
 
 ### Exit criteria
 

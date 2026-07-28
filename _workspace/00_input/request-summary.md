@@ -1900,6 +1900,41 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12 regional-affiliation audio motif v0.13.34
+
+## Scope
+
+Record the current reusable affiliation-audio motif for
+`regional-affiliation-v1` without claiming direct browser-native campaign
+audio integration or adding new audio content.
+
+## Target slice
+
+- Bind the existing `affiliation_negotiation` music state and
+  `event.affiliation-milestone` cue to visible affiliation/partner/coalition/
+  negotiation/commitment context and committed milestone text.
+- Record generated-audio properties, visible triggers, written equivalent,
+  audio-off fallback, competitive-only live-GUI boundary, and no-new-asset
+  decision.
+
+## Sources and expected files
+
+- `gui/music-stem-contract.mjs`, `gui/audio-cue-contract.mjs`,
+  `gui/audio.mjs`, `gui/audio-catalog.json`, `src/mcp/resolution.rs`, and
+  existing campaign-presentation, audio, and asset-need ledgers/tests.
+- New audio-motif ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive
+  contract/QA/handoff records.
+
+## Non-goals and validation
+
+- Do not add recorded/release audio, new stems/cues/routes/runtime fields,
+  registry entries, screenshots, persistence, instructor views, authority
+  paths, direct campaign integration, hidden meaning, human listening, or
+  public-release claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.
+
 # Request Summary — Visual/audio Phase 12 regional-affiliation partner identity v0.13.30
 
 ## Scope

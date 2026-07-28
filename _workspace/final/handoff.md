@@ -728,6 +728,29 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
 
+---
+# Final Handoff — Phase 12 regional-affiliation audio motif v0.13.34
+
+## Result
+
+Recorded the current reusable `affiliation_negotiation` music state,
+`event.affiliation-milestone` cue, visible triggers, generated-audio
+properties, and written/audio-off fallback.
+
+## Evidence boundary
+
+The ledger and parity test pass for current motif evidence. No direct
+browser-native campaign audio route, new/stage-specific audio, release file,
+runtime authority path, asset promotion, or human listening/quality,
+accessibility, legal, educational, or public-release claim is introduced.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.33.
+- Working branch: `feat/regional-affiliation-audio-motif-v0.13.34`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
 # Final Handoff — Phase 8.2 current portrait metadata gates v0.13.19
 
 ## Result

@@ -859,6 +859,12 @@ boundary. Resolved integration drag and continuity shock remain outside the
 actor observation; no browser route, asset, hidden state, or authority change
 is introduced.
 
+The v0.13.34 Phase 12 slice records the reusable regional-affiliation audio
+motif: the existing `affiliation_negotiation` music state, explicit committed
+affiliation milestone cue, visible trigger/text-equivalent/fallback contracts,
+and optional generated-audio boundary. It does not add audio content, direct
+browser-native affiliation integration, or change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
