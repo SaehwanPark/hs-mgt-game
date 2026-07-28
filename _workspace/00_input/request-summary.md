@@ -1276,3 +1276,56 @@ Python suite, Rust format/tests/Clippy, release/documentation/asset checks, and
 one presentation QA record. A passing result closes only the bounded Phase
 11.2 low-power-profile evidence item; real-device validation remains explicit
 follow-up evidence.
+
+# Request Summary — Visual/audio Phase 11.1 operational-overlay coverage v0.13.12
+
+## Scope
+
+Continue the visual/audio roadmap with the next technically verifiable unmet
+item: current supported operational-overlay coverage in the live competitive
+regional-world projection. The catalog already contains twelve entries, while
+the host currently binds only five.
+
+## Target slice
+
+- Bind all twelve registered operational-overlay IDs to direct visible
+  `PlayerObservation` fields or explicit visible market/policy/project text.
+- Preserve raw metric overlays, host authority, written equivalents, static
+  reduced-motion behavior, non-color semantics, and generic unknown fallback.
+- Record exact catalog-to-host condition coverage in the Phase 11.1 ledger.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 11.1.
+- `gui/operational-overlays.mjs` and the existing regional-board/browser
+  resolver.
+- `src/mcp/regional_world.rs` and `PlayerObservation` visible fields.
+- `tests/test_phase11_live_operational_overlays.py` and
+  `tests/test_phase11_campaign_coverage.py`.
+
+## Expected files
+
+- `src/mcp/regional_world.rs`
+- `gui/operational-overlays.mjs`
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json`
+- `tests/test_phase11_live_operational_overlays.py`
+- `tests/test_phase11_campaign_coverage.py`
+- `_workspace/02_presentation_contract.md`, `_workspace/03_presentation_qa.md`,
+  `_workspace/106_implementation_plan_visual-audio-phase11-overlay-v0.13.12.md`,
+  and `_workspace/final/handoff.md`.
+- Roadmap, `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md`, `LESSONS.md`, and
+  patch-version projections.
+
+## Non-goals and evidence limits
+
+- Do not add hidden-state thresholds, inferred severity/intent/causality,
+  simulation mechanics, new assets/audio, browser dependencies, persistence,
+  screenshot tooling, or human evaluation.
+- Do not claim full campaign placement/use, screenshot, accessibility, or
+  educational completion from catalog/projection parity.
+
+## Validation target
+
+Focused Rust/browser/ledger tests, full Python/Rust/Clippy checks, release,
+documentation, asset, offline, browser-policy, and visual/audio contract checks.
+The bounded result closes only current supported operational-overlay coverage.

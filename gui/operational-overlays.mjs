@@ -35,8 +35,8 @@ const OPERATIONAL_OVERLAY_SET = Object.freeze([
     glyph: "♙",
     marker_shape: "vertical-hatch badge",
     non_color_pattern: "vertical hatch with ♙ glyph and text label",
-    triggering_visible_field: "ReadOnlyObservation.staffing / PlayerObservation.nurses, physicians, and admins",
-    text_equivalent: "Staffing constraint; visible staffing fields require attention",
+    triggering_visible_field: "PlayerObservation.workforce_trust_summary",
+    text_equivalent: "Staffing constraint; visible staffing status requires attention",
     display_priority: 120,
   }),
   overlay({
@@ -45,8 +45,8 @@ const OPERATIONAL_OVERLAY_SET = Object.freeze([
     glyph: "▤",
     marker_shape: "double-line badge",
     non_color_pattern: "double border with ▤ glyph and text label",
-    triggering_visible_field: "ReadOnlyObservation.capacity / visible facility capacity metrics",
-    text_equivalent: "Capacity constraint; visible capacity metric is constrained",
+    triggering_visible_field: "PlayerObservation capacity fields",
+    text_equivalent: "Capacity constraint; visible capacity fields require attention",
     display_priority: 110,
   }),
   overlay({
@@ -85,8 +85,8 @@ const OPERATIONAL_OVERLAY_SET = Object.freeze([
     glyph: "✓",
     marker_shape: "double-ring badge",
     non_color_pattern: "double ring with ✓ glyph and text label",
-    triggering_visible_field: "ReadOnlyPresentation.latest_transition committed visible effects",
-    text_equivalent: "Project completion; committed visible effect is reported",
+    triggering_visible_field: "PlayerObservation visible project text",
+    text_equivalent: "Project completion; committed visible text is reported",
     display_priority: 80,
   }),
   overlay({

@@ -364,6 +364,56 @@ fn overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOverlay> {
 
 fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOverlay> {
   let mut overlays = Vec::new();
+  let project_text = observation.in_flight_projects.to_ascii_lowercase();
+  let market_text = observation.market_bullets.join(" ").to_ascii_lowercase();
+  let policy_text = observation.policy_bullets.join(" ").to_ascii_lowercase();
+  let annual_review_text = observation
+    .annual_policy_review
+    .as_ref()
+    .map(|items| items.join(" "))
+    .unwrap_or_default()
+    .to_ascii_lowercase();
+  let completion_text = format!("{project_text} {market_text} {policy_text} {annual_review_text}");
+
+  if observation
+    .workforce_trust_summary
+    .to_ascii_lowercase()
+    .contains("strained")
+  {
+    overlays.push(operational_overlay(
+      "operational-staffing-constraint",
+      "Staffing constraint",
+      observation.workforce_trust_summary.clone(),
+      "reported status",
+      "PlayerObservation.workforce_trust_summary",
+      "Staffing constraint; visible staffing status requires attention",
+    ));
+  }
+  if [
+    observation.staffed_beds,
+    observation.outpatient_capacity,
+    observation.emergency_capacity,
+    observation.icu_capacity,
+    observation.obstetrics_capacity,
+    observation.psychiatric_capacity,
+    observation.cardiology_capacity,
+    observation.oncology_capacity,
+    observation.infusion_capacity,
+    observation.neurology_capacity,
+    observation.asc_capacity,
+  ]
+  .iter()
+  .any(|capacity| *capacity <= 0)
+  {
+    overlays.push(operational_overlay(
+      "operational-capacity-constraint",
+      "Capacity constraint",
+      "One or more reported facility capacities are zero or unavailable".to_string(),
+      "reported status",
+      "PlayerObservation capacity fields",
+      "Capacity constraint; visible capacity fields require attention",
+    ));
+  }
   if observation.monthly_unmet_demand > 0 {
     overlays.push(operational_overlay(
       "operational-demand-pressure",
@@ -376,6 +426,7 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
   }
   if !observation.in_flight_projects.trim().is_empty()
     && !observation.in_flight_projects.eq_ignore_ascii_case("none")
+    && !project_text.contains("complet")
   {
     overlays.push(operational_overlay(
       "operational-active-capital-project",
@@ -384,6 +435,68 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
       "reported process",
       "PlayerObservation.in_flight_projects",
       "Active capital project; host-reported project timing is visible",
+    ));
+  }
+  if project_text.contains("delay") {
+    overlays.push(operational_overlay(
+      "operational-delayed-project",
+      "Delayed project",
+      observation.in_flight_projects.clone(),
+      "reported process",
+      "PlayerObservation.in_flight_projects",
+      "Delayed project; visible timing/status is reported without a hidden cause",
+    ));
+  }
+  if completion_text.contains("project") && completion_text.contains("complet") {
+    overlays.push(operational_overlay(
+      "operational-project-completion",
+      "Project completion",
+      "Visible project completion text reported".to_string(),
+      "reported event",
+      "PlayerObservation visible project text",
+      "Project completion; committed visible text is reported",
+    ));
+  }
+  if market_text.contains("payer/network")
+    || market_text.contains("network change")
+    || market_text.contains("payer change")
+    || market_text.contains("carrier change")
+    || market_text.contains("renewal decision")
+  {
+    overlays.push(operational_overlay(
+      "operational-payer-network-change",
+      "Payer/network change",
+      "Visible payer or network signal reported".to_string(),
+      "reported signal",
+      "PlayerObservation.market_bullets",
+      "Payer or network change; visible market signal is reported",
+    ));
+  }
+  if observation.annual_policy_review.is_some() || policy_text.contains("regulatory") {
+    overlays.push(operational_overlay(
+      "operational-regulatory-review",
+      "Regulatory review",
+      if annual_review_text.is_empty() {
+        "Visible regulatory policy signal reported".to_string()
+      } else {
+        annual_review_text.clone()
+      },
+      "reported policy signal",
+      "PlayerObservation.policy_bullets / annual_policy_review",
+      "Regulatory review; visible review text is reported",
+    ));
+  }
+  if observation
+    .community_trust_summary
+    .eq_ignore_ascii_case("watch")
+  {
+    overlays.push(operational_overlay(
+      "operational-community-trust-concern",
+      "Community-trust concern",
+      observation.community_trust_summary.clone(),
+      "reported status",
+      "PlayerObservation.community_trust_summary",
+      "Community-trust concern; visible trust status is reported",
     ));
   }
   if observation.monthly_operating_margin < 0
@@ -402,17 +515,14 @@ fn operational_overlays(observation: &PlayerObservation) -> Vec<RegionalWorldOve
       "Financial distress; visible cash/runway signal is reported",
     ));
   }
-  if observation
-    .community_trust_summary
-    .eq_ignore_ascii_case("watch")
-  {
+  if observation.monthly_operating_margin > 0 {
     overlays.push(operational_overlay(
-      "operational-community-trust-concern",
-      "Community-trust concern",
-      observation.community_trust_summary.clone(),
-      "reported status",
-      "PlayerObservation.community_trust_summary",
-      "Community-trust concern; visible trust status is reported",
+      "operational-recovery",
+      "Operational recovery",
+      observation.monthly_operating_margin.to_string(),
+      "reported margin",
+      "PlayerObservation.monthly_operating_margin",
+      "Operational recovery; visible monthly result is reported",
     ));
   }
   if !observation.intel_gaps.is_empty() || observation.prior_access_revision.is_some() {
@@ -503,7 +613,7 @@ mod tests {
       workforce_trust_summary: "strained".to_string(),
       community_trust_summary: "watch".to_string(),
       staffed_beds: 100,
-      outpatient_capacity: 100,
+      outpatient_capacity: 0,
       emergency_capacity: 10,
       icu_capacity: 5,
       obstetrics_capacity: 4,
@@ -521,11 +631,13 @@ mod tests {
       monthly_unmet_demand: 12,
       monthly_operating_revenue: 90,
       monthly_operating_cost: 100,
-      monthly_operating_margin: -10,
-      in_flight_projects: "tower (month 2 of 12)".to_string(),
+      monthly_operating_margin: 10,
+      in_flight_projects: "tower (delayed, month 2 of 12)".to_string(),
       cash_runway_signal: CashRunwaySignal::Strained,
-      market_bullets: Vec::new(),
-      policy_bullets: Vec::new(),
+      market_bullets: vec![
+        "Commercial payer/network change and project completed signal".to_string(),
+      ],
+      policy_bullets: vec!["Regulatory review reported".to_string()],
       annual_policy_review: None,
       consultant_options: Vec::new(),
       intel_gaps: vec!["Northlake activity last month".to_string()],
@@ -539,10 +651,17 @@ mod tests {
         .map(|overlay| overlay.operational_overlay_id.as_deref())
         .collect::<Vec<_>>(),
       vec![
+        Some("operational-staffing-constraint"),
+        Some("operational-capacity-constraint"),
         Some("operational-demand-pressure"),
         Some("operational-active-capital-project"),
-        Some("operational-financial-distress"),
+        Some("operational-delayed-project"),
+        Some("operational-project-completion"),
+        Some("operational-payer-network-change"),
+        Some("operational-regulatory-review"),
         Some("operational-community-trust-concern"),
+        Some("operational-financial-distress"),
+        Some("operational-recovery"),
         Some("operational-uncertain-stale-intelligence"),
       ]
     );
@@ -560,5 +679,20 @@ mod tests {
         .and_then(|overlay| overlay.operational_overlay_id.as_deref()),
       None
     );
+
+    let mut quiet = observation.clone();
+    quiet.workforce_trust_summary = "moderate".to_string();
+    quiet.outpatient_capacity = 100;
+    quiet.monthly_unmet_demand = 0;
+    quiet.in_flight_projects = "none".to_string();
+    quiet.market_bullets = Vec::new();
+    quiet.policy_bullets = Vec::new();
+    quiet.annual_policy_review = None;
+    quiet.community_trust_summary = "stable".to_string();
+    quiet.monthly_operating_margin = 0;
+    quiet.cash_runway_signal = CashRunwaySignal::Comfortable;
+    quiet.intel_gaps = Vec::new();
+    quiet.prior_access_revision = None;
+    assert!(operational_overlays(&quiet).is_empty());
   }
 }

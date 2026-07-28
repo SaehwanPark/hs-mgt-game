@@ -1270,8 +1270,8 @@ At each phase gate, explicitly decide what will not be built next.
 3. If initial-release work resumes, prioritize the remaining Phase 8 gaps:
    explicit compatibility/support expectations beyond the current evidence and
    an instructor-facing guide; the source-checkout distribution decision is
-   documented at v0.13.10 and the current low-power GUI proxy evidence at
-   v0.13.11.
+   documented at v0.13.10, the current low-power GUI proxy evidence at
+   v0.13.11, and current operational-overlay coverage at v0.13.12.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

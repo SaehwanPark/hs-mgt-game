@@ -14,6 +14,20 @@
 - Prevention: Keep proxy results and real-device validation as separate gates;
   never infer hardware suitability from a passing static or local smoke report.
 
+## Bind Presentation Labels Only to Explicit Visible Fields
+
+- Context: Phase 11.1 had a twelve-entry operational-overlay catalog, but the
+  live host emitted only five category bindings.
+- Risk: Filling the catalog by treating raw metrics or inferred context as
+  causal labels would leak assumptions into the actor-visible surface and make
+  the overlay look more authoritative than its source.
+- Resolution: Bind each remaining ID only to an explicit `PlayerObservation`
+  field or visible project/market/policy text; keep raw metric rows raw, omit
+  absent categories, and retain the generic fallback for unknown IDs.
+- Prevention: Require a ledger row, host source string, written equivalent,
+  absence test, and authority-marker test for every catalog ID before marking
+  current overlay coverage complete.
+
 ## Append to Existing Handoff Artifacts
 
 - Context: The repository keeps durable `_workspace` request, presentation,

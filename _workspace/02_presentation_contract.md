@@ -1856,6 +1856,84 @@ Focused tests establish current source parity, row alignment, validation, and
 failure preservation. They do not establish full campaign history/debrief,
 durable save/load/replay continuity, screenshots, browser/device compatibility,
 accessibility, or human educational usefulness.
+
+# Presentation Contract — Phase 11.1 operational-overlay coverage v0.13.12
+
+## Goal and Authorization
+
+Complete the current twelve-entry operational-overlay catalog in the live
+competitive regional-world read-only projection. Authorized changes are direct
+host bindings, catalog source/equivalent alignment, ledger evidence, and tests.
+No simulation rule, hidden-state projection, browser authority, new asset, or
+human-quality claim is authorized.
+
+## Player Questions and Consequences
+
+The overlay should answer: “Which explicitly reported operational field or
+visible text needs attention?” It may identify staffing, capacity, demand,
+projects, payer/policy signals, community trust, cash/runway, recovery, or
+uncertainty only when that source is present. It must not answer why an outcome
+occurred, predict what will happen, or rank a strategy.
+
+## Actor-Visible Source Ledger
+
+| Catalog ID | Direct host condition | Missing/unknown behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| staffing constraint | `PlayerObservation.workforce_trust_summary` contains visible strained status | No overlay when status is absent/non-strained | No staffing-cause or labor-outcome inference |
+| capacity constraint | Explicit player facility capacity field is zero/unavailable | No overlay when all reported capacities are positive | No hidden utilization or demand forecast |
+| demand pressure | `PlayerObservation.monthly_unmet_demand > 0` | Raw metric remains visible without category when zero | No severity or future demand claim |
+| active/delayed project | Explicit `in_flight_projects` text, with delayed wording for delayed state | No overlay for empty/none text | No inferred delay cause |
+| project completion | Visible project text contains explicit completion wording | No overlay when text is absent | No transition reconstruction |
+| payer/network change | Visible market bullet contains payer, carrier, network, or renewal signal | No overlay when signal is absent | No payer forecast or negotiation advice |
+| regulatory review | Visible regulatory policy bullet or annual review exists | No overlay when absent | No legal/compliance conclusion |
+| community trust | `PlayerObservation.community_trust_summary` is `watch` | No overlay for stable/absent status | No population judgment |
+| financial distress | Visible negative margin or strained cash runway | No overlay when neither is present | No solvency prediction |
+| operational recovery | Visible monthly margin is positive | No overlay when non-positive | No durable recovery claim |
+| uncertain/stale intelligence | Visible information gaps or prior access revision exists | No overlay when both are absent | No probability/truth estimate |
+
+## Visual, Motion, and Audio Semantics
+
+The browser continues to use the existing registered non-color patterns, glyphs,
+stable priority/order, written equivalents, static reduced-motion behavior, and
+optional audio. The host only adds `operational_overlay_id` values to existing
+actor-visible regional-world rows; raw demand/access/capacity/process rows stay
+raw and unclassified.
+
+## Accessibility and Fallbacks
+
+Every bound entry retains source text and a written equivalent. Unknown IDs
+resolve to `operational-overlay-generic`; missing conditions omit the optional
+operational binding without deleting the raw metric. Meaning does not depend on
+color, motion, or audio. This slice does not establish contrast, screen-reader,
+device, or lived accessibility quality.
+
+## Authority, History, and Replay Boundaries
+
+Conditions read only `PlayerObservation` fields and explicit visible bullets.
+They do not read true world state, transition inputs, effect queues, hidden rival
+state, stochastic inputs, commands, hashes, history, replay, debrief facts, or
+client-owned authority. The browser resolver remains a presentation fallback,
+not a source of truth.
+
+## Asset Provenance and Release Requirements
+
+No asset or audio bytes are added or changed. Existing catalog provenance,
+registry, release, credits, security, and offline checks remain authoritative.
+
+## Verification and Evidence Limits
+
+Rust fixture tests and Python live/ledger tests must cover all twelve IDs,
+absence behavior, raw metric preservation, generic fallback, source/equivalent
+text, syntax, and forbidden authority markers. Catalog-to-host parity does not
+establish full campaign placement/use, screenshots, asset quality, human
+accessibility, audio usefulness, or educational benefit.
+
+## Non-Goals and Open Questions
+
+- No new overlay categories, screenshot suite, durable save/load, replay
+  regeneration, runtime telemetry, or simulation mechanism is included.
+- Open: full campaign placement/use and visual continuity across durable
+  save/load/replay remain separate Phase 11.1 gates.
 # Presentation Contract — Phase 11.2 low-power profile evidence v0.13.11
 
 ## Goal and Authorization

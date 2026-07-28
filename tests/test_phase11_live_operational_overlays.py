@@ -7,6 +7,20 @@ ROOT = Path(__file__).resolve().parents[1]
 REGIONAL = ROOT / "src" / "mcp" / "regional_world.rs"
 BOARD = ROOT / "gui" / "regional-board.mjs"
 APP = ROOT / "gui" / "app.mjs"
+REQUIRED_IDS = [
+  "operational-staffing-constraint",
+  "operational-capacity-constraint",
+  "operational-demand-pressure",
+  "operational-active-capital-project",
+  "operational-delayed-project",
+  "operational-project-completion",
+  "operational-payer-network-change",
+  "operational-regulatory-review",
+  "operational-community-trust-concern",
+  "operational-financial-distress",
+  "operational-recovery",
+  "operational-uncertain-stale-intelligence",
+]
 
 
 NODE_PROBE = r'''
@@ -75,6 +89,23 @@ console.log('pass');
 
 
 class Phase11LiveOperationalOverlayTests(unittest.TestCase):
+  def test_host_binds_every_registered_operational_overlay(self):
+    regional = REGIONAL.read_text(encoding="utf-8")
+    for overlay_id in REQUIRED_IDS:
+      self.assertIn(f'"{overlay_id}"', regional)
+    for source in (
+      "PlayerObservation.workforce_trust_summary",
+      "PlayerObservation capacity fields",
+      "PlayerObservation.monthly_unmet_demand",
+      "PlayerObservation.in_flight_projects",
+      "PlayerObservation visible project text",
+      "PlayerObservation.market_bullets",
+      "PlayerObservation.policy_bullets / annual_policy_review",
+      "PlayerObservation.community_trust_summary",
+      "PlayerObservation.monthly_operating_margin + PlayerObservation.cash_runway_signal",
+    ):
+      self.assertIn(source, regional)
+
   def test_live_overlay_catalog_binding_and_raw_metric_preservation(self):
     result = subprocess.run(
       ["node", "--input-type=module", "-e", NODE_PROBE],
@@ -92,8 +123,13 @@ class Phase11LiveOperationalOverlayTests(unittest.TestCase):
     app = APP.read_text(encoding="utf-8")
     for marker in (
       "operational_overlay_id",
+      "PlayerObservation.workforce_trust_summary",
+      "PlayerObservation capacity fields",
       "PlayerObservation.monthly_unmet_demand",
       "PlayerObservation.in_flight_projects",
+      "PlayerObservation visible project text",
+      "PlayerObservation.market_bullets",
+      "PlayerObservation.policy_bullets / annual_policy_review",
       "PlayerObservation.monthly_operating_margin",
       "PlayerObservation.community_trust_summary",
       "PlayerObservation.intel_gaps",

@@ -2228,8 +2228,9 @@ Extend the validated asset and interaction language to the remainder of the comp
 ## Milestone 11.1: Complete competitive campaign coverage
 
 **Status:** Facility asset catalog/release-registry coverage, current
-visible event-cue parity, current music-state catalog/projection parity, and
-history-view handoff evidence completed in v0.13.9 after the
+visible event-cue parity, current music-state catalog/projection parity,
+current supported operational-overlay catalog/projection coverage in v0.13.12,
+and history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use, event taxonomy beyond the current projection, durable save/load/replay
@@ -2249,7 +2250,11 @@ continuity, performance, and screenshot gates remain open.
 ### Checklist
 
 - [x] Facility asset coverage complete.
-- [ ] Overlay coverage complete.
+- [x] Current supported operational-overlay coverage complete. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `src/mcp/regional_world.rs`, and
+  `tests/test_phase11_live_operational_overlays.py`; full-campaign placement
+  and usage remain open.
 - [x] Actor-family coverage complete.
 - [x] Event cue coverage complete.
 - [x] Music-state coverage complete.
@@ -2313,6 +2318,26 @@ continuity, performance, and screenshot gates remain open.
   throwing adapter recovery, and the unchanged read-only authority boundary.
 - This closes only the current history-view handoff. Debrief, durable
   save/load/replay continuity, screenshots, device/browser compatibility, and
+  human quality remain open.
+
+### v0.13.12 current supported operational-overlay coverage evidence
+
+- The current twelve-entry `OPERATIONAL_OVERLAY_SET` now has exact direct host
+  bindings in `src/mcp/regional_world.rs`, recorded in the Phase 11.1 ledger.
+  Conditions read only visible `PlayerObservation` fields or explicit visible
+  project/market/policy text: staffing, capacity, demand, active/delayed/
+  completed projects, payer/network, regulatory, community, financial,
+  recovery, and uncertainty.
+- Raw demand, access, staffed-bed, and pending-process rows remain raw metric
+  overlays; operational IDs are optional presentation labels. Unknown IDs keep
+  the generic text/non-color fallback, and missing conditions omit the optional
+  binding without inventing a category.
+- The Rust regional-world fixture and Python live/coverage tests prove all
+  twelve IDs, absence/raw preservation, generic fallback, source/equivalent
+  text, syntax, and the unchanged client-authority boundary.
+- This closes only current supported operational-overlay catalog/projection
+  coverage. Full competitive-campaign placement/use, durable save/load/replay
+  visual continuity, screenshots, asset quality, device/browser quality, and
   human quality remain open.
 
 ### v0.12.88 bounded campaign-coverage evidence and limits

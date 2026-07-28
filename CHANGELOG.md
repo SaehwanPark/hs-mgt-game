@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.12] - 2026-07-28
+
+- Completed current supported Phase 11.1 operational-overlay coverage: all
+  twelve catalog IDs now have direct visible host bindings with source and
+  written-equivalent semantics.
+- Preserved raw metric rows, generic unknown fallback, non-color/reduced-motion
+  behavior, and host/client authority boundaries; no simulation mechanics,
+  assets, audio bytes, persistence, or screenshot tooling changed.
+- Added Rust/Python catalog-to-host coverage and recorded that full campaign
+  placement/use, continuity, screenshots, device/browser, and human-quality
+  gates remain open.
+
 ## [0.13.11] - 2026-07-28
 
 - Added a bounded `device-performance-v1` policy and dependency-free checker
