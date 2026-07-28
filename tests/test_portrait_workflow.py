@@ -49,6 +49,27 @@ class PortraitWorkflowTests(unittest.TestCase):
     self.assertEqual(coverage["review_boundary"]["status"], "pending-human-review")
     self.assertIn("No release derivative", " ".join(coverage["limits"]))
 
+  def test_preview_technical_gates_match_role_source_and_text_fields(self):
+    coverage = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    portrait_set = json.loads(PORTRAIT_SET.read_text(encoding="utf-8"))
+    previews = json.loads(PREVIEWS.read_text(encoding="utf-8"))
+    gates = coverage["technical_gates"]
+    self.assertEqual(gates["role_definition"]["status"], "complete-current-set")
+    self.assertEqual(gates["source_preservation"]["status"], "complete-current-previews")
+    self.assertEqual(gates["accessible_equivalent"]["status"], "complete-current-written-fields")
+    roles = {role["id"]: role for role in portrait_set["roles"]}
+    for entry in previews["entries"]:
+      role = roles[entry["role_id"]]
+      self.assertTrue(role["label"])
+      self.assertTrue(role["family"])
+      self.assertTrue(role["alt_text_guidance"])
+      self.assertTrue(role["fallback"])
+      self.assertTrue(entry["accessible_equivalent"])
+      self.assertTrue(entry["generic_fallback"])
+      source = ROOT / entry["source_output_path"]
+      self.assertTrue(source.is_file())
+      self.assertEqual(entry["source_hash"], f"sha256:{hashlib.sha256(source.read_bytes()).hexdigest()}")
+
   def test_role_set_and_shared_style_are_complete(self):
     document = json.loads(PORTRAIT_SET.read_text(encoding="utf-8"))
     previews = json.loads(PREVIEWS.read_text(encoding="utf-8"))

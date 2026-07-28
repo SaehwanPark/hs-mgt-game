@@ -2793,3 +2793,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   identity, resemblance, protected-mark, artifact, accessibility, small-size,
   grayscale, provenance, legal, release-derivative, registry, and runtime-use
   gates.
+
+## Phase 29: Treat written equivalents as metadata closure, not accessibility approval
+
+- Context: Each portrait candidate already has an identity-only written
+  equivalent and generic fallback, alongside a defined role and preserved
+  source/hash binding.
+- Risk: Checking “alt text written” or “source image preserved” could be read
+  as human accessibility, recognition, quality, or identity-consistency
+  approval.
+- Resolution: Record the three fields as machine-checkable technical gates in
+  the portrait ledger and test their parity, while leaving lived accessibility,
+  small-size/grayscale, human review, and release promotion open.
+- Prevention: Name whether a checklist item verifies a field/path/hash or a
+  human judgment before changing its roadmap state.

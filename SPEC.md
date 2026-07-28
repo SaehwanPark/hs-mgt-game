@@ -6031,6 +6031,34 @@ Deferred / Non-Goals:
 - No portrait bytes, generation metadata, model claim, release derivative,
   asset registry entry, GUI integration, or human approval was added.
 
+### Visual/audio Phase 8.2 current portrait role/source/equivalent metadata gates (v0.13.19)
+
+Status: Complete for the current machine-checkable role, source-preservation,
+and written-equivalent fields; prompt/seed, derivative, human, legal,
+accessibility-quality, release, registry, and runtime gates remain separately
+gated.
+
+Done:
+
+- Extended `portrait-preview-coverage.json` with complete current-set status
+  for role definition, preserved source PNG/hash binding, and written
+  identity-only equivalent/generic fallback fields.
+- Extended `tests/test_portrait_workflow.py` to bind every preview to its role
+  label/family, existing source hash, and non-empty written fallback fields.
+- Updated the Phase 8.2 checklist and synchronized patch-version and
+  presentation handoff records; no portrait bytes or runtime behavior changed.
+
+Not Yet Done:
+
+- Prompt/seed provenance, crop/release derivatives, identity/resemblance,
+  protected marks, artifact quality, lived accessibility, small-size/grayscale,
+  legal review, registry promotion, and runtime use.
+
+Deferred / Non-Goals:
+
+- No image generation, model claim, release derivative, asset registry entry,
+  GUI consumer, or human approval was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

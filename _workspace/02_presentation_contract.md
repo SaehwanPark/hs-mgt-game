@@ -2260,3 +2260,34 @@ dimension, pending-review, empty-manifest, fallback, and release-block checks.
 Human identity/role, resemblance, protected marks, artifact quality, lived
 accessibility, small-size/grayscale review, legal/ownership, release
 derivative, registry bridge, and runtime-use evidence remain open.
+
+# Presentation Contract — Phase 8.2 current portrait metadata gates v0.13.19
+
+## Contract status
+
+Complete for current machine-checkable portrait role/source/equivalent fields.
+This is not human identity, quality, lived accessibility, legal, release, or
+runtime approval.
+
+## Source and visible behavior
+
+- The ledger marks role definition, source preservation, and written
+  identity-only equivalent/generic fallback fields complete for all seven
+  preview candidates.
+- The role set provides labels, families, alt-text guidance, and fallbacks;
+  the preview set provides existing hash-bound source PNGs and non-empty
+  accessible-equivalent/fallback fields.
+
+## Fallback, authority, and provenance
+
+These metadata fields remain generation/release evidence only. They do not
+enter simulation state, commands, observations, history, replay, debrief, or
+client authority. Generic actor fallbacks remain the runtime-safe boundary.
+
+## Verification and limits
+
+`tests/test_portrait_workflow.py` requires parity for role label/family,
+source existence/hash, and written equivalent/fallback fields. Prompt/seed,
+crop/derivative, human identity/resemblance, protected marks, artifact
+quality, lived accessibility, small-size/grayscale, legal, release, registry,
+and runtime-use gates remain open.

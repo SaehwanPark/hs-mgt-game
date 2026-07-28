@@ -729,6 +729,30 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 8.2 current portrait metadata gates v0.13.19
+
+## Result
+
+Closed the current technical portrait metadata gates for all seven candidates:
+role definition, preserved source/hash binding, and written identity-only
+equivalents/generic fallbacks.
+
+## Evidence boundary
+
+The ledger and portrait workflow tests pass. This does not approve prompt/seed
+provenance, crop/release derivatives, identity/resemblance, protected marks,
+artifact quality, lived accessibility, small-size/grayscale, legal review,
+registry/release promotion, runtime use, or human review; all candidates remain
+unverified and unreleased.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.18.
+- Working branch: `feat/portrait-metadata-gates-v0.13.19`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Phase 8.2 current portrait-preview inventory integrity v0.13.18
 
 ## Result

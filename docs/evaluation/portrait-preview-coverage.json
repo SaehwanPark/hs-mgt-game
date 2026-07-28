@@ -36,6 +36,23 @@
     },
     "written_equivalent_and_generic_fallback": "present for every preview"
   },
+  "technical_gates": {
+    "role_definition": {
+      "status": "complete-current-set",
+      "source": "assets/generation/portrait-set.json: roles",
+      "evidence": "Every canonical role has an ID, label, actor family, alt-text guidance, and generic fallback."
+    },
+    "source_preservation": {
+      "status": "complete-current-previews",
+      "source": "assets/generation/portrait-previews.json: entries",
+      "evidence": "Every preview source path is repository-relative, exists, is square, and matches its recorded SHA-256."
+    },
+    "accessible_equivalent": {
+      "status": "complete-current-written-fields",
+      "source": "assets/generation/portrait-previews.json: entries.accessible_equivalent",
+      "evidence": "Every preview has a non-empty written identity-only equivalent and role fallback; this is not lived accessibility approval."
+    }
+  },
   "review_boundary": {
     "status": "pending-human-review",
     "all_preview_status": "unverified-preview",
