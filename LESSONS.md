@@ -2823,3 +2823,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Keep automated technical contracts, bounded local proxies,
   product/content review, and human/public-release decisions as separate
   checklist layers.
+
+## Phase 31: Inventory campaign presentation before commissioning campaign art
+
+- Context: Phase 12 already had a typed `campaign-coverage-v1` surface for
+  stabilization and regional affiliation, but the roadmap did not record
+  which campaign-visible surfaces were shared or whether the current abstract
+  and stage contracts required new map/facility assets.
+- Risk: Treating the broad Phase 12 checklist as an undifferentiated art queue
+  could duplicate reusable presentation primitives or imply that generic
+  campaign coverage completed tutorial, pressure-state, stage-art, audio,
+  replay/debrief, or educational work.
+- Resolution: Add a campaign-specific inventory ledger and parity test that
+  bind the current campaign IDs and shared host/browser surfaces, record the
+  no-new-map/facility boundary, and list open campaign work explicitly.
+- Prevention: Separate current inventory evidence from implementation,
+  provenance, human review, and educational usability before checking a
+  campaign-specific roadmap item.

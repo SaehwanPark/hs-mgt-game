@@ -2919,8 +2919,17 @@ Extend the validated visual/audio language without redesigning the core asset sy
 
 ## Milestone 12.1: Stabilization campaign
 
+**Status:** Current campaign-specific presentation inventory recorded in
+v0.13.21. Full stabilization-specific visual/audio implementation remains
+open.
+
 ### Checklist
 
+- [x] Current campaign-specific presentation inventory recorded. Evidence:
+  `docs/evaluation/phase12-campaign-presentation-coverage.json` and
+  `tests/test_phase12_campaign_presentation_coverage.py`; the current abstract
+  contract requires no new map or facility asset, while tutorial, pressure,
+  campaign-audio, and debrief work remain open.
 - [ ] Campaign-specific map or facility needs identified.
 - [ ] Reusable assets used where possible.
 - [ ] New pressure states registered.
@@ -2938,8 +2947,17 @@ Extend the validated visual/audio language without redesigning the core asset sy
 
 ## Milestone 12.2: Regional affiliation campaign
 
+**Status:** Current campaign-specific presentation inventory recorded in
+v0.13.21. Full regional-affiliation-specific visual/audio implementation
+remains open.
+
 ### Checklist
 
+- [x] Current campaign-specific presentation inventory recorded. Evidence:
+  `docs/evaluation/phase12-campaign-presentation-coverage.json` and
+  `tests/test_phase12_campaign_presentation_coverage.py`; the current stage
+  contract requires no new map or facility asset, while stage-specific art,
+  affiliation audio, and full-stage replay/debrief review remain open.
 - [ ] Partner identity treatment completed.
 - [ ] Negotiation-stage visualization completed.
 - [ ] Commitment and review states completed.
@@ -2948,6 +2966,21 @@ Extend the validated visual/audio language without redesigning the core asset sy
 - [ ] Stage-transition sequence completed.
 - [ ] Replay and debrief views updated.
 - [ ] Provenance audit passes.
+
+### v0.13.21 current campaign-specific presentation inventory
+
+- `docs/evaluation/phase12-campaign-presentation-coverage.json` records the
+  current `stabilization-v1` and `regional-affiliation-v1` campaign IDs,
+  their shared briefing, metric, actor, process, decision, history/replay,
+  debrief, and optional-audio presentation surfaces, and the host/browser
+  source markers for each surface.
+- `tests/test_phase12_campaign_presentation_coverage.py` checks source parity,
+  written-equivalent fields, supporting accessibility/audio/provenance paths,
+  and the read-only host-adapter boundary.
+- The current abstract stabilization contract and current affiliation-stage
+  contract require no new map or facility asset. This is an inventory result,
+  not a claim that future tutorial, pressure-state, stage-specific art,
+  campaign-audio, replay/debrief, or human review work is complete.
 
 ### Exit criteria
 

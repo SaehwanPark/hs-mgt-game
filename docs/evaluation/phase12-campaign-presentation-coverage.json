@@ -1,0 +1,96 @@
+{
+  "schema_version": "campaign-presentation-coverage-v1",
+  "status": "complete-current-inventory",
+  "campaigns": ["stabilization-v1", "regional-affiliation-v1"],
+  "contract": {
+    "schema": "campaign-coverage-v1",
+    "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageEnvelope",
+    "session_source": "src/mcp/session.rs: get_campaign_coverage",
+    "route_source": "src/mcp/server.rs: get_campaign_coverage",
+    "browser_source": "gui/app.mjs: renderCampaignCoverage",
+    "adapter_source": "gui/app.mjs: createCampaignCoverageClient"
+  },
+  "shared_surfaces": [
+    {
+      "id": "briefing",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageBriefing",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageBriefing",
+      "visible_equivalent": "Stage briefing remains written and source-linked."
+    },
+    {
+      "id": "metrics",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageMetric",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageMetrics",
+      "visible_equivalent": "Visible metric label, value, source, and uncertainty remain text-first."
+    },
+    {
+      "id": "actors",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageActor",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageActors",
+      "visible_equivalent": "Actor role and reported signal remain written and source-bound."
+    },
+    {
+      "id": "processes",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageProcess",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageProcesses",
+      "visible_equivalent": "Process status and obligation remain explicit without inferred outcomes."
+    },
+    {
+      "id": "decisions",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageDecision",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageDecisions",
+      "visible_equivalent": "Decision forms substitute only host-provided command parameters."
+    },
+    {
+      "id": "history-replay",
+      "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageReplayMetadata",
+      "browser_source": "gui/app.mjs: renderCampaignCoverageHistory",
+      "visible_equivalent": "Immutable history and replay metadata remain host-authored text."
+    },
+    {
+      "id": "debrief",
+      "host_source": "src/mcp/campaign_coverage.rs: educational_debrief",
+      "browser_source": "gui/app.mjs: renderCampaignCoverage",
+      "visible_equivalent": "Host-provided debrief remains written and campaign-specific."
+    },
+    {
+      "id": "optional-audio",
+      "source_scope": "browser-only-visible-audio",
+      "browser_source": "gui/app.mjs: campaignAudioInput",
+      "visible_equivalent": "Audio is optional and written/text status remains complete."
+    }
+  ],
+  "campaign_boundaries": {
+    "stabilization-v1": {
+      "current_surface": "Abstract executive campaign coverage using shared briefing, metric, actor, process, decision, history, replay, and debrief fields.",
+      "map_or_facility_asset_need": "none-required-by-current-abstract-contract",
+      "reusable_assets": "shared executive desktop, actor-family language, status/fallback, and optional audio contracts",
+      "open_campaign_work": ["campaign-specific tutorial presentation", "new pressure-state taxonomy", "campaign-specific audio/content quality"]
+    },
+    "regional-affiliation-v1": {
+      "current_surface": "Stage/partner/commitment/review/integration signals through the shared campaign coverage contract.",
+      "map_or_facility_asset_need": "none-required-by-current-stage-contract",
+      "reusable_assets": "shared executive desktop, actor-family language, status/fallback, and optional audio contracts",
+      "open_campaign_work": ["stage-specific visual treatment", "affiliation audio motif quality", "full-stage replay/debrief presentation review"]
+    }
+  },
+  "supporting_evidence": {
+    "campaign_contract_test": "tests/test_gui_campaign_coverage.py",
+    "accessibility_contract_tests": ["tests/test_gui_accessibility.py", "tests/test_gui_first_month.py"],
+    "audio_contract_tests": ["tests/test_gui_audio.py", "tests/test_audio_cue_contract.py", "tests/test_music_stem_contract.py"],
+    "provenance_checks": ["scripts/validate_assets.py", "scripts/generate_asset_credits.py"],
+    "read_only_boundary": "gui/app.mjs: campaign coverage submits only through the host adapter and renders supplied projections."
+  },
+  "limits": [
+    "The inventory does not complete Phase 12 campaign-specific map/facility, tutorial, pressure-state, stage-art, audio, or debrief implementation.",
+    "No new campaign asset is required by the current abstract/stage contract; this is not evidence that future campaign art will not be needed.",
+    "Existing technical accessibility/audio/provenance checks do not establish human comprehension, quality, educational usability, or fatigue-free use.",
+    "No instructor-only true-state view, counterfactual, distributional visualization, or public release claim is made."
+  ],
+  "evidence": [
+    "Both current campaign IDs are represented by the typed host contract and shared browser surface.",
+    "Every named shared surface has an applicable host or browser source, renderer, and written-equivalent boundary.",
+    "Current campaign-specific asset needs and open implementation decisions are explicit rather than inferred from generic catalog coverage."
+  ],
+  "test_source": "tests/test_phase12_campaign_presentation_coverage.py"
+}

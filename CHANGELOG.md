@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.21] - 2026-07-28
+
+- Recorded the current Phase 12 campaign-specific presentation inventory for
+  stabilization and regional affiliation, including shared briefing, metric,
+  actor, process, decision, history/replay, debrief, and optional-audio
+  surfaces.
+- Documented that the current abstract/stage contracts require no new map or
+  facility asset while keeping tutorial, pressure, stage-art, audio,
+  replay/debrief, instructor, human-review, and educational gates open; no
+  runtime behavior changed.
+
 ## [0.13.20] - 2026-07-28
 
 - Recorded current Phase 13.1 technical-release coverage across Rust, GUI,
