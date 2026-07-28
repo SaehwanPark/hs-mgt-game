@@ -845,6 +845,13 @@ renderers, and optional affiliation-negotiation audio. It does not complete a
 browser-native affiliation route, add stage art/audio, expose hidden state, or
 change runtime authority.
 
+The v0.13.32 Phase 12 slice records current regional-affiliation commitment and
+review states: visible commitment metrics, partner response statuses, the
+pending institutional-review process, submit/await decisions, reported review
+statuses, shared process/decision renderers, and optional affiliation audio.
+It does not expose private review deliberation or hidden state, add assets or a
+browser route, or change runtime authority.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

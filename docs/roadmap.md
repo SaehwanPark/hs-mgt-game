@@ -1288,7 +1288,8 @@ At each phase gate, explicitly decide what will not be built next.
    debrief evidence at v0.13.27, current stabilization accessibility evidence
    at v0.13.28, current stabilization provenance evidence at v0.13.29, and
    current regional-affiliation partner-identity evidence at v0.13.30, and
-   current regional-affiliation negotiation-stage evidence at v0.13.31.
+   current regional-affiliation negotiation-stage evidence at v0.13.31, and
+   current regional-affiliation commitment/review evidence at v0.13.32.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

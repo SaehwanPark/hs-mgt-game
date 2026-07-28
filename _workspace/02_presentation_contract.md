@@ -2660,3 +2660,40 @@ introduced.
 markers, stage/process identity, commitment fields, renderer and canonical
 command boundaries, live scope, optional audio, and the no-new-asset decision.
 Stage-specific art/audio, replay/debrief, and human review remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation commitment and review states v0.13.32
+
+## Contract status
+
+Complete for current host-projected commitment/review evidence only.
+Browser-native affiliation integration, state-specific art/audio,
+integration-state visualization, replay/debrief updates, and human quality,
+accessibility, legal, educational, and public-release review remain separately
+gated.
+
+## Source and visible behavior
+
+- The ledger binds community, workforce, and continuity commitment metrics and
+  reported partner response statuses to the pending `institutional-review`
+  process and `submit-review`/`await-review` decisions.
+- Reported review response/status values remain host-resolved observations with
+  written timing and outcome uncertainty; they are not legal or predictive
+  claims.
+- Shared process/decision renderers preserve supplied fields and canonical host
+  submission while written labels, values, status, and uncertainty remain
+  complete.
+
+## Fallback, authority, and provenance
+
+The reusable `affiliation_negotiation` music state remains optional and
+visible-trigger based. The live GUI remains competitive-regional-v1 only; no
+browser-native review route, new asset, runtime authority path, hidden review
+deliberation, or registry entry is introduced.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_commitment_review.py` checks source
+markers, commitment/review fields and statuses, renderers, canonical-command
+and written-fallback boundaries, live scope, optional audio, and the no-new-
+asset decision. State-specific art/audio, integration, replay/debrief, and
+human review remain open.

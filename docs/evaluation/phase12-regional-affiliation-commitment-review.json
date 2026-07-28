@@ -1,0 +1,74 @@
+{
+  "schema_version": "regional-affiliation-commitment-review-v1",
+  "status": "complete-current-commitment-review-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current host-projected commitment values, partner response states, and institutional-review process/status boundary",
+  "source_contract": {
+    "commitment_metrics": "src/mcp/campaign_coverage.rs: Community commitment",
+    "commitment_fields": "src/mcp/campaign_coverage.rs: AffiliationObservation.commitments",
+    "partner_response_states": "src/model/affiliation.rs: PartnerAccepted",
+    "review_process": "src/mcp/campaign_coverage.rs: institutional-review",
+    "submit_review_decision": "src/mcp/campaign_coverage.rs: submit-review",
+    "await_review_decision": "src/mcp/campaign_coverage.rs: await-review",
+    "review_observation": "src/model/affiliation.rs: pub review_response: Option<ReviewResponse>",
+    "review_status_states": "src/model/affiliation.rs: ReviewPending",
+    "review_transition": "src/affiliation/transition.rs: Institutional review resolved as",
+    "process_renderer": "gui/app.mjs: renderCampaignCoverageProcesses",
+    "decision_renderer": "gui/app.mjs: renderCampaignCoverageDecisions",
+    "audio_state": "gui/music-stem-contract.mjs: affiliation_negotiation",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"
+  },
+  "commitment_state": {
+    "metric_labels": ["Community commitment", "Workforce commitment", "Continuity commitment"],
+    "metric_unit": "commitment units",
+    "reported_partner_statuses": ["Pursuing", "PartnerAccepted", "PartnerConditioned", "PartnerRejected"],
+    "uncertainty": "Partner fit and stakeholder responses remain uncertain after commitment.",
+    "visible_equivalent": "Commitment labels, values, partner status, stakeholder signals, source text, and written uncertainty remain available."
+  },
+  "review_state": {
+    "process_id": "institutional-review",
+    "process_label": "Institutional review",
+    "process_status": "pending",
+    "visible_stages": ["SubmitReview", "ResolveReview"],
+    "decisions": [
+      {
+        "id": "submit-review",
+        "label": "Submit institutional review",
+        "command_template": "submit_review",
+        "uncertainty": "Review may approve, condition, delay, or reject the proposal."
+      },
+      {
+        "id": "await-review",
+        "label": "Await institutional review",
+        "command_template": "await_review",
+        "uncertainty": "Review timing and response remain outside Riverside authority."
+      }
+    ],
+    "reported_response_values": ["Approved", "Conditional", "Delayed", "Rejected", "NotEngaged"],
+    "reported_status_values": ["Approved", "ConditionallyApproved", "ReviewDelayed", "ReviewRejected", "ReviewPending"],
+    "visible_equivalent": "Pending review label, host-reported response/status, timing uncertainty, and written process text remain available."
+  },
+  "presentation_surface": {
+    "shared_process_renderer": "The shared campaign renderer can display the host-supplied pending institutional-review process with a written label and status.",
+    "shared_decision_renderer": "The shared campaign renderer can display submit/await decisions and submit only the canonical host command.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation review route is claimed.",
+    "audio_state": "The reusable affiliation_negotiation music state is optional, visible-trigger based, and text-complete; no direct campaign review audio integration is claimed.",
+    "new_asset_need": "none-required-by-current-stage-contract"
+  },
+  "open_work": [
+    "browser-native regional-affiliation commitment/review integration",
+    "state-specific visual treatment and quality review",
+    "direct affiliation audio integration and human listening review",
+    "integration-state visualization, stage transitions, replay/debrief presentation, and human educational review"
+  ],
+  "limits": [
+    "This record covers current host-projected commitment and review states; it does not complete the full affiliation campaign visualization.",
+    "No private review deliberation, hidden threshold, agreement probability, legal validity, true response, causal outcome, or future integration result is exposed.",
+    "Review responses are stylized host-resolved observations, not legal, regulatory, partner, or educational predictions.",
+    "Optional audio remains a presentation cue and cannot establish approval, rejection, severity, or outcome certainty.",
+    "No new map, facility, portrait, stage art, audio file, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "No human accessibility, educational, legal, quality, listening, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_commitment_review.py"
+}

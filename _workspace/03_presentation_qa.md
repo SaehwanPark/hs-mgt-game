@@ -3083,6 +3083,43 @@ public release remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 regional-affiliation commitment and review states v0.13.32
+
+## Status
+
+`pass` for bounded current commitment/review evidence only. No browser-native
+affiliation integration, state-specific visual/audio quality, private review
+authority, legal, human, educational, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: commitment metrics and partner response statuses resolve to the current
+  host campaign-coverage and affiliation-observation sources.
+- Pass: `institutional-review` is represented as a pending process with
+  source-linked submit/await decisions and reported response/status values.
+- Pass: shared process/decision renderers, canonical host submission, written
+  fallback, optional affiliation-negotiation audio, and competitive-only live
+  GUI scope remain explicit.
+- Pass: no new asset, route, runtime field, registry entry, or authority path
+  is introduced.
+
+## Required fixes
+
+None for this bounded current commitment/review contract.
+
+## Evidence limits
+
+Browser-native review integration, state-specific art/audio, integration-state
+visualization, stage transitions, replay/debrief updates, provenance/legal,
+human quality/accessibility, educational usability, and public release remain
+open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_commitment_review` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

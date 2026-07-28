@@ -3011,7 +3011,12 @@ remains open.
   host-owned stage/process, commitment decision, written uncertainty, and
   optional-audio boundary are covered while browser integration and stage art
   remain open.
-- [ ] Commitment and review states completed.
+- [x] Current regional-affiliation commitment and review states recorded.
+  Evidence: `docs/evaluation/phase12-regional-affiliation-commitment-review.json`
+  and `tests/test_phase12_regional_affiliation_commitment_review.py`; visible
+  commitment metrics, partner response statuses, pending review process,
+  submit/await decisions, and written uncertainty are covered while browser
+  integration and state-specific art/audio remain open.
 - [ ] Integration-state visualization completed.
 - [ ] Affiliation audio motif completed.
 - [ ] Stage-transition sequence completed.
@@ -3221,6 +3226,34 @@ Deferred / Non-Goals:
   response, causal outcome, or future agreement probability is exposed.
 - Optional audio remains a visible presentation cue and cannot establish
   agreement, success, severity, or outcome certainty.
+
+### v0.13.32 current regional-affiliation commitment and review states
+
+- `docs/evaluation/phase12-regional-affiliation-commitment-review.json`
+  records visible community/workforce/continuity commitment metrics, reported
+  partner response statuses, the pending `institutional-review` process,
+  `submit-review` and `await-review` decisions, reported review response/status
+  vocabularies, shared process/decision renderers, and optional
+  `affiliation_negotiation` audio eligibility.
+- `tests/test_phase12_regional_affiliation_commitment_review.py` checks source
+  markers, commitment fields/statuses, review process/decisions/statuses,
+  canonical-command and written-fallback boundaries, competitive-only live GUI
+  scope, optional audio, and the no-new-asset decision.
+- This closes only current commitment/review evidence. It does not complete
+  browser-native affiliation integration, state-specific art/audio,
+  integration-state visualization, stage transitions, replay/debrief updates,
+  or human quality, accessibility, legal, educational, and public-release
+  review.
+
+Deferred / Non-Goals:
+
+- No private review deliberation, hidden threshold, agreement probability,
+  legal validity, true response, causal outcome, future integration result,
+  asset, route, persistence, instructor view, or authority path is introduced.
+- Review responses remain stylized host-resolved observations, not legal,
+  regulatory, partner, or educational predictions.
+- Optional audio remains a visible-only cue and cannot establish approval,
+  rejection, severity, or outcome certainty.
 
 ### Exit criteria
 
