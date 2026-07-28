@@ -2776,3 +2776,20 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
 - Prevention: Separate source/structural/SVG regression, local smoke capture,
   raster goldens, browser/device compatibility, and human visual review in
   both the ledger and roadmap before checking a screenshot item.
+
+## Phase 28: Separate portrait inventory integrity from portrait approval
+
+- Context: Phase 8.2 already preserves one source preview for each of the
+  seven canonical fictional actor roles and maintains a pending review queue,
+  but those documents were not summarized by one integrity ledger.
+- Risk: Calling the seven-entry preview set “complete” could imply approved
+  model/seed provenance, human review, quality, legal clearance, release
+  readiness, or runtime suitability.
+- Resolution: Record `portrait-preview-coverage.json` for exact role/preview/
+  review counts, repository-relative paths, source PNG hashes/dimensions, and
+  the empty generation manifest while preserving every pending/release-block
+  field.
+- Prevention: Keep current inventory/hash closure separate from per-portrait
+  identity, resemblance, protected-mark, artifact, accessibility, small-size,
+  grayscale, provenance, legal, release-derivative, registry, and runtime-use
+  gates.

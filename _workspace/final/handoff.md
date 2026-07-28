@@ -729,6 +729,32 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 8.2 current portrait-preview inventory integrity v0.13.18
+
+## Result
+
+Recorded current portrait-preview inventory integrity for the seven canonical
+fictional actor roles. The ledger binds seven preserved source PNGs, source
+hashes/dimensions, seven pending review entries, and an empty generation
+manifest.
+
+## Evidence boundary
+
+Portrait workflow and generation metadata checks pass. Every candidate remains
+an unverified preview with pending approval, missing approved model/seed
+provenance, null release/registry fields, and no runtime consumer. Human
+identity/role, resemblance, protected-mark, artifact, accessibility,
+small-size/grayscale, legal, release, registry, and runtime-use gates remain
+open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.17.
+- Working branch: `feat/portrait-preview-coverage-v0.13.18`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.
+
+---
 # Final Handoff — Visual/audio Phase 11.1 current screenshot-surface contract v0.13.17
 
 ## Result

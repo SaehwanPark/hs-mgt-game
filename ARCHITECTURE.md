@@ -741,6 +741,14 @@ after starting a competitive session, but the capture is not persisted or
 treated as a golden raster. Full-campaign screenshots, cross-browser/device
 capture, pixel-level quality, and human review remain outside this contract.
 
+The v0.13.18 Phase 8.2 portrait slice records current preview-inventory
+integrity separately from approval. `portrait-preview-coverage.json` binds the
+seven role IDs to seven preserved source PNGs, their SHA-256 hashes and square
+dimensions, the seven-entry pending review queue, and an empty generation
+manifest. The preview tool's missing model/seed provenance, human review,
+release-derivative, registry-bridge, and runtime-use boundaries remain
+explicit; no portrait bytes or GUI consumer is added.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

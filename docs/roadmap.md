@@ -1276,7 +1276,8 @@ At each phase gate, explicitly decide what will not be built next.
    visual-continuity coverage at v0.13.14, current live replay
    visual-continuity coverage at v0.13.15, and current asset-registry
    completeness at v0.13.16, and current supported screenshot-surface
-   evidence at v0.13.17.
+   evidence at v0.13.17, and current portrait-preview inventory integrity at
+   v0.13.18.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

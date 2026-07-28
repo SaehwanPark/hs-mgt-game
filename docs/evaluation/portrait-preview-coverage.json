@@ -1,0 +1,76 @@
+{
+  "schema_version": "fictional-portrait-preview-coverage-v1",
+  "status": "complete-current-preview-inventory",
+  "phase": "8.2",
+  "sources": {
+    "role_set": "assets/generation/portrait-set.json: roles",
+    "previews": "assets/generation/portrait-previews.json: entries",
+    "review_queue": "assets/generation/portrait-review-queue.json: entries",
+    "generation_manifest": "assets/generation/generation-manifest.json: entries",
+    "workflow_validator": "scripts/validate_generation_metadata.py: validate_portrait_documents",
+    "focused_test": "tests/test_portrait_workflow.py"
+  },
+  "role_ids": [
+    "rival-system-executive",
+    "payer-negotiator",
+    "regulator",
+    "labor-representative",
+    "community-leader",
+    "board-chair",
+    "affiliation-partner-executive"
+  ],
+  "counts": {
+    "roles": 7,
+    "previews": 7,
+    "review_queue_entries": 7,
+    "generation_manifest_entries": 0
+  },
+  "source_contract": {
+    "one_preview_per_role": true,
+    "source_output_paths_are_repository_relative": true,
+    "source_hashes": "sha256 bound to each preserved source PNG",
+    "dimensions": {
+      "width": 1254,
+      "height": 1254,
+      "shape": "square"
+    },
+    "written_equivalent_and_generic_fallback": "present for every preview"
+  },
+  "review_boundary": {
+    "status": "pending-human-review",
+    "all_preview_status": "unverified-preview",
+    "all_approval_status": "pending",
+    "reviewer_metadata": "empty until an authorized human reviews each candidate",
+    "required_gates": [
+      "identity-only and role consistency",
+      "real-person resemblance",
+      "protected marks and readable text",
+      "anatomy and artifact quality",
+      "accessible equivalent",
+      "small-size rendering",
+      "grayscale rendering",
+      "model and seed provenance",
+      "release derivative",
+      "registry bridge"
+    ]
+  },
+  "release_boundary": {
+    "release_eligible": false,
+    "generation_manifest_entries": 0,
+    "asset_registry_ids": "null for every preview",
+    "release_paths": "null for every preview",
+    "runtime_consumers": "none"
+  },
+  "limits": [
+    "Inventory and source-hash integrity do not establish portrait quality, recognition, or stylistic coherence.",
+    "Written equivalents and generic fallbacks do not establish lived accessibility or human comprehension.",
+    "The built-in preview tool does not expose approved local model identity, immutable revision, or actual seed.",
+    "No legal, ownership, training-data, real-person resemblance, protected-mark, or clinical-plausibility approval is claimed.",
+    "No release derivative, visual registry entry, GUI/runtime use, or campaign placement is claimed."
+  ],
+  "evidence": [
+    "The current role set, preview entries, and review queue each contain the same seven role IDs exactly once.",
+    "Every preserved source PNG has a repository-relative path, square dimensions, and a matching recorded SHA-256 hash.",
+    "The generation manifest is empty and every preview remains blocked from release and runtime registry promotion."
+  ]
+}

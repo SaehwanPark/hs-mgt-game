@@ -13,11 +13,42 @@ from validate_generation_metadata import validate_portrait_documents
 
 PORTRAIT_SET = ROOT / "assets" / "generation" / "portrait-set.json"
 PREVIEWS = ROOT / "assets" / "generation" / "portrait-previews.json"
+COVERAGE = ROOT / "docs" / "evaluation" / "portrait-preview-coverage.json"
 MANIFEST = ROOT / "assets" / "generation" / "generation-manifest.json"
 PROOF = ROOT / "gui" / "portrait-workflow-proof.html"
 
 
 class PortraitWorkflowTests(unittest.TestCase):
+  def test_preview_coverage_ledger_matches_current_inventory(self):
+    coverage = json.loads(COVERAGE.read_text(encoding="utf-8"))
+    portrait_set = json.loads(PORTRAIT_SET.read_text(encoding="utf-8"))
+    previews = json.loads(PREVIEWS.read_text(encoding="utf-8"))
+    review_queue = json.loads(
+      (ROOT / "assets" / "generation" / "portrait-review-queue.json").read_text(encoding="utf-8")
+    )
+    manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    role_ids = [role["id"] for role in portrait_set["roles"]]
+    preview_ids = [entry["role_id"] for entry in previews["entries"]]
+    review_ids = [entry["role_id"] for entry in review_queue["entries"]]
+    self.assertEqual(coverage["status"], "complete-current-preview-inventory")
+    self.assertEqual(coverage["schema_version"], "fictional-portrait-preview-coverage-v1")
+    self.assertEqual(coverage["role_ids"], role_ids)
+    self.assertEqual(preview_ids, role_ids)
+    self.assertEqual(review_ids, role_ids)
+    self.assertEqual(
+      coverage["counts"],
+      {"roles": 7, "previews": 7, "review_queue_entries": 7, "generation_manifest_entries": 0},
+    )
+    self.assertEqual(len(manifest["entries"]), coverage["counts"]["generation_manifest_entries"])
+    for source in coverage["sources"].values():
+      source_path = source.split(": ", 1)[0]
+      self.assertTrue((ROOT / source_path).is_file(), source)
+    self.assertTrue(coverage["source_contract"]["one_preview_per_role"])
+    self.assertEqual(coverage["source_contract"]["dimensions"], {"width": 1254, "height": 1254, "shape": "square"})
+    self.assertFalse(coverage["release_boundary"]["release_eligible"])
+    self.assertEqual(coverage["review_boundary"]["status"], "pending-human-review")
+    self.assertIn("No release derivative", " ".join(coverage["limits"]))
+
   def test_role_set_and_shared_style_are_complete(self):
     document = json.loads(PORTRAIT_SET.read_text(encoding="utf-8"))
     previews = json.loads(PREVIEWS.read_text(encoding="utf-8"))
