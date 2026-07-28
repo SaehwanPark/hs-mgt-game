@@ -1834,3 +1834,35 @@ optional-audio fallback.
   evaluation.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   offline, browser-policy, device-policy, and visual/audio contract checks.
+
+# Request Summary — Visual/audio Phase 12 stabilization accessibility evidence v0.13.28
+
+## Scope
+
+Record current shared technical accessibility checks relevant to stabilization:
+keyboard/focus, text/non-color status, text scale, reduced motion, written
+equivalents, optional-audio fallback, and semantic campaign coverage.
+
+## Target slice
+
+- Join existing GUI accessibility, first-month, audio-fallback, and campaign
+  coverage tests to explicit source markers and passing check entries.
+- Preserve local presentation-only settings, text-first stabilization, and the
+  competitive-only live GUI boundary; close only technical evidence.
+
+## Sources and expected files
+
+- `tests/test_gui_accessibility.py`, `tests/test_gui_first_month.py`,
+  `tests/test_audio_fallback.py`, `tests/test_gui_campaign_coverage.py`,
+  `gui/index.html`, `gui/app.mjs`, and the Phase 10 technical-boundary doc.
+- New accessibility ledger/parity test, roadmap/spec/architecture/changelog/
+  lessons, version projections, generated credits, and additive contract/QA/
+  handoff records.
+
+## Non-goals and validation
+
+- Do not add accessibility behavior, a browser stabilization launcher, routes,
+  runtime fields, assets, audio files, screenshots, persistence, instructor
+  views, screen-reader/device certification, or human evaluation.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  offline, browser-policy, device-policy, and visual/audio contract checks.

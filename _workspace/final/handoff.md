@@ -1135,3 +1135,27 @@ educational, and public-release gates remain open; no runtime behavior changed.
 - Working branch: `feat/stabilization-debrief-presentation-v0.13.27`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 stabilization accessibility evidence v0.13.28
+
+## Result
+
+Recorded current shared technical accessibility evidence for keyboard/focus,
+text/non-color status, text scale, reduced motion, written equivalents,
+optional-audio fallback, semantic campaign coverage, and local-settings
+ownership.
+
+## Evidence boundary
+
+The ledger and parity test pass for technical accessibility evidence.
+Browser-native stabilization integration, contrast/screen-reader/device
+review, lived accessibility, human, educational, and public-release gates
+remain open; no runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.27.
+- Working branch: `feat/stabilization-accessibility-evidence-v0.13.28`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

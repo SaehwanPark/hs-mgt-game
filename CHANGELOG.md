@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.28] - 2026-07-28
+
+- Recorded current stabilization-relevant technical accessibility evidence for
+  keyboard/focus, text/non-color status, text scale, reduced motion, written
+  equivalents, optional-audio fallback, and shared campaign coverage.
+- Closed only current technical accessibility-contract evidence; browser-native
+  stabilization integration, assistive-technology/device review, human
+  accessibility, educational usability, and public-release gates remain open,
+  with no runtime behavior changed.
+
 ## [0.13.27] - 2026-07-28
 
 - Recorded the current stabilization debrief presentation contract across the

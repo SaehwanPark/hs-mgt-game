@@ -1,0 +1,79 @@
+{
+  "schema_version": "stabilization-accessibility-evidence-v1",
+  "status": "complete-current-technical-accessibility-contract",
+  "campaign": "stabilization-v1",
+  "scope": "shared technical GUI accessibility and fallback checks relevant to stabilization presentation",
+  "source_contract": {
+    "accessibility_tests": "tests/test_gui_accessibility.py: class GuiAccessibilityTests",
+    "first_month_tests": "tests/test_gui_first_month.py: class GuiFirstMonthTests",
+    "audio_fallback_tests": "tests/test_audio_fallback.py: class AudioFallbackTests",
+    "campaign_coverage_tests": "tests/test_gui_campaign_coverage.py: class GuiCampaignCoverageTests",
+    "html_controls": "gui/index.html: id=\"settings-reduced-motion\"",
+    "app_settings": "gui/app.mjs: createPresentationSettings",
+    "technical_boundary": "docs/history/initiatives/visual-audio/visual-audio-phase10-accessibility-v0.12.26.md: These checks are technical interface proxies"
+  },
+  "checks": [
+    {
+      "id": "keyboard-focus-landmarks",
+      "command": "python3 -m unittest tests.test_gui_accessibility",
+      "source": "tests/test_gui_accessibility.py: test_keyboard_landmarks_and_stable_targets_exist",
+      "status": "pass",
+      "coverage": "Skip link, stable presentation landmarks, focus-visible controls, and targeted live regions."
+    },
+    {
+      "id": "text-status-and-non-color",
+      "command": "python3 -m unittest tests.test_gui_accessibility",
+      "source": "tests/test_gui_accessibility.py: test_status_language_is_text_and_non_color",
+      "status": "pass",
+      "coverage": "Visible status labels, symbols/patterns, accessible labels, and source-bound status metadata."
+    },
+    {
+      "id": "text-scale-and-local-settings",
+      "command": "python3 -m unittest tests.test_gui_accessibility",
+      "source": "tests/test_gui_accessibility.py: test_text_scale_and_cue_equivalent_settings_are_functional",
+      "status": "pass",
+      "coverage": "Large text, written-equivalent preference, reduced motion, and local storage fallback boundaries."
+    },
+    {
+      "id": "written-first-resolution",
+      "command": "python3 -m unittest tests.test_gui_first_month",
+      "source": "tests/test_gui_first_month.py: test_renderer_exposes_text_first_current_completed_and_upcoming_states",
+      "status": "pass",
+      "coverage": "Committed resolution stages and host handoff remain written and recoverable during local pacing."
+    },
+    {
+      "id": "audio-fallback",
+      "command": "python3 -m unittest tests.test_audio_fallback",
+      "source": "tests/test_audio_fallback.py: test_audio_projection_and_runtime_failures_preserve_visible_equivalents",
+      "status": "pass",
+      "coverage": "Mute, unavailable audio, setup failure, and playback failure preserve visible/text meaning."
+    },
+    {
+      "id": "campaign-written-equivalents",
+      "command": "python3 -m unittest tests.test_gui_campaign_coverage",
+      "source": "tests/test_gui_campaign_coverage.py: test_campaign_views_forms_audio_and_adapter_are_present",
+      "status": "pass",
+      "coverage": "Shared campaign debrief, audio, adapter, and host-projection presentation fields retain written fallbacks."
+    }
+  ],
+  "presentation_surface": {
+    "current_shared_contract": "The shared GUI contract covers technical keyboard, focus, text, non-color, reduced-motion, text-scale, written-equivalent, and optional-audio fallback behavior for supplied actor-visible projections.",
+    "stabilization_boundary": "The current stabilization CLI remains text-first; the live GUI launcher supports competitive-regional-v1 only, so no browser-native stabilization accessibility flow is certified.",
+    "settings_ownership": "Text scale, reduced motion, and written-equivalent preferences are local presentation state and do not enter commands, transitions, randomness, history, hashes, or debrief output.",
+    "new_asset_need": "none-required-by-current-technical-contract"
+  },
+  "open_work": [
+    "browser-native stabilization accessibility integration",
+    "contrast, viewport, screen-reader, assistive-technology, and device review",
+    "lived human accessibility and usability review",
+    "educational usability and fatigue review"
+  ],
+  "limits": [
+    "Technical interface proxies do not establish human accessibility, lived usability, contrast certification, screen-reader behavior, assistive-technology compatibility, or hardware performance.",
+    "The shared checks do not certify an unlaunched browser-native stabilization flow; the live GUI remains competitive-regional-v1 only.",
+    "No new accessibility behavior, route, runtime field, asset, audio file, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "Written equivalents and reduced-motion behavior preserve meaning but do not establish learning, educational effectiveness, or policy validity.",
+    "No public-release, cross-browser certification, or human-review claim is made."
+  ],
+  "test_source": "tests/test_phase12_stabilization_accessibility_evidence.py"
+}

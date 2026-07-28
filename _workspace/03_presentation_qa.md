@@ -2976,6 +2976,41 @@ and future provenance review remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
+
+## Status
+
+`pass` for bounded current shared technical accessibility QA only. No lived
+accessibility, screen-reader, assistive-technology, device, human, or
+educational approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: keyboard/focus landmarks, text/non-color status language, text scale,
+  reduced motion, written equivalents, optional-audio fallback, and campaign
+  coverage source markers are present.
+- Pass: local settings remain presentation-only, written content remains
+  meaning-bearing, and the stabilization text-first/competitive-only boundary
+  is explicit.
+- Pass: no new accessibility behavior, route, asset, audio file, runtime, or
+  authority path is introduced.
+
+## Required fixes
+
+None for this bounded technical evidence record.
+
+## Evidence limits
+
+Contrast, viewport, screen-reader, assistive-technology, device, lived
+accessibility, fatigue, human comprehension, educational usability, and
+effectiveness remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_stabilization_accessibility_evidence` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pending at handoff.
+
 # Presentation Domain QA — Phase 12 stabilization debrief presentation v0.13.27
 
 ## Status

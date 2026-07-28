@@ -2917,3 +2917,11 @@ browser-native stabilization debrief, instructor-surface decision, or human
 educational result. Record the existing CLI instructor appendix explicitly so
 future visual work does not silently promote it into a new public true-state
 view.
+
+## Phase 38: Keep technical accessibility proxies separate from lived access (2026-07-28)
+
+The shared GUI already tests keyboard/focus landmarks, non-color status
+language, text scale, reduced motion, written equivalents, and optional-audio
+fallback. A stabilization evidence ledger can join those checks to the current
+text-first/competitive-only boundary, but it must keep screen-reader, device,
+assistive-technology, lived accessibility, and educational findings open.
