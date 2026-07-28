@@ -2944,7 +2944,11 @@ open.
   `tests/test_phase12_pressure_state_registration.py`; campaign-specific
   pressure taxonomy, tutorial explanation, and direct audio mapping remain
   open.
-- [ ] Tutorial presentation updated.
+- [x] Current stabilization tutorial presentation contract recorded. Evidence:
+  `docs/evaluation/phase12-stabilization-tutorial-presentation.json` and
+  `tests/test_phase12_stabilization_tutorial_presentation.py`; the current
+  CLI beginner flow and guide are covered, while browser-native integration,
+  direct audio, and human review remain open.
 - [ ] Audio-state mapping completed.
 - [ ] Debrief presentation completed.
 - [ ] Accessibility tests pass.
@@ -3040,6 +3044,19 @@ remains open.
 - This closes only current shared pressure-state registration. It does not
   complete campaign-specific pressure taxonomy, tutorial presentation, direct
   audio mapping, visual quality, replay/debrief, or human review.
+
+### v0.13.25 current stabilization tutorial presentation
+
+- `docs/evaluation/phase12-stabilization-tutorial-presentation.json` records
+  the five-turn beginner menu, three choices per turn, labels/pros/cons/
+  trade-offs/recommendability fields, player-guide source, shared GUI coverage
+  boundary, and the competitive-only live GUI limitation.
+- `tests/test_phase12_stabilization_tutorial_presentation.py` checks source
+  markers, tutorial field counts, host ownership, written equivalents, and
+  the explicit no-browser-tutorial/no-human-learning boundary.
+- This closes only current stabilization tutorial-presentation evidence. It
+  does not complete browser-native stabilization integration, direct tutorial
+  audio, campaign-specific pacing/content, quality, or human review.
 
 ### Exit criteria
 

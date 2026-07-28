@@ -797,6 +797,13 @@ written equivalents, non-color/reduced-motion behavior, fallback handling, and
 an empty campaign-specific registration set; no hidden severity, new pressure
 mechanic, runtime field, asset, audio mapping, or authority path is introduced.
 
+The v0.13.25 Phase 12 slice records the existing stabilization tutorial
+presentation as a five-turn CLI beginner contract with three written choices
+per turn and host-owned commands/outcomes. It links the player guide and shared
+campaign-coverage renderer while preserving the current live GUI competitive-
+only boundary; no browser-native stabilization rail, tutorial audio, content,
+or authority path is introduced.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

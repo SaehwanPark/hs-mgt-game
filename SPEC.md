@@ -6222,6 +6222,39 @@ Deferred / Non-Goals:
 - Event cues and music states remain eligible visible-only channels, not direct
   campaign-envelope audio mapping or outcome prediction.
 
+### Visual/audio Phase 12 current stabilization tutorial presentation (v0.13.25)
+
+Status: Complete for the current CLI beginner/tutorial contract only;
+browser-native stabilization integration, direct audio, campaign-specific
+content, quality, human review, and educational usability remain separately
+gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-stabilization-tutorial-presentation.json`
+  for the five-turn beginner menu, three choices per turn, written choice
+  fields, guide source, shared GUI coverage boundary, and live competitive-only
+  GUI limitation.
+- Added `tests/test_phase12_stabilization_tutorial_presentation.py` to require
+  source markers, field counts, host ownership, written equivalents, and
+  explicit no-browser-tutorial/no-human-learning limits.
+- Checked only current stabilization tutorial-presentation evidence and
+  synchronized canonical docs, lessons, version metadata, generated credits,
+  and additive request/contract/QA/handoff records; no runtime behavior
+  changed.
+
+Not Yet Done:
+
+- Browser-native stabilization tutorial integration, direct tutorial audio,
+  campaign-specific tutorial content/pacing, visual quality, replay/debrief
+  presentation, and human/educational review remain open.
+
+Deferred / Non-Goals:
+
+- No new tutorial copy, route, asset, audio, screenshot, persistence,
+  instructor view, or authority path was added.
+- The CLI beginner flow is not a human learning or optimal-policy claim.
+
 ## Future
 
 ### Visual and audio experience upgrade

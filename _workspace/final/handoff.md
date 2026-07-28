@@ -1068,3 +1068,25 @@ human, and educational work remain open, with no runtime behavior changed.
 - Working branch: `feat/pressure-state-registration-v0.13.24`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+
+---
+# Final Handoff — Phase 12 stabilization tutorial presentation v0.13.25
+
+## Result
+
+Recorded the current five-turn CLI stabilization beginner/tutorial contract,
+three written choices per turn, player-guide source, shared GUI coverage
+boundary, and live competitive-only GUI limitation.
+
+## Evidence boundary
+
+The ledger and parity test pass for current tutorial evidence. Browser-native
+stabilization integration, direct audio, campaign content/pacing, quality,
+human, and educational gates remain open; no runtime behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.24.
+- Working branch: `feat/stabilization-tutorial-presentation-v0.13.25`.
+- PR, review, CI, merge commit, and temporary-branch cleanup are pending.
+- One code reviewer will perform the required independent review passes.

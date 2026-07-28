@@ -2885,3 +2885,17 @@ agents meaningful time. Keep entries factual, concise, and tied to prevention.
   equivalents, and keep campaign-specific registration empty.
 - Prevention: Require a visible source, written equivalent, fallback, and
   explicit direct-mapping boundary before promoting any future pressure state.
+
+## Phase 35: Separate CLI tutorial evidence from browser tutorial completion
+
+- Context: The five-turn stabilization beginner flow and player guide already
+  provide written choices, trade-offs, and host-owned commands, while the
+  browser launcher currently supports only the competitive campaign.
+- Risk: Calling the existing CLI beginner flow a completed visual tutorial
+  could imply browser integration, direct audio, human comprehension, or an
+  optimal policy recommendation.
+- Resolution: Record the current CLI/tutorial contract, shared campaign-
+  coverage renderer boundary, and competitive-only live GUI limitation in one
+  parity-checked ledger; keep browser-native integration and human review open.
+- Prevention: Name the current presentation surface and live-launch scope
+  before checking any tutorial roadmap item.
