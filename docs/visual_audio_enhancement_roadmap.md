@@ -1734,7 +1734,8 @@ each canonical role. All seven candidates remain explicitly unverified and are
 not in the visual asset registry, release directory, or generation manifest
 because the preview tool does not expose the approved local model revision or
 actual seed. Current preview-inventory/source-hash integrity is recorded in
-v0.13.18; per-portrait human review remains required.
+v0.13.18, and current role/source/equivalent metadata gates are closed in
+v0.13.19; per-portrait human review remains required.
 
 ### Initial portrait roles
 
@@ -1921,12 +1922,36 @@ v0.13.18; per-portrait human review remains required.
   small-size, grayscale, model/seed, legal, release-derivative, registry, and
   runtime-use gates remain open.
 
+### v0.13.19 current portrait role/source/equivalent metadata gates
+
+- `portrait-preview-coverage.json` now records complete current-set gates for
+  role definition, preserved source previews, and written accessible
+  equivalents/generic fallbacks. The statuses describe machine-checkable
+  metadata/path/text closure, not human approval.
+- `tests/test_portrait_workflow.py` binds each preview to its role label/family,
+  repository-relative source PNG and SHA-256, and non-empty identity-only
+  equivalent/fallback fields.
+- This closes only the three current technical metadata gates. Prompt/seed
+  provenance, crop/release derivatives, identity/resemblance, protected marks,
+  artifact quality, lived accessibility, small-size/grayscale checks, legal
+  review, registry/release promotion, and runtime use remain open.
+
 ### Current inventory boundary
 
 - [x] Current preview inventory and source-hash coverage recorded. Evidence:
   `docs/evaluation/portrait-preview-coverage.json`,
   `tests/test_portrait_workflow.py`, and the preserved source previews; this
   does not approve any portrait or close the per-portrait human gates.
+
+- [x] Role defined. Evidence: all seven role IDs, labels, families, and
+  fallbacks in `assets/generation/portrait-set.json` are ledger- and
+  test-bound; human identity consistency remains open.
+- [x] Source image preserved. Evidence: all seven repository-relative source
+  PNG paths exist and match their recorded SHA-256 hashes; crop/derivative and
+  human artifact review remain open.
+- [x] Alt text written. Evidence: all seven preview entries have written
+  identity-only equivalents and generic fallbacks; lived accessibility review
+  remains open.
 
 ### Checklist per portrait
 

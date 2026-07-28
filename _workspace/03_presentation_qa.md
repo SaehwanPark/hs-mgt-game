@@ -2873,3 +2873,37 @@ derivative, registry bridge, and runtime-use review remain open.
 - `python3 -m unittest tests.test_portrait_workflow` — pass.
 - Generation metadata, portrait review-queue, asset, release, security, and
   documentation checks remain pass/fail-closed as documented.
+
+# Presentation Domain QA — Phase 8.2 current portrait metadata gates v0.13.19
+
+## Status
+
+`pass` for current machine-checkable role/source/equivalent metadata only. No
+human portrait, quality, lived accessibility, legal, release, or runtime
+approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: seven role definitions retain labels, families, alt-text guidance, and
+  generic fallbacks.
+- Pass: seven preserved source PNGs exist and match their recorded SHA-256
+  hashes; seven written identity-only equivalents and generic fallbacks are
+  non-empty.
+- Pass: the existing preview/review/release boundary remains unverified,
+  pending, empty, and outside the runtime registry/GUI.
+
+## Required fixes
+
+None for this bounded technical contract.
+
+## Evidence limits
+
+Prompt/seed, crop/derivative, identity/resemblance, protected marks, artifact
+quality, lived accessibility, small-size/grayscale, legal, registry, release,
+runtime-use, and human review remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_portrait_workflow` — pass.
+- Full generation, release, asset/security, documentation, offline,
+  browser/device, and visual/audio checks — pass.

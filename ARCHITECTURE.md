@@ -749,6 +749,14 @@ manifest. The preview tool's missing model/seed provenance, human review,
 release-derivative, registry-bridge, and runtime-use boundaries remain
 explicit; no portrait bytes or GUI consumer is added.
 
+The v0.13.19 Phase 8.2 portrait metadata slice exposes three technical gates
+from that same ledger: each role has a defined label/family/fallback, each
+preserved source PNG remains path- and SHA-256-bound, and each preview has a
+written identity-only equivalent with a generic fallback. These fields are
+metadata/release evidence only; they do not establish lived accessibility,
+quality, identity consistency, model/seed provenance, approval, or runtime
+use.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

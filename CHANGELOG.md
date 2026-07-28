@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.19] - 2026-07-28
+
+- Closed the current Phase 8.2 technical metadata gates for all seven portrait
+  candidates: role definition, preserved source/hash binding, and written
+  identity-only equivalents/generic fallbacks.
+- Kept prompt/seed provenance, crop/release derivatives, human identity and
+  quality review, lived accessibility, legal review, registry promotion, and
+  runtime use open; no portrait bytes or behavior changed.
+
 ## [0.13.18] - 2026-07-28
 
 - Recorded current Phase 8.2 portrait-preview inventory integrity: seven

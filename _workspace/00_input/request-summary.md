@@ -1401,6 +1401,37 @@ unreleased state and do not infer approval from preserved bytes or hashes.
   documentation, asset, offline, browser-policy, device-policy, and
   visual/audio checks.
 
+# Request Summary — Phase 8.2 current portrait metadata gates v0.13.19
+
+## Scope
+
+Close only the three current machine-checkable portrait metadata gates:
+defined role, preserved source preview, and written accessible equivalent.
+
+## Target slice
+
+- Require all seven role definitions to retain IDs, labels, families, and
+  generic fallbacks.
+- Require all seven preview source paths to exist and match SHA-256 hashes.
+- Require all seven previews to retain non-empty identity-only equivalents and
+  generic fallbacks.
+- Keep prompt/seed, derivative, identity, quality, lived accessibility,
+  legal, release, registry, runtime, and human-review gates open.
+
+## Sources and validation
+
+- `assets/generation/portrait-set.json`, `portrait-previews.json`, and
+  `docs/evaluation/portrait-preview-coverage.json`.
+- `tests/test_portrait_workflow.py` and existing generation/release validators.
+- Run full Python/Rust/lint/release/documentation/generation/asset/offline/
+  browser/device/visual-audio checks.
+
+## Non-goals
+
+Do not modify portrait bytes or generation records, add model/seed claims,
+create derivatives, perform human review, approve release/registry promotion,
+or integrate portraits into runtime.
+
 # Request Summary — Visual/audio Phase 11.1 current screenshot-surface contract v0.13.17
 
 ## Scope
