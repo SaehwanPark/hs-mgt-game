@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.34] - 2026-07-28
+
+- Recorded the current reusable regional-affiliation audio motif across the
+  `affiliation_negotiation` music state, explicit
+  `event.affiliation-milestone` cue, visible triggers, generated-audio
+  properties, and written/audio-off fallback.
+- Closed only current motif evidence; direct browser-native campaign audio,
+  new/stage-specific audio content, human listening/quality/accessibility/
+  educational/legal review, and public-release gates remain open, with no
+  runtime behavior changed.
+
 ## [0.13.33] - 2026-07-28
 
 - Recorded current regional-affiliation integration-state presentation across

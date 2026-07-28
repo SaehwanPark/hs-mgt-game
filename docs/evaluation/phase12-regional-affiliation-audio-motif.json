@@ -1,0 +1,68 @@
+{
+  "schema_version": "regional-affiliation-audio-motif-v1",
+  "status": "complete-current-affiliation-audio-motif-boundary",
+  "campaign": "regional-affiliation-v1",
+  "scope": "current reusable affiliation/negotiation music state, committed milestone cue, visible triggers, and written fallback",
+  "source_contract": {
+    "music_state": "gui/music-stem-contract.mjs: affiliation_negotiation",
+    "music_trigger": "gui/music-stem-contract.mjs: Actor-visible affiliation, partner, coalition, or negotiation stage/report",
+    "music_equivalent": "gui/music-stem-contract.mjs: Partner, coalition, negotiation, and commitment status text",
+    "music_classifier": "gui/music-stem-contract.mjs: AFFILIATION_WORDS",
+    "music_fallback": "gui/music-stem-contract.mjs: Music unavailable or suppressed; the visible heading, status, source, and result remain complete.",
+    "event_cue": "gui/audio-cue-contract.mjs: event.affiliation-milestone",
+    "event_route": "gui/audio.mjs: event.affiliation-milestone",
+    "host_music_route": "src/mcp/resolution.rs: affiliation_negotiation",
+    "host_event_route": "src/mcp/resolution.rs: event.affiliation-milestone",
+    "audio_catalog": "gui/audio-catalog.json: affiliation_negotiation",
+    "music_test": "tests/test_music_stem_contract.py: MUSIC_STEM_CONTRACT",
+    "event_test": "tests/test_phase11_live_event_cues.py: event.affiliation-milestone",
+    "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
+    "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"
+  },
+  "motif": {
+    "music": {
+      "id": "affiliation_negotiation",
+      "label": "Affiliation or negotiation",
+      "semantic_purpose": "Mark a visible partner, coalition, or negotiation context without implying agreement.",
+      "visible_trigger_source": "Actor-visible affiliation, partner, coalition, or negotiation stage/report",
+      "text_equivalent": "Partner, coalition, negotiation, and commitment status text",
+      "loop_duration_ms": 4600,
+      "normalization_gain": 0.07,
+      "crossfade_ms": 260
+    },
+    "event": {
+      "id": "event.affiliation-milestone",
+      "semantic_purpose": "A committed affiliation stage milestone is visible",
+      "visible_source": "Committed visible affiliation history",
+      "text_equivalent": "Affiliation stage/status marker when supported",
+      "priority_class": "major",
+      "duration_ms": 150,
+      "cooldown_ms": 1500
+    },
+    "routing": {
+      "music": "Visible affiliation/partner/coalition/negotiation/commitment text may classify to the reusable music state.",
+      "event": "Only explicit visible affiliation or integration milestone text routes to the milestone cue.",
+      "campaign_boundary": "The shared contract is eligible for affiliation presentation but no direct browser-native regional-affiliation campaign envelope is claimed."
+    },
+    "written_fallback": "Audio unavailable or suppressed; visible headings, statuses, sources, results, stage markers, and written notifications remain complete."
+  },
+  "presentation_surface": {
+    "shared_audio_contract": "The shared browser audio contracts can render the optional music state and committed milestone cue from visible inputs.",
+    "audio_off_boundary": "Mute, unavailable audio, reduced motion, or unsupported Web Audio preserves written meaning and does not block host state or command submission.",
+    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation audio route is claimed.",
+    "new_asset_need": "none-required-by-current-stage-contract",
+    "release_audio": "Runtime-generated Web Audio has no release audio file; no new recorded or packaged audio is added."
+  },
+  "open_work": [
+    "direct browser-native regional-affiliation campaign audio integration",
+    "new or stage-specific audio content decision",
+    "human listening, quality, accessibility, educational, legal, and public-release review"
+  ],
+  "limits": [
+    "This record covers current reusable affiliation-audio contracts; it does not complete direct regional-affiliation campaign audio integration.",
+    "Audio is optional and may reflect only explicit visible context or committed visible events; it cannot encode agreement, severity, success, private intent, or future outcome.",
+    "No new recorded audio, release audio file, stem, cue ID, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
+    "No human listening, accessibility, educational, legal, quality, policy-validity, or public-release claim is made."
+  ],
+  "test_source": "tests/test_phase12_regional_affiliation_audio_motif.py"
+}

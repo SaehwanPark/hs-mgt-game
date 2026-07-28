@@ -6529,6 +6529,38 @@ Deferred / Non-Goals:
   route, persistence, instructor view, or authority path is introduced.
 - Optional audio remains visible-only with complete written meaning.
 
+### Visual/audio Phase 12 current regional-affiliation audio motif (v0.13.34)
+
+Status: Complete for current reusable motif evidence only; direct
+browser-native affiliation integration, new/stage-specific audio,
+human listening/quality/accessibility/legal/educational review, and public
+release remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-regional-affiliation-audio-motif.json` for
+  the reusable music state, explicit milestone cue, visible routing,
+  generated-audio properties, written fallback, and no-release-file boundary.
+- Added `tests/test_phase12_regional_affiliation_audio_motif.py` to check
+  source markers, IDs/properties, visible/audio-off/live-GUI boundaries, and
+  the no-new-asset decision.
+- Checked only current motif evidence and synchronized canonical docs,
+  lessons, version metadata, generated credits, and additive request,
+  contract, QA, and handoff records; no runtime behavior changed.
+
+Not Yet Done:
+
+- Direct browser-native campaign audio integration, new/stage-specific audio
+  content, human listening/quality/accessibility/legal/educational review,
+  and public release remain open.
+
+Deferred / Non-Goals:
+
+- No audio file, stem, cue, route, runtime field, registry entry, screenshot,
+  persistence, instructor view, or authority path is added.
+- Audio remains optional and visible-only with complete written meaning; it
+  cannot imply agreement, severity, success, private intent, or future outcome.
+
 ## Future
 
 ### Visual and audio experience upgrade

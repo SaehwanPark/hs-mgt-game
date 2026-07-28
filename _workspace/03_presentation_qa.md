@@ -3157,6 +3157,40 @@ accessibility, educational usability, and public release remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pending at handoff.
 
+# Presentation Domain QA — Phase 12 regional-affiliation audio motif v0.13.34
+
+## Status
+
+`pass` for bounded current reusable affiliation-audio motif QA only. No
+direct browser-native campaign audio, listening quality, accessibility,
+educational, legal, or public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: the existing `affiliation_negotiation` music state and explicit
+  `event.affiliation-milestone` cue resolve to visible trigger sources and
+  written equivalents.
+- Pass: generated-audio properties, optional routing, audio-off meaning,
+  competitive-only live-GUI scope, and no-new-asset boundary are explicit.
+- Pass: no new audio content, release file, runtime field, authority path, or
+  provenance/public-release claim is added.
+
+## Required fixes
+
+None for this bounded motif contract.
+
+## Evidence limits
+
+Direct browser-native campaign audio integration, new or stage-specific audio,
+human listening, device/accessibility, educational usability, legal review,
+provenance clearance, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_regional_affiliation_audio_motif` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.
+
 # Presentation Domain QA — Phase 12 stabilization accessibility evidence v0.13.28
 
 ## Status

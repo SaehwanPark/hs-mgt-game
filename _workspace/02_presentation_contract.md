@@ -2732,3 +2732,36 @@ markers, stage/process/decision identity, outcomes, hidden-input exclusions,
 renderers, canonical-command and written-fallback boundaries, live scope,
 optional audio, and the no-new-asset decision. State-specific art/audio,
 transitions, replay/debrief, persistence, and human review remain open.
+
+# Presentation Contract — Phase 12 regional-affiliation audio motif v0.13.34
+
+## Contract status
+
+Complete for the current reusable affiliation-audio motif evidence only.
+Direct browser-native campaign audio integration, new/stage-specific audio,
+human listening/quality/accessibility/legal/educational review, and public
+release remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds the existing `affiliation_negotiation` music state and
+  `event.affiliation-milestone` cue to explicit visible affiliation,
+  partner, coalition, negotiation, commitment, and committed milestone text.
+- Generated loop/cue properties and shared audio routing are recorded without
+  adding an audio file, release path, or direct campaign route.
+- Audio remains optional and cannot imply agreement, severity, success, private
+  intent, or future outcome.
+
+## Fallback, authority, and provenance
+
+Written headings, statuses, sources, results, stage markers, and notifications
+remain complete when audio is unavailable, muted, reduced, or unsupported.
+The live GUI remains competitive-regional-v1 only; no runtime authority,
+registry, or new asset boundary changes.
+
+## Verification and limits
+
+`tests/test_phase12_regional_affiliation_audio_motif.py` checks source markers,
+IDs/properties, visible routing, written/audio-off fallback, live scope, and
+the no-new-asset boundary. Direct campaign audio integration and human
+listening/quality review remain open.
