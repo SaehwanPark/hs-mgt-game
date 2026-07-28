@@ -3639,3 +3639,36 @@ comprehension, educational usability, and public release remain open.
 - `python3 -m unittest tests.test_phase12_decision_time_recovery_boundary` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
+
+# Presentation Domain QA — Phase 12.3 causal attribution boundary v0.13.41
+
+## Status
+
+`pass` for bounded current direct-attribution QA only. No causal inference,
+causal certainty, complete causal graph, accessibility, educational, or
+public-release approval is implied.
+
+## Reviewed inputs and findings
+
+- Pass: typed host effects retain source, metric, delta, and text, and the
+  resolution sequence keeps before/after and direct-effect stages ordered.
+- Pass: browser consequence links preserve host source and state-hash context;
+  they explicitly avoid future-outcome inference and causal graph authoring.
+- Pass: debrief attribution remains descriptive, source/status text is written,
+  and the live GUI scope remains competitive-only.
+
+## Required fixes
+
+None for this bounded direct-attribution contract.
+
+## Evidence limits
+
+Inferred causal graphs, causal certainty, counterfactual, distributional,
+export, instructor-surface, accessibility, human comprehension, educational
+usability, domain/policy validity, and public release remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase12_causal_attribution_boundary` — pass.
+- Full Python/Rust/lint/release/documentation/generation/asset/offline,
+  browser/device/visual-audio checks — pass.

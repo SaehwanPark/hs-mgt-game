@@ -2272,3 +2272,35 @@ per-decision observation playback.
   claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio Phase 12.3 causal attribution boundary v0.13.41
+
+## Scope
+
+Record the existing host-sourced direct-effect and before/after resolution
+presentation contract without adding causal inference or expanding authority.
+
+## Target slice
+
+- Join typed `ResolutionEffect` source/metric/delta/text fields to ordered
+  before/after, response, process, direct-effect, information, and pending
+  resolution stages.
+- Record source-linked consequence rendering, descriptive debrief attribution,
+  written fallback, and the competitive-only live-GUI boundary.
+
+## Sources and expected files
+
+- `src/mcp/resolution.rs`, `src/debrief/report.rs`, `gui/app.mjs`,
+  `gui/consequence-links.mjs`, `gui/README.md`, and the Phase 4 resolution
+  contract.
+- New causal-attribution ledger/parity test, roadmap/spec/architecture/
+  changelog/lessons, version projections, generated credits, and additive
+  contract, QA, and handoff records.
+
+## Non-goals and validation
+
+- Do not add causal inference, hidden-state fields, probability/calibration,
+  counterfactuals, distributional views, exports, assets, audio files,
+  persistence, routes, or human educational claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, offline, browser-policy, device-policy, and visual/audio checks.

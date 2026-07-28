@@ -1298,7 +1298,8 @@ At each phase gate, explicitly decide what will not be built next.
    Phase 12.3 instructor-authority boundary evidence at v0.13.38, and current
    Phase 12.3 true-state/player-visible language-boundary evidence at
    v0.13.39, and current Phase 12.3 decision-time recovery-boundary evidence
-   at v0.13.40.
+   at v0.13.40, and current Phase 12.3 direct-attribution boundary evidence at
+   v0.13.41.
 4. Keep human learning and classroom-effectiveness claims deferred until a
    separately funded and approved evaluation exists.
 5. Treat broader GUI, public-payer, patient, affiliation, difficulty, and actor

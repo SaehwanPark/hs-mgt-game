@@ -3031,3 +3031,11 @@ reported estimates are revised. Host history/replay summaries are intentionally
 narrower and the current browser view shows summary turn/command/hash data.
 Document those layers separately so technical recoverability is not mistaken
 for complete browser playback or human decision-time comprehension.
+
+## Phase 51: Keep direct effects descriptive (2026-07-28)
+
+Host-sourced effect records and before/after resolution stages can make a
+committed consequence inspectable, and source-linked consequence items can make
+that evidence readable. They do not justify an inferred causal graph, causal
+certainty, calibrated forecast, or policy-validity claim. Keep direct effect
+attribution, causal inference, and human review as separate gates.

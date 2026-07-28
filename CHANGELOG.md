@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.41] - 2026-07-28
+
+- Recorded current host-sourced direct-effect attribution, ordered before/after
+  resolution context, source-linked consequence rendering, and descriptive
+  debrief attribution language.
+- Closed only current direct-attribution boundary evidence; inferred causal
+  graphs, counterfactual/distributional views, and human review remain open,
+  with no runtime behavior changed.
+
 ## [0.13.40] - 2026-07-28
 
 - Recorded current decision-time observation retention in immutable core

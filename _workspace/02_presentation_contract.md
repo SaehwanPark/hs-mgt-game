@@ -2968,3 +2968,34 @@ than core history and do not expose resolved inputs or private rationale.
 `tests/test_phase12_decision_time_recovery_boundary.py` checks source markers,
 recovery contracts, the narrower host/browser boundary, written fallback, and
 no-expansion limits. Full browser recovery and human review remain open.
+
+# Presentation Contract — Phase 12.3 causal attribution boundary v0.13.41
+
+## Contract status
+
+Complete for current host-sourced direct-attribution evidence only. Inferred
+causal graphs, causal certainty, counterfactual, distributional, export,
+instructor-surface, accessibility, human educational, and public-release work
+remain separately gated.
+
+## Source and visible behavior
+
+- The ledger binds typed `ResolutionEffect` source/metric/delta/text fields,
+  ordered direct-effect resolution stages, descriptive debrief attribution,
+  and source-linked consequence rendering.
+- Host/core resolution owns effect source, magnitude, text, and ordering;
+  shared renderers display supplied evidence without calculating new outcomes.
+- The live GUI remains `competitive-regional-v1` only; direct attribution is a
+  descriptive source-linked layer, not a browser causal model.
+
+## Fallback, authority, and provenance
+
+Effect text, source labels, before/after values, hashes, consequence text, and
+debrief lines remain readable without audio or decorative motion. Before/after
+comparison does not authorize causal certainty or future-outcome inference.
+
+## Verification and limits
+
+`tests/test_phase12_causal_attribution_boundary.py` checks source markers,
+attribution contracts, read-only/live scope, written fallback, and no-inference
+limits. Broader causal design and human review remain open.
