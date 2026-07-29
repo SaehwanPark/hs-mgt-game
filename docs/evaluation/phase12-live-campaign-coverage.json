@@ -1,7 +1,7 @@
 {
   "schema_version": "phase12-live-campaign-coverage-v1",
-  "status": "complete-current-technical-browser-handoff-only",
-  "target": "Connect the existing campaign-coverage-v1 envelope to the loopback GUI launcher for stabilization-v1 and regional-affiliation-v1.",
+  "status": "complete-current-technical-browser-and-audio-handoff-only",
+  "target": "Connect the existing campaign-coverage-v1 envelope, including optional host-sourced audio metadata, to the loopback GUI launcher for stabilization-v1 and regional-affiliation-v1.",
   "campaigns": [
     "stabilization-v1",
     "regional-affiliation-v1"
@@ -15,6 +15,8 @@
     "launcher_campaign_set": "gui/app.mjs: SESSION_LAUNCH_CAMPAIGNS",
     "campaign_fallback": "gui/app.mjs: loadCampaignCoverage",
     "campaign_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "campaign_audio_projection": "src/mcp/campaign_coverage.rs: CampaignCoverageAudio",
+    "campaign_audio_client": "gui/app.mjs: campaignMusicStateId",
     "canonical_mutation": "gui/app.mjs: adapter.submitTurn(command)"
   },
   "findings": {
@@ -24,6 +26,8 @@
     "campaign_decisions_use_host_submit_turn": true,
     "existing_session_campaign_is_resolved_from_host": true,
     "rejected_campaign_decisions_do_not_advance_history": true,
+    "campaign_audio_metadata_uses_existing_catalog_only": true,
+    "explicit_empty_campaign_cues_disable_legacy_fallback": true,
     "browser_true_state_or_new_authority_added": false,
     "campaign_specific_visual_audio_quality_review": false,
     "human_accessibility_educational_or_public_release_review": false

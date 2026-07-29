@@ -60,7 +60,7 @@
     },
     {
       "id": "ui-feedback-cues",
-      "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+      "reuse_decision": "current-contract-eligible",
       "catalog_sources": [
         {
           "path": "gui/audio-catalog.json",
@@ -76,7 +76,7 @@
       "current_surface": "Tutorial-oriented executive stabilization uses shared identity, marker, status, fallback, and host-authored debrief presentation.",
       "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],
       "audio_reuse": {
-        "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+        "reuse_decision": "current-contract-eligible",
         "catalog_sources": [
           {
             "path": "gui/audio-catalog.json",
@@ -87,13 +87,13 @@
         "visible_equivalent": "Written stage, status, and debrief content remains complete when optional audio is muted or unavailable."
       },
       "new_asset_need": "none-required-by-current-abstract-contract",
-      "open_work": ["campaign-specific tutorial presentation", "new pressure-state taxonomy", "direct campaign audio-state mapping", "audio/content quality review"]
+      "open_work": ["campaign-specific tutorial presentation", "new pressure-state taxonomy", "audio/content quality review"]
     },
     "regional-affiliation-v1": {
       "current_surface": "Stage/partner/commitment/review/integration signals use shared identity, marker, status, fallback, and host-authored debrief presentation.",
       "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],
       "audio_reuse": {
-        "reuse_decision": "current-contract-eligible-but-not-direct-mapping",
+        "reuse_decision": "current-contract-eligible",
         "catalog_sources": [
           {
             "path": "gui/audio-catalog.json",
@@ -108,7 +108,7 @@
     }
   },
   "limits": [
-    "Reuse eligibility does not prove that every listed cue or ambience is directly mapped into the campaign-coverage envelope.",
+    "The current campaign projection is directly mapped through explicit host-sourced music/cue IDs from the existing catalog; reuse eligibility does not establish audio quality or human usefulness.",
     "No new map, facility, portrait, stage-art, or file-backed audio asset is created or promoted by this matrix.",
     "Existing technical accessibility, provenance, and written-equivalent checks do not establish human comprehension, audio usefulness, or visual quality.",
     "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."

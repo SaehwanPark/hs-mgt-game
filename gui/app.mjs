@@ -901,10 +901,24 @@ function renderRegionalNavigation(navigation, root) {
   if (!navigation?.length) emptyState(nav, "Regional navigation is unavailable.");
 }
 
+export function campaignMusicStateId(envelope = {}) {
+  const state = envelope?.audio?.music_state_id;
+  return typeof state === "string" && state.trim() ? state.trim() : null;
+}
+
+export function campaignAudioCueIds(envelope = {}) {
+  if (!Array.isArray(envelope?.audio?.audio_cue_ids)) return null;
+  const allowed = new Set(AUDIO_CATALOG.cues.map((entry) => entry.id));
+  return envelope.audio.audio_cue_ids
+    .filter((cueId) => typeof cueId === "string" && allowed.has(cueId.trim()))
+    .map((cueId) => cueId.trim());
+}
+
 function campaignAudioInput(envelope) {
   return {
     campaign: envelope?.session?.campaign,
     done: envelope?.session?.done,
+    music_state_id: campaignMusicStateId(envelope),
     observation: {
       market_bullets: (envelope?.briefing ?? []).map((entry) => entry.detail),
       workforce_trust: (envelope?.actors ?? []).map((entry) => entry.status).join(" "),
@@ -1142,7 +1156,9 @@ export function createCampaignCoverageClient({
       renderOnboarding(envelope, root, recorder);
       recordVisibleEnvelope(recorder, envelope);
       const audioInput = campaignAudioInput(envelope);
-      audioClient.setMusicFromVisible(audioInput);
+      const musicStateId = campaignMusicStateId(envelope);
+      if (musicStateId) audioClient.setMusicState(musicStateId, audioInput);
+      else audioClient.setMusicFromVisible(audioInput);
       audioClient.setAmbienceFromVisible(audioInput);
       return result;
     } catch (error) {
@@ -1172,7 +1188,10 @@ export function createCampaignCoverageClient({
       if (!result.ok) return result;
       audioClient.playCue("ui.report-received");
       audioClient.playCue("ui.advance-month");
-      if (result.envelope.session?.campaign === "regional-affiliation-v1") {
+      const cueIds = campaignAudioCueIds(result.envelope);
+      if (cueIds) {
+        for (const cueId of cueIds) audioClient.playCue(cueId);
+      } else if (result.envelope.session?.campaign === "regional-affiliation-v1") {
         audioClient.playCue("event.affiliation-milestone");
       }
       onCommitted(result.envelope);
@@ -3085,6 +3104,8 @@ if (typeof document !== "undefined") {
       createCheckpointClient,
       createReadOnlyClient,
       createThinClient,
+      campaignMusicStateId,
+      campaignAudioCueIds,
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,
@@ -3126,6 +3147,8 @@ if (typeof document !== "undefined") {
       createCheckpointClient,
       createReadOnlyClient,
       createThinClient,
+      campaignMusicStateId,
+      campaignAudioCueIds,
       renderEnvelope,
       renderPresentation,
       renderReadOnlyEnvelope,

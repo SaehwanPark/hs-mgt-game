@@ -38,7 +38,7 @@ class Phase12PressureStateRegistrationTests(unittest.TestCase):
       for source_id in state["overlay_ids"] + state["event_cue_ids"]:
         source_path = "gui/operational-overlays.mjs" if source_id.startswith("operational-") else "gui/audio-cue-contract.mjs"
         self.assertIn(source_id, source_cache[source_path], source_id)
-      self.assertEqual(state["audio_mapping_boundary"], "eligible-visible-only-not-direct-campaign-mapping")
+      self.assertEqual(state["audio_mapping_boundary"], "eligible-visible-only-host-sourced-campaign-metadata")
     self.assertGreaterEqual(len(state_ids), 8)
     for campaign in self.ledger["campaigns"].values():
       self.assertEqual(set(campaign["shared_registered_state_ids"]), state_ids)
@@ -46,7 +46,7 @@ class Phase12PressureStateRegistrationTests(unittest.TestCase):
 
   def test_limits_preserve_visible_only_and_no_new_asset_boundary(self):
     limits = " ".join(self.ledger["limits"])
-    for marker in ("hidden severity", "direct campaign-envelope audio mapping", "No new campaign-specific pressure ID", "human quality", "educational usability", "true-state", "public-release"):
+    for marker in ("hidden severity", "host-sourced campaign metadata", "No new campaign-specific pressure ID", "human quality", "educational usability", "true-state", "public-release"):
       self.assertIn(marker, limits)
     self.assertEqual(self.ledger["test_source"], "tests/test_phase12_pressure_state_registration.py")
 

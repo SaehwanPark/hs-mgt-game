@@ -123,7 +123,10 @@ repeated cues. Master, music, interface, event, and ambience volumes are
 independent sliders.
 
 Audio emphasizes information already visible on the page. Every cue has a
-written equivalent, and muted or unsupported audio never prevents play.
+written equivalent, and muted or unsupported audio never prevents play. For
+campaign coverage, host-supplied music/cue metadata is optional and remains
+limited to the existing catalog; the written stage and decision surface stays
+complete when it is absent or muted.
 
 ## Credits and provenance
 

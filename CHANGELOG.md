@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.60] - 2026-07-29
+
+- Added typed host-sourced campaign audio metadata to the existing
+  `campaign-coverage-v1` projection for stabilization and regional affiliation.
+- Routed supplied music and allowlisted event cues through the browser audio
+  client, preserving explicit-empty behavior and legacy fallback for older
+  adapters.
+- Kept campaign-specific audio quality/listening, accessibility, educational,
+  provenance, persistence, device, and public-release gates open.
+
 ## [0.13.59] - 2026-07-29
 
 - Added a campaign-aware first-session rail for stabilization and regional

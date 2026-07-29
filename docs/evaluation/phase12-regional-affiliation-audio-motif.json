@@ -1,6 +1,6 @@
 {
   "schema_version": "regional-affiliation-audio-motif-v1",
-  "status": "complete-current-affiliation-audio-motif-boundary",
+  "status": "complete-current-affiliation-audio-integration-boundary",
   "campaign": "regional-affiliation-v1",
   "scope": "current reusable affiliation/negotiation music state, committed milestone cue, visible triggers, and written fallback",
   "source_contract": {
@@ -49,17 +49,16 @@
   "presentation_surface": {
     "shared_audio_contract": "The shared browser audio contracts can render the optional music state and committed milestone cue from visible inputs.",
     "audio_off_boundary": "Mute, unavailable audio, reduced motion, or unsupported Web Audio preserves written meaning and does not block host state or command submission.",
-    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific audio route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel and honors optional host-sourced regional-affiliation audio metadata through the existing catalog.",
     "new_asset_need": "none-required-by-current-stage-contract",
     "release_audio": "Runtime-generated Web Audio has no release audio file; no new recorded or packaged audio is added."
   },
   "open_work": [
-    "direct browser-native regional-affiliation campaign audio integration",
     "new or stage-specific audio content decision",
     "human listening, quality, accessibility, educational, legal, and public-release review"
   ],
   "limits": [
-    "This record covers current reusable affiliation-audio contracts; it does not complete direct regional-affiliation campaign audio integration.",
+    "This record covers the current reusable affiliation-audio contracts and their optional host-sourced campaign projection; stage-specific content and listening quality remain open.",
     "Audio is optional and may reflect only explicit visible context or committed visible events; it cannot encode agreement, severity, success, private intent, or future outcome.",
     "No new recorded audio, release audio file, stem, cue ID, route, runtime field, registry entry, screenshot, persistence, instructor view, or authority path is created or promoted.",
     "No human listening, accessibility, educational, legal, quality, policy-validity, or public-release claim is made."

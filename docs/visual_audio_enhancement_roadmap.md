@@ -2937,23 +2937,22 @@ open.
   triggers documented for future campaign geography or placement.
 - [x] Reusable assets used where possible. Evidence:
   `docs/evaluation/phase12-campaign-reuse-matrix.json` and
-  `tests/test_phase12_campaign_reuse_matrix.py`; direct campaign audio mapping
-  and campaign-specific quality review remain open.
+  `tests/test_phase12_campaign_reuse_matrix.py`; existing catalog projection is
+  covered while campaign-specific quality review remains open.
 - [x] Current shared pressure-state taxonomy registered. Evidence:
   `docs/evaluation/phase12-pressure-state-registration.json` and
   `tests/test_phase12_pressure_state_registration.py`; campaign-specific
-  pressure taxonomy, tutorial explanation, and direct audio mapping remain
-  open.
+  pressure taxonomy, tutorial explanation, and human quality review remain open.
 - [x] Current stabilization tutorial presentation contract recorded. Evidence:
   `docs/evaluation/phase12-stabilization-tutorial-presentation.json` and
   `tests/test_phase12_stabilization_tutorial_presentation.py`; the current
-  CLI beginner flow and guide are covered, while browser-native integration,
-  direct audio, and human review remain open.
+  CLI beginner flow, guide, and current browser audio projection are covered,
+  while campaign-specific tutorial content and human review remain open.
 - [x] Current stabilization audio-state mapping recorded. Evidence:
   `docs/evaluation/phase12-stabilization-audio-state-mapping.json` and
   `tests/test_phase12_stabilization_audio_state_mapping.py`; the eight shared
-  categories map to existing optional music/cue/direction contracts, while
-  direct campaign-envelope integration, quality, and human review remain open.
+  categories map to existing optional music/cue/direction contracts and the
+  live campaign envelope; quality and human review remain open.
 - [x] Current stabilization debrief presentation recorded. Evidence:
   `docs/evaluation/phase12-stabilization-debrief-presentation.json` and
   `tests/test_phase12_stabilization_debrief_presentation.py`; current CLI and
@@ -2974,10 +2973,11 @@ open.
 - [x] Current live stabilization campaign-coverage handoff passes. Evidence:
   `docs/evaluation/phase12-live-campaign-coverage.json`,
   `tests/test_phase12_live_campaign_coverage.py`, the loopback
-  `campaign-coverage-v1` route, and the shared campaign renderer; the existing
-  stabilization stage/decision/history/debrief projection is now reachable
-  from the browser launcher while campaign-specific visual/audio quality and
-  human review remain open.
+  `campaign-coverage-v1` route, shared campaign renderer, and optional typed
+  host-sourced audio projection; the existing stabilization
+  stage/decision/history/debrief/audio surface is now reachable from the
+  browser launcher while campaign-specific visual/audio quality and human
+  review remain open.
 
 ### Exit criteria
 
@@ -3034,8 +3034,8 @@ remains open.
   Evidence: `docs/evaluation/phase12-regional-affiliation-audio-motif.json`
   and `tests/test_phase12_regional_affiliation_audio_motif.py`; reusable
   affiliation/negotiation music, explicit milestone cue, visible routing, and
-  written/audio-off fallback are covered while direct campaign integration and
-  human listening review remain open.
+  written/audio-off fallback are covered while stage-specific content quality
+  and human listening review remain open.
 - [x] Current regional-affiliation stage-transition sequence recorded.
   Evidence:
   `docs/evaluation/phase12-regional-affiliation-stage-transition-sequence.json`
@@ -3058,10 +3058,11 @@ remains open.
 - [x] Current live regional-affiliation campaign-coverage handoff passes.
   Evidence: `docs/evaluation/phase12-live-campaign-coverage.json`,
   `tests/test_phase12_live_campaign_coverage.py`, the loopback
-  `campaign-coverage-v1` route, and the shared campaign renderer; the existing
-  stage/decision/history/debrief projection is now reachable from the browser
-  launcher while stage-specific visual/audio quality and human review remain
-  open.
+  `campaign-coverage-v1` route, shared campaign renderer, and optional typed
+  host-sourced audio projection; the existing
+  stage/decision/history/debrief/audio surface is now reachable from the
+  browser launcher while stage-specific visual/audio quality and human review
+  remain open.
 
 ### v0.13.21 current campaign-specific presentation inventory
 
@@ -3886,6 +3887,24 @@ are completed. Human-review gates remain open.
   campaign-specific visual/audio quality, screenshots, durable persistence,
   browser/device certification, human accessibility/educational review,
   provenance/legal review, and public-release approval remain open.
+
+### v0.13.60 current direct campaign audio projection
+
+- `src/mcp/campaign_coverage.rs` adds the typed `CampaignCoverageAudio`
+  projection to the existing `campaign-coverage-v1` envelope. The host derives
+  music and event IDs only from the campaign's visible stage, briefing, actor,
+  process, and committed history summaries, using existing catalog IDs.
+- `gui/app.mjs` honors a supplied `music_state_id` directly and filters
+  `audio_cue_ids` against the existing catalog. Explicit empty cue metadata
+  means “play no campaign cue”; omitted metadata preserves the pre-existing
+  regional-affiliation milestone fallback for older adapters.
+- `tests/test_phase12_live_campaign_coverage.py`, the stabilization and
+  regional-affiliation audio ledgers, and the pressure/reuse ledgers cover the
+  new source boundary and written/audio-off behavior. No new route, simulation
+  rule, asset, audio file, authority path, or schema version is introduced.
+- This closes only the current technical direct-projection boundary. Campaign-
+  specific visual/audio quality, listening, accessibility, educational,
+  provenance/legal, persistence, device, and public-release gates remain open.
 
 ### Exit criteria
 

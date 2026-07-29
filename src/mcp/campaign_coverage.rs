@@ -11,7 +11,9 @@ use super::session::{TransitionSummary, affiliation_legal_commands, stabilizatio
 
 pub const CAMPAIGN_COVERAGE_SCHEMA_VERSION: &str = "campaign-coverage-v1";
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageEnvelope {
   pub schema_version: String,
   pub session: CampaignCoverageSession,
@@ -24,10 +26,14 @@ pub struct CampaignCoverageEnvelope {
   pub decisions: Vec<CampaignCoverageDecision>,
   pub history: Vec<TransitionSummary>,
   pub debrief: Vec<String>,
+  #[serde(default, skip_serializing_if = "Option::is_none")]
+  pub audio: Option<CampaignCoverageAudio>,
   pub replay: CampaignCoverageReplayMetadata,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageSession {
   pub session_id: String,
   pub campaign: String,
@@ -37,7 +43,9 @@ pub struct CampaignCoverageSession {
   pub done: bool,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageStage {
   pub id: String,
   pub label: String,
@@ -45,7 +53,9 @@ pub struct CampaignCoverageStage {
   pub source: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageBriefing {
   pub kind: String,
   pub title: String,
@@ -53,7 +63,9 @@ pub struct CampaignCoverageBriefing {
   pub source: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageMetric {
   pub label: String,
   pub value: String,
@@ -62,7 +74,9 @@ pub struct CampaignCoverageMetric {
   pub equivalent: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageActor {
   pub id: String,
   pub label: String,
@@ -72,7 +86,9 @@ pub struct CampaignCoverageActor {
   pub source: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageProcess {
   pub id: String,
   pub label: String,
@@ -81,7 +97,9 @@ pub struct CampaignCoverageProcess {
   pub source: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageDecision {
   pub id: String,
   pub label: String,
@@ -91,7 +109,9 @@ pub struct CampaignCoverageDecision {
   pub parameters: Vec<CampaignCoverageParameter>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageParameter {
   pub name: String,
   pub label: String,
@@ -101,16 +121,28 @@ pub struct CampaignCoverageParameter {
   pub max: Option<i32>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageOption {
   pub label: String,
   pub value: String,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, schemars::JsonSchema)]
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
 pub struct CampaignCoverageReplayMetadata {
   pub transition_count: usize,
   pub state_hash: Option<String>,
+}
+
+#[derive(
+  Clone, Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize, schemars::JsonSchema,
+)]
+pub struct CampaignCoverageAudio {
+  pub music_state_id: String,
+  pub audio_cue_ids: Vec<String>,
 }
 
 pub(crate) fn from_stabilization(
@@ -165,6 +197,49 @@ pub(crate) fn from_stabilization(
     ));
   }
 
+  let stage = CampaignCoverageStage {
+    id: format!("turn-{turn}"),
+    label: if done {
+      "Stabilization complete".to_string()
+    } else {
+      format!("Stabilization turn {turn}")
+    },
+    detail: if done {
+      "Review the committed tradeoffs in the educational debrief.".to_string()
+    } else {
+      "Choose the response for this stage; future outcomes remain uncertain.".to_string()
+    },
+    source: "Stabilization session stage".to_string(),
+  };
+  let actors = vec![actor(
+    "health-system-executive",
+    "Health system executive",
+    "Player decision-maker",
+    "observing",
+    "Allocates visible resources and commitments while other institutions respond.",
+    "Stabilization campaign role",
+  )];
+  let processes = vec![process(
+    "stabilization-stage",
+    "Stage response",
+    if done {
+      "No further stage response is available.".to_string()
+    } else {
+      "One host-defined response is available for this stabilization turn.".to_string()
+    },
+    if done { "complete" } else { "active" },
+    "Stabilization stage and legal command surface",
+  )];
+  let audio = campaign_audio(
+    "stabilization-v1",
+    done,
+    &stage,
+    &briefings,
+    &actors,
+    &processes,
+    history,
+  );
+
   CampaignCoverageEnvelope {
     schema_version: CAMPAIGN_COVERAGE_SCHEMA_VERSION.to_string(),
     session: CampaignCoverageSession {
@@ -176,20 +251,7 @@ pub(crate) fn from_stabilization(
       done,
     },
     campaign_role: "tutorial-oriented stabilization".to_string(),
-    stage: CampaignCoverageStage {
-      id: format!("turn-{turn}"),
-      label: if done {
-        "Stabilization complete".to_string()
-      } else {
-        format!("Stabilization turn {turn}")
-      },
-      detail: if done {
-        "Review the committed tradeoffs in the educational debrief.".to_string()
-      } else {
-        "Choose the response for this stage; future outcomes remain uncertain.".to_string()
-      },
-      source: "Stabilization session stage".to_string(),
-    },
+    stage,
     briefing: briefings,
     metrics: vec![
       metric(
@@ -221,25 +283,8 @@ pub(crate) fn from_stabilization(
         "Reported quality measure",
       ),
     ],
-    actors: vec![actor(
-      "health-system-executive",
-      "Health system executive",
-      "Player decision-maker",
-      "observing",
-      "Allocates visible resources and commitments while other institutions respond.",
-      "Stabilization campaign role",
-    )],
-    processes: vec![process(
-      "stabilization-stage",
-      "Stage response",
-      if done {
-        "No further stage response is available.".to_string()
-      } else {
-        "One host-defined response is available for this stabilization turn.".to_string()
-      },
-      if done { "complete" } else { "active" },
-      "Stabilization stage and legal command surface",
-    )],
+    actors,
+    processes,
     decisions,
     history: history.to_vec(),
     debrief: if done {
@@ -247,6 +292,7 @@ pub(crate) fn from_stabilization(
     } else {
       Vec::new()
     },
+    audio: Some(audio),
     replay: CampaignCoverageReplayMetadata {
       transition_count: history.len(),
       state_hash: latest_hash,
@@ -293,6 +339,68 @@ pub(crate) fn from_affiliation(
   }));
 
   let decisions = affiliation_decisions(state, ruleset);
+  let stage = CampaignCoverageStage {
+    id: format!("{:?}", observation.stage).to_ascii_lowercase(),
+    label: affiliation_stage_label(observation.stage).to_string(),
+    detail: if done {
+      "Review the partner, stakeholder, and integration tradeoffs in the debrief.".to_string()
+    } else {
+      "The current stage exposes a bounded institutional decision; later responses remain uncertain.".to_string()
+    },
+    source: "AffiliationObservation.stage".to_string(),
+  };
+  let actors = vec![
+    actor(
+      "riverside",
+      &observation.riverside_name,
+      "Player institution",
+      &format!("{:?}", observation.status),
+      "Sets posture, commitments, review choices, and integration decision.",
+      "AffiliationObservation Riverside fields",
+    ),
+    actor(
+      "partner",
+      &observation.partner_name,
+      "Potential partner",
+      &condition,
+      "Partner condition is reported only when the campaign stage makes it visible.",
+      "AffiliationObservation.partner_name/reported_condition",
+    ),
+    actor(
+      "labor",
+      "Labor response",
+      "Stakeholder",
+      &format!("{:?}", observation.labor_response),
+      "Labor response is separate from Riverside workforce trust.",
+      "AffiliationObservation.labor_response",
+    ),
+    actor(
+      "payer",
+      "Payer response",
+      "Stakeholder",
+      &format!("{:?}", observation.payer_response),
+      "Payer response is separate from Riverside market share.",
+      "AffiliationObservation.payer_response",
+    ),
+    actor(
+      "community",
+      "Community response",
+      "Stakeholder",
+      &format!("{:?}", observation.community_response),
+      "Community response is separate from Riverside community trust.",
+      "AffiliationObservation.community_response",
+    ),
+  ];
+  let processes = affiliation_processes(&observation);
+  let audio = campaign_audio(
+    "regional-affiliation-v1",
+    done,
+    &stage,
+    &briefings,
+    &actors,
+    &processes,
+    history,
+  );
   CampaignCoverageEnvelope {
     schema_version: CAMPAIGN_COVERAGE_SCHEMA_VERSION.to_string(),
     session: CampaignCoverageSession {
@@ -304,16 +412,7 @@ pub(crate) fn from_affiliation(
       done,
     },
     campaign_role: "institutional fit and obligation process".to_string(),
-    stage: CampaignCoverageStage {
-      id: format!("{:?}", observation.stage).to_ascii_lowercase(),
-      label: affiliation_stage_label(observation.stage).to_string(),
-      detail: if done {
-        "Review the partner, stakeholder, and integration tradeoffs in the debrief.".to_string()
-      } else {
-        "The current stage exposes a bounded institutional decision; later responses remain uncertain.".to_string()
-      },
-      source: "AffiliationObservation.stage".to_string(),
-    },
+    stage,
     briefing: briefings,
     metrics: vec![
       metric(
@@ -380,49 +479,8 @@ pub(crate) fn from_affiliation(
         "Visible obligation",
       ),
     ],
-    actors: vec![
-      actor(
-        "riverside",
-        &observation.riverside_name,
-        "Player institution",
-        &format!("{:?}", observation.status),
-        "Sets posture, commitments, review choices, and integration decision.",
-        "AffiliationObservation Riverside fields",
-      ),
-      actor(
-        "partner",
-        &observation.partner_name,
-        "Potential partner",
-        &condition,
-        "Partner condition is reported only when the campaign stage makes it visible.",
-        "AffiliationObservation.partner_name/reported_condition",
-      ),
-      actor(
-        "labor",
-        "Labor response",
-        "Stakeholder",
-        &format!("{:?}", observation.labor_response),
-        "Labor response is separate from Riverside workforce trust.",
-        "AffiliationObservation.labor_response",
-      ),
-      actor(
-        "payer",
-        "Payer response",
-        "Stakeholder",
-        &format!("{:?}", observation.payer_response),
-        "Payer response is separate from Riverside market share.",
-        "AffiliationObservation.payer_response",
-      ),
-      actor(
-        "community",
-        "Community response",
-        "Stakeholder",
-        &format!("{:?}", observation.community_response),
-        "Community response is separate from Riverside community trust.",
-        "AffiliationObservation.community_response",
-      ),
-    ],
-    processes: affiliation_processes(&observation),
+    actors,
+    processes,
     decisions,
     history: history.to_vec(),
     debrief: if done {
@@ -430,10 +488,134 @@ pub(crate) fn from_affiliation(
     } else {
       Vec::new()
     },
+    audio: Some(audio),
     replay: CampaignCoverageReplayMetadata {
       transition_count: history.len(),
       state_hash: latest_hash,
     },
+  }
+}
+
+fn campaign_audio(
+  campaign: &str,
+  done: bool,
+  stage: &CampaignCoverageStage,
+  briefings: &[CampaignCoverageBriefing],
+  actors: &[CampaignCoverageActor],
+  processes: &[CampaignCoverageProcess],
+  history: &[TransitionSummary],
+) -> CampaignCoverageAudio {
+  let visible_text = [
+    stage.label.as_str(),
+    stage.detail.as_str(),
+    &briefings
+      .iter()
+      .flat_map(|entry| [entry.title.as_str(), entry.detail.as_str()])
+      .collect::<Vec<_>>()
+      .join(" "),
+    &actors
+      .iter()
+      .flat_map(|entry| {
+        [
+          entry.label.as_str(),
+          entry.role.as_str(),
+          entry.status.as_str(),
+          entry.detail.as_str(),
+        ]
+      })
+      .collect::<Vec<_>>()
+      .join(" "),
+    &processes
+      .iter()
+      .flat_map(|entry| {
+        [
+          entry.label.as_str(),
+          entry.status.as_str(),
+          entry.detail.as_str(),
+        ]
+      })
+      .collect::<Vec<_>>()
+      .join(" "),
+  ]
+  .join(" ")
+  .to_ascii_lowercase();
+  let music_state_id = if done {
+    "debrief"
+  } else if campaign == "regional-affiliation-v1" || visible_text.contains("affiliation") {
+    "affiliation_negotiation"
+  } else if visible_text.contains("regulat") || visible_text.contains("policy review") {
+    "regulatory_scrutiny"
+  } else if [
+    "pressure",
+    "strained",
+    "shortage",
+    "constraint",
+    "unmet",
+    "negative",
+  ]
+  .iter()
+  .any(|word| visible_text.contains(word))
+  {
+    "pressure"
+  } else {
+    "stable_operations"
+  };
+
+  let transition_text = history
+    .last()
+    .map(|summary| {
+      summary
+        .events
+        .iter()
+        .chain(summary.effects.iter())
+        .map(String::as_str)
+        .collect::<Vec<_>>()
+        .join(" ")
+        .to_ascii_lowercase()
+    })
+    .unwrap_or_default();
+  let mut audio_cue_ids = Vec::new();
+  let mut add_cue = |cue_id: &str| {
+    if !audio_cue_ids.iter().any(|existing| existing == cue_id) {
+      audio_cue_ids.push(cue_id.to_string());
+    }
+  };
+  if transition_text.contains("project") && transition_text.contains("complete") {
+    add_cue("event.project-complete");
+  }
+  if ["staffing", "staffed", "vacancy", "workforce constraint"]
+    .iter()
+    .any(|word| transition_text.contains(word))
+  {
+    add_cue("event.staffing-constraint");
+  }
+  if transition_text.contains("operating loss") || transition_text.contains("negative margin") {
+    add_cue("event.operating-loss");
+  }
+  if transition_text.contains("operating recovery") || transition_text.contains("recovery") {
+    add_cue("event.operating-recovery");
+  }
+  if transition_text.contains("payer") {
+    add_cue("event.payer-decision");
+  }
+  if transition_text.contains("regulat") || transition_text.contains("policy decision") {
+    add_cue("event.regulatory-decision");
+  }
+  if (transition_text.contains("rival")
+    && (transition_text.contains("expand") || transition_text.contains("expansion")))
+    || (transition_text.contains("expan") && transition_text.contains("rival"))
+  {
+    add_cue("event.rival-expansion");
+  }
+  if transition_text.contains("affiliation milestone")
+    || transition_text.contains("integration milestone")
+  {
+    add_cue("event.affiliation-milestone");
+  }
+
+  CampaignCoverageAudio {
+    music_state_id: music_state_id.to_string(),
+    audio_cue_ids,
   }
 }
 
