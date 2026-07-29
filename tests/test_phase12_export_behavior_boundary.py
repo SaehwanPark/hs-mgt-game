@@ -34,7 +34,10 @@ class Phase12ExportBehaviorBoundaryTests(unittest.TestCase):
       "serialized CompetitiveHistory JSON",
       "versioned regional-affiliation replay artifact",
       "empty export input skips writing",
-      "never browser state",
+      "CLI calls the existing writer",
+      "separate verify_replay_artifact function",
+      "may serialize commands",
+      "not browser state",
       "mid-run saves",
     ):
       self.assertIn(marker, " ".join(contract.values()))

@@ -3746,6 +3746,8 @@ usability, domain/policy validity, and public release remain open.
 `pass` for the documentation-only export boundary. The evidence distinguishes
 the existing stabilization/affiliation versioned replay artifacts from the
 competitive serialized-history export, preserves the empty-input skip, and
-does not promote any export into browser authority or mid-run persistence.
-Human classroom export workflows and future competitive-format versioning
-remain open questions.
+records that stabilization's separate verifier is not called by the writer
+command. Exported artifacts may contain serialized commands, transitions, and
+hashes, but are not browser authority or mid-run persistence. Human classroom
+export workflows and future competitive-format versioning remain open
+questions.
