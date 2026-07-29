@@ -3786,3 +3786,11 @@ guide distinguishes a fictional educational simulation from calibrated policy
 forecasting and real-world decision tools, keeps host/actor visibility limits
 visible, and names unresolved human/release gates. No runtime, asset, audio,
 authority, persistence, or educational approval claim was added.
+
+## Vertical-Slice Technical Evidence QA — v0.13.49
+
+`pass` for the bounded current technical slice. Existing live tests bind the
+actor-visible board, facilities/reports, project overlays, first-month
+consequences, and visible-input-driven planning/pressure music without hidden
+state or client authority. Full-campaign, provenance, first-time-user, and
+human review remain open.

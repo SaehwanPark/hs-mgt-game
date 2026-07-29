@@ -3988,15 +3988,46 @@ The visual/audio enhancement program should be considered successful when the fo
 
 ## Vertical-slice sprint
 
-- [ ] Integrate the board with live competitive-session data.
-- [ ] Link facilities and reports.
-- [ ] Implement visible project progression.
-- [ ] Implement first-month consequence presentation.
-- [ ] Add adaptive planning and pressure music states.
+- [x] Integrate the board with live competitive-session data. Evidence:
+  `docs/evaluation/phase7-vertical-slice-technical-evidence.json`,
+  `tests/test_gui_regional_world.py`, and
+  `tests/test_phase11_live_facility_binding.py`; current actor-visible board
+  projections are host-supplied and read-only.
+- [x] Link facilities and reports. Evidence:
+  `tests/test_phase11_live_facility_binding.py`,
+  `tests/test_consequence_links.py`,
+  `tests/test_gui_campaign_coverage.py`, and the current campaign-coverage
+  ledger; facility components and written reports retain visible source and
+  fallback semantics, with report/entity focus and linked consequence controls
+  exposed in both directions.
+- [x] Implement visible project progression. Evidence:
+  `tests/test_phase11_live_operational_overlays.py` and
+  `src/mcp/regional_world.rs`; active, delayed, and completed project signals
+  remain tied to actor-visible observation fields.
+- [x] Implement first-month consequence presentation. Evidence:
+  `tests/test_phase10_first_month.py`, `tests/test_gui_first_month.py`, and
+  `tests/test_phase11_live_music.py`; the host-connected seven-stage path keeps
+  resolution, written effects, skip/review behavior, and refreshed observation
+  handoffs visible.
+- [x] Add adaptive planning and pressure music states. Evidence:
+  `tests/test_phase10_first_month.py`, `tests/test_phase11_live_music.py`,
+  `tests/test_music_stem_contract.py`, and
+  `gui/music-stem-contract.mjs`; planning, stable, pressure, policy,
+  competitive, affiliation, and debrief states derive from visible inputs.
 - [ ] Complete asset provenance review.
 - [ ] Run structured first-time-user evaluation.
 - [ ] Record revision decisions.
 - [ ] Approve or reject expansion to full campaign coverage.
+
+### v0.13.49 current vertical-slice technical evidence boundary
+
+- `docs/evaluation/phase7-vertical-slice-technical-evidence.json` joins the
+  current host projections, browser renderers, live handoff tests, and visible
+  music contract for the five technical items above.
+- These checkboxes close only current supported technical behavior. They do not
+  claim full-campaign facility placement, raster screenshots, asset provenance,
+  audio usefulness, first-time-user comprehension, educational usability,
+  accessibility quality, or human approval.
 
 ---
 

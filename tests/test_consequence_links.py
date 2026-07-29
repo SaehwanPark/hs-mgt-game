@@ -95,6 +95,10 @@ class ConsequenceLinkTests(unittest.TestCase):
       "regionalSessionId",
       "Show related reports and consequences",
       "Focus board",
+      "selectedEntityId = link.target_id",
+      "renderSelectedEntity(currentMapEntities, root)",
+      "briefingFocusEntityId = entity.id",
+      "renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root)",
       "behavior: \"auto\"",
     ):
       self.assertIn(marker, self.app)

@@ -3130,3 +3130,11 @@ forecast or real-world operational, clinical, financial, regulatory, or legal
 decision tool, while preserving actor-visible and host-authoritative limits.
 Remaining human, provenance, browser/device, full-campaign, persistence, and
 public-release gates remain explicit.
+
+## Vertical-Slice Technical Evidence Addendum — v0.13.49
+
+Current live host/browser contracts support the actor-visible regional board,
+facility/report linkage, visible project overlays, first-month consequence
+handoffs, and planning/pressure music states from visible inputs. The evidence
+remains bounded to supported current conditions and does not expose hidden state
+or claim full-campaign, provenance, first-time-user, or human-review completion.
