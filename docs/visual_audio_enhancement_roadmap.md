@@ -3995,9 +3995,11 @@ The visual/audio enhancement program should be considered successful when the fo
   projections are host-supplied and read-only.
 - [x] Link facilities and reports. Evidence:
   `tests/test_phase11_live_facility_binding.py`,
+  `tests/test_consequence_links.py`,
   `tests/test_gui_campaign_coverage.py`, and the current campaign-coverage
   ledger; facility components and written reports retain visible source and
-  fallback semantics.
+  fallback semantics, with report/entity focus and linked consequence controls
+  exposed in both directions.
 - [x] Implement visible project progression. Evidence:
   `tests/test_phase11_live_operational_overlays.py` and
   `src/mcp/regional_world.rs`; active, delayed, and completed project signals

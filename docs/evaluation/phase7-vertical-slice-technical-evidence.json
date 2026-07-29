@@ -12,6 +12,7 @@
     "live_board_host": "src/mcp/regional_world.rs: RegionalWorldEnvelope",
     "live_board_browser": "gui/app.mjs: createRegionalWorldClient",
     "facility_binding": "tests/test_phase11_live_facility_binding.py: test_actor_visible_facilities_bind_to_catalog_components_with_fallback",
+    "facility_report_links": "tests/test_consequence_links.py: test_gui_exposes_bidirectional_links_and_static_boundary",
     "project_binding": "tests/test_phase11_live_operational_overlays.py: operational-active-capital-project",
     "first_month_flow": "gui/first-month.mjs: FIRST_MONTH_FLOW_SCHEMA",
     "first_month_test": "tests/test_phase10_first_month.py: test_every_phase10_technical_checklist_item_is_evidenced",
@@ -21,7 +22,7 @@
   },
   "coverage": {
     "live_board": "Host-projected competitive-regional-world data renders into the read-only regional board with missing/unknown fallbacks.",
-    "facilities_and_reports": "Visible facility components and written campaign/report surfaces retain source and fallback semantics.",
+    "facilities_and_reports": "Visible facility components and written campaign/report surfaces retain source and fallback semantics; report/entity focus and linked consequence controls are exposed in both directions.",
     "project_progression": "Active, delayed, and completed project overlays consume explicit actor-visible observation fields.",
     "first_month_consequences": "The host-connected seven-stage path exposes resolution, written effects, skip/review behavior, and refreshed observation handoffs.",
     "planning_and_pressure_music": "Planning, stable, pressure, policy, competitive, affiliation, and debrief states derive from visible inputs and retain written fallbacks."
