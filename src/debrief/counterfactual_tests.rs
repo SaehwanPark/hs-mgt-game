@@ -55,4 +55,9 @@ fn comparison_uses_written_fallback_for_incompatible_or_stochastic_runs() {
     .policy_signal += 1;
   let lines = counterfactual_difference_lines(&baseline, &different_inputs).join("\n");
   assert!(lines.contains("different recorded inputs"));
+
+  let mut extra_turn = baseline.clone();
+  extra_turn.transitions.push(baseline.transitions[0].clone());
+  let lines = counterfactual_difference_lines(&baseline, &extra_turn).join("\n");
+  assert!(lines.contains("different recorded inputs"));
 }

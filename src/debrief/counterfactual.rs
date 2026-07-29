@@ -53,11 +53,12 @@ pub fn counterfactual_difference_lines(baseline: &History, alternative: &History
     ));
   }
 
-  let resolved_inputs_match = baseline
-    .transitions
-    .iter()
-    .zip(alternative.transitions.iter())
-    .all(|(left, right)| left.resolved_inputs == right.resolved_inputs);
+  let resolved_inputs_match = baseline.transitions.len() == alternative.transitions.len()
+    && baseline
+      .transitions
+      .iter()
+      .zip(alternative.transitions.iter())
+      .all(|(left, right)| left.resolved_inputs == right.resolved_inputs);
   lines.push(format!(
     "Resolved-input parity: {}.",
     if resolved_inputs_match {

@@ -2975,7 +2975,9 @@ no-expansion limits. Full browser recovery and human review remain open.
 
 This slice closes the current “Counterfactual differences visualized” item as
 a deterministic, text-first, post-run comparison of existing stabilization
-histories. It is not a browser or instructor authority surface.
+histories. The existing preset CLI demo displays the selected preset against a
+deterministic alternative. It is not a browser or instructor authority
+surface.
 
 ## Source Ledger and Semantics
 

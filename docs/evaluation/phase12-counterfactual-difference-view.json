@@ -15,9 +15,9 @@
     "causality": "no causal certainty, ranking, probability, or strategy-value claim"
   },
   "presentation_surface": {
-    "format": "deterministic text-first post-run renderer",
+    "format": "deterministic text-first post-run renderer used by the existing preset CLI demo",
     "host_authority": "read-only immutable histories",
-    "browser_boundary": "no browser route or new instructor authority path",
+    "browser_boundary": "no browser route or new instructor authority path; CLI-only preset comparison",
     "audio_visual_assets": "none required",
     "written_fallback": "always available"
   },

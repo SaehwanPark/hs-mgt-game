@@ -122,9 +122,10 @@ before/after resolution context, source-linked consequence rendering, and the
 boundary against inferred causal graphs. Causal inference and human review
 remain open; no runtime presentation surface changes.
 The v0.13.42 evidence adds a deterministic text-first comparison of same-genesis
-committed stabilization histories with explicit resolved-input parity and
-descriptive state/effect differences. Causal certainty, browser instructor
-views, distributional summaries, export behavior, and human review remain open.
+committed stabilization histories to the preset post-run CLI demo, with
+explicit resolved-input parity and descriptive state/effect differences.
+Causal certainty, browser instructor views, distributional summaries, export
+behavior, and human review remain open.
 
 Key capabilities include:
 - **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.

@@ -2956,8 +2956,10 @@ educational usability, and public-release approval remain open.
   language; resolved-input values are not printed.
 - Text output remains complete without color, motion, audio, assets, or browser
   support, with written fallbacks for empty or incompatible comparisons.
-- The renderer is read-only and does not submit commands, mutate state hashes,
-  write replay artifacts, or create an instructor route.
+- The existing preset CLI demo now calls the renderer after the committed
+  replay/debrief output; the renderer is read-only and does not submit
+  commands, mutate state hashes, write replay artifacts, or create an
+  instructor route.
 
 ## Required fixes
 

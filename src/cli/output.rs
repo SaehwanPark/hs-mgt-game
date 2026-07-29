@@ -1,13 +1,14 @@
 use crate::actors::describe_actor_decision;
-use crate::model::{History, Ruleset};
+use crate::debrief::counterfactual_difference_lines;
+use crate::model::{History, Ruleset, StrategyPath};
 use crate::replay::replay;
 
 use super::display::{
-  print_demo_actor_decision, print_demo_debrief, print_demo_effect, print_demo_event,
+  print_block, print_demo_actor_decision, print_demo_debrief, print_demo_effect, print_demo_event,
   print_demo_replay_footer, print_demo_styled_header, print_demo_turn_separator, print_line, style,
 };
 
-pub fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
+pub fn print_demo(seed: u64, history: &History, ruleset: &Ruleset, strategy: StrategyPath) {
   let replayed = replay(history, ruleset).expect("demo history should replay");
 
   print_demo_styled_header(seed, ruleset.version);
@@ -65,4 +66,24 @@ pub fn print_demo(seed: u64, history: &History, ruleset: &Ruleset) {
     .is_some_and(|transition| replayed.final_state == transition.next);
   print_demo_replay_footer(replay_matches);
   print_demo_debrief(history);
+
+  let alternative_strategy = match &strategy {
+    StrategyPath::AccessStabilization => StrategyPath::FiscalCaution,
+    StrategyPath::FiscalCaution => StrategyPath::AccessStabilization,
+    StrategyPath::AggressiveBargaining => StrategyPath::AccessStabilization,
+  };
+  let alternative = super::strategy::build_history_for_strategy_from_genesis(
+    super::strategy::strategy_plan(alternative_strategy),
+    seed,
+    ruleset,
+    history.genesis.clone(),
+  )
+  .expect("preset counterfactual should build from the committed genesis");
+  let mut comparison = vec![
+    "Counterfactual difference view (descriptive; no option is marked correct)".to_string(),
+    format!("Baseline: selected {:?} preset", strategy),
+    format!("Alternative: {:?} preset", alternative_strategy),
+  ];
+  comparison.extend(counterfactual_difference_lines(history, &alternative));
+  print_block(&comparison);
 }

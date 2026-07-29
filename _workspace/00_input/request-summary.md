@@ -1911,7 +1911,8 @@ post-run comparison over existing stabilization `History` values.
 
 Compare two committed histories from the same genesis, show aligned commands,
 committed next-state metric differences, attributed-effect differences, and
-resolved-input parity, with written fallbacks for incompatible histories.
+resolved-input parity, with written fallbacks for incompatible histories. Make
+the view reachable from the existing preset post-run CLI demo.
 
 ## Non-goals
 

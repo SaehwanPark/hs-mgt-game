@@ -3446,9 +3446,10 @@ Deferred / Non-Goals:
 - [x] Counterfactual differences visualized. Evidence:
   `docs/evaluation/phase12-counterfactual-difference-view.json`,
   `src/debrief/counterfactual.rs`, and
-  `tests/test_phase12_counterfactual_difference_view.py`; this is a
-  deterministic, text-first descriptive comparison of same-genesis committed
-  stabilization histories, not causal inference or a browser instructor view.
+  `tests/test_phase12_counterfactual_difference_view.py`; the existing preset
+  CLI demo calls the renderer for a deterministic, text-first descriptive
+  comparison of same-genesis committed stabilization histories, not causal
+  inference or a browser instructor view.
 - [ ] Distributional outcomes represented responsibly.
 - [ ] Export behavior documented.
 - [ ] Educational usability reviewed.
