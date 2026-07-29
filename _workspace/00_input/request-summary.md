@@ -1900,6 +1900,31 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 13.1 player-facing settings/help boundary v0.13.45
+
+## Scope
+
+Make the existing live GUI settings, optional audio controls, reduced-motion
+and text-scale choices, credits disclosure, and troubleshooting path
+discoverable for first-time players and facilitators.
+
+## Target slice
+
+- Update the existing GUI guide with the settings panel's current controls,
+  storage/fallback behavior, audio channel choices, credits disclosure, and
+  actionable recovery steps.
+- Source-link the guide to the existing DOM controls, presentation settings
+  client, audio panel, and asset-credit renderer.
+- Preserve local presentation ownership: no host command, transition, replay,
+  asset, audio, or authority behavior changes.
+
+## Non-goals and validation
+
+- Do not claim human accessibility, educational usability, audio usefulness,
+  classroom readiness, or public-release approval.
+- Run the source-linked documentation test plus the standard Rust, Python,
+  metadata, documentation, formatting, clippy, and generated-credit checks.
+
 # Request Summary — Visual/audio Phase 12.3 distributional outcome summary v0.13.43
 
 ## Scope

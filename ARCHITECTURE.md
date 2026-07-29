@@ -915,7 +915,15 @@ serialized `CompetitiveHistory` JSON. Empty input skips writing. These
 artifacts may serialize commands, transitions, and state hashes, but they are
 not browser authority, mid-run saves, or new simulation state.
 
-Last Reviewed: 2026-07-28
+The v0.13.45 Phase 13.1 slice documents the existing GUI settings and help
+surface for first-time players and facilitators. Reduced motion, optional cue
+explanations, Standard/Large text, optional audio channels, credits disclosure,
+and troubleshooting remain local presentation concerns. Browser-local storage
+with session-local fallback does not enter commands, validation, transitions,
+replay, persistence of simulation state, or host authority. Human accessibility,
+educational, audio-quality, and classroom review remain external gates.
+
+Last Reviewed: 2026-07-29
 Status: Verified
 
 ### Planned Visual and Audio Presentation Architecture

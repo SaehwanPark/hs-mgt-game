@@ -3579,12 +3579,27 @@ educational/accessibility gates remain open.
 
 - [ ] First-session workflow complete.
 - [ ] Competitive campaign coverage complete.
-- [ ] Settings documented.
-- [ ] Audio controls documented.
-- [ ] Reduced-motion mode documented.
-- [ ] Text scaling documented.
-- [ ] Credits accessible.
-- [ ] Troubleshooting updated.
+- [x] Settings documented. Evidence: `docs/guides/gui-how-to-play.md` and
+  `docs/evaluation/phase13.1-player-help-boundary.json`; the existing settings
+  panel, browser-local/session-local behavior, and presentation-only boundary
+  are source-linked.
+- [x] Audio controls documented. Evidence: `docs/guides/gui-how-to-play.md`
+  and `docs/evaluation/phase13.1-player-help-boundary.json`; enable, mute,
+  cues-only, reduced-notifications, and independent channel controls are
+  documented from the existing panel.
+- [x] Reduced-motion mode documented. Evidence:
+  `docs/guides/gui-how-to-play.md` and
+  `docs/evaluation/phase13.1-player-help-boundary.json`; written-result
+  retention and immediate-pacing behavior are documented.
+- [x] Text scaling documented. Evidence: `docs/guides/gui-how-to-play.md` and
+  `docs/evaluation/phase13.1-player-help-boundary.json`; Standard/Large text
+  and browser-zoom guidance are documented.
+- [x] Credits accessible. Evidence: `docs/guides/gui-how-to-play.md` and
+  `docs/evaluation/phase13.1-player-help-boundary.json`; the existing
+  keyboard-accessible text-first disclosure is documented.
+- [x] Troubleshooting updated. Evidence: `docs/guides/gui-how-to-play.md` and
+  `docs/evaluation/phase13.1-player-help-boundary.json`; storage, audio, text,
+  motion, host, validation, and demo-data recovery paths have next actions.
 
 ### Technical checklist
 

@@ -1,0 +1,39 @@
+{
+  "schema_version": "phase13.1-player-help-boundary-v1",
+  "status": "complete-current-gui-settings-help-documentation-only",
+  "roadmap_items": [
+    "Settings documented",
+    "Audio controls documented",
+    "Reduced-motion mode documented",
+    "Text scaling documented",
+    "Credits accessible",
+    "Troubleshooting updated"
+  ],
+  "audience_and_use_case": {
+    "primary_users": "first-time local GUI players",
+    "supporting_users": "facilitators helping with a bounded local session",
+    "job_to_be_done": "adjust presentation preferences, preserve written meaning, inspect provenance, and recover from common setup problems"
+  },
+  "source_contract": {
+    "settings_dom": "gui/index.html: <section class=\"panel readiness-panel\" id=\"settings-panel\"",
+    "audio_dom": "gui/index.html: <section class=\"panel audio-panel\" id=\"audio-panel\"",
+    "settings_client": "gui/app.mjs: export function createPresentationSettings(",
+    "audio_equivalent": "gui/index.html: Audio only emphasizes visible category and timing.",
+    "credits_renderer": "gui/asset-credits-renderer.mjs: export function renderAssetCredits(",
+    "guide": "docs/guides/gui-how-to-play.md: ## Settings and accessibility",
+    "troubleshooting": "docs/guides/gui-how-to-play.md: ## Troubleshooting"
+  },
+  "documented_contract": {
+    "settings": "Reduced motion, optional cue explanations, Standard/Large text, browser-local storage, and session-local fallback are documented.",
+    "audio": "Enable, mute, cues-only, music-only mute, reduced notifications, and independent channel volume controls are documented.",
+    "credits": "The keyboard-accessible Asset credits and provenance disclosure is documented as contributor/release information.",
+    "recovery": "Audio, storage, text/motion, host, validation, session, and demo-data recovery paths are written with next actions.",
+    "boundary": "Preferences remain local presentation settings and do not change host commands, validation, transitions, replay, or simulation authority."
+  },
+  "limits": [
+    "This closes only current player-facing GUI help documentation.",
+    "It does not establish human accessibility, educational usability, audio usefulness, classroom readiness, or public-release approval.",
+    "It does not add or change runtime controls, assets, audio behavior, persistence, or authority paths."
+  ],
+  "test_source": "tests/test_phase13_player_help_boundary.py"
+}

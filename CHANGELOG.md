@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.45] - 2026-07-29
+
+- Documented the existing GUI settings, optional audio controls, reduced-motion
+  and text-scale choices, accessible credits disclosure, and troubleshooting
+  recovery paths for first-time players and facilitators.
+- Closed only the current player-facing documentation items; no runtime,
+  simulation, persistence, asset, audio, or authority behavior changed, and
+  human accessibility/educational review remains open.
+
 ## [0.13.44] - 2026-07-29
 
 - Documented and source-linked existing post-run export behavior across the

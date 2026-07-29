@@ -3078,3 +3078,18 @@ history JSON. Empty export input skips writing. These outputs may serialize
 commands, transitions, hashes, and resolved inputs, but they are post-run
 analysis artifacts rather than browser state, mid-run saves, or new authority
 paths.
+
+## Player-Facing Settings and Help Addendum — v0.13.45
+
+The existing GUI guide is the player-facing source for the settings panel,
+optional audio controls, credits disclosure, and troubleshooting. It documents
+reduced motion, optional cue explanations, Standard/Large text, browser-local
+storage with session-local fallback, mute/cues-only/channel controls, and
+written recovery paths. These controls remain presentation-only: they do not
+enter host commands, validation, transitions, stochastic inputs, immutable
+history, replay verification, or simulation authority.
+
+The guide is written for a first-time local Chromium player and a facilitator
+helping with a bounded session. It does not claim human accessibility,
+educational usability, audio quality, classroom readiness, or public-release
+approval.
