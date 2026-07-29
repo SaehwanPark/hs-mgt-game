@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.59] - 2026-07-29
+
+- Added a campaign-aware first-session rail for stabilization and regional
+  affiliation while preserving the competitive seven-stage action rail.
+- Kept campaign decisions host-shaped and advanced the campaign rail only after
+  canonical submission and coverage refresh; rejected decisions remain
+  recoverable.
+- Kept first-time-user, accessibility, educational, campaign-specific quality,
+  provenance, and public-release review as separate open gates.
+
 ## [0.13.58] - 2026-07-29
 
 - Connected the existing `campaign-coverage-v1` projection to the loopback GUI

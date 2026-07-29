@@ -1,3 +1,36 @@
+# Presentation QA — Campaign-aware first-month rail v0.13.59
+
+## Status
+
+`pass` for the bounded technical contract. This is not human accessibility,
+usability, educational, audio-quality, or public-release approval.
+
+## Findings
+
+- Competitive `competitive-first-month-v1` behavior remains unchanged.
+- Campaign-coverage sessions use the five-stage rail and do not show
+  competitive draft/validation instructions.
+- Accepted campaign decisions advance only after canonical host submission and
+  coverage refresh; rejected or malformed reads preserve recoverable state.
+- No new host/simulation authority, hidden-state field, asset, audio file, or
+  persistence path appears.
+- Pass: malformed coverage and a successful host commit followed by a failed
+  refresh leave the campaign rail recoverable at decision selection.
+- Review: the sole medium-effort reviewer found no Critical/High issue. The
+  captured device-source measurement was corrected after the final small
+  cleanup, and explicit malformed/failed-refresh tests were added for the Low
+  finding.
+
+## Verification evidence
+
+Focused tests passed (17 for the rail/coverage slice); full Rust passed with
+344 tests and full Python passed with 761 tests. Release metadata,
+documentation links, asset/security/generation, device-performance,
+offline, browser-compatibility, and visual/audio contract checks passed.
+Human evaluation and campaign-specific quality gates remain open.
+
+---
+
 # Presentation QA — Phase 12 live campaign-coverage handoff v0.13.58
 
 ## Status

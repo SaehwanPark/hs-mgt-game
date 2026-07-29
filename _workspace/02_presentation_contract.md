@@ -3305,6 +3305,44 @@ comprehension, accessibility quality, educational effectiveness, classroom
 readiness, causal certainty, or public-release approval. No new route, asset,
 audio, persistence, replay regeneration, or runtime simulation behavior is
 added.
+# Presentation Contract — Campaign-aware first-month rail v0.13.59
+
+## Contract status
+
+Bounded technical presentation contract for the first-session rail only. The
+competitive rail remains `competitive-first-month-v1`; the two existing
+campaign-coverage campaigns use `campaign-coverage-first-session-v1`.
+
+## Actor-visible behavior
+
+- Competitive sessions retain Start/load → inspect → draft → validate → submit
+  → resolution → continue.
+- Stabilization and regional-affiliation sessions show Start/load → inspect
+  coverage → choose a host decision → review the committed stage → continue.
+- Campaign-coverage text remains sourced from the existing typed host envelope;
+  the rail labels presentation handoffs and never claims a strategy or outcome.
+- A rejected campaign decision leaves the current stage and visible envelope
+  recoverable. A successful decision advances only after the existing coverage
+  refresh succeeds.
+
+## Authority and fallback
+
+- `first-month.mjs` owns only local stage labels, state, and semantic markup.
+- `app.mjs` updates campaign stages from successful adapter reads/writes;
+  `adapter.submitTurn(command)` remains the only mutation path.
+- Missing, malformed, or failed coverage preserves the current valid surface
+  and shows a written recovery message.
+- No true state, resolved input, private rationale, effect queue, forecast, or
+  client-side legality is introduced.
+
+## Non-goals and evidence limits
+
+No new host schema, simulation transition, asset, audio file, persistence,
+screenshot, browser certification, human accessibility review, educational
+usability result, or public-release approval is claimed.
+
+---
+
 # Presentation Contract — Live campaign-coverage handoff v0.13.58
 
 ## Goal and authorization

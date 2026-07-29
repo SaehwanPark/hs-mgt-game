@@ -3,7 +3,7 @@ import { ASSET_CREDITS } from "./asset-credits.mjs";
 import { renderAssetCredits } from "./asset-credits-renderer.mjs";
 import { consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
 import { facilityComponentFor } from "./facility-components.mjs";
-import { FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
+import { CAMPAIGN_COVERAGE_FLOW_SCHEMA, FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
 import { presentationFixtureToSceneData, regionalWorldToSceneData } from "./regional-board.mjs";
 import { renderRegionalSvg } from "./scene.mjs";
@@ -1115,6 +1115,7 @@ export function createCampaignCoverageClient({
   root = document,
   audio,
   recorder,
+  onCommitted = () => {},
 } = {}) {
   let currentEnvelope = null;
   const audioClient = audio ?? createAudioClient({ root, recorder });
@@ -1174,6 +1175,7 @@ export function createCampaignCoverageClient({
       if (result.envelope.session?.campaign === "regional-affiliation-v1") {
         audioClient.playCue("event.affiliation-milestone");
       }
+      onCommitted(result.envelope);
       setPresentationState(root, "Campaign decision committed; current stage refreshed from the host.");
       return { ok: true, envelope: result.envelope };
     } catch (error) {
@@ -2179,7 +2181,19 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const checkpointClient = createCheckpointClient({ adapter, root, recorder, refresh: load });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
-  const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
+  const campaignCoverageClient = createCampaignCoverageClient({
+    adapter: coverageAdapter,
+    root,
+    audio: audioClient,
+    recorder,
+    onCommitted: (envelope) => firstMonthFlow.update({
+      flow: "campaign-coverage",
+      sessionLoaded: true,
+      coverageLoaded: true,
+      decisionSubmitted: true,
+      refreshed: Boolean(envelope),
+    }),
+  });
   const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
   function draftCommand() {
@@ -2349,7 +2363,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     validation = null;
     editingIndex = null;
     sessionId = requestedSessionId;
-    adapter.activateSession?.(requestedSessionId);
+    adapter.activateSession?.(requestedSessionId, result.envelope?.session?.campaign ?? null);
     setActionControls(root, false);
     renderActions([], root);
     renderDraftState();
@@ -2357,8 +2371,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     const actionMode = root.querySelector("#action-mode");
     if (actionMode) actionMode.textContent = "campaign coverage · host-shaped decisions";
     firstMonthFlow.update({
+      flow: "campaign-coverage",
       sessionLoaded: true,
       actionCatalogLoaded: false,
+      coverageLoaded: true,
       draftCount: 0,
       validated: false,
       submitted: false,
@@ -3052,6 +3068,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       ASSET_CREDITS,
       VISUAL_CATALOG,
+      CAMPAIGN_COVERAGE_FLOW_SCHEMA,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,
@@ -3092,6 +3109,7 @@ if (typeof document !== "undefined") {
       AUDIO_CATALOG,
       ASSET_CREDITS,
       VISUAL_CATALOG,
+      CAMPAIGN_COVERAGE_FLOW_SCHEMA,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
       createPlaytestRecorder,

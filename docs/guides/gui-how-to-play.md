@@ -49,9 +49,10 @@ validation, simulation outcomes, or replay history.
 The server listens only on your computer's loopback interface. It does not make
 the game available to other computers and does not provide network multiplayer.
 
-## Play the first month
+## Follow the first session
 
-The First-month path panel tracks seven presentation handoffs:
+The First-session path panel selects a rail from the host campaign. Competitive
+sessions track seven action handoffs:
 
 1. **Start or load:** create a session or load an ID from this running host.
 2. **Inspect:** read the executive briefing, regional market, Riverside detail,
@@ -64,6 +65,11 @@ The First-month path panel tracks seven presentation handoffs:
 6. **Resolution:** read, play, pause, skip, or review the committed monthly
    resolution. Skipping animation does not skip the game result.
 7. **Continue:** inspect the refreshed observation for the next month.
+
+For stabilization and regional affiliation, the rail instead tracks five
+campaign-coverage handoffs: start/load, inspect the visible campaign envelope,
+choose a host-shaped decision, review the committed stage, and continue. These
+campaigns do not use the competitive local-draft or validation steps.
 
 Drafting does not advance time. Validation checks action points, cash, political
 capital, command syntax, and other host-owned constraints without committing the

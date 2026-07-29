@@ -500,10 +500,13 @@ Phase 2/3/4/5/6/7/8/10/11/12/13 review checklist:
 - exercise missing start capability, malformed session envelopes, invalid seed,
   and failed replacement loads without losing the current rendered session or
   calling command submission.
-- follow the first-month path rail from start/load through visible inspection,
-  two local drafts, host validation, unchanged submission, resolution, and
-  refreshed presentation; confirm it reaches Continue only after both host reads
-  succeed.
+- follow the competitive first-session rail from start/load through visible
+  inspection, two local drafts, host validation, unchanged submission,
+  resolution, and refreshed presentation; confirm it reaches Continue only
+  after both host reads succeed;
+- start stabilization or regional affiliation and confirm the rail changes to
+  campaign coverage: inspect, choose a host-shaped decision, review the
+  refreshed stage, and continue only after canonical host submission succeeds;
 - revise or remove a draft after validation and confirm the rail returns to its
   draft/validation handoff without limiting the existing draft controls; reject
   a host operation and confirm the current session and path remain recoverable.
@@ -529,9 +532,10 @@ presentation state and does not establish human accessibility. Phase 11
 session launch/load is an optional host adapter boundary and does not create
 local session state. Phase 12 visual identity/marker lookup is a generated,
 visible-only vocabulary and does not create host facts or local game state. Phase
-13 first-month continuity is a local text-first stage projection; it does not
+13 first-session continuity is a local text-first stage projection; it does not
 create a host payload, client-side legality/outcome rule, transition, or local
-simulation state. Phase 6.2 first-month resolution sequencing is a pure local
+simulation state. The competitive seven-stage rail and the campaign-coverage
+five-stage rail both report presentation handoffs only. Phase 6.2 first-month resolution sequencing is a pure local
 storyboard over the host-owned `competitive-resolution-v1` envelope. It renders
 every committed stage immediately, annotates display-only priority and
 board/report/metric synchronization targets, aligns optional cues to visible

@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Onboarding Rails Aligned with Campaign Authority
+
+- Context: the live GUI gained stabilization and regional-affiliation
+  campaign-coverage handoff, but the existing first-session rail still taught
+  competitive local drafting and validation.
+- Risk: A technically reachable campaign can still mislead a new player if its
+  orientation rail describes controls that do not exist for that campaign.
+- Resolution: Keep the competitive rail schema unchanged and add a separate
+  five-stage campaign-coverage rail driven by successful host reads and writes.
+  Rejected decisions do not advance the local presentation stage.
+- Prevention: Whenever a new campaign renderer becomes launchable, audit the
+  first-session orientation, guidance, and recovery wording for campaign-
+  specific controls before calling the technical path complete.
+
 ## Keep Low-Power Evidence Explicitly Emulated
 
 - Context: Phase 11.2 required a low-power-device test, but the verification

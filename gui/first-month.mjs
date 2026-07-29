@@ -1,4 +1,5 @@
 export const FIRST_MONTH_FLOW_SCHEMA = "competitive-first-month-v1";
+export const CAMPAIGN_COVERAGE_FLOW_SCHEMA = "campaign-coverage-first-session-v1";
 
 export const FIRST_MONTH_STAGES = Object.freeze([
   Object.freeze({
@@ -38,9 +39,39 @@ export const FIRST_MONTH_STAGES = Object.freeze([
   }),
 ]);
 
+export const CAMPAIGN_COVERAGE_STAGES = Object.freeze([
+  Object.freeze({
+    id: "start",
+    label: "Start or load",
+    detail: "Use the host to start a stabilization or regional-affiliation session, or load an existing session.",
+  }),
+  Object.freeze({
+    id: "inspect",
+    label: "Inspect campaign coverage",
+    detail: "Read the host-owned briefing, visible stage, metrics, actors, processes, decisions, history, and debrief.",
+  }),
+  Object.freeze({
+    id: "choose",
+    label: "Choose a host decision",
+    detail: "Select a visible campaign decision; the browser sends the unchanged command to the host.",
+  }),
+  Object.freeze({
+    id: "review",
+    label: "Review the committed stage",
+    detail: "Read the refreshed host envelope, visible consequences, history, and any campaign debrief text.",
+  }),
+  Object.freeze({
+    id: "continue",
+    label: "Continue to the next stage",
+    detail: "The next actor-visible campaign observation is ready; the host remains authoritative for what changed.",
+  }),
+]);
+
 const DEFAULT_STATE = Object.freeze({
+  flow: "competitive",
   sessionLoaded: false,
   actionCatalogLoaded: false,
+  coverageLoaded: false,
   draftCount: 0,
   validated: false,
   submitted: false,
@@ -53,6 +84,13 @@ function safeDraftCount(value) {
 }
 
 export function firstMonthStageFor(state = {}) {
+  if (state.flow === "campaign-coverage") {
+    if (!state.sessionLoaded) return "start";
+    if (!state.coverageLoaded) return "inspect";
+    if (!state.decisionSubmitted) return "choose";
+    if (!state.refreshed) return "review";
+    return "continue";
+  }
   const draftCount = safeDraftCount(state.draftCount);
   if (!state.sessionLoaded) return "start";
   if (!state.actionCatalogLoaded) return "inspect";
@@ -81,6 +119,10 @@ function stageMarker(state) {
   return "Next";
 }
 
+function stagesFor(state) {
+  return state.flow === "campaign-coverage" ? CAMPAIGN_COVERAGE_STAGES : FIRST_MONTH_STAGES;
+}
+
 export function createFirstMonthFlow({ root = globalThis.document } = {}) {
   let state = { ...DEFAULT_STATE };
 
@@ -89,14 +131,15 @@ export function createFirstMonthFlow({ root = globalThis.document } = {}) {
     const currentNode = root?.querySelector?.("#first-month-flow-state");
     const detailNode = root?.querySelector?.("#first-month-flow-detail");
     const stageId = firstMonthStageFor(state);
-    const currentIndex = FIRST_MONTH_STAGES.findIndex((stage) => stage.id === stageId);
-    const current = FIRST_MONTH_STAGES[currentIndex] ?? FIRST_MONTH_STAGES[0];
-    if (currentNode) currentNode.textContent = `${current.label} · ${currentIndex + 1} of ${FIRST_MONTH_STAGES.length}`;
+    const stages = stagesFor(state);
+    const currentIndex = stages.findIndex((stage) => stage.id === stageId);
+    const current = stages[currentIndex] ?? stages[0];
+    if (currentNode) currentNode.textContent = `${current.label} · ${currentIndex + 1} of ${stages.length}`;
     if (detailNode) detailNode.textContent = `${current.detail} This rail reports presentation handoffs; the host owns commands and outcomes.`;
     if (!list) return { ok: false, code: "first_month_flow_surface_missing", stage: current };
 
     list.replaceChildren();
-    FIRST_MONTH_STAGES.forEach((stage, index) => {
+    stages.forEach((stage, index) => {
       const item = createElement(root, "li");
       const marker = createElement(root, "span");
       const label = createElement(root, "strong");
@@ -128,6 +171,6 @@ export function createFirstMonthFlow({ root = globalThis.document } = {}) {
     update,
     render,
     get state() { return Object.freeze({ ...state }); },
-    get stage() { return FIRST_MONTH_STAGES.find((stage) => stage.id === firstMonthStageFor(state)) ?? FIRST_MONTH_STAGES[0]; },
+    get stage() { return stagesFor(state).find((stage) => stage.id === firstMonthStageFor(state)) ?? stagesFor(state)[0]; },
   };
 }
