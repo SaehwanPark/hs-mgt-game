@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.13.44.
+The current public milestone is a playable Rust prototype at v0.13.45.
 
 The current visual/audio evidence also records the supported actor-visible GUI
 screenshot surface and its deterministic SVG/structural regression boundary;
@@ -134,6 +134,10 @@ The v0.13.44 evidence documents the existing post-run export boundary across
 stabilization, competitive, and regional-affiliation CLI paths, including
 format differences, empty-input skip behavior, and non-authoritative use. No
 new export format or browser download route is introduced.
+The v0.13.45 evidence documents the existing GUI settings, optional audio,
+reduced-motion, text-scale, credits, and troubleshooting surfaces for first-
+time players and facilitators. No runtime control, simulation, persistence, or
+authority path changes; human accessibility and educational review remain open.
 
 Key capabilities include:
 - **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.

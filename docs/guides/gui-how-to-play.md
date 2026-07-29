@@ -16,6 +16,11 @@ JavaScript adapter injection.
 The GUI currently supports `competitive-regional-v1`. Use `cargo run` for the
 stabilization, regional-affiliation, or custom-scenario play.
 
+For a first session, start with the documented Normal/seed-42 defaults, then
+adjust presentation settings only if they reduce friction. These controls are
+local browser presentation preferences; they do not change commands, host
+validation, simulation outcomes, or replay history.
+
 ## Start the GUI
 
 1. Open a terminal in the repository root.
@@ -72,14 +77,44 @@ month. Editing or removing a validated draft requires validation again.
 
 Rival private state and unresolved stochastic inputs are deliberately not shown.
 
+## Settings and accessibility
+
+The **Accessibility and settings** panel is available before or during a live
+session:
+
+- **Reduced motion** removes non-essential pacing and uses immediate written
+  updates. It does not remove a result or a control.
+- **Show optional cue explanations** keeps written explanations for audio/event
+  cues visible when enabled. Written decisions, observations, results, history,
+  and debrief remain complete either way.
+- **Text size** supports **Standard** and **Large**. Choose **Large** when the
+  default scale is difficult to read; browser zoom remains an additional local
+  option.
+
+The initial reduced-motion value follows the browser's `prefers-reduced-motion`
+preference when available. Settings are stored in the browser when storage is
+available and otherwise remain session-local; a storage failure does not block
+play.
+
 ## Optional audio
 
 Audio starts off. Select **Enable audio** after the page opens; browsers require
-a user gesture before sound can start. You can mute audio, reduce notifications,
-or adjust master, music, interface, event, and ambience volumes independently.
+a user gesture before sound can start. Use **Mute audio** for a complete audio
+silence, **Cues only** when you want event/interface feedback without music,
+**Music only mute** to remove music, or **Reduced notifications** for fewer
+repeated cues. Master, music, interface, event, and ambience volumes are
+independent sliders.
 
 Audio emphasizes information already visible on the page. Every cue has a
 written equivalent, and muted or unsupported audio never prevents play.
+
+## Credits and provenance
+
+Open **Asset credits and provenance** in the settings panel to inspect the
+registered visual and audio sources used by the presentation. The disclosure
+is text-first and keyboard-accessible. It describes contributor/release
+provenance; it is not a claim that an asset is a real institution, person, or
+policy authority.
 
 ## Load an existing session
 
@@ -148,6 +183,19 @@ incorrectly. Start a new session in the current process.
 Select **Enable audio**, check browser/tab mute settings, raise Master and the
 relevant channel volume, and return focus to the page. Continue with the written
 equivalents if Web Audio is unavailable.
+
+### Settings reset after restarting the browser
+
+The GUI keeps settings in local browser storage when available, but private
+browsing, blocked storage, or browser policy can make them session-local. Set
+the preferences again after starting a session; this does not affect the host
+session or replay.
+
+### Text or motion is difficult to follow
+
+Choose **Large** text, enable **Reduced motion**, and use the written resolution
+controls (**Skip to result** or **Review all**) when pacing is distracting. The
+host result remains unchanged.
 
 ## Scope and safety
 

@@ -3751,3 +3751,12 @@ command. Exported artifacts may contain serialized commands, transitions, and
 hashes, but are not browser authority or mid-run persistence. Human classroom
 export workflows and future competitive-format versioning remain open
 questions.
+
+## Player-Facing Settings and Help QA — v0.13.45
+
+`pass` for the documentation-only settings/help boundary. The GUI guide names
+the existing settings, audio, credits, and troubleshooting surfaces; describes
+safe local-storage fallback; and keeps written outcomes complete when motion,
+audio, text-equivalent, or text-scale preferences change. No host authority or
+simulation path is added. Human accessibility, educational, audio-quality,
+classroom, and public-release review remain open.
