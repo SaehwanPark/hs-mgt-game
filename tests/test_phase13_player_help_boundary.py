@@ -5,12 +5,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "evaluation" / "phase13.1-player-help-boundary.json"
+GUIDE = ROOT / "docs" / "guides" / "gui-how-to-play.md"
 
 
 class Phase13PlayerHelpBoundaryTests(unittest.TestCase):
   @classmethod
   def setUpClass(cls):
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    cls.guide = GUIDE.read_text(encoding="utf-8")
 
   def test_source_contract_markers_exist(self):
     self.assertEqual(
@@ -54,6 +56,24 @@ class Phase13PlayerHelpBoundaryTests(unittest.TestCase):
       "authority paths",
     ):
       self.assertIn(marker, limits)
+
+    for marker in (
+      "## Settings and accessibility",
+      "**Reduced motion**",
+      "**Show optional cue explanations**",
+      "**Text size** supports **Standard** and **Large**",
+      "session-local",
+      "## Optional audio",
+      "**Enable audio**",
+      "**Cues only**",
+      "**Music only mute**",
+      "**Reduced notifications**",
+      "## Credits and provenance",
+      "## Troubleshooting",
+      "### Settings reset after restarting the browser",
+      "### Text or motion is difficult to follow",
+    ):
+      self.assertIn(marker, self.guide)
 
 
 if __name__ == "__main__":
