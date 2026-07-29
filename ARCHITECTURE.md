@@ -923,6 +923,13 @@ with session-local fallback does not enter commands, validation, transitions,
 replay, persistence of simulation state, or host authority. Human accessibility,
 educational, audio-quality, and classroom review remain external gates.
 
+The v0.13.46 Phase 13.2 slice prepares an authorized human-pilot workflow
+without adding participant data or a new runtime path. The existing
+evaluation guide records loopback/classroom assumptions, optional audio,
+presentation accommodations, consent/media boundaries, and a pending feedback
+instrument. This preparation does not create classroom multiplayer, a runtime
+low-distraction mode, a debrief route, persistence, or host authority.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 
