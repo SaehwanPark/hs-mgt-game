@@ -3741,3 +3741,13 @@ usability, domain/policy validity, and public release remain open.
 - `python3 -m unittest tests.test_phase12_causal_attribution_boundary` — pass.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
+## Export Boundary QA — v0.13.44
+
+`pass` for the documentation-only export boundary. The evidence distinguishes
+the existing stabilization/affiliation versioned replay artifacts from the
+competitive serialized-history export, preserves the empty-input skip, and
+records that stabilization's separate verifier is not called by the writer
+command. Exported artifacts may contain serialized commands, transitions, and
+hashes, but are not browser authority or mid-run persistence. Human classroom
+export workflows and future competitive-format versioning remain open
+questions.

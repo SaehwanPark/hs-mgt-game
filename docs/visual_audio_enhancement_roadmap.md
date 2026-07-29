@@ -3457,7 +3457,12 @@ Deferred / Non-Goals:
   post-run instructor summary shows separate per-system committed deltas with
   stable ordering, no ranking or aggregate welfare score, and explicit
   visibility limits.
-- [ ] Export behavior documented.
+- [x] Export behavior documented. Evidence:
+  `docs/evaluation/phase12-export-behavior-boundary.json` and
+  `tests/test_phase12_export_behavior_boundary.py`; the existing
+  stabilization, competitive, and regional-affiliation CLI export paths are
+  source-linked, including format differences, empty-input skip behavior, and
+  the post-run/non-authoritative boundary. No new export format is introduced.
 - [ ] Educational usability reviewed.
 
 ### Exit criteria

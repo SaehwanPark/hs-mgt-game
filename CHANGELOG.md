@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.44] - 2026-07-29
+
+- Documented and source-linked existing post-run export behavior across the
+  stabilization, competitive, and regional-affiliation CLI paths, including
+  format differences, empty-input skip behavior, and authority boundaries.
+- Closed only the current export-documentation item; no new export format,
+  browser route, persistence path, or educational claim is introduced.
+
 ## [0.13.43] - 2026-07-29
 
 - Added a deterministic post-run competitive instructor-summary table for

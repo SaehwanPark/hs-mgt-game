@@ -3067,3 +3067,14 @@ Focused Rust tests cover multiple systems, metric deltas, deterministic order,
 and no-transition fallback. A source-linked Python ledger test checks the
 instructor boundary and no-ranking language. Human educational interpretation,
 policy validity, and distributional fairness review remain open.
+## Export Boundary Addendum — v0.13.44
+
+The current export contract is documentation-only in this slice. Stabilization
+uses the versioned `replay-artifact-0.1.15` writer; the separate
+`verify_replay_artifact` function is available for validation but is not invoked
+by the export command. Regional affiliation uses its versioned replay writer;
+competitive CLI export currently writes the existing serialized competitive
+history JSON. Empty export input skips writing. These outputs may serialize
+commands, transitions, hashes, and resolved inputs, but they are post-run
+analysis artifacts rather than browser state, mid-run saves, or new authority
+paths.

@@ -1,0 +1,34 @@
+{
+  "schema_version": "phase12-export-behavior-boundary-v1",
+  "status": "complete-current-post-run-export-boundary-only",
+  "roadmap_item": "Export behavior documented",
+  "source_contract": {
+    "stabilization_version": "src/artifact/serialize.rs: pub const REPLAY_ARTIFACT_VERSION",
+    "stabilization_write": "src/artifact/verify.rs: pub fn write_replay_artifact(",
+    "stabilization_verifier": "src/artifact/verify.rs: pub fn verify_replay_artifact(",
+    "stabilization_cli": "src/cli/session.rs: match write_replay_artifact(&path, &artifact)",
+    "competitive_cli": "src/cli/campaign.rs: let text = serde_json::to_string_pretty(&history).unwrap_or_default();",
+    "affiliation_cli": "src/cli/affiliation.rs: artifact_version: crate::model::AFFILIATION_REPLAY_ARTIFACT_VERSION.to_string(),",
+    "skip_parser": "src/cli/io.rs: pub fn parse_replay_export_path(input: &str) -> Option<String>",
+    "distribution_guide": "docs/guides/reproducible-distribution.md: local replay exports are not required checkout inputs"
+  },
+  "campaign_contract": {
+    "stabilization": "versioned replay-artifact-0.1.15 text artifact containing seed, play mode, ruleset, and committed history; CLI calls the existing writer, while a separate verify_replay_artifact function is available but is not invoked by the export command",
+    "competitive": "post-run serialized CompetitiveHistory JSON from the existing CLI path; no new versioned competitive export format is claimed",
+    "regional_affiliation": "versioned regional-affiliation replay artifact using the existing artifact version constant",
+    "empty_input": "empty export input skips writing",
+    "authority": "exports are post-run analysis artifacts; they may serialize commands, transitions, hashes, and resolved inputs, but are not browser state, mid-run saves, or new authority"
+  },
+  "presentation_surface": {
+    "format": "written documentation and source-linked evidence",
+    "browser_boundary": "no browser export route or download authority",
+    "asset_audio": "none involved",
+    "fallback": "written behavior remains available when export is skipped or write fails"
+  },
+  "limits": [
+    "This closes only the current post-run export documentation boundary.",
+    "It does not add durable persistence, classroom workflow, competitive export versioning, or public-release packaging.",
+    "Exported content is not evidence of educational usability, policy validity, or human accessibility quality."
+  ],
+  "test_source": "tests/test_phase12_export_behavior_boundary.py"
+}
