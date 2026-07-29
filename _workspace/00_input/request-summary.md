@@ -1922,6 +1922,27 @@ operational, clinical, financial, regulatory, or legal advice.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   device, and diff checks.
 
+# Request Summary — Visual/audio vertical-slice technical evidence v0.13.49
+
+## Scope
+
+Join existing live host/browser evidence for the current vertical slice:
+competitive board data, facility/report linkage, visible projects, first-month
+consequences, and visible-input-driven planning/pressure music.
+
+## Target slice
+
+- Mark only the five bounded technical roadmap items supported by current
+  source contracts and tests.
+- Record explicit full-campaign, provenance, first-time-user, and human-review
+  limits.
+
+## Non-goals and validation
+
+- Do not add hidden state, new authority, new assets/audio, or human approval.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  device, and diff checks.
+
 # Request Summary — Visual/audio Phase 13.2 low-distraction mode v0.13.47
 
 ## Scope

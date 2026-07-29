@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.49] - 2026-07-29
+
+- Recorded the bounded current vertical-slice technical evidence for live
+  board bindings, facility/report linkage, visible project progression,
+  first-month consequence presentation, and visible-input-driven planning /
+  pressure music states.
+- Kept full-campaign coverage, asset provenance, first-time-user evaluation,
+  human review, and expansion approval open.
+
 ## [0.13.48] - 2026-07-29
 
 - Added a user-facing release limitations statement distinguishing this

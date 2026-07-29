@@ -944,6 +944,12 @@ remain separate from human accessibility, educational, audio-quality,
 provenance, resemblance, browser/device, full-campaign, persistence, and
 public-release gates.
 
+The v0.13.49 vertical-slice evidence records current live actor-visible board
+bindings, facility/report linkage, visible project progression, first-month
+consequence presentation, and planning/pressure music derived from visible
+inputs. It does not promote full-campaign coverage, hidden state, or human
+quality/evaluation approval.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 
