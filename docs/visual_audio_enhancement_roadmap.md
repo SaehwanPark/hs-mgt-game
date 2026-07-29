@@ -3650,7 +3650,25 @@ educational/accessibility gates remain open.
 - [ ] No hidden-state leak found.
 - [ ] Attribution complete.
 - [ ] AI-generation metadata complete.
-- [ ] Limitations statement updated.
+- [x] Limitations statement updated. Evidence:
+  `docs/evaluation/phase13.1-limitations-statement.json`,
+  `docs/guides/gui-how-to-play.md`, and
+  `tests/test_phase13_1_limitations_statement.py`; the player-facing guide
+  distinguishes the fictional educational simulation from calibrated policy
+  forecasting and operational/clinical/financial/regulatory/legal advice while
+  keeping remaining human and release gates explicit.
+
+### v0.13.48 current limitations statement boundary
+
+- `docs/evaluation/phase13.1-limitations-statement.json` and
+  `tests/test_phase13_1_limitations_statement.py` bind the user-facing guide
+  language to the release boundary.
+- The statement says what the simulation is not, preserves actor-visible and
+  host-authoritative limits, and names unresolved human, provenance,
+  browser/device, full-campaign, persistence, and public-release gates.
+- This closes only the documentation gate. It does not approve content,
+  portraits, assets, audio usefulness, accessibility, educational usability,
+  policy validity, or public release.
 
 ### Exit criteria
 

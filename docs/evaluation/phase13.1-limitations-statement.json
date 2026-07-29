@@ -1,0 +1,30 @@
+{
+  "schema_version": "phase13.1-limitations-statement-v1",
+  "status": "complete-documentation-boundary-only",
+  "roadmap_item": "Limitations statement updated",
+  "source_contract": {
+    "guide_heading": "docs/guides/gui-how-to-play.md: ## Scope, safety, and limitations",
+    "simulation_boundary": "docs/guides/gui-how-to-play.md: This is a fictional educational simulation and research prototype.",
+    "forecast_boundary": "docs/guides/gui-how-to-play.md: calibrated policy forecast",
+    "decision_boundary": "docs/guides/gui-how-to-play.md: operational, clinical, financial, regulatory,",
+    "human_gate_boundary": "docs/guides/gui-how-to-play.md: human accessibility, educational, audio-quality, provenance, resemblance,",
+    "host_boundary": "docs/guides/gui-how-to-play.md: The host remains\nauthoritative"
+  },
+  "claims": {
+    "educational_simulation_not_forecast": true,
+    "fictional_institutions_not_real_world_advice": true,
+    "technical_checks_do_not_replace_human_review": true,
+    "actor_visible_and_host_authoritative": true
+  },
+  "remaining_gates": [
+    "human accessibility and educational review",
+    "audio-quality and provenance/resemblance review",
+    "browser/device and full-campaign review",
+    "durable persistence and public-release approval"
+  ],
+  "limits": [
+    "This closes a documentation gate only.",
+    "It does not establish policy validity, clinical validity, educational effectiveness, accessibility, or public-release approval."
+  ],
+  "test_source": "tests/test_phase13_1_limitations_statement.py"
+}

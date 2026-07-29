@@ -3121,3 +3121,12 @@ The mode does not enter commands, host validation, stochastic inputs,
 transitions, immutable history, replay, host persistence, or simulation
 authority. It is not a new host game mode and does not establish human
 accessibility, educational usability, or classroom approval.
+
+## Limitations Statement Addendum — v0.13.48
+
+The GUI guide now places the fictional educational-simulation boundary beside
+first-session instructions. It states that the game is not a calibrated policy
+forecast or real-world operational, clinical, financial, regulatory, or legal
+decision tool, while preserving actor-visible and host-authoritative limits.
+Remaining human, provenance, browser/device, full-campaign, persistence, and
+public-release gates remain explicit.

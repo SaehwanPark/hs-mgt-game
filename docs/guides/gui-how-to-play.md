@@ -202,8 +202,18 @@ Choose **Large** text, enable **Reduced motion**, and use the written resolution
 controls (**Skip to result** or **Review all**) when pacing is distracting. The
 host result remains unchanged.
 
-## Scope and safety
+## Scope, safety, and limitations
 
-The GUI is local, competitive-only, and in-memory. It is not a hosted service,
-network multiplayer client, calibrated policy forecast, or operational,
-clinical, financial, regulatory, or legal decision tool.
+This is a fictional educational simulation and research prototype. It is not a
+calibrated policy forecast or an operational, clinical, financial, regulatory,
+or legal decision tool. The current rules, seed, commands, and explicit
+stochastic inputs produce a bounded game outcome; they do not estimate what a
+real institution, policy, payer, workforce, or community will do.
+
+The GUI is local, competitive-only, and in-memory. The host remains
+authoritative, and actor-specific observations intentionally omit private rival
+state and unresolved hidden inputs. Current technical checks do not replace
+human accessibility, educational, audio-quality, provenance, resemblance,
+browser/device, full-campaign, persistence, or public-release review. Do not
+use the game to make real-world decisions or infer that a fictional institution
+represents a real organization or person.
