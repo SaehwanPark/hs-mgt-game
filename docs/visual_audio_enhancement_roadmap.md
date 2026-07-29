@@ -3688,7 +3688,9 @@ educational/accessibility gates remain open.
   outside release and runtime attribution surfaces. This closes only the
   current repository-owned technical attribution gate; human legal, ownership,
   training-data, resemblance, and public-release review remain open.
-- [ ] AI-generation metadata complete.
+- [ ] AI-generation metadata complete. Current technical readiness and
+  fail-closed promotion evidence are recorded below; actual preview metadata
+  and human review remain open.
 - [x] Limitations statement updated. Evidence:
   `docs/evaluation/phase13.1-limitations-statement.json`,
   `docs/guides/gui-how-to-play.md`, and
@@ -3786,6 +3788,28 @@ educational/accessibility gates remain open.
   claiming visual quality, causal certainty, or human comprehension.
 - Human visual, accessibility, educational, classroom, and public-release
   review remain open.
+
+### v0.13.57 current AI-generation metadata boundary
+
+- `docs/evaluation/phase13.1-ai-generation-metadata-boundary.json` and
+  `tests/test_phase13_1_ai_generation_metadata_boundary.py` bind the approved
+  local model registry, generation workflow, capture/validation scripts,
+  seven preserved portrait previews, pending review queue, empty generation
+  manifest, and visual-registry exclusion boundary.
+- The current technical contract passes for required metadata vocabulary,
+  approved model revision, source/hash preservation, and validator coverage.
+  Existing previews still lack their actual model identity, immutable
+  revision, sampler, and seed; they remain `unverified-preview`/`pending` and
+  are not release or runtime eligible.
+- The focused test proves that a promotion-shaped preview mutation fails closed
+  rather than accepting guessed provenance. Human identity, resemblance,
+  artifact, accessibility, legal, ownership, training-data, release, and
+  public-release review remain open.
+
+This closes only the current technical metadata-readiness boundary. The
+AI-generation metadata checklist item remains unchecked until an authorized
+generation run records real model/seed provenance and the required human gates
+are completed. Human-review gates remain open.
 
 ### Exit criteria
 

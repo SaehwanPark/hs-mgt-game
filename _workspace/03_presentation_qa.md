@@ -4123,3 +4123,76 @@ None for this bounded technical debrief presentation pass.
 - `python3 -m unittest tests.test_phase13_2_debrief_visual_boundary` — pass.
 - Existing live debrief, causal-attribution, accessibility, audio, and
   visual/audio contract checks — pass at handoff.
+
+## Presentation Domain QA — Phase 13.1 AI-generation metadata boundary v0.13.57
+
+### Status
+
+`pass` for the current repository-owned technical metadata-readiness and
+fail-closed promotion boundary only. Portrait human review, legal/ownership,
+training-data, accessibility, educational, and public-release approval are not
+implied.
+
+### Reviewed Inputs and Authorization
+
+- `_workspace/00_input/request-summary.md`,
+  `_workspace/02_presentation_contract.md`, and
+  `_workspace/136_implementation_plan_phase13-1-ai-generation-metadata-boundary-v0.13.57.md`.
+- The approved model registry, generation workflow, capture/validation scripts,
+  portrait previews, review queue, generation manifest, visual registry, and
+  `docs/evaluation/phase13.1-ai-generation-metadata-boundary.json`.
+- Authorization is limited to technical provenance readiness evidence; no
+  portrait generation, promotion, runtime route, or player-facing asset use
+  was authorized.
+
+### Information and Causality Findings
+
+- Pass: the ledger distinguishes the approved model/workflow contract from the
+  missing actual model identity, immutable revision, sampler, and seed for
+  existing previews.
+- Pass: the negative promotion-shaped test requires missing provenance to fail
+  closed; no guessed metadata, quality, identity, intent, or outcome meaning
+  is introduced.
+
+### Accessibility and Fallback Findings
+
+- Pass: the slice is text/JSON-only and preserves the existing generic actor
+  marker and written role label as the complete fallback.
+- Pass: no visual, motion, color, or audio channel is required to understand
+  pending, unavailable, or release-blocked status; human accessibility review
+  remains open.
+
+### Provenance and Rights Findings
+
+- Pass: current source hashes, workflow fields, approved model revision, empty
+  manifest, and registry exclusion are machine-checked.
+- Pass: missing model/seed provenance and pending human review prevent release
+  promotion; legal, ownership, training-data, and resemblance review remain
+  open.
+
+### Authority and Replay Findings
+
+- Pass: the ledger and validators run outside runtime presentation and do not
+  enter commands, transitions, stochastic inputs, observations, state hashes,
+  history, replay, checkpoints, or debrief facts.
+
+### Required Fixes
+
+None for this bounded technical metadata pass.
+
+### Residual Risks and Evidence Limits
+
+- Technical validation cannot supply missing generation metadata or establish
+  human identity, resemblance, artifact quality, lived accessibility, legal
+  clearance, ownership, training-data provenance, educational value, or
+  public-release readiness.
+- Actual approved regeneration and named human review remain required before
+  any portrait can enter the manifest, registry, credits, release, or runtime.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_ai_generation_metadata_boundary` —
+  pass.
+- Existing generation workflow, portrait inventory, review queue, asset
+  registry, release, security, credits, and visual/audio contract checks remain
+  the supporting evidence boundary.

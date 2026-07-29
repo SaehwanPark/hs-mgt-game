@@ -1,3 +1,86 @@
+# Presentation Contract — Phase 13.1 AI-generation metadata boundary v0.13.57
+
+## Goal and Authorization
+
+The authorized outcome is a technical provenance/readiness ledger for the
+existing fictional portrait-preview candidates. It must make the release
+boundary inspectable without treating missing model/seed data as known. This
+is a governance and evidence surface, not a new player-facing portrait or
+browser route.
+
+## Player Questions and Consequences
+
+There is no new player-facing semantic signal in this slice. The contributor
+question is: “Can this candidate be regenerated or promoted with complete,
+auditable provenance?” The safe consequence of an incomplete answer is the
+existing generic actor marker and written role label; no preview may become a
+runtime asset by implication.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Approved model identity/revision | `assets/generation/approved-models.json` | Current registry record; no record means unavailable | Do not infer the model used for an existing preview |
+| Required metadata vocabulary | `assets/generation/generation-workflow.json` | Capture-time contract | Do not treat a field name as a captured value |
+| Captured record validation | `scripts/capture_generation_metadata.py`, `scripts/validate_generation_metadata.py` | Pre-manifest/release check | Do not bypass the validator for a preview |
+| Preview source/hash/role/equivalent | `assets/generation/portrait-previews.json` and preserved PNGs | Current preview inventory | Do not infer model, seed, quality, identity, or outcome meaning |
+| Human review status | `assets/generation/portrait-review-queue.json` | Pending until a named human review occurs | Do not convert technical checks into human approval |
+| Release/runtime eligibility | generation manifest and visual registry | Must remain empty/unregistered for current previews | Do not infer release eligibility from source hashes alone |
+
+## Visual, Motion, and Audio Semantics
+
+The ledger is text/JSON-only and has no visual, motion, or audio cue. The
+meaningful states are written explicitly: `technical-ready`,
+`missing-preview-provenance`, `pending-human-review`, and `release-blocked`.
+The generic actor marker and written role label remain the complete fallback if
+portraits are unavailable. No color, motion, sound, or image is required to
+understand the boundary.
+
+## Accessibility and Fallbacks
+
+The evidence is machine-readable and text-first. Missing model, revision, seed,
+sampler, or review data must remain visible as unavailable/pending rather than
+being replaced with a guessed value. No audio or motion capability is used;
+the existing generic fallback and written equivalent remain available at all
+times.
+
+## Authority, History, and Replay Boundaries
+
+The ledger and validators operate outside the simulation and presentation
+runtime. They must not read or write commands, transitions, stochastic inputs,
+observations, state hashes, immutable history, replay artifacts, checkpoints,
+or debrief facts. No browser state, asset status, or provenance field may
+enter host authority.
+
+## Asset Provenance and Release Requirements
+
+Existing preview hashes may prove byte preservation only. A future promoted
+portrait requires an approved model ID and immutable revision, license/card
+metadata, actual seed and sampler/settings, preserved source output, release
+derivative/hash, complete human-review gates, an asset registry entry, and
+manifest/credits parity. Until then, preview status, approval, release path,
+registry ID, and manifest entry remain blocked/null.
+
+## Verification and Evidence Limits
+
+The focused test will validate the ledger's source paths and statuses, run the
+current generation validator, assert all seven previews have null model/seed
+provenance and pending review, and mutate one preview into a promotion-shaped
+state to prove validation fails closed. This cannot establish human
+resemblance, artifact quality, lived accessibility, legal clearance,
+training-data provenance, educational value, or public-release readiness.
+
+## Non-Goals and Open Questions
+
+- No portrait regeneration, model download, image editing, asset promotion,
+  runtime integration, or screenshot is authorized.
+- Open: an authorized contributor must regenerate or replace each candidate
+  through the approved local workflow with real model/seed data.
+- Open: a named human must complete identity, resemblance, marks, artifact,
+  accessibility, small-size, grayscale, and release-derivative review.
+
+--- Historical presentation contracts ---
+
 # Presentation Contract — Phase 11.1 live history handoff v0.12.94
 
 ## Goal and Authorization

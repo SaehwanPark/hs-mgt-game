@@ -729,6 +729,33 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 13.1 AI-generation metadata boundary v0.13.57
+
+## Result
+
+Recorded the current technical readiness boundary for the approved local
+AI-generation workflow and seven preserved portrait previews. The validator
+and focused parity test preserve missing model/seed provenance as unavailable,
+keep previews pending/unreleased/unregistered, and reject a promotion-shaped
+mutation.
+
+## Evidence boundary
+
+The ledger and focused test pass for workflow/model contract, source hashes,
+written equivalents, review-queue parity, empty generation manifest, visual
+registry exclusion, and fail-closed promotion. Actual model identity,
+immutable revision, sampler, seed, per-portrait human review, release
+derivative, legal/ownership/training-data review, accessibility, and
+public-release approval remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.56.
+- Working branch: `feat/ai-generation-metadata-boundary-v0.13.57`.
+- PR, one medium-effort code review, CI, merge commit, and temporary-branch
+  cleanup are pending.
+
+---
 # Final Handoff — Phase 13.1 bounded content boundary QA v0.13.51
 
 ## Result
