@@ -833,6 +833,33 @@ human evaluation result changed.
 - Focused/full verification, one medium-reasoning code review, PR, merge, and
   temporary-branch cleanup remain pending.
 
+---
+# Final Handoff — Phase 13.2 technical debrief visual boundary v0.13.55
+
+## Result
+
+Recorded the current technical debrief visual presentation boundary across
+terminal history/replay/hash alignment, written debrief/direct-effect rendering,
+read-only controls, and complete written fallbacks when audio or motion is
+unavailable.
+
+## Evidence boundary
+
+The ledger and executable Node probe bind host-supplied terminal fields,
+descriptive direct effects, consequence links, and read-only rendering without
+adding browser authority. Human visual hierarchy, accessibility, educational,
+classroom, causal-interpretation, and public-release review remain open.
+
+No runtime behavior, route, asset, audio, persistence, replay regeneration,
+causal graph, or human evaluation result changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.54.
+- Working branch: `codex/phase13-2-debrief-visual-boundary-v0-13-55`.
+- Focused/full verification, one medium-reasoning code review, PR, merge, and
+  temporary-branch cleanup remain pending.
+
 ## Handoff and merge gate
 
 - Base: `main` at v0.13.50.

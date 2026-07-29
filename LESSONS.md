@@ -3110,3 +3110,12 @@ first-time comprehension, or educational value. Record the technical campaign
 boundary separately and keep product/content and human expansion gates open;
 also state explicitly when a shared campaign envelope does not support the
 campaign being assessed.
+
+## Phase 60: Treat technical debrief rendering as a boundary, not a visual review (2026-07-29)
+
+Terminal envelope validation, aligned history/replay/hash metadata, written
+debrief/direct-effect rendering, read-only controls, and audio/motion fallbacks
+can establish a technical presentation contract. They cannot establish visual
+hierarchy, comprehension, accessibility quality, educational usefulness,
+causal certainty, or classroom readiness. Keep the technical renderer probe
+and the human debrief review as separate gates.

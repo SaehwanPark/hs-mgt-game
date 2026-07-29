@@ -4064,3 +4064,62 @@ None for this bounded technical campaign presentation pass.
 - Existing campaign-coverage, history, replay, checkpoint, debrief,
   accessibility, browser/device-policy, and visual/audio contract checks —
   pass at handoff.
+
+## Presentation Domain QA — Phase 13.2 technical debrief visual boundary v0.13.55
+
+### Status
+
+`pass` for the current host-bound technical debrief presentation only. Human
+visual, accessibility, educational, classroom, and public-release approval are
+not implied.
+
+### Reviewed Inputs and Authorization
+
+- Terminal envelope validator/renderer, direct-effect and consequence-link
+  renderers, live debrief/causal-attribution tests, text-first guide language,
+  and the focused debrief boundary ledger/test.
+- Authorization is limited to recording existing technical presentation and
+  fallback behavior; no new route, asset, audio, or simulation authority was
+  authorized.
+
+### Information and Causality Findings
+
+- Pass: terminal history, replay count, latest hash, debrief lines, snapshots,
+  direct effects, and consequence links remain host-supplied and source-bound.
+- Pass: before/after and direct-effect presentation remains descriptive; no
+  causal graph, hidden input, future outcome, or policy-validity claim is added.
+
+### Accessibility and Fallback Findings
+
+- Pass: terminal history/debrief/effect text remains written and controls become
+  read-only; audio and motion are optional presentation layers.
+- Existing accessibility, reduced-motion, audio-off, and written-equivalent
+  contracts remain unchanged; human review remains open.
+
+### Provenance and Rights Findings
+
+- No asset, portrait, audio file, or release path was added.
+- Existing attribution, provenance, and release boundaries remain unchanged.
+
+### Authority and Replay Findings
+
+- Pass: host/core owns terminal history, replay metadata, debrief lines,
+  snapshots, direct effects, and hashes.
+- No browser-owned terminal mutation, replay regeneration, or outcome-authoring
+  authority is added.
+
+### Required Fixes
+
+None for this bounded technical debrief presentation pass.
+
+### Residual Risks and Evidence Limits
+
+- Technical evidence cannot establish visual hierarchy, quality, comprehension,
+  accessibility quality, educational usefulness, classroom readiness, causal
+  interpretation, or public-release readiness.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_2_debrief_visual_boundary` — pass.
+- Existing live debrief, causal-attribution, accessibility, audio, and
+  visual/audio contract checks — pass at handoff.

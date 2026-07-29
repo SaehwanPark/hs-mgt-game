@@ -6920,6 +6920,34 @@ Deferred / Non-Goals:
 - No new campaign route, simulation rule, asset, audio file, persistence,
   replay authority, or human evaluation result is added.
 
+### Visual/audio Phase 13.2 current technical debrief visual boundary (v0.13.55)
+
+Status: Complete for the current repository-owned technical debrief visual
+presentation boundary only; human visual, accessibility, educational,
+classroom, and public-release review remain open.
+
+Done:
+
+- Added `docs/evaluation/phase13.2-debrief-visual-boundary.json` and
+  `tests/test_phase13_2_debrief_visual_boundary.py` for terminal
+  history/replay/hash alignment, written debrief/direct-effect rendering,
+  read-only terminal controls, and audio/motion fallbacks.
+- Bound host-supplied terminal fields, descriptive direct-effect presentation,
+  and text-first fallback behavior to existing sources and an executable Node
+  renderer probe; no runtime behavior changed.
+- Synchronized roadmap, README, architecture, changelog, lessons, QA,
+  contract, handoff, and release metadata.
+
+Not Yet Done:
+
+- Human visual hierarchy, comprehension, accessibility, educational, classroom,
+  causal-interpretation, and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No new debrief copy, route, runtime field, persistence, replay regeneration,
+  asset, audio file, causal graph, or human evaluation result is added.
+
 ## Future
 
 ### Visual and audio experience upgrade
