@@ -3081,3 +3081,12 @@ claims. It cannot establish clinical validity, policy validity, player
 comprehension, or educational safety. Close only the repository-owned wording
 gate and keep expert, human, provenance, accessibility, and release review
 explicit.
+
+## Phase 57: Keep attribution technical when portraits are unreleased (2026-07-29)
+
+Canonical registry fields, generated credits/notices, runtime credits, and
+release-manifest parity can close the current technical attribution gate. An
+unverified portrait preview must remain outside those release surfaces when
+model/seed metadata and human review are missing. Do not convert machine
+attribution into legal, ownership, training-data, resemblance, or release
+approval.

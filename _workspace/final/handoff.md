@@ -749,6 +749,35 @@ resemblance, legal, first-time-user, and public-release review remain open.
 No runtime, simulation, asset, audio, host authority, persistence, replay, or
 debrief behavior changed.
 
+---
+# Final Handoff — Phase 13.1 technical attribution boundary v0.13.52
+
+## Result
+
+Recorded current repository-owned attribution completeness across canonical
+visual/audio registries, generated credits/notices, runtime credits,
+release-manifest parity, and the exclusion of unverified portrait previews.
+
+## Evidence boundary
+
+The ledger and focused test pass for current attribution, source/generation,
+legal-basis, accessible-equivalent, approval, and hash projections. Unverified
+portraits and review-queue entries remain pending, unreleased, unregistered,
+and absent from runtime attribution; the on-disk preview directory is checked
+against both metadata lists. Human legal, ownership, training-data, resemblance, accessibility,
+educational, and public-release review remain open, as does portrait
+AI-generation metadata.
+
+No runtime, simulation, asset promotion, audio, host authority, persistence,
+replay, or debrief behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.51.
+- Working branch: `codex/phase13-1-attribution-boundary-v0-13-52`.
+- Focused and full verification, one medium-reasoning code review, PR, merge,
+  and temporary-branch cleanup remain pending.
+
 ## Handoff and merge gate
 
 - Base: `main` at v0.13.50.

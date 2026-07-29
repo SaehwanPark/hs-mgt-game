@@ -3663,7 +3663,15 @@ educational/accessibility gates remain open.
   checks reject simulation-world, resolved-input, and effect-queue fields.
   This closes only the automated source-checkout boundary, not human content or
   policy review.
-- [ ] Attribution complete.
+- [x] Attribution complete. Evidence:
+  `docs/evaluation/phase13.1-attribution-boundary.json`,
+  `tests/test_phase13_1_attribution_boundary.py`, canonical visual/audio
+  registries, generated credits/notices, runtime credits, and the release
+  manifest; all current repository-owned attribution fields and generated
+  projections are parity-checked, while unverified portrait previews remain
+  outside release and runtime attribution surfaces. This closes only the
+  current repository-owned technical attribution gate; human legal, ownership,
+  training-data, resemblance, and public-release review remain open.
 - [ ] AI-generation metadata complete.
 - [x] Limitations statement updated. Evidence:
   `docs/evaluation/phase13.1-limitations-statement.json`,
@@ -3710,6 +3718,20 @@ educational/accessibility gates remain open.
   The original clinical-implication item remains open for human clinical/
   policy review; resemblance, provenance, accessibility, educational, legal,
   and public-release review also remain open.
+
+### v0.13.52 current technical attribution boundary
+
+- `docs/evaluation/phase13.1-attribution-boundary.json` and
+  `tests/test_phase13_1_attribution_boundary.py` join the current visual/audio
+  registries, generated static credits, third-party notices, runtime credits,
+  release manifest, and portrait preview exclusion boundary.
+- Current registry entries retain attribution, source/generation, legal-basis,
+  accessible-equivalent, approval, and hash fields; release-capable entries
+  join the manifest by path and hash.
+- Unverified portrait previews remain pending, unreleased, unregistered, and
+  absent from runtime credits. This closes only current technical attribution;
+  human legal/ownership/training-data, resemblance, and public-release review
+  plus portrait AI-generation metadata remain open.
 
 ### Exit criteria
 

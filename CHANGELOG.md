@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.52] - 2026-07-29
+
+- Recorded the current repository-owned attribution boundary across canonical
+  registries, generated credits/notices, runtime credits, and the release
+  manifest, while keeping unverified portraits unreleased and unregistered.
+- Closed only the current technical attribution gate; human legal, ownership,
+  training-data, resemblance, and public-release review plus portrait
+  AI-generation metadata remain open.
+
 ## [0.13.51] - 2026-07-29
 
 - Recorded a bounded repository-owned content/presentation QA pass for the

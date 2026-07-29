@@ -6834,6 +6834,36 @@ Deferred / Non-Goals:
   simulation rule, stochastic input, persistence, replay change, forecast,
   clinical recommendation, or human approval claim is added.
 
+### Visual/audio Phase 13.1 current technical attribution boundary (v0.13.52)
+
+Status: Complete for the current repository-owned attribution and generated
+credits boundary only; human legal, ownership, training-data, resemblance,
+accessibility, educational, and public-release review remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-attribution-boundary.json` and
+  `tests/test_phase13_1_attribution_boundary.py` for canonical visual/audio
+  registries, generated static credits/notices, runtime credits, release
+  manifest parity, and unreleased portrait exclusion.
+- Verified that current registry entries retain attribution, source/generation,
+  legal-basis, accessible-equivalent, approval, and hash fields; release
+  entries join the manifest by path and hash.
+- Kept unverified portrait previews pending, unreleased, unregistered, and
+  absent from runtime attribution. No runtime, simulation, asset, audio,
+  replay, or authority behavior changed.
+
+Not Yet Done:
+
+- Portrait model/seed metadata, human identity/resemblance/artifact review,
+  legal/ownership/training-data review, and public-release approval remain
+  open.
+
+Deferred / Non-Goals:
+
+- No portrait is promoted, no registry or release asset is added, and no
+  AI-generation metadata is fabricated for the built-in preview outputs.
+
 ## Future
 
 ### Visual and audio experience upgrade

@@ -101,3 +101,49 @@ None for this bounded source/content pass.
 
 - `python3 -m unittest tests.test_phase13_1_content_boundary_qa` — pass.
 - Existing hidden-state and limitations boundary tests — pass.
+
+# Domain QA — Phase 13.1 technical attribution boundary v0.13.52
+
+## Status
+
+`pass` for the current repository-owned attribution and generated-credits
+boundary. This is not legal, ownership, training-data, resemblance, or
+public-release approval.
+
+## Reviewed Inputs
+
+- Canonical visual/audio registries, generated static credits/notices, runtime
+  credits projection, release manifest, and portrait preview/review queue.
+- `docs/evaluation/phase13.1-attribution-boundary.json` and its focused test.
+- Existing asset validation, security, generation metadata, release, and
+  in-game credits checks.
+
+## Findings
+
+- Current registry entries retain source/generation attribution, legal-basis
+  reference, accessible equivalent, approval status, and original hash; release
+  entries also carry release hashes and manifest path parity.
+- Static credits, third-party notices, runtime credits, and release-manifest
+  projections are current relative to canonical registries.
+- Unverified portrait previews and review-queue entries remain pending,
+  unreleased, unregistered, and absent from runtime attribution surfaces; the
+  on-disk preview directory is enumerated against both metadata lists.
+- The slice does not fabricate model, seed, human review, ownership, or legal
+  approval for previews whose generation tool did not expose those fields.
+
+## Required Fixes
+
+None for this bounded technical attribution pass.
+
+## Residual Risks
+
+- Human legal, ownership, training-data, resemblance, artifact, accessibility,
+  educational, and public-release review remain open.
+- Portrait AI-generation metadata remains incomplete by design until an
+  approved metadata-bearing generation route is used.
+
+## Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_attribution_boundary` — pass.
+- Existing asset registry, credits, generation, security, and release checks —
+  pass.

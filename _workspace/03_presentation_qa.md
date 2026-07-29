@@ -3872,3 +3872,68 @@ None for this bounded technical presentation/content pass.
 - `python3 -m unittest tests.test_phase13_1_content_boundary_qa` — pass.
 - Existing Phase 13.1 hidden-state/limitations tests and current GUI contract
   checks — pass at handoff.
+
+## Presentation Domain QA — Phase 13.1 technical attribution boundary v0.13.52
+
+### Status
+
+`pass` for the current technical attribution/provenance projection only. No
+legal, ownership, training-data, resemblance, accessibility, educational, or
+public-release approval is implied.
+
+### Reviewed Inputs and Authorization
+
+- Canonical visual/audio registries, generated credits/notices, runtime credits,
+  release manifest, portrait preview/review queue, and asset validation output.
+- The Phase 13.1 attribution ledger and focused parity test.
+- Authorization is limited to documenting current attribution projections and
+  keeping unreleased previews outside release surfaces; no asset promotion or
+  runtime authority change was authorized.
+
+### Information and Causality Findings
+
+- Pass: credits expose attribution and provenance fields as text-first metadata;
+  they do not imply an asset is a real institution/person or add simulation
+  meaning.
+- Pass: unverified portraits are not promoted into the registry, release
+  manifest, or runtime credits, so decorative identity cannot be mistaken for
+  approved content.
+
+### Accessibility and Fallback Findings
+
+- Existing credits disclosure remains text-first, keyboard-accessible, and
+  host-independent; portrait generic fallbacks and written equivalents remain
+  available.
+- Human accessibility and comprehension review remain open.
+
+### Provenance and Rights Findings
+
+- Pass: current repository-owned registry attribution, generated credits,
+  third-party notices, runtime projection, and release-manifest parity are
+  machine-checked.
+- Pass: the unreleased portrait boundary preserves missing model/seed
+  provenance and pending human review instead of fabricating approval; both the
+  review queue and on-disk preview directory are checked for pending parity.
+- Legal, ownership, training-data, and human resemblance review remain open.
+
+### Authority and Replay Findings
+
+- Pass: credits and provenance projections do not access host state, commands,
+  transitions, stochastic inputs, history, replay, or persistence.
+- No simulation or presentation authority path changes.
+
+### Required Fixes
+
+None for this bounded technical attribution pass.
+
+### Residual Risks and Evidence Limits
+
+- Machine attribution parity cannot establish legal clearance, ownership,
+  training-data provenance, output quality, resemblance, or public release.
+- Portrait AI-generation metadata and human review remain incomplete.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_attribution_boundary` — pass.
+- Existing registry, credits, generation, release, and GUI boundary checks —
+  pass at handoff.
