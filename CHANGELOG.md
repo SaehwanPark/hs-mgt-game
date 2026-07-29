@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.56] - 2026-07-29
+
+- Reworked the root README into a concise, player-first introduction with a
+  guided stabilization quickstart and an optional GUI path.
+- Moved milestone detail out of the visitor flow by linking to the existing
+  specification, roadmap, changelog, and contributor documentation.
+
 ## [0.13.55] - 2026-07-29
 
 - Recorded the current technical debrief visual boundary across terminal

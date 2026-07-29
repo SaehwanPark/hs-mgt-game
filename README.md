@@ -1,345 +1,108 @@
-![screenshot](https://i.imgur.com/gfmOO3O.png)
-
 # Health Policy Strategy Game
 
-Health Policy Strategy Game is a command-line strategy simulation about leading
-a fictional nonprofit US health system through financial pressure, workforce
-constraints, payer negotiations, policy oversight, market competition, and
-community trust.
+Health Policy Strategy Game is a strategy simulation about leading a fictional
+nonprofit US health system through financial pressure, workforce constraints,
+payer negotiations, policy oversight, market competition, and community trust.
 
-The game is built around a simple thesis: health-policy outcomes are not direct
-levers. They emerge from strategic responses by institutions with different
-authority, incentives, information, and constraints.
+The current public milestone is a playable Rust prototype at v0.13.56.
 
-The current public milestone is a playable Rust prototype at v0.13.55.
+Health-policy outcomes are not direct levers here. Other institutions respond
+to your choices based on their own authority, incentives, information, and
+constraints. You make tradeoffs with incomplete information, live with delayed
+consequences, and review what happened in an educational debrief.
 
-The current visual/audio evidence also records the supported actor-visible GUI
-screenshot surface and its deterministic SVG/structural regression boundary;
-full-campaign raster screenshots and human visual-quality review remain open.
-Current fictional portrait previews are inventory/hash-bound but remain
-unverified and unreleased pending human review.
-Their current role, source/hash, and written-equivalent metadata gates are
-machine-checked; this does not approve the images.
-The current source-checkout technical release contract is also machine-checked;
-public-release and human evaluation gates remain open.
-The current campaign-specific presentation inventory is recorded for
-stabilization and regional affiliation; campaign-specific implementation and
-human review remain open.
-The reusable-asset matrix now records eligible shared primitives and keeps
-direct campaign audio mapping and campaign-specific quality review open.
-The current map/facility decision records no new asset requirement under the
-present abstract/stage contracts, with future reopen triggers documented.
-The current shared pressure/recovery taxonomy is registered against visible
-catalogs; campaign-specific pressure design and direct audio mapping remain
-open.
-The current stabilization tutorial contract covers the CLI beginner flow and
-guide; browser-native stabilization integration and human review remain open.
-The current stabilization audio-state mapping joins the eight shared visible
-pressure/recovery categories to existing optional music, event-cue, and
-audio-direction contracts with written equivalents; direct campaign-envelope
-audio and human quality review remain open. No runtime or authority boundary
-changes.
-The current stabilization debrief contract records the deterministic CLI
-tradeoff/rationale/effect/revision presentation and host-authored shared
-browser/end-session renderers; the live GUI remains competitive-only and
-browser-native stabilization debrief quality, instructor-surface decisions,
-and human educational review remain open. No runtime or authority boundary
-changes.
-The current stabilization accessibility evidence records shared technical
-keyboard/focus, text/non-color status, text-scale, reduced-motion,
-written-equivalent, and audio-fallback checks; the stabilization CLI remains
-text-first and the live GUI remains competitive-only. Human accessibility,
-screen-reader/device review, and educational usability remain open. No runtime
-or authority boundary changes.
-The current stabilization provenance audit records repository-authored and
-runtime-generated reusable catalog sources, generated credits/notices,
-release-manifest checks, the no-new-asset decision, and the unreleased portrait
-preview boundary. Legal clearance, future asset provenance, human quality, and
-public-release review remain open. No asset, runtime, or authority boundary
-changes.
-The current regional-affiliation partner identity evidence records host-reported
-partner name/condition/stage fields, generic actor fallback, and the
-identity-only unverified/unreleased partner portrait boundary. Partner-specific
-art/audio, browser integration, and human quality/legal review remain open. No
-new asset or runtime authority path changes.
+![Terminal view of the game's executive report and competitive command entry](https://i.imgur.com/gfmOO3O.png)
 
-The current regional-affiliation negotiation-stage evidence records the
-host-owned `NegotiateCommitments` process label, commitment decision fields,
-visible uncertainty, shared process/decision renderers, and optional
-affiliation-negotiation audio. Browser-native affiliation integration,
-stage-specific art/audio, hidden-state presentation, and human review remain
-open. No new asset or runtime authority path changes.
+## Start Here
 
-The current regional-affiliation commitment/review evidence records visible
-commitment metrics, partner response states, the pending institutional-review
-process, submit/await decisions, reported review statuses, and optional
-affiliation-negotiation audio. Browser-native review integration, state-specific
-art/audio, hidden review deliberation, and human review remain open. No new
-asset or runtime authority path changes.
-
-The current regional-affiliation integration-state evidence records the
-host-owned `IntegrateOrDecline` stage, integration-obligation process,
-begin/decline decision, visible outcome statuses, and written consequence
-boundary. Resolved integration drag and continuity shock remain outside the
-actor observation; browser-native integration, state-specific art/audio, and
-human review remain open. No new asset or runtime authority path changes.
-The current regional-affiliation audio-motif evidence records the reusable
-`affiliation_negotiation` music state, explicit `event.affiliation-milestone`
-cue, visible triggers, generated-audio properties, and written/audio-off
-fallback. Direct browser-native affiliation audio integration and human
-listening/quality review remain open. No new audio content or runtime
-authority path changes.
-The current regional-affiliation stage-transition evidence records the typed
-Assess partner → Choose posture → Negotiate commitments → Submit review →
-Resolve review → Integrate or decline → Affiliation complete sequence, host
-successors, legal command gates, visible labels, and replay-aligned history.
-Browser-native affiliation sequencing, stage-specific presentation, and human
-review remain open. No runtime authority path changes.
-The current regional-affiliation replay/debrief evidence records versioned
-replay artifact verification, host history/replay metadata, terminal debrief
-content, decision-quality language, alternatives, and written rendering.
-Browser-native affiliation replay/debrief views, durable persistence, and human
-educational review remain open. No runtime authority path changes.
-The current regional-affiliation provenance audit records reusable catalog and
-registry sources, generated credits, release/security/audio packaging checks,
-the no-new-asset decision, and unreleased portrait-preview gates. Legal,
-training-data, human quality, and public-release review remain open. No asset
-or runtime authority boundary changes.
-The current Phase 12.3 authority-boundary evidence distinguishes existing
-post-run CLI/typed debrief detail from player-visible observations across the
-three campaign contracts; no new instructor route or true-state browser view
-is claimed. Instructor-surface design and human educational review remain open.
-The v0.13.39 evidence records the current textual distinction between
-observed, true-state, and instructor-only labels while keeping browser-native
-true-state visualization, export, and human review open. It adds no runtime
-presentation surface or authority.
-The v0.13.40 evidence records current decision-time observation retention in
-the immutable core/CLI contract, host history/replay alignment, and the
-text-first browser summary boundary. Full browser per-decision observation
-recovery and human review remain open; no runtime presentation surface changes.
-The v0.13.41 evidence records current host-sourced direct-effect attribution,
-before/after resolution context, source-linked consequence rendering, and the
-boundary against inferred causal graphs. Causal inference and human review
-remain open; no runtime presentation surface changes.
-The v0.13.42 evidence adds a deterministic text-first comparison of same-genesis
-committed stabilization histories to the preset post-run CLI demo, with
-explicit resolved-input parity and descriptive state/effect differences.
-Causal certainty, browser instructor views, distributional summaries, export
-behavior, and human review remain open.
-The v0.13.43 evidence adds a post-run instructor-summary distributional table
-with separate committed per-system deltas and explicit no-ranking/no-welfare
-language. Distributional fairness, export behavior, browser-native instructor
-views, and human review remain open.
-The v0.13.44 evidence documents the existing post-run export boundary across
-stabilization, competitive, and regional-affiliation CLI paths, including
-format differences, empty-input skip behavior, and non-authoritative use. No
-new export format or browser download route is introduced.
-The v0.13.45 evidence documents the existing GUI settings, optional audio,
-reduced-motion, text-scale, credits, and troubleshooting surfaces for first-
-time players and facilitators. No runtime control, simulation, persistence, or
-authority path changes; human accessibility and educational review remain open.
-The v0.13.46 evidence prepares the existing facilitator guide and feedback
-instrument for an authorized bounded pilot, including classroom assumptions,
-audio/accessibility guidance, consent boundaries, and anonymized response
-structure. No participant results or approval decision is recorded.
-The v0.13.47 evidence adds a local GUI Low-distraction mode that temporarily
-forces reduced motion, Large text, written cue explanations, muted audio, and
-reduced notifications, then restores prior local preferences. No host or
-simulation authority changes; human accessibility review remains open.
-
-The v0.13.48 release statement keeps the project boundary explicit: this is a
-fictional educational simulation, not a calibrated policy forecast or an
-operational, clinical, financial, regulatory, or legal decision tool. Technical
-checks do not replace human accessibility, educational, audio-quality,
-provenance, resemblance, browser/device, full-campaign, persistence, or
-public-release review.
-
-The v0.13.49 evidence records the bounded current vertical slice: live
-actor-visible board data, facility/report linkage, project overlays, first-month
-consequence presentation, and visible-input-driven planning/pressure music.
-Full-campaign coverage and first-time-user, provenance, and human review gates
-remain open.
-
-The v0.13.50 evidence records the current browser/DTO hidden-state boundary:
-presentation modules consume actor-visible host projections and do not contain
-simulation-world, resolved-input, or effect-queue fields. This automated source
-boundary does not replace human content, provenance, accessibility, educational,
-or public-release review.
-
-The v0.13.51 evidence records a bounded source/content QA pass over the current
-player guide, README, GUI modules, metric proof, and semantic source catalog.
-The reviewed surfaces preserve the fictional/non-forecast and operational,
-clinical, financial, regulatory, and legal limitation boundary and make no
-unsupported clinical-advice claim. This does not replace human clinical/policy,
-resemblance, provenance, accessibility, educational, legal, or public-release
-review.
-
-The v0.13.52 evidence records the current repository-owned attribution
-boundary: canonical visual/audio registry entries, generated credits and
-notices, runtime credits, and the release manifest are parity-checked, while
-unverified portrait previews remain outside release and runtime attribution
-surfaces. Human legal, ownership, training-data, resemblance, and
-public-release review remain open; AI-generation metadata for the portraits is
-also incomplete.
-
-The v0.13.53 evidence records the current technical first-session path:
-host-bound launch/load, actor-visible inspection, contextual drafting and
-validation, committed resolution review, continuation, and written recovery
-guidance. The broader first-session workflow remains open for structured
-first-time-user, accessibility, and educational evaluation.
-
-The v0.13.54 evidence records the current technical competitive-regional
-campaign boundary: a host-owned 24-month run, current actor-visible
-board/facility/overlay/event/music surfaces, host-owned
-history/replay/checkpoint/resolution/debrief continuity, and written
-fallbacks. The shared `campaign-coverage-v1` envelope remains limited to
-stabilization and regional-affiliation. Full-campaign visual/content review and
-structured human campaign evaluation remain open.
-
-The v0.13.55 evidence records the current technical debrief visual boundary:
-host-supplied terminal history/replay/hash alignment, written debrief and
-direct-effect rendering, read-only terminal controls, and complete written
-fallbacks when audio or motion is unavailable. Human visual, accessibility,
-educational, and classroom review remain open.
-
-Key capabilities include:
-- **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.
-- **Deterministic Simulation Core**: Pure state transition core, explicit stochastic input derivation, actor-visible vs. true state separation, append-only history, and stable state hashing for deterministic replay verification.
-- **Web-Based Presentation & Audio**: SVG-based regional map and facility rendering, operational overlays, synthesized Web Audio cues and environmental ambience, semantic information containers, and decision-quality debriefing.
-- **Host & Packaging Security**: Host-authoritative, loopback-only local web host (`cargo run --bin hs-mgt-game-gui`), automated asset security scanning, manifest auditing, and offline package completeness.
-
-It is intended for inspection, playtesting, portfolio review, and future educational design work. It is not a calibrated policy forecast or a model of any real institution.
-
-## What You Can Play
-
-- `stabilization-v1`: a five-turn executive stabilization campaign.
-- `competitive-regional-v1`: a 24-month regional-market campaign with
-  one human-led system, AI rival health systems, simultaneous monthly actions,
-  lagged rival observability, a recurring operating consequence loop, and
-  end-of-run debriefing.
-- `regional-affiliation-v1`: an opt-in six-stage regional affiliation campaign
-  with explicit partner observations, commitments, review, integration, replay,
-  and educational debriefing.
-
-All campaigns are deterministic for a given seed and set of choices. The
-simulation separates true state from actor-visible observations, records
-append-only history, and verifies replay through stable state hashes.
-
-## Why It Exists
-
-Most health-policy teaching tools make one part of the system legible at a
-time: finance, operations, regulation, insurance, labor, or public policy. This
-project asks the player to reason across those boundaries.
-
-The design emphasizes:
-
-- tradeoffs rather than a single score;
-- incomplete information rather than omniscient dashboards;
-- institutional actors rather than passive background conditions;
-- delayed and stochastic effects that are resolved outside the deterministic
-  transition core;
-- debriefs that explain why outcomes happened and what the player knew at the
-  time.
-
-## Quickstart
-
-Prerequisites:
-
-- Rust toolchain with Cargo.
-
-### Play in the terminal
-
-Run all three campaigns through the CLI:
+You need a Rust toolchain with Cargo. From the repository root, run:
 
 ```bash
 cargo run
 ```
 
-Then choose:
+For a friendly first session:
 
-- Enter or `1` for the stabilization campaign.
-- `2` or `c` for the competitive campaign.
-- `3` or `a` for the regional affiliation campaign.
-- Enter for the default seed, or provide a numeric seed for a different
-  deterministic run.
+1. Press Enter or choose `1` for `stabilization-v1`.
+2. Press Enter for the default deterministic seed.
+3. Choose beginner mode.
 
-For a first session, start with `stabilization-v1` in beginner mode. For the
-competitive campaign, Normal difficulty gives a compact introduction to monthly
-action budgeting and rival pressure.
+The stabilization campaign is a short, five-turn introduction. The game
+explains the available choices as you play, and `?` or `help` shows guidance
+when you need it.
 
-### Play in the GUI
+## What You Can Play
 
-The live GUI currently supports `competitive-regional-v1` only.
+- `stabilization-v1` — a five-turn executive stabilization campaign and the
+  recommended starting point.
+- `competitive-regional-v1` — a 24-month regional-market campaign with AI
+  rivals, simultaneous monthly actions, and lagged information.
+- `regional-affiliation-v1` — a six-stage affiliation campaign covering
+  partner assessment, commitments, review, integration, and debriefing.
+
+Every campaign is deterministic for the same seed and choices. The simulation
+keeps actor-visible information separate from its underlying state, records an
+append-only history, and supports replay verification.
+
+## Optional GUI
+
+The live GUI currently supports `competitive-regional-v1` only:
 
 ```bash
 cargo run --bin hs-mgt-game-gui
 ```
 
-Keep that terminal running, open the printed URL (normally
-`http://127.0.0.1:7878`), select seed `42` and Normal difficulty, then choose
-**Start competitive session**. Opening `gui/index.html` directly shows the
-static demo and does not start a live scenario.
+Keep that terminal running and open the printed URL, normally
+`http://127.0.0.1:7878`. Choose seed `42`, Normal difficulty, and
+**Start competitive session**.
 
-See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete first
-month, audio controls, alternate ports, session lifetime, and troubleshooting.
+Opening `gui/index.html` directly shows demo data; it does not start a live
+scenario.
 
-See [Reproducible Distribution](docs/guides/reproducible-distribution.md) for
-the canonical source-checkout contents, support boundaries, and release checks.
-
-## Competitive Command Examples
-
-Competitive mode uses short Stata-like commands. Commands can be chained with
-semicolons.
-
-```text
-monitor target=northlake depth=1
-recruit role=nurse headcount=4
-invest domain=beds amount=20
-negotiate payer=carrier_a rate_posture=neutral
-commit pledge_type=access level=3
-project kind=ehr_epic budget=60
-hold
-```
-
-Example batch:
-
-```text
-monitor target=northlake depth=1; recruit role=nurse headcount=4
-```
-
-Type `?` or `help` inside the game for command guidance.
+See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete
+first month, settings, alternate ports, and troubleshooting.
 
 ## Current Boundaries
 
-This is a playable prototype, not a finished educational release.
+This is a playable research and educational prototype, not a finished
+educational release or a model of any real institution.
 
-Current limits:
+- Numerical thresholds and game units are documented abstractions, not
+  empirically calibrated parameters or forecasts.
+- Rivals are local AI or bounded MCP agents; there is no network multiplayer.
+- Automated playtests help evaluate gameplay and explanations, but they are not
+  evidence of measured human learning.
+- Human accessibility, educational, browser/device, provenance, and
+  public-release reviews remain open.
 
-- the campaign features local AI rivals or MCP agents with no network multiplayer;
-- current numerical thresholds are documented abstractions, not empirically
-  calibrated parameters;
-- AI-agent playtest findings are validation aids for gameplay and explanation,
-  not evidence of measured human learning.
-- Phase 9 capture-matrix findings are deterministic technical/interface-task
-  hypotheses; they do not automatically revise the interface or simulation.
-- monthly demand, volume, revenue, and cost use visible game units rather than
-  calibrated encounters or dollars.
-
-The model should not be used for operational, clinical, financial, regulatory,
+Do not use the game for operational, clinical, financial, regulatory, legal,
 or policy decisions.
 
-## Documentation
+## Learn More
 
-Contributors should start with the [documentation index](docs/README.md), which
-provides separate software, game/domain-design, and validation paths while
-keeping historical evidence out of the current instruction flow.
+### Players
 
-Players can go directly to [How to Play](docs/guides/how-to-play.md) or
-[How to Play in GUI Mode](docs/guides/gui-how-to-play.md). The design essay
-[A Management Game Where the Market Talks Back](docs/blog-posts/health-policy-strategy-game.md)
-is also available on [Medium](https://medium.com/@saehwanpark/a-management-game-where-the-market-talks-back-388fb2955f26).
+- [How to Play in the CLI](docs/guides/how-to-play.md)
+- [How to Play in GUI Mode](docs/guides/gui-how-to-play.md)
 
-## Development
+### Project and contributors
+
+- [Contributor documentation index](docs/README.md)
+- [Project specification](SPEC.md)
+- [Architecture](ARCHITECTURE.md)
+- [Proposal](docs/proposal.md)
+- [Roadmap](docs/roadmap.md)
+- [Design principles](docs/design_principles.md)
+- [Changelog](CHANGELOG.md)
+
+For a longer introduction to the design, read
+[A Management Game Where the Market Talks Back](docs/blog-posts/health-policy-strategy-game.md).
+
+## Contributing
+
+The codebase is intentionally CLI-first. Keep core simulation transitions
+deterministic and resolve randomness into explicit inputs before evaluating a
+transition.
 
 Run the standard checks:
 
@@ -351,33 +114,8 @@ cargo clippy --all-targets -- -D warnings
 cargo test
 ```
 
-The release metadata command is documented in
-[`docs/guides/contributor-release-check.md`](docs/guides/contributor-release-check.md).
-The complete source-checkout distribution decision is documented in
-[`docs/guides/reproducible-distribution.md`](docs/guides/reproducible-distribution.md).
-
-Run the local MCP server used for bounded agent playtesting:
-
-```bash
-cargo run --bin hs-mgt-game-mcp
-```
-
-Run the scripted playtest harness:
-
-```bash
-python3 scripts/run_automated_playtests.py
-```
-
-The codebase is intentionally CLI-first. Core simulation transitions should stay
-deterministic, with randomness resolved into explicit inputs before transition
-evaluation.
-
-A dependency-free browser client is available in [`gui/`](gui/). The
-`hs-mgt-game-gui` binary serves it with a loopback-only, in-memory host so a
-player can start and play the competitive campaign. The client builds
-host-validated batches, reviews committed resolution, and optionally plays
-visible-only generated audio without owning simulation state. Direct static
-serving remains available for fixture and externally injected-adapter work.
+Start with the [contributor documentation index](docs/README.md) for software,
+game and domain design, validation, release, and decision-record guidance.
 
 ## License
 

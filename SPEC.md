@@ -6948,6 +6948,31 @@ Deferred / Non-Goals:
 - No new debrief copy, route, runtime field, persistence, replay regeneration,
   asset, audio file, causal graph, or human evaluation result is added.
 
+### Visitor-first README (v0.13.56)
+
+Status: Complete for the root README information hierarchy and release
+bookkeeping only.
+
+Done:
+
+- Replaced the milestone-by-milestone opening with a concise project
+  introduction and a guided `stabilization-v1` beginner quickstart.
+- Kept the live competitive GUI path, prototype limitations, player guides,
+  and a small contributor doorway visible while linking detailed project state
+  to existing canonical documents.
+- Preserved release metadata and GUI documentation contracts and bumped package
+  metadata to `0.13.56`.
+
+Not Yet Done:
+
+- Structured first-time-player, accessibility, educational, and browser/device
+  evaluation remain open.
+
+Deferred / Non-Goals:
+
+- No gameplay, simulation, scenario, replay, GUI, architecture, release
+  packaging, or historical evidence changes are included.
+
 ## Future
 
 ### Visual and audio experience upgrade

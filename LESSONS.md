@@ -3119,3 +3119,11 @@ can establish a technical presentation contract. They cannot establish visual
 hierarchy, comprehension, accessibility quality, educational usefulness,
 causal certainty, or classroom readiness. Keep the technical renderer probe
 and the human debrief review as separate gates.
+
+## Phase 61: Keep milestone evidence out of the visitor README (2026-07-29)
+
+Appending each release boundary to the root README placed implementation
+evidence before the playable overview and made the first-session path harder to
+find. Keep the README focused on orientation, first play, current limitations,
+and clear next links; preserve milestone detail in the changelog,
+specification, roadmap, and evaluation records that already own it.
