@@ -2839,6 +2839,22 @@ renderers, optional audio, live scope, resolved-detail boundaries, and the
 no-new-asset decision. Browser views, persistence, and human review remain
 open.
 
+## Technical Attribution Boundary Addendum — v0.13.52
+
+The current canonical visual/audio registries, generated static credits and
+third-party notices, runtime credits projection, and release manifest are
+joined by a focused technical attribution ledger/test. Every current registry
+entry retains source/generation attribution, legal-basis reference, accessible
+equivalent, approval status, and hash fields; release entries remain manifest-
+bound. Unverified portrait previews remain outside registry, release, and
+runtime attribution surfaces.
+
+This addendum records a provenance projection boundary only. It does not
+authorize portrait promotion or establish legal, ownership, training-data,
+resemblance, accessibility, educational, or public-release approval. Portrait
+AI-generation metadata remains open because the current preview tool did not
+expose approved model and seed data.
+
 # Presentation Contract — Phase 12 regional-affiliation provenance audit v0.13.37
 
 ## Contract status

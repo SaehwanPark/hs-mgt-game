@@ -2551,3 +2551,41 @@ presentation contract without adding causal inference or expanding authority.
   persistence, routes, or human educational claims.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio technical attribution boundary v0.13.52
+
+## Scope
+
+Record current repository-owned attribution completeness across canonical
+visual/audio registries, generated static credits/notices, runtime credits,
+release-manifest parity, and the exclusion of unverified portrait previews.
+
+## Target slice
+
+- Verify every current registry entry has attribution, source/generation,
+  legal-basis, accessible-equivalent, approval, and hash fields.
+- Verify release paths and hashes join the deterministic release manifest and
+  generated credits projections.
+- Keep portrait previews without approved model/seed metadata and human review
+  outside release, registry, and runtime attribution surfaces.
+
+## Sources and expected files
+
+- `assets/registry/*.json`, `assets/ASSET_CREDITS.md`,
+  `assets/THIRD_PARTY_NOTICES.md`, `gui/asset-credits.mjs`, and
+  `assets/ASSET_RELEASE_MANIFEST.json`.
+- `assets/generation/portrait-previews.json` and
+  `assets/generation/portrait-review-queue.json`.
+- New `docs/evaluation/phase13.1-attribution-boundary.json` and
+  `tests/test_phase13_1_attribution_boundary.py`.
+- Additive domain/presentation QA, contract, handoff, roadmap, SDD, changelog,
+  lessons, and release-metadata updates.
+
+## Non-goals and validation
+
+- Do not promote portraits, add assets/audio, fabricate model/seed metadata,
+  change runtime authority, or claim legal, ownership, training-data,
+  resemblance, accessibility, educational, or public-release approval.
+- Run the focused attribution test plus full Python/Rust, asset, generation,
+  security, release, credits, documentation, offline, browser/device-policy,
+  and visual/audio contract checks.

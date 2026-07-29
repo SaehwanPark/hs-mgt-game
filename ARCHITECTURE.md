@@ -963,6 +963,12 @@ renderer; the review adds no runtime, authority, replay, or simulation path.
 The wording check is not clinical/policy expert approval, human comprehension
 evidence, or public-release approval.
 
+The v0.13.52 technical attribution boundary keeps canonical registry entries,
+generated credits/notices, runtime credits, and release-manifest paths aligned.
+Unverified portrait previews remain outside release and runtime attribution;
+this is a provenance projection boundary, not legal, ownership, training-data,
+resemblance, or public-release approval.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

@@ -1,0 +1,35 @@
+{
+  "schema_version": "phase13.1-attribution-boundary-v1",
+  "status": "complete-current-technical-attribution-boundary-only",
+  "roadmap_item": "Attribution complete",
+  "source_contract": {
+    "visual_registry": "assets/registry/visual-assets.json: asset-registry-v1",
+    "audio_registry": "assets/registry/audio-assets.json: asset-registry-v1",
+    "asset_credits": "assets/ASSET_CREDITS.md: No third-party release assets are included",
+    "third_party_notices": "assets/THIRD_PARTY_NOTICES.md: All current release-capable entries are repository-authored",
+    "runtime_credits": "gui/asset-credits.mjs: \"third_party_release_count\": 0",
+    "release_manifest": "assets/ASSET_RELEASE_MANIFEST.json: asset-release-manifest-v1",
+    "portrait_boundary": "assets/generation/portrait-review-queue.json: Human review, approved model/seed provenance, release derivative, and registry bridge are incomplete"
+  },
+  "coverage": {
+    "registry_entries": "Every current visual/audio registry entry has source or generation attribution, legal-basis reference, accessible equivalent, approval status, and source hash; release entries also have release hashes.",
+    "generated_outputs": "Static credits, third-party notices, runtime credits, and the release manifest are generated or parity-checked from canonical registry data.",
+    "portrait_boundary": "Unverified portrait previews and review-queue entries remain pending and outside the release manifest, canonical registries, and runtime credits projection; the preview directory is enumerated against both metadata lists.",
+    "runtime_boundary": "The text-first credits surface is presentation-only and does not access host state or simulation authority."
+  },
+  "findings": {
+    "current_registry_attribution_complete": true,
+    "generated_credits_current": true,
+    "release_manifest_current": true,
+    "unreleased_portraits_excluded": true,
+    "human_legal_clearance": false,
+    "training_data_provenance_review": false,
+    "human_resemblance_review": false
+  },
+  "limits": [
+    "This closes the current repository-owned attribution and generated-credits boundary only.",
+    "It does not establish human legal clearance, ownership, training-data provenance, output quality, resemblance review, accessibility, educational usability, or public-release approval.",
+    "AI-generation metadata remains open because current portrait previews lack exposed approved model and seed data and remain unreleased."
+  ],
+  "test_source": "tests/test_phase13_1_attribution_boundary.py"
+}
