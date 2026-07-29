@@ -117,6 +117,10 @@ fn competitive_distributional_summary_has_empty_history_fallback() {
 
   let summary = crate::debrief::competitive_distributional_summary(&history).join("\n");
   assert!(summary.contains("No committed transitions are available"));
+
+  let debrief = competitive_debrief(&history).join("\n");
+  assert!(debrief.contains("=== DISTRIBUTIONAL OUTCOME SUMMARY (INSTRUCTOR REVIEW) ==="));
+  assert!(debrief.contains("No committed transitions are available"));
 }
 
 #[test]

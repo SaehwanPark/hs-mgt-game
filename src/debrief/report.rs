@@ -410,12 +410,14 @@ pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<Strin
 
   let Some(human_system) = history.genesis.human_system() else {
     lines.push("No human system found at genesis.".to_string());
+    lines.extend(competitive_distributional_summary(history));
     return lines;
   };
   let human_system_id = human_system.system_id;
 
   if history.transitions.is_empty() {
     lines.push("No transitions available.".to_string());
+    lines.extend(competitive_distributional_summary(history));
     return lines;
   }
 
