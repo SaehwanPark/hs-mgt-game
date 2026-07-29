@@ -1943,6 +1943,28 @@ consequences, and visible-input-driven planning/pressure music.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   device, and diff checks.
 
+# Request Summary — Visual/audio hidden-state boundary v0.13.50
+
+## Scope
+
+Record the current browser/DTO technical boundary against simulation-world,
+resolved-input, and effect-queue fields.
+
+## Target slice
+
+- Scan current presentation modules and read-only DTO tests for forbidden hidden
+  fields and authority paths.
+- Mark only the technical hidden-state content gate.
+- Keep human content, provenance, accessibility, educational, and public-release
+  review separate.
+
+## Non-goals and validation
+
+- Do not expose true state, resolved inputs, private rationale, or new runtime
+  fields; do not claim human content approval.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  device, and diff checks.
+
 # Request Summary — Visual/audio Phase 13.2 low-distraction mode v0.13.47
 
 ## Scope

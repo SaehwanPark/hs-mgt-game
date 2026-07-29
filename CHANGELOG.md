@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.50] - 2026-07-29
+
+- Recorded a source-checkout browser/DTO hidden-state boundary for the current
+  live presentation surfaces and marked only that technical content gate.
+- Kept human content, provenance, accessibility, educational, and public-release
+  review separate from automated no-hidden-field checks.
+
 ## [0.13.49] - 2026-07-29
 
 - Recorded the bounded current vertical-slice technical evidence for live
