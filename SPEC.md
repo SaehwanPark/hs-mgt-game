@@ -6973,6 +6973,38 @@ Deferred / Non-Goals:
 - No gameplay, simulation, scenario, replay, GUI, architecture, release
   packaging, or historical evidence changes are included.
 
+### Visual/audio Phase 13.1 AI-generation metadata boundary (v0.13.57)
+
+Status: Complete for the current repository-owned technical metadata-readiness
+and fail-closed promotion boundary only; actual preview provenance and human
+portrait/release review remain open.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-ai-generation-metadata-boundary.json` and
+  `tests/test_phase13_1_ai_generation_metadata_boundary.py` for the approved
+  model registry, generation workflow, capture/validation scripts, seven
+  preserved previews, review queue, empty manifest, and visual-registry
+  exclusion boundary.
+- Verified the current workflow and approved model revision metadata, source
+  hashes, written equivalents, and pending/unreleased preview state.
+- Added a negative promotion-shaped mutation test that requires missing model
+  and revision provenance to fail closed.
+- Bumped package metadata to `0.13.57` and synchronized roadmap, changelog,
+  lessons, presentation contract, QA, and handoff records.
+
+Not Yet Done:
+
+- Actual model identity, immutable revision, sampler, and seed capture for the
+  existing previews; per-portrait identity/resemblance/marks/artifact/
+  accessibility/small-size/grayscale review; release derivatives; registry
+  approval; and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No image generation, model download, asset promotion, GUI/runtime behavior,
+  simulation, history, replay, persistence, or authority path changes.
+
 ## Future
 
 ### Visual and audio experience upgrade

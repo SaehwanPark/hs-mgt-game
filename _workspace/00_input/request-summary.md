@@ -1,3 +1,62 @@
+# Request Summary — Visual/audio Phase 13.1 AI-generation metadata boundary v0.13.57
+
+## Authorized outcome
+
+Substantiate the open Phase 13.1 AI-generation metadata gate without
+fabricating model, revision, seed, or human-review data. Preserve the seven
+portrait previews as unreleased, unregistered, pending candidates and make the
+next approved regeneration/promotion handoff explicit.
+
+## Target slice
+
+- Add a deterministic evaluation ledger for the current approved local model
+  registry, generation workflow, capture/validation scripts, portrait previews,
+  review queue, manifest, and visual registry boundary.
+- Add a focused Python test that proves current technical metadata inputs pass,
+  missing preview model/seed provenance remains blocked, and a promotion-shaped
+  mutation fails closed.
+- Update the roadmap, specification, changelog, lessons, presentation QA,
+  handoff, and package version to v0.13.57.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 8.2 portrait and Phase
+  13.1 AI-generation metadata gates.
+- `assets/generation/approved-models.json` and
+  `assets/generation/generation-workflow.json` — approved model and required
+  metadata contracts.
+- `scripts/capture_generation_metadata.py` and
+  `scripts/validate_generation_metadata.py` — fail-closed capture and
+  validation paths.
+- `assets/generation/portrait-previews.json` and
+  `assets/generation/portrait-review-queue.json` — current pending preview and
+  human-review boundary.
+- `_workspace/136_implementation_plan_phase13-1-ai-generation-metadata-boundary-v0.13.57.md`
+  — bounded implementation plan.
+
+## Non-goals
+
+- Do not invent model identity, immutable revision, seed, sampler, or license
+  metadata for existing Codex previews.
+- Do not generate or promote portraits, add registry/release/manifest entries,
+  add browser/runtime behavior, or alter simulation, history, replay,
+  persistence, or authority.
+- Do not claim human resemblance, artifact, accessibility, legal, ownership,
+  training-data, clinical, educational, or public-release approval.
+
+## Validation target
+
+Focused AI-generation metadata boundary test and validator, release metadata,
+asset/security/credits checks, documentation-link checks, Rust formatting,
+Clippy, Rust tests, and the full Python test suite.
+
+## Evidence limits
+
+This slice proves the current technical readiness and fail-closed boundary for
+portrait metadata only. It does not close the roadmap's actual prompt/seed
+capture, per-portrait human review, release derivative, registry approval, or
+public-release gates.
+
 # Request Summary — Visual/audio Phase 11.1 live history handoff v0.12.94
 
 ## Authorized outcome

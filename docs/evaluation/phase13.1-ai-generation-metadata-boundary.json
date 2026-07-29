@@ -1,0 +1,40 @@
+{
+  "schema_version": "phase13.1-ai-generation-metadata-boundary-v1",
+  "status": "complete-current-technical-metadata-boundary-only",
+  "roadmap_item": "AI-generation metadata complete",
+  "source_contract": {
+    "approved_model_registry": "assets/generation/approved-models.json: approved-generation-models-v1",
+    "generation_workflow": "assets/generation/generation-workflow.json: generation-workflow-v1",
+    "capture_validator": "scripts/capture_generation_metadata.py: generation-record-v1",
+    "workflow_validator": "scripts/validate_generation_metadata.py: generation workflow check: passed",
+    "portrait_previews": "assets/generation/portrait-previews.json: fictional-portrait-preview-v1",
+    "portrait_review_queue": "assets/generation/portrait-review-queue.json: fictional-portrait-review-queue-v1",
+    "generation_manifest": "assets/generation/generation-manifest.json: generation-manifest-v1",
+    "visual_registry": "assets/registry/visual-assets.json: asset-registry-v1"
+  },
+  "coverage": {
+    "approved_model_contract": "The approved local model registry records an immutable model revision, license, model-card reference, generation application, access conditions, and review basis.",
+    "required_metadata_contract": "The generation workflow requires model identity/revision, prompt, negative prompt, seed, sampler/settings, source/release hashes, accessible equivalent, human review, approval, and registry linkage.",
+    "current_preview_boundary": "All seven preserved portrait previews have source hashes, prompts, written equivalents, and generic fallbacks, but their actual model identity, immutable revision, sampler, and seed are unavailable; they remain unverified and pending.",
+    "promotion_boundary": "The existing validator rejects a promotion-shaped preview when required model/seed provenance or portrait review is missing.",
+    "release_boundary": "The generation manifest and visual registry contain no portrait preview entries; release paths, release hashes, and registry IDs remain null."
+  },
+  "findings": {
+    "approved_model_registry_complete": true,
+    "required_metadata_contract_complete": true,
+    "current_preview_source_hashes_complete": true,
+    "current_preview_model_and_seed_metadata": false,
+    "current_preview_human_review": false,
+    "current_preview_release_eligible": false,
+    "promotion_validation_fail_closed": true,
+    "generation_manifest_empty": true,
+    "visual_registry_excludes_previews": true
+  },
+  "limits": [
+    "This closes only the current repository-owned technical metadata readiness and fail-closed promotion boundary.",
+    "It does not provide the actual model identity, immutable revision, sampler, or seed for any existing preview.",
+    "Per-portrait identity, resemblance, protected-mark, artifact, accessibility, small-size, grayscale, legal, ownership, training-data, release-derivative, registry, human-review, and public-release readiness gates remain open.",
+    "No portrait is approved, released, loaded by the GUI, or represented as a player-visible actor fact."
+  ],
+  "test_source": "tests/test_phase13_1_ai_generation_metadata_boundary.py"
+}

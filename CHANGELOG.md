@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.57] - 2026-07-29
+
+- Added a technical AI-generation metadata readiness ledger for the approved
+  local workflow, current portrait previews, review queue, and release boundary.
+- Added fail-closed evidence that missing model/seed provenance cannot promote
+  an existing preview; portraits remain pending, unreleased, and unregistered.
+- Kept human portrait, legal, accessibility, ownership, training-data, and
+  public-release review as separate open gates.
+
 ## [0.13.56] - 2026-07-29
 
 - Reworked the root README into a concise, player-first introduction with a

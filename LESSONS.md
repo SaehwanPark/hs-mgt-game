@@ -3127,3 +3127,14 @@ evidence before the playable overview and made the first-session path harder to
 find. Keep the README focused on orientation, first play, current limitations,
 and clear next links; preserve milestone detail in the changelog,
 specification, roadmap, and evaluation records that already own it.
+
+## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
+
+An approved local model registry and a strict generation workflow can prove
+that the project is ready to capture provenance, but they cannot supply the
+actual model identity, immutable revision, sampler, or seed for previews
+created by a tool that did not expose those fields. Keep current previews
+pending and outside the manifest/registry, and require a promotion-shaped
+negative test so guessed metadata cannot pass. Human portrait, legal,
+accessibility, ownership, training-data, and public-release review remain
+separate gates.
