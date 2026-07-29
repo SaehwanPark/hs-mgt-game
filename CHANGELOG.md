@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.61] - 2026-07-29
+
+- Added optional actor-visible decision-time observation details to
+  stabilization and regional-affiliation campaign history entries.
+- Added a native written disclosure in the campaign history while preserving
+  legacy summaries, competitive paths, host authority, and hidden-state limits.
+- Kept causal visualization, human comprehension/accessibility, educational,
+  quality, persistence, device, provenance, and public-release gates open.
+
 ## [0.13.60] - 2026-07-29
 
 - Added typed host-sourced campaign audio metadata to the existing

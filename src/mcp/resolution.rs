@@ -449,6 +449,7 @@ mod tests {
     TransitionSummary {
       turn: 1,
       command: "hold".to_string(),
+      observation: None,
       events: vec![
         "Payer decision was reported".to_string(),
         "Regulatory policy decision was reported".to_string(),

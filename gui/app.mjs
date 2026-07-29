@@ -1020,6 +1020,20 @@ function renderCampaignCoverageHistory(entries, root) {
     hash.className = "hash";
     hash.textContent = ` · state hash: ${entry.state_hash ?? "—"}`;
     item.append(turn, command, hash);
+    if (Array.isArray(entry.observation) && entry.observation.length) {
+      const details = document.createElement("details");
+      const summary = document.createElement("summary");
+      summary.textContent = "Decision-time observation";
+      const observation = document.createElement("ul");
+      observation.className = "campaign-observation-list";
+      for (const line of entry.observation) {
+        const observationLine = document.createElement("li");
+        observationLine.textContent = String(line);
+        observation.append(observationLine);
+      }
+      details.append(summary, observation);
+      item.append(details);
+    }
     list.append(item);
   }
   if (!entries?.length) emptyState(list, "No committed campaign transitions yet.");

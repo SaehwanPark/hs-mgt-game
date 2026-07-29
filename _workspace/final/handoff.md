@@ -1,3 +1,43 @@
+# Final Handoff — Campaign decision-time observation recovery v0.13.61
+
+## Status
+
+Ready for PR handoff on `feat/campaign-observation-recovery-v0.13.61`. The plan is
+`_workspace/140_implementation_plan_campaign-observation-recovery-v0.13.61.md`.
+
+## Planned result
+
+Add optional actor-visible observation lines to campaign transition summaries and
+render them as written decision-time details in the existing campaign history.
+No new route, schema version, asset, audio file, simulation rule, persistence,
+or authority path is in scope.
+
+## Verification
+
+- The host projects optional actor-visible observation lines into stabilization
+  and regional-affiliation campaign history; competitive history remains
+  unchanged.
+- The browser renders each supplied observation as a native written disclosure
+  tied to its committed history entry, with legacy summaries still valid.
+- All 344 Rust tests and all 764 Python tests passed. Formatting, Clippy with
+  warnings denied, release metadata, documentation links, asset/security/
+  generation, device-performance, offline, browser-compatibility, raster, and
+  visual/audio contract checks passed.
+
+## Review
+
+- The sole medium-effort code review found no Critical, High, or Medium
+  findings. Two Low findings were fixed: nested observation CSS card styling
+  and missing legacy/competitive serialization assertions.
+- Focused and full checks were rerun after those fixes; no actionable findings
+  remain.
+
+## Review boundary
+
+Exactly one medium-effort code review was used for this cycle. Human
+comprehension, accessibility, educational, causal, visual-quality, legal,
+provenance, persistence, device, and public-release gates remain open.
+
 # Final Handoff — Direct campaign audio projection v0.13.60
 
 ## Status

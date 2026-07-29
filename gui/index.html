@@ -330,7 +330,10 @@
       .campaign-decision-form label { display: grid; gap: .18rem; color: var(--muted); font-size: .78rem; }
       .campaign-decision-form input, .campaign-decision-form select { background: var(--panel); border: 1px solid var(--line); border-radius: .35rem; color: var(--ink); padding: .4rem; }
       .campaign-history-list, .campaign-debrief-list { display: grid; gap: .35rem; list-style: none; margin: 0; padding: 0; }
-      .campaign-history-list li, .campaign-debrief-list li { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; padding: .45rem .55rem; }
+      .campaign-history-list > li, .campaign-debrief-list > li { background: var(--panel); border: 1px solid var(--line); border-radius: .45rem; padding: .45rem .55rem; }
+      .campaign-history-list details { margin-top: .4rem; }
+      .campaign-history-list summary { cursor: pointer; font-weight: 700; }
+      .campaign-observation-list { color: var(--muted); display: grid; gap: .2rem; margin: .35rem 0 0 1rem; padding: 0; }
       .readiness-panel { grid-column: 1 / -1; }
       .readiness-controls { align-items: center; display: flex; flex-wrap: wrap; gap: .55rem 1rem; }
       .readiness-controls label { align-items: center; color: var(--muted); display: flex; gap: .35rem; font-size: .8rem; }

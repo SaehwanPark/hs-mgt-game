@@ -15,7 +15,7 @@ class Phase12DecisionTimeRecoveryBoundaryTests(unittest.TestCase):
   def test_recovery_sources_and_contract_match(self):
     ledger = self.ledger
     self.assertEqual(ledger["schema_version"], "phase12-decision-time-recovery-boundary-v1")
-    self.assertEqual(ledger["status"], "complete-current-recovery-boundary-only")
+    self.assertEqual(ledger["status"], "complete-current-campaign-observation-recovery-boundary")
     for source_ref in ledger["source_contract"].values():
       source_path, marker = source_ref.split(": ", 1)
       path = ROOT / source_path
@@ -25,7 +25,7 @@ class Phase12DecisionTimeRecoveryBoundaryTests(unittest.TestCase):
     self.assertIn("observation paired with its command", recovery["core_history"])
     self.assertIn("before each command", recovery["debrief"])
     self.assertIn("hash continuity", recovery["host_history_replay"])
-    self.assertIn("does not replay full historical observations", recovery["browser_current"])
+    self.assertIn("optional decision-time observation lines", recovery["browser_current"])
     self.assertIn("written text", recovery["written_fallback"])
 
   def test_surface_and_no_expansion_boundaries_remain_bounded(self):
@@ -33,13 +33,13 @@ class Phase12DecisionTimeRecoveryBoundaryTests(unittest.TestCase):
     self.assertIn("read-only", surface["core_authority"])
     self.assertIn("narrower than the core", surface["host_summary_boundary"])
     self.assertIn("shared campaign-coverage", surface["browser_boundary"])
-    self.assertIn("none-required", surface["new_surface_need"])
+    self.assertIn("optional-campaign-history", surface["new_surface_need"])
     self.assertTrue(self.ledger["open_work"])
     limits = " ".join(self.ledger["limits"])
     for marker in (
-      "technical recovery boundaries only",
+      "technical campaign observation recovery only",
       "not expose resolved inputs",
-      "No observation field",
+      "No new browser route",
       "causal graph",
       "counterfactual",
       "distributional view",

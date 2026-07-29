@@ -1,3 +1,53 @@
+# Presentation QA — Campaign decision-time observation recovery v0.13.61
+
+## Status
+
+`pass` for the bounded technical host-to-browser observation-recovery
+contract. This is not human comprehension, accessibility, educational,
+visual-quality, causal, or public-release approval.
+
+## Planned review focus
+
+- Observation lines come from existing actor-visible host formatters and
+  precede the paired command.
+- Stabilization and affiliation summaries expose the optional field; older and
+  competitive summaries remain valid without it.
+- Browser disclosure is written, accessible, immutable, and absent when the
+  host supplies no observation.
+- No resolved inputs, private rationale, true state, local authority,
+  persistence, or competitive behavior changes.
+
+## Planned evidence
+
+Focused Rust/Node/Python tests, full Rust/Python suites, release metadata,
+documentation links, asset/security/generation, device-performance, offline,
+browser-compatibility, and visual/audio contract checks. Human educational
+and accessibility gates remain open.
+
+## Verification evidence
+
+- Stabilization and affiliation summaries expose the existing actor-visible
+  observation lines; competitive summaries omit the optional field.
+- The browser renders a native written **Decision-time observation** disclosure
+  only when observation lines are supplied; legacy history fixtures remain
+  valid and hidden-state markers are not introduced.
+- All 344 Rust tests and all 764 Python tests passed. Formatting, Clippy with
+  warnings denied, release metadata, documentation links, asset/security/
+  generation, device-performance, offline, browser-compatibility, raster, and
+  visual/audio contract checks passed.
+- Human comprehension, accessibility, educational, and causal-quality gates
+  remain open.
+
+## Review findings
+
+- The sole medium-effort reviewer found no Critical, High, or Medium findings.
+- Low: nested observation lines could inherit the history-card style. Fixed by
+  scoping the card selector to direct history/debrief children.
+- Low: compatibility claims lacked direct assertions. Fixed with legacy
+  `TransitionSummary` deserialization and competitive JSON-omission tests.
+- No other actionable findings remained; the affected focused and full checks
+  were rerun successfully.
+
 # Presentation QA — Direct campaign audio projection v0.13.60
 
 ## Status
