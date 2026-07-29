@@ -3098,3 +3098,15 @@ validation/submission errors, and clear guide text can establish a technical
 first-session path. They cannot establish that a new player understands it,
 can complete it without assistance, or finds it accessible and educationally
 useful. Keep structured human evaluation separate from technical path closure.
+
+## Phase 59: Separate campaign duration from campaign presentation coverage (2026-07-29)
+
+A deterministic host test can establish that `competitive-regional-v1` reaches
+its 24-month terminal state, and existing actor-visible board, facility,
+overlay, event, music, history, replay, checkpoint, and debrief contracts can
+establish current presentation coverage. That does not establish full-campaign
+facility placement/use coverage, campaign-specific visual/audio quality,
+first-time comprehension, or educational value. Record the technical campaign
+boundary separately and keep product/content and human expansion gates open;
+also state explicitly when a shared campaign envelope does not support the
+campaign being assessed.

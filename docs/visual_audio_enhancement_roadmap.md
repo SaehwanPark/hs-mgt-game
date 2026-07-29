@@ -3586,6 +3586,15 @@ educational/accessibility gates remain open.
   covers the current repository-owned technical path only and does not close
   human comprehension, accessibility, educational, or classroom review.
 - [ ] Competitive campaign coverage complete.
+- [x] Current technical competitive campaign boundary documented. Evidence:
+  `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
+  `tests/test_phase13_1_competitive_campaign_boundary.py`; the current
+  host-owned 24-month `competitive-regional-v1` run, current actor-visible
+  board/facility/overlay/event/music surfaces, history/replay/checkpoint/debrief
+  continuity, and written fallbacks are source-bound; the shared
+  `campaign-coverage-v1` envelope remains explicitly limited to stabilization
+  and regional-affiliation. Full-campaign visual/content and human campaign
+  review remain open.
 - [x] Settings documented. Evidence: `docs/guides/gui-how-to-play.md` and
   `docs/evaluation/phase13.1-player-help-boundary.json`; the existing settings
   panel, browser-local/session-local behavior, and presentation-only boundary
@@ -3751,6 +3760,21 @@ educational/accessibility gates remain open.
   browser authority.
 - Human first-time-user comprehension, accessibility, educational usability,
   classroom readiness, and broader competitive-campaign coverage remain open.
+
+### v0.13.54 current technical competitive campaign boundary
+
+- `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
+  `tests/test_phase13_1_competitive_campaign_boundary.py` bind the current
+  `competitive-regional-v1` host completion limit, current actor-visible
+  board/facility/overlay/event/music surfaces, host-owned
+  history/replay/checkpoint/resolution/debrief continuity, and written fallback
+  behavior. The shared campaign-coverage envelope remains limited to
+  stabilization and regional-affiliation.
+- This records the current 24-month technical campaign path without claiming
+  full-campaign facility placement/use coverage, campaign-specific visual or
+  audio quality, screenshot completeness, or browser authority.
+- Full-campaign product/content review, human comprehension, educational
+  evaluation, and expansion approval remain open.
 
 ### Exit criteria
 

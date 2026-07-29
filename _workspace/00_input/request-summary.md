@@ -2621,3 +2621,37 @@ validation, committed resolution review, continuation, and written recovery.
   assets, audio, replay authority, or human evaluation results.
 - Run the focused first-session test plus full Python/Rust, GUI, release,
   documentation, asset, browser/device-policy, and visual/audio checks.
+
+# Request Summary — Visual/audio technical competitive campaign boundary v0.13.54
+
+## Scope
+
+Record the current repository-owned `competitive-regional-v1` campaign
+boundary without treating host duration or shared presentation contracts as
+full-campaign product/content approval.
+
+## Target slice
+
+- Bind the host-owned 24-month completion path to existing Rust tests.
+- Bind typed campaign-coverage briefing, metrics, actors, processes, decisions,
+  history, replay, checkpoint, resolution, debrief, and written fallback
+  surfaces to existing sources/tests.
+- Preserve the host/core authority boundary and keep full-campaign visual,
+  audio, screenshot, human, and expansion gates open.
+
+## Sources and expected files
+
+- Existing `src/mcp/session.rs`, `src/cli/campaign.rs`, GUI campaign-coverage,
+  history, replay, checkpoint, and debrief sources/tests.
+- New `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
+  `tests/test_phase13_1_competitive_campaign_boundary.py`.
+- Additive roadmap, SDD, architecture, changelog, lessons, QA, contract,
+  handoff, generated credits, and release-metadata updates.
+
+## Non-goals and validation
+
+- Do not add runtime behavior, routes, simulation rules, assets, audio files,
+  persistence, replay authority, or human evaluation results.
+- Run the focused campaign-boundary test plus full Python/Rust, asset,
+  generation, security, release, documentation, offline, browser/device,
+  and visual/audio contract checks.

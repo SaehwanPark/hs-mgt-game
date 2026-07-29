@@ -6891,6 +6891,35 @@ Deferred / Non-Goals:
 - No browser-owned session, transition, simulation state, new route, persistence,
   asset, audio, or human evaluation result is added.
 
+### Visual/audio Phase 13.1 current technical competitive campaign boundary (v0.13.54)
+
+Status: Complete for the current repository-owned `competitive-regional-v1`
+technical campaign boundary only; full-campaign visual/content review, human
+comprehension, educational evaluation, and expansion approval remain open.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
+  `tests/test_phase13_1_competitive_campaign_boundary.py` for the host-owned
+  24-month completion path and current competitive actor-visible presentation
+  surfaces; the shared campaign-coverage envelope remains limited to
+  stabilization and regional-affiliation.
+- Bound history, replay, checkpoint, resolution, terminal debrief, written
+  fallbacks, and browser-authority restrictions to existing sources/tests.
+- Synchronized roadmap, README, architecture, changelog, lessons, QA,
+  contract, handoff, and release metadata; no runtime behavior changed.
+
+Not Yet Done:
+
+- Full-campaign facility placement/use, visual/audio quality, screenshot and
+  browser/device coverage, human comprehension, educational review, and
+  approval to expand campaign coverage remain open.
+
+Deferred / Non-Goals:
+
+- No new campaign route, simulation rule, asset, audio file, persistence,
+  replay authority, or human evaluation result is added.
+
 ## Future
 
 ### Visual and audio experience upgrade

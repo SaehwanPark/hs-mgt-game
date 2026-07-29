@@ -975,6 +975,14 @@ written recovery contracts. It adds no browser-owned session or simulation
 state and does not establish first-time-user, accessibility, educational, or
 classroom readiness.
 
+The v0.13.54 technical competitive campaign boundary records the existing
+host-owned 24-month `competitive-regional-v1` completion path, current
+actor-visible board/facility/overlay/event/music surfaces,
+history/replay/checkpoint/resolution/debrief continuity, and written fallbacks.
+The shared campaign-coverage envelope remains limited to stabilization and
+regional-affiliation; this does not claim full-campaign visual/content coverage,
+human comprehension, educational effectiveness, or browser authority.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

@@ -804,6 +804,35 @@ behavior changed.
 - Focused/full verification, one medium-reasoning code review, PR, merge, and
   temporary-branch cleanup remain pending.
 
+---
+# Final Handoff — Phase 13.1 technical competitive campaign boundary v0.13.54
+
+## Result
+
+Recorded the current technical `competitive-regional-v1` campaign boundary:
+host-owned 24-month completion, current actor-visible board/facility/overlay/
+event/music surfaces, host-owned history/replay/checkpoint/resolution/debrief
+continuity, and written fallbacks. The shared campaign-coverage envelope remains
+limited to stabilization and regional-affiliation.
+
+## Evidence boundary
+
+The ledger and focused test bind existing host duration, campaign-coverage,
+history, replay, checkpoint, debrief, and browser-authority contracts. Full-
+campaign facility placement/use, campaign-specific visual/audio quality,
+screenshot completeness, human comprehension, educational evaluation, and
+expansion approval remain open.
+
+No runtime behavior, route, asset, audio, persistence, replay authority, or
+human evaluation result changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.53.
+- Working branch: `codex/phase13-1-competitive-campaign-boundary-v0-13-54`.
+- Focused/full verification, one medium-reasoning code review, PR, merge, and
+  temporary-branch cleanup remain pending.
+
 ## Handoff and merge gate
 
 - Base: `main` at v0.13.50.
