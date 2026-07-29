@@ -6,16 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "docs" / "evaluation" / "phase13.1-hidden-state-boundary.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
-BROWSER_MODULES = (
-  ROOT / "gui" / "app.mjs",
-  ROOT / "gui" / "regional-board.mjs",
-  ROOT / "gui" / "consequence-links.mjs",
-  ROOT / "gui" / "facility-components.mjs",
-  ROOT / "gui" / "operational-overlays.mjs",
-  ROOT / "gui" / "resolution-sequence.mjs",
-  ROOT / "gui" / "audio.mjs",
-  ROOT / "gui" / "music-stem-contract.mjs",
-)
+BROWSER_MODULES = tuple(sorted((ROOT / "gui").glob("*.mjs")))
 
 
 class Phase131HiddenStateBoundaryTests(unittest.TestCase):

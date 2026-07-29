@@ -8,6 +8,7 @@
     "live_history_test": "tests/test_phase11_live_history.py: test_live_history_read_does_not_expose_simulation_authority",
     "live_replay_test": "tests/test_phase11_live_replay.py: test_live_replay_read_does_not_expose_simulation_authority",
     "live_checkpoint_test": "tests/test_phase11_live_checkpoint.py: test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
+    "browser_module_set": "tests/test_phase13_1_hidden_state_boundary.py: BROWSER_MODULES = tuple(sorted((ROOT / \"gui\").glob(\"*.mjs\")))",
     "dto_source": "src/mcp/presentation.rs: ReadOnlyPresentationEnvelope"
   },
   "forbidden_browser_fields": [
