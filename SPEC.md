@@ -6864,6 +6864,33 @@ Deferred / Non-Goals:
 - No portrait is promoted, no registry or release asset is added, and no
   AI-generation metadata is fabricated for the built-in preview outputs.
 
+### Visual/audio Phase 13.1 current technical first-session boundary (v0.13.53)
+
+Status: Complete for the current repository-owned technical path only;
+structured first-time-user, accessibility, educational, classroom, and
+broader campaign coverage review remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-first-session-boundary.json` and
+  `tests/test_phase13_1_first_session_boundary.py` for host-bound launch/load,
+  actor-visible inspection, contextual drafting/validation, committed
+  resolution review, continuation, and written recovery guidance.
+- Bound the seven-stage first-month path to existing GUI sources and tests while
+  preserving the host-authoritative, read-only presentation boundary.
+- Synchronized roadmap, README, architecture, changelog, lessons, QA,
+  contract, handoff, and release metadata; no runtime behavior changed.
+
+Not Yet Done:
+
+- First-time-user comprehension, human accessibility, educational usability,
+  classroom readiness, and broader competitive-campaign coverage remain open.
+
+Deferred / Non-Goals:
+
+- No browser-owned session, transition, simulation state, new route, persistence,
+  asset, audio, or human evaluation result is added.
+
 ## Future
 
 ### Visual and audio experience upgrade

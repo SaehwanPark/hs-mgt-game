@@ -3177,3 +3177,16 @@ check. It does not authorize new assets, audio, browser routes, host fields,
 simulation changes, or clinical/policy claims. Human domain, accessibility,
 educational, provenance, resemblance, legal, and public-release review remain
 open.
+
+## Technical First-Session Boundary Addendum — v0.13.53
+
+The current presentation contract now records the technical path from
+host-bound launch/load through actor-visible inspection, contextual drafting and
+validation, committed resolution review, continuation, and written recovery.
+The seven-stage first-month rail remains source-bound and presentation-only;
+browser-local draft/preferences state does not become session or simulation
+authority.
+
+This addendum does not establish first-time-user comprehension, human
+accessibility, educational usability, classroom readiness, or broader campaign
+coverage. No new route, asset, audio, persistence, or replay behavior is added.

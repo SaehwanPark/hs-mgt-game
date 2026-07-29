@@ -3577,7 +3577,14 @@ educational/accessibility gates remain open.
 
 ### Product checklist
 
-- [ ] First-session workflow complete.
+- [ ] First-session workflow complete. Structured first-time-user evaluation
+  remains open.
+- [x] Current technical first-session path documented and recoverable. Evidence:
+  `docs/evaluation/phase13.1-first-session-boundary.json`,
+  `tests/test_phase13_1_first_session_boundary.py`, the host-bound launch/load
+  tests, the seven-stage first-month flow tests, and the player guide; this
+  covers the current repository-owned technical path only and does not close
+  human comprehension, accessibility, educational, or classroom review.
 - [ ] Competitive campaign coverage complete.
 - [x] Settings documented. Evidence: `docs/guides/gui-how-to-play.md` and
   `docs/evaluation/phase13.1-player-help-boundary.json`; the existing settings
@@ -3732,6 +3739,18 @@ educational/accessibility gates remain open.
   absent from runtime credits. This closes only current technical attribution;
   human legal/ownership/training-data, resemblance, and public-release review
   plus portrait AI-generation metadata remain open.
+
+### v0.13.53 current technical first-session boundary
+
+- `docs/evaluation/phase13.1-first-session-boundary.json` and
+  `tests/test_phase13_1_first_session_boundary.py` join the current GUI
+  launch/load controls, host-bound adapter calls, seven-stage first-month flow,
+  written recovery guidance, and visible limitations boundary.
+- This records the current technical path from session start through refreshed
+  observation and recoverable errors without adding local simulation state or
+  browser authority.
+- Human first-time-user comprehension, accessibility, educational usability,
+  classroom readiness, and broader competitive-campaign coverage remain open.
 
 ### Exit criteria
 

@@ -3090,3 +3090,11 @@ unverified portrait preview must remain outside those release surfaces when
 model/seed metadata and human review are missing. Do not convert machine
 attribution into legal, ownership, training-data, resemblance, or release
 approval.
+
+## Phase 58: Separate first-session mechanics from first-time-user evidence (2026-07-29)
+
+Host-bound launch/load, a complete seven-stage first-month rail, recoverable
+validation/submission errors, and clear guide text can establish a technical
+first-session path. They cannot establish that a new player understands it,
+can complete it without assistance, or finds it accessible and educationally
+useful. Keep structured human evaluation separate from technical path closure.
