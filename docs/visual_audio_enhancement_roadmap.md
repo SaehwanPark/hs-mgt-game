@@ -3675,7 +3675,13 @@ educational/accessibility gates remain open.
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; audio-off,
   cues-only, mute, reduced-notifications, channel, speaker/headphone, and
   written-equivalent guidance is recorded.
-- [ ] Low-distraction mode available.
+- [x] Low-distraction mode available. Evidence:
+  `docs/evaluation/phase13.2-low-distraction-mode.json`,
+  `gui/index.html`, `gui/app.mjs`, and
+  `tests/test_phase13_2_low_distraction_mode.py`; the local mode forces the
+  existing motion/text/audio-safe recipe, restores prior local preferences,
+  and leaves host/simulation authority unchanged. Human accessibility review
+  remains open.
 - [x] Screenshot and recording permissions clarified. Evidence:
   `docs/guides/phase10.2-structured-evaluation.md` and
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; explicit consent,

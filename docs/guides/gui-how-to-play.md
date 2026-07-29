@@ -82,6 +82,10 @@ Rival private state and unresolved stochastic inputs are deliberately not shown.
 The **Accessibility and settings** panel is available before or during a live
 session:
 
+- **Low-distraction mode** combines Reduced motion, Large text, visible cue
+  explanations, muted audio, and reduced notifications. While active, the
+  individual presentation and audio controls are locked to that safe recipe;
+  turning it off restores the prior local presentation/audio preferences.
 - **Reduced motion** removes non-essential pacing and uses immediate written
   updates. It does not remove a result or a control.
 - **Show optional cue explanations** keeps written explanations for audio/event
@@ -94,7 +98,8 @@ session:
 The initial reduced-motion value follows the browser's `prefers-reduced-motion`
 preference when available. Settings are stored in the browser when storage is
 available and otherwise remain session-local; a storage failure does not block
-play.
+play. Low-distraction mode is a local presentation preference, not a host game
+mode.
 
 ## Optional audio
 

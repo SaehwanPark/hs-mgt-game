@@ -35,7 +35,7 @@ class Phase132PilotPreparationTests(unittest.TestCase):
       "### Audio and accessibility guidance",
       "### Screenshot, recording, and feedback handling",
       "explicit consent",
-      "low-distraction recipe",
+      "dedicated **Low-distraction mode**",
       "Reduced motion",
       "Large",
       "cues-only",

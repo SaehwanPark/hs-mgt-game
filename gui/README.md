@@ -535,6 +535,11 @@ stages, and exposes native advance, skip, pause, and review controls. Skip and
 reduced motion alter only local emphasis; they retain all written reports and
 effects. The sequence planner has no transition, randomness, network, history,
 hash, or hidden-state authority.
+The settings panel's Low-distraction mode is also local presentation state: it
+temporarily enforces reduced motion, Large text, written cue explanations,
+muted audio, and reduced notifications, then restores the prior local
+preferences when disabled. It does not change host commands, validation,
+transitions, replay, or simulation state.
 Richer causal
 overlays, recorded assets, true geography, and broader campaign expansion
 require a new bounded proposal.

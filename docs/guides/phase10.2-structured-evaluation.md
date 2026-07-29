@@ -147,10 +147,11 @@ result, recording, or go/no-go decision is included here.
   explanation settings before the first task. Keep written results visible and
   allow keyboard navigation, skip, review, extra time, or a task retry as
   accommodations.
-- A bounded low-distraction recipe is available through the existing controls:
-  Reduced motion on, Large text when useful, cue explanations on, and audio
-  muted or reduced-notifications enabled. This is a facilitator recipe, not a
-  new runtime mode or a claim of universal accessibility.
+- A dedicated **Low-distraction mode** is available in the settings panel. It
+  applies the existing recipe: Reduced motion on, Large text, cue explanations
+  on, audio muted, and reduced notifications enabled. Turning it off restores
+  prior local presentation/audio preferences. This is still not a claim of
+  universal accessibility.
 - Record only the accommodation offered or the observed barrier category; do
   not record a diagnosis, health information, or identifying detail.
 

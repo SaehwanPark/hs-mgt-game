@@ -1900,6 +1900,29 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 13.2 low-distraction mode v0.13.47
+
+## Scope
+
+Add the dedicated local GUI low-distraction presentation mode already prepared
+by the pilot recipe.
+
+## Target slice
+
+- Add a settings toggle that forces reduced motion, Large text, written cue
+  explanations, muted audio, and reduced notifications.
+- Lock conflicting presentation/audio controls while active and restore the
+  prior local preferences when disabled.
+- Keep the mode outside host commands, validation, transitions, history, replay,
+  persistence, and simulation authority; add source-linked behavior evidence.
+
+## Non-goals and validation
+
+- No new host game mode, observation/debrief route, asset, network path,
+  classroom multiplayer, or human accessibility/educational claim.
+- Run focused browser-module behavior tests plus the standard Rust, Python,
+  metadata, documentation, formatting, clippy, and generated-credit checks.
+
 # Request Summary — Visual/audio Phase 13.2 pilot-preparation boundary v0.13.46
 
 ## Scope

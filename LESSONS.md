@@ -3039,3 +3039,12 @@ committed consequence inspectable, and source-linked consequence items can make
 that evidence readable. They do not justify an inferred causal graph, causal
 certainty, calibrated forecast, or policy-validity claim. Keep direct effect
 attribution, causal inference, and human review as separate gates.
+
+## Phase 52: Composite accessibility modes must restore local preferences (2026-07-29)
+
+A low-distraction setting can safely compose existing reduced-motion, text,
+written-equivalent, mute, and notification controls only if it captures the
+prior local presentation/audio state and restores it on exit. Keep the mode in
+the browser boundary, lock conflicting controls while active, and test both
+enable and restore paths so a convenience setting does not silently overwrite a
+player's preferences or enter simulation authority.

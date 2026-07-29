@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.47] - 2026-07-29
+
+- Added a local GUI Low-distraction mode that combines reduced motion, Large
+  text, written cue explanations, muted audio, and reduced notifications while
+  restoring prior local preferences when disabled.
+- Added focused behavior evidence; no host game mode, simulation, replay,
+  persistence, asset, or authority path changed, and human accessibility/
+  educational review remains open.
+
 ## [0.13.46] - 2026-07-29
 
 - Updated the existing structured-evaluation guide with facilitator preflight,
