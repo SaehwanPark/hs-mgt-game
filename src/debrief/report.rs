@@ -410,12 +410,14 @@ pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<Strin
 
   let Some(human_system) = history.genesis.human_system() else {
     lines.push("No human system found at genesis.".to_string());
+    lines.extend(competitive_distributional_summary(history));
     return lines;
   };
   let human_system_id = human_system.system_id;
 
   if history.transitions.is_empty() {
     lines.push("No transitions available.".to_string());
+    lines.extend(competitive_distributional_summary(history));
     return lines;
   }
 
@@ -509,6 +511,51 @@ pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<Strin
 
   // Append decision-quality evaluation
   lines.extend(analyze_decision_quality(history));
+  lines.extend(competitive_distributional_summary(history));
+
+  lines
+}
+
+pub fn competitive_distributional_summary(history: &CompetitiveHistory) -> Vec<String> {
+  let mut lines = vec![
+    "".to_string(),
+    "=== DISTRIBUTIONAL OUTCOME SUMMARY (INSTRUCTOR REVIEW) ===".to_string(),
+    "Descriptive committed changes by system; metrics are separate, no system is ranked, and no overall welfare score is assigned.".to_string(),
+    "Rival values may have been unobserved during play; this post-run summary does not describe live player knowledge or causal responsibility.".to_string(),
+  ];
+
+  if history.transitions.is_empty() {
+    lines.push("No committed transitions are available for distributional comparison.".to_string());
+    return lines;
+  }
+
+  let mut final_systems = history.final_state().systems.iter().collect::<Vec<_>>();
+  final_systems.sort_by_key(|system| system.system_id);
+  for system in final_systems {
+    let Some(genesis) = history
+      .genesis
+      .systems
+      .iter()
+      .find(|candidate| candidate.system_id == system.system_id)
+    else {
+      lines.push(format!(
+        "{} (system {}): no comparable genesis record; omitted from deltas.",
+        system.name, system.system_id
+      ));
+      continue;
+    };
+
+    lines.push(format!(
+      "{} (system {}): access {:+}, quality {:+}, workforce trust {:+}, community trust {:+}, market share {:+}.",
+      system.name,
+      system.system_id,
+      system.access_index - genesis.access_index,
+      system.quality_index - genesis.quality_index,
+      system.workforce_trust - genesis.workforce_trust,
+      system.community_trust - genesis.community_trust,
+      system.market_share_index - genesis.market_share_index,
+    ));
+  }
 
   lines
 }

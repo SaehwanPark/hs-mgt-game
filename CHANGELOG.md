@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.43] - 2026-07-29
+
+- Added a deterministic post-run competitive instructor-summary table for
+  separate per-system access, quality, workforce-trust, community-trust, and
+  market-share deltas with stable ordering and explicit no-ranking language.
+- Closed only the current responsible distributional-outcome representation;
+  no aggregate welfare score, causal claim, browser route, export format, or
+  human educational claim is introduced.
+
 ## [0.13.42] - 2026-07-29
 
 - Added a deterministic, text-first counterfactual difference renderer for

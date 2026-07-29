@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase12-distributional-outcome-summary-v1",
+  "status": "complete-current-descriptive-instructor-summary-only",
+  "roadmap_item": "Distributional outcomes represented responsibly",
+  "source_contract": {
+    "renderer": "src/debrief/report.rs: pub fn competitive_distributional_summary",
+    "call_site": "src/debrief/report.rs: lines.extend(competitive_distributional_summary(history));",
+    "focused_tests": "src/debrief/report_tests.rs: competitive_distributional_summary_keeps_metrics_separate_and_unranked"
+  },
+  "summary_contract": {
+    "inputs": "committed competitive genesis and final system states",
+    "metrics": "access, quality, workforce trust, community trust, and market share deltas shown separately",
+    "ordering": "stable system_id order without ranking",
+    "visibility": "existing post-run instructor-summary boundary; rival values may have been unobserved during play",
+    "fallback": "no committed transitions receive an explicit written fallback",
+    "interpretation": "descriptive only; no aggregate welfare score; no causal claim; no calibration or strategy value"
+  },
+  "presentation_surface": {
+    "format": "deterministic text-first CLI/debrief output",
+    "host_authority": "read-only committed history",
+    "player_observation": "unchanged",
+    "browser_boundary": "no new browser route or live rival signal",
+    "audio_visual_assets": "none required"
+  },
+  "limits": [
+    "This closes only the current descriptive instructor-summary representation.",
+    "It does not establish distributional fairness, social welfare, calibration, learning, or human accessibility quality.",
+    "Export behavior, browser-native instructor visualization, and human educational review remain separate gates."
+  ],
+  "test_source": "tests/test_phase12_distributional_outcome_summary.py"
+}

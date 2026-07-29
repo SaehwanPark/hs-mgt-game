@@ -1900,6 +1900,29 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12.3 distributional outcome summary v0.13.43
+
+## Scope
+
+Implement the next Phase 12.3 item: represent committed competitive outcomes
+by health system in the existing post-run instructor summary.
+
+## Target behavior
+
+Render a stable, text-first table of each system's committed change in access,
+quality, workforce trust, community trust, and market share. Label the view
+instructor-only/descriptive, keep metrics separate, and never rank systems or
+collapse them into a welfare score.
+
+## Non-goals and validation
+
+- No new player-observation field, browser route, asset, audio, export format,
+  persistence, or simulation transition.
+- No aggregate welfare score, strategy ranking, causal claim, or calibration.
+- Do not expose data outside the existing post-run instructor-summary boundary.
+- Run focused/full Rust and Python checks plus release metadata, documentation,
+  formatting, clippy, and generated-credits checks.
+
 # Request Summary — Visual/audio Phase 12.3 counterfactual difference view v0.13.42
 
 ## Scope
