@@ -1900,6 +1900,33 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 12.3 counterfactual difference view v0.13.42
+
+## Scope
+
+Implement the smallest next Phase 12.3 slice: a deterministic, text-first
+post-run comparison over existing stabilization `History` values.
+
+## Target behavior
+
+Compare two committed histories from the same genesis, show aligned commands,
+committed next-state metric differences, attributed-effect differences, and
+resolved-input parity, with written fallbacks for incompatible histories.
+
+## Non-goals
+
+- No browser route, instructor authorization route, or new host authority.
+- No true-state, resolved-input, or private actor disclosure to the player.
+- No causal inference, probability, calibration, strategy ranking,
+  distributional claim, asset, audio, dependency, persistence, or export format.
+
+## Sources and validation
+
+- `docs/visual_audio_enhancement_roadmap.md`, Phase 12.3.
+- `docs/design_principles.md`, `ARCHITECTURE.md`, and the harness team spec.
+- Run focused/full Rust and Python checks plus release metadata, documentation,
+  formatting, clippy, and generated-credits checks.
+
 # Request Summary — Visual/audio Phase 12.3 instructor-only authority boundaries v0.13.38
 
 ## Scope

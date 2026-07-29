@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.13.41.
+The current public milestone is a playable Rust prototype at v0.13.42.
 
 The current visual/audio evidence also records the supported actor-visible GUI
 screenshot surface and its deterministic SVG/structural regression boundary;
@@ -121,6 +121,10 @@ The v0.13.41 evidence records current host-sourced direct-effect attribution,
 before/after resolution context, source-linked consequence rendering, and the
 boundary against inferred causal graphs. Causal inference and human review
 remain open; no runtime presentation surface changes.
+The v0.13.42 evidence adds a deterministic text-first comparison of same-genesis
+committed stabilization histories with explicit resolved-input parity and
+descriptive state/effect differences. Causal certainty, browser instructor
+views, distributional summaries, export behavior, and human review remain open.
 
 Key capabilities include:
 - **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.

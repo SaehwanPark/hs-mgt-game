@@ -3443,7 +3443,12 @@ Deferred / Non-Goals:
   `tests/test_phase12_causal_attribution_boundary.py`; host-sourced direct
   effects, before/after resolution context, and source-linked consequence
   rendering remain descriptive while inferred causal graphs remain open.
-- [ ] Counterfactual differences visualized.
+- [x] Counterfactual differences visualized. Evidence:
+  `docs/evaluation/phase12-counterfactual-difference-view.json`,
+  `src/debrief/counterfactual.rs`, and
+  `tests/test_phase12_counterfactual_difference_view.py`; this is a
+  deterministic, text-first descriptive comparison of same-genesis committed
+  stabilization histories, not causal inference or a browser instructor view.
 - [ ] Distributional outcomes represented responsibly.
 - [ ] Export behavior documented.
 - [ ] Educational usability reviewed.
