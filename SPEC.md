@@ -6802,6 +6802,38 @@ Deferred / Non-Goals:
 - Before/after comparisons and source labels do not claim causal certainty,
   future outcomes, legal validity, or educational effectiveness.
 
+### Visual/audio Phase 13.1 bounded content boundary QA (v0.13.51)
+
+Status: Complete for the current repository-owned source/content check only;
+clinical/policy expert review, human comprehension, accessibility, educational,
+provenance, resemblance, legal, and public-release review remain separately
+gated.
+
+Done:
+
+- Added `docs/evaluation/phase13.1-content-boundary-qa.json` and
+  `tests/test_phase13_1_content_boundary_qa.py` for the current player guide,
+  README, GUI modules, metric proof, semantic source/status catalog, and
+  hidden-state/precision boundaries.
+- Recorded that the reviewed surfaces preserve the fictional/non-forecast and
+  operational, clinical, financial, regulatory, and legal limits and make no
+  unsupported diagnosis, prescribing, treatment-plan, patient-specific,
+  clinical-recommendation, or clinical-decision claim.
+- Synchronized the roadmap, presentation contract, domain/presentation QA,
+  release metadata, changelog, lessons, and handoff records; no runtime,
+  simulation, asset, audio, replay, or authority behavior changed.
+
+Not Yet Done:
+
+- Human clinical/policy, visual/audio, accessibility, educational, provenance,
+  resemblance, legal, first-time-user, and public-release review remain open.
+
+Deferred / Non-Goals:
+
+- No asset, audio file, portrait promotion, browser route, host field,
+  simulation rule, stochastic input, persistence, replay change, forecast,
+  clinical recommendation, or human approval claim is added.
+
 ## Future
 
 ### Visual and audio experience upgrade

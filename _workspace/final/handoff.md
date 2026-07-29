@@ -729,6 +729,34 @@ optional storage, and loopback-only access. No runtime behavior changed.
 - One code reviewer will perform the required independent review passes.
 
 ---
+# Final Handoff — Phase 13.1 bounded content boundary QA v0.13.51
+
+## Result
+
+Recorded a bounded repository-owned source/content QA pass over the current
+player guide, README, GUI modules, metric visualization proof, semantic
+source/status catalog, and existing hidden-state boundary.
+
+## Evidence boundary
+
+The ledger and focused test pass for the current fictional/non-forecast,
+precision, source/status, and direct unsupported-clinical-advice wording
+boundaries. The bounded wording item is recorded; the broader roadmap
+clinical-implication item remains open for human review.
+Human clinical/policy, visual/audio, accessibility, educational, provenance,
+resemblance, legal, first-time-user, and public-release review remain open.
+
+No runtime, simulation, asset, audio, host authority, persistence, replay, or
+debrief behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.50.
+- Working branch: `codex/phase13-1-domain-presentation-qa-v0-13-51`.
+- Focused QA passed; full verification, one medium-reasoning code review, PR,
+  merge, and temporary-branch cleanup remain pending.
+
+---
 # Final Handoff — Phase 12.3 instructor-only authority boundaries v0.13.38
 
 ## Result

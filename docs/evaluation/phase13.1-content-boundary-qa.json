@@ -1,0 +1,43 @@
+{
+  "schema_version": "phase13.1-content-boundary-qa-v1",
+  "status": "pass-bounded-technical-content-qa-only",
+  "roadmap_item": "Current GUI source/content wording scan completed",
+  "source_contract": {
+    "player_limitations": "docs/guides/gui-how-to-play.md: This is a fictional educational simulation and research prototype.",
+    "decision_boundary": "docs/guides/gui-how-to-play.md: operational, clinical, financial, regulatory,",
+    "metric_boundary": "gui/metric-visualization-proof.html: Numeric visuals never add precision beyond supplied fields and do not establish a probability, forecast, or hidden state.",
+    "semantic_source_boundary": "gui/semantic-containers.mjs: Preserve visible source and status language; never add hidden severity.",
+    "hidden_state_scan": "tests/test_phase13_1_hidden_state_boundary.py: BROWSER_MODULES = tuple(sorted((ROOT / \"gui\").glob(\"*.mjs\")))"
+  },
+  "review_scope": [
+    "current player-facing limitations and safety language",
+    "current GUI module and fixture wording",
+    "current metric visualization precision and source rules",
+    "current actor-visible source/status and hidden-state boundary"
+  ],
+  "forbidden_claim_fragments": [
+    "clinical recommendation",
+    "medical advice",
+    "diagnosis or diagnostic wording",
+    "prescribing, prescription, or dosage wording",
+    "medication wording",
+    "treatment or care plan wording",
+    "patient-specific wording",
+    "clinical decision wording"
+  ],
+  "findings": {
+    "fictional_scope_is_visible": true,
+    "real_world_decision_boundary_is_visible": true,
+    "direct_clinical_advice_claims_absent_from_reviewed_surfaces": true,
+    "numeric_precision_and_forecast_boundary_is_visible": true,
+    "source_and_status_language_is_preserved": true,
+    "browser_hidden_state_boundary_is_covered": true
+  },
+  "authority_boundary": "The host/core owns observations, transitions, resolved inputs, history, and effects; presentation code renders authorized actor-visible fields and written equivalents.",
+  "limits": [
+    "This is a bounded repository-owned source/content QA pass, not clinical or policy expert approval.",
+    "It does not establish clinical validity, policy validity, calibration, human comprehension, accessibility quality, or educational effectiveness.",
+    "Human content, resemblance, provenance, accessibility, educational, and public-release review remain open."
+  ],
+  "test_source": "tests/test_phase13_1_content_boundary_qa.py"
+}
