@@ -341,16 +341,29 @@ export function createPresentationSettings({ root = document, recorder, storage,
   } catch {
     persisted = {};
   }
+  const persistedLowAudioState = persisted.low_distraction_audio_snapshot;
+  const hasPersistedLowAudioState = persistedLowAudioState
+    && typeof persistedLowAudioState.muted === "boolean"
+    && typeof persistedLowAudioState.reducedNotifications === "boolean";
   const state = {
-    low_distraction: Boolean(persisted.low_distraction),
+    low_distraction: Boolean(persisted.low_distraction && hasPersistedLowAudioState),
     reduced_motion: persisted.reduced_motion ?? Boolean(globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches),
     text_equivalents: persisted.text_equivalents ?? true,
     text_scale: persisted.text_scale === "large" ? "large" : "standard",
   };
-  let lowDistractionAudioState = null;
+  let lowDistractionAudioState = state.low_distraction ? { ...persistedLowAudioState } : null;
   const save = () => {
     try {
-      (storage ?? globalThis.localStorage)?.setItem?.("hs-mgt-presentation-settings", JSON.stringify(state));
+      const persistedState = {
+        ...state,
+        low_distraction_audio_snapshot: state.low_distraction && lowDistractionAudioState
+          ? {
+            muted: lowDistractionAudioState.muted,
+            reducedNotifications: lowDistractionAudioState.reducedNotifications,
+          }
+          : null,
+      };
+      (storage ?? globalThis.localStorage)?.setItem?.("hs-mgt-presentation-settings", JSON.stringify(persistedState));
     } catch {
       // Settings remain session-local when storage is unavailable.
     }
@@ -411,8 +424,8 @@ export function createPresentationSettings({ root = document, recorder, storage,
     event.__hsMgtPlaytestRecorded = true;
     state.low_distraction = Boolean(event.target.checked);
     recorder?.record("settings_changed", { setting: "low_distraction", value: state.low_distraction });
-    save();
     apply();
+    save();
   });
   root.querySelector("#settings-reduced-motion")?.addEventListener("change", (event) => {
     event.__hsMgtPlaytestRecorded = true;

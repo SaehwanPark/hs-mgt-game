@@ -23,7 +23,7 @@ class DevicePerformanceTests(unittest.TestCase):
     report = self.checker.build_report(ROOT, self.document)
     self.assertEqual(report["status"], "pass")
     self.assertEqual(report["schema_version"], "device-performance-report-v1")
-    self.assertEqual(report["source_bytes"], 372379)
+    self.assertEqual(report["source_bytes"], 373061)
     self.assertEqual(report["measurements"]["dom_elements"], 818)
     self.assertFalse(self.document["certification"]["real_device"])
 

@@ -84,11 +84,48 @@ class Phase132LowDistractionModeTests(unittest.TestCase):
       if (!settings.state.low_distraction || root.documentElement.dataset.lowDistraction !== "true") process.exit(1);
       if (root.documentElement.dataset.textScale !== "large" || root.documentElement.dataset.textEquivalents !== "true") process.exit(2);
       if (!audioState.muted || !audioState.reducedNotifications) process.exit(3);
-      if (!JSON.parse(saved).low_distraction) process.exit(4);
+      const savedWithMode = JSON.parse(saved);
+      if (!savedWithMode.low_distraction || !savedWithMode.low_distraction_audio_snapshot) process.exit(4);
+      const reloadListeners = new Map();
+      const reloadNodes = new Map();
+      for (const selector of [
+        "#settings-low-distraction",
+        "#settings-reduced-motion",
+        "#settings-text-equivalents",
+        "#settings-text-scale",
+        "#settings-state",
+      ]) {
+        reloadNodes.set(selector, {
+          checked: false,
+          value: "standard",
+          textContent: "",
+          disabled: false,
+          addEventListener(type, callback) { reloadListeners.set(`${selector}:${type}`, callback); },
+        });
+      }
+      const reloadAudioState = { muted: true, reducedNotifications: true };
+      const reloadAudio = {
+        state() { return { ...reloadAudioState }; },
+        setMuted(value) { reloadAudioState.muted = value; },
+        setReducedNotifications(value) { reloadAudioState.reducedNotifications = value; },
+      };
+      const reloadRoot = {
+        documentElement: { dataset: {} },
+        querySelector(selector) { return reloadNodes.get(selector) ?? null; },
+        querySelectorAll() { return []; },
+      };
+      const reloadStorage = {
+        getItem() { return JSON.stringify(savedWithMode); },
+        setItem(_key, value) { saved = value; },
+      };
+      const reloadedSettings = createPresentationSettings({ root: reloadRoot, storage: reloadStorage, audio: reloadAudio });
+      if (!reloadedSettings.state.low_distraction) process.exit(5);
+      reloadListeners.get("#settings-low-distraction:change")({ target: { checked: false } });
+      if (reloadAudioState.muted || reloadAudioState.reducedNotifications) process.exit(6);
       listeners.get("#settings-low-distraction:change")({ target: { checked: false } });
-      if (settings.state.low_distraction || root.documentElement.dataset.lowDistraction !== "false") process.exit(5);
-      if (root.documentElement.dataset.textScale !== "standard" || root.documentElement.dataset.textEquivalents !== "false") process.exit(6);
-      if (audioState.muted || audioState.reducedNotifications) process.exit(7);
+      if (settings.state.low_distraction || root.documentElement.dataset.lowDistraction !== "false") process.exit(7);
+      if (root.documentElement.dataset.textScale !== "standard" || root.documentElement.dataset.textEquivalents !== "false") process.exit(8);
+      if (audioState.muted || audioState.reducedNotifications) process.exit(9);
     '''
     result = subprocess.run(
       ["node", "--input-type=module", "-e", script],
