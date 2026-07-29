@@ -33,7 +33,7 @@ class Phase12StabilizationAccessibilityEvidenceTests(unittest.TestCase):
   def test_scope_and_human_accessibility_boundaries_remain_bounded(self):
     surface = self.ledger["presentation_surface"]
     self.assertIn("text-first", surface["stabilization_boundary"])
-    self.assertIn("competitive-regional-v1 only", surface["stabilization_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["stabilization_boundary"])
     self.assertIn("do not enter commands", surface["settings_ownership"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertTrue(self.ledger["open_work"])

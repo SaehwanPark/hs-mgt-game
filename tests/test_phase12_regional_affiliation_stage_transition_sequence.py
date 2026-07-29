@@ -49,7 +49,7 @@ class Phase12RegionalAffiliationStageTransitionSequenceTests(unittest.TestCase):
     self.assertIn("immutable transition", sequence["advancement"])
     self.assertIn("committed history", sequence["written_equivalent"])
     self.assertIn("read-only", surface["host_boundary"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["live_gui_boundary"])
     self.assertIn("competitive-first-month only", surface["shared_sequence_boundary"])
     self.assertIn("optional", surface["audio_boundary"])
     self.assertIn("none-required", surface["new_asset_need"])

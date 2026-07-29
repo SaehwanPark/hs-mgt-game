@@ -43,7 +43,7 @@
   "presentation_surface": {
     "shared_process_renderer": "The shared campaign renderer can display the host-supplied integration-obligation process with a written label and visible status.",
     "shared_decision_renderer": "The shared campaign renderer can display begin/decline choices and submit only the canonical host command.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation integration route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific integration route is claimed.",
     "audio_state": "The reusable affiliation_negotiation music state is optional, visible-trigger based, and text-complete; no direct campaign integration audio is claimed.",
     "new_asset_need": "none-required-by-current-stage-contract"
   },

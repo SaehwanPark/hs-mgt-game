@@ -3305,3 +3305,63 @@ comprehension, accessibility quality, educational effectiveness, classroom
 readiness, causal certainty, or public-release approval. No new route, asset,
 audio, persistence, replay regeneration, or runtime simulation behavior is
 added.
+# Presentation Contract — Live campaign-coverage handoff v0.13.58
+
+## Goal and authorization
+
+Expose the existing host-owned `campaign-coverage-v1` envelope through the
+loopback GUI for stabilization and regional-affiliation sessions. Reuse the
+existing text-first campaign panel and canonical host decision route. This is
+an integration slice, not a new campaign presentation system.
+
+## Player questions and visible consequences
+
+The browser should answer: “What campaign stage, actor-visible metrics,
+processes, decisions, committed history, and debrief are currently available?”
+A selected decision is submitted as the host-provided canonical command and
+the next panel is fetched from the host. A failed read or submit preserves the
+current view and reports a recoverable error.
+
+## Source and visibility contract
+
+| Surface | Source | Allowed browser behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign launch | `GameSessionStore::start_session` | Send campaign, seed, and competitive difficulty when relevant | Do not create a local session or outcome |
+| Existing-session identity | Host session-envelope read | Resolve the campaign before selecting the competitive or campaign-coverage renderer | Do not infer campaign identity from a stale browser value |
+| Stage/metrics/actors/processes | `get_campaign_coverage` | Render the typed envelope and source labels | Do not reconstruct true state, intent, probability, or future response |
+| Decisions | Envelope `command_template` and parameters | Fill visible fields and submit the resulting canonical command | Do not invent commands or validate locally as authoritative |
+| History/debrief/replay metadata | Same host envelope | Render committed summaries and hashes | Do not regenerate transitions or debrief facts |
+| Session end | Existing `end_session` route | Show the host terminal envelope | Do not mark a session complete locally |
+
+## Visual, motion, and audio semantics
+
+The existing campaign-coverage panel, text/status language, optional audio
+classifier, and written equivalents are reused. No new cue, music state, asset,
+motion effect, or color-only signal is introduced. Stabilization and affiliation
+remain distinguishable through host-provided campaign role/stage text and
+source-linked fields.
+
+## Accessibility and recovery
+
+Keyboard forms, text equivalents, reduced-motion behavior, optional audio, and
+existing recovery controls remain the fallback. Missing or malformed campaign
+coverage must not erase a successfully rendered prior session. Adapter and
+host failures remain visible as recoverable status messages.
+
+## Authority, history, and provenance boundary
+
+The Rust host remains authoritative for campaign creation, command acceptance,
+transition resolution, history, hashes, and debrief. The browser stores only
+the active session ID, campaign selection, and presentation/draft UI state.
+No asset or release registry entry changes in this slice.
+
+## Evidence limits and non-goals
+
+This contract does not establish campaign-specific art/audio quality,
+human comprehension, accessibility, educational usefulness, screenshots,
+durable persistence, replay playback, legal/provenance approval, or public
+release. No new visual/audio asset or hidden-state route is authorized.
+
+--- Historical presentation contracts ---
+
+# Presentation Contract — Phase 13.1 AI-generation metadata boundary v0.13.57

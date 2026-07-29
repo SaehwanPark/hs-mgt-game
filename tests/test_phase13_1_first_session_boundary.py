@@ -145,7 +145,7 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
     )
     for marker in (
       "cargo run --bin hs-mgt-game-gui",
-      "Start competitive session",
+      "Start competitive regional session",
       "The First-month path panel tracks seven presentation handoffs",
       "Validate draft with host",
       "Submit validated month",

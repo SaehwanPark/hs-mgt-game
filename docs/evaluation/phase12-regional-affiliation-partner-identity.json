@@ -32,7 +32,7 @@
   "presentation_surface": {
     "current_host": "The host campaign-coverage projection exposes a partner briefing, actor role, stage, condition/status, and written uncertainty.",
     "shared_gui": "The shared campaign renderer can display supplied partner identity and coverage fields with written fallback; the actor-family catalog supplies generic fallback language separately.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation partner route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific partner route is claimed.",
     "new_asset_need": "none-required-by-current-stage-contract"
   },
   "open_work": [

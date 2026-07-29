@@ -17,7 +17,7 @@
     "command_surface": "src/mcp/session.rs: AffiliationStage::AssessPartner",
     "completion_test": "src/affiliation/transition.rs: independent_path_completes_six_stages",
     "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set([",
     "shared_sequence_boundary": "gui/resolution-sequence.mjs: competitive-first-month-resolution-v1"
   },
   "sequence": {
@@ -78,7 +78,7 @@
   "presentation_surface": {
     "host_boundary": "The host owns stage validation, stochastic input resolution, transition, state hash, and replay; the presentation surface is read-only for those results.",
     "history_boundary": "Campaign coverage returns committed history and replay transition metadata; the sequence record does not add persistence or a new replay route.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation sequence route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific sequence route is claimed.",
     "shared_sequence_boundary": "The existing browser resolution sequence is competitive-first-month only and is not promoted as affiliation coverage.",
     "audio_boundary": "Existing optional visible-only affiliation audio may accompany supported text/events; it does not make the sequence complete or imply a future outcome.",
     "new_asset_need": "none-required-by-current-stage-contract"

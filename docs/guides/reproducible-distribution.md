@@ -76,7 +76,8 @@ For the live GUI:
 cargo run --bin hs-mgt-game-gui
 ```
 
-The live GUI currently supports `competitive-regional-v1` only and binds to a
+The live GUI supports `competitive-regional-v1`, `stabilization-v1`, and
+`regional-affiliation-v1` and binds to a
 loopback address. The supported browser evidence covers Chromium evergreen
 desktop version 120 or newer with ECMAScript modules, `fetch`, native SVG, and
 CSS Grid. Web Audio and local presentation preferences remain optional.

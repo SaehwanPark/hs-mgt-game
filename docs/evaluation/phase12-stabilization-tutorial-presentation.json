@@ -21,7 +21,7 @@
   "presentation_surface": {
     "current": "CLI beginner menu plus player guide for the five-turn stabilization flow.",
     "shared_gui": "The shared campaign-coverage contract can render supplied stabilization stage/briefing/metric/actor/process/decision/history/replay/debrief projections.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization tutorial rail is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native stabilization-specific tutorial rail is claimed.",
     "new_asset_need": "none-required-by-current-cli-and-shared-coverage-contract"
   },
   "open_work": [

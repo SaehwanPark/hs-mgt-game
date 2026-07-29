@@ -1,8 +1,9 @@
 # How To Play
 
-This guide introduces both terminal and GUI play. The CLI supports all three
-campaigns. The live GUI currently supports the competitive campaign and has a
-separate step-by-step guide at [`gui-how-to-play.md`](gui-how-to-play.md).
+This guide introduces both terminal and GUI play. The CLI and live GUI support
+all three campaigns, with the stabilization and regional-affiliation GUI paths
+using the host-owned campaign-coverage panel. The separate step-by-step guide
+is at [`gui-how-to-play.md`](gui-how-to-play.md).
 
 ## What this game is
 
@@ -58,7 +59,7 @@ interact.
 2. Keep that terminal running and open the printed URL, normally
    `http://127.0.0.1:7878`.
 3. Select `competitive-regional-v1`, seed `42`, and Normal difficulty.
-4. Choose **Start competitive session**.
+4. Choose **Start competitive regional session**.
 5. Inspect the briefing and regional market, add at least two action drafts,
    validate the unchanged draft, submit it, then review or skip the resolution.
 

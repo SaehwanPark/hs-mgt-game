@@ -49,7 +49,7 @@ class Phase12RegionalAffiliationReplayDebriefTests(unittest.TestCase):
     self.assertIn("written", surface["history_renderer"])
     self.assertIn("written", surface["debrief_renderer"])
     self.assertIn("completion fallback", surface["debrief_renderer"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["live_gui_boundary"])
     self.assertIn("optional", surface["audio_boundary"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertIn("typed replay", debrief["resolved_detail_boundary"])

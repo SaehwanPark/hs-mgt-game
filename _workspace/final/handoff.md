@@ -1,3 +1,55 @@
+# Final Handoff — Phase 12 live campaign-coverage handoff v0.13.58
+
+## Result
+
+The loopback GUI can now start and load the existing
+`stabilization-v1` and `regional-affiliation-v1` campaigns through the typed
+`campaign-coverage-v1` host envelope. Competitive sessions retain their
+separate action-catalog path; the additional campaigns use the shared
+actor-visible coverage panel and canonical host decision submission.
+
+## Changed files and behavior
+
+- Added typed loopback campaign-coverage and generic session-identity reads in
+  `src/gui_server.rs`, with transport coverage for valid and rejected campaign
+  decisions plus unsupported campaigns.
+- Added campaign-aware launcher, adapter session/campaign tracking, existing
+  session resolution, coverage fallback, and last-valid-view preservation in
+  `gui/index.html`, `gui/host-adapter.mjs`, and `gui/app.mjs`.
+- Updated guides, roadmap/evaluation ledgers, canonical records, lessons,
+  generated credits/version projections, and release notes. No simulation
+  rule, hidden state, asset, audio file, or persistence path changed.
+
+## Verification
+
+- Rust: `cargo fmt --check`, Clippy with warnings denied, and all 344 unit/
+  integration tests passed.
+- Python: all 760 discovered tests passed, including the live campaign
+  transport, launcher, coverage, and boundary tests.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation, device-performance, offline, browser-compatibility, and
+  visual/audio contract checks passed.
+
+## Handoff and review
+
+- Base: `main` at v0.13.57.
+- Working branch: `feat/live-campaign-coverage-v0.13.58`.
+- Pull request: pending.
+- One medium-effort code review completed with no Critical/High findings;
+  review findings were fixed and revalidated.
+- Presentation-domain QA: pass for the bounded technical contract; evidence
+  limits are recorded in `_workspace/03_presentation_qa.md`.
+
+## Limits and next slice
+
+This closes only the technical browser handoff for the existing shared
+campaign-coverage projection. Campaign-specific visual/audio quality, direct
+audio integration, screenshots, replay playback, durable persistence,
+human accessibility/educational evaluation, provenance/legal review, and
+public-release approval remain open.
+
+---
+
 # Final Handoff — Visual/audio Phase 11.1 live music-state projection v0.12.93
 
 ## Result
@@ -1626,3 +1678,30 @@ is introduced.
 - Working branch: `feat/causal-attribution-boundary-v0.13.41`.
 - PR, review, CI, merge commit, and temporary-branch cleanup are pending.
 - One code reviewer will perform the required independent review passes.
+# Final Handoff — Live campaign-coverage handoff v0.13.58
+
+## Result
+
+Connected the existing host-owned `campaign-coverage-v1` envelope to the
+loopback GUI launcher and local adapter for `stabilization-v1` and
+`regional-affiliation-v1`. The action client falls back from competitive-only
+presentation/action reads to the existing campaign panel; campaign decisions
+still submit through the canonical host route. Competitive flow remains
+unchanged.
+
+## Evidence boundary
+
+The ledger, focused tests, and Rust transport tests pass for the current
+technical browser handoff. No new simulation state, browser authority, true
+state, asset, audio file, persistence, or release claim was added. Campaign-
+specific visual/audio quality, screenshots, replay playback, human
+accessibility/educational review, provenance/legal review, and public-release
+approval remain open.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.57.
+- Working branch: `feat/live-campaign-coverage-v0.13.58`.
+- One medium-effort code reviewer is required; Critical/High findings must be
+  fixed before merge.
+- PR, CI, merge, and temporary-branch cleanup are pending.

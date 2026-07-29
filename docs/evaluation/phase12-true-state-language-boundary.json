@@ -12,7 +12,7 @@
     "instructor_authority_boundary": "docs/evaluation/phase12-instructor-authority-boundaries.json: boundary-documented-no-new-instructor-surface",
     "shared_renderer": "gui/app.mjs: renderCampaignCoverage",
     "written_boundary": "gui/README.md: text-first history/debrief view",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set(["
   },
   "language_contract": {
     "player_visible": "Observed and reported labels describe actor-visible information and committed history; they do not imply access to resolved hidden state.",
@@ -24,7 +24,7 @@
   "presentation_surface": {
     "host_ownership": "Host/core debrief functions own observation, true-state labeling, resolution, and any post-run instructor detail; presentation remains read-only.",
     "shared_rendering": "Shared renderers may display supplied labels and debrief lines without authoring true state, outcomes, or authority.",
-    "browser_boundary": "The current live GUI supports competitive-regional-v1 only; this record does not establish browser-native true-state visual language.",
+    "browser_boundary": "The current live GUI exposes shared campaign-coverage; this record does not establish browser-native true-state visual language.",
     "written_fallback": "The distinction remains readable through text labels, history, hashes, and authority notices when audio or visual decoration is unavailable.",
     "new_surface_need": "none-required-for-current-textual-boundary-record"
   },

@@ -86,7 +86,7 @@
   ],
   "campaign_surface": {
     "current_cli": "The five-turn stabilization beginner flow is text-first and has no playback surface; its written choices, trade-offs, and uncertainty remain complete.",
-    "live_gui": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization audio route is claimed.",
+    "live_gui": "The current live GUI exposes the shared campaign-coverage panel; no browser-native stabilization-specific audio route is claimed.",
     "shared_mapping_status": "complete-current-shared-contract-mapping",
     "direct_campaign_audio_status": "open-not-integrated",
     "optional_audio_rule": "Audio may reinforce only supplied visible state; mute, unavailable, reduced, or unsupported audio preserves the same written meaning."

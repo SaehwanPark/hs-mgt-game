@@ -32,7 +32,7 @@ class Phase12CausalAttributionBoundaryTests(unittest.TestCase):
     surface = self.ledger["presentation_surface"]
     self.assertIn("read-only", surface["host_authority"])
     self.assertIn("without calculating", surface["shared_rendering"])
-    self.assertIn("competitive-regional-v1 only", surface["browser_boundary"])
+    self.assertIn("shared campaign-coverage", surface["browser_boundary"])
     self.assertIn("none-required", surface["new_surface_need"])
     self.assertTrue(self.ledger["open_work"])
     limits = " ".join(self.ledger["limits"])

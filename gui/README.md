@@ -9,7 +9,8 @@ cargo run --bin hs-mgt-game-gui
 ```
 
 Keep the process running and open the printed loopback URL. The live GUI
-currently supports `competitive-regional-v1`. Complete instructions and
+supports `competitive-regional-v1`, `stabilization-v1`, and
+`regional-affiliation-v1`. Complete instructions and
 troubleshooting are in [`docs/guides/gui-how-to-play.md`](../docs/guides/gui-how-to-play.md).
 
 Opening `gui/index.html` directly or through a generic static server intentionally
@@ -405,12 +406,15 @@ history, hashes, and debrief text remain complete when audio is muted.
 
 When supplied, `getCampaignCoverage(sessionId)` returns
 `schema_version: "campaign-coverage-v1"` for the `stabilization` or
-`regional-affiliation` campaign. The projection keeps each campaign's briefing,
-visible metrics, actor signals, process status, decision forms, immutable
-history, replay metadata, and host-provided debrief distinct. Decision forms
-substitute only host-provided parameter values into the host command template;
-the existing `submitTurn` path remains the only mutation path. Host rejection is
-shown as a recoverable error and does not fabricate a local transition.
+`regional-affiliation` campaign. The loopback launcher exposes this read and
+the action client falls back to it when a noncompetitive session has no
+competitive presentation/action catalog. The projection keeps each campaign's
+briefing, visible metrics, actor signals, process status, decision forms,
+immutable history, replay metadata, and host-provided debrief distinct.
+Decision forms substitute only host-provided parameter values into the host
+command template; the existing `submitTurn` path remains the only mutation
+path. Host rejection is shown as a recoverable error and does not fabricate a
+local transition.
 
 For reproducible interface-task traces, inject an optional recorder from
 `playtest.mjs` into any client. It emits `schema_version: "gui-playtest-v1"`

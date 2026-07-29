@@ -1082,7 +1082,6 @@ function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
 export function renderCampaignCoverage(envelope, root = document, onSubmit = () => {}) {
   const panel = root.querySelector("#campaign-coverage-panel");
   if (!envelope || envelope.schema_version !== CAMPAIGN_COVERAGE_SCHEMA) {
-    if (panel) panel.hidden = true;
     return { ok: false, code: envelope ? "unsupported_campaign_coverage_schema" : "empty_campaign_coverage" };
   }
   if (panel) panel.hidden = false;
@@ -1132,7 +1131,6 @@ export function createCampaignCoverageClient({
       const envelope = await adapter.getCampaignCoverage(sessionId);
       const result = renderCampaignCoverage(envelope, root, submit);
       if (!result.ok) {
-        currentEnvelope = null;
         recordPlaytestFailure(recorder, result.code, "Campaign coverage schema is unavailable.");
         setPresentationState(root, "Campaign coverage is unavailable; existing presentation remains active.");
         showRecovery(root, "Campaign coverage could not be read. Retry the current host read when the adapter is available.");
@@ -1147,7 +1145,6 @@ export function createCampaignCoverageClient({
       audioClient.setAmbienceFromVisible(audioInput);
       return result;
     } catch (error) {
-      currentEnvelope = null;
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "campaign_coverage_adapter_error", message);
       setPresentationState(root, `Campaign coverage adapter error: ${message}`);
@@ -1757,8 +1754,20 @@ async function endHostSession({ adapter, sessionId, root, recorder, audio }) {
   }
 }
 
-const SESSION_LAUNCH_CAMPAIGN = "competitive-regional-v1";
+const SESSION_LAUNCH_CAMPAIGNS = new Set([
+  "competitive-regional-v1",
+  "stabilization-v1",
+  "regional-affiliation-v1",
+]);
 const SESSION_LAUNCH_DIFFICULTIES = new Set(["easy", "normal", "hard", "expert"]);
+
+function sessionCampaignLabel(campaign) {
+  return {
+    "competitive-regional-v1": "competitive regional",
+    "stabilization-v1": "stabilization",
+    "regional-affiliation-v1": "regional affiliation",
+  }[campaign] ?? "selected";
+}
 
 function sessionLaunchStatus(root, message) {
   const node = root.querySelector("#session-launch-status");
@@ -1769,8 +1778,8 @@ function readSessionLaunchOptions(root) {
   const campaign = root.querySelector("#session-campaign")?.value;
   const seedText = String(root.querySelector("#session-seed")?.value ?? "").trim();
   const difficulty = String(root.querySelector("#session-difficulty")?.value ?? "").toLowerCase();
-  if (campaign !== SESSION_LAUNCH_CAMPAIGN) {
-    return { ok: false, code: "unsupported_campaign", message: "This launcher supports the competitive regional campaign only." };
+  if (!SESSION_LAUNCH_CAMPAIGNS.has(campaign)) {
+    return { ok: false, code: "unsupported_campaign", message: "Choose a supported campaign before starting." };
   }
   if (!/^\d+$/.test(seedText)) {
     return { ok: false, code: "invalid_seed", message: "Enter a non-negative integer seed before starting." };
@@ -1779,10 +1788,12 @@ function readSessionLaunchOptions(root) {
   if (!Number.isSafeInteger(seed) || seed < 0) {
     return { ok: false, code: "invalid_seed", message: "Enter a safe, non-negative integer seed before starting." };
   }
-  if (!SESSION_LAUNCH_DIFFICULTIES.has(difficulty)) {
+  if (campaign === "competitive-regional-v1" && !SESSION_LAUNCH_DIFFICULTIES.has(difficulty)) {
     return { ok: false, code: "invalid_difficulty", message: "Choose Easy, Normal, Hard, or Expert before starting." };
   }
-  return { ok: true, options: { campaign, seed, difficulty } };
+  const options = { campaign, seed };
+  if (campaign === "competitive-regional-v1") options.difficulty = difficulty;
+  return { ok: true, options };
 }
 
 export function createSessionLauncher({ adapter, root = document, load, recorder = null } = {}) {
@@ -1790,7 +1801,15 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   const start = root.querySelector("#session-start");
   const existingId = root.querySelector("#session-id");
   const loadButton = root.querySelector("#session-load");
+  const campaign = root.querySelector("#session-campaign");
+  const difficulty = root.querySelector("#session-difficulty");
   let busy = false;
+
+  function updateCampaignControls() {
+    const selected = campaign?.value;
+    if (start) start.textContent = `Start ${sessionCampaignLabel(selected)} session`;
+    if (difficulty) difficulty.disabled = selected !== "competitive-regional-v1";
+  }
 
   const setBusy = (value) => {
     busy = value;
@@ -1875,7 +1894,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
         return result ?? { ok: false, code: "session_load_failed" };
       }
       if (existingId) existingId.value = sessionId;
-      sessionLaunchStatus(root, `Competitive session loaded: ${sessionId}`);
+      sessionLaunchStatus(root, `${sessionCampaignLabel(response?.campaign ?? input.options.campaign)} session loaded: ${sessionId}`);
       return { ok: true, session_id: sessionId, envelope: result.envelope ?? response };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -1889,6 +1908,8 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
 
   form?.addEventListener("submit", startSession);
   loadButton?.addEventListener("click", loadExisting);
+  campaign?.addEventListener("change", updateCampaignControls);
+  updateCampaignControls();
   if (!adapter?.startSession) {
     sessionLaunchStatus(root, "Configure a host adapter to start or load a session; the demo fixture remains available.");
   }
@@ -2320,6 +2341,38 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     return { ok: true, envelope: response };
   }
 
+  async function loadCampaignCoverage(requestedSessionId) {
+    const result = await campaignCoverageClient.load(requestedSessionId);
+    if (!result.ok) return result;
+    catalog = null;
+    drafts = [];
+    validation = null;
+    editingIndex = null;
+    sessionId = requestedSessionId;
+    adapter.activateSession?.(requestedSessionId);
+    setActionControls(root, false);
+    renderActions([], root);
+    renderDraftState();
+    renderValidation(null, root);
+    const actionMode = root.querySelector("#action-mode");
+    if (actionMode) actionMode.textContent = "campaign coverage · host-shaped decisions";
+    firstMonthFlow.update({
+      sessionLoaded: true,
+      actionCatalogLoaded: false,
+      draftCount: 0,
+      validated: false,
+      submitted: false,
+      resolutionVisible: false,
+      refreshed: false,
+    });
+    setEndSessionControl(root, typeof adapter.endSession === "function");
+    checkpointClient.setEnabled(
+      typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
+    );
+    setPresentationState(root, `${result.envelope.session.campaign} campaign coverage loaded; choose a host-shaped decision.`);
+    return result;
+  }
+
   async function load(nextSessionId = sessionId) {
     const requestedSessionId = String(nextSessionId ?? "").trim();
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
@@ -2335,6 +2388,22 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       setPresentationState(root, "A host session ID is required before loading actions.");
       showRecovery(root, "Enter or start a host session before loading the action catalog.");
       return { ok: false, code: "session_id_missing" };
+    }
+    let requestedCampaign = adapter?.sessionId === requestedSessionId ? adapter?.campaign : null;
+    if (!requestedCampaign && typeof adapter?.getSession === "function") {
+      try {
+        const session = await adapter.getSession(requestedSessionId);
+        requestedCampaign = session?.campaign ?? null;
+        if (requestedCampaign) adapter.activateSession?.(requestedSessionId, requestedCampaign);
+      } catch {
+        // The campaign-specific fallback below preserves the existing error boundary.
+      }
+    }
+    if (
+      ["stabilization-v1", "regional-affiliation-v1"].includes(requestedCampaign)
+      && typeof coverageAdapter?.getCampaignCoverage === "function"
+    ) {
+      return loadCampaignCoverage(requestedSessionId);
     }
     if (!adapter || typeof adapter.getActionCatalog !== "function" || typeof adapter.validateTurn !== "function") {
       if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
@@ -2425,6 +2494,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       return { ok: true, catalog };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
+      if (typeof coverageAdapter?.getCampaignCoverage === "function") {
+        const coverage = await loadCampaignCoverage(requestedSessionId);
+        if (coverage.ok) return coverage;
+      }
       recordPlaytestFailure(recorder, "action_adapter_error", message);
       if (replacingSession) {
         setPresentationState(root, `Replacement session could not be loaded; the current session remains active: ${message}`);

@@ -9,15 +9,16 @@ use axum::{Json, Router};
 use serde::Deserialize;
 
 use crate::mcp::{
-  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetHistoryRequest,
-  GetPresentationRequest, GetRegionalWorldRequest, GetReplayRequest, GetResolutionRequest,
-  HistoryEnvelope, LoadSessionRequest, McpErrorMessage, SaveSessionRequest, StartSessionRequest,
-  SubmitTurnRequest, ValidateTurnRequest,
+  EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetCampaignCoverageRequest,
+  GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
+  GetReplayRequest, GetResolutionRequest, HistoryEnvelope, LoadSessionRequest, McpErrorMessage,
+  SaveSessionRequest, StartSessionRequest, SubmitTurnRequest, ValidateTurnRequest,
 };
 
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
 const HOST_ADAPTER_MARKER: &str = "<!-- HS_MGT_GAME_HOST_ADAPTER -->";
 const GUI_HISTORY_CAMPAIGN: &str = "competitive-regional-v1";
+const GUI_CAMPAIGN_COVERAGE_CAMPAIGNS: [&str; 2] = ["stabilization-v1", "regional-affiliation-v1"];
 
 #[derive(Clone, Default)]
 struct GuiState {
@@ -96,9 +97,14 @@ async fn shutdown_signal() {
 fn gui_router() -> Router {
   Router::new()
     .route("/api/v1/sessions", post(start_session))
+    .route("/api/v1/sessions/{session_id}", get(get_session))
     .route(
       "/api/v1/sessions/{session_id}/presentation",
       get(get_presentation),
+    )
+    .route(
+      "/api/v1/sessions/{session_id}/campaign-coverage",
+      get(get_campaign_coverage),
     )
     .route(
       "/api/v1/sessions/{session_id}/action-catalog",
@@ -130,14 +136,16 @@ async fn start_session(
   State(state): State<GuiState>,
   Json(request): Json<GuiStartSessionRequest>,
 ) -> Response {
-  if request.campaign != GUI_HISTORY_CAMPAIGN {
+  if request.campaign != GUI_HISTORY_CAMPAIGN
+    && !GUI_CAMPAIGN_COVERAGE_CAMPAIGNS.contains(&request.campaign.as_str())
+  {
     return (
       StatusCode::BAD_REQUEST,
       Json(McpErrorMessage {
-        error: "live GUI currently supports competitive-regional-v1 only".to_string(),
+        error: "live GUI supports competitive-regional-v1, stabilization-v1, and regional-affiliation-v1 only".to_string(),
         code: Some("unsupported_gui_campaign".to_string()),
         resource_limit: None,
-        hint: Some("Use cargo run for stabilization or regional affiliation.".to_string()),
+        hint: Some("Choose a supported launcher campaign or use cargo run for a custom scenario.".to_string()),
       }),
     )
       .into_response();
@@ -152,12 +160,27 @@ async fn start_session(
   })
 }
 
+async fn get_session(State(state): State<GuiState>, Path(session_id): Path<String>) -> Response {
+  with_store(&state, |store| {
+    store.get_observation(GetObservationRequest { session_id })
+  })
+}
+
 async fn get_presentation(
   State(state): State<GuiState>,
   Path(session_id): Path<String>,
 ) -> Response {
   with_store(&state, |store| {
     store.get_presentation(GetPresentationRequest { session_id })
+  })
+}
+
+async fn get_campaign_coverage(
+  State(state): State<GuiState>,
+  Path(session_id): Path<String>,
+) -> Response {
+  with_store(&state, |store| {
+    store.get_campaign_coverage(GetCampaignCoverageRequest { session_id })
   })
 }
 
@@ -724,6 +747,20 @@ mod tests {
     assert_eq!(status, 404);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert!(error["error"].as_str().unwrap().contains("unknown session"));
+    let (status, body) = request(
+      address,
+      "GET",
+      "/api/v1/sessions/missing/campaign-coverage",
+      None,
+    )
+    .await;
+    assert_eq!(status, 404);
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert!(error["error"].as_str().unwrap().contains("unknown session"));
+    let (status, body) = request(address, "GET", "/api/v1/sessions/missing", None).await;
+    assert_eq!(status, 404);
+    let error: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert!(error["error"].as_str().unwrap().contains("unknown session"));
     let (status, body) = request(address, "POST", "/api/v1/sessions/missing/save", None).await;
     assert_eq!(status, 404);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
@@ -736,9 +773,60 @@ mod tests {
   }
 
   #[tokio::test]
-  async fn live_transport_rejects_unsupported_campaign() {
+  async fn live_transport_supports_campaign_coverage_campaigns() {
     let (address, server) = test_server().await;
-    let body = r#"{"campaign":"stabilization-v1","seed":42,"difficulty":null}"#;
+    for campaign in ["stabilization-v1", "regional-affiliation-v1"] {
+      let body = format!(r#"{{"campaign":"{campaign}","seed":42,"difficulty":null}}"#);
+      let (status, body) = request(address, "POST", "/api/v1/sessions", Some(&body)).await;
+      assert_eq!(status, 200, "{campaign}: {body}");
+      let session: serde_json::Value = serde_json::from_str(&body).unwrap();
+      assert_eq!(session["campaign"], campaign);
+      let session_id = session["session_id"].as_str().unwrap();
+      let (status, body) = request(
+        address,
+        "GET",
+        &format!("/api/v1/sessions/{session_id}/campaign-coverage"),
+        None,
+      )
+      .await;
+      assert_eq!(status, 200, "{campaign}: {body}");
+      let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
+      assert_eq!(coverage["schema_version"], "campaign-coverage-v1");
+      assert_eq!(coverage["session"]["campaign"], campaign);
+      let command = if campaign == "stabilization-v1" {
+        "8 18 112"
+      } else {
+        "assess"
+      };
+      let body = format!(r#"{{"command_text":"{command}"}}"#);
+      let (status, body) = request(
+        address,
+        "POST",
+        &format!("/api/v1/sessions/{session_id}/turns"),
+        Some(&body),
+      )
+      .await;
+      assert_eq!(status, 200, "{campaign} valid decision: {body}");
+      let (status, body) = request(
+        address,
+        "POST",
+        &format!("/api/v1/sessions/{session_id}/turns"),
+        Some(r#"{"command_text":"not-a-valid-command"}"#),
+      )
+      .await;
+      assert_eq!(status, 400, "{campaign} invalid decision: {body}");
+      let (status, body) = request(
+        address,
+        "GET",
+        &format!("/api/v1/sessions/{session_id}/campaign-coverage"),
+        None,
+      )
+      .await;
+      assert_eq!(status, 200, "{campaign} post-submit coverage: {body}");
+      let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
+      assert_eq!(coverage["replay"]["transition_count"], 1);
+    }
+    let body = r#"{"campaign":"unsupported-v1","seed":42,"difficulty":null}"#;
     let (status, body) = request(address, "POST", "/api/v1/sessions", Some(body)).await;
     assert_eq!(status, 400);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();

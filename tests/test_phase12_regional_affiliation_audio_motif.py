@@ -37,7 +37,7 @@ class Phase12RegionalAffiliationAudioMotifTests(unittest.TestCase):
     surface = self.ledger["presentation_surface"]
     self.assertIn("optional", surface["shared_audio_contract"])
     self.assertIn("written meaning", surface["audio_off_boundary"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["live_gui_boundary"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertIn("no release audio file", surface["release_audio"])
     self.assertTrue(self.ledger["open_work"])

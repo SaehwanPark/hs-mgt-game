@@ -2971,6 +2971,13 @@ open.
   registry/release/credits checks, no-new-asset decision, and unreleased
   portrait-preview boundary are covered while legal and human review remain
   open.
+- [x] Current live stabilization campaign-coverage handoff passes. Evidence:
+  `docs/evaluation/phase12-live-campaign-coverage.json`,
+  `tests/test_phase12_live_campaign_coverage.py`, the loopback
+  `campaign-coverage-v1` route, and the shared campaign renderer; the existing
+  stabilization stage/decision/history/debrief projection is now reachable
+  from the browser launcher while campaign-specific visual/audio quality and
+  human review remain open.
 
 ### Exit criteria
 
@@ -3048,6 +3055,13 @@ remains open.
   catalog/registry, credits, release/security/audio packaging, no-new-asset,
   and unreleased portrait-preview gates are machine-checked while legal,
   training-data, human quality, and public-release review remain open.
+- [x] Current live regional-affiliation campaign-coverage handoff passes.
+  Evidence: `docs/evaluation/phase12-live-campaign-coverage.json`,
+  `tests/test_phase12_live_campaign_coverage.py`, the loopback
+  `campaign-coverage-v1` route, and the shared campaign renderer; the existing
+  stage/decision/history/debrief projection is now reachable from the browser
+  launcher while stage-specific visual/audio quality and human review remain
+  open.
 
 ### v0.13.21 current campaign-specific presentation inventory
 
@@ -3400,6 +3414,33 @@ Deferred / Non-Goals:
   runtime asset, or authority path is created or promoted.
 - Catalog eligibility and generated credits do not prove direct campaign use,
   legal clearance, training-data provenance, asset quality, or audio usefulness.
+
+### v0.13.58 current live campaign-coverage handoff
+
+- `docs/evaluation/phase12-live-campaign-coverage.json` records the bounded
+  loopback route, existing typed `campaign-coverage-v1` source, launcher
+  support for `stabilization-v1` and `regional-affiliation-v1`, local adapter
+  handoff, and the action-client fallback from competitive-only reads.
+- `tests/test_phase12_live_campaign_coverage.py` checks source parity, the
+  supported campaign list, launcher seed/difficulty behavior, canonical
+  `submitTurn` authority, and the absence of browser true-state fields.
+- Rust transport tests start both campaigns, retrieve the typed envelope, and
+  preserve the unsupported-campaign error boundary. No simulation transition
+  or new presentation schema was added.
+- This closes only the current technical browser handoff for the existing
+  campaign-coverage projection. It does not close campaign-specific visual or
+  audio quality, screenshots, replay playback, durable persistence, human
+  accessibility/educational evaluation, provenance/legal review, or public
+  release.
+
+Deferred / Non-Goals:
+
+- No new map, facility, portrait, stage art, audio file, runtime asset,
+  hidden-state field, true-state route, local transition authority, or new
+  campaign rule was added.
+- The shared panel remains a source-linked actor-visible projection; it does
+  not expose private rationale, resolved inputs, outcome forecasts, or causal
+  certainty.
 
 ### Exit criteria
 
@@ -3810,6 +3851,22 @@ This closes only the current technical metadata-readiness boundary. The
 AI-generation metadata checklist item remains unchecked until an authorized
 generation run records real model/seed provenance and the required human gates
 are completed. Human-review gates remain open.
+
+### v0.13.58 current additional-campaign browser boundary
+
+- `docs/evaluation/phase12-live-campaign-coverage.json` and
+  `tests/test_phase12_live_campaign_coverage.py` bind the loopback launcher,
+  typed campaign-coverage route, local adapter, shared panel, and canonical
+  host decision path for stabilization and regional-affiliation sessions.
+- This extends the current technical first-session surface beyond the
+  competitive action catalog without changing simulation authority. The
+  existing competitive campaign remains on its separate presentation,
+  validation, resolution, regional-world, history, replay, and checkpoint
+  paths.
+- Full-campaign coverage, campaign-specific content/quality review, human
+  first-time-user and educational evaluation, screenshots, durable persistence,
+  browser/device certification, provenance/legal review, and public-release
+  approval remain open.
 
 ### Exit criteria
 

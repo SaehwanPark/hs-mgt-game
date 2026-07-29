@@ -12,7 +12,7 @@
     "browser_history_renderer": "gui/app.mjs: function renderHistory(entries, root)",
     "browser_observation_history_boundary": "gui/app.mjs: ReadOnlyPresentation.observation and committed history",
     "written_history_boundary": "gui/README.md: history, replay metadata, and host-provided debrief distinct",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set(["
   },
   "recovery_contract": {
     "core_history": "Each immutable Transition retains the observation paired with its command, actor decision, effects, next state, and state hash; this is the technical decision-time record.",
@@ -24,7 +24,7 @@
   "presentation_surface": {
     "core_authority": "Core history and host debrief functions own decision-time observation retention and recovery; presentation remains read-only.",
     "host_summary_boundary": "Host summary reads are recoverable and hash-aligned but intentionally narrower than the core Transition record; they do not imply resolved-input or private-rationale disclosure.",
-    "browser_boundary": "The live GUI supports competitive-regional-v1 only and currently recovers summary history, not a browser-native full decision-time observation timeline.",
+    "browser_boundary": "The live GUI exposes shared campaign-coverage and currently recovers summary history, not a browser-native full decision-time observation timeline.",
     "new_surface_need": "none-required-for-current-recovery-boundary-record"
   },
   "open_work": [

@@ -47,7 +47,7 @@ class Phase12StabilizationAudioStateMappingTests(unittest.TestCase):
   def test_campaign_audio_boundary_and_limits_remain_bounded(self):
     surface = self.ledger["campaign_surface"]
     self.assertIn("text-first", surface["current_cli"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui"])
+    self.assertIn("shared campaign-coverage", surface["live_gui"])
     self.assertEqual(surface["shared_mapping_status"], "complete-current-shared-contract-mapping")
     self.assertEqual(surface["direct_campaign_audio_status"], "open-not-integrated")
     self.assertTrue(self.ledger["open_work"])

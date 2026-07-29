@@ -35,7 +35,7 @@
   "presentation_surface": {
     "current_cli": "The stabilization interactive result prints replay-match status, run seed/ruleset, and the educational debrief after the five-turn history.",
     "shared_gui": "The campaign-coverage and end-session renderers can display supplied stabilization debrief lines alongside committed history and replay metadata.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization debrief route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native stabilization-specific debrief route is claimed.",
     "audio": "Optional debrief music uses the existing debrief state; written history, hashes, and debrief text remain complete when muted or unavailable.",
     "new_asset_need": "none-required-by-current-cli-and-shared-debrief-contract"
   },

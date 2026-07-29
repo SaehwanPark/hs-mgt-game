@@ -1,0 +1,36 @@
+{
+  "schema_version": "phase12-live-campaign-coverage-v1",
+  "status": "complete-current-technical-browser-handoff-only",
+  "target": "Connect the existing campaign-coverage-v1 envelope to the loopback GUI launcher for stabilization-v1 and regional-affiliation-v1.",
+  "campaigns": [
+    "stabilization-v1",
+    "regional-affiliation-v1"
+  ],
+  "source_contract": {
+    "gui_route": "src/gui_server.rs: /api/v1/sessions/{session_id}/campaign-coverage",
+    "session_identity_route": "src/gui_server.rs: /api/v1/sessions/{session_id}",
+    "gui_store_call": "src/gui_server.rs: GetCampaignCoverageRequest",
+    "gui_launch_boundary": "src/gui_server.rs: GUI_CAMPAIGN_COVERAGE_CAMPAIGNS",
+    "host_adapter": "gui/host-adapter.mjs: getCampaignCoverage",
+    "launcher_campaign_set": "gui/app.mjs: SESSION_LAUNCH_CAMPAIGNS",
+    "campaign_fallback": "gui/app.mjs: loadCampaignCoverage",
+    "campaign_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "canonical_mutation": "gui/app.mjs: adapter.submitTurn(command)"
+  },
+  "findings": {
+    "loopback_route_uses_existing_typed_projection": true,
+    "both_campaign_coverage_campaigns_are_launchable": true,
+    "competitive_difficulty_and_action_path_remain_separate": true,
+    "campaign_decisions_use_host_submit_turn": true,
+    "existing_session_campaign_is_resolved_from_host": true,
+    "rejected_campaign_decisions_do_not_advance_history": true,
+    "browser_true_state_or_new_authority_added": false,
+    "campaign_specific_visual_audio_quality_review": false,
+    "human_accessibility_educational_or_public_release_review": false
+  },
+  "limits": [
+    "The shared campaign-coverage panel is a technical integration surface, not a campaign-specific visual or audio quality approval.",
+    "The browser does not receive true state, private rationale, resolved inputs, or local transition authority.",
+    "Screenshots, replay playback, durable persistence, human evaluation, provenance/legal review, and public-release approval remain open."
+  ]
+}
