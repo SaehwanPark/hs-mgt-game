@@ -2749,6 +2749,41 @@ review.
 - Run the focused Node renderer/parity test plus full Python/Rust, asset,
   generation, security, release, documentation, offline, browser/device,
   and visual/audio contract checks.
+# Request Summary — Campaign-aware first-month rail v0.13.59
+
+## User request
+
+Continue the visual/audio enhancement roadmap loop. After merging v0.13.58,
+implement the next unmet technical item: make the GUI first-session rail
+accurately distinguish competitive action drafting from the existing
+stabilization and regional-affiliation campaign-coverage handoff.
+
+## Target slice
+
+- Preserve the competitive `competitive-first-month-v1` seven-stage rail.
+- Add a separate campaign-coverage first-session rail for
+  `stabilization-v1` and `regional-affiliation-v1`.
+- Show start/load, visible inspection, host-shaped decision selection,
+  committed-stage review, and continuation in text-first presentation.
+- Advance only after the existing canonical host submission and coverage
+  refresh succeed; rejected decisions remain recoverable at decision selection.
+
+## Scope boundary
+
+This is a local presentation-state and documentation change. It must not add a
+host route, simulation rule, hidden-state field, client transition authority,
+asset, audio file, persistence behavior, or human-evaluation claim. Human
+accessibility, educational usability, campaign-specific visual/audio quality,
+and public-release gates remain open.
+
+## Evidence target
+
+Add focused derivation/renderer/live-handoff tests and update the current
+Phase 13.1 first-session evidence ledger, roadmap, guides, version projections,
+request/contract/QA/handoff records, and lessons for v0.13.59.
+
+---
+
 # Request Summary — Live campaign-coverage handoff v0.13.58
 
 ## Authorized outcome

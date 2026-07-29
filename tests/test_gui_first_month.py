@@ -23,10 +23,13 @@ class GuiFirstMonthTests(unittest.TestCase):
 
   def test_stage_function_covers_the_complete_first_month(self):
     script = r'''
-      import { FIRST_MONTH_FLOW_SCHEMA, FIRST_MONTH_STAGES, firstMonthStageFor } from "./gui/first-month.mjs";
+      import { CAMPAIGN_COVERAGE_FLOW_SCHEMA, CAMPAIGN_COVERAGE_STAGES, FIRST_MONTH_FLOW_SCHEMA, FIRST_MONTH_STAGES, firstMonthStageFor } from "./gui/first-month.mjs";
       const expected = ["start", "inspect", "draft", "validate", "submit", "resolution", "continue"];
+      const expectedCampaign = ["start", "inspect", "choose", "review", "continue"];
       if (FIRST_MONTH_FLOW_SCHEMA !== "competitive-first-month-v1") process.exit(1);
+      if (CAMPAIGN_COVERAGE_FLOW_SCHEMA !== "campaign-coverage-first-session-v1") process.exit(2);
       if (JSON.stringify(FIRST_MONTH_STAGES.map((stage) => stage.id)) !== JSON.stringify(expected)) process.exit(2);
+      if (JSON.stringify(CAMPAIGN_COVERAGE_STAGES.map((stage) => stage.id)) !== JSON.stringify(expectedCampaign)) process.exit(3);
       const states = [
         [{}, "start"],
         [{ sessionLoaded: true }, "inspect"],
@@ -39,6 +42,16 @@ class GuiFirstMonthTests(unittest.TestCase):
       ];
       for (const [state, expectedStage] of states) {
         if (firstMonthStageFor(state) !== expectedStage) process.exit(10);
+      }
+      const campaignStates = [
+        [{ flow: "campaign-coverage" }, "start"],
+        [{ flow: "campaign-coverage", sessionLoaded: true }, "inspect"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true }, "choose"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, decisionSubmitted: true }, "review"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, decisionSubmitted: true, refreshed: true }, "continue"],
+      ];
+      for (const [state, expectedStage] of campaignStates) {
+        if (firstMonthStageFor(state) !== expectedStage) process.exit(20);
       }
       if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true, submitted: true, resolutionVisible: true }) !== "resolution") process.exit(11);
       if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: -2 }) !== "draft") process.exit(12);
@@ -85,7 +98,10 @@ class GuiFirstMonthTests(unittest.TestCase):
       if (list.children[3]["aria-current"] !== "step") process.exit(3);
       if (!nodes.get("#first-month-flow-state").textContent.toLowerCase().includes("validate")) process.exit(4);
       if (!nodes.get("#first-month-flow-detail").textContent.includes("host")) process.exit(5);
-      console.log(JSON.stringify({ stage: flow.stage.id, states }));
+      flow.update({ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true });
+      if (list.children.length !== 5 || flow.stage.id !== "choose") process.exit(6);
+      if (!nodes.get("#first-month-flow-state").textContent.includes("5")) process.exit(7);
+      console.log(JSON.stringify({ stage: "validate", campaignStage: flow.stage.id, states }));
     '''
     result = subprocess.run(
       ["node", "--input-type=module", "-e", script],
@@ -251,6 +267,10 @@ class GuiFirstMonthTests(unittest.TestCase):
       "resolutionVisible: true",
       "refreshed: true",
       "competitive-first-month-v1",
+      "campaign-coverage-first-session-v1",
+      "campaign-coverage",
+      "coverageLoaded",
+      "decisionSubmitted",
     ):
       self.assertIn(marker, self.app + self.flow)
     for marker in (

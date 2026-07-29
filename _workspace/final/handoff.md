@@ -1,3 +1,45 @@
+# Final Handoff — Campaign-aware first-month rail v0.13.59
+
+## Result
+
+The GUI now preserves the competitive seven-stage first-month rail and selects
+a separate five-stage campaign-coverage rail for stabilization and regional
+affiliation. The campaign rail reports host-owned inspection, decision,
+committed-stage review, and continuation without teaching competitive draft or
+validation controls.
+
+## Changed files and behavior
+
+- Added `campaign-coverage-first-session-v1` stages in `gui/first-month.mjs`
+  while retaining `competitive-first-month-v1` unchanged.
+- Connected the campaign coverage client’s successful host refresh to the
+  campaign rail; accepted decisions advance only after refresh, while rejected,
+  malformed, and failed-refresh cases remain recoverable.
+- Updated GUI wording, guides, Phase 13.1 evidence, roadmap, spec, changelog,
+  lessons, generated credits/version projections, and release records. No
+  simulation rule, host route, hidden state, asset, audio file, or persistence
+  path changed.
+
+## Verification
+
+- Rust: `cargo fmt --check`, Clippy with warnings denied, and all 344 unit/
+  integration tests passed.
+- Python: all 761 discovered tests passed, including focused campaign-rail,
+  malformed-envelope, and failed-refresh recovery tests.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation, device-performance, offline, browser-compatibility, and
+  visual/audio contract checks passed.
+
+## Review boundary
+
+One medium-effort code review completed with no Critical/High findings; the
+review’s Medium measurement correction and Low recovery-test finding were
+fixed and revalidated. Human accessibility, educational usability,
+campaign-specific visual/audio quality, screenshots, durable persistence,
+provenance/legal review, and public release remain open.
+
+---
+
 # Final Handoff — Phase 12 live campaign-coverage handoff v0.13.58
 
 ## Result

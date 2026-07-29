@@ -7037,6 +7037,37 @@ Deferred / Non-Goals:
 - No new campaign rule, simulation state, hidden-state field, asset, audio
   file, true-state route, local transition authority, or new schema was added.
 
+### Visual/audio Phase 13 campaign-aware first-session rail (v0.13.59)
+
+Status: Complete for the current technical first-session presentation boundary
+only; structured first-time-user, human accessibility, educational, campaign-
+specific quality, provenance/legal, and public-release gates remain open.
+
+Done:
+
+- Preserved the competitive `competitive-first-month-v1` seven-stage rail and
+  added `campaign-coverage-first-session-v1` for stabilization and regional
+  affiliation.
+- The campaign rail presents visible inspection, host-shaped decision choice,
+  committed-stage review, and continuation; accepted decisions advance only
+  after the existing host coverage refresh, while rejected decisions remain at
+  decision choice.
+- Updated first-session guidance, the Phase 13.1 evidence ledger, roadmap,
+  lessons, request/contract/QA/handoff records, and package metadata to
+  `0.13.59`.
+
+Not Yet Done:
+
+- Human first-time-user comprehension, accessibility, educational usability,
+  campaign-specific visual/audio quality, screenshots, durable persistence,
+  browser/device certification, provenance/legal review, and public-release
+  approval.
+
+Deferred / Non-Goals:
+
+- No new host schema, simulation rule, transition, hidden-state field, asset,
+  audio file, persistence behavior, or client authority path was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

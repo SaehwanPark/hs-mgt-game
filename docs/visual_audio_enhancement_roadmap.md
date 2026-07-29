@@ -3623,9 +3623,10 @@ educational/accessibility gates remain open.
 - [x] Current technical first-session path documented and recoverable. Evidence:
   `docs/evaluation/phase13.1-first-session-boundary.json`,
   `tests/test_phase13_1_first_session_boundary.py`, the host-bound launch/load
-  tests, the seven-stage first-month flow tests, and the player guide; this
-  covers the current repository-owned technical path only and does not close
-  human comprehension, accessibility, educational, or classroom review.
+  tests, the competitive seven-stage and campaign-coverage five-stage flow
+  tests, and the player guide; this covers the current repository-owned
+  technical path only and does not close human comprehension, accessibility,
+  educational, or classroom review.
 - [ ] Competitive campaign coverage complete.
 - [x] Current technical competitive campaign boundary documented. Evidence:
   `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
@@ -3867,6 +3868,24 @@ are completed. Human-review gates remain open.
   first-time-user and educational evaluation, screenshots, durable persistence,
   browser/device certification, provenance/legal review, and public-release
   approval remain open.
+
+### v0.13.59 current campaign-aware first-session rail
+
+- `docs/evaluation/phase13.1-first-session-boundary.json` records the existing
+  competitive `competitive-first-month-v1` rail alongside the new
+  `campaign-coverage-first-session-v1` rail for stabilization and regional
+  affiliation.
+- `tests/test_gui_first_month.py` proves the competitive seven-stage behavior
+  remains unchanged and the campaign rail exposes start/load, inspection,
+  host-shaped decision selection, committed-stage review, and continuation.
+  `tests/test_phase12_live_campaign_coverage.py` proves accepted decisions
+  advance only after the host coverage refresh and rejected decisions remain
+  at decision selection.
+- This closes only the technical wording/state-machine boundary for the
+  repository-owned first-session surface. Structured first-time-user review,
+  campaign-specific visual/audio quality, screenshots, durable persistence,
+  browser/device certification, human accessibility/educational review,
+  provenance/legal review, and public-release approval remain open.
 
 ### Exit criteria
 

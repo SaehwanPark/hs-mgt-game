@@ -130,6 +130,111 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
     )
     self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
 
+  def test_campaign_coverage_rail_advances_only_after_host_refresh(self):
+    script = r'''
+      function makeNode(tagName = "div") {
+        return {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          classList: { add() {}, toggle() {} },
+          hidden: false,
+          value: "",
+          textContent: "",
+          append(...children) { this.children.push(...children); },
+          replaceChildren(...children) { this.children = children; },
+          addEventListener() {},
+          setAttribute(name, value) { this[name] = value; },
+          removeAttribute(name) { delete this[name]; },
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+          focus() {},
+        };
+      }
+      function makeRoot() {
+        const nodes = new Map();
+        return {
+          documentElement: makeNode("html"),
+          querySelector(selector) {
+            if (!nodes.has(selector)) nodes.set(selector, makeNode());
+            return nodes.get(selector);
+          },
+          querySelectorAll() { return []; },
+          addEventListener() {},
+        };
+      }
+      const documentStub = { createElement: (tagName) => makeNode(tagName), documentElement: makeNode("html") };
+      globalThis.document = undefined;
+      const { createActionClient } = await import("./gui/app.mjs");
+      globalThis.document = documentStub;
+      globalThis.matchMedia = () => ({ matches: false });
+
+      const envelope = {
+        schema_version: "campaign-coverage-v1",
+        campaign_role: "Stabilization",
+        session: { session_id: "coverage-1", campaign: "stabilization-v1", turn: 1, max_turns: 5 },
+        stage: { label: "Assess", detail: "Visible stage" },
+        briefing: [], metrics: [], actors: [], processes: [],
+        decisions: [{ label: "Assess", command_template: "assess", parameters: [], uncertainty: "Visible uncertainty" }],
+        history: [], debrief: [],
+      };
+      function adapterFor({ reject = false, failRefreshAfterCommit = false } = {}) {
+        return {
+          sessionId: "coverage-1",
+          campaign: "stabilization-v1",
+          malformed: false,
+          failRefresh: false,
+          activateSession(sessionId, campaign) { this.sessionId = sessionId; this.campaign = campaign; },
+          async getCampaignCoverage() {
+            if (this.failRefresh) throw new Error("coverage refresh failed");
+            if (this.malformed) return { ...envelope, schema_version: "unsupported" };
+            return envelope;
+          },
+          async submitTurn(command) {
+            if (reject) throw new Error("host rejected decision");
+            if (command !== "assess") throw new Error("unexpected command");
+            this.failRefresh = failRefreshAfterCommit;
+            return { accepted: true };
+          },
+        };
+      }
+
+      const client = createActionClient({ adapter: adapterFor(), root: makeRoot() });
+      await client.load("coverage-1");
+      if (client.firstMonthFlow.stage.id !== "choose") process.exit(1);
+      const accepted = await client.campaignCoverage.submit("assess");
+      if (!accepted.ok || client.firstMonthFlow.stage.id !== "continue") process.exit(2);
+
+      const rejectedClient = createActionClient({ adapter: adapterFor({ reject: true }), root: makeRoot() });
+      await rejectedClient.load("coverage-1");
+      const rejected = await rejectedClient.campaignCoverage.submit("assess");
+      if (rejected.ok || rejectedClient.firstMonthFlow.stage.id !== "choose") process.exit(3);
+
+      const malformedAdapter = adapterFor();
+      const malformedClient = createActionClient({ adapter: malformedAdapter, root: makeRoot() });
+      await malformedClient.load("coverage-1");
+      malformedAdapter.malformed = true;
+      const malformed = await malformedClient.campaignCoverage.load("coverage-1");
+      if (malformed.ok || malformedClient.firstMonthFlow.stage.id !== "choose") process.exit(4);
+
+      const refreshFailureClient = createActionClient({
+        adapter: adapterFor({ failRefreshAfterCommit: true }),
+        root: makeRoot(),
+      });
+      await refreshFailureClient.load("coverage-1");
+      const refreshFailure = await refreshFailureClient.campaignCoverage.submit("assess");
+      if (refreshFailure.ok || refreshFailureClient.firstMonthFlow.stage.id !== "choose") process.exit(5);
+      console.log(JSON.stringify({ accepted: client.firstMonthFlow.stage.id, rejected: rejectedClient.firstMonthFlow.stage.id, malformed: malformedClient.firstMonthFlow.stage.id, refreshFailure: refreshFailureClient.firstMonthFlow.stage.id }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
 
 if __name__ == "__main__":
   unittest.main()

@@ -58,10 +58,15 @@ interact.
 
 2. Keep that terminal running and open the printed URL, normally
    `http://127.0.0.1:7878`.
-3. Select `competitive-regional-v1`, seed `42`, and Normal difficulty.
-4. Choose **Start competitive regional session**.
-5. Inspect the briefing and regional market, add at least two action drafts,
-   validate the unchanged draft, submit it, then review or skip the resolution.
+3. Select a campaign and seed `42`. Difficulty applies only to
+   `competitive-regional-v1`.
+4. Choose **Start selected session**. Competitive uses the action rail; the
+   stabilization and regional-affiliation sessions use the host-shaped
+   campaign-coverage rail.
+5. For competitive, inspect the briefing and regional market, add at least two
+   action drafts, validate the unchanged draft, submit it, then review or skip
+   the resolution. For the other campaigns, inspect the visible stage and
+   choose one host-shaped decision, then review the refreshed stage.
 
 Do not open `gui/index.html` directly when you want to play: direct/static mode
 contains demonstration data and no live game host. For audio controls, alternate

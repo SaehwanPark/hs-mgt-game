@@ -24,6 +24,10 @@ EXPECTED_SOURCE_CONTRACT = {
     "gui/first-month.mjs",
     "FIRST_MONTH_FLOW_SCHEMA",
   ),
+  "campaign_first_session_flow": (
+    "gui/first-month.mjs",
+    "CAMPAIGN_COVERAGE_FLOW_SCHEMA",
+  ),
   "launch_test": (
     "tests/test_gui_session_launch.py",
     "test_launcher_start_and_existing_load_use_host_boundary",
@@ -31,6 +35,10 @@ EXPECTED_SOURCE_CONTRACT = {
   "first_month_sequence_test": (
     "tests/test_gui_first_month.py",
     "test_host_adapter_sequence_reaches_continue_and_rejection_stays_recoverable",
+  ),
+  "campaign_first_session_test": (
+    "tests/test_phase12_live_campaign_coverage.py",
+    "test_campaign_coverage_rail_advances_only_after_host_refresh",
   ),
   "recovery_guidance": (
     "docs/guides/gui-how-to-play.md",
@@ -95,6 +103,9 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
       '"submit"',
       '"resolution"',
       '"continue"',
+      '"choose"',
+      '"review"',
+      "campaign-coverage-first-session-v1",
     ):
       self.assertIn(marker, flow)
     for forbidden in ("CompetitiveWorldState", "resolved_inputs", "transition_competitive"):
@@ -104,12 +115,13 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
     self.assertEqual(
       self.ledger["technical_path"],
       [
-        "launch or load a competitive host session",
-        "inspect actor-visible briefing, market, resources, facilities, workforce, payer, and rival signals",
-        "draft and host-validate contextual actions",
-        "submit a validated month through the host boundary",
-        "review or skip the committed resolution",
-        "continue from the refreshed actor-visible observation",
+        "launch or load one of the supported host campaigns",
+        "competitive sessions inspect actor-visible briefing, market, resources, facilities, workforce, payer, and rival signals",
+        "competitive sessions draft and host-validate contextual actions",
+        "competitive sessions submit a validated month through the host boundary",
+        "campaign-coverage sessions inspect visible campaign stage, actors, processes, decisions, history, and debrief",
+        "campaign-coverage sessions choose a host-shaped decision and review the committed stage",
+        "continue from the refreshed actor-visible observation or campaign stage",
         "recover from rejected submissions, refresh failures, storage limits, audio limits, and pacing friction",
       ],
     )
@@ -118,6 +130,8 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
       {
         "launch_and_existing_load_are_host_bound": True,
         "seven_first_month_stages_are_source_bound": True,
+        "five_campaign_coverage_first_session_stages_are_source_bound": True,
+        "campaign_coverage_acceptance_requires_host_refresh": True,
         "written_recovery_guidance_is_present": True,
         "limitations_and_actor_visibility_are_present": True,
         "human_first_time_user_evaluation": False,
@@ -126,7 +140,7 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
     )
     self.assertEqual(
       self.ledger["authority_boundary"],
-      "The Rust host owns session creation, validation, submission, resolution, history, and refreshed observations; the browser stores only local presentation preferences and draft UI state.",
+      "The Rust host owns session creation, campaign decisions, validation, submission, resolution, history, and refreshed observations; the browser stores only local presentation preferences and draft UI state.",
     )
     self.assertEqual(
       self.ledger["limits"],
@@ -146,7 +160,8 @@ class Phase131FirstSessionBoundaryTests(unittest.TestCase):
     for marker in (
       "cargo run --bin hs-mgt-game-gui",
       "Start competitive regional session",
-      "The First-month path panel tracks seven presentation handoffs",
+      "Competitive sessions track seven action handoffs",
+      "five campaign-coverage handoffs",
       "Validate draft with host",
       "Submit validated month",
       "Skip to result",
