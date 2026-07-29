@@ -1,3 +1,39 @@
+# Presentation Contract — Campaign decision-time observation recovery v0.13.61
+
+## Goal and Authorization
+
+Let a player revisit the visible observation that preceded each committed
+stabilization or regional-affiliation decision. The host remains authoritative;
+the browser renders optional written observation lines alongside immutable
+turn/command/hash summaries.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Decision-time observation | Existing host `Transition.observation` / `AffiliationTransition.observation` formatted through visible session helpers | Optional on `TransitionSummary`; absent for older/competitive summaries | Do not expose resolved inputs, private rationale, true state, or future outcome |
+| Turn and command | Existing immutable `TransitionSummary` | Paired with the committed entry | Do not allow local edits or inferred command results |
+| State hash | Existing host transition summary | Existing hash remains host-owned | Do not recalculate or use it as causal proof |
+| Written fallback | Existing history/command/effect/debrief text | Always available if disclosure is absent or audio is unavailable | Do not make decoration or audio required |
+
+## Visual, Motion, and Audio Semantics
+
+The browser uses native written `<details>`/`<summary>` disclosure semantics
+for observation lines. No new image, animation, audio cue, or color-only state
+is introduced. Reduced motion and audio-off behavior remain unchanged.
+
+## Accessibility, Authority, and Evidence Limits
+
+The disclosure is text-first and tied to a committed history item. Technical
+keyboard/DOM/source checks do not establish human comprehension, accessibility,
+educational usefulness, causal understanding, or visual quality.
+
+## Non-Goals
+
+- No route, schema version, simulation rule, persistence, replay regeneration,
+  true-state view, resolved-input field, private rationale, or causal graph.
+- No instructor-only or competitive-path redesign.
+
 # Presentation Contract — Direct campaign audio projection v0.13.60
 
 ## Goal and Authorization

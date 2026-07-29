@@ -128,6 +128,10 @@ campaign coverage, host-supplied music/cue metadata is optional and remains
 limited to the existing catalog; the written stage and decision surface stays
 complete when it is absent or muted.
 
+After a campaign decision commits, expand **Decision-time observation** in the
+history entry to revisit the visible information that preceded that command.
+This is host-supplied written context, not a hidden-state or outcome forecast.
+
 ## Credits and provenance
 
 Open **Asset credits and provenance** in the settings panel to inspect the

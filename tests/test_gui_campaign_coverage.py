@@ -67,6 +67,7 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       "campaignAudioInput",
       "campaignMusicStateId",
       "campaignAudioCueIds",
+      "Decision-time observation",
     ):
       self.assertIn(marker, self.app)
     for selector in (

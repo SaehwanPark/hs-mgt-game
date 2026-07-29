@@ -3478,8 +3478,9 @@ Deferred / Non-Goals:
   `docs/evaluation/phase12-decision-time-recovery-boundary.json` and
   `tests/test_phase12_decision_time_recovery_boundary.py`; immutable core/CLI
   history retains observation-before-command records and host history/replay
-  summaries remain hash-aligned, while full browser per-decision observation
-  recovery remains explicitly open.
+  summaries remain hash-aligned; the current campaign-coverage history now
+  renders optional written per-decision observation details while competitive
+  history remains on its existing path.
 - [x] Causal attribution visualized. Evidence:
   `docs/evaluation/phase12-causal-attribution-boundary.json` and
   `tests/test_phase12_causal_attribution_boundary.py`; host-sourced direct
@@ -3905,6 +3906,22 @@ are completed. Human-review gates remain open.
 - This closes only the current technical direct-projection boundary. Campaign-
   specific visual/audio quality, listening, accessibility, educational,
   provenance/legal, persistence, device, and public-release gates remain open.
+
+### v0.13.61 current campaign decision-time observation recovery
+
+- `src/mcp/session.rs` adds an optional `TransitionSummary.observation` field
+  populated from the existing actor-visible stabilization and affiliation
+  observation formatters. Competitive summaries omit the field, and legacy
+  summaries without it remain valid.
+- `gui/app.mjs` renders each supplied campaign observation as a native written
+  `Decision-time observation` disclosure tied to the committed turn, command,
+  and host state hash. No local state, resolved input, private rationale, or
+  causal interpretation is added.
+- `docs/evaluation/phase12-decision-time-recovery-boundary.json` and
+  `tests/test_phase12_decision_time_recovery_boundary.py` record the current
+  technical browser recovery closure. Causal visualization, instructor
+  surfaces, human accessibility, educational usability, and quality review
+  remain open.
 
 ### Exit criteria
 

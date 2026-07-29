@@ -177,6 +177,8 @@ pub struct EndSessionReplayMetadata {
 pub struct TransitionSummary {
   pub turn: u32,
   pub command: String,
+  #[serde(default, skip_serializing_if = "Option::is_none")]
+  pub observation: Option<Vec<String>>,
   pub events: Vec<String>,
   pub effects: Vec<String>,
   pub state_hash: String,
@@ -1311,6 +1313,10 @@ pub(crate) fn summarize_stabilization_transition(transition: &Transition) -> Tra
   TransitionSummary {
     turn: transition.next.turn,
     command: format!("{:?}", transition.command),
+    observation: Some(format_stabilization_observation(
+      &transition.prior,
+      &transition.observation,
+    )),
     events: transition.events.iter().map(format_event).collect(),
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
@@ -1329,6 +1335,7 @@ pub(crate) fn summarize_competitive_transition(
   TransitionSummary {
     turn: transition.next.turn,
     command,
+    observation: None,
     events: transition.events.iter().map(format_event).collect(),
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
@@ -1342,6 +1349,7 @@ pub(crate) fn summarize_affiliation_transition(
   TransitionSummary {
     turn: transition.next.turn,
     command: format!("{:?}", transition.command),
+    observation: Some(format_affiliation_observation(&transition.observation)),
     events: transition.events.iter().map(format_event).collect(),
     effects: transition.effects.iter().map(format_effect).collect(),
     state_hash: transition.state_hash.clone(),
@@ -2379,6 +2387,28 @@ mod tests {
     );
     assert_eq!(stabilization_before, stabilization_after);
 
+    let stabilization_committed = start(&mut store, "stabilization-v1");
+    let stabilization_committed = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: stabilization_committed.session_id,
+        command_text: "8 18 112".to_string(),
+      })
+      .expect("stabilization transition");
+    let stabilization_history = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: stabilization_committed.session_id,
+      })
+      .expect("stabilization committed coverage")
+      .history;
+    assert_eq!(stabilization_history.len(), 1);
+    assert_eq!(
+      stabilization_history[0]
+        .observation
+        .as_ref()
+        .expect("stabilization decision observation")[0],
+      "Turn 1"
+    );
+
     let affiliation = start(&mut store, "regional-affiliation-v1");
     let affiliation_coverage = store
       .get_campaign_coverage(GetCampaignCoverageRequest {
@@ -2419,6 +2449,54 @@ mod tests {
         .metrics
         .iter()
         .any(|metric| metric.label == "Continuity commitment")
+    );
+
+    let affiliation_committed = start(&mut store, "regional-affiliation-v1");
+    let affiliation_committed = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: affiliation_committed.session_id,
+        command_text: "assess".to_string(),
+      })
+      .expect("affiliation transition");
+    let affiliation_history = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: affiliation_committed.session_id,
+      })
+      .expect("affiliation committed coverage")
+      .history;
+    assert_eq!(affiliation_history.len(), 1);
+    assert!(
+      affiliation_history[0]
+        .observation
+        .as_ref()
+        .expect("affiliation decision observation")[0]
+        .starts_with("Stage 1:")
+    );
+    let mut legacy_transition_value =
+      serde_json::to_value(&stabilization_history[0]).expect("transition summary value");
+    legacy_transition_value
+      .as_object_mut()
+      .expect("transition summary object")
+      .remove("observation");
+    let legacy_transition: TransitionSummary =
+      serde_json::from_value(legacy_transition_value).expect("legacy transition summary");
+    assert!(legacy_transition.observation.is_none());
+
+    let competitive = start(&mut store, "competitive-regional-v1");
+    let competitive = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: competitive.session_id,
+        command_text: "hold".to_string(),
+      })
+      .expect("competitive transition");
+    let competitive_json =
+      serde_json::to_value(competitive.latest_transition.expect("competitive summary"))
+        .expect("competitive summary value");
+    assert!(
+      !competitive_json
+        .as_object()
+        .expect("competitive summary object")
+        .contains_key("observation")
     );
     for json in [stabilization_json, affiliation_json] {
       for forbidden in [

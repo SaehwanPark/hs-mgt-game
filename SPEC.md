@@ -7097,6 +7097,38 @@ Deferred / Non-Goals:
 - No new route, schema version, simulation rule, hidden-state field, asset,
   audio file, local transition authority, or persistence behavior was added.
 
+### Visual/audio campaign decision-time observation recovery (v0.13.61)
+
+Status: Complete for the current technical browser recovery of actor-visible
+decision-time observations in stabilization and regional-affiliation campaign
+coverage only; human comprehension, accessibility, educational, causal,
+quality, persistence, device, provenance/legal, and public-release gates remain
+open.
+
+Done:
+
+- Added optional `TransitionSummary.observation` lines from the existing host
+  observation formatters for stabilization and regional affiliation. Current
+  competitive summaries omit the field, and legacy summaries without it remain
+  compatible.
+- Added a native written `Decision-time observation` disclosure to each
+  campaign history entry when the host supplies the optional field. The
+  disclosure remains paired with the committed turn, command, and state hash.
+- Synchronized the decision-time recovery ledger, roadmap, guides, lessons,
+  request/contract/QA/handoff records, and package metadata to `0.13.61`.
+
+Not Yet Done:
+
+- Causal attribution visualization, instructor surfaces, human visual/
+  accessibility/educational review, durable persistence, device/browser
+  certification, provenance/legal review, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new route, schema version, simulation rule, true-state field, resolved
+  input, private rationale, causal graph, asset, audio file, persistence, or
+  competitive-path redesign was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

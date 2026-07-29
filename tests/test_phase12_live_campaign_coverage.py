@@ -237,6 +237,62 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
     )
     self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
 
+  def test_campaign_history_renders_decision_time_observation_disclosure(self):
+    script = r'''
+      function makeNode(tagName = "div") {
+        return {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          classList: { add() {}, toggle() {} },
+          hidden: false,
+          textContent: "",
+          append(...children) { this.children.push(...children); },
+          replaceChildren(...children) { this.children = children; },
+          addEventListener() {},
+          setAttribute(name, value) { this[name] = value; },
+          removeAttribute(name) { delete this[name]; },
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+          focus() {},
+        };
+      }
+      globalThis.document = undefined;
+      const { renderCampaignCoverage } = await import("./gui/app.mjs");
+      globalThis.document = { createElement: (tagName) => makeNode(tagName), documentElement: makeNode("html") };
+      const nodes = new Map();
+      const root = {
+        querySelector(selector) {
+          if (!nodes.has(selector)) nodes.set(selector, makeNode());
+          return nodes.get(selector);
+        },
+        querySelectorAll() { return []; },
+      };
+      const result = renderCampaignCoverage({
+        schema_version: "campaign-coverage-v1",
+        campaign_role: "Stabilization",
+        session: { campaign: "stabilization-v1", turn: 2, max_turns: 5 },
+        stage: { label: "Turn 2", detail: "Visible stage" },
+        briefing: [], metrics: [], actors: [], processes: [], decisions: [], debrief: [],
+        history: [{ turn: 1, command: "stabilize", state_hash: "hash-1", observation: ["Turn 1", "Cash: 100"] }],
+      }, root);
+      if (!result.ok) process.exit(1);
+      const history = nodes.get("#campaign-history-list");
+      const item = history.children[0];
+      const details = item.children.find((child) => child.tagName === "DETAILS");
+      if (!details || details.children[0].textContent !== "Decision-time observation") process.exit(2);
+      if (!details.children[1].children.some((line) => line.textContent === "Cash: 100")) process.exit(3);
+      console.log(JSON.stringify({ detail: details.children[0].textContent, lines: details.children[1].children.length }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
   def test_campaign_coverage_rail_advances_only_after_host_refresh(self):
     script = r'''
       function makeNode(tagName = "div") {

@@ -1,3 +1,44 @@
+# Request Summary — Campaign decision-time observation recovery v0.13.61
+
+## Authorized outcome
+
+Continue the roadmap loop with a bounded browser-native recovery slice:
+expose existing actor-visible observations paired with stabilization and
+regional-affiliation committed decisions through the campaign-coverage history
+and render them as optional written details.
+
+## Target slice
+
+- Add an optional observation-lines field to `TransitionSummary`, populated
+  from existing visible host formatters for stabilization and affiliation.
+- Add an accessible campaign-history disclosure tied to each committed
+  turn/command, preserving fixtures without the field and competitive paths.
+- Update the decision-time recovery ledger, roadmap/spec/guides, tests,
+  version, generated records, QA, and handoff documentation to v0.13.61.
+
+## Non-goals
+
+- Do not add a route, schema version, asset, audio file, simulation rule,
+  persistence behavior, replay regeneration, true-state field, resolved input,
+  private rationale, causal graph, or instructor authority.
+- Do not claim human comprehension, accessibility, educational value, or
+  visual quality from technical disclosure tests.
+
+## Validation target
+
+Focused Rust/Node/Python observation-recovery tests, full Rust/Python suites,
+release metadata, documentation links, asset/security/generation,
+device-performance, offline, browser-compatibility, visual/audio contract,
+and diff checks, followed by exactly one medium-effort code review and PR
+handoff.
+
+## Evidence limits
+
+This slice proves only technical recovery of visible decision-time observation
+text. Causal visualization, counterfactual/instructor surfaces, human
+accessibility, educational usability, quality, persistence, and public-release
+gates remain open.
+
 # Request Summary — Direct campaign audio projection v0.13.60
 
 ## Authorized outcome

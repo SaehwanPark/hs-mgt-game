@@ -423,6 +423,11 @@ campaign cues, while omitted audio metadata preserves the older visible-state
 and regional-milestone fallback. Audio remains optional and the written
 campaign surface is complete without it.
 
+Committed stabilization and regional-affiliation history entries may also
+include optional actor-visible observation lines from before the corresponding
+command. The browser presents them in a native written disclosure; older
+entries without the field and competitive history remain valid.
+
 For reproducible interface-task traces, inject an optional recorder from
 `playtest.mjs` into any client. It emits `schema_version: "gui-playtest-v1"`
 with declared campaign/role/task metadata, allowlisted onboarding/settings/

@@ -1,5 +1,19 @@
 # Lessons Learned
 
+## Keep Decision-Time Recovery Host-Sourced and Written
+
+- Context: core stabilization and affiliation transitions already retained the
+  actor-visible observation paired with each command, but campaign history
+  summaries exposed only command/effect/hash text to the browser.
+- Risk: asking players to judge an earlier decision from current or outcome
+  text can blur the information boundary and encourage hindsight reasoning.
+- Resolution: add an optional summary field populated by existing visible
+  formatters and render it as a native written disclosure tied to the committed
+  history entry; omit it for competitive summaries and preserve older payloads.
+- Prevention: expose only pre-command visible observations, keep hashes and
+  commands host-owned, test absent-field compatibility, and keep causal or
+  educational claims separate from technical recovery evidence.
+
 ## Keep Host Audio Metadata Visible-Only and Optional
 
 - Context: campaign coverage already exposed typed stage, actor, process,
