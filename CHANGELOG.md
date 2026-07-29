@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.53] - 2026-07-29
+
+- Recorded the current technical first-session path across host-bound launch/
+  load, actor-visible inspection, contextual action validation, committed
+  resolution review, continuation, and written recovery guidance.
+- Kept first-time-user comprehension, human accessibility, educational
+  usability, and classroom readiness as separate evaluation gates.
+
 ## [0.13.52] - 2026-07-29
 
 - Recorded the current repository-owned attribution boundary across canonical

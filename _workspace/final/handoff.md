@@ -778,6 +778,32 @@ replay, or debrief behavior changed.
 - Focused and full verification, one medium-reasoning code review, PR, merge,
   and temporary-branch cleanup remain pending.
 
+---
+# Final Handoff — Phase 13.1 technical first-session boundary v0.13.53
+
+## Result
+
+Recorded the current technical first-session path across host-bound launch/load,
+actor-visible inspection, contextual drafting and validation, committed
+resolution review, continuation, and written recovery guidance.
+
+## Evidence boundary
+
+The ledger and focused test bind the seven-stage first-month rail and existing
+GUI/session-launch tests without adding browser-owned session or simulation
+authority. Human first-time-user comprehension, accessibility, educational,
+classroom, and broader campaign coverage review remain open.
+
+No runtime, simulation, asset, audio, persistence, replay, or authority
+behavior changed.
+
+## Handoff and merge gate
+
+- Base: `main` at v0.13.52.
+- Working branch: `codex/phase13-1-first-session-boundary-v0-13-53`.
+- Focused/full verification, one medium-reasoning code review, PR, merge, and
+  temporary-branch cleanup remain pending.
+
 ## Handoff and merge gate
 
 - Base: `main` at v0.13.50.

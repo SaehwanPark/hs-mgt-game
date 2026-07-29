@@ -969,6 +969,12 @@ Unverified portrait previews remain outside release and runtime attribution;
 this is a provenance projection boundary, not legal, ownership, training-data,
 resemblance, or public-release approval.
 
+The v0.13.53 technical first-session boundary records the existing GUI launch/
+load, host validation/submission, seven-stage first-month, continuation, and
+written recovery contracts. It adds no browser-owned session or simulation
+state and does not establish first-time-user, accessibility, educational, or
+classroom readiness.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

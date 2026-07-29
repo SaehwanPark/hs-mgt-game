@@ -2589,3 +2589,35 @@ release-manifest parity, and the exclusion of unverified portrait previews.
 - Run the focused attribution test plus full Python/Rust, asset, generation,
   security, release, credits, documentation, offline, browser/device-policy,
   and visual/audio contract checks.
+
+# Request Summary — Visual/audio technical first-session boundary v0.13.53
+
+## Scope
+
+Record the current repository-owned first-session path from host-bound
+launch/load through actor-visible inspection, contextual drafting and
+validation, committed resolution review, continuation, and written recovery.
+
+## Target slice
+
+- Bind launch/load controls and adapter calls to the host authority boundary.
+- Bind the seven-stage first-month path to existing GUI sources and tests.
+- Preserve written recovery, actor-visible limitations, local presentation
+  preference boundaries, and non-authoritative browser behavior.
+
+## Sources and expected files
+
+- `gui/index.html`, `gui/app.mjs`, `gui/first-month.mjs`, and
+  `docs/guides/gui-how-to-play.md`.
+- `tests/test_gui_session_launch.py`, `tests/test_gui_first_month.py`, and new
+  `tests/test_phase13_1_first_session_boundary.py`.
+- New `docs/evaluation/phase13.1-first-session-boundary.json` plus additive
+  roadmap, SDD, architecture, changelog, lessons, contract, QA, handoff, and
+  release metadata updates.
+
+## Non-goals and validation
+
+- Do not add browser-owned session or simulation state, routes, persistence,
+  assets, audio, replay authority, or human evaluation results.
+- Run the focused first-session test plus full Python/Rust, GUI, release,
+  documentation, asset, browser/device-policy, and visual/audio checks.
