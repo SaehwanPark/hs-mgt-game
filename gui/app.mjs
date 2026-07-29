@@ -332,7 +332,7 @@ function recordPlaytestFailure(recorder, code, message, recoverable = true) {
   recorder.recordFailure({ class: failureClass, message, recoverable });
 }
 
-export function createPresentationSettings({ root = document, recorder, storage } = {}) {
+export function createPresentationSettings({ root = document, recorder, storage, audio } = {}) {
   if (root.__hsMgtPresentationSettings) return root.__hsMgtPresentationSettings;
   bindSkipNavigation(root);
   let persisted = {};
@@ -341,35 +341,92 @@ export function createPresentationSettings({ root = document, recorder, storage 
   } catch {
     persisted = {};
   }
+  const persistedLowAudioState = persisted.low_distraction_audio_snapshot;
+  const hasPersistedLowAudioState = persistedLowAudioState
+    && typeof persistedLowAudioState.muted === "boolean"
+    && typeof persistedLowAudioState.reducedNotifications === "boolean";
   const state = {
+    low_distraction: Boolean(persisted.low_distraction && hasPersistedLowAudioState),
     reduced_motion: persisted.reduced_motion ?? Boolean(globalThis.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches),
     text_equivalents: persisted.text_equivalents ?? true,
     text_scale: persisted.text_scale === "large" ? "large" : "standard",
   };
+  let lowDistractionAudioState = state.low_distraction ? { ...persistedLowAudioState } : null;
   const save = () => {
     try {
-      (storage ?? globalThis.localStorage)?.setItem?.("hs-mgt-presentation-settings", JSON.stringify(state));
+      const persistedState = {
+        ...state,
+        low_distraction_audio_snapshot: state.low_distraction && lowDistractionAudioState
+          ? {
+            muted: lowDistractionAudioState.muted,
+            reducedNotifications: lowDistractionAudioState.reducedNotifications,
+          }
+          : null,
+      };
+      (storage ?? globalThis.localStorage)?.setItem?.("hs-mgt-presentation-settings", JSON.stringify(persistedState));
     } catch {
       // Settings remain session-local when storage is unavailable.
     }
   };
+  const applyLowDistractionAudio = () => {
+    if (!audio) return;
+    if (state.low_distraction && !lowDistractionAudioState) {
+      lowDistractionAudioState = typeof audio.state === "function" ? audio.state() : {};
+      audio.setMuted?.(true);
+      audio.setReducedNotifications?.(true);
+    } else if (!state.low_distraction && lowDistractionAudioState) {
+      if (typeof lowDistractionAudioState.muted === "boolean") audio.setMuted?.(lowDistractionAudioState.muted);
+      if (typeof lowDistractionAudioState.reducedNotifications === "boolean") {
+        audio.setReducedNotifications?.(lowDistractionAudioState.reducedNotifications);
+      }
+      lowDistractionAudioState = null;
+    }
+  };
   const apply = () => {
-    root.documentElement?.dataset && (root.documentElement.dataset.reducedMotion = String(state.reduced_motion));
-    root.documentElement?.dataset && (root.documentElement.dataset.textEquivalents = String(state.text_equivalents));
-    root.documentElement?.dataset && (root.documentElement.dataset.textScale = state.text_scale);
+    applyLowDistractionAudio();
+    const effectiveReducedMotion = state.reduced_motion || state.low_distraction;
+    const effectiveTextEquivalents = state.text_equivalents || state.low_distraction;
+    const effectiveTextScale = state.low_distraction ? "large" : state.text_scale;
+    root.documentElement?.dataset && (root.documentElement.dataset.lowDistraction = String(state.low_distraction));
+    root.documentElement?.dataset && (root.documentElement.dataset.reducedMotion = String(effectiveReducedMotion));
+    root.documentElement?.dataset && (root.documentElement.dataset.textEquivalents = String(effectiveTextEquivalents));
+    root.documentElement?.dataset && (root.documentElement.dataset.textScale = effectiveTextScale);
+    const low = root.querySelector("#settings-low-distraction");
     const motion = root.querySelector("#settings-reduced-motion");
     const text = root.querySelector("#settings-text-equivalents");
     const scale = root.querySelector("#settings-text-scale");
-    if (motion) motion.checked = state.reduced_motion;
-    if (text) text.checked = state.text_equivalents;
-    if (scale) scale.value = state.text_scale;
+    if (low) low.checked = state.low_distraction;
+    if (motion) {
+      motion.checked = effectiveReducedMotion;
+      motion.disabled = state.low_distraction;
+    }
+    if (text) {
+      text.checked = effectiveTextEquivalents;
+      text.disabled = state.low_distraction;
+    }
+    if (scale) {
+      scale.value = effectiveTextScale;
+      scale.disabled = state.low_distraction;
+    }
+    for (const control of root.querySelectorAll?.("#audio-panel button, #audio-panel input, #audio-panel select") ?? []) {
+      control.disabled = state.low_distraction;
+    }
     const status = root.querySelector("#settings-state");
     if (status) {
-      const motionLabel = state.reduced_motion ? "Reduced motion is active." : "Standard motion is active.";
-      const cueLabel = state.text_equivalents ? "Optional cue explanations are visible." : "Optional cue explanations are hidden.";
-      status.textContent = `${motionLabel} ${cueLabel} Written results remain complete.`;
+      const modeLabel = state.low_distraction ? "Low-distraction mode is active." : "Low-distraction mode is off.";
+      const motionLabel = effectiveReducedMotion ? "Reduced motion is active." : "Standard motion is active.";
+      const cueLabel = effectiveTextEquivalents ? "Optional cue explanations are visible." : "Optional cue explanations are hidden.";
+      const scaleLabel = effectiveTextScale === "large" ? "Large text is active." : "Standard text is active.";
+      status.textContent = `${modeLabel} ${motionLabel} ${scaleLabel} ${cueLabel} Written results remain complete.`;
     }
   };
+  root.querySelector("#settings-low-distraction")?.addEventListener("change", (event) => {
+    event.__hsMgtPlaytestRecorded = true;
+    state.low_distraction = Boolean(event.target.checked);
+    recorder?.record("settings_changed", { setting: "low_distraction", value: state.low_distraction });
+    apply();
+    save();
+  });
   root.querySelector("#settings-reduced-motion")?.addEventListener("change", (event) => {
     event.__hsMgtPlaytestRecorded = true;
     state.reduced_motion = Boolean(event.target.checked);
@@ -1062,7 +1119,7 @@ export function createCampaignCoverageClient({
 } = {}) {
   let currentEnvelope = null;
   const audioClient = audio ?? createAudioClient({ root, recorder });
-  const settings = createPresentationSettings({ root, recorder });
+  const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
   async function load(sessionId = adapter?.sessionId) {
     configureRecovery(root, () => load(sessionId), recorder);
@@ -1846,7 +1903,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
-  const settings = createPresentationSettings({ root, recorder });
+  const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
   function render(envelope) {
     const result = renderReadOnlyEnvelope(envelope, root);
@@ -2102,7 +2159,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({ adapter: coverageAdapter, root, audio: audioClient, recorder });
-  const settings = createPresentationSettings({ root, recorder });
+  const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");

@@ -3769,3 +3769,12 @@ consent and media limits, anonymized feedback, and a pending decision state.
 No participant result, low-distraction runtime mode, classroom multiplayer,
 new host route, or authority path is introduced. Human accessibility,
 educational, audio-quality, legal, and public-release review remain open.
+
+## Low-Distraction Mode QA — v0.13.47
+
+`pass` for the local presentation-only mode. The toggle forces the documented
+motion, text, written-cue, mute, and notification recipe; conflicting controls
+are locked while active and prior local preferences are restored on exit.
+Focused JavaScript behavior evidence covers the enable/restore path. No host
+command, transition, replay, persistence, or simulation authority changes.
+Human accessibility and educational review remain open.

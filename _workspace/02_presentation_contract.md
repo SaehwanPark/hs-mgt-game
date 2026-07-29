@@ -3107,3 +3107,17 @@ This preparation does not create classroom multiplayer, a runtime
 low-distraction mode, a new observation or debrief route, participant data,
 media storage, or host authority. It does not establish accessibility,
 educational, audio-quality, legal, or public-release approval.
+
+## Low-Distraction Mode Addendum — v0.13.47
+
+The GUI now exposes a local **Low-distraction mode** toggle. When enabled, the
+presentation layer forces reduced motion, Large text, written cue explanations,
+muted audio, and reduced notifications; it temporarily locks conflicting
+presentation/audio controls and restores their prior local values when disabled.
+The mode preference uses the existing browser-local/session-local settings
+boundary.
+
+The mode does not enter commands, host validation, stochastic inputs,
+transitions, immutable history, replay, host persistence, or simulation
+authority. It is not a new host game mode and does not establish human
+accessibility, educational usability, or classroom approval.

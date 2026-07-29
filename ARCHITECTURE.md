@@ -930,6 +930,13 @@ presentation accommodations, consent/media boundaries, and a pending feedback
 instrument. This preparation does not create classroom multiplayer, a runtime
 low-distraction mode, a debrief route, persistence, or host authority.
 
+The v0.13.47 Phase 13.2 slice adds a local presentation-only Low-distraction
+mode. It composes existing reduced-motion, text-scale, written-cue, audio-mute,
+and reduced-notification controls, locks conflicting controls while active, and
+restores prior local preferences on exit. The setting is browser-local/session-
+local and does not enter commands, validation, transitions, history, replay,
+host persistence, or simulation authority.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

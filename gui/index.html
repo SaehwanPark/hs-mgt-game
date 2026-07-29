@@ -470,6 +470,11 @@
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .001ms !important; }
       }
+
+      html[data-reduced-motion="true"] *, html[data-low-distraction="true"] * {
+        scroll-behavior: auto !important;
+        transition-duration: .001ms !important;
+      }
     </style>
   </head>
   <body>
@@ -546,6 +551,7 @@
           <span id="settings-state" aria-live="polite">Written results remain complete.</span>
         </div>
         <div class="readiness-controls">
+          <label><input type="checkbox" id="settings-low-distraction" data-playtest-setting="low_distraction" /> Low-distraction mode</label>
           <label><input type="checkbox" id="settings-reduced-motion" data-playtest-setting="reduced_motion" /> Reduced motion</label>
           <label><input type="checkbox" id="settings-text-equivalents" data-playtest-setting="text_equivalents" checked /> Show optional cue explanations</label>
           <label for="settings-text-scale">Text size
@@ -555,7 +561,7 @@
             </select>
           </label>
         </div>
-        <p class="readiness-detail">Written decisions, observations, results, history, and debrief remain visible at every setting. Audio mute, reduced notifications, focus behavior, and independent channel volumes remain available in the optional audio panel.</p>
+        <p class="readiness-detail">Written decisions, observations, results, history, and debrief remain visible at every setting. Low-distraction mode combines reduced motion, Large text, written cue explanations, muted audio, and reduced notifications; the prior local presentation preferences return when it is turned off.</p>
         <details class="status-language-legend" id="status-language-legend">
           <summary>Status language: text and symbol cues are used together</summary>
           <ul class="status-language-list">

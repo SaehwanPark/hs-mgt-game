@@ -1,0 +1,27 @@
+{
+  "schema_version": "phase13.2-low-distraction-mode-v1",
+  "status": "complete-local-presentation-mode-only",
+  "roadmap_item": "Low-distraction mode available",
+  "source_contract": {
+    "dom_toggle": "gui/index.html: id=\"settings-low-distraction\"",
+    "css_boundary": "gui/index.html: html[data-low-distraction=\"true\"]",
+    "settings_state": "gui/app.mjs: low_distraction: Boolean(persisted.low_distraction && hasPersistedLowAudioState)",
+    "audio_bridge": "gui/app.mjs: const applyLowDistractionAudio = () =>",
+    "audio_mute": "gui/app.mjs: audio.setMuted?.(true)",
+    "audio_notifications": "gui/app.mjs: audio.setReducedNotifications?.(true)",
+    "guide": "docs/guides/gui-how-to-play.md: **Low-distraction mode**"
+  },
+  "behavior": {
+    "enabled": "Forces reduced motion, Large text, visible cue explanations, muted audio, and reduced notifications; locks conflicting presentation/audio controls.",
+    "disabled": "Restores the prior local presentation/audio preferences captured when the mode was enabled.",
+    "storage": "The mode preference and pre-mode mute/notification snapshot use the existing browser-local/session-local presentation settings boundary.",
+    "fallback": "Written decisions, observations, results, history, and debrief remain available when the mode or audio bridge is unavailable."
+  },
+  "authority_boundary": "The mode is local presentation state; it does not enter commands, validation, transitions, stochastic inputs, immutable history, replay, host persistence, or simulation authority.",
+  "limits": [
+    "This does not establish universal accessibility, educational usability, audio usefulness, or classroom approval.",
+    "It is not a new host game mode and does not create a new observation or debrief route.",
+    "Human accessibility and educational review remain separate gates."
+  ],
+  "test_source": "tests/test_phase13_2_low_distraction_mode.py"
+}
