@@ -1,0 +1,80 @@
+{
+  "schema_version": "phase13.1-competitive-campaign-boundary-v1",
+  "status": "complete-current-technical-competitive-campaign-boundary-only",
+  "roadmap_item": "Current technical competitive campaign boundary documented",
+  "campaign": "competitive-regional-v1",
+  "source_contract": {
+    "host_month_limit": "src/mcp/session.rs: pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;",
+    "host_completion_test": "src/mcp/session.rs: fn competitive_advances_twenty_four_months_then_done()",
+    "cli_month_loop_test": "src/cli/campaign.rs: fn competitive_month_loop_runs_twenty_four_months_in_non_tty_context()",
+    "competitive_campaign_id": "src/mcp/session.rs: \"competitive-regional-v1\" => Ok(CampaignId::CompetitiveRegionalV1),",
+    "competitive_catalog_ledger": "docs/evaluation/phase11.1-campaign-coverage-ledger.json: \"campaign\": \"competitive-regional-v1\"",
+    "competitive_catalog_test": "tests/test_phase11_campaign_coverage.py: self.assertEqual(self.ledger[\"campaign\"], \"competitive-regional-v1\")",
+    "campaign_coverage_scope": "src/mcp/session.rs: campaign coverage currently supports stabilization-v1 and regional-affiliation-v1 only",
+    "campaign_gui_boundary_test": "tests/test_gui_campaign_coverage.py: def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
+    "history_test": "tests/test_phase11_live_history.py: def test_live_history_read_does_not_expose_simulation_authority(self):",
+    "replay_test": "tests/test_phase11_live_replay.py: def test_live_replay_read_does_not_expose_simulation_authority(self):",
+    "checkpoint_test": "tests/test_phase11_live_checkpoint.py: def test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority(self):",
+    "debrief_test": "tests/test_phase11_live_debrief.py: def test_host_terminal_contract_is_explicit_and_presentation_only(self):"
+  },
+  "technical_path": [
+    "start competitive-regional-v1 through the host session boundary",
+    "advance the host campaign for 24 monthly transitions",
+    "render the current competitive actor-visible board, facility, overlay, event-cue, music, history, replay, checkpoint, and terminal-debrief surfaces",
+    "retain host-owned history, replay metadata, checkpoint state, resolution, and terminal debrief",
+    "use written fallbacks and recoverable read errors when optional GUI capability is unavailable",
+    "keep the shared campaign-coverage envelope explicitly limited to stabilization-v1 and regional-affiliation-v1"
+  ],
+  "surface_contract": {
+    "campaign_id": "competitive-regional-v1",
+    "max_turns": 24,
+    "terminal_transition_count": 24,
+    "competitive_presentation_surfaces": [
+      "regional board",
+      "facility components",
+      "operational overlays",
+      "event cues",
+      "music states",
+      "history",
+      "replay",
+      "checkpoint",
+      "terminal debrief"
+    ],
+    "shared_campaign_coverage_envelope_support": [
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "host_owned_state": [
+      "history",
+      "replay metadata",
+      "checkpoint state",
+      "resolution",
+      "terminal debrief"
+    ],
+    "browser_forbidden_authority_markers": [
+      "transition_competitive",
+      "resolved_inputs",
+      "effect_queue",
+      "CompetitiveWorldState",
+      "WorldState",
+      "WebSocket"
+    ]
+  },
+  "findings": {
+    "host_campaign_runs_24_months_and_terminates": true,
+    "current_competitive_presentation_surfaces_are_source_bound": true,
+    "history_replay_checkpoint_and_debrief_are_host_bound": true,
+    "browser_authority_boundary_is_preserved": true,
+    "optional_audio_and_written_fallback_are_present": true,
+    "competitive_campaign_coverage_envelope_is_not_claimed": true,
+    "full_campaign_visual_content_review": false,
+    "human_campaign_comprehension_and_educational_review": false
+  },
+  "authority_boundary": "The Rust host/core owns campaign transitions, actor-visible projections, history, replay metadata, checkpoint state, resolution, and debrief; the browser renders supplied competitive projections and local presentation preferences without simulation authority.",
+  "limits": [
+    "This closes the current repository-owned technical competitive-regional campaign boundary only.",
+    "It does not establish full-campaign facility placement/use coverage, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
+    "The broader Competitive campaign coverage complete roadmap item remains open for product/content review and structured human evaluation."
+  ],
+  "test_source": "tests/test_phase13_1_competitive_campaign_boundary.py"
+}

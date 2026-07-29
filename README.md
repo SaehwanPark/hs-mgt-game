@@ -11,7 +11,7 @@ The game is built around a simple thesis: health-policy outcomes are not direct
 levers. They emerge from strategic responses by institutions with different
 authority, incentives, information, and constraints.
 
-The current public milestone is a playable Rust prototype at v0.13.53.
+The current public milestone is a playable Rust prototype at v0.13.54.
 
 The current visual/audio evidence also records the supported actor-visible GUI
 screenshot surface and its deterministic SVG/structural regression boundary;
@@ -187,6 +187,14 @@ host-bound launch/load, actor-visible inspection, contextual drafting and
 validation, committed resolution review, continuation, and written recovery
 guidance. The broader first-session workflow remains open for structured
 first-time-user, accessibility, and educational evaluation.
+
+The v0.13.54 evidence records the current technical competitive-regional
+campaign boundary: a host-owned 24-month run, current actor-visible
+board/facility/overlay/event/music surfaces, host-owned
+history/replay/checkpoint/resolution/debrief continuity, and written
+fallbacks. The shared `campaign-coverage-v1` envelope remains limited to
+stabilization and regional-affiliation. Full-campaign visual/content review and
+structured human campaign evaluation remain open.
 
 Key capabilities include:
 - **Interactive Campaigns**: Support for 5-turn executive stabilization (`stabilization-v1`), 24-month regional market competition (`competitive-regional-v1`), and 6-stage regional affiliation (`regional-affiliation-v1`) across CLI and GUI surfaces.

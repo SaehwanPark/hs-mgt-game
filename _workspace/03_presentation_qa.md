@@ -3999,3 +3999,68 @@ None for this bounded technical first-session presentation pass.
 - `python3 -m unittest tests.test_phase13_1_first_session_boundary` — pass.
 - Existing session-launch, first-month, accessibility, recovery, and authority
   checks — pass at handoff.
+
+## Presentation Domain QA — Phase 13.1 technical competitive campaign boundary v0.13.54
+
+### Status
+
+`pass` for the current host-bound technical `competitive-regional-v1` campaign
+presentation only. Full-campaign visual/content, human comprehension,
+educational, and expansion approval are not implied.
+
+### Reviewed Inputs and Authorization
+
+- The host 24-month completion path, competitive actor-visible board/facility/
+  overlay/event/music surfaces, history/replay/checkpoint/debrief surfaces,
+  fallback behavior, and focused campaign-boundary ledger/test; the shared
+  campaign-coverage envelope limit was also checked.
+- Authorization is limited to recording current technical presentation
+  coverage; no new route, asset, audio, or simulation authority was authorized.
+
+### Information and Causality Findings
+
+- Pass: current board, facility, overlay, event, music, history, replay, and
+  debrief surfaces remain supplied actor-visible projections with written
+  source/status semantics; the browser does not infer hidden outcomes or causal
+  certainty, and the unsupported shared campaign envelope is not claimed.
+- Pass: the 24-month terminal boundary is host-owned, and visual/audio
+  presentation does not change committed campaign history or resolution.
+
+### Accessibility and Fallback Findings
+
+- Pass: current written campaign surfaces and optional-audio contracts retain
+  text-first fallbacks and recoverable read errors.
+- Existing reduced-motion, audio-off, accessibility, and device contracts
+  remain unchanged; human review remains open.
+
+### Provenance and Rights Findings
+
+- No asset, portrait, audio file, or release path was added.
+- Existing registry, attribution, and release boundaries remain unchanged.
+
+### Authority and Replay Findings
+
+- Pass: campaign transitions, history, replay metadata, checkpoint state,
+  resolution, and terminal debrief remain host/core-owned.
+- No browser-owned campaign transition, persistence, replay, checkpoint, or
+  hidden-state authority is added.
+
+### Required Fixes
+
+None for this bounded technical campaign presentation pass.
+
+### Residual Risks and Evidence Limits
+
+- Technical source/contract evidence cannot establish full-campaign facility
+  placement/use, campaign-specific visual/audio quality, screenshot quality,
+  human comprehension, educational usability, or expansion readiness.
+- Cross-browser/device certification and structured human campaign evaluation
+  remain open.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_competitive_campaign_boundary` —
+  pass.
+- Existing campaign-coverage, history, replay, checkpoint, debrief,
+  accessibility, browser/device-policy, and visual/audio contract checks —
+  pass at handoff.

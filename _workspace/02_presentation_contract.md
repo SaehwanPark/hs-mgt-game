@@ -3190,3 +3190,20 @@ authority.
 This addendum does not establish first-time-user comprehension, human
 accessibility, educational usability, classroom readiness, or broader campaign
 coverage. No new route, asset, audio, persistence, or replay behavior is added.
+
+## Technical Competitive Campaign Boundary Addendum — v0.13.54
+
+The current presentation contract now records the technical
+`competitive-regional-v1` campaign boundary: host-owned 24-month completion,
+current actor-visible board/facility/overlay/event/music/history/replay/
+checkpoint/debrief surfaces, host-owned resolution continuity, and written
+fallbacks. The shared `campaign-coverage-v1` envelope remains limited to
+stabilization and regional-affiliation. Presentation code remains a renderer of
+supplied competitive projections; it does not own campaign transitions, history,
+replay, checkpoint state, resolution, or debrief authority.
+
+This addendum does not establish full-campaign facility placement/use coverage,
+campaign-specific visual or audio quality, screenshot completeness,
+cross-browser/device certification, human comprehension, educational value, or
+expansion approval. No new route, asset, audio, persistence, or runtime
+simulation behavior is added.

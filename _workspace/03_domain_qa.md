@@ -189,3 +189,49 @@ None for this bounded technical path pass.
 - `python3 -m unittest tests.test_phase13_1_first_session_boundary` — pass.
 - Existing GUI session-launch, first-month, recovery, and authority tests —
   pass.
+
+# Domain QA — Phase 13.1 technical competitive campaign boundary v0.13.54
+
+## Status
+
+`pass` for the current repository-owned `competitive-regional-v1` technical
+campaign boundary only. Full-campaign visual/content, human comprehension,
+educational, and expansion approval are not implied.
+
+## Reviewed Inputs
+
+- The host 24-month competitive completion test and CLI month-loop test.
+- The Phase 11 competitive campaign-coverage ledger, current competitive
+  actor-visible board/facility/overlay/event/music sources, and live
+  history/replay/checkpoint/debrief tests; the Phase 12 campaign-coverage
+  envelope limit was also checked.
+- `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and its
+  focused parity test.
+
+## Findings
+
+- The host-owned `competitive-regional-v1` path advances 24 monthly
+  transitions, terminates at month 24, and retains a 24-transition history.
+- Current actor-visible board, facility, overlay, event, music, history,
+  replay, checkpoint, resolution, and terminal debrief contracts are
+  source-bound; the shared campaign-coverage envelope is not claimed for this
+  campaign.
+- Written fallbacks and browser-authority restrictions remain explicit; no
+  browser-owned campaign transition or hidden-state projection is introduced.
+
+## Required Fixes
+
+None for this bounded technical campaign pass.
+
+## Residual Risks
+
+- Full-campaign facility placement/use, campaign-specific visual/audio quality,
+  screenshot completeness, browser/device certification, human comprehension,
+  educational usability, and expansion approval remain open.
+
+## Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_competitive_campaign_boundary` —
+  pass.
+- Existing host duration, campaign-coverage, history, replay, checkpoint,
+  debrief, authority, and full Rust/Python verification — pass at handoff.

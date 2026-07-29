@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.54] - 2026-07-29
+
+- Recorded the current technical `competitive-regional-v1` campaign boundary:
+  host-owned 24-month completion, actor-visible board/facility/overlay/event/
+  music surfaces, history/replay/checkpoint/debrief continuity, and written
+  fallbacks; the shared campaign-coverage envelope remains limited to
+  stabilization and regional-affiliation.
+- Kept full-campaign visual/content review and structured human campaign
+  evaluation as separate open gates.
+
 ## [0.13.53] - 2026-07-29
 
 - Recorded the current technical first-session path across host-bound launch/
