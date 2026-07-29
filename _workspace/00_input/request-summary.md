@@ -1923,6 +1923,28 @@ collapse them into a welfare score.
 - Run focused/full Rust and Python checks plus release metadata, documentation,
   formatting, clippy, and generated-credits checks.
 
+# Request Summary — Visual/audio Phase 12.3 export behavior boundary v0.13.44
+
+## Scope
+
+Document and source-link the existing post-run replay export behavior across
+stabilization, competitive, and regional-affiliation CLI paths.
+
+## Target behavior
+
+Record which export format/version each campaign uses, how empty input skips
+export, where verification exists, and why exports remain analysis artifacts
+rather than mid-run saves or browser authority inputs.
+
+## Non-goals and validation
+
+- No new export format, persistence path, browser download, route, asset, audio,
+  simulation, or replay-authority change.
+- Do not claim that the competitive JSON export has the same versioned parser
+  contract as the stabilization and affiliation replay artifacts.
+- Run source-linked Python tests plus the standard Rust, metadata, docs,
+  formatting, clippy, and generated-credit checks.
+
 # Request Summary — Visual/audio Phase 12.3 counterfactual difference view v0.13.42
 
 ## Scope

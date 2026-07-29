@@ -907,6 +907,13 @@ deltas separate, uses stable system ordering, and emits no ranking or aggregate
 welfare score. The player observation, browser route, simulation authority,
 hashes, replay, and asset boundary remain unchanged.
 
+The v0.13.44 Phase 12.3 slice documents existing post-run export behavior.
+Stabilization uses the versioned `replay-artifact-0.1.15` writer/verifier,
+regional affiliation uses its versioned writer, and competitive CLI export
+remains serialized `CompetitiveHistory` JSON. Empty input skips writing. These
+artifacts are not browser authority, commands, mid-run saves, transitions,
+hashes, or new simulation state.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
