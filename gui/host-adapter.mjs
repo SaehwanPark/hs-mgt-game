@@ -2,6 +2,7 @@ const API_ROOT = "/api/v1/sessions";
 
 export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) {
   let activeSessionId = null;
+  let activeCampaign = null;
 
   async function request(path, options = {}) {
     const response = await fetchImpl(path, {
@@ -25,20 +26,33 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
 
   return {
     get sessionId() { return activeSessionId; },
+    get campaign() { return activeCampaign; },
 
-    activateSession(sessionId) {
+    activateSession(sessionId, campaign = null) {
       activeSessionId = String(sessionId ?? "").trim() || null;
+      activeCampaign = campaign;
     },
 
     async startSession(options) {
-      return request(API_ROOT, {
+      const envelope = await request(API_ROOT, {
         method: "POST",
         body: JSON.stringify(options),
       });
+      activeSessionId = envelope?.session_id ?? null;
+      activeCampaign = envelope?.campaign ?? options?.campaign ?? null;
+      return envelope;
     },
 
     async getPresentation(sessionId) {
       return request(sessionPath(sessionId, "presentation"));
+    },
+
+    async getSession(sessionId) {
+      return request(`${API_ROOT}/${encodeURIComponent(String(sessionId ?? "").trim())}`);
+    },
+
+    async getCampaignCoverage(sessionId) {
+      return request(sessionPath(sessionId, "campaign-coverage"));
     },
 
     async getRegionalWorld(sessionId) {

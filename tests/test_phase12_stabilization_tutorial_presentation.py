@@ -30,7 +30,7 @@ class Phase12StabilizationTutorialPresentationTests(unittest.TestCase):
       self.assertIn(marker, path.read_text(encoding="utf-8"), source_ref)
     for marker in ("written", "host", "uncertain"):
       self.assertIn(marker, ledger["tutorial_contract"]["visible_equivalent"].lower() + ledger["tutorial_contract"]["command_owner"].lower())
-    self.assertIn("competitive-regional-v1 only", ledger["presentation_surface"]["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", ledger["presentation_surface"]["live_gui_boundary"])
     self.assertIn("none-required", ledger["presentation_surface"]["new_asset_need"])
     self.assertTrue(ledger["open_work"])
 

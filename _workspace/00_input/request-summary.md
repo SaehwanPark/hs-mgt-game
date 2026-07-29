@@ -2749,3 +2749,62 @@ review.
 - Run the focused Node renderer/parity test plus full Python/Rust, asset,
   generation, security, release, documentation, offline, browser/device,
   and visual/audio contract checks.
+# Request Summary — Live campaign-coverage handoff v0.13.58
+
+## Authorized outcome
+
+Continue the visual/audio roadmap by closing the current technical browser
+integration gap for the existing `campaign-coverage-v1` envelope. Make
+stabilization and regional-affiliation sessions launchable from the loopback
+GUI and route their actor-visible decisions through the existing campaign
+coverage renderer and host-owned `submit_turn` boundary.
+
+## Target slice
+
+- Add the loopback campaign-coverage route.
+- Add a non-mutating host session-envelope read for existing-session campaign
+  identification after a fresh page load.
+- Allow the two existing campaign-coverage campaigns in the launcher.
+- Add local-adapter campaign tracking and `getCampaignCoverage`.
+- Fall back from competitive-only presentation/action reads to campaign
+  coverage for noncompetitive sessions.
+- Preserve the competitive seven-stage action path and all authority limits.
+- Preserve the current campaign panel when a replacement coverage envelope is
+  malformed or unavailable.
+- Update technical evidence, docs, version, and release metadata to v0.13.58.
+
+## Sources
+
+- `docs/visual_audio_enhancement_roadmap.md` — Phase 12.1/12.2 browser-native
+  integration gaps and Phase 13 full-campaign boundary.
+- `src/mcp/session.rs` and `src/mcp/campaign_coverage.rs` — existing typed
+  host-owned campaign projections and canonical transition route.
+- `src/gui_server.rs` — loopback GUI transport boundary.
+- `gui/host-adapter.mjs`, `gui/app.mjs`, and `gui/index.html` — current
+  launcher, action-client fallback, and campaign-coverage renderer.
+- `_workspace/137_implementation_plan_live-campaign-coverage-v0.13.58.md` —
+  bounded implementation plan.
+
+## Non-goals
+
+- Do not change simulation rules, transitions, commands, hidden state, or
+  browser authority.
+- Do not add assets, audio files, screenshots, persistence, or true-state
+  projections.
+- Do not claim human visual/audio/accessibility/educational, legal, or release
+  approval.
+
+## Validation target
+
+Focused Rust transport and JavaScript fallback tests, full Python/Rust checks,
+Clippy, formatting, release metadata, asset/security/credits, documentation
+links, and one medium-effort code review.
+
+## Evidence limits
+
+This slice proves only that the existing typed campaign-coverage projection is
+reachable and usable through the loopback GUI for the two supported campaigns.
+Campaign-specific quality, screenshots, replay playback, durable persistence,
+human evaluation, and public-release gates remain open.
+
+# Request Summary — Visual/audio Phase 13.1 AI-generation metadata boundary v0.13.57

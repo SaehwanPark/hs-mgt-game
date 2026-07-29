@@ -42,7 +42,7 @@
   "presentation_surface": {
     "shared_process_renderer": "The shared campaign renderer can display the host-supplied institutional-stage process with a written label and status.",
     "shared_decision_renderer": "The shared campaign renderer can display the host-supplied commitment decision fields and submit only the canonical host command.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation negotiation route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific negotiation route is claimed.",
     "audio_state": "The reusable affiliation_negotiation music state is optional, visible-trigger based, and text-complete; no direct campaign audio integration is claimed.",
     "new_asset_need": "none-required-by-current-stage-contract"
   },

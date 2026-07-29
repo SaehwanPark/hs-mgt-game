@@ -20,7 +20,7 @@
     "cli_export": "src/cli/affiliation.rs: Replay export complete",
     "gui_history_renderer": "gui/app.mjs: function renderCampaignCoverageHistory(entries, root)",
     "gui_debrief_renderer": "gui/app.mjs: for (const line of envelope.debrief ?? [])",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";",
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set([",
     "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1"
   },
   "replay": {
@@ -50,7 +50,7 @@
   "presentation_surface": {
     "history_renderer": "Shared browser campaign coverage renders committed turn, command, and state-hash history as written list items.",
     "debrief_renderer": "Shared browser campaign coverage renders host-supplied debrief lines as written list items with a completion fallback.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation replay/debrief route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific replay/debrief route is claimed.",
     "audio_boundary": "Existing optional visible-only affiliation audio may accompany supported text/events; it is not required for replay integrity or debrief meaning.",
     "new_asset_need": "none-required-by-current-stage-contract"
   },

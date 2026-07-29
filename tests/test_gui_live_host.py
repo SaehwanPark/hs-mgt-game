@@ -24,7 +24,7 @@ class GuiLiveHostTests(unittest.TestCase):
     self.assertIn("HsMgtGameActionAdapter", adapter)
     self.assertIn("Demo fixture loaded; start a host session to play", app)
     self.assertNotIn("campaignCoverageClient.load(sessionId)", app)
-    self.assertEqual(app.count("campaignCoverageClient.load(requestedSessionId)"), 2)
+    self.assertEqual(app.count("campaignCoverageClient.load(requestedSessionId)"), 3)
 
   def test_local_adapter_maps_requests_and_preserves_session_on_failure(self):
     script = r'''
@@ -39,9 +39,9 @@ class GuiLiveHostTests(unittest.TestCase):
       };
       const adapter = createLocalActionAdapter({ fetchImpl });
       await adapter.startSession({ campaign: "competitive-regional-v1", seed: 42, difficulty: "normal" });
-      if (adapter.sessionId !== null) process.exit(1);
+      if (adapter.sessionId !== "session-1") process.exit(1);
       await adapter.getPresentation("session-1");
-      if (adapter.sessionId !== null) process.exit(9);
+      if (adapter.sessionId !== "session-1") process.exit(9);
       adapter.activateSession("session-1");
       if (adapter.sessionId !== "session-1") process.exit(10);
       await adapter.validateTurn("session-1", "hold");

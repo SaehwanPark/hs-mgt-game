@@ -1,8 +1,8 @@
 # How to Play in GUI Mode
 
-The live browser GUI provides the competitive regional campaign through a local
-Rust host. It does not require MCP setup, a separate web server, or manual
-JavaScript adapter injection.
+The live browser GUI provides the competitive regional, stabilization, and
+regional-affiliation campaigns through a local Rust host. It does not require
+MCP setup, a separate web server, or manual JavaScript adapter injection.
 
 ## Requirements
 
@@ -13,8 +13,11 @@ JavaScript adapter injection.
   optional and uses the browser Web Audio API.
 - A local checkout of this repository.
 
-The GUI currently supports `competitive-regional-v1`. Use `cargo run` for the
-stabilization, regional-affiliation, or custom-scenario play.
+The launcher supports `competitive-regional-v1`, `stabilization-v1`, and
+`regional-affiliation-v1`. The competitive campaign uses its action catalog;
+the stabilization and regional-affiliation campaigns use the typed
+`campaign-coverage-v1` panel for host-shaped decisions. Custom scenarios still
+use `cargo run`.
 
 For a first session, start with the documented Normal/seed-42 defaults, then
 adjust presentation settings only if they reduce friction. These controls are
@@ -38,7 +41,10 @@ validation, simulation outcomes, or replay history.
 
 4. Open that URL in your browser.
 5. Leave the campaign set to `competitive-regional-v1`, use seed `42`, choose
-   Normal difficulty, and select **Start competitive session**.
+   Normal difficulty, and select **Start competitive regional session**. For
+   stabilization or regional affiliation, choose that campaign and select the
+   same start button; difficulty is not used for those campaign-coverage
+   sessions.
 
 The server listens only on your computer's loopback interface. It does not make
 the game available to other computers and does not provide network multiplayer.
@@ -210,7 +216,8 @@ or legal decision tool. The current rules, seed, commands, and explicit
 stochastic inputs produce a bounded game outcome; they do not estimate what a
 real institution, policy, payer, workforce, or community will do.
 
-The GUI is local, competitive-only, and in-memory. The host remains
+The GUI is local and in-memory. Competitive actions and campaign-coverage
+decisions remain host-owned. The host remains
 authoritative, and actor-specific observations intentionally omit private rival
 state and unresolved hidden inputs. Current technical checks do not replace
 human accessibility, educational, audio-quality, provenance, resemblance,

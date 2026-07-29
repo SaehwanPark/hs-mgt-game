@@ -12,7 +12,7 @@
     "coverage_renderer": "gui/app.mjs: renderCampaignCoverage",
     "end_session_renderer": "gui/app.mjs: renderEndSessionEnvelope",
     "written_boundary": "gui/README.md: text-first history/debrief view",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set(["
   },
   "authority_contract": {
     "stabilization-v1": {
@@ -37,7 +37,7 @@
   "presentation_surface": {
     "host_ownership": "Host/core contracts own observation, resolution, debrief, and any post-run instructor detail; presentation is read-only.",
     "shared_rendering": "Shared campaign/end-session renderers display supplied text, history, hashes, and debrief lines without authoring true state or outcomes.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native stabilization or regional-affiliation instructor route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native stabilization or regional-affiliation instructor route is claimed.",
     "written_fallback": "Labels, source attribution, committed history, hashes, debrief text, and authority notices remain readable without audio or visual decoration.",
     "new_surface_need": "none-required-for-current-boundary-record"
   },

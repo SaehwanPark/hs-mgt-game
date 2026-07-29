@@ -44,7 +44,7 @@ class Phase12StabilizationDebriefPresentationTests(unittest.TestCase):
   def test_surface_and_instructor_boundaries_remain_bounded(self):
     surface = self.ledger["presentation_surface"]
     self.assertIn("five-turn", surface["current_cli"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["live_gui_boundary"])
     self.assertIn("Optional debrief music", surface["audio"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertTrue(self.ledger["open_work"])

@@ -3128,6 +3128,15 @@ find. Keep the README focused on orientation, first play, current limitations,
 and clear next links; preserve milestone detail in the changelog,
 specification, roadmap, and evaluation records that already own it.
 
+## Phase 63: Reuse typed campaign coverage at the live boundary (2026-07-29)
+
+An existing typed campaign envelope is not browser-integrated merely because a
+renderer and MCP tool exist. The loopback transport, launcher, adapter, and
+mutation handoff must be joined explicitly. Keep competitive-only reads and
+validation separate from campaign-specific coverage, and let failed fallback
+reads preserve the current view. This technical route still does not establish
+campaign-specific visual/audio quality, human usability, or release approval.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove

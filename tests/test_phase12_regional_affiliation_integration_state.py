@@ -36,7 +36,7 @@ class Phase12RegionalAffiliationIntegrationStateTests(unittest.TestCase):
     surface = self.ledger["presentation_surface"]
     self.assertIn("host-supplied", surface["shared_process_renderer"])
     self.assertIn("canonical host command", surface["shared_decision_renderer"])
-    self.assertIn("competitive-regional-v1 only", surface["live_gui_boundary"])
+    self.assertIn("shared campaign-coverage panel", surface["live_gui_boundary"])
     self.assertIn("optional", surface["audio_state"])
     self.assertIn("none-required", surface["new_asset_need"])
     self.assertTrue(self.ledger["open_work"])

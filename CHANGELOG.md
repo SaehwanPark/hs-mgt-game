@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.58] - 2026-07-29
+
+- Connected the existing `campaign-coverage-v1` projection to the loopback GUI
+  launcher and adapter for stabilization and regional-affiliation sessions.
+- Preserved the competitive action/catalog path while routing noncompetitive
+  decisions through the host-owned canonical `submit_turn` boundary.
+- Kept campaign-specific visual/audio quality, human evaluation, provenance,
+  and public-release review as separate open gates.
+
 ## [0.13.57] - 2026-07-29
 
 - Added a technical AI-generation metadata readiness ledger for the approved

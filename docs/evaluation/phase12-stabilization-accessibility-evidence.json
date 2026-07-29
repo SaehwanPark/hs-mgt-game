@@ -58,7 +58,7 @@
   ],
   "presentation_surface": {
     "current_shared_contract": "The shared GUI contract covers technical keyboard, focus, text, non-color, reduced-motion, text-scale, written-equivalent, and optional-audio fallback behavior for supplied actor-visible projections.",
-    "stabilization_boundary": "The current stabilization CLI remains text-first; the live GUI launcher supports competitive-regional-v1 only, so no browser-native stabilization accessibility flow is certified.",
+    "stabilization_boundary": "The current stabilization CLI remains text-first; the live GUI exposes the shared campaign-coverage panel, so this record does not certify campaign-specific stabilization accessibility.",
     "settings_ownership": "Text scale, reduced motion, and written-equivalent preferences are local presentation state and do not enter commands, transitions, randomness, history, hashes, or debrief output.",
     "new_asset_need": "none-required-by-current-technical-contract"
   },
@@ -70,7 +70,7 @@
   ],
   "limits": [
     "Technical interface proxies do not establish human accessibility, lived usability, contrast certification, screen-reader behavior, assistive-technology compatibility, or hardware performance.",
-    "The shared checks do not certify an unlaunched browser-native stabilization flow; the live GUI remains competitive-regional-v1 only.",
+    "The shared checks do not certify campaign-specific stabilization accessibility; the live GUI's shared campaign-coverage panel remains a technical handoff, not a human review.",
     "No new accessibility behavior, route, runtime field, asset, audio file, screenshot, persistence, instructor view, or authority path is created or promoted.",
     "Written equivalents and reduced-motion behavior preserve meaning but do not establish learning, educational effectiveness, or policy validity.",
     "No public-release, cross-browser certification, or human-review claim is made."

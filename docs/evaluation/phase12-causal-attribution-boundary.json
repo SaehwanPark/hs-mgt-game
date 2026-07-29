@@ -11,7 +11,7 @@
     "consequence_inference_limit": "gui/consequence-links.mjs: Direct host-committed effect; no future outcome is inferred.",
     "causal_graph_limit": "docs/history/initiatives/visual-audio/visual-audio-phase4-resolution-causal-v0.12.20.md: The client may compare before/after values to label a change.",
     "written_contract": "gui/README.md: consequence-links.mjs",
-    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGN = \"competitive-regional-v1\";"
+    "live_gui_boundary": "gui/app.mjs: const SESSION_LAUNCH_CAMPAIGNS = new Set(["
   },
   "attribution_contract": {
     "typed_effect": "Committed ResolutionEffect source, metric, delta, and text fields are host-supplied direct-effect evidence.",
@@ -23,7 +23,7 @@
   "presentation_surface": {
     "host_authority": "Host/core resolution and debrief functions own effect source, metric, delta, text, and ordering; presentation remains read-only.",
     "shared_rendering": "Shared resolution/consequence renderers display supplied direct-effect evidence and source labels without calculating new outcomes.",
-    "browser_boundary": "The live GUI supports competitive-regional-v1 only; current direct attribution is a source-linked descriptive layer, not a full causal model.",
+    "browser_boundary": "The live GUI exposes shared campaign-coverage; current direct attribution is a source-linked descriptive layer, not a full causal model.",
     "new_surface_need": "none-required-for-current-direct-attribution-boundary-record"
   },
   "open_work": [

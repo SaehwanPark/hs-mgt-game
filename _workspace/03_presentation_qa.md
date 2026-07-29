@@ -1,3 +1,78 @@
+# Presentation QA — Phase 12 live campaign-coverage handoff v0.13.58
+
+## Status
+
+`pass` for the bounded technical loopback handoff of the existing
+`stabilization-v1` and `regional-affiliation-v1` campaign-coverage envelope.
+This is technical presentation QA, not human accessibility, usability,
+educational, audio-quality, full-campaign, or public-release approval.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/137_implementation_plan_live-campaign-coverage-v0.13.58.md`.
+- Changed paths: `src/gui_server.rs`, `gui/host-adapter.mjs`, `gui/app.mjs`,
+  `gui/index.html`, tests, evaluation ledgers, and project records.
+- Roadmap gate: current technical browser handoff for the existing shared
+  campaign-coverage projection only.
+
+## Information and Causality Findings
+
+- Pass: the loopback route returns the existing typed `campaign-coverage-v1`
+  host envelope; the browser does not invent stage, decision, history, replay,
+  debrief, true-state, or causal fields.
+- Pass: competitive sessions retain their separate action-catalog path; the
+  two additional campaigns use the shared actor-visible coverage panel and
+  submit decisions through the canonical host adapter.
+- Pass: a fresh-page existing-session load resolves campaign identity through
+  the generic host session envelope before selecting the presentation path.
+
+## Accessibility and Fallback Findings
+
+- Pass: unsupported campaigns, malformed coverage, missing adapters, rejected
+  decisions, and unknown sessions fail visibly and preserve the last valid view
+  where applicable.
+- Pass: coverage remains text-first and written-equivalent; optional audio and
+  existing reduced-motion/audio-off behavior remain unchanged.
+- Evidence limit: automated checks do not establish contrast, screen-reader
+  behavior, focus quality, low-power behavior, human comprehension, or audio
+  usefulness/fatigue.
+
+## Authority, Replay, and Review Findings
+
+- Pass: accepted and rejected campaign decisions use the canonical host
+  `submit_turn` route; rejected commands do not advance host history.
+- Pass: no new simulation transition, hidden-state route, local transition
+  authority, persistence mechanism, or presentation schema was added.
+- Review: one medium-effort code reviewer found no Critical/High issue. Three
+  Medium findings were fixed: fresh existing-session campaign resolution,
+  malformed-envelope last-valid-view preservation, and stale test coverage.
+  Transport coverage was also expanded to exercise valid and rejected writes.
+
+## Required Fixes
+
+None for this bounded technical contract after review fixes.
+
+## Residual Risks and Evidence Limits
+
+- Full campaign-specific visual/audio quality, stage art, direct audio mapping,
+  screenshots, replay playback, durable persistence, browser/device
+  certification, provenance/legal review, human evaluation, and public release
+  remain open.
+
+## Verification Evidence
+
+- Rust: `cargo fmt --check`, Clippy with warnings denied, and all 344 unit/
+  integration tests passed.
+- Python: all 760 discovered tests passed, including live campaign transport,
+  launcher, coverage, and boundary tests.
+- Release metadata, documentation links, asset registry/credits/release,
+  security/generation, device-performance, offline, browser-compatibility, and
+  visual/audio contract checks passed.
+
+---
+
 # Presentation QA — Phase 11.1 live music-state projection v0.12.93
 
 ## Status
@@ -4196,3 +4271,53 @@ None for this bounded technical metadata pass.
 - Existing generation workflow, portrait inventory, review queue, asset
   registry, release, security, credits, and visual/audio contract checks remain
   the supporting evidence boundary.
+# Presentation Domain QA — Live campaign-coverage handoff v0.13.58
+
+### Status
+
+`pass` for the current technical loopback handoff only. Campaign-specific
+visual/audio quality, human comprehension/accessibility/educational review,
+provenance/legal review, and public-release approval remain open.
+
+### Reviewed contract and sources
+
+- `_workspace/00_input/request-summary.md`,
+  `_workspace/02_presentation_contract.md`, and
+  `_workspace/137_implementation_plan_live-campaign-coverage-v0.13.58.md`.
+- `src/gui_server.rs`, `src/mcp/session.rs`,
+  `src/mcp/campaign_coverage.rs`, `gui/host-adapter.mjs`,
+  `gui/app.mjs`, and `gui/index.html`.
+- `docs/evaluation/phase12-live-campaign-coverage.json` and its focused test.
+
+### Information and causality findings
+
+- Pass: the route reuses the existing typed `campaign-coverage-v1` projection;
+  the browser does not receive true state, private rationale, resolved
+  inputs, or a new transition authority.
+- Pass: competitive action/catalog/validation flow remains distinct, while
+  stabilization and regional-affiliation decisions use the existing canonical
+  host `submit_turn` path.
+- Pass: failed noncompetitive presentation reads can fall back to campaign
+  coverage without fabricating a local session or outcome.
+
+### Accessibility, fallback, and provenance findings
+
+- Pass: the existing campaign panel, text/source labels, written equivalents,
+  optional audio, and recovery messages remain the understanding path.
+- Pass: no new asset, audio file, portrait, registry entry, release path, or
+  external network boundary was added.
+- Human accessibility, visual/audio usefulness, campaign comprehension, legal,
+  provenance, and public-release review are not implied.
+
+### Required fixes
+
+None for this bounded technical handoff.
+
+### Verification evidence
+
+- Focused Rust GUI transport tests pass for both campaign-coverage campaigns
+  and unknown-session behavior.
+- Focused launcher/campaign-coverage Python tests and Node syntax checks pass.
+- Full validation remains required before PR handoff.
+
+--- Historical presentation QA ---

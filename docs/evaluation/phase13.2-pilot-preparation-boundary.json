@@ -13,7 +13,7 @@
     "existing_evaluation_guide": "docs/guides/phase10.2-structured-evaluation.md: ## Phase 13.2 pilot-preparation addendum",
     "existing_gui_guide": "docs/guides/gui-how-to-play.md: ## Settings and accessibility",
     "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
-    "distribution_boundary": "docs/guides/reproducible-distribution.md: The live GUI currently supports `competitive-regional-v1` only and binds to a"
+    "distribution_boundary": "docs/guides/reproducible-distribution.md: The live GUI supports `competitive-regional-v1`, `stabilization-v1`, and"
   },
   "prepared_contract": {
     "facilitator": "Preflight, task-order, consent, stop, and no-teaching-hidden-state guidance is written.",

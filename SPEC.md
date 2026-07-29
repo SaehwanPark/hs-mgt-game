@@ -7005,6 +7005,38 @@ Deferred / Non-Goals:
 - No image generation, model download, asset promotion, GUI/runtime behavior,
   simulation, history, replay, persistence, or authority path changes.
 
+### Visual/audio Phase 12 live campaign-coverage handoff (v0.13.58)
+
+Status: Complete for the current technical loopback browser handoff only;
+campaign-specific visual/audio quality, human evaluation, durable persistence,
+and public-release gates remain separately gated.
+
+Done:
+
+- Added `docs/evaluation/phase12-live-campaign-coverage.json` and
+  `tests/test_phase12_live_campaign_coverage.py` for the existing typed
+  `campaign-coverage-v1` route, launcher, adapter, shared renderer, and
+  canonical host mutation boundary.
+- The live GUI now launches `stabilization-v1` and
+  `regional-affiliation-v1`; the action client uses campaign coverage when
+  competitive presentation/action reads are not available.
+- Competitive difficulty validation and the competitive action/resolution
+  path remain separate. Campaign decisions still submit through host-owned
+  `submit_turn`.
+- Synchronized the roadmap, guides, changelog, lessons, contracts, QA,
+  handoff, and package metadata to `0.13.58`.
+
+Not Yet Done:
+
+- Campaign-specific visual/audio quality, screenshots, replay playback,
+  durable persistence, human accessibility/educational review, provenance and
+  legal review, browser/device certification, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new campaign rule, simulation state, hidden-state field, asset, audio
+  file, true-state route, local transition authority, or new schema was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

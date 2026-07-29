@@ -49,7 +49,7 @@
   "presentation_surface": {
     "shared_audio_contract": "The shared browser audio contracts can render the optional music state and committed milestone cue from visible inputs.",
     "audio_off_boundary": "Mute, unavailable audio, reduced motion, or unsupported Web Audio preserves written meaning and does not block host state or command submission.",
-    "live_gui_boundary": "The current live GUI launcher supports competitive-regional-v1 only; no browser-native regional-affiliation audio route is claimed.",
+    "live_gui_boundary": "The current live GUI exposes the shared campaign-coverage panel; no browser-native regional-affiliation-specific audio route is claimed.",
     "new_asset_need": "none-required-by-current-stage-contract",
     "release_audio": "Runtime-generated Web Audio has no release audio file; no new recorded or packaged audio is added."
   },

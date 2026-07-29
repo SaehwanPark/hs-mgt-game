@@ -34,7 +34,7 @@ class Phase12TrueStateLanguageBoundaryTests(unittest.TestCase):
     surface = self.ledger["presentation_surface"]
     self.assertIn("read-only", surface["host_ownership"])
     self.assertIn("without authoring", surface["shared_rendering"])
-    self.assertIn("competitive-regional-v1 only", surface["browser_boundary"])
+    self.assertIn("shared campaign-coverage", surface["browser_boundary"])
     self.assertIn("readable", surface["written_fallback"])
     self.assertIn("none-required", surface["new_surface_need"])
     self.assertTrue(self.ledger["open_work"])
