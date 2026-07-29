@@ -950,6 +950,12 @@ consequence presentation, and planning/pressure music derived from visible
 inputs. It does not promote full-campaign coverage, hidden state, or human
 quality/evaluation approval.
 
+The v0.13.50 hidden-state boundary records automated scans of current browser
+presentation modules and read-only DTO tests for forbidden simulation-world,
+resolved-input, and effect-queue fields. The host may use true state internally;
+the browser boundary remains actor-visible and presentation-only, and human
+content/provenance review remains separate.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

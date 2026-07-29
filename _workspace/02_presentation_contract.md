@@ -3138,3 +3138,11 @@ facility/report linkage, visible project overlays, first-month consequence
 handoffs, and planning/pressure music states from visible inputs. The evidence
 remains bounded to supported current conditions and does not expose hidden state
 or claim full-campaign, provenance, first-time-user, or human-review completion.
+
+## Hidden-State Boundary Addendum — v0.13.50
+
+Current browser presentation modules and read-only DTO tests reject simulation
+world, resolved-input, and effect-queue fields at the presentation boundary.
+This is a technical source-checkout contract only; it does not approve content,
+clinical implications, institutional resemblance, accessibility, educational
+usability, or public release.

@@ -3647,7 +3647,13 @@ educational/accessibility gates remain open.
 - [ ] No real institution accidentally represented.
 - [ ] No public-figure resemblance remains.
 - [ ] No unsupported clinical implication introduced.
-- [ ] No hidden-state leak found.
+- [x] No hidden-state leak found. Evidence:
+  `docs/evaluation/phase13.1-hidden-state-boundary.json`,
+  `tests/test_phase13_1_hidden_state_boundary.py`, and the existing GUI
+  read-only/visibility tests; current browser presentation modules and DTO
+  checks reject simulation-world, resolved-input, and effect-queue fields.
+  This closes only the automated source-checkout boundary, not human content or
+  policy review.
 - [ ] Attribution complete.
 - [ ] AI-generation metadata complete.
 - [x] Limitations statement updated. Evidence:
@@ -3669,6 +3675,17 @@ educational/accessibility gates remain open.
 - This closes only the documentation gate. It does not approve content,
   portraits, assets, audio usefulness, accessibility, educational usability,
   policy validity, or public release.
+
+### v0.13.50 current hidden-state boundary
+
+- `docs/evaluation/phase13.1-hidden-state-boundary.json` and
+  `tests/test_phase13_1_hidden_state_boundary.py` record the current browser/
+  DTO forbidden-field scans and read-only source contracts.
+- The host may retain true state internally; the browser consumes only
+  actor-visible projections and does not gain simulation authority.
+- This closes only the automated hidden-state content gate. Human content,
+  provenance, accessibility, educational, clinical-implication, resemblance,
+  and public-release review remain open.
 
 ### Exit criteria
 

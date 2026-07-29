@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase13.1-hidden-state-boundary-v1",
+  "status": "complete-automated-source-boundary-only",
+  "roadmap_item": "No hidden-state leak found",
+  "source_contract": {
+    "campaign_visibility_test": "tests/test_gui_campaign_coverage.py: test_browser_preserves_host_authority_and_no_external_boundary_break",
+    "regional_visibility_test": "tests/test_gui_regional_world.py: test_browser_has_no_map_simulation_or_external_asset_boundary_break",
+    "live_history_test": "tests/test_phase11_live_history.py: test_live_history_read_does_not_expose_simulation_authority",
+    "live_replay_test": "tests/test_phase11_live_replay.py: test_live_replay_read_does_not_expose_simulation_authority",
+    "live_checkpoint_test": "tests/test_phase11_live_checkpoint.py: test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
+    "dto_source": "src/mcp/presentation.rs: ReadOnlyPresentationEnvelope"
+  },
+  "forbidden_browser_fields": [
+    "CompetitiveWorldState",
+    "HealthSystemState",
+    "resolved_inputs",
+    "effect_queue"
+  ],
+  "coverage": {
+    "browser": "Current presentation modules are scanned for simulation-world types, resolved inputs, effect queues, and direct client transition authority.",
+    "dto": "Read-only host envelopes expose actor-visible projections rather than simulation-world state or resolved inputs.",
+    "read_only": "History, replay, checkpoint, campaign, and regional-world tests preserve a non-mutating browser boundary."
+  },
+  "authority_boundary": "The host/core may retain true state internally; the browser consumes actor-visible projections and cannot enter transitions, resolved inputs, effect queues, or simulation authority.",
+  "limits": [
+    "This closes an automated source-checkout boundary only.",
+    "It does not establish that all narrative, visual, audio, clinical, institutional, provenance, accessibility, educational, or public-release content is acceptable.",
+    "Human content, policy, provenance, and release review remain open."
+  ],
+  "test_source": "tests/test_phase13_1_hidden_state_boundary.py"
+}

@@ -3794,3 +3794,10 @@ actor-visible board, facilities/reports, project overlays, first-month
 consequences, and visible-input-driven planning/pressure music without hidden
 state or client authority. Full-campaign, provenance, first-time-user, and
 human review remain open.
+
+## Hidden-State Boundary QA — v0.13.50
+
+`pass` for the automated browser/DTO boundary scan. Current presentation modules
+and read-only tests reject simulation-world, resolved-input, and effect-queue
+fields without changing host authority. Human content, provenance, accessibility,
+educational, and public-release review remain open.
