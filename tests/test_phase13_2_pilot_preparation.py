@@ -40,6 +40,7 @@ class Phase132PilotPreparationTests(unittest.TestCase):
       "Large",
       "cues-only",
       "1024×768",
+      "same computer",
       "does not establish measured",
     ):
       self.assertIn(marker, self.guide)
@@ -51,6 +52,11 @@ class Phase132PilotPreparationTests(unittest.TestCase):
     self.assertIn("not-observed", self.feedback["rating_scale"])
     self.assertEqual(self.feedback["decision"]["status"], "pending-human-evidence")
     self.assertIsNone(self.feedback["decision"]["go_no_go"])
+    consent = self.feedback["consent_record"]
+    for field in ("feedback", "screenshot", "recording"):
+      self.assertIn("granted", consent[field])
+      self.assertIn("declined", consent[field])
+    self.assertIn("Record consent status only", consent["storage_rule"])
     forbidden = " ".join(self.feedback["session_record"]["forbidden"])
     for marker in ("names", "health information", "private game state", "browser URLs"):
       self.assertIn(marker, forbidden)

@@ -122,8 +122,11 @@ result, recording, or go/no-go decision is included here.
 ### Classroom hardware assumptions
 
 - One facilitator-controlled local host and one learner-facing Chromium desktop
-  session per active run; the GUI currently supports one competitive session
-  flow, not classroom multiplayer.
+  browser on the **same computer** per active run; the loopback host cannot
+  serve a browser on another computer. In a multi-device room, use one
+  host/browser pair per learner or show one facilitator-controlled session;
+  the GUI currently supports one competitive session flow, not classroom
+  multiplayer.
 - Keyboard and pointing-device access, a readable desktop display, and a
   current Chromium-based browser with JavaScript modules enabled.
 - The repository's bounded browser proxy uses a 1024×768 viewport. This is a
@@ -159,7 +162,9 @@ result, recording, or go/no-go decision is included here.
 - Do not commit participant media or raw responses to the repository. Use the
   structured instrument at
   `docs/evaluation/phase13.2-pilot-feedback-instrument.json` and record only
-  anonymized task outcomes, bounded ratings, and classified findings.
+  anonymized task outcomes, bounded ratings, classified findings, and the
+  separate feedback/screenshot/recording consent statuses. A declined or
+  not-applicable media consent must not be followed by capture.
 - Classify a finding as `defect`, `preference`, or `scope-expansion`. Keep the
   decision field pending until an authorized reviewer inspects the evidence.
 

@@ -19,7 +19,7 @@
     "facilitator": "Preflight, task-order, consent, stop, and no-teaching-hidden-state guidance is written.",
     "classroom": "Loopback Chromium, 1024x768 planning baseline, local host, input, audio-optional, and prebuild assumptions are written.",
     "accessibility": "Reduced motion, Large text, written equivalents, mute/reduced notifications, keyboard, skip/review, and extra-time accommodations are written.",
-    "privacy": "Separate consent and anonymized-only screenshot, recording, media, and feedback boundaries are written.",
+    "privacy": "Separate feedback, screenshot, and recording consent status fields plus anonymized-only media and feedback boundaries are written.",
     "feedback": "Tasks, rating dimensions, response states, finding categories, and pending decision fields are structured in a checked-in instrument."
   },
   "limits": [

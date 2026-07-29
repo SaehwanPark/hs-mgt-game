@@ -4,6 +4,12 @@
   "purpose": "Collect bounded, anonymized feedback about first-session play, presentation controls, accessibility friction, audio preference, and debrief comprehension.",
   "source_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json",
   "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+  "consent_record": {
+    "feedback": "granted | declined | not-recorded",
+    "screenshot": "granted | declined | not-applicable | not-recorded",
+    "recording": "granted | declined | not-applicable | not-recorded",
+    "storage_rule": "Record consent status only; never store signatures, names, raw media, or identifying notes in the repository."
+  },
   "session_record": {
     "allowed": [
       "anonymized participant role/category",
