@@ -3778,3 +3778,11 @@ are locked while active and prior local preferences are restored on exit.
 Focused JavaScript behavior evidence covers the enable/restore path. No host
 command, transition, replay, persistence, or simulation authority changes.
 Human accessibility and educational review remain open.
+
+## Limitations Statement QA — v0.13.48
+
+`pass` for the documentation-only limitations boundary. The first-session
+guide distinguishes a fictional educational simulation from calibrated policy
+forecasting and real-world decision tools, keeps host/actor visibility limits
+visible, and names unresolved human/release gates. No runtime, asset, audio,
+authority, persistence, or educational approval claim was added.

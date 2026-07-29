@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.48] - 2026-07-29
+
+- Added a user-facing release limitations statement distinguishing this
+  fictional educational simulation from calibrated policy forecasting and
+  operational, clinical, financial, regulatory, or legal advice.
+- Recorded the remaining human, provenance, browser, persistence, and
+  full-campaign gates instead of implying that technical checks close them.
+
 ## [0.13.47] - 2026-07-29
 
 - Added a local GUI Low-distraction mode that combines reduced motion, Large

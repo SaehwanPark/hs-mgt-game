@@ -937,6 +937,13 @@ restores prior local preferences on exit. The setting is browser-local/session-
 local and does not enter commands, validation, transitions, history, replay,
 host persistence, or simulation authority.
 
+The v0.13.48 release statement distinguishes the fictional educational
+simulation from calibrated policy forecasting and operational, clinical,
+financial, regulatory, or legal advice. Machine-checked technical boundaries
+remain separate from human accessibility, educational, audio-quality,
+provenance, resemblance, browser/device, full-campaign, persistence, and
+public-release gates.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

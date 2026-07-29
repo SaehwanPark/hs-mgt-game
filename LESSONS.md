@@ -3048,3 +3048,11 @@ prior local presentation/audio state and restores it on exit. Keep the mode in
 the browser boundary, lock conflicting controls while active, and test both
 enable and restore paths so a convenience setting does not silently overwrite a
 player's preferences or enter simulation authority.
+
+## Phase 53: Put limitations beside the first-session instructions (2026-07-29)
+
+A technical release can be usable without being a policy forecast, a real-world
+decision tool, or evidence of human accessibility and educational approval. Keep
+the fictional/educational boundary, actor-visible limits, host authority, and
+remaining human/release gates in the player guide so a first-time player sees
+the scope before treating a game outcome as advice.

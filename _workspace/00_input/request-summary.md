@@ -1900,6 +1900,28 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 13.1 limitations statement v0.13.48
+
+## Scope
+
+Add a player-facing limitations statement distinguishing the fictional
+educational simulation from calibrated policy forecasting and real-world
+operational, clinical, financial, regulatory, or legal advice.
+
+## Target slice
+
+- Bind the guide language to a small release evidence ledger and contract test.
+- Preserve actor-visible and host-authoritative boundaries.
+- Name remaining human, provenance, browser/device, full-campaign, persistence,
+  and public-release gates without claiming they are complete.
+
+## Non-goals and validation
+
+- Do not add runtime behavior, simulation fields, authority paths, assets,
+  audio, persistence, or educational approval claims.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  device, and diff checks.
+
 # Request Summary — Visual/audio Phase 13.2 low-distraction mode v0.13.47
 
 ## Scope
