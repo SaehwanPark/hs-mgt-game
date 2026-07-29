@@ -2655,3 +2655,38 @@ full-campaign product/content approval.
 - Run the focused campaign-boundary test plus full Python/Rust, asset,
   generation, security, release, documentation, offline, browser/device,
   and visual/audio contract checks.
+
+# Request Summary — Visual/audio technical debrief visual boundary v0.13.55
+
+## Scope
+
+Record the current repository-owned terminal debrief presentation contract
+without treating technical rendering evidence as human visual or educational
+review.
+
+## Target slice
+
+- Bind terminal host history, replay transition count, latest state hash,
+  written debrief, direct effects, snapshots, consequence links, and read-only
+  controls to existing GUI sources/tests.
+- Preserve descriptive direct-attribution and host-authority boundaries.
+- Preserve complete written behavior when optional audio or motion is
+  unavailable, while keeping human visual/accessibility/educational review
+  open.
+
+## Sources and expected files
+
+- Existing `src/mcp/session.rs`, `gui/app.mjs`,
+  `gui/consequence-links.mjs`, `gui/README.md`, and live debrief/causal tests.
+- New `docs/evaluation/phase13.2-debrief-visual-boundary.json` and
+  `tests/test_phase13_2_debrief_visual_boundary.py`.
+- Additive roadmap, SDD, architecture, changelog, lessons, QA, contract,
+  handoff, generated credits, and release-metadata updates.
+
+## Non-goals and validation
+
+- Do not add debrief copy, routes, runtime fields, assets, audio files,
+  persistence, replay regeneration, causal graphs, or human evaluation results.
+- Run the focused Node renderer/parity test plus full Python/Rust, asset,
+  generation, security, release, documentation, offline, browser/device,
+  and visual/audio contract checks.

@@ -983,6 +983,12 @@ The shared campaign-coverage envelope remains limited to stabilization and
 regional-affiliation; this does not claim full-campaign visual/content coverage,
 human comprehension, educational effectiveness, or browser authority.
 
+The v0.13.55 technical debrief visual boundary records the existing host-supplied
+terminal history/replay/hash alignment, written debrief/direct-effect rendering,
+read-only controls, and audio/motion fallbacks. It preserves descriptive
+host-authority semantics and does not establish visual quality, causal certainty,
+human comprehension, educational value, or public-release readiness.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

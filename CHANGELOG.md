@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.55] - 2026-07-29
+
+- Recorded the current technical debrief visual boundary across terminal
+  history/replay/hash alignment, written debrief/direct-effect rendering,
+  read-only controls, and audio/motion fallbacks.
+- Kept human visual, accessibility, educational, and classroom debrief review
+  as separate open gates.
+
 ## [0.13.54] - 2026-07-29
 
 - Recorded the current technical `competitive-regional-v1` campaign boundary:

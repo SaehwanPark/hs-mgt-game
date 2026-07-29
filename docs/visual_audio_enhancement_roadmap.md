@@ -3776,6 +3776,17 @@ educational/accessibility gates remain open.
 - Full-campaign product/content review, human comprehension, educational
   evaluation, and expansion approval remain open.
 
+### v0.13.55 current technical debrief visual boundary
+
+- `docs/evaluation/phase13.2-debrief-visual-boundary.json` and
+  `tests/test_phase13_2_debrief_visual_boundary.py` bind terminal history,
+  replay/hash alignment, written debrief/direct-effect rendering, read-only
+  controls, and complete written fallbacks when audio or motion is unavailable.
+- This records the existing host-supplied debrief presentation contract without
+  claiming visual quality, causal certainty, or human comprehension.
+- Human visual, accessibility, educational, classroom, and public-release
+  review remain open.
+
 ### Exit criteria
 
 - No critical or high-severity defect remains.
@@ -3812,6 +3823,12 @@ educational/accessibility gates remain open.
   redaction, local-only handling, and no-repository-media boundaries are
   recorded.
 - [ ] Debrief visuals reviewed.
+- [x] Current technical debrief visual presentation contract documented.
+  Evidence: `docs/evaluation/phase13.2-debrief-visual-boundary.json` and
+  `tests/test_phase13_2_debrief_visual_boundary.py`; terminal host envelope
+  alignment, written debrief/direct-effect rendering, read-only controls, and
+  audio/motion fallbacks are source-bound. Human visual, accessibility,
+  educational, and classroom review remain open.
 - [x] Classroom hardware assumptions documented. Evidence:
   `docs/guides/phase10.2-structured-evaluation.md` and
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; loopback host,

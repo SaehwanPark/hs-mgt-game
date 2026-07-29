@@ -3207,3 +3207,18 @@ campaign-specific visual or audio quality, screenshot completeness,
 cross-browser/device certification, human comprehension, educational value, or
 expansion approval. No new route, asset, audio, persistence, or runtime
 simulation behavior is added.
+
+## Technical Debrief Visual Boundary Addendum — v0.13.55
+
+The current presentation contract records the host-supplied terminal debrief
+path: history/replay/hash alignment, written debrief lines, before/after
+snapshots, direct committed effects, consequence links, read-only terminal
+controls, and written fallbacks when audio or motion is unavailable. The browser
+validates and renders supplied fields; it does not author outcomes, infer a
+causal graph, or retain terminal mutation authority.
+
+This addendum does not establish visual hierarchy or quality, human
+comprehension, accessibility quality, educational effectiveness, classroom
+readiness, causal certainty, or public-release approval. No new route, asset,
+audio, persistence, replay regeneration, or runtime simulation behavior is
+added.

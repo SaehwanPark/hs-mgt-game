@@ -1,0 +1,56 @@
+{
+  "schema_version": "phase13.2-debrief-visual-boundary-v1",
+  "status": "complete-current-technical-debrief-visual-boundary-only",
+  "roadmap_item": "Current technical debrief visual presentation contract documented",
+  "source_contract": {
+    "host_debrief": "src/mcp/session.rs: debrief: educational_debrief(&session.history)",
+    "terminal_test": "tests/test_phase11_live_debrief.py: def test_host_terminal_contract_is_explicit_and_presentation_only(self):",
+    "terminal_renderer": "gui/app.mjs: export function renderEndSessionEnvelope(envelope, root = document) {",
+    "terminal_validator": "gui/app.mjs: export function validateEndSessionEnvelope(envelope) {",
+    "direct_effect_renderer": "gui/app.mjs: function appendResolutionItems(list, items, emptyMessage) {",
+    "consequence_links": "gui/consequence-links.mjs: export function resolutionConsequenceLinks(envelope = {})",
+    "text_first_boundary": "gui/README.md: text-first history/debrief view",
+    "audio_fallback": "gui/README.md: Optional debrief music is atmospheric only"
+  },
+  "technical_path": [
+    "receive a host-supplied terminal session envelope",
+    "validate terminal history, debrief, replay transition count, and latest state hash alignment",
+    "render committed history, written debrief lines, terminal metadata, and read-only controls",
+    "render host-supplied before/after snapshots, direct effects, and consequence links descriptively",
+    "retain written history, hashes, debrief, and effect text when audio or motion is unavailable"
+  ],
+  "surface_contract": {
+    "terminal_sections": [
+      "committed history",
+      "replay transition count",
+      "latest state hash",
+      "written debrief",
+      "before/after snapshots",
+      "direct committed effects",
+      "consequence links"
+    ],
+    "read_only_terminal_behavior": [
+      "disable further action controls",
+      "disable end-session control",
+      "preserve host-supplied history and debrief"
+    ],
+    "optional_audio_boundary": "Debrief music is atmospheric only; written history, hashes, and debrief text remain complete when muted or unavailable.",
+    "human_review_boundary": "Technical rendering evidence does not replace human visual, accessibility, educational, or classroom review."
+  },
+  "findings": {
+    "terminal_envelope_alignment_is_source_bound": true,
+    "history_hash_debrief_text_are_rendered": true,
+    "direct_effects_remain_descriptive": true,
+    "terminal_controls_become_read_only": true,
+    "written_audio_and_motion_fallback_is_present": true,
+    "human_debrief_visual_review": false,
+    "educational_and_classroom_review": false
+  },
+  "authority_boundary": "The host/core owns terminal history, replay metadata, debrief lines, snapshots, direct effects, and hashes; the browser validates and renders supplied fields and does not author outcomes, infer causal graphs, or retain terminal mutation authority.",
+  "limits": [
+    "This closes the current repository-owned technical debrief visual presentation boundary only.",
+    "It does not establish visual quality, information hierarchy, human comprehension, accessibility quality, educational effectiveness, classroom readiness, causal certainty, or policy validity.",
+    "The broader Debrief visuals reviewed roadmap item remains open for structured human visual/educational review."
+  ],
+  "test_source": "tests/test_phase13_2_debrief_visual_boundary.py"
+}
