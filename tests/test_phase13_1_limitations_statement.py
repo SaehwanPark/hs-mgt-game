@@ -34,6 +34,13 @@ class Phase131LimitationsStatementTests(unittest.TestCase):
       "use the game to make real-world decisions",
     ):
       self.assertIn(marker, normalized_guide)
+    for claim in (
+      "educational_simulation_not_forecast",
+      "fictional_institutions_not_real_world_advice",
+      "technical_checks_do_not_replace_human_review",
+      "actor_visible_and_host_authoritative",
+    ):
+      self.assertTrue(self.ledger["claims"].get(claim), claim)
     self.assertFalse(self.ledger["claims"].get("policy_validity", False))
     self.assertIn("public-release approval", " ".join(self.ledger["remaining_gates"]))
 
