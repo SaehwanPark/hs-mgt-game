@@ -1900,6 +1900,41 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio bounded content boundary QA v0.13.51
+
+## Scope
+
+Review current player-facing policy/safety wording and browser presentation
+sources for unsupported clinical implications, false precision, and
+actor-observation boundary drift. Record a bounded QA result without adding
+runtime behavior or claiming human or expert approval.
+
+## Target slice
+
+- Verify the fictional educational-simulation and non-forecast boundary is
+  visible beside first-session guidance.
+- Check current GUI modules for unsupported clinical-advice language.
+- Preserve source/status, written precision, fallback, host authority, and
+  hidden-state boundaries.
+
+## Sources and expected files
+
+- `README.md`, `docs/guides/gui-how-to-play.md`, `gui/*.mjs`, `gui/index.html`,
+  `gui/metric-visualization-proof.html`, and `gui/semantic-containers.mjs`.
+- New `docs/evaluation/phase13.1-content-boundary-qa.json` and
+  `tests/test_phase13_1_content_boundary_qa.py`.
+- Additive domain/presentation QA, contract, handoff, roadmap, SDD, changelog,
+  and release-metadata updates.
+
+## Non-goals and validation
+
+- Do not add assets, portraits, audio, routes, commands, host fields,
+  simulation rules, stochastic inputs, persistence, replay changes, clinical
+  recommendations, policy forecasts, or human approval claims.
+- Run the focused QA test plus the repository's full Python/Rust and release,
+  documentation, asset, generation, offline, browser/device-policy, and
+  visual/audio checks.
+
 # Request Summary — Visual/audio Phase 13.1 limitations statement v0.13.48
 
 ## Scope

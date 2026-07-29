@@ -3646,7 +3646,16 @@ educational/accessibility gates remain open.
 
 - [ ] No real institution accidentally represented.
 - [ ] No public-figure resemblance remains.
-- [ ] No unsupported clinical implication introduced.
+- [ ] No unsupported clinical implication introduced. Human clinical/policy
+  review remains open.
+- [x] Current GUI source/content wording scan completed. Evidence:
+  `docs/evaluation/phase13.1-content-boundary-qa.json`,
+  `tests/test_phase13_1_content_boundary_qa.py`, and the Phase 13.1 domain/
+  presentation QA records; the current reviewed player-facing and GUI source
+  surfaces contain no direct unsupported clinical-advice wording and preserve
+  the fictional/non-forecast boundary. This closes only a bounded
+  repository-owned source/content wording check; it does not close the
+  clinical-implication gate.
 - [x] No hidden-state leak found. Evidence:
   `docs/evaluation/phase13.1-hidden-state-boundary.json`,
   `tests/test_phase13_1_hidden_state_boundary.py`, and the existing GUI
@@ -3686,6 +3695,21 @@ educational/accessibility gates remain open.
 - This closes only the automated hidden-state content gate. Human content,
   provenance, accessibility, educational, clinical-implication, resemblance,
   and public-release review remain open.
+
+### v0.13.51 current bounded content boundary QA
+
+- `docs/evaluation/phase13.1-content-boundary-qa.json` and
+  `tests/test_phase13_1_content_boundary_qa.py` record a bounded review of the
+  current player guide, README, GUI modules, metric proof, and semantic source
+  catalog.
+- The current surfaces preserve the fictional/non-forecast and operational,
+  clinical, financial, regulatory, and legal limitation language; the focused
+  scan finds no diagnosis, prescribing, treatment-plan, patient-specific,
+  clinical-recommendation, or clinical-decision claim.
+- This records only the current repository-owned source/content wording gate.
+  The original clinical-implication item remains open for human clinical/
+  policy review; resemblance, provenance, accessibility, educational, legal,
+  and public-release review also remain open.
 
 ### Exit criteria
 

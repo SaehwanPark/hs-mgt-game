@@ -3072,3 +3072,12 @@ current browser surface does not carry simulation-world or resolved-input data.
 They do not prove that every narrative, visual, audio, clinical implication,
 institutional resemblance, or educational interpretation is safe; keep those
 content and human gates explicit.
+
+## Phase 56: Make content-boundary QA evidence narrow (2026-07-29)
+
+A source-level scan can verify that the current player guide and GUI surfaces
+retain fictional/non-forecast limits and do not make direct clinical-advice
+claims. It cannot establish clinical validity, policy validity, player
+comprehension, or educational safety. Close only the repository-owned wording
+gate and keep expert, human, provenance, accessibility, and release review
+explicit.

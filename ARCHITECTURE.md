@@ -956,6 +956,13 @@ resolved-input, and effect-queue fields. The host may use true state internally;
 the browser boundary remains actor-visible and presentation-only, and human
 content/provenance review remains separate.
 
+The v0.13.51 bounded content-boundary QA records a source-level review of the
+current player guide, README, GUI modules, metric proof, and semantic
+source/status catalog. Presentation remains a host-authorized actor-visible
+renderer; the review adds no runtime, authority, replay, or simulation path.
+The wording check is not clinical/policy expert approval, human comprehension
+evidence, or public-release approval.
+
 Last Reviewed: 2026-07-29
 Status: Verified
 

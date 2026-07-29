@@ -3146,3 +3146,18 @@ world, resolved-input, and effect-queue fields at the presentation boundary.
 This is a technical source-checkout contract only; it does not approve content,
 clinical implications, institutional resemblance, accessibility, educational
 usability, or public release.
+
+## Bounded Content Boundary Addendum — v0.13.51
+
+The current player guide, README, metric visualization proof, semantic
+container catalog, and browser modules were reviewed for unsupported clinical
+implications and information-boundary drift. The source/content QA records
+the fictional/non-forecast boundary, absence of diagnosis/prescribing/
+treatment-plan/patient-specific/clinical-recommendation claims, text-first
+precision rules, and host-authorized source/status semantics.
+
+This contract closes only a current repository-owned wording and source-boundary
+check. It does not authorize new assets, audio, browser routes, host fields,
+simulation changes, or clinical/policy claims. Human domain, accessibility,
+educational, provenance, resemblance, legal, and public-release review remain
+open.

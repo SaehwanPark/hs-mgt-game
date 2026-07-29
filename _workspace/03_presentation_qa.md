@@ -3801,3 +3801,74 @@ human review remain open.
 and read-only tests reject simulation-world, resolved-input, and effect-queue
 fields without changing host authority. Human content, provenance, accessibility,
 educational, and public-release review remain open.
+
+## Presentation Domain QA — Phase 13.1 bounded content boundary v0.13.51
+
+### Status
+
+`pass` for the bounded current technical presentation/content boundary only.
+No human visual-quality, accessibility, clinical/policy, educational, legal,
+provenance, or public-release approval is implied.
+
+### Reviewed Inputs and Authorization
+
+- The current presentation contract, player guide, README, semantic-container
+  catalog, metric visualization proof, and all current browser modules.
+- The Phase 13.1 content-boundary ledger and focused regression test.
+- The existing host/DTO hidden-state boundary and limitations statement.
+- Authorization is limited to reviewing current actor-visible presentation
+  wording and source/precision boundaries; no new visual, audio, host, or
+  simulation authority was authorized.
+
+### Information and Causality Findings
+
+- Pass: visible source/status language remains part of the semantic-container
+  contract and the metric proof keeps exact values, uncertainty, missingness,
+  and source in written equivalents.
+- Pass: current surfaces do not claim diagnosis, prescribing, treatment plans,
+  patient-specific advice, clinical recommendations, or clinical decisions.
+- Pass: the fictional/non-forecast limitation is adjacent to first-session
+  guidance, and no presentation surface turns an observed metric into a
+  probability, forecast, hidden state, or causal certainty.
+
+### Accessibility and Fallback Findings
+
+- Pass: the reviewed precision and safety meanings remain text-first and do not
+  depend on color, motion, audio, or a portrait.
+- Existing audio, reduced-motion, text-scale, written-equivalent, and
+  low-distraction fallbacks remain unchanged and separately bounded.
+- Human screen-reader, device, comprehension, and educational review remain
+  outside this source QA.
+
+### Provenance and Rights Findings
+
+- No asset, portrait, audio file, registry entry, or release path was added.
+- Existing provenance, resemblance, licensing, AI-generation metadata, and
+  legal gates remain open and are not inferred from the wording scan.
+
+### Authority and Replay Findings
+
+- Pass: the reviewed GUI remains a renderer of host-authorized actor-visible
+  data; no simulation-world, resolved-input, effect-queue, or client-transition
+  authority is added.
+- No command, transition, stochastic input, history, hash, replay, persistence,
+  or debrief authority changes.
+
+### Required Fixes
+
+None for this bounded technical presentation/content pass.
+
+### Residual Risks and Evidence Limits
+
+- Source-level absence of prohibited wording is not clinical or policy expert
+  approval and cannot prove that a player will interpret every metric safely;
+  the broader roadmap clinical-implication gate remains open.
+- Human visual/audio quality, accessibility, educational usability, portrait
+  identity/resemblance, provenance/legal clearance, full-campaign coverage,
+  and public-release review remain open.
+
+### Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_content_boundary_qa` — pass.
+- Existing Phase 13.1 hidden-state/limitations tests and current GUI contract
+  checks — pass at handoff.

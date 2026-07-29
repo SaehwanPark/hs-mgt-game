@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.51] - 2026-07-29
+
+- Recorded a bounded repository-owned content/presentation QA pass for the
+  fictional/non-forecast boundary, unsupported clinical-advice wording, metric
+  precision, source/status semantics, and actor-visible information limits.
+- Closed only the current source/content gate; human clinical/policy,
+  resemblance, provenance, accessibility, educational, legal, and
+  public-release review remain open.
+
 ## [0.13.50] - 2026-07-29
 
 - Recorded a source-checkout browser/DTO hidden-state boundary for the current

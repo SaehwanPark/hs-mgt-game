@@ -51,3 +51,53 @@ None remaining.
   process/curl launch, and diff checks passed.
 - One severity-ranked code-review pass completed; its one blocking finding was
   fixed and reverified. Final review: no actionable issues found.
+
+# Domain QA — Phase 13.1 bounded content boundary v0.13.51
+
+## Status
+
+`pass` for the bounded repository-owned source/content QA. This is not
+clinical or policy expert approval.
+
+## Reviewed Inputs
+
+- `README.md`, `docs/guides/gui-how-to-play.md`, and the canonical design,
+  proposal, roadmap, and team-spec boundaries.
+- Current `gui/*.mjs`, `gui/index.html`, metric visualization proof, and
+  semantic-container source/status catalog.
+- `docs/evaluation/phase13.1-content-boundary-qa.json` and its focused test.
+- Existing hidden-state and limitations ledgers/tests.
+
+## Findings
+
+- Scope remains a fictional educational simulation and research prototype;
+  player-facing text rejects calibrated forecasting and operational, clinical,
+  financial, regulatory, and legal decision use.
+- The reviewed GUI surfaces contain no claims of diagnosis, prescribing,
+  treatment plans, patient-specific advice, clinical recommendations, or
+  clinical decisions.
+- Numeric visualization rules retain exact values, source, status, uncertainty,
+  and missingness in written text and prohibit forecast, probability, and
+  hidden-state inference.
+- Actor-visible source/status language and the existing browser hidden-state
+  scan keep current presentation evidence separate from true state, resolved
+  inputs, and effects.
+
+## Required Fixes
+
+None for this bounded source/content pass.
+
+## Residual Risks
+
+- A source scan cannot establish clinical validity, policy validity, calibration,
+  human comprehension, accessibility quality, or educational effectiveness.
+- Portrait resemblance, institutional resemblance, asset/audio provenance,
+  legal review, and public-release review remain open.
+- The bounded source/content wording gate is recorded for this current reviewed
+  checkout; the broader clinical-implication item remains an explicit human
+  content/policy release gate.
+
+## Verification Evidence
+
+- `python3 -m unittest tests.test_phase13_1_content_boundary_qa` — pass.
+- Existing hidden-state and limitations boundary tests — pass.
