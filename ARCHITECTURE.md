@@ -893,6 +893,13 @@ commands while documenting the narrower host/browser summary boundary. It does
 not add runtime presentation state. Its direct-effect evidence remains
 descriptive and does not authorize an inferred causal graph.
 
+The v0.13.42 counterfactual-difference renderer adds a text-first, read-only
+comparison of same-genesis committed stabilization histories, called by the
+existing preset CLI post-run demo. It reports aligned state and effect deltas
+plus resolved-input parity without recalculating runs or claiming causal
+certainty. It does not create a browser instructor route, distributional view,
+export format, or new authority boundary.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 

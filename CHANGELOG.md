@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.42] - 2026-07-29
+
+- Added a deterministic, text-first counterfactual difference renderer for
+  committed stabilization histories, reachable from the preset post-run CLI
+  demo, with same-genesis and resolved-input parity checks, committed
+  state/effect deltas, and written fallbacks.
+- Closed only the current descriptive counterfactual-difference view; no
+  causal certainty, strategy ranking, browser instructor route, distributional
+  view, export format, or human educational claim is introduced.
+
 ## [0.13.41] - 2026-07-28
 
 - Recorded current host-sourced direct-effect attribution, ordered before/after

@@ -356,6 +356,7 @@ fn run_session_from_genesis(
         "Selected preset",
         strategy_plan(strategy).name,
       ));
+      let selected_strategy = strategy;
       let history = build_history_for_strategy_from_genesis(
         strategy_plan(strategy),
         config.seed,
@@ -363,7 +364,7 @@ fn run_session_from_genesis(
         initial_state.clone(),
       )
       .map_err(CliError::InvalidStrategyPlan)?;
-      print_demo(config.seed, &history, ruleset);
+      print_demo(config.seed, &history, ruleset, selected_strategy);
       InteractiveRunResult::Completed(history)
     }
     PlayMode::Interactive => {

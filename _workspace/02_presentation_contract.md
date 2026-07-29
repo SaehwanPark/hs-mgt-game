@@ -2969,6 +2969,41 @@ than core history and do not expose resolved inputs or private rationale.
 recovery contracts, the narrower host/browser boundary, written fallback, and
 no-expansion limits. Full browser recovery and human review remain open.
 
+# Presentation Contract — Phase 12.3 counterfactual difference view v0.13.42
+
+## Goal and Authorization
+
+This slice closes the current “Counterfactual differences visualized” item as
+a deterministic, text-first, post-run comparison of existing stabilization
+histories. The existing preset CLI demo displays the selected preset against a
+deterministic alternative. It is not a browser or instructor authority
+surface.
+
+## Source Ledger and Semantics
+
+- Commands come from committed `Transition.command` values.
+- State differences come from committed `Transition.next` values.
+- Effect differences come from committed `AttributedEffect` values.
+- Resolved-input equality is reported without printing resolved-input values.
+- Same genesis is required; mismatches receive a written fallback.
+
+The output uses stable baseline/alternative/unchanged/different labels. It does
+not infer intent, severity, future outcomes, causal graphs, or strategy value.
+
+## Accessibility, Authority, and Provenance
+
+The view is fully text-first and requires no color, motion, audio, asset, or
+browser capability. It reads immutable histories without mutating commands,
+transitions, hashes, replay artifacts, or debrief state. No new asset or audio
+provenance record is needed.
+
+## Verification and Open Questions
+
+Focused Rust tests cover equal histories, changed command/state/effect values,
+unequal inputs, and incompatible genesis. A source-linked Python ledger test
+checks the boundary. Causal validity, distributional outcomes, export behavior,
+browser instructor presentation, and human educational review remain open.
+
 # Presentation Contract — Phase 12.3 causal attribution boundary v0.13.41
 
 ## Contract status

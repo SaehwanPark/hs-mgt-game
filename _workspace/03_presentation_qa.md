@@ -2942,6 +2942,42 @@ educational usability, and public-release approval remain open.
 - Full Python/Rust/lint/release/documentation/generation/asset/offline,
   browser/device/visual-audio checks — pass.
 
+# Presentation Domain QA — Phase 12.3 counterfactual difference view v0.13.42
+
+## Status
+
+`pass` for the bounded current descriptive view.
+
+## Findings
+
+- `src/debrief/counterfactual.rs` reads only committed histories, requires equal
+  genesis states, and reports aligned state/effect differences.
+- Unequal resolved inputs are explicit and prevent counterfactual attribution
+  language; resolved-input values are not printed.
+- Text output remains complete without color, motion, audio, assets, or browser
+  support, with written fallbacks for empty or incompatible comparisons.
+- The existing preset CLI demo now calls the renderer after the committed
+  replay/debrief output; the renderer is read-only and does not submit
+  commands, mutate state hashes, write replay artifacts, or create an
+  instructor route.
+
+## Required fixes
+
+None for this bounded slice.
+
+## Evidence limits
+
+This does not establish causal validity, strategy ranking, educational
+usability, human accessibility quality, distributional fairness, or public
+release readiness. Those remain separate gates.
+
+## Verification evidence
+
+- `cargo test` — 342 passed.
+- `python3 -m unittest discover -s tests` — 708 passed.
+- Release metadata, documentation links, clippy, formatting, diff, and
+  generated-credit checks — pass.
+
 # Presentation Domain QA — Phase 12 campaign-specific presentation inventory v0.13.21
 
 ## Status

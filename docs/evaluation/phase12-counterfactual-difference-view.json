@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase12-counterfactual-difference-view-v1",
+  "status": "complete-current-descriptive-counterfactual-view-only",
+  "roadmap_item": "Counterfactual differences visualized",
+  "source_contract": {
+    "renderer": "src/debrief/counterfactual.rs: pub fn counterfactual_difference_lines",
+    "module_export": "src/debrief/mod.rs: pub use counterfactual::counterfactual_difference_lines",
+    "focused_tests": "src/debrief/counterfactual_tests.rs: comparison_shows_command_state_and_effect_differences"
+  },
+  "comparison_contract": {
+    "inputs": "two committed stabilization History values",
+    "required_parity": "same genesis; aligned turns are compared descriptively",
+    "reported": "baseline/alternative commands, committed next-state metric differences, attributed-effect differences, and resolved-input parity",
+    "fallbacks": "different genesis, empty alignment, unequal transition counts, and unequal resolved inputs remain explicit",
+    "causality": "no causal certainty, ranking, probability, or strategy-value claim"
+  },
+  "presentation_surface": {
+    "format": "deterministic text-first post-run renderer used by the existing preset CLI demo",
+    "host_authority": "read-only immutable histories",
+    "browser_boundary": "no browser route or new instructor authority path; CLI-only preset comparison",
+    "audio_visual_assets": "none required",
+    "written_fallback": "always available"
+  },
+  "limits": [
+    "This closes only the current descriptive counterfactual difference view.",
+    "The renderer does not recalculate either history or expose resolved-input values.",
+    "It does not establish causal validity, calibration, balance, learning, or human accessibility.",
+    "Distributional outcomes, export behavior, browser-native instructor surfaces, and human educational review remain separate gates."
+  ],
+  "test_source": "tests/test_phase12_counterfactual_difference_view.py"
+}
