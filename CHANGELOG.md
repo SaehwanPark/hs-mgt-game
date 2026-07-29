@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.46] - 2026-07-29
+
+- Updated the existing structured-evaluation guide with facilitator preflight,
+  classroom assumptions, audio/accessibility guidance, consent and recording
+  boundaries, and pilot feedback handling.
+- Added a privacy-preserving feedback instrument with bounded task/rating
+  fields and a pending human decision; no participant results, runtime
+  low-distraction mode, or approval claim is introduced.
+
 ## [0.13.45] - 2026-07-29
 
 - Documented the existing GUI settings, optional audio controls, reduced-motion

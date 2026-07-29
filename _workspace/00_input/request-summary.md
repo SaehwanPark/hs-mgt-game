@@ -1900,6 +1900,32 @@ unreleased portrait-preview boundary.
 - Run focused/full Python and Rust checks plus release, documentation, asset,
   generation, offline, browser-policy, device-policy, and visual/audio checks.
 
+# Request Summary — Visual/audio Phase 13.2 pilot-preparation boundary v0.13.46
+
+## Scope
+
+Prepare the existing human-evaluation workflow for a bounded classroom or
+facilitated pilot without recording participant results or making a go/no-go
+claim.
+
+## Target slice
+
+- Add facilitator preflight, classroom hardware assumptions, audio guidance,
+  accessibility accommodations, low-distraction recipe boundaries, and
+  screenshot/recording consent guidance to the existing evaluation guide.
+- Add a structured privacy-preserving feedback instrument with task states,
+  ratings, finding categories, and a pending human decision field.
+- Source-link the preparation evidence and update only the feasible Phase 13.2
+  documentation checklist items.
+
+## Non-goals and validation
+
+- Do not add participant results, raw media, personal data, human approval,
+  educational-effectiveness claims, or a dedicated runtime low-distraction
+  mode in this slice.
+- Run focused/full Python and Rust checks plus release, documentation, asset,
+  generation, and presentation-boundary checks.
+
 # Request Summary — Visual/audio Phase 13.1 player-facing settings/help boundary v0.13.45
 
 ## Scope

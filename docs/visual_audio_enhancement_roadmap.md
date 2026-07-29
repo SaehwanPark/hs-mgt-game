@@ -3665,14 +3665,38 @@ educational/accessibility gates remain open.
 
 ### Checklist
 
-- [ ] Pilot facilitator guide updated.
-- [ ] Audio guidance for classrooms included.
+- [x] Pilot facilitator guide updated. Evidence:
+  `docs/guides/phase10.2-structured-evaluation.md`,
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`, and
+  `tests/test_phase13_2_pilot_preparation.py`; the Phase 13.2 addendum records
+  preflight, stop/consent, no-teaching-hidden-state, and feedback handling.
+- [x] Audio guidance for classrooms included. Evidence:
+  `docs/guides/phase10.2-structured-evaluation.md` and
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; audio-off,
+  cues-only, mute, reduced-notifications, channel, speaker/headphone, and
+  written-equivalent guidance is recorded.
 - [ ] Low-distraction mode available.
-- [ ] Screenshot and recording permissions clarified.
+- [x] Screenshot and recording permissions clarified. Evidence:
+  `docs/guides/phase10.2-structured-evaluation.md` and
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; explicit consent,
+  redaction, local-only handling, and no-repository-media boundaries are
+  recorded.
 - [ ] Debrief visuals reviewed.
-- [ ] Classroom hardware assumptions documented.
-- [ ] Accessibility accommodation guidance documented.
-- [ ] Feedback instrument prepared.
+- [x] Classroom hardware assumptions documented. Evidence:
+  `docs/guides/phase10.2-structured-evaluation.md` and
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; loopback host,
+  Chromium, input, display, 1024x768 planning baseline, audio-optional, and
+  prebuild assumptions are recorded.
+- [x] Accessibility accommodation guidance documented. Evidence:
+  `docs/guides/phase10.2-structured-evaluation.md` and
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; existing motion,
+  text, audio, keyboard, skip/review, and extra-time accommodations are
+  recorded without claiming universal accessibility.
+- [x] Feedback instrument prepared. Evidence:
+  `docs/evaluation/phase13.2-pilot-feedback-instrument.json`,
+  `docs/evaluation/phase13.2-pilot-preparation-boundary.json`, and
+  `tests/test_phase13_2_pilot_preparation.py`; tasks, ratings, privacy, finding
+  categories, and a pending human decision field are structured.
 
 ### Exit criteria
 

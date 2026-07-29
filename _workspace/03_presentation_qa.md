@@ -3760,3 +3760,12 @@ safe local-storage fallback; and keeps written outcomes complete when motion,
 audio, text-equivalent, or text-scale preferences change. No host authority or
 simulation path is added. Human accessibility, educational, audio-quality,
 classroom, and public-release review remain open.
+
+## Pilot Preparation QA — v0.13.46
+
+`pass` for the preparation-only pilot boundary. The guide and instrument cover
+facilitator preflight, classroom assumptions, audio/accessibility options,
+consent and media limits, anonymized feedback, and a pending decision state.
+No participant result, low-distraction runtime mode, classroom multiplayer,
+new host route, or authority path is introduced. Human accessibility,
+educational, audio-quality, legal, and public-release review remain open.

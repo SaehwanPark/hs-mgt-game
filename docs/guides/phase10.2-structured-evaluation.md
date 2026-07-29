@@ -102,3 +102,72 @@ This protocol prepares human evaluation. No participant results are included.
 Preparation does not establish legal clearance, universal accessibility,
 clinical validity, policy forecasting accuracy, or educational effectiveness.
 Any release or human-approval decision remains separately authorized.
+
+## Phase 13.2 pilot-preparation addendum
+
+**Status:** preparation complete for authorized human planning; no participant
+result, recording, or go/no-go decision is included here.
+
+### Facilitator preflight
+
+- Use an exact repository checkout and build the live host before the session;
+  the GUI binds to loopback and is not a network multiplayer service.
+- Use the documented `competitive-regional-v1`, seed `42`, and Normal
+  difficulty first unless the session plan records another bounded choice.
+- Confirm that all examples remain fictional and that the facilitator will not
+  teach hidden rival actions, future outcomes, or an intended optimal strategy.
+- Obtain explicit consent before collecting any feedback, screenshot, or
+  recording. A participant may skip a task or stop without explanation.
+
+### Classroom hardware assumptions
+
+- One facilitator-controlled local host and one learner-facing Chromium desktop
+  browser on the **same computer** per active run; the loopback host cannot
+  serve a browser on another computer. In a multi-device room, use one
+  host/browser pair per learner or show one facilitator-controlled session;
+  the GUI currently supports one competitive session flow, not classroom
+  multiplayer.
+- Keyboard and pointing-device access, a readable desktop display, and a
+  current Chromium-based browser with JavaScript modules enabled.
+- The repository's bounded browser proxy uses a 1024×768 viewport. This is a
+  layout-planning baseline, not a real-device, battery, thermal, or frame-rate
+  certification.
+- Audio is optional. A muted session must remain fully playable; if audio is
+  enabled, use headphones or a facilitator-controlled speaker and avoid
+  assuming that every learner can hear it.
+- Build/dependency resolution should be completed before class. The live host
+  itself is local and does not require runtime asset or network downloads.
+
+### Audio and accessibility guidance
+
+- Begin with audio off and explain that every cue has a written equivalent.
+  Offer cues-only, mute, reduced notifications, and independent channel
+  volumes; stop or mute audio when it causes distraction or fatigue.
+- Offer the existing **Reduced motion**, **Large** text, and optional cue
+  explanation settings before the first task. Keep written results visible and
+  allow keyboard navigation, skip, review, extra time, or a task retry as
+  accommodations.
+- A bounded low-distraction recipe is available through the existing controls:
+  Reduced motion on, Large text when useful, cue explanations on, and audio
+  muted or reduced-notifications enabled. This is a facilitator recipe, not a
+  new runtime mode or a claim of universal accessibility.
+- Record only the accommodation offered or the observed barrier category; do
+  not record a diagnosis, health information, or identifying detail.
+
+### Screenshot, recording, and feedback handling
+
+- Screenshots and recordings require separate explicit consent. Do not capture
+  the browser URL, session IDs, participant names, private notes, or hidden
+  state; crop or redact any accidental capture before local review.
+- Do not commit participant media or raw responses to the repository. Use the
+  structured instrument at
+  `docs/evaluation/phase13.2-pilot-feedback-instrument.json` and record only
+  anonymized task outcomes, bounded ratings, classified findings, and the
+  separate feedback/screenshot/recording consent statuses. A declined or
+  not-applicable media consent must not be followed by capture.
+- Classify a finding as `defect`, `preference`, or `scope-expansion`. Keep the
+  decision field pending until an authorized reviewer inspects the evidence.
+
+This addendum prepares a pilot workflow. It does not establish measured
+learning, classroom effectiveness, human accessibility, audio usefulness,
+legal clearance, or public-release readiness.

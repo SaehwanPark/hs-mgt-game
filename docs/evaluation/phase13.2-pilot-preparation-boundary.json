@@ -1,0 +1,31 @@
+{
+  "schema_version": "phase13.2-pilot-preparation-boundary-v1",
+  "status": "complete-preparation-only",
+  "roadmap_items": [
+    "Pilot facilitator guide updated",
+    "Audio guidance for classrooms included",
+    "Screenshot and recording permissions clarified",
+    "Classroom hardware assumptions documented",
+    "Accessibility accommodation guidance documented",
+    "Feedback instrument prepared"
+  ],
+  "source_contract": {
+    "existing_evaluation_guide": "docs/guides/phase10.2-structured-evaluation.md: ## Phase 13.2 pilot-preparation addendum",
+    "existing_gui_guide": "docs/guides/gui-how-to-play.md: ## Settings and accessibility",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "distribution_boundary": "docs/guides/reproducible-distribution.md: The live GUI currently supports `competitive-regional-v1` only and binds to a"
+  },
+  "prepared_contract": {
+    "facilitator": "Preflight, task-order, consent, stop, and no-teaching-hidden-state guidance is written.",
+    "classroom": "Loopback Chromium, 1024x768 planning baseline, local host, input, audio-optional, and prebuild assumptions are written.",
+    "accessibility": "Reduced motion, Large text, written equivalents, mute/reduced notifications, keyboard, skip/review, and extra-time accommodations are written.",
+    "privacy": "Separate feedback, screenshot, and recording consent status fields plus anonymized-only media and feedback boundaries are written.",
+    "feedback": "Tasks, rating dimensions, response states, finding categories, and pending decision fields are structured in a checked-in instrument."
+  },
+  "limits": [
+    "No participant results or go/no-go decision are recorded.",
+    "This does not establish human accessibility, educational effectiveness, audio usefulness, legal clearance, or public-release readiness.",
+    "A dedicated runtime low-distraction mode, debrief visual review, and full campaign coverage remain separate items."
+  ],
+  "test_source": "tests/test_phase13_2_pilot_preparation.py"
+}

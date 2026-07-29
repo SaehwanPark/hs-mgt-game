@@ -3093,3 +3093,17 @@ The guide is written for a first-time local Chromium player and a facilitator
 helping with a bounded session. It does not claim human accessibility,
 educational usability, audio quality, classroom readiness, or public-release
 approval.
+
+## Pilot Preparation Addendum — v0.13.46
+
+The existing structured-evaluation guide now carries a preparation-only pilot
+contract: facilitator preflight, fictional seeded runs, loopback/local-host
+assumptions, optional audio, existing reduced-motion/Large-text/written
+equivalent controls, accommodation categories, and explicit screenshot/
+recording consent. The feedback instrument stores only anonymized bounded
+responses and keeps the human decision pending.
+
+This preparation does not create classroom multiplayer, a runtime
+low-distraction mode, a new observation or debrief route, participant data,
+media storage, or host authority. It does not establish accessibility,
+educational, audio-quality, legal, or public-release approval.

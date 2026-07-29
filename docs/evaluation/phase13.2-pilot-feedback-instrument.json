@@ -1,0 +1,80 @@
+{
+  "schema_version": "phase13.2-pilot-feedback-instrument-v1",
+  "status": "ready-for-authorized-human-pilot",
+  "purpose": "Collect bounded, anonymized feedback about first-session play, presentation controls, accessibility friction, audio preference, and debrief comprehension.",
+  "source_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json",
+  "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+  "consent_record": {
+    "feedback": "granted | declined | not-recorded",
+    "screenshot": "granted | declined | not-applicable | not-recorded",
+    "recording": "granted | declined | not-applicable | not-recorded",
+    "storage_rule": "Record consent status only; never store signatures, names, raw media, or identifying notes in the repository."
+  },
+  "session_record": {
+    "allowed": [
+      "anonymized participant role/category",
+      "campaign, seed, and difficulty",
+      "task status: completed, skipped, or not-observed",
+      "bounded 1-5 ratings or not-observed",
+      "accommodation offered or observed barrier category",
+      "defect, preference, or scope-expansion classification"
+    ],
+    "forbidden": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "pilot-start-to-resolution",
+      "source_task": "first-session-start-to-resolution",
+      "prompt": "Start the seeded session, draft two actions, validate, submit, review the resolution, and describe what refreshed.",
+      "response": "completed | skipped | not-observed"
+    },
+    {
+      "id": "pilot-settings-and-recovery",
+      "source_task": "keyboard-large-text-reduced-motion",
+      "prompt": "Try Large text, Reduced motion, written cue explanations, skip/review, and one recovery path; note any barrier.",
+      "response": "completed | skipped | not-observed"
+    },
+    {
+      "id": "pilot-audio-choice",
+      "source_task": "audio-preference-and-equivalent",
+      "prompt": "Try audio off, mute, cues-only, reduced notifications, and written equivalents; rate usefulness and fatigue only if observed.",
+      "response": "completed | skipped | not-observed"
+    },
+    {
+      "id": "pilot-debrief-comprehension",
+      "source_task": "reconstruct-first-month",
+      "prompt": "Use the written resolution, history, and debrief to reconstruct the first-month consequence sequence.",
+      "response": "completed | skipped | not-observed"
+    }
+  ],
+  "rating_dimensions": [
+    "first-session-clarity",
+    "consequence-comprehension",
+    "information-density",
+    "accessibility-friction",
+    "audio-usefulness",
+    "audio-fatigue",
+    "debrief-comprehension",
+    "trust-in-information-boundaries"
+  ],
+  "rating_scale": "1=very poor or confusing; 5=very clear or useful; not-observed is allowed.",
+  "finding_categories": ["defect", "preference", "scope-expansion"],
+  "decision": {
+    "status": "pending-human-evidence",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This instrument contains no participant results.",
+    "Preparation does not establish learning, classroom effectiveness, universal accessibility, audio usefulness, legal clearance, or public-release readiness.",
+    "Human evaluation and go/no-go remain separately authorized decisions."
+  ]
+}
