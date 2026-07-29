@@ -1,3 +1,43 @@
+# Presentation Contract — Direct campaign audio projection v0.13.60
+
+## Goal and Authorization
+
+Expose optional host-selected campaign music/cue metadata through the existing
+typed `campaign-coverage-v1` envelope and let the browser use it without
+changing simulation authority. Existing written campaign content remains the
+primary equivalent when audio is unavailable, muted, reduced, or omitted.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign music state | Host `CampaignCoverageAudio.music_state_id` | Optional; browser falls back to visible text when omitted | Do not infer hidden severity, intent, agreement, or future outcome |
+| Campaign event cues | Host `CampaignCoverageAudio.audio_cue_ids` and existing catalog | Optional; explicit empty means no campaign cue; omitted preserves legacy fallback | Do not invent cues or treat a cue as causal proof |
+| Music/cue vocabulary | Existing `AUDIO_CATALOG` | IDs must already be catalog entries | Do not create or accept new runtime IDs |
+| Written meaning | Existing campaign stage, briefing, actor, process, decision, history, and debrief fields | Always retained independent of audio | Do not make audio required for play |
+
+## Visual, Motion, and Audio Semantics
+
+Host metadata selects existing optional Web Audio recipes only. The browser
+filters cue IDs, applies explicit music after a valid coverage refresh, and
+plays campaign cues only after a successful canonical host submission and
+refresh. Audio-off and reduced-notification settings continue to preserve the
+same written stage and decision meaning.
+
+## Accessibility, Authority, and Evidence Limits
+
+The projection must not contain true state, resolved inputs, private rationale,
+or local transition authority. Technical routing and allowlist tests do not
+establish human listening quality, comprehension, accessibility, educational
+value, fatigue, legal clearance, device certification, or public-release
+readiness.
+
+## Non-Goals
+
+- No new audio asset, catalog ID, route, schema version, simulation rule,
+  transition, persistence, or registry entry.
+- No campaign-specific motif redesign or human listening approval.
+
 # Presentation Contract — Phase 13.1 AI-generation metadata boundary v0.13.57
 
 ## Goal and Authorization
@@ -3305,6 +3345,40 @@ comprehension, accessibility quality, educational effectiveness, classroom
 readiness, causal certainty, or public-release approval. No new route, asset,
 audio, persistence, replay regeneration, or runtime simulation behavior is
 added.
+# Presentation Contract — Direct campaign audio projection v0.13.60
+
+## Contract status
+
+Bounded technical host-to-browser audio contract for the existing
+`campaign-coverage-v1` envelope. The projection is additive and optional.
+
+## Actor-visible behavior
+
+- Stabilization and regional-affiliation coverage may include an existing
+  catalog `music_state_id` and a list of existing visible event-cue IDs.
+- Music is applied on coverage load; event cues play only after a successful
+  canonical host decision and refreshed envelope.
+- An explicit empty cue list means no cue. An omitted audio projection uses the
+  existing visible text classifier and affiliation fallback for older envelopes.
+
+## Authority and fallback
+
+- The Rust host derives metadata from visible campaign presentation fields and
+  committed visible transition summaries; it does not expose private rationale,
+  resolved inputs, true state, or future outcomes.
+- The browser validates/uses catalog vocabulary only for presentation. Audio
+  never changes commands, transitions, history, hashes, or debrief facts.
+- Mute, unavailable audio, reduced notifications, malformed IDs, and missing
+  metadata retain written stage, decision, consequence, and debrief content.
+
+## Non-goals and evidence limits
+
+No new audio asset, catalog entry, route, schema version, simulation behavior,
+audio-quality claim, human listening result, accessibility approval, educational
+result, legal clearance, or public-release approval is claimed.
+
+---
+
 # Presentation Contract — Campaign-aware first-month rail v0.13.59
 
 ## Contract status

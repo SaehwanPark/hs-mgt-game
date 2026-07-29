@@ -1,3 +1,45 @@
+# Request Summary — Direct campaign audio projection v0.13.60
+
+## Authorized outcome
+
+Continue the roadmap loop with a bounded direct campaign-audio projection:
+carry optional host-sourced music/cue metadata through the existing
+`campaign-coverage-v1` envelope for stabilization and regional affiliation,
+honor it in the browser, and keep written/audio-off fallbacks complete.
+
+## Target slice
+
+- Add `CampaignCoverageAudio` using only existing catalog IDs and actor-visible
+  stage, briefing, actor, process, and committed history-summary sources.
+- Make the browser distinguish explicit empty cue metadata from omitted legacy
+  metadata; preserve the older affiliation milestone fallback only when audio
+  metadata is absent.
+- Update current Phase 12 ledgers, roadmap/spec/guides, tests, version,
+  generated records, QA, and handoff documentation to v0.13.60.
+
+## Non-goals
+
+- Do not add a new route, schema version, asset, audio file, catalog ID,
+  simulation rule, hidden-state field, transition authority, or persistence.
+- Do not infer severity, agreement, intent, probability, causality, or future
+  outcome from audio metadata.
+- Do not claim human listening, accessibility, educational, legal, provenance,
+  device, or public-release approval.
+
+## Validation target
+
+Focused host/browser audio tests, full Rust/Python suites, release metadata,
+documentation links, asset/security/generation, device-performance, offline,
+browser-compatibility, and visual/audio contract checks, followed by exactly
+one medium-effort code review and PR handoff.
+
+## Evidence limits
+
+This slice proves only the technical host-to-browser direct audio projection
+and its visible-only/optional boundary. Campaign-specific audio quality,
+listening, accessibility, educational, persistence, device, provenance/legal,
+and public-release gates remain open.
+
 # Request Summary — Visual/audio Phase 13.1 AI-generation metadata boundary v0.13.57
 
 ## Authorized outcome
@@ -2749,6 +2791,38 @@ review.
 - Run the focused Node renderer/parity test plus full Python/Rust, asset,
   generation, security, release, documentation, offline, browser/device,
   and visual/audio contract checks.
+# Request Summary — Direct campaign audio projection v0.13.60
+
+## User request
+
+Continue the roadmap loop after v0.13.59. Implement the next unmet technical
+item: direct browser-native audio integration for the existing stabilization and
+regional-affiliation `campaign-coverage-v1` envelope.
+
+## Target slice
+
+- Add optional host-sourced `music_state_id` and `audio_cue_ids` metadata to the
+  existing typed campaign-coverage projection.
+- Derive IDs deterministically from actor-visible stage/briefing/actor/process
+  text and committed visible transition summaries only.
+- Make the browser prefer explicit host music and post-refresh cue IDs, while
+  preserving omitted-field legacy classification and explicit-empty behavior.
+
+## Scope boundary
+
+No new audio asset, catalog ID, route, schema version, simulation rule,
+transition, persistence path, hidden-state field, or local authority is allowed.
+Audio remains optional and all written campaign meaning must survive mute,
+unavailable audio, reduced notifications, and unsupported metadata.
+
+## Evidence target
+
+Update both Phase 12 audio ledgers, live campaign-coverage evidence, focused
+Rust/Node/Python tests, guides, roadmap/spec/changelog/lessons, package version,
+generated metadata, and current request/contract/QA/handoff records to v0.13.60.
+
+---
+
 # Request Summary — Campaign-aware first-month rail v0.13.59
 
 ## User request

@@ -7068,6 +7068,35 @@ Deferred / Non-Goals:
 - No new host schema, simulation rule, transition, hidden-state field, asset,
   audio file, persistence behavior, or client authority path was added.
 
+### Visual/audio Phase 12 direct campaign audio projection (v0.13.60)
+
+Status: Complete for the current technical host-to-browser audio projection
+boundary only; campaign-specific quality, listening, accessibility, education,
+provenance/legal, persistence, device, and public-release gates remain open.
+
+Done:
+
+- Added `CampaignCoverageAudio` to the existing `campaign-coverage-v1`
+  projection. The host derives optional music/cue IDs from visible campaign
+  stage, briefing, actor, process, and committed history summaries and reuses
+  existing catalog IDs.
+- Updated the browser coverage client to honor valid supplied music state and
+  cue IDs. Explicit empty cue metadata suppresses campaign cues; omitted audio
+  metadata preserves the older regional-affiliation milestone fallback.
+- Synchronized phase ledgers, guides, roadmap, lessons, presentation
+  contracts, QA/handoff records, and package metadata to `0.13.60`.
+
+Not Yet Done:
+
+- Campaign-specific visual/audio quality and listening review; human
+  accessibility and educational evaluation; persistence, device/browser
+  certification, provenance/legal, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new route, schema version, simulation rule, hidden-state field, asset,
+  audio file, local transition authority, or persistence behavior was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

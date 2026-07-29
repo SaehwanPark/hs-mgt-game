@@ -416,6 +416,13 @@ command template; the existing `submitTurn` path remains the only mutation
 path. Host rejection is shown as a recoverable error and does not fabricate a
 local transition.
 
+The same envelope may include an optional `audio` projection with
+host-supplied `music_state_id` and `audio_cue_ids`. The browser accepts only
+IDs already present in `AUDIO_CATALOG`; an explicit empty cue list suppresses
+campaign cues, while omitted audio metadata preserves the older visible-state
+and regional-milestone fallback. Audio remains optional and the written
+campaign surface is complete without it.
+
 For reproducible interface-task traces, inject an optional recorder from
 `playtest.mjs` into any client. It emits `schema_version: "gui-playtest-v1"`
 with declared campaign/role/task metadata, allowlisted onboarding/settings/

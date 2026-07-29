@@ -1,3 +1,37 @@
+# Final Handoff — Direct campaign audio projection v0.13.60
+
+## Status
+
+Ready for PR handoff on `feat/direct-campaign-audio-v0.13.60`. The plan is
+`_workspace/139_implementation_plan_direct-campaign-audio-v0.13.60.md`.
+
+## Planned result
+
+Add optional host-selected music/cue metadata to the existing campaign-coverage
+envelope and honor it in the browser with explicit-empty and legacy fallbacks.
+No new asset, catalog ID, route, schema version, or simulation authority is in
+scope.
+
+## Verification
+
+- All 344 Rust tests and all 763 Python tests passed; focused campaign/audio
+  tests passed, including direct browser application and legacy-envelope
+  deserialization coverage.
+- `cargo fmt --check`, Clippy with warnings denied, release metadata,
+  documentation links, asset/security/generation, device-performance,
+  offline, browser-compatibility, and visual/audio contract checks passed.
+- One medium-effort reviewer found one High compatibility issue and one Low
+  record-state issue; both were fixed and the affected checks were rerun. No
+  other actionable findings remained.
+
+## Review boundary
+
+The technical review is complete. Human listening, accessibility, educational,
+campaign-specific quality, legal, provenance, persistence, device, and
+public-release gates remain open.
+
+---
+
 # Final Handoff — Campaign-aware first-month rail v0.13.59
 
 ## Result

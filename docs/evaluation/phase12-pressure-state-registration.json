@@ -19,7 +19,7 @@
       "status_ids": ["watch", "constrained"],
       "event_cue_ids": ["event.staffing-constraint"],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Staffing and capacity constraint; visible fields require attention.",
       "non_color_motion": "Text label, hatch/double-line pattern, and static reduced-motion presentation."
     },
@@ -31,7 +31,7 @@
       "status_ids": ["watch", "constrained"],
       "event_cue_ids": [],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Demand pressure; the visible unmet-demand value is reported.",
       "non_color_motion": "Text label, wave-line pattern, and static reduced-motion presentation."
     },
@@ -43,7 +43,7 @@
       "status_ids": ["constrained", "critical"],
       "event_cue_ids": ["event.operating-loss"],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Financial distress or operating loss; visible cash, runway, and result text remain available.",
       "non_color_motion": "Text label, diagonal-hatch pattern, and static reduced-motion presentation."
     },
@@ -55,7 +55,7 @@
       "status_ids": ["watch", "uncertain"],
       "event_cue_ids": ["event.regulatory-decision"],
       "music_state_id": "regulatory_scrutiny",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Regulatory review; visible review text and current status remain explicit.",
       "non_color_motion": "Text label, dotted-frame pattern, and static reduced-motion presentation."
     },
@@ -67,7 +67,7 @@
       "status_ids": ["watch", "uncertain"],
       "event_cue_ids": [],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Community-trust concern; visible trust status is reported.",
       "non_color_motion": "Text label, crosshatch pattern, and static reduced-motion presentation."
     },
@@ -79,7 +79,7 @@
       "status_ids": ["delayed", "revised"],
       "event_cue_ids": [],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Delayed project; visible timing and status are reported without a hidden cause.",
       "non_color_motion": "Text label, dashed-ring pattern, and static reduced-motion presentation."
     },
@@ -91,7 +91,7 @@
       "status_ids": ["uncertain", "revised"],
       "event_cue_ids": [],
       "music_state_id": "pressure",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Uncertain or stale intelligence; missingness or revision remains explicit.",
       "non_color_motion": "Text label, dot-dash pattern, and static reduced-motion presentation."
     },
@@ -103,7 +103,7 @@
       "status_ids": ["improving", "stable"],
       "event_cue_ids": ["event.operating-recovery"],
       "music_state_id": "stable_operations",
-      "audio_mapping_boundary": "eligible-visible-only-not-direct-campaign-mapping",
+      "audio_mapping_boundary": "eligible-visible-only-host-sourced-campaign-metadata",
       "written_equivalent": "Operational recovery; the visible monthly result is reported without a guaranteed future outcome.",
       "non_color_motion": "Text label, ascending-mark pattern, and static reduced-motion presentation."
     }
@@ -112,17 +112,17 @@
     "stabilization-v1": {
       "shared_registered_state_ids": ["workforce-capacity", "demand-access", "financial-operating", "regulatory-policy", "community-trust", "project-timing", "uncertain-intelligence", "operational-recovery"],
       "campaign_specific_registered_ids": [],
-      "open_work": ["campaign-specific pressure taxonomy", "tutorial explanation", "direct audio mapping", "human quality review"]
+      "open_work": ["campaign-specific pressure taxonomy", "tutorial explanation", "human quality review"]
     },
     "regional-affiliation-v1": {
       "shared_registered_state_ids": ["workforce-capacity", "demand-access", "financial-operating", "regulatory-policy", "community-trust", "project-timing", "uncertain-intelligence", "operational-recovery"],
       "campaign_specific_registered_ids": [],
-      "open_work": ["stage-specific pressure taxonomy", "tutorial explanation", "direct affiliation audio mapping", "human quality review"]
+      "open_work": ["stage-specific pressure taxonomy", "tutorial explanation", "human quality review"]
     }
   },
   "limits": [
     "The taxonomy registers current actor-visible categories only; no hidden severity, intent, probability, causality, or future outcome is inferred.",
-    "Event cues and music states are eligible visible-only channels, not proof of direct campaign-envelope audio mapping.",
+    "Event cues and music states are eligible visible-only channels projected through explicit host-sourced campaign metadata; they do not encode hidden severity, intent, probability, causality, or future outcome.",
     "No new campaign-specific pressure ID, transition, asset, audio file, screenshot, placement, or registry entry is created or promoted.",
     "Existing technical text, pattern, reduced-motion, accessibility, and provenance checks do not establish human quality, comprehension, or educational usability.",
     "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."

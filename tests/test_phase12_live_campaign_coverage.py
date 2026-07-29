@@ -22,6 +22,8 @@ EXPECTED_SOURCE_CONTRACT = {
   "launcher_campaign_set": ("gui/app.mjs", "SESSION_LAUNCH_CAMPAIGNS"),
   "campaign_fallback": ("gui/app.mjs", "loadCampaignCoverage"),
   "campaign_renderer": ("gui/app.mjs", "renderCampaignCoverage"),
+  "campaign_audio_projection": ("src/mcp/campaign_coverage.rs", "CampaignCoverageAudio"),
+  "campaign_audio_client": ("gui/app.mjs", "campaignMusicStateId"),
   "canonical_mutation": ("gui/app.mjs", "adapter.submitTurn(command)"),
 }
 
@@ -34,7 +36,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
   def test_ledger_and_source_contract_are_exact(self):
     self.assertEqual(
       self.ledger["status"],
-      "complete-current-technical-browser-handoff-only",
+      "complete-current-technical-browser-and-audio-handoff-only",
     )
     self.assertEqual(
       self.ledger["campaigns"],
@@ -57,6 +59,8 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
         "campaign_decisions_use_host_submit_turn": True,
         "existing_session_campaign_is_resolved_from_host": True,
         "rejected_campaign_decisions_do_not_advance_history": True,
+        "campaign_audio_metadata_uses_existing_catalog_only": True,
+        "explicit_empty_campaign_cues_disable_legacy_fallback": True,
         "browser_true_state_or_new_authority_added": False,
         "campaign_specific_visual_audio_quality_review": False,
         "human_accessibility_educational_or_public_release_review": False,
@@ -79,6 +83,9 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       "getCampaignCoverage",
       "loadCampaignCoverage",
       "adapter.submitTurn(command)",
+      "campaignMusicStateId",
+      "campaignAudioCueIds",
+      "setMusicState(musicStateId, audioInput)",
       "competitive-regional-v1",
     ):
       self.assertIn(marker, app + adapter)
@@ -119,6 +126,106 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       if (JSON.stringify(calls) !== JSON.stringify([{ campaign: "stabilization-v1", seed: 42 }])) process.exit(1);
       if (!nodes.get("#session-start").textContent.includes("stabilization")) process.exit(2);
       if (!nodes.get("#session-difficulty").disabled) process.exit(3);
+      console.log(JSON.stringify({ calls }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
+  def test_campaign_audio_projection_honors_allowlist_empty_and_legacy_fallback(self):
+    script = r'''
+      import { campaignAudioCueIds, campaignMusicStateId } from "./gui/app.mjs";
+      const direct = {
+        audio: {
+          music_state_id: "affiliation_negotiation",
+          audio_cue_ids: ["event.affiliation-milestone", "not-a-cue"],
+        },
+      };
+      if (campaignMusicStateId(direct) !== "affiliation_negotiation") process.exit(1);
+      if (JSON.stringify(campaignAudioCueIds(direct)) !== JSON.stringify(["event.affiliation-milestone"])) process.exit(2);
+      if (campaignAudioCueIds({ audio: { audio_cue_ids: [] } }).length !== 0) process.exit(3);
+      if (campaignAudioCueIds({}) !== null) process.exit(4);
+      if (campaignMusicStateId({ audio: { music_state_id: "" } }) !== null) process.exit(5);
+      console.log(JSON.stringify({ direct: campaignMusicStateId(direct), empty: campaignAudioCueIds({ audio: { audio_cue_ids: [] } }) }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
+  def test_campaign_client_applies_host_audio_after_load_and_refresh(self):
+    script = r'''
+      function makeNode(tagName = "div") {
+        return {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          classList: { add() {}, toggle() {} },
+          hidden: false,
+          value: "",
+          textContent: "",
+          append(...children) { this.children.push(...children); },
+          replaceChildren(...children) { this.children = children; },
+          addEventListener() {},
+          setAttribute(name, value) { this[name] = value; },
+          removeAttribute(name) { delete this[name]; },
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+          focus() {},
+          scrollIntoView() {},
+        };
+      }
+      const documentStub = { createElement: (tagName) => makeNode(tagName), documentElement: makeNode("html") };
+      globalThis.document = undefined;
+      globalThis.matchMedia = () => ({ matches: false });
+      const { createCampaignCoverageClient } = await import("./gui/app.mjs");
+      globalThis.document = documentStub;
+      const root = {
+        __hsMgtPresentationSettings: null,
+        documentElement: makeNode("html"),
+        querySelector() { return makeNode(); },
+        querySelectorAll() { return []; },
+        addEventListener() {},
+      };
+      const calls = [];
+      const audio = {
+        state() { return { muted: false, reducedNotifications: false }; },
+        setMuted() {},
+        setReducedNotifications() {},
+        setMusicState(id) { calls.push(["music", id]); },
+        setMusicFromVisible() { calls.push(["legacy-music"]); },
+        setAmbienceFromVisible() {},
+        playCue(id) { calls.push(["cue", id]); },
+      };
+      const envelope = {
+        schema_version: "campaign-coverage-v1",
+        campaign_role: "Affiliation",
+        session: { session_id: "coverage-audio", campaign: "regional-affiliation-v1", turn: 1, max_turns: 6, done: false },
+        stage: { label: "Assess partner", detail: "Visible stage" },
+        briefing: [], metrics: [], actors: [], processes: [], decisions: [], history: [], debrief: [],
+        audio: { music_state_id: "affiliation_negotiation", audio_cue_ids: ["event.affiliation-milestone"] },
+      };
+      const adapter = {
+        sessionId: "coverage-audio",
+        async getCampaignCoverage() { return envelope; },
+        async submitTurn() { envelope.audio = { music_state_id: "affiliation_negotiation", audio_cue_ids: [] }; return { accepted: true }; },
+      };
+      const client = createCampaignCoverageClient({ adapter, root, audio });
+      await client.load();
+      if (!calls.some(([kind, id]) => kind === "music" && id === "affiliation_negotiation")) process.exit(1);
+      calls.length = 0;
+      const result = await client.submit("host-shaped");
+      if (!result.ok) process.exit(2);
+      if (calls.some(([kind, id]) => kind === "cue" && id === "event.affiliation-milestone")) process.exit(3);
       console.log(JSON.stringify({ calls }));
     '''
     result = subprocess.run(

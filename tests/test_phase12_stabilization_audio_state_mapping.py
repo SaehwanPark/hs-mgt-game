@@ -17,7 +17,7 @@ class Phase12StabilizationAudioStateMappingTests(unittest.TestCase):
   def test_mapping_contract_and_sources_match(self):
     ledger = self.ledger
     self.assertEqual(ledger["schema_version"], "stabilization-audio-state-mapping-v1")
-    self.assertEqual(ledger["status"], "complete-current-shared-audio-mapping")
+    self.assertEqual(ledger["status"], "complete-current-stabilization-audio-integration-boundary")
     self.assertEqual(ledger["campaign"], "stabilization-v1")
     for source_ref in ledger["source_contract"].values():
       source_path, marker = source_ref.split(": ", 1)
@@ -49,10 +49,10 @@ class Phase12StabilizationAudioStateMappingTests(unittest.TestCase):
     self.assertIn("text-first", surface["current_cli"])
     self.assertIn("shared campaign-coverage", surface["live_gui"])
     self.assertEqual(surface["shared_mapping_status"], "complete-current-shared-contract-mapping")
-    self.assertEqual(surface["direct_campaign_audio_status"], "open-not-integrated")
+    self.assertEqual(surface["direct_campaign_audio_status"], "complete-current-host-projected-metadata")
     self.assertTrue(self.ledger["open_work"])
     limits = " ".join(self.ledger["limits"])
-    for marker in ("hidden severity", "direct stabilization campaign-envelope integration", "No new cue", "human comprehension", "true-state", "public-release"):
+    for marker in ("hidden severity", "Host-sourced music states", "explicit empty", "No new cue", "human comprehension", "true-state", "public-release"):
       self.assertIn(marker, limits)
     self.assertEqual(self.ledger["test_source"], "tests/test_phase12_stabilization_audio_state_mapping.py")
 

@@ -28,6 +28,7 @@ class GuiCampaignCoverageTests(unittest.TestCase):
     for marker in (
       "campaign-coverage-v1",
       "CampaignCoverageEnvelope",
+      "CampaignCoverageAudio",
       "CampaignCoverageStage",
       "CampaignCoverageBriefing",
       "CampaignCoverageMetric",
@@ -64,6 +65,8 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       "campaign_submit_rejected",
       "event.affiliation-milestone",
       "campaignAudioInput",
+      "campaignMusicStateId",
+      "campaignAudioCueIds",
     ):
       self.assertIn(marker, self.app)
     for selector in (

@@ -74,7 +74,7 @@
   ],
   "campaign_boundary": {
     "reusable_visuals": "Current identity, marker, status, and generic-facility vocabulary is repository-authored/project-generated and source-linked; it is eligible reuse, not direct partner/stage art promotion.",
-    "reusable_audio": "Current affiliation music/cue entries are runtime-generated or repository-authored with null file-backed release paths and written equivalents; direct campaign mapping and listening quality remain open.",
+    "reusable_audio": "Current affiliation music/cue entries are runtime-generated or repository-authored with null file-backed release paths and written equivalents; campaign-specific listening quality remains open.",
     "new_asset_need": "none-required-by-current-stage-contract",
     "third_party_release_count": 0,
     "release_audio_count": 0,
@@ -90,7 +90,7 @@
   "limits": [
     "This is a current technical provenance audit, not legal clearance, training-data provenance, output-quality approval, or human review.",
     "No new map, facility, portrait, stage-art, raster, audio, registry entry, route, or runtime asset is created or promoted.",
-    "Runtime-generated audio has no shipped file-backed release path; catalog provenance and written equivalents do not imply direct campaign mapping or audio quality.",
+    "Runtime-generated audio has no shipped file-backed release path; catalog provenance and written equivalents do not imply campaign-specific audio quality.",
     "Unverified portrait previews remain unreleased and are not evidence that future partner identity or stage treatment is complete.",
     "No instructor-only true-state view, counterfactual, public-release, educational, legal, or policy-validity claim is made."
   ],

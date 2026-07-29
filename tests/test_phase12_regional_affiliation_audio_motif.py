@@ -15,7 +15,7 @@ class Phase12RegionalAffiliationAudioMotifTests(unittest.TestCase):
   def test_audio_motif_sources_and_metadata_match(self):
     ledger = self.ledger
     self.assertEqual(ledger["schema_version"], "regional-affiliation-audio-motif-v1")
-    self.assertEqual(ledger["status"], "complete-current-affiliation-audio-motif-boundary")
+    self.assertEqual(ledger["status"], "complete-current-affiliation-audio-integration-boundary")
     self.assertEqual(ledger["campaign"], "regional-affiliation-v1")
     for source_ref in ledger["source_contract"].values():
       source_path, marker = source_ref.split(": ", 1)

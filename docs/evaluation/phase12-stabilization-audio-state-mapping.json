@@ -1,6 +1,6 @@
 {
   "schema_version": "stabilization-audio-state-mapping-v1",
-  "status": "complete-current-shared-audio-mapping",
+  "status": "complete-current-stabilization-audio-integration-boundary",
   "campaign": "stabilization-v1",
   "scope": "current actor-visible stabilization pressure/recovery mapping to optional existing audio contracts",
   "source_contract": {
@@ -18,7 +18,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible workforce trust, staffing, or capacity constraint",
       "text_equivalent": "Staffing and capacity constraint; visible fields require attention.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "demand-access",
@@ -27,7 +27,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible unmet demand or access pressure",
       "text_equivalent": "Demand pressure; the visible unmet-demand value is reported.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "financial-operating",
@@ -36,7 +36,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible cash, runway, margin, or operating-loss result",
       "text_equivalent": "Financial distress or operating loss; visible cash, runway, and result text remain available.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "regulatory-policy",
@@ -45,7 +45,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible regulatory, oversight, mandate, or policy-review context",
       "text_equivalent": "Regulatory review; visible review text and current status remain explicit.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "community-trust",
@@ -54,7 +54,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible community-trust concern",
       "text_equivalent": "Community-trust concern; visible trust status is reported.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "project-timing",
@@ -63,7 +63,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible delayed project timing or status",
       "text_equivalent": "Delayed project; visible timing and status are reported without a hidden cause.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "uncertain-intelligence",
@@ -72,7 +72,7 @@
       "direction_prototype_ids": ["audio.direction-pressure-layer"],
       "visible_trigger_source": "Actor-visible information gap, staleness, or revision",
       "text_equivalent": "Uncertain or stale intelligence; missingness or revision remains explicit.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     },
     {
       "id": "operational-recovery",
@@ -81,25 +81,23 @@
       "direction_prototype_ids": ["audio.direction-neutral-bed"],
       "visible_trigger_source": "Actor-visible improved operating result or recovery text",
       "text_equivalent": "Operational recovery; the visible monthly result is reported without a guaranteed future outcome.",
-      "audio_boundary": "eligible-visible-only-not-direct-campaign-envelope-mapping"
+      "audio_boundary": "eligible-visible-only-host-sourced-campaign-metadata"
     }
   ],
   "campaign_surface": {
     "current_cli": "The five-turn stabilization beginner flow is text-first and has no playback surface; its written choices, trade-offs, and uncertainty remain complete.",
-    "live_gui": "The current live GUI exposes the shared campaign-coverage panel; no browser-native stabilization-specific audio route is claimed.",
+    "live_gui": "The current live GUI exposes the shared campaign-coverage panel and honors optional host-sourced stabilization audio metadata through the existing catalog.",
     "shared_mapping_status": "complete-current-shared-contract-mapping",
-    "direct_campaign_audio_status": "open-not-integrated",
+    "direct_campaign_audio_status": "complete-current-host-projected-metadata",
     "optional_audio_rule": "Audio may reinforce only supplied visible state; mute, unavailable, reduced, or unsupported audio preserves the same written meaning."
   },
   "open_work": [
-    "browser-native stabilization audio integration",
-    "direct stabilization tutorial or campaign audio mapping",
     "campaign-specific motif and quality review",
     "human comprehension, educational usability, and fatigue review"
   ],
   "limits": [
     "The mapping reuses current visible categories and catalog IDs; it does not infer hidden severity, intent, probability, causality, or future outcome.",
-    "Eligible event cues, music states, and direction prototypes are optional visible-only channels, not direct stabilization campaign-envelope integration.",
+    "Host-sourced music states and event cues remain optional visible-only channels; explicit empty cue metadata suppresses legacy fallback without changing written meaning.",
     "No new cue, music state, audio file, route, transition, asset, screenshot, persistence, or registry entry is created or promoted.",
     "Existing technical audio, accessibility, and provenance checks do not establish audio quality, human comprehension, educational usability, or fatigue-free use.",
     "No instructor-only true-state view, counterfactual, distributional visualization, or public-release claim is made."

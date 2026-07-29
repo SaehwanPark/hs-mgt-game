@@ -1,5 +1,21 @@
 # Lessons Learned
 
+## Keep Host Audio Metadata Visible-Only and Optional
+
+- Context: campaign coverage already exposed typed stage, actor, process,
+  history, and debrief data, but the browser still had to infer campaign music
+  and cues from those visible strings.
+- Risk: Browser-side classification can drift from host meaning, while a cue
+  list without an explicit empty state can accidentally preserve legacy events
+  after the host has intentionally supplied no campaign cue.
+- Resolution: Project optional host-sourced music/cue IDs in the existing
+  campaign envelope, filter them against the current catalog, distinguish
+  omitted metadata from an explicit empty list, and keep written equivalents
+  complete when audio is muted or unavailable.
+- Prevention: For every new audio projection, bind it to visible host fields,
+  use existing approved IDs, test allowlist and empty/omitted behavior, and
+  keep human listening/quality claims separate from technical routing evidence.
+
 ## Keep Onboarding Rails Aligned with Campaign Authority
 
 - Context: the live GUI gained stabilization and regional-affiliation

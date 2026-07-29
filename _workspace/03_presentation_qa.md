@@ -1,3 +1,50 @@
+# Presentation QA — Direct campaign audio projection v0.13.60
+
+## Status
+
+`pass` for the bounded technical host-to-browser audio contract. This is not
+human listening, accessibility, educational, audio-quality, legal, or
+public-release approval.
+
+## Planned review focus
+
+- Host metadata uses only existing music/cue IDs and visible sources.
+- Explicit host music/cues take precedence without changing written content;
+  explicit empty cues and omitted legacy metadata remain distinct.
+- Cues play only after successful host refresh; rejection/failure does not play
+  a campaign cue.
+- Competitive resolution audio, audio-off behavior, hidden-state boundaries,
+  and simulation authority remain unchanged.
+
+## Findings
+
+- Pass: host metadata uses only existing music/cue IDs and actor-visible stage,
+  briefing, actor, process, and committed history-summary sources.
+- Pass: explicit host music takes precedence; explicit empty cues suppress the
+  legacy regional milestone cue, while omitted audio metadata preserves the
+  older fallback.
+- Pass: cues are applied only after a successful host refresh; rejection,
+  malformed coverage, and failed refresh remain recoverable without a campaign
+  cue transition.
+- Pass: `CampaignCoverageAudio` is optional at the Rust deserialization/schema
+  boundary and constructors emit `Some(...)`; a legacy envelope without audio
+  deserializes with `None`.
+- Review: the sole medium-effort reviewer found one High compatibility issue
+  and one Low record-state issue. The audio field was changed from required to
+  optional, a legacy deserialization assertion was added, and these records
+  were finalized. No other actionable findings remained.
+
+## Verification evidence
+
+Focused campaign/audio tests passed (20 tests in the focused set); all 344 Rust
+tests and all 763 Python tests passed. `cargo fmt --check`, Clippy with
+warnings denied, release metadata, documentation links, asset/security/
+generation, device-performance, offline, browser-compatibility, and
+visual/audio contract checks passed. Human listening and campaign-specific
+quality gates remain open.
+
+---
+
 # Presentation QA — Campaign-aware first-month rail v0.13.59
 
 ## Status

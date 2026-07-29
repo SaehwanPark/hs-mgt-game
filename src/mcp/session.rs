@@ -173,7 +173,7 @@ pub struct EndSessionReplayMetadata {
   pub latest_state_hash: Option<String>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+#[derive(Clone, Debug, Deserialize, PartialEq, Eq, Serialize, JsonSchema)]
 pub struct TransitionSummary {
   pub turn: u32,
   pub command: String,
@@ -2361,6 +2361,22 @@ mod tests {
     assert_eq!(stabilization_coverage.stage.id, "turn-1");
     assert_eq!(stabilization_coverage.decisions.len(), 1);
     assert_eq!(stabilization_coverage.decisions[0].parameters.len(), 3);
+    assert_eq!(
+      stabilization_coverage
+        .audio
+        .as_ref()
+        .expect("stabilization campaign audio")
+        .music_state_id,
+      "stable_operations"
+    );
+    assert!(
+      stabilization_coverage
+        .audio
+        .as_ref()
+        .expect("stabilization campaign audio")
+        .audio_cue_ids
+        .is_empty()
+    );
     assert_eq!(stabilization_before, stabilization_after);
 
     let affiliation = start(&mut store, "regional-affiliation-v1");
@@ -2376,6 +2392,22 @@ mod tests {
       "institutional fit and obligation process"
     );
     assert_eq!(affiliation_coverage.stage.id, "assesspartner");
+    assert_eq!(
+      affiliation_coverage
+        .audio
+        .as_ref()
+        .expect("affiliation campaign audio")
+        .music_state_id,
+      "affiliation_negotiation"
+    );
+    assert!(
+      affiliation_coverage
+        .audio
+        .as_ref()
+        .expect("affiliation campaign audio")
+        .audio_cue_ids
+        .is_empty()
+    );
     assert!(
       affiliation_coverage
         .actors
@@ -2401,6 +2433,15 @@ mod tests {
         assert!(!json.contains(forbidden), "found {forbidden}");
       }
     }
+
+    let mut legacy_value = serde_json::to_value(&stabilization_coverage).expect("coverage value");
+    legacy_value
+      .as_object_mut()
+      .expect("coverage object")
+      .remove("audio");
+    let legacy: crate::mcp::campaign_coverage::CampaignCoverageEnvelope =
+      serde_json::from_value(legacy_value).expect("legacy campaign coverage without audio");
+    assert!(legacy.audio.is_none());
 
     let competitive = start(&mut store, "competitive-regional-v1");
     let competitive_before = store
