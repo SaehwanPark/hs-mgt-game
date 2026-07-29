@@ -3034,3 +3034,36 @@ comparison does not authorize causal certainty or future-outcome inference.
 `tests/test_phase12_causal_attribution_boundary.py` checks source markers,
 attribution contracts, read-only/live scope, written fallback, and no-inference
 limits. Broader causal design and human review remain open.
+
+# Presentation Contract — Phase 12.3 distributional outcome summary v0.13.43
+
+## Goal and Authorization
+
+This slice addresses “Distributional outcomes represented responsibly” using
+the existing post-run competitive instructor-summary renderer. It adds no new
+authority path and does not promote the summary into the player observation.
+
+## Source Ledger and Semantics
+
+| Element | Source | Meaning | Prohibited inference |
+| --- | --- | --- | --- |
+| System identity | committed `CompetitiveWorldState.systems` | stable system label | ownership beyond host label |
+| Outcome change | genesis and final committed system fields | per-system descriptive delta | welfare, rank, or causal value |
+| Visibility | existing instructor-summary boundary | post-run review context | live rival knowledge |
+
+The renderer reports access, quality, workforce trust, community trust, and
+market share changes independently. It does not sum, normalize, rank, or label
+one metric as the objective.
+
+## Accessibility, Authority, and Provenance
+
+The view is text-first, with no color, motion, audio, or asset requirement. It
+reads committed history snapshots and does not change commands, transitions,
+hashes, replay, or observation DTOs. No new asset provenance is required.
+
+## Verification and Open Questions
+
+Focused Rust tests cover multiple systems, metric deltas, deterministic order,
+and no-transition fallback. A source-linked Python ledger test checks the
+instructor boundary and no-ranking language. Human educational interpretation,
+policy validity, and distributional fairness review remain open.

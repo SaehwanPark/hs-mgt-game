@@ -3450,7 +3450,13 @@ Deferred / Non-Goals:
   CLI demo calls the renderer for a deterministic, text-first descriptive
   comparison of same-genesis committed stabilization histories, not causal
   inference or a browser instructor view.
-- [ ] Distributional outcomes represented responsibly.
+- [x] Distributional outcomes represented responsibly. Evidence:
+  `docs/evaluation/phase12-distributional-outcome-summary.json`,
+  `src/debrief/report.rs`, and
+  `tests/test_phase12_distributional_outcome_summary.py`; the existing
+  post-run instructor summary shows separate per-system committed deltas with
+  stable ordering, no ranking or aggregate welfare score, and explicit
+  visibility limits.
 - [ ] Export behavior documented.
 - [ ] Educational usability reviewed.
 

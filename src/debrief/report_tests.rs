@@ -90,6 +90,36 @@ fn test_competitive_instructor_summary_and_debrief() {
 }
 
 #[test]
+fn competitive_distributional_summary_keeps_metrics_separate_and_unranked() {
+  let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
+    .expect("should build competitive history");
+  let summary = crate::debrief::competitive_distributional_summary(&history).join("\n");
+
+  assert!(summary.contains("=== DISTRIBUTIONAL OUTCOME SUMMARY (INSTRUCTOR REVIEW) ==="));
+  assert!(summary.contains("Riverside Community Health"));
+  assert!(summary.contains("Northlake Health"));
+  assert!(summary.contains("Summit Care"));
+  assert!(summary.contains("access"));
+  assert!(summary.contains("quality"));
+  assert!(summary.contains("workforce trust"));
+  assert!(summary.contains("community trust"));
+  assert!(summary.contains("market share"));
+  assert!(summary.contains("no system is ranked"));
+  assert!(summary.contains("no overall welfare score"));
+  assert!(!summary.contains("rank 1"));
+}
+
+#[test]
+fn competitive_distributional_summary_has_empty_history_fallback() {
+  let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 1)
+    .expect("should build competitive history");
+  history.transitions.clear();
+
+  let summary = crate::debrief::competitive_distributional_summary(&history).join("\n");
+  assert!(summary.contains("No committed transitions are available"));
+}
+
+#[test]
 fn competitive_debrief_includes_player_owned_monthly_operating_results() {
   let mut history = build_multi_month_resolution_history(Difficulty::Normal, 42, 3)
     .expect("should build competitive history");

@@ -900,6 +900,13 @@ plus resolved-input parity without recalculating runs or claiming causal
 certainty. It does not create a browser instructor route, distributional view,
 export format, or new authority boundary.
 
+The v0.13.43 Phase 12.3 slice adds a post-run instructor-summary
+distributional table from committed competitive genesis/final system states.
+It keeps access, quality, workforce trust, community trust, and market share
+deltas separate, uses stable system ordering, and emits no ranking or aggregate
+welfare score. The player observation, browser route, simulation authority,
+hashes, replay, and asset boundary remain unchanged.
+
 Last Reviewed: 2026-07-28
 Status: Verified
 
