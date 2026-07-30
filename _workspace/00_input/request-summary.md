@@ -2958,3 +2958,50 @@ Campaign-specific quality, screenshots, replay playback, durable persistence,
 human evaluation, and public-release gates remain open.
 
 # Request Summary — Visual/audio Phase 13.1 AI-generation metadata boundary v0.13.57
+# Request Summary — Browser-refresh session continuity v0.13.62
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the smallest technical slice that
+advances the open Phase 11.1 persistence boundary: recover a currently live
+host session after a browser refresh by retaining only its host-issued session
+ID in browser storage and reloading the existing host projections.
+
+## Target slice
+
+- Add a safe, injectable browser-storage helper for the active host session ID.
+- Persist the ID only after a successful host start/load and restore it into the
+  existing-session control on page initialization.
+- Attempt the normal host-owned `load` path after refresh; clear only a
+  confirmed stale/unknown ID and keep durable-session limitations visible.
+- Clear the stored ID after a confirmed host end; storage failures remain
+  recoverable and never block a session.
+- Update the Phase 11.1 evidence ledger, roadmap, guides, SPEC/changelog/
+  lessons, package metadata, tests, and current handoff records to v0.13.62.
+
+## Non-goals
+
+- No durable file persistence, cross-process recovery, browser serialization,
+  replay regeneration/playback, new route, schema version, simulation rule,
+  asset, audio behavior, or local transition authority.
+- Do not store commands, observations, outcomes, hashes, true state, private
+  rationale, or resolved stochastic inputs in browser storage.
+- Do not claim persistence across a stopped host, human usability,
+  accessibility, educational benefit, or public-release readiness.
+
+## Validation target
+
+Focused Node/Python tests for safe storage, start/load/refresh/end behavior,
+unknown-session cleanup, written recovery, and authority boundaries; full Rust
+and Python suites; release metadata, documentation links, asset/security/
+generation, device, offline, browser, visual/audio contract, and diff checks.
+Then perform exactly one medium-effort code review and the authorized PR/merge
+handoff.
+
+## Evidence limits
+
+This slice proves only technical same-host browser-refresh recovery using a
+stored session ID. Durable persistence, cross-process recovery, replay
+regeneration, real-device/browser certification, human accessibility,
+educational evaluation, provenance/legal review, and public-release approval
+remain open.

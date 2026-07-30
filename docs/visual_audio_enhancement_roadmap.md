@@ -3923,6 +3923,22 @@ are completed. Human-review gates remain open.
   surfaces, human accessibility, educational usability, and quality review
   remain open.
 
+### v0.13.62 current same-host browser-refresh recovery
+
+- `gui/app.mjs` stores only the opaque host-issued session ID in the
+  best-effort `hs-mgt-active-session-id` browser-storage key after successful
+  start/load, prefills the existing-session control, and reuses the existing
+  host-owned action/campaign load path when a page refresh finds that ID.
+- Confirmed unknown-session failures clear the stale ID, successful host end
+  clears it, and storage or transient adapter failures retain the written
+  recovery path without replacing the current host session locally.
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `tests/test_phase11_browser_refresh_recovery.py` record the current
+  same-host technical boundary. Durable file persistence, browser
+  serialization, cross-process recovery, replay playback/regeneration,
+  device certification, human accessibility/educational review, and
+  provenance/legal/public-release gates remain open.
+
 ### Exit criteria
 
 - No critical or high-severity defect remains.

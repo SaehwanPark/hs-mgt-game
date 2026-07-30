@@ -209,6 +209,7 @@ const REPLAY_SCHEMA = "competitive-replay-v1";
 const SAVE_SCHEMA = "competitive-save-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
+export const ACTIVE_SESSION_STORAGE_KEY = "hs-mgt-active-session-id";
 let selectedEntityId = null;
 let selectedBoardId = null;
 let currentMapEntities = [];
@@ -218,6 +219,55 @@ let briefingFocusEntityId = null;
 let currentRegionalLinks = [];
 let currentResolutionLinks = [];
 let currentResolutionSessionId = null;
+
+export function createSessionIdStorage({ storage } = {}) {
+  function target() {
+    try {
+      return storage ?? globalThis.localStorage;
+    } catch {
+      return null;
+    }
+  }
+
+  return {
+    get() {
+      try {
+        const value = target()?.getItem?.(ACTIVE_SESSION_STORAGE_KEY);
+        const sessionId = String(value ?? "").trim();
+        return sessionId || null;
+      } catch {
+        return null;
+      }
+    },
+    set(sessionId) {
+      const value = String(sessionId ?? "").trim();
+      if (!value) return false;
+      try {
+        const store = target();
+        if (!store?.setItem) return false;
+        store.setItem(ACTIVE_SESSION_STORAGE_KEY, value);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+    clear() {
+      try {
+        const store = target();
+        if (!store?.removeItem) return false;
+        store.removeItem(ACTIVE_SESSION_STORAGE_KEY);
+        return true;
+      } catch {
+        return false;
+      }
+    },
+  };
+}
+
+function isUnknownSessionResult(result) {
+  const detail = `${result?.code ?? ""} ${result?.message ?? result?.error ?? ""}`.toLowerCase();
+  return detail.includes("unknown session") || detail.includes("session_not_found");
+}
 
 function boardEntityFor(id) {
   return currentBoardScene?.entities?.find((entity) => entity.id === id || entity.source_id === id);
@@ -1831,7 +1881,7 @@ function readSessionLaunchOptions(root) {
   return { ok: true, options };
 }
 
-export function createSessionLauncher({ adapter, root = document, load, recorder = null } = {}) {
+export function createSessionLauncher({ adapter, root = document, load, recorder = null, sessionStore = createSessionIdStorage() } = {}) {
   const form = root.querySelector("#session-launch-form");
   const start = root.querySelector("#session-start");
   const existingId = root.querySelector("#session-id");
@@ -1873,9 +1923,11 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
     try {
       const result = await load(sessionId);
       if (!result?.ok) {
+        if (isUnknownSessionResult(result)) sessionStore.clear();
         sessionLaunchStatus(root, result?.message ?? "The host session could not be loaded; the current view remains active.");
         return result ?? { ok: false, code: "session_load_failed" };
       }
+      sessionStore.set(sessionId);
       sessionLaunchStatus(root, `Host session loaded: ${sessionId}`);
       return result;
     } catch (error) {
@@ -1925,10 +1977,12 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
     try {
       const result = await load(sessionId);
       if (!result?.ok) {
+        if (isUnknownSessionResult(result)) sessionStore.clear();
         sessionLaunchStatus(root, result?.message ?? "The new host session could not be loaded; the current view remains active.");
         return result ?? { ok: false, code: "session_load_failed" };
       }
       if (existingId) existingId.value = sessionId;
+      sessionStore.set(sessionId);
       sessionLaunchStatus(root, `${sessionCampaignLabel(response?.campaign ?? input.options.campaign)} session loaded: ${sessionId}`);
       return { ok: true, session_id: sessionId, envelope: result.envelope ?? response };
     } catch (error) {
@@ -1945,6 +1999,10 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   loadButton?.addEventListener("click", loadExisting);
   campaign?.addEventListener("change", updateCampaignControls);
   updateCampaignControls();
+  const storedSessionId = sessionStore.get();
+  if (storedSessionId && existingId && !String(existingId.value ?? "").trim()) {
+    existingId.value = storedSessionId;
+  }
   if (!adapter?.startSession) {
     sessionLaunchStatus(root, "Configure a host adapter to start or load a session; the demo fixture remains available.");
   }
@@ -1954,6 +2012,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
   let currentEnvelope = null;
   let sessionId = adapter?.sessionId;
+  const sessionStore = createSessionIdStorage();
   const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
@@ -1999,7 +2058,10 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     if (!adapter || typeof adapter.getPresentation !== "function") {
       if (coverageAdapter && typeof coverageAdapter.getCampaignCoverage === "function") {
         const result = await campaignCoverageClient.load(requestedSessionId);
-        if (result.ok) sessionId = requestedSessionId;
+        if (result.ok) {
+          sessionId = requestedSessionId;
+          sessionStore.set(requestedSessionId);
+        }
         return result;
       }
       recordPlaytestFailure(recorder, "read_only_adapter_missing", "No read-only presentation adapter is configured.");
@@ -2024,6 +2086,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       if (result.ok) {
         await regionalWorldClient.load(requestedSessionId);
         sessionId = requestedSessionId;
+        sessionStore.set(requestedSessionId);
         setEndSessionControl(root, typeof adapter?.endSession === "function");
       }
       if (!result.ok) {
@@ -2049,14 +2112,15 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     if (result.ok) {
       currentEnvelope = result.envelope;
       sessionId = null;
+      sessionStore.clear();
       adapter.activateSession?.(null);
     }
     return result;
   }
 
   root.querySelector("#session-end")?.addEventListener("click", endSession);
-  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, render, renderStaticFixture, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
+  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder, sessionStore });
+  return { load, render, renderStaticFixture, endSession, sessionLauncher, sessionStore, firstMonthFlow, audio: audioClient, settings, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get envelope() { return currentEnvelope; } };
 }
 
 function setActionControls(root, enabled) {
@@ -2200,12 +2264,13 @@ function renderValidation(validation, root) {
   );
 }
 
-export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null } = {}) {
+export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, storage } = {}) {
   let catalog = null;
   let drafts = [];
   let validation = null;
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
+  const sessionStore = createSessionIdStorage({ storage });
   const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
@@ -2396,6 +2461,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     validation = null;
     editingIndex = null;
     sessionId = requestedSessionId;
+    sessionStore.set(requestedSessionId);
     adapter.activateSession?.(requestedSessionId, result.envelope?.session?.campaign ?? null);
     setActionControls(root, false);
     renderActions([], root);
@@ -2535,6 +2601,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       });
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
       sessionId = requestedSessionId;
+      sessionStore.set(requestedSessionId);
       adapter.activateSession?.(requestedSessionId);
       setEndSessionControl(root, typeof adapter.endSession === "function");
       checkpointClient.setEnabled(
@@ -2567,6 +2634,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       validation = null;
       editingIndex = null;
       sessionId = null;
+      sessionStore.clear();
       adapter.activateSession?.(null);
       checkpointClient.setEnabled(false);
     }
@@ -2576,8 +2644,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   root.querySelector("#session-end")?.addEventListener("click", endSession);
-  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder });
-  return { load, validate: validateDraft, submit, endSession, sessionLauncher, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, checkpoint: checkpointClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
+  const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder, sessionStore });
+  return { load, validate: validateDraft, submit, endSession, sessionLauncher, sessionStore, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, checkpoint: checkpointClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
 }
 
 function reducedMotion(root) {
@@ -3089,8 +3157,18 @@ if (typeof document !== "undefined") {
   const actionAdapter = globalThis.HsMgtGameActionAdapter;
   if (actionAdapter) {
     const client = createActionClient({ root: document });
-    if (actionAdapter.sessionId) {
-      client.load();
+    const storedSessionId = client.sessionStore.get();
+    const initialSessionId = actionAdapter.sessionId || storedSessionId;
+    if (initialSessionId) {
+      if (!actionAdapter.sessionId) {
+        sessionLaunchStatus(document, `Recovering host session ${initialSessionId} after browser refresh…`);
+      }
+      client.load(initialSessionId).then((result) => {
+        if (!result?.ok && isUnknownSessionResult(result)) {
+          client.sessionStore.clear();
+          sessionLaunchStatus(document, "The stored host session is no longer available; start or load a current session.");
+        }
+      });
     } else {
       renderEnvelope(demoEnvelope, document);
       setActionControls(document, false);
@@ -3107,6 +3185,8 @@ if (typeof document !== "undefined") {
       createPlaytestRecorder,
       createAudioClient,
       createActionClient,
+      createSessionIdStorage,
+      ACTIVE_SESSION_STORAGE_KEY,
       createCampaignCoverageClient,
       createSessionLauncher,
       createPresentationSettings,
@@ -3150,6 +3230,8 @@ if (typeof document !== "undefined") {
       createPlaytestRecorder,
       createAudioClient,
       createActionClient,
+      createSessionIdStorage,
+      ACTIVE_SESSION_STORAGE_KEY,
       createCampaignCoverageClient,
       createSessionLauncher,
       createPresentationSettings,

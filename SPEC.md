@@ -7129,6 +7129,37 @@ Deferred / Non-Goals:
   input, private rationale, causal graph, asset, audio file, persistence, or
   competitive-path redesign was added.
 
+### Visual/audio browser-refresh session continuity (v0.13.62)
+
+Status: Complete for same-host browser-refresh recovery using an opaque
+host-issued session ID only; durable persistence, cross-process recovery,
+replay regeneration/playback, human review, and public-release gates remain
+open.
+
+Done:
+
+- Added best-effort browser storage for `hs-mgt-active-session-id`, with safe
+  read/write/clear behavior when storage is unavailable or blocked.
+- Prefilled the existing-session control and reused the existing host-owned
+  action/campaign load path after a browser refresh while the same loopback
+  host process remains alive.
+- Cleared confirmed unknown-session IDs and successful terminal sessions while
+  retaining IDs for transient failures; synchronized the Phase 11.1 ledger,
+  roadmap, guides, lessons, request/contract/QA/handoff records, and package
+  metadata to `0.13.62`.
+
+Not Yet Done:
+
+- Durable file persistence, browser serialization, cross-process recovery,
+  replay playback/regeneration, human visual/accessibility/educational review,
+  provenance/legal review, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new route, DTO/schema, simulation state, command, transition, history,
+  replay, asset, audio behavior, service worker, or browser-authored outcome
+  was added.
+
 ## Future
 
 ### Visual and audio experience upgrade

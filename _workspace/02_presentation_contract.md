@@ -3513,3 +3513,67 @@ release. No new visual/audio asset or hidden-state route is authorized.
 --- Historical presentation contracts ---
 
 # Presentation Contract — Phase 13.1 AI-generation metadata boundary v0.13.57
+# Presentation Contract — Browser-refresh session continuity v0.13.62
+
+## Goal and Authorization
+
+Let a player return to a still-running local host session after refreshing the
+browser. The browser may retain only the opaque host-issued session ID as
+presentation state, then request the existing actor-visible envelope again.
+
+## Player Questions and Consequences
+
+The player question is: “Can I resume the session I was viewing after the page
+reloads?” A valid host response restores the same visible campaign/action
+surface; an unavailable session produces written recovery guidance and does
+not invent a replacement outcome.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Active session identity | Host-issued `session_id` from start/load/read responses | Optional best-effort browser storage; absent storage means manual load | Do not store or derive true state, command, outcome, observation, hash, or intent |
+| Recovery result | Existing host `getSession`/presentation/campaign-coverage/action reads | Valid host response, unknown session, or adapter failure | Do not infer a new session or local outcome from failure |
+| Terminal cleanup | Successful host `end_session` response | Clear only after confirmed end; retain on failure | Do not mark a session ended locally |
+| Written fallback | Existing launcher status/recovery messages and current valid view | Always available without storage or audio | Do not make storage required for play |
+
+## Visual, Motion, and Audio Semantics
+
+No new semantic visual, motion, or audio signal is introduced. The existing
+session launcher status is the written recovery surface. Current rendered
+history, observations, commands, results, mute behavior, and reduced-motion
+behavior remain unchanged.
+
+## Accessibility and Fallbacks
+
+Storage read/write/clear failures are swallowed as optional-capability failures.
+The existing session-ID field remains keyboard-visible, and a player can load a
+session manually. Unknown IDs are cleared with written guidance; transient
+errors retain the ID for retry. No color, motion, sound, or storage is required
+to understand or continue the session.
+
+## Authority, History, and Replay Boundaries
+
+The browser stores one opaque ID only. Recovery calls the existing host reads;
+the browser does not serialize or recreate simulation state, submit commands,
+mutate history, recalculate hashes, regenerate replay, or change authority.
+Cross-process and durable file recovery remain outside this contract.
+
+## Asset Provenance and Release Requirements
+
+No asset, registry, release path, audio file, or provenance record is added.
+
+## Verification and Evidence Limits
+
+Focused source/Node/Python checks must cover optional storage, successful and
+failed recovery, stale cleanup, end cleanup, written fallback, and forbidden
+authority fields. These checks do not establish human usability, accessibility,
+device/browser certification, durable persistence, or educational benefit.
+
+## Non-Goals and Open Questions
+
+- No durable file persistence, cross-process store, browser serialization,
+  service worker/cache, replay playback/regeneration, new host route/schema,
+  simulation change, asset, audio change, or human review is included.
+- Open: durable file/cross-process recovery and full-campaign continuity require
+  a separately designed host persistence slice.

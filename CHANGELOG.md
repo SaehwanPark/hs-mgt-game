@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.62] - 2026-07-30
+
+- Added best-effort same-host browser-refresh recovery by retaining only the
+  opaque host session ID and reusing the existing host-owned load path.
+- Added stale-session cleanup and terminal cleanup while preserving written
+  recovery, blocked-storage fallback, simulation authority, and replay limits.
+- Kept durable file/cross-process persistence, replay regeneration, human
+  evaluation, provenance, and public-release gates open.
+
 ## [0.13.61] - 2026-07-29
 
 - Added optional actor-visible decision-time observation details to
