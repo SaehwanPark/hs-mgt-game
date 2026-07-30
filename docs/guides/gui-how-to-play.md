@@ -48,6 +48,8 @@ validation, simulation outcomes, or replay history.
 
 The server listens only on your computer's loopback interface. It does not make
 the game available to other computers and does not provide network multiplayer.
+At startup it prints the application-config path used for explicit competitive
+checkpoint files; the file is host-owned and is never sent to the browser.
 
 ## Follow the first session
 
@@ -143,14 +145,22 @@ policy authority.
 ## Load an existing session
 
 Copy a session ID displayed by the current GUI and enter it under **Existing
-session ID**, then select **Load existing session**. Session IDs exist only in
-the memory of the currently running `hs-mgt-game-gui` process. Stopping or
-restarting that process invalidates them.
+session ID**, then select **Load existing session**. For
+`competitive-regional-v1`, select **Save host checkpoint** before stopping the
+host if you want restart recovery. A browser refresh or manual load after a
+restart attempts that host checkpoint once when the opaque ID matches the
+saved file, then refreshes the ordinary presentation/action/history/replay
+reads. Stabilization and regional-affiliation sessions remain in-memory only.
+Without an explicit competitive checkpoint, stopping or restarting the host
+invalidates the live session ID.
 
 ## Stop the GUI
 
 Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end
-when the process stops.
+when the process stops; an explicitly saved competitive checkpoint remains in
+the printed host application-config path until the recovered session is ended
+or replaced by a later save. The configured path stores one latest explicit
+competitive checkpoint; it is not an archive for multiple sessions.
 
 ## Use a different port
 
@@ -199,17 +209,20 @@ shown.
 
 ### An existing session ID is unknown
 
-The ID belongs to a different or stopped server process, or it was typed
-incorrectly. Start a new session in the current process.
+The ID may belong to a different host, may have no explicit competitive
+checkpoint, or may be typed incorrectly. The GUI attempts one host checkpoint
+load after an unknown live-session response. If that also fails, start a new
+session or enter a matching saved ID; no replacement session is created.
 
 ### The browser was refreshed
 
 When browser storage is available, the GUI retains only the opaque host-issued
-session ID and attempts the normal host read after refresh. This works only
-while the same loopback host process still holds the session in memory. If the
-session is unknown, the stale ID is cleared and the launcher explains how to
-start or load a current session; transient read failures preserve the ID for a
-retry. This is not durable file or cross-process persistence.
+session ID and attempts the normal host read after refresh. If the live session
+is unknown, it tries the host checkpoint load once; this recovers only an
+explicitly saved competitive session from the same host's configured file.
+Stale or unmatched IDs are cleared with written guidance, while transient
+failures preserve the ID for retry. Browser storage never contains commands,
+observations, outcomes, hashes, or true state.
 
 ### Audio is silent
 

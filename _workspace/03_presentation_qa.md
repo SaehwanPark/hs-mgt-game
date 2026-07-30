@@ -4451,6 +4451,53 @@ None for this bounded technical handoff.
 - Full validation remains required before PR handoff.
 
 --- Historical presentation QA ---
+
+# Presentation QA — Durable host checkpoint recovery v0.13.63
+
+## Status
+
+`pass` for the bounded technical durable competitive host-checkpoint contract.
+This is not human accessibility, visual/audio quality, educational,
+device/browser, legal, provenance, or public-release approval.
+
+## Planned review boundary
+
+The implementation must remain a host persistence slice, not a browser state
+transfer. The existing `competitive-save-v1` metadata and actor-visible reads
+remain the browser contract; the serialized `CompetitiveSessionSave` and its
+wrapper are host-only.
+
+## Required pass conditions
+
+- Explicit save writes a matching competitive checkpoint and does not enter a
+  transition.
+- A fresh store recovers only the matching opaque session ID, restores the
+  prior history/hash, and produces the same next-month result.
+- Missing or malformed files fail with written recoverable errors and cannot
+  create a replacement session.
+- The configured application path has single-checkpoint semantics: a later
+  explicit save replaces the prior competitive checkpoint.
+- Browser recovery tries host load only after an unknown live session, then
+  repeats existing reads without receiving true state or replay payloads.
+- Existing audio-off, reduced-motion, keyboard, written, and current-view
+  recovery behavior remains complete.
+
+## Evidence limits
+
+This is an automated technical boundary review. It cannot approve human
+accessibility, visual/audio quality, educational comprehension, device/browser
+behavior, replay playback, provenance/legal status, or public release.
+
+## Review findings
+
+- The sole medium-effort reviewer found two Medium persistence findings:
+  possible live-session ID collision during restart and incomplete prior-state
+  linkage validation.
+- Hydration now refuses to overwrite an occupied live session, terminal cleanup
+  leaves an unclaimed durable file intact, and persistence validation reproduces
+  the deterministic month-start state and checks the aggregated action month.
+- Regression tests cover both findings. The complete Rust/Python and repository
+  quality checks pass with no unresolved Critical, High, or Medium findings.
 # Presentation QA — Browser-refresh session continuity v0.13.62
 
 ## Status

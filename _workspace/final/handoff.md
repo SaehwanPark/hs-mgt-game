@@ -1,3 +1,55 @@
+# Final Handoff — Durable competitive host-checkpoint recovery v0.13.63
+
+## Status
+
+Implementation and full verification are complete on
+`feat/durable-host-checkpoint-v0.13.63`; this handoff records the bounded
+technical slice ready for the PR loop.
+
+## Result
+
+- The loopback GUI host writes explicit competitive checkpoints as a
+  host-only `gui-competitive-save-v1` wrapper around the existing
+  `CompetitiveSessionSave` artifact, using the printed application-config path
+  and temporary-file replacement.
+- A new host store recovers only a matching opaque session ID, restores the
+  immutable history/current world/prior aggregated actions, preserves the
+  latest hash and deterministic next-month result, avoids ID collisions, and
+  removes the durable file after a confirmed terminal end.
+- Browser recovery retries `loadSession` once only after an unknown live
+  session, then repeats existing actor-visible reads. Browser storage remains
+  an opaque ID only.
+
+## Verification
+
+- 350 Rust tests, 770 Python tests, and focused browser-refresh Python/Node
+  tests pass, including recovery request order and host-only authority markers.
+- Formatting, Clippy with warnings denied, release metadata, documentation
+  links, asset/security/generation/credits, device/offline/browser, audio,
+  raster, visual/audio contract, and diff checks pass.
+- The sole medium-effort reviewer found two Medium persistence findings:
+  live session IDs could collide with a durable ID, and persisted transition
+  linkage was under-validated. Hydration now refuses to overwrite a live
+  session, terminal cleanup preserves an unclaimed checkpoint, and validation
+  reproduces the deterministic month-start state plus aggregated month link.
+  Regression tests cover both cases; all full checks passed after the fixes.
+
+## Review boundary
+
+Exactly one medium-effort code review was used for this cycle. No Critical,
+High, or unresolved Medium findings remain. Human accessibility, visual/audio
+quality, educational, legal, provenance, device, and public-release gates
+remain open.
+
+## Review boundary and remaining gates
+
+This slice does not add autosave, durable stabilization/affiliation saves,
+browser serialization, replay playback/regeneration, full-campaign placement
+or screenshots, device certification, human accessibility/educational review,
+provenance/legal approval, or public-release readiness.
+
+---
+
 # Final Handoff — Campaign decision-time observation recovery v0.13.61
 
 ## Status

@@ -2283,12 +2283,14 @@ current in-memory checkpoint visual-continuity evidence in v0.13.14, and
 current live replay visual-continuity evidence in v0.13.15, and
 current tracked visual/audio asset-registry completeness in v0.13.16, and
 current supported screenshot-surface evidence in v0.13.17, and
+current explicit durable competitive host-checkpoint recovery evidence in
+v0.13.63, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
-use, event taxonomy beyond the current projection, durable save/load/replay
-continuity, performance, full-campaign raster screenshots, and human visual
-quality gates remain open.
+use, event taxonomy beyond the current projection, durable stabilization/
+affiliation and full-campaign save/load/replay continuity, performance,
+full-campaign raster screenshots, and human visual quality gates remain open.
 
 ### Scope
 
@@ -2320,8 +2322,15 @@ quality gates remain open.
   instructor debrief remain open.
 - [x] Current in-memory host checkpoint visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
-  `tests/test_phase11_live_checkpoint.py`; durable persistence,
-  cross-process recovery, and browser-refresh recovery remain open.
+  `tests/test_phase11_live_checkpoint.py`; durable recovery is recorded as a
+  separate bounded competitive-host item below.
+- [x] Current explicit durable competitive host checkpoint recovery covered.
+  Evidence: `durable_checkpoint_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
+  persistence/session/transport tests, and
+  `tests/test_phase11_browser_refresh_recovery.py`; durable
+  stabilization/affiliation saves, autosave, and full-campaign save/load/replay
+  continuity remain open.
 - [x] Current live replay visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
   `tests/test_phase11_live_replay.py`; playback, regeneration, and durable
@@ -3938,6 +3947,38 @@ are completed. Human-review gates remain open.
   serialization, cross-process recovery, replay playback/regeneration,
   device certification, human accessibility/educational review, and
   provenance/legal/public-release gates remain open.
+
+### v0.13.63 current durable competitive host-checkpoint recovery
+
+- `durable_checkpoint_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  host-only `gui-competitive-save-v1` wrapper around the existing
+  `CompetitiveSessionSave` artifact, the configured loopback host path, the
+  matching opaque session-ID hydration rule, and the browser retry boundary.
+- `src/mcp/persistence.rs` writes an explicit competitive checkpoint through a
+  temporary sibling file before replacement. `src/mcp/session.rs` reconstructs
+  immutable history, current world, prior aggregated actions, and the done flag
+  without entering a transition; hashes and deterministic continuation remain
+  aligned, session IDs avoid collisions, and terminal end removes the durable
+  file.
+- `src/gui_server.rs` wires the durable path into the real loopback host while
+  keeping default test/MCP stores in-memory. `gui/app.mjs` calls the existing
+  host `loadSession` route once only after an unknown live-session read, then
+  repeats the ordinary actor-visible reads. The browser still stores only the
+  opaque session ID.
+- Rust persistence/session/transport tests and
+  `tests/test_phase11_browser_refresh_recovery.py` cover identity matching,
+  restart recovery, count/hash alignment, deterministic next-month results,
+  terminal cleanup, malformed/missing boundaries, request order, and the
+  unchanged browser authority boundary.
+- The sole medium-effort review found and the implementation fixed live-ID
+  collision and incomplete persisted-history linkage risks; regression tests
+  and the complete Rust/Python/repository validation rerun pass.
+- This closes only explicit durable `competitive-regional-v1` host checkpoint
+  recovery. Durable campaign-coverage saves, autosave, browser serialization,
+  replay playback/regeneration, full-campaign placement/use and screenshots,
+  device/browser certification, human accessibility/educational review,
+  provenance/legal review, and public-release approval remain open.
 
 ### Exit criteria
 

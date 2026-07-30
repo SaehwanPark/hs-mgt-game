@@ -3005,3 +3005,53 @@ stored session ID. Durable persistence, cross-process recovery, replay
 regeneration, real-device/browser certification, human accessibility,
 educational evaluation, provenance/legal review, and public-release approval
 remain open.
+
+# Request Summary — Durable host checkpoint recovery v0.13.63
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the smallest next Phase 11.1 slice:
+make an explicitly saved competitive GUI checkpoint durable on the loopback
+host and recover it after the host process restarts through the existing opaque
+browser session handle.
+
+## Target slice
+
+- Reuse the existing `CompetitiveSessionSave` artifact behind a host-only GUI
+  wrapper that records the session ID and save schema.
+- Persist only after an explicit host checkpoint save, using the existing
+  application config directory and no new dependency.
+- Reconstruct the same competitive history/current state and deterministic
+  continuation when the stored session ID is loaded by a new host process.
+- Extend browser recovery to try the existing host `loadSession` operation only
+  after the ordinary live-session read reports an unknown session, then repeat
+  the actor-visible reads.
+- Synchronize the Phase 11.1 ledger, roadmap, GUI docs, SPEC/changelog/lessons,
+  package metadata, tests, and handoff records to v0.13.63.
+
+## Non-goals
+
+- No durable stabilization/affiliation save, autosave, browser serialization,
+  service worker, replay playback/regeneration, new route/schema to the
+  browser, simulation rule, transition, asset, audio behavior, or local
+  authority.
+- Do not return the host save artifact, true state, resolved inputs, private
+  rationale, commands, or immutable history payload to JavaScript.
+- Do not claim full-campaign visual placement, screenshot quality, human
+  accessibility/educational/legal/provenance approval, or public-release
+  readiness.
+
+## Validation target
+
+Focused Rust restart/hash/continuation and GUI transport tests; focused Node/
+Python durable-recovery and authority tests; full Rust/Python suites; Clippy,
+formatting, release metadata, documentation links, asset/security/generation/
+credits, device/offline/browser, visual/audio contract, and diff checks. Then
+exactly one medium-effort code review and the authorized PR/merge handoff.
+
+## Evidence limits
+
+This slice proves only explicit durable competitive host checkpoint recovery
+and browser re-entry after host restart. It does not prove autosave, durable
+campaign-coverage saves, replay playback/regeneration, human usability,
+accessibility, educational value, provenance/legal approval, or public release.

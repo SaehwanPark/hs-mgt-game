@@ -157,6 +157,75 @@ training-data provenance, educational value, or public-release readiness.
 
 --- Historical presentation contracts ---
 
+# Presentation Contract — Durable host checkpoint recovery v0.13.63
+
+## Goal and Authorization
+
+Let a player explicitly save a competitive GUI checkpoint, stop/restart the
+loopback host, and recover the same host-owned session through the opaque ID
+already held by browser storage.
+
+## Player Questions and Consequences
+
+The player question is: “Can I recover my explicitly saved competitive session
+after the local host restarts?” A matching durable checkpoint restores the same
+visible board, action catalog, history, replay metadata, and regional-world
+reads. Missing or invalid durable data produces written recovery guidance and
+does not invent a new campaign or outcome.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Durable checkpoint identity | Host-only save wrapper containing the opaque `session_id` and existing `CompetitiveSessionSave` | Written only after explicit save; loaded only for a matching ID | Do not display or expose serialized true state, resolved inputs, or private rationale |
+| Recovery status | Existing host load response plus repeated actor-visible reads | Success, missing file, malformed file, or adapter failure | Do not infer a replacement session, transition, or outcome |
+| Restored visible surface | Existing presentation/action/history/replay/regional-world responses | After host hydration and ordinary read refresh | Do not reconstruct the projection in JavaScript |
+
+## Visual, Motion, and Audio Semantics
+
+No new semantic visual, motion, or audio signal is introduced. Existing
+checkpoint status, written recovery, history, replay metadata, resolution,
+regional-world, optional audio, and reduced-motion fallbacks remain the complete
+understanding path.
+
+## Accessibility and Fallbacks
+
+The browser continues to store only the opaque session ID. A missing or
+malformed host file leaves the current view recoverable, exposes written
+status, and permits manual start/load. Persistence is not required for audio,
+color, motion, or browser storage.
+
+## Authority, History, and Replay Boundaries
+
+Rust owns serialization, file I/O, session hydration, immutable history,
+state hashes, stochastic inputs, transitions, and debrief facts. The browser
+may request `loadSession` after an unknown live session and then re-read host
+projections; it does not serialize, deserialize, mutate, regenerate, or play
+back simulation state.
+
+## Asset Provenance and Release Requirements
+
+No asset, audio file, registry entry, or release path is added.
+
+## Verification and Evidence Limits
+
+Focused tests must cover explicit save, new-store load, matching identity,
+hash/count alignment, deterministic continuation, missing/malformed files,
+browser retry, and authority exclusions. These checks do not establish human
+usability, device/browser certification, replay playback, educational value,
+legal/provenance approval, or public-release readiness.
+
+## Non-Goals and Open Questions
+
+- No autosave, durable stabilization/affiliation checkpoint, browser
+  serialization, service worker, replay playback/regeneration, or new visual/
+  audio asset is included.
+- The configured application path stores one latest explicit competitive
+  checkpoint; a later save replaces that file, and concurrent-session archive
+  management is out of scope.
+- Open: full-campaign presentation placement, replay playback/regeneration,
+  and human review remain separate roadmap gates.
+
 # Presentation Contract — Phase 11.1 live history handoff v0.12.94
 
 ## Goal and Authorization

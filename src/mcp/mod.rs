@@ -1,5 +1,6 @@
 mod action;
 mod campaign_coverage;
+mod persistence;
 mod presentation;
 mod regional_world;
 mod resolution;
@@ -11,6 +12,7 @@ pub use action::{
   VALIDATION_SCHEMA_VERSION, ValidateTurnEnvelope,
 };
 pub use campaign_coverage::{CAMPAIGN_COVERAGE_SCHEMA_VERSION, CampaignCoverageEnvelope};
+pub use persistence::GUI_COMPETITIVE_SAVE_SCHEMA_VERSION;
 pub use presentation::{PRESENTATION_SCHEMA_VERSION, ReadOnlyPresentationEnvelope};
 pub use regional_world::{REGIONAL_WORLD_SCHEMA_VERSION, RegionalWorldEnvelope};
 pub use resolution::{

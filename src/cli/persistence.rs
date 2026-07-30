@@ -27,6 +27,10 @@ pub fn competitive_session_save_path() -> PathBuf {
   config_dir().join("competitive_session.save")
 }
 
+pub fn gui_competitive_session_save_path() -> PathBuf {
+  config_dir().join("gui_competitive_session.save")
+}
+
 pub fn settings_path() -> PathBuf {
   config_dir().join("settings")
 }

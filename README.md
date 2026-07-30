@@ -4,7 +4,7 @@ Health Policy Strategy Game is a strategy simulation about leading a fictional
 nonprofit US health system through financial pressure, workforce constraints,
 payer negotiations, policy oversight, market competition, and community trust.
 
-The current public milestone is a playable Rust prototype at v0.13.62.
+The current public milestone is a playable Rust prototype at v0.13.63.
 
 Health-policy outcomes are not direct levers here. Other institutions respond
 to your choices based on their own authority, incentives, information, and
