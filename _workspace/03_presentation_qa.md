@@ -4451,3 +4451,83 @@ None for this bounded technical handoff.
 - Full validation remains required before PR handoff.
 
 --- Historical presentation QA ---
+# Presentation QA — Browser-refresh session continuity v0.13.62
+
+## Status
+
+`pass` for the bounded same-host browser-refresh contract. This does not
+approve durable persistence, cross-process recovery, replay regeneration,
+human usability/accessibility, educational value, device certification,
+provenance/legal review, or public release.
+
+## Reviewed Inputs and Authorization
+
+- Request: `_workspace/00_input/request-summary.md`.
+- Contract: `_workspace/02_presentation_contract.md`.
+- Plan: `_workspace/141_implementation_plan_visual-audio-phase11-browser-refresh-v0.13.62.md`.
+- Changed presentation paths: `gui/app.mjs`, `gui/index.html`, the Phase 11.1
+  ledger, and focused recovery tests.
+- Roadmap gate: same-host browser-refresh continuity only; the host process
+  remains the source of session and simulation state.
+
+## Information and Causality Findings
+
+- Pass: browser storage contains only the non-empty host-issued session ID;
+  refresh recovery reuses existing host reads and does not reconstruct a
+  campaign, transition, outcome, observation, hash, or replay.
+- Pass: successful start/load persists the ID, confirmed unknown-session
+  failures clear only the stale handle, and transient failures preserve it for
+  retry. Successful host end clears the handle after the host response renders
+  in both the action and read-only clients.
+- Pass: competitive and campaign-coverage loading remain on the existing
+  action-client/host adapter paths; no local legality or transition engine was
+  introduced.
+
+## Accessibility and Fallback Findings
+
+- Pass: blocked or absent storage is optional, the existing session-ID field
+  remains keyboard-visible, and written status/recovery messages remain the
+  complete path.
+- Pass: storage is not needed for audio-off, reduced-motion, text, history,
+  observation, command, result, or debrief meaning; a stale ID is explained in
+  text and transient errors remain retryable.
+
+## Provenance and Rights Findings
+
+- Pass: no asset, registry, release path, audio file, or external source was
+  added or changed beyond generated version metadata.
+- Human legal, provenance, visual quality, and accessibility review remain
+  open project gates.
+
+## Authority and Replay Findings
+
+- Pass: the browser stores no true state, resolved inputs, private rationale,
+  transition data, history rows, state hashes, checkpoints, or replay payload.
+  Host routes remain the only source of current session and outcome data.
+- Pass: same-host refresh recovery is explicitly bounded by the in-memory Rust
+  host; stopping/restarting the process makes the ID unavailable and does not
+  create a replacement session.
+- Review fix: the sole medium-effort reviewer found one Medium read-only
+  terminal-cleanup issue. The read-only client now shares the launcher store
+  and clears it after confirmed end; focused read-only coverage was added.
+
+## Required Fixes
+
+None for this bounded technical presentation pass.
+
+## Residual Risks and Evidence Limits
+
+- Automated tests do not establish real browser storage policy behavior across
+  devices, durability, cross-process recovery, focus quality, contrast,
+  screen-reader behavior, human comprehension, or learning.
+- A separate host persistence design is required before claiming durable
+  save/load or full campaign continuity.
+
+## Verification Evidence
+
+- `tests/test_phase11_browser_refresh_recovery.py` — focused storage, launcher,
+  stale cleanup, and boundary checks passed.
+- Full Python discovery: 768 tests passed; Rust: 344 tests passed.
+- Formatting, Clippy, release metadata, documentation links, asset registry/
+  release/security/generation, device proxy, offline, browser compatibility,
+  visual/audio contract, credits, and diff checks passed.

@@ -202,6 +202,15 @@ shown.
 The ID belongs to a different or stopped server process, or it was typed
 incorrectly. Start a new session in the current process.
 
+### The browser was refreshed
+
+When browser storage is available, the GUI retains only the opaque host-issued
+session ID and attempts the normal host read after refresh. This works only
+while the same loopback host process still holds the session in memory. If the
+session is unknown, the stale ID is cleared and the launcher explains how to
+start or load a current session; transient read failures preserve the ID for a
+retry. This is not durable file or cross-process persistence.
+
 ### Audio is silent
 
 Select **Enable audio**, check browser/tab mute settings, raise Master and the
@@ -229,7 +238,9 @@ or legal decision tool. The current rules, seed, commands, and explicit
 stochastic inputs produce a bounded game outcome; they do not estimate what a
 real institution, policy, payer, workforce, or community will do.
 
-The GUI is local and in-memory. Competitive actions and campaign-coverage
+The GUI is local and in-memory. Browser refresh recovery may retain only the
+opaque host session ID and reload the same running host process; it does not
+survive a stopped/restarted host. Competitive actions and campaign-coverage
 decisions remain host-owned. The host remains
 authoritative, and actor-specific observations intentionally omit private rival
 state and unresolved hidden inputs. Current technical checks do not replace

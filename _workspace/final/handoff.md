@@ -1821,3 +1821,54 @@ approval remain open.
 - One medium-effort code reviewer is required; Critical/High findings must be
   fixed before merge.
 - PR, CI, merge, and temporary-branch cleanup are pending.
+# Final Handoff — Browser-refresh session continuity v0.13.62
+
+## Result
+
+Added best-effort same-host browser-refresh recovery for the live GUI. The
+browser retains only the opaque host-issued session ID, prefills the existing
+session control, and reuses the existing host-owned load path while the same
+loopback host process remains alive. Unknown-session handles and confirmed
+terminal sessions are cleared; transient failures retain a retryable ID.
+
+## Changed files and behavior
+
+- `gui/app.mjs`: safe injectable session-ID storage, launcher persistence,
+  initial refresh recovery, stale-session cleanup, and terminal cleanup.
+- `gui/index.html` and `docs/guides/gui-how-to-play.md`: written same-host
+  refresh and durability limitations.
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `tests/test_phase11_browser_refresh_recovery.py`: technical evidence for
+  optional storage, recovery, cleanup, fallbacks, and authority exclusions.
+- Roadmap, SPEC, changelog, lessons, version projections, device measurement,
+  request/contract/QA records: synchronized to v0.13.62.
+
+## Verification
+
+- 344 Rust tests passed; 768 Python tests passed.
+- `cargo fmt --check`, Clippy with warnings denied, release metadata,
+  documentation links, asset registry/release/security/generation, device
+  proxy, offline, browser compatibility, visual/audio contract, credits, and
+  `git diff --check` passed.
+
+## Handoff and review
+
+- Base: `main` at v0.13.61.
+- Working branch: `feat/browser-refresh-recovery-v0.13.62`.
+- PR: #309, draft, with one medium-effort code review completed.
+- Review: one Medium read-only terminal-cleanup finding was fixed and the
+  affected focused checks were rerun; no other actionable findings remained.
+- Merge status: pending.
+- Exactly one medium-effort code reviewer is required by the user request;
+  the repository default multi-pass loop is narrowed to that explicit policy.
+- Presentation-domain QA: pass for the bounded technical contract; human,
+  device, provenance/legal, durable persistence, and public-release limits are
+  recorded above.
+
+## Limits and next slice
+
+This closes only same-host browser-refresh continuity. Durable file
+persistence, browser serialization, cross-process recovery, replay playback or
+regeneration, full-campaign continuity, human accessibility/educational review,
+and public-release approval remain open. The next plan should select the
+smallest host persistence slice rather than expanding browser authority.

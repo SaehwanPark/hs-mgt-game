@@ -1,5 +1,20 @@
 # Lessons Learned
 
+## Keep Browser Refresh Recovery as an Opaque Same-Host Handle
+
+- Context: the loopback GUI held the active session ID only in the in-memory
+  adapter, so a browser refresh lost the route back to a still-running host
+  session even though the host remained authoritative.
+- Risk: storing a serialized presentation or simulation snapshot would create a
+  second state boundary and could expose or reconstruct information the browser
+  is not authorized to own.
+- Resolution: retain only the non-empty host-issued session ID in optional
+  browser storage, reuse the existing host load path, clear confirmed stale or
+  terminal IDs, and preserve IDs for transient failures.
+- Prevention: keep storage best-effort and written; test blocked storage,
+  unknown-session cleanup, end cleanup, and authority-marker exclusions. Treat
+  durable file or cross-process recovery as a separate host persistence design.
+
 ## Keep Decision-Time Recovery Host-Sourced and Written
 
 - Context: core stabilization and affiliation transitions already retained the

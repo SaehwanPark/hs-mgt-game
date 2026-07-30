@@ -453,6 +453,31 @@
       "The history read path remains read-only and cannot submit commands or expose hidden state."
     ]
   },
+  "browser_refresh_coverage": {
+    "status": "complete-same-host-browser-recovery",
+    "storage_source": "gui/app.mjs: createSessionIdStorage",
+    "storage_key": "hs-mgt-active-session-id",
+    "launcher_source": "gui/app.mjs: createSessionLauncher",
+    "initial_recovery_source": "gui/app.mjs: action-client initialization",
+    "host_read_source": "Existing getSession, presentation, action-catalog, and campaign-coverage reads",
+    "test_source": "tests/test_phase11_browser_refresh_recovery.py",
+    "stored_value": "One opaque non-empty host-issued session ID only",
+    "continuity_behavior": [
+      "Successful host start/load stores the session ID and prefills the existing-session control.",
+      "A fresh page attempts the existing host-owned load path when the same host process is still running.",
+      "Confirmed unknown-session failures clear the stale ID; other failures preserve it for retry.",
+      "Successful host end clears the ID; blocked storage never blocks a session or written fallback."
+    ],
+    "boundary": "Browser storage is best-effort presentation state; the host remains authoritative for sessions, transitions, history, replay, checkpoints, and outcomes.",
+    "limits": [
+      "No durable file persistence, browser serialization, or cross-process recovery is established.",
+      "No replay playback/regeneration, screenshot, device, accessibility, usability, or human-learning claim is made."
+    ],
+    "evidence": [
+      "Focused tests cover safe storage, successful and failed start/load, refresh recovery, stale cleanup, end cleanup, written fallback, and forbidden authority markers.",
+      "The existing host process remains in-memory; a stopped or restarted host makes the stored ID unavailable and does not create a replacement session."
+    ]
+  },
   "continuity": {
     "status": "bounded-first-month-evidence",
     "surfaces": [
@@ -471,7 +496,8 @@
       "tests/test_phase11_live_music.py",
       "tests/test_phase11_live_history.py",
       "tests/test_phase11_live_replay.py",
-      "tests/test_phase11_live_checkpoint.py"
+      "tests/test_phase11_live_checkpoint.py",
+      "tests/test_phase11_browser_refresh_recovery.py"
     ],
     "boundary": "History, debrief, replay, save/load, hashes, cue authority, music-state authority, and transition authority remain host/core-owned; the live history, replay, checkpoint, terminal, event-cue, and music-state slices verify host responses and presentation references only."
   },
@@ -486,6 +512,7 @@
   },
   "open_limits": [
     "Full competitive-campaign facility placement and usage coverage is not established by this bounded ledger; the facility asset catalog and release registry are complete, while live bindings cover only directly supported current player conditions.",
+    "Durable file persistence, browser serialization, and cross-process recovery are not established by the same-host browser-refresh slice.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
   ]
