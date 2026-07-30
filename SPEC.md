@@ -7160,6 +7160,41 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio durable stabilization host-checkpoint recovery (v0.13.64)
+
+Status: Complete for explicit durable `stabilization-v1` host checkpoints and
+browser re-entry after a host restart when the opaque session ID matches the
+saved wrapper; regional-affiliation durability, replay playback/regeneration,
+human review, and public-release gates remain open.
+
+Done:
+
+- Added the host-only `gui-stabilization-save-v1` wrapper around the existing
+  `SessionSave` replay artifact. The GUI host writes it only after an explicit
+  Save host checkpoint request, atomically replacing the one configured GUI
+  checkpoint file.
+- Added matching-ID hydration into a fresh `GameSessionStore`, verifying the
+  deterministic stabilization replay before restoring history/current state,
+  count/hash metadata, done state, and continuation without a new transition.
+- Reused the browser's one unknown-session `loadSession` retry; JavaScript still
+  stores only the opaque ID and renders existing actor-visible campaign reads.
+- Added collision-preservation and restart transport coverage, and synchronized
+  roadmap, ledger, guides, contracts, handoff, lessons, and package metadata to
+  `0.13.64`.
+
+Not Yet Done:
+
+- Durable regional-affiliation saves, autosave, browser serialization, replay
+  playback/regeneration, full-campaign visual placement/screenshots,
+  device/browser certification, human accessibility/educational review,
+  provenance/legal review, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new browser DTO, simulation rule, transition, asset, audio behavior,
+  service worker, browser-authoritative state, or replay regeneration path was
+  added.
+
 ### Visual/audio durable competitive host-checkpoint recovery (v0.13.63)
 
 Status: Complete for explicit durable `competitive-regional-v1` host

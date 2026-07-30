@@ -1,3 +1,54 @@
+# Final Handoff — Durable stabilization host checkpoint v0.13.64
+
+## Status
+
+Implementation and focused verification are complete on
+`feat/durable-stabilization-checkpoint-v0.13.64`; full validation and the PR
+loop remain.
+
+## Planned result
+
+- Add a host-only `gui-stabilization-save-v1` wrapper around the existing
+  stabilization `SessionSave` artifact on the configured GUI checkpoint path.
+- Recover a matching stabilization session across host restart with replay
+  verification, visible-history/hash alignment, deterministic continuation,
+  collision protection, and terminal cleanup.
+- Reuse the existing browser unknown-session load retry and keep browser state
+  limited to the opaque session ID.
+
+## Focused verification
+
+- Stabilization persistence/session tests pass, including matching identity,
+  deterministic replay verification, fresh-host hydration, collision
+  protection, continuation, and terminal cleanup.
+- GUI transport tests pass for stabilization save/load across two host
+  instances and visible campaign coverage after recovery.
+
+## Full verification
+
+- 354 Rust tests and 770 Python tests pass; Clippy with warnings denied,
+  formatting, release metadata, documentation links, asset/security/
+  generation/credits, device/offline/browser, audio, raster, visual/audio
+  contract, and diff checks pass.
+- The configured source-byte snapshot was updated from the stabilization UI
+  wording change to 383754 bytes.
+
+## Review
+
+- The sole medium-effort reviewer found one Medium Windows compatibility issue:
+  an existing destination could not be replaced by `fs::rename`. The
+  platform-aware replacement helper and repeated-save regression test now
+  cover the portable behavior; focused checks pass again.
+- No other actionable persistence-integrity, authority-boundary, security, or
+  maintainability findings were identified.
+
+## Review boundary and remaining gates
+
+Implementation, full validation, exactly one medium-effort review, PR handoff,
+merge, and branch cleanup remain required. Regional-affiliation durability,
+replay playback/regeneration, screenshots, human evaluation, provenance/legal,
+device certification, and public-release gates remain open.
+
 # Final Handoff — Durable competitive host-checkpoint recovery v0.13.63
 
 ## Status

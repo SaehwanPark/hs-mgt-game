@@ -146,21 +146,23 @@ policy authority.
 
 Copy a session ID displayed by the current GUI and enter it under **Existing
 session ID**, then select **Load existing session**. For
-`competitive-regional-v1`, select **Save host checkpoint** before stopping the
-host if you want restart recovery. A browser refresh or manual load after a
-restart attempts that host checkpoint once when the opaque ID matches the
-saved file, then refreshes the ordinary presentation/action/history/replay
-reads. Stabilization and regional-affiliation sessions remain in-memory only.
-Without an explicit competitive checkpoint, stopping or restarting the host
-invalidates the live session ID.
+`competitive-regional-v1` or `stabilization-v1`, select **Save host checkpoint**
+before stopping the host if you want restart recovery. A browser refresh or
+manual load after a restart attempts that host checkpoint once when the opaque
+ID matches the saved file, then refreshes the ordinary
+presentation/campaign/action/history/replay reads. Regional-affiliation
+sessions remain in-memory only. Without an explicit competitive or
+stabilization checkpoint, stopping or restarting the host invalidates the live
+session ID.
 
 ## Stop the GUI
 
 Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end
-when the process stops; an explicitly saved competitive checkpoint remains in
-the printed host application-config path until the recovered session is ended
-or replaced by a later save. The configured path stores one latest explicit
-competitive checkpoint; it is not an archive for multiple sessions.
+when the process stops; an explicitly saved competitive or stabilization
+checkpoint remains in the printed host application-config path until the
+recovered session is ended or replaced by a later save. The configured path
+stores one latest explicit checkpoint; it is not an archive for multiple
+sessions.
 
 ## Use a different port
 

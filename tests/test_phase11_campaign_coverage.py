@@ -230,7 +230,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -621,7 +621,7 @@ console.log(JSON.stringify(resolved));
 
   def test_bounded_continuity_surfaces_are_present(self):
     continuity = self.ledger["continuity"]
-    self.assertEqual(continuity["status"], "bounded-competitive-durable-checkpoint-evidence")
+    self.assertEqual(continuity["status"], "bounded-competitive-and-stabilization-durable-checkpoint-evidence")
     for relative_path in continuity["surfaces"]:
       self.assertTrue((ROOT / relative_path).is_file(), relative_path)
     self.assertIn("host/core-owned", continuity["boundary"])
@@ -655,6 +655,7 @@ console.log(JSON.stringify(resolved));
       "Current competitive terminal debrief view covered. Evidence:": "x",
       "Current in-memory host checkpoint visual continuity covered. Evidence:": "x",
       "Current explicit durable competitive host checkpoint recovery covered.": "x",
+      "Current explicit durable stabilization host checkpoint recovery covered.": "x",
       "Current live replay visual continuity covered. Evidence:": "x",
       "Unknown content fallbacks tested.": "x",
       "Current tracked visual/audio asset-registry coverage is 100%. Evidence:": "x",

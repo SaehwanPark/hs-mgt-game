@@ -26,7 +26,8 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 use super::persistence::{
-  load_competitive_session_save, remove_competitive_session_save, write_competitive_session_save,
+  GuiSessionSave, load_gui_session_save, remove_gui_session_save, write_competitive_session_save,
+  write_stabilization_session_save,
 };
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -213,7 +214,7 @@ pub struct GameSessionStore {
   next_id: u64,
   sessions: HashMap<String, GameSession>,
   checkpoints: HashMap<String, GameSession>,
-  durable_competitive_save_path: Option<PathBuf>,
+  durable_gui_save_path: Option<PathBuf>,
 }
 
 #[derive(Clone, Debug)]
@@ -258,15 +259,19 @@ impl Default for GameSessionStore {
       next_id: 1,
       sessions: HashMap::new(),
       checkpoints: HashMap::new(),
-      durable_competitive_save_path: None,
+      durable_gui_save_path: None,
     }
   }
 }
 
 impl GameSessionStore {
   pub fn with_competitive_persistence(path: PathBuf) -> Self {
+    Self::with_gui_persistence(path)
+  }
+
+  pub fn with_gui_persistence(path: PathBuf) -> Self {
     Self {
-      durable_competitive_save_path: Some(path),
+      durable_gui_save_path: Some(path),
       ..Self::default()
     }
   }
@@ -472,15 +477,22 @@ impl GameSessionStore {
         request.session_id
       )));
     };
-    if let (Some(path), GameSession::Competitive(competitive)) =
-      (&self.durable_competitive_save_path, &session)
-    {
-      write_competitive_session_save(
-        path,
-        &request.session_id,
-        &competitive_session_save(competitive),
-      )
-      .map_err(checkpoint_persistence_error)?;
+    if let Some(path) = &self.durable_gui_save_path {
+      match &session {
+        GameSession::Competitive(competitive) => write_competitive_session_save(
+          path,
+          &request.session_id,
+          &competitive_session_save(competitive),
+        )
+        .map_err(checkpoint_persistence_error)?,
+        GameSession::Stabilization(stabilization) => write_stabilization_session_save(
+          path,
+          &request.session_id,
+          &stabilization_session_save(stabilization),
+        )
+        .map_err(checkpoint_persistence_error)?,
+        GameSession::Affiliation(_) => {}
+      }
     }
     self.checkpoints.insert(request.session_id.clone(), session);
     self.save_envelope(&request.session_id, "saved")
@@ -811,16 +823,17 @@ impl GameSessionStore {
     &mut self,
     request: EndSessionRequest,
   ) -> Result<EndSessionEnvelope, McpErrorMessage> {
-    let durable_competitive = self
+    let durable_gui_checkpoint = self
       .sessions
       .get(&request.session_id)
       .is_some_and(|session| {
-        matches!(session, GameSession::Competitive(_))
-          && self.checkpoints.contains_key(&request.session_id)
+        matches!(
+          session,
+          GameSession::Competitive(_) | GameSession::Stabilization(_)
+        ) && self.checkpoints.contains_key(&request.session_id)
       });
-    if durable_competitive && let Some(path) = &self.durable_competitive_save_path {
-      remove_competitive_session_save(path, &request.session_id)
-        .map_err(checkpoint_persistence_error)?;
+    if durable_gui_checkpoint && let Some(path) = &self.durable_gui_save_path {
+      remove_gui_session_save(path, &request.session_id).map_err(checkpoint_persistence_error)?;
     }
     let Some(mut session) = self.sessions.remove(&request.session_id) else {
       return Err(error_message(format!(
@@ -908,16 +921,23 @@ impl GameSessionStore {
     if self.sessions.contains_key(session_id) {
       return Ok(false);
     }
-    let Some(path) = &self.durable_competitive_save_path else {
+    let Some(path) = &self.durable_gui_save_path else {
       return Ok(false);
     };
-    let ruleset = default_competitive_ruleset();
-    let Some(save) = load_competitive_session_save(path, session_id, &ruleset)
-      .map_err(checkpoint_persistence_error)?
+    let Some(save) = load_gui_session_save(
+      path,
+      session_id,
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+    )
+    .map_err(checkpoint_persistence_error)?
     else {
       return Ok(false);
     };
-    let session = competitive_session_from_save(save);
+    let session = match save {
+      GuiSessionSave::Competitive(save) => competitive_session_from_save(save),
+      GuiSessionSave::Stabilization(save) => stabilization_session_from_save(save),
+    };
     self
       .checkpoints
       .insert(session_id.to_string(), session.clone());
@@ -1060,6 +1080,16 @@ fn competitive_session_save(session: &CompetitiveSession) -> crate::model::Compe
   }
 }
 
+fn stabilization_session_save(session: &StabilizationSession) -> crate::model::SessionSave {
+  crate::model::SessionSave {
+    ruleset_version: session.ruleset.version.to_string(),
+    seed: session.seed,
+    experience_mode: crate::model::ExperienceMode::Standard,
+    history: session.history.clone(),
+    next_turn: session.current.turn + 1,
+  }
+}
+
 fn competitive_session_from_save(save: crate::model::CompetitiveSessionSave) -> GameSession {
   let current = save.history.final_state().clone();
   let prior_aggregated = save
@@ -1074,6 +1104,23 @@ fn competitive_session_from_save(save: crate::model::CompetitiveSessionSave) -> 
     history: save.history,
     current,
     prior_aggregated,
+    done,
+  })
+}
+
+fn stabilization_session_from_save(save: crate::model::SessionSave) -> GameSession {
+  let current = save
+    .history
+    .transitions
+    .last()
+    .map(|transition| transition.next.clone())
+    .unwrap_or_else(|| save.history.genesis.clone());
+  let done = current.turn >= INTERACTIVE_TURN_COUNT;
+  GameSession::Stabilization(StabilizationSession {
+    seed: save.seed,
+    ruleset: default_ruleset(),
+    history: save.history,
+    current,
     done,
   })
 }
@@ -1953,6 +2000,116 @@ mod tests {
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let live = start(&mut restarted, "competitive-regional-v1");
+    assert_eq!(live.session_id, original_id);
+    let error = restarted
+      .load_session(LoadSessionRequest {
+        session_id: live.session_id.clone(),
+      })
+      .expect_err("a live colliding session must not be overwritten");
+    assert_eq!(error.code.as_deref(), Some("checkpoint_missing"));
+    let replay = restarted
+      .get_replay(GetReplayRequest {
+        session_id: live.session_id.clone(),
+      })
+      .expect("live session remains available");
+    assert_eq!(replay.transition_count, 0);
+    restarted
+      .end_session(EndSessionRequest {
+        session_id: live.session_id,
+      })
+      .expect("end colliding live session");
+    assert!(path.is_file(), "unclaimed durable checkpoint must remain");
+    let _ = std::fs::remove_file(path);
+  }
+
+  #[test]
+  fn durable_stabilization_checkpoint_recovers_across_store_restart() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-stabilization-{}.save",
+      std::process::id()
+    ));
+    let mut store = GameSessionStore::with_competitive_persistence(path.clone());
+    let session = start(&mut store, "stabilization-v1");
+    let session_id = session.session_id.clone();
+    let first = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("first stage");
+    let saved = store
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable stabilization save");
+    assert_eq!(saved.transition_count, 1);
+    assert!(path.is_file());
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let loaded = restarted
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable stabilization load");
+    assert_eq!(loaded.transition_count, saved.transition_count);
+    assert_eq!(loaded.latest_state_hash, saved.latest_state_hash);
+    let restored = restarted
+      .get_observation(GetObservationRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored observation");
+    assert_eq!(restored.turn, first.turn);
+
+    let original_next = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("original continuation");
+    let restarted_next = restarted
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("restarted continuation");
+    assert_eq!(
+      restarted_next
+        .latest_transition
+        .map(|transition| transition.state_hash),
+      original_next
+        .latest_transition
+        .map(|transition| transition.state_hash)
+    );
+
+    restarted
+      .end_session(EndSessionRequest { session_id })
+      .expect("end recovered stabilization session");
+    assert!(!path.exists());
+  }
+
+  #[test]
+  fn durable_stabilization_checkpoint_does_not_overwrite_live_session() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-stabilization-collision-{}.save",
+      std::process::id()
+    ));
+    let mut original = GameSessionStore::with_competitive_persistence(path.clone());
+    let original_session = start(&mut original, "stabilization-v1");
+    let original_id = original_session.session_id.clone();
+    original
+      .submit_turn(SubmitTurnRequest {
+        session_id: original_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("first stage");
+    original
+      .save_session(SaveSessionRequest {
+        session_id: original_id.clone(),
+      })
+      .expect("durable save");
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let live = start(&mut restarted, "stabilization-v1");
     assert_eq!(live.session_id, original_id);
     let error = restarted
       .load_session(LoadSessionRequest {

@@ -1,3 +1,52 @@
+# Presentation Contract — Durable stabilization host checkpoint v0.13.64
+
+## Goal and Authorization
+
+Let a player explicitly save a `stabilization-v1` GUI checkpoint, stop/restart
+the loopback host, and recover the same host-owned campaign session through the
+opaque ID already held by browser storage.
+
+## Player Questions and Consequences
+
+The player question is: “Can I recover my explicitly saved stabilization
+session after the local host restarts?” A matching durable checkpoint restores
+the visible campaign stage, history, hash, and continuation. Missing, malformed,
+or colliding data produces written recovery guidance and never overwrites a
+live session or invents a replacement outcome.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Durable checkpoint identity | Host-only wrapper containing opaque `session_id` and the existing stabilization `SessionSave` fields | Written only after explicit save; loaded only for matching ID | Do not display or expose serialized true state, resolved inputs, or private rationale |
+| Recovery status | Existing host load response plus repeated actor-visible reads | Success, missing file, malformed file, collision, or adapter failure | Do not infer a replacement session, transition, or outcome |
+| Restored visible surface | Existing campaign-coverage, history, replay, and session responses | After host hydration and ordinary reads | Do not reconstruct the projection in JavaScript |
+
+## Visual, Motion, and Audio Semantics
+
+No new semantic visual, motion, or audio signal is introduced. Existing
+campaign stage, written history, optional audio, audio-off, and reduced-motion
+fallbacks remain the complete understanding path.
+
+## Accessibility, Authority, and Evidence Limits
+
+The browser continues to store only the opaque session ID. The host owns file
+I/O, replay verification, hydration, and transitions; the browser never
+serializes, deserializes, mutates, or regenerates stabilization state. Technical
+checks do not establish human usability, accessibility, educational value,
+device certification, legal/provenance approval, or public release.
+
+## Non-Goals and Open Questions
+
+- No durable regional-affiliation checkpoint, autosave, browser serialization,
+  replay playback/regeneration, new route/schema, asset, audio behavior, or
+  screenshot is included.
+- The configured path stores one latest explicit checkpoint; a later
+  stabilization save replaces the prior file through a temporary-sibling host
+  operation.
+- Open: regional-affiliation durability, full-campaign save/load/replay
+  continuity, screenshots, and human review remain separate roadmap gates.
+
 # Presentation Contract — Campaign decision-time observation recovery v0.13.61
 
 ## Goal and Authorization

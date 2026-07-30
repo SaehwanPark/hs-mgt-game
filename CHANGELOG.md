@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.64] - 2026-07-30
+
+- Added explicit durable stabilization GUI checkpoints using a host-only
+  `gui-stabilization-save-v1` wrapper around the existing `SessionSave` replay
+  artifact on the configured GUI checkpoint path.
+- Added fresh-host stabilization hydration with replay/hash validation,
+  deterministic continuation, live-session collision protection, and GUI
+  transport restart coverage while reusing the existing browser load retry.
+- Kept regional-affiliation durability, autosave, replay playback/regeneration,
+  human evaluation, provenance, and public-release gates open.
+
 ## [0.13.63] - 2026-07-30
 
 - Added explicit durable competitive GUI checkpoints using a host-only wrapper

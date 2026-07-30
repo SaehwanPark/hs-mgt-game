@@ -3217,6 +3217,24 @@ tampered save can look hash-consistent while driving inconsistent read/debrief
 views, or a restarted host can overwrite a newly created session with a stale
 checkpoint.
 
+## Phase 66: Reuse the canonical campaign replay serializer (2026-07-30)
+
+When a campaign history already has a text serializer and deterministic verifier,
+keep the GUI wrapper thin: persist the canonical artifact text plus only the
+opaque host session ID and schema marker. Requiring new JSON serialization for
+an internal history type would expand the model contract and invite a second
+validation path. The wrapper can remain host-only while the existing verifier
+continues to own replay integrity.
+
+## Phase 67: Treat file replacement as a platform contract (2026-07-30)
+
+`rename` is a clean replacement primitive on Unix but does not overwrite an
+existing destination on Windows. A temporary sibling still gives the host a
+recoverable write boundary, but the replacement helper must handle the
+platform difference and the documentation must avoid promising stronger
+atomicity than the implementation provides. Keep a repeated-save regression
+test beside the persistence wrapper.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove
