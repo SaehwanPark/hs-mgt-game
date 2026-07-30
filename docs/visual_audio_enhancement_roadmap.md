@@ -2287,11 +2287,13 @@ current explicit durable competitive host-checkpoint recovery evidence in
 v0.13.63, and
 current explicit durable stabilization host-checkpoint recovery evidence in
 v0.13.64, and
+current explicit durable regional-affiliation host-checkpoint recovery
+evidence in v0.13.65, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
-use, event taxonomy beyond the current projection, durable regional-affiliation
-and full-campaign save/load/replay continuity, performance,
+use, event taxonomy beyond the current projection, full-campaign save/load/
+replay continuity, performance,
 full-campaign raster screenshots, and human visual quality gates remain open.
 
 ### Scope
@@ -2331,14 +2333,17 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
   persistence/session/transport tests, and
   `tests/test_phase11_browser_refresh_recovery.py`; durable
-  stabilization/affiliation saves, autosave, and full-campaign save/load/replay
-  continuity remain open.
+  autosave and full-campaign save/load/replay continuity remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
   persistence/session/transport tests, and the existing browser recovery
-  boundary; durable regional-affiliation saves, autosave, and full-campaign
-  save/load/replay continuity remain open.
+  boundary; autosave and full-campaign save/load/replay continuity remain open.
+- [x] Current explicit durable regional-affiliation host checkpoint recovery covered.
+  Evidence: `durable_affiliation_checkpoint_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
+  persistence/session/transport tests, and the existing browser recovery
+  boundary; autosave and full-campaign save/load/replay continuity remain open.
 - [x] Current live replay visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
   `tests/test_phase11_live_replay.py`; playback, regeneration, and durable
@@ -4009,6 +4014,27 @@ are completed. Human-review gates remain open.
   regeneration, full-campaign placement/use and screenshots, device/browser
   certification, human accessibility/educational review, provenance/legal
   review, and public-release approval remain open.
+
+### v0.13.65 current durable regional-affiliation host-checkpoint recovery
+
+- `durable_affiliation_checkpoint_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  host-only `gui-affiliation-save-v1` wrapper around the existing
+  `AffiliationReplayArtifact`, matching opaque-ID hydration, and reuse of the
+  browser’s one unknown-session host-load retry.
+- `src/mcp/persistence.rs` verifies the canonical affiliation replay artifact
+  before hydration. `src/mcp/session.rs` reconstructs the current stage/history
+  and done state without a transition, keeps live collision protection, and
+  shares the one latest explicit GUI checkpoint path with the other campaigns.
+- `src/gui_server.rs` transport tests cover affiliation save/load across two
+  host instances, visible campaign coverage, hash/count alignment, and
+  terminal cleanup. The browser remains opaque-ID-only and receives only the
+  existing actor-visible reads.
+- This closes only explicit durable `regional-affiliation-v1` host checkpoint
+  recovery. Autosave, browser serialization, replay playback/regeneration,
+  full-campaign placement/use and screenshots, device/browser certification,
+  human accessibility/educational review, provenance/legal review, and
+  public-release approval remain open.
 
 ### Exit criteria
 

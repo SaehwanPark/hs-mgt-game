@@ -921,6 +921,84 @@ mod tests {
   }
 
   #[tokio::test]
+  async fn live_transport_recovers_durable_affiliation_checkpoint_after_host_restart() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-affiliation-transport-{}.save",
+      std::process::id()
+    ));
+    let (address, server) = test_server_with_persistence(path.clone()).await;
+    let (status, body) = request(
+      address,
+      "POST",
+      "/api/v1/sessions",
+      Some(r#"{"campaign":"regional-affiliation-v1","seed":42,"difficulty":null}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let session_id = serde_json::from_str::<serde_json::Value>(&body).unwrap()["session_id"]
+      .as_str()
+      .unwrap()
+      .to_string();
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/turns"),
+      Some(r#"{"command_text":"assess"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/save"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(saved["transition_count"], 1);
+    assert!(path.is_file());
+    server.abort();
+
+    let (address, restarted_server) = test_server_with_persistence(path.clone()).await;
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/load"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let loaded: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(loaded["operation"], "loaded");
+    assert_eq!(loaded["transition_count"], 1);
+    assert_eq!(loaded["latest_state_hash"], saved["latest_state_hash"]);
+
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/campaign-coverage"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(coverage["session"]["campaign"], "regional-affiliation-v1");
+    assert_eq!(coverage["stage"]["id"], "chooseposture");
+
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/end"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    assert!(!path.exists());
+    restarted_server.abort();
+  }
+
+  #[tokio::test]
   async fn live_transport_returns_structured_unknown_session_error() {
     let (address, server) = test_server().await;
     let (status, body) = request(

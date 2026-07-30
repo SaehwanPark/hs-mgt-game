@@ -333,6 +333,7 @@ pub enum AffiliationValidationError {
   TerminalState,
   ReplayStateMismatch,
   ObservationMismatch,
+  ResolvedInputsMismatch,
   StateHashMismatch {
     turn: u32,
     expected: String,
@@ -367,6 +368,9 @@ impl AffiliationValidationError {
       }
       Self::ObservationMismatch => {
         "affiliation replay observation does not match the decision-time state".to_string()
+      }
+      Self::ResolvedInputsMismatch => {
+        "affiliation replay resolved inputs do not match the saved seed".to_string()
       }
       Self::StateHashMismatch {
         turn,

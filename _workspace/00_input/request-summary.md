@@ -1,3 +1,48 @@
+# Request Summary — Durable regional-affiliation host checkpoint v0.13.65
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next bounded persistence slice:
+make an explicitly saved `regional-affiliation-v1` GUI checkpoint durable on
+the loopback host and recover it after restart through the existing opaque
+browser session handle.
+
+## Target slice
+
+- Reuse the existing `AffiliationReplayArtifact` serializer and verifier behind
+  a host-only `gui-affiliation-save-v1` wrapper.
+- Keep one latest explicit checkpoint on the configured GUI path through the
+  existing temporary-sibling replacement behavior.
+- Hydrate only a matching opaque session ID in a fresh host, preserving
+  affiliation history, stage, hash, and deterministic continuation.
+- Reuse the existing browser unknown-session host-load retry; no new browser
+  route, schema, true-state field, or local authority is added.
+- Synchronize roadmap, ledgers, guides, SPEC/changelog/lessons, tests, handoff
+  records, and package metadata to v0.13.65.
+
+## Non-goals
+
+- No autosave, browser serialization, replay playback/regeneration, simulation
+  rule, transition, asset, audio behavior, screenshot, or service worker.
+- Do not return the host save artifact, true state, resolved inputs, private
+  rationale, commands, or immutable history payload to JavaScript.
+- Do not claim full-campaign placement, human accessibility/educational/legal/
+  provenance approval, device certification, or public-release readiness.
+
+## Validation target
+
+Focused Rust affiliation wrapper/restart/hash/collision and GUI transport
+tests; existing browser recovery authority tests; full Rust/Python suites;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/visual-audio checks,
+diff checks, exactly one medium-effort review, and the authorized PR/merge loop.
+
+## Evidence limits
+
+This slice proves only explicit durable regional-affiliation host-checkpoint
+recovery and browser re-entry after host restart. Replay playback/regeneration,
+human review, and public-release gates remain open.
+
 # Request Summary — Durable stabilization host checkpoint v0.13.64
 
 ## Authorized outcome

@@ -387,7 +387,6 @@
     "boundary": "The host owns file I/O, true state, history, hashes, stochastic inputs, hydration, and transitions; the browser receives only the existing save metadata and actor-visible projections.",
     "limits": [
       "The configured application path stores one latest explicit competitive checkpoint; a later save replaces it.",
-      "Stabilization and regional-affiliation checkpoints remain in-memory only.",
       "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
@@ -414,13 +413,38 @@
     "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
     "limits": [
       "The configured application path stores one latest explicit checkpoint; a later stabilization or competitive save replaces it.",
-      "Regional-affiliation checkpoints remain in-memory only.",
       "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
       "Rust persistence tests cover matching identity, deterministic replay verification, and malformed boundaries.",
       "Rust session tests cover fresh-store hydration, transition-count/hash alignment, deterministic continuation, collision protection, and terminal cleanup.",
       "Rust GUI transport tests cover a saved stabilization checkpoint across two host server instances; the existing browser recovery test preserves the opaque-ID-only boundary."
+    ]
+  },
+  "durable_affiliation_checkpoint_coverage": {
+    "status": "complete-explicit-affiliation-host-checkpoint",
+    "schema": "gui-affiliation-save-v1",
+    "canonical_artifact": "AffiliationReplayArtifact",
+    "host_source": "src/mcp/persistence.rs + src/mcp/session.rs",
+    "route_source": "src/gui_server.rs: configured loopback GUI store",
+    "browser_source": "gui/app.mjs: existing unknown-session host-load retry",
+    "test_source": "src/mcp/persistence.rs, src/mcp/session.rs, src/gui_server.rs, tests/test_phase11_browser_refresh_recovery.py",
+    "continuity_behavior": [
+      "Explicit regional-affiliation Save host checkpoint writes a host-only wrapper around the existing AffiliationReplayArtifact.",
+      "A fresh host verifies the saved affiliation history through the existing deterministic replay verifier before hydrating a matching opaque session ID.",
+      "Restored campaign coverage, history, latest hash, visible stage, and deterministic next-stage continuation remain aligned.",
+      "A live colliding session is never overwritten, and ending an unclaimed collision leaves the durable checkpoint available for later recovery.",
+      "Ending the recovered regional-affiliation session removes the durable checkpoint file."
+    ],
+    "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
+    "limits": [
+      "The configured application path stores one latest explicit checkpoint; a later campaign save replaces it.",
+      "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
+    ],
+    "evidence": [
+      "Rust persistence tests cover matching identity, canonical affiliation replay verification, and malformed boundaries.",
+      "Rust session tests cover fresh-store hydration, transition-count/hash alignment, visible-stage recovery, deterministic continuation, collision protection, and terminal cleanup.",
+      "Rust GUI transport tests cover a saved regional-affiliation checkpoint across two host server instances; the existing browser recovery test preserves the opaque-ID-only boundary."
     ]
   },
   "replay_view_coverage": {
@@ -532,7 +556,7 @@
     ]
   },
   "continuity": {
-    "status": "bounded-competitive-and-stabilization-durable-checkpoint-evidence",
+    "status": "bounded-competitive-stabilization-and-affiliation-durable-checkpoint-evidence",
     "surfaces": [
       "gui/first-month.mjs",
       "gui/resolution-sequence.mjs",
@@ -566,8 +590,8 @@
   },
   "open_limits": [
     "Full competitive-campaign facility placement and usage coverage is not established by this bounded ledger; the facility asset catalog and release registry are complete, while live bindings cover only directly supported current player conditions.",
-    "Durable competitive and stabilization checkpoint recovery is established only for explicit host saves; durable regional-affiliation saves, autosave, browser serialization, and full-campaign save/load/replay continuity remain open.",
-    "Browser recovery after host restart is established only when the player explicitly saved a competitive or stabilization checkpoint and the same loopback host uses the configured file path.",
+    "Durable competitive, stabilization, and regional-affiliation checkpoint recovery is established only for explicit host saves; autosave, browser serialization, and full-campaign save/load/replay continuity remain open.",
+    "Browser recovery after host restart is established only when the player explicitly saved a competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
   ]

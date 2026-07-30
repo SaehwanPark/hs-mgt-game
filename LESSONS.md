@@ -3235,6 +3235,16 @@ platform difference and the documentation must avoid promising stronger
 atomicity than the implementation provides. Keep a repeated-save regression
 test beside the persistence wrapper.
 
+## Phase 68: Dispatch typed campaign artifacts behind one host checkpoint boundary (2026-07-30)
+
+When multiple campaigns share an explicit GUI checkpoint path, keep the
+transport and browser contract stable while dispatching by a host-only schema
+marker into each campaign's canonical artifact verifier. The affiliation path
+can then reuse `AffiliationReplayArtifact` without inventing a second history
+format or exposing serialized state to JavaScript. Test each campaign's
+fresh-host stage/hash/continuation behavior, while keeping autosave, replay
+playback/regeneration, and full-campaign continuity as separate gates.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove
