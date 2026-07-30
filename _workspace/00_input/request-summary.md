@@ -1,3 +1,50 @@
+# Request Summary — Durable stabilization host checkpoint v0.13.64
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next bounded Phase 11.1 slice:
+make an explicitly saved `stabilization-v1` GUI checkpoint durable on the
+loopback host and recover it after a host restart through the existing opaque
+browser session handle.
+
+## Target slice
+
+- Reuse the existing stabilization `SessionSave` artifact and replay verifier
+  behind a host-only `gui-stabilization-save-v1` wrapper.
+- Keep one latest explicit host checkpoint on the existing configured GUI path,
+  with temporary-sibling replacement and no autosave.
+- Hydrate only a matching opaque session ID in a fresh host store, preserving
+  history, state hash, visible campaign state, and deterministic continuation.
+- Reuse the existing browser unknown-session host-load retry; no new browser
+  route, schema, true-state field, or local authority is added.
+- Synchronize the Phase 11.1 ledger, roadmap, guides, SPEC/changelog/lessons,
+  tests, handoff records, and package metadata to v0.13.64.
+
+## Non-goals
+
+- No durable regional-affiliation save, autosave, browser serialization,
+  replay playback/regeneration, simulation rule, transition, asset, audio
+  behavior, screenshot, or service worker.
+- Do not return the host save artifact, true state, resolved inputs, private
+  rationale, commands, or immutable history payload to JavaScript.
+- Do not claim full-campaign placement, human accessibility/educational/legal/
+  provenance approval, device certification, or public-release readiness.
+
+## Validation target
+
+Focused Rust stabilization wrapper/restart/hash/collision and GUI transport
+tests; existing browser recovery authority tests; full Rust/Python suites;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/visual-audio checks,
+diff checks, exactly one medium-effort review, and the authorized PR/merge loop.
+
+## Evidence limits
+
+This slice proves only explicit durable stabilization host-checkpoint recovery
+and browser re-entry after host restart. Regional-affiliation durability,
+replay playback/regeneration, human review, and public-release gates remain
+open.
+
 # Request Summary — Campaign decision-time observation recovery v0.13.61
 
 ## Authorized outcome

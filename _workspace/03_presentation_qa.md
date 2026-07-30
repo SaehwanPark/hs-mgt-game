@@ -1,3 +1,48 @@
+# Presentation QA — Durable stabilization host checkpoint v0.13.64
+
+## Status
+
+`pass` for the bounded technical durable stabilization host-checkpoint
+contract. This is not human accessibility, visual/audio quality, educational,
+device/browser, legal, provenance, or public-release approval.
+
+## Review boundary
+
+The implementation must remain a host persistence slice, not a browser state
+transfer. The existing campaign-coverage and actor-visible read contracts
+remain unchanged; the stabilization replay artifact and new wrapper are
+host-only.
+
+## Required pass conditions
+
+- Explicit stabilization Save writes a matching checkpoint without entering a
+  transition and replaces the one configured host file through a
+  temporary-sibling host operation on supported platforms.
+- A fresh store verifies and recovers the same history/hash/visible state and
+  deterministic next-stage continuation.
+- Missing, malformed, or colliding files fail with written recoverable errors
+  and cannot overwrite a live session.
+- Existing browser recovery tries host load only after an unknown live read,
+  then repeats existing actor-visible reads without true state or replay data.
+- Existing audio-off, reduced-motion, keyboard, written, and campaign-view
+  behavior remains complete.
+
+## Evidence limits
+
+This is an automated technical boundary review. It cannot approve human
+accessibility, visual/audio quality, educational comprehension, device/browser
+behavior, replay playback, provenance/legal status, or public release.
+
+## Review findings
+
+- The sole medium-effort reviewer found one Medium portability issue: replacing
+  an existing destination with `fs::rename` is not supported on Windows.
+- The host replacement helper now removes an existing destination under
+  Windows before the temporary sibling rename, and a repeated-save regression
+  test confirms the latest checkpoint is recoverable. Documentation now states
+  the portable temporary-sibling replacement guarantee without overclaiming
+  cross-platform atomicity.
+
 # Presentation QA — Campaign decision-time observation recovery v0.13.61
 
 ## Status

@@ -187,9 +187,12 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
   def test_durable_recovery_remains_host_only(self):
     for marker in (
       "GUI_COMPETITIVE_SAVE_SCHEMA_VERSION",
+      "GUI_STABILIZATION_SAVE_SCHEMA_VERSION",
       "with_competitive_persistence",
       "hydrate_durable_session",
       "competitive_session_from_save",
+      "stabilization_session_from_save",
+      "gui-stabilization-save-v1",
       "Recovering durable host checkpoint",
       "allowDurableRecovery",
       "loadSession(requestedSessionId)",
