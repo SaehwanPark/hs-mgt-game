@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.63] - 2026-07-30
+
+- Added explicit durable competitive GUI checkpoints using a host-only wrapper
+  around the existing `CompetitiveSessionSave` artifact and a configured
+  application save path.
+- Added matching-session hydration across host restart, deterministic
+  continuation/hash tests, terminal file cleanup, and one browser host-load
+  retry after an unknown live session.
+- Kept campaign-coverage durability, autosave, replay playback/regeneration,
+  human evaluation, provenance, and public-release gates open.
+
 ## [0.13.62] - 2026-07-30
 
 - Added best-effort same-host browser-refresh recovery by retaining only the

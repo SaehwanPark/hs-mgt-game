@@ -9,6 +9,9 @@ APP = ROOT / "gui" / "app.mjs"
 HTML = ROOT / "gui" / "index.html"
 GUIDE = ROOT / "docs" / "guides" / "gui-how-to-play.md"
 LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json"
+SERVER = ROOT / "src" / "gui_server.rs"
+SESSION = ROOT / "src" / "mcp" / "session.rs"
+PERSISTENCE = ROOT / "src" / "mcp" / "persistence.rs"
 
 
 class BrowserRefreshRecoveryTests(unittest.TestCase):
@@ -18,6 +21,9 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     cls.html = HTML.read_text(encoding="utf-8")
     cls.guide = GUIDE.read_text(encoding="utf-8")
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
+    cls.server = SERVER.read_text(encoding="utf-8")
+    cls.session = SESSION.read_text(encoding="utf-8")
+    cls.persistence = PERSISTENCE.read_text(encoding="utf-8")
 
   def run_node(self, script):
     result = subprocess.run(
@@ -127,6 +133,74 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "effect_queue",
       "WebSocket",
       "serializeState",
+    ):
+      self.assertNotIn(forbidden, self.app)
+
+  def test_action_client_retries_host_load_after_unknown_live_session(self):
+    result = self.run_node(r'''
+      function node() {
+        return {
+          children: [], dataset: {}, classList: { add() {}, toggle() {} },
+          hidden: false, value: "", textContent: "", disabled: false,
+          replaceChildren(...items) { this.children = items; },
+          append(...items) { this.children.push(...items); },
+          appendChild(item) { this.children.push(item); },
+          addEventListener() {}, querySelector() { return null; }, querySelectorAll() { return []; },
+          setAttribute() {}, removeAttribute() {}, focus() {},
+        };
+      }
+      const nodes = new Map();
+      const root = {
+        documentElement: node(),
+        querySelector(selector) { if (!nodes.has(selector)) nodes.set(selector, node()); return nodes.get(selector); },
+        querySelectorAll() { return []; }, addEventListener() {}, removeEventListener() {},
+      };
+      globalThis.document = undefined;
+      const { createActionClient } = await import("./gui/app.mjs");
+      globalThis.document = { createElement: () => node(), documentElement: node() };
+      globalThis.matchMedia = () => ({ matches: false });
+      const calls = [];
+      const presentation = {
+        schema_version: "competitive-read-only-v1",
+        session: { session_id: "session-7", campaign: "competitive-regional-v1", turn: 1, max_turns: 24 },
+        observation: {}, institutions: [], resources: {}, pending_effects: [], history: [], replay: {},
+      };
+      const adapter = {
+        sessionId: null,
+        campaign: null,
+        async getPresentation() { calls.push("presentation"); if (!this.sessionId) throw new Error("unknown session 'session-7'"); return presentation; },
+        async loadSession(sessionId) { calls.push("load"); this.sessionId = sessionId; this.campaign = "competitive-regional-v1"; return { schema_version: "competitive-save-v1", operation: "loaded", session_id: sessionId, campaign: "competitive-regional-v1", seed: 42, transition_count: 0, latest_state_hash: null }; },
+        async getActionCatalog() { calls.push("catalog"); return { schema_version: "competitive-actions-v1", turn: 1, actions: [] }; },
+        async validateTurn() { return { valid: true, previews: [], errors: [] }; },
+      };
+      const values = new Map();
+      const storage = { getItem(key) { return values.get(key) ?? null; }, setItem(key, value) { values.set(key, value); }, removeItem(key) { values.delete(key); } };
+      const client = createActionClient({ adapter, root, storage });
+      const result = await client.load("session-7");
+      console.log(JSON.stringify({ ok: result.ok, calls, sessionId: client.sessionStore.get() }));
+    ''')
+    self.assertEqual(
+      result,
+      {"ok": True, "calls": ["presentation", "load", "presentation", "catalog"], "sessionId": "session-7"},
+    )
+
+  def test_durable_recovery_remains_host_only(self):
+    for marker in (
+      "GUI_COMPETITIVE_SAVE_SCHEMA_VERSION",
+      "with_competitive_persistence",
+      "hydrate_durable_session",
+      "competitive_session_from_save",
+      "Recovering durable host checkpoint",
+      "allowDurableRecovery",
+      "loadSession(requestedSessionId)",
+      "competitive-save-v1",
+    ):
+      self.assertIn(marker, self.app + self.server + self.session + self.persistence)
+    for forbidden in (
+      "CompetitiveWorldState",
+      "resolved_inputs",
+      "serializeState",
+      "history.transitions",
     ):
       self.assertNotIn(forbidden, self.app)
 

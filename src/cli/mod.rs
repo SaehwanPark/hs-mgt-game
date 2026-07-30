@@ -37,6 +37,7 @@ pub use parse::{
   describe_command_defaults, parse_coalition_command, parse_competitor_command,
   parse_policy_command, parse_stabilize_access_command, parse_workforce_command,
 };
+pub use persistence::gui_competitive_session_save_path;
 pub use session::{
   InteractiveRunResult, read_stabilization_run_config, run, run_interactive_history, run_session,
 };

@@ -3196,6 +3196,27 @@ validation separate from campaign-specific coverage, and let failed fallback
 reads preserve the current view. This technical route still does not establish
 campaign-specific visual/audio quality, human usability, or release approval.
 
+## Phase 64: Persist the host artifact, not the browser projection (2026-07-30)
+
+Durable GUI recovery can reuse the existing competitive save artifact when the
+host adds only an opaque session-ID wrapper and reconstructs the in-memory
+session from immutable history. Keep the file behind the host boundary, write
+only after an explicit checkpoint request, and retry hydration only after the
+ordinary live-session read reports an unknown ID. This preserves the browser's
+actor-visible contract and makes deterministic hash/continuation tests the
+proof of restart recovery; it does not imply autosave, campaign-coverage
+durability, replay playback, or human release readiness.
+
+## Phase 65: Validate the restart boundary’s hidden intermediate state (2026-07-30)
+
+A persisted competitive transition does not point directly from the prior
+history state to the recorded `prior`: the deterministic month-start tick runs
+first. Validate the exact reconstructed intermediate state, the aggregated
+action month, and occupied-session behavior before hydrating. Otherwise a
+tampered save can look hash-consistent while driving inconsistent read/debrief
+views, or a restarted host can overwrite a newly created session with a stale
+checkpoint.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove

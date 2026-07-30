@@ -25,6 +25,16 @@ struct GuiState {
   store: Arc<Mutex<GameSessionStore>>,
 }
 
+impl GuiState {
+  fn with_competitive_persistence(path: std::path::PathBuf) -> Self {
+    Self {
+      store: Arc::new(Mutex::new(GameSessionStore::with_competitive_persistence(
+        path,
+      ))),
+    }
+  }
+}
+
 #[derive(Debug, Deserialize)]
 #[serde(deny_unknown_fields)]
 struct GuiStartSessionRequest {
@@ -83,8 +93,12 @@ pub async fn run_gui_server(address: SocketAddr) -> Result<(), Box<dyn std::erro
   let listener = tokio::net::TcpListener::bind(address).await?;
   let local = listener.local_addr()?;
   println!("Health Policy Strategy Game GUI: http://{local}");
-  println!("Keep this terminal running. Press Ctrl-C to stop; sessions are held in memory.");
-  axum::serve(listener, gui_router())
+  let save_path = crate::cli::gui_competitive_session_save_path();
+  println!(
+    "Keep this terminal running. Explicit competitive checkpoints use the host file {}.",
+    save_path.display()
+  );
+  axum::serve(listener, gui_router_with_persistence(save_path))
     .with_graceful_shutdown(shutdown_signal())
     .await?;
   Ok(())
@@ -94,7 +108,16 @@ async fn shutdown_signal() {
   let _ = tokio::signal::ctrl_c().await;
 }
 
+#[cfg(test)]
 fn gui_router() -> Router {
+  gui_router_with_state(GuiState::default())
+}
+
+fn gui_router_with_persistence(path: std::path::PathBuf) -> Router {
+  gui_router_with_state(GuiState::with_competitive_persistence(path))
+}
+
+fn gui_router_with_state(state: GuiState) -> Router {
   Router::new()
     .route("/api/v1/sessions", post(start_session))
     .route("/api/v1/sessions/{session_id}", get(get_session))
@@ -129,7 +152,7 @@ fn gui_router() -> Router {
     .route("/api/v1/sessions/{session_id}/load", post(load_session))
     .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
-    .with_state(GuiState::default())
+    .with_state(state)
 }
 
 async fn start_session(
@@ -481,6 +504,19 @@ mod tests {
     (address, task)
   }
 
+  async fn test_server_with_persistence(
+    path: std::path::PathBuf,
+  ) -> (SocketAddr, tokio::task::JoinHandle<()>) {
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let address = listener.local_addr().unwrap();
+    let task = tokio::spawn(async move {
+      axum::serve(listener, gui_router_with_persistence(path))
+        .await
+        .unwrap();
+    });
+    (address, task)
+  }
+
   async fn request(
     address: SocketAddr,
     method: &str,
@@ -728,6 +764,82 @@ mod tests {
     assert_eq!(status, 404, "{body}");
 
     server.abort();
+  }
+
+  #[tokio::test]
+  async fn live_transport_recovers_durable_checkpoint_after_host_restart() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-transport-{}.save",
+      std::process::id()
+    ));
+    let (address, server) = test_server_with_persistence(path.clone()).await;
+    let (status, body) = request(
+      address,
+      "POST",
+      "/api/v1/sessions",
+      Some(r#"{"campaign":"competitive-regional-v1","seed":42,"difficulty":"normal"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let session_id = serde_json::from_str::<serde_json::Value>(&body).unwrap()["session_id"]
+      .as_str()
+      .unwrap()
+      .to_string();
+    let turns_path = format!("/api/v1/sessions/{session_id}/turns");
+    let (status, body) = request(
+      address,
+      "POST",
+      &turns_path,
+      Some(r#"{"command_text":"hold"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let save_path = format!("/api/v1/sessions/{session_id}/save");
+    let (status, body) = request(address, "POST", &save_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(saved["transition_count"], 1);
+    assert!(path.is_file());
+    server.abort();
+
+    let (address, restarted_server) = test_server_with_persistence(path.clone()).await;
+    let load_path = format!("/api/v1/sessions/{session_id}/load");
+    let (status, body) = request(address, "POST", &load_path, None).await;
+    assert_eq!(status, 200, "{body}");
+    let loaded: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(loaded["operation"], "loaded");
+    assert_eq!(loaded["transition_count"], 1);
+    assert_eq!(loaded["latest_state_hash"], saved["latest_state_hash"]);
+
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/presentation"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/replay"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let replay: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(replay["transition_count"], 1);
+
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/end"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    assert!(!path.exists());
+    restarted_server.abort();
   }
 
   #[tokio::test]

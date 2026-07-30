@@ -2488,7 +2488,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     return result;
   }
 
-  async function load(nextSessionId = sessionId) {
+  // Action-client load also owns one host-only durable-checkpoint retry.
+  async function load(nextSessionId = sessionId, allowDurableRecovery = true) {
     const requestedSessionId = String(nextSessionId ?? "").trim();
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
     configureRecovery(root, () => load(requestedSessionId), recorder);
@@ -2609,6 +2610,19 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       );
       return { ok: true, catalog };
     } catch (error) {
+      if (
+        allowDurableRecovery
+        && isUnknownSessionResult(error)
+        && typeof adapter?.loadSession === "function"
+      ) {
+        try {
+          sessionLaunchStatus(root, `Recovering durable host checkpoint ${requestedSessionId}…`);
+          await adapter.loadSession(requestedSessionId);
+          return load(requestedSessionId, false);
+        } catch (restoreError) {
+          error = restoreError;
+        }
+      }
       const message = error instanceof Error ? error.message : String(error);
       if (typeof coverageAdapter?.getCampaignCoverage === "function") {
         const coverage = await loadCampaignCoverage(requestedSessionId);

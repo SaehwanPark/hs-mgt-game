@@ -7160,6 +7160,45 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio durable competitive host-checkpoint recovery (v0.13.63)
+
+Status: Complete for explicit durable `competitive-regional-v1` host
+checkpoints and browser re-entry after a host restart when the opaque session
+ID matches the saved wrapper; durable campaign-coverage saves, autosave, full
+campaign save/load/replay continuity, replay playback/regeneration, human
+review, and public-release gates remain open.
+
+Done:
+
+- Added the host-only `gui-competitive-save-v1` wrapper around the existing
+  `CompetitiveSessionSave` artifact. The GUI host writes it only after an
+  explicit Save host checkpoint request, using the application config path
+  printed at startup and a temporary sibling file replacement.
+- Added matching-ID hydration into a new `GameSessionStore`, restoring the
+  immutable competitive history, current state, prior aggregated actions, and
+  done flag without a new transition or browser true-state transfer. Hashes,
+  counts, deterministic continuation, ID allocation, live-session collision
+  protection, history linkage, and terminal cleanup are tested.
+- Added one browser-side `loadSession` retry only after the ordinary live read
+  reports an unknown session; the browser then repeats existing presentation,
+  action, history, replay, and regional-world reads while retaining only the
+  opaque session ID.
+- Synchronized the Phase 11.1 ledger, roadmap, guides, lessons,
+  request/contract/QA/handoff records, and package metadata to `0.13.63`.
+
+Not Yet Done:
+
+- Durable stabilization/affiliation saves, autosave, browser serialization,
+  replay playback/regeneration, full-campaign visual placement/screenshots,
+  device/browser certification, human accessibility/educational review,
+  provenance/legal review, and public-release approval.
+
+Deferred / Non-Goals:
+
+- No new browser DTO, simulation rule, transition, asset, audio behavior,
+  service worker, browser-authoritative state, or replay regeneration path was
+  added.
+
 ## Future
 
 ### Visual and audio experience upgrade
