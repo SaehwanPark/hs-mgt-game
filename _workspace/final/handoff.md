@@ -2584,3 +2584,52 @@ merge the PR, delete the temporary branch locally and remotely, verify clean
 cross-browser/device capture, human accessibility/educational review,
 provenance/legal approval, audio listening quality, and public-release approval
 remain open.
+
+# Final Handoff — Debrief visual review packet v0.13.83
+
+## Status
+
+The v0.13.83 technical packet is implemented on
+`feat/debrief-visual-review-packet-v0.13.83`. It maps the three corrected
+terminal debrief cases to host-projection transcripts and rasters, names
+accessibility/fallback and causality/replay questions, and preserves explicit
+pending-human status. The `Debrief visuals reviewed` roadmap item remains
+unchecked.
+
+The sole medium-effort reviewer found two medium transcript/contract binding
+gaps and one low source-marker gap; the validator now checks actual JPEG
+metadata, exact record sets, complete per-case assertions, and referenced
+source anchors. No second reviewer was used.
+
+## Target result
+
+- Keep exactly three terminal cases aligned to competitive, stabilization, and
+  regional affiliation.
+- Make written-equivalent, audio-off/mute, reduced-motion, large-text,
+  keyboard, recovery, provenance, and replay questions ready for authorized
+  human evaluation.
+- Prevent hidden-state, inferred-causality, release-promotion, or fabricated
+  participant-result claims.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.2-debrief-visual-review-packet.json`.
+- Test: `tests/test_phase13_2_debrief_visual_review_packet.py`.
+- Ledger: `debrief_visual_review_packet` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
+
+## Verification
+
+- 801 Python tests pass; 375 Rust tests pass serially.
+- `cargo fmt --check`, Clippy with warnings denied, documentation links,
+  release metadata, raster, browser/device, and visual/audio contract checks
+  pass.
+- The packet validator confirms exact case coverage, artifact/transcript
+  bindings, source markers, fallback questions, authority/replay limits, and
+  pending human-review status.
+
+## Limits
+
+This is a technical review handoff only. Human visual/accessibility,
+educational/classroom, audio-listening, provenance/legal, and public-release
+decisions remain pending.

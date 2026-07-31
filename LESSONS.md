@@ -3482,3 +3482,14 @@ separate gates.
 - Prevention: treat terminal filenames as untrusted labels; validate the
   host envelope and rendered decision surface before persisting or approving
   terminal evidence.
+
+# Technical Review Packets Do Not Close Human Gates
+
+- Context: corrected terminal rasters can support a structured debrief review,
+  but the repository has no authorized participant results.
+- Risk: marking a technical packet as a completed visual, accessibility,
+  educational, classroom, or audio review would overclaim evidence.
+- Resolution: bind exact cases, host sources, written fallbacks, review
+  questions, and explicit pending-human fields to the technical artifacts.
+- Prevention: keep the roadmap human checkbox unchecked until authorized
+  anonymized feedback and a recorded go/no-go decision exist.
