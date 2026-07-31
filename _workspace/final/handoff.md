@@ -2442,3 +2442,26 @@ three campaigns, with 373 Rust tests and 787 Python tests plus all repository
 contract gates passing. The sole reviewer approved with no actionable findings.
 Merge the PR, clean the temporary branch locally/remotely, verify clean `main`,
 and select the next unmet roadmap slice.
+# Final Handoff — Full-campaign coverage transport continuity v0.13.79
+
+## Status
+
+Implementation and full validation are complete on
+`feat/full-campaign-coverage-transport-v0.13.79`; the sole medium-effort review
+is approved on PR #326 with no actionable findings. Merge and branch cleanup
+remain.
+
+## Target result
+
+- Walk the existing loopback campaign-coverage route from genesis through
+  terminal completion for competitive, stabilization, and regional affiliation.
+- Preserve host identity, counts, debrief/audio metadata, written fallbacks, and
+  read-only authority without adding a route or client simulation.
+
+## Remaining work
+
+The full-run loopback regression covers 24 competitive months, 5 stabilization
+stages, and 6 regional-affiliation stages, with 374 Rust tests and 788 Python
+tests plus all repository contract gates passing. Merge PR #326, clean the
+temporary branch locally/remotely, verify clean `main`, and select the next
+unmet roadmap slice.

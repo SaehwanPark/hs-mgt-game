@@ -5157,3 +5157,33 @@ The full repository validation passes with 373 Rust tests and 787 Python tests;
 Clippy, formatting, release metadata, documentation links, asset/security/
 generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
 asset-budget, CLI smoke, Node syntax, and diff checks are green.
+# Presentation QA — Full-campaign coverage transport continuity v0.13.79
+
+## Status
+
+Implementation and full automated validation pass; the bounded boundary is the
+existing loopback transport for full active and terminal campaign-coverage
+reads. The sole medium-effort review is approved on PR #326 with no actionable
+findings; merge/cleanup remain.
+
+## Required pass conditions
+
+- Genesis and every post-transition route read returns valid campaign coverage
+  for all three campaigns with matching counts and identity.
+- Terminal route reads preserve written debrief, optional audio, and `debrief`
+  music without adding a mutation or browser-authority path.
+- Evidence remains separate from real-browser layout, screenshots,
+  accessibility, educational review, and release approval.
+
+## Evidence limits
+
+This slice establishes only technical loopback transport continuity; it cannot
+establish real-browser quality, lived accessibility, replay comprehension,
+educational value, archive durability, or public release.
+
+## Verification result
+
+The full repository validation passes with 374 Rust tests and 788 Python tests;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
+asset-budget, CLI smoke, Node syntax, and diff checks are green.

@@ -3630,3 +3630,39 @@ and temporary-branch cleanup.
 This proves only technical fixture-level renderer continuity and authority
 preservation. It does not prove real-browser visual quality, accessibility,
 human comprehension, educational value, or public-release readiness.
+
+# Request Summary — Full-campaign coverage transport continuity v0.13.79
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with loopback host-transport evidence that
+the existing `campaign-coverage-v1` route carries full active and terminal runs
+for all three launchable campaigns.
+
+## Target slice
+
+- Start competitive, stabilization, and regional-affiliation sessions through
+  the existing GUI route and read coverage before and after every transition.
+- Require status/schema/campaign identity, history/replay counts, audio
+  metadata, terminal written debrief, and terminal `debrief` music state.
+- Keep new routes, schemas, archives, browser serialization, screenshots,
+  human review, and release gates open.
+
+## Non-goals
+
+- No new route/schema, simulation rule, stochastic input, browser authority,
+  checkpoint archive, browser save artifact, asset/audio file, screenshot,
+  human review, provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused loopback transport and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup. Review approval is recorded on PR #326 with no
+actionable findings; merge and cleanup remain.
+
+## Evidence limits
+
+This proves only technical full-run loopback transport continuity. It does not
+prove real-browser layout, human accessibility, educational value, archive
+durability, or public-release readiness.

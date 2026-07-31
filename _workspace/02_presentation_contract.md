@@ -4509,3 +4509,55 @@ accessibility, educational, screenshot, or release evidence.
   human approval claim.
 - Open: real-browser screenshots, human visual/replay/accessibility review,
   provenance/legal review, and public-release approval.
+# Presentation Contract — Full-campaign coverage transport continuity v0.13.79
+
+## Goal and authorization
+
+Verify that the existing loopback GUI campaign-coverage route carries complete
+active and terminal host envelopes through all three launchable campaigns.
+
+## Player questions and consequences
+
+The player question is: “Does the live GUI transport keep the same visible
+campaign context through completion?” A route failure remains written and
+recoverable; it cannot create or alter a transition.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Route response | Existing loopback `/campaign-coverage` handler | Genesis and after each accepted transition | Do not infer state in the browser |
+| Campaign identity | Host `CampaignCoverageEnvelope.session.campaign` | All three launchable campaigns | Do not trust a client-selected identity over host response |
+| History/replay counts | Host campaign coverage projection | One row per committed transition | Do not regenerate or mutate history in transport |
+| Terminal handoff | Host debrief/audio coverage | Written debrief and `debrief` music at completion | Do not treat transport/audio as outcome authority |
+
+## Visual, motion, and audio semantics
+
+No new route or playback behavior is introduced. Existing browser rendering,
+written fallbacks, and optional audio consume the transported envelope.
+
+## Accessibility and fallbacks
+
+Written coverage, terminal debrief, empty/error responses, audio-off, and
+reduced-motion behavior remain available if transport or audio fails.
+
+## Authority and provenance boundary
+
+Rust owns route handling, sessions, transitions, coverage, history, replay,
+audio metadata, and debrief. The loopback browser receives serialized host
+data only and cannot submit through the coverage read.
+
+## Verification and evidence limits
+
+The focused transport regression must walk all three campaigns from genesis to
+terminal coverage and assert status, schema, identity, counts, audio, debrief,
+and terminal music. This does not establish real-browser screenshots, human
+quality, accessibility, educational usefulness, or release readiness.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic input, browser authority,
+  checkpoint archive, browser serialization, asset, audio file, screenshot, or
+  human approval claim.
+- Open: real-browser screenshots, human visual/audio/accessibility review,
+  provenance/legal review, and public-release approval.

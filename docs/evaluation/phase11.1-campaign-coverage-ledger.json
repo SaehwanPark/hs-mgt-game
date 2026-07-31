@@ -683,6 +683,44 @@
       "This is fixture-level technical rendering evidence only; real-browser screenshots, human visual/accessibility/educational review, provenance/legal approval, and public release remain open."
     ]
   },
+  "full_campaign_coverage_transport_continuity": {
+    "status": "complete-full-campaign-loopback-coverage-transport-continuity",
+    "schema": "campaign-coverage-v1",
+    "campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "route_source": "src/gui_server.rs: GET /api/v1/sessions/{session_id}/campaign-coverage",
+    "host_source": "src/mcp/session.rs: get_campaign_coverage",
+    "test_source": "src/gui_server.rs: fn live_transport_covers_full_campaign_coverage_reads",
+    "active_reads": [
+      "competitive genesis plus 24 monthly route reads",
+      "stabilization genesis plus 5 stage route reads",
+      "regional affiliation genesis plus 6 stage route reads"
+    ],
+    "terminal_contract": [
+      "route status remains 200 with campaign-coverage-v1",
+      "host campaign identity and history/replay counts remain aligned",
+      "terminal route reads retain written debrief lines",
+      "terminal route reads use debrief music state"
+    ],
+    "continuity_behavior": [
+      "The existing loopback route starts each supported campaign and reads genesis coverage.",
+      "Every accepted route transition is followed by a coverage read through the existing host store.",
+      "The route transports optional audio metadata and written fallbacks without changing transition authority.",
+      "Invalid campaign selection remains rejected and coverage remains observational."
+    ],
+    "boundary": "The loopback route serializes the host-owned campaign-coverage-v1 envelope; Rust remains authoritative for sessions, transitions, history, replay, debrief, audio metadata, and outcomes.",
+    "evidence": [
+      "A full-run Rust transport regression covers all 24 competitive months, 5 stabilization stages, and 6 regional-affiliation stages.",
+      "The regression asserts route status/schema/identity, replay counts, history row counts, audio presence, terminal written debrief, and terminal debrief music.",
+      "No new route/schema, simulation rule, browser authority, checkpoint archive, browser serialization, asset, audio file, or screenshot is introduced."
+    ],
+    "limits": [
+      "This is transport continuity evidence only; real-browser screenshots, human visual/audio/accessibility/educational review, provenance/legal approval, and public release remain open."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
