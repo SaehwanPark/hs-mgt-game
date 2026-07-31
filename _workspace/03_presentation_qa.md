@@ -2,8 +2,8 @@
 
 ## Status
 
-The bounded local replay playback contract passes its focused implementation
-checks and is ready for the sole code-review handoff. This is not replay
+The bounded local replay playback contract passes its full automated checks and
+the sole medium-effort code-review re-verification. This is not replay
 regeneration, human accessibility, visual/audio quality, educational,
 device/browser, legal, provenance, or public-release approval.
 
@@ -32,6 +32,11 @@ comprehension, device/browser behavior, provenance/legal status, or public
 release.
 
 ## Review findings
+
+- The initial review found stale visible controls after a failed refresh while
+  playback was active. Amended commit `b765057` stops the timer and re-renders
+  the preserved cursor as paused; the regression passes and the sole reviewer
+  approved with no remaining findings.
 
 # Presentation QA — Durable regional-affiliation host checkpoint v0.13.65
 

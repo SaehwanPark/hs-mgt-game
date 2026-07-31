@@ -2,8 +2,8 @@
 
 ## Status
 
-Implementation and focused verification are complete on
-`feat/replay-playback-v0.13.66`; full validation and the PR loop remain.
+Implementation, full validation, and the sole code review are complete on
+`feat/replay-playback-v0.13.66`; PR creation, merge, and branch cleanup remain.
 
 ## Planned result
 
@@ -28,12 +28,18 @@ Implementation and focused verification are complete on
   device/offline/browser/audio/raster/loading, visual/audio contract, and diff
   checks pass; the measured source-byte proxy is 389616 bytes.
 
+## Review
+
+- The sole medium-effort reviewer found a medium stale-control-state issue on
+  failed refresh. The amended commit `b765057` halts the timer, preserves the
+  valid envelope/cursor, re-renders paused controls, and adds regression
+  coverage; the reviewer re-verified and approved with no remaining findings.
+
 ## Review boundary and remaining gates
 
-Implementation, full validation, exactly one medium-effort review, PR handoff,
-merge, and branch cleanup remain required. Replay regeneration, full-campaign
-placement/use and screenshots, human evaluation, provenance/legal, device
-certification, and public-release gates remain open.
+PR handoff, merge, and branch cleanup remain required. Replay regeneration,
+full-campaign placement/use and screenshots, human evaluation, provenance/legal,
+device certification, and public-release gates remain open.
 
 # Final Handoff — Durable regional-affiliation host checkpoint v0.13.65
 
