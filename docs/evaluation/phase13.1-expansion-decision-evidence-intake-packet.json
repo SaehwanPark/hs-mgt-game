@@ -1,0 +1,122 @@
+{
+  "schema_version": "phase13.1-expansion-decision-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-evidence",
+  "roadmap_item": "Approve or reject expansion to full campaign coverage",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for an authorized full-campaign expansion decision without recording a go/no-go outcome or approving public release in this preparation packet.",
+  "source_contract": {
+    "competitive_review_packet": "docs/evaluation/phase13.1-competitive-campaign-review-packet.json: \"schema_version\": \"phase13.1-competitive-campaign-review-packet-v1\"",
+    "first_session_review_packet": "docs/evaluation/phase13.1-first-session-review-packet.json: \"schema_version\": \"phase13.1-first-session-review-packet-v1\"",
+    "pilot_evidence_intake": "docs/evaluation/phase13.2-pilot-evidence-intake-packet.json: \"schema_version\": \"phase13.2-pilot-evidence-intake-v1\"",
+    "debrief_visual_evidence_intake": "docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json: \"schema_version\": \"phase13.2-debrief-visual-evidence-intake-v1\"",
+    "asset_provenance_evidence_intake": "docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json: \"schema_version\": \"phase13.1-asset-provenance-evidence-intake-v1\"",
+    "revision_decision_evidence_intake": "docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json: \"schema_version\": \"phase13.2-revision-decision-evidence-intake-v1\"",
+    "campaign_coverage_ledger": "docs/evaluation/phase11.1-campaign-coverage-ledger.json: \"status\": \"bounded-technical-ledger\"",
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json: \"status\": \"ready-for-human-evaluation\"",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\""
+  },
+  "input_sources": [
+    {"id": "competitive-review", "status": "technical-packet-pending-human-review"},
+    {"id": "first-session-review", "status": "technical-packet-pending-human-review"},
+    {"id": "pilot-evidence", "status": "empty-pending-human-evidence"},
+    {"id": "debrief-visual-evidence", "status": "empty-pending-human-review"},
+    {"id": "asset-provenance", "status": "empty-pending-human-review"},
+    {"id": "revision-decisions", "status": "empty-pending-human-evidence"}
+  ],
+  "scope_catalog": {
+    "campaign_ids": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "gate_catalog": [
+      {"gate_id": "first-session-workflow", "source_id": "first-session-review", "technical_status": "complete", "human_status": "pending"},
+      {"gate_id": "competitive-campaign-coverage", "source_id": "competitive-review", "technical_status": "complete", "human_status": "pending"},
+      {"gate_id": "debrief-visuals", "source_id": "debrief-visual-evidence", "technical_status": "complete", "human_status": "pending"},
+      {"gate_id": "educational-usability", "source_id": "competitive-review", "technical_status": "not-established", "human_status": "pending"},
+      {"gate_id": "accessibility", "source_id": "first-session-review", "technical_status": "not-established", "human_status": "pending"},
+      {"gate_id": "audio-usefulness", "source_id": "competitive-review", "technical_status": "not-established", "human_status": "pending"},
+      {"gate_id": "revision-decisions", "source_id": "revision-decisions", "technical_status": "complete", "human_status": "pending"},
+      {"gate_id": "asset-provenance", "source_id": "asset-provenance", "technical_status": "complete", "human_status": "pending"},
+      {"gate_id": "legal-public-release", "source_id": "asset-provenance", "technical_status": "not-established", "human_status": "pending"}
+    ]
+  },
+  "decision_boundary": {
+    "technical_intake_complete": true,
+    "source_parity_complete": true,
+    "human_evidence_present": false,
+    "expansion_decision_present": false,
+    "campaign_expansion_approved": false,
+    "public_release_approval": false
+  },
+  "intake_boundary": {
+    "record_count": 0,
+    "human_findings_collected": false,
+    "raw_notes_collected": false,
+    "raw_media_collected": false,
+    "private_game_state_collected": false,
+    "browser_location_collected": false,
+    "decision_status": "pending-human-evidence",
+    "go_no_go": null
+  },
+  "decision_contract": {
+    "record_fields": [
+      "decision_id",
+      "campaign",
+      "gate_id",
+      "gate_status",
+      "evidence_strength",
+      "blocker_codes",
+      "decision_outcome",
+      "rationale_codes"
+    ],
+    "gate_statuses": ["technical-ready", "human-evidence-pending", "blocked", "pass", "fail", "not-observed"],
+    "evidence_strengths": ["technical-only", "human-evidence", "mixed", "not-observed"],
+    "decision_outcomes": ["expand", "retain-bounded", "defer", "reject"],
+    "blocker_codes": [
+      "missing-human-evidence",
+      "first-session-review-pending",
+      "campaign-review-pending",
+      "visual-review-pending",
+      "accessibility-review-pending",
+      "educational-review-pending",
+      "audio-listening-review-pending",
+      "revision-decision-pending",
+      "asset-provenance-pending",
+      "legal-public-release-pending",
+      "technical-gap"
+    ],
+    "rationale_codes": [
+      "evidence-confirmed",
+      "insufficient-evidence",
+      "scope-control",
+      "accessibility-risk",
+      "educational-risk",
+      "audio-risk",
+      "provenance-risk",
+      "release-safety",
+      "technical-gap"
+    ],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-human-evidence",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no human findings or expansion decision and does not approve, reject, or expand the campaign scope.",
+    "Technical campaign continuity and preparation packets do not establish comprehension, accessibility, educational usefulness, audio usefulness, provenance/legal clearance, or public-release readiness.",
+    "Decision records may use only bounded campaign, gate, status, evidence-strength, blocker, outcome, and rationale codes; free text, identity, private state, browser/session locations, and raw media are prohibited.",
+    "Human evaluation, revision decisions, expansion authorization, legal/provenance review, and public-release approval remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_1_expansion_decision_evidence_intake.py"
+}

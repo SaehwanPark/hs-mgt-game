@@ -7591,6 +7591,26 @@ The target and validator are recorded in
 `docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json`, and
 `scripts/validate_revision_decision_evidence_intake.py`.
 
+### Visual/audio expansion-decision evidence-intake packet (v0.13.94)
+
+The Phase 13.1 packet makes the open `Approve or reject expansion to full
+campaign coverage` item operationally ready for an authorized decision across
+the three supported campaigns and current first-session, competitive,
+debrief, accessibility, educational, audio, revision, provenance, and release
+gates. It derives source statuses and bounded gate/campaign vocabularies from
+the existing packets and starts with zero records and a null go/no-go field.
+
+The validator rejects source/gate/campaign drift, private or free-text fields,
+unknown statuses/outcomes, duplicate values, numeric coercion, and premature
+expansion or public-release decisions. It records technical preparation only;
+human evaluation, expansion authorization, legal/provenance, and public
+release remain pending.
+
+The target and validator are recorded in
+`_workspace/172_implementation_plan_visual-audio-phase13-1-expansion-decision-evidence-intake-v0.13.94.md`,
+`docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json`, and
+`scripts/validate_expansion_decision_evidence_intake.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

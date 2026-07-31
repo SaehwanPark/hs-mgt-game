@@ -5079,3 +5079,36 @@ and unrestricted rationale text remain excluded. The host remains authoritative.
 `tests/test_phase13_2_revision_decision_evidence_intake.py` checks source and
 target parity, bounded record values, privacy exclusions, type safety, and
 pending decision boundaries.
+
+# Presentation Contract — Expansion-decision evidence-intake packet v0.13.94
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized full-campaign
+expansion review. This packet does not change campaign presentation, approve
+scope, or authorize public release.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign scope | `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json` | Bind the three supported campaign IDs | Do not infer expansion approval from technical campaign support |
+| Competitive review | `docs/evaluation/phase13.1-competitive-campaign-review-packet.json` | Preserve 24-month technical continuity and pending human gates | Do not infer participant comprehension or expansion readiness |
+| First-session review | `docs/evaluation/phase13.1-first-session-review-packet.json` | Preserve first-session and recovery boundary | Do not infer first-time-user completion |
+| Evaluation inputs | Pilot, debrief, asset, and revision-decision intake packets | Bind current source/gate statuses | Do not infer human findings from empty packets |
+| Decision validator | `scripts/validate_expansion_decision_evidence_intake.py` | Reject source/gate drift, private/free-text fields, and premature decisions | Do not treat validator success as authorization |
+
+## Accessibility, privacy, and authority
+
+The intake adds no presentation path and preserves written equivalents,
+fallbacks, audio-off, reduced-motion, keyboard, Large text, history, replay,
+checkpoint, and debrief contracts. It permits only bounded campaign/gate
+codes; identity, private or hidden state, browser/session locations, raw notes,
+screenshots, recordings, and unrestricted rationale text remain excluded. The
+host remains authoritative.
+
+## Verification
+
+`tests/test_phase13_1_expansion_decision_evidence_intake.py` checks campaign and
+gate parity, bounded records, privacy exclusions, type safety, and pending
+expansion/release decisions.

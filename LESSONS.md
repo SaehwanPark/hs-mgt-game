@@ -3637,3 +3637,18 @@ separate gates.
 - Prevention: separate evidence capture, revision decisions, implementation
   verification, campaign expansion, provenance/legal review, and public
   release; never infer a revision from validator success.
+
+# Expansion Decisions Need Gate-Level Evidence
+
+- Context: campaign continuity, first-session behavior, human evaluation,
+  visual/audio review, provenance, revision decisions, and public release have
+  different sources and different authorization boundaries.
+- Risk: a single go/no-go field can hide an unresolved accessibility,
+  educational, audio, provenance, or legal gate and make technical continuity
+  look like product approval.
+- Resolution: bind the three campaign IDs and nine gate IDs to source packets,
+  keep the expansion decision empty, and constrain future records to bounded
+  status, evidence-strength, blocker, outcome, and rationale codes.
+- Prevention: require gate-level human evidence and explicit expansion
+  authorization before changing scope; never infer campaign expansion from
+  automated coverage or an empty intake.
