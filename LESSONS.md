@@ -3380,3 +3380,14 @@ separate gates.
 - Prevention: require a campaign-specific durable checkpoint target and
   terminal comparison surfaces before treating persistence continuity as
   complete.
+# Cross-Campaign Checkpoints Must Fail Closed by Identity
+
+- Context: the application intentionally stores one latest durable checkpoint,
+  and each campaign now has its own full continuation evidence.
+- Risk: a later campaign save could accidentally restore an older campaign ID,
+  remove the newer wrapper during cleanup, or be presented as an archive.
+- Resolution: replace wrappers sequentially, use fresh hosts to load each
+  replaced ID, require the existing `checkpoint_missing` boundary, verify the
+  newest campaign identity, and clean only its matching ID.
+- Prevention: treat campaign and opaque-session identity as a joint durable
+  invariant; never infer archive semantics from a single latest-save path.

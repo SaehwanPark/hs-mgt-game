@@ -517,6 +517,43 @@
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
+  "cross_campaign_checkpoint_identity": {
+    "status": "complete-cross-campaign-latest-checkpoint-identity",
+    "checkpoint_schemas": [
+      "gui-competitive-save-v1",
+      "gui-stabilization-save-v1",
+      "gui-affiliation-save-v1"
+    ],
+    "replacement_sequence": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "host_source": "src/mcp/session.rs: save_session + load_session + end_session + hydrate_durable_session",
+    "test_source": "src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+    "fresh_host_recovery": [
+      "replaced competitive ID returns checkpoint_missing after stabilization replaces the single durable wrapper",
+      "matching stabilization ID hydrates the gui-stabilization-save-v1 wrapper",
+      "replaced stabilization ID returns checkpoint_missing after regional affiliation replaces the wrapper",
+      "matching regional-affiliation ID hydrates the gui-affiliation-save-v1 wrapper"
+    ],
+    "continuity_behavior": [
+      "Each accepted campaign save replaces the one configured latest checkpoint path rather than creating an archive.",
+      "Fresh hosts hydrate only the newest wrapper when both opaque session ID and campaign wrapper match.",
+      "The latest loaded SaveEnvelope reports regional-affiliation-v1 and one committed transition.",
+      "Ending the recovered latest session removes the matching checkpoint file."
+    ],
+    "boundary": "The host owns wrapper replacement, campaign identity, checkpoint verification, hydration, transitions, history, replay, and cleanup; the browser retains only opaque session IDs and supplied metadata.",
+    "evidence": [
+      "The Rust session regression writes competitive, stabilization, and regional-affiliation saves sequentially on one path.",
+      "Fresh host placeholders exercise checkpoint_missing for each replaced ID and matching hydration for the latest wrapper.",
+      "No archive, browser save artifact, client state serialization, or new route/schema is introduced."
+    ],
+    "limits": [
+      "This closes latest-wrapper cross-campaign identity only; browser serialization, multi-checkpoint archive design, and broader save/load/replay evidence remain open.",
+      "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
@@ -768,7 +805,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores; browser serialization, cross-campaign durable continuity, and broader full-campaign save/load/replay evidence remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, and latest-wrapper cross-campaign identity is covered; browser serialization, multi-checkpoint archives, and broader full-campaign save/load/replay evidence remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

@@ -5034,3 +5034,37 @@ host-owned regional-affiliation stage-3 restore followed by deterministic
 This slice establishes only deterministic host persistence and terminal read
 parity; it cannot establish lived accessibility, educational usefulness,
 provenance/legal status, or public release.
+# Presentation QA — Cross-campaign checkpoint identity v0.13.75
+
+## Status
+
+Implementation and full automated validation pass. The bounded boundary is
+host-owned latest-checkpoint replacement and matching-ID hydration across all
+  three launchable campaigns. The sole medium-effort code review approved this
+  boundary with no actionable findings.
+
+## Required pass conditions
+
+- Fresh hosts reject replaced competitive and stabilization IDs with the
+  existing recoverable checkpoint-missing result.
+- The newest regional-affiliation wrapper restores with the correct campaign
+  identity, and matching end-session cleanup removes the file.
+- Evidence stays separate from browser serialization, archives, visual quality,
+  human review, and release approval.
+
+## Current validation
+
+- 371 Rust tests and 784 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device, offline, browser, audio, raster,
+  loading, visual/audio, asset-budget, CLI smoke, Node syntax, and diff checks
+  also pass.
+- The focused regression saves competitive, stabilization, and affiliation
+  wrappers sequentially, rejects each replaced ID on fresh hosts, restores the
+  latest matching wrapper, and verifies matching checkpoint cleanup.
+
+## Evidence limits
+
+This slice establishes only deterministic host checkpoint identity and
+replacement; it cannot establish lived accessibility, educational usefulness,
+archive durability, provenance/legal status, or public release.

@@ -2621,6 +2621,134 @@ mod tests {
   }
 
   #[test]
+  fn durable_checkpoint_replacement_preserves_cross_campaign_identity() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-cross-campaign-{}.save",
+      std::process::id()
+    ));
+    let mut writer = GameSessionStore::with_competitive_persistence(path.clone());
+    let competitive = start(&mut writer, "competitive-regional-v1");
+    let competitive_id = competitive.session_id.clone();
+    writer
+      .submit_turn(SubmitTurnRequest {
+        session_id: competitive_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("competitive checkpoint transition");
+    let competitive_saved = writer
+      .save_session(SaveSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect("competitive checkpoint");
+    assert_eq!(competitive_saved.campaign, "competitive-regional-v1");
+
+    let stabilization = start(&mut writer, "stabilization-v1");
+    let stabilization_id = stabilization.session_id.clone();
+    writer
+      .submit_turn(SubmitTurnRequest {
+        session_id: stabilization_id.clone(),
+        command_text: String::new(),
+      })
+      .expect("stabilization checkpoint transition");
+    let stabilization_saved = writer
+      .save_session(SaveSessionRequest {
+        session_id: stabilization_id.clone(),
+      })
+      .expect("stabilization checkpoint replacement");
+    assert_eq!(stabilization_saved.campaign, "stabilization-v1");
+
+    let mut stabilization_host = GameSessionStore::with_competitive_persistence(path.clone());
+    let competitive_live = start(&mut stabilization_host, "competitive-regional-v1");
+    assert_eq!(competitive_live.session_id, competitive_id);
+    let replaced_competitive = stabilization_host
+      .load_session(LoadSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect_err("replaced competitive checkpoint must not hydrate");
+    assert_eq!(
+      replaced_competitive.code.as_deref(),
+      Some("checkpoint_missing")
+    );
+    stabilization_host
+      .end_session(EndSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect("end competitive placeholder");
+
+    let stabilization_live = start(&mut stabilization_host, "stabilization-v1");
+    assert_eq!(stabilization_live.session_id, stabilization_id);
+    stabilization_host
+      .end_session(EndSessionRequest {
+        session_id: stabilization_id.clone(),
+      })
+      .expect("end stabilization placeholder before hydration");
+    let loaded_stabilization = stabilization_host
+      .load_session(LoadSessionRequest {
+        session_id: stabilization_id.clone(),
+      })
+      .expect("latest stabilization checkpoint must hydrate");
+    assert_eq!(loaded_stabilization.campaign, "stabilization-v1");
+    assert_eq!(loaded_stabilization.transition_count, 1);
+
+    let affiliation = start(&mut stabilization_host, "regional-affiliation-v1");
+    let affiliation_id = affiliation.session_id.clone();
+    stabilization_host
+      .submit_turn(SubmitTurnRequest {
+        session_id: affiliation_id.clone(),
+        command_text: "assess".to_string(),
+      })
+      .expect("affiliation checkpoint transition");
+    let affiliation_saved = stabilization_host
+      .save_session(SaveSessionRequest {
+        session_id: affiliation_id.clone(),
+      })
+      .expect("affiliation checkpoint replacement");
+    assert_eq!(affiliation_saved.campaign, "regional-affiliation-v1");
+
+    let mut affiliation_host = GameSessionStore::with_competitive_persistence(path.clone());
+    let competitive_placeholder = start(&mut affiliation_host, "competitive-regional-v1");
+    assert_eq!(competitive_placeholder.session_id, competitive_id);
+    let stabilization_placeholder = start(&mut affiliation_host, "stabilization-v1");
+    assert_eq!(stabilization_placeholder.session_id, stabilization_id);
+    let replaced_stabilization = affiliation_host
+      .load_session(LoadSessionRequest {
+        session_id: stabilization_id.clone(),
+      })
+      .expect_err("replaced stabilization checkpoint must not hydrate");
+    assert_eq!(
+      replaced_stabilization.code.as_deref(),
+      Some("checkpoint_missing")
+    );
+    affiliation_host
+      .end_session(EndSessionRequest {
+        session_id: stabilization_id,
+      })
+      .expect("end stabilization placeholder");
+
+    let affiliation_placeholder = start(&mut affiliation_host, "regional-affiliation-v1");
+    assert_eq!(affiliation_placeholder.session_id, affiliation_id);
+    affiliation_host
+      .end_session(EndSessionRequest {
+        session_id: affiliation_id.clone(),
+      })
+      .expect("end affiliation placeholder before hydration");
+    let loaded_affiliation = affiliation_host
+      .load_session(LoadSessionRequest {
+        session_id: affiliation_id.clone(),
+      })
+      .expect("latest affiliation checkpoint must hydrate");
+    assert_eq!(loaded_affiliation.campaign, "regional-affiliation-v1");
+    assert_eq!(loaded_affiliation.transition_count, 1);
+
+    affiliation_host
+      .end_session(EndSessionRequest {
+        session_id: affiliation_id,
+      })
+      .expect("end latest recovered campaign");
+    assert!(!path.exists());
+  }
+
+  #[test]
   fn durable_affiliation_checkpoint_does_not_overwrite_live_session() {
     let path = std::env::temp_dir().join(format!(
       "hs-mgt-game-durable-affiliation-collision-{}.save",
