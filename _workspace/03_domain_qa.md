@@ -385,3 +385,34 @@ expansion approval, and public-release readiness remain open.
 - Existing competitive boundary, facility continuity, full-campaign history/
   replay/checkpoint/audio/raster, authority, and full Python/Rust tests remain
   the source evidence.
+
+# Domain QA — Phase 13.1 AI preview provenance/human-review packet v0.13.87
+
+## Status
+
+`pass` for the technical seven-preview inventory and release-boundary
+contract only. No identity, resemblance, accessibility, quality, legal,
+training-data, or public-release decision is implied.
+
+## Findings
+
+- The packet mirrors the current seven roles, source hashes, dimensions,
+  written equivalents, generic fallbacks, and queue gates.
+- Missing model, immutable revision, sampler, and seed fields remain null and
+  are checked against the preview tool’s not-exposed status.
+- Generation manifest, visual registry, runtime credits, and release manifest
+  exclusion are tested independently; a technical hash does not become an
+  approval claim.
+
+## Required fixes
+
+None for this bounded technical packet. Human identity/resemblance,
+accessibility/quality, legal/training-data, and release review are required
+before any promotion decision.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_ai_preview_provenance_review_packet`
+  — focused packet validation target.
+- Existing AI metadata, attribution, portrait workflow, asset, security, and
+  release-manifest tests remain authoritative.

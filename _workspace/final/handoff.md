@@ -2733,3 +2733,34 @@ the authoritative competitive completion/facility/checkpoint tests, and
 splitting accessibility/audio fallback checks into concrete implementation
 bindings. The final recheck reported no actionable issues; no second reviewer
 was used.
+
+# Final Handoff — AI preview provenance/human-review packet v0.13.87
+
+## Status
+
+The v0.13.87 technical packet is implemented on the temporary feature branch.
+It binds the seven preserved fictional actor-portrait previews to exact
+source hashes, dimensions, role/family contracts, written equivalents,
+generic fallbacks, generation metadata requirements, pending review gates,
+and runtime/registry/release exclusion. The `AI-generation metadata complete`
+roadmap item remains unchecked.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-ai-preview-provenance-review-packet.json`.
+- Test: `tests/test_phase13_1_ai_preview_provenance_review_packet.py`.
+- Plan: `_workspace/165_implementation_plan_visual-audio-phase13-1-ai-preview-provenance-review-packet-v0.13.87.md`.
+
+## Limits
+
+No model/seed values were guessed. No identity, resemblance, protected-mark,
+artifact, accessibility, visual-quality, educational, training-data, legal,
+release-derivative, registry, or public-release decision is recorded. No
+runtime, simulation, generated-image, registry, manifest, or release artifact
+is introduced.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed by Mill. Four medium
+validator gaps and one low documentation-ordering issue were fixed; the final
+recheck found no actionable issues. No second reviewer was used.

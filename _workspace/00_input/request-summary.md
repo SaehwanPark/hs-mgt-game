@@ -3839,6 +3839,36 @@ Focused first-session packet and existing boundary tests; full Rust/Python and
 repository validation; exactly one medium-effort review; authorized PR/merge
 and temporary-branch cleanup.
 
+# Request Summary — Competitive campaign review packet v0.13.85
+
+## Authorized outcome
+
+Make the open Phase 13.1 `Competitive campaign coverage complete` review
+actionable from existing 24-month host continuity, facility, overlay, event,
+music, history, replay, checkpoint, terminal-raster, and debrief evidence.
+
+## Target slice
+
+- Bind early, middle, and terminal competitive checkpoints to participant
+  tasks and visible success observations.
+- Cover the four player facility groups, eleven capacity labels, current
+  consequence surfaces, host-owned review controls, written fallbacks, and
+  optional audio.
+- Add fail-closed source/ledger parity and pending-human expansion fields.
+
+## Non-goals
+
+- No runtime, simulation, route, browser-authority, persistence, asset,
+  audio-file, screenshot, participant-data, or release-asset change.
+- No pixel-quality, cross-browser/device, human accessibility/educational,
+  audio-listening, provenance/legal, expansion, or public-release conclusion.
+
+## Validation target
+
+Focused competitive packet and existing boundary tests; full Rust/Python and
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
 # Request Summary — Audio preference/listening review packet v0.13.86
 
 ## Authorized outcome
@@ -3870,32 +3900,33 @@ Focused audio-preference packet and existing audio contract/fallback/priority
 tests; full Rust/Python and repository validation; exactly one medium-effort
 review; authorized PR/merge and temporary-branch cleanup.
 
-# Request Summary — Competitive campaign review packet v0.13.85
+# Request Summary — AI preview provenance/human-review packet v0.13.87
 
 ## Authorized outcome
 
-Make the open Phase 13.1 `Competitive campaign coverage complete` review
-actionable from existing 24-month host continuity, facility, overlay, event,
-music, history, replay, checkpoint, terminal-raster, and debrief evidence.
+Make the open AI-generation metadata and portrait review work actionable from
+the existing seven-preview inventory, approved-model/workflow records,
+portrait review queue, registries, credits, and release manifest.
 
 ## Target slice
 
-- Bind early, middle, and terminal competitive checkpoints to participant
-  tasks and visible success observations.
-- Cover the four player facility groups, eleven capacity labels, current
-  consequence surfaces, host-owned review controls, written fallbacks, and
-  optional audio.
-- Add fail-closed source/ledger parity and pending-human expansion fields.
+- Bind all seven fictional actor-portrait previews to exact source hashes,
+  dimensions, roles/families, written equivalents, generic fallbacks, and
+  pending review gates.
+- Enforce missing model/seed metadata, queue state, generation manifest,
+  visual registry, runtime credits, and release manifest boundaries.
+- Add fail-closed source/inventory parity and human/legal non-claim fields.
 
 ## Non-goals
 
-- No runtime, simulation, route, browser-authority, persistence, asset,
-  audio-file, screenshot, participant-data, or release-asset change.
-- No pixel-quality, cross-browser/device, human accessibility/educational,
-  audio-listening, provenance/legal, expansion, or public-release conclusion.
+- No runtime, simulation, GUI, asset, generated-image, registry, manifest,
+  participant-data, or release-asset change.
+- No guessed model/seed/training-data provenance, resemblance, quality,
+  accessibility, legal, educational, or public-release conclusion.
 
 ## Validation target
 
-Focused competitive packet and existing boundary tests; full Rust/Python and
-repository validation; exactly one medium-effort review; authorized PR/merge
-and temporary-branch cleanup.
+Focused AI-preview packet plus existing generation, attribution, portrait,
+asset, security, and release tests; full Rust/Python and repository validation;
+exactly one medium-effort review; authorized PR/merge and temporary-branch
+cleanup.

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.87] - 2026-07-31
+
+- Added a source-bound AI-preview provenance/human-review packet for the seven
+  preserved fictional actor-portrait previews, including hash/dimension/role
+  parity, missing model/seed metadata, written fallbacks, and release gates.
+- Kept identity, resemblance, accessibility, training-data, legal, release-
+  derivative, registry, and public-release review pending; no preview was
+  promoted or registered.
+
 ## [0.13.86] - 2026-07-31
 
 - Added a source-bound Phase 10.2 audio preference/listening review packet for

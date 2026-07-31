@@ -3875,6 +3875,11 @@ educational/accessibility gates remain open.
 - [ ] AI-generation metadata complete. Current technical readiness and
   fail-closed promotion evidence are recorded below; actual preview metadata
   and human review remain open.
+- [x] Current technical AI-preview provenance/human-review packet prepared.
+  Evidence: `docs/evaluation/phase13.1-ai-preview-provenance-review-packet.json`
+  and `tests/test_phase13_1_ai_preview_provenance_review_packet.py`; the seven
+  preserved previews are hash/dimension/role bound, missing model/seed values
+  remain null, and all human/release gates remain pending.
 - [x] Limitations statement updated. Evidence:
   `docs/evaluation/phase13.1-limitations-statement.json`,
   `docs/guides/gui-how-to-play.md`, and
@@ -4461,6 +4466,21 @@ are completed. Human-review gates remain open.
 - This prepares authorized listening, accessibility, and educational review;
   it does not collect participant feedback, ratings, interviews, classified
   findings, revision decisions, a go/no-go decision, or release approval.
+
+### v0.13.87 AI preview provenance/human-review packet
+
+- `docs/evaluation/phase13.1-ai-preview-provenance-review-packet.json` binds
+  the seven preserved fictional actor-portrait previews to their source
+  hashes, 1254×1254 dimensions, role/family contracts, written equivalents,
+  generic fallbacks, generation metadata requirements, and pending review
+  queue gates.
+- `tests/test_phase13_1_ai_preview_provenance_review_packet.py` fails closed on
+  source-marker drift, preview hash/dimension drift, missing roles, guessed
+  model/seed metadata, queue-gate completion, runtime/registry/release
+  promotion, and human/legal claims.
+- This makes authorized identity, resemblance, accessibility, provenance, and
+  release review actionable; it does not provide model/seed values, complete
+  human review, establish legal/training-data clearance, or authorize release.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

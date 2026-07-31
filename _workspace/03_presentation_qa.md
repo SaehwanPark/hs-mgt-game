@@ -5535,3 +5535,41 @@ This is a technical terminal-state and capture-provenance correction. It does
 not establish pixel-level visual quality, human comprehension or
 accessibility, classroom usefulness, audio listening quality, device/browser
 coverage, provenance/legal approval, or public release.
+
+# Presentation QA — AI preview provenance/human-review packet v0.13.87
+
+## Status
+
+Pass for the bounded technical AI-preview provenance and review-packet
+contract. The seven previews remain unverified, unreleased, and pending human
+review.
+
+## Reviewed Inputs and Authorization
+
+- AI metadata and attribution boundaries.
+- Preview/set/queue/workflow/model records.
+- Packet: `docs/evaluation/phase13.1-ai-preview-provenance-review-packet.json`.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.87 section.
+- Roadmap AI-generation metadata, legal, and release gates remain open.
+
+## Findings
+
+- Source hashes, dimensions, roles/families, written equivalents, generic
+  fallbacks, and seven-entry parity are independently checked.
+- Null/not-exposed model, revision, sampler, and seed values are preserved;
+  no preview is placed in the generation manifest, visual registry, runtime
+  credits, or release manifest.
+- Review tasks separate identity/resemblance/accessibility/provenance from
+  release promotion; no visual quality or legal conclusion is inferred.
+
+## Required fixes
+
+None for this bounded technical packet. Authorized human identity,
+resemblance, accessibility, legal/training-data, and release review remains
+the next gate.
+
+## Verification evidence
+
+`tests/test_phase13_1_ai_preview_provenance_review_packet.py` checks exact
+source markers, image hashes/dimensions, role and queue parity, missing
+metadata, release exclusion, and pending review state.

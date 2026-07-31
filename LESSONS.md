@@ -3534,3 +3534,20 @@ separate gates.
   privacy fields, and pending human-evidence fields.
 - Prevention: treat audio mode coverage, source/contract checks, participant
   listening results, revision decisions, and go/no-go as separate gates.
+
+# AI Preview Packets Need Null Metadata and Promotion Parity
+
+- Context: the preserved portrait previews have useful hashes, prompts,
+  written equivalents, and role contracts, but the preview tool did not expose
+  the approved model revision, sampler, or actual seed.
+- Risk: copying values from an approved model registry or inferring them from
+  an image would create false provenance and could accidentally promote an
+  unreviewed preview into credits, registries, or release assets.
+- Resolution: bind every preview to source bytes, dimensions, role/family,
+  fallback, queue gates, and explicit null/not-exposed metadata while testing
+  generation-manifest, registry, runtime-credit, and release-manifest
+  exclusion.
+- Prevention: treat inventory identity, model/seed provenance, human review,
+  legal/training-data review, release derivative, registry bridge, and public
+  release as separate gates; never replace a missing field with a plausible
+  value.
