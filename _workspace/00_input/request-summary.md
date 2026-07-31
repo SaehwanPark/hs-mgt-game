@@ -1,3 +1,41 @@
+# Request Summary — Host-envelope replay playback rail v0.13.66
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next bounded replay gate: add a
+local written playback rail over the existing host `ReplayEnvelope` so players
+can review committed replay rows without regenerating simulation state.
+
+## Target slice
+
+- Add previous/next/play/pause controls for existing visible transition
+  summaries, with keyboard/native semantics and a complete written equivalent.
+- Preserve the last valid replay envelope and cursor on malformed or failed
+  reads; report an explicit empty state when no committed rows exist.
+- Keep the host route, schema, browser opaque/read-only boundary, history list,
+  and existing actor-visible fields unchanged.
+
+## Non-goals
+
+- No replay regeneration, new route/schema, true-state or resolved-input field,
+  simulation transition, durable persistence, autosave, asset/audio change,
+  screenshot, human review, or public release claim.
+
+## Validation target
+
+Focused Node/browser-source playback, keyboard, failure-preservation, empty,
+and authority tests; full Rust/Python suites; Clippy, formatting, release
+metadata, documentation links, asset/security/generation/credits,
+device/offline/browser/audio/raster/loading/visual-audio checks, one medium
+review, and the authorized PR/merge loop.
+
+## Evidence limits
+
+This slice proves only local playback of existing visible replay summaries. It
+does not prove deterministic replay regeneration, full-campaign presentation,
+human accessibility/educational value, device certification, provenance/legal
+approval, or public release.
+
 # Request Summary — Durable regional-affiliation host checkpoint v0.13.65
 
 ## Authorized outcome

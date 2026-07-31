@@ -2346,8 +2346,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   boundary; autosave and full-campaign save/load/replay continuity remain open.
 - [x] Current live replay visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
-  `tests/test_phase11_live_replay.py`; playback, regeneration, and durable
+  `tests/test_phase11_live_replay.py`; replay regeneration and durable
   persistence remain open.
+- [x] Current local replay playback over visible host rows covered. Evidence:
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `tests/test_phase11_live_replay.py`, and the existing replay route; replay
+  regeneration and full-campaign durable continuity remain open.
 - [x] Unknown content fallbacks tested.
 - [x] Current tracked visual/audio asset-registry coverage is 100%. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
@@ -4035,6 +4039,21 @@ are completed. Human-review gates remain open.
   full-campaign placement/use and screenshots, device/browser certification,
   human accessibility/educational review, provenance/legal review, and
   public-release approval remain open.
+
+### v0.13.66 current host-envelope replay playback rail
+
+- `replay_view_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records local
+  previous/next/play/pause review over the validated `competitive-replay-v1`
+  host envelope.
+- `gui/app.mjs` keeps the cursor and selected command/context/events/effects/
+  hash detail local and written. Failed reads preserve the last valid view;
+  empty histories explicitly disable movement. No submit, transition, or
+  replay regeneration path is called.
+- This closes only local playback of existing visible summaries. Replay
+  regeneration, durable persistence, autosave, full-campaign placement/use or
+  screenshots, human review, device/browser certification, provenance/legal
+  review, and public release remain open.
 
 ### Exit criteria
 

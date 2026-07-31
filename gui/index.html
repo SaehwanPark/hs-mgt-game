@@ -395,6 +395,11 @@
       .resolution-controls button:nth-child(3) { background: var(--orange); }
       .resolution-controls label { color: var(--muted); display: flex; gap: .35rem; align-items: center; font-size: .82rem; }
       .resolution-controls input { border: 1px solid #b9cbc8; border-radius: .45rem; padding: .45rem .55rem; width: 5rem; }
+      .replay-controls { align-items: center; display: flex; flex-wrap: wrap; gap: .45rem; margin-bottom: var(--space-3); }
+      .replay-controls button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-size: .82rem; font-weight: 750; padding: .45rem .65rem; }
+      .replay-controls button:nth-child(3) { background: var(--orange); }
+      .replay-controls button:disabled { cursor: not-allowed; opacity: .55; }
+      .replay-playback-status { background: var(--panel-soft); border-left: 4px solid var(--teal); color: var(--muted); margin: 0 0 var(--space-3); min-height: 2.7em; padding: .55rem .7rem; }
       .resolution-steps { display: grid; gap: .65rem; list-style: decimal; margin: var(--space-3) 0; padding-left: 1.5rem; }
       .resolution-step { background: var(--panel); border: 1px solid var(--line); border-radius: .65rem; padding: .7rem .85rem; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
       .resolution-step--active { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal-soft); transform: translateX(.2rem); }
@@ -421,6 +426,8 @@
       .history, .debrief { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .history-item { display: grid; gap: .15rem; grid-template-columns: 4rem 1fr; }
       .history-item strong { color: var(--teal); }
+      .history-item[aria-current="true"] { border-color: var(--teal); box-shadow: 0 0 0 2px var(--teal-soft); }
+      .history-item .history-detail { color: var(--muted); grid-column: 1 / -1; }
       .hash { color: var(--muted); font-family: ui-monospace, SFMono-Regular, monospace; font-size: .76rem; grid-column: 2; overflow-wrap: anywhere; }
       .empty { color: var(--muted); font-style: italic; }
 
@@ -793,6 +800,13 @@
           <h2 id="history-heading">Committed history and replay</h2>
           <span>state-hash output</span>
         </div>
+        <div class="replay-controls" aria-label="Replay playback controls">
+          <button type="button" id="replay-previous" disabled>Previous row</button>
+          <button type="button" id="replay-play" disabled>Play replay</button>
+          <button type="button" id="replay-pause" disabled>Pause replay</button>
+          <button type="button" id="replay-next" disabled>Next row</button>
+        </div>
+        <p class="replay-playback-status" id="replay-playback-status" role="status" aria-live="polite">No committed replay rows yet.</p>
         <ol class="history" id="history-list"></ol>
       </section>
 

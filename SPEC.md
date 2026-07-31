@@ -7160,6 +7160,30 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio host-envelope replay playback rail (v0.13.66)
+
+Status: Complete for bounded local playback over the existing host replay
+envelope; replay regeneration, durable persistence, human review, and
+public-release gates remain open.
+
+Done:
+
+- The host already exposes immutable visible replay summaries through the
+  existing `competitive-replay-v1` route and browser adapter.
+- The browser validates and renders the replay list with a local row cursor and
+  native previous/next/play/pause controls.
+
+Not Yet Done:
+
+- Added previous/next/play/pause review with written selected-row status,
+  empty/failure preservation, and authority-boundary tests.
+
+Deferred / Non-Goals:
+
+- No replay regeneration, new route/schema, true-state field, resolved input,
+  private rationale, simulation transition, persistence, autosave, asset/audio
+  behavior, screenshot, or human/public-release claim.
+
 ### Visual/audio durable regional-affiliation host-checkpoint recovery (v0.13.65)
 
 Status: Complete for explicit durable `regional-affiliation-v1` host

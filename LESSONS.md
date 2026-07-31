@@ -3245,6 +3245,16 @@ format or exposing serialized state to JavaScript. Test each campaign's
 fresh-host stage/hash/continuation behavior, while keeping autosave, replay
 playback/regeneration, and full-campaign continuity as separate gates.
 
+## Phase 69: Make replay playback a local review cursor (2026-07-30)
+
+An immutable host replay list can support useful review without replaying the
+simulation. Keep previous/next/play/pause as local cursor operations over
+visible summaries, write the selected command/context/effects/hash into the
+existing history surface, and preserve the last valid cursor when a host read
+fails. Do not call submission, regenerate a trace, or infer hidden state from a
+row; deterministic regeneration and human replay comprehension remain separate
+gates.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove

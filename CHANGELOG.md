@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.66] - 2026-07-30
+
+- Added a local written replay playback rail over the existing host
+  `competitive-replay-v1` envelope with previous/next/play/pause controls,
+  selected-row command/context/events/effects/hash detail, and keyboard-native
+  buttons.
+- Preserved the last valid replay view and cursor on failed reads, made empty
+  histories explicit, and kept replay playback read-only without simulation
+  submission or regeneration.
+- Kept replay regeneration, durable persistence, autosave, screenshots, human
+  evaluation, provenance, and public-release gates open.
+
 ## [0.13.65] - 2026-07-30
 
 - Added explicit durable regional-affiliation GUI checkpoints using a

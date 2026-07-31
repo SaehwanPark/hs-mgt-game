@@ -10,7 +10,7 @@
     "host_history_read": "src/mcp/session.rs: pub fn get_history",
     "host_replay_read": "src/mcp/session.rs: pub fn get_replay(&self, request: GetReplayRequest)",
     "campaign_observation_summary": "src/mcp/session.rs: pub observation: Option<Vec<String>>",
-    "browser_history_renderer": "gui/app.mjs: function renderHistory(entries, root)",
+    "browser_history_renderer": "gui/app.mjs: function renderHistory(entries, root, selectedIndex = -1)",
     "browser_observation_timeline": "gui/app.mjs: Decision-time observation",
     "browser_observation_history_boundary": "gui/app.mjs: ReadOnlyPresentation.observation and committed history",
     "written_history_boundary": "gui/README.md: history, replay metadata, and host-provided debrief distinct",
@@ -26,7 +26,7 @@
   "presentation_surface": {
     "core_authority": "Core history and host debrief functions own decision-time observation retention and recovery; presentation remains read-only.",
     "host_summary_boundary": "Host summary reads are recoverable and hash-aligned but intentionally narrower than the core Transition record; they do not imply resolved-input or private-rationale disclosure.",
-    "browser_boundary": "The live GUI exposes shared campaign-coverage history with an optional written decision-time observation disclosure; competitive history remains on its existing path.",
+    "browser_boundary": "The live GUI exposes shared campaign-coverage history with an optional written decision-time observation disclosure and a local competitive replay review cursor; replay playback remains read-only and does not regenerate transitions.",
     "new_surface_need": "optional-campaign-history-observation-disclosure"
   },
   "open_work": [
@@ -37,7 +37,7 @@
   "limits": [
     "This record documents current technical campaign observation recovery only; it does not establish human decision-time comprehension.",
     "Host summaries are narrower than core history and do not expose resolved inputs, hidden state, private rationale, calibrated forecasts, legal conclusions, or educational results.",
-    "No new browser route, persistence, screenshot, asset, audio file, true-state view, causal graph, counterfactual, distributional view, or export format is created or promoted.",
+    "No new browser route, persistence, screenshot, asset, audio file, true-state view, replay regeneration, causal graph, counterfactual, distributional view, or export format is created or promoted.",
     "No human visual quality, accessibility, classroom effectiveness, policy-validity, or public-release claim is made."
   ],
   "test_source": "tests/test_phase12_decision_time_recovery_boundary.py"
