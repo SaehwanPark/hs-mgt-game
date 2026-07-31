@@ -1,5 +1,22 @@
 # Lessons Learned
 
+## Keep GUI autosave behind the existing host checkpoint boundary
+
+- Context: the loopback GUI already supported explicit host checkpoints for
+  competitive, stabilization, and regional-affiliation sessions, but a player
+  could commit a decision and stop before saving a restart point.
+- Risk: adding browser serialization or a second autosave format would create
+  a competing state boundary and could make a failed save look like a failed
+  decision.
+- Resolution: invoke the existing `saveSession` adapter only after the host
+  accepts a decision, report success/failure in the existing live status, reuse
+  the approved save-complete cue, and leave the committed session active when
+  saving fails. Manual Save/Restore remains an explicit recovery path.
+- Prevention: test accepted-response ordering, success metadata/cue, failure
+  preservation, all supported campaign paths, blocked adapters, and the
+  unchanged opaque-session/host-authority boundary. Treat durable autosave as
+  host persistence, not browser state.
+
 ## Keep Browser Refresh Recovery as an Opaque Same-Host Handle
 
 - Context: the loopback GUI held the active session ID only in the in-memory

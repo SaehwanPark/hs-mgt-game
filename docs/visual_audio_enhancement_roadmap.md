@@ -4069,6 +4069,25 @@ are completed. Human-review gates remain open.
   screenshots, human review, device/browser certification, provenance/legal
   review, and public release remain open.
 
+### v0.13.68 current host autosave after accepted GUI decisions
+
+- `src/mcp/session.rs` and the existing GUI save route remain the host-owned
+  checkpoint boundary. `gui/app.mjs` now requests that existing checkpoint
+  after each accepted competitive, stabilization, or regional-affiliation
+  GUI decision.
+- Successful autosave reports the existing committed transition count and
+  reuses the approved `ui.save-complete` cue when audio is available. Failure
+  is written and recoverable; the accepted host transition remains active and
+  manual Save/Restore remains available as an explicit retry.
+- `docs/evaluation/phase11.1-campaign-coverage-ledger.json` records the
+  `autosave_coverage` contract, while
+  `tests/test_phase11_live_checkpoint.py` covers success, failure, ordering,
+  and authority boundaries.
+- This closes only host autosave over the existing checkpoint path. Browser
+  serialization, full-campaign save/load/replay continuity, screenshots,
+  human review, device/browser certification, provenance/legal review, and
+  public release remain open.
+
 ### Exit criteria
 
 - No critical or high-severity defect remains.

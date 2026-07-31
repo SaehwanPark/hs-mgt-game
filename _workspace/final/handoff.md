@@ -1,3 +1,45 @@
+# Final Handoff — Host autosave after committed GUI decisions v0.13.68
+
+## Status
+
+Implementation and full validation are complete on
+`feat/gui-autosave-v0.13.68`. The sole medium-effort review found a Medium
+autosave-concurrency issue; the amended implementation queues autosaves behind
+the active checkpoint operation and adds concurrent regression coverage.
+The same reviewer re-verified the amended diff with no actionable issues. PR
+handoff, merge, cleanup, and final evidence update remain.
+
+## Target result
+
+- Request the existing host-only checkpoint after every accepted GUI decision
+  across competitive, stabilization, and regional-affiliation campaigns.
+- Report autosave success/failure in written status, reuse the existing
+  save-complete cue, and preserve the committed transition if saving fails.
+- Serialize autosaves so an accepted decision is not left one durable
+  checkpoint behind when submissions or manual checkpoint operations overlap.
+- Keep manual Save/Restore, host authority, save envelope, routes, and opaque
+  browser session storage unchanged.
+
+## Design and verification boundary
+
+The browser invokes only the existing `saveSession` adapter after a successful
+host submit. It never serializes state, performs a transition, generates a
+replay, or treats failed autosave as a rejected decision.
+
+## Verification
+
+- 364 Rust tests, 777 Python tests, Clippy, formatting, release metadata,
+  documentation links, asset/security/generation/credits, device/offline/
+  browser/audio/raster/loading/visual-audio contract, and diff checks pass.
+- The sole medium-effort reviewer initially found the busy-operation loss
+  risk; the amended FIFO autosave queue and overlap tests resolve it, and the
+  same reviewer approved with no actionable findings.
+
+## Remaining work
+
+Create and merge the PR, delete the temporary branch locally and remotely, and
+then select the next unmet roadmap slice.
+
 # Final Handoff — Host deterministic replay regeneration v0.13.67
 
 ## Status

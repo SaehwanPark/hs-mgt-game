@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.68] - 2026-07-30
+
+- Added host autosave requests after accepted GUI decisions across the
+  competitive, stabilization, and regional-affiliation campaign paths by
+  reusing the existing host-only checkpoint route and save envelope.
+- Added written autosave success/failure status and reused the existing
+  save-complete cue without rolling back committed transitions; manual
+  Save/Restore remains available as an explicit recovery path.
+- Kept browser serialization, new routes/schemas, screenshots, human review,
+  device certification, provenance, and public-release gates open.
+
 ## [0.13.67] - 2026-07-30
 
 - Added host/core deterministic regeneration of competitive replay histories

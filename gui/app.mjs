@@ -1193,6 +1193,7 @@ export function createCampaignCoverageClient({
   root = document,
   audio,
   recorder,
+  autosave,
   onCommitted = () => {},
 } = {}) {
   let currentEnvelope = null;
@@ -1247,6 +1248,7 @@ export function createCampaignCoverageClient({
       recorder?.record("command_submitted", { campaign: currentEnvelope?.session?.campaign, command, turn: currentEnvelope?.session?.turn });
       const response = await adapter.submitTurn(command);
       if (response?.error) throw new Error(response.error);
+      if (typeof autosave === "function") await autosave(adapter.sessionId);
       audioClient.playCue("ui.submit");
       const result = await load(adapter.sessionId);
       if (!result.ok) return result;
@@ -2311,7 +2313,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
   const historyClient = createHistoryClient({ adapter, root, recorder });
   const replayClient = createReplayClient({ adapter, root });
-  const checkpointClient = createCheckpointClient({ adapter, root, recorder, refresh: load });
+  const checkpointClient = createCheckpointClient({ adapter, root, recorder, refresh: load, audio: audioClient });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
   const campaignCoverageClient = createCampaignCoverageClient({
@@ -2319,6 +2321,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     root,
     audio: audioClient,
     recorder,
+    autosave: (sessionId) => checkpointClient.autosave(sessionId),
     onCommitted: (envelope) => firstMonthFlow.update({
       flow: "campaign-coverage",
       sessionLoaded: true,
@@ -2411,6 +2414,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       recorder?.record("command_submitted", { campaign: "competitive-regional-v1", command: validation.canonical_command_text, turn: catalog?.turn });
       response = await adapter.submitTurn(validation.canonical_command_text);
       if (response?.error) throw new Error(response.error);
+      await checkpointClient.autosave(sessionId);
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "submit_rejected", message);
@@ -3107,39 +3111,84 @@ export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter
   return { load, previous, next, play, pause, get envelope() { return envelope; }, get selectedIndex() { return selectedIndex; } };
 }
 
-export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, refresh } = {}) {
+export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, refresh, audio } = {}) {
   let envelope = null;
   let enabled = false;
   let busy = false;
+  let operationCompletion = null;
+  let autosaveQueue = Promise.resolve();
 
   function setEnabled(value) {
     enabled = Boolean(value);
     setCheckpointControls(root, enabled, busy);
   }
 
-  async function save(sessionId = adapter?.sessionId) {
+  async function save(sessionId = adapter?.sessionId, { automatic = false } = {}) {
     if (!enabled || !adapter || typeof adapter.saveSession !== "function") {
-      return { ok: false, code: "save_adapter_missing", message: "No host checkpoint-save adapter configured." };
+      return {
+        ok: false,
+        code: automatic ? "autosave_unavailable" : "save_adapter_missing",
+        message: "No host checkpoint-save adapter configured.",
+      };
     }
-    if (busy) return { ok: false, code: "checkpoint_busy" };
+    if (busy) {
+      if (automatic) {
+        const message = "Host autosave was skipped because another checkpoint operation is still running.";
+        recordPlaytestFailure(recorder, "checkpoint_autosave_error", message);
+        sessionLaunchStatus(root, `${message} The current session remains active.`);
+      }
+      return { ok: false, code: automatic ? "autosave_busy" : "checkpoint_busy" };
+    }
     busy = true;
+    let resolveOperation;
+    operationCompletion = new Promise((resolve) => {
+      resolveOperation = resolve;
+    });
     setCheckpointControls(root, enabled, busy);
     try {
       const nextEnvelope = await adapter.saveSession(sessionId);
       const validation = validateSaveEnvelope(nextEnvelope);
-      if (!validation.ok) return validation;
+      if (!validation.ok) {
+        if (automatic) {
+          recordPlaytestFailure(recorder, "checkpoint_autosave_error", validation.message ?? validation.code);
+          sessionLaunchStatus(root, "Host autosave returned incomplete checkpoint metadata; the current session remains active.");
+        }
+        return validation;
+      }
       envelope = nextEnvelope;
-      sessionLaunchStatus(root, `Host checkpoint saved at ${nextEnvelope.transition_count} committed transitions.`);
-      return validation;
+      sessionLaunchStatus(root, automatic
+        ? `Host autosave completed at ${nextEnvelope.transition_count} committed transitions.`
+        : `Host checkpoint saved at ${nextEnvelope.transition_count} committed transitions.`);
+      if (automatic) audio?.playCue?.("ui.save-complete");
+      return { ...validation, automatic };
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
-      recordPlaytestFailure(recorder, "checkpoint_save_error", message);
-      sessionLaunchStatus(root, `Checkpoint save failed; the current session remains active: ${message}`);
-      return { ok: false, code: "checkpoint_save_error", message };
+      const code = automatic ? "checkpoint_autosave_error" : "checkpoint_save_error";
+      recordPlaytestFailure(recorder, code, message);
+      sessionLaunchStatus(root, `${automatic ? "Host autosave" : "Checkpoint save"} failed; the current session remains active: ${message}`);
+      return { ok: false, code, message };
     } finally {
       busy = false;
+      resolveOperation?.();
+      operationCompletion = null;
       setCheckpointControls(root, enabled, busy);
     }
+  }
+
+  function autosave(sessionId = adapter?.sessionId) {
+    if (!enabled || !adapter || typeof adapter.saveSession !== "function") {
+      return Promise.resolve({
+        ok: false,
+        code: "autosave_unavailable",
+        message: "No host checkpoint-save adapter configured.",
+      });
+    }
+    const request = autosaveQueue.then(async () => {
+      if (busy && operationCompletion) await operationCompletion;
+      return save(sessionId, { automatic: true });
+    });
+    autosaveQueue = request.then(() => undefined, () => undefined);
+    return request;
   }
 
   async function load(sessionId = adapter?.sessionId) {
@@ -3148,6 +3197,10 @@ export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAda
     }
     if (busy) return { ok: false, code: "checkpoint_busy" };
     busy = true;
+    let resolveOperation;
+    operationCompletion = new Promise((resolve) => {
+      resolveOperation = resolve;
+    });
     setCheckpointControls(root, enabled, busy);
     try {
       const nextEnvelope = await adapter.loadSession(sessionId);
@@ -3171,6 +3224,8 @@ export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAda
       return { ok: false, code: error?.code === "checkpoint_missing" ? "checkpoint_missing" : "checkpoint_load_error", message };
     } finally {
       busy = false;
+      resolveOperation?.();
+      operationCompletion = null;
       setCheckpointControls(root, enabled, busy);
     }
   }
@@ -3178,7 +3233,13 @@ export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAda
   root.querySelector("#session-save")?.addEventListener("click", () => save());
   root.querySelector("#session-restore")?.addEventListener("click", () => load());
   setCheckpointControls(root, false);
-  return { save, load, setEnabled, get envelope() { return envelope; } };
+  return {
+    save,
+    autosave,
+    load,
+    setEnabled,
+    get envelope() { return envelope; },
+  };
 }
 
 export function renderPresentation(envelope, root = document) {

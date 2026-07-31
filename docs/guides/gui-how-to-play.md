@@ -74,12 +74,15 @@ campaign-coverage handoffs: start/load, inspect the visible campaign envelope,
 choose a host-shaped decision, review the committed stage, and continue. These
 campaigns do not use the competitive local-draft or validation steps.
 
-Use **Save host checkpoint** after a committed decision when you want a durable
-restart point. The host stores one latest checkpoint for the selected campaign;
-after a host restart, enter the same opaque session ID and choose **Load existing
-session** or **Restore host checkpoint**. The browser never receives the saved
-artifact, and a missing or colliding checkpoint is reported as a recoverable
-error.
+After each accepted GUI decision, the host automatically requests a checkpoint
+through the same host-only path. The GUI reports the committed transition count
+when autosave succeeds; if it fails, the committed session remains active and
+the written status gives the error. **Save host checkpoint** remains available
+as a manual retry. The host stores one latest checkpoint for the selected
+campaign; after a host restart, enter the same opaque session ID and choose
+**Load existing session** or **Restore host checkpoint**. The browser never
+receives the saved artifact, and a missing or colliding checkpoint is reported
+as a recoverable error.
 
 Drafting does not advance time. Validation checks action points, cash, political
 capital, command syntax, and other host-owned constraints without committing the
@@ -164,19 +167,20 @@ policy authority.
 Copy a session ID displayed by the current GUI and enter it under **Existing
 session ID**, then select **Load existing session**. For
 `competitive-regional-v1`, `stabilization-v1`, or `regional-affiliation-v1`,
-select **Save host checkpoint** before stopping the host if you want restart
-recovery. A browser refresh or manual load after a restart attempts that host
-checkpoint once when the opaque ID matches the saved file, then refreshes the
-ordinary presentation/campaign/action/history/replay reads. Without an explicit
+each accepted decision requests autosave; select **Save host checkpoint** before
+stopping the host if you want an explicit retry. A browser refresh or manual
+load after a restart attempts that host checkpoint once when the opaque ID
+matches the saved file, then refreshes the ordinary
+presentation/campaign/action/history/replay reads. Without a successful
 checkpoint, stopping or restarting the host invalidates the live session ID.
 
 ## Stop the GUI
 
 Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end
-when the process stops; an explicitly saved competitive or stabilization
-checkpoint remains in the printed host application-config path until the
-recovered session is ended or replaced by a later save. The configured path
-stores one latest explicit checkpoint; it is not an archive for multiple
+when the process stops; the latest autosaved competitive, stabilization, or
+regional-affiliation checkpoint remains in the printed host application-config
+path until the recovered session is ended or replaced by a later save. The
+configured path stores one latest checkpoint; it is not an archive for multiple
 sessions.
 
 ## Use a different port

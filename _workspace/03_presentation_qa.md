@@ -1,3 +1,53 @@
+# Presentation QA — Host autosave after committed GUI decisions v0.13.68
+
+## Status
+
+Implementation and full automated validation pass. The sole medium-effort
+review found and the amended implementation fixed a Medium concurrency issue:
+autosave now waits for an in-flight checkpoint operation and serializes queued
+autosave requests. The same reviewer re-verified the amended diff with no
+actionable issues. The target is automatic invocation of the existing host
+checkpoint after accepted GUI decisions; it is not browser persistence or a
+new simulation path.
+
+## Review boundary
+
+The implementation must autosave only after successful host submission for all
+three GUI campaigns, reuse the existing checkpoint adapter/path, keep manual
+Save/Restore available, and preserve committed state when autosave fails.
+
+## Required pass conditions
+
+- Competitive and campaign-coverage submission paths request autosave only
+  after an accepted host response.
+- Success is written, failure is written and recoverable, queued autosaves are
+  serialized, and neither path turns an autosave failure into a false rollback
+  or fabricated transition.
+- The existing save envelope, host route, browser opaque-session storage,
+  replay/history/debrief surfaces, and authority exclusions remain unchanged.
+- Node syntax, focused tests, full Rust/Python/repository gates, and one
+  medium-effort code review pass.
+
+## Evidence limits
+
+Automated checks establish only technical host-autosave invocation and
+fallback behavior. They cannot approve human accessibility, visual/audio
+quality, educational comprehension, device/browser behavior, legal/provenance
+status, or public release.
+
+## Review finding and correction
+
+- The sole reviewer found that two overlapping autosaves, or an autosave
+  arriving during manual Save/Restore, could return `autosave_busy` without a
+  later host write, leaving the durable checkpoint one accepted transition
+  behind.
+- `createCheckpointClient` now tracks checkpoint-operation completion and a
+  FIFO autosave promise chain. A queued autosave waits for the active operation
+  and then writes; a concurrent-autosave regression covers two queued writes.
+- Focused checkpoint/campaign coverage and full Python/Rust/repository gates
+  pass; residual gaps are live browser/device crash and concurrent host-restart
+  testing.
+
 # Presentation QA — Host deterministic replay regeneration v0.13.67
 
 ## Status

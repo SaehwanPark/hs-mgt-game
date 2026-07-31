@@ -7160,6 +7160,32 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio host autosave after committed GUI decisions (v0.13.68)
+
+Status: Complete for the bounded host-autosave request over the existing GUI
+checkpoint path; human review, full-campaign presentation, and release gates
+remain open.
+
+Done:
+
+- Autosave runs after accepted competitive, stabilization, and
+  regional-affiliation GUI decisions through the existing host save envelope,
+  route, and durable path.
+- Autosave success/failure is written, manual Save/Restore remains available,
+  and FIFO queuing prevents overlapping checkpoint operations from leaving the
+  durable state one accepted transition behind.
+
+Not Yet Done:
+
+- PR handoff, merge, branch cleanup, and final release-evidence synchronization
+  remain for this active slice.
+
+Deferred / Non-Goals:
+
+- No new route, DTO/schema, simulation transition, browser serialization,
+  service worker, replay redesign, fresh AI search, screenshot, human review,
+  device certification, provenance/legal approval, or public-release claim.
+
 ### Visual/audio host deterministic replay regeneration (v0.13.67)
 
 Status: Complete for bounded host/core deterministic regeneration from recorded
