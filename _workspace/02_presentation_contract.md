@@ -4106,3 +4106,67 @@ visual quality, educational usefulness, legal status, or release readiness.
 - Open: full-campaign raster placement quality, structured first-time-user
   review, human accessibility/educational review, provenance/legal review, and
   release approval.
+# Presentation Contract — Full-campaign checkpoint/replay continuity v0.13.72
+
+## Goal and authorization
+
+Verify that the existing host-owned competitive checkpoint path restores a
+month-12 session and preserves terminal actor-visible presentation through the
+existing 24-month continuation, without adding browser persistence or a second
+simulation boundary.
+
+## Player questions and consequences
+
+The player question is: “If the host restores my mid-campaign session, will the
+same visible history, regional context, and terminal debrief remain coherent?”
+The test compares supplied host projections; it does not make a human quality
+or educational-effectiveness claim.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Checkpoint identity/count | Existing `SaveEnvelope` from host `save_session`/`load_session` | Saved at month 12; loaded before continuation | Do not serialize or reconstruct state in the browser |
+| Immutable history/replay | Host `CompetitiveSessionSave` and `get_replay` | Compared at month 12 and terminal month 24 | Do not regenerate history in JavaScript or expose true state |
+| Regional-world presentation | Host `get_regional_world` projection | Compared at terminal completion | Do not derive facilities, rival detail, or outcomes locally |
+| Campaign-coverage presentation | Host `get_campaign_coverage` projection | Compared at terminal completion | Do not add a second mutation or debrief authority |
+| Durable cleanup | Host `end_session` removal of matching checkpoint | After the recovered session ends | Do not delete an unrelated checkpoint or claim browser persistence |
+
+## Visual, motion, and audio semantics
+
+No new visual/audio behavior is introduced. Existing terminal board, facility,
+history, replay, debrief, written fallback, and optional audio projections are
+compared as host-supplied data only.
+
+## Accessibility and fallbacks
+
+Existing save/load recovery, written status, mute, reduced-motion, text, and
+unknown-data fallbacks remain unchanged. This slice does not broaden browser
+recovery behavior or certify device/browser accessibility.
+
+## Authority, history, and replay boundaries
+
+Rust owns serialization, verification, true state, stochastic inputs,
+transitions, history, replay hashes, regional-world data, and campaign
+coverage. The browser retains only an opaque session ID and renders supplied
+projections.
+
+## Asset provenance and release requirements
+
+No asset or audio file is added. Existing registries, credits, and host
+projection contracts remain the release authority.
+
+## Verification and evidence limits
+
+The focused regression must compare original/restored terminal replay/history
+metadata and actor-visible envelopes after a month-12 checkpoint, then verify
+checkpoint cleanup. Automated equality cannot establish human comprehension,
+visual quality, accessibility, educational benefit, or public-release readiness.
+
+## Non-goals and open questions
+
+- No new route/schema, browser save artifact, replay format, simulation,
+  screenshot, asset, audio file, or human approval claim.
+- Open: full cross-campaign durable continuity, browser/device certification,
+  raster screenshots, human first-time-user/accessibility/educational review,
+  provenance/legal review, and public-release approval.

@@ -218,6 +218,36 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     self.assertIn("cross-process", " ".join(coverage["limits"]))
     self.assertIn("tests/test_phase11_browser_refresh_recovery.py", coverage["test_source"])
 
+  def test_full_campaign_checkpoint_continuity_is_host_bound(self):
+    coverage = self.ledger["full_campaign_checkpoint_continuity"]
+    self.assertEqual(
+      coverage["status"],
+      "complete-competitive-full-campaign-host-checkpoint-continuation",
+    )
+    self.assertEqual(coverage["checkpoint_turn"], 12)
+    self.assertEqual(coverage["terminal_turn"], 24)
+    self.assertEqual(
+      coverage["test_source"],
+      "src/mcp/session.rs: fn competitive_durable_checkpoint_covers_full_campaign_continuation",
+    )
+    self.assertEqual(
+      coverage["comparison_surfaces"],
+      [
+        "competitive-replay-v1",
+        "competitive-regional-world-v1",
+        "campaign-coverage-v1",
+      ],
+    )
+    for marker in (
+      "fn competitive_durable_checkpoint_covers_full_campaign_continuation",
+      "get_replay(GetReplayRequest",
+      "get_regional_world(GetRegionalWorldRequest",
+      "get_campaign_coverage(GetCampaignCoverageRequest",
+      "end_session(EndSessionRequest",
+    ):
+      self.assertIn(marker, self.session)
+    self.assertTrue(any("browser" in item.lower() for item in coverage["limits"]))
+
 
 if __name__ == "__main__":
   unittest.main()

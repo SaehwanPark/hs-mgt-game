@@ -2265,3 +2265,24 @@ actionable issues. PR handoff, merge, and branch cleanup remain.
 
 Merge the PR, clean both temporary branches, verify clean `main`, and select
 the next unmet roadmap slice.
+# Final Handoff — Full-campaign checkpoint/replay continuity v0.13.72
+
+## Status
+
+Implementation, full validation, and exactly one medium-effort review are
+complete on `feat/full-campaign-checkpoint-continuity-v0.13.72`; the reviewer
+found no actionable issues. PR handoff, merge, and branch cleanup remain.
+
+## Target result
+
+- Restore a competitive session saved at month 12 and continue it through the
+  host’s 24-month endpoint.
+- Prove terminal parity for immutable replay/history and actor-visible
+  regional-world and campaign-coverage reads.
+- Preserve opaque-session storage and host ownership of all persistence and
+  transition authority.
+
+## Remaining work
+
+Merge the PR, clean both temporary branches, verify clean `main`, and select
+the next unmet roadmap slice.

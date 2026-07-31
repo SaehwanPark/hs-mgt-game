@@ -13,6 +13,7 @@
     "campaign_coverage_scope": "src/mcp/session.rs: from_competitive",
     "competitive_companion_scope": "gui/app.mjs: refreshCompetitiveCoverageCompanion",
     "competitive_facility_placement_use_scope": "src/mcp/session.rs: fn regional_world_facility_projection_covers_all_competitive_months()",
+    "competitive_full_campaign_checkpoint_scope": "src/mcp/session.rs: fn competitive_durable_checkpoint_covers_full_campaign_continuation()",
     "campaign_gui_boundary_test": "tests/test_gui_campaign_coverage.py: def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
     "history_test": "tests/test_phase11_live_history.py: def test_live_history_read_does_not_expose_simulation_authority(self):",
     "replay_test": "tests/test_phase11_live_replay.py: def test_live_replay_read_does_not_expose_simulation_authority(self):",
@@ -72,13 +73,14 @@
     "competitive_campaign_coverage_envelope_is_host_bound": true,
     "competitive_coverage_companion_preserves_action_rail": true,
     "competitive_full_campaign_facility_placement_use_is_host_bound": true,
+    "competitive_full_campaign_checkpoint_replay_continuity_is_host_bound": true,
     "full_campaign_visual_content_review": false,
     "human_campaign_comprehension_and_educational_review": false
   },
   "authority_boundary": "The Rust host/core owns campaign transitions, actor-visible projections, history, replay metadata, checkpoint state, resolution, and debrief; the browser renders supplied competitive projections and local presentation preferences without simulation authority.",
   "limits": [
     "This closes the current repository-owned technical competitive-regional campaign boundary only.",
-    "It does not establish pixel-level full-campaign facility placement/use coverage quality, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
+    "It does not establish browser serialization, cross-campaign durable save/load/replay continuity, pixel-level full-campaign facility placement/use coverage quality, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
     "The broader Competitive campaign coverage complete roadmap item remains open for product/content review and structured human evaluation."
   ],
   "test_source": "tests/test_phase13_1_competitive_campaign_boundary.py"

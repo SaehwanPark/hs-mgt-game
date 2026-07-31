@@ -2088,6 +2088,114 @@ mod tests {
   }
 
   #[test]
+  fn competitive_durable_checkpoint_covers_full_campaign_continuation() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-full-campaign-{}.save",
+      std::process::id()
+    ));
+    let mut original = GameSessionStore::with_competitive_persistence(path.clone());
+    let session = start(&mut original, "competitive-regional-v1");
+    let session_id = session.session_id.clone();
+    for _ in 0..12 {
+      original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("pre-checkpoint month");
+    }
+    let saved = original
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("mid-campaign durable save");
+    assert_eq!(saved.transition_count, 12);
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let loaded = restarted
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("mid-campaign durable load");
+    assert_eq!(loaded.transition_count, saved.transition_count);
+    assert_eq!(loaded.latest_state_hash, saved.latest_state_hash);
+
+    for _ in 12..COMPETITIVE_MONTH_LIMIT {
+      let original_next = original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("original continuation month");
+      let restarted_next = restarted
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("restored continuation month");
+      assert_eq!(
+        original_next
+          .latest_transition
+          .map(|transition| transition.state_hash),
+        restarted_next
+          .latest_transition
+          .map(|transition| transition.state_hash)
+      );
+    }
+
+    let original_replay = original
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original terminal replay");
+    let restarted_replay = restarted
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored terminal replay");
+    assert_eq!(original_replay, restarted_replay);
+    assert_eq!(
+      original_replay.transition_count,
+      COMPETITIVE_MONTH_LIMIT as usize
+    );
+    assert_eq!(
+      original_replay.latest_state_hash,
+      restarted_replay.latest_state_hash
+    );
+
+    let original_world = original
+      .get_regional_world(GetRegionalWorldRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original terminal regional world");
+    let restarted_world = restarted
+      .get_regional_world(GetRegionalWorldRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored terminal regional world");
+    assert_eq!(original_world, restarted_world);
+    assert!(original_world.session.done);
+
+    let original_coverage = original
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original terminal campaign coverage");
+    let restarted_coverage = restarted
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored terminal campaign coverage");
+    assert_eq!(original_coverage, restarted_coverage);
+    assert!(original_coverage.session.done);
+
+    restarted
+      .end_session(EndSessionRequest { session_id })
+      .expect("end recovered terminal session");
+    assert!(!path.exists());
+  }
+
+  #[test]
   fn durable_checkpoint_does_not_overwrite_live_session_with_reused_id() {
     let path = std::env::temp_dir().join(format!(
       "hs-mgt-game-durable-collision-{}.save",

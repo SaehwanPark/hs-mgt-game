@@ -4931,3 +4931,37 @@ This slice can establish only a deterministic host projection and continuity
 contract; it cannot establish human visual comprehension, accessibility,
 educational usefulness, device/browser certification, provenance/legal status,
 or public release.
+# Presentation QA — Full-campaign checkpoint/replay continuity v0.13.72
+
+## Status
+
+Implementation, full validation, and the sole medium-effort code review pass.
+The reviewer found no actionable issues. The bounded boundary is host-owned
+competitive checkpoint restore at month 12 followed by deterministic
+continuation through month 24.
+
+## Required pass conditions
+
+- Original and restored sessions reach equal terminal transition counts,
+  state hashes, replay/history rows, regional-world data, and campaign-coverage
+  data.
+- The recovered checkpoint is removed only when the matching recovered session
+  ends; browser storage remains opaque-ID-only.
+- Evidence stays distinct from browser persistence, cross-campaign continuity,
+  pixel-level visual quality, human review, and release approval.
+- Focused tests, full repository gates, and exactly one medium-effort code review
+  pass before PR handoff.
+
+## Current validation
+
+- 368 Rust tests, 781 Python tests, Clippy, formatting, release metadata,
+  documentation links, asset/security/generation/credits, device, offline,
+  browser, audio, raster, loading, visual/audio, and asset-budget checks pass.
+- The host regression compares original/restored replay/history, regional-world,
+  and campaign-coverage terminal data after a month-12 checkpoint.
+
+## Evidence limits
+
+This slice can establish only deterministic host persistence and terminal read
+parity; it cannot establish lived accessibility, educational usefulness,
+device/browser certification, provenance/legal status, or public release.

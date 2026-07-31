@@ -3347,3 +3347,13 @@ separate gates.
 - Prevention: exercise the host-owned read before every committed month and at
   terminal completion; assert source-bound player metrics and explicit private-
   rival absence without inventing client-side utilization semantics.
+# Compare Restored and Original Runs at the Full Host Endpoint
+
+- Context: a one-month checkpoint/next-turn hash proves local restore but not
+  full-campaign continuity across terminal presentation surfaces.
+- Risk: a restored session can diverge later while immediate checkpoint metadata
+  still matches, leaving replay, regional context, or terminal debrief parity
+  untested.
+- Prevention: checkpoint mid-campaign, continue original and restored hosts to
+  the same terminal turn, compare immutable hashes and actor-visible envelopes,
+  and clean only the matching recovered checkpoint.
