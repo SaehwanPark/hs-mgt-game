@@ -3594,3 +3594,39 @@ temporary-branch cleanup.
 This proves only host-owned full-campaign history/replay read continuity and
 hash alignment. It does not prove browser serialization, archive durability,
 human usability, educational value, or public-release readiness.
+
+# Request Summary — Full-campaign coverage renderer continuity v0.13.78
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with browser-presentation evidence that the
+existing `campaign-coverage-v1` renderer preserves host-supplied active and
+terminal content for all three launchable campaigns.
+
+## Target slice
+
+- Render active and terminal competitive, stabilization, and regional-
+  affiliation coverage fixtures through `renderCampaignCoverage`.
+- Require campaign/stage identity, history rows, terminal debrief lines,
+  supplied audio metadata, written fallbacks, and disabled decisions to remain
+  visible without creating a browser mutation path.
+- Keep new routes, schemas, archives, browser serialization, screenshots,
+  human review, and release gates open.
+
+## Non-goals
+
+- No new route/schema, simulation rule, stochastic input, browser authority,
+  checkpoint archive, browser save artifact, asset/audio file, screenshot,
+  human review, provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused Node/browser-renderer and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only technical fixture-level renderer continuity and authority
+preservation. It does not prove real-browser visual quality, accessibility,
+human comprehension, educational value, or public-release readiness.

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.78] - 2026-07-31
+
+- Added host-envelope browser-renderer continuity evidence across active and
+  terminal competitive, stabilization, and regional-affiliation fixtures:
+  identity, history/debrief, optional audio, written fallbacks, and disabled
+  coverage decisions remain intact.
+- Kept real-browser screenshots, human visual/accessibility review,
+  provenance/legal approval, and public-release gates open.
+
 ## [0.13.77] - 2026-07-31
 
 - Added host-bound full-campaign history/replay continuity evidence across

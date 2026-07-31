@@ -2420,3 +2420,25 @@ and 6 regional-affiliation stages, with 373 Rust tests and 786 Python tests
 plus all repository contract gates passing. The sole reviewer approved with no
 actionable findings. Merge the PR, clean the temporary branch locally/remotely,
 verify clean `main`, and select the next unmet roadmap slice.
+# Final Handoff — Full-campaign coverage renderer continuity v0.13.78
+
+## Status
+
+Implementation, full validation, and the sole medium-effort review are
+complete on `feat/full-campaign-coverage-renderer-v0.13.78`; the reviewer
+found no actionable findings. PR handoff, merge, and branch cleanup remain.
+
+## Target result
+
+- Render active and terminal host coverage fixtures for competitive,
+  stabilization, and regional affiliation through the existing shared panel.
+- Preserve identity, history/debrief, audio metadata, written fallbacks, and
+  disabled decisions without adding a browser authority path.
+
+## Remaining work
+
+The six-fixture renderer matrix covers active and terminal envelopes for all
+three campaigns, with 373 Rust tests and 787 Python tests plus all repository
+contract gates passing. The sole reviewer approved with no actionable findings.
+Merge the PR, clean the temporary branch locally/remotely, verify clean `main`,
+and select the next unmet roadmap slice.

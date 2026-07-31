@@ -3415,3 +3415,16 @@ separate gates.
   counts, and hashes, and keep regeneration/authority at the host boundary.
 - Prevention: treat full-campaign replay continuity as a separate technical
   gate from browser serialization, archive design, and human replay quality.
+# Full-Campaign Renderer Evidence Must Preserve the Host Envelope
+
+- Context: host coverage, audio, and history/replay continuity now walk every
+  campaign read, while browser tests exercise only representative fixtures.
+- Risk: a renderer can silently drop terminal debrief text, supplied audio, or
+  campaign identity even when the host envelope remains correct, or enable a
+  second decision path through a fixture callback.
+- Resolution: exercise active and terminal fixtures for all campaigns through
+  the existing renderer, assert written/optional metadata retention, and keep
+  decisions disabled without an explicit host submit callback.
+- Prevention: treat browser rendering as a consumer of the complete host
+  envelope and keep fixture evidence separate from real-browser and human
+  quality claims.
