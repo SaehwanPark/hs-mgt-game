@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.69] - 2026-07-31
+
+- Added the competitive `campaign-coverage-v1` host projection with visible
+  player metrics, public signals, process summaries, canonical action metadata,
+  history/replay metadata, terminal debrief, and existing audio metadata.
+- Extended the loopback campaign-coverage read to all three launchable campaign
+  IDs while keeping competitive decisions on the existing catalog, validation,
+  and submit action rail; coverage-only competitive decisions are disabled.
+- Kept full-campaign placement/use, campaign-specific visual/audio quality,
+  screenshots, human review, device certification, provenance, and
+  public-release gates open.
+
 ## [0.13.68] - 2026-07-30
 
 - Added host autosave requests after accepted GUI decisions across the

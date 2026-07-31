@@ -13,6 +13,11 @@ supports `competitive-regional-v1`, `stabilization-v1`, and
 `regional-affiliation-v1`. Complete instructions and
 troubleshooting are in [`docs/guides/gui-how-to-play.md`](../docs/guides/gui-how-to-play.md).
 
+The host-owned `campaign-coverage-v1` read is available for all three campaign
+IDs. Competitive decisions still use the catalog, host validation, and submit
+action path; coverage does not reveal private rival state or add browser
+simulation authority.
+
 Opening `gui/index.html` directly or through a generic static server intentionally
 shows fixture/demo mode; it cannot start a live scenario by itself.
 

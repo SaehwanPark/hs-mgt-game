@@ -1,8 +1,9 @@
 {
   "schema_version": "phase12-live-campaign-coverage-v1",
   "status": "complete-current-technical-browser-and-audio-handoff-only",
-  "target": "Connect the existing campaign-coverage-v1 envelope, including optional host-sourced audio metadata, to the loopback GUI launcher for stabilization-v1 and regional-affiliation-v1.",
+  "target": "Connect the existing campaign-coverage-v1 envelope, including optional host-sourced audio metadata, to the loopback GUI coverage read for competitive-regional-v1, stabilization-v1, and regional-affiliation-v1.",
   "campaigns": [
+    "competitive-regional-v1",
     "stabilization-v1",
     "regional-affiliation-v1"
   ],
@@ -21,9 +22,10 @@
   },
   "findings": {
     "loopback_route_uses_existing_typed_projection": true,
-    "both_campaign_coverage_campaigns_are_launchable": true,
+    "all_supported_campaigns_are_launchable": true,
     "competitive_difficulty_and_action_path_remain_separate": true,
     "campaign_decisions_use_host_submit_turn": true,
+    "competitive_coverage_is_a_typed_read_projection": true,
     "existing_session_campaign_is_resolved_from_host": true,
     "rejected_campaign_decisions_do_not_advance_history": true,
     "campaign_audio_metadata_uses_existing_catalog_only": true,

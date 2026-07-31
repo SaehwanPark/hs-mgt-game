@@ -40,7 +40,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
     )
     self.assertEqual(
       self.ledger["campaigns"],
-      ["stabilization-v1", "regional-affiliation-v1"],
+      ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
     )
     self.assertEqual(set(self.ledger["source_contract"]), set(EXPECTED_SOURCE_CONTRACT))
     for key, (source_path, marker) in EXPECTED_SOURCE_CONTRACT.items():
@@ -54,9 +54,10 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       self.ledger["findings"],
       {
         "loopback_route_uses_existing_typed_projection": True,
-        "both_campaign_coverage_campaigns_are_launchable": True,
+        "all_supported_campaigns_are_launchable": True,
         "competitive_difficulty_and_action_path_remain_separate": True,
         "campaign_decisions_use_host_submit_turn": True,
+        "competitive_coverage_is_a_typed_read_projection": True,
         "existing_session_campaign_is_resolved_from_host": True,
         "rejected_campaign_decisions_do_not_advance_history": True,
         "campaign_audio_metadata_uses_existing_catalog_only": True,
@@ -74,6 +75,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
     for marker in (
       'value="stabilization-v1"',
       'value="regional-affiliation-v1"',
+      'value="competitive-regional-v1"',
       'id="campaign-coverage-panel"',
     ):
       self.assertIn(marker, html)
@@ -87,6 +89,8 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       "campaignAudioCueIds",
       "setMusicState(musicStateId, audioInput)",
       "competitive-regional-v1",
+      "competitive_coverage_read_only",
+      "Use the competitive action rail",
     ):
       self.assertIn(marker, app + adapter)
     for forbidden in (

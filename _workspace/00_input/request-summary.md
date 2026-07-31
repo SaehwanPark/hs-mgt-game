@@ -3274,3 +3274,41 @@ This slice proves only explicit durable competitive host checkpoint recovery
 and browser re-entry after host restart. It does not prove autosave, durable
 campaign-coverage saves, replay playback/regeneration, human usability,
 accessibility, educational value, provenance/legal approval, or public release.
+# Request Summary — Competitive campaign-coverage envelope v0.13.69
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next unmet technical gate: expose
+`competitive-regional-v1` through the existing host-owned
+`campaign-coverage-v1` read projection so the shared technical coverage
+contract includes all three launchable campaigns.
+
+## Target slice
+
+- Derive the competitive envelope from the human `PlayerObservation`, player
+  resources, public campaign signals, existing action catalog, sanitized
+  public-action history summaries, player-safe terminal debrief, and existing
+  campaign audio metadata.
+- Allow the existing loopback campaign-coverage route to read competitive
+  sessions without adding a route, schema, browser store, or simulation path.
+- Keep competitive mutation on the existing action-catalog → host validation →
+  `submitTurn` path; shared coverage remains a typed read projection.
+
+## Non-goals
+
+- No true-state/rival-private data, resolved inputs, browser simulation, new
+  mutation protocol, replay redesign, persistence, asset/audio file, screenshot,
+  human review, device certification, provenance/legal approval, or public
+  release claim.
+
+## Validation target
+
+Focused Rust campaign-coverage and authority tests; full Rust/Python/repository
+validation; exactly one medium-effort code review; authorized PR/merge and
+temporary-branch cleanup before selecting the next roadmap slice.
+
+## Evidence limits
+
+This slice proves a host-owned typed competitive coverage read and loopback
+integration. It does not prove campaign-specific visual/audio quality, human
+comprehension, device/browser certification, or public-release readiness.

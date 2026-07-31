@@ -1,3 +1,47 @@
+# Final Handoff — Competitive campaign-coverage envelope v0.13.69
+
+## Status
+
+Implementation and full validation are complete on
+`feat/competitive-campaign-coverage-v0.13.69`. The sole medium-effort review
+found private-rival event/effect and instructor-debrief leakage in competitive
+coverage; the amended implementation now exposes only public-action summaries,
+uses a player-safe terminal debrief, and has regression coverage for both
+boundaries. The same reviewer re-reviewed the amended implementation and
+approved it with no actionable issues. PR handoff, merge, temporary-branch
+cleanup, and final evidence update remain.
+
+## Target result
+
+- Expose `competitive-regional-v1` through the existing host-owned
+  `campaign-coverage-v1` read projection with player-visible metrics, public
+  signals, process summaries, canonical decisions, sanitized public-action
+  history/replay metadata, terminal debrief, and existing audio metadata.
+- Keep competitive mutation on the existing catalog, host validation, and
+  submit action path; coverage-only competitive decisions are disabled.
+- Preserve the no-true-state, no-private-rival-data, no-resolved-input, and
+  no-browser-transition boundary.
+
+## Verification
+
+- 366 Rust tests, 778 Python tests, Clippy, formatting, release metadata,
+  documentation links, asset/security/generation/credits, device/offline/
+  browser/audio/raster/loading/visual-audio contract checks all pass.
+- Focused tests cover active and terminal competitive envelopes, 24-month
+  completion, canonical action metadata, no-mutation reads, the loopback route,
+  disabled direct coverage submission for competitive sessions, exclusion of a
+  private rival monitor action from coverage history/effects, and terminal
+  debrief exclusion of instructor-only rival sections and deltas.
+
+- The sole medium-effort code review approved the amended implementation with
+  no actionable issues after both actor-visible boundary corrections.
+
+## Remaining work
+
+Complete exactly one medium-effort review, create and merge the PR, delete the
+temporary branch locally and remotely, verify clean `main`, and then select the
+next unmet roadmap slice.
+
 # Final Handoff — Host autosave after committed GUI decisions v0.13.68
 
 ## Status
@@ -2148,3 +2192,25 @@ persistence, browser serialization, cross-process recovery, replay playback or
 regeneration, full-campaign continuity, human accessibility/educational review,
 and public-release approval remain open. The next plan should select the
 smallest host persistence slice rather than expanding browser authority.
+# Final Handoff — Competitive campaign-coverage envelope v0.13.69
+
+## Target result
+
+Expose the competitive campaign through the existing host-owned
+`campaign-coverage-v1` read projection, with actor-visible player metrics,
+public signals, canonical decisions, history/replay metadata, terminal
+debrief, and existing audio metadata. Keep competitive mutation on the
+catalog/validation/submit path.
+
+## Review boundary
+
+No new route, schema, browser store, simulation authority, hidden-state field,
+asset, audio file, or product-release claim is authorized. The sole reviewer
+must check semantic mapping, actor-visible boundaries, terminal behavior, and
+mutation-path separation.
+
+## Remaining work
+
+Run the full repository validation, complete exactly one medium-effort review,
+create and merge the PR, delete the temporary branch locally and remotely,
+verify clean `main`, and then select the next unmet roadmap slice.

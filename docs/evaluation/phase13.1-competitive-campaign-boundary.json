@@ -10,7 +10,7 @@
     "competitive_campaign_id": "src/mcp/session.rs: \"competitive-regional-v1\" => Ok(CampaignId::CompetitiveRegionalV1),",
     "competitive_catalog_ledger": "docs/evaluation/phase11.1-campaign-coverage-ledger.json: \"campaign\": \"competitive-regional-v1\"",
     "competitive_catalog_test": "tests/test_phase11_campaign_coverage.py: self.assertEqual(self.ledger[\"campaign\"], \"competitive-regional-v1\")",
-    "campaign_coverage_scope": "src/mcp/session.rs: campaign coverage currently supports stabilization-v1 and regional-affiliation-v1 only",
+    "campaign_coverage_scope": "src/mcp/session.rs: from_competitive",
     "campaign_gui_boundary_test": "tests/test_gui_campaign_coverage.py: def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
     "history_test": "tests/test_phase11_live_history.py: def test_live_history_read_does_not_expose_simulation_authority(self):",
     "replay_test": "tests/test_phase11_live_replay.py: def test_live_replay_read_does_not_expose_simulation_authority(self):",
@@ -23,7 +23,7 @@
     "render the current competitive actor-visible board, facility, overlay, event-cue, music, history, replay, checkpoint, and terminal-debrief surfaces",
     "retain host-owned history, replay metadata, checkpoint state, resolution, and terminal debrief",
     "use written fallbacks and recoverable read errors when optional GUI capability is unavailable",
-    "keep the shared campaign-coverage envelope explicitly limited to stabilization-v1 and regional-affiliation-v1"
+    "serve competitive-regional-v1 through the host-owned campaign-coverage-v1 typed read while keeping competitive mutations on the existing action-catalog and validation path"
   ],
   "surface_contract": {
     "campaign_id": "competitive-regional-v1",
@@ -41,7 +41,8 @@
       "terminal debrief"
     ],
     "shared_campaign_coverage_envelope_support": [
-      "stabilization-v1",
+    "competitive-regional-v1",
+    "stabilization-v1",
       "regional-affiliation-v1"
     ],
     "host_owned_state": [
@@ -66,7 +67,7 @@
     "history_replay_checkpoint_and_debrief_are_host_bound": true,
     "browser_authority_boundary_is_preserved": true,
     "optional_audio_and_written_fallback_are_present": true,
-    "competitive_campaign_coverage_envelope_is_not_claimed": true,
+    "competitive_campaign_coverage_envelope_is_host_bound": true,
     "full_campaign_visual_content_review": false,
     "human_campaign_comprehension_and_educational_review": false
   },

@@ -4088,6 +4088,27 @@ are completed. Human-review gates remain open.
   human review, device/browser certification, provenance/legal review, and
   public release remain open.
 
+### v0.13.69 current competitive campaign-coverage envelope
+
+- `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
+  existing host-owned `campaign-coverage-v1` read projection, completing the
+  shared technical coverage contract across the three launchable campaigns.
+- The projection derives from the human `PlayerObservation`, player resources,
+  public market/policy signals, process/status summaries, the canonical
+  competitive action catalog, sanitized public-action history summaries,
+  player-safe terminal debrief, and existing allowlisted audio metadata.
+- Competitive mutation remains on the existing action-catalog, host
+  validation, and `submitTurn` path. The shared coverage projection is not a
+  second browser-authority path.
+- `src/mcp/session.rs`, `src/gui_server.rs`, the shared browser renderer, and
+  the Phase 11.1/12/13.1 evidence tests cover active and terminal competitive
+  reads, the loopback route, no-mutation behavior, source-bound fields, and
+  disabled coverage-only competitive decision controls.
+- This slice closes only typed host competitive coverage and loopback read
+  integration. Campaign-specific visual/audio quality, human comprehension,
+  device/browser certification, provenance/legal review, screenshots, and
+  public-release approval remain open.
+
 ### Exit criteria
 
 - No critical or high-severity defect remains.

@@ -1,5 +1,36 @@
 # Lessons Learned
 
+## Sanitize Shared Coverage History, Not Just Current Observation
+
+- Context: competitive campaign coverage reused a typed transition-summary
+  shape and the full competitive debrief while the competitive resolver records
+  private rival events, effects, instructor rationales, and true-state deltas
+  internally for host/instructor history and review.
+- Risk: filtering only current observation fields still let a player infer an
+  exact private rival command and its parameters from active coverage history,
+  or receive instructor-only rival actions and metric deltas at completion.
+- Resolution: map competitive coverage history from the host-owned public-action
+  log, keep the player command and state hash, omit raw competitive effects, and
+  use a player-safe terminal debrief; add active/private and terminal regressions.
+- Prevention: treat every shared projection field—including history, debrief,
+  audio inputs, and error text—as an actor-visible boundary. Preserve raw
+  transitions only on host-authorized history/replay surfaces.
+
+## Keep Shared Campaign Coverage Read-Only for Competitive Mutation
+
+- Context: competitive presentation already has a richer action-catalog,
+  validation, and submit sequence, while stabilization and affiliation use the
+  shared campaign-coverage renderer.
+- Risk: routing competitive decisions through a second coverage-specific
+  submit path would bypass host validation or make the browser a competing
+  mutation authority.
+- Resolution: extend only the host-owned `campaign-coverage-v1` read projection
+  with actor-visible competitive data and canonical catalog decision metadata;
+  keep competitive mutation on the existing validated action rail.
+- Prevention: test that competitive coverage reads do not advance history,
+  exclude true-state/private-rival markers, and leave catalog/validation/
+  `submitTurn` as the only competitive mutation path.
+
 ## Keep GUI autosave behind the existing host checkpoint boundary
 
 - Context: the loopback GUI already supported explicit host checkpoints for

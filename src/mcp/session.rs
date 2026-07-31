@@ -774,9 +774,23 @@ impl GameSessionStore {
           &session.history,
         ))
       }
-      GameSession::Competitive(_) => Err(error_message(
-        "campaign coverage currently supports stabilization-v1 and regional-affiliation-v1 only",
-      )),
+      GameSession::Competitive(session) => {
+        let history = session
+          .history
+          .transitions
+          .iter()
+          .map(summarize_competitive_campaign_coverage_transition)
+          .collect::<Vec<_>>();
+        Ok(crate::mcp::campaign_coverage::from_competitive(
+          request.session_id,
+          session.seed,
+          session.done,
+          &session.current,
+          session.prior_aggregated.as_ref(),
+          &history,
+          &session.history,
+        ))
+      }
     }
   }
 
@@ -1553,6 +1567,34 @@ pub(crate) fn summarize_competitive_transition(
   }
 }
 
+pub(crate) fn summarize_competitive_campaign_coverage_transition(
+  transition: &CompetitiveTransition,
+) -> TransitionSummary {
+  let command = transition
+    .aggregated
+    .batch_for_system(0)
+    .map(|batch| format!("{:?}", batch.commands))
+    .unwrap_or_else(|| "[]".to_string());
+  let current_month = transition.prior.policy_calendar.month_index;
+  let events = transition
+    .next
+    .public_action_log
+    .iter()
+    .filter(|entry| entry.month_index == current_month)
+    .map(|entry| format!("Public action: {}", entry.summary))
+    .collect();
+
+  TransitionSummary {
+    turn: transition.next.turn,
+    command,
+    observation: None,
+    events,
+    effects: Vec::new(),
+    state_hash: transition.state_hash.clone(),
+    consultant_options: transition.consultant_options.clone(),
+  }
+}
+
 pub(crate) fn summarize_affiliation_transition(
   transition: &AffiliationTransition,
 ) -> TransitionSummary {
@@ -1774,6 +1816,7 @@ fn competitive_validation_error_code(
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::model::CompetitiveCommand;
 
   fn start(store: &mut GameSessionStore, campaign: &str) -> SessionEnvelope {
     store
@@ -3088,18 +3131,70 @@ mod tests {
       .get_observation(GetObservationRequest {
         session_id: competitive.session_id.clone(),
       })
-      .expect("competitive before unsupported coverage");
-    let error = store
+      .expect("competitive before coverage");
+    let competitive_coverage = store
       .get_campaign_coverage(GetCampaignCoverageRequest {
         session_id: competitive.session_id.clone(),
       })
-      .expect_err("competitive coverage is intentionally unsupported");
-    assert!(error.error.contains("stabilization-v1"));
+      .expect("competitive coverage");
+    assert_eq!(
+      competitive_coverage.session.campaign,
+      "competitive-regional-v1"
+    );
+    assert_eq!(
+      competitive_coverage.session.max_turns,
+      COMPETITIVE_MONTH_LIMIT
+    );
+    assert_eq!(competitive_coverage.stage.id, "month-1");
+    assert_eq!(competitive_coverage.decisions.len(), 7);
+    assert_eq!(
+      competitive_coverage
+        .audio
+        .as_ref()
+        .expect("competitive campaign audio")
+        .music_state_id,
+      "competitive_escalation"
+    );
+    assert!(
+      competitive_coverage
+        .decisions
+        .iter()
+        .any(|decision| decision.id == "monitor")
+    );
+    assert!(
+      competitive_coverage
+        .actors
+        .iter()
+        .any(|actor| actor.id == "regional-rivals")
+    );
+    assert!(
+      competitive_coverage
+        .processes
+        .iter()
+        .any(|process| process.id == "information-gaps")
+    );
+    assert!(
+      competitive_coverage
+        .metrics
+        .iter()
+        .any(|metric| metric.label == "Operating margin")
+    );
+    let competitive_json =
+      serde_json::to_string(&competitive_coverage).expect("competitive coverage json");
+    for forbidden in [
+      "CompetitiveWorldState",
+      "WorldState",
+      "ResolvedInputs",
+      "resolved_inputs",
+      "effect_queue",
+    ] {
+      assert!(!competitive_json.contains(forbidden), "found {forbidden}");
+    }
     let competitive_after = store
       .get_observation(GetObservationRequest {
         session_id: competitive.session_id,
       })
-      .expect("competitive after unsupported coverage");
+      .expect("competitive after coverage");
     assert_eq!(competitive_before, competitive_after);
   }
 
@@ -3135,6 +3230,90 @@ mod tests {
         .debrief
         .iter()
         .any(|line| line.contains("Regional affiliation debrief"))
+    );
+  }
+
+  #[test]
+  fn competitive_campaign_coverage_sanitizes_private_rival_actions() {
+    let ruleset = default_competitive_ruleset();
+    let genesis =
+      crate::competitive::genesis_competitive_world_with_ruleset(Difficulty::Normal, &ruleset);
+    let month_index = genesis.policy_calendar.month_index;
+    let transition = crate::competitive::regenerate_competitive_month(
+      &genesis,
+      &ruleset,
+      42,
+      AggregatedMonthlyActions {
+        month_index,
+        batches: vec![
+          SystemMonthlyBatch::new(0, vec![CompetitiveCommand::Hold]),
+          SystemMonthlyBatch::new(
+            1,
+            vec![CompetitiveCommand::Monitor {
+              target: crate::model::MonitorTarget::Northlake,
+              depth: 2,
+            }],
+          ),
+        ],
+      },
+      None,
+    )
+    .expect("private rival transition");
+
+    let raw_summary = summarize_competitive_transition(&transition);
+    assert!(
+      raw_summary
+        .events
+        .iter()
+        .any(|event| event.contains("Northlake Health: monitoring"))
+    );
+
+    let coverage_summary = summarize_competitive_campaign_coverage_transition(&transition);
+    assert!(coverage_summary.events.is_empty());
+    assert!(coverage_summary.effects.is_empty());
+  }
+
+  #[test]
+  fn campaign_coverage_terminal_competitive_includes_debrief_without_decisions() {
+    let mut store = GameSessionStore::default();
+    let mut session = start(&mut store, "competitive-regional-v1");
+    for _ in 0..COMPETITIVE_MONTH_LIMIT {
+      session = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: session.session_id,
+          command_text: "hold".to_string(),
+        })
+        .expect("competitive month");
+    }
+    let coverage = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session.session_id,
+      })
+      .expect("terminal competitive coverage");
+    assert!(coverage.session.done);
+    assert_eq!(coverage.session.turn, COMPETITIVE_MONTH_LIMIT);
+    assert!(coverage.decisions.is_empty());
+    assert!(coverage.stage.label.contains("complete"));
+    let debrief = coverage.debrief.join("\n");
+    assert!(debrief.contains("Final player tradeoff:"));
+    for forbidden in [
+      "INSTRUCTOR RUN SUMMARY",
+      "DISTRIBUTIONAL OUTCOME SUMMARY",
+      "REVEALED FOR INSTRUCTOR REVIEW",
+      "unobserved during play",
+      "Rival values",
+      "Rival Northlake",
+      "Rival Summit",
+      "Rival Valley",
+      "Rival Metro",
+    ] {
+      assert!(!debrief.contains(forbidden), "found {forbidden}");
+    }
+    assert!(
+      coverage
+        .debrief
+        .iter()
+        .any(|line| line.contains("Competitive preview completed"))
     );
   }
 
