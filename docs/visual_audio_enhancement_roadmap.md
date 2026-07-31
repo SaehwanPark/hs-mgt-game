@@ -2292,7 +2292,7 @@ evidence in v0.13.65, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
-use, event taxonomy beyond the current projection, full-campaign save/load/
+use quality, event taxonomy beyond the current projection, full-campaign save/load/
 replay continuity, performance,
 full-campaign raster screenshots, and human visual quality gates remain open.
 
@@ -2313,8 +2313,15 @@ full-campaign raster screenshots, and human visual quality gates remain open.
 - [x] Current supported operational-overlay coverage complete. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
   `src/mcp/regional_world.rs`, and
-  `tests/test_phase11_live_operational_overlays.py`; full-campaign placement
-  and usage remain open.
+  `tests/test_phase11_live_operational_overlays.py`; pixel-level full-campaign
+  placement/use quality remains open.
+- [x] Current 24-month competitive facility placement/use read continuity
+  complete. Evidence: `facility_placement_use_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
+  `src/mcp/regional_world.rs`, and
+  `src/mcp/session.rs: fn regional_world_facility_projection_covers_all_competitive_months`;
+  every monthly and terminal host read preserves the four player facility
+  components, eleven visible capacity metrics, and private-rival absence.
 - [x] Actor-family coverage complete.
 - [x] Event cue coverage complete.
 - [x] Music-state coverage complete.
@@ -2357,8 +2364,8 @@ full-campaign raster screenshots, and human visual quality gates remain open.
 - [x] Current tracked visual/audio asset-registry coverage is 100%. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
   `scripts/validate_assets.py`, and `tests/test_asset_registry.py`; future
-  campaign inventory, placement/use, quality, and screenshot gates remain
-  open.
+  campaign inventory, pixel-level placement/use quality, and screenshot gates
+  remain open.
 - [x] Current supported screenshot-surface contract passes. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
   `tests/test_phase11_campaign_coverage.py`, the deterministic regional SVG
@@ -3661,11 +3668,11 @@ educational/accessibility gates remain open.
   `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
   `tests/test_phase13_1_competitive_campaign_boundary.py`; the current
   host-owned 24-month `competitive-regional-v1` run, current actor-visible
-  board/facility/overlay/event/music surfaces, history/replay/checkpoint/debrief
-  continuity, and written fallbacks are source-bound; the shared
-  `campaign-coverage-v1` envelope remains explicitly limited to stabilization
-  and regional-affiliation. Full-campaign visual/content and human campaign
-  review remain open.
+  board/facility/overlay/event/music surfaces, 24-month facility read
+  continuity, history/replay/checkpoint/debrief continuity, and written
+  fallbacks are source-bound; the shared `campaign-coverage-v1` envelope
+  supports all three launchable campaigns. Full-campaign visual/content and
+  human campaign review remain open.
 - [x] Settings documented. Evidence: `docs/guides/gui-how-to-play.md` and
   `docs/evaluation/phase13.1-player-help-boundary.json`; the existing settings
   panel, browser-local/session-local behavior, and presentation-only boundary
@@ -4099,7 +4106,8 @@ are completed. Human-review gates remain open.
   boundary. A failed optional read is written/recoverable and does not block or
   fabricate a transition.
 - Focused and full technical validation pass; the sole medium-effort review
-  passed with no actionable findings. The PR/merge/cleanup loop remains.
+  passed with no actionable findings. PR #317 merged into `main` at
+  `523d140`, and the temporary branch was deleted locally and remotely.
   Full-campaign visual/content quality,
   structured first-time-user review, accessibility/educational review,
   provenance/legal review, and public-release approval remain open.
@@ -4107,6 +4115,22 @@ are completed. Human-review gates remain open.
   approval claim. Full-campaign visual/content quality, structured first-time
   user review, accessibility/educational review, provenance/legal review, and
   public-release approval remain open.
+
+### v0.13.71 current full-campaign facility placement/use evidence
+
+- `src/mcp/session.rs` now reads the existing host-owned
+  `competitive-regional-world-v1` projection before every month of the
+  24-month competitive campaign and after terminal completion, requiring the
+  four player facility components, eleven visible capacity metrics, and
+  source-bound `PlayerObservation` markers at each read.
+- Public-rival entities continue to expose no private facility detail, and the
+  terminal read retains the 24-transition replay count. No new route, schema,
+  facility simulation, asset, audio file, or browser authority was added.
+- Focused and full technical validation pass; the sole medium-effort review
+  passed with no actionable findings. The PR/merge/cleanup loop remains.
+  Pixel-level placement quality, raster screenshots,
+  structured first-time-user review, accessibility/educational review,
+  provenance/legal review, and public-release approval remain open.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

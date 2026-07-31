@@ -41,6 +41,10 @@ EXPECTED_SOURCE_CONTRACT = {
     "gui/app.mjs",
     "refreshCompetitiveCoverageCompanion",
   ),
+  "competitive_facility_placement_use_scope": (
+    "src/mcp/session.rs",
+    "fn regional_world_facility_projection_covers_all_competitive_months()",
+  ),
   "campaign_gui_boundary_test": (
     "tests/test_gui_campaign_coverage.py",
     "def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
@@ -152,6 +156,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
         "optional_audio_and_written_fallback_are_present": True,
         "competitive_campaign_coverage_envelope_is_host_bound": True,
         "competitive_coverage_companion_preserves_action_rail": True,
+        "competitive_full_campaign_facility_placement_use_is_host_bound": True,
         "full_campaign_visual_content_review": False,
         "human_campaign_comprehension_and_educational_review": False,
       },
@@ -164,7 +169,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
       self.ledger["limits"],
       [
         "This closes the current repository-owned technical competitive-regional campaign boundary only.",
-        "It does not establish full-campaign facility placement/use coverage, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
+        "It does not establish pixel-level full-campaign facility placement/use coverage quality, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
         "The broader Competitive campaign coverage complete roadmap item remains open for product/content review and structured human evaluation.",
       ],
     )
@@ -196,6 +201,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
       "assert_eq!(current.turn, 24);",
       "assert_eq!(history.transition_count, 24);",
       "from_competitive(",
+      "fn regional_world_facility_projection_covers_all_competitive_months()",
     ):
       self.assertIn(marker, session)
     for marker in (

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.71] - 2026-07-31
+
+- Added host-bound evidence that the competitive regional-world facility
+  projection preserves four player facility components and eleven visible
+  capacity metrics through all 24 monthly reads and terminal completion.
+- Kept private rival facility detail unavailable and left pixel-level visual
+  quality, screenshots, human review, and public-release gates open.
+
 ## [0.13.70] - 2026-07-31
 
 - Added a normal-GUI competitive coverage companion: the existing typed host

@@ -4040,3 +4040,69 @@ competitive submissions on the existing catalog/validation/submit sequence.
 No asset, audio file, registry entry, or release binary is added. Existing
 allowlisted audio IDs and written equivalents remain the only presentation
 outputs.
+# Presentation Contract — Full-campaign facility placement/use evidence v0.13.71
+
+## Goal and authorization
+
+Verify that the existing host-owned competitive regional-world projection
+continues to present the player’s visible facility groups and capacity metrics
+through all 24 committed months, without adding simulation or browser
+authority.
+
+## Player questions and consequences
+
+The player question is: “Does the regional board continue to show the facilities
+and capacity signals that are available to me as the campaign advances?” The
+technical contract checks continuity of the visible facility presentation;
+actual strategic usefulness and visual quality remain human-review questions.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Player facility groups | Host `get_regional_world` → `RegionalWorldEntity.facilities` | One read before each committed month and terminal read | Do not derive facilities from true state or client history |
+| Capacity metrics | `PlayerObservation` capacity fields via host `RegionalWorldFacility.metrics` | Eleven visible labels remain present; unavailable values retain host representation | Do not calculate utilization, severity, or future capacity locally |
+| Rival facility detail | Host `RegionalWorldMissing` private-detail boundary | Always unavailable to the player | Do not infer rival facilities from public actions or map layout |
+| Facility visual component | Existing `FACILITY_COMPONENTS` catalog through `component_id` | Known IDs use catalog assets; unknown IDs use the generic fallback | Do not add a client-side facility registry or asset inference |
+
+## Visual, motion, and audio semantics
+
+No new visual or audio behavior is introduced. The existing facility component,
+written label, metric, source, and generic fallback remain the semantic display
+contract. The evidence test does not treat a stable identifier as proof of
+pixel-level placement quality.
+
+## Accessibility and fallbacks
+
+Existing text labels, source/equivalent text, generic facility fallback,
+reduced-motion behavior, mute behavior, and loading recovery remain unchanged.
+An unavailable regional-world read must retain the existing recoverable GUI
+error path; this slice does not broaden that path.
+
+## Authority, history, and replay boundaries
+
+Rust owns facility state, observations, transitions, history, replay, and
+hashes. The browser receives the regional-world projection and renders it. Read
+calls must not advance the session, reveal resolved inputs, or expose private
+rival facilities.
+
+## Asset provenance and release requirements
+
+No asset or audio file is added. Existing facility catalog and registry
+provenance remain the release authority; this evidence does not approve future
+assets or human visual quality.
+
+## Verification and evidence limits
+
+The focused regression must cover all 24 monthly reads, terminal continuity,
+metric/component source markers, no-mutation behavior, and private-rival
+facility exclusion. Automated evidence cannot establish human accessibility,
+visual quality, educational usefulness, legal status, or release readiness.
+
+## Non-goals and open questions
+
+- No new route/schema, facility simulation, utilization model, asset, audio
+  file, screenshot, browser mutation path, or public-release claim.
+- Open: full-campaign raster placement quality, structured first-time-user
+  review, human accessibility/educational review, provenance/legal review, and
+  release approval.

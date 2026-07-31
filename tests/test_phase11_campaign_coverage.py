@@ -231,7 +231,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -390,6 +390,44 @@ console.log(JSON.stringify(resolved));
     fallback = next(entry for entry in self.live["facility_assets"] if entry["id"] == coverage["fallback_id"])
     self.assertIsNone(fallback["source_path"])
     self.assertIsNone(fallback["release_path"])
+
+  def test_facility_placement_use_coverage_is_host_bound_for_the_full_competitive_loop(self):
+    coverage = self.ledger["facility_placement_use_coverage"]
+    self.assertEqual(coverage["status"], "complete-competitive-24-month-host-read")
+    self.assertEqual(coverage["schema"], "competitive-regional-world-v1")
+    self.assertEqual(coverage["host_source"], "src/mcp/regional_world.rs: player_facilities")
+    self.assertEqual(
+      coverage["test_source"],
+      "src/mcp/session.rs: fn regional_world_facility_projection_covers_all_competitive_months",
+    )
+    self.assertEqual(
+      coverage["facility_component_ids"],
+      [
+        "general-hospital-base",
+        "ambulatory-center",
+        "emergency-department",
+        "specialty-center",
+      ],
+    )
+    self.assertEqual(
+      coverage["capacity_metric_labels"],
+      [
+        "Staffed beds",
+        "Outpatient capacity",
+        "Emergency",
+        "ICU",
+        "Obstetrics",
+        "Psychiatric",
+        "Cardiology",
+        "Oncology",
+        "Infusion",
+        "Neurology",
+        "ASC",
+      ],
+    )
+    self.assertTrue(coverage["evidence"])
+    self.assertTrue(any("24" in item for item in coverage["evidence"]))
+    self.assertTrue(any("private" in item.lower() for item in coverage["evidence"]))
 
   def test_event_cue_catalog_matches_visible_projection_and_fallback(self):
     coverage = self.ledger["event_cue_coverage"]
@@ -700,6 +738,7 @@ console.log(JSON.stringify(resolved));
     expected = {
       "Facility asset coverage complete.": "x",
       "Current supported operational-overlay coverage complete. Evidence:": "x",
+      "Current 24-month competitive facility placement/use read continuity": "x",
       "Actor-family coverage complete.": "x",
       "Event cue coverage complete.": "x",
       "Music-state coverage complete.": "x",

@@ -2,7 +2,7 @@
   "schema_version": "competitive-campaign-coverage-ledger-v1",
   "status": "bounded-technical-ledger",
   "campaign": "competitive-regional-v1",
-  "scope": "Committed presentation catalogs, bounded first-month continuity, the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint bindings, and the current supported screenshot surface; not full-campaign raster or screenshot completion.",
+  "scope": "Committed presentation catalogs, bounded first-month continuity, 24-month competitive facility placement/use read continuity, the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint bindings, and the current supported screenshot surface; not full-campaign raster or screenshot completion.",
   "catalogs": {
     "facilities": {
       "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
@@ -146,6 +146,41 @@
       "Every file-backed catalog entry declares a source SVG and release SVG.",
       "Every file-backed catalog entry maps exactly once to an approved visual registry entry.",
       "Registry and release-manifest/hash validators remain required release gates."
+    ]
+  },
+  "facility_placement_use_coverage": {
+    "status": "complete-competitive-24-month-host-read",
+    "schema": "competitive-regional-world-v1",
+    "host_source": "src/mcp/regional_world.rs: player_facilities",
+    "test_source": "src/mcp/session.rs: fn regional_world_facility_projection_covers_all_competitive_months",
+    "facility_component_ids": [
+      "general-hospital-base",
+      "ambulatory-center",
+      "emergency-department",
+      "specialty-center"
+    ],
+    "capacity_metric_labels": [
+      "Staffed beds",
+      "Outpatient capacity",
+      "Emergency",
+      "ICU",
+      "Obstetrics",
+      "Psychiatric",
+      "Cardiology",
+      "Oncology",
+      "Infusion",
+      "Neurology",
+      "ASC"
+    ],
+    "source_boundary": "Every player facility group is sourced from PlayerObservation capacity fields; public-rival entities expose no private facilities.",
+    "evidence": [
+      "The host regression reads the regional-world projection before every one of the 24 competitive months and after terminal completion.",
+      "Every monthly read retains the four player facility components and all eleven capacity metric labels with the host source marker.",
+      "The same regression requires public-rival entities to expose no private facilities and terminal replay metadata to report 24 transitions."
+    ],
+    "limits": [
+      "This is host-read continuity evidence for visible player capacity metrics, not a pixel-level placement or utilization-quality claim.",
+      "It does not establish future asset inventory, full-campaign raster screenshots, human visual quality, accessibility, educational usefulness, or public release."
     ]
   },
   "asset_registry_coverage": {
@@ -491,7 +526,7 @@
     ],
     "boundary": "The host owns competitive observation, true state, history, replay, checkpoint, debrief, and mutation; the browser receives the typed coverage projection and does not receive private rival fields, resolved inputs, effect queues, or transition authority.",
     "limits": [
-      "This is a typed technical coverage read, not full-campaign facility placement/use coverage or campaign-specific visual/audio quality approval.",
+      "This is a typed technical coverage read, not pixel-level facility placement/use quality or campaign-specific visual/audio quality approval.",
       "The coverage read does not replace the competitive validated action rail and does not establish screenshots, human review, device/browser certification, provenance/legal approval, or public release."
     ],
     "evidence": [
@@ -645,7 +680,7 @@
     "music_state_unknown": null
   },
   "open_limits": [
-    "Full competitive-campaign facility placement and usage coverage is not established by this bounded ledger; the facility asset catalog and release registry are complete, while live bindings cover only directly supported current player conditions.",
+    "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
     "Durable competitive, stabilization, and regional-affiliation checkpoint recovery now includes host autosave after accepted GUI decisions; browser serialization and full-campaign save/load/replay continuity remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",

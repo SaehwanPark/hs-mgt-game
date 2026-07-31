@@ -7162,9 +7162,10 @@ Deferred / Non-Goals:
 
 ### Visual/audio competitive coverage companion surface (v0.13.70)
 
-Status: Complete for the bounded normal-GUI companion read; the sole review is
-approved, while PR/merge cleanup, full-campaign visual/content quality, human
-review, and release gates remain open.
+Status: Complete for the bounded normal-GUI companion read; the sole review,
+PR/merge cleanup, and final evidence synchronization are complete, while
+full-campaign visual/content quality, human review, and release gates remain
+open.
 
 Done:
 
@@ -7179,14 +7180,41 @@ Done:
 
 Not Yet Done:
 
-- Complete PR handoff/merge, branch cleanup, and final evidence synchronization
-  for this slice.
+- Broader full-campaign visual/content quality, human review, and release gates
+  remain open and are intentionally tracked outside this bounded slice.
 
 Deferred / Non-Goals:
 
 - No new route/schema, simulation, action protocol, persistence, asset/audio
   file, screenshot, human review, device certification, provenance/legal
   approval, or public-release claim.
+
+### Visual/audio full-campaign facility placement/use evidence (v0.13.71)
+
+Status: Implementation, full validation, and the sole review are complete on
+the bounded 24-month host-read continuity slice; the reviewer found no
+actionable issues. PR/merge cleanup remains.
+
+Done:
+
+- The target and actor-visible source contract are recorded in
+  `_workspace/149_implementation_plan_visual-audio-phase11-full-campaign-facility-use-v0.13.71.md`
+  and the current request/contract/QA/handoff records.
+- The existing facility catalog and `competitive-regional-world-v1` host read
+  are the only presentation sources; no new route/schema or simulation is
+  authorized.
+- The host regression covers every monthly and terminal read, all four player
+  facility components, eleven capacity metrics, source markers, and private-
+  rival facility absence; full Rust/Python/repository validation passes.
+
+Not Yet Done:
+
+- Merge, clean the branch, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No pixel-level placement-quality, raster screenshot, human accessibility or
+  educational, provenance/legal, or public-release claim.
 
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
