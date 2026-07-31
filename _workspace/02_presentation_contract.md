@@ -4982,3 +4982,33 @@ preferences, assets, audio, or release outputs.
 unbounded record fields, unsafe identity/media/location/state fields, and
 non-pending human decision fields. Human evaluation, accessibility,
 educational, audio, revision, expansion, and release decisions remain open.
+
+# Presentation Contract — Debrief visual evidence-intake packet v0.13.91
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized review of the
+three terminal debrief visual cases. This packet captures no human finding and
+does not change the terminal presentation contract.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Terminal cases | `docs/evaluation/phase13.2-debrief-visual-review-packet.json` | Preserve the three corrected campaign cases and five questions | Do not infer visual quality or human completion from raster/transcript checks |
+| Presentation boundary | `docs/evaluation/phase13.2-debrief-visual-boundary.json` | Preserve host authority, written history/debrief, replay, effects, and fallbacks | Do not infer hidden causal graphs or policy validity |
+| Intake validator | `scripts/validate_debrief_visual_evidence_intake.py` | Reject source drift, private state, media, and premature decisions | Do not treat validator success as human review |
+
+## Accessibility, recovery, and authority
+
+The intake preserves the existing written-equivalent, Large text, reduced
+motion, keyboard, recovery, audio-off, mute, and cues-only questions. It adds
+no screenshots, recordings, browser/session locations, private state, or
+terminal authority; the host-owned debrief renderer and evaluation-only
+artifacts remain unchanged.
+
+## Verification
+
+`tests/test_phase13_2_debrief_visual_evidence_intake.py` must fail closed on
+case/question/source drift, unknown envelope fields, unbounded ratings,
+identity/media/private-state capture, and non-pending human/release fields.

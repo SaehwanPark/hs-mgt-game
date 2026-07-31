@@ -7531,6 +7531,26 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio debrief visual evidence-intake packet (v0.13.91)
+
+The Phase 13.2 packet makes the open `Debrief visuals reviewed` item
+operationally ready for authorized human review of the competitive,
+stabilization, and regional-affiliation terminal debrief cases. The intake
+preserves the existing review questions and technical source boundary, accepts
+only bounded case/reviewer/status/rating/accommodation/finding fields, and
+starts with zero records.
+
+The validator rejects unknown envelope fields, redirected sources, hidden or
+private state, unbounded notes/media, source vocabulary drift, boolean/float
+rating coercion, and premature human or release decisions. It does not claim
+pixel quality, accessibility, educational, classroom, audio-listening,
+legal/provenance, or public-release results.
+
+The target and validator are recorded in
+`_workspace/169_implementation_plan_visual-audio-phase13-2-debrief-visual-evidence-intake-v0.13.91.md`,
+`docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json`, and
+`scripts/validate_debrief_visual_evidence_intake.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.91] - 2026-07-31
+
+- Added a strict, empty evidence-intake packet for authorized human review of
+  the three terminal debrief visual cases.
+- Kept visual, accessibility, educational, classroom, audio-listening, and
+  public-release decisions pending; no human findings or new media were added.
+
 ## [0.13.90] - 2026-07-31
 
 - Added a privacy-bounded, source-bound pilot evidence-intake packet and

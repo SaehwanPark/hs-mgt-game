@@ -3931,6 +3931,38 @@ asset, security, and release tests; full Rust/Python and repository validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
 
+# Request Summary — Debrief visual evidence-intake packet v0.13.91
+
+## Authorized outcome
+
+Make the open `Debrief visuals reviewed` item operationally ready for
+authorized human review without recording human findings or implying release
+approval.
+
+## Target slice
+
+- Preserve the three source-defined terminal debrief cases and five review
+  questions in an empty intake packet.
+- Add a standard-library validator and focused tests for case IDs, reviewer
+  categories, review status, bounded ratings, accommodations, findings, source
+  parity, and privacy/release boundaries.
+- Keep human visual, accessibility, educational, classroom, audio-listening,
+  provenance/legal, revision, and public-release decisions pending.
+
+## Non-goals
+
+- No human review, participant identity, raw notes/transcripts, new screenshots,
+  recordings, browser URLs, session IDs, or private game state.
+- No terminal renderer, raster, transcript, host, simulation, asset, audio,
+  browser-policy, persistence, or release-manifest change.
+
+## Validation target
+
+Focused debrief intake validator and source-parity tests; existing debrief
+visual packet, pilot-preparation, asset, release, full Python/Rust,
+formatting/clippy, and documentation checks; exactly one medium-effort review;
+authorized PR/merge and temporary-branch cleanup.
+
 # Request Summary — Cross-browser/device review packet v0.13.88
 
 ## Authorized outcome

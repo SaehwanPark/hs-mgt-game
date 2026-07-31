@@ -508,3 +508,34 @@ required before closing the related roadmap gates.
   — focused packet and record-shape validation.
 - `python3 scripts/validate_pilot_evidence_intake.py` — empty pending intake
   contract.
+
+# Domain QA — Phase 13.2 debrief visual evidence-intake packet v0.13.91
+
+## Status
+
+`pass` for the technical intake boundary only. The packet preserves the three
+terminal cases and five source review questions, but contains no human review
+records or quality conclusion.
+
+## Findings
+
+- Case IDs, reviewer categories, finding categories, and review questions are
+  source-bound to the existing debrief packet and evaluation protocol.
+- Records are limited to case/status/rating/accommodation/finding fields;
+  identity, raw notes/media, browser/session locations, and private state are
+  excluded.
+- Exact envelopes, source paths, numeric types, and pending decisions fail
+  closed before any human evidence can be considered.
+
+## Required fixes
+
+None for this bounded preparation packet. Authorized human visual,
+accessibility, educational, classroom, audio-listening, revision, and release
+evidence remain required before closing the roadmap item.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_debrief_visual_evidence_intake`
+  — focused intake validation.
+- `python3 scripts/validate_debrief_visual_evidence_intake.py` — empty pending
+  intake contract.
