@@ -1,0 +1,135 @@
+{
+  "schema_version": "phase13.2-educational-usability-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-review",
+  "roadmap_item": "Educational usability reviewed",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for authorized educational and classroom usability review without recording human findings in this preparation packet.",
+  "review_questions": [
+    "Can a first-time player identify how to launch or load a session and what to do next without implementation knowledge?",
+    "Can a first-time player complete the seven competitive first-month handoffs while distinguishing draft, validation, submission, and committed resolution?",
+    "Can a player recover from rejection or an unavailable read without losing work, inventing an outcome, or needing hidden-state instruction?",
+    "Can a player recognize the five campaign-coverage orientation stages and distinguish a host-shaped decision from a local prediction?",
+    "Do text, keyboard, reduced-motion, audio-off, cues-only, Large text, skip, and review accommodations preserve the same visible meaning?",
+    "Can a reviewer distinguish early, middle, and terminal facility and operational-pressure states without relying on color, motion, or audio alone?",
+    "Can a reviewer trace a visible committed consequence across board, facility, overlay, event, resolution, history, and debrief surfaces without inferring hidden state or causal certainty?",
+    "Can a reviewer distinguish host-supplied public rival observations and uncertainty from private rival intent, resolved inputs, or future outcomes?",
+    "Can a reviewer use history, replay, and checkpoint controls to reconstruct visible campaign continuity without mistaking review for mutation?",
+    "Do written equivalents, audio-off or cues-only, reduced motion, Large text, keyboard, skip/review, and retry preserve decision-relevant meaning across the full campaign?",
+    "Does the current competitive campaign provide enough visual/audio comprehension and trust to justify expansion review, or should the scope remain bounded?",
+    "Can a reviewer distinguish committed campaign history from the retrospective debrief without relying on color, motion, or audio?",
+    "Can a reviewer reconstruct the visible consequence sequence from written history, debrief, and direct effects without inferring hidden state or causal certainty?",
+    "Can a reviewer locate the current stage, terminal status, and absence of further decision controls at the planned 1024x768 baseline?",
+    "Do Large text, reduced motion, keyboard navigation, recovery guidance, audio-off, mute, and cues-only preserve decision-relevant meaning?",
+    "Are actor-visible observations, uncertainty, written fallbacks, and provenance boundaries understandable without exposing private or instructor-only state?"
+  ],
+  "source_contract": {
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json: \"status\": \"ready-for-human-evaluation\"",
+    "first_session_review_packet": "docs/evaluation/phase13.1-first-session-review-packet.json: \"educational_usability_review_complete\": false",
+    "competitive_campaign_review_packet": "docs/evaluation/phase13.1-competitive-campaign-review-packet.json: \"educational_and_classroom_review_complete\": false",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "pilot_preparation": "docs/evaluation/phase13.2-pilot-preparation-boundary.json: \"feedback\": \"Tasks, rating dimensions, response states, finding categories, and pending decision fields are structured in a checked-in instrument.\"",
+    "pilot_evidence_intake": "docs/evaluation/phase13.2-pilot-evidence-intake-packet.json: \"schema_version\": \"phase13.2-pilot-evidence-intake-v1\"",
+    "debrief_visual_evidence_intake": "docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json: \"schema_version\": \"phase13.2-debrief-visual-evidence-intake-v1\"",
+    "revision_decision_evidence_intake": "docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json: \"schema_version\": \"phase13.2-revision-decision-evidence-intake-v1\""
+  },
+  "review_boundary": {
+    "technical_intake_complete": true,
+    "source_parity_complete": true,
+    "human_results_present": false,
+    "educational_usability_review_complete": false,
+    "classroom_review_complete": false,
+    "accessibility_review_complete": false,
+    "audio_listening_review_complete": false,
+    "revision_decisions_present": false,
+    "expansion_approval": false,
+    "public_release_approval": false
+  },
+  "intake_boundary": {
+    "record_count": 0,
+    "reviewer_identity_collected": false,
+    "raw_notes_collected": false,
+    "raw_media_collected": false,
+    "raw_transcripts_collected": false,
+    "browser_location_collected": false,
+    "private_game_state_collected": false,
+    "decision_status": "pending-authorized-human-review",
+    "go_no_go": null
+  },
+  "review_contract": {
+    "record_fields": [
+      "review_id",
+      "task_id",
+      "reviewer_category",
+      "review_status",
+      "ratings",
+      "accommodations",
+      "finding_categories"
+    ],
+    "task_ids": [
+      "first-session-start-to-resolution",
+      "recognize-three-systems",
+      "recognize-facility-pressure-source",
+      "trace-visible-consequence",
+      "reconstruct-first-month",
+      "keyboard-large-text-reduced-motion",
+      "audio-preference-and-equivalent"
+    ],
+    "reviewer_categories": [
+      "project-owner-or-contributor",
+      "strategy-game-player",
+      "health-policy-or-management-expert",
+      "accessibility-oriented-reviewer",
+      "first-time-user"
+    ],
+    "review_statuses": ["reviewed", "skipped", "not-observed"],
+    "rating_dimensions": [
+      "institutional-recognition",
+      "facility-recognition",
+      "map-legibility",
+      "consequence-comprehension",
+      "information-density",
+      "cognitive-load",
+      "animation-usefulness",
+      "audio-usefulness",
+      "audio-fatigue",
+      "perceived-game-identity",
+      "accessibility",
+      "trust-in-information-boundaries"
+    ],
+    "rating_values": [1, 2, 3, 4, 5, "not-observed"],
+    "accommodation_categories": [
+      "keyboard-navigation",
+      "large-text",
+      "reduced-motion",
+      "audio-off",
+      "cues-only",
+      "reduced-notifications",
+      "written-equivalent",
+      "skip-review",
+      "extra-time",
+      "no-accommodation-observed"
+    ],
+    "finding_categories": ["defect", "preference", "scope-expansion"],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-authorized-human-review",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no human findings and does not perform or represent educational, classroom, accessibility, or audio-listening review.",
+    "The bounded record vocabulary does not establish comprehension, learning, classroom effectiveness, universal accessibility, audio usefulness, legal/provenance clearance, or policy validity.",
+    "Technical source parity and an empty intake are preparation evidence only; they do not substitute for authorized participant review or a decision.",
+    "Human review, revision decisions, expansion approval, legal/provenance clearance, and public-release approval remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_2_educational_usability_evidence_intake.py"
+}

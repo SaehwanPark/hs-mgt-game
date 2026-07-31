@@ -3652,3 +3652,17 @@ separate gates.
 - Prevention: require gate-level human evidence and explicit expansion
   authorization before changing scope; never infer campaign expansion from
   automated coverage or an empty intake.
+# Educational Evidence Must Stay Separate From Educational Claims
+
+- Context: the project has canonical evaluation tasks, pilot/debrief packets,
+  and a roadmap item for educational usability, but no authorized participant
+  results.
+- Risk: copying review questions into an unbounded intake or treating technical
+  parity as learning evidence could capture private material or falsely close
+  the educational/classroom gate.
+- Resolution: derive a zero-record intake from existing task, reviewer,
+  rating, accommodation, finding, and privacy vocabularies; use deterministic
+  review IDs; invoke upstream validators; and keep all human decisions null.
+- Prevention: keep technical preparation, participant evidence, educational
+  interpretation, revision decisions, expansion approval, and public release
+  as separate gates; never infer educational effectiveness from automation.

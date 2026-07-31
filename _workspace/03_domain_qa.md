@@ -638,3 +638,36 @@ roadmap item.
   — focused source, gate, campaign, and record-boundary validation.
 - `python3 scripts/validate_expansion_decision_evidence_intake.py` — empty,
   source-bound, pending intake contract.
+# Domain QA — Phase 13.2 educational-usability evidence-intake packet v0.13.95
+
+## Status
+
+`pass` for the repository-owned technical intake boundary only. The packet
+contains no participant results, educational conclusion, classroom readiness
+decision, accessibility result, audio finding, revision decision, expansion
+outcome, legal/provenance conclusion, or public-release approval.
+
+## Findings
+
+- The seven evaluation tasks, reviewer categories, rating dimensions,
+  accommodations, finding categories, and forbidden fields are source-bound;
+  the pilot, debrief, and revision sources remain empty and pending.
+- Records are limited to deterministic task/category IDs, review status,
+  bounded ratings, accommodation categories, and finding categories. Free
+  text, identity, private state, browser/session locations, and raw media are
+  excluded.
+- Source validators and nested first-session/competitive pending boundaries
+  keep technical preparation separate from authorized educational evidence.
+
+## Required fixes
+
+None for this bounded preparation packet. Obtain authorized educational,
+classroom, accessibility, audio, revision, provenance/legal, and public-release
+evidence before closing the roadmap item.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_educational_usability_evidence_intake`
+  — focused packet, source-parity, and record-boundary validation.
+- `python3 scripts/validate_educational_usability_evidence_intake.py` — empty,
+  source-bound, pending intake contract.

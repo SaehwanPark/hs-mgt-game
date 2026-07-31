@@ -4154,3 +4154,36 @@ Focused intake validator and source-parity tests; existing pilot-preparation,
 first-session, privacy, asset, release, and full Python/Rust validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
+# Request Summary — Educational-usability evidence-intake packet v0.13.95
+
+## Authorized outcome
+
+Make the open educational-usability review item operationally ready for an
+authorized educational and classroom review without recording participant
+results or claiming that the review occurred.
+
+## Target slice
+
+- Bind the seven evaluation-protocol tasks, reviewer categories, rating
+  dimensions, accommodations, finding categories, and privacy boundary to
+  canonical sources.
+- Define deterministic review IDs and bounded status/rating/category fields;
+  keep records empty and all human decisions pending.
+- Invoke existing pilot, debrief, and revision source validators so this
+  intake cannot drift from its pending upstream boundaries.
+
+## Non-goals
+
+- No educational, classroom, first-time-user, accessibility, audio, visual,
+  provenance, legal, revision, expansion, or public-release finding is entered.
+- No runtime, GUI, simulation, asset, audio, browser, persistence, or release
+  behavior changes.
+- No identity, contact details, private state, browser/session locations, raw
+  notes, screenshots, recordings, or unrestricted text is stored.
+
+## Validation target
+
+Focused educational-usability intake validator and source-parity tests; full
+Python/Rust, asset/release, formatting/clippy, and documentation checks;
+exactly one medium-effort review; authorized PR/merge and temporary-branch
+cleanup.

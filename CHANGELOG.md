@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.95] - 2026-07-31
+
+- Added a strict, empty, source-bound educational-usability evidence-intake
+  packet covering the canonical evaluation tasks, reviewer categories, ratings,
+  accommodations, and finding categories.
+- Kept educational, classroom, accessibility, audio, revision, expansion,
+  provenance/legal, and public-release decisions pending; no participant data
+  or runtime behavior was changed.
+
 ## [0.13.94] - 2026-07-31
 
 - Added a strict, empty, source-bound expansion-decision evidence-intake
