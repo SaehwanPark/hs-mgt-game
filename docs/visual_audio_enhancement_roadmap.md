@@ -3834,6 +3834,12 @@ educational/accessibility gates remain open.
   Chromium matrix and emulated low-power proxy are source-bound while
   Firefox/WebKit, real hardware, and human accessibility/usability remain
   pending.
+- [x] Current Firefox host-backed runtime-smoke packet prepared. Evidence:
+  `docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json`,
+  `scripts/check_firefox_runtime_smoke.py`, and
+  `tests/test_phase13_1_firefox_runtime_smoke_packet.py`; Firefox 147.0.2
+  shell/host-start observations are recorded while full engine and WebKit
+  certification remain open.
 
 ### v0.13.20 current technical-release evidence
 
@@ -4502,6 +4508,20 @@ are completed. Human-review gates remain open.
 - This closes only the current repository-owned technical review packet.
   Firefox/WebKit runtime checks, real hardware and performance measurements,
   lived accessibility/usability, and public-release certification remain open.
+
+### v0.13.89 Firefox host-backed runtime-smoke packet
+
+- `scripts/check_firefox_runtime_smoke.py` uses Firefox Marionette against an
+  already-running loopback host and records document readiness, the session
+  start control, and one host-backed competitive session start without writing
+  project state.
+- `docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json` records the
+  observed Firefox 147.0.2 result and the Safari/WebKit remote-automation
+  permission blocker; `tests/test_phase13_1_firefox_runtime_smoke_packet.py`
+  binds probe source markers, exact observations, and release limits.
+- This is a bounded runtime smoke only. Full Firefox campaign/audio
+  certification, Safari/WebKit runtime evidence, real hardware, human review,
+  and public-release approval remain open.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

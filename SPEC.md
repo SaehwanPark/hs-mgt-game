@@ -7531,6 +7531,25 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio Firefox host-backed runtime-smoke packet (v0.13.89)
+
+The Phase 13.1 packet records an observed Firefox 147.0.2 headless Marionette
+smoke against the loopback GUI. The probe verifies document readiness, the
+session-start control, and one real host-backed competitive session start;
+the probe is dependency-free, uses a temporary Firefox profile, and does not
+write project state.
+
+Safari/WebKit automation remains blocked by the local Safari remote-automation
+permission, so no WebKit result or support promotion is recorded. The packet
+does not certify full Firefox campaign behavior, audio decoding, real hardware,
+lived accessibility/usability, legal readiness, or public release.
+
+The target and actor-visible contract is recorded in
+`_workspace/167_implementation_plan_visual-audio-phase13-1-firefox-runtime-smoke-packet-v0.13.89.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio first-session participant review packet (v0.13.84)
 
 The Phase 13.1 packet makes the open first-session workflow review actionable

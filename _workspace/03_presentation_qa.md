@@ -5611,3 +5611,39 @@ support or release promotion.
 `tests/test_phase13_1_cross_browser_device_review_packet.py` checks exact
 policy parity, checker results, source markers, target queue, measurements,
 fallbacks, claim limits, and release exclusion.
+
+# Presentation QA — Firefox host-backed runtime-smoke packet v0.13.89
+
+## Status
+
+Pass for the bounded Firefox 147.0.2 headless host-backed smoke. Full Firefox
+engine/campaign/audio certification and Safari/WebKit runtime evidence remain
+open.
+
+## Reviewed Inputs and Authorization
+
+- Probe: `scripts/check_firefox_runtime_smoke.py`.
+- Packet: `docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json`.
+- Existing browser policy, GUI guide, loopback host, and technical coverage.
+- SafariDriver permission response; no WebKit result was recorded.
+
+## Findings
+
+- Firefox reached `readyState=complete`, exposed the session-start control,
+  and returned `competitive regional session loaded: session-1` after the
+  host-backed click.
+- The probe uses a temporary profile and leaves the canonical browser policy
+  unchanged; the opaque smoke session is not participant or release evidence.
+- Safari/WebKit remote automation is blocked by local permission settings, so
+  it remains not-certified.
+
+## Required fixes
+
+None for this bounded smoke packet. Obtain authorized full Firefox/WebKit,
+real-device, performance, accessibility, and usability evidence before any
+support or release promotion.
+
+## Verification evidence
+
+`tests/test_phase13_1_firefox_runtime_smoke_packet.py` checks exact observed
+fields, probe source markers, policy status, Safari blocker, and release limits.

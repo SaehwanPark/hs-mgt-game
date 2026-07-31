@@ -3566,3 +3566,17 @@ separate gates.
   runtime certification, hardware measurements, human accessibility/usability,
   and public-release approval; never promote an engine or device claim from a
   neighboring test.
+
+# Runtime Smoke Must Bind the Host, Not Only the Shell
+
+- Context: a Firefox screenshot proved that the static GUI shell rendered, but
+  the meaningful browser boundary also includes the host adapter and session
+  start.
+- Risk: shell readiness could be mistaken for a working host-backed GUI or for
+  full campaign/browser certification.
+- Resolution: use Firefox Marionette to load the loopback page, inspect the
+  readiness/start control, click the real start control, and record the host
+  status and opaque session ID while keeping Safari/WebKit permission failure
+  explicit.
+- Prevention: label shell smoke, host-backed smoke, full engine coverage,
+  device performance, human review, and release approval as separate gates.

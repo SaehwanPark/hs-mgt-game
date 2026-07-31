@@ -2797,3 +2797,37 @@ detailed checker statuses were not fully bound. The packet and validator now
 mirror the complete capability/boundary records and compare every status to
 the live checker report; the final recheck found no actionable issues. No
 second reviewer was used.
+
+# Final Handoff — Firefox host-backed runtime-smoke packet v0.13.89
+
+## Status
+
+The v0.13.89 runtime-smoke packet is implemented on the temporary feature
+branch. Firefox 147.0.2 headless Marionette loaded the loopback GUI, reached
+document readiness, exposed the start control, and returned a host-backed
+competitive session status after a real click. Safari/WebKit automation is
+permission-blocked and remains not-certified.
+
+## Evidence
+
+- Probe: `scripts/check_firefox_runtime_smoke.py`.
+- Packet: `docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json`.
+- Test: `tests/test_phase13_1_firefox_runtime_smoke_packet.py`.
+- Plan: `_workspace/167_implementation_plan_visual-audio-phase13-1-firefox-runtime-smoke-packet-v0.13.89.md`.
+
+## Limits
+
+No browser-policy promotion, full Firefox campaign/audio certification,
+Safari/WebKit result, real-device measurement, human accessibility/usability
+finding, legal conclusion, or public-release approval is recorded. No runtime
+or simulation code, asset, audio, screenshot, or release artifact is added.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed by Russell. The reviewer
+identified two medium probe-boundary issues and two low evidence-boundary
+issues across the rechecks: observation/capability validation, literal
+loopback URL enforcement, stale Firefox policy wording, and stale next-evidence
+wording. The probe, packet, policy, and cross-browser evidence record now bind
+those boundaries; the final recheck found no remaining actionable issues. No
+second reviewer was used.

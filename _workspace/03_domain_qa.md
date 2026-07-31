@@ -446,3 +446,32 @@ release evidence is required before changing the support boundary.
   — focused packet validation target.
 - Existing browser compatibility, device-performance, technical-coverage,
   asset, security, release, and full Python/Rust tests remain authoritative.
+
+# Domain QA — Phase 13.1 Firefox host-backed runtime-smoke packet v0.13.89
+
+## Status
+
+`pass` for one observed Firefox 147.0.2 headless shell and host-start smoke
+only. Full browser/campaign/audio, WebKit, hardware, human, and public-release
+decisions are not implied.
+
+## Findings
+
+- The Marionette probe binds a complete document, a real session-start click,
+  and the host-returned opaque session ID/status.
+- The canonical browser policy remains unchanged; the one smoke result does
+  not promote Firefox support or certify the complete engine matrix.
+- Safari/WebKit automation remains explicitly blocked by the remote-automation
+  permission, with no inferred runtime result.
+
+## Required fixes
+
+None for this bounded smoke packet. Full engine, device, human, and release
+evidence remains required before a support decision.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_firefox_runtime_smoke_packet`
+  — focused packet validation target.
+- Existing browser/device/technical-coverage and full Python/Rust tests remain
+  authoritative.
