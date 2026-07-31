@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.73] - 2026-07-31
+
+- Added host-bound stabilization checkpoint continuity evidence: save after
+  stage 2, restore in a fresh host, continue through stage 5, and compare
+  history/replay plus terminal campaign-coverage data.
+- Kept regional-affiliation continuation, browser serialization, screenshots,
+  human review, and public-release gates open.
+
 ## [0.13.72] - 2026-07-31
 
 - Added host-bound full-campaign checkpoint continuity evidence: save a

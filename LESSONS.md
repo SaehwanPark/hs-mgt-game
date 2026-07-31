@@ -3357,3 +3357,12 @@ separate gates.
 - Prevention: checkpoint mid-campaign, continue original and restored hosts to
   the same terminal turn, compare immutable hashes and actor-visible envelopes,
   and clean only the matching recovered checkpoint.
+# Checkpoint Each Campaign at Its Own Durable Boundary
+
+- Context: competitive continuity was proven at month 12, but stabilization
+  still had only a one-stage restore/next-transition regression.
+- Risk: using one campaign’s checkpoint depth as evidence for another can miss
+  stage-specific terminal/debrief divergence.
+- Prevention: choose a meaningful mid-stage checkpoint for each campaign,
+  continue original and restored hosts to that campaign’s endpoint, compare
+  actor-visible terminal reads, and clean only the matching checkpoint.

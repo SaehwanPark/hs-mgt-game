@@ -7219,9 +7219,9 @@ Deferred / Non-Goals:
 
 ### Visual/audio full-campaign checkpoint/replay continuity (v0.13.72)
 
-Status: Implementation, full validation, and the sole review are complete on a
-bounded month-12 host checkpoint continuation slice; the reviewer found no
-actionable issues. PR/merge cleanup remains.
+Status: Complete for the bounded month-12 host checkpoint continuation slice;
+the reviewer found no actionable issues, PR #319 merged into `main` at
+`892af6e`, and the temporary branch was deleted locally and remotely.
 
 Done:
 
@@ -7237,12 +7237,49 @@ Done:
 
 Not Yet Done:
 
-- Merge, clean the branch, and verify `main`.
+- Broader full-campaign visual/content quality, human review, and release gates
+  remain open.
 
 Deferred / Non-Goals:
 
 - No browser serialization, cross-campaign durable continuity, screenshot,
   human accessibility/educational, provenance/legal, or public-release claim.
+
+### Visual/audio full stabilization checkpoint continuity (v0.13.73)
+
+Status: Implementation, full automated validation, and the sole review are
+complete for the bounded stage-2 host checkpoint continuation target. The
+reviewer found one low-severity evidence-list omission; the amended ledger and
+contract include `competitive-history-v1`, and the same reviewer approved with
+no actionable findings. PR/merge cleanup and final evidence synchronization
+remain.
+
+Done:
+
+- Added the target and actor-visible persistence contract in
+  `_workspace/151_implementation_plan_visual-audio-phase11-full-stabilization-checkpoint-continuity-v0.13.73.md`
+  and the current request/contract/QA/handoff records.
+- Added a host regression that saves `stabilization-v1` after stage 2, loads it
+  in a fresh store, compares deterministic continuation through stage 5, and
+  requires equal history, replay, and terminal campaign-coverage envelopes.
+- Recorded the bounded result in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and its contract
+  test while preserving the opaque browser session-ID boundary.
+- Full validation passes: 369 Rust tests, 782 Python tests, Clippy, formatting,
+  release metadata, documentation links, asset/security/generation/credits,
+  device/offline/browser/audio/raster/loading/visual-audio/asset-budget, CLI
+  smoke, Node syntax, and diff checks.
+
+Not Yet Done:
+
+- Merge the PR, delete the temporary branch locally/remotely, verify `main`,
+  and synchronize final evidence.
+
+Deferred / Non-Goals:
+
+- No new route/schema, browser serialization, simulation rule, asset/audio
+  file, screenshot, human review, provenance/legal approval, or public-release
+  claim; regional-affiliation continuation remains a later bounded slice.
 
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 

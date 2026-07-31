@@ -2271,7 +2271,8 @@ the next unmet roadmap slice.
 
 Implementation, full validation, and exactly one medium-effort review are
 complete on `feat/full-campaign-checkpoint-continuity-v0.13.72`; the reviewer
-found no actionable issues. PR handoff, merge, and branch cleanup remain.
+found no actionable issues. PR #319 merged into `main` at `892af6e`, and the
+temporary branch was deleted locally and remotely.
 
 ## Target result
 
@@ -2284,5 +2285,35 @@ found no actionable issues. PR handoff, merge, and branch cleanup remain.
 
 ## Remaining work
 
-Merge the PR, clean both temporary branches, verify clean `main`, and select
-the next unmet roadmap slice.
+Broader full-campaign visual/content quality, human review, and release gates
+remain open; the next bounded slice is tracked separately.
+# Final Handoff — Full stabilization checkpoint continuity v0.13.73
+
+## Status
+
+Implementation, full automated validation, and the sole medium-effort review
+are complete on `feat/full-stabilization-checkpoint-continuity-v0.13.73`.
+The reviewer found one low-severity evidence-list omission; the amended ledger
+and contract now include `competitive-history-v1`, and the same reviewer
+approved with no actionable findings. PR handoff, merge, branch cleanup, and
+final evidence synchronization remain.
+
+## Target result
+
+- Restore `stabilization-v1` after stage 2 and continue through stage 5.
+- Prove parity for replay/history and terminal campaign-coverage data.
+- Preserve opaque-session storage and host ownership of persistence and
+  transition authority.
+
+## Remaining work
+
+Merge the PR, clean the temporary branch locally/remotely, verify clean
+`main`, and select the next unmet roadmap slice.
+
+## Verification
+
+- 369 Rust tests and 782 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device/offline/browser/audio/raster/
+  loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
+  pass.

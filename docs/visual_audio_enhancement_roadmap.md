@@ -2289,6 +2289,9 @@ current explicit durable stabilization host-checkpoint recovery evidence in
 v0.13.64, and
 current explicit durable regional-affiliation host-checkpoint recovery
 evidence in v0.13.65, and
+current competitive full-campaign host checkpoint continuation evidence in
+v0.13.72, and current stabilization full-campaign host checkpoint
+continuation evidence in v0.13.73, and
 history-view handoff evidence completed in v0.13.9 after the
 bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
@@ -2348,6 +2351,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `src/mcp/session.rs: fn competitive_durable_checkpoint_covers_full_campaign_continuation`;
   browser serialization, cross-campaign durable continuity, and broader
   save/load/replay evidence remain open.
+- [x] Current full stabilization host checkpoint continuation covered.
+  Evidence: `full_stabilization_checkpoint_continuity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn durable_stabilization_checkpoint_covers_full_campaign_continuation`;
+  regional-affiliation continuation, browser serialization, cross-campaign
+  durable continuity, and broader save/load/replay evidence remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4144,7 +4153,7 @@ are completed. Human-review gates remain open.
 
 ### v0.13.72 current full-campaign checkpoint/replay continuity
 
-- The existing competitive host checkpoint path has a bounded mid-campaign
+- The existing competitive host checkpoint path closed a bounded mid-campaign
   target: save after month 12, restore in a fresh host, continue both runs to
   month 24, and compare immutable replay/history hashes plus terminal
   regional-world and campaign-coverage reads.
@@ -4152,8 +4161,25 @@ are completed. Human-review gates remain open.
   is planned. Browser serialization, cross-campaign durable continuity,
   screenshots, human accessibility/educational review, provenance/legal review,
   and public-release approval remain open.
-- Focused and full technical validation pass; the sole medium-effort review
-  passed with no actionable findings. PR/merge cleanup remains.
+- Focused and full technical validation passed; the sole medium-effort review
+  passed with no actionable findings. PR #319 merged into `main` at
+  `892af6e`, and the temporary branch was deleted locally and remotely.
+
+### v0.13.73 current full stabilization checkpoint continuity
+
+- The existing `gui-stabilization-save-v1` host checkpoint path now has a
+  bounded full-campaign target: save after stage 2, restore in a fresh host,
+  continue both runs through the existing five-stage endpoint, and compare
+  immutable history/replay plus terminal `campaign-coverage-v1` reads.
+- No browser save artifact, new route/schema, simulation, asset, or audio file
+  is planned. Regional-affiliation continuation, browser serialization,
+  screenshots, human accessibility/educational review, provenance/legal review,
+  and public-release approval remain open.
+- The focused regression and full technical validation pass. The sole
+  medium-effort review first identified an omitted history comparison surface;
+  the amended ledger/contract now include `competitive-history-v1`, and the
+  same reviewer approved with no actionable findings. PR handoff, merge,
+  branch cleanup, and final evidence synchronization remain.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
