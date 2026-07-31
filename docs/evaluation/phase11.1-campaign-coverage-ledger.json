@@ -338,6 +338,39 @@
       "No cross-browser/device, pixel-quality, human visual/accessibility, educational, legal, or public-release claim is made."
     ]
   },
+  "full_campaign_raster_screenshot_evidence": {
+    "status": "complete-technical-persisted-raster-evidence",
+    "manifest_source": "docs/evaluation/phase11.1-full-campaign-raster-evidence.json",
+    "native_capture_metadata_source": "docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json",
+    "test_source": "tests/test_phase11_full_campaign_raster_evidence.py",
+    "artifact_directory": "docs/evaluation/phase11.1-campaign-raster",
+    "viewport": {
+      "width": 1024,
+      "height": 768,
+      "device_scale_factor": 1
+    },
+    "state_matrix": [
+      "competitive-regional-v1 active",
+      "competitive-regional-v1 terminal",
+      "stabilization-v1 active",
+      "stabilization-v1 terminal",
+      "regional-affiliation-v1 active",
+      "regional-affiliation-v1 terminal"
+    ],
+    "capture_artifact": "persisted-technical-evidence-not-release-asset",
+    "continuity_behavior": [
+      "Each launchable campaign has one active and one terminal local-browser raster record.",
+      "Each record carries a host campaign/turn identity, native capture dimensions, padded canvas dimensions, byte size, and SHA-256 hash.",
+      "The capture route remains the existing campaign-coverage host projection, adapter, shared renderer, and desktop surface.",
+      "The raster records preserve written equivalents and optional-audio metadata without adding browser authority or simulation state."
+    ],
+    "boundary": "Technical raster persistence records actor-visible presentation evidence only; it does not establish pixel-level quality, human visual/accessibility or educational usefulness, cross-browser/device coverage, provenance/legal approval, or public release.",
+    "limits": [
+      "The requested 1024x768 canvas includes right-and-bottom padding because the in-app browser returned a smaller content-area raster when scrollbars were present.",
+      "Persisted evaluation rasters are not included in the asset registry or release manifest.",
+      "Human review and product-quality gates remain open."
+    ]
+  },
   "event_cue_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_event_cue_ids",

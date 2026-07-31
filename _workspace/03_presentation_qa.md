@@ -5269,3 +5269,39 @@ human visual, lived accessibility, educational, or public-release gate.
 - Release metadata, documentation links, offline/browser/device contracts,
   asset/security/SVG/release/credits/generation checks, and the full visual/
   audio contract audit — pass.
+
+# Presentation QA — Persisted full-campaign raster evidence v0.13.81
+
+## Status
+
+Pass for the bounded technical persistence contract. Six local-browser JPEGs
+are present, normalized to 1024×768, hash- and dimension-checked, and excluded
+from release assets. This does not pass pixel-level visual, human
+accessibility/educational, cross-browser/device, provenance/legal, or public-
+release gates.
+
+## Required pass conditions
+
+- Active and terminal records exist for all three launchable campaigns.
+- Every file matches the manifest path, MIME type, byte size, SHA-256, and
+  exact 1024×768 JPEG dimensions; pre-padding native dimensions and raw
+  capture hashes are retained in the capture metadata record.
+- Host identity/turn, written equivalents, optional audio, terminal debrief,
+  route sources, and non-release boundaries remain explicit.
+- No asset registry entry, release-manifest entry, browser authority, runtime
+  field, or hidden-state claim is introduced.
+
+## Findings
+
+- The in-app browser returned smaller content-area rasters where scrollbars
+  were present; right-and-bottom padding makes the requested output canvas
+  explicit and is recorded separately from native capture dimensions.
+- Visual inspection of representative active and terminal frames confirms the
+  existing executive/campaign presentation surface is retained. No claim is
+  made about pixel-level quality or human comprehension.
+
+## Verification result
+
+The focused raster-evidence and campaign-coverage tests pass. Full repository
+validation, exactly one medium-effort code review, PR handoff, merge, and
+temporary-branch cleanup remain for this slice.

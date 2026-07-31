@@ -2498,3 +2498,40 @@ temporary branch locally/remotely, verify clean `main`, and select the next
 unmet roadmap slice. Persisted raster goldens, cross-browser/device capture,
 human visual/accessibility/educational review, provenance/legal review, and
 public-release approval remain open.
+
+# Final Handoff — Persisted full-campaign raster evidence v0.13.81
+
+## Status
+
+Implementation and focused evidence validation are complete on
+`feat/persisted-campaign-screenshot-evidence-v0.13.81`; the six technical
+rasters are persisted under the evaluation-only boundary. Full validation,
+the sole medium-effort review, PR handoff, merge, branch cleanup, and final
+evidence synchronization remain.
+
+## Target result
+
+- Persist active and terminal 1024×768 raster records for each launchable
+  campaign while retaining native capture dimensions and padding metadata.
+- Validate exact paths, JPEG MIME/dimensions, byte sizes, SHA-256 hashes,
+  campaign/turn identity, written equivalents, optional audio, debrief state,
+  source routes, pre-padding capture metadata, and exclusion from release
+  assets.
+- Keep runtime, schema, simulation, browser authority, and asset/audio
+  registries unchanged; leave human and release gates open.
+
+## Verification
+
+- The six-state raster manifest and campaign ledger validator pass.
+- Representative active and terminal rasters were visually inspected; browser
+  content-area scrollbars were handled with explicit right/bottom canvas
+  padding rather than hidden dimension drift.
+
+## Remaining work
+
+Run full repository gates and exactly one medium-effort review, create and
+merge the PR, delete the temporary branch locally and remotely, verify clean
+`main`, and select the next unmet roadmap slice. Pixel-level visual quality,
+cross-browser/device capture, human accessibility/educational review,
+provenance/legal approval, audio listening quality, and public-release approval
+remain open.

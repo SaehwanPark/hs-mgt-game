@@ -2298,8 +2298,10 @@ music-state, history, replay, and checkpoint slices; full campaign placement/
 use quality, event taxonomy beyond the current projection, full-campaign save/load/
 replay continuity, performance,
 full-campaign raster goldens, and human visual quality gates remain open. A
-bounded six-state local-browser inspection record is now tracked in v0.13.80;
-it does not promote ephemeral captures to release artifacts.
+bounded six-state local-browser inspection record is now tracked in v0.13.80,
+and persisted technical 1024×768 raster evidence is tracked in v0.13.81; the
+persisted rasters remain evaluation-only and do not close pixel-quality,
+human-review, cross-browser/device, provenance/legal, or public-release gates.
 
 ### Scope
 
@@ -2435,6 +2437,17 @@ it does not promote ephemeral captures to release artifacts.
   for all three launchable campaigns were inspected at 1024×768. Persisted
   raster goldens, cross-browser/device capture, pixel-level quality, and human
   review remain open.
+- [x] Current persisted 1024x768 full-campaign raster evidence recorded.
+  Evidence: `docs/evaluation/phase11.1-full-campaign-raster-evidence.json`,
+  `docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json`,
+  `docs/evaluation/phase11.1-campaign-raster/`,
+  `tests/test_phase11_full_campaign_raster_evidence.py`, and the
+  `full_campaign_raster_screenshot_evidence` ledger entry; one active and one
+  terminal raster is persisted for each launchable campaign with byte/hash/
+  dimension checks and an explicit non-release boundary. This technical slice
+  does not establish pixel-level quality, human visual/accessibility or
+  educational usefulness, cross-browser/device coverage, provenance/legal
+  approval, or public release.
 
 ### v0.13.6 facility asset coverage evidence
 

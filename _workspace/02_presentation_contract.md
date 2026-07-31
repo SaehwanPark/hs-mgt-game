@@ -4577,6 +4577,51 @@ evidence.
   claim.
 - Open: persisted raster golden strategy, cross-browser/device captures,
   human visual/accessibility review, educational review, and release approval.
+
+# Presentation Contract — Persisted full-campaign raster evidence v0.13.81
+
+## Goal and authorization
+
+Persist six technical local-browser JPEG records for the existing host-backed
+campaign coverage surface: active and terminal competitive, stabilization, and
+regional-affiliation states at a 1024×768 output canvas. The files are
+evaluation evidence only and are not release assets.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign/turn identity | Host campaign-coverage envelope | Active and terminal record for each launchable campaign | Do not infer state from pixels or browser timing |
+| Written history/debrief | Host history and debrief projection | Committed rows and terminal debrief where supplied | Do not regenerate, reorder, or invent hidden outcomes |
+| Optional audio | Host campaign audio metadata plus written equivalent | Optional and mute-safe in every record | Do not infer severity, intent, or future outcomes from sound |
+| Raster artifact | Existing browser screenshot bytes, normalized to 1024×768 | Native dimensions and padding rule are recorded | Do not treat a padded evaluation canvas as pixel-quality approval |
+
+## Visual, motion, and audio semantics
+
+No new visual or audio vocabulary is introduced. The artifact preserves the
+existing shared campaign panel, written results, debrief, and optional-audio
+controls. Padding is capture metadata, not game content.
+
+## Accessibility and fallbacks
+
+The manifest requires written equivalents, terminal-debrief status, and audio
+optionalness. The slice does not claim contrast, screen-reader, device, lived
+accessibility, or educational comprehension review.
+
+## Authority and provenance boundary
+
+Rust remains authoritative for campaign state, transitions, history, replay,
+debrief, and audio metadata. The browser screenshot records only actor-visible
+output. The JPEGs are excluded from the asset registry and release manifest;
+no provenance or approval status is inferred from their hashes.
+
+## Verification and evidence limits
+
+The validator must fail closed on missing files, path drift, MIME/byte/hash
+drift, non-1024×768 JPEG dimensions, missing source markers, incorrect host
+turns, or hidden-state overclaims. This is technical persistence evidence,
+not raster-golden, human-quality, cross-browser/device, legal, or release
+evidence.
 # Presentation Contract — Full-campaign coverage transport continuity v0.13.79
 
 ## Goal and authorization
