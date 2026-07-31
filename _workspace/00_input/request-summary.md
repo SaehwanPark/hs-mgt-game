@@ -3456,3 +3456,37 @@ and temporary-branch cleanup.
 This proves only deterministic host stabilization checkpoint continuation from
 stage 2 through stage 5. It does not prove browser persistence, affiliation
 continuity, human usability, or public-release readiness.
+# Request Summary — Full regional-affiliation checkpoint continuity v0.13.74
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a host-owned stage-3 checkpoint/restore
+continuity slice for the six-stage regional-affiliation campaign.
+
+## Target slice
+
+- Save after `assess`, independent posture selection, and the first hold stage;
+  load into a fresh host and continue original/restored sessions through stage
+  6.
+- Compare host history/replay and terminal campaign-coverage data while
+  preserving the opaque-session and host-authority boundaries.
+- Keep browser serialization, screenshots, human review, and release gates
+  open.
+
+## Non-goals
+
+- No new route/schema, save format, simulation rule, asset/audio file, browser
+  persistence, screenshot suite, human review, device certification,
+  provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused persistence/session and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only deterministic host regional-affiliation checkpoint
+continuation from stage 3 through stage 6. It does not prove browser
+persistence, human usability, or public-release readiness.

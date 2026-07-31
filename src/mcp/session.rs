@@ -2519,6 +2519,108 @@ mod tests {
   }
 
   #[test]
+  fn durable_affiliation_checkpoint_covers_full_campaign_continuation() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-full-affiliation-{}.save",
+      std::process::id()
+    ));
+    let mut original = GameSessionStore::with_competitive_persistence(path.clone());
+    let session = start(&mut original, "regional-affiliation-v1");
+    let session_id = session.session_id.clone();
+    for command_text in ["assess", "posture choice=independent", "hold"] {
+      original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: command_text.to_string(),
+        })
+        .expect("affiliation stage before checkpoint");
+    }
+    let saved = original
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable affiliation stage-three save");
+    assert_eq!(saved.transition_count, 3);
+    assert!(path.is_file());
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let loaded = restarted
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable affiliation stage-three load");
+    assert_eq!(loaded.transition_count, saved.transition_count);
+    assert_eq!(loaded.latest_state_hash, saved.latest_state_hash);
+
+    for _ in 3..AFFILIATION_TURN_COUNT {
+      let original_next = original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("original affiliation continuation");
+      let restarted_next = restarted
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: "hold".to_string(),
+        })
+        .expect("restarted affiliation continuation");
+      assert_eq!(
+        restarted_next
+          .latest_transition
+          .map(|transition| transition.state_hash),
+        original_next
+          .latest_transition
+          .map(|transition| transition.state_hash)
+      );
+    }
+
+    let original_history = original
+      .get_history(GetHistoryRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original affiliation history");
+    let restarted_history = restarted
+      .get_history(GetHistoryRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted affiliation history");
+    assert_eq!(restarted_history, original_history);
+    assert_eq!(restarted_history.transition_count, 6);
+
+    let original_replay = original
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original affiliation replay");
+    let restarted_replay = restarted
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted affiliation replay");
+    assert_eq!(restarted_replay, original_replay);
+    assert_eq!(restarted_replay.transition_count, 6);
+
+    let original_coverage = original
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original affiliation coverage");
+    let restarted_coverage = restarted
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted affiliation coverage");
+    assert_eq!(restarted_coverage, original_coverage);
+    assert!(restarted_coverage.session.done);
+
+    restarted
+      .end_session(EndSessionRequest { session_id })
+      .expect("end recovered full affiliation session");
+    assert!(!path.exists());
+  }
+
+  #[test]
   fn durable_affiliation_checkpoint_does_not_overwrite_live_session() {
     let path = std::env::temp_dir().join(format!(
       "hs-mgt-game-durable-affiliation-collision-{}.save",

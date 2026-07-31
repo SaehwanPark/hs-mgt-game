@@ -2317,3 +2317,32 @@ Merge the PR, clean the temporary branch locally/remotely, verify clean
   asset/security/generation/credits, device/offline/browser/audio/raster/
   loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
   pass.
+# Final Handoff — Full regional-affiliation checkpoint continuity v0.13.74
+
+## Status
+
+Implementation and full automated validation are complete on
+`feat/full-affiliation-checkpoint-continuity-v0.13.74`; the sole medium-effort
+review approved the implementation with no actionable findings, and PR
+handoff, merge, branch cleanup, and final evidence synchronization remain.
+
+## Target result
+
+- Restore `regional-affiliation-v1` after stage 3 and continue through stage 6.
+- Prove parity for history/replay and terminal campaign-coverage data.
+- Preserve opaque-session storage and host ownership of persistence and
+  transition authority.
+
+## Remaining work
+
+Complete exactly one medium-effort review, merge the PR, clean the temporary
+branch locally/remotely, verify clean `main`, and select the next unmet roadmap
+slice.
+
+## Verification
+
+- 370 Rust tests and 783 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device/offline/browser/audio/raster/
+  loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
+  pass.

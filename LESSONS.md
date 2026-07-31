@@ -3366,3 +3366,17 @@ separate gates.
 - Prevention: choose a meaningful mid-stage checkpoint for each campaign,
   continue original and restored hosts to that campaign’s endpoint, compare
   actor-visible terminal reads, and clean only the matching checkpoint.
+# Checkpoint Each Campaign at Its Own Durable Boundary
+
+- Context: competitive and stabilization continuity were proven from bounded
+  mid-campaign checkpoints, while regional affiliation still had only a
+  stage-1 restore/next-transition regression.
+- Risk: using another campaign's checkpoint depth as evidence can miss
+  affiliation-specific review, integration, terminal, or debrief divergence.
+- Resolution: checkpoint after the committed affiliation posture/hold path,
+  continue original and restored hosts through the six-stage endpoint, compare
+  immutable history/replay and actor-visible coverage, and clean only the
+  matching recovered checkpoint.
+- Prevention: require a campaign-specific durable checkpoint target and
+  terminal comparison surfaces before treating persistence continuity as
+  complete.

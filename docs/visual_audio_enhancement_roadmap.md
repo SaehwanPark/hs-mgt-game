@@ -2357,6 +2357,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `src/mcp/session.rs: fn durable_stabilization_checkpoint_covers_full_campaign_continuation`;
   regional-affiliation continuation, browser serialization, cross-campaign
   durable continuity, and broader save/load/replay evidence remain open.
+- [x] Current full regional-affiliation host checkpoint continuation covered.
+  Evidence: `full_affiliation_checkpoint_continuity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn durable_affiliation_checkpoint_covers_full_campaign_continuation`;
+  browser serialization, cross-campaign durable continuity, and broader
+  save/load/replay evidence remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4180,6 +4186,21 @@ are completed. Human-review gates remain open.
   the amended ledger/contract now include `competitive-history-v1`, and the
   same reviewer approved with no actionable findings. PR handoff, merge,
   branch cleanup, and final evidence synchronization remain.
+
+### v0.13.74 current full regional-affiliation checkpoint continuity
+
+- The existing `gui-affiliation-save-v1` host checkpoint path has the next
+  bounded target: save after stage 3, restore in a fresh host, continue both
+  runs through the six-stage endpoint, and compare immutable history/replay
+  plus terminal `campaign-coverage-v1` reads.
+- No browser save artifact, new route/schema, simulation, asset, or audio file
+  is planned. Browser serialization, screenshots, human accessibility/
+  educational review, provenance/legal review, and public-release approval
+  remain open.
+- Plan and source contract are recorded; the implementation and full technical
+  validation pass. The sole medium-effort review passed with no actionable
+  findings. PR handoff, merge, branch cleanup, and final evidence
+  synchronization remain.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
