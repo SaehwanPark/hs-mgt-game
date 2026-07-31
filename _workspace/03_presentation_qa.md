@@ -5068,3 +5068,32 @@ host-owned latest-checkpoint replacement and matching-ID hydration across all
 This slice establishes only deterministic host checkpoint identity and
 replacement; it cannot establish lived accessibility, educational usefulness,
 archive durability, provenance/legal status, or public release.
+# Presentation QA — Full-campaign audio-state coverage v0.13.76
+
+## Status
+
+Implementation and full automated validation pass; the bounded boundary is
+host-sourced campaign-coverage audio metadata across every active and terminal
+read of all three launchable campaigns. The sole medium-effort review passed
+with no actionable findings; merge/cleanup remain.
+
+## Required pass conditions
+
+- All active and terminal coverage reads expose valid allowlisted music/cue
+  metadata with written equivalents preserved.
+- Every terminal read uses `debrief` music state and audio remains optional.
+- Evidence stays separate from human listening quality, accessibility, assets,
+  screenshots, and release approval.
+
+## Evidence limits
+
+This slice establishes only technical metadata continuity and registry-bound
+IDs; it cannot establish lived accessibility, listening usefulness, educational
+value, or public release.
+
+## Verification result
+
+The full repository validation passes with 372 Rust tests and 785 Python tests;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
+asset-budget, CLI smoke, Node syntax, and diff checks are green.

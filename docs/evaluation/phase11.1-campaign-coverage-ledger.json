@@ -554,6 +554,60 @@
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
+  "full_campaign_audio_state_coverage": {
+    "status": "complete-full-campaign-host-audio-state-continuity",
+    "schema": "campaign-coverage-v1",
+    "campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "host_source": "src/mcp/session.rs: get_campaign_coverage + src/mcp/campaign_coverage.rs: campaign_audio",
+    "test_source": "src/mcp/session.rs: fn campaign_coverage_audio_state_covers_all_full_campaign_reads",
+    "active_reads": [
+      "competitive genesis plus 24 monthly reads",
+      "stabilization genesis plus 5 stage reads",
+      "regional affiliation genesis plus 6 stage reads"
+    ],
+    "terminal_music_state": "debrief",
+    "allowlists": {
+      "music_states": [
+        "menu",
+        "stable_operations",
+        "pressure",
+        "regulatory_scrutiny",
+        "competitive_escalation",
+        "affiliation_negotiation",
+        "debrief"
+      ],
+      "event_cues": [
+        "event.project-complete",
+        "event.staffing-constraint",
+        "event.operating-loss",
+        "event.operating-recovery",
+        "event.payer-decision",
+        "event.regulatory-decision",
+        "event.rival-expansion",
+        "event.affiliation-milestone"
+      ]
+    },
+    "continuity_behavior": [
+      "Every active and terminal campaign-coverage-v1 read includes host-derived audio metadata.",
+      "Every music state and event cue is checked against the existing committed allowlists.",
+      "Every terminal read switches to debrief music and retains written debrief lines.",
+      "The read remains observational and does not submit commands, mutate history, or add client authority."
+    ],
+    "boundary": "Rust derives audio metadata from actor-visible campaign coverage and existing transition summaries; browser rendering remains read-only and written equivalents remain available.",
+    "evidence": [
+      "The Rust regression walks all 24 competitive months, 5 stabilization stages, and 6 regional-affiliation stages, checking genesis and post-transition reads.",
+      "The regression asserts campaign-coverage-v1, non-empty terminal debriefs, terminal debrief music, and allowlisted cue IDs.",
+      "No new route/schema, simulation rule, stochastic input, asset, audio file, or browser authority is introduced."
+    ],
+    "limits": [
+      "This closes technical host audio-state continuity only; browser serialization, multi-checkpoint archives, broader full-campaign save/load/replay evidence, and human listening/accessibility review remain open.",
+      "It does not establish screenshots, pixel-level visual quality, device performance, provenance/legal approval, educational benefit, or public release."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
@@ -805,7 +859,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, and latest-wrapper cross-campaign identity is covered; browser serialization, multi-checkpoint archives, and broader full-campaign save/load/replay evidence remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity is covered, and full-campaign host audio-state continuity is covered; browser serialization, multi-checkpoint archives, broader full-campaign save/load/replay evidence, and human listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

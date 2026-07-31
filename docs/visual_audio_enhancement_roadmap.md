@@ -2369,6 +2369,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity`;
   browser serialization, multi-checkpoint archives, and broader save/load/
   replay evidence remain open.
+- [x] Current full-campaign host audio-state coverage covered. Evidence:
+  `full_campaign_audio_state_coverage` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn campaign_coverage_audio_state_covers_all_full_campaign_reads`;
+  written fallbacks, browser serialization, screenshots, and human
+  listening/accessibility review remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4222,6 +4228,21 @@ are completed. Human-review gates remain open.
   validation pass. The sole medium-effort review passed with no actionable
   findings. PR handoff, merge, branch cleanup, and final evidence
   synchronization remain.
+
+### v0.13.76 current full-campaign audio-state coverage
+
+- The existing host `campaign-coverage-v1` projection has the next bounded
+  target: walk competitive, stabilization, and regional affiliation through
+  every active and terminal read, validating allowlisted music/cue IDs and
+  terminal `debrief` music state.
+- No new route/schema, simulation, asset, or audio file is planned. Audio-off
+  and written-equivalent fallbacks, browser read-only rendering, screenshots,
+  human listening/accessibility review, provenance/legal review, and
+  public-release approval remain open.
+- Plan and source contract are recorded; implementation, full validation, and
+  the sole medium-effort review pass at 372 Rust tests and 785 Python tests;
+  the reviewer found no actionable findings. PR handoff, merge, branch
+  cleanup, and final evidence synchronization remain.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

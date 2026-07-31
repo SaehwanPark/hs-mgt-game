@@ -4344,3 +4344,57 @@ browser serialization, archive durability, or public release.
 - Open: browser serialization, multi-checkpoint archive design, raster
   screenshots, human first-time-user/accessibility/educational review,
   provenance/legal review, and public-release approval.
+# Presentation Contract — Full-campaign audio-state coverage v0.13.76
+
+## Goal and authorization
+
+Verify that every active and terminal host `campaign-coverage-v1` read across
+competitive, stabilization, and regional-affiliation campaigns carries valid
+allowlisted music/cue metadata with written equivalents already supplied by the
+coverage projection.
+
+## Player questions and consequences
+
+The player question is: “Does the optional audio presentation stay aligned with
+the visible campaign state through the whole run?” Valid metadata may select
+an existing cue/stem; missing or muted audio leaves the written coverage intact.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign music state | Host `CampaignCoverageAudio.music_state_id` from visible stage/process/history | Present on active and terminal coverage reads | Do not classify hidden severity or future actor response in the browser |
+| Event cue IDs | Host `CampaignCoverageAudio.audio_cue_ids` from visible committed summaries | Zero or more allowlisted IDs; written text remains complete | Do not invent cues from raw strings or playback state |
+| Terminal audio | Host debrief coverage with `debrief` music state | Required at terminal for all campaigns | Do not treat music as a gameplay outcome or scoring signal |
+| Written fallback | Existing briefing/history/debrief/source/equivalent fields | Always available with or without audio | Do not make audio required for play or recovery |
+
+## Visual, motion, and audio semantics
+
+No new asset or playback behavior is introduced. Existing music/cue registry
+IDs and optional browser audio controls remain the only presentation surface.
+
+## Accessibility and fallbacks
+
+Audio-off, blocked-audio, reduced-notification, reduced-motion, missing-ID, and
+unknown-data paths retain written labels/equivalents and do not affect host
+transitions.
+
+## Authority and provenance boundary
+
+Rust owns campaign transitions, visible projection, metadata selection, and
+allowlisted IDs. The browser optionally plays supplied IDs and renders written
+equivalents; registry/credits files remain unchanged and authoritative.
+
+## Verification and evidence limits
+
+The focused regression must walk all three full campaigns, validate active and
+terminal metadata against the existing cue/music catalogs, and require terminal
+`debrief` state. Automated registry parity does not establish human listening
+quality, accessibility, educational value, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic input, browser authority, asset,
+  audio file, screenshot, or human approval claim.
+- Open: human listening/accessibility review, screenshot coverage, provenance/
+  legal review, and public-release approval.
