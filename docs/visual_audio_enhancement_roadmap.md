@@ -4565,6 +4565,19 @@ are completed. Human-review gates remain open.
   accessibility, legal, release-derivative, registry, or public-release
   approval.
 
+### v0.13.93 revision-decision evidence-intake packet
+
+- `docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json`
+  binds future revision triage to the empty pilot, debrief-visual, and
+  asset-provenance source packets and starts with zero decision records.
+- `scripts/validate_revision_decision_evidence_intake.py` and
+  `tests/test_phase13_2_revision_decision_evidence_intake.py` fail closed on
+  source/target drift, free text or private fields, invalid bounded values,
+  duplicate lists, numeric coercion, and premature decisions.
+- This prepares revision evidence capture only. It does not record findings,
+  approve a revision, verify implementation, approve campaign expansion, or
+  establish legal/provenance or public-release readiness.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4673,6 +4686,12 @@ are completed. Human-review gates remain open.
   `tests/test_phase13_1_asset_provenance_evidence_intake.py`; the empty,
   source-bound intake mirrors the visual/audio/portrait inventory and keeps
   provenance, human-review, release, and public-approval gates pending.
+- [x] Revision decision intake prepared. Evidence:
+  `docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json`,
+  `scripts/validate_revision_decision_evidence_intake.py`, and
+  `tests/test_phase13_2_revision_decision_evidence_intake.py`; the empty
+  decision contract is source-bound and keeps findings, revisions,
+  implementation verification, expansion, and release approval pending.
 
 ### Exit criteria
 

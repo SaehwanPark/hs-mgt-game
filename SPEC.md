@@ -7571,6 +7571,26 @@ The target and validator are recorded in
 `docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json`, and
 `scripts/validate_asset_provenance_evidence_intake.py`.
 
+### Visual/audio revision-decision evidence-intake packet (v0.13.93)
+
+The Phase 13.2 packet makes the open `Record revision decisions` item
+operationally ready for authorized synthesis of future pilot, debrief-visual,
+and asset-provenance findings. It derives the target catalog and finding/
+privacy vocabularies from the existing source packets, starts with zero
+records, and allows only bounded source, target, category, disposition,
+priority, action, and rationale codes.
+
+The validator rejects source/target drift, unknown or free-text fields,
+private state and media capture, duplicate/unknown list values, numeric type
+coercion, and premature human or expansion decisions. It records technical
+preparation only; no human finding, revision, implementation, campaign
+expansion, legal/provenance, or public-release decision is claimed.
+
+The target and validator are recorded in
+`_workspace/171_implementation_plan_visual-audio-phase13-2-revision-decision-evidence-intake-v0.13.93.md`,
+`docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json`, and
+`scripts/validate_revision_decision_evidence_intake.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

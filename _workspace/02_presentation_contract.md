@@ -5047,3 +5047,35 @@ runtime credit, registry, or release manifest is promoted.
 `tests/test_phase13_1_asset_provenance_evidence_intake.py` checks exact source
 parity, bounded record fields, privacy exclusions, gate/status vocabularies,
 type safety, and pending release decisions.
+
+# Presentation Contract — Revision-decision evidence-intake packet v0.13.93
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized revision
+triage after future evidence capture. This packet does not record a finding,
+change presentation behavior, or authorize a revision or release.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Revision template | `docs/evaluation/phase10.2-revision-log.md` | Preserve the prepared/no-findings boundary | Do not infer participant findings or decisions |
+| Pilot targets | `docs/evaluation/phase13.2-pilot-feedback-instrument.json` and pilot intake | Bind the four task IDs and finding/privacy vocabulary | Do not infer pilot completion or usefulness |
+| Debrief targets | `docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json` | Bind the three terminal case IDs | Do not infer visual, accessibility, or educational review |
+| Asset targets | `docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json` | Bind current visual/audio/portrait IDs | Do not infer provenance, legal, or release clearance |
+| Decision validator | `scripts/validate_revision_decision_evidence_intake.py` | Reject source drift, private/free-text fields, and premature decisions | Do not treat validator success as a human revision decision |
+
+## Accessibility, privacy, and authority
+
+The intake adds no presentation path and preserves existing written
+equivalents, fallbacks, audio-off, reduced-motion, keyboard, and Large text
+contracts. It permits only bounded codes and target IDs; identity, private or
+hidden state, browser/session locations, raw notes, screenshots, recordings,
+and unrestricted rationale text remain excluded. The host remains authoritative.
+
+## Verification
+
+`tests/test_phase13_2_revision_decision_evidence_intake.py` checks source and
+target parity, bounded record values, privacy exclusions, type safety, and
+pending decision boundaries.

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.93] - 2026-07-31
+
+- Added a strict, empty, source-bound revision-decision evidence-intake
+  packet for future pilot, debrief-visual, and asset-provenance findings.
+- Kept human findings, revision dispositions, implementation verification,
+  campaign expansion, legal/provenance, and public-release decisions pending;
+  no revision or runtime behavior was changed.
+
 ## [0.13.92] - 2026-07-31
 
 - Added a strict, empty asset-provenance evidence-intake packet covering the
