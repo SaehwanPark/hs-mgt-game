@@ -3428,3 +3428,15 @@ separate gates.
 - Prevention: treat browser rendering as a consumer of the complete host
   envelope and keep fixture evidence separate from real-browser and human
   quality claims.
+# Full-Campaign Transport Evidence Must Walk the Existing Route
+
+- Context: host full-run and renderer fixture evidence can both pass while the
+  loopback route still drops a field or stops serving a campaign at a later
+  transition.
+- Risk: a stale route serializer can leave the browser with an apparently
+  healthy initial panel but no terminal debrief, counts, or audio metadata.
+- Resolution: start each campaign through the existing route, read coverage at
+  genesis and after every transition, and assert terminal identity/counts,
+  debrief, and optional audio without adding transport authority.
+- Prevention: keep host, renderer, and route continuity as separate evidence
+  gates; passing one boundary must not stand in for the others.

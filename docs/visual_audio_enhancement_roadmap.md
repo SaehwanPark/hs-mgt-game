@@ -2387,6 +2387,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `tests/test_phase11_campaign_coverage.py:
   test_full_campaign_coverage_renderer_preserves_host_envelope`;
   real-browser screenshots and human visual/accessibility review remain open.
+- [x] Current full-campaign coverage transport continuity covered. Evidence:
+  `full_campaign_coverage_transport_continuity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/gui_server.rs: fn live_transport_covers_full_campaign_coverage_reads`;
+  real-browser screenshots and human visual/audio/accessibility review remain
+  open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4285,6 +4291,20 @@ are completed. Human-review gates remain open.
   the sole medium-effort review pass at 373 Rust tests and 787 Python tests;
   the reviewer found no actionable findings. PR handoff, merge, branch
   cleanup, and final evidence synchronization remain.
+
+### v0.13.79 current full-campaign coverage transport continuity
+
+- The existing loopback campaign-coverage route has the next bounded target:
+  start each launchable campaign and read active/terminal coverage through all
+  24 competitive months, 5 stabilization stages, and 6 affiliation stages.
+- No new route/schema, simulation, checkpoint archive, browser serialization,
+  asset, or audio file is planned. Real-browser screenshots, human visual/
+  audio/accessibility/educational review, provenance/legal review, and
+  public-release approval remain open.
+- Plan and source contract are recorded; implementation and full validation
+  pass at 374 Rust tests and 788 Python tests. The sole medium-effort review on
+  PR #326 is approved with no actionable findings; merge, branch cleanup, and
+  final evidence synchronization remain.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

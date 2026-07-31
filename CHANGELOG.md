@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.79] - 2026-07-31
+
+- Added host-bound full-campaign loopback transport evidence for campaign
+  coverage across competitive, stabilization, and regional-affiliation routes,
+  including terminal debrief and audio handoff checks.
+- Kept new routes, browser serialization, screenshots, human review,
+  provenance/legal approval, and public-release gates open.
+
 ## [0.13.78] - 2026-07-31
 
 - Added host-envelope browser-renderer continuity evidence across active and

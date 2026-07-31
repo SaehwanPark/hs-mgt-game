@@ -1044,6 +1044,57 @@ mod tests {
     server.abort();
   }
 
+  async fn assert_full_campaign_coverage_transport(
+    address: SocketAddr,
+    campaign: &str,
+    commands: &[&str],
+  ) {
+    let start_body = format!(r#"{{"campaign":"{campaign}","seed":42,"difficulty":null}}"#);
+    let (status, body) = request(address, "POST", "/api/v1/sessions", Some(&start_body)).await;
+    assert_eq!(status, 200, "{campaign} start: {body}");
+    let session: serde_json::Value = serde_json::from_str(&body).unwrap();
+    let session_id = session["session_id"].as_str().unwrap().to_string();
+
+    let coverage_path =
+      |session_id: &str| format!("/api/v1/sessions/{session_id}/campaign-coverage");
+    let (status, body) = request(address, "GET", &coverage_path(&session_id), None).await;
+    assert_eq!(status, 200, "{campaign} genesis coverage: {body}");
+    let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(coverage["schema_version"], "campaign-coverage-v1");
+    assert_eq!(coverage["session"]["campaign"], campaign);
+    assert!(!coverage["session"]["done"].as_bool().unwrap());
+    assert_eq!(coverage["replay"]["transition_count"], 0);
+    assert!(coverage["audio"].is_object());
+
+    for (index, command) in commands.iter().enumerate() {
+      let turn_body = format!(r#"{{"command_text":"{command}"}}"#);
+      let (status, body) = request(
+        address,
+        "POST",
+        &format!("/api/v1/sessions/{session_id}/turns"),
+        Some(&turn_body),
+      )
+      .await;
+      assert_eq!(status, 200, "{campaign} transition {}: {body}", index + 1);
+
+      let (status, body) = request(address, "GET", &coverage_path(&session_id), None).await;
+      assert_eq!(status, 200, "{campaign} coverage {}: {body}", index + 1);
+      let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
+      assert_eq!(coverage["schema_version"], "campaign-coverage-v1");
+      assert_eq!(coverage["session"]["campaign"], campaign);
+      assert_eq!(coverage["replay"]["transition_count"], index + 1);
+      assert_eq!(coverage["history"].as_array().unwrap().len(), index + 1);
+      assert!(coverage["audio"].is_object());
+      if index + 1 == commands.len() {
+        assert!(coverage["session"]["done"].as_bool().unwrap());
+        assert!(!coverage["debrief"].as_array().unwrap().is_empty());
+        assert_eq!(coverage["audio"]["music_state_id"], "debrief");
+      } else {
+        assert!(!coverage["session"]["done"].as_bool().unwrap());
+      }
+    }
+  }
+
   #[tokio::test]
   async fn live_transport_supports_campaign_coverage_campaigns() {
     let (address, server) = test_server().await;
@@ -1109,6 +1160,37 @@ mod tests {
     assert_eq!(status, 400);
     let error: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(error["code"], "unsupported_gui_campaign");
+    server.abort();
+  }
+
+  #[tokio::test]
+  async fn live_transport_covers_full_campaign_coverage_reads() {
+    let (address, server) = test_server().await;
+    let competitive_commands = vec![""; 24];
+    let stabilization_commands = vec![""; crate::model::INTERACTIVE_TURN_COUNT as usize];
+    let affiliation_commands = [
+      "assess",
+      "posture choice=independent",
+      "hold",
+      "hold",
+      "hold",
+      "hold",
+    ];
+
+    assert_full_campaign_coverage_transport(
+      address,
+      "competitive-regional-v1",
+      &competitive_commands,
+    )
+    .await;
+    assert_full_campaign_coverage_transport(address, "stabilization-v1", &stabilization_commands)
+      .await;
+    assert_full_campaign_coverage_transport(
+      address,
+      "regional-affiliation-v1",
+      &affiliation_commands,
+    )
+    .await;
     server.abort();
   }
 

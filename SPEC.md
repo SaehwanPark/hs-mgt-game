@@ -7424,6 +7424,34 @@ Deferred / Non-Goals:
   browser serialization, asset/audio file, screenshot, human review,
   provenance/legal approval, or public-release claim.
 
+### Visual/audio full-campaign coverage transport continuity (v0.13.79)
+
+Status: Implementation and full automated validation are complete for the
+bounded existing-loopback transport target across all active and terminal
+campaign-coverage reads of the three launchable campaigns; the sole
+medium-effort review on PR #326 is approved with no actionable findings.
+PR/merge cleanup and final evidence synchronization remain.
+
+Done:
+
+- Added the target and actor-visible transport contract in
+  `_workspace/157_implementation_plan_visual-audio-phase11-full-campaign-coverage-transport-v0.13.79.md`
+  and the current request/contract/QA/handoff records.
+- Defined the existing loopback campaign-coverage route as the only transport
+  source: carry host identity, counts, debrief/audio metadata, and written
+  fallbacks through completion without adding a route or client authority.
+
+Not Yet Done:
+
+- Merge PR #326, clean the temporary branch locally/remotely, and verify
+  `main`.
+
+Deferred / Non-Goals:
+
+- No new route/schema, simulation rule, browser authority, checkpoint archive,
+  browser serialization, asset/audio file, screenshot, human review,
+  provenance/legal approval, or public-release claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;
