@@ -176,7 +176,11 @@ pub(crate) fn from_stabilization(
     observe_for_player(state, &resolved_inputs)
   };
   let turn = if done { state.turn } else { state.turn + 1 };
-  let decisions = stabilization_decisions(turn, ruleset);
+  let decisions = if done {
+    Vec::new()
+  } else {
+    stabilization_decisions(turn, ruleset)
+  };
   let latest_hash = history.last().map(|entry| entry.state_hash.clone());
   let mut briefings = vec![briefing(
     "policy",
@@ -342,7 +346,11 @@ pub(crate) fn from_affiliation(
     )
   }));
 
-  let decisions = affiliation_decisions(state, ruleset);
+  let decisions = if done {
+    Vec::new()
+  } else {
+    affiliation_decisions(state, ruleset)
+  };
   let stage = CampaignCoverageStage {
     id: format!("{:?}", observation.stage).to_ascii_lowercase(),
     label: affiliation_stage_label(observation.stage).to_string(),

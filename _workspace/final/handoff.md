@@ -514,6 +514,55 @@ audio integration, screenshots, replay playback, durable persistence,
 human accessibility/educational evaluation, provenance/legal review, and
 public-release approval remain open.
 
+# Final Handoff — Corrected terminal raster state evidence v0.13.82
+
+## Status
+
+The v0.13.82 implementation and full automated validation are complete on
+`feat/terminal-debrief-raster-qa-v0.13.82`. The three terminal campaign
+rasters were recaptured after their final host transitions. Stabilization and
+regional affiliation now suppress campaign decision records after completion,
+matching competitive coverage. The sole medium-effort reviewer found one
+medium transcript-binding issue and one low changelog issue; both were fixed
+without a second review. PR handoff, merge, branch cleanup, and final
+synchronization remain.
+
+## Target result
+
+- Require `session.done`, exact endpoint history count, non-empty host debrief,
+  and no campaign decision controls for each terminal evidence record.
+- Preserve active artifacts, native raw capture metadata, right/bottom canvas
+  padding, written equivalents, optional audio metadata, host authority, and
+  exclusion from the asset registry and release manifest.
+- Keep human visual/accessibility/educational, audio-listening,
+  cross-browser/device, provenance/legal, and public-release gates open.
+
+## Evidence
+
+- Manifest: `docs/evaluation/phase11.1-full-campaign-raster-evidence.json`.
+- Raw capture provenance:
+  `docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json`.
+- Same-run host-projection transcript:
+  `docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json`.
+- Corrected JPEGs: `docs/evaluation/phase11.1-campaign-raster/`.
+- Source boundary: `src/mcp/campaign_coverage.rs` and
+  `src/mcp/session.rs` terminal coverage tests.
+
+## Verification
+
+- 798 Python tests pass; 375 Rust tests pass serially.
+- `cargo fmt --check`, Clippy with warnings denied, documentation links,
+  release metadata, asset/security/release/credits/generation checks,
+  browser/device/offline/loading/raster, and visual/audio contract checks
+  pass.
+- `git diff --check` passes.
+
+## Handoff gate
+
+Run the full repository gates, exactly one medium-effort review, create and
+merge the PR, delete the temporary branch locally and remotely, verify clean
+`main`, and reassess the next unmet roadmap slice.
+
 ---
 
 # Final Handoff — Visual/audio Phase 11.1 live music-state projection v0.12.93

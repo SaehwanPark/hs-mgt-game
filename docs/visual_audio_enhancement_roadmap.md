@@ -2299,8 +2299,9 @@ use quality, event taxonomy beyond the current projection, full-campaign save/lo
 replay continuity, performance,
 full-campaign raster goldens, and human visual quality gates remain open. A
 bounded six-state local-browser inspection record is now tracked in v0.13.80,
-and persisted technical 1024×768 raster evidence is tracked in v0.13.81; the
-persisted rasters remain evaluation-only and do not close pixel-quality,
+and persisted technical 1024×768 raster evidence is tracked and its terminal
+state correction is recorded in v0.13.82; the persisted rasters remain
+evaluation-only and do not close pixel-quality,
 human-review, cross-browser/device, provenance/legal, or public-release gates.
 
 ### Scope
@@ -2448,6 +2449,18 @@ human-review, cross-browser/device, provenance/legal, or public-release gates.
   does not establish pixel-level quality, human visual/accessibility or
   educational usefulness, cross-browser/device coverage, provenance/legal
   approval, or public release.
+- [x] Current persisted terminal raster state correction recorded. Evidence:
+  `docs/evaluation/phase11.1-full-campaign-raster-evidence.json`,
+  `docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json`,
+  `docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json`,
+  `src/mcp/campaign_coverage.rs`,
+  `tests/test_phase11_full_campaign_raster_evidence.py`, and the
+  `full_campaign_raster_screenshot_evidence` ledger entry; all three terminal
+  records now prove completed host state, endpoint history, non-empty debrief,
+  and no campaign decision controls. This corrects technical capture-state
+  labeling only and does not establish human visual, accessibility, educational,
+  audio-listening, cross-browser/device, provenance/legal, or public-release
+  approval.
 
 ### v0.13.6 facility asset coverage evidence
 
@@ -4344,6 +4357,31 @@ are completed. Human-review gates remain open.
   educational review, provenance/legal review, and public-release approval
   remain open.
 
+### v0.13.81 persisted full-campaign raster evidence
+
+- The six-state raster matrix was persisted under
+  `docs/evaluation/phase11.1-campaign-raster/` with byte/hash/dimension
+  metadata and an explicit evaluation-only boundary.
+- This technical record exposed a capture-state labeling defect: the three
+  files named terminal were the final active decision screens rather than
+  completed debrief screens. The correction is recorded in v0.13.82 below;
+  no human visual or educational gate was closed by this slice.
+
+### v0.13.82 corrected terminal raster state and decision boundary
+
+- The three terminal rasters were recaptured after the final host transition
+  through the existing loopback campaign-coverage route. The manifest now
+  requires `session.done`, exact endpoint history count, non-empty debrief,
+  and no campaign decision controls; the same-run host-projection transcript
+  and raw capture sidecar remain bound to each padded artifact.
+- Stabilization and regional-affiliation coverage now suppress host-shaped
+  decision records after completion, matching the existing competitive
+  terminal boundary. Rust coverage tests and the persisted-raster validator
+  enforce the completed-state contract.
+- This closes only a technical terminal-state correction. Human visual,
+  accessibility, educational/classroom, audio-listening, cross-browser/device,
+  provenance/legal, and public-release reviews remain open.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4407,6 +4445,11 @@ are completed. Human-review gates remain open.
   alignment, written debrief/direct-effect rendering, read-only controls, and
   audio/motion fallbacks are source-bound. Human visual, accessibility,
   educational, and classroom review remain open.
+- [x] Current terminal debrief raster state correction recorded. Evidence:
+  `docs/evaluation/phase11.1-full-campaign-raster-evidence.json`,
+  `docs/evaluation/phase11.1-campaign-raster/`, and
+  `src/mcp/campaign_coverage.rs`; this is a source-bound technical correction
+  only. The broader human debrief visual review remains open.
 - [x] Classroom hardware assumptions documented. Evidence:
   `docs/guides/phase10.2-structured-evaluation.md` and
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; loopback host,

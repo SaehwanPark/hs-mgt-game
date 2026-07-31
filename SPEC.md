@@ -7425,6 +7425,29 @@ Deferred / Non-Goals:
 - No screenshot runner, PNG/JPEG artifact, screenshot hash, route/schema,
   simulation rule, browser authority, asset/audio file, or approval claim.
 
+### Visual/audio corrected terminal raster state evidence (v0.13.82)
+
+The Phase 11.1 terminal-raster correction recaptures the three terminal
+campaign states after the final host transition through the existing loopback
+campaign-coverage route. The persisted manifest and raw-capture sidecar require
+`session.done`, exact endpoint history count, non-empty host debrief content,
+and no campaign decision controls. The same-run DOM-backed host-projection
+transcript binds those observed controls, history/debrief excerpts, raw hashes,
+and normalized artifact hashes to the manifest. Stabilization and regional affiliation now
+match competitive by suppressing host-shaped decision records after completion.
+
+The normalized JPEGs remain evaluation-only, keep their native capture metadata,
+and are excluded from the asset registry and release manifest. This technical
+correction does not establish pixel quality, human visual/accessibility or
+educational usefulness, audio listening quality, cross-browser/device coverage,
+provenance/legal approval, or public release.
+
+The target and actor-visible contract is recorded in
+`_workspace/160_implementation_plan_visual-audio-phase11-terminal-raster-state-correction-v0.13.82.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio persisted full-campaign raster evidence (v0.13.81)
 
 The Phase 11.1 persisted raster slice records one active and one terminal

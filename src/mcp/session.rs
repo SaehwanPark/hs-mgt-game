@@ -3665,6 +3665,8 @@ mod tests {
       })
       .expect("terminal affiliation coverage");
     assert!(coverage.session.done);
+    assert_eq!(coverage.session.turn, 6);
+    assert!(coverage.decisions.is_empty());
     assert!(
       coverage
         .debrief
@@ -3992,6 +3994,31 @@ mod tests {
         .iter()
         .any(|line| line.contains("Competitive preview completed"))
     );
+  }
+
+  #[test]
+  fn campaign_coverage_terminal_stabilization_has_debrief_without_decisions() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "stabilization-v1");
+    let commands = ["1 1 0", "0 1", "1 1", "1 1", "1 1"];
+    let mut current = session;
+    for command in commands {
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id,
+          command_text: command.to_string(),
+        })
+        .expect("stabilization stage");
+    }
+    let coverage = store
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: current.session_id,
+      })
+      .expect("terminal stabilization coverage");
+    assert!(coverage.session.done);
+    assert_eq!(coverage.session.turn, 5);
+    assert!(coverage.decisions.is_empty());
+    assert!(!coverage.debrief.is_empty());
   }
 
   #[test]

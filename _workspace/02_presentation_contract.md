@@ -4570,6 +4570,35 @@ campaigns, include source markers and terminal debrief evidence, and state
 raster-golden, human visual, accessibility, educational, legal, or release
 evidence.
 
+# Presentation Contract — Corrected terminal raster state evidence v0.13.82
+
+## Goal and authorization
+
+Correct the three persisted terminal campaign rasters after the v0.13.81
+terminal filenames were found to represent pre-terminal last-decision states.
+The active artifacts remain unchanged; the corrected JPEGs remain evaluation
+evidence only.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Required terminal behavior | Prohibited inference |
+| --- | --- | --- | --- |
+| Completion state | Host `CampaignCoverageEnvelope.session.done` | Must be true | Do not infer completion from filename or turn label |
+| History endpoint | Host committed campaign history | Count equals campaign endpoint | Do not reconstruct rows in the browser |
+| Debrief | Host campaign debrief projection | Non-empty and not the placeholder | Do not invent educational conclusions |
+| Decision controls | Host decision envelope and shared renderer | No campaign decision, submit, or commit controls | Do not treat absence as outcome authority |
+
+## Verification and evidence limits
+
+The manifest, raw-capture sidecar, Rust coverage tests, and raster validator
+must fail closed on pre-terminal state, history-count drift, empty debrief,
+placeholder debrief, or remaining campaign decision controls. The same-run
+DOM-backed host-projection transcript is the independent capture record bound
+to the normalized and raw artifact hashes. This remains a
+technical capture correction, not pixel-quality, human visual/accessibility,
+educational, audio-listening, cross-browser/device, provenance/legal, or
+public-release evidence.
+
 ## Non-goals and open questions
 
 - No new route/schema, simulation, stochastic input, browser authority,

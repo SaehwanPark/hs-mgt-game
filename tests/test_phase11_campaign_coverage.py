@@ -936,6 +936,7 @@ console.log(JSON.stringify(resolved));
       "Current supported screenshot-surface contract passes. Evidence:": "x",
       "Current full-campaign local-browser screenshot inspection recorded.": "x",
       "Current persisted 1024x768 full-campaign raster evidence recorded.": "x",
+      "Current persisted terminal raster state correction recorded. Evidence:": "x",
     }
     actual = {label: state for state, label in re.findall(r"^- \[([ x])\] (.+)$", self.phase11_1, re.MULTILINE)}
     self.assertEqual(actual, {label: state for label, state in expected.items()})

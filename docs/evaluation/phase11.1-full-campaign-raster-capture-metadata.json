@@ -1,8 +1,9 @@
 {
-  "schema_version": "phase11.1-native-capture-metadata-v1",
-  "status": "complete-raw-capture-provenance",
-  "capture_method": "Codex in-app browser screenshot raw Uint8Array before canvas padding",
+  "schema_version": "phase11.1-native-capture-metadata-v2",
+  "status": "complete-raw-capture-provenance-corrected-terminal-state",
+  "capture_method": "Codex in-app browser screenshot raw Uint8Array after the final host transition and before canvas padding",
   "route": "http://127.0.0.1:7878/",
+  "capture_transcript": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
   "viewport_request": {
     "width": 1024,
     "height": 768,
@@ -28,8 +29,8 @@
       "campaign": "competitive-regional-v1",
       "state": "terminal",
       "raw_mime_type": "image/jpeg",
-      "raw_byte_size": 48412,
-      "raw_sha256": "41fefb78125e4434014dde9082215b245659a620f6bfdf1ea4c265212d8c5f83",
+      "raw_byte_size": 57350,
+      "raw_sha256": "89e77df41a912e567c7f8e3ec1856b9b7d65030c94284387564e4fe39872ff6b",
       "native_width": 1004,
       "native_height": 753,
       "normalized_artifact": "docs/evaluation/phase11.1-campaign-raster/competitive-regional-v1-terminal-1024x768.jpg"
@@ -48,8 +49,8 @@
       "campaign": "stabilization-v1",
       "state": "terminal",
       "raw_mime_type": "image/jpeg",
-      "raw_byte_size": 83962,
-      "raw_sha256": "d9f511d582660c3190c8c1952060985b5dce240d2a8a741817ac525a64afda83",
+      "raw_byte_size": 91799,
+      "raw_sha256": "d175057a39dba9670cdbf7ac84c8e97768c054b01437f28b20cf24780b191799",
       "native_width": 1009,
       "native_height": 757,
       "normalized_artifact": "docs/evaluation/phase11.1-campaign-raster/stabilization-v1-terminal-1024x768.jpg"
@@ -68,8 +69,8 @@
       "campaign": "regional-affiliation-v1",
       "state": "terminal",
       "raw_mime_type": "image/jpeg",
-      "raw_byte_size": 66633,
-      "raw_sha256": "45a4494d9bb2b8384e8dc13a1b9cae33b6566a91afdf31ee16b7baf850b519c4",
+      "raw_byte_size": 65867,
+      "raw_sha256": "7d531d6ea2079d82eef778aee8070b25e9ee456ebcec495c73b15d3352c175e0",
       "native_width": 1004,
       "native_height": 753,
       "normalized_artifact": "docs/evaluation/phase11.1-campaign-raster/regional-affiliation-v1-terminal-1024x768.jpg"

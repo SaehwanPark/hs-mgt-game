@@ -339,10 +339,19 @@
     ]
   },
   "full_campaign_raster_screenshot_evidence": {
-    "status": "complete-technical-persisted-raster-evidence",
+    "status": "complete-technical-persisted-raster-evidence-corrected-terminal-state",
     "manifest_source": "docs/evaluation/phase11.1-full-campaign-raster-evidence.json",
     "native_capture_metadata_source": "docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json",
+    "capture_transcript_source": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
     "test_source": "tests/test_phase11_full_campaign_raster_evidence.py",
+    "correction_source": "v0.13.82 terminal capture-state correction and stabilization/affiliation decision gating",
+    "terminal_state_contract": {
+      "session_done": true,
+      "history_count_matches_endpoint": true,
+      "debrief_non_empty": true,
+      "campaign_decision_controls": 0,
+      "placeholder_debrief": false
+    },
     "artifact_directory": "docs/evaluation/phase11.1-campaign-raster",
     "viewport": {
       "width": 1024,
@@ -361,6 +370,9 @@
     "continuity_behavior": [
       "Each launchable campaign has one active and one terminal local-browser raster record.",
       "Each record carries a host campaign/turn identity, native capture dimensions, padded canvas dimensions, byte size, and SHA-256 hash.",
+      "Each terminal record is captured after the final host transition with session.done, endpoint history count, non-empty debrief, and no campaign decision controls.",
+      "The terminal capture transcript retains same-run host-projection excerpts, observed control counts, raw capture hashes, and normalized artifact hashes for independent manifest binding.",
+      "The v0.13.82 terminal records supersede the v0.13.81 pre-terminal filenames; active records remain unchanged.",
       "The capture route remains the existing campaign-coverage host projection, adapter, shared renderer, and desktop surface.",
       "The raster records preserve written equivalents and optional-audio metadata without adding browser authority or simulation state."
     ],

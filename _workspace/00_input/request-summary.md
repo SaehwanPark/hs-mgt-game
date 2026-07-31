@@ -3738,3 +3738,42 @@ The six files prove only that the existing loopback GUI was captured at the
 specified campaign states and that their recorded bytes match the manifest.
 The explicit canvas padding handles browser scrollbars and is not a visual
 quality result; human and release gates remain open.
+
+# Request Summary — Corrected terminal raster state evidence v0.13.82
+
+## Authorized outcome
+
+Correct the persisted Phase 11.1 terminal artifacts after verifying that the
+v0.13.81 terminal filenames represented the final active decision screens.
+
+## Target slice
+
+- Recapture only the competitive, stabilization, and regional-affiliation
+  terminal JPEGs after the final host transition through the existing loopback
+  GUI.
+- Require completed host state, exact endpoint history count, non-empty host
+  debrief, and no campaign decision controls in the manifest and validator.
+- Persist a same-run host-projection transcript with the observed history,
+  debrief, controls, raw hashes, and normalized artifact hashes.
+- Gate stabilization and regional-affiliation decision envelopes after
+  completion so the source contract matches the corrected terminal evidence.
+
+## Non-goals
+
+- No new route/schema, simulation rule, stochastic input, browser authority,
+  asset/audio file, screenshot runner, release asset, or human approval claim.
+- No pixel-level quality, cross-browser/device, accessibility, educational,
+  audio-listening, provenance/legal, or public-release conclusion.
+
+## Validation target
+
+Focused terminal-raster and campaign-coverage tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+The corrected files prove only that the existing host-backed GUI was captured
+after completed campaign state and that the recorded bytes match the manifest.
+They do not close the separate human visual, educational, audio, device,
+provenance, legal, or release gates.
