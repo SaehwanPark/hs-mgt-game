@@ -375,10 +375,14 @@ turn, regenerates replay data, or creates save/load state.
 When supplied, `getReplay(sessionId)` returns
 `schema_version: "competitive-replay-v1"` with the same immutable summaries,
 seed, transition count, and latest visible state hash. The page validates the
-alignment and renders the existing history/replay list; failure preserves the
-current list. Historical committed resolution review remains the separate
-host-read `getResolution(sessionId, turn)` path, and no browser playback or
-replay regeneration is introduced.
+alignment and renders the existing history/replay list. **Previous row**,
+**Next row**, **Play replay**, and **Pause replay** move a local written cursor
+over those rows and show the selected command, optional visible observation,
+events/effects, and state hash. Failure preserves the current list and cursor;
+an empty replay disables movement with an explicit written state. Historical
+committed resolution review remains the separate host-read
+`getResolution(sessionId, turn)` path, and no replay regeneration is
+introduced.
 
 When supplied, `saveSession(sessionId)` and `loadSession(sessionId)` return
 `schema_version: "competitive-save-v1"` with `saved`/`loaded` operation,

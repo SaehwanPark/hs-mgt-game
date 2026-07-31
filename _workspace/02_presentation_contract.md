@@ -1,3 +1,47 @@
+# Presentation Contract — Host-envelope replay playback rail v0.13.66
+
+## Goal and Authorization
+
+Let a player review committed replay rows through previous/next/play/pause
+controls backed only by the existing host `ReplayEnvelope`.
+
+## Player Questions and Consequences
+
+The player question is: “What did I commit, what visible context accompanied it,
+and what hash/effects were recorded?” Selecting a row changes only the local
+review cursor. It never submits a command, changes host state, or fabricates a
+missing result.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Replay rows | Existing host `ReplayEnvelope.transitions` | After a successful replay read; empty when no rows exist | Do not reconstruct true state or regenerate a trace |
+| Selected row | Local cursor over validated visible summaries | Previous/next/play/pause only | Do not call a transition or imply an unrecorded outcome |
+| Row detail | Existing command, optional observation, events, effects, and state hash | Written with the selected row; absent fields remain absent | Do not reveal resolved inputs or private actor rationale |
+| Recovery status | Existing replay adapter response/failure | Failed reads preserve the last valid view | Do not replace a failed read with client-authored data |
+
+## Visual, Motion, and Audio Semantics
+
+Playback is a local written review state. Animation and audio are optional
+presentation layers; reduced motion, muted audio, and no-audio environments keep
+the same selected-row text and controls.
+
+## Accessibility, Authority, and Evidence Limits
+
+Controls are native buttons with written status and keyboard activation. The
+browser validates and displays host-sourced summaries; it never serializes,
+deserializes, mutates, or regenerates simulation state. Technical checks do not
+establish human usability, accessibility, educational value, device
+certification, legal/provenance approval, or public release.
+
+## Non-Goals and Open Questions
+
+- No replay regeneration, new route/schema, state transfer, simulation,
+  persistence, autosave, asset/audio behavior, or screenshot is included.
+- Open: deterministic regeneration, full-campaign placement/use and
+  screenshots, and human review remain separate roadmap gates.
+
 # Presentation Contract — Durable regional-affiliation host checkpoint v0.13.65
 
 ## Goal and Authorization

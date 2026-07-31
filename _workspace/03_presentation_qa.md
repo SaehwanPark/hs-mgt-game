@@ -1,3 +1,43 @@
+# Presentation QA — Host-envelope replay playback rail v0.13.66
+
+## Status
+
+The bounded local replay playback contract passes its full automated checks and
+the sole medium-effort code-review re-verification. This is not replay
+regeneration, human accessibility, visual/audio quality, educational,
+device/browser, legal, provenance, or public-release approval.
+
+## Review boundary
+
+The implementation must remain a local cursor over validated host replay rows.
+It must not add simulation authority, a new host route/schema, browser state
+serialization, or hidden-state fields.
+
+## Required pass conditions
+
+- Existing replay rows can be selected and reviewed with previous/next/play/
+  pause controls and a complete written status.
+- Empty replay is explicit and disables movement; malformed or failed reads
+  preserve the last valid rows and selected cursor.
+- Keyboard/native controls, reduced motion, and audio-off/text fallbacks remain
+  usable without semantic loss.
+- Source/tests show no submit/transition/regeneration path in the playback
+  controller.
+
+## Evidence limits
+
+This is an automated technical boundary review. It cannot approve deterministic
+regeneration, human accessibility, visual/audio quality, educational
+comprehension, device/browser behavior, provenance/legal status, or public
+release.
+
+## Review findings
+
+- The initial review found stale visible controls after a failed refresh while
+  playback was active. Amended commit `b765057` stops the timer and re-renders
+  the preserved cursor as paused; the regression passes and the sole reviewer
+  approved with no remaining findings.
+
 # Presentation QA — Durable regional-affiliation host checkpoint v0.13.65
 
 ## Status

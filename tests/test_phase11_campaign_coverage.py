@@ -527,7 +527,7 @@ console.log(JSON.stringify(resolved));
     coverage = self.ledger["replay_view_coverage"]
     replay_test = REPLAY_TEST.read_text(encoding="utf-8")
     mcp_server = MCP_SERVER.read_text(encoding="utf-8")
-    self.assertEqual(coverage["status"], "complete-live-host-projection")
+    self.assertEqual(coverage["status"], "complete-live-host-projection-and-local-playback")
     self.assertEqual(coverage["schema"], "competitive-replay-v1")
     self.assertEqual(
       coverage["metadata_contract"],
@@ -543,6 +543,11 @@ console.log(JSON.stringify(resolved));
       "createReplayClient",
       "validateReplayEnvelope",
       "renderReplayEnvelope",
+      "replay-previous",
+      "replay-play",
+      "replay-pause",
+      "replay-next",
+      "replay-playback-status",
       "replay_adapter_missing",
       "replay_adapter_error",
     ):
@@ -658,6 +663,7 @@ console.log(JSON.stringify(resolved));
       "Current explicit durable stabilization host checkpoint recovery covered.": "x",
       "Current explicit durable regional-affiliation host checkpoint recovery covered.": "x",
       "Current live replay visual continuity covered. Evidence:": "x",
+      "Current local replay playback over visible host rows covered. Evidence:": "x",
       "Unknown content fallbacks tested.": "x",
       "Current tracked visual/audio asset-registry coverage is 100%. Evidence:": "x",
       "Current supported screenshot-surface contract passes. Evidence:": "x",

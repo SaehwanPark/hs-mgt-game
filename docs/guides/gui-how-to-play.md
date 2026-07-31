@@ -142,6 +142,13 @@ After a campaign decision commits, expand **Decision-time observation** in the
 history entry to revisit the visible information that preceded that command.
 This is host-supplied written context, not a hidden-state or outcome forecast.
 
+In **Committed history and replay**, use **Previous row**, **Next row**,
+**Play replay**, and **Pause replay** to review the visible committed summaries.
+The selected row shows its command, optional observation, visible events/effects,
+and state hash in written text. These controls move a local review cursor only;
+they do not submit a command or regenerate the simulation. An empty replay says
+that no committed rows exist, and a failed refresh preserves the last valid view.
+
 ## Credits and provenance
 
 Open **Asset credits and provenance** in the settings panel to inspect the
@@ -154,14 +161,12 @@ policy authority.
 
 Copy a session ID displayed by the current GUI and enter it under **Existing
 session ID**, then select **Load existing session**. For
-`competitive-regional-v1` or `stabilization-v1`, select **Save host checkpoint**
-before stopping the host if you want restart recovery. A browser refresh or
-manual load after a restart attempts that host checkpoint once when the opaque
-ID matches the saved file, then refreshes the ordinary
-presentation/campaign/action/history/replay reads. Regional-affiliation
-sessions remain in-memory only. Without an explicit competitive or
-stabilization checkpoint, stopping or restarting the host invalidates the live
-session ID.
+`competitive-regional-v1`, `stabilization-v1`, or `regional-affiliation-v1`,
+select **Save host checkpoint** before stopping the host if you want restart
+recovery. A browser refresh or manual load after a restart attempts that host
+checkpoint once when the opaque ID matches the saved file, then refreshes the
+ordinary presentation/campaign/action/history/replay reads. Without an explicit
+checkpoint, stopping or restarting the host invalidates the live session ID.
 
 ## Stop the GUI
 

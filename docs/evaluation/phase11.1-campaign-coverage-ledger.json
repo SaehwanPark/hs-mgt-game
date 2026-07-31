@@ -387,7 +387,7 @@
     "boundary": "The host owns file I/O, true state, history, hashes, stochastic inputs, hydration, and transitions; the browser receives only the existing save metadata and actor-visible projections.",
     "limits": [
       "The configured application path stores one latest explicit competitive checkpoint; a later save replaces it.",
-      "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
+      "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
       "Rust persistence and session tests cover wrapper identity, new-store hydration, count/hash alignment, deterministic continuation, ID allocation, and terminal file cleanup.",
@@ -413,7 +413,7 @@
     "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
     "limits": [
       "The configured application path stores one latest explicit checkpoint; a later stabilization or competitive save replaces it.",
-      "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
+      "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
       "Rust persistence tests cover matching identity, deterministic replay verification, and malformed boundaries.",
@@ -439,7 +439,7 @@
     "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
     "limits": [
       "The configured application path stores one latest explicit checkpoint; a later campaign save replaces it.",
-      "No autosave, browser serialization, replay playback/regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
+      "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
       "Rust persistence tests cover matching identity, canonical affiliation replay verification, and malformed boundaries.",
@@ -448,7 +448,7 @@
     ]
   },
   "replay_view_coverage": {
-    "status": "complete-live-host-projection",
+    "status": "complete-live-host-projection-and-local-playback",
     "schema": "competitive-replay-v1",
     "host_source": "src/mcp/session.rs: get_replay",
     "mcp_source": "src/mcp/server.rs: get_replay",
@@ -468,16 +468,18 @@
       "Host returns immutable visible transition summaries without entering a new transition.",
       "Replay metadata aligns seed, transition count, latest state hash, and visible rows.",
       "Browser renders the projection through the existing text-first history surface.",
-      "Missing adapter, failed read, or malformed replay preserves the last valid view and exposes a recoverable error."
+      "Previous/next/play/pause move a local written cursor over visible rows without submitting or regenerating a transition.",
+      "Missing adapter, failed read, or malformed replay preserves the last valid view and cursor while exposing a recoverable error.",
+      "Empty replay disables movement and reports that no committed rows exist."
     ],
-    "boundary": "Host/core owns replay metadata, immutable history, and state hashes; the browser validates and renders a read-only projection without playback, regeneration, or client authority.",
+    "boundary": "Host/core owns replay metadata, immutable history, and state hashes; the browser validates and locally plays back a read-only projection without regeneration or client authority.",
     "limits": [
-      "No replay playback or regenerated simulation trace is established.",
+      "No replay regeneration or regenerated simulation trace is established.",
       "No durable replay persistence or browser-authored hash is established.",
       "No screenshot, accessibility, usability, or human-learning claim is made."
     ],
     "evidence": [
-      "The live replay test covers schema/operation-independent metadata validation, empty and committed views, adapter fallback, rendering, failure preservation, route/source markers, syntax, and authority exclusions.",
+      "The live replay test covers schema/operation-independent metadata validation, empty and committed views, local cursor/play/pause, adapter fallback, rendering, failure preservation, route/source markers, syntax, and authority exclusions.",
       "Rust session, MCP, and transport tests cover immutable history alignment and the read-only replay route."
     ]
   },
@@ -548,7 +550,7 @@
     "boundary": "Browser storage is best-effort presentation state; the host remains authoritative for sessions, transitions, history, replay, checkpoints, and outcomes.",
     "limits": [
       "No durable file persistence, browser serialization, or cross-process recovery is established.",
-      "No replay playback/regeneration, screenshot, device, accessibility, usability, or human-learning claim is made."
+      "No replay regeneration, screenshot, device, accessibility, usability, or human-learning claim is made."
     ],
     "evidence": [
       "Focused tests cover safe storage, successful and failed start/load, refresh recovery, stale cleanup, end cleanup, written fallback, and forbidden authority markers.",

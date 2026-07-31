@@ -1404,12 +1404,21 @@ function renderMonthlyResult(result, root) {
   list.append(headline);
 }
 
-function renderHistory(entries, root) {
+function replayDetailText(entry) {
+  const details = [];
+  if (Array.isArray(entry?.observation) && entry.observation.length) details.push(`observation: ${entry.observation.join(" | ")}`);
+  if (Array.isArray(entry?.events) && entry.events.length) details.push(`events: ${entry.events.join(" | ")}`);
+  if (Array.isArray(entry?.effects) && entry.effects.length) details.push(`effects: ${entry.effects.join(" | ")}`);
+  return details.join(" · ");
+}
+
+function renderHistory(entries, root, selectedIndex = -1) {
   const list = root.querySelector("#history-list");
   list.replaceChildren();
-  for (const entry of entries ?? []) {
+  for (const [index, entry] of (entries ?? []).entries()) {
     const item = document.createElement("li");
     item.className = "history-item";
+    if (index === selectedIndex) item.setAttribute("aria-current", "true");
     const turn = document.createElement("strong");
     turn.textContent = `Turn ${entry.turn ?? "—"}`;
     const command = document.createElement("span");
@@ -1418,6 +1427,12 @@ function renderHistory(entries, root) {
     hash.className = "hash";
     hash.textContent = `state hash: ${entry.state_hash ?? "—"}`;
     item.append(turn, command, hash);
+    if (index === selectedIndex) {
+      const detail = document.createElement("span");
+      detail.className = "history-detail";
+      detail.textContent = replayDetailText(entry) || "No additional visible row detail was supplied.";
+      item.append(detail);
+    }
     list.append(item);
   }
   if (!entries?.length) emptyState(list, "No committed transitions yet.");
@@ -1513,6 +1528,26 @@ export function renderReplayEnvelope(envelope, root = document) {
     meta.textContent = `${envelope.campaign} · replay ${envelope.transition_count} committed transitions · hash ${envelope.latest_state_hash ?? "no committed hash"}`;
   }
   return validation;
+}
+
+function renderReplayPlaybackState(entry, index, total, playing, root) {
+  const status = root.querySelector("#replay-playback-status");
+  if (status) {
+    if (!entry) {
+      status.textContent = "No committed replay rows yet.";
+    } else {
+      const detail = replayDetailText(entry);
+      status.textContent = `Reviewing replay row ${index + 1} of ${total} · Turn ${entry.turn ?? "—"} · command ${entry.command ?? "—"} · ${detail || "no additional visible row detail"} · state hash ${entry.state_hash ?? "—"}. ${playing ? "Playing." : "Paused."}`;
+    }
+  }
+  const previous = root.querySelector("#replay-previous");
+  const play = root.querySelector("#replay-play");
+  const pause = root.querySelector("#replay-pause");
+  const next = root.querySelector("#replay-next");
+  if (previous) previous.disabled = !entry || index <= 0;
+  if (play) play.disabled = !entry || playing;
+  if (pause) pause.disabled = !playing;
+  if (next) next.disabled = !entry || index >= total - 1;
 }
 
 export function validateSaveEnvelope(envelope) {
@@ -2952,6 +2987,94 @@ export function createHistoryClient({ adapter = globalThis.HsMgtGameActionAdapte
 
 export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document } = {}) {
   let envelope = null;
+  let selectedIndex = -1;
+  let playing = false;
+  let playbackTimer = null;
+
+  function rows() {
+    return envelope?.transitions ?? [];
+  }
+
+  function renderPlayback() {
+    const entries = rows();
+    renderHistory(entries, root, selectedIndex);
+    renderReplayPlaybackState(entries[selectedIndex], selectedIndex, entries.length, playing, root);
+  }
+
+  function stopTimer() {
+    if (playbackTimer !== null) {
+      clearInterval(playbackTimer);
+      playbackTimer = null;
+    }
+  }
+
+  function haltPlayback({ render = false } = {}) {
+    stopTimer();
+    playing = false;
+    if (render && typeof root?.querySelector === "function" && root.querySelector("#history-list")?.replaceChildren) {
+      renderPlayback();
+    }
+  }
+
+  function pause() {
+    haltPlayback();
+    renderPlayback();
+    return { ok: true, index: selectedIndex };
+  }
+
+  function select(index) {
+    const entries = rows();
+    if (!entries.length) {
+      selectedIndex = -1;
+      renderPlayback();
+      return { ok: false, code: "replay_empty" };
+    }
+    selectedIndex = Math.max(0, Math.min(index, entries.length - 1));
+    renderPlayback();
+    return { ok: true, index: selectedIndex, entry: entries[selectedIndex] };
+  }
+
+  function previous() {
+    return select(selectedIndex <= 0 ? 0 : selectedIndex - 1);
+  }
+
+  function next() {
+    return select(selectedIndex < 0 ? 0 : selectedIndex + 1);
+  }
+
+  function play() {
+    const entries = rows();
+    if (!entries.length) return { ok: false, code: "replay_empty" };
+    if (selectedIndex < 0 || selectedIndex >= entries.length - 1) selectedIndex = 0;
+    stopTimer();
+    playing = true;
+    renderPlayback();
+    playbackTimer = setInterval(() => {
+      if (selectedIndex >= rows().length - 1) {
+        pause();
+        return;
+      }
+      selectedIndex += 1;
+      renderPlayback();
+    }, 900);
+    return { ok: true, index: selectedIndex };
+  }
+
+  function bindControls() {
+    if (typeof root?.querySelector !== "function") return;
+    const controls = [
+      ["#replay-previous", previous],
+      ["#replay-play", play],
+      ["#replay-pause", pause],
+      ["#replay-next", next],
+    ];
+    for (const [selector, handler] of controls) {
+      const button = root.querySelector(selector);
+      if (typeof button?.addEventListener === "function") button.addEventListener("click", handler);
+    }
+  }
+
+  bindControls();
 
   async function load(sessionId = adapter?.sessionId) {
     if (!adapter || typeof adapter.getReplay !== "function") {
@@ -2960,12 +3083,19 @@ export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter
     try {
       const nextEnvelope = await adapter.getReplay(sessionId);
       const validation = validateReplayEnvelope(nextEnvelope);
-      if (!validation.ok) return validation;
+      if (!validation.ok) {
+        haltPlayback({ render: true });
+        return validation;
+      }
       const rendered = renderReplayEnvelope(nextEnvelope, root);
       if (!rendered.ok) return rendered;
+      pause();
       envelope = nextEnvelope;
-      return { ...rendered, envelope: nextEnvelope };
+      selectedIndex = nextEnvelope.transitions.length ? 0 : -1;
+      renderPlayback();
+      return { ...rendered, envelope: nextEnvelope, index: selectedIndex };
     } catch (error) {
+      haltPlayback({ render: true });
       return {
         ok: false,
         code: "replay_adapter_error",
@@ -2974,7 +3104,7 @@ export function createReplayClient({ adapter = globalThis.HsMgtGameActionAdapter
     }
   }
 
-  return { load, get envelope() { return envelope; } };
+  return { load, previous, next, play, pause, get envelope() { return envelope; }, get selectedIndex() { return selectedIndex; } };
 }
 
 export function createCheckpointClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, refresh } = {}) {

@@ -1,3 +1,46 @@
+# Final Handoff — Host-envelope replay playback rail v0.13.66
+
+## Status
+
+Implementation, full validation, and the sole code review are complete on
+`feat/replay-playback-v0.13.66`; PR creation, merge, and branch cleanup remain.
+
+## Planned result
+
+- Add a local written replay cursor over the existing validated host
+  `ReplayEnvelope` with previous/next/play/pause controls.
+- Preserve the last valid view on failure, report explicit empty state, and
+  keep browser authority limited to visible replay summaries.
+- Keep replay regeneration, persistence, autosave, screenshots, human review,
+  and public-release gates open.
+
+## Focused verification
+
+- Replay validation, local cursor movement, previous/next/play/pause, empty
+  state, failed-read preservation, selected-row written detail, and authority
+  boundary tests pass.
+- Existing live replay, history, browser, and GUI source tests remain green.
+
+## Full verification
+
+- `node --check gui/app.mjs`, full Rust/Python validation, Clippy, release
+  metadata, documentation links, asset/security/generation/credits,
+  device/offline/browser/audio/raster/loading, visual/audio contract, and diff
+  checks pass; the measured source-byte proxy is 389616 bytes.
+
+## Review
+
+- The sole medium-effort reviewer found a medium stale-control-state issue on
+  failed refresh. The amended commit `b765057` halts the timer, preserves the
+  valid envelope/cursor, re-renders paused controls, and adds regression
+  coverage; the reviewer re-verified and approved with no remaining findings.
+
+## Review boundary and remaining gates
+
+PR handoff, merge, and branch cleanup remain required. Replay regeneration,
+full-campaign placement/use and screenshots, human evaluation, provenance/legal,
+device certification, and public-release gates remain open.
+
 # Final Handoff — Durable regional-affiliation host checkpoint v0.13.65
 
 ## Status
