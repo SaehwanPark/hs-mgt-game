@@ -4509,6 +4509,19 @@ are completed. Human-review gates remain open.
   Firefox/WebKit runtime checks, real hardware and performance measurements,
   lived accessibility/usability, and public-release certification remain open.
 
+### v0.13.91 debrief visual evidence-intake packet
+
+- `docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json`
+  preserves the existing three terminal debrief cases and five review
+  questions while keeping the intake empty and human review pending.
+- `scripts/validate_debrief_visual_evidence_intake.py` and
+  `tests/test_phase13_2_debrief_visual_evidence_intake.py` fail closed on
+  case/source drift, unknown envelope fields, identity/media/private-state
+  capture, unbounded values, and premature review or release decisions.
+- This prepares debrief evidence capture only. It does not close `Debrief
+  visuals reviewed` or establish visual, accessibility, educational,
+  classroom, audio-listening, legal, or public-release results.
+
 ### v0.13.90 pilot evidence-intake packet
 
 - `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json` defines an
@@ -4612,6 +4625,12 @@ are completed. Human-review gates remain open.
   corrected terminal cases to host-projection, written-equivalent,
   accessibility/fallback, causality, replay, and provenance questions while
   leaving authorized human review pending.
+- [x] Debrief visual evidence intake prepared. Evidence:
+  `docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json`,
+  `scripts/validate_debrief_visual_evidence_intake.py`, and
+  `tests/test_phase13_2_debrief_visual_evidence_intake.py`; the empty intake
+  preserves all three technical cases and rejects identity, raw media,
+  private state, source drift, and premature human/release decisions.
 - [x] Classroom hardware assumptions documented. Evidence:
   `docs/guides/phase10.2-structured-evaluation.md` and
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; loopback host,

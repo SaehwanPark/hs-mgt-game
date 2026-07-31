@@ -3594,3 +3594,17 @@ separate gates.
 - Prevention: separate preparation, authorized evidence capture, findings,
   revision decisions, expansion approval, and public release; never infer a
   human conclusion from an empty or automated intake check.
+
+# Review Packets Need an Evidence Intake, Not Just Questions
+
+- Context: the terminal debrief review packet already bound three corrected
+  cases and five review questions, but it had no bounded place to capture an
+  authorized review later.
+- Risk: a reviewer could add unstructured findings, identity, private state,
+  or new media and blur technical debrief evidence with human quality or
+  release approval.
+- Resolution: add an empty intake with exact case/source parity, bounded
+  reviewer/status/rating/accommodation/finding fields, and explicit pending
+  decisions.
+- Prevention: keep technical review packets, human evidence intake, revision
+  decisions, provenance/legal review, and public release as separate gates.

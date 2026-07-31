@@ -1,0 +1,106 @@
+{
+  "schema_version": "phase13.2-debrief-visual-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-review",
+  "roadmap_item": "Debrief visuals reviewed",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for authorized human review of the three terminal debrief cases without recording human findings in this preparation packet.",
+  "review_questions": [
+    "Can a reviewer distinguish committed campaign history from the retrospective debrief without relying on color, motion, or audio?",
+    "Can a reviewer reconstruct the visible consequence sequence from written history, debrief, and direct effects without inferring hidden state or causal certainty?",
+    "Can a reviewer locate the current stage, terminal status, and absence of further decision controls at the planned 1024x768 baseline?",
+    "Do Large text, reduced motion, keyboard navigation, recovery guidance, audio-off, mute, and cues-only preserve decision-relevant meaning?",
+    "Are actor-visible observations, uncertainty, written fallbacks, and provenance boundaries understandable without exposing private or instructor-only state?"
+  ],
+  "source_contract": {
+    "review_packet": "docs/evaluation/phase13.2-debrief-visual-review-packet.json: \"status\": \"complete-technical-packet-pending-human-review\"",
+    "technical_boundary": "docs/evaluation/phase13.2-debrief-visual-boundary.json: \"status\": \"complete-current-technical-debrief-visual-boundary-only\"",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json: \"status\": \"ready-for-human-evaluation\"",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md: explicit consent",
+    "accommodations": "docs/evaluation/phase13.2-pilot-preparation-boundary.json: \"accessibility\": \"Reduced motion, Large text, written equivalents, mute/reduced notifications, keyboard, skip/review, and extra-time accommodations are written.\""
+  },
+  "review_boundary": {
+    "technical_intake_complete": true,
+    "human_review_records_present": false,
+    "human_visual_review_complete": false,
+    "human_accessibility_review_complete": false,
+    "educational_and_classroom_review_complete": false,
+    "audio_listening_review_complete": false,
+    "public_release_approval": false
+  },
+  "intake_boundary": {
+    "record_count": 0,
+    "reviewer_identity_collected": false,
+    "raw_notes_collected": false,
+    "raw_media_collected": false,
+    "browser_location_collected": false,
+    "private_game_state_collected": false,
+    "decision_status": "pending-authorized-human-review",
+    "go_no_go": null
+  },
+  "review_contract": {
+    "record_fields": [
+      "case_id",
+      "reviewer_category",
+      "review_status",
+      "ratings",
+      "accommodations",
+      "finding_categories"
+    ],
+    "case_ids": [
+      "competitive-terminal-debrief",
+      "stabilization-terminal-debrief",
+      "regional-affiliation-terminal-debrief"
+    ],
+    "reviewer_categories": [
+      "project-owner-or-contributor",
+      "strategy-game-player",
+      "health-policy-or-management-expert",
+      "accessibility-oriented-reviewer",
+      "first-time-user"
+    ],
+    "review_statuses": ["reviewed", "skipped", "not-observed"],
+    "review_dimensions": [
+      "history-debrief-distinction",
+      "consequence-sequence-reconstruction",
+      "terminal-status-and-control-legibility",
+      "accessibility-fallback-equivalence",
+      "actor-visible-and-uncertainty-boundary"
+    ],
+    "rating_values": [1, 2, 3, 4, 5, "not-observed"],
+    "accommodation_categories": [
+      "keyboard-navigation",
+      "large-text",
+      "reduced-motion",
+      "audio-off",
+      "cues-only",
+      "reduced-notifications",
+      "written-equivalent",
+      "skip-review",
+      "extra-time",
+      "no-accommodation-observed"
+    ],
+    "finding_categories": ["defect", "preference", "scope-expansion"],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-authorized-human-review",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no human findings and does not perform or represent visual, accessibility, educational, classroom, or audio-listening review.",
+    "The bounded record vocabulary does not establish pixel quality, comprehension, learning, classroom effectiveness, audio usefulness, legal/provenance clearance, or policy validity.",
+    "Existing rasters and transcripts remain evaluation-only; this slice adds no screenshot, recording, asset, or release artifact.",
+    "Human review, revision decisions, expansion approval, legal/provenance clearance, and public-release approval remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_2_debrief_visual_evidence_intake.py"
+}
