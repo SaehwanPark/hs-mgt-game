@@ -4853,3 +4853,37 @@ pending.
 on source/ledger drift, terminal evidence drift, missing facility/capacity or
 fallback coverage, forbidden authority markers, release promotion, or
 completed human-review fields.
+
+# Presentation Contract — AI preview provenance/human-review packet v0.13.87
+
+## Goal and authorization
+
+Prepare a technical review surface for seven preserved fictional actor-portrait
+previews without loading, registering, promoting, or altering any image. The
+packet separates machine inventory/provenance facts from human identity,
+resemblance, accessibility, legal, and release judgments.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Preview identity and role | `assets/generation/portrait-set.json` and `portrait-previews.json` | Compare the seven fictional roles, families, labels, and fallback text | Do not infer a real person, institution, severity, intent, or outcome |
+| Source preservation | Preview path, SHA-256, and dimensions | Verify the preserved 1254×1254 inventory | A hash proves byte identity, not visual quality or approval |
+| Generation provenance | `generation-workflow.json`, `approved-models.json`, and preview metadata | Check required fields and preserve null/not-exposed values | Do not reconstruct model, revision, sampler, seed, ownership, or training data |
+| Human review queue | `portrait-review-queue.json` | Conduct identity, resemblance, marks, artifact, accessibility, size, grayscale, and release-gate review | Machine checks do not complete human review or legal clearance |
+| Release boundary | Generation manifest, visual registry, credits, and release manifest | Verify previews remain excluded and fallbacks remain available | A technical packet does not authorize registration, release, or public approval |
+
+## Accessibility, fallback, and authority
+
+Every preview retains an accessible equivalent and generic actor-marker fallback.
+The portraits are not loaded by the GUI and cannot own simulation state. The
+technical packet preserves the existing written/fallback presentation contract
+while leaving human small-size, grayscale, resemblance, accessibility, and
+quality review pending.
+
+## Verification
+
+`tests/test_phase13_1_ai_preview_provenance_review_packet.py` must fail closed
+on source-marker or seven-role drift, hash/dimension drift, guessed metadata,
+completed queue gates, registry/runtime/release promotion, or human/legal
+claims.

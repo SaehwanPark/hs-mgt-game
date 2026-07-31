@@ -7490,6 +7490,26 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio AI preview provenance/human-review packet (v0.13.87)
+
+The Phase 13.1 packet makes technical and authorized human review of the seven
+preserved fictional actor-portrait previews actionable. It binds source
+hashes, dimensions, role/family contracts, written equivalents, generic
+fallbacks, generation metadata requirements, pending review gates, and
+runtime/registry/release exclusion.
+
+The packet validator rejects source or inventory drift, hash/dimension drift,
+guessed model/seed values, completed queue gates, registry/runtime/release
+promotion, and human/legal claims. It does not provide unavailable model or
+seed metadata, complete resemblance/accessibility/legal/training-data review,
+or authorize release.
+
+The target and actor-visible contract is recorded in
+`_workspace/165_implementation_plan_visual-audio-phase13-1-ai-preview-provenance-review-packet-v0.13.87.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio first-session participant review packet (v0.13.84)
 
 The Phase 13.1 packet makes the open first-session workflow review actionable
