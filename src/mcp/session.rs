@@ -3646,6 +3646,96 @@ mod tests {
   }
 
   #[test]
+  fn regional_world_facility_projection_covers_all_competitive_months() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let expected_components = [
+      "general-hospital-base",
+      "ambulatory-center",
+      "emergency-department",
+      "specialty-center",
+    ];
+    let expected_metrics = [
+      "Staffed beds",
+      "Outpatient capacity",
+      "Emergency",
+      "ICU",
+      "Obstetrics",
+      "Psychiatric",
+      "Cardiology",
+      "Oncology",
+      "Infusion",
+      "Neurology",
+      "ASC",
+    ];
+    let mut current = session;
+
+    for month in 1..=COMPETITIVE_MONTH_LIMIT {
+      let world = store
+        .get_regional_world(GetRegionalWorldRequest {
+          session_id: current.session_id.clone(),
+        })
+        .expect("regional world during competitive month");
+      assert_eq!(world.session.turn, month);
+      assert!(!world.session.done);
+      let owned = world
+        .entities
+        .iter()
+        .find(|entity| entity.visibility == "owned")
+        .expect("owned facility entity");
+      assert_eq!(
+        owned
+          .facilities
+          .iter()
+          .map(|facility| facility.component_id.as_str())
+          .collect::<Vec<_>>(),
+        expected_components
+      );
+      assert!(
+        owned
+          .facilities
+          .iter()
+          .all(|facility| facility.source == "PlayerObservation capacity fields")
+      );
+      assert_eq!(
+        owned
+          .facilities
+          .iter()
+          .flat_map(|facility| facility.metrics.iter())
+          .map(|metric| metric.label.as_str())
+          .collect::<Vec<_>>(),
+        expected_metrics
+      );
+      assert!(
+        world
+          .entities
+          .iter()
+          .filter(|entity| entity.visibility == "public identity")
+          .all(|entity| entity.facilities.is_empty())
+      );
+
+      current = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: current.session_id,
+          command_text: "hold".to_string(),
+        })
+        .expect("competitive month");
+    }
+
+    let terminal = store
+      .get_regional_world(GetRegionalWorldRequest {
+        session_id: current.session_id,
+      })
+      .expect("terminal regional world");
+    assert!(terminal.session.done);
+    assert_eq!(terminal.session.turn, COMPETITIVE_MONTH_LIMIT);
+    assert_eq!(
+      terminal.replay.transition_count,
+      COMPETITIVE_MONTH_LIMIT as usize
+    );
+  }
+
+  #[test]
   fn regional_world_public_signals_respect_observation_lag() {
     let mut store = GameSessionStore::default();
     let session = start(&mut store, "competitive-regional-v1");

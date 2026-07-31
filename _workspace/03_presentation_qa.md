@@ -4897,3 +4897,37 @@ Automated checks establish technical source-bound projection and authority
 preservation only. They cannot approve human accessibility, visual/audio
 quality, educational comprehension, device/browser behavior, provenance/legal
 status, or public release.
+# Presentation QA — Full-campaign facility placement/use evidence v0.13.71
+
+## Status
+
+Implementation, full validation, and the sole medium-effort code review pass.
+The reviewer found no actionable issues. The bounded boundary is host-projected
+player facility continuity across all 24 competitive months.
+
+## Required pass conditions
+
+- Every monthly and terminal regional-world read exposes the four player
+  facility components and eleven visible capacity metric labels.
+- Every facility source remains `PlayerObservation capacity fields`, rival
+  private facilities remain unavailable, and read calls do not mutate history.
+- Evidence stays distinct from pixel-level placement quality, screenshot
+  completeness, human accessibility, educational review, and release approval.
+- Focused tests, full repository gates, and exactly one medium-effort code review
+  pass before PR handoff.
+
+## Current validation
+
+- 367 Rust tests, 780 Python tests, Clippy, formatting, release metadata,
+  documentation links, asset/security/generation/credits, device, offline,
+  browser, audio, raster, loading, visual/audio, and asset-budget checks pass.
+- The host regression covers every monthly regional-world read, terminal
+  completion, all four player facility components, eleven capacity metrics,
+  source markers, and private-rival facility exclusion.
+
+## Evidence limits
+
+This slice can establish only a deterministic host projection and continuity
+contract; it cannot establish human visual comprehension, accessibility,
+educational usefulness, device/browser certification, provenance/legal status,
+or public release.

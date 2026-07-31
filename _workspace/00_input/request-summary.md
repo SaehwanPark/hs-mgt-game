@@ -3352,3 +3352,39 @@ temporary-branch cleanup before selecting the next roadmap slice.
 This slice proves a host-owned typed competitive coverage read and loopback
 integration. It does not prove campaign-specific visual/audio quality, human
 comprehension, device/browser certification, or public-release readiness.
+# Request Summary — Full-campaign facility placement/use evidence v0.13.71
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a bounded technical evidence slice for
+competitive facility placement/use continuity across every month of the
+host-owned 24-month campaign.
+
+## Target slice
+
+- Read the existing `competitive-regional-world-v1` projection before each
+  committed month and after terminal completion.
+- Verify the four player facility components and eleven visible capacity
+  metrics remain source-bound to `PlayerObservation` without exposing private
+  rival facilities or hidden simulation inputs.
+- Record this as current technical evidence while keeping full-campaign visual
+  quality, screenshots, human review, and release gates open.
+
+## Non-goals
+
+- No new route, schema, simulation, facility type, asset/audio file, browser
+  authority, persistence format, screenshot suite, human review, device
+  certification, provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused Rust/session and evidence-contract tests; full Rust/Python/repository
+validation; exactly one medium-effort code review; authorized PR/merge and
+temporary-branch cleanup before selecting the next roadmap slice.
+
+## Evidence limits
+
+This slice proves only host-projected facility continuity and visible capacity
+metric coverage across the 24-month competitive loop. It does not prove visual
+quality, pixel-level placement, human comprehension, accessibility, audio
+usefulness, or public-release readiness.

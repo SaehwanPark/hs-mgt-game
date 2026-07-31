@@ -3336,3 +3336,14 @@ pending and outside the manifest/registry, and require a promotion-shaped
 negative test so guessed metadata cannot pass. Human portrait, legal,
 accessibility, ownership, training-data, and public-release review remain
 separate gates.
+# Prove Full-Campaign Presentation Continuity at the Host Read Boundary
+
+- Context: current facility catalogs and regional-world rendering were tested
+  at the initial competitive state, while the roadmap still called out
+  full-campaign placement/use coverage as open.
+- Risk: treating an initial snapshot or stable asset catalog as evidence that
+  facility presentation remains available through committed campaign changes
+  can hide a stale or incomplete projection.
+- Prevention: exercise the host-owned read before every committed month and at
+  terminal completion; assert source-bound player metrics and explicit private-
+  rival absence without inventing client-side utilization semantics.

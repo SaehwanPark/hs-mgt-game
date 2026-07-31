@@ -2244,3 +2244,24 @@ mutation-path separation.
 Run the full repository validation, complete exactly one medium-effort review,
 create and merge the PR, delete the temporary branch locally and remotely,
 verify clean `main`, and then select the next unmet roadmap slice.
+# Final Handoff — Full-campaign facility placement/use evidence v0.13.71
+
+## Status
+
+Implementation, full validation, and exactly one medium-effort review are
+complete on `feat/full-campaign-facility-use-v0.13.71`; the reviewer found no
+actionable issues. PR handoff, merge, and branch cleanup remain.
+
+## Target result
+
+- Prove the existing host regional-world read preserves player facility groups
+  and capacity metrics through every month of the 24-month competitive run.
+- Preserve the actor-visible boundary and keep private rival facility detail
+  unavailable.
+- Update evidence without claiming screenshot quality, human approval, or
+  public-release readiness.
+
+## Remaining work
+
+Merge the PR, clean both temporary branches, verify clean `main`, and select
+the next unmet roadmap slice.
