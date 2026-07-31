@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.88] - 2026-07-31
+
+- Added a source-bound cross-browser/device review packet for the declared
+  Chromium compatibility matrix and reduced-capability low-power proxy.
+- Kept Firefox, WebKit, real hardware, battery/thermal/memory/frame-rate,
+  human accessibility/usability, and public-release certification pending.
+
 ## [0.13.87] - 2026-07-31
 
 - Added a source-bound AI-preview provenance/human-review packet for the seven

@@ -4887,3 +4887,35 @@ quality review pending.
 on source-marker or seven-role drift, hash/dimension drift, guessed metadata,
 completed queue gates, registry/runtime/release promotion, or human/legal
 claims.
+
+# Presentation Contract — Cross-browser/device review packet v0.13.88
+
+## Goal and authorization
+
+Prepare a technical review surface for the declared Chromium browser target
+and the reduced-capability low-power proxy without expanding browser support or
+claiming real-device or human review results.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Browser target | `assets/browser-compatibility-policy.json` and `scripts/check_browser_compatibility.py` | Verify the supported Chromium target, minimum version, capabilities, fallbacks, and not-certified engines | Do not infer Firefox/WebKit support from syntax or local smoke evidence |
+| Loading and offline boundary | `assets/loading-policy.json`, `assets/offline-policy.json`, and existing checker tests | Verify embedded modules, loopback-only host access, and no speculative file-backed loading | Do not infer network, cache, decoder, or persistence certification |
+| Low-power proxy | `assets/device-performance-policy.json` and `scripts/check_device_performance.py` | Verify the 1024x768 reduced-motion/audio-off emulated profile, measurements, and limits | Do not infer real hardware, battery, thermal, memory, or frame-rate behavior |
+| Presentation fallbacks | Browser policy, GUI guide, and technical coverage ledger | Verify written equivalents, audio-off behavior, single-column fallback, and documented open gates | Do not infer lived accessibility, usability, learning, or public-release approval |
+
+## Accessibility, recovery, and authority
+
+Audio-off, reduced motion, unavailable storage, written equivalents, and
+single-column fallback remain technical presentation contracts. The browser
+does not gain simulation authority, and the packet does not alter host
+transitions, state, assets, or release outputs. Firefox, WebKit, real hardware,
+human accessibility/usability, and public-release decisions remain pending.
+
+## Verification
+
+`tests/test_phase13_1_cross_browser_device_review_packet.py` must fail closed
+on policy/target/capability drift, measurement drift, unsupported certification
+claims, missing fallback/limit markers, authority changes, or release
+promotion.

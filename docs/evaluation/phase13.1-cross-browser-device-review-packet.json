@@ -1,0 +1,291 @@
+{
+  "schema_version": "phase13.1-cross-browser-device-review-packet-v1",
+  "status": "complete-technical-packet-pending-runtime-certification",
+  "roadmap_item": "cross-browser/device certification",
+  "review_boundary": {
+    "technical_packet_complete": true,
+    "declared_browser_matrix_complete": true,
+    "chromium_target_check_complete": true,
+    "emulated_low_power_proxy_check_complete": true,
+    "firefox_runtime_certification_complete": false,
+    "webkit_runtime_certification_complete": false,
+    "real_device_certification_complete": false,
+    "hardware_performance_certification_complete": false,
+    "human_accessibility_review_complete": false,
+    "human_usability_review_complete": false,
+    "public_release_approval": false
+  },
+  "shared_sources": [
+    "assets/browser-compatibility-policy.json",
+    "assets/device-performance-policy.json",
+    "assets/loading-policy.json",
+    "assets/offline-policy.json",
+    "scripts/check_browser_compatibility.py",
+    "scripts/check_device_performance.py",
+    "tests/test_browser_compatibility.py",
+    "tests/test_device_performance.py",
+    "docs/evaluation/phase13.1-technical-coverage.json",
+    "tests/test_phase13_technical_coverage.py",
+    "docs/guides/reproducible-distribution.md",
+    "docs/guides/gui-how-to-play.md"
+  ],
+  "source_contract": {
+    "required_source_markers": {
+      "browser_policy": [
+        "browser-compatibility-v1",
+        "completed-technical-matrix",
+        "chromium-evergreen-desktop",
+        "firefox-desktop",
+        "webkit-desktop",
+        "legacy-browser",
+        "static-contract",
+        "local-browser-smoke",
+        "es-modules",
+        "fetch",
+        "native-svg",
+        "css-grid",
+        "web-audio",
+        "not-certified",
+        "The matrix certifies only the named target and documented capabilities."
+      ],
+      "device_policy": [
+        "device-performance-v1",
+        "completed-emulated-proxy",
+        "low-power-browser-proxy",
+        "1024",
+        "768",
+        "reduced",
+        "off",
+        "unavailable",
+        "loopback-only",
+        "real_device",
+        "emulated reduced-capability proxy only",
+        "No battery, thermal, memory, frame-rate, decoder, or cache conclusion is established."
+      ],
+      "guides": [
+        "Firefox and WebKit are not runtime-certified by this contract.",
+        "Firefox/WebKit certification or real low-power-device measurements;",
+        "Chromium surface; Firefox and WebKit are not certified yet."
+      ],
+      "technical_coverage": [
+        "chromium-compatibility",
+        "accessibility-presentation-contract",
+        "Chromium and emulated low-power checks do not certify Firefox/WebKit, real hardware, battery/thermal/memory behavior, or human accessibility."
+      ],
+      "validators": [
+        "validate_definition",
+        "build_report",
+        "BrowserCompatibilityTests",
+        "DevicePerformanceTests"
+      ]
+    },
+    "forbidden_claim_markers": [
+      "Firefox is supported",
+      "WebKit is supported",
+      "Firefox/WebKit certified",
+      "real-device certification complete",
+      "battery certification complete",
+      "human accessibility review complete",
+      "public release approved"
+    ]
+  },
+  "browser_contract": {
+    "policy_schema_version": "browser-compatibility-v1",
+    "policy_status": "completed-technical-matrix",
+    "surface": "loopback dependency-free GUI",
+    "entrypoint": "gui/index.html",
+    "supported_targets": [
+      {
+        "id": "chromium-evergreen-desktop",
+        "engine": "Chromium",
+        "minimum_major_version": 120,
+        "support": "supported",
+        "evidence": ["static-contract", "local-browser-smoke"],
+        "required_capabilities": ["es-modules", "fetch", "native-svg", "css-grid"]
+      }
+    ],
+    "not_certified_targets": [
+      {
+        "id": "firefox-desktop",
+        "engine": "Firefox",
+        "support": "not-certified",
+        "reason": "No Firefox runtime is available in the current verification environment."
+      },
+      {
+        "id": "webkit-desktop",
+        "engine": "WebKit",
+        "support": "not-certified",
+        "reason": "No WebKit runtime is available in the current verification environment."
+      },
+      {
+        "id": "legacy-browser",
+        "engine": "Legacy non-module browser",
+        "support": "unsupported",
+        "reason": "The live entrypoint requires native ECMAScript modules."
+      }
+    ],
+    "required_capabilities": ["es-modules", "fetch", "native-svg", "css-grid"],
+    "optional_capabilities": ["web-audio", "local-storage"],
+    "capabilities": [
+      {
+        "id": "es-modules",
+        "required": true,
+        "source": "gui/index.html module entrypoint and declared local imports",
+        "fallback": "Show a browser-support message; do not start a partial client."
+      },
+      {
+        "id": "fetch",
+        "required": true,
+        "source": "gui/host-adapter.mjs same-origin host requests",
+        "fallback": "Preserve the static shell and show a recoverable adapter error."
+      },
+      {
+        "id": "native-svg",
+        "required": true,
+        "source": "gui/scene.mjs regional-board SVG rendering",
+        "fallback": "Retain facility labels, markers, and written equivalents without SVG decoration."
+      },
+      {
+        "id": "css-grid",
+        "required": true,
+        "source": "gui/index.html responsive executive desktop layout",
+        "fallback": "The page remains readable as a single-column document flow."
+      },
+      {
+        "id": "web-audio",
+        "required": false,
+        "source": "gui/audio.mjs optional generated cues, ambience, and music",
+        "fallback": "Mute audio and keep all cue meaning in visible/text equivalents."
+      },
+      {
+        "id": "local-storage",
+        "required": false,
+        "source": "gui/app.mjs optional local presentation preferences",
+        "fallback": "Use session defaults; never block host state or command submission."
+      }
+    ],
+    "boundary_checks": {
+      "loading_policy": "assets/loading-policy.json",
+      "offline_policy": "assets/offline-policy.json",
+      "forbidden_client_authority_markers": [
+        "CompetitiveWorldState",
+        "HealthSystemState",
+        "resolved_inputs",
+        "effect_queue",
+        "Math.random"
+      ]
+    },
+    "check_status": {
+      "overall": "pass",
+      "loading_policy": "pass",
+      "offline_policy": "pass",
+      "syntax": "pass",
+      "authority_boundary": "pass"
+    }
+  },
+  "device_contract": {
+    "policy_schema_version": "device-performance-v1",
+    "policy_status": "completed-emulated-proxy",
+    "surface": "loopback dependency-free GUI",
+    "live_entrypoint": "gui/index.html",
+    "profile": {
+      "id": "low-power-browser-proxy",
+      "viewport": {"width": 1024, "height": 768},
+      "motion": "reduced",
+      "audio": "off",
+      "storage": "unavailable",
+      "network": "loopback-only"
+    },
+    "limits": {
+      "live_source_bytes": 400000,
+      "dom_elements": 900,
+      "svg_elements": 8,
+      "shell_reload_ms": 1000,
+      "host_start_ms": 1000,
+      "adapter_command_ms": 1000
+    },
+    "measurements": {
+      "viewport": {"width": 1024, "height": 768},
+      "live_source_bytes": 395285,
+      "dom_elements": 818,
+      "svg_elements": 4,
+      "shell_reload_samples_ms": [52, 49, 50, 52, 50],
+      "shell_reload_max_ms": 52,
+      "host_start_ms": 367,
+      "adapter_command_ms": 259,
+      "written_equivalent_present": true,
+      "audio_off_present": true,
+      "reduced_motion_language_present": true
+    },
+    "evidence": [
+      "static-live-source-audit",
+      "local-browser-smoke",
+      "loopback-host-session-start",
+      "loopback-adapter-command-probe"
+    ],
+    "certification": {
+      "real_device": false,
+      "hardware_target": null,
+      "claim": "emulated reduced-capability proxy only"
+    },
+    "check_status": "pass"
+  },
+  "runtime_certification_queue": [
+    {
+      "id": "chromium-evergreen-desktop",
+      "status": "technical-contract-pass",
+      "next_evidence": "Repeat the declared local smoke contract when the supported runtime changes."
+    },
+    {
+      "id": "low-power-browser-proxy",
+      "status": "emulated-proxy-pass",
+      "next_evidence": "Obtain authorized real hardware measurements before making a device claim."
+    },
+    {
+      "id": "firefox-desktop",
+      "status": "pending-runtime-check",
+      "next_evidence": "Run the supported GUI contract in an available Firefox runtime and record engine/version/results."
+    },
+    {
+      "id": "webkit-desktop",
+      "status": "pending-runtime-check",
+      "next_evidence": "Run the supported GUI contract in an available WebKit runtime and record engine/version/results."
+    },
+    {
+      "id": "real-hardware",
+      "status": "pending-device-check",
+      "next_evidence": "Run the reduced-capability profile on authorized hardware and record device, OS, browser, and measurement conditions."
+    },
+    {
+      "id": "human-accessibility-usability",
+      "status": "pending-human-review",
+      "next_evidence": "Collect authorized accessibility and usability evidence; do not infer it from automated checks."
+    }
+  ],
+  "review_tasks": [
+    "Confirm the declared Chromium target and minimum version from the source policy.",
+    "Confirm required and optional browser capabilities and their presentation fallbacks.",
+    "Confirm the loading, offline, syntax, and client-authority checks remain green.",
+    "Confirm the low-power profile is an emulated 1024x768 proxy with audio off, reduced motion, unavailable storage, and loopback-only networking.",
+    "Confirm measured source, DOM, SVG, reload, host-start, and adapter-command values remain within policy limits.",
+    "Confirm Firefox, WebKit, real hardware, and human accessibility/usability remain pending rather than certified.",
+    "Confirm the packet does not authorize runtime, release, or public-support promotion."
+  ],
+  "evidence_limits": [
+    "The packet closes only the repository-owned technical review surface for the declared browser matrix and emulated proxy.",
+    "Chromium and local smoke evidence do not certify Firefox or WebKit.",
+    "An emulated low-power proxy is not a real-device, battery, thermal, memory, frame-rate, decoder, or cache certification.",
+    "Automated checks do not establish lived accessibility, human usability, learning, or audio quality.",
+    "The packet does not authorize a browser support expansion, a release claim, or public-release approval."
+  ],
+  "release_boundary": {
+    "runtime_changes": 0,
+    "simulation_changes": 0,
+    "asset_changes": 0,
+    "audio_changes": 0,
+    "screenshot_changes": 0,
+    "release_manifest_changes": 0,
+    "public_release_approval": false,
+    "technical_packet_does_not_authorize_support_promotion": true
+  }
+}
