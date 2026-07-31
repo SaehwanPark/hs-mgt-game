@@ -3666,3 +3666,38 @@ actionable findings; merge and cleanup remain.
 This proves only technical full-run loopback transport continuity. It does not
 prove real-browser layout, human accessibility, educational value, archive
 durability, or public-release readiness.
+
+# Request Summary — Full-campaign screenshot evidence v0.13.80
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a bounded local-browser inspection
+record for the existing full-campaign coverage surface.
+
+## Target slice
+
+- Inspect one active and one terminal coverage state for competitive,
+  stabilization, and regional affiliation at 1024×768.
+- Record host campaign identity, terminal debrief presence, written fallback,
+  optional-audio behavior, source markers, and ephemeral-capture status.
+- Validate the exact six-state matrix without adding routes, schemas, browser
+  authority, assets, audio files, or hidden-state fields.
+
+## Non-goals
+
+- No browser automation dependency, production screenshot runner, committed
+  PNG/JPEG golden, screenshot hash, human visual/accessibility review,
+  provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused screenshot-evidence contract test; full Rust/Python/repository
+validation; exactly one medium-effort review; authorized PR/merge and
+temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only that the existing loopback GUI and shared campaign panel were
+inspected at the six bounded states. It does not establish persisted raster
+goldens, cross-browser/device certification, pixel-level visual quality, lived
+accessibility, educational usefulness, or public-release readiness.

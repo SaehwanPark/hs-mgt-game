@@ -233,7 +233,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "full_campaign_screenshot_inspection", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -934,6 +934,7 @@ console.log(JSON.stringify(resolved));
       "Unknown content fallbacks tested.": "x",
       "Current tracked visual/audio asset-registry coverage is 100%. Evidence:": "x",
       "Current supported screenshot-surface contract passes. Evidence:": "x",
+      "Current full-campaign local-browser screenshot inspection recorded.": "x",
     }
     actual = {label: state for state, label in re.findall(r"^- \[([ x])\] (.+)$", self.phase11_1, re.MULTILINE)}
     self.assertEqual(actual, {label: state for label, state in expected.items()})

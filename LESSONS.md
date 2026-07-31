@@ -3440,3 +3440,19 @@ separate gates.
   debrief, and optional audio without adding transport authority.
 - Prevention: keep host, renderer, and route continuity as separate evidence
   gates; passing one boundary must not stand in for the others.
+
+# Keep Browser Screenshot Inspection Separate From Raster Release Evidence
+
+- Context: the live loopback GUI can be inspected at the documented baseline,
+  but the repository does not yet have a committed raster-capture harness or
+  golden image set.
+- Risk: recording a successful browser screenshot as a completed release,
+  visual-quality, or accessibility gate would turn ephemeral inspection into
+  unsupported approval.
+- Resolution: record exactly one active and one terminal inspection per
+  campaign with viewport, host source, written equivalent, optional-audio, and
+  terminal-debrief fields; set artifact path/hash to null and retain explicit
+  limits.
+- Prevention: require persisted files, reproducible capture tooling, and
+  separate human review before promoting the screenshot boundary to a raster
+  or public-release claim.

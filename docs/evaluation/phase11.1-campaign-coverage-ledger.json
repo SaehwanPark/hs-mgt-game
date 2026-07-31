@@ -316,6 +316,28 @@
       "The browser remains read-only for simulation authority; screenshot inspection does not create or infer hidden state."
     ]
   },
+  "full_campaign_screenshot_inspection": {
+    "status": "complete-technical-local-browser-inspection",
+    "manifest_source": "docs/evaluation/phase11.1-full-campaign-screenshot-evidence.json",
+    "test_source": "tests/test_phase11_full_campaign_screenshot_evidence.py",
+    "viewport": {
+      "width": 1024,
+      "height": 768
+    },
+    "state_matrix": [
+      "competitive-regional-v1 active",
+      "competitive-regional-v1 terminal",
+      "stabilization-v1 active",
+      "stabilization-v1 terminal",
+      "regional-affiliation-v1 active",
+      "regional-affiliation-v1 terminal"
+    ],
+    "capture_artifact": "ephemeral-not-persisted",
+    "limits": [
+      "No committed PNG/JPEG raster golden or screenshot hash is claimed.",
+      "No cross-browser/device, pixel-quality, human visual/accessibility, educational, legal, or public-release claim is made."
+    ]
+  },
   "event_cue_coverage": {
     "status": "complete",
     "host_projection_source": "src/mcp/resolution.rs: visible_event_cue_ids",

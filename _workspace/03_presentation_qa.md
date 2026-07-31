@@ -5187,3 +5187,85 @@ The full repository validation passes with 374 Rust tests and 788 Python tests;
 Clippy, formatting, release metadata, documentation links, asset/security/
 generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
 asset-budget, CLI smoke, Node syntax, and diff checks are green.
+
+# Presentation QA — Full-campaign screenshot inspection evidence v0.13.80
+
+## Status
+
+Pass for the bounded technical local-browser inspection contract. The six
+active/terminal campaign states were inspected at 1024×768 and the manifest
+and ledger validators pass. This does not pass a persisted raster-golden,
+human visual, lived accessibility, educational, or public-release gate.
+
+## Reviewed Inputs and Authorization
+
+- Roadmap target: Phase 11.1 current full-campaign screenshot inspection
+  boundary; the broader full-campaign raster-golden item remains open.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.80 section.
+- Evidence: `docs/evaluation/phase11.1-full-campaign-screenshot-evidence.json`
+  and `docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
+- Sources: existing loopback route in `src/gui_server.rs`, adapter in
+  `gui/host-adapter.mjs`, shared renderer in `gui/app.mjs`, and desktop in
+  `gui/index.html`.
+- Capture matrix: active/terminal for `competitive-regional-v1` (1/24,
+  24/24), `stabilization-v1` (1/5, 5/5), and `regional-affiliation-v1`
+  (1/6, 6/6).
+
+## Information and Causality Findings
+
+- Campaign identity and stage/turn text remained host-supplied in all six
+  inspected states.
+- Terminal history and debrief text were present in the three terminal states;
+  no client-inferred severity, intent, or future outcome was recorded.
+- The inspection record names the existing written equivalent and optional
+  audio behavior; it does not treat visual appearance or sound as causal proof.
+
+## Accessibility and Fallback Findings
+
+- The fixed 1024×768 baseline was used for all records.
+- Written identity, history/debrief, and audio-off equivalents remain required
+  by the manifest; the focused test fails closed when they are absent.
+- Reduced-motion, contrast, screen-reader, device, and lived accessibility
+  quality were not evaluated by this slice.
+
+## Provenance and Rights Findings
+
+- No visual or audio asset was created, modified, promoted, or added to a
+  registry; no release path, hash, attribution, or approval was invented.
+- The six screenshots were ephemeral browser-tool inspections and have null
+  artifact paths/hashes in the evidence manifest.
+
+## Authority and Replay Findings
+
+- The browser consumed the existing host projection and did not simulate or
+  mutate campaign state for the inspection.
+- Screenshot state is excluded from commands, outcomes, history, state hashes,
+  replay, and debrief authority. Private rival state and resolved inputs were
+  not captured.
+
+## Required Fixes
+
+- None for this bounded technical contract.
+- Before treating the broader screenshot roadmap item as complete, add a
+  reproducible persisted raster-capture/golden strategy and obtain the
+  separately required cross-browser/device and human reviews.
+
+## Residual Risks and Evidence Limits
+
+- Ephemeral screenshots are not reproducible release artifacts or pixel-level
+  regression baselines.
+- The inspection does not establish visual quality, contrast, screen-reader
+  behavior, audio usefulness, educational comprehension, legal clearance,
+  resemblance review, or public-release readiness.
+
+## Verification Evidence
+
+- `python3 -m unittest tests/test_phase11_full_campaign_screenshot_evidence.py`
+  — pass.
+- `python3 -m unittest discover -s tests` — 792 tests pass.
+- `cargo fmt --check` — pass.
+- `cargo clippy --all-targets -- -D warnings` — pass.
+- `cargo test -- --test-threads=1` — 374 tests pass.
+- Release metadata, documentation links, offline/browser/device contracts,
+  asset/security/SVG/release/credits/generation checks, and the full visual/
+  audio contract audit — pass.

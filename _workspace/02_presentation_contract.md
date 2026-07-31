@@ -4509,6 +4509,74 @@ accessibility, educational, screenshot, or release evidence.
   human approval claim.
 - Open: real-browser screenshots, human visual/replay/accessibility review,
   provenance/legal review, and public-release approval.
+
+# Presentation Contract — Full-campaign screenshot evidence v0.13.80
+
+## Goal and authorization
+
+Inspect the existing host-backed campaign coverage surface at a fixed 1024×768
+viewport for active and terminal competitive, stabilization, and regional-
+affiliation states. This authorizes evidence recording only; it does not
+authorize a new screenshot pipeline or release asset.
+
+## Player questions and consequences
+
+The player question is: “Does the shared campaign surface keep identity,
+stage/turn context, written history or debrief, and optional-audio equivalents
+visible at the beginning and end of each campaign?”
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign/state identity | Host `CampaignCoverageEnvelope.session` and `stage` | Active and terminal inspection records | Do not derive state from client timing or layout |
+| History/replay context | Host `CampaignCoverageEnvelope.history` and `replay` | Empty at genesis; committed rows at terminal | Do not reorder, regenerate, or infer outcomes |
+| Terminal debrief | Host `CampaignCoverageEnvelope.debrief` | Terminal only; unavailable before completion | Do not invent instructor, true-state, or causal detail |
+| Audio metadata/equivalent | Host audio projection plus rendered written text | Optional and mute-safe | Do not infer severity, intent, or future outcomes |
+| Screenshot inspection | Existing `gui/index.html` desktop and shared campaign renderer | Local browser only; artifact is ephemeral in this slice | Do not treat inspection as a release golden or approval |
+
+## Visual, motion, and audio semantics
+
+No new visual, motion, or audio vocabulary is introduced. The inspection
+checks the existing text-first identity, history/debrief, written equivalents,
+and optional audio metadata. Meaning must remain available when audio or
+motion is unavailable.
+
+## Accessibility and fallbacks
+
+The capture baseline is 1024×768. The manifest requires written identity,
+terminal debrief, audio-off equivalence, and existing reduced-motion behavior
+to remain available. It does not claim contrast, screen-reader, device, or
+lived accessibility review.
+
+## Authority, history, and replay boundaries
+
+The host remains authoritative for campaign state, transitions, history,
+replay, debrief, and audio metadata. The browser inspection observes the
+existing route and renderer only; screenshot state does not enter commands,
+transitions, hashes, history, or replay.
+
+## Asset provenance and release requirements
+
+No asset or audio file is created, modified, promoted, or added to a registry.
+The inspection record must not invent release paths, hashes, attribution, or
+approval status.
+
+## Verification and evidence limits
+
+The six records must cover active/terminal states for all three launchable
+campaigns, include source markers and terminal debrief evidence, and state
+`inspected-local-browser` with no persisted artifact. This is not persisted
+raster-golden, human visual, accessibility, educational, legal, or release
+evidence.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic input, browser authority,
+  screenshot runner, PNG/JPEG golden, asset, audio file, or public-release
+  claim.
+- Open: persisted raster golden strategy, cross-browser/device captures,
+  human visual/accessibility review, educational review, and release approval.
 # Presentation Contract — Full-campaign coverage transport continuity v0.13.79
 
 ## Goal and authorization

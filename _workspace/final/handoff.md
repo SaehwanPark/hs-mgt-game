@@ -2465,3 +2465,36 @@ stages, and 6 regional-affiliation stages, with 374 Rust tests and 788 Python
 tests plus all repository contract gates passing. Merge PR #326, clean the
 temporary branch locally/remotely, verify clean `main`, and select the next
 unmet roadmap slice.
+
+# Final Handoff — Full-campaign screenshot inspection evidence v0.13.80
+
+## Status
+
+The bounded six-state local-browser inspection, implementation, full
+validation, and presentation-domain QA are complete on
+`feat/full-campaign-screenshot-evidence-v0.13.80`. PR handoff, merge, branch
+cleanup, and final evidence synchronization remain.
+
+## Target result
+
+- Inspect active and terminal coverage for competitive, stabilization, and
+  regional affiliation at 1024×768.
+- Preserve host identity, terminal debrief, written equivalents, optional
+  audio, and the browser read-only boundary.
+- Record ephemeral inspection honestly without creating raster-release claims.
+
+## Verification
+
+- Six exact active/terminal records pass the focused evidence validator.
+- 374 Rust tests and 792 Python tests pass; formatting, Clippy, release
+  metadata, documentation, asset/security/generation/credits, device/offline/
+  browser/audio/raster/loading/visual-audio/asset-budget, and CLI/Node checks
+  pass.
+
+## Remaining work
+
+Complete exactly one medium-effort review, create and merge the PR, delete the
+temporary branch locally/remotely, verify clean `main`, and select the next
+unmet roadmap slice. Persisted raster goldens, cross-browser/device capture,
+human visual/accessibility/educational review, provenance/legal review, and
+public-release approval remain open.
