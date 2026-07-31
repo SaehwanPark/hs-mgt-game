@@ -1,0 +1,199 @@
+{
+  "schema_version": "phase13.1-first-session-review-packet-v1",
+  "status": "complete-technical-packet-pending-human-review",
+  "roadmap_item": "First-session workflow complete",
+  "purpose": "Make authorized first-time-user evaluation of the local GUI first-session workflow actionable without recording participant results or implying release approval.",
+  "audience_and_use_case": {
+    "primary_users": "first-time local GUI players",
+    "supporting_users": "facilitators helping with a bounded local session",
+    "job_to_be_done": "launch or load a session, identify the next visible action, complete the host-mediated first-month handoffs, recover from friction, and report comprehension",
+    "default_setup": "local loopback host, Chromium, 1024x768 planning baseline, audio optional",
+    "facilitator_boundary": "provide setup, consent, stop, and recovery guidance without teaching hidden state or promising outcomes"
+  },
+  "review_boundary": {
+    "technical_packet_complete": true,
+    "participant_results_present": false,
+    "structured_first_time_user_evaluation_complete": false,
+    "human_accessibility_review_complete": false,
+    "educational_usability_review_complete": false,
+    "competitive_campaign_human_review_complete": false,
+    "expansion_approval": false,
+    "public_release_approval": false
+  },
+  "shared_sources": {
+    "technical_first_session_boundary": "docs/evaluation/phase13.1-first-session-boundary.json",
+    "competitive_campaign_boundary": "docs/evaluation/phase13.1-competitive-campaign-boundary.json",
+    "player_help_boundary": "docs/evaluation/phase13.1-player-help-boundary.json",
+    "pilot_preparation": "docs/evaluation/phase13.2-pilot-preparation-boundary.json",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+    "player_guide": "docs/guides/gui-how-to-play.md"
+  },
+  "source_contract": {
+    "launch_markup": "gui/index.html: id=\"session-launch-form\"",
+    "launch_client": "gui/app.mjs: createSessionLauncher",
+    "first_month_flow": "gui/first-month.mjs: FIRST_MONTH_FLOW_SCHEMA",
+    "campaign_coverage_flow": "gui/first-month.mjs: CAMPAIGN_COVERAGE_FLOW_SCHEMA",
+    "first_month_stage_ids": "gui/first-month.mjs: export const FIRST_MONTH_STAGES = Object.freeze([",
+    "campaign_coverage_stage_ids": "gui/first-month.mjs: export const CAMPAIGN_COVERAGE_STAGES = Object.freeze([",
+    "first_month_test": "tests/test_gui_first_month.py: test_host_adapter_sequence_reaches_continue_and_rejection_stays_recoverable",
+    "campaign_first_session_test": "tests/test_phase12_live_campaign_coverage.py: test_campaign_coverage_rail_advances_only_after_host_refresh",
+    "settings_help": "docs/evaluation/phase13.1-player-help-boundary.json: \"documented_contract\"",
+    "recovery_guidance": "docs/guides/gui-how-to-play.md: Use **Retry current read** when offered."
+  },
+  "technical_contract": {
+    "competitive_flow_schema": "competitive-first-month-v1",
+    "competitive_stages": [
+      "start",
+      "inspect",
+      "draft",
+      "validate",
+      "submit",
+      "resolution",
+      "continue"
+    ],
+    "campaign_coverage_flow_schema": "campaign-coverage-first-session-v1",
+    "campaign_coverage_stages": [
+      "start",
+      "inspect",
+      "choose",
+      "review",
+      "continue"
+    ],
+    "required_recovery_paths": [
+      "rejected submission",
+      "refresh/read failure",
+      "storage limit",
+      "audio unavailable or muted",
+      "reduced-motion or pacing friction"
+    ],
+    "required_presentation_accommodations": [
+      "written equivalents",
+      "audio-off and cues-only",
+      "reduced motion",
+      "Large text",
+      "keyboard navigation",
+      "skip/review controls"
+    ],
+    "authority": "The Rust host owns session creation, campaign decisions, validation, submission, resolution, history, and refreshed observations; the browser stores only local presentation preferences and draft UI state.",
+    "forbidden_browser_state_markers": [
+      "transition_competitive",
+      "resolved_inputs",
+      "effect_queue",
+      "CompetitiveWorldState",
+      "WorldState",
+      "WebSocket"
+    ]
+  },
+  "participant_tasks": [
+    {
+      "id": "orient-and-launch",
+      "flow": "competitive-first-month-v1",
+      "prompt": "Starting from the local GUI, launch or load a competitive session and describe what you know and what the interface asks you to do next.",
+      "technical_success_observation": "The host-bound launch surface exposes campaign, seed, difficulty, start/load, and a polite status region before the first observation.",
+      "human_measure": "participant identifies the next action without facilitator explanation"
+    },
+    {
+      "id": "complete-first-month",
+      "flow": "competitive-first-month-v1",
+      "prompt": "Follow the visible first-month rail through inspect, draft, validation, submission, resolution, and continuation.",
+      "technical_success_observation": "The seven source-defined stages advance only after the corresponding host-bound handoff and refreshed observation.",
+      "human_measure": "participant completes the path, describes the visible result, and distinguishes a draft from a committed outcome"
+    },
+    {
+      "id": "recover-from-friction",
+      "flow": "competitive-first-month-v1",
+      "prompt": "When a submission is rejected, a read is unavailable, or storage is unavailable, use the visible recovery guidance and continue without inventing an outcome.",
+      "technical_success_observation": "Rejected work remains recoverable, retry guidance is present, storage guidance is documented, and the browser does not advance the host-owned state locally.",
+      "human_measure": "participant chooses a safe recovery action and retains trust in the displayed state"
+    },
+    {
+      "id": "recognize-campaign-coverage",
+      "flow": "campaign-coverage-first-session-v1",
+      "prompt": "Start or load a supported campaign-coverage session and identify the visible stage, actors, processes, decisions, history, and debrief before choosing a host decision.",
+      "technical_success_observation": "The five source-defined campaign-coverage stages advance only after host refresh and retain written actor-visible context.",
+      "human_measure": "participant can distinguish a host-shaped decision from a local prediction or hidden-state claim"
+    },
+    {
+      "id": "adjust-presentation",
+      "flow": "settings-and-accessibility",
+      "prompt": "Try Large text, reduced motion, audio-off or cues-only, and keyboard/skip/review accommodations, then repeat a comprehension question.",
+      "technical_success_observation": "The documented presentation preferences and written equivalents remain available without changing host commands or simulation state.",
+      "human_measure": "participant retains the same decision-relevant meaning under the selected accommodation"
+    }
+  ],
+  "review_questions": [
+    "Can a first-time player identify how to launch or load a session and what to do next without implementation knowledge?",
+    "Can a first-time player complete the seven competitive first-month handoffs while distinguishing draft, validation, submission, and committed resolution?",
+    "Can a player recover from rejection or an unavailable read without losing work, inventing an outcome, or needing hidden-state instruction?",
+    "Can a player recognize the five campaign-coverage orientation stages and distinguish a host-shaped decision from a local prediction?",
+    "Do text, keyboard, reduced-motion, audio-off, cues-only, Large text, skip, and review accommodations preserve the same visible meaning?"
+  ],
+  "technical_observations": {
+    "launch_and_existing_load_are_host_bound": true,
+    "seven_first_month_stages_are_source_bound": true,
+    "five_campaign_coverage_stages_are_source_bound": true,
+    "rejected_submission_is_recoverable": true,
+    "campaign_coverage_acceptance_requires_host_refresh": true,
+    "written_recovery_guidance_is_present": true,
+    "presentation_preferences_are_local_only": true,
+    "browser_authority_boundary_is_preserved": true,
+    "human_comprehension_is_unverified": true
+  },
+  "accessibility_and_recovery_checks": [
+    {
+      "id": "written-equivalent",
+      "source": "gui/index.html: id=\"result-list\"",
+      "status": "technical-source-bound; human comprehension pending"
+    },
+    {
+      "id": "audio-off-and-cues-only",
+      "source": "docs/evaluation/phase13.1-player-help-boundary.json: \"audio\"",
+      "status": "documented and technically bounded; listening review pending"
+    },
+    {
+      "id": "reduced-motion-and-pacing",
+      "source": "docs/evaluation/phase13.2-low-distraction-mode.json: \"enabled\"",
+      "status": "technical-source-bound; lived accessibility review pending"
+    },
+    {
+      "id": "large-text-and-keyboard",
+      "source": "docs/guides/phase10.2-structured-evaluation.md: keyboard navigation",
+      "status": "protocol-ready; human interaction review pending"
+    },
+    {
+      "id": "rejection-and-retry",
+      "source": "gui/index.html: id=\"recovery-retry\"",
+      "status": "technical-source-bound; participant recovery review pending"
+    },
+    {
+      "id": "storage-limit",
+      "source": "docs/guides/gui-how-to-play.md: a storage failure does not block",
+      "status": "technical-source-bound; participant recovery review pending"
+    }
+  ],
+  "causality_and_privacy_boundary": {
+    "host_owned_transitions_only": true,
+    "actor_visible_observations_only": true,
+    "no_hidden_state_inference": true,
+    "no_causal_certainty": true,
+    "no_participant_identity_in_packet": true,
+    "no_external_data_collection": true,
+    "source": "docs/evaluation/phase13.1-first-session-boundary.json"
+  },
+  "human_review_record": {
+    "status": "pending-authorized-human-review",
+    "participant_results_present": false,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "decision": null,
+    "go_no_go": null
+  },
+  "limits": [
+    "This packet makes first-session evaluation actionable; it does not perform or represent participant evaluation.",
+    "No comprehension, accessibility, educational, classroom, audio-usefulness, or fatigue score is inferred from source tests.",
+    "The separate Competitive campaign coverage complete item remains open for full-campaign product/content review and structured human evaluation.",
+    "This packet creates no runtime, simulation, asset, audio, persistence, screenshot, route, or release artifact."
+  ],
+  "test_source": "tests/test_phase13_1_first_session_review_packet.py"
+}

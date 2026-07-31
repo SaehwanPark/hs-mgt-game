@@ -3808,3 +3808,33 @@ occurred.
 Focused packet and debrief-boundary tests; full Rust/Python/repository
 validation; exactly one medium-effort review; authorized PR/merge and
 temporary-branch cleanup.
+
+# Request Summary — First-session participant review packet v0.13.84
+
+## Authorized outcome
+
+Make the open Phase 13.1 first-session workflow review actionable from the
+existing source-bound launch, first-month, campaign-coverage, settings, and
+recovery contracts without claiming participant results.
+
+## Target slice
+
+- Bind the seven competitive first-month stages and five campaign-coverage
+  orientation stages to participant tasks and success observations.
+- Name the existing written-equivalent, audio-off/cues-only, reduced-motion,
+  Large text, keyboard, skip/review, rejection, and retry accommodations.
+- Keep host authority, actor-visible information, privacy, and no-causal-
+  certainty boundaries explicit in a fail-closed JSON packet and test.
+
+## Non-goals
+
+- No runtime, schema, simulation, route, browser-authority, asset, audio-file,
+  screenshot, participant-data, or release-asset change.
+- No human comprehension, accessibility, educational, classroom, competitive
+  expansion, provenance/legal, or public-release conclusion.
+
+## Validation target
+
+Focused first-session packet and existing boundary tests; full Rust/Python and
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.

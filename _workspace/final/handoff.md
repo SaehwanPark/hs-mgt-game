@@ -2633,3 +2633,36 @@ source anchors. No second reviewer was used.
 This is a technical review handoff only. Human visual/accessibility,
 educational/classroom, audio-listening, provenance/legal, and public-release
 decisions remain pending.
+
+# Final Handoff — First-session participant review packet v0.13.84
+
+## Status
+
+The v0.13.84 participant-ready technical packet is implemented on the
+temporary feature branch. It binds the existing competitive first-month and
+campaign-coverage orientation stages to first-time-user tasks, recovery and
+presentation accommodation checks, and explicit pending-human fields. The
+`First-session workflow complete` and `Competitive campaign coverage complete`
+roadmap items remain unchecked.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-first-session-review-packet.json`.
+- Test: `tests/test_phase13_1_first_session_review_packet.py`.
+- Plan: `_workspace/162_implementation_plan_visual-audio-phase13-first-session-review-packet-v0.13.84.md`.
+
+## Limits
+
+No participant results, accessibility or educational conclusion,
+competitive-expansion decision, provenance/legal clearance, or public-release
+approval is recorded. No runtime, simulation, asset, audio, screenshot,
+browser-authority, or release artifact is introduced.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed. The reviewer’s findings
+were fixed by independently binding the exported stage arrays, validating the
+complete shared-source/authority/recovery/accommodation contracts, adding the
+storage-limit recovery check, and verifying exact source markers for every
+accessibility/recovery check. The final recheck reported no actionable issues;
+no second reviewer was used.

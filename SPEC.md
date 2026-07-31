@@ -7447,6 +7447,29 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio first-session participant review packet (v0.13.84)
+
+The Phase 13.1 packet makes the open first-session workflow review actionable
+without claiming participant results. It binds the seven competitive
+first-month stages and five campaign-coverage orientation stages to
+participant prompts, technical success observations, recovery paths, and
+review questions. Existing written equivalents, audio-off/cues-only, reduced
+motion, Large text, keyboard, skip/review, rejection, retry, actor-visible,
+privacy, and host-authority boundaries remain explicit.
+
+The packet validator rejects source/stage drift, forbidden browser-state
+markers, missing accommodation or recovery coverage, release promotion, and
+human-review fields marked complete without results. The `First-session
+workflow complete` and `Competitive campaign coverage complete` roadmap items
+remain unchecked, as do accessibility, educational, provenance/legal, and
+public-release decisions.
+
+The target and actor-visible contract is recorded in
+`_workspace/162_implementation_plan_visual-audio-phase13-first-session-review-packet-v0.13.84.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio corrected terminal raster state evidence (v0.13.82)
 
 The Phase 11.1 terminal-raster correction recaptures the three terminal

@@ -5365,6 +5365,49 @@ review remains pending.
   debrief-boundary test pass for exact cases, artifacts, transcript bindings,
   source markers, fallbacks, causality, replay, and pending human status.
 
+# Presentation QA — First-session participant review packet v0.13.84
+
+## Status
+
+Pass for the bounded technical participant-packet contract. The packet is
+participant-ready but human first-session, accessibility, educational,
+classroom, competitive-expansion, and release review remain pending.
+
+## Reviewed Inputs and Authorization
+
+- Roadmap: `First-session workflow complete` and `Competitive campaign
+  coverage complete` remain unchecked.
+- Packet: `docs/evaluation/phase13.1-first-session-review-packet.json`.
+- Existing technical boundaries: Phase 13.1 first-session, competitive
+  campaign, player-help, and Phase 13.2 pilot-preparation records.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.84 section.
+
+## Information, recovery, and accessibility findings
+
+- The seven competitive first-month stages and five campaign-coverage stages
+  are source-bound to existing host handoffs.
+- Participant tasks distinguish orientation, draft, validation, submission,
+  committed result, rejection/retry, and accommodation checks.
+- Written equivalents and local presentation controls remain available; no
+  human comprehension or lived accessibility result is asserted.
+
+## Authority, privacy, and provenance
+
+The packet introduces no transition path, participant data, asset, audio file,
+or release artifact. Host authority and actor-visible boundaries remain
+explicit; provenance/legal and public-release review remain open.
+
+## Required fixes
+
+None for this bounded technical packet. Obtain authorized participant results
+before changing the first-session roadmap checkbox or expansion decision.
+
+## Verification evidence
+
+`tests/test_phase13_1_first_session_review_packet.py` checks exact source
+markers, stage lists, tasks, recovery/accessibility checks, authority limits,
+release exclusion, and pending human-review status.
+
 # Presentation QA — Corrected terminal raster state evidence v0.13.82
 
 ## Status

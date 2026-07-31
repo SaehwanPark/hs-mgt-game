@@ -3493,3 +3493,17 @@ separate gates.
   questions, and explicit pending-human fields to the technical artifacts.
 - Prevention: keep the roadmap human checkbox unchecked until authorized
   anonymized feedback and a recorded go/no-go decision exist.
+
+# Participant-Ready Packets Need Workflow and Recovery Boundaries
+
+- Context: the technical first-session path already had source-bound launch,
+  stage, settings, and recovery evidence, but a first-time-user review still
+  had no single participant task sequence.
+- Risk: a facilitator could over-teach the workflow, conflate draft and
+  committed outcomes, or treat source tests as proof of comprehension.
+- Resolution: bind exact stage schemas and existing recovery/accommodation
+  sources to participant prompts, technical success observations, review
+  questions, and an explicit pending-human record.
+- Prevention: keep participant-ready evidence separate from participant
+  results, and make rejected submissions, unavailable reads, presentation
+  preferences, and host refresh requirements visible in every future packet.
