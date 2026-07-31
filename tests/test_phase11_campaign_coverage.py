@@ -184,6 +184,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
     cls.app = (ROOT / "gui" / "app.mjs").read_text(encoding="utf-8")
     cls.adapter = (ROOT / "gui" / "host-adapter.mjs").read_text(encoding="utf-8")
     cls.server = (ROOT / "src" / "gui_server.rs").read_text(encoding="utf-8")
+    cls.mcp_server = MCP_SERVER.read_text(encoding="utf-8")
     cls.session = (ROOT / "src" / "mcp" / "session.rs").read_text(encoding="utf-8")
     roadmap = ROADMAP.read_text(encoding="utf-8")
     cls.phase11_1 = roadmap.split("## Milestone 11.1:", 1)[1].split("## Milestone 11.2:", 1)[0]
@@ -230,7 +231,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -560,6 +561,28 @@ console.log(JSON.stringify(resolved));
       'self.assertNotIn("submit_turn", replay_handler)',
     ):
       self.assertIn(boundary, replay_test + mcp_server + self.session)
+
+  def test_autosave_coverage_matches_the_existing_checkpoint_path(self):
+    coverage = self.ledger["autosave_coverage"]
+    checkpoint_test = CHECKPOINT_TEST.read_text(encoding="utf-8")
+    self.assertEqual(coverage["status"], "complete-host-autosave-after-accepted-decision")
+    self.assertEqual(coverage["schema"], "competitive-save-v1 plus existing campaign save wrappers")
+    for marker in (
+      "save_session",
+      '"/api/v1/sessions/{session_id}/save"',
+      "createCheckpointClient",
+      "autosave",
+      "checkpoint_autosave_error",
+      "ui.save-complete",
+      "current session remains active",
+    ):
+      self.assertIn(marker, checkpoint_test + self.app + self.adapter + self.server)
+    for boundary in (
+      "without client-side state restoration",
+      "The browser stores no save artifact or simulation state",
+      "test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
+    ):
+      self.assertIn(boundary, checkpoint_test + self.app + self.server + self.mcp_server + self.session + json.dumps(coverage))
 
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():

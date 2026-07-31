@@ -447,6 +447,29 @@
       "Rust GUI transport tests cover a saved regional-affiliation checkpoint across two host server instances; the existing browser recovery test preserves the opaque-ID-only boundary."
     ]
   },
+  "autosave_coverage": {
+    "status": "complete-host-autosave-after-accepted-decision",
+    "schema": "competitive-save-v1 plus existing campaign save wrappers",
+    "host_source": "src/mcp/session.rs: save_session",
+    "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/save",
+    "browser_source": "gui/app.mjs: createCheckpointClient + campaign/competitive submit paths",
+    "test_source": "tests/test_phase11_live_checkpoint.py",
+    "continuity_behavior": [
+      "Competitive, stabilization, and regional-affiliation submissions request the existing host checkpoint only after the host accepts the decision.",
+      "Successful autosave reports the existing SaveEnvelope committed count and reuses the approved ui.save-complete cue when audio is available.",
+      "Autosave failure reports a written recoverable status and leaves the already committed host transition active; manual Save/Restore remains available.",
+      "The browser stores no save artifact or simulation state and retains only the existing opaque session ID."
+    ],
+    "boundary": "The host owns checkpoint serialization, verification, file I/O, history, hashes, and continuation; the browser invokes only the existing save adapter after an accepted host response.",
+    "limits": [
+      "Autosave stores one latest host checkpoint through the configured application path; it is not an archive or browser persistence layer.",
+      "No full-campaign screenshot, human accessibility/educational, device/browser, provenance/legal, or public-release claim is made."
+    ],
+    "evidence": [
+      "The live checkpoint test covers automatic success metadata/cue, failure preservation, accepted-response ordering, existing routes, controls, and authority exclusions.",
+      "The existing Rust persistence/session and GUI transport tests remain the host checkpoint verification boundary for all three campaign artifacts."
+    ]
+  },
   "replay_view_coverage": {
     "status": "complete-live-host-projection-local-playback-and-host-regeneration",
     "schema": "competitive-replay-v1",
@@ -594,8 +617,8 @@
   },
   "open_limits": [
     "Full competitive-campaign facility placement and usage coverage is not established by this bounded ledger; the facility asset catalog and release registry are complete, while live bindings cover only directly supported current player conditions.",
-    "Durable competitive, stabilization, and regional-affiliation checkpoint recovery is established only for explicit host saves; autosave, browser serialization, and full-campaign save/load/replay continuity remain open.",
-    "Browser recovery after host restart is established only when the player explicitly saved a competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
+    "Durable competitive, stabilization, and regional-affiliation checkpoint recovery now includes host autosave after accepted GUI decisions; browser serialization and full-campaign save/load/replay continuity remain open.",
+    "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
   ]

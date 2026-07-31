@@ -1,3 +1,68 @@
+# Presentation Contract — Host autosave after committed GUI decisions v0.13.68
+
+## Goal and authorization
+
+Make the existing host checkpoint path automatic after an accepted GUI
+decision while keeping the current browser presentation, save envelope, and
+opaque-session boundary unchanged.
+
+## Player questions and consequences
+
+The player question is: “Will my accepted decision have a current host restart
+point?” A successful autosave reports the committed count. A failed autosave
+reports a written recovery message; the accepted host transition remains the
+current session and can be retried with the manual Save host checkpoint
+control.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Autosave trigger | Successful host `submitTurn` response | Only after the host accepts the decision | Do not submit, retry, or synthesize a transition in JavaScript |
+| Autosave result | Existing `SaveEnvelope` metadata or host error | Written after each accepted decision when the adapter supports save | Do not expose the save artifact or true state |
+| Recovery action | Existing manual Save/Restore controls and load path | Available after success, failure, refresh, or restart | Do not claim durable success when the host save failed |
+
+## Visual, motion, and audio semantics
+
+No new visual asset or motion behavior is introduced. Autosave success uses the
+existing written session status and approved `ui.save-complete` cue when audio
+is available. Audio-off, reduced-motion, and blocked-audio paths retain the
+same written status. Autosave failure remains written and recoverable.
+
+## Accessibility and fallbacks
+
+The status is exposed through the existing live session-status region and is
+not color-only. The current committed presentation remains available if
+autosave fails. Missing save capability is a safe no-op for adapters that do
+not support checkpoints; it does not block a host transition.
+
+## Authority and persistence boundary
+
+The host owns save serialization, verification, durable file replacement,
+history, hashes, and continuation. The browser calls only the existing save
+adapter and stores no serialized state. Autosave does not add a route, schema,
+transition, or client authority.
+
+## Asset provenance and release requirements
+
+No asset, audio file, registry entry, provenance record, or release binary is
+added. The existing approved save-complete cue is reused.
+
+## Verification and evidence limits
+
+Focused tests must prove autosave is exposed by the shared checkpoint client,
+is invoked after accepted competitive and campaign decisions, reports failure
+without rejecting the committed decision, and preserves the authority boundary.
+The checks do not establish human accessibility, educational usefulness,
+device/browser certification, provenance/legal approval, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, browser serialization, service worker, simulation rule,
+  replay redesign, fresh AI search, screenshot, human review, or release claim.
+- Open: full-campaign placement/screenshots, human evaluation, device/browser
+  certification, provenance/legal review, and public-release approval.
+
 # Presentation Contract — Host deterministic replay regeneration v0.13.67
 
 ## Goal and Authorization

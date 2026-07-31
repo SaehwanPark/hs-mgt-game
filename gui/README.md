@@ -388,7 +388,10 @@ does not regenerate or simulate replay data.
 When supplied, `saveSession(sessionId)` and `loadSession(sessionId)` return
 `schema_version: "competitive-save-v1"` with `saved`/`loaded` operation,
 identity, committed count, and latest visible hash. The live page exposes
-explicit Save host checkpoint and Restore host checkpoint controls. Restore
+explicit Save host checkpoint and Restore host checkpoint controls, and
+requests an autosave after each accepted campaign decision. Autosave uses the
+same host-only checkpoint route and reports success or failure in written
+status; it never rolls back a committed transition. Restore
 uses the existing host read path to refresh presentation, action catalog,
 history, replay, and regional-world views; failed operations preserve the
 current view. The loopback GUI host also writes an explicit competitive,

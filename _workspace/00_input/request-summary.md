@@ -1,3 +1,45 @@
+# Request Summary — Host autosave after committed GUI decisions v0.13.68
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next explicit persistence gate:
+request the existing host-owned GUI checkpoint automatically after each
+accepted decision across competitive, stabilization, and regional-affiliation
+campaigns.
+
+## Target slice
+
+- Reuse the current `saveSession` route, save envelope, and configured durable
+  host path; do not create a new route, schema, browser state store, or save
+  format.
+- Run autosave only after the host accepts a transition, with written success
+  status and the existing save-complete cue when available.
+- Keep a committed transition active if autosave fails; surface a written,
+  recoverable error and retain manual Save host checkpoint as a retry.
+- Keep browser storage limited to the opaque session ID and save metadata.
+
+## Non-goals
+
+- No browser serialization, service worker, simulation transition, history or
+  replay redesign, fresh AI decision search, new asset/audio file, screenshot,
+  human review, device certification, provenance/legal approval, or public
+  release claim.
+
+## Validation target
+
+Focused Node checkpoint/autosave and campaign coverage tests; full Rust/Python
+validation; Clippy, formatting, release metadata, documentation links,
+asset/security/generation/credits, device/offline/browser/audio/raster/loading/
+visual-audio checks; exactly one medium-effort review; and the authorized
+PR/merge/temporary-branch cleanup loop.
+
+## Evidence limits
+
+This slice proves only host autosave invocation and written recovery behavior
+over the existing durable checkpoint path. It does not prove human usability,
+full-campaign screenshot coverage, cross-browser/device certification,
+provenance/legal approval, or public release.
+
 # Request Summary — Host deterministic replay regeneration v0.13.67
 
 ## Authorized outcome
