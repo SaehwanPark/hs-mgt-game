@@ -201,7 +201,17 @@ class Phase132EducationalUsabilityEvidenceIntakeTests(unittest.TestCase):
       return source
 
     with patch.object(self.validator, "_load_json", side_effect=load_with_mutation):
-      with self.assertRaisesRegex(ValueError, "first-session source must keep educational_usability_review_complete false"):
+      with self.assertRaisesRegex(ValueError, "first-session source boundary is not canonical"):
+        self.validator.validate_packet(self.packet)
+
+    def load_with_human_decision(path):
+      source = original_load(path)
+      if path.resolve() == first_session_path:
+        source["human_review_record"]["decision"] = "approved"
+      return source
+
+    with patch.object(self.validator, "_load_json", side_effect=load_with_human_decision):
+      with self.assertRaisesRegex(ValueError, "first-session human review record is not pending"):
         self.validator.validate_packet(self.packet)
 
   def test_packet_rejects_boolean_record_count(self):

@@ -110,6 +110,44 @@ EXPECTED_EVIDENCE_LIMITS = [
   "Human review, revision decisions, expansion approval, legal/provenance clearance, and public-release approval remain separate authorization gates.",
 ]
 EXPECTED_TEST_SOURCE = "tests/test_phase13_2_educational_usability_evidence_intake.py"
+EXPECTED_FIRST_SESSION_REVIEW_BOUNDARY = {
+  "technical_packet_complete": True,
+  "participant_results_present": False,
+  "structured_first_time_user_evaluation_complete": False,
+  "human_accessibility_review_complete": False,
+  "educational_usability_review_complete": False,
+  "competitive_campaign_human_review_complete": False,
+  "expansion_approval": False,
+  "public_release_approval": False,
+}
+EXPECTED_FIRST_SESSION_HUMAN_REVIEW = {
+  "status": "pending-authorized-human-review",
+  "participant_results_present": False,
+  "authorized_reviewer": None,
+  "recorded_at": None,
+  "decision": None,
+  "go_no_go": None,
+}
+EXPECTED_COMPETITIVE_REVIEW_BOUNDARY = {
+  "technical_packet_complete": True,
+  "participant_results_present": False,
+  "full_campaign_human_review_complete": False,
+  "human_visual_review_complete": False,
+  "human_accessibility_review_complete": False,
+  "educational_and_classroom_review_complete": False,
+  "audio_listening_review_complete": False,
+  "expansion_approval": False,
+  "public_release_approval": False,
+}
+EXPECTED_COMPETITIVE_HUMAN_REVIEW = {
+  "status": "pending-authorized-human-review",
+  "participant_results_present": False,
+  "authorized_reviewer": None,
+  "recorded_at": None,
+  "decision": None,
+  "expansion_go_no_go": None,
+  "public_release_approval": None,
+}
 
 
 def _require(condition: bool, message: str) -> None:
@@ -140,10 +178,15 @@ def _validate_source_packet(name: str, validator, source: dict) -> None:
     raise ValueError(f"{name} source validation failed: {error}") from error
 
 
-def _require_pending_boundary(name: str, source: dict, fields: tuple[str, ...]) -> None:
-  boundary = source.get("review_boundary", {})
-  for field in fields:
-    _require(boundary.get(field) is False, f"{name} source must keep {field} false")
+def _require_pending_source(
+  name: str,
+  source: dict,
+  expected_boundary: dict,
+  expected_human_review: dict,
+) -> None:
+  _require(source["status"] == "complete-technical-packet-pending-human-review", f"{name} source status is not pending")
+  _require(source.get("review_boundary") == expected_boundary, f"{name} source boundary is not canonical")
+  _require(source.get("human_review_record") == expected_human_review, f"{name} human review record is not pending")
 
 
 def _canonical_sources() -> tuple[list[str], list[str], dict]:
@@ -168,32 +211,17 @@ def _canonical_sources() -> tuple[list[str], list[str], dict]:
   _require(pilot["decision"]["status"] == "pending-human-evidence", "pilot decision must remain pending")
   _require(debrief["decision"]["status"] == "pending-authorized-human-review", "debrief decision must remain pending")
   _require(revision["decision"]["status"] == "pending-human-evidence", "revision decision must remain pending")
-  _require_pending_boundary(
+  _require_pending_source(
     "first-session",
     first_session,
-    (
-      "participant_results_present",
-      "structured_first_time_user_evaluation_complete",
-      "human_accessibility_review_complete",
-      "educational_usability_review_complete",
-      "competitive_campaign_human_review_complete",
-      "expansion_approval",
-      "public_release_approval",
-    ),
+    EXPECTED_FIRST_SESSION_REVIEW_BOUNDARY,
+    EXPECTED_FIRST_SESSION_HUMAN_REVIEW,
   )
-  _require_pending_boundary(
+  _require_pending_source(
     "competitive-campaign",
     competitive,
-    (
-      "participant_results_present",
-      "full_campaign_human_review_complete",
-      "human_visual_review_complete",
-      "human_accessibility_review_complete",
-      "educational_and_classroom_review_complete",
-      "audio_listening_review_complete",
-      "expansion_approval",
-      "public_release_approval",
-    ),
+    EXPECTED_COMPETITIVE_REVIEW_BOUNDARY,
+    EXPECTED_COMPETITIVE_HUMAN_REVIEW,
   )
 
   task_ids = [task["id"] for task in protocol["tasks"]]
