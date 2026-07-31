@@ -2339,18 +2339,27 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   Evidence: `durable_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
   persistence/session/transport tests, and
-  `tests/test_phase11_browser_refresh_recovery.py`; durable
-  autosave and full-campaign save/load/replay continuity remain open.
+  `tests/test_phase11_browser_refresh_recovery.py`; durable autosave remains
+  covered while full-campaign continuation is recorded as a separate bounded
+  item below.
+- [x] Current competitive full-campaign host checkpoint continuation covered.
+  Evidence: `full_campaign_checkpoint_continuity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn competitive_durable_checkpoint_covers_full_campaign_continuation`;
+  browser serialization, cross-campaign durable continuity, and broader
+  save/load/replay evidence remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
   persistence/session/transport tests, and the existing browser recovery
-  boundary; autosave and full-campaign save/load/replay continuity remain open.
+  boundary; cross-campaign durable continuity and broader save/load/replay
+  evidence remain open.
 - [x] Current explicit durable regional-affiliation host checkpoint recovery covered.
   Evidence: `durable_affiliation_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
   persistence/session/transport tests, and the existing browser recovery
-  boundary; autosave and full-campaign save/load/replay continuity remain open.
+  boundary; cross-campaign durable continuity and broader save/load/replay
+  evidence remain open.
 - [x] Current live replay visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
   `tests/test_phase11_live_replay.py`; fresh AI decision search and durable
@@ -4127,10 +4136,24 @@ are completed. Human-review gates remain open.
   terminal read retains the 24-transition replay count. No new route, schema,
   facility simulation, asset, audio file, or browser authority was added.
 - Focused and full technical validation pass; the sole medium-effort review
-  passed with no actionable findings. The PR/merge/cleanup loop remains.
+  passed with no actionable findings. PR #318 merged into `main` at
+  `0a1a0e8`, and the temporary branch was deleted locally and remotely.
   Pixel-level placement quality, raster screenshots,
   structured first-time-user review, accessibility/educational review,
   provenance/legal review, and public-release approval remain open.
+
+### v0.13.72 current full-campaign checkpoint/replay continuity
+
+- The existing competitive host checkpoint path has a bounded mid-campaign
+  target: save after month 12, restore in a fresh host, continue both runs to
+  month 24, and compare immutable replay/history hashes plus terminal
+  regional-world and campaign-coverage reads.
+- No browser save artifact, new route/schema, simulation, asset, or audio file
+  is planned. Browser serialization, cross-campaign durable continuity,
+  screenshots, human accessibility/educational review, provenance/legal review,
+  and public-release approval remain open.
+- Focused and full technical validation pass; the sole medium-effort review
+  passed with no actionable findings. PR/merge cleanup remains.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

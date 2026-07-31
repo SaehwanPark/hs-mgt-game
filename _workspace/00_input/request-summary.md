@@ -3388,3 +3388,38 @@ This slice proves only host-projected facility continuity and visible capacity
 metric coverage across the 24-month competitive loop. It does not prove visual
 quality, pixel-level placement, human comprehension, accessibility, audio
 usefulness, or public-release readiness.
+# Request Summary — Full-campaign checkpoint/replay continuity v0.13.72
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a host-owned mid-campaign checkpoint and
+restore evidence slice for the 24-month competitive campaign.
+
+## Target slice
+
+- Save after month 12, load into a fresh host, and continue the original and
+  restored sessions through month 24.
+- Compare terminal replay/history hashes, regional-world data, and
+  campaign-coverage data while preserving opaque-session and actor-visible
+  boundaries.
+- Record only technical host continuity; browser serialization, screenshots,
+  human review, and release gates remain open.
+
+## Non-goals
+
+- No new route/schema, save format, browser state artifact, simulation rule,
+  replay format, asset/audio file, screenshot suite, human review, device
+  certification, provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused Rust persistence/session and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort code review; authorized
+PR/merge and temporary-branch cleanup before selecting the next roadmap slice.
+
+## Evidence limits
+
+This slice proves only deterministic host checkpoint continuation from month 12
+through the 24-month competitive endpoint. It does not prove browser-side
+persistence, cross-campaign durable continuity, visual quality, accessibility,
+educational usefulness, or public-release readiness.

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.72] - 2026-07-31
+
+- Added host-bound full-campaign checkpoint continuity evidence: save a
+  competitive session at month 12, restore it in a fresh host, continue to
+  month 24, and compare replay/history hashes plus terminal regional-world and
+  campaign-coverage reads.
+- Kept browser serialization, cross-campaign durable continuity, screenshots,
+  human review, and public-release gates open.
+
 ## [0.13.71] - 2026-07-31
 
 - Added host-bound evidence that the competitive regional-world facility

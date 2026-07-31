@@ -7191,9 +7191,9 @@ Deferred / Non-Goals:
 
 ### Visual/audio full-campaign facility placement/use evidence (v0.13.71)
 
-Status: Implementation, full validation, and the sole review are complete on
-the bounded 24-month host-read continuity slice; the reviewer found no
-actionable issues. PR/merge cleanup remains.
+Status: Implementation, full validation, sole review, PR/merge cleanup, and
+main verification are complete on the bounded 24-month host-read continuity
+slice; the reviewer found no actionable issues.
 
 Done:
 
@@ -7209,12 +7209,40 @@ Done:
 
 Not Yet Done:
 
-- Merge, clean the branch, and verify `main`.
+- Broader full-campaign visual/content quality, human review, and release gates
+  remain open and are intentionally tracked outside this bounded slice.
 
 Deferred / Non-Goals:
 
 - No pixel-level placement-quality, raster screenshot, human accessibility or
   educational, provenance/legal, or public-release claim.
+
+### Visual/audio full-campaign checkpoint/replay continuity (v0.13.72)
+
+Status: Implementation, full validation, and the sole review are complete on a
+bounded month-12 host checkpoint continuation slice; the reviewer found no
+actionable issues. PR/merge cleanup remains.
+
+Done:
+
+- The target and actor-visible persistence contract are recorded in
+  `_workspace/150_implementation_plan_visual-audio-phase11-full-campaign-checkpoint-continuity-v0.13.72.md`
+  and the current request/contract/QA/handoff records.
+- The existing `gui-competitive-save-v1` host checkpoint and opaque-session
+  boundary are the only persistence sources; no browser save artifact or new
+  route/schema is authorized.
+- The host regression compares original/restored terminal replay/history,
+  regional-world, and campaign-coverage data after continuing from month 12
+  through month 24; full Rust/Python/repository validation passes.
+
+Not Yet Done:
+
+- Merge, clean the branch, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No browser serialization, cross-campaign durable continuity, screenshot,
+  human accessibility/educational, provenance/legal, or public-release claim.
 
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
