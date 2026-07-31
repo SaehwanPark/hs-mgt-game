@@ -2346,3 +2346,33 @@ slice.
   asset/security/generation/credits, device/offline/browser/audio/raster/
   loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
   pass.
+# Final Handoff — Cross-campaign checkpoint identity v0.13.75
+
+## Status
+
+Implementation, full automated validation, and the sole medium-effort review
+are complete on `feat/cross-campaign-checkpoint-identity-v0.13.75`; the
+reviewer approved with no actionable findings. PR handoff, merge, branch
+cleanup, and final evidence synchronization remain.
+
+## Target result
+
+- Prove sequential competitive → stabilization → regional-affiliation
+  replacement on the one latest host checkpoint path.
+- Reject replaced opaque IDs on fresh hosts and restore only the newest
+  matching campaign wrapper.
+- Preserve host ownership and the browser opaque-session boundary.
+
+## Remaining work
+
+Complete exactly one medium-effort review, merge the PR, clean the temporary
+branch locally/remotely, verify clean `main`, and select the next unmet roadmap
+slice.
+
+## Verification
+
+- 371 Rust tests and 784 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device/offline/browser/audio/raster/
+  loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
+  pass.

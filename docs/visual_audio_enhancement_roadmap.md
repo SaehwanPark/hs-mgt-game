@@ -2363,6 +2363,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `src/mcp/session.rs: fn durable_affiliation_checkpoint_covers_full_campaign_continuation`;
   browser serialization, cross-campaign durable continuity, and broader
   save/load/replay evidence remain open.
+- [x] Current cross-campaign latest-checkpoint identity covered. Evidence:
+  `cross_campaign_checkpoint_identity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity`;
+  browser serialization, multi-checkpoint archives, and broader save/load/
+  replay evidence remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4197,6 +4203,21 @@ are completed. Human-review gates remain open.
   is planned. Browser serialization, screenshots, human accessibility/
   educational review, provenance/legal review, and public-release approval
   remain open.
+- Plan and source contract are recorded; the implementation and full technical
+  validation pass. The sole medium-effort review passed with no actionable
+  findings. PR handoff, merge, branch cleanup, and final evidence
+  synchronization remain.
+
+### v0.13.75 current cross-campaign checkpoint identity
+
+- The existing single latest host checkpoint path has the next bounded target:
+  save competitive, replace it with stabilization, replace it with regional
+  affiliation, and use fresh hosts to reject replaced IDs while restoring only
+  the newest matching campaign wrapper.
+- No browser save artifact, archive, new route/schema, simulation, asset, or
+  audio file is planned. Browser serialization, screenshots, human
+  accessibility/educational review, provenance/legal review, and public-release
+  approval remain open.
 - Plan and source contract are recorded; the implementation and full technical
   validation pass. The sole medium-effort review passed with no actionable
   findings. PR handoff, merge, branch cleanup, and final evidence

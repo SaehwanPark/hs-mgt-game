@@ -304,6 +304,43 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       self.assertIn(marker, self.session)
     self.assertTrue(any("browser" in item.lower() for item in coverage["limits"]))
 
+  def test_cross_campaign_checkpoint_identity_is_host_bound(self):
+    coverage = self.ledger["cross_campaign_checkpoint_identity"]
+    self.assertEqual(
+      coverage["status"],
+      "complete-cross-campaign-latest-checkpoint-identity",
+    )
+    self.assertEqual(
+      coverage["checkpoint_schemas"],
+      [
+        "gui-competitive-save-v1",
+        "gui-stabilization-save-v1",
+        "gui-affiliation-save-v1",
+      ],
+    )
+    self.assertEqual(
+      coverage["replacement_sequence"],
+      [
+        "competitive-regional-v1",
+        "stabilization-v1",
+        "regional-affiliation-v1",
+      ],
+    )
+    self.assertEqual(
+      coverage["test_source"],
+      "src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+    )
+    for marker in (
+      "fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+      "checkpoint_missing",
+      "gui-competitive-save-v1",
+      "gui-stabilization-save-v1",
+      "gui-affiliation-save-v1",
+      "end_session(EndSessionRequest",
+    ):
+      self.assertIn(marker, self.session + self.persistence)
+    self.assertTrue(any("archive" in item.lower() for item in coverage["limits"]))
+
 
 if __name__ == "__main__":
   unittest.main()

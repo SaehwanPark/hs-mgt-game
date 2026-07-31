@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.75] - 2026-07-31
+
+- Added host-bound cross-campaign checkpoint identity evidence: sequential
+  competitive, stabilization, and regional-affiliation saves replace the one
+  latest wrapper, replaced IDs fail closed, and the newest matching wrapper
+  restores on a fresh host.
+- Kept browser serialization, multi-checkpoint archives, screenshots, human
+  review, and public-release gates open.
+
 ## [0.13.74] - 2026-07-31
 
 - Added host-bound regional-affiliation checkpoint continuity evidence: save

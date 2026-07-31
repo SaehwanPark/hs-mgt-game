@@ -7311,6 +7311,38 @@ Deferred / Non-Goals:
   file, screenshot, human review, provenance/legal approval, or public-release
   claim.
 
+### Visual/audio cross-campaign checkpoint identity (v0.13.75)
+
+Status: Implementation, full automated validation, and the sole review are
+complete for the bounded latest-checkpoint replacement and matching-ID
+hydration target across competitive, stabilization, and regional-affiliation
+campaigns; the reviewer found no actionable findings. PR/merge cleanup and
+final evidence synchronization remain.
+
+Done:
+
+- Added the target and actor-visible persistence contract in
+  `_workspace/153_implementation_plan_visual-audio-phase11-cross-campaign-checkpoint-identity-v0.13.75.md`
+  and the current request/contract/QA/handoff records.
+- Defined the existing one-file latest-checkpoint path as the only persistence
+  source: sequentially replace campaign wrappers, reject replaced IDs on fresh
+  hosts, restore only the newest campaign identity, and remove its matching
+  checkpoint at end-session.
+- Full validation passes: 371 Rust tests, 784 Python tests, Clippy, formatting,
+  release metadata, documentation links, asset/security/generation/credits,
+  device/offline/browser/audio/raster/loading/visual-audio/asset-budget, CLI
+  smoke, Node syntax, and diff checks.
+
+Not Yet Done:
+
+- Merge the PR, clean the temporary branch locally/remotely, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No new route/schema, browser serialization, archive, simulation rule,
+  asset/audio file, screenshot, human review, provenance/legal approval, or
+  public-release claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;

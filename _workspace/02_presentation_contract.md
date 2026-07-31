@@ -4285,3 +4285,62 @@ usefulness, legal status, or public release.
 - Open: browser/device certification, raster screenshots, human first-time-
   user/accessibility/educational review, provenance/legal review, and
   public-release approval.
+# Presentation Contract — Cross-campaign checkpoint identity v0.13.75
+
+## Goal and authorization
+
+Verify that the existing host checkpoint path replaces older campaign wrappers
+and hydrates only the newest matching opaque session ID across the three
+launchable campaigns, without adding browser persistence or an archive.
+
+## Player questions and consequences
+
+The player question is: “Which saved campaign can this host restore now?” A
+matching latest checkpoint restores its own campaign; a replaced session ID
+receives a written recoverable missing-checkpoint result.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Latest checkpoint wrapper | Host `save_session` and existing `gui-*-save-v1` wrappers | Replaced on each accepted save; one latest file | Do not present an archive or claim older saves remain recoverable |
+| Campaign identity | Host `SaveEnvelope.campaign` and hydrated session campaign | Returned on matching load | Do not infer campaign from browser state or file contents |
+| Replaced-ID recovery | Host `checkpoint_missing` error for a non-matching opaque ID | Fresh host load after another campaign saves | Do not delete the newer checkpoint or fabricate a load |
+| Cleanup | Host `end_session` matching-ID removal | After latest campaign recovery ends | Do not remove an unrelated checkpoint |
+
+## Visual, motion, and audio semantics
+
+No new visual/audio behavior is introduced. Existing written save/load status,
+campaign stage, and recovery fallbacks remain the presentation source.
+
+## Accessibility and fallbacks
+
+Missing checkpoint remains written and recoverable through the existing Save/
+Restore controls; mute, reduced-motion, text, unknown-data, and host-load
+fallbacks remain unchanged. No device/browser certification is claimed.
+
+## Authority, history, and replay boundaries
+
+Rust owns wrapper replacement, campaign identity, checkpoint verification,
+hydration, transitions, history, replay, and cleanup. The browser retains only
+opaque session IDs and supplied metadata.
+
+## Asset provenance and release requirements
+
+No asset or audio file is added; existing registries and credits remain the
+release authority.
+
+## Verification and evidence limits
+
+The focused regression must save the three campaigns sequentially, use fresh
+hosts to reject replaced IDs, restore the latest campaign wrapper, and verify
+matching cleanup. Automated identity parity does not establish human quality,
+browser serialization, archive durability, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, archive, browser save artifact, simulation, screenshot,
+  asset, audio file, or human approval claim.
+- Open: browser serialization, multi-checkpoint archive design, raster
+  screenshots, human first-time-user/accessibility/educational review,
+  provenance/legal review, and public-release approval.

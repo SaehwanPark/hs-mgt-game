@@ -3490,3 +3490,37 @@ and temporary-branch cleanup.
 This proves only deterministic host regional-affiliation checkpoint
 continuation from stage 3 through stage 6. It does not prove browser
 persistence, human usability, or public-release readiness.
+# Request Summary — Cross-campaign checkpoint identity v0.13.75
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a host-owned cross-campaign durable
+checkpoint identity slice over the existing single latest-save path.
+
+## Target slice
+
+- Save competitive, replace it with stabilization, then replace it with
+  regional affiliation using the configured host checkpoint path.
+- On fresh hosts, reject each replaced opaque session ID and restore only the
+  newest matching campaign wrapper; remove only the matching latest checkpoint
+  on end-session.
+- Keep browser serialization, checkpoint archives, screenshots, human review,
+  and release gates open.
+
+## Non-goals
+
+- No new route/schema, save format, simulation rule, asset/audio file, browser
+  persistence, archive, screenshot suite, human review, device certification,
+  provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused persistence/session and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only cross-campaign replacement and matching-ID hydration on the
+single host checkpoint path. It does not prove browser serialization, archive
+history, human usability, or public-release readiness.
