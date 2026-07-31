@@ -386,15 +386,14 @@ identity, committed count, and latest visible hash. The live page exposes
 explicit Save host checkpoint and Restore host checkpoint controls. Restore
 uses the existing host read path to refresh presentation, action catalog,
 history, replay, and regional-world views; failed operations preserve the
-current view. The loopback GUI host also writes an explicit competitive or
-stabilization checkpoint to its application-config save path, wrapping the
-existing `CompetitiveSessionSave` or `SessionSave` artifact with the opaque
-session ID. After a host
+current view. The loopback GUI host also writes an explicit competitive,
+stabilization, or regional-affiliation checkpoint to its application-config
+save path, wrapping the existing `CompetitiveSessionSave`, `SessionSave`, or
+`AffiliationReplayArtifact` artifact with the opaque session ID. After a host
 restart, a browser refresh may request the existing host `loadSession` route
 once after an unknown live-session read, then repeat the same actor-visible
-reads. Regional-affiliation checkpoints remain in-memory; the browser never
-receives or serializes the save artifact, and the path stores one latest
-explicit checkpoint.
+reads. The browser never receives or serializes the save artifact, and the path
+stores one latest explicit checkpoint.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

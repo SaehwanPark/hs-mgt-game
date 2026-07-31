@@ -85,3 +85,20 @@ fn affiliation_replay_detects_observation_tampering() {
   let text = serde_json::to_string(&value).unwrap();
   assert!(verify_affiliation_replay(&text, &default_affiliation_ruleset()).is_err());
 }
+
+#[test]
+fn affiliation_replay_detects_seed_tampering() {
+  let artifact = AffiliationReplayArtifact {
+    artifact_version: AFFILIATION_REPLAY_ARTIFACT_VERSION.to_string(),
+    seed: 42,
+    ruleset_version: default_affiliation_ruleset().version.clone(),
+    history: sample_history(),
+  };
+  let mut value: serde_json::Value =
+    serde_json::from_str(&serialize_affiliation_replay(&artifact)).unwrap();
+  value["seed"] = serde_json::json!(43);
+  let text = serde_json::to_string(&value).unwrap();
+  let error = verify_affiliation_replay(&text, &default_affiliation_ruleset())
+    .expect_err("seed tampering must fail deterministic input validation");
+  assert!(error.contains("saved seed"));
+}

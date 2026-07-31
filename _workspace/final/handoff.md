@@ -1,3 +1,51 @@
+# Final Handoff — Durable regional-affiliation host checkpoint v0.13.65
+
+## Status
+
+Implementation and focused verification are complete on
+`feat/durable-affiliation-checkpoint-v0.13.65`; full validation and the PR
+loop remain.
+
+## Planned result
+
+- Add a host-only `gui-affiliation-save-v1` wrapper around the existing
+  `AffiliationReplayArtifact` serializer/verifier on the configured GUI path.
+- Recover a matching affiliation session across host restart with replay/hash
+  validation, visible-stage alignment, deterministic continuation, collision
+  protection, and terminal cleanup.
+- Reuse the existing browser unknown-session load retry and keep browser state
+  limited to the opaque session ID.
+
+## Focused verification
+
+- Affiliation persistence, session, collision, restart, deterministic
+  continuation, visible-stage, and terminal-cleanup tests pass.
+- GUI transport tests pass for affiliation save/load across two host instances
+  and visible campaign coverage after recovery.
+
+## Full verification
+
+- `cargo fmt --check`, 360 Rust tests, and Clippy with warnings denied pass.
+- Full Python validation, release metadata, documentation links,
+  asset/security/generation/credits, device/offline/browser, audio, raster,
+  and visual/audio contract checks pass; the measured source-byte proxy is
+  383737 bytes.
+
+## Review
+
+- The sole medium-effort review found and the implementation fixed a medium
+  seed-to-resolved-input integrity gap; a tampered-seed regression now fails
+  closed. It also found and the ledger update removed two stale in-memory-only
+  affiliation claims.
+- The same reviewer re-verified commit `354ae15` with no remaining concrete
+  findings.
+
+## Review boundary and remaining gates
+
+PR handoff, merge, and branch cleanup remain. Replay playback/regeneration,
+screenshots, human evaluation, provenance/legal, device certification, and
+public-release gates remain open.
+
 # Final Handoff — Durable stabilization host checkpoint v0.13.64
 
 ## Status

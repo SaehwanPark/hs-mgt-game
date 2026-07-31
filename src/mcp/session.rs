@@ -26,8 +26,8 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 use super::persistence::{
-  GuiSessionSave, load_gui_session_save, remove_gui_session_save, write_competitive_session_save,
-  write_stabilization_session_save,
+  GuiSessionSave, load_gui_session_save, remove_gui_session_save, write_affiliation_session_save,
+  write_competitive_session_save, write_stabilization_session_save,
 };
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -491,7 +491,12 @@ impl GameSessionStore {
           &stabilization_session_save(stabilization),
         )
         .map_err(checkpoint_persistence_error)?,
-        GameSession::Affiliation(_) => {}
+        GameSession::Affiliation(affiliation) => write_affiliation_session_save(
+          path,
+          &request.session_id,
+          &affiliation_session_save(affiliation),
+        )
+        .map_err(checkpoint_persistence_error)?,
       }
     }
     self.checkpoints.insert(request.session_id.clone(), session);
@@ -829,7 +834,7 @@ impl GameSessionStore {
       .is_some_and(|session| {
         matches!(
           session,
-          GameSession::Competitive(_) | GameSession::Stabilization(_)
+          GameSession::Competitive(_) | GameSession::Stabilization(_) | GameSession::Affiliation(_)
         ) && self.checkpoints.contains_key(&request.session_id)
       });
     if durable_gui_checkpoint && let Some(path) = &self.durable_gui_save_path {
@@ -929,6 +934,7 @@ impl GameSessionStore {
       session_id,
       &default_competitive_ruleset(),
       &default_ruleset(),
+      &default_affiliation_ruleset(),
     )
     .map_err(checkpoint_persistence_error)?
     else {
@@ -937,6 +943,7 @@ impl GameSessionStore {
     let session = match save {
       GuiSessionSave::Competitive(save) => competitive_session_from_save(save),
       GuiSessionSave::Stabilization(save) => stabilization_session_from_save(save),
+      GuiSessionSave::Affiliation(save) => affiliation_session_from_save(save),
     };
     self
       .checkpoints
@@ -1090,6 +1097,17 @@ fn stabilization_session_save(session: &StabilizationSession) -> crate::model::S
   }
 }
 
+fn affiliation_session_save(
+  session: &AffiliationSession,
+) -> crate::model::AffiliationReplayArtifact {
+  crate::model::AffiliationReplayArtifact {
+    artifact_version: crate::model::AFFILIATION_REPLAY_ARTIFACT_VERSION.to_string(),
+    seed: session.seed,
+    ruleset_version: session.ruleset.version.to_string(),
+    history: session.history.clone(),
+  }
+}
+
 fn competitive_session_from_save(save: crate::model::CompetitiveSessionSave) -> GameSession {
   let current = save.history.final_state().clone();
   let prior_aggregated = save
@@ -1119,6 +1137,18 @@ fn stabilization_session_from_save(save: crate::model::SessionSave) -> GameSessi
   GameSession::Stabilization(StabilizationSession {
     seed: save.seed,
     ruleset: default_ruleset(),
+    history: save.history,
+    current,
+    done,
+  })
+}
+
+fn affiliation_session_from_save(save: crate::model::AffiliationReplayArtifact) -> GameSession {
+  let current = save.history.final_state().clone();
+  let done = current.turn >= AFFILIATION_TURN_COUNT;
+  GameSession::Affiliation(AffiliationSession {
+    seed: save.seed,
+    ruleset: default_affiliation_ruleset(),
     history: save.history,
     current,
     done,
@@ -2110,6 +2140,117 @@ mod tests {
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let live = start(&mut restarted, "stabilization-v1");
+    assert_eq!(live.session_id, original_id);
+    let error = restarted
+      .load_session(LoadSessionRequest {
+        session_id: live.session_id.clone(),
+      })
+      .expect_err("a live colliding session must not be overwritten");
+    assert_eq!(error.code.as_deref(), Some("checkpoint_missing"));
+    let replay = restarted
+      .get_replay(GetReplayRequest {
+        session_id: live.session_id.clone(),
+      })
+      .expect("live session remains available");
+    assert_eq!(replay.transition_count, 0);
+    restarted
+      .end_session(EndSessionRequest {
+        session_id: live.session_id,
+      })
+      .expect("end colliding live session");
+    assert!(path.is_file(), "unclaimed durable checkpoint must remain");
+    let _ = std::fs::remove_file(path);
+  }
+
+  #[test]
+  fn durable_affiliation_checkpoint_recovers_across_store_restart() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-affiliation-{}.save",
+      std::process::id()
+    ));
+    let mut store = GameSessionStore::with_competitive_persistence(path.clone());
+    let session = start(&mut store, "regional-affiliation-v1");
+    let session_id = session.session_id.clone();
+    let first = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "assess".to_string(),
+      })
+      .expect("assessment stage");
+    let saved = store
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable affiliation save");
+    assert_eq!(saved.transition_count, 1);
+    assert!(path.is_file());
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let loaded = restarted
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable affiliation load");
+    assert_eq!(loaded.transition_count, saved.transition_count);
+    assert_eq!(loaded.latest_state_hash, saved.latest_state_hash);
+    let coverage = restarted
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restored affiliation coverage");
+    assert_eq!(coverage.stage.id, "chooseposture");
+
+    let original_next = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "posture choice=independent".to_string(),
+      })
+      .expect("original continuation");
+    let restarted_next = restarted
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "posture choice=independent".to_string(),
+      })
+      .expect("restarted continuation");
+    assert_eq!(
+      restarted_next
+        .latest_transition
+        .map(|transition| transition.state_hash),
+      original_next
+        .latest_transition
+        .map(|transition| transition.state_hash)
+    );
+
+    restarted
+      .end_session(EndSessionRequest { session_id })
+      .expect("end recovered affiliation session");
+    assert!(!path.exists());
+    let _ = first;
+  }
+
+  #[test]
+  fn durable_affiliation_checkpoint_does_not_overwrite_live_session() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-affiliation-collision-{}.save",
+      std::process::id()
+    ));
+    let mut original = GameSessionStore::with_competitive_persistence(path.clone());
+    let original_session = start(&mut original, "regional-affiliation-v1");
+    let original_id = original_session.session_id.clone();
+    original
+      .submit_turn(SubmitTurnRequest {
+        session_id: original_id.clone(),
+        command_text: "assess".to_string(),
+      })
+      .expect("assessment stage");
+    original
+      .save_session(SaveSessionRequest {
+        session_id: original_id.clone(),
+      })
+      .expect("durable save");
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let live = start(&mut restarted, "regional-affiliation-v1");
     assert_eq!(live.session_id, original_id);
     let error = restarted
       .load_session(LoadSessionRequest {

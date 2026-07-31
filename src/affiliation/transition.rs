@@ -394,6 +394,7 @@ pub fn resolve_affiliation_turn(
 pub fn replay_affiliation(
   history: &AffiliationHistory,
   ruleset: &AffiliationRuleset,
+  seed: u64,
 ) -> Result<AffiliationWorldState, AffiliationValidationError> {
   let mut current = history.genesis.clone();
   for transition in &history.transitions {
@@ -402,6 +403,10 @@ pub fn replay_affiliation(
     }
     if transition.observation != observe_affiliation(&current) {
       return Err(AffiliationValidationError::ObservationMismatch);
+    }
+    if transition.resolved_inputs != resolve_affiliation_inputs(seed, &current, &transition.command)
+    {
+      return Err(AffiliationValidationError::ResolvedInputsMismatch);
     }
     let replayed = transition_affiliation(
       &current,

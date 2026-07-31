@@ -148,7 +148,7 @@ impl McpGameServer {
 
   #[tool(
     name = "save_session",
-    description = "Save an explicit host checkpoint for a live session without serializing state in the client; the loopback GUI may persist competitive or stabilization checkpoints in its host-owned file."
+    description = "Save an explicit host checkpoint for a live session without serializing state in the client; the loopback GUI may persist competitive, stabilization, or regional-affiliation checkpoints in its host-owned file."
   )]
   async fn save_session(
     &self,
@@ -159,7 +159,7 @@ impl McpGameServer {
 
   #[tool(
     name = "load_session",
-    description = "Restore an in-memory host checkpoint or a matching durable loopback competitive or stabilization checkpoint and return aligned save metadata without client-side state restoration."
+    description = "Restore an in-memory host checkpoint or a matching durable loopback competitive, stabilization, or regional-affiliation checkpoint and return aligned save metadata without client-side state restoration."
   )]
   async fn load_session(
     &self,

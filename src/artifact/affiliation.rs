@@ -30,6 +30,6 @@ pub fn verify_affiliation_replay(
       artifact.ruleset_version, ruleset.version
     ));
   }
-  crate::affiliation::replay_affiliation(&artifact.history, ruleset)
+  crate::affiliation::replay_affiliation(&artifact.history, ruleset, artifact.seed)
     .map_err(|error: AffiliationValidationError| error.message())
 }

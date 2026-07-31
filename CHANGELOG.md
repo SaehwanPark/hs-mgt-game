@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.65] - 2026-07-30
+
+- Added explicit durable regional-affiliation GUI checkpoints using a
+  host-only `gui-affiliation-save-v1` wrapper around the existing
+  `AffiliationReplayArtifact` on the configured GUI checkpoint path.
+- Added fresh-host affiliation replay verification, visible-stage/hash
+  recovery, deterministic continuation, collision protection, terminal
+  cleanup, and GUI transport restart coverage while reusing the browser load
+  retry.
+- Kept autosave, browser serialization, replay playback/regeneration, human
+  evaluation, provenance, and public-release gates open.
+
 ## [0.13.64] - 2026-07-30
 
 - Added explicit durable stabilization GUI checkpoints using a host-only

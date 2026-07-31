@@ -48,8 +48,9 @@ validation, simulation outcomes, or replay history.
 
 The server listens only on your computer's loopback interface. It does not make
 the game available to other computers and does not provide network multiplayer.
-At startup it prints the application-config path used for explicit competitive
-checkpoint files; the file is host-owned and is never sent to the browser.
+At startup it prints the application-config path used for explicit checkpoint
+files for all three campaigns; the file is host-owned and is never sent to the
+browser.
 
 ## Follow the first session
 
@@ -72,6 +73,13 @@ For stabilization and regional affiliation, the rail instead tracks five
 campaign-coverage handoffs: start/load, inspect the visible campaign envelope,
 choose a host-shaped decision, review the committed stage, and continue. These
 campaigns do not use the competitive local-draft or validation steps.
+
+Use **Save host checkpoint** after a committed decision when you want a durable
+restart point. The host stores one latest checkpoint for the selected campaign;
+after a host restart, enter the same opaque session ID and choose **Load existing
+session** or **Restore host checkpoint**. The browser never receives the saved
+artifact, and a missing or colliding checkpoint is reported as a recoverable
+error.
 
 Drafting does not advance time. Validation checks action points, cash, political
 capital, command syntax, and other host-owned constraints without committing the

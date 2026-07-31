@@ -4,15 +4,19 @@ use std::path::Path;
 use serde::{Deserialize, Serialize};
 
 use crate::artifact::{
-  describe_session_save_error, deserialize_competitive_session_save,
-  serialize_competitive_session_save, serialize_session_save, verify_session_save,
+  describe_session_save_error, deserialize_affiliation_replay,
+  deserialize_competitive_session_save, serialize_affiliation_replay,
+  serialize_competitive_session_save, serialize_session_save, verify_affiliation_replay,
+  verify_session_save,
 };
 use crate::model::{
-  CompetitiveRuleset, CompetitiveSessionSave, Ruleset, SessionSave, hash_competitive_state,
+  AffiliationReplayArtifact, AffiliationRuleset, CompetitiveRuleset, CompetitiveSessionSave,
+  Ruleset, SessionSave, hash_competitive_state,
 };
 
 pub const GUI_COMPETITIVE_SAVE_SCHEMA_VERSION: &str = "gui-competitive-save-v1";
 pub const GUI_STABILIZATION_SAVE_SCHEMA_VERSION: &str = "gui-stabilization-save-v1";
+pub const GUI_AFFILIATION_SAVE_SCHEMA_VERSION: &str = "gui-affiliation-save-v1";
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct GuiCompetitiveSessionSave {
@@ -28,10 +32,18 @@ pub struct GuiStabilizationSessionSave {
   pub save_text: String,
 }
 
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct GuiAffiliationSessionSave {
+  pub schema_version: String,
+  pub session_id: String,
+  pub save_text: String,
+}
+
 #[derive(Clone, Debug)]
 pub enum GuiSessionSave {
   Competitive(CompetitiveSessionSave),
   Stabilization(SessionSave),
+  Affiliation(AffiliationReplayArtifact),
 }
 
 pub fn write_competitive_session_save(
@@ -61,6 +73,21 @@ pub fn write_stabilization_session_save(
   };
   let text = serde_json::to_string_pretty(&wrapper)
     .map_err(|error| format!("unable to serialize GUI stabilization save: {error}"))?;
+  write_gui_save_text(path, &text)
+}
+
+pub fn write_affiliation_session_save(
+  path: &Path,
+  session_id: &str,
+  save: &AffiliationReplayArtifact,
+) -> Result<(), String> {
+  let wrapper = GuiAffiliationSessionSave {
+    schema_version: GUI_AFFILIATION_SAVE_SCHEMA_VERSION.to_string(),
+    session_id: session_id.to_string(),
+    save_text: serialize_affiliation_replay(save),
+  };
+  let text = serde_json::to_string_pretty(&wrapper)
+    .map_err(|error| format!("unable to serialize GUI affiliation save: {error}"))?;
   write_gui_save_text(path, &text)
 }
 
@@ -163,11 +190,40 @@ pub fn load_stabilization_session_save(
     })
 }
 
+pub fn load_affiliation_session_save(
+  path: &Path,
+  session_id: &str,
+  ruleset: &AffiliationRuleset,
+) -> Result<Option<AffiliationReplayArtifact>, String> {
+  if !path.is_file() {
+    return Ok(None);
+  }
+  let text = fs::read_to_string(path)
+    .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
+  let wrapper: GuiAffiliationSessionSave = serde_json::from_str(&text)
+    .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
+  if wrapper.schema_version != GUI_AFFILIATION_SAVE_SCHEMA_VERSION {
+    return Err(format!(
+      "unsupported GUI save schema '{}'",
+      wrapper.schema_version
+    ));
+  }
+  if wrapper.session_id != session_id {
+    return Ok(None);
+  }
+  let artifact = deserialize_affiliation_replay(&wrapper.save_text)
+    .map_err(|error| format!("invalid GUI affiliation save: {error}"))?;
+  verify_affiliation_replay(&wrapper.save_text, ruleset)
+    .map_err(|error| format!("invalid GUI affiliation save: {error}"))?;
+  Ok(Some(artifact))
+}
+
 pub fn load_gui_session_save(
   path: &Path,
   session_id: &str,
   competitive_ruleset: &CompetitiveRuleset,
   stabilization_ruleset: &Ruleset,
+  affiliation_ruleset: &AffiliationRuleset,
 ) -> Result<Option<GuiSessionSave>, String> {
   if !path.is_file() {
     return Ok(None);
@@ -188,6 +244,10 @@ pub fn load_gui_session_save(
     GUI_STABILIZATION_SAVE_SCHEMA_VERSION => {
       load_stabilization_session_save(path, session_id, stabilization_ruleset)
         .map(|save| save.map(GuiSessionSave::Stabilization))
+    }
+    GUI_AFFILIATION_SAVE_SCHEMA_VERSION => {
+      load_affiliation_session_save(path, session_id, affiliation_ruleset)
+        .map(|save| save.map(GuiSessionSave::Affiliation))
     }
     other => Err(format!("unsupported GUI save schema '{other}'")),
   }
@@ -212,7 +272,9 @@ pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), Stri
   if stored_session_id == session_id
     && matches!(
       schema,
-      GUI_COMPETITIVE_SAVE_SCHEMA_VERSION | GUI_STABILIZATION_SAVE_SCHEMA_VERSION
+      GUI_COMPETITIVE_SAVE_SCHEMA_VERSION
+        | GUI_STABILIZATION_SAVE_SCHEMA_VERSION
+        | GUI_AFFILIATION_SAVE_SCHEMA_VERSION
     )
   {
     fs::remove_file(path)
@@ -293,9 +355,11 @@ mod tests {
   use super::*;
   use crate::competitive::{build_multi_month_resolution_history, genesis_competitive_world};
   use crate::model::{
-    CompetitiveHistory, Difficulty, ExperienceMode, History, default_competitive_ruleset,
+    AFFILIATION_REPLAY_ARTIFACT_VERSION, AffiliationHistory, CompetitiveHistory, Difficulty,
+    ExperienceMode, History, default_affiliation_ruleset, default_competitive_ruleset,
     default_ruleset, genesis_state,
   };
+  use crate::scenario::default_regional_affiliation_scenario;
 
   #[test]
   fn gui_save_round_trip_requires_matching_opaque_session_id() {
@@ -398,14 +462,24 @@ mod tests {
     };
 
     write_stabilization_session_save(&path, "session-7", &save).expect("write GUI save");
-    let missing =
-      load_gui_session_save(&path, "session-8", &default_competitive_ruleset(), &ruleset)
-        .expect("mismatched ID read");
+    let missing = load_gui_session_save(
+      &path,
+      "session-8",
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect("mismatched ID read");
     assert!(missing.is_none());
-    let restored =
-      load_gui_session_save(&path, "session-7", &default_competitive_ruleset(), &ruleset)
-        .expect("matching ID read")
-        .expect("matching save");
+    let restored = load_gui_session_save(
+      &path,
+      "session-7",
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect("matching ID read")
+    .expect("matching save");
     assert!(matches!(restored, GuiSessionSave::Stabilization(_)));
 
     remove_gui_session_save(&path, "session-8").expect("mismatched ID removal");
@@ -440,6 +514,57 @@ mod tests {
       .expect("replacement read")
       .expect("replacement save");
     assert_eq!(restored.seed, 43);
+    let _ = fs::remove_file(&path);
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn affiliation_save_round_trip_verifies_replay_and_requires_matching_opaque_session_id() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-affiliation-{}",
+      std::process::id()
+    ));
+    let path = directory.join("affiliation.save");
+    let ruleset = default_affiliation_ruleset();
+    let genesis = default_regional_affiliation_scenario()
+      .expect("affiliation scenario")
+      .initial_affiliation_world_state()
+      .expect("affiliation genesis");
+    let save = AffiliationReplayArtifact {
+      artifact_version: AFFILIATION_REPLAY_ARTIFACT_VERSION.to_string(),
+      seed: 42,
+      ruleset_version: ruleset.version.to_string(),
+      history: AffiliationHistory {
+        genesis,
+        transitions: Vec::new(),
+      },
+    };
+
+    write_affiliation_session_save(&path, "session-7", &save).expect("write GUI save");
+    let missing = load_gui_session_save(
+      &path,
+      "session-8",
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+      &ruleset,
+    )
+    .expect("mismatched ID read");
+    assert!(missing.is_none());
+    let restored = load_gui_session_save(
+      &path,
+      "session-7",
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+      &ruleset,
+    )
+    .expect("matching ID read")
+    .expect("matching save");
+    assert!(matches!(restored, GuiSessionSave::Affiliation(_)));
+
+    remove_gui_session_save(&path, "session-8").expect("mismatched ID removal");
+    assert!(path.is_file());
+    remove_gui_session_save(&path, "session-7").expect("matching ID removal");
+    assert!(!path.exists());
     let _ = fs::remove_file(&path);
     let _ = fs::remove_dir(&directory);
   }

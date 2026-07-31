@@ -1,3 +1,37 @@
+# Presentation QA — Durable regional-affiliation host checkpoint v0.13.65
+
+## Status
+
+The bounded durable regional-affiliation host-checkpoint contract passes its
+automated implementation checks and the sole code-review re-verification.
+This is not human accessibility, visual/audio quality, educational,
+device/browser, legal, provenance, or public-release approval.
+
+## Review boundary
+
+The implementation must remain a host persistence slice, not browser state
+transfer. Existing campaign-coverage and actor-visible read contracts remain
+unchanged; the affiliation replay artifact and wrapper are host-only.
+
+## Required pass conditions
+
+- Explicit affiliation Save writes a matching checkpoint without entering a
+  transition and uses the temporary-sibling replacement behavior.
+- A fresh store verifies and recovers the same history/hash/visible stage and
+  deterministic continuation.
+- Missing, malformed, or colliding files fail with written recoverable errors
+  and cannot overwrite a live session.
+- Browser recovery uses the existing one-time host load retry only after an
+  unknown live read, then repeats actor-visible reads without true state.
+- Existing audio-off, reduced-motion, keyboard, written, and campaign-view
+  behavior remains complete.
+
+## Evidence limits
+
+This is an automated technical boundary review. It cannot approve human
+accessibility, visual/audio quality, educational comprehension, device/browser
+behavior, replay playback, provenance/legal status, or public release.
+
 # Presentation QA — Durable stabilization host checkpoint v0.13.64
 
 ## Status
