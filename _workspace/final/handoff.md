@@ -2376,3 +2376,25 @@ slice.
   asset/security/generation/credits, device/offline/browser/audio/raster/
   loading/visual-audio/asset-budget, CLI smoke, Node syntax, and diff checks
   pass.
+# Final Handoff — Full-campaign audio-state coverage v0.13.76
+
+## Status
+
+Implementation, full validation, and the sole medium-effort review are
+complete on `feat/full-campaign-audio-state-coverage-v0.13.76`; the reviewer
+found no actionable findings. PR handoff, merge, and branch cleanup remain.
+
+## Target result
+
+- Walk all three launchable campaigns through their endpoints and validate
+  host-supplied campaign-coverage music/cue metadata at every read.
+- Require terminal `debrief` music state, allowlisted IDs, and written
+  equivalents without adding assets or browser authority.
+
+## Remaining work
+
+The bounded regression walks 24 competitive months, 5 stabilization stages,
+and 6 regional-affiliation stages, with 372 Rust tests and 785 Python tests
+plus all repository contract gates passing. The sole reviewer approved with no
+actionable findings. Merge the PR, clean the temporary branch locally/remotely,
+verify clean `main`, and select the next unmet roadmap slice.

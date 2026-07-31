@@ -3391,3 +3391,16 @@ separate gates.
   newest campaign identity, and clean only its matching ID.
 - Prevention: treat campaign and opaque-session identity as a joint durable
   invariant; never infer archive semantics from a single latest-save path.
+# Full-Campaign Audio Evidence Must Walk Every Host Read
+
+- Context: representative music/cue mappings and registry checks passed, but a
+  single active/terminal fixture could not establish continuity across all
+  campaign stages.
+- Risk: an unvisited stage could emit an unregistered cue, lose written
+  equivalents, or fail to switch to debrief music while the browser appears
+  healthy.
+- Resolution: walk each launchable campaign through every host coverage read,
+  validate IDs against existing catalogs, require terminal debrief state, and
+  keep audio optional with written fallbacks.
+- Prevention: treat full-campaign metadata continuity as host-source evidence,
+  separate from human listening/accessibility quality and release approval.

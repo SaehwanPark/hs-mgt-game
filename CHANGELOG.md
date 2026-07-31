@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.76] - 2026-07-31
+
+- Added host-bound full-campaign audio-state evidence across competitive,
+  stabilization, and regional-affiliation campaigns: every active and
+  terminal campaign-coverage read carries allowlisted music/cue metadata,
+  terminal debrief music, and written debrief fallbacks.
+- Kept browser serialization, screenshots, human listening/accessibility
+  review, provenance/legal approval, and public-release gates open.
+
 ## [0.13.75] - 2026-07-31
 
 - Added host-bound cross-campaign checkpoint identity evidence: sequential

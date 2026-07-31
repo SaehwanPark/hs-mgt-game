@@ -13,6 +13,7 @@ AUDIO_REGISTRY = ROOT / "assets" / "registry" / "audio-assets.json"
 ROADMAP = ROOT / "docs" / "visual_audio_enhancement_roadmap.md"
 HTML = ROOT / "gui" / "index.html"
 RESOLUTION = ROOT / "src" / "mcp" / "resolution.rs"
+CAMPAIGN_COVERAGE = ROOT / "src" / "mcp" / "campaign_coverage.rs"
 HISTORY_TEST = ROOT / "tests" / "test_phase11_live_history.py"
 DEBRIEF_TEST = ROOT / "tests" / "test_phase11_live_debrief.py"
 CHECKPOINT_TEST = ROOT / "tests" / "test_phase11_live_checkpoint.py"
@@ -180,6 +181,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
     cls.registry = json.loads(VISUAL_REGISTRY.read_text(encoding="utf-8"))
     cls.audio_registry = json.loads(AUDIO_REGISTRY.read_text(encoding="utf-8"))
     cls.resolution = RESOLUTION.read_text(encoding="utf-8")
+    cls.campaign_coverage = CAMPAIGN_COVERAGE.read_text(encoding="utf-8")
     cls.html = HTML.read_text(encoding="utf-8")
     cls.app = (ROOT / "gui" / "app.mjs").read_text(encoding="utf-8")
     cls.adapter = (ROOT / "gui" / "host-adapter.mjs").read_text(encoding="utf-8")
@@ -231,7 +233,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -644,6 +646,40 @@ console.log(JSON.stringify(resolved));
       self.assertNotIn(forbidden, self.app)
     self.assertIn("competitive coverage", self.session)
 
+  def test_full_campaign_audio_state_coverage_is_host_bound(self):
+    coverage = self.ledger["full_campaign_audio_state_coverage"]
+    self.assertEqual(coverage["status"], "complete-full-campaign-host-audio-state-continuity")
+    self.assertEqual(coverage["schema"], "campaign-coverage-v1")
+    self.assertEqual(
+      coverage["campaigns"],
+      ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
+    )
+    self.assertEqual(coverage["terminal_music_state"], "debrief")
+    self.assertEqual(
+      coverage["allowlists"]["music_states"],
+      ["menu", "stable_operations", "pressure", "regulatory_scrutiny", "competitive_escalation", "affiliation_negotiation", "debrief"],
+    )
+    self.assertEqual(
+      coverage["allowlists"]["event_cues"],
+      ["event.project-complete", "event.staffing-constraint", "event.operating-loss", "event.operating-recovery", "event.payer-decision", "event.regulatory-decision", "event.rival-expansion", "event.affiliation-milestone"],
+    )
+    for marker in (
+      "campaign_coverage_audio_state_covers_all_full_campaign_reads",
+      "get_campaign_coverage(GetCampaignCoverageRequest",
+      "CampaignCoverageAudio",
+      "campaign_audio",
+      "debrief",
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1",
+    ):
+      self.assertIn(marker, self.session + self.campaign_coverage + json.dumps(coverage))
+    self.assertIn("event.project-complete", self.session)
+    self.assertIn("event.affiliation-milestone", self.session)
+    self.assertIn("Every active and terminal campaign-coverage-v1 read", json.dumps(coverage))
+    for boundary in ("No new route/schema", "written equivalents", "does not submit commands"):
+      self.assertIn(boundary, json.dumps(coverage))
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -750,6 +786,7 @@ console.log(JSON.stringify(resolved));
       "Current full stabilization host checkpoint continuation covered.": "x",
       "Current full regional-affiliation host checkpoint continuation covered.": "x",
       "Current cross-campaign latest-checkpoint identity covered. Evidence:": "x",
+      "Current full-campaign host audio-state coverage covered. Evidence:": "x",
       "Current explicit durable stabilization host checkpoint recovery covered.": "x",
       "Current explicit durable regional-affiliation host checkpoint recovery covered.": "x",
       "Current live replay visual continuity covered. Evidence:": "x",

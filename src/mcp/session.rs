@@ -3674,6 +3674,139 @@ mod tests {
   }
 
   #[test]
+  fn campaign_coverage_audio_state_covers_all_full_campaign_reads() {
+    let allowed_music_states = [
+      "menu",
+      "stable_operations",
+      "pressure",
+      "regulatory_scrutiny",
+      "competitive_escalation",
+      "affiliation_negotiation",
+      "debrief",
+    ];
+    let allowed_audio_cues = [
+      "event.project-complete",
+      "event.staffing-constraint",
+      "event.operating-loss",
+      "event.operating-recovery",
+      "event.payer-decision",
+      "event.regulatory-decision",
+      "event.rival-expansion",
+      "event.affiliation-milestone",
+    ];
+    let assert_audio_state = |coverage: crate::mcp::campaign_coverage::CampaignCoverageEnvelope,
+                              terminal: bool| {
+      assert_eq!(coverage.schema_version, "campaign-coverage-v1");
+      let audio = coverage.audio.expect("campaign coverage audio");
+      assert!(
+        allowed_music_states.contains(&audio.music_state_id.as_str()),
+        "unexpected music state {}",
+        audio.music_state_id
+      );
+      for cue_id in &audio.audio_cue_ids {
+        assert!(
+          allowed_audio_cues.contains(&cue_id.as_str()),
+          "unexpected audio cue {cue_id}"
+        );
+      }
+      if terminal {
+        assert!(coverage.session.done);
+        assert_eq!(audio.music_state_id, "debrief");
+        assert!(!coverage.debrief.is_empty());
+      } else {
+        assert!(!coverage.session.done);
+      }
+    };
+
+    let mut store = GameSessionStore::default();
+    let mut competitive = start(&mut store, "competitive-regional-v1");
+    assert_audio_state(
+      store
+        .get_campaign_coverage(GetCampaignCoverageRequest {
+          session_id: competitive.session_id.clone(),
+        })
+        .expect("competitive genesis coverage"),
+      false,
+    );
+    for month in 0..COMPETITIVE_MONTH_LIMIT {
+      competitive = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: competitive.session_id,
+          command_text: String::new(),
+        })
+        .expect("competitive month");
+      assert_audio_state(
+        store
+          .get_campaign_coverage(GetCampaignCoverageRequest {
+            session_id: competitive.session_id.clone(),
+          })
+          .expect("competitive campaign coverage"),
+        month + 1 == COMPETITIVE_MONTH_LIMIT,
+      );
+    }
+
+    let mut stabilization = start(&mut store, "stabilization-v1");
+    assert_audio_state(
+      store
+        .get_campaign_coverage(GetCampaignCoverageRequest {
+          session_id: stabilization.session_id.clone(),
+        })
+        .expect("stabilization genesis coverage"),
+      false,
+    );
+    for stage in 0..INTERACTIVE_TURN_COUNT {
+      stabilization = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: stabilization.session_id,
+          command_text: String::new(),
+        })
+        .expect("stabilization stage");
+      assert_audio_state(
+        store
+          .get_campaign_coverage(GetCampaignCoverageRequest {
+            session_id: stabilization.session_id.clone(),
+          })
+          .expect("stabilization campaign coverage"),
+        stage + 1 == INTERACTIVE_TURN_COUNT,
+      );
+    }
+
+    let mut affiliation = start(&mut store, "regional-affiliation-v1");
+    let affiliation_commands = [
+      "assess",
+      "posture choice=independent",
+      "hold",
+      "hold",
+      "hold",
+      "hold",
+    ];
+    assert_audio_state(
+      store
+        .get_campaign_coverage(GetCampaignCoverageRequest {
+          session_id: affiliation.session_id.clone(),
+        })
+        .expect("affiliation genesis coverage"),
+      false,
+    );
+    for (stage, command) in affiliation_commands.into_iter().enumerate() {
+      affiliation = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: affiliation.session_id,
+          command_text: command.to_string(),
+        })
+        .expect("affiliation stage");
+      assert_audio_state(
+        store
+          .get_campaign_coverage(GetCampaignCoverageRequest {
+            session_id: affiliation.session_id.clone(),
+          })
+          .expect("affiliation campaign coverage"),
+        stage + 1 == AFFILIATION_TURN_COUNT as usize,
+      );
+    }
+  }
+
+  #[test]
   fn competitive_campaign_coverage_sanitizes_private_rival_actions() {
     let ruleset = default_competitive_ruleset();
     let genesis =

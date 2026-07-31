@@ -3524,3 +3524,36 @@ and temporary-branch cleanup.
 This proves only cross-campaign replacement and matching-ID hydration on the
 single host checkpoint path. It does not prove browser serialization, archive
 history, human usability, or public-release readiness.
+# Request Summary — Full-campaign audio-state coverage v0.13.76
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with host-source evidence for audio metadata
+across every active and terminal read of all three launchable campaigns.
+
+## Target slice
+
+- Walk competitive, stabilization, and regional affiliation through their
+  existing endpoints and read `campaign-coverage-v1` before/after each stage.
+- Require allowlisted music/cue IDs and terminal debrief music while keeping
+  written equivalents, browser read-only rendering, and host authority intact.
+- Keep new assets, browser serialization, screenshots, human listening review,
+  and release gates open.
+
+## Non-goals
+
+- No new route/schema, simulation rule, stochastic input, browser authority,
+  asset/audio file, screenshot suite, human review, provenance/legal approval,
+  or public-release claim.
+
+## Validation target
+
+Focused audio/campaign-coverage and evidence-contract tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only host-sourced metadata continuity and registry-bound IDs. It
+does not prove audio usefulness, human listening quality, accessibility, or
+public-release readiness.
