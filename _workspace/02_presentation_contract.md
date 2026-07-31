@@ -5012,3 +5012,38 @@ artifacts remain unchanged.
 `tests/test_phase13_2_debrief_visual_evidence_intake.py` must fail closed on
 case/question/source drift, unknown envelope fields, unbounded ratings,
 identity/media/private-state capture, and non-pending human/release fields.
+
+# Presentation Contract — Asset-provenance evidence-intake packet v0.13.92
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized provenance and
+release review of the current visual/audio registries and seven unreleased
+portrait previews. This packet does not change presentation behavior or
+approve an asset.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Visual inventory | `assets/registry/visual-assets.json` | Bind all current visual IDs | Do not infer human provenance or release clearance |
+| Audio inventory | `assets/registry/audio-assets.json` | Bind all current audio IDs | Do not infer listening usefulness or license clearance |
+| Portrait previews | `assets/generation/portrait-review-queue.json` | Bind seven hash-backed unreleased preview IDs and gates | Do not infer model, seed, resemblance, or release approval |
+| Generation policy | `assets/generation/generation-workflow.json` | Preserve required metadata and human-review gates | Do not fill missing metadata with plausible values |
+| Review vocabulary | `docs/evaluation/phase13.2-pilot-feedback-instrument.json` | Reuse bounded finding categories and forbidden fields | Do not collect names, raw notes, media, or private state |
+| Intake validator | `scripts/validate_asset_provenance_evidence_intake.py` | Fail closed on source, inventory, record, and release-boundary drift | Do not treat validator success as provenance or legal evidence |
+
+## Accessibility, privacy, and authority
+
+The intake preserves existing written equivalents, fallbacks, audio-off,
+reduced-motion, keyboard, and Large text contracts without changing them. It
+stores zero review records and forbids identity, contact details, private or
+hidden state, browser/session locations, raw notes, screenshots, recordings,
+and unrestricted transcripts. The host remains authoritative and no asset,
+runtime credit, registry, or release manifest is promoted.
+
+## Verification
+
+`tests/test_phase13_1_asset_provenance_evidence_intake.py` checks exact source
+parity, bounded record fields, privacy exclusions, gate/status vocabularies,
+type safety, and pending release decisions.

@@ -4550,6 +4550,21 @@ are completed. Human-review gates remain open.
   certification, Safari/WebKit runtime evidence, real hardware, human review,
   and public-release approval remain open.
 
+### v0.13.92 asset-provenance evidence-intake packet
+
+- `docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json`
+  binds the 38 visual-registry entries, 7 audio-registry entries, and 7
+  unreleased portrait previews to the current source markers and starts with
+  zero human review records.
+- `scripts/validate_asset_provenance_evidence_intake.py` and
+  `tests/test_phase13_1_asset_provenance_evidence_intake.py` fail closed on
+  source redirects, inventory/gate vocabulary drift, unknown or private
+  fields, boolean coercion, and premature approval or release promotion.
+- This prepares provenance evidence capture only. It does not establish model
+  or seed provenance, identity/resemblance, license/training-data,
+  accessibility, legal, release-derivative, registry, or public-release
+  approval.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4652,6 +4667,12 @@ are completed. Human-review gates remain open.
   `tests/test_phase13_2_pilot_evidence_intake.py`; the empty intake is
   source-bound and rejects identity, raw media, browser/session locations,
   hidden state, and unbounded free text while leaving human evidence pending.
+- [x] Asset provenance review intake prepared. Evidence:
+  `docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json`,
+  `scripts/validate_asset_provenance_evidence_intake.py`, and
+  `tests/test_phase13_1_asset_provenance_evidence_intake.py`; the empty,
+  source-bound intake mirrors the visual/audio/portrait inventory and keeps
+  provenance, human-review, release, and public-approval gates pending.
 
 ### Exit criteria
 

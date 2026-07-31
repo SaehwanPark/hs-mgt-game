@@ -539,3 +539,36 @@ evidence remain required before closing the roadmap item.
   — focused intake validation.
 - `python3 scripts/validate_debrief_visual_evidence_intake.py` — empty pending
   intake contract.
+
+# Domain QA — Phase 13.1 asset-provenance evidence-intake packet v0.13.92
+
+## Status
+
+`pass` for the repository-owned technical intake boundary only. The packet
+contains no human provenance records, license conclusion, identity judgment,
+accessibility finding, release decision, or public-approval result.
+
+## Findings
+
+- Visual, audio, and portrait-preview IDs/counts are derived from the current
+  canonical registries and queue; generation workflow and pilot vocabulary
+  define the review gates and privacy boundary.
+- The record shape is limited to asset ID/family, review status, bounded gate
+  statuses, and finding categories. Identity, raw media, private state,
+  browser/session locations, and unbounded notes are excluded.
+- Technical parity is complete, but model/seed provenance, human review,
+  license/training-data, release-derivative, registry, legal, and public
+  release gates remain explicitly pending.
+
+## Required fixes
+
+None for this bounded preparation packet. Authorized provenance, legal,
+accessibility, identity/resemblance, release, and public-approval evidence
+remain required before closing the roadmap item.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_asset_provenance_evidence_intake`
+  — focused packet, source-parity, and record-boundary validation.
+- `python3 scripts/validate_asset_provenance_evidence_intake.py` — empty,
+  source-bound, pending intake contract.

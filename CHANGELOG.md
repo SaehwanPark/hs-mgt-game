@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.92] - 2026-07-31
+
+- Added a strict, empty asset-provenance evidence-intake packet covering the
+  current visual/audio registries and seven unreleased portrait previews.
+- Kept provenance, identity/resemblance, license/training-data, accessibility,
+  release-derivative, registry, and public-release decisions pending; no asset
+  was approved, promoted, or added to a release manifest.
+
 ## [0.13.91] - 2026-07-31
 
 - Added a strict, empty evidence-intake packet for authorized human review of

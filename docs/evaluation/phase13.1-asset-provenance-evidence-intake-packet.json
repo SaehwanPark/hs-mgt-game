@@ -1,0 +1,169 @@
+{
+  "schema_version": "phase13.1-asset-provenance-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-review",
+  "roadmap_item": "Complete asset provenance review",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for authorized provenance and release review of the current asset inventory without approving or promoting any asset.",
+  "source_contract": {
+    "visual_registry": "assets/registry/visual-assets.json: \"schema_version\": \"asset-registry-v1\"",
+    "audio_registry": "assets/registry/audio-assets.json: \"schema_version\": \"asset-registry-v1\"",
+    "portrait_queue": "assets/generation/portrait-review-queue.json: \"schema_version\": \"fictional-portrait-review-queue-v1\"",
+    "generation_workflow": "assets/generation/generation-workflow.json: \"schema_version\": \"generation-workflow-v1\"",
+    "ai_boundary": "docs/evaluation/phase13.1-ai-generation-metadata-boundary.json: \"schema_version\": \"phase13.1-ai-generation-metadata-boundary-v1\"",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "release_manifest": "assets/ASSET_RELEASE_MANIFEST.json: \"schema_version\": \"asset-release-manifest-v1\""
+  },
+  "inventory": {
+    "visual_count": 38,
+    "audio_count": 7,
+    "portrait_preview_count": 7,
+    "visual_ids": [
+      "visual.runtime-resolution-sequence",
+      "visual.runtime-motion-catalog",
+      "visual.runtime-metric-visualizations",
+      "visual.runtime-identities",
+      "visual.art-direction.variant-a",
+      "visual.art-direction.variant-b",
+      "visual.art-direction.variant-c",
+      "visual.map.regional-grid",
+      "visual.map.road-tile-set",
+      "visual.map.district-tile-set",
+      "visual.map.parcel-system",
+      "visual.map.relationship-line-styles",
+      "visual.map.service-area-overlays",
+      "visual.map.uncertainty-overlays",
+      "visual.runtime-markers",
+      "visual.runtime-semantic-containers",
+      "visual.runtime-statuses",
+      "visual.actor-family-language",
+      "visual.facility.administrative-headquarters",
+      "visual.facility.parking-structure",
+      "visual.facility.utility-plant",
+      "visual.facility.research-education-building",
+      "visual.facility.construction-crane",
+      "visual.facility.undeveloped-parcel",
+      "visual.facility.general-hospital-base",
+      "visual.facility.patient-tower",
+      "visual.facility.emergency-department",
+      "visual.facility.ambulatory-center",
+      "visual.facility.specialty-center",
+      "visual.facility.rural-clinic",
+      "visual.runtime-svg-scene-proof",
+      "visual.identity.riverside-kit",
+      "visual.identity.northlake-kit",
+      "visual.identity.summit-kit",
+      "visual.map.event-marker-set",
+      "visual.runtime-consequence-links",
+      "visual.runtime-operational-overlays",
+      "visual.runtime-regional-board-adapter"
+    ],
+    "audio_ids": [
+      "audio.runtime-cue-refinement",
+      "audio.runtime-music",
+      "audio.runtime-music-stems",
+      "audio.runtime-ui-cues",
+      "audio.runtime-event-cues",
+      "audio.runtime-ambience-library",
+      "audio.direction-prototype"
+    ],
+    "portrait_preview_ids": [
+      "visual.portrait.rival-system-executive",
+      "visual.portrait.payer-negotiator",
+      "visual.portrait.regulator",
+      "visual.portrait.labor-representative",
+      "visual.portrait.community-leader",
+      "visual.portrait.board-chair",
+      "visual.portrait.affiliation-partner-executive"
+    ]
+  },
+  "review_boundary": {
+    "technical_intake_complete": true,
+    "inventory_parity_complete": true,
+    "human_provenance_review_complete": false,
+    "human_identity_and_resemblance_review_complete": false,
+    "license_and_training_data_review_complete": false,
+    "accessibility_and_design_review_complete": false,
+    "release_derivative_review_complete": false,
+    "public_release_approval": false
+  },
+  "intake_boundary": {
+    "record_count": 0,
+    "reviewer_identity_collected": false,
+    "raw_notes_collected": false,
+    "raw_media_collected": false,
+    "browser_location_collected": false,
+    "private_game_state_collected": false,
+    "decision_status": "pending-human-review",
+    "go_no_go": null
+  },
+  "review_contract": {
+    "record_fields": [
+      "asset_id",
+      "asset_family",
+      "review_status",
+      "gate_statuses",
+      "finding_categories"
+    ],
+    "asset_families": ["visual-registry", "audio-registry", "portrait-preview"],
+    "review_statuses": ["reviewed", "skipped", "not-observed"],
+    "gate_statuses": ["pass", "fail", "pending", "not-applicable"],
+    "gate_ids": [
+      "provenance",
+      "license",
+      "accessibility",
+      "technical",
+      "human-review",
+      "release",
+      "real_person_resemblance_reviewed",
+      "logo_trademark_reviewed",
+      "clinical_plausibility_reviewed",
+      "accessibility_equivalent_written",
+      "artifact_quality_reviewed",
+      "source_output_preserved",
+      "release_derivative_reviewed",
+      "identity_only",
+      "role_consistency",
+      "real_person_resemblance",
+      "protected_marks_and_text",
+      "artifact_quality",
+      "accessible_equivalent",
+      "small_size",
+      "grayscale",
+      "model_and_seed_provenance",
+      "release_derivative",
+      "registry_bridge"
+    ],
+    "finding_categories": [
+      "defect",
+      "preference",
+      "scope-expansion"
+    ],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "release_boundary": {
+    "new_registry_entries": 0,
+    "new_release_files": 0,
+    "portrait_previews_release_eligible": false,
+    "public_release_approval": false
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-human-review",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no human provenance findings and does not approve, register, release, or promote any asset.",
+    "The current registries and generated credits are technical source evidence, not legal clearance, training-data provenance, human design review, or public-release approval.",
+    "The seven portrait previews remain hash-bound, unreleased, and missing actual model/seed metadata; no plausible values may be substituted.",
+    "Human review, revision decisions, license/training-data conclusions, release-derivative approval, and public release remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_1_asset_provenance_evidence_intake.py"
+}

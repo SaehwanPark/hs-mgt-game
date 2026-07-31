@@ -3608,3 +3608,18 @@ separate gates.
   decisions.
 - Prevention: keep technical review packets, human evidence intake, revision
   decisions, provenance/legal review, and public release as separate gates.
+
+# Provenance Intake Must Mirror Inventory
+
+- Context: the repository has separate visual/audio registries, a generated
+  portrait queue, generation metadata policy, credits, and release manifest.
+- Risk: a manually copied review list can omit an asset, merge registry and
+  preview semantics, or make a later human decision appear to cover an item
+  that was never in scope.
+- Resolution: derive the intake inventory and gate vocabulary from canonical
+  sources, require exact source markers, and start with zero records and no
+  promotion fields.
+- Prevention: keep technical inventory parity, model/seed provenance,
+  identity/resemblance, license/training-data, accessibility, release
+  derivative, registry, legal, human review, and public release as separate
+  gates; never claim clearance from validator success.
