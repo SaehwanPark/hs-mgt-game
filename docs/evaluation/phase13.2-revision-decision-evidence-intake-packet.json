@@ -1,0 +1,183 @@
+{
+  "schema_version": "phase13.2-revision-decision-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-evidence",
+  "roadmap_item": "Record revision decisions",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for authorized revision triage without recording human findings, revision decisions, or campaign-expansion approval in this preparation packet.",
+  "source_contract": {
+    "revision_log": "docs/evaluation/phase10.2-revision-log.md: Status: prepared; no participant findings have been collected or entered.",
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json: \"status\": \"ready-for-human-evaluation\"",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "pilot_evidence_intake": "docs/evaluation/phase13.2-pilot-evidence-intake-packet.json: \"schema_version\": \"phase13.2-pilot-evidence-intake-v1\"",
+    "debrief_visual_evidence_intake": "docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json: \"schema_version\": \"phase13.2-debrief-visual-evidence-intake-v1\"",
+    "asset_provenance_evidence_intake": "docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json: \"schema_version\": \"phase13.1-asset-provenance-evidence-intake-v1\""
+  },
+  "input_sources": [
+    {
+      "id": "pilot-evidence",
+      "status": "empty-pending-human-evidence"
+    },
+    {
+      "id": "debrief-visual-evidence",
+      "status": "empty-pending-human-review"
+    },
+    {
+      "id": "asset-provenance",
+      "status": "empty-pending-human-review"
+    }
+  ],
+  "target_catalog": {
+    "pilot-task_ids": [
+      "pilot-start-to-resolution",
+      "pilot-settings-and-recovery",
+      "pilot-audio-choice",
+      "pilot-debrief-comprehension"
+    ],
+    "debrief-case_ids": [
+      "competitive-terminal-debrief",
+      "stabilization-terminal-debrief",
+      "regional-affiliation-terminal-debrief"
+    ],
+    "asset_ids": [
+      "visual.runtime-resolution-sequence",
+      "visual.runtime-motion-catalog",
+      "visual.runtime-metric-visualizations",
+      "visual.runtime-identities",
+      "visual.art-direction.variant-a",
+      "visual.art-direction.variant-b",
+      "visual.art-direction.variant-c",
+      "visual.map.regional-grid",
+      "visual.map.road-tile-set",
+      "visual.map.district-tile-set",
+      "visual.map.parcel-system",
+      "visual.map.relationship-line-styles",
+      "visual.map.service-area-overlays",
+      "visual.map.uncertainty-overlays",
+      "visual.runtime-markers",
+      "visual.runtime-semantic-containers",
+      "visual.runtime-statuses",
+      "visual.actor-family-language",
+      "visual.facility.administrative-headquarters",
+      "visual.facility.parking-structure",
+      "visual.facility.utility-plant",
+      "visual.facility.research-education-building",
+      "visual.facility.construction-crane",
+      "visual.facility.undeveloped-parcel",
+      "visual.facility.general-hospital-base",
+      "visual.facility.patient-tower",
+      "visual.facility.emergency-department",
+      "visual.facility.ambulatory-center",
+      "visual.facility.specialty-center",
+      "visual.facility.rural-clinic",
+      "visual.runtime-svg-scene-proof",
+      "visual.identity.riverside-kit",
+      "visual.identity.northlake-kit",
+      "visual.identity.summit-kit",
+      "visual.map.event-marker-set",
+      "visual.runtime-consequence-links",
+      "visual.runtime-operational-overlays",
+      "visual.runtime-regional-board-adapter",
+      "audio.runtime-cue-refinement",
+      "audio.runtime-music",
+      "audio.runtime-music-stems",
+      "audio.runtime-ui-cues",
+      "audio.runtime-event-cues",
+      "audio.runtime-ambience-library",
+      "audio.direction-prototype",
+      "visual.portrait.rival-system-executive",
+      "visual.portrait.payer-negotiator",
+      "visual.portrait.regulator",
+      "visual.portrait.labor-representative",
+      "visual.portrait.community-leader",
+      "visual.portrait.board-chair",
+      "visual.portrait.affiliation-partner-executive"
+    ]
+  },
+  "decision_boundary": {
+    "technical_intake_complete": true,
+    "source_parity_complete": true,
+    "human_findings_present": false,
+    "revision_decisions_present": false,
+    "revision_implementation_present": false,
+    "campaign_expansion_approval": false,
+    "public_release_approval": false
+  },
+  "intake_boundary": {
+    "record_count": 0,
+    "human_findings_collected": false,
+    "raw_notes_collected": false,
+    "raw_media_collected": false,
+    "private_game_state_collected": false,
+    "browser_location_collected": false,
+    "decision_status": "pending-human-evidence",
+    "go_no_go": null
+  },
+  "decision_contract": {
+    "record_fields": [
+      "decision_id",
+      "evidence_source",
+      "target_id",
+      "target_family",
+      "decision_status",
+      "finding_categories",
+      "revision_disposition",
+      "priority",
+      "action_codes",
+      "rationale_codes"
+    ],
+    "evidence_sources": [
+      "pilot-evidence",
+      "debrief-visual-evidence",
+      "asset-provenance"
+    ],
+    "target_families": ["pilot-task", "debrief-case", "asset"],
+    "decision_statuses": ["proposed", "recorded"],
+    "finding_categories": ["defect", "preference", "scope-expansion"],
+    "revision_dispositions": ["revise", "retain", "defer", "reject"],
+    "priorities": ["critical", "high", "normal", "low"],
+    "action_codes": [
+      "no-change",
+      "copy",
+      "layout",
+      "accessibility",
+      "audio",
+      "visual",
+      "asset",
+      "provenance",
+      "release",
+      "scope",
+      "additional-evidence"
+    ],
+    "rationale_codes": [
+      "evidence-confirmed",
+      "insufficient-evidence",
+      "privacy-boundary",
+      "provenance-boundary",
+      "accessibility-equivalent",
+      "technical-defect",
+      "scope-control",
+      "release-safety"
+    ],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-human-evidence",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no human findings or revision decisions and does not approve a revision, campaign expansion, asset, or public release.",
+    "The source packets and revision log remain empty preparation artifacts; automated parity and vocabulary checks are not human evaluation evidence.",
+    "Decision records may use only bounded source IDs, target IDs, categories, dispositions, priorities, action codes, and rationale codes; free text, identity, private state, browser/session locations, and raw media are prohibited.",
+    "Human evaluation, revision decisions, implementation verification, expansion approval, legal/provenance clearance, and public-release approval remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_2_revision_decision_evidence_intake.py"
+}

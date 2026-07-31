@@ -572,3 +572,35 @@ remain required before closing the roadmap item.
   — focused packet, source-parity, and record-boundary validation.
 - `python3 scripts/validate_asset_provenance_evidence_intake.py` — empty,
   source-bound, pending intake contract.
+
+# Domain QA — Phase 13.2 revision-decision evidence-intake packet v0.13.93
+
+## Status
+
+`pass` for the repository-owned technical intake boundary only. The packet
+contains no human findings, revision dispositions, implementation result,
+expansion decision, legal/provenance conclusion, or release approval.
+
+## Findings
+
+- Target IDs are derived from the four pilot tasks, three debrief terminal
+  cases, and current visual/audio/portrait inventory; source packets remain
+  empty and pending.
+- Records are limited to source/target identifiers, bounded finding,
+  disposition, priority, action, and rationale codes. Free text, identity,
+  private state, browser/session locations, and raw media are excluded.
+- The packet keeps technical source parity separate from human evidence and
+  from implementation verification or campaign expansion.
+
+## Required fixes
+
+None for this bounded preparation packet. Authorized findings, revision
+decisions, implementation verification, expansion review, legal/provenance,
+and public-release evidence remain required before closing the roadmap item.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_revision_decision_evidence_intake`
+  — focused source, target, and record-boundary validation.
+- `python3 scripts/validate_revision_decision_evidence_intake.py` — empty,
+  source-bound, pending intake contract.

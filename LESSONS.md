@@ -3623,3 +3623,17 @@ separate gates.
   identity/resemblance, license/training-data, accessibility, release
   derivative, registry, legal, human review, and public release as separate
   gates; never claim clearance from validator success.
+
+# Revision Decisions Need Source-Bound Targets
+
+- Context: pilot, debrief-visual, and asset-provenance evidence use different
+  target vocabularies and remain empty until authorized human review.
+- Risk: a free-form revision log can blend findings across sources, capture
+  private or identifying notes, or make a technical packet look like a human
+  decision.
+- Resolution: derive target IDs from each canonical source, constrain
+  dispositions/actions/rationales to enums, and keep the decision intake empty
+  with a pending human-evidence status.
+- Prevention: separate evidence capture, revision decisions, implementation
+  verification, campaign expansion, provenance/legal review, and public
+  release; never infer a revision from validator success.

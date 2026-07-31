@@ -3931,6 +3931,39 @@ asset, security, and release tests; full Rust/Python and repository validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
 
+# Request Summary — Revision-decision evidence-intake packet v0.13.93
+
+## Authorized outcome
+
+Make the open revision-decision item operationally ready for authorized
+synthesis of future pilot, debrief-visual, and asset-provenance findings
+without recording human findings or deciding a revision.
+
+## Target slice
+
+- Bind the three empty evidence-intake sources to exact pilot-task,
+  debrief-case, and visual/audio/portrait target catalogs.
+- Define bounded dispositions, priorities, action codes, rationale codes, and
+  finding categories with no free-text or private-state capture.
+- Keep records empty and human findings, revisions, implementation,
+  expansion, legal/provenance, and public-release decisions pending.
+
+## Non-goals
+
+- No participant, reviewer, provenance, legal, accessibility, educational,
+  audio, visual, or release finding is entered.
+- No revision, asset promotion, campaign expansion, runtime, GUI, simulation,
+  browser, audio, persistence, or release-manifest change is made.
+- No identity, contact details, private state, browser/session locations, raw
+  notes, screenshots, recordings, or unrestricted text is stored.
+
+## Validation target
+
+Focused revision-decision intake validator and source-parity tests; existing
+pilot, debrief, provenance, asset, release, full Python/Rust,
+formatting/clippy, and documentation checks; exactly one medium-effort review;
+authorized PR/merge and temporary-branch cleanup.
+
 # Request Summary — Asset-provenance evidence-intake packet v0.13.92
 
 ## Authorized outcome
