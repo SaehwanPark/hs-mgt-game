@@ -3469,3 +3469,16 @@ separate gates.
 - Prevention: require persisted files, reproducible capture tooling, and
   separate human review before promoting the screenshot boundary to a raster
   or public-release claim.
+
+# Terminal Filenames Do Not Prove Terminal State
+
+- Context: the first persisted full-campaign raster pass stopped on the last
+  active decision screen while naming those files `terminal`.
+- Risk: a turn label such as `24/24`, `5/5`, or `6/6` can coexist with a still
+  available host decision and a placeholder debrief, producing false evidence.
+- Resolution: capture after the final host transition and require
+  `session.done`, exact endpoint history count, non-empty debrief content, and
+  zero campaign decision controls in both source coverage and artifact tests.
+- Prevention: treat terminal filenames as untrusted labels; validate the
+  host envelope and rendered decision surface before persisting or approving
+  terminal evidence.

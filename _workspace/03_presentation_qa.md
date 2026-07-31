@@ -5305,3 +5305,45 @@ release gates.
 The focused raster-evidence and campaign-coverage tests pass. Full repository
 validation, exactly one medium-effort code review, PR handoff, merge, and
 temporary-branch cleanup remain for this slice.
+
+# Presentation QA — Corrected terminal raster state evidence v0.13.82
+
+## Status
+
+Technical source-bound pass for the terminal-state correction. The prior
+terminal filenames were found to show last active decisions; all three were
+recaptured after completion. The corrected records show completed history,
+host-authored debrief content, and no campaign decision controls. This does
+not pass human visual, accessibility, educational/classroom, audio-listening,
+cross-browser/device, provenance/legal, or public-release gates.
+
+## Required pass conditions
+
+- `session.done` is true for each terminal envelope.
+- History counts equal 24, 5, and 6 for competitive, stabilization, and
+  regional affiliation respectively.
+- Debrief line counts are non-zero and the placeholder is absent.
+- Campaign decision, submit, and commit controls are absent after completion.
+- Normalized JPEGs, native capture metadata, hashes, and the evaluation-only
+  release boundary match the persisted manifest.
+- The same-run host-projection transcript independently records the terminal
+  history/debrief excerpts and observed decision-control counts bound to each
+  raw and normalized artifact.
+
+## Findings and resolution
+
+- The browser capture sequence had stopped on the final decision stage; the
+  three terminal files were therefore mislabeled even though the route itself
+  could render terminal debriefs.
+- Stabilization and regional-affiliation host projections also emitted their
+  final decision records after `done=true`. The source now gates those records
+  the same way as competitive coverage.
+- Repeated in-app browser runs show `No campaign decision is available` and
+  actual host debrief lines for all three corrected terminal states.
+
+## Evidence limits
+
+This is a technical terminal-state and capture-provenance correction. It does
+not establish pixel-level visual quality, human comprehension or
+accessibility, classroom usefulness, audio listening quality, device/browser
+coverage, provenance/legal approval, or public release.

@@ -1,5 +1,6 @@
 import hashlib
 import json
+import re
 import struct
 import unittest
 from pathlib import Path
@@ -8,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EVIDENCE = ROOT / "docs" / "evaluation" / "phase11.1-full-campaign-raster-evidence.json"
 CAPTURE_METADATA = ROOT / "docs" / "evaluation" / "phase11.1-full-campaign-raster-capture-metadata.json"
+CAPTURE_TRANSCRIPT = ROOT / "docs" / "evaluation" / "phase11.1-full-campaign-terminal-capture-transcript.json"
 LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json"
 RELEASE_MANIFEST = ROOT / "assets" / "ASSET_RELEASE_MANIFEST.json"
 HOST = ROOT / "src" / "gui_server.rs"
@@ -60,17 +62,37 @@ class FullCampaignRasterEvidenceTests(unittest.TestCase):
   def setUpClass(cls):
     cls.evidence = json.loads(EVIDENCE.read_text(encoding="utf-8"))
     cls.capture_metadata = json.loads(CAPTURE_METADATA.read_text(encoding="utf-8"))
+    cls.capture_transcript = json.loads(CAPTURE_TRANSCRIPT.read_text(encoding="utf-8"))
     cls.ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
 
   def test_manifest_is_exact_six_state_matrix_and_not_release_eligible(self):
     self.assertEqual(
       self.evidence["schema_version"],
-      "phase11.1-persisted-campaign-raster-evidence-v1",
+      "phase11.1-persisted-campaign-raster-evidence-v2",
     )
-    self.assertEqual(self.evidence["status"], "complete-technical-persisted-raster-evidence")
+    self.assertEqual(
+      self.evidence["status"],
+      "complete-technical-persisted-raster-evidence-corrected-terminal-state",
+    )
+    self.assertEqual(self.evidence["correction"]["corrected_in"], "v0.13.82")
+    self.assertTrue(self.evidence["correction"]["active_artifacts_unchanged"])
+    self.assertEqual(
+      self.evidence["terminal_state_contract"],
+      {
+        "requires_session_done": True,
+        "requires_endpoint_history_count": True,
+        "requires_non_empty_debrief": True,
+        "requires_no_campaign_decision_controls": True,
+        "requires_no_placeholder_debrief": True,
+      },
+    )
     self.assertEqual(self.evidence["campaigns"], list(CAMPAIGNS))
     self.assertEqual(self.evidence["viewport"], {"width": 1024, "height": 768, "device_scale_factor": 1})
     self.assertEqual(self.evidence["artifact_directory"], "docs/evaluation/phase11.1-campaign-raster")
+    self.assertEqual(
+      self.evidence["capture_transcript"],
+      "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
+    )
     self.assertFalse(self.evidence["release_eligible"])
     self.assertTrue(self.evidence["not_release_asset"])
     self.assertEqual(
@@ -112,8 +134,15 @@ class FullCampaignRasterEvidenceTests(unittest.TestCase):
       self.evidence["native_capture_metadata"],
       "docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json",
     )
-    self.assertEqual(self.capture_metadata["schema_version"], "phase11.1-native-capture-metadata-v1")
-    self.assertEqual(self.capture_metadata["status"], "complete-raw-capture-provenance")
+    self.assertEqual(self.capture_metadata["schema_version"], "phase11.1-native-capture-metadata-v2")
+    self.assertEqual(
+      self.capture_metadata["status"],
+      "complete-raw-capture-provenance-corrected-terminal-state",
+    )
+    self.assertEqual(
+      self.capture_metadata["capture_transcript"],
+      "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
+    )
     self.assertEqual(
       {(record["campaign"], record["state"]) for record in self.capture_metadata["records"]},
       {(campaign, state) for campaign in CAMPAIGNS for state in ("active", "terminal")},
@@ -151,13 +180,114 @@ class FullCampaignRasterEvidenceTests(unittest.TestCase):
       self.assertEqual(record["host_state"]["campaign"], record["campaign"])
       self.assertEqual(record["host_state"]["turn"], campaign["turns"][record["state"]])
       self.assertTrue(record["host_state"]["stage"])
-      self.assertEqual(record["inspection_status"], "persisted-local-browser-raster")
+      expected_inspection_status = (
+        "persisted-local-browser-terminal-raster-correction"
+        if record["state"] == "terminal"
+        else "persisted-local-browser-raster"
+      )
+      self.assertEqual(record["inspection_status"], expected_inspection_status)
       self.assertTrue(record["observed_content"])
       self.assertTrue(record["written_equivalent"])
       self.assertTrue(record["optional_audio"])
       self.assertEqual(record["terminal_debrief"], record["state"] == "terminal")
       if record["state"] == "terminal":
+        endpoint_turn = int(campaign["turns"]["terminal"].split("/", 1)[0])
+        self.assertTrue(record["session_done"])
+        self.assertEqual(record["history_count"], endpoint_turn)
+        self.assertGreater(record["debrief_line_count"], 0)
+        self.assertEqual(
+          record["terminal_controls"],
+          {
+            "campaign_decision_count": 0,
+            "submit_host_shaped_decision_count": 0,
+            "commit_decision_count": 0,
+          },
+        )
         self.assertTrue(any("debrief" in item.lower() for item in record["observed_content"]))
+        observed = " ".join(record["observed_content"]).lower()
+        self.assertIn("no campaign decision is available", observed)
+        self.assertNotIn("becomes available after completion", observed)
+      else:
+        self.assertNotIn("session_done", record)
+
+  def test_terminal_transcript_binds_host_projection_controls_and_artifacts(self):
+    self.assertEqual(
+      self.capture_transcript["schema_version"],
+      "phase11.1-terminal-capture-transcript-v1",
+    )
+    self.assertEqual(
+      self.capture_transcript["status"],
+      "complete-same-run-host-projection-transcript",
+    )
+    transcript_records = {
+      capture["campaign"]: capture
+      for capture in self.capture_transcript["captures"]
+    }
+    self.assertEqual(set(transcript_records), set(CAMPAIGNS))
+    terminal_records = {
+      record["campaign"]: record
+      for record in self.evidence["state_records"]
+      if record["state"] == "terminal"
+    }
+    raw_records = {
+      (record["campaign"], record["state"]): record
+      for record in self.capture_metadata["records"]
+    }
+    for campaign, expected in CAMPAIGNS.items():
+      transcript = transcript_records[campaign]
+      manifest = terminal_records[campaign]
+      raw = raw_records[(campaign, "terminal")]
+      host = transcript["host_envelope"]
+      observed = transcript["observed_dom"]
+      normalized = transcript["normalized_artifact"]
+      raw_capture = transcript["raw_capture"]
+      self.assertEqual(transcript["artifact"], manifest["artifact"])
+      self.assertEqual(host["session"], {
+        "campaign": campaign,
+        "turn": expected["turns"]["terminal"],
+        "max_turns": int(expected["turns"]["terminal"].split("/", 1)[1]),
+        "done": True,
+      })
+      self.assertEqual(host["history_count"], manifest["history_count"])
+      self.assertEqual(host["debrief_line_count"], manifest["debrief_line_count"])
+      self.assertEqual(host["terminal_controls"], manifest["terminal_controls"])
+      self.assertEqual(host["replay"]["transition_count"], host["history_count"])
+      self.assertEqual(
+        (
+          len(re.findall(r"- strong: Turn [0-9]+", observed["history_excerpt"])),
+          len(re.findall(r"- listitem:", observed["debrief_excerpt"])),
+        ),
+        (host["history_count"], host["debrief_line_count"]),
+      )
+      self.assertEqual(
+        observed["campaign_coverage_excerpt_sha256"],
+        hashlib.sha256(observed["campaign_coverage_excerpt"].encode()).hexdigest(),
+      )
+      self.assertRegex(observed["dom_snapshot_sha256"], r"^[0-9a-f]{64}$")
+      self.assertIn('region "Campaign debrief"', observed["campaign_coverage_excerpt"])
+      self.assertIn("No campaign decision is available", observed["decision_excerpt"])
+      self.assertEqual(
+        len(re.findall(r"No campaign decision is available", observed["decision_excerpt"])),
+        1,
+      )
+      self.assertEqual(
+        len(re.findall(r'button "Submit host-shaped decision"', observed["decision_excerpt"])),
+        host["terminal_controls"]["submit_host_shaped_decision_count"],
+      )
+      self.assertEqual(
+        len(re.findall(r'button "Commit decision"', observed["decision_excerpt"])),
+        host["terminal_controls"]["commit_decision_count"],
+      )
+      self.assertNotIn("Submit host-shaped decision", observed["decision_excerpt"])
+      self.assertNotIn("Commit decision", observed["decision_excerpt"])
+      self.assertFalse(observed["placeholder_present"])
+      self.assertEqual(raw_capture["raw_byte_size"], raw["raw_byte_size"])
+      self.assertEqual(raw_capture["raw_sha256"], raw["raw_sha256"])
+      self.assertEqual(raw_capture["native_width"], raw["native_width"])
+      self.assertEqual(raw_capture["native_height"], raw["native_height"])
+      self.assertEqual(normalized["byte_size"], manifest["byte_size"])
+      self.assertEqual(normalized["sha256"], manifest["sha256"])
+      self.assertEqual((normalized["width"], normalized["height"]), (1024, 768))
 
   def test_source_routes_and_registry_boundary_are_explicit(self):
     route = self.evidence["route"]

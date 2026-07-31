@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.82] - 2026-07-31
+
+- Corrected the three persisted terminal campaign rasters so they are captured
+  after the final host transition with completed history and debrief content.
+- Gated stabilization and regional-affiliation host-shaped decisions after
+  `session.done`, matching the existing competitive terminal boundary.
+- Added fail-closed terminal-state assertions for completion, endpoint history,
+  non-empty debrief, no decision controls, and the explicit non-release limit.
+
 ## [0.13.81] - 2026-07-31
 
 - Persisted one active and one terminal 1024×768 local-browser raster record

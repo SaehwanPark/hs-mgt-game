@@ -1,6 +1,12 @@
 {
-  "schema_version": "phase11.1-persisted-campaign-raster-evidence-v1",
-  "status": "complete-technical-persisted-raster-evidence",
+  "schema_version": "phase11.1-persisted-campaign-raster-evidence-v2",
+  "status": "complete-technical-persisted-raster-evidence-corrected-terminal-state",
+  "correction": {
+    "supersedes": "v0.13.81 terminal records",
+    "reason": "The prior terminal filenames captured the final active decision stage before the final host transition.",
+    "corrected_in": "v0.13.82",
+    "active_artifacts_unchanged": true
+  },
   "campaigns": [
     "competitive-regional-v1",
     "stabilization-v1",
@@ -13,7 +19,15 @@
   },
   "artifact_directory": "docs/evaluation/phase11.1-campaign-raster",
   "native_capture_metadata": "docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json",
-  "capture_method": "Codex in-app browser screenshot bytes captured from the existing loopback GUI, then padded to the requested evaluation canvas to account for browser content-area scrollbars",
+  "capture_transcript": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
+  "terminal_state_contract": {
+    "requires_session_done": true,
+    "requires_endpoint_history_count": true,
+    "requires_non_empty_debrief": true,
+    "requires_no_campaign_decision_controls": true,
+    "requires_no_placeholder_debrief": true
+  },
+  "capture_method": "Codex in-app browser screenshot bytes captured from the corrected loopback GUI after the final host transition, then padded to the requested evaluation canvas to account for browser content-area scrollbars",
   "canvas_rule": {
     "output_mime_type": "image/jpeg",
     "padding_color": "#F1F5F4",
@@ -69,8 +83,8 @@
       "state": "terminal",
       "artifact": "docs/evaluation/phase11.1-campaign-raster/competitive-regional-v1-terminal-1024x768.jpg",
       "mime_type": "image/jpeg",
-      "byte_size": 77224,
-      "sha256": "f1abdf6db682d66c561561442a6d05d88a00bd03e5e3d4b39b6d7f581e3f94fa",
+      "byte_size": 85429,
+      "sha256": "1118afe44c80bbfc21365bb8e83653aa3d6f999d45930c3c92bdb3c4c7f6c495",
       "width": 1024,
       "height": 768,
       "host_state": {
@@ -78,15 +92,24 @@
         "turn": "24/24",
         "stage": "Competitive campaign complete: review the committed strategic tradeoffs in the host terminal debrief"
       },
+      "session_done": true,
+      "history_count": 24,
+      "debrief_line_count": 130,
+      "terminal_controls": {
+        "campaign_decision_count": 0,
+        "submit_host_shaped_decision_count": 0,
+        "commit_decision_count": 0
+      },
       "observed_content": [
         "Twenty-four committed history and replay rows",
         "Host-authored competitive campaign debrief",
+        "No campaign decision is available after completion",
         "Terminal written fallback with optional audio metadata"
       ],
       "terminal_debrief": true,
       "written_equivalent": true,
       "optional_audio": true,
-      "inspection_status": "persisted-local-browser-raster",
+      "inspection_status": "persisted-local-browser-terminal-raster-correction",
       "native_capture_size": {
         "width": 1004,
         "height": 753
@@ -125,8 +148,8 @@
       "state": "terminal",
       "artifact": "docs/evaluation/phase11.1-campaign-raster/stabilization-v1-terminal-1024x768.jpg",
       "mime_type": "image/jpeg",
-      "byte_size": 114739,
-      "sha256": "1a7a553cc73ee2ba38877a243440d62aa7a3254dbcb82a827200a27e989ea65a",
+      "byte_size": 122779,
+      "sha256": "1f6c54a74b4c63f8f587f39bd08bba2d206386170829490b5948539aa5d5a647",
       "width": 1024,
       "height": 768,
       "host_state": {
@@ -134,15 +157,24 @@
         "turn": "5/5",
         "stage": "Stabilization tutorial complete: review the committed stage history and host debrief"
       },
+      "session_done": true,
+      "history_count": 5,
+      "debrief_line_count": 28,
+      "terminal_controls": {
+        "campaign_decision_count": 0,
+        "submit_host_shaped_decision_count": 0,
+        "commit_decision_count": 0
+      },
       "observed_content": [
         "Five committed stabilization stage rows",
         "Host-authored stabilization educational debrief text",
+        "No campaign decision is available after completion",
         "Terminal written fallback with optional audio metadata"
       ],
       "terminal_debrief": true,
       "written_equivalent": true,
       "optional_audio": true,
-      "inspection_status": "persisted-local-browser-raster",
+      "inspection_status": "persisted-local-browser-terminal-raster-correction",
       "native_capture_size": {
         "width": 1009,
         "height": 757
@@ -181,8 +213,8 @@
       "state": "terminal",
       "artifact": "docs/evaluation/phase11.1-campaign-raster/regional-affiliation-v1-terminal-1024x768.jpg",
       "mime_type": "image/jpeg",
-      "byte_size": 100145,
-      "sha256": "4fd1552140a5c3cc42a87a63b45e2ec30e0290f8fe92304bac759f3b2e2a276b",
+      "byte_size": 98418,
+      "sha256": "aa1d0b4ef776c2a6e6c98ad6b9ae2cfebcad63f52af4a97ce4fe7ab20bff485e",
       "width": 1024,
       "height": 768,
       "host_state": {
@@ -190,15 +222,24 @@
         "turn": "6/6",
         "stage": "Regional affiliation complete: review committed stage history and host debrief"
       },
+      "session_done": true,
+      "history_count": 6,
+      "debrief_line_count": 14,
+      "terminal_controls": {
+        "campaign_decision_count": 0,
+        "submit_host_shaped_decision_count": 0,
+        "commit_decision_count": 0
+      },
       "observed_content": [
         "Six committed regional-affiliation stage rows",
         "Host-authored regional-affiliation debrief text",
+        "No campaign decision is available after completion",
         "Terminal written fallback with optional audio metadata"
       ],
       "terminal_debrief": true,
       "written_equivalent": true,
       "optional_audio": true,
-      "inspection_status": "persisted-local-browser-raster",
+      "inspection_status": "persisted-local-browser-terminal-raster-correction",
       "native_capture_size": {
         "width": 1004,
         "height": 753
