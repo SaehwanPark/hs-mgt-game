@@ -1,0 +1,330 @@
+{
+  "schema_version": "phase10.2-audio-preference-review-packet-v1",
+  "status": "complete-technical-packet-pending-human-review",
+  "roadmap_items": [
+    "Audio preference feedback collected",
+    "Quantitative ratings collected",
+    "Qualitative interviews completed",
+    "Findings classified as defect, preference, or scope expansion",
+    "Go/no-go decision recorded"
+  ],
+  "purpose": "Make authorized Phase 10.2 audio preference and listening evaluation actionable without recording participant results or implying audio, accessibility, educational, or release approval.",
+  "audience_and_use_case": {
+    "primary_users": "authorized evaluators comparing optional presentation audio",
+    "supporting_users": "facilitators administering a bounded local session",
+    "job_to_be_done": "compare audio modes and fallbacks, report usefulness/fatigue and lost meaning, and retain the same written decision context without sound",
+    "default_setup": "local loopback host, Chromium, 1024x768 planning baseline, seeded competitive-regional-v1 session, audio optional",
+    "facilitator_boundary": "provide setup, consent, stop, and accommodation guidance without teaching hidden state or promising an audio outcome"
+  },
+  "review_boundary": {
+    "technical_packet_complete": true,
+    "participant_results_present": false,
+    "audio_preference_feedback_collected": false,
+    "quantitative_ratings_collected": false,
+    "qualitative_interviews_completed": false,
+    "findings_classified": false,
+    "revision_decisions_recorded": false,
+    "human_audio_listening_review_complete": false,
+    "human_accessibility_review_complete": false,
+    "educational_usability_review_complete": false,
+    "go_no_go_decision_recorded": false,
+    "public_release_approval": false
+  },
+  "shared_sources": {
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json",
+    "pilot_feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+    "player_guide": "docs/guides/gui-how-to-play.md",
+    "audio_cue_contract": "gui/audio-cue-contract.mjs",
+    "audio_priority_contract": "gui/audio-priority-contract.mjs",
+    "music_stem_contract": "gui/music-stem-contract.mjs",
+    "ambience_contract": "gui/ambience-contract.mjs",
+    "audio_runtime": "gui/audio.mjs",
+    "presentation_settings": "gui/app.mjs",
+    "audio_markup": "gui/index.html",
+    "audio_registry": "gui/audio-catalog.json",
+    "audio_contract_tests": "tests/test_gui_audio.py",
+    "audio_fallback_tests": "tests/test_audio_fallback.py",
+    "audio_priority_tests": "tests/test_audio_priority.py",
+    "revision_log": "docs/evaluation/phase10.2-revision-log.md"
+  },
+  "source_contract": {
+    "protocol_audio_task": "docs/evaluation/phase10.2-evaluation-protocol.json: \"audio-preference-and-equivalent\"",
+    "protocol_rating_dimensions": "docs/evaluation/phase10.2-evaluation-protocol.json: \"audio-usefulness\"",
+    "protocol_privacy": "docs/evaluation/phase10.2-evaluation-protocol.json: \"repository_must_not_contain\"",
+    "protocol_pending_decision": "docs/evaluation/phase10.2-evaluation-protocol.json: \"pending-human-evidence\"",
+    "pilot_audio_task": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"pilot-audio-choice\"",
+    "pilot_rating_dimensions": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"audio-fatigue\"",
+    "pilot_forbidden_fields": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"browser URLs or session IDs\"",
+    "facilitator_audio_sequence": "docs/guides/phase10.2-structured-evaluation.md: Try full audio, cues-only, mute, reduced notifications, unavailable audio",
+    "facilitator_audio_off": "docs/guides/phase10.2-structured-evaluation.md: Begin with audio off and explain that every cue has a written equivalent",
+    "player_audio_guidance": "docs/guides/gui-how-to-play.md: written equivalent",
+    "cue_schema": "gui/audio-cue-contract.mjs: export const AUDIO_CUE_CONTRACT_SCHEMA",
+    "cue_written_equivalent_policy": "gui/audio-cue-contract.mjs: written_equivalent_rule",
+    "cue_only_channels": "gui/audio-cue-contract.mjs: cues_only_channels",
+    "cue_trigger_contract": "gui/audio-cue-contract.mjs: trigger_is_visible_only",
+    "priority_schema": "gui/audio-priority-contract.mjs: export const AUDIO_PRIORITY_MANAGER_SCHEMA",
+    "priority_limits": "gui/audio-priority-contract.mjs: maximum_critical_per_batch",
+    "music_schema": "gui/music-stem-contract.mjs: export const MUSIC_STEM_CONTRACT_SCHEMA",
+    "music_fallback": "gui/music-stem-contract.mjs: Music unavailable or suppressed; the visible heading, status, source, and result remain complete.",
+    "ambience_schema": "gui/ambience-contract.mjs: export const AMBIENCE_CONTRACT_SCHEMA",
+    "ambience_fallback": "gui/ambience-contract.mjs: Ambience unavailable; written setting and decision-relevant text remain complete.",
+    "visible_audio_projection": "gui/audio.mjs: export function audioPresentationFor",
+    "visible_music_projection": "gui/audio.mjs: export function classifyMusicState",
+    "visible_event_cues": "gui/audio.mjs: export function visibleEventCues",
+    "audio_mode_state": "gui/audio.mjs: let mode = [\"full\", \"cues-only\"]",
+    "audio_unavailable_fallback": "gui/audio.mjs: Audio unavailable;",
+    "audio_muted_fallback": "gui/audio.mjs: Audio muted; visual and text equivalents remain active.",
+    "cues_only_behavior": "gui/audio.mjs: Cues-only mode enabled; music and ambience are off",
+    "written_audio_status": "gui/index.html: id=\"audio-state\"",
+    "audio_mode_control": "gui/index.html: id=\"audio-mode\"",
+    "audio_reduced_notifications_control": "gui/index.html: id=\"audio-reduced-notifications\"",
+    "audio_equivalent_copy": "gui/index.html: id=\"audio-equivalent\"",
+    "low_distraction_audio_boundary": "gui/app.mjs: applyLowDistractionAudio",
+    "focus_pause_boundary": "gui/audio.mjs: setFocused",
+    "registry_generated_source": "gui/audio-catalog.json: \"generated_source\": \"gui/audio.mjs\"",
+    "registry_no_third_party_assets": "gui/audio-catalog.json: \"third_party_assets\": []",
+    "fallback_test": "tests/test_audio_fallback.py: test_audio_projection_and_runtime_failures_preserve_visible_equivalents",
+    "priority_test": "tests/test_audio_priority.py: test_policy_plans_priority_critical_limit_and_aggregation",
+    "contract_test": "tests/test_gui_audio.py: test_catalog_covers_phase0_music_and_cues_with_registry_entries"
+  },
+  "technical_contract": {
+    "campaign": "competitive-regional-v1",
+    "audio_is_optional": true,
+    "browser_local_preferences_only": true,
+    "host_owned_transitions_only": true,
+    "actor_visible_audio_inputs_only": true,
+    "written_equivalent_required": true,
+    "music_state_ids": [
+      "menu",
+      "stable_operations",
+      "pressure",
+      "regulatory_scrutiny",
+      "competitive_escalation",
+      "affiliation_negotiation",
+      "debrief"
+    ],
+    "interface_cue_ids": [
+      "ui.action-confirm",
+      "ui.action-reject",
+      "ui.action-add",
+      "ui.action-remove",
+      "ui.submit",
+      "ui.advance-month",
+      "ui.report-received",
+      "ui.save-complete"
+    ],
+    "event_cue_ids": [
+      "event.project-complete",
+      "event.staffing-constraint",
+      "event.operating-loss",
+      "event.operating-recovery",
+      "event.payer-decision",
+      "event.regulatory-decision",
+      "event.rival-expansion",
+      "event.affiliation-milestone"
+    ],
+    "ambience_ids": [
+      "ambience.executive-office",
+      "ambience.hospital-lobby",
+      "ambience.hospital-campus-exterior",
+      "ambience.construction-site",
+      "ambience.boardroom",
+      "ambience.press-policy-event",
+      "ambience.regional-city-bed"
+    ],
+    "preference_modes": [
+      "full",
+      "cues-only",
+      "muted/audio-off",
+      "reduced-notifications",
+      "music-only-mute",
+      "focus-loss",
+      "audio-unavailable"
+    ],
+    "required_visible_equivalents": [
+      "status",
+      "source",
+      "timing",
+      "category",
+      "decision-relevant result",
+      "written debrief/history"
+    ],
+    "priority_limits": {
+      "maximum_critical_per_batch": 1,
+      "maximum_batch_cues": 4,
+      "maximum_queued_cues": 4,
+      "maximum_simultaneous_cue_voices": 1,
+      "routine_aggregation_minimum": 2
+    },
+    "forbidden_browser_markers": [
+      "CompetitiveWorldState",
+      "resolved_inputs",
+      "effect_queue",
+      "private_rival",
+      "fetch(",
+      "WebSocket"
+    ]
+  },
+  "evaluation_sequence": [
+    {
+      "id": "audio-off-baseline",
+      "mode": "muted/audio-off",
+      "prompt": "Begin with audio off, inspect the visible briefing and one committed result, and identify the written meaning before enabling any sound.",
+      "technical_observation": "The audio status and equivalent copy state that visual and text equivalents are active.",
+      "human_measure": "evaluator can identify the decision-relevant meaning without sound"
+    },
+    {
+      "id": "full-audio-comparison",
+      "mode": "full",
+      "prompt": "Enable full audio and compare one interface cue, one event cue, one music state, and one ambience context with the same visible text.",
+      "technical_observation": "Audio is requested only from visible page, host-result, or actor-visible source/status context.",
+      "human_measure": "evaluator reports whether audio adds useful timing/category emphasis or increases distraction"
+    },
+    {
+      "id": "cues-only-comparison",
+      "mode": "cues-only",
+      "prompt": "Switch to cues-only and repeat a visible action/result sequence, noting whether interface and event cues remain distinguishable while music and ambience stop.",
+      "technical_observation": "Cues-only retains interface/event channels and suppresses music and ambience.",
+      "human_measure": "evaluator reports whether the cues-only mode preserves useful meaning with acceptable load"
+    },
+    {
+      "id": "mute-and-reduced-notifications",
+      "mode": "muted/audio-off",
+      "prompt": "Use mute and reduced notifications independently, then inspect the status, written result, and any changed local preference label.",
+      "technical_observation": "Mute clears playback while reduced notifications suppress non-music notifications; neither changes host state or removes written output.",
+      "human_measure": "evaluator can explain what is intentionally suppressed and what remains available"
+    },
+    {
+      "id": "unavailable-and-focus-recovery",
+      "mode": "audio-unavailable",
+      "prompt": "Use an unavailable or failed audio condition and move focus away and back; use the written fallback and continue the same host-mediated task.",
+      "technical_observation": "Failure/focus loss pauses optional playback, reports recovery status, and preserves visible source/equivalent text.",
+      "human_measure": "evaluator retains trust and can continue without treating audio failure as a game-state failure"
+    },
+    {
+      "id": "written-equivalent-reconstruction",
+      "mode": "muted/audio-off",
+      "prompt": "With audio disabled, reconstruct one visible consequence using the status, source, result, history, or debrief text.",
+      "technical_observation": "Written equivalents remain available for cues, music, ambience, monthly results, history, and debrief.",
+      "human_measure": "evaluator reports any lost meaning and distinguishes preference from defect"
+    }
+  ],
+  "review_questions": [
+    "Does audio add useful category or timing information beyond the visible source, status, and result text?",
+    "Which mode—full, cues-only, muted/audio-off, or reduced notifications—best supports concentration for this evaluator, and why?",
+    "Are interface cues, event cues, music states, and ambience contexts distinguishable without implying hidden state or outcome certainty?",
+    "Does unavailable, failed, muted, or focus-paused audio preserve enough written meaning to continue the host-mediated task?",
+    "Does reduced notifications suppress unwanted interruptions without removing a decision-relevant written result?",
+    "Does the audio presentation create fatigue, urgency, distraction, or accessibility friction, and is the observation a defect, preference, or scope expansion?",
+    "What revision, if any, should be recorded before a human go/no-go decision?"
+  ],
+  "response_shape": {
+    "allowed_participant_role": "anonymized role/category only",
+    "task_status": ["completed", "skipped", "not-observed"],
+    "rating_dimensions": [
+      "audio-usefulness",
+      "audio-fatigue",
+      "accessibility",
+      "information-density",
+      "cognitive-load",
+      "trust-in-information-boundaries"
+    ],
+    "rating_scale": "1=very poor or confusing; 5=very clear or useful; not-observed is allowed",
+    "finding_categories": ["defect", "preference", "scope-expansion"],
+    "qualitative_comment_rule": "bounded de-identified observation only; no names, contact details, health information, private game state, browser URLs, session IDs, screenshots, recordings, or raw identifying transcripts",
+    "decision_fields": {
+      "status": "pending-human-evidence",
+      "go_no_go": null,
+      "authorized_reviewer": null,
+      "recorded_at": null,
+      "rationale": null
+    }
+  },
+  "technical_observations": {
+    "audio_catalog_is_registry_bound": true,
+    "audio_catalog_has_no_third_party_assets": true,
+    "all_cues_have_text_equivalents": true,
+    "music_states_have_text_equivalents": true,
+    "ambience_has_text_equivalents": true,
+    "cues_only_preserves_interface_and_event_channels": true,
+    "mute_preserves_visible_and_written_output": true,
+    "unavailable_audio_has_fallback": true,
+    "focus_loss_pauses_optional_playback": true,
+    "priority_and_queue_limits_are_bounded": true,
+    "audio_triggers_are_visible_only": true,
+    "browser_preferences_do_not_mutate_host_state": true,
+    "human_listening_quality_is_unverified": true
+  },
+  "accessibility_and_fallback_checks": [
+    {
+      "id": "audio-off-written-equivalent",
+      "source": "gui/index.html: id=\"audio-equivalent\"",
+      "status": "technical-source-bound; human comprehension pending"
+    },
+    {
+      "id": "audio-status-live-region",
+      "source": "gui/index.html: id=\"audio-state\" aria-live=\"polite\"",
+      "status": "technical-source-bound; audibility and comprehension pending"
+    },
+    {
+      "id": "cues-only-channel-boundary",
+      "source": "gui/audio-cue-contract.mjs: cues_only_channels",
+      "status": "technical-source-bound; listening distinction pending"
+    },
+    {
+      "id": "unavailable-audio-fallback",
+      "source": "tests/test_audio_fallback.py: test_audio_projection_and_runtime_failures_preserve_visible_equivalents",
+      "status": "executable fallback contract; human recovery review pending"
+    },
+    {
+      "id": "reduced-notifications",
+      "source": "gui/index.html: id=\"audio-reduced-notifications\"",
+      "status": "technical control present; human load review pending"
+    },
+    {
+      "id": "low-distraction-audio",
+      "source": "gui/app.mjs: applyLowDistractionAudio",
+      "status": "technical source-bound; accommodation review pending"
+    },
+    {
+      "id": "focus-loss-recovery",
+      "source": "gui/audio.mjs: setFocused",
+      "status": "technical source-bound; human recovery review pending"
+    },
+    {
+      "id": "keyboard-audio-controls",
+      "source": "gui/app.mjs: #audio-panel button, #audio-panel input, #audio-panel select",
+      "status": "technical focus order source-bound; human keyboard review pending"
+    }
+  ],
+  "authority_privacy_provenance_boundary": {
+    "host_authority": "The Rust host owns session state, transitions, validation, submission, resolution, history, replay, checkpointing, and visible event inputs.",
+    "browser_authority": "The browser may store local presentation/audio preferences and render host-provided visible summaries; it may not infer hidden state or perform transitions.",
+    "audio_provenance": "Current audio is repository-authored deterministic Web Audio synthesis with no third-party audio files; registry and credits remain the provenance authority.",
+    "forbidden_claims": [
+      "participant preference or usefulness result",
+      "audio fatigue or listening quality result",
+      "universal accessibility",
+      "educational effectiveness",
+      "cross-browser or device certification",
+      "legal clearance or public-release approval",
+      "go/no-go decision"
+    ],
+    "repository_privacy_limits": [
+      "No names or contact details",
+      "No health information or diagnoses",
+      "No private game state or hidden rival actions",
+      "No browser URLs or session IDs",
+      "No screenshots, recordings, or raw identifying transcripts"
+    ]
+  },
+  "release_boundary": {
+    "release_ready": false,
+    "release_asset_paths": [],
+    "participant_results_recorded": false,
+    "human_review_complete": false,
+    "approval_authority": "authorized human evaluator and project owner",
+    "technical_packet_does_not_authorize_release": true
+  }
+}

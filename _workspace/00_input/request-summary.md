@@ -3839,6 +3839,37 @@ Focused first-session packet and existing boundary tests; full Rust/Python and
 repository validation; exactly one medium-effort review; authorized PR/merge
 and temporary-branch cleanup.
 
+# Request Summary — Audio preference/listening review packet v0.13.86
+
+## Authorized outcome
+
+Make the open Phase 10.2 audio preference/listening review actionable from the
+existing protocol, pilot instrument, audio contracts, fallback behavior, and
+written-equivalent controls.
+
+## Target slice
+
+- Bind full audio, cues-only, mute/audio-off, reduced notifications,
+  unavailable/focus-paused audio, and written-equivalent reconstruction to
+  participant tasks and technical observations.
+- Cover all current music states, interface/event cues, ambience entries,
+  priority/queue limits, visible-only triggers, registry provenance, and
+  accessibility/fallback controls.
+- Add fail-closed source/contract parity and pending-human evidence fields.
+
+## Non-goals
+
+- No runtime, simulation, route, browser-authority, persistence, asset,
+  audio-file, screenshot, participant-data, or release-asset change.
+- No listening-quality, fatigue, usefulness, accessibility, educational,
+  cross-browser/device, provenance/legal, or go/no-go conclusion.
+
+## Validation target
+
+Focused audio-preference packet and existing audio contract/fallback/priority
+tests; full Rust/Python and repository validation; exactly one medium-effort
+review; authorized PR/merge and temporary-branch cleanup.
+
 # Request Summary — Competitive campaign review packet v0.13.85
 
 ## Authorized outcome

@@ -5408,6 +5408,49 @@ before changing the first-session roadmap checkbox or expansion decision.
 markers, stage lists, tasks, recovery/accessibility checks, authority limits,
 release exclusion, and pending human-review status.
 
+# Presentation QA — Audio preference/listening review packet v0.13.86
+
+## Status
+
+Pass for the bounded technical Phase 10.2 audio review-packet contract. The
+packet is participant-ready, but listening, accessibility, educational,
+provenance/legal, and release review remain pending.
+
+## Reviewed Inputs and Authorization
+
+- Protocol: `docs/evaluation/phase10.2-evaluation-protocol.json`.
+- Pilot instrument: `docs/evaluation/phase13.2-pilot-feedback-instrument.json`.
+- Packet: `docs/evaluation/phase10.2-audio-preference-review-packet.json`.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.86 section.
+- Roadmap audio human gates remain unchecked.
+
+## Information and fallback findings
+
+- Full, cues-only, mute/audio-off, reduced notifications,
+  unavailable/focus-paused, and written-equivalent paths are named as separate
+  review steps.
+- Music, interface/event cues, ambience, priority/queue bounds, visible-only
+  triggers, and registry provenance are source-bound.
+- The packet does not infer loudness, fatigue, usefulness, intelligibility,
+  accessibility, or educational value from source checks.
+
+## Authority, privacy, and provenance
+
+The packet introduces no transition path, participant data, asset, audio file,
+or release artifact. Host authority, actor-visible boundaries, written
+equivalents, and repository privacy limits remain explicit.
+
+## Required fixes
+
+None for this bounded technical packet. Obtain authorized human audio evidence
+before recording findings, revision decisions, or go/no-go.
+
+## Verification evidence
+
+`tests/test_phase10_2_audio_preference_review_packet.py` checks exact source
+markers, protocol/pilot parity, catalog IDs, priority limits, fallback checks,
+privacy boundaries, release exclusion, and pending human-review status.
+
 # Presentation QA — Competitive campaign review packet v0.13.85
 
 ## Status

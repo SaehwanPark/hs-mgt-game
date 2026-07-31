@@ -2255,6 +2255,10 @@ and go/no-go remain explicit human-evaluation gates.
   sequence and explicitly prohibits teaching hidden outcomes or recording
   identifying/private data. `docs/evaluation/phase10.2-revision-log.md` is an
   empty, anonymized findings template.
+- Current technical audio preference/listening review packet prepared in
+  `docs/evaluation/phase10.2-audio-preference-review-packet.json` with
+  `tests/test_phase10_2_audio_preference_review_packet.py`; human audio
+  feedback and decision fields remain pending.
 - No audio feedback, quantitative ratings, interviews, classified findings, or
   go/no-go decision has been fabricated or recorded. These remain human gates.
 
@@ -4442,6 +4446,21 @@ are completed. Human-review gates remain open.
   classroom, and audio review actionable; it does not record participants,
   establish pixel quality, close the roadmap item, approve expansion, or
   authorize public release.
+
+### v0.13.86 audio preference/listening review packet
+
+- `docs/evaluation/phase10.2-audio-preference-review-packet.json` binds the
+  open Phase 10.2 audio task and pilot instrument to a participant-ready
+  sequence covering audio-off, full audio, cues-only, mute, reduced
+  notifications, unavailable/focus-paused audio, and written-equivalent
+  reconstruction.
+- The packet is source-bound to the cue, music, ambience, priority, fallback,
+  registry, presentation-settings, and audio-control contracts. Its validator
+  checks exact catalog IDs, priority limits, visible-only triggers, fallback
+  markers, privacy limits, and the existing audio contract tests.
+- This prepares authorized listening, accessibility, and educational review;
+  it does not collect participant feedback, ratings, interviews, classified
+  findings, revision decisions, a go/no-go decision, or release approval.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

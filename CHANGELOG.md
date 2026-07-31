@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.86] - 2026-07-31
+
+- Added a source-bound Phase 10.2 audio preference/listening review packet for
+  full audio, cues-only, mute, reduced notifications, unavailable/focus-paused
+  audio, and written equivalents.
+- Kept participant feedback, ratings, interviews, classified findings,
+  revision decisions, go/no-go, accessibility/educational conclusions,
+  provenance/legal review, and public-release approval pending.
+
 ## [0.13.85] - 2026-07-31
 
 - Added a participant-ready technical packet for the open competitive
