@@ -4965,3 +4965,38 @@ continuation through month 24.
 This slice can establish only deterministic host persistence and terminal read
 parity; it cannot establish lived accessibility, educational usefulness,
 device/browser certification, provenance/legal status, or public release.
+# Presentation QA — Full stabilization checkpoint continuity v0.13.73
+
+## Status
+
+Implementation, full automated validation, and the sole medium-effort code
+review pass. The reviewer first identified an omitted `competitive-history-v1`
+comparison surface in the evidence ledger; the amended ledger and contract
+now match the direct `get_history` comparison, and the same reviewer approved
+with no actionable findings.
+
+## Required pass conditions
+
+- Original and restored runs reach equal terminal replay/history and
+  campaign-coverage data after five stages.
+- Matching checkpoint cleanup succeeds and browser storage remains opaque-ID-
+  only.
+- Evidence stays separate from regional-affiliation continuity, browser
+  persistence, visual quality, human review, and release approval.
+
+## Current validation
+
+- 369 Rust tests and 782 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device, offline, browser, audio, raster,
+  loading, visual/audio, asset-budget, CLI smoke, Node syntax, and diff checks
+  also pass.
+- The focused regression saves after stage 2, restores into a fresh host,
+  compares each continuation hash through stage 5, compares history/replay and
+  campaign-coverage envelopes, and verifies matching checkpoint cleanup.
+
+## Evidence limits
+
+This slice establishes only deterministic host persistence and terminal read
+parity; it cannot establish lived accessibility, educational usefulness,
+provenance/legal status, or public release.

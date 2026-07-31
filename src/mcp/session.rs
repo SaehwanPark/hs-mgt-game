@@ -2306,6 +2306,108 @@ mod tests {
   }
 
   #[test]
+  fn durable_stabilization_checkpoint_covers_full_campaign_continuation() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-durable-full-stabilization-{}.save",
+      std::process::id()
+    ));
+    let mut original = GameSessionStore::with_competitive_persistence(path.clone());
+    let session = start(&mut original, "stabilization-v1");
+    let session_id = session.session_id.clone();
+    for _ in 0..2 {
+      original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: String::new(),
+        })
+        .expect("stabilization stage before checkpoint");
+    }
+    let saved = original
+      .save_session(SaveSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable stabilization stage-two save");
+    assert_eq!(saved.transition_count, 2);
+    assert!(path.is_file());
+
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let loaded = restarted
+      .load_session(LoadSessionRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("durable stabilization stage-two load");
+    assert_eq!(loaded.transition_count, saved.transition_count);
+    assert_eq!(loaded.latest_state_hash, saved.latest_state_hash);
+
+    for _ in 2..INTERACTIVE_TURN_COUNT {
+      let original_next = original
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: String::new(),
+        })
+        .expect("original stabilization continuation");
+      let restarted_next = restarted
+        .submit_turn(SubmitTurnRequest {
+          session_id: session_id.clone(),
+          command_text: String::new(),
+        })
+        .expect("restarted stabilization continuation");
+      assert_eq!(
+        restarted_next
+          .latest_transition
+          .map(|transition| transition.state_hash),
+        original_next
+          .latest_transition
+          .map(|transition| transition.state_hash)
+      );
+    }
+
+    let original_history = original
+      .get_history(GetHistoryRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original stabilization history");
+    let restarted_history = restarted
+      .get_history(GetHistoryRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted stabilization history");
+    assert_eq!(restarted_history, original_history);
+    assert_eq!(restarted_history.transition_count, 5);
+
+    let original_replay = original
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original stabilization replay");
+    let restarted_replay = restarted
+      .get_replay(GetReplayRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted stabilization replay");
+    assert_eq!(restarted_replay, original_replay);
+    assert_eq!(restarted_replay.transition_count, 5);
+
+    let original_coverage = original
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("original stabilization coverage");
+    let restarted_coverage = restarted
+      .get_campaign_coverage(GetCampaignCoverageRequest {
+        session_id: session_id.clone(),
+      })
+      .expect("restarted stabilization coverage");
+    assert_eq!(restarted_coverage, original_coverage);
+    assert!(restarted_coverage.session.done);
+
+    restarted
+      .end_session(EndSessionRequest { session_id })
+      .expect("end recovered full stabilization session");
+    assert!(!path.exists());
+  }
+
+  #[test]
   fn durable_stabilization_checkpoint_does_not_overwrite_live_session() {
     let path = std::env::temp_dir().join(format!(
       "hs-mgt-game-durable-stabilization-collision-{}.save",
