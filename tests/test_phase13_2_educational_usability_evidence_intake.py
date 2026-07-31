@@ -214,6 +214,26 @@ class Phase132EducationalUsabilityEvidenceIntakeTests(unittest.TestCase):
       with self.assertRaisesRegex(ValueError, "first-session human review record is not pending"):
         self.validator.validate_packet(self.packet)
 
+    def load_with_numeric_boundary(path):
+      source = original_load(path)
+      if path.resolve() == first_session_path:
+        source["review_boundary"]["technical_packet_complete"] = 1
+      return source
+
+    with patch.object(self.validator, "_load_json", side_effect=load_with_numeric_boundary):
+      with self.assertRaisesRegex(ValueError, "first-session source boundary is not canonical"):
+        self.validator.validate_packet(self.packet)
+
+    def load_with_numeric_human_flag(path):
+      source = original_load(path)
+      if path.resolve() == first_session_path:
+        source["human_review_record"]["participant_results_present"] = 0
+      return source
+
+    with patch.object(self.validator, "_load_json", side_effect=load_with_numeric_human_flag):
+      with self.assertRaisesRegex(ValueError, "first-session human review record is not pending"):
+        self.validator.validate_packet(self.packet)
+
   def test_packet_rejects_boolean_record_count(self):
     packet = copy.deepcopy(self.packet)
     packet["intake_boundary"]["record_count"] = False

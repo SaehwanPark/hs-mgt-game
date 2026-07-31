@@ -155,6 +155,22 @@ def _require(condition: bool, message: str) -> None:
     raise ValueError(message)
 
 
+def _strict_equal(actual: object, expected: object) -> bool:
+  if type(actual) is not type(expected):
+    return False
+  if isinstance(actual, dict):
+    return set(actual) == set(expected) and all(
+      _strict_equal(actual[key], expected[key])
+      for key in actual
+    )
+  if isinstance(actual, list):
+    return len(actual) == len(expected) and all(
+      _strict_equal(actual_item, expected_item)
+      for actual_item, expected_item in zip(actual, expected)
+    )
+  return actual == expected
+
+
 def _load_json(path: Path) -> dict:
   value = json.loads(path.read_text(encoding="utf-8"))
   _require(isinstance(value, dict), f"canonical source is not an object: {path}")
@@ -185,8 +201,8 @@ def _require_pending_source(
   expected_human_review: dict,
 ) -> None:
   _require(source["status"] == "complete-technical-packet-pending-human-review", f"{name} source status is not pending")
-  _require(source.get("review_boundary") == expected_boundary, f"{name} source boundary is not canonical")
-  _require(source.get("human_review_record") == expected_human_review, f"{name} human review record is not pending")
+  _require(_strict_equal(source.get("review_boundary"), expected_boundary), f"{name} source boundary is not canonical")
+  _require(_strict_equal(source.get("human_review_record"), expected_human_review), f"{name} human review record is not pending")
 
 
 def _canonical_sources() -> tuple[list[str], list[str], dict]:
