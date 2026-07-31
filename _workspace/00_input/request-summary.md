@@ -3930,3 +3930,35 @@ Focused AI-preview packet plus existing generation, attribution, portrait,
 asset, security, and release tests; full Rust/Python and repository validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
+
+# Request Summary — Cross-browser/device review packet v0.13.88
+
+## Authorized outcome
+
+Make the open Phase 13.1 cross-browser/device certification gate actionable
+from the declared Chromium compatibility matrix, loading/offline policies,
+emulated low-power proxy, device measurements, and existing technical guides.
+
+## Target slice
+
+- Bind the supported Chromium target, required/optional capabilities, and
+  presentation fallbacks to the current checker outputs.
+- Bind the 1024x768 reduced-motion/audio-off, storage-unavailable,
+  loopback-only low-power proxy to its exact limits and measurements.
+- Keep Firefox, WebKit, real hardware, performance, human accessibility/
+  usability, and public-release certification explicitly pending.
+
+## Non-goals
+
+- No Firefox, WebKit, real-device, battery, thermal, memory, frame-rate,
+  decoder, cache, or lived human result is fabricated or claimed.
+- No runtime, simulation, GUI, asset, audio, screenshot, participant-data, or
+  release-asset change.
+- No browser-support expansion, public-release certification, or human
+  accessibility/usability conclusion.
+
+## Validation target
+
+Focused cross-browser/device packet and existing compatibility/device tests;
+full Rust/Python and repository validation; exactly one medium-effort review;
+authorized PR/merge and temporary-branch cleanup.

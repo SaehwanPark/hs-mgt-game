@@ -3827,6 +3827,13 @@ educational/accessibility gates remain open.
   `test_phase11_live_checkpoint.py`; durable persistence remains open.
 - [x] Current declared Chromium compatibility contract passes. Evidence:
   `check_browser_compatibility.py`; Firefox/WebKit remain non-certified.
+- [x] Current technical cross-browser/device certification review packet
+  prepared. Evidence:
+  `docs/evaluation/phase13.1-cross-browser-device-review-packet.json` and
+  `tests/test_phase13_1_cross_browser_device_review_packet.py`; the declared
+  Chromium matrix and emulated low-power proxy are source-bound while
+  Firefox/WebKit, real hardware, and human accessibility/usability remain
+  pending.
 
 ### v0.13.20 current technical-release evidence
 
@@ -4481,6 +4488,20 @@ are completed. Human-review gates remain open.
 - This makes authorized identity, resemblance, accessibility, provenance, and
   release review actionable; it does not provide model/seed values, complete
   human review, establish legal/training-data clearance, or authorize release.
+
+### v0.13.88 cross-browser/device review packet
+
+- `docs/evaluation/phase13.1-cross-browser-device-review-packet.json` binds the
+  declared Chromium compatibility matrix, required/optional capabilities,
+  loading/offline/syntax/authority checks, and the 1024x768 reduced-capability
+  low-power proxy with its measured limits and fallbacks.
+- `tests/test_phase13_1_cross_browser_device_review_packet.py` fails closed on
+  browser/device policy drift, target/capability drift, measurement drift,
+  unsupported certification claims, missing guide/ledger markers, and release
+  promotion.
+- This closes only the current repository-owned technical review packet.
+  Firefox/WebKit runtime checks, real hardware and performance measurements,
+  lived accessibility/usability, and public-release certification remain open.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

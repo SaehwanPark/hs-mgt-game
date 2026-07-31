@@ -3551,3 +3551,18 @@ separate gates.
   legal/training-data review, release derivative, registry bridge, and public
   release as separate gates; never replace a missing field with a plausible
   value.
+
+# Browser/Device Packets Need Engine and Hardware Claim Separation
+
+- Context: the repository already had a green Chromium compatibility check and
+  an emulated low-power proxy, while Firefox/WebKit and real hardware were
+  unavailable.
+- Risk: a passing syntax or local-smoke check could be reported as broad
+  browser support, device performance, or lived accessibility evidence.
+- Resolution: bind the browser/device policies, checker outputs, guide limits,
+  target queue, and measured proxy values into one packet while keeping each
+  unsupported runtime and human gate explicitly pending.
+- Prevention: separate declared target support, emulated proxy evidence,
+  runtime certification, hardware measurements, human accessibility/usability,
+  and public-release approval; never promote an engine or device claim from a
+  neighboring test.

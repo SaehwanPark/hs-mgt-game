@@ -7510,6 +7510,27 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio cross-browser/device review packet (v0.13.88)
+
+The Phase 13.1 packet makes the open cross-browser/device certification gate
+actionable without claiming unsupported runtime or hardware evidence. It binds
+the declared Chromium target and capabilities, loading/offline/syntax/authority
+checks, and the 1024x768 reduced-motion/audio-off/unavailable-storage
+loopback-only emulated low-power proxy.
+
+The packet validator mirrors the browser and device policies, their checker
+outputs, the technical-coverage ledger, and the current guide language. It
+keeps Firefox, WebKit, real hardware, battery/thermal/memory/frame-rate,
+decoder/cache, human accessibility/usability, and public-release decisions
+explicitly pending. No runtime, GUI, simulation, asset, audio, screenshot, or
+release artifact is changed.
+
+The target and actor-visible contract is recorded in
+`_workspace/166_implementation_plan_visual-audio-phase13-1-cross-browser-device-review-packet-v0.13.88.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio first-session participant review packet (v0.13.84)
 
 The Phase 13.1 packet makes the open first-session workflow review actionable
