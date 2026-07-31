@@ -313,6 +313,42 @@ clearance, and public-release approval remain open.
 - Existing first-session, player-help, low-distraction, campaign-coverage,
   authority, and full Python/Rust tests remain the source evidence.
 
+# Domain QA — Phase 10.2 audio preference/listening review packet v0.13.86
+
+## Status
+
+`pass` for the technical audio preference/listening review boundary only. No
+participant, usefulness, fatigue, accessibility, educational, provenance,
+legal, or public-release decision is implied.
+
+## Findings
+
+- The packet mirrors the canonical Phase 10.2 audio task and pilot response
+  shape without adding results.
+- Full, cues-only, mute, reduced notifications, unavailable/focus-paused, and
+  written-equivalent paths are separated so preference is not conflated with
+  defect or host-state failure.
+- Contract IDs, visible-only triggers, priority limits, fallback language,
+  privacy fields, and registry provenance are independently anchored.
+
+## Required fixes
+
+None for this bounded technical packet. Human listening and audio-preference
+evidence is the required next gate.
+
+## Residual risks
+
+Listening usefulness, fatigue, accessibility, educational value,
+cross-browser/device behavior, provenance/legal clearance, and public-release
+readiness remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase10_2_audio_preference_review_packet`
+  — focused packet validation target.
+- Existing audio contract, fallback, priority, GUI, and full Python/Rust tests
+  remain the source evidence.
+
 # Domain QA — Phase 13.1 competitive campaign review packet v0.13.85
 
 ## Status

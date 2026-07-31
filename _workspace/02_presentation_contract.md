@@ -4768,6 +4768,50 @@ provenance/legal, and public-release decisions remain pending.
 source/stage drift, forbidden browser-state markers, missing recovery or
 accommodation coverage, release promotion, or completed human-review fields.
 
+# Presentation Contract — Audio preference/listening review packet v0.13.86
+
+## Goal and authorization
+
+Prepare a participant-ready technical audio review surface for the existing
+Phase 10.2 protocol without changing the runtime or recording human
+experience. The review compares optional audio modes while retaining the same
+host-provided visible and written meaning.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Music state | `gui/music-stem-contract.mjs` and visible classifier | Compare planning, stable, pressure, policy, competitive, affiliation, and debrief emphasis | Do not infer hidden severity, intent, or future outcome from a stem |
+| Interface/event cue | `gui/audio-cue-contract.mjs` and visible runtime projection | Compare category/timing emphasis against written status and result | Do not treat a cue as a transition or hidden-state signal |
+| Ambience | `gui/ambience-contract.mjs` and explicit/competitive visible context | Compare optional atmosphere and silence fallback | Do not infer geography, acuity, speech, or clinical outcome |
+| Preferences/fallbacks | `gui/audio.mjs`, `gui/app.mjs`, and audio controls | Compare full, cues-only, mute, reduced notifications, focus loss, and unavailable audio | Do not treat local preferences or failure as a host-state change |
+
+## Accessibility, recovery, and provenance
+
+Status, source, timing, category, results, history, and debrief text remain
+available without sound. The packet names audio-off, cues-only, live status,
+reduced notifications, low-distraction, focus recovery, and keyboard-control
+checks. Registry and credits remain the provenance authority; no audio file is
+added or promoted.
+
+## Authority and limits
+
+Rust remains authoritative for sessions, transitions, resolution, history,
+replay, checkpoints, and visible event inputs. The browser stores only local
+presentation/audio preferences and renders supplied visible data. Human audio,
+accessibility, educational, provenance/legal, and public-release decisions
+remain pending.
+
+## Verification
+
+`tests/test_phase10_2_audio_preference_review_packet.py` must fail closed on
+protocol/instrument drift, source-marker drift, catalog or priority drift,
+missing fallback coverage, privacy/provenance limits, release promotion, or
+completed human-evidence fields.
+
+The packet introduces no transition path, participant data, asset, audio file,
+or release artifact.
+
 # Presentation Contract — Competitive campaign review packet v0.13.85
 
 ## Goal and authorization

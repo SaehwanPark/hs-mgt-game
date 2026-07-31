@@ -7469,6 +7469,27 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio audio preference/listening review packet (v0.13.86)
+
+The Phase 10.2 packet makes authorized audio preference and listening review
+actionable without recording participant results. It binds full audio,
+cues-only, mute/audio-off, reduced notifications, unavailable/focus-paused
+audio, and written-equivalent reconstruction to the existing cue, music,
+ambience, priority, fallback, registry, and presentation-settings contracts.
+
+The packet validator checks exact protocol and pilot-instrument parity, catalog
+IDs and priority limits, visible-only audio triggers, written fallbacks,
+privacy/provenance boundaries, and the existing audio contract tests. Human
+feedback, ratings, interviews, classified findings, revision decisions,
+go/no-go, accessibility/educational conclusions, and release approval remain
+pending.
+
+The target and actor-visible contract is recorded in
+`_workspace/164_implementation_plan_visual-audio-phase10-2-audio-preference-review-packet-v0.13.86.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio first-session participant review packet (v0.13.84)
 
 The Phase 13.1 packet makes the open first-session workflow review actionable

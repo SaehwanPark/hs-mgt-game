@@ -3520,3 +3520,17 @@ separate gates.
   recovery, and terminal evidence to participant tasks and review questions.
 - Prevention: keep full-campaign technical parity, screenshot evidence, human
   findings, and expansion approval as separate gates.
+
+# Audio Review Packets Need Mode and Fallback Parity
+
+- Context: the existing Phase 10.2 protocol named an audio task, but its
+  full/muted/cues-only/unavailable paths were distributed across contracts,
+  runtime code, controls, and the pilot instrument.
+- Risk: a reviewer could report a broad audio preference without checking that
+  every mode retains written meaning, or mistake a source-level contract for
+  listening usefulness.
+- Resolution: bind the exact protocol and pilot task to separate mode steps,
+  contract IDs, priority limits, visible-only triggers, fallback controls,
+  privacy fields, and pending human-evidence fields.
+- Prevention: treat audio mode coverage, source/contract checks, participant
+  listening results, revision decisions, and go/no-go as separate gates.
