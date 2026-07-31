@@ -608,6 +608,46 @@
       "It does not establish screenshots, pixel-level visual quality, device performance, provenance/legal approval, educational benefit, or public release."
     ]
   },
+  "full_campaign_replay_continuity": {
+    "status": "complete-full-campaign-host-history-replay-continuity",
+    "schemas": [
+      "competitive-history-v1",
+      "competitive-replay-v1"
+    ],
+    "campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "host_source": "src/mcp/session.rs: get_history + get_replay",
+    "test_source": "src/mcp/session.rs: fn full_campaign_history_and_replay_reads_remain_hash_aligned",
+    "active_reads": [
+      "competitive genesis plus 24 monthly reads",
+      "stabilization genesis plus 5 stage reads",
+      "regional affiliation genesis plus 6 stage reads"
+    ],
+    "terminal_contract": [
+      "history transition_count equals the committed endpoint count",
+      "replay transition_count equals history transition_count",
+      "ordered history and replay rows have matching state hashes",
+      "replay latest_state_hash equals the final history row hash"
+    ],
+    "continuity_behavior": [
+      "Genesis history and replay reads are empty and hash-free without mutating the session.",
+      "Every accepted transition adds exactly one ordered row to both host projections.",
+      "Competitive replay continues to verify the recorded deterministic history at the host boundary.",
+      "The browser receives supplied rows only and cannot submit commands or regenerate simulation."
+    ],
+    "boundary": "Rust owns immutable histories, replay verification, row ordering, counts, hashes, and completion; browser rendering remains a read-only presentation of host envelopes.",
+    "evidence": [
+      "The Rust regression walks all 24 competitive months, 5 stabilization stages, and 6 regional-affiliation stages, checking genesis and every post-transition read.",
+      "The regression compares schemas, counts, ordered transition summaries, row hashes, terminal latest hash, and no-mutation observation state.",
+      "No new route/schema, simulation rule, checkpoint archive, browser serialization, asset, audio file, or browser authority is introduced."
+    ],
+    "limits": [
+      "This closes host read continuity only; browser serialization, multi-checkpoint archives, human replay/accessibility/educational review, screenshots, provenance/legal approval, and public release remain open."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
@@ -859,7 +899,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity is covered, and full-campaign host audio-state continuity is covered; browser serialization, multi-checkpoint archives, broader full-campaign save/load/replay evidence, and human listening/accessibility review remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity is covered, and full-campaign host audio-state continuity is covered; full-campaign history/replay read continuity is the next technical target, while browser serialization, multi-checkpoint archives, broader durable save/load evidence, and human listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

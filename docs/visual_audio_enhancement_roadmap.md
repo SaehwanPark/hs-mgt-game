@@ -2375,6 +2375,12 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   `src/mcp/session.rs: fn campaign_coverage_audio_state_covers_all_full_campaign_reads`;
   written fallbacks, browser serialization, screenshots, and human
   listening/accessibility review remain open.
+- [x] Current full-campaign host history/replay continuity covered. Evidence:
+  `full_campaign_replay_continuity` in
+  `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
+  `src/mcp/session.rs: fn full_campaign_history_and_replay_reads_remain_hash_aligned`;
+  browser serialization, archives, screenshots, and human
+  replay/accessibility review remain open.
 - [x] Current explicit durable stabilization host checkpoint recovery covered.
   Evidence: `durable_stabilization_checkpoint_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, the Rust
@@ -4241,6 +4247,21 @@ are completed. Human-review gates remain open.
   public-release approval remain open.
 - Plan and source contract are recorded; implementation, full validation, and
   the sole medium-effort review pass at 372 Rust tests and 785 Python tests;
+  the reviewer found no actionable findings. PR handoff, merge, branch
+  cleanup, and final evidence synchronization remain.
+
+### v0.13.77 current full-campaign history/replay continuity
+
+- The existing host history/replay projections have the next bounded target:
+  walk competitive, stabilization, and regional affiliation from genesis
+  through every committed transition, comparing ordered rows, counts, and
+  state hashes at every read and terminal completion.
+- No new route/schema, simulation, checkpoint archive, browser serialization,
+  asset, or audio file is planned. Screenshots, human replay/accessibility/
+  educational review, provenance/legal review, and public-release approval
+  remain open.
+- Plan and source contract are recorded; implementation, full validation, and
+  the sole medium-effort review pass at 373 Rust tests and 786 Python tests;
   the reviewer found no actionable findings. PR handoff, merge, branch
   cleanup, and final evidence synchronization remain.
 

@@ -4398,3 +4398,58 @@ quality, accessibility, educational value, or public release.
   audio file, screenshot, or human approval claim.
 - Open: human listening/accessibility review, screenshot coverage, provenance/
   legal review, and public-release approval.
+# Presentation Contract — Full-campaign history/replay continuity v0.13.77
+
+## Goal and authorization
+
+Verify that every active and terminal host history/replay read across
+competitive, stabilization, and regional-affiliation campaigns preserves the
+same ordered committed transition summaries and hashes.
+
+## Player questions and consequences
+
+The player question is: “Can the run be reviewed as the same committed story
+from genesis through completion?” Replay is a read-only review surface; it does
+not regenerate a new decision or alter the current session.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| History rows | Host `get_history` over immutable campaign history | Genesis empty, then one row per committed transition | Do not expose true state or hidden inputs |
+| Replay rows | Host `get_replay` over the same committed history | Same ordered rows and count as history | Do not invent a browser trace or re-run policy |
+| State hashes | Host transition summaries and replay metadata | Every committed row and latest replay hash | Do not treat hashes as outcomes or scores |
+| Terminal review | Existing session completion plus terminal history/replay | Final committed row remains available | Do not imply archive or durable browser storage |
+
+## Visual, motion, and audio semantics
+
+No new visual/audio behavior is introduced. Existing written history/replay
+rows, campaign coverage, and optional presentation metadata remain the only
+surfaces.
+
+## Accessibility and fallbacks
+
+Empty history, unavailable replay, muted audio, reduced motion, and failed reads
+retain existing written error/fallback behavior and do not affect transitions.
+
+## Authority and provenance boundary
+
+Rust owns transition history, replay verification, ordering, counts, hashes, and
+campaign completion. The browser may render supplied rows only; it cannot submit
+commands, regenerate simulation, or serialize state.
+
+## Verification and evidence limits
+
+The focused regression must walk every campaign from genesis through its full
+endpoint, compare history/replay rows after each transition, and require final
+hash alignment. This is technical continuity evidence, not proof of human
+replay comprehension, educational usefulness, accessibility, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic input, browser authority,
+  checkpoint archive, browser serialization, asset, audio file, screenshot, or
+  human approval claim.
+- Open: browser serialization, multi-checkpoint archives, screenshots, human
+  replay/accessibility/educational review, provenance/legal review, and public
+  release approval.

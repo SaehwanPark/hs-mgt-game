@@ -3557,3 +3557,40 @@ and temporary-branch cleanup.
 This proves only host-sourced metadata continuity and registry-bound IDs. It
 does not prove audio usefulness, human listening quality, accessibility, or
 public-release readiness.
+
+# Request Summary — Full-campaign history/replay continuity v0.13.77
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with host-source evidence for immutable
+history and replay continuity across every active and terminal read of all
+three launchable campaigns.
+
+## Target slice
+
+- Walk competitive, stabilization, and regional affiliation through their
+  existing endpoints and read `competitive-history-v1` and
+  `competitive-replay-v1` at genesis and after each transition.
+- Require ordered transition rows, counts, state hashes, latest replay hashes,
+  and terminal alignment while keeping host authority and written UI surfaces
+  intact.
+- Keep browser serialization, archives, screenshots, human review, and release
+  gates open.
+
+## Non-goals
+
+- No new route/schema, simulation rule, stochastic input, browser authority,
+  checkpoint archive, browser save artifact, asset/audio file, screenshot,
+  human review, provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused history/replay and evidence-contract tests; full Rust/Python/repository
+validation; exactly one medium-effort review; authorized PR/merge and
+temporary-branch cleanup.
+
+## Evidence limits
+
+This proves only host-owned full-campaign history/replay read continuity and
+hash alignment. It does not prove browser serialization, archive durability,
+human usability, educational value, or public-release readiness.

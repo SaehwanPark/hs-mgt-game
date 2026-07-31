@@ -2398,3 +2398,25 @@ and 6 regional-affiliation stages, with 372 Rust tests and 785 Python tests
 plus all repository contract gates passing. The sole reviewer approved with no
 actionable findings. Merge the PR, clean the temporary branch locally/remotely,
 verify clean `main`, and select the next unmet roadmap slice.
+# Final Handoff — Full-campaign history/replay continuity v0.13.77
+
+## Status
+
+Implementation, full validation, and the sole medium-effort review are
+complete on `feat/full-campaign-replay-continuity-v0.13.77`; the reviewer
+found no actionable findings. PR handoff, merge, and branch cleanup remain.
+
+## Target result
+
+- Walk all three launchable campaigns through their endpoints and compare
+  host-supplied history and replay rows after every transition.
+- Require ordered row/count/hash alignment through terminal completion without
+  adding a route, browser trace, archive, asset, or browser authority.
+
+## Remaining work
+
+The bounded regression walks 24 competitive months, 5 stabilization stages,
+and 6 regional-affiliation stages, with 373 Rust tests and 786 Python tests
+plus all repository contract gates passing. The sole reviewer approved with no
+actionable findings. Merge the PR, clean the temporary branch locally/remotely,
+verify clean `main`, and select the next unmet roadmap slice.
