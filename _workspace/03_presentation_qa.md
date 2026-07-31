@@ -5127,3 +5127,33 @@ The full repository validation passes with 373 Rust tests and 786 Python tests;
 Clippy, formatting, release metadata, documentation links, asset/security/
 generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
 asset-budget, CLI smoke, Node syntax, and diff checks are green.
+# Presentation QA — Full-campaign coverage renderer continuity v0.13.78
+
+## Status
+
+Implementation and full automated validation pass; the bounded boundary is
+fixture-level browser rendering of host-owned active and terminal coverage for
+all three launchable campaigns. The sole medium-effort review passed with no
+actionable findings; merge/cleanup remain.
+
+## Required pass conditions
+
+- Six active/terminal campaign fixtures render with identity/stage metadata,
+  history/debrief content, supplied audio metadata, and written fallbacks.
+- Coverage decisions remain disabled without an existing host submit callback;
+  no browser simulation or mutation authority is introduced.
+- Evidence remains separate from real-browser visual quality, screenshots,
+  accessibility, educational review, and release approval.
+
+## Evidence limits
+
+This slice establishes only technical fixture-level renderer continuity and
+authority preservation; it cannot establish real-browser layout quality, lived
+accessibility, replay comprehension, educational value, or public release.
+
+## Verification result
+
+The full repository validation passes with 373 Rust tests and 787 Python tests;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
+asset-budget, CLI smoke, Node syntax, and diff checks are green.

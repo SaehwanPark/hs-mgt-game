@@ -233,7 +233,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -707,6 +707,96 @@ console.log(JSON.stringify(resolved));
     for boundary in ("No new route/schema", "browser serialization", "cannot submit commands"):
       self.assertIn(boundary, json.dumps(coverage))
 
+  def test_full_campaign_coverage_renderer_preserves_host_envelope(self):
+    coverage = self.ledger["full_campaign_browser_coverage_rendering"]
+    self.assertEqual(coverage["status"], "complete-full-campaign-browser-coverage-renderer-continuity")
+    self.assertEqual(coverage["schema"], "campaign-coverage-v1")
+    self.assertEqual(
+      coverage["campaigns"],
+      ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
+    )
+    self.assertEqual(len(coverage["fixtures"]), 6)
+    for marker in (
+      "renderCampaignCoverage",
+      "campaign-coverage-v1",
+      "campaignMusicStateId",
+      "campaignAudioCueIds",
+      "Use the competitive action rail",
+    ):
+      self.assertIn(marker, self.app + json.dumps(coverage))
+    for boundary in ("does not submit commands", "classify hidden state", "No new route/schema"):
+      self.assertIn(boundary, json.dumps(coverage))
+    script = r'''
+      function makeNode(tagName = "div") {
+        return {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          classList: { add() {}, toggle() {} },
+          hidden: true,
+          disabled: false,
+          textContent: "",
+          append(...children) { this.children.push(...children); },
+          replaceChildren(...children) { this.children = children; },
+          setAttribute(name, value) { this[name] = value; },
+          removeAttribute(name) { delete this[name]; },
+          addEventListener() {},
+        };
+      }
+      globalThis.document = undefined;
+      const { renderCampaignCoverage } = await import("./gui/app.mjs");
+      globalThis.document = { createElement: (tagName) => makeNode(tagName) };
+
+      const cases = [
+        ["competitive-regional-v1", "Competitive", "Month 1", 1, 24, false, "competitive_escalation"],
+        ["competitive-regional-v1", "Competitive", "Complete", 24, 24, true, "debrief"],
+        ["stabilization-v1", "Stabilization", "Turn 1", 1, 5, false, "stable_operations"],
+        ["stabilization-v1", "Stabilization", "Complete", 5, 5, true, "debrief"],
+        ["regional-affiliation-v1", "Affiliation", "Assess partner", 1, 6, false, "affiliation_negotiation"],
+        ["regional-affiliation-v1", "Affiliation", "Complete", 6, 6, true, "debrief"],
+      ];
+      for (const [campaign, role, label, turn, maxTurns, done, music] of cases) {
+        const envelope = {
+          schema_version: "campaign-coverage-v1",
+          campaign_role: role,
+          session: { session_id: `${campaign}-${turn}`, campaign, turn, max_turns: maxTurns, done },
+          stage: { label, detail: "Host-visible stage detail" },
+          briefing: [], metrics: [], actors: [], processes: [],
+          decisions: done ? [] : [{ label: "Hold", command_template: "hold", parameters: [], uncertainty: "Visible uncertainty" }],
+          history: [{ turn: Math.max(1, turn - 1), command: "hold", state_hash: `${campaign}-hash` }],
+          debrief: done ? [`${role} debrief remains written`] : [],
+          audio: { music_state_id: music, audio_cue_ids: ["event.project-complete"] },
+        };
+        const nodes = new Map();
+        const root = {
+          querySelector(selector) {
+            if (!nodes.has(selector)) nodes.set(selector, makeNode());
+            return nodes.get(selector);
+          },
+        };
+        const result = renderCampaignCoverage(envelope, root);
+        if (!result.ok || result.envelope !== envelope) process.exit(1);
+        if (nodes.get("#campaign-coverage-panel").hidden) process.exit(2);
+        if (!nodes.get("#campaign-coverage-meta").textContent.includes(campaign)) process.exit(3);
+        if (!nodes.get("#campaign-role").textContent.includes(role)) process.exit(4);
+        if (nodes.get("#campaign-history-list").children.length !== 1) process.exit(5);
+        if (done && nodes.get("#campaign-debrief-list").children.length !== 1) process.exit(6);
+        if (!done) {
+          const form = nodes.get("#campaign-decision-list").children[0].children.find((child) => child.tagName === "FORM");
+          if (!form || !form.children[0].disabled) process.exit(7);
+        }
+      }
+      console.log(JSON.stringify({ cases: cases.length, host_envelope_preserved: true, decisions_read_only: true }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -815,6 +905,7 @@ console.log(JSON.stringify(resolved));
       "Current cross-campaign latest-checkpoint identity covered. Evidence:": "x",
       "Current full-campaign host audio-state coverage covered. Evidence:": "x",
       "Current full-campaign host history/replay continuity covered. Evidence:": "x",
+      "Current full-campaign coverage renderer continuity covered. Evidence:": "x",
       "Current explicit durable stabilization host checkpoint recovery covered.": "x",
       "Current explicit durable regional-affiliation host checkpoint recovery covered.": "x",
       "Current live replay visual continuity covered. Evidence:": "x",

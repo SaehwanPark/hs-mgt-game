@@ -648,6 +648,41 @@
       "This closes host read continuity only; browser serialization, multi-checkpoint archives, human replay/accessibility/educational review, screenshots, provenance/legal approval, and public release remain open."
     ]
   },
+  "full_campaign_browser_coverage_rendering": {
+    "status": "complete-full-campaign-browser-coverage-renderer-continuity",
+    "schema": "campaign-coverage-v1",
+    "campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "browser_source": "gui/app.mjs: renderCampaignCoverage",
+    "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageEnvelope",
+    "test_source": "tests/test_phase11_campaign_coverage.py: test_full_campaign_coverage_renderer_preserves_host_envelope",
+    "fixtures": [
+      "competitive active",
+      "competitive terminal",
+      "stabilization active",
+      "stabilization terminal",
+      "regional affiliation active",
+      "regional affiliation terminal"
+    ],
+    "continuity_behavior": [
+      "Active and terminal fixtures retain supplied campaign identity and stage text.",
+      "History rows, terminal debrief lines, supplied audio metadata, and written fallback content remain available to the renderer.",
+      "Coverage decisions remain disabled unless an existing host submit callback is explicitly provided.",
+      "The renderer does not submit commands, regenerate simulation, or classify hidden state."
+    ],
+    "boundary": "The browser renders the host-owned campaign-coverage-v1 envelope; Rust remains authoritative for transitions, history, debrief, audio metadata, replay, and outcomes.",
+    "evidence": [
+      "A Node fixture matrix invokes the existing renderCampaignCoverage function for active and terminal envelopes from all three campaigns.",
+      "The fixture matrix asserts identity/stage metadata, history/debrief rows, audio retention, written fallbacks, disabled decisions, and no client mutation callback.",
+      "No new route/schema, simulation rule, browser authority, checkpoint archive, serialization, asset, audio file, or screenshot is introduced."
+    ],
+    "limits": [
+      "This is fixture-level technical rendering evidence only; real-browser screenshots, human visual/accessibility/educational review, provenance/legal approval, and public release remain open."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
@@ -899,7 +934,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity is covered, and full-campaign host audio-state continuity is covered; full-campaign history/replay read continuity is the next technical target, while browser serialization, multi-checkpoint archives, broader durable save/load evidence, and human listening/accessibility review remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, multi-checkpoint archives, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

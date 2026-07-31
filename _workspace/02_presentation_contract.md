@@ -4453,3 +4453,59 @@ replay comprehension, educational usefulness, accessibility, or public release.
 - Open: browser serialization, multi-checkpoint archives, screenshots, human
   replay/accessibility/educational review, provenance/legal review, and public
   release approval.
+# Presentation Contract — Full-campaign coverage renderer continuity v0.13.78
+
+## Goal and authorization
+
+Verify that the existing browser `renderCampaignCoverage` function preserves
+host-supplied active and terminal campaign-coverage content for all three
+launchable campaigns.
+
+## Player questions and consequences
+
+The player question is: “Does the shared campaign panel keep the visible run
+context and written fallback available as the campaign changes?” The renderer
+may display supplied metadata; it does not decide outcomes or submit commands.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Campaign identity/stage | Host `CampaignCoverageEnvelope.session` and `stage` | Active and terminal reads | Do not derive campaign state in the browser |
+| History rows | Host `CampaignCoverageEnvelope.history` | Empty at genesis or append-only committed rows | Do not regenerate or reorder history |
+| Terminal debrief | Host `CampaignCoverageEnvelope.debrief` | Written lines at terminal; fallback text before completion | Do not invent instructor/true-state detail |
+| Optional audio | Host `CampaignCoverageEnvelope.audio` | Supplied metadata remains optional | Do not infer severity or future outcomes from audio |
+| Decisions | Existing host-shaped coverage metadata | Rendered disabled without explicit existing submit callback | Do not create a second mutation rail |
+
+## Visual, motion, and audio semantics
+
+No new rendering or playback category is introduced. The existing campaign
+panel, written rows, debrief text, and optional supplied music/cue metadata are
+the only presentation surfaces.
+
+## Accessibility and fallbacks
+
+Written identity, history, debrief, disabled-decision, muted-audio, reduced-
+motion, malformed-read, and empty-state fallbacks remain available. Audio is
+never required for play or recovery.
+
+## Authority and provenance boundary
+
+Rust owns coverage, history, debrief, audio metadata, transition, and replay
+authority. The browser only renders the supplied envelope and may use an
+existing host submit callback; no client classification or simulation is added.
+
+## Verification and evidence limits
+
+The focused fixture matrix must render active and terminal envelopes for all
+three campaigns and assert identity, rows/debrief, audio retention, and
+disabled decisions. Fixture-level rendering evidence is not human visual,
+accessibility, educational, screenshot, or release evidence.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic input, browser authority,
+  checkpoint archive, browser serialization, asset, audio file, screenshot, or
+  human approval claim.
+- Open: real-browser screenshots, human visual/replay/accessibility review,
+  provenance/legal review, and public-release approval.

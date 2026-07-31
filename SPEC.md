@@ -7397,6 +7397,33 @@ Deferred / Non-Goals:
   browser serialization, asset/audio file, screenshot, human review,
   provenance/legal approval, or public-release claim.
 
+### Visual/audio full-campaign coverage renderer continuity (v0.13.78)
+
+Status: Implementation, full automated validation, and the sole medium-effort
+review are complete for the bounded fixture-level browser renderer target
+across active and terminal host envelopes for the three launchable campaigns;
+the reviewer found no actionable findings. PR/merge cleanup and final evidence
+synchronization remain.
+
+Done:
+
+- Added the target and actor-visible renderer contract in
+  `_workspace/156_implementation_plan_visual-audio-phase11-full-campaign-coverage-renderer-v0.13.78.md`
+  and the current request/contract/QA/handoff records.
+- Defined the existing `renderCampaignCoverage` function as the only browser
+  consumer: preserve host identity, history/debrief, optional audio, written
+  fallbacks, and disabled decisions without adding a mutation path.
+
+Not Yet Done:
+
+- Merge the PR, clean the temporary branch locally/remotely, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No new route/schema, simulation rule, browser authority, checkpoint archive,
+  browser serialization, asset/audio file, screenshot, human review,
+  provenance/legal approval, or public-release claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;
