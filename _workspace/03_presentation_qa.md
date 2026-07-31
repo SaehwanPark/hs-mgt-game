@@ -3,11 +3,11 @@
 ## Status
 
 The bounded host/core deterministic regeneration contract passes its focused
-implementation checks and is ready for full validation/review. The target is
-regeneration of recorded competitive action batches behind the existing replay
-projection; it is not a new browser surface. This is not fresh AI decision
-search, human accessibility, educational, calibration, device/browser, legal,
-provenance, or public-release approval.
+and full automated checks plus the sole medium-effort code review. The target
+is regeneration of recorded competitive action batches behind the existing
+replay projection; it is not a new browser surface. This is not fresh AI
+decision search, human accessibility, educational, calibration, device/browser,
+legal, provenance, or public-release approval.
 
 ## Review boundary
 
@@ -37,9 +37,9 @@ behavior, calibration, provenance/legal status, or public release.
 
 ## Review findings
 
-- Focused Rust regeneration, session rejection, persistence rejection, and
-  existing browser authority checks pass. Full validation and the sole
-  medium-effort review remain before merge.
+- Rust regeneration, session rejection, persistence rejection, existing browser
+  authority checks, full Rust/Python validation, and repository release gates
+  pass. The sole reviewer approved with no actionable findings.
 
 # Presentation QA — Host-envelope replay playback rail v0.13.66
 
