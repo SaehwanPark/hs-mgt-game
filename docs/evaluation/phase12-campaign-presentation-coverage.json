@@ -65,7 +65,7 @@
       "current_surface": "Competitive player-visible metrics, public market/policy signals, process summaries, canonical action metadata, sanitized public-action history/replay metadata, player-safe terminal debrief, and optional audio through the shared host coverage contract.",
       "map_or_facility_asset_need": "none-required-by-current-typed-read-contract",
       "reusable_assets": "shared executive desktop, actor-family language, status/fallback, and optional audio contracts",
-      "open_campaign_work": ["campaign-specific action-rail integration review", "full-campaign facility placement/use", "competitive visual/audio and educational quality review"]
+      "open_campaign_work": ["full-campaign facility placement/use", "competitive visual/audio and educational quality review"]
     },
     "stabilization-v1": {
       "current_surface": "Abstract executive campaign coverage using shared briefing, metric, actor, process, decision, history, replay, and debrief fields.",

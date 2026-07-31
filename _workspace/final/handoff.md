@@ -42,6 +42,36 @@ Complete exactly one medium-effort review, create and merge the PR, delete the
 temporary branch locally and remotely, verify clean `main`, and then select the
 next unmet roadmap slice.
 
+# Final Handoff — Competitive coverage companion surface v0.13.70
+
+## Status
+
+Implementation, full validation, and the sole medium-effort review are complete
+on `feat/competitive-coverage-companion-v0.13.70`; the reviewer found no
+actionable issues. PR handoff, merge, branch cleanup, and final evidence update
+remain.
+
+## Target result
+
+- Show the existing host competitive coverage read beside the normal action
+  rail after competitive start/load and accepted monthly refreshes.
+- Preserve competitive drafts, validation, action controls, host submission,
+  history/replay/checkpoint behavior, and read-only coverage decisions.
+- Keep companion failures recoverable and retain written/source-bound fallbacks.
+
+## Verification
+
+- 366 Rust tests, 779 Python tests, Node syntax, Clippy, formatting, release
+  metadata, documentation links, asset/security/generation/credits, device,
+  offline, browser, audio, raster, loading, and visual/audio checks pass.
+- Focused contracts prove companion loading, read-only coverage decisions,
+  preserved action controls, and the separate stabilization/affiliation rails.
+
+## Remaining work
+
+Create and merge the PR, delete the temporary branch locally/remotely, verify
+clean `main`, and select the next unmet roadmap slice.
+
 # Final Handoff — Host autosave after committed GUI decisions v0.13.68
 
 ## Status

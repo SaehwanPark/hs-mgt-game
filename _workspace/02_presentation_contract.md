@@ -1,3 +1,65 @@
+# Presentation Contract — Competitive coverage companion surface v0.13.70
+
+## Goal and authorization
+
+Render the existing host-owned `campaign-coverage-v1` competitive envelope in
+the normal GUI session as a read-only companion to the competitive action rail.
+The companion adds no mutation authority and reuses the existing route, schema,
+panel, and optional audio metadata.
+
+## Player questions and consequences
+
+The player question is: “What visible campaign context accompanies the next
+competitive decision?” The companion panel provides current player metrics,
+public signals, visible processes, committed coverage history, and terminal
+player-safe debrief text while the action rail remains the decision surface.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Companion envelope | Host `getCampaignCoverage` response | Loaded after normal competitive reads and accepted refreshes; may be unavailable | Do not reconstruct state or treat a failed companion read as a failed transition |
+| Coverage decisions | Existing `competitive_action_catalog` metadata | Always read-only in the companion panel | Do not submit from coverage or duplicate host validation |
+| Action rail | Existing action catalog, validate, and `submitTurn` path | Remains enabled and authoritative | Do not reset drafts or validation from a companion refresh |
+| Companion history/debrief | Sanitized public-action history and player-safe terminal debrief | Append-only; debrief only when terminal | Do not expose private rival events/effects, instructor-only details, or true-state deltas |
+| Companion audio | Existing allowlisted host music/cue metadata | Optional; written equivalents remain complete | Do not infer severity or future rival response |
+
+## Visual, motion, and audio semantics
+
+Reuse the existing campaign-coverage panel beside the competitive action rail.
+Companion refreshes may update host-sourced music/cue metadata, but no new
+asset, animation, audio file, or visual state category is introduced.
+
+## Accessibility and fallbacks
+
+The companion remains text-first with existing source/equivalent labels,
+reduced-motion behavior, audio-off behavior, and recovery messaging. If its
+read fails, the normal competitive action rail and current host presentation
+remain usable.
+
+## Authority boundary
+
+Rust owns competitive transitions, validation, history, replay, checkpoint,
+resolution, and debrief. The browser performs an optional read and renders the
+result; it never calculates legality/outcomes, mutates drafts through coverage,
+or submits a coverage decision.
+
+## Verification and evidence limits
+
+Tests must prove companion placement on normal competitive load and accepted
+refresh, preservation of the action rail, read-only coverage controls, and
+recoverable companion failure. These checks do not establish human usability,
+visual/audio quality, educational value, device/browser certification,
+provenance/legal approval, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, simulation, stochastic, persistence, asset, audio file,
+  screenshot, replay format, or browser mutation protocol.
+- Open: full-campaign visual/content quality, structured first-time-user review,
+  human accessibility/educational review, provenance/legal review, and release
+  approval.
+
 # Presentation Contract — Host autosave after committed GUI decisions v0.13.68
 
 ## Goal and authorization

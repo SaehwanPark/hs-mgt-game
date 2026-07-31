@@ -1,3 +1,39 @@
+# Presentation QA — Competitive coverage companion surface v0.13.70
+
+## Status
+
+Implementation, full validation, and the sole medium-effort code review pass.
+The reviewer found no actionable issues. The boundary is normal competitive GUI
+placement of an existing host-owned read alongside the existing action rail.
+
+## Required pass conditions
+
+- Normal competitive start/load renders the coverage companion without hiding
+  or disabling the validated action rail.
+- Accepted competitive refresh renders the companion again without resetting
+  drafts, validation, action controls, history, replay, or checkpoint state.
+- Coverage decisions remain visibly read-only; companion failure is written and
+  recoverable while action submission remains available.
+- Focused tests, full repository gates, and exactly one medium-effort code review
+  pass.
+
+## Current validation
+
+- 366 Rust tests, 779 Python tests, Node syntax, Clippy, formatting, release
+  metadata, documentation links, asset/security/generation/credits, device
+  proxy, offline, browser compatibility, audio packaging, raster scope,
+  loading policy, and visual/audio audit checks pass.
+- Focused companion coverage tests prove the host read appears on normal
+  competitive load, coverage decisions remain read-only, action controls are
+  preserved, and the existing stabilization/affiliation rails remain intact.
+
+## Evidence limits
+
+Automated checks establish only technical companion placement and authority
+preservation. They cannot approve human comprehension, visual/audio quality,
+accessibility, educational usefulness, device/browser behavior, provenance/legal
+status, or public release.
+
 # Presentation QA — Competitive campaign-coverage envelope v0.13.69
 
 ## Status

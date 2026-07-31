@@ -37,6 +37,10 @@ EXPECTED_SOURCE_CONTRACT = {
     "src/mcp/session.rs",
     "from_competitive",
   ),
+  "competitive_companion_scope": (
+    "gui/app.mjs",
+    "refreshCompetitiveCoverageCompanion",
+  ),
   "campaign_gui_boundary_test": (
     "tests/test_gui_campaign_coverage.py",
     "def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
@@ -147,6 +151,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
         "browser_authority_boundary_is_preserved": True,
         "optional_audio_and_written_fallback_are_present": True,
         "competitive_campaign_coverage_envelope_is_host_bound": True,
+        "competitive_coverage_companion_preserves_action_rail": True,
         "full_campaign_visual_content_review": False,
         "human_campaign_comprehension_and_educational_review": False,
       },

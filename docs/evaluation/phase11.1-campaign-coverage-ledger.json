@@ -485,6 +485,7 @@
     ],
     "continuity_behavior": [
       "The host returns actor-visible competitive metrics, public market/policy signals, process/status summaries, canonical action metadata, sanitized public-action history/replay metadata, player-safe terminal debrief, and audio metadata without advancing history.",
+      "The normal competitive GUI renders this typed read as a companion panel after start/load and accepted refreshes without replacing the validated action rail.",
       "Competitive decisions are sourced from competitive-actions-v1; competitive mutation remains on the existing action-catalog, validation, and submit path.",
       "Terminal competitive coverage reports the 24-month completion state and no further decisions."
     ],

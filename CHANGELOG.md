@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.70] - 2026-07-31
+
+- Added a normal-GUI competitive coverage companion: the existing typed host
+  read appears beside the competitive action rail after start/load and accepted
+  refreshes without changing mutation authority.
+- Kept companion failure recoverable, coverage decisions read-only, and full
+  campaign visual/content, human, provenance, and release gates open.
+
 ## [0.13.69] - 2026-07-31
 
 - Added the competitive `campaign-coverage-v1` host projection with visible

@@ -1,3 +1,43 @@
+# Request Summary — Competitive coverage companion surface v0.13.70
+
+## Authorized outcome
+
+Continue the visual/audio roadmap by making the existing host-owned
+`campaign-coverage-v1` competitive read visible during the normal competitive
+GUI session as a companion surface, without replacing the validated competitive
+action rail.
+
+## Target slice
+
+- Load the actor-visible competitive coverage envelope after normal competitive
+  start/load and after accepted monthly refreshes.
+- Render it beside the existing competitive action catalog, history, replay,
+  regional-world, and resolution surfaces using the existing panel, route,
+  schema, and optional audio metadata.
+- Keep coverage decisions disabled/read-only and preserve drafts, validation,
+  action controls, host submit, and all browser authority boundaries.
+- Treat companion reads as best-effort; a coverage failure remains written and
+  recoverable without blocking or fabricating a competitive transition.
+
+## Non-goals
+
+- No new route, schema, simulation, stochastic input, action protocol,
+  persistence, asset/audio file, screenshot, human review, device certification,
+  provenance/legal approval, or public-release claim.
+
+## Validation target
+
+Focused Node/GUI companion and authority tests; full Rust/Python/repository
+validation; exactly one medium-effort code review; authorized PR/merge and
+temporary-branch cleanup before selecting the next roadmap slice.
+
+## Evidence limits
+
+This slice proves only technical placement of a host-owned competitive coverage
+read beside the existing action rail. It does not prove full-campaign visual or
+audio quality, human comprehension, accessibility, device/browser certification,
+or public-release readiness.
+
 # Request Summary — Host autosave after committed GUI decisions v0.13.68
 
 ## Authorized outcome
