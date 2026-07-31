@@ -1,0 +1,119 @@
+{
+  "schema_version": "full-campaign-screenshot-evidence-v1",
+  "status": "complete-technical-local-browser-inspection",
+  "viewport": {
+    "width": 1024,
+    "height": 768
+  },
+  "route": {
+    "source": "src/gui_server.rs: existing loopback campaign-coverage route",
+    "adapter_source": "gui/host-adapter.mjs: campaign coverage adapter",
+    "renderer_source": "gui/app.mjs: shared campaign coverage renderer",
+    "surface_source": "gui/index.html: desktop and campaign coverage regions",
+    "schema": "campaign-coverage-v1"
+  },
+  "capture_method": "Codex in-app browser screenshot plus DOM inspection",
+  "capture_artifact": {
+    "status": "ephemeral-not-persisted",
+    "path": null,
+    "hash": null,
+    "release_eligible": false
+  },
+  "records": [
+    {
+      "campaign": "competitive-regional-v1",
+      "state": "active",
+      "host_state": "competitive-regional-v1 · turn 1/24",
+      "observed_content": [
+        "Campaign coverage briefing and visible metrics",
+        "Host-shaped decision rail with source/equivalent text",
+        "Existing optional-audio and written-equivalent controls"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    },
+    {
+      "campaign": "competitive-regional-v1",
+      "state": "terminal",
+      "host_state": "competitive-regional-v1 · turn 24/24",
+      "observed_content": [
+        "24 committed history/replay rows",
+        "Host-authored competitive campaign debrief",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    },
+    {
+      "campaign": "stabilization-v1",
+      "state": "active",
+      "host_state": "stabilization-v1 · turn 1/5",
+      "observed_content": [
+        "Tutorial-oriented stage briefing",
+        "Host-shaped stage decision",
+        "Existing optional-audio and written-equivalent controls"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    },
+    {
+      "campaign": "stabilization-v1",
+      "state": "terminal",
+      "host_state": "stabilization-v1 · turn 5/5",
+      "observed_content": [
+        "Five committed stage rows",
+        "Host-authored stabilization educational debrief",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "state": "active",
+      "host_state": "regional-affiliation-v1 · turn 1/6",
+      "observed_content": [
+        "Partner condition and institutional-stage briefing",
+        "Host-shaped affiliation decision",
+        "Existing optional-audio and written-equivalent controls"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "state": "terminal",
+      "host_state": "regional-affiliation-v1 · turn 6/6",
+      "observed_content": [
+        "Six committed affiliation stage rows",
+        "Host-authored regional affiliation debrief",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "inspected-local-browser"
+    }
+  ],
+  "authority_boundary": [
+    "The browser reads the existing host projection and does not simulate transitions.",
+    "Screenshot state is not included in commands, outcomes, history, hashes, or replay.",
+    "No private rival state, resolved input, true state, or future outcome is captured."
+  ],
+  "limits": [
+    "The six screenshots were inspected locally and are not persisted in the repository.",
+    "This is not a PNG/JPEG raster golden, cross-browser/device certification, or pixel-level quality result.",
+    "Human visual, accessibility, educational, provenance/legal, and public-release review remain open."
+  ],
+  "test_source": "tests/test_phase11_full_campaign_screenshot_evidence.py"
+}

@@ -7397,6 +7397,34 @@ Deferred / Non-Goals:
   browser serialization, asset/audio file, screenshot, human review,
   provenance/legal approval, or public-release claim.
 
+### Visual/audio full-campaign screenshot inspection evidence (v0.13.80)
+
+Status: The bounded six-state local-browser inspection and evidence contract
+are complete; persisted raster goldens, cross-browser/device certification,
+human visual/accessibility review, and release gates remain open.
+
+Done:
+
+- Added the target and actor-visible screenshot contract in
+  `_workspace/158_implementation_plan_visual-audio-phase11-full-campaign-screenshot-evidence-v0.13.80.md`
+  and the additive request/contract/QA/handoff records.
+- Recorded active and terminal local-browser inspections for all three
+  launchable campaigns at 1024×768 in
+  `docs/evaluation/phase11.1-full-campaign-screenshot-evidence.json`.
+- Added a fail-closed evidence test for the exact campaign/state matrix,
+  source markers, written fallbacks, and host/browser authority boundary.
+
+Not Yet Done:
+
+- Persisted raster goldens, cross-browser/device capture, pixel-level quality,
+  human visual/accessibility/educational review, provenance/legal review, and
+  public-release approval.
+
+Deferred / Non-Goals:
+
+- No screenshot runner, PNG/JPEG artifact, screenshot hash, route/schema,
+  simulation rule, browser authority, asset/audio file, or approval claim.
+
 ### Visual/audio full-campaign coverage renderer continuity (v0.13.78)
 
 Status: Implementation, full automated validation, and the sole medium-effort

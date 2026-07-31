@@ -2297,7 +2297,9 @@ bounded live facility, operational-overlay, terminal-debrief, event-cue,
 music-state, history, replay, and checkpoint slices; full campaign placement/
 use quality, event taxonomy beyond the current projection, full-campaign save/load/
 replay continuity, performance,
-full-campaign raster screenshots, and human visual quality gates remain open.
+full-campaign raster goldens, and human visual quality gates remain open. A
+bounded six-state local-browser inspection record is now tracked in v0.13.80;
+it does not promote ephemeral captures to release artifacts.
 
 ### Scope
 
@@ -2426,6 +2428,13 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   snapshot, and the local browser smoke route; full-campaign raster goldens,
   cross-browser/device capture, pixel-level quality, and human review remain
   open.
+- [x] Current full-campaign local-browser screenshot inspection recorded.
+  Evidence: `docs/evaluation/phase11.1-full-campaign-screenshot-evidence.json`,
+  `tests/test_phase11_full_campaign_screenshot_evidence.py`, and the existing
+  `campaign-coverage-v1` loopback/renderer sources; active and terminal states
+  for all three launchable campaigns were inspected at 1024×768. Persisted
+  raster goldens, cross-browser/device capture, pixel-level quality, and human
+  review remain open.
 
 ### v0.13.6 facility asset coverage evidence
 
@@ -4305,6 +4314,22 @@ are completed. Human-review gates remain open.
   pass at 374 Rust tests and 788 Python tests. The sole medium-effort review on
   PR #326 is approved with no actionable findings; merge, branch cleanup, and
   final evidence synchronization remain.
+
+### v0.13.80 current full-campaign screenshot inspection evidence
+
+- `docs/evaluation/phase11.1-full-campaign-screenshot-evidence.json` records
+  one active and one terminal local-browser inspection for competitive,
+  stabilization, and regional affiliation at 1024×768. Each record retains
+  host campaign identity, the existing shared panel, written equivalents,
+  optional audio behavior, and terminal debrief evidence where applicable.
+- `tests/test_phase11_full_campaign_screenshot_evidence.py` enforces the exact
+  six-state matrix, route/renderer/source markers, authority boundary, and
+  fail-closed ephemeral-artifact limits.
+- This closes only the technical local-browser inspection boundary. The six
+  screenshots are not persisted or release-eligible; raster goldens,
+  cross-browser/device capture, pixel-level visual quality, human accessibility/
+  educational review, provenance/legal review, and public-release approval
+  remain open.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

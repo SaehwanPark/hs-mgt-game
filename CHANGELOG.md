@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.80] - 2026-07-31
+
+- Recorded six bounded local-browser screenshot inspections for active and
+  terminal competitive, stabilization, and regional-affiliation coverage at
+  the documented 1024×768 baseline.
+- Kept persisted raster goldens, cross-browser/device capture, human visual/
+  accessibility review, provenance/legal approval, and public-release gates
+  open.
+
 ## [0.13.79] - 2026-07-31
 
 - Added host-bound full-campaign loopback transport evidence for campaign
