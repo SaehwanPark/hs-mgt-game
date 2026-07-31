@@ -4728,3 +4728,42 @@ quality, accessibility, educational usefulness, or release readiness.
   human approval claim.
 - Open: real-browser screenshots, human visual/audio/accessibility review,
   provenance/legal review, and public-release approval.
+
+# Presentation Contract — First-session participant review packet v0.13.84
+
+## Goal and authorization
+
+Prepare a participant-ready technical review surface for the existing local
+GUI first-session workflow. The packet covers orientation, host-mediated
+first-month handoffs, recovery, and presentation accommodations; it does not
+change the runtime or record human experience.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| First-month stage | `gui/first-month.mjs` stage schemas and host-bound handoffs | Ask whether a first-time player knows the next visible action | Do not infer comprehension from source code or a passing test |
+| Validation/submission | Existing host adapter and first-month tests | Ask whether draft, validation, submission, and result are distinguishable | Do not treat a local draft or predicted result as committed state |
+| Recovery | Existing guide and recoverable rejection/read paths | Ask whether the player can safely retry or revise | Do not invent an outcome when the host read is unavailable |
+| Presentation accommodation | Existing settings/help and pilot-preparation contracts | Ask whether meaning survives text, motion, keyboard, and audio changes | Do not make sound, color, or motion the only semantic channel |
+
+## Accessibility, privacy, and causality
+
+Written equivalents, audio-off/cues-only, reduced motion, Large text,
+keyboard, skip/review, and retry paths are named for participant inspection.
+The packet stores no participant identity or raw feedback and makes no
+clinical, causal, educational, or release claim.
+
+## Authority and limits
+
+Rust remains authoritative for sessions, validation, transitions, resolution,
+history, replay metadata, checkpoint state, and refreshed observations. The
+browser retains only local presentation preferences and draft UI state. Human
+first-session, accessibility, educational, competitive-expansion,
+provenance/legal, and public-release decisions remain pending.
+
+## Verification
+
+`tests/test_phase13_1_first_session_review_packet.py` must fail closed on
+source/stage drift, forbidden browser-state markers, missing recovery or
+accommodation coverage, release promotion, or completed human-review fields.

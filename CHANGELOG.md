@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.84] - 2026-07-31
+
+- Added a participant-ready technical packet for the open first-session
+  workflow review, binding the seven competitive first-month stages, the five
+  campaign-coverage orientation stages, recovery/settings accommodations, and
+  host-authority limits.
+- Kept participant results, human accessibility/educational review, campaign
+  expansion, provenance/legal review, and public-release approval pending.
+
 ## [0.13.83] - 2026-07-31
 
 - Added a source-bound debrief visual review packet for the three corrected

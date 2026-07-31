@@ -3753,6 +3753,12 @@ educational/accessibility gates remain open.
   tests, and the player guide; this covers the current repository-owned
   technical path only and does not close human comprehension, accessibility,
   educational, or classroom review.
+- [x] Current first-session technical review packet prepared. Evidence:
+  `docs/evaluation/phase13.1-first-session-review-packet.json` and
+  `tests/test_phase13_1_first_session_review_packet.py`; the participant-ready
+  packet binds the seven competitive first-month stages, five campaign-
+  coverage orientation stages, existing recovery/settings accommodations, and
+  host-authority limits while leaving pending human review explicit.
 - [ ] Competitive campaign coverage complete.
 - [x] Current technical competitive campaign boundary documented. Evidence:
   `docs/evaluation/phase13.1-competitive-campaign-boundary.json` and
@@ -4396,6 +4402,23 @@ are completed. Human-review gates remain open.
 - This makes the remaining human visual, accessibility, educational,
   classroom, and audio-listening review actionable; it does not close the
   `Debrief visuals reviewed` item or authorize public release.
+
+### v0.13.84 first-session participant review packet
+
+- `docs/evaluation/phase13.1-first-session-review-packet.json` is a
+  participant-ready technical packet for the open `First-session workflow
+  complete` item. It binds the seven competitive first-month stages, the five
+  campaign-coverage orientation stages, existing settings and recovery
+  guidance, and the host/browser authority boundary to structured tasks and
+  review questions.
+- `tests/test_phase13_1_first_session_review_packet.py` fails closed on source
+  marker drift, exact stage lists, recovery/accessibility coverage, forbidden
+  browser-state markers, release promotion, and human-review fields marked
+  complete without participant results.
+- This prepares authorized first-time-user, accessibility, educational, and
+  classroom evaluation; it does not record participants, close the
+  `First-session workflow complete` or `Competitive campaign coverage
+  complete` items, or authorize expansion or public release.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
