@@ -2995,3 +2995,36 @@ found one source-boundary issue in nested competitive/first-session human
 review records. The validator now enforces those cross-field rules, exact
 pending/null nested records, and contradiction mutation tests; the final
 recheck found no actionable issues. No second reviewer was used.
+# Final Handoff — Educational-usability evidence-intake packet v0.13.95
+
+## Status
+
+The v0.13.95 technical intake packet is implemented on the temporary feature
+branch. It binds the canonical evaluation tasks and bounded review vocabulary,
+starts with zero records, and remains pending authorized educational and
+classroom evidence.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`.
+- Validator: `scripts/validate_educational_usability_evidence_intake.py`.
+- Test: `tests/test_phase13_2_educational_usability_evidence_intake.py`.
+- Plan: `_workspace/173_implementation_plan_visual-audio-phase13-2-educational-usability-evidence-intake-v0.13.95.md`.
+
+## Limits
+
+No participant result, educational/classroom conclusion, accessibility or
+audio finding, revision decision, campaign expansion, provenance/legal
+conclusion, public-release approval, identity, private state, raw media,
+browser/session location, or free-text note is recorded. No runtime, GUI,
+simulation, asset, audio, registry, persistence, or release artifact changes.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed by Russell. The initial
+review found one medium source-boundary issue: first-session and competitive
+sources were not required to retain their exact technical-complete and
+pending/null human-review structures. A follow-up found one low type-coercion
+edge in those nested dictionaries. The validator now enforces exact
+type-strict boundary and human-review dictionaries with numeric mutation tests;
+the final recheck found no actionable issues. No second reviewer was used.

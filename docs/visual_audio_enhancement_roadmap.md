@@ -4591,6 +4591,22 @@ are completed. Human-review gates remain open.
 - This prepares expansion evidence capture only. It does not approve, reject,
   or infer campaign expansion, public release, or human review completion.
 
+### v0.13.95 educational-usability evidence-intake packet
+
+- `docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`
+  binds the seven canonical evaluation tasks, reviewer categories, rating
+  dimensions, accommodations, finding categories, and privacy boundaries to
+  the existing evaluation, pilot, first-session, competitive, debrief, and
+  revision sources.
+- `scripts/validate_educational_usability_evidence_intake.py` and
+  `tests/test_phase13_2_educational_usability_evidence_intake.py` fail closed on
+  source/task/vocabulary drift, deterministic review-ID drift, private/free-text
+  fields, duplicate values, numeric coercion, nested pending-boundary drift,
+  and premature educational or public-release decisions.
+- This prepares educational and classroom evidence capture only. It does not
+  establish learning, comprehension, classroom readiness, accessibility,
+  audio usefulness, legal/provenance clearance, or human approval.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4711,6 +4727,12 @@ are completed. Human-review gates remain open.
   `tests/test_phase13_1_expansion_decision_evidence_intake.py`; the empty
   campaign/gate contract keeps the actual expansion and public-release
   decisions pending.
+- [x] Educational usability review intake prepared. Evidence:
+  `docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`,
+  `scripts/validate_educational_usability_evidence_intake.py`, and
+  `tests/test_phase13_2_educational_usability_evidence_intake.py`; the empty
+  task/reviewer/rating contract keeps educational, classroom, accessibility,
+  audio, and public-release decisions pending.
 
 ### Exit criteria
 

@@ -5821,3 +5821,36 @@ approving or rejecting campaign expansion.
 `tests/test_phase13_1_expansion_decision_evidence_intake.py` checks source and
 gate parity, privacy exclusions, bounded values, type safety, and pending
 expansion decisions.
+# Presentation QA — Educational-usability evidence-intake packet v0.13.95
+
+## Status
+
+Pass for the empty technical intake boundary. The packet adds no visual,
+audio, portrait, renderer, browser, host, simulation, screenshot, recording,
+registry, or release artifact.
+
+## Reviewed Inputs and Authorization
+
+- Packet: `docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`.
+- Validator: `scripts/validate_educational_usability_evidence_intake.py`.
+- Evaluation protocol, first-session/competitive/debrief packets, pilot
+  instrument and intake, and revision-decision intake.
+
+## Findings
+
+- The source-bound task and rating contract preserves the existing host-owned
+  information boundaries and written/audio/accessibility fallbacks.
+- Empty records and deterministic IDs prevent invented participant findings,
+  identity capture, unrestricted notes, or a presentation-derived approval.
+- Human educational, classroom, accessibility, audio, visual, revision,
+  provenance/legal, expansion, and public-release decisions remain pending.
+
+## Required fixes
+
+None for this bounded intake packet. Obtain authorized evidence before
+recording findings or marking educational usability reviewed.
+
+## Verification evidence
+
+`tests/test_phase13_2_educational_usability_evidence_intake.py` checks source
+parity, privacy exclusions, bounded values, type safety, and pending decisions.

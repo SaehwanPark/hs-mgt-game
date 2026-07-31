@@ -5112,3 +5112,36 @@ host remains authoritative.
 `tests/test_phase13_1_expansion_decision_evidence_intake.py` checks campaign and
 gate parity, bounded records, privacy exclusions, type safety, and pending
 expansion/release decisions.
+# Presentation Contract — Educational-usability evidence-intake packet v0.13.95
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized educational
+and classroom usability review. This packet adds no presentation path, does
+not record participant results, and does not establish learning, accessibility,
+audio usefulness, or release readiness.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Evaluation tasks and dimensions | `docs/evaluation/phase10.2-evaluation-protocol.json` | Bind seven task IDs, reviewer groups, and rating dimensions | Do not infer task completion or educational effectiveness |
+| First-session and competitive questions | `docs/evaluation/phase13.1-first-session-review-packet.json` and `docs/evaluation/phase13.1-competitive-campaign-review-packet.json` | Preserve first-session, campaign, and accommodation review intent | Do not infer first-time-user or campaign comprehension |
+| Debrief questions | `docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json` | Preserve terminal consequence and fallback review intent | Do not infer visual, educational, or classroom quality |
+| Review vocabulary | `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json` and pilot feedback instrument | Reuse bounded statuses, accommodations, findings, and forbidden fields | Do not collect names, raw notes, media, or private state |
+| Intake validator | `scripts/validate_educational_usability_evidence_intake.py` | Reject source/vocabulary drift and premature decisions | Do not treat validator success as human evidence |
+
+## Accessibility, privacy, and authority
+
+The intake adds no presentation path and preserves existing written
+equivalents, audio-off, reduced-motion, keyboard, Large text, skip/review,
+history, replay, checkpoint, and debrief contracts. It permits only bounded
+task/category/rating fields and deterministic IDs; identity, private or hidden
+state, browser/session locations, raw notes, screenshots, recordings, and
+unrestricted text remain excluded. The host remains authoritative.
+
+## Verification
+
+`tests/test_phase13_2_educational_usability_evidence_intake.py` checks source
+and vocabulary parity, deterministic record shape, privacy exclusions, type
+safety, nested pending boundaries, and pending educational decisions.

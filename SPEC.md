@@ -7611,6 +7611,27 @@ The target and validator are recorded in
 `docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json`, and
 `scripts/validate_expansion_decision_evidence_intake.py`.
 
+### Visual/audio educational-usability evidence-intake packet (v0.13.95)
+
+The Phase 13.2 packet makes the open `Educational usability reviewed` item
+operationally ready for authorized educational and classroom review without
+storing participant results. It derives the seven evaluation tasks, reviewer
+categories, rating dimensions, accommodation categories, finding categories,
+and privacy vocabulary from the existing evaluation protocol and pilot/debrief
+sources, and starts with zero records and a pending review decision.
+
+The validator rejects source/task/vocabulary drift, deterministic review-ID
+drift, unknown or private/free-text fields, duplicate values, numeric coercion,
+and premature educational, classroom, revision, expansion, or public-release
+decisions. It records technical preparation only; educational effectiveness,
+classroom readiness, accessibility, audio usefulness, and human approval
+remain pending.
+
+The target and validator are recorded in
+`_workspace/173_implementation_plan_visual-audio-phase13-2-educational-usability-evidence-intake-v0.13.95.md`,
+`docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`,
+and `scripts/validate_educational_usability_evidence_intake.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
