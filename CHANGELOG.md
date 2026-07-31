@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.85] - 2026-07-31
+
+- Added a participant-ready technical packet for the open competitive
+  campaign-coverage review, binding the 24-month host path, early/mid/terminal
+  checkpoints, facility/capacity continuity, visible consequence surfaces,
+  replay/checkpoint/debrief evidence, and fallback questions.
+- Kept full-campaign participant results, visual/accessibility/educational and
+  audio review, expansion approval, provenance/legal review, and public-release
+  approval pending.
+
 ## [0.13.84] - 2026-07-31
 
 - Added a participant-ready technical packet for the open first-session

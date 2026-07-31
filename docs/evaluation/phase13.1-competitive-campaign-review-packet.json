@@ -1,0 +1,250 @@
+{
+  "schema_version": "phase13.1-competitive-campaign-review-packet-v1",
+  "status": "complete-technical-packet-pending-human-review",
+  "roadmap_item": "Competitive campaign coverage complete",
+  "purpose": "Make authorized full-campaign competitive review actionable without recording participant results or implying campaign expansion approval.",
+  "audience_and_use_case": {
+    "primary_users": "strategy-game players and health-policy or management reviewers",
+    "supporting_users": "accessibility-oriented reviewers and bounded-session facilitators",
+    "job_to_be_done": "inspect early, middle, and terminal competitive states; identify facility and pressure changes; trace visible committed consequences; use history, replay, and checkpoint views; and report friction",
+    "default_setup": "local loopback host, Chromium, 1024x768 planning baseline, audio optional",
+    "facilitator_boundary": "provide setup, consent, stop, and recovery guidance without teaching hidden state, private rival intent, or optimal play"
+  },
+  "review_boundary": {
+    "technical_packet_complete": true,
+    "participant_results_present": false,
+    "full_campaign_human_review_complete": false,
+    "human_visual_review_complete": false,
+    "human_accessibility_review_complete": false,
+    "educational_and_classroom_review_complete": false,
+    "audio_listening_review_complete": false,
+    "expansion_approval": false,
+    "public_release_approval": false
+  },
+  "shared_sources": {
+    "competitive_boundary": "docs/evaluation/phase13.1-competitive-campaign-boundary.json",
+    "campaign_coverage_ledger": "docs/evaluation/phase11.1-campaign-coverage-ledger.json",
+    "raster_manifest": "docs/evaluation/phase11.1-full-campaign-raster-evidence.json",
+    "terminal_transcript": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
+    "first_session_packet": "docs/evaluation/phase13.1-first-session-review-packet.json",
+    "player_help_boundary": "docs/evaluation/phase13.1-player-help-boundary.json",
+    "pilot_preparation": "docs/evaluation/phase13.2-pilot-preparation-boundary.json",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+    "player_guide": "docs/guides/gui-how-to-play.md"
+  },
+  "source_contract": {
+    "month_limit": "src/mcp/session.rs: pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;",
+    "completion_test": "src/mcp/session.rs: fn competitive_advances_twenty_four_months_then_done()",
+    "facility_continuity_test": "src/mcp/session.rs: fn regional_world_facility_projection_covers_all_competitive_months()",
+    "coverage_projection": "src/mcp/campaign_coverage.rs: from_competitive",
+    "coverage_renderer": "gui/app.mjs: renderCampaignCoverage",
+    "coverage_route": "src/gui_server.rs: /api/v1/sessions/{session_id}/campaign-coverage",
+    "regional_world_projection": "src/mcp/regional_world.rs: from_competitive_world",
+    "regional_board_renderer": "gui/regional-board.mjs: presentationFixtureToSceneData",
+    "event_cue_projection": "src/mcp/resolution.rs: visible_event_cue_ids",
+    "music_state_projection": "src/mcp/resolution.rs: visible_music_state_id",
+    "audio_cue_contract": "gui/audio-cue-contract.mjs: AUDIO_CUE_CONTRACT",
+    "music_contract": "gui/music-stem-contract.mjs: MUSIC_STEM_CONTRACT",
+    "resolution_projection": "src/mcp/resolution.rs: from_competitive_transition",
+    "history_projection": "src/mcp/session.rs: get_history",
+    "replay_projection": "src/mcp/session.rs: get_replay",
+    "replay_client": "gui/app.mjs: createReplayClient",
+    "checkpoint_continuity_test": "src/mcp/session.rs: fn competitive_durable_checkpoint_covers_full_campaign_continuation",
+    "checkpoint_client": "gui/app.mjs: createCheckpointClient",
+    "checkpoint_recovery_behavior": "gui/app.mjs: checkpoint_refresh_error",
+    "terminal_raster_manifest": "docs/evaluation/phase11.1-full-campaign-raster-evidence.json: \"competitive-regional-v1\"",
+    "terminal_capture_transcript": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json: \"competitive-regional-v1\"",
+    "facility_catalog": "gui/facility-components.mjs: FACILITY_COMPONENTS",
+    "overlay_catalog": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_SET",
+    "history_renderer": "gui/index.html: id=\"history-list\"",
+    "debrief_renderer": "gui/index.html: id=\"debrief-list\"",
+    "recovery_control": "gui/index.html: id=\"recovery-retry\""
+  },
+  "technical_contract": {
+    "campaign": "competitive-regional-v1",
+    "max_turns": 24,
+    "inspection_checkpoints": [
+      "genesis",
+      "early-month-1",
+      "mid-campaign-month-12",
+      "terminal-month-24"
+    ],
+    "presentation_surfaces": [
+      "regional board",
+      "facility components",
+      "operational overlays",
+      "event cues",
+      "music states",
+      "history",
+      "replay",
+      "checkpoint",
+      "terminal debrief"
+    ],
+    "facility_component_ids": [
+      "general-hospital-base",
+      "ambulatory-center",
+      "emergency-department",
+      "specialty-center"
+    ],
+    "capacity_metric_labels": [
+      "Staffed beds",
+      "Outpatient capacity",
+      "Emergency",
+      "ICU",
+      "Obstetrics",
+      "Psychiatric",
+      "Cardiology",
+      "Oncology",
+      "Infusion",
+      "Neurology",
+      "ASC"
+    ],
+    "host_owned_state": [
+      "history",
+      "replay metadata",
+      "checkpoint state",
+      "resolution",
+      "terminal debrief"
+    ],
+    "browser_forbidden_authority_markers": [
+      "transition_competitive",
+      "resolved_inputs",
+      "effect_queue",
+      "CompetitiveWorldState",
+      "WorldState",
+      "WebSocket"
+    ],
+    "written_fallback_and_optional_audio": true,
+    "no_pixel_quality_claim": true
+  },
+  "participant_tasks": [
+    {
+      "id": "orient-and-enter-campaign",
+      "checkpoint": "genesis",
+      "prompt": "Start or load the competitive campaign, identify the visible briefing and next action, and use the first-session packet for the initial handoffs.",
+      "technical_success_observation": "The host-bound campaign starts with actor-visible briefing, market, resources, facilities, workforce, payer, and public rival signals.",
+      "human_measure": "participant identifies the next visible action without hidden-state instruction"
+    },
+    {
+      "id": "trace-facility-continuity",
+      "checkpoint": "early-month-1, mid-campaign-month-12, terminal-month-24",
+      "prompt": "At early, middle, and terminal checkpoints, inspect the player facilities, capacity labels, selection state, and visible operational overlays.",
+      "technical_success_observation": "The host read retains the four player facility groups and eleven capacity labels across all 24 monthly reads; public rivals expose no private facilities.",
+      "human_measure": "participant can describe what changed, what remained stable, and which source/status label supports the observation"
+    },
+    {
+      "id": "trace-visible-consequences",
+      "checkpoint": "mid-campaign-month-12",
+      "prompt": "Choose one visible event, pressure, project, payer, policy, or workforce signal and trace its committed result, pending process, and written explanation.",
+      "technical_success_observation": "Event cues, music states, overlays, resolution, direct effects, and pending processes are derived from host-supplied visible fields and retain written equivalents.",
+      "human_measure": "participant distinguishes an observed committed effect from a prediction, private intent, or causal certainty claim"
+    },
+    {
+      "id": "use-history-replay-checkpoint",
+      "checkpoint": "mid-campaign-month-12, terminal-month-24",
+      "prompt": "Review committed history, move through read-only replay rows, and inspect or restore a host checkpoint without changing the campaign through the browser.",
+      "technical_success_observation": "History, replay metadata, state hashes, and checkpoint continuation remain host-owned; browser playback and recovery are read-only.",
+      "human_measure": "participant can reconstruct a visible sequence and distinguish review controls from a new decision"
+    },
+    {
+      "id": "review-terminal-campaign",
+      "checkpoint": "terminal-month-24",
+      "prompt": "Review the terminal debrief, written equivalents, optional audio, absence of further decisions, and recovery guidance.",
+      "technical_success_observation": "The corrected terminal raster/transcript records done=true, 24 history rows, non-empty debrief content, zero campaign decision controls, and optional audio.",
+      "human_measure": "participant can identify completion, summarize visible tradeoffs, and continue meaningfully with audio off or reduced motion"
+    }
+  ],
+  "review_questions": [
+    "Can a reviewer distinguish early, middle, and terminal facility and operational-pressure states without relying on color, motion, or audio alone?",
+    "Can a reviewer trace a visible committed consequence across board, facility, overlay, event, resolution, history, and debrief surfaces without inferring hidden state or causal certainty?",
+    "Can a reviewer distinguish host-supplied public rival observations and uncertainty from private rival intent, resolved inputs, or future outcomes?",
+    "Can a reviewer use history, replay, and checkpoint controls to reconstruct visible campaign continuity without mistaking review for mutation?",
+    "Do written equivalents, audio-off or cues-only, reduced motion, Large text, keyboard, skip/review, and retry preserve decision-relevant meaning across the full campaign?",
+    "Does the current competitive campaign provide enough visual/audio comprehension and trust to justify expansion review, or should the scope remain bounded?"
+  ],
+  "evidence_assertions": {
+    "host_runs_24_months_and_terminates": true,
+    "facility_read_continuity_covers_all_24_months": true,
+    "four_player_facility_groups_are_source_bound": true,
+    "eleven_capacity_labels_are_source_bound": true,
+    "public_rival_private_facilities_are_excluded": true,
+    "history_replay_checkpoint_and_debrief_are_host_owned": true,
+    "terminal_raster_has_completed_debrief_state": true,
+    "written_fallback_and_optional_audio_are_present": true,
+    "browser_authority_boundary_is_preserved": true,
+    "human_campaign_comprehension_is_unverified": true
+  },
+  "accessibility_and_fallback_checks": [
+    {
+      "id": "facility-labels-and-fallbacks",
+      "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
+      "status": "technical-source-bound; human visual/accessibility review pending"
+    },
+    {
+      "id": "overlay-meaning-and-fallback",
+      "source": "gui/operational-overlays.mjs: OPERATIONAL_OVERLAY_SET",
+      "status": "technical-source-bound; human comprehension review pending"
+    },
+    {
+      "id": "written-equivalent",
+      "source": "gui/index.html: id=\"result-list\"",
+      "status": "technical-source-bound; human comprehension review pending"
+    },
+    {
+      "id": "audio-off-and-cues-only",
+      "source": "gui/audio.mjs: mode === \"cues-only\"",
+      "status": "documented and technically bounded; listening review pending"
+    },
+    {
+      "id": "audio-written-fallback",
+      "source": "gui/index.html: id=\"audio-state\"",
+      "status": "technical-source-bound; human listening review pending"
+    },
+    {
+      "id": "reduced-motion",
+      "source": "gui/app.mjs: const effectiveReducedMotion =",
+      "status": "technical-source-bound; human accessibility review pending"
+    },
+    {
+      "id": "large-text",
+      "source": "gui/app.mjs: const effectiveTextScale =",
+      "status": "technical-source-bound; human accessibility review pending"
+    },
+    {
+      "id": "keyboard-navigation",
+      "source": "gui/index.html: id=\"skip-to-content\"",
+      "status": "protocol-ready; human interaction review pending"
+    },
+    {
+      "id": "retry-recovery",
+      "source": "gui/index.html: id=\"recovery-retry\"",
+      "status": "technical-source-bound; participant recovery review pending"
+    }
+  ],
+  "causality_privacy_and_provenance_boundary": {
+    "host_owned_transitions_only": true,
+    "actor_visible_observations_only": true,
+    "no_hidden_state_inference": true,
+    "no_causal_certainty": true,
+    "no_private_rival_intent": true,
+    "evaluation_artifacts_not_release_assets": true,
+    "source": "docs/evaluation/phase13.1-competitive-campaign-boundary.json"
+  },
+  "human_review_record": {
+    "status": "pending-authorized-human-review",
+    "participant_results_present": false,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "decision": null,
+    "expansion_go_no_go": null,
+    "public_release_approval": null
+  },
+  "limits": [
+    "This packet makes full-campaign competitive review actionable; it does not perform or represent participant evaluation.",
+    "The existing evidence covers host continuity and corrected active/terminal raster states, not a 24-frame screenshot golden set or pixel-quality approval.",
+    "No visual, accessibility, educational, classroom, audio-listening, provenance/legal, browser/device, expansion, or public-release conclusion is inferred.",
+    "The separate first-session human-review gate remains open and is referenced rather than repeated."
+  ],
+  "test_source": "tests/test_phase13_1_competitive_campaign_review_packet.py"
+}

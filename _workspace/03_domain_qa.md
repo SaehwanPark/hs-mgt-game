@@ -312,3 +312,40 @@ clearance, and public-release approval remain open.
   focused packet validation target.
 - Existing first-session, player-help, low-distraction, campaign-coverage,
   authority, and full Python/Rust tests remain the source evidence.
+
+# Domain QA — Phase 13.1 competitive campaign review packet v0.13.85
+
+## Status
+
+`pass` for the current technical full-campaign review-packet boundary only.
+No participant, visual-quality, accessibility, educational, audio, expansion,
+provenance/legal, or public-release decision is implied.
+
+## Findings
+
+- The packet keeps the existing 24-month competitive host path and its
+  early/mid/terminal checkpoints as the only campaign review contract.
+- Four player facility groups, eleven capacity labels, operational/event/music
+  surfaces, host-owned history/replay/checkpoint/debrief, terminal evidence,
+  written fallbacks, and optional audio are parity-bound to current ledgers.
+- Tasks separate visible committed effects from hidden intent, predictions,
+  and causal certainty; browser review controls do not create transitions.
+
+## Required fixes
+
+None for this bounded technical packet. Human campaign review is the required
+next gate.
+
+## Residual risks
+
+Pixel quality, cross-browser/device behavior, lived accessibility,
+educational usefulness, audio fatigue/usefulness, provenance/legal clearance,
+expansion approval, and public-release readiness remain open.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_competitive_campaign_review_packet`
+  — focused packet validation target.
+- Existing competitive boundary, facility continuity, full-campaign history/
+  replay/checkpoint/audio/raster, authority, and full Python/Rust tests remain
+  the source evidence.

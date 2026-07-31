@@ -3507,3 +3507,16 @@ separate gates.
 - Prevention: keep participant-ready evidence separate from participant
   results, and make rejected submissions, unavailable reads, presentation
   preferences, and host refresh requirements visible in every future packet.
+
+# Full-Campaign Review Packets Need Checkpoint and Surface Parity
+
+- Context: a technical 24-month competitive ledger can prove host continuity
+  while leaving facility placement/use, overlays, replay, checkpoint, audio,
+  and terminal-debrief review difficult to conduct as one bounded session.
+- Risk: a reviewer may overgeneralize a first-month or terminal screenshot,
+  or treat host-read continuity as proof of visual quality or comprehension.
+- Resolution: bind exact early/mid/terminal checkpoints, current facility and
+  capacity catalogs, all named presentation surfaces, host-owned state, live
+  recovery, and terminal evidence to participant tasks and review questions.
+- Prevention: keep full-campaign technical parity, screenshot evidence, human
+  findings, and expansion approval as separate gates.
