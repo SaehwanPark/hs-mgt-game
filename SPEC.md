@@ -7281,6 +7281,36 @@ Deferred / Non-Goals:
   file, screenshot, human review, provenance/legal approval, or public-release
   claim; regional-affiliation continuation remains a later bounded slice.
 
+### Visual/audio full regional-affiliation checkpoint continuity (v0.13.74)
+
+Status: Implementation, full automated validation, and the sole review are
+complete for the bounded stage-3 host checkpoint continuation target; the
+reviewer found no actionable findings. PR/merge cleanup and final evidence
+synchronization remain.
+
+Done:
+
+- Added the target and actor-visible persistence contract in
+  `_workspace/152_implementation_plan_visual-audio-phase11-full-affiliation-checkpoint-continuity-v0.13.74.md`
+  and the current request/contract/QA/handoff records.
+- Defined the existing `gui-affiliation-save-v1` path as the only persistence
+  source: save after stage 3, restore in a fresh host, continue through stage
+  6, and compare history/replay plus terminal campaign coverage.
+- Full validation passes: 370 Rust tests, 783 Python tests, Clippy, formatting,
+  release metadata, documentation links, asset/security/generation/credits,
+  device/offline/browser/audio/raster/loading/visual-audio/asset-budget, CLI
+  smoke, Node syntax, and diff checks.
+
+Not Yet Done:
+
+- Merge the PR, clean the temporary branch locally/remotely, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No new route/schema, browser serialization, simulation rule, asset/audio
+  file, screenshot, human review, provenance/legal approval, or public-release
+  claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;

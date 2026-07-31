@@ -488,6 +488,35 @@
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
+  "full_affiliation_checkpoint_continuity": {
+    "status": "complete-affiliation-full-campaign-host-checkpoint-continuation",
+    "checkpoint_schema": "gui-affiliation-save-v1",
+    "comparison_surfaces": [
+      "competitive-history-v1",
+      "competitive-replay-v1",
+      "campaign-coverage-v1"
+    ],
+    "host_source": "src/mcp/session.rs: save_session + load_session + get_history + get_replay + get_campaign_coverage",
+    "test_source": "src/mcp/session.rs: fn durable_affiliation_checkpoint_covers_full_campaign_continuation",
+    "checkpoint_stage": 3,
+    "terminal_stage": 6,
+    "continuity_behavior": [
+      "A regional-affiliation session is durably saved after 3 committed stages and loaded by a fresh host store using the matching opaque session ID.",
+      "Original and restored sessions continue the independent posture path with identical hold commands through the existing six-stage terminal endpoint.",
+      "Replay/history hashes and counts and terminal campaign-coverage data are equal across the original and restored hosts.",
+      "Ending the recovered session removes the matching durable checkpoint file."
+    ],
+    "boundary": "The host owns checkpoint serialization, replay/history verification, true state, history, hashes, transitions, and actor-visible reads; the browser remains opaque-ID-only.",
+    "evidence": [
+      "The Rust session regression compares saved/loaded metadata at stage 3 and each deterministic continuation hash through the terminal stage.",
+      "The same regression compares terminal history, replay, and campaign-coverage envelopes and verifies durable-file cleanup.",
+      "No browser save artifact, client state serialization, or new route/schema is introduced."
+    ],
+    "limits": [
+      "This closes regional-affiliation host checkpoint continuation only; browser serialization, cross-campaign durable continuity, and broader persistence evidence remain open.",
+      "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
+    ]
+  },
   "durable_stabilization_checkpoint_coverage": {
     "status": "complete-explicit-stabilization-host-checkpoint",
     "schema": "gui-stabilization-save-v1",
@@ -739,7 +768,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive and stabilization host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores; regional-affiliation continuation, browser serialization, cross-campaign durable continuity, and broader full-campaign save/load/replay evidence remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores; browser serialization, cross-campaign durable continuity, and broader full-campaign save/load/replay evidence remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

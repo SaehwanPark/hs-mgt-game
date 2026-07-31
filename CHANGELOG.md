@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.74] - 2026-07-31
+
+- Added host-bound regional-affiliation checkpoint continuity evidence: save
+  after stage 3, restore in a fresh host, continue through stage 6, and compare
+  history/replay plus terminal campaign-coverage data.
+- Kept browser serialization, screenshots, human review, and public-release
+  gates open.
+
 ## [0.13.73] - 2026-07-31
 
 - Added host-bound stabilization checkpoint continuity evidence: save after

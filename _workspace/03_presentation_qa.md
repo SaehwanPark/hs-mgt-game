@@ -5000,3 +5000,37 @@ with no actionable findings.
 This slice establishes only deterministic host persistence and terminal read
 parity; it cannot establish lived accessibility, educational usefulness,
 provenance/legal status, or public release.
+# Presentation QA — Full regional-affiliation checkpoint continuity v0.13.74
+
+## Status
+
+Implementation and full automated validation pass. The bounded boundary is
+host-owned regional-affiliation stage-3 restore followed by deterministic
+  continuation through stage 6. The sole medium-effort code review approved
+  this boundary with no actionable findings.
+
+## Required pass conditions
+
+- Original and restored runs reach equal terminal history/replay and
+  campaign-coverage data after six stages.
+- Matching checkpoint cleanup succeeds and browser storage remains opaque-ID-
+  only.
+- Evidence stays separate from browser persistence, visual quality, human
+  review, and release approval.
+
+## Current validation
+
+- 370 Rust tests and 783 Python tests pass in the repository's serial Rust test
+  mode; Clippy, formatting, release metadata, documentation links,
+  asset/security/generation/credits, device, offline, browser, audio, raster,
+  loading, visual/audio, asset-budget, CLI smoke, Node syntax, and diff checks
+  also pass.
+- The focused regression saves after stage 3, restores into a fresh host,
+  compares each continuation hash through stage 6, compares history/replay and
+  campaign-coverage envelopes, and verifies matching checkpoint cleanup.
+
+## Evidence limits
+
+This slice establishes only deterministic host persistence and terminal read
+parity; it cannot establish lived accessibility, educational usefulness,
+provenance/legal status, or public release.

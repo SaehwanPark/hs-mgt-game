@@ -4227,3 +4227,61 @@ usefulness, legal status, or public release.
 - Open: regional-affiliation durable continuity, browser/device certification,
   raster screenshots, human first-time-user/accessibility/educational review,
   provenance/legal review, and public-release approval.
+# Presentation Contract — Full regional-affiliation checkpoint continuity v0.13.74
+
+## Goal and authorization
+
+Verify that the existing host regional-affiliation checkpoint restores stage 3
+and preserves terminal history/replay and actor-visible campaign-coverage
+output through stage 6, without adding browser persistence or a second
+authority.
+
+## Player questions and consequences
+
+The player question is: “Will a restored affiliation run retain the same
+visible stage progression and final debrief?” The contract compares
+host-supplied projections and makes no human quality claim.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Checkpoint identity/count | Existing host `save_session`/`load_session` envelope | Save after stage 3; load before stages 4–6 | Do not serialize state in the browser |
+| Affiliation history/replay | Host history and replay projections backed by `regional-affiliation-replay-v1` | Compared at stage 3 and terminal stage 6 | Do not rebuild history client-side |
+| Campaign coverage/debrief | Host `campaign-coverage-v1` read | Compared at terminal completion | Do not author outcomes or hidden state |
+| Checkpoint cleanup | Host `end_session` matching-ID removal | After recovered terminal run ends | Do not remove an unrelated save |
+
+## Visual, motion, and audio semantics
+
+No new visual/audio behavior is introduced. Existing written affiliation
+stages, debrief, replay, and optional audio projections remain host-supplied.
+
+## Accessibility and fallbacks
+
+Existing written recovery, mute, reduced-motion, text, unknown-data, and host
+load fallbacks remain unchanged. No device/browser certification is claimed.
+
+## Authority, history, and replay boundaries
+
+Rust owns affiliation state, save verification, transitions, history, replay,
+hashes, and campaign coverage. The browser retains only an opaque session ID.
+
+## Asset provenance and release requirements
+
+No asset or audio file is added; existing registries and credits remain the
+release authority.
+
+## Verification and evidence limits
+
+The focused regression must compare original/restored terminal history/replay
+and campaign-coverage envelopes after stage-3 restore, then verify cleanup.
+Automated parity does not establish visual quality, accessibility, educational
+usefulness, legal status, or public release.
+
+## Non-goals and open questions
+
+- No new route/schema, browser save artifact, simulation, screenshot, asset,
+  audio file, or human approval claim.
+- Open: browser/device certification, raster screenshots, human first-time-
+  user/accessibility/educational review, provenance/legal review, and
+  public-release approval.

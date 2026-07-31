@@ -274,6 +274,36 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       self.assertIn(marker, self.session)
     self.assertTrue(any("browser" in item.lower() for item in coverage["limits"]))
 
+  def test_full_affiliation_checkpoint_continuity_is_host_bound(self):
+    coverage = self.ledger["full_affiliation_checkpoint_continuity"]
+    self.assertEqual(
+      coverage["status"],
+      "complete-affiliation-full-campaign-host-checkpoint-continuation",
+    )
+    self.assertEqual(coverage["checkpoint_stage"], 3)
+    self.assertEqual(coverage["terminal_stage"], 6)
+    self.assertEqual(
+      coverage["test_source"],
+      "src/mcp/session.rs: fn durable_affiliation_checkpoint_covers_full_campaign_continuation",
+    )
+    self.assertEqual(
+      coverage["comparison_surfaces"],
+      [
+        "competitive-history-v1",
+        "competitive-replay-v1",
+        "campaign-coverage-v1",
+      ],
+    )
+    for marker in (
+      "fn durable_affiliation_checkpoint_covers_full_campaign_continuation",
+      "get_history(GetHistoryRequest",
+      "get_replay(GetReplayRequest",
+      "get_campaign_coverage(GetCampaignCoverageRequest",
+      "end_session(EndSessionRequest",
+    ):
+      self.assertIn(marker, self.session)
+    self.assertTrue(any("browser" in item.lower() for item in coverage["limits"]))
+
 
 if __name__ == "__main__":
   unittest.main()
