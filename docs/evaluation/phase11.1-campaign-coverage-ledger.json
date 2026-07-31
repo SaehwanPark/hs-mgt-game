@@ -448,9 +448,9 @@
     ]
   },
   "replay_view_coverage": {
-    "status": "complete-live-host-projection-and-local-playback",
+    "status": "complete-live-host-projection-local-playback-and-host-regeneration",
     "schema": "competitive-replay-v1",
-    "host_source": "src/mcp/session.rs: get_replay",
+    "host_source": "src/mcp/session.rs: get_replay + src/competitive/replay.rs: regenerate_competitive_history",
     "mcp_source": "src/mcp/server.rs: get_replay",
     "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/replay",
     "adapter_source": "gui/host-adapter.mjs: getReplay",
@@ -469,17 +469,19 @@
       "Replay metadata aligns seed, transition count, latest state hash, and visible rows.",
       "Browser renders the projection through the existing text-first history surface.",
       "Previous/next/play/pause move a local written cursor over visible rows without submitting or regenerating a transition.",
+      "Host deterministically regenerates competitive transitions from recorded explicit action batches before returning the replay projection.",
       "Missing adapter, failed read, or malformed replay preserves the last valid view and cursor while exposing a recoverable error.",
       "Empty replay disables movement and reports that no committed rows exist."
     ],
-    "boundary": "Host/core owns replay metadata, immutable history, and state hashes; the browser validates and locally plays back a read-only projection without regeneration or client authority.",
+    "boundary": "Host/core owns replay metadata, immutable history, deterministic regeneration, and state hashes; the browser validates and locally plays back a read-only projection without client regeneration or authority.",
     "limits": [
-      "No replay regeneration or regenerated simulation trace is established.",
+      "No fresh AI decision search, browser regeneration, or regenerated core trace is exposed through the client.",
       "No durable replay persistence or browser-authored hash is established.",
       "No screenshot, accessibility, usability, or human-learning claim is made."
     ],
     "evidence": [
       "The live replay test covers schema/operation-independent metadata validation, empty and committed views, local cursor/play/pause, adapter fallback, rendering, failure preservation, route/source markers, syntax, and authority exclusions.",
+      "Rust competitive replay tests cover exact multi-month regeneration and tampered transition rejection; session and persistence tests reject tampered traces before projection or checkpoint hydration.",
       "Rust session, MCP, and transport tests cover immutable history alignment and the read-only replay route."
     ]
   },

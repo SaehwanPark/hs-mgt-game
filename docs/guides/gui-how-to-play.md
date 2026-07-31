@@ -146,8 +146,10 @@ In **Committed history and replay**, use **Previous row**, **Next row**,
 **Play replay**, and **Pause replay** to review the visible committed summaries.
 The selected row shows its command, optional observation, visible events/effects,
 and state hash in written text. These controls move a local review cursor only;
-they do not submit a command or regenerate the simulation. An empty replay says
-that no committed rows exist, and a failed refresh preserves the last valid view.
+they do not submit a command or regenerate the simulation. The host verifies
+competitive replay determinism before returning the visible projection. An
+empty replay says that no committed rows exist, and a failed refresh preserves
+the last valid view.
 
 ## Credits and provenance
 

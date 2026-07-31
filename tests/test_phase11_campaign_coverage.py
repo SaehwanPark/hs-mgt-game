@@ -527,7 +527,7 @@ console.log(JSON.stringify(resolved));
     coverage = self.ledger["replay_view_coverage"]
     replay_test = REPLAY_TEST.read_text(encoding="utf-8")
     mcp_server = MCP_SERVER.read_text(encoding="utf-8")
-    self.assertEqual(coverage["status"], "complete-live-host-projection-and-local-playback")
+    self.assertEqual(coverage["status"], "complete-live-host-projection-local-playback-and-host-regeneration")
     self.assertEqual(coverage["schema"], "competitive-replay-v1")
     self.assertEqual(
       coverage["metadata_contract"],
@@ -543,6 +543,7 @@ console.log(JSON.stringify(resolved));
       "createReplayClient",
       "validateReplayEnvelope",
       "renderReplayEnvelope",
+      "regenerate_competitive_history",
       "replay-previous",
       "replay-play",
       "replay-pause",
@@ -550,6 +551,7 @@ console.log(JSON.stringify(resolved));
       "replay-playback-status",
       "replay_adapter_missing",
       "replay_adapter_error",
+      "replay_verification_failed",
     ):
       self.assertIn(marker, replay_test + self.app + self.adapter + self.server + mcp_server + self.session)
     for boundary in (

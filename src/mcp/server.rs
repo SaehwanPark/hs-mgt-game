@@ -140,7 +140,7 @@ impl McpGameServer {
 
   #[tool(
     name = "get_replay",
-    description = "Return host-owned replay metadata and immutable transition summaries for a session without advancing or regenerating it."
+    description = "Verify and return host-owned replay metadata and immutable transition summaries for a session without advancing session state."
   )]
   async fn get_replay(&self, Parameters(request): Parameters<GetReplayRequest>) -> CallToolResult {
     self.with_store(|store| store.get_replay(request))

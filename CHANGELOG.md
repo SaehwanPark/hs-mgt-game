@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.67] - 2026-07-30
+
+- Added host/core deterministic regeneration of competitive replay histories
+  from the immutable seed, genesis, and recorded monthly action batches,
+  comparing full transitions, events/effects, consultant options, and hashes.
+- Reused the verifier on the existing replay read and durable competitive
+  checkpoint validation so tampered traces fail closed without changing the
+  replay envelope or browser playback rail.
+- Kept fresh AI decision search, browser regeneration, autosave, screenshots,
+  human evaluation, provenance, and public-release gates open.
+
 ## [0.13.66] - 2026-07-30
 
 - Added a local written replay playback rail over the existing host

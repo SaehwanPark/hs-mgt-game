@@ -1,6 +1,7 @@
 mod fixtures;
 mod genesis;
 mod month_loop;
+mod replay;
 mod resolution;
 
 pub use fixtures::{
@@ -11,8 +12,9 @@ pub use genesis::{
 };
 pub use month_loop::{
   build_month1_resolution_history, build_multi_month_resolution_history, human_batch_for_month,
-  resolve_competitive_month,
+  regenerate_competitive_month, resolve_competitive_month,
 };
+pub use replay::regenerate_competitive_history;
 pub use resolution::{
   compute_ai_batch, month1_batches_with_ai, month1_human_preset_batch, month1_preset_batches,
   resolution_summary_lines, resolve_preset_month1,

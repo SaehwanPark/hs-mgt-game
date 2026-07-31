@@ -18,11 +18,32 @@ pub struct CompetitiveTransition {
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum CompetitiveReplayError {
   Validation(CompetitiveValidationError),
+  TransitionMismatch {
+    turn: u32,
+  },
   StateHashMismatch {
     turn: u32,
     expected: String,
     actual: String,
   },
+}
+
+impl CompetitiveReplayError {
+  pub fn message(&self) -> String {
+    match self {
+      Self::Validation(error) => error.message(),
+      Self::TransitionMismatch { turn } => {
+        format!("competitive replay transition mismatch at turn {turn}")
+      }
+      Self::StateHashMismatch {
+        turn,
+        expected,
+        actual,
+      } => format!(
+        "competitive replay state hash mismatch at turn {turn}: expected {expected}, got {actual}"
+      ),
+    }
+  }
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, serde::Serialize, serde::Deserialize)]

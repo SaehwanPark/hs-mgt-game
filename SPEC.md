@@ -7160,6 +7160,32 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio host deterministic replay regeneration (v0.13.67)
+
+Status: Complete for bounded host/core deterministic regeneration from recorded
+competitive action batches. The existing replay envelope and browser playback
+surface remain unchanged; fresh AI decision regeneration, human review, and
+public-release gates remain open.
+
+Done:
+
+- Regenerate each immutable competitive transition from seed, genesis, and
+  recorded `AggregatedMonthlyActions`, then compare prior state, actions,
+  events/effects, next state, consultant options, and state hash.
+- Reuse the verifier on the existing replay read and durable competitive-save
+  validation without adding a route, schema, browser simulation, or save format.
+
+Not Yet Done:
+
+- No fresh AI decision search, browser regeneration, or client-owned trace is
+  included.
+
+Deferred / Non-Goals:
+
+- No fresh AI decision search, true-state/resolved-input field, client-side
+  regeneration, autosave, asset/audio behavior, screenshot, human review, or
+  public-release claim.
+
 ### Visual/audio host-envelope replay playback rail (v0.13.66)
 
 Status: Complete for bounded local playback over the existing host replay

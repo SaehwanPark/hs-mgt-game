@@ -2346,12 +2346,13 @@ full-campaign raster screenshots, and human visual quality gates remain open.
   boundary; autosave and full-campaign save/load/replay continuity remain open.
 - [x] Current live replay visual continuity covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
-  `tests/test_phase11_live_replay.py`; replay regeneration and durable
+  `tests/test_phase11_live_replay.py`; fresh AI decision search and durable
   persistence remain open.
 - [x] Current local replay playback over visible host rows covered. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
   `tests/test_phase11_live_replay.py`, and the existing replay route; replay
-  regeneration and full-campaign durable continuity remain open.
+  regeneration is covered host-side while fresh AI decision search and
+  full-campaign durable continuity remain open.
 - [x] Unknown content fallbacks tested.
 - [x] Current tracked visual/audio asset-registry coverage is 100%. Evidence:
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json`,
@@ -4052,6 +4053,19 @@ are completed. Human-review gates remain open.
   replay regeneration path is called.
 - This closes only local playback of existing visible summaries. Replay
   regeneration, durable persistence, autosave, full-campaign placement/use or
+  screenshots, human review, device/browser certification, provenance/legal
+  review, and public release remain open.
+
+### v0.13.67 current host deterministic replay regeneration
+
+- `src/competitive/replay.rs` regenerates each current competitive transition
+  from the immutable seed, genesis, and recorded `AggregatedMonthlyActions`,
+  then compares the full transition and state hash.
+- The existing replay read and durable competitive save validation reuse that
+  verifier. The `competitive-replay-v1` envelope, route, browser local
+  playback rail, visible summaries, and error boundary remain unchanged.
+- This closes host-side deterministic regeneration of recorded explicit action
+  batches only. Fresh AI decision search, browser simulation, autosave,
   screenshots, human review, device/browser certification, provenance/legal
   review, and public release remain open.
 

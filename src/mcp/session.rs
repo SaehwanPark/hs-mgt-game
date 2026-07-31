@@ -449,6 +449,19 @@ impl GameSessionStore {
   }
 
   pub fn get_replay(&self, request: GetReplayRequest) -> Result<ReplayEnvelope, McpErrorMessage> {
+    if let Some(GameSession::Competitive(session)) = self.sessions.get(&request.session_id) {
+      crate::competitive::regenerate_competitive_history(
+        &session.history,
+        &session.ruleset,
+        session.seed,
+      )
+      .map_err(|error| McpErrorMessage {
+        error: format!("replay verification failed: {}", error.message()),
+        code: Some("replay_verification_failed".to_string()),
+        resource_limit: None,
+        hint: None,
+      })?;
+    }
     let history = self.get_history(GetHistoryRequest {
       session_id: request.session_id,
     })?;
@@ -1888,6 +1901,30 @@ mod tests {
         .last()
         .map(|transition| transition.state_hash.clone())
     );
+  }
+
+  #[test]
+  fn competitive_replay_rejects_tampered_history_before_projection() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let session_id = session.session_id.clone();
+    store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session_id.clone(),
+        command_text: "hold".to_string(),
+      })
+      .expect("advance one month");
+
+    let GameSession::Competitive(session) = store.sessions.get_mut(&session_id).expect("session")
+    else {
+      panic!("expected competitive session");
+    };
+    session.history.transitions[0].effects[0].delta += 1;
+
+    let error = store
+      .get_replay(GetReplayRequest { session_id })
+      .expect_err("tampered replay");
+    assert_eq!(error.code.as_deref(), Some("replay_verification_failed"));
   }
 
   #[test]

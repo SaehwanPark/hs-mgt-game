@@ -1,3 +1,46 @@
+# Presentation QA — Host deterministic replay regeneration v0.13.67
+
+## Status
+
+The bounded host/core deterministic regeneration contract passes its focused
+implementation checks and is ready for full validation/review. The target is
+regeneration of recorded competitive action batches behind the existing replay
+projection; it is not a new browser surface. This is not fresh AI decision
+search, human accessibility, educational, calibration, device/browser, legal,
+provenance, or public-release approval.
+
+## Review boundary
+
+The implementation must compare regenerated transitions with immutable history
+before returning replay summaries, fail closed on any mismatch, reuse the same
+check for durable competitive saves, and leave the browser playback rail,
+schema, route, and actor-visible field boundary unchanged.
+
+## Required pass conditions
+
+- A valid recorded competitive history regenerates exactly from seed, genesis,
+  recorded action batches, deterministic month-start inputs, institution phase,
+  events/effects, next state, consultant options, and hash.
+- Tampered prior state, actions, events/effects, next state, or hash is rejected
+  in host/core tests and cannot be projected as a valid replay.
+- Existing replay transport/schema/browser tests remain green and show no
+  client-side regeneration, transition, hidden-state, or route expansion.
+- Durable competitive checkpoint validation uses the same deterministic replay
+  verifier without changing the save format.
+
+## Evidence limits
+
+Automated checks establish only technical host regeneration and rejection of
+tampered traces. They cannot approve fresh AI-policy regeneration, human
+accessibility, replay comprehension, educational value, device/browser
+behavior, calibration, provenance/legal status, or public release.
+
+## Review findings
+
+- Focused Rust regeneration, session rejection, persistence rejection, and
+  existing browser authority checks pass. Full validation and the sole
+  medium-effort review remain before merge.
+
 # Presentation QA — Host-envelope replay playback rail v0.13.66
 
 ## Status

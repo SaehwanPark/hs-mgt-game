@@ -1,3 +1,36 @@
+# Final Handoff — Host deterministic replay regeneration v0.13.67
+
+## Status
+
+Implementation and focused verification are complete on
+`feat/host-replay-regeneration-v0.13.67`; full validation, review, and the PR
+loop remain.
+
+## Target result
+
+- Regenerate and verify each competitive history transition from the existing
+  seed, genesis, and recorded monthly action batches before serving the current
+  visible replay projection.
+- Reuse the verifier for durable competitive checkpoint validation and reject
+  tampered traces without changing the save format or replay envelope.
+- Keep browser playback, route/schema, actor-visible summaries, and asset/audio
+  behavior unchanged.
+
+## Design and verification boundary
+
+The verifier uses the deterministic host/core phases and compares the full
+recorded transition, including events, attributed effects, next state,
+consultant options, and state hash. It does not search for fresh AI decisions,
+expose resolved inputs, return true state, or let JavaScript regenerate a trace.
+
+## Remaining work
+
+Implementation, focused/full validation, exactly one medium-effort review, PR
+handoff, merge, branch cleanup, and synchronized roadmap/SPEC/ledger/release
+metadata updates remain. Fresh AI-policy regeneration, full-campaign replay
+placement/screenshots, human evaluation, provenance/legal review, device
+certification, and public release remain open.
+
 # Final Handoff — Host-envelope replay playback rail v0.13.66
 
 ## Status
