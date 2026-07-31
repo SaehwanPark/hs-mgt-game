@@ -4578,6 +4578,19 @@ are completed. Human-review gates remain open.
   approve a revision, verify implementation, approve campaign expansion, or
   establish legal/provenance or public-release readiness.
 
+### v0.13.94 expansion-decision evidence-intake packet
+
+- `docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json`
+  binds the three supported campaigns and the open first-session,
+  competitive, debrief, accessibility, educational, audio, revision,
+  provenance, and release gates to their existing technical sources.
+- `scripts/validate_expansion_decision_evidence_intake.py` and
+  `tests/test_phase13_1_expansion_decision_evidence_intake.py` fail closed on
+  source/gate/campaign drift, private/free-text fields, invalid outcomes,
+  duplicate values, numeric coercion, and premature expansion decisions.
+- This prepares expansion evidence capture only. It does not approve, reject,
+  or infer campaign expansion, public release, or human review completion.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4692,6 +4705,12 @@ are completed. Human-review gates remain open.
   `tests/test_phase13_2_revision_decision_evidence_intake.py`; the empty
   decision contract is source-bound and keeps findings, revisions,
   implementation verification, expansion, and release approval pending.
+- [x] Expansion decision intake prepared. Evidence:
+  `docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json`,
+  `scripts/validate_expansion_decision_evidence_intake.py`, and
+  `tests/test_phase13_1_expansion_decision_evidence_intake.py`; the empty
+  campaign/gate contract keeps the actual expansion and public-release
+  decisions pending.
 
 ### Exit criteria
 

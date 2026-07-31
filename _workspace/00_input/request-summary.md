@@ -3931,6 +3931,40 @@ asset, security, and release tests; full Rust/Python and repository validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
 
+# Request Summary — Expansion-decision evidence-intake packet v0.13.94
+
+## Authorized outcome
+
+Make the open full-campaign expansion item operationally ready for an
+authorized decision across the three supported campaigns without approving or
+rejecting expansion.
+
+## Target slice
+
+- Bind the supported campaign catalog and first-session, competitive,
+  debrief, accessibility, educational, audio, revision, provenance, and
+  release gates to canonical technical sources.
+- Define bounded gate statuses, evidence-strength labels, blockers, outcomes,
+  and rationale codes with no free-text or private-state capture.
+- Keep records empty and expansion, human, legal/provenance, and public-release
+  decisions pending.
+
+## Non-goals
+
+- No participant, reviewer, educational, accessibility, audio, visual,
+  provenance, legal, or public-release finding is entered.
+- No campaign expansion, runtime, GUI, simulation, asset, audio, browser,
+  persistence, or release-manifest change is made.
+- No identity, contact details, private state, browser/session locations, raw
+  notes, screenshots, recordings, or unrestricted text is stored.
+
+## Validation target
+
+Focused expansion-decision intake validator and source-parity tests; existing
+first-session, campaign, pilot, debrief, revision, provenance, asset, release,
+full Python/Rust, formatting/clippy, and documentation checks; exactly one
+medium-effort review; authorized PR/merge and temporary-branch cleanup.
+
 # Request Summary — Revision-decision evidence-intake packet v0.13.93
 
 ## Authorized outcome

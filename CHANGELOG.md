@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.94] - 2026-07-31
+
+- Added a strict, empty, source-bound expansion-decision evidence-intake
+  packet for the supported campaign catalog and open human review gates.
+- Kept expansion, participant, accessibility, educational, audio,
+  provenance/legal, and public-release decisions pending; no campaign scope
+  or runtime behavior was changed.
+
 ## [0.13.93] - 2026-07-31
 
 - Added a strict, empty, source-bound revision-decision evidence-intake

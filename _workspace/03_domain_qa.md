@@ -604,3 +604,37 @@ and public-release evidence remain required before closing the roadmap item.
   — focused source, target, and record-boundary validation.
 - `python3 scripts/validate_revision_decision_evidence_intake.py` — empty,
   source-bound, pending intake contract.
+
+# Domain QA — Phase 13.1 expansion-decision evidence-intake packet v0.13.94
+
+## Status
+
+`pass` for the repository-owned technical intake boundary only. The packet
+contains no human findings, campaign expansion outcome, implementation result,
+legal/provenance conclusion, or public-release approval.
+
+## Findings
+
+- The three supported campaigns and nine review gates are source-bound to the
+  existing campaign, first-session, evaluation, debrief, asset, revision,
+  and coverage documents; all human/expansion boundaries remain pending.
+- Records are limited to campaign/gate identifiers, bounded statuses,
+  evidence-strength, blocker, outcome, and rationale codes. Free text,
+  identity, private state, browser/session locations, and raw media are
+  excluded.
+- Existing source validators are invoked for the pilot, debrief, asset, and
+  revision packets before the expansion contract can pass.
+
+## Required fixes
+
+None for this bounded preparation packet. Authorized first-session,
+full-campaign, visual, accessibility, educational, audio, revision,
+provenance/legal, and expansion evidence remain required before closing the
+roadmap item.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_expansion_decision_evidence_intake`
+  — focused source, gate, campaign, and record-boundary validation.
+- `python3 scripts/validate_expansion_decision_evidence_intake.py` — empty,
+  source-bound, pending intake contract.

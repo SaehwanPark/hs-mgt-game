@@ -2961,3 +2961,37 @@ invokes the existing source validators, cross-checks canonical targets,
 requires deterministic source/target IDs, and compares the complete canonical
 empty log; mutation tests cover each issue. The final recheck found no
 actionable issues. No second reviewer was used.
+
+# Final Handoff — Expansion-decision evidence-intake packet v0.13.94
+
+## Status
+
+The v0.13.94 technical intake packet is implemented on the temporary feature
+branch. It binds the three supported campaigns and nine review gates to
+existing technical/evaluation sources, starts with zero records, and remains
+pending authorized human evidence and expansion approval.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json`.
+- Validator: `scripts/validate_expansion_decision_evidence_intake.py`.
+- Test: `tests/test_phase13_1_expansion_decision_evidence_intake.py`.
+- Plan: `_workspace/172_implementation_plan_visual-audio-phase13-1-expansion-decision-evidence-intake-v0.13.94.md`.
+
+## Limits
+
+No participant, visual, accessibility, educational, audio, provenance/legal,
+revision, expansion, or public-release result is recorded. No campaign scope,
+runtime, GUI, simulation, asset, audio, registry, persistence, or release
+artifact is changed; no identity, private state, raw media, browser/session
+location, or free-text rationale is accepted.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed by Russell. The initial
+review found one medium cross-field issue: expansion could be recorded without
+human/mixed evidence, a passing gate, blockers, or rationale. A follow-up
+found one source-boundary issue in nested competitive/first-session human
+review records. The validator now enforces those cross-field rules, exact
+pending/null nested records, and contradiction mutation tests; the final
+recheck found no actionable issues. No second reviewer was used.
