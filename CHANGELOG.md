@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.90] - 2026-07-31
+
+- Added a privacy-bounded, source-bound pilot evidence-intake packet and
+  standard-library validator for the open first-time-user evaluation item.
+- Kept the intake empty and pending human evidence; no participant identity,
+  raw media, hidden state, or comprehension/go/no-go result is recorded.
+
 ## [0.13.89] - 2026-07-31
 
 - Added a dependency-free Firefox Marionette smoke probe and source-bound

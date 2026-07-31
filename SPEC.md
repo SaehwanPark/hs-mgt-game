@@ -7531,6 +7531,25 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio pilot evidence-intake packet (v0.13.90)
+
+The Phase 13.2 packet makes the open first-time-user pilot evidence path
+machine-checkable without storing participant results. The bounded intake
+contract accepts only anonymized categories, campaign/seed/difficulty,
+consent status, task responses, bounded ratings, accommodation categories, and
+finding categories; names, contact details, raw media/transcripts, browser
+locations, session IDs, and hidden game state are rejected.
+
+The packet starts empty with `pending-human-evidence`; it does not establish
+first-time-user comprehension, accessibility, educational usefulness, audio
+usefulness, revision decisions, campaign expansion, legal/provenance
+clearance, or public-release approval.
+
+The target and validator are recorded in
+`_workspace/168_implementation_plan_visual-audio-phase13-2-pilot-evidence-intake-v0.13.90.md`,
+`docs/evaluation/phase13.2-pilot-evidence-intake-packet.json`, and
+`scripts/validate_pilot_evidence_intake.py`.
+
 ### Visual/audio Firefox host-backed runtime-smoke packet (v0.13.89)
 
 The Phase 13.1 packet records an observed Firefox 147.0.2 headless Marionette

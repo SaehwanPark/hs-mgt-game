@@ -4509,6 +4509,20 @@ are completed. Human-review gates remain open.
   Firefox/WebKit runtime checks, real hardware and performance measurements,
   lived accessibility/usability, and public-release certification remain open.
 
+### v0.13.90 pilot evidence-intake packet
+
+- `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json` defines an
+  empty, source-bound intake contract for the authorized first-time-user pilot;
+  it accepts only anonymized categories, bounded task/rating responses,
+  consent status, accommodation categories, and finding categories.
+- `scripts/validate_pilot_evidence_intake.py` and
+  `tests/test_phase13_2_pilot_evidence_intake.py` fail closed on source drift,
+  unbounded fields, identity/media/browser-location capture, hidden state, and
+  premature human decision fields.
+- This prepares evidence capture but does not run a participant evaluation or
+  establish comprehension, accessibility, educational usefulness, audio
+  usefulness, revision decisions, expansion approval, or public release.
+
 ### v0.13.89 Firefox host-backed runtime-smoke packet
 
 - `scripts/check_firefox_runtime_smoke.py` uses Firefox Marionette against an
@@ -4613,6 +4627,12 @@ are completed. Human-review gates remain open.
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`, and
   `tests/test_phase13_2_pilot_preparation.py`; tasks, ratings, privacy, finding
   categories, and a pending human decision field are structured.
+- [x] Pilot evidence intake prepared. Evidence:
+  `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json`,
+  `scripts/validate_pilot_evidence_intake.py`, and
+  `tests/test_phase13_2_pilot_evidence_intake.py`; the empty intake is
+  source-bound and rejects identity, raw media, browser/session locations,
+  hidden state, and unbounded free text while leaving human evidence pending.
 
 ### Exit criteria
 

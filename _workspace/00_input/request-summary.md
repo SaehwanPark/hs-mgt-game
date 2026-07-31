@@ -3990,3 +3990,34 @@ GUI host and make the remaining Safari/WebKit blocker explicit.
 Focused runtime-smoke packet and probe checks; existing browser/device and
 technical-coverage tests; full Rust/Python and repository validation; exactly
 one medium-effort review; authorized PR/merge and temporary-branch cleanup.
+
+# Request Summary — Pilot evidence-intake packet v0.13.90
+
+## Authorized outcome
+
+Make the open first-time-user evaluation item operationally ready for an
+authorized human pilot without fabricating or storing participant results.
+
+## Target slice
+
+- Add a source-bound, empty JSON intake packet for bounded anonymized pilot
+  records.
+- Add a standard-library validator and focused tests for task responses,
+  bounded ratings, consent statuses, accommodations, finding categories, and
+  explicit privacy/hidden-state exclusions.
+- Keep human comprehension, accessibility, educational, audio, revision,
+  expansion, legal/provenance, and public-release decisions pending.
+
+## Non-goals
+
+- No participant recruitment, human evaluation, identity, raw media,
+  transcripts, browser URLs, session IDs, private state, or unbounded notes.
+- No runtime, simulation, GUI, asset, audio, browser-policy, persistence, or
+  release-manifest change.
+
+## Validation target
+
+Focused intake validator and source-parity tests; existing pilot-preparation,
+first-session, privacy, asset, release, and full Python/Rust validation;
+exactly one medium-effort review; authorized PR/merge and temporary-branch
+cleanup.

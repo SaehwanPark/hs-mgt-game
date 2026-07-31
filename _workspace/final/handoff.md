@@ -2798,6 +2798,37 @@ mirror the complete capability/boundary records and compare every status to
 the live checker report; the final recheck found no actionable issues. No
 second reviewer was used.
 
+# Final Handoff — Pilot evidence-intake packet v0.13.90
+
+## Status
+
+The v0.13.90 technical intake packet is implemented on the temporary feature
+branch. It is source-bound, empty, and pending authorized human evidence for
+the first-time-user pilot.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json`.
+- Validator: `scripts/validate_pilot_evidence_intake.py`.
+- Test: `tests/test_phase13_2_pilot_evidence_intake.py`.
+- Plan: `_workspace/168_implementation_plan_visual-audio-phase13-2-pilot-evidence-intake-v0.13.90.md`.
+
+## Limits
+
+The packet stores no participant results, identity, raw media/transcripts,
+browser URLs, session IDs, private state, or unbounded notes. Human
+comprehension, accessibility, educational/audio usefulness, revision,
+expansion, provenance/legal, and public-release decisions remain open.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed by Russell. The reviewer
+identified three medium boundary issues and two low type-safety issues across
+the rechecks: unknown envelope fields, self-referential/incomplete source
+parity, mutable privacy text, boolean coercion, and float rating coercion. The
+validator, packet, and mutation tests now close those cases; the final recheck
+found no actionable issues. No second reviewer was used.
+
 # Final Handoff — Firefox host-backed runtime-smoke packet v0.13.89
 
 ## Status
