@@ -3580,3 +3580,17 @@ separate gates.
   explicit.
 - Prevention: label shell smoke, host-backed smoke, full engine coverage,
   device performance, human review, and release approval as separate gates.
+
+# Pilot Intake Must Be Empty Before Humans Fill It
+
+- Context: the project has a participant-ready first-session packet and
+  feedback instrument, but no authorized pilot results.
+- Risk: adding a result-shaped artifact too early could silently collect
+  identity, raw media, browser/session identifiers, hidden game state, or
+  unbounded notes and be mistaken for human evidence.
+- Resolution: keep a source-bound intake packet with zero records, bounded
+  categories and ratings, explicit consent metadata, and a pending decision;
+  validate record shapes without checking in participant data.
+- Prevention: separate preparation, authorized evidence capture, findings,
+  revision decisions, expansion approval, and public release; never infer a
+  human conclusion from an empty or automated intake check.

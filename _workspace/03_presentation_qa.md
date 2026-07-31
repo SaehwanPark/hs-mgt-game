@@ -5647,3 +5647,38 @@ support or release promotion.
 
 `tests/test_phase13_1_firefox_runtime_smoke_packet.py` checks exact observed
 fields, probe source markers, policy status, Safari blocker, and release limits.
+
+# Presentation QA — Pilot evidence-intake packet v0.13.90
+
+## Status
+
+Pass for the empty technical intake boundary. No participant, browser, private
+state, media, accessibility, educational, audio, or public-release result is
+claimed.
+
+## Reviewed Inputs and Authorization
+
+- Packet: `docs/evaluation/phase13.2-pilot-evidence-intake-packet.json`.
+- Validator: `scripts/validate_pilot_evidence_intake.py`.
+- Existing first-session packet, pilot feedback instrument, evaluation
+  protocol, and facilitator guide.
+
+## Findings
+
+- The packet preserves task and rating semantics without adding presentation
+  controls or changing actor-visible host sources.
+- Consent is represented only as bounded status metadata; raw media and
+  unrestricted notes remain outside the repository contract.
+- Empty records, pending decision fields, and explicit no-result limits keep
+  preparation separate from human evaluation and release approval.
+
+## Required fixes
+
+None for this bounded intake packet. Authorized human evidence and the related
+visual, accessibility, educational, provenance, and release reviews remain
+open.
+
+## Verification evidence
+
+`tests/test_phase13_2_pilot_evidence_intake.py` checks source parity, bounded
+record values, privacy exclusions, pending decisions, and the empty intake.

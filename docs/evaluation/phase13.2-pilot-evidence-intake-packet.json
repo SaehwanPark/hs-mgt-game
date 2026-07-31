@@ -1,0 +1,111 @@
+{
+  "schema_version": "phase13.2-pilot-evidence-intake-v1",
+  "status": "complete-technical-intake-pending-human-evidence",
+  "roadmap_item": "Run structured first-time-user evaluation",
+  "purpose": "Provide a privacy-bounded, source-bound intake contract for an authorized first-time-user pilot without recording participant results in this preparation packet.",
+  "source_contract": {
+    "first_session_packet": "docs/evaluation/phase13.1-first-session-review-packet.json: \"status\": \"complete-technical-packet-pending-human-review\"",
+    "feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"status\": \"ready-for-authorized-human-pilot\"",
+    "evaluation_protocol": "docs/evaluation/phase10.2-evaluation-protocol.json: \"status\": \"ready-for-human-evaluation\"",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md: explicit consent",
+    "supported_campaigns": "docs/guides/reproducible-distribution.md: The live GUI supports `competitive-regional-v1`, `stabilization-v1`, and",
+    "difficulties": "src/model/campaign.rs: pub enum Difficulty",
+    "accommodations": "docs/evaluation/phase13.2-pilot-preparation-boundary.json: \"accessibility\": \"Reduced motion, Large text, written equivalents, mute/reduced notifications, keyboard, skip/review, and extra-time accommodations are written.\"",
+    "feedback_fields": "docs/evaluation/phase13.2-pilot-feedback-instrument.json: \"forbidden\": ["
+  },
+  "intake_boundary": {
+    "participant_results_present": false,
+    "record_count": 0,
+    "participant_identity_collected": false,
+    "raw_media_collected": false,
+    "raw_transcripts_collected": false,
+    "private_game_state_collected": false,
+    "browser_location_collected": false,
+    "decision_status": "pending-human-evidence",
+    "go_no_go": null
+  },
+  "allowed_record_contract": {
+    "record_fields": [
+      "participant_category",
+      "campaign",
+      "seed",
+      "difficulty",
+      "consent",
+      "tasks",
+      "ratings",
+      "accommodations",
+      "finding_categories"
+    ],
+    "participant_categories": [
+      "project-owner-or-contributor",
+      "strategy-game-player",
+      "health-policy-or-management-expert",
+      "accessibility-oriented-reviewer",
+      "first-time-user"
+    ],
+    "campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "difficulties": ["easy", "normal", "hard", "expert"],
+    "consent_fields": {
+      "feedback": ["granted", "declined", "not-recorded"],
+      "screenshot": ["granted", "declined", "not-applicable", "not-recorded"],
+      "recording": ["granted", "declined", "not-applicable", "not-recorded"]
+    },
+    "task_ids": [
+      "pilot-start-to-resolution",
+      "pilot-settings-and-recovery",
+      "pilot-audio-choice",
+      "pilot-debrief-comprehension"
+    ],
+    "task_responses": ["completed", "skipped", "not-observed"],
+    "rating_dimensions": [
+      "first-session-clarity",
+      "consequence-comprehension",
+      "information-density",
+      "accessibility-friction",
+      "audio-usefulness",
+      "audio-fatigue",
+      "debrief-comprehension",
+      "trust-in-information-boundaries"
+    ],
+    "rating_values": [1, 2, 3, 4, 5, "not-observed"],
+    "accommodation_categories": [
+      "keyboard-navigation",
+      "large-text",
+      "reduced-motion",
+      "audio-off",
+      "cues-only",
+      "reduced-notifications",
+      "written-equivalent",
+      "skip-review",
+      "extra-time",
+      "no-accommodation-observed"
+    ],
+    "finding_categories": ["defect", "preference", "scope-expansion"],
+    "forbidden_fields": [
+      "names or contact details",
+      "health information or diagnoses",
+      "private game state or hidden rival actions",
+      "browser URLs or session IDs",
+      "screenshots, recordings, or raw transcripts without separate consent"
+    ]
+  },
+  "records": [],
+  "decision": {
+    "status": "pending-human-evidence",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This packet contains no participant results and does not perform a human evaluation.",
+    "The bounded record vocabulary does not establish comprehension, accessibility, educational effectiveness, audio usefulness, or classroom readiness.",
+    "Consent status is metadata only; names, contact details, raw media, raw transcripts, browser URLs, session IDs, and private game state remain prohibited.",
+    "Human review, revision decisions, expansion approval, legal/provenance clearance, and public-release approval remain separate authorization gates."
+  ],
+  "test_source": "tests/test_phase13_2_pilot_evidence_intake.py"
+}

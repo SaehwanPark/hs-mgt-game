@@ -475,3 +475,36 @@ evidence remains required before a support decision.
   — focused packet validation target.
 - Existing browser/device/technical-coverage and full Python/Rust tests remain
   authoritative.
+
+# Domain QA — Phase 13.2 pilot evidence-intake packet v0.13.90
+
+## Status
+
+`pass` for the technical intake boundary only. The packet is empty and
+pending human evidence; it does not claim participant comprehension,
+accessibility, educational usefulness, audio usefulness, or a go/no-go result.
+
+## Findings
+
+- The intake task, rating, participant-category, consent, and finding
+  vocabularies are source-bound to the existing evaluation protocol and pilot
+  instrument.
+- Record shape is intentionally narrow: anonymized categories and bounded
+  values are allowed, while identity, raw media/transcripts, browser/session
+  locations, and hidden game state are excluded.
+- The validator preserves the distinction between technical preparation and
+  authorized human evidence; zero records and all decision fields remain
+  explicit.
+
+## Required fixes
+
+None for this bounded preparation packet. Authorized human pilot evidence,
+revision decisions, expansion review, and public-release decisions remain
+required before closing the related roadmap gates.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_pilot_evidence_intake`
+  — focused packet and record-shape validation.
+- `python3 scripts/validate_pilot_evidence_intake.py` — empty pending intake
+  contract.

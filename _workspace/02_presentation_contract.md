@@ -4949,3 +4949,36 @@ human accessibility/usability, and release decisions remain separate gates.
 `tests/test_phase13_1_firefox_runtime_smoke_packet.py` must fail closed on
 probe-marker drift, exact observation drift, policy-promotion claims, missing
 Safari/WebKit blocker language, authority changes, or release promotion.
+
+# Presentation Contract — Pilot evidence-intake packet v0.13.90
+
+## Goal and authorization
+
+Prepare an empty, privacy-bounded intake surface for authorized first-time-user
+pilot evidence. This packet is an evaluation boundary, not a participant
+result or a new presentation/runtime feature.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| First-session tasks | `docs/evaluation/phase13.1-first-session-review-packet.json` | Preserve the source-defined first-session and recovery intent | Do not infer participant completion from technical tests |
+| Pilot response vocabulary | `docs/evaluation/phase13.2-pilot-feedback-instrument.json` | Bind task responses, ratings, consent, and finding categories | Do not collect names, raw notes, or unrestricted responses |
+| Evaluation groups | `docs/evaluation/phase10.2-evaluation-protocol.json` | Preserve the authorized participant category vocabulary | Do not identify or recruit a person in the repository |
+| Intake validator | `scripts/validate_pilot_evidence_intake.py` | Reject unsafe fields and premature decisions | Do not treat validator success as human evidence |
+
+## Accessibility, privacy, and authority
+
+The intake keeps presentation meaning tied to the existing written-equivalent,
+audio-off, reduced-motion, keyboard, Large text, skip/review, and recovery
+contracts. It permits only bounded categories and ratings; identity, raw
+media/transcripts, browser/session locations, and private or hidden state are
+excluded. It does not alter host authority, simulation state, presentation
+preferences, assets, audio, or release outputs.
+
+## Verification
+
+`tests/test_phase13_2_pilot_evidence_intake.py` must fail closed on source drift,
+unbounded record fields, unsafe identity/media/location/state fields, and
+non-pending human decision fields. Human evaluation, accessibility,
+educational, audio, revision, expansion, and release decisions remain open.
