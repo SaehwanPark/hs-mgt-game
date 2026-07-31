@@ -4088,6 +4088,26 @@ are completed. Human-review gates remain open.
   human review, device/browser certification, provenance/legal review, and
   public release remain open.
 
+### v0.13.70 current competitive coverage companion surface
+
+- `gui/app.mjs` now loads the existing host-owned competitive
+  `campaign-coverage-v1` envelope beside the normal competitive action rail on
+  start/load and after accepted monthly refreshes through a separate
+  `loadCompanion` lifecycle.
+- The companion preserves drafts, host validation, action controls,
+  history/replay/checkpoint behavior, and the read-only coverage decision
+  boundary. A failed optional read is written/recoverable and does not block or
+  fabricate a transition.
+- Focused and full technical validation pass; the sole medium-effort review
+  passed with no actionable findings. The PR/merge/cleanup loop remains.
+  Full-campaign visual/content quality,
+  structured first-time-user review, accessibility/educational review,
+  provenance/legal review, and public-release approval remain open.
+- This slice adds no route, schema, asset, audio file, simulation, or human
+  approval claim. Full-campaign visual/content quality, structured first-time
+  user review, accessibility/educational review, provenance/legal review, and
+  public-release approval remain open.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

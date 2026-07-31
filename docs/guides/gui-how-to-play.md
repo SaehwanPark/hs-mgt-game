@@ -23,6 +23,9 @@ The host also exposes `campaign-coverage-v1` for a typed competitive read of
 the current player-visible metrics, public signals, process summaries, action
 metadata, history, and terminal debrief. This read does not replace the
 competitive catalog/validation/submit sequence or reveal private rival state.
+In the normal competitive GUI it appears as a companion panel after
+start/load and accepted monthly refreshes; if that optional read is unavailable,
+the action rail remains usable.
 
 For a first session, start with the documented Normal/seed-42 defaults, then
 adjust presentation settings only if they reduce friction. These controls are

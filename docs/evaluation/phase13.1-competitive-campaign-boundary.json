@@ -11,6 +11,7 @@
     "competitive_catalog_ledger": "docs/evaluation/phase11.1-campaign-coverage-ledger.json: \"campaign\": \"competitive-regional-v1\"",
     "competitive_catalog_test": "tests/test_phase11_campaign_coverage.py: self.assertEqual(self.ledger[\"campaign\"], \"competitive-regional-v1\")",
     "campaign_coverage_scope": "src/mcp/session.rs: from_competitive",
+    "competitive_companion_scope": "gui/app.mjs: refreshCompetitiveCoverageCompanion",
     "campaign_gui_boundary_test": "tests/test_gui_campaign_coverage.py: def test_browser_preserves_host_authority_and_no_external_boundary_break(self):",
     "history_test": "tests/test_phase11_live_history.py: def test_live_history_read_does_not_expose_simulation_authority(self):",
     "replay_test": "tests/test_phase11_live_replay.py: def test_live_replay_read_does_not_expose_simulation_authority(self):",
@@ -68,6 +69,7 @@
     "browser_authority_boundary_is_preserved": true,
     "optional_audio_and_written_fallback_are_present": true,
     "competitive_campaign_coverage_envelope_is_host_bound": true,
+    "competitive_coverage_companion_preserves_action_rail": true,
     "full_campaign_visual_content_review": false,
     "human_campaign_comprehension_and_educational_review": false
   },

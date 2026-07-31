@@ -60,6 +60,7 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       "CAMPAIGN_COVERAGE_SCHEMA",
       "renderCampaignCoverage",
       "createCampaignCoverageClient",
+      "loadCompanion",
       "coverageCommand",
       "getCampaignCoverage",
       "campaign_coverage_adapter_error",
@@ -91,6 +92,7 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       "stabilization",
       "regional-affiliation",
       "canonical command path",
+      "companion panel",
     ):
       self.assertIn(marker, self.readme)
 

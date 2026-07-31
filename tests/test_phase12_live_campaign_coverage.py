@@ -21,6 +21,7 @@ EXPECTED_SOURCE_CONTRACT = {
   "host_adapter": ("gui/host-adapter.mjs", "getCampaignCoverage"),
   "launcher_campaign_set": ("gui/app.mjs", "SESSION_LAUNCH_CAMPAIGNS"),
   "campaign_fallback": ("gui/app.mjs", "loadCampaignCoverage"),
+  "competitive_companion_read": ("gui/app.mjs", "loadCompanion"),
   "campaign_renderer": ("gui/app.mjs", "renderCampaignCoverage"),
   "campaign_audio_projection": ("src/mcp/campaign_coverage.rs", "CampaignCoverageAudio"),
   "campaign_audio_client": ("gui/app.mjs", "campaignMusicStateId"),
@@ -58,6 +59,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
         "competitive_difficulty_and_action_path_remain_separate": True,
         "campaign_decisions_use_host_submit_turn": True,
         "competitive_coverage_is_a_typed_read_projection": True,
+        "competitive_coverage_is_a_normal_gui_companion_read": True,
         "existing_session_campaign_is_resolved_from_host": True,
         "rejected_campaign_decisions_do_not_advance_history": True,
         "campaign_audio_metadata_uses_existing_catalog_only": True,
@@ -84,6 +86,8 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       "SESSION_LAUNCH_CAMPAIGNS",
       "getCampaignCoverage",
       "loadCampaignCoverage",
+      "loadCompanion",
+      "refreshCompetitiveCoverageCompanion",
       "adapter.submitTurn(command)",
       "campaignMusicStateId",
       "campaignAudioCueIds",
@@ -91,6 +95,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       "competitive-regional-v1",
       "competitive_coverage_read_only",
       "Use the competitive action rail",
+      "action rail remains usable",
     ):
       self.assertIn(marker, app + adapter)
     for forbidden in (
@@ -231,6 +236,90 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       if (!result.ok) process.exit(2);
       if (calls.some(([kind, id]) => kind === "cue" && id === "event.affiliation-milestone")) process.exit(3);
       console.log(JSON.stringify({ calls }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
+  def test_competitive_companion_read_preserves_action_controls_and_is_read_only(self):
+    script = r'''
+      function makeNode(tagName = "div") {
+        return {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          className: "",
+          classList: { add() {}, toggle() {} },
+          hidden: false,
+          disabled: false,
+          value: "",
+          textContent: "",
+          append(...children) { this.children.push(...children); },
+          replaceChildren(...children) { this.children = children; },
+          addEventListener() {},
+          setAttribute(name, value) { this[name] = value; },
+          removeAttribute(name) { delete this[name]; },
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+          focus() {},
+          scrollIntoView() {},
+        };
+      }
+      globalThis.document = undefined;
+      globalThis.matchMedia = () => ({ matches: false });
+      const { createCampaignCoverageClient } = await import("./gui/app.mjs");
+      globalThis.document = { createElement: (tagName) => makeNode(tagName), documentElement: makeNode("html") };
+      const nodes = new Map();
+      const root = {
+        __hsMgtPresentationSettings: null,
+        documentElement: makeNode("html"),
+        querySelector(selector) {
+          if (!nodes.has(selector)) nodes.set(selector, makeNode());
+          return nodes.get(selector);
+        },
+        querySelectorAll() { return []; },
+        addEventListener() {},
+      };
+      const actionControls = root.querySelector("#validate-actions");
+      actionControls.disabled = false;
+      actionControls.hidden = false;
+      const envelope = {
+        schema_version: "campaign-coverage-v1",
+        campaign_role: "Competitive regional lead",
+        session: { session_id: "competitive-companion", campaign: "competitive-regional-v1", turn: 1, max_turns: 24, done: false },
+        stage: { label: "Month 1", detail: "Visible stage" },
+        briefing: [], metrics: [], actors: [], processes: [],
+        decisions: [{ label: "Hold", command_template: "hold", parameters: [], uncertainty: "Visible uncertainty", source: "catalog" }],
+        history: [], debrief: [], replay: { transition_count: 0, state_hash: "genesis" },
+        audio: { music_state_id: "competitive_escalation", audio_cue_ids: [] },
+      };
+      const calls = [];
+      const audio = {
+        state() { return { muted: false, reducedNotifications: false }; },
+        setMuted() {}, setReducedNotifications() {},
+        setMusicState(id) { calls.push(["music", id]); },
+        setMusicFromVisible() {}, setAmbienceFromVisible() {}, playCue() {},
+      };
+      const adapter = {
+        async getCampaignCoverage() { calls.push(["coverage"]); return envelope; },
+        async submitTurn() { calls.push(["submit"]); return { accepted: true }; },
+      };
+      const client = createCampaignCoverageClient({ adapter, root, audio });
+      const result = await client.loadCompanion("competitive-companion");
+      if (!result.ok) process.exit(1);
+      if (JSON.stringify(calls.filter(([kind]) => kind === "submit")) !== "[]") process.exit(2);
+      if (actionControls.disabled || actionControls.hidden) process.exit(3);
+      if (nodes.get("#campaign-coverage-panel").hidden) process.exit(4);
+      const decision = nodes.get("#campaign-decision-list").children[0];
+      const form = decision.children.find((child) => child.tagName === "FORM");
+      const button = form.children.find((child) => child.tagName === "BUTTON");
+      if (!button.disabled || button.textContent !== "Use the competitive action rail") process.exit(5);
+      console.log(JSON.stringify({ calls, action_controls_preserved: true, decision_read_only: true }));
     '''
     result = subprocess.run(
       ["node", "--input-type=module", "-e", script],

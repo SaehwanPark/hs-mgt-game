@@ -7160,6 +7160,34 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio competitive coverage companion surface (v0.13.70)
+
+Status: Complete for the bounded normal-GUI companion read; the sole review is
+approved, while PR/merge cleanup, full-campaign visual/content quality, human
+review, and release gates remain open.
+
+Done:
+
+- The target slice and source/authority contract are recorded in
+  `_workspace/148_implementation_plan_visual-audio-phase13-competitive-coverage-companion-v0.13.70.md`
+  and the current request/contract/QA/handoff records.
+- The existing competitive coverage envelope, route, renderer, and read-only
+  decision boundary are reused as the normal competitive companion panel.
+- `loadCompanion` refreshes the host read after normal competitive start/load
+  and accepted monthly refreshes without resetting the action rail; 366 Rust,
+  779 Python, Node, and repository checks pass.
+
+Not Yet Done:
+
+- Complete PR handoff/merge, branch cleanup, and final evidence synchronization
+  for this slice.
+
+Deferred / Non-Goals:
+
+- No new route/schema, simulation, action protocol, persistence, asset/audio
+  file, screenshot, human review, device certification, provenance/legal
+  approval, or public-release claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;

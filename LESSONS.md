@@ -1,5 +1,18 @@
 # Lessons Learned
 
+## Keep Read Companions Separate from Mutation Rails
+
+- Context: the competitive GUI already has a validated action rail, while the
+  shared campaign-coverage envelope is a richer typed read projection.
+- Risk: reusing the coverage campaign loader in a normal competitive session
+  would reset drafts and disable the action rail even though no command was
+  submitted.
+- Resolution: use a companion-only coverage read that renders the existing
+  envelope without changing action-client state; treat failures as optional
+  read errors and keep host submit authoritative.
+- Prevention: name and test read-only companion lifecycles separately from
+  campaign loaders that own controls, drafts, validation, or submission.
+
 ## Sanitize Shared Coverage History, Not Just Current Observation
 
 - Context: competitive campaign coverage reused a typed transition-summary

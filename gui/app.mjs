@@ -1206,6 +1206,21 @@ export function createCampaignCoverageClient({
   const audioClient = audio ?? createAudioClient({ root, recorder });
   const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
+  function applyCoverageEnvelope(envelope, onSubmit, clearExistingRecovery = true) {
+    const result = renderCampaignCoverage(envelope, root, onSubmit);
+    if (!result.ok) return result;
+    currentEnvelope = envelope;
+    if (clearExistingRecovery) clearRecovery(root);
+    renderOnboarding(envelope, root, recorder);
+    recordVisibleEnvelope(recorder, envelope);
+    const audioInput = campaignAudioInput(envelope);
+    const musicStateId = campaignMusicStateId(envelope);
+    if (musicStateId) audioClient.setMusicState(musicStateId, audioInput);
+    else audioClient.setMusicFromVisible(audioInput);
+    audioClient.setAmbienceFromVisible(audioInput);
+    return result;
+  }
+
   async function load(sessionId = adapter?.sessionId) {
     configureRecovery(root, () => load(sessionId), recorder);
     if (!adapter || typeof adapter.getCampaignCoverage !== "function") {
@@ -1215,9 +1230,8 @@ export function createCampaignCoverageClient({
     }
     try {
       const envelope = await adapter.getCampaignCoverage(sessionId);
-      const result = renderCampaignCoverage(
+      const result = applyCoverageEnvelope(
         envelope,
-        root,
         envelope?.session?.campaign === "competitive-regional-v1" ? null : submit,
       );
       if (!result.ok) {
@@ -1226,15 +1240,6 @@ export function createCampaignCoverageClient({
         showRecovery(root, "Campaign coverage could not be read. Retry the current host read when the adapter is available.");
         return result;
       }
-      currentEnvelope = envelope;
-      clearRecovery(root);
-      renderOnboarding(envelope, root, recorder);
-      recordVisibleEnvelope(recorder, envelope);
-      const audioInput = campaignAudioInput(envelope);
-      const musicStateId = campaignMusicStateId(envelope);
-      if (musicStateId) audioClient.setMusicState(musicStateId, audioInput);
-      else audioClient.setMusicFromVisible(audioInput);
-      audioClient.setAmbienceFromVisible(audioInput);
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
@@ -1242,6 +1247,30 @@ export function createCampaignCoverageClient({
       setPresentationState(root, `Campaign coverage adapter error: ${message}`);
       showRecovery(root, `Campaign coverage could not be read: ${message}`);
       return { ok: false, code: "campaign_coverage_adapter_error", message };
+    }
+  }
+
+  async function loadCompanion(sessionId = adapter?.sessionId) {
+    configureRecovery(root, () => loadCompanion(sessionId), recorder);
+    if (!adapter || typeof adapter.getCampaignCoverage !== "function") {
+      recordPlaytestFailure(recorder, "campaign_coverage_companion_missing", "Campaign coverage adapter is unavailable.");
+      showRecovery(root, "Competitive campaign context is unavailable; the action rail remains usable.");
+      return { ok: false, code: "campaign_coverage_companion_missing" };
+    }
+    try {
+      const envelope = await adapter.getCampaignCoverage(sessionId);
+      const result = applyCoverageEnvelope(envelope, null, false);
+      if (!result.ok) {
+        recordPlaytestFailure(recorder, "campaign_coverage_companion_schema", "Campaign coverage companion schema is unavailable.");
+        showRecovery(root, "Competitive campaign context could not be read; the action rail remains usable.");
+        return result;
+      }
+      return result;
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      recordPlaytestFailure(recorder, "campaign_coverage_companion_error", message);
+      showRecovery(root, `Competitive campaign context could not be read; the action rail remains usable: ${message}`);
+      return { ok: false, code: "campaign_coverage_companion_error", message };
     }
   }
 
@@ -1291,7 +1320,7 @@ export function createCampaignCoverageClient({
     }
   }
 
-  return { load, submit, audio: audioClient, settings, get envelope() { return currentEnvelope; } };
+  return { load, loadCompanion, submit, audio: audioClient, settings, get envelope() { return currentEnvelope; } };
 }
 
 export function renderRegionalWorld(envelope, root = document) {
@@ -2325,6 +2354,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let validation = null;
   let editingIndex = null;
   let sessionId = adapter?.sessionId;
+  let activeCampaign = adapter?.campaign ?? null;
   const sessionStore = createSessionIdStorage({ storage });
   const firstMonthFlow = createFirstMonthFlow({ root });
   const audioClient = createAudioClient({ root, recorder });
@@ -2349,6 +2379,21 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     }),
   });
   const settings = createPresentationSettings({ root, recorder, audio: audioClient });
+
+  async function refreshCompetitiveCoverageCompanion(requestedSessionId) {
+    if (activeCampaign !== "competitive-regional-v1" || typeof campaignCoverageClient.loadCompanion !== "function") {
+      return { ok: true, skipped: true };
+    }
+    const result = await campaignCoverageClient.loadCompanion(requestedSessionId);
+    if (!result.ok) {
+      recordPlaytestFailure(
+        recorder,
+        result.code ?? "campaign_coverage_companion_error",
+        result.message ?? "Competitive campaign context could not be refreshed.",
+      );
+    }
+    return result;
+  }
 
   function draftCommand() {
     return drafts.map((draft) => draft.command).join("; ");
@@ -2492,6 +2537,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
             }
           }
           await regionalWorldClient.load(sessionId);
+          await refreshCompetitiveCoverageCompanion(sessionId);
         }
       } catch (error) {
         renderEnvelope(response, root);
@@ -2572,6 +2618,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         // The campaign-specific fallback below preserves the existing error boundary.
       }
     }
+    activeCampaign = requestedCampaign;
     if (
       ["stabilization-v1", "regional-affiliation-v1"].includes(requestedCampaign)
       && typeof coverageAdapter?.getCampaignCoverage === "function"
@@ -2624,6 +2671,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
           }
         }
         await regionalWorldClient.load(requestedSessionId);
+        await refreshCompetitiveCoverageCompanion(requestedSessionId);
       }
       catalog = nextCatalog;
       renderActionCatalog(catalog, root, (spec, params, form) => {
@@ -2705,6 +2753,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       validation = null;
       editingIndex = null;
       sessionId = null;
+      activeCampaign = null;
       sessionStore.clear();
       adapter.activateSession?.(null);
       checkpointClient.setEnabled(false);
