@@ -5408,6 +5408,49 @@ before changing the first-session roadmap checkbox or expansion decision.
 markers, stage lists, tasks, recovery/accessibility checks, authority limits,
 release exclusion, and pending human-review status.
 
+# Presentation QA — Competitive campaign review packet v0.13.85
+
+## Status
+
+Pass for the bounded technical full-campaign review-packet contract. The
+packet is participant-ready but visual, accessibility, educational,
+classroom, audio-listening, expansion, and release review remain pending.
+
+## Reviewed Inputs and Authorization
+
+- Roadmap: `Competitive campaign coverage complete` remains unchecked.
+- Packet: `docs/evaluation/phase13.1-competitive-campaign-review-packet.json`.
+- Existing technical boundary, campaign ledger, corrected terminal raster
+  manifest/transcript, player-help, and pilot-preparation records.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.85 section.
+
+## Information and fallback findings
+
+- The packet mirrors the host-bound 24-month campaign, four player facility
+  groups, eleven capacity labels, and all nine named presentation surfaces.
+- Early/mid/terminal tasks distinguish visible observation, committed effect,
+  read-only review, terminal completion, optional audio, and recovery.
+- Source markers and terminal evidence are independently checked; no pixel or
+  comprehension result is inferred.
+
+## Authority, privacy, and provenance
+
+The packet introduces no transition path, participant data, asset, audio file,
+or release artifact. Private rival intent, resolved inputs, effect queues, and
+browser transition authority remain excluded.
+
+## Required fixes
+
+None for this bounded technical packet. Obtain authorized participant results
+before changing the campaign roadmap checkbox or expansion decision.
+
+## Verification evidence
+
+`tests/test_phase13_1_competitive_campaign_review_packet.py` checks exact
+source/ledger parity, terminal done/history/debrief/decision state, task and
+fallback coverage, release exclusion, authority/privacy limits, and pending
+human-review status.
+
 # Presentation QA — Corrected terminal raster state evidence v0.13.82
 
 ## Status

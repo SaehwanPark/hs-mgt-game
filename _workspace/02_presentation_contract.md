@@ -4767,3 +4767,45 @@ provenance/legal, and public-release decisions remain pending.
 `tests/test_phase13_1_first_session_review_packet.py` must fail closed on
 source/stage drift, forbidden browser-state markers, missing recovery or
 accommodation coverage, release promotion, or completed human-review fields.
+
+# Presentation Contract — Competitive campaign review packet v0.13.85
+
+## Goal and authorization
+
+Prepare a participant-ready technical review surface for the existing
+24-month `competitive-regional-v1` campaign. The packet covers early/mid/
+terminal facility and consequence inspection, host-owned history/replay/
+checkpoint/debrief review, and presentation fallbacks without changing the
+runtime or recording human experience.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Facility/capacity continuity | Host regional-world projection and 24-month regression | Compare early, middle, and terminal visible facility groups and labels | Do not infer pixel quality or private rival facilities from host-read counts |
+| Operational pressure and events | PlayerObservation-bound overlays, event cues, and music states | Trace visible pressure and committed consequence presentation | Do not infer hidden severity, intent, future outcomes, or causal certainty |
+| History/replay/checkpoint | Host history, replay, state hashes, and checkpoint continuation | Reconstruct visible continuity and distinguish review from mutation | Do not treat browser playback or checkpoint controls as simulation authority |
+| Terminal debrief | Corrected terminal raster/DOM transcript and host debrief | Review completion, written effects, optional audio, and disabled decisions | Do not treat a terminal filename or screenshot alone as completion proof |
+
+## Accessibility, recovery, and provenance
+
+Facility labels/fallbacks, written result/debrief text, audio-off/cues-only,
+reduced motion, Large text, keyboard, skip/review, and retry are named for
+human inspection. The packet creates no asset or audio file and keeps all
+evaluation artifacts outside the release manifest.
+
+## Authority and limits
+
+Rust remains authoritative for campaign transitions, actor-visible
+projections, history, replay metadata, checkpoint state, resolution, and
+debrief. The browser renders supplied projections and local presentation
+preferences without simulation authority. Human campaign, accessibility,
+educational, audio, legal, expansion, and public-release decisions remain
+pending.
+
+## Verification
+
+`tests/test_phase13_1_competitive_campaign_review_packet.py` must fail closed
+on source/ledger drift, terminal evidence drift, missing facility/capacity or
+fallback coverage, forbidden authority markers, release promotion, or
+completed human-review fields.

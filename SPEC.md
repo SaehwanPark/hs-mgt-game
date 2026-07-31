@@ -7447,6 +7447,28 @@ The target and actor-visible contract is recorded in
 `_workspace/02_presentation_contract.md`, and
 `_workspace/03_presentation_qa.md`.
 
+### Visual/audio competitive campaign review packet (v0.13.85)
+
+The Phase 13.1 packet makes the open competitive campaign review actionable
+without claiming participant results or expansion approval. It binds the
+host-owned 24-month `competitive-regional-v1` path to early/mid/terminal
+checkpoints, four player facility groups, eleven capacity labels, operational
+overlays, event cues, music, history, replay, checkpoint, terminal debrief,
+written fallbacks, optional audio, and recovery questions.
+
+The packet validator rejects source/ledger drift, terminal evidence drift,
+missing facility/capacity or fallback coverage, forbidden browser authority,
+release promotion, and human-review fields marked complete without results.
+The `Competitive campaign coverage complete` roadmap item remains unchecked,
+as do visual, accessibility, educational, audio, legal, expansion, and public-
+release decisions.
+
+The target and actor-visible contract is recorded in
+`_workspace/163_implementation_plan_visual-audio-phase13-competitive-campaign-review-packet-v0.13.85.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio first-session participant review packet (v0.13.84)
 
 The Phase 13.1 packet makes the open first-session workflow review actionable

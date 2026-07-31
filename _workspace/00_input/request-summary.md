@@ -3838,3 +3838,33 @@ recovery contracts without claiming participant results.
 Focused first-session packet and existing boundary tests; full Rust/Python and
 repository validation; exactly one medium-effort review; authorized PR/merge
 and temporary-branch cleanup.
+
+# Request Summary — Competitive campaign review packet v0.13.85
+
+## Authorized outcome
+
+Make the open Phase 13.1 `Competitive campaign coverage complete` review
+actionable from existing 24-month host continuity, facility, overlay, event,
+music, history, replay, checkpoint, terminal-raster, and debrief evidence.
+
+## Target slice
+
+- Bind early, middle, and terminal competitive checkpoints to participant
+  tasks and visible success observations.
+- Cover the four player facility groups, eleven capacity labels, current
+  consequence surfaces, host-owned review controls, written fallbacks, and
+  optional audio.
+- Add fail-closed source/ledger parity and pending-human expansion fields.
+
+## Non-goals
+
+- No runtime, simulation, route, browser-authority, persistence, asset,
+  audio-file, screenshot, participant-data, or release-asset change.
+- No pixel-quality, cross-browser/device, human accessibility/educational,
+  audio-listening, provenance/legal, expansion, or public-release conclusion.
+
+## Validation target
+
+Focused competitive packet and existing boundary tests; full Rust/Python and
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.

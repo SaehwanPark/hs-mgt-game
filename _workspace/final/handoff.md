@@ -2666,3 +2666,37 @@ complete shared-source/authority/recovery/accommodation contracts, adding the
 storage-limit recovery check, and verifying exact source markers for every
 accessibility/recovery check. The final recheck reported no actionable issues;
 no second reviewer was used.
+
+# Final Handoff — Competitive campaign review packet v0.13.85
+
+## Status
+
+The v0.13.85 participant-ready technical packet is implemented on the
+temporary feature branch. It binds the host-owned 24-month competitive path to
+early/mid/terminal inspection tasks, facility/capacity continuity, visible
+consequence surfaces, history/replay/checkpoint/debrief review, fallback
+checks, and explicit pending-human fields. The `Competitive campaign coverage
+complete` roadmap item remains unchecked.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-competitive-campaign-review-packet.json`.
+- Test: `tests/test_phase13_1_competitive_campaign_review_packet.py`.
+- Plan: `_workspace/163_implementation_plan_visual-audio-phase13-competitive-campaign-review-packet-v0.13.85.md`.
+
+## Limits
+
+No participant results, pixel-quality conclusion, accessibility or educational
+finding, audio-listening result, expansion decision, provenance/legal
+clearance, or public-release approval is recorded. No runtime, simulation,
+asset, audio, screenshot, browser-authority, or release artifact is introduced.
+
+## Review outcome
+
+Exactly one medium-effort code review was performed. The reviewer’s findings
+were fixed by binding complete terminal manifest/transcript fields and artifact
+hashes, adding source markers for every claimed presentation surface, executing
+the authoritative competitive completion/facility/checkpoint tests, and
+splitting accessibility/audio fallback checks into concrete implementation
+bindings. The final recheck reported no actionable issues; no second reviewer
+was used.

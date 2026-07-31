@@ -3769,6 +3769,12 @@ educational/accessibility gates remain open.
   fallbacks are source-bound; the shared `campaign-coverage-v1` envelope
   supports all three launchable campaigns. Full-campaign visual/content and
   human campaign review remain open.
+- [x] Current competitive full-campaign technical review packet prepared.
+  Evidence: `docs/evaluation/phase13.1-competitive-campaign-review-packet.json`
+  and `tests/test_phase13_1_competitive_campaign_review_packet.py`; the packet
+  binds host continuity, facility/capacity coverage, visible consequence
+  surfaces, replay/checkpoint/debrief review, and fallback questions while
+  leaving participant and expansion decisions pending human review.
 - [x] Settings documented. Evidence: `docs/guides/gui-how-to-play.md` and
   `docs/evaluation/phase13.1-player-help-boundary.json`; the existing settings
   panel, browser-local/session-local behavior, and presentation-only boundary
@@ -4419,6 +4425,23 @@ are completed. Human-review gates remain open.
   classroom evaluation; it does not record participants, close the
   `First-session workflow complete` or `Competitive campaign coverage
   complete` items, or authorize expansion or public release.
+
+### v0.13.85 competitive campaign review packet
+
+- `docs/evaluation/phase13.1-competitive-campaign-review-packet.json` is a
+  technical, participant-ready packet for the open `Competitive campaign
+  coverage complete` item. It binds the host-owned 24-month path, early/mid/
+  terminal inspection checkpoints, four player facility groups, eleven
+  capacity labels, operational overlays, event cues, music, history, replay,
+  checkpoint, terminal debrief, and written/audio fallbacks.
+- `tests/test_phase13_1_competitive_campaign_review_packet.py` fails closed on
+  exact source/ledger parity, terminal evidence, facility/capacity coverage,
+  authority/privacy/provenance limits, per-check source markers, release
+  promotion, and human-review fields marked complete without results.
+- This makes full-campaign competitive visual, accessibility, educational,
+  classroom, and audio review actionable; it does not record participants,
+  establish pixel quality, close the roadmap item, approve expansion, or
+  authorize public release.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
