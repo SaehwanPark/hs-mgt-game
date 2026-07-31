@@ -3931,6 +3931,40 @@ asset, security, and release tests; full Rust/Python and repository validation;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
 
+# Request Summary — Asset-provenance evidence-intake packet v0.13.92
+
+## Authorized outcome
+
+Make the open asset-provenance review item operationally ready for authorized
+review of the current visual/audio registries and seven unreleased portrait
+previews without approving or promoting any asset.
+
+## Target slice
+
+- Bind exact visual, audio, and portrait-preview inventory parity to the
+  canonical registries and generation sources.
+- Define a bounded record contract for provenance, identity/resemblance,
+  license, accessibility, technical, release-derivative, and registry gates.
+- Keep the intake empty and pending human provenance, legal/training-data,
+  accessibility, release, and public-approval evidence.
+
+## Non-goals
+
+- No model, revision, sampler, seed, license, human finding, legal conclusion,
+  identity judgment, release derivative, registry entry, or public approval is
+  invented or recorded.
+- No identity, contact details, private state, browser/session locations, raw
+  notes, screenshots, recordings, or unrestricted participant data is stored.
+- No asset registry, release manifest, runtime credit, GUI, audio, simulation,
+  or generated asset is changed.
+
+## Validation target
+
+Focused asset-provenance intake validator and source-parity tests; existing
+generation, asset, release, full Python/Rust, formatting/clippy, and
+documentation checks; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
 # Request Summary — Debrief visual evidence-intake packet v0.13.91
 
 ## Authorized outcome

@@ -7551,6 +7551,26 @@ The target and validator are recorded in
 `docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json`, and
 `scripts/validate_debrief_visual_evidence_intake.py`.
 
+### Visual/audio asset-provenance evidence-intake packet (v0.13.92)
+
+The Phase 13.1 packet makes the open `Complete asset provenance review` item
+actionable for authorized review of the current visual/audio registries and
+seven unreleased portrait previews. It derives exact inventory parity and
+review-gate vocabularies from the registries, generation workflow, portrait
+queue, and bounded pilot instrument while starting with zero records.
+
+The validator rejects unknown envelope or record fields, redirected sources,
+inventory drift, private or identity-bearing fields, gate vocabulary/status
+drift, boolean coercion, and premature approval or release claims. It records
+technical intake readiness only; provenance, identity/resemblance,
+license/training-data, accessibility, release-derivative, registry, legal,
+and public-release decisions remain pending.
+
+The target and validator are recorded in
+`_workspace/170_implementation_plan_visual-audio-phase13-1-asset-provenance-evidence-intake-v0.13.92.md`,
+`docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json`, and
+`scripts/validate_asset_provenance_evidence_intake.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
