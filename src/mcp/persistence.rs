@@ -347,6 +347,8 @@ fn validate_competitive_save(
       save.next_month, final_state.policy_calendar.month_index
     ));
   }
+  crate::competitive::regenerate_competitive_history(&save.history, ruleset, save.seed)
+    .map_err(|error| format!("invalid GUI competitive save: {}", error.message()))?;
   Ok(())
 }
 
@@ -440,6 +442,24 @@ mod tests {
     let month_error = validate_competitive_save(&month_mismatch, &ruleset)
       .expect_err("misdated aggregated actions must fail");
     assert!(month_error.contains("aggregated actions month"));
+  }
+
+  #[test]
+  fn tampered_competitive_effect_fails_replay_regeneration() {
+    let ruleset = default_competitive_ruleset();
+    let history = build_multi_month_resolution_history(Difficulty::Normal, 42, 2)
+      .expect("build competitive history");
+    let mut save = CompetitiveSessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      difficulty: Difficulty::Normal,
+      history,
+      next_month: 3,
+    };
+    save.history.transitions[1].effects[0].delta += 1;
+
+    let error = validate_competitive_save(&save, &ruleset).expect_err("tampered effect");
+    assert!(error.contains("replay transition mismatch"));
   }
 
   #[test]

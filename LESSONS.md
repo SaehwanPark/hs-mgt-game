@@ -3255,6 +3255,16 @@ fails. Do not call submission, regenerate a trace, or infer hidden state from a
 row; deterministic regeneration and human replay comprehension remain separate
 gates.
 
+## Phase 70: Regenerate replay from recorded explicit inputs at the host boundary (2026-07-30)
+
+When a competitive history stores the full `AggregatedMonthlyActions` for each
+month, the host can regenerate the deterministic transition without inventing
+a fresh AI decision or exposing core state to the browser. Compare the full
+transition—including month-start events, institution effects, consultant
+options, next state, and hash—before returning the existing visible replay
+projection, and reuse the same verifier for durable saves. Keep client playback
+local and treat fresh policy/AI search as a separate future gate.
+
 ## Phase 62: Keep AI metadata readiness separate from AI metadata completion (2026-07-29)
 
 An approved local model registry and a strict generation workflow can prove

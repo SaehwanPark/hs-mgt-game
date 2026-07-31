@@ -381,8 +381,9 @@ over those rows and show the selected command, optional visible observation,
 events/effects, and state hash. Failure preserves the current list and cursor;
 an empty replay disables movement with an explicit written state. Historical
 committed resolution review remains the separate host-read
-`getResolution(sessionId, turn)` path, and no replay regeneration is
-introduced.
+`getResolution(sessionId, turn)` path. The host verifies competitive history
+deterministically before returning the replay projection; the browser still
+does not regenerate or simulate replay data.
 
 When supplied, `saveSession(sessionId)` and `loadSession(sessionId)` return
 `schema_version: "competitive-save-v1"` with `saved`/`loaded` operation,

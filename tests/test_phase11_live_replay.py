@@ -28,6 +28,8 @@ class LiveReplayContinuityTests(unittest.TestCase):
       "REPLAY_SCHEMA_VERSION",
       "GetReplayRequest",
       "get_replay",
+      "regenerate_competitive_history",
+      "replay_verification_failed",
       '"/api/v1/sessions/{session_id}/replay"',
     ):
       self.assertIn(marker, self.server + self.mcp_server + self.session)

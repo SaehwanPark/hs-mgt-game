@@ -1,3 +1,50 @@
+# Request Summary — Host deterministic replay regeneration v0.13.67
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with the next explicit replay gate: make the
+existing host replay read regenerate and verify the competitive history from
+its immutable seed, genesis, and recorded monthly action batches before the
+visible replay projection is returned.
+
+## Target slice
+
+- Add a deterministic host/core regeneration path for recorded competitive
+  monthly actions, including month-start inputs, institution effects, next
+  state, events, attributed effects, consultant options, and state hash.
+- Verify the complete immutable history on the existing `get_replay` path and
+  reuse the same verifier for durable competitive checkpoint validation.
+- Fail closed on tampered prior state, actions, events/effects, next state, or
+  hash while preserving the existing visible error boundary and replay schema.
+- Keep the browser local playback rail unchanged; it receives only the
+  host-verified visible summaries already authorized by `competitive-replay-v1`.
+
+## Non-goals
+
+- No new route, schema, browser simulation, client-side regeneration, true-state
+  or resolved-input field, private rationale, fresh AI decision search, save
+  format, autosave, asset/audio change, screenshot, human review, or public
+  release claim.
+- Do not expose regenerated core transitions or hidden inputs through the
+  replay envelope; the host returns the same actor-visible summary projection.
+
+## Validation target
+
+Focused Rust regeneration/history tamper and session/persistence tests; existing
+GUI replay transport and browser authority tests; full Rust/Python suites;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/loading/visual-audio
+checks, diff checks, exactly one medium-effort review, and the authorized
+PR/merge loop.
+
+## Evidence limits
+
+This slice proves technical deterministic regeneration of a current competitive
+history from recorded explicit action batches and host-side rejection of
+tampered traces. It does not prove fresh AI-policy regeneration, human replay
+comprehension, full-campaign presentation, accessibility, calibration,
+provenance/legal approval, device certification, or public release.
+
 # Request Summary — Host-envelope replay playback rail v0.13.66
 
 ## Authorized outcome

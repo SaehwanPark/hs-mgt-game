@@ -27,6 +27,29 @@ pub fn resolve_competitive_month(
   prior_aggregated: Option<&AggregatedMonthlyActions>,
 ) -> Result<CompetitiveTransition, CompetitiveValidationError> {
   let consultant_options = observe_for_human(prior, prior_aggregated).consultant_options;
+  let (working, pre_events) = prepare_competitive_month(prior, seed);
+
+  let batches = build_monthly_batches_with_ai(&working, ruleset, seed, human_batch)?;
+  let aggregated = resolve_monthly_batches(&working, &batches, ruleset)?;
+  finish_competitive_month(working, ruleset, aggregated, consultant_options, pre_events)
+}
+
+pub fn regenerate_competitive_month(
+  prior: &CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+  seed: u64,
+  aggregated: AggregatedMonthlyActions,
+  prior_aggregated: Option<&AggregatedMonthlyActions>,
+) -> Result<CompetitiveTransition, CompetitiveValidationError> {
+  let consultant_options = observe_for_human(prior, prior_aggregated).consultant_options;
+  let (working, pre_events) = prepare_competitive_month(prior, seed);
+  finish_competitive_month(working, ruleset, aggregated, consultant_options, pre_events)
+}
+
+fn prepare_competitive_month(
+  prior: &CompetitiveWorldState,
+  seed: u64,
+) -> (CompetitiveWorldState, Vec<crate::model::Event>) {
   let mut working = prior.clone();
   let inputs = resolve_competitive_inputs(
     seed,
@@ -35,13 +58,24 @@ pub fn resolve_competitive_month(
   );
   let mut pre_events = Vec::new();
   apply_month_start_tick(&mut working, &inputs, &mut pre_events);
+  (working, pre_events)
+}
 
-  let batches = build_monthly_batches_with_ai(&working, ruleset, seed, human_batch)?;
-  let aggregated = resolve_monthly_batches(&working, &batches, ruleset)?;
-  let mut transition = transition_competitive(&working, aggregated.clone(), ruleset)?;
+fn finish_competitive_month(
+  working: CompetitiveWorldState,
+  ruleset: &CompetitiveRuleset,
+  aggregated: AggregatedMonthlyActions,
+  consultant_options: Vec<crate::model::ConsultantOption>,
+  pre_events: Vec<crate::model::Event>,
+) -> Result<CompetitiveTransition, CompetitiveValidationError> {
+  let mut transition = transition_competitive(&working, aggregated, ruleset)?;
 
   let mut institution_events = Vec::new();
-  apply_institution_phase(&mut transition.next, &aggregated, &mut institution_events);
+  apply_institution_phase(
+    &mut transition.next,
+    &transition.aggregated,
+    &mut institution_events,
+  );
 
   transition
     .events

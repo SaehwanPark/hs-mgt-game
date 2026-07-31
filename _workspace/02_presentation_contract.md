@@ -1,3 +1,74 @@
+# Presentation Contract — Host deterministic replay regeneration v0.13.67
+
+## Goal and Authorization
+
+Keep the existing `competitive-replay-v1` visible replay projection backed by a
+host/core deterministic regeneration check over immutable recorded action
+batches. This is a host integrity boundary, not a new browser presentation or
+simulation surface.
+
+## Player Questions and Consequences
+
+The player question remains: “Can I trust that the committed replay rows and
+hashes are internally reproducible?” A valid replay continues to show the same
+local written playback rail. A failed verification produces a recoverable host
+error rather than a partial or client-authored trace.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Regeneration inputs | Host-owned seed, genesis, and recorded `AggregatedMonthlyActions` in the immutable competitive history | Used only during host verification before a replay projection is returned | Do not expose resolved stochastic inputs or infer private actor rationale |
+| Regenerated transition | Deterministic core month-start, transition, and institution phases | Compared to the recorded transition; mismatch fails closed | Do not return regenerated true state or let the browser calculate it |
+| Visible replay rows | Existing `ReplayEnvelope` summary projection after successful verification | Same schema, fields, and missingness as the current replay read | Do not add a regenerated trace, hidden field, or new outcome |
+| Failure status | Existing MCP/GUI host error boundary | Malformed or tampered history is rejected in written form | Do not silently fall back to unverified rows |
+
+## Visual, Motion, and Audio Semantics
+
+No new visual, motion, or audio signal is introduced. The existing local replay
+cursor, written row detail, reduced-motion behavior, muted-audio behavior, and
+empty/failure fallbacks remain unchanged. Verification status is represented by
+the existing host read success/error boundary, not by a severity cue.
+
+## Accessibility and Fallbacks
+
+The existing native replay controls and written summaries remain the complete
+understanding path. A failed host verification must be written and recoverable;
+it must not leave a stale successful projection presented as current. Missing
+or empty history retains the existing explicit empty state. No color, motion,
+audio, asset, browser storage, or client computation is required.
+
+## Authority, History, and Replay Boundaries
+
+The host/core owns deterministic regeneration, immutable history, seeds, action
+batches, state hashes, and rejection of tampered traces. The browser continues
+to validate and locally play back only the visible `ReplayEnvelope`; it never
+regenerates, serializes, mutates, submits, or accesses true state. Regeneration
+uses recorded explicit action batches, not a fresh AI decision search.
+
+## Asset Provenance and Release Requirements
+
+No asset, audio file, registry entry, provenance record, or release binary is
+added or modified by this slice.
+
+## Verification and Evidence Limits
+
+Focused Rust tests must prove exact regeneration of an untampered history and
+fail-closed rejection of tampered action, event/effect, state, and hash data.
+Session replay and durable-save tests must exercise the same verifier. Existing
+browser/transport tests must show no route/schema or authority expansion. These
+checks do not establish human accessibility, educational replay comprehension,
+calibration, device/browser certification, provenance/legal approval, or public
+release readiness.
+
+## Non-Goals and Open Questions
+
+- No new route/schema, browser simulation, client-side replay regeneration,
+  true-state/resolved-input field, private rationale, fresh AI search, save
+  format, autosave, asset/audio behavior, screenshot, or human review.
+- Open: fresh policy/AI decision regeneration, full-campaign replay placement,
+  screenshots, human evaluation, and public-release approval.
+
 # Presentation Contract — Host-envelope replay playback rail v0.13.66
 
 ## Goal and Authorization
