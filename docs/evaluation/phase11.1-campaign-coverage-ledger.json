@@ -438,6 +438,22 @@
       "No instructor-only, counterfactual, durable persistence, replay-regeneration, human-usability, or learning claim is made."
     ]
   },
+  "debrief_visual_review_packet": {
+    "status": "complete-technical-packet-pending-human-review",
+    "manifest_source": "docs/evaluation/phase13.2-debrief-visual-review-packet.json",
+    "test_source": "tests/test_phase13_2_debrief_visual_review_packet.py",
+    "cases": [
+      "competitive-regional-v1 terminal debrief",
+      "stabilization-v1 terminal debrief",
+      "regional-affiliation-v1 terminal debrief"
+    ],
+    "technical_boundary": [
+      "Each case maps to the corrected terminal raster and same-run host-projection transcript.",
+      "Each case names written-equivalent, optional-audio, accessibility/fallback, causality, replay, and provenance questions.",
+      "Human visual, accessibility, educational, classroom, audio-listening, and public-release decisions remain explicitly pending."
+    ],
+    "capture_artifact": "evaluation-only-technical-review-packet-not-release-asset"
+  },
   "checkpoint_view_coverage": {
     "status": "complete-in-memory-host",
     "schema": "competitive-save-v1",

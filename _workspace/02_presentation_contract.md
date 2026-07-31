@@ -4599,6 +4599,31 @@ technical capture correction, not pixel-quality, human visual/accessibility,
 educational, audio-listening, cross-browser/device, provenance/legal, or
 public-release evidence.
 
+# Presentation Contract — Debrief visual review packet v0.13.83
+
+## Goal and authorization
+
+Prepare a technical handoff for authorized human review of the three corrected
+terminal debrief cases. The packet is not a human evaluation result and does
+not promote the artifacts to release assets.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Review question | Prohibited inference |
+| --- | --- | --- | --- |
+| Terminal status/history | Corrected raster plus same-run host transcript | Can the reviewer distinguish completed history from retrospective debrief? | Do not infer completion from filenames alone |
+| Debrief/effects | Host campaign projection and written renderer | Can the reviewer reconstruct visible consequences without hidden state? | Do not infer causal certainty or optimality |
+| Audio and fallbacks | Existing audio client, written text, motion/text settings | Does decision-relevant meaning survive mute, audio-off, reduced motion, and scaling? | Do not treat sound or motion as required meaning |
+| Review decision | Existing pilot feedback instrument | Are findings recorded as defect, preference, or scope expansion? | Do not fabricate participant results |
+
+## Verification and evidence limits
+
+The packet validator must fail closed on case drift, artifact/hash drift,
+missing source markers, hidden-state or inferred-causality claims, release
+promotion, or human-review fields marked complete without results. The broader
+human visual, accessibility, educational/classroom, audio-listening,
+provenance/legal, and public-release gates remain open.
+
 ## Non-goals and open questions
 
 - No new route/schema, simulation, stochastic input, browser authority,

@@ -3777,3 +3777,34 @@ The corrected files prove only that the existing host-backed GUI was captured
 after completed campaign state and that the recorded bytes match the manifest.
 They do not close the separate human visual, educational, audio, device,
 provenance, legal, or release gates.
+
+# Request Summary — Debrief visual review packet v0.13.83
+
+## Authorized outcome
+
+Make the remaining Phase 13.2 debrief visual review actionable from the
+corrected terminal evidence without claiming that human evaluation has
+occurred.
+
+## Target slice
+
+- Map exactly three terminal debrief cases to the corrected rasters and
+  same-run host-projection transcript.
+- Record source-bound questions for information hierarchy, written equivalents,
+  optional audio, accessibility fallbacks, causal language, replay, and
+  provenance.
+- Add fail-closed packet validation and keep all human-review and release
+  decisions pending.
+
+## Non-goals
+
+- No human visual, accessibility, educational, classroom, audio-listening,
+  legal, provenance, or public-release claim.
+- No route, schema, simulation, browser-authority, asset, audio-file, or
+  release-asset change.
+
+## Validation target
+
+Focused packet and debrief-boundary tests; full Rust/Python/repository
+validation; exactly one medium-effort review; authorized PR/merge and
+temporary-branch cleanup.

@@ -2300,7 +2300,8 @@ replay continuity, performance,
 full-campaign raster goldens, and human visual quality gates remain open. A
 bounded six-state local-browser inspection record is now tracked in v0.13.80,
 and persisted technical 1024×768 raster evidence is tracked and its terminal
-state correction is recorded in v0.13.82; the persisted rasters remain
+state correction is recorded in v0.13.82 and a technical debrief review packet
+is recorded in v0.13.83; the persisted rasters remain
 evaluation-only and do not close pixel-quality,
 human-review, cross-browser/device, provenance/legal, or public-release gates.
 
@@ -4382,6 +4383,20 @@ are completed. Human-review gates remain open.
   accessibility, educational/classroom, audio-listening, cross-browser/device,
   provenance/legal, and public-release reviews remain open.
 
+### v0.13.83 debrief visual review packet
+
+- `docs/evaluation/phase13.2-debrief-visual-review-packet.json` maps the three
+  corrected terminal debrief cases to their raster artifacts, same-run
+  host-projection transcript, written equivalents, optional-audio behavior,
+  accessibility/fallback checks, causality/replay boundaries, and structured
+  review questions.
+- `tests/test_phase13_2_debrief_visual_review_packet.py` fails closed on case
+  drift, artifact/hash drift, hidden-state or inferred-causality claims,
+  release promotion, or human-review fields marked complete without results.
+- This makes the remaining human visual, accessibility, educational,
+  classroom, and audio-listening review actionable; it does not close the
+  `Debrief visuals reviewed` item or authorize public release.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -4450,6 +4465,13 @@ are completed. Human-review gates remain open.
   `docs/evaluation/phase11.1-campaign-raster/`, and
   `src/mcp/campaign_coverage.rs`; this is a source-bound technical correction
   only. The broader human debrief visual review remains open.
+- [x] Current technical debrief visual review packet prepared. Evidence:
+  `docs/evaluation/phase13.2-debrief-visual-review-packet.json`,
+  `tests/test_phase13_2_debrief_visual_review_packet.py`, and the
+  `debrief_visual_review_packet` ledger entry; the packet maps all three
+  corrected terminal cases to host-projection, written-equivalent,
+  accessibility/fallback, causality, replay, and provenance questions while
+  leaving authorized human review pending.
 - [x] Classroom hardware assumptions documented. Evidence:
   `docs/guides/phase10.2-structured-evaluation.md` and
   `docs/evaluation/phase13.2-pilot-preparation-boundary.json`; loopback host,

@@ -1,0 +1,153 @@
+{
+  "schema_version": "phase13.2-debrief-visual-review-packet-v1",
+  "status": "complete-technical-packet-pending-human-review",
+  "roadmap_item": "Debrief visuals reviewed",
+  "purpose": "Make authorized human visual, accessibility, educational, classroom, and audio-listening review of the terminal debrief surface actionable without recording human results.",
+  "review_boundary": {
+    "technical_packet_complete": true,
+    "human_visual_review_complete": false,
+    "human_accessibility_review_complete": false,
+    "educational_and_classroom_review_complete": false,
+    "audio_listening_review_complete": false,
+    "public_release_approval": false
+  },
+  "shared_sources": {
+    "raster_manifest": "docs/evaluation/phase11.1-full-campaign-raster-evidence.json",
+    "capture_transcript": "docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json",
+    "technical_debrief_boundary": "docs/evaluation/phase13.2-debrief-visual-boundary.json",
+    "human_feedback_instrument": "docs/evaluation/phase13.2-pilot-feedback-instrument.json",
+    "facilitator_guide": "docs/guides/phase10.2-structured-evaluation.md",
+    "renderer": "gui/app.mjs: renderCampaignCoverage(envelope, root = document, onSubmit = null)",
+    "audio": "gui/audio.mjs: createAudioClient",
+    "desktop_surface": "gui/index.html: campaign-debrief-list and campaign-history-list",
+    "host_projection": "src/mcp/campaign_coverage.rs: from_stabilization/from_affiliation/from_competitive",
+    "terminal_tests": "src/mcp/session.rs: campaign_coverage_terminal_*"
+  },
+  "cases": [
+    {
+      "id": "competitive-terminal-debrief",
+      "campaign": "competitive-regional-v1",
+      "terminal_turn": "24/24",
+      "raster_artifact": "docs/evaluation/phase11.1-campaign-raster/competitive-regional-v1-terminal-1024x768.jpg",
+      "transcript_campaign": "competitive-regional-v1",
+      "host_visible_sections": [
+        "committed campaign history",
+        "campaign debrief",
+        "host-shaped decision"
+      ],
+      "technical_assertions": {
+        "session_done": true,
+        "history_count": 24,
+        "debrief_non_empty": true,
+        "placeholder_debrief": false,
+        "campaign_decision_controls": 0,
+        "written_equivalent": true,
+        "optional_audio": true,
+        "replay_state_remains_host_owned": true,
+        "actor_visible_only": true
+      }
+    },
+    {
+      "id": "stabilization-terminal-debrief",
+      "campaign": "stabilization-v1",
+      "terminal_turn": "5/5",
+      "raster_artifact": "docs/evaluation/phase11.1-campaign-raster/stabilization-v1-terminal-1024x768.jpg",
+      "transcript_campaign": "stabilization-v1",
+      "host_visible_sections": [
+        "committed campaign history",
+        "campaign debrief",
+        "host-shaped decision"
+      ],
+      "technical_assertions": {
+        "session_done": true,
+        "history_count": 5,
+        "debrief_non_empty": true,
+        "placeholder_debrief": false,
+        "campaign_decision_controls": 0,
+        "written_equivalent": true,
+        "optional_audio": true,
+        "replay_state_remains_host_owned": true,
+        "actor_visible_only": true
+      }
+    },
+    {
+      "id": "regional-affiliation-terminal-debrief",
+      "campaign": "regional-affiliation-v1",
+      "terminal_turn": "6/6",
+      "raster_artifact": "docs/evaluation/phase11.1-campaign-raster/regional-affiliation-v1-terminal-1024x768.jpg",
+      "transcript_campaign": "regional-affiliation-v1",
+      "host_visible_sections": [
+        "committed campaign history",
+        "campaign debrief",
+        "host-shaped decision"
+      ],
+      "technical_assertions": {
+        "session_done": true,
+        "history_count": 6,
+        "debrief_non_empty": true,
+        "placeholder_debrief": false,
+        "campaign_decision_controls": 0,
+        "written_equivalent": true,
+        "optional_audio": true,
+        "replay_state_remains_host_owned": true,
+        "actor_visible_only": true
+      }
+    }
+  ],
+  "review_questions": [
+    "Can a reviewer distinguish committed campaign history from the retrospective debrief without relying on color, motion, or audio?",
+    "Can a reviewer reconstruct the visible consequence sequence from written history, debrief, and direct effects without inferring hidden state or causal certainty?",
+    "Can a reviewer locate the current stage, terminal status, and absence of further decision controls at the planned 1024x768 baseline?",
+    "Do Large text, reduced motion, keyboard navigation, recovery guidance, audio-off, mute, and cues-only preserve decision-relevant meaning?",
+    "Are actor-visible observations, uncertainty, written fallbacks, and provenance boundaries understandable without exposing private or instructor-only state?"
+  ],
+  "accessibility_and_fallback_checks": [
+    {
+      "id": "written-equivalent",
+      "source": "gui/index.html: campaign-history-list, campaign-debrief-list, debrief-list",
+      "status": "technical-source-bound; human comprehension pending"
+    },
+    {
+      "id": "audio-off-and-mute",
+      "source": "gui/audio.mjs: optional audio state and mute fallback",
+      "status": "technical-source-bound; listening review pending"
+    },
+    {
+      "id": "reduced-motion",
+      "source": "gui/app.mjs: presentation settings and reduced-motion behavior",
+      "status": "technical-source-bound; lived accessibility review pending"
+    },
+    {
+      "id": "large-text-and-keyboard",
+      "source": "docs/guides/phase10.2-structured-evaluation.md: accommodation guidance",
+      "status": "protocol-ready; human interaction review pending"
+    },
+    {
+      "id": "recovery",
+      "source": "docs/evaluation/phase13.2-pilot-preparation-boundary.json: recovery and stop guidance",
+      "status": "protocol-ready; human recovery review pending"
+    }
+  ],
+  "causality_and_replay_boundary": {
+    "committed_effects_only": true,
+    "no_hidden_state_inference": true,
+    "no_causal_certainty": true,
+    "history_is_immutable": true,
+    "browser_has_no_transition_authority": true,
+    "source": "docs/evaluation/phase13.2-debrief-visual-boundary.json"
+  },
+  "human_review_record": {
+    "status": "pending-authorized-human-review",
+    "participant_results_present": false,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "decision": null,
+    "go_no_go": null
+  },
+  "limits": [
+    "This packet makes the remaining human review actionable; it does not perform or represent human evaluation.",
+    "No pixel-quality, usability, learning, classroom, audio-listening, legal, provenance, or policy-validity score is inferred.",
+    "The three rasters and transcript remain evaluation-only and are not release assets."
+  ],
+  "test_source": "tests/test_phase13_2_debrief_visual_review_packet.py"
+}

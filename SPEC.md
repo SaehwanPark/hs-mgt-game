@@ -7425,6 +7425,28 @@ Deferred / Non-Goals:
 - No screenshot runner, PNG/JPEG artifact, screenshot hash, route/schema,
   simulation rule, browser authority, asset/audio file, or approval claim.
 
+### Visual/audio debrief visual review packet (v0.13.83)
+
+The Phase 13.2 packet maps the corrected competitive, stabilization, and
+regional-affiliation terminal debrief cases to their persisted raster artifacts
+and same-run host-projection transcript. It records source-bound review
+questions for information hierarchy, committed effects, written equivalents,
+audio/motion/scaling/keyboard/recovery fallbacks, provenance, and replay
+immutability. The packet validator rejects artifact drift, hidden-state or
+inferred-causality claims, release promotion, and human-review fields marked
+complete without participant results.
+
+The packet is a technical handoff only. Human visual/accessibility,
+educational/classroom, audio-listening, provenance/legal, and public-release
+decisions remain pending and the `Debrief visuals reviewed` roadmap item stays
+unchecked.
+
+The target and actor-visible contract is recorded in
+`_workspace/161_implementation_plan_visual-audio-phase13-debrief-visual-review-packet-v0.13.83.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio corrected terminal raster state evidence (v0.13.82)
 
 The Phase 11.1 terminal-raster correction recaptures the three terminal

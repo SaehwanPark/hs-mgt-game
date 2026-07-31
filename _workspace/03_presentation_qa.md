@@ -5306,6 +5306,65 @@ The focused raster-evidence and campaign-coverage tests pass. Full repository
 validation, exactly one medium-effort code review, PR handoff, merge, and
 temporary-branch cleanup remain for this slice.
 
+# Presentation QA — Debrief visual review packet v0.13.83
+
+## Status
+
+Pass for the bounded technical review-packet contract. Exactly three corrected
+terminal debrief cases are mapped to host-projection transcript and raster
+evidence with explicit questions and limits. Human visual, accessibility,
+educational/classroom, audio-listening, provenance/legal, and public-release
+review remains pending.
+
+## Reviewed Inputs and Authorization
+
+- Roadmap: Phase 13.2 `Debrief visuals reviewed` remains unchecked.
+- Packet: `docs/evaluation/phase13.2-debrief-visual-review-packet.json`.
+- Corrected evidence: `docs/evaluation/phase11.1-full-campaign-raster-evidence.json`
+  and `docs/evaluation/phase11.1-full-campaign-terminal-capture-transcript.json`.
+- Contract: `_workspace/02_presentation_contract.md`, v0.13.83 section.
+- Human protocol: `docs/evaluation/phase13.2-pilot-feedback-instrument.json`
+  and `docs/guides/phase10.2-structured-evaluation.md`.
+
+## Information and Causality Findings
+
+- Each case preserves host-supplied history, debrief, written effects, and no
+  campaign decision controls after completion.
+- Review questions explicitly separate committed effects from inference and
+  preserve actor-visible and replay boundaries.
+
+## Accessibility and Fallback Findings
+
+- Written-equivalent, audio-off/mute, reduced-motion, large-text/keyboard, and
+  recovery checks are named for human inspection; no lived result is recorded.
+
+## Provenance and Rights Findings
+
+- The packet creates no asset or audio file and keeps the corrected evidence
+  evaluation-only; provenance/legal approval remains open.
+
+## Authority and Replay Findings
+
+- The host remains authoritative for session state, history, replay, debrief,
+  effects, and audio metadata; the packet cannot create a transition.
+
+## Required Fixes
+
+- None for this bounded technical packet. Obtain authorized human review before
+  changing the roadmap human-review checkbox.
+
+## Residual Risks and Evidence Limits
+
+- Technical packet readiness does not establish visual quality, comprehension,
+  accessibility, learning, classroom usefulness, audio usefulness, or policy
+  validity.
+
+## Verification Evidence
+
+- `tests/test_phase13_2_debrief_visual_review_packet.py` and the existing
+  debrief-boundary test pass for exact cases, artifacts, transcript bindings,
+  source markers, fallbacks, causality, replay, and pending human status.
+
 # Presentation QA — Corrected terminal raster state evidence v0.13.82
 
 ## Status
