@@ -7425,6 +7425,35 @@ Deferred / Non-Goals:
 - No screenshot runner, PNG/JPEG artifact, screenshot hash, route/schema,
   simulation rule, browser authority, asset/audio file, or approval claim.
 
+### Visual/audio persisted full-campaign raster evidence (v0.13.81)
+
+The Phase 11.1 persisted raster slice records one active and one terminal
+local-browser capture for each launchable campaign in
+`docs/evaluation/phase11.1-campaign-raster/`. The six JPEGs are normalized to
+an explicit 1024×768 evaluation canvas, retain native capture dimensions, and
+are checked by
+`tests/test_phase11_full_campaign_raster_evidence.py` against
+`docs/evaluation/phase11.1-full-campaign-raster-evidence.json` for path,
+MIME type, byte size, SHA-256, JPEG dimensions, host campaign/turn identity,
+source routes, and the non-release boundary.
+
+The pre-padding capture dimensions, raw byte sizes, and raw SHA-256 values are
+retained in `docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json`
+and checked against the normalized manifest records.
+
+The padding rule accounts for browser content-area scrollbars and is recorded
+as capture metadata; it is not a pixel-quality claim. These files are
+technical evaluation evidence, are excluded from the asset registry and
+release manifest, and do not establish raster-golden quality, cross-browser or
+device coverage, human accessibility or educational usefulness, provenance or
+legal approval, audio listening quality, or public release.
+
+The target and actor-visible contract is recorded in
+`_workspace/159_implementation_plan_visual-audio-phase11-persisted-campaign-raster-evidence-v0.13.81.md`,
+`_workspace/00_input/request-summary.md`,
+`_workspace/02_presentation_contract.md`, and
+`_workspace/03_presentation_qa.md`.
+
 ### Visual/audio full-campaign coverage renderer continuity (v0.13.78)
 
 Status: Implementation, full automated validation, and the sole medium-effort

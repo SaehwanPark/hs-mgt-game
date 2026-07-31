@@ -1,0 +1,227 @@
+{
+  "schema_version": "phase11.1-persisted-campaign-raster-evidence-v1",
+  "status": "complete-technical-persisted-raster-evidence",
+  "campaigns": [
+    "competitive-regional-v1",
+    "stabilization-v1",
+    "regional-affiliation-v1"
+  ],
+  "viewport": {
+    "width": 1024,
+    "height": 768,
+    "device_scale_factor": 1
+  },
+  "artifact_directory": "docs/evaluation/phase11.1-campaign-raster",
+  "native_capture_metadata": "docs/evaluation/phase11.1-full-campaign-raster-capture-metadata.json",
+  "capture_method": "Codex in-app browser screenshot bytes captured from the existing loopback GUI, then padded to the requested evaluation canvas to account for browser content-area scrollbars",
+  "canvas_rule": {
+    "output_mime_type": "image/jpeg",
+    "padding_color": "#F1F5F4",
+    "padding_direction": "right-and-bottom-only",
+    "native_capture_sizes": {
+      "competitive-regional-v1": {
+        "width": 1004,
+        "height": 753
+      },
+      "stabilization-v1": {
+        "width": 1009,
+        "height": 757
+      },
+      "regional-affiliation-v1": {
+        "width": 1004,
+        "height": 753
+      }
+    }
+  },
+  "release_eligible": false,
+  "not_release_asset": true,
+  "state_records": [
+    {
+      "campaign": "competitive-regional-v1",
+      "state": "active",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/competitive-regional-v1-active-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 108989,
+      "sha256": "cb688ea179b323824a5572734947eb5b7bdc0cabb7757a3e2a3c644ebcc2d3dd",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "competitive-regional-v1",
+        "turn": "1/24",
+        "stage": "Competitive campaign active: visible briefing, market signals, and first-month decision"
+      },
+      "observed_content": [
+        "Shared campaign coverage briefing and visible metrics",
+        "Host-shaped decision rail with source and written-equivalent text",
+        "Optional audio controls with written results retained"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1004,
+        "height": 753
+      }
+    },
+    {
+      "campaign": "competitive-regional-v1",
+      "state": "terminal",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/competitive-regional-v1-terminal-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 77224,
+      "sha256": "f1abdf6db682d66c561561442a6d05d88a00bd03e5e3d4b39b6d7f581e3f94fa",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "competitive-regional-v1",
+        "turn": "24/24",
+        "stage": "Competitive campaign complete: review the committed strategic tradeoffs in the host terminal debrief"
+      },
+      "observed_content": [
+        "Twenty-four committed history and replay rows",
+        "Host-authored competitive campaign debrief",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1004,
+        "height": 753
+      }
+    },
+    {
+      "campaign": "stabilization-v1",
+      "state": "active",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/stabilization-v1-active-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 111122,
+      "sha256": "b9801f1b8e92f66e96b2dca779b82c47a8cb208fe97e92cafc9734e877c6e1ab",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "stabilization-v1",
+        "turn": "1/5",
+        "stage": "Stabilization tutorial active: visible stage briefing and host-shaped decision"
+      },
+      "observed_content": [
+        "Tutorial-oriented campaign coverage stage briefing",
+        "Host-shaped stage decision with written equivalent",
+        "Optional audio controls with written results retained"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1009,
+        "height": 757
+      }
+    },
+    {
+      "campaign": "stabilization-v1",
+      "state": "terminal",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/stabilization-v1-terminal-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 114739,
+      "sha256": "1a7a553cc73ee2ba38877a243440d62aa7a3254dbcb82a827200a27e989ea65a",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "stabilization-v1",
+        "turn": "5/5",
+        "stage": "Stabilization tutorial complete: review the committed stage history and host debrief"
+      },
+      "observed_content": [
+        "Five committed stabilization stage rows",
+        "Host-authored stabilization educational debrief text",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1009,
+        "height": 757
+      }
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "state": "active",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/regional-affiliation-v1-active-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 116052,
+      "sha256": "cba51e31f394fd04203683454434e1ed59ab2e7101377ebb2d48796485201327",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "regional-affiliation-v1",
+        "turn": "1/6",
+        "stage": "Regional affiliation active: partner-condition briefing and host-shaped institutional decision"
+      },
+      "observed_content": [
+        "Partner condition and institutional-stage campaign coverage briefing",
+        "Host-shaped affiliation decision with source text",
+        "Optional audio controls with written results retained"
+      ],
+      "terminal_debrief": false,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1004,
+        "height": 753
+      }
+    },
+    {
+      "campaign": "regional-affiliation-v1",
+      "state": "terminal",
+      "artifact": "docs/evaluation/phase11.1-campaign-raster/regional-affiliation-v1-terminal-1024x768.jpg",
+      "mime_type": "image/jpeg",
+      "byte_size": 100145,
+      "sha256": "4fd1552140a5c3cc42a87a63b45e2ec30e0290f8fe92304bac759f3b2e2a276b",
+      "width": 1024,
+      "height": 768,
+      "host_state": {
+        "campaign": "regional-affiliation-v1",
+        "turn": "6/6",
+        "stage": "Regional affiliation complete: review committed stage history and host debrief"
+      },
+      "observed_content": [
+        "Six committed regional-affiliation stage rows",
+        "Host-authored regional-affiliation debrief text",
+        "Terminal written fallback with optional audio metadata"
+      ],
+      "terminal_debrief": true,
+      "written_equivalent": true,
+      "optional_audio": true,
+      "inspection_status": "persisted-local-browser-raster",
+      "native_capture_size": {
+        "width": 1004,
+        "height": 753
+      }
+    }
+  ],
+  "route": {
+    "schema": "campaign-coverage-v1",
+    "source": "src/gui_server.rs: existing loopback campaign-coverage route",
+    "adapter_source": "gui/host-adapter.mjs: campaign coverage adapter",
+    "renderer_source": "gui/app.mjs: shared campaign coverage renderer",
+    "surface_source": "gui/index.html: desktop and campaign coverage regions"
+  },
+  "authority_boundary": [
+    "The browser reads the existing host projection and does not simulate transitions.",
+    "Screenshot state is not included in commands, outcomes, history, hashes, or replay.",
+    "The raster records only actor-visible campaign coverage, written results, and optional audio controls; it does not expose private or hidden simulation state."
+  ],
+  "limits": [
+    "The artifacts are technical evaluation evidence, not production UI snapshots or release assets.",
+    "Persisting six local-browser rasters does not establish pixel-level visual quality, human visual or accessibility quality, educational usefulness, or audio listening quality.",
+    "No cross-browser or device matrix, performance benchmark, provenance/legal approval, or public-release approval is claimed.",
+    "The canvas padding records the browser content-area normalization and does not claim that the source page occupied every output pixel."
+  ],
+  "test_source": "tests/test_phase11_full_campaign_raster_evidence.py"
+}

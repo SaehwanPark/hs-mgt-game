@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.81] - 2026-07-31
+
+- Persisted one active and one terminal 1024×768 local-browser raster record
+  for competitive, stabilization, and regional-affiliation campaigns under
+  the evaluation-only Phase 11.1 evidence boundary.
+- Added byte-size, SHA-256, JPEG-dimension, route-source, and non-release
+  validators for the exact six-state raster matrix.
+- Kept pixel-level quality, cross-browser/device capture, human review,
+  provenance/legal approval, and public-release gates open.
+
 ## [0.13.80] - 2026-07-31
 
 - Recorded six bounded local-browser screenshot inspections for active and

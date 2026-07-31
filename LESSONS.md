@@ -3441,6 +3441,19 @@ separate gates.
 - Prevention: keep host, renderer, and route continuity as separate evidence
   gates; passing one boundary must not stand in for the others.
 
+# Persisted Browser Rasters Need Native-Size Provenance
+
+- Context: the in-app browser screenshot API returned content-area JPEGs
+  smaller than the requested outer viewport when scrollbars were present.
+- Risk: labeling those bytes as 1024×768 artifacts would make the manifest
+  dimension claim drift from the file and hide the capture-area difference.
+- Resolution: normalize each evaluation-only frame to a 1024×768 canvas with
+  right-and-bottom padding, record the native campaign-specific dimensions,
+  and validate both native metadata and final JPEG dimensions/hash.
+- Prevention: treat output canvas size, native capture size, and pixel-quality
+  review as separate facts; never promote padded evidence to a release asset
+  or visual-quality approval without an explicit review contract.
+
 # Keep Browser Screenshot Inspection Separate From Raster Release Evidence
 
 - Context: the live loopback GUI can be inspected at the documented baseline,

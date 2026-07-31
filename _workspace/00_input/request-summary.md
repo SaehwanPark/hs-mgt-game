@@ -3701,3 +3701,40 @@ This proves only that the existing loopback GUI and shared campaign panel were
 inspected at the six bounded states. It does not establish persisted raster
 goldens, cross-browser/device certification, pixel-level visual quality, lived
 accessibility, educational usefulness, or public-release readiness.
+
+# Request Summary — Persisted full-campaign raster evidence v0.13.81
+
+## Authorized outcome
+
+Continue the visual/audio roadmap with a bounded, evaluation-only raster record
+for the existing six-state full-campaign browser surface.
+
+## Target slice
+
+- Persist one active and one terminal local-browser JPEG for competitive,
+  stabilization, and regional affiliation at a 1024×768 output canvas.
+- Record native capture dimensions, padding metadata, byte size, SHA-256,
+  host campaign/turn identity, written equivalents, optional audio, terminal
+  debrief status, and source routes.
+- Add a fail-closed validator and ledger entry while keeping the files outside
+  the asset registry and release manifest.
+
+## Non-goals
+
+- No runtime, schema, simulation, stochastic input, browser authority, route,
+  asset, audio-file, screenshot-runner, or release-asset change.
+- No pixel-level quality, cross-browser/device, human accessibility or
+  educational, provenance/legal, audio listening, or public-release claim.
+
+## Validation target
+
+Focused raster-evidence and campaign-coverage tests; full Rust/Python/
+repository validation; exactly one medium-effort review; authorized PR/merge
+and temporary-branch cleanup.
+
+## Evidence limits
+
+The six files prove only that the existing loopback GUI was captured at the
+specified campaign states and that their recorded bytes match the manifest.
+The explicit canvas padding handles browser scrollbars and is not a visual
+quality result; human and release gates remain open.
