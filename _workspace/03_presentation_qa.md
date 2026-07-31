@@ -1,3 +1,48 @@
+# Presentation QA — Competitive campaign-coverage envelope v0.13.69
+
+## Status
+
+Implementation and focused validation pass. The sole medium-effort review found
+a Medium private-rival history/debrief leakage; competitive coverage history is
+now sanitized to public-action summaries with no effects, and terminal reads
+use a player-safe debrief without instructor-only rival details. The same
+reviewer re-reviewed the amended implementation and approved it with no
+actionable issues. Campaign-specific visual/audio quality and human evaluation
+remain open.
+
+## Required pass conditions
+
+- Active and terminal competitive sessions return the existing coverage schema
+  with visible player metrics, public signals, process summaries, canonical
+  decisions, history/replay metadata, debrief, and audio metadata.
+- Reads do not mutate history and the envelope contains no true-state,
+  resolved-input, private-rival event/effect, effect-queue, or browser-authority
+  fields; competitive history uses only public-action summaries and terminal
+  debrief omits instructor-only rival details.
+- Competitive GUI mutation remains catalogued, host-validated, and submitted
+  through the existing action path; coverage-only competitive controls are
+  disabled.
+- Focused tests, full repository gates, and one medium-effort code review pass.
+
+## Current validation
+
+- 366 Rust tests, 778 Python tests, formatting, Clippy, release metadata,
+  documentation links, asset/security/generation/credits, device proxy,
+  offline, browser compatibility, audio packaging, raster scope, loading
+  policy, and visual/audio audit checks pass.
+- The competitive active/terminal coverage tests verify 24-month stage
+  metadata, canonical seven-action mapping, host debrief, visible-only fields,
+  no-mutation reads, loopback transport, and disabled coverage-only decision
+  controls, plus private-rival history/debrief redaction regressions. Exactly
+  one medium-effort code review was completed with no actionable issues.
+
+## Evidence limits
+
+Automated checks establish technical source-bound projection and authority
+boundary only. They cannot approve human accessibility, visual/audio quality,
+educational comprehension, device/browser behavior, provenance/legal status,
+or public release.
+
 # Presentation QA — Host autosave after committed GUI decisions v0.13.68
 
 ## Status
@@ -4790,3 +4835,29 @@ None for this bounded technical presentation pass.
 - Formatting, Clippy, release metadata, documentation links, asset registry/
   release/security/generation, device proxy, offline, browser compatibility,
   visual/audio contract, credits, and diff checks passed.
+# Presentation QA — Competitive campaign-coverage envelope v0.13.69
+
+## Status
+
+Implementation and focused validation pass. The review boundary is the typed competitive
+coverage projection and loopback read integration; campaign-specific visual or
+audio quality and human evaluation remain open.
+
+## Required pass conditions
+
+- Active competitive sessions return the existing coverage schema with visible
+  player metrics, public signals, canonical decisions, history, replay metadata,
+  and audio metadata.
+- Terminal competitive sessions return debrief lines and no further decisions.
+- Reads do not mutate history and the envelope contains no true-state,
+  resolved-input, effect-queue, or browser-authority fields.
+- Competitive GUI mutation remains catalogued, host-validated, and submitted
+  through the existing action path.
+- Focused tests, full repository gates, and one medium-effort code review pass.
+
+## Evidence limits
+
+Automated checks establish technical source-bound projection and authority
+preservation only. They cannot approve human accessibility, visual/audio
+quality, educational comprehension, device/browser behavior, provenance/legal
+status, or public release.

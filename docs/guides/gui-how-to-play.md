@@ -19,6 +19,11 @@ the stabilization and regional-affiliation campaigns use the typed
 `campaign-coverage-v1` panel for host-shaped decisions. Custom scenarios still
 use `cargo run`.
 
+The host also exposes `campaign-coverage-v1` for a typed competitive read of
+the current player-visible metrics, public signals, process summaries, action
+metadata, history, and terminal debrief. This read does not replace the
+competitive catalog/validation/submit sequence or reveal private rival state.
+
 For a first session, start with the documented Normal/seed-42 defaults, then
 adjust presentation settings only if they reduce friction. These controls are
 local browser presentation preferences; they do not change commands, host

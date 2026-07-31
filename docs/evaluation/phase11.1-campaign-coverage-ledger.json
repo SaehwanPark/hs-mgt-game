@@ -470,6 +470,34 @@
       "The existing Rust persistence/session and GUI transport tests remain the host checkpoint verification boundary for all three campaign artifacts."
     ]
   },
+  "campaign_coverage_read_coverage": {
+    "status": "complete-host-typed-coverage-read-for-all-launchable-campaigns",
+    "schema": "campaign-coverage-v1",
+    "host_source": "src/mcp/campaign_coverage.rs: from_stabilization + from_competitive + from_affiliation",
+    "session_source": "src/mcp/session.rs: get_campaign_coverage",
+    "route_source": "src/gui_server.rs: /api/v1/sessions/{session_id}/campaign-coverage",
+    "adapter_source": "gui/host-adapter.mjs: getCampaignCoverage",
+    "browser_source": "gui/app.mjs: renderCampaignCoverage",
+    "supported_campaigns": [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1"
+    ],
+    "continuity_behavior": [
+      "The host returns actor-visible competitive metrics, public market/policy signals, process/status summaries, canonical action metadata, sanitized public-action history/replay metadata, player-safe terminal debrief, and audio metadata without advancing history.",
+      "Competitive decisions are sourced from competitive-actions-v1; competitive mutation remains on the existing action-catalog, validation, and submit path.",
+      "Terminal competitive coverage reports the 24-month completion state and no further decisions."
+    ],
+    "boundary": "The host owns competitive observation, true state, history, replay, checkpoint, debrief, and mutation; the browser receives the typed coverage projection and does not receive private rival fields, resolved inputs, effect queues, or transition authority.",
+    "limits": [
+      "This is a typed technical coverage read, not full-campaign facility placement/use coverage or campaign-specific visual/audio quality approval.",
+      "The coverage read does not replace the competitive validated action rail and does not establish screenshots, human review, device/browser certification, provenance/legal approval, or public release."
+    ],
+    "evidence": [
+      "Rust session tests cover active and terminal competitive coverage, decision/catalog mapping, actor-visible exclusions, debrief, and no-mutation behavior.",
+      "Phase 12 and Phase 13.1 contract tests cover the loopback route, all three supported campaign IDs, and the unchanged competitive mutation boundary."
+    ]
+  },
   "replay_view_coverage": {
     "status": "complete-live-host-projection-local-playback-and-host-regeneration",
     "schema": "competitive-replay-v1",
@@ -488,7 +516,7 @@
     ],
     "row_contract": ["turn", "state_hash"],
     "continuity_behavior": [
-      "Host returns immutable visible transition summaries without entering a new transition.",
+      "Host returns immutable visible campaign summaries, using public-action history for competitive coverage, without entering a new transition.",
       "Replay metadata aligns seed, transition count, latest state hash, and visible rows.",
       "Browser renders the projection through the existing text-first history surface.",
       "Previous/next/play/pause move a local written cursor over visible rows without submitting or regenerating a transition.",

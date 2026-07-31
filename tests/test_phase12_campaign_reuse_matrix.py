@@ -16,7 +16,7 @@ class Phase12CampaignReuseMatrixTests(unittest.TestCase):
     matrix = self.matrix
     self.assertEqual(matrix["schema_version"], "campaign-presentation-reuse-v1")
     self.assertEqual(matrix["status"], "complete-current-reuse-matrix")
-    self.assertEqual(matrix["campaigns"], ["stabilization-v1", "regional-affiliation-v1"])
+    self.assertEqual(matrix["campaigns"], ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"])
     decisions = {
       "current-contract-eligible",
       "current-contract-eligible-but-not-direct-mapping",

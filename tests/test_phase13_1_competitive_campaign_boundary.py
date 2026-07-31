@@ -35,7 +35,7 @@ EXPECTED_SOURCE_CONTRACT = {
   ),
   "campaign_coverage_scope": (
     "src/mcp/session.rs",
-    "campaign coverage currently supports stabilization-v1 and regional-affiliation-v1 only",
+    "from_competitive",
   ),
   "campaign_gui_boundary_test": (
     "tests/test_gui_campaign_coverage.py",
@@ -94,7 +94,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
         "render the current competitive actor-visible board, facility, overlay, event-cue, music, history, replay, checkpoint, and terminal-debrief surfaces",
         "retain host-owned history, replay metadata, checkpoint state, resolution, and terminal debrief",
         "use written fallbacks and recoverable read errors when optional GUI capability is unavailable",
-        "keep the shared campaign-coverage envelope explicitly limited to stabilization-v1 and regional-affiliation-v1",
+        "serve competitive-regional-v1 through the host-owned campaign-coverage-v1 typed read while keeping competitive mutations on the existing action-catalog and validation path",
       ],
     )
     self.assertEqual(
@@ -115,6 +115,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
           "terminal debrief",
         ],
         "shared_campaign_coverage_envelope_support": [
+          "competitive-regional-v1",
           "stabilization-v1",
           "regional-affiliation-v1",
         ],
@@ -145,7 +146,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
         "history_replay_checkpoint_and_debrief_are_host_bound": True,
         "browser_authority_boundary_is_preserved": True,
         "optional_audio_and_written_fallback_are_present": True,
-        "competitive_campaign_coverage_envelope_is_not_claimed": True,
+        "competitive_campaign_coverage_envelope_is_host_bound": True,
         "full_campaign_visual_content_review": False,
         "human_campaign_comprehension_and_educational_review": False,
       },
@@ -189,7 +190,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
       "assert!(current.done);",
       "assert_eq!(current.turn, 24);",
       "assert_eq!(history.transition_count, 24);",
-      "GameSession::Competitive(_) => Err(",
+      "from_competitive(",
     ):
       self.assertIn(marker, session)
     for marker in (

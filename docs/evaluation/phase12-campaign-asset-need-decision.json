@@ -8,6 +8,19 @@
     "fallback_test": "tests/test_asset_fallback.py: facilityPresentationFor"
   },
   "campaigns": {
+    "competitive-regional-v1": {
+      "current_surface": "Typed player-visible metrics, public market/policy signals, process summaries, canonical action metadata, immutable history/replay, terminal debrief, and optional audio through the shared campaign contract.",
+      "asset_need_decision": "none-required-by-current-typed-read-contract",
+      "existing_reuse_boundary": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary"],
+      "fallback_descriptor": "generic-facility",
+      "fallback_source": "gui/facility-components.mjs: generic-facility",
+      "written_equivalent": "Current player-visible coverage, action metadata, history, replay, and debrief fields remain text-complete without a new map or facility illustration in this read-only contract.",
+      "reopen_triggers": [
+        "Competitive facility placement or use becomes necessary to explain a visible decision or consequence.",
+        "Campaign-specific geography becomes actor-visible.",
+        "A map or facility view becomes necessary to explain a competitive causal chain."
+      ]
+    },
     "stabilization-v1": {
       "current_surface": "Abstract executive briefing, visible metrics, actor/process/decision rows, immutable history/replay, and debrief text.",
       "asset_need_decision": "none-required-by-current-abstract-contract",
@@ -42,8 +55,8 @@
     "No instructor-only true-state view, counterfactual, distributional visualization, persistence, or public-release claim is made."
   ],
   "evidence": [
-    "Both current campaign surfaces are represented by the typed campaign-coverage inventory.",
-    "Both campaigns have an explicit current need decision, fallback descriptor, written equivalent, and reopen triggers.",
+    "All three current campaign surfaces are represented by the typed campaign-coverage inventory.",
+    "All three campaigns have an explicit current need decision, fallback descriptor, written equivalent, and reopen triggers.",
     "The decision is consistent with the existing reusable-asset matrix and generic-facility fallback test."
   ],
   "test_source": "tests/test_phase12_campaign_asset_need_decision.py"

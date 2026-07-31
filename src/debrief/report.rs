@@ -400,6 +400,85 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
   lines
 }
 
+pub fn competitive_player_debrief(history: &CompetitiveHistory) -> Vec<String> {
+  let final_state = history.final_state();
+  let mut lines = vec![
+    format!(
+      "Competitive preview completed {} committed month(s).",
+      history.transitions.len()
+    ),
+    format!(
+      "Final state hash: {}",
+      history
+        .transitions
+        .last()
+        .map(|transition| transition.state_hash.as_str())
+        .unwrap_or("none")
+    ),
+    format!(
+      "Final calendar: Year {}, Month {}.",
+      final_state.policy_calendar.year, final_state.policy_calendar.month_in_year
+    ),
+  ];
+
+  let Some(human_system) = history.genesis.human_system() else {
+    lines
+      .push("Final player tradeoff metrics unavailable: no human system at genesis.".to_string());
+    return lines;
+  };
+  let human_system_id = human_system.system_id;
+  lines.extend(competitive_final_tradeoff_lines(
+    &history.genesis,
+    final_state,
+  ));
+  lines.extend(access_follow_through_notes(history, human_system_id));
+
+  for (idx, transition) in history.transitions.iter().enumerate() {
+    lines.push(format!("--- Month {} ---", idx + 1));
+    if let Some(human_batch) = transition.aggregated.batch_for_system(human_system_id) {
+      let commands = human_batch
+        .commands
+        .iter()
+        .map(format_command_debrief)
+        .collect::<Vec<_>>();
+      lines.push(format!(
+        "Player: {}",
+        if commands.is_empty() {
+          "none".to_string()
+        } else {
+          commands.join("; ")
+        }
+      ));
+    }
+    if let Some(operating_result) = competitive_operating_result_line(transition, human_system_id) {
+      lines.push(operating_result);
+    }
+    if !transition.consultant_options.is_empty() {
+      let options = transition
+        .consultant_options
+        .iter()
+        .map(|option| format!("{} — {}", option.label, option.title))
+        .collect::<Vec<_>>()
+        .join("; ");
+      lines.push(format!("Consultant options shown: {options}"));
+      lines.push(
+        "Advisory comparison: the available options are recorded for discussion; none is marked correct."
+          .to_string(),
+      );
+    }
+  }
+
+  lines.extend([
+    "Competitive rival details remain limited to the public and observed signals available during play.".to_string(),
+    "Recruitment lesson: nurse, physician, and admin hiring spends cash immediately, resolves after role-specific delays, and can lower workforce trust while added capacity is pending.".to_string(),
+    "Capital project lesson: EHR Epic/Cerner, Tower, and Clinic Network projects consume Action Points and cash immediately, draw cash monthly over their duration (9 to 12 months), and are limited to a maximum of 2 concurrent projects.".to_string(),
+    "Access pledge lesson: public access commitments build legitimacy, but durable access improvement depends on operational follow-through such as capacity investment, staffing, monitoring, or payer posture while preserving enough cash runway.".to_string(),
+    "Decision quality and outcome quality remain separate: review the information available before each player command rather than treating an unfavorable realization as proof that the decision was poor.".to_string(),
+  ]);
+
+  lines
+}
+
 pub fn competitive_instructor_summary(history: &CompetitiveHistory) -> Vec<String> {
   let mut lines = vec![
     "".to_string(),

@@ -3923,3 +3923,58 @@ device/browser certification, durable persistence, or educational benefit.
   simulation change, asset, audio change, or human review is included.
 - Open: durable file/cross-process recovery and full-campaign continuity require
   a separately designed host persistence slice.
+# Presentation Contract — Competitive campaign-coverage envelope v0.13.69
+
+## Goal and authorization
+
+Extend the existing host-owned `campaign-coverage-v1` projection to the
+competitive campaign while preserving the competitive action rail as the only
+mutation path.
+
+## Player questions and consequences
+
+The player question is: “What is visible about my current regional campaign,
+and which host-defined choices are available?” The panel may show current
+player metrics, public market/policy signals, delayed visible processes, and
+canonical action choices. It must not reveal private rival state or imply that
+the browser can resolve a decision.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Player metrics | `observe_for_human` plus human-system resources | Current host state; terminal state remains readable | Do not expose true rival metrics or resolved inputs |
+| Market/policy briefing | `PlayerObservation.market_bullets` and `policy_bullets` | Only signals currently reported to the player | Do not turn absence into “no activity” |
+| Rival actor signal | Generic public-signal summary from the observation | May be empty or partial because intelligence is lagged | Do not name private intent or forecast response |
+| Decisions | Existing `competitive_action_catalog` | Empty after terminal completion | Do not submit from the coverage projection without normal validation |
+| History/debrief/audio | Sanitized typed competitive coverage summaries built from the public-action log, `competitive_player_debrief`, and `campaign_audio` | History is append-only; debrief only when done | Do not expose private rival events/effects, instructor-only debrief sections, or synthesize causal certainty/future outcomes |
+
+## Visual, motion, and audio semantics
+
+Reuse the existing campaign-coverage renderer and host audio metadata. The
+competitive coverage read may select existing stable/pressure/debrief music and
+allowlisted event cues based only on visible text and transition summaries. No
+new asset or audio file is introduced.
+
+## Accessibility and fallbacks
+
+Keep written labels, source/equivalent fields, existing empty states, and
+recoverable adapter errors. If the coverage read is unavailable, the existing
+competitive action rail remains the supported path. Audio-off, reduced-motion,
+and browser-fallback behavior remain unchanged.
+
+When the shared renderer receives a competitive envelope, its decision controls
+are visibly disabled and direct submission is rejected; the player must use the
+competitive action catalog and host validation path.
+
+## Authority boundary
+
+Rust owns competitive transitions, validation, history, replay, checkpoint, and
+debrief. The browser receives an actor-visible coverage projection and keeps
+competitive submissions on the existing catalog/validation/submit sequence.
+
+## Asset provenance and release requirements
+
+No asset, audio file, registry entry, or release binary is added. Existing
+allowlisted audio IDs and written equivalents remain the only presentation
+outputs.

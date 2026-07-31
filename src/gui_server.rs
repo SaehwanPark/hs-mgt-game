@@ -18,7 +18,11 @@ use crate::mcp::{
 const DEFAULT_BIND: &str = "127.0.0.1:7878";
 const HOST_ADAPTER_MARKER: &str = "<!-- HS_MGT_GAME_HOST_ADAPTER -->";
 const GUI_HISTORY_CAMPAIGN: &str = "competitive-regional-v1";
-const GUI_CAMPAIGN_COVERAGE_CAMPAIGNS: [&str; 2] = ["stabilization-v1", "regional-affiliation-v1"];
+const GUI_CAMPAIGN_COVERAGE_CAMPAIGNS: [&str; 3] = [
+  "competitive-regional-v1",
+  "stabilization-v1",
+  "regional-affiliation-v1",
+];
 
 #[derive(Clone, Default)]
 struct GuiState {
@@ -1043,7 +1047,11 @@ mod tests {
   #[tokio::test]
   async fn live_transport_supports_campaign_coverage_campaigns() {
     let (address, server) = test_server().await;
-    for campaign in ["stabilization-v1", "regional-affiliation-v1"] {
+    for campaign in [
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1",
+    ] {
       let body = format!(r#"{{"campaign":"{campaign}","seed":42,"difficulty":null}}"#);
       let (status, body) = request(address, "POST", "/api/v1/sessions", Some(&body)).await;
       assert_eq!(status, 200, "{campaign}: {body}");
@@ -1061,7 +1069,9 @@ mod tests {
       let coverage: serde_json::Value = serde_json::from_str(&body).unwrap();
       assert_eq!(coverage["schema_version"], "campaign-coverage-v1");
       assert_eq!(coverage["session"]["campaign"], campaign);
-      let command = if campaign == "stabilization-v1" {
+      let command = if campaign == "competitive-regional-v1" {
+        "hold"
+      } else if campaign == "stabilization-v1" {
         "8 18 112"
       } else {
         "assess"

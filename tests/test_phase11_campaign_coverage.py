@@ -231,7 +231,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -583,6 +583,28 @@ console.log(JSON.stringify(resolved));
       "test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
     ):
       self.assertIn(boundary, checkpoint_test + self.app + self.server + self.mcp_server + self.session + json.dumps(coverage))
+
+  def test_campaign_coverage_read_covers_all_launchable_campaigns(self):
+    coverage = self.ledger["campaign_coverage_read_coverage"]
+    self.assertEqual(coverage["status"], "complete-host-typed-coverage-read-for-all-launchable-campaigns")
+    self.assertEqual(coverage["schema"], "campaign-coverage-v1")
+    self.assertEqual(
+      coverage["supported_campaigns"],
+      ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
+    )
+    for marker in (
+      "from_stabilization",
+      "from_competitive",
+      "from_affiliation",
+      "get_campaign_coverage",
+      "getCampaignCoverage",
+      "renderCampaignCoverage",
+      "campaign-coverage-v1",
+    ):
+      self.assertIn(marker, self.session + self.server + self.adapter + self.app + json.dumps(coverage))
+    for forbidden in FORBIDDEN_AUTHORITY_MARKERS:
+      self.assertNotIn(forbidden, self.app)
+    self.assertIn("competitive coverage", self.session)
 
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():

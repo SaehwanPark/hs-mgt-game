@@ -1,7 +1,7 @@
 {
   "schema_version": "campaign-presentation-reuse-v1",
   "status": "complete-current-reuse-matrix",
-  "campaigns": ["stabilization-v1", "regional-affiliation-v1"],
+  "campaigns": ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
   "source_contract": {
     "inventory": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
     "visual_catalog": "gui/visual-catalog.json: visual-catalog-v1",
@@ -72,6 +72,23 @@
     }
   ],
   "campaign_reuse": {
+    "competitive-regional-v1": {
+      "current_surface": "Competitive typed campaign coverage reuses shared identity, marker, status, fallback, and host-authored history/debrief presentation while keeping the validated action rail separate.",
+      "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],
+      "audio_reuse": {
+        "reuse_decision": "current-contract-eligible",
+        "catalog_sources": [
+          {
+            "path": "gui/audio-catalog.json",
+            "group": "entries",
+            "ids": ["competitive_escalation", "pressure", "stable_operations", "debrief", "ambience.regional-city-bed"]
+          }
+        ],
+        "visible_equivalent": "Written player-visible stage, signals, and debrief remain complete when optional audio is muted or unavailable."
+      },
+      "new_asset_need": "none-required-by-current-typed-read-contract",
+      "open_work": ["competitive action-rail integration review", "full-campaign facility placement/use", "competitive visual/audio quality review"]
+    },
     "stabilization-v1": {
       "current_surface": "Tutorial-oriented executive stabilization uses shared identity, marker, status, fallback, and host-authored debrief presentation.",
       "reused_surface_sets": ["identity-language", "semantic-markers", "status-language", "facility-fallback-boundary", "ui-feedback-cues"],

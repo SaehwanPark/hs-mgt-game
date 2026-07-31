@@ -1,12 +1,16 @@
 use crate::affiliation::observe_affiliation;
-use crate::debrief::{affiliation_debrief, educational_debrief};
+use crate::debrief::{affiliation_debrief, competitive_player_debrief, educational_debrief};
 use crate::inputs::resolve_inputs;
 use crate::model::{
-  AffiliationObservation, AffiliationRuleset, AffiliationStage, AffiliationWorldState, History,
-  Observation, Ruleset, WorldState,
+  AffiliationObservation, AffiliationRuleset, AffiliationStage, AffiliationWorldState,
+  CompetitiveHistory, CompetitiveWorldState, History, Observation, PlayerObservation, Ruleset,
+  WorldState,
 };
+use crate::sim::observe_for_human;
 use crate::sim::observe_for_player;
 
+use super::action::competitive_action_catalog;
+use super::presentation::ReadOnlyResources;
 use super::session::{TransitionSummary, affiliation_legal_commands, stabilization_legal_commands};
 
 pub const CAMPAIGN_COVERAGE_SCHEMA_VERSION: &str = "campaign-coverage-v1";
@@ -496,6 +500,340 @@ pub(crate) fn from_affiliation(
   }
 }
 
+pub(crate) fn from_competitive(
+  session_id: String,
+  seed: u64,
+  done: bool,
+  state: &CompetitiveWorldState,
+  prior_aggregated: Option<&crate::model::AggregatedMonthlyActions>,
+  history: &[TransitionSummary],
+  typed_history: &CompetitiveHistory,
+) -> CampaignCoverageEnvelope {
+  let observation = observe_for_human(state, prior_aggregated);
+  let player = state
+    .human_system()
+    .expect("competitive campaign coverage requires a human system");
+  let turn = if done { state.turn } else { state.turn + 1 };
+  let latest_hash = history.last().map(|entry| entry.state_hash.clone());
+  let mut briefings = vec![briefing(
+    "organization",
+    "Player system",
+    &format!(
+      "{} · {} runway",
+      observation.org_name,
+      observation.cash_runway_signal.label()
+    ),
+    "PlayerObservation.org_name/cash_runway_signal",
+  )];
+  briefings.extend(observation.market_bullets.iter().map(|detail| {
+    briefing(
+      "market",
+      "Market signal",
+      detail,
+      "PlayerObservation.market_bullets",
+    )
+  }));
+  briefings.extend(observation.policy_bullets.iter().map(|detail| {
+    briefing(
+      "policy",
+      "Policy signal",
+      detail,
+      "PlayerObservation.policy_bullets",
+    )
+  }));
+
+  let stage = CampaignCoverageStage {
+    id: format!("month-{turn}"),
+    label: if done {
+      "Competitive campaign complete".to_string()
+    } else {
+      format!("Competitive month {turn}")
+    },
+    detail: if done {
+      "Review the committed strategic tradeoffs in the host terminal debrief.".to_string()
+    } else {
+      "Choose from the canonical competitive action catalog; rival responses and delayed operating outcomes remain uncertain.".to_string()
+    },
+    source: "Competitive session turn and host completion state".to_string(),
+  };
+
+  let public_rival_signals = observation
+    .market_bullets
+    .iter()
+    .filter(|detail| detail.to_ascii_lowercase().contains("rival"))
+    .cloned()
+    .collect::<Vec<_>>();
+  let player_status = format!(
+    "access {}, quality {}, workforce {}, community {}",
+    observation.reported_access_index,
+    observation.reported_quality_index,
+    observation.workforce_trust_summary,
+    observation.community_trust_summary
+  );
+  let rival_detail = if public_rival_signals.is_empty() {
+    "Only public and lagged signals are available; private rival activity remains unobserved."
+      .to_string()
+  } else {
+    public_rival_signals.join(" ")
+  };
+  let policy_detail = if observation.policy_bullets.is_empty() {
+    "No current policy signal is reported in the player observation.".to_string()
+  } else {
+    observation.policy_bullets.join(" ")
+  };
+  let actors = vec![
+    actor(
+      "player-system",
+      &observation.org_name,
+      "Player institution",
+      &player_status,
+      "Allocates visible resources while regional institutions and other stakeholders respond.",
+      "PlayerObservation actor-visible fields",
+    ),
+    actor(
+      "regional-rivals",
+      "Regional rivals",
+      "Strategic institutions",
+      if public_rival_signals.is_empty() {
+        "no new public signal"
+      } else {
+        "public signals reported"
+      },
+      &rival_detail,
+      "PlayerObservation.market_bullets",
+    ),
+    actor(
+      "policy-institutions",
+      "Policy institutions",
+      "External stakeholders",
+      if observation.policy_bullets.is_empty() {
+        "no current policy signal"
+      } else {
+        "policy signals reported"
+      },
+      &policy_detail,
+      "PlayerObservation.policy_bullets",
+    ),
+  ];
+
+  let processes = competitive_processes(&observation);
+  let decisions = if done {
+    Vec::new()
+  } else {
+    competitive_decisions(
+      session_id.clone(),
+      turn,
+      ReadOnlyResources {
+        cash: player.resources.cash,
+        action_points: player.resources.ap_budget,
+        political_capital: player.resources.political_capital,
+      },
+    )
+  };
+  let audio = campaign_audio(
+    "competitive-regional-v1",
+    done,
+    &stage,
+    &briefings,
+    &actors,
+    &processes,
+    history,
+  );
+
+  CampaignCoverageEnvelope {
+    schema_version: CAMPAIGN_COVERAGE_SCHEMA_VERSION.to_string(),
+    session: CampaignCoverageSession {
+      session_id,
+      campaign: "competitive-regional-v1".to_string(),
+      seed,
+      turn,
+      max_turns: crate::mcp::session::COMPETITIVE_MONTH_LIMIT,
+      done,
+    },
+    campaign_role: "nonprofit health-system lead in a competitive regional market".to_string(),
+    stage,
+    briefing: briefings,
+    metrics: vec![
+      metric(
+        "Cash",
+        player.resources.cash,
+        "game units",
+        "HealthSystemState.resources.cash",
+        "Current resource",
+      ),
+      metric(
+        "Action points",
+        player.resources.ap_budget as i32,
+        "AP",
+        "HealthSystemState.resources.ap_budget",
+        "Current monthly action budget",
+      ),
+      metric(
+        "Political capital",
+        player.resources.political_capital as i32,
+        "capital units",
+        "HealthSystemState.resources.political_capital",
+        "Current resource",
+      ),
+      metric(
+        "Access",
+        observation.reported_access_index,
+        "index",
+        "PlayerObservation.reported_access_index",
+        "Visible player outcome",
+      ),
+      metric(
+        "Quality",
+        observation.reported_quality_index,
+        "index",
+        "PlayerObservation.reported_quality_index",
+        "Visible player outcome",
+      ),
+      metric(
+        "Staffed beds",
+        observation.staffed_beds,
+        "beds",
+        "PlayerObservation.staffed_beds",
+        "Current capacity",
+      ),
+      metric(
+        "Monthly demand",
+        observation.monthly_demand,
+        "visits",
+        "PlayerObservation.monthly_demand",
+        "Current operating pressure",
+      ),
+      metric(
+        "Treated volume",
+        observation.monthly_treated_volume,
+        "visits",
+        "PlayerObservation.monthly_treated_volume",
+        "Current operating result",
+      ),
+      metric(
+        "Unmet demand",
+        observation.monthly_unmet_demand,
+        "visits",
+        "PlayerObservation.monthly_unmet_demand",
+        "Current operating pressure",
+      ),
+      metric(
+        "Operating margin",
+        observation.monthly_operating_margin,
+        "game units",
+        "PlayerObservation.monthly_operating_margin",
+        "Current operating result",
+      ),
+    ],
+    actors,
+    processes,
+    decisions,
+    history: history.to_vec(),
+    debrief: if done {
+      competitive_player_debrief(typed_history)
+    } else {
+      Vec::new()
+    },
+    audio: Some(audio),
+    replay: CampaignCoverageReplayMetadata {
+      transition_count: history.len(),
+      state_hash: latest_hash,
+    },
+  }
+}
+
+fn competitive_processes(observation: &PlayerObservation) -> Vec<CampaignCoverageProcess> {
+  let mut processes = vec![process(
+    "in-flight-projects",
+    "In-flight projects",
+    observation.in_flight_projects.clone(),
+    if observation.in_flight_projects == "none" {
+      "idle"
+    } else {
+      "active"
+    },
+    "PlayerObservation.in_flight_projects",
+  )];
+  processes.push(process(
+    "information-gaps",
+    "Information gaps",
+    if observation.intel_gaps.is_empty() {
+      "No explicit intelligence gap is currently reported.".to_string()
+    } else {
+      observation.intel_gaps.join(" ")
+    },
+    if observation.intel_gaps.is_empty() {
+      "clear"
+    } else {
+      "open"
+    },
+    "PlayerObservation.intel_gaps",
+  ));
+  if let Some(review) = &observation.annual_policy_review {
+    processes.push(process(
+      "annual-policy-review",
+      "Annual policy review",
+      review.join(" "),
+      "reported",
+      "PlayerObservation.annual_policy_review",
+    ));
+  }
+  if observation.rna_strike_active {
+    processes.push(process(
+      "rna-strike",
+      "Workforce disruption",
+      "A workforce disruption is currently reported in the player observation.",
+      "active",
+      "PlayerObservation.rna_strike_active",
+    ));
+  }
+  processes
+}
+
+fn competitive_decisions(
+  session_id: String,
+  turn: u32,
+  resources: ReadOnlyResources,
+) -> Vec<CampaignCoverageDecision> {
+  competitive_action_catalog(session_id, turn, resources)
+    .actions
+    .into_iter()
+    .map(|action| {
+      let uncertainty = format!(
+        "{}; {} Constraint: {}",
+        action.delay_label, action.uncertainty_label, action.constraint_label
+      );
+      decision(
+        &action.id,
+        &action.label,
+        action.command_template,
+        &uncertainty,
+        "competitive-actions-v1 ActionSpec",
+        action
+          .parameters
+          .into_iter()
+          .map(competitive_parameter)
+          .collect(),
+      )
+    })
+    .collect()
+}
+
+fn competitive_parameter(parameter: super::action::ActionParameter) -> CampaignCoverageParameter {
+  CampaignCoverageParameter {
+    name: parameter.name,
+    label: parameter.label,
+    input_type: parameter.input_type,
+    options: parameter
+      .options
+      .into_iter()
+      .map(|value| option(&value, &value))
+      .collect(),
+    min: parameter.min,
+    max: parameter.max,
+  }
+}
+
 fn campaign_audio(
   campaign: &str,
   done: bool,
@@ -543,6 +881,10 @@ fn campaign_audio(
     "debrief"
   } else if campaign == "regional-affiliation-v1" || visible_text.contains("affiliation") {
     "affiliation_negotiation"
+  } else if campaign == "competitive-regional-v1"
+    && (visible_text.contains("rival") || visible_text.contains("competition"))
+  {
+    "competitive_escalation"
   } else if visible_text.contains("regulat") || visible_text.contains("policy review") {
     "regulatory_scrutiny"
   } else if [

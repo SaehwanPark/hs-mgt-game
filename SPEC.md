@@ -7160,6 +7160,37 @@ Deferred / Non-Goals:
   replay, asset, audio behavior, service worker, or browser-authored outcome
   was added.
 
+### Visual/audio competitive campaign-coverage envelope (v0.13.69)
+
+Status: Complete for the bounded host-owned competitive coverage read;
+campaign-specific visual/audio quality, human review, and release gates remain
+open.
+
+Done:
+
+- The target slice and actor-visible source contract are recorded in
+  `_workspace/147_implementation_plan_visual-audio-phase12-competitive-campaign-coverage-v0.13.69.md`
+  and the current request/contract/QA/handoff records.
+- `from_competitive` now maps the human player observation, public signals,
+  process summaries, canonical action catalog, sanitized public-action
+  history/replay metadata, player-safe terminal debrief, and existing audio
+  metadata into `campaign-coverage-v1`.
+- `GameSessionStore::get_campaign_coverage`, the loopback route, and the
+  coverage evidence ledgers now support all three launchable campaign IDs.
+- Competitive coverage decisions are read-only in the shared renderer; the
+  competitive action catalog, host validation, and submit path remain canonical.
+
+Not Yet Done:
+
+- Complete the PR handoff, merge, temporary-branch cleanup, and final release-
+  evidence synchronization for this slice.
+
+Deferred / Non-Goals:
+
+- No new schema or route, browser simulation, hidden-state/rival-private field,
+  mutation protocol, asset/audio file, persistence, screenshot, human review,
+  device certification, provenance/legal approval, or public-release claim.
+
 ### Visual/audio host autosave after committed GUI decisions (v0.13.68)
 
 Status: Complete for the bounded host-autosave request over the existing GUI

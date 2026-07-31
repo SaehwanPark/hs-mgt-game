@@ -16,7 +16,7 @@ class Phase12CampaignPresentationCoverageTests(unittest.TestCase):
     ledger = self.ledger
     self.assertEqual(ledger["schema_version"], "campaign-presentation-coverage-v1")
     self.assertEqual(ledger["status"], "complete-current-inventory")
-    self.assertEqual(ledger["campaigns"], ["stabilization-v1", "regional-affiliation-v1"])
+    self.assertEqual(ledger["campaigns"], ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"])
     source_cache = {}
     for key, source_ref in ledger["contract"].items():
       if key == "schema":
@@ -41,8 +41,9 @@ class Phase12CampaignPresentationCoverageTests(unittest.TestCase):
       self.assertTrue(surface["visible_equivalent"], surface["id"])
     self.assertEqual(
       set(ledger["campaign_boundaries"]),
-      {"stabilization-v1", "regional-affiliation-v1"},
+      {"competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"},
     )
+    self.assertIn("canonical action metadata", ledger["campaign_boundaries"]["competitive-regional-v1"]["current_surface"])
     self.assertIn("none-required", ledger["campaign_boundaries"]["stabilization-v1"]["map_or_facility_asset_need"])
     self.assertIn("none-required", ledger["campaign_boundaries"]["regional-affiliation-v1"]["map_or_facility_asset_need"])
 

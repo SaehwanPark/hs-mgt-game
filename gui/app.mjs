@@ -1103,6 +1103,7 @@ function coverageCommand(decision, form) {
 function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
   const list = root.querySelector("#campaign-decision-list");
   if (!list) return;
+  const canSubmit = typeof onSubmit === "function";
   list.replaceChildren();
   for (const decision of decisions ?? []) {
     const item = document.createElement("article");
@@ -1139,17 +1140,22 @@ function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
     }
     const button = document.createElement("button");
     button.type = "submit";
-    button.textContent = decision.parameters?.length ? "Submit host-shaped decision" : "Commit decision";
+    button.disabled = !canSubmit;
+    button.textContent = canSubmit
+      ? decision.parameters?.length ? "Submit host-shaped decision" : "Commit decision"
+      : "Use the competitive action rail";
     form.append(button);
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const result = coverageCommand(decision, form);
-      if (!result.ok) {
-        setPresentationState(root, result.message);
-        return;
-      }
-      onSubmit(result.command);
-    });
+    if (canSubmit) {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const result = coverageCommand(decision, form);
+        if (!result.ok) {
+          setPresentationState(root, result.message);
+          return;
+        }
+        onSubmit(result.command);
+      });
+    }
     item.append(heading, uncertainty, form);
     appendSource(item, decision.source);
     list.append(item);
@@ -1157,7 +1163,7 @@ function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
   if (!decisions?.length) emptyState(list, "No campaign decision is available.");
 }
 
-export function renderCampaignCoverage(envelope, root = document, onSubmit = () => {}) {
+export function renderCampaignCoverage(envelope, root = document, onSubmit = null) {
   const panel = root.querySelector("#campaign-coverage-panel");
   if (!envelope || envelope.schema_version !== CAMPAIGN_COVERAGE_SCHEMA) {
     return { ok: false, code: envelope ? "unsupported_campaign_coverage_schema" : "empty_campaign_coverage" };
@@ -1209,7 +1215,11 @@ export function createCampaignCoverageClient({
     }
     try {
       const envelope = await adapter.getCampaignCoverage(sessionId);
-      const result = renderCampaignCoverage(envelope, root, submit);
+      const result = renderCampaignCoverage(
+        envelope,
+        root,
+        envelope?.session?.campaign === "competitive-regional-v1" ? null : submit,
+      );
       if (!result.ok) {
         recordPlaytestFailure(recorder, result.code, "Campaign coverage schema is unavailable.");
         setPresentationState(root, "Campaign coverage is unavailable; existing presentation remains active.");
@@ -1236,6 +1246,14 @@ export function createCampaignCoverageClient({
   }
 
   async function submit(command) {
+    if (currentEnvelope?.session?.campaign === "competitive-regional-v1") {
+      const message = "Competitive campaign coverage is a read-only projection; use the validated action rail.";
+      setPresentationState(root, message);
+      recordPlaytestFailure(recorder, "competitive_coverage_read_only", message);
+      showRecovery(root, message);
+      audioClient.playCue("ui.action-reject");
+      return { ok: false, code: "competitive_coverage_read_only", message };
+    }
     if (!adapter || typeof adapter.submitTurn !== "function") {
       setPresentationState(root, "No campaign submit adapter configured; no transition was attempted.");
       recordPlaytestFailure(recorder, "campaign_submit_adapter_missing", "Campaign submit adapter is unavailable.");
