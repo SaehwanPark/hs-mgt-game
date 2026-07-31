@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.77] - 2026-07-31
+
+- Added host-bound full-campaign history/replay continuity evidence across
+  competitive, stabilization, and regional-affiliation runs: genesis, every
+  committed transition, terminal row counts, ordered state hashes, and latest
+  replay metadata remain aligned without adding browser authority.
+- Kept browser serialization, checkpoint archives, screenshots, human replay/
+  accessibility review, provenance/legal approval, and public-release gates
+  open.
+
 ## [0.13.76] - 2026-07-31
 
 - Added host-bound full-campaign audio-state evidence across competitive,

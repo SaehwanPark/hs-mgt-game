@@ -3807,6 +3807,110 @@ mod tests {
   }
 
   #[test]
+  fn full_campaign_history_and_replay_reads_remain_hash_aligned() {
+    let assert_alignment =
+      |store: &GameSessionStore, session_id: &str, expected_count: usize, terminal: bool| {
+        let before = store
+          .get_observation(GetObservationRequest {
+            session_id: session_id.to_string(),
+          })
+          .expect("observation before history/replay read");
+        let history = store
+          .get_history(GetHistoryRequest {
+            session_id: session_id.to_string(),
+          })
+          .expect("history read");
+        let replay = store
+          .get_replay(GetReplayRequest {
+            session_id: session_id.to_string(),
+          })
+          .expect("replay read");
+        let after = store
+          .get_observation(GetObservationRequest {
+            session_id: session_id.to_string(),
+          })
+          .expect("observation after history/replay read");
+
+        assert_eq!(before, after);
+        assert_eq!(before.done, terminal);
+        assert_eq!(history.schema_version, HISTORY_SCHEMA_VERSION);
+        assert_eq!(replay.schema_version, REPLAY_SCHEMA_VERSION);
+        assert_eq!(history.session_id, session_id);
+        assert_eq!(replay.session_id, session_id);
+        assert_eq!(history.transition_count, expected_count);
+        assert_eq!(replay.transition_count, expected_count);
+        assert_eq!(history.transitions, replay.transitions);
+        assert_eq!(
+          replay.latest_state_hash,
+          history
+            .transitions
+            .last()
+            .map(|transition| transition.state_hash.clone())
+        );
+      };
+
+    let mut store = GameSessionStore::default();
+    let mut competitive = start(&mut store, "competitive-regional-v1");
+    assert_alignment(&store, &competitive.session_id, 0, false);
+    for month in 0..COMPETITIVE_MONTH_LIMIT {
+      competitive = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: competitive.session_id,
+          command_text: String::new(),
+        })
+        .expect("competitive month");
+      assert_alignment(
+        &store,
+        &competitive.session_id,
+        month as usize + 1,
+        month + 1 == COMPETITIVE_MONTH_LIMIT,
+      );
+    }
+
+    let mut stabilization = start(&mut store, "stabilization-v1");
+    assert_alignment(&store, &stabilization.session_id, 0, false);
+    for stage in 0..INTERACTIVE_TURN_COUNT {
+      stabilization = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: stabilization.session_id,
+          command_text: String::new(),
+        })
+        .expect("stabilization stage");
+      assert_alignment(
+        &store,
+        &stabilization.session_id,
+        stage as usize + 1,
+        stage + 1 == INTERACTIVE_TURN_COUNT,
+      );
+    }
+
+    let mut affiliation = start(&mut store, "regional-affiliation-v1");
+    assert_alignment(&store, &affiliation.session_id, 0, false);
+    let affiliation_commands = [
+      "assess",
+      "posture choice=independent",
+      "hold",
+      "hold",
+      "hold",
+      "hold",
+    ];
+    for (stage, command) in affiliation_commands.into_iter().enumerate() {
+      affiliation = store
+        .submit_turn(SubmitTurnRequest {
+          session_id: affiliation.session_id,
+          command_text: command.to_string(),
+        })
+        .expect("affiliation stage");
+      assert_alignment(
+        &store,
+        &affiliation.session_id,
+        stage + 1,
+        stage + 1 == AFFILIATION_TURN_COUNT as usize,
+      );
+    }
+  }
+
+  #[test]
   fn competitive_campaign_coverage_sanitizes_private_rival_actions() {
     let ruleset = default_competitive_ruleset();
     let genesis =

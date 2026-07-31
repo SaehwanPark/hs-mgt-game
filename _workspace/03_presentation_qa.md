@@ -5097,3 +5097,33 @@ The full repository validation passes with 372 Rust tests and 785 Python tests;
 Clippy, formatting, release metadata, documentation links, asset/security/
 generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
 asset-budget, CLI smoke, Node syntax, and diff checks are green.
+# Presentation QA — Full-campaign history/replay continuity v0.13.77
+
+## Status
+
+Implementation and full automated validation pass; the bounded boundary is
+host-owned history/replay alignment through every active and terminal read of
+all three launchable campaigns. The sole medium-effort review passed with no
+actionable findings; merge/cleanup remain.
+
+## Required pass conditions
+
+- Genesis and every post-transition history/replay read has matching schemas,
+  ordered rows, counts, state hashes, and latest replay hash.
+- Terminal reads preserve the final committed row and do not add browser or
+  archive authority.
+- Evidence stays separate from replay usability, accessibility, education,
+  screenshots, and release approval.
+
+## Evidence limits
+
+This slice establishes only technical host history/replay continuity and hash
+alignment; it cannot establish lived replay comprehension, accessibility,
+educational value, archive durability, or public release.
+
+## Verification result
+
+The full repository validation passes with 373 Rust tests and 786 Python tests;
+Clippy, formatting, release metadata, documentation links, asset/security/
+generation/credits, device/offline/browser/audio/raster/loading/visual-audio/
+asset-budget, CLI smoke, Node syntax, and diff checks are green.

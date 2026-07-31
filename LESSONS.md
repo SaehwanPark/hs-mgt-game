@@ -3404,3 +3404,14 @@ separate gates.
   keep audio optional with written fallbacks.
 - Prevention: treat full-campaign metadata continuity as host-source evidence,
   separate from human listening/accessibility quality and release approval.
+# Full-Campaign Replay Evidence Must Compare Every Host Read
+
+- Context: checkpoint regressions compared replay/history at selected restore
+  points, while full-campaign audio coverage now walks every campaign read.
+- Risk: a later transition could drop a history row, reorder replay rows, or
+  expose a stale latest hash while the terminal view still appears complete.
+- Resolution: read immutable history and replay at genesis and after every
+  committed transition through each campaign endpoint, compare ordered rows,
+  counts, and hashes, and keep regeneration/authority at the host boundary.
+- Prevention: treat full-campaign replay continuity as a separate technical
+  gate from browser serialization, archive design, and human replay quality.

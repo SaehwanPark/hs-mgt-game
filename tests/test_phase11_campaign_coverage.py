@@ -233,7 +233,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "event_cue_coverage", "debrief_view_coverage", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -680,6 +680,33 @@ console.log(JSON.stringify(resolved));
     for boundary in ("No new route/schema", "written equivalents", "does not submit commands"):
       self.assertIn(boundary, json.dumps(coverage))
 
+  def test_full_campaign_replay_continuity_target_is_host_bound(self):
+    coverage = self.ledger["full_campaign_replay_continuity"]
+    self.assertEqual(coverage["status"], "complete-full-campaign-host-history-replay-continuity")
+    self.assertEqual(
+      coverage["schemas"],
+      ["competitive-history-v1", "competitive-replay-v1"],
+    )
+    self.assertEqual(
+      coverage["campaigns"],
+      ["competitive-regional-v1", "stabilization-v1", "regional-affiliation-v1"],
+    )
+    self.assertEqual(
+      coverage["test_source"],
+      "src/mcp/session.rs: fn full_campaign_history_and_replay_reads_remain_hash_aligned",
+    )
+    for marker in (
+      "get_history(GetHistoryRequest",
+      "get_replay(GetReplayRequest",
+      "HistoryEnvelope",
+      "ReplayEnvelope",
+      "competitive-history-v1",
+      "competitive-replay-v1",
+    ):
+      self.assertIn(marker, self.session + json.dumps(coverage))
+    for boundary in ("No new route/schema", "browser serialization", "cannot submit commands"):
+      self.assertIn(boundary, json.dumps(coverage))
+
   def test_ledger_fallback_references_match_live_adapters(self):
     for catalog_name, catalog in self.ledger["catalogs"].items():
       self.assertEqual(catalog["fallback_id"], self.live["catalog_fallbacks"][catalog_name])
@@ -787,6 +814,7 @@ console.log(JSON.stringify(resolved));
       "Current full regional-affiliation host checkpoint continuation covered.": "x",
       "Current cross-campaign latest-checkpoint identity covered. Evidence:": "x",
       "Current full-campaign host audio-state coverage covered. Evidence:": "x",
+      "Current full-campaign host history/replay continuity covered. Evidence:": "x",
       "Current explicit durable stabilization host checkpoint recovery covered.": "x",
       "Current explicit durable regional-affiliation host checkpoint recovery covered.": "x",
       "Current live replay visual continuity covered. Evidence:": "x",

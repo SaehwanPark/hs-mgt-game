@@ -7370,6 +7370,33 @@ Deferred / Non-Goals:
   screenshot, human listening/accessibility review, provenance/legal approval,
   or public-release claim.
 
+### Visual/audio full-campaign history/replay continuity (v0.13.77)
+
+Status: Implementation, full automated validation, and the sole medium-effort
+review are complete for the bounded host-owned history/replay alignment target
+across all active and terminal reads of the three launchable campaigns; the
+reviewer found no actionable findings. PR/merge cleanup and final evidence
+synchronization remain.
+
+Done:
+
+- Added the target and actor-visible history/replay contract in
+  `_workspace/155_implementation_plan_visual-audio-phase11-full-campaign-replay-continuity-v0.13.77.md`
+  and the current request/contract/QA/handoff records.
+- Defined existing immutable host history and replay envelopes as the only
+  sources: compare ordered rows, counts, state hashes, and terminal latest hash
+  without adding a route, browser trace, archive, or browser authority.
+
+Not Yet Done:
+
+- Merge the PR, clean the temporary branch locally/remotely, and verify `main`.
+
+Deferred / Non-Goals:
+
+- No new route/schema, simulation rule, browser authority, checkpoint archive,
+  browser serialization, asset/audio file, screenshot, human review,
+  provenance/legal approval, or public-release claim.
+
 ### Visual/audio competitive campaign-coverage envelope (v0.13.69)
 
 Status: Complete for the bounded host-owned competitive coverage read;
