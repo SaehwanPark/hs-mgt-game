@@ -4919,3 +4919,33 @@ human accessibility/usability, and public-release decisions remain pending.
 on policy/target/capability drift, measurement drift, unsupported certification
 claims, missing fallback/limit markers, authority changes, or release
 promotion.
+
+# Presentation Contract — Firefox host-backed runtime-smoke packet v0.13.89
+
+## Goal and authorization
+
+Prepare a technical runtime-smoke surface for Firefox 147.0.2 against the
+existing loopback GUI host without changing the browser policy or promoting
+engine support.
+
+## Source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Firefox runtime | `scripts/check_firefox_runtime_smoke.py` and Firefox Marionette | Verify shell readiness, the start control, and one host-backed session start | Do not infer full-campaign, audio-decoder, device, or human certification |
+| Host boundary | Existing loopback GUI host and session-start status | Confirm the click reaches the host adapter and returns an opaque session ID | Do not treat the smoke session as a durable or participant result |
+| Browser policy | `assets/browser-compatibility-policy.json` and current guides | Preserve Firefox/WebKit not-certified status and the no-promotion rule | Do not infer support expansion from one runtime smoke |
+| WebKit blocker | SafariDriver permission response | Record why no WebKit result exists | Do not infer WebKit behavior from Safari availability alone |
+
+## Accessibility, recovery, and authority
+
+The probe uses a temporary browser profile, loopback-only host access, and no
+project-state writes. It does not alter host authority or runtime behavior.
+Written equivalents, audio-off, reduced motion, full campaign, device,
+human accessibility/usability, and release decisions remain separate gates.
+
+## Verification
+
+`tests/test_phase13_1_firefox_runtime_smoke_packet.py` must fail closed on
+probe-marker drift, exact observation drift, policy-promotion claims, missing
+Safari/WebKit blocker language, authority changes, or release promotion.

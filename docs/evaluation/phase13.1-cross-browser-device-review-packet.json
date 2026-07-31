@@ -109,7 +109,7 @@
         "id": "firefox-desktop",
         "engine": "Firefox",
         "support": "not-certified",
-        "reason": "No Firefox runtime is available in the current verification environment."
+        "reason": "Firefox runtime smoke is available, but full Firefox engine and campaign certification is not complete."
       },
       {
         "id": "webkit-desktop",
@@ -244,7 +244,7 @@
     {
       "id": "firefox-desktop",
       "status": "pending-runtime-check",
-      "next_evidence": "Run the supported GUI contract in an available Firefox runtime and record engine/version/results."
+      "next_evidence": "Complete full Firefox engine and campaign certification after the bounded runtime smoke, recording engine/version/results across the supported GUI contract."
     },
     {
       "id": "webkit-desktop",

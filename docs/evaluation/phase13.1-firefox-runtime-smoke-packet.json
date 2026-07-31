@@ -1,0 +1,105 @@
+{
+  "schema_version": "phase13.1-firefox-runtime-smoke-packet-v1",
+  "status": "complete-firefox-host-backed-smoke-pending-matrix",
+  "roadmap_item": "cross-browser/device certification",
+  "observed_on": "2026-07-31",
+  "probe": {
+    "script": "scripts/check_firefox_runtime_smoke.py",
+    "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
+    "host_requirement": "An already-running local GUI host bound to 127.0.0.1:7878 is required.",
+    "writes_project_state": false
+  },
+  "policy_boundary": {
+    "canonical_browser_policy_unchanged": true,
+    "firefox_policy_status": "not-certified",
+    "webkit_policy_status": "not-certified",
+    "smoke_result_does_not_promote_browser_support": true
+  },
+  "runtime_observation": {
+    "status": "pass",
+    "url": "http://127.0.0.1:7878/",
+    "marionette_protocol": 3,
+    "browser": {
+      "name": "firefox",
+      "version": "147.0.2",
+      "platform": "mac",
+      "headless": true
+    },
+    "shell": {
+      "title": "Health Policy Strategy Game — Executive Desktop",
+      "ready": "complete",
+      "start_control": true,
+      "demo_fixture": true,
+      "url": "http://127.0.0.1:7878/"
+    },
+    "host_start": {
+      "status": "competitive regional session loaded: session-1",
+      "session": "session-1",
+      "demo_fixture": false
+    }
+  },
+  "safari_webkit_boundary": {
+    "status": "blocked-permission",
+    "driver": "/usr/bin/safaridriver",
+    "attempt": "WebDriver session creation on port 4444",
+    "message": "You must enable 'Allow remote automation' in the Developer section of Safari Settings to control Safari via WebDriver.",
+    "runtime_result_recorded": false,
+    "support_status": "not-certified"
+  },
+  "review_boundary": {
+    "firefox_shell_runtime_smoke_complete": true,
+    "firefox_host_backed_start_smoke_complete": true,
+    "firefox_full_campaign_certification_complete": false,
+    "firefox_audio_decoder_review_complete": false,
+    "webkit_runtime_certification_complete": false,
+    "real_device_certification_complete": false,
+    "hardware_performance_certification_complete": false,
+    "human_accessibility_review_complete": false,
+    "human_usability_review_complete": false,
+    "public_release_approval": false
+  },
+  "required_source_markers": {
+    "probe": [
+      "MarionetteClient",
+      "WebDriver:NewSession",
+      "WebDriver:Navigate",
+      "WebDriver:ExecuteScript",
+      "WebDriver:DeleteSession",
+      "validate_observations",
+      "urlparse",
+      "#session-start",
+      "#session-launch-status",
+      "document.readyState",
+      "marionetteProtocol",
+      "127.0.0.1"
+    ],
+    "browser_policy": [
+      "firefox-desktop",
+      "webkit-desktop",
+      "not-certified",
+      "Firefox runtime smoke is available, but full Firefox engine and campaign certification is not complete.",
+      "No WebKit runtime is available in the current verification environment."
+    ],
+    "guides": [
+      "Firefox and WebKit are not runtime-certified by this contract.",
+      "Firefox/WebKit certification or real low-power-device measurements;"
+    ]
+  },
+  "evidence_limits": [
+    "The Firefox result covers one headless shell load and one host-backed competitive session-start click.",
+    "The result does not certify Firefox full-campaign behavior, audio decoding, real hardware, or lived accessibility/usability.",
+    "Safari/WebKit has no result because local remote automation permission is disabled.",
+    "The canonical browser policy remains unchanged and no browser-support promotion is authorized.",
+    "No human, legal, educational, or public-release conclusion is recorded."
+  ],
+  "release_boundary": {
+    "runtime_changes": 0,
+    "simulation_changes": 0,
+    "asset_changes": 0,
+    "audio_changes": 0,
+    "screenshot_changes": 0,
+    "release_manifest_changes": 0,
+    "public_release_approval": false,
+    "technical_packet_does_not_authorize_support_promotion": true
+  }
+}

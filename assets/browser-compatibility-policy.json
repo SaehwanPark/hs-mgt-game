@@ -18,7 +18,7 @@
       "id": "firefox-desktop",
       "engine": "Firefox",
       "support": "not-certified",
-      "reason": "No Firefox runtime is available in the current verification environment."
+      "reason": "Firefox runtime smoke is available, but full Firefox engine and campaign certification is not complete."
     },
     {
       "id": "webkit-desktop",

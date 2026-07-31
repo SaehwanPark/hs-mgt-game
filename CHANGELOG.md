@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.89] - 2026-07-31
+
+- Added a dependency-free Firefox Marionette smoke probe and source-bound
+  evidence for Firefox 147.0.2 loading the loopback GUI and starting one
+  host-backed competitive session.
+- Recorded Safari/WebKit remote-automation permission blocking and kept full
+  browser certification, hardware, human, and public-release gates pending.
+
 ## [0.13.88] - 2026-07-31
 
 - Added a source-bound cross-browser/device review packet for the declared

@@ -3962,3 +3962,31 @@ emulated low-power proxy, device measurements, and existing technical guides.
 Focused cross-browser/device packet and existing compatibility/device tests;
 full Rust/Python and repository validation; exactly one medium-effort review;
 authorized PR/merge and temporary-branch cleanup.
+
+# Request Summary — Firefox host-backed runtime-smoke packet v0.13.89
+
+## Authorized outcome
+
+Record a bounded Firefox 147.0.2 runtime smoke against the existing loopback
+GUI host and make the remaining Safari/WebKit blocker explicit.
+
+## Target slice
+
+- Use a dependency-free Marionette probe to verify Firefox document readiness,
+  the session-start control, and one host-backed competitive session start.
+- Record the exact browser version, shell observations, host status, and
+  temporary-profile/no-project-write boundary.
+- Keep full Firefox campaign/audio coverage, Safari/WebKit, real hardware,
+  human review, and public-release decisions pending.
+
+## Non-goals
+
+- No browser-support promotion, policy change, runtime or simulation change,
+  screenshot/release asset, audio decoder, participant, or human result.
+- No Safari/WebKit claim while remote automation is permission-blocked.
+
+## Validation target
+
+Focused runtime-smoke packet and probe checks; existing browser/device and
+technical-coverage tests; full Rust/Python and repository validation; exactly
+one medium-effort review; authorized PR/merge and temporary-branch cleanup.
