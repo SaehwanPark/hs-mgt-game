@@ -3215,3 +3215,42 @@ accessibility, audio listening/quality, Firefox/WebKit and real-device
 certification, provenance/legal and resemblance, clinical/policy review,
 revision decisions, campaign expansion, and public-release approval remain
 pending and promotion-blocking.
+
+# Final Handoff — Generated device-evidence synchronization v0.13.100
+
+## Status
+
+The v0.13.100 maintenance slice is implemented on
+`codex/phase13-1-device-evidence-sync-v0.13.100` and reviewed in PR #347. It
+corrects source-bound evidence drift found after the v0.13.99 merge; it does
+not change runtime behavior or promote any support/release gate.
+
+## Evidence
+
+- Plan: `_workspace/178_implementation_plan_visual-audio-phase13-1-device-evidence-sync-v0.13.100.md`.
+- Request summary: `_workspace/00_input/request-summary-v0.13.100.md`.
+- Device policy and review packet now bind the 395667-byte GUI source total,
+  below the existing 400000-byte emulated-proxy limit.
+- Generated asset credits/notices and package metadata are synchronized to
+  v0.13.100; v0.13.99 terminal evidence remains historical and unchanged.
+
+## Verification
+
+- Full Python suite: 924 tests pass.
+- Serial Rust suite: 376 tests pass.
+- Clippy, formatting, device checker, cross-browser/device contract tests,
+  asset credits, release metadata, and diff checks pass.
+
+## Review outcome
+
+Exactly one medium-effort code reviewer was used for PR #347. The reviewer
+found no actionable issues and confirmed that the packet consistency,
+generated projections, and pending hardware/browser/human-review boundaries
+remain intact. No second reviewer was used.
+
+## Remaining gates
+
+Real-device performance, browser certification, human visual/debrief quality,
+accessibility, audio listening/quality, educational usability, provenance/
+legal and resemblance, clinical/policy review, revision decisions, campaign
+expansion, and public-release approval remain pending and promotion-blocking.
