@@ -4685,10 +4685,11 @@ The target and validator are recorded in
   the player-facing competitive end-session projection. The host path now uses
   a player-safe terminal debrief while the CLI/instructor `competitive_debrief`
   path remains available for its authorized review surface.
-- The terminal renderer now hides the stale campaign-coverage companion panel
-  after end-session and directs onboarding to the visible standard debrief
-  target. History, replay metadata, read-only controls, and written fallbacks
-  remain host-owned and actor-visible.
+- The competitive terminal renderer now hides the stale campaign-coverage
+  companion panel after end-session and directs onboarding to the visible
+  standard debrief target; stabilization and regional-affiliation terminal
+  coverage remains available. History, replay metadata, read-only controls,
+  and written fallbacks remain host-owned and actor-visible.
 - `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`,
   `scripts/validate_terminal_debrief_runtime_evidence.py`, and
   `tests/test_phase13_2_terminal_debrief_runtime_evidence.py` bind the

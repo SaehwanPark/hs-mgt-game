@@ -5283,7 +5283,10 @@ learning, accessibility, audio, browser/device support, or release.
 - History and debrief remain native written lists; an empty host debrief is an
   explicit fallback, while this evidence packet requires the current campaign
   case to be non-empty.
-- Terminal controls are read-only after the host end response.
+- Terminal controls are read-only after the host end response. For the
+  competitive terminal projection, the stale campaign-coverage companion panel
+  is hidden; stabilization and regional-affiliation terminal coverage remains
+  available.
 - Debrief music remains optional and atmospheric; mute, reduced motion, audio
   unavailability, and optional cue-copy settings never remove written history
   or debrief meaning.

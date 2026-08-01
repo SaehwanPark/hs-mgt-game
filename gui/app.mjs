@@ -1882,7 +1882,9 @@ export function renderEndSessionEnvelope(envelope, root = document) {
     meta.textContent = `${envelope.campaign} · final turn ${envelope.turn}/${envelope.max_turns} · ${envelope.replay.transition_count} transitions · hash ${hash}`;
   }
   const campaignCoveragePanel = root.querySelector("#campaign-coverage-panel");
-  if (campaignCoveragePanel) campaignCoveragePanel.hidden = true;
+  if (campaignCoveragePanel && envelope.campaign === "competitive-regional-v1") {
+    campaignCoveragePanel.hidden = true;
+  }
   setReadOnlyControls(root, true);
   setEndSessionControl(root, false);
   setActionControls(root, false);

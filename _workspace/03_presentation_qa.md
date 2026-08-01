@@ -5982,8 +5982,10 @@ public-release conclusion is recorded.
 - The live terminal observation identified an instructor-only appendix in the
   player-facing end-session surface; the host projection now removes it while
   preserving the separate CLI/instructor path.
-- The stale campaign-coverage placeholder is hidden after terminal end-session,
-  and onboarding selects the visible standard written debrief target.
+- The stale campaign-coverage placeholder is hidden for competitive terminal
+  end-session, while stabilization and regional-affiliation terminal coverage
+  remains available; onboarding selects the visible standard written debrief
+  target for competitive sessions.
 - Terminal history, final metadata, read-only controls, written fallback, and
   audio-off status remain visible/source-bound without changing host authority.
 
