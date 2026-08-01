@@ -16,7 +16,7 @@ single required medium-effort reviewer and PR loop remain.
 
 ## Verification
 
-- 387 Rust tests, Clippy with warnings denied, 934 Python tests, formatting,
+- 388 Rust tests, Clippy with warnings denied, 934 Python tests, formatting,
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
