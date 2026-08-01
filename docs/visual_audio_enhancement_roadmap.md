@@ -4784,6 +4784,28 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.103.md`, the Phase 11.1 ledger, and
 the typed host/browser tests.
 
+### v0.13.104 browser-safe checkpoint reference transfer
+
+- The GUI now exports and imports deterministic `gui-checkpoint-reference-v1`
+  JSON containing only validated discovery metadata: opaque session ID,
+  campaign, seed, committed-transition count, and archive/legacy source.
+- Import rejects malformed JSON, unsupported schemas, unsafe IDs, invalid
+  metadata, extra keys, and save-shaped content; a valid reference fills the
+  existing session-ID control without automatic loading or browser-storage
+  writes. Load and Restore remain explicit host-authorized actions.
+- This closes browser-safe checkpoint-reference transfer only. Actual browser
+  save-artifact serialization, automatic resume policy, replay regeneration,
+  screenshots, human accessibility/educational review, browser/device
+  certification, provenance/legal review, and public-release gates remain
+  open.
+- The emulated low-power proxy is synchronized to 406,663 live source bytes
+  under a bounded 410,000-byte limit; this is not hardware certification.
+
+The target is recorded in
+`_workspace/182_implementation_plan_phase11-checkpoint-reference-v0.13.104.md`,
+`_workspace/00_input/request-summary-v0.13.104.md`, the Phase 11.1 ledger, and
+the browser contract tests.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

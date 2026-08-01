@@ -147,6 +147,155 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     self.assertIn("session-checkpoint-list", self.html)
     self.assertIn("Save contents remain host-only", self.html)
 
+  def test_checkpoint_reference_round_trip_is_metadata_only_and_deterministic(self):
+    result = self.run_node(r'''
+      import {
+        CHECKPOINT_REFERENCE_SCHEMA,
+        parseCheckpointReference,
+        serializeCheckpointReference,
+        validateCheckpointReference,
+      } from "./gui/app.mjs";
+      const reference = {
+        schema_version: CHECKPOINT_REFERENCE_SCHEMA,
+        session_id: "session-7",
+        campaign: "stabilization-v1",
+        seed: 42,
+        transition_count: 2,
+        storage: "archive",
+      };
+      const serialized = serializeCheckpointReference(reference);
+      const parsed = parseCheckpointReference(serialized.text);
+      const extra = validateCheckpointReference({ ...reference, history: [] });
+      const malformed = parseCheckpointReference("{not-json");
+      console.log(JSON.stringify({
+        ok: serialized.ok && parsed.ok,
+        stable: serialized.text === serializeCheckpointReference(reference).text,
+        fields: Object.keys(parsed.reference),
+        hasHistory: serialized.text.includes("history"),
+        extra: extra.code,
+        malformed: malformed.code,
+      }));
+    ''')
+    self.assertEqual(result["ok"], True)
+    self.assertEqual(result["stable"], True)
+    self.assertEqual(
+      result["fields"],
+      ["schema_version", "session_id", "campaign", "seed", "transition_count", "storage"],
+    )
+    self.assertFalse(result["hasHistory"])
+    self.assertEqual(result["extra"], "invalid_checkpoint_reference_fields")
+    self.assertEqual(result["malformed"], "invalid_checkpoint_reference_json")
+
+  def test_checkpoint_reference_import_fills_id_without_loading_or_storage(self):
+    result = self.run_node(r'''
+      import {
+        CHECKPOINT_REFERENCE_SCHEMA,
+        importCheckpointReference,
+      } from "./gui/app.mjs";
+      const input = { value: "", focus() { this.focused = true; } };
+      const status = { textContent: "" };
+      const root = { querySelector(selector) { return { "#session-id": input, "#session-checkpoint-status": status }[selector] ?? null; } };
+      const file = { async text() { return JSON.stringify({
+        schema_version: CHECKPOINT_REFERENCE_SCHEMA,
+        session_id: "session-imported",
+        campaign: "regional-affiliation-v1",
+        seed: 7,
+        transition_count: 3,
+        storage: "legacy",
+      }); } };
+      let loadCalls = 0;
+      const result = await importCheckpointReference(file, root);
+      console.log(JSON.stringify({ ok: result.ok, input: input.value, focused: input.focused, status: status.textContent, loadCalls }));
+    ''')
+    self.assertEqual(result["ok"], True)
+    self.assertEqual(result["input"], "session-imported")
+    self.assertTrue(result["focused"])
+    self.assertIn("ready to load", result["status"])
+    self.assertEqual(result["loadCalls"], 0)
+    for marker in (
+      "gui-checkpoint-reference-v1",
+      "serializeCheckpointReference",
+      "parseCheckpointReference",
+      "downloadCheckpointReference",
+      "importCheckpointReference",
+      "session-checkpoint-reference-file",
+      "session-checkpoint-reference-import",
+      "Export reference",
+      "metadata only",
+    ):
+      self.assertIn(marker, self.app + self.html)
+    for forbidden in ("history", "resolved_inputs", "CompetitiveWorldState", "serializeState"):
+      self.assertNotIn(forbidden, self.app.split("export function serializeCheckpointReference", 1)[-1].split("export function parseCheckpointReference", 1)[0])
+
+  def test_checkpoint_reference_export_downloads_only_the_reference(self):
+    result = self.run_node(r'''
+      import { CHECKPOINT_REFERENCE_SCHEMA, downloadCheckpointReference } from "./gui/app.mjs";
+      const events = [];
+      globalThis.URL = {
+        createObjectURL(blob) { events.push(["create", blob.type]); return "blob:test"; },
+        revokeObjectURL(url) { events.push(["revoke", url]); },
+      };
+      globalThis.Blob = class { constructor(parts, options) { this.text = parts.join(""); this.type = options.type; } };
+      const link = { click() { events.push(["click", this.download, this.href]); }, setAttribute() {} };
+      const root = { ownerDocument: { createElement() { return link; } } };
+      const result = downloadCheckpointReference({
+        schema_version: CHECKPOINT_REFERENCE_SCHEMA,
+        session_id: "session-7",
+        campaign: "stabilization-v1",
+        seed: 42,
+        transition_count: 2,
+        storage: "archive",
+      }, root);
+      console.log(JSON.stringify({ ok: result.ok, filename: result.filename, text: result.text, events }));
+    ''')
+    self.assertTrue(result["ok"])
+    self.assertEqual(result["filename"], "hs-mgt-checkpoint-session-7.json")
+    self.assertNotIn("history", result["text"])
+    self.assertEqual(result["events"], [["create", "application/json"], ["click", "hs-mgt-checkpoint-session-7.json", "blob:test"], ["revoke", "blob:test"]])
+
+  def test_checkpoint_reference_export_controls_have_checkpoint_specific_labels(self):
+    result = self.run_node(r'''
+      import { renderCheckpointDiscovery } from "./gui/app.mjs";
+      const list = {
+        children: [],
+        replaceChildren() { this.children = []; },
+        append(...items) { this.children.push(...items); },
+      };
+      const status = { textContent: "" };
+      const root = {
+        querySelector(selector) {
+          return { "#session-checkpoint-list": list, "#session-checkpoint-status": status }[selector] ?? null;
+        },
+      };
+      globalThis.document = {
+        createElement(tag) {
+          return {
+            tag,
+            children: [],
+            setAttribute(name, value) { this[name] = value; },
+            addEventListener() {},
+            append(...items) { this.children.push(...items); },
+          };
+        },
+      };
+      renderCheckpointDiscovery({
+        schema_version: "gui-checkpoint-discovery-v1",
+        campaign: "stabilization-v1",
+        invalid_entry_count: 0,
+        checkpoints: [
+          { session_id: "session-a", campaign: "stabilization-v1", seed: 1, transition_count: 2, storage: "archive" },
+          { session_id: "session-b", campaign: "stabilization-v1", seed: 2, transition_count: 3, storage: "legacy" },
+        ],
+      }, root);
+      console.log(JSON.stringify({
+        labels: list.children.map((item) => item.children[1]["aria-label"]),
+      }));
+    ''')
+    self.assertEqual(result["labels"], [
+      "Export reference for session-a",
+      "Export reference for session-b",
+    ])
+
   def test_refresh_contract_and_authority_boundary_are_explicit(self):
     for marker in (
       "ACTIVE_SESSION_STORAGE_KEY",

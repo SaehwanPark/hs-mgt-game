@@ -187,6 +187,15 @@ matches an archived checkpoint file, then refreshes the ordinary
 presentation/campaign/action/history/replay reads. Without a successful
 checkpoint, stopping or restarting the host invalidates the live session ID.
 
+Each discovered entry also offers **Export reference**. The resulting
+`gui-checkpoint-reference-v1` JSON file contains only the opaque ID, campaign,
+seed, committed-transition count, and archive/legacy source. Choose **Import
+reference** to fill the existing ID field in another browser session; the
+browser does not load, store, or reconstruct the checkpoint, and the host still
+validates it when you choose **Load existing session** or **Restore host
+checkpoint**. Invalid, stale, or extra-field references remain recoverable
+errors.
+
 ## Stop the GUI
 
 Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end

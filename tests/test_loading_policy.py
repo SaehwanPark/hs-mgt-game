@@ -140,6 +140,14 @@ class LoadingPolicyTests(unittest.TestCase):
       errors = self.checker.scan_markers(root, "app.mjs", self.checker._markers(self.document))
       self.assertEqual(sum("runtime-file-backed-load" in error for error in errors), 4)
 
+  def test_blob_object_url_download_is_not_an_asset_load(self):
+    with tempfile.TemporaryDirectory() as directory:
+      root = Path(directory)
+      source = root / "app.mjs"
+      source.write_text("const objectUrl = URL.createObjectURL(blob); link.href = objectUrl;", encoding="utf-8")
+      errors = self.checker.scan_markers(root, "app.mjs", self.checker._markers(self.document))
+      self.assertEqual(errors, [])
+
   def test_external_or_escaped_entrypoint_sources_fail_closed(self):
     with tempfile.TemporaryDirectory() as directory:
       root = Path(directory)

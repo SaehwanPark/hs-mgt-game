@@ -677,6 +677,31 @@
       "The route and picker are source-bound technical preparation only; browser/device certification, accessibility, educational, legal, and public-release gates remain open."
     ]
   },
+  "checkpoint_reference_transfer": {
+    "status": "complete-browser-safe-metadata-reference-transfer",
+    "schema": "gui-checkpoint-reference-v1",
+    "fields": [
+      "schema_version",
+      "session_id",
+      "campaign",
+      "seed",
+      "transition_count",
+      "storage"
+    ],
+    "browser_source": "gui/app.mjs: serializeCheckpointReference + parseCheckpointReference + importCheckpointReference + downloadCheckpointReference",
+    "test_source": "tests/test_phase11_browser_refresh_recovery.py: checkpoint reference contract tests",
+    "behavior": [
+      "Export is deterministic and contains exactly the validated discovery metadata fields.",
+      "Import rejects malformed JSON, unsupported schemas, unsafe IDs, invalid values, extra keys, and save-shaped content.",
+      "A valid import fills the existing opaque session-ID field and does not load, restore, or write browser storage.",
+      "Host Load or Restore remains responsible for validating whether the referenced checkpoint still exists and is compatible."
+    ],
+    "boundary": "The browser transfers an informational metadata reference only; the host remains authoritative for save contents, true state, history, replay, hashes, hydration, and transitions.",
+    "limits": [
+      "This closes browser-safe checkpoint-reference transfer only; actual browser save-artifact serialization, automatic resume policy, replay regeneration, broader durable save/load evidence, screenshots, human quality findings, and release gates remain open.",
+      "The reference does not prove the checkpoint is current or available until the host validates it."
+    ]
+  },
   "full_campaign_audio_state_coverage": {
     "status": "complete-full-campaign-host-audio-state-continuity",
     "schema": "campaign-coverage-v1",

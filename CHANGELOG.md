@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.13.104] - 2026-08-01
+
+- Added deterministic browser-safe checkpoint reference export/import using
+  only validated opaque session metadata.
+- Import fills the existing session-ID control without loading, writing browser
+  storage, or receiving the host save artifact; host validation remains the
+  authority.
+- Updated the emulated low-power source-byte budget to 410,000 with an exact
+  406,663-byte measurement for the added reference-transfer UI; this remains
+  a proxy and not device certification.
+- Actual browser save-artifact serialization, automatic resume, replay,
+  human/runtime certification, and release gates remain open.
+
 ## [0.13.103] - 2026-08-01
 
 - Added host-owned `GET /api/v1/checkpoints` discovery for validated durable

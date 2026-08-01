@@ -416,6 +416,13 @@ once after an unknown live-session read, then repeat the same actor-visible
 reads. The browser never receives or serializes the save artifact, and invalid
 checkpoint files are omitted from discovery.
 
+Each discovered entry can export a deterministic `gui-checkpoint-reference-v1`
+JSON file, and the Saved checkpoints panel can import one. A reference contains
+only the discovery metadata and fills the existing opaque session-ID control;
+it never loads automatically, writes browser storage, or carries host save
+contents, history, hashes, resolved inputs, or true state. The host still
+validates the current checkpoint when the user chooses Load or Restore.
+
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a
 schematic identity map, visible demand/access/process overlays, owned facility
