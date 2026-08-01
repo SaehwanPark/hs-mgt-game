@@ -3695,3 +3695,18 @@ separate gates.
 - Prevention: treat runtime observations, browser support policy, real-device
   measurements, human evidence, and public-release approval as separate gates;
   do not infer one from another.
+
+# Optional Cue Copy Must Be Distinct From Written Results
+
+- Context: the live GUI hides the optional audio explanation when optional cue
+  explanations are disabled, while the settings summary and written result,
+  history, and debrief surfaces remain available.
+- Risk: treating the optional paragraph as the complete written-equivalent
+  contract would either report a false fallback defect or hide a real loss of
+  decision-relevant content.
+- Resolution: verify both states explicitly: the optional explanation is
+  present when enabled and intentionally hidden when disabled, while written
+  results remain complete in both cases; keep muted/cues-only playback and
+  listening quality unverified.
+- Prevention: distinguish optional explanatory copy from mandatory written
+  outcomes in runtime evidence, accessibility review, and audio evaluation.

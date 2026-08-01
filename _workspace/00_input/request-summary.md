@@ -4262,3 +4262,36 @@ The packet proves one current Chrome/Chromium host-backed smoke and records
 host capability facts. It does not certify other engines, hardware, lived
 accessibility/usability, audio quality, education, campaign coverage, or
 public release; those gates remain explicitly pending.
+
+# Request Summary — First-session/audio runtime-boundary evidence v0.13.98
+
+## Authorized outcome
+
+Record current live-GUI technical evidence for the open first-session/audio
+roadmap gate while preserving participant, listening, accessibility,
+educational, browser/device, expansion, and public-release boundaries.
+
+## Target slice
+
+- Capture a Chrome 150 host-backed competitive start and all seven visible
+  first-session rail stages.
+- Capture actor-visible briefing, current observation, written history/debrief
+  surfaces, and host-authority language.
+- Exercise low-distraction forced settings, independent reduced-motion/Large-
+  text/cue-explanation settings, cues-only mode, and mute.
+- Distinguish optional cue-explanation visibility from mandatory written results;
+  do not claim audio playback or quality.
+
+## Non-goals
+
+- No participant evaluation, listening feedback, ratings, interviews,
+  accessibility conclusion, educational finding, or release decision.
+- No audio permission change, decoder claim, browser/device certification,
+  GUI/audio behavior change, external upload, or new dependency.
+
+## Evidence limits
+
+This packet proves only a current technical first-session and fallback state
+observation. It cannot close first-time-user, audio-listening, human
+accessibility, educational, browser/device, provenance, revision, expansion,
+or public-release gates.

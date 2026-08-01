@@ -5220,3 +5220,38 @@ engine/version, loopback, host/session, console, source-marker, capability,
 and promotion boundaries. Passing proves packet integrity and one current
 Chromium smoke only. Firefox/WebKit, real hardware, human accessibility/
 usability, audio quality, education, and public release remain pending.
+
+# Presentation Contract — First-session/audio runtime-boundary evidence v0.13.98
+
+## Goal and authorization
+
+Capture a bounded actor-visible first-session and optional-audio runtime state
+sequence. The packet records technical presentation behavior only and cannot
+approve human comprehension, listening quality, accessibility, education,
+browser/device support, or release.
+
+## Player questions and actor-visible source ledger
+
+| Player question | Authorized source | Runtime evidence | Prohibited inference |
+| --- | --- | --- | --- |
+| What should I do first? | `gui/first-month.mjs` first-session flow | Seven labeled stages and current stage/progress | Do not infer first-time comprehension |
+| What can I see now? | Host-projected GUI observation/briefing/history/debrief surfaces | Written actor-visible surfaces present | Do not infer hidden rival intent or future outcomes |
+| What does low-distraction mode change? | `gui/app.mjs` presentation settings and low-distraction packet | Reduced motion, Large text, cue explanations, muted audio, reduced notifications, locked controls | Do not infer universal accessibility |
+| What does audio add or remove? | `gui/audio.mjs` and `gui/index.html` | Cues-only/muted status and written-equivalent states | Do not infer playback quality or usefulness |
+| What remains when optional cue copy is hidden? | `gui/index.html` settings/result/history/debrief surfaces | Written results remain complete while optional explanation may be hidden | Do not call optional copy mandatory evidence |
+
+## Accessibility, authority, and fallbacks
+
+Meaning is retained through visible status text, written results, history,
+debrief, and non-color stage labels. Low-distraction mode is presentation-only
+and locks conflicting controls; cues-only and mute retain written equivalents.
+The host remains authoritative for session creation and commands; no settings,
+audio state, or rail state enters transitions, hashes, replay, or persistence.
+
+## Verification and evidence limits
+
+`tests/test_phase13_1_first_session_audio_runtime_evidence.py` checks exact rail,
+settings, audio, written-equivalent, source, privacy, type, and promotion
+boundaries. Passing proves a current technical state observation only. It does
+not establish participant comprehension, audio usefulness/fatigue, lived
+accessibility, educational value, hardware/browser quality, or release.
