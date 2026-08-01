@@ -3807,7 +3807,8 @@ separate gates.
 - Risk: allowing the browser to deserialize or synthesize the file would move
   true state, history, or serialization authority into the presentation layer.
 - Resolution: validate the selected archive/legacy file on the host and serve
-  its exact bytes as an attachment; let the browser create only a transient
-  download object URL and never inspect, load, or store the artifact.
+  its exact bytes as an attachment; validate the same in-memory bytes that
+  will be returned, then let the browser create only a transient download
+  object URL and never inspect, load, or store the artifact.
 - Prevention: preserve explicit storage-source selection, reject unsafe paths
   and invalid content, and keep automatic resume/replay regeneration separate.

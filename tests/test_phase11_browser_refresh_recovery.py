@@ -230,6 +230,8 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "Download host save",
       "read_checkpoint_artifact",
       "read_gui_session_checkpoint_artifact",
+      "let bytes = fs::read(&candidate)",
+      "load_gui_session_save_text",
     ):
       self.assertIn(marker, self.adapter + self.app + self.server + self.session + self.persistence)
     for forbidden in ("serializeState", "submit_turn", "localStorage", "sessionStorage"):

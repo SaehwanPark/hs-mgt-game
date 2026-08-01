@@ -180,7 +180,16 @@ pub fn load_competitive_session_save(
   }
   let text = fs::read_to_string(path)
     .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
-  let wrapper: GuiCompetitiveSessionSave = serde_json::from_str(&text)
+  load_competitive_session_save_text(&text, path, session_id, ruleset)
+}
+
+fn load_competitive_session_save_text(
+  text: &str,
+  path: &Path,
+  session_id: &str,
+  ruleset: &CompetitiveRuleset,
+) -> Result<Option<CompetitiveSessionSave>, String> {
+  let wrapper: GuiCompetitiveSessionSave = serde_json::from_str(text)
     .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
   if wrapper.schema_version != GUI_COMPETITIVE_SAVE_SCHEMA_VERSION {
     return Err(format!(
@@ -215,7 +224,16 @@ pub fn load_stabilization_session_save(
   }
   let text = fs::read_to_string(path)
     .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
-  let wrapper: GuiStabilizationSessionSave = serde_json::from_str(&text)
+  load_stabilization_session_save_text(&text, path, session_id, ruleset)
+}
+
+fn load_stabilization_session_save_text(
+  text: &str,
+  path: &Path,
+  session_id: &str,
+  ruleset: &Ruleset,
+) -> Result<Option<SessionSave>, String> {
+  let wrapper: GuiStabilizationSessionSave = serde_json::from_str(text)
     .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
   if wrapper.schema_version != GUI_STABILIZATION_SAVE_SCHEMA_VERSION {
     return Err(format!(
@@ -246,7 +264,16 @@ pub fn load_affiliation_session_save(
   }
   let text = fs::read_to_string(path)
     .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
-  let wrapper: GuiAffiliationSessionSave = serde_json::from_str(&text)
+  load_affiliation_session_save_text(&text, path, session_id, ruleset)
+}
+
+fn load_affiliation_session_save_text(
+  text: &str,
+  path: &Path,
+  session_id: &str,
+  ruleset: &AffiliationRuleset,
+) -> Result<Option<AffiliationReplayArtifact>, String> {
+  let wrapper: GuiAffiliationSessionSave = serde_json::from_str(text)
     .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
   if wrapper.schema_version != GUI_AFFILIATION_SAVE_SCHEMA_VERSION {
     return Err(format!(
@@ -293,6 +320,37 @@ pub fn load_gui_session_save(
     }
     GUI_AFFILIATION_SAVE_SCHEMA_VERSION => {
       load_affiliation_session_save(path, session_id, affiliation_ruleset)
+        .map(|save| save.map(GuiSessionSave::Affiliation))
+    }
+    other => Err(format!("unsupported GUI save schema '{other}'")),
+  }
+}
+
+fn load_gui_session_save_text(
+  text: &str,
+  path: &Path,
+  session_id: &str,
+  competitive_ruleset: &CompetitiveRuleset,
+  stabilization_ruleset: &Ruleset,
+  affiliation_ruleset: &AffiliationRuleset,
+) -> Result<Option<GuiSessionSave>, String> {
+  let value: serde_json::Value = serde_json::from_str(text)
+    .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
+  let schema = value
+    .get("schema_version")
+    .and_then(serde_json::Value::as_str)
+    .ok_or_else(|| format!("GUI save at {} has no schema version", path.display()))?;
+  match schema {
+    GUI_COMPETITIVE_SAVE_SCHEMA_VERSION => {
+      load_competitive_session_save_text(text, path, session_id, competitive_ruleset)
+        .map(|save| save.map(GuiSessionSave::Competitive))
+    }
+    GUI_STABILIZATION_SAVE_SCHEMA_VERSION => {
+      load_stabilization_session_save_text(text, path, session_id, stabilization_ruleset)
+        .map(|save| save.map(GuiSessionSave::Stabilization))
+    }
+    GUI_AFFILIATION_SAVE_SCHEMA_VERSION => {
+      load_affiliation_session_save_text(text, path, session_id, affiliation_ruleset)
         .map(|save| save.map(GuiSessionSave::Affiliation))
     }
     other => Err(format!("unsupported GUI save schema '{other}'")),
@@ -361,7 +419,20 @@ pub fn read_gui_session_checkpoint_artifact(
       candidate.display()
     ));
   }
-  if load_gui_session_save(
+  let bytes = fs::read(&candidate).map_err(|error| {
+    format!(
+      "unable to read GUI checkpoint artifact {}: {error}",
+      candidate.display()
+    )
+  })?;
+  let text = std::str::from_utf8(&bytes).map_err(|error| {
+    format!(
+      "GUI checkpoint artifact is not valid UTF-8 at {}: {error}",
+      candidate.display()
+    )
+  })?;
+  if load_gui_session_save_text(
+    text,
     &candidate,
     session_id,
     competitive_ruleset,
@@ -372,12 +443,7 @@ pub fn read_gui_session_checkpoint_artifact(
   {
     return Ok(None);
   }
-  fs::read(&candidate).map(Some).map_err(|error| {
-    format!(
-      "unable to read GUI checkpoint artifact {}: {error}",
-      candidate.display()
-    )
-  })
+  Ok(Some(bytes))
 }
 
 pub fn discover_gui_session_checkpoints(
