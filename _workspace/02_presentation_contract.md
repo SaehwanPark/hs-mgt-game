@@ -5145,3 +5145,43 @@ unrestricted text remain excluded. The host remains authoritative.
 `tests/test_phase13_2_educational_usability_evidence_intake.py` checks source
 and vocabulary parity, deterministic record shape, privacy exclusions, type
 safety, nested pending boundaries, and pending educational decisions.
+
+# Presentation Contract — Remaining-gate technical audit v0.13.96
+
+## Goal and authorization
+
+Provide a documentation/evaluation-only audit of the remaining visual/audio
+roadmap gates. It adds no presentation path and cannot approve an asset,
+campaign, participant result, or release.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Audit use | Prohibited inference |
+| --- | --- | --- | --- |
+| Technical evidence | Existing Phase 13.1/13.2 packets and validators | Identify completed source-bound preparation | Do not infer human quality or approval |
+| Remaining roadmap items | `docs/visual_audio_enhancement_roadmap.md` unchecked markers | Ensure every substantive open gate is mapped | Do not rewrite an open human gate as complete |
+| Human status | Existing intake decision, review, and boundary fields | Preserve pending authority and next action | Do not create reviewer identity, findings, or decisions |
+| Audit validator | `scripts/validate_remaining_gate_technical_audit.py` | Fail closed on drift or promotion | Do not treat validator success as human evidence |
+
+## Accessibility, privacy, and authority
+
+The audit does not render or modify the GUI, audio, assets, host projections,
+simulation transitions, replay, or state hashes. It stores no participant
+identity, raw notes/media, browser/session location, private state, or hidden
+actor information. Meaningful presentation remains available through the
+existing written, reduced-motion, mute, and fallback contracts; this slice
+does not evaluate those contracts with humans.
+
+## Verification and evidence limits
+
+The focused test proves source/marker parity, strict status boundaries, and
+absence of premature release or human decisions. Passing proves only
+technical audit integrity. Human provenance/legal, resemblance, accessibility,
+audio, educational, debrief, clinical/policy, browser/device, revision, and
+expansion decisions remain pending.
+
+## Non-goals and open questions
+
+The audit does not answer whether the GUI is understandable, whether audio is
+useful, whether assets are legally clear, or whether full campaign coverage
+should be approved. Those require authorized human evidence and decisions.

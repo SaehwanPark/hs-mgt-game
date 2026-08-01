@@ -671,3 +671,50 @@ evidence before closing the roadmap item.
   — focused packet, source-parity, and record-boundary validation.
 - `python3 scripts/validate_educational_usability_evidence_intake.py` — empty,
   source-bound, pending intake contract.
+
+# Domain QA — Remaining-gate technical audit v0.13.96
+
+## Status
+
+`pass` for the source-bound technical audit only. The audit does not close or
+infer any human, legal, clinical/policy, runtime-certification, revision,
+expansion, or public-release gate.
+
+## Reviewed inputs
+
+- `_workspace/174_implementation_plan_visual-audio-phase13-remaining-gate-technical-audit-v0.13.96.md`.
+- `docs/evaluation/phase13-remaining-gate-technical-audit.json` and its
+  validator/test.
+- The current Phase 13.1/13.2 technical packets, intake validators, and
+  `docs/visual_audio_enhancement_roadmap.md` open markers.
+
+## Findings
+
+- All 27 substantive open roadmap markers are mapped to exactly one of eight
+  stable gate IDs with source paths, source markers, technical status, pending
+  authority, and a next action.
+- The audit reports no remaining technical implementation gap, but keeps every
+  promotion-relevant human/runtime gate pending and blocking.
+- The validator rejects source/marker drift, unmapped items, type coercion,
+  unsupported status promotion, and non-null approval fields.
+- No simulation transition, actor-visible projection, replay/hash boundary,
+  or educational claim is changed.
+
+## Required fixes
+
+None for this bounded technical-audit slice.
+
+## Residual risks and evidence limits
+
+The roadmap remains substantively open until authorized reviewers provide the
+listed provenance/legal, resemblance, accessibility, audio, educational,
+debrief, clinical/policy, browser/device, revision, and expansion evidence.
+Automated audit integrity is not human evidence or public-release approval.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_remaining_gate_technical_audit` — pass.
+- Full Python suite: 899 tests — pass.
+- Rust suite: 375 tests — pass.
+- Clippy, formatting, release metadata, documentation links, asset registry,
+  release manifest, and diff checks — pass.

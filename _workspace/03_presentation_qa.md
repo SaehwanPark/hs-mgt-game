@@ -5854,3 +5854,51 @@ recording findings or marking educational usability reviewed.
 
 `tests/test_phase13_2_educational_usability_evidence_intake.py` checks source
 parity, privacy exclusions, bounded values, type safety, and pending decisions.
+
+# Presentation QA — Remaining-gate technical audit v0.13.96
+
+## Status
+
+`pass` for the documentation/evaluation-only audit boundary. No visual, audio,
+GUI, asset, host, replay, or browser presentation behavior was changed.
+
+## Reviewed inputs and authorization
+
+- The v0.13.96 request summary, presentation contract, implementation plan,
+  audit packet, validator, and focused tests.
+- Existing visual/audio registries, release/credits projections, Phase 13.1
+  technical packets, Phase 13.2 evidence intakes, and roadmap markers.
+
+## Information and causality findings
+
+- The audit consumes only committed documentation and source markers; it does
+  not derive severity, intent, future outcomes, or causal claims in the
+  browser.
+- It preserves the existing actor-visible, written-equivalent, reduced-motion,
+  mute, fallback, host-authority, and replay boundaries.
+
+## Accessibility, privacy, provenance, and authority findings
+
+- No participant identity, raw notes/media, browser/session location, private
+  state, new asset, release derivative, or audio file is introduced.
+- Technical asset/credits parity is regenerated and passes; the audit does not
+  imply human provenance, resemblance, accessibility, legal, or release
+  approval.
+- The audit is outside commands, transition evaluation, stochastic inputs,
+  state hashes, and authoritative replay.
+
+## Required fixes
+
+None for this bounded audit slice.
+
+## Residual risks and evidence limits
+
+Human visual/audio quality, accessibility, educational usability, provenance/
+legal, resemblance, clinical/policy, browser/device, revision, expansion, and
+public-release review remain open and explicitly blocking.
+
+## Verification evidence
+
+- `python3 scripts/validate_remaining_gate_technical_audit.py` — pass.
+- Focused audit tests and all existing Python/Rust, asset, release, and
+  documentation checks — pass.

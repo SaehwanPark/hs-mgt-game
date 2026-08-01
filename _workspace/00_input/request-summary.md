@@ -4187,3 +4187,42 @@ Focused educational-usability intake validator and source-parity tests; full
 Python/Rust, asset/release, formatting/clippy, and documentation checks;
 exactly one medium-effort review; authorized PR/merge and temporary-branch
 cleanup.
+
+# Request Summary — Remaining-gate technical audit v0.13.96
+
+## Authorized outcome
+
+Continue the visual/audio roadmap by consolidating all substantive unchecked
+roadmap gates into a source-bound technical audit, while preserving each
+authorized human-evidence boundary.
+
+## Target slice
+
+- Bind open portrait/AI metadata, audio and first-time-user evaluation,
+  educational/debrief review, content/resemblance/clinical review, competitive
+  human coverage, browser/device certification, revision decisions, and
+  campaign-expansion approval to existing evidence packets and roadmap markers.
+- Record current technical preparation separately from pending human status and
+  the required authority/action.
+- Add strict validation and mutation coverage for source, type, status, and
+  roadmap-marker drift.
+
+## Non-goals
+
+- No human review, participant result, legal conclusion, clinical/policy
+  conclusion, revision, expansion decision, or public-release approval.
+- No runtime, GUI, simulation, asset, audio, browser, persistence, or release
+  behavior change; no raw notes, media, identity, private state, or
+  session location is stored.
+
+## Validation target
+
+Focused audit validator/tests; full repository checks; one medium-effort code
+review; authorized PR/merge and temporary-branch cleanup.
+
+## Evidence limits
+
+This slice proves that the remaining roadmap work is explicitly mapped and
+that current technical evidence is source-bound. It cannot close the human
+evidence gates or establish educational, accessibility, legal, clinical,
+policy, or public-release readiness.
