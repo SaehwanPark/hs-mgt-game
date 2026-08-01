@@ -454,6 +454,10 @@ async fn static_asset(uri: Uri) -> Response {
       "text/javascript; charset=utf-8",
       include_str!("../gui/first-month.mjs").to_string(),
     ),
+    "/workspace.mjs" => (
+      "text/javascript; charset=utf-8",
+      include_str!("../gui/workspace.mjs").to_string(),
+    ),
     "/metric-visualizations.mjs" => (
       "text/javascript; charset=utf-8",
       include_str!("../gui/metric-visualizations.mjs").to_string(),
@@ -654,6 +658,7 @@ mod tests {
         include_str!("../gui/facility-components.mjs"),
       ),
       ("/first-month.mjs", include_str!("../gui/first-month.mjs")),
+      ("/workspace.mjs", include_str!("../gui/workspace.mjs")),
       (
         "/metric-visualizations.mjs",
         include_str!("../gui/metric-visualizations.mjs"),

@@ -1375,6 +1375,19 @@ The 24-month campaign loop features autosave/resume, scenario loading, and repla
 Last Reviewed: 2026-07-07
 Status: Verified (router, report, validation, genesis, resolver, AI, events, CLI, campaign loop, autosave, scenario loader)
 
+## v0.14.1 GUI presentation boundary
+
+The GUI task-workspace shell keeps Setup, Brief, Decide, Resolve, and Review as
+presentation-only roots over the existing host observations, command catalog,
+validation, transition, history, replay, checkpoint, and debrief contracts.
+`gui/workspace.mjs` maps host/session events to one visible workspace and keeps
+briefing/resolution acknowledgements explicit. Native hidden roots prevent
+inactive controls from receiving focus; bounded collections and utility/context
+dialogs reduce default density without changing the host envelope. The
+regional board and visual-token catalog remain text-equivalent, source-led, and
+dependency-free. Human cognitive-load/accessibility evidence and any generated
+asset decision remain pending the authorized pilot.
+
 ## Open Architectural Decisions
 
 - Durable replay artifact format: `replay-artifact-0.1.15` stores ruleset id,

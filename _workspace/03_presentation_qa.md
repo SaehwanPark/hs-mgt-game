@@ -6002,3 +6002,198 @@ release claim is inferred from the technical observation.
 - `python3 -m unittest tests.test_phase11_live_debrief tests.test_phase13_2_debrief_visual_boundary` — pass.
 - The Rust player/instructor debrief separation regression remains
   authoritative.
+
+---
+
+# Presentation QA — Task workspace redesign v0.14.1
+
+## Status
+
+`pass` for source-bound implementation and automated/host-contract checks;
+human cognitive-load, lived accessibility, browser/device, and educational
+effectiveness gates remain explicitly pending.
+
+## Findings and checks
+
+- One active workspace is controlled by `gui/workspace.mjs`; inactive roots use
+  native `hidden` and `aria-hidden`, and navigation uses ordinary buttons with
+  `aria-current="page"`.
+- Briefing and resolution progression requires explicit handoff reasons;
+  loading, refresh, or navigation alone does not acknowledge review.
+- Bounded lists preserve host order, visible totals/overflow disclosures,
+  uncertainty, missingness, source labels, costs, status, and written
+  equivalents. Campaign coverage now has a dedicated latest-transition Resolve
+  surface while its canonical submit path remains unchanged.
+- Long text wraps, supported board layouts are full-width, phone board content
+  is disclosure-gated, Large Text is 125%, and primary targets are 44px.
+- Visual tokens provide hover/focus `aria-describedby` help and click/tap
+  contextual-drawer explanations; existing catalog symbols remain in use.
+
+## Evidence run
+
+- Focused GUI/workspace/first-month/campaign/resolution/live-host tests — pass.
+- Loading/offline policy checks and embedded-route tests — pass.
+- Node syntax checks and HTML/static accessibility checks — pass.
+- Full Python/Rust/release/clippy checks are the final handoff gate; no browser
+  or authorized human pilot is claimed by this record.
+
+## Runtime measurement addendum — v0.14.1
+
+- Embedded GUI delivery remained within the device proxy contract after the
+  workspace split: measured source/runtime payload `444990` bytes against the
+  synchronized `445000`-byte limit.
+- This is a packaging/runtime-boundary measurement only. It does not certify
+  viewport height, browser engines, real devices, accessibility, or cognitive
+  load.
+
+## Final verification addendum — v0.14.1
+
+- Full Python suite: 939 tests passed.
+- Rust formatting, clippy, and cargo tests passed; the embedded GUI served `/`,
+  `/workspace.mjs`, and a host session-start request with HTTP 200.
+- Release metadata, documentation links, loading/offline policy, device proxy,
+  Node syntax, and whitespace checks passed.
+- No real-browser layout matrix or authorized human pilot was run; the
+  cognitive-load/usability gate and conditional asset gate remain open.
+
+---
+
+# Presentation QA — Word-sized visible-information wrapping correction v0.14.1
+
+## Status
+
+`pass` for the targeted source-preserving layout correction. The screenshot
+defect was a presentation-only flex min-content collapse; no host data or
+command behavior changed.
+
+## Reviewed Inputs and Authorization
+
+- User-provided screenshot showing the `Visible information` marker and
+  `Uncertain or stale intelligence` badge collapsed to one character per line.
+- Changed surface: `gui/index.html` and the focused workspace regression test.
+
+## Information and Causality Findings
+
+- The correction changes only CSS sizing and wrapping. Existing source labels,
+  uncertainty language, missingness, and host-provided text remain visible.
+- No ranking, recommendation, severity inference, causal claim, or hidden state
+  is introduced.
+
+## Accessibility and Fallback Findings
+
+- Timeline rows use stable grid tracks at supported widths and wrap to a full
+  status line on narrow screens.
+- Ordinary labels wrap at word boundaries; `break-word` remains available for
+  genuinely unbroken host strings, while hashes retain their explicit fallback.
+
+## Provenance and Rights Findings
+
+- No new asset, font, external resource, or visual identity was added.
+
+## Authority and Replay Findings
+
+- No HTTP, MCP, host-adapter, command, transition, history, replay, checkpoint,
+  or persistence boundary changed.
+
+## Required Fixes
+
+- None for the targeted defect. Human/browser visual confirmation remains a
+  separate gate.
+
+## Residual Risks and Evidence Limits
+
+- Automated checks cannot establish final browser pixel layout or cognitive
+  load. The authorized pilot and browser/device matrix remain pending.
+
+## Verification Evidence
+
+- Node syntax checks passed.
+- Workspace, visual-identity, accessibility, and device-proxy checks passed;
+  device source measured `444990` bytes against the `445000`-byte limit.
+
+---
+
+# Presentation QA — Actor and overlay alignment correction v0.14.1
+
+## Status
+
+`pass` for the follow-up screenshot correction. Long actor status summaries are
+now ordinary readable text, and marker labels use non-collapsing word-sized
+tracks instead of status/marker pills that can consume a single character.
+
+## Reviewed Inputs and Authorization
+
+- User-provided campaign-actor and visible-overlay screenshots.
+- Changed surfaces: `gui/app.mjs`, `gui/index.html`, and focused workspace tests.
+
+## Information and Causality Findings
+
+- Actor status text, overlay values, source labels, uncertainty, and missingness
+  remain unchanged and host-derived.
+- The correction changes presentation semantics only; no local ranking or
+  causal interpretation is introduced.
+
+## Accessibility and Fallback Findings
+
+- Long actor summaries are readable paragraphs rather than compressed badges.
+- Marker labels remain single-line where the catalog label fits; status text
+  wraps onto its own row on narrow screens.
+
+## Provenance and Rights Findings
+
+- No assets, fonts, external resources, or new visual identifiers were added.
+
+## Authority and Replay Findings
+
+- Host DTOs, commands, transitions, history, replay, checkpoints, and
+  persistence remain untouched.
+
+## Required Fixes
+
+- None identified by the targeted screenshot review; browser pixel review is
+  still separate.
+
+## Residual Risks and Evidence Limits
+
+- Automated tests cannot certify all browser engines, zoom levels, or lived
+  readability. Human/browser validation remains pending.
+
+## Verification Evidence
+
+- Full Python suite: 940 tests passed.
+- Node syntax, GUI campaign/workspace tests, Rust checks, and device proxy
+  passed; source measured `444990` / `445000` bytes.
+
+---
+
+# Presentation QA — Overlay track sizing correction v0.14.1
+
+## Status
+
+`pass` for the browser-reproduced follow-up defect. The regional overlay list
+now uses two flexible columns instead of an `auto` value track that could take
+the entire row and collapse the marker/title track to zero pixels.
+
+## Verification Evidence
+
+- Local GUI browser inspection at `1024×768` reproduced the collapsed track
+  before the correction (`0px 905.906px`) and measured the corrected tracks at
+  `452.953px 452.953px`.
+- The long uncertainty heading now wraps across words, and the host-provided
+  value wraps across multiple words without character-per-line rendering.
+- Actor summaries remain ordinary paragraphs below the actor heading; source,
+  uncertainty, and missingness text remain visible.
+- Device source measurement is synchronized at `444994` / `445000` bytes.
+
+## Authority and Evidence Limits
+
+- This is presentation-only CSS; host DTOs, commands, transitions, history,
+  replay, checkpoints, persistence, and asset provenance are unchanged.
+- The local browser check is targeted evidence, not cross-browser certification
+  or a substitute for the authorized human usability pilot.
+
+## Verification refresh
+
+- Full Python suite: 941 tests passed; Node syntax, release metadata,
+  documentation links, loading/offline policy, device proxy, Rust formatting,
+  clippy, and Rust tests also passed.

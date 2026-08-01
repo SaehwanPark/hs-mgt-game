@@ -5627,6 +5627,37 @@ explicit missingness. Package and public metadata were bumped to `0.12.22`.
 
 ## Present
 
+### GUI task-workspace redesign (v0.14.1)
+
+Status: Technically verified; authorized human cognitive-load, accessibility,
+and usability validation remains open.
+
+Done:
+
+- Added the dependency-free `gui/workspace.mjs` controller with Setup, Brief,
+  Decide, Resolve, and Review roots, event routing, native hidden-state
+  visibility, focus restoration, utility/context dialogs, and explicit
+  briefing/resolution acknowledgement handoffs.
+- Split the existing presentation into task workspaces, bounded host-ordered
+  collections, responsive regional-board/entity views, 125% Large Text, and
+  keyboard/focusable contextual explanations while preserving host envelopes,
+  commands, history, replay, checkpoints, and debrief semantics.
+- Registered the module in embedded/offline delivery manifests and added
+  focused controller/density/flow tests.
+
+Not Yet Done:
+
+- Host-backed layout measurements across all campaigns and the authorized
+  five-group structured pilot are still required before claiming cognitive-load,
+  accessibility, educational-effectiveness, or browser certification.
+
+Deferred / Non-Goals:
+
+- No simulation, balance, actor, campaign, persistence, command, transition,
+  replay, checkpoint, or debrief-semantic change.
+- No generated artwork, new framework/runtime dependency, locally ranked
+  recommendation, hidden-state inference, or sub-768 full-play certification.
+
 The Phase 1.3 audio direction standards and policy fixture proof are complete
 through v0.12.38. Broader production and human or educational evaluation remain
 separately gated Future work.

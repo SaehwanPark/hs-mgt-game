@@ -24,3 +24,62 @@ This document details the implementation of the `competitive-exemplary-v1` scena
 ## Version Bump
 - Package version bumped to `0.5.6` in `Cargo.toml`.
 - Added release notes for `0.5.6` in `CHANGELOG.md` and `SPEC.md`.
+
+---
+
+# QA Handoff — GUI task workspace redesign v0.14.1
+
+## Changed files
+
+`gui/index.html`, `gui/app.mjs`, `gui/first-month.mjs`, new
+`gui/workspace.mjs`, `src/gui_server.rs`, loading/offline manifests, focused
+GUI tests, canonical docs, version metadata, and append-only presentation
+artifacts.
+
+## Verification target
+
+Run Node syntax, focused/full Python tests, loading/offline/documentation and
+release checks, `cargo fmt --check`, `cargo clippy --all-targets -- -D
+warnings`, and `cargo test`. Host-backed campaign workflows must retain the
+existing command, envelope, transition, history, replay, checkpoint, and
+debrief behavior.
+
+## Residual risk
+
+No authorized human pilot or real browser/device layout matrix has been run in
+this handoff. Treat the redesign as technically verified and pending human
+cognitive-load/accessibility/usability validation. PR3 asset generation remains
+conditional on recorded repeated findings and provenance/licensing approval.
+
+## Final verification addendum — v0.14.1
+
+- Full Python suite: 939 passed; Rust `cargo test`, `cargo fmt --check`, and
+  `cargo clippy --all-targets -- -D warnings` passed.
+- Embedded smoke served the shell, `/workspace.mjs`, and host session creation;
+  release, documentation, loading/offline, device-proxy, syntax, and diff
+  checks passed.
+- Residual risk is unchanged: no browser layout certification or authorized
+  human cognitive-load/usability result is claimed.
+
+### Word-sized wrapping correction
+
+The follow-up screenshot defect is addressed with stable timeline grid tracks,
+word-boundary label wrapping, and a narrow-screen status row. The correction is
+presentation-only and adds no host or asset contract.
+
+### Actor and overlay follow-up
+
+Long actor summaries now render as readable text below the actor heading, and
+overlay/process marker labels cannot collapse to character-per-line pills.
+
+### Overlay track sizing correction
+
+Browser reproduction found the long intelligence value could still consume the
+entire `auto` grid track and leave the marker/title track at zero width. The
+regional overlay list now uses two flexible columns, preserving readable
+word-sized heading and value wrapping. Device source remains within the
+`445000`-byte proxy limit (`444994` bytes measured).
+
+The refreshed verification run passes all 941 Python tests plus Node syntax,
+release/documentation, loading/offline, device-proxy, formatting, clippy, and
+Rust test checks.

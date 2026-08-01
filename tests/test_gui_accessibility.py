@@ -21,13 +21,13 @@ class GuiAccessibilityTests(unittest.TestCase):
   def test_keyboard_landmarks_and_stable_targets_exist(self):
     for marker in (
       'class="skip-link"',
-      'href="#briefing-region"',
+      'data-workspace-target="brief"',
       'id="briefing-region" tabindex="-1"',
       'id="presentation-navigation"',
       'aria-label="Presentation sections"',
-      'href="#action-region"',
-      'href="#resolution-panel"',
-      'href="#debrief-region"',
+      'data-workspace-target="decide"',
+      'data-workspace-target="resolve"',
+      'data-workspace-target="review"',
       'id="briefing-region"',
       'id="action-region"',
       'id="resolution-panel"',

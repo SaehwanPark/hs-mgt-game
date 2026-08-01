@@ -106,6 +106,13 @@
     },
     {
       "urls": [
+        "/workspace.mjs"
+      ],
+      "source": "gui/workspace.mjs",
+      "kind": "module"
+    },
+    {
+      "urls": [
         "/metric-visualizations.mjs"
       ],
       "source": "gui/metric-visualizations.mjs",

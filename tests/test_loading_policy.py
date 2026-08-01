@@ -24,11 +24,11 @@ class LoadingPolicyTests(unittest.TestCase):
     report = self.checker.build_report(ROOT, self.document)
     self.assertEqual(report["status"], "pass")
     self.assertEqual(report["schema_version"], "loading-policy-report-v1")
-    self.assertEqual(report["live_file_count"], 20)
+    self.assertEqual(report["live_file_count"], 21)
     self.assertEqual(report["marker_hits"], [])
     self.assertEqual(report["entrypoint_sources"], ["gui/app.mjs"])
-    self.assertEqual(len(report["module_sources"]), 18)
-    self.assertEqual(len(report["discovered_sources"]), 19)
+    self.assertEqual(len(report["module_sources"]), 19)
+    self.assertEqual(len(report["discovered_sources"]), 20)
     self.assertEqual(report["decisions"], {
       "lazy_loading": "no-lazy-loading-needed",
       "preloading": "no-preload-directives",
