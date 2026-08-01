@@ -1733,6 +1733,12 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
       renderActionDetails(action, root);
     });
     toggle.addEventListener?.("click", () => setExpanded(expandedId === action.id ? null : action.id, true));
+    toggle.addEventListener?.("keydown", (event) => {
+      if (["Enter", " ", "Spacebar"].includes(event.key)) {
+        event.preventDefault?.();
+        toggle.click?.();
+      }
+    });
     header.append(toggle, detailsButton);
 
     const body = actionNode(root, "div", null, "action-card-body");

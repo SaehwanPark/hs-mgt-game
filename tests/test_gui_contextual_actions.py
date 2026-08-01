@@ -154,6 +154,7 @@ class GuiContextualActionTests(unittest.TestCase):
             event.target ??= this;
             for (const listener of this.listeners[type] ?? []) listener(event);
           },
+          click() { this.dispatch("click"); },
           setAttribute(name, value) { this[name] = String(value); },
           removeAttribute(name) { delete this[name]; },
           querySelector(selector) {
@@ -220,6 +221,8 @@ class GuiContextualActionTests(unittest.TestCase):
       if (first.children[1].hidden || second.children[1].hidden !== true || firstToggle.focused !== 1) process.exit(3);
       secondToggle.dispatch("click");
       if (first.children[1].hidden !== true || second.children[1].hidden || secondToggle.focused !== 1) process.exit(4);
+      firstToggle.dispatch("keydown", { key: "Enter", preventDefault() {} });
+      if (first.children[1].hidden || second.children[1].hidden !== true || firstToggle.focused !== 2) process.exit(7);
       const details = second.children[0].children[1];
       details.dispatch("click", { stopPropagation() {} });
       if (!nodes.get("#context-drawer").open) process.exit(5);
