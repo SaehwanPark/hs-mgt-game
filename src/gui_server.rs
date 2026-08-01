@@ -99,7 +99,7 @@ pub async fn run_gui_server(address: SocketAddr) -> Result<(), Box<dyn std::erro
   println!("Health Policy Strategy Game GUI: http://{local}");
   let save_path = crate::cli::gui_competitive_session_save_path();
   println!(
-    "Keep this terminal running. Explicit GUI checkpoints use the host file {}.",
+    "Keep this terminal running. Explicit GUI checkpoints use the host archive rooted at {}.",
     save_path.display()
   );
   axum::serve(listener, gui_router_with_persistence(save_path))
@@ -450,6 +450,7 @@ async fn static_asset(uri: Uri) -> Response {
 #[cfg(test)]
 mod tests {
   use super::*;
+  use crate::mcp::gui_session_checkpoint_path;
   use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
   #[test]
@@ -803,7 +804,8 @@ mod tests {
     assert_eq!(status, 200, "{body}");
     let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(saved["transition_count"], 1);
-    assert!(path.is_file());
+    let checkpoint_path = gui_session_checkpoint_path(&path, &session_id).unwrap();
+    assert!(checkpoint_path.is_file());
     server.abort();
 
     let (address, restarted_server) = test_server_with_persistence(path.clone()).await;
@@ -883,7 +885,8 @@ mod tests {
     assert_eq!(status, 200, "{body}");
     let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(saved["transition_count"], 1);
-    assert!(path.is_file());
+    let checkpoint_path = gui_session_checkpoint_path(&path, &session_id).unwrap();
+    assert!(checkpoint_path.is_file());
     server.abort();
 
     let (address, restarted_server) = test_server_with_persistence(path.clone()).await;
@@ -961,7 +964,8 @@ mod tests {
     assert_eq!(status, 200, "{body}");
     let saved: serde_json::Value = serde_json::from_str(&body).unwrap();
     assert_eq!(saved["transition_count"], 1);
-    assert!(path.is_file());
+    let checkpoint_path = gui_session_checkpoint_path(&path, &session_id).unwrap();
+    assert!(checkpoint_path.is_file());
     server.abort();
 
     let (address, restarted_server) = test_server_with_persistence(path.clone()).await;

@@ -7756,6 +7756,25 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.101.md`, and
 `docs/evaluation/phase13-remaining-gate-technical-audit.json`.
 
+### Per-session durable GUI checkpoint archive (v0.13.102)
+
+The GUI host now writes explicit competitive, stabilization, and
+regional-affiliation checkpoints to separate files in the sibling
+`.checkpoints` archive, keyed by validated opaque session ID. Fresh
+hosts can hydrate each campaign independently, and terminal cleanup removes
+only the matching archive file. Existing single-file GUI checkpoints remain
+loadable as a migration fallback.
+
+The browser still stores only the opaque session ID and calls the existing host
+load route. This does not establish browser save serialization, checkpoint
+discovery, replay regeneration, human review, browser/device certification, or
+public-release approval.
+
+The target is recorded in
+`_workspace/180_implementation_plan_phase11-per-session-durable-checkpoints-v0.13.102.md`,
+`_workspace/00_input/request-summary-v0.13.102.md`, and
+`docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
