@@ -754,3 +754,37 @@ The observation does not establish Firefox/WebKit certification, real hardware
 performance, lived accessibility/usability, audio quality, educational value,
 full campaign coverage, or public-release readiness. Those remain authorized
 runtime or human gates.
+
+# Domain QA — First-session/audio runtime-boundary evidence v0.13.98
+
+## Status
+
+`pass` for bounded technical presentation evidence only. No participant,
+listening, accessibility, educational, browser/device, clinical, expansion, or
+public-release status is promoted.
+
+## Reviewed inputs
+
+- `_workspace/176_implementation_plan_visual-audio-phase13-1-first-session-audio-runtime-evidence-v0.13.98.md`.
+- `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`, its
+  validator/test, and the existing first-session/audio/low-distraction packets.
+- `gui/first-month.mjs`, `gui/app.mjs`, `gui/audio.mjs`, and `gui/index.html`.
+
+## Findings
+
+- The live observation exposes the complete seven-stage competitive rail with
+  host-authority language and current actor-visible briefing/observation/
+  history/debrief surfaces.
+- Low-distraction mode forces the documented reduced-motion, Large-text,
+  cue-explanation, muted-audio, and reduced-notification state while locking
+  conflicting controls; independent settings remain distinct.
+- Cues-only and muted states retain written equivalents. Optional cue copy is
+  correctly distinguished from mandatory written results when hidden.
+- The packet records no playback verification, private state, causal inference,
+  participant data, or human conclusion.
+
+## Residual risks and evidence limits
+
+Human first-time-user, audio-listening, accessibility, educational, hardware,
+browser/device, provenance, revision, expansion, and public-release review
+remain open and require authorized evidence.

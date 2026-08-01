@@ -1,0 +1,174 @@
+{
+  "schema_version": "phase13.1-first-session-audio-runtime-evidence-v1",
+  "status": "complete-first-session-audio-runtime-boundary-pending-human-evaluation",
+  "package_version": "0.13.98",
+  "roadmap_item": "audio and first-session evaluation",
+  "observed_on": "2026-08-01",
+  "observation": {
+    "method": "Codex in-app Browser Playwright DOM snapshots after host-backed launch and presentation-only control interactions",
+    "url": "http://127.0.0.1:7878/",
+    "browser": {
+      "name": "Chrome",
+      "engine": "Chromium",
+      "version": "150.0.0.0",
+      "platform": "macOS",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "protocol": "Chrome DevTools Protocol"
+    },
+    "host_start": {
+      "status": "competitive regional session loaded: session-1",
+      "session_id": "session-1",
+      "demo_fixture": false
+    },
+    "first_session_rail": {
+      "flow_schema": "competitive-first-month-v1",
+      "stage_count": 7,
+      "stage_labels": [
+        "Start or load",
+        "Inspect the visible market",
+        "Draft contextual actions",
+        "Review and validate",
+        "Submit the unchanged batch",
+        "Review monthly resolution",
+        "Continue to the next observation"
+      ],
+      "current_stage": "Draft contextual actions",
+      "progress": "Draft contextual actions · 3 of 7",
+      "source": "gui/first-month.mjs",
+      "all_stage_details_present": true,
+      "host_authority_language_present": true
+    },
+    "actor_visible_surface": {
+      "title": "Health Policy Strategy Game — Executive Desktop",
+      "ready": "complete",
+      "briefing_present": true,
+      "current_observation_present": true,
+      "written_history_present": true,
+      "debrief_placeholder_present": true,
+      "private_state_claim_absent": true,
+      "written_equivalent_policy_present": true
+    },
+    "repository_state_written": false,
+    "host_session_started": true
+  },
+  "settings_observation": {
+    "low_distraction_forced": {
+      "mode_active": true,
+      "reduced_motion_active": true,
+      "large_text_active": true,
+      "cue_explanations_active": true,
+      "audio_controls_disabled": true,
+      "reduced_notifications_active": true,
+      "written_results_complete": true
+    },
+    "independent_accommodation": {
+      "mode_active": false,
+      "reduced_motion_active": true,
+      "large_text_active": true,
+      "cue_explanations_active": true,
+      "written_results_complete": true,
+      "restored_after_low_distraction": true
+    },
+    "written_content_contract": {
+      "settings_summary_present": true,
+      "written_results_present": true,
+      "history_surface_present": true,
+      "debrief_surface_present": true
+    }
+  },
+  "audio_observation": {
+    "audio_controls_exposed": true,
+    "low_distraction_state": {
+      "controls_disabled": true,
+      "reduced_notifications_active": true,
+      "muted_by_mode": true
+    },
+    "cues_only_state": {
+      "mode": "cues-only",
+      "status": "Cues-only mode enabled; music and ambience are off while interface/event cues remain available.",
+      "written_equivalent_present": true,
+      "playback_verified": false
+    },
+    "muted_state": {
+      "status": "Audio muted; visual and text equivalents remain active.",
+      "written_equivalent_present": true,
+      "playback_verified": false
+    },
+    "optional_equivalent_contract": {
+      "visible_when_text_equivalents_enabled": true,
+      "hidden_when_optional_explanations_disabled": true,
+      "written_results_remain_complete_when_hidden": true
+    },
+    "audio_playback_verified": false,
+    "audio_listening_review_complete": false
+  },
+  "review_boundary": {
+    "technical_first_session_observation_complete": true,
+    "technical_accessibility_state_observation_complete": true,
+    "technical_audio_fallback_observation_complete": true,
+    "first_time_user_evaluation_complete": false,
+    "audio_preference_feedback_collected": false,
+    "quantitative_audio_ratings_collected": false,
+    "qualitative_audio_interviews_completed": false,
+    "human_accessibility_review_complete": false,
+    "educational_usability_review_complete": false,
+    "browser_device_certification_complete": false,
+    "public_release_approval": false
+  },
+  "source_contract": {
+    "sources": [
+      "docs/evaluation/phase13.1-first-session-boundary.json",
+      "docs/evaluation/phase13.1-first-session-review-packet.json",
+      "docs/evaluation/phase10.2-audio-preference-review-packet.json",
+      "docs/evaluation/phase13.2-low-distraction-mode.json",
+      "gui/first-month.mjs",
+      "gui/app.mjs",
+      "gui/audio.mjs",
+      "gui/index.html",
+      "tests/test_gui_first_month.py",
+      "tests/test_audio_fallback.py"
+    ],
+    "required_markers": [
+      "docs/evaluation/phase13.1-first-session-boundary.json: complete-current-technical-first-session-boundary-only",
+      "docs/evaluation/phase13.1-first-session-review-packet.json: complete-technical-packet-pending-human-review",
+      "docs/evaluation/phase10.2-audio-preference-review-packet.json: complete-technical-packet-pending-human-review",
+      "docs/evaluation/phase13.2-low-distraction-mode.json: complete-local-presentation-mode-only",
+      "gui/first-month.mjs: export const FIRST_MONTH_FLOW_SCHEMA",
+      "gui/app.mjs: const applyLowDistractionAudio = () =>",
+      "gui/audio.mjs: Audio muted; visual and text equivalents remain active.",
+      "gui/audio.mjs: Cues-only mode enabled; music and ambience are off",
+      "gui/index.html: id=\"audio-equivalent\"",
+      "gui/index.html: id=\"settings-state\"",
+      "tests/test_gui_first_month.py: test_host_adapter_sequence_reaches_continue_and_rejection_stays_recoverable",
+      "tests/test_audio_fallback.py: test_audio_projection_and_runtime_failures_preserve_visible_equivalents"
+    ],
+    "forbidden_claim_markers": [
+      "human first-time-user evaluation complete",
+      "audio preference feedback collected",
+      "quantitative audio ratings collected",
+      "qualitative audio interviews completed",
+      "audio quality approved",
+      "human accessibility review complete",
+      "public release approved",
+      "Firefox/WebKit certified"
+    ]
+  },
+  "evidence_limits": [
+    "The observation covers one current Chrome first-session launch and presentation-control state sequence only; it is not participant evidence.",
+    "No listening feedback, audio quality, fatigue, quantitative rating, qualitative interview, or decoder/playback conclusion is established.",
+    "Technical accommodation states do not establish human accessibility, first-time-user comprehension, educational usability, or classroom readiness.",
+    "The observation does not certify Firefox/WebKit, browser/device compatibility, real hardware, battery/thermal behavior, or cross-device performance.",
+    "The packet does not authorize revision decisions, campaign expansion, support promotion, or public release."
+  ],
+  "release_boundary": {
+    "technical_evidence_added": true,
+    "gui_changes": 0,
+    "runtime_changes": 0,
+    "simulation_changes": 0,
+    "audio_changes": 0,
+    "asset_changes": 0,
+    "persistence_changes": 0,
+    "support_policy_changed": false,
+    "public_release_approval": false
+  }
+}

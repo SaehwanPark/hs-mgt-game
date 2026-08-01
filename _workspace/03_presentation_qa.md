@@ -5934,3 +5934,37 @@ behavior was changed.
 - `python3 -m unittest tests.test_phase13_1_runtime_capability_evidence` — pass.
 - `python3 scripts/validate_runtime_capability_evidence.py` — pass.
 - Existing browser/device and Phase 13 technical validators remain authoritative.
+
+# Presentation QA — First-session/audio runtime-boundary evidence v0.13.98
+
+## Status
+
+`pass` for the bounded live presentation observation. No GUI, audio, asset,
+simulation, host, replay, policy, or release behavior was changed.
+
+## Information and causality findings
+
+- The seven-stage rail is sourced from `gui/first-month.mjs` and reports
+  presentation handoffs while the host owns commands and outcomes.
+- The observation uses actor-visible briefing, observation, history, and
+  debrief surfaces only; it does not infer private rival activity or future
+  results.
+- Cues-only/muted status language is visible, but no playback or listening
+  quality claim is recorded.
+
+## Accessibility, fallback, provenance, and authority findings
+
+- Low-distraction, reduced-motion, Large-text, optional cue-explanation,
+  audio-off, and written-result states are recorded separately and preserve
+  the existing local presentation-only boundary.
+- Optional audio explanation copy may be hidden by the user; mandatory written
+  results, history, and debrief remain part of the contract.
+- No participant identity, raw media, hidden state, new asset, external
+  destination, or release claim is introduced.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_first_session_audio_runtime_evidence` — pass.
+- `python3 scripts/validate_first_session_audio_runtime_evidence.py` — pass.
+- Existing first-session, audio, low-distraction, browser/device, and Phase 13
+  technical validators remain authoritative.

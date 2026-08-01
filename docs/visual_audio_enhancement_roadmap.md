@@ -3742,7 +3742,7 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 ## Milestone 13.1: Release candidate audit
 
 **Status:** Current source-checkout technical evidence is recorded through
-v0.13.97. Product/content review, public-release approval, full-campaign
+v0.13.98. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -3847,6 +3847,13 @@ educational/accessibility gates remain open.
   completes the current loopback shell/host-start smoke with zero warning or
   error console entries, while Firefox/WebKit, real hardware, and human review
   remain pending.
+- [x] Current first-session/audio runtime-boundary evidence recorded. Evidence:
+  `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`,
+  `scripts/validate_first_session_audio_runtime_evidence.py`, and
+  `tests/test_phase13_1_first_session_audio_runtime_evidence.py`; the live
+  Chrome surface exposes all seven first-session stages, low-distraction and
+  independent presentation accommodations, muted/cues-only status language,
+  and written equivalents while participant/listening review remains open.
 
 ### v0.13.20 current technical-release evidence
 
@@ -4647,6 +4654,30 @@ The target and validator are recorded in
 `_workspace/175_implementation_plan_visual-audio-phase13-1-runtime-capability-evidence-v0.13.97.md`,
 `docs/evaluation/phase13.1-runtime-capability-evidence.json`, and
 `scripts/validate_runtime_capability_evidence.py`.
+
+### v0.13.98 first-session/audio runtime-boundary evidence
+
+- `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`
+  records a current Chrome 150.0.0.0 competitive session start, the complete
+  seven-stage first-session rail, actor-visible briefing/observation/history/
+  debrief surfaces, and host-authority language.
+- The packet records low-distraction forced reduced motion, Large text, visible
+  cue explanations, muted audio, and reduced notifications; it separately
+  records independent reduced-motion/Large-text settings and the optional cue
+  explanation visibility contract.
+- Cues-only and muted states retain written equivalents, but playback is not
+  verified. `scripts/validate_first_session_audio_runtime_evidence.py` and
+  `tests/test_phase13_1_first_session_audio_runtime_evidence.py` fail closed on
+  rail, settings, audio, source-marker, privacy, type, human-evidence, and
+  release-promotion drift.
+- This is technical runtime evidence only. It does not close first-time-user,
+  audio-listening, accessibility, educational, browser/device, provenance,
+  revision, expansion, or public-release gates.
+
+The target and validator are recorded in
+`_workspace/176_implementation_plan_visual-audio-phase13-1-first-session-audio-runtime-evidence-v0.13.98.md`,
+`docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`, and
+`scripts/validate_first_session_audio_runtime_evidence.py`.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.98] - 2026-08-01
+
+- Added source-bound live GUI evidence for the seven-stage competitive
+  first-session rail, low-distraction/reduced-motion/Large-text states, and
+  muted/cues-only audio fallbacks with written equivalents.
+- Kept participant, listening, accessibility, educational, browser/device,
+  expansion, and public-release decisions pending; no GUI or audio behavior
+  changed.
+
 ## [0.13.97] - 2026-08-01
 
 - Added a source-bound current-runtime evidence packet for the supported
