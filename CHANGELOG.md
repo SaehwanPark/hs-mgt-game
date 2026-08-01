@@ -8,7 +8,7 @@
   storage, or receiving the host save artifact; host validation remains the
   authority.
 - Updated the emulated low-power source-byte budget to 410,000 with an exact
-  406,565-byte measurement for the added reference-transfer UI; this remains
+  406,663-byte measurement for the added reference-transfer UI; this remains
   a proxy and not device certification.
 - Actual browser save-artifact serialization, automatic resume, replay,
   human/runtime certification, and release gates remain open.

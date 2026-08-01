@@ -18,11 +18,11 @@ reviewer and PR loop remain.
 
 ## Verification
 
-- 386 Rust tests, Clippy with warnings denied, 926 Python tests, formatting,
+- 386 Rust tests, Clippy with warnings denied, 932 Python tests, formatting,
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
-- The bounded low-power proxy measures 406,565 bytes under its 410,000-byte
+- The bounded low-power proxy measures 406,663 bytes under its 410,000-byte
   limit; this remains an emulated proxy, not device certification.
 - Focused tests cover archive/legacy discovery ordering and invalid counting,
   malformed archive shadowing with legacy fallback, archive file and directory

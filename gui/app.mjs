@@ -1798,6 +1798,7 @@ export function renderCheckpointDiscovery(envelope, root = document) {
       const exportButton = document.createElement("button");
       exportButton.type = "button";
       exportButton.textContent = "Export reference";
+      exportButton.setAttribute?.("aria-label", `Export reference for ${checkpoint.session_id}`);
       exportButton.addEventListener("click", () => {
         const result = downloadCheckpointReference({
           schema_version: CHECKPOINT_REFERENCE_SCHEMA,

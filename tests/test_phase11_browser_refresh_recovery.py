@@ -253,6 +253,49 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     self.assertNotIn("history", result["text"])
     self.assertEqual(result["events"], [["create", "application/json"], ["click", "hs-mgt-checkpoint-session-7.json", "blob:test"], ["revoke", "blob:test"]])
 
+  def test_checkpoint_reference_export_controls_have_checkpoint_specific_labels(self):
+    result = self.run_node(r'''
+      import { renderCheckpointDiscovery } from "./gui/app.mjs";
+      const list = {
+        children: [],
+        replaceChildren() { this.children = []; },
+        append(...items) { this.children.push(...items); },
+      };
+      const status = { textContent: "" };
+      const root = {
+        querySelector(selector) {
+          return { "#session-checkpoint-list": list, "#session-checkpoint-status": status }[selector] ?? null;
+        },
+      };
+      globalThis.document = {
+        createElement(tag) {
+          return {
+            tag,
+            children: [],
+            setAttribute(name, value) { this[name] = value; },
+            addEventListener() {},
+            append(...items) { this.children.push(...items); },
+          };
+        },
+      };
+      renderCheckpointDiscovery({
+        schema_version: "gui-checkpoint-discovery-v1",
+        campaign: "stabilization-v1",
+        invalid_entry_count: 0,
+        checkpoints: [
+          { session_id: "session-a", campaign: "stabilization-v1", seed: 1, transition_count: 2, storage: "archive" },
+          { session_id: "session-b", campaign: "stabilization-v1", seed: 2, transition_count: 3, storage: "legacy" },
+        ],
+      }, root);
+      console.log(JSON.stringify({
+        labels: list.children.map((item) => item.children[1]["aria-label"]),
+      }));
+    ''')
+    self.assertEqual(result["labels"], [
+      "Export reference for session-a",
+      "Export reference for session-b",
+    ])
+
   def test_refresh_contract_and_authority_boundary_are_explicit(self):
     for marker in (
       "ACTIVE_SESSION_STORAGE_KEY",

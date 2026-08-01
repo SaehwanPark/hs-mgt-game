@@ -4798,7 +4798,7 @@ the typed host/browser tests.
   screenshots, human accessibility/educational review, browser/device
   certification, provenance/legal review, and public-release gates remain
   open.
-- The emulated low-power proxy is synchronized to 406,565 live source bytes
+- The emulated low-power proxy is synchronized to 406,663 live source bytes
   under a bounded 410,000-byte limit; this is not hardware certification.
 
 The target is recorded in
