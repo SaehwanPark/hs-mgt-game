@@ -7720,6 +7720,24 @@ The target and validator are recorded in
 `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`, and
 `scripts/validate_terminal_debrief_runtime_evidence.py`.
 
+### Visual/audio generated device-evidence synchronization (v0.13.100)
+
+The follow-up maintenance slice synchronizes the emulated low-power
+device-performance source-byte measurement with the current GUI source after
+the v0.13.99 cross-campaign terminal renderer guard. It updates the policy,
+cross-browser/device review packet, bounded test expectation, and generated
+asset-credit/version projections.
+
+The 395667-byte measurement remains below the existing 400000-byte proxy limit
+and is a reproducibility check only. It does not establish hardware
+performance, browser certification, accessibility, audio quality, educational
+usefulness, or public-release readiness. No gameplay, simulation, audio, asset,
+persistence, support-policy, or human-review behavior changes.
+
+The target is recorded in
+`_workspace/178_implementation_plan_visual-audio-phase13-1-device-evidence-sync-v0.13.100.md`
+and `_workspace/00_input/request-summary-v0.13.100.md`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

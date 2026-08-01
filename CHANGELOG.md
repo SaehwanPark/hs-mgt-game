@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.100] - 2026-08-01
+
+- Synchronized the bounded emulated device-performance source-byte evidence
+  with the post-merge GUI source after the v0.13.99 terminal renderer guard.
+- Refreshed generated asset-credit projections and release metadata only; no
+  device-support, human-review, hardware, gameplay, or public-release status
+  changed.
+
 ## [0.13.99] - 2026-08-01
 
 - Corrected the player-facing competitive end-session projection so it no
