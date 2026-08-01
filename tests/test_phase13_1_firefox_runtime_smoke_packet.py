@@ -23,6 +23,8 @@ EXPECTED_HOST_START = {
   "status": "competitive regional session loaded: session-1",
   "session": "session-1",
   "demo_fixture": False,
+  "campaign": "competitive-regional-v1",
+  "ready": "complete",
   "checkpoint_saved": True,
   "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
   "stored_session_id": "session-1",
@@ -38,6 +40,7 @@ EXPECTED_REVIEW_BOUNDARY = {
   "firefox_shell_runtime_smoke_complete": True,
   "firefox_host_backed_start_smoke_complete": True,
   "firefox_browser_refresh_resume_smoke_complete": True,
+  "firefox_all_campaign_launch_smoke_complete": True,
   "firefox_full_campaign_certification_complete": False,
   "firefox_audio_decoder_review_complete": False,
   "webkit_runtime_certification_complete": False,
@@ -86,6 +89,21 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
     self.assertEqual(observation["shell"], EXPECTED_SHELL)
     self.assertEqual(observation["host_start"], EXPECTED_HOST_START)
     self.assertEqual(observation["browser_refresh_resume"], EXPECTED_RESUME)
+    self.assertEqual(observation["campaign_launches"], {
+      "competitive-regional-v1": EXPECTED_HOST_START,
+      "stabilization-v1": {
+        "status": "stabilization session loaded: session-2",
+        "session": "session-2",
+        "demo_fixture": False,
+        "ready": "complete",
+      },
+      "regional-affiliation-v1": {
+        "status": "regional affiliation session loaded: session-3",
+        "session": "session-3",
+        "demo_fixture": False,
+        "ready": "complete",
+      },
+    })
     self.assertTrue(self.packet["probe"]["writes_project_state"] is False)
 
   def test_probe_source_and_browser_policy_boundaries_are_exact(self):
@@ -135,6 +153,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
       observation["browser"],
       observation["marionette_protocol"],
       observation["browser_refresh_resume"],
+      observation["campaign_launches"],
     )
     bad_host = dict(observation["host_start"])
     bad_host["status"] = "stabilization session loaded: session-1"
@@ -146,6 +165,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["browser"],
         observation["marionette_protocol"],
         observation["browser_refresh_resume"],
+        observation["campaign_launches"],
       )
     bad_browser = dict(observation["browser"])
     bad_browser["headless"] = False
@@ -157,6 +177,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         bad_browser,
         observation["marionette_protocol"],
         observation["browser_refresh_resume"],
+        observation["campaign_launches"],
       )
     with self.assertRaises(RuntimeError):
       self.probe.validate_observations(
@@ -166,6 +187,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["browser"],
         observation["marionette_protocol"],
         observation["browser_refresh_resume"],
+        observation["campaign_launches"],
       )
     with self.assertRaises(RuntimeError):
       self.probe._validate_loopback_url("http://example.com/")

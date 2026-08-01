@@ -19,6 +19,11 @@ DEFAULT_URL = "http://127.0.0.1:7878/"
 DEFAULT_PORT = 2828
 LOOPBACK_HOSTS = {"127.0.0.1", "::1"}
 EXPECTED_PAGE_TITLE = "Health Policy Strategy Game — Executive Desktop"
+CAMPAIGN_LABELS = {
+  "competitive-regional-v1": "competitive regional",
+  "stabilization-v1": "stabilization",
+  "regional-affiliation-v1": "regional affiliation",
+}
 FIREFOX_CANDIDATES = (
   "/Applications/Firefox.app/Contents/MacOS/firefox",
   "/usr/bin/firefox",
@@ -96,6 +101,7 @@ def validate_observations(
   browser: object,
   marionette_protocol: object,
   resume: object | None = None,
+  campaign_launches: object | None = None,
 ) -> None:
   if not isinstance(shell, dict) or not isinstance(host, dict) or not isinstance(browser, dict):
     raise RuntimeError("Firefox runtime smoke observations must be objects")
@@ -158,6 +164,28 @@ def validate_observations(
       resume_errors.append("browser refresh resume did not reach readyState=complete")
     if resume_errors:
       raise RuntimeError("; ".join(resume_errors))
+  if campaign_launches is not None:
+    if not isinstance(campaign_launches, dict):
+      raise RuntimeError("Firefox campaign launch observations must be an object")
+    campaign_errors = []
+    for campaign, label in CAMPAIGN_LABELS.items():
+      observation = campaign_launches.get(campaign)
+      if not isinstance(observation, dict):
+        campaign_errors.append(f"missing Firefox campaign launch observation: {campaign}")
+        continue
+      expected_status = f"{label} session loaded: {observation.get('session')}"
+      if observation.get("status") != expected_status:
+        campaign_errors.append(f"unexpected Firefox campaign launch status: {campaign}")
+      if not isinstance(observation.get("session"), str) or not re.fullmatch(
+        r"session-[A-Za-z0-9_-]+", observation["session"]
+      ):
+        campaign_errors.append(f"invalid opaque Firefox campaign session ID: {campaign}")
+      if observation.get("demo_fixture") is not False:
+        campaign_errors.append(f"demo fixture remained after Firefox campaign launch: {campaign}")
+      if observation.get("ready") != "complete":
+        campaign_errors.append(f"Firefox campaign launch did not reach readyState=complete: {campaign}")
+    if campaign_errors:
+      raise RuntimeError("; ".join(campaign_errors))
 
 
 def _wait_for_port(host: str, port: int, timeout: float) -> None:
@@ -177,6 +205,26 @@ def _execute(client: MarionetteClient, session_id: str, script: str) -> object:
     {"sessionId": session_id, "script": script, "args": []},
   )
   return result.get("value") if isinstance(result, dict) else result
+
+
+def _start_campaign(client: MarionetteClient, session_id: str, campaign: str) -> object:
+  script = f"""
+    const select = document.querySelector('#session-campaign');
+    select.value = {json.dumps(campaign)};
+    select.dispatchEvent(new Event('change', {{bubbles: true}}));
+    document.querySelector('#session-start').click();
+    return true;
+  """
+  _execute(client, session_id, script)
+  time.sleep(1.0)
+  return _execute(client, session_id, """
+    return {
+      status: document.querySelector('#session-launch-status')?.textContent || '',
+      session: document.querySelector('#session-id')?.value || '',
+      demo_fixture: document.body.innerText.includes('Demo fixture loaded'),
+      ready: document.readyState
+    };
+  """)
 
 
 def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
@@ -228,7 +276,9 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         return {
           status: document.querySelector('#session-launch-status')?.textContent || '',
           session: document.querySelector('#session-id')?.value || '',
-          demo_fixture: document.body.innerText.includes('Demo fixture loaded')
+          demo_fixture: document.body.innerText.includes('Demo fixture loaded'),
+          campaign: 'competitive-regional-v1',
+          ready: document.readyState
         };
       """)
       _execute(client, session_id, "document.querySelector('#session-save').click(); return true;")
@@ -269,7 +319,20 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "platform": capabilities.get("platformName"),
         "headless": capabilities.get("moz:headless"),
       }
-      validate_observations(shell, host, url, browser, hello.get("marionetteProtocol"), resume)
+      campaign_launches = {
+        "competitive-regional-v1": host,
+        "stabilization-v1": _start_campaign(client, session_id, "stabilization-v1"),
+        "regional-affiliation-v1": _start_campaign(client, session_id, "regional-affiliation-v1"),
+      }
+      validate_observations(
+        shell,
+        host,
+        url,
+        browser,
+        hello.get("marionetteProtocol"),
+        resume,
+        campaign_launches,
+      )
       client.command("WebDriver:DeleteSession", {"sessionId": session_id})
       session_id = None
       return {
@@ -280,6 +343,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "shell": shell,
         "host_start": host,
         "browser_refresh_resume": resume,
+        "campaign_launches": campaign_launches,
       }
     finally:
       if client is not None:

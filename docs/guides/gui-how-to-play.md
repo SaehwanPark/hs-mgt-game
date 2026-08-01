@@ -282,6 +282,8 @@ The repository also has a bounded Firefox/Marionette smoke that exercises one
 explicit checkpoint save and one refresh against the live loopback host. This
 is runtime evidence only; it does not certify Firefox full-campaign behavior,
 WebKit, real hardware, audio decoding, or human accessibility/usability.
+The smoke also launches each of the three supported campaigns, but that
+launch/read continuity does not replace full-campaign certification.
 
 ### Audio is silent
 

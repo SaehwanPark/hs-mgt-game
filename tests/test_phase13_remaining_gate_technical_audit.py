@@ -31,7 +31,7 @@ class Phase13RemainingGateTechnicalAuditTests(unittest.TestCase):
   def test_audit_maps_all_open_markers_and_keeps_promotion_blocked(self):
     self.validator.validate_audit(self.audit)
     self.assertEqual(self.audit["schema_version"], "phase13-remaining-gate-technical-audit-v1")
-    self.assertEqual(self.audit["package_version"], "0.13.107")
+    self.assertEqual(self.audit["package_version"], "0.13.108")
     self.assertEqual(len(self.audit["gates"]), 8)
     runtime_check = next(check for check in self.audit["technical_checks"] if check["id"] == "runtime-boundary-evidence")
     self.assertIn("docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json", runtime_check["sources"])
@@ -47,6 +47,8 @@ class Phase13RemainingGateTechnicalAuditTests(unittest.TestCase):
     self.assertIn("gui/app.mjs", resume_check["sources"])
     firefox_check = next(check for check in self.audit["technical_checks"] if check["id"] == "firefox-browser-refresh-resume-smoke")
     self.assertIn("scripts/check_firefox_runtime_smoke.py", firefox_check["sources"])
+    campaign_check = next(check for check in self.audit["technical_checks"] if check["id"] == "firefox-multi-campaign-launch-smoke")
+    self.assertIn("gui/index.html", campaign_check["sources"])
     self.assertTrue(self.audit["decision_boundary"]["human_or_runtime_gates_remaining"])
     self.assertTrue(self.audit["decision_boundary"]["promotion_blocked"])
     self.assertIsNone(self.audit["decision_boundary"]["go_no_go"])
