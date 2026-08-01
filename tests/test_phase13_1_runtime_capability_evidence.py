@@ -58,6 +58,10 @@ class Phase13RuntimeCapabilityEvidenceTests(unittest.TestCase):
     packet["observation"]["browser"]["name"] = "Firefox"
     with self.assertRaises(ValueError):
       self.validator.validate_packet(packet)
+    packet = copy.deepcopy(self.packet)
+    packet["observation"]["browser"]["version"] = "149.0.0.0"
+    with self.assertRaises(ValueError):
+      self.validator.validate_packet(packet)
 
   def test_validator_rejects_host_or_console_drift(self):
     packet = copy.deepcopy(self.packet)
@@ -76,6 +80,10 @@ class Phase13RuntimeCapabilityEvidenceTests(unittest.TestCase):
       self.validator.validate_packet(packet)
     packet = copy.deepcopy(self.packet)
     packet["release_boundary"]["public_release_approval"] = True
+    with self.assertRaises(ValueError):
+      self.validator.validate_packet(packet)
+    packet = copy.deepcopy(self.packet)
+    packet["release_boundary"]["runtime_changes"] = False
     with self.assertRaises(ValueError):
       self.validator.validate_packet(packet)
 

@@ -18,7 +18,6 @@ EXPECTED_VERSION = "0.13.97"
 EXPECTED_URL = "http://127.0.0.1:7878/"
 EXPECTED_TITLE = "Health Policy Strategy Game — Executive Desktop"
 SESSION_PATTERN = re.compile(r"^session-[A-Za-z0-9_-]+$")
-VERSION_PATTERN = re.compile(r"^\d+\.\d+\.\d+\.\d+$")
 LOOPBACK_HOSTS = {"127.0.0.1", "::1"}
 REQUIRED_FIELDS = {
   "schema_version",
@@ -110,7 +109,7 @@ def _validate_observation(observation: object) -> None:
   _require(set(browser) == {"name", "engine", "version", "platform", "user_agent", "protocol"}, "browser fields are not exact")
   _require(browser["name"] == "Chrome", "observed browser must be Chrome")
   _require(browser["engine"] == "Chromium", "observed browser engine must be Chromium")
-  _require(isinstance(browser["version"], str) and VERSION_PATTERN.fullmatch(browser["version"]), "browser version must be dotted numeric")
+  _require(browser["version"] == "150.0.0.0", "browser version must match the observed Chrome runtime")
   _require(browser["platform"] == "macOS", "browser platform must identify macOS")
   _require(isinstance(browser["user_agent"], str) and "Chrome/150.0.0.0" in browser["user_agent"], "browser user agent must bind the observed Chrome version")
   _require(browser["protocol"] == "Chrome DevTools Protocol", "browser protocol must identify the read-only runtime observation")
@@ -197,7 +196,7 @@ def validate_packet(packet: object) -> None:
   _require(release["technical_evidence_added"] is True, "technical evidence addition must be recorded")
   _require(release["support_policy_changed"] is False, "support policy must remain unchanged")
   for key in ("runtime_changes", "simulation_changes", "asset_changes", "audio_changes", "persistence_changes"):
-    _require(release[key] == 0, f"{key} must remain zero")
+    _require(type(release[key]) is int and release[key] == 0, f"{key} must be an integer zero")
   _require(release["public_release_approval"] is False, "public release approval must remain false")
 
   searchable = json.dumps({
