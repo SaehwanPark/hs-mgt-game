@@ -1,43 +1,41 @@
-# Final Handoff — Browser-safe checkpoint reference transfer v0.13.104
+# Final Handoff — Host save-artifact download bridge v0.13.105
 
 ## Status
 
-Implementation and full validation are complete on
-the v0.13.104 implementation branch; the single required medium-effort code
-reviewer and PR loop remain.
+The v0.13.105 implementation is in progress on its temporary branch; the
+single required medium-effort reviewer and PR loop remain.
 
 ## Target result
 
-- Add deterministic `gui-checkpoint-reference-v1` browser JSON export/import
-  using only validated checkpoint discovery metadata.
-- Add explicit **Export reference** and **Import reference** controls. Import
-  fills the existing opaque session-ID field without automatic loading,
-  browser-storage writes, or host save-artifact access.
+- Add `GET /api/v1/sessions/{session_id}/save-artifact` for host-validated
+  archive/legacy checkpoint bytes with a safe attachment filename.
+- Add **Download host save** to validated discovery entries while preserving
+  the selected storage source and keeping the browser download opaque.
 - Preserve host authority, replay validation, immutable history, and all
-  existing campaign transitions and load/restore paths.
+  existing transition, save, restore, reference, and discovery paths.
 
 ## Verification
 
-- 386 Rust tests, Clippy with warnings denied, 932 Python tests, formatting,
+- 388 Rust tests, Clippy with warnings denied, 934 Python tests, formatting,
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
-- The bounded low-power proxy measures 406,663 bytes under its 410,000-byte
+- The bounded low-power proxy measures 409,599 bytes under its 410,000-byte
   limit; this remains an emulated proxy, not device certification.
 - Focused tests cover archive/legacy discovery ordering and invalid counting,
   malformed archive shadowing with legacy fallback, archive file and directory
   symlink rejection with legacy fallback, live route metadata privacy, and
   browser picker validation/manual-load-only behavior, deterministic reference
-  export, strict import validation, and no-load/no-storage import behavior.
+  export, strict import validation, no-load/no-storage import behavior, and
+  manual host-artifact download with archive/legacy source preservation.
 
 ## Review boundary and remaining work
 
-The remaining PR handoff is to create/merge the v0.13.104 PR, delete its
-temporary branch locally and remotely, verify clean `main`, and select the
-next unmet roadmap slice. Actual browser save-artifact serialization,
-automatic resume policy, replay regeneration, screenshots, human
-accessibility/educational review, browser/device certification, provenance,
-and public-release gates remain open.
+The remaining PR handoff is to complete review, merge the v0.13.105 PR, delete
+its temporary branch locally and remotely, verify clean `main`, and select the
+next unmet roadmap slice. Automatic resume policy, replay regeneration,
+screenshots, human accessibility/educational review, browser/device
+certification, provenance, and public-release gates remain open.
 
 # Final Handoff — Competitive campaign-coverage envelope v0.13.69
 

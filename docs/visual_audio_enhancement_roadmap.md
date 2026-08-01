@@ -4798,13 +4798,32 @@ the typed host/browser tests.
   screenshots, human accessibility/educational review, browser/device
   certification, provenance/legal review, and public-release gates remain
   open.
-- The emulated low-power proxy is synchronized to 406,663 live source bytes
+- The emulated low-power proxy is synchronized to 409,599 live source bytes
   under a bounded 410,000-byte limit; this is not hardware certification.
 
 The target is recorded in
 `_workspace/182_implementation_plan_phase11-checkpoint-reference-v0.13.104.md`,
 `_workspace/00_input/request-summary-v0.13.104.md`, the Phase 11.1 ledger, and
 the browser contract tests.
+
+### v0.13.105 host save-artifact download bridge
+
+- The loopback GUI host now revalidates and serves the exact existing
+  competitive, stabilization, or regional-affiliation checkpoint bytes from
+  an explicit archive/legacy source as an attachment.
+- Validated discovery entries expose **Download host save**. The browser uses
+  a transient object URL for the user-requested download only; it never
+  serializes, parses, loads, stores, or treats the save artifact as game state.
+- Unsafe IDs, unsupported storage selectors, symlinks, missing or mismatched
+  entries, unsupported schemas, and invalid save contents fail closed.
+- This closes host-validated artifact download only. Automatic resume, replay
+  regeneration, screenshots, human review, browser/device certification,
+  provenance/legal review, and public-release gates remain open.
+
+The target is recorded in
+`_workspace/183_implementation_plan_phase11-save-artifact-download-v0.13.105.md`,
+`_workspace/00_input/request-summary-v0.13.105.md`, the Phase 11.1 ledger, and
+the host/browser transport tests.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

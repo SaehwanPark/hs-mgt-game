@@ -671,7 +671,7 @@
       "Archive file and directory symlinks are omitted and counted without reading their targets; matching valid legacy content remains a fallback.",
       "Selecting a browser entry fills the existing opaque session-ID field without loading automatically."
     ],
-    "boundary": "The host validates and summarizes durable wrappers; the browser renders metadata and reuses the existing load/restore path without storing save contents or creating transition authority.",
+    "boundary": "The host validates and summarizes durable wrappers; the browser renders metadata and reuses the existing load/restore path without serializing, loading, or creating transition authority. Explicit artifact download is tracked as a separate host-validated transfer.",
     "limits": [
       "This does not establish browser save serialization, automatic resume, replay regeneration, broader durable save/load evidence, screenshots, or human quality findings.",
       "The route and picker are source-bound technical preparation only; browser/device certification, accessibility, educational, legal, and public-release gates remain open."
@@ -700,6 +700,32 @@
     "limits": [
       "This closes browser-safe checkpoint-reference transfer only; actual browser save-artifact serialization, automatic resume policy, replay regeneration, broader durable save/load evidence, screenshots, human quality findings, and release gates remain open.",
       "The reference does not prove the checkpoint is current or available until the host validates it."
+    ]
+  },
+  "checkpoint_artifact_download": {
+    "status": "complete-host-validated-opaque-artifact-download",
+    "schema": "host-save-artifact-download-v1",
+    "route": "GET /api/v1/sessions/{session_id}/save-artifact",
+    "storage_sources": [
+      "archive",
+      "legacy"
+    ],
+    "host_source": "src/mcp/session.rs: read_checkpoint_artifact + src/mcp/persistence.rs: read_gui_session_checkpoint_artifact + src/gui_server.rs: download_checkpoint_artifact",
+    "browser_source": "gui/host-adapter.mjs: downloadCheckpointArtifact + gui/app.mjs: downloadHostCheckpointArtifact + renderCheckpointDiscovery",
+    "test_source": [
+      "src/gui_server.rs: fn live_transport_downloads_only_a_host_validated_checkpoint_artifact",
+      "tests/test_phase11_browser_refresh_recovery.py: test_host_save_artifact_download_is_manual_and_opaque"
+    ],
+    "behavior": [
+      "The host selects the requested archive or legacy source, validates the wrapper schema, session identity, and campaign save contents, then serves the exact existing bytes as an attachment.",
+      "Unsafe IDs, unsupported storage selectors, missing files, symlinks, mismatched IDs, unsupported schemas, and invalid save contents fail closed.",
+      "The GUI exposes Download host save only for validated discovery entries and preserves the selected archive/legacy source.",
+      "The browser creates a transient download object URL and never deserializes, loads, stores, or treats save bytes as game state."
+    ],
+    "boundary": "Host/core owns save serialization, validation, file I/O, true state, history, replay, hashes, hydration, and transitions; the browser is only a manual opaque download surface.",
+    "limits": [
+      "This closes host-validated browser download of existing save artifacts only; it does not add browser serialization, automatic resume, replay regeneration, or browser-side load authority.",
+      "Screenshots, human visual/listening/accessibility/educational review, browser/device certification, provenance/legal review, and public-release gates remain open."
     ]
   },
   "full_campaign_audio_state_coverage": {

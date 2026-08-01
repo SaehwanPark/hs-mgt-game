@@ -1,11 +1,12 @@
 [package]
 name = "hs-mgt-game"
-version = "0.13.104"
+version = "0.13.105"
 edition = "2024"
 default-run = "hs-mgt-game"
 
 [dependencies]
 axum = "0.8.9"
+libc = "0.2.177"
 rmcp = { version = "1.8.0", default-features = false, features = ["macros", "server", "transport-io"] }
 rustyline = "18.0.1"
 schemars = "1.2.1"

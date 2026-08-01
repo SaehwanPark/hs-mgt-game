@@ -1774,7 +1774,7 @@ export async function importCheckpointReference(file, root = document) {
   return result;
 }
 
-export function renderCheckpointDiscovery(envelope, root = document) {
+export function renderCheckpointDiscovery(envelope, root = document, { onDownloadArtifact = null } = {}) {
   const validation = validateCheckpointDiscoveryEnvelope(envelope);
   const list = root.querySelector("#session-checkpoint-list");
   const status = root.querySelector("#session-checkpoint-status");
@@ -1808,7 +1808,26 @@ export function renderCheckpointDiscovery(envelope, root = document) {
           ? `Checkpoint reference exported for ${checkpoint.session_id}. It contains metadata only.`
           : result.message;
       });
-      item.append(select, exportButton); list.append(item);
+      item.append(select, exportButton);
+      if (typeof onDownloadArtifact === "function") {
+        const artifactButton = document.createElement("button");
+        artifactButton.type = "button";
+        artifactButton.textContent = "Download host save";
+        artifactButton.setAttribute?.("aria-label", `Download host save for ${checkpoint.session_id}`);
+        artifactButton.addEventListener("click", async () => {
+          artifactButton.disabled = true;
+          try {
+            const result = await onDownloadArtifact(checkpoint);
+            if (status) status.textContent = result.ok
+              ? `Host save downloaded for ${checkpoint.session_id}. The file remains host-generated.`
+              : result.message;
+          } finally {
+            artifactButton.disabled = false;
+          }
+        });
+        item.append(artifactButton);
+      }
+      list.append(item);
     }
     if (!envelope.checkpoints.length) emptyState(list, "No valid checkpoints found.");
   }
@@ -1816,6 +1835,42 @@ export function renderCheckpointDiscovery(envelope, root = document) {
     ? `${envelope.checkpoints.length} valid checkpoint(s); ${envelope.invalid_entry_count} invalid omitted.`
     : `${envelope.checkpoints.length} valid checkpoint(s).`;
   return { ok: true, envelope };
+}
+
+export async function downloadHostCheckpointArtifact({ adapter, checkpoint, root = document } = {}) {
+  const sessionId = String(checkpoint?.session_id ?? "").trim();
+  const storage = checkpoint?.storage;
+  if (
+    !adapter || typeof adapter.downloadCheckpointArtifact !== "function"
+    || !/^[A-Za-z0-9_-]+$/.test(sessionId)
+    || !["archive", "legacy"].includes(storage)
+  ) {
+    return { ok: false, code: "checkpoint_artifact_unavailable", message: "Host save download is unavailable for this checkpoint." };
+  }
+  try {
+    const result = await adapter.downloadCheckpointArtifact(sessionId, storage);
+    if (!result?.blob || typeof Blob !== "function" || typeof globalThis.URL?.createObjectURL !== "function") {
+      return { ok: false, code: "checkpoint_artifact_download_unavailable", message: "This browser cannot download the host save artifact." };
+    }
+    const documentRef = root?.ownerDocument ?? globalThis.document;
+    if (!documentRef?.createElement) {
+      return { ok: false, code: "checkpoint_artifact_download_unavailable", message: "The checkpoint download surface is unavailable." };
+    }
+    const objectUrl = globalThis.URL.createObjectURL(result.blob);
+    const link = documentRef.createElement("a");
+    link.href = objectUrl;
+    link.download = result.filename || `hs-mgt-checkpoint-${sessionId}.save`;
+    link.setAttribute?.("aria-label", `Download host save for ${sessionId}`);
+    try {
+      link.click?.();
+    } finally {
+      globalThis.URL.revokeObjectURL?.(objectUrl);
+    }
+    return { ok: true, filename: link.download };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return { ok: false, code: error?.code ?? "checkpoint_artifact_download_error", message: `Host save download failed; the current session remains active: ${message}` };
+  }
 }
 
 function renderObservationLines(observation, root) {
@@ -2193,7 +2248,9 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
     }
     setBusy(true);
     try {
-      return renderCheckpointDiscovery(await adapter.listCheckpoints(), root);
+      return renderCheckpointDiscovery(await adapter.listCheckpoints(), root, {
+        onDownloadArtifact: (checkpoint) => downloadHostCheckpointArtifact({ adapter, checkpoint, root }),
+      });
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       const status = root.querySelector("#session-checkpoint-status");
@@ -3703,6 +3760,7 @@ if (typeof document !== "undefined") {
       parseCheckpointReference,
       downloadCheckpointReference,
       importCheckpointReference,
+      downloadHostCheckpointArtifact,
       renderCheckpointDiscovery,
       createReadOnlyClient,
       createThinClient,

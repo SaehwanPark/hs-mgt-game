@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.104",
+  "package_version": "0.13.105",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -84,6 +84,12 @@
       "status": "pass-source-bound-technical-preparation",
       "command": "python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_checkpoint_reference_round_trip_is_metadata_only_and_deterministic tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_checkpoint_reference_export_downloads_only_the_reference tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_checkpoint_reference_import_fills_id_without_loading_or_storage",
       "sources": ["gui/app.mjs", "gui/index.html", "docs/guides/gui-how-to-play.md", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
+    },
+    {
+      "id": "checkpoint-artifact-download",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "cargo test gui_server::tests::live_transport_downloads_only_a_host_validated_checkpoint_artifact && python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_host_save_artifact_download_is_manual_and_opaque",
+      "sources": ["src/mcp/persistence.rs", "src/mcp/session.rs", "src/gui_server.rs", "gui/host-adapter.mjs", "gui/app.mjs", "gui/index.html", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
     }
   ],
   "gates": [

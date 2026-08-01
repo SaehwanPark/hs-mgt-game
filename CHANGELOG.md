@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.13.105] - 2026-08-01
+
+- Added a host-validated `GET /api/v1/sessions/{session_id}/save-artifact`
+  download for existing competitive, stabilization, and regional-affiliation
+  checkpoints, with explicit archive/legacy source selection.
+- Added **Download host save** to validated checkpoint discovery entries. The
+  browser performs only the user-requested opaque download; it does not parse,
+  serialize, load, or store the save artifact as game state.
+- The bounded low-power source-byte proxy measures 409,599 bytes under its
+  410,000-byte limit; this remains an emulated proxy, not device certification.
+- Actual automatic resume, replay regeneration, human/runtime certification,
+  provenance, and release gates remain open.
+
 ## [0.13.104] - 2026-08-01
 
 - Added deterministic browser-safe checkpoint reference export/import using

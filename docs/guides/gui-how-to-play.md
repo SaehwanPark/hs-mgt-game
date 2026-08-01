@@ -90,8 +90,10 @@ as a manual retry. The host stores one checkpoint file per opaque session ID in
 its sibling archive; after a host restart, choose **Find saved checkpoints** to
 inspect validated metadata, select **Use this session ID**, and then choose
 **Load existing session** or **Restore host checkpoint**. Manual opaque-ID entry
-remains available. The browser never receives the saved artifact, and a missing
-or colliding checkpoint is reported as a recoverable error.
+remains available. The browser never serializes or loads the saved artifact,
+and a missing or colliding checkpoint is reported as a recoverable error. An
+explicit **Download host save** action transfers only the host-validated file
+bytes to the user's download.
 
 Drafting does not advance time. Validation checks action points, cash, political
 capital, command syntax, and other host-owned constraints without committing the
@@ -195,6 +197,11 @@ browser does not load, store, or reconstruct the checkpoint, and the host still
 validates it when you choose **Load existing session** or **Restore host
 checkpoint**. Invalid, stale, or extra-field references remain recoverable
 errors.
+
+Valid discovered entries also offer **Download host save**. This asks the host
+to revalidate and serve the selected archive/legacy checkpoint as an
+attachment; the browser does not serialize, parse, or load the downloaded
+artifact.
 
 ## Stop the GUI
 

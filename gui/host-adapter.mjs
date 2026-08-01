@@ -55,6 +55,23 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
       return request("/api/v1/checkpoints");
     },
 
+    async downloadCheckpointArtifact(sessionId, storage) {
+      const query = storage ? `?storage=${encodeURIComponent(storage)}` : "";
+      const response = await fetchImpl(`${sessionPath(sessionId, "save-artifact")}${query}`);
+      if (!response.ok) {
+        const payload = await response.json().catch(() => null);
+        const error = new Error(payload?.error ?? `GUI host request failed (${response.status}).`);
+        if (payload?.code) error.code = payload.code;
+        throw error;
+      }
+      const disposition = response.headers?.get?.("Content-Disposition") ?? "";
+      const match = disposition.match(/filename="([A-Za-z0-9_.-]+)"/);
+      return {
+        blob: await response.blob(),
+        filename: match?.[1] ?? `hs-mgt-checkpoint-${String(sessionId).trim()}.save`,
+      };
+    },
+
     async getCampaignCoverage(sessionId) {
       return request(sessionPath(sessionId, "campaign-coverage"));
     },
