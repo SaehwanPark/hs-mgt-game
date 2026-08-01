@@ -4,8 +4,9 @@ Keep this file short and repo-wide. Detailed workflow rules live in
 `.agents/skills/` and `docs/harness/`.
 
 ## What
-- This repository is a Rust, CLI-first health-policy strategy game in early
-  research and design. The player leads a fictional nonprofit US health system.
+- This repository is a Rust health-policy strategy game with a reference CLI,
+  bounded MCP adapter, and active loopback browser GUI. The player leads a
+  fictional nonprofit US health system.
 - Canonical project docs are `README.md`, `docs/proposal.md`,
   `docs/roadmap.md`, and `docs/design_principles.md`.
 - The durable design boundaries are deterministic core transitions, explicit
@@ -26,6 +27,13 @@ Keep this file short and repo-wide. Detailed workflow rules live in
   functional programming, Rust quality, UX, code review, comments, spec
   maintenance, planning, and release preparation.
 - Current Rust commands: `cargo fmt`, `cargo test`, and `cargo run`.
+- Current GUI development targets the host-backed Setup/Brief/Decide/Resolve/
+  Review workspace and all three launchable campaigns. Chromium evergreen is
+  the default browser target; Codex browser inspection is development evidence.
+- Future development uses deterministic automated and AI-agent checks. Human
+  learning, lived accessibility, legal-quality, and policy-validity limits are
+  recorded honestly but do not form routine stop gates. Unverifiable assets use
+  generic fallbacks.
 - Do not invent build, CI, scenario, data, or release conventions until the
   roadmap phase calls for them and they are documented.
 - You may install any necessary dependencies or tools via `cargo install`.

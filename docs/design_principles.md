@@ -7,9 +7,10 @@
 
 **Current application:** The playable prototype now applies these principles
 across stabilization, competitive regional-market, and regional-affiliation
-campaigns, with CLI and MCP interfaces plus a bounded GUI thin-client proof.
-New runtime or platform work remains evidence-gated; existing simulated-agent
-validation does not establish calibration, policy validity, human learning, or
+campaigns, with a CLI/reference interface, MCP adapter, and host-backed loopback
+GUI task workspace sharing the same deterministic core and action surface. New
+runtime or platform work remains evidence-gated; automated validation does not
+establish calibration, policy validity, human learning, lived accessibility, or
 classroom effectiveness.
 
 ---
@@ -519,7 +520,7 @@ Extensibility should be achieved through separation of concerns, not speculative
 
 ---
 
-## 26. Use the CLI as a Deliberate Product Choice
+## 26. Keep the CLI as a Reference Interface and Build the GUI as a Shared Boundary
 
 The terminal interface should emphasize:
 
@@ -530,14 +531,19 @@ The terminal interface should emphasize:
 - causal reports;
 - and complete logs.
 
-The CLI is not merely a temporary absence of graphics. It is a way to focus development on systems, explanation, and educational usability.
+The CLI remains a reproducible reference interface for systems, explanation, and
+educational usability. GUI development is the active presentation focus, but it
+must consume the same host-authoritative action surface rather than introduce a
+second rules or persistence model.
 
 Future interfaces should consume the same underlying engine rather than redefine the simulation.
 
-A future GUI may broaden the audience, but it should remain an interface layer:
-rendering, input, assets, layout, and packaging outside the deterministic core;
-the same actor observations, commands, replay history, and debrief logic inside
-the product boundary.
+The loopback GUI remains an interface layer: rendering, input, assets, layout,
+and packaging stay outside the deterministic core; the same actor observations,
+commands, replay history, checkpoints, and debrief logic stay inside the product
+boundary. Chromium evergreen desktop is the default end-user target; the Codex
+in-app browser is a development inspection surface, while Firefox, WebKit/Safari,
+mobile, and legacy browsers remain deferred and non-certified.
 
 Regional merger or acquisition mechanics should be held to the same standards
 as other strategic interactions. They must separate organizational advantage,

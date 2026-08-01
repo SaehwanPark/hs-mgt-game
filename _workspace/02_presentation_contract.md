@@ -5392,3 +5392,46 @@ The three campaign smoke paths, keyboard/static checks, large-text,
 reduced-motion, narrow-layout, and device-source checks are technical evidence.
 They do not establish human usability, accessibility, educational effect,
 browser/device certification, or a human pilot result.
+
+---
+
+# Presentation Contract — Documentation alignment v0.14.3
+
+## Goal and authorization
+
+Reconcile the current GUI presentation contract and roadmap with the
+implemented host-backed task workspace, shared action surface, three campaign
+paths, durable checkpoints, and default Chromium browser boundary. This is a
+documentation/governance slice; it authorizes no runtime presentation change.
+
+## Player questions and actor-visible sources
+
+Current documentation must explain the implemented Setup, Brief, Decide,
+Resolve, and Review sequence, host-ordered canonical actions, visible
+consequences and debriefs, and recovery. Sources remain existing host routes,
+typed envelopes, actor-visible observations, committed history, source labels,
+written equivalents, and registered catalogs.
+
+Private rival state, resolved inputs, effect queues, browser-owned transitions,
+inferred severity, and future outcomes remain prohibited presentation sources.
+
+## Accessibility, fallback, and provenance
+
+Documentation retains text-first meaning, keyboard/reduced-motion/mute/scaling
+behavior, missing-data fallbacks, and host-authoritative recovery. A new asset
+with incomplete machine-readable provenance is excluded from runtime and uses
+the registered generic fallback; unrelated technical work does not wait for
+human approval.
+
+## Authority and evidence limits
+
+The browser remains presentation-only; commands, outcomes, history, hashes,
+replay, and checkpoints remain host-owned. Automated and AI-agent evidence may
+drive development but cannot establish human learning, lived accessibility,
+legal conclusions, calibration, or policy validity. Those limits are claim
+boundaries, not active promotion gates.
+
+## Non-goals
+
+No new DTO, route, asset, audio file, simulation rule, browser engine, or
+instructor authority surface is introduced.

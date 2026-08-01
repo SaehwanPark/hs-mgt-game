@@ -3341,6 +3341,36 @@ campaign expansion approval remain pending and promotion-blocking.
 
 ---
 
+# Final Handoff — GUI-focused documentation and SDD cleanup v0.14.3
+
+## Status
+
+Planned as a documentation/governance PR on
+`codex/docs-gui-sdd-alignment`, with four meaningful commits and a draft PR
+against `main`. Runtime code, GUI behavior, APIs, schemas, and persistence are
+out of scope.
+
+## Intended changes
+
+- Compact SDD/current-state documents around the implemented three-campaign
+  host-backed GUI and deterministic core.
+- Replace human-dependent future stop gates with AI-native technical checks and
+  explicit nonblocking evidence limits.
+- Make Chromium evergreen the active browser target and defer non-default
+  engines while preserving historical evidence.
+- Add automated documentation-currentness coverage and bump v0.14.2 to
+  v0.14.3 once.
+
+## Validation and limits
+
+Run documentation, asset, browser-policy, device-proxy, Python, formatting,
+Clippy, Rust, and diff checks. Open a draft PR, run three independent
+code-reviewer passes, fix Critical/High findings, and report remaining risks.
+Do not claim human learning, lived accessibility, legal clearance, calibration,
+or policy validity from automated or AI-agent evidence.
+
+---
+
 # Final Handoff — Unified draft contextual actions v0.14.2
 
 ## Status

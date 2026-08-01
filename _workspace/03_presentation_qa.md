@@ -6224,3 +6224,28 @@ educational review remain pending.
   against the 445,000-byte device proxy.
 
 No human pilot or pixel-level browser certification is claimed by this record.
+
+---
+
+# Presentation QA — Documentation alignment v0.14.3
+
+## Status
+
+`pass` for the documentation-only presentation contract, subject to the
+automated checks and three independent review passes required by the plan.
+
+## Findings and verification target
+
+- Current wording is checked against the implemented three-campaign host,
+  task-workspace/action-surface behavior, durable checkpoint/replay contracts,
+  and actor-visible presentation boundaries.
+- Human evaluation, legal-quality conclusions, and lived accessibility remain
+  unestablished evidence limits; they are not future stop gates.
+- Chromium evergreen is the active browser target. Firefox/WebKit/mobile and
+  legacy-browser work remains deferred; historical smoke evidence is not
+  promoted to support certification.
+- Incomplete asset provenance is handled by exclusion and generic fallback.
+
+Run documentation-currentness, links, release metadata, browser policy, asset,
+full Python, formatting, Clippy, Rust, and diff checks. No runtime/API or
+browser implementation change is authorized.
