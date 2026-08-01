@@ -395,6 +395,7 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "automatic_source",
       "max_host_restore_attempts",
       "automaticResume: !actionAdapter.sessionId && Boolean(storedSessionId)",
+      "Host session refreshed after browser refresh",
     ):
       self.assertIn(marker, self.app)
 

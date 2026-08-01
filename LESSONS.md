@@ -3825,3 +3825,19 @@ separate gates.
   and confirmed unknown sessions clear it.
 - Prevention: keep the policy versioned and source-bound, test the one-attempt
   boundary, and never add browser save parsing, serialization, or state.
+
+## Keep Browser Smoke Evidence Honest (v0.13.107)
+
+- Context: the live GUI host embeds the browser module graph at Rust compile
+  time, and a browser refresh normally finds the still-running host session
+  before the conditional durable-restore branch is needed.
+- Risk: probing a stale host binary can miss the new visible contract, while a
+  successful refresh against a live host can be overstated as proof of host
+  restart recovery.
+- Resolution: rebuild the GUI host before the Firefox smoke, verify one
+  explicit checkpoint save plus one refresh and opaque-ID recovery, and record
+  that the probe does not simulate a stopped host or claim the durable-restore
+  branch ran.
+- Prevention: separate live-session refresh evidence from stopped-host restore
+  evidence, keep Firefox/WebKit/device certification boundaries fail-closed,
+  and rerun the source-byte proxy after every embedded GUI change.

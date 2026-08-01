@@ -23,10 +23,21 @@ EXPECTED_HOST_START = {
   "status": "competitive regional session loaded: session-1",
   "session": "session-1",
   "demo_fixture": False,
+  "checkpoint_saved": True,
+  "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
+  "stored_session_id": "session-1",
+}
+EXPECTED_RESUME = {
+  "status": "Host session refreshed after browser refresh: session-1",
+  "session": "session-1",
+  "stored_session_id": "session-1",
+  "demo_fixture": False,
+  "ready": "complete",
 }
 EXPECTED_REVIEW_BOUNDARY = {
   "firefox_shell_runtime_smoke_complete": True,
   "firefox_host_backed_start_smoke_complete": True,
+  "firefox_browser_refresh_resume_smoke_complete": True,
   "firefox_full_campaign_certification_complete": False,
   "firefox_audio_decoder_review_complete": False,
   "webkit_runtime_certification_complete": False,
@@ -74,6 +85,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
     })
     self.assertEqual(observation["shell"], EXPECTED_SHELL)
     self.assertEqual(observation["host_start"], EXPECTED_HOST_START)
+    self.assertEqual(observation["browser_refresh_resume"], EXPECTED_RESUME)
     self.assertTrue(self.packet["probe"]["writes_project_state"] is False)
 
   def test_probe_source_and_browser_policy_boundaries_are_exact(self):
@@ -122,6 +134,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
       observation["url"],
       observation["browser"],
       observation["marionette_protocol"],
+      observation["browser_refresh_resume"],
     )
     bad_host = dict(observation["host_start"])
     bad_host["status"] = "stabilization session loaded: session-1"
@@ -132,6 +145,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["url"],
         observation["browser"],
         observation["marionette_protocol"],
+        observation["browser_refresh_resume"],
       )
     bad_browser = dict(observation["browser"])
     bad_browser["headless"] = False
@@ -142,6 +156,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["url"],
         bad_browser,
         observation["marionette_protocol"],
+        observation["browser_refresh_resume"],
       )
     with self.assertRaises(RuntimeError):
       self.probe.validate_observations(
@@ -150,6 +165,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         "https://example.com/",
         observation["browser"],
         observation["marionette_protocol"],
+        observation["browser_refresh_resume"],
       )
     with self.assertRaises(RuntimeError):
       self.probe._validate_loopback_url("http://example.com/")

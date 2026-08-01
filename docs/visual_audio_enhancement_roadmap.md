@@ -4847,6 +4847,22 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.106.md`, the Phase 11.1 ledger, and
 the browser recovery tests.
 
+### v0.13.107 Firefox browser-refresh resume smoke
+
+- The existing Firefox/Marionette runtime probe now starts a competitive host
+  session, saves one explicit host checkpoint, performs one browser refresh,
+  and verifies the same opaque session ID and host-backed refresh status.
+- This is source-bound runtime evidence only. It does not simulate a stopped
+  host or prove that the conditional durable-restore branch was invoked, and it
+  does not promote Firefox support or full-campaign certification.
+- WebKit, real-device, human accessibility/usability, audio, provenance,
+  full-campaign, revision, expansion, and public-release gates remain open.
+
+The target is recorded in
+`_workspace/185_implementation_plan_phase13-firefox-resume-smoke-v0.13.107.md`,
+`_workspace/00_input/request-summary-v0.13.107.md`, the Firefox runtime packet,
+and the remaining-gate audit.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
