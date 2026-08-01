@@ -3345,8 +3345,9 @@ campaign expansion approval remain pending and promotion-blocking.
 
 ## Status
 
-Implementation is complete on `codex/gui-contextual-actions-v0.14.2` pending
-the required three independent code-review passes and draft-PR/CI handoff.
+Implementation is complete on `codex/gui-contextual-actions-v0.14.2` in draft
+PR #359 against `main`; CI is passing and the branch remains intentionally
+unmerged.
 
 ## Changed surface
 
@@ -3358,12 +3359,29 @@ controls. Release metadata, device evidence, guides, specification,
 architecture, presentation contract/QA, request summary, credits/audit
 metadata, and lessons were synchronized to v0.14.2.
 
+## Final verification and review
+
+- 942 Python tests pass; `cargo fmt --check`, Clippy with warnings denied, and
+  the full Rust suite pass; all GUI modules pass Node syntax checks.
+- Release, documentation-link, loading/offline, browser-policy, asset, audit,
+  and device checks pass. The live source is 444,206 bytes against the
+  445,000-byte proxy.
+- In-app browser smoke covered competitive, stabilization, and affiliation at
+  1280×900 and 1024×768, plus a 700px stacked plan, Details/overflow, keyboard
+  card activation, Large Text, and reduced motion.
+- Three independent code-reviewer passes found no Critical or High issues;
+  all reported Medium/Low findings were corrected and the post-fix CI run is
+  green.
+
 ## Boundaries and unresolved risks
 
 No Rust/MCP schema, simulation, persistence, command, stochastic, asset, or
 dependency change was made. Technical checks do not prove human usability,
 lived accessibility, educational effectiveness, browser/device certification,
-or public-release approval. Those gates remain explicitly pending.
+or public-release approval. Those gates remain explicitly pending. Firefox
+runtime smoke could not execute because no Firefox executable is installed in
+this environment; Firefox/WebKit remain not-certified. No human pilot was run
+or claimed.
 
 ---
 
