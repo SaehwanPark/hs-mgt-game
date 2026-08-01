@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.97] - 2026-08-01
+
+- Added a source-bound current-runtime evidence packet for the supported
+  Chromium shell and one host-backed competitive session-start smoke.
+- Recorded absent command-line Firefox/Chromium binaries and the unchanged
+  Safari remote-automation permission boundary without promoting support or
+  closing real-device, human, or public-release gates.
+
 ## [0.13.96] - 2026-07-31
 
 - Added a source-bound technical audit mapping every substantive unchecked

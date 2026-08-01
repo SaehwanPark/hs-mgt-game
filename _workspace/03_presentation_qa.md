@@ -5902,3 +5902,35 @@ public-release review remain open and explicitly blocking.
 - `python3 scripts/validate_remaining_gate_technical_audit.py` — pass.
 - Focused audit tests and all existing Python/Rust, asset, release, and
   documentation checks — pass.
+
+# Presentation QA — Supported-runtime capability evidence v0.13.97
+
+## Status
+
+`pass` for documentation/evidence integrity and the current Chromium smoke
+boundary. No visual, audio, GUI, asset, host, replay, policy, or release
+behavior was changed.
+
+## Information and causality findings
+
+- The packet records only visible title/readiness/control/status/session fields
+  and a read-only browser engine identifier.
+- The opaque session ID is evidence of host acceptance, not a browser-owned
+  snapshot or authority path.
+- Zero console warnings/errors are a local smoke result, not a human quality,
+  accessibility, audio, hardware, or educational conclusion.
+
+## Accessibility, privacy, provenance, and authority findings
+
+- No participant identity, browser history, raw media, hidden state, new asset,
+  or external destination is introduced.
+- Existing written-equivalent, mute, reduced-motion, and fallback contracts
+  remain unchanged and are not treated as human-tested evidence.
+- Firefox/WebKit, real-device, human, educational, revision, expansion, and
+  public-release gates remain explicitly false/pending.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_1_runtime_capability_evidence` — pass.
+- `python3 scripts/validate_runtime_capability_evidence.py` — pass.
+- Existing browser/device and Phase 13 technical validators remain authoritative.

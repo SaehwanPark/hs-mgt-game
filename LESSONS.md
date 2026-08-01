@@ -3679,3 +3679,19 @@ separate gates.
   promotion-blocking status; validate the mapping and pending decision fields.
 - Prevention: re-audit the consolidated ledger after every merge and require
   authorized evidence before changing a human/runtime status.
+
+# Runtime Smoke Must Bind Engine Identity and Promotion Limits
+
+- Context: the in-app browser completed a current Chromium host-backed smoke,
+  while Firefox and Safari/WebKit capabilities were unavailable or permission-
+  gated in the same host environment.
+- Risk: a passing shell interaction could be copied into a broad browser or
+  device certification claim, while an absent CLI binary could be mistaken for
+  a failure of the supported in-app runtime.
+- Resolution: record the exact observed engine/version, loopback shell state,
+  opaque host-start result, zero warning/error counts, and capability statuses
+  in a strict additive packet; keep browser policy, human review, hardware, and
+  release booleans fail-closed.
+- Prevention: treat runtime observations, browser support policy, real-device
+  measurements, human evidence, and public-release approval as separate gates;
+  do not infer one from another.

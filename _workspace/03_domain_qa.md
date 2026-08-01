@@ -718,3 +718,39 @@ Automated audit integrity is not human evidence or public-release approval.
 - Rust suite: 375 tests — pass.
 - Clippy, formatting, release metadata, documentation links, asset registry,
   release manifest, and diff checks — pass.
+
+# Domain QA — Supported-runtime capability evidence v0.13.97
+
+## Status
+
+`pass` for the bounded current-runtime evidence packet only. No browser policy,
+simulation, clinical/policy, human, hardware, educational, or public-release
+status is promoted.
+
+## Reviewed inputs
+
+- `_workspace/175_implementation_plan_visual-audio-phase13-1-runtime-capability-evidence-v0.13.97.md`.
+- `docs/evaluation/phase13.1-runtime-capability-evidence.json`, its validator,
+  focused tests, and the existing Phase 13.1 browser/device packets.
+- `assets/browser-compatibility-policy.json`,
+  `assets/device-performance-policy.json`, and the loopback GUI sources.
+
+## Findings
+
+- The current Chrome 150.0.0.0 observation binds the executive shell to a
+  complete DOM state, an accepted competitive host session, demo-fixture
+  removal, and zero warning/error console entries.
+- Capability statuses distinguish the observed in-app Chromium runtime from
+  absent command-line binaries and the Safari remote-automation permission
+  boundary.
+- The validator rejects browser identity, loopback, host/session, console,
+  source-marker, capability, and unsupported promotion drift.
+- No hidden state, actor intent, causal outcome, or clinical/policy claim is
+  added to the presentation surface.
+
+## Residual risks and evidence limits
+
+The observation does not establish Firefox/WebKit certification, real hardware
+performance, lived accessibility/usability, audio quality, educational value,
+full campaign coverage, or public-release readiness. Those remain authorized
+runtime or human gates.

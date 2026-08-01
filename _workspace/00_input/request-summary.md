@@ -4226,3 +4226,39 @@ This slice proves that the remaining roadmap work is explicitly mapped and
 that current technical evidence is source-bound. It cannot close the human
 evidence gates or establish educational, accessibility, legal, clinical,
 policy, or public-release readiness.
+
+# Request Summary — Supported-runtime capability evidence v0.13.97
+
+## Authorized outcome
+
+Continue the visual/audio roadmap by recording a reproducible current-browser
+runtime observation and host capability boundary without promoting browser,
+device, human, educational, legal, clinical, expansion, or release status.
+
+## Target slice
+
+- Capture the current Chrome/Chromium loopback shell and one host-backed
+  competitive session-start result from the in-app browser.
+- Record exact engine/version, shell readiness, opaque session binding, and
+  warning/error console counts.
+- Record absent command-line browser binaries and the unchanged Safari remote-
+  automation permission boundary.
+- Validate the packet with strict source markers, capability statuses, and
+  fail-closed promotion boundaries.
+
+## Non-goals
+
+- No browser installation, macOS permission change, external upload, or new
+  browser/device support claim.
+- No Firefox/WebKit, real-device, battery/thermal, audio-quality, human
+  accessibility/usability, educational, provenance/legal, revision, expansion,
+  or public-release decision.
+- No runtime, GUI, simulation, asset, audio, persistence, or host-authority
+  behavior change.
+
+## Evidence limits
+
+The packet proves one current Chrome/Chromium host-backed smoke and records
+host capability facts. It does not certify other engines, hardware, lived
+accessibility/usability, audio quality, education, campaign coverage, or
+public release; those gates remain explicitly pending.

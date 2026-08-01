@@ -5185,3 +5185,38 @@ expansion decisions remain pending.
 The audit does not answer whether the GUI is understandable, whether audio is
 useful, whether assets are legally clear, or whether full campaign coverage
 should be approved. Those require authorized human evidence and decisions.
+
+# Presentation Contract — Supported-runtime capability evidence v0.13.97
+
+## Goal and authorization
+
+Record a bounded current Chromium presentation observation for the loopback
+GUI. This is technical runtime evidence only; it cannot promote support or
+approve a device, human, educational, legal, clinical, expansion, or release
+gate.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Review use | Prohibited inference |
+| --- | --- | --- | --- |
+| Browser identity/version | Read-only browser runtime identifier | Bind the observed Chrome/Chromium engine and version | Do not infer Firefox/WebKit support |
+| Shell readiness | `gui/index.html` DOM | Confirm title, complete readiness, and session-start control | Do not infer human comprehension or accessibility |
+| Host start | `src/gui_server.rs` and visible status/session fields | Confirm one competitive session was accepted by the host | Do not serialize state or infer campaign completion |
+| Console result | Browser developer diagnostics | Record zero warning/error entries for this smoke | Do not infer audio, hardware, or release quality |
+| Capability inventory | Current host checks plus prior bounded runtime packets | Separate observed, absent, and permission-blocked capabilities | Do not convert absence into a support-policy change |
+
+## Accessibility, privacy, and authority
+
+The observation uses only actor-visible shell/status fields and an opaque host
+session ID. It stores no participant identity, browser history, private state,
+raw media, or hidden simulation state. The host remains authoritative for the
+session and the browser policy remains unchanged. Written, mute, reduced-motion,
+and fallback contracts are not human-tested by this slice.
+
+## Verification and evidence limits
+
+`tests/test_phase13_1_runtime_capability_evidence.py` checks exact packet shape,
+engine/version, loopback, host/session, console, source-marker, capability,
+and promotion boundaries. Passing proves packet integrity and one current
+Chromium smoke only. Firefox/WebKit, real hardware, human accessibility/
+usability, audio quality, education, and public release remain pending.

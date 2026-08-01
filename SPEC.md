@@ -7653,6 +7653,27 @@ The target and validator are recorded in
 `docs/evaluation/phase13-remaining-gate-technical-audit.json`, and
 `scripts/validate_remaining_gate_technical_audit.py`.
 
+### Visual/audio supported-runtime capability evidence (v0.13.97)
+
+The Phase 13.1 runtime packet records a bounded current Chrome 150.0.0.0
+loopback observation: the executive shell reached complete readiness, one
+host-backed competitive session started, the demo fixture was absent afterward,
+and browser warning/error logs were empty. The packet also records missing
+command-line Firefox/Chromium binaries and the Safari remote-automation
+permission boundary without changing the canonical support policy.
+
+The validator rejects non-loopback URLs, browser identity/version drift,
+missing host/session observations, console warnings/errors, source-marker drift,
+capability-status drift, and any browser/device/human/release promotion. It
+adds no runtime, simulation, asset, audio, persistence, or public-release
+behavior and does not establish Firefox/WebKit, hardware, accessibility,
+educational, audio-quality, or campaign-expansion completion.
+
+The target and validator are recorded in
+`_workspace/175_implementation_plan_visual-audio-phase13-1-runtime-capability-evidence-v0.13.97.md`,
+`docs/evaluation/phase13.1-runtime-capability-evidence.json`, and
+`scripts/validate_runtime_capability_evidence.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
