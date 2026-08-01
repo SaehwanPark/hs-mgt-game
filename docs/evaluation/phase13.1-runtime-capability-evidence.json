@@ -1,0 +1,119 @@
+{
+  "schema_version": "phase13.1-runtime-capability-evidence-v1",
+  "status": "complete-supported-chromium-host-smoke-pending-cross-engine-certification",
+  "package_version": "0.13.97",
+  "roadmap_item": "cross-browser/device certification",
+  "observed_on": "2026-08-01",
+  "observation": {
+    "method": "Codex in-app Browser Playwright DOM inspection plus read-only Chrome DevTools Protocol runtime identification",
+    "url": "http://127.0.0.1:7878/",
+    "browser": {
+      "name": "Chrome",
+      "engine": "Chromium",
+      "version": "150.0.0.0",
+      "platform": "macOS",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "protocol": "Chrome DevTools Protocol"
+    },
+    "shell": {
+      "title": "Health Policy Strategy Game — Executive Desktop",
+      "ready": "complete",
+      "start_control": true,
+      "demo_fixture": false,
+      "status": "competitive regional session loaded: session-12",
+      "session_id": "session-12"
+    },
+    "console": {
+      "warning_count": 0,
+      "error_count": 0
+    },
+    "repository_state_written": false,
+    "host_session_started": true
+  },
+  "capability_inventory": [
+    {
+      "id": "in-app-chromium",
+      "status": "observed",
+      "evidence": "Current in-app browser identified as Chrome 150.0.0.0 and completed a host-backed competitive session start.",
+      "next_action": "Repeat the supported Chromium smoke when the runtime changes."
+    },
+    {
+      "id": "chromium-command-line",
+      "status": "absent",
+      "evidence": "No google-chrome, chromium, or chromium-browser executable was found by the host capability check.",
+      "next_action": "Use an authorized supported runtime for CLI-based reproduction if one is needed."
+    },
+    {
+      "id": "firefox-command-line",
+      "status": "absent",
+      "evidence": "No Firefox executable was found by the host capability check; the prior Firefox packet remains a historical host-backed smoke observation.",
+      "next_action": "Run the existing Marionette probe in an authorized Firefox runtime before any certification decision."
+    },
+    {
+      "id": "safari-webdriver",
+      "status": "permission-blocked",
+      "evidence": "safaridriver is present, but a listener/session cannot be created without the macOS remote-automation configuration change; no change was made.",
+      "next_action": "An authorized human must enable remote automation before Safari/WebKit evidence can be collected."
+    }
+  ],
+  "review_boundary": {
+    "chromium_host_backed_smoke_complete": true,
+    "chromium_console_warning_error_free": true,
+    "firefox_runtime_certification_complete": false,
+    "webkit_runtime_certification_complete": false,
+    "real_device_certification_complete": false,
+    "hardware_performance_certification_complete": false,
+    "human_accessibility_review_complete": false,
+    "human_usability_review_complete": false,
+    "public_release_approval": false,
+    "canonical_browser_policy_promoted": false
+  },
+  "source_contract": {
+    "sources": [
+      "assets/browser-compatibility-policy.json",
+      "assets/device-performance-policy.json",
+      "docs/evaluation/phase13.1-cross-browser-device-review-packet.json",
+      "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json",
+      "docs/guides/gui-how-to-play.md",
+      "gui/index.html",
+      "src/gui_server.rs"
+    ],
+    "required_markers": [
+      "assets/browser-compatibility-policy.json: chromium-evergreen-desktop",
+      "assets/browser-compatibility-policy.json: firefox-desktop",
+      "assets/browser-compatibility-policy.json: webkit-desktop",
+      "assets/device-performance-policy.json: low-power-browser-proxy",
+      "docs/evaluation/phase13.1-cross-browser-device-review-packet.json: complete-technical-packet-pending-runtime-certification",
+      "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json: complete-firefox-host-backed-smoke-pending-matrix",
+      "docs/guides/gui-how-to-play.md: http://127.0.0.1:7878",
+      "gui/index.html: session-start",
+      "src/gui_server.rs: 127.0.0.1:7878"
+    ],
+    "forbidden_claim_markers": [
+      "Firefox is supported",
+      "WebKit is supported",
+      "Firefox/WebKit certified",
+      "real-device certification complete",
+      "battery certification complete",
+      "human accessibility review complete",
+      "public release approved"
+    ]
+  },
+  "evidence_limits": [
+    "The observation confirms one current Chrome/Chromium shell load and one host-backed competitive session-start action only.",
+    "The observation does not certify Firefox or WebKit full-campaign behavior, audio decoding, or cross-engine compatibility.",
+    "Missing command-line binaries and blocked Safari remote automation are host capability facts, not support-policy decisions.",
+    "No real hardware, battery, thermal, memory, frame-rate, human accessibility, human usability, or educational conclusion is established.",
+    "The packet does not authorize support promotion, revision decisions, campaign expansion, or public release."
+  ],
+  "release_boundary": {
+    "technical_evidence_added": true,
+    "support_policy_changed": false,
+    "runtime_changes": 0,
+    "simulation_changes": 0,
+    "asset_changes": 0,
+    "audio_changes": 0,
+    "persistence_changes": 0,
+    "public_release_approval": false
+  }
+}

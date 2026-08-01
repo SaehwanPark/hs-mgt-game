@@ -3741,8 +3741,8 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 
 ## Milestone 13.1: Release candidate audit
 
-**Status:** Current source-checkout technical evidence is recorded in
-v0.13.20. Product/content review, public-release approval, full-campaign
+**Status:** Current source-checkout technical evidence is recorded through
+v0.13.97. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -3840,6 +3840,13 @@ educational/accessibility gates remain open.
   `tests/test_phase13_1_firefox_runtime_smoke_packet.py`; Firefox 147.0.2
   shell/host-start observations are recorded while full engine and WebKit
   certification remain open.
+- [x] Current supported-runtime capability evidence recorded. Evidence:
+  `docs/evaluation/phase13.1-runtime-capability-evidence.json`,
+  `scripts/validate_runtime_capability_evidence.py`, and
+  `tests/test_phase13_1_runtime_capability_evidence.py`; Chrome 150.0.0.0
+  completes the current loopback shell/host-start smoke with zero warning or
+  error console entries, while Firefox/WebKit, real hardware, and human review
+  remain pending.
 
 ### v0.13.20 current technical-release evidence
 
@@ -4620,6 +4627,26 @@ are completed. Human-review gates remain open.
 - This closes the technical mapping gap only. Human provenance/legal,
   resemblance, accessibility, audio, educational, debrief, clinical/policy,
   browser/device, revision, and expansion gates remain explicitly pending.
+
+### v0.13.97 supported-runtime capability evidence
+
+- `docs/evaluation/phase13.1-runtime-capability-evidence.json` records the
+  current Chrome 150.0.0.0 in-app browser loading the loopback executive shell,
+  starting one host-backed competitive session, removing the demo fixture, and
+  producing zero warning/error console entries.
+- `scripts/validate_runtime_capability_evidence.py` and
+  `tests/test_phase13_1_runtime_capability_evidence.py` fail closed on browser
+  identity/version, loopback, opaque-session, console, source-marker,
+  capability-status, and support/release-promotion drift.
+- The packet records absent command-line Firefox/Chromium binaries and the
+  unchanged Safari remote-automation permission boundary. It does not certify
+  Firefox/WebKit, real hardware, human accessibility/usability, audio quality,
+  educational effectiveness, campaign expansion, or public release.
+
+The target and validator are recorded in
+`_workspace/175_implementation_plan_visual-audio-phase13-1-runtime-capability-evidence-v0.13.97.md`,
+`docs/evaluation/phase13.1-runtime-capability-evidence.json`, and
+`scripts/validate_runtime_capability_evidence.py`.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

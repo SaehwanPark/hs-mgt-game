@@ -3078,3 +3078,45 @@ separately and passed.
 After merge, re-audit the roadmap; if only these explicitly authorized
 human/runtime gates remain, report the required evidence inputs rather than
 fabricating closure.
+
+# Final Handoff — Supported-runtime capability evidence v0.13.97
+
+## Status
+
+The v0.13.97 runtime-capability evidence slice is implemented on
+`codex/phase13-1-runtime-capability-evidence-v0.13.97`. It records the current
+Chrome 150.0.0.0 loopback shell/host-start smoke, absent command-line browser
+binaries, and the unchanged Safari remote-automation boundary. No support,
+human, hardware, educational, expansion, or public-release gate is promoted.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-runtime-capability-evidence.json`.
+- Validator: `scripts/validate_runtime_capability_evidence.py`.
+- Test: `tests/test_phase13_1_runtime_capability_evidence.py`.
+- Plan: `_workspace/175_implementation_plan_visual-audio-phase13-1-runtime-capability-evidence-v0.13.97.md`.
+
+## Verification
+
+- Full Python suite: 908 tests pass.
+- Serial Rust suite: 375 tests pass.
+- Focused runtime packet, release metadata, asset registry/release, browser,
+  device, remaining-gate, formatting, Clippy, and diff checks pass.
+- The packet validates the observed shell readiness, competitive host start,
+  demo-fixture removal, opaque session binding, and zero warning/error console
+  entries.
+
+## Review outcome
+
+Exactly one medium-effort code reviewer was used. The initial review found a
+Medium browser-version consistency gap and a Low boolean-as-zero counter gap.
+The validator now binds the exact observed Chrome version and requires strict
+integer zero counters; regression tests cover both mutations. The same
+reviewer’s follow-up found no actionable issues. No second reviewer was used.
+
+## Remaining gates
+
+Firefox/WebKit certification, real hardware/performance, human accessibility
+and usability, audio quality, educational/debrief review, provenance/legal and
+resemblance review, clinical/policy review, revision decisions, campaign
+expansion, and public-release approval remain pending and promotion-blocking.
