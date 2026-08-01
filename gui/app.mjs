@@ -1384,7 +1384,7 @@ export function normalizeActionViewModel(spec = {}, submissionMode = "draft", so
 }
 
 export function normalizeCampaignDecision(decision = {}) {
-  return normalizeActionViewModel(decision, "commit", decision.source ?? "CampaignCoverage.decisions");
+  return normalizeActionViewModel(decision, "commit", decision.source ?? null);
 }
 
 function commandForParameters(action, params) {
@@ -1695,6 +1695,7 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
   const surfaceRoot = root.querySelector("#action-builder");
   if (surfaceRoot) surfaceRoot.hidden = false;
   const cards = new Map();
+  const editingSnapshots = new Map();
   let expandedId = null;
   const normalizedActions = Array.isArray(actions) ? actions : [];
 
@@ -1722,7 +1723,9 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
     const detailsButton = actionNode(root, "button", "Details", "action-details visual-token", { type: "button" });
     detailsButton.title = "Timing, rules, uncertainty, command, and source";
     const tooltip = actionNode(root, "span", "Timing, rules, uncertainty, command, and source", "visual-token-help");
+    tooltip.id = `${bodyId}-details-help`;
     tooltip.setAttribute("role", "tooltip");
+    detailsButton.setAttribute("aria-describedby", tooltip.id);
     detailsButton.append(tooltip);
     detailsButton.addEventListener?.("click", (event) => {
       event.stopPropagation?.();
@@ -1806,6 +1809,7 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
       return true;
     },
     edit(id, params = {}) {
+      surface.cancelEditing();
       const card = cards.get(id);
       if (!card) {
         const more = root.querySelector("#action-preview-more");
@@ -1814,6 +1818,12 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
       }
       const overflow = card.element.closest?.("#action-preview-more");
       if (overflow) overflow.open = true;
+      const original = {};
+      for (const parameter of card.action.parameters ?? []) {
+        const input = card.form.elements?.namedItem?.(parameter.name);
+        original[parameter.name] = String(input?.value ?? "");
+      }
+      editingSnapshots.set(id, original);
       setExpanded(id);
       for (const [name, value] of Object.entries(params)) {
         const input = card.form.elements?.namedItem?.(name);
@@ -1825,6 +1835,21 @@ function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange =
       return true;
     },
     resetEditing() {
+      editingSnapshots.clear();
+      for (const card of cards.values()) {
+        card.submitButton.textContent = "Add";
+        card.form.dataset.editing = "false";
+      }
+    },
+    cancelEditing() {
+      for (const [id, original] of editingSnapshots) {
+        const card = cards.get(id);
+        for (const [name, value] of Object.entries(original ?? {})) {
+          const input = card?.form.elements?.namedItem?.(name);
+          if (input) input.value = value;
+        }
+      }
+      editingSnapshots.clear();
       for (const card of cards.values()) {
         card.submitButton.textContent = "Add";
         card.form.dataset.editing = "false";
@@ -2987,7 +3012,8 @@ function setActionControls(root, enabled) {
   for (const selector of ["#draft-action-list", "#validate-actions", "#submit-month", "#cancel-edit"]) {
     const node = root.querySelector(selector);
     if (node) {
-      node.hidden = !enabled || mode !== "draft";
+      const editing = selector === "#cancel-edit" && actionState(root).actionEditing === "true";
+      node.hidden = !enabled || mode !== "draft" || (selector === "#cancel-edit" && !editing);
       node.disabled = !enabled;
     }
   }
@@ -3027,7 +3053,7 @@ function renderActionCatalog(catalog, root, onAdd, onChange = null) {
   const actions = (catalog?.actions ?? []).map((spec) => normalizeActionViewModel(
     spec,
     "draft",
-    spec.source ?? (spec.id ? `ActionCatalog.${spec.id}` : null),
+    spec.source ?? null,
   ));
   actionState(root).actionSubmissionMode = "draft";
   return renderUnifiedActionSurface(actions, root, {
@@ -3037,7 +3063,7 @@ function renderActionCatalog(catalog, root, onAdd, onChange = null) {
   });
 }
 
-function renderValidation(validation, root) {
+function renderValidation(validation, root, drafts = []) {
   const status = root.querySelector("#validation-status");
   const submit = root.querySelector("#submit-month");
   const previews = root.querySelector("#validation-preview-list");
@@ -3055,10 +3081,14 @@ function renderValidation(validation, root) {
   if (submit) submit.hidden = !validation.valid;
   if (!previews) return;
   previews.replaceChildren();
+  const labels = new Map((drafts ?? []).map((draft) => [
+    draft.action_id,
+    draft.label ?? draft.action?.label ?? draft.action_id,
+  ]));
   for (const preview of validation.previews ?? []) {
     const item = actionNode(root, "li");
     item.append(
-      actionNode(root, "strong", preview.action_id ?? "Checked action"),
+      actionNode(root, "strong", labels.get(preview.action_id) ?? preview.action_id ?? "Checked action"),
       actionNode(root, "span", ` · ${preview.cost?.action_points ?? "?"} AP · ${preview.cost?.cash_cost ?? "?"} cash · ${preview.cost?.political_capital ?? "?"} political capital`),
     );
     const details = actionNode(root, "details");
@@ -3127,7 +3157,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   function invalidateDraft() {
     validation = null;
     firstMonthFlow.update({ draftCount: drafts.length, validated: false });
-    renderValidation(null, root);
+    renderValidation(null, root, drafts);
     setPresentationState(root, "Draft changed; host validation is required again.");
   }
 
@@ -3163,11 +3193,16 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       params,
       command,
     };
-    const targetIndex = editingIndex;
+    const replacing = editingIndex != null
+      && form?.dataset?.editing === "true"
+      && drafts[editingIndex]?.action_id === action.id;
+    const targetIndex = replacing ? editingIndex : null;
     if (targetIndex == null) drafts.push(draft);
     else drafts[targetIndex] = draft;
-    editingIndex = null;
-    root.__hsMgtActionSurface?.resetEditing?.();
+    if (replacing) {
+      editingIndex = null;
+      root.__hsMgtActionSurface?.resetEditing?.();
+    }
     invalidateDraft();
     audioClient.playCue("ui.action-add");
     renderDraftState();
@@ -3177,7 +3212,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       added.tabIndex = -1;
       added.focus?.({ preventScroll: true });
     }
-    setPresentationState(root, targetIndex == null ? `${action.label} added to your plan.` : `${action.label} saved.`);
+    setPresentationState(root, replacing ? `${action.label} saved.` : `${action.label} added to your plan.`);
     return { ok: true, action, params, form };
   }
 
@@ -3188,19 +3223,19 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       showRecovery(root, "Validation is unavailable. Load a host adapter before submitting a decision.");
       return { ok: false, code: "validation_adapter_missing" };
     }
-    setPresentationState(root, "Validating draft with the host…");
+    setPresentationState(root, "Checking plan…");
     try {
       const result = await adapter.validateTurn(sessionId, draftCommand());
       validation = result;
       recorder?.recordValidation({ valid: Boolean(result.valid), code: result.code, message: result.error ?? result.message });
-      renderValidation(validation, root);
+      renderValidation(validation, root, drafts);
       firstMonthFlow.update({ validated: Boolean(validation.valid) });
       audioClient.playCue(validation.valid ? "ui.action-confirm" : "ui.action-reject");
-      setPresentationState(root, validation.valid ? "Host validation passed; review before submitting." : "Host validation rejected the draft; revise and retry.");
+      setPresentationState(root, validation.valid ? "Plan checked; review before committing." : "Plan needs changes; revise and retry.");
       return { ok: Boolean(validation.valid), envelope: validation };
     } catch (error) {
       validation = null;
-      renderValidation(null, root);
+      renderValidation(null, root, drafts);
       audioClient.playCue("ui.action-reject");
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "validation_adapter_error", message);
@@ -3306,7 +3341,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     setReadOnlyControls(root, true);
     setActionControls(root, true);
     renderDraftState();
-    renderValidation(null, root);
+    renderValidation(null, root, drafts);
     workspaceEvent(root, refreshedPresentationDone ? "session_ended" : "transition_committed", { focus: false });
     setPresentationState(root, refreshMessage);
     return { ok: true, envelope: response };
@@ -3325,7 +3360,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     actionState(root).actionSubmissionMode = "commit";
     setActionControls(root, true);
     renderDraftState();
-    renderValidation(null, root);
+    renderValidation(null, root, drafts);
     const actionMode = root.querySelector("#action-mode");
     if (actionMode) actionMode.textContent = "Choose an action";
     firstMonthFlow.update({
@@ -3441,7 +3476,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       setActionControls(root, true);
       if (actionMode) actionMode.textContent = "Build your plan";
       renderDraftState();
-      renderValidation(null, root);
+      renderValidation(null, root, drafts);
       firstMonthFlow.update({
         sessionLoaded: true,
         actionCatalogLoaded: true,
@@ -3517,7 +3552,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   root.querySelector("#submit-month")?.addEventListener("click", submit);
   root.querySelector("#cancel-edit")?.addEventListener("click", () => {
     editingIndex = null;
-    root.__hsMgtActionSurface?.resetEditing?.();
+    root.__hsMgtActionSurface?.cancelEditing?.();
     renderDraftState();
     setPresentationState(root, "Revision cancelled.");
   });

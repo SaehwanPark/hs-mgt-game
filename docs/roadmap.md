@@ -1292,7 +1292,7 @@ Done:
   revision/validation/commit behavior while preserving exact host commands.
 - Kept legal/CLI controls inside collapsed static/demo-only `Technical
   controls`, hid them during live play, and synchronized the 445,000-byte
-  device proxy at 441,328 bytes.
+  device proxy at 444,016 bytes.
 
 Not Yet Done:
 

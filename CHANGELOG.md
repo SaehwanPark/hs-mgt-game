@@ -7,7 +7,7 @@
 - Added the competitive `Monthly plan` column with human-readable labels,
   revise/remove flows, host-authoritative validation, and on-demand `Details`.
 - Kept technical controls demo-only, preserved focus/live-region recovery, and
-  reduced the live GUI source budget to 441,328 bytes without changing host or
+  reduced the live GUI source budget to 444,016 bytes without changing host or
   simulation contracts.
 - Browser/device and human usability evidence remain bounded technical checks;
   no simulation, persistence, schema, or public-release semantics changed.

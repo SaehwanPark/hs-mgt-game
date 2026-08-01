@@ -378,7 +378,7 @@ def _run_competitive_full_campaign(
       "return {valid: document.querySelector('#submit-month')?.hidden === false, text: document.querySelector('#validation-status')?.textContent || ''};",
       lambda value: isinstance(value, dict)
       and value.get("valid") is True
-      and str(value.get("text", "")).startswith("Host validation passed:"),
+      and str(value.get("text", "")).startswith("Plan checked:"),
       f"host validation for turn {turn}",
     )
     _execute(client, session_id, "document.querySelector('#submit-month').click(); return true;")

@@ -6220,7 +6220,7 @@ educational review remain pending.
   authoritative and the exact canonical batch is preserved. Direct rejection
   leaves entered values in the expanded card.
 - Live technical controls are hidden; static/demo controls remain available
-  under a collapsed disclosure. The measured source payload is 442,591 bytes
+  under a collapsed disclosure. The measured source payload is 444,016 bytes
   against the 445,000-byte device proxy.
 
 No human pilot or pixel-level browser certification is claimed by this record.
