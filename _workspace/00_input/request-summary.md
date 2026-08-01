@@ -4295,3 +4295,49 @@ This packet proves only a current technical first-session and fallback state
 observation. It cannot close first-time-user, audio-listening, human
 accessibility, educational, browser/device, provenance, revision, expansion,
 or public-release gates.
+
+# Request Summary — Terminal-debrief runtime-boundary evidence v0.13.99
+
+## Authorized outcome
+
+Record a fresh host-backed terminal competitive-session observation for the
+open debrief/educational roadmap gate. This is technical presentation evidence
+only; it must not create human debrief findings, educational claims, or release
+approval.
+
+## Target slice
+
+- Start one current competitive session in the live GUI and invoke the existing
+  host-owned `End session and review debrief` control.
+- Capture the terminal status, final session metadata, committed history rows,
+  non-placeholder written debrief, aligned replay transition count/latest hash,
+  and read-only control state.
+- Confirm the terminal onboarding action points to the debrief and that written
+  history/debrief remain the authoritative fallback when audio is optional,
+  muted, reduced, or unavailable.
+- Add a strict source-bound evidence packet, validator, regression tests, and
+  synchronized roadmap/version/handoff records.
+
+## Non-goals
+
+- No gameplay, simulation, replay, persistence, asset, audio implementation, or
+  support-policy change; the existing host terminal projection is corrected to
+  remove instructor-only debrief text from the player-facing end-session path.
+- No participant debrief, educational usability, accessibility, audio quality,
+  browser/device certification, provenance/legal, content, revision, expansion,
+  or public-release decision.
+- No raw participant notes/media, identity, private state, browser history,
+  session location, or hidden actor information.
+
+## Validation target
+
+Focused terminal-debrief packet/tests, live Chromium observation, full Python
+and Rust checks, formatting, Clippy, release/asset/browser/device/gate audits,
+one medium-effort code review, PR merge, and temporary-branch cleanup.
+
+## Evidence limits
+
+The slice proves one current host terminal-debrief presentation boundary and
+its written/read-only fallbacks. It does not establish that a person
+understands the debrief, learns from it, can use it accessibly, or finds audio
+useful.

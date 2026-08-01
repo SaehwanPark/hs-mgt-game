@@ -3161,3 +3161,57 @@ usability, Firefox/WebKit certification, educational/debrief review,
 provenance/legal and resemblance review, clinical/policy review, revision
 decisions, campaign expansion, and public-release approval remain pending and
 promotion-blocking.
+
+# Final Handoff — Terminal-debrief runtime-boundary evidence v0.13.99
+
+## Status
+
+The v0.13.99 terminal-debrief slice is implemented on
+`codex/phase13-2-terminal-debrief-runtime-evidence-v0.13.99` and was reviewed
+in PR #346. It corrects the competitive player-facing terminal projection
+without promoting the human debrief or educational gate.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`.
+- Validator: `scripts/validate_terminal_debrief_runtime_evidence.py`.
+- Test: `tests/test_phase13_2_terminal_debrief_runtime_evidence.py`.
+- Plan: `_workspace/177_implementation_plan_visual-audio-phase13-2-terminal-debrief-runtime-evidence-v0.13.99.md`.
+- Fresh Chrome 150.0.0.0 loopback observation: host-backed competitive
+  session, one Hold transition, terminal status, one immutable history row,
+  19 written player-safe debrief rows, replay/hash alignment, hidden stale
+  competitive coverage panel, read-only controls, and written audio fallback.
+
+## Correction
+
+The host end-session route now uses `competitive_end_session_debrief`, which
+preserves actor-visible content while excluding the instructor-only appendix;
+the separate CLI/instructor `competitive_debrief` path remains available.
+The renderer hides the stale companion panel only for the competitive terminal
+projection and preserves stabilization/regional-affiliation terminal coverage.
+
+## Verification
+
+- Full Python suite: 924 tests pass.
+- Serial Rust suite: 376 tests pass.
+- Clippy, formatting, release metadata, asset/audio/offline/browser/device,
+  remaining-gate, documentation-link, and terminal packet checks pass.
+- The live GUI was stopped after evidence capture; no repository state was
+  written by the observation.
+
+## Review outcome
+
+Exactly one medium-effort code reviewer was used. The initial review found one
+Medium cross-campaign renderer-scope issue: unconditional panel hiding could
+remove stabilization/regional-affiliation terminal coverage. The guard was
+scoped to `competitive-regional-v1`, cross-campaign regression coverage was
+added, and the same reviewer’s follow-up found no actionable issues. No second
+reviewer was used.
+
+## Remaining gates
+
+Human visual debrief, first-use comprehension, educational usability,
+accessibility, audio listening/quality, Firefox/WebKit and real-device
+certification, provenance/legal and resemblance, clinical/policy review,
+revision decisions, campaign expansion, and public-release approval remain
+pending and promotion-blocking.

@@ -5255,3 +5255,65 @@ settings, audio, written-equivalent, source, privacy, type, and promotion
 boundaries. Passing proves a current technical state observation only. It does
 not establish participant comprehension, audio usefulness/fatigue, lived
 accessibility, educational value, hardware/browser quality, or release.
+
+# Presentation Contract — Terminal-debrief runtime-boundary evidence v0.13.99
+
+## Goal and authorization
+
+Capture one current live terminal debrief through the existing host-owned
+`competitive-end-session-v1` route. This is technical runtime evidence for the
+open debrief/educational gate; it cannot approve human debrief quality,
+learning, accessibility, audio, browser/device support, or release.
+
+## Player questions and actor-visible source ledger
+
+| Player question | Authorized source | Runtime evidence | Prohibited inference |
+| --- | --- | --- | --- |
+| What happened after I ended the session? | Host `EndSessionEnvelope` and `renderEndSessionEnvelope` | Explicit terminal status and final metadata | Do not infer unreported outcomes |
+| Can I inspect my committed decisions? | Host `history` and `renderHistory` | Written history rows with turn/command/hash | Do not regenerate or rewrite history |
+| What did the host debrief? | Host `debrief` and `#debrief-list` | Non-placeholder written debrief rows | Do not infer learning or causal claims beyond supplied text |
+| Can I still submit a decision? | `setReadOnlyControls`, `setActionControls`, and `#session-end` | Action submission removed/disabled and end control disabled | Do not treat presentation state as simulation authority |
+| What remains when audio is unavailable? | Written history/debrief plus audio fallback contracts | Written terminal content remains present | Do not claim playback or listening usefulness |
+
+## Visual, motion, audio, and fallback semantics
+
+- Terminal status is visible text and not color-only.
+- Final metadata exposes campaign, final turn, transition count, and latest
+  committed hash exactly as supplied by the host.
+- History and debrief remain native written lists; an empty host debrief is an
+  explicit fallback, while this evidence packet requires the current campaign
+  case to be non-empty.
+- Terminal controls are read-only after the host end response. For the
+  competitive terminal projection, the stale campaign-coverage companion panel
+  is hidden; stabilization and regional-affiliation terminal coverage remains
+  available.
+- Debrief music remains optional and atmospheric; mute, reduced motion, audio
+  unavailability, and optional cue-copy settings never remove written history
+  or debrief meaning.
+
+## Authority, privacy, and replay boundaries
+
+The host owns session termination, committed history, replay metadata, state
+hashes, and debrief lines. The browser validates and renders those fields and
+does not mutate the simulation, regenerate history, infer private state, or
+enter presentation state into commands, transitions, hashes, persistence, or
+replay. The packet stores no participant identity, raw notes/media, private
+state, browser history, or session location.
+
+## Provenance and evidence limits
+
+No new asset or audio file is introduced. Existing asset/audio registries and
+fallback contracts remain authoritative. A passing validator proves only one
+current host terminal presentation observation and packet integrity; it does
+not prove debrief comprehension, educational usefulness, lived accessibility,
+audio quality, legal/provenance clearance, browser/device certification,
+revision, expansion, or public release.
+
+## Verification and non-goals
+
+Focused tests must bind the packet to `gui/app.mjs`, `gui/host-adapter.mjs`,
+`src/gui_server.rs`, `src/mcp/session.rs`, `src/debrief/report.rs`, the
+terminal host tests, and existing debrief visual/audio contracts. No gameplay
+or simulation rule changes are authorized; the existing player-facing terminal
+projection may remove instructor-only debrief text while preserving the
+separate instructor/CLI debrief path.

@@ -7694,6 +7694,32 @@ The target and validator are recorded in
 `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`, and
 `scripts/validate_first_session_audio_runtime_evidence.py`.
 
+### Visual/audio terminal-debrief runtime-boundary evidence (v0.13.99)
+
+The Phase 13.2 terminal packet records one current Chrome 150.0.0.0
+host-backed competitive session after one committed Hold month and end-session.
+It binds the terminal status, final metadata, immutable history row, written
+player-safe debrief, read-only controls, onboarding target, written fallback,
+and replay-aligned state hash.
+
+The player-facing host projection now uses a debrief without the instructor-only
+appendix. The separate CLI/instructor `competitive_debrief` path remains
+available for its authorized review surface. The renderer hides the stale
+campaign-coverage companion panel after end-session and selects the visible
+standard debrief target for onboarding.
+
+The validator rejects host/history/debrief/read-only/renderer/source-marker
+drift, instructor-only claim leakage, type coercion, and human or release
+promotion. This technical correction adds no gameplay, simulation, audio,
+asset, persistence, support-policy, or public-release behavior and does not
+establish visual debrief quality, educational usability, accessibility, audio
+listening quality, browser/device certification, or human approval.
+
+The target and validator are recorded in
+`_workspace/177_implementation_plan_visual-audio-phase13-2-terminal-debrief-runtime-evidence-v0.13.99.md`,
+`docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`, and
+`scripts/validate_terminal_debrief_runtime_evidence.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

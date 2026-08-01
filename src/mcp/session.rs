@@ -10,7 +10,7 @@ use crate::cli::{
   parse_workforce_command,
 };
 use crate::competitive::{genesis_competitive_world_with_ruleset, resolve_competitive_month};
-use crate::debrief::{affiliation_debrief, competitive_debrief, educational_debrief};
+use crate::debrief::{affiliation_debrief, competitive_end_session_debrief, educational_debrief};
 use crate::inputs::resolve_inputs;
 use crate::model::{
   AFFILIATION_TURN_COUNT, AffiliationHistory, AffiliationRuleset, AffiliationTransition,
@@ -912,7 +912,7 @@ impl GameSessionStore {
           max_turns: COMPETITIVE_MONTH_LIMIT,
           done: session.done,
           history: history.clone(),
-          debrief: competitive_debrief(&session.history),
+          debrief: competitive_end_session_debrief(&session.history),
           replay: end_session_replay(session.seed, &history),
         }
       }
@@ -3016,6 +3016,38 @@ mod tests {
     assert!(text.contains("operating revenue "));
     assert!(text.contains("operating cost "));
     assert!(text.contains("operating margin "));
+  }
+
+  #[test]
+  fn competitive_end_session_excludes_instructor_only_debrief_sections() {
+    let mut store = GameSessionStore::default();
+    let session = start(&mut store, "competitive-regional-v1");
+    let session = store
+      .submit_turn(SubmitTurnRequest {
+        session_id: session.session_id,
+        command_text: "hold".to_string(),
+      })
+      .expect("advance one month");
+    let ended = store
+      .end_session(EndSessionRequest {
+        session_id: session.session_id,
+      })
+      .expect("end session");
+    let text = ended.debrief.join("\n");
+
+    assert!(text.contains("Competitive preview completed 1 committed month(s)."));
+    assert!(text.contains("[Private Action] (unobserved by you)"));
+    for forbidden in [
+      "=== INSTRUCTOR RUN SUMMARY & DECISION QUALITY REVIEW ===",
+      "REVEALED FOR INSTRUCTOR REVIEW",
+      "measurement noise and reporting delays",
+      "=== DISTRIBUTIONAL OUTCOME SUMMARY (INSTRUCTOR REVIEW) ===",
+    ] {
+      assert!(
+        !text.contains(forbidden),
+        "found instructor-only text: {forbidden}"
+      );
+    }
   }
 
   #[test]

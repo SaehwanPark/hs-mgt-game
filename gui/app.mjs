@@ -343,7 +343,12 @@ function renderOnboarding(envelope, root, recorder) {
   next.onclick = (event) => {
     event.__hsMgtPlaytestRecorded = true;
     recorder?.record("onboarding_next", { target: session.done ? "campaign-debrief-list" : "briefing-list" });
-    const target = root.querySelector(session.done ? "#campaign-debrief-list, #debrief-list" : "#campaign-coverage-panel, #briefing-list");
+    const targetSelectors = session.done
+      ? ["#campaign-debrief-list", "#debrief-list"]
+      : ["#campaign-coverage-panel", "#briefing-list"];
+    const target = targetSelectors
+      .map((selector) => root.querySelector(selector))
+      .find((candidate) => candidate && !candidate.closest?.("[hidden]"));
     target?.scrollIntoView?.({ behavior: reducedMotion(root) ? "auto" : "smooth", block: "start" });
     target?.focus?.({ preventScroll: true });
   };
@@ -1875,6 +1880,10 @@ export function renderEndSessionEnvelope(envelope, root = document) {
   if (meta) {
     const hash = envelope.replay.latest_state_hash ?? "no committed hash";
     meta.textContent = `${envelope.campaign} · final turn ${envelope.turn}/${envelope.max_turns} · ${envelope.replay.transition_count} transitions · hash ${hash}`;
+  }
+  const campaignCoveragePanel = root.querySelector("#campaign-coverage-panel");
+  if (campaignCoveragePanel && envelope.campaign === "competitive-regional-v1") {
+    campaignCoveragePanel.hidden = true;
   }
   setReadOnlyControls(root, true);
   setEndSessionControl(root, false);

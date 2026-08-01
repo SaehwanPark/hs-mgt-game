@@ -231,6 +231,12 @@ pub fn instructor_run_summary(history: &History) -> Vec<String> {
 }
 
 pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
+  let mut lines = competitive_end_session_debrief(history);
+  lines.extend(competitive_instructor_summary(history));
+  lines
+}
+
+pub fn competitive_end_session_debrief(history: &CompetitiveHistory) -> Vec<String> {
   let final_state = history.final_state();
   let mut lines = vec![
     format!(
@@ -393,9 +399,6 @@ pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {
     "Access pledge lesson: public access commitments build legitimacy, but the debrief reviews whether repeated pledges were paired with capacity, staffing, monitoring, or payer follow-through.".to_string(),
     "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.".to_string(),
   ]);
-
-  // Append the instructor run summary
-  lines.extend(competitive_instructor_summary(history));
 
   lines
 }

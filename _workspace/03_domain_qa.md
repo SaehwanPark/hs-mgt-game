@@ -788,3 +788,43 @@ public-release status is promoted.
 Human first-time-user, audio-listening, accessibility, educational, hardware,
 browser/device, provenance, revision, expansion, and public-release review
 remain open and require authorized evidence.
+
+# Domain QA — Terminal-debrief runtime-boundary evidence v0.13.99
+
+## Status
+
+`pass` for the bounded technical terminal projection and evidence packet only.
+No human debrief, educational, accessibility, audio, browser/device, or
+public-release status is promoted.
+
+## Reviewed inputs
+
+- `_workspace/177_implementation_plan_visual-audio-phase13-2-terminal-debrief-runtime-evidence-v0.13.99.md`.
+- `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`, its
+  validator/test, and the existing terminal/debrief visual contracts.
+- `src/debrief/report.rs`, `src/mcp/session.rs`, `gui/app.mjs`, and the host
+  end-session route.
+
+## Findings
+
+- The player-facing competitive end-session route now uses the terminal-safe
+  debrief and no longer exposes the instructor-only appendix; the separate
+  CLI/instructor debrief remains intact.
+- The terminal packet binds one committed actor-visible Hold transition,
+  immutable history/replay alignment, written debrief rows, read-only controls,
+  and the visible onboarding handoff.
+- The correction does not expose true state, private rival actions, future
+  outcomes, participant data, or a new simulation authority path.
+
+## Residual risks and evidence limits
+
+The live observation and source checks do not establish human visual debrief
+quality, educational usefulness, lived accessibility, audio listening quality,
+browser/device certification, provenance/legal clearance, campaign expansion,
+or public-release readiness. Those remain authorized pending gates.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_terminal_debrief_runtime_evidence` — pass.
+- Existing terminal/debrief visual-boundary tests and the Rust projection
+  regression remain authoritative.

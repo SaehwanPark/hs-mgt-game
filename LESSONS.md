@@ -3710,3 +3710,19 @@ separate gates.
   listening quality unverified.
 - Prevention: distinguish optional explanatory copy from mandatory written
   outcomes in runtime evidence, accessibility review, and audio evaluation.
+
+# Player Endpoints Must Not Reuse Instructor Debriefs
+
+- Context: the competitive end-session host route reused a debrief builder that
+  appended an instructor-only decision-quality appendix, and a stale campaign
+  coverage panel could remain visible beside the terminal debrief.
+- Risk: a player-facing endpoint can leak review-only information and present a
+  contradictory placeholder surface even when the host envelope is otherwise
+  correct.
+- Resolution: keep the full `competitive_debrief` builder for the authorized
+  CLI/instructor surface, add a player-safe terminal projection for the host
+  route, hide the stale companion panel, select a visible debrief target, and
+  bind the correction to a live evidence packet plus regression tests.
+- Prevention: treat player and instructor projections as separate contracts;
+  validate information boundaries and visible terminal targets together rather
+  than assuming a shared formatter is safe for every endpoint.

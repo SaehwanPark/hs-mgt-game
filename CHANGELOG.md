@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.99] - 2026-08-01
+
+- Corrected the player-facing competitive end-session projection so it no
+  longer includes the instructor-only debrief appendix, while preserving the
+  separate CLI/instructor review path.
+- Hid the stale campaign-coverage companion panel after terminal end-session
+  and kept onboarding directed to the visible written debrief.
+- Added a source-bound terminal runtime evidence packet and fail-closed
+  validator; human debrief, educational, accessibility, audio, browser/device,
+  and public-release decisions remain pending.
+
 ## [0.13.98] - 2026-08-01
 
 - Added source-bound live GUI evidence for the seven-stage competitive

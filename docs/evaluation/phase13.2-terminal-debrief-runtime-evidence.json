@@ -1,0 +1,151 @@
+{
+  "schema_version": "phase13.2-terminal-debrief-runtime-evidence-v1",
+  "status": "complete-terminal-debrief-runtime-boundary-pending-human-review",
+  "package_version": "0.13.99",
+  "roadmap_item": "debrief visuals reviewed",
+  "observed_on": "2026-08-01",
+  "observation": {
+    "method": "Codex in-app Browser Playwright DOM snapshots after host-backed launch, one Hold submit, and end-session transition",
+    "url": "http://127.0.0.1:7878/",
+    "browser": {
+      "name": "Chrome",
+      "engine": "Chromium",
+      "version": "150.0.0.0",
+      "platform": "macOS",
+      "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "protocol": "Chrome DevTools Protocol"
+    },
+    "host_start": {
+      "status": "competitive regional session loaded: session-1",
+      "session_id": "session-1",
+      "demo_fixture": false
+    },
+    "committed_action": {
+      "command": "hold",
+      "transition_count": 1,
+      "latest_state_hash": "61357596d8800592"
+    },
+    "repository_state_written": false,
+    "host_session_started": true
+  },
+  "terminal_surface": {
+    "title": "Health Policy Strategy Game — Executive Desktop",
+    "status": "Host session ended; final history and debrief loaded",
+    "presentation_state": "Host session ended; final history and debrief loaded",
+    "meta": "competitive-regional-v1 · final turn 1/24 · 1 transitions · hash 61357596d8800592",
+    "history": {
+      "row_count": 1,
+      "rows": [
+        {
+          "turn": 1,
+          "command": "[Hold]",
+          "state_hash": "61357596d8800592"
+        }
+      ],
+      "placeholder_absent": true
+    },
+    "debrief": {
+      "row_count": 19,
+      "first_line": "Competitive preview completed 1 committed month(s).",
+      "last_line": "Decision quality and outcome quality remain separate: the MCP surface reports actor-visible observations plus committed transition summaries.",
+      "required_markers": [
+        "Final state hash:",
+        "Final calendar:",
+        "Final player tradeoff:",
+        "Final player resources:",
+        "Player: hold",
+        "Operating result:",
+        "Rival Northlake Health:",
+        "[Private Action] (unobserved by you)",
+        "Attributed mechanisms to inspect:",
+        "Resolved events:",
+        "Decision quality and outcome quality remain separate:"
+      ],
+      "placeholder_absent": true,
+      "instructor_only_markers_absent": true,
+      "written_rows_present": true
+    },
+    "read_only": {
+      "command_form_hidden": true,
+      "action_builder_hidden": true,
+      "session_end_disabled": true,
+      "action_submission_deferred": true
+    },
+    "onboarding": {
+      "next_text": "Review the debrief",
+      "directs_to_debrief": true
+    },
+    "audio": {
+      "state": "Audio off; visual and text equivalents are active.",
+      "written_fallback_present": true,
+      "playback_verified": false,
+      "listening_review_complete": false
+    }
+  },
+  "renderer_contract": {
+    "source_test": "tests/test_phase11_live_debrief.py",
+    "campaign_coverage_hidden_after_end_session": true,
+    "visible_terminal_debrief_target_selected": true
+  },
+  "review_boundary": {
+    "technical_terminal_debrief_observation_complete": true,
+    "technical_player_debrief_boundary_complete": true,
+    "technical_read_only_terminal_controls_complete": true,
+    "human_visual_debrief_review_complete": false,
+    "educational_usability_review_complete": false,
+    "human_accessibility_review_complete": false,
+    "audio_listening_review_complete": false,
+    "browser_device_certification_complete": false,
+    "public_release_approval": false
+  },
+  "source_contract": {
+    "sources": [
+      "src/debrief/report.rs",
+      "src/debrief/mod.rs",
+      "src/mcp/session.rs",
+      "gui/app.mjs",
+      "gui/host-adapter.mjs",
+      "src/gui_server.rs",
+      "tests/test_phase11_live_debrief.py",
+      "tests/test_phase13_2_debrief_visual_boundary.py"
+    ],
+    "required_markers": [
+      "src/debrief/report.rs: pub fn competitive_end_session_debrief(history: &CompetitiveHistory) -> Vec<String> {",
+      "src/debrief/report.rs: pub fn competitive_debrief(history: &CompetitiveHistory) -> Vec<String> {",
+      "src/mcp/session.rs: debrief: competitive_end_session_debrief(&session.history),",
+      "gui/app.mjs: const campaignCoveragePanel = root.querySelector(\"#campaign-coverage-panel\");",
+      "gui/app.mjs: const targetSelectors = session.done",
+      "gui/host-adapter.mjs: async endSession(sessionId) {",
+      "src/gui_server.rs: \"/api/v1/sessions/{session_id}/end\", post(end_session)",
+      "tests/test_phase11_live_debrief.py: if (nodes.get('#campaign-coverage-panel').hidden !== true) process.exit(15);",
+      "tests/test_phase13_2_debrief_visual_boundary.py: renderEndSessionEnvelope"
+    ],
+    "forbidden_claim_markers": [
+      "human visual debrief review complete",
+      "educational usability review complete",
+      "human accessibility review complete",
+      "audio listening review complete",
+      "audio quality approved",
+      "Firefox/WebKit certified",
+      "public release approved"
+    ]
+  },
+  "evidence_limits": [
+    "The observation covers one current Chrome first-session, one committed Hold month, and one terminal end-session render; it is not participant evidence.",
+    "Removing instructor-only sections from the player-facing projection is a technical information-boundary correction, not a human debrief-quality finding.",
+    "No participant debrief, educational usability, lived accessibility, audio listening, fatigue, or audio quality conclusion is established.",
+    "The observation does not certify Firefox/WebKit, browser/device compatibility, real hardware, battery/thermal behavior, or cross-device performance.",
+    "The packet does not authorize revision decisions, campaign expansion, support promotion, or public release."
+  ],
+  "release_boundary": {
+    "technical_evidence_added": true,
+    "player_terminal_projection_corrected": true,
+    "gameplay_changes": 0,
+    "simulation_changes": 0,
+    "audio_changes": 0,
+    "asset_changes": 0,
+    "persistence_changes": 0,
+    "support_policy_changed": false,
+    "public_release_approval": false
+  }
+}

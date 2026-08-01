@@ -35,6 +35,7 @@ const nodes = new Map([
   ['#validate-actions', node()],
   ['#submit-month', node()],
   ['#session-end', node()],
+  ['#campaign-coverage-panel', node()],
   ['#session-status', node()],
   ['#presentation-state', node()],
 ]);
@@ -64,7 +65,14 @@ if (nodes.get('#history-list').children.length !== 2) process.exit(3);
 if (nodes.get('#debrief-list').children.length !== 1) process.exit(4);
 if (!nodes.get('#session-meta').textContent.includes('hash-2')) process.exit(5);
 if (nodes.get('#session-end').disabled !== true) process.exit(6);
+if (nodes.get('#campaign-coverage-panel').hidden !== true) process.exit(15);
 if (!nodes.get('#presentation-state').textContent.includes('final history and debrief')) process.exit(7);
+nodes.get('#campaign-coverage-panel').hidden = false;
+for (const campaign of ['stabilization-v1', 'regional-affiliation-v1']) {
+  const preserved = renderEndSessionEnvelope({ ...envelope, campaign }, root);
+  if (!preserved.ok) process.exit(16);
+  if (nodes.get('#campaign-coverage-panel').hidden !== false) process.exit(17);
+}
 const presentationBeforeFailure = nodes.get('#presentation-state').textContent;
 const metaBeforeFailure = nodes.get('#session-meta').textContent;
 const failedRender = renderEndSessionEnvelope({ ...envelope, schema_version: 'unknown' }, root);
