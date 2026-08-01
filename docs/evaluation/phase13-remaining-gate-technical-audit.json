@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.109",
+  "package_version": "0.13.110",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -111,6 +111,12 @@
     },
     {
       "id": "firefox-competitive-full-campaign-smoke",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
+      "sources": ["scripts/check_firefox_runtime_smoke.py", "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json", "gui/app.mjs", "gui/index.html", "tests/test_phase13_1_firefox_runtime_smoke_packet.py"]
+    },
+    {
+      "id": "firefox-all-campaign-full-transition-smoke",
       "status": "pass-source-bound-technical-preparation",
       "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
       "sources": ["scripts/check_firefox_runtime_smoke.py", "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json", "gui/app.mjs", "gui/index.html", "tests/test_phase13_1_firefox_runtime_smoke_packet.py"]

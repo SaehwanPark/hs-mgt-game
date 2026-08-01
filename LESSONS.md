@@ -3869,3 +3869,16 @@ separate gates.
   certification, alternative action coverage, audio decoding, real-device
   measurement, and human review; do not infer any of those from a passing
   24-month Hold path.
+
+## Keep Campaign-Specific Firefox Smoke Host-Shaped (v0.13.110)
+
+- Context: stabilization and regional affiliation use a different visible
+  campaign-coverage decision contract than competitive action drafts.
+- Risk: reusing competitive selectors or treating a visible form refresh as a
+  committed stage could overstate Firefox full-transition continuity.
+- Resolution: drive each campaign's rendered coverage form, fill only visible
+  minimum/default values, require exact host autosave and history counts, then
+  use the visible end-session path for the host terminal debrief and hash.
+- Prevention: keep campaign-specific runtime smoke separate from Firefox
+  support certification, alternative decision coverage, audio decoding,
+  human review, device measurement, and public-release approval.

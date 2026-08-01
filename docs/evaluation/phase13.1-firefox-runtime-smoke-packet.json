@@ -6,7 +6,7 @@
   "probe": {
     "script": "scripts/check_firefox_runtime_smoke.py",
     "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
-    "host_requirement": "An already-running local GUI host bound to 127.0.0.1:7878 is required.",
+    "host_requirement": "An already-running local GUI host bound to 127.0.0.1:7878 is required; host session IDs are opaque run-specific values.",
     "writes_project_state": false
   },
   "policy_boundary": {
@@ -33,19 +33,19 @@
       "url": "http://127.0.0.1:7878/"
     },
     "host_start": {
-      "status": "competitive regional session loaded: session-1",
-      "session": "session-1",
+      "status": "competitive regional session loaded: session-4",
+      "session": "session-4",
       "demo_fixture": false,
       "campaign": "competitive-regional-v1",
       "ready": "complete",
       "checkpoint_saved": true,
       "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
-      "stored_session_id": "session-1"
+      "stored_session_id": "session-4"
     },
     "browser_refresh_resume": {
-      "status": "Host session refreshed after browser refresh: session-1",
-      "session": "session-1",
-      "stored_session_id": "session-1",
+      "status": "Host session refreshed after browser refresh: session-4",
+      "session": "session-4",
+      "stored_session_id": "session-4",
       "demo_fixture": false,
       "ready": "complete"
     },
@@ -56,26 +56,26 @@
         "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
         "demo_fixture": false,
         "ready": "complete",
-        "session": "session-1",
-        "status": "competitive regional session loaded: session-1",
-        "stored_session_id": "session-1"
+        "session": "session-4",
+        "status": "competitive regional session loaded: session-4",
+        "stored_session_id": "session-4"
       },
       "stabilization-v1": {
         "demo_fixture": false,
         "ready": "complete",
-        "session": "session-2",
-        "status": "stabilization session loaded: session-2"
+        "session": "session-5",
+        "status": "stabilization session loaded: session-5"
       },
       "regional-affiliation-v1": {
         "demo_fixture": false,
         "ready": "complete",
-        "session": "session-3",
-        "status": "regional affiliation session loaded: session-3"
+        "session": "session-6",
+        "status": "regional affiliation session loaded: session-6"
       }
     },
     "competitive_full_campaign": {
       "campaign": "competitive-regional-v1",
-      "session": "session-1",
+      "session": "session-4",
       "target_turns": 24,
       "committed_turns": 24,
       "history_count": 24,
@@ -113,6 +113,51 @@
         "debrief_count": 188,
         "final_state_hash": "b24eea963c3abfe2"
       }
+    },
+    "campaign_full_runs": {
+      "stabilization-v1": {
+        "campaign": "stabilization-v1",
+        "session": "session-5",
+        "target_stages": 5,
+        "committed_stages": 5,
+        "history_count": 5,
+        "autosave_count": 5,
+        "stages": [
+          {"stage": 1, "history_count": 1, "autosave_status": "Host autosave completed at 1 committed transitions.", "state_hash": "4a41dfcb5438b5f8"},
+          {"stage": 2, "history_count": 2, "autosave_status": "Host autosave completed at 2 committed transitions.", "state_hash": "113e6acccc04f651"},
+          {"stage": 3, "history_count": 3, "autosave_status": "Host autosave completed at 3 committed transitions.", "state_hash": "ae271eae8d552f15"},
+          {"stage": 4, "history_count": 4, "autosave_status": "Host autosave completed at 4 committed transitions.", "state_hash": "6d306853a415633a"},
+          {"stage": 5, "history_count": 5, "autosave_status": "Host autosave completed at 5 committed transitions.", "state_hash": "6982f2ef9a3df4e7"}
+        ],
+        "terminal": {
+          "status": "Host session ended; final history and debrief loaded",
+          "history_count": 5,
+          "debrief_count": 29,
+          "final_state_hash": "6982f2ef9a3df4e7"
+        }
+      },
+      "regional-affiliation-v1": {
+        "campaign": "regional-affiliation-v1",
+        "session": "session-6",
+        "target_stages": 6,
+        "committed_stages": 6,
+        "history_count": 6,
+        "autosave_count": 6,
+        "stages": [
+          {"stage": 1, "history_count": 1, "autosave_status": "Host autosave completed at 1 committed transitions.", "state_hash": "9d38e1d2ebc1e05d"},
+          {"stage": 2, "history_count": 2, "autosave_status": "Host autosave completed at 2 committed transitions.", "state_hash": "31c9e7e5e7cc16fd"},
+          {"stage": 3, "history_count": 3, "autosave_status": "Host autosave completed at 3 committed transitions.", "state_hash": "ee38360229afe70c"},
+          {"stage": 4, "history_count": 4, "autosave_status": "Host autosave completed at 4 committed transitions.", "state_hash": "0a1a88f40ee9bba5"},
+          {"stage": 5, "history_count": 5, "autosave_status": "Host autosave completed at 5 committed transitions.", "state_hash": "5ca716a1c0ce6826"},
+          {"stage": 6, "history_count": 6, "autosave_status": "Host autosave completed at 6 committed transitions.", "state_hash": "00025c494e6299ae"}
+        ],
+        "terminal": {
+          "status": "Host session ended; final history and debrief loaded",
+          "history_count": 6,
+          "debrief_count": 14,
+          "final_state_hash": "00025c494e6299ae"
+        }
+      }
     }
   },
   "safari_webkit_boundary": {
@@ -129,6 +174,8 @@
     "firefox_browser_refresh_resume_smoke_complete": true,
     "firefox_all_campaign_launch_smoke_complete": true,
     "firefox_competitive_full_campaign_smoke_complete": true,
+    "firefox_stabilization_full_campaign_smoke_complete": true,
+    "firefox_affiliation_full_campaign_smoke_complete": true,
     "firefox_full_campaign_certification_complete": false,
     "firefox_audio_decoder_review_complete": false,
     "webkit_runtime_certification_complete": false,
@@ -161,7 +208,11 @@
       "CAMPAIGN_LABELS",
       "session loaded: ",
       "EXPECTED_COMPETITIVE_TURNS",
+      "EXPECTED_CAMPAIGN_STAGE_COUNTS",
       "competitive_full_campaign",
+      "campaign_full_runs",
+      "#campaign-decision-list",
+      "#campaign-history-list",
       "#draft-action-list",
       "#validate-actions",
       "#submit-month",
@@ -188,8 +239,8 @@
   "evidence_limits": [
     "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicitly verified host checkpoint save, and one browser-refresh session recovery.",
     "The refresh result observes the live host path and opaque-ID retention; it does not simulate a stopped host or prove that the conditional durable-restore branch was invoked.",
-    "The multi-campaign result covers launch/read continuity only; it does not advance stabilization or regional affiliation through their full transition sequences.",
-    "The competitive full-campaign result uses the visible Hold path only; it is a host-backed runtime smoke and does not certify Firefox support, alternative action forms, audio decoding, real hardware, or lived accessibility/usability.",
+    "The all-campaign result uses one bounded visible decision path for each campaign: Hold for competitive, minimum/default numeric fields for stabilization, and Commit decision for regional affiliation.",
+    "The result is host-backed full-campaign runtime smoke and does not certify Firefox support, alternative decision values, audio decoding, real hardware, or lived accessibility/usability.",
     "Safari/WebKit has no result because local remote automation permission is disabled.",
     "The canonical browser policy remains unchanged and no browser-support promotion is authorized.",
     "No human, legal, educational, or public-release conclusion is recorded."
