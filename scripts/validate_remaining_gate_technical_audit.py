@@ -48,7 +48,7 @@ DECISION_FIELDS = {
 }
 EXPECTED_SCHEMA = "phase13-remaining-gate-technical-audit-v1"
 EXPECTED_STATUS = "complete-technical-audit-pending-human-gates"
-EXPECTED_PACKAGE_VERSION = "0.13.108"
+EXPECTED_PACKAGE_VERSION = "0.13.109"
 EXPECTED_TEST_SOURCE = "tests/test_phase13_remaining_gate_technical_audit.py"
 EXPECTED_TECHNICAL_CHECKS = {
   "current-release-coverage",
@@ -63,6 +63,7 @@ EXPECTED_TECHNICAL_CHECKS = {
   "automatic-resume-policy",
   "firefox-browser-refresh-resume-smoke",
   "firefox-multi-campaign-launch-smoke",
+  "firefox-competitive-full-campaign-smoke",
 }
 EXPECTED_GATES = {
   "asset-provenance-and-portrait-review",

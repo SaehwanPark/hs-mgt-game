@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.109] - 2026-08-01
+
+- Extended the bounded Firefox/Marionette smoke through the visible Hold path
+  for all 24 competitive months, verifying host validation, commit/autosave
+  status, history/replay rows, and the host terminal debrief.
+- This is source-bound competitive full-campaign smoke evidence only; Firefox
+  support, alternative action forms, WebKit, real-device, human-review, and
+  public-release gates remain pending.
+
 ## [0.13.108] - 2026-08-01
 
 - Extended the bounded Firefox/Marionette smoke to launch all three supported

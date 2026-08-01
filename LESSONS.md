@@ -3853,3 +3853,19 @@ separate gates.
   advanced through its full transition sequence.
 - Prevention: keep launch/read smoke, full-campaign runtime certification, and
   human review as separate evidence fields and promotion decisions.
+
+## Keep Full-Campaign Browser Smoke Host-Backed (v0.13.109)
+
+- Context: the Firefox launch probe proved only that campaign shells could
+  load, while the browser gate still needed evidence across a transition
+  sequence.
+- Risk: clicking controls without waiting for host validation, autosave,
+  history/replay, and terminal rendering could report a browser-only loop
+  rather than a committed campaign.
+- Resolution: drive the existing visible Hold form, validation, submission,
+  end-session controls, and host status fields; require exact month-by-month
+  history/replay/autosave counts and a host-provided terminal debrief.
+- Prevention: keep this technical smoke separate from Firefox support
+  certification, alternative action coverage, audio decoding, real-device
+  measurement, and human review; do not infer any of those from a passing
+  24-month Hold path.

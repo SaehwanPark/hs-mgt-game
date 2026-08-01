@@ -19,6 +19,7 @@ DEFAULT_URL = "http://127.0.0.1:7878/"
 DEFAULT_PORT = 2828
 LOOPBACK_HOSTS = {"127.0.0.1", "::1"}
 EXPECTED_PAGE_TITLE = "Health Policy Strategy Game — Executive Desktop"
+EXPECTED_COMPETITIVE_TURNS = 24
 CAMPAIGN_LABELS = {
   "competitive-regional-v1": "competitive regional",
   "stabilization-v1": "stabilization",
@@ -102,6 +103,7 @@ def validate_observations(
   marionette_protocol: object,
   resume: object | None = None,
   campaign_launches: object | None = None,
+  competitive_full_campaign: object | None = None,
 ) -> None:
   if not isinstance(shell, dict) or not isinstance(host, dict) or not isinstance(browser, dict):
     raise RuntimeError("Firefox runtime smoke observations must be objects")
@@ -186,6 +188,63 @@ def validate_observations(
         campaign_errors.append(f"Firefox campaign launch did not reach readyState=complete: {campaign}")
     if campaign_errors:
       raise RuntimeError("; ".join(campaign_errors))
+  if competitive_full_campaign is not None:
+    if not isinstance(competitive_full_campaign, dict):
+      raise RuntimeError("Firefox competitive full-campaign observation must be an object")
+    full_campaign_errors = []
+    if competitive_full_campaign.get("campaign") != "competitive-regional-v1":
+      full_campaign_errors.append("full-campaign observation is not competitive regional")
+    if competitive_full_campaign.get("session") != host.get("session"):
+      full_campaign_errors.append("full-campaign observation changed the host session ID")
+    if competitive_full_campaign.get("target_turns") != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign target turn count is not 24")
+    if competitive_full_campaign.get("committed_turns") != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign committed turn count is not 24")
+    if competitive_full_campaign.get("history_count") != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign history count is not 24")
+    if competitive_full_campaign.get("replay_count") != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign replay count is not 24")
+    if competitive_full_campaign.get("autosave_count") != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign autosave count is not 24")
+    turns = competitive_full_campaign.get("turns")
+    if not isinstance(turns, list) or len(turns) != EXPECTED_COMPETITIVE_TURNS:
+      full_campaign_errors.append("full-campaign turn observations are incomplete")
+    else:
+      for expected_turn, observation in enumerate(turns, start=1):
+        if not isinstance(observation, dict):
+          full_campaign_errors.append(f"full-campaign turn {expected_turn} is not an object")
+          continue
+        if observation.get("turn") != expected_turn:
+          full_campaign_errors.append(f"full-campaign turn ordering is invalid at {expected_turn}")
+        if observation.get("command") != "hold":
+          full_campaign_errors.append(f"full-campaign command is not Hold at {expected_turn}")
+        if observation.get("history_count") != expected_turn:
+          full_campaign_errors.append(f"full-campaign history count is invalid at {expected_turn}")
+        if observation.get("replay_count") != expected_turn:
+          full_campaign_errors.append(f"full-campaign replay count is invalid at {expected_turn}")
+        autosave_status = observation.get("autosave_status")
+        expected_autosave = f"Host autosave completed at {expected_turn} committed transitions."
+        if autosave_status != expected_autosave:
+          full_campaign_errors.append(f"full-campaign autosave status is invalid at {expected_turn}")
+        state_hash = observation.get("state_hash")
+        if not isinstance(state_hash, str) or not re.fullmatch(r"[0-9a-f]+", state_hash):
+          full_campaign_errors.append(f"full-campaign state hash is invalid at {expected_turn}")
+    terminal = competitive_full_campaign.get("terminal")
+    if not isinstance(terminal, dict):
+      full_campaign_errors.append("full-campaign terminal observation is missing")
+    else:
+      if terminal.get("status") != "Host session ended; final history and debrief loaded":
+        full_campaign_errors.append("full-campaign terminal status is invalid")
+      if terminal.get("history_count") != EXPECTED_COMPETITIVE_TURNS:
+        full_campaign_errors.append("full-campaign terminal history count is not 24")
+      if not isinstance(terminal.get("debrief_count"), int) or terminal["debrief_count"] <= 0:
+        full_campaign_errors.append("full-campaign terminal debrief is missing")
+      if not isinstance(terminal.get("final_state_hash"), str) or not re.fullmatch(
+        r"[0-9a-f]+", terminal["final_state_hash"]
+      ):
+        full_campaign_errors.append("full-campaign terminal state hash is invalid")
+    if full_campaign_errors:
+      raise RuntimeError("; ".join(full_campaign_errors))
 
 
 def _wait_for_port(host: str, port: int, timeout: float) -> None:
@@ -205,6 +264,140 @@ def _execute(client: MarionetteClient, session_id: str, script: str) -> object:
     {"sessionId": session_id, "script": script, "args": []},
   )
   return result.get("value") if isinstance(result, dict) else result
+
+
+def _wait_for(
+  client: MarionetteClient,
+  session_id: str,
+  script: str,
+  predicate: object,
+  description: str,
+  timeout: float = 5.0,
+) -> object:
+  deadline = time.monotonic() + timeout
+  latest = None
+  while time.monotonic() < deadline:
+    latest = _execute(client, session_id, script)
+    if callable(predicate) and predicate(latest):
+      return latest
+    time.sleep(0.05)
+  raise RuntimeError(f"Firefox runtime smoke timed out waiting for {description}: {latest!r}")
+
+
+def _run_competitive_full_campaign(
+  client: MarionetteClient,
+  session_id: str,
+  host_session_id: str,
+) -> dict:
+  turns = []
+  for turn in range(1, EXPECTED_COMPETITIVE_TURNS + 1):
+    _execute(client, session_id, """
+      const button = document.querySelector('form[data-action-id="hold"] button[type="submit"]');
+      if (!button) throw new Error('competitive Hold action form is unavailable');
+      button.click();
+      return true;
+    """)
+    _wait_for(
+      client,
+      session_id,
+      "return {draft_count: document.querySelectorAll('#draft-action-list > li').length};",
+      lambda value: isinstance(value, dict) and value.get("draft_count") == 1,
+      f"Hold draft for turn {turn}",
+    )
+    _execute(client, session_id, "document.querySelector('#validate-actions').click(); return true;")
+    _wait_for(
+      client,
+      session_id,
+      "return {valid: document.querySelector('#submit-month')?.hidden === false, text: document.querySelector('#validation-status')?.textContent || ''};",
+      lambda value: isinstance(value, dict)
+      and value.get("valid") is True
+      and str(value.get("text", "")).startswith("Host validation passed:"),
+      f"host validation for turn {turn}",
+    )
+    _execute(client, session_id, "document.querySelector('#submit-month').click(); return true;")
+    snapshot = _wait_for(
+      client,
+      session_id,
+      """
+        const replay = document.querySelector('#replay-playback-status')?.textContent || '';
+        const replayMatch = replay.match(/ of (\\d+)/);
+        const hashes = [...document.querySelectorAll('#history-list .hash')];
+        return {
+          history_count: document.querySelectorAll('#history-list > li').length,
+          replay_count: replayMatch ? Number(replayMatch[1]) : 0,
+          autosave_status: document.querySelector('#session-launch-status')?.textContent || '',
+          state_hash_text: hashes.length ? hashes[hashes.length - 1].textContent : ''
+        };
+      """,
+      lambda value: isinstance(value, dict)
+      and value.get("history_count") == turn
+      and value.get("replay_count") == turn
+      and value.get("autosave_status") == f"Host autosave completed at {turn} committed transitions.",
+      f"host commit, replay, and autosave for turn {turn}",
+      timeout=8.0,
+    )
+    state_hash_match = re.search(r"state hash: ([0-9a-f]+)", str(snapshot.get("state_hash_text", "")))
+    turns.append({
+      "turn": turn,
+      "command": "hold",
+      "history_count": snapshot.get("history_count"),
+      "replay_count": snapshot.get("replay_count"),
+      "autosave_status": snapshot.get("autosave_status"),
+      "state_hash": state_hash_match.group(1) if state_hash_match else "",
+    })
+  _execute(client, session_id, "document.querySelector('#session-end').click(); return true;")
+  terminal = _wait_for(
+    client,
+    session_id,
+    "return {status: document.querySelector('#session-status')?.textContent || '', history_count: document.querySelectorAll('#history-list > li').length, debrief_count: document.querySelectorAll('#debrief-list > li').length, meta: document.querySelector('#session-meta')?.textContent || ''};",
+    lambda value: isinstance(value, dict)
+    and value.get("status") == "Host session ended; final history and debrief loaded"
+    and value.get("history_count") == EXPECTED_COMPETITIVE_TURNS
+    and isinstance(value.get("debrief_count"), int)
+    and value.get("debrief_count") > 0,
+    "host terminal history and debrief",
+  )
+  final_hash_match = re.search(r"hash ([0-9a-f]+)", str(terminal.get("meta", "")))
+  return {
+    "campaign": "competitive-regional-v1",
+    "session": host_session_id,
+    "target_turns": EXPECTED_COMPETITIVE_TURNS,
+    "committed_turns": len(turns),
+    "history_count": terminal.get("history_count"),
+    "replay_count": EXPECTED_COMPETITIVE_TURNS,
+    "autosave_count": len(turns),
+    "turns": turns,
+    "terminal": {
+      "status": terminal.get("status"),
+      "history_count": terminal.get("history_count"),
+      "debrief_count": terminal.get("debrief_count"),
+      "final_state_hash": final_hash_match.group(1) if final_hash_match else "",
+    },
+  }
+
+
+def _best_effort_end_current_host_session(client: MarionetteClient, session_id: str) -> bool:
+  try:
+    state = _execute(client, session_id, """
+      return {
+        session: document.querySelector('#session-id')?.value || '',
+        end_available: Boolean(document.querySelector('#session-end') && !document.querySelector('#session-end').disabled)
+      };
+    """)
+    if not isinstance(state, dict) or not state.get("session") or not state.get("end_available"):
+      return False
+    _execute(client, session_id, "document.querySelector('#session-end').click(); return true;")
+    _wait_for(
+      client,
+      session_id,
+      "return document.querySelector('#session-status')?.textContent || '';",
+      lambda value: value == "Host session ended; final history and debrief loaded",
+      "best-effort host session cleanup",
+      timeout=5.0,
+    )
+    return True
+  except Exception:
+    return False
 
 
 def _start_campaign(client: MarionetteClient, session_id: str, campaign: str) -> object:
@@ -310,6 +503,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
           ready: document.readyState
         };
       """)
+      competitive_full_campaign = _run_competitive_full_campaign(client, session_id, host["session"])
       host["checkpoint_saved"] = checkpoint_saved
       host["checkpoint_status"] = checkpoint_status
       host["stored_session_id"] = stored_session_id
@@ -322,8 +516,10 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
       campaign_launches = {
         "competitive-regional-v1": host,
         "stabilization-v1": _start_campaign(client, session_id, "stabilization-v1"),
-        "regional-affiliation-v1": _start_campaign(client, session_id, "regional-affiliation-v1"),
       }
+      _best_effort_end_current_host_session(client, session_id)
+      campaign_launches["regional-affiliation-v1"] = _start_campaign(client, session_id, "regional-affiliation-v1")
+      _best_effort_end_current_host_session(client, session_id)
       validate_observations(
         shell,
         host,
@@ -332,6 +528,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         hello.get("marionetteProtocol"),
         resume,
         campaign_launches,
+        competitive_full_campaign,
       )
       client.command("WebDriver:DeleteSession", {"sessionId": session_id})
       session_id = None
@@ -344,10 +541,12 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "host_start": host,
         "browser_refresh_resume": resume,
         "campaign_launches": campaign_launches,
+        "competitive_full_campaign": competitive_full_campaign,
       }
     finally:
       if client is not None:
         if session_id is not None:
+          _best_effort_end_current_host_session(client, session_id)
           try:
             client.command("WebDriver:DeleteSession", {"sessionId": session_id})
           except (OSError, RuntimeError):

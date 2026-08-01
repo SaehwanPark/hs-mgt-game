@@ -279,11 +279,13 @@ failures preserve the ID for retry. Browser storage never contains commands,
 observations, outcomes, hashes, or true state.
 
 The repository also has a bounded Firefox/Marionette smoke that exercises one
-explicit checkpoint save and one refresh against the live loopback host. This
-is runtime evidence only; it does not certify Firefox full-campaign behavior,
-WebKit, real hardware, audio decoding, or human accessibility/usability.
-The smoke also launches each of the three supported campaigns, but that
-launch/read continuity does not replace full-campaign certification.
+explicit checkpoint save and one refresh against the live loopback host. It
+launches each of the three supported campaigns and runs the visible Hold path
+through all 24 competitive months, including host autosaves, history/replay,
+and the terminal debrief. This is runtime evidence only; it does not certify
+Firefox support, alternative action forms, WebKit, real hardware, audio
+decoding, or human accessibility/usability. Stabilization and regional
+affiliation launch/read continuity do not replace full-campaign certification.
 
 ### Audio is silent
 
