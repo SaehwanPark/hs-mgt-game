@@ -3742,7 +3742,7 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 ## Milestone 13.1: Release candidate audit
 
 **Status:** Current source-checkout technical evidence is recorded through
-v0.13.100. Product/content review, public-release approval, full-campaign
+v0.13.101. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -4722,6 +4722,24 @@ The target and validator are recorded in
 The target is recorded in
 `_workspace/178_implementation_plan_visual-audio-phase13-1-device-evidence-sync-v0.13.100.md`
 and `_workspace/00_input/request-summary-v0.13.100.md`.
+
+### v0.13.101 consolidated remaining-gate audit refresh
+
+- The consolidated `phase13-remaining-gate-technical-audit-v1` packet now
+  records current package state and explicitly indexes the runtime capability,
+  first-session/audio, terminal-debrief, and device evidence packets.
+- The audit still maps all 27 substantive unchecked markers to exactly eight
+  promotion-blocking gates. Technical implementation gaps remain closed, while
+  human review or runtime certification and all decision fields remain pending.
+- This is evidence-index maintenance only. It does not establish participant
+  comprehension, accessibility, audio usefulness, provenance/legal clearance,
+  clinical/policy validity, browser/device certification, campaign expansion,
+  or public-release approval.
+
+The target is recorded in
+`_workspace/179_implementation_plan_visual-audio-phase13-gate-audit-refresh-v0.13.101.md`,
+`_workspace/00_input/request-summary-v0.13.101.md`, and
+`docs/evaluation/phase13-remaining-gate-technical-audit.json`.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

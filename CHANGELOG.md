@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.101] - 2026-08-01
+
+- Refreshed the consolidated remaining-gate technical audit to current
+  package state and added explicit source-bound runtime-boundary evidence
+  coverage.
+- Kept all eight human/runtime gates pending and promotion-blocking; no
+  gameplay, simulation, GUI, audio, asset, support, or release behavior
+  changed.
+
 ## [0.13.100] - 2026-08-01
 
 - Synchronized the bounded emulated device-performance source-byte evidence

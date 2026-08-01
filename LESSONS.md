@@ -3741,3 +3741,17 @@ separate gates.
 - Prevention: run generated asset, device, and release projection checks after
   the final renderer diff; treat every byte-count mismatch as evidence drift,
   not as a reason to loosen the bound or claim device quality.
+
+# Refresh Consolidated Audits After Evidence Slices
+
+- Context: the remaining-gate audit was still versioned to the earlier v0.13.96
+  preparation slice after newer runtime capability, first-session/audio,
+  terminal-debrief, and device evidence had merged.
+- Risk: a technically accurate but stale index can omit the strongest current
+  evidence and make the next authorized human action harder to identify.
+- Resolution: refresh the audit package version, add a dedicated current
+  runtime-boundary check, and retain the same eight gate mappings and pending
+  decision boundary.
+- Prevention: re-run the consolidated audit after each evidence packet merge;
+  update source indexes without converting technical preparation into human or
+  release approval.

@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.96",
+  "package_version": "0.13.101",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -60,6 +60,12 @@
       "status": "partial-source-bound-technical-preparation",
       "command": "python3 -m unittest tests.test_phase13_1_cross_browser_device_review_packet tests.test_phase13_1_firefox_runtime_smoke_packet",
       "sources": ["docs/evaluation/phase13.1-cross-browser-device-review-packet.json", "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json", "tests/test_phase13_1_cross_browser_device_review_packet.py", "tests/test_phase13_1_firefox_runtime_smoke_packet.py"]
+    },
+    {
+      "id": "runtime-boundary-evidence",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 scripts/validate_runtime_capability_evidence.py && python3 scripts/validate_first_session_audio_runtime_evidence.py && python3 scripts/validate_terminal_debrief_runtime_evidence.py && python3 scripts/check_device_performance.py",
+      "sources": ["docs/evaluation/phase13.1-runtime-capability-evidence.json", "docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json", "docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json", "assets/device-performance-policy.json", "docs/evaluation/phase13.1-cross-browser-device-review-packet.json", "scripts/validate_runtime_capability_evidence.py", "scripts/validate_first_session_audio_runtime_evidence.py", "scripts/validate_terminal_debrief_runtime_evidence.py", "scripts/check_device_performance.py"]
     }
   ],
   "gates": [
