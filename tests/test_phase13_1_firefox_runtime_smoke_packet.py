@@ -41,6 +41,7 @@ EXPECTED_REVIEW_BOUNDARY = {
   "firefox_host_backed_start_smoke_complete": True,
   "firefox_browser_refresh_resume_smoke_complete": True,
   "firefox_all_campaign_launch_smoke_complete": True,
+  "firefox_competitive_full_campaign_smoke_complete": True,
   "firefox_full_campaign_certification_complete": False,
   "firefox_audio_decoder_review_complete": False,
   "webkit_runtime_certification_complete": False,
@@ -104,6 +105,21 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         "ready": "complete",
       },
     })
+    full_campaign = observation["competitive_full_campaign"]
+    self.assertEqual(full_campaign["campaign"], "competitive-regional-v1")
+    self.assertEqual(full_campaign["session"], EXPECTED_HOST_START["session"])
+    self.assertEqual(full_campaign["target_turns"], 24)
+    self.assertEqual(full_campaign["committed_turns"], 24)
+    self.assertEqual(full_campaign["history_count"], 24)
+    self.assertEqual(full_campaign["replay_count"], 24)
+    self.assertEqual(full_campaign["autosave_count"], 24)
+    self.assertEqual(len(full_campaign["turns"]), 24)
+    self.assertEqual(full_campaign["turns"][0]["state_hash"], "61357596d8800592")
+    self.assertEqual(full_campaign["turns"][-1]["state_hash"], "b24eea963c3abfe2")
+    self.assertEqual(full_campaign["terminal"]["status"], "Host session ended; final history and debrief loaded")
+    self.assertEqual(full_campaign["terminal"]["history_count"], 24)
+    self.assertGreater(full_campaign["terminal"]["debrief_count"], 0)
+    self.assertEqual(full_campaign["terminal"]["final_state_hash"], "b24eea963c3abfe2")
     self.assertTrue(self.packet["probe"]["writes_project_state"] is False)
 
   def test_probe_source_and_browser_policy_boundaries_are_exact(self):
@@ -154,6 +170,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
       observation["marionette_protocol"],
       observation["browser_refresh_resume"],
       observation["campaign_launches"],
+      observation["competitive_full_campaign"],
     )
     bad_host = dict(observation["host_start"])
     bad_host["status"] = "stabilization session loaded: session-1"
@@ -166,6 +183,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["marionette_protocol"],
         observation["browser_refresh_resume"],
         observation["campaign_launches"],
+        observation["competitive_full_campaign"],
       )
     bad_browser = dict(observation["browser"])
     bad_browser["headless"] = False

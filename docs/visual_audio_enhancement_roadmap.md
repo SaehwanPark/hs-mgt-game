@@ -4879,6 +4879,24 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.108.md`, the Firefox runtime packet,
 and the remaining-gate audit.
 
+### v0.13.109 Firefox competitive full-campaign smoke
+
+- The bounded Firefox/Marionette probe now drives the visible competitive Hold
+  action through all 24 host months, waiting for host validation, submission,
+  autosave status, history/replay refresh, and the host terminal debrief.
+- The packet records 24 committed transitions, 24 history/replay rows, 24
+  autosave observations, per-turn state hashes, and a non-empty host debrief.
+- This closes only source-bound competitive full-campaign runtime smoke
+  evidence. It does not certify Firefox support, alternative action forms,
+  stabilization or regional-affiliation full campaigns, WebKit, real devices,
+  audio decoding, human accessibility/usability, educational value,
+  provenance, or public release.
+
+The target is recorded in
+`_workspace/187_implementation_plan_phase13-firefox-competitive-full-campaign-smoke-v0.13.109.md`,
+`_workspace/00_input/request-summary-v0.13.109.md`, the Firefox runtime packet,
+and the remaining-gate audit.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

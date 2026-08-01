@@ -72,6 +72,47 @@
         "session": "session-3",
         "status": "regional affiliation session loaded: session-3"
       }
+    },
+    "competitive_full_campaign": {
+      "campaign": "competitive-regional-v1",
+      "session": "session-1",
+      "target_turns": 24,
+      "committed_turns": 24,
+      "history_count": 24,
+      "replay_count": 24,
+      "autosave_count": 24,
+      "turns": [
+        {"turn": 1, "command": "hold", "history_count": 1, "replay_count": 1, "autosave_status": "Host autosave completed at 1 committed transitions.", "state_hash": "61357596d8800592"},
+        {"turn": 2, "command": "hold", "history_count": 2, "replay_count": 2, "autosave_status": "Host autosave completed at 2 committed transitions.", "state_hash": "e473fa4163cd6f91"},
+        {"turn": 3, "command": "hold", "history_count": 3, "replay_count": 3, "autosave_status": "Host autosave completed at 3 committed transitions.", "state_hash": "be386a47cd13500c"},
+        {"turn": 4, "command": "hold", "history_count": 4, "replay_count": 4, "autosave_status": "Host autosave completed at 4 committed transitions.", "state_hash": "6eada336fb8a5f1e"},
+        {"turn": 5, "command": "hold", "history_count": 5, "replay_count": 5, "autosave_status": "Host autosave completed at 5 committed transitions.", "state_hash": "ded335766ca79366"},
+        {"turn": 6, "command": "hold", "history_count": 6, "replay_count": 6, "autosave_status": "Host autosave completed at 6 committed transitions.", "state_hash": "f2abbb8bcdc39a15"},
+        {"turn": 7, "command": "hold", "history_count": 7, "replay_count": 7, "autosave_status": "Host autosave completed at 7 committed transitions.", "state_hash": "ac62dbabaa6a9067"},
+        {"turn": 8, "command": "hold", "history_count": 8, "replay_count": 8, "autosave_status": "Host autosave completed at 8 committed transitions.", "state_hash": "be245bb15a3512e9"},
+        {"turn": 9, "command": "hold", "history_count": 9, "replay_count": 9, "autosave_status": "Host autosave completed at 9 committed transitions.", "state_hash": "ff4fd22fbacf79b4"},
+        {"turn": 10, "command": "hold", "history_count": 10, "replay_count": 10, "autosave_status": "Host autosave completed at 10 committed transitions.", "state_hash": "dd8785dc13db8ae4"},
+        {"turn": 11, "command": "hold", "history_count": 11, "replay_count": 11, "autosave_status": "Host autosave completed at 11 committed transitions.", "state_hash": "a54405e5a294ee87"},
+        {"turn": 12, "command": "hold", "history_count": 12, "replay_count": 12, "autosave_status": "Host autosave completed at 12 committed transitions.", "state_hash": "0b31a5643d32eb8b"},
+        {"turn": 13, "command": "hold", "history_count": 13, "replay_count": 13, "autosave_status": "Host autosave completed at 13 committed transitions.", "state_hash": "1da73de0be47b729"},
+        {"turn": 14, "command": "hold", "history_count": 14, "replay_count": 14, "autosave_status": "Host autosave completed at 14 committed transitions.", "state_hash": "297199926f7df7ba"},
+        {"turn": 15, "command": "hold", "history_count": 15, "replay_count": 15, "autosave_status": "Host autosave completed at 15 committed transitions.", "state_hash": "a9034fcea165efa4"},
+        {"turn": 16, "command": "hold", "history_count": 16, "replay_count": 16, "autosave_status": "Host autosave completed at 16 committed transitions.", "state_hash": "a6589e5a0b97d3a1"},
+        {"turn": 17, "command": "hold", "history_count": 17, "replay_count": 17, "autosave_status": "Host autosave completed at 17 committed transitions.", "state_hash": "f31e6dfbd16c451c"},
+        {"turn": 18, "command": "hold", "history_count": 18, "replay_count": 18, "autosave_status": "Host autosave completed at 18 committed transitions.", "state_hash": "7fa44b7b8d4e0ef9"},
+        {"turn": 19, "command": "hold", "history_count": 19, "replay_count": 19, "autosave_status": "Host autosave completed at 19 committed transitions.", "state_hash": "306b61ec6b044154"},
+        {"turn": 20, "command": "hold", "history_count": 20, "replay_count": 20, "autosave_status": "Host autosave completed at 20 committed transitions.", "state_hash": "9a3b44abec6a6fec"},
+        {"turn": 21, "command": "hold", "history_count": 21, "replay_count": 21, "autosave_status": "Host autosave completed at 21 committed transitions.", "state_hash": "1b806f5a33bd08e1"},
+        {"turn": 22, "command": "hold", "history_count": 22, "replay_count": 22, "autosave_status": "Host autosave completed at 22 committed transitions.", "state_hash": "7f626b85f2daf17f"},
+        {"turn": 23, "command": "hold", "history_count": 23, "replay_count": 23, "autosave_status": "Host autosave completed at 23 committed transitions.", "state_hash": "13cb26b7e8ce93d8"},
+        {"turn": 24, "command": "hold", "history_count": 24, "replay_count": 24, "autosave_status": "Host autosave completed at 24 committed transitions.", "state_hash": "b24eea963c3abfe2"}
+      ],
+      "terminal": {
+        "status": "Host session ended; final history and debrief loaded",
+        "history_count": 24,
+        "debrief_count": 188,
+        "final_state_hash": "b24eea963c3abfe2"
+      }
     }
   },
   "safari_webkit_boundary": {
@@ -87,6 +128,7 @@
     "firefox_host_backed_start_smoke_complete": true,
     "firefox_browser_refresh_resume_smoke_complete": true,
     "firefox_all_campaign_launch_smoke_complete": true,
+    "firefox_competitive_full_campaign_smoke_complete": true,
     "firefox_full_campaign_certification_complete": false,
     "firefox_audio_decoder_review_complete": false,
     "webkit_runtime_certification_complete": false,
@@ -118,6 +160,15 @@
       "regional-affiliation-v1",
       "CAMPAIGN_LABELS",
       "session loaded: ",
+      "EXPECTED_COMPETITIVE_TURNS",
+      "competitive_full_campaign",
+      "#draft-action-list",
+      "#validate-actions",
+      "#submit-month",
+      "#session-end",
+      "#history-list",
+      "#debrief-list",
+      "Host autosave completed at",
       "document.readyState",
       "marionetteProtocol",
       "127.0.0.1"
@@ -137,8 +188,8 @@
   "evidence_limits": [
     "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicitly verified host checkpoint save, and one browser-refresh session recovery.",
     "The refresh result observes the live host path and opaque-ID retention; it does not simulate a stopped host or prove that the conditional durable-restore branch was invoked.",
-    "The multi-campaign result covers launch/read continuity only; it does not advance any campaign through its full transition sequence.",
-    "The result does not certify Firefox full-campaign behavior, audio decoding, real hardware, or lived accessibility/usability.",
+    "The multi-campaign result covers launch/read continuity only; it does not advance stabilization or regional affiliation through their full transition sequences.",
+    "The competitive full-campaign result uses the visible Hold path only; it is a host-backed runtime smoke and does not certify Firefox support, alternative action forms, audio decoding, real hardware, or lived accessibility/usability.",
     "Safari/WebKit has no result because local remote automation permission is disabled.",
     "The canonical browser policy remains unchanged and no browser-support promotion is authorized.",
     "No human, legal, educational, or public-release conclusion is recorded."
