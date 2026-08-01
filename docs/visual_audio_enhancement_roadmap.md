@@ -4607,6 +4607,20 @@ are completed. Human-review gates remain open.
   establish learning, comprehension, classroom readiness, accessibility,
   audio usefulness, legal/provenance clearance, or human approval.
 
+### v0.13.96 remaining-gate technical audit
+
+- `docs/evaluation/phase13-remaining-gate-technical-audit.json` maps every
+  substantive unchecked visual/audio roadmap marker to the current
+  source-bound technical evidence, pending human/runtime status, required
+  authority, and next action.
+- `scripts/validate_remaining_gate_technical_audit.py` and
+  `tests/test_phase13_remaining_gate_technical_audit.py` fail closed on source
+  or roadmap-marker drift, missing gate mappings, type coercion, unsupported
+  status promotion, and premature human, expansion, or release decisions.
+- This closes the technical mapping gap only. Human provenance/legal,
+  resemblance, accessibility, audio, educational, debrief, clinical/policy,
+  browser/device, revision, and expansion gates remain explicitly pending.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the
@@ -5026,6 +5040,12 @@ The visual/audio enhancement program should be considered successful when the fo
   `tests/test_music_stem_contract.py`, and
   `gui/music-stem-contract.mjs`; planning, stable, pressure, policy,
   competitive, affiliation, and debrief states derive from visible inputs.
+- [x] Map remaining technical gate dependencies. Evidence:
+  `docs/evaluation/phase13-remaining-gate-technical-audit.json`,
+  `scripts/validate_remaining_gate_technical_audit.py`, and
+  `tests/test_phase13_remaining_gate_technical_audit.py`; current technical
+  preparation is source-bound, while authorized human/runtime gates remain
+  blocking.
 - [ ] Complete asset provenance review.
 - [ ] Run structured first-time-user evaluation.
 - [ ] Record revision decisions.

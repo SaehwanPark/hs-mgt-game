@@ -7632,6 +7632,27 @@ The target and validator are recorded in
 `docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json`,
 and `scripts/validate_educational_usability_evidence_intake.py`.
 
+### Visual/audio remaining-gate technical audit (v0.13.96)
+
+The Phase 13 audit maps every substantive unchecked visual/audio roadmap item
+to its existing technical evidence, pending human/runtime status, required
+authority, and next action. It covers portrait and AI metadata/provenance,
+audio and first-session evaluation, educational/debrief review,
+content/resemblance/clinical review, competitive human coverage,
+browser/device certification, revision decisions, and campaign expansion.
+
+The validator rejects roadmap-marker drift, missing source paths or markers,
+unknown gate/status values, type coercion, unmapped open items, and any human,
+runtime, expansion, or release approval. It records that technical
+implementation gaps are closed while promotion remains blocked by explicit
+authorized human or runtime gates; no participant data or runtime behavior is
+changed.
+
+The target and validator are recorded in
+`_workspace/174_implementation_plan_visual-audio-phase13-remaining-gate-technical-audit-v0.13.96.md`,
+`docs/evaluation/phase13-remaining-gate-technical-audit.json`, and
+`scripts/validate_remaining_gate_technical_audit.py`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

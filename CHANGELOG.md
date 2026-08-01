@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.13.96] - 2026-07-31
+
+- Added a source-bound technical audit mapping every substantive unchecked
+  visual/audio roadmap gate to existing evidence and its required authorized
+  human or runtime action.
+- Kept human evaluation, provenance/legal, resemblance, clinical/content,
+  browser/device, revision, expansion, and public-release decisions pending;
+  no runtime or release behavior changed.
+
 ## [0.13.95] - 2026-07-31
 
 - Added a strict, empty, source-bound educational-usability evidence-intake

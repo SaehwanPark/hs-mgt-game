@@ -3666,3 +3666,16 @@ separate gates.
 - Prevention: keep technical preparation, participant evidence, educational
   interpretation, revision decisions, expansion approval, and public release
   as separate gates; never infer educational effectiveness from automation.
+
+# A Single Remaining-Gate Audit Prevents Technical Evidence Drift
+
+- Context: the roadmap now has many source-bound technical packets, but its
+  open human/runtime gates span portrait provenance, audio, evaluation,
+  debrief, content, browser/device, revision, and expansion work.
+- Risk: separate packets can make an open gate disappear from the next plan or
+  make technical preparation look like product approval.
+- Resolution: map every substantive unchecked marker to one stable gate with
+  exact source markers, technical status, pending authority, next action, and
+  promotion-blocking status; validate the mapping and pending decision fields.
+- Prevention: re-audit the consolidated ledger after every merge and require
+  authorized evidence before changing a human/runtime status.

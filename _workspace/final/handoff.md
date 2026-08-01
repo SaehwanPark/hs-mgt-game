@@ -3028,3 +3028,38 @@ pending/null human-review structures. A follow-up found one low type-coercion
 edge in those nested dictionaries. The validator now enforces exact
 type-strict boundary and human-review dictionaries with numeric mutation tests;
 the final recheck found no actionable issues. No second reviewer was used.
+
+# Final Handoff — Remaining-gate technical audit v0.13.96
+
+## Status
+
+The v0.13.96 technical audit is implemented on
+`agent/remaining-gate-technical-audit-v0.13.96`. It maps 27 substantive open
+roadmap markers to eight source-bound gates and preserves the explicit human or
+runtime blocker for each. No runtime or release behavior changed.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13-remaining-gate-technical-audit.json`.
+- Validator: `scripts/validate_remaining_gate_technical_audit.py`.
+- Test: `tests/test_phase13_remaining_gate_technical_audit.py`.
+- Plan: `_workspace/174_implementation_plan_visual-audio-phase13-remaining-gate-technical-audit-v0.13.96.md`.
+
+## Verification
+
+- Focused audit tests, full Python suite (898 tests), and serial Rust suite
+  (375 tests) pass.
+- Formatting, Clippy, release metadata, documentation links, asset registry,
+  generated credits, release manifest, and diff checks pass.
+
+## Review boundary and remaining work
+
+The audit is technical preparation only. Human provenance/legal, portrait
+metadata/resemblance, accessibility, audio, first-time-user, educational,
+debrief, content/clinical, competitive full-campaign, browser/device,
+revision, and expansion decisions remain pending and promotion-blocking.
+
+Exactly one medium-effort code reviewer is required before PR handoff. After
+merge, re-audit the roadmap; if only these explicitly authorized human/runtime
+gates remain, report the required evidence inputs rather than fabricating
+closure.

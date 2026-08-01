@@ -1,0 +1,191 @@
+{
+  "schema_version": "phase13-remaining-gate-technical-audit-v1",
+  "status": "complete-technical-audit-pending-human-gates",
+  "package_version": "0.13.96",
+  "roadmap_item": "Remaining visual/audio roadmap gates",
+  "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
+  "roadmap_contract": {
+    "path": "docs/visual_audio_enhancement_roadmap.md",
+    "open_item_markers": [
+      {"id": "portrait-prompt-seed", "text": "Prompt and seed recorded."},
+      {"id": "portrait-crop-derivative", "text": "Crop and release derivative completed."},
+      {"id": "portrait-identity", "text": "Identity consistency reviewed."},
+      {"id": "portrait-resemblance", "text": "Real-person resemblance reviewed."},
+      {"id": "portrait-artifact", "text": "Anatomy and artifact review completed."},
+      {"id": "portrait-marks", "text": "No protected marks present."},
+      {"id": "portrait-registry", "text": "Registry entry approved."},
+      {"id": "portrait-small-size", "text": "Small-size rendering tested."},
+      {"id": "portrait-grayscale", "text": "Grayscale rendering tested."},
+      {"id": "audio-feedback", "text": "Audio preference feedback collected."},
+      {"id": "audio-ratings", "text": "Quantitative ratings collected."},
+      {"id": "audio-interviews", "text": "Qualitative interviews completed."},
+      {"id": "audio-findings", "text": "Findings classified as defect, preference, or scope expansion."},
+      {"id": "audio-go-no-go", "text": "Go/no-go decision recorded."},
+      {"id": "educational-review", "text": "Educational usability reviewed."},
+      {"id": "first-session-evaluation", "text": "First-session workflow complete."},
+      {"id": "competitive-human-coverage", "text": "Competitive campaign coverage complete."},
+      {"id": "content-institution", "text": "No real institution accidentally represented."},
+      {"id": "content-public-figure", "text": "No public-figure resemblance remains."},
+      {"id": "content-clinical", "text": "No unsupported clinical implication introduced."},
+      {"id": "ai-metadata", "text": "AI-generation metadata complete."},
+      {"id": "debrief-visuals", "text": "Debrief visuals reviewed."},
+      {"id": "asset-provenance", "text": "Complete asset provenance review."},
+      {"id": "pilot-evaluation", "text": "Run structured first-time-user evaluation."},
+      {"id": "revision-decisions", "text": "Record revision decisions."},
+      {"id": "expansion-decision", "text": "Approve or reject expansion to full campaign coverage."},
+      {"id": "browser-device-certification", "text": "cross-browser/device certification"}
+    ]
+  },
+  "technical_checks": [
+    {
+      "id": "current-release-coverage",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 -m unittest tests.test_phase13_technical_coverage",
+      "sources": ["docs/evaluation/phase13.1-technical-coverage.json", "tests/test_phase13_technical_coverage.py"]
+    },
+    {
+      "id": "asset-and-attribution-boundary",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 -m unittest tests.test_phase13_1_attribution_boundary tests.test_phase13_1_asset_provenance_evidence_intake",
+      "sources": ["docs/evaluation/phase13.1-attribution-boundary.json", "docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json", "tests/test_phase13_1_attribution_boundary.py", "tests/test_phase13_1_asset_provenance_evidence_intake.py"]
+    },
+    {
+      "id": "evaluation-and-review-intakes",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 -m unittest tests.test_phase13_2_pilot_evidence_intake tests.test_phase13_2_debrief_visual_evidence_intake tests.test_phase13_2_revision_decision_evidence_intake tests.test_phase13_2_educational_usability_evidence_intake",
+      "sources": ["docs/evaluation/phase13.2-pilot-evidence-intake-packet.json", "docs/evaluation/phase13.2-debrief-visual-evidence-intake-packet.json", "docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json", "docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json"]
+    },
+    {
+      "id": "browser-device-boundary",
+      "status": "partial-source-bound-technical-preparation",
+      "command": "python3 -m unittest tests.test_phase13_1_cross_browser_device_review_packet tests.test_phase13_1_firefox_runtime_smoke_packet",
+      "sources": ["docs/evaluation/phase13.1-cross-browser-device-review-packet.json", "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json", "tests/test_phase13_1_cross_browser_device_review_packet.py", "tests/test_phase13_1_firefox_runtime_smoke_packet.py"]
+    }
+  ],
+  "gates": [
+    {
+      "id": "asset-provenance-and-portrait-review",
+      "roadmap_marker_ids": ["portrait-prompt-seed", "portrait-crop-derivative", "portrait-identity", "portrait-resemblance", "portrait-artifact", "portrait-marks", "portrait-registry", "portrait-small-size", "portrait-grayscale", "ai-metadata", "asset-provenance"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-review",
+      "required_authority": "authorized provenance, design, accessibility, and legal reviewers",
+      "next_action": "perform the bounded asset/provenance review and record only the approved intake fields",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.1-ai-preview-provenance-review-packet.json: \"status\": \"complete-technical-packet-pending-human-review\"",
+        "docs/evaluation/phase13.1-asset-provenance-evidence-intake-packet.json: \"human_provenance_review_complete\": false",
+        "assets/generation/portrait-review-queue.json: pending-human-review"
+      ]
+    },
+    {
+      "id": "audio-and-first-session-evaluation",
+      "roadmap_marker_ids": ["audio-feedback", "audio-ratings", "audio-interviews", "audio-findings", "audio-go-no-go", "first-session-evaluation", "pilot-evaluation"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-evidence",
+      "required_authority": "authorized evaluators and facilitator",
+      "next_action": "run the bounded first-session/audio evaluation and enter anonymized intake evidence",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase10.2-audio-preference-review-packet.json: \"audio_preference_feedback_collected\": false",
+        "docs/evaluation/phase13.1-first-session-review-packet.json: \"structured_first_time_user_evaluation_complete\": false",
+        "docs/evaluation/phase13.2-pilot-evidence-intake-packet.json: \"decision_status\": \"pending-human-evidence\""
+      ]
+    },
+    {
+      "id": "debrief-and-educational-review",
+      "roadmap_marker_ids": ["debrief-visuals", "educational-review"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-review",
+      "required_authority": "authorized visual, accessibility, educational, and classroom reviewers",
+      "next_action": "review the three terminal debrief cases and educational tasks using the existing bounded intakes",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.2-debrief-visual-review-packet.json: \"human_visual_review_complete\": false",
+        "docs/evaluation/phase13.2-educational-usability-evidence-intake-packet.json: \"educational_usability_review_complete\": false"
+      ]
+    },
+    {
+      "id": "content-resemblance-and-clinical-review",
+      "roadmap_marker_ids": ["content-institution", "content-public-figure", "content-clinical"],
+      "technical_status": "pass-bounded-source-qa-only",
+      "human_status": "pending-authorized-human-review",
+      "required_authority": "authorized content, clinical/policy, and resemblance reviewers",
+      "next_action": "perform bounded human content/resemblance review; retain the current fictional and safety limits",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.1-content-boundary-qa.json: \"status\": \"pass-bounded-technical-content-qa-only\"",
+        "docs/evaluation/phase13.1-limitations-statement.json: \"technical_checks_do_not_replace_human_review\": true"
+      ]
+    },
+    {
+      "id": "competitive-campaign-human-coverage",
+      "roadmap_marker_ids": ["competitive-human-coverage"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-review",
+      "required_authority": "authorized strategy, health-policy, accessibility, and educational reviewers",
+      "next_action": "review the early, middle, and terminal competitive campaign checkpoints",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.1-competitive-campaign-review-packet.json: \"full_campaign_human_review_complete\": false",
+        "docs/evaluation/phase13.1-competitive-campaign-boundary.json: \"status\": \"complete-current-technical-competitive-campaign-boundary-only\""
+      ]
+    },
+    {
+      "id": "browser-device-certification",
+      "roadmap_marker_ids": ["browser-device-certification"],
+      "technical_status": "partial-source-bound-technical-preparation",
+      "human_status": "pending-runtime-certification",
+      "required_authority": "authorized browser/device test owner with real target environments",
+      "next_action": "run remaining Firefox/WebKit and real-device checks; do not promote the declared Chromium proxy",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.1-cross-browser-device-review-packet.json: \"firefox_runtime_certification_complete\": false",
+        "docs/evaluation/phase13.1-cross-browser-device-review-packet.json: \"webkit_runtime_certification_complete\": false",
+        "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json: \"status\": \"complete-firefox-host-backed-smoke-pending-matrix\""
+      ]
+    },
+    {
+      "id": "revision-decisions",
+      "roadmap_marker_ids": ["revision-decisions"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-evidence",
+      "required_authority": "authorized evidence reviewer and project owner",
+      "next_action": "synthesize bounded pilot, debrief, audio, and provenance findings into revision dispositions",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.2-revision-decision-evidence-intake-packet.json: \"decision_status\": \"pending-human-evidence\"",
+        "docs/evaluation/phase10.2-revision-log.md: Status: prepared; no participant findings have been collected or entered."
+      ]
+    },
+    {
+      "id": "campaign-expansion-approval",
+      "roadmap_marker_ids": ["expansion-decision"],
+      "technical_status": "prepared-source-bound",
+      "human_status": "pending-authorized-human-evidence",
+      "required_authority": "project owner after gate-level human evidence and revision decisions",
+      "next_action": "record an authorized approve/reject expansion decision only after all blocking gates have evidence",
+      "blocking_promotion": true,
+      "sources": [
+        "docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json: \"decision_status\": \"pending-human-evidence\"",
+        "docs/evaluation/phase13.1-expansion-decision-evidence-intake-packet.json: \"go_no_go\": null"
+      ]
+    }
+  ],
+  "decision_boundary": {
+    "technical_implementation_gaps_remaining": false,
+    "human_or_runtime_gates_remaining": true,
+    "promotion_blocked": true,
+    "status": "awaiting-authorized-human-evidence-or-runtime-certification",
+    "go_no_go": null,
+    "authorized_reviewer": null,
+    "recorded_at": null,
+    "rationale": null
+  },
+  "evidence_limits": [
+    "This audit proves only that substantive open roadmap gates are mapped to existing technical evidence and an authorized next action.",
+    "Technical preparation, source parity, automated checks, and empty evidence intakes do not establish human comprehension, accessibility quality, audio usefulness, provenance, legal clearance, resemblance, clinical or policy validity, or campaign expansion readiness.",
+    "No participant results, reviewer identity, raw notes/media, browser/session location, private game state, release asset, revision, expansion decision, or public-release approval is recorded.",
+    "The roadmap cannot reach substantive closure until the listed human or runtime authorities supply and record the required bounded evidence; authorized human evidence remains required."
+  ],
+  "test_source": "tests/test_phase13_remaining_gate_technical_audit.py"
+}
