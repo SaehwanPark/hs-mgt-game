@@ -1,5 +1,21 @@
 # Changelog
 
+## [0.14.3] - 2026-08-01
+
+- Aligned maintained project documents and SDD files with the current
+  three-campaign loopback GUI, host authority, durable checkpoints,
+  history/replay, and shared action surface.
+- Replaced human-dependent technical stop gates with AI-native,
+  agent-executable progression and automated/domain presentation QA; human
+  learning, accessibility, legal, calibration, and policy claims remain
+  explicitly unestablished.
+- Declared Chromium evergreen desktop as the active browser target, retained
+  Codex in-app browser inspection as development evidence, and deferred
+  Firefox, WebKit/Safari, mobile, legacy, and real-device certification.
+- Added Markdown role/currentness checks and CI coverage. No runtime API,
+  simulation, persistence, schema, GUI behavior, asset, or audio implementation
+  changed.
+
 ## [0.14.2] - 2026-08-01
 
 - Unified competitive, stabilization, and regional-affiliation decisions in a

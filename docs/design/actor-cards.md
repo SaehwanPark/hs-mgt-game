@@ -1,6 +1,6 @@
 # Actor Card Template
 
-**Status:** Maintained design template; reviewed for v0.14.2
+**Status:** Maintained design template; reviewed for v0.14.3
 **Audience:** Contributors designing strategic actors and scenario content
 
 Actor cards define what an institution can do, what it wants, what it knows,

@@ -1,7 +1,8 @@
 # Visual/audio art-direction reference board
 
-**Status:** Variant A selected for the next technical rendering slice
-**Version:** v0.12.35
+**Status:** Point-in-time Variant A technical design reference; current GUI
+queue is governed by `docs/visual_audio_enhancement_roadmap.md`
+**Version:** Original decision v0.12.35; reviewed for v0.14.3
 **Evidence type:** Technical design proxy; not human design or accessibility
 study
 
@@ -61,8 +62,9 @@ routing aid, not a measured user preference.
 
 ## Decision
 
-Select Variant A as the Phase 1.2 SVG proof-of-concept vocabulary. Reject B for
-unsupported geography risk and C for dashboard-only risk. Preserve the rejected
+Historical decision marker: Select Variant A as the Phase 1.2 SVG
+proof-of-concept vocabulary; reject B for unsupported geography risk and C for
+dashboard-only risk. Preserve the rejected
 variants as comparison evidence; do not silently reuse their geographic or
 dashboard semantics in production.
 

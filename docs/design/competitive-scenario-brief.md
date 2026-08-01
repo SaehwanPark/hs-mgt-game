@@ -1,6 +1,6 @@
 # Competitive Scenario Brief
 
-**Status:** Maintained scenario reference; runtime implemented in v0.14.2
+**Status:** Maintained scenario reference; runtime implemented in v0.14.3
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign id:** `competitive-regional-v1`
 
@@ -133,7 +133,8 @@ Players should practice:
 | Rival | Turn-5 NPC actor | K AI peer systems |
 | Status | Implemented | Implemented (24-month campaign loop, autosave, scenario loading, and replay export) |
 
-Both campaigns coexist through the implemented campaign router.
+The stabilization and competitive campaigns coexist through the implemented
+campaign router, with `regional-affiliation-v1` as a third opt-in path.
 
 ## Related documents
 

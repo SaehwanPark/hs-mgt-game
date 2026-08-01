@@ -1,6 +1,6 @@
 # Versioning Policy
 
-**Status:** Maintained governance reference; reviewed for v0.14.2
+**Status:** Maintained governance reference; reviewed for v0.14.3
 **Audience:** Contributors and release maintainers
 
 ## Package Version (Cargo)

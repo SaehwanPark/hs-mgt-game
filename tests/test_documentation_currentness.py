@@ -12,6 +12,8 @@ class DocumentationCurrentnessTests(unittest.TestCase):
   def test_roles_cover_representative_document_classes(self):
     self.assertEqual(classify_markdown(ROOT / "README.md"), "maintained")
     self.assertEqual(classify_markdown(ROOT / "docs/history/playtests/v0.10/playtest-findings-v0.10.14.md"), "historical")
+    self.assertEqual(classify_markdown(ROOT / "docs/evaluation/phase10.2-revision-log.md"), "historical")
+    self.assertEqual(classify_markdown(ROOT / "docs/blog-posts/health-policy-strategy-game.md"), "historical")
     self.assertEqual(classify_markdown(ROOT / "docs/decision-records/0012-loopback-gui-host.md"), "ADR")
     self.assertEqual(classify_markdown(ROOT / "_workspace/00_input/request-summary.md"), "workspace")
     self.assertEqual(classify_markdown(ROOT / "assets/ASSET_CREDITS.md"), "generated")

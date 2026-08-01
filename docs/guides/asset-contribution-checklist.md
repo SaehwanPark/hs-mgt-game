@@ -7,7 +7,11 @@ Before opening a pull request that adds or changes a visual or audio asset:
   `assets/generated/`.
 - Add a stable ID to the matching visual or audio registry with a known semantic
   role, visible host source, accessible equivalent, creator, method,
-  modifications, license, attribution/status, hashes, and provenance.
+  modifications, license, attribution, `approval_status`, hashes, and
+  provenance. `approval_status` is the machine-checked release-eligibility
+  field; where the asset policy requires external human review for candidate
+  release, an incomplete candidate remains excluded and does not block GUI
+  technical progression.
 - Use only the allowlisted license or `project-generated` basis. Do not add
   unclear, non-commercial, personal-use, redistribution-hostile, proprietary,
   or close-imitation assets.

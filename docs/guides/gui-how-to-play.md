@@ -20,7 +20,7 @@ surface: competitive play drafts a `Monthly plan`, while stabilization and
 regional affiliation commit one decision directly. Custom scenarios still use
 `cargo run`.
 
-The host also exposes `campaign-coverage-v1` for a typed competitive read of
+The host also exposes `campaign-coverage-v1` for a typed campaign coverage read of
 the current player-visible metrics, public signals, process summaries, action
 metadata, history, and terminal debrief. This read does not replace the
 competitive catalog/validation/submit sequence or reveal private rival state.

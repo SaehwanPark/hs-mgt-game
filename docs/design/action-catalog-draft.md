@@ -1,6 +1,6 @@
 # Action Catalog Draft
 
-**Status:** Maintained action reference; verified against v0.14.2
+**Status:** Maintained action reference; verified against v0.14.3
 **Audience:** Simulation implementers, scenario authors  
 **Campaign:** `competitive-regional-v1`
 

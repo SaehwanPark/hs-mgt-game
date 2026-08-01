@@ -1,6 +1,6 @@
 # MCP Agent Interface
 
-**Status:** Implemented and current for v0.14.2
+**Status:** Implemented and current for v0.14.3
 **Audience:** AI-agent clients, contributors, instructors testing autonomous play
 
 The `hs-mgt-game-mcp` binary exposes a local Model Context Protocol server over
@@ -14,9 +14,11 @@ authority, actor-visible projections, history/replay, and checkpoint boundaries.
 cargo run --bin hs-mgt-game-mcp
 ```
 
-MCP clients should launch the binary as a stdio server. The host keeps active
-session state in process memory and persists explicit checkpoint archives for
-discovery/restoration; clients never own save bytes.
+MCP clients should launch the binary as a stdio server. The default MCP process
+keeps active session state and any checkpoint snapshot in process memory;
+durable checkpoint archives, discovery, and restoration are provided by the
+loopback GUI host when its configured persistence path is available. Clients
+never own save bytes.
 
 ## Tools
 
@@ -24,8 +26,17 @@ discovery/restoration; clients never own save bytes.
 | --- | --- |
 | `start_session` | Start `stabilization-v1`, `competitive-regional-v1`, or `regional-affiliation-v1` |
 | `get_observation` | Read the current actor-visible observation and command format |
+| `get_action_catalog` | Read the host-ordered competitive action catalog and parameter metadata |
+| `get_resolution` | Read a committed competitive-month resolution |
+| `get_regional_world` | Read the actor-visible competitive regional-world projection |
+| `get_campaign_coverage` | Read actor-visible stage, decision, history, replay, and debrief coverage for all campaigns |
+| `validate_turn` | Validate a competitive command batch without advancing the session |
 | `submit_turn` | Submit one command string and advance one turn/month |
 | `get_history` | Read append-only transition summaries and state hashes |
+| `get_replay` | Verify and read host-owned replay metadata and summaries |
+| `save_session` | Request a host-owned checkpoint snapshot |
+| `load_session` | Restore a validated host-owned checkpoint snapshot |
+| `get_presentation` | Read the actor-visible competitive presentation envelope |
 | `end_session` | Close the session and return a debrief summary |
 
 ### `start_session`
@@ -52,7 +63,7 @@ For competitive play:
 
 Difficulty may be `easy`, `normal`, `hard`, or `expert`; omitted difficulty
 defaults to `normal`. `scenario_path` is optional and may point to a validated
-stabilization or competitive scenario file.
+stabilization, competitive, or regional-affiliation scenario file.
 
 ### `submit_turn`
 

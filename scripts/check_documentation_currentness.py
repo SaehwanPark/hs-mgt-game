@@ -70,6 +70,11 @@ CURRENT_FILES = {
     "checkpoint archives",
     "actor-visible",
   ),
+  "docs/harness/health-policy-strategy-game/team-spec.md": (
+    "reference CLI",
+    "host-backed loopback GUI",
+    "AI-native",
+  ),
 }
 
 FORBIDDEN_CURRENT_CLAIMS = {
@@ -119,6 +124,10 @@ def classify_markdown(path: Path, root: Path = ROOT) -> str:
   if relative in GENERATED_PATHS:
     return "generated"
   if relative.startswith("docs/history/"):
+    return "historical"
+  if relative.startswith("docs/evaluation/"):
+    return "historical"
+  if relative.startswith("docs/blog-posts/"):
     return "historical"
   if relative.startswith("_workspace/"):
     return "workspace"

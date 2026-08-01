@@ -1,6 +1,6 @@
 # Core Game Loop Specification
 
-**Status:** Maintained design reference; verified against v0.14.2
+**Status:** Maintained design reference; verified against v0.14.3
 **Audience:** Contributors, instructors, playtest designers  
 **Supersedes:** Informal loop descriptions scattered in roadmap §3.1 only
 
@@ -17,7 +17,7 @@ campaigns in the repository.
 
 ## Shared principles
 
-Both campaigns preserve:
+All three campaigns preserve:
 
 - Deterministic `transition()` core (ADR-0001)
 - True state vs actor observations

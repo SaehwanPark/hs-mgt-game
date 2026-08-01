@@ -5,13 +5,14 @@ Strategy Game using the Model Context Protocol (MCP) interface, the loopback GUI
 host, and the provided Python tooling. It is the operational runbook for the
 active [`AI-Agent Playtest Protocol`](../validation/playtesting.md).
 
-## Current operating rule (v0.14.2)
+## Current operating rule (v0.14.3)
 
 Use agents or scripted policies by default across `stabilization-v1`,
-`competitive-regional-v1`, and `regional-affiliation-v1`. The Rust host owns
-session truth, validation, action ordering, transitions, history/replay,
-debriefs, and durable checkpoints; the GUI and MCP clients consume the same
-actor-visible projections. Chromium evergreen desktop is the default GUI target,
+`competitive-regional-v1`, and `regional-affiliation-v1`. The MCP stdio server
+owns session truth, validation, action ordering, transitions, history/replay,
+and debriefs in process memory. The loopback GUI host additionally provides
+durable checkpoint archives, discovery, and restoration when configured; GUI and
+MCP clients consume the same actor-visible projections. Chromium evergreen desktop is the default GUI target,
 with the Codex in-app browser used for development inspection. Firefox,
 WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
 
@@ -28,19 +29,23 @@ and campaign coverage documented in `ARCHITECTURE.md`.
 
 The playtesting harness decouples the simulation logic from the player client:
 1. **MCP/GUI host:** The Rust executables expose bounded stdio and loopback HTTP
-   tools using JSON-RPC/JSON DTOs. The host owns `GameSessionStore`, durable
-   checkpoint discovery/restoration, and session state.
+   tools using JSON-RPC/JSON DTOs. Both use `GameSessionStore` and host-owned
+   session state; durable checkpoint discovery/restoration is a configured
+   loopback GUI-host capability, not a default MCP-stdio capability.
 2. **Python Client Wrapper:** Located in `scripts/play_game.py`. It starts the MCP server as a subprocess, performs the initialize handshake, and exposes high-level Python wrappers for:
    - Starting a campaign session (`start_session`)
    - Submitting commands and advancing turns (`submit_turn`)
-   - Getting history and debriefs (`get_history` / `end_session`)
+   - Receiving the latest transition and debrief from the session result
+     (`end_session`); use the MCP `get_history` tool directly when a full
+     history read is required.
 
 ## Running Automated Playtests
 
 We have automated four scripted profiles (Fiscal Caution, Capacity Growth,
-Balanced Strategy, and Naive First-Time) across the stabilization, competitive,
-and regional-affiliation campaign previews. Competitive scripts submit commands across the
-24-month campaign and include newer service-line, public-payer, staffing,
+Balanced Strategy, and Naive First-Time) across the stabilization and
+competitive campaign previews. Regional-affiliation coverage uses the
+host-backed MCP/GUI campaign-coverage path. Competitive scripts submit commands
+across the 24-month campaign and include newer service-line, public-payer, staffing,
 monitoring, and commitment actions. Treat these runs as simulated-player
 evidence; they do not measure actual human learning or classroom effectiveness.
 

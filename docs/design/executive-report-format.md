@@ -1,6 +1,6 @@
 # Executive Report Format
 
-**Status:** Maintained report reference; verified against v0.14.2
+**Status:** Maintained report reference; verified against v0.14.3
 **Audience:** CLI implementers, instructors, playtest designers  
 **Renders in:** `src/cli/display/executive_report.rs` (competitive campaign)
 

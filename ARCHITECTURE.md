@@ -1,7 +1,7 @@
 # Architecture
 
 Last Reviewed: 2026-08-01
-Status: Verified against v0.14.2 source and tests
+Status: Verified against v0.14.3 source and tests
 
 The project is a deterministic Rust simulation with CLI, MCP, and loopback
 browser presentation interfaces. The host/core owns simulation truth and
@@ -51,8 +51,8 @@ typed actor-visible projections, including:
 - competitive presentation, action catalog, validation, resolution, and
   regional-world reads;
 - shared `campaign-coverage-v1` reads for all three campaigns;
-- history, replay, checkpoint discovery, opaque checkpoint references, and
-  host save-artifact download.
+- history and replay reads; the loopback GUI host additionally owns checkpoint
+  discovery, opaque checkpoint references, and host save-artifact download.
 
 MCP and GUI mutation paths delegate to the same host validation and transition
 logic. Read projections are non-mutating and must omit true state, resolved

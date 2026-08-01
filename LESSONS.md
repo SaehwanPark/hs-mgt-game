@@ -3910,3 +3910,18 @@ separate gates.
   direct rejection preservation, hidden live technical controls, and the device
   source budget before changing card or plan markup; record human usability as
   pending until an authorized pilot exists.
+
+## Keep Documentation Currentness Agent-Executable (v0.14.3)
+
+- Context: broad GUI growth left active Markdown, SDD summaries, and roadmap
+  gates describing older implementation boundaries even while runtime tests
+  remained green.
+- Risk: human-dependent approval language and stale browser/persistence claims
+  can block safe technical work or misstate the actor-visible authority
+  boundary.
+- Resolution: classify every tracked Markdown path, keep current SDD prose
+  compact, preserve historical evidence verbatim, and make future GUI work
+  advance through agent-executable checks with explicit evidence limits.
+- Prevention: run `scripts/check_documentation_currentness.py` in CI and keep
+  Chromium-default, fail-closed asset, host-authority, replay/checkpoint, and
+  optional-human-feedback boundaries synchronized with source and tests.

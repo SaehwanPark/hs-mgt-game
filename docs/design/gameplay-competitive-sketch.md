@@ -1,6 +1,6 @@
 # Competitive Gameplay Sketch — Canonical Specification
 
-**Status:** Maintained gameplay reference; 24-month runtime implemented in v0.14.2
+**Status:** Maintained gameplay reference; 24-month runtime implemented in v0.14.3
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign:** `competitive-regional-v1` (parallel to stabilization demo)
 

@@ -2,7 +2,7 @@
 
 **Status:** Canonical current direction
 **Reviewed:** 2026-08-01
-**Code baseline:** v0.14.2
+**Code baseline:** v0.14.3
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and

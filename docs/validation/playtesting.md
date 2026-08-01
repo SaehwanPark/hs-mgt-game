@@ -2,7 +2,7 @@
 
 **Status:** Active agent-playtest and technical evidence protocol
 **Audience:** Contributors, domain reviewers, agent-playtest operators, and future facilitators
-**Version:** v0.14.2 (governed by ADR-0009 and ADR-0014)
+**Version:** v0.14.3 (governed by ADR-0009 and ADR-0014)
 
 This protocol uses AI agents or sub-agents as the default technical path to play
 bounded campaign slices through the local MCP or loopback GUI host, then synthesizes reproducible

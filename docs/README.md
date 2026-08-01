@@ -15,7 +15,7 @@ current implementation instructions.
 | GUI/presentation | `gui/README.md`, `docs/guides/gui-how-to-play.md`, visual/audio roadmap, asset READMEs | Current GUI contracts and player/contributor operation |
 | ADR / decision records | `docs/decision-records/` | Point-in-time decisions; later records supersede changed direction |
 | Generated/registry records | `assets/`, generated credits, release manifests | Machine-produced or provenance-controlled outputs; do not hand-edit generated files |
-| Historical evidence | `docs/history/` | Immutable prior findings, milestones, and superseded plans |
+| Historical/evaluation evidence | `docs/history/`, `docs/evaluation/`, `docs/blog-posts/` | Immutable prior findings, milestones, superseded plans, dated narratives, and point-in-time evidence packets |
 | Workspace evidence | `_workspace/` | Dated handoffs and experiment artifacts; append current handoffs, do not rewrite prior slices |
 
 ## Software contributor path

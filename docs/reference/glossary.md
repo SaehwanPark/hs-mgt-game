@@ -1,6 +1,6 @@
 # Glossary
 
-**Status:** Maintained terminology reference; reviewed for v0.14.2
+**Status:** Maintained terminology reference; reviewed for v0.14.3
 **Audience:** Contributors, domain reviewers, and playtest designers
 
 Core terms for the Health Policy Strategy Game, aligned with
@@ -50,8 +50,8 @@ Core terms for the Health Policy Strategy Game, aligned with
 | --- | --- |
 | Vertical slice | Bounded end-to-end demo proving architecture and gameplay thesis. |
 | Ruleset | Versioned validation bounds and transition parameters for a demo or scenario. |
-| Scenario | Packaged initial conditions, actor set, and learning objectives; format draft only. |
-| Campaign | Playable run configuration (`stabilization-v1` or `competitive-regional-v1`). |
+| Scenario | Packaged initial conditions, actor set, and learning objectives using the validated `scenario-toml-0.1.40` format; broader authoring remains a draft. |
+| Campaign | Playable run configuration (`stabilization-v1`, `competitive-regional-v1`, or `regional-affiliation-v1`). |
 | Abstraction | Prototype mechanism labeled as design simplification, not calibrated fact. |
 
 ## Related Documents

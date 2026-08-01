@@ -55,36 +55,23 @@ later GUI DTOs are promoted only through the current host contracts and ADRs.
 Historical phase labels retained for evidence indexing: Phase 1 static executive desktop; Phases 8–9 remain sequentially gated; those labels are not current
 promotion gates and remain future work only in their dated evidence records.
 
+### GUI-focused documentation and SDD alignment (v0.14.3)
+
+- Maintained Markdown was classified and aligned with the implemented
+  three-campaign loopback GUI, deterministic host boundary, AI-native
+  progression rules, and Chromium-default browser policy.
+- Root SDD files were compacted into current-state indexes; release journals,
+  historical reports, accepted ADR bodies, generated credits, and versioned
+  workspace evidence remain preserved in their source roles.
+- A repository-wide currentness checker, focused tests, and CI command now
+  enforce document roles, current GUI facts, browser scope, and human-evidence
+  claim limits.
+
 ## Present
 
-### GUI-focused documentation and SDD cleanup (v0.14.3)
-
-Status: Active
-
-Summary:
-
-Align maintained Markdown documents with the implemented GUI, deterministic
-host boundaries, AI-native validation path, and default-browser policy.
-
-Done:
-
-- Current code and documentation surfaces have been inventoried.
-- Historical `docs/history/` and versioned workspace evidence are preserved.
-- The branch and presentation/documentation handoff are established.
-
-Not Yet Done:
-
-- Compact the remaining SDD and roadmap documents.
-- Align active GUI, player, contributor, ADR, design, and harness references.
-- Add documentation-currentness checks and CI wiring.
-- Run full validation, bump the package to v0.14.3, push, open the draft PR,
-  and complete three independent review passes.
-
-Deferred / Non-Goals:
-
-- No runtime, API, schema, simulation, persistence, asset-generation, or
-  browser-engine change.
-- No human participant, approval, or lived-accessibility stop gate.
+The documentation baseline is complete for this release. Present work is
+limited to the ranked GUI-first Future queue below; each item advances through
+agent-executable evidence and automated/domain QA rather than a human stop gate.
 
 ## Future
 

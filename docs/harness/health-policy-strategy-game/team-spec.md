@@ -2,8 +2,10 @@
 
 ## Domain Summary
 
-This project is a playable, CLI-first Rust strategy simulation with a bounded
-browser thin client. The player leads a fictional nonprofit US health system
+This project is a playable Rust strategy simulation with a reference CLI,
+bounded MCP adapter, and active host-backed loopback GUI for all three
+campaigns. AI-native validation is the default technical progression path. The
+player leads a fictional nonprofit US health system
 under financial, clinical, regulatory, political, labor, market, and
 educational constraints.
 

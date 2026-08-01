@@ -1,6 +1,6 @@
 # CLI Command Grammar Draft
 
-**Status:** Maintained CLI reference; reviewed for v0.14.2
+**Status:** Maintained CLI reference; reviewed for v0.14.3
 **Audience:** CLI implementers  
 **Campaign:** `competitive-regional-v1` only (stabilization demo keeps numeric prompts)
 

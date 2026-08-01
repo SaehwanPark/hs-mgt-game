@@ -1,6 +1,6 @@
 # Initial System Boundary and Ontology Draft
 
-**Status:** Maintained conceptual reference; updated for v0.14.2
+**Status:** Maintained conceptual reference; updated for v0.14.3
 **Audience:** Contributors and domain reviewers
 
 This document defines the conceptual boundary for regional market slices. It
@@ -133,8 +133,9 @@ Excluded from the **stabilization demo** conceptual boundary:
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.
-- Scenario or ruleset file loading beyond the accepted stabilization TOML
-  boundary.
+- New scenario authoring and migration workflows beyond the validated
+  `scenario-toml-0.1.40` loader boundary; all three current campaign shapes
+  load through the checked-in scenario/runtime contracts.
 - Graphical interface or release packaging.
 
 The **competitive campaign** adds multi-system peer players, monthly calendar,
@@ -156,7 +157,8 @@ Future expansion boundaries:
   histories, replay, and debrief outputs. Graphical rendering and asset loading
   stay outside the deterministic core.
 
-Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
+Mid-run session autosave/resume is implemented for all three launchable GUI
+campaigns through the host-owned checkpoint boundary (ADR-0002).
 
 ## Deferred Ontology and Runtime Work
 
