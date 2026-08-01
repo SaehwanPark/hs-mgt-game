@@ -344,6 +344,7 @@ name = "hs-mgt-game"
 version = "0.13.105"
 dependencies = [
  "axum",
+ "libc",
  "rmcp",
  "rustyline",
  "schemars",

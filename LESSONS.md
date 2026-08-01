@@ -3810,5 +3810,6 @@ separate gates.
   its exact bytes as an attachment; validate the same in-memory bytes that
   will be returned, then let the browser create only a transient download
   object URL and never inspect, load, or store the artifact.
-- Prevention: preserve explicit storage-source selection, reject unsafe paths
-  and invalid content, and keep automatic resume/replay regeneration separate.
+- Prevention: preserve explicit storage-source selection, open archive directories
+  and files with no-follow handle confinement, reject unsafe paths and invalid
+  content, and keep automatic resume/replay regeneration separate.

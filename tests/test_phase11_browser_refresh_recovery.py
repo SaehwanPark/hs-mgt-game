@@ -230,7 +230,10 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "Download host save",
       "read_checkpoint_artifact",
       "read_gui_session_checkpoint_artifact",
-      "let bytes = fs::read(&candidate)",
+      "open_gui_checkpoint_artifact",
+      "open_gui_path_without_following_symlinks",
+      "libc::openat",
+      "libc::O_NOFOLLOW",
       "load_gui_session_save_text",
     ):
       self.assertIn(marker, self.adapter + self.app + self.server + self.session + self.persistence)

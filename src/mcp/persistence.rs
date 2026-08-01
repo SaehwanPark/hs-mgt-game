@@ -1,5 +1,7 @@
 use std::collections::BTreeSet;
-use std::fs;
+use std::ffi::CString;
+use std::fs::{self, File};
+use std::io::{self, Read};
 use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
@@ -419,7 +421,26 @@ pub fn read_gui_session_checkpoint_artifact(
       candidate.display()
     ));
   }
-  let bytes = fs::read(&candidate).map_err(|error| {
+  let mut file = open_gui_checkpoint_artifact(path, session_id, storage).map_err(|error| {
+    format!(
+      "unable to read GUI checkpoint artifact {}: {error}",
+      candidate.display()
+    )
+  })?;
+  let file_metadata = file.metadata().map_err(|error| {
+    format!(
+      "unable to inspect GUI checkpoint artifact {}: {error}",
+      candidate.display()
+    )
+  })?;
+  if !file_metadata.is_file() {
+    return Err(format!(
+      "GUI checkpoint artifact is not a regular file: {}",
+      candidate.display()
+    ));
+  }
+  let mut bytes = Vec::new();
+  file.read_to_end(&mut bytes).map_err(|error| {
     format!(
       "unable to read GUI checkpoint artifact {}: {error}",
       candidate.display()
@@ -444,6 +465,67 @@ pub fn read_gui_session_checkpoint_artifact(
     return Ok(None);
   }
   Ok(Some(bytes))
+}
+
+fn open_gui_checkpoint_artifact(
+  path: &Path,
+  session_id: &str,
+  storage: GuiCheckpointStorage,
+) -> io::Result<File> {
+  match storage {
+    GuiCheckpointStorage::Legacy => open_gui_path_without_following_symlinks(path),
+    GuiCheckpointStorage::Archive => {
+      let archive_dir = gui_checkpoint_archive_dir(path).map_err(io::Error::other)?;
+      let directory = open_gui_path_without_following_symlinks(&archive_dir)?;
+      if !directory.metadata()?.is_dir() {
+        return Err(io::Error::new(
+          io::ErrorKind::NotADirectory,
+          format!(
+            "GUI checkpoint archive is not a directory: {}",
+            archive_dir.display()
+          ),
+        ));
+      }
+      let file_name = CString::new(format!("{session_id}.save")).map_err(|error| {
+        io::Error::new(
+          io::ErrorKind::InvalidInput,
+          format!("invalid GUI checkpoint file name: {error}"),
+        )
+      })?;
+      #[cfg(unix)]
+      {
+        use std::os::fd::{AsRawFd, FromRawFd};
+        let flags = libc::O_RDONLY | libc::O_CLOEXEC | libc::O_NOFOLLOW;
+        let file_descriptor =
+          unsafe { libc::openat(directory.as_raw_fd(), file_name.as_ptr(), flags, 0) };
+        if file_descriptor < 0 {
+          return Err(io::Error::last_os_error());
+        }
+        Ok(unsafe { File::from_raw_fd(file_descriptor) })
+      }
+      #[cfg(not(unix))]
+      open_gui_path_without_following_symlinks(
+        &archive_dir.join(file_name.to_string_lossy().as_ref()),
+      )
+    }
+  }
+}
+
+fn open_gui_path_without_following_symlinks(path: &Path) -> io::Result<File> {
+  let mut options = fs::OpenOptions::new();
+  options.read(true);
+  #[cfg(unix)]
+  {
+    use std::os::unix::fs::OpenOptionsExt;
+    options.custom_flags(libc::O_NOFOLLOW);
+  }
+  #[cfg(windows)]
+  {
+    use std::os::windows::fs::OpenOptionsExt;
+    const FILE_FLAG_OPEN_REPARSE_POINT: u32 = 0x0020_0000;
+    options.custom_flags(FILE_FLAG_OPEN_REPARSE_POINT);
+  }
+  options.open(path)
 }
 
 pub fn discover_gui_session_checkpoints(
@@ -1106,6 +1188,57 @@ mod tests {
     .expect("legacy fallback load")
     .expect("legacy checkpoint");
     assert!(matches!(restored, GuiSessionSave::Stabilization(_)));
+
+    fs::remove_file(&archive_dir).expect("remove archive directory symlink");
+    fs::remove_file(&external_path).expect("remove external checkpoint");
+    remove_gui_session_save(&path, session_id).expect("remove legacy checkpoint");
+    let _ = fs::remove_dir(&external_archive_dir);
+    let _ = fs::remove_dir(&external_directory);
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[cfg(unix)]
+  #[test]
+  fn checkpoint_artifact_read_rejects_archive_directory_symlinks() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-artifact-directory-symlink-{}",
+      std::process::id()
+    ));
+    let external_directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-artifact-directory-external-{}",
+      std::process::id()
+    ));
+    let path = directory.join("gui.save");
+    let archive_dir = gui_checkpoint_archive_dir(&path).expect("archive directory");
+    let external_archive_dir = external_directory.join("external.checkpoints");
+    let session_id = "session-artifact-directory-link";
+    let external_path = external_archive_dir.join(format!("{session_id}.save"));
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&external_path, session_id, &save)
+      .expect("external checkpoint");
+    write_stabilization_session_save(&path, session_id, &save).expect("legacy checkpoint");
+    symlink(&external_archive_dir, &archive_dir).expect("archive directory symlink");
+
+    let error = read_gui_session_checkpoint_artifact(
+      &path,
+      session_id,
+      GuiCheckpointStorage::Archive,
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect_err("archive directory symlink must be rejected");
+    assert!(error.contains("unable to read GUI checkpoint artifact"));
 
     fs::remove_file(&archive_dir).expect("remove archive directory symlink");
     fs::remove_file(&external_path).expect("remove external checkpoint");
