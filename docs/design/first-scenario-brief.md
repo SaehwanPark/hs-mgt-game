@@ -1,6 +1,6 @@
 # First Scenario Brief
 
-**Status:** Phase 3 design artifact  
+**Status:** Maintained scenario reference; stabilization runtime implemented
 **Audience:** Contributors, domain reviewers, and future playtest designers
 
 ## Scenario Concept

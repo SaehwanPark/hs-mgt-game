@@ -1,6 +1,6 @@
 # Competitive Gameplay Sketch — Canonical Specification
 
-**Status:** Phase 6.0 design artifact; 24-month runtime implemented
+**Status:** Maintained gameplay reference; 24-month runtime implemented in v0.14.2
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign:** `competitive-regional-v1` (parallel to stabilization demo)
 
@@ -11,8 +11,8 @@ domain-review evidence.
 
 ## Overview
 
-The competitive campaign models a regional US health market where one human player
-and K AI-controlled health systems compete for access, margin, workforce, and
+The competitive campaign models a regional US health market where one
+player-controlled system and K AI-controlled health systems compete for access, margin, workforce, and
 community trust over a multi-month horizon. All players share one market model;
 they differ only in command choices (human input vs programmed logic plus bounded
 stochastic tie-breaks).
@@ -86,7 +86,8 @@ non-binding and derived only from each system's observation.
 
 ### 4. One player per health system
 
-**Requirement:** Each health system is controlled by one player (human or computer).
+**Requirement:** Each health system is controlled by one player controller
+(agent, CLI user, or GUI user) under the same ruleset.
 
 **Mechanics:**
 

@@ -1,5 +1,17 @@
 # GUI executive desktop and adapter reference
 
+**Current status (v0.14.2):** The loopback Axum host is the active GUI surface
+for all three campaigns. The host owns actions, transitions, history/replay,
+debriefs, and durable checkpoint discovery/restoration; this browser client is
+presentation-only. Chromium evergreen desktop is the default end-user target;
+Codex in-app browser inspection is development evidence. Firefox,
+WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
+
+## Authority and presentation state
+
+The loopback host is authoritative for simulation state and transitions; the
+browser renders actor-visible projections and text/accessibility fallbacks.
+
 ## Players: use the live GUI host
 
 From the repository root, run:
@@ -45,8 +57,9 @@ use the same contextual drawer with text fallbacks.
 
 This redesign is technically verified by static, host-contract, loading, and
 offline checks. Human cognitive-load, clarity, consequence-comprehension, and
-accessibility validation remain pending the authorized five-group pilot; no
-generated artwork is included until that evidence gate is met.
+lived-accessibility outcomes remain unestablished; optional external feedback
+does not gate technical GUI progression. Unverified artwork remains excluded in
+favor of generic registered fallbacks.
 
 ## Unified Actions workspace
 

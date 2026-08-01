@@ -13,8 +13,8 @@ decisions under pressure from finance, workforce, policy, and competitors.
 Three campaigns are currently visible in the CLI:
 
 - `stabilization-v1`: five-turn executive demo.
-- `competitive-regional-v1`: 24-month competitive campaign with one human
-  system and AI rivals.
+- `competitive-regional-v1`: 24-month competitive campaign with one
+  player-controlled system and AI rivals.
 - `regional-affiliation-v1`: opt-in six-stage nonprofit affiliation decision.
 
 The game is deterministic for a given seed and set of choices. A poor outcome

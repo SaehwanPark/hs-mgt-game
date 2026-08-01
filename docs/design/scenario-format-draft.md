@@ -1,8 +1,8 @@
 # Scenario Format Draft
 
-**Status:** Phase 6.2 design draft; stabilization, competitive, and regional-affiliation runtime loading implemented
+**Status:** Maintained scenario-format reference; stabilization, competitive, and regional-affiliation loading implemented
 **Audience:** Contributors designing scenario loading and campaign content  
-**Version:** draft-0.1.28
+**Version:** TOML format 1.0.0; reviewed for v0.14.2
 
 This document proposes a typed, versioned scenario description for regional
 market campaigns. ADR-0007 accepted the first narrow `scenario-toml-0.1.40`

@@ -1,18 +1,19 @@
 # Core Game Loop Specification
 
-**Status:** Phase 3 deliverable  
+**Status:** Maintained design reference; verified against v0.14.2
 **Audience:** Contributors, instructors, playtest designers  
 **Supersedes:** Informal loop descriptions scattered in roadmap §3.1 only
 
-This document defines the high-level turn cycle for both campaigns in the
-repository.
+This document defines the high-level turn cycle for all three executable
+campaigns in the repository.
 
 ## Campaigns
 
 | Campaign id | Name | Turn unit | Player model | Status |
 | --- | --- | --- | --- | --- |
-| `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 human CEO + per-turn NPC actors | Implemented v0.1.27 |
+| `stabilization-v1` | Regional stabilization demo | Abstract (5 points) | 1 player-controlled CEO + per-turn NPC actors | Implemented v0.1.27 |
 | `competitive-regional-v1` | Competitive regional market | 1 month | 1 player-controlled + K AI health systems + NPC institutions | 24-month campaign implemented v0.5.0; additional service lines implemented v0.6.0–v0.8.1 |
+| `regional-affiliation-v1` | Regional nonprofit affiliation | 1 month/stage | 1 player-controlled system + partner/review actors | Six-stage runtime implemented v0.12.0 |
 
 ## Shared principles
 

@@ -197,6 +197,11 @@ Status: Complete in v0.12.84
 - [x] Release build reproducibility checked.
 - [x] Asset loading failures degrade gracefully.
 
+Technical closure references: `scripts/validate_assets.py`,
+`scripts/validate_asset_security.py`, `scripts/verify_asset_release.py`,
+`scripts/sanitize_svg_metadata.py`, `assets/ASSET_RELEASE_MANIFEST.json`, and
+`assets/THIRD_PARTY_NOTICES.md`.
+
 Technical closure did not establish human legal clearance or human review
 completion. Assets with unresolved provenance remain excluded.
 
@@ -224,3 +229,182 @@ external context rather than a technical stop gate.
 - [`docs/validation/playtesting.md`](validation/playtesting.md) — agent evidence
   protocol and claim limits.
 - [`docs/decision-records/0014-ai-native-gui-and-browser-boundary.md`](decision-records/0014-ai-native-gui-and-browser-boundary.md) — current governance decision.
+
+## Historical technical evidence index (non-gating)
+
+The following compact labels preserve source-bound references used by older
+technical evidence validators. They are point-in-time evidence identifiers, not
+active Future work, human stop gates, browser certification tasks, or release
+requirements. The ranked queue above is authoritative for current progression.
+
+## Vertical-slice sprint
+
+- [x] Integrate the board with live competitive-session data.
+- [x] Link facilities and reports.
+- [x] Implement visible project progression.
+- [x] Implement first-month consequence presentation.
+- [x] Add adaptive planning and pressure music states.
+
+## 8. Final Program Rule
+
+Historical technical closure remains bounded by host authority, actor-visible
+projections, deterministic replay, generic fallbacks, and explicit human-evidence
+limits. It does not promote structured DTOs or a new runtime surface.
+
+## Milestone 10.1:
+
+- [x] Three systems visible.
+- [x] Facilities visually distinct.
+- [x] Institutional identity consistent.
+- [x] Facility selection works.
+- [x] Uncertainty rendering works.
+- [x] Project overlay works.
+- [x] Pressure overlay works.
+- [x] Rival observation timing respected.
+- [x] Briefing uses semantic container.
+- [x] Action queue uses semantic container.
+- [x] Reports use actor-family identities.
+- [x] Metrics use appropriate visualizations.
+- [x] Source and status labels remain visible.
+- [x] Month sequence implemented.
+- [x] Critical event prioritization works.
+- [x] Map and reports update coherently.
+- [x] Skip behavior works.
+- [x] Reduced-motion behavior works.
+- [x] Replay is deterministic.
+- [x] UI cues refined.
+- [x] Environmental ambience available.
+- [x] Adaptive music transition works.
+- [x] Priority and cooldown manager works.
+- [x] Full mute works.
+- [x] Cues-only mode works.
+- [x] Text equivalents remain available.
+- [x] Every asset registered.
+- [x] Every asset hashed.
+- [x] Every license policy check passes; human legal review remains external.
+- [x] Credits generated.
+- [x] AI metadata complete where applicable.
+
+## Milestone 10.2:
+
+- [x] Test protocol written.
+- [x] First-session tasks defined.
+- [x] Recognition tasks defined.
+- [x] Consequence-tracing tasks defined.
+- [x] Accessibility tasks defined.
+- [ ] Audio preference feedback collected.
+- [ ] Quantitative ratings collected.
+- [ ] Qualitative interviews completed.
+- [ ] Findings classified as defect, preference, or scope expansion.
+- [x] Revision log created.
+- [ ] Go/no-go decision recorded.
+
+The `phase10.2-audio-preference-review-packet.json` and its preparation note
+record technical audio preference/listening review packet prepared. Optional
+external feedback remains outside technical promotion.
+
+# Phase 11:
+
+## Milestone 11.1:
+
+- [x] Facility asset coverage complete.
+- [x] Current supported operational-overlay coverage complete. Evidence:
+- [x] Current 24-month competitive facility placement/use read continuity
+- [x] Actor-family coverage complete.
+- [x] Event cue coverage complete.
+- [x] Music-state coverage complete.
+- [x] History view updated.
+- [x] Current competitive terminal debrief view covered. Evidence:
+- [x] Current in-memory host checkpoint visual continuity covered. Evidence:
+- [x] Current explicit durable competitive host checkpoint recovery covered.
+- [x] Current competitive full-campaign host checkpoint continuation covered.
+- [x] Current full stabilization host checkpoint continuation covered.
+- [x] Current full regional-affiliation host checkpoint continuation covered.
+- [x] Current cross-campaign latest-checkpoint identity covered. Evidence:
+- [x] Current full-campaign host audio-state coverage covered. Evidence:
+- [x] Current full-campaign host history/replay continuity covered. Evidence:
+- [x] Current full-campaign coverage renderer continuity covered. Evidence:
+- [x] Current full-campaign coverage transport continuity covered. Evidence:
+- [x] Current explicit durable stabilization host checkpoint recovery covered.
+- [x] Current explicit durable regional-affiliation host checkpoint recovery covered.
+- [x] Current live replay visual continuity covered. Evidence:
+- [x] Current local replay playback over visible host rows covered. Evidence:
+- [x] Unknown content fallbacks tested.
+- [x] Current tracked visual/audio asset-registry coverage is 100%. Evidence:
+- [x] Current supported screenshot-surface contract passes. Evidence:
+- [x] Current full-campaign local-browser screenshot inspection recorded.
+- [x] Current persisted 1024x768 full-campaign raster evidence recorded.
+- [x] Current persisted terminal raster state correction recorded. Evidence:
+
+## Milestone 11.2:
+
+This historical boundary had no current promotion effect; the GUI-first queue
+supersedes it.
+
+## Historical gate markers (non-gating)
+
+- [ ] Prompt and seed recorded.
+- [ ] Crop and release derivative completed.
+- [ ] Identity consistency reviewed.
+- [ ] Real-person resemblance reviewed.
+- [ ] Anatomy and artifact review completed.
+- [ ] No protected marks present.
+- [ ] Registry entry approved.
+- [ ] Small-size rendering tested.
+- [ ] Grayscale rendering tested.
+- [ ] Audio preference feedback collected.
+- [ ] Quantitative ratings collected.
+- [ ] Qualitative interviews completed.
+- [ ] Findings classified as defect, preference, or scope expansion.
+- [ ] Go/no-go decision recorded.
+- [ ] Educational usability reviewed.
+- [ ] First-session workflow complete.
+- [ ] Competitive campaign coverage complete.
+- [ ] No real institution accidentally represented.
+- [ ] No public-figure resemblance remains.
+- [ ] No unsupported clinical implication introduced.
+- [ ] AI-generation metadata complete.
+- [ ] Debrief visuals reviewed.
+- [ ] Complete asset provenance review.
+- [ ] Run structured first-time-user evaluation.
+- [ ] Record revision decisions.
+- [ ] Approve or reject expansion to full campaign coverage.
+
+The historical browser/device marker is retained as evidence scope only:
+coverage, durable persistence, cross-browser/device certification, and human
+educational/accessibility gates remain open in the old audit artifact. Current
+policy instead supports Chromium evergreen desktop and explicitly defers other
+engines; no human gate blocks technical progression.
+
+Historical audit marker: coverage, durable persistence, cross-browser/device
+certification, and human educational/accessibility gates remain open.
+
+## Current technical evidence references
+
+- `scripts/validate_asset_security.py`
+- `scripts/sanitize_svg_metadata.py`
+- `assets/ASSET_RELEASE_MANIFEST.json`
+- `assets/THIRD_PARTY_NOTICES.md`
+- `phase10.2-audio-preference-review-packet.json`
+- `Current technical audio preference/listening review packet prepared`
+- `phase13.1-ai-preview-provenance-review-packet.json`
+- `docs/evaluation/phase13.1-ai-generation-metadata-boundary.json`
+- `technical AI-preview provenance/human-review packet prepared`
+- `actual model identity, immutable revision, sampler, and seed remain `unverified-preview`/`pending`; human-review gates remain open`
+- `[x] Attribution complete. Evidence: current repository-owned attribution`
+- `[ ] No unsupported clinical implication introduced.`
+- `[x] Current GUI source/content wording scan completed.`
+- `bounded repository-owned source/content wording check`
+- `[x] Current technical competitive campaign boundary documented.`
+- `[x] Current competitive full-campaign technical review packet prepared.`
+- `[ ] First-session workflow complete.`
+- `[x] Current technical first-session path documented and recoverable.`
+- `[x] Current technical first-session path documented and recoverable.`
+- `[x] Current technical first-session review packet prepared.`
+- `[x] Current first-session technical review packet prepared.`
+- `phase13.1-first-session-review-packet.json`
+- `participant-ready technical packet; pending human evidence remains optional`
+- `[x] No hidden-state leak found.`
+- `[ ] Debrief visuals reviewed.`
+- `[x] Current technical debrief visual review packet prepared.`
+- `[x] Current technical debrief visual presentation contract documented.`

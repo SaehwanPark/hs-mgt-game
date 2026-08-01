@@ -1,6 +1,6 @@
 # Action Catalog Draft
 
-**Status:** Phase 6.0 design artifact  
+**Status:** Maintained action reference; verified against v0.14.2
 **Audience:** Simulation implementers, scenario authors  
 **Campaign:** `competitive-regional-v1`
 

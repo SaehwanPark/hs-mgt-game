@@ -8,9 +8,10 @@ MCP setup, a separate web server, or manual JavaScript adapter injection.
 
 - A Rust toolchain with Cargo.
 - A current Chromium-based desktop browser with JavaScript modules enabled.
-  The repository's compatibility matrix certifies the documented evergreen
-  Chromium surface; Firefox and WebKit are not certified yet. Audio is
-  optional and uses the browser Web Audio API.
+  The repository's compatibility matrix supports the documented evergreen
+  Chromium surface. Firefox, WebKit/Safari, mobile, and legacy browsers are
+  deferred and non-certified. Audio is optional and uses the browser Web Audio
+  API.
 - A local checkout of this repository.
 
 The launcher supports `competitive-regional-v1`, `stabilization-v1`, and
@@ -216,8 +217,8 @@ artifact.
 
 ## Stop the GUI
 
-Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end
-when the process stops; each autosaved competitive, stabilization, or
+Return to the server terminal and press Ctrl-C. Active sessions held in process
+memory end when the process stops; each autosaved competitive, stabilization, or
 regional-affiliation checkpoint remains in the host application's sibling
 checkpoint archive until that recovered session is ended. Older single-file
 checkpoints remain readable as a migration fallback.
@@ -286,13 +287,14 @@ Stale or unmatched IDs are cleared with written guidance, while transient
 failures preserve the ID for retry. Browser storage never contains commands,
 observations, outcomes, hashes, or true state.
 
-The repository also has a bounded Firefox/Marionette smoke that exercises one
+The repository retains a bounded Firefox/Marionette smoke as historical
+technical evidence. It exercises one
 explicit checkpoint save and one refresh against the live loopback host. It
 launches each of the three supported campaigns, runs the visible Hold path
 through all 24 competitive months, and runs the visible unified action cards
 through the five stabilization and six regional-affiliation stages,
-including host autosaves, history/replay, and terminal debriefs. This is
-runtime evidence only; it does not certify Firefox support, alternative action
+including host autosaves, history/replay, and terminal debriefs. It is not an
+active support task and does not certify Firefox support, alternative action
 values, WebKit, real hardware, audio decoding, or human accessibility/usability.
 
 ### Audio is silent
@@ -322,10 +324,12 @@ or legal decision tool. The current rules, seed, commands, and explicit
 stochastic inputs produce a bounded game outcome; they do not estimate what a
 real institution, policy, payer, workforce, or community will do.
 
-The GUI is local and in-memory. Browser refresh recovery may retain only the
-opaque host session ID and reload the same running host process; it does not
-survive a stopped/restarted host. Competitive actions and campaign-coverage
-decisions remain host-owned. The host remains
+The GUI is a local loopback client. Active session state is in-memory during the
+process lifetime; the host also keeps durable checkpoint archives; browser
+refresh recovery may retain only
+the opaque host session ID and reload the same running host process, while a
+stopped/restarted host can discover explicit archives. Competitive actions and
+campaign-coverage decisions remain host-owned. The host remains
 authoritative, and actor-specific observations intentionally omit private rival
 state and unresolved hidden inputs. Current technical checks do not replace
 human accessibility, educational, audio-quality, provenance, resemblance,

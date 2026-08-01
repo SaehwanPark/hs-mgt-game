@@ -66,5 +66,6 @@ unsupported geography risk and C for dashboard-only risk. Preserve the rejected
 variants as comparison evidence; do not silently reuse their geographic or
 dashboard semantics in production.
 
-Human color-vision, screen-reader, contrast, usability, and design-review
-evidence remain open questions for a separately authorized evaluation.
+Human color-vision, screen-reader, contrast, usability, and optional external
+design-review evidence remain open questions; they do not gate technical GUI
+progression.

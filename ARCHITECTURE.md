@@ -120,3 +120,6 @@ after a bounded evidence gap identifies the need. Prefer extending existing
 typed host projections and shared presentation primitives. A change that would
 alter simulation authority, replay semantics, persistence formats, or public
 browser support requires a new ADR and a separate implementation slice.
+
+Historical phase records may say that later interface work “remain future work”;
+current implementation status is defined by the verified sections above.

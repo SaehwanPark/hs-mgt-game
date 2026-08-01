@@ -50,6 +50,11 @@ never use `SPEC.md` as a per-commit journal.
   browser inspection is development evidence. Firefox, WebKit/Safari, mobile,
   and legacy browsers remain deferred.
 
+Historical boundary note: Phase 0 acceptance does not promote structured DTOs;
+later GUI DTOs are promoted only through the current host contracts and ADRs.
+Historical phase labels retained for evidence indexing: Phase 1 static executive desktop; Phases 8–9 remain sequentially gated; those labels are not current
+promotion gates and remain future work only in their dated evidence records.
+
 ## Present
 
 ### GUI-focused documentation and SDD cleanup (v0.14.3)

@@ -1,11 +1,12 @@
 # MCP Agent Interface
 
-**Status:** Implemented v0.1.41  
+**Status:** Implemented and current for v0.14.2
 **Audience:** AI-agent clients, contributors, instructors testing autonomous play
 
 The `hs-mgt-game-mcp` binary exposes a local Model Context Protocol server over
-stdio. It lets an AI agent play the current bounded campaigns without using
-terminal prompts.
+stdio. It lets an AI agent play all three current bounded campaigns without
+using terminal prompts. The GUI loopback host and MCP adapter share host
+authority, actor-visible projections, history/replay, and checkpoint boundaries.
 
 ## Run
 
@@ -13,14 +14,15 @@ terminal prompts.
 cargo run --bin hs-mgt-game-mcp
 ```
 
-MCP clients should launch the binary as a stdio server. The server keeps session
-state in memory for the lifetime of the process.
+MCP clients should launch the binary as a stdio server. The host keeps active
+session state in process memory and persists explicit checkpoint archives for
+discovery/restoration; clients never own save bytes.
 
 ## Tools
 
 | Tool | Purpose |
 | --- | --- |
-| `start_session` | Start `stabilization-v1` or `competitive-regional-v1` |
+| `start_session` | Start `stabilization-v1`, `competitive-regional-v1`, or `regional-affiliation-v1` |
 | `get_observation` | Read the current actor-visible observation and command format |
 | `submit_turn` | Submit one command string and advance one turn/month |
 | `get_history` | Read append-only transition summaries and state hashes |
@@ -96,7 +98,7 @@ expose hidden true state beyond the current actor-visible observation and
 committed transition summaries.
 
 For `competitive-regional-v1`, `end_session` includes final player tradeoff and
-resource metrics derived from the human system in committed history. This is an
+resource metrics derived from the player-controlled system in committed history. This is an
 end-of-run debrief surface, not an active-play observation surface, and it does
 not add rival private-state reporting.
 

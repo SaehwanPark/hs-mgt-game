@@ -67,8 +67,9 @@ validity.
 
 ## Deferred next slice
 
-Broader production assets, calibrated measurement, and human listening remain
-separate gates. The policy prototype now covers deterministic priority order,
+Broader production assets, calibrated measurement, and optional external human
+listening remain separate evidence limits, not technical stop gates. The policy
+prototype now covers deterministic priority order,
 music ducking metadata, cooldown, full/cues-only/muted modes, and reduced-audio
 preference behavior.
 

@@ -1,6 +1,6 @@
 # Glossary
 
-**Status:** Phase 0 governance artifact  
+**Status:** Maintained terminology reference; reviewed for v0.14.2
 **Audience:** Contributors, domain reviewers, and playtest designers
 
 Core terms for the Health Policy Strategy Game, aligned with

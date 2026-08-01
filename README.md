@@ -56,8 +56,8 @@ host-ordered actions, host-owned checkpoints, replay/history reads, and
 text-first source/uncertainty fallbacks. `gui/index.html` opened directly shows
 demo data; it does not start a live scenario.
 
-The declared default browser target is Chromium evergreen desktop. The Codex
-in-app browser is a development inspection surface. Firefox, WebKit/Safari,
+The declared default browser target is Chromium evergreen desktop. The Codex in-app browser
+is a development inspection surface. Firefox, WebKit/Safari,
 mobile, and legacy-browser support are deferred and not certified.
 
 See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for launch,

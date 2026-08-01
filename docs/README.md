@@ -9,14 +9,14 @@ current implementation instructions.
 
 | Class | Location | Authority |
 | --- | --- | --- |
-| Product direction | `README.md`, `docs/proposal.md`, `docs/roadmap.md`, `docs/design_principles.md` | Current intent and scope |
+| Maintained product direction | `README.md`, `docs/proposal.md`, `docs/roadmap.md`, `docs/design_principles.md` | Current intent and scope |
 | Software SDD | `SPEC.md`, `ARCHITECTURE.md`, `CHANGELOG.md` | Current state, boundaries, and release history |
 | Active design/reference | `docs/design/`, `docs/reference/`, `docs/research/`, `docs/validation/` | Current mechanics, terminology, evidence, and workflows |
 | GUI/presentation | `gui/README.md`, `docs/guides/gui-how-to-play.md`, visual/audio roadmap, asset READMEs | Current GUI contracts and player/contributor operation |
-| Decision records | `docs/decision-records/` | Point-in-time decisions; later records supersede changed direction |
+| ADR / decision records | `docs/decision-records/` | Point-in-time decisions; later records supersede changed direction |
 | Generated/registry records | `assets/`, generated credits, release manifests | Machine-produced or provenance-controlled outputs; do not hand-edit generated files |
 | Historical evidence | `docs/history/` | Immutable prior findings, milestones, and superseded plans |
-| Agent workspace | `_workspace/` | Dated handoffs and experiment artifacts; append current handoffs, do not rewrite prior slices |
+| Workspace evidence | `_workspace/` | Dated handoffs and experiment artifacts; append current handoffs, do not rewrite prior slices |
 
 ## Software contributor path
 

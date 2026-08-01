@@ -1,6 +1,6 @@
 # Competitive Scenario Brief
 
-**Status:** Phase 6.0 design artifact  
+**Status:** Maintained scenario reference; runtime implemented in v0.14.2
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign id:** `competitive-regional-v1`
 
@@ -11,7 +11,7 @@ campaign without changing the stabilization executable.
 ## Scenario concept
 
 Two to five nonprofit and community health systems compete in a fictional
-mid-size regional US market (1 human + K AI rivals, K=1–4 by difficulty). The human player leads **Riverside Community
+mid-size regional US market (1 player-controlled + K AI rivals, K=1–4 by difficulty). The player-controlled system leads **Riverside Community
 Health**, a safety-net-leaning system facing rivals with different growth
 strategies, payer mixes, and community relationships.
 
@@ -84,7 +84,7 @@ Players should practice:
 - Refactoring or replacing stabilization demo
 - Regional merger/acquisition mechanics in the default campaign. The separate
   `regional-affiliation-v1` runtime is opt-in and remains outside this campaign.
-- GUI-specific scenario behavior; future graphical clients must reuse the same
+- GUI-specific scenario behavior; the current loopback GUI reuses the same
   scenario and core data.
 - Advisor-market, payroll, candidate-pool, or hire/fire mechanics until the
   reviewed advisor proposal is promoted into a bounded runtime slice.

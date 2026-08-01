@@ -1,16 +1,17 @@
 # Asset licensing policy
 
 This repository keeps visual and audio provenance in the canonical registries
-under `assets/registry/`. The policy is a release gate and documentation aid,
-not legal advice or a substitute for a human license audit.
+under `assets/registry/`. The policy is an automated release-safety check and
+documentation aid, not legal advice or a substitute for a human legal
+conclusion.
 
 ## Default allowlist
 
-The validator accepts project-authored or otherwise explicitly reviewed
+The validator accepts project-authored or otherwise explicitly registered
 entries using `project-generated`, `CC0-1.0`, `CC-BY-4.0`, `CC-BY-SA-4.0`,
 `MIT`, `Apache-2.0`, `GPL-3.0-or-later`, or `OFL-1.1`. GPL and other
-third-party-compatible entries still require an appropriate human review
-before distribution.
+third-party-compatible entries still carry a visible rights/provenance limit;
+uncertain entries are excluded rather than approved by inference.
 
 The validator rejects noncommercial, no-derivatives, personal-use-only,
 unclear, proprietary, unattributed-aggregator, screenshot, and protected-art
@@ -33,8 +34,10 @@ derivatives remain hash-bound by `scripts/validate_assets.py`.
 
 ## Release practice
 
-Only approved entries with a registered `release_path` are distributable.
+Only entries that pass automated policy checks and have a registered
+`release_path` are distributable.
 `assets/ASSET_CREDITS.md` and `assets/THIRD_PARTY_NOTICES.md` are generated
 from registry data. Before a release, contributors must rerun the registry,
-credits, notices, and human license-audit checks and retain any external
-license text or archive reference required by that audit.
+credits, notices, security, and release checks and retain any external license
+text or archive reference available. Automated conformance does not establish
+legal clearance; unresolved rights fail closed to exclusion and fallback.
