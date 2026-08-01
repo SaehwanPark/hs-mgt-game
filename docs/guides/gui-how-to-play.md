@@ -280,12 +280,12 @@ observations, outcomes, hashes, or true state.
 
 The repository also has a bounded Firefox/Marionette smoke that exercises one
 explicit checkpoint save and one refresh against the live loopback host. It
-launches each of the three supported campaigns and runs the visible Hold path
-through all 24 competitive months, including host autosaves, history/replay,
-and the terminal debrief. This is runtime evidence only; it does not certify
-Firefox support, alternative action forms, WebKit, real hardware, audio
-decoding, or human accessibility/usability. Stabilization and regional
-affiliation launch/read continuity do not replace full-campaign certification.
+launches each of the three supported campaigns, runs the visible Hold path
+through all 24 competitive months, and runs the visible host-shaped coverage
+forms through the five stabilization and six regional-affiliation stages,
+including host autosaves, history/replay, and terminal debriefs. This is
+runtime evidence only; it does not certify Firefox support, alternative action
+values, WebKit, real hardware, audio decoding, or human accessibility/usability.
 
 ### Audio is silent
 

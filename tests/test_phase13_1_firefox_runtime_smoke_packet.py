@@ -19,29 +19,15 @@ EXPECTED_SHELL = {
   "demo_fixture": True,
   "url": "http://127.0.0.1:7878/",
 }
-EXPECTED_HOST_START = {
-  "status": "competitive regional session loaded: session-1",
-  "session": "session-1",
-  "demo_fixture": False,
-  "campaign": "competitive-regional-v1",
-  "ready": "complete",
-  "checkpoint_saved": True,
-  "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
-  "stored_session_id": "session-1",
-}
-EXPECTED_RESUME = {
-  "status": "Host session refreshed after browser refresh: session-1",
-  "session": "session-1",
-  "stored_session_id": "session-1",
-  "demo_fixture": False,
-  "ready": "complete",
-}
+SESSION_ID_PATTERN = r"session-[A-Za-z0-9_-]+"
 EXPECTED_REVIEW_BOUNDARY = {
   "firefox_shell_runtime_smoke_complete": True,
   "firefox_host_backed_start_smoke_complete": True,
   "firefox_browser_refresh_resume_smoke_complete": True,
   "firefox_all_campaign_launch_smoke_complete": True,
   "firefox_competitive_full_campaign_smoke_complete": True,
+  "firefox_stabilization_full_campaign_smoke_complete": True,
+  "firefox_affiliation_full_campaign_smoke_complete": True,
   "firefox_full_campaign_certification_complete": False,
   "firefox_audio_decoder_review_complete": False,
   "webkit_runtime_certification_complete": False,
@@ -88,26 +74,33 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
       "headless": True,
     })
     self.assertEqual(observation["shell"], EXPECTED_SHELL)
-    self.assertEqual(observation["host_start"], EXPECTED_HOST_START)
-    self.assertEqual(observation["browser_refresh_resume"], EXPECTED_RESUME)
-    self.assertEqual(observation["campaign_launches"], {
-      "competitive-regional-v1": EXPECTED_HOST_START,
-      "stabilization-v1": {
-        "status": "stabilization session loaded: session-2",
-        "session": "session-2",
-        "demo_fixture": False,
-        "ready": "complete",
-      },
-      "regional-affiliation-v1": {
-        "status": "regional affiliation session loaded: session-3",
-        "session": "session-3",
-        "demo_fixture": False,
-        "ready": "complete",
-      },
-    })
+    host_start = observation["host_start"]
+    self.assertRegex(host_start["session"], SESSION_ID_PATTERN)
+    self.assertEqual(host_start["status"], f"competitive regional session loaded: {host_start['session']}")
+    self.assertFalse(host_start["demo_fixture"])
+    self.assertEqual(host_start["campaign"], "competitive-regional-v1")
+    self.assertEqual(host_start["ready"], "complete")
+    self.assertTrue(host_start["checkpoint_saved"])
+    self.assertEqual(host_start["checkpoint_status"], "Host checkpoint saved at 0 committed transitions.")
+    self.assertEqual(host_start["stored_session_id"], host_start["session"])
+    resume = observation["browser_refresh_resume"]
+    self.assertEqual(resume["status"], f"Host session refreshed after browser refresh: {host_start['session']}")
+    self.assertEqual(resume["session"], host_start["session"])
+    self.assertEqual(resume["stored_session_id"], host_start["session"])
+    self.assertFalse(resume["demo_fixture"])
+    self.assertEqual(resume["ready"], "complete")
+    launches = observation["campaign_launches"]
+    self.assertEqual(launches["competitive-regional-v1"], host_start)
+    for campaign, label in (("stabilization-v1", "stabilization"), ("regional-affiliation-v1", "regional affiliation")):
+      launch = launches[campaign]
+      self.assertRegex(launch["session"], SESSION_ID_PATTERN)
+      self.assertEqual(launch["status"], f"{label} session loaded: {launch['session']}")
+      self.assertFalse(launch["demo_fixture"])
+      self.assertEqual(launch["ready"], "complete")
+    self.assertEqual(len({launches[campaign]["session"] for campaign in launches}), 3)
     full_campaign = observation["competitive_full_campaign"]
     self.assertEqual(full_campaign["campaign"], "competitive-regional-v1")
-    self.assertEqual(full_campaign["session"], EXPECTED_HOST_START["session"])
+    self.assertEqual(full_campaign["session"], host_start["session"])
     self.assertEqual(full_campaign["target_turns"], 24)
     self.assertEqual(full_campaign["committed_turns"], 24)
     self.assertEqual(full_campaign["history_count"], 24)
@@ -120,6 +113,29 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
     self.assertEqual(full_campaign["terminal"]["history_count"], 24)
     self.assertGreater(full_campaign["terminal"]["debrief_count"], 0)
     self.assertEqual(full_campaign["terminal"]["final_state_hash"], "b24eea963c3abfe2")
+    full_runs = observation["campaign_full_runs"]
+    stabilization = full_runs["stabilization-v1"]
+    self.assertEqual(stabilization["session"], launches["stabilization-v1"]["session"])
+    self.assertEqual(stabilization["target_stages"], 5)
+    self.assertEqual(stabilization["committed_stages"], 5)
+    self.assertEqual(stabilization["history_count"], 5)
+    self.assertEqual(stabilization["autosave_count"], 5)
+    self.assertEqual([stage["state_hash"] for stage in stabilization["stages"]], [
+      "4a41dfcb5438b5f8", "113e6acccc04f651", "ae271eae8d552f15",
+      "6d306853a415633a", "6982f2ef9a3df4e7",
+    ])
+    self.assertEqual(stabilization["terminal"]["debrief_count"], 29)
+    affiliation = full_runs["regional-affiliation-v1"]
+    self.assertEqual(affiliation["session"], launches["regional-affiliation-v1"]["session"])
+    self.assertEqual(affiliation["target_stages"], 6)
+    self.assertEqual(affiliation["committed_stages"], 6)
+    self.assertEqual(affiliation["history_count"], 6)
+    self.assertEqual(affiliation["autosave_count"], 6)
+    self.assertEqual([stage["state_hash"] for stage in affiliation["stages"]], [
+      "9d38e1d2ebc1e05d", "31c9e7e5e7cc16fd", "ee38360229afe70c",
+      "0a1a88f40ee9bba5", "5ca716a1c0ce6826", "00025c494e6299ae",
+    ])
+    self.assertEqual(affiliation["terminal"]["debrief_count"], 14)
     self.assertTrue(self.packet["probe"]["writes_project_state"] is False)
 
   def test_probe_source_and_browser_policy_boundaries_are_exact(self):
@@ -171,6 +187,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
       observation["browser_refresh_resume"],
       observation["campaign_launches"],
       observation["competitive_full_campaign"],
+      observation["campaign_full_runs"],
     )
     bad_host = dict(observation["host_start"])
     bad_host["status"] = "stabilization session loaded: session-1"
@@ -184,6 +201,7 @@ class Phase13FirefoxRuntimeSmokePacketTests(unittest.TestCase):
         observation["browser_refresh_resume"],
         observation["campaign_launches"],
         observation["competitive_full_campaign"],
+        observation["campaign_full_runs"],
       )
     bad_browser = dict(observation["browser"])
     bad_browser["headless"] = False

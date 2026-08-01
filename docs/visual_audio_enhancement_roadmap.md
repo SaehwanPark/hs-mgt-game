@@ -4897,6 +4897,22 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.109.md`, the Firefox runtime packet,
 and the remaining-gate audit.
 
+### v0.13.110 Firefox all-campaign full-transition smoke
+
+- The bounded Firefox/Marionette probe now drives the visible five-stage
+  stabilization coverage form and six-stage regional-affiliation Commit
+  decision form, waiting for host autosave status, committed history/state
+  hashes, and each host terminal debrief.
+- This closes only source-bound full-transition smoke evidence for the three
+  currently launchable campaigns. It does not certify Firefox support,
+  alternative decision values, WebKit, real devices, audio decoding, human
+  accessibility/usability, educational value, provenance, or public release.
+
+The target is recorded in
+`_workspace/188_implementation_plan_phase13-firefox-all-campaign-full-smoke-v0.13.110.md`,
+`_workspace/00_input/request-summary-v0.13.110.md`, the Firefox runtime packet,
+and the remaining-gate audit.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.13.110] - 2026-08-01
+
+- Extended the bounded Firefox/Marionette smoke through all five stabilization
+  stages and all six regional-affiliation stages using the visible host-shaped
+  decision controls, host autosave status, history/state hashes, and terminal
+  debriefs.
+- This is source-bound all-campaign runtime smoke evidence only; Firefox
+  support, alternative decision values, WebKit, real-device, human-review, and
+  public-release gates remain pending.
+
 ## [0.13.109] - 2026-08-01
 
 - Extended the bounded Firefox/Marionette smoke through the visible Hold path

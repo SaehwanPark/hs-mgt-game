@@ -3339,6 +3339,42 @@ debrief/educational review, content/resemblance/clinical review, competitive
 campaign human coverage, browser/device certification, revision decisions, and
 campaign expansion approval remain pending and promotion-blocking.
 
+# Final Handoff — Firefox all-campaign full-transition smoke v0.13.110
+
+## Status
+
+The v0.13.110 technical evidence slice extends the loopback Firefox/Marionette
+probe through the visible host-shaped transition contracts for stabilization
+and regional affiliation. It does not promote Firefox, WebKit, device, human,
+educational, provenance, or public-release gates.
+
+## Evidence
+
+- Plan: `_workspace/188_implementation_plan_phase13-firefox-all-campaign-full-smoke-v0.13.110.md`.
+- Request summary: `_workspace/00_input/request-summary-v0.13.110.md`.
+- Packet: `docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json`.
+- The packet records competitive 24-month smoke plus five stabilization and
+  six regional-affiliation host-backed transitions, autosave counts, state
+  hashes, and terminal debriefs.
+- The consolidated audit is current at v0.13.110 with eight promotion-blocking
+  gates still mapped to authorized human or runtime evidence.
+
+## Verification
+
+- Rebuilt GUI host and live Firefox 147.0.2 probe passed all three campaign
+  transition sequences.
+- Focused packet, audit, browser/device, technical coverage, and release tests
+  passed.
+- Full Rust, Python, lint, formatting, device-proxy, audit, and diff checks are
+  required before PR handoff.
+
+## Remaining gates
+
+Firefox engine certification, WebKit, real-device/hardware checks, human
+accessibility/usability and educational review, asset/provenance/content review,
+revision decisions, expansion approval, and public-release approval remain
+pending and promotion-blocking.
+
 # Final Handoff — Firefox competitive full-campaign smoke v0.13.109
 
 ## Status

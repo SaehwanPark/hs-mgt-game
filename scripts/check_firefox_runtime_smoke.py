@@ -20,6 +20,10 @@ DEFAULT_PORT = 2828
 LOOPBACK_HOSTS = {"127.0.0.1", "::1"}
 EXPECTED_PAGE_TITLE = "Health Policy Strategy Game — Executive Desktop"
 EXPECTED_COMPETITIVE_TURNS = 24
+EXPECTED_CAMPAIGN_STAGE_COUNTS = {
+  "stabilization-v1": 5,
+  "regional-affiliation-v1": 6,
+}
 CAMPAIGN_LABELS = {
   "competitive-regional-v1": "competitive regional",
   "stabilization-v1": "stabilization",
@@ -104,6 +108,7 @@ def validate_observations(
   resume: object | None = None,
   campaign_launches: object | None = None,
   competitive_full_campaign: object | None = None,
+  campaign_full_runs: object | None = None,
 ) -> None:
   if not isinstance(shell, dict) or not isinstance(host, dict) or not isinstance(browser, dict):
     raise RuntimeError("Firefox runtime smoke observations must be objects")
@@ -170,6 +175,7 @@ def validate_observations(
     if not isinstance(campaign_launches, dict):
       raise RuntimeError("Firefox campaign launch observations must be an object")
     campaign_errors = []
+    campaign_sessions = []
     for campaign, label in CAMPAIGN_LABELS.items():
       observation = campaign_launches.get(campaign)
       if not isinstance(observation, dict):
@@ -182,10 +188,17 @@ def validate_observations(
         r"session-[A-Za-z0-9_-]+", observation["session"]
       ):
         campaign_errors.append(f"invalid opaque Firefox campaign session ID: {campaign}")
+      else:
+        campaign_sessions.append(observation["session"])
       if observation.get("demo_fixture") is not False:
         campaign_errors.append(f"demo fixture remained after Firefox campaign launch: {campaign}")
       if observation.get("ready") != "complete":
         campaign_errors.append(f"Firefox campaign launch did not reach readyState=complete: {campaign}")
+    competitive_launch = campaign_launches.get("competitive-regional-v1")
+    if isinstance(competitive_launch, dict) and competitive_launch.get("session") != host.get("session"):
+      campaign_errors.append("competitive campaign launch changed the host session ID")
+    if len(campaign_sessions) == len(CAMPAIGN_LABELS) and len(set(campaign_sessions)) != len(campaign_sessions):
+      campaign_errors.append("Firefox campaign launches reused an opaque session ID")
     if campaign_errors:
       raise RuntimeError("; ".join(campaign_errors))
   if competitive_full_campaign is not None:
@@ -245,6 +258,60 @@ def validate_observations(
         full_campaign_errors.append("full-campaign terminal state hash is invalid")
     if full_campaign_errors:
       raise RuntimeError("; ".join(full_campaign_errors))
+  if campaign_full_runs is not None:
+    if not isinstance(campaign_full_runs, dict):
+      raise RuntimeError("Firefox campaign full-transition observations must be an object")
+    coverage_errors = []
+    for campaign, target_stages in EXPECTED_CAMPAIGN_STAGE_COUNTS.items():
+      observation = campaign_full_runs.get(campaign)
+      launch = campaign_launches.get(campaign) if isinstance(campaign_launches, dict) else None
+      if not isinstance(observation, dict):
+        coverage_errors.append(f"missing Firefox full-transition observation: {campaign}")
+        continue
+      if not isinstance(launch, dict) or observation.get("session") != launch.get("session"):
+        coverage_errors.append(f"full-transition observation changed the host session ID: {campaign}")
+      if observation.get("campaign") != campaign:
+        coverage_errors.append(f"full-transition observation has the wrong campaign: {campaign}")
+      if observation.get("target_stages") != target_stages:
+        coverage_errors.append(f"full-transition target stage count is invalid: {campaign}")
+      if observation.get("committed_stages") != target_stages:
+        coverage_errors.append(f"full-transition committed stage count is invalid: {campaign}")
+      if observation.get("history_count") != target_stages:
+        coverage_errors.append(f"full-transition history count is invalid: {campaign}")
+      if observation.get("autosave_count") != target_stages:
+        coverage_errors.append(f"full-transition autosave count is invalid: {campaign}")
+      stages = observation.get("stages")
+      if not isinstance(stages, list) or len(stages) != target_stages:
+        coverage_errors.append(f"full-transition stage observations are incomplete: {campaign}")
+      else:
+        for expected_stage, stage in enumerate(stages, start=1):
+          if not isinstance(stage, dict):
+            coverage_errors.append(f"full-transition stage is not an object: {campaign} {expected_stage}")
+            continue
+          if stage.get("stage") != expected_stage:
+            coverage_errors.append(f"full-transition stage ordering is invalid: {campaign} {expected_stage}")
+          if stage.get("history_count") != expected_stage:
+            coverage_errors.append(f"full-transition stage history count is invalid: {campaign} {expected_stage}")
+          if stage.get("autosave_status") != f"Host autosave completed at {expected_stage} committed transitions.":
+            coverage_errors.append(f"full-transition autosave status is invalid: {campaign} {expected_stage}")
+          if not isinstance(stage.get("state_hash"), str) or not re.fullmatch(r"[0-9a-f]+", stage["state_hash"]):
+            coverage_errors.append(f"full-transition state hash is invalid: {campaign} {expected_stage}")
+      terminal = observation.get("terminal")
+      if not isinstance(terminal, dict):
+        coverage_errors.append(f"full-transition terminal observation is missing: {campaign}")
+      else:
+        if terminal.get("status") != "Host session ended; final history and debrief loaded":
+          coverage_errors.append(f"full-transition terminal status is invalid: {campaign}")
+        if terminal.get("history_count") != target_stages:
+          coverage_errors.append(f"full-transition terminal history count is invalid: {campaign}")
+        if not isinstance(terminal.get("debrief_count"), int) or terminal["debrief_count"] <= 0:
+          coverage_errors.append(f"full-transition terminal debrief is missing: {campaign}")
+        if not isinstance(terminal.get("final_state_hash"), str) or not re.fullmatch(
+          r"[0-9a-f]+", terminal["final_state_hash"]
+        ):
+          coverage_errors.append(f"full-transition terminal state hash is invalid: {campaign}")
+    if coverage_errors:
+      raise RuntimeError("; ".join(coverage_errors))
 
 
 def _wait_for_port(host: str, port: int, timeout: float) -> None:
@@ -400,6 +467,82 @@ def _best_effort_end_current_host_session(client: MarionetteClient, session_id: 
     return False
 
 
+def _run_campaign_coverage(
+  client: MarionetteClient,
+  session_id: str,
+  host_session_id: str,
+  campaign: str,
+) -> dict:
+  target_stages = EXPECTED_CAMPAIGN_STAGE_COUNTS[campaign]
+  stages = []
+  for stage in range(1, target_stages + 1):
+    _execute(client, session_id, """
+      const form = document.querySelector('#campaign-decision-list form');
+      if (!form) throw new Error('campaign coverage decision form is unavailable');
+      for (const field of form.querySelectorAll('input, select')) {
+        if (field.tagName === 'SELECT') field.value = field.options[0]?.value || '';
+        else field.value = field.min || '0';
+      }
+      const submit = form.querySelector('button[type="submit"]');
+      if (!submit) throw new Error('campaign coverage submit control is unavailable');
+      submit.click();
+      return true;
+    """)
+    snapshot = _wait_for(
+      client,
+      session_id,
+      """
+        const history = [...document.querySelectorAll('#campaign-history-list > li')]
+          .filter((item) => !item.classList.contains('empty'));
+        return {
+          history_count: history.length,
+          autosave_status: document.querySelector('#session-launch-status')?.textContent || '',
+          state_hash_text: history.length ? history[history.length - 1].textContent : ''
+        };
+      """,
+      lambda value: isinstance(value, dict)
+      and value.get("history_count") == stage
+      and value.get("autosave_status") == f"Host autosave completed at {stage} committed transitions.",
+      f"host commit and autosave for {campaign} stage {stage}",
+      timeout=8.0,
+    )
+    state_hash_match = re.search(r"state hash: ([0-9a-f]+)", str(snapshot.get("state_hash_text", "")))
+    stages.append({
+      "stage": stage,
+      "history_count": snapshot.get("history_count"),
+      "autosave_status": snapshot.get("autosave_status"),
+      "state_hash": state_hash_match.group(1) if state_hash_match else "",
+    })
+  _execute(client, session_id, "document.querySelector('#session-end').click(); return true;")
+  terminal = _wait_for(
+    client,
+    session_id,
+    "return {status: document.querySelector('#session-status')?.textContent || '', history_count: document.querySelectorAll('#history-list > li').length, debrief_count: document.querySelectorAll('#debrief-list > li').length, meta: document.querySelector('#session-meta')?.textContent || ''};",
+    lambda value: isinstance(value, dict)
+    and value.get("status") == "Host session ended; final history and debrief loaded"
+    and value.get("history_count") == target_stages
+    and isinstance(value.get("debrief_count"), int)
+    and value.get("debrief_count") > 0,
+    f"host terminal {campaign} history and debrief",
+  )
+  final_hash_match = re.search(r"hash ([0-9a-f]+)", str(terminal.get("meta", "")))
+  return {
+    "campaign": campaign,
+    "session": host_session_id,
+    "target_stages": target_stages,
+    "committed_stages": len(stages),
+    "history_count": terminal.get("history_count"),
+    "autosave_count": len(stages),
+    "stages": stages,
+    "terminal": {
+      "status": terminal.get("status"),
+      "history_count": terminal.get("history_count"),
+      "debrief_count": terminal.get("debrief_count"),
+      "final_state_hash": final_hash_match.group(1) if final_hash_match else "",
+    },
+  }
+
+
 def _start_campaign(client: MarionetteClient, session_id: str, campaign: str) -> object:
   script = f"""
     const select = document.querySelector('#session-campaign');
@@ -513,13 +656,23 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "platform": capabilities.get("platformName"),
         "headless": capabilities.get("moz:headless"),
       }
+      stabilization_launch = _start_campaign(client, session_id, "stabilization-v1")
+      stabilization_full = _run_campaign_coverage(
+        client, session_id, stabilization_launch["session"], "stabilization-v1"
+      )
+      affiliation_launch = _start_campaign(client, session_id, "regional-affiliation-v1")
+      affiliation_full = _run_campaign_coverage(
+        client, session_id, affiliation_launch["session"], "regional-affiliation-v1"
+      )
       campaign_launches = {
         "competitive-regional-v1": host,
-        "stabilization-v1": _start_campaign(client, session_id, "stabilization-v1"),
+        "stabilization-v1": stabilization_launch,
+        "regional-affiliation-v1": affiliation_launch,
       }
-      _best_effort_end_current_host_session(client, session_id)
-      campaign_launches["regional-affiliation-v1"] = _start_campaign(client, session_id, "regional-affiliation-v1")
-      _best_effort_end_current_host_session(client, session_id)
+      campaign_full_runs = {
+        "stabilization-v1": stabilization_full,
+        "regional-affiliation-v1": affiliation_full,
+      }
       validate_observations(
         shell,
         host,
@@ -529,6 +682,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         resume,
         campaign_launches,
         competitive_full_campaign,
+        campaign_full_runs,
       )
       client.command("WebDriver:DeleteSession", {"sessionId": session_id})
       session_id = None
@@ -542,6 +696,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "browser_refresh_resume": resume,
         "campaign_launches": campaign_launches,
         "competitive_full_campaign": competitive_full_campaign,
+        "campaign_full_runs": campaign_full_runs,
       }
     finally:
       if client is not None:
