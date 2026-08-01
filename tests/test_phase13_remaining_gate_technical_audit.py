@@ -56,8 +56,13 @@ class Phase13RemainingGateTechnicalAuditTests(unittest.TestCase):
       self.validator.validate_audit(audit)
 
     audit = copy.deepcopy(self.audit)
-    audit["roadmap_contract"]["open_item_markers"][0]["text"] = "not an open roadmap item"
-    with self.assertRaisesRegex(ValueError, "roadmap marker is missing"):
+    audit["roadmap_contract"]["open_item_markers"][0]["text"] = "Current technical competitive campaign boundary documented."
+    with self.assertRaisesRegex(ValueError, "roadmap marker contract drifted"):
+      self.validator.validate_audit(audit)
+
+    audit = copy.deepcopy(self.audit)
+    audit["roadmap_contract"]["path"] = "/etc/passwd"
+    with self.assertRaisesRegex(ValueError, "roadmap path must be relative"):
       self.validator.validate_audit(audit)
 
   def test_validator_rejects_status_promotion_and_type_coercion(self):
@@ -85,6 +90,22 @@ class Phase13RemainingGateTechnicalAuditTests(unittest.TestCase):
     audit = copy.deepcopy(self.audit)
     audit["decision_boundary"]["go_no_go"] = "approved"
     with self.assertRaisesRegex(ValueError, "decision field must remain unset"):
+      self.validator.validate_audit(audit)
+
+  def test_validator_rejects_absolute_and_non_string_check_paths(self):
+    audit = copy.deepcopy(self.audit)
+    audit["technical_checks"][0]["sources"][0] = "/etc/passwd"
+    with self.assertRaisesRegex(ValueError, "check source must be relative"):
+      self.validator.validate_audit(audit)
+
+    audit = copy.deepcopy(self.audit)
+    audit["technical_checks"][0]["sources"][0] = 7
+    with self.assertRaisesRegex(ValueError, "check source must be a string"):
+      self.validator.validate_audit(audit)
+
+    audit = copy.deepcopy(self.audit)
+    audit["test_source"] = 7
+    with self.assertRaisesRegex(ValueError, "test source must be a string"):
       self.validator.validate_audit(audit)
 
 

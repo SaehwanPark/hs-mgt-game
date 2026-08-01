@@ -66,6 +66,36 @@ EXPECTED_GATES = {
   "revision-decisions",
   "campaign-expansion-approval",
 }
+EXPECTED_ROADMAP_MARKERS = {
+  "portrait-prompt-seed": "Prompt and seed recorded.",
+  "portrait-crop-derivative": "Crop and release derivative completed.",
+  "portrait-identity": "Identity consistency reviewed.",
+  "portrait-resemblance": "Real-person resemblance reviewed.",
+  "portrait-artifact": "Anatomy and artifact review completed.",
+  "portrait-marks": "No protected marks present.",
+  "portrait-registry": "Registry entry approved.",
+  "portrait-small-size": "Small-size rendering tested.",
+  "portrait-grayscale": "Grayscale rendering tested.",
+  "audio-feedback": "Audio preference feedback collected.",
+  "audio-ratings": "Quantitative ratings collected.",
+  "audio-interviews": "Qualitative interviews completed.",
+  "audio-findings": "Findings classified as defect, preference, or scope expansion.",
+  "audio-go-no-go": "Go/no-go decision recorded.",
+  "educational-review": "Educational usability reviewed.",
+  "first-session-evaluation": "First-session workflow complete.",
+  "competitive-human-coverage": "Competitive campaign coverage complete.",
+  "content-institution": "No real institution accidentally represented.",
+  "content-public-figure": "No public-figure resemblance remains.",
+  "content-clinical": "No unsupported clinical implication introduced.",
+  "ai-metadata": "AI-generation metadata complete.",
+  "debrief-visuals": "Debrief visuals reviewed.",
+  "asset-provenance": "Complete asset provenance review.",
+  "pilot-evaluation": "Run structured first-time-user evaluation.",
+  "revision-decisions": "Record revision decisions.",
+  "expansion-decision": "Approve or reject expansion to full campaign coverage.",
+  "browser-device-certification": "cross-browser/device certification",
+}
+NON_CHECKBOX_ROADMAP_MARKERS = {"browser-device-certification"}
 ALLOWED_HUMAN_STATUSES = {
   "pending-authorized-human-review",
   "pending-authorized-human-evidence",
@@ -89,15 +119,22 @@ def _load_json(path: Path) -> dict:
   return value
 
 
-def _strict_int(value: object) -> bool:
-  return isinstance(value, int) and not isinstance(value, bool)
+def _repository_path(value: object, label: str) -> Path:
+  _require(isinstance(value, str), f"{label} must be a string")
+  candidate = Path(value)
+  _require(not candidate.is_absolute(), f"{label} must be relative")
+  resolved = (ROOT / candidate).resolve()
+  try:
+    resolved.relative_to(ROOT_RESOLVED)
+  except ValueError as error:
+    raise ValueError(f"{label} escapes repository root") from error
+  return resolved
 
 
 def _source_marker_is_valid(source: object) -> None:
   _require(isinstance(source, str), "source marker must be a string")
   source_path, marker = source.split(": ", 1)
-  path = (ROOT / source_path).resolve()
-  _require(path == ROOT_RESOLVED / source_path, f"source path escaped repository root: {source_path}")
+  path = _repository_path(source_path, "source path")
   _require(path.is_file(), f"source path is missing: {source_path}")
   _require(marker in path.read_text(encoding="utf-8"), f"source marker is missing: {source}")
 
@@ -110,13 +147,13 @@ def validate_audit(audit: object) -> None:
   _require(audit["package_version"] == EXPECTED_PACKAGE_VERSION, "audit package version drifted")
   _require(audit["roadmap_item"] == "Remaining visual/audio roadmap gates", "roadmap item drifted")
   _require(isinstance(audit["purpose"], str) and audit["purpose"], "audit purpose is required")
+  _require(isinstance(audit["test_source"], str), "test source must be a string")
   _require(audit["test_source"] == EXPECTED_TEST_SOURCE, "test source drifted")
 
   roadmap_contract = audit["roadmap_contract"]
   _require(isinstance(roadmap_contract, dict), "roadmap contract must be an object")
   _require(set(roadmap_contract) == ROADMAP_CONTRACT_FIELDS, "roadmap contract fields are not bounded")
-  roadmap_path = (ROOT / roadmap_contract["path"]).resolve()
-  _require(roadmap_path == ROOT_RESOLVED / roadmap_contract["path"], "roadmap path escaped repository root")
+  roadmap_path = _repository_path(roadmap_contract["path"], "roadmap path")
   _require(roadmap_path.is_file(), "roadmap source is missing")
   roadmap_text = roadmap_path.read_text(encoding="utf-8")
   markers = roadmap_contract["open_item_markers"]
@@ -126,8 +163,20 @@ def validate_audit(audit: object) -> None:
     _require(isinstance(marker, dict) and set(marker) == MARKER_FIELDS, "roadmap marker fields are not bounded")
     _require(isinstance(marker["id"], str) and marker["id"] not in marker_ids, "roadmap marker IDs must be unique")
     _require(isinstance(marker["text"], str) and marker["text"], "roadmap marker text is required")
-    _require(marker["text"] in roadmap_text, f"roadmap marker is missing: {marker['id']}")
+    _require(EXPECTED_ROADMAP_MARKERS.get(marker["id"]) == marker["text"], f"roadmap marker contract drifted: {marker['id']}")
+    if marker["id"] in NON_CHECKBOX_ROADMAP_MARKERS:
+      _require(marker["text"] in roadmap_text, f"roadmap marker is missing: {marker['id']}")
+    else:
+      checkbox_marker = f"- [ ] {marker['text']}"
+      _require(
+        any(line.startswith(checkbox_marker) for line in roadmap_text.splitlines()),
+        f"unchecked roadmap marker is missing: {marker['id']}",
+      )
     marker_ids.add(marker["id"])
+  _require(
+    {marker["id"]: marker["text"] for marker in markers} == EXPECTED_ROADMAP_MARKERS,
+    "roadmap marker inventory drifted",
+  )
 
   checks = audit["technical_checks"]
   _require(isinstance(checks, list), "technical checks must be a list")
@@ -142,8 +191,7 @@ def validate_audit(audit: object) -> None:
     _require(isinstance(check["command"], str) and check["command"], f"command is required: {check['id']}")
     _require(isinstance(check["sources"], list) and check["sources"], f"sources are required: {check['id']}")
     for source in check["sources"]:
-      source_path = (ROOT / source).resolve()
-      _require(source_path == ROOT_RESOLVED / source, f"check source escaped repository root: {source}")
+      source_path = _repository_path(source, "check source")
       _require(source_path.is_file(), f"check source is missing: {source}")
     check_ids.add(check["id"])
   _require(check_ids == EXPECTED_TECHNICAL_CHECKS, "technical check inventory drifted")
@@ -186,14 +234,14 @@ def validate_audit(audit: object) -> None:
   limits_text = " ".join(limits)
   for marker in ("human comprehension", "accessibility quality", "legal clearance", "public-release approval", "authorized human evidence"):
     _require(marker in limits_text, f"evidence limit is missing: {marker}")
-  test_source = ROOT / audit["test_source"]
+  test_source = _repository_path(audit["test_source"], "test source")
   _require(test_source.is_file(), "audit test source is missing")
 
 
 def main() -> int:
   try:
     validate_audit(_load_json(AUDIT_PATH))
-  except (OSError, ValueError, json.JSONDecodeError) as error:
+  except (OSError, TypeError, ValueError, json.JSONDecodeError) as error:
     print(json.dumps({"status": "fail", "error": str(error)}))
     return 1
   print(json.dumps({"status": "pass", "schema_version": EXPECTED_SCHEMA, "gate_count": len(_load_json(AUDIT_PATH)["gates"])}))
