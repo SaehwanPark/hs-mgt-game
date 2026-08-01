@@ -1,3 +1,4 @@
+import json
 import subprocess
 import unittest
 from pathlib import Path
@@ -29,12 +30,14 @@ class GuiContextualActionTests(unittest.TestCase):
       "createActionClient",
       "getActionCatalog",
       "validateTurn",
-      "actionCommand",
+      "commandForParameters",
+      "normalizeActionViewModel",
+      "normalizeCampaignDecision",
+      "renderUnifiedActionSurface",
       "drafts",
       "renderDraftActions",
-      "Replace draft",
+      "Save",
       "Remove",
-      "Validate the unchanged draft before submitting",
       "submit_rejected",
     ):
       self.assertIn(marker, self.app)
@@ -42,12 +45,20 @@ class GuiContextualActionTests(unittest.TestCase):
       self.assertIn(marker, self.action)
     for selector in (
       'id="action-builder"',
+      'id="action-preview-list"',
+      'id="action-plan"',
       'id="draft-action-list"',
       'id="validate-actions"',
       'id="submit-month"',
       'id="validation-status"',
+      'id="technical-controls"',
     ):
       self.assertIn(selector, self.html)
+    for label in ("Check plan", "Commit month", "Technical controls"):
+      self.assertIn(label, self.html)
+    self.assertIn('"Details", "action-details visual-token"', self.app)
+    for forbidden in ("Host-shaped decision", "Host catalog", "Submit host-shaped decision"):
+      self.assertNotIn(forbidden, self.html)
 
   def test_read_only_path_has_no_submit_call(self):
     start = self.app.index("export function createReadOnlyClient")
@@ -108,6 +119,124 @@ class GuiContextualActionTests(unittest.TestCase):
       check=False,
     )
     self.assertEqual(result.returncode, 0, result.stderr)
+
+  def test_unified_surface_keeps_one_open_card_and_host_ordered_overflow(self):
+    script = r'''
+      function makeNode(tagName = "div") {
+        const node = {
+          tagName: tagName.toUpperCase(),
+          children: [],
+          dataset: {},
+          listeners: {},
+          hidden: false,
+          open: false,
+          disabled: false,
+          value: "",
+          textContent: "",
+          ownerDocument: null,
+          append(...children) {
+            for (const child of children) {
+              this.children.push(child);
+              child.parentNode = this;
+              if (child.name) this.elements._values[child.name] = child;
+              for (const descendant of child.children ?? []) {
+                if (descendant.name) this.elements._values[descendant.name] = descendant;
+              }
+            }
+          },
+          replaceChildren(...children) { this.children = []; this.append(...children); },
+          addEventListener(type, listener) { (this.listeners[type] ??= []).push(listener); },
+          dispatch(type, event = {}) {
+            event.target ??= this;
+            for (const listener of this.listeners[type] ?? []) listener(event);
+          },
+          setAttribute(name, value) { this[name] = String(value); },
+          removeAttribute(name) { delete this[name]; },
+          querySelector(selector) {
+            if (selector === "summary") {
+              return this.children.find((child) => child.tagName === "SUMMARY") ?? (this._summary ??= makeNode("summary"));
+            }
+            if (selector === "button[type=submit]") {
+              return this.children.flatMap((child) => child.children ?? []).find((child) => child.tagName === "BUTTON") ?? null;
+            }
+            return null;
+          },
+          querySelectorAll() { return []; },
+          focus() { this.focused = (this.focused ?? 0) + 1; },
+          showModal() { this.open = true; },
+        };
+        node.elements = { _values: {}, namedItem(name) { return this._values[name] ?? null; } };
+        return node;
+      }
+      const documentStub = {
+        createElement(tagName) { const node = makeNode(tagName); node.ownerDocument = documentStub; return node; },
+        documentElement: makeNode("html"),
+      };
+      const nodes = new Map();
+      const root = {
+        ownerDocument: documentStub,
+        querySelector(selector) {
+          if (!nodes.has(selector)) {
+            const node = documentStub.createElement(selector === "#action-preview-more" ? "details" : "div");
+            nodes.set(selector, node);
+          }
+          return nodes.get(selector);
+        },
+      };
+      globalThis.document = undefined;
+      const { normalizeActionViewModel, renderCampaignCoverage } = await import("./gui/app.mjs");
+      globalThis.document = documentStub;
+      const submitted = [];
+      const decisions = Array.from({ length: 7 }, (_, index) => ({
+        id: `decision-${index + 1}`,
+        label: `Decision ${index + 1}`,
+        command_template: `choose {{level}} ${index + 1}`,
+        uncertainty: "Host-reported uncertainty",
+        parameters: [{ name: "level", label: "Level", input_type: "number", min: 1, max: 5 }],
+      }));
+      const envelope = {
+        schema_version: "campaign-coverage-v1",
+        campaign_role: "Stabilization",
+        session: { campaign: "stabilization-v1", turn: 1, max_turns: 5, done: false },
+        stage: { label: "Turn 1", detail: "Visible stage" },
+        briefing: [], metrics: [], actors: [], processes: [], decisions,
+        history: [], debrief: [],
+      };
+      const normalized = normalizeActionViewModel(decisions[0], "commit");
+      if (normalized.id !== "decision-1" || normalized.submissionMode !== "commit") process.exit(1);
+      const result = renderCampaignCoverage(envelope, root, (command) => submitted.push(command));
+      const list = nodes.get("#action-preview-list");
+      const more = nodes.get("#action-preview-more");
+      if (!result.ok || list.children.length !== 6 || more.hidden || more.querySelector("summary").textContent !== "Show 1 more") process.exit(2);
+      const first = list.children[0];
+      const second = list.children[1];
+      const firstToggle = first.children[0].children[0];
+      const secondToggle = second.children[0].children[0];
+      firstToggle.dispatch("click");
+      if (first.children[1].hidden || second.children[1].hidden !== true || firstToggle.focused !== 1) process.exit(3);
+      secondToggle.dispatch("click");
+      if (first.children[1].hidden !== true || second.children[1].hidden || secondToggle.focused !== 1) process.exit(4);
+      const details = second.children[0].children[1];
+      details.dispatch("click", { stopPropagation() {} });
+      if (!nodes.get("#context-drawer").open) process.exit(5);
+      const form = second.children[1].children[0];
+      form.elements.namedItem("level").value = "3";
+      form.dispatch("submit", { preventDefault() {} });
+      if (submitted[0] !== "choose 3 2") process.exit(6);
+      console.log(JSON.stringify({ cards: list.children.length, overflow: more.querySelector("summary").textContent, submitted: submitted[0] }));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+    payload = json.loads(result.stdout)
+    self.assertEqual(payload["cards"], 6)
+    self.assertEqual(payload["overflow"], "Show 1 more")
+    self.assertEqual(payload["submitted"], "choose 3 2")
 
 
 if __name__ == "__main__":

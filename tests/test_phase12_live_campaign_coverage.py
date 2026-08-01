@@ -94,8 +94,8 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       "setMusicState(musicStateId, audioInput)",
       "competitive-regional-v1",
       "competitive_coverage_read_only",
-      "Use the competitive action rail",
-      "action rail remains usable",
+      "Choose an action",
+      "action surface remains usable",
     ):
       self.assertIn(marker, app + adapter)
     for forbidden in (
@@ -315,11 +315,9 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
       if (JSON.stringify(calls.filter(([kind]) => kind === "submit")) !== "[]") process.exit(2);
       if (actionControls.disabled || actionControls.hidden) process.exit(3);
       if (nodes.get("#campaign-coverage-panel").hidden) process.exit(4);
-      const decision = nodes.get("#campaign-decision-list").children[0];
-      const form = decision.children.find((child) => child.tagName === "FORM");
-      const button = form.children.find((child) => child.tagName === "BUTTON");
-      if (!button.disabled || button.textContent !== "Use the competitive action rail") process.exit(5);
-      console.log(JSON.stringify({ calls, action_controls_preserved: true, decision_read_only: true }));
+      if (nodes.has("#campaign-decision-list")) process.exit(5);
+      if (!nodes.get("#campaign-coverage-panel").dataset.workspaceAreas.includes("brief")) process.exit(6);
+      console.log(JSON.stringify({ calls, action_controls_preserved: true, decision_surface_removed: true }));
     '''
     result = subprocess.run(
       ["node", "--input-type=module", "-e", script],

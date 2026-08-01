@@ -96,7 +96,7 @@ CONTRACT_REQUIREMENTS = (
       "gui/app.mjs": ("renderActionCatalog", "command_template", "drafts"),
     },
     "tests": {
-      "tests/test_gui_contextual_actions.py": ("validateTurn", "actionCommand"),
+      "tests/test_gui_contextual_actions.py": ("validateTurn", "commandForParameters"),
       "tests/test_gui_first_month.py": ("drafts.length", "continue"),
     },
   },

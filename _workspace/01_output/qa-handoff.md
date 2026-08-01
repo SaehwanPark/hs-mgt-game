@@ -83,3 +83,12 @@ word-sized heading and value wrapping. Device source remains within the
 The refreshed verification run passes all 941 Python tests plus Node syntax,
 release/documentation, loading/offline, device-proxy, formatting, clippy, and
 Rust test checks.
+
+## Unified draft contextual actions v0.14.2
+
+The QA target is one host-ordered `Actions` surface for all three campaign
+types, with competitive `Monthly plan` validation and direct-card submission.
+Review must preserve canonical batches, host authority, rejection recovery,
+Details accessibility, focus/live-region behavior, live technical-control
+visibility, and the 445,000-byte source proxy. Human usability/accessibility
+and browser/device certification remain open gates.

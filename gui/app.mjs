@@ -399,7 +399,7 @@ function renderOnboarding(envelope, root, recorder) {
   if (!panel || !campaign || !next) return;
   const session = envelope?.session ?? envelope ?? {};
   const campaignId = session.campaign ?? "the current campaign";
-  campaign.textContent = `${campaignId} · start with the visible briefing and one host-shaped decision.`;
+  campaign.textContent = `${campaignId} · start with the visible briefing and choose an action.`;
   next.textContent = session.done ? "Review the debrief" : "Review the current briefing";
   next.onclick = (event) => {
     event.__hsMgtPlaytestRecorded = true;
@@ -566,10 +566,15 @@ export function createPresentationSettings({ root = document, recorder, storage,
 function setReadOnlyControls(root, readOnly) {
   const form = root.querySelector("#command-form");
   if (form) form.hidden = readOnly;
+  const technical = root.querySelector("#technical-controls");
+  if (technical) {
+    technical.hidden = readOnly;
+    if (readOnly) technical.open = false;
+  }
   const commands = root.querySelector("#legal-command-list");
   if (readOnly && commands) {
     commands.replaceChildren();
-    emptyState(commands, "Action submission is deferred to Phase 3.");
+    emptyState(commands, "Submission is unavailable in this view.");
   }
 }
 
@@ -1343,86 +1348,59 @@ function setCampaignCoverageReviewSurface(root, active) {
   }
 }
 
-function coverageCommand(decision, form) {
-  let command = String(decision.command_template ?? "");
-  for (const parameter of decision.parameters ?? []) {
-    const input = form.elements.namedItem(parameter.name);
-    const value = input?.value ?? "";
-    if (!value) return { ok: false, message: `Enter ${parameter.label ?? parameter.name}.` };
-    command = command.replaceAll(`{{${parameter.name}}}`, value);
-  }
-  return { ok: true, command };
+function normalizeActionParameter(parameter = {}) {
+  const options = (parameter.options ?? []).map((option) => {
+    const value = String(option?.value ?? option?.label ?? option ?? "");
+    return { value, label: String(option?.label ?? value) };
+  });
+  const name = String(parameter.name ?? "parameter");
+  return {
+    name,
+    label: String(parameter.label ?? name),
+    inputType: String(parameter.input_type ?? "text"),
+    options,
+    min: parameter.min,
+    max: parameter.max,
+  };
 }
 
-function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
-  const list = root.querySelector("#campaign-decision-list");
-  if (!list) return;
-  const canSubmit = typeof onSubmit === "function";
-  const renderItem = (decision) => {
-    const item = document.createElement("article");
-    item.className = "campaign-decision-card";
-    const heading = document.createElement("h4");
-    heading.textContent = String(decision.label ?? "Campaign decision");
-    const uncertainty = document.createElement("p");
-    uncertainty.textContent = String(decision.uncertainty ?? "Future response remains uncertain.");
-    const form = document.createElement("form");
-    form.className = "campaign-decision-form";
-    for (const parameter of decision.parameters ?? []) {
-      const label = document.createElement("label");
-      label.textContent = String(parameter.label ?? parameter.name);
-      let input;
-      if (parameter.input_type === "select") {
-        input = document.createElement("select");
-        for (const option of parameter.options ?? []) {
-          const optionNode = document.createElement("option");
-          optionNode.value = String(option.value);
-          optionNode.textContent = String(option.label ?? option.value);
-          input.append(optionNode);
-        }
-      } else {
-        input = document.createElement("input");
-        input.type = parameter.input_type ?? "text";
-        if (parameter.min != null) input.min = String(parameter.min);
-        if (parameter.max != null) input.max = String(parameter.max);
-        input.inputMode = parameter.input_type === "number" ? "numeric" : "text";
-      }
-      input.name = parameter.name;
-      input.required = true;
-      label.append(input);
-      form.append(label);
-    }
-    const button = document.createElement("button");
-    button.type = "submit";
-    button.disabled = !canSubmit;
-    button.textContent = canSubmit
-      ? decision.parameters?.length ? "Submit host-shaped decision" : "Commit decision"
-      : "Use the competitive action rail";
-    form.append(button);
-    if (canSubmit) {
-      form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const result = coverageCommand(decision, form);
-        if (!result.ok) {
-          setPresentationState(root, result.message);
-          return;
-        }
-        onSubmit(result.command);
-      });
-    }
-    item.append(heading, uncertainty, form);
-    appendSource(item, decision.source);
-    return item;
+export function normalizeActionViewModel(spec = {}, submissionMode = "draft", source = null) {
+  const id = String(spec.id ?? spec.action_id ?? "action");
+  const details = {
+    timing: spec.delay_label ?? spec.delay ?? spec.timing ?? null,
+    constraint: spec.constraint_label ?? spec.constraint ?? null,
+    uncertainty: spec.uncertainty_label ?? spec.uncertainty ?? null,
+    cost: spec.cost ?? null,
+    commandTemplate: spec.command_template ?? spec.command ?? null,
+    source: source ?? spec.source ?? null,
   };
-  renderBoundedCollection({
-    list,
-    overflow: root.querySelector("#campaign-decision-overflow-list"),
-    details: root.querySelector("#campaign-decision-more"),
-    items: decisions,
-    limit: DEFAULT_VISIBLE_COUNTS.actions,
-    label: "additional campaign decisions",
-    renderItem,
-    emptyMessage: "No campaign decision is available.",
-  });
+  return {
+    id,
+    label: String(spec.label ?? spec.title ?? id),
+    parameters: (spec.parameters ?? []).map(normalizeActionParameter),
+    submissionMode,
+    details,
+  };
+}
+
+export function normalizeCampaignDecision(decision = {}) {
+  return normalizeActionViewModel(decision, "commit", decision.source ?? "CampaignCoverage.decisions");
+}
+
+function commandForParameters(action, params) {
+  return String(action?.details?.commandTemplate ?? "").replace(/\{\{(.*?)\}\}/g, (_, name) => String(params[name] ?? ""));
+}
+
+function collectActionParameters(form, action) {
+  const params = {};
+  for (const parameter of action.parameters ?? []) {
+    const input = form?.elements?.namedItem?.(parameter.name);
+    params[parameter.name] = String(input?.value ?? "");
+  }
+  const missing = (action.parameters ?? []).find((parameter) => !params[parameter.name]);
+  return missing
+    ? { ok: false, message: `Enter ${missing.label}.` }
+    : { ok: true, params };
 }
 
 export function renderCampaignCoverage(envelope, root = document, onSubmit = null) {
@@ -1432,6 +1410,7 @@ export function renderCampaignCoverage(envelope, root = document, onSubmit = nul
   }
   if (panel) panel.hidden = false;
   if (panel) panel.dataset.workspaceReady = "true";
+  if (panel) panel.dataset.workspaceAreas = "brief resolve review";
   setCampaignCoverageReviewSurface(root, true);
   const role = root.querySelector("#campaign-role");
   const stage = root.querySelector("#campaign-stage");
@@ -1443,7 +1422,18 @@ export function renderCampaignCoverage(envelope, root = document, onSubmit = nul
   renderCampaignCoverageMetrics(envelope.metrics, root);
   renderCampaignCoverageActors(envelope.actors, root);
   renderCampaignCoverageProcesses(envelope.processes, root);
-  renderCampaignCoverageDecisions(envelope.decisions, root, onSubmit);
+  if (envelope.session?.campaign !== "competitive-regional-v1") {
+    renderUnifiedActionSurface(
+      (envelope.decisions ?? []).map(normalizeCampaignDecision),
+      root,
+      {
+        onSubmit: typeof onSubmit === "function"
+          ? (action, params, form, command, item) => onSubmit(command, action, params, form, item)
+          : null,
+        submissionMode: "commit",
+      },
+    );
+  }
   renderCampaignCoverageResolution(envelope, root);
   renderCampaignCoverageHistory(envelope.history, root);
   const debrief = root.querySelector("#campaign-debrief-list");
@@ -1481,6 +1471,7 @@ export function createCampaignCoverageClient({
   const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
   function applyCoverageEnvelope(envelope, onSubmit, clearExistingRecovery = true) {
+    setReadOnlyControls(root, true);
     const result = renderCampaignCoverage(envelope, root, onSubmit);
     if (!result.ok) return result;
     currentEnvelope = envelope;
@@ -1528,7 +1519,7 @@ export function createCampaignCoverageClient({
     configureRecovery(root, () => loadCompanion(sessionId), recorder);
     if (!adapter || typeof adapter.getCampaignCoverage !== "function") {
       recordPlaytestFailure(recorder, "campaign_coverage_companion_missing", "Campaign coverage adapter is unavailable.");
-      showRecovery(root, "Competitive campaign context is unavailable; the action rail remains usable.");
+      showRecovery(root, "Competitive campaign context is unavailable; the action surface remains usable.");
       return { ok: false, code: "campaign_coverage_companion_missing" };
     }
     try {
@@ -1536,21 +1527,21 @@ export function createCampaignCoverageClient({
       const result = applyCoverageEnvelope(envelope, null, false);
       if (!result.ok) {
         recordPlaytestFailure(recorder, "campaign_coverage_companion_schema", "Campaign coverage companion schema is unavailable.");
-        showRecovery(root, "Competitive campaign context could not be read; the action rail remains usable.");
+        showRecovery(root, "Competitive campaign context could not be read; the action surface remains usable.");
         return result;
       }
       return result;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       recordPlaytestFailure(recorder, "campaign_coverage_companion_error", message);
-      showRecovery(root, `Competitive campaign context could not be read; the action rail remains usable: ${message}`);
+      showRecovery(root, `Competitive campaign context could not be read; the action surface remains usable: ${message}`);
       return { ok: false, code: "campaign_coverage_companion_error", message };
     }
   }
 
   async function submit(command) {
     if (currentEnvelope?.session?.campaign === "competitive-regional-v1") {
-      const message = "Competitive campaign coverage is a read-only projection; use the validated action rail.";
+      const message = "Competitive campaign coverage is a read-only projection; use the action plan.";
       setPresentationState(root, message);
       recordPlaytestFailure(recorder, "competitive_coverage_read_only", message);
       showRecovery(root, message);
@@ -1650,42 +1641,217 @@ export function createRegionalWorldClient({ adapter = globalThis.HsMgtGameReadOn
   return { load, get envelope() { return currentEnvelope; } };
 }
 
-function renderActions(actions, root) {
+function actionDocument(root) {
+  return root?.ownerDocument?.createElement
+    ? root.ownerDocument
+    : root?.createElement
+      ? root
+      : root?.documentElement?.ownerDocument ?? globalThis.document;
+}
+
+function actionState(root) {
+  return root?.dataset ?? root?.documentElement?.dataset ?? (root.__hsMgtActionState ??= {});
+}
+
+function actionNode(root, tag, text, className, attrs = {}) {
+  const node = actionDocument(root).createElement(tag);
+  if (text != null) node.textContent = String(text);
+  if (className) node.className = className;
+  for (const [key, value] of Object.entries(attrs)) {
+    if (key.includes("-")) node.setAttribute(key, String(value));
+    else node[key] = value;
+  }
+  return node;
+}
+
+function renderActionDetails(action, root) {
+  const drawer = root.querySelector("#context-drawer");
+  const detail = root.querySelector("#entity-detail");
+  const heading = root.querySelector("#entity-heading");
+  if (!drawer || !detail || !heading) return false;
+  heading.textContent = `${action.label} details`;
+  detail.replaceChildren();
+  detail.append(actionNode(root, "p", "These details come from the current host read."));
+  const rows = [
+    ["Timing", action.details.timing],
+    ["Rules", action.details.constraint],
+    ["Uncertainty", action.details.uncertainty],
+    ["Cost", action.details.cost],
+    ["Canonical command", action.details.commandTemplate],
+  ];
+  const list = actionNode(root, "dl", null, "detail-metrics");
+  for (const [label, value] of rows) {
+    list.append(actionNode(root, "dt", label), actionNode(root, "dd", value ?? "Not provided by the host."));
+  }
+  detail.append(list);
+  appendSource(detail, action.details.source ?? "Not provided by the host.");
+  openContextDrawer(root);
+  return true;
+}
+
+function renderUnifiedActionSurface(actions, root, { onSubmit = null, onChange = null, submissionMode = "read-only" } = {}) {
   const list = root.querySelector("#action-preview-list");
-  const renderItem = (action) => {
-    const item = document.createElement("article");
-    item.className = "action-card";
-    const heading = document.createElement("div");
-    heading.className = "action-heading";
-    const title = document.createElement("strong");
-    title.textContent = String(action.label ?? "Action preview");
-    heading.append(title, createStatus("uncertain", "Preview"));
-    const command = document.createElement("p");
-    command.className = "command-preview";
-    command.textContent = String(action.command ?? "Canonical command unavailable");
-    const meta = document.createElement("div");
-    meta.className = "action-meta";
-    for (const value of [action.cost, action.delay, action.constraint]) {
-      const line = document.createElement("span");
-      line.textContent = String(value ?? "Unavailable");
-      meta.append(line);
+  if (!list) return { ok: false, code: "action_surface_missing" };
+  const surfaceRoot = root.querySelector("#action-builder");
+  if (surfaceRoot) surfaceRoot.hidden = false;
+  const cards = new Map();
+  let expandedId = null;
+  const normalizedActions = Array.isArray(actions) ? actions : [];
+
+  const setExpanded = (id, focus = false) => {
+    expandedId = id;
+    for (const [actionId, card] of cards) {
+      const open = actionId === id;
+      card.element.dataset.expanded = String(open);
+      card.body.hidden = !open;
+      card.toggle.setAttribute("aria-expanded", String(open));
     }
-    const uncertainty = document.createElement("p");
-    uncertainty.textContent = String(action.uncertainty ?? "Realized outcome remains uncertain.");
-    item.append(heading, command, meta, uncertainty);
-    appendSource(item, action.source);
+    if (focus && id) cards.get(id)?.toggle.focus?.({ preventScroll: true });
+  };
+
+  const renderItem = (action) => {
+    const item = actionNode(root, "article", null, "action-card");
+    item.dataset.actionId = action.id;
+    item.dataset.expanded = "false";
+    const header = actionNode(root, "div", null, "action-card-header");
+    const bodyId = `action-body-${action.id.replace(/[^A-Za-z0-9_-]/g, "-")}`;
+    const toggle = actionNode(root, "button", null, "action-toggle", {
+      type: "button", "aria-expanded": false, "aria-controls": bodyId,
+    });
+    toggle.append(actionNode(root, "strong", action.label), actionNode(root, "span", action.details.timing ?? "Details available", "muted"));
+    const detailsButton = actionNode(root, "button", "Details", "action-details visual-token", { type: "button" });
+    detailsButton.title = "Timing, rules, uncertainty, command, and source";
+    const tooltip = actionNode(root, "span", "Timing, rules, uncertainty, command, and source", "visual-token-help");
+    tooltip.setAttribute("role", "tooltip");
+    detailsButton.append(tooltip);
+    detailsButton.addEventListener?.("click", (event) => {
+      event.stopPropagation?.();
+      detailsButton.dataset.tooltipOpen = "true";
+      renderActionDetails(action, root);
+    });
+    toggle.addEventListener?.("click", () => setExpanded(expandedId === action.id ? null : action.id, true));
+    header.append(toggle, detailsButton);
+
+    const body = actionNode(root, "div", null, "action-card-body");
+    body.id = bodyId;
+    body.hidden = true;
+    const form = actionNode(root, "form", null, "action-card-form");
+    form.dataset.actionId = action.id;
+    for (const parameter of action.parameters ?? []) {
+      const label = actionNode(root, "label", parameter.label);
+      const input = actionNode(root, parameter.inputType === "select" ? "select" : "input", null, null, {
+        name: parameter.name, required: true,
+      });
+      if (parameter.inputType !== "select") {
+        input.type = parameter.inputType;
+        if (parameter.min != null) input.min = String(parameter.min);
+        if (parameter.max != null) input.max = String(parameter.max);
+        if (parameter.inputType === "number") input.inputMode = "numeric";
+      } else for (const option of parameter.options) {
+        input.append(actionNode(root, "option", option.label, null, { value: option.value }));
+      }
+      label.append(input);
+      form.append(label);
+    }
+    const submitButton = actionNode(
+      root,
+      "button",
+      submissionMode === "draft" ? "Add" : submissionMode === "commit" ? "Commit decision" : "Read only",
+      null,
+      { type: "submit", disabled: submissionMode === "read-only" || typeof onSubmit !== "function" },
+    );
+    form.append(submitButton);
+    if (submissionMode === "draft" && typeof onChange === "function") {
+      form.addEventListener?.("input", () => onChange(action, form));
+      form.addEventListener?.("change", () => onChange(action, form));
+    }
+    form.addEventListener?.("submit", (event) => {
+      event.preventDefault?.();
+      if (submitButton.disabled) return;
+      const result = collectActionParameters(form, action);
+      if (!result.ok) {
+        setPresentationState(root, result.message);
+        return;
+      }
+      onSubmit(action, result.params, form, commandForParameters(action, result.params), item);
+    });
+    body.append(form);
+    item.append(header, body);
+    cards.set(action.id, { action, element: item, body, form, submitButton, toggle });
     return item;
   };
+
   renderBoundedCollection({
     list,
     overflow: root.querySelector("#action-preview-overflow-list"),
     details: root.querySelector("#action-preview-more"),
-    items: actions,
+    items: normalizedActions,
     limit: DEFAULT_VISIBLE_COUNTS.actions,
-    label: "additional action previews",
+    label: "more actions",
     renderItem,
-    emptyMessage: "No contextual action previews available.",
+    emptyMessage: submissionMode === "commit" ? "No campaign action is available." : "No action is available.",
   });
+  const actionMore = root.querySelector("#action-preview-more");
+  if (actionMore && normalizedActions.length > DEFAULT_VISIBLE_COUNTS.actions) {
+    const remaining = normalizedActions.length - DEFAULT_VISIBLE_COUNTS.actions;
+    const summary = actionMore.querySelector?.("summary");
+    if (summary) summary.textContent = `Show ${remaining} more`;
+  }
+  actionState(root).actionSubmissionMode = submissionMode;
+  const surface = {
+    expand(id, focus = true) {
+      const card = cards.get(id);
+      if (!card) return false;
+      setExpanded(id, focus);
+      return true;
+    },
+    edit(id, params = {}) {
+      const card = cards.get(id);
+      if (!card) {
+        const more = root.querySelector("#action-preview-more");
+        if (more) more.open = true;
+        return false;
+      }
+      const overflow = card.element.closest?.("#action-preview-more");
+      if (overflow) overflow.open = true;
+      setExpanded(id);
+      for (const [name, value] of Object.entries(params)) {
+        const input = card.form.elements?.namedItem?.(name);
+        if (input) input.value = value;
+      }
+      card.submitButton.textContent = "Save";
+      card.form.dataset.editing = "true";
+      card.toggle.focus?.({ preventScroll: true });
+      return true;
+    },
+    resetEditing() {
+      for (const card of cards.values()) {
+        card.submitButton.textContent = "Add";
+        card.form.dataset.editing = "false";
+      }
+    },
+  };
+  root.__hsMgtActionSurface = surface;
+  return { ok: true, actions: normalizedActions, surface };
+}
+
+function renderActions(actions, root) {
+  const normalized = (actions ?? []).map((action, index) => normalizeActionViewModel({
+    id: action.id ?? action.action_id ?? `action-${index + 1}`,
+    label: action.label ?? "Action",
+    command: action.command,
+    cost: action.cost,
+    delay: action.delay,
+    constraint: action.constraint,
+    uncertainty: action.uncertainty,
+    source: action.source,
+  }, "read-only", action.source));
+  const result = renderUnifiedActionSurface(normalized, root, { submissionMode: "read-only" });
+  if (!normalized.length) {
+    const surfaceRoot = root.querySelector("#action-builder");
+    if (surfaceRoot) surfaceRoot.hidden = true;
+  }
+  return result;
 }
 
 function renderPending(items, root) {
@@ -2298,6 +2464,7 @@ function clearReadOnlySurface(root, message) {
   if (campaignCoveragePanel) {
     campaignCoveragePanel.hidden = true;
     campaignCoveragePanel.dataset.workspaceReady = "false";
+    campaignCoveragePanel.dataset.workspaceAreas = "brief decide resolve review";
   }
   setCampaignCoverageReviewSurface(root, false);
   renderPresentation({ presentation_fixture: undefined }, root);
@@ -2310,7 +2477,7 @@ function clearReadOnlySurface(root, message) {
   emptyState(debrief, "Debrief is unavailable in the read-only session view.");
   const commands = root.querySelector("#legal-command-list");
   commands.replaceChildren();
-  emptyState(commands, "Action submission is deferred to Phase 3.");
+  emptyState(commands, "Submission is unavailable in this view.");
   setEndSessionControl(root, false);
   setReadOnlyControls(root, true);
   setPresentationState(root, message);
@@ -2339,6 +2506,7 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
   if (campaignCoveragePanel) {
     campaignCoveragePanel.hidden = true;
     campaignCoveragePanel.dataset.workspaceReady = "false";
+    campaignCoveragePanel.dataset.workspaceAreas = "brief decide resolve review";
   }
   setCampaignCoverageReviewSurface(root, false);
   const fixture = readOnlyEnvelopeToFixture(envelope);
@@ -2350,7 +2518,7 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
   emptyState(debrief, "Debrief is supplied by the host end-session view.");
   const commands = root.querySelector("#legal-command-list");
   commands.replaceChildren();
-  emptyState(commands, "Action submission is deferred to Phase 3.");
+  emptyState(commands, "Submission is unavailable in this view.");
   setReadOnlyControls(root, true);
   const latestHash = envelope.replay?.latest_state_hash ?? "no committed hash yet";
   const session = envelope.session;
@@ -2422,6 +2590,7 @@ export function renderEndSessionEnvelope(envelope, root = document) {
   if (campaignCoveragePanel && envelope.campaign === "competitive-regional-v1") {
     campaignCoveragePanel.hidden = true;
     campaignCoveragePanel.dataset.workspaceReady = "false";
+    campaignCoveragePanel.dataset.workspaceAreas = "brief decide resolve review";
   }
   setCampaignCoverageReviewSurface(root, false);
   setReadOnlyControls(root, true);
@@ -2707,7 +2876,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     currentEnvelope = null;
     renderEnvelope({ ...demoEnvelope, legal_commands: [], presentation_fixture: fixture }, root);
     setEndSessionControl(root, false);
-    setReadOnlyControls(root, true);
+    setReadOnlyControls(root, false);
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
     firstMonthFlow.update({
       sessionLoaded: true,
@@ -2810,155 +2979,93 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
 }
 
 function setActionControls(root, enabled) {
-  for (const selector of ["#action-builder", "#draft-action-list", "#validate-actions", "#submit-month"]) {
+  const mode = actionState(root).actionSubmissionMode ?? "read-only";
+  const surfaceRoot = root.querySelector("#action-builder");
+  if (surfaceRoot) surfaceRoot.hidden = !enabled;
+  const plan = root.querySelector("#action-plan");
+  if (plan) plan.hidden = mode !== "draft" || !enabled;
+  for (const selector of ["#draft-action-list", "#validate-actions", "#submit-month", "#cancel-edit"]) {
     const node = root.querySelector(selector);
-    if (node) node.hidden = !enabled;
+    if (node) {
+      node.hidden = !enabled || mode !== "draft";
+      node.disabled = !enabled;
+    }
   }
-}
-
-function actionCommand(spec, params) {
-  return spec.command_template.replace(/\{\{(.*?)\}\}/g, (_, name) => String(params[name] ?? ""));
 }
 
 function renderDraftActions(drafts, root, onRemove, onRevise) {
   const list = root.querySelector("#draft-action-list");
+  if (!list) return;
   list.replaceChildren();
   for (const [index, draft] of drafts.entries()) {
-    const item = document.createElement("li");
-    item.className = "draft-action";
-    const command = document.createElement("code");
-    command.textContent = draft.command;
-    const controls = document.createElement("span");
-    const revise = document.createElement("button");
+    const item = actionNode(root, "li", null, "draft-action");
+    const detail = actionNode(root, "div");
+    detail.append(actionNode(root, "strong", draft.label ?? draft.action?.label ?? draft.action_id ?? "Action"));
+    const params = actionNode(root, "small");
+    const labels = draft.action?.parameters ?? [];
+    params.textContent = labels.length
+      ? labels.map((parameter) => `${parameter.label}: ${draft.params?.[parameter.name] ?? "—"}`).join(" · ")
+      : "No parameters";
+    detail.append(params);
+    const controls = actionNode(root, "span");
+    const revise = actionNode(root, "button", "Revise");
     revise.type = "button";
-    revise.textContent = "Revise";
     revise.addEventListener("click", () => onRevise(index));
-    const remove = document.createElement("button");
+    const remove = actionNode(root, "button", "Remove");
     remove.type = "button";
-    remove.textContent = "Remove";
     remove.addEventListener("click", () => onRemove(index));
     controls.append(revise, remove);
-    item.append(command, controls);
+    item.append(detail, controls);
     list.append(item);
   }
-  if (!drafts.length) emptyState(list, "No draft actions. Add Hold or another host-catalogued action.");
+  if (!drafts.length) emptyState(list, "Your plan is empty. Add an action.");
+  const cancel = root.querySelector("#cancel-edit");
+  if (cancel) cancel.hidden = actionState(root).actionEditing !== "true";
 }
 
-function renderActionCatalog(catalog, root, onAdd) {
-  const list = root.querySelector("#action-preview-list");
-  const builder = root.querySelector("#action-builder");
-  builder.replaceChildren();
-  const renderItem = (spec) => {
-    const item = document.createElement("article");
-    item.className = "action-card action-catalog-card";
-    const heading = document.createElement("div");
-    heading.className = "action-heading";
-    const title = document.createElement("strong");
-    title.textContent = spec.label ?? spec.id ?? "Action";
-    heading.append(title, createStatus("reported", "Host catalog"));
-    const command = document.createElement("p");
-    command.className = "command-preview";
-    command.textContent = spec.command_template ?? "Canonical template unavailable";
-    const meta = document.createElement("div");
-    meta.className = "action-meta";
-    for (const value of [spec.delay_label, spec.constraint_label, spec.uncertainty_label]) {
-      const line = document.createElement("span");
-      line.textContent = String(value ?? "Host metadata unavailable");
-      meta.append(line);
-    }
-    item.append(heading, command, meta);
-    appendSource(item, `ActionCatalog.${spec.id ?? "unknown"}`);
-    return item;
-  };
-  const actions = catalog.actions ?? [];
-  renderBoundedCollection({
-    list,
-    overflow: root.querySelector("#action-preview-overflow-list"),
-    details: root.querySelector("#action-preview-more"),
-    items: actions,
-    limit: DEFAULT_VISIBLE_COUNTS.actions,
-    label: "additional host actions",
-    renderItem,
-    emptyMessage: "No host action catalog is available.",
+function renderActionCatalog(catalog, root, onAdd, onChange = null) {
+  const actions = (catalog?.actions ?? []).map((spec) => normalizeActionViewModel(
+    spec,
+    "draft",
+    spec.source ?? (spec.id ? `ActionCatalog.${spec.id}` : null),
+  ));
+  actionState(root).actionSubmissionMode = "draft";
+  return renderUnifiedActionSurface(actions, root, {
+    submissionMode: "draft",
+    onSubmit: (action, params, form, command) => onAdd(action, params, form, command),
+    onChange,
   });
-  for (const spec of actions) {
-
-    const form = document.createElement("form");
-    form.className = "action-builder-form";
-    form.dataset.actionId = spec.id ?? "";
-    const formHeading = document.createElement("h3");
-    formHeading.textContent = `Add ${spec.label ?? spec.id ?? "action"}`;
-    form.append(formHeading);
-    for (const parameter of spec.parameters ?? []) {
-      const label = document.createElement("label");
-      label.textContent = parameter.label ?? parameter.name;
-      let input;
-      if (parameter.input_type === "select") {
-        input = document.createElement("select");
-        for (const option of parameter.options ?? []) {
-          const optionNode = document.createElement("option");
-          optionNode.value = option;
-          optionNode.textContent = option;
-          input.append(optionNode);
-        }
-      } else {
-        input = document.createElement("input");
-        input.type = parameter.input_type ?? "text";
-        if (parameter.min != null) input.min = String(parameter.min);
-        if (parameter.max != null) input.max = String(parameter.max);
-      }
-      input.name = parameter.name;
-      input.required = true;
-      label.append(input);
-      form.append(label);
-    }
-    const add = document.createElement("button");
-    add.type = "submit";
-    add.textContent = "Add to draft";
-    form.append(add);
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const params = {};
-      for (const parameter of spec.parameters ?? []) {
-        const input = form.elements.namedItem(parameter.name);
-        params[parameter.name] = input?.value ?? "";
-      }
-      if ((spec.parameters ?? []).some((parameter) => !params[parameter.name])) {
-        setPresentationState(root, "Complete each required action field before adding it.");
-        return;
-      }
-      onAdd(spec, params, form);
-    });
-    builder.append(form);
-  }
 }
 
 function renderValidation(validation, root) {
   const status = root.querySelector("#validation-status");
   const submit = root.querySelector("#submit-month");
+  const previews = root.querySelector("#validation-preview-list");
   if (!validation) {
-    if (status) status.textContent = "Draft actions need host validation before submission.";
+    if (status) status.textContent = "Add actions to build a plan.";
     if (submit) submit.hidden = true;
+    previews?.replaceChildren();
     return;
   }
   if (status) {
     status.textContent = validation.valid
-      ? `Host validation passed: ${validation.cost?.action_points ?? "?"} AP · ${validation.cost?.cash_cost ?? "?"} cash · ${validation.cost?.political_capital ?? "?"} political capital.`
-      : `Host validation rejected the draft: ${(validation.errors ?? []).join(" ")}`;
+      ? `Plan checked: ${validation.cost?.action_points ?? "?"} AP · ${validation.cost?.cash_cost ?? "?"} cash · ${validation.cost?.political_capital ?? "?"} political capital.`
+      : `Plan needs changes: ${(validation.errors ?? []).join(" ")}`;
   }
   if (submit) submit.hidden = !validation.valid;
-  renderActions(
-    (validation.previews ?? []).map((preview) => ({
-      label: preview.action_id ?? "Validated action",
-      command: preview.canonical_command,
-      cost: `${preview.cost?.action_points ?? "?"} AP · ${preview.cost?.cash_cost ?? "?"} cash · ${preview.cost?.political_capital ?? "?"} political capital`,
-      delay: preview.delay_label,
-      uncertainty: preview.uncertainty_label,
-      constraint: preview.constraint_label,
-      source: "ValidateTurn.host",
-    })),
-    root,
-  );
+  if (!previews) return;
+  previews.replaceChildren();
+  for (const preview of validation.previews ?? []) {
+    const item = actionNode(root, "li");
+    item.append(
+      actionNode(root, "strong", preview.action_id ?? "Checked action"),
+      actionNode(root, "span", ` · ${preview.cost?.action_points ?? "?"} AP · ${preview.cost?.cash_cost ?? "?"} cash · ${preview.cost?.political_capital ?? "?"} political capital`),
+    );
+    const details = actionNode(root, "details");
+    details.append(actionNode(root, "summary", "Details"), actionNode(root, "code", preview.canonical_command ?? "Not provided by the host.", "command-preview"));
+    item.append(details);
+    previews.append(item);
+  }
 }
 
 export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter, root = document, recorder = null, storage } = {}) {
@@ -3025,10 +3132,13 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   }
 
   function renderDraftState() {
+    actionState(root).actionEditing = editingIndex == null ? "false" : "true";
     renderDraftActions(
       drafts,
       root,
       (index) => {
+        editingIndex = null;
+        root.__hsMgtActionSurface?.resetEditing?.();
         drafts.splice(index, 1);
         audioClient.playCue("ui.action-remove");
         invalidateDraft();
@@ -3036,18 +3146,39 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       },
       (index) => {
         const draft = drafts[index];
-        const form = root.querySelector(`form[data-action-id="${draft.action_id}"]`);
-        if (!form) return;
-        for (const [name, value] of Object.entries(draft.params)) {
-          const input = form.elements.namedItem(name);
-          if (input) input.value = value;
-        }
         editingIndex = index;
-        const button = form.querySelector("button[type=submit]");
-        if (button) button.textContent = "Replace draft";
+        invalidateDraft();
+        renderDraftState();
+        root.__hsMgtActionSurface?.edit?.(draft.action_id, draft.params);
         setPresentationState(root, `Revising draft action ${index + 1}.`);
       },
     );
+  }
+
+  function handleDraftSubmit(action, params, form, command) {
+    const draft = {
+      action_id: action.id,
+      label: action.label,
+      action,
+      params,
+      command,
+    };
+    const targetIndex = editingIndex;
+    if (targetIndex == null) drafts.push(draft);
+    else drafts[targetIndex] = draft;
+    editingIndex = null;
+    root.__hsMgtActionSurface?.resetEditing?.();
+    invalidateDraft();
+    audioClient.playCue("ui.action-add");
+    renderDraftState();
+    setActionControls(root, true);
+    const added = root.querySelector(`#draft-action-list li:nth-child(${(targetIndex ?? drafts.length - 1) + 1})`);
+    if (added) {
+      added.tabIndex = -1;
+      added.focus?.({ preventScroll: true });
+    }
+    setPresentationState(root, targetIndex == null ? `${action.label} added to your plan.` : `${action.label} saved.`);
+    return { ok: true, action, params, form };
   }
 
   async function validateDraft() {
@@ -3169,6 +3300,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     } else {
       renderEnvelope(response, root);
     }
+    if (catalog) renderActionCatalog(catalog, root, handleDraftSubmit, () => {
+      if (actionState(root).actionEditing === "true") invalidateDraft();
+    });
+    setReadOnlyControls(root, true);
     setActionControls(root, true);
     renderDraftState();
     renderValidation(null, root);
@@ -3187,12 +3322,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     sessionId = requestedSessionId;
     sessionStore.set(requestedSessionId);
     adapter.activateSession?.(requestedSessionId, result.envelope?.session?.campaign ?? null);
-    setActionControls(root, false);
-    renderActions([], root);
+    actionState(root).actionSubmissionMode = "commit";
+    setActionControls(root, true);
     renderDraftState();
     renderValidation(null, root);
     const actionMode = root.querySelector("#action-mode");
-    if (actionMode) actionMode.textContent = "campaign coverage · host-shaped decisions";
+    if (actionMode) actionMode.textContent = "Choose an action";
     firstMonthFlow.update({
       flow: "campaign-coverage",
       sessionLoaded: true,
@@ -3211,7 +3346,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     checkpointClient.setEnabled(
       typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
     );
-    setPresentationState(root, `${result.envelope.session.campaign} campaign coverage loaded; choose a host-shaped decision.`);
+    setPresentationState(root, `${result.envelope.session.campaign} actions loaded; choose an action.`);
     return result;
   }
 
@@ -3222,10 +3357,11 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
     configureRecovery(root, () => load(requestedSessionId), recorder);
     const actionMode = root.querySelector("#action-mode");
+    setReadOnlyControls(root, true);
     if (!replacingSession && !sessionId) {
       setActionControls(root, false);
       renderActions([], root);
-      if (actionMode) actionMode.textContent = "read-only view · actions deferred to Phase 3";
+      if (actionMode) actionMode.textContent = "Choose an action";
     }
     setPresentationState(root, "Loading action catalog…");
     if (adapter && !requestedSessionId) {
@@ -3299,26 +3435,11 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         await refreshCompetitiveCoverageCompanion(requestedSessionId);
       }
       catalog = nextCatalog;
-      renderActionCatalog(catalog, root, (spec, params, form) => {
-        const draft = { action_id: spec.id, params, command: actionCommand(spec, params) };
-        if (editingIndex == null) drafts.push(draft);
-        else drafts[editingIndex] = draft;
-        editingIndex = null;
-        firstMonthFlow.update({
-          sessionLoaded: true,
-          actionCatalogLoaded: true,
-          draftCount: drafts.length,
-          validated: false,
-        });
-        const button = form.querySelector("button[type=submit]");
-        if (button) button.textContent = "Add to draft";
-        invalidateDraft();
-        audioClient.playCue("ui.action-add");
-        renderDraftState();
-        setActionControls(root, true);
+      renderActionCatalog(catalog, root, handleDraftSubmit, () => {
+        if (actionState(root).actionEditing === "true") invalidateDraft();
       });
       setActionControls(root, true);
-      if (actionMode) actionMode.textContent = "host-catalogued draft builder";
+      if (actionMode) actionMode.textContent = "Build your plan";
       renderDraftState();
       renderValidation(null, root);
       firstMonthFlow.update({
@@ -3333,7 +3454,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         resolutionReviewed: false,
       });
       workspaceEvent(root, { type: "session_loaded", done: Boolean(presentation?.session?.done) }, { focus: false });
-      setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
+      setPresentationState(root, "Actions loaded; build your plan.");
       sessionId = requestedSessionId;
       sessionStore.set(requestedSessionId);
       adapter.activateSession?.(requestedSessionId);
@@ -3394,6 +3515,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
 
   root.querySelector("#validate-actions")?.addEventListener("click", validateDraft);
   root.querySelector("#submit-month")?.addEventListener("click", submit);
+  root.querySelector("#cancel-edit")?.addEventListener("click", () => {
+    editingIndex = null;
+    root.__hsMgtActionSurface?.resetEditing?.();
+    renderDraftState();
+    setPresentationState(root, "Revision cancelled.");
+  });
   root.querySelector("#session-end")?.addEventListener("click", endSession);
   const sessionLauncher = createSessionLauncher({ adapter, root, load, recorder, sessionStore });
   return { load, validate: validateDraft, submit, endSession, sessionLauncher, sessionStore, firstMonthFlow, audio: audioClient, settings, history: historyClient, replay: replayClient, checkpoint: checkpointClient, regionalWorld: regionalWorldClient, campaignCoverage: campaignCoverageClient, get drafts() { return drafts; } };
@@ -4076,7 +4203,6 @@ if (typeof document !== "undefined") {
       });
     } else {
       renderEnvelope(demoEnvelope, document);
-      setActionControls(document, false);
       setPresentationState(document, "Demo fixture loaded; start a host session to play");
     }
     globalThis.HsMgtGui = {

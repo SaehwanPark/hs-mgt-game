@@ -59,9 +59,9 @@ class GuiStaticDesktopTests(unittest.TestCase):
       "renderSelectedEntity",
       "dataset.entityId",
       "renderPresentation",
-      "actions deferred to Phase 3",
+      "Actions",
     ):
-      self.assertIn(marker, self.html if marker == "actions deferred to Phase 3" else self.app)
+      self.assertIn(marker, self.html if marker == "Actions" else self.app)
     self.assertNotIn("transition_competitive", self.app)
     self.assertNotIn("CompetitiveWorldState", self.app)
     self.assertNotIn("resolved_inputs", self.app)
@@ -71,8 +71,8 @@ class GuiStaticDesktopTests(unittest.TestCase):
       "--space-1",
       "--teal",
       "status--watch",
-      "@media (max-width: 760px)",
-      "@media (prefers-reduced-motion: reduce)",
+      "@media (max-width:760px)",
+      "@media (prefers-reduced-motion:reduce)",
       'aria-label="Executive metrics"',
     ):
       self.assertIn(marker, self.html)

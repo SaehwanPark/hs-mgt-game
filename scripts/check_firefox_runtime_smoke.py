@@ -477,8 +477,8 @@ def _run_campaign_coverage(
   stages = []
   for stage in range(1, target_stages + 1):
     _execute(client, session_id, """
-      const form = document.querySelector('#campaign-decision-list form');
-      if (!form) throw new Error('campaign coverage decision form is unavailable');
+      const form = document.querySelector('#action-preview-list form');
+      if (!form) throw new Error('campaign action form is unavailable');
       for (const field of form.querySelectorAll('input, select')) {
         if (field.tagName === 'SELECT') field.value = field.options[0]?.value || '';
         else field.value = field.min || '0';

@@ -57,7 +57,7 @@ class GuiAccessibilityTests(unittest.TestCase):
   def test_text_scale_and_cue_equivalent_settings_are_functional(self):
     for marker in (
       'id="settings-text-scale"',
-      'data-text-scale="large"',
+      "data-text-scale=large",
       "text_scale",
       "dataset.textScale",
       "text_equivalents",

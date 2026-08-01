@@ -211,7 +211,7 @@
       "EXPECTED_CAMPAIGN_STAGE_COUNTS",
       "competitive_full_campaign",
       "campaign_full_runs",
-      "#campaign-decision-list",
+      "#action-preview-list",
       "#campaign-history-list",
       "#draft-action-list",
       "#validate-actions",

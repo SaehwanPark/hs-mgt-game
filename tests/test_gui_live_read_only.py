@@ -39,7 +39,7 @@ class GuiLiveReadOnlyTests(unittest.TestCase):
       "empty_presentation",
       "Loading read-only presentation",
       "Unsupported read-only presentation schema",
-      "Action submission is deferred to Phase 3",
+      "Submission is unavailable in this view.",
     ):
       self.assertIn(marker, self.app)
     self.assertIn('id="presentation-state"', self.html)

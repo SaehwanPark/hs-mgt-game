@@ -14,7 +14,7 @@
     "review_status_states": "src/model/affiliation.rs: ReviewPending",
     "review_transition": "src/affiliation/transition.rs: Institutional review resolved as",
     "process_renderer": "gui/app.mjs: renderCampaignCoverageProcesses",
-    "decision_renderer": "gui/app.mjs: renderCampaignCoverageDecisions",
+    "decision_renderer": "gui/app.mjs: renderUnifiedActionSurface",
     "audio_state": "gui/music-stem-contract.mjs: affiliation_negotiation",
     "campaign_contract": "docs/evaluation/phase12-campaign-presentation-coverage.json: campaign-presentation-coverage-v1",
     "asset_need": "docs/evaluation/phase12-campaign-asset-need-decision.json: campaign-asset-need-decision-v1"

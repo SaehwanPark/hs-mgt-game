@@ -31,7 +31,7 @@ class Phase132LowDistractionModeTests(unittest.TestCase):
   def test_mode_contract_and_limits_are_explicit(self):
     for marker in (
       'id="settings-low-distraction"',
-      'data-low-distraction="true"',
+      "data-low-distraction=true",
       "low_distraction",
       "applyLowDistractionAudio",
       "audio.setMuted?.(true)",

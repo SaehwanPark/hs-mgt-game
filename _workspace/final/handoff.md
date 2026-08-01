@@ -3341,6 +3341,32 @@ campaign expansion approval remain pending and promotion-blocking.
 
 ---
 
+# Final Handoff — Unified draft contextual actions v0.14.2
+
+## Status
+
+Implementation is complete on `codex/gui-contextual-actions-v0.14.2` pending
+the required three independent code-review passes and draft-PR/CI handoff.
+
+## Changed surface
+
+`gui/index.html`, `gui/app.mjs`, `gui/first-month.mjs`, and `gui/playtest.mjs`
+now share one host-normalized `Actions` surface. Focused GUI tests and the
+Firefox probe were updated for single-open cards, `Monthly plan`, direct
+campaign cards, Details access, validation invalidation, and hidden technical
+controls. Release metadata, device evidence, guides, specification,
+architecture, presentation contract/QA, request summary, credits/audit
+metadata, and lessons were synchronized to v0.14.2.
+
+## Boundaries and unresolved risks
+
+No Rust/MCP schema, simulation, persistence, command, stochastic, asset, or
+dependency change was made. Technical checks do not prove human usability,
+lived accessibility, educational effectiveness, browser/device certification,
+or public-release approval. Those gates remain explicitly pending.
+
+---
+
 ## GUI task-workspace redesign v0.14.1
 
 Implemented a presentation-only Setup/Brief/Decide/Resolve/Review shell with

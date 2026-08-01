@@ -5355,3 +5355,40 @@ settings state. Host HTTP/MCP/adapters, DTOs, commands, deterministic
 transitions, history, replay, checkpoint, and persistence schemas remain
 unchanged. Technical checks are not a substitute for the authorized
 five-participant-group pilot.
+
+---
+
+# Presentation Contract — Unified draft contextual actions v0.14.2
+
+## Player questions and visible sequence
+
+The Decide workspace answers one concise question: which host-provided action
+belongs in this plan or direct decision? `Actions` lists each ID once in host
+order. Competitive play places the plan before the cards on narrow screens;
+direct campaigns omit the plan column. The inspect-only continuation is not
+shown while drafting, checking, submitting, or choosing.
+
+## Host-led action contract
+
+The client maps action ID, label, parameter descriptors, timing, constraints,
+uncertainty, cost, canonical template, and source into a private view model.
+Missing details remain unavailable. Human labels are presentation-only; the
+host owns legality, costs, uncertainty, canonical command equivalence,
+validation, transition effects, and history. The browser never computes or
+infers those values.
+
+## Interaction and accessibility contract
+
+Cards are collapsed by default, only one expands, and six rows precede a
+`Show 1 more` disclosure. `Details` uses the existing tooltip/context-drawer
+pattern and works on hover, focus, and tap. Add/save/revise/remove and direct
+rejection restore focus to the relevant card or plan row; status changes use
+the existing live region. Native `[hidden]` removes inactive technical forms
+from live focus order.
+
+## Evidence boundary
+
+The three campaign smoke paths, keyboard/static checks, large-text,
+reduced-motion, narrow-layout, and device-source checks are technical evidence.
+They do not establish human usability, accessibility, educational effect,
+browser/device certification, or a human pilot result.

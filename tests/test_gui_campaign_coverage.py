@@ -61,7 +61,8 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       "renderCampaignCoverage",
       "createCampaignCoverageClient",
       "loadCompanion",
-      "coverageCommand",
+      "normalizeCampaignDecision",
+      "renderUnifiedActionSurface",
       "getCampaignCoverage",
       "campaign_coverage_adapter_error",
       "campaign_submit_rejected",
@@ -81,9 +82,10 @@ class GuiCampaignCoverageTests(unittest.TestCase):
       'id="campaign-metric-list"',
       'id="campaign-actor-list"',
       'id="campaign-process-list"',
-      'id="campaign-decision-list"',
       'id="campaign-history-list"',
       'id="campaign-debrief-list"',
+      'id="action-preview-list"',
+      'id="action-plan"',
     ):
       self.assertIn(selector, self.html)
     for marker in (

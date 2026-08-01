@@ -4,7 +4,7 @@
   "roadmap_item": "Low-distraction mode available",
   "source_contract": {
     "dom_toggle": "gui/index.html: id=\"settings-low-distraction\"",
-    "css_boundary": "gui/index.html: html[data-low-distraction=\"true\"]",
+    "css_boundary": "gui/index.html: html[data-low-distraction=true]",
     "settings_state": "gui/app.mjs: low_distraction: Boolean(persisted.low_distraction && hasPersistedLowAudioState)",
     "audio_bridge": "gui/app.mjs: const applyLowDistractionAudio = () =>",
     "audio_mute": "gui/app.mjs: audio.setMuted?.(true)",

@@ -6197,3 +6197,30 @@ the entire row and collapse the marker/title track to zero pixels.
 - Full Python suite: 941 tests passed; Node syntax, release metadata,
   documentation links, loading/offline policy, device proxy, Rust formatting,
   clippy, and Rust tests also passed.
+
+---
+
+# Presentation QA — Unified draft contextual actions v0.14.2
+
+## Status
+
+`pass` for source-bound implementation and automated/host-contract checks;
+human usability, lived accessibility, browser/device certification, and
+educational review remain pending.
+
+## Findings and checks
+
+- Competitive, stabilization, and regional-affiliation payloads now render one
+  `Actions` surface; duplicate catalog/decision/builder markup is absent from
+  the live default.
+- Single-open cards, six-row overflow, keyboard focus restoration, on-demand
+  `Details`, and explicit unavailable host detail fallbacks are covered by
+  focused characterization and behavior tests.
+- Competitive plan edits invalidate prior validation; host validation remains
+  authoritative and the exact canonical batch is preserved. Direct rejection
+  leaves entered values in the expanded card.
+- Live technical controls are hidden; static/demo controls remain available
+  under a collapsed disclosure. The measured source payload is 442,591 bytes
+  against the 445,000-byte device proxy.
+
+No human pilot or pixel-level browser certification is claimed by this record.

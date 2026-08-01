@@ -38,7 +38,7 @@
     {
       "id": "decisions",
       "host_source": "src/mcp/campaign_coverage.rs: CampaignCoverageDecision",
-      "browser_source": "gui/app.mjs: renderCampaignCoverageDecisions",
+      "browser_source": "gui/app.mjs: renderUnifiedActionSurface",
       "visible_equivalent": "Decision forms substitute only host-provided command parameters."
     },
     {
