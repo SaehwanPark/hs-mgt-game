@@ -4863,6 +4863,22 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.107.md`, the Firefox runtime packet,
 and the remaining-gate audit.
 
+### v0.13.108 Firefox multi-campaign launch smoke
+
+- The bounded Firefox/Marionette probe now launches competitive regional,
+  stabilization, and regional affiliation sessions and verifies each host
+  campaign label, opaque session ID, non-demo shell, and ready state.
+- This closes only source-bound launch/read continuity evidence. It does not
+  advance any campaign through its full transition sequence or promote Firefox
+  full-campaign certification.
+- WebKit, real-device, human accessibility/usability, audio, provenance,
+  full-campaign, revision, expansion, and public-release gates remain open.
+
+The target is recorded in
+`_workspace/186_implementation_plan_phase13-firefox-campaign-launch-smoke-v0.13.108.md`,
+`_workspace/00_input/request-summary-v0.13.108.md`, the Firefox runtime packet,
+and the remaining-gate audit.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

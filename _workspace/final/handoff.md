@@ -1,29 +1,32 @@
-# Final Handoff — Firefox browser-refresh resume smoke v0.13.107
+# Final Handoff — Firefox multi-campaign launch smoke v0.13.108
 
 ## Status
 
-The v0.13.107 Firefox/Marionette smoke is implemented on its temporary branch;
+The v0.13.108 Firefox/Marionette smoke is implemented on its temporary branch;
 the single required medium-effort reviewer and PR loop remain.
 
 ## Target result
 
-- Start a Firefox 147.0.2 headless host-backed competitive session.
-- Save one explicit host checkpoint, refresh once, and verify the same opaque
-  session ID and host-backed refresh status.
+- Start Firefox 147.0.2 headless host-backed competitive, stabilization, and
+  regional-affiliation sessions.
+- Verify each host-issued opaque ID, campaign label, non-demo shell, and ready
+  state while retaining the v0.13.107 checkpoint/refresh smoke.
 - Preserve the non-promotional boundary: this does not certify Firefox full
   campaign behavior, WebKit, real hardware, human review, or public release.
 
 ## Verification
 
-- The live Firefox smoke passes with one explicit checkpoint save and one
-  browser-refresh recovery; its evidence packet remains fail-closed.
+- The live Firefox smoke passes with one explicit checkpoint save, one
+  browser-refresh recovery, and all three supported campaign launches; its
+  evidence packet remains fail-closed.
 - 388 Rust tests, Clippy with warnings denied, 936 Python tests, formatting,
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
 - The bounded low-power proxy measures 410,175 bytes under its 411,000-byte
   limit; this remains an emulated proxy, not device certification.
-- Focused tests cover the Firefox refresh smoke, one-attempt browser-refresh
+- Focused tests cover the Firefox multi-campaign launch and refresh smoke,
+  one-attempt browser-refresh
   resume policy, manual load non-recovery, archive/legacy discovery ordering
   and invalid counting,
   malformed archive shadowing with legacy fallback, archive file and directory
@@ -34,7 +37,7 @@ the single required medium-effort reviewer and PR loop remain.
 
 ## Review boundary and remaining work
 
-The remaining PR handoff is to complete review, merge the v0.13.107 PR, delete
+The remaining PR handoff is to complete review, merge the v0.13.108 PR, delete
 its temporary branch locally and remotely, verify clean `main`, and select the
 next unmet roadmap slice. The Firefox smoke does not close full-campaign
 Firefox certification; WebKit, real-device, replay/screenshot, human

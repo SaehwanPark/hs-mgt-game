@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.108] - 2026-08-01
+
+- Extended the bounded Firefox/Marionette smoke to launch all three supported
+  GUI campaigns and verify host-issued opaque IDs, campaign labels, and shell
+  readiness.
+- This is launch/read continuity evidence only; Firefox full-campaign, WebKit,
+  real-device, human-review, and public-release gates remain pending.
+
 ## [0.13.107] - 2026-08-01
 
 - Added a bounded Firefox/Marionette browser-refresh smoke for the GUI resume

@@ -3841,3 +3841,15 @@ separate gates.
 - Prevention: separate live-session refresh evidence from stopped-host restore
   evidence, keep Firefox/WebKit/device certification boundaries fail-closed,
   and rerun the source-byte proxy after every embedded GUI change.
+
+## Keep Campaign Launch Smoke Below Full-Campaign Claims (v0.13.108)
+
+- Context: the Firefox runtime can start all three supported GUI campaigns, but
+  the roadmap gate asks for full-campaign browser certification.
+- Risk: launch success can be mistaken for transition continuity, audio
+  coverage, accessibility quality, or complete campaign certification.
+- Resolution: record campaign-specific labels, opaque IDs, non-demo shell state,
+  and ready state only; retain a separate boundary stating that no campaign
+  advanced through its full transition sequence.
+- Prevention: keep launch/read smoke, full-campaign runtime certification, and
+  human review as separate evidence fields and promotion decisions.

@@ -36,6 +36,8 @@
       "status": "competitive regional session loaded: session-1",
       "session": "session-1",
       "demo_fixture": false,
+      "campaign": "competitive-regional-v1",
+      "ready": "complete",
       "checkpoint_saved": true,
       "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
       "stored_session_id": "session-1"
@@ -46,6 +48,30 @@
       "stored_session_id": "session-1",
       "demo_fixture": false,
       "ready": "complete"
+    },
+    "campaign_launches": {
+      "competitive-regional-v1": {
+        "campaign": "competitive-regional-v1",
+        "checkpoint_saved": true,
+        "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
+        "demo_fixture": false,
+        "ready": "complete",
+        "session": "session-1",
+        "status": "competitive regional session loaded: session-1",
+        "stored_session_id": "session-1"
+      },
+      "stabilization-v1": {
+        "demo_fixture": false,
+        "ready": "complete",
+        "session": "session-2",
+        "status": "stabilization session loaded: session-2"
+      },
+      "regional-affiliation-v1": {
+        "demo_fixture": false,
+        "ready": "complete",
+        "session": "session-3",
+        "status": "regional affiliation session loaded: session-3"
+      }
     }
   },
   "safari_webkit_boundary": {
@@ -60,6 +86,7 @@
     "firefox_shell_runtime_smoke_complete": true,
     "firefox_host_backed_start_smoke_complete": true,
     "firefox_browser_refresh_resume_smoke_complete": true,
+    "firefox_all_campaign_launch_smoke_complete": true,
     "firefox_full_campaign_certification_complete": false,
     "firefox_audio_decoder_review_complete": false,
     "webkit_runtime_certification_complete": false,
@@ -85,6 +112,12 @@
       "hs-mgt-active-session-id",
       "Host checkpoint saved at",
       "Host session refreshed after browser refresh",
+      "#session-campaign",
+      "competitive-regional-v1",
+      "stabilization-v1",
+      "regional-affiliation-v1",
+      "CAMPAIGN_LABELS",
+      "session loaded: ",
       "document.readyState",
       "marionetteProtocol",
       "127.0.0.1"
@@ -104,6 +137,7 @@
   "evidence_limits": [
     "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicitly verified host checkpoint save, and one browser-refresh session recovery.",
     "The refresh result observes the live host path and opaque-ID retention; it does not simulate a stopped host or prove that the conditional durable-restore branch was invoked.",
+    "The multi-campaign result covers launch/read continuity only; it does not advance any campaign through its full transition sequence.",
     "The result does not certify Firefox full-campaign behavior, audio decoding, real hardware, or lived accessibility/usability.",
     "Safari/WebKit has no result because local remote automation permission is disabled.",
     "The canonical browser policy remains unchanged and no browser-support promotion is authorized.",
